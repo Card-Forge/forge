@@ -10549,23 +10549,99 @@ public class GameActionUtil {
 					}
 				}
 			}
+		}// execute()
+	};
+	
+	public static Command Koth_Emblem = new Command() {
+
+		private static final long serialVersionUID = -3233715310427996429L;
+		CardList gloriousAnthemList = new CardList();
+		
+		public void execute()
+		{
+			CardList list = gloriousAnthemList;
+			Card crd;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				crd = list.get(i);
+				SpellAbility[] sas = crd.getSpellAbility();
+				for (int j=0;j<sas.length;j++)
+				{
+					if (sas[j].isKothThirdAbility())
+						crd.removeSpellAbility(sas[j]);
+				}
+			}
 			
-			/*PlayerZone[] zone = getZone("Elspeth, Knight-Errant");
+			CardList emblem = AllZoneUtil.getCardsInPlay();
+			emblem = emblem.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.isEmblem() && c.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
+				}
+			});
+			
+			for (int i = 0; i < emblem.size(); i++)
+			{
+				CardList mountains = AllZoneUtil.getPlayerCardsInPlay(emblem.get(i).getController());
+				mountains = mountains.filter(new CardListFilter()
+				{
+					public boolean addCard(Card crd)
+					{
+						return crd.getType().contains("Mountain");
+					}
+				});
+				
+				for(int j = 0; j < mountains.size(); j++) {
+					final Card c = mountains.get(j);
+					boolean hasAbility = false;
+					SpellAbility[] sas = c.getSpellAbility();
+					for (SpellAbility sa:sas)
+					{
+						if (sa.isKothThirdAbility())
+							hasAbility = true;
+					}
+					
+					if(!hasAbility) {
+						
+						final Ability_Tap ability = new Ability_Tap(c)
+					    {
+					        private static final long serialVersionUID = -7560349014757367722L;
+							public void chooseTargetAI()
+					        {
+					          CardList list = CardFactoryUtil.AI_getHumanCreature(1, c, true);
+					          list.shuffle();
 
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList perms = new CardList(zone[outer].getCards());
-
-				for(int i = 0; i < perms.size(); i++) {
-					c = perms.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
+					          if(list.isEmpty() || AllZone.Human_Life.getLife() < 5)
+					            setTargetPlayer(Constant.Player.Human);
+					          else
+					            setTargetCard(list.get(0));
+					        }
+					        public void resolve()
+					        {
+					          if(getTargetCard() != null)
+					          {
+					            if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(c, getTargetCard()) )
+					            	AllZone.GameAction.addDamage(getTargetCard(), c, 1);
+					              //getTargetCard().addDamage(1);
+					          }
+					          else
+					            //AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+					        	  AllZone.GameAction.addDamage(getTargetPlayer(), c, 1);
+					        }//resolve()
+					    };//SpellAbility
+					    ability.setKothThirdAbility(true);
+					    ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
+					    ability.setDescription("tap: This land deals 1 damage to target creature or player.");
+					    
+					    c.addSpellAbility(ability);
+					    
 						gloriousAnthemList.add(c);
 					}
-				}// for inner
-			}// for outer
-			*/
-		}// execute()
-
+				}
+			}
+			
+		}
 	};
 	
     public static Command Akromas_Memorial                = new Command() {
@@ -20764,6 +20840,7 @@ public class GameActionUtil {
 
 		commands.put("Darksteel_Forge", Darksteel_Forge);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
+		commands.put("Koth_Emblem", Koth_Emblem);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Goblin_Warchief", Goblin_Warchief);	

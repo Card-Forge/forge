@@ -34,6 +34,7 @@ public abstract class SpellAbility {
     private boolean 		xCost			   = false;
     private boolean         kickerAbility      = false;
     private boolean			anyPlayer		   = false;
+    private boolean 		kothThirdAbility   = false;
     
     private Input           beforePayMana;
     private Input           afterResolve;
@@ -357,4 +358,12 @@ public abstract class SpellAbility {
         }
         return clone;
     }
+
+	public void setKothThirdAbility(boolean kothThirdAbility) {
+		this.kothThirdAbility = kothThirdAbility;
+	}
+
+	public boolean isKothThirdAbility() {
+		return kothThirdAbility;
+	}
 }

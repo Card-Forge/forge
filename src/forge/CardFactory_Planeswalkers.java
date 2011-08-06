@@ -96,7 +96,6 @@ class CardFactory_Planeswalkers {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
                         
-
                         AllZone.Stack.push(ability2);
                     }
                     stop();
@@ -3355,6 +3354,253 @@ class CardFactory_Planeswalkers {
             
             return card2;
     	}//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Koth of the Hammer")) {
+            //computer only plays ability 1 and 3, put 1/1 Soldier in play and make everything indestructible
+            final int turn[] = new int[1];
+            turn[0] = -1;
+            
+            final Card card2 = new Card() {
+                @Override
+                public void addDamage(int n, Card source) {
+                    subtractCounter(Counters.LOYALTY, n);
+                    AllZone.GameAction.checkStateEffects();
+                }
+            };
+            card2.setOwner(owner);
+            card2.setController(owner);
+            
+            card2.setName(card.getName());
+            card2.setType(card.getType());
+            card2.setManaCost(card.getManaCost());
+            card2.addSpellAbility(new Spell_Permanent(card2));
+            card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
+            
+            //ability2: add R for each mountain
+            final SpellAbility ability2 = new Ability(card2, "0") {
+                
+                @Override
+                public void resolve() {
+                    
+                    card2.subtractCounter(Counters.LOYALTY, 2);
+                    
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    Card mp = AllZone.ManaPool;//list.getCard(0);
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+                    list = list.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card crd)
+                    	{
+                    		return crd.getType().contains("Mountain");
+                    	}
+                    });
+                    
+                    for (int i=0;i<list.size();i++)
+                    	mp.addExtrinsicKeyword("ManaPool:R");
+                    
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    
+                    return 0 < card2.getCounters(Counters.LOYALTY)
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                    
+                }//canPlay()
+            };//SpellAbility ability2
+            
+            //ability3
+            final SpellAbility ability3 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.subtractCounter(Counters.LOYALTY, 5);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    Card emblem = new Card();
+
+                    emblem.addIntrinsicKeyword("Indestructible");
+                    emblem.addIntrinsicKeyword("Shroud");
+                    emblem.addIntrinsicKeyword("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
+                    emblem.setImmutable(true);
+                    emblem.addType("Emblem");
+                    emblem.setController(card2.getController());
+                    emblem.setOwner(card2.getOwner());
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+                    play.add(emblem);
+                    
+                    //AllZone.GameAction.checkStateEffects();
+                    AllZone.StaticEffects.rePopulateStateBasedList();
+                    for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
+                        Command com = GameActionUtil.commands.get(effect);
+                        com.execute();
+                    }  
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return 5 <= card2.getCounters(Counters.LOYALTY)
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    list = list.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isEmblem() && c.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
+                    	}
+                    });
+                	return list.size() == 0 && card2.getCounters(Counters.LOYALTY) > 5;
+                }
+            };
+            ability3.setBeforePayMana(new Input() {
+                private static final long serialVersionUID = -2054686425541429389L;
+                
+                int                       check            = -1;
+                
+                @Override
+                public void showMessage() {
+                    if(check != AllZone.Phase.getTurn()) {
+                        check = AllZone.Phase.getTurn();
+                        turn[0] = AllZone.Phase.getTurn();
+                        AllZone.Stack.push(ability3);
+                    }
+                    stop();
+                }//showMessage()
+            });
+            
+            //ability 1: make 4/4 out of moutain
+            final SpellAbility ability1 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.addCounterFromNonEffect(Counters.LOYALTY, 1);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    final Card card[] = new Card[1];
+                    card[0] = getTargetCard();
+                    
+                    final int[] oldAttack = new int[1];
+                    final int[] oldDefense = new int[1];
+                    
+                    oldAttack[0] = card[0].getBaseAttack();
+                    oldDefense[0] = card[0].getBaseDefense();
+                   
+                    if (card[0].getType().contains("Mountain"))
+                    {
+                    	card[0].untap();
+                    	
+	                    card[0].setBaseAttack(4);
+	                    card[0].setBaseDefense(4);
+	                    card[0].addType("Creature");
+	                    card[0].addType("Elemental");
+	                    
+	                    //EOT
+	                    final Command untilEOT = new Command() {
+	
+							private static final long serialVersionUID = 6426615528873039915L;
+	
+							public void execute() {
+	                            card[0].setBaseAttack(oldAttack[0]);
+	                            card[0].setBaseDefense(oldDefense[0]);
+	                            
+	                            card[0].removeType("Creature");
+	                            card[0].removeType("Elemental");
+	                        }
+	                    };
+	                    AllZone.EndOfTurn.addUntil(untilEOT);
+                    }
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                	CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                	list = list.filter(new CardListFilter()
+                	{
+                		public boolean addCard(Card crd)
+                		{
+                			return crd.isEmblem() && crd.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
+                		}
+                	});
+                	
+                	
+                    if(ability3.canPlay() && ability3.canPlayAI() && list.size() == 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return 0 < card2.getCounters(Counters.LOYALTY)
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+            };//SpellAbility ability1
+            
+            Input runtime = new Input() {
+                private static final long serialVersionUID = -7823269301012427007L;
+                
+                @Override
+                public void showMessage() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+                    
+                    CardList lands = new CardList();
+                    lands.addAll(play.getCards());
+                    lands = lands.filter(new CardListFilter() {
+                    	public boolean addCard(Card crd)
+                    	{
+                    		return crd.getType().contains("Mountain");
+                    	}
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability1, lands, "Select target Mountain",
+                            true, false));
+                }//showMessage()
+            };//Input
+            
+            ability1.setBeforePayMana(runtime);
+            
+            ability1.setDescription("+1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.");
+            //ability1.setStackDescription("");
+            card2.addSpellAbility(ability1);
+            
+            ability2.setDescription("-2: Add R to your mana pool for each Mountain you control.");
+            ability2.setStackDescription("Koth of the Hammer - Add R to your mana pool for each Mountain you control.");
+            card2.addSpellAbility(ability2);
+            
+            ability3.setDescription("-5: You get an emblem with \"Mountains you control have 'tap: This land deals 1 damage to target creature or player.'\"");
+            ability3.setStackDescription("Koth of the Hammer - You get an emblem with \"Mountains you control have ‘tap: This land deals 1 damage to target creature or player.'\"");
+            card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
+            
+            return card2;
+        }
+        //*************** END ************ END **************************
         
         return card;
     }

@@ -1,0 +1,6 @@
+Name:Koth of the Hammer
+ManaCost:2 R R
+Types:Planeswalker - Koth
+Text:no text
+SVar:Rarity:Mythic
+End
