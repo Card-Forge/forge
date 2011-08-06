@@ -1,0 +1,10 @@
+Name:Nantuko Calmer
+ManaCost:2 G G
+Types:Creature Insect Druid
+Text:no text
+PT:2/3
+K:abDestroyTgtV G T Sac<1/CARDNAME>:Enchantment:Destroy target enchantment.
+K:stPumpSelf:Creature:1/1:Threshold:Threshold - Nantuko Calmer gets +1/+1 as long as seven or more cards are in your graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_calmer.jpg
+End

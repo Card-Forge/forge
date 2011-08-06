@@ -5,6 +5,7 @@ Text:no text
 PT:1/2
 K:stPumpOther:YouCtrl Creature.Green:1/1:isUntapped:As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.
 SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_advocate.jpg
 End
