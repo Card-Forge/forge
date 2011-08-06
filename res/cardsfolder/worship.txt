@@ -1,0 +1,7 @@
+Name:Worship
+ManaCost:3 W
+Types:Enchantment
+Text:If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/worship.jpg
+End

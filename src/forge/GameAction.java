@@ -3917,6 +3917,18 @@ public class GameAction {
         GameActionUtil.executePlayerDamageEffects(player, source, damage, false);
     }
     
+    public boolean worshipFlag(String player) {
+    	if( AllZoneUtil.isCardInPlay("Ali from Cairo", player)
+    			|| (AllZoneUtil.isCardInPlay("Worship", player) && AllZoneUtil.getCreaturesInPlay(player).size() > 0)
+    			|| AllZoneUtil.isCardInPlay("Fortune Thief", player)
+    			|| AllZoneUtil.isCardInPlay("Sustaining Spirit", player)) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
     public void addPoison(String player, int poison)
     {
     	if(player.equals(Constant.Player.Human)) 
