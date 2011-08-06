@@ -18142,13 +18142,13 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        //add life
                         String player = getTargetCard().getController();
-                        //  PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        // life.addLife(getTargetCard().getNetAttack());
                         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                         
-
+                        //remove card from play
+                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        
+                        //Retrieve basic land
                         CardList lands = new CardList(lib.getCards());
                         lands = lands.getType("Basic");
                         
@@ -18177,8 +18177,6 @@ public class CardFactory implements NewConstants {
                             lands.remove(card);
                             AllZone.GameAction.shuffle(player);
                         }
-                        //remove card from play
-                        AllZone.GameAction.removeFromGame(getTargetCard());
                     }
                 }//resolve()
                 
