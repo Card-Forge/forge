@@ -781,6 +781,20 @@ public class GameAction {
         lastPlayerToDraw = s;
     }
     
+    /**
+     * target player draws a certain number of cards
+     * 
+     * @param player target player to draw
+     * @param numCards the number of cards the player should draw
+     */
+    public void drawCards(String player, int numCards) {
+    	if(numCards > 0) {
+    		for(int i=0; i < numCards; i++) {
+    			drawCard(player);
+    		}
+    	}
+    }
+    
     public void drawCard(String player) {
         
         boolean isDrawPhase = AllZone.Phase.getPhase().equals(Constant.Phase.Draw);
