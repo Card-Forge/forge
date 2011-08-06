@@ -149,7 +149,6 @@ public class CardList implements Iterable<Card> {
         return c;
     }
     
-    //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     public CardList getController(final Player player) {
     	return this.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
@@ -313,32 +312,6 @@ public class CardList implements Iterable<Card> {
             }
         });
     } 
-    
-    /*
-    public CardList getValidCards(final String Restrictions[], final Card source) {
-        return this.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isValidCard(Restrictions, source);
-            }
-        });
-    } 
-    
-    public CardList getValidCards(final String Restrictions[], final Player Controller) {
-        return this.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isValidCard(Restrictions, Controller);
-            }
-        });
-    } 
-       
-    public CardList getValidCards(final String Restrictions[]) {
-        return this.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isValidCard(Restrictions);
-            }
-        });
-    }//getValidCards
-    */
     
     public CardList getEquipMagnets() {
     	return this.filter(new CardListFilter() {

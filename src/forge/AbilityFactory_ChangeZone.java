@@ -583,7 +583,7 @@ public class AbilityFactory_ChangeZone {
 
 			CardList list = AllZoneUtil.getCardsInZone(origin);
 			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, source);
-			 
+			
 			if (list.size() == 0)
 				return false;
 			
@@ -605,7 +605,7 @@ public class AbilityFactory_ChangeZone {
 				
 			}
 			
-			if (destination.equals("Exile"))
+			if (destination.equals("Exile") || origin.equals("Battlefield"))
 				list = list.getController(AllZone.HumanPlayer);
 
 			if (list.size() == 0)
