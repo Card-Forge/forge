@@ -317,7 +317,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Swamp Thing 2", "medium", "BG deck");
 //        addToDeckList("Swamp Thing 3", "hard", "BG deck");
         
-        addToDeckList("Tarzan 1", "easy", "WG deck with jungle creatures and pump spells");
+        addToDeckList("Tarzan 1", "easy", "WR Ape tribal deck with Ancient Silverback, Earthbind, Claws of Wirewood and pump spells");
         addToDeckList("Tarzan 2", "medium", "WR Ape tribal deck with Ancient Silverback, Raking Canopy and Treetop Village");
         addToDeckList("Terminator 3", "hard", "Mono B artifact deck with The Abyss");
         addToDeckList("The Great Gazoo 3", "hard", "WR deck with, red damage all spells and pro from red creatures");
