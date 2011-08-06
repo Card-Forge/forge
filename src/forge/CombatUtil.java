@@ -164,7 +164,7 @@ public class CombatUtil {
         if(attacker.getKeyword().contains("Unblockable")) return false;
         
         if(blocker.getKeyword().contains("CARDNAME can't block.")
-                || blocker.getKeyword().contains("This creature can't attack or block")) return false;
+                || blocker.getKeyword().contains("CARDNAME can't attack or block.")) return false;
         
         if(attacker.getKeyword().contains("Flying")) {
             if(!blocker.getKeyword().contains("Flying")
@@ -296,7 +296,7 @@ public class CombatUtil {
         
         if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
                 || oppControlsBlazingArchon(c) || c.getKeyword().contains("This creature can't attack")
-                || c.getKeyword().contains("This creature can't attack or block")) return false;
+                || c.getKeyword().contains("CARDNAME can't attack or block.")) return false;
         
         //if Card has Haste, Card.hasSickness() will return false
         return true;

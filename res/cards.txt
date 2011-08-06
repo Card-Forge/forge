@@ -1,3 +1,17 @@
+Bound in Silence
+2 W
+Tribal Enchantment Rebel Aura
+Enchanted creature can't attack or block.
+Enchant creature
+enPumpCurse:CARDNAME can't attack or block.
+
+Pacifism
+1 W
+Enchantment Aura
+Enchanted creature can't attack or block.
+Enchant creature
+enPumpCurse:CARDNAME can't attack or block.
+
 Akroma, Angel of Fury
 5 R R R
 Legendary Creature Angel
@@ -8292,20 +8306,6 @@ Pillory of the Sleepless
 Enchantment Aura
 Enchanted creature can't attack or block. Enchanted creature has "At the beginning of your upkeep, you lose 1 life."
 Enchant creature
-
-Pacifism
-1 W
-Enchantment Aura
-Enchanted creature can't attack or block.
-Enchant creature
-enPumpCurse:This creature can't attack or block
-
-Bound in Silence
-2 W
-Tribal Enchantment Rebel Aura
-Enchanted creature can't attack or block.
-Enchant creature
-enPumpCurse:This creature can't attack or block
 
 Barrenton Cragtreads
 2 WU WU

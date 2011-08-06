@@ -939,7 +939,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature can't attack or block");
+                        crd.addExtrinsicKeyword("CARDNAME can't attack or block.");
                     }
                 }//execute()
             };//Command
@@ -952,7 +952,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature can't attack or block");
+                        crd.removeExtrinsicKeyword("CARDNAME can't attack or block.");
                     }
                     
                 }//execute()
@@ -1738,7 +1738,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature can't attack or block");
+                        crd.addExtrinsicKeyword("CARDNAME can't attack or block.");
                     }
                 }//execute()
             };//Command
@@ -1750,7 +1750,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature can't attack or block");
+                        crd.removeExtrinsicKeyword("CARDNAME can't attack or block.");
                     }
                     
                 }//execute()
