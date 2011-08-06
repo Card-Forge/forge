@@ -1,0 +1,11 @@
+Name:Ball Lightning
+ManaCost:R R R
+Types:Creature Elemental
+Text:no text
+PT:6/1
+K:Haste
+K:Trample
+K:At the beginning of the end step, sacrifice CARDNAME.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card4031.jpg
+End

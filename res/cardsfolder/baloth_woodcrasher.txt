@@ -1,0 +1,10 @@
+Name:Baloth Woodcrasher
+ManaCost:4 G G
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Trample!StatsPumpEOT/4/4:Self!Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Baloth Woodcrasher gets +4/+4 and gains trample until end of turn.
+K:SVar:BuffedBy:Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_woodcrasher.jpg
+End

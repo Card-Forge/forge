@@ -1,0 +1,9 @@
+Name:Bog Wraith
+ManaCost:3 B
+Types:Creature Wraith
+Text:no text
+PT:3/3
+K:Swampwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83011.jpg
+End

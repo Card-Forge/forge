@@ -1,0 +1,10 @@
+Name:Bloated Toad
+ManaCost:2 G
+Types:Creature Frog
+Text:no text
+PT:2/2
+K:Protection from blue
+K:Cycling:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloated_toad.jpg
+End

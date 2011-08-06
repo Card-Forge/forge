@@ -1,0 +1,10 @@
+Name:Aven Flock
+ManaCost:4 W
+Types:Creature Bird Soldier
+Text:no text
+PT:2/3
+K:Flying
+K:abPump W:+0/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_flock.jpg
+End

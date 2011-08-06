@@ -1,0 +1,10 @@
+Name:Brilliant Halo
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+2.
+K:Enchant creature
+K:enPump:+1/+2
+K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/brilliant_halo.jpg
+End

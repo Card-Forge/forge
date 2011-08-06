@@ -1,0 +1,12 @@
+Name:Boartusk Liege
+ManaCost:1 RG RG RG
+Types:Creature Goblin Knight
+Text:no text
+PT:3/4
+K:Trample
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.red!NotSelf:Other red creatures you control get +1/+1.
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boartusk_liege.jpg
+End

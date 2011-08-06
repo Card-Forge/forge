@@ -1,0 +1,9 @@
+Name:Bull Hippo
+ManaCost:3 G
+Types:Creature Hippo
+Text:no text
+PT:3/3
+K:Islandwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13103.jpg
+End

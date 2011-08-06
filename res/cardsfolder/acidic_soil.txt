@@ -1,0 +1,7 @@
+Name:Acidic Soil
+ManaCost:2 R
+Types:Sorcery
+Text:Acidic Soil deals damage to each player equal to the number of lands he or she controls.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_soil.jpg
+End

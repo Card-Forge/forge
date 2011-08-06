@@ -1,0 +1,8 @@
+Name:Boris Devilboon
+ManaCost:3 B R
+Types:Legendary Creature Zombie Wizard
+Text:no text
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boris_devilboon.jpg
+End

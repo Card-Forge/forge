@@ -1,0 +1,9 @@
+Name:Badlands
+ManaCost:no cost
+Types:Land Mountain Swamp
+Text:no text
+K:tap: add B
+K:tap: add R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/badlands.jpg
+End

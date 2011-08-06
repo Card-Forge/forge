@@ -1,0 +1,10 @@
+Name:Big Game Hunter
+ManaCost:1 B B
+Types:Creature Human Rebel Assassin
+Text:When Big Game Hunter enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.
+PT:1/1
+K:etbDestroyTgt:Creature.powerGE4:NoRegen
+K:Madness:B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/big_game_hunter.jpg
+End

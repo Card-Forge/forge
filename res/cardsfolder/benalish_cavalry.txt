@@ -1,0 +1,9 @@
+Name:Benalish Cavalry
+ManaCost:1 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Flanking
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_cavalry.jpg
+End

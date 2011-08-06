@@ -1,0 +1,9 @@
+Name:Atog
+ManaCost:1 R
+Types:Creature Atog
+Text:no text
+PT:1/2
+K:abPump 0 Sac-Artifact:+2/+2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/atog.jpg
+End

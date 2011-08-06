@@ -1,0 +1,8 @@
+Name:Altar's Light
+ManaCost:2 W W
+Types:Instant
+Text:Exile target artifact or enchantment.
+K:spBounceTgt:Artifact,Enchantment:Exile
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/altars_light.jpg
+End

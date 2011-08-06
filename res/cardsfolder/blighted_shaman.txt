@@ -1,0 +1,10 @@
+Name:Blighted Shaman
+ManaCost:1 B
+Types:Creature Human Cleric Shaman
+Text:no text
+PT:1/1
+K:abPumpTgtC T Sac-Land:+1/+1
+K:abPumpTgtC T Sac-Creature:+2/+2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_shaman.jpg
+End

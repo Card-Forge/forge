@@ -1,0 +1,9 @@
+Name:Ayumi, the Last Visitor
+ManaCost:3 G G
+Types:Legendary Creature Spirit
+Text:no text
+PT:7/3
+K:Legendary landwalk
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ayumi_the_last_visitor.jpg
+End

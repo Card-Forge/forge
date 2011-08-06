@@ -1,0 +1,10 @@
+Name:Basal Thrull
+ManaCost:B B
+Types:Creature Thrull
+Text:no text
+PT:1/2
+K:tap, Sacrifice CARDNAME: Add B B to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/basal_thrull.jpg
+End

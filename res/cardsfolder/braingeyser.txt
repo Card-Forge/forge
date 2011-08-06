@@ -1,0 +1,7 @@
+Name:Braingeyser
+ManaCost:X U U
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/braingeyser.jpg
+End

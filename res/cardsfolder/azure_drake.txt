@@ -1,0 +1,9 @@
+Name:Azure Drake
+ManaCost:3 U
+Types:Creature Drake
+Text:no text
+PT:2/4
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83084.jpg
+End

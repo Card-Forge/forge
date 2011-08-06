@@ -1,0 +1,10 @@
+Name:Bloodbraid Elf
+ManaCost:2 R G
+Types:Creature Elf
+Text:no text
+PT:3/2
+K:Haste
+K:Cascade
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodbraid_elf.jpg
+End

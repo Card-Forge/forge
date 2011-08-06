@@ -1,0 +1,10 @@
+Name:Blasting Station
+ManaCost:3
+Types:Artifact
+Text:no text
+K:abDamageTgtCP T Sac-Creature:1
+K:WheneverKeyword:EntersBattleField:Type/Creature:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever a creature enters the battlefield, you may untap Blasting Station.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blasting_station.jpg
+End

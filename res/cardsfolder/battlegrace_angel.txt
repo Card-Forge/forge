@@ -1,0 +1,10 @@
+Name:Battlegrace Angel
+ManaCost:3 W W
+Types:Creature Angel
+Text:Whenever a creature you control attacks alone, it gains lifelink until end of turn.
+PT:4/4
+K:Flying
+K:Exalted
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/battlegrace_angel.jpg
+End

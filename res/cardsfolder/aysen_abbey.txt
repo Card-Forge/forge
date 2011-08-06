@@ -1,0 +1,12 @@
+Name:Aysen Abbey
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:1, tap: add W
+K:2, tap: add U
+K:2, tap: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_abbey.jpg
+End

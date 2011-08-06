@@ -1,0 +1,9 @@
+Name:Alaborn Cavalier
+ManaCost:2 W W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Alaborn Cavalier attacks, you may tap target creature.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_cavalier.jpg
+End

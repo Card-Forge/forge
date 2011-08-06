@@ -1,0 +1,8 @@
+Name:Braidwood Cup
+ManaCost:3
+Types:Artifact
+Text:no text
+K:abGainLife T:1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/braidwood_cup.jpg
+End

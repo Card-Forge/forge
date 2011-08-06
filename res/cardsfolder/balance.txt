@@ -1,0 +1,7 @@
+Name:Balance
+ManaCost:1 W
+Types:Sorcery
+Text:Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/balance.jpg
+End

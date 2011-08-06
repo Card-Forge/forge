@@ -1,0 +1,8 @@
+Name:Bee Sting
+ManaCost:3 G
+Types:Sorcery
+Text:no text
+K:spDamageTgtCP:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bee_sting.jpg
+End

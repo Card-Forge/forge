@@ -1,0 +1,10 @@
+Name:Avenger of Zendikar
+ManaCost:5 G G
+Types:Creature Elemental
+Text:When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control.\r\nLandfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
+PT:5/5
+K:Landfall
+K:SVar:BuffedBy:Land
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
+End

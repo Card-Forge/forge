@@ -1,0 +1,9 @@
+Name:Accelerated Mutation
+ManaCost:3 G G
+Types:Instant
+Text:no text
+K:spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.:Target creature gets +X/+X until end of turn.
+K:SVar:X:Count$MaxCMCYouCtrl
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/accelerated_mutation.jpg
+End

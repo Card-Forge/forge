@@ -1,0 +1,7 @@
+Name:Bitterblossom
+ManaCost:1 B
+Types:Tribal Enchantment Faerie
+Text:At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying into play.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bitterblossom.jpg
+End

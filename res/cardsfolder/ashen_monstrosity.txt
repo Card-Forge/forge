@@ -1,0 +1,10 @@
+Name:Ashen Monstrosity
+ManaCost:5 R R
+Types:Creature Spirit
+Text:no text
+PT:7/4
+K:Haste
+K:CARDNAME attacks each turn if able.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ashen_monstrosity.jpg
+End

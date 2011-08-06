@@ -1,0 +1,9 @@
+Name:Akki Drillmaster
+ManaCost:2 R
+Types:Creature Goblin Shaman
+Text:no text
+PT:2/2
+K:abPumpTgtC T:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74393.jpg
+End

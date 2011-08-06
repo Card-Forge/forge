@@ -1,0 +1,10 @@
+Name:Apprentice Wizard
+ManaCost:1 U U
+Types:Creature Human Wizard
+Text:no text
+PT:0/1
+K:U, tap: add 3
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_wizard.jpg
+End

@@ -1,0 +1,8 @@
+Name:Bottle Gnomes
+ManaCost:3
+Types:Artifact Creature Gnome
+Text:no text
+PT:1/3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bottle_gnomes.jpg
+End

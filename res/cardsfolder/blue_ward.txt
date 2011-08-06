@@ -1,0 +1,9 @@
+Name:Blue Ward
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature has protection from blue. This effect doesn't remove Blue Ward.
+K:Enchant creature
+K:enPump:Protection from blue
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_ward.jpg
+End

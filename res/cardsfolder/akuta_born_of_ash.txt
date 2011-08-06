@@ -1,0 +1,10 @@
+Name:Akuta, Born of Ash
+ManaCost:2 B B
+Types:Legendary Creature Spirit
+Text:no text
+PT:3/2
+K:Haste
+K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Play:Self:ASAP:SacrificeType/Swamp:ControllerUpkeep!MoreCardsInHand:At the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return Akuta, Born of Ash from your graveyard to the battlefield.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/akuta_born_of_ash.jpg
+End

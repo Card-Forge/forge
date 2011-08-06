@@ -1,0 +1,8 @@
+Name:Brain Freeze
+ManaCost:1 U
+Types:Instant
+Text:Target player puts the top three cards of his or her library into his or her graveyard.
+K:Storm
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
+End

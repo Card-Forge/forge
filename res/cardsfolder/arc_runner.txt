@@ -1,0 +1,10 @@
+Name:Arc Runner
+ManaCost:2 R
+Types:Creature Elemental Ox
+Text:no text
+PT:5/1
+K:Haste
+K:At the beginning of the end step, sacrifice CARDNAME.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_runner.jpg
+End

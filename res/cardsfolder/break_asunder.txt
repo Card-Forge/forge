@@ -1,0 +1,9 @@
+Name:Break Asunder
+ManaCost:2 G G
+Types:Sorcery
+Text:Destroy target artifact or enchantment.
+K:spDestroyTgt:Artifact,Enchantment
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/break_asunder.jpg
+End

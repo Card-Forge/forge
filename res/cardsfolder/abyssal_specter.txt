@@ -1,0 +1,9 @@
+Name:Abyssal Specter
+ManaCost:2 B B
+Types:Creature Specter
+Text:Whenever Abyssal Specter deals damage to a player, that player discards a card.
+PT:2/3
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_specter.jpg
+End

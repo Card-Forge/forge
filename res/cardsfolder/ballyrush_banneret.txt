@@ -1,0 +1,9 @@
+Name:Ballyrush Banneret
+ManaCost:1 W
+Types:Creature Kithkin Soldier
+Text:Kithkin spells and Soldier spells you cast cost 1 less to cast.
+PT:2/1
+K:CostChange:Player:Less:1:Spell:All:Kithkin/Soldier:OnlyOneBonus
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ballyrush_banneret.jpg
+End

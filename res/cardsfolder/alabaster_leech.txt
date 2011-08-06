@@ -1,0 +1,9 @@
+Name:Alabaster Leech
+ManaCost:W
+Types:Creature Leech
+Text:White spells you cast cost W more to cast.
+PT:1/3
+K:CostChange:Player:More:W:Spell:white:All:NoSpecial
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_leech.jpg
+End

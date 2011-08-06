@@ -1,0 +1,10 @@
+Name:Beastbreaker of Bala Ged
+ManaCost:1 G
+Types:Creature Human Warrior
+Text:LEVEL 1-3 4/4 LEVEL 4+ 6/6 Trample
+PT:2/2
+K:Level up:2 G
+K:maxLevel:6
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/beastbreaker_of_bala_ged.jpg
+End

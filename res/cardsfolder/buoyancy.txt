@@ -1,0 +1,10 @@
+Name:Buoyancy
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted creature has flying.
+K:Enchant creature
+K:Flash
+K:enPump:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/buoyancy.jpg
+End

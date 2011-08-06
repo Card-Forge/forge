@@ -1,0 +1,10 @@
+Name:Blightspeaker
+ManaCost:1 B
+Types:Creature Human Rebel Cleric
+Text:no text
+PT:1/1
+K:abLoseLifeTgt T:1
+K:SearchRebel:4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blightspeaker.jpg
+End

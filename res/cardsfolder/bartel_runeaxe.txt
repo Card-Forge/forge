@@ -1,0 +1,10 @@
+Name:Bartel Runeaxe
+ManaCost:3 G R B
+Types:Legendary Creature Giant Warrior
+Text:no text
+PT:6/5
+K:Vigilance
+K:CARDNAME can't be the target of Aura spells.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bartel_runeaxe.jpg
+End

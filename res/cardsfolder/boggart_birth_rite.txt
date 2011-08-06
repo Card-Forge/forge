@@ -1,0 +1,8 @@
+Name:Boggart Birth Rite
+ManaCost:B
+Types:Tribal Sorcery Goblin
+Text:no text
+K:spRaiseDead:1/Goblin
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_birth_rite.jpg
+End

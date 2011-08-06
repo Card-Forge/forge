@@ -1,0 +1,10 @@
+Name:Angel of Retribution
+ManaCost:6 W
+Types:Creature Angel
+Text:no text
+PT:5/5
+K:Flying
+K:First Strike
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_retribution.jpg
+End

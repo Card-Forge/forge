@@ -1,0 +1,8 @@
+Name:Academy Ruins
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+K:tap: add 1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_ruins.jpg
+End

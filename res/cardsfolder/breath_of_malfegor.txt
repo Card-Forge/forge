@@ -1,0 +1,8 @@
+Name:Breath of Malfegor
+ManaCost:3 B R
+Types:Instant
+Text:no text
+K:spDamageTgtP:5
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/breath_of_malfegor.jpg
+End

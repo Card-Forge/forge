@@ -1,0 +1,8 @@
+Name:Balduvian Bears
+ManaCost:1 G
+Types:Creature Bear
+Text:no text
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2550.jpg
+End

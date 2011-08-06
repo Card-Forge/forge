@@ -1,0 +1,9 @@
+Name:Asha's Favor
+ManaCost:2 W
+Types:Enchantment Aura
+Text:Enchanted creature has flying, first strike, and vigilance.
+K:Enchant creature
+K:enPump:Flying & First Strike & Vigilance
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ashas_favor.jpg
+End

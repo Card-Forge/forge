@@ -1,0 +1,7 @@
+Name:Animate Dead
+ManaCost:1 B
+Types:Sorcery
+Text:Put target creature card from any graveyard into play under your control. That creature gets -1/-0. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3823.jpg
+End

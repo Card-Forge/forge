@@ -1,0 +1,10 @@
+Name:Bant Battlemage
+ManaCost:2 W
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+K:abPumpTgtC G T:Trample
+K:abPumpTgtC U T:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_battlemage.jpg
+End

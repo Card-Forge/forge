@@ -1,0 +1,10 @@
+Name:Blood Vassal
+ManaCost:2 B
+Types:Creature Thrull
+Text:no text
+PT:2/2
+K:Sacrifice CARDNAME: Add B B to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_vassal.jpg
+End

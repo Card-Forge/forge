@@ -1,0 +1,10 @@
+Name:AEther Membrane
+ManaCost:1 R R
+Types:Creature Wall
+Text:Whenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
+PT:0/5
+K:Defender
+K:Reach
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card124504.jpg
+End

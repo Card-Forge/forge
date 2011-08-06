@@ -1,0 +1,11 @@
+Name:Basalt Gargoyle
+ManaCost:2 R
+Types:Creature Gargoyle
+Text:no text
+PT:3/2
+K:Flying
+K:Echo:2 R
+K:abPump R:+0/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/basalt_gargoyle.jpg
+End

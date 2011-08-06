@@ -1,0 +1,10 @@
+Name:Archangel
+ManaCost:5 W W
+Types:Creature Angel
+Text:no text
+PT:5/5
+K:Flying
+K:Vigilance
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3708.jpg
+End

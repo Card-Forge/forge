@@ -1,0 +1,10 @@
+Name:Burst of Speed
+ManaCost:R
+Types:Sorcery
+Text:no text
+K:spAllPump:YouCtrl:Haste:Creatures you control gain haste until end of turn.:Burst of Speed - Creatures gain haste until EOT
+K:SVar:RemAIDeck:True
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_of_speed.jpg
+End

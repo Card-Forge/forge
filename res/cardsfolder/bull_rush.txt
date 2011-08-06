@@ -1,0 +1,8 @@
+Name:Bull Rush
+ManaCost:R
+Types:Instant
+Text:no text
+K:spPumpTgt:+2/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_rush.jpg
+End

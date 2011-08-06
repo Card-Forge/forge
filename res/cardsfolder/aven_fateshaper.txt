@@ -1,0 +1,9 @@
+Name:Aven Fateshaper
+ManaCost:6 U
+Types:Creature Bird Wizard
+Text:When Aven Fateshaper enters the battlefield, look at the top four cards of your library, then put them back in any order.
+PT:4/5
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_fateshaper.jpg
+End

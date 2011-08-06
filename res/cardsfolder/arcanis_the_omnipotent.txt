@@ -1,0 +1,8 @@
+Name:Arcanis the Omnipotent
+ManaCost:3 U U U
+Types:Legendary Creature Wizard
+Text:no text
+PT:3/4
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arcanis_the_omnipotent.jpg
+End

@@ -1,0 +1,9 @@
+Name:Bloodstone Cameo
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add B
+K:tap: add R
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstone_cameo.jpg
+End

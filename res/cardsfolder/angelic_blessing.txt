@@ -1,0 +1,8 @@
+Name:Angelic Blessing
+ManaCost:2 W
+Types:Sorcery
+Text:no text
+K:spPumpTgt:+3/+3/Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4370.jpg
+End

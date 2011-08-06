@@ -1,0 +1,10 @@
+Name:Bull Cerodon
+ManaCost:4 R W
+Types:Creature Beast
+Text:no text
+PT:5/5
+K:Vigilance
+K:Haste
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_cerodon.jpg
+End

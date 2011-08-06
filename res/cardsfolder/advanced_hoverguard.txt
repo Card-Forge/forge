@@ -1,0 +1,10 @@
+Name:Advanced Hoverguard
+ManaCost:3 U
+Types:Creature Drone
+Text:no text
+PT:2/2
+K:Flying
+K:abPump U:Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/advanced_hoverguard.jpg
+End

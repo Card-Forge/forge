@@ -1,0 +1,10 @@
+Name:Acidic Slime
+ManaCost:3 G G
+Types:Creature Ooze
+Text:When Acidic Slime enters the battlefield, destroy target artifact, enchantment, or land.
+PT:2/2
+K:Deathtouch
+K:etbDestroyTgt:Artifact,Enchantment,Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_slime.jpg
+End

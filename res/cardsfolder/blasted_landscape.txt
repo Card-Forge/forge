@@ -1,0 +1,9 @@
+Name:Blasted Landscape
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:Cycling:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blasted_landscape.jpg
+End

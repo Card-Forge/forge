@@ -1,0 +1,9 @@
+Name:Bringer of the White Dawn
+ManaCost:7 W W
+Types:Creature Bringer
+Text:At the beginning of your upkeep, you may return target artifact card from your graveyard to play.
+PT:5/5
+K:Trample
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_white_dawn.jpg
+End

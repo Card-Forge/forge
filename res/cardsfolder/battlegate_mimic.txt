@@ -1,0 +1,9 @@
+Name:Battlegate Mimic
+ManaCost:1 RW
+Types:Creature Shapeshifter
+Text:Whenever you cast a spell that's both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
+PT:2/1
+K:SVar:BuffedBy:Spell.Red+White
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Battlegate_Mimic.jpg
+End

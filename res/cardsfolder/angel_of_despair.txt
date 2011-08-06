@@ -1,0 +1,10 @@
+Name:Angel of Despair
+ManaCost:3 W W B B
+Types:Creature Angel
+Text:When Angel of Despair enters the battlefield, destroy target permanent.
+PT:5/5
+K:Flying
+K:etbDestroyTgt:Permanent
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card83869.jpg
+End

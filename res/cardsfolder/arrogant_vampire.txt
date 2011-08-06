@@ -1,0 +1,9 @@
+Name:Arrogant Vampire
+ManaCost:3 B B
+Types:Creature Vampire
+Text:no text
+PT:4/3
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4207.jpg
+End

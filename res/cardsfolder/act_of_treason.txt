@@ -1,0 +1,7 @@
+Name:Act of Treason
+ManaCost:2 R
+Types:Sorcery
+Text:Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. (It can attack this turn.)
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/act_of_treason.jpg
+End

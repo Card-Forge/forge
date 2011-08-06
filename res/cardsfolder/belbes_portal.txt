@@ -1,0 +1,7 @@
+Name:Belbe's Portal
+ManaCost:5
+Types:Artifact
+Text:As Belbe's Portal comes into play, choose a creature type.\r\n3, tap: You may put a creature card of the chosen type from your hand onto the battlefield.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_portal.jpg
+End

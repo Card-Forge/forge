@@ -1,0 +1,9 @@
+Name:Artisan of Kozilek
+ManaCost:9
+Types:Creature Eldrazi
+Text:When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.
+PT:10/9
+K:Annihilator 2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/artisan_of_kozilek.jpg
+End

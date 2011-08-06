@@ -1,0 +1,8 @@
+Name:Annul
+ManaCost:U
+Types:Instant
+Text:Counter target artifact or enchantment spell.
+K:spCounter:Spell:Type(Artifact,Enchantment):Graveyard:None
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/annul.jpg
+End

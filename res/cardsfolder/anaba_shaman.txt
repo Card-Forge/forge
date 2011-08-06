@@ -1,0 +1,9 @@
+Name:Anaba Shaman
+ManaCost:3 R
+Types:Creature Minotaur Shaman
+Text:no text
+PT:2/2
+K:abDamageTgtCP R T:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_shaman.jpg
+End

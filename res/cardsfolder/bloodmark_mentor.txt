@@ -1,0 +1,10 @@
+Name:Bloodmark Mentor
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Color.red:Red creatures you control have first strike.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodmark_mentor.jpg
+End

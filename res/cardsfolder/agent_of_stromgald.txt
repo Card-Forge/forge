@@ -1,0 +1,10 @@
+Name:Agent of Stromgald
+ManaCost:R
+Types:Creature Human Knight
+Text:no text
+PT:1/1
+K:R: add B
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_stromgald.jpg
+End

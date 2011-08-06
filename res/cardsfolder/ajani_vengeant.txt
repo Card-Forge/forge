@@ -1,0 +1,7 @@
+Name:Ajani Vengeant
+ManaCost:2 R W
+Types:Planeswalker - Ajani
+Text:no text
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_vengeant.jpg
+End

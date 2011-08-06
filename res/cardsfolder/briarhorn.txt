@@ -1,0 +1,9 @@
+Name:Briarhorn
+ManaCost:3 G
+Types:Creature Elemental
+Text:When Briarhorn comes into play, target creature gets +3/+3 until end of turn.
+PT:3/3
+K:Flash
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/briarhorn.jpg
+End

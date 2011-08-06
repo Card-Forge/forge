@@ -1,0 +1,10 @@
+Name:Augury Owl
+ManaCost:1 U
+Types:Creature Bird
+Text:no text
+PT:1/1
+K:Flying
+K:Scry 3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/augury_owl.jpg
+End

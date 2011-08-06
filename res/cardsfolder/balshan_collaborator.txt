@@ -1,0 +1,10 @@
+Name:Balshan Collaborator
+ManaCost:3 U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/2
+K:Flying
+K:abPump B:+1/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/balshan_collaborator.jpg
+End

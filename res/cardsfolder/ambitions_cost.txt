@@ -1,0 +1,8 @@
+Name:Ambition's Cost
+ManaCost:3 B
+Types:Sorcery
+Text:no text
+K:spDrawCards:3:Drawback$YouLoseLife/3:You draw three cards and you lose 3 life.:Ambition's Cost - draw 3 cards and lose 3 life.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ambitions_cost.jpg
+End

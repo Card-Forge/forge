@@ -1,0 +1,11 @@
+Name:Avalanche Riders
+ManaCost:3 R
+Types:Creature Human Nomad
+Text:When Avalanche Riders enters the battlefield, destroy target land.
+PT:2/2
+K:Haste
+K:Echo:3 R
+K:etbDestroyTgt:Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_riders.jpg
+End

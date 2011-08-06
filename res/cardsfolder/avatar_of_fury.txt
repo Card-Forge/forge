@@ -1,0 +1,10 @@
+Name:Avatar of Fury
+ManaCost:6 R R
+Types:Creature Avatar
+Text:If an opponent controls seven or more lands, Avatar of Fury costs 6 less to cast.
+PT:6/6
+K:Flying
+K:abPump R:+1/+0
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_fury.jpg
+End

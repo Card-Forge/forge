@@ -1,0 +1,9 @@
+Name:Blood Rites
+ManaCost:3 R R
+Types:Enchantment
+Text:no text
+K:abDamageTgtCP 1 R Sac-Creature:2
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_rites.jpg
+End

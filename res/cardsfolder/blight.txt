@@ -1,0 +1,8 @@
+Name:Blight
+ManaCost:B B
+Types:Enchantment Aura
+Text:When enchanted land becomes tapped, destroy it.
+K:Enchant Land Curse
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blight.jpg
+End

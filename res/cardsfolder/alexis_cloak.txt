@@ -1,0 +1,10 @@
+Name:Alexi's Cloak
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted creature has shroud.
+K:Flash
+K:Enchant creature
+K:enPump:Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/alexis_cloak.jpg
+End

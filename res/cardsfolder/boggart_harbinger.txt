@@ -1,0 +1,8 @@
+Name:Boggart Harbinger
+ManaCost:2 B
+Types:Creature Goblin Shaman
+Text:When Boggart Harbinger enters the battlefield, you may search your library for a Goblin card, reveal it, then shuffle your library and put that card on top of it.
+PT:2/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_harbinger.jpg
+End

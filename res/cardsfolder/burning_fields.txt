@@ -1,0 +1,8 @@
+Name:Burning Fields
+ManaCost:4 R
+Types:Sorcery
+Text:no text
+K:spDamageTgtOpp:5:Burning Fields deals 5 damage to target opponent.:Burning Fields - deals 5 damage
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_fields.jpg
+End

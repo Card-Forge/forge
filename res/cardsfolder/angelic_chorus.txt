@@ -1,0 +1,8 @@
+Name:Angelic Chorus
+ManaCost:3 W W
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Toughness:ControllingPlayer_Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_chorus.jpg
+End

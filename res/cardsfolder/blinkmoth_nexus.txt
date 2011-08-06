@@ -1,0 +1,8 @@
+Name:Blinkmoth Nexus
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card39439.jpg
+End

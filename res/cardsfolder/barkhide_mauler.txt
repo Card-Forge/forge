@@ -1,0 +1,9 @@
+Name:Barkhide Mauler
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card34196.jpg
+End

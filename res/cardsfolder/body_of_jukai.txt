@@ -1,0 +1,10 @@
+Name:Body of Jukai
+ManaCost:7 G G
+Types:Creature Spirit
+Text:no text
+PT:8/5
+K:Trample
+K:Soulshift:8
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/body_of_jukai.jpg
+End

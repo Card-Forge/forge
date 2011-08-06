@@ -1,0 +1,9 @@
+Name:Blastoderm
+ManaCost:2 G G
+Types:Creature Beast
+Text:Fading 3
+PT:5/5
+K:Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blastoderm.jpg
+End

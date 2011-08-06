@@ -1,0 +1,8 @@
+Name:Bewilder
+ManaCost:2 U
+Types:Instant
+Text:no text
+K:spPumpTgtCurse:-3/-0
+K:Draw a card.
+K:SVar:RemAIDeck:True
+End

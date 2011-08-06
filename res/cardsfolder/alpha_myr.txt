@@ -1,0 +1,8 @@
+Name:Alpha Myr
+ManaCost:2
+Types:Artifact Creature Myr
+Text:no text
+PT:2/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49045.jpg
+End

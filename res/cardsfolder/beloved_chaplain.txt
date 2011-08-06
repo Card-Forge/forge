@@ -1,0 +1,9 @@
+Name:Beloved Chaplain
+ManaCost:1 W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+K:Protection from creatures
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/beloved_chaplain.jpg
+End

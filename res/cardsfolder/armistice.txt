@@ -1,0 +1,8 @@
+Name:Armistice
+ManaCost:2 W
+Types:Enchantment
+Text:no text
+K:abDrawCards 3 W W:1:Drawback$OppGainLife/3:You draw a card and target opponent gains 3 life.:Armistice - draw a card and opponent gains life
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/armistice.jpg
+End

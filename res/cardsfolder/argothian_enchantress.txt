@@ -1,0 +1,9 @@
+Name:Argothian Enchantress
+ManaCost:1 G
+Types:Creature Human Druid
+Text:Whenever you play an enchantment spell, draw a card.
+PT:0/1
+K:Shroud
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_enchantress.jpg
+End

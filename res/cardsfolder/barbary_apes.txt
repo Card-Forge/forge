@@ -1,0 +1,8 @@
+Name:Barbary Apes
+ManaCost:1 G
+Types:Creature Ape
+Text:no text
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1516.jpg
+End

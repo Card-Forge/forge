@@ -1,0 +1,8 @@
+Name:Bad Moon
+ManaCost:1 B
+Types:Enchantment
+Text:Black creatures get +1/+1
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_moon.jpg
+End

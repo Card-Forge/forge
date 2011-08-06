@@ -1,0 +1,10 @@
+Name:Arrogant Wurm
+ManaCost:3 G G
+Types:Creature Wurm
+Text:no text
+PT:4/4
+K:Trample
+K:Madness:2 G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arrogant_wurm.jpg
+End

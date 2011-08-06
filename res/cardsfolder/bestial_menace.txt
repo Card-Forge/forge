@@ -1,0 +1,7 @@
+Name:Bestial Menace
+ManaCost:3 G G
+Types:Sorcery
+Text:Put a 1/1 green Snake creature token, a 2/2 green Wolf creature token, and a 3/3 green Elephant creature token onto the battlefield.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bestial_menace.jpg
+End

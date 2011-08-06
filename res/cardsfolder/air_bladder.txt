@@ -1,0 +1,9 @@
+Name:Air Bladder
+ManaCost:U
+Types:Enchantment Aura
+Text:Enchanted creature has flying and can block only creatures with flying.
+K:Enchant creature
+K:enPump:Flying & CARDNAME can block only creatures with flying.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/air_bladder.jpg
+End

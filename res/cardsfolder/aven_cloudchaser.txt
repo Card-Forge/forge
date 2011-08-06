@@ -1,0 +1,10 @@
+Name:Aven Cloudchaser
+ManaCost:3 W
+Types:Creature Bird Soldier
+Text:When Aven Cloudchaser enters the battlefield, destroy target enchantment.
+PT:2/2
+K:Flying
+K:etbDestroyTgt:Enchantment
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_cloudchaser.jpg
+End

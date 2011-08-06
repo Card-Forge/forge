@@ -1,0 +1,10 @@
+Name:Arcbound Hybrid
+ManaCost:4
+Types:Artifact Creature Beast
+Text:no text
+PT:0/0
+K:Haste
+K:Modular 2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_hybrid.jpg
+End

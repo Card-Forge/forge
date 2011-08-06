@@ -1,0 +1,7 @@
+Name:Ajani Goldmane
+ManaCost:2 W W
+Types:Planeswalker - Ajani
+Text:no text
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_goldmane.jpg
+End

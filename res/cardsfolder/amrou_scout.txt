@@ -1,0 +1,9 @@
+Name:Amrou Scout
+ManaCost:1 W
+Types:Creature Kithkin Rebel Scout
+Text:no text
+PT:2/1
+K:SearchRebel:4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_scout.jpg
+End

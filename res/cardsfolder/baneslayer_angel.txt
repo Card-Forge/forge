@@ -1,0 +1,13 @@
+Name:Baneslayer Angel
+ManaCost:3 W W
+Types:Creature Angel
+Text:no text
+PT:5/5
+K:Flying
+K:First Strike
+K:Lifelink
+K:Protection from Demons
+K:Protection from Dragons
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/baneslayer_angel.jpg
+End

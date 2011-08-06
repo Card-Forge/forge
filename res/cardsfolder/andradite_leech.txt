@@ -1,0 +1,10 @@
+Name:Andradite Leech
+ManaCost:2 B
+Types:Creature Leech
+Text:Black spells you cast cost B more to cast.
+PT:2/2
+K:abPump B:+1/+1
+K:CostChange:Player:More:B:Spell:black:All:NoSpecial
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/andradite_leech.jpg
+End

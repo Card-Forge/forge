@@ -1,0 +1,14 @@
+Name:Birds of Paradise
+ManaCost:G
+Types:Creature Bird
+Text:no text
+PT:0/1
+K:tap: add W
+K:tap: add B
+K:tap: add U
+K:tap: add R
+K:tap: add G
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83688.jpg
+End

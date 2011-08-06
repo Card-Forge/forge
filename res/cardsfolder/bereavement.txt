@@ -1,0 +1,9 @@
+Name:Bereavement
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature!Color/green:Play:DiscardCards/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a green creature is put into a graveyard from the battlefield, its controller discards a card.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bereavement.jpg
+End

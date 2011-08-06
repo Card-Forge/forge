@@ -1,0 +1,8 @@
+Name:Barrenton Cragtreads
+ManaCost:2 WU WU
+Types:Creature Kithkin Scout
+Text:Barrenton Cragtreads can't be blocked by red creatures.
+PT:3/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/barrenton_cragtreads.jpg
+End

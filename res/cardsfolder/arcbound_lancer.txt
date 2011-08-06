@@ -1,0 +1,10 @@
+Name:Arcbound Lancer
+ManaCost:7
+Types:Artifact Creature Beast
+Text:no text
+PT:0/0
+K:First Strike
+K:Modular 4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_lancer.jpg
+End

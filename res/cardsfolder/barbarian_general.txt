@@ -1,0 +1,9 @@
+Name:Barbarian General
+ManaCost:4 R
+Types:Creature Human Barbarian Soldier
+Text:no text
+PT:3/2
+K:Horsemanship
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_general.jpg
+End

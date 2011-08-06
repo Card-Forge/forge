@@ -1,0 +1,10 @@
+Name:Armored Griffin
+ManaCost:3 W
+Types:Creature Griffin
+Text:no text
+PT:2/3
+K:Flying
+K:Vigilance
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/armored_griffin.jpg
+End

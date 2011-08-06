@@ -1,0 +1,9 @@
+Name:Akoum Refuge
+ManaCost:no cost
+Types:Land
+Text:Akoum Refuge enters the battlefield tapped.\r\nWhen Akoum Refuge enters the battlefield, you gain 1 life.
+K:tap: add B
+K:tap: add R
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_refuge.jpg
+End

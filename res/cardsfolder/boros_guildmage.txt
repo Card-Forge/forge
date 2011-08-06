@@ -1,0 +1,10 @@
+Name:Boros Guildmage
+ManaCost:RW RW
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+K:abPumpTgtC 1 R:Haste
+K:abPumpTgtC 1 W:First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_guildmage.jpg
+End

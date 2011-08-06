@@ -1,0 +1,9 @@
+Name:Bountiful Harvest
+ManaCost:4 G
+Types:Sorcery
+Text:no text
+K:spGainLife:X:You gain 1 life for each land you control.:Bountiful Harvest - player gains X life
+K:SVar:X:Count$TypeYouCtrl.Land
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bountiful_harvest.jpg
+End

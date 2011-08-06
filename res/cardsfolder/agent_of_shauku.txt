@@ -1,0 +1,9 @@
+Name:Agent of Shauku
+ManaCost:1 B
+Types:Creature Human Mercenary
+Text:no text
+PT:1/1
+K:abPumpTgtC 1 B Sac-Land:+2/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_shauku.jpg
+End

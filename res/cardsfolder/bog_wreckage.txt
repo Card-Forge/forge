@@ -1,0 +1,14 @@
+Name:Bog Wreckage
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add B
+K:tap, Sacrifice CARDNAME: Add W to your mana pool.
+K:tap, Sacrifice CARDNAME: Add U to your mana pool.
+K:tap, Sacrifice CARDNAME: Add B to your mana pool.
+K:tap, Sacrifice CARDNAME: Add R to your mana pool.
+K:tap, Sacrifice CARDNAME: Add G to your mana pool.
+K:Comes into play tapped.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_wreckage.jpg
+End

@@ -1,0 +1,8 @@
+Name:Anowon, the Ruin Sage
+ManaCost:3 B B
+Types:Legendary Creature Vampire Shaman
+Text:At the beginning of your upkeep, each player sacrifices a non-Vampire creature.
+PT:4/3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/anowon_the_ruin_sage.jpg
+End

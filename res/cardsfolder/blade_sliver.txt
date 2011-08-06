@@ -1,0 +1,9 @@
+Name:Blade Sliver
+ManaCost:2 R
+Types:Creature Sliver
+Text:All Sliver creatures get +1/+0.
+PT:2/2
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_sliver.jpg
+End

@@ -1,0 +1,8 @@
+Name:Bojuka Bog
+ManaCost:no cost
+Types:Land
+Text:CARDNAME enters the battlefield tapped. When CARDNAME enters the battlefield, exile target player's graveyard.
+K:tap: add B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bojuka_bog.jpg
+End

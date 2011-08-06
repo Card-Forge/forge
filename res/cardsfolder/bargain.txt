@@ -1,0 +1,8 @@
+Name:Bargain
+ManaCost:2 W
+Types:Sorcery
+Text:no text
+K:spGainLife:7:Drawback$OppDrawCard/1:Target opponent draws a card. You gain 7 life.:Bargain - opponent draws a card and you gain 7 life
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bargain.jpg
+End

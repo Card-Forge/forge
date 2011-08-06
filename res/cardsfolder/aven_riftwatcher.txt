@@ -1,0 +1,9 @@
+Name:Aven Riftwatcher
+ManaCost:2 W
+Types:Creature Bird Rebel Soldier
+Text:Vanishing 3. When Aven Riftwatcher comes into play or leaves play, you gain 2 life.
+PT:2/3
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_riftwatcher.jpg
+End

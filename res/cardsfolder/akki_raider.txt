@@ -1,0 +1,9 @@
+Name:Akki Raider
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:2/1
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Land:Play:StatsPumpEOT/1/0:Self:ASAP:No_Condition:No Special Condition:Whenever a land is put into a graveyard from the battlefield, Akki Raider gets +1/+0 until end of turn.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_raider.jpg
+End

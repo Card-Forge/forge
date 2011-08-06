@@ -1,0 +1,12 @@
+Name:Blistering Firecat
+ManaCost:1 R R R
+Types:Creature Cat
+Text:no text
+PT:7/1
+K:Morph:R R
+K:Trample
+K:Haste
+K:At the beginning of the end step, sacrifice CARDNAME.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39737.jpg
+End

@@ -1,0 +1,9 @@
+Name:Anurid Murkdiver
+ManaCost:4 B B
+Types:Creature Zombie Frog Beast
+Text:no text
+PT:4/3
+K:Swampwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card43638.jpg
+End

@@ -1,0 +1,9 @@
+Name:Bloodrite Invoker
+ManaCost:2 B
+Types:Creature Vampire Shaman
+Text:no text
+PT:3/1
+K:abLoseLifeTgt 8:3:Drawback$YouGainLife/3:Target player loses 3 life and you gain 3 life.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrite_invoker.jpg
+End

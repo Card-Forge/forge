@@ -1,0 +1,10 @@
+Name:Benalish Knight
+ManaCost:2 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Flash
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_knight.jpg
+End

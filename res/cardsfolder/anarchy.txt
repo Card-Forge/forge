@@ -1,0 +1,9 @@
+Name:Anarchy
+ManaCost:2 R R
+Types:Sorcery
+Text:Destroy all white permanents.
+K:spDestroyAll:Permanent.White
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/anarchy.jpg
+End

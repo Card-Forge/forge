@@ -1,0 +1,8 @@
+Name:Arc-Slogger
+ManaCost:3 R R
+Types:Creature Beast
+Text:R, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to target creature or player.
+PT:4/5
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_slogger.jpg
+End

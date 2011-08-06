@@ -1,0 +1,10 @@
+Name:Aspect of Mongoose
+ManaCost:1 G
+Types:Enchantment Aura
+Text:Enchanted creature has shroud.
+K:Enchant creature
+K:enPump:Shroud
+K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aspect_of_mongoose.jpg
+End

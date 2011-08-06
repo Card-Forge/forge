@@ -1,0 +1,9 @@
+Name:Brion Stoutarm
+ManaCost:2 R W
+Types:Legendary Creature Giant Warrior
+Text:no text
+PT:4/4
+K:Lifelink
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/brion_stoutarm.jpg
+End

@@ -1,0 +1,10 @@
+Name:Adarkar Valkyrie
+ManaCost:4 W W
+Types:Snow Creature Angel
+Text:no text
+PT:4/5
+K:Flying
+K:Vigilance
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121196.jpg
+End

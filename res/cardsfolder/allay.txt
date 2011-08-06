@@ -1,0 +1,10 @@
+Name:Allay
+ManaCost:1 W
+Types:Instant
+Text:Destroy target enchantment.
+K:spDestroyTgt:Enchantment
+K:SVar:Buyback:3
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/allay.jpg
+End

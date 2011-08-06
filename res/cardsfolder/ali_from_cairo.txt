@@ -1,0 +1,8 @@
+Name:Ali from Cairo
+ManaCost:2 R R
+Types:Creature Human
+Text:Damage that would reduce your life total to less than 1 reduces it to 1 instead.
+PT:0/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ali_from_cairo.jpg
+End

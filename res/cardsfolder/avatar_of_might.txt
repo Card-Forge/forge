@@ -1,0 +1,9 @@
+Name:Avatar of Might
+ManaCost:6 G G
+Types:Creature Avatar
+Text:If an opponent controls at least four more creatures than you, Avatar of Might costs 6 less to cast.
+PT:8/8
+K:Trample
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_might.jpg
+End

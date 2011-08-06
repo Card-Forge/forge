@@ -1,0 +1,9 @@
+Name:Bog Smugglers
+ManaCost:1 B B
+Types:Creature Human Mercenary
+Text:no text
+PT:2/2
+K:Swampwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19598.jpg
+End

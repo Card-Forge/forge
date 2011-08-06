@@ -1,0 +1,10 @@
+Name:Bog Initiate
+ManaCost:1 B
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+K:1: add B
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_initiate.jpg
+End

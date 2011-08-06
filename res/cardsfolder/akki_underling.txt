@@ -1,0 +1,9 @@
+Name:Akki Underling
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:2/1
+K:StaticEffect:Play:Self:PTBonus/2/1!Keyword/First Strike:CardsInHandMore/7:As long as you have seven or more cards in hand, Akki Underling gets +2/+1 and has first strike.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_underling.jpg
+End

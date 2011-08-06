@@ -1,0 +1,11 @@
+Name:Ancient Spring
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add U
+K:tap, Sacrifice CARDNAME: Add W B to your mana pool.
+K:Comes into play tapped.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_spring.jpg
+End

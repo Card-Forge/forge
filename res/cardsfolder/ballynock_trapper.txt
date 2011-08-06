@@ -1,0 +1,9 @@
+Name:Ballynock Trapper
+ManaCost:3 W
+Types:Creature Kithkin Soldier
+Text:no text
+PT:2/2
+K:WheneverKeyword:CastSpell/Controller:Color/white:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a white spell, you may untap Ballynock Trapper.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_trapper.jpg
+End

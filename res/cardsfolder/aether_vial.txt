@@ -1,0 +1,8 @@
+Name:AEther Vial
+ManaCost:1
+Types:Artifact
+Text:At the beginning of your upkeep, you may put a charge counter on AEther Vial.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_vial.jpg
+End

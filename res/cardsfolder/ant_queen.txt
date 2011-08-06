@@ -1,0 +1,8 @@
+Name:Ant Queen
+ManaCost:3 G G
+Types:Creature Insect
+Text:no text
+PT:5/5
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ant_queen.jpg
+End

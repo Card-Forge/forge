@@ -1,0 +1,9 @@
+Name:Acid Rain
+ManaCost:3 U
+Types:Sorcery
+Text:Destroy all Forests.
+K:spDestroyAll:Forest
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_rain.jpg
+End

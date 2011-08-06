@@ -1,0 +1,11 @@
+Name:Abyssal Persecutor
+ManaCost:2 B B
+Types:Creature Demon
+Text:You can't win the game and your opponents can't lose the game.
+PT:6/6
+K:Flying
+K:Trample
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg
+End

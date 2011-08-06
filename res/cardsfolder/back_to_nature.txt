@@ -1,0 +1,8 @@
+Name:Back to Nature
+ManaCost:1 G
+Types:Instant
+Text:Destroy all enchantments.
+K:spDestroyAll:Enchantment
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
+End

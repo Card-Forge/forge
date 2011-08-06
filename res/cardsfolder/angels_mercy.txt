@@ -1,0 +1,8 @@
+Name:Angel's Mercy
+ManaCost:2 W W
+Types:Instant
+Text:no text
+K:spGainLife:7
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_mercy.jpg
+End

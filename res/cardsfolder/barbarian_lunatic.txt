@@ -1,0 +1,9 @@
+Name:Barbarian Lunatic
+ManaCost:2 R
+Types:Creature Human Barbarian
+Text:no text
+PT:2/1
+K:abDamageTgtC 2 R Sac-CARDNAME:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_lunatic.jpg
+End

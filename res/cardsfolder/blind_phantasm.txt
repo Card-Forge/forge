@@ -1,0 +1,8 @@
+Name:Blind Phantasm
+ManaCost:2 U
+Types:Creature Illusion
+Text:no text
+PT:2/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126143.jpg
+End

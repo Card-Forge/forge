@@ -1,0 +1,9 @@
+Name:Adarkar Sentinel
+ManaCost:5
+Types:Artifact Creature Soldier
+Text:no text
+PT:3/3
+K:abPump 1:+0/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_sentinel.jpg
+End

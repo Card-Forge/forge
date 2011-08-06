@@ -1,0 +1,11 @@
+Name:Bone Shredder
+ManaCost:2 B
+Types:Creature Minion
+Text:When Bone Shredder enters the battlefield, destroy target nonartifact, nonblack creature.
+PT:1/1
+K:Flying
+K:Echo:2B
+K:etbDestroyTgt:Creature.nonArtifact+nonBlack
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shredder.jpg
+End

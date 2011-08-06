@@ -1,0 +1,9 @@
+Name:Aggressive Urge
+ManaCost:1 G
+Types:Instant
+Text:no text
+K:spPumpTgt:+1/+1
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aggressive_urge.jpg
+End

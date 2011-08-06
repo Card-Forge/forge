@@ -1,0 +1,8 @@
+Name:Amnesia
+ManaCost:3 U U U
+Types:Sorcery
+Text:Target player reveals his or her hand and discards all nonland cards.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1746.jpg
+End

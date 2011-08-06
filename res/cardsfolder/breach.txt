@@ -1,0 +1,8 @@
+Name:Breach
+ManaCost:2 B
+Types:Instant
+Text:no text
+K:spPumpTgt:+2/+0/Fear
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/breach.jpg
+End

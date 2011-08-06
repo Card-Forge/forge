@@ -1,0 +1,8 @@
+Name:Absorb
+ManaCost:W U U
+Types:Instant
+Text:Counter target spell. You gain 3 life.
+K:spCounter:Spell:None:Graveyard:My-GainLife(3)
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23155.jpg
+End

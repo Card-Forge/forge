@@ -1,0 +1,9 @@
+Name:Bird Maiden
+ManaCost:2 R
+Types:Creature Human Bird
+Text:no text
+PT:1/2
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card4032.jpg
+End

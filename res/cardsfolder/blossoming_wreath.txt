@@ -1,0 +1,9 @@
+Name:Blossoming Wreath
+ManaCost:G
+Types:Instant
+Text:no text
+K:spGainLife:X:You gain life equal to the number of creature cards in your graveyard.:Blossoming Wreath - player gains X life
+K:SVar:X:Count$TypeInYourYard.Creature
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blossoming_wreath.jpg
+End

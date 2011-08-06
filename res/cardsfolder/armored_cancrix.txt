@@ -1,0 +1,8 @@
+Name:Armored Cancrix
+ManaCost:4 U
+Types:Creature Crab
+Text:no text
+PT:2/5
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_cancrix.jpg
+End

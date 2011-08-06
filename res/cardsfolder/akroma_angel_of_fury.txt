@@ -1,0 +1,15 @@
+Name:Akroma, Angel of Fury
+ManaCost:5 R R R
+Types:Legendary Creature Angel
+Text:no text
+PT:6/6
+K:Flying
+K:Trample
+K:Protection from white
+K:Protection from blue
+K:abPump R:+1/+0
+K:Morph:3 R R R
+K:CARDNAME can't be countered.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122432.jpg
+End

@@ -1,0 +1,9 @@
+Name:Agility
+ManaCost:1 R
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+1 and has flanking.
+K:Enchant creature
+K:enPump:+1/+1/Flanking
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/agility.jpg
+End
