@@ -1,4 +1,4 @@
-Name:Temple of a False God
+Name:Temple of the False God
 ManaCost:no cost
 Types:Land
 Text:no text
