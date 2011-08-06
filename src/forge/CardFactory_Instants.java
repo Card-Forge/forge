@@ -37,7 +37,57 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+
+        //*************** START ********** START *************************
+        else if(cardName.equals("Regenerate"))
+          {
+          	card.clearSpellAbility();
+          	final Card[] tgt = new Card[1];
+          	final Command untilEOT = new Command() {
+                  private static final long serialVersionUID = -7619842476705984912L;
+                  
+                  public void execute() {
+                      tgt[0].setShield(0);                    
+                  }
+              };
+              
+          	SpellAbility spell = new Spell(card) {
+                  private static final long serialVersionUID = 6139754377230333678L;
+                  
+                  @Override
+                  public void resolve() {
+                  	tgt[0] = this.getTargetCard();
+                  	
+                  	tgt[0].addShield();
+                  	AllZone.EndOfTurn.addUntil(untilEOT);
+                  }
+                  
+                  @Override
+                  public boolean canPlayAI()
+                  {
+                  	return false;
+                  }
+                  
+                  @Override
+                  public boolean canPlay() {
+                      CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play,card.getController()).getCards());
+                      
+                      creats.filter(new CardListFilter() {
+                      	public boolean addCard(Card c)
+                      	{
+                      		return c.getType().contains("Creature");
+                      	}
+                      });
+                      
+                      return creats.size() != 0;
+                  }
+              };
+              spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+              
+              
+              card.addSpellAbility(spell);            
+              
+          }//*************** END ************ END ************************** 
     
     	 //*************** START *********** START **************************
         else if (cardName.equals("Brave the Elements")) {
