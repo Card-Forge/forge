@@ -55,7 +55,7 @@ public class CardFactory_Creatures {
     }
     
 
-    public static Card getCard(final Card card, String cardName, Player owner, CardFactory cf) {
+    public static Card getCard(final Card card, final String cardName, Player owner, CardFactory cf) {
         
         //*************** START *********** START **************************
         if(cardName.equals("Lurking Informant")) {
@@ -13514,6 +13514,76 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }
         //*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Phyrexian Dreadnought")) {
+        	final Command comesIntoPlay = new Command() {
+        		private static final long serialVersionUID = 7680692311339496770L;
+        		final Player player = card.getController();
+        		final CardList toSac = new CardList();
+
+        		public void execute() {
+        			if(player.isHuman()) {
+        				Input target = new Input() {
+        					private static final long serialVersionUID = 2698036349873486664L;
+        					
+        					@Override
+        					public void showMessage() {
+        						String toDisplay = cardName+" - Select any number of creatures to sacrifice.  ";
+        						toDisplay += "Currently, ("+toSac.size()+") selected with a total power of: "+getTotalPower();
+        						toDisplay += "  Click OK when Done.";
+        						AllZone.Display.showMessage(toDisplay);
+        						ButtonUtil.enableAll();
+        					}
+        					
+        					@Override
+        					public void selectButtonOK() {
+        						done();
+        					}
+        					
+        					@Override
+        					public void selectButtonCancel() {
+        						toSac.clear();
+        						AllZone.GameAction.sacrifice(card);
+        						stop();
+        					}
+        					
+        					@Override
+        					public void selectCard(Card c, PlayerZone zone) {
+        						if(c.isCreature() && zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer)
+        								&& !toSac.contains(c)) {
+        							toSac.add(c);
+        						}
+        						showMessage();
+        					}//selectCard()
+        					
+        					private void done() {
+        						if(getTotalPower() >= 12) {
+        							for(Card sac:toSac) AllZone.GameAction.sacrifice(sac);
+        						}
+        						else {
+        							AllZone.GameAction.sacrifice(card);
+        						}
+        						toSac.clear();
+        						stop();
+        					}
+        				};//Input
+        				AllZone.InputControl.setInput(target);
+        			}
+        		}
+
+        		private int getTotalPower() {
+        			int sum = 0;
+        			for(Card c:toSac) {
+        				sum += c.getNetAttack();
+        			}
+        			return sum;
+        		}
+        	};
+
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
         
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
