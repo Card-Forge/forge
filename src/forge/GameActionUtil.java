@@ -10012,8 +10012,8 @@ public class GameActionUtil {
             String keyword3 = "Vigilance";
             String keyword4 = "Trample";
             String keyword5 = "Haste";
-            String keyword6 = "Protection from Black";
-            String keyword7 = "Protection from Red";
+            String keyword6 = "Protection from black";
+            String keyword7 = "Protection from red";
             CardList list = gloriousAnthemList;
             Card c;
             
