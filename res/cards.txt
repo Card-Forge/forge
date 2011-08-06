@@ -1,3 +1,9 @@
+Patriarch's Bidding
+3 B B
+Sorcery
+Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield.
+SVar:Rarity:Rare
+
 Death Baron
 1 B B
 Creature Zombie Wizard

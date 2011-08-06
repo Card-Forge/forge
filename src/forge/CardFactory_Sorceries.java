@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -8152,6 +8153,97 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spDFWf);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Patriarch's Bidding")) {
+            final String[] input = new String[2];
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+
+                        input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
+                                JOptionPane.QUESTION_MESSAGE);
+                        
+                        if(input[0].equals("Legendary") || input[0].equals("Artifact")
+                                || input[0].equals("Enchantment") || input[0].equals("Shrine")
+                                || input[0].equals("Creature")) input[0] = "";
+                        //TODO: some more input validation, case-sensitivity, etc.
+                        
+                        input[0] = input[0].trim(); //this is to prevent "cheating", and selecting multiple creature types,eg "Goblin Soldier"
+
+                        PlayerZone aiGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+                        HashMap<String,Integer> countInGraveyard = new HashMap<String,Integer>();
+                        CardList allGrave = new CardList(aiGrave.getCards());
+                        allGrave.filter(new CardListFilter() {
+                        	public boolean addCard(Card c) {
+                        		return c.getType().contains("Creature");
+                        	}
+                        });
+                        for(Card c:allGrave)
+                        {
+                        	for(String type:c.getType())
+                        	{
+                        		if(!type.equals("Legendary") && !type.equals("Creature") && !type.equals("Artifact"))
+                        		{
+                        			if(countInGraveyard.containsKey(type))
+                        			{
+                        				countInGraveyard.put(type, countInGraveyard.get(type)+1);
+                        			}
+                        			else
+                        			{
+                        				countInGraveyard.put(type, 1);
+                        			}
+                        		}
+                        	}
+                        }
+                        String maxKey = "";
+                        int maxCount = -1;
+                        for(String type:countInGraveyard.keySet())
+                        {
+                        	if(countInGraveyard.get(type) > maxCount)
+                        	{
+                        		maxKey = type;
+                        		maxCount = countInGraveyard.get(type);
+                        	}
+                        }
+                        if(!maxKey.equals("")) input[1] = maxKey;
+                        else input[1] = "Sliver";
+
+                        //Actually put everything  on the battlefield 
+                        PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard,Constant.Player.Human);
+                        PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Play,Constant.Player.Human);
+                        for(Card c:humanGrave.getCards())
+                        {
+                        	if(c.getType().contains(input[0]))
+                        	{
+                        		humanGrave.remove(c);
+                        		humanBattlefield.add(c);
+                        	}
+                        }
+                        PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard,Constant.Player.Computer);
+                        PlayerZone computerBattlefield = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                        for(Card c:computerGrave.getCards())
+                        {
+                        	if(c.getType().contains(input[1]))
+                        	{
+                        		computerGrave.remove(c);
+                        		computerBattlefield.add(c);
+                        	}
+                        }
+                }
+            };//ability
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 5634360316643996274L;
+                
+                public void execute() {
+                    ability.setStackDescription("When " + card.getName()
+                            + " comes into play, choose a creature type.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);            
+
+        }//*************** END ************ END **************************
         
      // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
