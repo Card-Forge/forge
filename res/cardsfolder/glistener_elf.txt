@@ -1,0 +1,9 @@
+Name:Glistener Elf
+ManaCost:G
+Types:Creature Elf Warrior
+Text:no text
+PT:1/1
+K:Infect
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glistener_elf.jpg
+End
