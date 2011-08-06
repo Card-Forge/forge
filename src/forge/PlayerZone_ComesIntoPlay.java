@@ -99,6 +99,24 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 }
             }
             
+            if(c.isCreature()) {
+            	CardList flashes = AllZoneUtil.getCardsInPlay("AEther Flash");
+            	final Card enteringCard = c;
+            	for(final Card flash:flashes){
+                    	SpellAbility ability = new Ability(flash, "") {
+                    		@Override
+                    		public void resolve() {
+                    			enteringCard.addDamage(2, flash);
+                    		}
+                    	};
+                    	StringBuilder sb = new StringBuilder();
+                    	sb.append(flash).append(" - deals 2 damage to ").append(enteringCard.getName());
+                    	ability.setStackDescription(sb.toString());
+                    	
+                    	AllZone.Stack.add(ability);
+                    }
+            }
+            
             if(c.isCreature() && AllZoneUtil.isCardInPlay("Intruder Alarm")) {
             	CardList alarms = AllZoneUtil.getCardsInPlay("Intruder Alarm");
             	for(Card alarm:alarms) {
