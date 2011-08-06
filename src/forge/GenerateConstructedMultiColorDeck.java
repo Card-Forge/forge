@@ -490,6 +490,7 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Ur-Golem's Eye");
     remove.add("Viridian Acolyte");
     remove.add("Worn Powerstone");
+    remove.add("Mana Vault");
    
     
     final ArrayList<Card> goodLand = new ArrayList<Card>();

@@ -33,6 +33,28 @@ public class Input_Draw extends Input {
             
         } else { //continue with draw phase
             boolean drawCard = true;
+            //this looks like Human only code, so this should be safe
+            final String player = AllZone.Phase.getActivePlayer();
+            
+            /*
+             * Mana Vault - At the beginning of your draw step, if Mana Vault
+             * is tapped, it deals 1 damage to you.
+             */
+            CardList manaVaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
+            for(Card manaVault:manaVaults) {
+            	final Card vault = manaVault;
+            	if(vault.isTapped()) {
+            		final Ability damage = new Ability(vault, "0") {
+            			@Override
+            			public void resolve() {
+            				AllZone.GameAction.addDamage(player, vault, 1);
+            			}
+            		};//Ability
+            		damage.setStackDescription(vault+" - does 1 damage to "+player);
+            		AllZone.Stack.add(damage);
+            	}
+            }
+            
             if(0 < getDredge().size()) {
                 String choices[] = {"Yes", "No"};
                 Object o = AllZone.Display.getChoice("Do you want to dredge?", choices);

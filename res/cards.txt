@@ -1,3 +1,10 @@
+Mana Vault
+1
+Artifact
+At the beginning of your upkeep, you may pay 4. If you do, untap Mana Vault.  At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
+tap: add 3
+CARDNAME doesn't untap during your untap step.
+
 Dark Depths
 no cost
 Legendary Snow Land

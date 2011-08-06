@@ -27,6 +27,7 @@ public class GameActionUtil {
 		upkeep_Honden_of_Nights_Reach();
 		upkeep_Honden_of_Infinite_Rage();
 		upkeep_Land_Tax();
+		upkeep_Mana_Vault();
 		upkeep_Feedback();
 		upkeep_Warp_Artifact();
 		upkeep_Wanderlust();
@@ -4912,6 +4913,36 @@ public class GameActionUtil {
 			}// for
 		}// if fewer lands than opponent
 
+	}
+	
+	private static void upkeep_Mana_Vault() {
+		//this card is filtered out for the computer, so we will only worry about Human here
+		final String player = AllZone.Phase.getActivePlayer();
+		if(player.equals(Constant.Player.Human)) {  //in case stupid computer takes control
+			CardList vaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
+			for(Card vault:vaults) {
+				if(vault.isTapped()) {
+					final Card thisVault = vault;
+					final String[] choices = {"Yes", "No"};
+					Object o = AllZone.Display.getChoice("Untap Mana Vault?", choices);
+					String choice = (String) o;
+					if(choice.equals("Yes")) {
+						//prompt for pay mana cost, then untap
+						final SpellAbility untap = new Ability(thisVault, "4") {
+							@Override
+							public void resolve() {
+								thisVault.untap();
+							}
+						};//Ability
+						thisVault.addSpellAbility(untap);
+						untap.setStackDescription("Untap "+thisVault);
+						untap.setBeforePayMana(new Input_PayManaCost(untap));
+						//AllZone.Stack.add(untap);
+						AllZone.GameAction.playSpellAbility(untap);
+					}
+				}
+			}
+		}
 	}
 	
 	private static void upkeep_Feedback() {
