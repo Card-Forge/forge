@@ -1,8 +1,8 @@
 Name:Raise Dead
 ManaCost:B
 Types:Sorcery
-Text:no text
-K:spRaiseDead:1
+Text:Return target creature card from your graveyard to your hand.
+K:spReturnTgt:1:Creature:Hand
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83220.jpg
 End

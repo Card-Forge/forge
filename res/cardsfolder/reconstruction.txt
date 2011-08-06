@@ -1,8 +1,8 @@
 Name:Reconstruction
 ManaCost:U
 Types:Sorcery
-Text:no text
-K:spRaiseDead:1/Artifact
+Text:Return target artifact card from your graveyard to your hand.
+K:spReturnTgt:1:Artifact:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reconstruction.jpg
 End
