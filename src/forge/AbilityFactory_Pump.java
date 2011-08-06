@@ -221,19 +221,13 @@ public class AbilityFactory_Pump {
                 if(hSick && kHaste) 
                     return cTgt;
                     
-                boolean cAtt = CardFactoryUtil.AI_doesCreatureAttack(c); 
+                boolean cAtt = CardFactoryUtil.AI_doesCreatureAttack(c);
                 boolean kSize = Keywords.size() > 0;
-
-                /* This time we will comment out this block rather than just the last line
                 String KWs[] = {"none"};
                 if (!Keywords.get(0).equals("none"))
-                    KWs = (String[]) Keywords.toArray();
-
+                	KWs = Keywords.toArray(new String[Keywords.size()]);
+                
                 boolean hKW = c.hasAnyKeyword(KWs);
-                */
-                
-                boolean hKW = c.hasAnyKeyword(Keywords);
-                
                 return (cAtt && cTgt && (kSize && !hKW) && !(!hSick && kHaste));
                     
                 //return false;
