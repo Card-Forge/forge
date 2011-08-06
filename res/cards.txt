@@ -1,3 +1,11 @@
+Eternal Dragon
+5 W W
+Creature Dragon Spirit
+no text
+5/5
+Flying
+TypeCycling:Plains:2
+
 Rite of Replication
 2 U U
 Sorcery

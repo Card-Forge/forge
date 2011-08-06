@@ -1385,7 +1385,10 @@ public class CardFactoryUtil {
                 }
                 
 
-                if(sameType.size() == 0) return;
+                if(sameType.size() == 0) {
+                	AllZone.GameAction.discard(sourceCard);
+                	return;
+                }
                 
 
                 Object o = AllZone.Display.getChoiceOptional("Select a card", sameType.toArray());

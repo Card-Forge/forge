@@ -10798,6 +10798,39 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Eternal Dragon")) {
+            final Ability ability = new Ability(card, "3 W W") {
+                
+    			private static final long serialVersionUID = -5633265048009L;
+
+
+    			@Override
+                public void resolve() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    
+                    grave.remove(card);
+                    hand.add(card);
+                  }
+                
+                
+                @Override
+                public boolean canPlay() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw() == card.getController() && hand.size() > 0;                   
+                }
+                
+            };
+            card.addSpellAbility(ability);
+            ability.setFlashBackAbility(true);
+            card.setUnearth(true);
+            ability.setDescription("3 W W: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.");
+            ability.setStackDescription(card.getName() + " returns from the graveyard to hand");
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Undead Gladiator")) {
             final Ability ability = new Ability(card, "1 B") {
                 
