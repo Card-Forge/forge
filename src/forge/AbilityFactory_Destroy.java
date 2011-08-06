@@ -482,6 +482,10 @@ public class AbilityFactory_Destroy {
 		if(params.containsKey("ValidCards")) 
 			Valid = params.get("ValidCards");
 		
+		// Ugh. If calculateAmount needs to be called with DestroyAll it _needs_ to use the X variable
+		// We really need a better solution to this
+		if (Valid.contains("X"))	
+			Valid = Valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
 		
 		CardList list = AllZoneUtil.getCardsInPlay();
 		
