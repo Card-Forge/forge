@@ -1,0 +1,10 @@
+Name:Cephalid Inkshrouder
+ManaCost:2 U
+Types:Creature Cephalid
+Text:no text
+PT:2/1
+A:AB$Pump | Cost$ Discard<1/Any> | KW$ Shroud & HIDDEN Unblockable | SpellDescription$ CARDNAME gains shroud until end of turn and is unblockable this turn. (A permanent with shroud can't be the target of spells or abilities.)
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_inkshrouder.jpg
+End
