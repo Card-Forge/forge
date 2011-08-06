@@ -17488,6 +17488,97 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	      card.clearSpellAbility();
 	      card.addSpellAbility(spell);
 	    }//*************** END ************ END **************************
+	    
+	    
+	  //*************** START *********** START **************************
+	    else if(cardName.equals("Lobotomy"))
+	    {
+	      final SpellAbility spell = new Spell(card)
+	      {
+	      private static final long serialVersionUID = 5338238621454661783L;
+
+	      public void resolve()
+	        {
+	          Card choice = null;
+
+	          //check for no cards in hand on resolve
+	          String player = getTargetPlayer();
+	          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	          PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+	          CardList libList = new CardList(lib.getCards());
+	          CardList grvList = new CardList(grave.getCards());
+	          CardList fullHand = new CardList(hand.getCards());
+	          Card[] handChoices = removeLand(hand.getCards());
+
+	          if(card.getController().equals(Constant.Player.Human))
+	          {
+	            choice = (Card) AllZone.Display.getChoice("Choose", handChoices);
+	          }
+	          else//computer chooses
+	          {
+	            choice = CardUtil.getRandom(handChoices);
+	          }
+	         
+	          String chosen = choice.getName();
+	         
+	          int max = libList.size();
+	          for (int i=0;i<max;i++)
+	          {
+	            Card c = libList.get(i);
+	            if ( c.getName().equals(chosen))    
+	             {   lib.remove(c);
+	                    exiled.add(c);
+	             }
+	          }
+	          int grv = grvList.size();
+	          for (int i=0;i<grv;i++)
+	          {
+	            Card c = grvList.get(i);
+	            if ( c.getName().equals(chosen))    
+	             {   grave.remove(c);
+	                    exiled.add(c);
+	             }
+	          }
+	          int hnd = fullHand.size();
+	          for (int i=0;i<hnd;i++)
+	          {
+	            Card c = fullHand.get(i);
+	            if ( c.getName().equals(chosen))    
+	             {   hand.remove(c);
+	                    exiled.add(c);
+	             }
+	          }
+	         
+	        }//resolve()
+
+	        public boolean canPlayAI()
+	        {
+	          Card[] c = removeLand(AllZone.Human_Hand.getCards());
+	          return 0 < c.length;
+	        }
+
+	        Card[] removeLand(Card[] in)
+	        {
+	          CardList c = new CardList(in);
+	          c = c.filter(new CardListFilter()
+	          {
+	            public boolean addCard(Card c)
+	            {
+	              return !c.getType().contains("Basic");
+	            }
+	          });
+	          return c.toArray();
+	        }//removeLand()
+	      };//SpellAbility spell
+	      spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+	    }//*************** END ************ END ************************** 
+
 	        
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

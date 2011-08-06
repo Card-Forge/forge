@@ -219,8 +219,8 @@ public class Gui_Quest extends JFrame {
         if(resizeCheckbox.isSelected()) AllZone.Display = new GuiDisplay3();
         else AllZone.Display = new GuiDisplay2();
         
-        if(smoothLandCheckBox.isSelected()) Constant.Runtime.smooth[0] = true;
-        else Constant.Runtime.smooth[0] = false;
+        if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
+        else Constant.Runtime.Smooth[0] = false;
         
         AllZone.GameAction.newGame(human, computer);
         AllZone.Display.setVisible(true);

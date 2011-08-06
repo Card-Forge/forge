@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+lobotomy.jpg                http://www.wizards.com/global/images/magic/general/lobotomy.jpg
 haunting_echoes.jpg         http://www.wizards.com/global/images/magic/general/haunting_echoes.jpg
 hedron_crab.jpg				http://www.wizards.com/global/images/magic/general/hedron_crab.jpg
 daru_encampment.jpg         http://www.wizards.com/global/images/magic/general/Daru_Encampment.jpg

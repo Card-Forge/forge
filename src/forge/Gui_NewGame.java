@@ -78,6 +78,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private TitledBorder            titledBorder2;
     private static JCheckBox        newGuiCheckBox       = new JCheckBox("", true);
     private static JCheckBox        smoothLandCheckBox   = new JCheckBox("", true);
+    private static JCheckBox 		millLoseCheckBox 	 = new JCheckBox("", true);
     
     // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
     // use these two variables
@@ -168,7 +169,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         Dimension screen = getToolkit().getScreenSize();
         Rectangle bounds = getBounds();
         bounds.width = 460;
-        bounds.height = 560;
+        bounds.height = 610;
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
         setBounds(bounds);
@@ -276,7 +277,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 deckEditorButton_actionPerformed(e);
             }
         });
-        startButton.setBounds(new Rectangle(159, 375, 139, 54));
+        startButton.setBounds(new Rectangle(159, 410, 139, 54));
         startButton.setFont(new java.awt.Font("Dialog", 0, 18));
         startButton.setHorizontalTextPosition(SwingConstants.LEADING);
         startButton.setText("Start Game");
@@ -312,16 +313,18 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             }
         });
         jPanel1.setBorder(BorderFactory.createEtchedBorder());
-        jPanel1.setBounds(new Rectangle(10, 209, 425, 150));
+        jPanel1.setBounds(new Rectangle(10, 209, 425, 190));
         jPanel1.setLayout(null);
         newGuiCheckBox.setText("Resizable Game Area");
-        newGuiCheckBox.setBounds(new Rectangle(159, 305, 164, 25));
+        newGuiCheckBox.setBounds(new Rectangle(140, 305, 164, 25));
         //newGuiCheckBox.setSelected(true);
         smoothLandCheckBox.setText("Stack AI land");
-        smoothLandCheckBox.setBounds(new Rectangle(159, 330, 165, 25));
+        smoothLandCheckBox.setBounds(new Rectangle(140, 330, 165, 25));
         //smoothLandCheckBox.setSelected(true);
+        millLoseCheckBox.setText("Milling = Loss Condition");
+        millLoseCheckBox.setBounds(new Rectangle(140, 355, 165, 25));
         
-        questButton.setBounds(new Rectangle(137, 435, 187, 53));
+        questButton.setBounds(new Rectangle(137, 470, 187, 53));
         questButton.setFont(new java.awt.Font("Dialog", 0, 18));
         questButton.setText("Quest Mode");
         
@@ -334,6 +337,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         this.getContentPane().add(startButton, null);
         this.getContentPane().add(newGuiCheckBox, null);
         this.getContentPane().add(smoothLandCheckBox, null);
+        this.getContentPane().add(millLoseCheckBox, null);
         this.getContentPane().add(questButton, null);
         this.getContentPane().add(jPanel2, null);
         jPanel2.add(singleRadioButton, null);
@@ -450,11 +454,21 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
         
-        if(newGuiCheckBox.isSelected()) AllZone.Display = new GuiDisplay3();
-        else AllZone.Display = new GuiDisplay2();
+        if(newGuiCheckBox.isSelected())
+        	AllZone.Display = new GuiDisplay3();
+        else
+        	AllZone.Display = new GuiDisplay2();
         
-        if(smoothLandCheckBox.isSelected()) Constant.Runtime.smooth[0] = true;
-        else Constant.Runtime.smooth[0] = false;
+        if(smoothLandCheckBox.isSelected())
+        	Constant.Runtime.Smooth[0] = true;
+        else
+        	Constant.Runtime.Smooth[0] = false;
+        
+        if(millLoseCheckBox.isSelected())
+        	Constant.Runtime.Mill[0] = true;
+        else
+        	Constant.Runtime.Mill[0] = false;
+        
         
         AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         AllZone.Display.setVisible(true);

@@ -18,7 +18,8 @@ public interface Constant {
         public static final Deck[]    ComputerDeck = new Deck[1];
         public static final String[]  GameType     = new String[1];
         public static final WinLose   WinLose      = new WinLose();
-        public static final boolean[] smooth       = new boolean[1];
+        public static final boolean[] Smooth       = new boolean[1];
+        public static final boolean[] Mill		   = new boolean[1];
         
         public static final int[]     width        = new int[1];
         public static final int[]     height       = new int[1];

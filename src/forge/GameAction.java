@@ -684,7 +684,6 @@ private Card getCurrentCard(int ID)
   
   public void drawCard(String player)
   {
-    //TODO: show that milled player looses
 
    boolean isDrawPhase = AllZone.Phase.getPhase().equals(Constant.Phase.Draw);
    if(isDrawPhase){
@@ -711,6 +710,21 @@ private Card getCurrentCard(int ID)
       hand.add(c);
       
       GameActionUtil.executeDrawCardTriggeredEffects(player);
+    }
+    if(library.size() != 0)
+    {
+     
+      Card c = library.get(0);
+      library.remove(0);
+      hand.add(c);
+     
+      GameActionUtil.executeDrawCardTriggeredEffects(player);
+    }
+    //lose:
+    else if (Constant.Runtime.Mill[0])
+    {
+	     PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+	     life.setLife(0);
     }
   }
   
@@ -881,7 +895,7 @@ private Card getCurrentCard(int ID)
       this.shuffle(Constant.Player.Human);
 
     //do this instead of shuffling Computer's deck
-    boolean smoothLand = Constant.Runtime.smooth[0];
+    boolean smoothLand = Constant.Runtime.Smooth[0];
 
     if(smoothLand)
     {

@@ -1546,14 +1546,13 @@ public class GameActionUtil
 			{
 				Card card = new Card();
 	
-
 				card.setName("Bird");
 				card.setImageName("W 1 1 Bird");
 
 				card.setOwner(crd.getController());
 				card.setController(crd.getController());
 
-				card.setManaCost("G");
+				card.setManaCost("W");
 				card.setToken(true);
 
 				card.addType("Creature");
