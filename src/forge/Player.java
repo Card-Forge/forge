@@ -132,13 +132,10 @@ public abstract class Player extends MyObservable{
 				addLife(lifeGain);
 				newLifeSet = true;
 				this.updateObservers();
+				GameActionUtil.executeLifeGainEffects(this, lifeGain, source);
 			}
 		}
 		else System.out.println("Player - trying to gain negative or 0 life");
-		
-		Object[] Life_Whenever_Parameters = new Object[1];
-    	Life_Whenever_Parameters[0] = lifeGain;
-    	AllZone.GameAction.checkWheneverKeyword(getPlayerCard(), "GainLife", Life_Whenever_Parameters);
 
 		return newLifeSet;
 	}
