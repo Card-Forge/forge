@@ -1,3 +1,13 @@
+Juniper Order Ranger
+3 W G
+Creature Human Knight
+no text
+2/4
+WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Counters/1:Self!Initiating_Card:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
+SVar:BuffedBy:Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
+
 Obstinate Baloth
 2 G G
 Creature Beast
@@ -15894,16 +15904,6 @@ Reach
 Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_weaver.jpg
-
-Juniper Order Ranger
-2 W G
-Creature Human Knight
-no text
-2/4
-WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Counters/1:Self!Initiating_Card:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
-SVar:BuffedBy:Creature
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
 
 Junun Efreet
 1 B B
