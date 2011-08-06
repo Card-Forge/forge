@@ -1,0 +1,9 @@
+Name:Trench Wurm
+ManaCost:3 B
+Types:Creature Wurm
+Text:no text
+PT:3/3
+K:abDestroyTgtV 2 R T:Land.nonBasic:Desroy target nonbasic land.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/trench_wurm.jpg
+End
