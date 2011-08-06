@@ -8,6 +8,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.ComputerUtil;
+import forge.Constant;
 import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
@@ -195,6 +196,10 @@ public class AbilityFactory_AlterLife {
 
 		if (!AllZone.ComputerPlayer.canGainLife())
 			return false;
+		
+		//Don't use lifegain before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        	return false;
 
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
