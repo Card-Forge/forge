@@ -39,6 +39,7 @@ public class Trigger_CounterAdded extends Trigger {
 			copy.setOverridingAbility(overridingAbility);
 		}
 		copy.setName(name);
+        copy.setID(ID);
 
 		return copy;
 	}

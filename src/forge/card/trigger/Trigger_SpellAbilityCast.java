@@ -153,6 +153,7 @@ public class Trigger_SpellAbilityCast extends Trigger {
 			copy.setOverridingAbility(overridingAbility);
 		}
 		copy.setName(name);
+        copy.setID(ID);
 		
 		return copy;
 	}

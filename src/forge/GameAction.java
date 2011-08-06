@@ -2286,6 +2286,7 @@ public class GameAction {
         AllZone.ComputerPlayer.clearHandSizeOperations();
         
         AllZone.TriggerHandler.clearRegistered();
+        forge.card.trigger.Trigger.resetIDs();
         
 
         {//re-number cards just so their unique numbers are low, just for user friendliness

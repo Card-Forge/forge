@@ -31,6 +31,7 @@ public class Trigger_TurnFaceUp extends Trigger {
 			copy.setOverridingAbility(overridingAbility);
 		}
 		copy.setName(name);
+        copy.setID(ID);
 		
 		return copy;
 	}

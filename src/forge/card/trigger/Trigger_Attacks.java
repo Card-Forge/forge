@@ -56,6 +56,7 @@ public class Trigger_Attacks extends Trigger {
 			copy.setOverridingAbility(overridingAbility);
 		}
 		copy.setName(name);
+        copy.setID(ID);
 		
 		return copy;
 	}

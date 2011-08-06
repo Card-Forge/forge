@@ -193,7 +193,12 @@ public class TriggerHandler {
 	
 	public void removeRegisteredTrigger(Trigger trig)
 	{
-		registeredTriggers.remove(trig);
+
+        for(int i=0;i< registeredTriggers.size();i++)
+        {
+            if(registeredTriggers.get(i).equals(trig))
+                registeredTriggers.remove(i);
+        }
 	}
 	
 	public ArrayList<Trigger> getRegisteredTriggers() {

@@ -37,6 +37,7 @@ public class Trigger_Unequip extends Trigger {
 			copy.setOverridingAbility(overridingAbility);
 		}
 		copy.setName(name);
+        copy.setID(ID);
 
 		return copy;
 	}

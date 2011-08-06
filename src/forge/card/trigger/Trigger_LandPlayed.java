@@ -16,7 +16,15 @@ public class Trigger_LandPlayed extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_LandPlayed(this.name, this.mapParams, this.hostCard);
+        Trigger copy = new Trigger_LandPlayed(name,mapParams,hostCard);
+        copy.setID(ID);
+
+        if(this.overridingAbility != null)
+        {
+            copy.setOverridingAbility(overridingAbility);
+        }
+
+        return copy;
 	}
 
 	@Override

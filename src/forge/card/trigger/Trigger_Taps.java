@@ -34,6 +34,7 @@ public class Trigger_Taps extends Trigger {
 			copy.setOverridingAbility(overridingAbility);
 		}
 		copy.setName(name);
+        copy.setID(ID);
 		
 		return copy;
 	}

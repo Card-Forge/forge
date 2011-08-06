@@ -38,6 +38,7 @@ public class Trigger_AttackerBlocked extends Trigger {
 			copy.setOverridingAbility(overridingAbility);
 		}
 		copy.setName(name);
+        copy.setID(ID);
 		
 		return copy;
 	}

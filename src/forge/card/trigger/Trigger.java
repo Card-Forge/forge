@@ -12,6 +12,15 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
 public abstract class Trigger {
+
+    private static int nextID = 0;
+
+    public static void resetIDs()
+    {
+        nextID = 0;
+    }
+
+    protected int ID = nextID++;
 	
 	protected String name;
 	public String getName()
@@ -22,7 +31,12 @@ public abstract class Trigger {
 	{
 		name = n;
 	}
-	
+
+    public void setID(int id)
+    {
+        ID = id;
+    }
+
 	protected HashMap<String,String> mapParams = new HashMap<String,String>();
 	public HashMap<String,String> getMapParams()
 	{
@@ -275,6 +289,15 @@ public abstract class Trigger {
 		}
 		return false;
 	}
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(!(o instanceof Trigger))
+            return false;
+
+        return this.ID == ((Trigger)o).ID;
+    }
 	
 	public abstract boolean performTest(HashMap<String,Object> runParams);
 	
