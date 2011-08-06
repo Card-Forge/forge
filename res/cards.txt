@@ -1,3 +1,120 @@
+Brass Gnat
+1
+Artifact Creature Insect
+no text
+1/1
+Flying
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/1:ControllerUpkeep:At the beginning of your upkeep, you may pay 1. If you do, untap Brass Gnat.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_gnat.jpg
+
+Brass Man
+1
+Artifact Creature Construct
+no text
+1/3
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/1:ControllerUpkeep:At the beginning of your upkeep, you may pay 1. If you do, untap Brass Man.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_man.jpg
+
+Collective Restraint
+3 U
+Enchantment
+Domain - Creatures can't attack you unless their controller pays X for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_restraint.jpg
+
+Goblin Dirigible
+6
+Artifact Creature Construct
+no text
+4/4
+Flying
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/4:ControllerUpkeep:At the beginning of your upkeep, you may pay 4. If you do, untap Goblin Dirigible.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dirigible.jpg
+
+Goblin War Wagon
+4
+Artifact Creature Juggernaut
+no text
+3/3
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/2:ControllerUpkeep:At the beginning of your upkeep, you may pay 2. If you do, untap Goblin War Wagon.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_wagon.jpg
+
+Grizzled Wolverine
+1 R R
+Creature Wolverine
+no text
+2/2
+WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/0:Self:ASAP:PayMana/R:No Special Condition:Whenever Grizzled Wolverine becomes blocked, you may pay R. If you do, Grizzled Wolverine gets +2/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzled_wolverine.jpg
+
+Long-Forgotten Gohei
+3
+Artifact
+Arcane spells you cast cost 1 less to cast.
+CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
+
+Merfolk Seer
+2 U
+Creature Merfolk Wizard
+no text
+2/2
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1 U:No Special Condition:When Merfolk Seer is put into a graveyard from the battlefield, you may pay 1 U. If you do, draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
+
+Mind's Eye
+5
+Artifact
+no text
+WheneverKeyword:DrawCard:ControllingPlayer_Opponent:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever an opponent draws a card, you may pay 1. If you do, draw a card.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_eye.jpg
+
+Order of the Golden Cricket
+1 W
+Creature Kithkin Knight
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/Flying:Self:ASAP:PayMana/W:No Special Condition:Whenever Order of the Golden Cricket attacks, you may pay W. If you do, it gains flying until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_golden_cricket.jpg
+
+Seer's Sundial
+4
+Artifact
+no text
+WheneverKeyword:EntersBattleField:Type/Land:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/2:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may pay 2. If you do, draw a card.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_sundial.jpg
+
+Sigil of the New Dawn
+3 W
+Enchantment
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:MoveFrom-Graveyard-Hand:Initiating_Card:ASAP:PayMana/1 W:Initiator - OwnedByController:Whenever a creature is put into your graveyard from the battlefield, you may pay 1 W. If you do, return that card to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_new_dawn.jpg
+
+Tablet of Epityr
+1
+Artifact  
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:Initiator - OwnedByController:Whenever an artifact you control is put into a graveyard from the battlefield, you may pay 1. If you do, you gain 1 life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tablet_of_epityr.jpg
+
 Radiant's Dragoons
 3 W
 Creature Human Soldier
@@ -3774,27 +3891,6 @@ Morph:G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branchsnap_lorian.jpg
 
-Brass Gnat
-1
-Artifact Creature Insect
-no text
-1/1
-Flying
-CARDNAME doesn't untap during your untap step.
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/1:ControllerUpkeep:At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Gnat.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_gnat.jpg
-
-Brass Man
-1
-Artifact Creature Construct
-no text
-1/3
-CARDNAME doesn't untap during your untap step.
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/1:ControllerUpkeep:At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Man.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_man.jpg
-
 Brassclaw Orcs
 2 R
 Creature Orc
@@ -5522,13 +5618,6 @@ Whenever Cold-Eyed Selkie deals combat damage to a player, you may draw that man
 Islandwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_eyed_selkie.jpg
-
-Collective Restraint
-3 U
-Enchantment
-Domain - Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_restraint.jpg
 
 Collective Unconscious
 4 G G
@@ -11574,17 +11663,6 @@ Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_deathraiders.jpg
 
-Goblin Dirigible
-6
-Artifact Creature Construct
-no text
-4/4
-Flying
-CARDNAME doesn't untap during your untap step.
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/4:ControllerUpkeep:At the beginning of your upkeep, you may pay {4}. If you do, untap Goblin Dirigible.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dirigible.jpg
-
 Goblin General
 1 R R
 Creature Goblin Warrior
@@ -11893,16 +11971,6 @@ spDamageTgtP:X:Goblin War Strike deals damage equal to the number of Goblins you
 SVar:X:Count$TypeYouCtrl.Goblin
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_strike.jpg
-
-Goblin War Wagon
-4
-Artifact Creature Juggernaut
-no text
-3/3
-CARDNAME doesn't untap during your untap step.
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/2:ControllerUpkeep:At the beginning of your upkeep, you may pay {2}. If you do, untap Goblin War Wagon.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_wagon.jpg
 
 Goblin Warchief
 1 R R
@@ -12428,15 +12496,6 @@ no text
 1/5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzled_leotau.jpg
-
-Grizzled Wolverine
-1 R R
-Creature Wolverine
-no text
-2/2
-WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/0:Self:ASAP:PayMana/R:No Special Condition:Whenever Grizzled Wolverine becomes blocked, you may pay {R}. If you do, Grizzled Wolverine gets +2/+0 until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzled_wolverine.jpg
 
 Grizzly Bears
 1 G
@@ -17049,15 +17108,6 @@ Cycling:U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lonely_sandbar.jpg
 
-Long-Forgotten Gohei
-3
-Artifact
-Arcane spells you cast cost {1} less to cast.
-CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
-
 Longbow Archer
 W W
 Creature Human Soldier Archer
@@ -18108,15 +18158,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card10810.jpg
 
-Merfolk Seer
-2 U
-Creature Merfolk Wizard
-no text
-2/2
-WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1 U:No Special Condition:When Merfolk Seer is put into a graveyard from the battlefield, you may pay {1}{U}. If you do, draw a card.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
-
 Merfolk Sovereign
 1 U U
 Creature Merfolk
@@ -18380,14 +18421,6 @@ Indestructible
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
-
-Mind's Eye
-5
-Artifact
-no text
-WheneverKeyword:DrawCard:ControllingPlayer_Opponent:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_eye.jpg
 
 Mindstab
 5 B
@@ -20456,15 +20489,6 @@ abPump B:First Strike
 abPump B B:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_ebon_hand.jpg
-
-Order of the Golden Cricket
-1 W
-Creature Kithkin Knight
-no text
-2/2
-WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/Flying:Self:ASAP:PayMana/W:No Special Condition:Whenever Order of the Golden Cricket attacks, you may pay {W}. If you do, it gains flying until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_golden_cricket.jpg
 
 Order of the Sacred Bell
 3 G
@@ -24826,14 +24850,6 @@ abPumpTgt 2 G W:+3/+3:Drawback$UntapTgt:Target creature gets +3/+3 until end of 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedcradle_witch.jpg
 
-Seer's Sundial
-4
-Artifact
-no text
-WheneverKeyword:EntersBattleField:Type/Land:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/2:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may pay {2}. If you do, draw a card.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_sundial.jpg
-
 Seething Song
 2 R
 Instant
@@ -25672,14 +25688,6 @@ Enchantment
 Whenever you play an enchantment spell, put a 4/4 white Angel token with flying into play.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_empty_throne.jpg
-
-Sigil of the New Dawn
-3 W
-Enchantment
-no text
-WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:MoveFrom-Graveyard-Hand:Initiating_Card:ASAP:PayMana/1 W:Initiator - OwnedByController:Whenever a creature is put into your graveyard from the battlefield, you may pay {1}{W}. If you do, return that card to your hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_new_dawn.jpg
 
 Sigiled Behemoth
 4 G W
@@ -28644,14 +28652,6 @@ Sorcery
 spLoseLifeTgt:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.:Syphone Life - target player loses life and you gain life
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_life.jpg
-
-Tablet of Epityr
-1
-Artifact  
-no text
-WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:Initiator - OwnedByController:Whenever an artifact you control is put into a graveyard from the battlefield, you may pay {1}. If you do, you gain 1 life.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tablet_of_epityr.jpg
 
 Taiga
 no cost
