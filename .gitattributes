@@ -12,6 +12,77 @@ build/manifest.forge -text
 res/AllTokens.txt -text svneol=native#text/plain
 res/PerSetTracking.py -text svneol=native#text/x-python
 res/booster-decks -text svneol=unset#unset
+res/boosterdata/10E.pack -text
+res/boosterdata/2ED.pack -text
+res/boosterdata/3ED.pack -text
+res/boosterdata/4ED.pack -text
+res/boosterdata/5DN.pack -text
+res/boosterdata/5ED.pack -text
+res/boosterdata/6ED.pack -text
+res/boosterdata/7ED.pack -text
+res/boosterdata/8ED.pack -text
+res/boosterdata/9ED.pack -text
+res/boosterdata/A.pack -text
+res/boosterdata/ALA.pack -text
+res/boosterdata/ALL.pack -text
+res/boosterdata/APC.pack -text
+res/boosterdata/ARB.pack -text
+res/boosterdata/ARN.pack -text
+res/boosterdata/ATQ.pack -text
+res/boosterdata/B.pack -text
+res/boosterdata/BOK.pack -text
+res/boosterdata/CFX.pack -text
+res/boosterdata/CHK.pack -text
+res/boosterdata/CHR.pack -text
+res/boosterdata/CSP.pack -text
+res/boosterdata/DIS.pack -text
+res/boosterdata/DRK.pack -text
+res/boosterdata/DST.pack -text
+res/boosterdata/EVE.pack -text
+res/boosterdata/EXO.pack -text
+res/boosterdata/FEM.pack -text
+res/boosterdata/FUT.pack -text
+res/boosterdata/GPT.pack -text
+res/boosterdata/HML.pack -text
+res/boosterdata/ICE.pack -text
+res/boosterdata/INV.pack -text
+res/boosterdata/JUD.pack -text
+res/boosterdata/LEG.pack -text
+res/boosterdata/LGN.pack -text
+res/boosterdata/LRW.pack -text
+res/boosterdata/M10.pack -text
+res/boosterdata/M11.pack -text
+res/boosterdata/MBS.pack -text
+res/boosterdata/MIR.pack -text
+res/boosterdata/MMQ.pack -text
+res/boosterdata/MOR.pack -text
+res/boosterdata/MRD.pack -text
+res/boosterdata/NMS.pack -text
+res/boosterdata/ODY.pack -text
+res/boosterdata/ONS.pack -text
+res/boosterdata/P02.pack -text
+res/boosterdata/PCY.pack -text
+res/boosterdata/PLC.pack -text
+res/boosterdata/PLS.pack -text
+res/boosterdata/POR.pack -text
+res/boosterdata/PTK.pack -text
+res/boosterdata/RAV.pack -text
+res/boosterdata/ROE.pack -text
+res/boosterdata/SCG.pack -text
+res/boosterdata/SHM.pack -text
+res/boosterdata/SOK.pack -text
+res/boosterdata/SOM.pack -text
+res/boosterdata/STH.pack -text
+res/boosterdata/TMP.pack -text
+res/boosterdata/TOR.pack -text
+res/boosterdata/TSP.pack -text
+res/boosterdata/UDS.pack -text
+res/boosterdata/ULG.pack -text
+res/boosterdata/USG.pack -text
+res/boosterdata/VIS.pack -text
+res/boosterdata/WTH.pack -text
+res/boosterdata/WWK.pack -text
+res/boosterdata/ZEN.pack -text
 res/card-pictures-token.txt -text svneol=native#text/plain
 res/cardsfolder/abandoned_outpost.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_gargoyles.txt -text svneol=native#text/plain
