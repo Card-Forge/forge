@@ -2848,6 +2848,8 @@ public class CardFactoryUtil {
             if(kw.equals("Protection from enchantments") && spell.getType().contains("Enchantment")) return false;
             
             if(kw.equals("Protection from everything")) return false;
+            
+            if(kw.equals("Protection from colored spells") && !spell.isPermanent() && isColored(spell) ) return false;
         }
         
         return true;

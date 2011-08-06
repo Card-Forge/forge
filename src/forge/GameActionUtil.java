@@ -207,6 +207,8 @@ public class GameActionUtil {
 			playCard_Ulamog(c);
 		else if (c.getName().equals("Emrakul, the Aeons Torn"))
 			playCard_Emrakul(c);
+		else if (c.getName().equals("Artisan of Kozilek"))
+			playCard_Artisan_of_Kozilek(c);
 
 		playCard_Cascade(c);
 
@@ -321,8 +323,50 @@ public class GameActionUtil {
 		};
 		ability.setStackDescription(c + " - When you cast Emrakul, take an extra turn after this one.");
 		AllZone.Stack.add(ability);
-		
 	}
+	
+	public static void playCard_Artisan_of_Kozilek(Card c)
+	{
+		final String controller = c.getController();
+		final Ability ability = new Ability(c, "0")
+		{
+			public void chooseTargetAI()
+			{	
+				CardList list = AllZoneUtil.getPlayerGraveyard(Constant.Player.Computer);
+				list = list.getType("Creature");
+				
+				if (list.size()>0)
+				{
+					CardListUtil.sortCMC(list);
+					setTargetCard(list.get(0));
+				}
+			}
+			public void resolve()
+			{
+				if (controller.equals(Constant.Player.Human))
+				{
+					CardList creatures = AllZoneUtil.getPlayerGraveyard(Constant.Player.Human);
+					Object check = AllZone.Display.getChoiceOptional("Select creature", creatures.toArray());
+					if(check != null) {
+	                    this.setTargetCard((Card) check);
+	                }
+				}
+				
+				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, controller);
+				Card crd = getTargetCard();
+				if (crd!=null) {
+					if(AllZone.GameAction.isCardInZone(crd, grave)) {
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+                        AllZone.GameAction.moveTo(play, crd);
+                    }
+				}
+			}
+		};
+		ability.setStackDescription(c + " - you may return target creature card from your graveyard to the battlefield.");
+		AllZone.Stack.add(ability);
+	}
+	
+	
 	
 	public static void playCard_Cascade(Card c) {
 

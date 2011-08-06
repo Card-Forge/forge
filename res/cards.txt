@@ -1,3 +1,10 @@
+Artisan of Kozilek
+9
+Creature Eldrazi
+When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.
+10/9
+Annihilator 2
+
 Emrakul, the Aeons Torn
 15
 Legendary Creature Eldrazi
