@@ -2258,7 +2258,7 @@ no text
 Riding the Dilu Horse
 2 G
 Sorcery
-Target creature gets +2/+2 and gains horsemanship.
+no text
 spPumpTgt:+2/+2/Horsemanship
 
 Magus of the Coffers
@@ -4598,7 +4598,7 @@ Horsemanship
 Riding Red Hare
 2 W
 Sorcery
-Target creature gets +3/+3 and gains horsemanship until end of turn.
+no text
 spPumpTgt:+3/+3/Horsemanship
 
 Shu Elite Companions
@@ -4961,7 +4961,7 @@ Flying
 Slaughter Cry
 2 R
 Instant
-Target creature gets +3/+0 and gains first strike until end of turn.
+no text
 spPumpTgt:+3/+0/First Strike
 
 Stonework Puma
@@ -5445,7 +5445,7 @@ spDrawCardsTgt:2:Drawback$TgtDiscard/4:Target player draws two cards, then disca
 Wildsize
 2 G
 Instant
-Target creature gets +2/+2 and gains trample until end of turn.
+no text
 spPumpTgt:+2/+2/Trample
 Draw a card.
 
@@ -5458,20 +5458,20 @@ spDrawCards:Count$TypeOnBattlefield.Creature:Draw a card for each creature targe
 Infiltrate
 U
 Instant
-Target creature is unblockable this turn.
+no text
 spPumpTgt:Unblockable
 
 Touch of Invisibility
 3 U
 Sorcery
-Target creature is unblockable this turn.
+no text
 spPumpTgt:Unblockable
 Draw a card.
 
 Trailblazer
 2 G G
 Instant
-Target creature is unblockable this turn.
+no text
 spPumpTgt:Unblockable
 
 Ambition's Cost
@@ -6187,151 +6187,151 @@ Enchant creature
 Giant Growth
 G
 Instant
-Target creature gets +3/+3 until end of turn.
+no text
 spPumpTgt:+3/+3
 
 Accelerate
 1 R
 Instant
-Target creature gains haste until end of turn.
+no text
 spPumpTgt:Haste
 Draw a card.
 
 Cloak of Feathers
 U
 Sorcery
-Target creature gains flying until end of turn.
+no text
 spPumpTgt:Flying
 Draw a card.
 
 Unnatural Speed
 R
 Instant
-Target creature gains haste until end of turn.
+no text
 spPumpTgt:Haste
 
 Shriek of Dread
 1 B
 Instant
-Target creature gains fear until end of turn.
+no text
 spPumpTgt:Fear
 
 Shadow Rift
 U
 Instant
-Target creature gains shadow until end of turn.
+no text
 spPumpTgt:Shadow
 Draw a card.
 
 Leap
 U
 Instant
-Target creature gains flying until end of turn.
+no text
 spPumpTgt:Flying
 Draw a card.
 
 Lace with Moonglove
 2 G
 Instant
-Target creature gains deathtouch until end of turn.
+no text
 spPumpTgt:Deathtouch
 Draw a card.
 
 Jump
 U
 Instant
-Target creature gains flying until end of turn.
+no text
 spPumpTgt:Flying
 
 Double Cleave
 1 RW
 Instant
-Target creature gains double strike until end of turn.
+no text
 spPumpTgt:Double Strike
 
 Breach
 2 B
 Instant
-Target creature gets +2/+0 and gains fear until end of turn.
+no text
 spPumpTgt:+2/+0/Fear
 
 Wielding the Green Dragon
 1 G
 Sorcery
-Target creature gets +4/+4 until end of turn.
+no text
 spPumpTgt:+4/+4
 
 Screaming Fury
 2 R
 Sorcery
-Target creature gets +5/+0 and gains haste until end of turn.
+no text
 spPumpTgt:+5/+0/Haste
 
 Sangrite Surge
 4 R G
 Sorcery
-Target creature gets +3/+3 and gains double strike until end of turn.
+no text
 spPumpTgt:+3/+3/Double Strike
 
 Monstrous Growth
 1 G
 Sorcery
-Target creature gets +4/+4 until end of turn.
+no text
 spPumpTgt:+4/+4
 
 Howling Fury
 2 B
 Sorcery
-Target creature gets +4/+0 until end of turn.
+no text
 spPumpTgt:+4/+0
 
 Fit of Rage
 1 R
 Sorcery
-Target creature gets +3/+3 and gains first strike until end of turn.
+no text
 spPumpTgt:+3/+3/First Strike
 
 Sudden Strength
 3 G
 Instant
-Target creature gets +3/+3 until end of turn.
+no text
 spPumpTgt:+3/+3
 Draw a card.
 
 Silk Net
 G
 Instant
-Target creature gets +1/+1 and gains reach until end of turn.
+no text
 spPumpTgt:+1/+1/Reach
 
 Predator's Strike
 1 G
 Instant
-Target creature gets +3/+3 and gains trample until end of turn.
+no text
 spPumpTgt:+3/+3/Trample
 
 Kindled Fury
 R
 Instant
-Target creature gets +1/+0 and gains first strike until end of turn.
+no text
 spPumpTgt:+1/+0/First Strike
 
 Fists of the Anvil
 1 R
 Instant
-Target creature gets +4/+0 until end of turn.
+no text
 spPumpTgt:+4/+0
 
 Fanatical Fever
 2 G G
 Instant
-Target creature gets +3/+0 and gains trample until end of turn.
+no text
 spPumpTgt:+3/+0/Trample
 
 Colossal Might
 R G
 Instant
-Target creature gets +4/+2 and gains trample until end of turn.
+no text
 spPumpTgt:+4/+2/Trample
 
 Control Magic
@@ -9775,7 +9775,7 @@ no text
 Guided Strike
 1 W
 Instant
-Target creature gets +1/+0 and gains first strike until end of turn.
+no text
 spPumpTgt:+1/+0/First Strike
 Draw a card.
 
@@ -14511,7 +14511,7 @@ Flying
 Brute Force
 R
 Instant
-Target creature gets +3/+3 until end of turn.
+no text
 spPumpTgt:+3/+3
 
 Primal Clay
@@ -15347,7 +15347,7 @@ You gain 2 life for each basic land type among lands you control.
 Aggressive Urge
 1 G
 Instant
-Target creature gets +1/+1 until end of turn.
+no text
 spPumpTgt:+1/+1
 Draw a card.
 
@@ -15635,7 +15635,7 @@ Draw a card.
 Angelic Blessing
 2 W
 Sorcery
-Target creature gets +3/+3 and gains flying until end of turn.
+no text
 spPumpTgt:+3/+3/Flying
 
 Life Burst
@@ -15856,7 +15856,7 @@ no text
 Might of Oaks
 3 G
 Instant
-Target creature gets +7/+7 until end of turn.
+no text
 spPumpTgt:+7/+7
 
 Spined Wurm
