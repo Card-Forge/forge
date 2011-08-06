@@ -171,6 +171,15 @@ public class CardList implements Iterable<Card> {
     	});
     }
     
+  //cardType is like "Land" or "Goblin", returns a new CardList with cards that do not have this type
+    public CardList getNotType(final String cardType) {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return !c.isType(cardType);
+    		}
+    	});
+    }
+    
     /*
     public CardList getType(String cardType) {
         CardList c = new CardList();
