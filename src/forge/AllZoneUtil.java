@@ -478,39 +478,38 @@ public class AllZoneUtil {
 		return card;
 	}
 	
-	
 	public static CardList getCardsInZone(String zone){	
         return getCardsInZone(zone, null);
 	}
 	
-	public static CardList getCardsInZone(String zone, Player player){	
+	public static CardList getCardsInZone(String zone, Player player){
         CardList all = new CardList();
 
-		if (zone.equals(Constant.Zone.Graveyard)){
+		if (zone.contains(Constant.Zone.Graveyard)){
 			if (player == null || player.isHuman())
 				all.addAll(AllZone.Human_Graveyard.getCards());
 			if (player == null || player.isComputer())
 				all.addAll(AllZone.Computer_Graveyard.getCards());
 		}
-		else if (zone.equals(Constant.Zone.Hand)){
+		if (zone.contains(Constant.Zone.Hand)){
 			if (player == null || player.isHuman())
 				all.addAll(AllZone.Human_Hand.getCards());
 			if (player == null || player.isComputer())
 				all.addAll(AllZone.Computer_Hand.getCards());
 		}
-		else if (zone.equals(Constant.Zone.Battlefield)){
+		if (zone.contains(Constant.Zone.Battlefield)){
 			if (player == null || player.isHuman())
 				all.addAll(AllZone.Human_Battlefield.getCards());
 			if (player == null || player.isComputer())
 				all.addAll(AllZone.Computer_Battlefield.getCards());
 		}
-		else if (zone.equals(Constant.Zone.Exile)){
+		if (zone.contains(Constant.Zone.Exile)){
 			if (player == null || player.isHuman())
 				all.addAll(AllZone.Human_Exile.getCards());
 			if (player == null || player.isComputer())
 				all.addAll(AllZone.Computer_Exile.getCards());
 		}
-		else if (zone.equals(Constant.Zone.Library)){
+		if (zone.contains(Constant.Zone.Library)){
 			if (player == null || player.isHuman())
 				all.addAll(AllZone.Human_Library.getCards());
 			if (player == null || player.isComputer())

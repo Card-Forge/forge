@@ -241,54 +241,37 @@ public class AbilityFactory_ChangeZone {
 			pDefined = tgt.getTargetPlayers();
 		}
 		else{
-			pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),  params.get("Defined"), sa);
+			pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+		}
+		
+		String type = params.get("ChangeType");
+		if (type != null){
+			if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+				// Set PayX here to maximum value.
+				int xPay = ComputerUtil.determineLeftoverMana(sa);
+				source.setSVar("PayX", Integer.toString(xPay));
+			}
 		}
 		
 		for(Player p : pDefined){
-			CardList list = new CardList();
-			if (origin.equals("Hand")){
-				list = AllZoneUtil.getPlayerHand(p);
-				if (list.size() == 0)
-					return false;
+			CardList list = AllZoneUtil.getCardsInZone(origin, p);
+
+			if (type != null && p.isComputer()){
+				// AI only "knows" about his information
+				list = filterListByType(list, params, sa);
 			}
-			else if (origin.equals("Graveyard")){
-				list = AllZoneUtil.getPlayerGraveyard(p);
-				if (list.size() == 0)
-					return false;
-			}
-			else if (origin.equals("Library")){
-				list = AllZoneUtil.getPlayerCardsInLibrary(p);
-				if (list.size() == 0)
-					return false;
-			}
-			if (p.isComputer() && !list.isEmpty() && 
-					(destination.equals("Hand") || destination.equals("Battlefield") || 
-							(destination.equals("Graveyard") && origin.equals("Library")))){
-				if (params.containsKey("ChangeType")){
-					list = filterListByType(list, params, "ChangeType", sa);
-					if (list.size() == 0)
-						return false;
-				}
-			}
-			else if (origin.equals("Sideboard")){
-				// TODO: once sideboard is added
-				// canPlayAI for Wishes will go here
-			}
+			
+			if (list.isEmpty())
+				return false;
 		}
-		
-		// this works for hidden because the mana is paid first. 
-		String type = params.get("ChangeType");
-		if (type != null && type.contains("X") && source.getSVar("X").equals("Count$xPaid")){
-			// Set PayX here to maximum value.
-			int xPay = ComputerUtil.determineLeftoverMana(sa);
-			source.setSVar("PayX", Integer.toString(xPay));
-		}
+
+		chance &= (r.nextFloat() < .8);
 		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			chance &= subAb.chkAI_Drawback();
 		
-		return ((r.nextFloat() < .8) && chance);
+		return chance;
 	}
 	
 	private static boolean changeHiddenOriginPlayDrawbackAI(AbilityFactory af, SpellAbility sa){
@@ -327,30 +310,27 @@ public class AbilityFactory_ChangeZone {
 		ArrayList<Player> pDefined;
 		Target tgt = af.getAbTgt();
 		if(tgt != null && tgt.canTgtPlayer()) {
-			if (af.isCurse())
-				tgt.addTarget(AllZone.HumanPlayer);
-			else
-				tgt.addTarget(AllZone.ComputerPlayer);
+			if (af.isCurse()){
+				if (AllZone.HumanPlayer.canTarget(source))
+					tgt.addTarget(AllZone.HumanPlayer);
+				else if (mandatory && AllZone.ComputerPlayer.canTarget(source))
+					tgt.addTarget(AllZone.ComputerPlayer);
+			}
+			else{
+				if (AllZone.ComputerPlayer.canTarget(source))
+					tgt.addTarget(AllZone.ComputerPlayer);
+				else if (mandatory && AllZone.HumanPlayer.canTarget(source))
+					tgt.addTarget(AllZone.HumanPlayer);
+			}
+
 			pDefined = tgt.getTargetPlayers();
 			
+			if (pDefined.isEmpty())
+				return false;
 			
 			if (mandatory){
-				if (pDefined.size() > 0)
-					return true;
-				
-				// unfavorable targeting
-				if (!af.isCurse())
-					tgt.addTarget(AllZone.ComputerPlayer);
-				else
-					tgt.addTarget(AllZone.HumanPlayer);
-				
-				if (pDefined.size() > 0)
-					return true;
-				
-				// no targets
-				return false;
+				return pDefined.size() > 0;
 			}
-			
 		}
 		else{
 			if (mandatory)
@@ -359,31 +339,13 @@ public class AbilityFactory_ChangeZone {
 		}
 		
 		for(Player p : pDefined){
-			if (origin.equals("Hand")){
-				CardList hand = AllZoneUtil.getPlayerHand(p);
-				if (hand.size() == 0)
-					return false;
+			CardList list = AllZoneUtil.getCardsInZone(origin, p);
 
-				if (p.isComputer()){
-					if (params.containsKey("ChangeType")){
-						hand = filterListByType(hand, params, "ChangeType", sa);
-						if (hand.size() == 0)
-							return false;
-					}
-				}
-				// TODO: add some more improvements based on Destination and Type
-			}
-			else if (origin.equals("Library")){
-				CardList library = AllZoneUtil.getPlayerCardsInLibrary(p);
-				if (library.size() == 0)
-					return false;
-				
-				// TODO: add some more improvements based on Destination and Type
-			}
-			else if (origin.equals("Sideboard")){
-				// TODO: once sideboard is added
-				// canPlayAI for Wishes will go here
-			}
+			if (p.isComputer())	// Computer should "know" his deck
+				list = filterListByType(list, params, sa);
+			
+			if (list.isEmpty())
+				return false;
 		}
 		
 		Ability_Sub subAb = sa.getSubAbility();
@@ -397,73 +359,78 @@ public class AbilityFactory_ChangeZone {
 		// TODO: build Stack Description will need expansion as more cards are added
 		HashMap<String,String> params = af.getMapParams();
 
-		 StringBuilder sb = new StringBuilder();
-		 Card host = af.getHostCard();
-		 
-		 if (!(sa instanceof Ability_Sub))
-			 sb.append(host.getName()).append(" -");
-		 
-		 sb.append(" ");
-		 
-		 String origin = params.get("Origin");
-		 String destination = params.get("Destination");
-		 
-		 String type = params.containsKey("ChangeType") ? params.get("ChangeType") : "";
-		 int num = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(host, params.get("ChangeNum"), sa) : 1;
-		 
-		 if (origin.equals("Library")){
-			 sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
-			 
-			 if (params.get("ChangeNum").equals("1"))
-				 sb.append("put that card ");
-			 else
-				 sb.append("put those cards ");
-			 
-			 if (destination.equals("Battlefield")){
-				 sb.append("onto the battlefield");
-				 if (params.containsKey("Tapped"))
-					 sb.append(" tapped");
-				 
-				 
-				 sb.append(".");
-				 
-			 }
-			 if (destination.equals("Hand"))
-				 sb.append("into your hand.");
-			 if (destination.equals("Graveyard"))
-				 sb.append("into your graveyard.");
-			 
-			 sb.append("Then shuffle your library.");
-		 }
-		 else if (origin.equals("Hand")){
-			 sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
-			 
-			 if (destination.equals("Battlefield"))
-				 sb.append("onto the battlefield.");
-			 if (destination.equals("Library")){
-				 int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
-				 
-				 if (libraryPos == 0)
-					 sb.append("on top");
-				 if (libraryPos == -1)
-					 sb.append("on bottom");
-				 
-				 sb.append(" of your library.");
-			 }
-		 }
-		 else if (origin.equals("Battlefield")){
-			 // TODO: Expand on this Description as more cards use it
-			 // for the non-targeted SAs when you choose what is returned on resolution
-			 sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
-			 sb.append(" to your ").append(destination);
-		 }
-		 
-		 Ability_Sub abSub = sa.getSubAbility();
-		 if (abSub != null) {
-		 	sb.append(abSub.getStackDescription());
-		 }
-		 
-		 return sb.toString();
+		StringBuilder sb = new StringBuilder();
+		Card host = af.getHostCard();
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(host.getName()).append(" -");
+
+		sb.append(" ");
+		
+		if (params.containsKey("StackDescription"))
+			sb.append(params.get("StackDescription"));
+
+		else{
+			String origin = params.get("Origin");
+			String destination = params.get("Destination");
+	
+			String type = params.containsKey("ChangeType") ? params.get("ChangeType") : "Card";
+			int num = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(host, params.get("ChangeNum"), sa) : 1;
+	
+			if (origin.equals("Library")){
+				sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
+	
+				if (params.get("ChangeNum").equals("1"))
+					sb.append("put that card ");
+				else
+					sb.append("put those cards ");
+	
+				if (destination.equals("Battlefield")){
+					sb.append("onto the battlefield");
+					if (params.containsKey("Tapped"))
+						sb.append(" tapped");
+	
+	
+					sb.append(".");
+	
+				}
+				if (destination.equals("Hand"))
+					sb.append("into your hand.");
+				if (destination.equals("Graveyard"))
+					sb.append("into your graveyard.");
+	
+				sb.append("Then shuffle your library.");
+			}
+			else if (origin.equals("Hand")){
+				sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
+	
+				if (destination.equals("Battlefield"))
+					sb.append("onto the battlefield.");
+				if (destination.equals("Library")){
+					int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
+	
+					if (libraryPos == 0)
+						sb.append("on top");
+					if (libraryPos == -1)
+						sb.append("on bottom");
+	
+					sb.append(" of your library.");
+				}
+			}
+			else if (origin.equals("Battlefield")){
+				// TODO: Expand on this Description as more cards use it
+				// for the non-targeted SAs when you choose what is returned on resolution
+				sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
+				sb.append(" to your ").append(destination);
+			}
+		}
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
 	}
 	
 	private static void changeHiddenOriginResolve(AbilityFactory af, SpellAbility sa){
@@ -472,9 +439,11 @@ public class AbilityFactory_ChangeZone {
 		ArrayList<Player> fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		Player chooser = null;
 		if (params.containsKey("Chooser")) {
-			if (params.get("Chooser").equals("Targeted") && af.getAbTgt().getTargetPlayers() != null)
+			String choose = params.get("Chooser"); 
+			if (choose.equals("Targeted") && af.getAbTgt().getTargetPlayers() != null)
 				chooser = af.getAbTgt().getTargetPlayers().get(0);
-			else chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa).get(0);
+			else 
+				chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), choose, sa).get(0);
 		}
 
 		for(Player player : fetchers){
@@ -494,23 +463,38 @@ public class AbilityFactory_ChangeZone {
         Card card = af.getHostCard();
 		Target tgt = af.getAbTgt();
 		if (tgt != null){
-			if(!tgt.getTargetPlayers().isEmpty()) {
-				player = tgt.getTargetPlayers().get(0);
-				if (!player.canTarget(sa.getSourceCard()))
-					return;
-			}
+			ArrayList<Player> players = tgt.getTargetPlayers();
+			if (players.contains(player) && !player.canTarget(sa.getSourceCard()))
+				return;
 		}
 
 		String origin = params.get("Origin");
         String destination = params.get("Destination");
 		
+        if (params.containsKey("OriginChoice")){
+        	// Currently only used for Mishra, but may be used by other things
+        	// Improve how this message reacts for other cards
+        	String alt = params.get("OriginAlternative");
+        	CardList altFetchList = AllZoneUtil.getCardsInZone(alt, player);
+        	altFetchList = filterListByType(altFetchList, params, sa);
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(params.get("AlternativeMessage")).append(" ");
+        	sb.append(altFetchList.size()).append(" cards match your searching type in Alternate Zones.");
+        	
+        	if (!GameActionUtil.showYesNoDialog(card, sb.toString()))
+        		origin = alt;
+        }
+        
+
 		CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
-        if (origin.equals("Library"))	// Look at whole library before moving onto choosing a card
-        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
-        if (origin.equals("Hand") && player.isComputer())	// Look at opponents hand before moving onto choosing a card
-        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
+        if (origin.contains("Library"))	// Look at whole library before moving onto choosing a card{
+        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library", AllZoneUtil.getCardsInZone("Library", player).toArray());
+        
+        if (origin.contains("Hand") && player.isComputer())	// Look at opponents hand before moving onto choosing a card
+        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Human's Hand", AllZoneUtil.getCardsInZone("Hand", player).toArray());
 		
-		fetchList = filterListByType(fetchList, params, "ChangeType", sa);
+		fetchList = filterListByType(fetchList, params, sa);
 
         PlayerZone destZone = AllZone.getZone(destination, player);
         
@@ -534,7 +518,7 @@ public class AbilityFactory_ChangeZone {
                     // this needs to be zero indexed. Top = 0, Third = 2
                     int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
                     // do not shuffle the library once we have placed a fetched card on top.
-                    if (origin.equals("Library") && i < 1) {
+                    if (origin.contains("Library") && i < 1) {
                         player.shuffle();
                     }
                     AllZone.GameAction.moveToLibrary(c, libraryPos);
@@ -563,18 +547,15 @@ public class AbilityFactory_ChangeZone {
             }
         }
         
-        if ((origin.equals("Library") && !destination.equals("Library")) || params.containsKey("Shuffle"))
+        if ((origin.contains("Library") && !destination.equals("Library")) || params.containsKey("Shuffle"))
             player.shuffle();
 	            
 		String DrawBack = params.get("SubAbility");
         
         if (af.hasSubAbility()){
         	Ability_Sub abSub = sa.getSubAbility();
-        	if (abSub != null){
+        	if (abSub != null)
         	   abSub.resolve();
-        	}
-        	else
-        		CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
         }
 	}
 	
@@ -594,7 +575,7 @@ public class AbilityFactory_ChangeZone {
 		String origin = params.get("Origin");
 		
 		CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
-		fetchList = filterListByType(fetchList, params, "ChangeType", sa);
+		fetchList = filterListByType(fetchList, params, sa);
 		
         String destination = params.get("Destination");
 		
@@ -631,7 +612,7 @@ public class AbilityFactory_ChangeZone {
         	}
         	else{
         		//Don't fetch another tutor with the same name
-            	if (origin.equals("Library") && !fetchList.getNotName(card.getName()).isEmpty())
+            	if (origin.contains("Library") && !fetchList.getNotName(card.getName()).isEmpty())
             		fetchList = fetchList.getNotName(card.getName());
             	
         		fetchList.shuffle();
@@ -643,7 +624,7 @@ public class AbilityFactory_ChangeZone {
         	fetchList.remove(c);
         }
         
-        if (origin.equals("Library"))
+        if (origin.contains("Library"))
         	player.shuffle();
         
         for(Card c : fetched){
@@ -673,24 +654,45 @@ public class AbilityFactory_ChangeZone {
         	else
         		GuiUtils.getChoice(picked, new String[]{ "<Nothing>" } );
         }
-        
-		String DrawBack = params.get("SubAbility");
-        
+
         if (af.hasSubAbility()){
         	Ability_Sub abSub = sa.getSubAbility();
         	if (abSub != null){
         	   abSub.resolve();
         	}
-        	else
-        		CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
         }
 	}
 	
 	// *********** Utility functions for Hidden ********************
-	private static CardList filterListByType(CardList list, HashMap<String,String> params, String type, SpellAbility sa){		
-		if (params.containsKey(type))
-			list = list.getValidCards(params.get(type).split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-		return list;
+	private static CardList filterListByType(CardList list, HashMap<String,String> params, SpellAbility sa){
+		String type = params.get("ChangeType");
+		if (type == null)
+			return list;
+		
+		// Filter List Can send a different Source card in for things like Mishra and Lobotomy
+		
+		Card source = sa.getSourceCard();
+		if (type.contains("Triggered")){
+			Object o = source.getTriggeringObject("Card");
+			
+			// I won't the card attached to the Triggering object
+			if (!(o instanceof Card))
+				return new CardList();
+			
+			source = (Card)(o);
+			type = type.replace("Triggered", "Card");
+		}
+		else if (type.contains("Remembered")){
+			ArrayList<Card> rem = source.getRemembered(); 
+			
+			if (rem.isEmpty())
+				return new CardList();
+			
+			source = rem.get(0);
+			type.replace("Remembered", "Card");
+		}
+		
+		return list.getValidCards(type.split(","), sa.getActivatingPlayer(), source);
 	}
 	
 	private static Card basicManaFixing(CardList list){	// Search for a Basic Land
@@ -1334,9 +1336,9 @@ public class AbilityFactory_ChangeZone {
 		// ex. "Return all blocking/blocked by target creature" 
 		
 		CardList humanType = AllZoneUtil.getCardsInZone(origin, AllZone.HumanPlayer);
-		humanType = filterListByType(humanType, params, "ChangeType", sa);
+		humanType = filterListByType(humanType, params, sa);
 		CardList computerType = AllZoneUtil.getCardsInZone(origin, AllZone.ComputerPlayer);
-		computerType = filterListByType(computerType, params, "ChangeType", sa);
+		computerType = filterListByType(computerType, params, sa);
 
 		// TODO: improve restrictions on when the AI would want to use this
 		// spBounceAll has some AI we can compare to. 
@@ -1460,7 +1462,7 @@ public class AbilityFactory_ChangeZone {
 				tgtPlayer = af.getAbTgt().getTargetPlayers().get(0);
 				cards = AllZoneUtil.getCardsInZone(origin,tgtPlayer);
 			}
-		cards = filterListByType(cards, params, "ChangeType", sa);
+		cards = filterListByType(cards, params, sa);
 
 		
 		// I don't know if library position is necessary. It's here if it is, just in case
