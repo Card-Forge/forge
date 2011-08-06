@@ -395,6 +395,23 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
+                	
+                	CardList list = new CardList(AllZone.Computer_Play.getCards());
+                	list = list.filter(new CardListFilter() {
+                	    public boolean addCard(Card c) {
+                	        return c.isLand() && !c.isEnchanted() && CardFactoryUtil.canTarget(card, c);
+                	    }
+                	});
+                    
+                    if (list.isEmpty()) return false;
+                    else {
+                    	list.shuffle();
+                        setTargetCard(list.get(0));
+                        return true;
+                    }
+                }//canPlayAI()
+/*
+                public boolean canPlayAI() {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.getType("Land");
                     
@@ -403,6 +420,7 @@ class CardFactory_Auras {
                     setTargetCard(list.get(0));
                     return true;
                 }//canPlayAI()
+*/
                 
                 @Override
                 public void resolve() {

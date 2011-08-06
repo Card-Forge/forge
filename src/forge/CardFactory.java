@@ -17078,6 +17078,21 @@ public class CardFactory implements NewConstants {
           final SpellAbility spell = new Spell(card) {
 			private static final long serialVersionUID = 8653455310355884536L;
 
+			public boolean canPlayAI() {
+				CardList list = new CardList(AllZone.Human_Play.getCards());
+				list = list.filter(new CardListFilter() {
+					public boolean addCard(Card c) {
+						return c.isCreature()  && c.getNetAttack() > 3 && CardFactoryUtil.canTarget(card, c);
+					}
+				});
+				if (list.isEmpty()) return false;
+				
+				CardListUtil.sortAttack(list);
+                CardListUtil.sortFlying(list);
+				setTargetCard(list.get(0));
+                return true;
+			}//canPlayAI()
+			
 			public void resolve() {
           if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
              AllZone.GameAction.destroy(getTargetCard());
