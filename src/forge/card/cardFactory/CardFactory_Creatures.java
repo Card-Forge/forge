@@ -29,7 +29,6 @@ import forge.GameActionUtil;
 import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
-import forge.PlayerZone_ComesIntoPlay;
 import forge.Phase;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
@@ -155,151 +154,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
-
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Kiki-Jiki, Mirror Breaker")) {
-            final CardFactory cfact = cf;
-            Cost abCost = new Cost("T", cardName, true);
-            Target target = new Target(card,"Select target nonlegendary creature you control.", new String[] {"Creature.nonLegendary+YouCtrl"});
-            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
-                private static final long serialVersionUID = -943706942500499644L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getCreature().size() != 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    setTargetCard(getCreature().get(0));
-                }
-                
-                CardList getCreature() {
-                    CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (!c.getType().contains("Legendary"));
-                        }
-                    });
-                    CardListUtil.sortAttack(list);
-                    return list;
-                }//getCreature()
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && getTargetCard().getController().equals(card.getController())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        
-                    	 int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
-                         Card[] crds = new Card[multiplier];
-                         
-                         for (int i=0;i<multiplier;i++)
-                         {
-	                        //TODO: Use central copy methods
-	                        Card copy;
-	                        if(!getTargetCard().isToken()) {
-	                            //CardFactory cf = new CardFactory("cards.txt");
-	                            
-	
-	                            //copy creature and put it onto the battlefield
-	                            //copy = getCard(getTargetCard(), getTargetCard().getName(), card.getController());
-	                            copy = cfact.getCard(getTargetCard().getName(), getTargetCard().getOwner());
-	                            
-	                            //when copying something stolen:
-	                            copy.setController(getTargetCard().getController());
-	                            
-	                            copy.setToken(true);
-	                            copy.setCopiedToken(true);
-	                            
-	                            copy.addIntrinsicKeyword("Haste");
-	                        } else //isToken()
-	                        {
-	                            Card c = getTargetCard();
-	                            
-	                            copy = CardFactory.copyStats(c);
-	                            
-	                            copy.setName(c.getName());
-	                            copy.setImageName(c.getImageName());
-	                            
-	                            copy.setOwner(c.getController());
-	                            copy.setController(c.getController());
-	                            
-	                            copy.setManaCost(c.getManaCost());
-	                            copy.setColor(c.getColor());
-	                            copy.setToken(true);
-	                            
-	                            copy.setType(c.getType());
-	                            
-	                            copy.setBaseAttack(c.getBaseAttack());
-	                            copy.setBaseDefense(c.getBaseDefense());
-	                            copy.addIntrinsicKeyword("Haste");
-	                        }
-	                        
-	                        //Slight hack in case Kiki copies a creature with triggers.
-                            for(Trigger t : copy.getTriggers())
-                            {
-                            	AllZone.TriggerHandler.registerTrigger(t);
-                            }
-	                        
-	                        copy.setCurSetCode(getTargetCard().getCurSetCode());
-	                        copy.setImageFilename(getTargetCard().getImageFilename());
-	                        
-                            if(getTargetCard().isFaceDown()) {
-                                copy.setIsFaceDown(true);
-                                copy.setManaCost("");
-                                copy.setBaseAttack(2);
-                                copy.setBaseDefense(2);
-                                copy.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
-                                copy.setType(new ArrayList<String>()); //remove all types
-                                copy.addType("Creature");
-                                copy.clearSpellAbility(); //disallow "morph_up"
-                                copy.setCurSetCode("");
-                                copy.setImageFilename("morph.jpg");
-                            }
-
-	                        AllZone.GameAction.moveToPlay(copy);
-	                        crds[i] = copy;
-                    	}
-                        
-
-                        //have to do this since getTargetCard() might change
-                        //if Kiki-Jiki somehow gets untapped again
-                        final Card[] target = new Card[multiplier];
-                        for (int i=0;i<multiplier;i++) {
-                        	final int index = i;
-	                        target[i] = crds[i];
-	                        Command atEOT = new Command() {
-	                            private static final long serialVersionUID = 7803915905490565557L;
-	                            
-	                            public void execute() {
-	                                //technically your opponent could steal the token
-	                                //and the token shouldn't be sacrificed
-	                                if(AllZone.GameAction.isCardInPlay(target[index]))
-	                                {
-                                        AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
-	                                	//Slight hack in case kiki copies a creature with triggers
-                                        AllZone.TriggerHandler.removeAllFromCard(target[index]);
-	                                }
-	                            }
-	                        };//Command
-	                        AllZone.EndOfTurn.addAt(atEOT);
-                        }
-                    }//is card in play?
-                }//resolve()
-            };//SpellAbility
-            
-            ability.setStackDescription("Kiki-Jiki - copy card.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(abCost);
-            sb.append("Put a token that's a copy of target nonlegendary creature you control onto the battlefield. ");
-            sb.append("That token has haste. Sacrifice it at the beginning of the next end step.");
-            ability.setDescription(sb.toString());
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-         */
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Loxodon Hierarch")) {
@@ -397,7 +252,7 @@ public class CardFactory_Creatures {
                     String choice = "";
                     String choices[] = {"3/3", "2/2 with flying", "1/6 with defender"};
                     
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         choice = GuiUtils.getChoice("Choose one", choices);
                     } else choice = choices[MyRandom.random.nextInt(3)];
                     
@@ -507,7 +362,7 @@ public class CardFactory_Creatures {
 				String getChosenColor() {
 					// Choose color for protection in Brave the Elements
 					String color = "";
-					if (card.getController().equals(AllZone.HumanPlayer)) {
+					if (card.getController().isHuman()) {
 
 						String[] colors = Constant.Color.Colors;
 						colors[colors.length-1] = null;
@@ -727,7 +582,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         if(AllZone.Human_Hand.getCards().length == 0) AllZone.GameAction.sacrifice(card);
                         else AllZone.InputControl.setInput(discard);
                     } else {
@@ -995,7 +850,7 @@ public class CardFactory_Creatures {
                         
                         @Override
                         public void selectCard(Card card, PlayerZone zone) {
-                            if(card.isArtifact() && zone.is(Constant.Zone.Battlefield) && card.getController().equals(AllZone.HumanPlayer)) {
+                            if(card.isArtifact() && zone.is(Constant.Zone.Battlefield) && card.getController().isHuman()) {
                                 ability.setTargetCard(card);
                                 AllZone.Stack.add(ability);
                                 stop();
@@ -4435,12 +4290,13 @@ public class CardFactory_Creatures {
         				@Override
         				public void resolve() {
         					String chosenType = "";
-        					if(card.getController().equals(AllZone.HumanPlayer)) {
+        					if(card.getController().isHuman()) {
         						chosenType = JOptionPane.showInputDialog(null, "Select a card type:", card.getName(),
         								JOptionPane.QUESTION_MESSAGE);
         					}
         					else {
         						//TODO - this could probably be updated to get the most prominent type in play
+        						//wait until creature types are defined somewhere in Forge
         						chosenType = "Elf";
         					}
         					card.setChosenType(chosenType);
@@ -4616,7 +4472,7 @@ public class CardFactory_Creatures {
         				  }
         			  });
 
-        			  if(card.getController().equals(AllZone.HumanPlayer)) {
+        			  if(card.getController().isHuman()) {
         				  if (creats.size() > 0)
         				  {
         					  List<Card> selection = GuiUtils.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
@@ -5058,7 +4914,7 @@ public class CardFactory_Creatures {
                 	Player player = card.getController();
                     CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
                     
-                    if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(playerInput);
+                    if(player.isHuman()) AllZone.InputControl.setInput(playerInput);
                     else if(list.size() != 0) {
                         Card target = CardFactoryUtil.AI_getBestCreature(list);
                         ability.setTargetCard(target);
@@ -5386,7 +5242,7 @@ public class CardFactory_Creatures {
 	                    }
 	                };
 	                
-	                if(tgtSA.getActivatingPlayer().equals(AllZone.HumanPlayer))
+	                if(tgtSA.getActivatingPlayer().isHuman())
 	                {
 	                	GameActionUtil.payManaDuringAbilityResolve(card + "\r\n", ability.getManaCost(), 
 	                			Command.Blank, unpaidCommand);
