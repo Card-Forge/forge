@@ -88,6 +88,22 @@ public class CardList implements Iterable<Card> {
         
     }//remove(String cardName)
     
+    //removes one copy of that card, from given set (if set not found - just use regular remove(String cardName) ):
+    public void remove(final String cardName, final String setCode) {
+        CardList find = this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.getName().equals(cardName) && c.getCurSetCode().equals(setCode);
+            }
+        });
+        
+        if(0 < find.size()) this.remove(find.get(0));
+        /*else throw new RuntimeException("CardList : remove(String cardname, String setCode), error - card name not found: "
+                + cardName + " from set: " +setCode + " - contents of Arraylist:" + list);*/
+        else
+        	remove(cardName);
+        
+    }//remove(String cardName, final String setCode)
+    
     public int size() {
         return list.size();
     }
