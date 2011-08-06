@@ -217,12 +217,12 @@ public class ManaPool extends Card {
     		else if (wantSnow && mana.isSnow()){
 				if (choice == null)
 					choice = mana;
-				else if (!choice.isColor(Constant.Color.Colorless) && mana.isColor(Constant.Color.Colorless)){
-					// give preference to Colorless Snow mana over Colored snow mana
-					choice = mana;
-				}
 				else if (choice.isColor(Constant.Color.Colorless)){
 					// do nothing Snow Colorless should be used first to pay for Snow mana
+				}
+				else if (mana.isColor(Constant.Color.Colorless)){
+					// give preference to Colorless Snow mana over Colored snow mana
+					choice = mana;
 				}
 				else if (floatingTotals[map.get(mana.getColor())] > floatingTotals[map.get(choice.getColor())]){
 					// give preference to Colored mana that there is more of to pay Snow costs
@@ -231,21 +231,63 @@ public class ManaPool extends Card {
     		}
     		else if (colors[0].equals(Constant.Color.Colorless)){	// colorless
     			if (choice == null && mana.isColor(Constant.Color.Colorless))
-    				choice = mana;
+    				choice = mana;	// Colorless fits the bill nicely
     			else if (choice == null){
     				manaChoices.add(mana);
+    			}
+    			else if (choice.isSnow() && !mana.isSnow()){	// nonSnow colorless is better to spend than Snow colorless
+    				choice = mana;
     			}
     		}
     	}
     	
-    	// after this is submitted change the choice dialog to be more descriptive
-    	if (choice == null && colors[0].equals(Constant.Color.Colorless)){
+    	if (choice != null)
+    		return choice;
+    	
+    	if (colors[0].equals(Constant.Color.Colorless)){
     		if (manaChoices.size() == 1)
     			choice = manaChoices.get(0);
     		else if (manaChoices.size() > 1){
-	    		Object o = AllZone.Display.getChoiceOptional("Pay Mana from Mana Pool", manaChoices.toArray());
-	    		if (o != null)
-	    			choice = (Mana)o;
+    	    	int[] normalMana = {0,0,0,0,0,0};
+    	    	int[] snowMana = {0,0,0,0,0,0};
+    	    	String[] manaStrings = { Constant.Color.White,Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green, Constant.Color.Colorless };
+    	    	
+    			// loop through manaChoices adding 
+    	    	for(Mana m : manaChoices){
+    	        	if (m.isSnow())
+    	        		snowMana[map.get(m.getColor())] += m.getAmount();
+    	        	else
+    	        		normalMana[map.get(m.getColor())] += m.getAmount();
+    	    	}
+    	    	
+    	    	ArrayList<String> alChoice = new ArrayList<String>();
+    	    	for(int i = 0; i < normalMana.length; i++){
+    	    		if (normalMana[i] > 0){
+    	    			alChoice.add(manaStrings[i]+"("+normalMana[i]+")");
+    	    		}
+    	    		if (snowMana[i] > 0){
+    	    			alChoice.add("{S}"+manaStrings[i]+"("+snowMana[i]+")");
+    	    		}
+    	    	}
+    	    	
+    			
+	    		Object o = AllZone.Display.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
+	    		if (o != null){
+	    			String ch = o.toString();
+	    			boolean grabSnow = ch.startsWith("{S}");
+	    			ch = ch.replace("{S}", "");
+	    			
+	    			ch = ch.substring(0, ch.indexOf("("));
+	    			
+	    	    	for(Mana m : manaChoices){
+	    	        	if (m.isColor(ch) && (!grabSnow || (grabSnow && m.isSnow()))){
+	    	        		if (choice == null)
+	    	        			choice = m;
+	    	        		else if (choice.isSnow() && !m.isSnow())
+	    	        			choice = m;
+	    	        	}
+	    	    	}
+	    		}
 	    	}
 	    }
     	
@@ -362,7 +404,9 @@ public class ManaPool extends Card {
                 clessString = "";
             } else clessString += s;
         }
-        if(Colorless > 0) res.add(0, Colorless + "");
+        for(int i = 0; i < Colorless; i++)
+        	res.add("1");
+
         return res.toArray(new String[0]);
     }
     
