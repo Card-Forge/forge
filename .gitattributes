@@ -3280,6 +3280,7 @@ res/cardsfolder/llanowar_behemoth.txt -text svneol=native#text/plain
 res/cardsfolder/llanowar_cavalry.txt -text svneol=native#text/plain
 res/cardsfolder/llanowar_dead.txt -text svneol=native#text/plain
 res/cardsfolder/llanowar_druid.txt -text svneol=native#text/plain
+res/cardsfolder/llanowar_elite.txt -text svneol=native#text/plain
 res/cardsfolder/llanowar_elves.txt -text svneol=native#text/plain
 res/cardsfolder/llanowar_knight.txt -text svneol=native#text/plain
 res/cardsfolder/llanowar_mentor.txt -text svneol=native#text/plain
