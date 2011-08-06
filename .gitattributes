@@ -4434,6 +4434,7 @@ res/cardsfolder/plunder.txt -text svneol=native#text/plain
 res/cardsfolder/poison_arrow.txt -text svneol=native#text/plain
 res/cardsfolder/poison_the_well.txt -text svneol=native#text/plain
 res/cardsfolder/political_trickery.txt -text svneol=native#text/plain
+res/cardsfolder/polluted_bonds.txt -text svneol=native#text/plain
 res/cardsfolder/polluted_delta.txt -text svneol=native#text/plain
 res/cardsfolder/polluted_mire.txt -text svneol=native#text/plain
 res/cardsfolder/ponder.txt -text svneol=native#text/plain
