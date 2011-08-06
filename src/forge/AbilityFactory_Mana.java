@@ -20,7 +20,7 @@ public class AbilityFactory_Mana {
 			
 			@Override
 			public void resolve() {
-				manaResolve(this, af);
+				manaResolve(this, af, this);
 			}
 
 			@Override
@@ -59,12 +59,12 @@ public class AbilityFactory_Mana {
 			@Override
             public String getStackDescription(){
             // when getStackDesc is called, just build exactly what is happening
-                return manaStackDescription(tmpMana, af);
+                return manaStackDescription(tmpMana, af, this);
             }
 			
 			@Override
 			public void resolve() {
-				manaResolve(tmpMana, af);
+				manaResolve(tmpMana, af, this);
 			}
 			
 		};
@@ -93,12 +93,12 @@ public class AbilityFactory_Mana {
 			@Override
             public String getStackDescription(){
             // when getStackDesc is called, just build exactly what is happening
-                return manaStackDescription(tmpMana, af);
+                return manaStackDescription(tmpMana, af, this);
             }
 			
 			@Override
 			public void resolve() {
-				manaResolve(tmpMana, af);
+				manaResolve(tmpMana, af, this);
 			}
 
 			@Override
@@ -122,9 +122,15 @@ public class AbilityFactory_Mana {
 		return false;
 	}
 	
-	public static String manaStackDescription(Ability_Mana abMana, AbilityFactory af){
+	public static String manaStackDescription(Ability_Mana abMana, AbilityFactory af, SpellAbility sa){
 		StringBuilder sb = new StringBuilder();
-		sb.append("Add ").append(generatedMana(abMana, af)).append(" to your mana pool.");
+		
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(af.getHostCard()).append(" - ");
+		
+		sb.append("Add ").append(generatedMana(abMana, af, sa)).append(" to your mana pool.");
 
 		if (abMana.getSubAbility() != null)
 			sb.append(abMana.getSubAbility().getStackDescription());
@@ -132,14 +138,14 @@ public class AbilityFactory_Mana {
 		return sb.toString();
 	}
 	
-	public static void manaResolve(Ability_Mana abMana, AbilityFactory af){
+	public static void manaResolve(Ability_Mana abMana, AbilityFactory af, SpellAbility sa){
 		// Spells are not undoable
 		abMana.undoable = af.isAbility() && abMana.isUndoable();
 
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 		
-		abMana.produceMana(generatedMana(abMana, af));
+		abMana.produceMana(generatedMana(abMana, af, sa));
 		
 		// convert these to SubAbilities when appropriate		
 		if (params.containsKey("Stuck")){
@@ -159,10 +165,10 @@ public class AbilityFactory_Mana {
 		doDrawback(af, abMana, card);
 	}
 	
-	private static String generatedMana(Ability_Mana abMana, AbilityFactory af){
+	private static String generatedMana(Ability_Mana abMana, AbilityFactory af, SpellAbility sa){
 		// Calculate generated mana here for stack description and resolving
 		HashMap<String,String> params = af.getMapParams();
-		int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), abMana) : 1;
+		int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa) : 1;
 
 		String baseMana = abMana.mana();
 
