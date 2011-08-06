@@ -1,3 +1,8 @@
+Ancient Runes
+2 R
+Enchantment
+At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts he or she controls.
+
 Vivid Crag
 no cost
 Land

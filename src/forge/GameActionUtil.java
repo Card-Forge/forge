@@ -101,6 +101,7 @@ public class GameActionUtil {
 		
 		upkeep_Convalescence();
 		upkeep_Convalescent_Care();
+		upkeep_Ancient_Runes();
 		upkeep_Karma();
 		upkeep_Defense_of_the_Heart();
 		upkeep_Oath_of_Druids();
@@ -7431,7 +7432,80 @@ public class GameActionUtil {
 			}
 		}
 	}//Oath of Ghouls
-
+	
+	private static void upkeep_Ancient_Runes() {
+		final String player = AllZone.Phase.getActivePlayer();
+		
+		CardList ancient_runes = new CardList();
+		ancient_runes.addAll(AllZone.Human_Play.getCards());
+		ancient_runes.addAll(AllZone.Computer_Play.getCards());
+		ancient_runes = ancient_runes.getName("Ancient Runes");
+		
+		PlayerZone activePlayZone = AllZone.getZone(Constant.Zone.Play, player);
+		CardList artifacts = new CardList(activePlayZone.getCards());
+		artifacts = artifacts.getType("Artifact");
+		
+		// determine how much damage to deal the current player
+		final int damage = artifacts.size();
+		
+		// if there are 1 or more Ancient Runes on the 
+		// battlefield have each of them deal damage.
+		if(0 < ancient_runes.size()) {
+			for(int i = 0; i < ancient_runes.size(); i++) {
+				Ability ability = new Ability(ancient_runes.get(0), "0") {
+					@Override
+					public void resolve() {
+						if(damage>0){
+							PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+							life.setLife(life.getLife() - damage);
+						}
+					}
+				};// Ability
+				if(damage>0){
+					ability.setStackDescription("Ancient Runes deals " + damage + " damage to " + player);
+					AllZone.Stack.add(ability);
+				}
+			}
+		}// if
+	}// upkeep_Ancient_Runes()
+	
+	private static void upkeep_Karma() {
+		final String player = AllZone.Phase.getActivePlayer();
+		
+		CardList karma = new CardList();
+		karma.addAll(AllZone.Human_Play.getCards());
+		karma.addAll(AllZone.Computer_Play.getCards());
+		karma = karma.getName("Karma");
+		
+		PlayerZone activePlayZone = AllZone.getZone(Constant.Zone.Play, player);
+		CardList swamps = new CardList(activePlayZone.getCards());
+		swamps = swamps.getType("Swamp");
+		
+		// determine how much damage to deal the current player
+		final int damage = swamps.size();
+		
+		// if there are 1 or more Karmas on the  
+		// battlefield have each of them deal damage.
+		if(0 < karma.size()) {
+			for(int i = 0; i < karma.size(); i++) {
+				Ability ability = new Ability(karma.get(0), "0") {
+					@Override
+					public void resolve() {
+						if(damage>0){
+							PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+							life.setLife(life.getLife() - damage);
+						}
+					}
+				};// Ability
+				if(damage>0){
+					ability.setStackDescription("Karma deals " + damage + " damage to " + player);
+					AllZone.Stack.add(ability);
+				}
+			}
+		}// if
+	}// upkeep_Karma()
+	
+/*
 	private static void upkeep_Karma() {
 		final String player = AllZone.Phase.getActivePlayer();
 		String opponent = AllZone.GameAction.getOpponent(player);
@@ -7468,7 +7542,8 @@ public class GameActionUtil {
 			}
 		}// if
 	}// upkeep_Karma()
-
+*/
+	
 	private static void upkeep_Convalescence() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
