@@ -278,4 +278,10 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	////////////// cardListFilter for different types
+	public static CardListFilter artifacts = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isArtifact();
+		}
+	};
 }
