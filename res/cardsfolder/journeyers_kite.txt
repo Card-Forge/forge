@@ -2,7 +2,7 @@ Name:Journeyer's Kite
 ManaCost:2
 Types:Artifact
 Text:no text
-A:AB$Fetch|Cost$3 T|Destination$Hand|FetchType$Land.Basic|FetchNum$1|SpellDescription$Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
+A:AB$Fetch | Cost$ 3 T | Destination$ Hand | FetchType$ Land.Basic | FetchNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journeyers_kite.jpg
 End

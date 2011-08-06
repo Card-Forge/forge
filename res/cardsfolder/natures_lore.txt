@@ -2,7 +2,7 @@ Name:Nature's Lore
 ManaCost:1 G
 Types:Sorcery
 Text:no text
-A:SP$Fetch|Cost$1 G|Destination$Battlefield|FetchType$Forest|FetchNum$1|SpellDescription$Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
+A:SP$Fetch | Cost$ 1 G | Destination$ Battlefield | FetchType$ Forest | FetchNum$ 1 | SpellDescription$ Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_lore.jpg
 End

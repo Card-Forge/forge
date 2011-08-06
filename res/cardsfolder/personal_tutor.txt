@@ -2,7 +2,7 @@ Name:Personal Tutor
 ManaCost:U
 Types:Sorcery
 Text:no text
-A:SP$Fetch|Cost$U|Destination$Sorcery|LibraryPosition$0|FetchType$Artifact,Enchantment|FetchNum$1|SpellDescription$Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+A:SP$Fetch | Cost$ U | Destination$ Sorcery | LibraryPosition$ 0 | FetchType$ Artifact,Enchantment | FetchNum$ 1 | SpellDescription$ Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg

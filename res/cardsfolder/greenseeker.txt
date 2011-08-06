@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Spellshaper
 Text:no text
 PT:1/1
-A:AB$Fetch|Cost$G T Discard<1/Any>|Destination$Hand|FetchType$Land.Basic|FetchNum$1|SpellDescription$Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
+A:AB$Fetch | Cost$ G T Discard<1/Any> | Destination$ Hand | FetchType$ Land.Basic | FetchNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenseeker.jpg

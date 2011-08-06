@@ -2,7 +2,7 @@ Name:Merchant Scroll
 ManaCost:1 U
 Types:Sorcery
 Text:no text
-A:SP$Fetch|Cost$1 U|Destination$Hand|FetchType$Instant.Blue|FetchNum$1|SpellDescription$Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
+A:SP$Fetch | Cost$ 1 U | Destination$ Hand | FetchType$ Instant.Blue | FetchNum$ 1 | SpellDescription$ Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_scroll.jpg
