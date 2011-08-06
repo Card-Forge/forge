@@ -1,0 +1,9 @@
+Name:Porcelain Legionnaire
+ManaCost:2 PW
+Types:Artifact Creature Soldier
+Text:no text
+PT:3/1
+K:First strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/porcelain_legionnaire.jpg
+End

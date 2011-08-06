@@ -2,22 +2,15 @@ package forge.card.spellability;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
-import forge.AllZoneUtil;
-import forge.ButtonUtil;
-import forge.Card;
-import forge.CardList;
-import forge.CardListFilter;
-import forge.ComputerUtil;
-import forge.Constant;
-import forge.Counters;
-import forge.Phase;
-import forge.PlayerZone;
+import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.mana.ManaCost;
+import forge.card.mana.Mana_PartPhyrexian;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
+
+import java.util.ArrayList;
 
 public class Cost_Payment {
 	private Cost cost = null;
@@ -723,9 +716,12 @@ public class Cost_Payment {
 		    private static final long  serialVersionUID = 3467312982164195091L;
 		    
 		    private final String       originalManaCost = payment.getCost().getMana();
+
+            private int phyLifeToLose = 0;
 	        
 		    private void resetManaCost() {
 		    	mana = new ManaCost(originalManaCost);
+                phyLifeToLose = 0;
 		    }
 		    
 		    @Override
@@ -743,8 +739,28 @@ public class Cost_Payment {
 			        if (AllZone.InputControl.getInput() == this)
 			        	showMessage();
 		    }
+
+            @Override
+            public void selectPlayer(Player player)
+            {
+                showMessage();
+                if(player.equals(AllZone.HumanPlayer))
+                {
+                    if(manaCost.payPhyrexian())
+                    {
+                        phyLifeToLose += 2;
+                    }
+
+                    if(manaCost.isPaid()) {
+                        done();
+                    }
+                }
+
+            }
 		    
 		    private void done() {
+                if(phyLifeToLose > 0)
+                    AllZone.HumanPlayer.payLife(phyLifeToLose,sa.getSourceCard());
 		    	resetManaCost();
 		    	payment.setPayMana(true);
 		    	stop();
@@ -765,6 +781,16 @@ public class Cost_Payment {
 		        ButtonUtil.enableOnlyCancel();
 		        String displayMana = mana.toString().replace("X", "").trim();
 		        AllZone.Display.showMessage("Pay Mana Cost: " + displayMana);
+
+                StringBuilder msg = new StringBuilder("Pay Mana Cost: " +displayMana);
+                if(phyLifeToLose > 0)
+                {
+                    msg.append(" (");
+                    msg.append(phyLifeToLose);
+                    msg.append(" life paid for phyrexian mana)");
+                }
+
+                AllZone.Display.showMessage(msg.toString());
 		        if(mana.isPaid()) 
 		        	done(); 
 		    }

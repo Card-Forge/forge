@@ -39,6 +39,37 @@ public class ManaCost {
     	sunburstMap.clear();
     	return ret;
     }
+
+    private ArrayList<Mana_PartPhyrexian> getUnpaidPhyrexianMana()
+    {
+        ArrayList<Mana_PartPhyrexian> res = new ArrayList<Mana_PartPhyrexian>();
+        for(Object o : manaPart)
+        {
+            if(o instanceof Mana_PartPhyrexian)
+            {
+                Mana_PartPhyrexian phy = (Mana_PartPhyrexian)o;
+
+                if(!phy.isPaid())
+                    res.add(phy);
+            }
+        }
+
+        return res;
+    }
+
+    public boolean payPhyrexian()
+    {
+        ArrayList<Mana_PartPhyrexian> Phy = getUnpaidPhyrexianMana();
+
+        if(Phy.size() > 0)
+        {
+            Phy.get(0).payLife();
+
+            return true;
+        }
+
+        return false;
+    }
     
     // takes a Short Color and returns true if it exists in the mana cost. Easier for split costs
     public boolean isColor(String color){
@@ -253,6 +284,7 @@ public class ManaCost {
         if(cost.length() == 1 || cost.length() == 2) {
             if(Character.isDigit(cost.charAt(0))) list.add(new Mana_PartColorless(cost));
             else if(cost.charAt(0) == 'S') list.add(new Mana_PartSnow());
+            else if(cost.charAt(0) == 'P') list.add(new Mana_PartPhyrexian(cost));
             else list.add(new Mana_PartColor(cost));
         } else//handles "3 GW", "10 GW", "1 G G", "G G", "S 1"
         {
@@ -289,6 +321,8 @@ public class ManaCost {
             return new Mana_PartColorless(partCost);
         } else if(partCost.equals("S")) {
             return new Mana_PartSnow();
+        } else if(partCost.startsWith("P")) {
+            return new Mana_PartPhyrexian(partCost);
         } else {
             return new Mana_PartColor(partCost);
         }

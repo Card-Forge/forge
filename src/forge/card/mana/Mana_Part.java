@@ -28,7 +28,7 @@ public abstract class Mana_Part {
         if(m.length() != 1) throw new RuntimeException(
                 "Mana_Part : checkMana() error, argument mana is not of length 1, mana - " + m);
         
-        if(!(m.equals("G") || m.equals("U") || m.equals("W") || m.equals("B") || m.equals("R") || m.equals("1") || m.equals("S"))) throw new RuntimeException(
+        if(!(m.equals("G") || m.equals("U") || m.equals("W") || m.equals("B") || m.equals("R") || m.equals("1") || m.equals("S") || m.startsWith("P"))) throw new RuntimeException(
                 "Mana_Part : checkMana() error, argument mana is invalid mana, mana - " + m);
     }
 }

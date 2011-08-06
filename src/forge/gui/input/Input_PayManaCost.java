@@ -1,13 +1,12 @@
 
 package forge.gui.input;
 
-import forge.AllZone;
-import forge.ButtonUtil;
-import forge.Card;
-import forge.Phase;
-import forge.PlayerZone;
+import forge.*;
 import forge.card.mana.ManaCost;
+import forge.card.mana.Mana_PartPhyrexian;
 import forge.card.spellability.SpellAbility;
+
+import java.util.ArrayList;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
@@ -24,6 +23,8 @@ public class Input_PayManaCost extends Input {
     private final SpellAbility spell;
     
     private boolean skipStack;
+
+    private int phyLifeToLose = 0;
    
     public Input_PayManaCost(SpellAbility sa,boolean noStack) {
     	skipStack = noStack;
@@ -74,6 +75,7 @@ public class Input_PayManaCost extends Input {
    
     private void resetManaCost() {
         manaCost = new ManaCost(originalManaCost);
+        phyLifeToLose = 0;
     }
     
     @Override
@@ -97,8 +99,31 @@ public class Input_PayManaCost extends Input {
         	done();
         }
     }
+
+    @Override
+    public void selectPlayer(Player player)
+    {
+        showMessage();
+        if(player.equals(AllZone.HumanPlayer))
+        {
+            if(manaCost.payPhyrexian())
+            {
+                phyLifeToLose += 2;
+            }
+
+            if(manaCost.isPaid()) {
+                System.out.println("Phyrexian Mana: Pay " + phyLifeToLose);
+                resetManaCost();
+
+                done();
+            }
+        }
+
+    }
     
     private void done() {
+        if(phyLifeToLose > 0)
+            AllZone.HumanPlayer.payLife(phyLifeToLose,originalCard);
 		if (spell.getSourceCard().isCopiedSpell()) {
 			if (spell.getAfterPayMana() != null) {
 				stopSetNext(spell.getAfterPayMana());
@@ -147,10 +172,21 @@ public class Input_PayManaCost extends Input {
     @Override
     public void showMessage() {
         ButtonUtil.enableOnlyCancel();
-        AllZone.Display.showMessage("Pay Mana Cost: " + manaCost.toString());
+
+        StringBuilder msg = new StringBuilder("Pay Mana Cost: " + manaCost.toString());
+        if(phyLifeToLose > 0)
+        {
+            msg.append(" (");
+            msg.append(phyLifeToLose);
+            msg.append(" life paid for phyrexian mana)");
+        }
+
+        AllZone.Display.showMessage(msg.toString());
         if(manaCost.isPaid() && !new ManaCost(originalManaCost).isPaid()) {
         	originalCard.setSunburstValue(manaCost.getSunburst());
         	done(); 
         }
+
+
     }
 }
