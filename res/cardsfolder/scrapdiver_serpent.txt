@@ -1,0 +1,9 @@
+Name:Scrapdiver Serpent
+ManaCost:5 U U
+Types:Creature Serpent
+Text:no text
+PT:5/5
+K:stPumpSelf:Creature:0/0/HIDDEN Unblockable:isPresent Artifact.YouDontCtrl:Scrapdiver Serpent is unblockable as long as defending player controls an artifact.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapdiver_serpent.jpg
+End
