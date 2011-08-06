@@ -8379,7 +8379,8 @@ public class CardFactory implements NewConstants {
       card.setFlashback(true);
     }//*************** END ************ END **************************
 
-
+    
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Spark Spray"))
     {
@@ -8420,7 +8421,8 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
     }//*************** END ************ END **************************
-
+*/
+    
 
     //*************** START *********** START **************************
     else if(cardName.equals("Erratic Explosion"))

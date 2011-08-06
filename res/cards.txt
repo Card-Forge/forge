@@ -14808,6 +14808,8 @@ Spark Spray
 R
 Instant
 no text
+spDamageTgtCP:1:Spark Spray deals 1 damage to target creature or player.:Spark Spray - deals 1 damage
+Cycling:R
 
 Path of Anger's Flame
 2 R
