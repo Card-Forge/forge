@@ -1,7 +1,7 @@
 Name:Staunch Defenders
 ManaCost:3 W W
 Types:Creature Human Soldier
-Text:When Staunch Defenders comes into play, you gain 4 life.
+Text:When CARDNAME enters the battlefield, you gain 4 life.
 PT:3/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staunch_defenders.jpg

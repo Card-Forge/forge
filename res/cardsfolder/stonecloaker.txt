@@ -1,7 +1,7 @@
 Name:Stonecloaker
 ManaCost:2 W
 Types:Creature Gargoyle
-Text:When Stonecloaker comes into play, return a creature you control to its owner's hand.\r\nWhen Stonecloaker comes into play, remove target card in a graveyard from the game.
+Text:When CARDNAME enters the battlefield, return a creature you control to its owner's hand.\r\n\When CARDNAME enters the battlefield, exile target card from a graveyard.
 PT:3/2
 K:Flash
 K:Flying

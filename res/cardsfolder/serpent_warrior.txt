@@ -1,7 +1,7 @@
 Name:Serpent Warrior
 ManaCost:2 B
 Types:Creature Snake Warrior
-Text:When Serpent Warrior comes into play, you lose 3 life.
+Text:When CARDNAME enters the battlefield, you lose 3 life.
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83364.jpg

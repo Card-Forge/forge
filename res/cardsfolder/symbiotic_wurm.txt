@@ -1,7 +1,7 @@
 Name:Symbiotic Wurm
 ManaCost:5 G G G
 Types:Creature Wurm
-Text:When Symbiotic Wurm is put into a graveyard from play, put seven 1/1 green Insect creature tokens into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, put seven 1/1 green Insect creature tokens onto the battlefield.
 PT:7/7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbiotic_wurm.jpg

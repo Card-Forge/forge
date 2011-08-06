@@ -1,7 +1,7 @@
 Name:Symbiotic Elf
 ManaCost:3 G
 Types:Creature Elf
-Text:When Symbiotic Elf is put into a graveyard from play, put two 1/1 green Insect creature tokens into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, put two 1/1 green Insect creature tokens onto the battlefield.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card32216.jpg

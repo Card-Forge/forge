@@ -1,7 +1,7 @@
 Name:Thelonite Hermit
 ManaCost:3 G
 Types:Creature Elf Shaman
-Text:When Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens into play.
+Text:When CARDNAME is turned face up, put four 1/1 green Saproling creature tokens onto the battlefield.
 PT:1/1
 K:Morph:3 G G
 K:stPumpAll:Creature.Saproling:1/1:No Condition:Saproling creatures get +1/+1.

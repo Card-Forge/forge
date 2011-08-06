@@ -1,7 +1,7 @@
 Name:Sprouting Thrinax
 ManaCost:B R G
 Types:Creature Lizard
-Text:When Sprouting Thrinax is put into a graveyard from play, put three 1/1 green Saproling creature tokens into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, put three 1/1 green Saproling creature tokens onto the battlefield.
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_thrinax.jpg

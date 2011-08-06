@@ -1,7 +1,7 @@
 Name:Sylvan Messenger
 ManaCost:3 G
 Types:Creature Elf
-Text:When Sylvan Messenger comes into play, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library.
+Text:When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library.
 PT:2/2
 K:Trample
 SVar:RemAIDeck:True

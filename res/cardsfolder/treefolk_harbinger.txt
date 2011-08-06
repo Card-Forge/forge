@@ -1,7 +1,7 @@
 Name:Treefolk Harbinger
 ManaCost:G
 Types:Creature Treefolk Druid
-Text:When Treefolk Harbinger comes into play, you may search your library for a Treefolk or Forest card, reveal it, then shuffle your library and put that card on top of it.
+Text:When CARDNAME enters the battlefield, you may search your library for a Treefolk or Forest card, reveal it, then shuffle your library and put that card on top of it.
 PT:0/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treefolk_harbinger.jpg

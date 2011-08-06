@@ -1,7 +1,7 @@
 Name:Shivan Wurm
 ManaCost:3 R G
 Types:Creature Wurm
-Text:When Shivan Wurm comes into play, return a red or green creature you control to its owner's hand.
+Text:When CARDNAME enters the battlefield, return a red or green creature you control to its owner's hand.
 PT:7/7
 K:Trample
 SVar:Rarity:Rare
