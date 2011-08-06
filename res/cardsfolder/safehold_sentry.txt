@@ -1,0 +1,10 @@
+Name:Safehold Sentry
+ManaCost:1 W
+Types:Creature Elf Warrior
+Text:no text
+PT:2/2
+K:abPump 2 W Untap:+0/+2
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_sentry.jpg
+End

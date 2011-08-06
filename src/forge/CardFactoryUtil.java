@@ -4642,7 +4642,8 @@ public class CardFactoryUtil {
     	
     	//if (AllZone.GameAction.isCardInPlay(c)) 
     	//{
-    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.")) {
+    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.") 
+    			|| AllZoneUtil.isCardInPlay("Cowardice")) {
     		SpellAbility ability = new Ability(c, "0")
     		{
     			public void resolve()
@@ -4653,7 +4654,8 @@ public class CardFactoryUtil {
     		ability.setStackDescription(c + " - return CARDNAME to its owner's hand.");
     		AllZone.Stack.add(ability);
     	}
-    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, destroy CARDNAME.")) {
+    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, destroy CARDNAME.") 
+    			|| AllZoneUtil.isCardInPlay("Horobi, Death's Wail")) {
     		
     		SpellAbility ability = new Ability(c, "0")
     		{

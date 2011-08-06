@@ -120,28 +120,38 @@ public class CombatUtil {
             temp = blkCL.getType("Plains");
             if(!AllZoneUtil.isCardInPlay("Lord Magnus") 
             		&& !AllZoneUtil.isCardInPlay("Great Wall")
+            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
             		&& !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Islandwalk")) {
             temp = blkCL.getType("Island");
-            if(!AllZoneUtil.isCardInPlay("Undertow") && !AllZoneUtil.isCardInPlay("Gosta Dirk") && !temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Undertow") 
+            		&& !AllZoneUtil.isCardInPlay("Gosta Dirk")
+            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
+            		&& !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Swampwalk")) {
             temp = blkCL.getType("Swamp");
-            if(!AllZoneUtil.isCardInPlay("Ur-drago") && !AllZoneUtil.isCardInPlay("Quagmire") && !temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Ur-drago") 
+            		&& !AllZoneUtil.isCardInPlay("Quagmire")
+            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
+            		&& !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Mountainwalk")) {
             temp = blkCL.getType("Mountain");
-            if(!AllZoneUtil.isCardInPlay("Crevasse") && !temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Crevasse") 
+            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
+            		&& !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Forestwalk")) {
             temp = blkCL.getType("Forest");
             if(!AllZoneUtil.isCardInPlay("Lord Magnus")
             		&& !AllZoneUtil.isCardInPlay("Deadfall")
+            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
             		&& !temp.isEmpty()) return false;
         }
         
@@ -151,7 +161,7 @@ public class CombatUtil {
                     return c.isLand() && c.getType().contains("Legendary");
                 }
             });
-            if(!temp.isEmpty()) return false;
+            if(!temp.isEmpty() && !AllZoneUtil.isCardInPlay("Staff of the Ages")) return false;
         }
         
         if(attacker.getKeyword().contains("Nonbasic landwalk")) {
@@ -160,7 +170,7 @@ public class CombatUtil {
                     return c.isLand() && !c.isBasicLand();
                 }
             });
-            if(!temp.isEmpty()) return false;
+            if(!temp.isEmpty() && !AllZoneUtil.isCardInPlay("Staff of the Ages")) return false;
         }
         
 
