@@ -4946,6 +4946,7 @@ res/cardsfolder/rumbling_slum.txt -text svneol=native#text/plain
 res/cardsfolder/rune_cervin_rider.txt -text svneol=native#text/plain
 res/cardsfolder/runeboggle.txt -text svneol=native#text/plain
 res/cardsfolder/runeclaw_bear.txt -text svneol=native#text/plain
+res/cardsfolder/runed_arch.txt svneol=native#text/plain
 res/cardsfolder/runed_servitor.txt -text svneol=native#text/plain
 res/cardsfolder/runed_stalactite.txt -text svneol=native#text/plain
 res/cardsfolder/runes_of_the_deus.txt -text svneol=native#text/plain
