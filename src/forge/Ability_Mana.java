@@ -60,7 +60,12 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     if(pain.contains(sourceCard.getName()) && !Mana.equals("1"))
     runcommands.add(new Command()
     {
-    	public void execute(){
+    	/**
+		 * 
+		 */
+		private static final long serialVersionUID = -5904507275105961979L;
+
+		public void execute(){
 
     		AllZone.GameAction.getPlayerLife(getController()).subtractLife(1);
     }});
