@@ -2256,6 +2256,8 @@ public class CombatUtil {
                 	final Ability ability = new Ability(b, "0") {
                     	@Override
                    	public void resolve() {
+                    		//this isCardInPlay is probably not necessary since
+                    		//if is checked in the atEOC before being put on stack
                         	if(AllZone.GameAction.isCardInPlay(attacker)) {
                             	AllZone.GameAction.destroy(attacker);
                         	}
@@ -2270,7 +2272,9 @@ public class CombatUtil {
                     	private static final long serialVersionUID = 5854485314766349980L;
                     
                     	public void execute() {
-                        	AllZone.Stack.add(ability);
+                    		if(AllZone.GameAction.isCardInPlay(attacker)) {
+                    			AllZone.Stack.add(ability);
+                    		}
                     	}
                 	};
                 
