@@ -573,7 +573,8 @@ public class CardFactory_Instants {
             
             spell_one.setDescription("Draw a card.");
             spell_one.setStackDescription(cardName + " - " + card.getController() + " draws a card.");
-            spell_two.setDescription("Buyback 5 - Pay 5 U , put this card into your hand as it resolves.");
+            spell_two.setDescription("Buyback 5 (You may pay an additional 5 as you cast this spell. If you do, put this card into your hand as it resolves.)");
+            // spell_two.setDescription("Buyback 5 - Pay 5 U , put this card into your hand as it resolves.");
             spell_two.setStackDescription(cardName + " - (Buyback) " + card.getController() + " draws a card.");
             spell_two.setIsBuyBackAbility(true);
             
@@ -679,7 +680,8 @@ public class CardFactory_Instants {
             spell_two.setAdditionalManaCost("4");
             
             spell_one.setDescription("Target creature gets +2/+2 until end of turn.");
-            spell_two.setDescription("Buyback 4 - Pay 4G, put this card into your hand as it resolves.");
+            spell_two.setDescription("Buyback 4 (You may pay an additional 4 as you cast this spell. If you do, put this card into your hand as it resolves.)");
+            // spell_two.setDescription("Buyback 4 - Pay 4G, put this card into your hand as it resolves.");
             
             spell_one.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_one));
             spell_two.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_two));
@@ -729,7 +731,8 @@ public class CardFactory_Instants {
             spell_two.setAdditionalManaCost("3");
             
             spell_one.setDescription("Put a 1/1 green Saproling token into play.");
-            spell_two.setDescription("Buyback 3 - Pay 4G, put this card into your hand as it resolves.");
+            spell_two.setDescription("Buyback 3 (You may pay an additional 3 as you cast this spell. If you do, put this card into your hand as it resolves.)");
+            // spell_two.setDescription("Buyback 3 - Pay 4G, put this card into your hand as it resolves.");
             
             spell_one.setStackDescription("Sprout Swarm - Put a 1/1 green Saproling token into play");
             spell_two.setStackDescription("Sprout Swarm - Buyback, Put a 1/1 green Saproling token into play");
@@ -1146,9 +1149,17 @@ public class CardFactory_Instants {
             spell_two.setAdditionalManaCost("3");
             
             spell_one.setDescription("Copy target instant or sorcery spell. You may choose new targets for the copy.");
-            spell_one.setStackDescription(cardName + " - " + card.getController() + "Copies " + spell_one.getTargetCard());
-            spell_two.setDescription("Buyback 3 - Pay 4 R R , put this card into your hand as it resolves.");
-            spell_two.setStackDescription(cardName + " - (Buyback) " + card.getController() + "Copies " + spell_two.getTargetCard());
+            // spell_one.setStackDescription(cardName + " - " + card.getController() + "Copies " + spell_one.getTargetCard());
+            StringBuilder sbOne = new StringBuilder();
+            sbOne.append(cardName).append(" - ").append(card.getController()).append(" Copies ").append(spell_one.getTargetCard());
+            spell_one.setStackDescription(sbOne.toString());
+            
+            // spell_two.setDescription("Buyback 3 - Pay 4 R R , put this card into your hand as it resolves.");
+            spell_two.setDescription("Buyback 3 (You may pay an additional 3 as you cast this spell. If you do, put this card into your hand as it resolves.)");
+            // spell_two.setStackDescription(cardName + " - (Buyback) " + card.getController() + "Copies " + spell_two.getTargetCard());
+            StringBuilder sbTwo = new StringBuilder();
+            sbTwo.append(cardName).append(" - (Buyback) ").append(card.getController()).append(" Copies ").append(spell_two.getTargetCard());
+            
             spell_two.setIsBuyBackAbility(true);
             
             Input runtime1 = new Input() {
