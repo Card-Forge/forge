@@ -432,7 +432,8 @@ public class AbilityFactory {
 	}
 	
 	public static int calculateAmount(Card card, String amount, SpellAbility ability){
-		if (amount.matches("X"))
+		// amount can be anything, not just 'X' as long as sVar exists
+		if (!card.getSVar(amount).equals(""))
 		{
 			String calcX[] = card.getSVar(amount).split("\\$");
 			if (calcX.length == 1 || calcX[1].equals("none"))
@@ -449,6 +450,11 @@ public class AbilityFactory {
 			else if (ability != null && calcX[0].startsWith("Discarded"))
 			{
 				return CardFactoryUtil.handlePaid(ability.getDiscardedCost(), calcX[1]);
+			}
+			else if (ability != null && calcX[0].startsWith("Targeted"))
+			{
+				CardList list = new CardList(ability.getTarget().getTargetCards().toArray());
+				return CardFactoryUtil.handlePaid(list, calcX[1]);
 			}
 			else
 				return 0;

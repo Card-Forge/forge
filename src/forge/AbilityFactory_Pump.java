@@ -6,12 +6,11 @@ import java.util.Random;
 
 public class AbilityFactory_Pump {
 	
-	private final int NumAttack[] = {-1138};
-	private final int NumDefense[] = {-1138};
-	private final String AttackX[] = {"none"};
-	private final String DefenseX[] = {"none"};
 	private final ArrayList<String> Keywords = new ArrayList<String>();
 
+	private String numAttack;
+	private String numDefense;
+	
 	private AbilityFactory AF = null;
 	private HashMap<String,String> params = null;
 	private Card hostCard = null;
@@ -23,55 +22,15 @@ public class AbilityFactory_Pump {
 		
 		hostCard = AF.getHostCard();
 		
-		if (params.containsKey("NumAtt"))
-		{
-			String tmp = params.get("NumAtt");
-            if(tmp.matches("[\\+\\-][XY]"))
-            {
-                String xy = hostCard.getSVar(tmp.replaceAll("[\\+\\-]", ""));
-                if(xy.startsWith("Count$")) {
-                    String kk[] = xy.split("\\$");
-                    AttackX[0] = kk[1];
-                    
-                    if(tmp.contains("-"))
-                    {
-                    	if(AttackX[0].contains("/"))
-                    		AttackX[0] = AttackX[0].replace("/", "/Negative");
-                    	else 
-                    		AttackX[0] += "/Negative";
-                    }
-                }
-            } 
-            else if(tmp.matches("[\\+\\-][0-9]"))
-            	NumAttack[0] = Integer.parseInt(tmp.replace("+", ""));
-            
-		}
+		numAttack = (params.containsKey("NumAtt")) ? params.get("NumAtt") : "0";
+		numDefense = (params.containsKey("NumDef")) ? params.get("NumDef") : "0";
 		
-		if (params.containsKey("NumDef"))
-		{
-			String tmp = params.get("NumDef");
-            if(tmp.matches("[\\+\\-][XY]"))
-            {
-                String xy = hostCard.getSVar(tmp.replaceAll("[\\+\\-]", ""));
-                if(xy.startsWith("Count$")) {
-                    String kk[] = xy.split("\\$");
-                    DefenseX[0] = kk[1];
-                    
-                    if(tmp.contains("-"))
-                    {
-                    	if(DefenseX[0].contains("/"))
-                    		DefenseX[0] = DefenseX[0].replace("/", "/Negative");
-                    	else 
-                    		DefenseX[0] += "/Negative";
-                    }
-                }
-            } 
-            else if(tmp.matches("[\\+\\-][0-9]"))
-            	NumDefense[0] = Integer.parseInt(tmp.replace("+", ""));
-            
-		}
+		// Start with + sign now optional
+		if (numAttack.startsWith("+"))
+			numAttack = numAttack.substring(1);
+		if (numDefense.startsWith("+"))
+			numDefense = numDefense.substring(1);
 		
-		Keywords.add("none");
 		if (params.containsKey("KW"))
 		{
 			String tmp = params.get("KW");
@@ -81,6 +40,8 @@ public class AbilityFactory_Pump {
 			for (int i=0; i<kk.length; i++)
 				Keywords.add(kk[i]);
 		}
+		else
+			Keywords.add("none");
 	}
 	
 	public SpellAbility getSpell()
@@ -137,7 +98,7 @@ public class AbilityFactory_Pump {
             	if (!ComputerUtil.canPayCost(this))
             		return false;
             	
-                int defense = getNumDefense();
+                int defense = getNumDefense(this);
                 
                 if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
                 
@@ -189,24 +150,12 @@ public class AbilityFactory_Pump {
         return abPump;
 	}
 	
-    private int getNumAttack() {
-        if(NumAttack[0] != -1138)
-        	return NumAttack[0];
-        
-        if(!AttackX[0].equals("none"))
-        	return CardFactoryUtil.xCount(hostCard, AttackX[0]);
-        
-        return 0;
+    private int getNumAttack(SpellAbility sa) {
+    	return AbilityFactory.calculateAmount(hostCard, numAttack, sa);
     }
     
-    private int getNumDefense() {
-        if(NumDefense[0] != -1138)
-        	return NumDefense[0];
-        
-        if(!DefenseX[0].equals("none"))
-        	return CardFactoryUtil.xCount(hostCard, DefenseX[0]);
-        
-        return 0;
+    private int getNumDefense(SpellAbility sa) {
+    	return AbilityFactory.calculateAmount(hostCard, numDefense, sa);
     }
 
     private CardList getPumpCreatures() {
@@ -239,9 +188,9 @@ public class AbilityFactory_Pump {
         return list;
     }
     
-    private CardList getCurseCreatures()
+    private CardList getCurseCreatures(SpellAbility sa)
     {
-    	final int defense = getNumDefense();
+    	final int defense = getNumDefense(sa);
     	
     	CardList list = new CardList(AllZone.Human_Play.getCards());
         list = list.filter(new CardListFilter() {
@@ -280,7 +229,7 @@ public class AbilityFactory_Pump {
 
     private boolean doTgtAI(SpellAbility sa)
     {
-        int defense = getNumDefense();
+        int defense = getNumDefense(sa);
         
         String curPhase = AllZone.Phase.getPhase();
         if(curPhase.equals(Constant.Phase.Main2) && !(AF.isCurse() && defense < 0))
@@ -289,7 +238,7 @@ public class AbilityFactory_Pump {
 		Target tgt = AF.getAbTgt();
 		CardList list;
         if (AF.isCurse())  // Curse means spells with negative effect
-        	list = getCurseCreatures();
+        	list = getCurseCreatures(sa);
         else
         	list = getPumpCreatures();
 		
@@ -340,7 +289,7 @@ public class AbilityFactory_Pump {
 			}
 		}
         
-        return false;
+        return true;
 
     }
     
@@ -363,8 +312,8 @@ public class AbilityFactory_Pump {
 			 sb.append(c.getName());
 			 sb.append(" ");
 		 }
-	     final int atk = getNumAttack();
-	     final int def = getNumDefense();
+	     final int atk = getNumAttack(sa);
+	     final int def = getNumDefense(sa);
 	     
 		 sb.append("gains ");
 	     if (atk != 0 || def != 0){
@@ -388,6 +337,14 @@ public class AbilityFactory_Pump {
 	    }
 		 
 		 sb.append("until end of turn.");
+		 
+		 
+		 Ability_Sub abSub = sa.getSubAbility();
+		 if (abSub != null) {
+		 	abSub.setParent(sa);
+		 	sb.append(abSub.getStackDescription());
+		 }
+		 
 		 return sb.toString();
     }
     
@@ -414,8 +371,8 @@ public class AbilityFactory_Pump {
 			if (tgt != null && !CardFactoryUtil.canTarget(AF.getHostCard(), tgtC))
 				continue;
 			
-	        final int a = getNumAttack();
-	        final int d = getNumDefense();
+	        final int a = getNumAttack(sa);
+	        final int d = getNumDefense(sa);
 	        
 	        final Command untilEOT = new Command() {
 	            private static final long serialVersionUID = -42244224L;
@@ -453,12 +410,22 @@ public class AbilityFactory_Pump {
         
 		}
 		
-		Card first = tgtCards.get(0);
 		
-        if(AF.hasSubAbility()) 
-        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
-                hostCard.getController(), hostCard.getController().getOpponent(),
-                first.getController(), hostCard, first, sa);
+		
+		if (AF.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+			else{
+				Card first = tgtCards.get(0);
+	        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
+	                hostCard.getController(), hostCard.getController().getOpponent(),
+	                first.getController(), hostCard, first, sa);
+			}
+		}
         
     }
 }

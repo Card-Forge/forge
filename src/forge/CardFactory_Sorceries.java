@@ -5113,35 +5113,6 @@ public class CardFactory_Sorceries {
         } 
         //*************** END ************ END **************************
         
-                
-        //*************** START *********** START **************************
-        else if(cardName.equals("Braingeyser"))
-        {
-      	  final SpellAbility spell = new Spell(card){
-  			private static final long serialVersionUID = -7141472916367953810L;
-
-  			public void resolve()
-  			{
-  				Player player = getTargetPlayer();
-  				player.drawCards(card.getXManaCostPaid());
-  				card.setXManaCostPaid(0);
-  			}
-      		  
-      		  public boolean canPlayAI()
-      		  {
-      			  final int maxX = ComputerUtil.getAvailableMana().size() - 1;
-      			  return maxX > 3 && AllZone.Computer_Hand.size() <= 3;
-      		  }
-      	  };
-      	  spell.setDescription("Target player draws X cards.");
-      	  spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-      	  spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-      	  
-      	  card.clearSpellAbility();
-      	  card.addSpellAbility(spell);
-        }
-        //*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
       else if (cardName.equals("Beacon of Creation"))

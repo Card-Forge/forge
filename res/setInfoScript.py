@@ -199,6 +199,9 @@ cardDict = {}
 setStr = 'SetInfo:'
 
 for fileName in os.listdir(folder):
+	if fileName.startswith('.'):
+		continue
+
 # parse cardsfolder for Card Lines and Rarity/Picture SVars. Filling in any gaps
 	file = open(folder + '\\' + fileName)
 	cleanName = fileName.replace('.txt', '')
@@ -239,14 +242,14 @@ for fileName in os.listdir(folder):
 		addSets(card)
 		card.hasSet = True
 			
-	file = open(folder + "/" + fileName, 'w')
-	file.write(card.lines)
-	if card.hasSet:
-		for s in card.sets.values():
-			file.write('SetInfo:'+ s.set + '|' + s.rarity + '|' + s.image + '\n')
-			
-	file.write('End')
-	file.close()
-	err.write(card.name + '... Updated\n')
+		file = open(folder + "/" + fileName, 'w')
+		file.write(card.lines)
+		if card.hasSet:
+			for s in card.sets.values():
+				file.write('SetInfo:'+ s.set + '|' + s.rarity + '|' + s.image + '\n')
+				
+		file.write('End')
+		file.close()
+		err.write(card.name + '... Updated\n')
 
 err.close()

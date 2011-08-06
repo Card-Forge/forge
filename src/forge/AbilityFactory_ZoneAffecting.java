@@ -86,7 +86,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean chkAI_Drawback() {
-				return drawTargetAI(af);
+				return drawTargetAI(af, this);
 			}
 			
 		};
@@ -104,7 +104,7 @@ public class AbilityFactory_ZoneAffecting {
 		
 		sb.append(player.toString());
 		sb.append(" draws (");
-		sb.append(af.getMapParams().get("NumCards"));
+		sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa));
 		sb.append(").");
 		
 		Ability_Sub abSub = sa.getSubAbility();
@@ -142,7 +142,7 @@ public class AbilityFactory_ZoneAffecting {
 			
 		}
 			
-		boolean bFlag = drawTargetAI(af);
+		boolean bFlag = drawTargetAI(af, sa);
 		
 		if (!bFlag)
 			return false;
@@ -164,7 +164,7 @@ public class AbilityFactory_ZoneAffecting {
 		return randomReturn;
 	}
 	
-    public static boolean drawTargetAI(AbilityFactory af) {
+    public static boolean drawTargetAI(AbilityFactory af, SpellAbility sa) {
         Target tgt = af.getAbTgt();
         HashMap<String,String> params = af.getMapParams();
         
@@ -173,10 +173,11 @@ public class AbilityFactory_ZoneAffecting {
         int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
         int computerMaxHandSize = AllZone.ComputerPlayer.getMaxHandSize();
         
-        // todo: handle deciding what X would be around here for Braingeyser type cards    
+        // todo: handle deciding what X would be around here for Braingeyser type cards
         int numCards = 1;
         if (params.containsKey("NumCards"))
-            numCards = Integer.parseInt(params.get("NumCards"));
+        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        	
         
         if (tgt != null) {
             // ability is targeted
@@ -218,7 +219,7 @@ public class AbilityFactory_ZoneAffecting {
 		HashMap<String,String> params = af.getMapParams();
 		
 		Card source = sa.getSourceCard();
-		int numCards = Integer.parseInt(params.get("NumCards"));
+		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
