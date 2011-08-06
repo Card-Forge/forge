@@ -129,6 +129,7 @@ public class GameActionUtil {
 
 		upkeep_Copper_Tablet();
 		upkeep_The_Rack();
+		upkeep_Storm_World();
 		upkeep_BlackVise(); 
 		upkeep_Ivory_Tower();
 
@@ -7819,22 +7820,18 @@ public class GameActionUtil {
 
 	public static void upkeep_Ivory_Tower() {
 		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play,player);
 		CardList hand = AllZoneUtil.getPlayerHand(player);
 		
 		if(hand.size() <= 4) {
 			return;
 		}
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Ivory Tower");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Ivory Tower");
 
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			ability = new Ability(list.get(i), "0") {
+		for(Card tower:list) {
+			final Ability ability = new Ability(tower, "0") {
 				public void resolve() {
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-					int numCards = hand.getCards().length;
+					int numCards = AllZoneUtil.getPlayerHand(player).size();
 					if( numCards > 4 ) {
 						AllZone.GameAction.gainLife(player, numCards - 4);
 					}
@@ -7886,6 +7883,35 @@ public class GameActionUtil {
 			}
 		}// if
 	}// upkeep_The_Rack
+	
+	private static void upkeep_Storm_World() {
+		// sanity check. If a player has >= 3 cards The Rack does nothing.
+		final String player = AllZone.Phase.getActivePlayer();
+		final int playerHandSize = AllZoneUtil.getPlayerHand(player).size();
+
+		if(playerHandSize >= 4) {
+			return;
+		}
+		CardList storms = AllZoneUtil.getCardsInPlay("Storm World");
+
+		// determine how much damage to deal the current player
+		final int damage = 4 - playerHandSize;
+
+		if(0 < storms.size()) {
+			for(Card storm:storms) {
+				final Card source = storm;
+				Ability ability = new Ability(source, "0") {
+					@Override
+					public void resolve() {
+						AllZone.GameAction.addDamage(player, source, damage);
+					}
+				};// Ability
+
+				ability.setStackDescription(storm+" -  deals " + damage + " damage to " + player);
+				AllZone.Stack.add(ability);
+			}
+		}// if
+	}// upkeep_Storm_World
 
 	// Currently we don't determine the difference between beginning and end of
 	// upkeep in MTG forge.
@@ -7932,21 +7958,23 @@ public class GameActionUtil {
 
 	private static void upkeep_Copper_Tablet() {
 		/*
-		 * At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
+		 * At the beginning of each player's upkeep, Copper Tablet deals 1
+		 * damage to that player.
 		 */
 		final String player = AllZone.Phase.getActivePlayer();
 		CardList list = AllZoneUtil.getCardsInPlay("Copper Tablet");
 
 		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card F_card = list.get(i);
-			ability = new Ability(list.get(i), "0") {
+		for(Card tablet:list) {
+			final Card source = tablet;
+			ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
+					//AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
+					AllZone.GameAction.addDamage(player, source, 1);
 				}
 			};// Ability
-			ability.setStackDescription("Copper Tablet - deals 1 damage to " + player);
+			ability.setStackDescription(source+" - deals 1 damage to " + player);
 
 			AllZone.Stack.add(ability);
 		}// for

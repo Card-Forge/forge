@@ -3735,6 +3735,7 @@ res/cardsfolder/storm_herd.txt -text svneol=native#text/plain
 res/cardsfolder/storm_seeker.txt -text svneol=native#text/plain
 res/cardsfolder/storm_shaman.txt -text svneol=native#text/plain
 res/cardsfolder/storm_spirit.txt -text svneol=native#text/plain
+res/cardsfolder/storm_world.txt -text svneol=native#text/plain
 res/cardsfolder/stormbind.txt -text svneol=native#text/plain
 res/cardsfolder/stormcallers_boon.txt -text svneol=native#text/plain
 res/cardsfolder/stormcloud_djinn.txt -text svneol=native#text/plain
