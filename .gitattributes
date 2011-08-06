@@ -4846,6 +4846,7 @@ res/cardsfolder/purify.txt -text svneol=native#text/plain
 res/cardsfolder/purity.txt -text svneol=native#text/plain
 res/cardsfolder/purraj_of_urborg.txt svneol=native#text/plain
 res/cardsfolder/pus_kami.txt -text svneol=native#text/plain
+res/cardsfolder/put_away.txt -text svneol=native#text/plain
 res/cardsfolder/putrefaction.txt -text svneol=native#text/plain
 res/cardsfolder/putrefax.txt -text svneol=native#text/plain
 res/cardsfolder/putrefy.txt -text svneol=native#text/plain
