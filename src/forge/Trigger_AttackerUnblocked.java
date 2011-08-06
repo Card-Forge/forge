@@ -12,7 +12,7 @@ public class Trigger_AttackerUnblocked extends Trigger {
 	public boolean performTest(HashMap<String, Object> runParams) {
 		if(mapParams.containsKey("ValidCard"))
 		{
-			if(!matchesValid(runParams.get("Card"),mapParams.get("ValidCard").split(","),hostCard))
+			if(!matchesValid(runParams.get("Attacker"),mapParams.get("ValidCard").split(","),hostCard))
 			{
 				return false;
 			}

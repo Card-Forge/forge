@@ -1105,6 +1105,7 @@ public class AbilityFactory_ChangeZone {
 		        		
 		        		if(params.containsKey("Ninjutsu")) {
 		        			AllZone.Combat.addAttacker(tgtC);
+		        			AllZone.Combat.addUnblockedAttacker(tgtC);
 		        		}
 		    		}
 		    		else

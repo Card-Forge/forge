@@ -425,6 +425,11 @@ public class Combat {
 			if (block.size() == 0){
 				// this damage is assigned to a player by  setPlayerDamage()
 				addUnblockedAttacker(attacker);
+				
+				//Run Unblocked Trigger
+				HashMap<String,Object> runParams = new HashMap<String,Object>();
+				runParams.put("Attacker", attacker);
+				AllZone.TriggerHandler.runTrigger("AttackerUnblocked", runParams);
 			}
 		}
 	}
