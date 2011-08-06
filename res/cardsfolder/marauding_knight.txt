@@ -1,0 +1,12 @@
+Name:Marauding Knight
+ManaCost:2 B B
+Types:Creature Zombie Knight
+Text:no text
+PT:2/2
+K:Protection from white
+K:stPumpSelf:Creature:X/X:no Condition:Marauding Knight gets +1/+1 for each Plains your opponents control.
+SVar:X:Count$Valid Plains.YouDontCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marauding_knight.jpg
+End
