@@ -10819,7 +10819,7 @@ public class CardFactory_Creatures {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw() == card.getController() && hand.size() > 0;                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw().equals(card.getController()) && hand.size() > 0;                   
                 }
                 
             };
@@ -10852,7 +10852,7 @@ public class CardFactory_Creatures {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw() == card.getController() && hand.size() > 0;                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw().equals(card.getController()) && hand.size() > 0;                   
                 }
                 
             };

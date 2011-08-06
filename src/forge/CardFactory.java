@@ -15672,7 +15672,7 @@ public class CardFactory implements NewConstants {
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw() == card.getController();                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw().equals(card.getController());                   
                 }
                 
             };

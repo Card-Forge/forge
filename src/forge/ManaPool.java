@@ -484,18 +484,17 @@ public class ManaPool extends Card {
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
         Omnath_Human.addAll(play.getCards());
         Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
-        String New_ManaPool = "";
+        StringBuffer New_ManaPool = new StringBuffer();
         if(Omnath_Human.size() > 0) {
 	        String Human_ManaPool = has;
 	        int Count = Human_ManaPool.length();
             for(int i = 0; i < Count; i++) {          	
             	if(Human_ManaPool.contains("G") == true) {
             		Human_ManaPool = Human_ManaPool.replaceFirst("G", "");
-            		New_ManaPool = New_ManaPool + "G";
+            		New_ManaPool.append("G");
             	}
             }
-    		New_ManaPool = New_ManaPool.trim();
-            has = New_ManaPool;
+            has = New_ManaPool.toString().trim();
           //Omnath, Locus of Mana Mana Storage
         } else {
             has = "";//Arrays.fill(has, 0); 	
