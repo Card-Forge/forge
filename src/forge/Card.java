@@ -644,7 +644,12 @@ public class Card extends MyObservable {
         ArrayList<String> keyword = getKeyword();
         
         for (int i = 0; i < keyword.size(); i++) {
-            if (!keyword.get(i).toString().contains("CostChange")) {
+            if (!keyword.get(i).toString().contains("CostChange") 
+            		&& 
+            		!keyword.get(i).toString().contains("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")
+            		&& 
+            		!keyword.get(i).toString().contains("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat"))
+            {
                 if (keyword.get(i).toString().contains("WheneverKeyword")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[9]).append("\r\n");
@@ -1980,12 +1985,20 @@ public class Card extends MyObservable {
         return false;
     }
 	
-	public final int getKeywordPosition(String k) {
+	public int getKeywordPosition(String k) {
         ArrayList<String> a = getKeyword();
         for(int i = 0; i < a.size(); i++)
             if(a.get(i).toString().startsWith(k)) return i;
         return -1;
     }
+	
+	public boolean KeywordsContain(String keyword) {
+        ArrayList<String> a = getKeyword();
+        for(int i = 0; i < a.size(); i++)
+            if(a.get(i).toString().contains(keyword)) return true;
+        return false;
+    }
+
 	
 	public boolean hasAnyKeyword(String keywords[])
 	{

@@ -8846,20 +8846,40 @@ public class CardFactory_Creatures {
                             Object o = AllZone.Display.getChoice("Choose color", colors);
                             color = (String) o;
                             card.setChosenColor(color);
-                        } else {
-                            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
-                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+                        } else { 
+                        	// AI chooses the color that appears in the keywords of the most cards in its deck, hand and on battlefield
+                        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
                             CardList list = new CardList();
                             list.addAll(lib.getCards());
                             list.addAll(hand.getCards());
+                            list.addAll(AllZone.Computer_Play.getCards());
                             
-                            if(list.size() > 0) {
-                                String color = CardFactoryUtil.getMostProminentColor(list);
-                                if(!color.equals("")) card.setChosenColor(color);
-                                else card.setChosenColor("black");
-                            } else {
-                                card.setChosenColor("black");
+                            int white = list.getKeywordsContain("white").size();
+                            int blue = list.getKeywordsContain("blue").size();
+                            int black = list.getKeywordsContain("black").size();
+                            int red = list.getKeywordsContain("red").size();
+                            int green = list.getKeywordsContain("green").size();
+                            
+                            String maxColor = "white";
+                            int maxamount = white;
+                            if (maxamount < blue) {
+                            	maxamount = blue;
+                            	maxColor = "blue";
                             }
+                            if (maxamount < black) {
+                            	maxamount = black;
+                            	maxColor = "black";
+                            }
+                            if (maxamount < red) {
+                            	maxamount = red;
+                            	maxColor = "red";
+                            }
+                            if (maxamount < green) {
+                            	maxamount = green;
+                            	maxColor = "green";
+                            }
+                            card.setChosenColor(maxColor);
                         }
                     }
                 };
