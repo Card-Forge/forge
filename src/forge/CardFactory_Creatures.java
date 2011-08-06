@@ -16836,6 +16836,69 @@ public class CardFactory_Creatures {
 		       });
 	    	card.addSpellAbility(ability);
 	    }//*************** END ************ END **************************
+	    else if(cardName.equals("Kor Cartographer"))
+	    {
+	      final Ability ab1 = new Ability(card, "no cost")
+	    	{
+	    		private static final long serialVersionUID = -3361422153566629825L;
+
+	    		public void resolve()
+	    		{
+	    			PlayerZone lib  = AllZone.getZone(Constant.Zone.Library, card.getController());
+	    			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController()); 
+
+	    			CardList landInLib  = new CardList(lib.getCards());
+	    			landInLib = landInLib.getType("Plains");
+
+	    			if (landInLib.size() > 0)
+	    			{
+	    				if (card.getController().equals(Constant.Player.Computer))
+	    				{
+	    					lib.remove(landInLib.get(0));
+	    					landInLib.get(0).tap();
+	    					play.add(landInLib.get(0));
+	    				}
+	    				else
+	    				{
+	    					Object o = AllZone.Display.getChoiceOptional("Select plains card to put into play: ", landInLib.toArray());
+	    					if (o != null)
+	    					{	
+	    						Card crd = (Card)o;
+	    						lib.remove(crd);
+	    						crd.tap();
+	    						play.add(crd);
+	    					}
+	    				}
+	    				AllZone.GameAction.shuffle(card.getController());
+	    			}//if(isCardInPlay)
+	    		}
+
+	    		public boolean canPlayAI()
+	    		{
+	    			CardList landInLib  = new CardList(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).getCards());
+	    			CardList landInPlay = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+
+	    			landInLib  = landInLib.getType("Land");
+	    			landInPlay = landInPlay.getType("Land");
+
+	    			if (landInLib.size() > 0 && landInPlay.size() > 0)
+	    				return true;
+	    			else
+	    				return false;
+
+	    		}
+	    	};//SpellAbility
+	      Command cip = new Command(){/**
+			 * 
+			 */
+			private static final long serialVersionUID = -2084426519099911543L;
+
+			public void execute()
+			{
+				AllZone.Stack.add(ab1);
+			}};
+	      card.addComesIntoPlayCommand(cip);
+	    }//*************** END ************ END **************************
 	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
