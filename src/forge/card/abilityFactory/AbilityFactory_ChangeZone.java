@@ -1415,13 +1415,13 @@ public class AbilityFactory_ChangeZone {
         String origin = params.get("Origin");
 		
 		CardList cards = AllZoneUtil.getCardsInZone(origin);
-		cards = filterListByType(cards, params, "ChangeType", sa);
 		
         Player tgtPlayer = null;
 		if(af.getAbTgt().getTargetPlayers() != null) {
 			tgtPlayer = af.getAbTgt().getTargetPlayers().get(0);
 			cards = AllZoneUtil.getCardsInZone(origin,tgtPlayer);
 		}
+		cards = filterListByType(cards, params, "ChangeType", sa);
 
 		
 		// I don't know if library position is necessary. It's here if it is, just in case
