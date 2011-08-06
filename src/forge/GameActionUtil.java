@@ -9975,7 +9975,7 @@ public class GameActionUtil {
 					c.setBaseAttack(1);
 					c.setBaseDefense(2);
 				}
-				else if ( lcs >=1 && lcs < 3 )
+				else if ( lcs >=1 && lcs < 4 )  //levels 1-3
 				{
 					c.setBaseAttack(3);
 					c.setBaseDefense(6);
@@ -10009,7 +10009,7 @@ public class GameActionUtil {
 					c.setBaseAttack(2);
 					c.setBaseDefense(2);
 				}
-				else if ( lcs >=1 && lcs < 3 )
+				else if ( lcs >=1 && lcs < 4 )  //levels 1-3
 				{
 					c.setBaseAttack(2);
 					c.setBaseDefense(3);
@@ -10017,8 +10017,8 @@ public class GameActionUtil {
 				}
 				else
 				{
-					c.setBaseAttack(5);
-					c.setBaseDefense(5);
+					c.setBaseAttack(4);
+					c.setBaseDefense(4);
 					c.addNonStackingIntrinsicKeyword("Flying");
 					c.addNonStackingIntrinsicKeyword("Vigilance");
 				}
