@@ -10977,6 +10977,20 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command Serpent_of_the_Endless_Sea = new Command() {
+		private static final long serialVersionUID = 8263339065128877297L;
+
+		public void execute() {
+			CardList list = AllZoneUtil.getCardsInPlay("Serpent of the Endless Sea");
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				int pt = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Island").size();
+				c.setBaseAttack(pt);
+				c.setBaseDefense(pt);
+			}
+		}// execute()
+	};
+	
 	public static Command Heedless_One = new Command() {
 		private static final long serialVersionUID = -220650457326100804L;
 
@@ -16100,6 +16114,7 @@ public class GameActionUtil {
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);
+		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
 		commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
