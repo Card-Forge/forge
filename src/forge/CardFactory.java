@@ -2937,7 +2937,7 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -1148528222969323318L;
                 
                 @Override
-                public boolean canPlayAI() 
+                public boolean canPlayAI()
                 {
                     Random r = new Random();
                 	                    
@@ -2945,17 +2945,17 @@ public class CardFactory implements NewConstants {
                     hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
-                    	return true;
+                    	return super.canPlayAI();
                     
                     CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
                     cCards = cCards.getValidCards(Tgts,card.getController(),card);
                     cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
-                    	return true;
+                    	return super.canPlayAI();
                     else
                     {
                     	if (r.nextInt(100) > 67)
-                    		return true;
+                    		return super.canPlayAI();
                     }
                     
                 	return false;
