@@ -7,6 +7,8 @@ public class SpellAbility_Requirements {
 	private Target_Selection select = null;
 	private Cost_Payment payment = null;
 	private boolean isFree = false;
+	private boolean skipStack = false;
+	public void setSkipStack(boolean bSkip) { skipStack = bSkip; }
 	public void setFree(boolean bFree) { isFree = bFree; }
 	
 	private PlayerZone fromZone = null;
@@ -74,7 +76,16 @@ public class SpellAbility_Requirements {
 	
 	public void finishPaying(){
 		if (isFree || payment.isAllPaid())
-			addAbilityToStack();
+		{
+			if(skipStack)
+			{
+				ability.resolve();
+			}
+			else
+			{
+				addAbilityToStack();
+			}
+		}
 		else if (payment.isCanceled()){
 			Card c = ability.getSourceCard();
 			if (bCasting && !c.isCopiedSpell()){	// and not a copy

@@ -3268,6 +3268,44 @@ public class GameAction {
     	}
     }
     
+    public void playSpellAbility_NoStack(SpellAbility sa) {
+    	sa.setActivatingPlayer(AllZone.HumanPlayer);
+    	
+    	if (sa.getPayCosts() != null){
+    		Target_Selection ts = new Target_Selection(sa.getTarget(), sa);    		
+    		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
+    		
+    		payment.changeCost();
+    		
+    		SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+    		req.setSkipStack(true);
+    		req.fillRequirements();
+    	}
+    	else{
+	    	ManaCost manaCost = new ManaCost(sa.getManaCost());
+	    	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+	    		manaCost = new ManaCost("0"); 
+	    	} else {
+	    		
+	    		manaCost = getSpellCostChange(sa, new ManaCost(sa.getManaCost()));    		
+	    	}      
+	        if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
+	        	if (sa.getAfterPayMana() == null){
+	        		sa.resolve();
+		            if(sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
+		            if(sa.isUntapAbility()) sa.getSourceCard().untap();
+		            return;
+	        	}
+	        	else
+	        		AllZone.InputControl.setInput(sa.getAfterPayMana());
+	        }
+	        else if(sa.getBeforePayMana() == null) 
+	        	AllZone.InputControl.setInput(new Input_PayManaCost(sa,true));
+	        else 
+	        	AllZone.InputControl.setInput(sa.getBeforePayMana());
+    	}
+    }
+    
     public SpellAbility[] canPlaySpellAbility(SpellAbility[] sa) {
         ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
         

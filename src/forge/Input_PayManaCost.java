@@ -14,7 +14,33 @@ public class Input_PayManaCost extends Input {
     public ManaCost            manaCost;
     
     private final SpellAbility spell;
+    
+    private boolean skipStack;
    
+    public Input_PayManaCost(SpellAbility sa,boolean noStack) {
+    	skipStack = noStack;
+    	originalManaCost = sa.getManaCost(); // Change
+        originalCard = sa.getSourceCard();
+            
+        spell = sa;
+
+        if(Phase.GameBegins == 1)  {
+        	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+                if(spell.getAfterPayMana() != null) stopSetNext(spell.getAfterPayMana());
+                else {
+                	manaCost = new ManaCost("0"); 
+                    AllZone.Stack.add(spell);
+                }
+        	} else {
+        		manaCost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(originalManaCost)); 
+        	}    	
+        }
+        else
+        {
+        	manaCost = new ManaCost(sa.getManaCost());
+        }
+    }
+    
     public Input_PayManaCost(SpellAbility sa) {
         originalManaCost = sa.getManaCost(); // Change
         originalCard = sa.getSourceCard();
@@ -88,7 +114,14 @@ public class Input_PayManaCost extends Input {
 			if (spell.getAfterPayMana() != null)
 				stopSetNext(spell.getAfterPayMana());
 			else {
-				AllZone.Stack.add(spell);
+				if(skipStack)
+				{
+					spell.resolve();
+				}
+				else
+				{
+					AllZone.Stack.add(spell);
+				}
 				AllZone.InputControl.resetInput();
 			}
 		}

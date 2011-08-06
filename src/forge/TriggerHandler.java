@@ -201,6 +201,7 @@ public class TriggerHandler {
 		}
 		
 		HashMap<String,String> trigParams = regtrig.getMapParams();
+		final Player[] decider = new Player[1];
 		
 		if(mode.equals(trigParams.get("Mode")))
 		{
@@ -227,38 +228,17 @@ public class TriggerHandler {
 			}
 			if(trigParams.containsKey("Optional"))
 			{
-				Player decider = null;
+				
 				if(trigParams.get("Optional").equals("True"))
 				{
-					decider = regtrig.getHostCard().getController();
+					decider[0] = regtrig.getHostCard().getController();
 				}
 				else if(trigParams.get("Optional").equals("OpponentDecides"))
 				{
-					decider = regtrig.getHostCard().getController().getOpponent();
+					decider[0] = regtrig.getHostCard().getController().getOpponent();
 				}
 				
-				if(decider != null)
-				{
-					if(decider.equals(AllZone.HumanPlayer))
-					{
-						StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
-						buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
-						buildQuestion.append("\r\n(");
-						buildQuestion.append(regtrig.getMapParams().get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
-						buildQuestion.append(")");
-						if(!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString()))
-						{
-							return;
-						}
-					}
-					else
-					{
-						if(!sa[0].canPlayAI())
-						{
-							return;
-						}
-					}
-				}
+				
 			}
 
 			//Wrapper ability that checks the requirements again just before resolving, for intervening if clauses.
@@ -362,21 +342,9 @@ public class TriggerHandler {
 				}
 				
 				@Override
-				public String getManaCost()
-				{
-					return sa[0].getManaCost();
-				}
-				
-				@Override
 				public String getMultiKickerManaCost()
 				{
 					return sa[0].getMultiKickerManaCost();
-				}
-				
-				@Override
-				public Ability_Cost getPayCosts()
-				{
-					return sa[0].getPayCosts();
 				}
 				
 				@Override
@@ -400,7 +368,7 @@ public class TriggerHandler {
 				@Override
 				public String getStackDescription()
 				{
-					return sa[0].getStackDescription();
+					return regtrig.toString();
 				}
 				
 				@Override
@@ -732,7 +700,38 @@ public class TriggerHandler {
 						return;
 					}
 					
-					sa[0].resolve();
+					if(decider[0] != null)
+					{
+						if(decider[0].equals(AllZone.HumanPlayer))
+						{
+							StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
+							buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
+							buildQuestion.append("\r\n(");
+							buildQuestion.append(regtrig.getMapParams().get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
+							buildQuestion.append(")");
+							if(!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString()))
+							{
+								return;
+							}
+						}
+						else
+						{
+							if(!sa[0].canPlayAI())
+							{
+								return;
+							}
+						}
+					}
+					
+					//sa[0].resolve();
+					if(sa[0].getSourceCard().getController().equals(AllZone.HumanPlayer))
+					{
+						AllZone.GameAction.playSpellAbility_NoStack(sa[0]);
+					}
+					else
+					{
+						ComputerUtil.playNoStack(sa[0]);
+					}
 				}
 			};
 			wrapperAbility.setTrigger(true);

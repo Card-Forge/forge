@@ -75,7 +75,7 @@ public abstract class Trigger {
 	public String toString()
 	{
 		if (mapParams.containsKey("TriggerDescription")) {
-			return mapParams.get("TriggerDescription");
+			return mapParams.get("TriggerDescription").replace("CARDNAME", hostCard.getName());
 		}
 		else return "";
 	}
