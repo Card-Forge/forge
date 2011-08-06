@@ -7056,14 +7056,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && c.getKeyword().contains("Flying");
-                        }
-                    });
+                    CardList list = AllZoneUtil.getCreaturesInPlayWithKeyword("Flying");
                     
                     for(int i = 0; i < list.size(); i++)
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);

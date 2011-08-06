@@ -17,11 +17,27 @@ public class AllZoneUtil {
 	 * use to get a list of creatures in play for a given player
 	 * 
 	 * @param player the player to get creatures for
-	 * @return a CardList containing all creatures a give player has in play
+	 * @return a CardList containing all creatures a given player has in play
 	 */
 	public static CardList getCreaturesInPlay(final String player) {
 		CardList creatures = AllZoneUtil.getPlayerCardsInPlay(player);
 		return creatures.filter(AllZoneUtil.creatures);
+	}
+	
+	/**
+	 * use to get a list of creatures in play with a given keyword
+	 * 
+	 * @param keyword the keyword to get creatures for
+	 * @return a CardList containing all creatures in play with a given keyword
+	 */
+	public static CardList getCreaturesInPlayWithKeyword(final String keyword) {
+		CardList list = getCreaturesInPlay();
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.getKeyword().contains(keyword);
+            }
+        });
+        return list;
 	}
 	
 	/**
@@ -459,6 +475,12 @@ public class AllZoneUtil {
 		}
 	};
 	
+	/**
+	 * get a CardListFilter to filter in only cards that can be targeted
+	 * 
+	 * @param source - the card to be the source for the target
+	 * @return a CardListFilter to only add cards that can be targeted
+	 */
 	public static CardListFilter getCanTargetFilter(final Card source) {
 		CardListFilter canTarget = new CardListFilter() {
 			public boolean addCard(Card c) {
@@ -466,5 +488,20 @@ public class AllZoneUtil {
 			}
 		};
 		return canTarget;
+	}
+	
+	/**
+	 * get a CardListFilter to filter a CardList for a given keyword
+	 * 
+	 * @param keyword - the keyword to look for
+	 * @return a CardListFilter to only add cards with the given keyword
+	 */
+	public static CardListFilter getKeywordFilter(final String keyword) {
+		CardListFilter filter = new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.getKeyword().contains(keyword);
+			}
+		};
+		return filter;
 	}
 }
