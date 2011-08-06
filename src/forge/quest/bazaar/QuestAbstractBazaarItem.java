@@ -28,7 +28,7 @@ public abstract class QuestAbstractBazaarItem {
         this.price = price;
 
         //create a blank image placeholder
-        Image emptyImage = new BufferedImage(40,40,BufferedImage.TYPE_INT_RGB);
+        Image emptyImage = new BufferedImage(40, 40, BufferedImage.TYPE_INT_RGB);
         image = new ImageIcon(emptyImage);
 
     }
@@ -38,12 +38,12 @@ public abstract class QuestAbstractBazaarItem {
         this.description = description;
         this.price = price;
 
-        if (image == null){
+        if (image == null) {
             //create a blank image placeholder
-            Image emptyImage = new BufferedImage(40,40,BufferedImage.TYPE_INT_RGB);
-            image = new ImageIcon(emptyImage);
+            Image emptyImage = new BufferedImage(40, 40, BufferedImage.TYPE_INT_RGB);
+            this.image = new ImageIcon(emptyImage);
         }
-        else{
+        else {
             this.image = image;
         }
     }
@@ -53,15 +53,14 @@ public abstract class QuestAbstractBazaarItem {
      */
     public abstract void purchaseItem();
 
-    protected final JPanel getItemPanel()
-    {
-        ImageIcon resizedImage = new ImageIcon(image.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH));
+    protected final JPanel getItemPanel() {
+        ImageIcon resizedImage = new ImageIcon(image.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 
         JLabel iconLabel = new JLabel(resizedImage);
         JLabel nameLabel = new JLabel(name);
         nameLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
 
-        JLabel descriptionLabel = new JLabel("<html>"+description+"</html>");
+        JLabel descriptionLabel = new JLabel("<html>" + description + "</html>");
         descriptionLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 
         JLabel priceLabel = new JLabel("<html><b>Cost:</b> " + price + " credits</html>");
@@ -78,7 +77,7 @@ public abstract class QuestAbstractBazaarItem {
             }
         });
 
-        if (AllZone.QuestData.getCredits() < price){
+        if (AllZone.QuestData.getCredits() < price) {
             purchaseButton.setEnabled(false);
         }
 
@@ -87,7 +86,7 @@ public abstract class QuestAbstractBazaarItem {
         BorderLayout layout = new BorderLayout();
         layout.setHgap(3);
         itemPanel.setLayout(layout);
-        
+
 
         layout = new BorderLayout();
         layout.setVgap(3);
@@ -102,9 +101,9 @@ public abstract class QuestAbstractBazaarItem {
 
         itemPanel.add(iconLabel, BorderLayout.WEST);
         itemPanel.add(centerPanel, BorderLayout.CENTER);
-        itemPanel.add(buyPanel,BorderLayout.EAST);
+        itemPanel.add(buyPanel, BorderLayout.EAST);
 
-        itemPanel.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 1), new EmptyBorder(5,5,5,5)));
+        itemPanel.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 1), new EmptyBorder(5, 5, 5, 5)));
 
         return itemPanel;
     }
