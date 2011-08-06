@@ -17131,7 +17131,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
 	
 	//*************** START *********** START **************************
-    else if (cardName.equals("Time Stretch"))
+    else if (cardName.equals("Time Stretch") || cardName.equals("Time Warp"))
 	{
     	final SpellAbility spell = new Spell(card)
     	{
@@ -17139,7 +17139,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
 			public void resolve() {
 				AllZone.Phase.addExtraTurn(getTargetPlayer());
-				AllZone.Phase.addExtraTurn(getTargetPlayer());
+				if (cardName.equals("Time Stretch"));
+					AllZone.Phase.addExtraTurn(getTargetPlayer());
 			}
     	};
     	card.clearSpellAbility();

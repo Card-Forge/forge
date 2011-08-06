@@ -141,6 +141,24 @@ package forge;
                  return null;
              }
            }
+           /*
+           else if (phase.equals(Constant.Phase.End_Of_Combat))
+           {
+        	  if (! skipPhase())
+        		  return new Input_EndOfCombat();
+        	  else
+        	  {
+        		  AllZone.Phase.setNeedToNextPhase(true);
+        	  }
+        	  return null;
+           }
+           */
+           else if (phase.equals(Constant.Phase.End_Of_Combat))
+           {
+        	   AllZone.EndOfCombat.executeAt();
+        	   AllZone.Phase.setNeedToNextPhase(true);
+        	   return null;
+           }
            else if(phase.equals(Constant.Phase.At_End_Of_Turn))
            {
             AllZone.EndOfTurn.executeAt();
@@ -152,20 +170,19 @@ package forge;
             //return getInput();
             return null;
            }
-                else if(phase.equals(Constant.Phase.End_Of_Turn))
-                {
-                  if(AllZone.Display.stopEOT())
-                    return new Input_EOT();
-                  else
-                  {
-                   
-                   //AllZone.Phase.nextPhase();
-                   //for debugging: System.out.println("need to nextPhase(InputControl.getInput(),phase.equals(End_Of_Turn)) = true");
-                   AllZone.Phase.setNeedToNextPhase(true);
-                    //do not return getInput() here. There is now a check for null in this method's caller.
-                   //return getInput();
-                   return null;
-                  }
+           else if(phase.equals(Constant.Phase.End_Of_Turn))
+           {
+              if(AllZone.Display.stopEOT())
+                return new Input_EOT();
+              else
+              {   
+               //AllZone.Phase.nextPhase();
+               //for debugging: System.out.println("need to nextPhase(InputControl.getInput(),phase.equals(End_Of_Turn)) = true");
+               AllZone.Phase.setNeedToNextPhase(true);
+                //do not return getInput() here. There is now a check for null in this method's caller.
+               //return getInput();
+               return null;
+              }
            }
            else if(phase.equals(Constant.Phase.Until_End_Of_Turn))
            {

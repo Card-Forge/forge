@@ -68,7 +68,7 @@ public interface Constant {
         public static final String Combat_Declare_Blockers_InstantAbility         = "Declare Blockers - Play Instants and Abilities";
         public static final String Combat_Damage                                  = "Combat Damage";
         public static final String Combat_FirstStrikeDamage                       = "First Strike Damage";
-        //public static final String End_Combat  = "End of Combat";
+        public static final String End_Of_Combat  								  = "End of Combat";
         public static final String Main2                                          = "Main2";
         public static final String At_End_Of_Turn                                 = "At End of Turn";
         public static final String End_Of_Turn                                    = "End of Turn";

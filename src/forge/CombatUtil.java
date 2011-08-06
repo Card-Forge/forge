@@ -1535,6 +1535,121 @@ public class CombatUtil
 		  a.untap();
 	  }
 	  
+	  if (b.getName().equals("Frostweb Spider") && (a.getKeyword().contains("Flying")) )
+	  {
+		  final Card spider = b;
+		  
+		  final Ability ability = new Ability(b, "0")
+		  {
+			  public void resolve()
+			  {
+				  spider.addCounter(Counters.P1P1, 1);
+			  }
+		  };
+		  
+		  ability.setStackDescription(spider + " - gets a +1/+1 counter.");
+		  
+		  final Command atEOC = new Command()
+		  {
+			private static final long serialVersionUID = 6617320324660612694L;
+
+			public void execute()
+			{
+				if (AllZone.GameAction.isCardInPlay(spider))
+					AllZone.Stack.add(ability);
+			}
+		  };
+		  
+		  AllZone.EndOfCombat.addAt(atEOC);
+	  }//Frostweb Spider
+	  else if (b.getName().equals("Abomination") && 
+			   (CardUtil.getColors(a).contains(Constant.Color.White) || CardUtil.getColors(a).contains(Constant.Color.Green)) )
+	  {
+		  final Card attacker = a;
+		  final Ability ability = new Ability(b, "0")
+		  {
+			  public void resolve()			  
+			  {
+				  if (AllZone.GameAction.isCardInPlay(attacker))
+				  {
+					  AllZone.GameAction.destroy(attacker);
+				  }
+			  }
+		  };
+		  
+		  ability.setStackDescription(b + " - destroy blocked green or white creature.");
+		 
+		  final Command atEOC = new Command()
+		  {
+			private static final long serialVersionUID = 5854485314766349980L;
+
+			public void execute()
+			{
+				AllZone.Stack.add(ability);
+			}
+		  };
+		  
+		  AllZone.EndOfCombat.addAt(atEOC);
+	  }
+	  if (a.getName().equals("Abomination") && 
+			   (CardUtil.getColors(b).contains(Constant.Color.White) || CardUtil.getColors(b).contains(Constant.Color.Green)) )
+	  {
+		  final Card blocker = b;
+		  final Ability ability = new Ability(a, "0")
+		  {
+			  public void resolve()			  
+			  {
+				  AllZone.GameAction.destroy(blocker);
+			  }
+		  };
+		  
+		  ability.setStackDescription(b + " - destroy blocking green or white creature.");
+		 
+		  final Command atEOC = new Command()
+		  {
+			
+			private static final long serialVersionUID = -9077416427198135373L;
+
+			public void execute()
+			{
+				if (AllZone.GameAction.isCardInPlay(blocker))
+					AllZone.Stack.add(ability);
+			}
+		  };
+		  
+		  AllZone.EndOfCombat.addAt(atEOC);
+	  }
+	  
+	  else if (b.getName().equals("AEther Membrane") )
+	  {
+		  final Card attacker = a;
+		  final Ability ability = new Ability(b, "0")
+		  {
+			  public void resolve()			  
+			  {
+				  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, attacker.getOwner());
+				  AllZone.GameAction.moveTo(hand, attacker);
+			  }
+		  };
+		  
+		  ability.setStackDescription(b + " - return blocked creature to owner's hand.");
+		 
+		  final Command atEOC = new Command()
+		  {
+			private static final long serialVersionUID = 5263273480814811314L;
+
+			public void execute()
+			{
+				 if (AllZone.GameAction.isCardInPlay(attacker))
+					 AllZone.Stack.add(ability);
+			}
+		  };
+		  
+		  AllZone.EndOfCombat.addAt(atEOC);
+	  }
+	  
+	  
+	  	  
 	  a.setCreatureGotBlockedThisTurn(true);
   }
 }//Class CombatUtil

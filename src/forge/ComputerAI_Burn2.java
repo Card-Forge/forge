@@ -127,6 +127,11 @@ public class ComputerAI_Burn2 implements Computer {
         AllZone.Phase.setNeedToNextPhase(true);
     }
     
+    public void end_of_combat()
+    {
+    	AllZone.Phase.setNeedToNextPhase(true);
+    }
+    
     //end of Human's turn
     public void end_of_turn() {
         //AllZone.Phase.nextPhase();

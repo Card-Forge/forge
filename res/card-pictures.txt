@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+time_warp.jpg				http://www.wizards.com/global/images/magic/general/time_warp.jpg
 deadly_grub.jpg             http://www.wizards.com/global/images/magic/general/deadly_grub.jpg
 promised_kannushi.jpg       http://www.wizards.com/global/images/magic/general/promised_kannushi.jpg
 body_of_jukai.jpg           http://www.wizards.com/global/images/magic/general/body_of_jukai.jpg
@@ -136,7 +137,7 @@ mortivore.jpg               http://www.wizards.com/global/images/magic/general/m
 dimir_cutpurse.jpg          http://www.wizards.com/global/images/magic/general/dimir_cutpurse.jpg
 molimo_maro_sorcerer.jpg    http://www.wizards.com/global/images/magic/general/molimo_maro_sorcerer.jpg
 maro.jpg                    http://www.wizards.com/global/images/magic/general/maro.jpg
-multani_maro_sorcerer.jpg   http://www.wizards.com/global/images/magic/general/multani_maro_sorcerer.jpg
+multani_maro_sorcerer.jpg   http://www.wizards.com/global/images/magic/general/multani_maro_morcerer.jpg
 meddling_mage.jpg	 		http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
 gravelgill_duo.jpg          http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
 safehold_duo.jpg            http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
