@@ -11455,7 +11455,13 @@ public class CardFactory implements NewConstants {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                     } else if(zone.is(Constant.Zone.Play)) {
                         spell.setTargetCard(c);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if (this.isFree()) {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                            stop();                  
+                        }
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -16654,9 +16660,6 @@ public class CardFactory implements NewConstants {
     	  final Ability_Tap freeCast = new Ability_Tap(card, "2")
           {
 
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 4455819149429678456L;
 
 			@Override
@@ -16694,7 +16697,7 @@ public class CardFactory implements NewConstants {
               
               @Override
               public void showMessage() {
-                  AllZone.Display.showMessage("Your may exile an Instant with converted mana cost two or less from your hand");
+                  AllZone.Display.showMessage("You may exile an Instant with converted mana cost two or less from your hand");
                   ButtonUtil.enableOnlyCancel();
               }
               
@@ -16742,7 +16745,7 @@ public class CardFactory implements NewConstants {
               private static final long serialVersionUID = 9202753910259054021L;
               
               public void execute() {
-                  ability.setStackDescription("Imprint — " + card.getController()
+                  ability.setStackDescription("Imprint - " + card.getController()
                 		  + " may exile an instant card with converted mana cost 2 or less from their hand.");
                   AllZone.Stack.add(ability);
               }
