@@ -1,3 +1,10 @@
+Halimar Depths
+no cost
+Land
+When Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.
+Comes into play tapped.
+tap: add U
+
 Filigree Sages
 3 U
 Artifact Creature Vedalken Wizard
