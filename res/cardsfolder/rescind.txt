@@ -1,9 +1,9 @@
 Name:Rescind
 ManaCost:1 U U
 Types:Instant
-Text:Return target permanent to its owner's hand.
+Text:
 K:Cycling:2
-K:spBounceTgt:Permanent:Hand
+A:SP$Bounce|Cost$1 U U|ValidTgts$Permanent|TgtPrompt$Select target permanent|Destination$Hand|SpellDescription$Return target permanent to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rescind.jpg
 End

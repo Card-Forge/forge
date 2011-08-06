@@ -1,8 +1,8 @@
 Name:Second Thoughts
 ManaCost:4 W
 Types:Instant
-Text:Exile target attacking creature.
-K:spBounceTgt:Creature.attacking:Exile
+Text:no text
+A:SP$Bounce|Cost$4 W|ValidTgts$Creature.attacking|TgtPrompt$Select target attacking creature|Destination$Exile|SpellDescription$Exile target attacking creature.
 K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
