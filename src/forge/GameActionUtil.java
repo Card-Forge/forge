@@ -12755,8 +12755,8 @@ public class GameActionUtil {
 			int toughnessbonus = 0;
 			String[] Keyword = Keyword_Details.split("/",3);
 			
-			Keyword[0].replace("+","");
-			Keyword[1].replace("+","");
+			Keyword[0] = Keyword[0].replace("+","");
+			Keyword[1] = Keyword[1].replace("+","");
 			
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		// the xCount takes places before
@@ -12795,8 +12795,8 @@ public class GameActionUtil {
 			int toughnessbonus = 0;
 			String[] Keyword = Keyword_Details[2].split("/",3);
 			
-			Keyword[0].replace("+","");
-			Keyword[1].replace("+","");
+			Keyword[0] = Keyword[0].replace("+","");
+			Keyword[1] = Keyword[1].replace("+","");
 			
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		
