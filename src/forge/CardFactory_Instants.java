@@ -2220,7 +2220,9 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                     final Card creature = getTargetCard();
-                    final Ability_Tap tBanish = new Ability_Tap(creature) {
+                    Ability_Cost abCost = new Ability_Cost("T", creature.getName(), true);
+                    Target tgt = new Target("Select target nonland permanent", new String[] {"Permanent.nonLand"});
+                    final Ability_Activated tBanish = new Ability_Activated(creature, abCost, tgt) {
                         private static final long serialVersionUID = -1008113001678623984L;
                         
                         @Override
@@ -2233,29 +2235,16 @@ public class CardFactory_Instants {
                             StringBuilder sb = new StringBuilder();
                             sb.append(creature).append(" - Return").append(getTargetCard()).append("to its owner's hand");
                             setStackDescription(sb.toString());
-                            final Card[] target = new Card[1];
-                            target[0] = getTargetCard();
-                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target[0].getOwner());
                             
-                            if(AllZone.GameAction.isCardInPlay(target[0])
-                                    && CardFactoryUtil.canTarget(creature, target[0])) {
-                                AllZone.GameAction.moveTo(hand, target[0]);
+                            final Card target = getTargetCard();
+                            if(AllZone.GameAction.isCardInPlay(target)
+                                    && CardFactoryUtil.canTarget(creature, target)) {
+                                AllZone.GameAction.moveToHand(target);
                             }
                         }//resolve()
                     };//tBanish;
-                    tBanish.setDescription("tap: Return target nonland permanent to its owner's hand.");
+                    tBanish.setDescription(abCost+"Return target nonland permanent to its owner's hand.");
                     creature.addSpellAbility(tBanish);
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
-                    all = all.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (!c.isLand() && CardFactoryUtil.canTarget(creature, c));
-                        }
-                    });
-                    
-                    tBanish.setBeforePayMana(CardFactoryUtil.input_targetSpecific(tBanish, all,
-                            "Return target nonland permanent to its owner's hand.", true, false));
                     AllZone.EndOfTurn.addUntil(new Command() {
                         private static final long serialVersionUID = -7819140065166374666L;
                         
