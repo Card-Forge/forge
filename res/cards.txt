@@ -378,7 +378,7 @@ Etherium Sculptor
 Artifact Creature Vedalken Artificer
 Artifact spells you cast cost 1 less to cast.
 1/2
-CostChange:Player:Less:1:Spell:All:All:NoSpecial
+CostChange:Player:Less:1:Spell:All:Artifact:NoSpecial
 
 Chill
 1 U
