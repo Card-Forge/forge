@@ -2,7 +2,7 @@ Name:Burst of Energy
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$Untap|Cost$W|TgtPrompt$Choose target permanent|ValidTgts$Permanent|SpellDescription$Untap target Permanent.
+A:SP$Untap | Cost$ W | TgtPrompt$ Choose target permanent | ValidTgts$ Permanent | SpellDescription$ Untap target Permanent.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_of_energy.jpg
