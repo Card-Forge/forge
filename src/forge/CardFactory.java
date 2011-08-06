@@ -18549,14 +18549,8 @@ public class CardFactory implements NewConstants {
                     for(int i = 0; i < c.length; i++)
                         AllZone.GameAction.discard(c[i]);
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    CardList creatures = new CardList(play.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.isCreature();
-                    	}
-                    });
                     // Draw a card for each creature
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
                     for(int i = 0; i < creatures.size(); i++)
                         AllZone.GameAction.drawCard(player);
                 	
@@ -18564,16 +18558,9 @@ public class CardFactory implements NewConstants {
 
                 @Override
                 public boolean canPlayAI() {
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    CardList creatures = new CardList(play.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.isCreature();
-                    	}
-                    });
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-                    CardList handList = new CardList(hand.getCards());
-                    return creatures.size() > handList.size();
+                	CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+                    CardList hand = AllZoneUtil.getPlayerHand(Constant.Player.Computer);
+                    return creatures.size() > hand.size();
                 }
                 
             };//Ability_Tap
