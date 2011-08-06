@@ -1,0 +1,10 @@
+Name:Unyaro Griffin
+ManaCost:3 W
+Types:Creature Griffin
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | Type$ Spell | CounterValid$ Instant.Red,Sorcery.Red | SpellDescription$ Counter target red instant or sorcery spell.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_griffin.jpg
+End
