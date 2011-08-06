@@ -2,6 +2,7 @@
 package forge;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -2490,6 +2491,59 @@ class CardFactory_Lands {
         	};
 
         	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
+      
+        //*************** START ************ START **************************
+        else if(cardName.equals("Meteor Crater")) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -1070869703885279573L;
+
+				@Override
+        		public void resolve() {
+					CardList perms = AllZoneUtil.getPlayerCardsInPlay(card.getController());
+					ArrayList<String> colors = new ArrayList<String>();
+					for(Card c:perms) {
+						if(c.isBlack() && !colors.contains(Constant.Color.Black)) colors.add(Constant.Color.Black);
+						if(c.isBlue() && !colors.contains(Constant.Color.Blue)) colors.add(Constant.Color.Blue);
+						if(c.isGreen() && !colors.contains(Constant.Color.Green)) colors.add(Constant.Color.Green);
+						if(c.isRed() && !colors.contains(Constant.Color.Red)) colors.add(Constant.Color.Red);
+						if(c.isWhite() && !colors.contains(Constant.Color.White)) colors.add(Constant.Color.White);
+					}
+        			String color = "";
+
+        			Object o = AllZone.Display.getChoice("Choose mana color", colors.toArray());
+        			color = (String) o;
+
+        			if(color.equals("white")) color = "W";
+        			else if(color.equals("blue")) color = "U";
+        			else if(color.equals("black")) color = "B";
+        			else if(color.equals("red")) color = "R";
+        			else if(color.equals("green")) color = "G";
+
+        			AllZone.ManaPool.addManaToFloating(color, card);
+        		}
+				
+				@Override
+				public boolean canPlay() {
+					CardList perms = AllZoneUtil.getPlayerCardsInPlay(card.getController());
+					for(Card c:perms) {
+						if(c.isBlack() || c.isBlue() || c.isGreen() || c.isRed() || c.isWhite()) return true;
+					}
+					return false;
+				}
+        	};
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append(abCost).append("Choose a color of a permanent you control. Add one mana of that color to your mana pool.");
+        	mana.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(cardName).append(" - add one mana of that color to your mana pool.");
+        	mana.setStackDescription(sbStack.toString());
+        	
+        	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
         
         return card;

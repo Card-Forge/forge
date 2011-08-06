@@ -1,0 +1,7 @@
+Name:Meteor Crater
+ManaCost:no cost
+Types:Land
+Text:no text
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_crater.jpg
+End
