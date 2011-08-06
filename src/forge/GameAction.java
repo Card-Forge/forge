@@ -2187,7 +2187,7 @@ public class GameAction {
         if(!AllZone.GameAction.isCardInPlay(c)
                 || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return false;        
         
-        if(c.getShield() > 0) {
+        if(c.getShield() > 0 && !c.getKeyword().contains("CARDNAME can't be regenerated.")) {
             c.subtractShield();
             c.setDamage(0);
             c.tap();
