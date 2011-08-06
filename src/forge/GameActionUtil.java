@@ -2689,8 +2689,6 @@ public class GameActionUtil {
 		}
 		if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
 		else if(c.getName().equals("Ob Nixilis, the Fallen")) landfall_Ob_Nixilis(c);
-		else if(c.getName().equals("Ior Ruin Expedition")
-				|| c.getName().equals("Khalni Heart Expedition")) landfall_AddQuestCounter(c);
 		else if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
 		else if(c.getName().equals("Avenger of Zendikar")) landfall_Avenger_of_Zendikar(c);
 		else if(c.getName().equals("Eternity Vessel")) landfall_Eternity_Vessel(c);
@@ -2893,26 +2891,6 @@ public class GameActionUtil {
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
 		} else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
-	}
-
-	private static void landfall_AddQuestCounter(Card c) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.addCounter(Counters.QUEST, 1);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - gets a Quest counter.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
 	}
 
 	private static void landfall_Lotus_Cobra(final Card c) {
