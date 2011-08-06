@@ -129,7 +129,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             text = text.replaceAll(regex,"\r\n$0\r\n");
             
             //displays keywords that have dots in them a little better:
-            regex = "., ";
+            regex = "\\., ";
             text = text.replaceAll(regex,"\r\n");
             
             area.append(text);
