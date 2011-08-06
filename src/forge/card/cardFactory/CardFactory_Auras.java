@@ -1948,17 +1948,37 @@ class CardFactory_Auras {
                         player = AllZone.ComputerPlayer;
                     }
                     CardList list = AllZoneUtil.getPlayerTypeInPlay(player, type);
-
+                    
                     if (list.isEmpty()) return false;
                     
-                    //TODO - maybe do something intelligent here if it's not a curse, like
-                    //checking the aura magnet list
+                    // Enchant a random Aura magnet if one is in play.
+                    // Else enchant a random unenchanted card if one exists.
+                    // Enchant a previously enchanted card if no unenchanted cards exist.
                     
+                    if (! curse) {
+                        CardList magnets = list.getEnchantMagnets();
+                        
+                        if (! magnets.isEmpty()) {
+                            list = magnets;
+                            
+                        } else {
+                            CardList notEnchanted = list.filter(AllZoneUtil.unenchanted);
+                            if (! notEnchanted.isEmpty()) {
+                                list = notEnchanted;
+                            }
+                        }
+                    } else {
+                        CardList notEnchanted = list.filter(AllZoneUtil.unenchanted);
+                        if (! notEnchanted.isEmpty()) {
+                            list = notEnchanted;
+                        }
+                    }
                     // We do not want the AI to always enchant the same card.
-                    list.shuffle();
                     
+                    list.shuffle();
                     setTargetCard(list.get(0));
                     return super.canPlayAI();
+                    
                 }//canPlayAI()
 
                 @Override
