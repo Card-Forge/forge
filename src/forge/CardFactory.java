@@ -10487,6 +10487,45 @@ public class CardFactory implements NewConstants {
             
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Tumble Magnet")) {
+        	/*
+        	 * Tumble Magnet enters the battlefield with three charge
+        	 * counters on it.
+        	 * Tap, Remove a charge counter from Tumble Magnet: Tap target
+        	 * artifact or creature.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+				private static final long serialVersionUID = -5513092896385146010L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+				
+				@Override
+				public boolean canPlay() {
+					return card.getCounters(Counters.CHARGE) > 0;
+				}
+
+        		@Override
+        		public void resolve() {
+        			Card target = getTargetCard();
+        			//remove charge counter
+        			card.subtractCounter(Counters.CHARGE, 1);
+        			card.tap();
+        			
+        			if(CardFactoryUtil.canTarget(card, target) && AllZoneUtil.isCardInPlay(target)) {
+        				target.tap();
+        			}
+        		}
+
+        	};//Ability
+
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Creature;Artifact"));
+        }//*************** END ************ END **************************
 
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
