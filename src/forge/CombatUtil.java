@@ -2226,10 +2226,10 @@ public class CombatUtil {
     
     public static void checkBlockedAttackers(final Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
-    	if(!a.getCreatureGotBlockedThisCombat()) 
+        if(!a.getCreatureGotBlockedThisCombat()) { 
+        	
     		AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null);
     	
-        if(!a.getCreatureGotBlockedThisCombat()) {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
             
@@ -2267,11 +2267,8 @@ public class CombatUtil {
 		        for(int i=0 ; i < amount ; i++)
 		        	AllZone.Stack.add(ability);
         	}
-        }
-        
-        //Rampage
-        //not sure why this is "not" - but I copied from Bushido...
-        if(!a.getCreatureGotBlockedThisCombat()) {
+        	
+        	//Rampage
         	ArrayList<String> keywords = a.getKeyword();
         	Pattern p = Pattern.compile("Rampage [0-9]+");
         	Matcher m;
@@ -2285,8 +2282,8 @@ public class CombatUtil {
         				executeRampageAbility(a, magnitude, numBlockers);
         			}
         		} //find
-        	}
-        }//Rampage
+        	}//Rampage
+        }
         
         if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking")) {
             int flankingMagnitude = 0;
@@ -2460,8 +2457,7 @@ public class CombatUtil {
                     player.drawCards(numCards);
                 }
             }// player isComputer()
-            else if (computerLibrarySize >= (2 * numCards) 
-                        && computerHandSize <= (computerMaxHandSize - numCards)) {
+            else if (computerLibrarySize >= 3 + numCards && computerHandSize < computerMaxHandSize) {
                 player.drawCards(numCards);
             }
         }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
@@ -2492,7 +2488,7 @@ public class CombatUtil {
         }//Frostweb Spider
         
         
-        else if (b.getName().equals("Alaborn Zealot")) {
+        else if (b.getName().equals("Alaborn Zealot") || b.getName().equals("Loyal Sentry")) {
         	final Card blocker = b; 
         	final Card attacker = a;
         	final Ability ability = new Ability(b, "0") {
@@ -2504,13 +2500,14 @@ public class CombatUtil {
         	};
         	
         	StringBuilder sb = new StringBuilder();
-        	sb.append(b).append(" - destroy attacking creature.");
+        	sb.append(b).append(" - destroy blocked creature and itself.");
         	ability.setStackDescription(sb.toString());
         	
         	AllZone.Stack.add(ability);
         }
 
-        else if(b.getName().equals("AEther Membrane") || b.getName().equals("Aether Membrane") || b.getName().equals("Wall of Tears")) {
+        else if(b.getName().equals("AEther Membrane") || b.getName().equals("Aether Membrane") || b.getName().equals("Wall of Tears") 
+        		|| b.getName().equals("Kaijin of the Vanishing Touch")) {
             final Card attacker = a;
             final Ability ability = new Ability(b, "0") {
                 @Override
