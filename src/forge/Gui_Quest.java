@@ -397,6 +397,10 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Data 3		hard	Korlash, Heir to Blackblade, Liliana Vess");
         sb.append("\r\n");
+        sb.append("Dino 2		medium	Sloth' affinity brown deck, Affinity for artifacts and Modular cards");
+        sb.append("\r\n");
+        sb.append("Dino 3		hard	Sloth' affinity brown deck, Affinity for artifacts and Modular cards");
+        sb.append("\r\n");
         sb.append("Doc Holiday 1		easy	Morph + Regenerate GWU creatures");
         sb.append("\r\n");
         sb.append("Doc Holiday 2		medium	Morph + Regenerate GWU creatures");
