@@ -55,9 +55,7 @@ public class Input_Untap extends Input {
     		}
     	}
     	
-    	CardList allp = new CardList();
-    	allp.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-		allp.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards()); 
+    	CardList allp = AllZoneUtil.getCardsInPlay(); 
     	
 		for(Card ca : allp) {
 			if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {

@@ -11591,6 +11591,32 @@ public class CardFactory implements NewConstants {
         	ability.setDescription(abCost+"Regenerate target black creature.");
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Wrath of Marit Lage")) {
+        	/*
+        	 * When Wrath of Marit Lage enters the battlefield, tap all red creatures.
+        	 */
+        	final Ability comesIntoPlayAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	CardList red = AllZoneUtil.getCreaturesInPlay();
+                	red = red.filter(AllZoneUtil.red);
+                	for(Card c:red) c.tap();
+                }//resolve()
+            }; //comesIntoPlayAbility
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -8002808964908985221L;
+
+				public void execute() {
+                	comesIntoPlayAbility.setStackDescription(card.getName()+" - tap all red creatures.");
+                	AllZone.Stack.add(comesIntoPlayAbility);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
 
         return postFactoryKeywords(card);
     }//getCard2
