@@ -118,7 +118,17 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         if(!faceDown) {
             //card text
             if(area.length() != 0) area.append("\n");
-            area.append(card.getText());
+            String text = card.getText();
+            //LEVEL [0-9]+-[0-9]+
+            //LEVEL [0-9]+\+
+            
+            String regex = "LEVEL [0-9]+-[0-9]+ ";
+            String output = text.replaceAll(regex,"$0\r\n");
+            
+            regex = "LEVEL [0-9]+\\+ ";
+            output = output.replaceAll(regex,"\r\n$0\r\n");
+            
+            area.append(output);
         }
         
         //counter text
