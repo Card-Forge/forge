@@ -1,7 +1,7 @@
 Name:Diplomatic Immunity
 ManaCost:1 U
 Types:Enchantment Aura
-Text:Enchanted creature has shroud.
+Text:no text
 K:Enchant creature
 K:enPump:Shroud
 K:Shroud

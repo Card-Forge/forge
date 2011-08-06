@@ -1,7 +1,7 @@
 Name:Drake Umbra
 ManaCost:4 U
 Types:Enchantment Aura
-Text:Enchanted creature gets +3/+3 and has flying.
+Text:no text
 K:Enchant creature
 K:Totem armor
 K:enPump:+3/+3/Flying
