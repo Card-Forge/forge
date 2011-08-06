@@ -165,20 +165,50 @@ public class ReadDraftBoosterPack implements NewConstants {
     }//getRandomCard()
     
     private void setup() {
-        commonList = readFile(ForgeProps.getFile(DRAFT.COMMON));
-        uncommonList = readFile(ForgeProps.getFile(DRAFT.UNCOMMON));
-        rareList = readFile(ForgeProps.getFile(DRAFT.RARE));
+        //commonList = readFile(ForgeProps.getFile(DRAFT.COMMON));
+        //uncommonList = readFile(ForgeProps.getFile(DRAFT.UNCOMMON));
+        //rareList = readFile(ForgeProps.getFile(DRAFT.RARE));
         
         //System.out.println("commonList size:" + commonList.size());
         //System.out.println("ucommonList size:" + uncommonList.size());
         //System.out.println("rareList size:" + rareList.size());
         
-        commonCreatureList = commonList.getType("Creature");
-        commonNonCreatureList = commonList.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return !c.isCreature();
-            }
-        });
+        //commonCreatureList = commonList.getType("Creature");
+        //commonNonCreatureList = commonList.filter(new CardListFilter() {
+        //    public boolean addCard(Card c) {
+        //        return !c.isCreature();
+        //    }
+        //});
+    	
+        CardList AllCards = new CardList(AllZone.CardFactory.getAllCards().toArray());
+        
+        for (int i=0; i<AllCards.size(); i++)
+        {
+        	Card aCard = AllCards.get(i);
+        	String rr = aCard.getSVar("Rarity");
+        	
+        	if (rr.equals("Common"))
+        	{
+        		commonList.add(aCard);
+        		if (aCard.isCreature())
+        			commonCreatureList.add(aCard);
+        		else
+        			commonNonCreatureList.add(aCard);
+        	}
+        	else if (rr.equals("Uncommon"))
+        	{
+        		uncommonList.add(aCard);
+        	}
+        	else if (rr.equals("Rare"))
+        	{
+        		rareList.add(aCard);
+        	}
+        	else if (rr.equals("Mythic"))
+        	{
+        		rareList.add(aCard);
+        	}
+        		
+        }
     }//setup()
     
 
