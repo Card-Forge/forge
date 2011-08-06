@@ -110,44 +110,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Bojuka Bog")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-					if (card.getController().equals(AllZone.ComputerPlayer))
-						setTargetPlayer(AllZone.HumanPlayer);
-					
-        			final Player player = getTargetPlayer();
-        			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-        			for(Card c:grave) {
-        				AllZone.GameAction.exile(c);
-        			}
-                }
-            };
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -4309535765473933378L;
-
-				public void execute() {
-                    card.tap();
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
-                        AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
-                        ButtonUtil.disableAll();
-                    } else if(card.getController().equals(AllZone.ComputerPlayer)) {
-                        ability.setTargetPlayer(AllZone.HumanPlayer);
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - Exile target player's graveyard.");
-                    ability.setStackDescription(sb.toString());
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-            
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
+                //*************** START *********** START **************************
         else if(cardName.equals("Sejiri Steppe")) {
         	final HashMap<Card, String[]> creatureMap = new HashMap<Card, String[]>();
         	final SpellAbility[] a = new SpellAbility[1];
