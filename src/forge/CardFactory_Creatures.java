@@ -367,7 +367,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.addDamage(newCard, newCard, 1);
+                    newCard.addDamage(1, newCard);
                 }
             };//SpellAbility
             ability.setDescription(abilCost.toString() + "Stuffy Doll deals 1 damage to itself.");
@@ -2910,8 +2910,9 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canDamage(card, getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) AllZone.GameAction.addDamage(
-                            getTargetCard(), card, 4);
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                    	getTargetCard().addDamage(4, card);
+                    }
                 }
             };
             Command intoPlay = new Command() {
@@ -8699,7 +8700,7 @@ public class CardFactory_Creatures {
         			int damage = 6;
         			CardList all = AllZoneUtil.getCreaturesInPlay();
         			for(Card c:all) {
-        				AllZone.GameAction.addDamage(c, card, damage);
+        				c.addDamage(damage, card);
         			}
         			AllZone.ComputerPlayer.addDamage(damage, card);
         			AllZone.HumanPlayer.addDamage(damage, card);
@@ -19234,7 +19235,7 @@ public class CardFactory_Creatures {
         			if(getTargetCard() != null) {
         				if(AllZone.GameAction.isCardInPlay(getTargetCard())
         						&& CardFactoryUtil.canTarget(card, getTargetCard())) {
-        					AllZone.GameAction.addDamage(getTargetCard(), card, damage);
+        					getTargetCard().addDamage(damage, card);
         				}
         			} else getTargetPlayer().addDamage(damage, card);
 

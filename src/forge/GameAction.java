@@ -1802,7 +1802,7 @@ public class GameAction {
                         					CardList All = Check_if_All_Targets(F_card, F_k);
                         					if(All.size() > 0) {
                         						for(int i = 0; i < All.size(); i++) { 
-                        							AllZone.GameAction.addDamage(All.get(i), F_card, F_Amount[0]);	
+                        							All.get(i).addDamage(F_Amount[0], F_card);	
                         						}
                         					}
                         					else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
@@ -1812,7 +1812,7 @@ public class GameAction {
       			                              if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
       			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
       			                                  Card c = (Card) Targets_Multi[z];
-      			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount[0]);
+      			                                  c.addDamage(F_Amount[0], F_card);
       			                              }
       			                          } else {
       			                             //AllZone.GameAction.addDamage( (String) Targets_Multi[z], F_card, F_Amount[0]);
@@ -3611,18 +3611,6 @@ public class GameAction {
     public void addAssignedDamage(Card card, Card sourceCard, int damage) {
     	card.addGameActionAssignedDamage(damage, sourceCard);
     }
-    
-    @Deprecated
-    public void addCombatDamage(Card card, HashMap<Card, Integer> map) {
-    	card.addCombatDamage(map);
-        
-    }
-    
-    @Deprecated
-    public void addDamage(Card card, Card source, int damage) {
-        card.addDamage(damage, source);
-        
-    }    
     
     public void searchLibraryLand(String type, Player player, String Zone1, boolean tapLand) {
     	searchLibraryTwoLand(type, player, Zone1, tapLand, "", false);

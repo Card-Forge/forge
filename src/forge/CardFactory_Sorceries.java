@@ -6687,7 +6687,7 @@ public class CardFactory_Sorceries {
         						&& null != target[i]) {
         					//DEBUG
         					Log.debug("Fireball", "Fireball does "+damage+" to: "+target[i]);
-        					AllZone.GameAction.addDamage(target[i], card, damage);
+        					target[i].addDamage(damage, card);
         				}
         			}
         			for(int i = 0; i < targetPlayers.length; i++) {
@@ -7302,10 +7302,10 @@ public class CardFactory_Sorceries {
         			}
         				
         			for (int i=0; i<aCreatures.size(); i++)
-        				AllZone.GameAction.addDamage(aCreatures.get(i), card, number);
+        				aCreatures.get(i).addDamage(number, card);
         			
         			for (int i=0; i<oCreatures.size(); i++)
-        				AllZone.GameAction.addDamage(oCreatures.get(i), card, number);
+        				oCreatures.get(i).addDamage(number, card);
         			
         			return;
         		}
@@ -7721,7 +7721,7 @@ public class CardFactory_Sorceries {
 						//deal damage to all opponent's creatures
 						CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
 						for(Card creature:creatures) {
-							AllZone.GameAction.addDamage(creature, card, damage);
+							creature.addDamage(damage, card);
 						}
 
 						card.addReplaceMoveToGraveyardCommand(new Command() {
@@ -7832,7 +7832,7 @@ public class CardFactory_Sorceries {
                     opp.loseLife(2*numSwamps);
                     
                     //mountain
-                    AllZone.GameAction.addDamage(getTargetCard(), card, numMountains);
+                    getTargetCard().addDamage(numMountains, card);
                     
                     //forest
                     for(int i = 0; i < numForests; i++)
