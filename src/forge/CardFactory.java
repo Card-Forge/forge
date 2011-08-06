@@ -1243,15 +1243,20 @@ public class CardFactory implements NewConstants {
             String bbCost = card.getSVar("Buyback");
             if (!bbCost.equals(""))
             {
-               SpellAbility bbAllPump = spAllPump.copy();
-               bbAllPump.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-               bbAllPump.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
-               bbAllPump.setIsBuyBackAbility(true);
-                              
-               card.addSpellAbility(bbAllPump);
-            }
-
-        }
+                SpellAbility bbAllPump = spAllPump.copy();
+                bbAllPump.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+                sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                bbAllPump.setDescription(sb.toString());
+                // bbAllPump.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                bbAllPump.setIsBuyBackAbility(true);
+                               
+                card.addSpellAbility(bbAllPump);
+             }
+         }//spAllPump
+        
         while (hasKeyword(card, "abAllPump") != -1)
         {
         	int n = hasKeyword(card, "abAllPump");
