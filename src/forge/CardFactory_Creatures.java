@@ -20440,6 +20440,36 @@ public class CardFactory_Creatures {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Architects of Will")) {
+        	/*
+        	 * When Architects of Will enters the battlefield, look at the
+        	 * top three cards of target player's library, then put them
+        	 * back in any order.
+        	 */
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    AllZoneUtil.rearrangeTopOfLibrary(getTargetPlayer(), 3, false);
+                }//resolve()
+            };//SpellAbility
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 3539746365351917811L;
+
+				public void execute() {
+                	if(card.getController().equals(Constant.Player.Human)) {
+                        AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
+                        ButtonUtil.disableAll();
+                    }
+                	else { //Computer
+                        //not implemented for computer
+                    }//else
+                }
+            };
+            ability.setStackDescription(cardName + " - rearrange top 3 cards of target player's library.");
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

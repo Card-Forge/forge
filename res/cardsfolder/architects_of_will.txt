@@ -1,0 +1,10 @@
+Name:Architects of Will
+ManaCost:2 U B
+Types:Artifact Creature Human Wizard
+Text:When Architects of Will enters the battlefield, look at the top three cards of target player's library, then put them back in any order.
+PT:3/3
+K:Cycling:UB
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/architects_of_will.jpg
+End
