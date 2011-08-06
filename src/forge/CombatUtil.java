@@ -390,7 +390,7 @@ public class CombatUtil {
         return true;
     }//canAttack()
     
-    public static int getTotalFirstStrikeAttackPower(Card attacker, Player player)
+    public static int getTotalFirstStrikeBlockPower(Card attacker, Player player)
     {
     	final Card att = attacker;
     	int i = 0;
@@ -405,17 +405,7 @@ public class CombatUtil {
     	});
     	
     	int flankingMagnitude = 0;
-    	if(attacker.getKeyword().contains("Flanking")) {
-            
-            String kw = "";
-            ArrayList<String> lst = attacker.getKeyword();
-            
-            for(int j = 0; j < lst.size(); j++) {
-                kw = lst.get(j);
-                if(kw.equals("Flanking")) flankingMagnitude++;
-            }
-    	}
-    	
+    	if(attacker.getKeyword().contains("Flanking"))	flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
     	
     	for (Card c:list)
     	{
@@ -440,7 +430,8 @@ public class CombatUtil {
     		String parse = defender.getKeyword().get(KeywordPosition).toString();
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
-    		if(attacker.isValidCard(restrictions, defender.getController(), defender)) return true;
+    		if(attacker.isValidCard(restrictions, defender.getController(), defender) && !attacker.getKeyword().contains("Indestructible"))
+    			return true;
         }
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return false;
@@ -448,23 +439,13 @@ public class CombatUtil {
         int flankingMagnitude = 0;
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
             
-            String kw = "";
-            ArrayList<String> list = attacker.getKeyword();
-            
-            for(int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
-                if(kw.equals("Flanking")) flankingMagnitude++;
-            }
-            if(flankingMagnitude >= defender.getNetDefense() - defender.getDamage()) return false;
+        	flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
+
+            if(flankingMagnitude >= defender.getNetDefense()) return false;
+            if(flankingMagnitude >= defender.getNetDefense() - defender.getDamage() && !defender.getKeyword().contains("Indestructible")) 
+            	return false;
             
         }//flanking
-        
-        if(attacker.hasStartOfKeyword("Prevent all combat damage that would be dealt to") ||
-        		attacker.hasStartOfKeyword("Prevent all damage that would be dealt to")) return false;
-        if(defender.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
-        		defender.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME") ||
-        		defender.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.") ||
-        		defender.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME")) return false;
         
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
@@ -481,8 +462,13 @@ public class CombatUtil {
             defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
             attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
         }
-        int defenderLife = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
-        int attackerLife = attacker.getNetDefense() + attBushidoMagnitude;
+        
+        // consider static Damage Prevention
+        defenderDamage = attacker.staticDamagePrevention(defenderDamage, defender, true);
+        attackerDamage = defender.staticDamagePrevention(attackerDamage, attacker, true);
+        
+        int defenderLife = defender.getKillDamage() - flankingMagnitude + defBushidoMagnitude;
+        int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
         
         if(defender.getKeyword().contains("Double Strike") ) {
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
@@ -544,35 +530,24 @@ public class CombatUtil {
         int flankingMagnitude = 0;
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
             
-            String kw = "";
-            ArrayList<String> list = attacker.getKeyword();
-            
-            for(int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
-                if(kw.equals("Flanking")) flankingMagnitude++;
-            }
+        	flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
+        	
             if(flankingMagnitude >= defender.getNetDefense()) return true;
             if((flankingMagnitude >= defender.getNetDefense() - defender.getDamage()) && !defender.getKeyword().contains("Indestructible")) return true;    
         }//flanking
         
         if(defender.getKeyword().contains("Indestructible") && 
         		!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect"))) return false;
-        if(attacker.getName().equals("Sylvan Basilisk")) return true;
+        if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return true;
         
         if(attacker.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
         	int KeywordPosition = attacker.getKeywordPosition("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
         	String parse = attacker.getKeyword().get(KeywordPosition).toString();
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
-    		if(defender.isValidCard(restrictions,attacker.getController(),attacker)) return true;
+    		if(defender.isValidCard(restrictions,attacker.getController(),attacker) && !defender.getKeyword().contains("Indestructible"))
+    			return true;
         }
-        
-        if(defender.hasStartOfKeyword("Prevent all combat damage that would be dealt to") ||
-        		defender.hasStartOfKeyword("Prevent all damage that would be dealt to")) return false;
-        if(attacker.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
-        		attacker.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME") ||
-        		attacker.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.") ||
-        		attacker.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME")) return false;
         
         if(!CardFactoryUtil.canDamage(attacker,defender)) return false;
         
@@ -586,8 +561,13 @@ public class CombatUtil {
             defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
             attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
         }
-        int defenderLife = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
-        int attackerLife = attacker.getNetDefense() + attBushidoMagnitude;
+        
+        // consider static Damage Prevention
+        defenderDamage = attacker.staticDamagePrevention(defenderDamage, defender, true);
+        attackerDamage = defender.staticDamagePrevention(attackerDamage, attacker, true);
+        
+        int defenderLife = defender.getKillDamage() - flankingMagnitude + defBushidoMagnitude;
+        int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
         
         if(attacker.getKeyword().contains("Double Strike")) {
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;

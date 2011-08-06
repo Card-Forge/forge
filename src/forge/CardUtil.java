@@ -212,6 +212,7 @@ public class CardUtil {
                 && !cardType.equals("Equipment") && !cardType.equals("Aura")
                 && !cardType.equals("World") && !cardType.equals("Locus")
                 && !cardType.equals("Fortification") && !cardType.equals("Lair")
+                && !cardType.equals("Desert") && !cardType.equals("Trap")
                 && !cardType.equals("Plains") && !cardType.equals("Mountain")
                 && !cardType.equals("Island") && !cardType.equals("Forest")
                 && !cardType.equals("Swamp"));

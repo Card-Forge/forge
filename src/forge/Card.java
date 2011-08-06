@@ -2764,6 +2764,7 @@ public class Card extends MyObservable {
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
 	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 		int restDamage = damage;
+		Player player = source.getController();
 		
     	if(isCombat) {
     		if(getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))return 0;
@@ -2783,7 +2784,8 @@ public class Card extends MyObservable {
     	}
     	
     	if(hasStartOfKeyword("PreventAllDamageBy")) {
-    		String valid = this.getKeyword().get(getKeywordPosition("PreventAllDamageBy")).split(" ", 2)[1]; 
+    		String valid = getKeyword().get(getKeywordPosition("PreventAllDamageBy"));
+    		valid = valid.split(" ", 2)[1]; 
     		if (source.isValid(valid,this.getController(),this))
     			return 0;
     	}
@@ -2799,12 +2801,11 @@ public class Card extends MyObservable {
 		
 		// specific Cards
     	if(isCreature()) { //and not a planeswalker
-    		if((this.isCreature() && source.isCreature() && 
-				AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this)))return 0;
+    		if((source.isCreature() && AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this)))return 0;
     	
-    		if((!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", getController())))return 0;
+    		if((isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", player)))return 0;
     	
-    		if((source.getController().isPlayer(getController()) && AllZoneUtil.isCardInPlay("Light of Sanction", getController())))
+    		if((AllZoneUtil.isCardInPlay("Light of Sanction", player) && source.getController().isPlayer(player)))
     			return 0;
     	
     		if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 

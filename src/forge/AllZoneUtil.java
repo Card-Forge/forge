@@ -122,8 +122,11 @@ public class AllZoneUtil {
 	 */
 	public static CardList getPlayerCardsInPlay(final Player player, final String cardName) {
 		CardList cards = new CardList();
-		if( player.isHuman() || player.isComputer() ){
-			cards = getPlayerCardsInPlay(player);
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		cards.addAll(play.getCards());
+		
+		if( cardName != null && !"".equals(cardName) ) {
 			cards = cards.getName(cardName);
 		}
 		return cards;

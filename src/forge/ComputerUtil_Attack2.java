@@ -249,15 +249,16 @@ import java.util.*;
 		        	System.out.println(attackers.get(i).getName() + " can destroy blocker " +bigDef.getName());
 		         */
             	 
-            	 int totalFirstStrikeAttackPower = 0;
+            	 int totalFirstStrikeBlockPower = 0;
             	 if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
-            		 totalFirstStrikeAttackPower = CombatUtil.getTotalFirstStrikeAttackPower(attackers.get(i), AllZone.HumanPlayer);
+            		 totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attackers.get(i), AllZone.HumanPlayer);
         
                 //if attacker can destroy biggest blocker or
                 //biggest blocker cannot destroy attacker
-                if ( (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)) ||
+            	if (bigDef.equals(null)) {combat.addAttacker(attackers.get(i));}
+            	else if ( (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)) ||
                    (! CombatUtil.canDestroyAttacker(attackers.get(i), bigAtt))) &&
-                      totalFirstStrikeAttackPower < attackers.get(i).getNetDefense() ){
+                      totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() ){
                    combat.addAttacker(attackers.get(i));
                 }
                 else if(attackers.get(i).getSacrificeAtEOT()){
