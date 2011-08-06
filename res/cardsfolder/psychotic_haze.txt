@@ -2,7 +2,7 @@ Name:Psychotic Haze
 ManaCost:2 B B
 Types:Instant
 Text:no text
-K:spDamageAll:Player,Creature:1:Psychotic Haze deals 1 damage to each creature and each player.
+A:SP$DamageAll|Cost$1 R|NumDmg$1|ValidCards$Creature|ValidPlayers$Each|ValidDescription$each creature and each player.|SpellDescription$CARDNAME deals 1 damage to each creature and each player.
 K:Madness:1 B
 SVar:RemAIDeck:True
 SVar:Rarity:Common

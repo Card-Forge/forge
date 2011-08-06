@@ -2,7 +2,7 @@ Name:Shadowstorm
 ManaCost:R
 Types:Sorcery
 Text:no text
-K:spDamageAll:Creature.withShadow:2:Shadowstorm deals 2 damage to each creature with shadow.
+A:SP$DamageAll|Cost$R|NumDmg$2|ValidCards$Creature.withShadow|ValidDescription$each creature with shadow.|SpellDescription$CARDNAME deals 2 damage to each creature with shadow.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowstorm.jpg

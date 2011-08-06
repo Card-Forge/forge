@@ -2,7 +2,7 @@ Name:Rain of Blades
 ManaCost:W
 Types:Instant
 Text:no text
-K:spDamageAll:Creature.attacking:1:Rain of Blades deals 1 damage to each attacking creature.
+A:SP$DamageAll|Cost$W|NumDmg$1|ValidCards$Creature.attacking|ValidDescription$each attacking creature.|SpellDescription$CARDNAME deals 1 damage to each attacking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_blades.jpg
