@@ -1,3 +1,10 @@
+Reckless Assault
+2 B R
+Enchantment
+no text
+abDamageTgtCP 1 PayLife<2>:1
+SVar:RemAIDeck:True
+
 Disfigure
 B
 Instant

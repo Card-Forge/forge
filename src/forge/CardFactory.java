@@ -1267,10 +1267,10 @@ public class CardFactory implements NewConstants {
         		card.removeIntrinsicKeyword(parse);
         		
         		String k[] = parse.split(":");
+        		String tmpCost[] =  k[0].replace("abAllPump", "").split(" ", 2);
         		
-        		String tmpCost =  k[0].substring(9);
-        		
-        		final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName());        		
+        		final Target abTgt = new Target(tmpCost[0]);
+        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName());        		
         		
         		final String Scope[] = k[1].split("/");
         		
@@ -1422,7 +1422,9 @@ public class CardFactory implements NewConstants {
             				return false;
             				
             			// temporarily disabled until AI is improved
-            			if (abCost.getSacCost()) return false;	
+                    	if (abCost.getSacCost()) return false;	
+                    	if (abCost.getSubCounter()) return false;
+                    	if (abCost.getLifeCost())	 return false;
             			
             			if (abCost.getTap() && (card.isTapped() || card.isSick()))
             				return false;
@@ -1516,6 +1518,7 @@ public class CardFactory implements NewConstants {
             	abAllPump.setDescription(abCost.toString() + spDesc[0]);
             	abAllPump.setStackDescription(stDesc[0]);
             	abAllPump.setPayCosts(abCost);
+            	abAllPump.setTarget(abTgt);
 
                 card.addSpellAbility(abAllPump);
         	}
@@ -1528,10 +1531,12 @@ public class CardFactory implements NewConstants {
                 card.removeIntrinsicKeyword(parse);
                 
                 String k[] = parse.split(":");
-                
-                String tmpCost = k[0].substring(6);
-                
-                final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName());
+        		String tmp =  k[0].replace("abPump", "");
+        		
+        		String[] tmpCost = tmp.split(" ", 2);
+        		
+        		final Target abTgt = new Target(tmpCost[0]);        			
+        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName());
                 
                 final int NumAttack[] = {-1138};
                 final String AttackX[] = {"none"};
@@ -1597,7 +1602,7 @@ public class CardFactory implements NewConstants {
                 if((AttackX[0].equals("none") && !(NumAttack[0] == -1138))
                         && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && Keyword[0].equals("none")) {
                     // pt boost
-                    if(abCost.doesTarget()) sbD.append("Target creature gets ");
+                    if(abTgt.doesTarget()) sbD.append("Target creature gets ");
                     else {
                         sbD.append(cardName);
                         sbD.append(" gets ");
@@ -1621,7 +1626,7 @@ public class CardFactory implements NewConstants {
                 if((AttackX[0].equals("none") && NumAttack[0] == -1138)
                         && (DefenseX[0].equals("none") && NumDefense[0] == -1138) && !Keyword[0].equals("none")) {
                     // k boost
-                    if(abCost.doesTarget()) sbD.append("Target creature gains ");
+                    if(abTgt.doesTarget()) sbD.append("Target creature gains ");
                     else {
                         sbD.append(cardName);
                         sbD.append(" gains ");
@@ -1633,7 +1638,7 @@ public class CardFactory implements NewConstants {
                 if((AttackX[0].equals("none") && !(NumAttack[0] == -1138))
                         && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && !Keyword[0].equals("none")) {
                     // ptk boost
-                    if(abCost.doesTarget()) sbD.append("Target creature gets ");
+                    if(abTgt.doesTarget()) sbD.append("Target creature gets ");
                     else {
                         sbD.append(cardName);
                         sbD.append(" gets ");
@@ -1700,6 +1705,7 @@ public class CardFactory implements NewConstants {
                     	// temporarily disabled until AI is improved
                     	if (abCost.getSacCost()) return false;	
                     	if (abCost.getSubCounter()) return false;
+                    	if (abCost.getLifeCost())	 return false;
                     	
                     	if (!ComputerUtil.canPayCost(this))
                     		return false;
@@ -1709,7 +1715,7 @@ public class CardFactory implements NewConstants {
                         
                         if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
                         
-                        if(!abCost.doesTarget()) {
+                        if(!abTgt.doesTarget()) {
                             setTargetCard(card);
                             
                             if((card.getNetDefense() + defense > 0) && (!card.getKeyword().contains(keyword))) {
@@ -1778,9 +1784,9 @@ public class CardFactory implements NewConstants {
                     @Override
                     public void resolve() {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && (CardFactoryUtil.canTarget(card, getTargetCard()) || !abCost.doesTarget() )) {
+                                && (CardFactoryUtil.canTarget(card, getTargetCard()) || !abTgt.doesTarget() )) {
                             final Card[] creature = new Card[1];
-                            if(abCost.doesTarget()) creature[0] = getTargetCard();
+                            if(abTgt.doesTarget()) creature[0] = getTargetCard();
                             else creature[0] = card;
                             
                             final int a = getNumAttack();
@@ -1829,8 +1835,10 @@ public class CardFactory implements NewConstants {
                 ability.setDescription(spDesc[0]);
                 ability.setStackDescription(stDesc[0]);
                 
-                if(!abCost.doesTarget())
+                if(!abTgt.doesTarget())
                 	ability.setTargetCard(card);
+                else
+                	ability.setTarget(abTgt);
 
                 card.addSpellAbility(ability);
             }
@@ -2264,10 +2272,11 @@ public class CardFactory implements NewConstants {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
                 
-                String k[] = parse.split(":");
-                String tmpCost = k[0].substring(8);
-                
-                final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName());
+        		String k[] = parse.split(":");
+        		String tmpCost[] =  k[0].replace("abDamage", "").split(" ", 2);
+        		
+        		final Target abTgt = new Target(tmpCost[0]);
+        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName());    
                 
                 final int NumDmg[] = {-1};
                 final String NumDmgX[] = {"none"};
@@ -2301,7 +2310,7 @@ public class CardFactory implements NewConstants {
                     sb.append(card.getName());
                     sb.append(" deals " + NumDmg[0] + " damage to ");
                     
-                    sb.append(abCost.targetString());
+                    sb.append(abTgt.targetString());
                     spDesc[0] = sb.toString();
                     stDesc[0] = card.getName() + " -" + sb.toString();
                 }
@@ -2380,6 +2389,7 @@ public class CardFactory implements NewConstants {
                     	// temporarily disabled until better AI
                     	if (abCost.getSacCost())	 return false;
                     	if (abCost.getSubCounter())  return false;
+                    	if (abCost.getLifeCost())	 return false;
                     	
                     	if (!ComputerUtil.canPayCost(this))
                     		return false;
@@ -2391,7 +2401,7 @@ public class CardFactory implements NewConstants {
                         if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) 
                         	rr = true;
                         
-                        if(abCost.canTgtCreaturePlayer()) {
+                        if(abTgt.canTgtCreaturePlayer()) {
                             if(shouldTgtP()) {
                                 setTargetPlayer(Constant.Player.Human);
                                 return rr;
@@ -2404,12 +2414,12 @@ public class CardFactory implements NewConstants {
                             }
                         }
                         
-                        if(abCost.canTgtPlayer()/* || TgtOpp[0] == true */) {
+                        if(abTgt.canTgtPlayer()/* || TgtOpp[0] == true */) {
                             setTargetPlayer(Constant.Player.Human);
                             return rr;
                         }
                         
-                        if(abCost.canTgtCreature()) {
+                        if(abTgt.canTgtCreature()) {
                             Card c = chooseTgtC();
                             if(c != null) {
                                 setTargetCard(c);
@@ -2453,6 +2463,7 @@ public class CardFactory implements NewConstants {
                 };//Ability_Activated
                 
                 abDamage.setPayCosts(abCost);
+                abDamage.setTarget(abTgt);
                 abDamage.setDescription(spDesc[0]);
                 abDamage.setStackDescription(stDesc[0]);
                 

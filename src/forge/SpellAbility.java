@@ -40,6 +40,7 @@ public abstract class SpellAbility {
     private Input           afterPayMana;
     
     protected Ability_Cost	payCosts		   = null;
+    protected Target		chosenTarget	   = null;
     
     private Command         cancelCommand      = Command.Blank;
     private Command         beforePayManaAI    = Command.Blank;
@@ -236,6 +237,14 @@ public abstract class SpellAbility {
     
     public void setPayCosts(Ability_Cost abCost) {
     	payCosts = abCost;
+    }
+    
+    public Target getTarget() {
+    	return chosenTarget;
+    }
+    
+    public void setTarget(Target tgt) {
+    	chosenTarget = tgt;
     }
     
     public Input getAfterResolve() {

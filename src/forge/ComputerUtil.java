@@ -31,6 +31,7 @@ public class ComputerUtil
         	AllZone.Computer_Hand.remove(all[i].getSourceCard());
 
         Ability_Cost cost = all[i].getPayCosts();
+        Target tgt = all[i].getTarget();
         
         if (cost == null){
 	        if(all[i] instanceof Ability_Tap)
@@ -43,6 +44,9 @@ public class ComputerUtil
 	        AllZone.Stack.add(all[i]);
         }
         else{
+        	if (tgt != null && tgt.doesTarget())
+        		all[i].chooseTargetAI();
+        	
         	Cost_Payment pay = new Cost_Payment(cost, all[i]);
         	pay.payComputerCosts();
         }
@@ -230,6 +234,11 @@ public class ComputerUtil
 			if (card.getCounters(c) - cost.getCounterNum() < 0 || !AllZone.GameAction.isCardInPlay(card)){
 				return false;
 			}
+		}
+		
+		if (cost.getLifeCost()){
+			if (AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() <= cost.getLifeAmount())
+				return false;
 		}
 	  
 		// check additional costs.

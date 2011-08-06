@@ -16,7 +16,7 @@ public class Input_PayCostMana extends Input {
     
     public Input_PayCostMana(Cost_Payment payment) {
     	costPayment = payment;
-        originalManaCost = costPayment.cost.getMana();
+        originalManaCost = costPayment.getCost().getMana();
         sa = payment.getAbility();
 
         if(Phase.GameBegins == 1)  {

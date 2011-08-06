@@ -1,25 +1,6 @@
 package forge;
 
 public class Ability_Cost {
-	private boolean tgtPlayer = false;
-	public boolean canTgtPlayer() { return tgtPlayer; }
-	private boolean tgtCreature = false;
-	public boolean canTgtCreature() { return tgtCreature; }
-	
-	public boolean canTgtCreaturePlayer() { return tgtCreature && tgtPlayer; }
-	public boolean doesTarget() { return tgtCreature || tgtPlayer; }
-	
-	private int minTargets = 0;
-	public int getMinTargets() { return minTargets; }
-	private int maxTargets = 0;
-	public int getMaxTargets() { return maxTargets; }
-	// add array of targets here?
-	
-	private int numTargeted = 0;
-	public int getNumTargeted() { return numTargeted; }
-	public void incrementTargets() { numTargeted++; }
-	public void resetTargets() { numTargeted = 0; }
-	
 	private boolean sacCost = false;
 	public boolean getSacCost() { return sacCost; }
 	private String sacType = "";	// <type> or CARDNAME
@@ -30,7 +11,7 @@ public class Ability_Cost {
 	private boolean tapCost = false;
 	public boolean getTap() { return tapCost; } 
 	
-	// future expansion of Ability_Cost class: untap, and lifeCost
+	// future expansion of Ability_Cost class: untap
 	// private boolean untapCost = false;	
 	
 	private boolean subtractCounterCost = false;
@@ -44,7 +25,9 @@ public class Ability_Cost {
 	public Counters getCounterType() { return counterType; }
 	
 	private boolean lifeCost = false;
+	public boolean getLifeCost() { return lifeCost; }
 	private int lifeAmount = 0;
+	public int getLifeAmount() { return lifeAmount; }
 	
 	public boolean hasNoManaCost() { return manaCost.equals("") || manaCost.equals("0"); };
 	private String manaCost = "";
@@ -57,34 +40,8 @@ public class Ability_Cost {
 		// when adding new costs for cost string, place them here
 		name = cardName;
 		
-		if (parse.contains("Tgt")){
-			// Tgt{C}{P}{/<MinTargets>/<MaxTargets>} 
-			int tgtPos = parse.indexOf("Tgt");
-			int endTgt = parse.indexOf(" ");
-			//System.out.println(cardName);
-			String tgtStr = parse.substring(tgtPos, endTgt);
-			parse = parse.substring(endTgt+1);
-			tgtStr = tgtStr.replace("Tgt", "");
-			String[] tgtSplit = tgtStr.split("/");
-			
-			if (tgtSplit[0].contains("C"))
-				tgtCreature = true;
-			if (tgtSplit[0].contains("P"))
-				tgtPlayer = true;
-			//todo(sol) add Opp
-			
-			if (tgtSplit.length != 3){
-				minTargets = 1;
-				maxTargets = 1;
-			}
-			else{
-				minTargets = Integer.parseInt(tgtSplit[1]);
-				maxTargets = Integer.parseInt(tgtSplit[2]);
-			}
-		}
-		
         if(parse.contains("SubCounter<")) {
-        	// SubCounter/<Counter Type>/counters removed
+        	// SubCounter<CounterType/NumCounters>
         	subtractCounterCost = true;
         	int counterPos = parse.indexOf("SubCounter<");
         	int endPos = parse.indexOf(">", counterPos);
@@ -99,12 +56,27 @@ public class Ability_Cost {
         	counterAmount = Integer.parseInt(strSplit[1]);
         }       
 		
+        if(parse.contains("PayLife<")) {
+        	// PayLife<LifeCost>
+        	lifeCost = true;
+        	int lifePos = parse.indexOf("PayLife<");
+        	int endPos = parse.indexOf(">", lifePos);
+        	String str = parse.substring(lifePos, endPos+1);
+        	parse = parse.replace(str, "").trim();
+        	
+        	str = str.replace("PayLife<", "");
+        	str = str.replace(">", "");
+        	
+        	lifeAmount = Integer.parseInt(str);
+        }
+        
         if(parse.contains("Sac-")) {
         	sacCost = true;
         	int sacPos = parse.indexOf("Sac-");
         	sacType = parse.substring(sacPos).replace("Sac-", "").trim();
         	sacThis =  (sacType.equals("CARDNAME"));
-        	parse = parse.substring(0,sacPos-1).trim();
+        	if (sacPos > 0)
+        		parse = parse.substring(0,sacPos-1).trim();
         }                
 
         if(parse.contains("T")) {
@@ -156,8 +128,9 @@ public class Ability_Cost {
 			if (caps)
 				cost.append("Pay ");
 			else
-				cost.append(", Pay");
+				cost.append(", Pay ");
 			cost.append(lifeAmount);
+			cost.append(" Life");
 
 			caps = false;
 		}
@@ -191,20 +164,5 @@ public class Ability_Cost {
 			}
 		}
 		return cost.toString();
-	}
-	
-	public String targetString()
-	{
-		String tgt = "";
-		if (tgtCreature)
-			tgt += "creature";
-		if (tgtPlayer && !tgt.equals(""))
-			tgt += " or ";
-		if (tgtPlayer)
-			tgt += "player";
-		
-		tgt += ".";
-		
-		return "target " + tgt;
 	}
 }

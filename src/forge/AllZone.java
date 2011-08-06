@@ -37,8 +37,8 @@ public class AllZone implements NewConstants {
     public static Combat Combat   = new Combat();
     public static Combat pwCombat = new Combat();//for Planeswalker combat
 
-    public static PlayerLife Human_Life    = new PlayerLife();
-    public static PlayerLife Computer_Life = new PlayerLife();
+    public static PlayerLife Human_Life    = new PlayerLife(Constant.Player.Human);
+    public static PlayerLife Computer_Life = new PlayerLife(Constant.Player.Computer);
     
     public static PlayerPoisonCounter Human_PoisonCounter = new PlayerPoisonCounter();
     public static PlayerPoisonCounter Computer_PoisonCounter = new PlayerPoisonCounter();

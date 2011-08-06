@@ -1,23 +1,28 @@
 package forge;
 
+import javax.swing.JOptionPane;
+
 public class Cost_Payment {
-	Ability_Cost cost = null;
-	SpellAbility ability = null;
-	Card card = null;
+	private Ability_Cost cost = null;
+	private SpellAbility ability = null;
+	private Card card = null;
+	private SpellAbility_Requirements req = null;
 
 	public Ability_Cost getCost() { return cost; }
 	public SpellAbility getAbility() { return ability; }
+	public Card getCard() { return card; }
+	
+	public void setRequirements(SpellAbility_Requirements reqs) { req = reqs; } 
 	public void setCancel(boolean cancel) { bCancel = cancel; } 
-	public void setDoneTarget(boolean done) { bCancel = done; } 
+	public boolean isCanceled() { return bCancel; }
 	
 	private boolean payTap = false;
 	private boolean payMana = false;
 	private boolean paySubCounter = false;
 	private boolean paySac = false;
+	private boolean payLife = false;
+	
 	private boolean bCancel = false;
-	private boolean bCasting = false;
-	private boolean bDoneTarget = false;
-	private PlayerZone fromZone = null;
 
 	public void setPayMana(boolean bPay){	payMana = bPay;	}
 	public void setPaySac(boolean bSac){	paySac = bSac;	}
@@ -33,6 +38,7 @@ public class Cost_Payment {
 		payMana = cost.hasNoManaCost();
 		paySubCounter = !cost.getSubCounter();
 		paySac = !cost.getSacCost();
+		payLife = !cost.getLifeCost();
 	}
 	
     public boolean canPayAdditionalCosts(){
@@ -46,6 +52,12 @@ public class Cost_Payment {
 			if (countersLeft < 0){
 	    		return false;
 			}
+    	}
+    	
+    	if (cost.getLifeCost()){
+    		int curLife = AllZone.GameAction.getPlayerLife(card.getController()).getLife();
+    		if (curLife < cost.getLifeAmount())
+    			return false;
     	}
     	
 		if (cost.getSacCost()){
@@ -64,28 +76,9 @@ public class Cost_Payment {
     }
 	
 	public boolean payCost(){
-		if (bCancel || bDoneTarget && cost.getNumTargeted() < cost.getMinTargets()){
-			cancelPayment();
+		if (bCancel){
+			req.finishPaying();
 			return false;
-		}
-		
-		if (ability instanceof Spell && !bCasting){
-			// remove from hand, todo(sol) be careful of spell copies when spells start using this
-			bCasting = true;
-			Card c = ability.getSourceCard();
-			fromZone = AllZone.getZone(c);
-			fromZone.remove(c);
-		}
-		
-		// targetting, with forward code for multiple target abilities 
-		if (!bDoneTarget && cost.getMinTargets() > 0 && cost.getNumTargeted() < cost.getMaxTargets()){
-			if (cost.canTgtCreature() && cost.canTgtPlayer())
-				changeInput.stopSetNext(targetCreaturePlayer(ability, Command.Blank, true, this));
-			else if(cost.canTgtCreature()) 
-				changeInput.stopSetNext(targetCreature(ability, this));
-	        else if(cost.canTgtPlayer()) 
-	        	changeInput.stopSetNext(targetPlayer(ability, this));
-	        return false;
 		}
 		
 		if (!payTap && cost.getTap()){
@@ -98,13 +91,12 @@ public class Cost_Payment {
 		}
 
 		// insert untap here
-		if (!payMana && !cost.hasNoManaCost()){
-			// pay mana here
+		
+		if (!payMana && !cost.hasNoManaCost()){		// pay mana here
 			changeInput.stopSetNext(new Input_PayCostMana(this));
 			return false;
 		}
-		if (!paySubCounter && cost.getSubCounter()){
-			// subtract counters here. 
+		if (!paySubCounter && cost.getSubCounter()){	// pay counters here. 
 			Counters c = cost.getCounterType();
 			int countersLeft = card.getCounters(c) - cost.getCounterNum();
 			if (countersLeft >= 0){
@@ -112,12 +104,35 @@ public class Cost_Payment {
 				paySubCounter = true;
 			}
 			else{
-				cancelPayment();
+				bCancel = true;
+				req.finishPaying();
 				return false;
 			}
 		}
-		if (!paySac && cost.getSacCost())
-    	{
+		
+		if (!payLife && cost.getLifeCost()){			// pay life here
+			// todo: should ask with a yes/no popup box to pay life?
+			StringBuilder sb = new StringBuilder();
+			sb.append(getCard().getName());
+			sb.append(" - Pay ");
+			sb.append(cost.getLifeAmount());
+			sb.append(" Life?");
+			Object[] possibleValues = {"Yes", "No"};
+        	Object choice = JOptionPane.showOptionDialog(null, sb.toString(), getCard().getName() + " - Cost",  
+        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+        			null, possibleValues, possibleValues[0]);
+            if(choice.equals(0)) {
+            	  AllZone.GameAction.getPlayerLife(card.getController()).payLife(cost.getLifeAmount());
+            	  payLife = true;
+            }
+			else{
+				bCancel = true;
+				req.finishPaying();
+				return false;
+			}
+		}
+		
+		if (!paySac && cost.getSacCost()){
     		// sacrifice stuff here
     		if (cost.getSacThis())
     			changeInput.stopSetNext(sacrificeThis(ability, this));
@@ -126,28 +141,16 @@ public class Cost_Payment {
     		return false;
     	}
 
-		if (isAllPaid())
-			allPaid();
+		req.finishPaying();
 		return true;
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payMana && paySubCounter && paySac);
-	}
-	
-	public void allPaid(){
-		AllZone.ManaPool.clearPay(false);
-		AllZone.Stack.add(ability);
-		cost.resetTargets();
+		return (payTap && payMana && paySubCounter && paySac && payLife);
 	}
 	
 	public void cancelPayment(){
 		// unpay anything we can.
-		cost.resetTargets();
-		if (bCasting){
-			// add back to hand
-			fromZone.add(ability.getSourceCard());
-		}
 		if (cost.getTap() && payTap){
 			// untap if tapped
 			card.untap();
@@ -162,8 +165,60 @@ public class Cost_Payment {
 			card.setCounter(c, countersLeft);
         }
         
+        // refund life
+        if (cost.getLifeCost() && payLife){
+        	PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+        	life.payLife(cost.getLifeAmount()*-1);
+        }
+        
 		// can't really unsacrifice things
 	}
+    
+    public void payComputerCosts(){
+    	Card sacCard = null;
+    	ability.setActivatingPlayer(Constant.Player.Computer);
+    	
+    	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
+    	if (cost.getSacCost()){
+    		if (cost.getSacThis())
+    			sacCard = card;
+    		else
+    			sacCard = ComputerUtil.chooseSacrificeType(cost.getSacType(), card, ability.getTargetCard());
+    		
+	    	if (sacCard == null){
+	    		System.out.println("Couldn't find a valid card to sacrifice for: "+card.getName());
+	    		return;
+	    	}
+    	}
+    	// double check if counters available? Real check is in ComputerUtil.canPayAdditionalCosts()
+    	int countersLeft = 0;
+    	if (cost.getSubCounter()){
+			Counters c = cost.getCounterType();
+			countersLeft = card.getCounters(c) - cost.getCounterNum();
+			if (countersLeft < 0){
+	    		System.out.println("Not enough " + c.getName() + " on "+card.getName());
+	    		return;
+			}
+    	}
+    	
+    	if (cost.getTap())
+    		card.tap();
+    	
+    	if (!cost.hasNoManaCost())
+    		ComputerUtil.payManaCost(ability);
+    	
+    	if (cost.getSubCounter())
+    		card.setCounter(cost.getCounterType(), countersLeft);
+    	
+    	if (cost.getLifeCost())
+    		AllZone.GameAction.getPlayerLife(card.getController()).payLife(cost.getLifeAmount());
+    	
+		if (cost.getSacCost())
+			AllZone.GameAction.sacrifice(sacCard);
+
+        AllZone.Stack.add(ability);
+    }
+    
 	
     public static Input sacrificeThis(final SpellAbility spell, final Cost_Payment payment) {
         Input target = new Input() {
@@ -172,10 +227,15 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                String[] choices = {"Yes", "No"};
                 if(card.getController().equals(Constant.Player.Human)) {
-                    Object o = AllZone.Display.getChoice("Sacrifice " + card.getName() + " ?", choices);
-                    if(o.equals("Yes")) {
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName());
+        			sb.append(" - Sacrifice?");
+        			Object[] possibleValues = {"Yes", "No"};
+                	Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",  
+                			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                			null, possibleValues, possibleValues[0]);
+                    if(choice.equals(0)) {
                     	AllZone.GameAction.sacrifice(card);
                     	payment.setPaySac(true);
                     	stop();
@@ -226,171 +286,4 @@ public class Cost_Payment {
         };
         return target;
     }//sacrificeType()
-    
-    public static Input targetCreaturePlayer(final SpellAbility ability, final Command paid, final boolean targeted, final Cost_Payment payment) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 2781418414287281005L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target Creature, Player, or Planeswalker");
-                // when multi targets (Arc Mage) are added, need this: 
-                // if payment.targeted < mintarget only enable cancel
-                // else if payment.targeted < maxtarget enable cancel and ok
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-            	payment.setCancel(true);
-                stop();
-                payment.payCost();
-            }
-            
-            @Override     
-            public void selectButtonOK() {
-            	payment.setDoneTarget(true);
-                stop();
-                payment.payCost();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play)
-                        && (!targeted || CardFactoryUtil.canTarget(ability, card))) {
-                    ability.setTargetCard(card);
-                    done();
-                }
-            }//selectCard()
-            
-            @Override
-            public void selectPlayer(String player) {
-                ability.setTargetPlayer(player);
-                done();
-            }
-            
-            void done() {
-            	payment.getCost().incrementTargets();
-                paid.execute();
-                stop();
-                payment.payCost();
-            }
-        };
-        return target;
-    }//input_targetCreaturePlayer()
-    
-	public static Input targetCreature(final SpellAbility ability, final Cost_Payment payment) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 2781418414287281005L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target Creature");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-            	payment.setCancel(true);
-                stop();
-                payment.payCost();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(card.isCreature() && zone.is(Constant.Zone.Play) && (CardFactoryUtil.canTarget(ability, card))) {
-                    ability.setTargetCard(card);
-                    done();
-                }
-            }//selectCard()
-            
-            void done() {
-            	payment.getCost().incrementTargets();
-            	stop();
-                payment.payCost();
-            }
-        };
-        return target;
-    }//targetCreature()
-    
-    public static Input targetPlayer(final SpellAbility ability, final Cost_Payment payment) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 2781418414287281005L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target Player or Planeswalker");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-            	payment.setCancel(true);
-                stop();
-                payment.payCost();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(card.isPlaneswalker() && zone.is(Constant.Zone.Play) && (!CardFactoryUtil.canTarget(ability, card))) {
-                    ability.setTargetCard(card);
-                    done();
-                }
-            }//selectCard()
-            
-            @Override
-            public void selectPlayer(String player) {
-                ability.setTargetPlayer(player);
-                done();
-            }
-            
-            void done() {
-            	payment.getCost().incrementTargets();
-                stop();
-                payment.payCost();
-            }
-        };
-        return target;
-    }//targetPlayer()
-    
-    public void payComputerCosts(){
-    	Card sacCard = null;
-    	ability.setActivatingPlayer(Constant.Player.Computer);
-    	if (cost.doesTarget())
-    		ability.chooseTargetAI();
-    	
-    	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
-    	if (cost.getSacCost()){
-    		if (cost.getSacThis())
-    			sacCard = card;
-    		else
-    			sacCard = ComputerUtil.chooseSacrificeType(cost.getSacType(), card, ability.getTargetCard());
-    		
-	    	if (sacCard == null){
-	    		System.out.println("Couldn't find a valid card to sacrifice for: "+card.getName());
-	    		return;
-	    	}
-    	}
-    	// double check if counters available? Real check is in ComputerUtil.canPayAdditionalCosts()
-    	int countersLeft = 0;
-    	if (cost.getSubCounter()){
-			Counters c = cost.getCounterType();
-			countersLeft = card.getCounters(c) - cost.getCounterNum();
-			if (countersLeft < 0){
-	    		System.out.println("Not enough " + c.getName() + " on "+card.getName());
-	    		return;
-			}
-    	}
-    	
-    	if (cost.getTap())
-    		card.tap();
-    	if (!cost.hasNoManaCost())
-    		ComputerUtil.payManaCost(ability);
-    	if (cost.getSubCounter())
-    		card.setCounter(cost.getCounterType(), countersLeft);
-		if (cost.getSacCost())
-			AllZone.GameAction.sacrifice(sacCard);
-
-        AllZone.Stack.add(ability);
-    }
 }

@@ -3456,8 +3456,11 @@ public class GameAction {
     public void playSpellAbility(SpellAbility sa) {
     	sa.setActivatingPlayer(Constant.Player.Human);
     	if (sa.getPayCosts() != null){
+    		Target_Selection ts = new Target_Selection(sa.getTarget(), sa);    		
     		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
-    		payment.payCost();
+    		
+    		SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+    		req.fillRequirements();
     	}
     	else{
 	    	ManaCost manaCost = new ManaCost(sa.getManaCost());
