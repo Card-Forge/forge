@@ -39,7 +39,6 @@ public class GameActionUtil {
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
 		upkeep_Dega_Sanctuary();
-		upkeep_Living_Artifact();
 		upkeep_Tangle_Wire();
 		upkeep_Dance_of_the_Dead();
 		upkeep_Mana_Crypt();
@@ -1340,37 +1339,7 @@ public class GameActionUtil {
 			
 			AllZone.Stack.add(upkeepAbility);
 		}
-	}
-	
-	private static void upkeep_Living_Artifact(){
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList las = AllZoneUtil.getPlayerCardsInPlay(player, "Living Artifact");
-
-		for(final Card la:las) {
-			if(la.getCounters(Counters.VITALITY) > 0) {
-				final StringBuilder sb = new StringBuilder();
-				sb.append(la.getName()+" - Remove a vitality counter and gain 1 life?");
-				final Ability upkeepAbility = new Ability(la, "0") {
-					@Override
-					public void resolve() {
-						if( player.isComputer() ){
-							la.subtractCounter(Counters.VITALITY, 1);
-							player.gainLife(1, la);
-						}
-						else {
-							if (GameActionUtil.showYesNoDialog(la, sb.toString())){
-								la.subtractCounter(Counters.VITALITY, 1);
-								player.gainLife(1, la);
-							}
-						}
-					}
-				};
-				upkeepAbility.setStackDescription(sb.toString());
-				AllZone.Stack.add(upkeepAbility);
-			}
-		}
-	}//upkeep_Living_Artifact
-	
+	} //upkeep_Braid_of_Fire
 	
 	public static void upkeep_TabernacleUpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
