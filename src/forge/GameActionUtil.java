@@ -2939,7 +2939,7 @@ public class GameActionUtil {
     	DrawCard_Whenever_Parameters[0] = player;
 		AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
 		drawCardTriggered_Hoofprints_of_the_Stag(player);
-		drawCardTriggered_Lorescale_Coatl(player);
+		//drawCardTriggered_Lorescale_Coatl(player);
 		//drawCardTriggered_Underworld_Dreams(player);
 		drawCardTriggered_Spiteful_Visions(player);
 	}
@@ -2988,7 +2988,8 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
-
+	
+	/*
 	public static void drawCardTriggered_Lorescale_Coatl(Player player) {
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		CardList list = new CardList(playZone.getCards());
@@ -2999,7 +3000,7 @@ public class GameActionUtil {
 			Card c = list.get(i);
 			c.addCounter(Counters.P1P1, 1);
 		}
-	}
+	}*/
 
 	public static void drawCardTriggered_Hoofprints_of_the_Stag(Player player) {
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
