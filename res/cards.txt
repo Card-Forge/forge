@@ -1,3 +1,9 @@
+Lord of the Undead
+1 B B
+Creature Zombie
+Other Zombie creatures get +1/+1.
+2/2
+
 Sound the Call
 2 G
 Sorcery

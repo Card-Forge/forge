@@ -111,6 +111,7 @@ public class StaticEffects
 		cardToEffectsList.put("Privileged Position", new String[] {"Privileged_Position", "Privileged_Position_Other"});
 		cardToEffectsList.put("Elvish Archdruid", new String[] {"Elvish_Archdruid_Pump", "Elvish_Archdruid_Other"});
 		cardToEffectsList.put("Wizened Cenn", new String[] {"Wizened_Cenn_Pump", "Wizened_Cenn_Other"});
+		cardToEffectsList.put("Lord of the Undead", new String[] {"Lord_of_the_Undead_Pump", "Lord_of_the_Undead_Other"});
 		cardToEffectsList.put("Cemetery Reaper", new String[] {"Cemetery_Reaper_Pump", "Cemetery_Reaper_Other"});
 		cardToEffectsList.put("Captain of the Watch", new String[] {"Captain_of_the_Watch_Pump", "Captain_of_the_Watch_Other"});
 		cardToEffectsList.put("Veteran Armorsmith", new String[] {"Veteran_Armorsmith_Pump", "Veteran_Armorsmith_Other"});

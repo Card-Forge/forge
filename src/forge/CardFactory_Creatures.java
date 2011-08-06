@@ -18397,6 +18397,66 @@ public class CardFactory_Creatures {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
         }//*************** END ************ END **************************
         
+        
+      //*************** START *********** START ************************
+        if(cardName.equals("Lord of the Undead")) {
+            final Ability_Tap ability = new Ability_Tap(card, "1 B") {
+                
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = -4287216165943846367L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return getGraveCreatures().size() != 0;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    CardList grave = getGraveCreatures();
+                    Card target = CardFactoryUtil.AI_getBestCreature(grave);
+                    setTargetCard(target);
+                }
+                
+                @Override
+                public void resolve() {
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        Card c = AllZone.Display.getChoice("Select card", getGraveCreatures().toArray());
+                        setTargetCard(c);
+                    }
+                    
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    
+                    if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) AllZone.GameAction.moveTo(hand,
+                            getTargetCard());
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() {
+                    return super.canPlay() && getGraveCreatures().size() != 0;
+                }
+                
+                CardList getGraveCreatures() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    CardList list = new CardList(grave.getCards());
+                    list = list.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.getType().contains("Zombie") || c.getKeyword().contains("Changeling");
+                    	}
+                    });
+                    return list;
+                }
+            };//SpellAbility
+            ability.setDescription("1 B, Tap: Return target Zombie card from your graveyard to your hand.");
+            ability.setStackDescription(cardName + " - Return target Zombie card from your graveyard to your hand.");
+            
+            card.addSpellAbility(ability);
+
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
