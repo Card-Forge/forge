@@ -10743,7 +10743,7 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Tumble Magnet")) {
         	/*
@@ -10751,7 +10751,7 @@ public class CardFactory implements NewConstants {
         	 * counters on it.
         	 * Tap, Remove a charge counter from Tumble Magnet: Tap target
         	 * artifact or creature.
-        	 */
+        	 *
         	final Ability_Tap ability = new Ability_Tap(card, "0") {
 				private static final long serialVersionUID = -5513092896385146010L;
 
@@ -10782,6 +10782,8 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Creature;Artifact"));
         }//*************** END ************ END **************************
+        */
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Barl's Cage")) {
@@ -10893,20 +10895,12 @@ public class CardFactory implements NewConstants {
         
         //*************** START ************ START **************************
         else if(cardName.equals("Magistrate's Scepter")) {
-        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	Ability_Cost abCost = new Ability_Cost("T SubCounter<3/CHARGE>", cardName, true);
             final Ability_Activated addTurn = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -8712180600748576359L;
-				@Override
-				public boolean canPlay() {
-					return card.getCounters(Counters.CHARGE) >= 3;
-				}
-				@Override 
-				public boolean canPlayAI() {
-					return canPlay();
-				}
+				
                 @Override
                 public void resolve() {
-                    card.subtractCounter(Counters.CHARGE, 3);
                     AllZone.Phase.addExtraTurn(card.getController());
                 }
             };
@@ -10924,7 +10918,7 @@ public class CardFactory implements NewConstants {
         	/*
         	 * 1, Tap, Pay 1 life: Add one mana of any color to your mana pool.
         	 */
-        	Ability_Cost abCost = new Ability_Cost("1 T PayLife<1>", card.getName(), true);
+        	Ability_Cost abCost = new Ability_Cost("1 T PayLife<1>", cardName, true);
         	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -5393697921811242255L;
 
