@@ -10260,7 +10260,8 @@ public class GameActionUtil {
       			Cards_inZone.addAll(AllZone.Human_Battlefield.getCards());
       			Cards_inZone.addAll(AllZone.Computer_Battlefield.getCards());
       			//this is a hack for Quick Sliver
-      			if(Keyword_Details.length >= 2 && Keyword_Details[2].contains("Flash")) {
+      			if(Keyword_Details.length >= 2 && 
+      					(Keyword_Details[2].contains("Flash") || Keyword_Details[2].contains("CARDNAME can't be countered.")) {
       				Cards_inZone.addAll(AllZone.Human_Hand.getCards());
       				Cards_inZone.addAll(AllZone.Computer_Hand.getCards());
       				Cards_inZone.addAll(AllZone.Human_Graveyard.getCards());

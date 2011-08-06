@@ -2,7 +2,7 @@ Name:Mighty Emergence
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with power 5 or greater enters the battlefield under your control, you may put two +1/+1 counters on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE5+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with power 5 or greater enters the battlefield under your control, you may put two +1/+1 counters on it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Triggered | CounterType$ P1P1 | CounterNum$ 2
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
