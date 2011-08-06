@@ -34,12 +34,6 @@ public class AllZoneUtil {
 		return creatures.filter(AllZoneUtil.creatures);
 	}
 	
-	private static CardListFilter creatures = new CardListFilter() {
-		public boolean addCard(Card c) {
-			return c.isCreature();
-		}
-	};
-	
 	///////////////// Lands
 	
 	/**
@@ -359,6 +353,15 @@ public class AllZoneUtil {
 	public static CardListFilter untapped = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isUntapped();
+		}
+	};
+	
+	/**
+	 * a CardListFilter to get all creaures
+	 */
+	public static CardListFilter creatures = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isCreature();
 		}
 	};
 }

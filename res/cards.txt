@@ -1,3 +1,8 @@
+Arena of the Ancients
+3
+Artifact
+Legendary creatures don't untap during their controllers' untap steps.  When Arena of the Ancients enters the battlefield, tap all legendary creatures.
+
 Energy Tap
 U
 Sorcery

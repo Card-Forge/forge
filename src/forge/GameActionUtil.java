@@ -8429,6 +8429,39 @@ public class GameActionUtil {
 		}// execute()
 	};
 
+	/**
+	 * stores the Command to execute the "Legends don't untap during your untap step"
+	 */
+	public static Command Arena_of_the_Ancients = new Command() {
+		private static final long serialVersionUID = -3233715310427996429L;
+		
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			String keyword = "CARDNAME doesn't untap during your untap step.";
+
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.removeExtrinsicKeyword(keyword);
+			}
+			list.clear();
+
+			if(AllZoneUtil.isCardInPlay("Arena of the Ancients")) {
+				CardList legends = AllZoneUtil.getTypeInPlay("Legendary");
+				legends = legends.filter(AllZoneUtil.creatures);
+				for(int i = 0; i < legends.size(); i++) {
+					c = legends.get(i);
+					if(!c.getKeyword().contains(keyword)) {
+						c.addExtrinsicKeyword(keyword);
+						gloriousAnthemList.add(c);
+					}
+				}//for
+			}//if
+		}// execute()
+	};
 
 	public static Command Absolute_Grace              = new Command() {
 		private static final long serialVersionUID   = -6904191523315339355L;
@@ -16301,6 +16334,8 @@ public class GameActionUtil {
 		commands.put("Kor_Duelist", Kor_Duelist);
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Heedless_One", Heedless_One);
+		commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
+		
 		//System.out.println("size of commands: " + commands.size());
 
 	}

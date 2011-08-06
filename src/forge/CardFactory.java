@@ -19687,6 +19687,35 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Arena of the Ancients")) {
+        	/*
+        	 * When Arena of the Ancients enters the battlefield, tap
+        	 * all legendary creatures.
+        	 */
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			CardList legends = AllZoneUtil.getTypeInPlay("Legendary");
+        			legends = legends.filter(AllZoneUtil.creatures);
+        			for(int i = 0; i < legends.size(); i++) {
+        				Card c = legends.get(i);
+        				if(c.isUntapped()) c.tap();
+        			}
+        		}
+        	};//ability
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = 3564466123797650567L;
+
+				public void execute() {
+        			ability.setStackDescription("When " + card.getName()
+        					+ " comes into play, tap all Legendary creatures.");
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
