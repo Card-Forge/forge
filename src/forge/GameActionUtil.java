@@ -2560,42 +2560,67 @@ public class GameActionUtil {
 
 	}
 
-	public static void playCard_Enchantress_Draw(Card c) {
+    public static void playCard_Enchantress_Draw(Card c) {
 
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+        CardList list = new CardList();
+        list.addAll(play.getCards());
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card crd) {
+                if (crd.getName().equals("Verduran Enchantress")    || crd.getName().equals("Enchantress's Presence")
+                        || crd.getName().equals("Mesa Enchantress") || crd.getName().equals("Argothian Enchantress")) return true;
+                else return false;
+            }
+        });
 
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card crd) {
-				if(crd.getName().equals("Verduran Enchantress") || crd.getName().equals("Enchantress's Presence")
-						|| crd.getName().equals("Mesa Enchantress")
-						|| crd.getName().equals("Argothian Enchantress")) return true;
-				else return false;
-			}
-		});
-		//list = list.getName("Verduran Enchantress");
+        if (c.isEnchantment()) {
+            for (int i = 0; i < list.size(); i++) {
+                final Card card = list.get(i);        //was "list.get(0);"
 
-		if(c.isEnchantment()) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(0);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						// draws a card
-						AllZone.GameAction.drawCard(card.getController());
-					}
-				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " plays an enchantment spell and draws a card");
-				AllZone.Stack.add(ability2);
-
-			} // for
-		}// if isEnchantment()
-	}
+                Ability ability2 = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
+                        Boolean mayDrawNotMust = (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress"));
+                        int choice = 0;
+                        
+                        if (card.getController().equals("Human")) {
+                            if (mayDrawNotMust) {
+                                StringBuffer title = new StringBuffer();
+                                title.append(card.getName()).append(" Ability");
+                                StringBuffer message = new StringBuffer();
+                                message.append("Will you draw a card?");
+                                choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
+                            }// May Draw a card
+                            
+                            if ((mayDrawNotMust && choice == JOptionPane.YES_OPTION) || !mayDrawNotMust) {
+                                AllZone.GameAction.drawCard(card.getController());
+                            }
+                        }// Human
+                        
+                        if (card.getController().equals("Computer")) {
+                            int compLibSize = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
+                            int compHandSize = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
+                            if ((!mayDrawNotMust) || (mayDrawNotMust && compLibSize >= 5  && compHandSize <= 7)) {
+                                AllZone.GameAction.drawCard(card.getController());
+                            }
+                        }// Computer
+                    }// resolve()
+                };// ability2
+                
+                StringBuffer sb = new StringBuffer();
+                sb.append(card.getName()).append(" - ").append(c.getController()).append(" plays an enchantment spell and ");
+                if (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress")) {
+                    sb.append("may draw a card.");
+                } else {
+                    sb.append("draws a card.");
+                }
+                
+                ability2.setStackDescription(sb.toString());
+                AllZone.Stack.add(ability2);
+            }// for
+        }// if isEnchantment()
+    }// playCard_Enchantress_Draw()
 
 	public static void playCard_Gilt_Leaf_Archdruid(Card c) {
 
