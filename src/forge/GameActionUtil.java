@@ -50,6 +50,7 @@ public class GameActionUtil {
 		upkeep_Dega_Sanctuary();
 		upkeep_Sheltered_Valley();
 		upkeep_Land_Tax();
+		upkeep_Living_Artifact();
 		upkeep_Tangle_Wire();
 		upkeep_Mana_Vault();
 		upkeep_Dance_of_the_Dead();
@@ -3174,6 +3175,35 @@ public class GameActionUtil {
 		}
 	}
 	
+	private static void upkeep_Living_Artifact(){
+		final Player player = AllZone.Phase.getPlayerTurn();
+		CardList las = AllZoneUtil.getPlayerCardsInPlay(player, "Living Artifact");
+
+		for(final Card la:las) {
+			if(la.getCounters(Counters.VITALITY) > 0) {
+				final StringBuilder sb = new StringBuilder();
+				sb.append(la.getName()+" - Remove a vitality counter and gain 1 life?");
+				final Ability upkeepAbility = new Ability(la, "0") {
+					@Override
+					public void resolve() {
+						if( player.isComputer() ){
+							la.subtractCounter(Counters.VITALITY, 1);
+							player.gainLife(1, la);
+						}
+						else {
+							if (GameActionUtil.showYesNoDialog(la, sb.toString())){
+								la.subtractCounter(Counters.VITALITY, 1);
+								player.gainLife(1, la);
+							}
+						}
+					}
+				};
+				upkeepAbility.setStackDescription(sb.toString());
+				AllZone.Stack.add(upkeepAbility);
+			}
+		}
+	}//upkeep_Living_Artifact
+	
 	
 	public static void upkeep_TabernacleUpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
@@ -5982,9 +6012,23 @@ public class GameActionUtil {
 		else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
 		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
 			playerCombatDamage_Whirling_Dervish(c);
+		else if(AllZoneUtil.isCardInPlay("Living Artifact", player)) execute_Living_Artifact(player, damage);
     	
     	if (player.isPlayer(AllZone.HumanPlayer)) c.setDealtDmgToHumanThisTurn(true);
     	if (player.isPlayer(AllZone.ComputerPlayer)) c.setDealtDmgToComputerThisTurn(true);
+    }
+    
+    private static void execute_Living_Artifact(final Player p, final int num) {
+    	CardList las = AllZoneUtil.getPlayerCardsInPlay(p, "Living Artifact");
+    	for(final Card la:las) {
+    		Ability addCounter = new Ability(la, "0") {
+    			public void resolve() {
+    				la.addCounter(Counters.VITALITY, num);
+    			}
+    		};
+    		addCounter.setStackDescription(la.getName()+" - Put "+num+" vitality counters on "+la);
+    		AllZone.Stack.add(addCounter);
+    	}
     }
     
     //restricted to combat damage, restricted to players

@@ -71,6 +71,7 @@ public enum Counters {
     TOWER("tower"),
     TREASURE(),
     VERSE(),
+    VITALITY(),
     WIND(),
     WISH();
     

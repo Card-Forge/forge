@@ -1,0 +1,9 @@
+Name:Living Artifact
+ManaCost:G
+Types:Enchantment Aura
+Text:Whenever you're dealt damage, put that many vitality counters on CARDNAME.\r\n\r\nAt the beginning of your upkeep, you may remove a vitality counter from CARDNAME. If you do, you gain 1 life.
+K:Enchant Artifact
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/living_artifact.jpg
+End
