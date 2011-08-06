@@ -4274,7 +4274,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                    if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(untap);
                     else {
                         CardList list = new CardList(AllZone.Computer_Play.getCards());
                         list = list.filter(new CardListFilter() {
@@ -4330,7 +4330,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                    if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(untap);
                     else {
                         CardList list = new CardList(AllZone.Computer_Play.getCards());
                         list = list.filter(new CardListFilter() {
@@ -4388,7 +4388,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                    if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(untap);
                     else {
                         CardList list = new CardList(AllZone.Computer_Play.getCards());
                         list = list.filter(new CardListFilter() {
@@ -4469,7 +4469,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                    if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(untap);
                     else {
                         CardList list = new CardList(AllZone.Computer_Play.getCards());
                         list = list.filter(new CardListFilter() {
@@ -4505,8 +4505,8 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     AllZone.GameAction.drawCard(card.getController());
                     
-                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    else AllZone.GameAction.discardRandom("Computer", this);
+                    if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    else AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
             };
             Command intoPlay = new Command() {
@@ -5862,7 +5862,7 @@ public class CardFactory_Creatures {
                     //this allows players to look at their decks without paying anything
                     if(o == null) stop();
                     else {
-                        AllZone.GameAction.shuffle("Human");
+                        AllZone.GameAction.shuffle(Constant.Player.Human);
                         ability.setTargetCard((Card) o);
                         stopSetNext(new Input_PayManaCost(ability));
                     }
@@ -6619,10 +6619,10 @@ public class CardFactory_Creatures {
         	final SpellAbility ability = new Ability(card, "0") {
         		@Override
         		public boolean canPlayAI() {
-			        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, "Computer");
+			        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
 			        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
 			        PlayerCreatureList = PlayerCreatureList.getType("Creature");
-					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, "Human");
+					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
 			        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
 			        opponentCreatureList = opponentCreatureList.getType("Creature");
                     return ((PlayerCreatureList.size() + 1 > 2* opponentCreatureList.size() + 1) && (Phase.Sac_Dauntless_Escort_Comp == false) && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1))) ;
@@ -6632,7 +6632,7 @@ public class CardFactory_Creatures {
                     private static final long serialVersionUID = 2701248867610L;
                     
                     public void execute() {
-                        if(card.getController() == "Human") {
+                        if(card.getController() == Constant.Player.Human) {
                         	Phase.Sac_Dauntless_Escort = false;
                         	} else {
                         	Phase.Sac_Dauntless_Escort_Comp = false;  
@@ -6651,7 +6651,7 @@ public class CardFactory_Creatures {
         		@Override
         		public void resolve() {
                     AllZone.GameAction.sacrifice(card);
-                    if(card.getController() == "Human") {
+                    if(card.getController() == Constant.Player.Human) {
                     	Phase.Sac_Dauntless_Escort = true;
                     }
                     else Phase.Sac_Dauntless_Escort_Comp = true;	
@@ -10426,7 +10426,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = null;
-                    if(card.getController().equals("Human")) {
+                    if(card.getController().equals(Constant.Player.Human)) {
                         Object o = AllZone.Display.getChoiceOptional("Select Elemental", getCreatures());
                         c = (Card) o;
                         
@@ -12166,8 +12166,6 @@ public class CardFactory_Creatures {
             final Ability ability2 = new Ability(card, "2 W") {
                 @Override
                 public void resolve() {
-                    //if (player.equals("Human"))
-                    //{
                     CardList cards = new CardList();
                     PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
                     PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
@@ -12181,7 +12179,6 @@ public class CardFactory_Creatures {
                             cards.get(i).addDamage(3, card);
                         }
                     }
-                    //}
                 }
                 
                 @Override
@@ -12205,7 +12202,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     int lifeGain = 0;
-                    if(card.getController().equals("Human")) {
+                    if(card.getController().equals(Constant.Player.Human)) {
                         String choices[] = {"white", "blue", "black", "red", "green"};
                         Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
                         Log.debug("Treva, the Renewer", "Color:" + o);
@@ -12246,7 +12243,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     int numberTokens = 0;
-                    if(card.getController().equals("Human")) {
+                    if(card.getController().equals(Constant.Player.Human)) {
                         String choices[] = {"white", "blue", "black", "red", "green"};
                         Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
                         //System.out.println("Color:" + o);
@@ -13221,7 +13218,7 @@ public class CardFactory_Creatures {
                     //System.out.println("size of grave: " + gravecards.size());
                     
                     if(gravecards.size() > 0) {
-                        if(card.getController().equals("Human")) {
+                        if(card.getController().equals(Constant.Player.Human)) {
                             Object o = AllZone.Display.getChoiceOptional(title, gravecards.toArray());
                             if(o != null) {
                                 Card removedCard = (Card) o;
@@ -15420,8 +15417,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.Human_Life.subtractLife(countSwamps("Human"),card);
-                    AllZone.Computer_Life.subtractLife(countSwamps("Computer"),card);
+                    AllZone.Human_Life.subtractLife(countSwamps(Constant.Player.Human),card);
+                    AllZone.Computer_Life.subtractLife(countSwamps(Constant.Player.Computer),card);
                 }
                 
                 int countSwamps(String player) {
@@ -16401,7 +16398,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -4352349741511065318L;
                 
                 public void execute() {
-                    if(card.getController().equals("Human")) {
+                    if(card.getController().equals(Constant.Player.Human)) {
                         String[] choices = {"Yes", "No"};
                         Object q = null;
                         
@@ -17436,7 +17433,7 @@ public class CardFactory_Creatures {
                     CardList lands = new CardList(lib.getCards());
                     lands = lands.getType("Forest");
                     
-                    if(player.equals("Human") && lands.size() > 0) {
+                    if(player.equals(Constant.Player.Human) && lands.size() > 0) {
                         Object o = AllZone.Display.getChoiceOptional("Pick a forest card to put into play",
                                 lands.toArray());
                         if(o != null) {
@@ -17448,7 +17445,7 @@ public class CardFactory_Creatures {
                             AllZone.GameAction.shuffle(player);
                         }
                     } // player equals human
-                    else if(player.equals("Computer") && lands.size() > 0) {
+                    else if(player.equals(Constant.Player.Computer) && lands.size() > 0) {
                         Card card = lands.get(0);
                         lib.remove(card);
                         // hand.add(card);

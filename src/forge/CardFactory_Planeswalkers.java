@@ -571,7 +571,7 @@ class CardFactory_Planeswalkers {
                         }
                     });
                     
-                    if(player.equals("Human")) {
+                    if(player.equals(Constant.Player.Human)) {
                         for(int k = 0; k < oppPerms.size(); k++) {
                             Card c = oppPerms.get(k);
                             
