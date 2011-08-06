@@ -36,41 +36,11 @@ public class Input_Untap extends Input {
         AllZone.Phase.setNeedToNextPhase(true);
     }
     
-    private boolean isMarbleTitanInPlay() //or Meekstone
+    private boolean untapLessThanPower3()
     {
-    	/*
-        CardList all = new CardList();
-        all.addAll(AllZone.Human_Play.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
-        
-        all = all.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getName().equals("Meekstone") || c.getName().equals("Marble Titan");
-            }
-        });
-        
-        return all.size() > 0;
-        */
-        
+    	//checks for Marble Titan or Meekstone
         return AllZoneUtil.isCardInPlay("Marble Titan") || AllZoneUtil.isCardInPlay("Meekstone");
-
     }
-    
-    /*
-    private boolean isStasisInPlay() {
-        CardList all = new CardList();
-        all.addAll(AllZone.Human_Play.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
-        
-        all = all.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getName().equals("Stasis");
-            }
-        });
-        
-        return all.size() > 0;
-    }
-    */
      
     private void doUntap()
     {
@@ -80,13 +50,13 @@ public class Input_Untap extends Input {
     	{
     		public boolean addCard(Card c)
     		{
-    			if( isMarbleTitanInPlay() && isWinterOrbInEffect() ) {
+    			if( untapLessThanPower3() && isWinterOrbInEffect() ) {
     				return !c.isLand() && c.getNetAttack() < 3;
     			}
     			else if( isWinterOrbInEffect() ) {
     				return !c.isLand();
     			}
-    			else if (isMarbleTitanInPlay()) {
+    			else if (untapLessThanPower3()) {
     				return c.getNetAttack() < 3;
     			}
 
@@ -167,17 +137,7 @@ public class Input_Untap extends Input {
     	}
     }//end doUntap
 
-    
     private boolean isWinterOrbInEffect() {
-    	/*
-    	CardList all = new CardList();
-    	all.addAll(AllZone.Human_Play.getCards());
-    	all.addAll(AllZone.Computer_Play.getCards());
-    	all = all.filter(new CardListFilter() {
-    		public boolean addCard(Card c) {
-    			return c.getName().equals("Winter Orb");
-    		}
-    	}); */
     	
     	CardList all = AllZoneUtil.getCardsInPlay("Winter Orb");
 
