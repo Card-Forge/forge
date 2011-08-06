@@ -17295,8 +17295,10 @@ public class CardFactory implements NewConstants {
     	  };
     	  card.clearSpellAbility();
     	  card.addSpellAbility(spell);
-    	  if (cardName.equals("Moment's Peace"))
+    	  if (cardName.equals("Moment's Peace")) {
+    		  card.setFlashback(true);
     		  card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G", "0"));
+    	  }
       }//*************** END ************ END **************************
       
       //*************** START *********** START **************************
