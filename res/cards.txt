@@ -1,3 +1,9 @@
+Wanderlust
+2 G
+Enchantment Aura
+At the beginning of the upkeep of enchanted creature's controller, Wanderlust deals 1 damage to that player.
+Enchant Creature Curse
+
 Moonglove Extract
 3
 Artifact

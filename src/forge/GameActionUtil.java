@@ -29,6 +29,7 @@ public class GameActionUtil {
 		upkeep_Land_Tax();
 		upkeep_Feedback();
 		upkeep_Warp_Artifact();
+		upkeep_Wanderlust();
 		upkeep_Greener_Pastures();
 		upkeep_Wort();
 		upkeep_Squee();
@@ -4870,36 +4871,7 @@ public class GameActionUtil {
 	}
 	
 	private static void upkeep_Feedback() {
-        final String player = AllZone.Phase.getActivePlayer();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-        
-        CardList list = new CardList(playZone.getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isEnchantment() && c.isEnchanted();
-            }
-        });
-        
-        if(list.size() > 0) {
-        	Ability ability;
-        	for(Card target:list) {
-        		if(target.isEnchantedBy("Feedback")) {
-        			ability = new Ability(target, "0") {
-                        @Override
-                        public void resolve() {
-                            AllZone.GameAction.getPlayerLife(player).subtractLife(1);
-                        }
-                    };
-                    
-                    ability.setStackDescription("Feedback -  deals 1 damage to "+ player);
-                    AllZone.Stack.add(ability);
-        		}
-        	}
-        }//list > 0
-    }//upkeep_Feedback()
-	
-	private static void upkeep_Warp_Artifact() {
-		final String auraName = "Warp Artifact";
+		final String auraName = "Feedback";
         final String player = AllZone.Phase.getActivePlayer();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
@@ -4914,19 +4886,91 @@ public class GameActionUtil {
         	Ability ability;
         	for(Card target:list) {
         		if(target.isEnchantedBy(auraName)) {
-        			ability = new Ability(target, "0") {
-                        @Override
-                        public void resolve() {
-                            AllZone.GameAction.getPlayerLife(player).subtractLife(1);
-                        }
-                    };
-                    
-                    ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
-                    AllZone.Stack.add(ability);
+        			CardList auras = new CardList(target.getEnchantedBy().toArray());
+        			auras = auras.getName(auraName);
+        			for(Card aura:auras) {
+        				final Card source = aura;
+        				ability = new Ability(aura, "0") {
+        					@Override
+        					public void resolve() {
+        						AllZone.GameAction.addDamage(player, source, 1);
+        					}
+        				};
+        				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
+                        AllZone.Stack.add(ability);
+        			} 
         		}
         	}
         }//list > 0
     }//upkeep_Feedback()
+	
+	private static void upkeep_Warp_Artifact() {
+		final String auraName = "Warp Artifact";
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isArtifact() && c.isEnchanted();
+            }
+        });
+        
+        if(list.size() > 0) {
+        	Ability ability;
+        	for(Card target:list) {
+        		if(target.isEnchantedBy(auraName)) {
+        			CardList auras = new CardList(target.getEnchantedBy().toArray());
+        			auras = auras.getName(auraName);
+        			for(Card aura:auras) {
+        				final Card source = aura;
+        				ability = new Ability(aura, "0") {
+        					@Override
+        					public void resolve() {
+        						AllZone.GameAction.addDamage(player, source, 1);
+        					}
+        				};
+        				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
+                        AllZone.Stack.add(ability);
+        			} 
+        		}
+        	}
+        }//list > 0
+    }//upkeep_Warp_Artifact()
+	
+	private static void upkeep_Wanderlust() {
+		final String auraName = "Wanderlust";
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isCreature() && c.isEnchanted();
+            }
+        });
+        
+        if(list.size() > 0) {
+        	Ability ability;
+        	for(Card target:list) {
+        		if(target.isEnchantedBy(auraName)) {
+        			CardList auras = new CardList(target.getEnchantedBy().toArray());
+        			auras = auras.getName(auraName);
+        			for(Card aura:auras) {
+        				final Card source = aura;
+        				ability = new Ability(aura, "0") {
+        					@Override
+        					public void resolve() {
+        						AllZone.GameAction.addDamage(player, source, 1);
+        					}
+        				};
+        				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
+                        AllZone.Stack.add(ability);
+        			} 
+        		}
+        	}
+        }//list > 0
+    }//upkeep_Wanderlust()
 
 	private static void upkeep_Squee() {
 		final String player = AllZone.Phase.getActivePlayer();
