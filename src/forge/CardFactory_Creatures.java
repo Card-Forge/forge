@@ -16588,6 +16588,43 @@ public class CardFactory_Creatures {
   	    	card.addDestroyCommand(destroy);
   	    }//*************** END ************ END **************************
 
+	      //*************** START *********** START **************************
+  	    else if (cardName.equals("Deadly Grub"))
+  	    {
+  	    	final Command destroy = new Command()
+  	    	{
+				private static final long serialVersionUID = -4352349741511065318L;
+
+				public void execute() {
+					if (card.getCounters(Counters.AGE) <= 0){
+					
+					  Card c = new Card();
+
+	                  c.setName("Insect");
+	                  c.setImageName("G 6 1 Insect");
+
+	                  c.setOwner(card.getController());
+	                  c.setController(card.getController());
+
+	                  c.setManaCost("G");
+	                  c.setToken(true);
+	                 
+	                  c.addType("Creature");
+	                  c.addType("Insect");
+	                  c.setBaseAttack(6);
+	                  c.setBaseDefense(1);
+	                  c.addIntrinsicKeyword("Shroud");
+
+	                  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	                  play.add(c);}
+					
+				}	
+  	    	};
+  	    	
+  	    	card.addDestroyCommand(destroy);
+  	    }//*************** END ************ END **************************
+
+	      
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Boggart Harbinger"))
 	    {
