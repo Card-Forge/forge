@@ -7526,7 +7526,8 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Balloon Brigade")) {
             //mana ability - targets itself - until EOT
@@ -7571,8 +7572,9 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+*/
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Manta Riders")) {
             //mana ability - targets itself - until EOT
@@ -7617,6 +7619,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************

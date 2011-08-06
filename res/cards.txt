@@ -15132,6 +15132,7 @@ U
 Creature Merfolk
 no text
 1/1
+abPump U:Flying
 
 Centaur Glade
 3 G G
@@ -17033,6 +17034,7 @@ R
 Creature Goblin Warrior
 no text
 1/1
+abPump R:Flying
 
 Balduvian Barbarians
 1 R R
