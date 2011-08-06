@@ -2832,6 +2832,31 @@ public class Card extends MyObservable {
         receivedDamageFromThisTurn.clear();
     }
     
+    //how much damage is enough to kill the creature (for AI)
+    public int getEnoughDamageToKill(int maxDamage, Card source, boolean isCombat) {
+    	
+    	int killDamage = getKillDamage();
+    	
+    	if(getKeyword().contains("Indestructible") || getShield() > 0) { 
+    			if(!(source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect"))) 
+    				return maxDamage + 1;
+    	}
+    	else
+	        if(source.getKeyword().contains("Deathtouch")
+	        		|| source.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature"))
+	        	for(int i=1; i < maxDamage+1;i++) {
+	        		if (predictDamage(i, source, isCombat) > 0)
+	        			return i;
+	        	}
+        
+    	for(int i=1; i < maxDamage+1;i++) {
+    		if (predictDamage(i, source, isCombat) >= killDamage)
+    			return i;
+    	}
+        
+        return maxDamage + 1;
+    }
+    
     //the amount of damage needed to kill the creature (for AI)
     public int getKillDamage() {
     	int killDamage = getLethalDamage() + preventNextDamage;

@@ -10,7 +10,7 @@ public class Combat {
 	private Set<Card> blocked = new HashSet<Card>();
 
 	private HashMap<Card, CardList> unblockedMap = new HashMap<Card, CardList>();
-	private HashMap<Card, Integer> defendingFirstStrikeDamageMap = new HashMap<Card, Integer>();
+	//private HashMap<Card, Integer> defendingFirstStrikeDamageMap = new HashMap<Card, Integer>();
 	private HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
 
 	// Defenders are the Defending Player + Each Planeswalker that player controls
@@ -41,7 +41,7 @@ public class Combat {
 
 		attackingDamage = 0;
 		defendingDamageMap.clear();
-		defendingFirstStrikeDamageMap.clear();
+		//defendingFirstStrikeDamageMap.clear();
 
 		attackingPlayer = null;
 		defendingPlayer = null;
@@ -163,11 +163,13 @@ public class Combat {
 	public HashMap<Card, Integer> getDefendingDamageMap() {
 		return defendingDamageMap;
 	}
-
+	
+	/*
 	public HashMap<Card, Integer> getDefendingFirstStrikeDamageMap() {
 		return defendingFirstStrikeDamageMap;
 	}
-
+	*/
+	
 	public int getTotalDefendingDamage() {
 		int total = 0;
 
@@ -179,7 +181,8 @@ public class Combat {
 
 		return total;
 	}
-
+	
+	/*
 	public int getTotalFirstStrikeDefendingDamage() {
 		int total = 0;
 
@@ -191,7 +194,8 @@ public class Combat {
 
 		return total;
 	}
-
+	*/
+	
 	public void setDefendingDamage() {
 		defendingDamageMap.clear();
 		CardList att = new CardList(getAttackers());
@@ -211,7 +215,8 @@ public class Combat {
 			} // ! isBlocked...
 		}// for
 	}
-
+	
+	/*
 	public void setDefendingFirstStrikeDamage() {
 		defendingFirstStrikeDamageMap.clear();
 		CardList att = new CardList(getAttackers());
@@ -231,6 +236,7 @@ public class Combat {
 			}
 		} // for
 	}
+	*/
 
 	public void addDefendingDamage(int n, Card source) {
 		String slot = getDefenderByAttacker(source).toString();		
@@ -249,7 +255,8 @@ public class Combat {
 			defendingDamageMap.put(source, defendingDamageMap.get(source) + n);
 		}
 	}
-
+	
+	/*
 	public void addDefendingFirstStrikeDamage(int n, Card source) {
 		String slot = getDefenderByAttacker(source).toString();		
 		Object o = defenders.get(Integer.parseInt(slot));
@@ -268,6 +275,7 @@ public class Combat {
 			defendingFirstStrikeDamageMap.get(source) + n);
 		}
 	}
+	*/
 
 	public void addAttackingDamage(int n) {
 		attackingDamage += n;
@@ -388,7 +396,7 @@ public class Combat {
 	// also assigns player damage by setPlayerDamage()
 	public void setAssignedFirstStrikeDamage() {
 		
-		setDefendingFirstStrikeDamage();
+		//setDefendingFirstStrikeDamage();
 
 		CardList block;
 		CardList attacking = new CardList(getAttackers());
@@ -396,51 +404,39 @@ public class Combat {
 		
 		for (int i = 0; i < attacking.size(); i++) {
 			
-			block = getBlockers(attacking.get(i));
+			Card attacker = attacking.get(i);
+			block = getBlockers(attacker);
+
 			
-			int damageDealt = attacking.get(i).getNetCombatDamage();
+			int damageDealt = attacker.getNetCombatDamage();
 
 			// attacker always gets all blockers' attack
 
 			for (Card b : block) {
 				if (b.hasFirstStrike() || b.hasDoubleStrike()) {
-					attacking.get(i).addAssignedDamage(damageDealt, b);
+					attacker.addAssignedDamage(damageDealt, b);
 				}
 			}
 
 			if (block.size() == 0){
 				// this damage is assigned to a player by  setPlayerDamage()
-				addUnblockedAttacker(attacking.get(i));
+				addUnblockedAttacker(attacker);
 			}
 
-			else if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
+			else if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
 				
 				if (getAttackingPlayer().isHuman()) {// human attacks
-					AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
+					AllZone.Display.assignDamage(attacker, block, damageDealt);
 				}
 				else  {// computer attacks
-					if (block.size() == 1) {
-						
-						int trample = damageDealt - block.get(0).getKillDamage();
-						
-						// trample
-						if (attacking.get(i).getKeyword().contains("Trample") && 0 < trample) {
-							block.get(0).addAssignedDamage(block.get(0).getKillDamage(), attacking.get(i));
-							this.addDefendingDamage(trample, attacking.get(i));
-						}
-						else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
-					}// 1 blocker
-					else {
-						distributeAIDamage(attacking.get(i), block, damageDealt);
-					} 
-				} //Computer
-
+						distributeAIDamage(attacker, block, damageDealt);
+				}
 			}// if(hasFirstStrike || doubleStrike)
 		}// for
 	}// setAssignedFirstStrikeDamage()
 	
 	/*
-	private void addAssignedFirstStrikeDamage(Card attacker, CardList block, int damage) {
+	private void distributeAIFirstStrikeDamage(Card attacker, CardList block, int damage) {
 
 		Card c = attacker;
 		for (Card b : block) {
@@ -496,21 +492,8 @@ public class Combat {
 					AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
 				}
 				else  {// computer attacks
-					if (block.size() == 1) {
-						
-						int trample = damageDealt - block.get(0).getKillDamage();
-						
-						// trample
-						if (attacking.get(i).getKeyword().contains("Trample") && 0 < trample) {
-							block.get(0).addAssignedDamage(block.get(0).getKillDamage(), attacking.get(i));
-							this.addDefendingDamage(trample, attacking.get(i));
-						}
-						else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
-					}// 1 blocker
-					else {
 						distributeAIDamage(attacking.get(i), block, damageDealt);
-					} 
-				} //Computer
+				}
 			}// if !hasFirstStrike ...
 		}// for
 
@@ -520,25 +503,55 @@ public class Combat {
 
 	private void distributeAIDamage(Card attacker, CardList block, int damage) {
 		Card c = attacker;
-		for (Card b : block) {
-			if (b.getKillDamage() <= damage) {
-				damage -= b.getKillDamage();
-				CardList cl = new CardList();
-				cl.add(attacker);
-
-				b.addAssignedDamage(b.getKillDamage(), c);
-				// c.setAssignedDamage(c.getKillDamage());
+		
+		if (block.size() == 1) {
+			
+			Card blocker = block.get(0);
+			
+			// trample
+			if (attacker.getKeyword().contains("Trample")) {
+			
+				int damageNeeded = 0;
+				
+				//TODO: if the human can be killed distribute only the minimum of damage on the blocker
+				
+				damageNeeded = blocker.getEnoughDamageToKill(damage, attacker, true);
+				
+				if (damageNeeded > damage) 
+					damageNeeded = blocker.getLethalDamage();
+				else
+					damageNeeded = Math.min(blocker.getLethalDamage(),damageNeeded);
+				
+				int trample = damage - damageNeeded;
+				
+				if (0 < trample) {
+					blocker.addAssignedDamage(damageNeeded, attacker);
+					this.addDefendingDamage(trample, attacker);
+				}
 			}
-		}// for
-
-		// if attacker has no trample, and there's damage left, assign the rest
-		// to a random blocker
-		if (damage > 0 && !c.getKeyword().contains("Trample")) {
-			int index = CardUtil.getRandomIndex(block);
-			block.get(index).addAssignedDamage(damage, c);
-			damage = 0;
-		} else if (c.getKeyword().contains("Trample")) {
-			this.addDefendingDamage(damage, c);
+			else blocker.addAssignedDamage(damage, attacker);
+		}// 1 blocker
+		else {
+			for (Card b : block) {
+				if (b.getKillDamage() <= damage) {
+					damage -= b.getKillDamage();
+					CardList cl = new CardList();
+					cl.add(attacker);
+	
+					b.addAssignedDamage(b.getKillDamage(), c);
+					// c.setAssignedDamage(c.getKillDamage());
+				}
+			}// for
+	
+			// if attacker has no trample, and there's damage left, assign the rest
+			// to a random blocker
+			if (damage > 0 && !c.getKeyword().contains("Trample")) {
+				int index = CardUtil.getRandomIndex(block);
+				block.get(index).addAssignedDamage(damage, c);
+				damage = 0;
+			} else if (c.getKeyword().contains("Trample")) {
+				this.addDefendingDamage(damage, c);
+			}
 		}
 	}// setAssignedDamage()
 
@@ -548,8 +561,7 @@ public class Combat {
         
         boolean bFirstStrike = AllZone.Phase.is(Constant.Phase.Combat_FirstStrikeDamage);
         
-        HashMap<Card, Integer> defMap = bFirstStrike ? AllZone.Combat.getDefendingFirstStrikeDamageMap() : 
-        	AllZone.Combat.getDefendingDamageMap();
+        HashMap<Card, Integer> defMap = AllZone.Combat.getDefendingDamageMap();
         
         for(Entry<Card, Integer> entry : defMap.entrySet()) {
         	player.addCombatDamage(entry.getValue(), entry.getKey());

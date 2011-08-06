@@ -1359,12 +1359,7 @@ class Gui_MultipleBlockers3 extends JFrame {
             
             if (c.getName().equals("Player") && att.getKeyword().contains("Trample") && assignedLethalDamageToAllBlockers)
             {
-            	//what happens with Double Strike???
-            	if (att.getKeyword().contains("First Strike"))
-            		AllZone.Combat.addDefendingFirstStrikeDamage(1, att);
-            	else
-            		AllZone.Combat.addDefendingDamage(1, att);
-            	
+            	AllZone.Combat.addDefendingDamage(1, att);
             	c.addAssignedDamage(1, att);
             }
             else if (!c.getName().equals("Player")){

@@ -1333,19 +1333,14 @@ class Gui_MultipleBlockers4 extends JFrame {
             boolean assignedLethalDamageToAllBlockers = true;
                 for (Card crd : blockers )
                 {
-                        if (crd.getTotalAssignedDamage() < ( crd.getNetDefense() - crd.getDamage() ))
+                        if (crd.getLethalDamage() > 0 && (!att.getKeyword().contains("Deathtouch") || crd.getTotalAssignedDamage() < 1 ))
                                 assignedLethalDamageToAllBlockers = false;
                 }
                
            
             if (c.getName().equals("Player") && att.getKeyword().contains("Trample") && assignedLethalDamageToAllBlockers)
             {
-                //what happens with Double Strike???
-                if (att.getKeyword().contains("First Strike"))
-                        AllZone.Combat.addDefendingFirstStrikeDamage(1, att);
-                else
-                        AllZone.Combat.addDefendingDamage(1, att);
-               
+                AllZone.Combat.addDefendingDamage(1, att);
                 c.addAssignedDamage(1, att);
             }
             else if (!c.getName().equals("Player")){
