@@ -25,8 +25,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 	static private final float STACK_SPACING_Y = 0.07f;
 
 	private int landStackMax = 5;
+	private int tokenStackMax = 5;
 	private boolean stackVertical;
-
+	private boolean mirror;
+	
 	// Computed in layout.
 	private List<Row> rows = new ArrayList<Row>();
 	private int cardWidth, cardHeight;
@@ -34,9 +36,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 	private int extraCardSpacingX, cardSpacingX, cardSpacingY;
 	private int stackSpacingX, stackSpacingY;
 
-	public PlayArea (JScrollPane scrollPane) {
+	public PlayArea (JScrollPane scrollPane, boolean mirror) {
 		super(scrollPane);
 		setBackground(Color.white);
+		this.mirror = mirror;
 	}
 
 	public void layout () {
@@ -75,7 +78,42 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 			allLands.add(insertIndex == -1 ? allLands.size() : insertIndex, stack);
 		}
 
-		Row allCreatures = new Row(cardPanels, RowType.creature);
+		// Collect tokens.
+		Row allTokens = new Row();
+		outerLoop: //
+		for (CardPanel panel : cardPanels) {
+			if (!panel.gameCard.isToken()) continue;
+			
+			int insertIndex = -1;
+
+			// Find tokens with the same name.
+			for (int i = 0, n = allTokens.size(); i < n; i++) {
+				Stack stack = allTokens.get(i);
+				CardPanel firstPanel = stack.get(0);
+				if (firstPanel.gameCard.getName().equals(panel.gameCard.getName())) {
+					if (!firstPanel.attachedPanels.isEmpty()) {
+						// Put this token to the left of tokens with the same name and attachments.
+						insertIndex = i;
+						break;
+					}
+					if (!panel.attachedPanels.isEmpty() || stack.size() == tokenStackMax) {
+						// If this token has attachments or the stack is full, put it to the right.
+						insertIndex = i + 1;
+						continue;
+					}
+					// Add to stack.
+					stack.add(0, panel);
+					continue outerLoop;
+				}
+				if (insertIndex != -1) break;
+			}
+
+			Stack stack = new Stack();
+			stack.add(panel);
+			allTokens.add(insertIndex == -1 ? allTokens.size() : insertIndex, stack);
+		}
+		
+		Row allCreatures = new Row(cardPanels, RowType.creatureNonToken);
 		Row allOthers = new Row(cardPanels, RowType.other);
 
 		cardWidth = cardWidthMax;
@@ -91,12 +129,23 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 			stackSpacingX = stackVertical ? 0 : (int)Math.round(cardWidth * STACK_SPACING_X);
 			stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
 			Row creatures = (Row)allCreatures.clone();
+			Row tokens = (Row)allTokens.clone();
 			Row lands = (Row)allLands.clone();
 			Row others = (Row)allOthers.clone();
-			// Wrap all creatures and lands.
-			wrap(creatures, rows, -1);
-			int afterCreaturesIndex = rows.size();
-			wrap(lands, rows, afterCreaturesIndex);
+			int afterFirstRow;
+			if(mirror) {
+				// Wrap all creatures and lands.
+				wrap(lands, rows, -1);
+				afterFirstRow = rows.size();
+				wrap(tokens, rows, afterFirstRow);
+				wrap(creatures, rows, rows.size());
+			} else {
+				// Wrap all creatures and lands.
+				wrap(creatures, rows, -1);
+				afterFirstRow = rows.size();
+				wrap(tokens, rows, afterFirstRow);
+				wrap(lands, rows, rows.size());
+			}
 			// Store the current rows and others.
 			List<Row> storedRows = new ArrayList<Row>(rows.size());
 			for (Row row : rows)
@@ -106,15 +155,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 			for (Row row : rows)
 				fillRow(others, rows, row);
 			// Stop if everything fits, otherwise revert back to the stored values.
-			if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty()) break;
+			if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) break;
 			rows = storedRows;
 			others = storedOthers;
 			// Try to put others on their own row(s) and fill in the rest.
-			wrap(others, rows, afterCreaturesIndex);
+			wrap(others, rows, afterFirstRow);
 			for (Row row : rows)
 				fillRow(others, rows, row);
 			// If that still doesn't fit, scale down.
-			if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty()) break;
+			if (creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty()) break;
 			cardWidth--;
 		}
 
@@ -267,7 +316,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 	}
 
 	static private enum RowType {
-		land, creature, other;
+		land, creature, creatureNonToken, other;
 
 		public boolean isType (Card card) {
 			switch (this) {
@@ -275,6 +324,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 				return card.isLand();
 			case creature:
 				return card.isCreature();
+			case creatureNonToken:
+				return card.isCreature() && !card.isToken();
 			case other:
 				return !card.isLand() && !card.isCreature();
 			default:

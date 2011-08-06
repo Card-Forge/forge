@@ -953,13 +953,13 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
    
     private void initZones(JPanel pane) {
     	JScrollPane oppScroll = new JScrollPane();
- 		oppPlayPanel = new PlayArea(oppScroll);
+ 		oppPlayPanel = new PlayArea(oppScroll, true);
  		oppScroll.setBorder(BorderFactory.createEtchedBorder());
  		oppScroll.setViewportView(oppPlayPanel);
         pane.add(new ExternalPanel(oppScroll), "compyPlay");
     	
         JScrollPane playScroll = new JScrollPane();
-		playerPlayPanel = new PlayArea(playScroll);
+		playerPlayPanel = new PlayArea(playScroll, false);
 		playScroll.setBorder(BorderFactory.createEtchedBorder());
         playScroll.setViewportView(playerPlayPanel);
         pane.add(new ExternalPanel(playScroll), "humanPlay");
