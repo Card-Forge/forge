@@ -406,7 +406,7 @@ public class AbilityFactory_Animate {
 		}
 
 		//any other unanimate cleanup
-		c.unEquipAllCards();
+		if(!c.isCreature()) c.unEquipAllCards();
 	}
 
 }//end class AbilityFactory_Animate
