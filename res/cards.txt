@@ -7624,6 +7624,7 @@ Behemoth Sledge
 1 G W
 Artifact Equipment
 Equipped creature gets +2/+2 and has lifelink and trample.
+VanillaEquipment:2:2:3:Lifelink:Trample:none
 
 Fireshrieker
 3

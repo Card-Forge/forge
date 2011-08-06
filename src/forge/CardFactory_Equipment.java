@@ -234,7 +234,8 @@ class CardFactory_Equipment {
             
         } //*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Behemoth Sledge")) {
             final Ability equip = new Ability(card, "3") {
@@ -344,6 +345,7 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
             
         } //*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
