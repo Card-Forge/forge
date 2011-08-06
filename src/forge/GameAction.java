@@ -1160,9 +1160,18 @@ public class GameAction {
             AllZone.Computer_Library.setCards(AllZone.Computer_Library.getCards());
             this.shuffle(Constant.Player.Computer);
         }
-     // New code to determine who goes first. Delete this if it doesn't work properly
-        if(Start_Cut == true) seeWhoPlaysFirst();
-        else seeWhoPlaysFirst_CoinToss(); 
+     
+        // Only cut/coin toss if it's the first game of the match
+        if (Constant.Runtime.WinLose.countWinLose() == 0)
+        {
+        	// New code to determine who goes first. Delete this if it doesn't work properly
+	        if(Start_Cut) 
+	        	seeWhoPlaysFirst();
+	        else 
+	        	seeWhoPlaysFirst_CoinToss();
+        }
+        else if (Constant.Runtime.WinLose.didWinRecently())	// if player won last, AI starts
+        	computerStartsGame();
         
         for(int i = 0; i < 7; i++) {
             this.drawCard(Constant.Player.Computer);
@@ -1308,14 +1317,13 @@ public class GameAction {
         return out;
     }
     
-    
-    //decides who goes first when starting another game, used by newGame()
     //decides who goes first when starting another game, used by newGame()
     public void seeWhoPlaysFirst_CoinToss() {
     	Object[] possibleValues = {"Heads", "Tails" };
     	Object q = JOptionPane.showOptionDialog(null, "Heads or Tails?", "Coin Toss to Start the Game", 
     			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
     			null, possibleValues, possibleValues[0]);
+    	
     	int Flip = MyRandom.random.nextInt(2);
     	String Human_Flip = " ";
     	String Computer_Flip = " ";
@@ -1328,12 +1336,14 @@ public class GameAction {
     		Human_Flip = "Tails";
     		Computer_Flip = "Heads";
     	}
-        	 if((Flip == 0 && q.equals(0)) || (Flip == 1 && q.equals(1))) JOptionPane.showMessageDialog(null, Human_Flip + "\r\n" + "Human Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
-        	 else {
-        		 AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
-        		 JOptionPane.showMessageDialog(null, Computer_Flip + "\r\n" +  "Computer Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
-        	 }
-        }//seeWhoPlaysFirst_CoinToss()
+    	
+        if((Flip == 0 && q.equals(0)) || (Flip == 1 && q.equals(1))) 
+        	JOptionPane.showMessageDialog(null, Human_Flip + "\r\n" + "Human Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+        else {
+        	computerStartsGame();
+    		JOptionPane.showMessageDialog(null, Computer_Flip + "\r\n" +  "Computer Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+        }
+	}//seeWhoPlaysFirst_CoinToss()
     
     Card HumanCut = null;
     Card ComputerCut = null;   
@@ -1357,47 +1367,69 @@ public class GameAction {
         int Cut_Count = 0;
         int Cut_CountMax = 20;
         for(int i = 0; i < Cut_CountMax; i++) {
-        if(Starter_Determined == true) break;
-        if(HLibrary.size() > 0) HumanCut = HLibrary.get(MyRandom.random.nextInt(HLibrary.size()));
-        else {
-        	AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
-        	JOptionPane.showMessageDialog(null, "Human has no cards with a converted mana cost in library." + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
-        	AllZone.GameInfo.setComputerStartedThisGame(true);
-        	return;
-        }
-        if(CLibrary.size() > 0) ComputerCut = CLibrary.get(MyRandom.random.nextInt(CLibrary.size()));
-        else {
-        	JOptionPane.showMessageDialog(null, "Computer has no cards with a converted mana cost in library." + "\r\n" + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
-        	return;
-        }
-        Cut_Count = Cut_Count + 1;	
-        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human),AllZone.GameAction.HumanCut);
-        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer),AllZone.GameAction.ComputerCut);
+	        if(Starter_Determined == true) break;
+	        
+	        if(HLibrary.size() > 0) 
+	        	HumanCut = HLibrary.get(MyRandom.random.nextInt(HLibrary.size()));
+	        else {
+	        	computerStartsGame();
+	        	JOptionPane.showMessageDialog(null, "Human has no cards with a converted mana cost in library." + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	return;
+	        }
+	        
+	        if(CLibrary.size() > 0) 
+	        	ComputerCut = CLibrary.get(MyRandom.random.nextInt(CLibrary.size()));
+	        else {
+	        	JOptionPane.showMessageDialog(null, "Computer has no cards with a converted mana cost in library." + "\r\n" + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	return;
+	        }
+	        
+	        Cut_Count = Cut_Count + 1;	
+	        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human),AllZone.GameAction.HumanCut);
+	        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer),AllZone.GameAction.ComputerCut);
+	        
+	        StringBuilder sb = new StringBuilder();
+	        sb.append("Human cut his / her deck to : " + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
+	        sb.append("Computer cut his / her deck to : " + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");
+	        sb.append("\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n");
+	        if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) > CardUtil.getConvertedManaCost(HumanCut.getManaCost())){
+	        	computerStartsGame();
+	        	JOptionPane.showMessageDialog(null, sb + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	return;
+	        } 
+	        else if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) < CardUtil.getConvertedManaCost(HumanCut.getManaCost())) {
+	        	JOptionPane.showMessageDialog(null, sb + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	return;
+	        } 
+	        else{
+	        	sb.append("Equal Converted Mana Cost Cut" + "\r\n");
+	        	if (i == Cut_CountMax-1)
+	        	{
+	        		sb.append("Can't resolve starter by cut: Reverting to Coin Toss\r\n");
+	        	   	if(MyRandom.random.nextInt(2) == 1) 
+	        	   		JOptionPane.showMessageDialog(null,sb + "Human Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+	        		else {
+	        			computerStartsGame();
+	        			JOptionPane.showMessageDialog(null,sb + "Computer Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+	        		}
+	        	   	return;
+	        	}
+	        	else
+	        	{
+	        		sb.append("Cutting Again.....");
+	        	}
+	        	JOptionPane.showMessageDialog(null,sb, "", JOptionPane.INFORMATION_MESSAGE);
+	        }
+        } // for-loop for multiple card cutting
         
-        StringBuilder sb = new StringBuilder();
-        sb.append("Human cut his / her deck to : " + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
-        sb.append("Computer cut his / her deck to : " + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");
-        if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) > CardUtil.getConvertedManaCost(HumanCut.getManaCost()))
-        {
-        	AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
-        	JOptionPane.showMessageDialog(null, sb + "\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
-        	AllZone.GameInfo.setComputerStartedThisGame(true);
-        	Starter_Determined = true;
-        } else if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) < CardUtil.getConvertedManaCost(HumanCut.getManaCost())) {
-        	JOptionPane.showMessageDialog(null, sb + "\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n" + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
-        	Starter_Determined = true;
-        } else if(Cut_Count != Cut_CountMax) { 
-        	JOptionPane.showMessageDialog(null,sb + "\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n" + "Equal Converted Mana Cost Cut" + "\r\n" + "Cutting Again.....", "", JOptionPane.INFORMATION_MESSAGE);
-        }
-         else	{
-        	 if(MyRandom.random.nextInt(2) == 1) JOptionPane.showMessageDialog(null,sb + "\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n" + "Equal Converted Mana Cost Cut" + "\r\n" + "Human Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
-        	 else {
-        		 AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
-        		 JOptionPane.showMessageDialog(null,sb + "\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n" + "Equal Converted Mana Cost Cut" + "\r\n" + "Computer Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
-        	 }
-         }
-        }
-        }//seeWhoPlaysFirst()
+
+    }//seeWhoPlaysFirst()
+    
+    public void computerStartsGame()
+    {
+    	AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
+    	AllZone.GameInfo.setComputerStartedThisGame(true);
+    }
     
     //if Card had the type "Aura" this method would always return true, since local enchantments are always attached to something
     //if Card is "Equipment", returns true if attached to something
