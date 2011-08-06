@@ -1,5 +1,5 @@
 Name:Flame-Kin Zealot
-ManaCost:1 R W
+ManaCost:1 R R W
 Types:Creature Elemental Berserker
 Text:no text
 PT:2/2
