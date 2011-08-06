@@ -1752,10 +1752,10 @@ public class CardFactory implements NewConstants {
                     		// all the other tests still need to pass if a counter will be removed
                     		Counters count = abCost.getCounterType();
                     		double chance = .66;
-                    		if (count.equals("P1P1")){	// 10% chance to remove +1/+1 to pump
+                    		if (count.equals(Counters.P1P1)){	// 10% chance to remove +1/+1 to pump
                     			chance = .1;
                     		}
-                    		else if (count.equals("CHARGE")){ // 50% chance to remove +1/+1 to pump
+                    		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove +1/+1 to pump
                     			chance = .5;
                     		}
                             Random r = new Random();
@@ -11352,7 +11352,7 @@ public class CardFactory implements NewConstants {
                 
                 //may return null
                 public Card getCreature() {
-                    CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay();
+                    CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                     tappedCreatures = tappedCreatures.filter(AllZoneUtil.tapped);
                     tappedCreatures = tappedCreatures.filter(AllZoneUtil.getCanTargetFilter(card));
                     if(tappedCreatures.isEmpty()) return null;
