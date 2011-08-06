@@ -591,7 +591,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Samantha Stephens 3	hard	Sloth' Painter's Servant Grindstone deck, an interesting combo");
         sb.append("\r\n");
-        sb.append("Saruman 3		hard	Sloth' Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
+	  sb.append("Saruman 2		medium	Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
+        sb.append("\r\n");
+        sb.append("Saruman 3		hard	Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         sb.append("\r\n");
         sb.append("Scooby Doo 3   	hard   	Rares' Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
         sb.append("\r\n");
@@ -635,9 +637,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("The Great Gazoo 3	hard	Sloth's Sun Lotion deck, red damage all spells and pro from red creatures");
         sb.append("\r\n");
+	  sb.append("Totoro 2			medium Blue, black, green deck with spirits and arcane spells");
+        sb.append("\r\n");
         sb.append("Treebeard 1		easy	Treefolk creatures, a lumberjack's dream. Bosk Banneret, Dauntless Dourbark, Leaf-Crowned Elder");
         sb.append("\r\n");
-	    sb.append("Treebeard 2		medium	Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
+	    sb.append("Treebeard 2		medium Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
         sb.append("\r\n");
         sb.append("Treebeard 3		hard	Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
         sb.append("\r\n");
