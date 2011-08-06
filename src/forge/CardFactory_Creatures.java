@@ -6986,7 +6986,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Land"));
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Cao Cao, Lord of Wei")) {
             //mana tap ability
@@ -7040,6 +7040,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        */
         
         /*
         //*************** START *********** START **************************
