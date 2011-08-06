@@ -2855,7 +2855,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Keiga, the Tide Star")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -2915,9 +2915,8 @@ public class CardFactory_Creatures {
                 }//execute()
             };
             card.addDestroyCommand(destroy);
-        }
-        //*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************
+        */
       
         //*************** START *********** START **************************
         else if(cardName.equals("Jhoira of the Ghitu")) {
