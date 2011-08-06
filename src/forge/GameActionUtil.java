@@ -2616,8 +2616,7 @@ public class GameActionUtil {
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card crd) {
                 if (crd.getName().equals("Verduran Enchantress")    || crd.getName().equals("Enchantress's Presence")
-                        || crd.getName().equals("Mesa Enchantress") || crd.getName().equals("Argothian Enchantress")
-                        || crd.getName().equals("Kor Spiritdancer")) return true;
+                        || crd.getName().equals("Mesa Enchantress") || crd.getName().equals("Kor Spiritdancer")) return true;
                 else return false;
             }
         });

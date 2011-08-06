@@ -2433,7 +2433,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Aven Fisher") || cardName.equals("Riptide Crab")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -2457,7 +2457,7 @@ public class CardFactory_Creatures {
             };
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Peregrine Drake")) {
