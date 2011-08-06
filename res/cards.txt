@@ -1,3 +1,111 @@
+Silverstorm Samurai
+4 W W
+Creature Fox Samurai
+no text
+3/3
+Flash
+Bushido 1
+
+Samurai Enforcers
+4 W W
+Creature Human Samurai
+no text
+4/4
+Bushido 2
+
+Ronin Houndmaster
+2 R
+Creature Human Samurai
+no text
+2/2
+Haste
+Bushido 1
+
+Ronin Cavekeeper
+5 R
+Creature Human Samurai
+no text
+4/3
+Bushido 2
+
+Nezumi Ronin
+2 B
+Creature Rat Samurai
+no text
+3/1
+Bushido 1
+
+Mothrider Samurai
+3 W
+Creature Human Samurai
+no text
+2/2
+Flying
+Bushido 1
+
+Kuro's Taken
+1 B
+Creature Rat Samurai
+no text
+1/1
+Bushido 1
+RegenerateMe:1 B
+
+Konda, Lord of Eiganjo
+5 W W
+Legendary Creature Human Samurai
+no text
+3/3
+Vigilance
+Bushido 5
+Indestructible
+
+Kitsune Blademaster
+2 W
+Creature Fox Samurai
+no text
+2/2
+First Strike
+Bushido 1
+
+Inner-Chamber Guard
+1 W
+Creature Human Samurai
+no text
+0/2
+Bushido 2
+
+Devoted Retainer
+W
+Creature Human Samurai
+no text
+1/1
+Bushido 1
+
+Cursed Ronin
+3 B
+Creature Human Samurai
+no text
+1/1
+abPump B:+1/+1
+Bushido 1
+
+Battle-Mad Ronin
+1 R
+Creature Human Samurai
+no text
+1/1
+This card attacks each turn if able.
+Bushido 2
+
+Araba Mothrider
+1 W
+Creature Human Samurai
+no text
+1/1
+Flying
+Bushido 1
+
 Jace, the Mind Sculptor
 2 U U
 Planeswalker - Jace
@@ -8946,16 +9054,18 @@ Protection from white
 Hand of Honor
 W W
 Creature Human Samurai
-(NOTE: "Bushido" is not implemented.)
+no text
 2/2
 Protection from black
+Bushido 1
 
 Hand of Cruelty
 B B
 Creature Human Samurai
-(NOTE: "Bushido" is not implemented.)
+no text
 2/2
 Protection from white
+Bushido 1
 
 Simic Sky Swallower
 5 G U

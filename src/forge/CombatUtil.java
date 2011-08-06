@@ -1721,6 +1721,7 @@ public class CombatUtil
   {
 	  if (AllZone.Phase.getPhase().equals("Declare Blockers"))
 	  {
+		  
 		  if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisTurn())
 		  {
 			  Card card = new Card();
@@ -1781,7 +1782,13 @@ public class CombatUtil
   
   public static void checkBlockedAttackers(Card a, Card b)
   {
-	  System.out.println(a.getName() + " got blocked by " + b.getName());
+	  //System.out.println(a.getName() + " got blocked by " + b.getName());
+	  
+	  for (Ability ab: CardFactoryUtil.getBushidoEffects(a))
+		  AllZone.Stack.add(ab);
+	  
+	  for (Ability ab: CardFactoryUtil.getBushidoEffects(b))
+		  AllZone.Stack.add(ab);
 	  
 	  if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking"))
 	  {

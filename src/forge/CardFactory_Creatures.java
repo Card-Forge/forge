@@ -13725,7 +13725,7 @@ public class CardFactory_Creatures {
 	        	if (all.size() != 0) {
 	        		
 	        		if(card.getController().equals(Constant.Player.Human)) {
-	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target artifact.", true, false));
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target land.", true, false));
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {

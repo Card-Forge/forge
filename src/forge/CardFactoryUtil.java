@@ -3228,7 +3228,7 @@ public class CardFactoryUtil
   
   public static CardList makeToken(String name, String imageName, String controller, String manaCost, String[] types, int baseAttack, int baseDefense,
 		   	   String[] intrinsicKeywords)
-	{
+  {
 		CardList list = new CardList();
 		Card c = new Card();
 		c.setName(name);
@@ -3265,7 +3265,64 @@ public class CardFactoryUtil
 			list.add(temp);
 		}
 		return list;
-	}
+  }
+  
+  public static ArrayList<Ability> getBushidoEffects(Card c)
+  {
+	  ArrayList<String> keywords = c.getKeyword();
+	  ArrayList<Ability> list = new ArrayList<Ability>();
+	  
+	  final Card crd = c;
+	
+	  for (String kw : keywords)
+	  {
+		  if (kw.contains("Bushido"))
+		  {
+			  String[] parse = kw.split(" ");
+			  String s = parse[1];
+			  final int magnitude = Integer.parseInt(s);
+			  
+			  
+			  Ability ability = new Ability(c, "0")
+			  {
+				  public void resolve()
+				  {
+					  final Command untilEOT = new Command()
+		              {
+
+						private static final long serialVersionUID = 3014846051064254493L;
+
+						public void execute()
+	                    {
+	                       if (AllZone.GameAction.isCardInPlay(crd))
+	                       {
+	                          crd.addTempAttackBoost(-1 * magnitude);
+	                          crd.addTempDefenseBoost(-1 * magnitude);
+	                       }
+	                    }
+		              };
+					  
+					  AllZone.EndOfTurn.addUntil(untilEOT);
+					  
+					  crd.addTempAttackBoost(magnitude);
+		              crd.addTempDefenseBoost(magnitude);
+				  }
+			  };
+			  StringBuilder sb = new StringBuilder();
+			  sb.append(c);
+			  sb.append(" - (Bushido) gets +");
+			  sb.append(magnitude);
+			  sb.append("/+");
+			  sb.append(magnitude);
+			  sb.append(" until end of turn.");
+			  ability.setStackDescription(sb.toString());
+			  
+			  list.add(ability);
+		  }
+	  }
+	  
+	  return list;
+  }
   
   //may return null
   static public Card getRandomCard(CardList list)
