@@ -3446,7 +3446,7 @@ public class CardFactoryUtil {
         	CardList cardsonbattlefield = new CardList();
         	cardsonbattlefield.addAll(myField.getCards());
         	cardsonbattlefield.addAll(opField.getCards());
-        	cardsonbattlefield = cardsonbattlefield.getValidCards(rest, c.getController(), c);
+        	cardsonbattlefield = cardsonbattlefield.getValidCards(rest, cardController, c);
         	
         	n = cardsonbattlefield.size();
             
