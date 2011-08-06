@@ -1,0 +1,12 @@
+Name:Shard Phoenix
+ManaCost:4 R
+Types:Creature Phoenix
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ChangeZone | Cost$ R R R | Origin$ Graveyard | Destination$ Hand | ActivatingZone$ Graveyard | ActivatingPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return Shard Phoenix from your graveyard to your hand. Play this ability only during your upkeep.
+A:AB$DamageAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | ValidDescription$ each creature without flying. | SpellDescription$CARDNAME deals 2 damage to each creature without flying.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_phoenix.jpg
+End
