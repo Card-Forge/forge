@@ -1,0 +1,10 @@
+Name:Voltaic Construct
+ManaCost:4
+Types:Artifact Creature Golem Construct
+Text:no text
+PT:2/2
+K:abUntapTgt 2:Creature.Artifact:Untap target artifact creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncmmon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_construct.jpg
+End
