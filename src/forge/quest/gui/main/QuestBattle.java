@@ -68,8 +68,8 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("C3PO 3", "hard", "BR Goblin deck with Goblin Ringleader, Kiki-Jiki, Mad Auntie and Sensation Gorger");
 //        addToDeckList("Cable 2", "medium", "UR Artifact deck");
 //        addToDeckList("Cable 3", "hard", "R Artifact deck deck");
-//        addToDeckList("Captain America 2", "medium", "Bant Exalted deck");
-//        addToDeckList("Captain America 3", "hard", "Bant Exalted deck");
+        addToDeckList("Captain America 2", "medium", "Bant Exalted deck");
+        addToDeckList("Captain America 3", "hard", "Bant Exalted deck");
         addToDeckList("Catwoman 1", "easy", "WG Cat deck with Kjeldoran War Cry");
         addToDeckList("Catwoman 2", "medium", "WRG Cat deck with Lightning Helix");
 //        addToDeckList("Colbert 2", "medium", "WG Cats deck");
