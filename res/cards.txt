@@ -4999,8 +4999,9 @@ abDrawCards 3 U T:1:Draw a card.:Scepter of Insight - draw a card
 Asha's Favor
 2 W
 Enchantment Aura
-Enchanted creature gains flying, first strike and vigilance.
+Enchanted creature has flying, first strike, and vigilance.
 Enchant creature
+enPump:Flying & First Strike & Vigilance
 
 Frontline Sage
 2 U
@@ -5358,7 +5359,8 @@ Scavenged Weaponry
 Enchantment Aura
 Enchanted creature gets +1/+1.
 Enchant creature
-Draw a card.
+enPump:+1/+1
+When this card comes into play, draw a card.
 
 Shield of Duty and Reason
 W
@@ -6426,8 +6428,9 @@ Uncontrollable Anger
 2 R R
 Enchantment Aura
 Enchanted creature gets +2/+2 and attacks each turn if able.
-Flash
 Enchant creature
+enPump:+2/+2/This card attacks each turn if able.
+Flash
 
 Soulscour
 7 W W W
@@ -8246,12 +8249,14 @@ B
 Enchantment Aura
 Enchanted creature gets +2/+1.
 Enchant creature
+enPump:+2/+1
 
 Holy Strength
 W
 Enchantment Aura
 Enchanted creature gets +1/+2.
 Enchant creature
+enPump:+1/+2
 
 Giant Growth
 G
