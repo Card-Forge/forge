@@ -456,6 +456,153 @@ public class CardFactory implements NewConstants {
             } //if (should RegenerateMe)
         } //while - card has more RegenerateMe - Jungle Troll has two Regenerate keywords
         
+        if (hasKeyword(card, "spDiscard") != -1)
+        {
+        	int n = hasKeyword(card, "spDiscard");
+        	
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+        	
+        	String k[] = parse.split(":");
+        	final boolean Tgt = k[0].contains("Tgt");
+        	final boolean Opp = k[0].contains("Opp");
+        	
+        	final String DiscardMethod = k[1];
+        	
+        	final int NumCards[] = {-1138};
+        	final String NumCardsX[] = {"none"};
+        	final String UnlessType[] = {"none"};
+        	
+        	if (k[2].length() > 1)
+        	{
+        		String kk[] = k[2].split("/");
+        		if (kk[1].startsWith("UnlessDiscardType"))
+        		{
+        			String jk[] = kk[1].split("\\.");
+        			UnlessType[0] = jk[1]; 
+        		}
+        	}
+        	else if (k[2].matches("X"))
+        	{
+    			String xy = card.getSVar(k[2]);
+    			if (xy.startsWith("Count$"))
+    			{
+    				String kk[] = xy.split("\\$");
+    				NumCardsX[0] = kk[1];
+    			}
+        	}
+        	else if (k[2].matches("[0-9]"))
+        	{
+        		NumCards[0] = Integer.parseInt(k[2]);
+        	}
+        	
+        	
+        	final String Drawback[] = {"none"};
+        	final String spDesc[] = {"none"};
+        	final String stDesc[] = {"none"};
+        	
+    		if (k[3].contains("Drawback$"))
+    		{
+    			String kk[] = k[3].split("\\$");
+    			Drawback[0] = kk[1];
+    			if (k.length > 4) spDesc[0] = k[4];
+    			if (k.length > 5) stDesc[0] = k[5];
+    		}
+    		else
+    		{
+    			if (k.length > 3) spDesc[0] = k[3];
+    			if (k.length > 4) stDesc[0] = k[4];
+    		}
+    		
+        	SpellAbility spDiscard = new Spell(card)
+        	{
+        		private static final long serialVersionUID = 837472987492L;
+        		
+                private int getNumCards() {
+                    if(NumCards[0] != -1138) return NumCards[0];
+                    
+                    if(!NumCardsX[0].equals("none")) return CardFactoryUtil.xCount(card, NumCardsX[0]);
+                    
+                    return 0;
+                }
+                
+                public boolean canPlayAI()
+                {
+                	int nCards = getNumCards();
+                	
+                	PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+                	int numHHand = pzH.size();
+                	
+                	if (numHHand > (nCards - 1))
+                		return true;
+                		
+                	return false;
+                }
+                public void resolve()
+                {
+                	int nCards = getNumCards();
+                	
+                	if (DiscardMethod.equals("OppChoose"))
+                	{
+                		String opp = AllZone.GameAction.getOpponent(card.getController());
+                		
+                		if (!UnlessType[0].equals("none"))
+                			AllZone.GameAction.discardUnless(opp, nCards, UnlessType[0]);
+                		else
+                			AllZone.GameAction.discard(opp, nCards);
+                	}
+                	else if (DiscardMethod.equals("TgtChoose"))
+                	{
+                		if (!UnlessType[0].equals("none"))
+                			AllZone.GameAction.discardUnless(getTargetPlayer(), nCards, UnlessType[0]);
+                		else
+                			AllZone.GameAction.discard(getTargetPlayer(), nCards);
+                	}
+                	else if (DiscardMethod.equals("AtRandom"))
+                	{
+                		AllZone.GameAction.discardRandom(getTargetPlayer(), nCards);
+                	}
+                	else if (DiscardMethod.equals("Hand"))
+                	{
+                		AllZone.GameAction.discardHand(getTargetPlayer());
+                	}
+                	
+                	if (!Drawback[0].equals("none"))
+                	{
+                		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card);
+                	}
+                }
+        	};
+        	
+        	if (Tgt)
+        		spDiscard.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spDiscard));
+        	else
+        		spDiscard.setTargetPlayer(AllZone.GameAction.getOpponent(card.getController()));
+        	
+        	spDiscard.setDescription(spDesc[0]);
+        	spDiscard.setStackDescription(stDesc[0]);
+        	
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spDiscard);
+        	
+            String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals(""))
+            {
+               SpellAbility bbDiscardTgt = spDiscard.copy();
+               bbDiscardTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               bbDiscardTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbDiscardTgt.setIsBuyBackAbility(true);
+               
+               if (Tgt)
+            	   bbDiscardTgt.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbDiscardTgt));
+               else
+            	   bbDiscardTgt.setTargetPlayer(AllZone.GameAction.getOpponent(card.getController()));
+               
+               card.addSpellAbility(bbDiscardTgt);
+            }
+
+        }//spDiscardTgt
+        
         if (hasKeyword(card, "spAllPump") != -1)
         {
         	int n = hasKeyword(card, "spAllPump");
