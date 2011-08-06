@@ -18081,6 +18081,37 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
+        
+        //*****************************START*******************************
+        if(cardName.equals("Twiddle")) {
+        	/*
+        	 * You may tap or untap target artifact, creature, or land.
+        	 */
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 8126471702898625866L;
+				
+				public boolean canPlayAI() {
+        			return false;
+        		}
+        		public void chooseTargetAI() {
+        			//setTargetCard(c);
+        		}//chooseTargetAI()
+        		public void resolve() {
+        			if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+        				if(getTargetCard().isTapped()) {
+        					getTargetCard().untap();
+        				}
+        				else {
+        					getTargetCard().tap();
+        				}
+        			}
+        		}
+        	};//SpellAbility
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Artifact;Creature;Land"));
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);		
+        }//end Twiddle
+        //****************END*******END***********************
 
         
         // Cards with Cycling abilities
