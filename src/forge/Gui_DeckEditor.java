@@ -337,6 +337,12 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     		
     		if (SetInfoUtil.getSetInfo_Code(c.getSets(), SC) != null) {
 				c.setCurSetCode(SC);
+				
+		    	Random r = new Random();
+		    	int n = SetInfoUtil.getSetInfo_Code(c.getSets(), SC).PicCount;
+		    	if (n > 1)
+		    		c.setRandomPicture(r.nextInt(n-1) + 1);
+				
 				result = true;
 			}
     		filterOut = !(result);
@@ -346,7 +352,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     		if (!SC.equals(""))
     			c.setCurSetCode(c.getMostRecentSet());
     	}
-    		
+    		    	
     	c.setImageFilename(CardUtil.buildFilename(c));
     	
     	return filterOut;
