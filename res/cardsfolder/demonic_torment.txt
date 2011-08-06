@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Enchantment Aura
 Text:Enchanted creature can't attack.\r\nPrevent all combat damage that would be dealt by enchanted creature.
 K:Enchant creature
-K:enPumpCurse:HIDDEN CARDNAME can't attack. & HIDDEN Prevent all combat damage that would be dealt dealt by CARDNAME.
+K:enPumpCurse:HIDDEN CARDNAME can't attack. & HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_torment.jpg
 End
