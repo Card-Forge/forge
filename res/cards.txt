@@ -1,3 +1,9 @@
+Dread Statuary
+no cost
+Land
+no text
+tap: add 1
+
 Thrumming Stone
 5
 Legendary Artifact

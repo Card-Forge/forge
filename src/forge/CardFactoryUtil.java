@@ -4096,6 +4096,40 @@ public class CardFactoryUtil {
         return getRandomCard(new CardList(zone.getCards()));
     }
     
+    
+    public static void revertManland(Card c, String[] removeTypes, String[] removeKeywords) {
+        c.setBaseAttack(0);
+        c.setBaseDefense(0);
+        for(String r : removeTypes)
+        	c.removeType(r);
+
+        for(String k : removeKeywords)
+        	c.removeIntrinsicKeyword(k);
+        
+        c.setManaCost("");
+        c.unEquipAllCards();
+    }
+    
+    public static void activateManland(Card c, int attack, int defense, String[] addTypes, String[] addKeywords, String cost) {
+        c.setBaseAttack(attack);
+        c.setBaseDefense(defense);
+        
+        for(String r : addTypes)
+        {
+        	// if the card doesn't have that type, add it
+        	if (!c.getType().contains(r))
+        		c.addType(r);
+        }
+        for(String k : addKeywords)
+        {
+        	// if the card doesn't have that keyword, add it (careful about stackable keywords)
+        	if(!c.getIntrinsicKeyword().contains(k))
+        		c.addIntrinsicKeyword(k);	
+        }
+        
+        c.setManaCost(cost);
+    }
+    
     public static void main(String[] args) {
         
         CardList in = AllZone.CardFactory.getAllCards();

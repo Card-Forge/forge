@@ -759,6 +759,7 @@ raging_ravine.jpg		http://www.wizards.com/global/images/magic/general/raging_rav
 creeping_tar_pit.jpg		http://www.wizards.com/global/images/magic/general/creeping_tar_pit.jpg
 stirring_wildwood.jpg		http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
 celestial_colonnade.jpg		http://www.wizards.com/global/images/magic/general/celestial_colonnade.jpg
+dread_statuary.jpg		http://www.wizards.com/global/images/magic/general/dread_statuary.jpg
 ruthless_cullblade.jpg		http://www.wizards.com/global/images/magic/general/ruthless_cullblade.jpg
 anowon_the_ruin_sage.jpg		http://www.wizards.com/global/images/magic/general/anowon_the_ruin_sage.jpg
 pulse_tracker.jpg		http://www.wizards.com/global/images/magic/general/pulse_tracker.jpg

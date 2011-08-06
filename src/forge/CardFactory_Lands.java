@@ -312,13 +312,9 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    c.removeIntrinsicKeyword("Flying");
-                    c.removeType("Creature");
-                    c.removeType("Faerie");
-                    c.setManaCost("");
+                    String[] types = { "Creature", "Faerie" };
+                    String[] keywords = { "Flying" };
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -331,17 +327,10 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(2);
-                    c.setBaseDefense(1);
-                    
-                    //to prevent like duplication like "Flying Flying Creature Creature"
-                    if(!c.getIntrinsicKeyword().contains("Flying")) {
-                        c.addIntrinsicKeyword("Flying");
-                        c.addType("Creature");
-                        c.addType("Faerie");
-                        c.setManaCost("U");
-                    }
+                    String[] types = { "Creature", "Faerie" };
+                    String[] keywords = { "Flying" };
+                    CardFactoryUtil.activateManland(c, 2, 1, types, keywords, "U");
+
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -379,12 +368,10 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    c.removeType("Creature");
-                    c.removeType("Soldier");
-                    c.setManaCost("");
+                    String[] types = { "Creature", "Solider" };
+                    String[] keywords = {  };
+
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -397,16 +384,10 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(1);
-                    c.setBaseDefense(5);
-                    
-                    //to prevent like duplication like "Creature Creature"
-                    if(!c.getType().contains("Creature")) {
-                        c.addType("Creature");
-                        c.addType("Soldier");
-                        c.setManaCost("W");
-                    }
+                    String[] types = { "Creature", "Solider" };
+                    String[] keywords = {  };
+                    CardFactoryUtil.activateManland(c, 1, 5, types, keywords, "W");
+
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -444,12 +425,9 @@ class CardFactory_Lands {
                 public void execute() {
                     Card c = card;
                     
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    c.removeType("Creature");
-                    c.removeType("Ape");
-                    c.removeIntrinsicKeyword("Trample");
-                    c.setManaCost("");
+                    String[] removeTypes = { "Creature", "Ape" };
+                    String[] removeKeywords = { "Trample" };
+                    CardFactoryUtil.revertManland(c, removeTypes, removeKeywords);
                 }
             };
             
@@ -501,13 +479,9 @@ class CardFactory_Lands {
 				    
                 	public void execute() {
                 		Card c = card;
-                                           
-                		c.setBaseAttack(0);
-                		c.setBaseDefense(0);
-                		c.removeIntrinsicKeyword("Flying");
-                		c.removeType("Artifact");
-                		c.removeType("Creature");
-                		c.removeType("Blinkmoth");
+                		String[] types = { "Artifact", "Creature", "Blinkmoth" };
+                		String[] keywords = { "Flying" };
+                		CardFactoryUtil.revertManland(c, types, keywords);
                 	}
                 };
                 
@@ -519,16 +493,9 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(1);
-                    c.setBaseDefense(1);
-                    //to prevent like duplication like "Flying Flying Creature Creature"
-                    if(!c.getIntrinsicKeyword().contains("Flying")) {
-                        c.addIntrinsicKeyword("Flying");
-                    }
-                    c.addType("Artifact");
-                    c.addType("Creature");
-                    c.addType("Blinkmoth");
+                    String[] types = { "Artifact", "Creature", "Blinkmoth" };
+                    String[] keywords = { "Flying" };
+                    CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "");
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -679,11 +646,9 @@ class CardFactory_Lands {
                 public void execute() {
                     Card c = card;
                     
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    c.removeType("Artifact");
-                    c.removeType("Creature");
-                    c.removeType("Assembly-Worker");
+                    String[] types = { "Artifact", "Creature", "Assembly-Worker" };
+                    String[] keywords = { };
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -699,15 +664,10 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(2);
-                    c.setBaseDefense(2);
-                    //to prevent like duplication like "Creature Creature"
-                    if(!c.getKeyword().contains("Creature")) {
-                        c.addType("Artifact");
-                        c.addType("Creature");
-                        c.addType("Assembly-Worker");
-                    }
+                    String[] types = { "Artifact", "Creature", "Assembly-Worker" };
+                    String[] keywords = { };
+                    CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
+
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2040,11 +2000,11 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    c.removeIntrinsicKeyword("Changeling");
-                    c.removeType("Creature");
+
+                    String[] types = { "Creature" };
+                    String[] keywords = { "Changeling" };
+                    CardFactoryUtil.revertManland(c, types, keywords);
+
                 }
             };
             
@@ -2057,15 +2017,10 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(2);
-                    c.setBaseDefense(2);
-                    
-                    //to prevent like duplication like "Changeling Changeling Creature Creature"
-                    if(!c.getIntrinsicKeyword().contains("Changeling")) {
-                        c.addIntrinsicKeyword("Changeling");
-                        c.addType("Creature");
-                    }
+                    String[] types = { "Creature" };
+                    String[] keywords = { "Changeling" };
+                    CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
+
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2122,14 +2077,10 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    c.removeType("Creature");
-                    c.removeType("Skeleton");
-                    c.setManaCost("");
+                    String[] types = { "Creature", "Skeleton" };
+                    String[] keywords = {  };
+                    CardFactoryUtil.revertManland(c, types, keywords);
                     c.removeSpellAbility(a2);
-                    
                 }
             };
             
@@ -2142,12 +2093,11 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
+                    String[] types = { "Creature", "Skeleton" };
+                    String[] keywords = {  };
+                    CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "B");
                     
-                    c.setBaseAttack(1);
-                    c.setBaseDefense(1);
-                    c.setManaCost("B");
-                    
-                    //to prevent like duplication like "Creature Creature"
+                    // Don't stack Regen ability
                     boolean hasRegen = false;
                     SpellAbility[] sas = card.getSpellAbility();
                     for(SpellAbility sa:sas) {
@@ -2157,8 +2107,7 @@ class CardFactory_Lands {
                     if(!hasRegen) {
                         card.addSpellAbility(a2);
                     }
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Skeleton")) c.addType("Skeleton");
+
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2322,7 +2271,7 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     CardFactoryUtil.makeToken("Assembly-Worker", "C 2 2 Assembly-Worker", card, "C", new String[] {
-                            "Artiface", "Creature", "Assembly-Worker"}, 2, 2, new String[] {""});
+                            "Artifact", "Creature", "Assembly-Worker"}, 2, 2, new String[] {""});
                 }
             };
             
@@ -2715,13 +2664,10 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    c.removeType("Creature");
-                    c.removeType("Zombie");
-                    c.removeType("Plant");
-                    c.setManaCost("");
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    
+                    String[] types = { "Creature", "Zombie", "Plant" };
+                    String[] keywords = {  };
+
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -2742,15 +2688,11 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(1);
-                    c.setBaseDefense(1);
-                    c.setManaCost("B G");
-                    
-                    //to prevent like duplication like "Creature Creature"              
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Zombie")) c.addType("Zombie");
-                    if(!c.getType().contains("Plant")) c.addType("Plant");
+                    String[] types = { "Creature", "Zombie", "Plant" };
+                    String[] keywords = {  };
+
+                    CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "B G");
+
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2770,13 +2712,10 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
-                    c.removeType("Creature");
-                    c.removeType("Warrior");
-                    c.removeIntrinsicKeyword("First Strike");
-                    c.setManaCost("");
+                    String[] types = { "Creature", "Warrior" };
+                    String[] keywords = { "First Strike" };
+
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -2789,15 +2728,10 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(2);
-                    c.setBaseDefense(1);
-                    c.setManaCost("R");
-                    
-                    //to prevent like duplication like "Creature Creature"
-                    if(!c.getIntrinsicKeyword().contains("First Strike")) c.addIntrinsicKeyword("First Strike");
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Warrior")) c.addType("Warrior");
+                    String[] types = { "Creature", "Warrior" };
+                    String[] keywords = { "First Strike" };
+                    CardFactoryUtil.activateManland(c, 2, 1, types, keywords, "R");
+
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2828,17 +2762,10 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
+                    String[] types = { "Artifact", "Creature", "Elemental" };
+                    String[] keywords = {  };
                     
-                    c.setBaseAttack(3);
-                    c.setBaseDefense(3);
-                    c.setManaCost("");
-                    
-                    //to prevent like duplication like "Creature Creature"
-                    if(!c.getType().contains("Elemental")) c.addType("Elemental");
-                    if(!c.getType().contains("Artifact")) c.addType("Artifact");
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    
-
+                    CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "");
                 }
             };//SpellAbility
             
@@ -2885,13 +2812,9 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    c.removeType("Creature");
-                    c.removeType("Elemental");
-                    c.removeIntrinsicKeyword("Vigilance");
-                    c.removeIntrinsicKeyword("Flying");
-                    c.setManaCost("");
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
+                    String[] types = { "Creature", "Elemental" };
+                    String[] keywords = { "Vigilance", "Flying" };
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -2905,16 +2828,9 @@ class CardFactory_Lands {
                 public void resolve() {
                     Card c = card;
                     
-                    c.setBaseAttack(4);
-                    c.setBaseDefense(4);
-                    c.setManaCost("W U");
-                    
-                    //to prevent like duplication like "Creature Creature"              
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Elemental")) c.addType("Elemental");
-                    
-                    if(!c.getIntrinsicKeyword().contains("Flying")) c.addIntrinsicKeyword("Flying");
-                    if(!c.getIntrinsicKeyword().contains("Vigilance")) c.addIntrinsicKeyword("Vigilance");
+                    String[] types = { "Creature", "Elemental" };
+                    String[] keywords = { "Vigilance", "Flying" };
+                    CardFactoryUtil.activateManland(c, 4, 4, types, keywords, "W U");
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -2987,12 +2903,10 @@ class CardFactory_Lands {
                   
                   public void execute() {
                       Card c = card;
-                      c.removeType("Creature");
-                      c.removeType("Elemental");
+                      String[] types = { "Creature", "Elemental" };
+                      String[] keywords = {  };
+                      CardFactoryUtil.revertManland(c, types, keywords);
                       c.removeSpellAbility(X_ability);
-                      c.setManaCost("");
-                      c.setBaseAttack(0);
-                      c.setBaseDefense(0);
                   }
               };
               
@@ -3004,21 +2918,15 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                    Card c = card;
+	                Card c = card;
+	                String[] types = { "Creature", "Elemental" };
+	                String[] keywords = {  };
+	                CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "B R");
                     
-                    c.setBaseAttack(2);
-                    c.setBaseDefense(2);
-                    c.setManaCost("B R");
-                    
-                    //to prevent like duplication like "Creature Creature"              
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Elemental")) c.addType("Elemental");
-                    
-                  card.removeSpellAbility(X_ability);
-              	  X_ability.setDescription("X: This creature gets +X/+0 until end of turn.");
-            	  X_ability.setStackDescription("X: This creature gets +X/+0 until end of turn.");
-            	  card.addSpellAbility(X_ability);
-                    
+					card.removeSpellAbility(X_ability);
+					X_ability.setDescription("X: This creature gets +X/+0 until end of turn.");
+					X_ability.setStackDescription("X: This creature gets +X/+0 until end of turn.");
+					card.addSpellAbility(X_ability);
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -3048,12 +2956,9 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    c.removeType("Creature");
-                    c.removeType("Elemental");
-                    c.removeIntrinsicKeyword("Reach");
-                    c.setManaCost("");
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
+                    String[] types = { "Creature", "Elemental" };
+                    String[] keywords = { "Reach" };
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -3066,16 +2971,10 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
+                    String[] types = { "Creature", "Elemental" };
+                    String[] keywords = { "Reach" };
                     
-                    c.setBaseAttack(3);
-                    c.setBaseDefense(4);
-                    c.setManaCost("G W");
-                    
-                    //to prevent like duplication like "Creature Creature"              
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Elemental")) c.addType("Elemental");
-                    
-                    if(!c.getIntrinsicKeyword().contains("Reach")) c.addIntrinsicKeyword("Reach");
+                    CardFactoryUtil.activateManland(c, 3, 4, types, keywords, "G W");
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -3096,12 +2995,9 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    c.removeType("Creature");
-                    c.removeType("Elemental");
-                    c.removeIntrinsicKeyword("Unblockable");
-                    c.setManaCost("");
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
+                    String[] types = { "Creature", "Elemental" };
+                    String[] keywords = { "Unblockable" };
+                    CardFactoryUtil.revertManland(c, types, keywords);	
                 }
             };
             
@@ -3114,16 +3010,9 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    
-                    c.setBaseAttack(3);
-                    c.setBaseDefense(2);
-                    c.setManaCost("U B");
-                    
-                    //to prevent like duplication like "Creature Creature"              
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Elemental")) c.addType("Elemental");
-                    
-                    if(!c.getIntrinsicKeyword().contains("Unblockable")) c.addIntrinsicKeyword("Unblockable");
+                    String[] types = { "Creature", "Elemental" };
+                    String[] keywords = { "Unblockable" };
+                    CardFactoryUtil.activateManland(c, 3, 2, types, keywords, "U B");
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -3144,12 +3033,10 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    c.removeType("Creature");
-                    c.removeType("Elemental");
-                    c.removeIntrinsicKeyword("Whenever this creature attacks, put a +1/+1 counter on it.");
-                    c.setManaCost("");
-                    c.setBaseAttack(0);
-                    c.setBaseDefense(0);
+                    
+                    String[] types = { "Creature", "Elemental"};
+                    String[] keywords = { "Whenever this creature attacks, put a +1/+1 counter on it." };
+                    CardFactoryUtil.revertManland(c, types, keywords);
                 }
             };
             
@@ -3162,16 +3049,12 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
+                    String[] types = { "Creature", "Elemental"};
+                    String[] keywords = { };
                     
-                    c.setBaseAttack(3);
-                    c.setBaseDefense(3);
-                    c.setManaCost("R G");
+                    CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "R G");
                     
-                    //to prevent like duplication like "Creature Creature"              
-                    if(!c.getType().contains("Creature")) c.addType("Creature");
-                    if(!c.getType().contains("Elemental")) c.addType("Elemental");
-                    
-                    //if (!c.getIntrinsicKeyword().contains("Whenever this creature attacks, put a +1/+1 counter on it."))
+                    // this keyword stacks, so we can't put it through the activate
                     c.addIntrinsicKeyword("Whenever this creature attacks, put a +1/+1 counter on it.");
                     
                     AllZone.EndOfTurn.addUntil(eot1);
@@ -3183,6 +3066,45 @@ class CardFactory_Lands {
             a1.setStackDescription(card
                     + " - until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
             a1.setDescription("2 R G: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Dread Statuary")) {
+            final Command eot1 = new Command() {
+                private static final long serialVersionUID = -2632172918887247003L;
+                
+                public void execute() {
+                    Card c = card;
+                    
+                    String[] types = { "Artifact", "Creature", "Golem"};
+                    String[] keywords = {  };
+                    CardFactoryUtil.revertManland(c, types, keywords);
+                }
+            };
+            
+            final SpellAbility a1 = new Ability(card, "4") {
+                @Override
+                public boolean canPlayAI() {
+                    return !card.hasSickness();
+                }
+                
+                @Override
+                public void resolve() {
+                    Card c = card;
+                    String[] types = { "Artifact", "Creature", "Golem"};
+                    String[] keywords = { };
+                    
+                    CardFactoryUtil.activateManland(c, 4, 2, types, keywords, "");
+                    
+                    AllZone.EndOfTurn.addUntil(eot1);
+                }
+            };//SpellAbility
+            
+            card.clearSpellKeepManaAbility();
+            card.addSpellAbility(a1);
+            a1.setStackDescription(card
+                    + " - until end of turn,  becomes a 4/2 Golem artifact creature until end of turn.");
+            a1.setDescription("4: Until end of turn, becomes a 4/2 Golem artifact creature until end of turn. It's still a land.");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************

@@ -1108,8 +1108,8 @@ public class Card extends MyObservable {
     }
     
     public void unEquipAllCards() {
-        for(int i = 0; i < equippedBy.size(); i++) {
-            equippedBy.get(i).unEquipCard(this);
+    	while(equippedBy.size() > 0){	// while there exists equipment, unequip the first one 
+            equippedBy.get(0).unEquipCard(this);
         }
     }
     
