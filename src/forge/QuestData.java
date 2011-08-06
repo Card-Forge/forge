@@ -115,7 +115,7 @@ public class QuestData implements NewConstants {
         
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
-        credits = qdPrefs.getStartingBasic();
+        credits = qdPrefs.getStartingCredits();
         
         mode = m;
         if (mode.equals("Fantasy"))
