@@ -1400,7 +1400,7 @@ tap: add B
 Traumatic Visions
 3 U U
 Instant
-Counter target spell.
+no text
 TypeCycling:Basic:1 U
 
 Fiery Fall
@@ -4061,7 +4061,7 @@ tap: add 2
 Last Word
 2 U U
 Instant
-Last Word can't be countered by spells or abilities. Counter target spell. 
+no text 
 This card can't be countered.
 
 Composite Golem
@@ -5783,7 +5783,7 @@ Destroy all non-land permanents.
 Cancel
 1 U U
 Instant
-Counter target spell.
+no text
 
 Zombie Goliath
 4 B
@@ -15136,7 +15136,7 @@ Counter target spell. If that spell is countered this way, put it into its owner
 Counterspell
 U U
 Instant
-Counter target spell.
+no text
 
 Regress
 2 U

@@ -9474,6 +9474,13 @@ public class CardFactory implements NewConstants {
         }
       };
       card.clearSpellAbility();
+      String desc = "";
+      if(cardName.equals("Last Word"))
+      {
+    	desc = "Last Word can't be countered by spells or abilities.\r\n";
+      }
+      spell.setDescription(desc + "Counter target spell.");
+      spell.setStackDescription(card.getName() + " - Counters target spell.");
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
