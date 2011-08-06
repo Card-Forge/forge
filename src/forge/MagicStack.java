@@ -274,13 +274,10 @@ public class MagicStack extends MyObservable {
 					push(sp);
 				
 				else if (!sp.isMultiKicker() && !sp.isReplicate() && !sp.isXCost()) {
-					if(sp.getSourceCard().getName().equals("Gigadrowse")) {
-						System.out.println("Gigadrowse is not recognized as replicate: "+sp.isReplicate());
-					}
 					push(sp);
 				}
 				
-				else if (sp.getPayCosts() != null){
+				else if (sp.getPayCosts() != null && ! sp.isReplicate()){
 					push(sp);
 				}
 				
