@@ -20000,38 +20000,32 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if (cardName.equals("Roc Egg")) {
             final SpellAbility ability = new Ability(card, "0") {
-            	
+                
                 @Override
                 public void resolve() {
+                    
                     CardFactoryUtil.makeToken("Bird", "W 3 3 Bird", card, "W", new String[] {"Creature", "Bird"},
                             3, 3, new String[] {"Flying"});
-                }
-            }; //ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - Put a 3/3 white Bird creature token with flying onto the battlefield.");
-            ability.setStackDescription(sb.toString());
+                    
+                }// resolve()
+            };// ability
 
-            final Command createBird = new Command() {
-                
-				private static final long serialVersionUID = 5899334489679688989L;
+            Command destroy = new Command() {
+                private static final long serialVersionUID = 159321399857094976L;
 
-				public void execute() {
+                public void execute() {
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getController()).append(" - puts a 3/3 white Bird creature token with flying onto the battlefield.");
+                    ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
-                }
-            };
-            
-            final Command destroy = new Command() {
-                
-				private static final long serialVersionUID = 159321399857094976L;
-
-				public void execute() {
-                    AllZone.EndOfTurn.addAt(createBird);
-                }
-            };
+                    
+                }// execute()
+            };// Command destroy
             
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if (cardName.equals("Yavimaya Elder"))
