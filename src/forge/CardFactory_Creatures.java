@@ -7059,6 +7059,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         */
         
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Tuktuk the Explorer")) {
             final Ability ability = new Ability(card, "0") {
@@ -7082,7 +7083,8 @@ public class CardFactory_Creatures {
             };
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
-
+        */
+        
         /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Reveillark")) {
