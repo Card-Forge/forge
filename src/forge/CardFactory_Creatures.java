@@ -298,8 +298,9 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Kiki-Jiki, Mirror Breaker")) {
             final CardFactory cfact = cf;
-            
-            final SpellAbility ability = new Ability_Tap(card) {
+            Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            Target target = new Target("Select target nonlegendary creature you control.", new String[] {"Creature.nonLegendary+YouCtrl"});
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -943706942500499644L;
                 
                 @Override
@@ -313,14 +314,7 @@ public class CardFactory_Creatures {
                 }
                 
                 CardList getCreature() {
-                    CardList list = null;
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
-                        list = new CardList(AllZone.Human_Battlefield.getCards());
-                    } else {
-                        list = new CardList(AllZone.Computer_Battlefield.getCards());
-                    }
-                    
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return (!c.getType().contains("Legendary"));
@@ -420,31 +414,13 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 7171284831370490875L;
-                
-                @Override
-                public void showMessage() {
-                    //get all non-legendary creatures you control
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && (!c.getType().contains("Legendary"));
-                        }
-                    });
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list,
-                            "Select target creature to copy that is not legendary.", true, false));
-                }
-            };//Input
             ability.setStackDescription("Kiki-Jiki - copy card.");
             
             StringBuilder sb = new StringBuilder();
-            sb.append("tap: Put a token into play that's a copy of target nonlegendary creature you control. ");
-            sb.append("That creature token has haste. Sacrifice it at end of turn.");
+            sb.append(abCost);
+            sb.append("Put a token that's a copy of target nonlegendary creature you control onto the battlefield. ");
+            sb.append("That token has haste. Sacrifice it at the beginning of the next end step.");
             ability.setDescription(sb.toString());
-            
-            ability.setBeforePayMana(runtime);
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
