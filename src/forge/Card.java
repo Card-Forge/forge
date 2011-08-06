@@ -2798,10 +2798,14 @@ public class Card extends MyObservable {
              else if (Property.startsWith("notattacking")) { if(isAttacking())  return false;}
  			
              else if (Property.startsWith("blocking")) { if(!isBlocking())  return false;}
+        
+             else if (Property.startsWith("blockingSource")) { if(!isBlocking(source))  return false;}
 		
              else if (Property.startsWith("notblocking")) { if(isBlocking())  return false;}
 		
              else if (Property.startsWith("blocked")) { if(!AllZone.Combat.isBlocked(this))  return false;}
+        
+             else if (Property.startsWith("blockedBySource")) { if(!isBlockedBy(source))  return false;}
         
              else if (Property.startsWith("unblocked")) { if(!AllZone.Combat.isUnblocked(this))  return false;}
         
@@ -2900,6 +2904,14 @@ public class Card extends MyObservable {
 	public boolean isBlocking() {
 		CardList blockers = AllZone.Combat.getAllBlockers();
      	return blockers.contains(this);
+	}
+	
+	public boolean isBlocking(Card attacker) {
+     	return attacker.equals(AllZone.Combat.getAttackerBlockedBy(this));
+	}
+	
+	public boolean isBlockedBy(Card blocker) {
+     	return this.equals(AllZone.Combat.getAttackerBlockedBy(blocker));
 	}
 	
 	///////////////////////////
