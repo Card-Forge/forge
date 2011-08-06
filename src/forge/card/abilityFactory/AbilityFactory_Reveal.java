@@ -127,14 +127,14 @@ public class AbilityFactory_Reveal {
 		if(numToDig != 1) sb.append("s");
 		sb.append(" of ");
 		if(tgtPlayers.contains(host.getController())) {
-			sb.append("his or her");
+			sb.append("his or her ");
 		}
 		else {
 			for(Player p:tgtPlayers) {
-				sb.append(p).append("'s");
+				sb.append(p).append("'s ");
 			}
 		}
-		sb.append(" library.");
+		sb.append("library.");
 
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
@@ -273,7 +273,13 @@ public class AbilityFactory_Reveal {
 					if(destZone2.equals("Library")) {
 						//put them in any order
 						while(rest.size() > 0) {
-							Card chosen = GuiUtils.getChoice("Put the rest in your library in any order", rest.toArray());
+							Card chosen;
+							if(rest.size() > 1) {
+								chosen = GuiUtils.getChoice("Put the rest in the library in any order", rest.toArray());
+							}
+							else {
+								chosen = rest.get(0);
+							}
 							AllZone.GameAction.moveToLibrary(chosen, libraryPosition2);
 							rest.remove(chosen);
 						}
@@ -298,6 +304,7 @@ public class AbilityFactory_Reveal {
 		}
 	}//end resolve
 	
+	//returns a CardList that is a subset of list with cards that share a name with a permanent on the battlefield
 	private static CardList sharesNameWithCardOnBattlefield(CardList list) {
 		CardList toReturn = new CardList();
 		CardList play = AllZoneUtil.getCardsInPlay();
