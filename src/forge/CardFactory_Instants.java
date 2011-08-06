@@ -620,7 +620,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Ensnare")) {
             SpellAbility spell = new Spell(card) {
@@ -727,6 +727,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(bounce);
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        */
 
         
         //*************** START *********** START **************************

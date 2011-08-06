@@ -2,6 +2,8 @@ Name:Ensnare
 ManaCost:3 U
 Types:Instant
 Text:no text
+A:SP$TapAll|Cost$3 U|ValidCards$Creature|SpellDescription$Tap all creatures.
+SVar:AltCost:Return<2/Island>
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnare.jpg
