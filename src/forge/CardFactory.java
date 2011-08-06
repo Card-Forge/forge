@@ -9682,7 +9682,8 @@ public class CardFactory implements NewConstants {
             spell.setStackDescription(card.getName() + " - targeting opponent");
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Coercion")) {
             final SpellAbility spell = new Spell(card) {
@@ -9725,7 +9726,7 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(new Input_PayManaCost(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************

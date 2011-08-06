@@ -1,3 +1,9 @@
+Coercion
+2 B
+Sorcery
+no text
+spDiscardOpp:RevealYouChoose:1:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.:Coercion - opponent reveals hand and discards a card 
+
 Brainbite
 2 U B
 Sorcery
@@ -20753,11 +20759,6 @@ Cranial Extraction
 3 B
 Sorcery
 Name a nonland card. Search target player's graveyard, hand, and library for all cards with that name and remove them from the game. Then that player shuffles his or her library.
-
-Coercion
-2 B
-Sorcery
-Target opponent reveals his or her hand. You choose a card from it. That player discards that card. 
 
 Distress
 B B
