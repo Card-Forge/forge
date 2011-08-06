@@ -1,3 +1,10 @@
+Goblin Spy
+R
+Creature Goblin
+no text
+1/1
+Play with the top card of your library revealed.
+
 Irrigation Ditch
 no cost
 Land

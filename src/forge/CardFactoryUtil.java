@@ -3433,6 +3433,14 @@ public class CardFactoryUtil {
         return list;
     }
     
+    public static Card getTopCard(Card c)
+    {
+    	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getController());
+    	if (lib.size() > 0)
+    		return lib.get(0);
+    	else
+    		return null;
+    }
     
     public static CardList makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
         CardList list = new CardList();

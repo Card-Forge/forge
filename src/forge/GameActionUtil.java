@@ -7455,6 +7455,8 @@ public class GameActionUtil {
 		Wirewood_Hivemaster.execute();
 
 		Sacrifice_NoIslands.execute();
+		
+		topCardReveal_Update.execute();
 		//Angelic_Chorus.execute();
 	}// executeCardStateEffects()
 
@@ -13066,6 +13068,31 @@ public class GameActionUtil {
 		}
 
 
+	};
+	
+	public static Command topCardReveal_Update      = new Command() {
+
+		private static final long serialVersionUID = 8669404698350637963L;
+
+		public void execute() {
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+
+			list = list.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains(
+							"Play with the top card of your library revealed.");
+				}
+			});
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				if (CardFactoryUtil.getTopCard(c)!= null)
+					c.setTopCardName(CardFactoryUtil.getTopCard(c).getName());
+			}
+
+		}//execute()
 	};
 
 	public static Command Sacrifice_NoIslands         = new Command() {

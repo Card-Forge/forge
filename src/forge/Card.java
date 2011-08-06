@@ -104,6 +104,7 @@ public class Card extends MyObservable {
     private String                       chosenType                        = "";
     private String                       chosenColor                       = "";
     private String                       namedCard                         = "";
+    private String						 topCardName					   = "";
     
 
     public ArrayList<Ability_Triggered>  zcTriggers                        = new ArrayList<Ability_Triggered>();
@@ -437,6 +438,15 @@ public class Card extends MyObservable {
     public void setNamedCard(String s) {
         namedCard = s;
     }
+    
+    public String getTopCardName() {
+        return topCardName;
+    }
+    
+    public void setTopCardName(String s) {
+        topCardName = s;
+    }
+    
     
     public String getSpellText() {
         return text;
