@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Tgt$ TgtC | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | TargetMin$ 1 | Tgt$ TgtC | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
