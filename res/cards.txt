@@ -1,3 +1,25 @@
+Swat
+1 B B
+Instant
+Destroy target creature with power 2 or less.
+spDestroyTgt:Creature.powerLE2
+Cycling:2
+
+Radiant's Judgment
+2 W
+Instant
+Destroy target creature with power 4 or greater.
+spDestroyTgt:Creature.powerGE4
+Cycling:2
+
+Big Game Hunter
+1 B B
+Creature Human Rebel Assassin
+When Big Game Hunter enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.
+1/1
+etbDestroyTgt:Creature.powerGE4:NoRegen
+Madness:B
+
 Nikko-Onna
 2 W
 Creature Spirit
