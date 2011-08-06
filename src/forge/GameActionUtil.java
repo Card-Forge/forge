@@ -9757,6 +9757,7 @@ public class GameActionUtil {
 		Wirewood_Hivemaster.execute();
 
 		Sacrifice_NoIslands.execute();
+		Sacrifice_NoForests.execute();
 		
 		topCardReveal_Update.execute();
 		//Angelic_Chorus.execute();
@@ -17542,6 +17543,28 @@ public class GameActionUtil {
 			return islands.size();
 		}
 
+	};
+	
+	public static Command Sacrifice_NoForests = new Command() {
+		private static final long serialVersionUID = -5310856079162962126L;
+
+		public void execute() {
+			CardList creature = AllZoneUtil.getCardsInPlay();
+
+			creature = creature.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains(
+							"When you control no Forests, sacrifice CARDNAME.");
+				}
+			});
+
+			for(Card c:creature) {
+				if(AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Forest").size() == 0) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
 	};
 
 	public static Command Zuberi                      = new Command() {

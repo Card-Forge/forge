@@ -1,0 +1,10 @@
+Name:Gorilla Pack
+ManaCost:2 G
+Types:Creature Ape
+text:no text
+PT:3/3
+K:CARDNAME can't attack unless defending player controls a Forest.
+K:When you control no Forests, sacrifice CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_pack.jpg
+End

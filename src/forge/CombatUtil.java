@@ -334,6 +334,11 @@ public class CombatUtil {
             temp = list.getType("Island");
             if(temp.isEmpty()) return false;
         }
+        
+        if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls a Forest.")) {
+            temp = list.getType("Forest");
+            if(temp.isEmpty()) return false;
+        }
     	
         if(c.getName().equals("Harbor Serpent")) {
         	CardList allislands = AllZoneUtil.getTypeInPlay("Island");
