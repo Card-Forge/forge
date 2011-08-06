@@ -52,7 +52,6 @@ public class GameActionUtil {
 		
 		upkeep_Greener_Pastures();
 		upkeep_Squee();
-		upkeep_Dragonmaster_Outcast();
 		upkeep_Scute_Mob();
 		upkeep_Heartmender();
 		upkeep_Nath();
@@ -4795,35 +4794,6 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         } // if creatures > 0
     } // upkeep_Squee()
-
-	private static void upkeep_Dragonmaster_Outcast() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Dragonmaster Outcast");
-
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-				CardList lands = new CardList(playZone.getCards());
-				lands = lands.getType("Land");
-
-				if(lands.size() >= 6) {
-					final Card c = list.get(i);
-					Ability ability = new Ability(list.get(i), "0") {
-						@Override
-						public void resolve() {
-							CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", c.getController(), "R", new String[] {
-									"Creature", "Dragon"}, 5, 5, new String[] {"Flying"});
-						}
-
-					};// Ability
-					ability.setStackDescription("Dragonmaster Outcast - put a 5/5 red Dragon creature token with flying onto the battlefield.");
-					AllZone.Stack.add(ability);
-				}
-			} // for
-		} // if creatures > 0
-	};
 
 	private static void upkeep_Scute_Mob() {
 		final Player player = AllZone.Phase.getPlayerTurn();
