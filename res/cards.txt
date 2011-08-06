@@ -61,11 +61,6 @@ Creature Eldrazi Drone
 When Dread Drone enters the battlefield, put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
 4/1
 
-Blood Birthing
-1 R
-Sorcery
-If you control an Eldrazi Spawn, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool." Otherwise, put one of those tokens onto the battlefield.
-
 Animate Artifact
 3 U
 Enchantment Aura
