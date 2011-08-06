@@ -485,7 +485,9 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
             
             if(quest.shouldAddAdditionalCards(wonMatch)) {
-            	String fileName = quest.addRandomRare() + ".jpg";
+                Card c = AllZone.CardFactory.getCard(quest.addRandomRare(), AllZone.HumanPlayer);
+                c.setCurSetCode(c.getMostRecentSet());
+            	String fileName = CardUtil.buildFilename(c) +".jpg";
             	ImageIcon icon = getCardIcon(fileName);
                 
                 JOptionPane.showMessageDialog(null, "", "You have won a random rare.", JOptionPane.INFORMATION_MESSAGE, icon);
