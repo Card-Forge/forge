@@ -343,6 +343,21 @@ public abstract class Player extends MyObservable{
         library.setCards(c);
     }//shuffle
     ////////////////////////////////
+    
+    ////////////////////////////////
+    protected abstract void doScry(CardList topN, int N);
+    
+    public void scry(int numScry) {
+        CardList topN = new CardList();
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
+        numScry = Math.min(numScry, library.size());
+        for(int i = 0; i < numScry; i++) {
+            topN.add(library.get(0));
+            library.remove(0);
+        }
+        doScry(topN, topN.size());
+    }
+    ///////////////////////////////
 	
 	////////////////////////////////
 	//

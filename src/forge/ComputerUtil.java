@@ -119,7 +119,7 @@ public class ComputerUtil
       	if (k.startsWith("Scry"))
       	{
       		String kk[] = k.split(" ");
-      		AllZone.GameAction.scry(sa.getSourceCard().getController(), Integer.parseInt(kk[1]));
+      		sa.getSourceCard().getController().scry(Integer.parseInt(kk[1]));
       	}
       }
 

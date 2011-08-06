@@ -76,4 +76,50 @@ public class AIPlayer extends Player{
 		return use;
 	}
 	
+	protected void doScry(final CardList topN, final int N) {
+		int num = N;
+		for(int i = 0; i < num; i++) {
+            boolean b = false;
+            if(topN.get(i).getType().contains("Basic")) {
+                CardList bl = new CardList(
+                        AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+                bl = bl.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        if(c.getType().contains("Basic")) return true;
+                        
+                        return false;
+                    }
+                });
+                
+                if(bl.size() > 5) // if control more than 5 Basic land, probably don't need more
+                b = true;
+            } else if(topN.get(i).getType().contains("Creature")) {
+                CardList cl = new CardList(
+                        AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+                cl = cl.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        if(c.getType().contains("Creature")) return true;
+                        
+                        return false;
+                    }
+                });
+                
+                if(cl.size() > 5) // if control more than 5 Creatures, probably don't need more
+                b = true;
+            }
+            if(b == true) {
+                AllZone.Computer_Library.add(topN.get(i));
+                topN.remove(i);
+            }
+        }
+        num = topN.size();
+        if(num > 0) for(int i = 0; i < num; i++) // put the rest on top in random order
+        {
+            Random rndm = new Random();
+            int r = rndm.nextInt(topN.size());
+            AllZone.Computer_Library.add(topN.get(r), 0);
+            topN.remove(r);
+        }
+	}
+	
 }//end AIPlayer class

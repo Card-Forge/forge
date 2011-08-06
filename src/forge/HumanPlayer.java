@@ -71,4 +71,30 @@ public class HumanPlayer extends Player{
 		return dredged;
 	}
 	
+	protected void doScry(final CardList topN, final int N) {
+		int num = N;
+		for(int i = 0; i < num; i++) {
+            Object o;
+            o = AllZone.Display.getChoiceOptional("Choose a card to put on the bottom of your library.",
+                    topN.toArray());
+            if(o != null) {
+                Card c = (Card) o;
+                topN.remove(c);
+                AllZone.Human_Library.add(c);
+            } else // no card chosen for the bottom
+            break;
+        }
+        num = topN.size();
+        if(num > 0) for(int i = 0; i < num; i++) {
+            Object o;
+            o = AllZone.Display.getChoice("Choose a card to put on the top of your library.", topN.toArray());
+            if(o != null) {
+                Card c = (Card) o;
+                topN.remove(c);
+                AllZone.Human_Library.add(c, 0);
+            }
+            // no else - a card must have been chosen
+        }
+	}
+	
 }//end HumanPlayer class
