@@ -5942,6 +5942,32 @@ public class GameActionUtil {
 				playerDamage_Farsight_Mask(player, c, crd);
 		}
 		
+    	if(AllZoneUtil.isCardInPlay("Lich", player)) {
+    		CardList lichs = playerPerms.getName("Lich");
+			for(Card crd:lichs) {
+				final Card lich = crd;
+				SpellAbility ability = new Ability(lich, "0") {
+					public void resolve() {
+						for(int i = 0; i < damage; i++) {
+			    			CardList nonTokens = AllZoneUtil.getPlayerCardsInPlay(player);
+			    			nonTokens = nonTokens.filter(AllZoneUtil.nonToken);
+			    			if(nonTokens.size() == 0) {
+			    				player.altLoseConditionMet("Lich");
+			    			}
+			    			else player.sacrificePermanent("Select a permanent to sacrifice", nonTokens);
+			    		}
+					}
+				};
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(lich.getName()).append(" - ").append(lich.getController());
+				sb.append(" sacrifices ").append(damage).append(" nontoken Permanents.");
+				ability.setStackDescription(sb.toString());
+				
+				AllZone.Stack.add(ability);
+			}
+    	}
+		
     	if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
 			playerCombatDamage_PoisonCounter(c, 1);
     

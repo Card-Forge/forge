@@ -3005,7 +3005,7 @@ public class Card extends MyObservable {
 					restDamage -= 1;
 		}
     	
-    	if( AllZoneUtil.isCardInPlay("Divine Presence") && restDamage > 3) {
+    	if( AllZoneUtil.isCardInPlay("Divine Presence") && isCreature() && restDamage > 3) {
 			
     		restDamage = 3;
 		}
@@ -3020,9 +3020,15 @@ public class Card extends MyObservable {
     public int replaceDamage(final int damage, Card source, boolean isCombat) {
     	
     	int restDamage = damage;
+    	CardList auras = new CardList(getEnchantedBy().toArray());
     	
     	if(getName().equals("Phytohydra")) {
     		addCounter(Counters.P1P1, restDamage);
+    		return 0;
+    	}
+    	
+    	if(auras.containsName("Treacherous Link")) {
+    		getController().addDamage(restDamage, source);
     		return 0;
     	}
     	

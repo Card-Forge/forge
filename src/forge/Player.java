@@ -229,16 +229,6 @@ public abstract class Player extends MyObservable{
         	if(PlayerUtil.worshipFlag(this) && life <= damageToDo) {
         		damageToDo = Math.min(damageToDo, life - 1);
         	}
-        	if(AllZoneUtil.isCardInPlay("Lich", this)) {
-        		for(int i = 0; i < damageToDo; i++) {
-        			CardList nonTokens = AllZoneUtil.getPlayerCardsInPlay(this);
-        			nonTokens = nonTokens.filter(AllZoneUtil.nonToken);
-        			if(nonTokens.size() == 0) {
-        				this.altLoseConditionMet("Lich");
-        			}
-        			else sacrificePermanent("Select a permanent to sacrifice", nonTokens);
-        		}
-        	}
         	//rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
         	loseLife(damageToDo, source);
         }

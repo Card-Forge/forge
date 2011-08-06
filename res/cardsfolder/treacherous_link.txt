@@ -1,0 +1,10 @@
+Name:Treacherous Link
+ManaCost:1 B
+Types:Enchantment Aura
+Text:All damage that would be dealt to enchanted creature is dealt to its controller instead.
+K:Enchant creature
+K:enPumpCurse:+0/+0
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_link.jpg
+End
