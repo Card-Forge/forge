@@ -1,6 +1,6 @@
 Name:Eye of Nowhere
 ManaCost:U U
-Types:Sorcery
+Types:Sorcery Arcane
 Text:Return target permanent to its owner's hand.
 K:spBounceTgt:Permanent:Hand
 SVar:Rarity:Common
