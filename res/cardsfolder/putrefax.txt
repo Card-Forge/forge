@@ -1,0 +1,10 @@
+Name:Putrefax
+ManaCost:3 G G
+Types:Creature Horror
+Text:no text
+PT:5/3
+K:Trample
+K:Haste
+K:Infect
+K:At the beginning of the end step, sacrifice CARDNAME
+K:SVar:Rarity:Rare
