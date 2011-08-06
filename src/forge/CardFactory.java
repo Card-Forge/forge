@@ -2482,6 +2482,218 @@ public class CardFactory implements NewConstants {
                   }
         	}
         }//spGainLife
+
+        if (hasKeyword(card, "abGainLife") != -1)
+        {
+        	int n = hasKeyword(card, "abGainLife");
+        	if (n != -1)
+        	{
+        		String parse = card.getKeyword().get(n).toString();
+        		card.removeIntrinsicKeyword(parse);
+        		
+        		String k[] = parse.split(":");
+        		
+        		final boolean Tgt[] = {false};
+        		Tgt[0] = k[0].contains("Tgt");
+        		
+        		String tmpCost = "";
+        		
+        		if (Tgt[0])
+        			tmpCost = k[0].substring(13);
+        		else
+        			tmpCost = k[0].substring(10);
+        		
+        		boolean tapCost = false;
+        		boolean tapOnlyCost = false;
+        		
+        		if (tmpCost.contains("T"))
+        		{
+        			tapCost = true;
+        			tmpCost = tmpCost.replace("T", "").trim();
+        			if (tmpCost.length() == 0)
+        				tapOnlyCost = true;
+        		}
+        		
+        		final String manaCost = tmpCost;
+        		
+        		final int NumLife[] = {-1};
+        		final String NumLifeX[] = {"none"};
+        		
+        		if (k[1].matches("X"))
+        		{
+        			String x = card.getSVar(k[1]);
+        			if (x.startsWith("Count$"))
+        			{
+        				String kk[] = x.split("\\$");
+        				NumLifeX[0] = kk[1];
+        			}
+        		}
+        		else if (k[1].matches("[0-9][0-9]?"))
+        			NumLife[0] = Integer.parseInt(k[1]);
+        		
+        		// drawbacks and descriptions
+                final String DrawBack[] = {"none"};
+                final String spDesc[] = {"none"};
+                final String stDesc[] = {"none"};
+                if (k.length > 2)
+                {
+                   if (k[2].contains("Drawback$"))
+                   {
+                      String kk[] = k[2].split("\\$");
+                      DrawBack[0] = kk[1];
+                      if (k.length > 3)
+                         spDesc[0] = k[3];
+                      if (k.length > 4)
+                         stDesc[0] = k[4];
+                   }
+                   else
+                   {
+                      if (k.length > 2)
+                         spDesc[0] = k[2];
+                      if (k.length > 3)
+                         stDesc[0] = k[3];
+                   }
+                }
+                else
+                {
+                   if (Tgt[0] == true)
+                   {
+                      spDesc[0] = "Target player gains " + NumLife[0] + " life.";
+                      stDesc[0] =  cardName + " - target player gains life";
+                   }
+                   else
+                   {
+                      spDesc[0] = "You gain " + NumLife[0] + " life.";
+                      stDesc[0] = cardName + " - you gain life";
+                   }
+                }
+                if (!tapCost)
+                {
+                    final SpellAbility abGainLife = new Ability_Activated(card, manaCost)
+                    {
+                    private static final long serialVersionUID = -936369754466156082L;
+
+                     public int getNumLife()
+                     {
+                        if (NumLife[0] != -1)
+                           return NumLife[0];
+
+                        if (! NumLifeX[0].equals("none"))
+                           return CardFactoryUtil.xCount(card, NumLifeX[0]);
+                       
+                        return 0;
+                     }
+                     
+                     public boolean canPlayAI()
+                     {
+                    	 Random r = new Random();
+                    	 boolean rr = false; // prevent run-away activations - first time will always return true
+                    	 if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+                    		 rr = true;
+                    	 
+                         if (Tgt[0] == true)
+                        	 setTargetPlayer(Constant.Player.Computer);
+                         
+                         if (AllZone.Computer_Life.getLife() < 10)
+                        	 return true && rr;
+                         else
+                        	 return ((r.nextFloat() < .6667) && rr);
+                     }
+
+                    public void resolve()
+                       {
+                          int nlife = getNumLife();
+                          String TgtPlayer;
+
+                          if (Tgt[0] == true)
+                             TgtPlayer = getTargetPlayer();
+                          else
+                             TgtPlayer = card.getController();
+                         
+                          AllZone.GameAction.addLife(TgtPlayer, nlife);
+                         
+                          if (!DrawBack[0].equals("none"))
+                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                       }//resolve()
+                    };//SpellAbility
+                   
+                    if (Tgt[0] == true)
+                       abGainLife.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abGainLife));
+                   
+                    abGainLife.setDescription(manaCost + ": " + spDesc[0]);
+                    abGainLife.setStackDescription(stDesc[0]);
+                   
+                    card.addSpellAbility(abGainLife);
+                }
+                else
+                {
+                	final SpellAbility abGainLife = new Ability_Tap(card)
+                    {
+                    private static final long serialVersionUID = -3661692584660594012L;
+
+                     public int getNumLife()
+                     {
+                        if (NumLife[0] != -1)
+                           return NumLife[0];
+
+                        if (! NumLifeX[0].equals("none"))
+                           return CardFactoryUtil.xCount(card, NumLifeX[0]);
+                       
+                        return 0;
+                     }
+                     
+                     public boolean canPlayAI()
+                     {                    	 
+                        boolean att = !CardFactoryUtil.AI_doesCreatureAttack(card);
+                    	 
+                    	 if (Tgt[0] == true)
+                           setTargetPlayer(Constant.Player.Computer);
+                           
+                    	 if (AllZone.Computer_Life.getLife() < 10)
+                    		 return true && att;
+                    	 else
+                    	 {
+                    		 Random r = new Random();
+                    		 return ((r.nextFloat() < .6667) && att);
+                    	 }
+                        
+                     }
+
+                    public void resolve()
+                       {
+                          int nlife = getNumLife();
+                          String TgtPlayer;
+
+                          if (Tgt[0] == true)
+                             TgtPlayer = getTargetPlayer();
+                          else
+                             TgtPlayer = card.getController();
+                         
+                          AllZone.GameAction.addLife(TgtPlayer, nlife);
+                         
+                          if (!DrawBack[0].equals("none"))
+                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                       }//resolve()
+                    };//SpellAbility
+                   
+                    if (Tgt[0] == true)
+                       abGainLife.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abGainLife));
+                   
+                    if (tapOnlyCost)
+                    	abGainLife.setDescription("Tap: " + spDesc[0]);
+                    else
+                    {
+                    	abGainLife.setDescription(manaCost + ", tap: " + spDesc[0]);
+                    	abGainLife.setManaCost(manaCost);
+                    }
+                    	
+                    abGainLife.setStackDescription(stDesc[0]);
+                   
+                    card.addSpellAbility(abGainLife);
+                }
+        	}
+        }// abGainLife
+
         
         if(hasKeyword(card, "SearchRebel") != -1) {
             int n = hasKeyword(card, "SearchRebel");
