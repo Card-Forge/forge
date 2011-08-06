@@ -20622,68 +20622,73 @@ public class CardFactory implements NewConstants {
       //*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if (cardName.equals("Reprisal")) {
-        	final SpellAbility spell = new Spell(card) {
-        		private static final long serialVersionUID = 8653455310355884536L;
+        else if (cardName.equals("Reprisal")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 8653455310355884536L;
 
-        		public boolean canPlayAI() {
-        			CardList list = new CardList(AllZone.Human_Play.getCards());
-        			list = list.filter(new CardListFilter() {
-        				public boolean addCard(Card c) {
-        					return c.isCreature()  && c.getNetAttack() > 3 && CardFactoryUtil.canTarget(card, c);
-        				}
-        			});
-        			if (list.isEmpty()) return false;
-				
-        			CardListUtil.sortAttack(list);
-        			CardListUtil.sortFlying(list);
-        			setTargetCard(list.get(0));
-        			return true;
-        		}//canPlayAI()
-			
-        		public void resolve() {
-        			if (AllZone.GameAction.isCardInPlay(getTargetCard())) {
-        				// AllZone.GameAction.destroy(getTargetCard());
-        				AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-        			}
-        		}//resolve
-        	};//SpellAbility
-         
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-         
-        	Input target = new Input() {
-        		private static final long serialVersionUID = 4794354831721082791L;
-        		public void showMessage() {
-        			AllZone.Display.showMessage("Select target Creature to destroy");
-        			ButtonUtil.enableOnlyCancel();
-        		}
-        		public void selectButtonCancel() {
-        			stop();
-        		}
-        		public void selectCard(Card c, PlayerZone zone) {
-        			if (zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() > 3)) {
-        				spell.setTargetCard(c);
-        				if(this.isFree()) 
-        				{
-        					this.setFree(false);
-        					AllZone.Stack.add(spell);
-        					stop();
-        				}
-        				else
-        					stopSetNext(new Input_PayManaCost(spell));
-        			}
-        		}
-        	};//input
-        	
-        	card.setSVar("PlayMain1", "TRUE");
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() 
+                                && c.getNetAttack() > 3 
+                                && CardFactoryUtil.canTarget(card, c) 
+                                && !c.getKeyword().contains("Indestructible");
+                        }
+                    });
+                    
+                    if (list.isEmpty()) return false;
+              
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    setTargetCard(list.get(0));
+                    return true;
+                }//canPlayAI()
+          
+                public void resolve() {
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())) {
+                        AllZone.GameAction.destroyNoRegeneration(getTargetCard());
+                    }
+                }//resolve
+            };//SpellAbility
        
-        	spell.setBeforePayMana(target);
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+       
+            Input target = new Input() {
+                private static final long serialVersionUID = 4794354831721082791L;
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select target Creature to destroy");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                public void selectButtonCancel() {
+                    stop();
+                }
+                public void selectCard(Card c, PlayerZone zone) {
+                    if (zone.is(Constant.Zone.Play) 
+                            && c.isCreature() 
+                            && (c.getNetAttack() > 3) 
+                            && CardFactoryUtil.canTarget(card, c)) {
+                        spell.setTargetCard(c);
+                        if (this.isFree()) 
+                        {
+                            this.setFree(false);
+                            AllZone.Stack.add(spell);
+                            stop();
+                        }
+                        else
+                            stopSetNext(new Input_PayManaCost(spell));
+                    }
+                }
+            };//input
+          
+            card.setSVar("PlayMain1", "TRUE");
+       
+            spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-        
         //*****************************START*******************************
-        if(cardName.equals("Icy Manipulator")) {
+        else if(cardName.equals("Icy Manipulator")) {
            /* The Rules state that this can target a tapped card, but it won't do anything */
            
            final Ability_Tap ability = new Ability_Tap(card, "1") {
@@ -21017,7 +21022,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*****************************START*******************************
-        if(cardName.equals("Jandor's Saddlebags")) {
+        else if(cardName.equals("Jandor's Saddlebags")) {
         	/* Assuing the Rules state that this can target an untapped card,
         	 * but it won't do anything useful
         	 *
@@ -21520,7 +21525,7 @@ public class CardFactory implements NewConstants {
         
         
         //*************** START *********** START **************************
-        if(cardName.equals("Bottle of Suleiman")) {
+        else if(cardName.equals("Bottle of Suleiman")) {
            /*
             * Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
             * Bottle of Suleiman deals 5 damage to you. If you win the flip,
@@ -21701,7 +21706,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*****************************START*******************************
-        if(cardName.equals("Twiddle")) {
+        else if(cardName.equals("Twiddle")) {
         	/*
         	 * You may tap or untap target artifact, creature, or land.
         	 */
@@ -21763,7 +21768,7 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Zuran Orb")) {
+        else if(cardName.equals("Zuran Orb")) {
         	final SpellAbility ability = new Ability_Activated(card,"0") {
         		private static final long serialVersionUID = 6349074098650435648L;
         		public boolean canPlayAI() {
@@ -23778,7 +23783,6 @@ public class CardFactory implements NewConstants {
             spell.setStackDescription("Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way");
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         if(cardName.equals("Life from the Loam")) {
