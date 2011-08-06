@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Human Soldier
 Text:no text
 PT:3/2
-K:stPumpAll:Creature.Soldier+Other+YouCtrl:1/0:No Condition:K:stPumpAll:Creature.Merfolk+Other+YouCtrl:1/1:No Condition:Other Merfolk creatures you control get +1/+1.
+K:stPumpAll:Creature.Soldier+Other+YouCtrl:1/0:No Condition:Other Soldier creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_swordsmith.jpg
