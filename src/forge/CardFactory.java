@@ -8027,6 +8027,78 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Scroll Rack")) {
+        	Ability_Cost abCost = new Ability_Cost("1 T", cardName, true); 
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -5588587187720068547L;
+
+				@Override
+        		public void resolve() {
+            		//not implemented for compy
+        			if(card.getController().isHuman()) {
+        				AllZone.InputControl.setInput(new Input() {
+							private static final long serialVersionUID = -2305549394512889450L;
+							CardList exiled = new CardList();
+
+        					@Override
+        					public void showMessage() {
+        						AllZone.Display.showMessage(card.getName()+" - Exile cards from hand.  Currently, "+exiled.size()+" selected.  (Press OK when done.)");
+        						ButtonUtil.enableOnlyOK();
+        					}
+
+        					@Override
+        					public void selectButtonOK() { done(); }
+
+        					@Override
+        					public void selectCard(final Card c, PlayerZone zone) {
+        						if(zone.is(Constant.Zone.Hand, AllZone.HumanPlayer)
+        								&& !exiled.contains(c)) {
+        							exiled.add(c);
+        							showMessage();
+        						}
+        					}
+        					
+        					public void done() {
+        						//exile those cards
+        						for(Card c:exiled) AllZone.GameAction.exile(c);
+        						
+        						//Put that many cards from the top of your library into your hand.
+        						//Ruling: This is not a draw...
+        						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
+        						int numCards = 0;
+        						while(lib.size() > 0 && numCards < exiled.size()) {
+        							AllZone.GameAction.moveToHand(lib.get(0));
+        							numCards++;
+        						}
+        						
+        						AllZone.Display.showMessage(card.getName()+" - Returning cards to top of library.");
+        						
+        						//Then look at the exiled cards and put them on top of your library in any order.
+        						while(exiled.size() > 0) {
+        							Object o = AllZone.Display.getChoice("Put a card on top of your library.", exiled.toArray());
+        							Card c1 = (Card)o;
+        							AllZone.GameAction.moveToTopOfLibrary(c1);
+        							exiled.remove(c1);
+        						}
+        						
+    							stop();
+        					}
+        				});
+        			}
+        		}
+				
+				@Override
+				public boolean canPlayAI() {
+					return false;
+				}
+            };//ability
+            ability.setDescription(abCost+"Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.");
+            ability.setStackDescription(cardName+" - exile any number of cards from your hand.");
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
 
         return postFactoryKeywords(card);
     }//getCard2
