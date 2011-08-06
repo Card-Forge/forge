@@ -1,7 +1,10 @@
 Name:Lingering Mirage
 ManaCost:1 U
 Types:Enchantment Aura
-Text:Enchanted land is an Island.
+Text:no text
+#
+# Need to set the spell description in CardFactory_Auras for Lingering Mirage since it has cycling
+#
 K:Enchant land
 K:Cycling:2
 SVar:Rarity:Common
