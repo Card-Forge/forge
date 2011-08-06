@@ -2243,14 +2243,14 @@ public class CombatUtil {
                         	for(String keyword:keywords) {
                         		if(keyword.startsWith("Enchant creature")) {
                                     if(c.isEnchantment())  {
-                                    	String [] colors = new String[5];
+                                    	String [] colors = new String[6];
                                     ArrayList<String> color = CardUtil.getColors(c);
                                     if(color.contains(Constant.Color.Black)) 	colors[0] = "black";
                                     if(color.contains(Constant.Color.Blue)) 	colors[1] = "blue";
                                     if(color.contains(Constant.Color.Green)) 	colors[2] = "green";
                                     if(color.contains(Constant.Color.Red))	 	colors[3] = "red";
                                     if(color.contains(Constant.Color.White)) 	colors[4] = "white"; 
-                                    if(color.contains(Constant.Color.Colorless))colors[5] = "colorless";                                   
+                                    if(color.contains(Constant.Color.Colorless))colors[5] = "artifacts";                                   
     	                            for(int i = 0; i < colors.length; i++) {
                                     if(attacker.hasKeyword("Protection from " + colors[i]) == true) return false; 
     	                            }
@@ -2259,14 +2259,14 @@ public class CombatUtil {
                         		if(turn == "Human") {
                             		if(keyword.startsWith("Enchant Creature")) {
                         			if(keyword.endsWith("Curse")) {
-                                    	String [] colors = new String[5];
+                                    	String [] colors = new String[6];
                                         ArrayList<String> color = CardUtil.getColors(c);
                                         if(color.contains(Constant.Color.Black)) 	colors[0] = "black";
                                         if(color.contains(Constant.Color.Blue)) 	colors[1] = "blue";
                                         if(color.contains(Constant.Color.Green)) 	colors[2] = "green";
                                         if(color.contains(Constant.Color.Red))	 	colors[3] = "red";
                                         if(color.contains(Constant.Color.White)) 	colors[4] = "white"; 
-                                        if(color.contains(Constant.Color.Colorless))colors[5] = "colorless";                                   
+                                        if(color.contains(Constant.Color.Colorless))colors[5] = "artifacts";                                   
         	                            for(int i = 0; i < colors.length; i++) {
                                         if(attacker.hasKeyword("Protection from " + colors[i]) == true) return false; 
         	                            }
