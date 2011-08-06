@@ -87,7 +87,7 @@ public class Cost_Payment {
 			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 			CardList typeList = new CardList(play.getCards());
 			    
-			typeList = typeList.getValidCards(cost.getTapXType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard());
+			typeList = typeList.getValidCards(cost.getTapXType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard());
 			
 			if (cost.getTap()) {
 				typeList = typeList.filter(new CardListFilter()
@@ -139,7 +139,7 @@ public class Cost_Payment {
     		}
     		else{
     			if (!discType.equals("Any") && !discType.equals("Random")){
-    				String validType[] = discType.split(",");
+    				String validType[] = discType.split(";");
 
     				handList = handList.getValidCards(validType,ability.getActivatingPlayer() ,ability.getSourceCard());
     			}
@@ -155,7 +155,7 @@ public class Cost_Payment {
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 			    CardList typeList = new CardList(play.getCards());
 			    
-			    typeList = typeList.getValidCards(cost.getSacType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard()); 
+			    typeList = typeList.getValidCards(cost.getSacType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard()); 
 				if (typeList.size() < cost.getSacAmount())
 					return false;
 			}
@@ -167,7 +167,7 @@ public class Cost_Payment {
 			if (!cost.getExileThis()){
 			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(card.getController());
 			    
-			    typeList = typeList.getValidCards(cost.getExileType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard()); 
+			    typeList = typeList.getValidCards(cost.getExileType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard()); 
 				if (typeList.size() < cost.getExileAmount())
 					return false;
 			}
@@ -179,7 +179,7 @@ public class Cost_Payment {
 			if (!cost.getExileFromHandThis()){
 			    CardList typeList = AllZoneUtil.getPlayerHand(card.getController());
 			    
-			    typeList = typeList.getValidCards(cost.getExileFromHandType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard()); 
+			    typeList = typeList.getValidCards(cost.getExileFromHandType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard()); 
 				if (typeList.size() < cost.getExileFromHandAmount())
 					return false;
 			}
@@ -192,7 +192,7 @@ public class Cost_Payment {
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 			    CardList typeList = new CardList(play.getCards());
 			    
-			    typeList = typeList.getValidCards(cost.getReturnType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard()); 
+			    typeList = typeList.getValidCards(cost.getReturnType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard()); 
 				if (typeList.size() < cost.getReturnAmount())
 					return false;
 			}
@@ -253,7 +253,7 @@ public class Cost_Payment {
 		if (!payTapXType && cost.getTapXTypeCost()){
 			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
             CardList typeList = new CardList(play.getCards());
-            typeList = typeList.getValidCards(cost.getTapXType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard());
+            typeList = typeList.getValidCards(cost.getTapXType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard());
             
 			changeInput.stopSetNext(input_tapXCost(cost.getTapXTypeAmount(),cost.getTapXType(), typeList, ability, this));
 			return false;
@@ -326,7 +326,7 @@ public class Cost_Payment {
     			}
     			else{
 	    			if (!discType.equals("Any")){
-	    				String validType[] = discType.split(",");
+	    				String validType[] = discType.split(";");
 	    				handList = handList.getValidCards(validType,ability.getActivatingPlayer() ,ability.getSourceCard());
 	    			}
 	    			changeInput.stopSetNext(input_discardCost(discAmount, discType, handList, ability, this));
@@ -550,7 +550,7 @@ public class Cost_Payment {
     			}
     			else{
 	    			if (!discType.equals("Any")){
-	    				String validType[] = discType.split(",");
+	    				String validType[] = discType.split(";");
 	    				AllZone.GameAction.AI_discardNumType(discAmount, validType, ability);
 	    			}
 	    			else{
@@ -822,7 +822,7 @@ public class Cost_Payment {
             	
                 PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
-                typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
+                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -948,7 +948,7 @@ public class Cost_Payment {
             	
                 PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
-                typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
+                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -1009,7 +1009,7 @@ public class Cost_Payment {
             	
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, spell.getSourceCard().getController());
                 typeList = new CardList(hand.getCards());
-                typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
+                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -1155,7 +1155,7 @@ public class Cost_Payment {
             	
                 PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
-                typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
+                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }

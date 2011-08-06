@@ -2505,7 +2505,10 @@ public class Card extends MyObservable {
 
     // Takes arguments like Blue or withFlying
 	public boolean hasProperty(String Property, final Player sourceController, final Card source) {
-		if (Property.contains("White") || // ... Card colors
+		//by name can also have color names, so needs to happen before colors.
+        if(Property.startsWith("named")) { if(!getName().equals(Property.substring(5))) return false; }
+        
+        else if (Property.contains("White") || // ... Card colors
                 Property.contains("Blue") ||
                 Property.contains("Black") ||
                 Property.contains("Red") ||
@@ -2660,8 +2663,6 @@ public class Card extends MyObservable {
 		
              else if (Property.startsWith("blocked")) { if(!AllZone.Combat.isBlocked(this))  return false;}
  			
-             else if(Property.startsWith("named")) //by name
-             	{ if(!getName().equals(Property.substring(5))) return false;}
              else if(Property.startsWith("non")) // ... Other Card types
              	{ if(isType(Property.substring(3))) return false;}
              else {
