@@ -248,6 +248,7 @@ Elite Vanguard
 Elven Riders
 Elvish Aberration
 Elvish Harbinger
+Encroach
 Engineered Plague
 Enlightened Tutor
 Enlisted Wurm
@@ -710,6 +711,7 @@ Sentinels of Glen Elendra
 Serra's Blessing
 Serra's Embrace
 Shambling Remains
+Shattered Dreams
 Shatterstorm
 Shepherd of the Lost
 Shifting Wall
