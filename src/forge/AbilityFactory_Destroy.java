@@ -19,24 +19,7 @@ public class AbilityFactory_Destroy {
 		
 			@Override
 			public String getStackDescription(){
-			// when getStackDesc is called, just build exactly what is happening
-
-				 StringBuilder sb = new StringBuilder();
-				 String name = af.getHostCard().getName();
-				 String targetname = "";
-				 
-				 Card tgt = getTargetCard();
-				 if (tgt != null)
-					 targetname = tgt.getName();
-				 else
-					 targetname = name;
-
-				 sb.append(name).append(" - Destroy ").append(targetname);
-								 
-				 if(noRegen)
-					 sb.append(". It can't be regenerated");
-				
-				 return sb.toString();
+				return destroyStackDescription(af, this, noRegen);
 			}
 			
 			public boolean canPlay(){
@@ -69,24 +52,7 @@ public class AbilityFactory_Destroy {
 		
 			@Override
 			public String getStackDescription(){
-			// when getStackDesc is called, just build exactly what is happening
-
-				 StringBuilder sb = new StringBuilder();
-				 String name = af.getHostCard().getName();
-				 String targetname = "";
-				 
-				 Card tgt = getTargetCard();
-				 if (tgt != null)
-					 targetname = tgt.getName();
-				 else
-					 targetname = name;
-
-				 sb.append(name).append(" - Destroy ").append(targetname);
-								 
-				 if(noRegen)
-					 sb.append(". It can't be regenerated");
-				
-				 return sb.toString();
+				return destroyStackDescription(af, this, noRegen);
 			}
 			
 			public boolean canPlay(){
@@ -228,4 +194,37 @@ public class AbilityFactory_Destroy {
 		if (af.hasSubAbility())
 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
      }
+	
+	public static String destroyStackDescription(final AbilityFactory af, SpellAbility sa, boolean noRegen){
+		// when getStackDesc is called, just build exactly what is happening
+
+		 StringBuilder sb = new StringBuilder();
+		 String name = af.getHostCard().getName();
+
+		 ArrayList<Card> tgtCards;
+
+		 Target tgt = af.getAbTgt();
+		 if (tgt != null)
+		 	tgtCards = tgt.getTargetCards();
+		 else{
+		 	tgtCards = new ArrayList<Card>();
+		 	tgtCards.add(sa.getSourceCard());
+		 }
+		 
+		 sb.append(name).append(" - Destroy ");
+		 
+		 for(Card c : tgtCards)
+			 sb.append(c.getName()).append(" ");
+						 
+		 if(noRegen){
+			 sb.append(". ");
+			 if (tgtCards.size() == 1)
+				 sb.append("It");
+			 else
+				 sb.append("They");
+			 sb.append(" can't be regenerated");
+		 }
+		
+		 return sb.toString();
+	}
 }
