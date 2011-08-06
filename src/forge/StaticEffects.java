@@ -127,6 +127,7 @@ public class StaticEffects
 		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
 		cardToEffectsList.put("Mad Auntie", new String[] {"Mad_Auntie"});
 		cardToEffectsList.put("Veteran Armorer", new String[] {"Veteran_Armorer"});
+		cardToEffectsList.put("Kongming, \"Sleeping Dragon\"", new String[] {"Kongming"});
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});
 		cardToEffectsList.put("Castle Raptors", new String[] {"Castle_Raptors"});

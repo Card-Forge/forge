@@ -13301,6 +13301,47 @@ public class GameActionUtil {
                                                               }// for outer
                                                           }// execute()
                                                       }; // Veteran_Armorer
+                                                      
+    public static Command Kongming					 = new Command() {
+    	
+														private static final long serialVersionUID = 5376204832608673379L;
+														CardList                  old              = new CardList();
+												        
+												        public void execute() {
+												            Card c;
+												            // reset all cards in list - aka "old" cards
+												            for(int i = 0; i < old.size(); i++) {
+												                c = old.get(i);
+												                c.addSemiPermanentAttackBoost(-1);
+												                c.addSemiPermanentDefenseBoost(-1);
+												            }
+												            
+												            // add +1/+1 to cards
+												            old.clear();
+												            PlayerZone[] zone = getZone("Kongming, \"Sleeping Dragon\"");
+												            
+												            // for each zone found add +1/+1 to each card
+												            for(int outer = 0; outer < zone.length; outer++) {
+												                CardList creature = new CardList(
+												                        zone[outer].getCards());
+												                creature = creature.filter(new CardListFilter(){
+												                	public boolean addCard(Card c)
+												                	{
+												                		return c.isCreature() && !c.getName().equals("Kongming, \"Sleeping Dragon\"");
+												                	}
+												                });
+												                
+												                for(int i = 0; i < creature.size(); i++) {
+												                    c = creature.get(i);
+												                    c.addSemiPermanentAttackBoost(1);
+												                    c.addSemiPermanentDefenseBoost(1);
+												                    
+												                    old.add(c);
+												                }// for inner
+												            }// for outer
+												        }// execute()
+												    	
+    };
                                                          
     public static Command Valor                       = new Command() {
                                                           private static final long serialVersionUID = 1664342157638418864L;
@@ -14613,6 +14654,7 @@ public class GameActionUtil {
         commands.put("Mad_Auntie", Mad_Auntie);
         
         commands.put("Veteran_Armorer", Veteran_Armorer);
+        commands.put("Kongming", Kongming);
         commands.put("Radiant_Archangel", Radiant_Archangel);
         commands.put("Castle", Castle);
         commands.put("Castle_Raptors", Castle_Raptors);
