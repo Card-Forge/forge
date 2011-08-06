@@ -45,6 +45,12 @@ public class AbilityFactory_DealDamage {
 				AF.getHostCard().setAbilityUsed(AF.getHostCard().getAbilityUsed() + 1);
 
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 		};// Ability_Activated
 
 		return abDamage;
@@ -75,6 +81,12 @@ public class AbilityFactory_DealDamage {
 			@Override
 			public void resolve() {
 				damageAllResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 
 		};
@@ -165,6 +177,12 @@ public class AbilityFactory_DealDamage {
 				doResolve(this);
 			}
 
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
 		}; // Drawback
 
 		return dbDealDamage;
@@ -189,6 +207,12 @@ public class AbilityFactory_DealDamage {
 			public boolean chkAI_Drawback() {
 				//check AI life before playing this drawback?
 				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 
 		};

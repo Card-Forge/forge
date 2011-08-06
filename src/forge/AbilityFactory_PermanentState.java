@@ -28,6 +28,12 @@ public class AbilityFactory_PermanentState {
 			public void resolve() {
 				untapResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abUntap;
@@ -77,6 +83,12 @@ public class AbilityFactory_PermanentState {
 			@Override
 			public boolean chkAI_Drawback() {
 				return untapPlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};
@@ -300,6 +312,12 @@ public class AbilityFactory_PermanentState {
 			public void resolve() {
 				tapResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abTap;
@@ -349,6 +367,12 @@ public class AbilityFactory_PermanentState {
 			@Override
 			public boolean chkAI_Drawback() {
 				return tapPlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};
@@ -572,6 +596,12 @@ public class AbilityFactory_PermanentState {
 				untapAllResolve(af, this);
 			}
 
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
 		};
 		return abUntap;
 	}
@@ -676,6 +706,12 @@ public class AbilityFactory_PermanentState {
 				tapAllResolve(af, this);
 			}
 
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
 		};
 		return abUntap;
 	}
@@ -722,6 +758,12 @@ public class AbilityFactory_PermanentState {
 			@Override
 			public boolean chkAI_Drawback() {
 				return tapAllPlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};

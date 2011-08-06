@@ -80,6 +80,12 @@ public class AbilityFactory_CounterMagic {
 				counterResolve(af, this);
 			}
 
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
 		};
 		return abCounter;
 	}

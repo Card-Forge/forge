@@ -171,8 +171,19 @@ public class Target {
 		return sb.toString();
 	}
 	
+		
+	public boolean canOnlyTgtOpponent() {
+		boolean player = false;
+		boolean opponent = false;
+		for(String s: ValidTgts){
+			if (s.equals("Opponent"))
+				opponent = true;
+			else if (s.equals("Player"))
+				player = true;
+		}
+		return opponent && !player; 
+	}
 	
-	// These below functions are quite limited to the damage classes, we should find a way to move them into AF_DealDamage
 	public boolean canTgtPlayer() {
 		for(String s: ValidTgts){
 			if (s.equals("Player") || s.equals("Opponent"))

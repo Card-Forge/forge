@@ -121,6 +121,12 @@ public class AbilityFactory_GainControl {
 				}
 				return sb.toString();
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 		};//Ability_Activated
 
 		return abControl;

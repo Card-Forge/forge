@@ -34,6 +34,12 @@ public class AbilityFactory_Counters {
 			public void resolve() {
 				putResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abPutCounter;
@@ -87,6 +93,12 @@ public class AbilityFactory_Counters {
 			public boolean chkAI_Drawback() {
 				return putPlayDrawbackAI(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return dbPutCounter;
@@ -135,17 +147,17 @@ public class AbilityFactory_Counters {
 		Card choice = null;
 		String type = af.getMapParams().get("CounterType");
 		String amountStr = af.getMapParams().get("CounterNum");
-		
+
 		Player player = af.isCurse() ? AllZone.HumanPlayer : AllZone.ComputerPlayer;
 
-		
+
 		list = AllZoneUtil.getPlayerCardsInPlay(player);
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return CardFactoryUtil.canTarget(source, c);
 			}
 		});
-		
+
 		if (abTgt != null){
 			list = list.getValidCards(abTgt.getValidTgts(),source.getController(),source);
 
@@ -158,7 +170,7 @@ public class AbilityFactory_Counters {
 			if (!pZone.getPlayer().equals(player))
 				return false;
 		}
-		
+
 		if (abCost != null){
 			// AI currently disabled for these costs
 			if (abCost.getSacCost()){ 
@@ -166,7 +178,7 @@ public class AbilityFactory_Counters {
 			}
 			if (abCost.getLifeCost())	 return false;
 			if (abCost.getDiscardCost()) return false;
-			
+
 			if (abCost.getSubCounter()){
 				// A card has a 25% chance per counter to be able to pass through here
 				// 4+ counters will always pass. 0 counters will never
@@ -176,20 +188,20 @@ public class AbilityFactory_Counters {
 					return false;
 			}
 		}
-		
+
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
-		
+
 		// TODO handle proper calculation of X values based on Cost
 		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
-		
-		 // prevent run-away activations - first time will always return true
-		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		 
-		 // Targeting
-		 if (abTgt != null){
-			 abTgt.resetTargets();
-			 // target loop
+
+		// prevent run-away activations - first time will always return true
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		// Targeting
+		if (abTgt != null){
+			abTgt.resetTargets();
+			// target loop
 			while(abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 				if (list.size() == 0){
 					if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0){
@@ -201,38 +213,14 @@ public class AbilityFactory_Counters {
 						break;
 					}
 				}
-				
-				 if (af.isCurse()){
-					 if (type.equals("M1M1")){
-						 // try to kill the best killable creature, or reduce the best one 
-						 CardList killable = list.filter(new CardListFilter() {
-							public boolean addCard(Card c) {
-								return c.getNetDefense() <= amount;
-							}
-						 });
-						 if (killable.size() > 0)
-							 choice = CardFactoryUtil.AI_getBestCreature(killable);
-						 else
-							 choice = CardFactoryUtil.AI_getBestCreature(list);
-					 }
-					 else{
-						 // improve random choice here
-						 list.shuffle();
-						 choice = list.get(0);
-					 }
-				 }
-				 else{
-					 if (type.equals("P1P1")){
-						 choice = CardFactoryUtil.AI_getBestCreature(list);
-					 }
-					 else{
-						 // The AI really should put counters on cards that can use it. 
-						 // Charge counters on things with Charge abilities, etc. Expand these above
-						 list.shuffle();
-						 choice = list.get(0);
-					 } 
-				 }
-				 
+
+				if (af.isCurse()){
+					choice = chooseCursedTarget(list, type, amount);
+				}
+				else{
+					choice = chooseBoonTarget(list, type, amount);
+				}
+
 				if (choice == null){	// can't find anything left
 					if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0){
 						abTgt.resetTargets();
@@ -246,21 +234,21 @@ public class AbilityFactory_Counters {
 				list.remove(choice);
 				abTgt.addTarget(choice);
 			}
-		 }
-		 else{
+		}
+		else{
 			// Placeholder: No targeting necessary
-			 int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
+			int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
 			// each non +1/+1 counter on the card is a 10% chance of not activating this ability. 
- 
-			 if (!type.equals("P1P1") && r.nextFloat() < .1 * currCounters)	
-				 return false;
-		 }
-		 
-		 Ability_Sub subAb = sa.getSubAbility();
-		 if (subAb != null)
-			 chance &= subAb.chkAI_Drawback();
-		 
-		 return ((r.nextFloat() < .6667) && chance);
+
+			if (!type.equals("P1P1") && r.nextFloat() < .1 * currCounters)	
+				return false;
+		}
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+
+		return ((r.nextFloat() < .6667) && chance);
 	}
 	
 	public static boolean putPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa){
@@ -302,34 +290,10 @@ public class AbilityFactory_Counters {
 				}
 				
 				 if (af.isCurse()){
-					 if (type.equals("M1M1")){
-						 // try to kill the best killable creature, or reduce the best one 
-						 CardList killable = list.filter(new CardListFilter() {
-							public boolean addCard(Card c) {
-								return c.getNetDefense() <= amount;
-							}
-						 });
-						 if (killable.size() > 0)
-							 choice = CardFactoryUtil.AI_getBestCreature(killable);
-						 else
-							 choice = CardFactoryUtil.AI_getBestCreature(list);
-					 }
-					 else{
-						 // improve random choice here
-						 list.shuffle();
-						 choice = list.get(0);
-					 }
+					 choice = chooseCursedTarget(list, type, amount);
 				 }
 				 else{
-					 if (type.equals("P1P1")){
-						 choice = CardFactoryUtil.AI_getBestCreature(list);
-					 }
-					 else{
-						 // The AI really should put counters on cards that can use it. 
-						 // Charge counters on things with Charge abilities, etc. Expand these above
-						 list.shuffle();
-						 choice = list.get(0);
-					 } 
+
 				 }
 				 
 				if (choice == null){	// can't find anything left
@@ -353,6 +317,124 @@ public class AbilityFactory_Counters {
 			 chance &= subAb.chkAI_Drawback();
 		 
 		 return chance;
+	}
+	
+	public static boolean putDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory){
+		// if there is a cost, it's gotta be optional
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)
+			return false;
+		
+		HashMap<String,String> params = af.getMapParams();
+		Target abTgt = sa.getTarget();
+		final Card source = sa.getSourceCard();
+		boolean chance = true;
+		boolean preferred = true;
+		CardList list;
+		Player player = af.isCurse() ? AllZone.HumanPlayer : AllZone.ComputerPlayer;
+		String type = af.getMapParams().get("CounterType");
+		String amountStr = af.getMapParams().get("CounterNum");
+		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		
+		if (abTgt == null){
+			// No target. So must be defined
+			list = new CardList(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa).toArray());
+			
+			if (!mandatory){
+				// todo: If Trigger isn't mandatory, when wouldn't we want to put a counter?
+				// things like Powder Keg, which are way too complex for the AI
+			}
+		}
+		else{
+			list = AllZoneUtil.getPlayerCardsInPlay(player);
+			list = list.getTargetableCards(source);
+			if (abTgt != null){
+				list = list.getValidCards(abTgt.getValidTgts(),source.getController(),source);
+			}
+			if (list.isEmpty() && mandatory){
+				// If there isn't any prefered cards to target, gotta choose non-preferred ones
+				list = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
+				list = list.getTargetableCards(source);
+				if (abTgt != null){
+					list = list.getValidCards(abTgt.getValidTgts(),source.getController(),source);
+				}
+				preferred = false;
+			}
+			// Not mandatory, or the the list was regenerated and is still empty, so return false since there are no targets
+			if (list.isEmpty())	
+				return false;
+			
+			Card choice = null;
+			
+			// Choose targets here:
+			if (af.isCurse()){
+				if (preferred)
+					choice = chooseCursedTarget(list, type, amount);
+
+				else{
+					if (type.equals("M1M1")){
+						choice = CardFactoryUtil.AI_getWorstCreature(list);
+					}
+					else{
+						choice = CardFactoryUtil.getRandomCard(list);
+					}
+				}
+			}
+			else{
+				if (preferred)
+					choice = chooseBoonTarget(list, type, amount);
+				
+				else{
+					if (type.equals("P1P1")){
+						choice = CardFactoryUtil.AI_getWorstCreature(list);
+					}
+					else{
+						choice = CardFactoryUtil.getRandomCard(list);
+					}
+				}
+			}
+			
+			abTgt.addTarget(choice);
+		}
+		
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+			 chance &= subAb.doTrigger(mandatory);
+		
+		return true;
+	}
+	
+	public static Card chooseCursedTarget(CardList list, String type, final int amount){
+		Card choice;
+		if (type.equals("M1M1")){
+			// try to kill the best killable creature, or reduce the best one 
+			CardList killable = list.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getNetDefense() <= amount;
+				}
+			});
+			if (killable.size() > 0)
+				choice = CardFactoryUtil.AI_getBestCreature(killable);
+			else
+				choice = CardFactoryUtil.AI_getBestCreature(list);
+		}
+		else{
+			// improve random choice here
+			choice = CardFactoryUtil.getRandomCard(list);
+		}
+		return choice;
+	}
+	
+	public static Card chooseBoonTarget(CardList list, String type, final int amount){
+		Card choice;
+		 if (type.equals("P1P1")){
+			 choice = CardFactoryUtil.AI_getBestCreature(list);
+		 }
+		 else{
+			 // The AI really should put counters on cards that can use it. 
+			 // Charge counters on things with Charge abilities, etc. Expand these above
+			 choice = CardFactoryUtil.getRandomCard(list);
+		 }
+		 return choice;
 	}
 
 	public static void putResolve(final AbilityFactory af, final SpellAbility sa){
@@ -414,6 +496,12 @@ public class AbilityFactory_Counters {
 			public void resolve() {
 				removeResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abRemCounter;
@@ -466,6 +554,12 @@ public class AbilityFactory_Counters {
 			@Override
 			public boolean chkAI_Drawback() {
 				return removePlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};
@@ -656,6 +750,12 @@ public class AbilityFactory_Counters {
 			public String getStackDescription(){
     			return proliferateStackDescription(this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
     	};
     	
     	return abProliferate;
@@ -712,6 +812,12 @@ public class AbilityFactory_Counters {
 			@Override
 			public boolean chkAI_Drawback() {
 				return shouldProliferateAI(this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
     	};
     	
@@ -919,6 +1025,12 @@ public class AbilityFactory_Counters {
 				putAllResolve(af, this);
 			}
 
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
 		};
 		return abPutCounterAll;
 	}
@@ -965,6 +1077,12 @@ public class AbilityFactory_Counters {
 			@Override
 			public boolean chkAI_Drawback() {
 				return putAllPlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 
 		};

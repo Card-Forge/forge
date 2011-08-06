@@ -109,6 +109,12 @@ public class AbilityFactory_Token extends AbilityFactory {
 			public String getStackDescription() {
 				return doStackDescription(this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 		};
 		
 		return abToken;
@@ -162,6 +168,12 @@ public class AbilityFactory_Token extends AbilityFactory {
 			@Override
 			public void resolve() {
 				doResolve(this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 
 		}; // Spell

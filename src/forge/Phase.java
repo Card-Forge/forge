@@ -418,6 +418,10 @@ public class Phase extends MyObservable
 	public boolean isAfter(String phase) {
 		return phaseIndex > findIndex(phase);
 	}
+	
+	public boolean isBefore(String phase) {
+		return phaseIndex < findIndex(phase);
+	}
     
     private int findIndex(String phase) {
         for(int i = 0; i < phaseOrder.length; i++) {

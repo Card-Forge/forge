@@ -22,6 +22,12 @@ public class AbilityFactory_Mana {
 			public void resolve() {
 				manaResolve(this, af);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abMana;
@@ -36,6 +42,12 @@ public class AbilityFactory_Mana {
 			Ability_Cost tmp = new Ability_Cost("0", AF.getHostCard().getName(), false);
 			Ability_Mana tmpMana = new Ability_Mana(AF.getHostCard(), tmp, produced){
 				private static final long serialVersionUID = 1454043766057140491L;
+
+				@Override
+				public boolean doTrigger(boolean mandatory) {
+					// TODO Auto-generated method stub
+					return false;
+				}
 				
 			};
 			
@@ -69,6 +81,12 @@ public class AbilityFactory_Mana {
 			Ability_Cost tmp = new Ability_Cost("0", AF.getHostCard().getName(), false);
 			Ability_Mana tmpMana = new Ability_Mana(AF.getHostCard(), tmp, produced){
 				private static final long serialVersionUID = 1454043766057140491L;
+
+				@Override
+				public boolean doTrigger(boolean mandatory) {
+					// TODO Auto-generated method stub
+					return false;
+				}
 				
 			};
 			
@@ -86,6 +104,12 @@ public class AbilityFactory_Mana {
 			@Override
 			public boolean chkAI_Drawback() {
 				// todo: AI shouldn't use this until he has a mana pool
+				return false;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
 				return false;
 			}
 			
@@ -198,6 +222,12 @@ public class AbilityFactory_Mana {
 			public void resolve() {
 				manaReflectedResolve(this, af);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		abMana.setReflectedMana(true);
@@ -214,6 +244,12 @@ public class AbilityFactory_Mana {
 			Ability_Cost tmp = new Ability_Cost("0", AF.getHostCard().getName(), false);
 			Ability_Mana tmpMana = new Ability_Mana(AF.getHostCard(), tmp, produced){
 				private static final long serialVersionUID = 1454043766057140491L;
+
+				@Override
+				public boolean doTrigger(boolean mandatory) {
+					// TODO Auto-generated method stub
+					return false;
+				}
 
 				// todo: maybe add can produce here, so old AI code can use reflected mana?
 			};

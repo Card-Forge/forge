@@ -68,7 +68,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             AllZone.GameAction.checkWheneverKeyword(c,"EntersBattleField",null);
             
             PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-            PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
             
             //Amulet of Vigor
             if(c.isTapped()) {
@@ -99,7 +98,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 //System.out.println("A land was just put onto the battlefield: " + c.getName());
                 
                 CardList list = new CardList(play.getCards());
-                CardList graveList = new CardList(grave.getCards());
                 
                 CardList listValakut = list.filter(new CardListFilter() {
                 	public boolean addCard(Card c) {
@@ -128,28 +126,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 		}
                 	}
                 }
-                /*
-                CardList ankhs = AllZoneUtil.getCardsInPlay("Ankh of Mishra");
-                //
-                //ankhs.add(AllZoneUtil.getCardsInPlay("Zo-Zu the Punisher"));
-                //
-                final Card ankhLand = c;
-                for(Card ankh:ankhs) {
-                	final Card source = ankh;
-                	SpellAbility ability = new Ability(source, "") {
-                		@Override
-                		public void resolve() {
-                			ankhLand.getController().addDamage(2, source);
-                		}
-                	};
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(source).append(" - deals 2 damage to ").append(ankhLand.getController());
-                	ability.setStackDescription(sb.toString());
-                	
-                	AllZone.Stack.add(ability);
-                }
-                
-                */
                 
                 CardList seeds = AllZoneUtil.getCardsInPlay("Seed the Land");
                 final Card seedLand = c;

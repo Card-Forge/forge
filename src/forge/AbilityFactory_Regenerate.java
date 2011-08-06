@@ -34,6 +34,12 @@ public class AbilityFactory_Regenerate {
 			public String getStackDescription(){
 				return regenerateStackDescription(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};//Ability_Activated
 

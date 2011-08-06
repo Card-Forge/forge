@@ -3536,7 +3536,7 @@ public class GameActionUtil {
     }
     
     public static void showInfoDialg(String message) {
-    	AllZone.Display.setCard(c);
+    	//AllZone.Display.setCard(c); // c doesn't exist here!
     	JOptionPane.showMessageDialog(null, message);
     }
     

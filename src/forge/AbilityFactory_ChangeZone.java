@@ -30,6 +30,12 @@ public class AbilityFactory_ChangeZone {
 				return changeZoneDescription(AF, this);
 			}
 
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		
 		};
 		setMiscellaneous(AF, abChangeZone);
 		return abChangeZone;
@@ -74,6 +80,12 @@ public class AbilityFactory_ChangeZone {
 			@Override
 			public String getStackDescription(){
 				return changeZoneDescription(AF, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 		};
 		setMiscellaneous(AF, dbChangeZone);
@@ -940,6 +952,12 @@ public class AbilityFactory_ChangeZone {
 				return changeZoneAllDescription(AF, this);
 			}
 
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		
 		};
 		setMiscellaneous(AF, abChangeZone);
 		return abChangeZone;
@@ -984,6 +1002,12 @@ public class AbilityFactory_ChangeZone {
 			@Override
 			public String getStackDescription(){
 				return changeZoneAllDescription(AF, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 		};
 		setMiscellaneous(AF, dbChangeZone);

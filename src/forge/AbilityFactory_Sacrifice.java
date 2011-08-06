@@ -27,6 +27,12 @@ public class AbilityFactory_Sacrifice {
 			public String getStackDescription(){
 				return sacrificeDescription(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 		};
 		return abSacrifice;
 	}
@@ -72,6 +78,12 @@ public class AbilityFactory_Sacrifice {
 			
 			public String getStackDescription(){
 				return sacrificeDescription(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 		};
 		return dbSacrifice;

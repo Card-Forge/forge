@@ -37,6 +37,12 @@ public class AbilityFactory_ZoneAffecting {
 			public void resolve() {
 				drawResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abDraw;
@@ -93,6 +99,12 @@ public class AbilityFactory_ZoneAffecting {
 			@Override
 			public boolean chkAI_Drawback() {
 				return drawTargetAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};
@@ -334,6 +346,12 @@ public class AbilityFactory_ZoneAffecting {
 			public void resolve() {
 				millResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abMill;
@@ -393,6 +411,12 @@ public class AbilityFactory_ZoneAffecting {
 			@Override
 			public boolean chkAI_Drawback() {
 				return millTargetAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};
@@ -589,6 +613,12 @@ public class AbilityFactory_ZoneAffecting {
 			public void resolve() {
 				discardResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abDraw;
@@ -658,6 +688,12 @@ public class AbilityFactory_ZoneAffecting {
 			public boolean chkAI_Drawback() {
 				discardTargetAI(af);
 				return discardCheckDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};
@@ -939,6 +975,12 @@ public class AbilityFactory_ZoneAffecting {
 			public boolean chkAI_Drawback() {
 				return scryTargetAI(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return dbScry;
@@ -1052,6 +1094,12 @@ public class AbilityFactory_ZoneAffecting {
 			@Override
 			public void resolve() {
 				scryResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};

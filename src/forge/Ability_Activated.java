@@ -44,6 +44,10 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         	return false;
         
         return Cost_Payment.canPayAdditionalCosts(payCosts, this);
-        //TODO: make sure you can't play the Computer's activated abilities
+    }
+    
+	// This should be overridden by ALL AFs
+    public boolean doTrigger(boolean mandatory){
+    	return false;
     }
 }

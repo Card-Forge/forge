@@ -33,6 +33,12 @@ public class AbilityFactory_Turns {
 				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), this);
 				addTurnResolve(af, this, amount);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abAddTurn;
@@ -96,6 +102,12 @@ public class AbilityFactory_Turns {
 			@Override
 			public boolean chkAI_Drawback() {
 				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};

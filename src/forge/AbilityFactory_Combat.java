@@ -28,6 +28,12 @@ public class AbilityFactory_Combat {
 			public void resolve() {
 				fogResolve(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abFog;
@@ -74,6 +80,12 @@ public class AbilityFactory_Combat {
 			public boolean chkAI_Drawback() {
 				return fogPlayDrawbackAI(af, this);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return dbFog;
@@ -100,8 +112,11 @@ public class AbilityFactory_Combat {
 	
 	public static boolean fogCanPlayAI(final AbilityFactory af, SpellAbility sa){
 		// AI should only activate this during Human's Declare Blockers phase
-		boolean chance = AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility, sa.getActivatingPlayer().getOpponent());
-
+		boolean chance;
+		if (AllZone.Phase.isPlayerTurn(sa.getActivatingPlayer().getOpponent()))
+			chance = AllZone.Phase.isBefore(Constant.Phase.Combat_FirstStrikeDamage);
+		else 
+			chance = AllZone.Phase.isAfter(Constant.Phase.Combat_Damage);
 		// Only cast when Stack is empty, so Human uses spells/abilities first
 		chance &= AllZone.Stack.size() == 0;
 		
@@ -116,12 +131,34 @@ public class AbilityFactory_Combat {
 	
 	public static boolean fogPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
 		// AI should only activate this during Human's turn
-		boolean chance = AllZone.Phase.isPlayerTurn(sa.getActivatingPlayer().getOpponent()) || 
-			AllZone.Phase.isAfter(Constant.Phase.Combat_Damage);
+		boolean chance;
+		if (AllZone.Phase.isPlayerTurn(sa.getActivatingPlayer().getOpponent()))
+			chance = AllZone.Phase.isBefore(Constant.Phase.Combat_FirstStrikeDamage);
+		else 
+			chance = AllZone.Phase.isAfter(Constant.Phase.Combat_Damage);
 		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			chance &= subAb.chkAI_Drawback();
+		
+		return chance;
+	}
+	
+	public static boolean fogDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
+			return false;
+
+		boolean chance;
+		if (AllZone.Phase.isPlayerTurn(sa.getActivatingPlayer().getOpponent()))
+			chance = AllZone.Phase.isBefore(Constant.Phase.Combat_FirstStrikeDamage);
+		else 
+			chance = AllZone.Phase.isAfter(Constant.Phase.Combat_Damage);
+		 
+		// check SubAbilities DoTrigger?
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return chance && abSub.doTrigger(mandatory);
+		}
 		
 		return chance;
 	}

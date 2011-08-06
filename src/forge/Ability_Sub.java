@@ -18,6 +18,8 @@ abstract public class Ability_Sub extends SpellAbility implements java.io.Serial
 
 	abstract public boolean chkAI_Drawback();
 	
+	abstract public boolean doTrigger(boolean mandatory);
+	
 	public void setParent(SpellAbility parent) {
 		this.parent = parent;
 	}

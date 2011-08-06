@@ -87,6 +87,12 @@ public class AbilityFactory_Pump {
                 
                 hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
             }//resolve()
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
             
             
         };//SpellAbility
@@ -115,6 +121,12 @@ public class AbilityFactory_Pump {
 			@Override
 			public boolean chkAI_Drawback() {
 				return doDrawbackAI(this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
         };//SpellAbility
         
@@ -512,6 +524,13 @@ public class AbilityFactory_Pump {
                 doPumpAllResolve(this);
                 hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
             }//resolve()
+
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
             
             
         };//SpellAbility
@@ -629,6 +648,12 @@ public class AbilityFactory_Pump {
 			@Override
 			public boolean chkAI_Drawback() {
 				return chkPumpAllDrawbackAI(this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
         };//SpellAbility
         

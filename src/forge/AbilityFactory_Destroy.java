@@ -32,6 +32,12 @@ public class AbilityFactory_Destroy {
 			public void resolve() {
 				destroyResolve(af, this, noRegen);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abDestroy;
@@ -259,6 +265,12 @@ public class AbilityFactory_Destroy {
 			public void resolve() {
 				destroyAllResolve(af, this, noRegen);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 			
 		};
 		return abDestroyAll;
@@ -328,6 +340,12 @@ public class AbilityFactory_Destroy {
 			@Override
 			public boolean chkAI_Drawback() {
 				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 			
 		};

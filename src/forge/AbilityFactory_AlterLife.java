@@ -17,7 +17,6 @@ public class AbilityFactory_AlterLife {
 			private static final long serialVersionUID = 8869422603616247307L;
 			
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -32,13 +31,17 @@ public class AbilityFactory_AlterLife {
 			
 			public boolean canPlayAI()
 			{
-				return gainLifeCanPlayAI(af, this, params.get("LifeAmount"));
+				return gainLifeCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				gainLifeResolve(af, this, amount);
+				gainLifeResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return gainLifeDoTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -50,7 +53,6 @@ public class AbilityFactory_AlterLife {
 			private static final long serialVersionUID = 6631124959690157874L;
 			
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -68,13 +70,12 @@ public class AbilityFactory_AlterLife {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return gainLifeCanPlayAI(af, this, params.get("LifeAmount"));
+				return gainLifeCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				gainLifeResolve(af, this, amount);
+				gainLifeResolve(af, this);
 			}
 			
 		};
@@ -86,7 +87,6 @@ public class AbilityFactory_AlterLife {
 			private static final long serialVersionUID = 6631124959690157874L;
 			
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -99,18 +99,22 @@ public class AbilityFactory_AlterLife {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return gainLifeCanPlayAI(af, this, params.get("LifeAmount"));
+				return gainLifeCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				gainLifeResolve(af, this, amount);
+				gainLifeResolve(af, this);
 			}
 
 			@Override
 			public boolean chkAI_Drawback() {
 				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return gainLifeDoTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -147,11 +151,12 @@ public class AbilityFactory_AlterLife {
 		return sb.toString();
 	}
 	
-	public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
+	public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		Random r = new Random();
 		Ability_Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
 		int life = AllZone.ComputerPlayer.getLife();
+		String amountStr = af.getMapParams().get("LifeAmount");
 
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -184,31 +189,56 @@ public class AbilityFactory_AlterLife {
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		 
 		 Target tgt = sa.getTarget();
-		 
-		 if (sa.getTarget() != null){
+		 if (tgt != null){
 			 tgt.resetTargets();
-			 sa.getTarget().addTarget(AllZone.ComputerPlayer);
+			 if (tgt.canOnlyTgtOpponent())
+				 tgt.addTarget(AllZone.HumanPlayer);
+			 else
+				 tgt.addTarget(AllZone.ComputerPlayer);		
 		 }
 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
-	public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa, int lifeAmount){
+	public static boolean gainLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
+			return false;
+
+		// If the Target is gaining life, target self.
+		// if the Target is modifying how much life is gained, this needs to be handled better
+		 Target tgt = sa.getTarget();
+		 if (tgt != null){
+			 tgt.resetTargets();
+			 if (tgt.canOnlyTgtOpponent())
+				 tgt.addTarget(AllZone.HumanPlayer);
+			 else
+				 tgt.addTarget(AllZone.ComputerPlayer);		
+		 }
+		 
+		// check SubAbilities DoTrigger?
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return abSub.doTrigger(mandatory);
+		}
+		
+		return true;
+	}
+	
+	public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
-		
+		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		ArrayList<Player> tgtPlayers;
 
 		Target tgt = af.getAbTgt();
-		if (tgt != null)
+		if (tgt != null && !params.containsKey("Defined"))
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.gainLife(lifeAmount, sa.getSourceCard());
-		
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
@@ -232,7 +262,6 @@ public class AbilityFactory_AlterLife {
 			private static final long serialVersionUID = 1129762905315395160L;
 			
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -250,13 +279,17 @@ public class AbilityFactory_AlterLife {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return loseLifeCanPlayAI(af, this, params.get("LifeAmount"));
+				return loseLifeCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				loseLifeResolve(af, this, amount);
+				loseLifeResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return loseLifeDoTriggerAI(af, this, mandatory);
 			}
 		};
 		return abLoseLife;
@@ -267,7 +300,6 @@ public class AbilityFactory_AlterLife {
 			private static final long serialVersionUID = -2966932725306192437L;
 			
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -285,13 +317,12 @@ public class AbilityFactory_AlterLife {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return loseLifeCanPlayAI(af, this, params.get("LifeAmount"));
+				return loseLifeCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				loseLifeResolve(af, this, amount);
+				loseLifeResolve(af, this);
 			}
 		};
 		return spLoseLife;
@@ -302,8 +333,7 @@ public class AbilityFactory_AlterLife {
 			private static final long serialVersionUID = -2966932725306192437L;
 			
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
-		
+
 			@Override
 			public String getStackDescription(){
 				// when getStackDesc is called, just build exactly what is happening
@@ -315,18 +345,22 @@ public class AbilityFactory_AlterLife {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return loseLifeCanPlayAI(af, this, params.get("LifeAmount"));
+				return loseLifeCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				loseLifeResolve(af, this, amount);
+				loseLifeResolve(af, this);
 			}
 
 			@Override
 			public boolean chkAI_Drawback() {
 				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return loseLifeDoTriggerAI(af, this, mandatory);
 			}
 		};
 		return dbLoseLife;
@@ -361,13 +395,15 @@ public class AbilityFactory_AlterLife {
 		return sb.toString();
 	}
 	
-	public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
+	public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		Random r = new Random();
 		Ability_Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
 		int humanLife = AllZone.HumanPlayer.getLife();
 		int aiLife = AllZone.ComputerPlayer.getLife();
 
+		String amountStr = af.getMapParams().get("LifeAmount");
+		
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
 		
@@ -406,9 +442,28 @@ public class AbilityFactory_AlterLife {
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
-	public static void loseLifeResolve(final AbilityFactory af, final SpellAbility sa, int lifeAmount){
+	public static boolean loseLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
+			return false;
+
+		 Target tgt = sa.getTarget();
+		 if (tgt != null){
+			 tgt.addTarget(AllZone.HumanPlayer);
+		 }
+		 
+		// check SubAbilities DoTrigger?
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return abSub.doTrigger(mandatory);
+		}
+		
+		return true;
+	}
+	
+	public static void loseLifeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
+		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 		
@@ -477,6 +532,11 @@ public class AbilityFactory_AlterLife {
 				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), this);
 				poisonResolve(af, this, amount);
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return poisonDoTriggerAI(af, this, mandatory);
+			}
 			
 		};
 		return abPoison;
@@ -543,9 +603,39 @@ public class AbilityFactory_AlterLife {
 			public boolean chkAI_Drawback() {
 				return true;
 			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				// TODO Auto-generated method stub
+				return poisonDoTriggerAI(af, this, mandatory);
+			}
 			
 		};
 		return dbPoison;
+	}
+	
+	public static boolean poisonDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
+			return false;
+
+		 Target tgt = sa.getTarget();
+		 if (tgt != null){
+			 tgt.addTarget(AllZone.HumanPlayer);
+		 }
+		 else{
+			 ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			 for(Player p : players)
+				 if (!mandatory && p.isComputer() && p.getPoisonCounters() > p.getOpponent().getPoisonCounters())
+					 return false;
+		 }
+		 
+		// check SubAbilities DoTrigger?
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return abSub.doTrigger(mandatory);
+		}
+		
+		return true;
 	}
 	
 	private static void poisonResolve(final AbilityFactory af, final SpellAbility sa, int num){
