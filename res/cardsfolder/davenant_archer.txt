@@ -1,0 +1,10 @@
+Name:D'Avenant Archer
+ManaCost:2 W
+Types:Creature Human Soldier Archer
+Text:no text
+PT:1/2
+K:abDamageTgtV T:1:Creature.attacking,Creature.blocking:D'Avenant Archer deals 1 damage to target attacking or blocking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/davenant_archer.jpg
+End

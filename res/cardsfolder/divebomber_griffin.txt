@@ -1,0 +1,11 @@
+Name:Divebomber Griffin
+ManaCost:3 W W
+Types:Creature Griffin
+Text:no text
+PT:3/2
+K:Flying
+K:abDamageTgtV T Sac<1/CARDNAME>:3:Creature.attacking,Creature.blocking:Divebomber Griffin deals 3 damage to target attacking or blocking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/divebomber_griffin.jpg
+End

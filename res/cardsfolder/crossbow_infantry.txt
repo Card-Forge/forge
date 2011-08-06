@@ -1,0 +1,10 @@
+Name:Crossbow Infantry
+ManaCost:1 W
+Types:Creature Human Soldier Archer
+Text:no text
+PT:1/1
+K:abDamageTgtV T:1:Creature.attacking,Creature.blocking:Crossbow Infantry deals 1 damage to target attacking or blocking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crossbow_infantry.jpg
+End

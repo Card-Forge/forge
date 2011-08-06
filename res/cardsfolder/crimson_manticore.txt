@@ -1,0 +1,11 @@
+Name:Crimson Manticore
+ManaCost:2 R R
+Types:Creature Manticore
+Text:no text
+PT:2/2
+K:Flying
+K:abDamageTgtV R T:1:Creature.attacking,Creature.blocking:Crimson Manticore deals 1 damage to target attacking or blocking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_manticore.jpg
+End

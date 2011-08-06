@@ -1,0 +1,11 @@
+Name:Dawnray Archer
+ManaCost:2 U
+Types:Creature Human Archer
+Text:no text
+PT:1/1
+K:Exalted
+K:abDamageTgtV W T:1:Creature.attacking,Creature.blocking:Dawnray Archer deals 1 damage to target attacking or blocking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnray_archer.jpg
+End

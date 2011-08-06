@@ -5,6 +5,7 @@ Text:At the beginning of your upkeep, you may sacrifice an artifact. If you don'
 PT:6/6
 K:Flying
 K:First strike
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoth_demon.jpg
 End

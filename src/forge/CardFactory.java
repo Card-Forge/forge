@@ -2351,7 +2351,7 @@ public class CardFactory implements NewConstants {
         		if (abTgt.canTgtValid()){
         			int valid = drawBack;
 					// Looks like VTSelection is used for the Message box, should improve the message
-        			abTgt.setVTSelection(k[valid]);
+        			abTgt.setVTSelection("Select a target: " + k[valid]);
         			abTgt.setValidTgts(k[valid].split(","));
         			drawBack++;
         		}
