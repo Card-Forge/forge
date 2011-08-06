@@ -114,7 +114,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			this.setResizable(false);
 			this.setTitle("Deck Analysis");
 			pack();
-			this.setIconImage(null);
+			//this.setIconImage(null);
 			this.addWindowListener(new WListener());
 			getContentPane().add(getJButton1());
 			getContentPane().add(getJLabel1xx());
