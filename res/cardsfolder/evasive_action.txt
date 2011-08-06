@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ 1 U | Type$ Spell | UnlessCost$ X | SpellDescription$ Domai
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evasive_action.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/23.jpg
 End

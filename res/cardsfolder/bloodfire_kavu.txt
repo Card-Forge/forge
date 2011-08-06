@@ -7,4 +7,5 @@ A:AB$DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature | NumDmg$ 2 | Va
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_kavu.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/58.jpg
 End

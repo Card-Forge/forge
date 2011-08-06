@@ -7,4 +7,5 @@ A:AB$Token | Cost$ T Sac<1/Mountain> | TokenImage$ R 3 3 Elemental | TokenAmount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_the_elements.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/158.jpg
 End

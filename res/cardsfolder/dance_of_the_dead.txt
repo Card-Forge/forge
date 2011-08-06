@@ -5,4 +5,5 @@ Text:Enchant creature card in a graveyard\r\n\r\nWhen CARDNAME enters the battle
 K:stPumpEnchanted:Creature:1/1/CARDNAME doesn't untap during your untap step.:No Condition:Enchanted creature gets +1/+1 and doesn't untap during its controller's untap step.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_of_the_dead.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/6.jpg
 End

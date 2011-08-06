@@ -5,4 +5,5 @@ Text:Add B B B to your mana pool.\r\n\r\nThreshold Ñ Add B B B B B to your mana 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_ritual.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/51.jpg
 End

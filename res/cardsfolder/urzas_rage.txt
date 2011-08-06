@@ -7,4 +7,5 @@ A:SP$DealDamage|Cost$2 R|Tgt$TgtCP|NumDmg$3|SpellDescription$CARDNAME deals 3 da
 A:SP$DealDamage|Cost$10 R R|Tgt$TgtCP|NumDmg$10|NoPrevention$True|SpellDescription$Kicker 8 R (You may pay an additional 8 R as you cast this spell.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_rage.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/178.jpg
 End

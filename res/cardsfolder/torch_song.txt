@@ -7,4 +7,5 @@ K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.VERSE/1:Self
 SVar:X:Count$CardCounters.VERSE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_song.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/222.jpg
 End

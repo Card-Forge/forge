@@ -6,4 +6,7 @@ K:Enchant Creature
 K:enPumpCurse:HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrest.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/2.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/2.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/4.jpg
 End

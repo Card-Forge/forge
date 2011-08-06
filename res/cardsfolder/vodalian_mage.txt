@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Counter | Cost$ U T | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_mage.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/59.jpg
 End

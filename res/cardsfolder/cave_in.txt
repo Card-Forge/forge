@@ -6,4 +6,5 @@ A:SP$DamageAll | Cost$3 R R|NumDmg$2| ValidCards$ Creature|ValidPlayers$ Each | 
 SVar:AltCost:ExileFromHand<1/Card.Red>$You may exile a red card from your hand rather than pay Cave-In's mana cost.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_in.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/180.jpg
 End

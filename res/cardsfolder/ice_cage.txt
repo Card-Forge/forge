@@ -6,4 +6,6 @@ K:enPumpCurse:HIDDEN CARDNAME can't attack or block. & CARDNAME's activated abil
 K:When enchanted creature becomes the target of a spell or ability, destroy CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ice_cage.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/57.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/56.jpg
 End

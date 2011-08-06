@@ -6,4 +6,5 @@ A:AB$Token | Cost$ 2 Discard<1/Any> | TokenImage$ W 1 1 Pegasus Flying | TokenAm
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pegasus_refuge.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/247.jpg
 End

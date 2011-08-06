@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$tapXType<4/Merfolk> | Origin$ Graveyard | Destination$ Ha
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summon_the_school.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/42.jpg
 End

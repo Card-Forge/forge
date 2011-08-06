@@ -6,4 +6,6 @@ A:SP$Counter | Cost$ U | Type$ Spell | CounterValid$ Instant,Sorcery | UnlessCos
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupt.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/37.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/51.jpg
 End

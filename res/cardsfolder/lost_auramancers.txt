@@ -7,4 +7,5 @@ K:Vanishing:3
 SVar:SacMe:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_auramancers.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/11.jpg
 End

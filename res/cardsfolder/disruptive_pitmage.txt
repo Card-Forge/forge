@@ -7,4 +7,5 @@ A:AB$Counter | Cost$ T | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Counter
 K:Morph:U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disruptive_pitmage.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/81.jpg
 End

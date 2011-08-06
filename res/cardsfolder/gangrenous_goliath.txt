@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$tapXType<3/Cleric> | Origin$ Graveyard | Destination$ Han
 Var:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gangrenous_goliath.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/150.jpg
 End

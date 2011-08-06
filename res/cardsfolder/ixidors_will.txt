@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ X | SpellDescription$ Count
 SVar:X:Count$TypeYouCtrl.Wizard/Twice
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ixidors_will.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/90.jpg
 End

@@ -7,4 +7,5 @@ A:AB$DamageAll | Cost$ Sac<1/Artifact> | ValidCards$ Creature.withoutFlying | Nu
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_shaman.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/98.jpg
 End

@@ -7,4 +7,5 @@ A:AB$DamageAll | Cost$ T | ValidCards$ Creature.withFlying | NumDmg$ 1 | ValidDe
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot_archer.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/90.jpg
 End

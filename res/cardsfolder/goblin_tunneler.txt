@@ -6,4 +6,6 @@ PT:1/1
 A:AB$Pump | Cost$ T | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | KW$ HIDDEN Unblockable. | SpellDescription$ Target creature with power 2 or less is unblockable this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_tunneler.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/143.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/148.jpg
 End

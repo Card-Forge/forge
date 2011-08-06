@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ X | SpellDescription$ Count
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/override.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/45.jpg
 End

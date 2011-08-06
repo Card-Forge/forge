@@ -7,4 +7,5 @@ K:Flying
 K:Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eater_of_days.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/120.jpg
 End

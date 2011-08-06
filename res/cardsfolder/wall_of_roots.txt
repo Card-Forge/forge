@@ -7,4 +7,6 @@ K:Defender
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_roots.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/151.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/89.jpg
 End

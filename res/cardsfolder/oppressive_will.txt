@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ 2 U | Type $ Spell | UnlessCost$ X | SpellDescription$ Coun
 SVar:X:Count$InYourHand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oppressive_will.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/50.jpg
 End

@@ -4,4 +4,5 @@ Types:Sorcery
 Text:no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/research_the_deep.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/46.jpg
 End

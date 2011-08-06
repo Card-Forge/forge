@@ -7,4 +7,5 @@ A:AB$PutCounter | Cost$ Sac<1/CARDNAME> | Tgt$ TgtC | CounterType$ P1P1 | Counte
 K:Dredge 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_shell.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/230.jpg
 End

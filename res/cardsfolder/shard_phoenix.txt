@@ -9,4 +9,6 @@ A:AB$DamageAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying | Nu
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_phoenix.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/97.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/217.jpg
 End

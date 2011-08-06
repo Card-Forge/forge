@@ -8,4 +8,5 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/latulla_keldon_overseer.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/95.jpg
 End

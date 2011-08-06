@@ -9,4 +9,5 @@ SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_settlers.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/112.jpg
 End

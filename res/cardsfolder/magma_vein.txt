@@ -5,4 +5,5 @@ Text:no text
 A:AB$DamageAll |Cost$ R Sac<1/Land> | ValidCards$ Creature.withoutFlying|NumDmg$ 1 | ValidDescription$ each creature without flying. | SpellDescription$CARDNAME deals 1 damage to each creature without flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_vein.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/203.jpg
 End

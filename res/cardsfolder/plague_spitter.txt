@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, CARDNAME deals 1 damage to each creature a
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_spitter.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/119.jpg
 End

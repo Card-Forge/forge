@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Target player takes an extra turn after this one. Shuffle CARDNAME into its owner's library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_tomorrows.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/24.jpg
 End

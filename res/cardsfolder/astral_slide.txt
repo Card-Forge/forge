@@ -5,4 +5,5 @@ Text:Whenever a player cycles a card, you may exile target creature. If you do, 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_slide.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/4.jpg
 End

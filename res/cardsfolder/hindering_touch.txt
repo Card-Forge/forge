@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ 3 U | Type$ Spell | UnlessCost$ 2 | SpellDescription$ Count
 K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_lit_warder.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/37.jpg
 End

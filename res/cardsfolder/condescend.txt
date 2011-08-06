@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ X U | Type$ Spell | UnlessCost$ X | SpellDescription$ Count
 SVar:X:Count$xPaid
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/condescend.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/27.jpg
 End

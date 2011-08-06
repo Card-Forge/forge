@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$Discard | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ YouUntap
 # Use old subability for untapping until AF$Untap can handle Urza block style "Free" spells
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_search.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/32.jpg
 End

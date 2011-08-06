@@ -8,4 +8,5 @@ K:Sunburst
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_wanderer.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/103.jpg
 End

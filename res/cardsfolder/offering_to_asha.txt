@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ 2 W U | Type$ Spell | UnlessCost$ 4 | SubAbility$SVar=DBGai
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/offering_to_asha.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/9.jpg
 End

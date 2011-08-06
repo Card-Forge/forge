@@ -7,4 +7,5 @@ A:AB$Draw | Cost$ U T Sac<1/CARDNAME> | ValidTgts$Player|TgtPrompt$Select target
 SVar:DBDiscard:DB$Discard|NumCards$3|Mode$TgtChoose|Defined$Targeted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_coliseum.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/317.jpg
 End

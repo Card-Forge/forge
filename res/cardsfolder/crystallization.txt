@@ -7,4 +7,5 @@ K:enPumpCurse:HIDDEN CARDNAME can't attack or block.
 K:When enchanted creature becomes the target of a spell or ability, exile that creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystallization.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/144.jpg
 End
