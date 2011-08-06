@@ -1,3 +1,10 @@
+Volcanic Island
+no cost
+Land Mountain Island
+no text
+tap: add U
+tap: add R
+
 Leyline of Singularity
 2 U U
 Enchantment
@@ -16395,13 +16402,6 @@ Land Mountain Forest
 no text
 tap: add R
 tap: add G
-
-Volcanic Island
-no cost
-Land Mountain Island
-no text
-tap: add R
-tap: add U
 
 Scrubland
 no cost
