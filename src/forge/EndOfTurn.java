@@ -38,6 +38,7 @@ public class EndOfTurn implements java.io.Serializable
     
     AllZone.StateBasedEffects.rePopulateStateBasedList();
     
+    /*
     PlayerZone cz = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Computer);
     PlayerZone hz = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Human);
     
@@ -46,6 +47,7 @@ public class EndOfTurn implements java.io.Serializable
     
     System.out.println("number of cards in compy removed zone: " + c.size());
     System.out.println("number of cards in human removed zone: " + h.size());
+    */
     
     execute(at);
   }//executeAt()
