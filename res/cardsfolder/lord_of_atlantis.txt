@@ -7,6 +7,7 @@ K:stPumpAll:Creature.Merfolk+Other:1/1/Islandwalk:No Condition:Other Merfolk cre
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_atlantis.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/63.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/63.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/83.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/82.jpg

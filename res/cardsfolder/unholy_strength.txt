@@ -7,6 +7,7 @@ K:enPump:+2/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unholy_strength.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/169.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/40.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/40.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/168.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/63.jpg

@@ -8,6 +8,7 @@ K:Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card132120.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/56.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/226.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/228.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/55.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/305.jpg

@@ -24,6 +24,7 @@ class Card:
 
 def initSets():
 	# Base Sets
+	allSets['Limited Edition Alpha'] = 'LEA'
 	allSets['Limited Edition Beta'] = 'LEB'
 	allSets['Unlimited Edition'] = '2ED'
 	allSets['Revised Edition'] = '3ED'
@@ -36,6 +37,7 @@ def initSets():
 	allSets['Tenth Edition'] = '10E'
 	allSets['Magic 2010'] = 'M10'
 	allSets['Magic 2011'] = 'M11'
+	#allSets['Magic 2012'] = 'M12'
 	
 	# Portal
 	allSets['Portal'] = 'POR'

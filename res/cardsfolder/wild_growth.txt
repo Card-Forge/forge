@@ -6,6 +6,7 @@ K:Enchant Land
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_growth.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/138.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/138.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/282.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/204.jpg

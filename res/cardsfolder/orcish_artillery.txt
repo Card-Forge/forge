@@ -7,6 +7,7 @@ A:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ DamageYou/3 | S
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83193.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/207.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/166.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/167.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/205.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/253.jpg

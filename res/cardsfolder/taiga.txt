@@ -6,6 +6,7 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taiga.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/292.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/298.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/302.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/298.jpg

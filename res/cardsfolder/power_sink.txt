@@ -10,6 +10,7 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/power_sink.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/89.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/78.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/73.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/73.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/111.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/93.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/91.jpg

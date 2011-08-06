@@ -8,4 +8,5 @@ K:Enchant permanent
 #SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volition_reins.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/53.jpg
 End

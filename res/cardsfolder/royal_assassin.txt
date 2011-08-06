@@ -7,6 +7,7 @@ A:AB$Destroy | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target t
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83235.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/159.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/32.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/32.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/41.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/159.jpg

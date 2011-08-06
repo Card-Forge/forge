@@ -8,6 +8,7 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_star.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/304.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/250.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/252.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/301.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/379.jpg

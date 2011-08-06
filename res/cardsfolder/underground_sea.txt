@@ -6,6 +6,7 @@ A:AB$Mana|Cost$T|Produced$U|SpellDescription$Add U to your mana pool.
 A:AB$Mana|Cost$T|Produced$B|SpellDescription$Add B to your mana pool.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underground_sea.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/295.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/301.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/305.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/301.jpg

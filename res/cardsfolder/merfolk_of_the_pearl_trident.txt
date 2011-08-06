@@ -5,6 +5,7 @@ Text:no text
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card10810.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/67.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/67.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/90.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/86.jpg

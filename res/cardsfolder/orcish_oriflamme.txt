@@ -6,6 +6,7 @@ K:stPumpAll:Creature.attacking+YouCtrl:1/0:No Condition:Attacking creatures you 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_oriflamme.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/167.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/168.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/206.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/257.jpg

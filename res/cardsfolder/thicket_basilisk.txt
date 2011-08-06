@@ -7,6 +7,7 @@ K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Cr
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonWall
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thicket_basilisk.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/127.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/127.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/193.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/158.jpg

@@ -6,6 +6,7 @@ A:SP$DestroyAll | Cost$ 2 G | ValidCards$ Enchantment | SpellDescription$ Destro
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquility.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/155.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/129.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/129.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/276.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/161.jpg

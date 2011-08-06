@@ -6,6 +6,7 @@ A:SP$Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_growth.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/254.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/106.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/106.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/248.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/161.jpg

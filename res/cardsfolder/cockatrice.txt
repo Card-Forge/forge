@@ -8,6 +8,7 @@ K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Cr
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonWall
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cockatrice.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/98.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/98.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/121.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/75.jpg

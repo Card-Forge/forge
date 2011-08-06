@@ -7,6 +7,7 @@ K:CARDNAME attacks each turn if able.
 K:CARDNAME can't be blocked by Walls.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juggernaut.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/255.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/257.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/125.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/328.jpg

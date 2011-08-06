@@ -6,6 +6,7 @@ PT:6/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83040.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/239.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/99.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/99.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/148.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/122.jpg

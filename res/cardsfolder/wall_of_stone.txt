@@ -7,6 +7,7 @@ K:Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_stone.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/232.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/183.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/184.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/274.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/249.jpg

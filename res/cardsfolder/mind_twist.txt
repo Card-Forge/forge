@@ -7,6 +7,7 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_twist.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/24.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/24.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/25.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/31.jpg

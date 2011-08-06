@@ -6,6 +6,7 @@ K:Enchant creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fear.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/134.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/17.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/17.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/135.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/24.jpg

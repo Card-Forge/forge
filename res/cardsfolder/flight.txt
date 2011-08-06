@@ -7,6 +7,7 @@ K:enPump:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flight.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/80.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/59.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/59.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/75.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/86.jpg

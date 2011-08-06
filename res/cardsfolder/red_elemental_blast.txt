@@ -7,6 +7,7 @@ A:SP$Counter | Cost$ R | Type$ Spell | CounterValid$ Card.Blue | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_elemental_blast.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/170.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/171.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/170.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/236.jpg

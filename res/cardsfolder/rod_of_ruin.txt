@@ -6,6 +6,7 @@ A:AB$DealDamage | Cost$ 3 T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAM
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rod_of_ruin.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/312.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/268.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/270.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/314.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/396.jpg

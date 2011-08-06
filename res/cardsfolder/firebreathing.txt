@@ -7,6 +7,7 @@ K:enPump:+0/+0
 A:AB$Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firebreathing.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/151.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/152.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/228.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/211.jpg

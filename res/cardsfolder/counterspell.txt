@@ -6,6 +6,7 @@ A:SP$ Counter | Cost$ U U | Type$ Spell | Destination$ Graveyard | SpellDescript
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19570.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/57.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/55.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/55.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/67.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/65.jpg

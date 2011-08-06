@@ -6,6 +6,7 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karma.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/28.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/210.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/212.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/318.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/282.jpg

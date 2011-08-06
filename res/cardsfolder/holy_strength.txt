@@ -7,6 +7,7 @@ K:enPump:+1/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_strength.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/24.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/208.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/210.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/20.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/311.jpg

@@ -5,6 +5,7 @@ Text:Cast CARDNAME only during an opponent's turn, before attackers are declared
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/78.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/78.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/80.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/101.jpg

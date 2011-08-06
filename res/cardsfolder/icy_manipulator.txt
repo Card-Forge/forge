@@ -6,6 +6,7 @@ A:AB$Tap | Cost$ 1 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icy_manipulator.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/248.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/250.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/299.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/297.jpg

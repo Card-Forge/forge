@@ -8,6 +8,7 @@ K:Vigilance
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83254.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/45.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/223.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/225.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/42.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/300.jpg

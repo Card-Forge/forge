@@ -5,6 +5,7 @@ Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_life.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/282.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/126.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/126.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/272.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/190.jpg

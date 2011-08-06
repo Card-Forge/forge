@@ -19,4 +19,5 @@ SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/174.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/265.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/105.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/174.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/174.jpg
 End

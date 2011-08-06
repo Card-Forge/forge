@@ -10,6 +10,7 @@ SVar:DB:DB$DamageAll | NumDmg$X | ValidTgts$Creature|ValidPlayers$ Each | ValidD
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_eruption.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/89.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/89.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/89.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/112.jpg

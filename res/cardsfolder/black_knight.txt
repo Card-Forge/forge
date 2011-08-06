@@ -7,6 +7,7 @@ K:First Strike
 K:Protection from white
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_knight.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/3.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/3.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/5.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/5.jpg

@@ -6,6 +6,7 @@ K:Enchant creature
 K:enPump:Protection from blue:Enchanted creature has protection from blue. This effect doesn't remove Blue Ward.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_ward.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/192.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/193.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/191.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/260.jpg

@@ -7,6 +7,7 @@ A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83061.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/129.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/15.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/15.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/130.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/19.jpg

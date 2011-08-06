@@ -8,6 +8,7 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lure.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/263.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/120.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/120.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/255.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/146.jpg

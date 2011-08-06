@@ -8,6 +8,7 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_rod.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/295.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/239.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/241.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/291.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/361.jpg

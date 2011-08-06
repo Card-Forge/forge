@@ -5,9 +5,10 @@ Text:Enchant creature card in a graveyard\r\nWhen Animate Dead enters the battle
 K:stPumpEnchanted:Creature:-1/0:No Condition:Enchanted creature gets -1/-0.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3823.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/2.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/1.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/1.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/1.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/2.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/2.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/1.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/1.jpg
 End

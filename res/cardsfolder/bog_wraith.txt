@@ -7,6 +7,7 @@ K:Swampwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83011.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/120.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/4.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/4.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/123.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/5.jpg

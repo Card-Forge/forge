@@ -6,6 +6,7 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83515.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/119.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/119.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/253.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/175.jpg

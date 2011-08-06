@@ -5,6 +5,7 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/245.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/247.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/374.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/339.jpg
