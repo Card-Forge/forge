@@ -1,0 +1,9 @@
+Name:Skullmead Cauldron
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+A:AB$GainLife | Cost$ T Discard<1/Any>| LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skullmead_cauldron.jpg
+End
