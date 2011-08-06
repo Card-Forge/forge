@@ -14757,7 +14757,7 @@ Cycling:2
 Barren Moor
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add B
 Cycling:B
@@ -14765,14 +14765,14 @@ Cycling:B
 Blasted Landscape
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 tap: add 1
 Cycling:2
 
 Drifting Meadow
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add W
 Cycling:2
@@ -14780,7 +14780,7 @@ Cycling:2
 Forgotten Cave
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add R
 Cycling:R
@@ -14788,7 +14788,7 @@ Cycling:R
 Lonely Sandbar
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add U
 Cycling:U
@@ -14796,7 +14796,7 @@ Cycling:U
 Polluted Mire
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add B
 Cycling:2
@@ -14804,7 +14804,7 @@ Cycling:2
 Remote Isle
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add U
 Cycling:2
@@ -14812,7 +14812,7 @@ Cycling:2
 Secluded Steppe
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add W
 Cycling:W
@@ -14820,7 +14820,7 @@ Cycling:W
 Slippery Karst
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add G
 Cycling:2
@@ -14828,7 +14828,7 @@ Cycling:2
 Smoldering Crater
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add R
 Cycling:2
@@ -14836,7 +14836,7 @@ Cycling:2
 Tranquil Thicket
 no cost
 Land
-no text
+(NOTE: Cycling lands is not implemented.)
 Comes into play tapped.
 tap: add G
 Cycling:G

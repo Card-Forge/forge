@@ -7542,6 +7542,7 @@ public class CardFactory_Creatures {
 	            c.setController(card.getController());
 
 	            c.setName("Kelp");
+	            c.setImageName("U 0 1 Kelp");
 	            c.setManaCost("U");
 	            c.setToken(true);
 

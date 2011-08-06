@@ -934,7 +934,7 @@ class CardFactory_Lands {
 	   	             c.setController(card.getController());
 	   	
 	   	             c.setName("Marit Lage");
-	   	             c.setName("C 20 20 Marit Lage");
+	   	             c.setName("B 20 20 Marit Lage");
 	   	             c.setManaCost("B");
 	   	             c.setToken(true);
 	   	
@@ -1656,6 +1656,7 @@ class CardFactory_Lands {
 	   	          c.setController(card.getController());
 
 	   	          c.setName("Kobolds of Kher Keep");
+	   	          c.setImageName("R 0 1 Kobolds of Kher Keep");
 	   	          c.setManaCost("R");
 	   	          c.setToken(true);
 
