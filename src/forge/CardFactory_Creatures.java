@@ -4143,25 +4143,18 @@ public class CardFactory_Creatures {
                     if(graveList.size() == 0) return;
                     
                     if(card.getController().equals(Constant.Player.Human)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", grave.getCards());
+                        Object o = AllZone.Display.getChoiceOptional("Select target card", graveList.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
                         }
                     } else//computer
                     {
-                        CardList list = new CardList(grave.getCards());
-                        list = list.filter(new CardListFilter(){
-                        	public boolean addCard(Card crd)
-                        	{
-                        		return crd.isPermanent() && CardUtil.getConvertedManaCost(crd.getManaCost()) <=3;
-                        	}
-                        });
-                        Card best = CardFactoryUtil.AI_getBestCreature(list);
+                        Card best = CardFactoryUtil.AI_getBestCreature(graveList);
                         
                         if(best == null) {
-                            list.shuffle();
-                            best = list.get(0);
+                        	graveList.shuffle();
+                            best = graveList.get(0);
                         }
                         ability.setTargetCard(best);
                         AllZone.Stack.add(ability);
