@@ -1,0 +1,12 @@
+Name:Sanguine Praetor
+ManaCost:3 W
+Types:Creature Avatar
+Text:no text
+PT:7/5
+K:Vigilance
+A:AB$DestroyAll | Cost$ B Sac<1/Creature> | ValidCards$ Creature.cmcEQX | SpellDescription$ Destroy each creature with the same converted mana cost as the sacrificed creature.
+SVar:X:Sacrificed$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_praetor.jpg
+End
