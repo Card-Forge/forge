@@ -110,7 +110,7 @@ noIcon
 
 12
 Barroom Brawl
-A druken giant of a man takes a swing at you, your brew spills and a fight breaks out.
+A drunken giant of a man takes a swing at you, your brew spills and a fight breaks out.
 Hard
 Not Repeatable
 50
