@@ -1,0 +1,10 @@
+Name:Suture Spirit
+ManaCost:1 W
+Types:Creature Spirit
+Text:no text
+PT:1/1
+K:Flying
+A:AB$Regenerate|Tgt$TgtC|Cost$WB WB WB|SpellDescription$Regenerate target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/suture_spirit.jpg
+End
