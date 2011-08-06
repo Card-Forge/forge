@@ -27,7 +27,8 @@ public class Ability_Triggered extends Ability implements Command {
     }
     
     public Ability_Triggered(Card sourceCard, Command sourceCommand, ZCTrigger situation) {
-        super(sourceCard, "no cost");
+        super(sourceCard, "0");
+        setTrigger(true);
         todo = sourceCommand;
         trigger = situation;
         if(todo instanceof Ability_Triggered) {
