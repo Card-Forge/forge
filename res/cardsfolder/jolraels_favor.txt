@@ -8,5 +8,5 @@ K:enPump:+0/+0
 A:AB$Regenerate | Cost$ 1 G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 #TODO - check rarity on this
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jolreals_favor.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jolraels_favor.jpg
 End
