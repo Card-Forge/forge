@@ -136,7 +136,7 @@ public class AbilityFactory_Pump {
                 
                 if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
                 
-                if(!AF.getAbTgt().doesTarget()) {
+                if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
                 	Card creature;
                     //if (bPumpEquipped)
                     //	creature = card.getEquippingCard();
