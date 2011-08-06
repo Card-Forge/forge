@@ -2,7 +2,7 @@
     package forge;
 
     import java.util.ArrayList;
-    import java.util.Random;
+import java.util.Random;
 
     public class AbilityFactory_DealDamage {
         private AbilityFactory AF = null;
@@ -186,11 +186,6 @@
         }
        
         private Card chooseTgtC(final int d) {
-            // Combo alert!!
-            PlayerZone compy = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-            CardList cPlay = new CardList(compy.getCards());
-            if(cPlay.size() > 0) for(int i = 0; i < cPlay.size(); i++)
-                if(cPlay.get(i).getName().equals("Stuffy Doll")) return cPlay.get(i);
            
             PlayerZone human = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
             CardList hPlay = new CardList(human.getCards());
@@ -198,41 +193,49 @@
                 public boolean addCard(Card c) {
                     // will include creatures already dealt damage
                     return c.isCreature() && ((c.getNetDefense() + c.getDamage()) <= d)
-                            && CardFactoryUtil.canTarget(AF.getHostCard(), c);
+                            && CardFactoryUtil.canTarget(AF.getHostCard(), c)
+                            && !c.reduceDamageToZero(AF.getHostCard(),false);
                 }
             });
            
             if(hPlay.size() > 0) {
-                Card best = hPlay.get(0);
-               
-                if(hPlay.size() > 1) {
-                    for(int i = 1; i < hPlay.size(); i++) {
-                        Card b = hPlay.get(i);
-                        // choose best overall creature?
-                        if(b.getSpellAbility().length > best.getSpellAbility().length
-                                || b.getKeyword().size() > best.getKeyword().size()
-                                || b.getNetAttack() > best.getNetAttack()) best = b;
-                    }
-                }
+                Card best = CardFactoryUtil.AI_getBestCreature(hPlay);
                 return best;
             }
+            
+            // Combo alert!!
+            PlayerZone compy = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+            CardList cPlay = new CardList(compy.getCards());
+            if(cPlay.size() > 0) for(int i = 0; i < cPlay.size(); i++)
+                if(cPlay.get(i).getName().equals("Stuffy Doll")) return cPlay.get(i);
+            
             return null;
         }
 
         private boolean doCanPlayAI(SpellAbility saMe)
         {
+           int damage = getNumDamage(saMe);
+            
+           boolean rr = AF.isSpell();
+           
            // temporarily disabled until better AI
-           if (AF.getAbCost().getSacCost())    return false;
-           if (AF.getAbCost().getSubCounter())  return false;
-           if (AF.getAbCost().getLifeCost())    return false;
+           if (AF.getAbCost().getSacCost())    {
+               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this spell would kill the human
+        	   return false;
+           }
+           if (AF.getAbCost().getSubCounter())  {
+               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this spell would kill the human
+        	   return false;
+           }
+           if (AF.getAbCost().getLifeCost())    {
+               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this spell would kill the human
+        	   return false;
+           }
            
            if (!ComputerUtil.canPayCost(saMe))
               return false;
 
           // TODO handle proper calculation of X values based on Cost
-            int damage = getNumDamage(saMe);
-           
-            boolean rr = AF.isSpell();
            
             if (AF.isAbility())
             {

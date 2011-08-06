@@ -2756,7 +2756,7 @@ public class Card extends MyObservable {
         }
     }
     
-    private boolean reduceDamageToZero(Card source, boolean isCombat) {
+    public boolean reduceDamageToZero(Card source, boolean isCombat) {
     	boolean reduce = false;
     	if(isCombat) {
     		reduce = reduce || getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
