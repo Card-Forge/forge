@@ -288,6 +288,7 @@ Force of Nature
 Force of Savagery
 Forced Fruition
 Fracturing Gust
+Fungal Shambler
 Gaddock Teeg
 Gaea's Anthem
 Gaea's Avenger
@@ -900,6 +901,7 @@ Vampire Nocturnus
 Vampiric Spirit
 Vampiric Tutor
 Vedalken Archmage
+Vedalken Heretic
 Veldrane of Sengir
 Vendilion Clique
 Vengeful Firebrand

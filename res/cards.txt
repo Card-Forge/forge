@@ -1,3 +1,40 @@
+Vedalken Heretic
+U G
+Creature Vedalken Rogue
+no text
+1/1
+WheneverKeyword:DealsDamage/Opponent:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Vedalken Heretic deals damage to an opponent, you may draw a card.
+
+Juniper Order Ranger
+2 W G
+Creature Human Knight
+no text
+2/4
+WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Counters/1:Self!Initiating_Card:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
+
+Fungal Shambler
+4 U B G
+Creature Fungus Beast
+no text
+6/4
+Trample
+WheneverKeyword:DealsDamage/Opponent:Self:Play:DrawCards/1!DiscardCards/1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Fungal Shambler deals damage to an opponent, you draw a card and that opponent discards a card.
+
+Centaur Safeguard
+2 GW
+Creature Centaur Warrior
+no text
+3/1
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:ModifyLife/3:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:When Centaur Safeguard is put into a graveyard from the battlefield, you may gain 3 life.
+
+Wee Dragonauts
+1 U R
+Creature Faerie Wizard 
+no text
+1/3
+Flying
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Instant/Sorcery:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever you cast an instant or sorcery spell, Wee Dragonauts gets +2/+0 until end of turn.
+
 Cultivate
 2 G
 Sorcery  

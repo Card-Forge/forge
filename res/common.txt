@@ -225,6 +225,7 @@ Cavern Harpy
 Cavern Thoctar
 Cemetery Gate
 Centaur Courser
+Centaur Safeguard
 Cephalid Looter
 Cerodon Yearling
 Cessation
@@ -292,6 +293,7 @@ Crossbow Ambush
 Cruel Edict
 Crumble
 Crypt Ripper
+Cultivate
 Curse of Chains
 Cursed Flesh
 Cursed Ronin
@@ -332,6 +334,7 @@ Dehydration
 Delirium Skeins
 Demolish
 Demystify
+Deny Reality
 Descendant of Soramaro
 Despondency
 Devoted Hero
@@ -1097,6 +1100,7 @@ Renewed Faith
 Repentant Blacksmith
 Reprisal
 Repulse
+Rescind
 Respite
 Restless Bones
 Restless Dead
@@ -1571,6 +1575,7 @@ Wayward Soul
 Weakness
 Weatherseed Elf
 Weatherseed Faeries
+Wee Dragonauts
 Wei Ambush Force
 Wei Infantry
 Wei Scout
