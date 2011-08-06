@@ -357,14 +357,14 @@ public class CombatUtil {
         	Human.addAll(AllZone.Human_Play.getCards());
         	if (Human.getName("Ensnaring Bridge").size() > 0) {
         		CardList Hand = new CardList();
-        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, "Human").getCards());
+        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
         		limit = Hand.size();
         	}
         	CardList Compi = new CardList();
         	Compi.addAll(AllZone.Computer_Play.getCards());
         	if (Compi.getName("Ensnaring Bridge").size() > 0) {
         		CardList Hand = new CardList();
-        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, "Computer").getCards());
+        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
         		if (Hand.size() < limit) limit = Hand.size();
         	}
         	if (c.getNetAttack() > limit) return false;
@@ -1346,7 +1346,7 @@ public class CombatUtil {
                 });
                 
                 if(enchantments.size() > 0) {
-                    if(c.getController().equals("Human")) {
+                    if(c.getController().equals(Constant.Player.Human)) {
                         Object o = AllZone.Display.getChoiceOptional("Pick an enchantment to put into play",
                                 enchantments.toArray());
                         if(o != null) {
@@ -1386,7 +1386,7 @@ public class CombatUtil {
                             GameActionUtil.executeCardStateEffects();
                             
                         }
-                    } else if(c.getController().equals("Computer")) {
+                    } else if(c.getController().equals(Constant.Player.Computer)) {
                         enchantments = enchantments.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
                                 return !c.isAura();
@@ -1412,7 +1412,7 @@ public class CombatUtil {
                 creatures = creatures.getType("Creature");
                 
                 if(creatures.size() > 0) {
-                    if(c.getController().equals("Human")) {
+                    if(c.getController().equals(Constant.Player.Human)) {
                         Object o = AllZone.Display.getChoiceOptional("Pick a creature to put into play",
                                 creatures.toArray());
                         if(o != null) {
@@ -1426,7 +1426,7 @@ public class CombatUtil {
                             //however, this turns out to be incorrect rules-wise
                             //checkDeclareAttackers(card); 
                         }
-                    } else if(c.getController().equals("Computer")) {
+                    } else if(c.getController().equals(Constant.Player.Computer)) {
                         Card card = creatures.get(0);
                         grave.remove(card);
                         play.add(card);
@@ -1832,7 +1832,7 @@ public class CombatUtil {
                 soldiers = soldiers.getType("Soldier");
                 
                 if(soldiers.size() > 0) {
-                    if(c.getController().equals("Human")) {
+                    if(c.getController().equals(Constant.Player.Human)) {
                         Object o = AllZone.Display.getChoiceOptional("Pick a soldier to put into play",
                                 soldiers.toArray());
                         if(o != null) {
@@ -1847,7 +1847,7 @@ public class CombatUtil {
                             //checkDeclareAttackers(card); 
                             card.setCreatureAttackedThisCombat(true);
                         }
-                    } else if(c.getController().equals("Computer")) {
+                    } else if(c.getController().equals(Constant.Player.Computer)) {
                         Card card = soldiers.get(0);
                         hand.remove(card);
                         play.add(card);
@@ -2404,7 +2404,7 @@ public class CombatUtil {
             int compLibSize = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
             int compHandSize = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
             
-            if (player.equals ("Human")) {
+            if (player.equals (Constant.Player.Human)) {
             	StringBuilder title = new StringBuilder();
                 title.append(a.getName()).append(" Ability");
                 StringBuilder message = new StringBuilder();
@@ -2412,8 +2412,8 @@ public class CombatUtil {
                 choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
             }// if player.equals Human
             
-            if ((choice == JOptionPane.YES_OPTION && player.equals ("Human")) 
-                    || (player.equals ("Computer") && (compLibSize >= (2 * numCards)  && compHandSize <= (7 - numCards)))) {
+            if ((choice == JOptionPane.YES_OPTION && player.equals (Constant.Player.Human)) 
+                    || (player.equals (Constant.Player.Computer) && (compLibSize >= (2 * numCards)  && compHandSize <= (7 - numCards)))) {
                 for (int i = 0; i < numCards; i++) {
                     AllZone.GameAction.drawCard(player);
                 }
@@ -2769,7 +2769,7 @@ public class CombatUtil {
     	                            }
                                 		} return true;
                                 		}
-                        		if(turn == "Human") { 
+                        		if(turn == Constant.Player.Human) { 
                             		if(keyword.startsWith("Enchant Creature")) {
                         			if(keyword.endsWith("Curse")) {
                                     	String [] colors = new String[6];
@@ -2792,7 +2792,7 @@ public class CombatUtil {
                     });
 	                    String player = attacker.getController();
 	                    Card Enchantment = null;
-	                    if(player == "Human"){
+	                    if(player == Constant.Player.Human){
                             Card[] Target = new Card[enchantments.size()];
                             for(int i = 0; i < enchantments.size(); i++) {
                 				Card crd = enchantments.get(i);
@@ -2812,7 +2812,7 @@ public class CombatUtil {
 	                    	play.add(Enchantment);
 	                    	Enchantment.enchantCard(attacker);
 	                    }
-                        if(player == "Human") AllZone.GameAction.shuffle(attacker.getController());	                    
+                        if(player == Constant.Player.Human) AllZone.GameAction.shuffle(attacker.getController());	                    
                 }//resolve
             };// ability4
             ability4.setStackDescription(c + " - (Exalted) searches library for an Aura card that could enchant that creature, put it into play attached to that creature, then shuffles library. ");
