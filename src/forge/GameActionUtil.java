@@ -6126,8 +6126,26 @@ public class GameActionUtil {
 				target_Opponent_Lose_Life(player, gain, bond);
 			}
 		}
+		
+		if(AllZoneUtil.isCardInPlay("Ageless Entity", player)) {
+			CardList entities = AllZoneUtil.getPlayerCardsInPlay(player, "Ageless Entity");
+			for(Card entity:entities) {
+				card_Add_Counters(entity, Counters.P1P1, gain);
+			}
+		}
 
 	}//executeLifeGainEffects
+	
+	private static void card_Add_Counters(final Card card, final Counters type, final int num) {
+		//should be triggered
+		Ability addCounters = new Ability(card, "0") {
+			public void resolve() {
+				card.addCounter(type, num);
+			}
+		};
+		addCounters.setStackDescription(card.getName()+" - Put "+num+" "+type.getName()+" counters on "+card+".");
+		AllZone.Stack.add(addCounters);
+	}
 	
 	private static void target_Opponent_Lose_Life(final Player player, final int loss, final Card source) {
 		//should be triggered

@@ -1,11 +1,9 @@
 Name:Ageless Entity
 ManaCost:3 G G
 Types:Creature Elemental
-Text:(NOTE: This spell is rather buggy and should not be used at this time.)
+Text:Whenever you gain life, put that many +1/+1 counters on CARDNAME.
 PT:4/4
-K:WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
-SVar:RemAIDeck:True
-SVar:Rarity:None
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_entity.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/73.jpg
 End
