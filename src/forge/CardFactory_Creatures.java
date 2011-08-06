@@ -6514,34 +6514,41 @@ public class CardFactory_Creatures {
             //ability.setAfterPayMana(target);
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
-        else if(cardName.equals("Royal Assassin")) {
+        else if (cardName.equals("Royal Assassin")) {
             final Ability_Tap ability = new Ability_Tap(card) {
                 private static final long serialVersionUID = 1974437552336643722L;
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    human = human.filter(new CardListFilter() {
+                    return getCreature().size() != 0;
+                }//canPlayAI()
+                
+                CardList getCreature() {
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isTapped();
+                            return CardFactoryUtil.canTarget(card, c) 
+                                && !c.getKeyword().contains("Indestructible") 
+                                && c.isTapped();
                         }
                     });
-                    
-                    CardListUtil.sortAttack(human);
-                    CardListUtil.sortFlying(human);
-                    
-                    if(0 < human.size()) setTargetCard(human.get(0));
-                    
-                    return 0 < human.size();
-                }
+                    return list;
+                }//getCreature()
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(best);
+                }//chooseTargetAI()
                 
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && c.isTapped() && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZone.GameAction.isCardInPlay(c) 
+                            && c.isTapped() 
+                            && CardFactoryUtil.canTarget(card, c)) {
                         AllZone.GameAction.destroy(c);
                     }
                 }//resolve()
@@ -6565,7 +6572,9 @@ public class CardFactory_Creatures {
                 public void selectCard(Card c, PlayerZone zone) {
                     if(!CardFactoryUtil.canTarget(card, c)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if(c.isCreature() && zone.is(Constant.Zone.Play) && c.isTapped()) {
+                    } else if (c.isCreature() 
+                            && zone.is(Constant.Zone.Play) 
+                            && c.isTapped()) {
                         //tap ability
                         card.tap();
                         
@@ -6581,7 +6590,6 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Giltspire Avenger")) {
             final Ability_Tap ability = new Ability_Tap(card) {
