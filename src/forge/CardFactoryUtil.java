@@ -1746,6 +1746,7 @@ public class CardFactoryUtil {
                     this.setFree(false);
                     AllZone.Stack.add(spell);
                     if(spell.isTapAbility()) spell.getSourceCard().tap();
+                    if(spell.isUntapAbility()) spell.getSourceCard().untap();
                     stop();
                 } else stopSetNext(new Input_PayManaCost(spell));
             }

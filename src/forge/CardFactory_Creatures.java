@@ -1581,7 +1581,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
-                    card.untap();
                     
                     if(c.sumAllCounters() == 0) return;
                     else if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
@@ -1623,6 +1622,7 @@ public class CardFactory_Creatures {
                     return perms.size() > 0;
                 }
             };//SpellAbility
+            a1.makeUntapAbility();
             
             Input runtime = new Input() {
                 private static final long serialVersionUID = 1571239319226728848L;
@@ -1700,6 +1700,7 @@ public class CardFactory_Creatures {
                     return true;
                 }
             };//SpellAbility
+            a1.makeUntapAbility();
             card.addSpellAbility(a1);
             a1.setDescription("1 W W, Untap:  Return target creature card with converted mana cost 3 or less from your graveyard to play.");
             a1.setStackDescription(card.getName()
@@ -1735,6 +1736,7 @@ public class CardFactory_Creatures {
                     return true;
                 }
             };//SpellAbility
+            a1.makeUntapAbility();
             card.addSpellAbility(a1);
             a1.setDescription("1 W, Untap:  Put a 1/1 white Kithkin Soldier creature token into play.");
             a1.setStackDescription(card.getName() + " - put a 1/1 white Kithkin Soldier creature token into play.");

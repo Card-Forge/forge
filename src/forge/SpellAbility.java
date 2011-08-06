@@ -25,6 +25,7 @@ public abstract class SpellAbility {
     
     private boolean         spell;
     private boolean         tapAbility;
+    private boolean         untapAbility;
     private boolean         buyBackAbility     = false;        //false by default
     private boolean         flashBackAbility   = false;
     private boolean			multiKicker 	   = false;
@@ -124,6 +125,16 @@ public abstract class SpellAbility {
     
     public boolean isTapAbility() {
         return tapAbility;
+    }
+    
+    public boolean isUntapAbility() {
+        return untapAbility;
+    }
+    
+    public void makeUntapAbility()
+    {
+    	untapAbility = true;
+    	tapAbility = false;
     }
     
     public void setIsBuyBackAbility(boolean b) {

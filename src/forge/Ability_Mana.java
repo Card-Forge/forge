@@ -247,12 +247,16 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     @Override
     public boolean canPlay() {
         Card card = getSourceCard();
-        if(AllZone.GameAction.isCardInPlay(card) && (!isTapAbility() || card.isUntapped())) {
+        if(AllZone.GameAction.isCardInPlay(card) &!
+        	((isTapAbility() && card.isTapped()) ||
+        		(isUntapAbility() && card.isUntapped()))) {
             if(card.isFaceDown()) return false;
             
-            if(card.isArtifact() && card.isCreature()) return !(card.hasSickness() && isTapAbility());
+            if(card.isArtifact() && card.isCreature()) return !(card.hasSickness() &&
+            	(isTapAbility() || isUntapAbility()));
             
-            if(card.isCreature() && (!card.hasSickness() || !isTapAbility())) return true;
+            if(card.isCreature() && !(card.hasSickness() &&
+            	(isTapAbility() || isUntapAbility()))) return true;
             //Dryad Arbor, Mishra's Factory, Mutavault, ...
             else if(card.isCreature() && card.isLand() && card.hasSickness()) return false;
             else if(card.isArtifact() || card.isGlobalEnchantment() || card.isLand()) return true;

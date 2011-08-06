@@ -54,6 +54,7 @@ public class Input_PayManaCost extends Input {
         
         //if tap ability, tap card
         if(spell.isTapAbility()) originalCard.tap();
+        if(spell.isUntapAbility()) originalCard.untap();
         
         //this seems to remove a card if it is in the player's hand
         //and trys to remove abilities, but no error messsage is generated

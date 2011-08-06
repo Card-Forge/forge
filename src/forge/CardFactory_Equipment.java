@@ -1238,11 +1238,22 @@ class CardFactory_Equipment {
             equip.setType("Extrinsic");
             
             final Ability untapboost = new Ability(card, "3") {
+            	Command EOT(final Card c){return new Command() {
+                    private static final long serialVersionUID = -8840812331316327448L;
+                    
+                    public void execute() {
+                        if(AllZone.GameAction.isCardInPlay(getSourceCard())) {
+                            c.addTempAttackBoost(-2);
+                            c.addTempDefenseBoost(-2);
+                        }
+                        
+                    }
+                };}
                 @Override
                 public void resolve() {
                     getSourceCard().addTempAttackBoost(2);
                     getSourceCard().addTempDefenseBoost(2);
-                    getSourceCard().untap();
+                    AllZone.EndOfTurn.addUntil(EOT(getSourceCard()));
                 }
                 
                 @Override
@@ -1250,7 +1261,7 @@ class CardFactory_Equipment {
                     return (getSourceCard().isTapped() && !getSourceCard().hasSickness() && super.canPlay());
                 }
             };//equiped creature's ability
-            
+            untapboost.makeUntapAbility();
             Command onEquip = new Command() {
                 
                 private static final long serialVersionUID = -4784079305541955698L;

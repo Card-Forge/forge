@@ -1214,6 +1214,7 @@ public class GameAction {
         if(sa.getManaCost().equals("0") && sa.getBeforePayMana() == null) {
             AllZone.Stack.add(sa);
             if(sa.isTapAbility()) sa.getSourceCard().tap();
+            if(sa.isUntapAbility()) sa.getSourceCard().untap();
             return;
         }
         
