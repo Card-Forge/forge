@@ -2698,6 +2698,30 @@ public class Card extends MyObservable {
 	            if(source.getKeyword().contains("Deathtouch") && isCreature()) {
 	                AllZone.GameAction.destroy(this);
 	            }
+	            if(isCreature() 
+	            	&& source.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.")) 
+	            {
+	            	final Card damagedCard = this;
+	            	final Ability ability = new Ability(source, "0") {
+	                	@Override
+	                	public void resolve() { AllZone.GameAction.destroy(damagedCard); }
+	            	};
+	            
+	            	StringBuilder sb = new StringBuilder();
+	            	sb.append(source).append(" - destroy damaged creature.");
+	            	ability.setStackDescription(sb.toString());
+	            
+	            	final Command atEOC = new Command() {
+	                	private static final long serialVersionUID = 3789617910009764326L;
+	                
+	                	public void execute() {
+	                		if(AllZone.GameAction.isCardInPlay(damagedCard)) 
+	                			AllZone.Stack.add(ability);
+	                	}
+	            	};
+	            
+	            	AllZone.EndOfCombat.addAt(atEOC);
+	            }//Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
             }
 	        map.put(source, damageToAdd);
         }

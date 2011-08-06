@@ -612,7 +612,7 @@ public class CombatUtil {
         int defenderDefense = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
         
         return defenderDefense;
-    }
+    }//shieldDamage
     
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
@@ -663,56 +663,34 @@ public class CombatUtil {
         
         if(defender.getKeyword().contains("Double Strike") ) {
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
+            if(defenderDamage >= attackerLife) return true;
             
-            if(attacker.getKeyword().contains("Double Strike")) {
-                if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
-                if(((defenderLife - defender.getDamage()) > attackerDamage)
-                        && (attackerLife - attacker.getDamage() <= 2 * defenderDamage)
-                        && !attacker.getKeyword().contains("Deathtouch")) return true;
-            } else if(attacker.getKeyword().contains("First Strike")) //hmm, same as previous if ?
-            {
-                if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
-                if(((defenderLife - defender.getDamage()) > attackerDamage)
-                        && ((attackerLife - attacker.getDamage()) <= 2 * defenderDamage)
-                        && !attacker.getKeyword().contains("Deathtouch")) return true;
-            } else //no double nor first strike for attacker
-            {
-                if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
-                if((attackerLife - attacker.getDamage()) <= 2 * defenderDamage) return true;
-            }
-            
+            //Attacker may kill the blocker before he can deal normal (secondary) damage
+            if((attacker.getKeyword().contains("Double Strike") || attacker.getKeyword().contains("First Strike")) 
+            		&& !defender.getKeyword().contains("Indestructible")) {
+                if(attackerDamage >= defenderLife) return false;
+                if(attackerDamage > 0 && attacker.getKeyword().contains("Deathtouch")) return false;
+            } 
+            if(attackerLife <= 2 * defenderDamage) return true;
         }//defender double strike
         
-        else if(defender.getKeyword().contains("First Strike")) {
-            if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
-            
-            if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
-        }//defender first strike
-        
-        else //no double nor first strike for defender
-        {
-            if(attacker.getKeyword().contains("Double Strike")) {
-                if(defenderDamage >= attackerLife - attacker.getDamage()
-                        && attackerDamage * 2 < defenderLife - defender.getDamage()) return true;
-                
-                if(defender.getKeyword().contains("Deathtouch") && !attacker.getKeyword().contains("Deathtouch")
-                        && attackerDamage * 2 < defenderLife - defender.getDamage()) return true;
-            } else if(attacker.getKeyword().contains("First Strike")) //same as previous if?
-            {
-                if(defenderDamage >= attackerLife - attacker.getDamage()
-                        && !attacker.getKeyword().contains("Deathtouch")
-                        && attackerDamage < defenderLife - defender.getDamage()) return true;
-                
-                if(defender.getKeyword().contains("Deathtouch") && !attacker.getKeyword().contains("Deathtouch")
-                        && attackerDamage < defenderLife - defender.getDamage()) return true;
-            } else //no double nor first strike for attacker
-            {
-                if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
-                
-                return defenderDamage >= attackerLife - attacker.getDamage();
+        else //no double strike for defender
+        {	
+        	//Attacker may kill the blocker before he can deal any damage
+            if(attacker.getKeyword().contains("Double Strike") || attacker.getKeyword().contains("First Strike")
+            		&& !defender.getKeyword().contains("Indestructible") && !defender.getKeyword().contains("First Strike")) {
+            	
+            	if(attackerDamage > defenderLife) return false;
+            	if(attackerDamage > 0 && attacker.getKeyword().contains("Deathtouch") ) return false;
             }
             
-        }//defender no double/first strike
+            if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
+            if(defender.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
+            		&& defenderDamage > 0) return true;
+                
+            return defenderDamage >= attackerLife;
+            
+        }//defender no double strike
         return false; //should never arrive here
     } //canDestroyAttacker
     
@@ -730,6 +708,7 @@ public class CombatUtil {
         
         if(defender.getKeyword().contains("Indestructible") && 
         		!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect"))) return false;
+        
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return true;
         
         if(attacker.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
@@ -761,50 +740,36 @@ public class CombatUtil {
         int defenderLife = defender.getKillDamage() - flankingMagnitude + defBushidoMagnitude;
         int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
         
-        if(attacker.getKeyword().contains("Double Strike")) {
+        if(attacker.getKeyword().contains("Double Strike") ) {
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
+            if(attackerDamage >= defenderLife) return true;
             
-            if(defender.getKeyword().contains("Double Strike")) {
-                if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
-                if(((attackerLife - attacker.getDamage()) > defenderDamage)
-                        && (defenderLife - defender.getDamage() <= 2 * attackerDamage)
-                        && !defender.getKeyword().contains("Deathtouch")) return true;
-            } else if(defender.getKeyword().contains("First Strike")) //hmm, same as previous if ?
-            {
-                if(attackerDamage >= defenderLife - defender.getDamage()) return true;
-                if(((attackerLife - attacker.getDamage()) > defenderDamage)
-                        && ((defenderLife - defender.getDamage()) <= 2 * attackerDamage)
-                        && !defender.getKeyword().contains("Deathtouch")) return true;
-            } else //no double nor first strike for defender
-            {
-                if(attackerDamage >= defenderLife - defender.getDamage()) return true;
-                if((defenderLife - defender.getDamage()) <= 2 * attackerDamage) return true;
-            }
-            
+            //Attacker may kill the blocker before he can deal normal (secondary) damage
+            if((defender.getKeyword().contains("Double Strike") || defender.getKeyword().contains("First Strike")) 
+            		&& !attacker.getKeyword().contains("Indestructible")) {
+                if(defenderDamage >= attackerLife) return false;
+                if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch")) return false;
+            } 
+            if(defenderLife <= 2 * attackerDamage) return true;
         }//attacker double strike
         
-        else if(attacker.getKeyword().contains("First Strike")) {
-            if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
-            if(attackerDamage >= defenderLife - defender.getDamage()) return true;
-        }//attacker first strike
-        
-        else //no double nor first strike for attacker
-        {
-            if(defender.getKeyword().contains("Double Strike")) {
-                if(attackerDamage >= defenderLife - defender.getDamage()
-                        && defenderDamage < attackerLife - attacker.getDamage()) return true;
-            } else if(defender.getKeyword().contains("First Strike")) //same as previous if?
-            {
-                if(attackerDamage >= defenderLife - defender.getDamage()
-                        && defenderDamage < attackerLife - attacker.getDamage()) return true;
-            } else //no double nor first strike for defender
-            {
-                if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
-                
-                return attackerDamage >= defenderLife - defender.getDamage();
+        else //no double strike for attacker
+        {	
+        	//Defender may kill the attacker before he can deal any damage
+            if(defender.getKeyword().contains("Double Strike") || defender.getKeyword().contains("First Strike")
+            		&& !attacker.getKeyword().contains("Indestructible") && !attacker.getKeyword().contains("First Strike")) {
+            	
+            	if(defenderDamage > attackerLife) return false;
+            	if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch") ) return false;
             }
             
-        }//attacker no double/first strike
+            if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
+            if(attacker.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
+            		&& attackerDamage > 0) return true;
+                
+            return attackerDamage >= defenderLife;
+            
+        }//attacker no double strike
         return false; //should never arrive here
     }//canDestroyBlocker
     
@@ -2334,33 +2299,33 @@ public class CombatUtil {
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
     		if(a.isValidCard(restrictions,b.getController(),b)) {
-                	final Card attacker = a;
-                	final Ability ability = new Ability(b, "0") {
-                    	@Override
-                   	public void resolve() {
-                    		//this isCardInPlay is probably not necessary since
-                    		//if is checked in the atEOC before being put on stack
-                        	if(AllZone.GameAction.isCardInPlay(attacker)) {
-                            	AllZone.GameAction.destroy(attacker);
-                        	}
+            	final Card attacker = a;
+            	final Ability ability = new Ability(b, "0") {
+                	@Override
+               	public void resolve() {
+                		//this isCardInPlay is probably not necessary since
+                		//if is checked in the atEOC before being put on stack
+                    	if(AllZone.GameAction.isCardInPlay(attacker)) {
+                        	AllZone.GameAction.destroy(attacker);
                     	}
-                	};
+                	}
+            	};
+            
+            	StringBuilder sb = new StringBuilder();
+            	sb.append(b).append(" - destroy blocked creature.");
+            	ability.setStackDescription(sb.toString());
+            
+            	final Command atEOC = new Command() {
+                	private static final long serialVersionUID = 5854485314766349980L;
                 
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(b).append(" - destroy blocked creature.");
-                	ability.setStackDescription(sb.toString());
-                
-                	final Command atEOC = new Command() {
-                    	private static final long serialVersionUID = 5854485314766349980L;
-                    
-                    	public void execute() {
-                    		if(AllZone.GameAction.isCardInPlay(attacker)) {
-                    			AllZone.Stack.add(ability);
-                    		}
-                    	}
-                	};
-                
-                	AllZone.EndOfCombat.addAt(atEOC);
+                	public void execute() {
+                		if(AllZone.GameAction.isCardInPlay(attacker)) {
+                			AllZone.Stack.add(ability);
+                		}
+                	}
+            	};
+            
+            	AllZone.EndOfCombat.addAt(atEOC);
     		}
         }// Whenever CARDNAME blocks a creature, destroy that creature at end of combat 
 
