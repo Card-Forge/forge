@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+planar_gate.jpg			http://www.wizards.com/global/images/magic/general/planar_gate.jpg
 coat_of_arms.jpg     				 http://www.wizards.com/global/images/magic/general/coat_of_arms.jpg
 thrumming_stone.jpg     				 http://www.wizards.com/global/images/magic/general/thrumming_stone.jpg
 surging_aether.jpg     				 http://www.wizards.com/global/images/magic/general/surging_aether.jpg
@@ -77,7 +78,6 @@ ruby_medallion.jpg			http://www.wizards.com/global/images/magic/general/ruby_med
 ruby_leech.jpg			http://www.wizards.com/global/images/magic/general/ruby_leech.jpg
 razor_golem.jpg			http://www.wizards.com/global/images/magic/general/razor_golem.jpg
 qumulox.jpg			http://www.wizards.com/global/images/magic/general/qumulox.jpg	
-planar_gate.jpg			http://www.wizards.com/global/images/magic/general/qumulox.jpg		
 pearl_medallion.jpg			http://www.wizards.com/global/images/magic/general/pearl_medallion.jpg
 oxidda_golem.jpg			http://www.wizards.com/global/images/magic/general/oxidda_golem.jpg
 nightscape_familiar.jpg			http://www.wizards.com/global/images/magic/general/nightscape_familiar.jpg
