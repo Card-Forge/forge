@@ -2,7 +2,7 @@ Name:Primal Plasma
 ManaCost:3 U
 Types:Creature Elemental Shapeshifter
 Text:As Primal Plasma comes into play, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
-PT:3/3
+PT:*/*
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card124757.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/59.jpg
