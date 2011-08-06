@@ -1,3 +1,18 @@
+Bone Shredder
+2 B
+Creature Minion
+When CARDNAME enters the battlfield, destroy target nonartifact, nonblack creature.
+1/1
+Flying
+Echo:2 B
+
+Nekrataal
+2 B B  
+Creature Human Assassin
+When CARDNAME enters the battlfield, destroy target nonartifact, nonblack creature. It can't be regenerated.
+2/1
+First Strike
+
 Squirrel Mob
 1 G G
 Creature Squirrel

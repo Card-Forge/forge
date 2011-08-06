@@ -92,6 +92,7 @@ Boggart Ram-Gang
 Boil
 Boiling Seas
 Bonded Fetch
+Bone Shredder
 Boreal Shelf
 Boros Guildmage
 Boros Swiftblade
@@ -535,6 +536,7 @@ Nature's Ruin
 Naya Battlemage
 Needle Storm
 Needlebug
+Nekrataal
 Nettletooth Djinn
 Night's Whisper
 Nightshade Schemers

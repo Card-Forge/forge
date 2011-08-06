@@ -3211,6 +3211,107 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Nekrataal") || cardName.equals("Bone Shredder")) {
+        	// add creatures that destroy nonblack nonartifact without any additional weirdness like evoke
+        	final String name = cardName;
+            final CommandReturn getCreature = new CommandReturn() {
+                //get target card, may be null
+                public Object execute() {
+                    CardList nonblack = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    nonblack = nonblack.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (!c.isArtifact() && !CardUtil.getColors(c).contains(Constant.Color.Black));
+                        }
+                    });
+                    
+                    CardList list = new CardList(nonblack.toArray());                  
+                    if (list.isEmpty())	// todo: if human doesn't have a valid creature must kill own valid target
+                    	return null;
+                    
+                    // Sorts: Highest Attacking Flyer at the top. 
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    Card target = list.get(0);
+                    // if "Best creature has 2+ Attack and flying target that. 
+                    if(2 <= target.getNetAttack() && target.getKeyword().contains("Flying")) 
+                    	return target;
+                    
+                    if(MyRandom.percentTrue(50))
+                    	CardListUtil.sortAttack(list);
+
+                    return target;
+                }//execute()
+            };//CommandReturn
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)
+                            && !CardUtil.getColors(c).contains(Constant.Color.Black) && !c.isArtifact()) {
+                    	if (name.equals("Nekrataal"))
+                    		AllZone.GameAction.destroyNoRegeneration(c);
+                    	else if (name.equals("Bone Shredder"))
+                    		AllZone.GameAction.destroy(c);
+                    }
+                }//resolve()
+            };//SpellAbility
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 8480493532270093002L;
+
+				public void execute() {
+                    Input target = new Input() {
+						private static final long serialVersionUID = 913605099043649992L;
+
+						@Override
+                        public void showMessage() {
+                            AllZone.Display.showMessage("Select target nonartifact, nonblack creature to destroy");
+                            ButtonUtil.disableAll();
+                        }
+                        
+                        @Override
+                        public void selectCard(Card card, PlayerZone zone) {
+                            if(!CardFactoryUtil.canTarget(ability, card)) {
+                                AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                            } else if(card.isCreature() && zone.is(Constant.Zone.Play) && !card.isArtifact()
+                                    && !CardUtil.getColors(card).contains(Constant.Color.Black)) {
+                                ability.setTargetCard(card);
+                                AllZone.Stack.add(ability);
+                                stop();
+                            }
+                        }
+                    };//Input target
+                    
+
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        //get all creatures
+                    	CardList creatures = AllZoneUtil.getTypeInPlay("Creature");
+                        
+                        creatures = creatures.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return (!c.isArtifact() && !CardUtil.getColors(c).contains(Constant.Color.Black));
+                            }
+                        });
+                        
+                        if(creatures.size() != 0) AllZone.InputControl.setInput(target);
+
+                    } 
+                    else{ //computer
+                        Object o = getCreature.execute();
+                        if(o != null)//should never happen, but just in case
+                        {
+                            ability.setTargetCard((Card) o);
+                            AllZone.Stack.add(ability);
+                        }
+                    }//else
+                }//execute()
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Briarhorn")) {
