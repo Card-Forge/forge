@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 import com.esotericsoftware.minlog.Log;
 
 
@@ -2239,7 +2241,9 @@ public class CombatUtil {
             
             play.remove(b);
             library.add(b, 0);
-        } else if(a.getName().equals("Saprazzan Heir") && !a.getCreatureBlockedThisCombat()) {
+        } 
+/* These two cards were moved into one code block, see below
+        else if(a.getName().equals("Saprazzan Heir") && !a.getCreatureBlockedThisCombat()) {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
@@ -2248,7 +2252,9 @@ public class CombatUtil {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
-        } else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
+        } 
+*/
+        else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
                 && !a.getCreatureBlockedThisCombat()) {
             a.untap();
         } else if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisCombat()) {
@@ -2258,6 +2264,30 @@ public class CombatUtil {
         } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
         	 AllZone.GameAction.getPlayerLife(b.getController()).subtractLife(4,a);
         }
+        
+        else if ((a.getName().equals("Saprazzan Heir") || a.getName().equals("Drelnoch")) && !a.getCreatureBlockedThisCombat()) {
+            String player = a.getController();
+            int numCards = 3;
+            if (a.getName().equals("Drelnoch")) numCards = 2;
+            int choice = 0;
+            int compLibSize = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
+            int compHandSize = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
+            
+            if (player.equals ("Human")) {
+                StringBuffer title = new StringBuffer();
+                title.append(a.getName()).append(" Ability");
+                StringBuffer message = new StringBuffer();
+                message.append("Do you want to draw ").append(numCards).append(" cards?");
+                choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
+            }// if player.equals Human
+            
+            if ((choice == JOptionPane.YES_OPTION && player.equals ("Human")) 
+                    || (player.equals ("Computer") && (compLibSize >= (2 * numCards)  && compHandSize <= (7 - numCards)))) {
+                for (int i = 0; i < numCards; i++) {
+                    AllZone.GameAction.drawCard(player);
+                }
+            }
+        }// if Saprazzan Heir or Drelnoch was blocked
         
         if(b.getName().equals("Frostweb Spider") && (a.getKeyword().contains("Flying"))) {
             final Card spider = b;
