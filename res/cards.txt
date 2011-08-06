@@ -3393,7 +3393,7 @@ Creature Leech
 Blue spells you cast cost Blue more to cast.
 2/2
 Flying
-CostChange:Player:More:R:Spell:blue:All:NoSpecial
+CostChange:Player:More:U:Spell:blue:All:NoSpecial
 
 Ruby Medallion
 2
