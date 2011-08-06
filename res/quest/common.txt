@@ -169,6 +169,7 @@ Bosk Banneret
 Bountiful Harvest
 Brainbite
 Brainstorm
+Bramble Creeper
 Brass Gnat
 Brassclaw Orcs
 Breach
@@ -620,6 +621,7 @@ Hammerhead Shark
 Hand of Death
 Harrow
 Harvest Gwyllion
+Harvester Druid
 Haunting Misery
 Havenwood Wurm
 Headless Horseman
@@ -659,6 +661,7 @@ Humble Budoka
 Hundroog
 Hunger of the Nim
 Hungry Mist
+Hungry Spriggan
 Hurloon Minotaur
 Hush
 Hyalopterous Lemure
@@ -678,6 +681,7 @@ Incurable Ogre
 Independent Troops
 Index
 Indomitable Will
+Infectious Horror
 Infiltrate
 Information Dealer
 Inkfathom Divers
@@ -996,6 +1000,7 @@ Penumbra Spider
 Perish the Thought
 Pestermite
 Pestilent Kathari
+Petravark
 Pewter Golem
 Psychic Spear
 Phyrexian Battleflies
@@ -1044,6 +1049,7 @@ Python
 Qasali Pridemage
 Quag Vampires
 Quiet Purity
+Quirion Explorer
 Raging Bull
 Raging Cougar
 Raging Goblin
@@ -1070,6 +1076,7 @@ Razorfin Hunter
 Razorfoot Griffin
 Razortooth Rats
 Reaping the Graves
+Reckless Ogre
 Reckless Scholar
 Reclaim
 Recover
@@ -1125,6 +1132,7 @@ Rootwater Commando
 Rootwater Hunter
 Roterothopter
 Rotting Legion
+Rotting Rats
 Rowan Treefolk
 Royal Falcon
 Rukh Egg
@@ -1363,6 +1371,7 @@ Surveilling Sprite
 Swamp Mosquito
 Sylvan Bounty
 Sylvan Ranger
+Sylvok Explorer
 Symbiotic Elf
 Synchronous Sliver
 Tablet of Epityr

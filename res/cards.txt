@@ -1,3 +1,49 @@
+Rotting Rats
+1 B
+Creature Zombie Rat
+no text
+1/1
+WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1!DiscardCards/1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Rotting Rats enters the battlefield, each player discards a card.
+Unearth:1 B
+
+Howling Banshee
+2 B B
+Creature Spirit
+no text
+3/3
+Flying
+WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-3!ModifyLife/-3:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Howling Banshee enters the battlefield, each player loses 3 life.
+
+Shrieking Specter
+5 B
+Creature Specter
+no text
+2/2
+Flying
+WheneverKeyword:Attacks:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Shrieking Specter attacks, defending player discards a card.
+
+Infectious Horror
+3 B
+Creature Zombie Horror
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Infectious Horror attacks, each opponent loses 2 life.
+
+Order of Yawgmoth
+2 B B
+Creature Zombie Knight
+no text
+2/2
+Fear
+WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Order of Yawgmoth deals damage to a player, that player discards a card.
+
+Nightmare Void
+4 B
+Sorcery
+no text
+Dredge 2
+spDiscardOpp:RevealYouChoose:1:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.:Nightmare Void - opponent reveals hand and discards a card
+
 Yuan Shao's Infantry
 3 R
 Creature Human Soldier

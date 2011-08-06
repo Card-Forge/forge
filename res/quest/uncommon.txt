@@ -138,6 +138,7 @@ Castle
 Castle Sengir
 Cateran Enforcer
 Cateran Kidnappers
+Cave People
 Celestial Prism
 Celestial Purge
 Centaur Glade
@@ -280,6 +281,7 @@ Fanatical Fever
 Fecundity
 Feedback Bolt
 Feldon's Cane
+Fellwar Stone
 Femeref Archers
 Feral Animist
 Feral Lightning
@@ -418,6 +420,7 @@ Horned Sliver
 Horrible Hordes
 Hoverguard Observer
 Howl of the Night Pack
+Howling Banshee
 Hulking Cyclops
 Hunding Gjornersen
 Hunting Pack
@@ -577,6 +580,7 @@ Needlebug
 Nekrataal
 Nettletooth Djinn
 Night's Whisper
+Nightmare Void
 Nightshade Schemers
 Nimble Mongoose
 Nirkana Cutthroat
@@ -594,6 +598,7 @@ Orchard Warden
 Orcish Artillery
 Orcish Cannoneers
 Order of the White Shield
+Order of Yawgmoth
 Orzhova, the Church of Deals
 Oust
 Overrun
@@ -733,6 +738,7 @@ Shifting Wall
 Shimmering Barrier
 Shivan Oasis
 Shivan Raptor
+Shrieking Specter
 Shriekmaw
 Shu Elite Companions
 Shu General
@@ -1001,6 +1007,7 @@ Wreak Havoc
 Yavimaya Ants
 Yavimaya Enchantress
 Yavimaya Gnats
+Yuan Shao's Infantry
 Zebra Unicorn
 Zephid's Embrace
 Zodiac Horse

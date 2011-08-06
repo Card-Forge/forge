@@ -38,6 +38,12 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+nightmare_void.jpg              	http://www.wizards.com/global/images/magic/general/nightmare_void.jpg
+order_of_yawgmoth.jpg                  	http://www.wizards.com/global/images/magic/general/order_of_yawgmoth.jpg
+infectious_horror.jpg			http://www.wizards.com/global/images/magic/general/infectious_horror.jpg
+shrieking_specter.jpg			http://www.wizards.com/global/images/magic/general/shrieking_specter.jpg
+howling_banshee.jpg              	http://www.wizards.com/global/images/magic/general/howling_banshee.jpg
+rotting_rats.jpg              		http://www.wizards.com/global/images/magic/general/rotting_rats.jpg
 yuan_shaos_infantry.jpg              	http://www.wizards.com/global/images/magic/general/yuan_shaos_infantry.jpg
 reckless_ogre.jpg                  	http://www.wizards.com/global/images/magic/general/reckless_ogre.jpg
 ma_chao_western_warrior.jpg		http://www.wizards.com/global/images/magic/general/ma_chao_western_warrior.jpg
@@ -46,10 +52,10 @@ hungry_spriggan.jpg              	http://www.wizards.com/global/images/magic/gen
 cave_people.jpg              		http://www.wizards.com/global/images/magic/general/cave_people.jpg
 bramble_creeper.jpg              	http://www.wizards.com/global/images/magic/general/bramble_creeper.jpg
 petravark.jpg                  		http://www.wizards.com/global/images/magic/general/petravark.jpg
-sylvok_explorer.jpg            	http://www.wizards.com/global/images/magic/general/sylvok_explorer.jpg
+sylvok_explorer.jpg            		http://www.wizards.com/global/images/magic/general/sylvok_explorer.jpg
 quirion_explorer.jpg              	http://www.wizards.com/global/images/magic/general/quirion_explorer.jpg
 harvester_druid.jpg              	http://www.wizards.com/global/images/magic/general/harvester_druid.jpg
-fellwar_stone.jpg              	http://www.wizards.com/global/images/magic/general/fellwar_stone.jpg
+fellwar_stone.jpg              		http://www.wizards.com/global/images/magic/general/fellwar_stone.jpg
 tendo_ice_bridge.jpg              	http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
 soltari_trooper.jpg              	http://www.wizards.com/global/images/magic/general/soltari_trooper.jpg
 seasoned_marshal.jpg                  	http://www.wizards.com/global/images/magic/general/seasoned_marshal.jpg

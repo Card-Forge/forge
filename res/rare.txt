@@ -483,6 +483,7 @@ Loxodon Punisher
 Lu Bu, Master-at-Arms
 Lu Meng, Wu General
 Lu Xun, Scholar General
+Ma Chao, Western Warrior
 Mad Auntie
 Madrush Cyclops
 Maelstrom Nexus
@@ -788,6 +789,7 @@ Stifle
 Stillmoon Cavalier
 Stirring Wildwood
 Stomping Ground
+Stonebrow, Krosan Hero
 Stoneforge Mystic
 Storm Herd
 Storm Spirit
@@ -825,6 +827,7 @@ Teferi's Puzzle Box
 Temple Bell
 Temple Garden
 Temporal Manipulation
+Tendo Ice Bridge
 Terra Stomper
 Terravore
 Tethered Griffin
