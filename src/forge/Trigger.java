@@ -53,12 +53,12 @@ public abstract class Trigger {
 			}
 			if(AllZone.getZone(hostCard) == null)
 			{
-				System.out.println("Requirement failed: Location (should be among " + mapParams.get("TriggerZones") + " but was null) (I don't think that should be possible)");
+				System.out.println("Requirement failed: TriggerZones (should be among " + mapParams.get("TriggerZones") + " but was null) (I don't think that should be possible)");
 				return false;
 			}
 			if(!triggerZones.contains(AllZone.getZone(hostCard).getZoneName()))
 			{
-				System.out.println("Requirement failed: Location (should be among " + mapParams.get("TriggerZones") + " but was " + AllZone.getZone(hostCard).getZoneName() + ")");
+				System.out.println("Requirement failed: Triggerzones (should be among " + mapParams.get("TriggerZones") + " but was " + AllZone.getZone(hostCard).getZoneName() + ")");
 				return false;
 			}
 		}
@@ -127,6 +127,63 @@ public abstract class Trigger {
 			{
 				System.out.println("Requirement failed: Did not control required permanent.");
 				return false;
+			}
+		}
+		
+		if(mapParams.containsKey("RequireCounters"))
+		{
+			for(String counterOper : mapParams.get("RequireCounters").split(","))
+			{
+				System.out.println(counterOper);
+				String[] splitCO = counterOper.split("\\.");
+				System.out.println(splitCO[0]);
+				System.out.println(splitCO[1]);
+				int amt = hostCard.getCounters(Counters.valueOf(splitCO[0]));
+				
+				String operator = splitCO[1].substring(0, 2);
+				String operand = splitCO[1].substring(2);
+				System.out.println("op:" + operator);
+				
+				if(operator.equals("LT"))
+				{
+					if(!(amt < Integer.parseInt(operand)))
+					{
+						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount less than " + operand + ".");
+						return false;
+					}
+				}
+				else if(operator.equals("LE"))
+				{
+					if(!(amt <= Integer.parseInt(operand)))
+					{
+						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount less than or equal to " + operand + ".");
+						return false;
+					}
+				}
+				if(operator.equals("EQ"))
+				{
+					if(!(amt == Integer.parseInt(operand)))
+					{
+						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount equal to " + operand + ".");
+						return false;
+					}
+				}
+				else if(operator.equals("GE"))
+				{					
+					if(!(amt >= Integer.parseInt(operand)))
+					{
+						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount greater than or equal to " + operand + ".");
+						return false;
+					}
+				}
+				else if(operator.equals("GT"))
+				{
+					if(!(amt > Integer.parseInt(operand)))
+					{
+						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount greater than " + operand + ".");
+						return false;
+					}
+				}
 			}
 		}
 		

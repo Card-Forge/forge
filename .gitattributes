@@ -6628,6 +6628,7 @@ src/forge/TriggerHandler.java -text svneol=native#text/plain
 src/forge/Trigger_Battles.java -text svneol=native#text/plain
 src/forge/Trigger_ChangesZone.java -text svneol=native#text/plain
 src/forge/Trigger_DamageDone.java -text svneol=native#text/plain
+src/forge/Trigger_Discarded.java -text svneol=native#text/plain
 src/forge/Trigger_LifeGained.java -text svneol=native#text/plain
 src/forge/Trigger_LifeLost.java -text svneol=native#text/plain
 src/forge/Trigger_Phase.java -text svneol=native#text/plain

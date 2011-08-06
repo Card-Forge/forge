@@ -19,6 +19,25 @@ public class Trigger_Battles extends Trigger {
 				return false;
 			}
 		}
+		if(mapParams.containsKey("Unblocked"))
+		{
+			if(mapParams.get("Unblocked").equals("True"))
+			{
+				if(AllZone.Combat.getBlockers((Card)runParams.get("Battler")).size() != 0)
+				{
+					System.out.println("Test failed: Battler should've been unblocked.");
+					return false;
+				}
+			}
+			else
+			{
+				if(AllZone.Combat.getBlockers((Card)runParams.get("Battler")).size() == 0)
+				{
+					System.out.println("Test failed: Battler should've been blocked.");
+					return false;
+				}
+			}
+		}
 		if(mapParams.containsKey("ValidCard"))
 		{
 			if(!matchesValid(runParams.get("Battler"),mapParams.get("ValidCard").split(","),hostCard))

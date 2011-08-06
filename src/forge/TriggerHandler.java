@@ -13,13 +13,9 @@ public class TriggerHandler {
 		Trigger ret = null;
 		
 		String mode = mapParams.get("Mode");
-		if(mode.equals("Battless"))
+		if(mode.equals("Battles"))
 		{
 			ret = new Trigger_Battles(mapParams,host);
-		}
-		else if(mode.equals("Phase"))
-		{
-			ret = new Trigger_Phase(mapParams,host);
 		}
 		else if(mode.equals("ChangesZone"))
 		{
@@ -29,6 +25,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_DamageDone(mapParams,host);
 		}
+		else if(mode.equals("Discarded"))
+		{
+			ret = new Trigger_Discarded(mapParams,host);
+		}
 		else if(mode.equals("LifeGained"))
 		{
 			ret = new Trigger_LifeGained(mapParams,host);
@@ -36,6 +36,10 @@ public class TriggerHandler {
 		else if(mode.equals("LifeLost"))
 		{
 			ret = new Trigger_LifeLost(mapParams,host);
+		}
+		else if(mode.equals("Phase"))
+		{
+			ret = new Trigger_Phase(mapParams,host);
 		}
 		else if(mode.equals("SpellCast"))
 		{

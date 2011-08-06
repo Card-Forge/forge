@@ -648,6 +648,13 @@ public abstract class Player extends MyObservable{
         else {
         	AllZone.GameAction.moveToGraveyard(c);
         }
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Player", this);
+        runParams.put("Card", c);
+        AllZone.TriggerHandler.runTrigger("Discarded", runParams);
+        
     }//end doDiscard
     
     public void discardHand(SpellAbility sa) {
