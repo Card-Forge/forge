@@ -8086,60 +8086,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START ************************** 
-        else if(cardName.equals("Skizzik")) {
-            final SpellAbility kicker = new Spell(card) {
-                private static final long serialVersionUID = -1598664196463358630L;
-                
-                @Override
-                public void resolve() {
-                    card.setKicked(true);
-                    AllZone.GameAction.moveToPlay(card);
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay() && AllZone.Phase.getPlayerTurn().equals(card.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && !AllZone.GameAction.isCardInPlay(card);
-                }
-                
-            };
-            kicker.setKickerAbility(true);
-            kicker.setManaCost("3 R R");
-            kicker.setAdditionalManaCost("R");
-            kicker.setDescription("Kicker R");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Creature 5/3 (Kicked)");
-            kicker.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(kicker);
-            
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.removeIntrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-                	card.setKicked(false);
-                }
-            };
-            
-            Command commandComes = new Command() {
-				private static final long serialVersionUID = -5895458115371755529L;
-
-				public void execute() {
-                    if(card.isKicked()) {
-                            ability.setStackDescription(card.getName()+" is not sacrificed at end of turn.");
-                            AllZone.Stack.add(ability);
-                    }
-                }//execute()
-            };//CommandComes
-            
-            card.addComesIntoPlayCommand(commandComes);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
+         //*************** START *********** START **************************
         else if(cardName.equals("Karn, Silver Golem")) {
         	final long[] timeStamp = new long[1];
         	Ability_Cost abCost = new Ability_Cost("1", cardName, true);
