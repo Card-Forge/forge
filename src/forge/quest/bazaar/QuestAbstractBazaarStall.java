@@ -93,7 +93,8 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         scrollPane.setBorder(new EmptyBorder(0,0,0,0));
         layout.setConstraints(scrollPane, constraints);
         this.add(scrollPane);
-    
+
+        this.setBorder(new EmptyBorder(0,5,0,0));
     }
 
     private void populateInventory(java.util.List<QuestAbstractBazaarItem> stallItems) {
@@ -125,7 +126,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
 
         else{
 
-            innerConstraints.insets = new Insets(5,20,5,10);
+            innerConstraints.insets = new Insets(5,20,5,5);
             for (QuestAbstractBazaarItem item : stallItems) {
                 JPanel itemPanel = item.getItemPanel();
 
