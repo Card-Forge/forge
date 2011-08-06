@@ -3431,8 +3431,8 @@ public class GameActionUtil {
 							}
 							public void selectCard(Card selected, PlayerZone zone) {
 								//probably need to restrict by controller also
-								if(selected.isCreature() && !selected.isArtifact() && zone.is(Constant.Zone.Play)
-										&& zone.getPlayer().equals(AllZone.HumanPlayer)) {
+								if(selected.isCreature() && !selected.isArtifact() && CardFactoryUtil.canTarget(abyss, selected)
+										&& zone.is(Constant.Zone.Play) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
 									AllZone.GameAction.destroyNoRegeneration(selected);
 									stop();
 								}
@@ -3440,7 +3440,7 @@ public class GameActionUtil {
 						});//Input
 					}
 					else { //computer
-						CardList targets = abyss_getTargets(player);
+						CardList targets = abyss_getTargets(player,abyss);
 						CardList indestruct = targets.getKeyword("Indestructible");
 						if(indestruct.size() > 0) {
 							AllZone.GameAction.destroyNoRegeneration(indestruct.get(0));
@@ -3456,14 +3456,15 @@ public class GameActionUtil {
 				}//resolve
 			};//sacrificeCreature
 			sacrificeCreature.setStackDescription(abyss.getName()+" - destroy a nonartifact creatur of your choice.");
-			if(abyss_getTargets(player).size() > 0)
+			if(abyss_getTargets(player,abyss).size() > 0)
 				AllZone.Stack.add(sacrificeCreature);
 		}//end for
 	}//The Abyss
 	
-	private static CardList abyss_getTargets(final Player player) {
+	private static CardList abyss_getTargets(final Player player, Card card) {
 		CardList creats = AllZoneUtil.getCreaturesInPlay(player);
 		creats = creats.filter(AllZoneUtil.nonartifacts);
+		creats = creats.getTargetableCards(card);
 		return creats;
 	}
 
