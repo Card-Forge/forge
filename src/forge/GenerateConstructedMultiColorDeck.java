@@ -417,6 +417,7 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Thran Quarry");
     remove.add("Glimmervoid");
     remove.add("Parallel Evolution");
+    remove.add("Soultether Golem");
     
     /**
      *  semi useless:
@@ -463,7 +464,55 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Chalice of the Void");
     remove.add("Political Trickery");
     remove.add("Vedalken Plotter");
-    
+    remove.add("Ponder");
+    remove.add("Omen");
+    remove.add("Twiddle");
+    remove.add("Index");
+    remove.add("Machinate");
+    remove.add("Energy Tap");
+    remove.add("Recall");
+    remove.add("Demonic Consultation");
+    remove.add("Bridge from Below");
+    remove.add("Peel from Reality");
+    remove.add("Ensnare");
+    remove.add("Scattershot");
+    remove.add("Mind's Desire");
+    remove.add("Doomsday");
+    remove.add("Daze");
+    remove.add("Impulse");
+    remove.add("Necrogenesis");
+    remove.add("Night Soil");
+    remove.add("Commune with Nature");
+    remove.add("Global Ruin");
+    remove.add("Momentous Fall");
+    remove.add("Banishing Knack");
+    remove.add("Counterbalance");
+    remove.add("High Tide");
+    remove.add("Survival of the Fittest");
+    remove.add("Animate Land");
+    remove.add("Mox Diamond");
+    remove.add("Voltaic Key");
+    remove.add("Thwart");
+    remove.add("Force of Will");
+    remove.add("Jandor's Saddlebags");
+    remove.add("Natural Selection");
+    remove.add("Blinkmoth Infusion");
+    remove.add("Eye of Ugin");
+
+
+
+    /**
+     *  Buyback cards:
+     */
+    remove.add("Capsize");
+    remove.add("Whispers of the Muse");
+    remove.add("Elvish Fury");
+    remove.add("Lab Rats");
+    remove.add("Sprout Swarm");
+
+     /**
+     *  Fog cards:
+     */
     remove.add("Fog");
     remove.add("Holy Day");
     remove.add("Respite");
@@ -487,6 +536,28 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Hidden Path");
     remove.add("Day of Destiny");
     remove.add("Hanna's Custody");
+    remove.add("Thorn of Amethyst");
+    remove.add("Squeeze");
+    remove.add("Hum of the Radix");
+    remove.add("Helm of Awakening");
+    remove.add("Feroz's Ban");
+    remove.add("Sphere of Resistance");
+    remove.add("Leyline of Singularity");
+
+
+    /**
+     *  (Color) Hosers:
+     */
+    remove.add("High Seas");
+    remove.add("Gloom");
+    remove.add("Chill");
+    remove.add("Dread of Night");
+    remove.add("Insight");
+    remove.add("Warmth");
+    remove.add("Bereavement");
+    remove.add("Yawgmoth's Edict");
+    remove.add("Havoc");
+
     
     /**
      *  Harmful effects:
@@ -556,7 +627,16 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Twilight Mire");
     remove.add("Wizards' School");
     remove.add("Wooded Bastion");
-    
+ 
+    /**
+     *  Medallions:
+     */  
+    remove.add("Sapphire Medallion");
+    remove.add("Emerald Medallion");
+    remove.add("Jet Medallion");
+    remove.add("Pearl Medallion");
+    remove.add("Ruby Medallion"); 
+
     /**
      *  manapool stuff:
      */
@@ -657,6 +737,7 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Ur-Golem's Eye");
     remove.add("Viridian Acolyte");
     remove.add("Worn Powerstone");
+    remove.add("Channel the Suns");
    
     
     final ArrayList<Card> goodLand = new ArrayList<Card>();
