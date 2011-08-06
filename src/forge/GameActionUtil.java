@@ -12384,7 +12384,6 @@ public class GameActionUtil
 			CardList scions = new CardList(play.getCards());
 			scions = scions.getName("Scion of Oona");
 			return scions.size()-1;
-
 		}
 
 		public void execute()
@@ -12401,7 +12400,7 @@ public class GameActionUtil
 			{
 				Card c = creature.get(i);
 				otherScions = countOtherScions(c);
-				if (c.getType().equals("Faerie") || c.getKeyword().contains("Changeling"))
+				if (c.getType().contains("Faerie") || c.getKeyword().contains("Changeling"))
 				{
 					c.setOtherAttackBoost(otherScions);
 					c.setOtherDefenseBoost(otherScions);
