@@ -2868,6 +2868,7 @@ res/cardsfolder/hokori_dust_drinker.txt -text svneol=native#text/plain
 res/cardsfolder/hold_the_line.txt svneol=native#text/plain
 res/cardsfolder/hollow_dogs.txt -text svneol=native#text/plain
 res/cardsfolder/hollow_trees.txt -text svneol=native#text/plain
+res/cardsfolder/hollowsage.txt -text svneol=native#text/plain
 res/cardsfolder/holy_armor.txt -text svneol=native#text/plain
 res/cardsfolder/holy_day.txt -text svneol=native#text/plain
 res/cardsfolder/holy_light.txt -text svneol=native#text/plain
