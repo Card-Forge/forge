@@ -1,7 +1,8 @@
 Name:Palladium Myr
 ManaCost:3
 Types:Artifact Creature Myr
-Textno text
+Text:no text
+PT:2/2
 K:tap: add 2
 K:SVar:RemAIDeck:True
 K:SVar:Rarity:Uncommon
