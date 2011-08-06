@@ -1,7 +1,8 @@
 BasicLandPercentage=35
 
-[Group MaxCnt=4 Percentage=15]
+[Group MaxCnt=4 Percentage=17]
 Anowon, the Ruin Sage
+Kalastria Highborn
 Malakir Bloodwitch
 Vampire Nocturnus
 [/Group]
@@ -13,7 +14,7 @@ Quag Vampires
 Vampire Lacerator
 [/Group]
 
-[Group MaxCnt=4 Percentage=22]
+[Group MaxCnt=4 Percentage=20]
 Blood Seeker
 Bloodghast
 Child of Night
@@ -52,6 +53,5 @@ Baron Sengir
 Butcher of Malakir
 Butcher of Malakir
 [/Group]
-
 
 End
