@@ -637,17 +637,20 @@ public class MagicStack extends MyObservable {
 		AllZone.Phase.resetPriority();	// ActivePlayer gains priority first after Resolve
 		Card source = sa.getSourceCard();
 		boolean fizzle = hasFizzled(sa, source);
-
+		Command buyback = null;
+		
+		
 		if (!fizzle) {
 			final Card crd = source;
 			if (sa.isBuyBackAbility()) {
-				source.addReplaceMoveToGraveyardCommand(new Command() {
+				buyback = new Command() {
 					private static final long serialVersionUID = -2559488318473330418L;
 
 					public void execute() {
 						AllZone.GameAction.moveToHand(crd);
 					}
-				});
+				};
+				source.addReplaceMoveToGraveyardCommand(buyback);
 			}
 
 			// To stop Copied Spells from going into the graveyard.
@@ -686,8 +689,11 @@ public class MagicStack extends MyObservable {
 				AllZone.getZone(source).is(Constant.Zone.Stack)){
 			if (source.getReplaceMoveToGraveyard().size() == 0)
 				AllZone.GameAction.moveToGraveyard(source);
-			else
+			else{
 				source.replaceMoveToGraveyard();
+				if (buyback != null)
+					source.getReplaceMoveToGraveyard().remove(buyback);
+			}
 		}
 
 		// After SA resolves we have to do a handful of things
