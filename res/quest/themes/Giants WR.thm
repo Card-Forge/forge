@@ -1,4 +1,12 @@
-BasicLandPercentage=38
+BasicLandPercentage=15
+
+[Group MaxCnt=4 Percentage=23]
+Plateau
+Sacred Foundry
+Jungle Shrine
+Arid Mesa
+Ancient Amphitheater
+[/Group]
 
 [Group MaxCnt=4 Percentage=13]
 Stinkdrinker Daredevil
