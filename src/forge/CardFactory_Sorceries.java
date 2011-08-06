@@ -4200,7 +4200,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    Player player = getTargetPlayer();
+                    Player player = AllZone.HumanPlayer;
+                    setTargetPlayer(player);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     CardList libList = new CardList(lib.getCards());
                     return libList.size() > 0;
@@ -4257,6 +4258,8 @@ public class CardFactory_Sorceries {
         					return c.isBasicLand();
         				}
         			});
+            		
+            		setTargetPlayer(AllZone.HumanPlayer);
             		
                     return ((graveCount - graveyard.size() > 0) && library.size() > 0);
                 }
