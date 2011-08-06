@@ -162,7 +162,138 @@ public class CardFactory_Creatures {
 	         a1.setBeforePayMana(new Input_PayManaCost(a1));
 	         a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
 	       }//*************** END ************ END **************************
+
+	    //*************** START *********** START **************************
+	    else if(cardName.equals("Dimir Guildmage"))
+	       {
+	         final SpellAbility a1 = new Ability(card, "3 B")
+	         {
+	            private static final long serialVersionUID = 1446529067071763245L;
+
+	            public void chooseTargetAI()
+	            {
+	            setTargetPlayer(Constant.Player.Human);	
+	            }
+	            
+	            public boolean canPlay()
+	            {
+	            	 if (((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)&& AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController())) && AllZone.GameAction.isCardInPlay(card) )
+	            	        return true;
+	            	     else  
+	            	          return false;
+	            }
+	             public void resolve()
+	           {
+	                    String player = getTargetPlayer();
+	                    if(player.equals(Constant.Player.Human))
+				            AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+				          else
+				            AllZone.GameAction.discardRandom(Constant.Player.Computer);  // wise discard should be here  
+   	             
+	           }	            
+	           
+	           public boolean canPlayAI()
+	           {
+	               String player = getTargetPlayer();
+	                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+	                CardList HandList = new CardList(hand.getCards());
+	                return HandList.size() > 0;
+	           }
+	         };//SpellAbility a1
+	         
+	         final SpellAbility a2 = new Ability(card, "3 U")
+	         {
+	            private static final long serialVersionUID = 1446529067071763245L;
+	            
+	            public void chooseTargetAI()
+	            {
+	            	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+	            	CardList LibList = new CardList(lib.getCards());
+	            	if (LibList.size()<3) setTargetPlayer(Constant.Player.Human); else setTargetPlayer(Constant.Player.Computer);
+	            }	           
+	            public boolean canPlay()
+	            {
+	            	 if (((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)&& AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController())) && AllZone.GameAction.isCardInPlay(card) )
+	            	        return true;
+	            	     else  
+	            	          return false;
+	            }
+	             public void resolve()
+	           {
+	                    String player = getTargetPlayer();
+	                    AllZone.GameAction.drawCard(player);  
+   	             
+	           }	            
+	           
+	           public boolean canPlayAI()
+	           {	               
+	                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+	                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+	                CardList HandList = new CardList(hand.getCards());
+	                CardList LibList = new CardList(lib.getCards());
+	                return ((HandList.size() < 3) && (LibList.size()>3));
+	           }
+	         };//SpellAbility a2
+	         card.addSpellAbility(a1);
+	         a1.setDescription("3 B: Target player discards a card.  Play this ability only any time you could play a sorcery.");
+	         a1.setStackDescription(card + "Target player discards a card.");
+	         a1.setBeforePayMana(new Input_PayManaCost(a1));
+	         a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
+	         card.addSpellAbility(a2);
+	         a2.setDescription("3 U: Target player draws a card.  Play this ability only any time you could play a sorcery.");
+	         a2.setStackDescription(card + "Target player draws a card.");
+	         a2.setBeforePayMana(new Input_PayManaCost(a2));
+	         a2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a2));
+	       }//*************** END ************ END **************************
+
 	    
+		  //*************** START *********** START **************************
+	    else if(cardName.equals("Street Wraith"))
+	       {
+	         final SpellAbility a1 = new Ability_Hand(card, "0")
+	         {
+
+	        		  private static final long serialVersionUID = -4960704261761785512L;
+
+	        		  public boolean canPlayAI() {return false;}
+
+	        	      public void resolve()
+	        	      {
+	        	    	//AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
+	        	        AllZone.GameAction.discard(card);
+	        	        AllZone.GameAction.drawCard(card.getController());
+	        	        card.cycle();	        	 
+	        	    };
+	        	 	          
+	          
+	         };//SpellAbility
+	         
+	         Input runtime = new Input()
+		        {
+		          private static final long serialVersionUID = 1959709104655340395L;
+		  		boolean once = true;
+		          public void showMessage()
+		          {
+		            //this is necessary in order not to have a StackOverflowException
+		            //because this updates a card, it creates a circular loop of observers
+		            if(once)
+		            {
+		              once = false;
+		              AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
+		              AllZone.Stack.add(a1);
+
+		              stop();
+		            }
+		          }//showMessage()
+		        };
+		        
+		     a1.setBeforePayMana(runtime);
+	         card.addSpellAbility(a1);
+	         a1.setDescription("Cycling - (Pay 2 life, Discard this card: Draw a card.)");
+     	     a1.setStackDescription(card +" Cycling: Draw a card");
+	    
+	       }//*************** END ************ END **************************
+
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Street Wraith"))
 	       {

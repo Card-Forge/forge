@@ -1,3 +1,16 @@
+Dimir Guildmage
+UB UB
+Creature Human Wizard
+no text
+2/2
+
+Street Wraith
+3 B B
+Creature Wraith
+no text
+3/4
+Swampwalk
+
 Cathartic Adept
 U
 Creature Human Wizard

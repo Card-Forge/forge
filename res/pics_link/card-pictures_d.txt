@@ -313,7 +313,7 @@ diminishing_returns.jpg	http://mtgpics.chutography.com/6E/Diminishing%20Returns.
 dimir_aqueduct.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Aqueduct.full.jpg
 dimir_cutpurse.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Cutpurse.full.jpg
 dimir_doppelganger.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Doppelganger.full.jpg
-dimir_guildmage.jpg	http://mtgpics.chutography.com/REL/Dimir%20Guildmage.full.jpg
+dimir_guildmage.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Guildmage.full.jpg
 dimir_house_guard.jpg	http://mtgpics.chutography.com/RAV/Dimir%20House%20Guard.full.jpg
 dimir_infiltrator.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Infiltrator.full.jpg
 dimir_machinations.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Machinations.full.jpg
