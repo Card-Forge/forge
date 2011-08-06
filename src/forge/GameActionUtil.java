@@ -757,401 +757,7 @@ public class GameActionUtil {
 			AllZone.Stack.add(Storm);			
 		}
 	}
-	/**
-	public static void playCard_Storm(Card c) {
-		if(c.getKeyword().contains("Storm"))
-		{
-
-			final Card StormCard = c;	
-			StormCard.removeIntrinsicKeyword("Storm");
-			final int StormNumber  = Phase.StormCount - 1;		
-			final Ability Storm = new Ability(c, "0") {	
-				public void resolve() {
-					for(int i = 0; i < (StormNumber); i++) {
-				        final SpellAbility ability = new Spell(StormCard) {
-							private static final long serialVersionUID = -1444400689073579320L;
-
-							@Override
-		    				public void resolve() {
-		    					if(StormCard.getName().equals("Empty the Warrens")) {
-		                            CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", StormCard, "R", new String[] {
-		                                    "Creature", "Goblin"}, 1, 1, new String[] {""}); 
-		                            CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", StormCard, "R", new String[] {
-		                                    "Creature", "Goblin"}, 1, 1, new String[] {""}); 
-		    					} // Empty the Warrens
-		    					
-		    					else if(StormCard.getName().equals("Hunting Pack")) {
-			                        CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", StormCard, "G", new String[] {
-			                                "Creature", "Beast"}, 4, 4, new String[] {""}); 
-		    					} // Hunting Pack		    					
-
-		    					else if(StormCard.getName().equals("Brain Freeze")) {
-									String Player = AllZone.Phase.getActivePlayer();
-						        	if(Player == "Human"){
-										String Target = getTargetPlayer();
-			    	                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Target);
-			    	                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, Target);
-			    	                    CardList libList = new CardList(lib.getCards());
-			    	                    
-			    	                    int max = 3;
-			    	                    if(libList.size() < max) max = libList.size();
-			    	                    
-			    	                    for(int i = 0; i < max; i++) {
-			    	                        Card c = libList.get(i);
-			    	                        lib.remove(c);
-			    	                        grave.add(c);
-			    	                    }
-		    				} else {
-								String Target = AllZone.GameAction.getOpponent(Player);
-			                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Target);
-			                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, Target);
-			                    CardList libList = new CardList(lib.getCards());
-			                    
-			                    int max = 3;
-			                    if(libList.size() < max) max = libList.size();
-			                    
-			                    for(int i = 0; i < max; i++) {
-			                        Card c = libList.get(i);
-			                        lib.remove(c);
-			                        grave.add(c);
-			                    }
-		    					
-		    				}
-		    					} // Brain Freeze
-		    					else if(StormCard.getName().equals("Dragonstorm")) {
-		    	                    String player = StormCard.getController();
-		    	                    if(player == "Human"){
-		    	                        CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
-		    	                        CardList dragons = new CardList();
-		    	                        
-		    	                        for(int i = 0; i < list.size(); i++) {
-		    	                            if(list.get(i).getType().contains("Dragon")
-		    	                                    || list.get(i).getKeyword().contains("Changeling")) {
-		    	                                dragons.add(list.get(i));
-		    	                            }
-		    	                        }
-		    	                        
-		    	                        if(dragons.size() != 0) {
-		    	                            Object o = AllZone.Display.getChoiceOptional("Select an Dragon to put onto the battlefield", dragons.toArray());
-		    	                            
-		    	                            AllZone.GameAction.shuffle(StormCard.getController());
-		    	                            if(o != null) {
-		    	                                //put card in hand
-		    	                                AllZone.Human_Library.remove(o);
-		    	                                AllZone.Human_Play.add((Card) o);
-		    	                            }
-		    	                        }//if
-		    	                    	
-		    	                    } else {
-		    	                        CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer);
-		    	                        CardList dragons = new CardList();
-		    	                        
-		    	                        for(int i = 0; i < list.size(); i++) {
-		    	                            if(list.get(i).getType().contains("Dragon")
-		    	                                    || list.get(i).getKeyword().contains("Changeling")) {
-		    	                                dragons.add(list.get(i));
-		    	                            }
-		    	                        }
-		    	                                            
-		    	                        if(dragons.size() != 0) {
-		    	                            CardListUtil.sortAttack(dragons);
-		    	                            Card c = dragons.get(0);
-		    	                            AllZone.GameAction.shuffle(StormCard.getController());
-		    	                            //move to hand
-		    	                            AllZone.Computer_Library.remove(c);
-		    	                            AllZone.Computer_Play.add(c);
-		    	                            
-		    	                            CardList l = new CardList();
-		    	                            l.add(c);
-		    	                            AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
-		    	                        }                    	
-		    	                    }
-		    	                    
-		    	                } // Dragonstorm
-		    					else if(StormCard.getName().equals("Ignite Memories")) {
-		    	                    Card choice = null;
-		    	                    String opponent = AllZone.GameAction.getOpponent(StormCard.getController());
-		    	                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-		    	                    Card[] handChoices = hand.getCards();
-		    	                    if (handChoices.length > 0)
-		    	                    {
-		    	                        choice = CardUtil.getRandom(handChoices);
-		    	                        handChoices[0] = choice;
-		    	                        for(int i = 1; i < handChoices.length; i++) {
-		    	                            handChoices[i] = null;
-		    	                        }
-		    	                        AllZone.Display.getChoice("Random card", handChoices);
-		    	                        AllZone.GameAction.getPlayerLife(opponent).subtractLife(
-		    	                                CardUtil.getConvertedManaCost(choice.getManaCost()));
-		    	                    } 
-		    					} // Ignite Memories
-		    					else if(StormCard.getName().equals("Haze of Rage")) {
-			                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, StormCard.getController());
-			                        CardList start = new CardList(play.getCards());
-			                        final CardList list = start.getType("Creature");
-			                        
-			                        for(int i = 0; i < list.size(); i++) {
-			                            list.get(i).addTempAttackBoost(1);
-			                        }
-			                        
-			                        play.updateObservers();
-			                        
-			                        Command untilEOT = new Command() {
-			                            private static final long serialVersionUID = -28032591440730370L;
-			                            
-			                            public void execute() {
-			                                for(int i = 0; i < list.size(); i++)
-			                                    if(AllZone.GameAction.isCardInPlay(list.get(i))) {
-			                                        list.get(i).addTempAttackBoost(-1);
-			                                    }
-			                            }
-			                        };
-			                        AllZone.EndOfTurn.addUntil(untilEOT);
-		    					} // Haze of Rage
-		    					else if(StormCard.getName().equals("Astral Steel")) {
-		    	                    String player = StormCard.getController();
-		    	                    if(player != "Human"){
-
-		    	        					String Computer = AllZone.Phase.getActivePlayer();
-		    	        					PlayerZone ComputerPlayZone = AllZone.getZone(Constant.Zone.Play, Computer);
-		    	        			        CardList ComputerCreatureList = new CardList(ComputerPlayZone.getCards());
-		    	        			        ComputerCreatureList = ComputerCreatureList.getType("Creature");
-		    	        			        ComputerCreatureList = ComputerCreatureList.filter(new CardListFilter() {
-		    	        						public boolean addCard(Card c) {
-		    	        							return c.getNetAttack() >= 2 && CardFactoryUtil.canTarget(StormCard, getTargetCard());
-		    	        						}
-		    	        					});
-		    	                            if(ComputerCreatureList.size() != 0){
-		    	                                Card[] Target = new Card[ComputerCreatureList.size()];
-		    	                    			for(int i = 0; i < ComputerCreatureList.size(); i++) {
-		    	                    				Card crd = ComputerCreatureList.get(i);
-		    	                    				Target[i] = crd;
-		    	                    			}
-		    	            			        Random randomGenerator = new Random();
-		    	          			          int randomInt = randomGenerator.nextInt(ComputerCreatureList.size());
-		    	                            	setTargetCard(Target[randomInt]);
-		    	                    }
-		    	                    }
- 		    						
-		    	                    final Card c = getTargetCard();
-		    	                    if(c != null) {
-		                            c.addTempAttackBoost(1);
-		                            c.addTempDefenseBoost(2);		                        
-		                            c.updateObservers();
-		                        
-		                        Command untilEOT = new Command() {
-		                            private static final long serialVersionUID = -28032591440730370L;
-		                            
-		                            public void execute() {
-		                                c.addTempAttackBoost(-1);
-		                                c.addTempDefenseBoost(-2);
-		                            }
-		                        };
-		                        AllZone.EndOfTurn.addUntil(untilEOT);
-		    	                    } 
-		    					} // Astral Steel
-		    					
-		    					else if(StormCard.getName().equals("Grapeshot")) {
-		    	                    String player = StormCard.getController();
-		    	                    
-		    	                    if(player == "Human"){
-		    	                    if(getTargetCard() != null) {
-		    	                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-		    	                                && CardFactoryUtil.canTarget(StormCard, getTargetCard())) getTargetCard().addDamage(1,StormCard);
-		    	                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
-		    	                    } else AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(StormCard.getController())).subtractLife(1);
-		    					} // Grapeshot
-		    					
-		    					else if(StormCard.getName().equals("Reaping the Graves")) {
-		    	                    String player = StormCard.getController();
-    	                            CardList creature = new CardList();
-    	                            PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, StormCard.getController());
-	    	                        if(zone != null) {
-    	                            creature.addAll(zone.getCards());
-    	                            creature = creature.getType("Creature"); 
- 
-		    	                    if(player == "Human"){
-		                                Card[] Target = new Card[creature.size()];
-	    	                            for(int i = 0; i < creature.size(); i++) {
-    	                    				Card crd = creature.get(i);
-    	                    				Target[i] = crd;
-	    	                            }
-		    	                        Object check = AllZone.Display.getChoiceOptional("Select creature", Target);
-		    	                        if(check != null) {
-		    	                            setTargetCard((Card) check);
-		    	                        } 
-		    	                    } else {
-		    	                            Card biggest = creature.get(0);
-		    	                            for(int i = 0; i < creature.size(); i++)
-		    	                                if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
-		    	                            		setTargetCard(biggest);
-		    	                    				}
-	    	                        Card c = getTargetCard();
-	    	                        PlayerZone grave = AllZone.getZone(c);  	                        
-	    	                        if(AllZone.GameAction.isCardInZone(c, grave)) {
-	    	                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
-	    	                            AllZone.GameAction.moveTo(hand, c);
-	    	                        }
-	    	                        }
-		    					} // Reaping the Graves
-		    					else if(StormCard.getName().equals("Scattershot")) {
-		    	                   
-		    	                    if(getTargetCard() != null) {
-		    	                        if(AllZone.GameAction.isCardInPlay(getTargetCard()) 
-		    	                                && CardFactoryUtil.canTarget(StormCard, getTargetCard())) getTargetCard().addDamage(1,StormCard);
-		    	                    }
-		    	                    } // Scattershot	
-		    					else if(StormCard.getName().equals("Sprouting Vines")) {			    	                   
-		    						AllZone.GameAction.searchLibraryBasicLand(StormCard.getController(), 
-		    								Constant.Zone.Hand, false);
-		    	                    } // Sprouting Vines
-		    					else if(StormCard.getName().equals("Temporal Fissure")) {
-		    	                    String player = StormCard.getController();
-		    	                    if(player != "Human"){
-		    	                    	CardList human = CardFactoryUtil.AI_getHumanCreature(StormCard, true);
-		    	                		CardList human2 = CardFactoryUtil.AI_getHumanArtifact(StormCard, true);
-		    	                    	CardList human3 = CardFactoryUtil.AI_getHumanEnchantment(StormCard, true);
-		    	                    	CardList human4 = CardFactoryUtil.getLandsInPlay(player);
-		    	                    	if(human != null) setTargetCard(CardFactoryUtil.AI_getBestCreature(human));
-		    	                    	else if(human2 != null) setTargetCard(CardFactoryUtil.AI_getBestArtifact(human2));
-		    	                    	else if(human3 != null) setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human3,StormCard, true));
-		    	                    	else if(human4 != null) setTargetCard(CardFactoryUtil.AI_getBestLand(human4));
-		    	                    }
-
-		    	                    if(getTargetCard() != null) {
-		    	                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-		    	                            && CardFactoryUtil.canTarget(StormCard, getTargetCard())) {
-		    	                        if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
-		    	                        else {
-		    	                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
-		                					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-	                			        	play.remove(getTargetCard());
-		    	                            AllZone.GameAction.moveTo(hand, getTargetCard());
-		    	                        }
-		    	                    }
-		    	                    }
-		    	                        } // Temporal Fissure
-		    					else if(StormCard.getName().equals("Tendrils of Agony")) {
-			    			        PlayerLife player = AllZone.GameAction.getPlayerLife(StormCard.getController());
-			                        String opponent = AllZone.GameAction.getOpponent(StormCard.getController());
-			                        PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
-			    			        target.subtractLife(2);
-			    			        player.addLife(2);
-		    	                        } // Tendrils of Agony	
-		    					else if(StormCard.getName().equals("Volcanic Awakening")) {
-		    	                    String player = StormCard.getController();
-		    	                    if(player != "Human"){
-		    	                    //target basic land that Human only has 1 or 2 in play
-		    	                    CardList land = new CardList(AllZone.Human_Play.getCards());
-		    	                    land = land.getType("Land");
-		    	                    
-		    	                    Card target = null;
-		    	                    
-		    	                    String[] name = {"Forest", "Swamp", "Plains", "Mountain", "Island"};
-		    	                    for(int i = 0; i < name.length; i++)
-		    	                        if(land.getName(name[i]).size() == 1) {
-		    	                            target = land.getName(name[i]).get(0);
-		    	                            break;
-		    	                        }
-		    	                    
-		    	                    //see if there are only 2 lands of the same type
-		    	                    if(target == null) {
-		    	                        for(int i = 0; i < name.length; i++)
-		    	                            if(land.getName(name[i]).size() == 2) {
-		    	                                target = land.getName(name[i]).get(0);
-		    	                                break;
-		    	                            }
-		    	                    }//if
-		    	                    if(target == null) {
-		    	                        land.shuffle();
-		    	                        target = land.get(0);
-		    	                    }
-		    	                    setTargetCard(target);
-		    	                    }
-		    	                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-		    	                            && CardFactoryUtil.canTarget(StormCard, getTargetCard())) {
-		    	                        AllZone.GameAction.destroy(getTargetCard());
-		    					}
-		    	                        } // Volcanic Awakening	
-		    					else if(StormCard.getName().equals("Wing Shards")) {
-			                    	Card attack[] = AllZone.Combat.getAttackers(); 
-			                    	Card target = null;
-			                        String player = StormCard.getController();
-			                        if(player != "Human"){
-			                            Object check = AllZone.Display.getChoiceOptional("Select creature", attack);
-			                            if(check != null) {
-			                               target = ((Card) check);
-			                            } 
-			                        } else {
-			                            CardList Targets = new CardList();
-			                            String TPlayer = AllZone.GameAction.getOpponent(StormCard.getController());
-	    	        					PlayerZone TZone = AllZone.getZone(Constant.Zone.Play, TPlayer);
-			                            for(int i = 0; i < attack.length; i++) {
-			                				Card crd = attack[i];			                                
-				                                if(AllZone.GameAction.isCardInZone(attack[i], TZone)) Targets.add(crd);
-			                            }
-			                            CardListUtil.sortAttack(Targets);
-			                            if(Targets.size() != 0) target = (Targets.get(Targets.size() - 1));
-			                            }
-
-			                        if(target != null) AllZone.GameAction.sacrifice(target); 
-		    	                    } // Wing Shards
-		    					else if(StormCard.getName().equals("Mind's Desire")) {
-		        					String player = AllZone.Phase.getActivePlayer();
-		        					if(player == "Human") AllZone.GameAction.shuffle(StormCard.getController());
-		        					// New
-		        				PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);	
-		        				
-		        				if(AllZone.GameAction.isCardInZone(StormCard,Play) == false) {
-		        					Play.add(StormCard);
-		        				} else {
-		        				// New
-		    			        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-		    			        CardList libList = new CardList(lib.getCards());
-		    			        Card c = null;
-		    			        if(libList.size() > 0) {
-		    			        	c = libList.get(0);
-		    			        }
-		    	                if(c != null) {
-		        			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
-		                            AllZone.GameAction.moveTo(RFG, c);
-		                            StormCard.attachCard(c);  
-		    	                }
-		        				}
-		    	                    } // Mind's Desire
- 
-		    				} // Resolve
-		                        
-		    				};
-		    			// ability.setStackDescription(StormCard + " - Storm Copy.");
-		    			// Add all targetted storm cards to the if statement
-		    			ability.getSourceCard().setCopiedSpell(true);
-					//	Phase.StormCount = Phase.StormCount - 1;
-	                    String player = StormCard.getController();
-	                    ability.setManaCost("0");
-	                    if(player == "Human"){
-	    			 if(StormCard.getName().equals("Astral Steel")) {
- 						AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability));		
-	    			 	} else if(StormCard.getName().equals("Grapeshot")) {
-	    		        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
-	    			 	} else if(StormCard.getName().equals("Scattershot")) {
-	    		        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability));
-	    			 	} else if(StormCard.getName().equals("Brain Freeze")) {
-	    		        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
-	    			 	} else if(StormCard.getName().equals("Temporal Fissure")) {
-	    		        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetPermanent(ability));
-	    			 	} else if(StormCard.getName().equals("Volcanic Awakening")) {
-	    		        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetType(ability, "Land"));
-	    			 	} else AllZone.Stack.add(ability);	
-		                } else AllZone.Stack.add(ability);			
-				};	// For
-				}
-			};
-			Storm.setStackDescription(c + " - Storm.");
-			AllZone.Stack.add(Storm);			
-		}
-	}
-	**/
+	
 	public static void playCard_Vengevine(Card c) {
 		if (c.isCreature() == true && (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2))
 		{
@@ -1723,8 +1329,7 @@ public class GameActionUtil {
 		list = list.getName("Thief of Hope");
 
 		if(list.size() > 0) {
-			if(c.getType().contains("Spirit") || c.getType().contains("Arcane")
-					|| c.getIntrinsicKeyword().contains("Changeling")) {
+			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					Ability ability2 = new Ability(card, "0") {
@@ -1768,8 +1373,7 @@ public class GameActionUtil {
 		list = list.getName("Infernal Kirin");
 
 		if(list.size() > 0) {
-			if(c.getType().contains("Spirit") || c.getType().contains("Arcane")
-					|| c.getIntrinsicKeyword().contains("Changeling")) {
+			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final int converted = CardUtil.getConvertedManaCost(c.getManaCost());
@@ -1826,8 +1430,7 @@ public class GameActionUtil {
 		list = list.getName("Cloudhoof Kirin");
 
 		if(list.size() > 0) {
-			if(c.getType().contains("Spirit") || c.getType().contains("Arcane")
-					|| c.getIntrinsicKeyword().contains("Changeling")) {
+			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final int converted = CardUtil.getConvertedManaCost(c.getManaCost());
@@ -1884,8 +1487,7 @@ public class GameActionUtil {
 		list = list.getName("Bounteous Kirin");
 
 		if(list.size() > 0) {
-			if(c.getType().contains("Spirit") || c.getType().contains("Arcane")
-					|| c.getIntrinsicKeyword().contains("Changeling")) {
+			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final int converted = CardUtil.getConvertedManaCost(c.getManaCost());
@@ -4424,7 +4026,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Dingus Staff")) destroyCreature_Dingus_Staff(c, destroyed);
 		else if(c.getName().equals("Dauthi Ghoul") && destroyed.getKeyword().contains("Shadow")) destroyCreature_Dauthi_Ghoul(
 				c, destroyed);
-		else if(c.getName().equals("Prowess of the Fair") && destroyed.getType().contains("Elf")
+		else if(c.getName().equals("Prowess of the Fair") && destroyed.isType("Elf")
 				&& !destroyed.isToken() && !c.equals(destroyed)
 				&& destroyed.getController().equals(c.getController())) destroyCreature_Prowess_of_the_Fair(c,
 						destroyed);
@@ -4987,8 +4589,7 @@ public class GameActionUtil {
 				CardList plants = new CardList(play.getCards());
 				plants = plants.filter(new CardListFilter() {
 					public boolean addCard(Card card) {
-						return card.isCreature() && card.getType().contains("Plant") || 
-						card.getKeyword().contains("Changeling");
+						return (card.isCreature() && card.isType("Plant"));
 					}
 				});
 
@@ -6834,8 +6435,7 @@ public class GameActionUtil {
 
 					CardListFilter filter = new CardListFilter() {
 						public boolean addCard(Card c) {
-							return c.isCreature() && !c.getType().contains("Vampire")
-							&& !c.getKeyword().contains("Changeling");
+							return (c.isCreature() && !c.isType("Vampire"));
 						}
 					};
 
@@ -9879,7 +9479,7 @@ public class GameActionUtil {
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
 					if(c.getKeyword().contains(keyword)
-							&& c.getType().contains("Wall")) {
+							&& c.isType("Wall")) {
 						c.removeIntrinsicKeyword(keyword);
 						gloriousAnthemList.add(c);
 					}
@@ -13534,8 +13134,7 @@ public class GameActionUtil {
 			current = current.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return !c.isToken()
-					&& (c.getType().contains("Elf") || c.getKeyword().contains(
-							"Changeling"));
+					&& (c.getType().contains("Elf") || c.getKeyword().contains("Changeling"));
 				}
 
 			});
@@ -14261,10 +13860,8 @@ public class GameActionUtil {
 
 			tree = tree.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return (c.getKeyword().contains("Changeling") || c.getType().contains(
-							"Treefolk"))
-							&& !c.getName().equals(
-									"Dauntless Dourbark");
+					return (c.getKeyword().contains("Changeling") || c.getType().contains("Treefolk"))
+							&& !c.getName().equals("Dauntless Dourbark");
 				}
 			});
 			if(tree.size() > 0) return true;
@@ -14278,9 +13875,8 @@ public class GameActionUtil {
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.getType().contains("Treefolk")
-					|| c.getKeyword().contains(
-							"Changeling")
-							|| c.getType().contains("Forest");
+						|| c.getKeyword().contains("Changeling")
+						|| c.getType().contains("Forest");
 				}
 			});
 
@@ -15963,8 +15559,7 @@ public class GameActionUtil {
 			cenns = cenns.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.getName().equals("Wizened Cenn")
-					&& (c.getType().contains("Kithkin") || c.getKeyword().contains(
-							"Changeling"));
+					&& (c.getType().contains("Kithkin") || c.getKeyword().contains("Changeling"));
 				}
 			});
 			return cenns.size() - 1;
@@ -16128,8 +15723,7 @@ public class GameActionUtil {
 				public boolean addCard(Card c) {
 					return c.getName().equals(
 							"Cemetery Reaper")
-							&& (c.getType().contains("Zombie") || c.getKeyword().contains(
-									"Changeling"));
+							&& (c.getType().contains("Zombie") || c.getKeyword().contains("Changeling"));
 				}
 			});
 			return reapers.size() - 1;
@@ -16212,8 +15806,7 @@ public class GameActionUtil {
 				public boolean addCard(Card c) {
 					return c.getName().equals(
 							"Captain of the Watch")
-							&& (c.getType().contains("Soldier") || c.getKeyword().contains(
-									"Changeling"));
+							&& (c.getType().contains("Soldier") || c.getKeyword().contains("Changeling"));
 				}
 			});
 			return capts.size() - 1;
@@ -16293,8 +15886,7 @@ public class GameActionUtil {
 				public boolean addCard(Card c) {
 					return c.getName().equals(
 							"Veteran Swordsmith")
-							&& (c.getType().contains("Soldier") || c.getKeyword().contains(
-									"Changeling"));
+							&& (c.getType().contains("Soldier") || c.getKeyword().contains("Changeling"));
 				}
 			});
 			return cenns.size() - 1;
@@ -16372,8 +15964,7 @@ public class GameActionUtil {
 				public boolean addCard(Card c) {
 					return c.getName().equals(
 							"Veteran Armorsmith")
-							&& (c.getType().contains("Soldier") || c.getKeyword().contains(
-									"Changeling"));
+							&& (c.getType().contains("Soldier") || c.getKeyword().contains("Changeling"));
 				}
 			});
 			return cenns.size() - 1;
@@ -16517,8 +16108,7 @@ public class GameActionUtil {
 					public boolean addCard(Card c) {
 						return c.getType().contains("Treefolk")
 						|| c.getType().contains("Forest")
-						|| c.getKeyword().contains(
-								"Changeling");
+						|| c.getKeyword().contains("Changeling");
 					}
 				});
 
@@ -17257,8 +16847,8 @@ public class GameActionUtil {
 				Card c = creature.get(i);
 				otherBrigadiers = countOtherBrigadiers();
 				int boost = 0;
-				if(c.getType().contains("Bird")) boost++;
-				if(c.getType().contains("Soldier")) boost++;
+				if(c.isType("Bird")) boost++;
+				if(c.isType("Soldier")) boost++;
 				c.setOtherAttackBoost(boost * otherBrigadiers);
 				c.setOtherDefenseBoost(boost * otherBrigadiers);
 			}// for inner
@@ -17335,8 +16925,7 @@ public class GameActionUtil {
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
 				otherScions = countOtherScions(c);
-				if(c.getType().contains("Faerie")
-						|| c.getKeyword().contains("Changeling")) {
+				if(c.getType().contains("Faerie") || c.getKeyword().contains("Changeling")) {
 					c.setOtherAttackBoost(otherScions);
 					c.setOtherDefenseBoost(otherScions);
 					if(!c.getExtrinsicKeyword().contains(
@@ -20229,8 +19818,7 @@ public class GameActionUtil {
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
 					if(c.getType().contains(card.getChosenType())
-							|| c.getKeyword().contains(
-									"Changeling")) {
+							|| c.getKeyword().contains("Changeling")) {
 						c.addSemiPermanentAttackBoost(1);
 						c.addSemiPermanentDefenseBoost(1);
 						gloriousAnthemList.add(c);
@@ -20272,8 +19860,7 @@ public class GameActionUtil {
 				creature = creature.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
 						return c.getType().contains("Saproling")
-						|| c.getKeyword().contains(
-								"Changeling");
+						|| c.getKeyword().contains("Changeling");
 					}
 				});
 
@@ -20315,8 +19902,7 @@ public class GameActionUtil {
 				creature = creature.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
 						return c.getType().contains("Squirrel")
-						|| c.getKeyword().contains(
-								"Changeling");
+						|| c.getKeyword().contains("Changeling");
 					}
 				});
 
