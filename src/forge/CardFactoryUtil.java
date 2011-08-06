@@ -1856,25 +1856,6 @@ public class CardFactoryUtil {
     	return onLeavesPlay;
     }//enPump_LeavesPlay
     
-    public static Ability_Reflected_Mana getReflectedManaAbility(final Card card, String colorOrType, String who) {
-    	
-    	String whoString;
-    	if (who.startsWith("Opp")) {
-    		whoString = "an opponent controls";
-    	} else
-    		whoString = "you control";
-    	
-    	String abString = "tap: add to your mana pool one mana of any " + colorOrType.toLowerCase() +
-    		" that a land " + whoString + " could produce.";
-
-    	Ability_Reflected_Mana theAbility = new Ability_Reflected_Mana(card, abString, colorOrType, who);
- 
-    	return theAbility;
-    	//((ReflectedManaInfo)theAbility.choices_made[0]).colorChosen = new String("0");
-    	//((ReflectedManaInfo)theAbility.choices_made[0]).colorOrType = new String(colorOrType);
-    	//((ReflectedManaInfo)theAbility.choices_made[0]).who = new String(who);
-    } // End getReflectedManaAbility
-    
     public static Ability getForbiddenOrchardAbility(final Card card, Player player)
     {
     	final Player opp = player;
@@ -2004,11 +1985,12 @@ public class CardFactoryUtil {
     
     public static Ability_Mana getEldraziSpawnAbility(final Card c)
     {
-    	SpellAbility mana = new Ability_Mana(c, "Sacrifice CARDNAME: Add 1 to your mana pool.") {
-			private static final long serialVersionUID = 2384540533244132975L;
+    	Ability_Cost cost = new Ability_Cost("Sac<1/CARDNAME>", c.getName(), true);
+    	Ability_Mana mana = new Ability_Mana(c, cost, "1"){
+			private static final long serialVersionUID = -2478676548112738019L;
     	};
-    	
-		return (Ability_Mana)mana;
+		mana.setDescription("Sacrifice CARDNAME: Add 1 to your mana pool.");
+		return mana;
     }
     
     

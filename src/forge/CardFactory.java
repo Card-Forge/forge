@@ -252,15 +252,7 @@ public class CardFactory implements NewConstants {
         
         return -1;
     }
-    
-    private final int shouldManaAbility(Card c) {
-        ArrayList<String> a = c.getIntrinsicKeyword();
-        for(int i = 0; i < a.size(); i++)
-            if(a.get(i).toString().contains(": add ") || a.get(i).toString().contains(": Add ") ) return i;
-        return -1;
-    }
-    
-    
+
     final private Card getCard2(final String cardName, final Player owner) {
         //o should be Card object
         Object o = map.get(cardName);
@@ -1779,21 +1771,6 @@ public class CardFactory implements NewConstants {
             }
         }//Spore Saproling
         */
-        
-        if (hasKeyword(card, "abAddReflectedMana") != -1) {
-        	int n = hasKeyword(card,"abAddReflectedMana");
-        	
-        	String parse = card.getKeyword().get(n).toString();
-            card.removeIntrinsicKeyword(parse);
-        	String[] k = parse.split(":");
-        	
-        	// Reflecting Pool, Exotic Orchard, Fellwar Stone
-        	card.setReflectedLand(true);
-        	//
-            final Ability_Mana reflectedManaAbility = CardFactoryUtil.getReflectedManaAbility(card, k[1], k[2]); 
-
-            card.addSpellAbility(reflectedManaAbility);
-        } // ReflectingPool
         
         if(hasKeyword(card, "spDamageTgt") != -1) {
             int n = hasKeyword(card, "spDamageTgt");
@@ -4711,58 +4688,6 @@ public class CardFactory implements NewConstants {
         }// spPumpTgt
         */
         
-
-        while(shouldManaAbility(card) != -1) {
-            int n = shouldManaAbility(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                final Ability_Mana ability = new Ability_Mana(card, parse) {
-                    private static final long serialVersionUID = -113811381138L;
-                    
-                    @Override
-                    public boolean canPlayAI() {
-                        return false;
-                    }
-                };
-                //ability.setDescription(parse);
-                card.addSpellAbility(ability);
-            }
-        }
-        
-        while(hasKeyword(card,"paintap") != -1)
-        {
-           String toParse = card.getIntrinsicKeyword().get(hasKeyword(card,"paintap"));
-           card.removeIntrinsicKeyword(toParse);
-           String[] splitkeyword = toParse.split(":");
-
-           final int amountHurt = Integer.parseInt(splitkeyword[1]);
-           final String manaGenerated = splitkeyword[2];
-           StringBuilder sb = new StringBuilder();
-           sb.append("tap: add ").append(manaGenerated).append(" to your mana pool. CARDNAME deals ").append(amountHurt).append(" damage to you.");
-           final String abilityDescriptionString = sb.toString();
-           
-           // final Ability_Mana addMana = new Ability_Mana(card, "tap: add " + manaGenerated + " to your mana pool. CARDNAME deals " + amountHurt + " damage to you.") {
-           
-           final Ability_Mana addMana = new Ability_Mana(card, abilityDescriptionString) {
-                 private static final long serialVersionUID = -259088242789L;
-                 
-                 @Override
-                 public void resolve()
-                 {
-                	 card.getController().addDamage(amountHurt, card);
-                	 super.resolve();
-                 }
-                 
-                 @Override
-                 public String mana() {
-                 return manaGenerated;
-              }
-                                                
-            };
-            card.addSpellAbility(addMana);
-        }//paintap
-        
         ////////////////////////////////////////////////////////////////
         
         if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.") || 
@@ -6409,66 +6334,6 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-       
-        
-        //*************** START ************ START **************************
-        else if(cardName.equals("Gemstone Array")) {
-            final Ability store = new Ability(card, "2") {
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.CHARGE, 1);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Phase.is(Constant.Phase.Main2, AllZone.ComputerPlayer);
-                }
-            };
-            store.setDescription("2: Put a charge counter on Gemstone Array.");
-            store.setStackDescription("Put a charge counter on Gemstone Array");
-            card.addSpellAbility(store);
-            
-            final Ability_Mana retrieve = new Ability_Mana(card,
-                    "0, Remove a charge counter from Gemstone Array: Add one mana of any color to your mana pool.") {
-                private static final long serialVersionUID = -2938965362221626028L;
-                
-                @Override
-                public void undo() {
-                    card.addCounter(Counters.CHARGE, 1);
-                }
-                
-                //@Override
-                public String mana() {
-                    return this.choices_made[0].toString();
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(choices_made[0] == null) choices_made[0] = "1";
-                    return super.canPlay() && card.getCounters(Counters.CHARGE) > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.CHARGE, 1);
-                    super.resolve();
-                }
-            };
-            retrieve.choices_made = new String[1];
-            retrieve.setBeforePayMana(new Input() {
-                
-                private static final long serialVersionUID = 376497609786542558L;
-                
-                @Override
-                public void showMessage() {
-                    retrieve.choices_made[0] = Input_PayManaCostUtil.getShortColorString((String)(AllZone.Display.getChoiceOptional(
-                            "Select a Color", Constant.Color.onlyColors)));
-                    AllZone.Stack.add(retrieve);
-                    stop();
-                }
-            });
-            card.addSpellAbility(retrieve);
-        }//*************** END ************ END **************************
         
 
         //*************** START *********** START **************************
@@ -7029,44 +6894,7 @@ public class CardFactory implements NewConstants {
 
             ability.setDescription(abCost+"Look at target player's hand.");
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Everflowing Chalice")) {
-        	final Ability_Mana addMana = new Ability_Mana(card, "tap: add 1 to your mana pool for each charge counter on Everflowing Chalice.") {
- 				private static final long serialVersionUID = -2661488839088242789L;
-
- 				@Override
-				public String mana() {
-						return Integer.toString(card.getCounters(Counters.CHARGE));
-                }
-				                      		
-        	};
-
-        	final Ability addChargeCounters = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.CHARGE, card.getMultiKickerMagnitude());
-                    card.setMultiKickerMagnitude(0);
-                }
-            };
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName);
-            sb.append(" enters the battlefield with a charge counter on it for each time it was kicked.");
-            addChargeCounters.setStackDescription(sb.toString());
-            
-            final Command comesIntoPlay = new Command() {
-				private static final long serialVersionUID = 4245563898487609274L;
-
-				public void execute() {
-                    AllZone.Stack.add(addChargeCounters);
-                }
-            };
-            card.addSpellAbility(addMana);
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Chromatic Star")) {
@@ -7646,27 +7474,28 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Black Mana Battery") || cardName.equals("Blue Mana Battery")
         		|| cardName.equals("Green Mana Battery") || cardName.equals("Red Mana Battery")
         		|| cardName.equals("White Mana Battery")) {
+        	
         	final int[] num = new int[1];
         	String name[] = cardName.split(" ");
         	final String shortString = Input_PayManaCostUtil.getShortColorString(name[0].trim().toLowerCase());
         	StringBuilder desc = new StringBuilder();
-        	desc.append("tap, Remove any number of charge counters from ");
-        	desc.append(cardName);
-        	desc.append(": Add ");
-        	desc.append(shortString);
-        	desc.append(" to your mana pool, then add an additional ");
-        	desc.append(shortString);
-        	desc.append(" to your mana pool for each charge counter removed this way.");
+        	desc.append("tap, Remove any number of charge counters from ").append(cardName);
+        	desc.append(": Add ").append(shortString).append(" to your mana pool, then add an additional ");
+        	desc.append(shortString).append(" to your mana pool for each charge counter removed this way.");
             
-            final Ability_Mana addMana = new Ability_Mana(card, desc.toString()) {
+        	final Ability_Mana abMana = new Ability_Mana(card, "0", shortString){
+				private static final long serialVersionUID = -4506828762302357781L;
+        		
+                @Override
+                public boolean canPlay(){
+                	return false;
+                }
+        	};
+        	abMana.undoable = false;
+        	
+            final Ability addMana = new Ability(card, "0", desc.toString()) {
             	private static final long serialVersionUID = -5356224416791741957L;
 
-				@Override
-                public void undo() {
-                    card.addCounter(Counters.CHARGE, num[0]);
-                    card.untap();
-                }
-                
 				//@Override
                 public String mana() {
                 	StringBuilder mana = new StringBuilder();
@@ -7679,9 +7508,12 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    card.subtractCounter(Counters.CHARGE, num[0]);
-                    card.tap();
-                    super.resolve();
+                	abMana.produceMana(mana());
+                }
+                
+                @Override
+                public boolean canPlayAI(){
+                	return false;
                 }
             };
             
@@ -7699,55 +7531,21 @@ public class CardFactory implements NewConstants {
                             "Charge counters to remove", choices));
                     if(null != answer && !answer.equals("")) {
                     	num[0] = Integer.parseInt(answer);
+                        card.tap();
+                        card.subtractCounter(Counters.CHARGE, num[0]);
+                        stop();
                         AllZone.Stack.add(addMana);
+                        return;
                     }
                     stop();
                 }
             };
             
+            addMana.setDescription(desc.toString());
             addMana.setBeforePayMana(runtime);
             card.addSpellAbility(addMana);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START ************ START **************************
-        else if(cardName.equals("Standing Stones")) {
-        	/*
-        	 * 1, Tap, Pay 1 life: Add one mana of any color to your mana pool.
-        	 */
-        	Ability_Cost abCost = new Ability_Cost("1 T PayLife<1>", cardName, true);
-        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = -5393697921811242255L;
-
-				@Override
-        		public void resolve() {
-        			String color = "";
-
-        			Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.Colors);
-        			color = (String) o;
-
-        			if(color.equals("white")) color = "W";
-        			else if(color.equals("blue")) color = "U";
-        			else if(color.equals("black")) color = "B";
-        			else if(color.equals("red")) color = "R";
-        			else if(color.equals("green")) color = "G";
-
-        			Card mp = AllZone.ManaPool;
-        			mp.addExtrinsicKeyword("ManaPool:" + color);
-        		}
-        	};
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(abCost).append("Add one mana of any color to your mana pool.");
-        	mana.setDescription(sbDesc.toString());
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(cardName).append(" - add one mana of any color to your mana pool.");
-        	mana.setStackDescription(sbStack.toString());
-        	
-        	card.addSpellAbility(mana);
-        }//*************** END ************ END **************************
-        
+        }
+        //*************** END ************ END **************************        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sorcerer's Strongbox")) {

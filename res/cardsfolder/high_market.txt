@@ -2,7 +2,7 @@ Name:High Market
 ManaCost:no cost
 Types:Land
 Text:no text
-K:tap: add 1
+A:AB$Mana|Cost$T|Produced$1|SpellDescription$Add 1 to your mana pool.
 A:AB$GainLife | Cost$ 1 Sac<1/Creature> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

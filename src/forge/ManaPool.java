@@ -7,13 +7,12 @@ import java.util.Map;
 
 
 public class ManaPool extends Card {
+	// current paying moved to SpellAbility
+	
 	private ArrayList<Mana> floatingMana = new ArrayList<Mana>();
 	private int[] floatingTotals = new int[7];	// WUBRGCS
 	private final static Map<String,Integer> map = new HashMap<String,Integer>();
-	 
-	private ArrayList<Mana> payingMana = new ArrayList<Mana>();
-	private ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
-	
+
     public final static String colors  = "WUBRG";
     public final static String mcolors = "1WUBRG";
     private Player owner;
@@ -53,11 +52,12 @@ public class ManaPool extends Card {
         		normalMana[map.get(m.getColor())] += m.getAmount();
         }
         
-        StringBuilder sbNormal = new StringBuilder("Mana Available:\n");
-        StringBuilder sbSnow = new StringBuilder("Snow Mana Available:\n");
+        StringBuilder sbNormal = new StringBuilder();
+        StringBuilder sbSnow = new StringBuilder();
         if (!isEmpty()){
 	        for(int i = 0; i < 6; i++){
 	        	if (i == 5){
+	        		// Put colorless first
 	        		if (normalMana[i] > 0)
 	        			sbNormal.insert(0, normalMana[i] + " ");
 	        		if (snowMana[i] > 0)
@@ -71,6 +71,9 @@ public class ManaPool extends Card {
 	        	}
 	        }
         }
+        
+        sbNormal.insert(0, "Mana Available:\n");
+        sbSnow.insert(0, "Snow Mana Available:\n");
 
         return sbNormal.toString() + "\n" + sbSnow.toString();
     }
@@ -98,11 +101,7 @@ public class ManaPool extends Card {
         }
         return res.toString();
     }
-    
-    public void addMana(Ability_Mana am) {
-    	addManaToFloating(am.mana(), am.getSourceCard());
-    }
-    
+
     public void addManaToPool(ArrayList<Mana> pool, Mana mana){
     	pool.add(mana);
     	if (pool.equals(floatingMana)){
@@ -117,12 +116,6 @@ public class ManaPool extends Card {
     	for(Mana m : manaList){
     		addManaToPool(floatingMana, m);
     	}
-    }
-    
-    public void addManaToPaying(String manaStr, Card card) {
-    	ArrayList<Mana> manaList = convertStringToMana(manaStr, card);
-    	for(Mana m : manaList)
-    		addManaToPool(payingMana, m);
     }
     
     public static ArrayList<Mana> convertStringToMana(String manaStr, Card card){
@@ -293,10 +286,6 @@ public class ManaPool extends Card {
     	return choice;
     }
     
-    public void removeManaFromPaying(ManaCost mc, Card c){
-    	removeManaFrom(payingMana, mc, c);
-    }
-    
     public void removeManaFromFloating(ManaCost mc, Card c){
     	removeManaFrom(floatingMana, mc, c);
     }
@@ -409,7 +398,7 @@ public class ManaPool extends Card {
         return res.toArray(new String[0]);
     }
     
-    private ManaCost subtractMultiple(String[] cost, ManaCost m){
+    private ManaCost subtractMultiple(SpellAbility sa, String[] cost, ManaCost m){
         for(String s:cost){
         	if (isEmpty())
         		break;
@@ -426,37 +415,59 @@ public class ManaPool extends Card {
             	if (isEmpty())
             		break;
             		
-            	m = subtractOne(m, s);
+            	m = subtractOne(sa, m, s);
         	}
         }
     	return m;
     }
     
-    public ManaCost subtractMana(ManaCost m, Ability_Mana... mAbilities) {
+    public ManaCost subtractMana(SpellAbility sa, ManaCost m, Ability_Mana... mAbilities) {
+    	ArrayList<Ability_Mana> paidAbs = sa.getPayingManaAbilities();
+    	
         if(mAbilities.length == 0) {
         	// paying from Mana Pool
             if(m.isPaid() || isEmpty()) return m;
 
             String[] cost = formatMana(m.toString());
-            return subtractMultiple(cost, m);
+            return subtractMultiple(sa, cost, m);
         }
         
         // paying via Mana Abilities
         for(Ability_Mana mability:mAbilities) {
-            paidAbilities.add(mability);
+        	paidAbs.add(mability);
             String[] cost = formatMana(mability);
-            m = subtractMultiple(cost, m);
+            m = subtractMultiple(sa, cost, m);
         }
 
         return m;
     }
     
-    public void subtractOne(String Mana) {
-        subtractOne(new ManaCost(Mana), Mana);
+    public void subtractOne(String manaStr) {
+        // Just subtract from floating, used by removeExtrinsicKeyword
+    	ManaCost manaCost = new ManaCost(manaStr);
+    	if (manaStr.trim().equals("") || manaCost.isPaid()) return;
+    	
+    	// get a mana of this type from floating, bail if none available
+    	Mana mana = getManaFrom(floatingMana, manaStr);
+    	if (mana == null) return;	// no matching mana in the pool
+    	
+    	Mana[] manaArray = mana.toSingleArray();
+    	
+    	for(int i = 0; i< manaArray.length; i++){
+    		Mana m = manaArray[i];
+	    	if (manaCost.isNeeded(m)){
+	    		manaCost.payMana(m);
+	    		findAndRemoveFrom(floatingMana, m);
+	    	}
+	    	else
+	    		break;
+    	}
     }
     
-    public ManaCost subtractOne(ManaCost manaCost, String manaStr) {
+    public ManaCost subtractOne(SpellAbility sa, ManaCost manaCost, String manaStr) {
     	if (manaStr.trim().equals("") || manaCost.isPaid()) return manaCost;
+    	
+    	ArrayList<Mana> payMana = sa.getPayingMana();
     	
     	// get a mana of this type from floating, bail if none available
     	Mana mana = getManaFrom(floatingMana, manaStr);
@@ -468,7 +479,7 @@ public class ManaPool extends Card {
     		Mana m = manaArray[i];
 	    	if (manaCost.isNeeded(m)){
 	    		manaCost.payMana(m);
-	    		payingMana.add(m);
+	    		payMana.add(m);
 	    		findAndRemoveFrom(floatingMana, m);
 	    	}
 	    	else
@@ -484,35 +495,40 @@ public class ManaPool extends Card {
         return total;
     }
     
-    public void clearPay(boolean refund) {
-        paidAbilities.clear();
+    public void clearPay(SpellAbility ability, boolean refund) {
+    	ArrayList<Ability_Mana> payAbs = ability.getPayingManaAbilities(); 
+    	ArrayList<Mana> payMana = ability.getPayingMana();
+    	
+    	payAbs.clear();
         // move non-undoable paying mana back to floating
         if (refund){	
-	        for(Mana m : payingMana)
+	        for(Mana m : payMana)
 	        	addManaToPool(floatingMana, m);
         }
         
-        payingMana.clear();
+        payMana.clear();
     }
     
-    public boolean accountFor(String[] mana, Card c){
-    	// This might be more complex then it needs to be but here's the rundown
-    	// When attempting to undo mana from a source, account for all of the mana produced by the source
-    	// in both Paying and Floating pools. Marking mana as we go through. If it's accounted for
-    	// remove the mana at the end and return true, so undo() can be called.
-    	// Otherwise, clearPay will be called and dump the Paying Pool back into the Floating
-    	// Example: Sol Ring taps for 2 to partially play for a Spell that costs 1G. One colorless goes in paying 
-    	// and one goes into the mana pool. Now if the spell is canceled, each needs to be removed so Sol can untap.
-    	boolean flag = false;
-    	boolean paying = true;
-    	int j = 0, i = 0;
-    	Mana m;
+    public boolean accountFor(SpellAbility sa, String[] mana, Card c){
+    	// todo: account for unpaying mana in payMana and floatingPool
+    	ArrayList<Mana> payMana = sa.getPayingMana(); 
+    	
     	ArrayList<Mana> removePaying = new ArrayList<Mana>();
     	ArrayList<Mana> removeFloating = new ArrayList<Mana>();
+    	
+    	int i = 0, j = 0;
+    	boolean usePay = payMana.size() > 0;
+    	boolean flag = false;
+    	
     	String manaStr = mana[i];
     	String color = Input_PayManaCostUtil.getLongColorString(manaStr);
+    	
+    	if (!usePay && floatingMana.size() == 0)
+    		return false;
+    	
     	while(i < mana.length){
-    		m = paying ? payingMana.get(j) : floatingMana.get(j);
+    		
+    		Mana m = usePay ? payMana.get(j) : floatingMana.get(j);
     		
 			if (m.fromSourceCard(c) && m.getColor().equals(color)){
 				int amt = m.getColorlessAmount();
@@ -532,52 +548,54 @@ public class ManaPool extends Card {
 						manaStr = mana[i];
 				}
 				color = Input_PayManaCostUtil.getLongColorString(manaStr);
-				if (paying)
+				if (usePay)
 					removePaying.add(m);
 				else
 					removeFloating.add(m);
 				
-				if (i == mana.length)
+				if (i == mana.length)	// If mana has been depleted, break from loop. All Accounted for!
 					break;
 			}
-			j++;
-			// account for paying mana first, then 
-			if (paying && payingMana.size() == j){
-				j = 0;
-				paying = false;
+    		
+    		j++;	// increase j until we reach the end of paying, then reset and use floating.
+			if (usePay){
+				if (payMana.size() == j){
+					j = 0;
+					usePay = false;
+				}
 			}
-			else if (!paying && floatingMana.size() == j && !flag)
-			{
+			if (!usePay && floatingMana.size() == j && !flag)
 				return false;
-			}
     	}
     	
+			
     	for(int k = 0; k < removePaying.size(); k++){
-    		removeManaFrom(payingMana, removePaying.get(k));
+    		removeManaFrom(payMana, removePaying.get(k));
     	}
     	for(int k = 0; k < removeFloating.size(); k++){
     		removeManaFrom(floatingMana, removeFloating.get(k));
     	}
-    	
     	return true;
     }
 
     
-    public void unpaid() {
+    public void unpaid(SpellAbility sa, boolean untap) {
+    	// todo: having some crash in here related to undo and not tracking abilities properly
+    	ArrayList<Ability_Mana> payAbs = sa.getPayingManaAbilities(); 
+    	
     	// go through paidAbilities if they are undoable 
-        for(Ability_Mana am:paidAbilities) {
-            if(am.undoable()) {
-            	// todo(sol) for Sol Ring/Unpaid. Make sure mana is accounted for in both pools before undoing
-            	// Account for every mana produced by am. 
-            	// if accounted for remove from paying and remove from floating if needed
+        for(Ability_Mana am:payAbs) {
+            if(am.isUndoable()) {
             	String[] formattedMana = formatMana(am);
-            	if (accountFor(formattedMana, am.getSourceCard())){
+            	if (accountFor(sa, formattedMana, am.getSourceCard())){
 	                am.undo();
             	}
                 // else can't account let clearPay move paying back to floating
             }
         }
-        clearPay(true);
+        
+    	// move leftover pay back to floating
+        clearPay(sa, true);
     }
     
     private void updateKeywords() {

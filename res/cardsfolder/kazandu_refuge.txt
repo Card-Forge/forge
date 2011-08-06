@@ -2,8 +2,8 @@ Name:Kazandu Refuge
 ManaCost:no cost
 Types:Land
 Text:When CARDNAME enters the battlefield, you gain 1 life.
-K:tap: add R
-K:tap: add G
+A:AB$Mana|Cost$T|Produced$R|SpellDescription$Add R to your mana pool.
+A:AB$Mana|Cost$T|Produced$G|SpellDescription$Add G to your mana pool.
 K:etbGainLife:1
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon

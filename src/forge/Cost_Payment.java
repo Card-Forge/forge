@@ -35,9 +35,9 @@ public class Cost_Payment {
 	private boolean bCancel = false;
 	private boolean bXDefined = true;
 	
+	// why are these static? should they be attached to the CostPayment?
 	private static CardList payTapXTypeTappedList = new CardList();
-	static void addPayTapXTypeTappedList(Card c)
-	{
+	static void addPayTapXTypeTappedList(Card c){
 		payTapXTypeTappedList.add(c);
 	}
 
@@ -49,9 +49,6 @@ public class Cost_Payment {
 	public void setPayExileFromHand(boolean bExileFromHand) { payExileFromHand = bExileFromHand; }
 	public void setPayTapXType(boolean bTapX) { payTapXType = bTapX; }
 	public void setPayReturn(boolean bReturn){	payReturn = bReturn; }
-	
-	final private Input changeInput = new Input() {
-		private static final long serialVersionUID = -5750122411788688459L; };
 	
 	public Cost_Payment(Ability_Cost cost, SpellAbility abil){
 		this.cost = cost;
@@ -203,6 +200,10 @@ public class Cost_Payment {
     	return true;
     }
 	
+	public void setInput(Input in){
+		AllZone.InputControl.setInput(in, true);
+	}
+	
 	public boolean payCost(){
 		if (bCancel){
 			req.finishPaying();
@@ -240,13 +241,13 @@ public class Cost_Payment {
 		bXDefined = false;
 		
 		if (!payMana){		// pay mana here
-			changeInput.stopSetNext(input_payMana(getAbility(), this, manaToAdd));
+			setInput(input_payMana(getAbility(), this, manaToAdd));
 			return false;
 		}
 		
 		if (!payXMana && !cost.hasNoXManaCost()){		// pay X mana here
 			card.setXManaCostPaid(0);
-			changeInput.stopSetNext(input_payXMana(getCost().getXMana(), getAbility(), this));
+			setInput(input_payXMana(getCost().getXMana(), getAbility(), this));
 			return false;
 		}
 		
@@ -255,7 +256,7 @@ public class Cost_Payment {
             CardList typeList = new CardList(play.getCards());
             typeList = typeList.getValidCards(cost.getTapXType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard());
             
-			changeInput.stopSetNext(input_tapXCost(cost.getTapXTypeAmount(),cost.getTapXType(), typeList, ability, this));
+            setInput(input_tapXCost(cost.getTapXTypeAmount(),cost.getTapXType(), typeList, ability, this));
 			return false;
 		}
 		
@@ -329,7 +330,7 @@ public class Cost_Payment {
 	    				String validType[] = discType.split(";");
 	    				handList = handList.getValidCards(validType,ability.getActivatingPlayer() ,ability.getSourceCard());
 	    			}
-	    			changeInput.stopSetNext(input_discardCost(discAmount, discType, handList, ability, this));
+	    			setInput(input_discardCost(discAmount, discType, handList, ability, this));
 	    			return false;
     			}
     		}
@@ -337,33 +338,33 @@ public class Cost_Payment {
 		
 		if (!paySac && cost.getSacCost()){					// sacrifice stuff here
     		if (cost.getSacThis())
-    			changeInput.stopSetNext(sacrificeThis(ability, this));
+    			setInput(sacrificeThis(ability, this));
     		else
-    			changeInput.stopSetNext(sacrificeType(ability, cost.getSacType(), this));
+    			setInput(sacrificeType(ability, cost.getSacType(), this));
     		return false;
     	}
 		
 		if (!payExile && cost.getExileCost()){					// exile stuff here
     		if (cost.getExileThis())
-    			changeInput.stopSetNext(exileThis(ability, this));
+    			setInput(exileThis(ability, this));
     		else
-    			changeInput.stopSetNext(exileType(ability, cost.getExileType(), this));
+    			setInput(exileType(ability, cost.getExileType(), this));
     		return false;
     	}
 		
 		if (!payExileFromHand && cost.getExileFromHandCost()){					// exile stuff here
     		if (cost.getExileFromHandThis())
-    			changeInput.stopSetNext(exileFromHandThis(ability, this));
+    			setInput(exileFromHandThis(ability, this));
     		else
-    			changeInput.stopSetNext(exileFromHandType(ability, cost.getExileFromHandType(), this));
+    			setInput(exileFromHandType(ability, cost.getExileFromHandType(), this));
     		return false;
     	}
 		
 		if (!payReturn && cost.getReturnCost()){					// return stuff here
     		if (cost.getReturnThis())
-    			changeInput.stopSetNext(returnThis(ability, this));
+    			setInput(returnThis(ability, this));
     		else
-    			changeInput.stopSetNext(returnType(ability, cost.getReturnType(), this));
+    			setInput(returnType(ability, cost.getReturnType(), this));
     		return false;
     	}
 
@@ -395,7 +396,7 @@ public class Cost_Payment {
 			card.tap();
 		}
 		// refund mana
-        AllZone.ManaPool.unpaid();
+        AllZone.ManaPool.unpaid(ability, false);
         
 		if (cost.getTapXTypeCost()){ // Can't depend on payTapXType if canceling before tapping enough
 
@@ -620,15 +621,14 @@ public class Cost_Payment {
 		        if(sa.getSourceCard().equals(card) && sa.isTapAbility()) {
 		            return;
 		        }
-		        boolean canUse = false;
-		        for(Ability_Mana am:card.getManaAbility())
-		            canUse |= am.canPlay();
-		        mana = Input_PayManaCostUtil.tapCard(card, mana,false);
+
+		        mana = Input_PayManaCostUtil.activateManaAbility(sa, card, mana);
 		        
 		        if(mana.isPaid()) 
 		        	done();
 		        else
-		        	showMessage();
+			        if (AllZone.InputControl.getInput() == this)
+			        	showMessage();
 		    }
 		    
 		    private void done() {
@@ -681,16 +681,15 @@ public class Cost_Payment {
 		        	// this really shouldn't happen but just in case
 		            return;
 		        }
-		        boolean canUse = false;
-		        for(Ability_Mana am:card.getManaAbility())
-		            canUse |= am.canPlay();
-		        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost,false);
+
+		        manaCost = Input_PayManaCostUtil.activateManaAbility(sa, card, manaCost);
 		        if(manaCost.isPaid()){
 		        	manaCost = new ManaCost(Integer.toString(numX));
 		        	xPaid++;
 		        }
 		        
-		        showMessage();
+		        if (AllZone.InputControl.getInput() == this)
+		        	showMessage();
 		    }
 		    
 		    @Override
@@ -710,6 +709,7 @@ public class Cost_Payment {
 		    }
 			
 		};
+
 		return payX;
 	}
 	
@@ -725,10 +725,10 @@ public class Cost_Payment {
             public void showMessage() {
             	if (AllZone.Human_Hand.getCards().length == 0) stop();
             	StringBuilder type = new StringBuilder("");
-            	if (!discType.equals("Any")){
+            	if (!discType.equals("Any") || !discType.equals("Card")){
             		type.append(" ").append(discType);
             	}
-                AllZone.Display.showMessage("Select a"+ type.toString() + " card to discard");
+                AllZone.Display.showMessage("Select a "+ type.toString() + " card to discard");
                 ButtonUtil.enableOnlyCancel();
             }
             
@@ -767,16 +767,17 @@ public class Cost_Payment {
             	payment.payCost();
             }
         };
+
         return target;
     }//input_discard() 
 	
-    public static Input sacrificeThis(final SpellAbility spell, final Cost_Payment payment) {
+    public static Input sacrificeThis(final SpellAbility sa, final Cost_Payment payment) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             
             @Override
             public void showMessage() {
-            	Card card = spell.getSourceCard();
+            	Card card = sa.getSourceCard();
                 if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
@@ -800,10 +801,11 @@ public class Cost_Payment {
                 }
             }
         };
+        
         return target;
     }//input_sacrifice()
     
-    public static Input sacrificeType(final SpellAbility spell, final String type, final Cost_Payment payment){
+    public static Input sacrificeType(final SpellAbility sa, final String type, final Cost_Payment payment){
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private CardList typeList;
@@ -820,9 +822,9 @@ public class Cost_Payment {
             		msg.append("s");
             	}
             	
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sa.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
-                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
+                typeList = typeList.getValidCards(type.split(";"),sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -861,16 +863,17 @@ public class Cost_Payment {
             	payment.payCost();
             }
         };
+
         return target;
     }//sacrificeType()
     
-    public static Input exileThis(final SpellAbility spell, final Cost_Payment payment) {
+    public static Input exileThis(final SpellAbility sa, final Cost_Payment payment) {
         Input target = new Input() {
 			private static final long serialVersionUID = 678668673002725001L;
 
 			@Override
             public void showMessage() {
-            	Card card = spell.getSourceCard();
+            	Card card = sa.getSourceCard();
                 if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
@@ -893,6 +896,7 @@ public class Cost_Payment {
                 }
             }
         };
+
         return target;
     }//input_exile()
     
@@ -928,7 +932,7 @@ public class Cost_Payment {
         return target;
     }//input_exile()
     
-    public static Input exileType(final SpellAbility spell, final String type, final Cost_Payment payment){
+    public static Input exileType(final SpellAbility sa, final String type, final Cost_Payment payment){
         Input target = new Input() {
 			private static final long serialVersionUID = 1403915758082824694L;
 			
@@ -946,9 +950,9 @@ public class Cost_Payment {
             		msg.append("s");
             	}
             	
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sa.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
-                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
+                typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -986,6 +990,7 @@ public class Cost_Payment {
             	payment.payCost();
             }
         };
+
         return target;
     }//exileType()
     
@@ -1101,16 +1106,17 @@ public class Cost_Payment {
             	payment.payCost();
             }
         };
+
         return target;
     }//input_tapXCost() 
     
-    public static Input returnThis(final SpellAbility spell, final Cost_Payment payment) {
+    public static Input returnThis(final SpellAbility sa, final Cost_Payment payment) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             
             @Override
             public void showMessage() {
-            	Card card = spell.getSourceCard();
+            	Card card = sa.getSourceCard();
                 if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
@@ -1133,10 +1139,11 @@ public class Cost_Payment {
                 }
             }
         };
+
         return target;
     }//input_sacrifice()
     
-    public static Input returnType(final SpellAbility spell, final String type, final Cost_Payment payment){
+    public static Input returnType(final SpellAbility sa, final String type, final Cost_Payment payment){
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private CardList typeList;
@@ -1153,9 +1160,9 @@ public class Cost_Payment {
             		msg.append("s");
             	}
             	
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sa.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
-                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
+                typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
@@ -1193,6 +1200,7 @@ public class Cost_Payment {
             	payment.payCost();
             }
         };
+
         return target;
     }//returnType()  
 }

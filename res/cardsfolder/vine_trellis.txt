@@ -4,7 +4,7 @@ Types:Creature Wall
 Text:no text
 PT:0/4
 K:Defender
-K:tap: add G
+A:AB$Mana|Cost$T|Produced$G|SpellDescription$Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19624.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/287.jpg

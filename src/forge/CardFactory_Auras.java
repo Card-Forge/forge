@@ -667,7 +667,7 @@ class CardFactory_Auras {
                         	{
                         		ManaCol = "G";
                         	}
-                        	crd.addSpellAbility(new Ability_Mana(card, "tap: add " + ManaCol) {
+                        	crd.addSpellAbility(new Ability_Mana(card, "T", ManaCol) {
                     			private static final long serialVersionUID = 787111012484588884L;
                     		});
                         } else {

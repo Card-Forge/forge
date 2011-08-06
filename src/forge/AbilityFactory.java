@@ -412,6 +412,24 @@ public class AbilityFactory {
 				SA = AbilityFactory_Destroy.createSpellDestroyAll(this);
 		}
 		
+		if (API.equals("Mana")){
+			String produced = mapParams.get("Produced");
+			if (isAb)
+				SA = AbilityFactory_Mana.createAbilityMana(this, produced);
+			if (isSp){
+				SA = AbilityFactory_Mana.createSpellMana(this, produced);
+			}
+		}
+		
+		if (API.equals("ManaReflected")){
+			// Reflected mana will have a filler for produced of "1"
+			if (isAb)
+				SA = AbilityFactory_Mana.createAbilityManaReflected(this, "1");
+			if (isSp){	// shouldn't really happen i think?
+				SA = AbilityFactory_Mana.createSpellManaReflected(this, "1");
+			}
+		}
+		
 		if(API.equals("Token")){
 			AbilityFactory_Token AFT = new AbilityFactory_Token(this);
 			

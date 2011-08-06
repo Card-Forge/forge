@@ -2,7 +2,7 @@ Name:Mind Stone
 ManaCost:2
 Types:Artifact
 Text:no text
-K:tap: add 1
+A:AB$Mana|Cost$T|Produced$1|SpellDescription$Add 1 to your mana pool.
 A:AB$Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_stone.jpg

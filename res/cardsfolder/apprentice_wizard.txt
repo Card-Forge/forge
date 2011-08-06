@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Human Wizard
 Text:no text
 PT:0/1
-K:U, tap: add 3
+A:AB$Mana|Cost$U T|Produced$1|Amount$3|SpellDescription$Add 3 to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_wizard.jpg

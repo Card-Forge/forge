@@ -3,11 +3,12 @@ ManaCost:1 G
 Types:Creature Human Druid Ally
 Text:no text
 PT:0/1
-K:tap: add W to your mana pool for each Ally you control.
-K:tap: add U to your mana pool for each Ally you control.
-K:tap: add B to your mana pool for each Ally you control.
-K:tap: add R to your mana pool for each Ally you control.
-K:tap: add G to your mana pool for each Ally you control.
+A:AB$Mana|Cost$T|Produced$W|Amount$X|SpellDescription$Add W to your mana pool for each Ally you control.
+A:AB$Mana|Cost$T|Produced$U|Amount$X|SpellDescription$Add U to your mana pool for each Ally you control.
+A:AB$Mana|Cost$T|Produced$B|Amount$X|SpellDescription$Add B to your mana pool for each Ally you control.
+A:AB$Mana|Cost$T|Produced$R|Amount$X|SpellDescription$Add R to your mana pool for each Ally you control.
+A:AB$Mana|Cost$T|Produced$G|Amount$X|SpellDescription$Add G to your mana pool for each Ally you control.
+SVar:X:Count$Valid Ally.YouCtrl
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

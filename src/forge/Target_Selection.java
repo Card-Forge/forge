@@ -20,9 +20,6 @@ public class Target_Selection {
 	private boolean bDoneTarget = false;
 	public void setDoneTarget(boolean done) { bDoneTarget = done; } 
 	
-	final private Input changeInput = new Input() {
-		private static final long serialVersionUID = -5750122411788688459L; };
-	
 	public Target_Selection(Target tgt, SpellAbility sa){
 		target = tgt;
 		ability = sa;
@@ -67,7 +64,7 @@ public class Target_Selection {
 		}
 		
 		//targets still needed
-        changeInput.stopSetNext(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req));
+		AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req));
         return false;
 	}
 
@@ -76,7 +73,7 @@ public class Target_Selection {
     public static Input input_targetValid(final SpellAbility sa, final String[] Tgts, final String message, 
     		final Target_Selection select, final SpellAbility_Requirements req)
     {
-    	return new Input() {
+    	Input target = new Input() {
 			private static final long serialVersionUID = -2397096454771577476L;
 
 			@Override
@@ -107,10 +104,12 @@ public class Target_Selection {
 		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req));
 				}
 				else{
-					stopSetNext(input_cardFromList(sa, choices, message, true, select, req));
+					AllZone.InputControl.setInput(input_cardFromList(sa, choices, message, true, select, req));
 				}
 	        }
     	};
+    	
+        return target;
     }//input_targetValid
 
     //CardList choices are the only cards the user can successful select
@@ -178,6 +177,7 @@ public class Target_Selection {
                 select.chooseTargets();
             }
         };
+
         return target;
     }//input_targetSpecific()
     
@@ -219,6 +219,7 @@ public class Target_Selection {
                 select.chooseTargets();
 	        }
 	    };//Input
+
 	    return target;
     } 
 }

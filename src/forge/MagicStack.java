@@ -155,6 +155,7 @@ public class MagicStack extends MyObservable {
 	public void add(final SpellAbility sp) {
 		if (sp instanceof Ability_Mana) { // Mana Abilities go straight through
 			sp.resolve();
+			sp.resetOnceResolved();
 			return;
 		}
 

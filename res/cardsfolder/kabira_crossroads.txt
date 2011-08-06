@@ -2,7 +2,7 @@ Name:Kabira Crossroads
 ManaCost:no cost
 Types:Land
 Text:When CARDNAME enters the battlefield, you gain 2 life.
-K:tap: add W
+A:AB$Mana|Cost$T|Produced$W|SpellDescription$Add W to your mana pool.
 K:CARDNAME enters the battlefield tapped.
 K:etbGainLife:2
 SVar:Rarity:Common

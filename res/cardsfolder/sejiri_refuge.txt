@@ -2,8 +2,8 @@ Name:Sejiri Refuge
 ManaCost:no cost
 Types:Land
 Text:When CARDNAME enters the battlefield, you gain 1 life.
-K:tap: add W
-K:tap: add U
+A:AB$Mana|Cost$T|Produced$W|SpellDescription$Add W to your mana pool.
+A:AB$Mana|Cost$T|Produced$U|SpellDescription$Add U to your mana pool.
 K:etbGainLife:1
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon

@@ -3160,8 +3160,10 @@ public class GameActionUtil {
 					}
 					else if (GameActionUtil.showYesNoDialog(c, sb.toString())){
 						int ageCounters = c.getCounters(Counters.AGE);
-						for(int i = 0; i < ageCounters; i++)
-							AllZone.ManaPool.addManaToFloating("R", c);
+						Ability_Mana abMana = new Ability_Mana(c, "0", "R", ageCounters) {
+							private static final long serialVersionUID = -2182129023960978132L;
+						};
+						abMana.produceMana();
 					}
 					else{
 						AllZone.GameAction.sacrifice(c);
@@ -5258,27 +5260,23 @@ public class GameActionUtil {
 		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
 	}
 
-	private static void landfall_Lotus_Cobra(Card c) {
+	private static void landfall_Lotus_Cobra(final Card c) {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
 				String color = "";
 
-				Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.Colors);
-				color = (String) o;
+				Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.onlyColors);
+				color = Input_PayManaCostUtil.getShortColorString((String) o);
 
-				if(color.equals("white")) color = "W";
-				else if(color.equals("blue")) color = "U";
-				else if(color.equals("black")) color = "B";
-				else if(color.equals("red")) color = "R";
-				else if(color.equals("green")) color = "G";
-
-				Card mp = AllZone.ManaPool;
-
-				mp.addExtrinsicKeyword("ManaPool:" + color);
+				Ability_Mana abMana = new Ability_Mana(c, "0", color) {
+					private static final long serialVersionUID = -2182129023960978132L;
+				};
+				abMana.produceMana();
 			}
 		};
 		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append(c.getName()).append(" - add one mana of any color to your mana pool.");
 		ability.setStackDescription(sb.toString());
@@ -5286,7 +5284,9 @@ public class GameActionUtil {
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
 		}
-
+		else{
+			// todo: once AI has a mana pool he should choose add Ability and choose a mana as appropriate
+		}
 	}
 
 	private static void landfall_Hedron_Crab(Card c) {
@@ -10733,7 +10733,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", crd.getController(), "", new String[] {
-							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
 					for (Card c:cl)
 						c.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(c));
 				}// resolve()
@@ -12045,8 +12045,7 @@ public class GameActionUtil {
 		CardList                  landList = new CardList();
 		CardList				  creatList = new CardList();
 
-		String[]                  keyword            = {
-				"tap: add B B", "tap: add W W", "tap: add G G", "tap: add U U", "tap: add R R" };
+		String[]                  keyword            = { "B", "W", "G", "U", "R" };
 
 		final void addMana(Card c) {
 			for(int i = 0; i < keyword.length; i++) {
@@ -12055,8 +12054,7 @@ public class GameActionUtil {
 				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(
 						keyword[i])) {
 					//c.addExtrinsicKeyword(keyword[i]);
-					SpellAbility mana = new Ability_Mana(c,
-							keyword[i]) {
+					SpellAbility mana = new Ability_Mana(c, "T", keyword[i], 2) {
 						private static final long serialVersionUID = 2384540533244132975L;
 					};
 
@@ -12122,8 +12120,7 @@ public class GameActionUtil {
 
 		CardList                  gloriousAnthemList = new CardList();
 
-		String[]                  keyword            = {
-				"tap: add B", "tap: add W", "tap: add G", "tap: add U", "tap: add R"                       };
+		String[]                  keyword            = { "B", "W", "G", "U", "R"  };
 
 		final void addMana(Card c) {
 			for(int i = 0; i < keyword.length; i++) {
@@ -12132,8 +12129,7 @@ public class GameActionUtil {
 				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(
 						keyword[i])) {
 					//c.addExtrinsicKeyword(keyword[i]);
-					SpellAbility mana = new Ability_Mana(c,
-							keyword[i]) {
+					SpellAbility mana = new Ability_Mana(c, "T", keyword[i]) {
 						private static final long serialVersionUID = 2384540533244132975L;
 					};
 
@@ -12182,15 +12178,18 @@ public class GameActionUtil {
 	
 	public static Command Gemhide_Sliver              = new Command() {
 		private static final long serialVersionUID   = -2941784982910968772L;
-		
-		CardList gloriousAnthemList = new CardList();
-		String[] keyword = {"tap: add B", "tap: add W", "tap: add G", "tap: add U", "tap: add R"};
+
+		CardList                  gloriousAnthemList = new CardList();
+
+		String[]                  keyword            = { "B", "W", "G", "U", "R" };
 
 		final void addMana(Card c) {
 
 			for(int i = 0; i < keyword.length; i++) {
-				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(keyword[i])) {
-					SpellAbility mana = new Ability_Mana(c, keyword[i]) {
+				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(
+						keyword[i])) {
+					//c.addExtrinsicKeyword(keyword[i]);
+					SpellAbility mana = new Ability_Mana(c, "T", keyword[i]) {
 						private static final long serialVersionUID = -8909660504657778172L;
 					};
 					mana.setType("Extrinsic");

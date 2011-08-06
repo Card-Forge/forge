@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:X is the number of storage counters on City of Shadows.
 A:AB$PutCounter | Cost$ Exile<1/Creature> | CounterType$ STORAGE | CounterNum$ 1 | SpellDescription$ Put a storage counter on CARDNAME.
-K:tap: add X
+A:AB$Mana|Cost$T|Produced$X|SpellDescription$Add X to your mana pool, where X is the number of storage counters on City of Shadows.
 SVar:X:Count$CardCounters.STORAGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

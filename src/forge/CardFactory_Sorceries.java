@@ -5121,7 +5121,7 @@ public class CardFactory_Sorceries {
         			for (int i=0;i<times;i++)
         			{
 	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
-								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
 	        			for (Card crd:cl)
 	        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
         			}
@@ -5149,7 +5149,7 @@ public class CardFactory_Sorceries {
 							Constant.Zone.Battlefield, true);
 					
 					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
-							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
 				}
@@ -5659,17 +5659,22 @@ public class CardFactory_Sorceries {
         	 * Tap target untapped creature you control. If you do, add X to
         	 * your mana pool, where X is that creature's converted mana cost.
         	 */
-        	final SpellAbility spell = new Spell(card) {
+        	Ability_Cost cost = new Ability_Cost("U", cardName, false);
+        	Target tgt = new Target("Select an untapped creature you control", "Creature.untapped+YouCtrl".split(","));
+        	final SpellAbility spell = new Spell(card, cost, tgt) {
+
 				private static final long serialVersionUID = 8883585452278041848L;
 
 				@Override
         		public void resolve() {
         			Card target = getTargetCard();
         			if(null != target && target.isUntapped()) {
-        				int cost = CardUtil.getConvertedManaCost(target);
-        				Card mp = AllZone.ManaPool;
-        				mp.addExtrinsicKeyword("ManaPool:"+cost);
+        				int cmc = CardUtil.getConvertedManaCost(target);
         				target.tap();
+        				Ability_Mana abMana = new Ability_Mana(card, "0", "1", cmc) {
+        					private static final long serialVersionUID = -2182129023960978132L;
+        				};
+        				abMana.produceMana();
         			}
         		}
 
@@ -5678,18 +5683,7 @@ public class CardFactory_Sorceries {
         			return false;
         		}
         	};
-        	Input runtime = new Input() {
-				private static final long serialVersionUID = -757364902159389697L;
 
-				@Override
-                public void showMessage() {
-                    CardList choices = AllZoneUtil.getCreaturesInPlay(card.getController());
-                	choices = choices.filter(AllZoneUtil.untapped);
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choices,
-                    		"Select target untapped creature", true, false));
-                }//showMessage()
-            };//Input
-        	spell.setBeforePayMana(runtime);
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -6824,39 +6818,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setDescription(abCost+"Destroy target non-Swamp land. If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.");
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Rite of Flame")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 1168990016361927544L;
 
-				@Override
-                public void resolve() {
-                    AllZone.ManaPool.addManaToFloating("R R", card);
-                    int num = AllZoneUtil.getCardsInGraveyard(card.getName()).size();
-                    for(int i = 0; i < num; i++) {
-                    	AllZone.ManaPool.addManaToFloating("R", card);
-                    }
-                }
-               
-                @Override
-                public boolean canPlayAI() {
-                	//Compy has no mana pool
-                    return false;
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - Add R R to your mana pool, then add R to your mana pool for each card named "+cardName+" in each graveyard.");
-            spell.setStackDescription(sb.toString());
-            
-            spell.setDescription("Add R R to your mana pool, then add R to your mana pool for each card named "+cardName+" in each graveyard.");
-           
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
       
         //*************** START *********** START **************************
         else if(cardName.equals("Beacon of Tomorrows")) {

@@ -258,6 +258,26 @@ public class Ability_Cost {
 		}
 	}
 	
+	public void refundPaidCost(Card source){
+		// prereq: isUndoable is called first
+		if (tapCost)
+			source.untap();
+		else if (untapCost)
+			source.tap();
+		
+		if (subtractCounterCost)
+			source.addCounterFromNonEffect(counterType, counterAmount);
+		else if (addCounterCost)
+			source.subtractCounter(counterType, counterAmount);
+
+		// refund chained mana abilities?
+	}
+
+	public boolean isUndoable() {
+		return !(sacCost || exileCost || exileFromHandCost || tapXTypeCost || discardCost ||
+				returnCost || lifeCost) && hasNoXManaCost() && hasNoManaCost();
+	}
+	
 	public String toString()
 	{
 		if (isAbility)
@@ -271,7 +291,6 @@ public class Ability_Cost {
 	public String toStringAlt(){
 		return spellToString(false);
 	}
-	
 	
 	private String spellToString(boolean bFlag) {
 		StringBuilder cost = new StringBuilder();
@@ -591,7 +610,6 @@ public class Ability_Cost {
 		return cost.toString();
 	}
 	
-	
 // TODO: If an Ability_Cost needs to pay more than 10 of something, fill this array as appropriate
 	private static final String[] numNames = { "zero", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" }; 
 	private static final Pattern vowelPattern = Pattern.compile("^[aeiou]", Pattern.CASE_INSENSITIVE);
@@ -615,4 +633,5 @@ public class Ability_Cost {
 		
 		return sb.toString();
 	}
+
 }

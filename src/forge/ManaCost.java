@@ -16,11 +16,6 @@ public class ManaCost {
     //or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
     //"GW" can be paid with either G or W
     
-    //can barely handle Reaper King mana cost "2/W 2/U 2/B 2/R 2/G"
-    //to pay the colored costs for Reaper King you have to tap the colored
-    //mana in the order shown from right to left (wierd I know)
-    //note that when the cost is displayed it is backward "2/G 2/R 2/B 2/U 2/W"
-    //so you would have to tap W, then U, then B, then R, then G (order matters)
     public ManaCost(String manaCost) {
     	if (manaCost.equals("") || manaCost.equals("X"))
     		manaCost = "0";

@@ -103,7 +103,7 @@ public class SpellAbility_Requirements {
 			ability.setStackDescription(sb.toString());
 		}
 		
-		AllZone.ManaPool.clearPay(false);
+		AllZone.ManaPool.clearPay(ability, false);
 		AllZone.Stack.addAndUnfreeze(ability);
 	}
 }

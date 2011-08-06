@@ -2,7 +2,7 @@ Name:Mouth of Ronom
 ManaCost:no cost
 Types:Snow Land
 Text:no text
-K:tap: add 1
+A:AB$Mana|Cost$T|Produced$1|SpellDescription$Add 1 to your mana pool.
 A:AB$DealDamage | Cost$ 4 S T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

@@ -1586,54 +1586,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Skirk Prospector")) {
-            final Ability_Mana ability = new Ability_Mana(card, "Sacrifice a Goblin: Add R") {
-				private static final long serialVersionUID = -6764282980691397966L;
-
-				@Override
-                public boolean canPlayAI() {
-					return false;
-                }
-               
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                   
-                    if(c != null && c.isCreature() ) {
-                    	AllZone.GameAction.sacrifice(c);
-                    	super.resolve();
-                    }
-                }
-                
-                @Override
-				public String mana() {
-					return "R";
-            	}
-            };
-           
-            Input runtime = new Input() {
-				private static final long serialVersionUID = -7876248316975077074L;
-
-				@Override
-                public void showMessage() {
-                    CardList choice = new CardList();
-                    final Player player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                    choice.addAll(play.getCards());
-
-                    choice = choice.getType("Goblin");
-                   
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
-                            "Sacrifice a Goblin:", true, false));
-                }
-            };
-
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Sylvan Messenger") 
         		|| cardName.equals("Enlistment Officer") 
         		|| cardName.equals("Tidal Courier")
@@ -8656,39 +8608,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Workhorse")) {      
-            
-            final Ability_Mana ability = new Ability_Mana(card, "0: Add 1") {
-				private static final long serialVersionUID = -6764282980691397966L;
-
-				@Override
-                public boolean canPlayAI() {
-					return false;
-                }
-               
-                @Override
-                public void resolve() {
-                	
-                    card.subtractCounter(Counters.P1P1,1);
-                	super.resolve();
-                    
-                }
-                
-                @Override
-				public String mana() {
-					return "1";
-            	}
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" add 1 mana to mana pool.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("Remove a +1/+1 counter from Workhorse: Add 1 to your mana pool.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Molten Hydra")) {
@@ -9615,7 +9534,7 @@ public class CardFactory_Creatures {
                     String color = "";
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         
-                        Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.ColorsOnly);
+                        Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.onlyColors);
                         color = (String) o;
                         c.addExtrinsicKeyword("Protection from " + color);
                         if(creatureMap.containsKey(c)) {
@@ -10713,28 +10632,6 @@ public class CardFactory_Creatures {
 
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Viridian Joiner"))
-        {
-        	Ability_Mana ma = new Ability_Mana(card, "tap: add an amount of G to your mana pool equal to CARDNAME's power.")
-        	{
-				private static final long serialVersionUID = 3818278127211421729L;
-
-				public String mana()
-        		{
-        			StringBuilder sb = new StringBuilder();
-                    for(int i = 0; i < card.getNetAttack(); i++){
-                    	if (i != 0)
-                    		sb.append(" ");
-                    	sb.append("G");
-                    }
-                    return sb.toString();
-        		}
-        	};
-        	card.addSpellAbility(ma);
-        }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
         else if (cardName.equals("Lightkeeper of Emeria"))
         {
         	final Ability ability = new Ability(card, "0") {
@@ -11159,7 +11056,7 @@ public class CardFactory_Creatures {
                 
                 public void makeToken() {
                 	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
-							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
                 }
@@ -11194,7 +11091,7 @@ public class CardFactory_Creatures {
                 
                 public void makeToken() {
                 	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
-							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
                 }
@@ -11228,7 +11125,7 @@ public class CardFactory_Creatures {
                 
                 public void makeToken() {
                 	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
-							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
                 }
@@ -11828,47 +11725,6 @@ public class CardFactory_Creatures {
     	        card.addDestroyCommand(destroy);   	    
         }//*************** END ************ END **************************
        
-        
-        //*************** START *********** START **************************
-          else if(cardName.equals("Overgrown Battlement")) {
-              final Ability_Mana ability = new Ability_Mana(card,"tap: add G to your mana pool for each creature with defender you control.") {
-     
-  				private static final long serialVersionUID = 422282090183907L;
-
-  				@Override
-                  public String mana() {
-                      String res = "";
-                      
-                      CardList cl = new CardList(AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
-                      
-                      cl = cl.filter(new CardListFilter() {
-
-                      	public boolean addCard(Card c)
-                      	{
-                      		return c.hasKeyword("Defender");
-                      	}
-                      	
-                      });
-                      
-                      for(int i=0;i<cl.size();i++)
-                      {
-                      	res = res + "G ";
-                      }
-                      
-                      if(!res.equals(""))
-                      {
-                      	res = res.substring(0,res.length()-1);
-                      }
-                      
-                      return res;
-                  }//mana()                
-                  
-              };//Ability_Mana
-
-              card.addSpellAbility(ability);
-          }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
           else if(cardName.equals("Sutured Ghoul")) {
         	  final int[] numCreatures = new int[1];
@@ -12312,9 +12168,13 @@ public class CardFactory_Creatures {
         					for(Card reveal:revealed) sb.append(reveal.getName()+"\n");
         					JOptionPane.showMessageDialog(null, "Revealed Cards:\n"+sb.toString(), card.getName(), JOptionPane.PLAIN_MESSAGE);
         					//adding mana
-        					for(int i = 0; i < revealed.size(); i++) {
-        						AllZone.ManaPool.addManaToFloating("2", card);
-        					}
+        					
+        					Ability_Mana abMana = new Ability_Mana(card, "0", "1", 2*revealed.size()) {
+        						private static final long serialVersionUID = -2182129023960978132L;
+        					};
+        					abMana.undoable = false;
+        					abMana.produceMana();
+
         					stop();
         				}
         			});
@@ -12602,42 +12462,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(kicker);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START ************ START **************************
-        else if(cardName.equals("Wall of Roots")) {
-        	/*
-        	 * Put a -0/-1 counter on Wall of Roots: Add  to your mana pool. Activate this ability only once each turn.
-        	 */
-        	Ability_Cost abCost = new Ability_Cost("AddCounter<1/M0M1>", cardName, true);
-        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = 5369063561394954892L;
 
-				@Override
-        		public void resolve() {
-        			AllZone.ManaPool.addManaToFloating("G", card);
-        		}
-				
-				@Override
-				public boolean canPlayAI() {
-					return false;
-				}
-        	};
-        	
-        	mana.getRestrictions().setActivationLimit(1);
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(abCost).append("Add G to your mana pool. Activate this ability only once each turn.");
-        	mana.setDescription(sbDesc.toString());
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(cardName).append(" - add G to your mana pool.");
-        	mana.setStackDescription(sbStack.toString());
-        	
-        	card.addSpellAbility(mana);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Eater of Days")) {
         	final Ability ability = new Ability(card, "") {

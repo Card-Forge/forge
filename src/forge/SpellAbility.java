@@ -51,6 +51,9 @@ public abstract class SpellAbility {
     
     private AbilityFactory  abilityFactory 	   = null;
     
+    private ArrayList<Mana> payingMana = new ArrayList<Mana>();
+    private ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
+    
     private CardList 		sacrificedCards	   = null;
     private CardList 		discardedCards	   = null;
     
@@ -269,6 +272,14 @@ public abstract class SpellAbility {
     
     public AbilityFactory getAbilityFactory(){
     	return abilityFactory;
+    }
+    
+    public ArrayList<Mana> getPayingMana(){
+    	return payingMana;
+    }
+    
+    public ArrayList<Ability_Mana> getPayingManaAbilities(){
+    	return paidAbilities;
     }
     
     public void addSacrificedCost(Card c){

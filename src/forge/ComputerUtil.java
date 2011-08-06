@@ -490,28 +490,27 @@ public class ComputerUtil
  
   public static ArrayList<String> getColors(Card land)
   {
-		ArrayList<String> colors = new ArrayList<String>();
-	  	if (land.isReflectedLand()){
-	  		// Reflected lands (Exotic Orchard and Reflecting Pool) have one
-	  		// mana ability, and it has a method called 'getPossibleColors"
-	  		ArrayList<Ability_Mana> amList = land.getManaAbility();
-	  		colors = ((Ability_Reflected_Mana)amList.get(0)).getPossibleColors();
-	  	} else {  		 
-	  		if (land.getKeyword().contains("tap: add B"))
-	  			colors.add(Constant.Color.Black);
-	  		if (land.getKeyword().contains("tap: add W"))
-	  			colors.add(Constant.Color.White);
-	  		if (land.getKeyword().contains("tap: add G"))
-	  			colors.add(Constant.Color.Green);
-	  		if (land.getKeyword().contains("tap: add R"))
-	  			colors.add(Constant.Color.Red);
-	  		if (land.getKeyword().contains("tap: add U"))
-	  			colors.add(Constant.Color.Blue);
-	  		if (land.getKeyword().contains("tap: add 1"))
-	  			colors.add(Constant.Color.Colorless);
-	  	} 	
-	return colors;		
+	  // loop through abilities and peek at mana abilities
+	  // any mana abilities, look what color they produce
 	  
+		ArrayList<String> colors = new ArrayList<String>();
+		ArrayList<Ability_Mana> mana = land.getManaAbility();
+		
+		for(Ability_Mana m : mana){
+			if (!colors.contains(Constant.Color.Black) && m.isBasic() && m.mana().equals("B"))
+				colors.add(Constant.Color.Black);
+			if (!colors.contains(Constant.Color.White) && m.isBasic() && m.mana().equals("W"))
+				colors.add(Constant.Color.White);
+			if (!colors.contains(Constant.Color.Green) && m.isBasic() && m.mana().equals("G"))
+				colors.add(Constant.Color.Green);
+			if (!colors.contains(Constant.Color.Red) && m.isBasic() && m.mana().equals("R"))
+				colors.add(Constant.Color.Red);
+			if (!colors.contains(Constant.Color.Blue) && m.isBasic() && m.mana().equals("U"))
+				colors.add(Constant.Color.Blue);
+			if (!colors.contains(Constant.Color.Colorless) && m.isBasic() && m.mana().equals("1"))
+				colors.add(Constant.Color.Colorless);
+		}
+		return colors;
   }
 
   static public CardList getAvailableMana()
@@ -521,9 +520,6 @@ public class ComputerUtil
     {
       public boolean addCard(Card c)
       {
-        //if(c.isCreature() && c.hasSickness())
-        //  return false;
-
         for (Ability_Mana am : c.getAIPlayableMana())
         	if (am.canPlay()) return true;
                 
@@ -585,64 +581,6 @@ public class ComputerUtil
 	    AllZone.Computer_Battlefield.add(land);
 	    CardFactoryUtil.playLandEffects(land);
 	    AllZone.GameInfo.incrementComputerPlayedLands();
-  }
-  
-  static public void playEOT(){
-	  // TODO: Called from End of Turn of Player. 
-	  // Play any abilities of a renewable resource (tapping, mana)
-	  boolean bPass = true;
-	  
-	  if (bPass)
-		  passPriority();
-  }
-  
-  static public void playBeginHumanCombat(){
-	  // TODO: Called from Begin Combat of Player. 
-	  // should tap creatures we don't want to attack, or other sneaky things like that
-	  boolean bPass = true;
-	  
-	  if (bPass)
-		  passPriority();
-  }
-  
-  static public void playBeginAICombat(){
-	  // TODO: Called from Begin Combat of Computer. 
-	  // should tap creatures we don't want to attack, or other sneaky things like that
-	  boolean bPass = true;
-	  
-	  if (bPass)
-		  passPriority();
-  }
-  
-  static public void playDeclareAttacks(){
-	  // TODO: Called from Declare Attackers (Abilities)
-	  boolean bPass = true;
-	  
-	  if (bPass)
-		  passPriority();
-  }
-  
-  static public void playDeclareBlockers(){
-	  // TODO: Called from Declare Blockers (Abilities)
-	  boolean bPass = true;
-	  
-	  if (bPass)
-		  passPriority();
-  }
-  
-  static public void playRespondToStack(){
-	  // TODO: Called from Declare Blockers (Abilities)
-	  boolean bPass = true;
-	  
-	  if (bPass)
-		  passPriority();
-  }
-  
-  static public void passPriority(){
-	  // if it's the computers turn and the player should get priority. 
-	  if (AllZone.Phase.getPlayerTurn().isComputer()){
-		  // Let the human player have access to pass the turn
-	  }
   }
   
   static public Card getCardPreference(Card activate, String pref, CardList typeList){

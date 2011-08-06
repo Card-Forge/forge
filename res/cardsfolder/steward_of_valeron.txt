@@ -3,7 +3,7 @@ ManaCost:G W
 Types:Creature Human Druid Knight
 Text:no text
 PT:2/2
-K:tap: add G
+A:AB$Mana|Cost$T|Produced$G|SpellDescription$Add G to your mana pool.
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steward_of_valeron.jpg

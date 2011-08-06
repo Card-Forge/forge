@@ -1031,24 +1031,30 @@ public class Card extends MyObservable {
         sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
         sb.append("\r\n");
-        
+
         // Triggered abilities
         for(Trigger trig : triggers)
         {
         	sb.append(trig.toString() + "\r\n");
         }
-
-        SpellAbility[] sa = getSpellAbility();
-        for(int i = 0; i < sa.length; i++) {
-            //presumes the first SpellAbility added to this card, is the "main" spell
-            //skip the first SpellAbility for creatures, since it says "Summon this creature"
-            //looks bad on the Gui card detail
-            if(isPermanent() && (isLand() || i != 0)
-                    && !(manaAbility.contains(sa[i]) && ((Ability_Mana) sa[i]).isBasic()))//prevent mana ability duplication
-            {
-                sb.append(sa[i].toString());
-                sb.append("\r\n");
+        
+        ArrayList<String> addedManaStrings = new ArrayList<String>();
+        SpellAbility[] abilities = getSpellAbility();
+        for(SpellAbility sa : abilities){
+        	// only add abilities not Spell portions of cards
+            if(!isPermanent() || sa instanceof Spell_Permanent)
+            	continue;
+            
+            String sAbility = sa.toString();
+            
+            if (sa instanceof Ability_Mana){
+            	if (addedManaStrings.contains(sAbility))
+            		continue;
+        		addedManaStrings.add(sAbility);
             }
+
+            sb.append(sAbility);
+            sb.append("\r\n");
         }
         
         // NOTE:
@@ -1072,29 +1078,6 @@ public class Card extends MyObservable {
         return sb.toString().replaceAll("CARDNAME", getName()).trim();
     }//getText()
     
-    /* private ArrayList<Ability_Mana> addLandAbilities ()
-     {
-      ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>(manaAbility);
-      if (!getType().contains("Land")) return res;
-      ArrayList<String> types = getType();
-      for(int i = 0; i < basics.length; i++)
-    	  if(types.contains(basics[i]) && !res.contains("tap: add "+ ManaPool.colors.charAt(i)))
-    		  res.add(new Ability_Mana(this, "tap: add "+ ManaPool.colors.charAt(i)){});
-      return res;
-     }*/
-    /*ArrayList<Ability_Mana> addExtrinsicAbilities(ArrayList<Ability_Mana> have)
-    {
-      try{
-      if (AllZone.getZone(this).is(Constant.Zone.Play))
-      {
-    	  for (Card c : AllZone.getZone(Constant.Zone.Play, getController()).getCards())
-    			  if (c.getName().equals("Joiner Adept") && getType().contains("Land") || c.getName().equals("Gemhide Sliver") && getType().contains("Sliver"))
-    				  for (char ch : ManaPool.colors.toCharArray())
-    					  have.add(new Ability_Mana(this, "tap: add " + ch){});
-      }}
-      catch(NullPointerException ex){}//TOhaveDOne: fix this to something more memory-efficient than catching 2000 NullPointer Exceptions every time you open deck editor
-      return have;
-    }*/
     public ArrayList<Ability_Mana> getManaAbility() {
         return new ArrayList<Ability_Mana>(manaAbility);
     }
@@ -2003,10 +1986,7 @@ public class Card extends MyObservable {
     		runParams.put("Card", this);
     		AllZone.TriggerHandler.runTrigger("Untaps", runParams);
     	}
-    	if (isTapped() && isReflectedLand()) {
-    		Ability_Reflected_Mana am = (Ability_Reflected_Mana) getManaAbility().get(0);
-    		am.reset();
-    	}
+
     	for(Command var:untapCommandList) {
             var.execute();
     	}
@@ -2032,8 +2012,9 @@ public class Card extends MyObservable {
         a1.addAll(a3);
         a1.addAll(a4);
         
-        for(Ability_Mana sa:getManaAbility())
-            if(sa.isBasic()) a1.add((sa).orig);
+        // SOL Changes for Mana
+        //for(Ability_Mana sa:getManaAbility())
+        //    if(sa.isBasic()) a1.add((sa).orig);
         
         return a1;
     }
@@ -2047,8 +2028,9 @@ public class Card extends MyObservable {
         a1.addAll(a2);
         a1.addAll(a3);
         
-        for(Ability_Mana sa:getManaAbility())
-            if(sa.isBasic()) a1.add((sa).orig);
+        // SOL Changes for Mana
+        //for(Ability_Mana sa:getManaAbility())
+        //    if(sa.isBasic()) a1.add((sa).orig);
         
         return a1;
     }
@@ -2079,7 +2061,7 @@ public class Card extends MyObservable {
     	intrinsicAbility = new ArrayList<String>(a);
     }
     
-    public void addIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/
+    public void addIntrinsicKeyword(String s) {
         if (s.trim().length()!=0)
         	intrinsicKeyword.add((getName().trim().length()== 0 ? s :s.replaceAll(getName(), "CARDNAME")));
     }
@@ -2090,7 +2072,7 @@ public class Card extends MyObservable {
     		intrinsicAbility.add(s);
     }
     
-    public void addNonStackingIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/
+    public void addNonStackingIntrinsicKeyword(String s) {
     	if(!getIntrinsicKeyword().contains(s)){
 	    	if (s.trim().length()!=0)
 	        	intrinsicKeyword.add((getName().trim().length()== 0 ? s :s.replaceAll(getName(), "CARDNAME")));
@@ -2118,9 +2100,6 @@ public class Card extends MyObservable {
     public void addExtrinsicKeyword(String s) {
         //if(!getKeyword().contains(s)){
     	if(s.startsWith("HIDDEN")) addHiddenExtrinsicKeyword(s);
-    	else if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
-            private static final long serialVersionUID = 221124403788942412L;
-        });
         else 
         	extrinsicKeyword.add((getName().trim().length()==0 ? s :s.replaceAll(getName(), "CARDNAME")));
         //}
@@ -2128,10 +2107,6 @@ public class Card extends MyObservable {
     
     public void addStackingExtrinsicKeyword(String s) {
     	if(s.startsWith("HIDDEN")) addHiddenExtrinsicKeyword(s);
-    	else if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s)
-    	{
-    		private static final long serialVersionUID = 2443750124751086033L;  
-    	});
     	else extrinsicKeyword.add(s);
     }
     
@@ -2155,22 +2130,11 @@ public class Card extends MyObservable {
     }
     
     public void addOtherExtrinsicKeyword(String s) {
-        //if(!getKeyword().contains(s)){
-        if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
-
-			private static final long serialVersionUID = -3032496855034700637L;
-        });
-        else 
         otherExtrinsicKeyword.add((getName().trim().length()==0 ? s :s.replaceAll(getName(), "CARDNAME")));
-        //}
     }
     
     public void addStackingOtherExtrinsicKeyword(String s) {
-    	if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s)
-    	{
-			private static final long serialVersionUID = 7004485151675361747L;
-    	});
-    	else extrinsicKeyword.add(s);
+    	extrinsicKeyword.add(s);
     }
     
     public void removeOtherExtrinsicKeyword(String s) {
@@ -2758,6 +2722,10 @@ public class Card extends MyObservable {
 	 * there are easy checkers for Color.  The CardUtil functions should
 	 * be made part of the Card class, so calling out is not necessary
 	 */
+	
+	public boolean isColor(String col) {
+		return CardUtil.getColors(this).contains(col);
+	}
 	
 	public boolean isBlack() {
 		return CardUtil.getColors(this).contains(Constant.Color.Black);

@@ -1,8 +1,6 @@
 
 package forge;
 
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -170,7 +168,7 @@ class CardFactory_Lands {
 
         			if(card.getController() == AllZone.HumanPlayer){
         				if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
-        					Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.ColorsOnly);
+        					Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.onlyColors);
         					Color = (String) o;
         				}
 
@@ -268,190 +266,6 @@ class CardFactory_Lands {
 
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Gemstone Mine")) {
-            final Ability_Mana mine = new Ability_Mana(card, "tap, Remove a mining counter from CARDNAME: Add one mana of any color to your mana pool. If there are no mining counters on CARDNAME, sacrifice it.") {
-				private static final long serialVersionUID = -785117149012567841L;
-
-                @Override
-                public void undo() {
-                	card.untap();
-                    card.addCounter(Counters.MINING, 1);
-                }
-                
-                //@Override
-                public String mana() {
-                    return this.choices_made[0].toString();
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(choices_made[0] == null) choices_made[0] = "1";
-                    return super.canPlay() && card.getCounters(Counters.MINING) > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.MINING, 1);
-                    card.tap();
-                    if (card.getCounters(Counters.MINING) == 0) AllZone.GameAction.sacrifice(card);
-                    super.resolve();
-                }
-            };
-            
-            mine.choices_made = new String[1];
-            mine.setBeforePayMana(new Input() {
-                
-                private static final long serialVersionUID = 376497609786542558L;
-                
-                @Override
-                public void showMessage() {
-                	if (card.isUntapped())
-                	{
-	                	mine.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
-	                            "Select a Color", Constant.Color.onlyColors));
-	                	if (mine.choices_made[0] != null){
-	                		AllZone.Stack.add(mine);
-	                	}
-                	}
-                    stop();
-                }
-            });
-
-            card.setReflectableMana("WUBRG");
-            card.addSpellAbility(mine);
-            mine.setDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool. If there are no mining counters on CARDNAME, sacrifice it.");
-            mine.setStackDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool. If there are no mining counters on CARDNAME, sacrifice it.");
-        	
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -2231880032957304542L;
-
-				public void execute() {
-					card.addCounter(Counters.MINING, 3);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Vivid Crag") || cardName.equals("Vivid Creek") || cardName.equals("Vivid Grove")
-        		|| cardName.equals("Vivid Marsh") || cardName.equals("Vivid Meadow")){
-            final Ability_Mana vivid = new Ability_Mana(card, "tap, Remove a charge counter from CARDNAME: Add one mana of any color to your mana pool.") {
-				private static final long serialVersionUID = -785117149012567841L;
-
-                @Override
-                public void undo() {
-                	card.untap();
-                    card.addCounter(Counters.CHARGE, 1);
-                }
-                
-                //@Override
-                public String mana() {
-                    return this.choices_made[0].toString();
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(choices_made[0] == null) choices_made[0] = "1";
-                    return super.canPlay() && card.getCounters(Counters.CHARGE) > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.CHARGE, 1);
-                    card.tap();
-                    super.resolve();
-                }
-            };
-            
-            vivid.choices_made = new String[1];
-            vivid.setBeforePayMana(new Input() {
-                
-                private static final long serialVersionUID = 376497609786542558L;
-                
-                @Override
-                public void showMessage() {
-                	vivid.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
-                            "Select a Color", Constant.Color.onlyColors));
-                	if (vivid.choices_made[0] != null){
-                		AllZone.Stack.add(vivid);
-                	}
-                    stop();
-                }
-            });
-            
-            card.setReflectableMana("WUBRG");
-            card.addSpellAbility(vivid);
-            vivid.setDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
-            vivid.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
-        	
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -2231880032957304542L;
-
-				public void execute() {
-					card.addCounter(Counters.CHARGE, 2);
-					card.tap();
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Tendo Ice Bridge")){
-            final Ability_Mana tendo = new Ability_Mana(card, "tap, Remove a charge counter from CARDNAME: Add one mana of any color to your mana pool.") {
-				private static final long serialVersionUID = -785117149012567841L;
-
-                @Override
-                public void undo() {
-                	card.untap();
-                    card.addCounter(Counters.CHARGE, 1);
-                }
-                
-                //@Override
-                public String mana() {
-                    return this.choices_made[0].toString();
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(choices_made[0] == null) choices_made[0] = "1";
-                    return super.canPlay() && card.getCounters(Counters.CHARGE) > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.CHARGE, 1);
-                    card.tap();
-                    super.resolve();
-                }
-            };
-            
-            tendo.choices_made = new String[1];
-            tendo.setBeforePayMana(new Input() {
-                
-                private static final long serialVersionUID = 376497609786542558L;
-                
-                @Override
-                public void showMessage() {
-                	tendo.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
-                            "Select a Color", Constant.Color.onlyColors));
-                	if (tendo.choices_made[0] != null){
-                		AllZone.Stack.add(tendo);
-                	}
-                    stop();
-                }
-            });
-            
-            card.setReflectableMana("WUBRG");
-            card.addSpellAbility(tendo);
-            tendo.setDescription("tap, remove a charge counter: Add one mana of any color to your mana pool");
-            tendo.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
-        }//*************** END ************ END **************************
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Faerie Conclave")) {
         	final long[] timeStamp = new long[1];
@@ -1060,39 +874,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
         }
         //*************** END ************ END **************************
-        
-        
-       //*************** START *********** START **************************
-        else if(cardName.equals("Crypt of Agadeem")) {
-        	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-                private static final long serialVersionUID = -3561865824450791583L;
-                
-                @Override
-                public void resolve() {
-                    Card mp = AllZone.ManaPool;
-                    CardList evildead = AllZoneUtil.getPlayerTypeInGraveyard(card.getController(), "Creature");
-                    evildead = evildead.filter(AllZoneUtil.black);
-                    
-                    for(int i = 0; i < evildead.size(); i++) {
-                        mp.addExtrinsicKeyword("ManaPool:B");
-                    }
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            
-            ability.setDescription(abCost+"Add B to your mana pool for each for each black creature card in your graveyard.");
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" adds B to your mana pool for each black creature card in your graveyard.");
-            ability.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
+
        
         //*************** START *********** START **************************
         else if(cardName.equals("Svogthos, the Restless Tomb")) {
@@ -1556,95 +1338,7 @@ class CardFactory_Lands {
             a1.setStackDescription(sb.toString());
             a1.setDescription("4: Until end of turn, becomes a 4/2 Golem artifact creature until end of turn. It's still a land.");
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Phyrexian Tower")) {
-            final Ability_Mana ability = new Ability_Mana(card, "tap, Sacrifice a creature: Add B B") {
-				private static final long serialVersionUID = 5290938125518969674L;
-
-				@Override
-                public boolean canPlayAI() {
-					return false;
-                }
-               
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                   
-                    if(c != null && c.isCreature() ) {
-                    	card.tap();
-                    	AllZone.GameAction.sacrifice(c);
-                    	super.resolve();
-                    }
-                }
-                
-                @Override
-				public String mana() {
-					return "B B";
-            	}
-            };
-           
-            Input runtime = new Input() {
-				private static final long serialVersionUID = -7876248316975077074L;
-
-				@Override
-                public void showMessage() {
-                    CardList choice = new CardList();
-                    final Player player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                    choice.addAll(play.getCards());
-
-                    choice = choice.getType("Creature");
-                   
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
-                            "Sacrifice a creature:", true, false));
-                }
-            };
-
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Grove of the Burnwillows")) {
-        	
-            final Ability_Mana ability1 = new Ability_Mana(card, "tap, your opponent gains 1 life: add G") {
-				private static final long serialVersionUID = 5290938125518969678L;
-               
-                @Override
-                public void resolve() {
-                    card.getController().getOpponent().gainLife(1, card);
-                    super.resolve();
-                }
-                
-                @Override
-				public String mana() {
-					return "G";
-            	}
-            };
-            
-            final Ability_Mana ability2 = new Ability_Mana(card, "tap, your opponent gains 1 life: add R") {
-				private static final long serialVersionUID = 5290938125518969689L;
-               
-                @Override
-                public void resolve() {
-                    card.getController().getOpponent().gainLife(1, card);
-                    super.resolve();
-                }
-                
-                @Override
-				public String mana() {
-					return "R";
-            	}
-            };
-
-            card.addSpellAbility(ability1);
-            card.addSpellAbility(ability2);      
-        }//*************** END ************ END **************************
-        
-        
+ 
         //*************** START *********** START **************************
         else if(cardName.equals("Lotus Vale")) {
         	/*
@@ -1699,12 +1393,14 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Kjeldoran Outpost") || cardName.equals("Balduvian Trading Post")
-        		||cardName.equals("Heart of Yavimaya")) {
+        		|| cardName.equals("Heart of Yavimaya") || cardName.equals("Lake of the Dead")) {
         	
         	final String[] type = new String[1];
         	if(cardName.equals("Kjeldoran Outpost")) type[0] = "Plains";
         	else if(cardName.equals("Balduvian Trading Post")) type[0] = "Mountain";
         	else if(cardName.equals("Heart of Yavimaya")) type[0] = "Forest";
+        	else if(cardName.equals("Lake of the Dead")) type[0] = "Swamp";
+        	else if(cardName.equals("Soldevi Excavations")) type[0] = "Island";
         	
         	final Command comesIntoPlay = new Command() {
         		private static final long serialVersionUID = 6175830918425915833L;
@@ -1754,74 +1450,6 @@ class CardFactory_Lands {
 
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Lake of the Dead")) {
-        	Ability_Cost abCost = new Ability_Cost("T Sac<1/Swamp>", cardName, true);
-        	final Ability_Activated mana = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = -4916450798017379003L;
-				@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-        		@Override
-        		public void resolve() {
-        			AllZone.ManaPool.addManaToFloating("B B B B", card);
-        		}
-        	};
-        	final Command comesIntoPlay = new Command() {
-				private static final long serialVersionUID = 8514298400925774334L;
-				final Player player = card.getController();
-        		public void execute() {
-        			CardList swamps = AllZoneUtil.getPlayerTypeInPlay(player, "Swamp");
-
-        			if( player.equals(AllZone.ComputerPlayer)) {
-        				if( swamps.size() > 0 ) {
-        					CardList tappedSwamps = new CardList(swamps.toArray());
-        					tappedSwamps = tappedSwamps.filter(AllZoneUtil.tapped);
-        					//if any are tapped, sacrifice it
-        					//else sacrifice random
-        					if( tappedSwamps.size() > 0 ) {
-        						AllZone.GameAction.sacrifice(tappedSwamps.get(0));
-        					}
-        					else {
-        						AllZone.GameAction.sacrifice(swamps.get(0));
-        					}
-        				}
-        				else {
-        					AllZone.GameAction.sacrifice(card);
-        				}
-        			}
-        			else { //this is the human resolution
-        				Input target = new Input() {
-							private static final long serialVersionUID = -7346173541960840052L;
-							public void showMessage() {
-        						AllZone.Display.showMessage(cardName+" - Select one Swamp to sacrifice");
-        						ButtonUtil.enableOnlyCancel();
-        					}
-        					public void selectButtonCancel() {
-        						AllZone.GameAction.sacrifice(card);
-        						stop();
-        					}
-        					public void selectCard(Card c, PlayerZone zone) {
-        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains("Swamp")) {
-        							AllZone.GameAction.sacrifice(c);
-        							stop();
-        						}
-        					}//selectCard()
-        				};//Input
-        				AllZone.InputControl.setInput(target);
-        			}
-        		}
-        	};
-
-        	card.addComesIntoPlayCommand(comesIntoPlay);
-        	mana.setDescription(abCost+"Add B B B B to your mana pool.");
-        	mana.setStackDescription(cardName+" - add B B B B to your mana pool.");
-        	card.addSpellAbility(mana);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sheltered Valley")) {
@@ -2067,21 +1695,23 @@ class CardFactory_Lands {
         	
         	final String shortString = shortTemp;
         	StringBuilder desc = new StringBuilder();
-        	desc.append("tap, Remove any number of storage counters from ");
-        	desc.append(cardName);
-        	desc.append(": Add ");
-        	desc.append(shortString);
+        	desc.append("tap, Remove any number of storage counters from ").append(cardName);
+        	desc.append(": Add ").append(shortString);
         	desc.append(" to your mana pool for each charge counter removed this way.");
             
-            final Ability_Mana addMana = new Ability_Mana(card, desc.toString()) {
+        	final Ability_Mana abMana = new Ability_Mana(card, "0", shortString){
+				private static final long serialVersionUID = -4506828762302357781L;
+        		
+                @Override
+                public boolean canPlay(){
+                	return false;
+                }
+        	};
+        	abMana.undoable = false;
+        	
+            final Ability addMana = new Ability(card, "0", desc.toString()) {
 				private static final long serialVersionUID = -7805885635696245285L;
 
-				@Override
-                public void undo() {
-                    card.addCounter(Counters.STORAGE, num[0]);
-                    card.untap();
-                }
-                
               //@Override
                 public String mana() {
                 	StringBuilder mana = new StringBuilder();
@@ -2095,10 +1725,13 @@ class CardFactory_Lands {
                 }
                 
                 @Override
+                public boolean canPlayAI(){
+                	return false;
+                }
+                
+                @Override
                 public void resolve() {
-                    card.subtractCounter(Counters.STORAGE, num[0]);
-                    card.tap();
-                    super.resolve();
+                	abMana.produceMana(mana());
                 }
             };
             
@@ -2112,137 +1745,25 @@ class CardFactory_Lands {
                 	for(int j=0;j<=num[0];j++) {
                 		choices[j] = ""+j;
                 	}
-                    String answer = (String)(AllZone.Display.getChoiceOptional(
-                            "Storage counters to remove", choices));
-                    num[0] = Integer.parseInt(answer);
-                    AllZone.Stack.add(addMana);
+                    String answer = (String)(AllZone.Display.getChoiceOptional("Storage counters to remove", choices));
+                    if(null != answer && !answer.equals("")) {
+	                    num[0] = Integer.parseInt(answer);
+	                    card.tap();
+	                    card.subtractCounter(Counters.STORAGE, num[0]);
+	                    stop();
+	                    AllZone.Stack.add(addMana);
+	                    return;
+                    }
                     stop();
                 }
             };
             
+            addMana.setDescription(desc.toString());
             addMana.setBeforePayMana(runtime);
             card.addSpellAbility(addMana);
+            card.addSpellAbility(abMana);
         }//*************** END ************ END **************************
-        
-        //*************** START ************ START **************************
-        else if(cardName.equals("Urza's Power Plant") || cardName.equals("Urza's Mine") ||
-        		cardName.equals("Urza's Tower")) {
-        	final String[] bonus = new String[1];
-        	
-        	StringBuilder desc = new StringBuilder();
-        	desc.append("Tap: Add 1 to your mana pool. ");
-        	if(cardName.equals("Urza's Power Plant")) {
-        		bonus[0] = "2";
-        		desc.append("If you control an Urza's Mine and an Urza's Tower, add 2 to your mana pool instead.");
-        	}
-        	else if(cardName.equals("Urza's Mine")) {
-        		bonus[0] = "2";
-        		desc.append("If you control an Urza's Power Plant and an Urza's Tower, add 2 to your mana pool instead.");
-        	}
-        	else if(cardName.equals("Urza's Tower")) {
-        		bonus[0] = "3";
-        		desc.append("If you control an Urza's Mine and an Urza's Power Plant, add 3 to your mana pool instead.");
-        	}
-        	
-            final Ability_Mana addMana = new Ability_Mana(card, desc.toString()) {
-				private static final long serialVersionUID = -3598374122722723225L;
 
-				@Override
-                public void undo() {
-                    card.untap();
-                }
-                
-              //@Override
-                public String mana() {
-                	if(AllZoneUtil.hasAllUrzas(card.getController()))
-                		return bonus[0];
-                	else return "1";
-                }
-                
-                @Override
-                public void resolve() {
-                    card.tap();
-                    super.resolve();
-                }
-            };
-            
-            addMana.setDescription(desc.toString());
-            card.addSpellAbility(addMana);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Saprazzan Skerry") || cardName.equals("Remote Farm") ||
-        		cardName.equals("Sandstone Needle") || cardName.equals("Peat Bog") ||
-        		cardName.equals("Hickory Woodlot")) {
-        	
-        	String shortTemp = "";
-        	if(cardName.equals("Saprazzan Skerry")) shortTemp = "U";
-        	if(cardName.equals("Remote Farm")) shortTemp = "W";
-        	if(cardName.equals("Sandstone Needle")) shortTemp = "R";
-        	if(cardName.equals("Peat Bog")) shortTemp = "B";
-        	if(cardName.equals("Hickory Woodlot")) shortTemp = "G";
-        	
-        	final String shortString = shortTemp;
-        	StringBuilder desc = new StringBuilder();
-        	desc.append("tap, Remove a depletion counter from ");
-        	desc.append(cardName);
-        	desc.append(": Add ");
-        	desc.append(shortString).append(" ").append(shortString);
-        	desc.append(" to your mana pool. If there are no depletion counters on ");
-        	desc.append(cardName).append(", sacrifice it.");
-        	
-            final Ability_Mana ability = new Ability_Mana(card, desc.toString()) {
-				private static final long serialVersionUID = -1147974499024433438L;
-
-				@Override
-                public boolean canPlayAI() {
-					return false;
-                }
-				
-				@Override
-                public void undo() {
-					card.addCounterFromNonEffect(Counters.DEPLETION, 1);
-                    card.untap();
-                    //if it got sacrificed, you're kind of screwed
-                }
-               
-                @Override
-                public void resolve() {
-                    card.subtractCounter(Counters.DEPLETION, 1);
-                    if(card.getCounters(Counters.DEPLETION) == 0) {
-                    	AllZone.GameAction.sacrifice(card);
-                    }
-                    super.resolve();
-                }
-                
-                @Override
-                public String mana() {
-                	StringBuilder mana = new StringBuilder();
-                	for(int i = 0; i < 2; i++) {
-                		mana.append(shortString).append(" ");
-                	}
-                	return mana.toString().trim();
-                }
-            };
-           
-            Input runtime = new Input() {
-				private static final long serialVersionUID = -7876248316975077074L;
-
-				@Override
-                public void showMessage() {
-                    if(GameActionUtil.showYesNoDialog(card, "Remove a Depletion counter?")) {
-                    	card.tap();
-                    	AllZone.Stack.add(ability);
-                    	stop();
-                    }
-                    else stop();
-                }
-            };
-
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
         //*************** START *********** START **************************
         //Lorwyn Dual Lands, and a couple Morningtide...
         else if(cardName.equals("Ancient Amphitheater") || cardName.equals("Auntie's Hovel")
@@ -2309,45 +1830,9 @@ class CardFactory_Lands {
             });
         }//*************** END ************ END **************************
         
-        
+
         //*************** START ************ START **************************
-        else if(cardName.equals("Horizon Canopy")) {
-        	/*
-        	 * Tap, Pay 1 life: Add one W or G to your mana pool.
-        	 */
-        	Ability_Cost abCost = new Ability_Cost("T PayLife<1>", cardName, true);
-        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = -5393697921811242255L;
 
-				@Override
-        		public void resolve() {
-        			String color = "";
-        			String[] colors = new String[] {Constant.Color.White, Constant.Color.Green};
-
-        			Object o = AllZone.Display.getChoice("Choose mana color", colors);
-        			color = (String) o;
-
-        			if(color.equals("white")) color = "W";
-        			else if(color.equals("green")) color = "G";
-
-        			Card mp = AllZone.ManaPool;
-        			mp.addExtrinsicKeyword("ManaPool:" + color);
-        		}
-        	};
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(abCost).append("Add G or W to your mana pool.");
-        	mana.setDescription(sbDesc.toString());
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(cardName).append(" - add G or W to your mana pool.");
-        	mana.setStackDescription(sbStack.toString());
-        	
-        	card.addSpellAbility(mana);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START ************ START **************************
         else if(cardName.equals("Calciform Pools") || cardName.equals("Dreadship Reef") ||
         		cardName.equals("Fungal Reaches")  || cardName.equals("Molten Slagheap") ||
         		cardName.equals("Saltcrusted Steppe")) {
@@ -2368,7 +1853,23 @@ class CardFactory_Lands {
         	final String primary = pTemp;
         	final String secondary = sTemp;
         	
-        	final Ability_Mana addMana = new Ability_Mana(card, "tap, Remove X storage counters from "+cardName+": Add X mana in any combination of "+primary+" and/or "+secondary+" to your mana pool.") {
+        	StringBuilder description = new StringBuilder();
+        	description.append("1, Remove X storage counters from ").append(cardName);
+        	description.append(": Add X mana in any combination of ").append(primary);
+        	description.append(" and/or ").append(secondary).append(" to your mana pool.");
+        	
+        	// This dummy AbMana is for Reflecting and for having an abMana produce mana
+        	final Ability_Mana abMana = new Ability_Mana(card, "0", primary+" "+secondary){
+				private static final long serialVersionUID = -4506828762302357781L;
+        		
+                @Override
+                public boolean canPlay(){
+                	return false;
+                }
+        	};
+        	abMana.undoable = false;
+        	
+        	final Ability addMana = new Ability(card, "1", description.toString()) {
 				private static final long serialVersionUID = 7177960799748450242L;
 
 				//@Override
@@ -2383,11 +1884,16 @@ class CardFactory_Lands {
                     return mana.toString().trim();
                 }
                 
+                
+                @Override
+                public boolean canPlayAI(){
+                	return false;
+                }
+                
                 @Override
                 public void resolve() {
-                    card.subtractCounter(Counters.STORAGE, num[0]);
-                    card.tap();
-                    super.resolve();
+                	abMana.undoable = false;
+                	abMana.produceMana(mana());
                 }
             };
             
@@ -2403,20 +1909,34 @@ class CardFactory_Lands {
                 	}
                     String answer = (String)(AllZone.Display.getChoiceOptional(
                             "Storage counters to remove", choices));
+                    if (answer == null){
+                    	stop();
+                    	return;
+                    }
+                    	
                     num[0] = Integer.parseInt(answer);
                     
                     String splitNum = (String)(AllZone.Display.getChoiceOptional(
                             "Number of "+primary+" to add", choices));
+                    if (splitNum == null){
+                    	stop();
+                    	return;
+                    }
+                    
                     split[0] = Integer.parseInt(splitNum);
                     if(num[0] > 0 || split[0] > 0) {
+                    	card.subtractCounter(Counters.STORAGE, num[0]);
+                    	stop();
                     	AllZone.Stack.add(addMana);
+                    	return;
                     }
                     stop();
                 }
             };
-            
-            addMana.setBeforePayMana(runtime);
+            addMana.setDescription(description.toString());
+            addMana.setAfterPayMana(runtime);
             card.addSpellAbility(addMana);
+            card.addSpellAbility(abMana);
         }//*************** END ************ END **************************
         
         
@@ -2471,60 +1991,6 @@ class CardFactory_Lands {
         	};
 
         	card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-        
-      
-        //*************** START ************ START **************************
-        else if(cardName.equals("Meteor Crater")) {
-        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = -1070869703885279573L;
-
-				@Override
-        		public void resolve() {
-					CardList perms = AllZoneUtil.getPlayerCardsInPlay(card.getController());
-					ArrayList<String> colors = new ArrayList<String>();
-					for(Card c:perms) {
-						if(c.isBlack() && !colors.contains(Constant.Color.Black)) colors.add(Constant.Color.Black);
-						if(c.isBlue() && !colors.contains(Constant.Color.Blue)) colors.add(Constant.Color.Blue);
-						if(c.isGreen() && !colors.contains(Constant.Color.Green)) colors.add(Constant.Color.Green);
-						if(c.isRed() && !colors.contains(Constant.Color.Red)) colors.add(Constant.Color.Red);
-						if(c.isWhite() && !colors.contains(Constant.Color.White)) colors.add(Constant.Color.White);
-					}
-        			String color = "";
-
-        			Object o = AllZone.Display.getChoice("Choose mana color", colors.toArray());
-        			color = (String) o;
-
-        			if(color.equals("white")) color = "W";
-        			else if(color.equals("blue")) color = "U";
-        			else if(color.equals("black")) color = "B";
-        			else if(color.equals("red")) color = "R";
-        			else if(color.equals("green")) color = "G";
-
-        			AllZone.ManaPool.addManaToFloating(color, card);
-        		}
-				
-				@Override
-				public boolean canPlay() {
-					boolean found = false;
-					CardList perms = AllZoneUtil.getPlayerCardsInPlay(card.getController());
-					for(Card c:perms) {
-						if(c.isBlack() || c.isBlue() || c.isGreen() || c.isRed() || c.isWhite()) found = true;
-					}
-					return found && super.canPlay();
-				}
-        	};
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(abCost).append("Choose a color of a permanent you control. Add one mana of that color to your mana pool.");
-        	mana.setDescription(sbDesc.toString());
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(cardName).append(" - add one mana of that color to your mana pool.");
-        	mana.setStackDescription(sbStack.toString());
-        	
-        	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
         
         return card;

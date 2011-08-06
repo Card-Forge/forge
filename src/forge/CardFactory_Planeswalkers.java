@@ -2448,7 +2448,6 @@ class CardFactory_Planeswalkers {
                     
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    Card mp = AllZone.ManaPool;//list.getCard(0);
                     CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
                     list = list.filter(new CardListFilter()
                     {
@@ -2458,8 +2457,11 @@ class CardFactory_Planeswalkers {
                     	}
                     });
                     
-                    for (int i=0;i<list.size();i++)
-                    	mp.addExtrinsicKeyword("ManaPool:R");
+                    Ability_Mana abMana = new Ability_Mana(card, "0", "R", list.size()) {
+                    	private static final long serialVersionUID = -2182129023960978132L;
+                    };
+                    abMana.undoable = false;
+                    abMana.produceMana();
                     
                 }//resolve()
                 

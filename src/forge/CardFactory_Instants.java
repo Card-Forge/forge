@@ -2208,7 +2208,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                	Phase.HighTideCount = Phase.HighTideCount + 1;
+                	Phase.HighTides.add(this.getSourceCard());
                 }//resolve()
             };//SpellAbility
             card.clearSpellAbility();
@@ -2369,101 +2369,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-               
-        //*************** START *********** START **************************
-        else if(cardName.equals("Seething Song")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 113811381138L;
-                
-                @Override
-                public void resolve() {
-                    Card mp = AllZone.ManaPool;
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            
-            spell.setStackDescription("Adds R R R R R to your mana pool");
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            return card;
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Dark Ritual") || cardName.equals("Cabal Ritual")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = -8579887529151755266L;
-                
-                @Override
-                public void resolve() {
-                    Card mp = AllZone.ManaPool;
-                    mp.addExtrinsicKeyword("ManaPool:B");
-                    mp.addExtrinsicKeyword("ManaPool:B");
-                    mp.addExtrinsicKeyword("ManaPool:B");
-                    if(cardName.equals("Cabal Ritual") && card.getController().hasThreshold()) {
-                    	mp.addExtrinsicKeyword("ManaPool:B");
-                        mp.addExtrinsicKeyword("ManaPool:B");
-                    }
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" adds B B B to your mana pool.");
-            if(cardName.equals("Cabal Ritual")) sb.append("If you have threshold, add extra B B.");
-            spell.setStackDescription(sb.toString());
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            return card;
-        }//*************** END ************ END **************************
 
-   
-        //*************** START *********** START **************************
-        else if (cardName.equals("Pyretic Ritual")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -5473428583650237774L;
-
-				@Override
-                public void resolve() {
-                    Card mp = AllZone.ManaPool;
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" adds R R R to your mana pool");
-            spell.setStackDescription(sb.toString());
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            return card;
-        }//*************** END ************ END **************************
-
-        
         //*************** START *********** START **************************
         else if (cardName.equals("Path to Exile")) {
             SpellAbility spell = new Spell(card) {
@@ -3512,87 +3418,6 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sacrifice")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 7081747227572709229L;
-
-				@Override
-                public boolean canPlay() {
-                    return AllZoneUtil.getCreaturesInPlay(card.getController()).size() > 0;
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                	//Compy doesn't have a mana pool, so can't play this spell
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        AllZone.GameAction.sacrifice(c);
-                        int amt = CardUtil.getConvertedManaCost(c);
-                        StringBuilder mana = new StringBuilder();
-                        for(int i = 0; i < amt; i++) {
-                        	mana.append("B ");
-                        }
-                        Card mp = AllZone.ManaPool;
-                        mp.addExtrinsicKeyword("ManaPool:"+mana.toString());
-                        
-                    }//if isCardInPlay
-                }
-            };
-
-            Input runtime = new Input() {
-				private static final long serialVersionUID = 2544440783628551409L;
-
-				@Override
-                public void showMessage() {
-                    CardList choice = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    
-                    boolean free = false;
-                    if(this.isFree()) free = true;
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice,
-                            "Sacrifice - Select creature to sacrifice.", false, free));
-                }
-            };
-            spell.setBeforePayMana(runtime);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Brightstone Ritual")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 7081747227572709229L;
-                @Override
-                public boolean canPlayAI() {
-                	//Compy doesn't have a mana pool, so can't play this spell
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                	CardList goblins = AllZoneUtil.getTypeInPlay("Goblin");
-                	StringBuilder mana = new StringBuilder();
-                	for(int i = 0; i < goblins.size(); i++) {
-                		mana.append("R ");
-                	}
-                	Card mp = AllZone.ManaPool;
-                	mp.addExtrinsicKeyword("ManaPool:"+mana.toString());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Berserk")) {
             final SpellAbility spell = new Spell(card) {
@@ -4205,35 +4030,7 @@ public class CardFactory_Instants {
             card.setSpellWithChoices(true);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
-        
-      
-        //*************** START *********** START **************************
-        else if(cardName.equals("Songs of the Damned")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -7613104859827691986L;
 
-				@Override
-                public boolean canPlayAI() {
-                	//Compy doesn't have a mana pool, so can't play this spell
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                	CardList creats = AllZoneUtil.getPlayerGraveyard(card.getController());
-                	creats = creats.filter(AllZoneUtil.creatures);
-                	StringBuilder mana = new StringBuilder();
-                	for(int i = 0; i < creats.size(); i++) {
-                		mana.append("B ");
-                	}
-                	Card mp = AllZone.ManaPool;
-                	mp.addExtrinsicKeyword("ManaPool:"+mana.toString());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
       
         //*************** START *********** START **************************
         else if(cardName.equals("Remove Enchantments")) {

@@ -1,9 +1,6 @@
 
 package forge;
 
-
-//import java.util.*;
-
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
 //CANNOT be used for ABILITIES
@@ -54,11 +51,12 @@ public class Input_PayManaCost extends Input {
         	// I'm not sure if this actually prevents anything that wouldn't be handled by canPlay below
             return;
         }
-        boolean canUse = false;
-        for(Ability_Mana am:card.getManaAbility())
-            canUse |= am.canPlay();
-        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost,false);
-        showMessage();
+
+        manaCost = Input_PayManaCostUtil.activateManaAbility(spell, card, manaCost);
+        
+        // only show message if this is the active input
+        if (AllZone.InputControl.getInput() == this)
+        	showMessage();
         
         if(manaCost.isPaid()) {
         	originalCard.setSunburstValue(manaCost.getSunburst());
@@ -73,7 +71,7 @@ public class Input_PayManaCost extends Input {
 			} else
 				AllZone.InputControl.resetInput();
 		} else {
-			AllZone.ManaPool.clearPay(false);
+			AllZone.ManaPool.clearPay(spell, false);
 			resetManaCost();
 
 			// if tap ability, tap card
@@ -98,7 +96,7 @@ public class Input_PayManaCost extends Input {
     @Override
     public void selectButtonCancel() {
         resetManaCost();
-        AllZone.ManaPool.unpaid();
+        AllZone.ManaPool.unpaid(spell, true);
         AllZone.Human_Battlefield.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
         
         stop();

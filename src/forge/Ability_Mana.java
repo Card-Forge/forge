@@ -1,379 +1,170 @@
-
 package forge;
 
-
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-abstract public class Ability_Mana extends SpellAbility implements java.io.Serializable {
-    private ArrayList<Command> runcommands = new ArrayList<Command>();
-    public String              orig;
-    private String             Mana;
-    private Card               sourceCard;
-    private boolean            reflectedMana = false;	   
+abstract public class Ability_Mana extends Ability_Activated implements java.io.Serializable {
+	private static final long serialVersionUID = -6816356991224950520L;
+
+    private String		origProduced;
+    private int			amount = 1;
+    protected boolean	reflected = false;
+    protected boolean 	undoable = true;
+    protected boolean	canceled = false;
     
-    public boolean isBasic() {
-        return (orig.length() == 10 && orig.startsWith("tap: add ") && "1WBURG".contains("" + orig.charAt(9)));
+    public Ability_Mana(Card sourceCard, String parse, String produced) {
+    	this(sourceCard, parse, produced, 1);
     }
     
-    public boolean isSacrifice()
-    {
-    	return orig.contains("Sacrifice CARDNAME: Add ");
+    public Ability_Mana(Card sourceCard, String parse, String produced, int num) {
+    	this(sourceCard, new Ability_Cost(parse, sourceCard.getName(), true), produced, num);
     }
     
-    public boolean isSacrificeAny()
-    {
-    	return (orig.contains("Sacrifice a") && orig.contains(": Add"));
+    public Ability_Mana(Card sourceCard, Ability_Cost cost, String produced) {
+        this(sourceCard, cost, produced, 1);
     }
     
-    public boolean isUndoableMana() {
-    	// isBasic, plus "2" so Sol Ring is counted
-    	return (orig.length() == 10 && orig.startsWith("tap: add ") && "21WBURG".contains("" + orig.charAt(9)));
+    public Ability_Mana(Card sourceCard, Ability_Cost cost, String produced, int num) {
+        super(sourceCard, cost, null);
+
+        origProduced = produced;
+        amount = num;
     }
-    
-    private static final long serialVersionUID = 8292723782268822439L;
-    
-    public void setReflectedMana(boolean b) {
-    	this.reflectedMana = b;
-    }
-    public boolean isReflectedMana() {
-    	return (this.reflectedMana);
-    }
-    public boolean isSnow() {
-        return getSourceCard().isSnow();
-    }//override?
-    
+
     @Override
-    public boolean isTapAbility() {
-        return isTapAbility(orig);
-    }
-    
-    private static boolean isTapAbility(String orig) {
-        String cost = orig.split(":")[0];
-        cost = cost.replaceAll("Tap", "tap").replaceAll("tap", "T");
-        return (cost.contains("T"));
-    }
-    
-    public Ability_Mana(Card sourceCard, String orig) {
-    	super(SpellAbility.Ability, sourceCard);
-        
-        this.sourceCard = sourceCard;
-        this.orig = (sourceCard.getName().length() == 0? orig:orig.replaceAll(sourceCard.getName(), "CARDNAME"));
-        setDescription(orig);
-        
-        if (sourceCard.getName().equals("Forbidden Orchard"))
-        {
-        	final Card crd = sourceCard;
-        	runcommands.add(new Command() {
-				private static final long serialVersionUID = 1365329719980281985L;
+    public boolean canPlayAI() {
+        return false;
+    }    
 
-				public void execute()
-        		{
-					//  The computer can now use this card. A version of the 
-					//  line of code below was added to ComputerUtil.payManaCost()
-        			AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(crd, AllZone.ComputerPlayer));
-        		}
-        	});
-        }
-        
-        if (sourceCard.getName().equals("Undiscovered Paradise"))
-        {
-        	final Card crd = sourceCard;
-        	runcommands.add(new Command() {
-				private static final long serialVersionUID = 1365329719980281985L;
+	@Override
+	public void resolve() {
+		produceMana();
+	}
+	
+	public void produceMana(){
+		produceMana(origProduced);
+	}
+	
+	public void produceMana(String produced){
+		final Card source = this.getSourceCard();
+		// change this, once ManaPool moves to the Player
+		// this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced, getSourceCard());
+		AllZone.ManaPool.addManaToFloating(produced, source);
 
-				public void execute()
-        		{
-					//  The computer can now use this card. A version of the 
-					//  line of code below was added to ComputerUtil.payManaCost()
-        			crd.setBounceAtUntap(true);
-        		}
-        	});
-        }
+		// TODO: all of the following would be better as trigger events "tapped for mana"
+		
+		if (source.getType().contains("Swamp")){
+			// If Nirkana Revenant triggers, make mana undoable
 
-        if(isBasic())//lowers memory usage drastically
-        {
-            Mana = "" + orig.charAt(9);
-            setManaCost("0");
-            return;
-        }
-        else if (isSacrifice() || isSacrificeAny())
-        {
-        	String regex = "[0-9]+,";
-        	Pattern pattern = Pattern.compile(regex); 
-        	Matcher matcher = pattern.matcher(orig); 
-        	
-        	if (orig.startsWith("Sacrifice ") || orig.startsWith("tap, Sacrifice "))
-        		setManaCost("0");
-        	else if(matcher.find()) 
-        		setManaCost(matcher.group().substring(0, matcher.group().length()-1));
-        		
-        	return;
-        }
-        String[] parts = orig.split(":");
-        Mana = parts[1];
-        Mana = Mana.replaceAll(" add ", "");
-        //Mana = Mana.replaceAll(" ", ""); // sol - removed for new manapool compatibility
-        
-        String cost = parts[0];
-        cost = cost.replaceAll("Tap", "tap").replaceAll("tap", "T");
-        //cost = cost.replaceAll("T, ", "");
-        setManaCost(cost.replaceAll("T", "").split(",")[0]);
-        if(getManaCost().equals("")) setManaCost("0");
-        
-    }
-    
-    @Override
-    public boolean equals(Object o)//Mana abilities with equal descriptions are considered equal, please take this into account
-    {
-    	if(o instanceof Ability_Mana){
-    		Ability_Mana ab = (Ability_Mana) o;
-    		return ab.orig.equals(orig);
-    	}
-    	else return false;
-    }
-    
-    public boolean equals(String s)//Mana abilities with equal descriptions are considered equal, please take this into account
-    {
-        return s.equals(orig);
-    }
-    
-    public boolean equalsIgnoreMana(Ability_Mana ma) {
-        String noManaDesc = orig.substring(0, orig.indexOf(Mana));
-        noManaDesc += orig.substring(orig.indexOf(Mana) + Mana.length());
-        String noManaDesc_2 = ma.orig.substring(0, ma.orig.indexOf(Mana));
-        noManaDesc_2 += ma.orig.substring(ma.orig.indexOf(Mana) + Mana.length());
-        return noManaDesc.equals(noManaDesc_2);
-    }
-    
-    
-    @Override
-    public String toString() {
-        return orig;
-    }
-    
-    boolean undoable = false;
-    
-    public void undo() {
-        getSourceCard().untap();
-    }//override undo() and set undoable for custom undo costs
-    
-    public boolean undoable() {
-        return isUndoableMana() || undoable;
-    }
-    
-    public void parseCosts() {
-        parseCosts(orig);
-    }
-    
-    private void parseCosts(String orig) {
-        setBeforePayMana(null);// reset everything
-        setAfterPayMana(null);
-        setAfterResolve(null);
-        
-        String[] split = {",", ":", "."};//i.e. "cost,cost,cost<...>:Effect.Effect.Effect.
-        String copy = orig + "";
-        for(String s:split) {
-            copy = copy.replaceAll(" " + s, s); //trim splitter whitespace
-            copy = copy.replaceAll(s + " ", s);
-        }
-        copy = copy.replaceAll("T" + split[0], "");//i.e. "T,"-> ""(reason for this is that tapCost is already determined)
-        copy = copy.trim();
-        if(!("123456789GWURBXY(".contains(copy.charAt(0) + ""))) {
-            setManaCost("0");
-            copy = split[0] + copy;
-        }//Hacky, but should work
-        else setManaCost(copy.substring(0, copy.indexOf(",")));
-        String divider = ",";
-        while(!copy.trim().equals("")) {
-            if(copy.startsWith(":")) if(!divider.equals(".")) divider = ".";
-            while(copy.startsWith(":") || copy.startsWith(divider))
-                copy = copy.substring(1);
-            String current = copy.substring(0, copy.indexOf(","));
-            /*if (current.startsWith("Sacrifice a")){
-            	
-            }*/
-            copy = copy.substring(current.length());
-        }
-    }
-    
-    @Override
-    public void resolve() {
-    	if (isSacrifice())
-    		AllZone.GameAction.sacrifice(sourceCard);
-    	AllZone.ManaPool.addMana(this);
-    	
-    	// Nirkana Revenant Code
-    	CardList Nirkana_Human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Nirkana Revenant");
-        if(Nirkana_Human.size() > 0 && sourceCard.getType().contains("Swamp") && sourceCard.getController().isHuman()) {
-        	for(int i = 0; i < Nirkana_Human.size(); i++) {
-        		AllZone.ManaPool.addManaToFloating("B", Nirkana_Human.get(i));	
-        	}
-        } 
+			CardList nirkanas = AllZoneUtil.getPlayerCardsInPlay(getActivatingPlayer(), "Nirkana Revenant");
+			int size = nirkanas.size();
+			for(int i = 0; i < size; i++){
+				this.undoable = false;
+				AllZone.ManaPool.addManaToFloating("B", nirkanas.get(i));
+			}
+		}
+		if (source.getType().contains("Island")){
+			// If High Tide triggers, make mana undoable
+			
+			int size = Phase.HighTides.size();
+			for(int i = 0; i < size; i++){
+				this.undoable = false;
+				AllZone.ManaPool.addManaToFloating("U", Phase.HighTides.get(i));
+			}
+		}
+		
+		if (source.isLand()){
+			CardList manaBarbs = AllZoneUtil.getCardsInPlay("Manabarbs");
 
-    	// High Tide Code
-        if(Phase.HighTideCount > 0 && sourceCard.getType().contains("Island") && sourceCard.getController().isHuman()) {
-        	for(int i = 0; i < Phase.HighTideCount; i++) {
-        		AllZone.ManaPool.addManaToFloating("U", sourceCard);	
-        	}
-        }
-        
-        //Manabarbs code
-        if(sourceCard.isLand() && this.isTapAbility()) {
-        	CardList barbs = AllZoneUtil.getCardsInPlay("Manabarbs");
-        	for(Card barb:barbs) {
-        		final Card manabarb = barb;
-        		SpellAbility ability = new Ability(manabarb, "") {
+			for(final Card c : manaBarbs){
+				this.undoable = false;
+        		SpellAbility ability = new Ability(c, "") {
         			@Override
         			public void resolve() {
-        				sourceCard.getController().addDamage(1, manabarb);
+        				source.getController().addDamage(1, c);
         			}
         		};
+        		
         		StringBuilder sb = new StringBuilder();
-        		sb.append(manabarb.getName()).append(" - deal 1 damage to ").append(sourceCard.getController());
+        		sb.append(c.getName()).append(" - deal 1 damage to ").append(source.getController());
         		ability.setStackDescription(sb.toString());
         		
         		AllZone.Stack.add(ability);
-        	}
+			}
+		}
+		
+        if(source.getName().equals("Rainbow Vale")) {
+        	this.undoable = false;
+        	source.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
         }
         
-        if(sourceCard.getName().equals("Rainbow Vale")) {
-        	sourceCard.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+        if (source.getName().equals("Undiscovered Paradise")) {
+        	this.undoable = false;
+        	// Probably best to conver this to an Extrinsic Ability
+        	source.setBounceAtUntap(true);
         }
         
-        if(sourceCard.isLand() && sourceCard.isEnchantedBy("Wild Growth")) {
-        	if(sourceCard.getController().equals(AllZone.HumanPlayer)) {
-        		AllZone.ManaPool.addExtrinsicKeyword("ManaPool:G");
-        	}
-        	else {
-        		//only works for human since compy doesn't have the concept of
-        		//a mana pool.  Also, that code would currently go in ComputerUtil.payManaCost
-        		//(like the code for Manabarbs)
-        	}
+        if (source.getName().equals("Forbidden Orchard")) {
+        	this.undoable = false;
+        	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(source, getActivatingPlayer().getOpponent()));
         }
         
-        if(sourceCard.getType().contains("Mountain") && AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
+        if(source.getType().contains("Mountain") && AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
         	CardList list = AllZoneUtil.getCardsInPlay("Gauntlet of Might");
         	for(int i = 0; i < list.size(); i++) {
         		AllZone.ManaPool.addManaToFloating("R", list.get(i));
         	}
         }
         
-        if(sourceCard.isLand() && sourceCard.isEnchantedBy("Overgrowth")) {
-        	if(sourceCard.getController().equals(AllZone.HumanPlayer)) {
-        		AllZone.ManaPool.addExtrinsicKeyword("ManaPool:G");
-        		AllZone.ManaPool.addExtrinsicKeyword("ManaPool:G");
-        	}
-        	else {
-        		//only works for human since compy doesn't have the concept of
-        		//a mana pool.  Also, that code would currently go in ComputerUtil.payManaCost
-        		//(like the code for Manabarbs)
-        	}
+        ArrayList<Card> auras = source.getEnchantedBy();
+        for(Card c : auras){
+        	if (c.getName().equals("Wild Growth")){
+        		this.undoable = false;
+				AllZone.ManaPool.addManaToFloating("G", c);
+			}
+        	if (c.getName().equals("Overgrowth")){
+				this.undoable = false;
+				AllZone.ManaPool.addManaToFloating("G", c);
+				AllZone.ManaPool.addManaToFloating("G", c);
+			}
         }
+	}
+	
+	public String mana() { return origProduced; }
+	public void setMana(String s) { origProduced = s; }
+	public void setReflectedMana(boolean bReflect) { reflected = bReflect; }
+	
+	public boolean isSnow() { return this.getSourceCard().isSnow(); }
+	public boolean isSacrifice() { return this.getPayCosts().getSacCost(); }
+	public boolean isReflectedMana() { return reflected; }
+	
+	public boolean canProduce(String s) { return origProduced.contains(s); }
+	
+	public boolean isBasic(){
+		if (origProduced.length() != 1)
+			return false;
+		
+		if (amount > 1)
+			return false;
+		
+		return true;
+	}
 
-        if(!runcommands.isEmpty()) for(Command c:runcommands)
-            c.execute();
-    }
-    
-    public int getX() {
-        return getSourceCard().getX();
-    }//override these when not defined by card,
-    
-    public void setX(int X) {
-        getSourceCard().setX(X);
-    }//i.e. "T, remove X charge counters from {name}: add X+1 <color> mana to your mana pool"
-    
-    public String mana() {
-    	if (orig.contains("for each")) {
-            /*String[] manaPart = orig.split(": add ");
-            String m = manaPart[1];
-            m = m.replaceAll(" add ", "");
-            //TOhaveDOne: make this handle "multiple-mana symbol" cases, if they are ever needed
-            m = m.substring(0, 2);*/
-            String m = orig.split(": add ")[1].split(" to ")[0];
-            
-            String[] parts = orig.split(" for each ");
-            int index = parts[1].indexOf(' ');
-            String s1 = parts[1].substring(0, index);
-            String s2 = parts[1].substring(index);
-            
-            if(s2.equals(" on the battlefield.")) s2 = "TypeOnBattlefield";
-            else if(s2.equals(" you control.")) s2 = "TypeYouCtrl";
-            
-            StringBuilder countSB = new StringBuilder();
-            countSB.append("Count$");
-            countSB.append(s2);
-            countSB.append(".");
-            countSB.append(s1);
-            
-            int count = CardFactoryUtil.xCount(sourceCard, countSB.toString());
-            
-            StringBuilder sb = new StringBuilder();
-            
-            if(count == 0) sb.append("0");
-            
-            for(int i = 0; i < count; i++){
-            	if (i != 0)
-                    sb.append(" "); 	// added a space here to play nice with the new ManaPool
-                sb.append(m);
-            } 
-            return sb.toString();
-            
-        } 
-    	else if ((orig.contains("Sacrifice this creature: Add ") || orig.contains("Sacrifice CARDNAME: Add "))
-    		   && orig.contains(" to your mana pool."))
-    	{
-    		String m = orig.split(": Add ")[1].split(" to ")[0];
-    		return m;
-    	}
-    	else if( orig.contains("X")) {
-    		int amt = CardFactoryUtil.xCount(sourceCard, sourceCard.getSVar("X"));
-    		return Integer.toString(amt);
-    	}
-    	else {
-        	return Mana;
-        }
-        
-    }//override for all non-X variable mana,
-    
-    public Player getController() {
-        return getSourceCard().getController();
-    }
-    
+	public boolean isUndoable() { return getPayCosts().isUndoable() && AllZoneUtil.isCardInPlay(getSourceCard()); }
+	
+	public void setCanceled(boolean bCancel) { canceled = bCancel; }
+	public boolean getCanceled() { return canceled; }
+	
+	public void undo(){
+		if (isUndoable()){
+			getPayCosts().refundPaidCost(getSourceCard());
+		}
+	}
+	
     @Override
-    public boolean canPlayAI() {
-        return false;
+    public boolean equals(Object o)
+    {
+    	//Mana abilities with same Descriptions are "equal"
+    	return  o.toString().equals(this.toString());
     }
-    
-    @Override
-    public boolean canPlay() {
-        Card card = getSourceCard();
-        
-        // this isn't right
-        //if (card.getController().isComputer())
-        //	return false;
-        
-		 if(card.isCreature()) {
-    		 
-	 			CardList Silence = AllZoneUtil.getPlayerCardsInPlay(card.getController().getOpponent()); 	
-	     		Silence = Silence.getName("Linvala, Keeper of Silence");
-	     		if(Silence.size() > 0) return false;
-	     		}
-        if(AllZone.GameAction.isCardInPlay(card)
-                & !((isTapAbility() && card.isTapped()) || (isUntapAbility() && card.isUntapped()))) {
-            if(card.isFaceDown()) return false;
-            
-            if(card.isArtifact() && card.isCreature()) return !(card.hasSickness() && (isTapAbility() || isUntapAbility()));
-            
-            if(card.isCreature() && !(card.hasSickness() && (isTapAbility() || isUntapAbility()))) return true;
-            //Dryad Arbor, Mishra's Factory, Mutavault, ...
-            else if(card.isCreature() && card.isLand() && card.hasSickness()) return false;
-            else if(card.isArtifact() || card.isGlobalEnchantment() || card.isLand()) return true;
-        }
-        return false;
-    }
-
-
 }
 

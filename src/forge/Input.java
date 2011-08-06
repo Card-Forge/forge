@@ -5,8 +5,8 @@ package forge;
 public abstract class Input implements java.io.Serializable {
     private static final long serialVersionUID = -6539552513871194081L;
     
-    private boolean           isFree           = false;
-    
+    private boolean			isFree		= false;
+
     //showMessage() is always the first method called
     public void showMessage() {
         AllZone.Display.showMessage("Blank Input");
@@ -19,7 +19,10 @@ public abstract class Input implements java.io.Serializable {
     		Card channel = player.getChannelCard();
     		if (GameActionUtil.showYesNoDialog(channel, "Pay 1 life?")) {
     			player.payLife(1, channel);
-    			AllZone.ManaPool.addManaToFloating("1", channel);
+    			Ability_Mana abMana = new Ability_Mana(channel, "0", "1") {
+    				private static final long serialVersionUID = -2182129023960978132L;
+    			};
+    			abMana.produceMana();
     		}
     	}
     }

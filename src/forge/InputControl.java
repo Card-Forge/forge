@@ -9,9 +9,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private Input             input;
     static int                n                = 0;
     private Stack<Input>      inputStack       = new Stack<Input>();
+    private Stack<Input>	  resolvingStack 	= new Stack<Input>();
     private LinkedList<Input> resolvingQueue 	= new LinkedList<Input>();
-
-    // todo: needs a bit more work to allow mana abilities to put Inputs "on hold" while they are paid and then reinstuted
 
     public void setInput(final Input in) {
     	if(AllZone.Stack.getResolving() || !(input == null || input instanceof Input_PassPriority)) 
@@ -27,8 +26,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     		setInput(in);
     		return;
     	}
-    	resolvingQueue.add(in);	
-        updateObservers();
+
+    	Input old = input;
+    	resolvingStack.add(old);
+    	changeInput(in);
     }
     
     private void changeInput(final Input in){
@@ -63,13 +64,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         final Player priority = AllZone.Phase.getPriorityPlayer();
 
         // todo: this resolving portion needs more work, but fixes Death Cloud issues 
-		if (resolvingQueue.size() > 0) {
-			if (input != null) {
+		if (resolvingStack.size() > 0) {
+			if (input != null) {				
 				return input;
 			}
 
 			// if an SA is resolving, only change input for something that is part of the resolving SA
-			changeInput(resolvingQueue.poll());
+			changeInput(resolvingStack.pop());
 			return input;
 		}
 

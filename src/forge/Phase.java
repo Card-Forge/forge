@@ -13,7 +13,7 @@ public class Phase extends MyObservable
 
 	static int	 	GameBegins = 0;
     static int	   StormCount;
-    static int	   HighTideCount = 0;
+    static CardList		HighTides = new CardList();
     static int	   PlayerSpellCount;
     static int	   PlayerCreatureSpellCount;   
     static int	   ComputerSpellCount;
@@ -138,7 +138,7 @@ public class Phase extends MyObservable
     
     public void turnReset(){
     	StormCount = 0;
-    	HighTideCount = 0;
+    	HighTides.clear();
         PlayerSpellCount = 0;
         PlayerCreatureSpellCount = 0;   
         ComputerSpellCount = 0;

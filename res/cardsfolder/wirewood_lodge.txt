@@ -2,7 +2,7 @@ Name:Wirewood Lodge
 ManaCost:no cost
 Types:Land
 Text:no text
-K:tap: add 1
+A:AB$Mana|Cost$T|Produced$1|SpellDescription$Add 1 to your mana pool.
 A:AB$Untap | Cost$ G T | ValidTgts$ Elf | TgtPrompt$ Select target Elf | SpellDescription$ Untap target Elf.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

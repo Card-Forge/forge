@@ -8,41 +8,35 @@ public class Input_PayManaCost_Ability extends Input {
     private String            originalManaCost;
     private String            message          = "";
     private ManaCost          manaCost;
+    private SpellAbility 	  fakeAbility;
 
     private Command           paidCommand;
     private Command           unpaidCommand;
     
     //only used for X costs:
     private boolean 		  showOnlyOKButton = false;
-    
-    
-    //for Abilities that don't tap
+
     public Input_PayManaCost_Ability(String manaCost, Command paid) {
         this(manaCost, paid, Command.Blank);
     }
-    
-    //Command must set InputState, by calling AllZone.Input.selectState()
-    //or AllZone.Input.setState() with new InputState
+
     public Input_PayManaCost_Ability(String manaCost_2, Command paidCommand_2, Command unpaidCommand_2) {
-        originalManaCost = manaCost_2;
-        message = "";
-        
-        manaCost = new ManaCost(originalManaCost);
-        paidCommand = paidCommand_2;
-        unpaidCommand = unpaidCommand_2;
+    	this("", manaCost_2, paidCommand_2, unpaidCommand_2);
     }
     
     public Input_PayManaCost_Ability(String m, String manaCost_2, Command paidCommand_2, Command unpaidCommand_2) {
-        originalManaCost = manaCost_2;
-        message = m;
-        
-        manaCost = new ManaCost(originalManaCost);
-        paidCommand = paidCommand_2;
-        unpaidCommand = unpaidCommand_2;
+    	this(m, manaCost_2, paidCommand_2, unpaidCommand_2, false);
     }
     
     public Input_PayManaCost_Ability(String m, String manaCost_2, Command paidCommand_2, Command unpaidCommand_2, boolean showOKButton) {
-        originalManaCost = manaCost_2;
+       	fakeAbility = new SpellAbility(SpellAbility.Ability, null) {
+			@Override
+			public void resolve() {}
+			
+			@Override
+			public boolean canPlay() { return false; }
+		};
+    	originalManaCost = manaCost_2;
         message = m;
         
         manaCost = new ManaCost(originalManaCost);
@@ -59,12 +53,12 @@ public class Input_PayManaCost_Ability extends Input {
     @Override
     public void selectCard(Card card, PlayerZone zone) {
         //only tap card if the mana is needed
-        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost,false);
+        manaCost = Input_PayManaCostUtil.activateManaAbility(fakeAbility, card, manaCost);
         showMessage();
         
         if(manaCost.isPaid()) {
             resetManaCost();
-            AllZone.ManaPool.clearPay(false);
+            AllZone.ManaPool.clearPay(fakeAbility, false);
             
             paidCommand.execute();
             
@@ -75,7 +69,7 @@ public class Input_PayManaCost_Ability extends Input {
     @Override
     public void selectButtonCancel() {
         resetManaCost();
-        AllZone.ManaPool.unpaid();
+        AllZone.ManaPool.unpaid(fakeAbility, true);
         unpaidCommand.execute();
         AllZone.InputControl.resetInput();
     }

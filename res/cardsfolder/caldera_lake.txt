@@ -2,9 +2,10 @@ Name:Caldera Lake
 ManaCost:no cost
 Types:Land
 Text:no text
-K:tap: add 1
-K:paintap:1:U
-K:paintap:1:R
+A:AB$Mana|Cost$T|Produced$1|SpellDescription$Add 1 to your mana pool.
+A:AB$Mana|Cost$T|Produced$U|SubAbility$SVar=DBPain|SpellDescription$Add U to your mana pool. CARDNAME deals 1 damage to you.
+A:AB$Mana|Cost$T|Produced$R|SubAbility$SVar=DBPain|SpellDescription$Add R to your mana pool. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You 
 K:CARDNAME enters the battlefield tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

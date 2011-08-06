@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:Selesnya Sanctuary enters the battlefield tapped.
 K:When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
-K:Tap: add G W
+A:AB$Mana|Cost$T|Produced$G W|SpellDescription$Add G W to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_sanctuary.jpg

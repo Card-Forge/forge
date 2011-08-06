@@ -6,14 +6,14 @@ public class Input_PayManaCostUtil
   //all mana abilities start with this and typical look like "tap: add G"
   //mana abilities are Strings and are retrieved by calling card.getKeyword()
   //taps any card that has mana ability, not just land
-  public static ManaCost tapCard(Card card, ManaCost manaCost,boolean forceNoExpress)
+  public static ManaCost activateManaAbility(SpellAbility sa, Card card, ManaCost manaCost)
   {
 	//make sure computer's lands aren't selected
 	if(card.getController().equals(AllZone.ComputerPlayer))
 		return manaCost;
 	
     if(card instanceof ManaPool) 
-    	return ((ManaPool)card).subtractMana(manaCost);
+    	return ((ManaPool)card).subtractMana(sa, manaCost);
 
 	ArrayList<Ability_Mana> abilities = getManaAbilities(card);
     StringBuilder cneeded = new StringBuilder();
@@ -32,8 +32,8 @@ public class Input_PayManaCostUtil
     	else if (!canMake(ma, cneeded.toString())) it.remove();
     	
     	if (!skipExpress){
-    		// skip express mana if there's a a sacrifice or the ability is not undoable
-	    	if (ma.isSacrifice() || !ma.undoable()){
+    		// skip express mana if the ability is not undoable
+	    	if (!ma.isUndoable()){
 	    		skipExpress = true;
 	    		continue;
 	    	}	
@@ -45,7 +45,6 @@ public class Input_PayManaCostUtil
     // todo when implementing sunburst 
     // If the card has sunburst or any other ability that tracks mana spent, skip express Mana choice
     // if (card.getTrackManaPaid()) skipExpress = true;
-    if(forceNoExpress) skipExpress = true;
 
 	if (!skipExpress){
 		// express Mana Choice
@@ -75,120 +74,13 @@ public class Input_PayManaCostUtil
     		ability.put(am.toString(), am);
     	chosen = (Ability_Mana) AllZone.Display.getChoice("Choose mana ability", abilities.toArray());
     }
-    {
- 	   if (chosen.isReflectedMana()) {
- 		   // Choose the mana color
- 		   Ability_Reflected_Mana arm = (Ability_Reflected_Mana) chosen;
- 		   arm.chooseManaColor();
+    
+	AllZone.GameAction.playSpellAbility(chosen);
 
- 		   // Only resolve if the choice wasn't cancelled and the mana was actually needed
- 		   if (arm.wasCancelled()) {
- 			   return manaCost;
- 		   } else {
- 			   String color = chosen.mana();
- 			   if (!manaCost.isNeeded(color)) {
- 				   // Don't tap the card if the user chose something invalid
- 				   arm.reset(); // Invalidate the choice
- 				   return manaCost;
- 			   }
- 		   }
- 		   // A valid choice was made -- resolve the ability and tap the card
- 		   arm.resolve();
- 		   arm.getSourceCard().tap();
- 	   } else {
- 		   AllZone.GameAction.playSpellAbility(chosen);
- 	   }
-     	manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
-     	
-     	// Nirkana Revenant Code
-        Card mp = AllZone.ManaPool;
-        if(card.getType().contains("Swamp") && card.getController().equals(AllZone.HumanPlayer)) {
-         	CardList Nirkana_Human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Nirkana Revenant");
-         	for(int x = 0; x < Nirkana_Human.size(); x++) {
-        		for(int i = 0; i < abilities.size(); i++) {
-        			if(abilities.get(i).mana().contains("B")) {
-		         		if(!card.isSnow()) {
-		         			chosen = abilities.get(i);	
-		         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
-		         		} 
-		         		else {
-		         			if(!manaCost.toString().trim().equals("")) {
-			         			if(manaCost.toString().contains("B"))  {
-			         				manaCost.payMana("B");
-			         				if(AllZone.ManaPool.isEmpty()) {
-			         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("B"), Nirkana_Human.get(x));
-			         					mp.removeExtrinsicKeyword("ManaPool:B");
-			         				}
-			         				else  {
-			         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("B"),  Nirkana_Human.get(x));
-			         				}
-			         			}
-			         			else {
-			         				if(manaCost.toString().length() > 0) {
-				         				manaCost.payMana("1");
-				         				
-				         				if(AllZone.ManaPool.isEmpty()) {
-				         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("B"),  Nirkana_Human.get(x));
-				         					mp.removeExtrinsicKeyword("ManaPool:B");
-				         				}
-				         				else {
-				         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("B"),  Nirkana_Human.get(x));
-				         				}
-			         				}
-			         			}
-		         			}
-		         		}
-        			}      		
-        		}
-         	} 
-         }
+ 	manaCost = AllZone.ManaPool.subtractMana(sa, manaCost, chosen);
 
-       	// High Tide Code
-         if(Phase.HighTideCount > 0 && card.getType().contains("Island") && card.getController().equals(AllZone.HumanPlayer)) {
-         	for(int x = 0; x < Phase.HighTideCount; x++) {
-        		for(int i = 0; i < abilities.size(); i++) {
-        			if(abilities.get(i).mana().contains("U") == true) {
-        				chosen = abilities.get(i);	
-	         		if(card.isSnow() == false) {
-	         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
-	         		} else { 
-	         			
-	         			if(!manaCost.toString().trim().equals("")) {
-	         			if(manaCost.toString().contains("U"))  {
-	         				manaCost.payMana("U");
-	         				if(AllZone.ManaPool.isEmpty()) {
-	         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("U"), chosen.getSourceCard());
-	         					mp.removeExtrinsicKeyword("ManaPool:U");
-	         				}
-	         				else  {
-	         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("U"), chosen.getSourceCard());
-	         				}
-	         			}
-         			else {
-         				if(manaCost.toString().length() > 0) {
-         				manaCost.payMana("1");
-         				
-         				if(AllZone.ManaPool.isEmpty()) {
-         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("U"), chosen.getSourceCard());
-         					mp.removeExtrinsicKeyword("ManaPool:U");
-         				}
-         				else {
-         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("U"), chosen.getSourceCard());
-         					
-         				}
-         			}
-         			}
-         			
-         			}
-         		}       		
-         	}      		
-         	}
-         } 
-         }
-         	// High Tide Code
-     	AllZone.Human_Battlefield.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
-     	return manaCost;	
-     }
+ 	AllZone.Human_Battlefield.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
+ 	return manaCost;	
 
   }
   public static ArrayList<Ability_Mana> getManaAbilities(Card card)
@@ -200,14 +92,7 @@ public class Input_PayManaCostUtil
   {
 	  if(mana.contains("1")) return true;
 	  if(mana.contains("S") && am.isSnow()) return true;
-	  if(am.isReflectedMana()) {
-		  for( String color:((Ability_Reflected_Mana)am).getPossibleColors()) {
-			  if (mana.contains(getShortColorString(color))) {
-				  return true;
-			  }
-		  }
-		  return false;
-	  }
+
 	  for(String color : ManaPool.formatMana(am))
   		if(mana.contains(color)) return true;
   	  return false;
