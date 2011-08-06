@@ -103,7 +103,6 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
   }
   public void remove(Object c)
   {
-    //TODO: put leaves play checks here
     cards.remove((Card)c);
     update();
   }

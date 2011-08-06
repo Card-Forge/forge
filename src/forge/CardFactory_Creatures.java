@@ -7181,7 +7181,6 @@ public class CardFactory_Creatures {
                             if (card.getName().equals("Academy Rector")) {
                                 AllZone.GameAction.exile(card);
                             }
-                            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
                             CardList list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
                             list = list.getType("Enchantment");
                             
@@ -7189,10 +7188,9 @@ public class CardFactory_Creatures {
                                 Object objectSelected = GuiUtils.getChoiceOptional("Choose an enchantment", list.toArray());
                                 
                                 if (objectSelected != null) {
-                                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+
                                     final Card c = (Card) objectSelected;
-                                    lib.remove(c);
-                                    play.add(c);
+                                    AllZone.GameAction.moveToPlay(c);
                                     
                                     if (c.isAura()) {
                                         
@@ -7299,10 +7297,9 @@ public class CardFactory_Creatures {
                         });
                         
                         if (list.size() > 0) {
-                            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                             Card c = CardFactoryUtil.AI_getBestEnchantment(list, card, false);
-                            lib.remove(c);
-                            play.add(c);
+
+                            AllZone.GameAction.moveToPlay(c);
                             if (card.getName().equals("Academy Rector")) {
                                 AllZone.GameAction.exile(card);
                             }
@@ -7362,7 +7359,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+
                     CardList list = new CardList(hand.getCards());
                     CardList nonLandList = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -7680,7 +7677,7 @@ public class CardFactory_Creatures {
                     
                     PlayerZone hGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
                     PlayerZone cGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+
                     CardList creatures = new CardList();
                     creatures.addAll(hGrave.getCards());
                     creatures.addAll(cGrave.getCards());
@@ -8259,12 +8256,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
                     card.setKicked(true);
-                    hand.remove(card);
-                    play.add(card);
+                    AllZone.GameAction.moveToPlay(card);
                 }
                 
                 @Override
@@ -8318,13 +8311,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
                     card.setKicked(true);
-                    hand.remove(card);
-                    play.add(card);
-
+                    AllZone.GameAction.moveToPlay(card);
                 }
                 
                 @Override
@@ -9364,7 +9352,6 @@ public class CardFactory_Creatures {
         		@Override
         		public void resolve() {
         			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
         			if (AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
         				Card c = getTargetCard();
         				card.getController().shuffle();
@@ -9934,12 +9921,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
                     card.setKicked(true);
-                    hand.remove(card);
-                    play.add(card);
+                    AllZone.GameAction.moveToPlay(card);
                 }
                 
                 @Override
@@ -10137,12 +10120,8 @@ public class CardFactory_Creatures {
 
 				@Override
                 public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
                     card.setKicked(true);
-                    hand.remove(card);
-                    play.add(card);
+                    AllZone.GameAction.moveToPlay(card);
                     card.addCounterFromNonEffect(Counters.P1P1, 2);
                 }
                 

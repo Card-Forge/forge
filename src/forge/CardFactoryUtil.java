@@ -1364,11 +1364,8 @@ public class CardFactoryUtil {
             }
             
             @Override
-            public void resolve() {
-                
+            public void resolve() { 
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sourceCard.getController());
-                
 
                 CardList cards = new CardList(lib.getCards());
                 CardList sameType = new CardList();
@@ -1392,9 +1389,7 @@ public class CardFactoryUtil {
                     //AllZone.Stack.add(ability);
                     sourceCard.getController().discard(sourceCard, this);
                     Card c1 = (Card) o;
-                    lib.remove(c1);
-                    hand.add(c1);
-                    
+                    AllZone.GameAction.moveToHand(c1);
 
                 }
                 sourceCard.getController().shuffle();
@@ -1447,7 +1442,6 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sourceCard.getController());
                 
 
                 CardList cards = new CardList(lib.getCards());
@@ -1469,9 +1463,8 @@ public class CardFactoryUtil {
                     //AllZone.Stack.add(ability);
                     sourceCard.getController().discard(sourceCard, this);
                     Card c1 = (Card) o;
-                    lib.remove(c1);
-                    hand.add(c1);
-                    
+
+                    AllZone.GameAction.moveToHand(c1);
 
                 }
                 sourceCard.getController().shuffle();
@@ -2083,8 +2076,7 @@ public class CardFactoryUtil {
                         if (o != null) {
                             
                             Card c1 = (Card) o;
-                            lib.remove(c1);
-                            hand.add(c1);
+                            AllZone.GameAction.moveToHand(c1);
                         }
                     }
                 } else {

@@ -530,7 +530,6 @@ public class GameActionUtil {
 		playCard_Gelectrode(c);
 		playCard_Cinder_Pyromancer(c);
 		playCard_Standstill(c);
-		playCard_Memory_Erosion(c);
 		playCard_SolKanar(c);
 		playCard_Gilt_Leaf_Archdruid(c);
 		playCard_Reki(c);
@@ -2517,47 +2516,6 @@ public class GameActionUtil {
 
 	}
 
-	public static void playCard_Memory_Erosion(Card c) {
-		CardList list = AllZoneUtil.getCardsInPlay("Memory Erosion");
-
-		for(int i = 0; i < list.size(); i++) {
-			final Card card = list.get(i);
-			final Player drawer = card.getController().getOpponent();
-
-
-			Ability ability2 = new Ability(card, "0") {
-				@Override
-				public void resolve() {
-					// sac standstill
-					//            AllZone.GameAction.sacrifice(card);
-					// player who didn't play spell, draws 3 cards
-					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, drawer);
-					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, drawer);
-					CardList libList = new CardList(lib.getCards());
-
-					int max = 2;
-					if(libList.size() < 2) max = libList.size();
-
-					for(int i = 0; i < max; i++) {
-						Card c = libList.get(i);
-						lib.remove(c);
-						grave.add(c);
-					}
-
-				}
-			}; // ability2
-			if(!(card.getController().equals(c.getController()))) {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a spell, ");
-				sb.append(drawer).append(" puts the top two cards of his or her library into his or her graveyard.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-			}
-		}
-	}
-
 	public static void playCard_SolKanar(Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay("Sol'kanar the Swamp King");
 
@@ -4137,8 +4095,6 @@ public class GameActionUtil {
 				private static final long serialVersionUID = 4820011390853920644L;
 				@Override
 					public void resolve() {
-						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 						CardList playerLand = AllZoneUtil.getPlayerLandsInPlay(player);
 						
 						c.tap();
@@ -5231,12 +5187,10 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
 				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, crd.getController());
 
 				if(AllZone.GameAction.isCardInZone(crd, grave)) {
-					grave.remove(crd);
-					play.add(crd);
+					AllZone.GameAction.moveToPlay(crd);
 				}
 			}
 		};
@@ -6332,7 +6286,7 @@ public class GameActionUtil {
 
 					//check for no cards in hand on resolve
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-					PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, opponent);
+
 					Card[] handChoices = removeLand(hand.getCards());
 
 					if(handChoices.length == 0) return;
@@ -6345,8 +6299,7 @@ public class GameActionUtil {
 						choice = CardUtil.getRandom(handChoices); // wise choice should be here
 					}
 
-					hand.remove(choice);
-					exiled.add(choice);
+					AllZone.GameAction.exile(choice);
 				}//resolve()
 
 				@Override
@@ -6531,7 +6484,7 @@ public class GameActionUtil {
 				public void resolve() {
 
 					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opponent);
-					PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, opponent);
+
 					CardList libList = new CardList(lib.getCards());
 					int count = 0;
 					int broken = 0;
@@ -6565,8 +6518,7 @@ public class GameActionUtil {
 
 					for(int j = 0; j < max; j++) {
 						Card c = libList.get(j);
-						lib.remove(c);
-						exiled.add(c);
+						AllZone.GameAction.exile(c);
 					}
 				}
 			};// ability
@@ -6703,7 +6655,7 @@ public class GameActionUtil {
 				public void resolve() {
 					player[0] = crd.getController();
 					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player[0]);
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player[0]);
+
 					if(lib.size() > 0) {
 						CardList cl = new CardList();
 						cl.add(lib.get(0));
@@ -6711,9 +6663,7 @@ public class GameActionUtil {
 					};
 					Card top = lib.get(0);
 					player[0].gainLife(CardUtil.getConvertedManaCost(top.getManaCost()), crd);
-					hand.add(top);
-					lib.remove(top);
-
+					AllZone.GameAction.moveToHand(top);
 				}
 			};// ability2
 
@@ -8607,17 +8557,11 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
+					// todo: this is bad, the card that is revealed could be different than the one we get 
 					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 					player.loseLife(convertedManaCost, F_card);
 
-					// AllZone.GameAction.drawCard(player);
-					// !!!can't just draw card, since it won't work with jpb's
-					// fix!!!
-					Card c = library.get(0);
-					library.remove(c);
-					hand.add(c);
-
+					AllZone.GameAction.moveToHand(library.get(0));
 				}// resolve()
 			};// Ability
 			

@@ -2744,11 +2744,11 @@ public class Card extends MyObservable {
 	
 	public boolean sharesColorWith(final Card c1) {
 		boolean shares = false;
-		shares = shares || (isBlack() && c1.isBlack());
-		shares = shares || (isBlue() && c1.isBlue());
-		shares = shares || (isGreen() && c1.isGreen());
-		shares = shares || (isRed() && c1.isRed());
-		shares = shares || (isWhite() && c1.isWhite());
+		shares |= (isBlack() && c1.isBlack());
+		shares |= (isBlue() && c1.isBlue());
+		shares |= (isGreen() && c1.isGreen());
+		shares |= (isRed() && c1.isRed());
+		shares |= (isWhite() && c1.isWhite());
 		return shares;
 	}
 	

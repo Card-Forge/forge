@@ -2632,20 +2632,19 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     // Move graveyard into library
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-                    Card[] g = grave.getCards();
-                    for(int i = 0; i < g.length; i++) {
-                        grave.remove(g[i]);
-                        library.add(g[i], 0);
+                    CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+                    
+                    for(Card c : grave){
+                    	AllZone.GameAction.moveToLibrary(c);
                     }
+
                     // Shuffle library
                     player.shuffle();;
                 }
                 
                 @Override
                 public boolean canPlayAI()//97% of the time shuffling your grave into your library is a good thing
-                {
+                {						 // ^--- over 2/3rd of the statistics in the world are made up
                     setTargetPlayer(AllZone.ComputerPlayer);
                     return true;
                 }
@@ -2672,47 +2671,35 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
+                    CardList lib = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
                     
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    CardList lib = new CardList(library.getCards());
+                    if (lib.size() == 0)
+                    	return;
                     
-                    CardList topTwo = new CardList();
-                    
-                    if(lib.size() == 1) {
-                        card.getController().drawCard();
-                    } else {
-                        if(card.getController().equals(AllZone.HumanPlayer)) {
-                            topTwo.add(lib.get(0));
-                            topTwo.add(lib.get(1));
-                            
-                            Object o = GuiUtils.getChoiceOptional("Select card to put in hand: ",
-                                    topTwo.toArray());
-                            
-                            Card c1 = (Card) o;
-                            topTwo.remove(c1);
-                            library.remove(c1);
-                            hand.add(c1);
-                            
-                            Card c2 = topTwo.get(0);
-                            library.remove(c2);
-                            library.add(c2);
-                        } else //computer
-                        {
-                            Card c1 = lib.get(0);
-                            library.remove(c1);
-                            lib.remove(c1);
-                            hand.add(c1);
-                            
-                            Card c2 = lib.get(0);
-                            library.remove(c2);
-                            lib.remove(c2);
-                            library.add(c2); //put on bottom
-                            
-                        }
-                        
+                    if (lib.size() == 1){
+                    	AllZone.GameAction.moveToHand(lib.get(0));
+                    	return;
                     }
                     
+                    CardList topTwo = new CardList();
+                    topTwo.add(lib.get(0));
+                    topTwo.add(lib.get(1));
+                    
+                    Card toHand = null;
+                    if(card.getController().isHuman()) {
+                        Object o = GuiUtils.getChoice("Select card to put in hand: ",
+                                topTwo.toArray());
+                        
+                        toHand = (Card) o;
+                    } 
+                    else{
+                    	toHand = CardUtil.getRandom(topTwo.toArray());
+                    }    
+                    topTwo.remove(toHand);
+                    AllZone.GameAction.moveToHand(toHand);
+                    
+                    for(Card c : topTwo)	// Unnecessary for Sleight of Hand, but will be useful for other things
+                    	AllZone.GameAction.moveToBottomOfLibrary(c);
                 }
             };
             
@@ -3082,29 +3069,27 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
+                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(player);
                     
-                    int max = libList.size();
-                    int count = 0;
+                    int numLands = libList.getType("Land").size();
+                    
                     int total = 0;
-                    
-
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        total = i;
-                        if(c.getType().contains("Land")) {
-                            count++;
-                            if(count == 4) break;                          
-                        }
+                    if (numLands > 3){	// if only 3 or less lands in the deck everything is going
+	                    int landCount = 0;
+	                    
+	                    for(Card c : libList){
+	                    	total++;
+	                    	if (c.isLand()){
+	                    		landCount++;
+	                    		if (landCount == 4)
+	                    			break;
+	                    	}
+	                    }
                     }
-                    
-                    for(int i = 0; i <= total; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
+                    else{
+                    	total = libList.size();
                     }
+                    player.mill(total);
                 }
             };//SpellAbility
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
@@ -3139,28 +3124,18 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, player);
-                    CardList libList = new CardList(lib.getCards());
-                    CardList grvList = new CardList(grave.getCards());
+                    CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+                    grave = grave.getNotType("Basic");
                     
-                    int max = libList.size();
-                    int grv = grvList.size();
-                    
-                    for(int j = 0; j < grv; j++) {
-                        Card g = grvList.get(j);
-                        if(!g.getType().contains("Basic")) {
-	                        for(int i = 0; i < max; i++) {
-	                            Card c = libList.get(i);
-	                            if(c.getName().equals(g.getName())) {
-	                                lib.remove(c);
-	                                exiled.add(c);
-	                            }
-	                        }
-                            grave.remove(g);
-                            exiled.add(g);
-                        }
+                    CardList lib = AllZoneUtil.getPlayerCardsInLibrary(player);
+
+                    for(Card c : grave){
+                    	CardList remLib = lib.getName(c.getName());
+                    	for(Card rem : remLib){
+                    		AllZone.GameAction.exile(rem);
+                    		lib.remove(rem);
+                    	}
+                    	AllZone.GameAction.exile(c);
                     }
                 }
             };//SpellAbility
@@ -3178,75 +3153,44 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     Card choice = null;
+                    Player player = getTargetPlayer();
                     
                     //check for no cards in hand on resolve
-                    Player player = getTargetPlayer();
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, player);
-                    CardList libList = new CardList(lib.getCards());
-                    CardList grvList = new CardList(grave.getCards());
-                    CardList fullHand = new CardList(hand.getCards());
-                    Card[] handChoices = removeLand(hand.getCards());
+                    CardList handList = AllZoneUtil.getPlayerHand(player);
                     
-                    if(fullHand.size() > 0 && card.getController().equals(AllZone.HumanPlayer)) GuiUtils.getChoice(
-                            "Revealing hand", fullHand.toArray());
-                    
-                    if (handChoices.length == 0)
+                    if (handList.size() == 0)
                     	return;
                     
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
-                        choice = GuiUtils.getChoice("Choose", handChoices);
-                    } else //computer chooses
-                    {
-                        choice = CardUtil.getRandom(handChoices);
-                    }
+                    if(card.getController().isHuman()) 
+                    	GuiUtils.getChoice("Revealing hand", handList.toArray());
                     
-                    String chosen = choice.getName();
+                    CardList choices = handList.getNotType("Basic");
                     
-                    int max = libList.size();
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        if(c.getName().equals(chosen)) {
-                            lib.remove(c);
-                            exiled.add(c);
-                        }
-                    }
-                    int grv = grvList.size();
-                    for(int i = 0; i < grv; i++) {
-                        Card c = grvList.get(i);
-                        if(c.getName().equals(chosen)) {
-                            grave.remove(c);
-                            exiled.add(c);
-                        }
-                    }
-                    int hnd = fullHand.size();
-                    for(int i = 0; i < hnd; i++) {
-                        Card c = fullHand.get(i);
-                        if(c.getName().equals(chosen)) {
-                            hand.remove(c);
-                            exiled.add(c);
-                        }
-                    }
+                    if (choices.size() == 0)
+                    	return;
                     
+                    if(card.getController().isHuman()) 
+                        choice = GuiUtils.getChoice("Choose", choices.toArray());
+                    else //computer chooses
+                    	choice = CardUtil.getRandom(choices.toArray());
+                    
+                    String name = choice.getName();
+                    
+                    CardList remove = AllZoneUtil.getPlayerCardsInLibrary(player);
+                    remove.add(AllZoneUtil.getPlayerHand(player));
+                    remove.add(AllZoneUtil.getPlayerGraveyard(player));
+                    remove = remove.getName(name);
+                    
+                    for(Card c : remove)
+                    	AllZone.GameAction.exile(c);
                 }//resolve()
                 
                 @Override
                 public boolean canPlayAI() {
-                    Card[] c = removeLand(AllZone.Human_Hand.getCards());
-                    return 0 < c.length;
+                	setTargetPlayer(AllZone.HumanPlayer);
+                	CardList handList = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
+                    return 0 < handList.size();
                 }
-                
-                Card[] removeLand(Card[] in) {
-                    CardList c = new CardList(in);
-                    c = c.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.getType().contains("Basic");
-                        }
-                    });
-                    return c.toArray();
-                }//removeLand()
             };//SpellAbility spell
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.clearSpellAbility();
@@ -3263,33 +3207,19 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-                    CardList libList = new CardList(lib.getCards());
-                    return libList.size() > 0;
+                	CardList exiling = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
+                    return exiling.size() > 1;
                 }
                 
                 @Override
                 public void resolve() {
                     Player player = getTargetPlayer();
                     
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, player);
-                    CardList handList = new CardList(hand.getCards());
-                    CardList graveList = new CardList(grave.getCards());
+                    CardList exiling = AllZoneUtil.getPlayerHand(player);
+                    exiling.add(AllZoneUtil.getPlayerGraveyard(player));
                     
-                    int max = handList.size();
-                    for(int i = 0; i < max; i++) {
-                        Card c = handList.get(i);
-                        hand.remove(c);
-                        exiled.add(c);
-                    }
-                    int grv = graveList.size();
-                    for(int i = 0; i < grv; i++) {
-                        Card c = graveList.get(i);
-                        grave.remove(c);
-                        exiled.add(c);
-                    }
+                    for(Card c : exiling)
+                    	AllZone.GameAction.exile(c);
                 }
             };//SpellAbility
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -3460,24 +3390,18 @@ public class CardFactory_Sorceries {
       //*************** START *********** START **************************
       else if(cardName.equals("Exhume"))
       {
+    	  // Can this be converted to SP$ChangeZone | Hidden$ True | Defined$ Each ?
     	  final SpellAbility spell = new Spell(card)
-          {
-			private static final long serialVersionUID = 8073863864604364654L;
+    	  {
+    		  private static final long serialVersionUID = 8073863864604364654L;
 
-			public void resolve()
-    		{
-				
-				  PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-  			      PlayerZone computerPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-				
-    			  PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
-    			  PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-    			  
-    			  CardList humanList = new CardList(humanGrave.getCards());
+    		  public void resolve()
+    		  {
+    			  CardList humanList = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
     			  humanList = humanList.getType("Creature");
-    			  CardList computerList = new CardList(computerGrave.getCards());
+    			  CardList computerList = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
     			  computerList = computerList.getType("Creature");
-    			  
+
     			  Card c;
     			  if (humanList.size() > 0)
     			  {
@@ -3485,52 +3409,41 @@ public class CardFactory_Sorceries {
     				  if (check!=null)
     				  {
     					  c = (Card)check;
-    					  humanGrave.remove(c);
-    					  humanPlay.add(c);
+    					  AllZone.GameAction.moveToPlay(c);
     				  }
-    				  
+
     			  }
-    			  
+
     			  if (computerList.size() > 0)
     			  {
     				  c = CardFactoryUtil.AI_getBestCreature(computerList);
     				  if (c != null)
-    				  {
-    					  computerGrave.remove(c);
-    					  computerPlay.add(c);
-    				  }
-    				  else
-    				  {
-    					  computerGrave.remove(computerList.get(0));
-    					  computerPlay.add(computerList.get(0));
-    				  }
+    					  c = computerList.get(0);
+
+    				  AllZone.GameAction.moveToPlay(c);
     			  }
-    			  
     		  }
-    		  
+
     		  public boolean canPlayAI()
     		  {   
-  			      PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
-  			      PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-				
-    			  CardList humanList = new CardList(humanGrave.getCards());
+    			  CardList humanList = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
     			  humanList = humanList.getType("Creature");
-    			  CardList computerList = new CardList(computerGrave.getCards());
+    			  CardList computerList = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
     			  computerList = computerList.getType("Creature");
-    			  
+
     			  if (computerList.size() > 0)
     			  {
     				  if (humanList.size() == 0)
     					  return true;
-    				  
+
     				  return CardFactoryUtil.AI_getBestCreature(computerList).getNetAttack() > 
-    				  		 CardFactoryUtil.AI_getBestCreature(humanList).getNetAttack();
+    				  CardFactoryUtil.AI_getBestCreature(humanList).getNetAttack();
     			  }
     			  return false;
     		  }
-          };
-          card.clearSpellAbility();
-          card.addSpellAbility(spell);        
+    	  };
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);        
       }
       //*************** END ************ END **************************
         
@@ -4272,29 +4185,24 @@ public class CardFactory_Sorceries {
         			Player player = card.getController();
         			Player target = player.getOpponent();
 
-        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target);
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, target);
-
-        			CardList handList = new CardList(hand.getCards());
+        			CardList handList = AllZoneUtil.getPlayerHand(target);
+        			if(handList.size() == 0) 
+        				return;
 
         			//choose one card from it
+        			Card perish = null;
         			if(player.equals(AllZone.HumanPlayer)){ 
         				Object o = GuiUtils.getChoice("Put into library", handList.toArray());
         				//if(o == null) break;
-        				Card c_1 = (Card) o;
-        				if( c_1 != null ) {
-        					hand.remove(c_1);
-        					lib.add(c_1);
-        				}
+        				perish = (Card) o;
         			}
-        			else { //computer
-        				Card[] c = AllZone.getZone(Constant.Zone.Hand, target).getCards();
-        				if(c.length != 0) {
-        					Card toLib = CardUtil.getRandom(c);
-        					hand.remove(toLib);
-        					lib.add(toLib);
-        				}
-        			}
+        			else  //computer
+        				perish = CardUtil.getRandom(handList.toArray());
+
+        			if (perish == null)
+        				return;
+        			
+        			AllZone.GameAction.moveToLibrary(perish);
         			target.shuffle();
         		}
 
@@ -5281,30 +5189,11 @@ public class CardFactory_Sorceries {
                         else input[1] = "Sliver";
 
                         //Actually put everything  on the battlefield 
-                        if(input[0] != "")
-                        {
-                        	PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard,AllZone.HumanPlayer);
-                            PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
-                            for(Card c:humanGrave.getCards())
-                            {
-                            	
-                                if(c.isType(input[0]))
-                                {
-                                    humanGrave.remove(c);
-                                    humanBattlefield.add(c);
-                                }
-                            }
-                        }
-                        
-                        PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard,AllZone.ComputerPlayer);
-                        PlayerZone computerBattlefield = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                        for(Card c:computerGrave.getCards())
-                        {
-                            if(c.isType(input[1]))
-                            {
-                                computerGrave.remove(c);
-                                computerBattlefield.add(c);
-                            }
+                        CardList bidded = AllZoneUtil.getCardsInGraveyard();
+                        bidded = bidded.getType("Creature");
+                        for(Card c : bidded){
+                        	if (c.isType(input[1]) || (!input[0].equals("") && c.isType(input[0])))
+                        		AllZone.GameAction.moveToPlay(c);
                         }
                 }//resolve()
             };//SpellAbility

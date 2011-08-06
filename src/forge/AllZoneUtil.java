@@ -469,7 +469,7 @@ public class AllZoneUtil {
 		int maxCards = lib.size();
 		maxCards = Math.min(maxCards, numCards);
 		if(maxCards == 0) return;
-		CardList topCards =   new CardList();
+		CardList topCards =  new CardList();
 		//show top n cards:
 		for(int j = 0; j < maxCards; j++ ) {
 			topCards.add(lib.get(j));
@@ -487,8 +487,7 @@ public class AllZoneUtil {
 			if(o == null) break;
 			Card c_1 = (Card) o;
 			topCards.remove(c_1);
-			lib.remove(c_1);
-			lib.add(c_1, i - 1);
+			AllZone.GameAction.moveToLibrary(c_1, i - 1);
 		}
 		if(shuffle) {
 			player.shuffle();

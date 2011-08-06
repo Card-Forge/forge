@@ -242,11 +242,12 @@ public class GameAction {
         
         if(p != null) p.remove(c);
         
+        
         if (c.isToken())
         	return c;
         
-        // todo is this copy necessary?
-        c = AllZone.CardFactory.copyCard(c);
+        if (p != null && p.is(Constant.Zone.Battlefield))
+        	c = AllZone.CardFactory.copyCard(c);
         
         if (libPosition == -1 || libPosition > library.getCards().length)
         	libPosition = library.getCards().length;

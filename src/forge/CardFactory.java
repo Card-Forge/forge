@@ -749,19 +749,9 @@ public class CardFactory implements NewConstants {
                     	if(getSourceCard().getController().equals(AllZone.ComputerPlayer))
                     		setTargetCard(card);//CardFactoryUtil.getRandomCard(new CardList(AllZone.Computer_Play.getCards()).getType("Land")));
                         Card c = getTargetCard();
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
                         
                         if(AllZone.GameAction.isCardInPlay(c)) {
-                            AllZone.getZone(c).remove(c);
-                            
-                            if(!c.isToken()) {
-                                Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
-                                
-                                newCard.setCurSetCode(c.getCurSetCode());
-                                newCard.setImageFilename(c.getImageFilename());
-                                
-                                hand.add(newCard);
-                            }
+                        	AllZone.GameAction.moveToHand(c);
                         }
                     }
                 };
@@ -2770,10 +2760,7 @@ public class CardFactory implements NewConstants {
                     
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) 
                     {
-                        if(c.isToken()) 
-                        	AllZone.getZone(c).remove(c);
-                        else
-                        	AllZone.GameAction.destroy(c);
+                        AllZone.GameAction.destroy(c);
                         
                         if (!Drawback[0].equals("none"))
                         	CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), card.getController().getOpponent(), c.getController(), card, c, this);
@@ -3356,23 +3343,18 @@ public class CardFactory implements NewConstants {
         			
         			if (AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(card, tgtC))
         			{
-        				if (tgtC.isToken())
-        					AllZone.getZone(tgtC).remove(tgtC);
-        				else
-        				{
-        					if (Destination.equals("TopofLibrary"))
-        						AllZone.GameAction.moveToLibrary(tgtC);
-        					else if (Destination.equals("ShuffleIntoLibrary"))
-        					{
-        						AllZone.GameAction.moveToLibrary(tgtC);
-        						tgtC.getOwner().shuffle();
-        					}
-        					else if (Destination.equals("Exile"))
-        						AllZone.GameAction.exile(tgtC);
-        					else if (Destination.equals("Hand"))
-        						AllZone.GameAction.moveToHand(tgtC);
-        				}
-        				
+    					if (Destination.equals("TopofLibrary"))
+    						AllZone.GameAction.moveToLibrary(tgtC);
+    					else if (Destination.equals("ShuffleIntoLibrary"))
+    					{
+    						AllZone.GameAction.moveToLibrary(tgtC);
+    						tgtC.getOwner().shuffle();
+    					}
+    					else if (Destination.equals("Exile"))
+    						AllZone.GameAction.exile(tgtC);
+    					else if (Destination.equals("Hand"))
+    						AllZone.GameAction.moveToHand(tgtC);
+
         				if (!Drawback[0].equals("none"))
         					CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), card.getController().getOpponent(), tgtC.getController(), card, tgtC, this);
         			}
@@ -5783,7 +5765,6 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sensei's Divining Top")) {
-            //ability2: Draw card, and put divining top on top of library
         	Ability_Cost abCost2 = new Ability_Cost("T", cardName, true);
             final Ability_Activated ability2 = new Ability_Activated(card, abCost2, null) {
                 private static final long serialVersionUID = -2523015092351744208L;
@@ -5809,18 +5790,6 @@ public class CardFactory implements NewConstants {
                     else return false;
                 }//canPlay()
             };//SpellAbility ability2
-            /*
-            ability2.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = -4773496833654414458L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Stack.add(ability2);
-                    stop();
-                }//showMessage()
-            });
-            */
-            
 
             //ability (rearrange top 3 cards) :
             Ability_Cost abCost = new Ability_Cost("1", cardName, true);
@@ -5830,29 +5799,8 @@ public class CardFactory implements NewConstants {
 				@Override
                 public void resolve() {
                 	Player player = card.getController();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    
-                    if(lib.size() < 3) return;
-                    
-                    CardList topThree = new CardList();
-                    
-                    //show top 3 cards:
-                    topThree.add(lib.get(0));
-                    topThree.add(lib.get(1));
-                    topThree.add(lib.get(2));
-                    
-                    for(int i = 1; i <= 3; i++) {
-                        String Title = "Put on top: ";
-                        if(i == 2) Title = "Put second from top: ";
-                        if(i == 3) Title = "Put third from top: ";
-                        Object o = GuiUtils.getChoiceOptional(Title, topThree.toArray());
-                        if(o == null) break;
-                        Card c_1 = (Card) o;
-                        topThree.remove(c_1);
-                        lib.remove(c_1);
-                        lib.add(c_1, i - 1);
-                    }
-                    
+
+                    AllZoneUtil.rearrangeTopOfLibrary(player, 3, false);
                 }
                 
                 @Override
@@ -6602,7 +6550,6 @@ public class CardFactory implements NewConstants {
         			final int limit = 4;   //at most, this can target 4 cards
         			final Player player = getTargetPlayer();
         			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 
         			CardList lands = new CardList(grave.getCards());
         			lands = lands.filter(AllZoneUtil.basicLands);
@@ -6620,8 +6567,7 @@ public class CardFactory implements NewConstants {
         					if(o == null) break;
         					Card c_1 = (Card) o;
         					lands.remove(c_1); //remove from the display list
-        					grave.remove(c_1); //remove from graveyard
-        					lib.add(c_1, i - 1); //add to library
+        					AllZone.GameAction.moveToLibrary(c_1, i-1);
         				}
         			}
         			else { //Computer
@@ -6630,30 +6576,16 @@ public class CardFactory implements NewConstants {
         				int max = list.size();
         				if (max > limit) max = limit;
 
-        				for(int i=0;i<max;i++) {
-        					grave.remove(list.get(i));
-        					lib.add(list.get(i), i);
-        				}
+        				for(int i=0;i<max;i++)
+        					AllZone.GameAction.moveToLibrary(list.get(i));
         			}
-        			
-        			/*
-        			 * TODO - this draw is at End of Turn.  It should be at the beginning of next
-        			 * upkeep when a mechanism is in place
-        			 */
-        			final Command draw = new Command() {
-        				private static final long serialVersionUID = 8293374203043368969L;
-
-        				public void execute() {
-        					getTargetPlayer().drawCard();
-        				}
-        			};
-        			AllZone.EndOfTurn.addAt(draw);
+   
+        			getTargetPlayer().addSlowtripList(card);
         		}
 
         		private CardList getComputerLands() {
         			CardList list = new CardList(AllZone.Computer_Graveyard.getCards());
-        			//probably no need to sort the list...
-        			return list.filter(AllZoneUtil.basicLands);
+        			return list.getType("Basic");
         		}
         	};//ability
 
@@ -6678,39 +6610,33 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public void resolve() {
-					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, getTargetPlayer());
-					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, getTargetPlayer());
-					CardList libList = new CardList(lib.getCards());
-					int count = 0;
-					int broken = 0;
-					for(int i = 0; i < libList.size(); i = i + 2) {
-						Card c1 = null;
-						Card c2 = null;
-						if(i < libList.size()) c1 = libList.get(i);
-						else broken = 1;
-						if(i + 1 < libList.size()) c2 = libList.get(i + 1);
-						else broken = 1;
-						if(broken == 0) {
-							ArrayList<String> C2Color = CardUtil.getColors(c2);
-							broken = 1;
-							for(int x = 0; x < C2Color.size(); x++) {
-							if(CardUtil.getColors(c1).contains(C2Color.get(x)) && C2Color.get(x) != Constant.Color.Colorless)  {
-								count = count + 1;
-								broken = 0;
-							} 				
-							}
-						}
+        			Player target = getTargetPlayer();
+        			CardList library = AllZoneUtil.getPlayerCardsInLibrary(getTargetPlayer());
 
-					}
-					count = (count * 2) + 2;
-					int max = count;
-					if(libList.size() < count) max = libList.size();
-
-					for(int j = 0; j < max; j++) {
-						Card c = libList.get(j);
-						lib.remove(c);
-						grave.add(c);
-					}
+        			boolean loop = true;
+        			CardList grinding = new CardList();
+        			do{
+        				grinding.clear();
+        				
+        				for(int i = 0; i < 2; i++){
+        					// Move current grinding to a different list
+        					if (library.size() > 0){
+        						Card c = library.get(0);
+        						grinding.add(c);
+        						library.remove(c);
+        					}
+        					else{
+        						loop = false;
+        						break;
+        					}
+        				}
+        				
+        				// if current grinding dont share a color, stop grinding
+        				if (loop){
+        					loop = grinding.get(0).sharesColorWith(grinding.get(1));
+        				}
+        				target.mill(grinding.size());
+        			}while(loop);
 				}
         	};
         	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
