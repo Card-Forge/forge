@@ -3702,6 +3702,31 @@ public class GameActionUtil {
 		}
 	}
 
+	public static void endOfTurn_Krovikan_Horror()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+		horrorReturn(player);
+		horrorReturn(opponent);
+	}
+
+	public static void horrorReturn(String player)
+	{
+		// Find each Horror, peek at the card above it, if it's a creature return to hand
+		CardList grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, player).getCards());
+		if (grave.getName("Krovikan Horror").size() == 0) return;
+		int i = 0;
+		while(i+1 < grave.size()){
+			Card c = grave.get(i);
+			ArrayList<String> types = grave.get(i+1).getType();
+			if (c.getName().equals("Krovikan Horror") && types.contains("Creature")){
+				AllZone.GameAction.moveToHand(c);
+				grave.remove(c);
+			}
+			else
+				i++;
+		}
+	}
 	//END ENDOFTURN CARDS
 
 	public static void removeAttackedBlockedThisTurn() {

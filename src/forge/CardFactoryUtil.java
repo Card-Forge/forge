@@ -354,12 +354,17 @@ public class CardFactoryUtil {
             void done() {
                 paid.execute();
                 
-                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
-                        (Ability_Tap) spell));
+                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) 
+                	stopSetNext(new Input_NoCost_TapAbility((Ability_Tap) spell));
                 else if(spell.getManaCost().equals("0") || this.isFree()) {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    stop();
+                	if (spell.getAfterPayMana() == null){
+	                    this.setFree(false);
+	                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
+	                    stop();
+                	}
+                	else{
+                		stopSetNext(spell.getAfterPayMana());
+                	}
                 } else stopSetNext(new Input_PayManaCost(spell));
             }
         };
@@ -512,6 +517,39 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_sacrifice()
+    
+    public static Input input_sacrificeType(final SpellAbility spell, final String type, final String message) {
+    // This input should be setAfterManaPaid so it can add the spell to the stack
+        Input target = new Input() {
+            private static final long serialVersionUID = 2685832214519141903L;
+            private CardList typeList;
+            
+            @Override
+            public void showMessage() {
+                PlayerZone play = AllZone.getZone(Constant.Zone.Play, spell.getSourceCard().getController());
+                typeList = new CardList(play.getCards());
+                typeList = typeList.getType(type);
+                AllZone.Display.showMessage(message);
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+                stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(typeList.contains(card)) {
+                	AllZone.GameAction.sacrifice(card);
+                	AllZone.Stack.add(spell);
+                	stop();
+                }
+            }
+        };
+        return target;
+    }//input_sacrificeType()
+    
     
     public static Input Wheneverinput_sacrifice(final SpellAbility spell, final CardList choices, final String message, final Command Paid) {
         Input target = new Input() {

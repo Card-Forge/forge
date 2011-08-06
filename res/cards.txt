@@ -1,3 +1,48 @@
+Deadapult
+2 R
+Enchantment
+no text
+abDamageTgtCP R Sac-Zombie:2
+
+Goblin Bombardment
+1 R
+Enchantment
+no text
+abDamageTgtCP 0 Sac-Creature:1
+
+Rath's Edge
+no cost
+Legendary Land
+no text
+tap: add 1
+abDamageTgtCP 4 T Sac-Land:1
+
+Arms Dealer
+2 R
+Creature Goblin
+no text
+1/1
+abDamageTgtC 1 R Sac-Goblin:4
+
+Skull Catapult
+4
+Artifact
+no text
+abDamageTgtCP 1 T Sac-Creature:2
+
+Fodder Cannon
+4
+Artifact
+no text
+abDamageTgtC 4 T Sac-Creature:4
+
+Krovikan Horror
+3 B
+Creature Horror Spirit
+no text
+2/2
+abDamageTgtCP 1 Sac-Creature:1
+
 Aura Extraction
 1 W
 Instant

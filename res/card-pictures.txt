@@ -3825,3 +3825,10 @@ rabid_wolverines.jpg		http://www.wizards.com/global/images/magic/general/rabid_w
 citanul_druid.jpg		http://www.wizards.com/global/images/magic/general/citanul_druid.jpg
 dwarven_berserker.jpg		http://www.wizards.com/global/images/magic/general/dwarven_berserker.jpg
 battle_squadron.jpg		http://www.wizards.com/global/images/magic/general/battle_squadron.jpg
+deadapult.jpg		http://www.wizards.com/global/images/magic/general/deadapult.jpg
+raths_edge.jpg		http://www.wizards.com/global/images/magic/general/raths_edge.jpg
+arms_dealer.jpg		http://www.wizards.com/global/images/magic/general/arms_dealer.jpg
+skull_catapult.jpg		http://www.wizards.com/global/images/magic/general/skull_catapult.jpg
+fodder_cannon.jpg		http://www.wizards.com/global/images/magic/general/fodder_cannon.jpg
+krovikan_horror.jpg		http://www.wizards.com/global/images/magic/general/krovikan_horror.jpg
+goblin_bombardment.jpg		http://www.wizards.com/global/images/magic/general/goblin_bombardment.jpg

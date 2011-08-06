@@ -1686,19 +1686,32 @@ public class CardFactory implements NewConstants {
                     tmpCost = k[0].substring(12);
                 }
                 
+                final boolean sacCost[] = {false};
+                boolean sacFirstCost = false;
+                final String sacType[] = {""};
+                
+                if(tmpCost.contains("Sac-")) {
+                	sacCost[0] = true;
+                	int sacPos = tmpCost.indexOf("Sac-");
+                	sacType[0] = tmpCost.substring(sacPos).replace("Sac-", "").trim();
+                    tmpCost = tmpCost.substring(0,sacPos-1).trim();
+                    sacFirstCost = (tmpCost.length() == 0);
+                }
+                
                 boolean tapCost = false;
-                boolean tapOnlyCost = false;
+                boolean tapFirstCost = false;
                 
                 if(tmpCost.contains("T")) {
                     tapCost = true;
                     tmpCost = tmpCost.replace("T", "");
                     tmpCost = tmpCost.trim();
-                    if(tmpCost.length() == 0) tapOnlyCost = true;
+                    tapFirstCost = (tmpCost.length() == 0);
                 }
+                
+                if (tmpCost == "") tmpCost = "0";	// this doesn't seem to do anything
                 
                 final String manaCost = tmpCost;
                 
-
                 final int NumDmg[] = {-1};
                 final String NumDmgX[] = {"none"};
                 
@@ -1736,11 +1749,31 @@ public class CardFactory implements NewConstants {
                     spDesc[0] = sb.toString();
                     stDesc[0] = card.getName() + " -" + sb.toString();
                 }
-                if(tapOnlyCost == true) spDesc[0] = "Tap: " + spDesc[0];
-                else if(tapCost == true) spDesc[0] = manaCost + ", tap: " + spDesc[0];
-                else spDesc[0] = manaCost + ": " + spDesc[0];
                 
+                StringBuilder abCost = new StringBuilder();
+                abCost.append(manaCost);
+                if (tapCost){
+                	if (tapFirstCost)
+                		abCost.append("T");
+                	else
+                		abCost.append(", t");
+                	abCost.append("ap");
+                }
+                if (sacCost[0]){
+                	if (sacFirstCost)
+                		abCost.append("S");
+                	else
+                		abCost.append(", s");
+                	abCost.append("acrifice a ");
+                	abCost.append(sacType[0]);
+                }
+                abCost.append(": ");
+                
+                spDesc[0] = abCost + spDesc[0];
+                           
+             // Damage ability starts here
                 if(!tapCost) {
+                	// adDamage starts here
                     final SpellAbility abDamage = new Ability_Activated(card, manaCost) {
                         private static final long serialVersionUID = -7560349014757367722L;
                         
@@ -1759,10 +1792,10 @@ public class CardFactory implements NewConstants {
                             CardList hand = new CardList(compHand.getCards());
                             
                             if(hand.size() >= 7) // anti-discard-at-EOT
-                            return true;
+                            	return true;
                             
-                            if(AllZone.Human_Life.getLife() < (10 - damage)) // if damage from this spell would drop the human to less than 10 life
-                            return true;
+                            if(AllZone.Human_Life.getLife() - damage < 10) // if damage from this spell would drop the human to less than 10 life
+                            	return true;
                             
                             return false;
                         }
@@ -1805,6 +1838,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
+                        	if (sacCost[0])	 return false;
                             damage = getNumDamage();
                             
                             Random r = new Random(); // prevent run-away activations 
@@ -1869,15 +1903,20 @@ public class CardFactory implements NewConstants {
                     abDamage.setDescription(spDesc[0]);
                     abDamage.setStackDescription(stDesc[0]);
                     
-                    if(TgtCP[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(
-                            abDamage, true, false));
+
+                    if(TgtCP[0] == true) 
+                    	abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(abDamage, true, sacFirstCost));
                     else if(TgtCreature[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreature(abDamage));
                     else if(TgtPlayer[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDamage));
+                    
+                    if (sacCost[0])
+	                    abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abDamage, sacType[0], "Sacrifice a "+sacType[0]));
+                	     
                     
                     card.addSpellAbility(abDamage);
                 }//!tapCost
                 
-                if(tapCost) {
+                else {	//tapCost
                     final SpellAbility abDamage = new Ability_Tap(card) {
                         private static final long serialVersionUID = -7960649024757327722L;
                         
@@ -1896,10 +1935,10 @@ public class CardFactory implements NewConstants {
                             CardList hand = new CardList(compHand.getCards());
                             
                             if(hand.size() >= 7) // anti-discard-at-EOT
-                            return true;
+                            	return true;
                             
-                            if(AllZone.Human_Life.getLife() < (10 - damage)) // if damage from this spell would drop the human to less than 10 life
-                            return true;
+                            if(AllZone.Human_Life.getLife() - damage < 10) // if damage from this spell would drop the human to less than 10 life
+                            	return true;
                             
                             return false;
                         }
@@ -1942,6 +1981,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
+                        	if (sacCost[0])	return false;
                             damage = getNumDamage();
                             
                             boolean na = false;
@@ -2010,201 +2050,16 @@ public class CardFactory implements NewConstants {
                     else if(TgtCreature[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreature(abDamage));
                     else if(TgtPlayer[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDamage));
                     
-                    if(!tapOnlyCost) abDamage.setManaCost(manaCost);
+                    if (sacCost[0])
+	                    abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abDamage, sacType[0], "Sacrifice a "+sacType[0]));
+                	
+                    if(!tapFirstCost && !sacFirstCost) abDamage.setManaCost(manaCost);
                     
                     card.addSpellAbility(abDamage);
                 }//tapCost
                 
             }
-        }
-        
-        // TODO: remove abDamageCP in favor of abDamageTgt
-        if(hasKeyword(card, "abDamageCP") != -1) {
-            int n = hasKeyword(card, "abDamageCP");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                
-                String tmpCost = k[0].substring(11);
-                
-                final int dmg[] = new int[1];
-                dmg[0] = Integer.parseInt(k[1]);
-                
-                boolean tapCost = false;
-                boolean tapOnlyCost = false;
-                
-                if(tmpCost.contains("T")) {
-                    tapCost = true;
-                    tmpCost = tmpCost.replace("T", "");
-                    tmpCost = tmpCost.trim();
-                    if(tmpCost.length() == 0) tapOnlyCost = true;
-                }
-                
-                final String manaCost = tmpCost;
-                
-                String tempDesc = "";
-                tempDesc = cardName + " deals " + dmg[0] + " damage to target creature or player.";
-                final String Desc = tempDesc;
-                
-                if(!tapCost) {
-                    final SpellAbility ability = new Ability_Activated(card, manaCost) {
-                        private static final long serialVersionUID = -7560349014757367722L;
-                        
-                        @Override
-                        public boolean canPlayAI() {
-                            Random r = new Random();
-                            if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) return true;
-                            else return false;
-                        }
-                        
-                        @Override
-                        public void chooseTargetAI() {
-                            CardList list = CardFactoryUtil.AI_getHumanCreature(dmg[0], card, true);
-                            list.shuffle();
-                            
-                            if(list.isEmpty() || AllZone.Human_Life.getLife() < 5 + dmg[0]) setTargetPlayer(Constant.Player.Human);
-                            else setTargetCard(list.get(0));
-                        }//chooseTargetAI
-                        
-                        @Override
-                        public void resolve() {
-                            if(getTargetCard() != null) {
-                                if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                        && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                                    if(card.getKeyword().contains("Wither")) getTargetCard().addCounter(
-                                            Counters.M1M1, dmg[0]);
-                                    else getTargetCard().addDamage(dmg[0], card);
-                                    if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
-                                            card, dmg[0]);
-                                    
-                                    CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
-                                    for(Card c:cl) {
-                                        GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
-                                    }
-                                }
-                            } else {
-                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0],card);
-                                if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
-                                        card, dmg[0]);
-                                
-                                CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
-                                for(Card c:cl) {
-                                    GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
-                                }
-                            }
-                        }//resolve()
-                    };//Ability_Activated
-                    
-                    ability.setDescription(manaCost + ": " + Desc);
-                    ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
-                    card.addSpellAbility(ability);
-                }//!tapCost
-                
-                if(tapOnlyCost == true) {
-                    final Ability_Tap ability = new Ability_Tap(card) {
-                        private static final long serialVersionUID = -7560349014757367722L;
-                        
-                        @Override
-                        public void chooseTargetAI() {
-                            CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
-                            list.shuffle();
-                            
-                            if(list.isEmpty() || AllZone.Human_Life.getLife() < 5 + dmg[0]) setTargetPlayer(Constant.Player.Human);
-                            else setTargetCard(list.get(0));
-                        }//chooseTargetAI
-                        
-                        @Override
-                        public void resolve() {
-                            if(getTargetCard() != null) {
-                                if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                        && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                                    if(card.getKeyword().contains("Wither")) getTargetCard().addCounter(
-                                            Counters.M1M1, dmg[0]);
-                                    else getTargetCard().addDamage(dmg[0], card);
-                                    if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
-                                            card, dmg[0]);
-                                    
-                                    CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
-                                    for(Card c:cl) {
-                                        GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
-                                    }
-                                    
-                                }
-                            } else {
-                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0],card);
-                                if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
-                                        card, dmg[0]);
-                                
-                                CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
-                                for(Card c:cl) {
-                                    GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
-                                }
-                                
-
-                                card.setDealtDmgToOppThisTurn(true);
-                            }
-                        }//resolve()
-                    };//Ability_Tap
-                    
-                    ability.setDescription("tap: " + Desc);
-                    ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
-                    card.addSpellAbility(ability);
-                }//tapOnlyCost
-                
-                if(!tapOnlyCost && tapCost) {
-                    final SpellAbility ability = new Ability_Tap(card, manaCost) {
-                        private static final long serialVersionUID = -7560349014757367722L;
-                        
-                        @Override
-                        public void chooseTargetAI() {
-                            CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
-                            list.shuffle();
-                            
-                            if(list.isEmpty() || AllZone.Human_Life.getLife() < 5 + dmg[0]) setTargetPlayer(Constant.Player.Human);
-                            else setTargetCard(list.get(0));
-                        }//chooseTargetAI
-                        
-                        @Override
-                        public void resolve() {
-                            if(getTargetCard() != null) {
-                                if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                        && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                                    if(card.getKeyword().contains("Wither")) getTargetCard().addCounter(
-                                            Counters.M1M1, dmg[0]);
-                                    else getTargetCard().addDamage(dmg[0], card);
-                                    if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
-                                            card, dmg[0]);
-                                    
-                                    CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
-                                    for(Card c:cl) {
-                                        GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
-                                    }
-                                }
-                            } else {
-                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0],card);
-                                if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
-                                        card, dmg[0]);
-                                
-
-                                CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
-                                for(Card c:cl) {
-                                    GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
-                                }
-                                
-                                card.setDealtDmgToOppThisTurn(true);
-                            }
-                        }//resolve()
-                    };//Ability_Tap
-                    
-                    ability.setDescription(manaCost + ", tap: " + Desc);
-                    ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
-                    card.addSpellAbility(ability);
-                }//!tapOnlyCost && tapCost
-            }//n       
-        }//AbDamageCP
-        
+        }//abDamageTgt
 
         // Generic destroy target card
         if(hasKeyword(card, "spDestroyTgt") != -1) {
