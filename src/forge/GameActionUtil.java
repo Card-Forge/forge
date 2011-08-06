@@ -11464,13 +11464,15 @@ public class GameActionUtil {
 					}
 	      		});
 	      	}
-			
+
       		if(Range.equals("Enchanted")) {
-	      			CardList CardsinPlay = new CardList();
+      			if (SourceCard.getEnchanting().size() > 0)
+      				Cards_inZone.addAll(SourceCard.getEnchanting().toArray());
+	      			/*CardList CardsinPlay = new CardList();
 	      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
 	      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
-		      		for(int i = 0; i < Cards_inZone.size(); i++)
-		      		if(CardsinPlay.get(i).getEnchantedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));
+		      		for(int i = 0; i < CardsinPlay.size(); i++)
+		      		if(CardsinPlay.get(i).getEnchantedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));*/
 	      	}
       		
       		if(Range.equals("Equipped")) {

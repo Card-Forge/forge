@@ -1,0 +1,10 @@
+Name:Kamahl's Desire
+ManaCost:1 R
+Types:Enchantment Aura
+Text:Enchanted creature has first strike.
+K:Enchant creature
+K:enPump:First Strike
+K:stPumpEnchanted:Creature:3/0:Threshold:Threshold - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahls_desire.jpg
+End

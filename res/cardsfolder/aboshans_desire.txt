@@ -1,0 +1,10 @@
+Name:Aboshan's Desire
+ManaCost:U
+Types:Enchantment Aura
+Text:Enchanted creature has flying.
+K:Enchant creature
+K:enPump:Flying
+K:stPumpEnchanted:Creature:0/0/Shroud:Threshold:Threshold - Enchanted creature has shroud as long as seven or more cards are in your graveyard. (It can't be the target of spells or abilities.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aboshans_desire.jpg
+End

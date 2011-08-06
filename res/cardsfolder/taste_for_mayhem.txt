@@ -1,0 +1,10 @@
+Name:Taste for Mayhem
+ManaCost:R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+0.
+K:Enchant creature
+K:enPump:+2/+0
+K:stPumpEnchanted:Creature:2/0:Hellbent:Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_for_mayhem.jpg
+End
