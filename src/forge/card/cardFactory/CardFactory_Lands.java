@@ -830,6 +830,70 @@ class CardFactory_Lands {
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Coral Atoll") 		|| cardName.equals("Dormant Volcano")
+        		|| cardName.equals("Evergaldes")	|| cardName.equals("Jungle Basin")
+        		|| cardName.equals("Karoo")) {
+        	
+        	final String[] type = new String[1];
+        	if(cardName.equals("Coral Atoll")) type[0] = "Island";
+        	else if(cardName.equals("Dormant Volcano")) type[0] = "Mountain";
+        	else if(cardName.equals("Everglades")) type[0] = "Swamp";
+        	else if(cardName.equals("Jungle Basin")) type[0] = "Forest";
+        	else if(cardName.equals("Karoo")) type[0] = "Plains";
+        	
+        	final SpellAbility sacOrNo = new Ability(card, "") {
+        		@Override
+        		public void resolve() {
+        			final Player player = card.getController();
+        			final CardList land = AllZoneUtil.getPlayerCardsInPlay(player).getValidCards(type[0]+".untapped", player, card);
+
+        			if( player.equals(AllZone.ComputerPlayer)) {
+        				if( land.size() > 0 ) {
+        					Card c = CardFactoryUtil.getWorstLand(land);
+        					AllZone.GameAction.moveToHand(c);
+        				}
+        				else {
+        					AllZone.GameAction.sacrifice(card);
+        				}
+        			}
+        			else { //this is the human resolution
+        				Input target = new Input() {
+							private static final long serialVersionUID = -7886610643693087790L;
+							
+							public void showMessage() {
+        						AllZone.Display.showMessage(card+" - Select one untapped "+type[0]+" to return");
+        						ButtonUtil.enableOnlyCancel();
+        					}
+        					public void selectButtonCancel() {
+        						AllZone.GameAction.sacrifice(card);
+        						stop();
+        					}
+        					public void selectCard(Card c, PlayerZone zone) {
+        						if(zone.is(Constant.Zone.Battlefield) && land.contains(c)) {
+        							AllZone.GameAction.moveToHand(c);
+        							stop();
+        						}
+        					}//selectCard()
+        				};//Input
+        				AllZone.InputControl.setInput(target);
+        			}
+        		}
+        	};
+        	sacOrNo.setStackDescription("When CARDNAME enters the battlefield, sacrifice it unless you return an untapped "+type[0]+" you control to its owner's hand.");
+        	
+        	final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = -5777499632266148456L;
+
+				public void execute() {
+        			AllZone.Stack.add(sacOrNo);
+        		}
+        	};
+
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
         return card;
     }
     
