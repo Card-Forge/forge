@@ -2025,7 +2025,8 @@ public class CardFactory_Creatures {
             });        
         }//*************** END ************ END **************************
         */
-
+        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Keening Banshee")) {
             
@@ -2088,7 +2089,7 @@ public class CardFactory_Creatures {
                 }
             });            
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Peregrine Drake")) {
