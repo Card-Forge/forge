@@ -1,24 +1,42 @@
 package forge.quest;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
+
+import forge.AllZone;
+import forge.QuestData;
+import forge.gui.GuiUtils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
-import java.awt.*;
-import java.io.File;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
-public class Gui_Quest_Deck_Info implements NewConstants {
+public class QuestOpponent extends JPanel{
 
     static TreeMap<String, DeckInfo> nameDeckMap = new TreeMap<String, DeckInfo>();
 
     static {
         buildDeckList();
     }
+
+
+    ImageIcon icon;
+    String name;
+    String description;
+    String difficulty;
+
+    private Color backgroundColor;
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    private boolean selected;
 
     private static void buildDeckList() {
         //TODO: Build this list dynamically from the deck files.
@@ -207,54 +225,6 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         nameDeckMap.put(name, new DeckInfo(name, description, difficulty));
     }
 
-
-    public static void showDeckList() {
-
-        File base = ForgeProps.getFile(IMAGE_ICON);
-        File file = new File(base, "notesIcon.png");
-        ImageIcon icon = new ImageIcon(file.toString());
-
-        Object[][] data  = new Object[nameDeckMap.size()][];
-        Object[] headers = {"Name", "Difficulty", "Description"};
-        
-        int i = 0;
-        for (DeckInfo deck : nameDeckMap.values()){
-            data[i] = new Object[3];
-            data[i][0] = deck.name;
-            data[i][1] = deck.difficulty;
-            data[i][2] = deck.description;
-            i++;
-        }
-
-        JTable table = new JTable(){
-			private static final long serialVersionUID = 4794007259716860046L;
-
-			public TableCellRenderer getCellRenderer(int row, int column){
-                TableCellRenderer renderer = new DefaultTableCellRenderer(){
-					private static final long serialVersionUID = -901181777024884454L;
-
-					public String getToolTipText(){
-                        return this.getText();
-                    }
-                };
-                return renderer;
-            }
-        };
-
-        table.setModel(new DefaultTableModel(data, headers));
-        TableColumnModel tcm = table.getColumnModel();
-        tcm.getColumn(0).setMinWidth(150);
-        tcm.getColumn(0).setMaxWidth(150);
-        tcm.getColumn(1).setMinWidth(80);
-        tcm.getColumn(1).setMaxWidth(80);
-
-        JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        scrollPane.setMinimumSize(new Dimension(700,500));
-        scrollPane.setPreferredSize(new Dimension(700,500));
-        JOptionPane.showMessageDialog(null, scrollPane, "Opponent Deck Notes", JOptionPane.INFORMATION_MESSAGE, icon);
-    }
-
     public static String getDescription(String deckName) {
         if (nameDeckMap.containsKey(deckName)){
             return nameDeckMap.get(deckName).description;
@@ -277,5 +247,98 @@ public class Gui_Quest_Deck_Info implements NewConstants {
             this.difficulty = difficulty;
             this.name = name;
         }
+    }
+
+    public static List<QuestOpponent> getOpponents(){
+        List<QuestOpponent> opponentList = new ArrayList<QuestOpponent>();
+
+        QuestData questData = AllZone.QuestData;
+        String[] oponentNames = questData.getOpponents();
+        for (String opponentName : oponentNames) {
+            String oppIconName = opponentName.substring(0, opponentName.length() - 1).trim() + ".jpg";
+            ImageIcon icon = GuiUtils.getIconFromFile(oppIconName);
+
+            opponentList.add(new QuestOpponent(opponentName,
+                    nameDeckMap.get(opponentName).difficulty,
+                    nameDeckMap.get(opponentName).description,
+                    icon));
+        }
+
+        return opponentList;
+    }
+
+    private QuestOpponent(String name, String difficulty, String description, ImageIcon icon) {
+        this.name = name;
+        this.difficulty = difficulty;
+        this.description = description;
+        this.icon = icon;
+
+        this.setLayout(new BorderLayout(5,5));
+
+
+        JLabel iconLabel;
+
+        if(icon == null){
+            iconLabel = new JLabel(GuiUtils.getEmptyIcon(40,40));
+        }
+        else{
+            iconLabel = new JLabel(GuiUtils.getResizedIcon(icon,40,40));
+        }
+
+        iconLabel.setBorder(new LineBorder(Color.BLACK));
+        iconLabel.setAlignmentY(TOP_ALIGNMENT);
+
+        JPanel iconPanel = new JPanel(new BorderLayout());
+        iconPanel.setOpaque(false);
+        iconPanel.add(iconLabel, BorderLayout.NORTH);
+        this.add(iconPanel, BorderLayout.WEST);
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setOpaque(false);
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        this.add(centerPanel,BorderLayout.CENTER);
+
+        JPanel centerTopPanel = new JPanel();
+        centerTopPanel.setOpaque(false);
+        centerTopPanel.setAlignmentX(LEFT_ALIGNMENT);
+        centerTopPanel.setLayout(new BoxLayout(centerTopPanel, BoxLayout.X_AXIS));
+
+        JLabel nameLabel = new JLabel(this.name.substring(0, this.name.length()-2));
+        GuiUtils.setFontSize(nameLabel, 20);
+        nameLabel.setAlignmentY(BOTTOM_ALIGNMENT);
+        centerTopPanel.add(nameLabel);
+
+        GuiUtils.addExpandingHorizontalSpace(centerTopPanel);
+
+        JLabel difficultyLabel = new JLabel(this.difficulty);
+        difficultyLabel.setAlignmentY(BOTTOM_ALIGNMENT);
+        centerTopPanel.add(difficultyLabel);
+        centerPanel.add(centerTopPanel);
+
+        GuiUtils.addGap(centerPanel);
+
+        JLabel descriptionLabel = new JLabel(description);
+        descriptionLabel.setAlignmentX(LEFT_ALIGNMENT);
+        centerPanel.add(descriptionLabel);
+
+        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
+        this.setBorder(new CompoundBorder(new LineBorder(Color.BLACK),new EmptyBorder(5,5,5,5)));
+        this.backgroundColor = getBackground();
+    }
+
+    public void setSelected(boolean selected){
+        if(selected){
+            this.setBackground(backgroundColor.darker());
+        }
+        else{
+            this.setBackground(backgroundColor);
+        }
+
+        this.selected = selected;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

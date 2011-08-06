@@ -6,10 +6,10 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +29,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     private QuestData 		  questData;
     
     private Deck 			  hDeck;
-    
+
     private ReadQuest_Assignment read;
     
     public Gui_Quest_Assignments(Deck humanDeck) {
@@ -40,19 +40,11 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
         }
         
         hDeck = humanDeck;
-        
+
         setup();
 
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.addWindowListener(new WindowAdapter()
-		{
-			@Override
-			public void windowClosed(WindowEvent e)
-			{
-				Gui_Quest_Assignments.this.this_windowClosing(e);
-			}
-		});
-        
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
         setSize(1024, 768);
         this.setResizable(false);
         Dimension screen = getToolkit().getScreenSize();
@@ -209,7 +201,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                quitButton_actionPerformed(e);
+                quitButton_actionPerformed();
             }
         });
 
@@ -276,15 +268,11 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	return icon;
     }
     
-    void quitButton_actionPerformed(ActionEvent e) {
-    	//QuestData.saveData(questData);
-        //new Gui_Shops();
-
+    void quitButton_actionPerformed() {
         dispose();
+        new QuestMainFrame();
+
     }
-    
-    void this_windowClosing(WindowEvent e) {
-    }
-    
+
 }
 

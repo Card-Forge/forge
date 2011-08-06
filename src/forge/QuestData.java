@@ -77,6 +77,9 @@ public class QuestData implements NewConstants {
     public static final String FANTASY = "Fantasy";
     public static final String REALISTIC = "Realistic";
 
+    //TODO: Temporary.
+    public boolean useNewQuestUI = false; 
+
     public QuestData(){
     	qdPrefs = new QuestData_Prefs();		
     	

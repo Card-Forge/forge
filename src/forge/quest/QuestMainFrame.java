@@ -1,10 +1,16 @@
 package forge.quest;
 
+import forge.AllZone;
+import forge.Gui_NewGame;
+import forge.QuestData;
 import forge.quest.bazaar.QuestBazaarPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
 
 public class QuestMainFrame extends JFrame {
 	private static final long serialVersionUID = -2832625381531838412L;
@@ -33,11 +39,19 @@ public class QuestMainFrame extends JFrame {
 
         questLayout.show(visiblePanel, MAIN_PANEL);
 
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.pack();
         this.setVisible(true);
+
     }
 
     public void showPane(String paneName){
         questLayout.show(visiblePanel, paneName);
+    }
+
+    public void returnToMainMenu() {
+        QuestData.saveData(AllZone.QuestData);
+        (new Gui_NewGame()).show();
+        this.dispose();
     }
 }

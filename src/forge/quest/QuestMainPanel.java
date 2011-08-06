@@ -1,278 +1,314 @@
 package forge.quest;
 
 import forge.*;
-import forge.error.ErrorViewer;
-import forge.properties.NewConstants;
+import forge.gui.GuiUtils;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
-import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 
 
 //presumes AllZone.QuestData is not null
 
 //AllZone.QuestData should be set by Gui_QuestOptions
-public class QuestMainPanel extends JPanel implements NewConstants {
+public class QuestMainPanel extends JPanel {
     private QuestData questData;
-
-    private JLabel modeNameLabel = new JLabel();
-    private JLabel difficultyLabel = new JLabel();
-    private JLabel winLostLabel = new JLabel();
-    private JLabel rankLabel = new JLabel();
-    private JLabel creditsLabel = new JLabel();
-    private JLabel lifeLabel = new JLabel();
-    private JButton infoButton = new JButton();
-    private JButton bazaarButton = new JButton();
-    private JButton cardShopButton = new JButton();
-    private JButton deckEditorButton = new JButton();
-    private JButton playGameButton = new JButton();
-    private JButton questsButton = new JButton();
-
-    private JRadioButton opponentRadio1 = new JRadioButton();
-    private JRadioButton opponentRadio2 = new JRadioButton();
-    private JRadioButton opponentRadio3 = new JRadioButton();
-    private JComboBox deckComboBox = new JComboBox();
-    private JComboBox petComboBox = new JComboBox();
-    private ButtonGroup opponentGroup = new ButtonGroup();
-    private static JCheckBox smoothLandCheckBox = new JCheckBox("", false);
-    public static JCheckBox newGUICheckbox = new JCheckBox("", true);
-    private static JCheckBox devModeCheckBox = new JCheckBox("", true);
 
     private QuestMainFrame mainFrame;
 
+    JLabel creditsLabel = new JLabel();
+    JLabel lifeLabel = new JLabel();
+    JLabel statsLabel = new JLabel();
+    JLabel titleLabel = new JLabel();
+
+    JComboBox petComboBox = new JComboBox();
+    JComboBox deckComboBox = new JComboBox();
+
+    JButton questButton = new JButton("Quest");
+
+    QuestOpponent selectedOpponent = null;
+
+    private JCheckBox devModeCheckBox = new JCheckBox("Developer Mode");
+    public static JCheckBox newGUICheckbox = new JCheckBox("Use new UI", true);
+    private JCheckBox smoothLandCheckBox = new JCheckBox("Adjust AI Land");
+
+    private JCheckBox petCheckBox = new JCheckBox("Summon Pet");
+    private JCheckBox plantBox = new JCheckBox("Summon Plant");
+
+    private static final String NO_DECKS_AVAILABLE = "No decks available";
+
     public QuestMainPanel(QuestMainFrame mainFrame) {
         questData = AllZone.QuestData;
-
         this.mainFrame = mainFrame;
-        try {
-            initUI();
-        } catch (Exception ex) {
-            ErrorViewer.showError(ex);
-        }
-        setup();
 
-        setVisible(true);
+        initUI();
     }
 
-    private void setup() {
-        //set labels
-        difficultyLabel.setText(questData.getDifficulty() + " - " + questData.getMode());
-        rankLabel.setText(questData.getRank());
-        creditsLabel.setText("Credits: " + questData.getCredits());
+    private void initUI() {
+        JLabel modeLabel;
+        JLabel difficultyLabel;
 
-        if (questData.getMode().equals("Fantasy")) {
-            int life = questData.getLife();
-            if (life < 15) {
-                questData.setLife(15);
+        JPanel nextMatchPanel;
+        JPanel optionsPanel;
+
+        refresh();
+
+        nextMatchPanel = createNextMatchPanel();
+        this.setLayout(new BorderLayout(5, 5));
+        JPanel northPanel = new JPanel();
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        JPanel eastPanel = new JPanel();
+        this.add(northPanel, BorderLayout.NORTH);
+        this.add(centerPanel, BorderLayout.CENTER);
+        centerPanel.add(nextMatchPanel, BorderLayout.CENTER);
+        centerPanel.add(eastPanel, BorderLayout.EAST);
+
+        //Create labels at the top
+        titleLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 28));
+        titleLabel.setAlignmentX(LEFT_ALIGNMENT);
+        northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+        northPanel.add(titleLabel);
+
+        northPanel.add(Box.createVerticalStrut(5));
+
+        JPanel statusPanel = new JPanel();
+        statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
+        statusPanel.setAlignmentX(LEFT_ALIGNMENT);
+
+        modeLabel = new JLabel(questData.getMode());
+        statusPanel.add(modeLabel);
+        statusPanel.add(Box.createHorizontalGlue());
+
+        difficultyLabel = new JLabel(questData.getDifficulty());
+        statusPanel.add(difficultyLabel);
+        statusPanel.add(Box.createHorizontalGlue());
+
+        statusPanel.add(statsLabel);
+        northPanel.add(statusPanel);
+        GuiUtils.addGap(northPanel);
+
+        //Create options checkbox list
+        optionsPanel = new JPanel();
+        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+
+        optionsPanel.add(this.devModeCheckBox);
+        optionsPanel.add(Box.createVerticalStrut(5));
+        optionsPanel.add(this.newGUICheckbox);
+        optionsPanel.add(Box.createVerticalStrut(5));
+        optionsPanel.add(this.smoothLandCheckBox);
+        optionsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Options"));
+
+        List<Component> eastComponents = new ArrayList<Component>();
+        //Create buttons
+
+        JButton mainMenuButton = new JButton("Return to Main Menu");
+        mainMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                mainFrame.returnToMainMenu();
             }
-            lifeLabel.setText("Max Life: " + questData.getLife());
+        });
+        eastComponents.add(mainMenuButton);
+
+        JButton cardShopButton = new JButton("Card Shop");
+        cardShopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                QuestMainPanel.this.showCardShop();
+            }
+        });
+        eastComponents.add(cardShopButton);
+        cardShopButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+
+        JButton bazaarButton = null;
+
+        if (questData.getMode().equals(QuestData.FANTASY)) {
+
+            bazaarButton = new JButton("Bazaar");
+            bazaarButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
+                    QuestMainPanel.this.showBazaar();
+                }
+            });
+            eastComponents.add(bazaarButton);
+            bazaarButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         }
 
-        String s = questData.getWin() + " wins / " + questData.getLost() + " losses";
-        winLostLabel.setText(s);
-
-        String[] op = questData.getOpponents();
-        opponentRadio1.setText(op[0]);
-        opponentRadio1.setToolTipText(Gui_Quest_Deck_Info.getDescription(op[0]));
-        opponentRadio2.setText(op[1]);
-        opponentRadio2.setToolTipText(Gui_Quest_Deck_Info.getDescription(op[1]));
-        opponentRadio3.setText(op[2]);
-        opponentRadio3.setToolTipText(Gui_Quest_Deck_Info.getDescription(op[2]));
 
 
-        //get deck names as Strings
-        List<String> list = questData.getDeckNames();
-        Collections.sort(list);
-        for (String aList : list) {
-            deckComboBox.addItem(aList);
+        questButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                QuestMainPanel.this.showQuests();
+            }
+        });
+        eastComponents.add(questButton);
+        questButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+        questButton.setPreferredSize(new Dimension(0, 60));
+
+
+        JButton playButton = new JButton("Play");
+        playButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                QuestMainPanel.this.launchGame();
+            }
+        });
+
+        playButton.setFont(new Font(Font.DIALOG, Font.BOLD, 28));
+        playButton.setPreferredSize(new Dimension(0, 100));
+
+
+        eastComponents.add(playButton);
+        eastComponents.add(optionsPanel);
+
+        GuiUtils.setWidthToMax(eastComponents);
+
+        eastPanel.add(mainMenuButton);
+        GuiUtils.addGap(eastPanel);
+        eastPanel.add(optionsPanel);
+        eastPanel.add(Box.createVerticalGlue());
+        eastPanel.add(Box.createVerticalGlue());
+        eastPanel.add(creditsLabel);
+        GuiUtils.addGap(eastPanel);
+        eastPanel.add(cardShopButton);
+
+        if (questData.getMode().equals(QuestData.FANTASY)) {
+            GuiUtils.addGap(eastPanel);
+            eastPanel.add(bazaarButton);
         }
 
-        if (Constant.Runtime.HumanDeck[0] != null) {
-            deckComboBox.setSelectedItem(Constant.Runtime.HumanDeck[0].getName());
-        }
+        eastPanel.add(Box.createVerticalGlue());
 
-    }//setup()
+        eastPanel.add(questButton);
+        GuiUtils.addGap(eastPanel);
+        eastPanel.add(playButton);
 
-    private void initUI() throws Exception {
-        this.setLayout(new BorderLayout());
+        eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
 
-        JPanel centerPanel = new JPanel(new FlowLayout());
-        
-        Border opponentsBorder = new TitledBorder(
-                BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
-                "Opponents");
-        Border settingsBorder = new TitledBorder(
-                BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
-                "Settings");
-        Border playerBorder = new TitledBorder(
-                BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
-                "Player");
+    }
+
+    private JPanel createNextMatchPanel() {
+        JPanel outerPanel = new JPanel();
+        outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBorder(new TitledBorder(new EtchedBorder(), "Next Match"));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JPanel opponentPanel = new JPanel();
-        opponentPanel.setBorder(opponentsBorder);
-        JPanel settingsPanel = new JPanel();
-        settingsPanel.setBorder(settingsBorder);
-        JPanel playerPanel = new JPanel();
-        playerPanel.setBorder(playerBorder);
+        opponentPanel.setLayout(new BoxLayout(opponentPanel, BoxLayout.Y_AXIS));
+        opponentPanel.setBorder(new TitledBorder(new EtchedBorder(), "Opponent"));
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(0,1));
+        List<QuestOpponent> opponents = QuestOpponent.getOpponents();
 
-        modeNameLabel.setFont(new java.awt.Font("Dialog", 0, 25));
-        modeNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        modeNameLabel.setText("Quest Mode");
+        for (QuestOpponent opponent : opponents) {
+            opponentPanel.add(opponent);
+            opponent.addMouseListener(new OpponentAdapter(opponent));
 
-        difficultyLabel.setFont(new java.awt.Font("Dialog", 0, 25));
-        difficultyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            GuiUtils.addGap(opponentPanel, 3);
 
-        winLostLabel.setFont(new java.awt.Font("Dialog", 0, 25));
-        winLostLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        winLostLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-
-        rankLabel.setFont(new java.awt.Font("Dialog", 0, 25));
-        rankLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        creditsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        creditsLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-
-
-        infoButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        infoButton.setText("Opponent Notes");
-        infoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showOpponentInfo(e);
-            }
-        });
-
-
-        cardShopButton.setFont(new java.awt.Font("Dialog", 0, 16));
-        cardShopButton.setText("Card Shop");
-        cardShopButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showCardShop(e);
-            }
-        });
-
-        deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 16));
-        deckEditorButton.setText("Deck Editor");
-        deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showDeckEditor(e);
-            }
-        });
-
-
-
-
-        playGameButton.setFont(new java.awt.Font("Dialog", 0, 18));
-        playGameButton.setText("Play Game");
-        playGameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                launchGame(e);
-            }
-        });
-
-        smoothLandCheckBox.setText("Stack AI land");
-        newGUICheckbox.setText("New GUI");
-        devModeCheckBox.setText("Developer Mode");
-        devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
-
-
-
-        settingsPanel.setLayout(new BoxLayout(settingsPanel, BoxLayout.Y_AXIS));
-        settingsPanel.setBorder(settingsBorder);
-        settingsPanel.add(smoothLandCheckBox, null);
-        settingsPanel.add(newGUICheckbox, null);
-        settingsPanel.add(devModeCheckBox, null);
-
-        opponentPanel.setLayout(
-                new BoxLayout(opponentPanel,BoxLayout.Y_AXIS));
-
-        opponentRadio1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        opponentPanel.add(opponentRadio1);
-        opponentRadio2.setAlignmentX(Component.LEFT_ALIGNMENT);
-        opponentPanel.add(opponentRadio2);
-        opponentRadio3.setAlignmentX(Component.LEFT_ALIGNMENT);
-        opponentPanel.add(opponentRadio3);
-
-        opponentGroup.add(opponentRadio1);
-        opponentGroup.add(opponentRadio2);
-        opponentGroup.add(opponentRadio3);
-        opponentRadio1.setSelected(true);
-
-        infoButton.setAlignmentX(Component.LEFT_ALIGNMENT);
-        opponentPanel.add(infoButton);
-
-        creditsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        playerPanel.add(creditsLabel, null);
-
-        JPanel deckNamePanel = new JPanel();
-        deckNamePanel.setLayout(new BoxLayout(deckNamePanel,BoxLayout.X_AXIS));
-        JLabel deckNameLabel = new JLabel("Your Deck:");
-        
-        deckNamePanel.add(deckNameLabel);
-        deckNamePanel.add(Box.createHorizontalStrut(5));
-        deckNamePanel.add(deckComboBox);
-
-        BoxLayout playerLayout = new BoxLayout(playerPanel, BoxLayout.Y_AXIS);
-        playerPanel.setLayout(playerLayout);
-        deckNamePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        playerPanel.add(deckNamePanel);
-
-        if ("Fantasy".equals(questData.getMode())) {
-            playerPanel.add(Box.createVerticalStrut(5));
-
-            lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            lifeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-            lifeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-            playerPanel.add(lifeLabel);
-
-            refreshPets();
-            playerPanel.add(Box.createVerticalStrut(5));
-            petComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-            playerPanel.add(petComboBox);
-
-            bazaarButton.setFont(new java.awt.Font("Dialog", 0, 16));
-            bazaarButton.setText("Bazaar");
-            bazaarButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    showBazaar(e);
-                }
-            });
-            buttonPanel.add(bazaarButton, null);
-
-            questsButton.setFont(new java.awt.Font("Dialog", 0, 18));
-            questsButton.setText("Quests");
-            questsButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    showQuests(e);
-                }
-            });
-
-            questsButton.setEnabled(shouldQuestsBeEnabled());
-            buttonPanel.add(questsButton, null);
 
         }
 
+        opponentPanel.setAlignmentX(LEFT_ALIGNMENT);
+        mainPanel.add(opponentPanel);
 
-        centerPanel.add(modeNameLabel, null);
-        centerPanel.add(difficultyLabel, null);
-        centerPanel.add(rankLabel, null);
-        centerPanel.add(winLostLabel, null);
-        buttonPanel.add(cardShopButton, null);
-        buttonPanel.add(deckEditorButton, null);
-        buttonPanel.add(playGameButton, null);
-        centerPanel.add(opponentPanel, null);
-        centerPanel.add(settingsPanel, null);
-        centerPanel.add(playerPanel);
-        centerPanel.add(buttonPanel);
+        GuiUtils.addGap(mainPanel, 10);
 
-        this.add(centerPanel, BorderLayout.CENTER);
+        JPanel deckPanel = new JPanel();
+        deckPanel.setLayout(new BoxLayout(deckPanel, BoxLayout.X_AXIS));
+
+        JLabel deckLabel = new JLabel("Use Deck");
+        deckPanel.add(deckLabel);
+        GuiUtils.addGap(deckPanel);
+        deckPanel.add(this.deckComboBox);
+        GuiUtils.addGap(deckPanel);
+
+        JButton editDeckButton = new JButton("Deck Editor");
+        editDeckButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                showDeckEditor();
+            }
+        });
+        deckPanel.add(editDeckButton);
+        deckPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, deckPanel.getPreferredSize().height));
+        deckPanel.setAlignmentX(LEFT_ALIGNMENT);
+        mainPanel.add(deckPanel);
+
+
+        GuiUtils.addGap(mainPanel);
+
+        if (questData.getMode().equals(QuestData.FANTASY)) {
+            JPanel petPanel = new JPanel();
+            petPanel.setLayout(new BoxLayout(petPanel, BoxLayout.X_AXIS));
+            petPanel.add(this.petCheckBox);
+            GuiUtils.addGap(petPanel);
+            petPanel.add(this.petComboBox);
+            mainPanel.add(petPanel);
+            petPanel.setMaximumSize(petPanel.getPreferredSize());
+            petPanel.setAlignmentX(LEFT_ALIGNMENT);
+
+
+            GuiUtils.addGap(mainPanel);
+            mainPanel.add(this.lifeLabel);
+            this.lifeLabel.setAlignmentX(LEFT_ALIGNMENT);
+            this.lifeLabel.setMaximumSize(this.lifeLabel.getPreferredSize());
+        }
+        outerPanel.add(mainPanel);
+
+        return outerPanel;
+    }
+
+    void refresh() {
+        creditsLabel.setText("Credits: " + questData.getCredits());
+        statsLabel.setText(questData.getWin() + " wins / " + questData.getLost() + " losses");
+        titleLabel.setText(questData.getRank());
+
+        deckComboBox.removeAllItems();
+
+        if (questData.getDeckNames().size() > 0) {
+
+            deckComboBox.setEnabled(true);
+            for (String deckName : questData.getDeckNames()) {
+                deckComboBox.addItem(deckName);
+            }
+        }
+
+        else {
+            deckComboBox.addItem(NO_DECKS_AVAILABLE);
+            deckComboBox.setEnabled(false);
+        }
+        deckComboBox.setMinimumSize(new Dimension(150, 0));
+
+        questButton.setEnabled(shouldQuestsBeEnabled());
+
+        if (questData.getMode().equals(QuestData.FANTASY)) {
+            lifeLabel.setText("Starting Life: " + questData.getLife());
+            petComboBox.removeAllItems();
+
+            List<String> petList = QuestUtil.getPetNames(questData);
+
+            if (petList.size() > 0) {
+                petComboBox.setEnabled(true);
+                petCheckBox.setEnabled(true);
+                for (String aPetList : petList) {
+                    petComboBox.addItem(aPetList);
+                }
+            }
+
+            else {
+                petComboBox.addItem("No pets available");
+                petComboBox.setEnabled(false);
+                petCheckBox.setEnabled(false);
+            }
+        }
     }
 
     private boolean shouldQuestsBeEnabled() {
@@ -289,74 +325,65 @@ public class QuestMainPanel extends JPanel implements NewConstants {
         return !(questData.getWin() / div < questsPlayed || questData.getWin() < 25);
     }
 
-    void refreshCredits() {
-        creditsLabel.setText("Credits: " + questData.getCredits());
-    }
 
-    void refreshLife() {
-        lifeLabel.setText("Max Life: " + questData.getLife());
-    }
+    void showDeckEditor() {
+        Command exit = new Command() {
+            private static final long serialVersionUID = -5110231879431074581L;
 
-    void refreshPets() {
+            public void execute() {
+                //saves all deck data
+                QuestData.saveData(AllZone.QuestData);
 
-        petComboBox.removeAllItems();
-        List<String> petList = QuestUtil.getPetNames(questData);
-
-        for (String aPetList : petList) {
-            petComboBox.addItem(aPetList);
-        }
-
-        petComboBox.addItem("None");
-        petComboBox.addItem("No Plant/Pet");
-    }
-
-    //make sure credits/life get updated after shopping at bazaar
-    public void setVisible(boolean b) {
-        refreshPets();
-        refreshCredits();
-        refreshLife();
-        super.setVisible(b);
-    }
-
-    void showOpponentInfo(ActionEvent e) {
-        Gui_Quest_Deck_Info.showDeckList();
-    }
-
-    void showDeckEditor(ActionEvent e) {
+                new QuestMainFrame();
+            }
+        };
 
         Gui_Quest_DeckEditor g = new Gui_Quest_DeckEditor();
 
+        g.show(exit);
         g.setVisible(true);
-
+        mainFrame.dispose();
     }//deck editor button
 
-    void showBazaar(ActionEvent e) {
+    void showBazaar() {
         mainFrame.showPane(QuestMainFrame.BAZAAR_PANEL);
     }
 
-    void showCardShop(ActionEvent e) {
+    void showCardShop() {
+        Command exit = new Command() {
+			private static final long serialVersionUID = 8567193482568076362L;
+
+			public void execute() {
+                //saves all deck data
+                QuestData.saveData(AllZone.QuestData);
+
+                new QuestMainFrame();
+            }
+        };
+
         Gui_CardShop g = new Gui_CardShop(questData);
 
-        g.show(null);
+        g.show(exit);
         g.setVisible(true);
+
+        this.mainFrame.dispose();
 
     }//card shop button
 
-    void launchGame(ActionEvent e) {
+    void launchGame() {
         Object check = deckComboBox.getSelectedItem();
-        if (check == null || getOpponent().equals("")) {
+        if (check == NO_DECKS_AVAILABLE || getSelectedOpponent().equals("")) {
             return;
         }
 
         Deck human = questData.getDeck(check.toString());
-        Deck computer = questData.ai_getDeckNewFormat(getOpponent());
+        Deck computer = questData.ai_getDeckNewFormat(getSelectedOpponent());
 
         Constant.Runtime.HumanDeck[0] = human;
         Constant.Runtime.ComputerDeck[0] = computer;
 
-        String oppIconName = getOpponent();
+        String oppIconName = getSelectedOpponent();
         oppIconName = oppIconName.substring(0, oppIconName.length() - 1).trim() + ".jpg";
-
 
         Constant.Quest.oppIconName[0] = oppIconName;
 
@@ -374,7 +401,7 @@ public class QuestMainPanel extends JPanel implements NewConstants {
 
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
 
-        if (questData.getMode().equals("Realistic")) {
+        if (questData.getMode().equals(QuestData.REALISTIC)) {
             AllZone.GameAction.newGame(human, computer);
         }
         else {
@@ -393,16 +420,24 @@ public class QuestMainPanel extends JPanel implements NewConstants {
         //end - you can change stuff after this
 
         //close this window
-
+        mainFrame.dispose();
     }//play game button
 
-    void showQuests(ActionEvent e) {
-        Object check = deckComboBox.getSelectedItem();
-        if (check == null) {
+    private String getSelectedOpponent() {
+        if (selectedOpponent == null) {
+            return "";
+        }
+
+        return selectedOpponent.getName();
+    }
+
+    void showQuests() {
+        Object deckName = deckComboBox.getSelectedItem();
+        if (deckName == null) {
             return;
         }
 
-        Deck human = questData.getDeck(check.toString());
+        Deck human = questData.getDeck(deckName.toString());
 
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
 
@@ -415,22 +450,28 @@ public class QuestMainPanel extends JPanel implements NewConstants {
 
         Gui_Quest_Assignments g = new Gui_Quest_Assignments(human);
         g.setVisible(true);
-
+        mainFrame.dispose();
     }
 
-    String getOpponent() {
-        if (opponentRadio1.isSelected()) {
-            return opponentRadio1.getText();
+    class OpponentAdapter extends MouseAdapter {
+        QuestOpponent opponent;
+
+        OpponentAdapter(QuestOpponent opponent) {
+            super();
+            this.opponent = opponent;
         }
 
-        else if (opponentRadio2.isSelected()) {
-            return opponentRadio2.getText();
-        }
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {
 
-        else if (opponentRadio3.isSelected()) {
-            return opponentRadio3.getText();
-        }
+            if (selectedOpponent != null) {
+                selectedOpponent.setSelected(false);
+            }
 
-        return "";
+            opponent.setSelected(true);
+
+            selectedOpponent = opponent;
+        }
     }
+
 }

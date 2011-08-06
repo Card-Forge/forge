@@ -1,5 +1,6 @@
 package forge;
 import forge.error.ErrorViewer;
+import forge.quest.QuestMainFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -41,7 +42,10 @@ public class Gui_QuestOptions extends JFrame {
     private JPanel            jPanel3             = new JPanel();
     private Border            border2;
     private TitledBorder      titledBorder2;
-    
+
+
+    private JCheckBox useNewQuestUI = new JCheckBox("Use new Quest UI");
+
     public static void main(String[] args) {
         new Gui_QuestOptions();
     }
@@ -66,7 +70,7 @@ public class Gui_QuestOptions extends JFrame {
         //center window on the screen
         Dimension screen = this.getToolkit().getScreenSize();
         setBounds(screen.width / 4, 50, //position
-                420, 555); //size
+                420, 570); //size
         
         //if user closes this window, go back to "New Game" screen
         this.addWindowListener(new WindowAdapter() {
@@ -185,6 +189,9 @@ public class Gui_QuestOptions extends JFrame {
         
         buttonGroup2.add(realisticRadio);
         buttonGroup2.add(fantasyRadio);
+
+        useNewQuestUI.setBounds(0,520,150,30);
+        this.getContentPane().add(useNewQuestUI);
     }
     
     void continueQuestButton_actionPerformed(ActionEvent e) {
@@ -192,7 +199,17 @@ public class Gui_QuestOptions extends JFrame {
         AllZone.QuestData = QuestData.loadData();
         AllZone.QuestData.setDifficultyIndex();
         dispose();
-        new Gui_Quest();
+        
+        if(useNewQuestUI.isSelected()){
+            AllZone.QuestData.useNewQuestUI = true;
+            new QuestMainFrame();
+        }
+        else
+        {
+            AllZone.QuestData.useNewQuestUI = false;
+            new Gui_Quest();
+        }
+
     }
     
     void newQuestButton_actionPerformed(ActionEvent e) {
@@ -234,7 +251,14 @@ public class Gui_QuestOptions extends JFrame {
         AllZone.QuestData = questData;
         
         dispose();
-        new Gui_Quest();
+        if(useNewQuestUI.isSelected()){
+            AllZone.QuestData.useNewQuestUI = true;
+            new QuestMainFrame();
+        }
+        else{
+            AllZone.QuestData.useNewQuestUI = false;
+            new Gui_Quest();
+        }
     }
     
     //copy AI decks from old to newData

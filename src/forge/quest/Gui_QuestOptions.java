@@ -8,7 +8,10 @@ import forge.error.ErrorViewer;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -199,7 +202,7 @@ public class Gui_QuestOptions extends JFrame {
     void newQuestButton_actionPerformed(ActionEvent e) {
         int difficulty = 0;
 
-        String mode = fantasyRadio.isSelected() ? "Fantasy" : "Realistic";
+        String mode = fantasyRadio.isSelected() ? QuestData.FANTASY : QuestData.REALISTIC;
         
         if(easyRadio.isSelected()) difficulty = 0;
         

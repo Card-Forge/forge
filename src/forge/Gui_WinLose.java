@@ -2,30 +2,21 @@
 package forge;
 
 
-import java.awt.Color;
-import java.awt.Dimension;
-// import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.io.File;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-
-import net.miginfocom.swing.MigLayout;
-
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;
+import forge.quest.QuestMainFrame;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.io.File;
 
 
 public class Gui_WinLose extends JFrame implements NewConstants {
@@ -496,7 +487,12 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             AllZone.QuestAssignment = null;
             
             QuestData.saveData(quest);
-            new Gui_Quest();
+            if (AllZone.QuestData.useNewQuestUI){
+                new QuestMainFrame();
+            }
+            else{
+                new Gui_Quest();
+            }
         }//else - on quest
         
         dispose();
