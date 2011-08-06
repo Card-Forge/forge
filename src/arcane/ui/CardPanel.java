@@ -227,10 +227,7 @@ public class CardPanel extends JPanel implements CardContainer{
 		height = -yOffset + rotCenterY + rotCenterToBottomCorner;
 		setBounds(x + xOffset, y + yOffset, width, height);
 		
-		Insets i = getInsets();
-        Image image = gameCard == null? null:ImageCache.getImage(gameCard, getWidth() - i.left - i.right, getHeight()
-                - i.top - i.bottom);
-        setImage(image, image);
+		setCard(gameCard);
 	}
 
 	public void repaint () {
@@ -287,6 +284,7 @@ public class CardPanel extends JPanel implements CardContainer{
 	}
 
 	public void setCard(Card card) {
+		if(gameCard != null && gameCard.equals(card) && isAnimationPanel && imagePanel.hasImage()) return;
 		this.gameCard = card;
         if(!isShowing()) return;
         Insets i = getInsets();

@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,6 +46,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -55,6 +57,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -588,21 +591,44 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 //p.removeAllCardPanels();
                 
                 Card c[] = pZone.getCards();
-                arcane.ui.CardPanel cp;
+                
                 List<Card> tmp, diff;
                 tmp = new ArrayList<Card>();
                 for(arcane.ui.CardPanel cpa : p.cardPanels)
                 	tmp.add(cpa.gameCard);
                 diff = new ArrayList<Card>(tmp);
                 diff.removeAll(Arrays.asList(c));
-                for(Card card : diff) {
-                	p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
+                if(diff.size() == p.cardPanels.size())
+                	p.clear();
+                else {
+	                for(Card card : diff) {
+	                	p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
+	                }
                 }
                 diff = new ArrayList<Card>(Arrays.asList(c));
                 diff.removeAll(tmp);
+                
+                int fromZoneX = 0, fromZoneY = 0;
+                Rectangle pb = playerLibraryValue.getBounds();
+                Point zoneLocation = SwingUtilities.convertPoint(playerLibraryValue, Math.round(pb.width / 2.0f), Math.round(pb.height / 2.0f), layeredPane);
+    			fromZoneX = zoneLocation.x;
+    			fromZoneY = zoneLocation.y;
+    			int startWidth, startX, startY;
+    			startWidth = 10;
+				startX = fromZoneX - Math.round(startWidth / 2.0f);
+				startY = fromZoneY - Math.round(Math.round(startWidth * arcane.ui.CardPanel.ASPECT_RATIO) / 2.0f);
+    			
+                int endWidth, endX, endY;
+                arcane.ui.CardPanel toPanel = null;
+                
                 for(Card card : diff) {
-                	cp = p.addCard(card);
-                	Animation.moveCard(cp);
+                	toPanel = p.addCard(card);
+                	endWidth = toPanel.getCardWidth();
+                	Point toPos = SwingUtilities.convertPoint(playerHandPanel, toPanel.getCardLocation(), layeredPane);
+                	endX = toPos.x;
+    				endY = toPos.y;
+    				arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
+                	Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel, layeredPane, 500);
                 }
             }
         });
@@ -1067,6 +1093,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     CardDetailPanel                 detail                   = new CardDetailPanel(null);
     ViewPanel                       picturePanel             = new ViewPanel();
     arcane.ui.CardPanel             picture                  = new arcane.ui.CardPanel(null);
+    JLayeredPane                    layeredPane              = SwingUtilities.getRootPane(this).getLayeredPane();
     
     private class ZoneAction extends ForgeAction {
         private static final long serialVersionUID = -5822976087772388839L;

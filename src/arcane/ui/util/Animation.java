@@ -221,6 +221,7 @@ abstract public class Animation {
 								if (placeholder != null) {
 									placeholder.setDisplayEnabled(true);
 									placeholder.setImage(animationPanel);
+									placeholder.setCard(placeholder.gameCard);
 								}
 								animationPanel.setVisible(false);
 								animationPanel.repaint();
