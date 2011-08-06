@@ -1459,21 +1459,34 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlayAI() {
-                	Player player = getTargetPlayer();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
                     CardList libList = new CardList(lib.getCards());
-                    return (libList.size() > 0 && ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) || Phase.StormCount*3 >= libList.size()));
-                }
+                    
+                    return (libList.size() > 0 
+                                && ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) 
+                                || Phase.StormCount*3 >= libList.size()));
+                }//canPlayAI()
+                
+                @Override
+                public void chooseTargetAI() {
+                    
+                    setTargetPlayer(AllZone.HumanPlayer);
+                    
+                }//chooseTargetAI()
                 
                 @Override
                 public void resolve() {
+                    
                     AllZone.GameAction.mill(getTargetPlayer(),3);
-                }
+                    
+                }//resolve()
             };//SpellAbility
+            
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************    
+        }//*************** END ************ END **************************
         
 /*    	
         //*************** START *********** START **************************
