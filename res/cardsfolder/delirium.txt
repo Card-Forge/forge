@@ -8,4 +8,5 @@ SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN Prevent all combat damage t
 SVar:X:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delirium.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/320.jpg
 End

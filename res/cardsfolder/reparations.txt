@@ -6,4 +6,5 @@ T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Spell.YouDontCtrl | T
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reparations.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/338.jpg
 End
