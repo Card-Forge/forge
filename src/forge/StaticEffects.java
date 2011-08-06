@@ -40,11 +40,11 @@ public class StaticEffects
 		//cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
 		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
 		cardToEffectsList.put("Covetous Dragon", new String[] {"Covetous_Dragon"});
-		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
+		//cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
 		
-		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon_Blackblade"});
+		//cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon_Blackblade"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
-		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
+		//cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
 		
 		//cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
 		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});

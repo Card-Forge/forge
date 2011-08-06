@@ -1,9 +1,11 @@
 Name:Crowd of Cinders
 ManaCost:3 B
 Types:Creature Elemental
-Text:Crowd of Cinders's power and toughness are each equal to the number of black permanents you control.
-PT:1/1
+Text:no text
+PT:*/*
 K:Fear
+K:stSetPT:Count$Valid Permanent.Black+YouCtrl:Count$Valid Permanent.Black+YouCtrl:Crowd of Cinders's power and toughness are each equal to the number of black permanents you control.
+SVar:BuffedBy:Permanent.Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crowd_of_cinders.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/63.jpg

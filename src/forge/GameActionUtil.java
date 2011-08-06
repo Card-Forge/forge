@@ -13737,9 +13737,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
-	
-	
+	/*
 	public static Command Dakkon_Blackblade                      = new Command() {
 
 		private static final long serialVersionUID = 6863244333398587274L;
@@ -13762,6 +13760,7 @@ public class GameActionUtil {
 			return lands.size();
 		}
 	};
+	*/
 
 	public static Command Korlash_Heir_to_Blackblade = new Command() {
 		private static final long serialVersionUID = 1791221644995716398L;
@@ -14767,7 +14766,7 @@ public class GameActionUtil {
 
 		}// execute()
 	};
-
+	/*
 	public static Command Crowd_of_Cinders            = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
 
@@ -14785,6 +14784,7 @@ public class GameActionUtil {
 
 		}// execute()
 	}; // Crowd of Cinders
+	*/
 
 	public static Command Faerie_Swarm                = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
@@ -14807,6 +14807,7 @@ public class GameActionUtil {
 		}
 	}; // Faerie Swarm
 
+	/*
 	public static Command Drove_of_Elves              = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
 
@@ -14823,7 +14824,7 @@ public class GameActionUtil {
 
 		}// execute()
 	}; // Drove of Elves
-
+	*/
 
 	public static Command Multani_Maro_Sorcerer       = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
@@ -16398,11 +16399,11 @@ public class GameActionUtil {
 		//commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
 		commands.put("Covetous_Dragon", Covetous_Dragon);
-		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
+		//commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		
-		commands.put("Dakkon_Blackblade", Dakkon_Blackblade);
+		//commands.put("Dakkon_Blackblade", Dakkon_Blackblade);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
-		commands.put("Drove_of_Elves", Drove_of_Elves);
+		//commands.put("Drove_of_Elves", Drove_of_Elves);
 		
 		//commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
