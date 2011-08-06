@@ -1,0 +1,8 @@
+Name:Aura Fracture
+ManaCost:2 W
+Types:Enchantment
+Text:no text
+K:abDestroyTgtV Sac<1/Land>:Enchantment:Destroy target enchantment.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_fracture.jpg
+End
