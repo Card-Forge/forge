@@ -1,3 +1,10 @@
+Long-Forgotten Gohei
+3
+Artifact
+Arcane spells you cast cost {1} less to cast.
+CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
+
 Roughshod Mentor
 5 G
 Creature Giant Warrior
