@@ -328,12 +328,12 @@ public class CombatUtil {
                     && !blocker.isRed()) return false;
         }
         
-        if(attacker.getName().equals("Manta Ray")) {
-            if(!blocker.isBlue()) return false;
-        }
-        
         if(attacker.getKeyword().contains("CARDNAME can't be blocked except by black creatures.")) {
         	if(!blocker.isBlack())return false; 
+        }
+        
+        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by blue creatures.")) {
+        	if(!blocker.isBlue())return false; 
         }
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by Walls.") && blocker.isType("Wall")) return false;
