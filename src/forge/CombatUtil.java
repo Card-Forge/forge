@@ -377,14 +377,7 @@ public class CombatUtil {
                 if (asSeparateWords[12].matches("[0-9][0-9]?")) {
                     powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
                     
-                    CardList list = null;
-                    if (c.getController().isHuman()) {
-                        list = new CardList(AllZone.Computer_Battlefield.getCards());
-                    } else {
-                        list = new CardList(AllZone.Human_Battlefield.getCards());
-                    }
-                    
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(c.getController().getOpponent());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card ct) {
                             return ((ct.isUntapped() && ct.getNetAttack() >= powerLimit[0] && asSeparateWords[14].contains("greater")) ||
@@ -396,8 +389,7 @@ public class CombatUtil {
             }
         } // hasKeyword = CARDNAME can't attack if defending player controls an untapped creature with power ...
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController().getOpponent());
-        CardList list = new CardList(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent());
         CardList temp;
         
         if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls an Island.")) {
@@ -457,11 +449,7 @@ public class CombatUtil {
         
         if (AllZoneUtil.isCardInPlay("Kulrath Knight"))
         {
-        	CardList all = new CardList();
-        	all.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-        	all.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
-        	
-        	all = all.getName("Kulrath Knight");
+        	CardList all = AllZoneUtil.getCardsInPlay("Kulrath Knight");
         	for (int i=0; i<all.size(); i++)
         	{
         		Card cKK = all.get(i);
@@ -492,7 +480,7 @@ public class CombatUtil {
     	
     }
     
-    //This function take Doran and Double Strike into account
+    //This function takes Doran and Double Strike into account
     public static int getAttack(Card c)
     {
        int n = c.getNetAttack();
@@ -1538,15 +1526,8 @@ public class CombatUtil {
                 Ability ability2 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        Player player = charger.getController();
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                        CardList list = new CardList();
-                        list.addAll(play.getCards());
-                        list = list.filter(new CardListFilter() {
-                            public boolean addCard(Card card) {
-                                return (card.isCreature() && !card.isTapped());
-                            }
-                        });
+                        CardList list = AllZoneUtil.getCreaturesInPlay(charger.getController());
+                        list = list.filter(AllZoneUtil.untapped);
                         final int k = list.size();
                         
                         final Command untilEOT = new Command() {
@@ -1921,19 +1902,19 @@ public class CombatUtil {
             else if(c.getName().equals("Lorthos, the Tidemaker") && !c.getCreatureAttackedThisCombat()) {
             	final Card[] Targets = new Card[8];
             	final int[] index = new int[1];
-	                final Ability ability = new Ability(c, "8") {
-	                    @Override
-	                    public void resolve() {
-	                    	for(int i = 0; i < 8; i++) {
-	                    		if(Targets[i] != null) {
-                       	 Targets[i].tap();
-                    	 if(!Targets[i].hasKeyword("This card doesn't untap during your next untap step.")) {
-                    		 Targets[i].addExtrinsicKeyword("This card doesn't untap during your next untap step.");
-                    	 }
-	                    		}
-	                    	}
-	                    }
-                };
+            	final Ability ability = new Ability(c, "8") {
+            		@Override
+            		public void resolve() {
+            			for(int i = 0; i < 8; i++) {
+            				if(Targets[i] != null) {
+            					Targets[i].tap();
+            					if(!Targets[i].hasKeyword("This card doesn't untap during your next untap step.")) {
+            						Targets[i].addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+            					}
+            				}
+            			}
+            		}
+            	};
                 final Command unpaidCommand = new Command() {                   
                     private static final long serialVersionUID = -6483124208343935L;                  
                     public void execute() {
@@ -1944,11 +1925,7 @@ public class CombatUtil {
                     private static final long serialVersionUID = -83034517601871955L;
                     
                     public void execute() {
-                        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                        final CardList all = new CardList();
-                    	all.addAll(Hplay.getCards());
-                    	all.addAll(Cplay.getCards());
+                        final CardList all = AllZoneUtil.getCardsInPlay();
                         for(int i = 0; i < 8; i++) {
                        	 AllZone.InputControl.setInput(CardFactoryUtil.Lorthos_input_targetPermanent(ability , all , i ,new Command() {
                        	
@@ -2756,7 +2733,7 @@ public class CombatUtil {
     }
     
     /**
-     * executes rampage abilities for a given card
+     * executes Rampage abilities for a given card
      * 
      * @param c the card to add rampage bonus to
      * @param magnitude the magnitude of rampage (ie Rampage 2 means magnitude should be 2)
