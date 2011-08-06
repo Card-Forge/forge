@@ -1,3 +1,8 @@
+Reanimate
+B
+Sorcery
+Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+
 Grave Defiler
 3 B
 Creature Zombie

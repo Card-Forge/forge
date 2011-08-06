@@ -19747,6 +19747,68 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Reanimate")) {
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 2940635076296411568L;
+
+				@Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
+                    PlayerZone grave = AllZone.getZone(c);
+                    
+                    if(AllZone.GameAction.isCardInZone(c, grave)) {
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+                        AllZone.GameAction.moveTo(play, c);
+                    }
+                    AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(cmc);
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() {
+                    return super.canPlay() && getCreatures().size() > 0;
+                }
+                
+                public CardList getCreatures() {
+                    CardList creatures = AllZoneUtil.getCardsInGraveyard();
+                    return creatures.filter(AllZoneUtil.creatures);
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    CardList creatures = getCreatures();
+                    Card biggest = creatures.get(0);
+                    for(int i = 0; i < creatures.size(); i++)
+                        if(biggest.getNetAttack() < creatures.get(i).getNetAttack()) {
+                        	biggest = creatures.get(i);
+                        }
+                    setTargetCard(biggest);
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Input target = new Input() {
+				private static final long serialVersionUID = -5293899159488141547L;
+
+				@Override
+                public void showMessage() {
+                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
+                    if(check != null) {
+                        spell.setTargetCard((Card) check);
+                        stopSetNext(new Input_PayManaCost(spell));
+                    } else stop();
+                }//showMessage()
+                
+                public Card[] getCreatures() {
+                	CardList creatures = AllZoneUtil.getCardsInGraveyard();
+                    return creatures.filter(AllZoneUtil.creatures).toArray();
+                }
+            };//Input
+            spell.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
