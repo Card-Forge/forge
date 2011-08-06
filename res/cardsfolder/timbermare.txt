@@ -1,0 +1,10 @@
+Name:Timbermare
+ManaCost:3 G
+Types:Creature Elemental Horse
+Text:no text
+PT:5/5
+K:Haste
+K:Echo:5 G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timbermare.jpg
+End

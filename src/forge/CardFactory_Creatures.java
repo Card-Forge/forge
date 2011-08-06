@@ -20149,7 +20149,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Thundermare")) {
+        else if(cardName.equals("Thundermare") || cardName.equals("Timbermare")) {
         	/*
         	 * When Thundermare enters the battlefield, tap all other creatures.
         	 */
