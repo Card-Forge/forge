@@ -1,0 +1,10 @@
+Name:Anaba Ancestor
+ManaCost:1 R
+Types:Creature Minotaur Spirit
+Text:no text
+PT:1/1
+A:AB$Pump | Cost$ T | NumAtt$ +1 | NumDef$ +1 | ValidTgts$ Creature.Minotaur+Other | TgtPrompt$ Select another target Minotaur creature | SpellDescription$ Another target Minotaur creature gets +1/+1 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_ancestor.jpg
+End

@@ -1,0 +1,10 @@
+Name:Alpha Kavu
+ManaCost:2 G
+Types:Creature Kavu
+Text:no text
+PT:2/2
+A:AB$Pump | Cost$ 1 G | NumAtt$ -1 | NumDef$ +1 | ValidTgts$ Creature.Kavu | TgtPrompt$ Select target Kavu creature | SpellDescription$ Target Kavu creature gets -1/+1 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_kavu.jpg
+End

@@ -3,6 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 A:AB$Fog | Cost$ 2 Sac<1/Land.Snow> | CostDesc$ Sacrifice a snow land: | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunstone.jpg
 End
