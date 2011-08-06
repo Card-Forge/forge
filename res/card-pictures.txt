@@ -38,6 +38,11 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+immolation.jpg		http://www.wizards.com/global/images/magic/general/immolation.jpg
+maggot_therapy.jpg		http://www.wizards.com/global/images/magic/general/maggot_therapy.jpg
+riot_spikes.jpg		http://www.wizards.com/global/images/magic/general/riot_spikes.jpg
+sangrite_backlash.jpg		http://www.wizards.com/global/images/magic/general/sangrite_backlash.jpg
+twisted_experiment.jpg		http://www.wizards.com/global/images/magic/general/twisted_experiment.jpg
 the_rack.jpg					http://www.wizards.com/global/images/magic/general/the_rack.jpg
 crumble.jpg						http://www.wizards.com/global/images/magic/general/crumble.jpg
 flashfires.jpg 					http://www.wizards.com/global/images/magic/general/flashfires.jpg

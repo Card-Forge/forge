@@ -1414,22 +1414,23 @@ public class CardFactoryUtil {
                 
                 //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                 
-                CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
-                auraMagnetList = auraMagnetList.filter(new CardListFilter() {
-                	public boolean addCard(Card c) {
-                		return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
-                	}
-                });
-                if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
-                	auraMagnetList.shuffle();
-                	for (int i = 0; i < auraMagnetList.size(); i++) {
-                		if (CardFactoryUtil.canTarget(sourceCard, auraMagnetList.get(i))) {
-                			setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
-                			return true;
-                		}
-                	}
+                if (Tough >= -1) {    // we want Rabid Wombat or a Uril, the Miststalker to gain at least +1 toughness
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                	        return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
+                	    }
+                    });
+                    if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
+                        auraMagnetList.shuffle();
+                        for (int i = 0; i < auraMagnetList.size(); i++) {
+                            if (CardFactoryUtil.canTarget(sourceCard, auraMagnetList.get(i))) {
+                                setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
+                	            return true;
+                	    	}
+                	    }
+                    }
                 }
-                
                 //else (if aura is keyword only)
                 
                 if (Power == 0 && Tough == 0) {    // This aura is keyword only
@@ -1438,7 +1439,7 @@ public class CardFactoryUtil {
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                             for (String s:extKeywords) {
                                 if (!c.getKeyword().contains(s))
-                                    return true;
+                                    return true;    // Do not duplicate keyword and do not kill by reducing toughness to <= zero
                             }
                                 //no new keywords:
                                 return false;
@@ -1452,9 +1453,10 @@ public class CardFactoryUtil {
                 CardListUtil.sortFlying(list);
                 
                 for (int i = 0; i < list.size(); i++) {
-                    if (CardFactoryUtil.canTarget(sourceCard, list.get(i))) {
-                        setTargetCard(list.get(i));
-                        return true;
+                    if (CardFactoryUtil.canTarget(sourceCard, list.get(i)) && 
+                            list.get(i).getNetAttack() + Power > 0 && list.get(i).getNetDefense() + Tough > 0) {
+                        setTargetCard(list.get(i));    // Do not reduce power to <= zero
+                        return true;                   // Do not kill by reducing toughness to <= zero
                     }
                 }
                 return false;

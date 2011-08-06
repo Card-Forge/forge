@@ -1,3 +1,39 @@
+Immolation
+R
+Enchantment Aura
+Enchanted creature gets +2/-2.
+Enchant creature
+enPump:+2/-2
+
+Maggot Therapy
+2 B
+Enchantment Aura
+Enchanted creature gets +2/-2.
+Flash
+Enchant creature
+enPump:+2/-2
+
+Riot Spikes
+BR
+Enchantment Aura
+Enchanted creature gets +2/-1.
+Enchant creature
+enPump:+2/-1
+
+Sangrite Backlash
+BG R
+Enchantment Aura
+Enchanted creature gets +3/-3.
+Enchant creature
+enPump:+3/-3
+
+Twisted Experiment
+1 B
+Enchantment Aura
+Enchanted creature gets +3/-1.
+Enchant creature
+enPump:+3/-1
+
 The Rack
 1
 Artifact
