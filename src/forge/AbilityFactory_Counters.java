@@ -37,8 +37,7 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return putDoTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -96,8 +95,7 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return putDoTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -499,8 +497,7 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return removeDoTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -558,8 +555,7 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return removeDoTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -689,6 +685,25 @@ public class AbilityFactory_Counters {
 		 return chance;
 	}
 	
+	public static boolean removeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory){
+		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+		boolean chance = true;
+
+		//TODO - currently, not targeted, only for Self
+
+		// Note: Not many cards even use Trigger and Remove Counters. And even fewer are not mandatory
+		// Since the targeting portion of this would be what 
+		
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)
+			return false;
+		
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+		 	chance &= subAb.doTrigger(mandatory);
+
+		 return chance;
+	}
+	
 	public static void removeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		String type = params.get("CounterType");
@@ -741,20 +756,13 @@ public class AbilityFactory_Counters {
     		}
     		
     		@Override
-    		public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-    		
-    		@Override
 			public String getStackDescription(){
     			return proliferateStackDescription(this);
 			}
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return doTriggerProliferateAI(this, mandatory);
 			}
     	};
     	
@@ -816,8 +824,7 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return doTriggerProliferateAI(this, mandatory);
 			}
     	};
     	
@@ -847,6 +854,16 @@ public class AbilityFactory_Counters {
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			chance &= subAb.chkAI_Drawback();
+		
+		// todo: Make sure Human has poison counters or there are some counters we want to proliferate
+		return chance;
+	}
+	
+	private static boolean doTriggerProliferateAI(SpellAbility sa, boolean mandatory) {
+		boolean chance = true;
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.doTrigger(mandatory);
 		
 		// todo: Make sure Human has poison counters or there are some counters we want to proliferate
 		return chance;
