@@ -1957,6 +1957,7 @@ res/cardsfolder/enlisted_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/enlistment_officer.txt -text svneol=native#text/plain
 res/cardsfolder/enormous_baloth.txt -text svneol=native#text/plain
 res/cardsfolder/enrage.txt -text svneol=native#text/plain
+res/cardsfolder/enslave.txt -text svneol=native#text/plain
 res/cardsfolder/enslaved_dwarf.txt -text svneol=native#text/plain
 res/cardsfolder/enslaved_scout.txt -text svneol=native#text/plain
 res/cardsfolder/ensnare.txt -text svneol=native#text/plain

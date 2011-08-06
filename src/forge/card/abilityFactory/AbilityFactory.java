@@ -583,7 +583,7 @@ public class AbilityFactory {
 		}
 		
 		if (SA == null)
-			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Did you add the API section?");
+			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 
 		// *********************************************
 		// set universal properties of the SpellAbility
@@ -904,6 +904,11 @@ public class AbilityFactory {
         }
 		else if (defined.equals("EnchantedController")){
 			Player p = card.getEnchantingCard().getController();
+			if (!players.contains(p))
+				players.add(p);
+		}
+		else if (defined.equals("EnchantedOwner")){
+			Player p = card.getEnchantingCard().getOwner();
 			if (!players.contains(p))
 				players.add(p);
 		}
