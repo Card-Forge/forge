@@ -4,6 +4,7 @@ Types:Creature Human Shaman
 Text:no text
 PT:2/2
 K:abPumpTgtC R T:+2/+0
+K:abTapTgt W T:Creature:Tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_battlemage.jpg
 End

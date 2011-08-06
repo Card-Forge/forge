@@ -4,6 +4,7 @@ Types:Creature Human Soldier Rebel
 Text:no text
 PT:2/2
 K:Morph:W
+K:abTapTgt W T:Creature:Tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whipcorder.jpg
 End

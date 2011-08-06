@@ -3,6 +3,7 @@ ManaCost:2 WU
 Types:Creature Human Advisor
 Text:no text
 PT:1/1
+K:abTapTgt T:Creature:Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minister_of_impediments.jpg
 End

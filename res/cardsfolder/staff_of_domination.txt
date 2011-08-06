@@ -3,6 +3,9 @@ ManaCost:3
 Types:Artifact
 Text:no text
 K:Untap:1
+K:abGainLife 2 T:1
+K:abTapTgt 4 T:Creature:Tap target creature.
+K:abDrawCards 5 T:1:Draw a card.:Staff of Domination - draw a card
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_domination.jpg
 End

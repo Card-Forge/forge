@@ -5753,6 +5753,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlayAI() {
+        			//TODO: perhaps this can borrow from the Crowd Favorites AI...
         			if (!ComputerUtil.canPayCost(this))
         				return false;
 
@@ -8951,7 +8952,7 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Staff of Domination")) {
-            
+            /*
             final Ability_Tap ability2 = new Ability_Tap(card, "2") {
                 
                 private static final long serialVersionUID = -5513078874305811825L;
@@ -8972,7 +8973,7 @@ public class CardFactory implements NewConstants {
             StringBuilder sb2 = new StringBuilder();
             sb2.append(cardName).append(" - You gain 1 life.");
             ability2.setStackDescription(sb2.toString());
-            
+            */
             final SpellAbility ability3 = new Ability_Tap(card, "3") {
                 private static final long serialVersionUID = 1125696151526415705L;
                 
@@ -9010,7 +9011,7 @@ public class CardFactory implements NewConstants {
             
             ability3.setDescription("3, tap: Untap target creature.");
             ability3.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability3));
-            
+            /*
             final SpellAbility ability4 = new Ability_Tap(card, "4") {
                 
                 private static final long serialVersionUID = 8102011024731535257L;
@@ -9032,7 +9033,8 @@ public class CardFactory implements NewConstants {
             
             ability4.setDescription("4, tap: Tap target creature.");
             ability4.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability4));
-            
+            */
+            /*
             final Ability_Tap ability5 = new Ability_Tap(card, "5") {
                 
                 private static final long serialVersionUID = -8459438547823091716L;
@@ -9053,12 +9055,12 @@ public class CardFactory implements NewConstants {
             StringBuilder sb5 = new StringBuilder();
             sb5.append(card.getName()).append(" - draw a card.");
             ability5.setStackDescription(sb5.toString());
+            */
             
-            card.addSpellAbility(ability2);
+            //card.addSpellAbility(ability2);
             card.addSpellAbility(ability3);
-            card.addSpellAbility(ability4);
-            card.addSpellAbility(ability5);
-            
+            //card.addSpellAbility(ability4);
+            //card.addSpellAbility(ability5);         
         }//*************** END ************ END **************************
         
         
@@ -9502,10 +9504,10 @@ public class CardFactory implements NewConstants {
       }
       //*************** END ************ END **************************
         
-    
+    /*
         //*****************************START*******************************
         else if(cardName.equals("Icy Manipulator") || cardName.equals("Ring of Gix")) {
-           /* The Rules state that this can target a tapped card, but it won't do anything */
+           // The Rules state that this can target a tapped card, but it won't do anything 
            
            final Ability_Tap ability = new Ability_Tap(card, "1") {
 			private static final long serialVersionUID = 6349074398830621348L;
@@ -9527,6 +9529,7 @@ public class CardFactory implements NewConstants {
            ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Artifact;Creature;Land"));
         }//end Icy Manipulator
         //****************END*******END***********************
+        */
  
         
         //*****************************START*******************************

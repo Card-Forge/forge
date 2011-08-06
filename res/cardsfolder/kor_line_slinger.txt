@@ -1,8 +1,9 @@
 Name:Kor Line-Slinger
 ManaCost:1 W
 Types:Creature Kor Scout
-Text:tap: Tap target creature with power 3 or less.
+Text:no text
 PT:0/1
+K:abTapTgt T:Creature.powerLE3:Tap target creature with power 3 or less.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_line_slinger.jpg
 End

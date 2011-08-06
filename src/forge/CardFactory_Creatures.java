@@ -9001,7 +9001,7 @@ public class CardFactory_Creatures {
             }));
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         if(cardName.equals("Goldmeadow Harrier") || cardName.equals("Loxodon Mystic")
                 || cardName.equals("Master Decoy") || cardName.equals("Benalish Trapper")
@@ -9059,7 +9059,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         if(cardName.equals("Rathi Trapper")) {
@@ -9114,7 +9114,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         if(cardName.equals("Minister of Impediments") || cardName.equals("Ballynock Trapper")) {
             final SpellAbility ability = new Ability_Tap(card, "0") {
@@ -9167,8 +9167,9 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
         }//*************** END ************ END **************************
+        */
         
-        
+        /*
         //*************** START *********** START **************************
         if(cardName.equals("Crowd Favorites")) {
             final SpellAbility ability = new Ability_Tap(card, "3 W") {
@@ -9220,7 +9221,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if (cardName.equals("Stalking Assassin")) {
@@ -9290,7 +9291,7 @@ public class CardFactory_Creatures {
                     }
                 }//selectCard()
             };//Input
-            
+            /*
             final SpellAbility tap = new Ability_Tap(card, "3 U") {
                 private static final long serialVersionUID = -8634280576775825017L;
 
@@ -9339,10 +9340,11 @@ public class CardFactory_Creatures {
                     
                 }//canPlayAI
             };//SpellAbility
+            */
             
-            card.addSpellAbility(tap);
-            tap.setDescription("3 U, tap: Tap target creature.");
-            tap.setBeforePayMana(CardFactoryUtil.input_targetCreature(tap));
+            //card.addSpellAbility(tap);
+            //tap.setDescription("3 U, tap: Tap target creature.");
+            //tap.setBeforePayMana(CardFactoryUtil.input_targetCreature(tap));
             card.addSpellAbility(destroy);
             destroy.setDescription("3 B, tap: Destroy target tapped creature.");
             destroy.setBeforePayMana(target);
@@ -18068,7 +18070,7 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(cardName+" - add a +1+1 counter and draw a card.");
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Kor Line-Slinger")) {
         	final Ability_Tap ability = new Ability_Tap(card) {
@@ -18125,6 +18127,7 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************
