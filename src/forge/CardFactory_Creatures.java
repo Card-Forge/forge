@@ -10148,7 +10148,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger") 
-        		|| cardName.equals("Quicksilver Gargantuan")) {
+        		|| cardName.equals("Quicksilver Gargantuan")
+        		|| cardName.equals("Jwari Shapeshifter")) {
         	final CardFactory cfact = cf;
         	final Card[] copyTarget = new Card[1];
         	final Card[] cloned = new Card[1];
@@ -10197,14 +10198,12 @@ public class CardFactory_Creatures {
 						if(cardName.equals("Vesuvan Doppelganger")) {
 							cloned[0].addExtrinsicKeyword("At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.");
 							cloned[0].addColor("U", cloned[0], false, true);
-						}
-						
+						}						
 						else if (cardName.equals("Quicksilver Gargantuan")) {
 							cloned[0].setBaseDefense(7);
 							cloned[0].setBaseAttack(7);
 						}
-						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-						play.add(cloned[0]);
+						AllZone.GameAction.moveToPlay(cloned[0]);
 						card.setCurrentlyCloningCard(cloned[0]);
 					}
                 }
@@ -10225,6 +10224,10 @@ public class CardFactory_Creatures {
             	@Override
             	public void selectCard(Card c, PlayerZone z) {
             		if( z.is(Constant.Zone.Battlefield) && c.isCreature()) {
+            			if(cardName.equals("Jwari Shapeshifter") && ! c.isType("Ally"))
+            			{
+            				return;
+            			}
             			copyTarget[0] = c;
             			stopSetNext(new Input_PayManaCost(copy));
             		}
