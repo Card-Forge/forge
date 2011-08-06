@@ -265,6 +265,21 @@ public interface NewConstants {
         }
         
         public static interface Gui_NewGame {
+        	public static interface NEW_GAME_TEXT {
+        		public static final String NEW_GAME     = "%s/NewGame/new_game";
+        		public static final String CONSTRUCTED_TEXT      = "%s/NewGame/constructed_text";
+                public static final String SEALED_TEXT         = "%s/NewGame/sealed_text";
+                public static final String BOOSTER_TEXT         = "%s/NewGame/booster_text";
+                public static final String YOURDECK        = "%s/NewGame/yourdeck";
+                public static final String OPPONENT         = "%s/NewGame/opponent";
+                public static final String DECK_EDITOR         = "%s/NewGame/deckeditor";
+                public static final String NEW_GUI         = "%s/NewGame/newgui";
+                public static final String AI_LAND         = "%s/NewGame/ailand";
+                public static final String MILLING         = "%s/NewGame/milling";
+                public static final String QUEST_MODE         = "%s/NewGame/questmode";
+                public static final String START_GAME         = "%s/NewGame/startgame";
+                
+        	}
             public static interface MENU_BAR {
                 public static interface MENU {
                     public static final String TITLE      = "%s/NewGame/menu/title";

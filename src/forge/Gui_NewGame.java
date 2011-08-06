@@ -337,7 +337,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         titledBorder2 = new TitledBorder(border2, "Library");
         border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder3 = new TitledBorder(border3, "Settings");
-        titleLabel.setText("New Game");
+        titleLabel.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GAME));
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         this.getContentPane().setLayout(new MigLayout("fill"));
@@ -349,7 +349,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         jPanel2.setBorder(titledBorder1);
         jPanel2.setLayout(new MigLayout("align center"));
         
-        singleRadioButton.setText("Constructed (Easy) - Use all of the cards to defeat the computer");
+        singleRadioButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.CONSTRUCTED_TEXT));
         singleRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 singleRadioButton_actionPerformed(e);
@@ -357,7 +357,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         });
         
         sealedRadioButton.setToolTipText("");
-        sealedRadioButton.setText("Sealed Deck (Medium) - Create your deck from 75 available cards");
+        sealedRadioButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.SEALED_TEXT));
         sealedRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 sealedRadioButton_actionPerformed(e);
@@ -365,7 +365,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         });
         
         draftRadioButton.setToolTipText("");
-        draftRadioButton.setText("Booster Draft (Hard) - Pick cards 1 at a time to create your deck");
+        draftRadioButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.BOOSTER_TEXT));
         draftRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 draftRadioButton_actionPerformed(e);
@@ -379,8 +379,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         jPanel1.setBorder(titledBorder2);
         jPanel1.setLayout(new MigLayout("align center"));
         
-        jLabel2.setText("Your Deck");
-        jLabel3.setText("Opponent");
+        jLabel2.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.YOURDECK));
+        jLabel3.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.OPPONENT));
+        
 
         humanComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -395,9 +396,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         jPanel3.setBorder(titledBorder3);
         jPanel3.setLayout(new MigLayout("align center"));
         
-        newGuiCheckBox.setText("New GUI");
-        smoothLandCheckBox.setText("Stack AI land");
-        millLoseCheckBox.setText("Milling = Loss Condition");
+        newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
+        smoothLandCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.AI_LAND));
+        millLoseCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.MILLING));
         
         /*
          *  Buttons
@@ -405,7 +406,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         deckEditorButton.setToolTipText("");
         deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 15));
-        deckEditorButton.setText("Deck Editor");
+        deckEditorButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DECK_EDITOR));
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 deckEditorButton_actionPerformed(e);
@@ -414,7 +415,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         startButton.setFont(new java.awt.Font("Dialog", 0, 18));
         startButton.setHorizontalTextPosition(SwingConstants.LEADING);
-        startButton.setText("Start Game");
+        startButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.START_GAME));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startButton_actionPerformed(e);
@@ -422,7 +423,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         });
 
         questButton.setFont(new java.awt.Font("Dialog", 0, 18));
-        questButton.setText("Quest Mode");
+        questButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.QUEST_MODE));
         
         this.getContentPane().add(titleLabel, "align center, span 3, grow, wrap");
         
