@@ -14065,11 +14065,16 @@ public class CardFactory implements NewConstants {
                     CardList all = new CardList();
                     all.addAll(AllZone.Human_Play.getCards());
                     all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.getType("Creature");
+                    
+                    all = all.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getNetAttack() >= 4;
+                        }
+                    });
                     
                     for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        int power = c.getNetAttack();
-                        if(c.isCreature() && (power >= 4)) AllZone.GameAction.destroyNoRegeneration(c);
+                        AllZone.GameAction.destroyNoRegeneration(all.get(i));
                     }
                 }//resolve()
                 
@@ -14080,12 +14085,6 @@ public class CardFactory implements NewConstants {
                     
                     human = human.getType("Creature");
                     computer = computer.getType("Creature");
-                    
-                    human = human.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getNetAttack() >= 4;
-                        }
-                    });
                     
                     human = human.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
