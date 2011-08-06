@@ -2,7 +2,7 @@ Name:Glacial Crevasses
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-A:AB$Fog | Cost$ Sac<1/Mountain.Snow> | CostDesc$ Sacrifice a snow Mountain: | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+A:AB$ Fog | Cost$ Sac<1/Mountain.Snow> | CostDesc$ Sacrifice a snow Mountain: | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

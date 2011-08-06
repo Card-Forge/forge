@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:CARDNAME enters the battlefield tapped.
-A:AB$Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
 SVar:TrigScry:AB$Scry | Cost$ 0 | ScryNum$ 1
 SVar:RemAIDeck:True

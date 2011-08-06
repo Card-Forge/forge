@@ -2,7 +2,7 @@ Name:Pulling Teeth
 ManaCost:1 B
 Types:Sorcery
 Text:no text
-A:SP$Clash | Cost$ 1 B | WinSubAbility$ DBDiscardTwo | OtherwiseSubAbility$ DBDiscardOne | SpellDescription$ Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card.
+A:SP$ Clash | Cost$ 1 B | WinSubAbility$ DBDiscardTwo | OtherwiseSubAbility$ DBDiscardOne | SpellDescription$ Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card.
 SVar:DBDiscardOne:DB$Discard | Tgt$ TgtP | NumCards$ 1 | Mode$ TgtChoose
 SVar:DBDiscardTwo:DB$Discard | Tgt$ TgtP | NumCards$ 2 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
