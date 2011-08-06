@@ -1,3 +1,11 @@
+Tenza, Godo's Maul
+3
+Legendary Artifact Equipment
+Equipped creature gets +1/+1.
+eqPump 1:+1/+1
+StaticEffect:Play:Eqiupped Permanent:PTBonus/2/2:Type.Legendary:As long as it's legendary, it gets an additional +2/+2.
+StaticEffect:Play:Eqiupped Permanent:Keyword/Trample:Color.red:As long as it's red, it has trample.
+
 Island of Wak-Wak
 no cost
 Land
