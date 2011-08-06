@@ -3017,7 +3017,7 @@ public class CardFactory_Instants {
         //*************** START *********** START **************************
         else if(cardName.equals("Tithe")) {
             SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 1504792204526793942L;
+                private static final long serialVersionUID = 1504792204536793942L;
                 
                 public boolean oppMoreLand() {
                     String oppPlayer = AllZone.GameAction.getOpponent(card.getController());

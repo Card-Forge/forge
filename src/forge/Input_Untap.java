@@ -222,6 +222,7 @@ public class Input_Untap extends Input {
     private boolean isWinterOrbInEffect() {
     	
     	CardList all = AllZoneUtil.getCardsInPlay("Winter Orb");
+    	CardList all2 = AllZoneUtil.getCardsInPlay("Hokori, Dust Drinker");
 
     	//if multiple Winter Orbs, check that at least 1 of them is untapped
     	for( int i = 0; i < all.size(); i++ ) {
@@ -229,6 +230,11 @@ public class Input_Untap extends Input {
     			return true;
     		}
     	}
+    	
+    	if (all2.size() > 0){
+    		return true;
+    	}
+    	
     	return false;
     }
     
