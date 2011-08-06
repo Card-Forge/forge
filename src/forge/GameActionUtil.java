@@ -4424,9 +4424,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
 		else if(c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie")) playerCombatDamage_Glint_Eye_Nephilim(c);
 		else if(c.getName().equals("Hystrodon") && !c.isFaceDown()) playerCombatDamage_Hystrodon(c);
-		else if(c.getName().equals("Slith Ascendant")
-				|| c.getName().equals("Slith Bloodletter") || c.getName().equals("Slith Firewalker")
-				|| c.getName().equals("Slith Predator")) playerCombatDamage_Slith(c);
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
@@ -4701,28 +4698,7 @@ public class GameActionUtil {
 		if(c.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[1]);
 		else ComputerUtil.playNoStack(sa[1]);
 	}
-
 	
-	private static void playerCombatDamage_Slith(Card c) {
-		final int power = c.getNetAttack();
-		final Card card = c;
-
-		if(power > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					card.addCounter(Counters.P1P1, 1);
-				}
-			};// ability2
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - gets a +1/+1 counter.");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		} // if
-	}
-
 	private static void playerCombatDamage_Whirling_Dervish(Card c) {
 		final int power = c.getNetAttack();
 		final Card card = c;
