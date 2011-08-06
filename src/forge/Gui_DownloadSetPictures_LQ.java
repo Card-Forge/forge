@@ -219,6 +219,14 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                     
                     File f = new File(base, cName);
                     
+                    //test for folder existence
+                    File test = new File(base, cards[card].folder);
+                    if (!test.exists()) {
+                    	// create folder
+                    	if (!test.mkdir())
+                    		System.out.println("Can't create folder" + cards[card].folder);
+                    }
+                    
                     try {
                     	in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
                     	out = new BufferedOutputStream(new FileOutputStream(f));
@@ -249,10 +257,20 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                     }
                 } 
                 catch(FileNotFoundException fnfe) {
-                	System.out.println("Error - the LQ picture for "+cards[card].name+" could not be found on the server.");
+                	System.out.println("Error - the LQ picture for " + cards[card].name + " could not be found on the server. [" + cards[card].url + "] - " + fnfe.getMessage());
                 }
                 catch(Exception ex) {
                 	Log.error("LQ Pictures", "Error downloading pictures", ex);
+                }
+                
+                // pause
+                try
+                {
+	                Thread.sleep(2442);
+                }
+                catch (InterruptedException e)
+                {
+	                Log.error("LQ Set Pictures", "Sleep Error", e);
                 }
             }//for
         }
@@ -315,7 +333,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
 	    					if (imgFN.equals("none") || (!imgFN.contains(SC3) && !imgFN.contains(SC2)))
 	    					{
     							String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + n + ".full.jpg";
-    							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true)));
+    							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
 	    					}    							
 	    				}
     				}
@@ -327,7 +345,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     					if (imgFN.equals("none") ||	(!imgFN.contains(SC3) && !imgFN.contains(SC2)))
 						{
 							String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + ".full.jpg";
-							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true)));
+							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
 							
 						}    							
 
@@ -369,7 +387,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
             line = in.readLine();
             while(line != null && (!line.equals(""))) {
                 tok = new StringTokenizer(line);
-                list.add(new mCard(tok.nextToken(), tok.nextToken()));
+                list.add(new mCard(tok.nextToken(), tok.nextToken(), ""));
                 
                 line = in.readLine();
             }
@@ -403,10 +421,12 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     private static class mCard {
         final public String name;
         final public String url;
+        final public String folder;
         
-        mCard(String cardName, String cardURL) {
+        mCard(String cardName, String cardURL, String cardFolder) {
             name = cardName;
             url = cardURL;
+            folder = cardFolder;
         }
     }//mCard
 } 
