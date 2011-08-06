@@ -4139,7 +4139,7 @@ public class CardFactory_Creatures {
                 public void showMessage() {
                     CardList choice = (CardList) getCreature.execute();
                     
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice,
+                    stopSetNext(CardFactoryUtil.input_targetChampionSac(card, abilityComes, choice,
                             "Select Elemental to remove from the game", false, false));
                     ButtonUtil.disableAll();
                 }
@@ -4264,7 +4264,7 @@ public class CardFactory_Creatures {
                 public void showMessage() {
                     CardList choice = (CardList) getCreature.execute();
                     
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice,
+                    stopSetNext(CardFactoryUtil.input_targetChampionSac(card, abilityComes, choice,
                             "Select Elf to remove from the game", false, false));
                     ButtonUtil.disableAll(); //target this card means: sacrifice this card
                 }
@@ -4294,7 +4294,11 @@ public class CardFactory_Creatures {
                             abilityComes.setTargetCard(target);
                             AllZone.Stack.add(abilityComes);
                         }
-                    }//else
+                        else
+                        {
+                        	AllZone.GameAction.sacrifice(card);
+                        }
+                    }//computer
                 }//execute()
             };//CommandComes
             Command commandLeavesPlay = new Command() {
@@ -4427,7 +4431,7 @@ public class CardFactory_Creatures {
                 public void showMessage() {
                     CardList choice = (CardList) getCreature.execute();
                     
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice,
+                    stopSetNext(CardFactoryUtil.input_targetChampionSac(card, abilityComes, choice,
                             "Select creature to remove from the game", false, false));
                     ButtonUtil.disableAll();
                 }

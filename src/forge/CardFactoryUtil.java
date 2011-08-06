@@ -2010,6 +2010,42 @@ public class CardFactoryUtil {
         return target;
     }//input_targetSpecific()
     
+  //CardList choices are the only cards the user can successful select
+    public static Input input_targetChampionSac(final Card crd, final SpellAbility spell, final CardList choices, final String message, final boolean targeted, final boolean free) {
+        Input target = new Input() {
+			private static final long serialVersionUID = -3320425330743678663L;
+
+			@Override
+            public void showMessage() {
+                AllZone.Display.showMessage(message);
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	AllZone.GameAction.sacrifice(crd);
+            	stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(targeted && !canTarget(spell, card)) {
+                    AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                } else if(choices.contains(card)) {
+                    spell.setTargetCard(card);
+                    if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
+                            (Ability_Tap) spell));
+                    else if(spell.getManaCost().equals("0") || free) {
+                        this.setFree(false);
+                        AllZone.Stack.add(spell);
+                        stop();
+                    } else stopSetNext(new Input_PayManaCost(spell));
+                }
+            }//selectCard()
+        };
+        return target;
+    }//input_targetSpecific()
+    
     public static Input input_discard(final SpellAbility spell, final int nCards) {
         Input target = new Input() {
             private static final long serialVersionUID = 5101772642421944050L;
