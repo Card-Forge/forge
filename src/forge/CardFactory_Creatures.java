@@ -15498,6 +15498,9 @@ public class CardFactory_Creatures {
                     
                 }
             };//SpellAbility
+            
+            ab1.setStackDescription("search your library for a plains card, put it onto the battlefield tapped, then shuffle your library.");
+            
             Command cip = new Command() {
                 /**
 			 * 
