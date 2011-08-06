@@ -719,6 +719,27 @@ public class CardFactoryUtil {
         return target;
     }//input_sacrifice()
     
+    public static Input input_destroyNoRegeneration(final CardList choices, final String message) {
+        Input target = new Input() {
+			private static final long serialVersionUID = -6637588517573573232L;
+
+			@Override
+            public void showMessage() {
+                AllZone.Display.showMessage(message);
+                ButtonUtil.disableAll();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(choices.contains(card)) {
+                    AllZone.GameAction.destroyNoRegeneration(card);
+                    stop();
+                }
+            }
+        };
+        return target;
+    }//input_destroyNoRegeneration()
+    
     public static Input input_sacrificePermanents(final int nCards) {
     	Input target = new Input() {
 			private static final long serialVersionUID = -8149416676562317629L;

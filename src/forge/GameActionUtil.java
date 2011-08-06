@@ -23,6 +23,7 @@ public class GameActionUtil {
 		
 		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
 		
+		upkeep_Drop_of_Honey();
 		upkeep_Genesis();
 		upkeep_Phyrexian_Arena();
 		upkeep_Master_of_the_Wild_Hunt();
@@ -3527,6 +3528,76 @@ public class GameActionUtil {
 			}
 		}
 	}//damageUpkeepCost
+	
+	private static void upkeep_Drop_of_Honey() {
+		/*
+		 * At the beginning of your upkeep, destroy the creature with the
+		 * least power. It can't be regenerated. If two or more creatures
+		 * are tied for least power, you choose one of them.
+		 * 
+		 * When there are no creatures on the battlefield, sacrifice Drop of Honey.
+		 */
+		final String player = AllZone.Phase.getActivePlayer();
+		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Drop of Honey");
+		
+		//if no creatures in play, sacrifice all "Drop of Honey"s
+		if(AllZoneUtil.getCreaturesInPlay().size() == 0) {
+			for(Card drop:cards) {
+				AllZone.GameAction.sacrifice(drop);
+			}
+			return;
+		}
+		
+		for(int i = 0; i < cards.size(); i++) {
+			final Card c = cards.get(i);
+			
+			final Ability ability = new Ability(c, "") {
+				@Override
+				public void resolve() {
+					CardList creatures = AllZoneUtil.getCreaturesInPlay();
+					CardListUtil.sortAttackLowFirst(creatures);
+					int power = creatures.get(0).getNetAttack();
+					if(player.equals(Constant.Player.Human)) {
+        				AllZone.InputControl.setInput(CardFactoryUtil.input_destroyNoRegeneration(getLowestPowerList(creatures), "Select creature with power: "+power+" to sacrifice."));
+        			}
+					else { //computer
+						Card compyTarget = getCompyCardToDestroy(creatures);
+						AllZone.GameAction.destroyNoRegeneration(compyTarget);
+					}
+				}//resolve
+				
+				private CardList getLowestPowerList(CardList original) {
+					CardList lowestPower = new CardList();
+					int power = original.get(0).getNetAttack();
+					int i = 0;
+					while(original.get(i).getNetAttack() == power) {
+						lowestPower.add(original.get(i));
+						i++;
+					}
+					return lowestPower;
+				}
+				
+				private Card getCompyCardToDestroy(CardList original) {
+					CardList options = getLowestPowerList(original);
+					CardList humanCreatures = options.filter(new CardListFilter() {
+						public boolean addCard(Card c) {
+							return c.getController().equals(Constant.Player.Human);
+						}
+					});
+					if(humanCreatures.isEmpty()) {
+						options.shuffle();
+						return options.get(0);
+					}
+					else {
+						humanCreatures.shuffle();
+						return humanCreatures.get(0);
+					}
+				}
+			};
+			ability.setStackDescription(c.getName()+" - destroy 1 creature with lowest power.");
+			AllZone.Stack.add(ability);
+		}//end for
+	}
 	
 	/**
 	 * runs the upkeep for Genesis
