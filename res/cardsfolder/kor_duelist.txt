@@ -1,8 +1,9 @@
 Name:Kor Duelist
 ManaCost:W
 Types:Creature Kor Soldier
-Text:As long as Kor Duelist is equipped, it has double strike.
+Text:no text
 PT:1/1
+K:stPumpSelf:Creature:0/0/Double Strike:isEquipped:As long as Kor Duelist is equipped, it has double strike. (It deals both first-strike and regular combat damage.)
 SVar:EquipMe:Once
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_duelist.jpg
