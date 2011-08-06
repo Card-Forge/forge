@@ -7,5 +7,6 @@ K:tap, Sacrifice CARDNAME: Add B B to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basal_thrull.jpg
+SVar:PicCount:2
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/5.jpg
 End
