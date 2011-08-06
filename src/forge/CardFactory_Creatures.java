@@ -16334,7 +16334,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     AllZone.GameAction.mill(getTargetPlayer(),1);
-                    
                 }
                 
                 @Override
@@ -16355,6 +16354,7 @@ public class CardFactory_Creatures {
                 }
             };
             
+            a1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             a1.setDescription("tap: Target player puts the top card of his or her library into his or her graveyard.");
             a1.setStackDescription("Player puts the top card of his or her library into his or her graveyard");
             //a1.setBeforePayMana(new Input_PayManaCost(a1));
