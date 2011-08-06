@@ -4918,6 +4918,7 @@ res/cardsfolder/righteous_charge.txt -text svneol=native#text/plain
 res/cardsfolder/righteous_fury.txt -text svneol=native#text/plain
 res/cardsfolder/righteous_war.txt -text svneol=native#text/plain
 res/cardsfolder/righteousness.txt -text svneol=native#text/plain
+res/cardsfolder/rime_dryad.txt svneol=native#text/plain
 res/cardsfolder/rimebound_dead.txt -text svneol=native#text/plain
 res/cardsfolder/rimescale_dragon.txt -text svneol=native#text/plain
 res/cardsfolder/rimewind_cryomancer.txt -text svneol=native#text/plain
