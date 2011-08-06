@@ -1,0 +1,10 @@
+Name:Mind Warp
+ManaCost:X 3 B
+Types:Sorcery
+Text:no text
+K:spDiscardTgt:RevealYouChoose:X:Look at target player's hand and choose X cards from it. That player discards those cards.:CARDNAME - player reveals hand and discards X cards.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_warp.jpg
+End
