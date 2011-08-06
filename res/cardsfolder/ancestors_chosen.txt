@@ -2,6 +2,7 @@ Name:Ancestor's Chosen
 ManaCost:5 W W
 Types:Creature Human Cleric
 Text:no text
+PT:4/4
 K:First strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life for each card in your graveyard.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
