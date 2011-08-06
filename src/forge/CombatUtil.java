@@ -543,30 +543,51 @@ public class CombatUtil {
        return n;
     }
     
-    //Returns the damage unblocked attackers would deal
-    private static int sumAttack(CardList attackers, Player attacked)
+    //Returns the damage an unblocked attacker would deal
+    private static int damageIfUnblocked(Card attacker, Player attacked)
     {
-    	int sum = 0;
-    	for(int i = 0; i < attackers.size(); i++) {
-    		Card a = attackers.get(i);
-    		if (!a.hasKeyword("Infect")) sum += attacked.predictDamage(getAttack(a), a, true);
-    	}
-
-    	return sum;
+	  int damage = attacker.getNetCombatDamage();
+	  int sum = 0;
+	  damage += predictPowerBonusOfAttacker(attacker,null);
+	  if (!attacker.hasKeyword("Infect")) {
+		  sum = attacked.predictDamage(damage, attacker, true);
+		  if (attacker.hasKeyword("Double Strike")) sum += attacked.predictDamage(damage, attacker, true);
+	  }
+      return sum;
+    }
+ 
+    //Returns the poison an unblocked attacker would deal
+    private static int poisonIfUnblocked(Card attacker, Player attacked)
+    {
+	  int damage = attacker.getNetCombatDamage();
+	  int poison = 0;
+	  damage += predictPowerBonusOfAttacker(attacker,null);
+	  if (attacker.hasKeyword("Infect")) {
+		  poison += attacked.predictDamage(damage, attacker, true);
+		  if (attacker.hasKeyword("Double Strike")) poison += attacked.predictDamage(damage, attacker, true);
+	  }
+	  if (attacker.hasKeyword("Poisonous") && damage > 0) poison += attacker.getKeywordMagnitude("Poisonous");
+      return poison;
     }
     
-    //Returns the number of poison counters unblocked attackers would deal
-    private static int sumPoison(CardList attackers, Player attacked)
+    //Returns the damage unblocked attackers would deal
+    private static int sumDamageIfUnblocked(CardList attackers, Player attacked)
     {
-    	int sum = 0;
-    	for(int i = 0; i < attackers.size(); i++) {
-    		Card a = attackers.get(i);
-    		int damage = attacked.predictDamage(getAttack(a), a, true);
-    		if (a.hasKeyword("Infect")) sum += damage;
-    		if (a.hasKeyword("Poisonous") && damage > 0) sum += a.getKeywordMagnitude("Poisonous");
-    	}
-
-    	return sum;
+       int sum = 0;
+ 	  for(Card attacker: attackers) {
+ 		  sum += damageIfUnblocked(attacker, attacked);
+ 	  }
+      return sum;
+    }
+    
+  //Returns the number of poison counters unblocked attackers would deal
+    private static int sumPoisonIfUnblocked(CardList attackers, Player attacked)
+    {
+      int sum = 0;
+      for(Card attacker: attackers) {
+  		  sum += poisonIfUnblocked(attacker, attacked);
+  	  }
+      return sum;
     }
     
     //Checks if the life of the attacked Player/Planeswalker is in danger 
@@ -594,8 +615,8 @@ public class CombatUtil {
  			  }
  	   }
  	   
- 	   damage += sumAttack(unblocked, AllZone.ComputerPlayer);
- 	   poison += sumPoison(unblocked, AllZone.ComputerPlayer);
+ 	   damage += sumDamageIfUnblocked(unblocked, AllZone.ComputerPlayer);
+ 	   poison += sumPoisonIfUnblocked(unblocked, AllZone.ComputerPlayer);
  	   
 	   return (damage + 3 > AllZone.ComputerPlayer.getLife() || poison + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters());
     }
@@ -713,6 +734,16 @@ public class CombatUtil {
 				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source))
 					return false;
 		}
+		
+		// defender == null means unblocked
+		if (defender == null && trigParams.get("Mode").equals("AttackerUnblocked")) {
+			willTrigger = true;
+			if(trigParams.containsKey("ValidCard"))
+				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source))
+					return false;
+		}
+		
+		if(defender == null) return willTrigger;
 		
 		if (trigParams.get("Mode").equals("Blocks")) {
 			willTrigger = true;
@@ -1157,7 +1188,6 @@ public class CombatUtil {
                         	PhaseUtil.handleAttackingTriggers();
                     }
                 };
-
                 
                 final Command paidCommand = new Command() {
                     private static final long serialVersionUID = -8303368287601871955L;
@@ -1198,8 +1228,8 @@ public class CombatUtil {
         	//Run triggers
         	HashMap<String,Object> runParams = new HashMap<String,Object>();
         	runParams.put("Attacker", c);
-            CardList otherAttackers = new CardList(AllZone.Combat.getAttackers());
-            otherAttackers.remove(c);
+        	CardList otherAttackers = new CardList(AllZone.Combat.getAttackers());
+        	otherAttackers.remove(c);
             runParams.put("OtherAttackers",otherAttackers);
         	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
         	
@@ -1243,6 +1273,17 @@ public class CombatUtil {
 	        	} //for
         	}//creatureAttacked
         	//Annihilator
+        	
+            //Beastmaster Ascension
+            if(!c.getCreatureAttackedThisCombat()) {
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
+                CardList list = new CardList(play.getCards());
+                list = list.getName("Beastmaster Ascension");
+                
+                for(Card var:list) {
+                    var.addCounter(Counters.QUEST, 1);
+                }
+            } //BMA
             
             /*
             //Fervent Charge
@@ -1299,6 +1340,82 @@ public class CombatUtil {
   					c.tap();
   				}
             }//Mijae Djinn
+            
+            if (AllZone.Combat.getAttackers().length == 1)
+            {
+	            if (c.getKeyword().contains("Whenever this creature attacks alone, it gets +2/+0 until end of turn.") || 
+	            	c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn."))
+	            {
+	            	final Card charger = c;
+	            	Ability ability2 = new Ability(c, "0") {
+	                    @Override
+	                    public void resolve() {
+	                        
+	                        final Command untilEOT = new Command() {
+								private static final long serialVersionUID = -6039349249335745813L;
+
+								public void execute() {
+	                                if(AllZone.GameAction.isCardInPlay(charger)) {
+	                                    charger.addTempAttackBoost(-2);
+	                                    charger.addTempDefenseBoost(0);
+	                                }
+	                            }
+	                        };//Command
+	                        
+
+	                        if(AllZone.GameAction.isCardInPlay(charger)) {
+	                            charger.addTempAttackBoost(2);
+	                            charger.addTempDefenseBoost(0);
+	                            
+	                            AllZone.EndOfTurn.addUntil(untilEOT);
+	                        }
+	                    }//resolve
+	                    
+	                };//ability
+	                
+	                StringBuilder sb2 = new StringBuilder();
+	                sb2.append(c.getName()).append(" - attacks alone and gets +2/+0 until EOT.");
+	                ability2.setStackDescription(sb2.toString());
+	                
+	                AllZone.Stack.add(ability2);
+	            }
+	            
+	            if (c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +1/+0 until end of turn."))
+	            {
+	            	final Card charger = c;
+	            	Ability ability2 = new Ability(c, "0") {
+	            		@Override
+	            		public void resolve() {
+
+	            			final Command untilEOT = new Command() {
+	            				private static final long serialVersionUID = -6039349249335745813L;
+
+	            				public void execute() {
+	            					if(AllZone.GameAction.isCardInPlay(charger)) {
+	            						charger.addTempAttackBoost(-1);
+	            						charger.addTempDefenseBoost(0);
+	            					}
+	            				}
+	            			};//Command
+
+
+	            			if(AllZone.GameAction.isCardInPlay(charger)) {
+	            				charger.addTempAttackBoost(1);
+	            				charger.addTempDefenseBoost(0);
+
+	            				AllZone.EndOfTurn.addUntil(untilEOT);
+	            			}
+	            		}//resolve
+
+	            	};//ability
+
+	            	StringBuilder sb2 = new StringBuilder();
+	            	sb2.append(c.getName()).append(" - attacks alone and gets +1/+0 until EOT.");
+	            	ability2.setStackDescription(sb2.toString());
+
+	            	AllZone.Stack.add(ability2);
+	            }
+            }
             
             if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
                 //hack, to make sure this doesn't break grabbing an oblivion ring:
