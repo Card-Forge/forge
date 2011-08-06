@@ -1723,7 +1723,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Ambassador Oak")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1743,7 +1743,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mudbutton Torchrunner")) {
