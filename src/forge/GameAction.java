@@ -688,6 +688,21 @@ public class GameAction {
         this.sacrificePermanent(player, sa, list);
     }
     
+    public void sacrificePermanent(String player, String prompt, CardList choices) {
+        if(choices.size() > 0) {
+            if(player.equals(Constant.Player.Human)) {
+                Input in = CardFactoryUtil.input_sacrificePermanent(choices, prompt);
+                AllZone.InputControl.setInput(in);
+            } else {
+                CardListUtil.sortDefense(choices);
+                choices.reverse();
+                CardListUtil.sortAttackLowFirst(choices);
+                Card c = choices.get(0);
+                this.sacrificeDestroy(c);
+            }
+        }
+    }
+    
     public void sacrificePermanent(String player, SpellAbility sa, CardList choices) {
         if(choices.size() > 0) {
             if(player.equals(Constant.Player.Human)) {
