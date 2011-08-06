@@ -579,4 +579,9 @@ public class AllZoneUtil {
         if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
         return multiplier;
 	}
+	
+	public static boolean hasAllUrzas(Player player) {
+		return isCardInPlay("Urza's Power Plant", player) && isCardInPlay("Urza's Mine", player)
+			&& isCardInPlay("Urza's Tower");
+	}
 }

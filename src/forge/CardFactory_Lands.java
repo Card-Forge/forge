@@ -3675,7 +3675,7 @@ class CardFactory_Lands {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-      //*************** START ************ START **************************
+        //*************** START ************ START **************************
         else if(cardName.equals("Bottomless Vault") || cardName.equals("Dwarven Hold")
         		|| cardName.equals("Hollow Trees") || cardName.equals("Icatian Store")
         		|| cardName.equals("Sand Silos")) {
@@ -3743,8 +3743,53 @@ class CardFactory_Lands {
             card.addSpellAbility(addMana);
         }//*************** END ************ END **************************
         
+        //*************** START ************ START **************************
+        else if(cardName.equals("Urza's Power Plant") || cardName.equals("Urza's Mine") ||
+        		cardName.equals("Urza's Tower")) {
+        	final String[] bonus = new String[1];
+        	
+        	StringBuilder desc = new StringBuilder();
+        	desc.append("Tap: Add 1 to your mana pool. ");
+        	if(cardName.equals("Urza's Power Plant")) {
+        		bonus[0] = "2";
+        		desc.append("If you control an Urza's Mine and an Urza's Tower, add 2 to your mana pool instead.");
+        	}
+        	else if(cardName.equals("Urza's Mine")) {
+        		bonus[0] = "2";
+        		desc.append("If you control an Urza's Power Plant and an Urza's Tower, add 2 to your mana pool instead.");
+        	}
+        	else if(cardName.equals("Urza's Tower")) {
+        		bonus[0] = "3";
+        		desc.append("If you control an Urza's Mine and an Urza's Power Plant, add 3 to your mana pool instead.");
+        	}
+        	
+            final Ability_Mana addMana = new Ability_Mana(card, desc.toString()) {
+				private static final long serialVersionUID = -3598374122722723225L;
+
+				@Override
+                public void undo() {
+                    card.untap();
+                }
+                
+              //@Override
+                public String mana() {
+                	if(AllZoneUtil.hasAllUrzas(card.getController()))
+                		return bonus[0];
+                	else return "1";
+                }
+                
+                @Override
+                public void resolve() {
+                    card.tap();
+                    super.resolve();
+                }
+            };
+            
+            addMana.setDescription(desc.toString());
+            card.addSpellAbility(addMana);
+        }//*************** END ************ END **************************
+        
         return card;
     }
     
-
 }
