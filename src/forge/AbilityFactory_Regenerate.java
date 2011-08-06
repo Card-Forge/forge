@@ -27,6 +27,23 @@ public class AbilityFactory_Regenerate {
 				doResolve(af, this);
 				af.getHostCard().setAbilityUsed(af.getHostCard().getAbilityUsed() + 1);
 			}
+			
+			@Override
+			public String getStackDescription(){
+				 StringBuilder sb = new StringBuilder();
+				 String name = af.getHostCard().getName();
+				 sb.append(name).append(" - regenerate ");
+				 Card tgt = getTargetCard();
+				 if (tgt != null) {
+					 if(tgt.isFaceDown()) sb.append("Morph");
+					 else sb.append(tgt.getName());
+				 }
+				 else {
+					 sb.append(af.getHostCard().getName());
+				 }
+				 return sb.toString();
+			}
+			
 		};//Ability_Activated
 
 		return abRegenerate;
@@ -51,6 +68,23 @@ public class AbilityFactory_Regenerate {
 			public void resolve() {
 				doResolve(af, this);
 			}
+			
+			@Override
+			public String getStackDescription(){
+				 StringBuilder sb = new StringBuilder();
+				 String name = af.getHostCard().getName();
+				 sb.append(name).append(" - regenerate ");
+				 Card tgt = getTargetCard();
+				 if (tgt != null) {
+					 if(tgt.isFaceDown()) sb.append("Morph");
+					 else sb.append(tgt.getName());
+				 }
+				 else {
+					 sb.append(af.getHostCard().getName());
+				 }
+				 return sb.toString();
+			}
+			
 		}; // Spell
 
 		return spRegenerate;
