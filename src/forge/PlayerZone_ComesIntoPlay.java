@@ -74,7 +74,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 			});
 			
 			String[] allyNames = {"Umara Raptor", "Tuktuk Grunts", "Oran-Rief Survivalist", "Nimana Sell-Sword", "Makindi Shieldmate", 
-								  "Kazandu Blademaster","Turntimber Ranger"};
+								  "Kazandu Blademaster","Turntimber Ranger", "Highland Berserker", "Joraga Bard"};
 			final ArrayList<String> allyNamesList = new ArrayList<String>();
 			
 			for (int i=0;i<allyNames.length;i++)

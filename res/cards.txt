@@ -4,6 +4,36 @@ Artifact
 no text
 Comes into play tapped.
 
+Kazuul Warlord
+4 R
+Creature Minotaur Warrior Ally
+Whenever Kazuul Warlord or another Ally enters the battlefield under your control, you may put a +1/+1 counter on each Ally creature you control.
+3/3
+
+Seascape Aerialist
+4 U
+Creature Merfolk Wizard Ally
+Whenever Seascape Aerialist or another Ally enters the battlefield under your control, you may have Ally creatures you control gain flying until end of turn.
+2/3
+
+Ondu Cleric
+1 W
+Creature Kor Cleric Ally
+Whenever Ondu Cleric or another Ally enters the battlefield under your control, you may gain life equal to the number of Allies you control.
+1/1
+
+Joraga Bard
+3 G
+Creature Elf Rogue Ally
+Whenever Joraga Bard or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.
+1/4
+
+Highland Berserker
+1 R
+Creature Human Berserker Ally
+Whenever Highland Berserker or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
+2/1
+
 Cruel Edict
 1 B
 Sorcery

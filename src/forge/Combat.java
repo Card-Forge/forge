@@ -68,7 +68,8 @@ public class Combat
                 damageDealt = att.get(i).getNetDefense();
 
              //if the creature has first strike do not do damage in the normal combat phase
-             if(att.get(i).hasSecondStrike())
+             //if(att.get(i).hasSecondStrike())
+             if(!att.get(i).hasFirstStrike() || (att.get(i).hasFirstStrike() && att.get(i).hasDoubleStrike()) )
                 defendingDamage += damageDealt;
              }
           }
@@ -268,7 +269,8 @@ public class Combat
         CardList attacking = new CardList(getAttackers());
         for(int i = 0; i < attacking.size(); i++)
         {
-          if(!attacking.get(i).hasSecondStrike() ){
+          //if(!attacking.get(i).hasSecondStrike() ){
+        	if(!attacking.get(i).hasFirstStrike() || (attacking.get(i).hasFirstStrike() && attacking.get(i).hasDoubleStrike() )){
              block = getBlockers(attacking.get(i));
              
              //attacker always gets all blockers' attack

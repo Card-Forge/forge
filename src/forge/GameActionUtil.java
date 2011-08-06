@@ -982,12 +982,21 @@ public class GameActionUtil
 	public static void executeAllyEffects(Card c)
 	{
 		if (c.getName().equals("Kazandu Blademaster") || c.getName().equals("Makindi Shieldmate") || 
-			c.getName().equals("Nimana Sell-Sword") || c.getName().equals("Ondu Cleric") ||
-			c.getName().equals("Oran-Rief Survivalist") ||c.getName().equals("Tuktuk Grunts") ||
-			c.getName().equals("Umara Raptor"))
+			c.getName().equals("Nimana Sell-Sword") || c.getName().equals("Oran-Rief Survivalist") || 
+			c.getName().equals("Tuktuk Grunts") || c.getName().equals("Umara Raptor"))
 			ally_Generic_P1P1(c);
 		else if (c.getName().equals("Turntimber Ranger"))	
 			ally_Turntimber_Ranger(c);
+		else if (c.getName().equals("Highland Berserker"))
+			ally_BoostUntilEOT(c, "First Strike");
+		else if (c.getName().equals("Joraga Bard"))
+			ally_BoostUntilEOT(c, "Vigilance");
+		else if (c.getName().equals("Seascape Aerialist"))
+			ally_BoostUntilEOT(c, "Flying");
+		else if (c.getName().equals("Ondu Cleric"))
+			ally_Ondu_Cleric(c);
+		else if (c.getName().equals("Kazuul Warlord"))
+			ally_Kazuul_Warlord(c);
 		
 	}
 	
@@ -1085,6 +1094,118 @@ public class GameActionUtil
 				AllZone.Stack.add(ability);
 		}
 	}
+	
+	private static void ally_BoostUntilEOT(Card c, String k)
+	{
+		final Card crd = c;
+		final String keyword = k;
+        
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				CardList list = new CardList(play.getCards());
+				list = list.getType("Ally");
+				
+				final CardList allies = list;
+       		 
+	        	final Command untilEOT = new Command()
+		        {
+
+					private static final long serialVersionUID = -8434529949884582940L;
+
+					public void execute()
+		            {
+						  for (Card creat:allies){
+				              if(AllZone.GameAction.isCardInPlay(creat))
+				              {
+				                creat.removeExtrinsicKeyword(keyword);
+				              }
+						  }
+			            }
+			     	};//Command
+	
+			        for (Card creat:allies){  
+					    if(AllZone.GameAction.isCardInPlay(creat) )
+					    {
+					        creat.addExtrinsicKeyword(keyword);
+					    }
+			        }
+			        AllZone.EndOfTurn.addUntil(untilEOT);
+				
+				
+			}
+		};
+		
+		ability.setStackDescription(c.getName() + " - Ally: Ally creatures you control gain " +keyword +" until end of turn.");
+		
+		if (c.getController().equals(Constant.Player.Human)){
+				if (showAllyDialog(c))
+					AllZone.Stack.add(ability);
+		}
+		
+		else if (c.getController().equals(Constant.Player.Computer))
+			AllZone.Stack.add(ability);
+	}
+	
+	private static void ally_Ondu_Cleric(Card c)
+	{
+		final Card crd = c;
+        
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play ,crd.getController());
+				CardList allies = new CardList(play.getCards());
+				allies = allies.getType("Ally");
+				PlayerLife life = AllZone.GameAction.getPlayerLife(crd.getController());
+				life.addLife(allies.size());
+				
+			}
+		};
+		
+		ability.setStackDescription(c.getName() + " - Ally: gain life equal to the number of allies you control.");
+		
+		if (c.getController().equals(Constant.Player.Human)){
+				if (showAllyDialog(c))
+					AllZone.Stack.add(ability);
+		}
+		
+		else if (c.getController().equals(Constant.Player.Computer))
+			AllZone.Stack.add(ability);
+	}
+	
+	private static void ally_Kazuul_Warlord(Card c)
+	{
+		final Card crd = c;
+		
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				CardList list = new CardList(play.getCards());
+				list = list.getType("Ally");
+				
+				for (Card ally:list)
+				{
+					ally.addCounter(Counters.P1P1, 1);
+				}
+			}
+		};
+		ability.setStackDescription(c.getName() + " - Ally: put a +1/+1 counter on each Ally creature you control.");
+		
+		if (c.getController().equals(Constant.Player.Human)) {
+				if (showAllyDialog(c))
+					AllZone.Stack.add(ability);
+		}
+		
+		else if (c.getController().equals(Constant.Player.Computer))
+			AllZone.Stack.add(ability);
+	}
+	
 	
 	public static void executeDestroyCardEffects(Card c, Card destroyed)
 	{

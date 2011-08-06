@@ -155,7 +155,8 @@ public static void sortFlying(CardList list)
     int attack = 0;
     
     for(int i  = 0; i < c.size(); i++){
-      if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
+      //if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
+       if(c.get(i).isCreature() && (!c.get(i).hasFirstStrike() || (c.get(i).hasDoubleStrike() && c.get(i).hasFirstStrike())) ) {
     	  if (!CombatUtil.isDoranInPlay())	
     		  attack += c.get(i).getNetAttack();
     	  else if(CombatUtil.isDoranInPlay())
