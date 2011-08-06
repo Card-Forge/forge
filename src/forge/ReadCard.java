@@ -141,7 +141,7 @@ public class ReadCard implements Runnable, NewConstants {
             	
             	else if (s.startsWith("SVar:"))
             	{
-            		String t[] = s.split(":");
+            		String t[] = s.split(":", 3);
             		c.setSVar(t[1], t[2]);
             	}
             	
