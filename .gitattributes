@@ -474,6 +474,7 @@ res/cardsfolder/barbed_sextant.txt -text svneol=native#text/plain
 res/cardsfolder/barbed_sliver.txt svneol=native#text/plain
 res/cardsfolder/barbtooth_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/bargain.txt -text svneol=native#text/plain
+res/cardsfolder/barishi.txt -text svneol=native#text/plain
 res/cardsfolder/barkhide_mauler.txt -text svneol=native#text/plain
 res/cardsfolder/barktooth_warbeard.txt -text svneol=native#text/plain
 res/cardsfolder/barls_cage.txt -text svneol=native#text/plain
