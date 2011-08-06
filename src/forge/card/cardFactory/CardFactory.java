@@ -42,6 +42,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.spellability.Target;
+import forge.card.trigger.Trigger;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -215,6 +216,10 @@ public class CardFactory implements NewConstants {
         }
         out.setUniqueNumber(Unumber + 4); // +4 because +1 didn't work lol.
         out.setCopiedSpell(true);
+        for(Trigger t : out.getTriggers())
+        {
+            AllZone.TriggerHandler.registerTrigger(t);
+        }
         CopiedList.add(out);
         return out;
     	

@@ -4478,25 +4478,19 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sprouting Phytohydra")) {
-            final Card newCard = new Card() {
-                @Override
-                public void addDamage(HashMap<Card, Integer> map) {
-                	final HashMap<Card, Integer> m = map;
-                    final Ability ability = new Ability(card, "0") {
+            final Trigger myTrig = TriggerHandler.parseTrigger("Mode$ DamageDone | ValidTarget$ Card.Self | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may put a token that's a copy of CARDNAME onto the battlefield.",card);
+
+            final Ability ability = new Ability(card, "0") {
                     	@Override
                     	public void resolve() {
-                    		if(getController().isHuman() &&
-                    				GuiUtils.getChoice("Copy " + getSourceCard(),
-                    						new String[] {"Yes", "No"}).equals("No"))
-                    			return;
                     		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, getSourceCard().getController());
                     		CardList DoublingSeasons = new CardList(play.getCards());
                     		DoublingSeasons = DoublingSeasons.getName("Doubling Season");
-                    		PlayerZone_ComesIntoPlay.setSimultaneousEntry(true);      
+                    		PlayerZone_ComesIntoPlay.setSimultaneousEntry(true);
                     		double Count = DoublingSeasons.size();
                     		Count = Math.pow(2,Count);
                     		for(int i = 0; i < Count; i++) {
-                    			if(i + 1 == Count) PlayerZone_ComesIntoPlay.setSimultaneousEntry(false);                 
+                    			if(i + 1 == Count) PlayerZone_ComesIntoPlay.setSimultaneousEntry(false);
                     			Card Copy = AllZone.CardFactory.copyCardintoNew(getSourceCard());
                     			Copy.setToken(true);
                     			Copy.setController(getSourceCard().getController());
@@ -4504,34 +4498,10 @@ public class CardFactory_Creatures {
                     			AllZone.GameAction.moveToPlay(Copy);
                     		}
                     	}
-                    };
-                    ability.setStackDescription(toString() + " - you may put a token that's a copy of " + getName() + " onto the battlefield.");
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                    
-                    for(Entry<Card, Integer> entry : m.entrySet()) {
-                        this.addDamage(entry.getValue(), entry.getKey());
-                    }
-                    
-                }
             };
-            
-            newCard.setOwner(card.getOwner());
-            newCard.setController(card.getController());
-            
-            newCard.setManaCost(card.getManaCost());
-            newCard.setName(card.getName());
-            newCard.setType(card.getType());
-            newCard.setText(card.getSpellText());
-            newCard.setBaseAttack(card.getBaseAttack());
-            newCard.setBaseDefense(card.getBaseDefense());
-            
-            newCard.addSpellAbility(new Spell_Permanent(newCard));
-            
-            newCard.setSVars(card.getSVars());
-            newCard.setSets(card.getSets());
-            
-            return newCard;
+            myTrig.setOverridingAbility(ability);
+
+            card.addTrigger(myTrig);
         }//*************** END ************ END **************************
         
         
