@@ -14928,81 +14928,6 @@ public class GameActionUtil {
 		}
 	};
 
-	public static Command Sedge_Troll                 = new Command() {
-
-		private static final long serialVersionUID = -6021569379906767611L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Sedge Troll");
-
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(hasSwamp(c)) {
-					c.setBaseAttack(3);
-					c.setBaseDefense(3);
-				} else {
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-				}
-			}
-
-		}// execute()
-
-		private boolean hasSwamp(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-
-			CardList land = new CardList();
-			land.addAll(play.getCards());
-
-			land = land.getType("Swamp");
-			if(land.size() > 0) return true;
-			else return false;
-		}
-	};
-
-	public static Command Hedge_Troll                 = new Command() {
-
-		private static final long serialVersionUID = -8843070116088984774L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Hedge Troll");
-
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(hasPlains(c)) {
-					c.setBaseAttack(3);
-					c.setBaseDefense(3);
-				} else {
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-				}
-			}
-
-		}// execute()
-
-		private boolean hasPlains(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-
-			CardList land = new CardList();
-			land.addAll(play.getCards());
-
-			land = land.getType("Plains");
-			if(land.size() > 0) return true;
-			else return false;
-		}
-	};
 	
 	public static Command Champions_Drake = new Command() {
 		private static final long serialVersionUID = 8076177362922156784L;
@@ -21088,8 +21013,6 @@ public class GameActionUtil {
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
 		commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
-		commands.put("Sedge_Troll", Sedge_Troll);
-		commands.put("Hedge_Troll", Hedge_Troll);
 		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Liu_Bei", Liu_Bei);
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);

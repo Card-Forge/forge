@@ -1,8 +1,9 @@
 Name:Hedge Troll
 ManaCost:2 G
 Types:Creature Troll Cleric
-Text:Hedge Troll gets +1/+1 as long as you control a Plains.
+Text:no text
 PT:2/2
+K:stPumpSelf:Creature:1/1:isPresent Plains.YouCtrl:CARDNAME gets +1/+1 as long as you control a Plains.
 K:RegenerateMe:W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
