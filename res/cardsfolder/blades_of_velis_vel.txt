@@ -1,0 +1,9 @@
+Name:Blades of Velis Vel
+ManaCost:1 R
+Types:Tribal Instant Shapeshifter
+Text:no text
+K:Changeling
+A:SP$Pump|Cost$1 R|TargetMin$0|TargetMax$2|NumAtt$+2|KW$Changeling|ValidTgts$Creature|TgtPrompt$Select target Creature|SpellDescription$Up to two target creatures each get +2/+0 and gain all creature types until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blades_of_velis_vel.jpg
+End

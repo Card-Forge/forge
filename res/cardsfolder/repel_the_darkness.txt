@@ -2,7 +2,7 @@ Name:Repel the Darkness
 ManaCost:2 W
 Types:Instant
 Text:no text
-A:SP$Tap|Cost$2 W|TargetMin$1|TargetMax$2|TgtPrompt$Choose target creature|ValidTgts$Creature|SpellDescription$Tap up to two target creatures.
+A:SP$Tap|Cost$2 W|TargetMin$0|TargetMax$2|TgtPrompt$Choose target creature|ValidTgts$Creature|SpellDescription$Tap up to two target creatures.
 K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
