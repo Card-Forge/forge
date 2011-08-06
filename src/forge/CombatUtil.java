@@ -1715,6 +1715,7 @@ public class CombatUtil {
                 
             }//Witch-Maw Nephilim
             
+            /*
             else if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureAttackedThisCombat()) {
                 final Card jedit = c;
                 Ability ability2 = new Ability(c, "0") {
@@ -1734,7 +1735,7 @@ public class CombatUtil {
                 
                 AllZone.Stack.add(ability2);
                 
-            }//Jedit
+            }//Jedit */
             
             else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
