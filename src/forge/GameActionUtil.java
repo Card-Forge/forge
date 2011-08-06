@@ -7064,10 +7064,12 @@ public class GameActionUtil {
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+					
+					AllZone.GameAction.addDamage(player, 1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("Serendib Efreet - deals 1 damage to " + player);
@@ -7085,10 +7087,11 @@ public class GameActionUtil {
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+					AllZone.GameAction.addDamage(player, 1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("Nettletooth Djinn - deals 1 damage to " + player);
@@ -7502,10 +7505,11 @@ public class GameActionUtil {
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+					AllZone.GameAction.addDamage(player, 1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("Juzam Djinn - deals 1 damage to " + player);
@@ -7523,10 +7527,12 @@ public class GameActionUtil {
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+					AllZone.GameAction.addDamage(player, 1, crd);
+					
 				}
 			};// Ability
 			ability.setStackDescription("Fledgling Djinn - deals 1 damage to " + player);
