@@ -5681,7 +5681,7 @@ class CardFactory_Auras {
                     
                     for (int i = 0; i < 2; i ++)
                     {
-                        if (ptk[i].matches("[\\+\\-][0-9]")) ptk[i] =ptk[i].replace("+", "");
+                        if (ptk[i].matches("[\\+\\-][0-9]+")) ptk[i] =ptk[i].replace("+", "");
                     }
                     Power = Integer.parseInt(ptk[0].trim());
                     Tough = Integer.parseInt(ptk[1].trim());
