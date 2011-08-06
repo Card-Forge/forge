@@ -1,0 +1,8 @@
+Name:Smite
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$Destroy | Cost$ W | ValidTgts$ Creature.blocked | TgtPrompt$ Select target blocked creature | SpellDescription$ Destroy target blocked creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+End
