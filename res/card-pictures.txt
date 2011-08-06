@@ -38,6 +38,15 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+doubling_season.jpg		http://www.wizards.com/global/images/magic/general/doubling_season.jpg
+avenger_of_zendikar.jpg		http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
+bestial_menace.jpg		http://www.wizards.com/global/images/magic/general/bestial_menace.jpg
+stifle.jpg		http://www.wizards.com/global/images/magic/general/stifle.jpg
+spell_pierce.jpg		http://www.wizards.com/global/images/magic/general/spell_pierce.jpg
+mystical_tutor.jpg		http://www.wizards.com/global/images/magic/general/mystical_tutor.jpg
+rebuild.jpg		http://www.wizards.com/global/images/magic/general/rebuild.jpg
+wasteland.jpg		http://www.wizards.com/global/images/magic/general/wasteland.jpg
+strip_mine.jpg		http://www.wizards.com/global/images/magic/general/strip_mine.jpg
 accelerated_mutation.jpg		http://www.wizards.com/global/images/magic/general/accelerated_mutation.jpg
 burning_cloak.jpg		http://www.magickartenmarkt.de/img/cards/Portal/burning_cloak.jpg
 flowstone_strike.jpg		http://www.wizards.com/global/images/magic/general/flowstone_strike.jpg

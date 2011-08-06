@@ -1,3 +1,36 @@
+Stifle
+U
+Instant
+Counter target activated or triggered ability.
+
+Spell Pierce
+U
+Instant
+Counter target noncreature spell unless its controller pays 2.
+
+Mystical Tutor
+U
+Instant
+Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+
+Rebuild
+2 U
+Instant
+no text
+Cycling:2
+
+Wasteland
+no cost
+Land
+no text
+tap: add 1
+
+Strip Mine
+no cost
+Land
+no text
+tap: add 1
+
 Avenger of Zendikar
 5 G G
 Creature Elemental
@@ -18006,38 +18039,5 @@ Warrior's Honor
 2 W
 Instant
 Creatures you control get +1/+1 until end of turn.
-
-Stifle
-U
-Instant
-Counter target activated or triggered ability.
-
-Spell Pierce
-U
-Instant
-Counter target noncreature spell unless its controller pays 2.
-
-Mystical Tutor
-U
-Instant
-Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-
-Rebuild
-2 U
-Instant
-no text
-Cycling:2
-
-Wasteland
-no cost
-Land
-no text
-tap: add 1
-
-Strip Mine
-no cost
-Land
-no text
-tap: add 1
 
 End
