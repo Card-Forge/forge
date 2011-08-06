@@ -7690,6 +7690,82 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	};
+	
+	public static Command Mul_Daya_Channelers          = new Command() {
+		private static final long serialVersionUID   = -2543659953307485051L;
+
+		CardList                  landList = new CardList();
+		CardList				  creatList = new CardList();
+
+		String[]                  keyword            = {
+				"tap: add B B", "tap: add W W", "tap: add G G", "tap: add U U", "tap: add R R" };
+
+		final void addMana(Card c) {
+			for(int i = 0; i < keyword.length; i++) {
+				//don't add an extrinsic mana ability if the land can already has the same intrinsic mana ability
+				//eg. "tap: add G"
+				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(
+						keyword[i])) {
+					//c.addExtrinsicKeyword(keyword[i]);
+					SpellAbility mana = new Ability_Mana(c,
+							keyword[i]) {
+						private static final long serialVersionUID = 2384540533244132975L;
+					};
+
+					mana.setType("Extrinsic");
+					c.addSpellAbility(mana);
+				}
+			}
+		}
+		final void removeMana(Card c) {
+			c.removeAllExtrinsicManaAbilities();
+		}
+
+		public void execute() {
+			CardList list1 = landList;
+			CardList list2 = creatList;
+			
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list1.size(); i++) {
+				c = list1.get(i);
+				removeMana(c);
+			}
+			
+			for(int i = 0; i < list2.size(); i++) {
+				c = list2.get(i);
+				c.addSemiPermanentAttackBoost(-3);
+				c.addSemiPermanentDefenseBoost(-3);
+			}
+
+
+			list1.clear();
+			list2.clear();
+			CardList cl = AllZoneUtil.getCardsInPlay();
+			cl = cl.getName("Mul Daya Channelers");
+
+			for (Card crd:cl)
+			{
+				if (CardFactoryUtil.getTopCard(crd)!= null)
+				{
+					Card topCard = CardFactoryUtil.getTopCard(crd);
+					if (topCard.isLand()) {
+						addMana(crd);
+						landList.add(crd);
+					}
+					else if(topCard.isCreature())
+					{
+						crd.addSemiPermanentAttackBoost(3);
+						crd.addSemiPermanentDefenseBoost(3);
+						creatList.add(crd);
+					}
+						
+
+				}
+			}// for outer
+		}// execute()
+	}; // Mul Daya
+	
 
 	//moved to Card.addExtrinsicAbilities
 
@@ -16081,6 +16157,7 @@ public class GameActionUtil {
 
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 
+		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Joiner_Adept", Joiner_Adept);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);

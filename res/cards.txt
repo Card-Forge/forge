@@ -1,3 +1,10 @@
+Mul Daya Channelers
+1 G G
+Creature Elf Druid Shaman
+As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3. As long as the top card of your library is a land card, Mul Daya Channelers has "tap: Add two mana of any one color to your mana pool."
+2/2
+Play with the top card of your library revealed.
+
 Vampire Nocturnus
 1 B B B
 Creature Vampire

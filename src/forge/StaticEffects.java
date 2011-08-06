@@ -193,6 +193,7 @@ public class StaticEffects
 		cardToEffectsList.put("Blade Sliver", new String[] {"Blade_Sliver"});
 		cardToEffectsList.put("Battering Sliver", new String[] {"Battering_Sliver"});
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
+		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
