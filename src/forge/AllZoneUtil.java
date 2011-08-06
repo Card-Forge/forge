@@ -556,6 +556,13 @@ public class AllZoneUtil {
 		}
 	};
 	
+	public static CardListFilter basicLands = new CardListFilter() {
+		public boolean addCard(Card c) {
+			//the isBasicLand() check here may be sufficient...
+			return c.isLand() && c.isBasicLand();
+		}
+	};
+	
 	public static CardListFilter artifacts = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isArtifact();
