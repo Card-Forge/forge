@@ -1457,6 +1457,7 @@ svogthos_the_restless_tomb.jpg	http://mtgpics.chutography.com/RAV/Svogthos,%20th
 svyelunite_priest.jpg	http://mtgpics.chutography.com/FE/Svyelunite%20Priest.full.jpg
 svyelunite_temple.jpg	http://mtgpics.chutography.com/6E/Svyelunite%20Temple.full.jpg
 swallowing_plague.jpg	http://mtgpics.chutography.com/CHK/Swallowing%20Plague.full.jpg
+swamp_mosquito.jpg	http://mtgpics.chutography.com/TSB/Swamp%20Mosquito.full.jpg
 swans_of_bryn_argoll.jpg	http://mtgpics.chutography.com/SHM/Swans%20of%20Bryn%20Argoll.full.jpg
 swarm_of_rats.jpg	http://mtgpics.chutography.com/9E/Swarm%20of%20Rats.full.jpg
 swarmyard.jpg	http://mtgpics.chutography.com/TSP/Swarmyard.full.jpg
