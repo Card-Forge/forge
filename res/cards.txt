@@ -1,3 +1,10 @@
+Death Grasp
+X W B
+Sorcery
+no text
+spDamageTgtCP:X:Drawback$YouGainLife/X:Death Grasp deals X damage to target creature or player. You gain X life.
+SVar:X:Count$xPaid
+
 Fault Line
 X R R
 Sorcery
