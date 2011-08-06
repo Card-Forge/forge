@@ -1,0 +1,10 @@
+Name:Wall of Distortion
+ManaCost:2 B B
+Types:Creature Wall
+Text:no text
+PT:1/3
+K:Defender
+A:AB$Discard|Cost$2 B T|ValidTgts$Player|SorcerySpeed$True|NumCards$1|Mode$TgtChoose|SpellDescription$Target player discards a card. Activate this ability only any time you could cast a sorcery.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_distortion.jpg
+End
