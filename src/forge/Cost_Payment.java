@@ -32,6 +32,7 @@ public class Cost_Payment {
 	private boolean payReturn;
 	
 	private boolean bCancel = false;
+	private boolean bXDefined = true;
 	
 	private static CardList payTapXTypeTappedList = new CardList();
 	static void addPayTapXTypeTappedList(Card c)
@@ -210,12 +211,24 @@ public class Cost_Payment {
 				return false;
 		}
 		
-		if (!payMana /*&& !cost.hasNoManaCost()*/){		// pay mana here
-			changeInput.stopSetNext(input_payMana(getAbility(), this));
+		int manaToAdd = 0;
+		if (bXDefined && !cost.hasNoXManaCost()){
+			// if X cost is a defined value, other than xPaid
+			if (!card.getSVar("X").equals("Count$xPaid")){	
+				// this currently only works for things about Targeted object
+				manaToAdd = AbilityFactory.calculateAmount(card, "X", ability) * cost.getXMana();
+				payXMana = true;	// Since the X-cost is being lumped into the mana cost
+				payMana = false;
+			}
+		}
+		bXDefined = false;
+		
+		if (!payMana){		// pay mana here
+			changeInput.stopSetNext(input_payMana(getAbility(), this, manaToAdd));
 			return false;
 		}
 		
-		if (!payXMana && !cost.hasNoXManaCost()){		// pay mana here
+		if (!payXMana && !cost.hasNoXManaCost()){		// pay X mana here
 			card.setXManaCostPaid(0);
 			changeInput.stopSetNext(input_payXMana(getCost().getXMana(), getAbility(), this));
 			return false;
@@ -550,15 +563,16 @@ public class Cost_Payment {
 	// *********** Inputs used by Cost_Payment below here ***************************
 	// ******************************************************************************
 	
-	public static Input input_payMana(final SpellAbility sa, final Cost_Payment payment){
+	public static Input input_payMana(final SpellAbility sa, final Cost_Payment payment, int manaToAdd){
 		final ManaCost manaCost;
 	    
         if(Phase.GameBegins == 1)  {
         	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                	manaCost = new ManaCost("0"); 
+                manaCost = new ManaCost("0"); 
         	} else {
     		    String mana = payment.getCost().getMana();
         		manaCost = new ManaCost(mana);
+        		manaCost.increaseColorlessMana(manaToAdd);
         	}
         }
         else
@@ -586,10 +600,11 @@ public class Cost_Payment {
 		        for(Ability_Mana am:card.getManaAbility())
 		            canUse |= am.canPlay();
 		        mana = Input_PayManaCostUtil.tapCard(card, mana);
-		        showMessage();
 		        
 		        if(mana.isPaid()) 
 		        	done();
+		        else
+		        	showMessage();
 		    }
 		    
 		    private void done() {

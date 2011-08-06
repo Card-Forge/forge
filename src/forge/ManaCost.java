@@ -76,6 +76,21 @@ public class ManaCost {
         return addMana(color);
     }
     
+    public void increaseColorlessMana(int manaToAdd){
+    	if (manaToAdd <= 0)
+    		return;
+    	
+        Mana_Part m;
+        for(int i = 0; i < manaPart.size(); i++) {
+            m = (Mana_Part) manaPart.get(i);
+            if (m instanceof Mana_PartColorless){
+            	((Mana_PartColorless)m).addToManaNeeded(manaToAdd);
+            	return;
+            }
+        }
+        manaPart.add(new Mana_PartColorless(manaToAdd));
+    }
+    
     public boolean addMana(String mana) {
         if(!isNeeded(mana)) throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         

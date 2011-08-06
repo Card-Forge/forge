@@ -93,7 +93,9 @@ public class AbilityFactory_Fetch {
 				
 		HashMap<String,String> params = af.getMapParams();
 		CardList library = AllZoneUtil.getPlayerCardsInLibrary(player);
-		library = filterListByType(library, params, "FetchType");
+		
+		
+		library = filterListByType(library, params, "FetchType", sa);
 		String DrawBack = params.get("SubAbility");
         String destination = params.get("Destination");
         Card card = af.getHostCard();
@@ -149,7 +151,7 @@ public class AbilityFactory_Fetch {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 		CardList library = AllZoneUtil.getPlayerCardsInLibrary(player);
-		library = filterListByType(library, params, "FetchType");
+		library = filterListByType(library, params, "FetchType", sa);
 		String DrawBack = params.get("SubAbility");
         String destination = params.get("Destination");
         String type = params.get("FetchType");
@@ -261,9 +263,9 @@ public class AbilityFactory_Fetch {
 	}
 	
 
-	private static CardList filterListByType(CardList list, HashMap<String,String> params, String type){
+	private static CardList filterListByType(CardList list, HashMap<String,String> params, String type, SpellAbility sa){		
 		if (params.containsKey(type))
-			list = list.getValidCards(params.get(type).split(","),null,null);
+			list = list.getValidCards(params.get(type).split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 		return list;
 	}
 	
@@ -631,7 +633,7 @@ public class AbilityFactory_Fetch {
 			HashMap<String,String> params = af.getMapParams();
 			
 			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-			grave = filterListByType(grave, params, "RetrieveType");
+			grave = filterListByType(grave, params, "RetrieveType", sa);
 			
 	        String destination = params.get("Destination");
 	        

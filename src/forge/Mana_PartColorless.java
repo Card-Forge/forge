@@ -4,6 +4,7 @@ import forge.error.ErrorViewer;
 
 public class Mana_PartColorless extends Mana_Part {
     private int manaNeeded;
+    public void addToManaNeeded(int additional) { manaNeeded += additional; }
     
     //String manaCostToPay is like "1", "4", but NO COLOR
     public Mana_PartColorless(String manaCostToPay) {
@@ -13,6 +14,10 @@ public class Mana_PartColorless extends Mana_Part {
             ErrorViewer.showError(ex, "mana cost is not a number - %s", manaCostToPay);
             throw new RuntimeException(String.format("mana cost is not a number - %s", manaCostToPay), ex);
         }
+    }
+    
+    public Mana_PartColorless(int manaCostToPay) {
+            manaNeeded = manaCostToPay;
     }
     
     @Override
