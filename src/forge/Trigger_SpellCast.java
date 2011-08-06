@@ -11,9 +11,19 @@ public class Trigger_SpellCast extends Trigger {
 	@Override
 	public boolean performTest(HashMap<String, Object> runParams) 
 	{
-		if(mapParams.containsKey("ValidCard"))
+		Card cast = ((Spell)runParams.get("CastSA")).getSourceCard();
+		
+		if(mapParams.containsKey("ValidPlayer"))
 		{
-			Card cast = ((Spell)runParams.get("CastSA")).getSourceCard();
+			if(!matchesValid(cast.getController(),mapParams.get("ValidPlayer").split(","),hostCard))
+			{
+				System.out.println("Test failed: Player was not valid.");
+				return false;
+			}
+		}
+		
+		if(mapParams.containsKey("ValidCard"))
+		{			
 			if(!matchesValid(cast,mapParams.get("ValidCard").split(","),hostCard))
 			{
 				System.out.println("Test failed: Cast card was not valid.");

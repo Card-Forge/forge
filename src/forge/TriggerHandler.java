@@ -53,9 +53,13 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_SpellCast(mapParams,host);
 		}
-		else if(mode.equals("TapsUntaps"))
+		else if(mode.equals("Taps"))
 		{
-			ret = new Trigger_TapsUntaps(mapParams,host);
+			ret = new Trigger_Taps(mapParams,host);
+		}
+		else if(mode.equals("Untaps"))
+		{
+			ret = new Trigger_Untaps(mapParams,host);
 		}
 		
 		return ret;
