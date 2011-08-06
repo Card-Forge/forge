@@ -1002,6 +1002,7 @@ res/cardsfolder/citanul_centaurs.txt -text svneol=native#text/plain
 res/cardsfolder/citanul_druid.txt -text svneol=native#text/plain
 res/cardsfolder/citanul_flute.txt -text svneol=native#text/plain
 res/cardsfolder/citanul_hierophants.txt svneol=native#text/plain
+res/cardsfolder/citanul_woodreaders.txt -text svneol=native#text/plain
 res/cardsfolder/city_of_brass.txt -text svneol=native#text/plain
 res/cardsfolder/city_of_shadows.txt -text svneol=native#text/plain
 res/cardsfolder/city_of_traitors.txt -text svneol=native#text/plain
