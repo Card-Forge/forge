@@ -151,17 +151,17 @@ public class GenerateConstructedDeck
     
     //cards that slow the computer down
     
-    remove.add("Anger");
-    remove.add("Brawn");
-    remove.add("Valor");
-    remove.add("Wonder");
+    // remove.add("Anger");
+    // remove.add("Brawn");
+    // remove.add("Valor");
+    // remove.add("Wonder");
     
     //not fully implemented:
     
-    remove.add("Aether Membrane");
+    // remove.add("Aether Membrane");
     remove.add("Arashi, the Sky Asunder");
-    remove.add("Hand of Cruelty");
-    remove.add("Hand of Honor");
+    // remove.add("Hand of Cruelty");
+    // remove.add("Hand of Honor");
     
     //useless, or combo cards:
     
