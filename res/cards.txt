@@ -1,3 +1,105 @@
+Aspect of Mongoose
+1 G
+Enchantment Aura
+Enchanted creature has shroud.
+Enchant creature
+enPump:Shroud
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Brilliant Halo
+1 W
+Enchantment Aura
+Enchanted creature gets +1/+2.
+Enchant creature
+enPump:+1/+2
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Cessation
+2 W
+Enchantment Aura
+Enchanted creature can't attack.
+Enchant creature
+enPumpCurse:This creature can't attack
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Despondency
+1 B
+Enchantment Aura
+Enchanted creature gets -2/-0.
+Enchant creature
+enPumpCurse:-2/-0
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Endless Cockroaches
+1 B B
+Creature Insect
+no text
+1/1
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Launch
+1 U
+Enchantment Aura
+Enchanted creature has flying.
+Enchant creature
+enPump:Flying
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Rancor
+G
+Enchantment Aura
+Enchanted creature gets +2/+0 and has trample.
+Enchant creature
+enPump:+2/+0/Trample
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Shivan Phoenix
+4 R R
+Creature Phoenix
+no text
+3/4
+Flying
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Sleeper's Guile
+2 B
+Enchantment Aura
+Enchanted creature has fear.
+Enchant creature
+enPump:Fear
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Sluggishness
+1 R
+Enchantment Aura
+Enchanted creature can't block.
+Enchant creature
+enPumpCurse:CARDNAME can't block.
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Squee's Embrace
+R W
+Enchantment Aura
+Enchanted creature gets +2/+2 and has "When enchanted creature is put into a graveyard, return that card to its owner's hand."
+Enchant creature
+enPump:+2/+2/When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Undying Rage
+2 R
+Enchantment Aura
+Enchanted creature gets +2/+2 and can't block.
+Enchant creature
+enPump:+2/+2/CARDNAME can't block.
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
+Weatherseed Treefolk
+2 G G G
+Creature Treefolk
+no text
+5/3
+Trample
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
 Demonic Consultation
 B
 Instant
@@ -882,28 +984,12 @@ no text
 CARDNAME can't block.
 Unearth:B R
 
-Sluggishness
-1 R
-Enchantment Aura
-Enchanted creature can't block.
-Enchant creature
-enPumpCurse:CARDNAME can't block.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
 Spineless Thug
 1 B
 Creature Zombie Mercenary
 no text
 2/2
 CARDNAME can't block.
-
-Undying Rage
-2 R
-Enchantment Aura
-Enchanted creature gets +2/+2 and can't block.
-Enchant creature
-enPump:+2/+2/CARDNAME can't block.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Villainous Ogre
 2 B
@@ -3049,13 +3135,6 @@ Enchantment Aura
 Enchanted creature has trample.
 Enchant creature
 enPump:Trample
-
-Squee's Embrace
-R W
-Enchantment Aura
-Enchanted creature gets +2/+2 and has "When enchanted creature is put into a graveyard, return that card to its owner's hand."
-Enchant creature
-enPump:+2/+2/When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Leshrac's Rite
 B
@@ -7515,14 +7594,6 @@ Enchanted creature gets +3/+0 and has first strike.
 Enchant creature
 enPump:+3/+0/First Strike
 
-Despondency
-1 B
-Enchantment Aura
-Enchanted creature gets -2/-0.
-Enchant creature
-enPumpCurse:-2/-0
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
 Snow-Covered Forest
 no cost
 Basic Snow Land Forest
@@ -8093,14 +8164,6 @@ Pillory of the Sleepless
 Enchantment Aura
 Enchanted creature can't attack or block. Enchanted creature has "At the beginning of your upkeep, you lose 1 life."
 Enchant creature
-
-Cessation
-2 W
-Enchantment Aura
-Enchanted creature can't attack.
-Enchant creature
-enPumpCurse:This creature can't attack
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Pacifism
 1 W
@@ -8959,21 +9022,6 @@ no text
 1/1
 This card can't be the target of spells or abilities your opponents control.
 
-Endless Cockroaches
-1 B B
-Creature Insect
-no text
-1/1
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
-Shivan Phoenix
-4 R R
-Creature Phoenix
-no text
-3/4
-Flying
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
 Barbarian General
 4 R
 Creature Human Barbarian Soldier
@@ -9076,54 +9124,6 @@ Sorcery
 no text
 spGainLife:6
 Draw a card.
-
-Aspect of Mongoose
-1 G
-Enchantment Aura
-Enchanted creature has shroud.
-Enchant creature
-enPump:Shroud
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
-Launch
-1 U
-Enchantment Aura
-Enchanted creature has flying.
-Enchant creature
-enPump:Flying
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
-Sleeper's Guile
-2 B
-Enchantment Aura
-Enchanted creature has fear.
-Enchant creature
-enPump:Fear
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
-Weatherseed Treefolk
-2 G G G
-Creature Treefolk
-no text
-5/3
-Trample
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
-Brilliant Halo
-1 W
-Enchantment Aura
-Enchanted creature gets +1/+2.
-Enchant creature
-enPump:+1/+2
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
-Rancor
-G
-Enchantment Aura
-Enchanted creature gets +2/+0 and has trample.
-Enchant creature
-enPump:+2/+0/Trample
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Vedalken Plotter
 2 U

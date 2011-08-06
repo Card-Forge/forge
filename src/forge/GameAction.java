@@ -746,7 +746,7 @@ public class GameAction {
         
         //if (c.getName().equals("Rancor") || c.getName().equals("Brilliant Halo") || c.getName().equals("Undying Rage"))
         if(c.getKeyword().contains(
-                "When this card is put into a graveyard from the battlefield, return this card to its owner's hand")) {
+                "When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.")) {
             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
             moveTo(hand, c);
         }
