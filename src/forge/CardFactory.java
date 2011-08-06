@@ -3659,16 +3659,25 @@ public class CardFactory implements NewConstants {
             card.removeIntrinsicKeyword(parse);
             String k[] = parse.split(":");
             final boolean returnUpTo[] = {false};
+            final boolean anyNumber[] = {false};
+            final int numCardsToReturn;
             
             String np[] = k[1].split("/");
-            final int numCardsToReturn = Integer.parseInt(np[0]);
+            
+            if (np[0].equals("AnyNumber")) {
+                anyNumber[0] = true;
+                numCardsToReturn = 0;
+            } else {
+                numCardsToReturn = Integer.parseInt(np[0]);
+            }
+            
             if (np.length > 1) {
                 if (np[1].equals("UpTo")) {
                     returnUpTo[0] = true;
                 }
             }
             
-            //  Artifact, Creature, Enchantment, Land, Permanent, Instant, Sorcery
+            //  Artifact, Creature, Enchantment, Land, Permanent, Instant, Sorcery, Card
             //  White, Blue, Black, Red, Green, Colorless, MultiColor
             //  non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
             //  non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
@@ -3699,7 +3708,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay() {
-                    if (returnUpTo[0]) return true;
+                    if (returnUpTo[0] || anyNumber[0]) return true;
                     return getGraveyardList().size() >= numCardsToReturn;
                 }
                 
@@ -3709,6 +3718,14 @@ public class CardFactory implements NewConstants {
                     
                     CardList results = new CardList();
                     CardList choices = getGraveyardList();
+                    
+                    // We want cards like Footbottom Feast to return at least two cards
+                    if (anyNumber[0] 
+                            && choices.size() >= 2) {
+                        choices.shuffle();
+                        setTargetList(choices);
+                        return true;
+                    }
                     
                     if (choices.size() > 0) {
                         for (int nctr = 0; nctr < numCardsToReturn; nctr ++) {
@@ -3770,7 +3787,8 @@ public class CardFactory implements NewConstants {
                         }// for nctr
                     }// if choices
                     
-                    if (results.size() >= numCardsToReturn) {
+                    if (!anyNumber[0] 
+                            && results.size() >= numCardsToReturn) {
                         results.shuffle();
                         CardList targets = new CardList();
                         for (int i = 0; i < numCardsToReturn; i++) {
@@ -3809,7 +3827,8 @@ public class CardFactory implements NewConstants {
                     }// for
                     
                     if (!Drawback[0].equals("none")) {
-                        CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card, this);
+                        CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(
+                                card.getController()), card.getController(), card, card, this);
                     }
                 }// resolve()
                 
@@ -3827,7 +3846,8 @@ public class CardFactory implements NewConstants {
                     
                     if (card.getController().equals(Constant.Player.Computer)) {
                         list = list.getNotName(card.getName());
-                        if (Destination.equals("Battlefield")) {
+                        if (Destination.equals("Battlefield") 
+                                && !AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) {
                             list = list.getNotKeyword("At the beginning of the end step, destroy CARDNAME.");
                             list = list.getNotKeyword("At the beginning of the end step, exile CARDNAME.");
                             list = list.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
@@ -3850,7 +3870,8 @@ public class CardFactory implements NewConstants {
                 }// getGraveyardList()
             };// spRtrnTgt
             
-            spRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(card, spRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts));
+            spRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(
+                    card, spRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts, anyNumber[0]));
             
             if (desc.length() > 0) {
                 spRtrnTgt.setDescription(desc);
@@ -3875,7 +3896,8 @@ public class CardFactory implements NewConstants {
                bbRtrnTgt.setDescription(sb.toString());
                
                bbRtrnTgt.setIsBuyBackAbility(true);
-               bbRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(card, bbRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts));
+               bbRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(
+                       card, bbRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts, anyNumber[0]));
                card.addSpellAbility(bbRtrnTgt);
             }
         }// spReturnTgt

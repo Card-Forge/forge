@@ -3007,7 +3007,11 @@ public class CardFactoryUtil {
         return target;
     }//input_targetPlayer()
     
-    public static Input spReturnTgt_input_targetCards_InGraveyard(final Card card, final SpellAbility spell, final boolean UpTo, final int numCards, final String Tgts[]) {
+
+    public static Input spReturnTgt_input_targetCards_InGraveyard(
+            final Card card, final SpellAbility spell, final boolean UpTo, 
+            final int numCards, final String Tgts[], final boolean anyNumber) {
+        
         Input target = new Input() {
             private static final long serialVersionUID = 816838038180106359L;
             
@@ -3027,7 +3031,17 @@ public class CardFactoryUtil {
                             grave.remove(c);
                         }
                     }
-                    
+                } else if (anyNumber) {
+                    int max = grave.size();
+                    for (int i = 0; i < max; i++) {
+                        if (grave.size() > 0) {
+                            Object o = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
+                            if (o == null) break;
+                            Card c = (Card) o;
+                            targets.add(c);
+                            grave.remove(c);
+                        }
+                    }
                 } else if (grave.size() > numCards) {
                     for (int i = 0; i < numCards; i++) {
                         Object o = AllZone.Display.getChoice("Select a card", grave.toArray());
@@ -3057,6 +3071,7 @@ public class CardFactoryUtil {
         };// Input
         return target;
     }//spReturnTgt_input_targetCards_InGraveyard()
+    
     
     public static CardList AI_getHumanCreature(final Card spell, boolean targeted) {
         CardList creature = new CardList(AllZone.Human_Play.getCards());
