@@ -1,0 +1,11 @@
+Name:Harpoon Sniper
+ManaCost:2 W
+Types:Creature Merfolk Archer
+Text:no text
+PT:2/2
+K:abDamageTgtV W T:X:Creature.attacking,Creature.blocking:Harpoon Sniper deals X damage to target attacking or blocking creature, where X is the number of Merfolk you control.
+SVar:X:Count$TypeYouCtrl.Merfolk
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harpoon_sniper.jpg
+End
