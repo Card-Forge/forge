@@ -3753,6 +3753,7 @@ res/cardsfolder/order_of_leitbur.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_the_ebon_hand.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_the_golden_cricket.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_the_sacred_bell.txt -text svneol=native#text/plain
+res/cardsfolder/order_of_the_sacred_torch.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_the_white_shield.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_whiteclay.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_yawgmoth.txt -text svneol=native#text/plain
