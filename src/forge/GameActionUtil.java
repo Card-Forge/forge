@@ -68,6 +68,7 @@ public class GameActionUtil {
         upkeep_Bitterblossom();
         upkeep_Goblin_Assault();
         upkeep_Battle_of_Wits();
+        upkeep_Epic_Struggle();
         upkeep_Helix_Pinnacle();
         upkeep_Barren_Glory();
         upkeep_Felidar_Sovereign();
@@ -6082,6 +6083,37 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// if
     }// upkeep_Battle_of_Wits
+    
+    private static void upkeep_Epic_Struggle() {
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Epic Struggle");
+        
+        CardList creats = new CardList(playZone.getCards());
+        creats = creats.getType("Creature");
+        
+        if(0 < list.size() && creats.size() >= 20) {
+            Ability ability = new Ability(list.get(0), "0") {
+                @Override
+                public void resolve() {
+                    String opponent = AllZone.GameAction.getOpponent(player);
+                    PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+                    
+                    int gameNumber = 0;
+                    if (Constant.Runtime.WinLose.getWin()==1)
+                    	gameNumber = 1;
+                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Epic Struggle");
+                    
+                    life.setLife(0);
+                }
+            };// Ability
+            
+            ability.setStackDescription("Epic Struggle - " + player + " wins the game");
+            AllZone.Stack.add(ability);
+        }// if
+    }// upkeep_Epic_Struggle
     
     private static void upkeep_Helix_Pinnacle() {
         final String player = AllZone.Phase.getActivePlayer();

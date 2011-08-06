@@ -1,3 +1,13 @@
+Epic Struggle
+2 G G
+Enchantment
+At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
+
+Reinforcements
+W
+Instant
+Put up to three target creature cards from your graveyard on top of your library.
+
 Funeral Charm
 B
 Instant
