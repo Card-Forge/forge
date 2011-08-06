@@ -2,7 +2,7 @@ Name:Tome Scour
 ManaCost:U
 Types:Sorcery
 Text:no text
-A:SP$Mill|Cost$U|NumCards$5|ValidTgts$Player|TgtPrompt$Choose a player to mill|SpellDescription$Target player puts the top five cards of his or her library into his or her graveyard.
+A:SP$Mill | Cost$ U | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player to mill | SpellDescription$ Target player puts the top five cards of his or her library into his or her graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tome_scour.jpg
 End

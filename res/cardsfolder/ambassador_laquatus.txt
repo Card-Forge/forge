@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Legendary Creature Merfolk Wizard
 Text:no text
 PT:1/3
-A:AB$Mill|Cost$3|NumCards$3|ValidTgts$Player|TgtPrompt$Choose a player to mill|SpellDescription$Target player puts the top three cards of his or her library into his or her graveyard.
+A:AB$Mill | Cost$ 3 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player to mill | SpellDescription$ Target player puts the top three cards of his or her library into his or her graveyard.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambassador_laquatus.jpg
 End

@@ -2,7 +2,7 @@ Name:Vedalken Entrancer
 ManaCost:3 U
 Types:Creature Vedalken Wizard
 Text:no text
-A:AB$Mill|Cost$U T|NumCards$2|ValidTgts$Player|TgtPrompt$Choose a player to mill|SpellDescription$Target player puts the top two cards of his or her library into his or her graveyard.
+A:AB$Mill | Cost$ U T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player to mill | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.
 PT:1/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_entrancer.jpg
