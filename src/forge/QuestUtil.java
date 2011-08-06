@@ -526,6 +526,27 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(5));
 		}
+		else if (id == 19)  // The Desert Caravan
+		{
+			CardList humanList = new CardList();
+			String humanSetupCards[] = {"Spidersilk Net", "Dromad Purebred"};
+			
+			for (int i = 0; i < 2; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			String compySetupCards[] = {"Ambush Party", "Ambush Party", "Gnat Alley Creeper", "Ambush Party", "Ambush Party"};
+			
+			for (int i = 0; i < 5; i ++)
+			{
+				qa.addCompy(compySetupCards[i]);
+			}
+			
+			qa.setCardRewardList(pack.getRare(5));
+		}
 			
 	}
 	

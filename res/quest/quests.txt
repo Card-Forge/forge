@@ -178,4 +178,14 @@ Five random rares
 300
 noIcon
 
+19
+The Desert Caravan
+A caravan is transporting silk across the desert. While setting up camp for the night you are attacked by the thieves. Defend yourself.
+Hard
+Not Repeatable
+50
+Five random rares
+300
+noIcon
+
 End
