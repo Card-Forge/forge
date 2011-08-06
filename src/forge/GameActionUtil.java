@@ -495,11 +495,8 @@ public class GameActionUtil {
 		playCard_Forced_Fruition(c);
 		playCard_Gelectrode(c);
 		playCard_Standstill(c);
-		playCard_Reki(c);
-		playCard_Vedalken_Archmage(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Merrow_Levitator(c);
-		//playCard_Enchantress_Draw(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 		playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
@@ -1827,118 +1824,6 @@ public class GameActionUtil {
 
 		}
 
-	}
-	
-	/*
-    public static void playCard_Enchantress_Draw(Card c) {
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card crd) {
-                if (crd.getName().equals("Verduran Enchantress") 
-                        || crd.getName().equals("Mesa Enchantress") || crd.getName().equals("Kor Spiritdancer")) return true;
-                else return false;
-            }
-        });
-
-        if (c.isEnchantment()) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-
-                Ability ability2 = new Ability(card, "0") {
-                    @Override
-                    public void resolve() {
-                        Player controller = card.getController();
-                        int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
-                        int computerHandSize = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
-                        int computerMaxHandSize = AllZone.ComputerPlayer.getMaxHandSize();
-                        
-                        Boolean mayDrawNotMust = (card.getName().equals("Verduran Enchantress") 
-                                || card.getName().equals("Mesa Enchantress")
-                                || card.getName().equals("Kor Spiritdancer"));
-                        
-                        if (mayDrawNotMust) {
-                            
-                            if (controller.isHuman()) {
-                                String question = "Will you draw a card?";
-                                if (showYesNoDialog(card, question)) {
-                                    controller.drawCard();
-                                }
-                            }// controller isComputer() and may draw
-                            else if (computerLibrarySize >= 5 && computerHandSize < computerMaxHandSize) {
-                                controller.drawCard();
-                        }
-                        // Must draw, not may draw
-                        } else controller.drawCard();
-                        
-                    }// resolve()
-                };// ability2
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - ").append(c.getController()).append(" plays an enchantment spell and ");
-                
-                if (card.getName().equals("Verduran Enchantress") 
-                        || card.getName().equals("Mesa Enchantress")
-                        || card.getName().equals("Kor Spiritdancer")) {
-                    sb.append("may draw a card.");
-                } else {
-                    sb.append("draws a card.");
-                }
-                ability2.setStackDescription(sb.toString());
-                AllZone.Stack.add(ability2);
-            }// for
-        }// if isEnchantment()
-    }// playCard_Enchantress_Draw()
-	*/
-
-	public static void playCard_Reki(Card c) {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Reki, the History of Kamigawa");
-		
-		if(c.getType().contains("Legendary")) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(0);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						card.getController().drawCard();
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" plays a Legendary spell and draws a card");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-
-			} // for
-		}// if legendary
-	}
-
-	public static void playCard_Vedalken_Archmage(Card c) {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Vedalken Archmage");
-		
-		if(c.getType().contains("Artifact")) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(0);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						card.getController().drawCard();
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" plays an Artifact spell and draws a card");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-
-			} // for
-		}// if artifact
 	}
 
 	public static void playCard_Sigil_of_the_Empty_Throne(Card c) {
