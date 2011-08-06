@@ -124,6 +124,7 @@ src/forge/EndOfCombat.java -text svneol=native#text/plain
 src/forge/EndOfTurn.java svneol=native#text/plain
 src/forge/ExternalPanel.java svneol=native#text/plain
 src/forge/FileUtil.java -text svneol=native#text/plain
+src/forge/GUI_DeckAnalysis.java -text svneol=native#text/plain
 src/forge/GUI_Filter.java -text svneol=native#text/plain
 src/forge/GUI_PictureHQ.java -text svneol=native#text/plain
 src/forge/GUI_Quest_Filter.java -text svneol=native#text/plain

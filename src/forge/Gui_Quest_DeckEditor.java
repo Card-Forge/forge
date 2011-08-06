@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -56,6 +57,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     private Border            border2;
     private TitledBorder      titledBorder2;
     private JButton           addButton            = new JButton();
+    private JButton           analysisButton            = new JButton();
     private JPanel            cardDetailPanel      = new JPanel();
     private Border            border3;
     private TitledBorder      titledBorder3;
@@ -474,6 +476,16 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         addButton.setFont(new java.awt.Font("Dialog", 0, 13));
         addButton.setBounds(new Rectangle(23, 403, 146, 49));
         
+        analysisButton.setText("Deck Analysis");
+        analysisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	analysisButton_actionPerformed(e);
+            }
+        });
+        analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
+        
+        
         /**
          * Type filtering
          */
@@ -644,6 +656,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         this.getContentPane().add(jScrollPane2, null);
         this.getContentPane().add(addButton, null);
         this.getContentPane().add(removeButton, null);
+        this.getContentPane().add(analysisButton, null);
         this.getContentPane().add(statsLabel2, null);
         this.getContentPane().add(statsLabel, null);
         this.getContentPane().add(jLabel1, null);
@@ -702,6 +715,18 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         
     
     }//addButton_actionPerformed
+    
+ void analysisButton_actionPerformed(ActionEvent e) {
+        
+    	if (bottomModel.getRowCount()==0){
+    		JOptionPane.showMessageDialog(null, "Cards in deck not found.", "Analysis Deck", JOptionPane.INFORMATION_MESSAGE );
+    	}else{
+    	Gui_Quest_DeckEditor g = Gui_Quest_DeckEditor.this;
+    	GUI_DeckAnalysis dAnalysis = new GUI_DeckAnalysis(g, bottomModel);
+    	dAnalysis.setVisible(true);
+    	g.setEnabled(false);
+    }}
+    
     
     void removeButton_actionPerformed(ActionEvent e) {
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");

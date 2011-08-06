@@ -25,8 +25,11 @@ import java.util.HashMap;
 public class AnchorLayout implements LayoutManager2 {
 
 	private int preferredWidth, preferredHeight, minHeight, minWidth;
-	private HashMap<Component, Object> constraintMap = new HashMap<Component, Object>();
+
+	@SuppressWarnings("unchecked")
+	private HashMap constraintMap = new HashMap();
 	private boolean sizesCalculated = false;
+	@SuppressWarnings("unused")
 	private Container container;
 
 	public AnchorLayout() {
@@ -113,7 +116,7 @@ public class AnchorLayout implements LayoutManager2 {
 	 * @see org.eclipse.swt.widgets.Layout#layout(org.eclipse.swt.widgets.Composite, boolean)
 	 */
 	public void layoutContainer(Container container) {
-	    this.setContainer(container);
+	    this.container = container;
 		Component children[] = container.getComponents();
 		Rectangle rect = container.getBounds();
 		int width = rect.width;
@@ -220,6 +223,7 @@ public class AnchorLayout implements LayoutManager2 {
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager2#addLayoutComponent(java.awt.Component, java.lang.Object)
 	 */
+	@SuppressWarnings("unchecked")
 	public void addLayoutComponent(Component comp, Object constraints) {
 		constraintMap.put(comp, constraints);
 	}
@@ -250,14 +254,6 @@ public class AnchorLayout implements LayoutManager2 {
 	 */
 	public void invalidateLayout(Container target) {
 		sizesCalculated = false;
-	}
-
-	public void setContainer(Container container) {
-		this.container = container;
-	}
-
-	public Container getContainer() {
-		return container;
 	}
 
 }
