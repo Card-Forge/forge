@@ -1572,34 +1572,31 @@ public class CardFactory_Instants {
                     return false;
                 }//canPlayAI()
                 
-                @Override
-                public void resolve() {
-                	final Card[] target = new Card[1];
-                	target[0] = getTargetCard();
-                	final int x = target[0].getNetAttack();
-                    final Command untilEOT = new Command() {
+				@Override
+				public void resolve() {
+					final Card target = getTargetCard();
+					final int x = target.getNetAttack();
+					final Command untilEOT = new Command() {
 						private static final long serialVersionUID = -3673524041113224182L;
 
 						public void execute() {
-                            if(AllZoneUtil.isCardInPlay(target[0])) {
-                                target[0].addTempAttackBoost(-x);
-                                target[0].removeExtrinsicKeyword("Trample");
-                                target[0].removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
-                            }
-                        }
-                    };
-                    
-                    
-                    if(AllZoneUtil.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
-                        target[0].addTempAttackBoost(x);
-                        target[0].addExtrinsicKeyword("Trample");
-                        target[0].addExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
-                        
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    } else {
+							if(AllZoneUtil.isCardInPlay(target)) {
+								target.addTempAttackBoost(-x);
+								target.removeExtrinsicKeyword("Trample");
+								target.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
+							}
+						}
+					};
 
-                    }
-                }//resolve()
+
+					if(AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+						target.addTempAttackBoost(x);
+						target.addExtrinsicKeyword("Trample");
+						target.addExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
+
+						AllZone.EndOfTurn.addUntil(untilEOT);
+					}
+				}//resolve()
                 
                 @Override
                 public boolean canPlay() {

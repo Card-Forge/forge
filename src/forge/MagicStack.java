@@ -491,15 +491,18 @@ public class MagicStack extends MyObservable {
             {
                 //Run trigger
                 HashMap<String,Object> runParams = new HashMap<String,Object>();
+                runParams.put("Cost", sp.getPayCosts());
                 runParams.put("CastSA", sp);
                 AllZone.TriggerHandler.runTrigger("SpellAbilityCast", runParams);
 
                 if(sp.isSpell())
                 {
+                	runParams.put("Cost", sp.getPayCosts());
                     AllZone.TriggerHandler.runTrigger("SpellCast", runParams);
                 }
                 if(sp.isAbility())
                 {
+                	runParams.put("Cost", sp.getPayCosts());
                     AllZone.TriggerHandler.runTrigger("AbilityCast", runParams);
                 }
                 if(sp.isCycling())
@@ -594,31 +597,14 @@ public class MagicStack extends MyObservable {
 		}
 		
 		//Lurking Predators
-		if(sp.isSpell())
-		{
-			CardListFilter filter = new CardListFilter() {
-				public boolean addCard(Card c)
-				{
-					return c.getName().equals("Lurking Predators");
-				}
-			};
-			
-			CardList lurkingPredators = new CardList();
-			if(sp.getSourceCard().getController() == AllZone.HumanPlayer)
-			{
-				lurkingPredators.add(new CardList(AllZone.Computer_Battlefield.getCards()));
-			}
-			else
-			{
-				lurkingPredators.add(new CardList(AllZone.Human_Battlefield.getCards()));
-			}
-			
-			lurkingPredators = lurkingPredators.filter(filter);
+		if(sp.isSpell()) {
+			Player player = sp.getSourceCard().getController();
+			CardList lurkingPredators = AllZoneUtil.getPlayerCardsInPlay(player, "Lurking Predators");
 			
 			for(int i=0;i<lurkingPredators.size();i++)
 			{
 				StringBuilder revealMsg = new StringBuilder("");
-				if(lurkingPredators.get(i).getController() == AllZone.HumanPlayer)
+				if(lurkingPredators.get(i).getController().isHuman())
 				{
 					revealMsg.append("You reveal: ");
 					if(AllZone.Human_Library.size() == 0)

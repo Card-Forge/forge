@@ -66,32 +66,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         if(trigger) {
             c.setSickness(true);// summoning sickness
             c.comesIntoPlay();
+            
             AllZone.GameAction.checkWheneverKeyword(c,"EntersBattleField",null);
             
-            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-
-            /*
-            //Amulet of Vigor
-            if(c.isTapped()) {
-                final Card untapCrd = c;
-                Ability ability = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        untapCrd.untap();
-                    }
-                };
-                StringBuilder sb = new StringBuilder();
-                sb.append("Amulet of Vigor - Untap ").append(c);
-                ability.setStackDescription(sb.toString());
-                
-                for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Amulet of Vigor").size(); i++)
-                    AllZone.Stack.add(ability);
-            }*/
-            
             if(c.isLand()) {
-                //System.out.println("A land was just put onto the battlefield: " + c.getName());
-                
-                CardList list = new CardList(play.getCards());
+                CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
                 
                 CardList listValakut = list.filter(new CardListFilter() {
                 	public boolean addCard(Card c) {
@@ -177,10 +156,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             }
         }
         
-        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
-        CardList meek = new CardList(grave.getCards());
-        
-        meek = meek.getName("Sword of the Meek");
+        CardList meek = AllZoneUtil.getPlayerGraveyard(c.getController(), "Sword of the Meek");
         
         if(meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
             for(int i = 0; i < meek.size(); i++) {
@@ -223,17 +199,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             }
         }
 
-
-
-        /*
-        for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
-        	Command com = GameActionUtil.commands.get(effect);
-        	com.execute();
-        }
-        */
-
-        //System.out.println("Size: " + AllZone.StateBasedEffects.getStateBasedMap().size());
-    }
+    }// end add()
     
     @Override
     public void remove(Object o) {

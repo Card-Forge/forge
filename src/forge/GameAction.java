@@ -361,9 +361,8 @@ public class GameAction {
     }
     
     public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
-        CardList hand = new CardList();
-        hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        CardList tHand = hand.getValidCards(uTypes,sa.getActivatingPlayer(),sa.getSourceCard());
+    	CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+        CardList tHand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         
         if(tHand.size() >= numDiscard) {
             CardListUtil.sortCMC(tHand);
@@ -2644,8 +2643,7 @@ public class GameAction {
     //if Card had the type "Aura" this method would always return true, since local enchantments are always attached to something
     //if Card is "Equipment", returns true if attached to something
     public boolean isAttachee(Card c) {
-        CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-        list.addAll(AllZone.Human_Battlefield.getCards());
+        CardList list = AllZoneUtil.getCardsInPlay();
         
         for(int i = 0; i < list.size(); i++) {
             CardList check = new CardList(list.getCard(i).getAttachedCards());
@@ -3306,7 +3304,7 @@ public class GameAction {
     	
     private void aiSearchTwoLand(String type, String Zone1, boolean tapFirstLand,
     		String Zone2, boolean tapSecondLand) {
-        CardList land = new CardList(AllZone.Computer_Library.getCards());
+        CardList land = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
         land = land.getType(type);
         PlayerZone firstZone = AllZone.getZone(Zone1, AllZone.ComputerPlayer);
         

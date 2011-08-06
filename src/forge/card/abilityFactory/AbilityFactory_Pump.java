@@ -166,8 +166,7 @@ public class AbilityFactory_Pump {
         	KWpump = Keywords.toArray(new String[Keywords.size()]);
         final String KWs[] = KWpump;
     	
-        CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-        list = list.getType("Creature");
+        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 boolean hSick = c.hasSickness();
@@ -189,12 +188,8 @@ public class AbilityFactory_Pump {
     
     private CardList getCurseCreatures(SpellAbility sa, final int defense, int attack)
     {
-    	CardList list = new CardList(AllZone.Human_Battlefield.getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) { 
-                    	return CardFactoryUtil.canTarget(hostCard, c) && c.isCreature(); 
-                }
-        });
+    	CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+    	list = list.filter(AllZoneUtil.getCanTargetFilter(hostCard));
         
     	if (defense < 0 && !list.isEmpty()) { // with spells that give -X/-X, compi will try to destroy a creature
     		list = list.filter(new CardListFilter() {

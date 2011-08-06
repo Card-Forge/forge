@@ -739,13 +739,8 @@ public class GameActionUtil {
 	}
 
 	public static void playCard_Sigil_of_the_Empty_Throne(Card c) {
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Sigil of the Empty Throne");
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Sigil of the Empty Throne");
 		if(c.isEnchantment()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(0);
@@ -759,7 +754,7 @@ public class GameActionUtil {
 				}; // ability2
 				
 				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(card).append(" - ").append(c.getController());
 				sb.append(" puts a 4/4 White Angel token with flying onto the battlefield.");
 				ability2.setStackDescription(sb.toString());
 
@@ -811,17 +806,12 @@ public class GameActionUtil {
 	private static void upkeep_removeDealtDamageToOppThisTurn() {
 		// TODO: this should happen in the cleanup phase
 		// resets the status of attacked/blocked this turn
-		Player player = AllZone.Phase.getPlayerTurn();
-		Player opp = player.getOpponent();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
+		Player opp = AllZone.Phase.getPlayerTurn().getOpponent();
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		list = list.getType("Creature");
+		CardList list = AllZoneUtil.getCreaturesInPlay(opp);
 
 		for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
-			//c.setDealtCombatDmgToOppThisTurn(false);
 			c.setDealtDmgToHumanThisTurn(false);
 			c.setDealtDmgToComputerThisTurn(false);
 		}
@@ -4925,10 +4915,8 @@ public class GameActionUtil {
 
 	private static void upkeep_Eldrazi_Monument() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Eldrazi Monument");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Eldrazi Monument");
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
@@ -4936,15 +4924,14 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					CardList creats = new CardList(playZone.getCards());
-					creats = creats.getType("Creature");
+					CardList creats = AllZoneUtil.getCreaturesInPlay(player);
 
 					if(creats.size() < 1) {
 						AllZone.GameAction.sacrifice(card);
 						return;
 					}
 
-					if(player.equals(AllZone.HumanPlayer)) {
+					if(player.isHuman()) {
 						Object o = GuiUtils.getChoiceOptional("Select creature to sacrifice",
 								creats.toArray());
 						Card sac = (Card) o;

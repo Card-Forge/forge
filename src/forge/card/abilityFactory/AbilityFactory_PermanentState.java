@@ -400,9 +400,9 @@ public class AbilityFactory_PermanentState {
     	if (activatingPlayer.isHuman()) 
     		AllZone.InputControl.setInput(CardFactoryUtil.input_UntapUpToNType(num, valid));
     	else{
-            CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+            CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
             list = list.getType(valid);
-            list = list.getTapState("Tapped");
+            list = list.filter(AllZoneUtil.tapped);
             
             int count = 0;
             while(list.size() != 0 )
