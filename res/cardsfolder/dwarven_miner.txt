@@ -1,0 +1,9 @@
+Name:Dwarven Miner
+ManaCost:1 R
+Types:Creature Dwarf
+Text:no text
+PT:1/2
+K:abDestroyTgtV 2 R T:Land.nonBasic:Destroy target nonbasic land.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_miner.jpg
+End
