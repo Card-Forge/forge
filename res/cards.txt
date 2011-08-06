@@ -1,3 +1,90 @@
+Black Lotus
+0
+Artifact
+no text
+tap, Sacrifice CARDNAME: Add W W W to your mana pool.
+tap, Sacrifice CARDNAME: Add U U U to your mana pool.
+tap, Sacrifice CARDNAME: Add B B B to your mana pool.
+tap, Sacrifice CARDNAME: Add R R R to your mana pool.
+tap, Sacrifice CARDNAME: Add G G G to your mana pool.
+
+Crystal Vein
+no cost
+Land
+no text
+tap: add 1
+tap, Sacrifice Crystal Vein: Add 2 to your mana pool.
+
+Horn of Ramos
+3
+Artifact
+no text
+tap: add G
+Sacrifice CARDNAME: Add G to your mana pool.
+
+Heart of Ramos
+3
+Artifact
+no text
+tap: add R
+Sacrifice CARDNAME: Add R to your mana pool.
+
+Eye of Ramos
+3
+Artifact
+no text
+tap: add U
+Sacrifice CARDNAME: Add U to your mana pool.
+
+Coal Golem
+5
+Artifact Creature Golem
+no text
+3/3
+3, Sacrifice Coal Golem: Add R R R to your mana pool.
+
+Dromar's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice Dromar's Attendant: Add W U B to your mana pool.
+
+Darigaaz's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice Darigaaz's Attendant: Add B R G to your mana pool.
+
+Crosis's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice Crosis's Attendant: Add U B R to your mana pool.
+
+Blood Vassal
+2 B
+Creature Thrull
+no text
+2/2
+Sacrifice CARDNAME: Add B B to your mana pool.
+
+Composite Golem
+6
+Artifact Creature Golem
+no text
+4/4
+Sacrifice CARDNAME: Add W U B R G to your mana pool.
+
+Blood Pet
+B
+Creature Thrull
+no text
+1/1
+Sacrifice CARDNAME: Add B to your mana pool.
+
 Entangling Vines
 3 G
 Enchantment Aura
@@ -7232,12 +7319,6 @@ Instant
 no text 
 This card can't be countered.
 
-Composite Golem
-6
-Artifact Creature Golem
-no text
-4/4
-
 Madrush Cyclops
 1 B R G
 Creature Cyclops Warrior
@@ -9374,11 +9455,6 @@ Instant
 no text 
 spDamageTgtCP:1
 Draw a card.
-
-Black Lotus
-0
-Artifact
-no text
 
 Kitchen Finks
 1 GW GW

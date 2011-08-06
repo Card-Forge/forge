@@ -170,7 +170,7 @@ public class CardFactory implements NewConstants {
     private final int shouldManaAbility(Card c) {
         ArrayList<String> a = c.getIntrinsicKeyword();
         for(int i = 0; i < a.size(); i++)
-            if(a.get(i).toString().contains(": add ")) return i;
+            if(a.get(i).toString().contains(": add ") || a.get(i).toString().contains(": Add ") ) return i;
         return -1;
     }
     
@@ -13724,11 +13724,11 @@ public class CardFactory implements NewConstants {
             return card;
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Black Lotus")) {
             final Ability_Tap ability = new Ability_Tap(card, "0") {
                 private static final long serialVersionUID = 8394047173115959008L;
-                
                 
                 @Override
                 public boolean canPlayAI() {
@@ -13781,8 +13781,8 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
-
+        */
+	
         //**************************Equipment*****************************
         
 

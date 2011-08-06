@@ -13809,47 +13809,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        if(cardName.equals("Composite Golem")) {
-            final Ability ability = new Ability(card, "0") {
-                
-                @Override
-                public boolean canPlay() {
-                    SpellAbility sa;
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
-                    }
-                    return AllZone.GameAction.isCardInPlay(card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    if(card.getController().equals(Constant.Player.Human)) {
-                        /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-                        list = list.getName("Mana Pool");*/
-                        Card mp = AllZone.ManaPool;//list.getCard(0);
-                        
-                        mp.addExtrinsicKeyword("ManaPool:W");
-                        mp.addExtrinsicKeyword("ManaPool:U");
-                        mp.addExtrinsicKeyword("ManaPool:B");
-                        mp.addExtrinsicKeyword("ManaPool:R");
-                        mp.addExtrinsicKeyword("ManaPool:G");
-                        
-                        AllZone.GameAction.sacrifice(card);
-                    }
-                }
-            };
-            ability.setDescription("Sacrifice Composite Golem: Add W U B R G to your mana pool.");
-            ability.setStackDescription("Add WUBRG your mana pool");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
         
         //*************** START ************ START **************************
         if(cardName.equals("Rats of Rath")) {

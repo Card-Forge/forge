@@ -3,6 +3,8 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 abstract public class Ability_Mana extends SpellAbility implements java.io.Serializable {
     private ArrayList<Command> runcommands = new ArrayList<Command>();
@@ -13,6 +15,11 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     
     public boolean isBasic() {
         return (orig.length() == 10 && orig.startsWith("tap: add ") && "1WBURG".contains("" + orig.charAt(9)));
+    }
+    
+    public boolean isSacrifice()
+    {
+    	return orig.contains("Sacrifice CARDNAME: Add ");
     }
     
     public boolean isUndoableMana() {
@@ -50,7 +57,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     
     public Ability_Mana(Card sourceCard, String orig) {
         super(isTapAbility(orig)? SpellAbility.Ability_Tap:SpellAbility.Ability, sourceCard);
-        
+                
         /*
         if (orig.contains("$"))
         {
@@ -68,6 +75,9 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         this.sourceCard = sourceCard;
         this.orig = (sourceCard.getName().length() == 0? orig:orig.replaceAll(sourceCard.getName(), "CARDNAME"));
         setDescription(orig);
+        
+        if (sourceCard.getName().equals("Black Lotus"))
+        	System.out.println("BLACK LOTUS!");
         
         /*
         String parts[] = orig.split(":");
@@ -88,7 +98,20 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
             setManaCost("0");
             return;
         }
-       String[] parts = orig.split(":");
+        else if (isSacrifice())
+        {
+        	String regex = "[0-9]+,";
+        	Pattern pattern = Pattern.compile(regex); 
+        	Matcher matcher = pattern.matcher(orig); 
+        	
+        	if (orig.startsWith("Sacrifice ") || orig.startsWith("tap, Sacrifice "))
+        		setManaCost("0");
+        	else if(matcher.find()) 
+        		setManaCost(matcher.group().substring(0, matcher.group().length()-1));
+        		
+        	return;
+        }
+        String[] parts = orig.split(":");
         Mana = parts[1];
         Mana = Mana.replaceAll(" add ", "");
         Mana = Mana.replaceAll(" ", "");
@@ -199,6 +222,9 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     
     @Override
     public void resolve() {
+    	if (isSacrifice())
+    		AllZone.GameAction.sacrifice(sourceCard);
+
         AllZone.ManaPool.addMana(this);
         if(!runcommands.isEmpty()) for(Command c:runcommands)
             c.execute();
@@ -242,7 +268,14 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
                 sb.append(m);
             return sb.toString();
             
-        } else {
+        } 
+    	else if ((orig.contains("Sacrifice this creature: Add ") || orig.contains("Sacrifice CARDNAME: Add "))
+    		   && orig.contains(" to your mana pool."))
+    	{
+    		String m = orig.split(": Add ")[1].split(" to ")[0];
+    		return m;
+    	}
+    	else {
         	return Mana;
         }
         
