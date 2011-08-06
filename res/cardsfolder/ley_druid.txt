@@ -3,6 +3,7 @@ ManaCost:2 G
 Types:Creature Human Druid
 Text:no text
 PT:1/1
+K:abUntapTgt T:Land:Untap target land.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_druid.jpg

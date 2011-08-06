@@ -17310,7 +17310,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
-        
+        /*
         //****************************START*****************
         else if(cardName.equals("Ley Druid") || cardName.equals("Juniper Order Druid") || cardName.equals("Stone-Seeder Hierophant")) {
            final Ability_Tap ability = new Ability_Tap(card) {
@@ -17347,7 +17347,7 @@ public class CardFactory_Creatures {
            ability.setBeforePayMana(target);
         }//end Ley Druid
         //**************END****************END***********************
-
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Borderland Ranger") || cardName.equals("Sylvan Ranger")
