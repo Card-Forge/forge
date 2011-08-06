@@ -1,3 +1,39 @@
+Acid Rain
+3 U
+Sorcery
+Destroy all Forests.
+spDestroyAll:Forest
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_rain.jpg
+
+Boil
+3 R
+Instant
+Destroy all Islands.
+spDestroyAll:Island
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25675.jpg
+
+Boiling Seas
+3 R
+Sorcery
+Destroy all Islands.
+spDestroyAll:Island
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_seas.jpg
+
+Flashfires
+3 R
+Sorcery
+Destroy all Plains.
+spDestroyAll:Plains
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
+
 Mana Drain
 U U
 Instant
@@ -165,13 +201,6 @@ Instant
 no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accumulated_knowledge.jpg
-
-Acid Rain
-3 U
-Sorcery
-Destroy all Forests.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_rain.jpg
 
 Acidic Soil
 2 R
@@ -3533,22 +3562,6 @@ Haste
 Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_ram_gang.jpg
-
-Boil
-3 R
-Instant
-Destroy all Islands.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25675.jpg
-
-Boiling Seas
-3 R
-Sorcery
-Destroy all Islands.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_seas.jpg
 
 Bojuka Bog
 no cost
@@ -10200,14 +10213,6 @@ Counter target instant spell.
 spCounter:Spell:Type(Instant):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_counter.jpg
-
-Flashfires
-3 R
-Sorcery
-Destroy all Plains.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
 
 Flashfreeze
 1 U

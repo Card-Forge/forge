@@ -11207,6 +11207,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Boil") || cardName.equals("Boiling Seas")) {
             final SpellAbility spell = new Spell(card) {
@@ -11236,6 +11238,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -20397,6 +20400,7 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************
         
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Flashfires")) {
             final SpellAbility spell = new Spell(card) {
@@ -20426,6 +20430,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Crumble") || cardName.equals("Divine Offering")) {
@@ -22181,6 +22187,8 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Acid Rain")) {
         	final SpellAbility spell = new Spell(card) {
@@ -22204,7 +22212,9 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+*/
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Explosive Revelation")) {
         	/*
