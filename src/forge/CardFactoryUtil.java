@@ -3796,12 +3796,7 @@ public class CardFactoryUtil {
             	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
             }
         }//end MakeToken drawback
-            
-        if(d[0].contains("ReturnFromYard")) // placeholder for effect
-        X = X + 0;
-        
-        if(d[0].contains("Sacrifice")) // placeholder for effect
-        X = X + 0;
+
     }
     
     public static int getNumberOfMostProminentCreatureType(CardList list, String type) {

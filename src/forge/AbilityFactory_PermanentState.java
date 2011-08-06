@@ -203,8 +203,10 @@ public class AbilityFactory_PermanentState {
 		Card source = sa.getSourceCard();
 		
 		CardList untapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-		untapList = untapList.filter(AllZoneUtil.tapped);
+		untapList = untapList.getTargetableCards(source);
 		untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
+		
+		untapList = untapList.filter(AllZoneUtil.tapped);
 		// filter out enchantments and planeswalkers, their tapped state doesn't matter.
 		String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
 		untapList = untapList.getValidCards(tappablePermanents, source.getController(), source);

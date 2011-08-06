@@ -32,7 +32,7 @@ public class AbilityFactory_ChangeZone {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return changeZoneCanPlayAI(AF, this);
+				return changeZoneTriggerAI(AF, this, mandatory);
 			}
 		
 		};
@@ -83,7 +83,7 @@ public class AbilityFactory_ChangeZone {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return changeZoneCanPlayAI(AF, this);
+				return changeZoneTriggerAI(AF, this, mandatory);
 			}
 		};
 		setMiscellaneous(AF, dbChangeZone);
@@ -135,6 +135,19 @@ public class AbilityFactory_ChangeZone {
 		
 		else if (isKnown(origin))
 			return changeKnownOriginPlayDrawbackAI(af, sa);
+		
+		return false;
+	}
+	
+	private static boolean changeZoneTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		HashMap<String,String> params = af.getMapParams();
+		String origin = params.get("Origin");
+		
+		if (isHidden(origin, params.containsKey("Hidden")))
+			return changeHiddenTrigger(af, sa, mandatory);
+		
+		else if (isKnown(origin))
+			return changeKnownOriginTrigger(af, sa, mandatory);
 		
 		return false;
 	}
@@ -260,6 +273,94 @@ public class AbilityFactory_ChangeZone {
 		// if putting cards from hand to library and parent is drawing cards
 		// make sure this will actually do something:
 		
+		
+		return true;
+	}
+	
+	private static boolean changeHiddenTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		// Fetching should occur fairly often as it helps cast more spells, and have access to more mana
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Card source = sa.getSourceCard();
+		
+		HashMap<String,String> params = af.getMapParams();
+        //String destination = params.get("Destination");
+        String origin = params.get("Origin");
+		
+		// this works for hidden because the mana is paid first. 
+		String type = params.get("ChangeType");
+		if (type != null && type.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+		}
+        
+		ArrayList<Player> pDefined;
+		Target tgt = af.getAbTgt();
+		if(tgt != null && tgt.canTgtPlayer()) {
+			if (af.isCurse())
+				tgt.addTarget(AllZone.HumanPlayer);
+			else
+				tgt.addTarget(AllZone.ComputerPlayer);
+			pDefined = tgt.getTargetPlayers();
+			
+			
+			if (mandatory){
+				if (pDefined.size() > 0)
+					return true;
+				
+				// unfavorable targeting
+				if (!af.isCurse())
+					tgt.addTarget(AllZone.ComputerPlayer);
+				else
+					tgt.addTarget(AllZone.HumanPlayer);
+				
+				if (pDefined.size() > 0)
+					return true;
+				
+				// no targets
+				return false;
+			}
+			
+		}
+		else{
+			if (mandatory)
+				return true;
+			pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),  params.get("Defined"), sa);
+		}
+		
+		for(Player p : pDefined){
+			if (origin.equals("Hand")){
+				CardList hand = AllZoneUtil.getPlayerHand(p);
+				if (hand.size() == 0)
+					return false;
+
+				if (p.isComputer()){
+					if (params.containsKey("ChangeType")){
+						hand = filterListByType(hand, params, "ChangeType", sa);
+						if (hand.size() == 0)
+							return false;
+					}
+				}
+				// TODO: add some more improvements based on Destination and Type
+			}
+			else if (origin.equals("Library")){
+				CardList library = AllZoneUtil.getPlayerCardsInLibrary(p);
+				if (library.size() == 0)
+					return false;
+				
+				// TODO: add some more improvements based on Destination and Type
+			}
+			else if (origin.equals("Sideboard")){
+				// todo: once sideboard is added
+				// canPlayAI for Wishes will go here
+			}
+		}
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			return subAb.doTrigger(mandatory);
 		
 		return true;
 	}
@@ -609,7 +710,6 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 
 		String origin = params.get("Origin");
-        String destination = params.get("Destination");	
         
 		float pct = origin.equals("Battlefield") ? .8f : .667f;
 		
@@ -644,69 +744,8 @@ public class AbilityFactory_ChangeZone {
 		
 		Target tgt = af.getAbTgt();
 		if(tgt != null) {
-			tgt.resetTargets();
-
-			CardList list = AllZoneUtil.getCardsInZone(origin);
-			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, source);
-			
-			if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
+			if (!changeKnownPreferredTarget(af, sa, false))
 				return false;
-			
-			// Narrow down the list:
-			if (origin.equals("Battlefield")){
-				// filter out untargetables
-				list = list.filter(new CardListFilter() {
-					public boolean addCard(Card c) {
-						return CardFactoryUtil.canTarget(source, c);
-					}
-				});
-				
-				// if Destination is hand, either bounce opponents dangerous stuff or save my about to die stuff
-				
-				// if Destination is exile, filter out my cards
-			}
-			else if (origin.equals("Graveyard")){
-				// Retrieve from Graveyard to:
-				
-			}
-			
-			if (destination.equals("Exile") || origin.equals("Battlefield"))
-				list = list.getController(AllZone.HumanPlayer);
-
-			if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
-				return false;
-			
-			 // target loop
-			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
-				// AI Targeting 
-				Card choice = null;
-
-				if (!list.isEmpty()){
-					if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
-							&& (destination.equals("Battlefield") || origin.equals("Battlefield")))
-		        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
-		        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
-		        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
-		        	else{
-						// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
-		        		list.shuffle();
-		        		choice = list.get(0);
-		        	}
-				}
-				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				list.remove(choice);
-				tgt.addTarget(choice);
-			}
 		}
 		else{
 			// non-targeted retrieval
@@ -742,8 +781,166 @@ public class AbilityFactory_ChangeZone {
 	
 	private static boolean changeKnownOriginPlayDrawbackAI(AbilityFactory af, SpellAbility sa){
 		
+		return changeKnownPreferredTarget(af, sa, false);
+	}
+	
+	private static boolean changeKnownPreferredTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		HashMap<String,String> params = af.getMapParams();
+		Card source = sa.getSourceCard();
+		String origin = params.get("Origin");
+		String destination = params.get("Destination");
+		Target tgt = af.getAbTgt();
+		
+		tgt.resetTargets();
+
+		CardList list = AllZoneUtil.getCardsInZone(origin);
+		list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, source);
+		
+		if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
+			return false;
+		
+		// Narrow down the list:
+		if (origin.equals("Battlefield")){
+			// filter out untargetables
+			list = list.getTargetableCards(source);
+			
+			// if Destination is hand, either bounce opponents dangerous stuff or save my about to die stuff
+			
+			// if Destination is exile, filter out my cards
+		}
+		else if (origin.equals("Graveyard")){
+			// Retrieve from Graveyard to:
+			
+		}
+		
+		// for now only bounce opponents stuff, but consider my stuff that might die
+		if (destination.equals("Exile") || origin.equals("Battlefield"))
+			list = list.getController(AllZone.HumanPlayer);
+
+		if (list.isEmpty())
+			return false;
+		
+		if (!mandatory && list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
+			return false;
+		
+		 // target loop
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
+			// AI Targeting 
+			Card choice = null;
+
+			if (!list.isEmpty()){
+				if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
+						&& (destination.equals("Battlefield") || origin.equals("Battlefield")))
+	        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
+	        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
+	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+	        	else{
+					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
+	        		list.shuffle();
+	        		choice = list.get(0);
+	        	}
+			}
+			if (choice == null){	// can't find anything left
+				if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+					if (!mandatory)
+						tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			list.remove(choice);
+			tgt.addTarget(choice);
+		}
+		
 		return true;
 	}
+	
+	private static boolean changeKnownUnpreferredTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		HashMap<String,String> params = af.getMapParams();
+		Card source = sa.getSourceCard();
+		String origin = params.get("Origin");
+		String destination = params.get("Destination");
+		Target tgt = af.getAbTgt();
+
+		CardList list = AllZoneUtil.getCardsInZone(origin);
+		list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, source);
+		
+		// Narrow down the list:
+		if (origin.equals("Battlefield")){
+			// filter out untargetables
+			list = list.getTargetableCards(source);
+			
+			// if Destination is hand, either bounce opponents dangerous stuff or save my about to die stuff
+			
+			// if Destination is exile, filter out my cards
+		}
+		else if (origin.equals("Graveyard")){
+			// Retrieve from Graveyard to:
+			
+		}
+		
+		for(Card c : tgt.getTargetCards())
+			list.remove(c);
+
+		if (list.isEmpty())
+			return false;
+		
+		 // target loop
+		while(tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){ 
+			// AI Targeting 
+			Card choice = null;
+
+			if (!list.isEmpty()){
+				if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
+						&& (destination.equals("Battlefield") || origin.equals("Battlefield")))
+	        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
+	        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
+	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+	        	else{
+					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
+	        		list.shuffle();
+	        		choice = list.get(0);
+	        	}
+			}
+			if (choice == null){	// can't find anything left
+				if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+					tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			list.remove(choice);
+			tgt.addTarget(choice);
+		}
+		
+		return true;
+	}
+	
+	private static boolean changeKnownOriginTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		if (changeKnownPreferredTarget(af, sa, mandatory)){
+			; // do nothing
+		}
+		else if (!changeKnownUnpreferredTarget(af, sa, mandatory))
+			return false;
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			return subAb.doTrigger(mandatory);
+		
+		return true;
+	}
+	
 	
 	private static String changeKnownOriginStackDescription(AbilityFactory af, SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
