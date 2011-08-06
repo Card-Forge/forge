@@ -21,6 +21,7 @@ res/draft/draft.properties -text svneol=native#text/plain
 res/draft/rare.txt -text svneol=native#text/plain
 res/draft/uncommon.txt -text svneol=native#text/plain
 res/gui/display_layout.xml svneol=native#text/xml
+res/gui/display_new_layout.xml svneol=native#text/xml
 res/gui/gui.properties svneol=native#text/plain
 res/images/symbols-13/0.png -text svneol=unset#image/png
 res/images/symbols-13/1.png -text svneol=unset#image/png

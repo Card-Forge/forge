@@ -674,7 +674,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
            
             @Override
             public void windowClosed(WindowEvent e) {
-                File f = ForgeProps.getFile(LAYOUT);
+                File f = ForgeProps.getFile(LAYOUT_NEW);
                 Node layout = pane.getMultiSplitLayout().getModel();
                 try {
                     XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(f)));
@@ -688,7 +688,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
        
         //making the multi split pane
         Node model;
-        File f = ForgeProps.getFile(LAYOUT);
+        File f = ForgeProps.getFile(LAYOUT_NEW);
         try {
             XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(f)));
             model = (Node) decoder.readObject();

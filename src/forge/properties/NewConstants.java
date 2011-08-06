@@ -108,6 +108,7 @@ public interface NewConstants {
     public static interface GUI {
         public static interface GuiDisplay {
             public static final String LAYOUT = "gui/Display";
+            public static final String LAYOUT_NEW = "gui/Display/new";
         }
         
         public static interface GuiDeckEditor {
