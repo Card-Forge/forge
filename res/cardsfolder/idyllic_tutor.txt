@@ -1,8 +1,8 @@
 Name:Idyllic Tutor
 ManaCost:2 W
 Types:Sorcery
-Text:Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
-K:spTutor:Enchantment:Hand
+Text:no text
+A:SP$Fetch|Cost$2 W|Destination$Hand|FetchType$Enchantment|FetchNum$1|SpellDescription$Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/idyllic_tutor.jpg

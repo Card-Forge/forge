@@ -1,8 +1,8 @@
 Name:Long-Term Plans
 ManaCost:2 U
 Types:Instant
-Text:Search your library for a card, shuffle your library, then put that card third from the top.
-K:spTutor:Card:ThirdFromTopOfLibrary
+Text:no text
+A:SP$Fetch|Cost$2 U|Destination$Library|LibraryPosition$2|FetchType$Card|FetchNum$1|SpellDescription$Search your library for a card, shuffle your library, then put that card third from the top.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/long_term_plans.jpg
