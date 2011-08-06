@@ -17,12 +17,12 @@ public class CombatUtil {
         //rare case:
         if(blocker.getKeyword().contains("Shadow")
                 && blocker.getKeyword().contains(
-                        "This creature can block creatures with shadow as though they didn't have shadow.")) return false;
+                        "CARDNAME can block creatures with shadow as though they didn't have shadow.")) return false;
         
         if(attacker.getKeyword().contains("Shadow")
                 && !blocker.getKeyword().contains("Shadow")
                 && !blocker.getKeyword().contains(
-                        "This creature can block creatures with shadow as though they didn't have shadow.")) return false;
+                        "CARDNAME can block creatures with shadow as though they didn't have shadow.")) return false;
         
         if(!attacker.getKeyword().contains("Shadow") && blocker.getKeyword().contains("Shadow")) return false;
         

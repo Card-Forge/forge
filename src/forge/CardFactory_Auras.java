@@ -3436,7 +3436,7 @@ class CardFactory_Auras {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
                         crd.addExtrinsicKeyword("Reach");
-                        crd.addExtrinsicKeyword("This creature can block creatures with shadow as though they didn't have shadow.");
+                        crd.addExtrinsicKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.");
                         crd.addSemiPermanentAttackBoost(1);
                         crd.addSemiPermanentDefenseBoost(1);
                     }
@@ -3452,7 +3452,7 @@ class CardFactory_Auras {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
                         crd.removeExtrinsicKeyword("Reach");
-                        crd.removeExtrinsicKeyword("This creature can block creatures with shadow as though they didn't have shadow.");
+                        crd.removeExtrinsicKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.");
                         crd.addSemiPermanentAttackBoost(-1);
                         crd.addSemiPermanentDefenseBoost(-1);
                     }

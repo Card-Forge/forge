@@ -1,3 +1,35 @@
+AEther Web
+1 G
+Enchantment Aura
+Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow.
+Flash
+Enchant creature
+enPump:+1/+1/Reach & CARDNAME can block creatures with shadow as though they didn't have shadow.
+
+AEtherflame Wall
+1 R
+Creature Wall
+no text
+0/4
+Defender
+abPump R:+1/+0
+CARDNAME can block creatures with shadow as though they didn't have shadow.
+
+Heartwood Dryad
+1 G
+Creature Dryad
+no text
+2/1
+CARDNAME can block creatures with shadow as though they didn't have shadow.
+
+Wall of Diffusion
+1 R
+Creature Wall
+no text
+0/5
+Defender
+CARDNAME can block creatures with shadow as though they didn't have shadow.
+
 Air Bladder
 U
 Enchantment Aura
@@ -9285,14 +9317,6 @@ Creature Ogre Warrior
 no text
 3/3
 
-AEther Web
-1 G
-Enchantment Aura
-Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow.
-Flash
-Enchant creature
-enPump:+1/+1/Reach & This creature can block creatures with shadow as though they didn't have shadow.
-
 Emeria Angel
 2 W W
 Creature Angel
@@ -9381,30 +9405,6 @@ Thran Dynamo
 Artifact
 no text
 tap: add 3
-
-Heartwood Dryad
-1 G
-Creature Dryad
-no text
-2/1
-This creature can block creatures with shadow as though they didn't have shadow.
-
-AEtherflame Wall
-1 R
-Creature Wall
-no text
-0/4
-Defender
-abPump R:+1/+0
-This creature can block creatures with shadow as though they didn't have shadow.
-
-Wall of Diffusion
-1 R
-Creature Wall
-no text
-0/5
-Defender
-This creature can block creatures with shadow as though they didn't have shadow.
 
 Guilty Conscience
 W
