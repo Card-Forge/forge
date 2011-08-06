@@ -534,50 +534,54 @@ public class CardFactory implements NewConstants {
                 	int numHHand = pzH.size();
                 	
                 	if (numHHand > (nCards - 1))
+                	{
+                		if (Tgt)
+                			setTargetPlayer(Constant.Player.Human);
+                		
                 		return true;
+                	}
                 		
                 	return false;
                 }
                 public void resolve()
                 {
                 	int nCards = getNumCards();
+                	String discardingPlayer = "";
                 	
-                	if (DiscardMethod.equals("OppChoose"))
+                	if (Tgt)
+                		discardingPlayer = getTargetPlayer();
+                	else if (Opp)
+                		discardingPlayer = AllZone.GameAction.getOpponent(card.getController());
+                	
+                	if (DiscardMethod.equals("OppChoose") || DiscardMethod.equals("TgtChoose"))
                 	{
-                		String opp = AllZone.GameAction.getOpponent(card.getController());
+                		//String opp = AllZone.GameAction.getOpponent(card.getController());
                 		
                 		if (!UnlessType[0].equals("none"))
-                			AllZone.GameAction.discardUnless(opp, nCards, UnlessType[0]);
+                			AllZone.GameAction.discardUnless(discardingPlayer, nCards, UnlessType[0]);
                 		else
-                			AllZone.GameAction.discard(opp, nCards);
+                			AllZone.GameAction.discard(discardingPlayer, nCards);
                 	}
-                	else if (DiscardMethod.equals("TgtChoose"))
-                	{
-                		if (!UnlessType[0].equals("none"))
-                			AllZone.GameAction.discardUnless(getTargetPlayer(), nCards, UnlessType[0]);
-                		else
-                			AllZone.GameAction.discard(getTargetPlayer(), nCards);
-                	}
+
                 	else if (DiscardMethod.equals("AtRandom"))
                 	{
-                		AllZone.GameAction.discardRandom(getTargetPlayer(), nCards);
+                		AllZone.GameAction.discardRandom(discardingPlayer, nCards);
                 	}
+
                 	else if (DiscardMethod.equals("Hand"))
                 	{
-                		AllZone.GameAction.discardHand(getTargetPlayer());
+                		AllZone.GameAction.discardHand(discardingPlayer);
                 	}
                 	
                 	if (!Drawback[0].equals("none"))
                 	{
-                		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card);
+                		CardFactoryUtil.doDrawBack(Drawback[0], nCards, card.getController(), AllZone.GameAction.getOpponent(card.getController()), discardingPlayer, card, card);
                 	}
                 }
         	};
         	
         	if (Tgt)
         		spDiscard.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spDiscard));
-        	else
-        		spDiscard.setTargetPlayer(AllZone.GameAction.getOpponent(card.getController()));
         	
         	spDiscard.setDescription(spDesc[0]);
         	spDiscard.setStackDescription(stDesc[0]);
@@ -588,17 +592,15 @@ public class CardFactory implements NewConstants {
             String bbCost = card.getSVar("Buyback");
             if (!bbCost.equals(""))
             {
-               SpellAbility bbDiscardTgt = spDiscard.copy();
-               bbDiscardTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-               bbDiscardTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
-               bbDiscardTgt.setIsBuyBackAbility(true);
+               SpellAbility bbDiscard = spDiscard.copy();
+               bbDiscard.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               bbDiscard.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbDiscard.setIsBuyBackAbility(true);
                
                if (Tgt)
-            	   bbDiscardTgt.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbDiscardTgt));
-               else
-            	   bbDiscardTgt.setTargetPlayer(AllZone.GameAction.getOpponent(card.getController()));
+            	   bbDiscard.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbDiscard));
                
-               card.addSpellAbility(bbDiscardTgt);
+               card.addSpellAbility(bbDiscard);
             }
 
         }//spDiscardTgt
