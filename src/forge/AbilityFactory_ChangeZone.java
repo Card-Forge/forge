@@ -512,7 +512,7 @@ public class AbilityFactory_ChangeZone {
             }
             else{
             	StringBuilder sb = new StringBuilder();
-            	int num = Math.min(fetchList.size(), changeNum - i - 1);
+            	int num = Math.min(fetchList.size(), changeNum - i);
             	sb.append("Cancel Search? Up to ").append(num).append(" more cards can change zones.");
             	
             	if (i+1 == changeNum || GameActionUtil.showYesNoDialog(card, sb.toString()))
