@@ -665,7 +665,7 @@ public class AbilityFactory_ChangeZone {
 			if (destination.equals("Exile") || origin.equals("Battlefield"))
 				list = list.getController(AllZone.HumanPlayer);
 
-			if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
+			if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
 				return false;
 			
 			 // target loop
