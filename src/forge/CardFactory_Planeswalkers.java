@@ -3344,6 +3344,8 @@ class CardFactory_Planeswalkers {
             ability3.setStackDescription(card2 + " - Destroy all other permanents except for lands and tokens.");
             card2.addSpellAbility(ability3);
             
+            card2.setSVars(card.getSVars());
+            
             return card2;
     	}//*************** END ************ END **************************
         
