@@ -1,5 +1,5 @@
 Name:Tragic Poet
-ManaCost:U
+ManaCost:W
 Types:Creature Human
 Text:no text
 PT:1/1
