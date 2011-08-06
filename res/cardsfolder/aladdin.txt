@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Creature Human Rogue
 Text:no text
 PT:1/1
-A:AB$GainControl|Cost$1 R R T|ValidTgts$Artifact|TgtPrompt$Select target artifact.|LoseControl$LeavesPlay,LoseControl|SpellDescription$Gain control of target artifact for as long as you control Aladdin.
+A:AB$GainControl | Cost$ 1 R R T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target artifact for as long as you control Aladdin.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aladdin.jpg
 End

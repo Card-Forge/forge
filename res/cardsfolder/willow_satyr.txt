@@ -4,7 +4,7 @@ Types:Creature Satyr
 Text:no text
 PT:1/1
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$GainControl|Cost$T|ValidTgts$Creature.Legendary|TgtPrompt$Select target legendary creature.|LoseControl$Untap,LeavesPlay,LoseControl|SpellDescription$Gain control of target legendary creature for as long as you control Willow Satyr and Willow Satyr remains tapped.
+A:AB$GainControl | Cost$ T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature. | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target legendary creature for as long as you control Willow Satyr and Willow Satyr remains tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/willow_satyr.jpg
 End
