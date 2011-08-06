@@ -1,4 +1,4 @@
-boreName:Twinblade Slasher
+Name:Twinblade Slasher
 ManaCost:G
 Types:Creature Elf Warrior
 Text:Activate this ability only once each turn.
