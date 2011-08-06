@@ -1,6 +1,7 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -97,26 +98,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 			}
 		}
 		
-		if (source.isLand()){
-			CardList manaBarbs = AllZoneUtil.getCardsInPlay("Manabarbs");
-
-			for(final Card c : manaBarbs){
-				this.undoable = false;
-        		SpellAbility ability = new Ability(c, "") {
-        			@Override
-        			public void resolve() {
-        				source.getController().addDamage(1, c);
-        			}
-        		};
-        		
-        		StringBuilder sb = new StringBuilder();
-        		sb.append(c.getName()).append(" - deal 1 damage to ").append(source.getController());
-        		ability.setStackDescription(sb.toString());
-        		
-        		AllZone.Stack.add(ability);
-			}
-		}
-		
         if(source.getName().equals("Rainbow Vale")) {
         	this.undoable = false;
         	source.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
@@ -177,7 +158,17 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
     		}
     		
         }
-	}
+        
+        //Run triggers        
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+
+        runParams.put("Card", source);
+        runParams.put("Player", AllZone.HumanPlayer);
+        runParams.put("Ability_Mana", this);
+        runParams.put("Produced", produced);
+        AllZone.TriggerHandler.runTrigger("TapsForMana", runParams);
+        
+	}//end produceMana(String)
 	
 	private boolean mirariCanAdd(String c, String produced) {
 		return produced.contains(c);
@@ -221,5 +212,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
     	//Mana abilities with same Descriptions are "equal"
     	return  o.toString().equals(this.toString());
     }
-}
+    
+}//end class Ability_Mana
 

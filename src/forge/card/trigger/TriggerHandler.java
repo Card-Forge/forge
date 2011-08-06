@@ -14,6 +14,7 @@ import forge.GameActionUtil;
 import forge.Player;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
 import forge.card.spellability.SpellAbility;
@@ -129,6 +130,9 @@ public class TriggerHandler {
 		else if(mode.equals("Taps"))
 		{
 			ret = new Trigger_Taps(mapParams,host);
+		}
+		else if(mode.equals("TapsForMana")) {
+			ret = new Trigger_TapsForMana(mapParams, host);
 		}
 		else if(mode.equals("TurnFaceUp"))
 		{
@@ -306,6 +310,11 @@ public class TriggerHandler {
 			regtrig.setRunParams(runParams);
 			
 			//All tests passed, execute ability.
+			if(regtrig instanceof Trigger_TapsForMana) {
+			     Ability_Mana abMana = (Ability_Mana)runParams.get("Ability_Mana");
+			     abMana.setUndoable(false);
+			}
+			
 			AbilityFactory AF = new AbilityFactory();
 			
 			final SpellAbility[] sa = new SpellAbility[1];

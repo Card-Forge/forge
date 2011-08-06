@@ -1,12 +1,14 @@
+
 package forge;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Cost_Payment;
@@ -531,31 +533,18 @@ public class ComputerUtil
 					  AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(sourceLand, AllZone.HumanPlayer));
 				  }
 
-				  //Manabarbs code
-				  if(sourceLand.isLand()) { //&& this.isTapAbility()) {
-					  CardList barbs = AllZoneUtil.getCardsInPlay("Manabarbs");
-					  for(Card barb:barbs) {
-						  final Card manabarb = barb;
-						  SpellAbility ability = new Ability(manabarb, "") {
-							  @Override
-							  public void resolve() {
-								  sourceLand.getController().addDamage(1, manabarb);
-							  }
-						  };
-
-						  StringBuilder sb = new StringBuilder();
-						  sb.append(manabarb.getName()).append(" - deal 1 damage to ").append(sourceLand.getController());
-						  ability.setStackDescription(sb.toString());
-
-						  AllZone.Stack.add(ability);
-					  }
-				  }
-
 				  if(sourceLand.getName().equals("Rainbow Vale")) {
 					  sourceLand.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
 				  }
 
 				  //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
+				  //Run triggers        
+			      HashMap<String,Object> runParams = new HashMap<String,Object>();
+
+			      runParams.put("Card", sourceLand);
+			      runParams.put("Player", AllZone.ComputerPlayer);
+			      runParams.put("Produced", colors.get(j)); //can't tell what mana to computer just paid?
+			      AllZone.TriggerHandler.runTrigger("TapsForMana", runParams);
 
 			  }
 			  if(cost.isPaid())
@@ -569,6 +558,7 @@ public class ComputerUtil
 	  }
 	  if(!cost.isPaid())
 		  throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
+      
   }//payManaCost()
   
  
