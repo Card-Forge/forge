@@ -143,6 +143,13 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         	int game = 0;
         	if (winLose.getWinTurns()[0] != 0)
         		game = 1;
+        	int turn = AllZone.Phase.getTurn();
+        	if (AllZone.GameInfo.isComputerStartedThisGame())
+        		turn--;
+        	
+        	if (turn < 1)
+        		turn = 1;
+        	
         	winLose.setWinTurn(game, AllZone.Phase.getTurn());
         	winLose.setMulliganedToZero(game, AllZone.GameInfo.getHumanMulliganedToZero());
         	

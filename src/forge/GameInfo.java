@@ -4,6 +4,8 @@ public class GameInfo {
 	private int computerCanPlayNumberOfLands;
 	private int humanCanPlayNumberOfLands;
 	
+	private boolean computerStartedThisGame = false;
+	
 	private boolean computerPlayedFirstLandThisTurn;
 	private boolean humanPlayedFirstLandThisTurn;
 	
@@ -105,6 +107,14 @@ public class GameInfo {
 	
 	public boolean getResolvedFirstStrikeDamageThisCombat() {
 		return resolvedFirstStrikeDamageThisCombat;
+	}
+
+	public void setComputerStartedThisGame(boolean computerStartedThisGame) {
+		this.computerStartedThisGame = computerStartedThisGame;
+	}
+
+	public boolean isComputerStartedThisGame() {
+		return computerStartedThisGame;
 	}
 
 	

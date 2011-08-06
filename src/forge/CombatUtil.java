@@ -672,30 +672,44 @@ public class CombatUtil {
     }//getPlaneswalkerBlockers()
     
     public static void executeCombatDamageEffects(Card c) {
-        if(c.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(c);
         
-        CardList cl = CardFactoryUtil.getAurasEnchanting(c, "Guilty Conscience");
-        for(Card crd:cl)
-            GameActionUtil.executeGuiltyConscienceEffects(c, crd);
-        
-        /*
-         * Whenever equipped creature deals combat damage, put two
-         * charge counters on Umezawa's Jitte.
-         */
-        if(c.isEquipped() && c.getNetAttack() > 0) {
-        	ArrayList<Card> equips = c.getEquippedBy();
-        	for(Card equip:equips) {
-        		if(equip.getName().equals("Umezawa's Jitte")) {
-        			equip.addCounter(Counters.CHARGE, 2);
-        		}
-        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Fire and Ice")) {
-        			GameActionUtil.executeSwordOfFireAndIceEffects(equip);
-        		}
-        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Light and Shadow")) {
-        			GameActionUtil.executeSwordOfLightandShadowEffects(equip);
-        		}
-        	}
-        }
+    	boolean canDamage = true;
+    	CardList blockers = AllZone.Combat.getBlockers(c);
+    	if (blockers.size() == 1)
+    	{
+    		if (!CardFactoryUtil.canDamage(c, blockers.get(0)))
+    			canDamage = false;
+    		
+    		//TODO: multiple blockers
+    	}
+    	
+    	if (canDamage)
+    	{
+	    	if(c.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(c);
+	        
+	        CardList cl = CardFactoryUtil.getAurasEnchanting(c, "Guilty Conscience");
+	        for(Card crd:cl)
+	            GameActionUtil.executeGuiltyConscienceEffects(c, crd);
+	        
+	        /*
+	         * Whenever equipped creature deals combat damage, put two
+	         * charge counters on Umezawa's Jitte.
+	         */
+	        if(c.isEquipped() && c.getNetAttack() > 0) {
+	        	ArrayList<Card> equips = c.getEquippedBy();
+	        	for(Card equip:equips) {
+	        		if(equip.getName().equals("Umezawa's Jitte")) {
+	        			equip.addCounter(Counters.CHARGE, 2);
+	        		}
+	        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Fire and Ice")) {
+	        			GameActionUtil.executeSwordOfFireAndIceEffects(equip);
+	        		}
+	        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Light and Shadow")) {
+	        			GameActionUtil.executeSwordOfLightandShadowEffects(equip);
+	        		}
+	        	}
+	        }//isEquipped && getNetAttack > 0
+    	}//canDamage
     }
     
     private static boolean canBlockProtection(Card attacker, Card blocker) {

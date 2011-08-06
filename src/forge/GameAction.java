@@ -1083,6 +1083,7 @@ public class GameAction {
         AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
         AllZone.GameInfo.setHumanNumberOfTimesMulliganed(0);
         AllZone.GameInfo.setHumanMulliganedToZero(false);
+        AllZone.GameInfo.setComputerStartedThisGame(false);
         
         AllZone.Human_PoisonCounter.setPoisonCounters(0);
         AllZone.Computer_PoisonCounter.setPoisonCounters(0);
@@ -1361,6 +1362,7 @@ public class GameAction {
         else {
         	AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
         	JOptionPane.showMessageDialog(null, "Human has no cards with a converted mana cost in library." + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+        	AllZone.GameInfo.setComputerStartedThisGame(true);
         	return;
         }
         if(CLibrary.size() > 0) ComputerCut = CLibrary.get(MyRandom.random.nextInt(CLibrary.size()));
@@ -1379,6 +1381,7 @@ public class GameAction {
         {
         	AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
         	JOptionPane.showMessageDialog(null, sb + "\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+        	AllZone.GameInfo.setComputerStartedThisGame(true);
         	Starter_Determined = true;
         } else if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) < CardUtil.getConvertedManaCost(HumanCut.getManaCost())) {
         	JOptionPane.showMessageDialog(null, sb + "\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n" + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
@@ -2087,7 +2090,7 @@ public class GameAction {
         System.out.println("Adding " + damageToAdd + " damage to " + card.getName());
         if(isCardInPlay(card)) card.addDamage(damageToAdd, source);
         
-        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
+        if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, card)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
         for(Card c:cl) {

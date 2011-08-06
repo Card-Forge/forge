@@ -189,7 +189,13 @@ public class Combat
     return block;
   }//getAllBlockers()
 
-  public  CardList getBlockers(Card attacker) {return new CardList(getList(attacker).toArray());}
+  public CardList getBlockers(Card attacker) 
+  {
+	  if (getList(attacker) == null)
+		  return new CardList();
+	  else
+		  return new CardList(getList(attacker).toArray());
+  }
   private CardList getList(Card attacker)     {return (CardList)map.get(attacker);}
 
   public void removeFromCombat(Card c)
