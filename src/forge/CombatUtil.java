@@ -2009,37 +2009,41 @@ public class CombatUtil
   public static void executeExaltedAbility(Card c, int magnitude)
   {
 	  final Card crd = c;
-	  final int n = magnitude;
-	  Ability ability = new Ability(c,"0")
+	  Ability ability;
+
+	  for(int i=0;i<magnitude;i++)
 	  {
-		 public void resolve() 
-		 {
-	         final Command untilEOT = new Command()
-	         {
-				private static final long serialVersionUID = 1497565871061029469L;
-
-				public void execute()
-	            {
-	              if(AllZone.GameAction.isCardInPlay(crd))
-	              {
-	                crd.addTempAttackBoost(-n);
-	                crd.addTempDefenseBoost(-n);
-	              }
-	            }
-	          };//Command
-	          
-	          if(AllZone.GameAction.isCardInPlay(crd))
-	          {
-	            crd.addTempAttackBoost(n);
-	            crd.addTempDefenseBoost(n);
-
-	            AllZone.EndOfTurn.addUntil(untilEOT);
-	          }
-		 }//resolve
-		 
-	  };//ability
-	  ability.setStackDescription(c +" - (Exalted) gets +" +n +"/+" +n +" until EOT.");
-	  AllZone.Stack.add(ability);
+		  ability = new Ability(c,"0")
+		  {
+			 public void resolve() 
+			 {
+		         final Command untilEOT = new Command()
+		         {
+					private static final long serialVersionUID = 1497565871061029469L;
+	
+					public void execute()
+		            {
+		              if(AllZone.GameAction.isCardInPlay(crd))
+		              {
+		                crd.addTempAttackBoost(-1);
+		                crd.addTempDefenseBoost(-1);
+		              }
+		            }
+		          };//Command
+		          
+		          if(AllZone.GameAction.isCardInPlay(crd))
+		          {
+		            crd.addTempAttackBoost(1);
+		            crd.addTempDefenseBoost(1);
+	
+		            AllZone.EndOfTurn.addUntil(untilEOT);
+		          }
+			 }//resolve
+			 
+		  };//ability
+		  ability.setStackDescription(c +" - (Exalted) gets +1/+1 until EOT.");
+		  AllZone.Stack.add(ability);
+	  }
 	  
 	  if (GameActionUtil.isRafiqInPlay(c.getController()))
 	  {
