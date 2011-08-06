@@ -3434,7 +3434,8 @@ public class GameActionUtil {
 		
 		for(int i = 0; i < cards.size(); i++) {
 			final Card c = cards.get(i);
-			
+			if (c.isFaceDown()) continue;
+
 			final Ability sacrificeCreature = new Ability(c, "") {
 				@Override
 				public void resolve() {
