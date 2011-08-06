@@ -38,6 +38,12 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+day_of_destiny.jpg			http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
+oathsworn_giant.jpg			http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
+hannas_custody.jpg			http://www.wizards.com/global/images/magic/general/hannas_custody.jpg
+thistledown_liege.jpg			http://www.wizards.com/global/images/magic/general/thistledown_liege.jpg
+knight_of_sursi.jpg			http://www.wizards.com/global/images/magic/general/knight_of_sursi.jpg
+heroes_remembered.jpg			http://www.wizards.com/global/images/magic/general/heroes_remembered.jpg
 corrosive_mentor.jpg			http://www.wizards.com/global/images/magic/general/corrosive_mentor.jpg
 intimidation.jpg			http://www.wizards.com/global/images/magic/general/intimidation.jpg
 glen_elendra_liege.jpg			http://www.wizards.com/global/images/magic/general/glen_elendra_liege.jpg

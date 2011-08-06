@@ -1,6 +1,7 @@
 Absorb
 Abyssal Horror
 Abyssal Hunter
+Abyssal Nocturnus
 Abyssal Persecutor
 Academy Rector
 Academy Ruins
@@ -186,6 +187,7 @@ Darksteel Forge
 Darkwater Catacombs
 Dauntless Dourbark
 Dauntless Escort
+Day of Destiny
 Day of Judgment
 Death Grasp
 Deathless Angel
@@ -309,6 +311,7 @@ Gilded Lotus
 Gilt-Leaf Archdruid
 Giltspire Avenger
 Glacial Fortress
+Glen Elendra Liege
 Glimmervoid
 Glimpse the Unthinkable
 Glint-Eye Nephilim
@@ -349,6 +352,7 @@ Gwendlyn Di Corci
 Hallowed Fountain
 Hammer of Bogardan
 Hammerfist Giant
+Hanna's Custody
 Hanna, Ship's Navigator
 Harabaz Druid
 Hatching Plans
@@ -365,6 +369,7 @@ Hellkite Overlord
 Herald of Serra
 Hermit Druid
 Hero's Demise
+Heroes Remembered
 Hex
 Hidetsugu's Second Rite
 Honor of the Pure
@@ -846,6 +851,7 @@ The Hive
 The Tabernacle at Pendrell Vale
 The Unspeakable
 Thelonite Hermit
+Thistledown Liege
 Thorn of Amethyst
 Thornling
 Thornscape Master

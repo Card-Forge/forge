@@ -172,6 +172,7 @@ Concentrate
 Control Magic
 Control of the Court
 Copper Tablet
+Corrosive Mentor
 Corrupt Court Official
 Corrupt Eunuchs
 Council of Advisors
@@ -446,6 +447,7 @@ Inheritance
 Inkfathom Infiltrator
 Inner-Chamber Guard
 Inspirit
+Intimidation
 Irini Sengir
 Iron Lance
 Iron Tusk Elephant
@@ -594,6 +596,7 @@ Nocturnal Raid
 Novijen, Heart of Progress
 Noxious Hatchling
 Nullmage Shepherd
+Oathsworn Giant
 Obsianus Golem
 Ogre Taskmaster
 Ogre's Cleaver

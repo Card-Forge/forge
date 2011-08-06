@@ -760,6 +760,7 @@ Kjeldoran Outrider
 Kjeldoran War Cry
 Knight Errant
 Knight of Cliffhaven
+Knight of Sursi
 Knight of the Skyward Eye
 Kobolds of Kher Keep
 Kodama's Reach
@@ -871,6 +872,7 @@ Mighty Leap
 Mind Burst
 Mind Knives
 Mind Rot
+Mindstab
 Minamo Scrollkeeper
 Minister of Impediments
 Minotaur Warrior

@@ -1,3 +1,48 @@
+Day of Destiny
+3 W
+Legendary Enchantment
+no text
+StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Legendary:Legendary creatures you control get +2/+2.
+
+Oathsworn Giant
+4 W W
+Creature Giant Soldier
+no text
+3/4
+Vigilance
+StaticEffect:Play:Permanents you Control:PTBonus/0/2!Keyword/Vigilance:Type.Creature!NotSelf:Other creatures you control get +0/+2 and have vigilance.
+
+Hanna's Custody
+2 W
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Shroud:Type.Artifact:All artifacts have shroud. (They can't be the targets of spells or abilities.)
+
+Thistledown Liege
+1 WU WU WU
+Creature Kithkin Knight
+no text
+1/3
+Flash
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other white creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
+
+Knight of Sursi
+3 W
+Creature Human Knight
+no text
+2/2
+Flying
+Flanking
+Suspend:3:W
+
+Heroes Remembered
+6 W W W
+Sorcery
+no text
+spGainLife:20
+Suspend:10:W
+
 Corrosive Mentor
 2 B
 Creature Elemental Rogue
