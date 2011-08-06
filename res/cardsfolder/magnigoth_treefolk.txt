@@ -8,7 +8,8 @@ K:stPumpSelf:Permanent:0/0/Islandwalk:isPresent Island.YouCtrl:no text
 K:stPumpSelf:Permanent:0/0/Swampwalk:isPresent Swamp.YouCtrl:no text
 K:stPumpSelf:Permanent:0/0/Mountainwalk:isPresent Mountain.YouCtrl:no text
 K:stPumpSelf:Permanent:0/0/Forestwalk:isPresent Forest.YouCtrl:no text
-SVar:BuffedBy:Land
+SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnigoth_treefolk.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/82.jpg
