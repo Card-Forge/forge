@@ -1,0 +1,11 @@
+Name:Matsu-Tribe Birdstalker
+ManaCost:2 G G
+Types:Creature Snake Warrior Archer
+Text:no text
+PT:2/2
+K:Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+A:AB$Pump | Cost$ G | KW$ Reach | SpellDescription$ Matsu-Tribe Birdstalker gains reach until end of turn. (It can block creatures with flying.)
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/matsu_tribe_birdstalker.jpg
+End

@@ -1,0 +1,10 @@
+Name:Kashi-Tribe Reaver
+ManaCost:3 G
+Types:Creature Snake Warrior
+Text:no text
+PT:3/2
+K:Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+A:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_reaver.jpg
+End
