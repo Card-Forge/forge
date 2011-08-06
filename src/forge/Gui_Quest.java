@@ -284,7 +284,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	this.getContentPane().add(petComboBox, null);
         	
         	int questsPlayed = questData.getQuestsPlayed();
-        	System.out.println("questsPlayed: " + questsPlayed);
+        	//System.out.println("questsPlayed: " + questsPlayed);
         	if (questData.getWin() / 5 < questsPlayed || questData.getWin() < 25)
         		questsButton.setEnabled(false);
         	else
@@ -620,7 +620,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         String oppIconName = getOpponent();
         oppIconName = oppIconName.substring(0, oppIconName.length()-1).trim() + ".jpg";
-        System.out.println(oppIconName);
+        //System.out.println(oppIconName);
         
         Constant.Quest.oppIconName[0] = oppIconName;
         

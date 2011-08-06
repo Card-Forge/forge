@@ -711,7 +711,8 @@ public class GameAction {
             GameActionUtil.executeGrvDestroyCardEffects(grv.get(i), c);
         
         if(persist) {
-            c.setDamage(0);
+            /*
+        	c.setDamage(0);
             c.untap();
             PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Play, c.getOwner());
             PlayerZone grave = AllZone.getZone(c);
@@ -730,6 +731,7 @@ public class GameAction {
                 if(c.getCounters(counter) != 0) c.setCounter(counter, 0);
             
             c.addCounter(Counters.M1M1, 1);
+            */
         }
         
         //if (c.getName().equals("Rancor") || c.getName().equals("Brilliant Halo") || c.getName().equals("Undying Rage"))
