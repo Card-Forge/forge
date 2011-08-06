@@ -1,6 +1,94 @@
+Spitting Sliver
+4 B
+Creature Sliver
+no text
+3/3
+StaticEffect:Play:All Permanents:Keyword/First Strike:Type.Creature!Type.Sliver:All Sliver creatures have first strike.
+
+Righteous War
+1 W B
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Protection from black:Type.Creature!Color.white:White creatures you control have protection from black.
+StaticEffect:Play:Permanents you Control:Keyword/Protection from white:Type.Creature!Color.black:Black creatures you control have protection from white.
+
+Rhox Pikemaster
+2 W W
+Creature Rhino Soldier
+no text
+3/3
+First Strike
+StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Type.Soldier!NotSelf:Other Soldier creatures you control have first strike.
+
+Aysen Highway
+3 W W W
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Plainswalk:Type.Creature!Color.white:White creatures have plainswalk.
+
+Akroma's Devoted
+3 W
+Creature Human Cleric
+no text
+2/4
+StaticEffect:Play:All Permanents:Keyword/Vigilance:Type.Creature!Type.Cleric:Cleric creatures have vigilance.
+
+Urborg Shambler
+2 B B
+Creature Horror
+no text
+4/3
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black creatures get -1/-1.
+
+Stronghold Taskmaster
+2 B B
+Creature Giant Minion
+no text
+4/3
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black creatures get -1/-1.
+
+Dread of Night
+B
+Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.white:White creatures get -1/-1.
+
+Blessed Orator
+3 W
+Creature Human Cleric
+no text
+1/4
+StaticEffect:Play:Permanents you Control:PTBonus/0/1:Type.Creature!NotSelf:Other creatures you control get +0/+1.
+
+Sigil of the New Dawn
+3 W
+Enchantment
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:MoveFrom-Graveyard-Hand:Initiating_Card:ASAP:PayMana/1 W:Initiator - OwnedByController:Whenever a creature is put into your graveyard from the battlefield, you may pay {1}{W}. If you do, return that card to your hand.
+
+Yomiji, Who Bars the Way
+4 W W
+Legendary Creature Spirit
+no text
+4/4
+WheneverKeyword:PermanentIntoGraveyard:Type/Legendary:Play:MoveFrom-Graveyard-Hand:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a legendary permanent other than Yomiji, Who Bars the Way is put into a graveyard from the battlefield, return that card to its owner's hand.
+
+Subversion
+3 B B
+Enchantment
+no text
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1!ModifyLife/-1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
+
+Deathmask Nezumi
+2 B
+Creature Rat Shaman
+no text
+2/2
+StaticEffect:Play:Self:PTBonus/2/1!Keyword/Fear:CardsInHandMore/7:As long as you have seven or more cards in hand, Deathmask Nezumi gets +2/+1 and has fear.
+
 Zodiac Dragon
 7 R R
-Legendary Creature Spirit
+Creature Spirit
 no text
 8/8
 WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:No Special Condition:When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.
