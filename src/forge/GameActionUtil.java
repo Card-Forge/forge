@@ -2463,7 +2463,6 @@ public class GameActionUtil {
 
     public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
         if (c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
-        else if (c.getName().equals("Moonlit Wake")) destroyCreature_Moonlit_Wake(c, destroyed);
         else if (c.getName().equals("Proper Burial") 
                 && destroyed.getController().equals(c.getController())) destroyCreature_Proper_Burial(c, destroyed);
         else if (c.getName().equals("Sek'Kuar, Deathkeeper") 
@@ -2496,21 +2495,6 @@ public class GameActionUtil {
 
         AllZone.Stack.add(ability);
     }
-
-	private static void destroyCreature_Moonlit_Wake(final Card c, Card destroyed) {
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				c.getController().gainLife(1, c);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Moonlit Wake - ").append(c.getController()).append(" gains 1 life.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
 
 	private static void destroyCreature_Proper_Burial(final Card c, Card destroyed) {
 		final Card crd = c;
