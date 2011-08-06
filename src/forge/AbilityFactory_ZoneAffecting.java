@@ -105,7 +105,12 @@ public class AbilityFactory_ZoneAffecting {
 		sb.append(player.toString());
 		sb.append(" draws (");
 		sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa));
-		sb.append(").");
+		sb.append(")");
+		
+		if (af.getMapParams().containsKey("NextUpkeep"))
+			sb.append(" at the beginning of the next upkeep");
+		
+		sb.append(".");
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null){
