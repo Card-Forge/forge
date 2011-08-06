@@ -5325,8 +5325,7 @@ public class CardFactory implements NewConstants {
                         AllZone.GameAction.exile(getTargetCard());
                         
                         //put permanent onto the battlefield
-                        Card c = getSourceCard();
-                        AllZone.getZone(Constant.Zone.Battlefield, c.getController()).add(c);
+                        AllZone.GameAction.moveToPlay(card);
                     }
                 }//resolve()
                 
@@ -5359,9 +5358,7 @@ public class CardFactory implements NewConstants {
                             if(!c.isToken()) {
                                 c = AllZone.CardFactory.copyCard(c);
                                 c.setController(c.getOwner());
-                                
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-                                play.add(c);
+                                AllZone.GameAction.moveToPlay(c);
                             }
                         }//resolve()
                     };//SpellAbility
@@ -6750,12 +6747,11 @@ public class CardFactory implements NewConstants {
         		public void resolve() {
         			final Player player = card.getController();
         			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
         			
         			for(Card c:grave) {
-        				lib.add(c);
+        				AllZone.GameAction.moveToLibrary(c);
         			}
-        			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
+
         			player.shuffle();
         		}
 
@@ -6788,13 +6784,13 @@ public class CardFactory implements NewConstants {
         		public void resolve() {
         			final Player player = card.getController();
         			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+
         			AllZone.GameAction.moveToLibrary(card);
         			
         			for(Card c:grave) {
-        				lib.add(c);
+        				AllZone.GameAction.moveToLibrary(c);
         			}
-        			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
+
         			player.shuffle();
         			player.gainLife(5, card);
         		}

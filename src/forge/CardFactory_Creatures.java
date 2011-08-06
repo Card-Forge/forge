@@ -268,9 +268,7 @@ public class CardFactory_Creatures {
                                 copy.setImageFilename("morph.jpg");
                             }
 
-	                        
-	                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-	                        play.add(copy);
+	                        AllZone.GameAction.moveToPlay(copy);
 	                        crds[i] = copy;
                     	}
                         
@@ -5378,8 +5376,7 @@ public class CardFactory_Creatures {
                     copy.setBaseAttack(token.getBaseAttack());
                     copy.setBaseDefense(token.getBaseDefense());
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(copy);
+                    AllZone.GameAction.moveToPlay(copy);
                 }
                 
                 @Override
@@ -7875,11 +7872,12 @@ public class CardFactory_Creatures {
                     		double Count = DoublingSeasons.size();
                     		Count = Math.pow(2,Count);
                     		for(int i = 0; i < Count; i++) {
-                    			if(i + 1== Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
+                    			if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
                     			Card Copy = AllZone.CardFactory.copyCardintoNew(getSourceCard());
                     			Copy.setToken(true);
                     			Copy.setController(getSourceCard().getController());
-                    			play.add(Copy); 
+
+                    			AllZone.GameAction.moveToPlay(Copy);
                     		}
                     	}
                     };

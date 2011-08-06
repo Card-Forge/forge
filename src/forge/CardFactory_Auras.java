@@ -100,8 +100,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -292,8 +291,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -410,8 +408,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -605,8 +602,7 @@ class CardFactory_Auras {
                 			NewType[0] = GuiUtils.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
                 		}
                 	}
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -782,8 +778,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -862,8 +857,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -980,8 +974,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -1074,8 +1067,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -1173,8 +1165,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -1235,8 +1226,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -1340,8 +1330,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -1450,8 +1439,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -1768,8 +1756,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -1882,8 +1869,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+                	AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
@@ -2021,8 +2007,7 @@ class CardFactory_Auras {
 
         		@Override
         		public void resolve() {
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(card);
+        			AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);                  
@@ -2340,8 +2325,7 @@ class CardFactory_Auras {
                     
                     @Override
                     public void resolve() {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        play.add(card);
+                    	AllZone.GameAction.moveToPlay(card);
                         
                         Card c = getTargetCard();
                         
@@ -2481,8 +2465,7 @@ class CardFactory_Auras {
                     
                     @Override
                     public void resolve() {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        play.add(card);
+                    	AllZone.GameAction.moveToPlay(card);
                         
                         Card c = getTargetCard();
                         

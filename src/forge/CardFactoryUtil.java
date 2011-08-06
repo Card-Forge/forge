@@ -1097,7 +1097,6 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
                 
                 CardList mercs = new CardList();
                 CardList list = new CardList(lib.getCards());
@@ -4089,15 +4088,14 @@ public class CardFactoryUtil {
         for(String kw:intrinsicKeywords)
             c.addIntrinsicKeyword(kw);
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-        
         int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(controller);
+        // todo: does this need to set PlayerZone_ComesIntoPlay.SimultaneousEntry like Rite of Replication does?
         for(int i = 0; i < multiplier; i++) {
             Card temp = CardFactory.copyStats(c);
             temp.setController(controller);
             temp.setOwner(controller);
             temp.setToken(true);
-            play.add(temp);
+            AllZone.GameAction.moveToPlay(temp);
             list.add(temp);
         }
         return list;

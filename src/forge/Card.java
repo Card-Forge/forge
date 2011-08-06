@@ -173,7 +173,6 @@ public class Card extends MyObservable {
     //used a limited number of times per turn
     //CardFactory.SSP_canPlay(Card) uses these variables
     
-    private int                          abilityTurnUsed;                                                       //What turn did this card last use this ability?
     private int                          abilityUsed;                                                           //How many times has this ability been used?
     
     public void addTrigger(Trigger t)
@@ -202,15 +201,7 @@ public class Card extends MyObservable {
     {
     	triggers.clear();
     }
-                                                                                                                     
-    public void setAbilityTurnUsed(int i) {
-        abilityTurnUsed = i;
-    }
-    
-    public int getAbilityTurnUsed() {
-        return abilityTurnUsed;
-    }
-    
+
     public void setAbilityUsed(int i) {
         abilityUsed = i;
     }

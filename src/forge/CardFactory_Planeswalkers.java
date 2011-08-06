@@ -107,8 +107,7 @@ class CardFactory_Planeswalkers {
                     emblem.setController(card.getController());
                     emblem.setOwner(card.getOwner());
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(emblem);
+                    AllZone.GameAction.moveToPlay(emblem);
                     
                     //AllZone.GameAction.checkStateEffects();
                     AllZone.StaticEffects.rePopulateStateBasedList();
@@ -1978,8 +1977,8 @@ class CardFactory_Planeswalkers {
                     emblem.setController(card.getController());
                     emblem.setOwner(card.getOwner());
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(emblem);
+                    // todo: Emblems live in the command zone
+                    AllZone.GameAction.moveToPlay(emblem);
                     
                     //AllZone.GameAction.checkStateEffects();
                     AllZone.StaticEffects.rePopulateStateBasedList();
@@ -2339,8 +2338,7 @@ class CardFactory_Planeswalkers {
                     emblem.setController(card.getController());
                     emblem.setOwner(card.getOwner());
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(emblem);        
+                    AllZone.GameAction.moveToPlay(emblem);        
                 }
                 
                 @Override

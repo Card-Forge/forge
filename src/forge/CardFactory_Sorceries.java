@@ -2853,19 +2853,18 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
 
-                if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                        && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
-                    double Count = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
-                    for(int i = 0; i < Count; i++) {
-                    	if(i + 1== Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
-                    Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
-                    Copy.setToken(true);
-                    Copy.setController(card.getController());
-                    play.add(Copy);
-                    }
-                }             
+                	if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                			&& CardFactoryUtil.canTarget(card, getTargetCard())) {
+                		PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
+                		double Count = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
+                		for(int i = 0; i < Count; i++) {       
+                			if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;
+                			Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
+                			Copy.setToken(true);
+                			Copy.setController(card.getController());
+                			AllZone.GameAction.moveToPlay(Copy);
+                		}
+                	}             
                 }//resolve()
             };
             
@@ -2923,19 +2922,18 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                 	card.setKicked(true);
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        PlayerZone_ComesIntoPlay.SimultaneousEntry = true;
-                        int Count = 5 * AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
-                        for(int i = 0; i < Count; i++) {
-                        	if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
-                        Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
-                        Copy.setToken(true);
-                        Copy.setController(card.getController());
-                        play.add(Copy);
-                        }
-                    }            
+                	if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                			&& CardFactoryUtil.canTarget(card, getTargetCard())) {
+                		PlayerZone_ComesIntoPlay.SimultaneousEntry = true;
+                		int Count = 5 * AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
+                		for(int i = 0; i < Count; i++) {
+                			if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;   
+                			Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
+                			Copy.setToken(true);
+                			Copy.setController(card.getController());
+                			AllZone.GameAction.moveToPlay(Copy);
+                		}    
+                	}            
                 }//resolve()
             };
             kicker.setKickerAbility(true);

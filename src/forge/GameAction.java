@@ -49,10 +49,12 @@ public class GameAction {
         	p.remove(c);
         }
         else{
+        	// things that were just created will not have zones!
         	//System.out.println(c.getName() + " " + zone.getZoneName());
         }
         Card moving = c;
-        if (!c.isToken()){
+        // Don't add the Token, unless it's moving to the battlefield
+        if (!c.isToken() || zone.is(Constant.Zone.Battlefield)){
 	     // If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
 	        if (p != null && p.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield))
 	        	moving = AllZone.CardFactory.copyCard(c);         
@@ -2392,10 +2394,10 @@ public class GameAction {
             AllZone.ComputerPlayer.drawCard();
         }
 
+        // todo: ManaPool should be moved to Player and be represented in the player panel
         ManaPool mp = AllZone.ManaPool;
         mp.setImageFilename("mana_pool");
         AllZone.Human_Battlefield.add(mp);
-        //ButtonUtil.reset();
 
         AllZone.InputControl.setInput(new Input_Mulligan());
         Phase.GameBegins = 1;

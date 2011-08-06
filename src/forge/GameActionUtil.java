@@ -869,7 +869,7 @@ public class GameActionUtil {
 					}
 							revealed.shuffle();
 							for(Card bottom:revealed) {
-								lib.add(bottom);
+								AllZone.GameAction.moveToBottomOfLibrary(bottom);
 							}
 					}
 				};
@@ -10231,9 +10231,7 @@ public class GameActionUtil {
 					c.addSpellAbility(devour);
 					c.addComesIntoPlayCommand(intoPlay);
 
-					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-					play.add(c);
-
+					AllZone.GameAction.moveToPlay(c);
 				}
 			};// Ability
 			ability.setStackDescription("Dragon Broodmother - put a 1/1 red and green Dragon token onto the battlefield.");

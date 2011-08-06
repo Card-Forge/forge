@@ -2543,7 +2543,6 @@ public class CombatUtil {
                 @Override
                 public void resolve() {
                 	PlayerZone library = AllZone.getZone(Constant.Zone.Library, attacker.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, attacker.getController()); 
                     
                     CardList enchantments = new CardList(library.getCards());
                     //final String turn = attacker.getController();
