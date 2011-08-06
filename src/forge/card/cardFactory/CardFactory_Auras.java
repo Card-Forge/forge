@@ -21,7 +21,6 @@ import forge.Constant;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
@@ -1552,8 +1551,8 @@ class CardFactory_Auras {
                     	AllZone.Stack.add(detach);
 				}
 			};
-			
-        	card.clearSpellAbility();	// clear out base abilities since we're overriding
+			// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();	// clear out base abilities since we're overriding
         	
             card.addSpellAbility(animate);
 			
