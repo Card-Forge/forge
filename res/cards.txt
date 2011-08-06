@@ -1,3 +1,11 @@
+Keldon Halberdier
+4 R
+Creature - Human Warrior
+no text
+4/1
+First Strike
+Suspend:4:R
+
 Duskrider Peregrine
 5 W
 Creature - Bird
@@ -21,14 +29,6 @@ no text
 4/4
 Flying
 Suspend:4:1 U
-
-Keldon Halberdier
-4 R
-Creature - Human Warrior
-no text
-4/1
-First strike
-Suspend:4:R
 
 Durkwood Baloth
 4 G G

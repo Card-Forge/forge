@@ -20386,60 +20386,63 @@ public class CardFactory implements NewConstants {
       //*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Reprisal")) {
-          final SpellAbility spell = new Spell(card) {
-			private static final long serialVersionUID = 8653455310355884536L;
+        if (cardName.equals("Reprisal")) {
+        	final SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = 8653455310355884536L;
 
-			public boolean canPlayAI() {
-				CardList list = new CardList(AllZone.Human_Play.getCards());
-				list = list.filter(new CardListFilter() {
-					public boolean addCard(Card c) {
-						return c.isCreature()  && c.getNetAttack() > 3 && CardFactoryUtil.canTarget(card, c);
-					}
-				});
-				if (list.isEmpty()) return false;
+        		public boolean canPlayAI() {
+        			CardList list = new CardList(AllZone.Human_Play.getCards());
+        			list = list.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.isCreature()  && c.getNetAttack() > 3 && CardFactoryUtil.canTarget(card, c);
+        				}
+        			});
+        			if (list.isEmpty()) return false;
 				
-				CardListUtil.sortAttack(list);
-                CardListUtil.sortFlying(list);
-				setTargetCard(list.get(0));
-                return true;
-			}//canPlayAI()
+        			CardListUtil.sortAttack(list);
+        			CardListUtil.sortFlying(list);
+        			setTargetCard(list.get(0));
+        			return true;
+        		}//canPlayAI()
 			
-			public void resolve() {
-          if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
-             AllZone.GameAction.destroy(getTargetCard());
-          }
-         }//resolve
-          };//SpellAbility
+        		public void resolve() {
+        			if (AllZone.GameAction.isCardInPlay(getTargetCard())) {
+        				// AllZone.GameAction.destroy(getTargetCard());
+        				AllZone.GameAction.destroyNoRegeneration(getTargetCard());
+        			}
+        		}//resolve
+        	};//SpellAbility
          
-          card.clearSpellAbility();
-          card.addSpellAbility(spell);
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
          
-          Input target = new Input() {
-			private static final long serialVersionUID = 4794354831721082791L;
-			public void showMessage() {
-                AllZone.Display.showMessage("Select target Creature to destroy");
-                ButtonUtil.enableOnlyCancel();
-             }
-             public void selectButtonCancel() {
-                stop();
-             }
-             public void selectCard(Card c, PlayerZone zone) {
-                if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() > 3)) {
-                   spell.setTargetCard(c);
-                   if(this.isFree()) 
-                   {
-                	   this.setFree(false);
-                	   AllZone.Stack.add(spell);
-                   	   stop();
-               	   }
-                   else
-                	   stopSetNext(new Input_PayManaCost(spell));
-                }
-             }
-          };//input
+        	Input target = new Input() {
+        		private static final long serialVersionUID = 4794354831721082791L;
+        		public void showMessage() {
+        			AllZone.Display.showMessage("Select target Creature to destroy");
+        			ButtonUtil.enableOnlyCancel();
+        		}
+        		public void selectButtonCancel() {
+        			stop();
+        		}
+        		public void selectCard(Card c, PlayerZone zone) {
+        			if (zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() > 3)) {
+        				spell.setTargetCard(c);
+        				if(this.isFree()) 
+        				{
+        					this.setFree(false);
+        					AllZone.Stack.add(spell);
+        					stop();
+        				}
+        				else
+        					stopSetNext(new Input_PayManaCost(spell));
+        			}
+        		}
+        	};//input
+        	
+        	card.setSVar("PlayMain1", "TRUE");
        
-        spell.setBeforePayMana(target);
+        	spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
         
