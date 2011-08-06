@@ -3353,6 +3353,12 @@ public class CardFactoryUtil {
         	return Integer.parseInt(number);
         }
         
+        //Manapool
+        if(l[0].contains("ManaPool")) {
+        	String color = l[0].split(":")[1];
+        	return AllZone.ManaPool.getAmountOfColor(color);
+        }
+        
         // count valid cards on the battlefield
         if(l[0].contains("Valid")) {
         	String restrictions = l[0].replace("Valid ", "");

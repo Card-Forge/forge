@@ -12759,20 +12759,6 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
-
-	public static Command Omnath = new Command() {
-		private static final long serialVersionUID = -22045167326100804L;
-
-		public void execute() {
-			// todo: when computer manapool is made, this needs to be fixed
-			CardList list = AllZoneUtil.getCardsInPlay("Omnath, Locus of Mana");
-			int bonus = AllZone.ManaPool.getAmountOfColor(Constant.Color.Green);
-			for(Card c: list){
-				c.setBaseAttack(bonus + 1);
-				c.setBaseDefense(bonus + 1);
-			}
-		}// execute()
-	};
 	
 	public static Command Dauntless_Escort = new Command() {
 		private static final long serialVersionUID = -2201201455269804L;
@@ -13879,7 +13865,6 @@ public class GameActionUtil {
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
-		commands.put("Omnath", Omnath);
 		commands.put("Phylactery_Lich", Phylactery_Lich);
 		commands.put("Plague_Rats", Plague_Rats);
 		commands.put("Primalcrux", Primalcrux);

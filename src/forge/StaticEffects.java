@@ -39,7 +39,6 @@ public class StaticEffects
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		
 		cardToEffectsList.put("Old Man of the Sea", new String[] {"Old_Man_of_the_Sea"});
-		cardToEffectsList.put("Omnath, Locus of Mana", new String[] {"Omnath"});
 		cardToEffectsList.put("Phylactery Lich", new String[]{"Phylactery_Lich"});
 		cardToEffectsList.put("Plague Rats", new String[] {"Plague_Rats"});
 		cardToEffectsList.put("Primalcrux",new String[] {"Primalcrux"});

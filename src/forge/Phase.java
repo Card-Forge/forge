@@ -11,7 +11,7 @@ public class Phase extends MyObservable
 	private int phaseIndex;
 	private int turn;
 
-	static int	 	GameBegins = 0; // Omnath
+	static int	 	GameBegins = 0;
     static int	   StormCount;
     static int	   HighTideCount = 0;
     static int	   PlayerSpellCount;

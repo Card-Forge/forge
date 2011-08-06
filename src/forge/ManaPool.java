@@ -117,15 +117,6 @@ public class ManaPool extends Card {
     	for(Mana m : manaList){
     		addManaToPool(floatingMana, m);
     	}
-
-        //Omnath, Locus of Mana Pump Trigger
-        if(Phase.GameBegins == 1) {
-            CardList omnathList = AllZoneUtil.getPlayerCardsInPlay(owner, "Omnath, Locus of Mana");
-            if(omnathList.size() > 0) {
-            	Command com = GameActionUtil.commands.get("Omnath");
-                com.execute();
-            }
-        }
     }
     
     public void addManaToPaying(String manaStr, Card card) {
@@ -174,13 +165,7 @@ public class ManaPool extends Card {
     {
     	if (floatingMana.size() == 0) return;
     	
-    	if(Phase.GameBegins == 1){
-	    	CardList omnathList = AllZoneUtil.getPlayerCardsInPlay(owner, "Omnath, Locus of Mana");
-	    	if (omnathList.size() == 0){
-	    		floatingMana.clear();
-	    		return;
-	    	}
-	    	
+    	if(AllZoneUtil.isCardInPlay("Omnath, Locus of Mana", owner)) {
 	    	// Omnath in play, clear all non-green mana
 	    	int i = 0;
 	    	while(i < floatingMana.size()){
@@ -462,17 +447,6 @@ public class ManaPool extends Card {
             String[] cost = formatMana(mability);
             m = subtractMultiple(cost, m);
         }
-        
-        // is omnath block necessary here?
-        
-        //Omnath, Locus of Mana Pump Trigger
-        if(Phase.GameBegins == 1) {
-	    	CardList omnathList = AllZoneUtil.getPlayerCardsInPlay(owner, "Omnath, Locus of Mana");
-            if(omnathList.size() > 0) {
-            	Command com = GameActionUtil.commands.get("Omnath");
-                com.execute();
-            }
-        }
 
         return m;
     }
@@ -500,18 +474,6 @@ public class ManaPool extends Card {
 	    	else
 	    		break;
     	}
-    	
-        //Omnath, Locus of Mana Pump Trigger
-        if(Phase.GameBegins == 1) {
-            CardList Omnath_Human = new CardList();
-            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);                   
-            Omnath_Human.addAll(play.getCards());
-            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
-            if(Omnath_Human.size() > 0) {
-            	Command com = GameActionUtil.commands.get("Omnath");
-                com.execute();
-            }
-        }
         return manaCost;
     }
     
