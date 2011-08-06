@@ -18,6 +18,17 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+dauthi_ghoul.jpg			http://www.wizards.com/global/images/magic/general/dauthi_ghoul.jpg
+dingus_egg.jpg				http://www.wizards.com/global/images/magic/general/dingus_egg.jpg
+dingus_staff.jpg			http://www.wizards.com/global/images/magic/general/dingus_staff.jpg
+elvish_hunter.jpg			http://www.wizards.com/global/images/magic/general/elvish_hunter.jpg
+eternity_snare.jpg			http://www.wizards.com/global/images/magic/general/eternity_snare.jpg
+fecundity.jpg				http://www.wizards.com/global/images/magic/general/fecundity.jpg
+goblin_sharpshooter.jpg		http://www.wizards.com/global/images/magic/general/goblin_sharpshooter.jpg
+moonlit_wake.jpg			http://www.wizards.com/global/images/magic/general/moonlit_wake.jpg
+proper_burial.jpg			http://www.wizards.com/global/images/magic/general/proper_burial.jpg
+sekkuar_deathkeeper.jpg		http://www.wizards.com/global/images/magic/general/sekkuar_deathkeeper.jpg
+soulcatcher.jpg				http://www.wizards.com/global/images/magic/general/soulcatcher.jpg
 benalish_trapper.jpg		http://www.wizards.com/global/images/magic/general/benalish_trapper.jpg
 merfolk_looter.jpg			http://www.wizards.com/global/images/magic/general/merfolk_looter.jpg
 thornscape_apprentice.jpg	http://www.wizards.com/global/images/magic/general/thornscape_apprentice.jpg
