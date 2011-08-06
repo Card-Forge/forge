@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 A:SP$DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ Fire Ambush deals 3 damage to target creature or player.
 SVar:Rarity:Common
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/fire_ambush.jpg
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Three_Kingdoms/fire_ambush.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/111.jpg
 End

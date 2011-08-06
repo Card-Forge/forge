@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Flying
 SVar:Rarity:Common
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Starter_1999/royal_falcon.jpg
+SVar:Picture:http://serv1.tcgimages.eu/img/cards/Starter_1999/royal_falcon.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/24.jpg
 SetInfo:S00|Common|http://magiccards.info/scans/en/st2k/14.jpg
 End

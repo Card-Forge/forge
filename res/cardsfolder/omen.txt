@@ -5,6 +5,6 @@ Text:Look at the top three cards of your library, then put them back in any orde
 K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/omen.jpg
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/omen.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/63.jpg
 End

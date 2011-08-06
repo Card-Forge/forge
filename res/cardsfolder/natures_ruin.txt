@@ -5,6 +5,6 @@ Text:no text
 A:SP$DestroyAll | Cost$ 2 B | ValidCards$ Creature.Green | SpellDescription$ Destroy all green creatures.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/natures_ruin.jpg
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/natures_ruin.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/26.jpg
 End

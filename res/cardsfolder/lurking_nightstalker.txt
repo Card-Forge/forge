@@ -4,6 +4,6 @@ Types:Creature Nightstalker
 Text:If Lurking Nightstalker attacks, it gets +2/+0 until the end of the turn.
 PT:1/1
 SVar:Rarity:Common
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/lurking_nightstalker.jpg
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/lurking_nightstalker.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/17.jpg
 End

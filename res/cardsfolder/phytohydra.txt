@@ -4,6 +4,6 @@ Types:Creature Plant Hydra
 Text:If damage would be dealt to Phytohydra, put that many +1/+1 counters on it instead.
 PT:1/1
 SVar:Rarity:Rare
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Ravnica_City_of_Guilds/phytohydra.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phytohydra.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/218.jpg
 End

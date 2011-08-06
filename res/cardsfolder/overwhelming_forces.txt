@@ -3,6 +3,6 @@ ManaCost:6 B B
 Types:Sorcery
 Text:Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
 SVar:Rarity:Rare
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/overwhelming_forces.jpg
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/overwhelming_forces.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/79.jpg
 End

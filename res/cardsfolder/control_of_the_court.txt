@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 A:SP$Draw | Cost$ 1 R | NumCards$ 4 | SpellDescription$ Draw four cards, then discard three cards at random. | SubAbility$ YouDiscard/3/AtRandom
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/control_of_the_court.jpg
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/control_of_the_court.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/105.jpg
 End

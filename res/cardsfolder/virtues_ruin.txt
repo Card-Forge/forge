@@ -5,6 +5,6 @@ Text:no text
 A:SP$DestroyAll | Cost$ 2 B | ValidCards$ Creature.White | SpellDescription$ Destroy all white creatures.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/virtues_ruin.jpg
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/virtues_ruin.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/39.jpg
 End

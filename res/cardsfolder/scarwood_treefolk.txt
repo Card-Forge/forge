@@ -5,6 +5,6 @@ Text:no text
 PT:3/5
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Common
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Time_Spiral/scarwood_treefolk.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scarwood_treefolk.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/214.jpg
 End

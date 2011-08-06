@@ -4,6 +4,6 @@ Types:Creature Zombie
 Text:When Dakmor Ghoul enters the battlefield, target opponent loses 2 life and you gain 2 life.
 PT:2/2
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Starter_1999/dakmor_ghoul.jpg
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Starter_1999/dakmor_ghoul.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/70.jpg
 End
