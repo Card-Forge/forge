@@ -108,4 +108,14 @@ Three random rares
 150
 noIcon
 
+12
+Barroom Brawl
+A druken giant of a man takes a swing at you, your brew spills and a fight breaks out.
+Hard
+Not Repeatable
+50
+Four random rares
+250
+noIcon
+
 End

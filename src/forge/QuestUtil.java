@@ -396,6 +396,23 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(3));
 		}
+		else if (id == 12)  // Barroom Brawl
+		{
+			CardList humanList = new CardList();
+			for (int i = 0; i < 3; i ++)
+			{
+				Card c = CardFactoryUtil.makeToken("Soldier Ally", "W 1 1 Soldier Ally", Constant.Player.Human, "W", 
+							new String[] {"Creature", "Soldier", "Ally"}, 1, 1, new String[] {""}).get(0);
+
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			
+			qa.addCompy("Lowland Giant");
+			
+			qa.setCardRewardList(pack.getRare(4));
+		}
 			
 	}
 	
