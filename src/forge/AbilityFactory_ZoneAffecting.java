@@ -164,38 +164,55 @@ public class AbilityFactory_ZoneAffecting {
 		return randomReturn;
 	}
 	
-	public static boolean drawTargetAI(AbilityFactory af){
-		Target tgt = af.getAbTgt();
-		HashMap<String,String> params = af.getMapParams();
-		// todo: handle deciding what X would be around here for Braingeyser type cards	
-		int numCards = 1;
-		if (params.containsKey("NumCards"))
-			numCards = Integer.parseInt(params.get("NumCards"));
-		
-		if (tgt != null){
-			tgt.resetTargets();
-			
-			if (!AllZone.HumanPlayer.cantLose() && numCards >= AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size()){
-				// Deck the Human? DO IT!
-				tgt.addTarget(AllZone.HumanPlayer);
-				return true;
-			}
-			
-			if (numCards >= AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size()){
-				// Don't deck your self
-				return false;
-			}
-			
-			tgt.addTarget(AllZone.ComputerPlayer);
-		}
-		else{
-			if (numCards >= AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size()){
-				// Don't deck yourself
-				return false;
-			}
-		}
-		return true;
-	}
+    public static boolean drawTargetAI(AbilityFactory af) {
+        Target tgt = af.getAbTgt();
+        HashMap<String,String> params = af.getMapParams();
+        
+        int computerHandSize = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
+        int humanLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size();
+        int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
+        int computerMaxHandSize = AllZone.ComputerPlayer.getMaxHandSize();
+        
+        // todo: handle deciding what X would be around here for Braingeyser type cards    
+        int numCards = 1;
+        if (params.containsKey("NumCards"))
+            numCards = Integer.parseInt(params.get("NumCards"));
+        
+        if (tgt != null) {
+            // ability is targeted
+            tgt.resetTargets();
+            
+            if (!AllZone.HumanPlayer.cantLose() && numCards >= humanLibrarySize) {
+                // Deck the Human? DO IT!
+                tgt.addTarget(AllZone.HumanPlayer);
+                return true;
+            }
+            
+            if (numCards >= computerLibrarySize) {
+                // Don't deck your self
+                return false;
+            }
+            
+            if (computerHandSize + numCards > computerMaxHandSize) {
+                // Don't draw too many cards and then risk discarding cards at EOT
+                return false;
+            }
+            
+            tgt.addTarget(AllZone.ComputerPlayer);
+        }
+        else {
+            // ability is not targeted
+            if (numCards >= computerLibrarySize) {
+                // Don't deck yourself
+                return false;
+            }
+            if (computerHandSize + numCards > computerMaxHandSize) {
+                // Don't draw too many cards and then risk discarding cards at EOT
+                return false;
+            }
+        }
+        return true;
+    }// drawTargetAI()
 	
 	public static void drawResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
