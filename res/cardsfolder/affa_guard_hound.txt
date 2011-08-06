@@ -4,6 +4,7 @@ Types:Creature Hound
 Text:When Affa Guard Hound comes into play, target creature gets +0/+3 until end of turn.
 PT:2/2
 K:Flash
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/affa_guard_hound.jpg
 End

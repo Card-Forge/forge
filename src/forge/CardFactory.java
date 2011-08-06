@@ -6006,7 +6006,6 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(intoPlay);
             
-
         }//*************** END ************ END **************************
         
 
@@ -6112,7 +6111,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Dragon Roost")) {
             final SpellAbility ability = new Ability(card, "5 R R") {
@@ -6144,6 +6142,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Mobilization")) {
             final SpellAbility ability = new Ability(card, "2 W") {
@@ -6157,7 +6156,6 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription("Mobilization - Put a 1/1 Soldier token into play.");
             card.addSpellAbility(ability);
             
-
         }//*************** END ************ END **************************
         
 
@@ -6175,7 +6173,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-
 
         //*************** START *********** START **************************
         else if(cardName.equals("Oblivion Ring")) {
@@ -6671,9 +6668,7 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-       
-        
-        
+  
         
         //*************** START *********** START **************************
         if(cardName.equals("Midsummer Revel")) {   
@@ -6701,6 +6696,7 @@ public class CardFactory implements NewConstants {
             ability.setDescription("G, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto the battlefield, where X is the number of verse counters on Midsummer Revel.");
         }//*************** END ************ END **************************
              
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Necrogenesis")) {
             final SpellAbility necrogen = new Ability(card, "2") {
@@ -6763,6 +6759,7 @@ public class CardFactory implements NewConstants {
             necrogen.setAfterPayMana(necroTarget);
             card.addSpellAbility(necrogen);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Night Soil")) {
@@ -6888,6 +6885,7 @@ public class CardFactory implements NewConstants {
             };//Input
             ability.setBeforePayMana(payLife);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Necropotence")) {
@@ -7133,7 +7131,6 @@ public class CardFactory implements NewConstants {
             
             card.addDestroyCommand(draw3Cards);
             
-
         }//*************** END ************ END **************************  
         
 
@@ -7225,6 +7222,7 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("AEther Spellbomb")) {
@@ -7376,6 +7374,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Sunbeam Spellbomb")) {
             final Ability ability = new Ability(card, "W") {
@@ -7399,6 +7398,7 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 5 life.");
             card.addSpellAbility(ability);
         } //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Necrogen Spellbomb")) {
@@ -7432,6 +7432,7 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
             card.addSpellAbility(ability);
         } //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sensei's Divining Top")) {
@@ -7534,6 +7535,7 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Quicksilver Amulet")) {
             final SpellAbility ability = new Ability_Tap(card, "4") {
@@ -7606,6 +7608,7 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************     
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Counterbalance")) {
             String player = card.getController();
@@ -7662,9 +7665,9 @@ public class CardFactory implements NewConstants {
             //ability.setBeforePayMana(new Input_PayManaCost(ability));
             card.addSpellAbility(ability);
             
-
         }
         //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Aluren")) {
@@ -7722,8 +7725,6 @@ public class CardFactory implements NewConstants {
         //*************** END ************ END **************************
         
 
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Survival of the Fittest")) {
             SpellAbility ability = new Ability(card, "G") {
@@ -7777,6 +7778,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END ************************** 
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Volrath's Dungeon")) {
             final SpellAbility dungeon = new Ability(card, "0") {
@@ -7901,10 +7903,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(dungeon);
             card.addSpellAbility(bail);
         }//*************** END ************ END **************************
-        
-        
 
-      
 
         //*************** START *********** START **************************
         if(cardName.equals("Ior Ruin Expedition")) {
@@ -7933,6 +7932,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         if(cardName.equals("Khalni Heart Expedition")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -7964,6 +7964,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Earthcraft")) {
             final SpellAbility a1 = new Ability(card, "0") {
@@ -8281,6 +8282,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Standstill")) {
             card.clearSpellAbility();
@@ -8377,6 +8379,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Voltaic Key")) {
             final Ability_Tap ability = new Ability_Tap(card, "1") {
@@ -8423,9 +8426,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
-       
-        
-        //**************************Equipment*****************************
         
 
         //*************** START ************ START **************************
@@ -8662,6 +8662,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Seal of Fire") || cardName.equals("Moonglove Extract")) {
             final Ability ability = new Ability(card, "0") {
@@ -8713,6 +8714,7 @@ public class CardFactory implements NewConstants {
                 }
             }, true, false));
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Seal of Removal")) {
@@ -8843,6 +8845,7 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Staff of Domination")) {
             
@@ -8954,6 +8957,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability5);
             
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         if(cardName.equals("Goblin Charbelcher")) {
@@ -9095,6 +9099,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Time Vault")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -9138,8 +9143,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
-    
-
         //*************** START *********** START **************************
         if(cardName.equals("Serpent Generator")) {
             final SpellAbility ability = new Ability_Tap(card, "4") {
@@ -9163,8 +9166,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
-        
-                
+                       
         
         //*************** START *********** START **************************
         else if(cardName.equals("Illusions of Grandeur")) {
@@ -9207,8 +9209,7 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(intoPlay);
             card.addLeavesPlayCommand(leavesPlay);
             
-        }//*************** END ************ END **************************
-       
+        }//*************** END ************ END **************************       
   
 	  
       //*************** START *********** START **************************
@@ -9350,9 +9351,6 @@ public class CardFactory implements NewConstants {
       //*************** END ************ END **************************
 
         
-    
-        
-     
       //*************** START *********** START **************************
       else if(cardName.equals("Helix Pinnacle"))
       {
@@ -9423,8 +9421,6 @@ public class CardFactory implements NewConstants {
         }//end Icy Manipulator
         //****************END*******END***********************
  
-
-
         
         //*****************************START*******************************
         else if(cardName.equals("Jandor's Saddlebags")) {
@@ -9456,7 +9452,6 @@ public class CardFactory implements NewConstants {
         }//****************END*******END***********************
         
        
- 
         //*************** START *********** START **************************
         else if(cardName.equals("Bottle of Suleiman")) {
            /*
@@ -9557,6 +9552,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Lodestone Bauble")) {
         	/* 1, Tap, Sacrifice Lodestone Bauble: Put up to four target basic
@@ -9654,6 +9650,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
      
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Grindstone")) {
         	Ability_Tap ab1 = new Ability_Tap(card, "3") {
@@ -9710,6 +9707,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Keening Stone")) {
         	/*
@@ -9764,6 +9762,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(new Input_PayManaCost(ability));
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Slate of Ancestry")) {
@@ -9804,6 +9803,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
       //*************** START *********** START **************************
         else if(cardName.equals("Glasses of Urza")) {
             final Ability_Tap ability = new Ability_Tap(card, "0") {
@@ -9833,6 +9833,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Everflowing Chalice")) {
         	final Ability_Mana addMana = new Ability_Mana(card, "tap: add 1 to your mana pool for each charge counter on Everflowing Chalice.") {
@@ -9868,6 +9869,7 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Chromatic Star")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -9885,11 +9887,7 @@ public class CardFactory implements NewConstants {
                 }
             };
             card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
-        
-
-    
-        
+        }//*************** END ************ END **************************   
    
         
         //*************** START *********** START **************************
@@ -9927,64 +9925,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
-/* Converted to keyword 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Fabricate")) {
-            SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 5274602734116058876L;
 
-				@Override
-                public boolean canPlayAI() {
-                    return 4 < AllZone.Phase.getTurn();
-                }
-                
-                @Override
-                public void resolve() {
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
-                    else computerResolve();
-                    
-                }
-                
-                public void computerResolve() {
-                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer);
-                    list = list.filter(AllZoneUtil.artifacts);
-                                        
-                    if(list.size() != 0) {
-                        //comp will just grab the first one it finds
-                        Card c = list.get(0);
-                        AllZone.GameAction.shuffle(card.getController());
-                        //move to hand
-                        AllZone.Computer_Library.remove(c);
-                        AllZone.Computer_Hand.add(c);
-                        
-                        CardList l = new CardList();
-                        l.add(c);
-                        AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
-                    }
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
-                    list = list.filter(AllZoneUtil.artifacts);
-                    
-                    if(list.size() != 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Select an artifact", list.toArray());
-                        
-                        AllZone.GameAction.shuffle(card.getController());
-                        if(o != null) {
-                            //put card in hand
-                            AllZone.Human_Library.remove(o);
-                            AllZone.Human_Hand.add((Card) o);
-                        }
-                    }//if
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-*/        
-      
         //*************** START *********** START **************************
         else if(cardName.equals("Curse of Wizardry")) {
             final Ability ability = new Ability(card, "0") {
@@ -10054,6 +9995,7 @@ public class CardFactory implements NewConstants {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
       
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Expedition Map")) {
         	final Ability_Tap ability = new Ability_Tap(card, "2") {
@@ -10080,7 +10022,6 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-     
        
         //*************** START *********** START **************************
         else if(cardName.equals("Tormod's Crypt")) {
@@ -10119,6 +10060,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Journey to Nowhere")) {
@@ -10292,14 +10234,6 @@ public class CardFactory implements NewConstants {
         	});//addSpellAbility
         }//*************** END ************ END **************************
 
-    
-        //*************** START ********** START *************************
-        if (cardName.equals("Finest Hour") || cardName.equals("Gaea's Anthem") ||
-        		cardName.equals("Glorious Anthem"))  
-        	// no card factory code, cards handled elsewhere, 
-        {
-        	card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
         else if(cardName.equals("Recurring Nightmare")) {
@@ -10364,6 +10298,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Mirror Universe")) {
         	/*
@@ -10411,6 +10346,7 @@ public class CardFactory implements NewConstants {
         	ability.setStackDescription(cardName+" - Exchange life totals with target opponent.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Jade Statue")) {
@@ -10466,6 +10402,7 @@ public class CardFactory implements NewConstants {
             
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Jester's Cap")) {
@@ -10503,6 +10440,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if (cardName.equals("An-Zerrin Ruins")) {
         	
@@ -10532,6 +10470,7 @@ public class CardFactory implements NewConstants {
             
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Tumble Magnet")) {
@@ -10572,6 +10511,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Creature;Artifact"));
         }//*************** END ************ END **************************
 
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
