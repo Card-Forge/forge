@@ -11297,45 +11297,41 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Fledgling_Djinn()
 	
-	private static void upkeep_Creakwood_Liege() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+    private static void upkeep_Creakwood_Liege() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Creakwood Liege");
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Creakwood Liege");
 
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					String[] choices = {"Yes", "No"};
+        Ability ability;
+        for (int i = 0; i < list.size(); i++) {
+            final Card crd = list.get(i);
+            ability = new Ability(list.get(i), "0") {
+                @Override
+                public void resolve() {
+                    
+                    if (player.equals(AllZone.HumanPlayer)) {
+                        String question = "Put a 1/1 black and green Worm creature token onto the battlefield?";
+                        if (showYesNoDialog(crd, question)) {
+                            CardFactoryUtil.makeToken("Worm", "BG 1 1 Worm", crd.getController(), "BG", 
+                                    new String[] {"Creature", "Worm"}, 1, 1, new String[] {""});
+                        }
+                    } else {
+                        CardFactoryUtil.makeToken("Worm", "BG 1 1 Worm", crd.getController(), "BG", 
+                                new String[] {"Creature", "Worm"}, 1, 1, new String[] {""});
+                    }
+                }// resolve()
+            };// Ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Creakwood Liege - ").append(player);
+            sb.append(" puts a 1/1 Green Black Worm creature token into play.");
+            ability.setStackDescription(sb.toString());
 
-					Object q = null;
-					if(player.equals(AllZone.HumanPlayer)) {
-						q = AllZone.Display.getChoiceOptional("Use Creakwood Liege?", choices);
-
-						if(q == null || q.equals("No")) return;
-						if(q.equals("Yes")) {
-							CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd.getController(), "B G", new String[] {
-									"Creature", "Worm"}, 1, 1, new String[] {""});
-						}
-					} else if(player.equals(AllZone.ComputerPlayer)) {
-						CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd.getController(), "B G", new String[] {
-								"Creature", "Worm"}, 1, 1, new String[] {""});
-					}
-				}// resolve()
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Creakwood Liege - ").append(player);
-			sb.append(" puts a 1/1 Green Black Worm creature token into play.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Creakwood_Liege
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Creakwood_Liege
 	
 	private static void upkeep_Murkfiend_Liege()
 	{
