@@ -3,7 +3,7 @@ ManaCost:B G
 Types:Creature Sliver
 Text:no text
 PT:2/2
-K:stPumpAll:Sliver:0/0/SVar=GainLife:no Condition:All Sliver creatures have "Sacrifice this creature: You gain 3 life."
+K:stPumpAll:Sliver:0/0/SVar=GainLife:no Condition:All Slivers have "Sacrifice this permanent: You gain 3 life."
 SVar:GainLife:AB$GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ 3 | Defined$ You | SpellDescription$ You gain 3 life.
 SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
