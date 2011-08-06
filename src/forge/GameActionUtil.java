@@ -4055,18 +4055,18 @@ public class GameActionUtil {
 	        	AllZone.Stack.add(ability);
         }
         
-        if(source.isEquipped()) {
+        /*if(source.isEquipped()) {
         	ArrayList<Card> equips = source.getEquippedBy();
         	for(Card equip:equips) {
         		/*
                  * Whenever equipped creature deals combat damage, put two
                  * charge counters on Umezawa's Jitte.
-                 */
+                 *
         		if(equip.getName().equals("Umezawa's Jitte")) {
         			equip.addCounter(Counters.CHARGE, 2);
         		}
         	}
-        }//isEquipped
+        }//isEquipped*/
     }
 	
 	//restricted to combat damage and dealing damage to creatures
