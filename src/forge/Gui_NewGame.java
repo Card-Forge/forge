@@ -101,6 +101,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private Action                  DOWNLOAD_ACTION_LQ   = new DownloadActionLQ();
     private Action                  IMPORT_PICTURE       = new ImportPictureAction();
     private Action                  CARD_SIZES_ACTION    = new CardSizesAction();
+    private Action					CARD_STACK_ACTION    = new CardStackAction();
     private Action                  ABOUT_ACTION         = new AboutAction();
     
     public static void main(String[] args) {
@@ -173,6 +174,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         if(Constant.Runtime.height[0] == 0) Constant.Runtime.height[0] = 98;
         
+        if(Constant.Runtime.stackSize[0] == 0) Constant.Runtime.stackSize[0] = 8;
 
         try {
             jbInit();
@@ -211,7 +213,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void setupMenu() {
         Action[] actions = {
-                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
+                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION, CARD_STACK_ACTION,
                 ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for(Action a:actions)
@@ -806,6 +808,29 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }
     }
     
+    public static class CardStackAction extends AbstractAction {
+
+		private static final long serialVersionUID = -3770527681359311455L;
+		private String[]          keys             = {"3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        private int[]             values           = {3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        
+        public CardStackAction() {
+            super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK));
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+            ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose the max size of a stack", 0, 1, keys);
+            if(ch.show()) try {
+                int index = ch.getSelectedIndex();
+                if(index == -1) return;
+                Constant.Runtime.stackSize[0] = values[index];
+                //not needed any more
+//                ImageCache.dumpCache();
+            } catch(Exception ex) {
+                ErrorViewer.showError(ex);
+            }
+        }
+    }
     
     public static class AboutAction extends AbstractAction {
         

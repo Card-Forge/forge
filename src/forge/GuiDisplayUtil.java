@@ -343,7 +343,7 @@ public class GuiDisplayUtil implements NewConstants {
                 }
                 
 
-                if(!startANewStack && atInStack == 4) {
+                if(!startANewStack && atInStack == Constant.Runtime.stackSize[0]) {
                     startANewStack = true;
                 }
                 
@@ -530,7 +530,7 @@ public class GuiDisplayUtil implements NewConstants {
                     startANewStack = false;
                 }
                 
-                if(!startANewStack && atInStack == 4) {
+                if(!startANewStack && atInStack == Constant.Runtime.stackSize[0]) {
                     startANewStack = true;
                 }
                 
