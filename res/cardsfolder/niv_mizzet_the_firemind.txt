@@ -1,5 +1,5 @@
 Name:Niv-Mizzet, the Firemind
-ManaCost:0
+ManaCost:2 U U R R
 Types:Legendary Creature Dragon Wizard
 Text:no text
 PT:4/4
