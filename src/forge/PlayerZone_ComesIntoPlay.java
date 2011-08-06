@@ -138,6 +138,20 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 		}
                 	}
                 }
+                
+                CardList ankhs = AllZoneUtil.getCardsInPlay("Ankh of Mishra");
+                final Card ankhLand = c;
+                for(Card ankh:ankhs) {
+                	final Card source = ankh;
+                	SpellAbility ability = new Ability(source, "") {
+                		@Override
+                		public void resolve() {
+                			AllZone.GameAction.addDamage(ankhLand.getController(), source, 2);
+                		}
+                	};
+                	ability.setStackDescription(source+" - deals 2 damage to "+ankhLand.getController());
+                	AllZone.Stack.add(ability);
+                }
             }//isLand()
             
             //hack to make tokens trigger ally effects:

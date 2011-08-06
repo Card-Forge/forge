@@ -1,0 +1,7 @@
+Name:Ankh of Mishra
+ManaCost:2
+Types:Artifact
+Text:no text
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ankh_of_mishra.jpg
+End
