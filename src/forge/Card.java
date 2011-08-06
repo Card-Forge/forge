@@ -2684,6 +2684,11 @@ public class Card extends MyObservable {
         	AllZone.Stack.add(ability2);
         }
         
+        if(source.getKeyword().contains("Deathtouch") && this.isCreature()) {
+            AllZone.GameAction.destroy(this);
+            //AllZone.Combat.removeFromCombat(card);
+        }
+        
         System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
         if(AllZoneUtil.isCardInPlay(this) && CardFactoryUtil.canDamage(source, this)) {
