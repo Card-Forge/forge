@@ -93,8 +93,8 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Darrin Stephens 4", "very hard", "U Affinity deck");
         addToDeckList("Darth Vader 3", "hard", "WU Battle of Wits style alternate win type deck with WoG");
         addToDeckList("Data 3", "hard", "B deck with Korlash, Heir to Blackblade and Liliana Vess");
-//        addToDeckList("Deadpool 2", "medium", "BR Singleton");
-//        addToDeckList("Deadpool 3", "hard", "B/R Extended, Good luck!");
+        addToDeckList("Deadpool 2", "medium", "BR deck with Ashenmoor Liege and Grixis Grimblade");
+        addToDeckList("Deadpool 3", "hard", "BR deck with Ashenmoor Liege and Grixis Grimblade");
 //        addToDeckList("Dick Grayson 3", "hard", "WU Constructed");
         addToDeckList("Dino 2", "medium", "Mono brown affinity deck with Affinity for artifacts and Modular cards");
         addToDeckList("Dino 3", "hard", "Mono brown affinity deck with Affinity for artifacts and Modular cards");
