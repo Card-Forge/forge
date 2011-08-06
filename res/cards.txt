@@ -1,3 +1,15 @@
+Entangling Vines
+3 G
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant tapped creature
+
+Glimmerdust Nap
+2 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant tapped creature
+
 Basalt Monolith
 3
 Artifact

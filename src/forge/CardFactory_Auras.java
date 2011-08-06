@@ -1148,6 +1148,108 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if (cardName.equals("Entangling Vines") || cardName.equals("Glimmerdust Nap")) {
+            
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 843412563175285562L;
+
+                @Override
+                public boolean canPlayAI() {
+                	
+                	CardList list = new CardList(AllZone.Human_Play.getCards());    // Target human creature
+                	list = list.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isCreature() && c.isTapped() && CardFactoryUtil.canTarget(card, c) && 
+                			      !c.getKeyword().contains("CARDNAME doesn't untap during your untap step.");
+                		}
+                	});
+                    
+                    if (list.isEmpty()) {
+                    	return false;
+                    } else {
+                    	CardListUtil.sortAttack(list);
+                        CardListUtil.sortFlying(list);
+                        setTargetCard(list.get(0));
+                    }
+                    return true;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
+                    
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+				private static final long serialVersionUID = -8694692627290877222L;
+
+				public void execute() {
+                    if (card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        if (! crd.getKeyword().contains("CARDNAME doesn't untap during your untap step."))
+                        	crd.addExtrinsicKeyword("CARDNAME doesn't untap during your untap step.");
+                    }
+                }//execute()
+            };//Command
+            
+            Command onUnEnchant = new Command() {
+				private static final long serialVersionUID = -8271629765371049921L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.removeExtrinsicKeyword("CARDNAME doesn't untap during your untap step.");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+				private static final long serialVersionUID = -8694692627290877222L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 5974269912215230241L;
+
+				@Override
+                public void showMessage() {
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList creatures = new CardList();
+                    creatures.addAll(comp.getCards());
+                    creatures.addAll(hum.getCards());
+                    creatures = creatures.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && c.isTapped() && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, creatures, "Select target tapped creature", true, false));
+                }
+            };
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         
         
     	// ************************************************************************
