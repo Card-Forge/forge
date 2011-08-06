@@ -1,9 +1,14 @@
 Name:Illumination
 ManaCost:W W
 Types:Instant
-Text:no text
-A:SP$ Counter | Cost$ W W | Type$ Spell | Destination$ Graveyard | CounterValid$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment  spell. Its controller gains life equal to its converted mana cost. | SubAbility$ GainLifeTgtOwner/dX
-SVar:dX:Count$TgtCardManaCost
+Text:(NOTE: This spell is rather buggy and should not be used at this time. When cast, it would cause a NPE. As a temporary fix, this card no longer has a drawback.)
+#
+# This might work if the AF_Counter code could handle (but we would still have the problem of determining target spell controller):
+# ExtraActions$ CC-GainLife(X)
+#
+A:SP$ Counter | Cost$ W W | Type$ Spell | Destination$ Graveyard | CounterValid$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
+# | SubAbility$ GainLifeTgtOwner/dX
+# SVar:dX:Count$TgtCardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illumination.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/225.jpg
