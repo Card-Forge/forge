@@ -7081,7 +7081,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Intrepid Hero")) {
+        else if (cardName.equals("Intrepid Hero")) {
             //tap ability - no cost - target creature
             
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -7089,7 +7089,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())
                             && getTargetCard().getNetAttack() >= 4) {
                         AllZone.GameAction.destroy(getTargetCard());
@@ -7098,25 +7098,26 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getHumanCreatures().size() != 0;
-                }
+                    return getCreature().size() != 0;
+                }//canPlayAI()
                 
-                @Override
-                public void chooseTargetAI() {
-                    CardList human = getHumanCreatures();
-                    human.shuffle();
-                    setTargetCard(human.get(0));
-                }
-                
-                CardList getHumanCreatures() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                CardList getCreature() {
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && 3 < c.getNetAttack();
+                            return CardFactoryUtil.canTarget(card, c)
+                                && !c.getKeyword().contains("Indestructible")
+                                && c.getNetAttack() > 3;
                         }
                     });
                     return list;
-                }
+                }//getCreature()
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(best);
+                }//chooseTargetAI()
             };//SpellAbility
             
             Input target = new Input() {
@@ -7135,8 +7136,10 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(c.isCreature() && zone.is(Constant.Zone.Play) && 
-                    		3 < c.getNetAttack() && CardFactoryUtil.canTarget(card, c)) {
+                    if (c.isCreature() 
+                            && zone.is(Constant.Zone.Play) 
+                            && 3 < c.getNetAttack() 
+                            && CardFactoryUtil.canTarget(card, c)) {
                         ability.setTargetCard(c);
                         stopSetNext(new Input_NoCost_TapAbility(ability));
                     }
