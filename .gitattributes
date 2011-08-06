@@ -7386,6 +7386,7 @@ res/cardsfolder/winters_grasp.txt -text svneol=native#text/plain
 res/cardsfolder/wipe_away.txt svneol=native#text/plain
 res/cardsfolder/wipe_clean.txt -text svneol=native#text/plain
 res/cardsfolder/wirecat.txt -text svneol=native#text/plain
+res/cardsfolder/wirewood_channeler.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_elf.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_guardian.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_herald.txt -text svneol=native#text/plain
