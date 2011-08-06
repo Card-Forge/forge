@@ -33,7 +33,9 @@ public class CardFactory_Instants {
                     
                 }//resolve
             };//SpellAbility
-            spell.setStackDescription(card.getName() + " - I do nothing but go to the graveyard.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - I do nothing but go to the graveyard.");
+            spell.setStackDescription(sb.toString());
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -84,12 +86,11 @@ public class CardFactory_Instants {
               };
               spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
               
-              
               card.addSpellAbility(spell);            
               
           }//*************** END ************ END ************************** 
     
-    	 //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if (cardName.equals("Brave the Elements")) {
         	/**
         	 *  This card now works slightly better than it did before the spAllPump 
@@ -162,9 +163,9 @@ public class CardFactory_Instants {
 					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     list.addAll(play.getCards());
                     list = list.filter(new CardListFilter() {
-                       public boolean addCard(Card c) {
-                          return c.isWhite();
-                       }
+                        public boolean addCard(Card c) {
+                           return c.isWhite();
+                        }
                     });
                     
                     for (int i = 0; i < list.size(); i++) {
@@ -181,8 +182,8 @@ public class CardFactory_Instants {
                             }
                         };//Command
                         
-                        if (AllZone.GameAction.isCardInPlay(target[0]) && 
-                        		!target[0].getKeyword().contains(kboost)) {
+                        if (AllZone.GameAction.isCardInPlay(target[0]) 
+                        		&& !target[0].getKeyword().contains(kboost)) {
                             target[0].addExtrinsicKeyword(kboost);
                             
                             AllZone.EndOfTurn.addUntil(untilEOT);
@@ -262,8 +263,8 @@ public class CardFactory_Instants {
                         Card c = target[i];
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
                         
-                        if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) AllZone.GameAction.moveTo(
-                                hand, c);
+                        if(AllZone.GameAction.isCardInPlay(c) 
+                        		&& CardFactoryUtil.canTarget(card, c)) AllZone.GameAction.moveTo(hand, c);
                     }
                 }//resolve()
             };//SpellAbility
@@ -288,10 +289,12 @@ public class CardFactory_Instants {
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
                     //must target creature you control
-                    if(index[0] == 0 && !c.getController().equals(card.getController())) return;
+                    if(index[0] == 0 
+                    	&& !c.getController().equals(card.getController())) return;
                     
                     //must target creature you don't control
-                    if(index[0] == 1 && c.getController().equals(card.getController())) return;
+                    if(index[0] == 1 
+                    	&& c.getController().equals(card.getController())) return;
                     
 
                     if(c.isCreature() && zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(card, c)) {
@@ -610,10 +613,16 @@ public class CardFactory_Instants {
             spell_two.setAdditionalManaCost("5");
             
             spell_one.setDescription("Draw a card.");
-            spell_one.setStackDescription(cardName + " - " + card.getController() + " draws a card.");
+            
+            StringBuilder sb1 = new StringBuilder();
+            sb1.append(cardName).append(" - ").append(card.getController()).append(" draws a card.");
+            spell_one.setStackDescription(sb1.toString());
+            
             spell_two.setDescription("Buyback 5 (You may pay an additional 5 as you cast this spell. If you do, put this card into your hand as it resolves.)");
-            // spell_two.setDescription("Buyback 5 - Pay 5 U , put this card into your hand as it resolves.");
-            spell_two.setStackDescription(cardName + " - (Buyback) " + card.getController() + " draws a card.");
+            
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(cardName).append(" - (Buyback) ").append(card.getController()).append(" draws a card.");
+            spell_two.setStackDescription(sb2.toString());
             spell_two.setIsBuyBackAbility(true);
             
             card.clearSpellAbility();
@@ -808,7 +817,9 @@ public class CardFactory_Instants {
                 }
             };
             spell.setDescription("Tap all creatures.");
-            spell.setStackDescription(card.getName() + " - Tap all creatures");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Tap all creatures");
+            spell.setStackDescription(sb.toString());
             
             final SpellAbility bounce = new Spell(card) {
                 private static final long serialVersionUID = 6331598238749406160L;
@@ -842,7 +853,10 @@ public class CardFactory_Instants {
                 
             };
             bounce.setDescription("You may return two Islands you control to their owner's hand rather than pay Ensnare's mana cost.");
-            bounce.setStackDescription(card.getName() + " - Tap all creatures.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getName()).append(" - Tap all creatures.");
+            bounce.setStackDescription(sb2.toString());
+            
             bounce.setManaCost("0");
             
             final Input bounceIslands = new Input() {
@@ -1125,7 +1139,6 @@ public class CardFactory_Instants {
    					AllZone.CardFactory.copySpellontoStack(card,getTargetCard(), true);
                         done();
                 }//resolve()
-    				
                     
                     public boolean canPlay()
                     {
@@ -1215,8 +1228,6 @@ public class CardFactory_Instants {
             card.setCopiesSpells(true);
             spell_one.setBeforePayMana(runtime1);
             spell_two.setBeforePayMana(runtime2);
-
-
         }//*************** END ************ END **************************
         
         
@@ -1575,8 +1586,10 @@ public class CardFactory_Instants {
                 }
             };
             spell.setDescription("Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.");
-            spell.setStackDescription(cardName
-                    + " - Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.");
+            spell.setStackDescription(sb.toString());
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
@@ -1825,7 +1838,10 @@ public class CardFactory_Instants {
             
             if(cardName.equals("Daze")) {
                 spell.setDescription("Counter target spell unless its controller pays 1.");
-                spell.setStackDescription(card.getName() + " - Counter target spell unless its controller pays 1.");
+                StringBuilder sb = new StringBuilder();
+                sb.append(card.getName()).append(" - Counter target spell unless its controller pays 1.");
+                spell.setStackDescription(sb.toString());
+                
                 final SpellAbility bounce = new Spell(card) {
                     private static final long serialVersionUID = -8310299673731730438L;
                     
@@ -1857,8 +1873,9 @@ public class CardFactory_Instants {
                     
                 };
                 bounce.setDescription("You may return an Island you control to their owner's hand rather than pay Daze's mana cost.");
-                bounce.setStackDescription(card.getName()
-                        + " - Counter target spell unless its controller pays 1.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(card.getName()).append(" - Counter target spell unless its controller pays 1.");
+                bounce.setStackDescription(sb2.toString());
                 bounce.setManaCost("0");
                 
                 final Input bounceIslands = new Input() {
@@ -3431,7 +3448,9 @@ public class CardFactory_Instants {
                 }
             };
             spell.setDescription("Draw two cards.");
-            spell.setStackDescription(card.getName() + " - Draw two cards.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Draw two cards.");
+            spell.setStackDescription(sb.toString());
             
             final SpellAbility bounce = new Spell(card) {
                 private static final long serialVersionUID = 1950742710354343569L;
@@ -3451,7 +3470,9 @@ public class CardFactory_Instants {
                 
             };
             bounce.setDescription("You may return two Islands you control to their owner's hand rather than pay Gush's mana cost.");
-            bounce.setStackDescription(card.getName() + " - Draw two cards.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getName()).append(" - Draw two cards.");
+            bounce.setStackDescription(sb2.toString());
             bounce.setManaCost("0");
             
             final Input bounceIslands = new Input() {
@@ -3538,7 +3559,9 @@ public class CardFactory_Instants {
                 }
             };
             spell.setDescription("Counter target spell.");
-            spell.setStackDescription(card.getName() + " - Counter target spell.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Counter target spell.");
+            spell.setStackDescription(sb.toString());
             
             final SpellAbility bounce = new Spell(card) {
                 private static final long serialVersionUID = -8310299673731730438L;
@@ -3571,7 +3594,9 @@ public class CardFactory_Instants {
                 
             };
             bounce.setDescription("You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.");
-            bounce.setStackDescription(card.getName() + " - Counter target spell.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getName()).append(" - Counter target spell.");
+            bounce.setStackDescription(sb2.toString());            
             bounce.setManaCost("0");
             
             final Input bounceIslands = new Input() {
@@ -3658,7 +3683,9 @@ public class CardFactory_Instants {
                 }
             };
             spell.setDescription("Counter target spell.");
-            spell.setStackDescription(card.getName() + " - Counter target spell.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Counter target spell.");
+            spell.setStackDescription(sb.toString());
             
             final SpellAbility alt = new Spell(card) {
                 private static final long serialVersionUID = -8643870743780757816L;
@@ -3695,7 +3722,9 @@ public class CardFactory_Instants {
                 
             };
             alt.setDescription("You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.");
-            alt.setStackDescription(card.getName() + " - Counter target spell.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getName()).append(" - Counter target spell.");
+            alt.setStackDescription(sb2.toString());
             alt.setManaCost("0");
             
             final Input exileBlue = new Input() {
@@ -3816,8 +3845,13 @@ public class CardFactory_Instants {
   			    return humanFliers.size() > (compFliers.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
   			}
       	  };
-      	  spell.setDescription(cardName + " deals X damage to each creature with flying and each player.");
-      	  spell.setStackDescription(card + " - deals X damage to each creature with flying and each player.");
+      	  StringBuilder sbDesc = new StringBuilder();
+      	  sbDesc.append(cardName).append(" deals X damage to each creature with flying and each player.");
+      	  spell.setDescription(sbDesc.toString());
+      	  
+      	  StringBuilder sbStack = new StringBuilder();
+      	  sbStack.append(card).append(" - deals X damage to each creature with flying and each player.");
+       	  spell.setStackDescription(sbStack.toString());
       	  
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -3882,8 +3916,13 @@ public class CardFactory_Instants {
   			    return human.size() > (comp.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
   			}
       	  };
-      	  spell.setDescription(cardName + " deals X damage to each creature without "+ keyword[0]+" and each player.");
-      	  spell.setStackDescription(card + " - deals X damage to each creature without " +keyword[0] +" and each player.");
+      	  StringBuilder sbDesc = new StringBuilder();
+      	  sbDesc.append(cardName).append(" deals X damage to each creature without ").append(keyword[0]).append(" and each player.");
+      	  spell.setDescription(sbDesc.toString());
+      	  
+      	  StringBuilder sbStack = new StringBuilder();
+      	  sbStack.append(card).append(" - deals X damage to each creature without ").append(keyword[0]).append(" and each player.");
+      	  spell.setStackDescription(sbStack.toString());
       	  
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -4106,7 +4145,9 @@ public class CardFactory_Instants {
       	  };
       	  if (card.getName().equals("Lull") || card.getName().equals("Angelsong")) {
       		  spell.setDescription("Prevent all combat damage that would be dealt this turn.");
-      		  spell.setStackDescription(card.getName() + " - Prevent all combat damage that would be dealt this turn.");
+      		  StringBuilder sb = new StringBuilder();
+      		  sb.append(card.getName()).append(" - Prevent all combat damage that would be dealt this turn.");
+      		  spell.setStackDescription(sb.toString());
       	  }
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -4164,8 +4205,13 @@ public class CardFactory_Instants {
   			    return humanAll.size() > (compAll.size() + 2);
   			}
       	  };
-      	  spell.setDescription(cardName + " deals X damage to each creature.");
-      	  spell.setStackDescription(cardName + " - deals X damage to each creature.");
+      	  StringBuilder sbDesc = new StringBuilder();
+      	  sbDesc.append(cardName).append(" deals X damage to each creature.");
+      	  spell.setDescription(sbDesc.toString());
+      	  
+      	  StringBuilder sbStack = new StringBuilder();
+      	  sbStack.append(cardName).append(" - deals X damage to each creature.");
+      	  spell.setStackDescription(sbStack.toString());
       	  
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -4330,7 +4376,9 @@ public class CardFactory_Instants {
                 }
             };//SpellAbility
             
-            spell.setDescription(cardName+" - deal 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - deal 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.");
+            spell.setDescription(sb.toString());
             
             final SpellAbility kicker = new Spell(card) {
 				private static final long serialVersionUID = 7608486082373416819L;
@@ -4530,7 +4578,10 @@ public class CardFactory_Instants {
         			return false;
         		}
         	};//spell
-        	spell.setStackDescription(cardName+" - Rearrange the top X cards in your library in any order.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Rearrange the top X cards in your library in any order.");
+        	spell.setStackDescription(sb.toString());
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -4574,7 +4625,11 @@ public class CardFactory_Instants {
         			}
         		};
         	};// SpellAbility
-        	spell.setStackDescription(cardName+" - Deal 6 damage to all creatures and all players.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Deal 6 damage to all creatures and all players.");
+        	spell.setStackDescription(sb.toString());
+        	
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
@@ -4822,7 +4877,11 @@ public class CardFactory_Instants {
                     AllZone.EndOfCombat.addAt(atEOT);
                 }//resolve
             };//SpellAbility
-            spell.setStackDescription(card.getName() + " - All creatures that can attack must do so or be destroyed.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - All creatures that can attack must do so or be destroyed.");
+            spell.setStackDescription(sb.toString());
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -4853,7 +4912,11 @@ public class CardFactory_Instants {
                 	for(Card land:lands) land.untap();
                 }
             };//SpellAbility
-            spell.setStackDescription(card.getName() + " - untap all lands you control.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - untap all lands you control.");
+            spell.setStackDescription(sb.toString());
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
