@@ -470,32 +470,6 @@ class CardFactory_Lands {
             tendo.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Graypelt Refuge") || cardName.equals("Sejiri Refuge")
-                || cardName.equals("Jwar Isle Refuge") || cardName.equals("Akoum Refuge")
-                || cardName.equals("Kazandu Refuge")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().gainLife(1, card);
-                }
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 5055232386220487221L;
-                
-                public void execute() {
-                    card.tap();
-                    
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 1 life");
-                    ability.setStackDescription(sb.toString());
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Faerie Conclave")) {

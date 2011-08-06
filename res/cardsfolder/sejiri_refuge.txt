@@ -1,9 +1,11 @@
 Name:Sejiri Refuge
 ManaCost:no cost
 Types:Land
-Text:Sejiri Refuge enters the battlefield tapped.\r\nWhen Seijiri Refuge enters the battlefield, you gain 1 life.
+Text:When CARDNAME enters the battlefield, you gain 1 life.
 K:tap: add W
 K:tap: add U
+K:etbGainLife:1
+K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_refuge.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/224.jpg
