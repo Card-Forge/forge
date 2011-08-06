@@ -6813,6 +6813,7 @@ res/lib/miglayout-3.7.3.1-swing.jar -text svneol=unset#unset
 res/lib/napkinlaf-1.2.jar -text svneol=unset#unset
 res/lib/nimrodlf.jar -text svneol=unset#unset
 res/lib/substance.jar -text svneol=unset#unset
+res/lib/xstream-1.3.1.jar -text svneol=unset#unset
 res/main.properties svneol=native#text/plain
 res/mtg-data.txt svneol=native#text/plain
 res/pics/BookIcon.png -text svneol=unset#image/png
