@@ -1936,6 +1936,7 @@ public class CardFactory implements NewConstants {
         */
         
 
+        /* Converted cards to AF_Untap
         if(hasKeyword(card, "Untap") != -1) {
             int n = hasKeyword(card, "Untap");
             if(n != -1) {
@@ -1948,6 +1949,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(CardFactoryUtil.ability_Untap(card, manacost));
             }
         }
+        */
         
         if(hasKeyword(card, "Remove three spore counters") != -1) {
             int n = hasKeyword(card, "Remove three spore counters");
