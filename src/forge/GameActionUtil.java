@@ -10143,6 +10143,41 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command Hada_Spy_Patrol  = new Command() {
+		private static final long serialVersionUID = 2343715852240209999L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Hada Spy Patrol");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+				}
+				else if ( lcs >=1 && lcs < 3 )  //levels 1-2
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(2);
+					c.addNonStackingIntrinsicKeyword("Unblockable");
+				}
+				else
+				{
+					c.setBaseAttack(4);
+					c.setBaseDefense(4);
+					c.addNonStackingIntrinsicKeyword("Unblockable");
+					c.addNonStackingIntrinsicKeyword("Shroud");
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15561,6 +15596,7 @@ public class GameActionUtil {
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
+		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
