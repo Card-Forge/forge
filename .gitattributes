@@ -470,6 +470,7 @@ res/cardsfolder/blightning.txt -text svneol=native#text/plain
 res/cardsfolder/blightspeaker.txt -text svneol=native#text/plain
 res/cardsfolder/blind_creeper.txt -text svneol=native#text/plain
 res/cardsfolder/blind_phantasm.txt -text svneol=native#text/plain
+res/cardsfolder/blind_spot_giant.txt -text svneol=native#text/plain
 res/cardsfolder/blinding_light.txt -text svneol=native#text/plain
 res/cardsfolder/blinding_mage.txt -text svneol=native#text/plain
 res/cardsfolder/blinking_spirit.txt -text svneol=native#text/plain
@@ -2326,6 +2327,7 @@ res/cardsfolder/karma.txt -text svneol=native#text/plain
 res/cardsfolder/karmic_guide.txt -text svneol=native#text/plain
 res/cardsfolder/karoo_meerkat.txt -text svneol=native#text/plain
 res/cardsfolder/karplusan_forest.txt -text svneol=native#text/plain
+res/cardsfolder/karplusan_giant.txt -text svneol=native#text/plain
 res/cardsfolder/karplusan_strider.txt -text svneol=native#text/plain
 res/cardsfolder/karplusan_wolverine.txt -text svneol=native#text/plain
 res/cardsfolder/kasimir_the_lone_wolf.txt -text svneol=native#text/plain
@@ -5479,6 +5481,7 @@ res/quest/themes/Equipment[!!-~]W.thm -text
 res/quest/themes/Flying[!!-~]W.thm -text
 res/quest/themes/Flying[!!-~]WR.thm -text
 res/quest/themes/Flying[!!-~]WU.thm -text
+res/quest/themes/Giants[!!-~]R.thm -text
 res/quest/themes/Goblins[!!-~]BR.thm -text
 res/quest/themes/Goblins[!!-~]R.thm -text
 res/quest/themes/Indestructibility[!!-~]WB.thm -text
