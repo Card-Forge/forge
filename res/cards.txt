@@ -1,3 +1,33 @@
+Akki Raider
+1 R
+Creature Goblin Warrior
+no text
+2/1
+WheneverKeyword:PermanentIntoGraveyard:Type/Land:Play:StatsPumpEOT/1/0:Self:ASAP:No_Condition:No Special Condition:Whenever a land is put into a graveyard from the battlefield, Akki Raider gets +1/+0 until end of turn.
+
+Rockslide Elemental
+2 R
+Creature Elemental
+no text
+1/1
+First Strike
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Rockslide Elemental.
+
+Pelakka Wurm
+4 G G G
+Creature Wurm
+no text
+7/7
+Trample
+WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/7:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Pelakka Wurm enters the battlefield, you gain 7 life.
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Pelakka Wurm is put into a graveyard from the battlefield, draw a card.
+
+Aether Flash
+2 R R
+Enchantment
+no text
+WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, Æther Flash deals 2 damage to it.
+
 Nettle Sentinel
 G
 Creature Elf Warrior

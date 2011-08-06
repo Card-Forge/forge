@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+akki_raider.jpg              	 http://www.wizards.com/global/images/magic/general/akki_raider.jpg
+rockslide_elemental.jpg                  http://www.wizards.com/global/images/magic/general/rockslide_elemental.jpg
+pelakka_wurm.jpg			http://www.wizards.com/global/images/magic/general/pelakka_wurm.jpg
+aether_flash.jpg			http://www.wizards.com/global/images/magic/general/aether_flash.jpg
 nettle_sentinel.jpg              	 http://www.wizards.com/global/images/magic/general/nettle_sentinel.jpg
 kami_of_the_hunt.jpg                  http://www.wizards.com/global/images/magic/general/kami_of_the_hunt.jpg
 scaled_hulk.jpg			http://www.wizards.com/global/images/magic/general/scaled_hulk.jpg
