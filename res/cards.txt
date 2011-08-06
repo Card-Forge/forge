@@ -1,5 +1,5 @@
 Mind's Desire
-U
+4 U U
 Sorcery
 Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.) Storm (When you cast this spell, copy it for each spell cast before it this turn.)
 Storm
