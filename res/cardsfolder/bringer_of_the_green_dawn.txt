@@ -1,7 +1,7 @@
 Name:Bringer of the Green Dawn
 ManaCost:7 G G
 Types:Creature Bringer
-Text:At the beginning of your upkeep, you may put a 3/3 green Beast creature token into play.
+Text:At the beginning of your upkeep, you may put a 3/3 green Beast creature token onto the battlefield.
 PT:5/5
 K:Trample
 SVar:AltCost:W U B R G

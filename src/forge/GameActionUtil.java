@@ -10618,45 +10618,46 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Dragon_Broodmother()
 
-	private static void upkeep_Bringer_of_the_Green_Dawn() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
+    private static void upkeep_Bringer_of_the_Green_Dawn() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Bringer of the Green Dawn");
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Bringer of the Green Dawn");
 
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					String[] choices = {"Yes", "No"};
+        Ability ability;
+        for (int i = 0; i < list.size(); i++) {
+            final Card crd = list.get(i);
+            ability = new Ability(list.get(i), "0") {
+                @Override
+                public void resolve() {
+                    
+                    if (player.equals(AllZone.HumanPlayer)) {
+                        String question = "Place a 3/3 green Beast creature token onto the battlefield?";
 
-					Object q = null;
-					if(player.equals(AllZone.HumanPlayer)) {
-						q = AllZone.Display.getChoiceOptional("Use Bringer of the Green Dawn?", choices);
+                        if (GameActionUtil.showYesNoDialog(crd, question)) {
+                            makeBeastToken();
+                        }
+                    } // player is computer
+                    else {
+                        makeBeastToken();
+                    }
+                }// resolve()
+                
+                private void makeBeastToken() {
+                    CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd.getController(), "G", 
+                            new String[] {"Creature", "Beast"}, 3, 3, new String[] {""});
+                }
+            };// Ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Bringer of the Green Dawn - ").append(player);
+            sb.append(" may place a 3/3 Green Beast token creature onto the battlefield.");
+            ability.setStackDescription(sb.toString());
 
-						if(q == null || q.equals("No")) return;
-						if(q.equals("Yes")) {
-							CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd.getController(), "G", new String[] {
-									"Creature", "Beast"}, 3, 3, new String[] {""});
-						}
-					} else if(player.equals(AllZone.ComputerPlayer)) {
-						CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd.getController(), "G", new String[] {
-								"Creature", "Beast"}, 3, 3, new String[] {""});
-					}
-				}// resolve()
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Bringer of the Green Dawn - ").append(player);
-			sb.append(" puts a 3/3 Green Beast token creature into play.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Bringer_of_the_Green_Dawn()
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Bringer_of_the_Green_Dawn()
 
 	private static void upkeep_Bringer_of_the_Blue_Dawn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
