@@ -5,6 +5,7 @@ import forge.error.ErrorViewer;
 public class Mana_PartColorless extends Mana_Part {
     private int manaNeeded;
     public void addToManaNeeded(int additional) { manaNeeded += additional; }
+    public int getManaNeeded() { return manaNeeded; }
     
     //String manaCostToPay is like "1", "4", but NO COLOR
     public Mana_PartColorless(String manaCostToPay) {

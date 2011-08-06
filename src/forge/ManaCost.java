@@ -162,6 +162,35 @@ public class ManaCost {
         return true;
     }
     
+    public void combineManaCost(String extra){
+    	ArrayList<Object> extraParts = split(extra);
+    	
+    	Mana_PartColorless part = null;
+    	for(int i = 0; i < manaPart.size(); i++){
+    		Object o = manaPart.get(i);
+    		if (o instanceof Mana_PartColorless)
+    			part = (Mana_PartColorless)o;
+    	}
+    	if (part != null){
+    		manaPart.remove(part);
+    	}
+
+    	while(extraParts.size() > 0){
+    		Object o = extraParts.get(0);
+    		if (o instanceof Mana_PartColorless){
+    			if (part == null)
+    				part = (Mana_PartColorless)o;
+    			else{
+    				part.addToManaNeeded(((Mana_PartColorless)o).getManaNeeded());
+    			}
+    		}
+    		else{
+    			manaPart.add(o);
+    		}
+    		extraParts.remove(o);
+    	}
+    }
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

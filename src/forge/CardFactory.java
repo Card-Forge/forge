@@ -7925,6 +7925,51 @@ public class CardFactory implements NewConstants {
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
     	
+    	// todo: certain cards have two different kicker types, kicker will need to be written differently to handle this
+    	// todo: kicker costs can only be mana right now i think?
+    	int kicker = hasKeyword(card, "Kicker");
+    	if (kicker != -1){
+            final SpellAbility kickedSpell = new Spell(card) {
+                private static final long serialVersionUID = -1598664196463358630L;
+                
+                @Override
+                public void resolve() {
+                    card.setKicked(true);
+                    AllZone.GameAction.moveToPlay(card);
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return super.canPlay() && Phase.canCastSorcery(card.getController());
+                }
+                
+            };
+            String parse = card.getKeyword().get(kicker).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String k[] = parse.split(":");
+            final String kickerCost = k[1];
+            
+            ManaCost mc = new ManaCost(card.getManaCost());
+            mc.combineManaCost(kickerCost);
+
+            kickedSpell.setKickerAbility(true);
+            kickedSpell.setManaCost(mc.toString());
+            kickedSpell.setAdditionalManaCost(kickerCost);
+            
+            StringBuilder desc = new StringBuilder();
+            desc.append("Kicker ").append(kickerCost).append(" (You may pay an additional ");
+            desc.append(kickerCost).append(" as you cast this spell.)");
+            
+            kickedSpell.setDescription(desc.toString());
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Kicked)");
+            kickedSpell.setStackDescription(sb.toString());
+            
+            card.addSpellAbility(kickedSpell);
+    	}
+    	
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
             if(n != -1) {
