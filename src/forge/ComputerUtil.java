@@ -246,6 +246,11 @@ public class ComputerUtil
          {
             land.get(i).tap();
             cost.subtractMana(colors.get(j));
+            
+            if (land.get(i).getName().equals("Forbidden Orchard")) {
+            	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(land.get(i), Constant.Player.Human));
+            }
+            
             //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
 
          }

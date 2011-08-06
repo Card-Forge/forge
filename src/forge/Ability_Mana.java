@@ -102,7 +102,8 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
 
 				public void execute()
         		{
-        			//currently only human can use this card:
+					//  The computer can now use this card. A version of the 
+					//  line of code below was added to ComputerUtil.payManaCost()
         			AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(crd, Constant.Player.Computer));
         		}
         	});
