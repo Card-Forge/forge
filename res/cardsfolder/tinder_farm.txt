@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:tap: add G
 K:tap, Sacrifice CARDNAME: Add R W to your mana pool.
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_farm.jpg

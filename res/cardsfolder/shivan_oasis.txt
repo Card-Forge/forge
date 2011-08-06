@@ -2,7 +2,7 @@ Name:Shivan Oasis
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add R
 K:tap: add G
 SVar:Rarity:Uncommon

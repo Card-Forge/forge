@@ -2,7 +2,7 @@ Name:Door to Nothingness
 ManaCost:5
 Types:Artifact
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/door_to_nothingness.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/115.jpg

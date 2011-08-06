@@ -2,7 +2,7 @@ Name:Remote Isle
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add U
 K:Cycling:2
 SVar:Rarity:Common

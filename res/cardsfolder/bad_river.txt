@@ -2,7 +2,7 @@ Name:Bad River
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 A:AB$ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Island,Swamp | ChangeNum$ 1 | SpellDescription$ Search your library for an Island or Swamp card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_river.jpg

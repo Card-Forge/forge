@@ -8,7 +8,7 @@ K:tap, Sacrifice CARDNAME: Add U to your mana pool.
 K:tap, Sacrifice CARDNAME: Add B to your mana pool.
 K:tap, Sacrifice CARDNAME: Add R to your mana pool.
 K:tap, Sacrifice CARDNAME: Add G to your mana pool.
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timberland_ruins.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/330.jpg

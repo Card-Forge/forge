@@ -2,7 +2,7 @@ Name:Tranquil Thicket
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add G
 K:Cycling:G
 SVar:Rarity:Common

@@ -2,7 +2,7 @@ Name:Cloudpost
 ManaCost:no cost
 Types:Land Locus
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add 1 to your mana pool for each Locus on the battlefield.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

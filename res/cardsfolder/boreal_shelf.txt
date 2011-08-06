@@ -2,7 +2,7 @@ Name:Boreal Shelf
 ManaCost:no cost
 Types:Snow Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:tap: add U
 SVar:Rarity:Uncommon

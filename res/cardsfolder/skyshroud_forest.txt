@@ -5,7 +5,7 @@ Text:no text
 K:tap: add 1
 K:paintap:1:U
 K:paintap:1:G
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg

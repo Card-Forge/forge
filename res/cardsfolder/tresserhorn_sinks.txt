@@ -2,7 +2,7 @@ Name:Tresserhorn Sinks
 ManaCost:no cost
 Types:Snow Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add B
 K:tap: add R
 SVar:Rarity:Uncommon

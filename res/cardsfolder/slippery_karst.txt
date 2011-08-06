@@ -2,7 +2,7 @@ Name:Slippery Karst
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add G
 K:Cycling:2
 SVar:Rarity:Common

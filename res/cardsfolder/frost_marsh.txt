@@ -2,7 +2,7 @@ Name:Frost Marsh
 ManaCost:no cost
 Types:Snow Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add U
 K:tap: add B
 SVar:Rarity:Uncommon

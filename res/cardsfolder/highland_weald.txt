@@ -2,7 +2,7 @@ Name:Highland Weald
 ManaCost:no cost
 Types:Snow Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add R
 K:tap: add G
 SVar:Rarity:Uncommon

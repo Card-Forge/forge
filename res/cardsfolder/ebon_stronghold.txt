@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:tap: add B
 K:tap, Sacrifice CARDNAME: Add B B to your mana pool.
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_stronghold.jpg

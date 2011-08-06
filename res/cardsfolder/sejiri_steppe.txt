@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:When Sejiri Steppe enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
 K:tap: add W
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_steppe.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/142.jpg

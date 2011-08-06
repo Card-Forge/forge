@@ -2,7 +2,7 @@ Name:Crypt of Agadeem
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add B
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_of_agadeem.jpg

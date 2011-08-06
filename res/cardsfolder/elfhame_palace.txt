@@ -2,7 +2,7 @@ Name:Elfhame Palace
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:tap: add G
 SVar:Rarity:Uncommon

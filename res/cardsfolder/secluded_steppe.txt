@@ -2,7 +2,7 @@ Name:Secluded Steppe
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:Cycling:W
 SVar:Rarity:Common

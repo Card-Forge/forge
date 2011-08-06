@@ -2,7 +2,7 @@ Name:Salt Marsh
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add U
 K:tap: add B
 SVar:Rarity:Uncommon

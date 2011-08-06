@@ -2,7 +2,7 @@ Name:Tolaria West
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add U
 K:Transmute:1 U U
 SVar:Rarity:Uncommon

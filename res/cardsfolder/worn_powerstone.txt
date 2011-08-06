@@ -2,7 +2,7 @@ Name:Worn Powerstone
 ManaCost:3
 Types:Artifact
 Text:no text
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 K:tap: add 2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

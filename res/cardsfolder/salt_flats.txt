@@ -5,7 +5,7 @@ Text:no text
 K:tap: add 1
 K:paintap:1:W
 K:paintap:1:B
-K:Comes into play tapped.
+K:CARDNAME enters the battlefield tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_flats.jpg
