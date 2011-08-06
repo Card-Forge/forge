@@ -18283,6 +18283,44 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Hellion Eruption")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 5820870438419741058L;
+
+				@Override
+				public boolean canPlayAI() {
+            		return getCreatures(Constant.Player.Computer).size() > 0;
+            	}
+				
+                @Override
+                public void resolve() {
+                	Card[] c = getCreatures(card.getController()).toArray();
+                	for(int i = 0; i < c.length; i++) {
+                        if(c[i].isCreature()) {
+                            AllZone.GameAction.sacrifice(c[i]);
+                            CardFactoryUtil.makeToken("Hellion", "", c[i], "R", new String[] {
+                                    "Creature", "Hellion"}, 4, 4, new String[] {""});
+                        }
+                    }
+                }
+                
+                private CardList getCreatures(String player) {
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                	CardList creatures = new CardList();
+                	creatures.addAll(play.getCards());
+                	creatures = creatures.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isCreature();
+                		}
+                	});
+                	return creatures;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities

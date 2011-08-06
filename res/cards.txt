@@ -1,3 +1,8 @@
+Hellion Eruption
+5 R
+Sorcery
+Sacrifice all creatures you control, then put that many 4/4 red Hellion creature tokens onto the battlefield.
+
 Skywatcher Adept
 U
 Creature Merfolk Wizard
