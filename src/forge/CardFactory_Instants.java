@@ -4951,6 +4951,59 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Sacrifice")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 7081747227572709229L;
+
+				@Override
+                public boolean canPlay() {
+                    return AllZoneUtil.getCreaturesInPlay(card.getController()).size() > 0;
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                	//Compy doesn't have a mana pool, so can't play this spell
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(c)) {
+                        AllZone.GameAction.sacrifice(c);
+                        int amt = CardUtil.getConvertedManaCost(c);
+                        StringBuilder mana = new StringBuilder();
+                        for(int i = 0; i < amt; i++) {
+                        	mana.append("B ");
+                        }
+                        Card mp = AllZone.ManaPool;
+                        mp.addExtrinsicKeyword("ManaPool:"+mana.toString());
+                        
+                    }//if isCardInPlay
+                }
+            };
+
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 2544440783628551409L;
+
+				@Override
+                public void showMessage() {
+                    CardList choice = AllZoneUtil.getCreaturesInPlay(card.getController());
+                    
+                    boolean free = false;
+                    if(this.isFree()) free = true;
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice,
+                            "Sacrifice - Select creature to sacrifice.", false, free));
+                }
+            };
+            spell.setBeforePayMana(runtime);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
