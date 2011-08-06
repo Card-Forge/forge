@@ -4,9 +4,23 @@ import java.util.ArrayList;
 
 public class PhaseUtil {
 	// ******* UNTAP PHASE *****
+	private static boolean skipUntap(Player p) {
+		if(p.skipNextUntap()) {
+			p.setSkipNextUntap(false);
+			return true;
+		}
+		else return false;
+	}
+	
 	public static void handleUntap(){
 
 		Player turn = AllZone.Phase.getPlayerTurn();
+		
+		if (skipUntap(turn)){
+    		AllZone.Phase.setNeedToNextPhase(true);
+    		return;
+    	}
+		
         PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, turn);
         Card[] c = p.getCards();
         
@@ -56,9 +70,7 @@ public class PhaseUtil {
     		}
     	}
     	
-    	CardList allp = new CardList();
-    	allp.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-		allp.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards()); 
+    	CardList allp = AllZoneUtil.getCardsInPlay();
     	
 		for(Card ca : allp) {
 			if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {

@@ -13420,6 +13420,101 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Yosei, the Morning Star")) {
+        	final CardList targetPerms = new CardList();
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	Player p = getTargetPlayer();
+                	if(p.canTarget(card)) {
+                		p.setSkipNextUntap(true);
+                		for(Card c:targetPerms) {
+                    		if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    			c.tap();
+                    		}
+                    	}
+                	}
+                	targetPerms.clear();
+                }//resolve()
+            };
+            
+            final Input targetInput = new Input() {
+                private static final long serialVersionUID = -8727869672234802473L;
+                
+                @Override
+                public void showMessage() {
+                    if(targetPerms.size() == 5) done();
+                	AllZone.Display.showMessage("Select up to 5 target permanents.  Selected ("+targetPerms.size()+") so far.  Click OK when done.");
+                    ButtonUtil.enableOnlyOK();
+                }
+                
+                @Override
+                public void selectButtonOK() {
+                	done();
+                }
+                
+                private void done() {
+                	//here, we add the ability to the stack since it's triggered.
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - tap up to 5 permanents target player controls. Target player skips his or her next untap step.");
+                	ability.setStackDescription(sb.toString());
+                	AllZone.Stack.add(ability);
+                	stop();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                	if(zone.is(Constant.Zone.Battlefield, ability.getTargetPlayer()) && !targetPerms.contains(c)) {
+                		if(CardFactoryUtil.canTarget(card, c)) {
+                			targetPerms.add(c);
+                		}
+                	}
+                    showMessage();
+                }
+            };//Input
+            
+            final Input playerInput = new Input() {
+				private static final long serialVersionUID = 4765535692144126496L;
+
+				@Override
+            	public void showMessage() {
+            		AllZone.Display.showMessage(card.getName()+" - Select target player");
+            		ButtonUtil.enableOnlyCancel();
+            	}
+            	
+            	@Override
+            	public void selectPlayer(Player p) {
+            		if(p.canTarget(card)) {
+            			ability.setTargetPlayer(p);
+            			stopSetNext(targetInput);
+            		}
+            	}
+            	
+            	@Override
+            	public void selectButtonCancel() { stop(); }
+            };
+            
+            Command destroy = new Command() {
+                private static final long serialVersionUID = -3868616119471172026L;
+                
+                public void execute() {
+                	Player player = card.getController();
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    
+                    if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(playerInput);
+                    else if(list.size() != 0) {
+                        Card target = CardFactoryUtil.AI_getBestCreature(list);
+                        ability.setTargetCard(target);
+                        AllZone.Stack.add(ability);
+                    }
+                }//execute()
+            };
+            card.addDestroyCommand(destroy);
+        }
+        //*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {

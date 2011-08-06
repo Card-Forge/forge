@@ -21,6 +21,7 @@ public abstract class Player extends MyObservable{
 	protected String loseCondition = "";
 	
 	protected int nTurns = 0;
+	protected boolean skipNextUntap = false;
 	
 	protected Card lastDrawnCard;
 	protected int numDrawnThisTurn = 0;
@@ -642,6 +643,14 @@ public abstract class Player extends MyObservable{
     	Card old = lastDrawnCard;
     	lastDrawnCard = null;
     	return old;
+    }
+    
+    public boolean skipNextUntap() {
+    	return skipNextUntap;
+    }
+    
+    public void setSkipNextUntap(boolean b) {
+    	skipNextUntap = b;
     }
     
     public CardList getSlowtripList() {
