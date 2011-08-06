@@ -380,11 +380,16 @@ public class AbilityFactory_ChangeZone {
                     }
                     AllZone.GameAction.moveToLibrary(c, libraryPos);
                 }
-                else {
-                    if (destination.equals("Battlefield") && params.containsKey("Tapped"))
-                        c.tap();
+                else if (destination.equals("Battlefield")){
+		        		if (params.containsKey("Tapped"))
+		        			c.tap();
+		        		if (params.containsKey("GainControl"))
+		        			c.setController(sa.getActivatingPlayer());
+		        	
+		        		AllZone.GameAction.moveTo(AllZone.getZone(destination, c.getController()),c);
+		    		}
+		    	else
                 	AllZone.GameAction.moveTo(destZone, c);
-                }
             }
         }
         
@@ -473,12 +478,16 @@ public class AbilityFactory_ChangeZone {
             	int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
             	AllZone.GameAction.moveToLibrary(c, libraryPos);
         	}
-        	else{
-            	if (destination.equals("Battlefield") && params.containsKey("Tapped"))
-            		c.tap();
+        	else if (destination.equals("Battlefield")){
+        		if (params.containsKey("Tapped"))
+        			c.tap();
+        		if (params.containsKey("GainControl"))
+        			c.setController(sa.getActivatingPlayer());
         	
-        		AllZone.GameAction.moveTo(destZone, c);
-        	}
+        		AllZone.GameAction.moveTo(AllZone.getZone(destination, c.getController()),c);
+    		}
+    	else
+        	AllZone.GameAction.moveTo(destZone, c);
         }
         
         if (!destination.equals("Battlefield") && !type.equals("Card")){
