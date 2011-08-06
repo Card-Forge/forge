@@ -11398,14 +11398,13 @@ public class CardFactory implements NewConstants {
                 public void execute() {
                 	
                 	StringBuilder sb = new StringBuilder();
-                	sb.append("When ").append(card.getName()).append(" comes into play, pay any amount of life.");
+                	sb.append("As ").append(card.getName()).append(" enters the battlefield, pay any amount of life.");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-            
         }//*************** END ************ END **************************
         
 
