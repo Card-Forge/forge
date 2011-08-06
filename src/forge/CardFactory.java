@@ -19221,21 +19221,21 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Index")) {
         	/* 
         	 * Look at the top five cards of your library, then put them back
         	 * in any order.
         	 */
         	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -3175286661458692699L;
+        		private static final long serialVersionUID = -3175286661458692699L;
 
-				@Override
+        		@Override
         		public void resolve() {
         			String player = card.getController();
         			AllZoneUtil.rearrangeTopOfLibrary(player, 5, false);
         		}
-				
+
         		@Override
         		public boolean canPlayAI() {
         			//basically the same reason as Sensei's Diving Top
@@ -19243,6 +19243,35 @@ public class CardFactory implements NewConstants {
         		}
         	};//spell
         	spell.setStackDescription(cardName+" - Rearrange the top 5 cards in your library in any order.  You may shuffle you library.  Draw a card.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Machinate")) {
+        	/* 
+        	 * Look at the top X cards of your library, where X is the number
+        	 * of artifacts you control. Put one of those cards into your hand
+        	 * and the rest on the bottom of your library in any order.
+        	 */
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 5559004016728325736L;
+
+				@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			CardList artifacts = AllZoneUtil.getPlayerCardsInPlay(player);
+        			artifacts = artifacts.getType("Artifact");
+        			AllZoneUtil.rearrangeTopOfLibrary(player, artifacts.size(), false);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			//basically the same reason as Sensei's Diving Top
+        			return false;
+        		}
+        	};//spell
+        	spell.setStackDescription(cardName+" - Rearrange the top X cards in your library in any order.");
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
