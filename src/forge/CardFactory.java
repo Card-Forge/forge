@@ -17032,7 +17032,106 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		
 		spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
 	}//*************** END ************ END **************************
-    
+	
+	
+	//*************** START *********** START **************************
+	else if (cardName.equals("Staff of Domination"))
+	{
+	
+      final Ability_Tap ability2 = new Ability_Tap(card, "2")
+      {
+
+		private static final long serialVersionUID = -5513078874305811825L;
+
+		public boolean canPlayAI() {return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);}
+	
+	      public void resolve()
+	      {
+	          AllZone.GameAction.getPlayerLife(card.getController()).addLife(1);      
+	      }
+      };//SpellAbility
+      
+      ability2.setDescription("2, tap: You gain 1 life");
+      ability2.setStackDescription(cardName + " - You gain 1 life.");
+      
+      final SpellAbility ability3 = new Ability_Tap(card, "3")
+      {
+		private static final long serialVersionUID = 1125696151526415705L;
+		public boolean canPlayAI() {return getTapped().size() != 0;}
+        public void chooseTargetAI()
+        {
+          card.tap();
+          Card target = CardFactoryUtil.AI_getBestCreature(getTapped());
+          setTargetCard(target);
+        }
+        CardList getTapped()
+        {
+          CardList list = new CardList(AllZone.Computer_Play.getCards());
+          list = list.filter(new CardListFilter()
+          {
+            public boolean addCard(Card c)
+            {
+              return c.isCreature() && c.isTapped();
+            }
+          });
+          return list;
+        }//getTapped()
+        public void resolve()
+        {
+          if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+          {
+            Card c = getTargetCard();
+            if(c.isTapped())
+              c.untap();
+          }
+        }//resolve()
+      };//SpellAbility
+      
+      ability3.setDescription("3, tap: Untap target creature.");
+      ability3.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability3));
+      
+      final SpellAbility ability4 = new Ability_Tap(card, "4")
+      {
+
+		private static final long serialVersionUID = 8102011024731535257L;
+
+		public boolean canPlayAI() {return false;}
+        
+        public void resolve()
+        {
+          if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+          {
+            Card c = getTargetCard();
+            if(c.isUntapped())
+              c.tap();
+          }
+        }//resolve()
+      };//SpellAbility
+      
+      ability4.setDescription("4, tap: Tap target creature.");
+      ability4.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability4));
+      
+      final Ability_Tap ability5 = new Ability_Tap(card, "5")
+      {
+
+		private static final long serialVersionUID = -8459438547823091716L;
+		public boolean canPlayAI() {return true;}
+        public void resolve()
+        {
+          AllZone.GameAction.drawCard(card.getController());
+        } 
+      };//SpellAbility
+      
+      ability5.setDescription("5, tap: Draw a card.");
+      ability5.setStackDescription(card.getName() + " - draw a card.");
+      
+      card.addSpellAbility(ability2);
+      card.addSpellAbility(ability3);
+      card.addSpellAbility(ability4);
+      card.addSpellAbility(ability5);
+      
+  	}//*************** END ************ END **************************
+	
     
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

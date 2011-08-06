@@ -1,3 +1,9 @@
+Staff of Domination
+3
+Artifact
+no text
+Untap:1
+
 Academy Rector
 3 W
 Creature Human Cleric
