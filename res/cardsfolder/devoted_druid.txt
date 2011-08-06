@@ -1,0 +1,10 @@
+Name:Devoted Druid
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:0/2
+K:tap: add G
+A:AB$Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+End
