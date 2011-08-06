@@ -232,7 +232,7 @@ class CardFactory_Equipment {
 
         } //*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if (cardName.equals("Adventuring Gear")) {
             final Ability equip = new Ability(card, "1") {
@@ -318,7 +318,7 @@ class CardFactory_Equipment {
             card.addEquipCommand(onEquip);
         	card.addUnEquipCommand(onUnEquip);
         }//*************** END ************ END **************************
-
+		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Blade of the Bloodchief"))
