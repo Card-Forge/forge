@@ -18274,11 +18274,10 @@ public class CardFactory_Creatures {
                     stop();
                  }
                  public void selectCard(Card c, PlayerZone zone) {
-                    if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() <= power)) {
-                       ability.setTargetCard(c);
-                    	   this.setFree(false);
-                    	   AllZone.Stack.add(ability);
-                    }
+                	 if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() <= power)) {
+                		 ability.setTargetCard(c);
+                		 stopSetNext(new Input_NoCost_TapAbility(ability));
+                	 }
                  }
               };//input
             ability.setBeforePayMana(target);
