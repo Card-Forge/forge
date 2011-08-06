@@ -227,7 +227,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             else quest.addLost();
             
             //System.out.println("QuestData cardpoolsize:" + AllZone.QuestData.getCardpool().size());
-            AllZone.QuestData.clearShopList();
+            if(AllZone.QuestData.getShopList()!= null)
+            	AllZone.QuestData.clearShopList();
             
             if(quest.shouldAddCards(winLose.didWinRecently())) {
                 quest.addCards();
