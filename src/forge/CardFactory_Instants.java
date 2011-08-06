@@ -333,6 +333,7 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("About Face") || cardName.equals("Inside Out") || cardName.equals("Transmutation") || cardName.equals("Twisted Image")) {
             final SpellAbility spell = new Spell(card) {
@@ -371,6 +372,7 @@ public class CardFactory_Instants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+		*/
 
         //*************** START *********** START **************************
         else if(cardName.equals("Crib Swap")) {

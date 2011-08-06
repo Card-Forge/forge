@@ -1743,7 +1743,7 @@ public class Card extends MyObservable {
         this.updateObservers();
     }
     
-    public int getNetAttack() {
+    public int getUnswitchedAttack() {
         int total = getBaseAttack();
         total += getTempAttackBoost() + getSemiPermanentAttackBoost() + getOtherAttackBoost()
                 + getCounters(Counters.P1P1) + getCounters(Counters.P1P2) 
@@ -1752,7 +1752,12 @@ public class Card extends MyObservable {
         return total;
     }
     
-    public int getNetDefense() {
+    public int getNetAttack() {
+       if(this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 == 1 ) return getUnswitchedDefense();
+       else return getUnswitchedAttack();
+    }
+    
+    public int getUnswitchedDefense() {
         int total = getBaseDefense();
         total += getTempDefenseBoost() + getSemiPermanentDefenseBoost() + getOtherDefenseBoost()
                 + getCounters(Counters.P1P1) + (2*getCounters(Counters.P1P2)) 
@@ -1760,6 +1765,11 @@ public class Card extends MyObservable {
                 - getCounters(Counters.P0M1) - (2*getCounters(Counters.P0M2))
                 + (2*getCounters(Counters.P2P2));
         return total;
+    }
+    
+    public int getNetDefense() {
+        if(this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 == 1 ) return getUnswitchedAttack();
+        else return getUnswitchedDefense();
     }
     
     public void setRandomPicture(int n) {
