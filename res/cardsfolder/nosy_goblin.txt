@@ -1,0 +1,10 @@
+Name:Nosy Goblin
+ManaCost:2 R
+Types:Creature Goblin
+Text:no text
+PT:2/1
+A:AB$Destroy | Cost$T Sac<1/CARDNAME> | ValidTgts$Creature.faceDown | TgtPrompt$Select target face-down creature | SpellDescription$Destroy target face-down creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nosy_goblin.jpg
+End
