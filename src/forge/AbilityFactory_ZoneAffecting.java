@@ -322,7 +322,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean chkAI_Drawback() {
-				return true;
+				return millTargetAI(af, this);
 			}
 			
 		};
@@ -340,7 +340,8 @@ public class AbilityFactory_ZoneAffecting {
 			sb.append(" ");
 		
 		sb.append("Mills ");
-		sb.append(af.getMapParams().get("NumCards"));
+		int numCards = calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
+		sb.append(numCards);
 		sb.append(" Card(s) from ");
 		sb.append(player.toString());
 		sb.append("'s library.");
@@ -359,10 +360,9 @@ public class AbilityFactory_ZoneAffecting {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
-		Target tgt = af.getAbTgt();
+
 		Card source = sa.getSourceCard();
 		Ability_Cost abCost = af.getAbCost();
-		HashMap<String,String> params = af.getMapParams();
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -381,13 +381,26 @@ public class AbilityFactory_ZoneAffecting {
 			
 		}
 		
+		boolean bFlag = millTargetAI(af, sa);
+		if (!bFlag)
+			return false;
+		
+		Random r = new Random();
+		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		
+		// some other variables here, like deck size, and phase and other fun stuff
+
+		return randomReturn;
+	}
+	
+	public static boolean millTargetAI(AbilityFactory af, SpellAbility sa){
+		Target tgt = af.getAbTgt();
+		HashMap<String,String> params = af.getMapParams();
+		
 		if (tgt != null){
 			tgt.resetTargets();
 			
-			// todo: handle deciding what X would be around here for Psychic Drain type cards
-			int numCards = 1;
-			if (params.containsKey("NumCards"))
-				numCards = Integer.parseInt(params.get("NumCards"));
+			int numCards = calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 			
 			CardList pLibrary = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer);
 			
@@ -406,21 +419,15 @@ public class AbilityFactory_ZoneAffecting {
 			// else
 			tgt.addTarget(AllZone.HumanPlayer);
 		}
-		
-		Random r = new Random();
-		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		
-		// some other variables here, like deck size, and phase and other fun stuff
-
-		return randomReturn;
+		return true;
 	}
 	
 	public static void millResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		
 		Card source = sa.getSourceCard();
-		// todo: handle deciding what X would be around here for Psychic Drain type cards
-		int numCards = Integer.parseInt(params.get("NumCards"));
+
+		int numCards = calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -450,4 +457,28 @@ public class AbilityFactory_ZoneAffecting {
 			}
 		}
 	}
+	
+	public static int calculateAmount(Card card, String amount, SpellAbility ability){
+		// handle deciding what X would be around here for Psychic Drain type cards
+		if (amount.matches("X"))
+		{
+			String calcX[] = card.getSVar(amount).split("\\$");
+			if (calcX.length == 1 || calcX[1].equals("none"))
+				return 0;
+			
+			if (calcX[0].startsWith("Count"))
+			{
+				return CardFactoryUtil.xCount(card, calcX[1]);
+			}
+			else if (calcX[0].startsWith("Sacrificed"))
+			{
+				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
+			}
+			else
+				return 0;
+		}
+
+		return Integer.parseInt(amount);
+	}
+	
 }
