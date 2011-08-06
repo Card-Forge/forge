@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
@@ -554,7 +555,7 @@ public class GameAction {
 	        	}
 	        	else {
 	        		if (c.getController().isHuman())
-	        			crd = AllZone.Display.getChoiceOptional("Select totem armor to destroy", list.toArray());
+	        			crd = GuiUtils.getChoiceOptional("Select totem armor to destroy", list.toArray());
 	        		else 
 	        			crd = list.get(0);
 	        	}
@@ -1772,7 +1773,7 @@ public class GameAction {
     			}
 
     			@SuppressWarnings("unused")
-    			Object check2 = AllZone.Display.getChoiceOptional("View" + SearchDescription,
+    			Object check2 = GuiUtils.getChoiceOptional("View" + SearchDescription,
     					SearchBase.toArray());
     			if(Search[0].contains("SearchShuffle_SameName")) SearchBase = SearchBase.getName(Initiator.getName());
     			if(Search[0].contains("SearchShuffle_Type")) {
@@ -1790,7 +1791,7 @@ public class GameAction {
     				}
     			}
     			if(SearchBase.size() != 0) {
-    				Object check = AllZone.Display.getChoiceOptional("Select a Suitable Card",
+    				Object check = GuiUtils.getChoiceOptional("Select a Suitable Card",
     						SearchBase.toArray());
     				if(check != null) {
     					SearchedCard[y] = (Card) check;
@@ -2081,7 +2082,7 @@ public class GameAction {
 	        	}
 	        	else {
 	        		if (c.getController().isHuman())
-	        			crd = AllZone.Display.getChoiceOptional("Select totem armor to destroy", list.toArray());
+	        			crd = GuiUtils.getChoiceOptional("Select totem armor to destroy", list.toArray());
 	        		else 
 	        			crd = list.get(0);
 	        	}
@@ -2165,7 +2166,7 @@ public class GameAction {
      */
     public void promptForShuffle(final Player player) {
     	String[] choices = new String[] {"Yes", "No"};
-		Object o = AllZone.Display.getChoice("Shuffle "+player+"'s library?", choices);
+		Object o = GuiUtils.getChoice("Shuffle "+player+"'s library?", choices);
 		String myChoice = (String) o;
 		if(myChoice.equals("Yes")) {
 			player.shuffle();
@@ -2662,7 +2663,7 @@ public class GameAction {
         else if (choices.size() == 1)
         	choice = choices.get(0);
         else
-        	choice = (String) AllZone.Display.getChoiceOptional("Choose", choices.toArray());
+        	choice = (String) GuiUtils.getChoiceOptional("Choose", choices.toArray());
         
         if (choice == null)
         	return false;
@@ -2710,7 +2711,7 @@ public class GameAction {
         */
         if(choices.size() == 0) return;
         else if(choices.size() == 1) sa = choices.get(0);
-        else sa = (SpellAbility) AllZone.Display.getChoiceOptional("Choose", choices.toArray());
+        else sa = (SpellAbility) GuiUtils.getChoiceOptional("Choose", choices.toArray());
         
         if(sa == null) return;
         
@@ -3346,7 +3347,7 @@ public class GameAction {
         	firstPrompt = "Choose first land";
         
         //branch 2
-        Object o = AllZone.Display.getChoiceOptional(firstPrompt, list.toArray());
+        Object o = GuiUtils.getChoiceOptional(firstPrompt, list.toArray());
         if(o != null) {
             Card c = (Card) o;
             list.remove(c);
@@ -3359,7 +3360,7 @@ public class GameAction {
         }//if
         if ((list.size() == 0) || onlyOneLand) return;
         //branch 3
-        o = AllZone.Display.getChoiceOptional(ForgeProps.getLocalized(GAMEACTION_TEXT.CHOOSE_2ND_LAND), list.toArray());
+        o = GuiUtils.getChoiceOptional(ForgeProps.getLocalized(GAMEACTION_TEXT.CHOOSE_2ND_LAND), list.toArray());
         if(o != null) {
             PlayerZone secondZone = AllZone.getZone(Zone2, AllZone.HumanPlayer);
 
@@ -3428,7 +3429,7 @@ public class GameAction {
     						for(Counters c_1:Counters.values())
     							if(card.getCounters(c_1) != 0) choices.add(c_1.getName());
     						if (choices.size() > 0)
-    							card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : AllZone.Display.getChoice("Select counter type", choices.toArray()).toString())), 1);
+    							card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.getChoice("Select counter type", choices.toArray()).toString())), 1);
     					}
     					boolean selComputer = false;
     					boolean selHuman = false;

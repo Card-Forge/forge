@@ -107,7 +107,7 @@ public class AbilityFactory_Fetch {
         for(int i=0;i<fetchNum;i++){
 	        if(library.size() != 0 && destination != null) {
 	        	
-	            Object o = AllZone.Display.getChoiceOptional("Select a card", library.toArray());
+	            Object o = GuiUtils.getChoiceOptional("Select a card", library.toArray());
 	            
 	            if (o == null)	// Player didn't want anything? Bail from loop
 	            	break;
@@ -189,7 +189,7 @@ public class AbilityFactory_Fetch {
                     	CardList l = new CardList();
                     	l.add(c);
                     	if (!type.equals("Card"))
-                    	AllZone.Display.getChoiceOptional(af.getHostCard().getName() + " - Computer picked:", l.toArray());
+                    	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Computer picked:", l.toArray());
             		AllZone.Computer_Hand.add(c);
             	}//move to hand
             	else if (destination.equals("Battlefield")) {
@@ -201,7 +201,7 @@ public class AbilityFactory_Fetch {
                 	CardList l = new CardList();
                 	l.add(c);
                 	if (!type.equals("Card"))
-                	AllZone.Display.getChoiceOptional(af.getHostCard().getName() + " - Computer picked:", l.toArray());
+                	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Computer picked:", l.toArray());
                 	AllZone.Computer_Library.add(c, libraryPosition);
             	}//move to top of library
 	        }//if

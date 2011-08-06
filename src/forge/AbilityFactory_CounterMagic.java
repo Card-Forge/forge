@@ -3,6 +3,8 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import forge.gui.GuiUtils;
+
 //Type - Spell or Ability or SpellOrAbility
 //CounterValid - a "valid" expression for types to counter
 //SpellTarget - a "valid" expression for targets of the spell to counter
@@ -421,7 +423,7 @@ public class AbilityFactory_CounterMagic {
 					}
 					else {
 						CardList list = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
-						AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+						GuiUtils.getChoiceOptional("Revealed cards",list.toArray());
 					}
 				}
 			}
@@ -442,7 +444,7 @@ public class AbilityFactory_CounterMagic {
 					}
 					else {
 						CardList list = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-						AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+						GuiUtils.getChoiceOptional("Revealed cards",list.toArray());
 					}
 				}
 			}
@@ -502,7 +504,7 @@ public class AbilityFactory_CounterMagic {
 				String[] choices = new String[map.keySet().size()];
 				choices = map.keySet().toArray(choices);
 
-				String madeChoice = AllZone.Display.getChoice("Select target spell.",choices);
+				String madeChoice = GuiUtils.getChoice("Select target spell.",choices);
 
 				tgt[0] = map.get(madeChoice);
 				System.out.println(tgt[0]);

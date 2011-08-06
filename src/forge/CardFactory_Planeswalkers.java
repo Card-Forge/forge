@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.gui.GuiUtils;
+
 
 class CardFactory_Planeswalkers {
     public static Card getCard(final Card card, String cardName, Player owner) {
@@ -263,7 +265,7 @@ class CardFactory_Planeswalkers {
                     {
                         Object o = null;
                         for(int k = 0; k < oppPerms.size(); k++) {
-                            o = AllZone.Display.getChoiceOptional("Select Card to sacrifice",
+                            o = GuiUtils.getChoiceOptional("Select Card to sacrifice",
                                     oppPermTempList.toArray());
                             Card c = (Card) o;
                             //AllZone.GameAction.sacrifice(c);
@@ -752,7 +754,7 @@ class CardFactory_Planeswalkers {
                     CardList list = new CardList(library.getCards());
                     
                     if(list.size() != 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Select any card", list.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select any card", list.toArray());
                         
                         card.getController().shuffle();
                         if(o != null) {
@@ -1088,7 +1090,7 @@ class CardFactory_Planeswalkers {
                     for(int i = 0; i < choice.length; i++)
                         choice[i] = Integer.valueOf(i + 1);
                     
-                    Integer damage = (Integer) AllZone.Display.getChoice("Select X", choice);
+                    Integer damage = (Integer) GuiUtils.getChoice("Select X", choice);
                     return damage.intValue();
                 }
             };//Input target
@@ -1684,7 +1686,7 @@ class CardFactory_Planeswalkers {
                     for(int i = 0; i < choice.length; i++)
                         choice[i] = Integer.valueOf(i);
                     
-                    Integer damage = (Integer) AllZone.Display.getChoice("Select X", choice);
+                    Integer damage = (Integer) GuiUtils.getChoice("Select X", choice);
                     final int dam = damage.intValue();
                     
                     card.subtractCounter(Counters.LOYALTY, dam);
@@ -1699,7 +1701,7 @@ class CardFactory_Planeswalkers {
                     });
                     
                     if(list.size() > 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Select artifact",
+                        Object o = GuiUtils.getChoiceOptional("Select artifact",
                                 AllZone.Human_Library.getCards());
                         if(o != null) {
                             Card c = (Card) o;
@@ -1932,14 +1934,14 @@ class CardFactory_Planeswalkers {
                     
                     CardList putOnTop = new CardList(hand.getCards());
                     
-                    Object o = AllZone.Display.getChoiceOptional("First card to put on top: ", putOnTop.toArray());
+                    Object o = GuiUtils.getChoiceOptional("First card to put on top: ", putOnTop.toArray());
                     if(o != null) {
                         Card c1 = (Card) o;
                         putOnTop.remove(c1);
                         hand.remove(c1);
                         lib.add(c1, 0);
                     }
-                    o = AllZone.Display.getChoiceOptional("Second card to put on top: ", putOnTop.toArray());
+                    o = GuiUtils.getChoiceOptional("Second card to put on top: ", putOnTop.toArray());
                     if(o != null) {
                         Card c2 = (Card) o;
                         putOnTop.remove(c2);
@@ -2078,7 +2080,7 @@ class CardFactory_Planeswalkers {
                     int convertedManaTopCard = CardUtil.getConvertedManaCost(topCard.getManaCost());
                     CardList showTop = new CardList();
                     showTop.add(topCard);
-                    AllZone.Display.getChoiceOptional("Revealed top card: ", showTop.toArray());
+                    GuiUtils.getChoiceOptional("Revealed top card: ", showTop.toArray());
                     
                     //now, move it to player's hand
                     lib.remove(topCard);

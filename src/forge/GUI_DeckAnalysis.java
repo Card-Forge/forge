@@ -9,7 +9,6 @@ import java.awt.event.WindowListener;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import com.cloudgarden.layout.AnchorLayout;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -24,6 +23,8 @@ import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.cloudgarden.layout.AnchorLayout;
 
 
 /**

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import forge.gui.GuiUtils;
+
 public class AbilityFactory_ChangeZone {
 	
 	// Change Zone is going to work much differently than other AFs. 
@@ -334,7 +336,7 @@ public class AbilityFactory_ChangeZone {
 		
 		CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
         if (destination.equals("Library"))
-        	AllZone.Display.getChoice(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
+        	GuiUtils.getChoice(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
 		
 		fetchList = filterListByType(fetchList, params, "ChangeType", sa);
 
@@ -346,7 +348,7 @@ public class AbilityFactory_ChangeZone {
             if (fetchList.size() == 0 || destination == null) 
                 break;
                 
-            Object o = AllZone.Display.getChoiceOptional("Select a card", fetchList.toArray());
+            Object o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
             
             if (o != null) {
                 Card c = (Card) o;
@@ -464,9 +466,9 @@ public class AbilityFactory_ChangeZone {
         if (!destination.equals("Battlefield") && !type.equals("Card")){
         	String picked = af.getHostCard().getName() + " - Computer picked:";
         	if (fetched.size() > 0)
-        		AllZone.Display.getChoice(picked, fetched.toArray());
+        		GuiUtils.getChoice(picked, fetched.toArray());
         	else
-        		AllZone.Display.getChoice(picked, new String[]{ "<Nothing>" } );
+        		GuiUtils.getChoice(picked, new String[]{ "<Nothing>" } );
         }
         
 		String DrawBack = params.get("SubAbility");

@@ -14,21 +14,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.JList;
-import javax.swing.JDialog;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileFilter;
 
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 
 
 //presumes AllZone.QuestData is not null
@@ -1005,7 +1006,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         
         //Object o = JOptionPane.showInputDialog(null, "Deck Name", "Open Deck", JOptionPane.OK_CANCEL_OPTION, null,
         //        choices.toArray(), choices.toArray()[0]);
-        Object o = AllZone.Display.getChoiceOptional("Select Deck", choices.toArray());
+        Object o = GuiUtils.getChoiceOptional("Select Deck", choices.toArray());
         
         if(o == null) return "";
         

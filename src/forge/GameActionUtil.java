@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import forge.gui.GuiUtils;
+
 
 public class GameActionUtil {
 	public static void executeUpkeepEffects() {
@@ -653,7 +655,7 @@ public class GameActionUtil {
 				{
 					CardList creatures = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
 					creatures = creatures.getType("Creature");
-					Object check = AllZone.Display.getChoiceOptional("Select creature", creatures.toArray());
+					Object check = GuiUtils.getChoiceOptional("Select creature", creatures.toArray());
 					if(check != null) {
 	                    this.setTargetCard((Card) check);
 	                }
@@ -743,7 +745,7 @@ public class GameActionUtil {
                             if (count == topOfLibrary.size()) break;
 
                         }//while
-                        AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+                        GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
 
                         if (cascadedCard != null && !cascadedCard.isUnCastable()) {
 
@@ -853,7 +855,7 @@ public class GameActionUtil {
 							lib.remove(crd);
 							if(crd.getName().equals(RippleCard.getName())) RippledCards[i] = crd;
 						}//For
-							AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+							GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
 							for(int i = 0; i < RippleMax; i++) {
 						if(RippledCards[i] != null && !RippledCards[i].isUnCastable()) {
 
@@ -1630,7 +1632,7 @@ public class GameActionUtil {
 							final Player target;
 							if(card.getController().isHuman()) {
 								String[] choices = {"Opponent", "Yourself"};
-								Object choice = AllZone.Display.getChoice("Choose target player", choices);
+								Object choice = GuiUtils.getChoice("Choose target player", choices);
 								if(choice.equals("Opponent")) {
 									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
 								}// if choice yes
@@ -1677,7 +1679,7 @@ public class GameActionUtil {
 							final Player target;
 							if(card.getController().isHuman()) {
 								String[] choices = {"Opponent", "Yourself"};
-								Object choice = AllZone.Display.getChoice("Choose target player", choices);
+								Object choice = GuiUtils.getChoice("Choose target player", choices);
 								if(choice.equals("Opponent")) {
 									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
 								}// if choice yes
@@ -1685,7 +1687,7 @@ public class GameActionUtil {
 							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
 							PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target);
 							CardList fullHand = new CardList(hand.getCards());
-							if(fullHand.size() > 0 && target.equals(AllZone.ComputerPlayer)) AllZone.Display.getChoice(
+							if(fullHand.size() > 0 && target.equals(AllZone.ComputerPlayer)) GuiUtils.getChoice(
 									"Revealing hand", fullHand.toArray());
 							CardList discard = new CardList(hand.getCards());
 							discard = discard.filter(new CardListFilter() {
@@ -1736,7 +1738,7 @@ public class GameActionUtil {
 							final Player target;
 							if(card.getController().isHuman()) {
 								String[] choices = {"Opponent", "Yourself", "None"};
-								Object choice = AllZone.Display.getChoice("Choose target player", choices);
+								Object choice = GuiUtils.getChoice("Choose target player", choices);
 								if(choice.equals("Opponent")) {
 									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
 								}// if choice yes
@@ -1797,7 +1799,7 @@ public class GameActionUtil {
 							final Player target;
 							if(card.getController().isHuman()) {
 								String[] choices = {"Yourself", "Opponent", "None"};
-								Object choice = AllZone.Display.getChoice("Choose target player", choices);
+								Object choice = GuiUtils.getChoice("Choose target player", choices);
 								if(choice.equals("Opponent")) {
 									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
 								}// if choice yes
@@ -4075,7 +4077,7 @@ public class GameActionUtil {
 					if(player.equals(AllZone.HumanPlayer) && grave.size() > 0) {
 							CardList creatures = AllZoneUtil.getPlayerGraveyard(player);
 							creatures = creatures.filter(creatureFilter);
-							Object creatureChoice = AllZone.Display.getChoice("Creature to move to hand", creatures.toArray());
+							Object creatureChoice = GuiUtils.getChoice("Creature to move to hand", creatures.toArray());
 							Card creatureCard = (Card) creatureChoice;
 	                        graveyard.remove(creatureCard);
 	                        hand.add(creatureCard);
@@ -4270,7 +4272,7 @@ public class GameActionUtil {
 
                     if (player.equals(AllZone.HumanPlayer))
                     {
-                        Object o = AllZone.Display.getChoiceOptional("Select creature for Wall of Reverence life gain", validTargets.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select creature for Wall of Reverence life gain", validTargets.toArray());
                         if (o != null) {
                             Card c = (Card) o;
                             int power=c.getNetAttack();
@@ -4468,7 +4470,7 @@ public class GameActionUtil {
 
 		Object q = null;
 
-		q = AllZone.Display.getChoiceOptional("Use " + c.getName() + "'s Ally ability?", choices);
+		q = GuiUtils.getChoiceOptional("Use " + c.getName() + "'s Ally ability?", choices);
 
 		if(q == null || q.equals("No")) return false;
 		else return true;
@@ -4665,7 +4667,7 @@ public class GameActionUtil {
     	String choices[] = {"heads","tails"};
     	boolean flip = MyRandom.percentTrue(50);
     	if(caller.isHuman()) {
-    		choice = (String) AllZone.Display.getChoice(source.getName()+" - Call coin flip", choices);
+    		choice = (String) GuiUtils.getChoice(source.getName()+" - Call coin flip", choices);
     	}
     	else {
     		choice = choices[MyRandom.random.nextInt(2)];
@@ -5123,7 +5125,7 @@ public class GameActionUtil {
 
 		Object q = null;
 
-		q = AllZone.Display.getChoiceOptional("Use " + c.getName() + " Landfall?", choices);
+		q = GuiUtils.getChoiceOptional("Use " + c.getName() + " Landfall?", choices);
 
 		if(q == null || q.equals("No")) return false;
 		else return true;
@@ -5257,7 +5259,7 @@ public class GameActionUtil {
 			public void resolve() {
 				String color = "";
 
-				Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.onlyColors);
+				Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.onlyColors);
 				color = Input_PayManaCostUtil.getShortColorString((String) o);
 
 				Ability_Mana abMana = new Ability_Mana(c, "0", color) {
@@ -5829,7 +5831,7 @@ public class GameActionUtil {
                  }
                  
                  if(src.getController().equals(AllZone.HumanPlayer)) {
-                     Object o = AllZone.Display.getChoiceOptional("Select target card", list.toArray());
+                     Object o = GuiUtils.getChoiceOptional("Select target card", list.toArray());
                      if(o != null) {
                          ability.setTargetCard((Card) o);
                          AllZone.Stack.add(ability);
@@ -6299,9 +6301,9 @@ public class GameActionUtil {
         	if (grave.size() > 0) {
         		Object o;
         		if (mayReturn) {
-        			o = AllZone.Display.getChoiceOptional("Select a card", choices.toArray());
+        			o = GuiUtils.getChoiceOptional("Select a card", choices.toArray());
         		} else {
-        			o = AllZone.Display.getChoice("Select a card", choices.toArray());
+        			o = GuiUtils.getChoice("Select a card", choices.toArray());
         		}
         		if (o != null) {
         			Card c_1 = (Card) o;
@@ -6427,7 +6429,7 @@ public class GameActionUtil {
 
 					//human chooses
 					if(opponent.equals(AllZone.ComputerPlayer)) {
-						choice = AllZone.Display.getChoice("Choose", handChoices);
+						choice = GuiUtils.getChoice("Choose", handChoices);
 					} else//computer chooses
 					{
 						choice = CardUtil.getRandom(handChoices); // wise choice should be here
@@ -6788,7 +6790,7 @@ public class GameActionUtil {
 
 					if(goblins.size() > 0) {
 						if(card.getController().equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Select a Goblin to put onto the battlefield",
+							Object o = GuiUtils.getChoiceOptional("Select a Goblin to put onto the battlefield",
 									goblins.toArray());
 
 							if(o != null) {
@@ -6836,7 +6838,7 @@ public class GameActionUtil {
 
 					if(goblins.size() > 0) {
 						if(card.getController().equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Select a Goblin to put onto the battlefield",
+							Object o = GuiUtils.getChoiceOptional("Select a Goblin to put onto the battlefield",
 									goblins.toArray());
 
 							if(o != null) {
@@ -6923,7 +6925,7 @@ public class GameActionUtil {
 					if(lib.size() > 0) {
 						CardList cl = new CardList();
 						cl.add(lib.get(0));
-						AllZone.Display.getChoiceOptional("Top card", cl.toArray());
+						GuiUtils.getChoiceOptional("Top card", cl.toArray());
 					};
 					Card top = lib.get(0);
 					player[0].gainLife(CardUtil.getConvertedManaCost(top.getManaCost()), crd);
@@ -7004,19 +7006,19 @@ public class GameActionUtil {
 							for(int i = 0; i < 1; i++) {
 								if (dPChHand.size() > 0){
 									Card c = CardFactoryUtil.AI_getMostExpensivePermanent(dPChHand, source, false);
-									AllZone.Display.getChoiceOptional("Computer has chosen", new Card[] {c});
+									GuiUtils.getChoiceOptional("Computer has chosen", new Card[] {c});
 									AllZone.HumanPlayer.discard(c, this);
 								}
 							}
 						}
 						else {
 							//human
-							AllZone.Display.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+							GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
 
 							//hardcode for 1, but if it needs to be expanded, it's here
 							for(int i = 0; i < 1; i++) {
 								if (dPChHand.size() > 0) {
-									Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
+									Card dC = GuiUtils.getChoice("Choose a card to be discarded", dPChHand.toArray());
 									AllZone.ComputerPlayer.discard(dC, this);
 								}
 							}
@@ -7100,7 +7102,7 @@ public class GameActionUtil {
                             if (GameActionUtil.showYesNoDialog(c, question.toString())) {
                                 String title = "Pick a basic land card?";
                                 
-                                Object o = AllZone.Display.getChoiceOptional(title, lands.toArray());
+                                Object o = GuiUtils.getChoiceOptional(title, lands.toArray());
                                 if (o != null) {
                                     Card card = (Card) o;
                                     lib.remove(card);
@@ -7108,7 +7110,7 @@ public class GameActionUtil {
                                     lands.remove(card);
 
                                     if (lands.size() > 0) {
-                                        o = AllZone.Display.getChoiceOptional(title, lands.toArray());
+                                        o = GuiUtils.getChoiceOptional(title, lands.toArray());
                                         if (o != null) {
                                             card = (Card) o;
                                             lib.remove(card);
@@ -7116,7 +7118,7 @@ public class GameActionUtil {
                                             lands.remove(card);
                                             
                                             if (lands.size() > 0) {
-                                                o = AllZone.Display.getChoiceOptional(title, lands.toArray());
+                                                o = GuiUtils.getChoiceOptional(title, lands.toArray());
                                                 if (o != null) {
                                                     card = (Card) o;
                                                     lib.remove(card);
@@ -7656,7 +7658,7 @@ public class GameActionUtil {
 
 						Object q = null;
 						if(player.equals(AllZone.HumanPlayer)) {
-							q = AllZone.Display.getChoiceOptional("Put a counter on AEther Vial? ("
+							q = GuiUtils.getChoiceOptional("Put a counter on AEther Vial? ("
 									+ thisCard.getCounters(Counters.CHARGE) + ")", choices);
 							if(q == null || q.equals("No")) return;
 							if(q.equals("Yes")) {
@@ -7865,7 +7867,7 @@ public class GameActionUtil {
 
 						if(rats.size() > 0) {
 							if(player.equals(AllZone.HumanPlayer)) {
-								Object o = AllZone.Display.getChoiceOptional("Pick a Rat to put into your hand",
+								Object o = GuiUtils.getChoiceOptional("Pick a Rat to put into your hand",
 										rats.toArray());
 								if(o != null) {
 									Card card = (Card) o;
@@ -8057,7 +8059,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8145,7 +8147,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8234,7 +8236,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8317,7 +8319,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8388,7 +8390,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8474,7 +8476,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8553,7 +8555,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8626,7 +8628,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8696,7 +8698,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8787,7 +8789,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8857,7 +8859,7 @@ public class GameActionUtil {
                 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -8929,7 +8931,7 @@ public class GameActionUtil {
 
                 private void revealTopCard(String title) {
                     if (peek[0] != prevCardShown[0]) {
-                        AllZone.Display.getChoice(title, peek[0]);
+                        GuiUtils.getChoice(title, peek[0]);
                         prevCardShown[0] = peek[0];
                     }
                 }// revealTopCard()
@@ -9023,7 +9025,7 @@ public class GameActionUtil {
 						creatures = creatures.getType("Creature");
 
 						if(player.equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
+							Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
 									creatures.toArray());
 							if(o != null) {
 								Card card = (Card) o;
@@ -9075,7 +9077,7 @@ public class GameActionUtil {
 						creatures = creatures.getType("Creature");
 
 						if(player.equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
+							Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
 									creatures.toArray());
 							if(o != null) {
 								Card card = (Card) o;
@@ -9117,7 +9119,7 @@ public class GameActionUtil {
 
 						if(graveyardCreatures.size() >= 4) {
 							if(player.equals(AllZone.HumanPlayer)) {
-								Object o = AllZone.Display.getChoiceOptional("Pick a creature to return to hand",
+								Object o = GuiUtils.getChoiceOptional("Pick a creature to return to hand",
 										graveyardCreatures.toArray());
 								if(o != null) {
 									Card card = (Card) o;
@@ -9161,7 +9163,7 @@ public class GameActionUtil {
 					creatures = creatures.getType("Creature");
 
 					if(player.equals(AllZone.HumanPlayer)) {
-						Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
+						Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
 								creatures.toArray());
 						if(o != null) {
 							Card card = (Card) o;
@@ -9204,7 +9206,7 @@ public class GameActionUtil {
 					creatures = creatures.getType("Goblin");
 
 					if(player.equals(AllZone.HumanPlayer)) {
-						Object o = AllZone.Display.getChoiceOptional("Pick a goblin to put into your hand",
+						Object o = GuiUtils.getChoiceOptional("Pick a goblin to put into your hand",
 								creatures.toArray());
 						if(o != null) {
 							Card card = (Card) o;
@@ -9442,7 +9444,7 @@ public class GameActionUtil {
 						if(AllZone.ComputerPlayer.equals(card.getController())) {
 							return CardFactoryUtil.AI_getBestCreature(creatureList);
 						} else {
-							Object o = AllZone.Display.getChoiceOptional("Choose a creature card",
+							Object o = GuiUtils.getChoiceOptional("Choose a creature card",
 									creatureList.toArray());
 							if(o != null) {
 								Card creature = (Card) o;
@@ -9519,7 +9521,7 @@ public class GameActionUtil {
                                    }
                                }// for loop
                                if (cardsToReveal.size() > 0)
-                                   AllZone.Display.getChoice("Revealed cards", cardsToReveal.toArray());
+                                   GuiUtils.getChoice("Revealed cards", cardsToReveal.toArray());
                            }
                        }
                    }
@@ -9558,7 +9560,7 @@ public class GameActionUtil {
 
 						if(AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
 							if(player.equals(AllZone.HumanPlayer)) {
-								Object o = AllZone.Display.getChoiceOptional("Pick a creature to return to hand",
+								Object o = GuiUtils.getChoiceOptional("Pick a creature to return to hand",
 										graveyardCreatures.toArray());
 								if(o != null) {
 									Card card = (Card) o;
@@ -10350,7 +10352,7 @@ public class GameActionUtil {
 						for(int j = 0; j < 7; j++) {
 							choices[j] = ""+j;
 						}
-						String answer = (String)(AllZone.Display.getChoiceOptional(c.getName()+" - Choose a number", choices));
+						String answer = (String)(GuiUtils.getChoiceOptional(c.getName()+" - Choose a number", choices));
 						num = Integer.parseInt(answer);
 					}
 					else {
@@ -10764,7 +10766,7 @@ public class GameActionUtil {
 					}
 
 					if(player.equals(AllZone.HumanPlayer)) {
-						Object o = AllZone.Display.getChoiceOptional("Select creature to sacrifice",
+						Object o = GuiUtils.getChoiceOptional("Select creature to sacrifice",
 								creats.toArray());
 						Card sac = (Card) o;
 						if(sac == null) {
@@ -10962,7 +10964,7 @@ public class GameActionUtil {
 								int creatsSize = creats.size();
 
 								for(int k = 0; k < creatsSize; k++) {
-									o = AllZone.Display.getChoiceOptional("Select creature to sacrifice",
+									o = GuiUtils.getChoiceOptional("Select creature to sacrifice",
 											creats.toArray());
 
 									if(o == null) break;
@@ -11095,7 +11097,7 @@ public class GameActionUtil {
                                 CardList arts = new CardList(graveyard.getCards());
                                 arts = arts.getType("Artifact");
                                 String title = "Choose an artifact";
-                                Object o = AllZone.Display.getChoiceOptional(title, arts.toArray());
+                                Object o = GuiUtils.getChoiceOptional(title, arts.toArray());
                                 
                                 if (o != null) {
                                     Card card = (Card) o;
@@ -11296,7 +11298,7 @@ public class GameActionUtil {
                     for(int e = 0; e < Count; e++) {
 	                    if(hand.size() == 0) hand.addAll(Playerhand.getCards());
 	                    handlist = hand.toArray();
-	                    Object check = AllZone.Display.getChoice("Select card to put on bottom of library", handlist);
+	                    Object check = GuiUtils.getChoice("Select card to put on bottom of library", handlist);
 	                    if(check != null) {
 		                     Card target = ((Card) check);
 		                     hand.remove(target);
@@ -11385,7 +11387,7 @@ public class GameActionUtil {
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
 				String[] choices = {"Yes", "No"};
-				Object choice = AllZone.Display.getChoice("Pay Carnophage's upkeep?", choices);
+				Object choice = GuiUtils.getChoice("Pay Carnophage's upkeep?", choices);
 				if(choice.equals("Yes")) player.loseLife(1, c);
 				else c.tap();
 			}
@@ -11409,7 +11411,7 @@ public class GameActionUtil {
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
 				String[] choices = {"Yes", "No"};
-				Object choice = AllZone.Display.getChoice("Pay Sangrophage's upkeep?", choices);
+				Object choice = GuiUtils.getChoice("Pay Sangrophage's upkeep?", choices);
 				if(choice.equals("Yes")) player.loseLife(2,c);
 				else c.tap();
 			}
@@ -11578,7 +11580,7 @@ public class GameActionUtil {
 
 						String[] choices = {"Yes", "No, target a creature instead"};
 
-						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
+						Object q = GuiUtils.getChoiceOptional("Select computer as target?", choices);
 						if(q != null && q.equals("Yes")) {
 							AllZone.ComputerPlayer.addDamage(hondlist.size(), card);
 						}	
@@ -11593,7 +11595,7 @@ public class GameActionUtil {
 
 							if(oppCreatures.size() > 0) {
 
-								Object o = AllZone.Display.getChoiceOptional("Pick target creature",
+								Object o = GuiUtils.getChoiceOptional("Pick target creature",
 										oppCreatures.toArray());
 								Card c = (Card) o;
 								c.addDamage(hondlist.size(), card);

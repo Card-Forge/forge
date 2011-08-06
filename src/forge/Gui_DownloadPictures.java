@@ -1,7 +1,8 @@
 package forge;
 
-import static java.lang.Integer.*;
-import static javax.swing.JOptionPane.*;
+import static java.lang.Integer.parseInt;
+import static javax.swing.JOptionPane.DEFAULT_OPTION;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 
 import java.awt.Component;
 import java.awt.Dimension;

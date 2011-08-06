@@ -2,7 +2,7 @@
 package forge;
 
 
-import static org.jdesktop.swingx.MultiSplitLayout.*;
+import static org.jdesktop.swingx.MultiSplitLayout.parseModel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,7 +31,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -43,7 +42,6 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -57,15 +55,13 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import org.jdesktop.swingx.JXMultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
-import forge.gui.ListChooser;
+import forge.gui.GuiUtils;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPanel;
 import forge.gui.game.CardPicturePanel;
@@ -314,45 +310,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             
          messageArea.setBorder(border);
     }
-    
-    //returned Object could be null
-    public <T> T getChoiceOptional(String message, T... choices) {
-        if(choices == null || choices.length == 0) return null;
-        List<T> choice = getChoices(message, 0, 1, choices);
-        return choice.isEmpty()? null:choice.get(0);
-    }//getChoiceOptional()
-    
-    // returned Object will never be null
-    public <T> T getChoice(String message, T... choices) {
-        List<T> choice = getChoices(message, 1, 1, choices);
-        assert choice.size() == 1;
-        return choice.get(0);
-    }//getChoice()
-    
-    // returned Object will never be null
-    public <T> List<T> getChoicesOptional(String message, T... choices) {
-        return getChoices(message, 0, choices.length, choices);
-    }//getChoice()
-    
-    // returned Object will never be null
-    public <T> List<T> getChoices(String message, T... choices) {
-        return getChoices(message, 1, choices.length, choices);
-    }//getChoice()
-    
-    // returned Object will never be null
-    public <T> List<T> getChoices(String message, int min, int max, T... choices) {
-        ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        final JList list = c.getJList();
-        list.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent ev) {
-                if(list.getSelectedValue() instanceof Card) {
-                    setCard((Card) list.getSelectedValue());
-                }
-            }
-        });
-        c.show();
-        return c.getSelectedValues();
-    }//getChoice()
     
     private void addListeners() {
         //mouse Card Detail
@@ -1201,9 +1158,9 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             
             if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
             
-            if(c.length == 0) AllZone.Display.getChoiceOptional(title, new String[] {"no cards"});
+            if(c.length == 0) GuiUtils.getChoiceOptional(title, new String[] {"no cards"});
             else {
-                Card choice = AllZone.Display.getChoiceOptional(title, c);
+                Card choice = GuiUtils.getChoiceOptional(title, c);
                 if(choice != null) doAction(choice);
             }
         }

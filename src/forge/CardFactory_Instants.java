@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import forge.gui.GuiUtils;
+
 
 public class CardFactory_Instants {
 
@@ -72,7 +74,7 @@ public class CardFactory_Instants {
 	             		   // You can no longer choose to gain "protection from null".
 	             		   String[] colors = Constant.Color.onlyColors;
 
-	             		   Object o = AllZone.Display.getChoice("Choose color", colors);
+	             		   Object o = GuiUtils.getChoice("Choose color", colors);
 	             		   color = (String)o;
 	             	   }
 	             	   else {
@@ -610,7 +612,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void showMessage() {
-                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
+                    Object check = GuiUtils.getChoiceOptional("Select creature", getCreatures());
                     if(check != null) {
                         spell.setTargetCard((Card) check);
                         stopSetNext(new Input_PayManaCost(spell));
@@ -845,7 +847,7 @@ public class CardFactory_Instants {
                 	Card target = null;
                 	Player player = card.getController();
                     if(!player.isHuman()){
-                        Object check = AllZone.Display.getChoiceOptional("Select creature", attack);
+                        Object check = GuiUtils.getChoiceOptional("Select creature", attack);
                         if(check != null) {
                            target = ((Card) check);
                         } 
@@ -910,12 +912,12 @@ public class CardFactory_Instants {
                     int  Pile2CMC = 0;
                    
 
-                        AllZone.Display.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
+                        GuiUtils.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
                         //Human chooses
                         if(card.getController().equals(AllZone.ComputerPlayer)) {
                         for(int i = 0; i < Count; i++) {
                         	if(stop == false) {
-                        choice = AllZone.Display.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
+                        choice = GuiUtils.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
                         if(choice != null) {
                         	Pile1.add(choice);
                         	cards.remove(choice);
@@ -1440,7 +1442,7 @@ public class CardFactory_Instants {
                     
                     if(top.size() > 0) {
                         //let user get choice
-                        Card chosen = AllZone.Display.getChoice("Choose a card to put into your hand",
+                        Card chosen = GuiUtils.getChoice("Choose a card to put into your hand",
                                 top.toArray());
                         top.remove(chosen);
                         
@@ -1796,7 +1798,7 @@ public class CardFactory_Instants {
                     CardList creatures = new CardList(AllZone.Human_Library.getCards());
                     creatures = creatures.getType("Creature");
                     
-                    Object check = AllZone.Display.getChoiceOptional("Select creature", creatures.toArray());
+                    Object check = GuiUtils.getChoiceOptional("Select creature", creatures.toArray());
                     if(check != null) {
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                         AllZone.GameAction.moveTo(hand, (Card) check);
@@ -1814,7 +1816,7 @@ public class CardFactory_Instants {
                         Card c = CardFactoryUtil.AI_getBestCreature(list);
                         if(c == null) c = list.get(0);
                         AllZone.GameAction.moveToHand(c);
-                        AllZone.Display.getChoiceOptional("Computer picked:", c);
+                        GuiUtils.getChoiceOptional("Computer picked:", c);
                     }
                 }
                 
@@ -1978,7 +1980,7 @@ public class CardFactory_Instants {
                     CardList list = new CardList(library.getCards());
                     
                     if(list.size() != 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Select a card", list.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select a card", list.toArray());
                         
                         card.getController().shuffle();
                         if(o != null) {
@@ -2013,10 +2015,9 @@ public class CardFactory_Instants {
                 
                 public void humanResolve() {
                     CardList libraryList = new CardList(AllZone.Human_Library.getCards());
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     CardList selectedCards = new CardList();
                     
-                    Object o = AllZone.Display.getChoiceOptional("Select first card", libraryList.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Select first card", libraryList.toArray());
                     if(o != null) {
                         Card c1 = (Card) o;
                         libraryList.remove(c1);
@@ -2024,7 +2025,7 @@ public class CardFactory_Instants {
                     } else {
                         return;
                     }
-                    o = AllZone.Display.getChoiceOptional("Select second card", libraryList.toArray());
+                    o = GuiUtils.getChoiceOptional("Select second card", libraryList.toArray());
                     if(o != null) {
                         Card c2 = (Card) o;
                         libraryList.remove(c2);
@@ -2032,7 +2033,7 @@ public class CardFactory_Instants {
                     } else {
                         return;
                     }
-                    o = AllZone.Display.getChoiceOptional("Select third card", libraryList.toArray());
+                    o = GuiUtils.getChoiceOptional("Select third card", libraryList.toArray());
                     if(o != null) {
                         Card c3 = (Card) o;
                         libraryList.remove(c3);
@@ -2077,7 +2078,7 @@ public class CardFactory_Instants {
                     selectedCards.add(c);
                     
                     // NOTE: Using getChoiceOptional() results in a null error when you click on Cancel.
-                    Object o = AllZone.Display.getChoice("Select card to give to computer", selectedCards.toArray());
+                    Object o = GuiUtils.getChoice("Select card to give to computer", selectedCards.toArray());
                     
                     Card choice = (Card) o;
                     
@@ -2304,7 +2305,7 @@ public class CardFactory_Instants {
                             String question = "Pick a basic land card to put onto the battlefield tapped?";
                             
                             if (GameActionUtil.showYesNoDialog(card, question)) {
-                                Object o = AllZone.Display.getChoiceOptional("Choose a Basic Land", lands.toArray());
+                                Object o = GuiUtils.getChoiceOptional("Choose a Basic Land", lands.toArray());
                                 
                                 if (o != null) {
                                     Card card = (Card) o;
@@ -3015,7 +3016,7 @@ public class CardFactory_Instants {
 					
 					if( player.equals(AllZone.HumanPlayer)) {
 						for(int i = 0; i < X; i++) {
-							Object o = AllZone.Display.getChoice("Remove from game", graveList.toArray());
+							Object o = GuiUtils.getChoice("Remove from game", graveList.toArray());
 							if(o == null) break;
 							Card c_1 = (Card) o;
 							graveList.remove(c_1); //remove from the display list
@@ -3407,7 +3408,7 @@ public class CardFactory_Instants {
         			}
         			
         			for(int i = 0; i < 3 && !choices.isEmpty(); i++) {
-        				Object o = AllZone.Display.getChoice(prompt[i], choices.toArray());
+        				Object o = GuiUtils.getChoice(prompt[i], choices.toArray());
 						Card c1 = (Card)o;
 						if(i == 0) AllZone.GameAction.moveToHand(c1);
 						else if(i == 1) AllZone.GameAction.moveToLibrary(c1);
@@ -3921,13 +3922,13 @@ public class CardFactory_Instants {
                 
                 ArrayList<String> chooseTwo(ArrayList<String> choices) {
                     ArrayList<String> out = new ArrayList<String>();
-                    Object o = AllZone.Display.getChoiceOptional("Choose Two", choices.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
                     if(o == null) return null;
                     
                     out.add((String) o);
                     card.addSpellChoice((String) o);
                     choices.remove(out.get(0));
-                    o = AllZone.Display.getChoiceOptional("Choose Two", choices.toArray());
+                    o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
                     if(o == null) return null;
                     
                     out.add((String) o);

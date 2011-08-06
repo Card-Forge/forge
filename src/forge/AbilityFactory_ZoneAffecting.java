@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import forge.gui.GuiUtils;
+
 public class AbilityFactory_ZoneAffecting {
 	
 	//**********************************************************************
@@ -700,7 +702,7 @@ public class AbilityFactory_ZoneAffecting {
 
 									CardList dCs = new CardList();
 									dCs.add(dC);
-									AllZone.Display.getChoiceOptional("Computer has chosen", dCs.toArray());
+									GuiUtils.getChoiceOptional("Computer has chosen", dCs.toArray());
 
 									AllZone.ComputerPlayer.discard(dC, sa); // is this right?
 								}
@@ -708,11 +710,11 @@ public class AbilityFactory_ZoneAffecting {
 						}
 						else {
 							//human
-							AllZone.Display.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+							GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
 
 							for(int i = 0; i < numCards; i++) {
 								if (dPChHand.size() > 0) {
-									Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
+									Card dC = GuiUtils.getChoice("Choose a card to be discarded", dPChHand.toArray());
 
 									dPChHand.remove(dC);
 									AllZone.HumanPlayer.discard(dC, sa); // is this right?

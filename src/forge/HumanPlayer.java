@@ -1,6 +1,8 @@
 
 package forge;
 
+import forge.gui.GuiUtils;
+
 
 public class HumanPlayer extends Player{
 	
@@ -40,7 +42,7 @@ public class HumanPlayer extends Player{
 	
 	public void mayDrawCards(int n) {
 		String[] choices = {"Yes", "No"};
-		Object choice = AllZone.Display.getChoice("Draw "+n+" cards?", choices);
+		Object choice = GuiUtils.getChoice("Draw "+n+" cards?", choices);
 		if(choice.equals("Yes")) 
 			drawCards(n);
 	}
@@ -52,9 +54,9 @@ public class HumanPlayer extends Player{
 	public boolean dredge() {
 		boolean dredged = false;
 		String choices[] = {"Yes", "No"};
-		Object o = AllZone.Display.getChoice("Do you want to dredge?", choices);
+		Object o = GuiUtils.getChoice("Do you want to dredge?", choices);
 		if(o.equals("Yes")) {
-			Card c = (Card) AllZone.Display.getChoice("Select card to dredge", getDredge().toArray());
+			Card c = (Card) GuiUtils.getChoice("Select card to dredge", getDredge().toArray());
 			//rule 702.49a
 			if(getDredgeNumber(c) <= AllZone.Human_Library.size()) {
 
@@ -92,7 +94,7 @@ public class HumanPlayer extends Player{
             String s = "card";
             if(numToLibrary > 1) s += "s";
             
-            Object o = AllZone.Display.getChoice("Do you want to put the " + s
+            Object o = GuiUtils.getChoice("Do you want to put the " + s
                     + " on the top or bottom of your library?", new Object[] {"top", "bottom"});
             libPos = o.toString();
         }
@@ -102,7 +104,7 @@ public class HumanPlayer extends Player{
 	protected void doScry(final CardList topN, final int N) {
 		int num = N;
 		for(int i = 0; i < num; i++) {
-            Object o = AllZone.Display.getChoiceOptional("Put on bottom of library.",topN.toArray());
+            Object o = GuiUtils.getChoiceOptional("Put on bottom of library.",topN.toArray());
             if(o != null) {
                 Card c = (Card) o;
                 topN.remove(c);
@@ -114,7 +116,7 @@ public class HumanPlayer extends Player{
         num = topN.size();
         for(int i = 0; i < num; i++) {
             Object o;
-            o = AllZone.Display.getChoice("Put on top of library.", topN.toArray());
+            o = GuiUtils.getChoice("Put on top of library.", topN.toArray());
             if(o != null) {
                 Card c = (Card) o;
                 topN.remove(c);
@@ -132,7 +134,7 @@ public class HumanPlayer extends Player{
 	protected void clashMoveToTopOrBottom(Card c) {
 		String choice = "";
     	String choices[] = {"top","bottom"};
-    	choice = (String) AllZone.Display.getChoice(c.getName()+" - Top or bottom of Library", choices);
+    	choice = (String) GuiUtils.getChoice(c.getName()+" - Top or bottom of Library", choices);
 
     	if(choice.equals("bottom"))  {
     		AllZone.GameAction.moveToBottomOfLibrary(c);

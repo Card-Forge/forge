@@ -1,16 +1,20 @@
 package forge;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
+import java.awt.Dimension;
+import java.io.File;
+import java.util.TreeMap;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import java.awt.*;
-import java.io.File;
-import java.util.TreeMap;
+
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 public class Gui_Quest_Deck_Info implements NewConstants {
 

@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class Cost_Payment {

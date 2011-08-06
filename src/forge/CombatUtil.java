@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.gui.GuiUtils;
+
 
 public class CombatUtil {
 	static boolean Lorthos_Cancelled;
@@ -1297,7 +1299,7 @@ public class CombatUtil {
                 
                 if(enchantments.size() > 0) {
                     if(c.getController().isHuman()) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick an enchantment to put onto the battlefield",
+                        Object o = GuiUtils.getChoiceOptional("Pick an enchantment to put onto the battlefield",
                                 enchantments.toArray());
                         if(o != null) {
                             Card crd = (Card) o;
@@ -1309,14 +1311,14 @@ public class CombatUtil {
                                     CardList creats = new CardList(play.getCards());
                                     creats.addAll(oppPlay.getCards());
                                     creats = creats.getType("Creature");
-                                    obj = AllZone.Display.getChoiceOptional("Pick a creature to attach "
+                                    obj = GuiUtils.getChoiceOptional("Pick a creature to attach "
                                             + crd.getName() + " to", creats.toArray());
                                 } else if(crd.getKeyword().contains("Enchant land")
                                         || crd.getKeyword().contains("Enchant land you control")) {
                                     CardList lands = new CardList(play.getCards());
                                     //lands.addAll(oppPlay.getCards());
                                     lands = lands.getType("Land");
-                                    if(lands.size() > 0) obj = AllZone.Display.getChoiceOptional(
+                                    if(lands.size() > 0) obj = GuiUtils.getChoiceOptional(
                                             "Pick a land to attach " + crd.getName() + " to", lands.toArray());
                                 }
                                 if(obj != null) {
@@ -1354,14 +1356,13 @@ public class CombatUtil {
             
             else if(c.getName().equals("Yore-Tiller Nephilim") && !c.getCreatureAttackedThisCombat()) {
                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
                 
                 CardList creatures = new CardList(grave.getCards());
                 creatures = creatures.getType("Creature");
                 
                 if(creatures.size() > 0) {
                     if(c.getController().isHuman()) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
+                        Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
                                 creatures.toArray());
                         if(o != null) {
                             Card card = (Card) o;
@@ -1742,7 +1743,7 @@ public class CombatUtil {
                         if(graveList.size() == 0) return;
                         
                         if(sun.getController().isHuman()) {
-                            Object o = AllZone.Display.getChoiceOptional("Select target card", graveList.toArray());
+                            Object o = GuiUtils.getChoiceOptional("Select target card", graveList.toArray());
                             if(o != null) {
                                 ability2.setTargetCard((Card) o);
                                 AllZone.Stack.add(ability2);
@@ -1774,7 +1775,7 @@ public class CombatUtil {
                 
                 if(soldiers.size() > 0) {
                     if(c.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick a soldier to put onto the battlefield",
+                        Object o = GuiUtils.getChoiceOptional("Pick a soldier to put onto the battlefield",
                                 soldiers.toArray());
                         if(o != null) {
                             Card card = (Card) o;
@@ -1934,7 +1935,7 @@ public class CombatUtil {
                 if(lib.size() > 0) {
                     CardList cl = new CardList();
                     cl.add(lib.get(0));
-                    AllZone.Display.getChoiceOptional("Top card", cl.toArray());
+                    GuiUtils.getChoiceOptional("Top card", cl.toArray());
 	                Card top = lib.get(0);
 	                if(top.getType().contains("Creature")) {
 	                    player.gainLife(top.getBaseDefense(), c);
@@ -1955,7 +1956,7 @@ public class CombatUtil {
                         if(lib.size() > 0) {
                             CardList cl = new CardList();
                             cl.add(lib.get(0));
-                            AllZone.Display.getChoiceOptional("Top card:", cl.toArray());
+                            GuiUtils.getChoiceOptional("Top card:", cl.toArray());
                             
                             Card c = cl.get(0);
                             if(c.isLand()) {
@@ -2651,7 +2652,7 @@ public class CombatUtil {
                 				Card crd = enchantments.get(i);
                 				Target[i] = crd;
                             }
-	                        Object check = AllZone.Display.getChoiceOptional("Select enchantment to enchant exalted creature", Target);
+	                        Object check = GuiUtils.getChoiceOptional("Select enchantment to enchant exalted creature", Target);
 	                        if(check != null) {
 	                           Enchantment = ((Card) check);	
 	                        }

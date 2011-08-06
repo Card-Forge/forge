@@ -2,8 +2,8 @@
 package forge;
 
 
-import static javax.swing.BorderFactory.*;
-import static org.jdesktop.swingx.MultiSplitLayout.*;
+import static javax.swing.BorderFactory.createTitledBorder;
+import static org.jdesktop.swingx.MultiSplitLayout.parseModel;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

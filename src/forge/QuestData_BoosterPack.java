@@ -8,8 +8,6 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-//import forge.error.ErrorViewer;
-//import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 //balance the number of colors and creature/spells for

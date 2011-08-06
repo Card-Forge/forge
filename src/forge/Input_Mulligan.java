@@ -1,6 +1,8 @@
 
 package forge;
 
+import forge.gui.GuiUtils;
+
 public class Input_Mulligan extends Input {
     private static final long serialVersionUID = -8112954303001155622L;
     
@@ -85,7 +87,7 @@ public class Input_Mulligan extends Input {
         	if(HHandList.get(i).getName().startsWith("Leyline")) {
         		String[] choices = {"Yes", "No"};
         		Object q = null;
-        		q = AllZone.Display.getChoiceOptional("Put " + HHandList.get(i).getName() + " onto the battlefield?", choices);
+        		q = GuiUtils.getChoiceOptional("Put " + HHandList.get(i).getName() + " onto the battlefield?", choices);
         		if(q == null || q.equals("No"));
         		else {
         			HPlay.add(HHandList.get(i));

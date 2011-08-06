@@ -2,6 +2,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.gui.GuiUtils;
+
 abstract public class Ability_Mana extends Ability_Activated implements java.io.Serializable {
 	private static final long serialVersionUID = -6816356991224950520L;
 
@@ -160,7 +162,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
     			}
     			else {
     				for(int i = 0; i < list.size(); i++) {
-    					String s = (String)AllZone.Display.getChoice("Mirari's Wake"+" - Select a color to add", colors.toArray());
+    					String s = (String)GuiUtils.getChoice("Mirari's Wake"+" - Select a color to add", colors.toArray());
     					if(s != null) {
     						AllZone.ManaPool.addManaToFloating(s, source);
     					}

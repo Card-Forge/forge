@@ -12,10 +12,12 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.esotericsoftware.minlog.Log;
+
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import com.esotericsoftware.minlog.Log;
 
 public class CardFactory implements NewConstants {
     // String cardname is the key, Card is the value
@@ -473,7 +475,7 @@ public class CardFactory implements NewConstants {
     							{
     								if(Target == AllZone.HumanPlayer)
     								{
-    									if(AllZone.Display.getChoice("Do you want to draw" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
+    									if(GuiUtils.getChoice("Do you want to draw" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
     									{
     			        						Target.drawCards(Integer.parseInt(SplitActionParams[0]));
     									}
@@ -498,7 +500,7 @@ public class CardFactory implements NewConstants {
             						{
             							if(Target == AllZone.HumanPlayer)
             							{
-            								if(AllZone.Display.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
+            								if(GuiUtils.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
             								{
             									Target.discard(Integer.parseInt(SplitActionParams[0]),this, false);
             								}
@@ -518,7 +520,7 @@ public class CardFactory implements NewConstants {
             						{
             							if(Target == AllZone.HumanPlayer)
             							{
-            								if(AllZone.Display.getChoice("Do you want to lose" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
+            								if(GuiUtils.getChoice("Do you want to lose" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
             								{
     			        							Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
             								}
@@ -539,7 +541,7 @@ public class CardFactory implements NewConstants {
     								{
     									if(Target == AllZone.HumanPlayer)
     									{
-    										if(AllZone.Display.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
+    										if(GuiUtils.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
     										{
     			        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
     										}
@@ -561,7 +563,7 @@ public class CardFactory implements NewConstants {
     								System.out.println(Target);
     								if(Target == AllZone.HumanPlayer)
     								{
-    									if(AllZone.Display.getChoice("Do you want to reveal your hand?","Yes","No").equals("Yes"))
+    									if(GuiUtils.getChoice("Do you want to reveal your hand?","Yes","No").equals("Yes"))
     									{//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
 
     									}
@@ -581,7 +583,7 @@ public class CardFactory implements NewConstants {
     	        						else
     	        						{
     	        							CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
-    	        							AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+    	        							GuiUtils.getChoiceOptional("Revealed cards",list.toArray());
     	        						}
     							}
 						}
@@ -591,7 +593,7 @@ public class CardFactory implements NewConstants {
     							{
     								if(Target == AllZone.HumanPlayer)
     								{
-    									if(AllZone.Display.getChoice("Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?","Yes","No").equals("Yes"))
+    									if(GuiUtils.getChoice("Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?","Yes","No").equals("Yes"))
     									{
 										AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
     									}
@@ -610,7 +612,7 @@ public class CardFactory implements NewConstants {
 								else
 								{
 									CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
-									AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+									GuiUtils.getChoiceOptional("Revealed cards",list.toArray());
 								}
     							}
 						}
@@ -686,7 +688,7 @@ public class CardFactory implements NewConstants {
     				String[] choices = new String[map.keySet().size()];
     				choices = map.keySet().toArray(choices);
 
-    				String madeChoice = AllZone.Display.getChoice("Select target spell.",choices);
+    				String madeChoice = GuiUtils.getChoice("Select target spell.",choices);
 
     				tgt[0] = map.get(madeChoice);
     				System.out.println(tgt[0]);
@@ -3951,9 +3953,9 @@ public class CardFactory implements NewConstants {
                             if (grave.size() > 0) {
                                 Object o;
                                 if (mayReturn[0] || returnUpTo[0]) {
-                                    o = AllZone.Display.getChoiceOptional("Select a card", choices.toArray());
+                                    o = GuiUtils.getChoiceOptional("Select a card", choices.toArray());
                                 } else {
-                                    o = AllZone.Display.getChoice("Select a card", choices.toArray());
+                                    o = GuiUtils.getChoice("Select a card", choices.toArray());
                                 }
                                 if (o == null) break;
                                 Card c = (Card) o;
@@ -4097,7 +4099,7 @@ public class CardFactory implements NewConstants {
                         if (!Targets.startsWith("Card") && !Destination.equals("Battlefield")) {
                         	CardList l = new CardList();
                         	l.add(c);
-                        	AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                        	GuiUtils.getChoiceOptional("Computer picked:", l.toArray());
                         }
                     }
                 }//computerResolve()
@@ -4107,7 +4109,7 @@ public class CardFactory implements NewConstants {
                     list = list.getValidCards(Tgts);
                     
                     if(list.size() != 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Select a card", list.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select a card", list.toArray());
                         
                         card.getController().shuffle();
                         if(o != null) {
@@ -4269,7 +4271,7 @@ public class CardFactory implements NewConstants {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
                             if (creats.size() > 0)
                             {
-	                        	List<Card> selection = AllZone.Display.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
+	                        	List<Card> selection = GuiUtils.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
 	                            
 	                            numCreatures[0] = selection.size();
 	                            for(int m = 0; m < selection.size(); m++) {
@@ -4738,7 +4740,7 @@ public class CardFactory implements NewConstants {
         			
         			if (card.getController().equals(AllZone.HumanPlayer))
         			{
-        				List<Card> selection = AllZone.Display.getChoicesOptional("Select cards to fetch from Library", list.toArray());
+        				List<Card> selection = GuiUtils.getChoicesOptional("Select cards to fetch from Library", list.toArray());
         				
                         for(int m = 0; m < selection.size(); m++) {
                         	AllZone.Human_Library.remove(selection.get(m));
@@ -5089,7 +5091,7 @@ public class CardFactory implements NewConstants {
                         imageName = "B 1 1 Thrull";
                         color = "B";
                     } else if(player.equals(AllZone.HumanPlayer)) {
-                        Object q = AllZone.Display.getChoiceOptional("Select type of creature", choices);
+                        Object q = GuiUtils.getChoiceOptional("Select type of creature", choices);
                         if(q != null){
 	                        if(q.equals("Citizen")) {
 	                            type = "Citizen";
@@ -5573,7 +5575,7 @@ public class CardFactory implements NewConstants {
 						stop();
 					}
 					else {
-						Object o = AllZone.Display.getChoice("Choose card to exile", list.toArray());
+						Object o = GuiUtils.getChoice("Choose card to exile", list.toArray());
 						if (o!=null)
 						{
 							Card c = (Card)o;
@@ -5645,7 +5647,7 @@ public class CardFactory implements NewConstants {
 							chooseGrave.addAll(grave.toArray());
 						}
 						
-						Object o = AllZone.Display.getChoice("Choose first creature to exile", chooseGrave.toArray());
+						Object o = GuiUtils.getChoice("Choose first creature to exile", chooseGrave.toArray());
 						if (o!=null)
 						{
 							CardList newGrave;
@@ -5660,7 +5662,7 @@ public class CardFactory implements NewConstants {
 							newGrave = newGrave.getType("Creature");
 							newGrave.remove(c);
 							
-							Object o2 = AllZone.Display.getChoice("Choose second creature to exile", newGrave.toArray());
+							Object o2 = GuiUtils.getChoice("Choose second creature to exile", newGrave.toArray());
 							if (o2!=null)
 							{
 								Card c2 = (Card)o2;
@@ -5919,7 +5921,7 @@ public class CardFactory implements NewConstants {
                         String Title = "Put on top: ";
                         if(i == 2) Title = "Put second from top: ";
                         if(i == 3) Title = "Put third from top: ";
-                        Object o = AllZone.Display.getChoiceOptional(Title, topThree.toArray());
+                        Object o = GuiUtils.getChoiceOptional(Title, topThree.toArray());
                         if(o == null) break;
                         Card c_1 = (Card) o;
                         topThree.remove(c_1);
@@ -5985,7 +5987,7 @@ public class CardFactory implements NewConstants {
                     
                     CardList showTop = new CardList();
                     showTop.add(topCard);
-                    AllZone.Display.getChoiceOptional("Revealed top card: ", showTop.toArray());
+                    GuiUtils.getChoiceOptional("Revealed top card: ", showTop.toArray());
                     
                     if(convertedManaTopCard == convertedManaSpell) {
                         
@@ -6049,7 +6051,7 @@ public class CardFactory implements NewConstants {
                     if(creatures.size() == 0) return;
                     
 
-                    Object o = AllZone.Display.getChoiceOptional("Select target creature to play",
+                    Object o = GuiUtils.getChoiceOptional("Select target creature to play",
                             creatures.toArray());
                     if(o != null) {
                         Card c = (Card) o;
@@ -6104,7 +6106,7 @@ public class CardFactory implements NewConstants {
                     if (targetHand.size() == 0) return;
                     
                     if (target == AllZone.HumanPlayer){
-    	                Object discard = AllZone.Display.getChoice("Select Card to place on top of library.", targetHand.toArray());
+    	                Object discard = GuiUtils.getChoice("Select Card to place on top of library.", targetHand.toArray());
     	                
                         Card card = (Card)discard;
                         AllZone.GameAction.moveToLibrary(card);
@@ -6394,7 +6396,7 @@ public class CardFactory implements NewConstants {
                             	damage *= 2;
                         }
                     }//while
-                    AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+                    GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
                     
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
@@ -6695,7 +6697,7 @@ public class CardFactory implements NewConstants {
         					if(i == 2) Title = "Put second from top of library: ";
         					if(i == 3) Title = "Put third from top of library: ";
         					if(i == 4) Title = "Put fourth from top of library: ";
-        					Object o = AllZone.Display.getChoiceOptional(Title, lands.toArray());
+        					Object o = GuiUtils.getChoiceOptional(Title, lands.toArray());
         					if(o == null) break;
         					Card c_1 = (Card) o;
         					lands.remove(c_1); //remove from the display list
@@ -6842,7 +6844,7 @@ public class CardFactory implements NewConstants {
                     final Player player = getTargetPlayer();
                     CardList hand = AllZoneUtil.getPlayerHand(player);
                     if (hand.size() > 0) {
-                        AllZone.Display.getChoice("Target player's hand", hand.toArray());
+                        GuiUtils.getChoice("Target player's hand", hand.toArray());
                     } else {
                     	StringBuilder sb = new StringBuilder();
                         sb.append(getTargetPlayer()).append("'s hand is empty!");
@@ -6974,7 +6976,7 @@ public class CardFactory implements NewConstants {
                         String[] colors = Constant.Color.Colors;
                         colors[colors.length - 1] = null;
                         
-                        Object o = AllZone.Display.getChoice("Choose color", colors);
+                        Object o = GuiUtils.getChoice("Choose color", colors);
                         color = (String) o;
                         card.setChosenColor(color);
                     } else {
@@ -7492,7 +7494,7 @@ public class CardFactory implements NewConstants {
                 	for(int j=0;j<=num[0];j++) {
                 		choices[j] = ""+j;
                 	}
-                    String answer = (String)(AllZone.Display.getChoiceOptional(
+                    String answer = (String)(GuiUtils.getChoiceOptional(
                             "Charge counters to remove", choices));
                     if(null != answer && !answer.equals("")) {
                     	num[0] = Integer.parseInt(answer);
@@ -7723,7 +7725,7 @@ public class CardFactory implements NewConstants {
                     	for(int j = 0; j <= num; j++) {
                     		choices[j] = ""+j;
                     	}
-                        String answer = (String)(AllZone.Display.getChoiceOptional(
+                        String answer = (String)(GuiUtils.getChoiceOptional(
                                 "Life to pay:", choices));
                         lifeToPay = Integer.parseInt(answer);
                     } else {
@@ -7798,7 +7800,7 @@ public class CardFactory implements NewConstants {
         						
         						//Then look at the exiled cards and put them on top of your library in any order.
         						while(exiled.size() > 0) {
-        							Object o = AllZone.Display.getChoice("Put a card on top of your library.", exiled.toArray());
+        							Object o = GuiUtils.getChoice("Put a card on top of your library.", exiled.toArray());
         							Card c1 = (Card)o;
         							AllZone.GameAction.moveToLibrary(c1);
         							exiled.remove(c1);

@@ -21,7 +21,6 @@ import javax.swing.event.MouseInputAdapter;
 
 import arcane.ui.PlayArea;
 import arcane.ui.util.Animation;
-
 import forge.gui.game.CardPanel;
 import forge.properties.NewConstants;
 

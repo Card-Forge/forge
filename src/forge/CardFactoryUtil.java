@@ -11,6 +11,8 @@ import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.gui.GuiUtils;
+
 
 public class CardFactoryUtil {
     private static Random random = new Random();
@@ -511,7 +513,7 @@ public class CardFactoryUtil {
             	if(choices.size() == 0) stop();
             	if(spell.getTargetCard() != null) stop();
                 AllZone.Display.showMessage("Select target Spell: ");
-            	Card choice = AllZone.Display.getChoiceOptional("Choose a Spell", choices.toArray());
+            	Card choice = GuiUtils.getChoiceOptional("Choose a Spell", choices.toArray());
                 if(choice != null) {
                 	spell.setTargetCard(choice);
                 	done();
@@ -1122,7 +1124,7 @@ public class CardFactoryUtil {
                     play.add(merc);
                 } else //human
                 {
-                    Object o = AllZone.Display.getChoiceOptional("Select target Mercenary", mercs.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Select target Mercenary", mercs.toArray());
                     if(o != null) {
                         Card merc = (Card) o;
                         lib.remove(merc);
@@ -1217,7 +1219,7 @@ public class CardFactoryUtil {
                     play.add(rebel);
                 } else //human
                 {
-                    Object o = AllZone.Display.getChoiceOptional("Select target Rebel", rebels.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Select target Rebel", rebels.toArray());
                     if(o != null) {
                         Card rebel = (Card) o;
                         lib.remove(rebel);
@@ -1229,7 +1231,7 @@ public class CardFactoryUtil {
                                 CardList creats = new CardList(play.getCards());
                                 creats.addAll(oppPlay.getCards());
                                 creats = creats.getType("Creature");
-                                obj = AllZone.Display.getChoiceOptional("Pick a creature to attach "
+                                obj = GuiUtils.getChoiceOptional("Pick a creature to attach "
                                         + rebel.getName() + " to", creats.toArray());
                             }
                             if(obj != null) {
@@ -1388,7 +1390,7 @@ public class CardFactoryUtil {
                 }
                 
 
-                Object o = AllZone.Display.getChoiceOptional("Select a card", sameType.toArray());
+                Object o = GuiUtils.getChoiceOptional("Select a card", sameType.toArray());
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
                     //AllZone.Stack.add(ability);
@@ -1465,7 +1467,7 @@ public class CardFactoryUtil {
                 if(sameCost.size() == 0) return;
                 
 
-                Object o = AllZone.Display.getChoiceOptional("Select a card", sameCost.toArray());
+                Object o = GuiUtils.getChoiceOptional("Select a card", sameCost.toArray());
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
                     //AllZone.Stack.add(ability);
@@ -2083,7 +2085,7 @@ public class CardFactoryUtil {
                     question.append(Manacost).append(" or less from your graveyard to your hand?");
                     
                     if (GameActionUtil.showYesNoDialog(sourceCard, question.toString())) {
-                        Object o = AllZone.Display.getChoiceOptional("Select a card", sameCost.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select a card", sameCost.toArray());
                         if (o != null) {
                             
                             Card c1 = (Card) o;
@@ -2345,7 +2347,7 @@ public class CardFactoryUtil {
             	CardList grave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
             	for(int i = 1; i <= n; i++) {
             		String title = "Return card from grave to hand";
-            		Object o = AllZone.Display.getChoice(title, grave.toArray());
+            		Object o = GuiUtils.getChoice(title, grave.toArray());
             		if(o == null) break;
             		Card toHand = (Card) o;
             		grave.remove(toHand);
@@ -2641,7 +2643,7 @@ public class CardFactoryUtil {
                 if (UpTo) {
                     for (int i = 0; i < numCards; i++) {
                         if (grave.size() > 0) {
-                            Object o = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
+                            Object o = GuiUtils.getChoiceOptional("Select a card", grave.toArray());
                             if (o == null) break;
                             Card c = (Card) o;
                             targets.add(c);
@@ -2652,7 +2654,7 @@ public class CardFactoryUtil {
                     int max = grave.size();
                     for (int i = 0; i < max; i++) {
                         if (grave.size() > 0) {
-                            Object o = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
+                            Object o = GuiUtils.getChoiceOptional("Select a card", grave.toArray());
                             if (o == null) break;
                             Card c = (Card) o;
                             targets.add(c);
@@ -2661,7 +2663,7 @@ public class CardFactoryUtil {
                     }
                 } else if (grave.size() > numCards) {
                     for (int i = 0; i < numCards; i++) {
-                        Object o = AllZone.Display.getChoice("Select a card", grave.toArray());
+                        Object o = GuiUtils.getChoice("Select a card", grave.toArray());
                         Card c = (Card) o;
                         targets.add(c);
                         grave.remove(c);

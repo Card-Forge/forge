@@ -107,7 +107,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         optionsPanel.add(this.devModeCheckBox);
         optionsPanel.add(Box.createVerticalStrut(5));
-        optionsPanel.add(this.newGUICheckbox);
+        optionsPanel.add(QuestMainPanel.newGUICheckbox);
         optionsPanel.add(Box.createVerticalStrut(5));
         optionsPanel.add(this.smoothLandCheckBox);
         optionsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Options"));

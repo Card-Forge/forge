@@ -1,5 +1,5 @@
 package forge;
-import java.util.*;
+import java.util.Observer;
 
 //PlayerZone observers the cards that are added to its zone
 abstract public class PlayerZone extends MyObservable implements IPlayerZone, Observer

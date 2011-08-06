@@ -2,9 +2,9 @@
 package forge;
 
 
-import static java.lang.Integer.*;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,6 +1,6 @@
 package forge;
 import java.util.Enumeration;
- 
+
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
  

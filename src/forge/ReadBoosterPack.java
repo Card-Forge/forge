@@ -6,8 +6,6 @@ package forge;
 //import java.io.FileReader;
 import java.util.ArrayList;
 
-//import forge.error.ErrorViewer;
-//import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 

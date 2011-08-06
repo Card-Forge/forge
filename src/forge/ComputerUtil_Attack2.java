@@ -1,5 +1,6 @@
 package forge;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.ComputerPlayer
 public class ComputerUtil_Attack2 {

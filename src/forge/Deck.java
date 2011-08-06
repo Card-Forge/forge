@@ -2,7 +2,7 @@
 package forge;
 
 
-import static java.util.Collections.*;
+import static java.util.Collections.unmodifiableList;
 
 import java.util.ArrayList;
 import java.util.Comparator;

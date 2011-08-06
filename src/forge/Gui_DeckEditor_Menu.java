@@ -31,6 +31,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_DownloadPictures.ERRORS;
@@ -1014,7 +1015,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         }
         //Object o = JOptionPane.showInputDialog(null, "Deck Name", "Open Deck", JOptionPane.OK_CANCEL_OPTION, null,
         //        choices.toArray(), choices.toArray()[0]);
-        Object o = AllZone.Display.getChoiceOptional("Open Deck", choices.toArray());
+        Object o = GuiUtils.getChoiceOptional("Open Deck", choices.toArray());
         
         if(o == null) return "";
         

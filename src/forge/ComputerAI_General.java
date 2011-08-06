@@ -1,9 +1,7 @@
 package forge;
-import static forge.error.ErrorViewer.*;
+import static forge.error.ErrorViewer.showError;
 
 import java.util.ArrayList;
-// import java.util.Collection;
-// import java.util.TreeSet;
 
 import com.esotericsoftware.minlog.Log;
 

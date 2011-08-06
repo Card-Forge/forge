@@ -3,6 +3,8 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import forge.gui.GuiUtils;
+
 public class AbilityFactory_Mana {
 	// ****************************** MANA ************************
 	public static SpellAbility createAbilityMana(final AbilityFactory AF, final String produced){
@@ -363,7 +365,7 @@ public class AbilityFactory_Mana {
 			baseMana = Input_PayManaCostUtil.getShortColorString(colors.get(0));
 		else{
 			if (abMana.getActivatingPlayer().isHuman()){
-				Object o = AllZone.Display.getChoiceOptional("Select Mana to Produce", colors.toArray());
+				Object o = GuiUtils.getChoiceOptional("Select Mana to Produce", colors.toArray());
 				if (o == null) {
 					// User hit cancel
 					abMana.setCanceled(true); 

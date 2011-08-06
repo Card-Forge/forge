@@ -4,6 +4,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.gui.GuiUtils;
+
 /**
  * AllZoneUtil contains static functions used to get CardLists of various
  * cards in various zones.
@@ -481,7 +483,7 @@ public class AllZoneUtil {
 			default: suffix="th";
 			}
 			String title = "Put "+i+suffix+" in Library: ";
-			Object o = AllZone.Display.getChoiceOptional(title, topCards.toArray());
+			Object o = GuiUtils.getChoiceOptional(title, topCards.toArray());
 			if(o == null) break;
 			Card c_1 = (Card) o;
 			topCards.remove(c_1);
@@ -503,7 +505,7 @@ public class AllZoneUtil {
 		maxCards = Math.min(maxCards, numCards);
 		for(int i = 1; i <= maxCards; i++) {
 			String title = "Select card to exile: " + i + "/" + maxCards;
-			Object o = AllZone.Display.getChoiceOptional(title, cards.toArray());
+			Object o = GuiUtils.getChoiceOptional(title, cards.toArray());
 			if(o == null) break;
 			Card card = (Card) o;
 			AllZone.GameAction.exile(card);

@@ -8,7 +8,10 @@ import java.util.Vector;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
+
 import com.esotericsoftware.minlog.Log;
+
+import forge.gui.GuiUtils;
 
 public class CardFactory_Sorceries {
     
@@ -640,7 +643,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void showMessage() {
-                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreaturesAndArtifacts());
+                    Object check = GuiUtils.getChoiceOptional("Select creature", getCreaturesAndArtifacts());
                     if(check != null) {
                         spell.setTargetCard((Card) check);
                         stopSetNext(new Input_PayManaCost(spell));
@@ -712,7 +715,7 @@ public class CardFactory_Sorceries {
                         for(int i = 1; i < handChoices.length; i++) {
                             handChoices[i] = null;
                         }
-                        AllZone.Display.getChoice("Random card", handChoices);
+                        GuiUtils.getChoice("Random card", handChoices);
                         player.addDamage(CardUtil.getConvertedManaCost(choice.getManaCost()), card);
                     }                                   
                 }//resolve()
@@ -762,7 +765,7 @@ public class CardFactory_Sorceries {
                     		Card crd = creature.get(i);
                     		Target[i] = crd;
                     	}
-                    	Object check = AllZone.Display.getChoiceOptional("Select creature", Target);
+                    	Object check = GuiUtils.getChoiceOptional("Select creature", Target);
                     	if(check != null) {
                     		c2 = (Card) check;
                     	} 
@@ -993,7 +996,7 @@ public class CardFactory_Sorceries {
             	}
                 Object check = null;
                 if(SystemsGo == true) {
-                	check = AllZone.Display.getChoiceOptional("Select Card to play for free", Choices);                   	
+                	check = GuiUtils.getChoiceOptional("Select Card to play for free", Choices);                   	
 	                if(check != null) {
 	                   target = ((Card) check);
 	                }
@@ -1128,7 +1131,7 @@ public class CardFactory_Sorceries {
                 	Card[] Search = GraveandLibrary.toArray();
                     AllZone.Display.showMessage("Select a card to put " + i + " from the top of the new library: "  + (Count - i) + " Choices to go.");
                     ButtonUtil.enableOnlyCancel();
-                    Object check = AllZone.Display.getChoice("Select a card: ", Search);   
+                    Object check = GuiUtils.getChoice("Select a card: ", Search);   
                     NewLibrary.add((Card) check);
                     GraveandLibrary.remove((Card) check);
                     
@@ -1188,12 +1191,12 @@ public class CardFactory_Sorceries {
                     int  Pile2CMC = 0;
                    
 
-                        AllZone.Display.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
+                        GuiUtils.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
                         //Human chooses
                         if(card.getController().equals(AllZone.ComputerPlayer)) {
                         	for(int i = 0; i < Count; i++) {
                         		if(stop == false) {
-                        			choice = AllZone.Display.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
+                        			choice = GuiUtils.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
                         			if(choice != null) {
                         				Pile1.add(choice);
                         				cards.remove(choice);
@@ -1275,7 +1278,7 @@ public class CardFactory_Sorceries {
 	                    	  int Spells = Pile1.size();
 	                    	  for( int i = 0; i < Spells; i++) {
 	                    		  if(stop2 == false) {
-	                    			  Object check = AllZone.Display.getChoiceOptional("Select spells to play in reverse order: ", Pile1.toArray());
+	                    			  Object check = GuiUtils.getChoiceOptional("Select spells to play in reverse order: ", Pile1.toArray());
 	                    			  if(check != null) {
 	                    				  if(((Card) check).isLand() == true) {
 	                    					  if(CardFactoryUtil.canHumanPlayLand()) {
@@ -1297,7 +1300,7 @@ public class CardFactory_Sorceries {
 	                    	  int Spells = Pile2.size();
 	                    	  for( int i = 0; i < Spells; i++) {
 	                    		  if(stop2 == false) {
-	                    			  Object check = AllZone.Display.getChoiceOptional("Select spells to play in reverse order: ", Pile2.toArray());
+	                    			  Object check = GuiUtils.getChoiceOptional("Select spells to play in reverse order: ", Pile2.toArray());
 	                    			  if(check != null) {
 	                    				  if(((Card) check).isLand() == true) {
 	                    					  if(CardFactoryUtil.canHumanPlayLand()) {
@@ -1368,7 +1371,7 @@ public class CardFactory_Sorceries {
                         }
                         
                         if(dragons.size() != 0) {
-                            Object o = AllZone.Display.getChoiceOptional("Select a Dragon to put onto the battlefield", dragons.toArray());
+                            Object o = GuiUtils.getChoiceOptional("Select a Dragon to put onto the battlefield", dragons.toArray());
                             
                             card.getController().shuffle();
                             if(o != null) {
@@ -1399,7 +1402,7 @@ public class CardFactory_Sorceries {
                             
                             CardList l = new CardList();
                             l.add(c);
-                            AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                            GuiUtils.getChoiceOptional("Computer picked:", l.toArray());
                         }                    	
                     }
                     
@@ -1501,10 +1504,10 @@ public class CardFactory_Sorceries {
                         choice = JOptionPane.showInputDialog(null, "Name a nonland card", cardName, JOptionPane.QUESTION_MESSAGE);
                         
                         CardList showLibrary = AllZoneUtil.getPlayerCardsInLibrary(target);
-                        AllZone.Display.getChoiceOptional("Target Player's Library", showLibrary.toArray());
+                        GuiUtils.getChoiceOptional("Target Player's Library", showLibrary.toArray());
                         
                         CardList showHand = AllZoneUtil.getPlayerHand(target);
-                        AllZone.Display.getChoiceOptional("Target Player's Hand", showHand.toArray());
+                        GuiUtils.getChoiceOptional("Target Player's Hand", showHand.toArray());
                     }//if
                     else  //computer chooses
                     {
@@ -2321,13 +2324,13 @@ public class CardFactory_Sorceries {
                 
                 ArrayList<String> chooseTwo(ArrayList<String> choices) {
                     ArrayList<String> out = new ArrayList<String>();
-                    Object o = AllZone.Display.getChoiceOptional("Choose Two", choices.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
                     if(o == null) return null;
                     
                     out.add((String) o);
                     card.addSpellChoice((String) o);
                     choices.remove(out.get(0));
-                    o = AllZone.Display.getChoiceOptional("Choose Two", choices.toArray());
+                    o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
                     if(o == null) return null;
                     
                     out.add((String) o);
@@ -2461,7 +2464,7 @@ public class CardFactory_Sorceries {
                     CardList choices = new CardList(library.getCards());
                     
                     choices = choices.getType("Creature");
-                    Object o = AllZone.Display.getChoiceOptional("Choose a creature", choices.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Choose a creature", choices.toArray());
                     if(o != null) resolve((Card) o);
                 }
                 
@@ -2842,7 +2845,7 @@ public class CardFactory_Sorceries {
                         list.add(library.get(i));
                     
                     //optional, select a creature
-                    Object o = AllZone.Display.getChoiceOptional("Select a creature", list.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Select a creature", list.toArray());
                     if(o != null && ((Card) o).isCreature()) {
                         list.remove((Card) o);
                         AllZone.GameAction.moveToHand((Card) o);
@@ -3087,7 +3090,7 @@ public class CardFactory_Sorceries {
                     
                     if(list.size() > 0) {
                         
-                        Object o = AllZone.Display.getChoiceOptional("First card to discard", list.toArray());
+                        Object o = GuiUtils.getChoiceOptional("First card to discard", list.toArray());
                         
                         Card c = (Card) o;
                         list.remove(c);
@@ -3099,7 +3102,7 @@ public class CardFactory_Sorceries {
                         }
                         
                         if(list.size() > 0) {
-                            Object o2 = AllZone.Display.getChoiceOptional("Second card to discard", list.toArray());
+                            Object o2 = GuiUtils.getChoiceOptional("Second card to discard", list.toArray());
                             
                             Card c2 = (Card) o2;
                             list.remove(c2);
@@ -3181,7 +3184,7 @@ public class CardFactory_Sorceries {
                             topTwo.add(lib.get(0));
                             topTwo.add(lib.get(1));
                             
-                            Object o = AllZone.Display.getChoiceOptional("Select card to put in hand: ",
+                            Object o = GuiUtils.getChoiceOptional("Select card to put in hand: ",
                                     topTwo.toArray());
                             
                             Card c1 = (Card) o;
@@ -3214,6 +3217,74 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);           
         }//*************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cruel Tutor") || cardName.equals("Imperial Seal")) {
+            SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -948983382014193129L;
+
+				@Override
+                public boolean canPlayAI() {
+                    int life = AllZone.ComputerPlayer.getLife();
+                    if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
+                    else return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    Player player = card.getController();
+                    if(player.isHuman()) humanResolve();
+                    else computerResolve();
+                }
+                
+                public void computerResolve() {
+                    //TODO: somehow select a good noncreature card for AI
+                    CardList creature = new CardList(AllZone.Computer_Library.getCards());
+                    creature = creature.getType("Creature");
+                    if(creature.size() != 0) {
+                        Card c = CardFactoryUtil.AI_getBestCreature(creature);
+                        
+                        if(c == null) {
+                            creature.shuffle();
+                            c = creature.get(0);
+                        }
+                        
+                        card.getController().shuffle();
+                        
+                        //move to top of library
+                        AllZone.Computer_Library.remove(c);
+                        AllZone.Computer_Library.add(c, 0);
+                        
+                        //lose 2 life
+                        AllZone.ComputerPlayer.loseLife(2, card);
+                    }
+                }//computerResolve()
+                
+                public void humanResolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    
+                    CardList list = new CardList(library.getCards());
+                    
+                    if(list.size() != 0) {
+                        Object o = GuiUtils.getChoiceOptional("Select a card", list.toArray());
+                        
+                        card.getController().shuffle();
+                        if(o != null) {
+                            //put card on top of library
+                            library.remove(o);
+                            library.add((Card) o, 0);
+                        }
+                        //lose 2 life
+                        AllZone.HumanPlayer.loseLife(2, card);
+                    }//if
+                    
+
+                }//resolve()
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Invincible Hymn")) {
@@ -3590,7 +3661,7 @@ public class CardFactory_Sorceries {
                                 }
                             });
                             if(list.size() > 0) {
-                                Object o = AllZone.Display.getChoiceOptional("Select artifact", list.toArray());
+                                Object o = GuiUtils.getChoiceOptional("Select artifact", list.toArray());
                                 
                                 if(o != null) {
                                     Card crd = (Card) o;
@@ -3809,14 +3880,14 @@ public class CardFactory_Sorceries {
                     CardList fullHand = new CardList(hand.getCards());
                     Card[] handChoices = removeLand(hand.getCards());
                     
-                    if(fullHand.size() > 0 && card.getController().equals(AllZone.HumanPlayer)) AllZone.Display.getChoice(
+                    if(fullHand.size() > 0 && card.getController().equals(AllZone.HumanPlayer)) GuiUtils.getChoice(
                             "Revealing hand", fullHand.toArray());
                     
                     if (handChoices.length == 0)
                     	return;
                     
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        choice = AllZone.Display.getChoice("Choose", handChoices);
+                        choice = GuiUtils.getChoice("Choose", handChoices);
                     } else //computer chooses
                     {
                         choice = CardUtil.getRandom(handChoices);
@@ -4111,7 +4182,7 @@ public class CardFactory_Sorceries {
     			  Card c;
     			  if (humanList.size() > 0)
     			  {
-    				  Object check = AllZone.Display.getChoiceOptional("Select creature to Exhume", humanList.toArray());
+    				  Object check = GuiUtils.getChoiceOptional("Select creature to Exhume", humanList.toArray());
     				  if (check!=null)
     				  {
     					  c = (Card)check;
@@ -4899,7 +4970,7 @@ public class CardFactory_Sorceries {
 					
 					if( player.equals(AllZone.HumanPlayer)) {
 						for(int i = 0; i < size; i++) {
-							Object o = AllZone.Display.getChoice("Remove from game", graveList.toArray());
+							Object o = GuiUtils.getChoice("Remove from game", graveList.toArray());
 							if(o == null) break;
 							damage++;	// tally up how many cards removed
 							Card c_1 = (Card) o;
@@ -4956,7 +5027,7 @@ public class CardFactory_Sorceries {
 
         			//choose one card from it
         			if(player.equals(AllZone.HumanPlayer)){ 
-        				Object o = AllZone.Display.getChoice("Put into library", handList.toArray());
+        				Object o = GuiUtils.getChoice("Put into library", handList.toArray());
         				//if(o == null) break;
         				Card c_1 = (Card) o;
         				if( c_1 != null ) {
@@ -5251,7 +5322,7 @@ public class CardFactory_Sorceries {
                     		revealed.add(top);
                     	} while( index < lib.size() && top.isLand() );
                     	//Display the revealed cards
-                    	AllZone.Display.getChoice("Revealed cards:", revealed.toArray());
+                    	GuiUtils.getChoice("Revealed cards:", revealed.toArray());
                     	//non-land card into hand
                     	AllZone.GameAction.moveToHand(revealed.get(revealed.size()-1));
                     	//put the rest of the cards on the bottom of library
@@ -5650,7 +5721,7 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void showMessage() {
-                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
+                    Object check = GuiUtils.getChoiceOptional("Select creature", getCreatures());
                     if(check != null) {
                         spell.setTargetCard((Card) check);
                         stopSetNext(new Input_PayManaCost(spell));
@@ -5839,7 +5910,7 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void showMessage() {
-                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
+                    Object check = GuiUtils.getChoiceOptional("Select creature", getCreatures());
                     if(check != null) {
                         spell.setTargetCard((Card) check);
                         stopSetNext(new Input_PayManaCost(spell));
@@ -6259,7 +6330,7 @@ public class CardFactory_Sorceries {
 						final Card topCard = lib.get(0);
 						int damage = CardUtil.getConvertedManaCost(topCard);
 						
-						AllZone.Display.getChoiceOptional(card+" - Revealed card", new Card[] {topCard});
+						GuiUtils.getChoiceOptional(card+" - Revealed card", new Card[] {topCard});
 
 						//deal damage to player
 						opponent.addDamage(damage, card);
@@ -6320,7 +6391,7 @@ public class CardFactory_Sorceries {
 						topCards.add(lib.get(j));
 					}
 					final int num = CardFactoryUtil.getNumberOfManaSymbolsByColor("U", topCards);
-					AllZone.Display.getChoiceOptional("Revealed cards - "+num+" U mana symbols", topCards.toArray());
+					GuiUtils.getChoiceOptional("Revealed cards - "+num+" U mana symbols", topCards.toArray());
 					maxCards = Math.min(maxCards, num);
 					
 					//opponent moves this many cards to graveyard
@@ -6961,12 +7032,12 @@ public class CardFactory_Sorceries {
                 
                 ArrayList<String> chooseTwo(ArrayList<String> choices) {
                     ArrayList<String> out = new ArrayList<String>();
-                    Object o = AllZone.Display.getChoiceOptional("Choose Two", choices.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
                     if(o == null) return null;
                     
                     out.add((String) o);
                     choices.remove(out.get(0));
-                    o = AllZone.Display.getChoiceOptional("Choose Two", choices.toArray());
+                    o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
                     if(o == null) return null;
                     
                     out.add((String) o);

@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import forge.gui.GuiUtils;
+
 class CardFactory_Lands {
 
     public static Card getCard(final Card card, final String cardName, Player owner) {
@@ -168,7 +170,7 @@ class CardFactory_Lands {
 
         			if(card.getController() == AllZone.HumanPlayer){
         				if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
-        					Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.onlyColors);
+        					Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.onlyColors);
         					Color = (String) o;
         				}
 
@@ -663,7 +665,7 @@ class CardFactory_Lands {
                     } else // human
                     {
                         if(plains.size() > 0) {
-                            Object o = AllZone.Display.getChoiceOptional(
+                            Object o = GuiUtils.getChoiceOptional(
                                     "Select plains card to put onto the battlefield tapped: ", plains.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
@@ -1745,7 +1747,7 @@ class CardFactory_Lands {
                 	for(int j=0;j<=num[0];j++) {
                 		choices[j] = ""+j;
                 	}
-                    String answer = (String)(AllZone.Display.getChoiceOptional("Storage counters to remove", choices));
+                    String answer = (String)(GuiUtils.getChoiceOptional("Storage counters to remove", choices));
                     if(null != answer && !answer.equals("")) {
 	                    num[0] = Integer.parseInt(answer);
 	                    card.tap();
@@ -1907,7 +1909,7 @@ class CardFactory_Lands {
                 	for(int j=0;j<=num[0];j++) {
                 		choices[j] = ""+j;
                 	}
-                    String answer = (String)(AllZone.Display.getChoiceOptional(
+                    String answer = (String)(GuiUtils.getChoiceOptional(
                             "Storage counters to remove", choices));
                     if (answer == null){
                     	stop();
@@ -1916,7 +1918,7 @@ class CardFactory_Lands {
                     	
                     num[0] = Integer.parseInt(answer);
                     
-                    String splitNum = (String)(AllZone.Display.getChoiceOptional(
+                    String splitNum = (String)(GuiUtils.getChoiceOptional(
                             "Number of "+primary+" to add", choices));
                     if (splitNum == null){
                     	stop();

@@ -2,7 +2,9 @@
 package forge;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import forge.properties.NewConstants;
 @SuppressWarnings("unchecked") // Comparable needs <type>
 

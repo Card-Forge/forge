@@ -1,7 +1,8 @@
 package forge;
 
-import static java.lang.Integer.*;
-import static javax.swing.JOptionPane.*;
+import static java.lang.Integer.parseInt;
+import static javax.swing.JOptionPane.DEFAULT_OPTION;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -15,9 +16,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 

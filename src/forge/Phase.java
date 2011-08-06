@@ -1,7 +1,7 @@
 package forge;
 
-import java.util.Observer;
 import java.util.ArrayList;
+import java.util.Observer;
 import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;

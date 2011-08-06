@@ -3,14 +3,17 @@ package forge;
 
 
 import java.util.ArrayList;
-import java.util.Stack;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
+
 import com.esotericsoftware.minlog.Log;
+
+import forge.gui.GuiUtils;
 
 public class CardFactory_Creatures {
     
@@ -440,7 +443,7 @@ public class CardFactory_Creatures {
                     });
                     
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Choose a creature", creats.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Choose a creature", creats.toArray());
                         if(o != null) {
                             Card c = (Card) o;
                             grave.remove(c);
@@ -861,7 +864,7 @@ public class CardFactory_Creatures {
                     String choices[] = {"3/3", "2/2 with flying", "1/6 with defender"};
                     
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        choice = AllZone.Display.getChoice("Choose one", choices);
+                        choice = GuiUtils.getChoice("Choose one", choices);
                     } else choice = choices[MyRandom.random.nextInt(3)];
                     
                     if(choice.equals("2/2 with flying")) {
@@ -1024,7 +1027,7 @@ public class CardFactory_Creatures {
 						String[] colors = Constant.Color.Colors;
 						colors[colors.length-1] = null;
 
-						Object o = AllZone.Display.getChoice("Choose color", colors);
+						Object o = GuiUtils.getChoice("Choose color", colors);
 						color = (String)o;
 					}
 					else {
@@ -2357,7 +2360,7 @@ public class CardFactory_Creatures {
                     if(graveList.size() == 0) return;
                     
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", graveList.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", graveList.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -3877,7 +3880,7 @@ public class CardFactory_Creatures {
 						if(count == library.size()) 
 							break;
 					}//while
-					AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+					GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
 					
 					if (basicGrab != null){
 						// put basic in hand
@@ -4293,7 +4296,7 @@ public class CardFactory_Creatures {
                     CardList TopCreatures = TopCards;
                     if(card.getController().equals(AllZone.HumanPlayer)) {
                         if(TopCards.size()  > 0) {
-						AllZone.Display.getChoice(
+						GuiUtils.getChoice(
                                 "Look at the top five cards: ", TopCards.toArray());
                         TopCreatures = TopCreatures.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
@@ -4302,7 +4305,7 @@ public class CardFactory_Creatures {
                             }
                         });
                         if(TopCreatures.size() > 0) {
-	                        Object o2 = AllZone.Display.getChoiceOptional(
+	                        Object o2 = GuiUtils.getChoiceOptional(
 	                                "Put a creature with a power 5 or greater onto the battlefield: ", TopCreatures.toArray());
 	                        if(o2 != null) {
 	                            Card c = (Card) o2;
@@ -4317,7 +4320,7 @@ public class CardFactory_Creatures {
                     	for(int i = 0; i < Count; i++) {   
                             AllZone.Display.showMessage("Select a card to put " + (Count - i) + " from the bottom of your library: "  + (Count - i) + " Choices to go.");
                             ButtonUtil.enableOnlyCancel();
-                            Object check = AllZone.Display.getChoice("Select a card: ", TopCards.toArray());   
+                            Object check = GuiUtils.getChoice("Select a card: ", TopCards.toArray());   
                             AllZone.GameAction.moveTo(lib, (Card) check);
                             TopCards.remove((Card) check);
                         }
@@ -4755,7 +4758,7 @@ public class CardFactory_Creatures {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
                             String[] colors = Constant.Color.onlyColors;
                             
-                            Object o = AllZone.Display.getChoice("Choose color", colors);
+                            Object o = GuiUtils.getChoice("Choose color", colors);
                             color[0] = (String) o;
                             card.setChosenColor(color[0]);
                         } else { 
@@ -4833,7 +4836,7 @@ public class CardFactory_Creatures {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
                             String[] colors = Constant.Color.onlyColors;
                             
-                            Object o = AllZone.Display.getChoice("Choose color", colors);
+                            Object o = GuiUtils.getChoice("Choose color", colors);
                             color[0] = (String) o;
                             card.setChosenColor(color[0]);
                             String s = CardUtil.getShortColor(color[0]);
@@ -4962,14 +4965,14 @@ public class CardFactory_Creatures {
 						stop();
 					}
 					else {
-						Object o = AllZone.Display.getChoice("Choose first card to exile", list.toArray());
+						Object o = GuiUtils.getChoice("Choose first card to exile", list.toArray());
 						if (o!=null)
 						{
 							Card c1 = (Card)o;
 							AllZone.GameAction.exile(c1);
 							list.remove(c1);
 							
-							o = AllZone.Display.getChoice("Choose second card to exile", list.toArray());
+							o = GuiUtils.getChoice("Choose second card to exile", list.toArray());
 							if (o!=null)
 							{
 								
@@ -5227,7 +5230,7 @@ public class CardFactory_Creatures {
                     if(card.getController().equals(AllZone.HumanPlayer)) {
                         String[] colors = Constant.Color.onlyColors;
                         
-                        Object o = AllZone.Display.getChoice("Choose color", colors);
+                        Object o = GuiUtils.getChoice("Choose color", colors);
                         color[0] = (String) o;
                         card.setChosenColor(color[0]);
                     } else { 
@@ -5598,7 +5601,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Card c = null;
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select Elemental", getCreatures());
+                        Object o = GuiUtils.getChoiceOptional("Select Elemental", getCreatures());
                         c = (Card) o;
                         
                     } else {
@@ -5775,7 +5778,7 @@ public class CardFactory_Creatures {
                         dragon = CardFactoryUtil.AI_getBestCreature(list);
                     } else //human
                     {
-                        Object o = AllZone.Display.getChoiceOptional("Select Dragon", list.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select Dragon", list.toArray());
                         dragon = (Card) o;
                     }
                     AllZone.GameAction.moveToHand(dragon);
@@ -5940,7 +5943,7 @@ public class CardFactory_Creatures {
                     if(arts.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", arts.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", arts.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -5971,7 +5974,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         hand.add(c);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -5995,7 +5998,7 @@ public class CardFactory_Creatures {
                     if(goblins.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", goblins.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", goblins.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -6025,7 +6028,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -6048,7 +6051,7 @@ public class CardFactory_Creatures {
                     if(kithkin.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", kithkin.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", kithkin.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -6078,7 +6081,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -6103,7 +6106,7 @@ public class CardFactory_Creatures {
                     if(treefolkForests.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card",
+                        Object o = GuiUtils.getChoiceOptional("Select target card",
                                 treefolkForests.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
@@ -6205,7 +6208,7 @@ public class CardFactory_Creatures {
                     } else // human
                     {
                         if(basic.size() > 0) {
-                            Object o = AllZone.Display.getChoiceOptional("Select Plains card to put onto the battlefield: ",
+                            Object o = GuiUtils.getChoiceOptional("Select Plains card to put onto the battlefield: ",
                                     basic.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
@@ -6442,7 +6445,7 @@ public class CardFactory_Creatures {
                     
                     if(cards.size() > 0) {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
-                            Object o = AllZone.Display.getChoiceOptional("Select card to remove: ",
+                            Object o = GuiUtils.getChoiceOptional("Select card to remove: ",
                                     cards.toArray());
                             Card c = (Card) o;
                             AllZone.GameAction.exile(c);
@@ -6509,7 +6512,7 @@ public class CardFactory_Creatures {
                     int lifeGain = 0;
                     if(card.getController().equals(AllZone.HumanPlayer)) {
                         String choices[] = {"white", "blue", "black", "red", "green"};
-                        Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
+                        Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
                         Log.debug("Treva, the Renewer", "Color:" + o);
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
                         
@@ -6548,7 +6551,7 @@ public class CardFactory_Creatures {
                     int numberTokens = 0;
                     if(card.getController().equals(AllZone.HumanPlayer)) {
                         String choices[] = {"white", "blue", "black", "red", "green"};
-                        Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
+                        Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
                         //System.out.println("Color:" + o);
                         numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
                     } else {
@@ -6731,7 +6734,7 @@ public class CardFactory_Creatures {
                     } else // human
                     {
                         if(basic.size() > 0) {
-                            Object o = AllZone.Display.getChoiceOptional(
+                            Object o = GuiUtils.getChoiceOptional(
                                     "Select Basic Land card to put onto the battlefield tapped: ", basic.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
@@ -6844,7 +6847,7 @@ public class CardFactory_Creatures {
                     CardList cl = new CardList();
                     cl.add(lib.get(0));
                     
-                    AllZone.Display.getChoiceOptional("Top card", cl.toArray());
+                    GuiUtils.getChoiceOptional("Top card", cl.toArray());
                 }
                 
                 @Override
@@ -6898,7 +6901,7 @@ public class CardFactory_Creatures {
                     if(powerTwoCreatures.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card",
+                        Object o = GuiUtils.getChoiceOptional("Select target card",
                                 powerTwoCreatures.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
@@ -7061,7 +7064,7 @@ public class CardFactory_Creatures {
                         }
                     }
                     
-                    //Object o = AllZone.Display.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
+                    //Object o = GuiUtils.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
                     
 
                     AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, redGreen,
@@ -7257,7 +7260,7 @@ public class CardFactory_Creatures {
                     
                     if(gravecards.size() > 0) {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
-                            Object o = AllZone.Display.getChoiceOptional(title, gravecards.toArray());
+                            Object o = GuiUtils.getChoiceOptional(title, gravecards.toArray());
                             if(o != null) {
                                 Card removedCard = (Card) o;
                                 AllZone.GameAction.exile(removedCard);
@@ -7351,7 +7354,7 @@ public class CardFactory_Creatures {
                         }
                     }
                     
-                    //Object o = AllZone.Display.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
+                    //Object o = GuiUtils.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
                     
 
                     AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, blackBlue,
@@ -7491,7 +7494,7 @@ public class CardFactory_Creatures {
             		CardList creats = new CardList(AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
             		creats = creats.getType("Saproling");
                     
-            		List<Card> selection = AllZone.Display.getChoices("Select Saprolings to sacrifice", creats.toArray());
+            		List<Card> selection = GuiUtils.getChoices("Select Saprolings to sacrifice", creats.toArray());
                     
                     numCreatures[0] = selection.size();
                     for(int m = 0; m < selection.size(); m++) {
@@ -7580,7 +7583,7 @@ public class CardFactory_Creatures {
                     if(oneCostCreatures.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select First Creature",
+                        Object o = GuiUtils.getChoiceOptional("Select First Creature",
                                 oneCostCreatures.toArray());
                         if(o != null) {
                             //ability.setTargetCard((Card)o);
@@ -7592,7 +7595,7 @@ public class CardFactory_Creatures {
                             
                             if(oneCostCreatures.size() == 0) return;
                             
-                            o = AllZone.Display.getChoiceOptional("Select Second Creature",
+                            o = GuiUtils.getChoiceOptional("Select Second Creature",
                                     oneCostCreatures.toArray());
                             
                             if(o != null) {
@@ -7846,7 +7849,7 @@ public class CardFactory_Creatures {
                     sins = sins.getType("Assassin");
                     
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select an Assassin to exile", sins.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select an Assassin to exile", sins.toArray());
                         
                         if(o != null) {
                             Card crd = (Card) o;
@@ -8569,7 +8572,7 @@ public class CardFactory_Creatures {
                             list = list.getType("Enchantment");
                             
                             if (list.size() > 0) {
-                                Object objectSelected = AllZone.Display.getChoiceOptional("Choose an enchantment", list.toArray());
+                                Object objectSelected = GuiUtils.getChoiceOptional("Choose an enchantment", list.toArray());
                                 
                                 if (objectSelected != null) {
                                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
@@ -8750,7 +8753,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -8774,7 +8777,7 @@ public class CardFactory_Creatures {
                     if(goblins.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", goblins.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", goblins.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -8804,7 +8807,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -8828,7 +8831,7 @@ public class CardFactory_Creatures {
                     if(merfolk.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", merfolk.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", merfolk.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -8858,7 +8861,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -8882,7 +8885,7 @@ public class CardFactory_Creatures {
                     if(elves.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", elves.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", elves.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -8917,9 +8920,9 @@ public class CardFactory_Creatures {
                     
                     if(list.size() > 0) {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
-                            AllZone.Display.getChoiceOptional("Revealing hand", list.toArray());
+                            GuiUtils.getChoiceOptional("Revealing hand", list.toArray());
                             if(nonLandList.size() > 0) {
-                                Object o = AllZone.Display.getChoiceOptional("Select nonland card",
+                                Object o = GuiUtils.getChoiceOptional("Select nonland card",
                                         nonLandList.toArray());
                                 if(o != null) {
                                     Card c = (Card) o;
@@ -8971,7 +8974,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -8996,7 +8999,7 @@ public class CardFactory_Creatures {
                     if(faeries.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", faeries.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", faeries.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -9026,7 +9029,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -9050,7 +9053,7 @@ public class CardFactory_Creatures {
                     if(ele.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", ele.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", ele.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -9080,7 +9083,7 @@ public class CardFactory_Creatures {
                         lib.remove(c);
                         lib.add(c, 0);
                         if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
-                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
+                        	GuiUtils.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -9104,7 +9107,7 @@ public class CardFactory_Creatures {
                     if(giants.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", giants.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", giants.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -9141,7 +9144,7 @@ public class CardFactory_Creatures {
                             landInLib.get(0).tap();
                             play.add(landInLib.get(0));
                         } else {
-                            Object o = AllZone.Display.getChoiceOptional("Select plains card to put onto the battlefield: ",
+                            Object o = GuiUtils.getChoiceOptional("Select plains card to put onto the battlefield: ",
                                     landInLib.toArray());
                             if(o != null) {
                                 Card crd = (Card) o;
@@ -9203,7 +9206,7 @@ public class CardFactory_Creatures {
                         
                         if(list.size() > 0) {
                             if(card.getController().equals(AllZone.HumanPlayer)) {
-                                Object o = AllZone.Display.getChoiceOptional("Select Legendary creature",
+                                Object o = GuiUtils.getChoiceOptional("Select Legendary creature",
                                         list.toArray());
                                 if(o != null) {
                                     Card c = (Card) o;
@@ -9285,7 +9288,7 @@ public class CardFactory_Creatures {
                         
                         if(list.size() > 0) {
                             if(card.getController().equals(AllZone.HumanPlayer)) {
-                                Object o = AllZone.Display.getChoiceOptional("Select black card", list.toArray());
+                                Object o = GuiUtils.getChoiceOptional("Select black card", list.toArray());
                                 if(o != null) {
                                     Card c = (Card) o;
                                     grave.remove(c);
@@ -9406,7 +9409,7 @@ public class CardFactory_Creatures {
                     String color = "";
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         
-                        Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.onlyColors);
+                        Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.onlyColors);
                         color = (String) o;
                         c.addExtrinsicKeyword("Protection from " + color);
                         if(creatureMap.containsKey(c)) {
@@ -9566,7 +9569,7 @@ public class CardFactory_Creatures {
                     lands = lands.getType("Forest");
                     
                     if(player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick a forest card to put onto the battlefield",
+                        Object o = GuiUtils.getChoiceOptional("Pick a forest card to put onto the battlefield",
                                 lands.toArray());
                         if(o != null) {
                             Card card = (Card) o;
@@ -9673,7 +9676,7 @@ public class CardFactory_Creatures {
                         String[] colors = Constant.Color.Colors;
                         colors[colors.length - 1] = null;
                         
-                        Object o = AllZone.Display.getChoice("Choose color", colors);
+                        Object o = GuiUtils.getChoice("Choose color", colors);
                         color = (String) o;
                         card.setChosenColor(color);
                     } else {
@@ -9723,7 +9726,7 @@ public class CardFactory_Creatures {
                     creatures = creatures.getType("Creature");
                     if(creatures.size() > 0) {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
-                            Object o = AllZone.Display.getChoice("Pick creature: ", creatures.toArray());
+                            Object o = GuiUtils.getChoice("Pick creature: ", creatures.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
                                 PlayerZone zone = AllZone.getZone(c);
@@ -9907,7 +9910,7 @@ public class CardFactory_Creatures {
                     	@Override
                     	public void resolve() {
                     		if(getController().isHuman() &&
-                    				AllZone.Display.getChoice("Copy " + getSourceCard(),
+                    				GuiUtils.getChoice("Copy " + getSourceCard(),
                     						new String[] {"Yes", "No"}).equals("No"))
                     			return;
                     		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, getSourceCard().getController());
@@ -9966,7 +9969,7 @@ public class CardFactory_Creatures {
                     CardList hand = AllZoneUtil.getPlayerHand(player);
                     player.loseLife(1, card);
                     if(player.equals(AllZone.ComputerPlayer)) {
-                        AllZone.Display.getChoice("Look", hand.toArray());
+                        GuiUtils.getChoice("Look", hand.toArray());
                     }
                     
                 }
@@ -10007,7 +10010,7 @@ public class CardFactory_Creatures {
 	                    for(int i = 1; i < handChoices.length; i++) {
 	                        handChoices[i] = null;
 	                    }
-	                    AllZone.Display.getChoice("Random card", handChoices);
+	                    GuiUtils.getChoice("Random card", handChoices);
 	                    opponent.loseLife(CardUtil.getConvertedManaCost(choice.getManaCost()),card);
                     }
                 }//resolve()
@@ -10457,7 +10460,7 @@ public class CardFactory_Creatures {
                     if(arts.size() == 0) return;
                     
                     if(controller.equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", arts.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target card", arts.toArray());
                         if(o != null) {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -10553,7 +10556,7 @@ public class CardFactory_Creatures {
                     } else // human
                     {
                         if(basic.size() > 0) {
-                            Object o = AllZone.Display.getChoiceOptional(
+                            Object o = GuiUtils.getChoiceOptional(
                                     "Select Basic Land card to put into your hand: ", basic.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
@@ -10748,7 +10751,7 @@ public class CardFactory_Creatures {
     					for(int i = 0; i < 2; i++) {
     						if(graveList.size() == 0)  break;
     						
-    						Card c = AllZone.Display.getChoiceOptional("Select creature", graveList.toArray());
+    						Card c = GuiUtils.getChoiceOptional("Select creature", graveList.toArray());
     						if(c == null) break;
     						AllZone.GameAction.moveTo(battlefield, c);
     						graveList.remove(c);
@@ -11305,7 +11308,7 @@ public class CardFactory_Creatures {
         			
         			if(list.size() > 0) {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
-                            Object o = AllZone.Display.getChoice("Pick creature to exile: ", list.toArray());
+                            Object o = GuiUtils.getChoice("Pick creature to exile: ", list.toArray());
                             if(o != null) {
                             	Card c = (Card)o;
                             	if (AllZone.GameAction.isCardInGrave(c))
@@ -11535,7 +11538,7 @@ public class CardFactory_Creatures {
         			if(auras.size() == 0) return;
 
         			if (controller.equals(AllZone.HumanPlayer)) {
-        				Object o = AllZone.Display.getChoiceOptional("Select target card", auras.toArray());
+        				Object o = GuiUtils.getChoiceOptional("Select target card", auras.toArray());
         				if (o != null) {
         					ability.setTargetCard((Card) o);
         					AllZone.Stack.add(ability);
@@ -11620,7 +11623,7 @@ public class CardFactory_Creatures {
         			  if(card.getController().equals(AllZone.HumanPlayer)) {
         				  if (creats.size() > 0)
         				  {
-        					  List<Card> selection = AllZone.Display.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
+        					  List<Card> selection = GuiUtils.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
 
         					  numCreatures[0] = selection.size();
         					  for(int m = 0; m < selection.size(); m++) {
@@ -11796,7 +11799,7 @@ public class CardFactory_Creatures {
         				life[i] = String.valueOf(i);
         			}
         			
-        			Object o = AllZone.Display.getChoice("Nameless Race - pay X life", life);
+        			Object o = GuiUtils.getChoice("Nameless Race - pay X life", life);
         			String answer = (String) o;
         			int loseLife = 0;
         			try {
@@ -11943,7 +11946,7 @@ public class CardFactory_Creatures {
 							for(int j = 0; j < 7; j++) {
 								choices[j] = ""+j;
 							}
-							String answer = (String)(AllZone.Display.getChoiceOptional(
+							String answer = (String)(GuiUtils.getChoiceOptional(
 									card.getName()+" - Choose a number", choices));
 							num = Integer.parseInt(answer);
 						}
@@ -12044,7 +12047,7 @@ public class CardFactory_Creatures {
         				for(int j = 0; j < maxCards; j++ ) {
         					topCards.add(lib.get(j));
         				}
-        				Object o = AllZone.Display.getChoice("Put one card in your hand", topCards.toArray());
+        				Object o = GuiUtils.getChoice("Put one card in your hand", topCards.toArray());
     					if(o != null) {
     						Card c_1 = (Card) o;
     						topCards.remove(c_1);
@@ -12609,10 +12612,10 @@ public class CardFactory_Creatures {
 						hand.remove(random);
 					}
 					if(!revealed.isEmpty()) {
-						AllZone.Display.getChoice("Revealed at random", revealed.toArray());
+						GuiUtils.getChoice("Revealed at random", revealed.toArray());
 					}
 					else {
-						AllZone.Display.getChoice("Revealed at random", new String[] {"Nothing to reveal"});
+						GuiUtils.getChoice("Revealed at random", new String[] {"Nothing to reveal"});
 					}
 					
 					for(Card c:revealed) {

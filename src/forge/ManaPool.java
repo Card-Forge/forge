@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.gui.GuiUtils;
+
 
 public class ManaPool extends Card {
 	// current paying moved to SpellAbility
@@ -263,7 +265,7 @@ public class ManaPool extends Card {
     	    		return choice;
     	    	}
     	    	
-	    		Object o = AllZone.Display.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
+	    		Object o = GuiUtils.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
 	    		if (o != null){
 	    			String ch = o.toString();
 	    			boolean grabSnow = ch.startsWith("{S}");

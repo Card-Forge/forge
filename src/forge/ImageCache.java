@@ -2,8 +2,8 @@
 package forge;
 
 
-import static java.lang.Double.*;
-import static java.lang.Math.*;
+import static java.lang.Double.parseDouble;
+import static java.lang.Math.min;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;

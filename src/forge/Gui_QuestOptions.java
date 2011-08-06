@@ -1,11 +1,5 @@
 package forge;
-import forge.error.ErrorViewer;
-import forge.gui.GuiUtils;
-import forge.quest.QuestFrame;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -14,6 +8,23 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+
+import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
+import forge.quest.QuestFrame;
 
 public class Gui_QuestOptions extends JFrame {
     private static final long serialVersionUID    = 2018518804206822235L;

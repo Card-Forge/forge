@@ -2,6 +2,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.gui.GuiUtils;
+
 public class Target_Selection {
 	private Target target = null;
 	private SpellAbility ability = null;
@@ -200,7 +202,7 @@ public class Target_Selection {
 	        		// is there a more elegant way of doing this?
 	        		choicesWithDone.add(dummy);
 	        	}
-	            Object check = AllZone.Display.getChoiceOptional(message, choicesWithDone.toArray());
+	            Object check = GuiUtils.getChoiceOptional(message, choicesWithDone.toArray());
 	            if(check != null) {
 	            	Card c = (Card) check;
 	            	if (c.equals(dummy))

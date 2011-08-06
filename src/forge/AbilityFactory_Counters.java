@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import forge.gui.GuiUtils;
+
 public class AbilityFactory_Counters {
 	// An AbilityFactory subclass for Putting or Removing Counters on Cards.
 	
@@ -784,7 +786,7 @@ public class AbilityFactory_Counters {
 					for(Counters c_1:Counters.values())
 						if(card.getCounters(c_1) != 0) choices.add(c_1.getName());
 					if (choices.size() > 0)
-						card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : AllZone.Display.getChoice("Select counter type", choices.toArray()).toString())), 1);
+						card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.getChoice("Select counter type", choices.toArray()).toString())), 1);
 				}
 				boolean selComputer = false;
 				boolean selHuman = false;

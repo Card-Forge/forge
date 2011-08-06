@@ -1,5 +1,10 @@
 package forge;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import forge.gui.GuiUtils;
 
 public class Input_PayManaCostUtil
 {
@@ -72,7 +77,7 @@ public class Input_PayManaCostUtil
     	HashMap<String, Ability_Mana> ability = new HashMap<String, Ability_Mana>();
     	for(Ability_Mana am : abilities)
     		ability.put(am.toString(), am);
-    	chosen = (Ability_Mana) AllZone.Display.getChoice("Choose mana ability", abilities.toArray());
+    	chosen = (Ability_Mana) GuiUtils.getChoice("Choose mana ability", abilities.toArray());
     }
     
 	AllZone.GameAction.playSpellAbility(chosen);

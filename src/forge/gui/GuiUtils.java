@@ -1,13 +1,29 @@
 package forge.gui;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
+
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import forge.AllZone;
+import forge.Card;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
+
 
 public class GuiUtils {
 
@@ -86,6 +102,45 @@ public class GuiUtils {
     public static ImageIcon getEmptyIcon(int width, int height) {
         return new ImageIcon(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
     }
+    
+    //returned Object could be null
+    public static <T> T getChoiceOptional(String message, T... choices) {
+        if(choices == null || choices.length == 0) return null;
+        List<T> choice = getChoices(message, 0, 1, choices);
+        return choice.isEmpty()? null:choice.get(0);
+    }//getChoiceOptional()
+   
+    // returned Object will never be null
+    public static <T> T getChoice(String message, T... choices) {
+        List<T> choice = getChoices(message, 1, 1, choices);
+        assert choice.size() == 1;
+        return choice.get(0);
+    }//getChoice()
+   
+    // returned Object will never be null
+    public static <T> List<T> getChoicesOptional(String message, T... choices) {
+        return getChoices(message, 0, choices.length, choices);
+    }//getChoice()
+   
+    // returned Object will never be null
+    public static <T> List<T> getChoices(String message, T... choices) {
+        return getChoices(message, 1, choices.length, choices);
+    }//getChoice()
+   
+    // returned Object will never be null
+    public static <T> List<T> getChoices(String message, int min, int max, T... choices) {
+        ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+        final JList list = c.getJList();
+        list.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent ev) {
+                if(list.getSelectedValue() instanceof Card && AllZone.Display != null) {
+                		AllZone.Display.setCard((Card) list.getSelectedValue());
+                }
+            }
+        });
+        c.show();
+        return c.getSelectedValues();
+    }//getChoice()
 
     /**
      * Centers a frame on the screen based on its current size

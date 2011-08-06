@@ -1,6 +1,8 @@
 package forge;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import com.esotericsoftware.minlog.Log;
 

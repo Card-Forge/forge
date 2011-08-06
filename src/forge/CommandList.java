@@ -1,5 +1,6 @@
 package forge;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CommandList implements java.io.Serializable, Command, Iterable<Command>
 {

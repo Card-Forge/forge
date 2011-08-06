@@ -5,7 +5,10 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
+
 import com.esotericsoftware.minlog.Log;
+
+import forge.gui.GuiUtils;
 
 
 class CardFactory_Auras {
@@ -599,7 +602,7 @@ class CardFactory_Auras {
                 			|| card.getName().equals("Phantasmal Terrain")) {
                 		//Only query player, AI will have decided already.
                 		if(card.getController() == AllZone.HumanPlayer) {
-                			NewType[0] = AllZone.Display.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
+                			NewType[0] = GuiUtils.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
                 		}
                 	}
                 	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());

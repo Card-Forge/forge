@@ -2,18 +2,9 @@
 package forge;
 
 
-import java.util.List;
 
 
-public interface Display {
-    public <T> T getChoice(String message, T... choices);
-    
-    public <T> T getChoiceOptional(String message, T... choices);
-    
-    public <T> List<T> getChoices(String message, T... choices);
-    
-    public <T> List<T> getChoicesOptional(String message, T... choices);
-    
+public interface Display {    
     public void showMessage(String s);
     
     public MyButton getButtonOK();
@@ -37,4 +28,6 @@ public interface Display {
     public boolean savePrefs();
 
 	public boolean canLoseByDecking();
+	
+	public void setCard(Card c);
 }

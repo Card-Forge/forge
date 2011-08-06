@@ -1,5 +1,6 @@
 package forge;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class ComputerAI_Rats2 implements Computer
 {
