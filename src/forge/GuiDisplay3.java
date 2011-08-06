@@ -121,6 +121,8 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     }
     
     public void assignDamage(Card attacker, CardList blockers, int damage) {
+    	if (damage == 0)
+    		return;
         new Gui_MultipleBlockers3(attacker, blockers, damage, this);
     }
     

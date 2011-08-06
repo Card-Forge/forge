@@ -511,7 +511,6 @@ public class AbilityFactory_ZoneAffecting {
 	//////////////////////
 	
 	//NumCards - the number of cards to be discarded (may be integer or X)
-	//Opponent - set to True if "target opponent" - hopefully will be obsolete soon
 	//Mode	- the mode of discard - should match spDiscard
 	//				-Random
 	//				-TgtChoose
