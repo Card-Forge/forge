@@ -30,7 +30,6 @@ public class Input_Block extends Input {
         	for(Card attacker:attackers) {
         		if(attacker.hasKeyword("All creatures able to block CARDNAME do so.")) {
         			CardList bls = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-        			bls = bls.filter(AllZoneUtil.untapped);
         			for(Card bl:bls) {
         				if(CombatUtil.canBlock(attacker, bl)) {
         					allBlocking.add(bl);
