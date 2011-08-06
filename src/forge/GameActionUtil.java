@@ -6213,7 +6213,10 @@ public class GameActionUtil {
 		};
 		addCounters.setStackDescription(card.getName()+" - Put "+num+" "+type.getName()+" counters on "+card+".");
 		String mayString = "Put "+num+" "+type.getName()+" counters on "+card+"?";
-		if(!may || GameActionUtil.showYesNoDialog(card, mayString)) {
+		if(!may || card.getController().isComputer()) {
+			AllZone.Stack.add(addCounters);
+		}
+		else if(GameActionUtil.showYesNoDialog(card, mayString)) {
 			AllZone.Stack.add(addCounters);
 		}
 	}
