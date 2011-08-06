@@ -4727,6 +4727,9 @@ public class CardFactory implements NewConstants {
             final int NumDefense[] = {-1138};
             final String DefenseX[] = {"none"};
             final String Keyword[] = {"none"};
+            final boolean curse[] = {false};
+                
+            curse[0] = k[0].contains("Curse");
             
             String ptk[] = k[1].split("/");
             
@@ -4865,19 +4868,38 @@ public class CardFactory implements NewConstants {
                     if(curPhase.equals(Constant.Phase.Main2))
                     	return false;
                     
-                    CardList list = getCreatures();
-                    if(!list.isEmpty()) {
-                        boolean goodt = false;
-                        Card t = new Card();
-                        while(goodt == false && !list.isEmpty()) {
-                            t = CardFactoryUtil.AI_getBestCreature(list);
-                            if((t.getNetDefense() + defense) > 0) goodt = true;
-                            else list.remove(t);
+            		boolean goodt = false;
+            		Card t = new Card();
+            		
+                    if (curse[0]) {  // Curse means spells with negative effect
+                    	CardList list = new CardList(AllZone.Human_Play.getCards());
+                        list = list.filter(new CardListFilter() {
+                            public boolean addCard(Card c) { 
+                                    	return CardFactoryUtil.canTarget(card, c) && c.isCreature(); 
+                                }
+                        });        
+                    	if (NumDefense[0] < 0 && !list.isEmpty()) { // with spells that give -X/-X, compi will try to destroy a creature
+                            int defmalus = - getNumDefense();
+                    		list = CardListUtil.filterToughness(list, defmalus);
+                    	} // -X/-X end
+                    	if (!list.isEmpty()) {
+                    		t = CardFactoryUtil.AI_getBestCreature(list);
+                    		goodt = true;
+                    	}
+                    }
+                    else { // no Curse means spell with positive effect
+                    	CardList list = getCreatures();
+                    	if(!list.isEmpty()) {
+                    		while(goodt == false && !list.isEmpty()) {
+                    			t = CardFactoryUtil.AI_getBestCreature(list);
+                    			if((t.getNetDefense() + defense) > 0) goodt = true;
+                    			else list.remove(t);
+                    		}
                         }
-                        if(goodt == true) {
+                    }
+                    if(goodt == true) {
                             setTargetCard(t);
-                            return true;
-                        }
+                            return true;  
                     }
                     
                     return false;

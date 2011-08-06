@@ -1,3 +1,9 @@
+Disfigure
+B
+Instant
+no text
+spPumpTgtCurse:-2/-2
+
 Serra Avatar
 4 W W W
 Creature Avatar
