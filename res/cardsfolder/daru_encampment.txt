@@ -3,7 +3,8 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
+A:AB$Pump | Cost$ W T | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target Soldier creature | NumAtt$ +1|NumDef$+1| SpellDescription$ Target Soldier creature gets +1/+1 until end of turn.
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Daru_Encampment.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_encampment.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/315.jpg
 End

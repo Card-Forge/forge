@@ -3,7 +3,8 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add B
+A:AB$Pump | Cost$ B T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | KW$Fear | SpellDescription$ Target legendary creature gains fear until end of turn.
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Shizo_Deaths_Storehouse.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shizo_deaths_storehouse.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/283.jpg
 End
