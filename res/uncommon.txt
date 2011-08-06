@@ -545,6 +545,7 @@ Persuasion
 Pestilence
 Phantom Centaur
 Phantom Monster
+Phantom Warrior
 Phobian Phantasm
 Phyrexian Gargantua
 Phyrexian Hulk
