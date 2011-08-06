@@ -3931,9 +3931,32 @@ public class CardFactoryUtil {
         if(d[0].contains("TapTgt")) // 2/10
         TgtC.tap();
         
-        if(d[0].contains("GenToken")) // placeholder for effect
-        X = X + 0;
-        //TODO: update with syntax like spMakeToken
+        if(d[0].contains("MakeToken")) {
+        	final String[] k = d[0].split("<>");
+            //final String numString = k[1].equals("X") ? Src.getSVar("X") : k[1];
+        	final String numString = k[1];
+            //final boolean xString = k[1].equals("X") ? true : false;
+            final String name = k[2];
+            final String imageName = k[3];
+            final String controllerString = k[4];
+            final String manaCost = k[5];
+            final String[] types = k[6].split(";");
+            final int attack = Integer.valueOf(k[7]);
+            final int defense = Integer.valueOf(k[8]);
+            final String[] keywords = k[9].split(";");
+            
+            //String controller = (controllerString.equals("Controller") ? Src.getController() : AllZone.GameAction.getOpponent(card.getController()));
+            String controller = controllerString.equals("Controller") ? cardController : Opp;
+			
+            if(keywords[0].equals("None")) keywords[0] = "";
+			
+			//int num = xString ? CardFactoryUtil.xCount(card, numString) : Integer.valueOf(numString);
+            int num = Integer.valueOf(numString);
+            for(int i = 0; i < num; i ++ ){
+            	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
+            }
+        }
+        
         
         if(d[0].contains("ReturnFromYard")) // placeholder for effect
         X = X + 0;
