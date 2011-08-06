@@ -8,6 +8,8 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 /**
@@ -29,11 +31,15 @@ public class QuestData_State implements Serializable {
     @SuppressWarnings("unchecked")
     private Object readResolve() throws ObjectStreamException {
 //        System.out.println("resolving obsolete QuestData_State");
-        //removing generic types to make cast between Deck and forge.Deck
-        //i'm using Deck in this class because it may be somewhere in the serialization stream
-        //it is irrelevant, because readResolve replaces Deck by forge.Deck, and since generics
-        //aren't checked at runtime, the cast is ok.
-        return new forge.QuestData_State(rankIndex, win, lost, difficulty, cardPool, (HashMap) myDecks,
-                (HashMap) aiDecks);
+        Map<String, forge.Deck> myDecks = new HashMap<String, forge.Deck>();
+        for(Entry<String, Deck> deck:this.myDecks.entrySet()) {
+            myDecks.put(deck.getKey(), deck.getValue().migrate());
+        }
+        
+        Map<String, forge.Deck> aiDecks = new HashMap<String, forge.Deck>();
+        for(Entry<String, Deck> deck:this.aiDecks.entrySet()) {
+            aiDecks.put(deck.getKey(), deck.getValue().migrate());
+        }
+        return new forge.QuestData_State(rankIndex, win, lost, difficulty, cardPool, myDecks, aiDecks);
     }
 }

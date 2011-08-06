@@ -57,8 +57,8 @@ public class QuestData implements NewConstants {
     private ArrayList<String>     mediumAIDecks;
     private ArrayList<String>     hardAIDecks;
     
-    private HashMap<String, Deck> myDecks         = new HashMap<String, Deck>();
-    private HashMap<String, Deck> aiDecks         = new HashMap<String, Deck>();
+    private Map<String, Deck>     myDecks         = new HashMap<String, Deck>();
+    private Map<String, Deck>     aiDecks         = new HashMap<String, Deck>();
     
     //holds String card names
     private ArrayList<String>     cardPool        = new ArrayList<String>();

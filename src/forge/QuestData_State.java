@@ -11,7 +11,7 @@ package forge;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -27,7 +27,7 @@ public class QuestData_State implements Serializable {
     String                    difficulty;
     
     ArrayList<String>         cardPool;
-    HashMap<String, Deck>     myDecks, aiDecks;
+    Map<String, Deck>         myDecks, aiDecks;
     
     public QuestData_State() {}
     
@@ -35,7 +35,7 @@ public class QuestData_State implements Serializable {
      * This constructor is used by QestData_State in the default package to create a replacement object for the
      * obsolete class.
      */
-    public QuestData_State(int rankIndex, int win, int lost, String difficulty, ArrayList<String> cardPool, HashMap<String, Deck> myDecks, HashMap<String, Deck> aiDecks) {
+    public QuestData_State(int rankIndex, int win, int lost, String difficulty, ArrayList<String> cardPool, Map<String, Deck> myDecks, Map<String, Deck> aiDecks) {
         this.rankIndex = rankIndex;
         this.win = win;
         this.lost = lost;
