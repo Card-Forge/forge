@@ -1,3 +1,23 @@
+Maro
+2 G G
+Creature Elemental
+Maro's power and toughness are each equal to the number of cards in your hand.
+1/1
+
+Molimo, Maro-Sorcerer
+4 G G G
+Legendary Creature Elemental
+Molimo, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.
+1/1
+Trample
+
+Multani, Maro-Sorcerer
+4 G G
+Legendary Creature Elemental
+Multani, Maro-Sorcerer's power and toughness are each equal to the total number of cards in all players' hands.
+1/1
+Shroud
+
 Emberstrike Duo
 1 BR
 Creature Elemental Warrior Shaman
