@@ -1,8 +1,11 @@
 Name:Disentomb
 ManaCost:B
 Types:Sorcery
-Text:Return target creature card from your graveyard to your hand.
-K:spReturnTgt:1:Creature:Hand
+Text:no text
+A:SP$Retrieve | Cost$ B | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disentomb.jpg
 End
+#
+#K:spReturnTgt:1:Creature:Hand
+#

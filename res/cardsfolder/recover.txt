@@ -1,9 +1,12 @@
 Name:Recover
 ManaCost:2 B
 Types:Sorcery
-Text:Return target creature card from your graveyard to your hand.
-K:spReturnTgt:1:Creature:Hand
+Text:no text
+A:SP$Retrieve | Cost$ 2 B | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature | SpellDescription$ Return target creature card from your graveyard to your hand.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recover.jpg
 End
+#
+#K:spReturnTgt:1:Creature:Hand
+#
