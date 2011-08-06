@@ -1,3 +1,12 @@
+Niv-Mizzet, the Firemind
+2 U U R R
+Legendary Creature Dragon Wizard
+no text
+4/4
+Flying
+abDrawCards T:1:Draw a card.:Niv-Mizzet, the Firemind - Draw a card
+WheneverKeyword:DrawCard:ControllingPlayer_Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player
+
 Mind Sludge
 4 B
 Sorcery
@@ -16749,13 +16758,6 @@ Creature Human Knight
 When Knight of the White Orchid comes into play, if an opponents controls more lands than you you may search your library for a plains card, put it into play, then shuffle your library.
 2/2
 First Strike
-
-Niv-Mizzet, the Firemind
-2 U U R R
-Legendary Creature Dragon Wizard
-Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player.
-4/4
-Flying
 
 Hoofprints of the Stag
 1 W

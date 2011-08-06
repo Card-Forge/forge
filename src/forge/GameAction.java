@@ -666,7 +666,6 @@ public class GameAction {
     }
     
     // Whenever Keyword
-    // Whenever Keyword
     public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) { 
         PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
@@ -715,6 +714,7 @@ public class GameAction {
     	 * For GainLife		: Custom_Parameters[0] = Amount of Life Gained
     	 * For DealsDamage	: Custom_Parameters[0] = Player Target
     	 * 					: Custom_Parameters[2] = Damage Source
+    	 * For DrawCard		: Custom_Parameters[0] = Initiating Player
     	 */
 		final Card F_TriggeringCard = c;
 		final String[] Custom_Strings = new String[10];
@@ -778,11 +778,17 @@ public class GameAction {
                     String Conditions[] = ConditionsParse.split("!");
                     Initiator_Conditions = Conditions.length;
                         for(int y = 0; y < Initiator_Conditions; y++) {
-                            if(Conditions[y].contains("Self")) {
+                            if(Conditions[y].contains("Self") && !Conditions[y].contains("ControllingPlayer_Self")) {
                             	if(!card.equals(c)) k[4] = "Null";    
                                 }
+                            if(Conditions[y].contains("ControllingPlayer_Self")) {
+                            	if(!card.getController().equals(Custom_Parameters[0])) k[4] = "Null";    
+                                }
                             if(Conditions[y].contains("ControllingPlayer_Opponent")) {
-                            	if(!card.getController().equals(getOpponent(c.getController()))) k[4] = "Null";    
+                            	// Special Case for Draw Card
+                            	if(Event.equals("DrawCard")) {
+                            		if(!card.getController().equals(getOpponent((String) Custom_Parameters[0]))) k[4] = "Null"; 	
+                            	} else if(!card.getController().equals(getOpponent(c.getController()))) k[4] = "Null";    
                                 }
                             if(Conditions[y].contains("Enchanted_Creature")) {
                             	if(((Card)Custom_Parameters[2]).getEnchantedBy().contains(card) == false) k[4] = "Null";    
@@ -969,7 +975,8 @@ public class GameAction {
                                         public void execute() {
                                        	 Targets_Multi[index[0]] = ability.getTargetPlayer(); 
                                        	 if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = ability.getTargetCard();
-                                            index[0]++;                               
+                                            index[0]++;  
+                                            if(F_Multiple_Targets == 1) AllZone.Stack.updateObservers();
                                        	 }
                                     }));
                                    } 
@@ -977,6 +984,7 @@ public class GameAction {
                                }
                            };
                            if(k[8].contains("MultipleTargets")) CommandExecute[0] = MultiTargetsCommand;
+                           else if(k[8].contains("SingleTarget")) CommandExecute[0] = MultiTargetsCommand;
                            else CommandExecute[0] = Command.Blank;
                            
                            // Null
@@ -1179,7 +1187,8 @@ public class GameAction {
     			                      };
                             Command_Effects[F_Target] = Proper_resolve;      
                             if(F_Multiple_Targets != 1) StackDescription = StackDescription + "deals " + F_Amount*F_Multiple_Targets + " damage" + " divided among up to " +  Multiple_Targets + " target creatures and/or players";
-                            else StackDescription = StackDescription + "deals " + F_Amount*F_Multiple_Targets + " damage to "+ ((F_TargetCard[y] != null)? F_TargetCard[y]:"") + ((F_TargetPlayer[y] != null)? F_TargetPlayer[y]:"");
+                            else if(F_card.getController().equals(Constant.Player.Computer)) StackDescription = StackDescription + "targeting Human ";
+                            else StackDescription = StackDescription + "targeting ?";
                 		}
                 		
                 		Effects_Count[0]++;

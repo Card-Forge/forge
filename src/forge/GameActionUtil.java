@@ -2986,7 +2986,9 @@ public class GameActionUtil {
 
 
 	public static void executeDrawCardTriggeredEffects(String player) {
-		drawCardTriggered_Niv_Mizzet(player);
+    	Object[] DrawCard_Whenever_Parameters = new Object[1];
+    	DrawCard_Whenever_Parameters[0] = player;
+		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
 		drawCardTriggered_Hoofprints_of_the_Stag(player);
 		drawCardTriggered_Lorescale_Coatl(player);
 		drawCardTriggered_Underworld_Dreams(player);
@@ -3024,76 +3026,6 @@ public class GameActionUtil {
 			Card c = list.get(i);
 			c.addCounter(Counters.P1P1, 1);
 		}
-	}
-
-	public static void drawCardTriggered_Niv_Mizzet(String player) {
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList(playZone.getCards());
-
-		final String controller = player;
-
-		list = list.getName("Niv-Mizzet, the Firemind");
-
-		if(list.size() > 0) {
-			final Card crd = list.get(0);
-			final Ability ability = new Ability(list.get(0), "0") {
-				@Override
-				public void chooseTargetAI() {
-
-					CardList cards = CardFactoryUtil.AI_getHumanCreature(1, crd, false);
-					cards.shuffle();
-
-					if(cards.isEmpty() || AllZone.Human_Life.getLife() < 5) setTargetPlayer(Constant.Player.Human);
-					else setTargetCard(cards.get(0));
-				}
-
-				@Override
-				public void resolve() {
-					if(controller.equals("Human")) {
-						String opp = AllZone.GameAction.getOpponent(controller);
-						PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opp);
-
-						String[] choices = {"Yes", "No, target a creature instead"};
-
-						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
-						if(q != null && q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
-								1,crd);
-						else {
-							CardList cards = new CardList(oppPlay.getCards());
-							CardList oppCreatures = new CardList();
-							for(int i = 0; i < cards.size(); i++) {
-								if(cards.get(i).isPlaneswalker() || cards.get(i).isCreature()
-										&& CardFactoryUtil.canTarget(crd, cards.get(i))) {
-									oppCreatures.add(cards.get(i));
-								}
-							}
-
-							if(oppCreatures.size() > 0) {
-								Object o = AllZone.Display.getChoiceOptional("Pick target creature",
-										oppCreatures.toArray());
-								Card c = (Card) o;
-								c.addDamage(1, crd);
-							}
-						}
-					}
-
-					else {
-
-						if(getTargetCard() != null) {
-							if(AllZone.GameAction.isCardInPlay(getTargetCard())
-									&& CardFactoryUtil.canTarget(crd, getTargetCard())) getTargetCard().addDamage(
-											1, crd);
-						} else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,crd);
-					}
-				}//resolve()
-			};//SpellAbility
-
-			ability.setStackDescription(list.get(0) + " - Deals 1 damage to target creature or player");
-			AllZone.Stack.add(ability);
-
-
-		}//if
-
 	}
 
 	public static void drawCardTriggered_Hoofprints_of_the_Stag(String player) {

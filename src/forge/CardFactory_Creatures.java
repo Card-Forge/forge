@@ -11824,26 +11824,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Niv-Mizzet, the Firemind")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
-                private static final long serialVersionUID = 8670005059055071206L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("tap: Draw a card.");
-            ability.setStackDescription(card.getName() + " - draw a card.");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
-        }//*************** END ************ END **************************
-        //*************** START *********** START **************************
         if(cardName.equals("Doomed Necromancer")) {   
            
             final SpellAbility ability = new Ability_Tap(card, "B") {
