@@ -96,11 +96,11 @@ public class GameActionUtil {
 		//upkeep_Nettletooth_Djinn();
 		//upkeep_Fledgling_Djinn();
 		//upkeep_Juzam_Djinn();
-		upkeep_Grinning_Demon();
-		upkeep_Moroii();
+		//upkeep_Grinning_Demon();
+		//upkeep_Moroii();
 		upkeep_Vampire_Lacerator();
 		upkeep_Seizan_Perverter_of_Truth();
-		upkeep_Serendib_Efreet();
+		//upkeep_Serendib_Efreet();
 		upkeep_Sleeper_Agent();
 		upkeep_Cursed_Land();
 		upkeep_Pillory_of_the_Sleepless();
@@ -137,7 +137,7 @@ public class GameActionUtil {
 		upkeep_Suspend();
 		upkeep_Vanishing();
 		upkeep_Fading();
-		upkeep_Benthic_Djinn();
+		//upkeep_Benthic_Djinn();
 		upkeep_Masticore();
 		upkeep_Eldrazi_Monument();
 		upkeep_Blaze_Counters();
@@ -6216,6 +6216,7 @@ public class GameActionUtil {
 		}
 	}
 
+	/*
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
@@ -6237,7 +6238,7 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Benthic_Djinn()   
-	
+	*/
 	
     /////////////////////////
     // Start of Kinship cards
@@ -9470,7 +9471,8 @@ public class GameActionUtil {
 		//drawing cards doesn't seem to work during upkeep if it's in an ability
 		player.drawCards(2);
 	}// upkeep_Seizan_Perverter_of_Truth()
-
+	
+	/*
 	private static void upkeep_Moroii() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Moroii");
@@ -9479,6 +9481,7 @@ public class GameActionUtil {
 			player.loseLife(1, F_card);
 		}
 	}// upkeep_Moroii
+	*/
 
 	private static void upkeep_Vampire_Lacerator() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -9500,7 +9503,8 @@ public class GameActionUtil {
 			}
 		}
 	}// upkeep_Vampire_Lacerator
-
+	
+	/*
 	private static void upkeep_Grinning_Demon() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Grinning Demon");
@@ -9525,7 +9529,6 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Grinning_Demon()
 	
-	/*
 	private static void upkeep_Juzam_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Juzam Djinn");
