@@ -2,7 +2,7 @@ Name:Tremor
 ManaCost:R
 Types:Sorcery
 Text:no text
-K:spDamageAll:Creature.withoutFlying:1:Tremor deals 1 damage to each creature without flying.
+A:SP$DamageAll|Cost$R|NumDmg$1|ValidCards$Creature.withoutFlying|ValidDescription$each creature without flying.|SpellDescription$CARDNAME deals 3 damage to each creature without flying.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6592.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/228.jpg

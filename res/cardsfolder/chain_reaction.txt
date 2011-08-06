@@ -2,7 +2,7 @@ Name:Chain Reaction
 ManaCost:2 R R
 Types:Sorcery
 Text:no text
-K:spDamageAll:Creature:X:Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
+A:SP$DamageAll|Cost$2 R R|NumDmg$X|ValidCards$Creature|ValidDescription$each creature.|SpellDescription$CARDNAME deals X damage to each creature, where X is the number of creatures on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_reaction.jpg

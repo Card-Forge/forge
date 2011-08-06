@@ -2,7 +2,7 @@ Name:Evincar's Justice
 ManaCost:2 B B
 Types:Sorcery
 Text:no text
-K:spDamageAll:Player,Creature:2:Evincar's Justice deals 2 damage to each creature and each player.
+A:SP$DamageAll|Cost$2 B B|NumDmg$2|ValidCards$Creature|ValidPlayers$Each|ValidDescription$each creature and each player.|SpellDescription$CARDNAME deals 2 damage to each creature and each player.
 SVar:Buyback:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evincars_justice.jpg
