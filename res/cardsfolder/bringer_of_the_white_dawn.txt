@@ -1,7 +1,7 @@
 Name:Bringer of the White Dawn
 ManaCost:7 W W
 Types:Creature Bringer
-Text:At the beginning of your upkeep, you may return target artifact card from your graveyard to play.
+Text:At the beginning of your upkeep, you may return target artifact card from your graveyard to the battlefield.
 PT:5/5
 K:Trample
 SVar:AltCost:W U B R G

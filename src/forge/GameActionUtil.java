@@ -10671,71 +10671,70 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Bringer_of_the_Blue_Dawn()
 
-	private static void upkeep_Bringer_of_the_White_Dawn() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+    private static void upkeep_Bringer_of_the_White_Dawn() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
+        PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Bringer of the White Dawn");
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Bringer of the White Dawn");
 
-		CardList artifacts = new CardList(graveyard.getCards());
-		artifacts = artifacts.getType("Artifact");
+        CardList artifacts = new CardList(graveyard.getCards());
+        artifacts = artifacts.getType("Artifact");
 
-		if(artifacts.size() > 0 && list.size() > 0) {
-			Ability ability;
-			for(int i = 0; i < list.size(); i++) {
-				ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						String[] choices = {"Yes", "No"};
+        if (artifacts.size() > 0 && list.size() > 0) {
+            Ability ability;
+            for (int i = 0; i < list.size(); i++) {
+                final Card crd = list.get(i);
+                ability = new Ability(crd, "0") {
+                    @Override
+                    public void resolve() {
+                        
+                        if (player.equals(AllZone.HumanPlayer)) {
+                            String question = "Return target artifact card from your graveyard to the battlefield?";
+                            
+                            if (GameActionUtil.showYesNoDialog(crd, question)) {
+                            
+                                PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+                                PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-						Object q = null;
-						if(player.equals(AllZone.HumanPlayer)) {
-							q = AllZone.Display.getChoiceOptional("Use Bringer of the White Dawn?", choices);
-							if(q == null || q.equals("No")) return;
-							if(q.equals("Yes")) {
-								PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-								PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
+                                CardList arts = new CardList(graveyard.getCards());
+                                arts = arts.getType("Artifact");
+                                String title = "Choose an artifact";
+                                Object o = AllZone.Display.getChoiceOptional(title, arts.toArray());
+                                
+                                if (o != null) {
+                                    Card card = (Card) o;
+                                    graveyard.remove(card);
+                                    playZone.add(card);
+                                }
+                            }
+                        }
+                         // player is computer
+                        else {
+                            PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+                            PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-								CardList arts = new CardList(graveyard.getCards());
-								arts = arts.getType("Artifact");
+                            CardList arts = new CardList(graveyard.getCards());
+                            arts = arts.getType("Artifact");
+                            arts.shuffle();
 
-								Object o = AllZone.Display.getChoiceOptional("Pick an artifact to put into play",
-										arts.toArray());
-								if(o != null) {
-									Card card = (Card) o;
-									graveyard.remove(card);
-									playZone.add(card);
-								}
+                            Card card = arts.get(0);
+                            graveyard.remove(card);
+                            playZone.add(card);
+                        }
+                    }// resolve()
+                };// Ability
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Bringer of the White Dawn - ").append(player);
+                sb.append(" may return target artifact card from the graveyard to the battlefield.");
+                ability.setStackDescription(sb.toString());
 
-							}
-						}
-
-						else if(player.equals(AllZone.ComputerPlayer)) {
-							PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-							PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-							CardList arts = new CardList(graveyard.getCards());
-							arts = arts.getType("Artifact");
-
-							Card card = arts.get(0);
-							graveyard.remove(card);
-							playZone.add(card);
-						}
-
-					}// resolve()
-				};// Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Bringer of the White Dawn - ").append(player);
-				sb.append(" returns an artifact to play.");
-				ability.setStackDescription(sb.toString());
-
-				AllZone.Stack.add(ability);
-			}// for
-		}//if
-	}// upkeep_Bringer_of_the_White_Dawn()
+                AllZone.Stack.add(ability);
+            }// for
+        }//if
+    }// upkeep_Bringer_of_the_White_Dawn()
 
 
 	private static void upkeep_Serendib_Efreet() {
