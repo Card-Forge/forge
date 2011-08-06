@@ -1,7 +1,7 @@
 Name:Soul Bleed
 ManaCost:2 B
 Types:Enchantment Aura
-Text:At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.
+Text:no text
 K:Enchant Creature Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ EnchantedController | LifeAmount$ 1
