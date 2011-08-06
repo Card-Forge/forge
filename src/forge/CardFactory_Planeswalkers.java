@@ -2128,7 +2128,7 @@ class CardFactory_Planeswalkers {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Jace, the Mind Sculptor")) {
+        else if (cardName.equals("Jace, the Mind Sculptor")) {
             final int turn[] = new int[1];
             turn[0] = -1;
              
@@ -2141,21 +2141,20 @@ class CardFactory_Planeswalkers {
                     
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, targetPlayer);
                     
-                    if(lib.size() == 0) return;
+                    if (lib.size() == 0) return;
                     
                     Card c = lib.get(0);
                     
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if (card.getController().equals(AllZone.HumanPlayer)) {
+                        StringBuilder question = new StringBuilder();
+                        question.append("Put the card ").append(c).append(" on the bottom of the ");
+                        question.append(c.getController()).append("'s library?");
                         
-                        String[] choices = {"Yes", "No"};
-                        Object choice = AllZone.Display.getChoice("Put " + c + " on bottom of owner's library?",
-                                choices);
-                        if(choice != null) {
-                            if(choice.equals("Yes")) {
-                                lib.remove(c);
-                                lib.add(c);
-                            }
+                        if (GameActionUtil.showYesNoDialog(card, question.toString())) {
+                            lib.remove(c);
+                            lib.add(c);
                         }
+                        
                     } else //compy
                     {
                         PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
