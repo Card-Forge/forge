@@ -1,0 +1,7 @@
+Name:Well-Laid Plans
+ManaCost:2 U
+Types:Enchantment
+Text:Prevent all damage that would be dealt to a creature by another creature if they share a color.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/well_laid_plans.jpg
+End
