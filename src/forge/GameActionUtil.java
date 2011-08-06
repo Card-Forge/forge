@@ -31,6 +31,7 @@ public class GameActionUtil {
 		upkeep_Warp_Artifact();
 		upkeep_Wanderlust();
 		upkeep_Curse_of_Chains();
+		upkeep_Festering_Wound();
 		upkeep_Greener_Pastures();
 		upkeep_Wort();
 		upkeep_Squee();
@@ -5045,6 +5046,53 @@ public class GameActionUtil {
         					ability.setStackDescription(auraName+" -  tap enchanted creature.");
         					AllZone.Stack.add(ability);
         				}
+        			} 
+        		}
+        	}
+        }//list > 0
+    }//upkeep_Curse_of_Chains()
+	
+	private static void upkeep_Festering_Wound() {
+		final String auraName = "Festering Wound";
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isCreature() && c.isEnchanted();
+            }
+        });
+        
+        if(list.size() > 0) {
+        	Ability ability1;
+        	Ability ability2;
+        	for(Card target:list) {
+        		if(target.isEnchantedBy(auraName)) {
+        			CardList auras = new CardList(target.getEnchantedBy().toArray());
+        			auras = auras.getName(auraName);
+        			for(Card aura:auras) {
+        				final Card source = aura;
+        				final Card enchantedCard = target;
+        				ability1 = new Ability(aura, "0") {
+        					@Override
+        					public void resolve() {
+        						int damage = source.getCounters(Counters.INFECTION);
+        						AllZone.GameAction.addDamage(enchantedCard.getController(), source, damage );
+        					}
+        				};
+        				ability2 = new Ability(aura, "0") {
+        					@Override
+        					public void resolve() {
+        						//add an infection counter
+        						source.addCounter(Counters.INFECTION, 1);
+        					}
+        				};
+        				ability1.setStackDescription(auraName + " - deals X damage to "+target.getController());
+        				ability2.setStackDescription(auraName+" - add an infection counter to "+enchantedCard.getName());
+        				AllZone.Stack.add(ability1);
+        				AllZone.Stack.add(ability2);
+        				
         			} 
         		}
         	}
