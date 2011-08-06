@@ -2868,7 +2868,7 @@ public class CardFactoryUtil {
                     if(!spell.getController().equals(target.getController())) return false;
                 }
                 
-                if(kw.equals("This card can't be the target of Aura spells.")) {
+                if(kw.equals("CARDNAME can't be the target of Aura spells.")) {
                     if(spell.isAura()) return false;
                 }
                 

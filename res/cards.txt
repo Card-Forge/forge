@@ -1,3 +1,18 @@
+Bartel Runeaxe
+3 G R B
+Legendary Creature Giant Warrior
+no text
+6/5
+Vigilance
+CARDNAME can't be the target of Aura spells.
+
+Tetsuo Umezawa
+R B U
+Legendary Creature Human Archer
+no text
+3/3
+CARDNAME can't be the target of Aura spells.
+
 Khalni Hydra
 G G G G G G G G
 Creature Hydra
@@ -8611,21 +8626,6 @@ Stangg
 Legendary Creature Human Warrior
 When Stangg enters the battlefield, if Stangg is on the battlefield, put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield. When Stangg leaves the battlefield, exile that token. When that token leaves the battlefield, sacrifice Stangg.
 3/4
-
-Bartel Runeaxe
-3 G R B
-Legendary Creature Giant Warrior
-no text
-6/5
-Vigilance
-This card can't be the target of Aura spells.
-
-Tetsuo Umezawa
-R B U
-Legendary Creature Human Archer
-no text
-3/3
-This card can't be the target of Aura spells.
 
 Ayumi, the Last Visitor
 3 G G
