@@ -1656,7 +1656,7 @@ public class GameAction {
                  		if(card.isTapped() == false) k[3] = "0";             		
                  	}
                  	if(k[7].equals("TargetInPlay")) {
-                 		if(Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
+                 		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
                  	}
                  	if(k[7].contains("Affinity")) {
                           String spilt = k[7];                
@@ -1696,6 +1696,7 @@ public class GameAction {
                  }
  		        }
  		}
+
                  if(Mana.equals("0") && spell.isAbility()) {
                  } else {
               		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
@@ -1737,7 +1738,7 @@ public class GameAction {
                          		if(card.isTapped() == false) k[3] = "0";             		
                          	}
                          	if(k[7].equals("TargetInPlay")) {
-                         		if(Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
+                         		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
                          	}
                          	if(k[7].contains("Affinity")) {
       	                            String spilt = k[7];                
@@ -1782,7 +1783,7 @@ public class GameAction {
                          }
                          }
                          Mana = Mana.trim();
-                         if(Mana.equals("")) {
+                         if(Mana.isEmpty() || Mana.equals("0")) {
                          	if(sa.isSpell()) Mana = "0";
                          	else {
                          		Mana = "1";
