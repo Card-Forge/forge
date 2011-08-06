@@ -970,25 +970,29 @@ public class CardFactory implements NewConstants {
                 }
         	};
         	
-        	if (Tgt)
-        		spDiscard.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spDiscard));
-        	
-        	spDiscard.setDescription(spDesc[0]);
-        	spDiscard.setStackDescription(stDesc[0]);
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spDiscard);
-        	
+            if (Tgt)
+                spDiscard.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spDiscard));
+            
+            spDiscard.setDescription(spDesc[0]);
+            spDiscard.setStackDescription(stDesc[0]);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spDiscard);
+            
             String bbCost = card.getSVar("Buyback");
             if (!bbCost.equals(""))
             {
                SpellAbility bbDiscard = spDiscard.copy();
                bbDiscard.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-               bbDiscard.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               StringBuilder sb = new StringBuilder();
+               sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+               sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbDiscard.setDescription(sb.toString());
+               // bbDiscard.setDescription("Buyback " + bbCost + " (You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
                bbDiscard.setIsBuyBackAbility(true);
                
                if (Tgt)
-            	   bbDiscard.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbDiscard));
+                   bbDiscard.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbDiscard));
                
                card.addSpellAbility(bbDiscard);
             }
