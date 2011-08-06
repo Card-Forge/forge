@@ -171,9 +171,8 @@ public class CombatPlaneswalker
     	  int attack =  b.getNetAttack();
      	  if (CombatUtil.isDoranInPlay())
      		 attack = b.getNetDefense();
-    	  AllZone.GameAction.addAssignedDamage(attacking.get(i), b, attack);
+     	 attacking.get(i).addAssignedDamage(attack, b);
       }
-      //attacking.get(i).setAssignedDamage(CardListUtil.sumAttack(block));
       if(block.size() == 0)//this damage is assigned to a player by setPlayerDamage()
         ;
       else if(block.size() == 1)

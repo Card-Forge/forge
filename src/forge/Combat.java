@@ -246,7 +246,6 @@ public class Combat
         		 block = getBlockers(attacking.get(i));
 	       
 	             //attacker always gets all blockers' attack
-	             //AllZone.GameAction.setAssignedDamage(attacking.get(i), block, CardListUtil.sumFirstStrikeAttack(block));
 	             
 	             for (Card b : block)
 	             {
@@ -254,11 +253,10 @@ public class Combat
 		            	 int attack =  b.getNetAttack();
 		            	 if (CombatUtil.isDoranInPlay())
 		            		 attack = b.getNetDefense();
-		            	 AllZone.GameAction.addAssignedDamage(attacking.get(i), b, attack);
+		            	 attacking.get(i).addAssignedDamage(attack, b);
 	            	 }
 	             }
 	            
-	             //attacking.get(i).setAssignedDamage(CardListUtil.sumFirstStrikeAttack(block));
 	             if(block.size() == 0)//this damage is assigned to a player by setPlayerDamage()
 	             {
 	                //GameActionUtil.executePlayerCombatDamageEffects(attacking.get(i));
@@ -277,7 +275,7 @@ public class Combat
 		                 CardList cl = new CardList();
 		                 cl.add(attacking.get(i));
 		
-		                 AllZone.GameAction.addAssignedDamage(block.get(0), attacking.get(i), damageDealt);
+		                 block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
 		
 		                 
 		                 //trample
@@ -349,8 +347,7 @@ public class Combat
 	               CardList cl = new CardList();
 	               cl.add(attacker);
 	
-	           	   AllZone.GameAction.addAssignedDamage(b, c, b.getKillDamage());
-	               //c.setAssignedDamage(c.getKillDamage());
+	           	   b.addAssignedDamage(b.getKillDamage(), c);
 	        }
         }//for
         
@@ -358,7 +355,7 @@ public class Combat
         if (damage > 0)
         {	
         	int index = CardUtil.getRandomIndex(block);
-        	AllZone.GameAction.addAssignedDamage(block.get(index), c, damage);
+        	block.get(index).addAssignedDamage(damage, c);
         	damage = 0;
         }
         else if (c.getKeyword().contains("Trample"))
@@ -393,7 +390,7 @@ public class Combat
 	            	 int attack =  b.getNetAttack();
 	            	 if (CombatUtil.isDoranInPlay())
 	            		 attack = b.getNetDefense();
-	            	 AllZone.GameAction.addAssignedDamage(attacking.get(i), b, attack );
+	            	 attacking.get(i).addAssignedDamage(attack, b);
             	 }
              }
              
@@ -411,7 +408,7 @@ public class Combat
 		              if (CombatUtil.isDoranInPlay())
 		                 damageDealt = attacking.get(i).getNetDefense();
 		                 
-		              AllZone.GameAction.addAssignedDamage(block.get(0), attacking.get(i), damageDealt);
+		              block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
 		                            
 		               //trample
 		               int trample = damageDealt - block.get(0).getNetDefense();
@@ -516,7 +513,7 @@ public class Combat
   	               CardList cl = new CardList();
   	               cl.add(attacker);
   	
-  	           	   AllZone.GameAction.addAssignedDamage(b, c, b.getKillDamage());
+  	           	   b.addAssignedDamage(b.getKillDamage(), c);
   	               //c.setAssignedDamage(c.getKillDamage());
   	        }
           }//for
@@ -525,7 +522,7 @@ public class Combat
           if (damage > 0 && !c.getKeyword().contains("Trample"))
           {	
           	int index = CardUtil.getRandomIndex(block);
-          	AllZone.GameAction.addAssignedDamage(block.get(index), c, damage);
+          	block.get(index).addAssignedDamage(damage, c);
           	damage = 0;
           }
           else if (c.getKeyword().contains("Trample"))

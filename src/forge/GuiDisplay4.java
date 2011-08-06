@@ -1224,10 +1224,10 @@ class Gui_MultipleBlockers4 extends JFrame {
                 else
                         AllZone.Combat.addDefendingDamage(1, att);
                
-                AllZone.GameAction.addAssignedDamage(c, att, 1);
+                c.addAssignedDamage(1, att);
             }
             else if (!c.getName().equals("Player")){
-                AllZone.GameAction.addAssignedDamage(c, att, /*c.getTotalAssignedDamage() +*/1);
+                c.addAssignedDamage(1, att);
             }
             else
                 assignedDamage = false;
