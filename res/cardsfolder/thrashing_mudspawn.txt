@@ -1,0 +1,10 @@
+Name:Thrashing Mudspawn
+ManaCost:3 B B
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:Whenever CARDNAME is dealt damage, you lose that much life.
+K:Morph:1 B B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrashing_mudspawn.jpg
+End

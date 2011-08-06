@@ -2853,54 +2853,6 @@ public class Card extends MyObservable {
         System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
         
-        if(this.getName().equals("Stuffy Doll")) {
-        	final Player opponent = this.getOwner().getOpponent();
-        	final int stuffyDamage = damageToAdd;
-        	SpellAbility ability = new Ability(this, "0") {
-        		@Override
-        		public void resolve() {
-        			opponent.addDamage(stuffyDamage, Card.this);
-        		}
-        	};
-        	StringBuilder sb = new StringBuilder();
-            sb.append(this.getName()+" - Deals ").append(stuffyDamage).append(" damage to ").append(opponent);
-            ability.setStackDescription(sb.toString());
-            
-            AllZone.Stack.add(ability);
-        }
-        
-        if(this.getName().equals("Jackal Pup") || this.getName().equals("Shinka Gatekeeper")) {
-        	final Player player = this.getController();
-        	final int selfDamage = damageToAdd;
-        	SpellAbility ability = new Ability(this, "0") {
-        		@Override
-        		public void resolve() {
-        			player.addDamage(selfDamage, Card.this);
-        		}
-        	};
-        	StringBuilder sb = new StringBuilder();
-            sb.append(this.getName()+" - Deals ").append(selfDamage).append(" damage to ").append(player);
-            ability.setStackDescription(sb.toString());
-            
-            AllZone.Stack.add(ability);
-        }
-        
-        if(this.getName().equals("Filthy Cur")) {
-        	final Player player = this.getController();
-        	final int life = damageToAdd;
-        	SpellAbility ability = new Ability(this, "0") {
-        		@Override
-        		public void resolve() {
-        			player.loseLife(life, Card.this);
-        		}
-        	};
-        	StringBuilder sb = new StringBuilder();
-            sb.append(this.getName()+" - ").append(player).append(" loses ").append(life).append("life");
-            ability.setStackDescription(sb.toString());
-            
-            AllZone.Stack.add(ability);
-        }
-        
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
@@ -2918,59 +2870,7 @@ public class Card extends MyObservable {
         } else
             if(AllZoneUtil.isCardInPlay(this)) damage += damageToAdd;
         
-        if(source.getName().equals("Spiritmonger")) {
-        	Ability ability2 = new Ability(source, "0") {
-        		@Override
-        		public void resolve() {
-        			source.addCounter(Counters.P1P1, 1);
-        		}
-        	}; // ability2
-        	
-        	StringBuilder sb2 = new StringBuilder();
-        	sb2.append(source.getName()).append(" - gets a +1/+1 counter");
-        	ability2.setStackDescription(sb2.toString());
-        	
-        	AllZone.Stack.add(ability2);
-        }
-        
-        if(getKeyword().contains("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
-        	Ability ability2 = new Ability(this, "0") {
-        		@Override
-        		public void resolve() {
-        			addCounter(Counters.P1P1, 1);
-        		}
-        	}; // ability2
-        	
-        	StringBuilder sb2 = new StringBuilder();
-        	sb2.append(getName()).append(" - gets a +1/+1 counter");
-        	ability2.setStackDescription(sb2.toString());
-        	
-        	AllZone.Stack.add(ability2);
-        }
-        
-        if(hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
-	        final Card damagedCard = this;
-	        final Ability ability = new Ability(source, "0") {
-	        	@Override
-	        	public void resolve() { AllZone.GameAction.destroy(damagedCard); }
-	        };
-	        
-	        final Ability ability2 = new Ability(source, "0") {
-	        	@Override
-	        	public void resolve() { AllZone.GameAction.destroyNoRegeneration(damagedCard); }
-	        };
-	    
-	        StringBuilder sb = new StringBuilder();
-	    	sb.append(damagedCard).append(" - destroy");
-	    	ability.setStackDescription(sb.toString());
-	    	ability2.setStackDescription(sb.toString());
-	    	
-	    	if(getKeyword().contains("When CARDNAME is dealt damage, destroy it. It can't be regenerated."))
-	    		AllZone.Stack.add(ability2);
-	    	else AllZone.Stack.add(ability);
-        }
-        
-        if(source.getKeyword().contains("Deathtouch") && this.isCreature()) AllZone.GameAction.destroy(this);
+        GameActionUtil.executeCreatureDamageEffects(source, this, damageToAdd);
     }
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
     private String curSetCode = "";

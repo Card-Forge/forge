@@ -1,0 +1,10 @@
+Name:Ragged Veins
+ManaCost:1 B
+Types:Enchantment Aura
+Text:Whenever enchanted creature is dealt damage, its controller loses that much life.
+K:Flash
+K:Enchant creature
+K:enPumpCurse:HIDDEN Whenever CARDNAME is dealt damage, its controller loses that much life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ragged_veins.jpg
+End

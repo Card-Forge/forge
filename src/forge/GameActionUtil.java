@@ -5332,6 +5332,123 @@ public class GameActionUtil {
 		
 		AllZone.Stack.add(ability2);
 	}
+	
+	//not restricted to combat damage
+	public static void executeCreatureDamageEffects(final Card source, final Card affected, int damage) {
+		
+		final Player player = affected.getController();
+		
+        if(affected.getName().equals("Stuffy Doll")) {
+        	final Player opponent = affected.getOwner().getOpponent();
+        	final int stuffyDamage = damage;
+        	SpellAbility ability = new Ability(affected, "0") {
+        		@Override
+        		public void resolve() {
+        			opponent.addDamage(stuffyDamage, affected);
+        		}
+        	};
+        	StringBuilder sb = new StringBuilder();
+            sb.append(affected.getName()+" - Deals ").append(stuffyDamage).append(" damage to ").append(opponent);
+            ability.setStackDescription(sb.toString());
+            
+            AllZone.Stack.add(ability);
+        }
+        
+        if(affected.getName().equals("Jackal Pup") || affected.getName().equals("Shinka Gatekeeper")) {
+        	final int selfDamage = damage;
+        	Ability ability = new Ability(affected, "0") {
+        		@Override
+        		public void resolve() {
+        			player.addDamage(selfDamage, affected);
+        		}
+        	};
+        	StringBuilder sb = new StringBuilder();
+            sb.append(affected.getName()+" - Deals ").append(selfDamage).append(" damage to ").append(player);
+            ability.setStackDescription(sb.toString());
+            
+            AllZone.Stack.add(ability);
+        }
+        
+        if(affected.getKeyword().contains("Whenever CARDNAME is dealt damage, you lose that much life.")) {
+			final int life = damage;
+			
+	    	Ability ability = new Ability(affected, "0") {
+	    		@Override
+	    		public void resolve() {
+	    			player.loseLife(life, affected);
+	    		}
+	    	};
+	    	StringBuilder sb = new StringBuilder();
+	        sb.append(affected.getName()+" - ").append(player).append(" loses ").append(life).append(" life");
+	        ability.setStackDescription(sb.toString());
+        	int amount = affected.getAmountOfKeyword("Whenever CARDNAME is dealt damage, you lose that much life.");
+	        
+	        for(int i=0 ; i < amount ; i++)
+	        	AllZone.Stack.add(ability);
+        }
+        
+		if(source.getName().equals("Spiritmonger")) {
+        	Ability ability2 = new Ability(source, "0") {
+        		@Override
+        		public void resolve() {
+        			source.addCounter(Counters.P1P1, 1);
+        		}
+        	}; // ability2
+        	
+        	StringBuilder sb2 = new StringBuilder();
+        	sb2.append(source.getName()).append(" - gets a +1/+1 counter");
+        	ability2.setStackDescription(sb2.toString());
+        	
+        	AllZone.Stack.add(ability2);
+        }
+        
+        if(affected.getKeyword().contains("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
+        	Ability ability2 = new Ability(affected, "0") {
+        		@Override
+        		public void resolve() {
+        			affected.addCounter(Counters.P1P1, 1);
+        		}
+        	}; // ability2
+        	
+        	StringBuilder sb2 = new StringBuilder();
+        	sb2.append(affected.getName()).append(" - gets a +1/+1 counter");
+        	ability2.setStackDescription(sb2.toString());
+        	int amount = affected.getAmountOfKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.");
+            
+            for(int i=0 ; i < amount ; i++)
+            	AllZone.Stack.add(ability2);
+        }
+        
+        if(affected.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
+	        final Ability ability = new Ability(source, "0") {
+	        	@Override
+	        	public void resolve() { AllZone.GameAction.destroy(affected); }
+	        };
+	        
+	        final Ability ability2 = new Ability(source, "0") {
+	        	@Override
+	        	public void resolve() { AllZone.GameAction.destroyNoRegeneration(affected); }
+	        };
+	    
+	        StringBuilder sb = new StringBuilder();
+	    	sb.append(affected).append(" - destroy");
+	    	ability.setStackDescription(sb.toString());
+	    	ability2.setStackDescription(sb.toString());
+	    	
+	    	if(affected.getKeyword().contains("When CARDNAME is dealt damage, destroy it. It can't be regenerated.")) {
+	        	int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
+	            
+	            for(int i=0 ; i < amount ; i++)
+	            	AllZone.Stack.add(ability2);
+	    	}
+	    	int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
+            
+            for(int i=0 ; i < amount ; i++)
+            	AllZone.Stack.add(ability); AllZone.Stack.add(ability);
+        }
+        
+        if(source.getKeyword().contains("Deathtouch") && affected.isCreature()) AllZone.GameAction.destroy(affected);
+	}
 
 	public static void executeGuiltyConscienceEffects(Card c, Card source) {
 		int pwr = c.getNetAttack();
