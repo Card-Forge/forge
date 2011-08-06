@@ -8829,8 +8829,9 @@ public class CardFactory_Creatures {
                         if(card.getController().equals(Constant.Player.Human)) {
                             
                             String color = "";
-                            String[] colors = Constant.Color.Colors;
-                            colors[colors.length - 1] = null;
+                            // String[] colors = Constant.Color.Colors;
+                            // colors[colors.length - 1] = null;
+                            String[] colors = Constant.Color.onlyColors;
                             
                             Object o = AllZone.Display.getChoice("Choose color", colors);
                             color = (String) o;
