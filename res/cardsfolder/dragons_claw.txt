@@ -2,7 +2,7 @@ Name:Dragon's Claw
 ManaCost:2
 Types:Artifact
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a red spell, you may gain 1 life.
+T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a red spell, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
