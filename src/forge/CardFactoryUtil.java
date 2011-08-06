@@ -3933,9 +3933,9 @@ public class CardFactoryUtil {
         
         if(d[0].contains("MakeToken")) {
         	final String[] k = d[0].split("<>");
-            //final String numString = k[1].equals("X") ? Src.getSVar("X") : k[1];
-        	final String numString = k[1];
-            //final boolean xString = k[1].equals("X") ? true : false;
+            final String numString = k[1].equals("X") ? Src.getSVar("X") : k[1];
+        	//final String numString = k[1];
+            final boolean xString = k[1].equals("X") ? true : false;
             final String name = k[2];
             final String imageName = k[3];
             final String controllerString = k[4];
@@ -3945,17 +3945,14 @@ public class CardFactoryUtil {
             final int defense = Integer.valueOf(k[8]);
             final String[] keywords = k[9].split(";");
             
-            //String controller = (controllerString.equals("Controller") ? Src.getController() : AllZone.GameAction.getOpponent(card.getController()));
             String controller = controllerString.equals("Controller") ? cardController : Opp;
+			if(keywords[0].equals("None")) keywords[0] = "";
 			
-            if(keywords[0].equals("None")) keywords[0] = "";
-			
-			//int num = xString ? CardFactoryUtil.xCount(card, numString) : Integer.valueOf(numString);
-            int num = Integer.valueOf(numString);
+			int num = xString ? CardFactoryUtil.xCount(TgtC, numString) : Integer.valueOf(numString);
             for(int i = 0; i < num; i ++ ){
             	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
             }
-        }
+        }//end MakeToken drawback
         
         
         if(d[0].contains("ReturnFromYard")) // placeholder for effect
