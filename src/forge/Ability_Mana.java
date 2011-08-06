@@ -332,6 +332,10 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     		String m = orig.split(": Add ")[1].split(" to ")[0];
     		return m;
     	}
+    	else if( orig.contains("X")) {
+    		int amt = CardFactoryUtil.xCount(sourceCard, sourceCard.getSVar("X"));
+    		return Integer.toString(amt);
+    	}
     	else {
         	return Mana;
         }
