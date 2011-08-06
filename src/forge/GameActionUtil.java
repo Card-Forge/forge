@@ -11332,6 +11332,12 @@ public class GameActionUtil {
 	      			SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
 	      			if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
   	      	}
+  	      	if(SpecialConditions.contains("LibraryLE")) {
+  	      		CardList Library = new CardList();
+  	      		Library.addAll(AllZone.getZone(Constant.Zone.Library, SourceCard.getController()).getCards());
+  	      		String maxnumber = SpecialConditions.split("/")[1];
+	      		if (Library.size() > Integer.valueOf(maxnumber)) return false;
+	      	}
   	      	if(SpecialConditions.contains("Threshold")) {
   	      		PlayerZone pYard = AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController());
   	      		if (pYard.size() < 7) return false;
