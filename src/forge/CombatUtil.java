@@ -287,7 +287,12 @@ public class CombatUtil {
         }
         
         if(attacker.getKeyword().contains("Fear")) {
-            if(!blocker.getType().contains("Artifact") && !blocker.isBlack())
+            if(!blocker.isArtifact() && !blocker.isBlack())
+            return false;
+        }
+        
+        if(attacker.getKeyword().contains("Intimidate")) {
+            if(!blocker.isArtifact() && !blocker.sharesColorWith(attacker))
             return false;
         }
         
