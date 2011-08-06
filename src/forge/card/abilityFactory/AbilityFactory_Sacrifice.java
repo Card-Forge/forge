@@ -126,6 +126,10 @@ public class AbilityFactory_Sacrifice {
 		
 		if (valid.equals("Self"))
 			sb.append("Sacrifice ").append(sa.getSourceCard().toString());
+		else if(valid.equals("Card.AttachedBy")) {
+			Card toSac = sa.getSourceCard().getEnchantingCard();
+			sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
+		}
 		else{
 			for(Player p : tgts)
 				sb.append(p.getName()).append(" ");
@@ -136,6 +140,7 @@ public class AbilityFactory_Sacrifice {
 			
 			sb.append("Sacrifices ").append(amount).append(" ").append(msg).append(".");
 		}
+		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null)
         	sb.append(abSub.getStackDescription());
@@ -290,6 +295,13 @@ public class AbilityFactory_Sacrifice {
 		if (valid.equals("Self")){
 			if (AllZone.getZone(sa.getSourceCard()).is(Constant.Zone.Battlefield))
 				AllZone.GameAction.sacrifice(sa.getSourceCard());
+		}
+		//TODO - maybe this can be done smarter...
+		else if(valid.equals("Card.AttachedBy")) {
+			Card toSac = sa.getSourceCard().getEnchantingCard();
+			if (AllZone.getZone(sa.getSourceCard()).is(Constant.Zone.Battlefield) && AllZoneUtil.isCardInPlay(toSac)) {
+				AllZone.GameAction.sacrifice(toSac);
+			}
 		}
 		else if( valid.equals("TriggeredCard")) {
 			Card equipee = (Card)(card.getTriggeringObject("Card"));
