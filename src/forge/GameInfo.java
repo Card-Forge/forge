@@ -8,6 +8,7 @@ public class GameInfo {
 	private boolean humanPlayedFirstLandThisTurn;
 	
 	private int humanNumberOfTimesMulliganed;
+	private boolean humanMulliganedToZero;
 	
 	private boolean preventCombatDamageThisTurn;
 
@@ -67,6 +68,16 @@ public class GameInfo {
 	public void setHumanNumberOfTimesMulliganed(int n)
 	{
 		humanNumberOfTimesMulliganed = n;
+	}
+	
+	public boolean getHumanMulliganedToZero()
+	{
+		return humanMulliganedToZero;
+	}
+	
+	public void setHumanMulliganedToZero(boolean b)
+	{
+		humanMulliganedToZero = b;
 	}
 
 	public void setPreventCombatDamageThisTurn(boolean b) {

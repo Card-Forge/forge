@@ -144,6 +144,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         	if (winLose.getWinTurns()[0] != 0)
         		game = 1;
         	winLose.setWinTurn(game, AllZone.Phase.getTurn());
+        	winLose.setMulliganedToZero(game, AllZone.GameInfo.getHumanMulliganedToZero());
+        	
         	//winLose.setWinTurn(winLose.countWinLose()-1, AllZone.Phase.getTurn());
         	
         	//System.out.println("CountwinLose:" + winLose.countWinLose());
@@ -313,7 +315,17 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     				sb.append("Won by turn 15! Bonus: <b>+5 credits</b>.<br>");
     		}
     	}
+    	
+    	boolean[] mulliganedToZero = winLose.getMulliganedToZero();
 
+    	for (boolean b : mulliganedToZero)
+    	{
+    		if (b == true)
+    		{
+    			sb.append("Mulliganed to zero and still won! Bonus: <b>+500 credits</b>.<br>");
+    		}
+    	}
+    	
     	if (winLose.getLose()==0)
     		sb.append("You have not lost once! Bonus: <b>+10 credits</b>.<br>");
     	
@@ -428,7 +440,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             	String fileName = "HeartIcon.png";
             	ImageIcon icon = getIcon(fileName);
             	
-            	JOptionPane.showMessageDialog(null, "You FAIL! You have lost 15 credits.", "Awwww", JOptionPane.INFORMATION_MESSAGE, icon);
+            	JOptionPane.showMessageDialog(null, "You lose! You have lost 15 credits.", "Awwww", JOptionPane.INFORMATION_MESSAGE, icon);
             }
             
             if(quest.shouldAddAdditionalCards(winLose.didWinRecently())) {

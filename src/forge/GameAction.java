@@ -1059,6 +1059,7 @@ public class GameAction {
         
         AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
         AllZone.GameInfo.setHumanNumberOfTimesMulliganed(0);
+        AllZone.GameInfo.setHumanMulliganedToZero(false);
         
         AllZone.Human_PoisonCounter.setPoisonCounters(0);
         AllZone.Computer_PoisonCounter.setPoisonCounters(0);

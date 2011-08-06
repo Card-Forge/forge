@@ -46,7 +46,10 @@ public class Input_Mulligan extends Input {
         for(int i = 0; i < newHand; i++)
             AllZone.GameAction.drawCard(Constant.Player.Human);
         
-        if(newHand == 0) end();
+        if(newHand == 0) {
+        	AllZone.GameInfo.setHumanMulliganedToZero(true);
+        	end();
+        }
     }//selectButtonOK()
     
     void end() {

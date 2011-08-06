@@ -534,6 +534,7 @@ public class QuestData implements NewConstants {
     	long creds = (long) (10 + (0.3 * win));
     	String[] wins = winLose.getWinMethods();
     	int[] winTurns = winLose.getWinTurns();
+    	boolean[] mulliganedToZero = winLose.getMulliganedToZero();
     	
     	if (winLose.getLose() == 0)
     		creds += 10;
@@ -558,6 +559,13 @@ public class QuestData implements NewConstants {
 				creds+=50;
 			else if (i <= 15)
 				creds+=5;
+    	}
+    	
+    	
+    	for (boolean b : mulliganedToZero)
+    	{
+    		if (b == true)
+    			creds+=500;
     	}
     	
     	if (getEstatesLevel() == 1)
@@ -777,7 +785,10 @@ public class QuestData implements NewConstants {
     	if (getLuckyCoinLevel() >= 1)
     		chance = 0.65f;
     	
-    	if(didWin) return random.nextFloat() <= chance;
+    	float r = random.nextFloat();
+    	System.out.println("Random:" + r);
+    	
+    	if(didWin) return r <= chance;
         	
         else return false;
     }

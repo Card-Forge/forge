@@ -12,6 +12,7 @@ public class WinLose
   private String[] winMethods = new String[2];
   private int[]	   winTurns   = new int[2];
   
+  private boolean[] mulliganedToZero = new boolean[2];
   
   private int win;
   private int lose;
@@ -40,9 +41,20 @@ public class WinLose
 	  winTurns[gameNumber] = turns;
   }
   
+  
   public int[] getWinTurns()
   {
 	  return winTurns;
+  }
+  
+  public boolean[] getMulliganedToZero()
+  {
+	  return mulliganedToZero;
+  }
+  
+  public void setMulliganedToZero(int gameNumber, boolean b)
+  {
+	  mulliganedToZero[gameNumber] = b;
   }
 
   public boolean didWinRecently() {return winRecently;}
