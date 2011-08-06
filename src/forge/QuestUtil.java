@@ -758,6 +758,26 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(6));
 		}
+
+		else if (id == 22) // Pied Piper
+		{
+			CardList humanList = new CardList();
+			String humanSetupCards[] = {"Volunteer Militia", "Land Tax", "Elvish Farmer", "An-Havva Township"};
+			
+			for (int i = 0; i < 4; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			String compySetupCards[] = {"Darksteel Citadel", "Relentless Rats"};
+			
+			for (int i = 0; i < 2; i ++)
+				qa.addCompy(compySetupCards[i]);
+			
+			qa.setCardRewardList(pack.getRare(3));
+		}
 			
 	}
 	

@@ -563,8 +563,6 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Picard 3		hard	UWG Elf deck similar to Morpheus but also has flying elves");
         sb.append("\r\n");
-	sb.append("Pied Piper of Hamelin 3	hard	Thrumming Stone and Relentless Rats (nothing else)");
-        sb.append("\r\n");
         sb.append("Pinky and the Brain 3	hard	Royal Assassin, WoG + Damnation, Liliana Vess, Beacon of Unrest");
         sb.append("\r\n");
         sb.append("Professor X 3		hard	Master of Etherium + Vedalken Archmage and many artifacts");
