@@ -852,7 +852,7 @@ public class CombatUtil {
         //human does not have an "attackers_instantAbility" phase during his turn (yet), so triggers will happen at the beginning of declare blockers
         if( /*AllZone.Phase.getPhase().equals("Declare Blockers") ||*/
         AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
-        	AllZone.GameAction.CheckWheneverKeyword(c,"Attacks");
+        	AllZone.GameAction.CheckWheneverKeyword(c,"Attacks",null);
         	//Annihilator:
         	if (!c.getCreatureAttackedThisCombat())
         	{

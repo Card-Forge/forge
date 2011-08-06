@@ -663,7 +663,7 @@ public class GameAction {
     }
     
     // Whenever Keyword
-    public void CheckWheneverKeyword(Card Triggering_Card,String Event) { 
+    public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) { 
 		CardList Cards_In_Play = new CardList();
  		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
  		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
@@ -689,7 +689,7 @@ public class GameAction {
                  String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
                  String k[] = parse.split(":");
                  if((k[1].equals(Event))) {
-                	 RunWheneverKeyword(Triggering_Card, Event); // Beached
+                	 RunWheneverKeyword(Triggering_Card, Event, Custom_Parameters); // Beached
                 	 Triggered = true;
                  }
  		        }
@@ -697,7 +697,8 @@ public class GameAction {
  		}	
     }
 	static boolean MultiTarget_Cancelled = false;
-    public void RunWheneverKeyword(Card c, String Event) {   	
+    public void RunWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
+		final Card F_TriggeringCard = c;
  		CardList Cards_In_Play = new CardList();
  		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
  		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
@@ -725,7 +726,8 @@ public class GameAction {
                  if((k[1].equals("PermanentIntoGraveyard")) && Event.equals("PermanentIntoGraveyard")
                 	 || (k[1].equals("BeginningOfEndStep")) && Event.equals("BeginningOfEndStep")
                 	 || (k[1].equals("Attacks")) && Event.equals("Attacks")
-                	 || (k[1].equals("EntersBattleField")) && Event.equals("EntersBattleField"))
+                	 || (k[1].equals("EntersBattleField")) && Event.equals("EntersBattleField")
+                	 || (k[1].equals("GainLife")) && Event.equals("GainLife") && c.getController().equals(card.getController()))
                 		 {      
                     if(k[2].contains("Self")) {
                     	if(!card.equals(c)) k[4] = "Null";    
@@ -737,6 +739,9 @@ public class GameAction {
                              	}
                   	if(k[8].contains("Initiator - Other than Self")) {
                  		if(card.equals(c)) k[4] = "Null";      		
+                 	}
+                  	if(k[8].contains("Initiator - OwnedByController")) {
+                 		if(!c.getController().equals(card.getController())) k[4] = "Null";      		
                  	}
                   	if(k[8].contains("Initiator - Has Keyword")) {
                   		boolean Nullified = true;
@@ -754,17 +759,16 @@ public class GameAction {
     				if(k[5].equals("ControllingPlayer_Self")) TargetPlayer = card.getController();
     				final String F_TargetPlayer = TargetPlayer;
     				Card TargetCard = null;
-    				final Card Destroyed = c;
     				if(k[5].equals("Self")) TargetCard = F_card;
     				final Card F_TargetCard = TargetCard;
-                  	
                 		// +1 +1 Counters
                 		if(k[4].contains("+1+1 Counters")) {
                             String AmountParse = k[4];                
                             String S_Amount = AmountParse.split("/")[1];
                             int I_Amount = 0;
-                            if(S_Amount.equals("Power")) I_Amount = Destroyed.getNetAttack();
-                            else I_Amount = Integer.valueOf(S_Amount);
+                            if(S_Amount.equals("Power")) I_Amount = F_TriggeringCard.getNetAttack();
+                            else if(S_Amount.equals("Life_Gained")) I_Amount = ((Integer)Custom_Parameters[0]);
+                            else if(I_Amount == 0) I_Amount = Integer.valueOf(S_Amount);
                         final int F_Amount = I_Amount;
                 		Ability ability = new Ability(F_TargetCard, "0") {
                 			@Override
@@ -802,7 +806,7 @@ public class GameAction {
                             String AmountParse = k[4];                
                             String S_Amount = AmountParse.split("/")[1];
                             int I_Amount = 0;
-                            if(S_Amount.equals("Some random condition not implemented yet")) I_Amount = 3;
+                            if(S_Amount.equals("Toughness")) I_Amount = F_TriggeringCard.getNetDefense();
                             else I_Amount = Integer.valueOf(S_Amount);
                             final int F_Amount = I_Amount;
                     		Ability ability = new Ability(card, "0") {
@@ -993,7 +997,7 @@ public class GameAction {
             }
         });
         
-        CheckWheneverKeyword(c, "PermanentIntoGraveyard"); 
+        CheckWheneverKeyword(c, "PermanentIntoGraveyard",null);
         for(int i = 0; i < list.size(); i++)
             GameActionUtil.executeDestroyCardEffects(list.get(i), c);
         for(int i = 0; i < grv.size(); i++)

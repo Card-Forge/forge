@@ -28,6 +28,9 @@ public class CardFactory implements NewConstants {
     
     private HashSet<String>   removedCardList;
     private Card              blankCard = new Card();                 //new code
+    // The Following "Cards" are used by the Whenever Keyword
+    public Card               HumanNullCard = new Card();
+    public Card               ComputerNullCard = new Card();
                                                                        
     public CardFactory(String filename) {
         this(new File(filename));
@@ -53,6 +56,11 @@ public class CardFactory implements NewConstants {
         //theoretically blankCard will go to the wrong graveyard
         blankCard.setOwner(Constant.Player.Human);
         blankCard.setController(Constant.Player.Human);
+        
+        HumanNullCard.setOwner(Constant.Player.Human);
+        HumanNullCard.setController(Constant.Player.Human);
+        ComputerNullCard.setOwner(Constant.Player.Computer);
+        ComputerNullCard.setController(Constant.Player.Computer);
         
         removedCardList = new HashSet<String>(FileUtil.readFile(ForgeProps.getFile(REMOVED)));
         

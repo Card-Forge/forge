@@ -1,6 +1,5 @@
 package forge;
 
-import java.util.ArrayList;
 //import java.util.*;
 
 //handles "until end of turn" and "at end of turn" commands from cards
@@ -18,7 +17,7 @@ public class EndOfTurn implements java.io.Serializable
 
   public void executeAt()
   {
-	  	AllZone.GameAction.CheckWheneverKeyword(new Card(),"BeginningOfEndStep");
+	  AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard,"BeginningOfEndStep",null);
 	  
     //Pyrohemia and Pestilence
     CardList all = new CardList();

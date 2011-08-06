@@ -1,3 +1,23 @@
+Angelic Chorus
+3 W W
+Enchantment
+no text
+WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Toughness:ControllingPlayer_Self:ASAP:No Condition:Initiator - OwnedByController:Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
+
+Ajani's Pridemate
+1 W
+Creature Cat Soldier
+no text
+2/2
+WheneverKeyword:GainLife:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
+
+Ageless Entity
+3 G G
+Creature Elemental
+no text
+4/4
+WheneverKeyword:GainLife:No_Initiator:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
+
 Inferno Titan
 4 R R
 Creature Giant
