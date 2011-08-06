@@ -3234,7 +3234,13 @@ public class GameAction {
                          		&& ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
                          		|| (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                          		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
-                         		&& ((sa.getSourceCard().getType().contains(k[6])) 
+                         		/**
+                                  *  Chris added a test for Changeling.
+                                  *  This appears to reduce the cost correctly.
+                                  *  Works for both the computer and the human.
+                                  */
+                                && (((sa.getSourceCard().getType().contains(k[6])) || sa.getSourceCard().getKeyword().contains("Changeling"))
+                         				
                          		|| (!(sa.getSourceCard().getType().contains(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) { 
                          	if(k[7].contains("CardIsTapped")) {
                          		if(card.isTapped() == false) k[3] = "0";             		
