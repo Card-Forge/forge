@@ -5,7 +5,7 @@ Text:Enchanted artifact's activated abilities cost 2 less to activate. This effe
 K:CostChange:Player:Less:2:Enchanted:All:Artifact:TargetInPlay
 K:Enchant Artifact
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_artifact.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/55.jpg
 End
