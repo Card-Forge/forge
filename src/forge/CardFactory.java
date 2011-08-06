@@ -3871,7 +3871,7 @@ public class CardFactory implements NewConstants {
             };// spRtrnTgt
             
             spRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(
-                    card, spRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts, anyNumber[0]));
+            		card, spRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts, anyNumber[0]));
             
             if (desc.length() > 0) {
                 spRtrnTgt.setDescription(desc);
