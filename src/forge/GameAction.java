@@ -380,6 +380,7 @@ public class GameAction {
     public void scry(String player, int numScry) {
         CardList topN = new CardList();
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        numScry = Math.min(numScry, library.size());
         for(int i = 0; i < numScry; i++) {
             topN.add(library.get(0));
             library.remove(0);
