@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Enchantment
 Text:no text
 A:AB$ Counter | Cost$ G G | Type$ Spell | CounterValid$ Card.Black | SpellDescription$ Counter target black spell.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifeforce.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/115.jpg

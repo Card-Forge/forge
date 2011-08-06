@@ -5,6 +5,7 @@ Text:At the beginning of your upkeep, sacrifice a creature other than Lord of th
 PT:7/7
 K:Flying
 K:Trample
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_pit.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/23.jpg
