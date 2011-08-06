@@ -4,6 +4,7 @@ Types:Land
 Text:no text
 K:tap: add 1
 K:abTapTgt 1 T:Land:Tap target land.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_port.jpg
 End

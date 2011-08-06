@@ -3,6 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 K:abTapTgt T:Artifact:Tap target artifact.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_barrier.jpg
 End

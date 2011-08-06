@@ -3,6 +3,7 @@ ManaCost:3 W
 Types:Enchantment
 Text:no text
 K:abTapTgt tapXType<2/Creature>:Creature:Tap target creature.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diversionary_tactics.jpg
 End
