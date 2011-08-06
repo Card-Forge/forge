@@ -1134,69 +1134,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Great Whale")) {
-            final Input untap = new Input() {
-                private static final long serialVersionUID = -2167059018040912025L;
-                
-                int                       stop             = 7;
-                int                       count            = 0;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select a land to untap");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card card, PlayerZone zone) {
-                    if(card.isLand() && zone.is(Constant.Zone.Battlefield)) {
-                        card.untap();
-                        count++;
-                        if(count == stop) stop();
-                    }
-                }//selectCard()
-            };
-            
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(untap);
-                    else {
-                        CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                        list = list.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.isLand() && c.isTapped();
-                            }
-                        });
-                        for(int i = 0; i < 7 && i < list.size(); i++) {
-                            list.get(i).untap();
-                        }
-                    }//else
-                }//resolve()
-            };
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 7222997838266323277L;
-                
-                public void execute() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" untaps up to 7 lands.");
-                	ability.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END ***************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Palinchron")) {
             final Input untap = new Input() {
                 private static final long serialVersionUID = -2167159918040912025L;
@@ -1276,69 +1213,6 @@ public class CardFactory_Creatures {
             a1.setStackDescription(sb.toString());
             
             a1.setDescription("2 U U: Return Palinchron to its owner's hand.");
-        }//*************** END ************ END ***************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cloud of Faeries")) {
-            final Input untap = new Input() {
-                private static final long serialVersionUID = -2167059918040912025L;
-                
-                int                       stop             = 2;
-                int                       count            = 0;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select a land to untap");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card card, PlayerZone zone) {
-                    if(card.isLand() && zone.is(Constant.Zone.Battlefield)) {
-                        card.untap();
-                        count++;
-                        if(count == stop) stop();
-                    }
-                }//selectCard()
-            };
-            
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(untap);
-                    else {
-                        CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                        list = list.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.isLand() && c.isTapped();
-                            }
-                        });
-                        for(int i = 0; i < 2 && i < list.size(); i++) {
-                            list.get(i).untap();
-                        }
-                    }//else
-                }//resolve()
-            };//SpellAbility
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 7222997838166323277L;
-                
-                public void execute() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" untaps up to 2 lands.");
-                	ability.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END ***************************
         
 
