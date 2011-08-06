@@ -185,6 +185,8 @@ public class CardPanel extends JPanel implements CardContainer{
 			int width = ManaSymbols.getWidth(gameCard.getManaCost());
 			ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
 		}
+		if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isAttacking() ) 
+				ManaSymbols.drawAttack(g, cardXOffset + cardWidth / 2 - 12, cardYOffset +1);
 	}
 
 	public void layout () {		

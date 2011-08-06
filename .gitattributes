@@ -5743,6 +5743,7 @@ res/images/symbols-13/WU.png -text svneol=unset#image/png
 res/images/symbols-13/X.png -text svneol=unset#image/png
 res/images/symbols-13/Y.png -text svneol=unset#image/png
 res/images/symbols-13/Z.png -text svneol=unset#image/png
+res/images/symbols-13/attack.png -text svneol=unset#image/png
 res/images/symbols-13/slash.png -text svneol=unset#image/png
 res/lang/de.properties svneol=native#text/plain
 res/lang/en.properties svneol=native#text/plain
