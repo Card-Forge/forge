@@ -2443,7 +2443,8 @@ public class GameActionUtil {
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card crd) {
                 if (crd.getName().equals("Verduran Enchantress")    || crd.getName().equals("Enchantress's Presence")
-                        || crd.getName().equals("Mesa Enchantress") || crd.getName().equals("Argothian Enchantress")) return true;
+                        || crd.getName().equals("Mesa Enchantress") || crd.getName().equals("Argothian Enchantress")
+                        || crd.getName().equals("Kor Spiritdancer")) return true;
                 else return false;
             }
         });
@@ -2455,7 +2456,8 @@ public class GameActionUtil {
                 Ability ability2 = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        Boolean mayDrawNotMust = (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress"));
+                        Boolean mayDrawNotMust = (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress")
+                        		|| card.getName().equals("Kor Spiritdancer"));
                         int choice = 0;
                         
                         if (card.getController().equals("Human")) {
@@ -2484,7 +2486,8 @@ public class GameActionUtil {
                 
                 StringBuilder sb = new StringBuilder();
                 sb.append(card.getName()).append(" - ").append(c.getController()).append(" plays an enchantment spell and ");
-                if (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress")) {
+                if (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress")
+                		|| card.getName().equals("Kor Spiritdancer")) {
                     sb.append("may draw a card.");
                 } else {
                     sb.append("draws a card.");
@@ -15607,10 +15610,7 @@ public class GameActionUtil {
 
 		public void execute() {
               // get all creatures
-              CardList list = new CardList();
-              list.addAll(AllZone.Human_Play.getCards());
-              list.addAll(AllZone.Computer_Play.getCards());
-              list = list.getName("Aura Gnarlid");
+              CardList list = AllZoneUtil.getCardsInPlay("Aura Gnarlid");
               
               for(int i = 0; i < list.size(); i++) {
                   Card c = list.get(i);
@@ -15620,19 +15620,33 @@ public class GameActionUtil {
           }// execute()
           
           private int countAuras() {
-              PlayerZone cplay = AllZone.getZone(
-                      Constant.Zone.Play, Constant.Player.Computer);
-              PlayerZone hplay = AllZone.getZone(
-                      Constant.Zone.Play, Constant.Player.Human);
-              
-              CardList auras = new CardList();
-              auras.addAll(hplay.getCards());
-              auras.addAll(cplay.getCards());
-              
+              CardList auras = AllZoneUtil.getCardsInPlay();
               auras = auras.getType("Aura");
               return auras.size();
           }
       };
+      
+      /*
+       * Kor Spiritdancer gets +2/+2 for each Aura attached to it.
+       */
+      public static Command Kor_Spiritdancer = new Command() {
+    	  private static final long serialVersionUID = -216941322236352450L;
+
+    	  public void execute() {
+    		  // get all creatures
+    		  CardList list = AllZoneUtil.getCardsInPlay("Kor Spiritdancer");
+
+    		  for(Card c:list) {
+    			  c.setBaseAttack(0 + 2*countAuras(c));
+    			  c.setBaseDefense(2 + 2*countAuras(c));
+    		  }
+    	  }// execute()
+
+    	  private int countAuras(final Card c) {
+    		  ArrayList<Card> auras = c.getEnchantedBy();
+    		  return auras.size();
+    	  }
+      };//Kor Spiritdancer
 
 	public static Command Yavimaya_Enchantress        = new Command() {
 		private static final long serialVersionUID = -5650088477640877743L;
@@ -20911,6 +20925,7 @@ public class GameActionUtil {
 		commands.put("Serra_Ascendant", Serra_Ascendant);
 		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
 		commands.put("Aura_Gnarlid", Aura_Gnarlid);
+		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
 		commands.put("Zuberi", Zuberi);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);

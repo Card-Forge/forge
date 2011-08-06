@@ -108,6 +108,7 @@ public class StaticEffects
 		cardToEffectsList.put("Serra Ascendant", new String[] {"Serra_Ascendant"});
 		cardToEffectsList.put("Yavimaya Enchantress", new String[] {"Yavimaya_Enchantress"});
 		cardToEffectsList.put("Aura Gnarlid", new String[] {"Aura_Gnarlid"} );
+		cardToEffectsList.put("Kor Spiritdancer", new String[] {"Kor_Spiritdancer"});
 		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
 		cardToEffectsList.put("Zuberi, Golden Feather", new String[] {"Zuberi"});
 		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
