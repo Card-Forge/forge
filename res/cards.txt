@@ -1,3 +1,45 @@
+Insight
+2 U
+Enchantment
+no text
+WheneverKeyword:CastSpell/Opponent:Color/green:Play:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a green spell, you draw a card.
+
+Sunken City
+U U
+Enchantment
+no text
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U U
+StaticEffect:Play:All Permanents:PTBonus/1/1:Color.blue:Blue creatures get +1/+1.
+
+Deepchannel Mentor
+5 U
+Creature Merfolk Rogue
+no text
+2/2
+StaticEffect:Play:Permanents you Control:Keyword/Unblockable:Type.Creature!Color.blue:Blue creatures you control are unblockable.
+
+Sibilant Spirit
+5 U
+Creature Spirit
+no text
+5/6
+Flying
+WheneverKeyword:Attacks:Self:Play:DrawCards/1:ControllingPlayer_Opponent:ASAP:Opponent_Yes_No:No Special Condition:Whenever Sibilant Spirit attacks, defending player may draw a card.
+
+Fountain Watch
+3 W W
+Creature Human Cleric
+no text
+2/4
+StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Artifact:Artifacts and enchantments you control have shroud.
+StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Enchantment:(They can't be the targets of spells or abilities.)
+
+Warmth
+1 W
+Enchantment
+no text
+WheneverKeyword:CastSpell/Opponent:Color/red:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a red spell, you gain 2 life.
+
 Karplusan Wolverine
 R
 Creature Wolverine Beast
