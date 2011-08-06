@@ -372,6 +372,13 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Blinding Light");
     remove.add("Hymn to Tourach");
     
+    //cards that slow the computer down
+    
+    remove.add("Anger");
+    remove.add("Brawn");
+    remove.add("Valor");
+    remove.add("Wonder");
+    
     //not fully implemented:
     
     remove.add("Aether Membrane");
@@ -407,6 +414,7 @@ public class GenerateConstructedMultiColorDeck
     //cards the AI cannot play (effectively):
     
     remove.add("Necropotence");
+    remove.add("Yawgmoth's Bargain");
     remove.add("Sensei's Divining Top");
     remove.add("Standstill");
     //remove.add("Counterspell");

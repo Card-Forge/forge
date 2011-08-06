@@ -6753,7 +6753,7 @@ When this card is put into a graveyard from anywhere, reveal this card and shuff
 Brawn
 3 G
 Creature Incarnation
-As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample.
+As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
 3/3
 Trample
 
@@ -15064,21 +15064,21 @@ All creatures you control get +0/+1.
 Valor
 3 W
 Creature Incarnation
-As long as Valor is in your graveyard and you control a Plains, creatures you control have First Strike.
+As long as Valor is in your graveyard and you control a Plains, creatures you control have First Strike. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
 2/2
 First Strike
 
 Anger
 3 R
 Creature Incarnation
-As long as Anger is in your graveyard and you control a Mountain, creatures you control have Haste.
+As long as Anger is in your graveyard and you control a Mountain, creatures you control have Haste. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
 2/2
 Haste
 
 Wonder
 3 U
 Creature Incarnation
-As long as Wonder is in your graveyard and you control an Island, creatures you control have Flying.
+As long as Wonder is in your graveyard and you control an Island, creatures you control have Flying. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
 2/2
 Flying
 

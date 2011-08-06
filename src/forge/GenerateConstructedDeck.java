@@ -149,6 +149,13 @@ public class GenerateConstructedDeck
     remove.add("Blinding Light");
     remove.add("Hymn to Tourach");
     
+    //cards that slow the computer down
+    
+    remove.add("Anger");
+    remove.add("Brawn");
+    remove.add("Valor");
+    remove.add("Wonder");
+    
     //not fully implemented:
     
     remove.add("Aether Membrane");
