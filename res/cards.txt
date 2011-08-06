@@ -1,3 +1,10 @@
+Bountiful Harvest
+4 G
+Sorcery
+no text
+spGainLife:X:You gain 1 life for each land you control.:Bountiful Harvest - player gains X life
+SVar:X:Count$TypeYouCtrl.Land
+
 Tuktuk the Explorer
 2 R
 Legendary Creature Goblin
@@ -1246,13 +1253,6 @@ Instant
 no text
 spGainLife:X:You gain life equal to the number of creature cards in your graveyard.:Blossoming Wreath - player gains X life
 SVar:X:Count$TypeInYourYard.Creature
-
-Bountiful Harvest
-4 G
-Sorcery
-no text
-spGainLife:X:You gain 1 life for each land you control.:Bountiful Harvest - player gains X life
-SVar:X:Count$TypeYouControl.Land
 
 Congregate
 3 W
