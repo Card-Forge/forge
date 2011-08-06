@@ -13313,13 +13313,7 @@ public class CardFactory implements NewConstants {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    if(library.size() != 0) {
-                        Card c = library.get(0);
-                        library.remove(0);
-                        hand.add(c);
-                    }
+                    	AllZone.GameAction.drawCard(card.getController());
                 }
                 
                 @Override
@@ -13330,7 +13324,7 @@ public class CardFactory implements NewConstants {
             
             ability.setDescription("Pay 1 life: Draw a card.");
             ability.setStackDescription(card.getName() + " - Pay 1 life: Draw a card.");
-            
+
             card.addSpellAbility(ability);
             
             //instead of paying mana, pay life and add to stack
@@ -13341,11 +13335,12 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(1,card);
+                	boolean paid = AllZone.GameAction.payLife(card.getController(), 1, card);
                     
                     //this order is very important, do not change
                     stop();
-                    AllZone.Stack.push(ability);
+                    if (paid)
+                    	AllZone.Stack.push(ability);
                 }
             };//Input
             ability.setBeforePayMana(payLife);
@@ -13359,16 +13354,14 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 4511445425867383336L;
                 
                 public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        //put cards removed by Necropotence into player's hand
-                        if(necroCards.size() > 0) {
-                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                            
-                            for(int i = 0; i < necroCards.size(); i++) {
-                                hand.add(necroCards.get(i));
-                            }
-                            necroCards.clear();
+                    //put cards removed by Necropotence into player's hand
+                    if(necroCards.size() > 0) {
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                        
+                        for(int i = 0; i < necroCards.size(); i++) {
+                            hand.add(necroCards.get(i));
                         }
+                        necroCards.clear();
                     }
                 }
             };
@@ -13405,11 +13398,12 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(1,card);
+                	boolean paid = AllZone.GameAction.payLife(card.getController(), 1, card);
                     
                     //this order is very important, do not change
                     stop();
-                    AllZone.Stack.push(ability);
+                    if (paid)
+                    	AllZone.Stack.push(ability);
                 }
             };//Input
             ability.setBeforePayMana(payLife);
@@ -15860,8 +15854,7 @@ public class CardFactory implements NewConstants {
             ability.setDescription("G: Discard a creature card: Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.");
             ability.setStackDescription("Survival of the Fittest - search for a creature card and put into hand");
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END ************************** 
 
 
         //*************** START *********** START **************************
