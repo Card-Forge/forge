@@ -1,0 +1,10 @@
+Name:Oxidda Daredevil
+ManaCost:1 R
+Types:Creature Goblin Artificer
+Text:no text
+PT:2/1
+K:abPump Sac<1/Artifact>:Haste
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_daredevil.jpg
+End

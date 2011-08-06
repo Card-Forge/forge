@@ -1,0 +1,9 @@
+Name:Oxidda Scrapmelter
+ManaCost:3 R
+Types:Creature Beast
+Text:When Oxidda Scrapmelter enters the battlefield, destroy target artifact.
+PT:3/3
+K:etbDestroyTgt:Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_scrapmelter.jpg
+End
