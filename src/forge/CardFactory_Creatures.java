@@ -9024,52 +9024,11 @@ public class CardFactory_Creatures {
             ability.setDescription(abCost+"Target creature doesn't untap during its controller's next untap step.");
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Feral Hydra")) { 
-
-            SpellAbility spell = new Spell_Permanent(card) {
-                private static final long serialVersionUID = -11489323319L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return super.canPlay() && 4 <= ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card.getManaCost());
-                }
-            };
-             card.clearSpellAbility();
-             card.addSpellAbility(spell);
-            
-            final SpellAbility ability = new Ability(card, "3") {
-                @Override
-                public void resolve() {
-                	card.addCounter(Counters.P1P1,1);
-                }//resolve()
-            };
-            
-            ability.setDescription("3: put a +1/+1 counter on Feral Hydra. Any player may activate this ability.");
-            ability.setStackDescription("Feral Hydra gets a +1/+1 counter.");
-            ability.getRestrictions().setAnyPlayer(true);
-            card.addSpellAbility(ability);
-  
-            Command intoPlay = new Command() {
-                
-                private static final long serialVersionUID = 2559021590L;
-                
-                public void execute() {
-                	int XCounters = card.getXManaCostPaid();
-                	card.addCounter(Counters.P1P1, XCounters);
-
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
+        else if(cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals") || cardName.equals("Feral Hydra")
         		|| cardName.equals("Krakilin") || cardName.equals("Ivy Elemental") || cardName.equals("Lightning Serpent")) { 
         	
-        	if(!card.getName().equals("Krakilin")) {
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -11489323313L;
                 
@@ -9078,10 +9037,8 @@ public class CardFactory_Creatures {
                     return super.canPlay() && 4 <= ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card.getManaCost());
                 }
             };
-             card.clearSpellAbility();
-             card.addSpellAbility(spell);
-        	}
-            
+            card.clearFirstSpellAbility();
+            card.addFirstSpellAbility(spell);
             
             final SpellAbility ability = new Ability(card, "0") {
                 @Override

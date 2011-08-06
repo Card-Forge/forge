@@ -152,6 +152,12 @@ public class AbilityFactory_Counters {
 			if (list.size() == 0)
 				return false;
 		}
+		else{	// "put counter on this"
+			PlayerZone pZone = AllZone.getZone(source);
+			// Don't activate Curse abilities on my cards and non-curse abilites on my opponents
+			if (!pZone.getPlayer().equals(player))
+				return false;
+		}
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -244,8 +250,9 @@ public class AbilityFactory_Counters {
 		 else{
 			// Placeholder: No targeting necessary
 			 int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
-			// each counter on the card is a 10% chance of not activating this ability. 
-			 if (r.nextFloat() < .1 * currCounters)	
+			// each non +1/+1 counter on the card is a 10% chance of not activating this ability. 
+ 
+			 if (!type.equals("P1P1") && r.nextFloat() < .1 * currCounters)	
 				 return false;
 		 }
 		 
