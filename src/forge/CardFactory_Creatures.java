@@ -19021,7 +19021,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Tuktuk the Returned", "C 5 5 Tuktuk the Returned", card, "C", 
+                    CardFactoryUtil.makeToken("Tuktuk the Returned", "C 5 5 Tuktuk the Returned", card, "", 
                     		new String[] {"Legendary", "Artifact", "Creature", "Goblin", "Golem"}, 5, 5, new String[] {""});
                 }//resolve()
             };//Ability

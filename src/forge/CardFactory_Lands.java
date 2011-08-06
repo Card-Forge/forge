@@ -2543,7 +2543,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Assembly-Worker", "C 2 2 Assembly-Worker", card, "C", new String[] {
+                    CardFactoryUtil.makeToken("Assembly-Worker", "C 2 2 Assembly-Worker", card, "", new String[] {
                             "Artifact", "Creature", "Assembly-Worker"}, 2, 2, new String[] {""});
                 }
             };

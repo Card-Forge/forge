@@ -2017,7 +2017,7 @@ public class CardFactoryUtil {
     	{
     		public void resolve()
     		{
-    			makeToken("Spirit", "C 1 1 Spirit", opp, "C", new String[] {
+    			makeToken("Spirit", "C 1 1 Spirit", opp, "", new String[] {
                         "Creature", "Spirit"}, 1, 1, new String[] {""});
     		}
     	};
