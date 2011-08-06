@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+broodwarden.jpg		http://www.wizards.com/global/images/magic/general/broodwarden.jpg
 kargan_dragonlord.jpg		http://www.wizards.com/global/images/magic/general/kargan_dragonlord.jpg
 expedition_map.jpg      http://www.wizards.com/global/images/magic/general/expedition_map.jpg
 valakut_the_molten_pinnacle.jpg     http://www.wizards.com/global/images/magic/general/valakut_the_molten_pinnacle.jpg

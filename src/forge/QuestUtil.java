@@ -384,6 +384,18 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 2));	
 		}
+		else if (id == 11)  // The King's Contest
+		{
+			CardList humanList = new CardList();
+			Card c = AllZone.CardFactory.getCard("Seal of Cleansing", Constant.Player.Human);
+			humanList.add(c);
+			
+			qa.setHuman(humanList);
+			
+			qa.addCompy("Loyal Retainers");
+			
+			qa.setCardRewardList(pack.getRare(3));
+		}
 			
 	}
 	

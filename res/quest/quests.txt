@@ -98,4 +98,14 @@ Four black rares
 200
 blackOrbSmall.png
 
+11
+The King's Contest
+The king is holding a contest. You are invited to participate and compete against other legends of this era.
+Hard
+Not Repeatable
+50
+Three random rares
+150
+noIcon
+
 End
