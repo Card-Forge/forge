@@ -94,9 +94,9 @@ class TableModel extends AbstractTableModel {
                 column.setMinWidth(45);
             }
             else if(i == 8) {
-        	    column.setPreferredWidth(25); // AI
-        	    column.setMaxWidth(25);
-        	    column.setMinWidth(25);
+        	    column.setPreferredWidth(30); // AI
+        	    column.setMaxWidth(30);
+        	    column.setMinWidth(30);
         	}
         }//for
         
@@ -234,7 +234,10 @@ class TableModel extends AbstractTableModel {
             	if (!SC.equals(""))	
             		return SC;
             case 8:
-        		if (c.getSVar("RemAIDeck").equals("True"))
+            	if (c.getSVar("RemAIDeck").equals("True") 
+            			&& c.getSVar("RemRandomDeck").equals("True"))
+            		return "No ?";
+            	else if (c.getSVar("RemAIDeck").equals("True"))
         			return "No";
         		else if (c.getSVar("RemRandomDeck").equals("True"))
         			return "?";
