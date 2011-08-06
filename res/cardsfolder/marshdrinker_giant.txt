@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.Island+YouDontCtrl,Land.Swamp+YouDontCtrl | TgtPrompt$ Select target Island or Swamp an opponent controls
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marshdrinker_giant.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/69.jpg
 End

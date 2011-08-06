@@ -9,4 +9,5 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ T
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windscouter.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/53.jpg
 End

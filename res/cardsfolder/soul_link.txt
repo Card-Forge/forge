@@ -10,4 +10,5 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_link.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/120.jpg
 End

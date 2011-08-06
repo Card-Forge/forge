@@ -6,4 +6,5 @@ PT:2/2
 K:CARDNAME can't block white creatures with power 2 or greater.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_veteran.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/127.jpg
 End
