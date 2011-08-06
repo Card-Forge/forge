@@ -10,4 +10,5 @@ SVar:TrigSubCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ DE
 SVar:AddCounter:DB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/land_cap.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/338.jpg
 End

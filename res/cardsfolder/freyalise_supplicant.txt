@@ -8,4 +8,5 @@ SVar:X:Sacrificed$CardPower/HalfDown
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalise_supplicant.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/127.jpg
 End

@@ -8,4 +8,5 @@ K:stPumpEnchanted:Creature:2/2:isPresent Permanent.Red+YouDontCtrl:Enchanted cre
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_scarab.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/273.jpg
 End

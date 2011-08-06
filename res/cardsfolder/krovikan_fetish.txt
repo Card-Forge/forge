@@ -8,4 +8,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_fetish.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/34.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/28.jpg
 End
