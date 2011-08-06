@@ -50,7 +50,6 @@ public class GameActionUtil {
 		upkeep_Feedback();
 		upkeep_Farmstead();
 		upkeep_Unstable_Mutation();
-		upkeep_Warp_Artifact();
 		
 		/* Converteded to AF Trigger
 		upkeep_Plague_Spitter();
@@ -4947,44 +4946,6 @@ public class GameActionUtil {
 			}
 		}
 	}//upkeep_Farmstead()
-	
-	private static void upkeep_Warp_Artifact() {
-		final String auraName = "Warp Artifact";
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        
-        CardList list = new CardList(playZone.getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isArtifact() && c.isEnchanted();
-            }
-        });
-        
-        if(list.size() > 0) {
-        	Ability ability;
-        	for(Card target:list) {
-        		if(target.isEnchantedBy(auraName)) {
-        			CardList auras = new CardList(target.getEnchantedBy().toArray());
-        			auras = auras.getName(auraName);
-        			for(Card aura:auras) {
-        				final Card source = aura;
-        				ability = new Ability(aura, "0") {
-        					@Override
-        					public void resolve() {
-        						player.addDamage(1, source);
-        					}
-        				};
-        				
-        				StringBuilder sb = new StringBuilder();
-        				sb.append(auraName).append(" -  deals 1 damage to ").append(player);
-        				ability.setStackDescription(sb.toString());
-        				
-                        AllZone.Stack.add(ability);
-        			} 
-        		}
-        	}
-        }//list > 0
-    }//upkeep_Warp_Artifact()
 	
 	private static void upkeep_Wanderlust() {
 		final String auraName = "Wanderlust";
