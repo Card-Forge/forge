@@ -406,6 +406,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         */
         
+        /* Converted to generic aura + AF
         //*************** START *********** START **************************
         if(cardName.equals("Squirrel Nest")) {
             
@@ -479,11 +480,12 @@ class CardFactory_Auras {
                 }
             };
             spell.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************		
-
+        }//*************** END ************ END **************************
+        */
+        
         //*************** START *********** START **************************
-        else if(cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain")
-        		|| cardName.equals("Spreading Seas") || cardName.equals("Evil Presence")
+        if (cardName.equals("Convincing Mirage")       || cardName.equals("Phantasmal Terrain")
+        		|| cardName.equals("Spreading Seas")   || cardName.equals("Evil Presence")
         		|| cardName.equals("Lingering Mirage") || cardName.equals("Sea's Claim")
         		|| cardName.equals("Tainted Well")) {
             
