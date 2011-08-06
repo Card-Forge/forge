@@ -3,6 +3,10 @@ ManaCost:3 W W
 Types:Planeswalker - Elspeth
 Text:no text
 Loyalty:4
+A:AB$GainLife | Cost$ AddCounter<2/LOYALTY> | LifeAmount$ XLife | Planeswalker$ True | SpellDescription$ You gain 1 life for each creature you control.
+A:AB$Token | Cost$ SubCounter<2/LOYALTY> |TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put three 1/1 white Soldier creature tokens onto the battlefield.
+A:AB$DestroyAll | Cost$ SubCounter<5/LOYALTY> | ValidCards$ Permanent.nonLand+nonToken+Other | SpellDescription$ Destroy all other permanents except for lands and tokens.
+SVar:XLife:Count$TypeYouCtrl.Creature
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_tirel.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/6.jpg

@@ -39,6 +39,7 @@ public class MagicStack extends MyObservable {
 			frozenStack.remove(0);
 			this.add(sa);
 		}
+		AllZone.GameAction.checkStateEffects();
 	}
 
 	public void clearFrozen() {
