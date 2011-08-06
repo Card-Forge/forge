@@ -489,9 +489,10 @@ public class AbilityFactory_ZoneAffecting {
 	//Mode	- the mode of discard - should match spDiscard
 	//				-Random
 	//				-TgtChoose
-	//				-RevealYouChoose - not implemented yet
+	//				-RevealYouChoose
 	//				-Hand
-	//ValidDiscard - a ValidCards syntax for acceptable cards to discard - not implemented yet
+	//DiscardValid - a ValidCards syntax for acceptable cards to discard - not yet tested
+	//UnlessType - a ValidCards expression for "discard x unless you discard a ..." - not yet implemented
 	
 	//Examples:
 	//A:SP$Discard | Cost$B | Tgt$TgtP | NumCards$2 | Mode$Random | SpellDescription$<...>
@@ -564,10 +565,10 @@ public class AbilityFactory_ZoneAffecting {
 	private static void discardResolve(final AbilityFactory af, final SpellAbility sa){
 		Card source = sa.getSourceCard();
 		HashMap<String,String> params = af.getMapParams();
-		
+
 		boolean opp = params.containsKey("Opponent");
 		String mode = params.get("Mode");
-		
+
 		ArrayList<Player> tgtPlayers;
 
 		Target tgt = af.getAbTgt();
@@ -586,7 +587,7 @@ public class AbilityFactory_ZoneAffecting {
 			tgtPlayers = new ArrayList<Player>();
 			tgtPlayers.add(sa.getActivatingPlayer());
 		}
-		
+
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard())) {	
 				if(mode.equals("Hand")) {
@@ -602,8 +603,62 @@ public class AbilityFactory_ZoneAffecting {
 					}
 
 					if(mode.equals("RevealYouChoose")) {
-						//todo - this gets more complicted
-						//probably need ValidDiscard$Artifact,Creature.Blue like syntax
+						PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, p);
+						if(pzH.size() != 0) {
+							CardList dPHand = new CardList(pzH.getCards());
+							CardList dPChHand = new CardList(dPHand.toArray());
+
+							if (params.containsKey("DiscardValid")) {	// Restrict card choices
+								String[] dValid = params.get("DiscardValid").split(",");
+								dPChHand = dPHand.getValidCards(dValid,source.getController(),source);
+							}
+
+							if(source.getController().isComputer()){
+								//AI
+								for(int i = 0; i < numCards; i++) {
+									if (dPChHand.size() > 0){
+										CardList dChoices = new CardList();
+										if(params.containsKey("DiscardValid")) {
+											String dValid = params.get("DiscardValid");
+											if (dValid.contains("Creature") && !dValid.contains("nonCreature")) {
+												Card c = CardFactoryUtil.AI_getBestCreature(dPChHand);
+												if (c!=null)
+													dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
+											}
+										}
+
+
+										CardListUtil.sortByTextLen(dPChHand);
+										dChoices.add(dPChHand.get(0));
+
+										CardListUtil.sortCMC(dPChHand);
+										dChoices.add(dPChHand.get(0));
+
+										Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
+										dPChHand.remove(dC);
+
+										CardList dCs = new CardList();
+										dCs.add(dC);
+										AllZone.Display.getChoiceOptional("Computer has chosen", dCs.toArray());
+
+										AllZone.ComputerPlayer.discard(dC, sa);
+									}
+								}
+							}
+							else {
+								//human
+								AllZone.Display.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+
+								for(int i = 0; i < numCards; i++) {
+									if (dPChHand.size() > 0) {
+										Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
+
+										dPChHand.remove(dC);
+										AllZone.HumanPlayer.discard(dC, sa);
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -611,15 +666,15 @@ public class AbilityFactory_ZoneAffecting {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   if (abSub.getParent() == null)
-	     		  abSub.setParent(sa);
-	     	   abSub.resolve();
-	        }
-	        else{
+				if (abSub.getParent() == null)
+					abSub.setParent(sa);
+				abSub.resolve();
+			}
+			else{
 				String DrawBack = params.get("SubAbility");
 				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, null, sa);
-	        }
+					CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, null, sa);
+			}
 		}
 	}
 	
@@ -644,13 +699,16 @@ public class AbilityFactory_ZoneAffecting {
 			sb.append(" ");
 		
 		sb.append(player.toString());
-		sb.append(" discards (");
+		if(mode.equals("RevealYouChoose")) sb.append(" reveals his or her hand.");
+		if(mode.equals("RevealYouChoose")) sb.append("  You choose (");
+		else sb.append(" discards (");
 		if(params.get("Mode").equals("Hand")) {
 			sb.append("Hand");
 		}
 		else sb.append(af.getMapParams().get("NumCards"));
 			
 		sb.append(")");
+		if(mode.equals("RevealYouChoose")) sb.append(" to discard");
 		
 		if(mode.equals("Random"))
 			sb.append(" at random.");
