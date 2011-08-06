@@ -4,7 +4,7 @@ Types:Creature Merfolk Wizard
 Text:LEVEL 1-2 0/1 tap: Draw a card, then discard a card. LEVEL 3+ 0/1 tap: Draw a card.
 PT:0/1
 #No need for stSetPT here since it doesn't change through levels -PA
-K:stPumpSelf:Creature.countersGE1LEVEL:0/0/SVar=Loot:No Condition:no text
+K:stPumpSelf:Creature.countersGE1LEVEL+countersLT3LEVEL:0/0/SVar=Loot:No Condition:no text
 K:stPumpSelf:Creature.countersGE3LEVEL:0/0/SVar=Draw:No Condition:no text
 K:Level up:1 U
 K:maxLevel:3
