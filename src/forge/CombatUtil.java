@@ -936,7 +936,7 @@ public class CombatUtil {
         	
         	//Run triggers
         	HashMap<String,Object> runParams = new HashMap<String,Object>();
-        	runParams.put("Card", c);
+        	runParams.put("Attacker", c);
         	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
         	
         	//Annihilator:
