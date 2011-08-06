@@ -1,0 +1,10 @@
+Name:Snorting Gahr
+ManaCost:2 G G
+Types:Creature Rhino Beast
+Text:no text
+PT:3/3
+K:WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever CARDNAME becomes blocked, it gets +2/+2 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snorting_gahr.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/272.jpg
+End
