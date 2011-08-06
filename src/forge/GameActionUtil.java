@@ -9863,12 +9863,12 @@ public class GameActionUtil {
 		Dauntless_Escort.execute();
 	
 		Baru.execute();
-		Reach_of_Branches.execute();
+		//Reach_of_Branches.execute();
 		Sosukes_Summons.execute();
 
-		Essence_Warden.execute();
-		Soul_Warden.execute();
-		Souls_Attendant.execute();
+		//Essence_Warden.execute();
+		//Soul_Warden.execute();
+		//Souls_Attendant.execute();
 		Wirewood_Hivemaster.execute();
 
 		Sacrifice_NoIslands.execute();
@@ -13159,6 +13159,7 @@ public class GameActionUtil {
 		}// execute
 	}; // Windwright Mage
 
+	/*
 	// Reach of Branches
 	public static Command Reach_of_Branches           = new Command() {
 		private static final long serialVersionUID = 9191592685635589492L;
@@ -13215,6 +13216,7 @@ public class GameActionUtil {
 			return false;
 		}// newForest()
 	}; // Reach of Branches
+	*/
 	
 	// Reach of Branches
 	public static Command Sosukes_Summons= new Command() {
@@ -13397,6 +13399,8 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // Baru
+	
+	/*
 	public static Command Essence_Warden              = new Command() {
 		private static final long serialVersionUID = 6515549135916060107L;
 
@@ -13640,7 +13644,8 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // soul's Attendant
-
+	*/
+	
 	public static Command Wirewood_Hivemaster         = new Command() {
 		private static final long serialVersionUID = -6440532066018273862L;
 
@@ -13661,17 +13666,17 @@ public class GameActionUtil {
 
 			});
 
-			// Holds Soul Warden's in play
+			// Holds Wirewood_Hivemaster's in play
 			CardList hivemasterList = current.getName("Wirewood Hivemaster");
 
-			// Holds Soul Warden's that are new to play
+			// Holds Wirewood_Hivemaster's that are new to play
 			CardList newHivemaster = new CardList();
 
-			// Go through the list of Soul Warden's in play
+			// Go through the list of Wirewood_Hivemaster's in play
 			for(int i = 0; i < hivemasterList.size(); i++) {
 				Card c = hivemasterList.get(i);
 
-				// Check to see which Soul Warden's in play are new
+				// Check to see which Wirewood_Hivemaster's in play are new
 				if(!wirewood.contains(c)) {
 					newHivemaster.add(c);
 					hivemasterList.remove(c);
@@ -13690,7 +13695,7 @@ public class GameActionUtil {
 					}
 				}
 
-				// Gain life for new Soul Wardens
+				// Gain life for new Wirewood_Hivemaster
 				n[0] += newHivemaster.size();
 				final Card crd = hivemasterList.get(outer);
 
@@ -13723,9 +13728,9 @@ public class GameActionUtil {
 			wirewood.addAll(newHivemaster.toArray());
 			old = current;
 		}// execute()
-	}; // soul warden
+	}; // Wirewood_Hivemaster
 
-
+	/*
 	public static Command Angelic_Chorus              = new Command() {
 		private static final long serialVersionUID = 296710856999966577L;
 
@@ -13787,6 +13792,7 @@ public class GameActionUtil {
 			old.addAll(newCards.toArray());
 		}// execute()
 	};
+	*/
 	
 	public static Command Lighthouse_Chronologist  = new Command() {
 		

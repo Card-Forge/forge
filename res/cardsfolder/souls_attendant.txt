@@ -1,8 +1,9 @@
 Name:Soul's Attendant
 ManaCost:W
 Types:Creature Human Cleric
-Text:Whenever another creature comes into play, you gain 1 life.
+Text:no text
 PT:1/1
+K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature enters the battlefield, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_attendant.jpg
 End

@@ -1,0 +1,10 @@
+Name:Battered Golem 
+ManaCost:3
+Types:Artifact Creature Golem
+Text:no text
+PT:3/2
+K:CARDNAME doesn't untap during your untap step.
+K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever an artifact enters the battlefield, you may untap Battered Golem.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battered_golem.jpg
+End

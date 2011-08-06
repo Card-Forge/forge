@@ -1,8 +1,9 @@
 Name:Soul Warden
 ManaCost:W
 Types:Creature Human Cleric
-Text:Whenever another creature comes into play, you gain 1 life.
+Text:no text
 PT:1/1
+K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature enters the battlefield, you gain 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84112.jpg
 End
