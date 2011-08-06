@@ -42,7 +42,7 @@ public class QuestPetBird extends QuestPetAbstract{
 		}
 		else if (level == 4)
 		{
-            petCard.setImageName("W 2 1 Bird Pet");
+            petCard.setImageName("W 2 1 Bird Pet First Strike");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(1);
             petCard.addIntrinsicKeyword("First Strike");
