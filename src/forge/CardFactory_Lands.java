@@ -579,34 +579,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Gods' Eye, Gate to the Reikai")) {
-            
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", card.getController(), "", new String[] {
-                            "Creature", "Spirit"}, 1, 1, new String[] {""});
-                }//resolve()
-            };//Ability
-            
-            Command makeToken = new Command() {
-                private static final long serialVersionUID = 2339209292936869322L;
-                
-                public void execute() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - put a 1/1 Spirit creature token onto the battlefield");
-                	ability.setStackDescription(sb.toString());
-                    AllZone.Stack.add(ability);
-                }
-            };
-            
-            card.addDestroyCommand(makeToken);
-        }//*************** END ************ END **************************
-        
-
-        
-        //*************** START *********** START **************************
+                //*************** START *********** START **************************
         else if(cardName.equals("Mutavault")) {
         	final long[] timeStamp = new long[1];
             
