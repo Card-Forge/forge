@@ -2233,14 +2233,26 @@ public class CardFactory implements NewConstants {
                     	}
                        // if (!DrawBack[0].equals("none"))
                        //    CardFactoryUtil.doDrawBack(DrawBack[0], ndam, card.getController(), AllZone.GameAction.getOpponent(card.getController()), null, card, null);
+                    	
                      }//resolve()
-                  };//SpellAbility
+                  };//SpellAbility spDmgAll
                  
                   spDmgAll.setDescription(spDesc[0]);
                   spDmgAll.setStackDescription(spDesc[0]);
                  
                   card.clearSpellAbility();
                   card.addSpellAbility(spDmgAll);
+                  
+                  String bbCost = card.getSVar("Buyback");
+                  if (!bbCost.equals(""))
+                  {
+                     SpellAbility bbspDmgAll = spDmgAll.copy();
+                     bbspDmgAll.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                     bbspDmgAll.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                     bbspDmgAll.setIsBuyBackAbility(true);
+                     
+                     card.addSpellAbility(bbspDmgAll);
+                  }
         	}
         }//spDamageAll
         
