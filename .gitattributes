@@ -2769,6 +2769,7 @@ res/cardsfolder/heart_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/heart_warden.txt -text svneol=native#text/plain
 res/cardsfolder/hearth_charm.txt svneol=native#text/plain
 res/cardsfolder/hearthfire_hobgoblin.txt -text svneol=native#text/plain
+res/cardsfolder/heartless_hidetsugu.txt svneol=native#text/plain
 res/cardsfolder/heartmender.txt -text svneol=native#text/plain
 res/cardsfolder/heartstabber_mosquito.txt svneol=native#text/plain
 res/cardsfolder/heartstone.txt -text svneol=native#text/plain
