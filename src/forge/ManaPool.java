@@ -40,41 +40,38 @@ public class ManaPool extends Card {
     public String getText() {
     	Mana[] pool = floatingMana.toArray(new Mana[floatingMana.size()]);
     	
-    	//Arrays.sort(pool);
-    	// gotta sort it at some point
-    	
-    	StringBuilder normalMana = new StringBuilder();
-    	StringBuilder snowMana = new StringBuilder();
-
-    	int snowColorless = 0;
-    	int colorless = 0;
+    	int[] normalMana = {0,0,0,0,0,0};
+    	int[] snowMana = {0,0,0,0,0,0};
+    	String[] manaStrings = { Constant.Color.White,Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green, Constant.Color.Colorless };
     	
         for(Mana m:pool)
         {
-        	int mColorless = m.getColorlessAmount();
-        	if (mColorless > 0){
-	        	if (m.isSnow())
-	        		snowColorless += mColorless;
-	        	else
-	        		colorless += mColorless;
-	        	continue;
-        	}
-
         	if (m.isSnow())
-        		snowMana.append(m.toString());
+        		snowMana[map.get(m.getColor())] += m.getAmount();
         	else
-        		normalMana.append(m.toString());
+        		normalMana[map.get(m.getColor())] += m.getAmount();
         }
         
-        if (colorless != 0)
-        	normalMana.insert(0, colorless);
-        if (snowColorless != 0)
-        	snowMana.insert(0, snowColorless);
-        
-    	normalMana.insert(0, "Mana Available:\n");
-    	snowMana.insert(0, "Snow Mana Available:\n");
+        StringBuilder sbNormal = new StringBuilder("Mana Available:\n");
+        StringBuilder sbSnow = new StringBuilder("Snow Mana Available:\n");
+        if (!isEmpty()){
+	        for(int i = 0; i < 6; i++){
+	        	if (i == 5){
+	        		if (normalMana[i] > 0)
+	        			sbNormal.insert(0, normalMana[i] + " ");
+	        		if (snowMana[i] > 0)
+	        			sbSnow.insert(0, snowMana[i] + " ");
+	        	}
+	        	else{
+	        		if (normalMana[i] > 0)
+	        			sbNormal.append(CardUtil.getShortColor(manaStrings[i])).append("(").append(normalMana[i]).append(") ");
+	        		if (snowMana[i] > 0)
+	        			sbSnow.append(CardUtil.getShortColor(manaStrings[i])).append("(").append(snowMana[i]).append(") ");
+	        	}
+	        }
+        }
 
-        return normalMana + "\n" + snowMana;
+        return sbNormal.toString() + "\n" + sbSnow.toString();
     }
     
     public int getAmountOfColor(String color){
@@ -102,7 +99,6 @@ public class ManaPool extends Card {
     }
     
     public void addMana(Ability_Mana am) {
-    	//addMana(!am.mana().contains("X")? am.mana():am.mana().replaceAll("X", am.getX() + ""));
     	addManaToFloating(am.mana(), am.getSourceCard());
     }
     
@@ -239,9 +235,6 @@ public class ManaPool extends Card {
     			else if (choice == null){
     				manaChoices.add(mana);
     			}
-//    			if (choice == null ||
-//    				(!choice.isColor(Constant.Color.Colorless) && mana.isColor(Constant.Color.Colorless)))
-//    				choice = mana;
     		}
     	}
     	
