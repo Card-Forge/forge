@@ -3706,7 +3706,7 @@ public class GameActionUtil {
 					CardList lowestPower = new CardList();
 					int power = original.get(0).getNetAttack();
 					int i = 0;
-					while(original.get(i).getNetAttack() == power) {
+					while(i < original.size() && original.get(i).getNetAttack() == power) {
 						lowestPower.add(original.get(i));
 						i++;
 					}
