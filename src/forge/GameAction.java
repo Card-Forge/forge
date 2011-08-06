@@ -330,24 +330,8 @@ public class GameAction {
         for(int i = 0; i < opponentList.size(); i++) {
             Card card = opponentList.get(i);
             if(card.getName().equals("Nath of the Gilt-Leaf")) {
-                Card c = new Card();
-                
-                c.setOwner(card.getController());
-                c.setController(card.getController());
-                
-                c.setName("Elf Warrior");
-                c.setImageName("G 1 1 Elf Warrior");
-                c.setManaCost("G");
-                c.addColor("G");
-                c.setToken(true);
-                
-                c.addType("Creature");
-                c.addType("Elf");
-                c.addType("Warrior");
-                c.setBaseAttack(1);
-                c.setBaseDefense(1);
-                
-                opponentZone.add(c);
+                CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", opponent, "G", 
+                		new String[] {"Creature", "Elf", "Warrior"}, 1, 1, new String[] {});
             }
         }
     }
