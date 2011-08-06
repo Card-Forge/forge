@@ -175,7 +175,7 @@ import java.util.Random;
        
         private boolean shouldTgtP(int d) {
         	
-        	if (AllZone.HumanPlayer.reducePlayerDamageToZero(AF.getHostCard(), false) 
+        	if (AllZone.HumanPlayer.preventAllDamageToPlayer(AF.getHostCard(), false) 
         			|| !AllZone.HumanPlayer.canTarget(AF.getHostCard())) 	return false;
         	
             PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
@@ -199,7 +199,7 @@ import java.util.Random;
                     // will include creatures already dealt damage
                     return c.isCreature() && ((c.getNetDefense() + c.getDamage()) <= d)
                             && CardFactoryUtil.canTarget(AF.getHostCard(), c)
-                            && !c.reduceDamageToZero(AF.getHostCard(),false)
+                            && !c.preventAllDamageToCard(AF.getHostCard(),false)
                             && !c.getKeyword().contains("Indestructible")
                             && !(c.getSVar("SacMe").length() > 0);
                 }

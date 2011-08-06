@@ -187,7 +187,7 @@ public abstract class Player extends MyObservable{
 	public void addDamage(final int damage, final Card source) {
 		int damageToDo = damage;
 		
-		if( reducePlayerDamageToZero(source, false) )
+		if( preventAllDamageToPlayer(source, false) )
         	damageToDo = 0;
 		
 		if( source.getKeyword().contains("Infect") ) {
@@ -211,10 +211,11 @@ public abstract class Player extends MyObservable{
         GameActionUtil.executePlayerDamageEffects(this, source, damageToDo, false);
 	}
 	
-	public boolean reducePlayerDamageToZero(final Card source, final boolean isCombat) {
+	public boolean preventAllDamageToPlayer(final Card source, final boolean isCombat) {
 		boolean reduce = false;
     	if(isCombat) {
-    		//for future use
+    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
+    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.");
     	}
     	reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
 		reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.");

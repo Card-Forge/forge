@@ -2720,7 +2720,7 @@ public class Card extends MyObservable {
             list.add(source);
             int damageToAdd = entry.getValue();
             
-            if (reduceDamageToZero(source, true)) {
+            if (preventAllDamageToCard(source, true)) {
             	damageToAdd = 0;
             }
             else {
@@ -2756,7 +2756,7 @@ public class Card extends MyObservable {
         }
     }
     
-    public boolean reduceDamageToZero(Card source, boolean isCombat) {
+    public boolean preventAllDamageToCard(Card source, boolean isCombat) {
     	boolean reduce = false;
     	if(isCombat) {
     		reduce = reduce || getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
@@ -2776,8 +2776,12 @@ public class Card extends MyObservable {
 				&& source.isArtifact());
 		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by creatures.")
 				&& source.isCreature());
+		
+		// specific Cards
 		reduce = reduce || (this.isCreature() && source.isCreature() && 
 				AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this));
+		reduce = reduce || (isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", getController()));
+		reduce = reduce || (source.getController() == getController() && AllZoneUtil.isCardInPlay("Light of Sanction", getController()));
 		return reduce;
     }
     
@@ -2789,7 +2793,7 @@ public class Card extends MyObservable {
     
     public void addDamage(final int damageIn, final Card source) {
         int damageToAdd = damageIn;
-        if( reduceDamageToZero(source, false) ) {
+        if( preventAllDamageToCard(source, false) ) {
         	damageToAdd = 0;
         }
         
