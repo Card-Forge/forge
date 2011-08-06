@@ -13238,8 +13238,10 @@ public class CardFactory_Creatures {
             });
             
             card.addSpellAbility(a1);
-            a1.setStackDescription(card.getController()
-                    + " pays 1 life and returns Cavern Harpy back to owner's hand.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" pays 1 life and returns Cavern Harpy back to owner's hand.");
+            a1.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
 
@@ -13561,8 +13563,14 @@ public class CardFactory_Creatures {
             };
             
             card.addSpellAbility(a2);
-            a2.setDescription("Sacrifice a creature: " + card.getName() + " gets +2/+2 until end of turn.");
-            a2.setStackDescription(card.getName() + " gets +2/+2 until end of turn.");
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Sacrifice a creature: ").append(card.getName()).append(" gets +2/+2 until end of turn.");
+            a2.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName()).append(" gets +2/+2 until end of turn.");
+            a2.setStackDescription(sbStack.toString());
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -14209,6 +14217,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Wydwen, the Biting Gale")) {
             final SpellAbility a1 = new Ability(card, "U B") {
+            	
                 @Override
                 public boolean canPlayAI() {
                     return false;
@@ -14225,15 +14234,17 @@ public class CardFactory_Creatures {
                     */
                     if(card.isToken()) AllZone.getZone(card).remove(card);
                     else AllZone.GameAction.moveTo(hand, card);
-                    
                 }
             };//a1
             
             //card.clearSpellAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card.getController() + " pays 1 life and returns Wydwen back to owner's hand.");
-            a1.setDescription("U B, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.");
             
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" pays 1 life and returns Wydwen back to owner's hand.");
+            a1.setStackDescription(sb.toString());
+            
+            a1.setDescription("U B, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.");
         }//*************** END ************ END **************************
         
         
@@ -14724,9 +14735,13 @@ public class CardFactory_Creatures {
             
             card.clearSpellAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card.getController()
-                    + " taps seven untapped Druids and gains control of all opponent's land.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" taps seven untapped Druids and gains control of all opponent's land.");
+            a1.setStackDescription(sb.toString());
+            
             a1.setDescription("Tap seven untapped Druids you control: Gain control of all lands target player controls.");
+            
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = -4621346281051305833L;
                 
@@ -14735,7 +14750,6 @@ public class CardFactory_Creatures {
                     return true;
                 }
             });
-            
         }//*************** END ************ END **************************
         
 
@@ -14862,7 +14876,10 @@ public class CardFactory_Creatures {
                 }
             };// ability2
             
-            ability2.setStackDescription(card.getName() + " - gets a +1/+1 counter.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getName()).append(" - gets a +1/+1 counter.");
+            ability2.setStackDescription(sb2.toString());
+             
             ability2.setDescription("1 W: Put a +1/+1 counter on Jenara, Asura of War.");
             card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
@@ -15422,7 +15439,10 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(a2);
             a2.setDescription("Sacrifice a creature: Put a +1/+1 counter on " + card.getName() + ".");
-            a2.setStackDescription(card.getName() + " gets a +1/+1 counter.");
+            
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getName()).append(" gets a +1/+1 counter.");
+            a2.setStackDescription(sb2.toString());
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -15545,7 +15565,10 @@ public class CardFactory_Creatures {
                 	if(card.getName().equals("Lightning Serpent")) card.addCounter(Counters.P1P0, XCounters);
                 	else card.addCounter(Counters.P1P1, XCounters);
                 	if(card.getName().equals("Maga, Traitor to Mortals")) {
-                        ability.setStackDescription(ability.getTargetPlayer() + " - loses life equal to the number of +1/+1 counters on " + card.getName());
+                		StringBuilder sb = new StringBuilder();
+                		sb.append(ability.getTargetPlayer()).append(" - loses life equal to the number of +1/+1 counters on ").append(card.getName());
+                		ability.setStackDescription(sb.toString());
+                        
                         if(card.getController() == AllZone.HumanPlayer) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
                         else {
                         	ability.setTargetPlayer(AllZone.HumanPlayer);
@@ -15690,7 +15713,11 @@ public class CardFactory_Creatures {
 					return "1";
             	}
             };
-            ability.setStackDescription(cardName + " add 1 mana to mana pool. ");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" add 1 mana to mana pool.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("Remove a +1/+1 counter from Workhorse: Add 1 to your mana pool.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -16175,9 +16202,12 @@ public class CardFactory_Creatures {
             
             //card.clearSpellAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card.getController() + " returns Sliptide Serpent back to its owner's hand.");
-            a1.setDescription("3 U: Return Sliptide Serpent to its owner's hand.");
             
+            StringBuilder sb1 = new StringBuilder();
+            sb1.append(card.getController()).append(" returns Sliptide Serpent back to its owner's hand.");
+            a1.setStackDescription(sb1.toString());
+            
+            a1.setDescription("3 U: Return Sliptide Serpent to its owner's hand.");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -16203,9 +16233,12 @@ public class CardFactory_Creatures {
             
             //card.clearSpellAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card.getController() + " returns Fleeting Image back to its owner's hand.");
-            a1.setDescription("1 U: Return Fleeting Image to its owner's hand.");
             
+            StringBuilder sb1 = new StringBuilder();
+            sb1.append(card.getController()).append(" returns Fleeting Image back to its owner's hand.");
+            a1.setStackDescription(sb1.toString());
+            
+            a1.setDescription("1 U: Return Fleeting Image to its owner's hand.");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -16231,7 +16264,11 @@ public class CardFactory_Creatures {
             
             //card.clearSpellAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card.getController() + " returns Windreaver back to its owner's hand.");
+            
+            StringBuilder sb1 = new StringBuilder();
+            sb1.append(card.getController()).append(" returns Windreaver back to its owner's hand.");
+            a1.setStackDescription(sb1.toString());
+            
             a1.setDescription("U: return Windreaver to its owner's hand.");
             
             final SpellAbility a2 = new Ability(card, "U") {
@@ -16266,9 +16303,12 @@ public class CardFactory_Creatures {
             };//a2
 
             card.addSpellAbility(a2);
-            a2.setStackDescription(card.getController() + " switches Windreaver's power and toughness until EOT.");
-            a2.setDescription("U: Switch Windreaver's power and toughness until end of turn. ");
             
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getController()).append(" switches Windreaver's power and toughness until EOT.");
+            a2.setStackDescription(sb2.toString());
+            
+            a2.setDescription("U: Switch Windreaver's power and toughness until end of turn. ");
         }//*************** END ************ END **************************
         
         
@@ -16889,12 +16929,16 @@ public class CardFactory_Creatures {
                     });
                     return list.size() > 0;
                 }
-                
-
-            };
-            ability.setDescription("Sacrifice Loyal Retainers: Return target legendary creature card from your graveyard to the battlefield. Activate this ability only during your turn, before attackers are declared.");
-            ability.setStackDescription(cardName
-                    + " - Return target legendary creature card from your graveyard to the battlefield.");
+            };//Ability
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Sacrifice Loyal Retainers: Return target legendary creature card from your graveyard to the battlefield. ");
+            sbDesc.append("Activate this ability only during your turn, before attackers are declared.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName).append(" - Return target legendary creature card from your graveyard to the battlefield.");
+            ability.setStackDescription(sbStack.toString());
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -16953,8 +16997,15 @@ public class CardFactory_Creatures {
                     return false;
                 }
             };
-            ability.setDescription("Sacrifice Xiahou Dun, the One-Eyed: Return target black card from your graveyard to your hand. Activate this ability only during your turn, before attackers are declared.");
-            ability.setStackDescription(cardName + " - Return target black card from your graveyard to your hand.");
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Sacrifice Xiahou Dun, the One-Eyed: Return target black card from your graveyard to your hand. ");
+            sbDesc.append("Activate this ability only during your turn, before attackers are declared.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName).append(" - Return target black card from your graveyard to your hand.");
+            ability.setStackDescription(sbStack.toString());
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
