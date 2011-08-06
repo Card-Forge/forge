@@ -1,0 +1,9 @@
+Name:Divine Presence
+ManaCost:2 W
+Types:Enchantment
+Text:If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_presence.jpg
+End

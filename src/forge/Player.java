@@ -198,13 +198,20 @@ public abstract class Player extends MyObservable{
 		damageToDo = replaceDamage(damageToDo, source, false);
     	damageToDo = preventDamage(damageToDo, source, false);
 		
-		addDamageWithoutPrevention(damageToDo,source);
+		addDamageAfterPrevention(damageToDo,source);
 	}
 	
 	public void addDamageWithoutPrevention(final int damage, final Card source) {
 		int damageToDo = damage;
 		
-    	damageToDo = replaceDamage(damageToDo, source, false);
+		damageToDo = replaceDamage(damageToDo, source, false);
+		
+		addDamageAfterPrevention(damageToDo,source);
+	}
+	
+    //This function handles damage after replacement and prevention effects are applied
+	public void addDamageAfterPrevention(final int damage, final Card source) {
+		int damageToDo = damage;
     	
 		if( source.getKeyword().contains("Infect") ) {
         	addPoisonCounters(damageToDo);
@@ -289,6 +296,21 @@ public abstract class Player extends MyObservable{
     	
     	int restDamage = damage;
     	
+    	if( AllZoneUtil.isCardInPlay("Furnace of Rath")) {
+			
+    		restDamage += restDamage;
+		}
+    	
+    	if( AllZoneUtil.isCardInPlay("Divine Presence") && restDamage > 3) {
+			
+    		restDamage = 3;
+		}
+    	
+    	if( AllZoneUtil.isCardInPlay("Forethought Amulet",this) && (source.isInstant() || source.isSorcery()) && restDamage > 2) {
+			
+    		restDamage = 2;
+		}
+    	
     	if( AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
 			for(int i = 0; i < restDamage; i++) {
 				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
@@ -339,7 +361,7 @@ public abstract class Player extends MyObservable{
     	damageToDo = replaceDamage(damageToDo, source, true);
     	damageToDo = preventDamage(damageToDo, source, true);
     	
-    	addDamageWithoutPrevention(damageToDo, source);   //damage prevention is already checked
+    	addDamageAfterPrevention(damageToDo, source);   //damage prevention is already checked
     	
     	if ( damageToDo > 0 ) {
     		GameActionUtil.executeCombatDamageToPlayerEffects(source, damageToDo);

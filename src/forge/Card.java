@@ -2950,6 +2950,16 @@ public class Card extends MyObservable {
     	
     	int restDamage = damage;
     	
+    	if( AllZoneUtil.isCardInPlay("Furnace of Rath")) {
+			
+    		restDamage += restDamage;
+		}
+    	
+    	if( AllZoneUtil.isCardInPlay("Divine Presence") && restDamage > 3) {
+			
+    		restDamage = 3;
+		}
+    	
     	if(getName().equals("Phytohydra")) {
     		addCounter(Counters.P1P1, restDamage);
     		return 0;
@@ -2965,7 +2975,7 @@ public class Card extends MyObservable {
     
     public void addDamage(HashMap<Card, Integer> sourcesMap) {
         for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-        	addDamageWithoutPrevention(entry.getValue(), entry.getKey()); // damage prevention is already checked!
+        	addDamageAfterPrevention(entry.getValue(), entry.getKey()); // damage prevention is already checked!
         }
     }
     
@@ -2978,14 +2988,23 @@ public class Card extends MyObservable {
     	damageToAdd = replaceDamage(damageToAdd, source, false);
         damageToAdd = preventDamage(damageToAdd, source, false);
         
-        addDamageWithoutPrevention(damageToAdd,source);
+        addDamageAfterPrevention(damageToAdd,source);
+    }
+    
+    public void addDamageWithoutPrevention(final int damageIn, final Card source) {
+        int damageToAdd = damageIn;
+        
+        if(!CardFactoryUtil.canDamage(source, this)) return;
+        
+    	damageToAdd = replaceDamage(damageToAdd, source, false);
+        
+        addDamageAfterPrevention(damageToAdd,source);
     }
         
-    public void addDamageWithoutPrevention(final int damageIn, final Card source) {
+    //This function handles damage after replacement and prevention effects are applied
+    public void addDamageAfterPrevention(final int damageIn, final Card source) {
     	int damageToAdd = damageIn;
     	boolean wither = false;
-    	
-    	damageToAdd = replaceDamage(damageToAdd, source, false);
     	
         if( damageToAdd == 0 ) return;  //Rule 119.8
         
