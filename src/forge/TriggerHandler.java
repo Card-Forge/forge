@@ -176,7 +176,6 @@ public class TriggerHandler {
 		
 		if(mode.equals(trigParams.get("Mode")))
 		{
-			System.out.println("Mode is " + mode);
 			if(!regtrig.performTest(runParams))
 			{
 				return;

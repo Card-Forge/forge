@@ -3,7 +3,8 @@ ManaCost:1
 Types:Artifact
 Text:no text
 A:AB$ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | SpellDescription$ You may put a creature card with converted mana cost equal to the number of charge counters on AEther Vial from your hand onto the battlefield.
-K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.CHARGE/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a charge counter on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_vial.jpg

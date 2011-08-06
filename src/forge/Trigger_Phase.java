@@ -19,7 +19,7 @@ public class Trigger_Phase extends Trigger {
 		}
 		if(mapParams.containsKey("ValidPlayer"))
 		{
-			if(!matchesValid(runParams.get("Player"),mapParams.get("Player").split(","),hostCard))
+			if(!matchesValid(runParams.get("Player"),mapParams.get("ValidPlayer").split(","),hostCard))
 			{
 				return false;
 			}

@@ -343,7 +343,8 @@ public class PhaseUtil {
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Draw);
-    	runParams.put("Player", AllZone.Phase.getPlayerTurn());
+    	runParams.put("Player", playerTurn);
+    	System.out.println("Calling runTrigger from PhaseUtil.handleDraw()");
     	AllZone.TriggerHandler.runTrigger("Phase", runParams);
     	
     	playerTurn.drawCard();
@@ -387,9 +388,14 @@ public class PhaseUtil {
         //Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Side", "Attacker");
+        CardList otherAttackers = new CardList();
         for(int i=0;i< list.size();i++)
         {        	
+        	otherAttackers.clear();
+        	otherAttackers.add(list);
+        	otherAttackers.remove(list.get(i));
         	runParams.put("Attacker", list.get(i));
+        	runParams.put("OtherAttackers", otherAttackers);
         	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
         }
 	}

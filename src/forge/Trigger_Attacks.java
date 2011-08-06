@@ -19,6 +19,25 @@ public class Trigger_Attacks extends Trigger {
 			}
 		}
 		
+		if(mapParams.containsKey("Alone"))
+		{
+			CardList otherAttackers = (CardList)runParams.get("OtherAttackers");
+			if(mapParams.get("Alone").equals("True"))
+			{
+				if(otherAttackers.size() != 0)
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if(otherAttackers.size() == 0)
+				{
+					return false;
+				}
+			}
+		}
+		
 		return true;
 	}
 
