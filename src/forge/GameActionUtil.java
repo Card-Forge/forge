@@ -482,7 +482,6 @@ public class GameActionUtil {
 		playCard_Thief_of_Hope(c);
 		playCard_Infernal_Kirin(c);
 		playCard_Cloudhoof_Kirin(c);
-		playCard_Tattermunge_Duo(c);
 		playCard_Thistledown_Duo(c);
 		playCard_Battlegate_Mimic(c);
 		playCard_Nightsky_Mimic(c);
@@ -966,82 +965,6 @@ public class GameActionUtil {
 			}					
 		}//if
 	} // Chalice_of_the_Void 
-
-	public static void playCard_Tattermunge_Duo(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Tattermunge Duo");
-
-		if(list.size() > 0) {
-			if(c.isRed()) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					final Command untilEOT = new Command() {
-						private static final long serialVersionUID = -4569751606008597903L;
-
-						public void execute() {
-							if(AllZone.GameAction.isCardInPlay(card)) {
-								card.addTempAttackBoost(-1);
-								card.addTempDefenseBoost(-1);
-							}
-						}
-					};
-
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							card.addTempAttackBoost(1);
-							card.addTempDefenseBoost(1);
-							AllZone.EndOfTurn.addUntil(untilEOT);
-						}
-					}; // ability2
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a red spell, Tattermunge Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-		if(c.isGreen()) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-				final Command untilEOT = new Command() {
-					private static final long serialVersionUID = -4569751606008597903L;
-
-					public void execute() {
-						if(AllZone.GameAction.isCardInPlay(card)) {
-							card.removeIntrinsicKeyword("Forestwalk");
-						}
-					}
-				};
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						if(!card.getIntrinsicKeyword().contains("Forestwalk")) card.addIntrinsicKeyword("Forestwalk");
-						AllZone.EndOfTurn.addUntil(untilEOT);
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a green spell, Tattermunge Duo gains forestwalk until end of turn.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-			}
-		}//if
-
-	}//Tattermunge Duo
 
 	public static void playCard_Thistledown_Duo(Card c) {
 		final Player controller = c.getController();
