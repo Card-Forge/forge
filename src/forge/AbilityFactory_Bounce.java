@@ -88,8 +88,11 @@ public class AbilityFactory_Bounce {
 		 if (tgts.size() == 0)
 			 tgts.add(af.getHostCard());
 		 
-		 for(Card c : tgts)
-			 sbTargets.append(" ").append(c.getName());
+		 for(Card c : tgts) {
+			 sbTargets.append(" ");
+			 if(c.isFaceDown()) sbTargets.append("Morph");
+			 else sbTargets.append(c.getName());
+		 }
 		 
 		 String targetname = sbTargets.toString();
 		 
