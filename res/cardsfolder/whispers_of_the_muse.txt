@@ -2,7 +2,7 @@ Name:Whispers of the Muse
 ManaCost:U
 Types:Instant
 Text:no text
-A:SP$Draw | Cost$U | NumCards$1 | SpellDescription$Draw a card.
+A:SP$ Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Buyback:5
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
