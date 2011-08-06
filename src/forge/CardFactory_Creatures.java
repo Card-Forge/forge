@@ -12611,7 +12611,8 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Kazandu Tuskcaller"))
         {
-        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = 5172811502850812588L;
 				@Override
                 public void resolve() {
@@ -12625,13 +12626,14 @@ public class CardFactory_Creatures {
                 	return super.canPlay() && lcs >= 2 && lcs <= 5;
                 }
             };//Ability
-            ability.setDescription("tap: Put a 3/3 green Elephant creature token onto the battlefield.(LEVEL 2-5)");
+            ability.setDescription(abCost+"Put a 3/3 green Elephant creature token onto the battlefield.(LEVEL 2-5)");
             
             StringBuilder sb = new StringBuilder();
             sb.append(card).append(" - Put a 3/3 green Elephant creature token onto the battlefield.");
             ability.setStackDescription(sb.toString());
             
-            final Ability_Tap ability2 = new Ability_Tap(card, "0") {
+            Ability_Cost abCost2 = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability2 = new Ability_Activated(card, abCost2, null) {
 
 				private static final long serialVersionUID = 4795715660485178553L;
 				@Override
@@ -12647,7 +12649,7 @@ public class CardFactory_Creatures {
                 	return super.canPlay() && lcs >= 6;
                 }
             };//Ability
-            ability2.setDescription("tap: Put two 3/3 green Elephant creature tokens onto the battlefield.(LEVEL 6+)");
+            ability2.setDescription(abCost2+" Put two 3/3 green Elephant creature tokens onto the battlefield.(LEVEL 6+)");
             
             StringBuilder sb2 = new StringBuilder();
             sb2.append(card).append(" - Put two 3/3 green Elephant creature tokens onto the battlefield.");
@@ -12655,7 +12657,6 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
             card.addSpellAbility(ability2);
-        
     	}//*************** END ************ END **************************
         
         
@@ -13195,7 +13196,8 @@ public class CardFactory_Creatures {
         	 * Tap: Look at the top X cards of your library, where X is the
         	 * number of Wizards on the battlefield, then put them back in any order.
         	 */
-        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = 3451190255076340818L;
 				
 				@Override
@@ -13210,6 +13212,7 @@ public class CardFactory_Creatures {
         			}
         		}   
         	};
+        	ability.setDescription(abCost+"Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.");
         	card.addSpellAbility(ability);
         	
         	StringBuilder sb = new StringBuilder();
@@ -13244,7 +13247,6 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-        	//ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
         }//*************** END ************ END **************************
         
         
