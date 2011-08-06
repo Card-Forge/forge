@@ -7548,7 +7548,6 @@ public class CardFactory implements NewConstants {
                 }
             };//SpellAbility
             
-            //card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
             
             StringBuilder sb = new StringBuilder();
@@ -7566,6 +7565,7 @@ public class CardFactory implements NewConstants {
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if (cardName.equals("An-Zerrin Ruins")) {
         	
@@ -7644,6 +7644,7 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
+        
         
         //*************** START ************ START **************************
         else if(cardName.equals("Black Mana Battery") || cardName.equals("Blue Mana Battery")
@@ -8166,6 +8167,8 @@ public class CardFactory implements NewConstants {
         				else JOptionPane.showMessageDialog(null, "Error in "+cardName+".  freeCard is null", "", JOptionPane.INFORMATION_MESSAGE);
         			
         		}
+        		
+        		@Override
         		public boolean canPlayAI() {
         			return false;
         		}

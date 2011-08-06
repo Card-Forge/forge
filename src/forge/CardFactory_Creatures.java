@@ -926,6 +926,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Lava Hounds")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -952,25 +953,25 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Thunder Dragon")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                	
-      				CardList all = AllZoneUtil.getCreaturesInPlay();
-                      all = all.filter(new CardListFilter()
-                      {
-                      	public boolean addCard(Card c)
-                      	{
-                      		return !c.getKeyword().contains("Flying") &&
-                      			   CardFactoryUtil.canDamage(card, c);
-                      	}
-                      });
-                      
-                      for(int i = 0; i < all.size(); i++)
-                          	all.get(i).addDamage(3, card);
-                      
-                }
-            };
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+
+        			CardList all = AllZoneUtil.getCreaturesInPlay();
+        			all = all.filter(new CardListFilter()
+        			{
+        				public boolean addCard(Card c)
+        				{
+        					return !c.getKeyword().contains("Flying") &&
+        					CardFactoryUtil.canDamage(card, c);
+        				}
+        			});
+
+        			for(int i = 0; i < all.size(); i++)
+        				all.get(i).addDamage(3, card);
+
+        		}
+        	};
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 9072052875006010434L;
                 
@@ -989,28 +990,28 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cloudthresher")) {
-            final SpellAbility ability = new Ability(card, "0") {
-            	@Override
-            	public void resolve() {
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
 
-            		CardList all = AllZoneUtil.getCreaturesInPlay();
-            		all = all.filter(new CardListFilter()
-            		{
-            			public boolean addCard(Card c)
-            			{
-            				return c.getKeyword().contains("Flying") &&
-            				CardFactoryUtil.canDamage(card, c);
-            			}
-            		});
+        			CardList all = AllZoneUtil.getCreaturesInPlay();
+        			all = all.filter(new CardListFilter()
+        			{
+        				public boolean addCard(Card c)
+        				{
+        					return c.getKeyword().contains("Flying") &&
+        					CardFactoryUtil.canDamage(card, c);
+        				}
+        			});
 
-            		for(int i = 0; i < all.size(); i++)
-            			all.get(i).addDamage(2, card);
+        			for(int i = 0; i < all.size(); i++)
+        				all.get(i).addDamage(2, card);
 
-            		AllZone.HumanPlayer.addDamage(2, card);
-            		AllZone.ComputerPlayer.addDamage(2, card);
+        			AllZone.HumanPlayer.addDamage(2, card);
+        			AllZone.ComputerPlayer.addDamage(2, card);
 
-            	}
-            };
+        		}
+        	};
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 9072052875006010410L;
                 
@@ -1412,36 +1413,36 @@ public class CardFactory_Creatures {
                 }//getKeywordBoost()
 				
 				String getChosenColor() {
-	                   // Choose color for protection in Brave the Elements
-	             	   String color = "";
-	             	   if (card.getController().equals(AllZone.HumanPlayer)) {
+					// Choose color for protection in Brave the Elements
+					String color = "";
+					if (card.getController().equals(AllZone.HumanPlayer)) {
 
-	             		   String[] colors = Constant.Color.Colors;
-	             		   colors[colors.length-1] = null;
+						String[] colors = Constant.Color.Colors;
+						colors[colors.length-1] = null;
 
-	             		   Object o = AllZone.Display.getChoice("Choose color", colors);
-	             		   color = (String)o;
-	             	   }
-	             	   else {
-	             		   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-	             		   PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-	             		   CardList list = new CardList();
-	             		   list.addAll(lib.getCards());
-	             		   list.addAll(hand.getCards());
+						Object o = AllZone.Display.getChoice("Choose color", colors);
+						color = (String)o;
+					}
+					else {
+						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
+						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+						CardList list = new CardList();
+						list.addAll(lib.getCards());
+						list.addAll(hand.getCards());
 
-	             		   if (list.size() > 0) {  
-	             			   String mpcolor = CardFactoryUtil.getMostProminentColor(list);
-	             			   if (!mpcolor.equals(""))
-	             				   color = mpcolor;
-	             			   else
-	             				   color = "black";
-	             		   }
-	             		   else  {
-	             			   color = "black";
-	             		   }
-	             	   }
-	             	   return color;
-	                } // getChosenColor
+						if (list.size() > 0) {  
+							String mpcolor = CardFactoryUtil.getMostProminentColor(list);
+							if (!mpcolor.equals(""))
+								color = mpcolor;
+							else
+								color = "black";
+						}
+						else  {
+							color = "black";
+						}
+					}
+					return color;
+				} // getChosenColor
 				
 				@Override
 				public void resolve() {
@@ -2025,7 +2026,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	Player opponent = card.getController().getOpponent();
-                    //AllZone.GameAction.addDamage(opponent, card, 4);
                 	opponent.addDamage(4, card);
                 }
             };
@@ -3835,7 +3835,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectPlayer(Player player) {
                     int damage = ((Integer) countZubera.execute()).intValue();
-                    //AllZone.GameAction.addDamage(player, card, damage);
                     player.addDamage(damage, card);
                     stop();
                 }//selectPlayer()
@@ -5629,51 +5628,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Turtleshell Changeling")) {
-            //mana ability - targets itself - until EOT
-            //mana ability
-            final Ability ability = new Ability(card, "1 U") {
-                @Override
-                public boolean canPlayAI() {
-                    return CardFactoryUtil.AI_doesCreatureAttack(card) && card.getNetAttack() == 1;
-                }
-                
-                @Override
-                public void resolve() {
-                    //in case ability is played twice
-                    final int[] oldAttack = new int[1];
-                    final int[] oldDefense = new int[1];
-                    
-                    oldAttack[0] = card.getBaseAttack();
-                    oldDefense[0] = card.getBaseDefense();
-                    
-                    card.setBaseAttack(oldDefense[0]);
-                    card.setBaseDefense(oldAttack[0]);
-                    
-                    //EOT
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -5494886974452901728L;
-                        
-                        public void execute() {
-                            card.setBaseAttack(oldAttack[0]);
-                            card.setBaseDefense(oldDefense[0]);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - switch power and toughness until EOT.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("1 U: Switch Turtleshell Changeling's power and toughness until end of turn.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Jugan, the Rising Star")) {
