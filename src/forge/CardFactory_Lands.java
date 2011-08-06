@@ -512,7 +512,6 @@ class CardFactory_Lands {
             a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Blinkmoth"));
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Mishra's Factory")) {
             final Command eot1 = new Command() {
@@ -593,17 +592,27 @@ class CardFactory_Lands {
                     setTargetCard(getAttacker());
                 }
                 
+                /*
+                 *  getAttacker() will now filter out non-Assembly-Workers and non-Changelings
+                 */
+                
                 public Card getAttacker() {
                     //target creature that is going to attack
-                    Combat c = ComputerUtil.getAttackers();
-                    CardList att = new CardList(c.getAttackers());
-                    att = att.getType("Assembly-Worker");    // Should return only Assembly-Workers
-                    att.remove(card);
-                    att.shuffle();
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                    list = list.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return CardFactoryUtil.canTarget(card, c) && 
+                    		      (c.getType().contains("Assembly-Worker") || c.getKeyword().contains("Changeling"));
+                    	}
+                    });
+//                  list = list.getType("Assembly-Worker");    // Should return only Assembly-Workers
+                    list.remove(card);
+                    list.shuffle();
                     
-                    if (att.size() != 0 && 
+                    if (list.size() != 0 && 
                        (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) && 
-                        CardFactoryUtil.canTarget(card, att.get(0))) return att.get(0);
+                        CardFactoryUtil.canTarget(card, list.get(0))) return list.get(0);
                     else return null;
                 }//getAttacker()
                 
@@ -618,11 +627,40 @@ class CardFactory_Lands {
                     }
                 }//resolve()
             };//SpellAbility
+            
+            /*
+             *  We add this input method and the human can now target both
+             *  Assembly-Workers and Changelings. And the Mishra's Factory
+             *  will now tap when this ability is used.
+             */
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 7047534805576787311L;
+
+				@Override
+                public void showMessage() {
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList creatures = new CardList();
+                    creatures.addAll(comp.getCards());
+                    creatures.addAll(hum.getCards());
+                    creatures = creatures.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
+                                  (c.getType().contains("Assembly-Worker") || c.getKeyword().contains("Changeling"));
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2[0], creatures, "Select target Assembly-Worker", true, false));
+                }// showMessage
+            };// Input runtime
+            
             card.addSpellAbility(a2[0]);
             a2[0].setDescription("tap: Target Assembly-Worker gets +1/+1 until end of turn.");
             
-
-            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));
+            a2[0].setBeforePayMana(runtime);
+            
+//          a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));
             
         }//*************** END ************ END **************************
         
