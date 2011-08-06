@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.regex.Pattern;
+
 public class Ability_Cost {
 	private boolean isAbility = true;
 	
@@ -305,7 +307,7 @@ public class Ability_Cost {
 				cost.append("pay ");
 			else
 				cost.append("and pay ");
-			cost.append(convertIntToWords(lifeAmount));
+			cost.append(lifeAmount);
 			cost.append(" Life");
 
 			first = false;
@@ -381,11 +383,8 @@ public class Ability_Cost {
 				cost.append("Tap ");
 			else
 				cost.append(", tap ");
-			cost.append(convertIntToWords(tapXTypeAmount));
-			cost.append("untapped ");
-			cost.append(tapXType);	// needs IsValid String converter
-			if (tapXTypeAmount > 1)
-				cost.append("s");
+			cost.append(convertIntAndTypeToWords(tapXTypeAmount, "untapped " + tapXType));
+//			cost.append(tapXType);	// needs IsValid String converter
 			first = false;
 		}
 		
@@ -398,12 +397,8 @@ public class Ability_Cost {
 				else
 					cost.append(", remove ");
 
-				cost.append(convertIntToWords(counterAmount));
+				cost.append(convertIntAndTypeToWords(counterAmount, counterType.getName() + " counter"));
 
-				cost.append(counterType.getName());
-				cost.append(" counter");
-				if (counterAmount != 1)
-					cost.append("s");
 				cost.append(" from ");
 				cost.append(name);
 			}
@@ -420,12 +415,8 @@ public class Ability_Cost {
 				else
 					cost.append(", put ");
 
-				cost.append(convertIntToWords(counterAmount));
+				cost.append(convertIntAndTypeToWords(counterAmount, counterType.getName() + " counter"));
 
-				cost.append(counterType.getName());
-				cost.append(" counter");
-				if (counterAmount != 1)
-					cost.append("s");
 				cost.append(" on ");
 				cost.append(name);
 			}
@@ -437,7 +428,7 @@ public class Ability_Cost {
 				cost.append("Pay ");
 			else
 				cost.append(", Pay ");
-			cost.append(convertIntToWords(lifeAmount));
+			cost.append(lifeAmount);
 			cost.append(" Life");
 
 			first = false;
@@ -494,19 +485,17 @@ public class Ability_Cost {
 			cost.append(name);
 		}
 		else if (discardType.equals("Hand")){
-			cost.append(" your hand");
+			cost.append("your hand");
 		}
 		else if(discardType.equals("LastDrawn")) {
 			cost.append("last drawn card");
 		}
 		else{
-			cost.append(convertIntToWords(discardAmount));
 			if (!discardType.equals("Any") && !discardType.equals("Card") && !discardType.equals("Random")){
-				cost.append(discardType).append(" ");
-			}
-			cost.append("card");
-			if (discardAmount > 1)
-				cost.append("s");
+				cost.append(convertIntAndTypeToWords(discardAmount, discardType + " card"));
+			} else
+				cost.append(convertIntAndTypeToWords(discardAmount, "card"));
+			
 			if (discardType.equals("Random"))
 				cost.append(" at random");
 		}
@@ -528,12 +517,9 @@ public class Ability_Cost {
 		
 		if (sacType.equals("CARDNAME"))
 			cost.append(name);
-		else{
-			cost.append(convertIntToWords(sacAmount));
-			cost.append(sacType);
-			if (sacAmount > 1)
-				cost.append("s");
-		}
+		else
+			cost.append(convertIntAndTypeToWords(sacAmount, sacType));
+			
 		return cost.toString();
 	}
 	
@@ -551,12 +537,9 @@ public class Ability_Cost {
 		
 		if(exileType.equals("CARDNAME"))
 			cost.append(name);
-		else {
-			cost.append(convertIntToWords(exileAmount));
-			cost.append(exileType);
-			if(exileAmount > 1)
-				cost.append("s");
-		}
+		else 
+			cost.append(convertIntAndTypeToWords(exileAmount, exileType));
+		
 		return cost.toString();
 	}
 	
@@ -575,10 +558,7 @@ public class Ability_Cost {
 		if(exileType.equals("CARDNAME"))
 			cost.append(name);
 		else {
-			cost.append(convertIntToWords(exileAmount));
-			cost.append(exileType);
-			if(exileAmount > 1)
-				cost.append("s");
+			cost.append(convertIntAndTypeToWords(exileFromHandAmount, exileFromHandType));
 			cost.append(" from your hand");
 		}
 		return cost.toString();
@@ -600,11 +580,9 @@ public class Ability_Cost {
 		if (returnType.equals("CARDNAME"))
 			cost.append(name);
 		else{
-			cost.append(convertIntToWords(returnAmount));
-			cost.append(returnType);
+			cost.append(convertIntAndTypeToWords(returnAmount, returnType));
 			
 			if (returnAmount > 1){
-				cost.append("s");
 				pronoun = "their";
 			}
 			cost.append(" you control");
@@ -613,19 +591,27 @@ public class Ability_Cost {
 		return cost.toString();
 	}
 	
+	
 // TODO: If an Ability_Cost needs to pay more than 10 of something, fill this array as appropriate
-	private static final String[] numNames = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" }; 
+	private static final String[] numNames = { "zero", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" }; 
+	private static final Pattern vowelPattern = Pattern.compile("^[aeiou]", Pattern.CASE_INSENSITIVE);
 	
 	
-	private String convertIntToWords(int i){
+	private String convertIntAndTypeToWords(int i, String type){
 		StringBuilder sb = new StringBuilder();
 		
-		if (i >= numNames.length)
+		if (i >= numNames.length) {
 			sb.append(i);
+		}
+		else if(1 == i && vowelPattern.matcher(type).find())
+			sb.append("an"); 
 		else
 			sb.append(numNames[i]);
 		
 		sb.append(" ");
+		sb.append(type);
+		if (1 != i)
+			sb.append("s");
 		
 		return sb.toString();
 	}
