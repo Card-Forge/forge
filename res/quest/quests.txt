@@ -168,4 +168,14 @@ Four colorless rares
 250
 noIcon
 
+18
+Crows in the Field
+Crows are eating the seed planted in the local farm fields. The farmers are scared. Those crows are big, you will need some help.
+Hard
+Not Repeatable
+50
+Five random rares
+300
+noIcon
+
 End

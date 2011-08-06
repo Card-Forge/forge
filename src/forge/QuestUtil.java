@@ -505,6 +505,27 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 1));
 		}
+		else if (id == 18)  // Crows in the Field
+		{
+			CardList humanList = new CardList();
+			String humanSetupCards[] = {"Straw Soldiers", "Femeref Archers", "Moonglove Extract"};
+			
+			for (int i = 0; i < 3; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			String compySetupCards[] = {"Defiant Falcon", "Soulcatcher", "Storm Crow", "Hypnotic Specter"};
+			
+			for (int i = 0; i < 4; i ++)
+			{
+				qa.addCompy(compySetupCards[i]);
+			}
+			
+			qa.setCardRewardList(pack.getRare(5));
+		}
 			
 	}
 	
