@@ -1,4 +1,4 @@
-Name:Summon The School
+Name:Summon the School
 ManaCost:3 W
 Types:Tribal Sorcery Merfolk
 Text:no text
