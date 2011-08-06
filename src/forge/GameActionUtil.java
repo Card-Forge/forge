@@ -205,7 +205,7 @@ public class GameActionUtil {
 		
 		/*
 		 * Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
-		 */
+		 *
 		if(c.getType().contains("Forest")) {
 			final Player opponent = c.getController().getOpponent();
 			final CardList lifetaps = AllZoneUtil.getPlayerCardsInPlay(opponent, "Lifetap");
@@ -225,7 +225,7 @@ public class GameActionUtil {
 				
 				AllZone.Stack.add(ability);
 			}//for
-		}//end Lifetap
+		}//end Lifetap */
 		
 		/*
 		 * Blight - When enchanted land becomes tapped, destroy it.
