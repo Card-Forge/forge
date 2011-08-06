@@ -1431,6 +1431,10 @@ public class Card extends MyObservable {
         return type.contains("Creature");
     }
     
+    public boolean isWall() {
+    	return type.contains("Wall");
+    }
+    
     public boolean isBasicLand() {
         return type.contains("Basic");
     }

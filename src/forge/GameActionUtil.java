@@ -15008,7 +15008,37 @@ public class GameActionUtil {
                                                     		  }
                                                     	  }
                                                       }; //Kor Duelist
-                                                         
+                                                      
+                                                      public static Command Keldon_Warlord                   = new Command() {
+                                                    	  private static final long serialVersionUID = 3804539422363462063L;
+
+                                                    	  public void execute() {
+                                                    		  // get all creatures
+                                                    		  CardList list = new CardList();
+                                                    		  list.addAll(AllZone.Human_Play.getCards());
+                                                    		  list.addAll(AllZone.Computer_Play.getCards());
+                                                    		  list = list.getName("Keldon Warlord");
+
+                                                    		  for(int i = 0; i < list.size(); i++) {
+                                                    			  Card c = list.get(i);
+                                                    			  c.setBaseAttack(countCreatures(c));
+                                                    			  c.setBaseDefense(c.getNetAttack());
+                                                    		  }
+
+                                                    	  }// execute()
+
+                                                    	  private int countCreatures(Card c) {
+                                                    		  PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+                                                    		  CardList creatures = new CardList(play.getCards());
+                                                    		  creatures = creatures.filter(new CardListFilter() {
+                                                    			  public boolean addCard(Card c) {
+                                                    				  return c.isCreature() && !c.isWall();
+                                                    			  }
+                                                    		  });
+                                                    		  return creatures.size();
+                                                    	  }
+                                                      };
+
 
     // returns all PlayerZones that has at least 1 Glorious Anthem
     // if Computer has 2 Glorious Anthems, AllZone.Computer_Play will be
@@ -15231,6 +15261,7 @@ public class GameActionUtil {
         commands.put("Gaddock_Teeg", Gaddock_Teeg);
         commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
         commands.put("Kor_Duelist", Kor_Duelist);
+        commands.put("Keldon_Warlord", Keldon_Warlord);
         //System.out.println("size of commands: " + commands.size());
         
     }
