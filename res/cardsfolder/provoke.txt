@@ -8,4 +8,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/provoke.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/63.jpg
 End
