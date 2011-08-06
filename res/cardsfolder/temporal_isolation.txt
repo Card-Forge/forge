@@ -1,0 +1,10 @@
+Name:Temporal Isolation
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature has shadow. (It can block or be blocked by only creatures with shadow.)\r\nPrevent all damage that would be dealt by enchanted creature.
+K:Flash
+K:Enchant creature
+K:enPumpCurse:Shadow & HIDDEN Prevent all damage that would be dealt by CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_isolation.jpg
+End
