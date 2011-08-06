@@ -6936,52 +6936,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Dromad Purebred")) {
-            final Card newCard = new Card() {
-                @Override
-                public void addDamage(HashMap<Card, Integer> map) {
-                	final HashMap<Card, Integer> m = map;
-                    final Ability ability = new Ability(card, "0") {
-                        @Override
-                        public void resolve() {
-                            card.getController().gainLife(1, card);
-                        }
-                    };
-                    
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 1 life.");
-                    ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                    
-                    for(Entry<Card, Integer> entry : m.entrySet()) {
-                        this.addDamage(entry.getValue(), entry.getKey());
-                    }
-                    
-                }
-            };
-            
-            newCard.setOwner(card.getOwner());
-            newCard.setController(card.getController());
-            
-            newCard.setManaCost(card.getManaCost());
-            newCard.setName(card.getName());
-            newCard.addType("Creature");
-            newCard.addType("Camel");
-            newCard.addType("Beast");
-            newCard.setText(card.getSpellText());
-            newCard.setBaseAttack(card.getBaseAttack());
-            newCard.setBaseDefense(card.getBaseDefense());
-            
-            newCard.addSpellAbility(new Spell_Permanent(newCard));
-            
-            newCard.setSVars(card.getSVars());
-            newCard.setSets(card.getSets());
-            
-            return newCard;
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sprouting Phytohydra")) {
