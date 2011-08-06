@@ -244,6 +244,18 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         		//(like the code for Manabarbs)
         	}
         }
+        
+        if(sourceCard.isLand() && sourceCard.isEnchantedBy("Overgrowth")) {
+        	if(sourceCard.getController().equals(AllZone.HumanPlayer)) {
+        		AllZone.ManaPool.addExtrinsicKeyword("ManaPool:G");
+        		AllZone.ManaPool.addExtrinsicKeyword("ManaPool:G");
+        	}
+        	else {
+        		//only works for human since compy doesn't have the concept of
+        		//a mana pool.  Also, that code would currently go in ComputerUtil.payManaCost
+        		//(like the code for Manabarbs)
+        	}
+        }
 
         if(!runcommands.isEmpty()) for(Command c:runcommands)
             c.execute();
