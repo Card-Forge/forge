@@ -2,7 +2,7 @@ Name:Familiar's Ruse
 ManaCost:U U
 Types:Instant
 Text:no text.
-A:SP$ Counter | Cost$ U U Return<1/Creature.YouCtrl> | Type$ Spell | Destination$ Graveyard | SpellDescription$ As an additional cost to pay CARDNAME, return a creature you control to its owner's hand.
+A:SP$ Counter | Cost$ U U Return<1/Creature.YouCtrl> | Type$ Spell | Destination$ Graveyard | SpellDescription$ As an additional cost to cast CARDNAME, return a creature you control to its owner's hand. Counter target spell.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/familiars_ruse.jpg
