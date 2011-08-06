@@ -1,3 +1,10 @@
+Lovisa Coldeyes
+3 R R
+Legendary Creature Human Barbarian
+Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
+3/3
+SVar:PlayMain1:TRUE
+
 Dragon Tyrant
 8 R R
 Creature Dragon
