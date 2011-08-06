@@ -120,7 +120,7 @@ public class ManaPool extends Card {
 
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
-            CardList omnathList = CardFactoryUtil.getCards("Omnath, Locus of Mana", owner);
+            CardList omnathList = AllZoneUtil.getPlayerCardsInPlay(owner, "Omnath, Locus of Mana");
             if(omnathList.size() > 0) {
             	Command com = GameActionUtil.commands.get("Omnath");
                 com.execute();
@@ -175,7 +175,7 @@ public class ManaPool extends Card {
     	if (floatingMana.size() == 0) return;
     	
     	if(Phase.GameBegins == 1){
-	    	CardList omnathList = CardFactoryUtil.getCards("Omnath, Locus of Mana", owner);
+	    	CardList omnathList = AllZoneUtil.getPlayerCardsInPlay(owner, "Omnath, Locus of Mana");
 	    	if (omnathList.size() == 0){
 	    		floatingMana.clear();
 	    		return;
@@ -436,7 +436,7 @@ public class ManaPool extends Card {
         }
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
-	    	CardList omnathList = CardFactoryUtil.getCards("Omnath, Locus of Mana", owner);
+	    	CardList omnathList = AllZoneUtil.getPlayerCardsInPlay(owner, "Omnath, Locus of Mana");
             if(omnathList.size() > 0) {
             	Command com = GameActionUtil.commands.get("Omnath");
                 com.execute();

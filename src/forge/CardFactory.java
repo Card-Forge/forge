@@ -10214,7 +10214,7 @@ public class CardFactory implements NewConstants {
     		  }
     		  public boolean canPlayAI()
     		  {
-    			  int m = (int)Math.pow(2, CardFactoryUtil.getCards("Doubling Season", AllZone.ComputerPlayer).size());
+    			  int m = (int)Math.pow(2, AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Doubling Season").size());
     			  int n = Math.max(1, Math.min((100-getSourceCard().getCounters(Counters.TOWER))/m,
     					           ComputerUtil.getAvailableMana().size())) ;
     			  setManaCost(n + "");

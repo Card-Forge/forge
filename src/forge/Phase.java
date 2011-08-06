@@ -148,7 +148,7 @@ public class Phase extends MyObservable
                 || (is(Constant.Phase.Cleanup, AllZone.ComputerPlayer) && computerExtraTurns >= 0)) {
             Player player = getActivePlayer();
             Player opponent = player.getOpponent();
-            CardList list = CardFactoryUtil.getCards("Time Vault", opponent);
+            CardList list = AllZoneUtil.getPlayerCardsInPlay(opponent, "Time Vault");
             list = list.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
                     return c.isTapped();

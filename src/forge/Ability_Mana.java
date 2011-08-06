@@ -266,7 +266,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     	AllZone.ManaPool.addMana(this);
     	
     	// Nirkana Revenant Code
-    	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", AllZone.HumanPlayer);
+    	CardList Nirkana_Human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Nirkana Revenant");
         if(Nirkana_Human.size() > 0 && sourceCard.getType().contains("Swamp") && sourceCard.getController().isHuman()) {
         	for(int i = 0; i < Nirkana_Human.size(); i++) {
         		AllZone.ManaPool.addManaToFloating("B", Nirkana_Human.get(i));	

@@ -546,7 +546,7 @@ public class ComputerUtil
 		}
 		
 		while(!landList.isEmpty() && (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 ||
-		    	CardFactoryUtil.getCards("Fastbond", AllZone.ComputerPlayer).size() > 0)){
+		    	AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Fastbond").size() > 0)){
 			// play as many lands as you can
 		    int ix = 0;
 		    while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {

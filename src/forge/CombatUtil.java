@@ -2140,7 +2140,7 @@ public class CombatUtil {
 	        	if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisCombat())
 	        	{
 	        		final Card crd = c;
-	        		CardList pcs = CardFactoryUtil.getCards("Perimeter Captain", c.getController());
+	        		CardList pcs = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Perimeter Captain");
 		        	for (int i = 0; i < pcs.size();i++)
 		        	{
 		        		Ability ability = new Ability(pcs.get(i), "0")

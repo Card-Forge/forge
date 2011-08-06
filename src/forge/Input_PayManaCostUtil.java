@@ -102,7 +102,7 @@ public class Input_PayManaCostUtil
      	// Nirkana Revenant Code
         Card mp = AllZone.ManaPool;
         if(card.getType().contains("Swamp") && card.getController().equals(AllZone.HumanPlayer)) {
-         	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", AllZone.HumanPlayer);
+         	CardList Nirkana_Human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Nirkana Revenant");
          	for(int x = 0; x < Nirkana_Human.size(); x++) {
         		for(int i = 0; i < abilities.size(); i++) {
         			if(abilities.get(i).mana().contains("B")) {

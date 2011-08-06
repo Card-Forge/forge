@@ -545,7 +545,7 @@ public class CardFactory_Creatures {
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         
                     	 int multiplier = 1;
-                         int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+                         int doublingSeasons = AllZoneUtil.getPlayerCardsInPlay(card.getController(), "Doubling Season").size();
                          if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
                          Card[] crds = new Card[multiplier];
                          
@@ -10071,7 +10071,7 @@ public class CardFactory_Creatures {
                     });
                     
                     int multiplier = 1;
-                    int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+                    int doublingSeasons = AllZoneUtil.getPlayerCardsInPlay(card.getController(), "Doubling Season").size();
                     if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
                     
                     for(int i = 0; i < allTokens.size(); i++) {

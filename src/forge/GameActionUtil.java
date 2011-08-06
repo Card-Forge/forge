@@ -6863,7 +6863,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Anowon() {
 		final Player player = AllZone.Phase.getActivePlayer();
-		CardList list = CardFactoryUtil.getCards("Anowon, the Ruin Sage", player);
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Anowon, the Ruin Sage");
 
 		if(list.size() > 0) {
 			Ability ability = new Ability(list.get(0), "0") {
@@ -8952,7 +8952,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					int multiplier = 1;
-					int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+					int doublingSeasons = AllZoneUtil.getPlayerCardsInPlay(card.getController(), "Doubling Season").size();
 					if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
 					for(int i = 0; i < multiplier; i++)
 						makeToken();

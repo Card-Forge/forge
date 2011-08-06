@@ -6203,7 +6203,7 @@ public class CardFactory_Sorceries {
         		{
         			int times = 1;
         			CardList cl;
-        			if (CardFactoryUtil.getCards("Eldrazi Spawn", card.getController()).size() > 0)
+        			if (AllZoneUtil.getPlayerCardsInPlay(card.getController(), "Eldrazi Spawn").size() > 0)
         				times = 3;
         			for (int i=0;i<times;i++)
         			{
