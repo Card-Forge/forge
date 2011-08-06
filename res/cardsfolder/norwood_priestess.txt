@@ -1,0 +1,8 @@
+Name:Norwood Priestess
+ManaCost:2 G G
+Types:Creature Elf Druid
+Text:no text
+A:AB$ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | PlayerTurn$ True | ActivatingPhases$ Upkeep->BeginCombat | SpellDescription$ You may put a green creature card from your hand onto the battlefield. Activate this ability only during your turn, before attackers are declared.
+PT:1/1
+SVar:Rarity:Rare
+End
