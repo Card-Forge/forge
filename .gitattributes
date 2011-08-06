@@ -286,7 +286,6 @@ res/quest/decks/Wolverine[!!-~]3.dck -text
 res/quest/decks/Wyatt[!!-~]Earp[!!-~]1.dck -text
 res/quest/decks/Wyatt[!!-~]Earp[!!-~]2.dck -text
 res/quest/decks/Wyatt[!!-~]Earp[!!-~]3.dck -text
-res/quest/decks/quest[!!-~]22.dck -text
 res/quest/decks/quest1.dck -text
 res/quest/decks/quest10.dck -text
 res/quest/decks/quest11.dck -text
@@ -301,6 +300,7 @@ res/quest/decks/quest19.dck -text
 res/quest/decks/quest2.dck -text
 res/quest/decks/quest20.dck -text
 res/quest/decks/quest21.dck -text
+res/quest/decks/quest22.dck -text
 res/quest/decks/quest3.dck -text
 res/quest/decks/quest4.dck -text
 res/quest/decks/quest5.dck -text
