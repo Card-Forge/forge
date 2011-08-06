@@ -47,6 +47,7 @@ public class NewDeckIO implements DeckIO {
     }
     
     public NewDeckIO(File dir) {
+        if(dir == null) throw new IllegalArgumentException("No deck directory specified");
         try {
             this.dir = dir;
             

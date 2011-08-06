@@ -260,7 +260,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * Returns a property of the given type. This does not work to retrieve tree properties.
      */
     @SuppressWarnings("unchecked")
-	public <T> T getProperty(String key, Class<T> cls) {
+    public <T> T getProperty(String key, Class<T> cls) {
         String suffix;
         if(cls == String.class) suffix = "";
         else {
@@ -303,6 +303,10 @@ public class TreeProperties implements Iterable<PropertyElement> {
                 return result;
             }
         }
+        Exception ex=
+        new Exception("TreeProperties returns null for " + key + suffix);
+//        ex.printStackTrace();
+        System.err.println(ex);
         return null;
     }
     
@@ -330,7 +334,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
         }
         
         //After this call, the next element is determined, or the child iterator has next
-
+        
         public boolean hasNext() {
             if(next != null) return true;
             else if(child != null && child.hasNext()) return true;
@@ -356,29 +360,29 @@ public class TreeProperties implements Iterable<PropertyElement> {
                     cls = t.getType();
                 }
                 next = new PropertyElement() {
-
+                    
                     public String getKey() {
                         return prefix + parts[0];
                     }
                     
-
+                    
                     public Class<?> getType() {
                         return cls;
                     }
                     
-
+                    
                     public Object getValue() {
                         return value;
                     }
                     
-
+                    
                     public void setValue(String value) {}
                 };
                 return true;
             } else return false;
         }
         
-
+        
         public PropertyElement next() {
             if(!hasNext()) throw new NoSuchElementException();
             else if(next != null) {
@@ -388,7 +392,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
             } else return child.next();
         }
         
-
+        
         public void remove() {
             throw new UnsupportedOperationException();
         }

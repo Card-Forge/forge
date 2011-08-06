@@ -1,4 +1,6 @@
+
 package forge;
+
 
 import static org.jdesktop.swingx.MultiSplitLayout.*;
 
@@ -123,10 +125,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.Human_Graveyard, HUMAN_GRAVEYARD);
         HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.Human_Removed, HUMAN_REMOVED);
         HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.Human_Removed, HUMAN_FLASHBACK) {
-
-			private static final long serialVersionUID = 8120331222693706164L;
-
-			@Override
+            
+            private static final long serialVersionUID = 8120331222693706164L;
+            
+            @Override
             protected Card[] getCards() {
                 return CardFactoryUtil.getFlashbackCards(Constant.Player.Human).toArray();
             }
@@ -143,10 +145,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     }
     
     private void addMenu() {
-    	Object[] obj = {
-    	        HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
-    	        COMPUTER_REMOVED_ACTION, GuiDisplay3.eotCheckboxForMenu, new JSeparator(), 
-    	        ErrorViewer.ALL_THREADS_ACTION, new JSeparator(), CONCEDE_ACTION};
+        Object[] obj = {
+                HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
+                COMPUTER_REMOVED_ACTION, GuiDisplay3.eotCheckboxForMenu, new JSeparator(),
+                ErrorViewer.ALL_THREADS_ACTION, new JSeparator(), CONCEDE_ACTION};
         
         JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.MENU.TITLE));
         for(Object o:obj) {
@@ -429,7 +431,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         if(c.getCounters(Counters.AGE) != 0) counterText = counterText + "Age counters: "
                 + c.getCounters(Counters.AGE) + "\r\n";
         if(c.getCounters(Counters.BLAZE) != 0) counterText = counterText + "Blaze counters: "
-        		+ c.getCounters(Counters.BLAZE) + "\r\n";
+                + c.getCounters(Counters.BLAZE) + "\r\n";
         if(c.getCounters(Counters.CHARGE) != 0) counterText = counterText + "Charge counters: "
                 + c.getCounters(Counters.CHARGE) + "\r\n";
         if(c.getCounters(Counters.DIVINITY) != 0) counterText = counterText + "Divinity counters: "
@@ -459,8 +461,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         if (c.getCounters(Counters.M1M1) != 0)
          	counterText = counterText + "-1/-1 counters: " + c.getCounters(Counters.M1M1) + "\r\n";
         */
-        if(c.getCounters(Counters.QUEST) != 0)
-            counterText = counterText + "Quest counters: " + c.getCounters(Counters.QUEST) + "\r\n";
+        if(c.getCounters(Counters.QUEST) != 0) counterText = counterText + "Quest counters: "
+                + c.getCounters(Counters.QUEST) + "\r\n";
         if(c.getCounters(Counters.SPORE) != 0) counterText = counterText + "Spore counters: "
                 + c.getCounters(Counters.SPORE) + "\r\n";
         
@@ -693,7 +695,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     
     private void initComponents() {
         //Preparing the Frame
-        setTitle(ForgeProps.getProperty(LANG.PROGRAM_NAME));
+        setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
         setFont(new Font("Times New Roman", 0, 16));
         getContentPane().setLayout(new BorderLayout());
         addWindowListener(new WindowAdapter() {
@@ -1102,9 +1104,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     JLabel                          playerRemovedValue  = new JLabel();
     
     private class ZoneAction extends ForgeAction {
-		private static final long serialVersionUID = -5822976087772388839L;
-		private PlayerZone zone;
-        private String     title;
+        private static final long serialVersionUID = -5822976087772388839L;
+        private PlayerZone        zone;
+        private String            title;
         
         public ZoneAction(PlayerZone zone, String property) {
             super(property);
@@ -1123,6 +1125,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                 if(choice != null) doAction(choice);
             }
         }
+        
         /*
         protected PlayerZone getZone() {
             return zone;
@@ -1136,10 +1139,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     }
     
     private class ConcedeAction extends ForgeAction {
-
-		private static final long serialVersionUID = -6976695235601916762L;
-
-		public ConcedeAction() {
+        
+        private static final long serialVersionUID = -6976695235601916762L;
+        
+        public ConcedeAction() {
             super(CONCEDE);
         }
         

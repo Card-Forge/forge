@@ -106,7 +106,6 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                         "ComboBox.background", "MenuItem.background", "JCheckBoxMenuItem.background",
                         "Dialog.background", "OptionPane.background", "ScrollBar.background"};
                 for(int i = 0; i < properties.length; i++) {
-                    //UIManager.put(properties, background);
                     UIManager.put(properties[i], background);
                 }
             }

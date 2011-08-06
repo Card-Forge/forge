@@ -125,8 +125,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         if(message != null) System.err.println(message);
         ex.printStackTrace();
         
-        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), getProperty(VERSION),
-                message != null? message:ex.getMessage());
+        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL),
+                message != null? message:ex.getMessage(), getProperty(VERSION));
         ex.printStackTrace(pw);
     }
     
@@ -136,7 +136,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     private static void printError(PrintWriter pw, String message) {
         System.err.println(message);
         
-        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), getProperty(VERSION), message);
+        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), message, getProperty(VERSION));
         Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
         for(Entry<Thread, StackTraceElement[]> e:traces.entrySet()) {
             pw.println();
