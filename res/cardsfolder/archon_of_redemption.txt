@@ -4,7 +4,7 @@ Types:Creature Archon
 Text:no text
 PT:3/4
 K:Flying
-K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Power:ControllingPlayer_Self:ASAP:Yes_No:Initiator - Has Keyword/Flying:Whenever Archon of Redemption or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
+K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Power:ControllingPlayer_Self:ASAP:Yes_No:Initiator - Has Keyword/Flying!Initiator - OwnedByController:Whenever Archon of Redemption or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_redemption.jpg
 End

@@ -1090,7 +1090,7 @@ public class GameAction {
                  	}
                   	if(Special_Condition[y].contains("Initiator - Has Keyword")) {
                   		boolean Nullified = true;
-                        String KeywordParse = k[8];                
+                        String KeywordParse = Special_Condition[y];                
                         String Keyword[] = KeywordParse.split("/");
                         for(int z = 0; z < Keyword.length - 1; z++) if((c.getKeyword()).contains(Keyword[z + 1])) Nullified = false;  
                         if(Nullified == true) k[4] = "Null";
