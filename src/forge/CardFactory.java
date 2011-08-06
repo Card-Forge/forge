@@ -10556,9 +10556,9 @@ public class CardFactory implements NewConstants {
         }// *************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Tranquility") || cardName.equals("Tempest of Light")
-                || cardName.equals("Cleanfall") || cardName.equals("Hush") 
-                || cardName.equals("Tranquil Path")) {
+        else if(cardName.equals("Tranquility")      || cardName.equals("Tempest of Light")
+                || cardName.equals("Cleanfall")     || cardName.equals("Hush") 
+                || cardName.equals("Tranquil Path") || cardName.equals("Back to Nature")) {
             SpellAbility spell = new Spell(card) {
                 
                 private static final long serialVersionUID = 3087098751201624354L;
@@ -10597,11 +10597,13 @@ public class CardFactory implements NewConstants {
                 }
             };// SpellAbility
             spell.setDescription("Destroy all enchantments.");
-            spell.setStackDescription(card.getName() + " - destroy all enchantments.");
+            StringBuffer sb = new StringBuffer();
+            sb.append(card.getName()).append(" - destroy all enchantments.");
+            spell.setStackDescription(sb.toString());
+            // spell.setStackDescription(card.getName() + " - destroy all enchantments.");
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Incendiary Command")) {
