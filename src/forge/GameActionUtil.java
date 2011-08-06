@@ -10933,8 +10933,8 @@ public class GameActionUtil {
 				for(int i = 0; i < Count; i++) {
 					if(a + 1 == Keyword.length && !Keyword[a].contains("SetPT")) old[ANumber].add(list.get(i)); // Only store the card when it has all the bonuses added
 					if(Keyword[a].contains("PTBonus")) {
-						list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[a].split("/")[1]));
-						list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[a].split("/")[2]));
+						list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[a].split("/")[1].replace("+","")));
+						list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[a].split("/")[2].replace("+","")));
 					}
 					else if(Keyword[a].contains("SetPT")) {
 						//old[ANumber].remove(list.get(i)); //hack, make sure the card is not in the "old" list if there's a setPT 
@@ -10999,8 +10999,8 @@ public class GameActionUtil {
 					if(Effects == y + 1) old[ANumber].remove(c);
                     if(Effect[y].contains("PTBonus")) {
                    	keyword = Effect[y]; 
-					c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1]) * -1);
-					c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2]) * -1);
+					c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1].replace("+","")) * -1);
+					c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2].replace("+","")) * -1);
 			   } else if(Effect[y].contains("Keyword")) {
                    	keyword = Effect[y].split("/")[1];
 					List_Copy.get(i).removeExtrinsicKeyword(keyword);
@@ -11015,8 +11015,8 @@ public class GameActionUtil {
 					old[ANumber].remove(c);
                     if(Effect[y].contains("PTBonus")) {
                       	 keyword = Effect[y]; 
-								c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1]) * -1);
-								c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2]) * -1);
+								c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1].replace("+","")) * -1);
+								c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2].replace("+","")) * -1);
 						} else if(Effect[y].contains("Keyword")) {
 							keyword = Effect[y].split("/")[1];
 							List_Copy.get(i).removeExtrinsicKeyword(keyword);
@@ -11295,7 +11295,7 @@ public class GameActionUtil {
 
 		void addKeyword(Card SourceCard, CardList list, String[] Keyword_Details, int ANumber) {
 			// Add the boni of one card to a Cardlist
-			String[] Keyword = Keyword_Details[2].split("/");
+			String[] Keyword = Keyword_Details[2].replace("+","").split("/");
 			for(int i = 0; i < list.size(); i++) {
 				old[ANumber].add(list.get(i));
 				list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]));
@@ -11351,7 +11351,7 @@ public class GameActionUtil {
 		
 		void removeKeywords(Card SourceCard, Card affcard, String[] Keyword_Details, int ANumber) {
 			// Initialize Variables
-			String[] Keyword = Keyword_Details[2].split("/");
+			String[] Keyword = Keyword_Details[2].replace("+","").split("/");
 			old[ANumber].remove(affcard);
 			affcard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]) * -1);
 			affcard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]) * -1);
