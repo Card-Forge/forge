@@ -191,5 +191,30 @@ public class SetInfoUtil {
 		
 		return "";
 	}
+	
+	public static SetInfo getSetInfo_Code(ArrayList<SetInfo> SetList, String SetCode)
+	{
+		SetInfo si;
+		
+		for (int i=0; i<SetList.size(); i++)
+		{
+			si = SetList.get(i);
+			if (si.Code.equals(SetCode))
+				return si;
+		}
+		
+		return null;
+	}
+	
+	public static int getSetIndex(String SetCode)
+	{
+		for (int i=0; i<sets.length; i++)
+		{
+			if (sets[i][1].equals(SetCode))
+				return i;
+		}
+		
+		return 0;
+	}
 
 }

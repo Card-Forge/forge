@@ -27,6 +27,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -129,6 +130,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     
     private JTextField	      searchTextField2	   = new JTextField();
     private JTextField	      searchTextField3	   = new JTextField();
+    private JComboBox		  searchSetCombo	   = new JComboBox();
     private JButton           clearFilterButton    = new JButton();
     
     private CardList          top;
@@ -276,6 +278,12 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
             
             if(!filteredOut) {
+            	filteredOut = filterByCardSetCode(c);
+            }
+            
+            
+            
+            if(!filteredOut) {
                 topModel.addCard(c);
             }
         }// for
@@ -306,6 +314,32 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     	if(!(searchTextField3.getText() == "")){
     		filterOut = !(c.getText().toString().toLowerCase().contains(searchTextField3.getText().toLowerCase()));
     	}
+    	return filterOut;
+    }
+    
+    private boolean filterByCardSetCode(Card c) {
+    	boolean filterOut = false;
+    	String SC = "";
+    	
+    	if (!(searchSetCombo.getSelectedItem().toString().equals(""))) {
+    		SC = SetInfoUtil.getSetCode3_SetName(searchSetCombo.getSelectedItem().toString());
+    		
+    		boolean result = false;
+    		
+    		if (SetInfoUtil.getSetInfo_Code(c.getSets(), SC) != null) {
+				c.setCurSetCode(SC);
+				result = true;
+			}
+    		filterOut = !(result);
+    	}
+    	else {
+    		SC = c.getMostRecentSet();
+    		if (!SC.equals(""))
+    			c.setCurSetCode(c.getMostRecentSet());
+    	}
+    		
+    	c.setImageFilename(CardUtil.buildFilename(c));
+    	
     	return filterOut;
     }
     
@@ -727,7 +761,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         
         jLabel1.setText("Name:");
         jLabel1.setToolTipText("Card names must include the text in this field");
-        this.getContentPane().add(jLabel1, "cell 0 1, split 6");
+        this.getContentPane().add(jLabel1, "cell 0 1, split 7");
         this.getContentPane().add(searchTextField, "wmin 100, grow");
         
         jLabel2.setText("Type:");
@@ -737,7 +771,13 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         jLabel3.setText("Text:");
         jLabel3.setToolTipText("Card descriptions must include the text in this field");
         this.getContentPane().add(jLabel3, "");
-        this.getContentPane().add(searchTextField3, "wmin 200, grow, wrap");
+        this.getContentPane().add(searchTextField3, "wmin 200, grow");
+        
+        searchSetCombo.removeAllItems();
+        searchSetCombo.addItem("");
+        for (int i=0; i<SetInfoUtil.getSetNameList().size(); i++)
+        	searchSetCombo.addItem(SetInfoUtil.getSetNameList().get(i));
+        this.getContentPane().add(searchSetCombo, "wmin 150, grow");
         
         this.getContentPane().add(statsLabel2, "cell 0 4");
         this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, cell 1 4 1 4");
@@ -774,7 +814,22 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         int n = topTable.getSelectedRow();
         if(n != -1) {
             Card c = topModel.rowToCard(n);
-            bottomModel.addCard(c);
+            
+            Card newC = new Card();
+            newC.setName(c.getName());
+            newC.setColor(c.getColor());
+            newC.setType(c.getType());
+            newC.setManaCost(c.getManaCost());
+            newC.setBaseAttack(c.getBaseAttack());
+            newC.setBaseDefense(c.getBaseDefense());
+            newC.setBaseLoyalty(c.getBaseLoyalty());
+            newC.setRarity(c.getRarity());
+            newC.setCurSetCode(c.getCurSetCode());
+            newC.setImageFilename(c.getImageFilename());
+            newC.setSets(c.getSets());
+            newC.setText(c.getText());
+            
+            bottomModel.addCard(newC);
             bottomModel.resort();
             
             if(!Constant.GameType.Constructed.equals(customMenu.getGameType())) {
@@ -816,6 +871,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         searchTextField.setText("");
         searchTextField2.setText("");
         searchTextField3.setText("");
+        searchSetCombo.setSelectedIndex(0);
         
         updateDisplay();
     }// clearFilterButton_actionPerformed

@@ -33,7 +33,7 @@ class TableModel extends AbstractTableModel {
     
     private CardContainer     cardDetail;
     //private String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R", "AI"};
-    private String            column[]         = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R"};
+    private String            column[]         = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R", "Set"};
     
     //used to resort(), used when addCard(Card) is called
     private int               recentSortedColumn;
@@ -56,29 +56,42 @@ class TableModel extends AbstractTableModel {
             column = table.getColumnModel().getColumn(i);
             
             if(i == 0) {
-                column.setPreferredWidth(30); //make first column small
-                column.setMaxWidth(30);
-            } else if(i == 1) {
-                column.setPreferredWidth(190);
-                column.setMinWidth(190);
-                column.setMaxWidth(190);
-            } else if(i == 2) {
-                column.setPreferredWidth(85);
-                column.setMinWidth(85);
-                column.setMaxWidth(126);
-            } else if(i == 3) {
-                column.setPreferredWidth(58);
-                column.setMaxWidth(58);
-            } else if(i == 4) column.setPreferredWidth(130);
+                column.setPreferredWidth(35); // Qty
+                column.setMaxWidth(35);
+                column.setMinWidth(35);
+            }
+            else if(i == 1) {
+                column.setPreferredWidth(190); // Name
+                column.setMinWidth(170);
+                column.setMaxWidth(200);
+            }
+            else if(i == 2) {
+                column.setPreferredWidth(80); // Cost
+                column.setMinWidth(70);
+                column.setMaxWidth(90);
+            }
+            else if(i == 3) {
+                column.setPreferredWidth(70); // Color
+                column.setMaxWidth(70);
+                column.setMinWidth(70);
+            }
+            else if(i == 4) {
+            	column.setPreferredWidth(130); // Type
+            }
             else if(i == 5) {
-                column.setPreferredWidth(42);
-                column.setMaxWidth(42);
-            } else if(i == 6) {
-                column.setPreferredWidth(20);
-                column.setMaxWidth(20);
-            } else if(i == 7) {
-                column.setPreferredWidth(40);
-                column.setMaxWidth(40);
+                column.setPreferredWidth(50); // Stats 
+                column.setMaxWidth(50);
+                column.setMinWidth(50);
+            }
+            else if(i == 6) {
+                column.setPreferredWidth(25); // R
+                column.setMaxWidth(25);
+                column.setMinWidth(25);
+            }
+            else if(i == 7) {
+                column.setPreferredWidth(45); // Set
+                column.setMaxWidth(45);
+                column.setMinWidth(45);
             }
             
         }//for
@@ -148,9 +161,12 @@ class TableModel extends AbstractTableModel {
     //CardList data is either class members "dataNoCopies" or "dataCopies"
     private int countQuantity(Card c, CardList data) {
         int count = 0;
-        for(int i = 0; i < data.size(); i++)
-            //are the card names the same?
-            if(data.get(i).getName().equals(c.getName())) count++;
+        for(int i = 0; i < data.size(); i++) {
+            //are the card names and set code the same?
+        	Card dc = data.get(i); 
+            if(dc.getName().equals(c.getName()) && 
+            	dc.getCurSetCode().equals(c.getCurSetCode())) count++;
+        }
         
         return count;
     }
@@ -185,11 +201,27 @@ class TableModel extends AbstractTableModel {
             case 4:
                 return GuiDisplayUtil.formatCardType(c);
             case 5:
-                return c.isCreature()? c.getBaseAttackString() + "/" + c.getBaseDefenseString():"";
+                //return c.isCreature()? c.getBaseAttackString() + "/" + c.getBaseDefenseString():"";
+            	if (c.isCreature()) {
+            		return c.getBaseAttackString() + "/" + c.getBaseDefenseString();
+            	}
+            	else if (c.isPlaneswalker()) {
+            		return Integer.toString(c.getBaseLoyalty());
+            	}
+            	return "";
             case 6:
                 String rarity = c.getRarity();
                 if(rarity.length() > 0) rarity = rarity.substring(0, 1);
+                if (!c.getCurSetCode().equals("")){
+                	SetInfo si = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode());
+                	if (si != null)
+                		return si.Rarity.substring(0, 1);
+                }
                 return rarity;
+            case 7:
+            	String SC = c.getCurSetCode();
+            	if (!SC.equals(""))	
+            		return SC;
                 
             default:
                 return "error";
@@ -263,7 +295,7 @@ class TableModel extends AbstractTableModel {
         all.addAll(dataNoCopies.toArray());
         all.addAll(dataCopies.toArray());
         
-        TableSorter sorter = new TableSorter(all, column, ascending);
+        TableSorter sorter = new TableSorter(all, column, ascending, true);
         Card[] array = all.toArray();
         Arrays.sort(array, sorter);
         

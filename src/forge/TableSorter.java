@@ -12,6 +12,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
 {
   private final int column;
   private boolean ascending;
+  private boolean col7mod;
 
   private CardList all;
 
@@ -33,6 +34,14 @@ public class TableSorter implements Comparator<Card>, NewConstants
 	  all = new CardList(in_all.toArray());
 	  column = in_column;
 	  ascending = in_ascending;
+  }
+  
+  public TableSorter(CardList in_all, int in_column, boolean in_ascending, boolean in_col7mod)
+  {
+	  all = new CardList(in_all.toArray());
+	  column = in_column;
+	  ascending = in_ascending;
+	  col7mod = in_col7mod;
   }
 
   final public int compare(Card a, Card b)
@@ -89,10 +98,15 @@ public class TableSorter implements Comparator<Card>, NewConstants
       aCom = getRarity(a);
       bCom = getRarity(b);
     }
-    else if (column == 7)//Value
+    else if (column == 7 && col7mod == false)//Value
     {
       aCom = getValue(a);
       bCom = getValue(b);
+    }
+    else if (column == 7 && col7mod == true)//Set
+    {
+    	aCom = SetInfoUtil.getSetIndex(a.getCurSetCode());
+    	bCom = SetInfoUtil.getSetIndex(b.getCurSetCode());
     }
     /*else if (column == 99)//New First
     {
