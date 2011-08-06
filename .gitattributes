@@ -3134,6 +3134,7 @@ res/cardsfolder/hunting_pack.txt -text svneol=native#text/plain
 res/cardsfolder/hunting_triad.txt svneol=native#text/plain
 res/cardsfolder/hurkyls_recall.txt -text svneol=native#text/plain
 res/cardsfolder/hurloon_minotaur.txt -text svneol=native#text/plain
+res/cardsfolder/hurloon_shaman.txt -text svneol=native#text/plain
 res/cardsfolder/hurly_burly.txt svneol=native#text/plain
 res/cardsfolder/hurr_jackal.txt -text svneol=native#text/plain
 res/cardsfolder/hurricane.txt -text svneol=native#text/plain
