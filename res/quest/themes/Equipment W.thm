@@ -35,12 +35,14 @@ Spidersilk Net
 Sword of the Meek
 Trailblazer's Boots
 Trusty Machete
+Viridian Claw
 Vorrac Battlehorns
 Vulshok Morningstar
 [/Group]
 
 [Group MaxCnt=4 Percentage=8]
 Accorder's Shield
+Darksteel Plate
 Fireshrieker
 Loxodon Warhammer
 No-Dachi
@@ -48,6 +50,7 @@ Quietus Spike
 Slagwurm Armor
 Strider Harness
 Sword of Body and Mind
+Sword of Feast and Famine
 Sword of Fire and Ice
 Sword of Light and Shadow
 Sword of Vengeance
@@ -57,7 +60,6 @@ Vulshok Battlegear
 [Group MaxCnt=1 Percentage=2]
 Argentum Armor
 Ogre's Cleaver
-Shield of Kaldra
 Warlord's Axe
 [/Group]
 

@@ -3,8 +3,8 @@ ManaCost:2 RW
 Types:Creature Dwarf Shaman
 Text:no text
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Mountain.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDestroyA | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Mountains, you may destroy target artifact.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Plains.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDestroyE | TriggerDescription$ When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Mountain.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDestroyA | Optional$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Mountains, you may destroy target artifact.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Plains.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDestroyE | Optional$ True | TriggerDescription$ When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
 SVar:TrigDestroyA:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
 SVar:TrigDestroyE:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:Rarity:Uncommon

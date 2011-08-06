@@ -24,7 +24,7 @@ Tor Giant
 
 [Group MaxCnt=4 Percentage=10]
 Fomori Nomad
-Frost Giant
+Kuldotha Ringleader
 Obsidian Giant
 Thundering Giant
 [/Group]
@@ -32,6 +32,8 @@ Thundering Giant
 [Group MaxCnt=2 Percentage=10]
 Akoum Boulderfoot
 Axegrinder Giant
+Frost Giant
+Hamletback Goliath
 Hammerfist Giant
 Inferno Titan
 Loamdragger Giant

@@ -6,32 +6,52 @@ Malakir Bloodwitch
 Vampire Nocturnus
 [/Group]
 
-[Group MaxCnt=4 Percentage=30]
-Ascendant Evincar
-Bloodghast
-Gatekeeper of Malakir
-Child of Night
+[Group MaxCnt=4 Percentage=7]
 Guul Draz Vampire
-Mirri the Cursed
+Pulse Tracker
+Quag Vampires
+Vampire Lacerator
+[/Group]
+
+[Group MaxCnt=4 Percentage=22]
+Blood Seeker
+Bloodghast
+Child of Night
+Feast of Blood
+Feast of Blood
+Feast of Blood
+Gatekeeper of Malakir
+Ruthless Cullblade
+Vampire Hexmage
+[/Group]
+
+[Group MaxCnt=3 Percentage=8]
+Barony Vampire
+Bloodrite Invoker
 Nirkana Cutthroat
-Sengir Vampire
+Vampire Nighthawk
 Vampire Nighthawk
 [/Group]
 
-[Group MaxCnt=3 Percentage=20]
-Arrogant Vampire
-Barony Vampire
-Bloodrite Invoker
-Bloodthrone Vampire
+[Group MaxCnt=1 Percentage=2]
 Irini Sengir
-Pulse Tracker
-Quag Vampires
-Ruthless Cullblade
-Skyshroud Vampire
-Vampire Aristocrat
-Vampire Hexmage
-Vampire Hounds
-Vampire Lacerator
+Mirri the Cursed
+Sangromancer
 [/Group]
+
+[Group MaxCnt=2 Percentage=7]
+Arrogant Vampire
+Drana, Kalastria Bloodchief
+Sengir Vampire
+[/Group]
+
+[Group MaxCnt=2 Percentage=4]
+Ascendant Evincar
+Ascendant Evincar
+Baron Sengir
+Butcher of Malakir
+Butcher of Malakir
+[/Group]
+
 
 End
