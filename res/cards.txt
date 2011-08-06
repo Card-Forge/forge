@@ -889,7 +889,8 @@ no text
 Rejuvenate
 3 G
 Sorcery
-You gain 6 life. Cycling 2.
+no text
+Cycling:2
 
 Absolute Grace
 1 W
@@ -13488,6 +13489,7 @@ Renewed Faith
 2 W
 Instant
 no text
+Cycling:1 W
 
 Hymn to Tourach
 B B

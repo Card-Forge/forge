@@ -6765,7 +6765,7 @@ public class CardFactory implements NewConstants {
 
 
     //*************** START *********** START **************************
-    else if(cardName.equals("Renewed Faith") || cardName.equals("Dosan's Oldest Chant") || cardName.equals("Nourish"))
+    else if(cardName.equals("Renewed Faith") || cardName.equals("Rejuvenate") || cardName.equals("Dosan's Oldest Chant") || cardName.equals("Nourish"))
     {
       SpellAbility spell = new Spell(card)
       {
@@ -6793,7 +6793,7 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
       if (cardName.equals("Renewed Faith")) {
-    	  card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "1 W"));
+//    	  card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "1 W"));
     	  card.addCycleCommand(new Command(){
 			private static final long serialVersionUID = 7699412574052780825L;
 
