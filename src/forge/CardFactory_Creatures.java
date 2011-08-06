@@ -15055,9 +15055,9 @@ public class CardFactory_Creatures {
 	          {
 	             if (card.getController().equals(Constant.Player.Human))
 	             {
-	                    CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-	                    list = list.getName("Mana Pool");
-	                    Card mp = list.getCard(0);
+	                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	                    list = list.getName("Mana Pool");*/
+	                    Card mp = AllZone.ManaPool;//list.getCard(0);
 
 	                   	mp.addExtrinsicKeyword("ManaPool:W");
 	                	mp.addExtrinsicKeyword("ManaPool:U");
@@ -15084,9 +15084,9 @@ public class CardFactory_Creatures {
 			private static final long serialVersionUID = -7073759752440531772L;
 			public void resolve()
 	          {
-	             CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-	             list = list.getName("Mana Pool");
-	             Card mp = list.getCard(0);
+	             /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	             list = list.getName("Mana Pool");*/
+	             Card mp = AllZone.ManaPool;//list.getCard(0);
 	             
 	             PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 	             
@@ -15130,9 +15130,9 @@ public class CardFactory_Creatures {
 			private static final long serialVersionUID = -9155272432379335551L;
 			public void resolve()
 	          {
-	             CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-	             list = list.getName("Mana Pool");
-	             Card mp = list.getCard(0);
+	             /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	             list = list.getName("Mana Pool");*/
+	             Card mp = AllZone.ManaPool;//list.getCard(0);
 	             
 	             PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
 	             PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);

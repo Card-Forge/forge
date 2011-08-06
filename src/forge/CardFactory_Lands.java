@@ -1764,9 +1764,9 @@ class CardFactory_Lands {
 	   		private static final long serialVersionUID = -1631970749273122485L;
 	   		public void resolve()
 	             {
-	                CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-	                list = list.getName("Mana Pool");
-	                Card mp = list.getCard(0);
+	                /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	                list = list.getName("Mana Pool");*/
+	                Card mp = AllZone.ManaPool;//list.getCard(0);
 	                
 	                CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	                creats = creats.getType("Creature");
@@ -1800,9 +1800,9 @@ class CardFactory_Lands {
 	   		private static final long serialVersionUID = -9155272432379335551L;
 	   		public void resolve()
 	             {
-	                CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-	                list = list.getName("Mana Pool");
-	                Card mp = list.getCard(0);
+	                /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	                list = list.getName("Mana Pool");*/
+	                Card mp = AllZone.ManaPool;//list.getCard(0);
 	                
 	                CardList arts = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	                arts = arts.getType("Artifact");
@@ -1836,9 +1836,9 @@ class CardFactory_Lands {
 	   		private static final long serialVersionUID = 6337899963974773375L;
 	   		public void resolve()
 	             {
-	                CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-	                list = list.getName("Mana Pool");
-	                Card mp = list.getCard(0);
+	                /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	                list = list.getName("Mana Pool");*/
+	                Card mp = AllZone.ManaPool;//list.getCard(0);
 	                
 	                CardList ench = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	                ench = ench.getType("Enchantment");

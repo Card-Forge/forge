@@ -15986,9 +15986,9 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
           
           public void resolve()
           {
-             CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-             list = list.getName("Mana Pool");
-             Card mp = list.getCard(0);
+             //CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+             //list = list.getName("Mana Pool");
+             Card mp = AllZone.ManaPool;//list.getCard(0);
              mp.addExtrinsicKeyword("ManaPool:R");
              mp.addExtrinsicKeyword("ManaPool:R");
              mp.addExtrinsicKeyword("ManaPool:R");
@@ -16017,9 +16017,9 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		private static final long serialVersionUID = -8579887529151755266L;
 		public void resolve()
           {
-             CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-             list = list.getName("Mana Pool");
-             Card mp = list.getCard(0);
+             /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+             list = list.getName("Mana Pool");*/
+             Card mp = AllZone.ManaPool;//list.getCard(0);
              mp.addExtrinsicKeyword("ManaPool:B");
              mp.addExtrinsicKeyword("ManaPool:B");
              mp.addExtrinsicKeyword("ManaPool:B");
@@ -16050,9 +16050,9 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
           {
              if (card.getController().equals(Constant.Player.Human))
              {
-                    CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-                    list = list.getName("Mana Pool");
-                    Card mp = list.getCard(0);
+                    //CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                    //list = list.getName("Mana Pool");
+                    Card mp = AllZone.ManaPool;//list.getCard(0);
 
                     String color = new String();
                                         

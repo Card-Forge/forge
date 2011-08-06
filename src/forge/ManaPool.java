@@ -408,7 +408,7 @@ public class ManaPool extends Card
 	public void paid(){
 		if (!isSnow()) smp.paid();
 		used.clear();
-		has = "";//Arrays.fill(paid, 0);
+		paid = "";//Arrays.fill(paid, 0);
 		sortContents();
 	}
 	public void unpaid(){

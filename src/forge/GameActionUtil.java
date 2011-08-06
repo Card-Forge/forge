@@ -1267,9 +1267,9 @@ public class GameActionUtil
                 else if (color.equals("green"))
                 	color = "G";
                 
-                CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-                list = list.getName("Mana Pool");
-                Card mp = list.getCard(0);
+                //CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                //list = list.getName("Mana Pool");
+                Card mp = AllZone.ManaPool;//list.getCard(0);
                 
                 mp.addExtrinsicKeyword("ManaPool:"+ color);
 			}
