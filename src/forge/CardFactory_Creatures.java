@@ -14946,9 +14946,12 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     
                     if(getTargetCard() == null) return;
-                    
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
-                    AllZone.GameAction.moveTo(hand, getTargetCard());
+                    Card c = getTargetCard();
+                    if(c.isToken()) AllZone.getZone(c).remove(c);
+                    else {
+                    	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
+                    	AllZone.GameAction.moveTo(hand, c);
+                    }
                 }
                 
             };//a1
