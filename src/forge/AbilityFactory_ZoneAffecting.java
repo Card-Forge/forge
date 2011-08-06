@@ -1207,6 +1207,11 @@ public class AbilityFactory_ZoneAffecting {
 			}
 			
 			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return rearrangeTopOfLibraryTrigger(AF, this, mandatory);
+			}
+			
+			@Override
 			public void resolve() {
 				rearrangeTopOfLibraryResolve(AF, this);
 			}
@@ -1231,6 +1236,11 @@ public class AbilityFactory_ZoneAffecting {
 			public boolean canPlayAI()
 			{
 				return false;
+			}
+			
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return rearrangeTopOfLibraryTrigger(AF, this, mandatory);
 			}
 			
 			@Override
