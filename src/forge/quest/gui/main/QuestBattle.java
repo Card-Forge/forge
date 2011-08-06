@@ -340,8 +340,8 @@ public class QuestBattle extends QuestSelectablePanel {
         
 //        addToDeckList("Werewolf 2", "medium", "UGB UBG Fungal Shambler deck");
         addToDeckList("White Knight 1", "easy", "Mono W Knights deck");
-        addToDeckList("White Knight 2", "medium", "ono W Knights deck");
-        addToDeckList("White Knight 3", "hard", "ono W Knights deck");
+        addToDeckList("White Knight 2", "medium", "Mono W Knights deck");
+        addToDeckList("White Knight 3", "hard", "Mono W Knights deck");
         addToDeckList("Wilma Flintstone 1", "easy", "BG deck with Noxious Hatchling and Woodlurker Mimic");
         addToDeckList("Wilma Flintstone 2", "medium", "BG deck with Noxious Hatchling and Woodlurker Mimic");
         addToDeckList("Wilma Flintstone 3", "hard", "BG deck with Noxious Hatchling and Woodlurker Mimic");
