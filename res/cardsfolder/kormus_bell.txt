@@ -2,7 +2,7 @@ Name:Kormus Bell
 ManaCost:4
 Types:Artifact
 Text:no text
-K:stAnimateAll:Swamp:1/1:Creature:Black:No Condition:All Swamps are 1/1 black creatures that are still lands.
+K:stAnimateAll:Swamp:1/1:Creature:Black:No Abilities:No Condition:All Swamps are 1/1 black creatures that are still lands.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kormus_bell.jpg

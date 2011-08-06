@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Enchantment Aura
 Text:no text
 K:Enchant Artifact
-K:stAnimateEnchanted:Artifact:Count$CardManaCost/Count$CardManaCost:Creature:no colors:isPresent Card.AttachedBy+nonCreature:As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
+K:stAnimateEnchanted:Artifact:Count$CardManaCost/Count$CardManaCost:Creature:no colors:No Abilities:isPresent Card.AttachedBy+nonCreature:As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_artifact.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/49.jpg
