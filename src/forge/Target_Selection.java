@@ -185,16 +185,29 @@ public class Target_Selection {
     public static Input input_cardFromList(final SpellAbility sa, final CardList choices, final String message, 
     		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req){
     	// Send in a list of valid cards, and popup a choice box to target 
+		final Card dummy = new Card();
+		dummy.setName("[FINISH TARGETING]");
+    	
 	    Input target = new Input() {
 	        private static final long serialVersionUID = 9027742835781889044L;
 	        
 	        @Override
 	        public void showMessage() {
-	            Object check = AllZone.Display.getChoiceOptional(message, choices.toArray());
+	        	Target tgt = select.getTgt();
+	        	
+	        	CardList choicesWithDone = choices;
+	        	if (tgt.isMinTargetsChosen(sa.getSourceCard(), sa)){
+	        		// is there a more elegant way of doing this?
+	        		choicesWithDone.add(dummy);
+	        	}
+	            Object check = AllZone.Display.getChoiceOptional(message, choicesWithDone.toArray());
 	            if(check != null) {
 	            	Card c = (Card) check;
-                	select.getTgt().addTarget(c);
-	            } 
+	            	if (c.equals(dummy))
+	            		select.setDoneTarget(true);
+	            	else
+	            		tgt.addTarget(c);
+	            }
 	            else
 	            	select.setCancel(true);
 	            
