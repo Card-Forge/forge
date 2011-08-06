@@ -1,0 +1,9 @@
+Name:Skyshroud Ridgeback
+ManaCost:G
+Types:Creature Beast
+Text:no text
+PT:2/3
+K:Fading:2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_ridgeback.jpg
+End

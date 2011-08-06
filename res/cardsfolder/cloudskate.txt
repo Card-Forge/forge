@@ -1,0 +1,10 @@
+Name:Cloudskate
+ManaCost:1 U
+Types:Creature Illusion
+Text:no text
+PT:2/2
+K:Flying
+K:Fading:3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudskate.jpg
+End
