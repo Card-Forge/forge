@@ -16,7 +16,6 @@ public class Trigger_Blocks extends Trigger {
 		{
 			if(!matchesValid(runParams.get("Blocker"),mapParams.get("ValidCard").split(","),hostCard))
 			{
-				System.out.println("Test failed: Card not valid.");
 				return false;
 			}
 		}		

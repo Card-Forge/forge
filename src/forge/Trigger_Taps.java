@@ -17,7 +17,6 @@ public class Trigger_Taps extends Trigger {
 		{
 			if(!tapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard))
 			{
-				System.out.println("Test failed: Tapper not valid.");
 				return false;
 			}
 		}

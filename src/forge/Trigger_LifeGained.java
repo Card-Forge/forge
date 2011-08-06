@@ -15,7 +15,6 @@ public class Trigger_LifeGained extends Trigger {
 		{
 			if(!matchesValid(runParams.get("Player"),mapParams.get("ValidPlayer").split(","),hostCard))
 			{
-				System.out.println("Test failed: Player was not valid.");
 				return false;
 			}
 		}

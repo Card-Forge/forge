@@ -17,7 +17,6 @@ public class Trigger_Attacks extends Trigger {
 			{
 				if(AllZone.Combat.getBlockers((Card)runParams.get("Battler")).size() != 0)
 				{
-					System.out.println("Test failed: Battler should've been unblocked.");
 					return false;
 				}
 			}
@@ -25,7 +24,6 @@ public class Trigger_Attacks extends Trigger {
 			{
 				if(AllZone.Combat.getBlockers((Card)runParams.get("Battler")).size() == 0)
 				{
-					System.out.println("Test failed: Battler should've been blocked.");
 					return false;
 				}
 			}
@@ -34,7 +32,6 @@ public class Trigger_Attacks extends Trigger {
 		{
 			if(!matchesValid(runParams.get("Attacker"),mapParams.get("ValidCard").split(","),hostCard))
 			{
-				System.out.println("Test failed: Card not valid.");
 				return false;
 			}
 		}
@@ -53,7 +50,6 @@ public class Trigger_Attacks extends Trigger {
 			
 			if(!foundValidBlocker)
 			{
-				System.out.println("Test failed: Found no valid blocker.");
 				return false;
 			}
 		}

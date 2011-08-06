@@ -42,8 +42,8 @@ public abstract class Trigger {
 		return mapParams.get("TriggerDescription");
 	}
 	
-	public boolean requirementsCheck()
-	{		
+	public boolean zonesCheck()
+	{
 		if(mapParams.containsKey("TriggerZones"))
 		{
 			ArrayList<String> triggerZones = new ArrayList<String>();
@@ -53,21 +53,23 @@ public abstract class Trigger {
 			}
 			if(AllZone.getZone(hostCard) == null)
 			{
-				System.out.println("Requirement failed: TriggerZones (should be among " + mapParams.get("TriggerZones") + " but was null) (I don't think that should be possible)");
 				return false;
 			}
 			if(!triggerZones.contains(AllZone.getZone(hostCard).getZoneName()))
 			{
-				System.out.println("Requirement failed: Triggerzones (should be among " + mapParams.get("TriggerZones") + " but was " + AllZone.getZone(hostCard).getZoneName() + ")");
 				return false;
 			}
 		}
 		
+		return true;
+	}
+	
+	public boolean requirementsCheck()
+	{
 		if(mapParams.containsKey("Metalcraft"))
 		{
 			if(mapParams.get("Metalcraft").equals("True") && !hostCard.getController().hasMetalcraft())
 			{
-				System.out.println("Requirement failed: Metalcraft");
 				return false;
 			}
 		}
@@ -76,7 +78,6 @@ public abstract class Trigger {
 		{
 			if(mapParams.get("Threshold").equals("True") && !hostCard.getController().hasThreshold())
 			{
-				System.out.println("Requirement failed: Threshold");
 				return false;
 			}
 		}
@@ -85,17 +86,14 @@ public abstract class Trigger {
 		{
 			if(mapParams.get("PlayersPoisoned").equals("You") && hostCard.getController().getPoisonCounters() == 0)
 			{
-				System.out.println("Requirement failed: Poisoned(You)");
 				return false;
 			}
 			else if(mapParams.get("PlayersPoisoned").equals("Opponent") && hostCard.getController().getOpponent().getPoisonCounters() == 0)
 			{
-				System.out.println("Requirement failed: Poisoned(Opponent)");
 				return false;
 			}
 			else if(mapParams.get("PlayersPoisoned").equals("Each") && !(hostCard.getController().poisonCounters != 0 && hostCard.getController().getPoisonCounters() != 0 ))
 			{
-				System.out.println("Requirement failed: Poisoned(Each)");
 				return false;
 			}
 		}
@@ -103,11 +101,29 @@ public abstract class Trigger {
 		if (mapParams.containsKey("IsPresent")){
 			String sIsPresent = mapParams.get("IsPresent");
 			String presentCompare = "GE1";
+			String presentZone = "Battlefield";
+			String presentPlayer = "Any";
 			if(mapParams.containsKey("PresentCompare"))
 			{
 				presentCompare = mapParams.get("PresentCompare");
 			}
-			CardList list = AllZoneUtil.getCardsInPlay();
+			if(mapParams.containsKey("PresentZone"))
+			{
+				presentZone = mapParams.get("PresentZone");
+			}
+			if(mapParams.containsKey("PresentPlayer"))
+			{
+				presentPlayer = mapParams.get("PresentPlayer");
+			}
+			CardList list = new CardList();
+			if(presentPlayer.equals("You") || presentPlayer.equals("Any"))
+			{
+				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
+			}
+			if(presentPlayer.equals("Opponent") || presentPlayer.equals("Any"))
+			{
+				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
+			}
 			
 			list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
 			
@@ -123,29 +139,9 @@ public abstract class Trigger {
 			
 			if (!Card.compare(left, presentCompare, right))
 			{
-				System.out.println("Requirement failed: Required valid not present.");
 				return false;
 			}
 				
-		}
-		
-		if(mapParams.containsKey("CardsIn"))
-		{
-			for(String OCIOper : mapParams.get("CardsIn").split(","))
-			{
-				String[] splitOCIO = OCIOper.split("\\.");
-				Player player = splitOCIO[0].equals("You") ? hostCard.getController() : hostCard.getController().getOpponent();
-				int amt = AllZoneUtil.getCardsInZone(splitOCIO[1], player).size();
-				
-				String operator = splitOCIO[2].substring(0,2);
-				int operand = Integer.parseInt(splitOCIO[2].substring(2));
-				
-				if(!Card.compare(amt,operator,operand))
-				{
-					System.out.println("Requirement failed: Required cards not present/too many cards present in specific zone.");
-					return false;
-				}
-			}
 		}
 		
 		return true;

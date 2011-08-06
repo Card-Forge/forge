@@ -163,8 +163,12 @@ public class TriggerHandler {
 		}
 	}
 	
-	private void runSingleTrigger(Trigger regtrig, String mode,HashMap<String,Object> runParams)
+	private void runSingleTrigger(final Trigger regtrig, final String mode, final HashMap<String,Object> runParams)
 	{
+		if(!regtrig.zonesCheck())
+		{
+			return;
+		}
 		if(!regtrig.requirementsCheck())
 		{
 			return;
@@ -184,15 +188,16 @@ public class TriggerHandler {
 			System.out.println("All tests succeeded.");
 			AbilityFactory AF = new AbilityFactory();
 			
-			SpellAbility sa = regtrig.getOverridingAbility();
-			if(sa == null)
+			final SpellAbility[] sa = new SpellAbility[1];
+			sa[0] = regtrig.getOverridingAbility();
+			if(sa[0] == null)
 			{
-				sa = AF.getAbility(regtrig.getHostCard().getSVar(trigParams.get("Execute")), regtrig.getHostCard());
+				sa[0] = AF.getAbility(regtrig.getHostCard().getSVar(trigParams.get("Execute")), regtrig.getHostCard());
 			}
-			sa.setActivatingPlayer(regtrig.getHostCard().getController());
-			if(sa.getStackDescription().equals(""))
+			sa[0].setActivatingPlayer(regtrig.getHostCard().getController());
+			if(sa[0].getStackDescription().equals(""))
 			{
-				sa.setStackDescription(trigParams.get("TriggerDescription"));
+				sa[0].setStackDescription(trigParams.get("TriggerDescription"));
 			}
 			if(trigParams.containsKey("Optional"))
 			{
@@ -210,7 +215,7 @@ public class TriggerHandler {
 					}
 					else
 					{
-						if(!sa.canPlayAI())
+						if(!sa[0].canPlayAI())
 						{
 							System.out.println("AI refused optional activation. Fail.");
 							return;
@@ -218,40 +223,33 @@ public class TriggerHandler {
 					}
 				}
 			}
-			AllZone.GameAction.playSpellAbility(sa);
-		}
-	}
-	
-	private boolean matchesValid(Object o,String[] valids,Card srcCard)
-	{
-		if(o instanceof Card)
-		{
-			Card c = (Card)o;
-			return c.isValidCard(valids, srcCard.getController(), srcCard);
-		}
-		
-		if(o instanceof Player)
-		{
-			for(String v : valids)
-			{
-				if(v.equalsIgnoreCase("Player"))
-				{
-					return true;
+			
+			final Ability wrapperAbility = new Ability(regtrig.getHostCard(),"0") {
+				@Override
+				public String getStackDescription()
+				{					
+					return sa[0].getStackDescription();
 				}
-				if(v.equalsIgnoreCase("Opponent"))
+				
+				@Override
+				public void resolve()
 				{
-					if(o.equals(srcCard.getController().getOpponent()))
+					if(!regtrig.requirementsCheck())
 					{
-						return true;
+						return;
 					}
+					
+					sa[0].resolve();
 				}
-				if(v.equalsIgnoreCase("You"))
-				{
-					return o.equals(srcCard.getController());
-				}
+			};
+			if(regtrig.getHostCard().getController().equals(AllZone.HumanPlayer))
+			{
+				AllZone.GameAction.playSpellAbility(wrapperAbility);
+			}
+			else
+			{
+				ComputerUtil.playStack(wrapperAbility);
 			}
 		}
-		
-		return false;
 	}
 }

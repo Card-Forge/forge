@@ -18,7 +18,6 @@ public class Trigger_DamageDone extends Trigger {
 		{
 			if(!src.isValidCard(mapParams.get("SourceValid").split(" "), hostCard.getController(), hostCard))
 			{
-				System.out.println("DmgSrc not valid. Fail.");
 				return false;
 			}
 		}
@@ -27,7 +26,6 @@ public class Trigger_DamageDone extends Trigger {
 		{
 			if(!matchesValid(tgt,mapParams.get("TargetValid").split(","),hostCard))
 			{
-				System.out.println("DmgTgt not valid. Fail.");
 				return false;
 			}
 		}
@@ -38,14 +36,12 @@ public class Trigger_DamageDone extends Trigger {
 			{
 				if(!(src.isAttacking() || src.isBlocking()))
 				{
-					System.out.println("DmgSrc not in combat. Fail.");
 					return false;
 				}
 				if(tgt instanceof Card)
 				{
 					if(!(((Card)tgt).isAttacking() || ((Card)tgt).isBlocking()))
 					{
-						System.out.println("DmgTgt not in combat. Fail.");
 						return false;
 					}
 				}

@@ -14,7 +14,6 @@ public class Trigger_Phase extends Trigger {
 		{
 			if(!mapParams.get("Phase").equals(runParams.get("Phase")))
 			{
-				System.out.println("Test failed: Phase was wrong (should be " + mapParams.get("Phase") + " but was " + runParams.get("Phase")+ ")");
 				return false;
 			}
 		}
@@ -22,7 +21,6 @@ public class Trigger_Phase extends Trigger {
 		{
 			if(!matchesValid(runParams.get("Player"),mapParams.get("Player").split(","),hostCard))
 			{
-				System.out.println("Test failed: Player was wrong.");
 				return false;
 			}
 		}

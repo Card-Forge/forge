@@ -17,7 +17,6 @@ public class Trigger_Untaps extends Trigger {
 		{
 			if(!untapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard))
 			{
-				System.out.println("Test failed: Untapper not valid.");
 				return false;
 			}
 		}

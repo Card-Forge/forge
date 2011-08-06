@@ -17,7 +17,6 @@ public class Trigger_ChangesZone extends Trigger {
 			{
 				if(!mapParams.get("Origin").equals((String)runParams.get("Origin")))
 				{
-					System.out.println("Test failed: Origin (should be" + mapParams.get("Origin") + "but was " + ((String)runParams.get("Origin")) + ")");
 					return false;
 				}
 			}
@@ -29,7 +28,6 @@ public class Trigger_ChangesZone extends Trigger {
 			{
 				if(!mapParams.get("Destination").equals((String)runParams.get("Destination")))
 				{
-					System.out.println("Test failed: Origin (should be" + mapParams.get("Destination") + "but was " + ((String)runParams.get("Destination")) + ")");
 					return false;
 				}
 			}
@@ -40,7 +38,6 @@ public class Trigger_ChangesZone extends Trigger {
 			Card moved = (Card)runParams.get("MovedCard");
 			if(!moved.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard))
 			{
-				System.out.println("Test failed: MovedCard was not valid.");
 				return false;
 			}
 		}

@@ -15,7 +15,6 @@ public class Trigger_Sacrificed extends Trigger {
 		{
 			if(!matchesValid(sac.getController(),mapParams.get("ValidPlayer").split(","),hostCard))
 			{
-				System.out.println("Test failed: Discarding player not valid.");
 				return false;
 			}
 		}
@@ -23,7 +22,6 @@ public class Trigger_Sacrificed extends Trigger {
 		{
 			if(!sac.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard))
 			{
-				System.out.println("Test failed: Card not valid.");
 				return false;
 			}
 		}

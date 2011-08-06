@@ -14,7 +14,6 @@ public class Trigger_Discarded extends Trigger {
 		{
 			if(!matchesValid(runParams.get("Player"),mapParams.get("ValidPlayer").split(","),hostCard))
 			{
-				System.out.println("Test failed: Discarding player not valid.");
 				return false;
 			}
 		}
@@ -22,7 +21,6 @@ public class Trigger_Discarded extends Trigger {
 		{
 			if(!matchesValid(runParams.get("Card"),mapParams.get("ValidCard").split(","),hostCard))
 			{
-				System.out.println("Test failed: Discarded card not valid.");
 				return false;
 			}
 		}

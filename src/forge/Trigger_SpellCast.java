@@ -17,7 +17,6 @@ public class Trigger_SpellCast extends Trigger {
 		{
 			if(!matchesValid(cast.getController(),mapParams.get("ValidPlayer").split(","),hostCard))
 			{
-				System.out.println("Test failed: Player was not valid.");
 				return false;
 			}
 		}
@@ -26,7 +25,6 @@ public class Trigger_SpellCast extends Trigger {
 		{			
 			if(!matchesValid(cast,mapParams.get("ValidCard").split(","),hostCard))
 			{
-				System.out.println("Test failed: Cast card was not valid.");
 				return false;
 			}
 		}
@@ -57,13 +55,11 @@ public class Trigger_SpellCast extends Trigger {
 				
 				if(!validTgtFound)
 				{
-					System.out.println("Test failed: Cast card did not target a valid card.");
 					return false;
 				}
 			}
 			else
 			{
-				System.out.println("Test failed: Cast card did not target but it should have.");
 				return false;
 			}
 		}
