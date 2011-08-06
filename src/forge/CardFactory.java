@@ -17632,6 +17632,8 @@ public class CardFactory implements NewConstants {
                     
                     if(player.equals(Constant.Player.Human)) humanResolve();
                     else computerResolve();
+                    
+                    AllZone.GameAction.shuffle(card.getController());
                 }
                 
                 public void computerResolve() {
@@ -17681,7 +17683,6 @@ public class CardFactory implements NewConstants {
                         library.remove(c);
                         play.add(c);
                         
-                        AllZone.GameAction.shuffle(card.getController());
                     }//if
                 }//resolve()
                 
