@@ -4360,23 +4360,39 @@ public class GameActionUtil {
 		horrorReturn(opponent);
 	}
 
-	public static void horrorReturn(Player player)
-	{
-		// Find each Horror, peek at the card above it, if it's a creature return to hand
-		CardList grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, player).getCards());
-		if (grave.getName("Krovikan Horror").size() == 0) return;
-		int i = 0;
-		while(i+1 < grave.size()){
-			Card c = grave.get(i);
-			ArrayList<String> types = grave.get(i+1).getType();
-			if (c.getName().equals("Krovikan Horror") && types.contains("Creature")){
-				AllZone.GameAction.moveToHand(c);
-				grave.remove(c);
-			}
-			else
-				i++;
-		}
-	}
+    public static void horrorReturn(Player player)
+    {
+        // Find each Horror, peek at the card above it, if it's a creature return to hand
+        CardList grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, player).getCards());
+        if (grave.getName("Krovikan Horror").size() == 0) return;
+        int i = 0;
+        
+        while (i+1 < grave.size()){
+            Card c = grave.get(i);
+            ArrayList<String> types = grave.get(i+1).getType();
+            if (c.getName().equals("Krovikan Horror") && types.contains("Creature")) {
+                
+                if (player.isHuman()) {
+                    String question = "Return Krovikan Horror to your hand?";
+                    if (GameActionUtil.showYesNoDialog(c, question)) {
+                        AllZone.GameAction.moveToHand(c);
+                        grave.remove(c);
+                    }
+                    // increment counter to next occurance of Krovikan Horror
+                    // if human decides not to return Krovikan Horror to hand
+                    else
+                        i++;
+                }
+                // player is computer
+                else {
+                    AllZone.GameAction.moveToHand(c);
+                    grave.remove(c);
+                }
+            }
+            else
+                i++;
+        }
+    }
 	//END ENDOFTURN CARDS
 
 	public static void removeAttackedBlockedThisTurn() {
