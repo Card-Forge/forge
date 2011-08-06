@@ -584,43 +584,6 @@ class CardFactory_Lands {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Stalking Stones")) {
-            
-            final SpellAbility a1 = new Ability(card, "6") {
-                @Override
-                public boolean canPlayAI() {
-                    return !card.getType().contains("Creature") && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Artifact", "Creature", "Elemental" };
-                    String[] keywords = {  };
-                    
-                    CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "0");
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" becomes a 3/3 Elemental artifact creature that's still a land.");
-            a1.setStackDescription(sb.toString());            
-            a1.setDescription("6: Stalking Stones becomes a 3/3 Elemental artifact creature that's still a land. (This effect lasts indefinitely.)");
-            
-            Command paid1 = new Command() {
-                private static final long serialVersionUID = -6800983290478844750L;
-                
-                public void execute() {
-                    AllZone.Stack.add(a1);
-                }
-            };
-            a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Lavaclaw Reaches")) {
         	final long[] timeStamp = new long[1];
             final SpellAbility X_ability = new Ability(card, "0") {
