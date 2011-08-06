@@ -38,6 +38,10 @@ import forge.properties.NewConstants;
  * @author Clemens Koza
  */
 public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer {
+	private static final String nameOS = "os.name";        
+	private static final String versionOS = "os.version";        
+	private static final String architectureOS = "os.arch";
+	
     public static final Action ALL_THREADS_ACTION = new ShowAllThreadsAction();
     
     /**
@@ -126,7 +130,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         ex.printStackTrace();
         
         pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL),
-                message != null? message:ex.getMessage(), getProperty(VERSION));
+                message != null? message:ex.getMessage(), getProperty(VERSION), 
+                System.getProperty(nameOS), System.getProperty(versionOS), System.getProperty(architectureOS));
         ex.printStackTrace(pw);
     }
     
@@ -136,7 +141,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     private static void printError(PrintWriter pw, String message) {
         System.err.println(message);
         
-        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), message, getProperty(VERSION));
+        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), message, getProperty(VERSION),
+        		  System.getProperty(nameOS), System.getProperty(versionOS), System.getProperty(architectureOS));
         Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
         for(Entry<Thread, StackTraceElement[]> e:traces.entrySet()) {
             pw.println();
