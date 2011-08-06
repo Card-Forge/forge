@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Enchantment
 Text:no text
 K:Cumulative upkeep:U
-K:abPumpTgtC 1:Flying:Target creature gains flying until end of turn.
+A:AB$Pump | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arnjlots_ascent.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/57.jpg

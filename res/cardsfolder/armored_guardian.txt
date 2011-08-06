@@ -3,12 +3,12 @@ ManaCost:3 W U
 Types:Creature Cat Soldier
 Text:no text
 PT:2/5
-K:abPumpTgtC 1 W W:Protection from white
-K:abPumpTgtC 1 W W:Protection from blue
-K:abPumpTgtC 1 W W:Protection from black
-K:abPumpTgtC 1 W W:Protection from red
-K:abPumpTgtC 1 W W:Protection from green
-K:abPump 1 U U:Shroud
+A:AB$Pump | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from white | SpellDescription$ Target creature you control gains protection from white until end of turn.
+A:AB$Pump | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from blue | SpellDescription$ Target creature you control gains protection from blue until end of turn.
+A:AB$Pump | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from black | SpellDescription$ Target creature you control gains protection from black until end of turn.
+A:AB$Pump | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from red | SpellDescription$ Target creature you control gains protection from red until end of turn.
+A:AB$Pump | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from green | SpellDescription$ Target creature you control gains protection from green until end of turn.
+A:AB$Pump | Cost$ 1 U U | KW$ Shroud | SpellDescription$ Armored Guardian gains shroud until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_guardian.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/230.jpg
