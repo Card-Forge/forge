@@ -50,12 +50,12 @@ public class QuestBattleManager {
         return new ArrayList<String>(aiDecks.keySet());
     }
 
-    public static String[] getOpponents(List<String> aiDeck) {
+    public static String getOpponent(List<String> aiDeck, int number) {
         //This is to make sure that the opponents do not change when the deck editor is launched.
         List<String> deckListCopy = new ArrayList<String>(aiDeck);
         Collections.shuffle(deckListCopy, new Random(AllZone.QuestData.getRandomSeed()));
 
-        return new String[]{deckListCopy.get(0), deckListCopy.get(1), deckListCopy.get(2)};
+        return deckListCopy.get(number);
 
     }
 
@@ -64,14 +64,22 @@ public class QuestBattleManager {
         int index = AllZone.QuestData.getDifficultyIndex();
 
         if (AllZone.QuestData.getWin() < AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
-            return getOpponents(easyAIDecks);
+            return new String[]{getOpponent(easyAIDecks,0),getOpponent(easyAIDecks,1),getOpponent(easyAIDecks,2)};
+        }
+        
+        if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
+            return new String[]{getOpponent(easyAIDecks,0),getOpponent(mediumAIDecks,1),getOpponent(mediumAIDecks,2)};
         }
 
         if (AllZone.QuestData.getWin() < AllZone.QuestData.getPreferences().getWinsForHardAI(index)) {
-            return QuestBattleManager.getOpponents(mediumAIDecks);
+            return new String[]{getOpponent(mediumAIDecks,0),getOpponent(mediumAIDecks,1),getOpponent(mediumAIDecks,2)};
+        }
+        
+        if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
+            return new String[]{getOpponent(mediumAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(hardAIDecks,2)};
         }
 
-        return getOpponents(hardAIDecks);
+        return new String[]{getOpponent(hardAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(hardAIDecks,2)};
     }
 
     private static List<String> readFile(File file, List<String> aiDecks) {
