@@ -12600,6 +12600,86 @@ public class GameActionUtil {
 		}// execute()
 
 	}; //Wizened Cenn Other
+	
+	public static Command Cemetery_Reaper_Pump  = new Command() {
+
+		private static final long serialVersionUID = 3534935133707913819L;
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for(int i = 0; i < cList.size(); i++) {
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Cemetery Reaper");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+				creature = creature.getType("Zombie");
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					if(c.isCreature()
+							&& !c.getName().equals(
+									"Cemetery Reaper")) {
+						c.addSemiPermanentAttackBoost(1);
+						c.addSemiPermanentDefenseBoost(1);
+						
+						gloriousAnthemList.add(c);
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	}; //Cemetery_Reaper_Pump
+	
+	public static Command Cemetery_Reaper_Other  = new Command() {
+		private static final long serialVersionUID = 2006861399531569152L;
+		int                       otherReapers      = 0;
+
+		private int countOtherReapers(Card c) {
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+			CardList capts = new CardList(play.getCards());
+			capts = capts.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getName().equals(
+							"Cemetery Reaper")
+							&& (c.getType().contains("Zombie") || c.getKeyword().contains(
+									"Changeling"));
+				}
+			});
+			return capts.size() - 1;
+
+		}
+
+		public void execute() {
+
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+
+			creature = creature.getName("Cemetery Reaper");
+
+			for(int i = 0; i < creature.size(); i++) {
+				Card c = creature.get(i);
+				otherReapers = countOtherReapers(c);
+				c.setOtherAttackBoost(otherReapers);
+				c.setOtherDefenseBoost(otherReapers);
+
+			}// for inner
+		}// execute()
+
+	}; //Cemetery_Reaper_Oher
 
 	public static Command Captain_of_the_Watch_Pump   = new Command() {
 		private static final long serialVersionUID   = 542524781150091105L;
@@ -12615,7 +12695,7 @@ public class GameActionUtil {
 				c = cList.get(i);
 				c.addSemiPermanentAttackBoost(-1);
 				c.addSemiPermanentDefenseBoost(-1);
-				c.removeIntrinsicKeyword("Vigilance");
+				c.removeExtrinsicKeyword("Vigilance");
 			}
 			cList.clear();
 			PlayerZone[] zone = getZone("Captain of the Watch");
@@ -12633,8 +12713,8 @@ public class GameActionUtil {
 									"Captain of the Watch")) {
 						c.addSemiPermanentAttackBoost(1);
 						c.addSemiPermanentDefenseBoost(1);
-						if(!c.getIntrinsicKeyword().contains(
-								"Vigilance")) c.addIntrinsicKeyword("Vigilance");
+						if(!c.getExtrinsicKeyword().contains(
+								"Vigilance")) c.addExtrinsicKeyword("Vigilance");
 						gloriousAnthemList.add(c);
 					}
 
@@ -12648,13 +12728,13 @@ public class GameActionUtil {
 	public static Command Captain_of_the_Watch_Other  = new Command() {
 		private static final long serialVersionUID = -7242601069504800797L;
 
-		int                       otherCenns       = 0;
+		int                       otherCapts       = 0;
 
-		private int countOtherCenns(Card c) {
+		private int countOtherCapts(Card c) {
 			PlayerZone play = AllZone.getZone(
 					Constant.Zone.Play, c.getController());
-			CardList cenns = new CardList(play.getCards());
-			cenns = cenns.filter(new CardListFilter() {
+			CardList capts = new CardList(play.getCards());
+			capts = capts.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.getName().equals(
 							"Captain of the Watch")
@@ -12662,7 +12742,7 @@ public class GameActionUtil {
 									"Changeling"));
 				}
 			});
-			return cenns.size() - 1;
+			return capts.size() - 1;
 
 		}
 
@@ -12676,10 +12756,10 @@ public class GameActionUtil {
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
-				otherCenns = countOtherCenns(c);
-				c.setOtherAttackBoost(otherCenns);
-				c.setOtherDefenseBoost(otherCenns);
-				if(!c.getIntrinsicKeyword().contains("Vigilance")) c.addIntrinsicKeyword("Vigilance");
+				otherCapts = countOtherCapts(c);
+				c.setOtherAttackBoost(otherCapts);
+				c.setOtherDefenseBoost(otherCapts);
+				if(!c.getExtrinsicKeyword().contains("Vigilance")) c.addExtrinsicKeyword("Vigilance");
 
 			}// for inner
 		}// execute()
@@ -16606,6 +16686,8 @@ public class GameActionUtil {
 		commands.put("Elvish_Champion_Other", Elvish_Champion_Other);
 		commands.put("Wizened_Cenn_Pump", Wizened_Cenn_Pump);
 		commands.put("Wizened_Cenn_Other", Wizened_Cenn_Other);
+		commands.put("Cemetery_Reaper_Pump", Cemetery_Reaper_Pump);
+		commands.put("Cemetery_Reaper_Other", Cemetery_Reaper_Other);
 		commands.put("Captain_of_the_Watch_Pump", Captain_of_the_Watch_Pump);
 		commands.put("Captain_of_the_Watch_Other", Captain_of_the_Watch_Other);
 		commands.put("Veteran_Swordsmith_Pump", Veteran_Swordsmith_Pump);

@@ -120,6 +120,20 @@ public class AllZoneUtil {
 	
 	//////////GRAVEYARD
 	
+
+	/**
+	 * gets a list of all cards owned by both players that have are currently in the graveyard
+	 * 
+	 * @return a CardList with all cards currently in a graveyard
+	 */
+	public static CardList getCardsInGraveyard() {
+		CardList cards = new CardList();
+		cards.add(getPlayerGraveyard(Constant.Player.Human));
+		cards.add(getPlayerGraveyard(Constant.Player.Computer));
+		return cards;
+	}
+	
+	
 	/**
 	 * gets all cards in given player's graveyard
 	 * 

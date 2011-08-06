@@ -16427,8 +16427,7 @@ public class CardFactory_Creatures {
                 }
                 
             };
-            ability.setDescription(cardName
-                    + " - B B B, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.");
+            ability.setDescription("B B B, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.");
             ability.setStackDescription(card
                     + "Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.");
             card.addSpellAbility(ability);
@@ -18024,6 +18023,53 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Cemetery Reaper")) {
+        	final Ability_Tap ability = new Ability_Tap(card, "2 B")
+        	{
+				private static final long serialVersionUID = 1067370853723993280L;
+
+				public void makeToken(Card c)
+				{
+					AllZone.GameAction.removeFromGame(c);
+            		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", card, "B", new String[] {
+                            "Creature", "Zombie"}, 2, 2, new String[] {""});
+				}
+				
+				public void resolve()
+        		{
+        			CardList list = AllZoneUtil.getCardsInGraveyard();
+        			list = list.getType("Creature");
+        			
+        			if(list.size() > 0) {
+                        if(card.getController().equals(Constant.Player.Human)) {
+                            Object o = AllZone.Display.getChoice("Pick creature to exile: ", list.toArray());
+                            if(o != null) {
+                            	Card c = (Card)o;
+                            	if (AllZone.GameAction.isCardInGrave(c))
+                            		makeToken(c);
+                            }
+                        } else {
+                            Card c = list.get(0);
+                            if (AllZone.GameAction.isCardInGrave(c))
+                        		makeToken(c);
+                        }
+                    }
+        		}
+				
+				public boolean canPlayAI()
+				{
+					//AI will only use this when there's creatures in human's graveyard:
+					CardList humanList = AllZoneUtil.getPlayerGraveyard(Constant.Player.Human);
+					return humanList.size()>0;
+				}
+        	};
+        	card.addSpellAbility(ability);
+        	ability.setDescription("2 B, tap: Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.");
+        	 ability.setStackDescription(card + "Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.");
+        
+    	}//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

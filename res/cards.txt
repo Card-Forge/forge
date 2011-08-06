@@ -1,3 +1,9 @@
+Cemetery Reaper
+1 B B
+Creature Zombie
+Other Zombie creatures you control get +1/+1.
+2/2
+
 Inspiration
 3 U
 Instant
@@ -56,6 +62,18 @@ Flying
 Protection from colored spells
 Annihilator 6
 When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
+
+Warp Artifact
+B B
+Enchantment Aura
+At the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.
+Enchant Artifact Curse
+
+Feedback
+2 U
+Enchantment Aura
+At the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.
+Enchant Enchantment Curse
 
 Blight
 B B
