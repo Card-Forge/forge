@@ -130,13 +130,15 @@ public class CardFactoryUtil {
     public static Card AI_getBestEnchantment(CardList list, final Card spell, boolean targeted) {
         CardList all = list;
         all = all.getType("Enchantment");
-        all = all.filter(new CardListFilter() {
+        if (targeted)
+        {
+        	all = all.filter(new CardListFilter() {
             
-            public boolean addCard(Card c) {
-                return CardFactoryUtil.canTarget(spell, c);
-            }
-            
-        });
+	            public boolean addCard(Card c) {
+	                return CardFactoryUtil.canTarget(spell, c);
+	            }            
+        	});
+        }
         if(all.size() == 0) {
             return null;
         }
