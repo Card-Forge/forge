@@ -2,8 +2,7 @@ Name:Rewind
 ManaCost:2 U U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 2 U U | Type$ Spell | SubAbility$ SVar=DBUntap | SpellDescription$ Counter target spell, 
-SVar:DBUntap:DB$Untap | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 4 | TgtPrompt$ Select up to four target lands | SpellDescription$ you may uptap up to four target lands.
+A:SP$Counter | Cost$ 2 U U | Type$ Spell | SubAbility$ YouUntapUpTo/4/Land | SpellDescription$ Counter target spell. Untap up to four lands.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rewind.jpg
 End
