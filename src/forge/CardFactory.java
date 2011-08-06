@@ -2365,7 +2365,7 @@ public class CardFactory implements NewConstants {
         	}
         }//spDamageAll
         
-        
+        /* Cards converted to AF_AB$Damage
         while(hasKeyword(card, "abDamage") != -1) {
             int n = hasKeyword(card, "abDamage");
             if(n != -1) {
@@ -2524,7 +2524,8 @@ public class CardFactory implements NewConstants {
                             }
                         }
                         
-                        if(abTgt.canTgtPlayer()/* || TgtOpp[0] == true */) {
+                        // if(abTgt.canTgtPlayer() || TgtOpp[0] == true) {
+                        if(abTgt.canTgtPlayer()) {
                             setTargetPlayer(AllZone.HumanPlayer);
                             return rr;
                         }
@@ -2578,7 +2579,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(abDamage);
             }
         }//abDamageTgt
-
+        */
         
         // Generic destroy target card
         /* Converted cards to AF_SP$Destroy
