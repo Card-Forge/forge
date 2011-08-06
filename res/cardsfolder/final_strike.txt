@@ -1,0 +1,10 @@
+Name:Final Strike
+ManaCost:2 B B
+Types:Sorcery
+Text:no text
+A:SP$DealDamage | Cost$ 2 B B Sac<1/Creature> | Tgt$ TgtOpp | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target opponent equal to the sacrificed creature's power.
+SVar:X:Sacrificed$CardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/final_strike.jpg
+End
