@@ -77,6 +77,7 @@ public class GameActionUtil {
 		upkeep_Leaf_Crowned_Elder();
 		upkeep_Ink_Dissolver();
 		upkeep_Squeaking_Pie_Grubfellows();
+		upkeep_Kithkin_Zephyrnaut();
 		upkeep_Debtors_Knell();
 		upkeep_Reya();
 		upkeep_Emeria();
@@ -7317,6 +7318,94 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Ink_Dissolver()
+    
+    
+    private static void upkeep_Kithkin_Zephyrnaut() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Kithkin Zephyrnaut");
+        
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        
+        if (kinship.size() == 0 || library.size() <= 0)
+            return;
+        
+        final String[] shareTypes = { "Kithkin", "Soldier" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantKithkinBuff = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card, Kithkin Zephyrnaut gets +2/+2 and ");
+                            question.append("gains flying and vigilance until end of turn?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantKithkinBuff = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantKithkinBuff = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    
+                    if (wantKithkinBuff) {
+                        k.addTempAttackBoost(2);
+                        k.addTempDefenseBoost(2);
+                        k.addExtrinsicKeyword("Flying");
+                        k.addExtrinsicKeyword("Vigilance");
+                        
+                        final Command untilEOT = new Command() {
+                            private static final long serialVersionUID = 213717084767008154L;
+
+                            public void execute() {
+                                k.addTempAttackBoost(-2);
+                                k.addTempDefenseBoost(-2);
+                                k.removeExtrinsicKeyword("Flying");
+                                k.removeExtrinsicKeyword("Vigilance");
+                            }
+                        };
+                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    }
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Kithkin Zephyrnaut - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Kithkin_Zephyrnaut()
     
     
     private static void upkeep_Leaf_Crowned_Elder() {

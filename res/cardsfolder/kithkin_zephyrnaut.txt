@@ -1,0 +1,9 @@
+Name:Kithkin Zephyrnaut
+ManaCost:2 W
+Types:Creature Kithkin Soldier
+Text:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Kithkin Zephyrnaut, you may reveal it. If you do, Kithkin Zephyrnaut gets +2/+2 and gains flying and vigilance until end of turn.
+PT:2/2
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_zephyrnaut.jpg
+End
