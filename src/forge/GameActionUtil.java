@@ -86,7 +86,7 @@ public class GameActionUtil {
 		upkeep_Bringer_of_the_White_Dawn();
 		upkeep_Murkfiend_Liege();
 		upkeep_Mirror_Sigil_Sergeant();
-		upkeep_Luminous_Angel();
+		//upkeep_Luminous_Angel();
 		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 		upkeep_Bitterblossom();
@@ -8585,7 +8585,7 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Mycoloth()
 	
-	
+	/*
 	private static void upkeep_Luminous_Angel() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -8637,7 +8637,8 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Luminous_Angel()
-
+	 */
+	
 	private static void upkeep_Verdant_Force() {
 		//final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
