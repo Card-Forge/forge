@@ -1,7 +1,7 @@
 Name:Eternal Warrior
 ManaCost:R
 Types:Enchantment Aura
-Text:Enchanted creature has vigilance.
+Text:no text
 K:Enchant creature
 K:enPump:Vigilance
 SVar:Rarity:Common

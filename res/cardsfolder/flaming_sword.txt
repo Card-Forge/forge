@@ -1,7 +1,7 @@
 Name:Flaming Sword
 ManaCost:1 R
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+0 and has first strike.
+Text:no text
 K:Flash
 K:Enchant creature
 K:enPump:+1/+0/First Strike

@@ -1,7 +1,7 @@
 Name:Fishliver Oil
 ManaCost:1 U
 Types:Enchantment Aura
-Text:Enchanted creature has islandwalk.
+Text:no text
 K:Enchant creature
 K:enPump:Islandwalk
 SVar:Rarity:Common

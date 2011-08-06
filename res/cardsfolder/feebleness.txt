@@ -1,7 +1,7 @@
 Name:Feebleness
 ManaCost:1 B
 Types:Enchantment Aura
-Text:Enchanted creature gets -2/-1.
+Text:no text
 K:Flash
 K:Enchant creature
 K:enPumpCurse:-2/-1

@@ -1,7 +1,7 @@
 Name:Enfeeblement
 ManaCost:B B
 Types:Enchantment Aura
-Text:Enchanted creature gets -2/-2.
+Text:no text
 K:Enchant creature
 K:enPumpCurse:-2/-2
 SVar:Rarity:Common
