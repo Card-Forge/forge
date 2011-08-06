@@ -3710,7 +3710,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public boolean canPlay() {
                     if (returnUpTo[0] || anyNumber[0]) return true;
-                    return getGraveyardList().size() >= numCardsToReturn;
+                    return getGraveyardList().size() >= numCardsToReturn && super.canPlay();
                 }
                 
                 @Override
