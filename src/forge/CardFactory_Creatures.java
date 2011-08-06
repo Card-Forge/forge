@@ -9192,11 +9192,12 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Leveler")) {
-        	/*
-        	 * When Leveler enters the battlefield, exile all cards from your library.
-        	 */
+            //
+            // When Leveler enters the battlefield, exile all cards from your library.
+            //
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -9206,9 +9207,9 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             Command intoPlay = new Command() {
-				private static final long serialVersionUID = -5462488189911159119L;
+                private static final long serialVersionUID = -5462488189911159119L;
 
-				public void execute() {
+                public void execute() {
                     AllZone.Stack.add(ability);
                 }
             };
@@ -9219,6 +9220,7 @@ public class CardFactory_Creatures {
             
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************
