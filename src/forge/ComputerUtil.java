@@ -726,11 +726,9 @@ public class ComputerUtil
   }
   static public Combat getBlockers()
   {
-    ComputerUtil_Block2 block = new ComputerUtil_Block2(
-      AllZone.Combat.getAttackers()   ,
-      AllZone.Computer_Play.getCards(), AllZone.ComputerPlayer.getLife());
+    CardList blockers = new CardList(AllZone.Computer_Play.getCards());
 
-    return block.getBlockers();
+    return ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
   }
   
   static void sortSpellAbilityByCost(SpellAbility sa[])

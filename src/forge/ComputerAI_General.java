@@ -198,16 +198,13 @@ public class ComputerAI_General implements Computer {
     public void declare_blockers() {
         CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
         
-        Combat combat = getCombat(AllZone.pwCombat.getAttackers(), blockers);
-        
-        combat.setPlaneswalker(AllZone.pwCombat.getPlaneswalker());
-        AllZone.pwCombat = combat;
+        AllZone.pwCombat = ComputerUtil_Block2.getBlockers(AllZone.pwCombat, blockers);
         
         CardList remove = AllZone.pwCombat.getAllBlockers();
         for(int i = 0; i < remove.size(); i++)
             blockers.remove(remove.get(i));
         
-        AllZone.Combat = getCombat(AllZone.Combat.getAttackers(), blockers);
+        AllZone.Combat = ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
         
         CombatUtil.showCombat();
         
@@ -218,7 +215,10 @@ public class ComputerAI_General implements Computer {
     	stackResponse();
     }
     
+    /*
     private Combat getCombat(Card[] attackers, CardList availableBlockers) {
+    	
+    	
         ComputerUtil_Block2 com = new ComputerUtil_Block2(attackers, availableBlockers.toArray(),
                 AllZone.ComputerPlayer.getLife());
         
@@ -226,8 +226,14 @@ public class ComputerAI_General implements Computer {
         c.setAttackingPlayer(AllZone.Combat.getAttackingPlayer());
         c.setDefendingPlayer(AllZone.Combat.getDefendingPlayer());
         
+    	
+    	CardList attacks = new CardList(attackers);
+    	
+    	Combat c = ComputerUtil_Block2.getBlockers(attacks,availableBlockers);
+        
         return c;
     }
+    */
     
     public void end_of_combat(){
     	stackResponse();

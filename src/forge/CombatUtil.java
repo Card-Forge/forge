@@ -92,7 +92,6 @@ public class CombatUtil {
 	            temp = blkCL.getType("Forest");
 	            if(!AllZoneUtil.isCardInPlay("Lord Magnus")
 	            		&& !AllZoneUtil.isCardInPlay("Deadfall")
-	            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
 	            		&& !temp.isEmpty()) return false;
 	        }
 	        
@@ -118,7 +117,7 @@ public class CombatUtil {
         return true;
 	}
         
-	
+	// can the blocker block the attacker?
     public static boolean canBlock(Card attacker, Card blocker) {
     	
         if(attacker == null || blocker == null) return false;
@@ -175,14 +174,10 @@ public class CombatUtil {
 					&& blocker.getKeyword().contains("CARDNAME can't block creatures with power greater than CARDNAME's power.")) return false;
         	if (attacker.getNetAttack() >= blocker.getNetDefense()
         			&& blocker.getKeyword().contains("CARDNAME can't block creatures with power equal to or greater than CARDNAME's toughness.")) return false;
-        	
-        		
-        	
+
         }// hasKeyword CARDNAME can't block creatures with power ...
         
         // CARDNAME can't be blocked by creatures with power ...
-        
-
         int powerLimit2[] = {0};
         int keywordPosition2 = 0;
         boolean hasKeyword2 = false;
@@ -436,7 +431,7 @@ public class CombatUtil {
     	{
     		public boolean addCard(Card c)
     		{
-    			return c.isUntapped() && canBlock(att, c) && (c.hasFirstStrike() || c.hasDoubleStrike() ) ;
+    			return canBlock(att, c) && (c.hasFirstStrike() || c.hasDoubleStrike() ) ;
     		}
     	});
     	
@@ -458,6 +453,84 @@ public class CombatUtil {
     	return i;
     }
     
+    public static int totalDamageOfBlockers(Card attacker, CardList defenders) {
+    	int damage = 0;
+    	
+    	for (Card defender:defenders) damage += dealsDamageAsBlocker(attacker, defender);
+    	
+    	return damage;
+    }
+    	
+    
+    // This calculates the amount of damage a blocker in a blockgang can deal to the attacker
+    public static int dealsDamageAsBlocker(Card attacker, Card defender) {
+    	
+    	if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) 
+			return 0;
+    
+    	int flankingMagnitude = 0;
+    	if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
+        
+    		flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
+
+    		if(flankingMagnitude >= defender.getNetDefense()) return 0;
+    		if(flankingMagnitude >= defender.getNetDefense() - defender.getDamage() && !defender.getKeyword().contains("Indestructible")) 
+        	return 0;
+        
+    	}//flanking
+        if(attacker.getKeyword().contains("Indestructible") && 
+        		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return 0;
+        
+        if(!CardFactoryUtil.canDamage(defender, attacker)) return 0;
+        
+        int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
+        
+        int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
+        
+        if(isDoranInPlay()) {
+            defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
+        }
+        
+        // consider static Damage Prevention
+        defenderDamage = attacker.staticDamagePrevention(defenderDamage, defender, true);
+        
+        if (defender.hasKeyword("Double Strike")) defenderDamage += attacker.staticDamagePrevention(defenderDamage, defender, true);
+        
+        return defenderDamage;
+    }
+    
+    // This calculates the amount of damage a blocker in a blockgang can take from the attacker
+    public static int totalShieldDamage(Card attacker, CardList defenders) {
+    
+    	int defenderDefense = 0;
+    	
+    	for (Card defender:defenders) defenderDefense += shieldDamage(attacker, defender);
+        
+        return defenderDefense;
+    }
+    
+    // This calculates the amount of damage a blocker in a blockgang can take from the attacker
+    public static int shieldDamage(Card attacker, Card defender) {
+    	
+    	if (!canDestroyBlocker(defender,attacker)) return 100;
+    
+    	int flankingMagnitude = 0;
+    	if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
+        
+    		flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
+
+    		if(flankingMagnitude >= defender.getNetDefense()) return 0;
+    		if(flankingMagnitude >= defender.getNetDefense() - defender.getDamage() && !defender.getKeyword().contains("Indestructible")) 
+        	return 0;
+        
+    	}//flanking
+        
+        int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
+        
+        int defenderDefense = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
+        
+        return defenderDefense;
+    }
     
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
