@@ -1,0 +1,9 @@
+Name:Wildheart Invoker
+ManaCost:2 G G
+Types:Creature Elf Shaman
+Text:no text
+PT:4/3
+K:abPumpTgtC 8:+5/+5/Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wildheart_invoker.jpg
+End

@@ -1,0 +1,9 @@
+Name:Wallop
+ManaCost:1 G
+Types:Sorcery
+Text:Destroy target creature with flying.
+K:spDestroyTgt:Creature.Blue+withFlying,Creature.Black+withFlying
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wallop.jpg
+End

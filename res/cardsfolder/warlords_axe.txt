@@ -1,0 +1,8 @@
+Name:Warlord's Axe
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature gets +3/+1.
+K:eqPump 4:+3/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/warlords_axe.jpg
+End

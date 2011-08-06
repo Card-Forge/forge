@@ -1,0 +1,10 @@
+Name:Wall of Swords
+ManaCost:3 W
+Types:Creature Wall
+Text:no text
+PT:3/5
+K:Flying
+K:Defender
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card132120.jpg
+End

@@ -1,0 +1,10 @@
+Name:Wall of Blossoms
+ManaCost:1 G
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+K:When CARDNAME enters the battlefield, draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5265.jpg
+End

@@ -1,0 +1,10 @@
+Name:Wall of Omens
+ManaCost:1 W
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+K:When CARDNAME enters the battlefield, draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_omens.jpg
+End

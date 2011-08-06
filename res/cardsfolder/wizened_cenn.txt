@@ -1,0 +1,9 @@
+Name:Wizened Cenn
+ManaCost:W W
+Types:Creature Kithkin Cleric
+Text:Other Kithkin creatures you control get +1/+1.
+PT:2/2
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_cenn.jpg
+End

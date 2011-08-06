@@ -1,0 +1,9 @@
+Name:Whipcorder
+ManaCost:W W
+Types:Creature Human Soldier Rebel
+Text:no text
+PT:2/2
+K:Morph:W
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/whipcorder.jpg
+End

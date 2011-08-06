@@ -1,0 +1,9 @@
+Name:Willow Faerie
+ManaCost:1 G
+Types:Creature Faerie
+Text:no text
+PT:1/2
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2982.jpg
+End

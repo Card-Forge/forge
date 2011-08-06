@@ -1,0 +1,9 @@
+Name:Wort, Boggart Auntie
+ManaCost:2 B R
+Types:Legendary Creature Goblin Shaman
+Text:At the beginning of your upkeep, you may return target Goblin card from your graveyard to your hand.
+PT:3/3
+K:Fear
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wort_boggart_auntie.jpg
+End

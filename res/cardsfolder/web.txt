@@ -1,0 +1,9 @@
+Name:Web
+ManaCost:G
+Types:Enchantment Aura
+Text:Enchanted creature gets +0/+2 and has reach.
+K:Enchant creature
+K:enPump:+0/+2/Reach
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/web.jpg
+End

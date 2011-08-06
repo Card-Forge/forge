@@ -1,0 +1,9 @@
+Name:Yavimaya Scion
+ManaCost:4 G
+Types:Creature Treefolk
+Text:no text
+PT:4/4
+K:Protection from artifacts
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_scion.jpg
+End

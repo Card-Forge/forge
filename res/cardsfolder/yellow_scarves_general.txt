@@ -1,0 +1,10 @@
+Name:Yellow Scarves General
+ManaCost:3 R
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:Horsemanship
+K:CARDNAME can't block.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yellow_scarves_general.jpg
+End

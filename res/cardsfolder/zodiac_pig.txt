@@ -1,0 +1,9 @@
+Name:Zodiac Pig
+ManaCost:3 B
+Types:Creature Boar
+Text:no text
+PT:3/3
+K:Swampwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10586.jpg
+End

@@ -1,0 +1,8 @@
+Name:Words of Wisdom
+ManaCost:1 U
+Types:Instant
+Text:no text
+K:spDrawCards:2:Drawback$OppDraw/1:You draw two cards, then each other player draws a card.:Words of Wisdom - draw 2 cards and opponent draws 1 card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31779.jpg
+End

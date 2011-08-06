@@ -1,0 +1,9 @@
+Name:Yotian Soldier
+ManaCost:3
+Types:Artifact Creature Soldier
+Text:no text
+PT:1/4
+K:Vigilance
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46026.jpg
+End

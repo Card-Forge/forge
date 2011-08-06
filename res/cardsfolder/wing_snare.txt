@@ -1,0 +1,8 @@
+Name:Wing Snare
+ManaCost:2 G
+Types:Sorcery
+Text:Destroy target creature with flying.
+K:spDestroyTgt:Creature.withFlying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_snare.jpg
+End

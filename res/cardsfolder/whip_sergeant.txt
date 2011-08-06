@@ -1,0 +1,9 @@
+Name:Whip Sergeant
+ManaCost:2 R
+Types:Creature Human Soldier
+Text:no text
+PT:2/1
+K:abPumpTgtC R:Haste
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_sergeant.jpg
+End

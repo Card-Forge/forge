@@ -1,0 +1,9 @@
+Name:Wild Griffin
+ManaCost:2 W
+Types:Creature Griffin
+Text:no text
+PT:2/2
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129557.jpg
+End

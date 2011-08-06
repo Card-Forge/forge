@@ -1,0 +1,10 @@
+Name:Wall of Razors
+ManaCost:1 R
+Types:Creature Wall
+Text:no text
+PT:4/1
+K:Defender
+K:First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_razors.jpg
+End

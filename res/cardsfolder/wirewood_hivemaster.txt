@@ -1,0 +1,8 @@
+Name:Wirewood Hivemaster
+ManaCost:1 G
+Types:Creature Elf
+Text:Whenever another nontoken Elf comes into play, you may put a 1/1 green Insect creature token into play.
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_hivemaster.jpg
+End

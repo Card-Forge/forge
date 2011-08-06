@@ -1,0 +1,10 @@
+Name:Wall of Bone
+ManaCost:2 B
+Types:Creature Skeleton Wall
+Text:no text
+PT:1/4
+K:Defender
+K:RegenerateMe:B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_bone.jpg
+End

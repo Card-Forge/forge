@@ -1,0 +1,7 @@
+Name:Windfall
+ManaCost:2 U
+Types:Sorcery
+Text:Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/windfall.jpg
+End

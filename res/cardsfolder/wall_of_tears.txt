@@ -1,0 +1,9 @@
+Name:Wall of Tears
+ManaCost:1 U
+Types:Creature Wall
+Text:Whenever Wall of Tears blocks a creature, return that creature to its owner's hand at end of combat.
+PT:0/4
+K:Defender
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tears.jpg
+End

@@ -1,0 +1,10 @@
+Name:Zhalfirin Knight
+ManaCost:2 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Flanking
+K:abPump W W:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_knight.jpg
+End

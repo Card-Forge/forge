@@ -1,0 +1,9 @@
+Name:Waning Wurm
+ManaCost:3 B
+Types:Creature Zombie Wurm
+Text:no text
+PT:7/6
+K:Vanishing:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/waning_wurm.jpg
+End

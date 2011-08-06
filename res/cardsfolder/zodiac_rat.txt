@@ -1,0 +1,9 @@
+Name:Zodiac Rat
+ManaCost:B
+Types:Creature Rat
+Text:no text
+PT:1/1
+K:Swampwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10564.jpg
+End

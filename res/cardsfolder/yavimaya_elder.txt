@@ -1,0 +1,8 @@
+Name:Yavimaya Elder
+ManaCost:1 G G
+Types:Creature Human Druid
+Text:When Yavimaya Elder is put into a graveyard from the battlefield, you may search your library for up to two basic land cards, reveal them, and put them into your hand. If you do, shuffle your library.
+PT:2/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_elder.jpg
+End

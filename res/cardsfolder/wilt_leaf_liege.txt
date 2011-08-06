@@ -1,0 +1,12 @@
+Name:Wilt-Leaf Liege
+ManaCost:1 GW GW GW
+Types:Creature Elf Knight
+Text:no text
+PT:4/4
+K:If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other white creatures you control get +1/+1.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wilt_leaf_liege.jpg
+End

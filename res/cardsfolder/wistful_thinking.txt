@@ -1,0 +1,9 @@
+Name:Wistful Thinking
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+K:spDrawCardsTgt:2:Drawback$TgtDiscard/4:Target player draws two cards, then discards four cards.:Wistful Thinking - Target player draws 2 cards, then discards 4 cards.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wistful_thinking.jpg
+End

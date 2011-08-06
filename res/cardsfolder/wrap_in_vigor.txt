@@ -1,0 +1,7 @@
+Name:Wrap in Vigor
+ManaCost:1 G
+Types:Instant
+Text:Regenerate each creature you control.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130331.jpg
+End

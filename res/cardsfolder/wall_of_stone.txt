@@ -1,0 +1,9 @@
+Name:Wall of Stone
+ManaCost:1 R R
+Types:Creature Wall
+Text:no text
+PT:0/8
+K:Defender
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_stone.jpg
+End

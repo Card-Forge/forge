@@ -1,0 +1,9 @@
+Name:Zephid's Embrace
+ManaCost:2 U U
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and has flying and shroud.
+K:Enchant creature
+K:enPump:+2/+2/Flying & Shroud
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/zephids_embrace.jpg
+End

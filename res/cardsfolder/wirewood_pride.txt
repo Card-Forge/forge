@@ -1,0 +1,9 @@
+Name:Wirewood Pride
+ManaCost:G
+Types:Instant
+Text:no text
+K:spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.:Wirewood Pride - Target creature get +X/+X until end of turn.
+K:SVar:X:Count$TypeOnBattlefield.Elf
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_pride.jpg
+End

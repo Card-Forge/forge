@@ -1,0 +1,7 @@
+Name:Winter Orb
+ManaCost:2
+Types:Artifact
+Text:As long as Winter Orb is untapped, players can't untap more than one land during their untap steps.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_orb.jpg
+End

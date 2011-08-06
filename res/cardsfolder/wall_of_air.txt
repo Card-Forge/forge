@@ -1,0 +1,10 @@
+Name:Wall of Air
+ManaCost:1 U U
+Types:Creature Wall
+Text:no text
+PT:1/5
+K:Flying
+K:Defender
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135274.jpg
+End

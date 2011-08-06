@@ -1,0 +1,10 @@
+Name:Wall of Spears
+ManaCost:3
+Types:Artifact Creature Wall
+Text:no text
+PT:2/3
+K:Defender
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_spears.jpg
+End

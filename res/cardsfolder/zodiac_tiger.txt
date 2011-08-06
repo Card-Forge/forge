@@ -1,0 +1,9 @@
+Name:Zodiac Tiger
+ManaCost:2 G G
+Types:Creature Cat
+Text:no text
+PT:3/4
+K:Forestwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10594.jpg
+End

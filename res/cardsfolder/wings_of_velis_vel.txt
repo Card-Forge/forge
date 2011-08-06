@@ -1,0 +1,8 @@
+Name:Wings of Velis Vel
+ManaCost:1 U
+Types:Tribal Instant Shapeshifter
+Text:Target creature becomes 4/4 and gains flying until end of turn.
+K:Changeling
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_velis_vel.jpg
+End

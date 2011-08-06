@@ -1,0 +1,9 @@
+Name:Wren's Run Packmaster
+ManaCost:3 G
+Types:Creature Elf Warrior
+Text:Champion an Elf.\r\nEach Wolf you control has deathtouch.
+PT:5/5
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg
+End

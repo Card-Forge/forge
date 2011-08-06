@@ -1,0 +1,8 @@
+Name:Wild Mongrel
+ManaCost:1 G
+Types:Creature Hound
+Text:(NOTE: " and becomes color of your choice." not implemented.)
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29777.jpg
+End

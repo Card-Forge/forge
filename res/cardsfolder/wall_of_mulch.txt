@@ -1,0 +1,9 @@
+Name:Wall of Mulch
+ManaCost:1 G
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_mulch.jpg
+End

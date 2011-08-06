@@ -1,0 +1,9 @@
+Name:Wei Strike Force
+ManaCost:2 B
+Types:Creature Human Soldier
+Text:no text
+PT:2/1
+K:Horsemanship
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_strike_force.jpg
+End

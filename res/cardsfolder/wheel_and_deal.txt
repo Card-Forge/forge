@@ -1,0 +1,9 @@
+Name:Wheel and Deal
+ManaCost:3 U
+Types:Instant
+Text:no text
+K:spDiscardOpp:Hand:0:Drawback$OppDraw/7:Any number of target opponents each discards his or her hand and draws seven cards.:Wheel and Deal - target player discards cards
+K:Draw a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_and_deal.jpg
+End

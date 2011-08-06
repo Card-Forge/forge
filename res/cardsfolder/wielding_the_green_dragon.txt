@@ -1,0 +1,8 @@
+Name:Wielding the Green Dragon
+ManaCost:1 G
+Types:Sorcery
+Text:no text
+K:spPumpTgt:+4/+4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wielding_the_green_dragon.jpg
+End

@@ -1,0 +1,8 @@
+Name:Weathered Wayfarer
+ManaCost:W
+Types:Creature Human Nomad Cleric
+Text:no text
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83311.jpg
+End

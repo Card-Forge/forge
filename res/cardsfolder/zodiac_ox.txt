@@ -1,0 +1,9 @@
+Name:Zodiac Ox
+ManaCost:3 G
+Types:Creature Ox
+Text:no text
+PT:3/3
+K:Swampwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10636.jpg
+End

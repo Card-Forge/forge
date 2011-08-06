@@ -1,0 +1,10 @@
+Name:Wall of Kelp
+ManaCost:U U
+Types:Creature Wall
+Text:no text
+PT:0/3
+K:Defender
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2959.jpg
+End

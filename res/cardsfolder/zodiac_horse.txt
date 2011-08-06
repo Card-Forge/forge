@@ -1,0 +1,9 @@
+Name:Zodiac Horse
+ManaCost:3 G
+Types:Creature Horse
+Text:no text
+PT:3/3
+K:Islandwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10598.jpg
+End

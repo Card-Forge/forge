@@ -1,0 +1,9 @@
+Name:Zodiac Monkey
+ManaCost:1 G
+Types:Creature Ape
+Text:no text
+PT:2/1
+K:Forestwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83237.jpg
+End

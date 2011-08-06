@@ -1,0 +1,10 @@
+Name:Wei Night Raiders
+ManaCost:2 B B
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:Horsemanship
+K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Wei Night Raiders deals damage to an opponent, that player discards a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_night_raiders.jpg
+End

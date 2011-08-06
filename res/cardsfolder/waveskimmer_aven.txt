@@ -1,0 +1,10 @@
+Name:Waveskimmer Aven
+ManaCost:2 G W U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/4
+K:Flying
+K:Exalted
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/waveskimmer_aven.jpg
+End

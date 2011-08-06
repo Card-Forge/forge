@@ -1,0 +1,10 @@
+Name:Wormwood Dryad
+ManaCost:2 G
+Types:Creature Dryad
+Text:no text
+PT:3/1
+K:abPump G:Forestwalk:Drawback$DamageYou/1:Wormwood Dryad gains forestwalk until end of turn and deals 1 damage to you.
+K:abPump B:Swampwalk:Drawback$DamageYou/1:Wormwood Dryad gains swampwalk until end of turn and deals 1 damage to you.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_dryad.jpg
+End

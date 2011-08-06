@@ -1,0 +1,10 @@
+Name:Wall of Pine Needles
+ManaCost:3 G
+Types:Creature Plant Wall
+Text:no text
+PT:3/3
+K:Defender
+K:RegenerateMe:G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_pine_needles.jpg
+End

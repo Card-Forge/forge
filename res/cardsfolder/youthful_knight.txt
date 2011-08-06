@@ -1,0 +1,9 @@
+Name:Youthful Knight
+ManaCost:1 W
+Types:Creature Human Knight
+Text:no text
+PT:2/1
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/youthful_knight.jpg
+End

@@ -1,0 +1,9 @@
+Name:Warren Instigator
+ManaCost:R R
+Types:Creature Goblin
+Text:Whenever Warren Instigator deals damage to a player, you may put a Goblin creature card from your hand onto the battlefield.
+PT:1/1
+K:Double Strike
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_instigator.jpg
+End

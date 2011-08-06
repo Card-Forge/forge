@@ -1,0 +1,9 @@
+Name:Yavimaya Ancients
+ManaCost:3 G G
+Types:Creature Treefolk
+Text:no text
+PT:2/7
+K:abPump G:+1/-2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_ancients.jpg
+End

@@ -1,0 +1,9 @@
+Name:Woodland Changeling
+ManaCost:1 G
+Types:Creature Shapeshifter
+Text:no text
+PT:2/2
+K:Changeling
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_changeling.jpg
+End

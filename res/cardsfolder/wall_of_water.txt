@@ -1,0 +1,10 @@
+Name:Wall of Water
+ManaCost:1 U U
+Types:Creature Wall
+Text:no text
+PT:0/5
+K:Defender
+K:abPump U:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_water.jpg
+End

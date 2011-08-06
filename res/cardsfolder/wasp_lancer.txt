@@ -1,0 +1,9 @@
+Name:Wasp Lancer
+ManaCost:UB UB UB
+Types:Creature Faerie Soldier
+Text:no text
+PT:3/2
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wasp_lancer.jpg
+End

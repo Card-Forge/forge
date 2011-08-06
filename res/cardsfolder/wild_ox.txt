@@ -1,0 +1,9 @@
+Name:Wild Ox
+ManaCost:3 G
+Types:Creature Ox
+Text:no text
+PT:3/3
+K:Swampwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20227.jpg
+End

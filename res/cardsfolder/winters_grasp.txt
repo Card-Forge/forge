@@ -1,0 +1,8 @@
+Name:Winter's Grasp
+ManaCost:1 G G
+Types:Sorcery
+Text:Destroy target land.
+K:spDestroyTgt:Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/winters_grasp.jpg
+End

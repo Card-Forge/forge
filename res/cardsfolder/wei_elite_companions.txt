@@ -1,0 +1,9 @@
+Name:Wei Elite Companions
+ManaCost:4 B
+Types:Creature Human Soldier
+Text:no text
+PT:3/3
+K:Horsemanship
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_elite_companions.jpg
+End

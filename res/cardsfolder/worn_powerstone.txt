@@ -1,0 +1,10 @@
+Name:Worn Powerstone
+ManaCost:3
+Types:Artifact
+Text:no text
+K:Comes into play tapped.
+K:tap: add 2
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/worn_powerstone.jpg
+End

@@ -1,0 +1,10 @@
+Name:Wall of Opposition
+ManaCost:3 R R
+Types:Creature Wall
+Text:no text
+PT:0/6
+K:Defender
+K:abPump 1:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_opposition.jpg
+End

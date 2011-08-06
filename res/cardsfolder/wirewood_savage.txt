@@ -1,0 +1,9 @@
+Name:Wirewood Savage
+ManaCost:2 G
+Types:Creature Elf
+Text:no text
+PT:2/2
+K:WheneverKeyword:EntersBattleField:Type/Beast:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a Beast enters the battlefield, you may draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_savage.jpg
+End

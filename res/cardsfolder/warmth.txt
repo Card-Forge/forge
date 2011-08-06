@@ -1,0 +1,9 @@
+Name:Warmth
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:CastSpell/Opponent:Color/red:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a red spell, you gain 2 life.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/warmth.jpg
+End

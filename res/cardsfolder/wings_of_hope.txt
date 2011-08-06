@@ -1,0 +1,9 @@
+Name:Wings of Hope
+ManaCost:W U
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+3 and has flying.
+K:Enchant creature
+K:enPump:+1/+3/Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_hope.jpg
+End

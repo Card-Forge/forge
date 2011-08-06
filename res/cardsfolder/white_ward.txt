@@ -1,0 +1,9 @@
+Name:White Ward
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature has protection from white. This effect doesn't remove White Ward.
+K:Enchant creature
+K:enPump:Protection from white
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/white_ward.jpg
+End

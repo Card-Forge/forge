@@ -1,0 +1,10 @@
+Name:Whip-Spine Drake
+ManaCost:3 U U
+Types:Creature Drake
+Text:no text
+PT:3/3
+K:Flying
+K:Morph:2 W
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_spine_drake.jpg
+End

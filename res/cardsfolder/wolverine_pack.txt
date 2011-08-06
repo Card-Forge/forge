@@ -1,0 +1,9 @@
+Name:Wolverine Pack
+ManaCost:2 G G
+Types:Creature Wolverine
+Text:no text
+PT:2/4
+K:Rampage 2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wolverine_pack.jpg
+End

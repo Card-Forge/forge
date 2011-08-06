@@ -1,0 +1,8 @@
+Name:Whirlwind
+ManaCost:2 G G
+Types:Sorcery
+Text:Destroy all creatures with flying.
+K:spDestroyAll:Creature.withFlying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlwind.jpg
+End

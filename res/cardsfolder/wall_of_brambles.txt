@@ -1,0 +1,10 @@
+Name:Wall of Brambles
+ManaCost:2 G
+Types:Creature Plant Wall
+Text:no text
+PT:2/3
+K:Defender
+K:RegenerateMe:G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_brambles.jpg
+End

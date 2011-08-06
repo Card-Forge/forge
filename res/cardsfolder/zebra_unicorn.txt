@@ -1,0 +1,9 @@
+Name:Zebra Unicorn
+ManaCost:2 G W
+Types:Creature Unicorn
+Text:no text
+PT:2/2
+K:Lifelink
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/zebra_unicorn.jpg
+End

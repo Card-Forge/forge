@@ -1,0 +1,9 @@
+Name:Winding Wurm
+ManaCost:4 G
+Types:Creature Wurm
+Text:no text
+PT:6/6
+K:Echo:4 G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/winding_wurm.jpg
+End

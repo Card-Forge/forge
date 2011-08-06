@@ -1,0 +1,11 @@
+Name:Woodfall Primus
+ManaCost:5 G G G
+Types:Creature Treefolk Shaman
+Text:When Woodfall Primus enters the battlefield, destroy target noncreature permanent.
+PT:6/6
+K:Trample
+K:etbDestroyTgt:Permanent.nonCreature
+K:Persist
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/woodfall_primus.jpg
+End

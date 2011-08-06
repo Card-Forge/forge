@@ -1,0 +1,9 @@
+Name:Wayward Soul
+ManaCost:2 U U
+Types:Creature Spirit
+Text:no text
+PT:3/2
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card5273.jpg
+End

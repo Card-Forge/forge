@@ -1,0 +1,10 @@
+Name:War-Spike Changeling
+ManaCost:3 R
+Types:Creature Shapeshifter
+Text:no text
+PT:3/3
+K:Changeling
+K:abPump R:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/war_spike_changeling.jpg
+End

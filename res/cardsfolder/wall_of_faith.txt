@@ -1,0 +1,10 @@
+Name:Wall of Faith
+ManaCost:3 W
+Types:Creature Wall
+Text:no text
+PT:0/5
+K:Defender
+K:abPump W:+0/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_faith.jpg
+End

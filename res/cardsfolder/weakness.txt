@@ -1,0 +1,9 @@
+Name:Weakness
+ManaCost:B
+Types:Enchantment Aura
+Text:Enchanted creature gets -2/-1.
+K:Enchant creature
+K:enPumpCurse:-2/-1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/weakness.jpg
+End

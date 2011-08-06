@@ -1,0 +1,8 @@
+Name:Water Elemental
+ManaCost:3 U U
+Types:Creature Elemental
+Text:no text
+PT:5/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21040.jpg
+End

@@ -1,0 +1,7 @@
+Name:Wildfire
+ManaCost:4 R R
+Types:Sorcery
+Text:Each player sacrifices four lands. Wildfire deals 4 damage to each creature.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire.jpg
+End
