@@ -5234,6 +5234,7 @@ res/cardsfolder/release_the_ants.txt svneol=native#text/plain
 res/cardsfolder/relentless_rats.txt -text svneol=native#text/plain
 res/cardsfolder/relic_barrier.txt -text svneol=native#text/plain
 res/cardsfolder/relic_crush.txt -text svneol=native#text/plain
+res/cardsfolder/relic_of_progenitus.txt -text svneol=native#text/plain
 res/cardsfolder/relic_putrescence.txt -text svneol=native#text/plain
 res/cardsfolder/reliquary_monk.txt svneol=native#text/plain
 res/cardsfolder/reliquary_tower.txt -text svneol=native#text/plain
