@@ -1,3 +1,70 @@
+Keldon Marauders
+1 R
+Creature Human Warrior
+no text
+3/3
+Vanishing:2
+WheneverKeyword:EntersBattleField:Self:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Keldon Marauders enters the battlefield, it deals 1 damage to target player.
+WheneverKeyword:LeavesBattleField:Self:Any:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Keldon Marauders leaves the battlefield, it deals 1 damage to target player.
+
+Keldon Champion
+2 R R
+Creature Human Barbarian
+no text
+3/2
+Haste
+Echo:2 R R
+WheneverKeyword:EntersBattleField:Self:Play:Damage/3:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Keldon Champion enters the battlefield, it deals 3 damage to target player.
+
+Sunrise Sovereign
+5 R
+Creature Giant Warrior
+no text
+5/5
+StaticEffect:Play:Permanents you Control:PTBonus/2/2!Keyword/Trample:Type.Creature!Type.Giant!NotSelf:Other Giant creatures you control get +2/+2 and have trample.
+
+Bloodmark Mentor
+1 R
+Creature Goblin Warrior
+no text
+1/1
+StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Color.red:Red creatures you control have first strike.
+
+Kobold Drill Sergeant
+1 R
+Creature Kobold Soldier
+no text
+1/2
+StaticEffect:Play:Permanents you Control:PTBonus/0/1!Keyword/Trample:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +0/+1 and have trample.
+
+Kobold Taskmaster
+1 R
+Creature Kobold
+no text
+1/2
+StaticEffect:Play:Permanents you Control:PTBonus/1/0:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +1/+0.
+
+Rage Reflection
+4 R R
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Double Strike:Type.Creature:Creatures you control have double strike.
+
+Boartusk Liege
+1 RG RG RG
+Creature Goblin Knight
+no text
+3/4
+Trample
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.red!NotSelf:Other red creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
+
+Furious Assault
+2 R
+Enchantment
+no text
+WheneverKeyword:CastSpell/Controller:Type/Creature:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, Furious Assault deals 1 damage to target player.
+
 Day of Destiny
 3 W
 Legendary Enchantment
@@ -171,7 +238,7 @@ Suspend:4:1 G
 
 Reckless One
 3 R
-Creature  Goblin Avatar
+Creature Goblin Avatar
 no text
 1/1
 Haste

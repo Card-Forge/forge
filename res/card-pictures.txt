@@ -38,6 +38,15 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+keldon_marauders.jpg			http://www.wizards.com/global/images/magic/general/keldon_marauders.jpg
+keldon_champion.jpg			http://www.wizards.com/global/images/magic/general/keldon_champion.jpg
+sunrise_sovereign.jpg			http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
+bloodmark_mentor.jpg			http://www.wizards.com/global/images/magic/general/bloodmark_mentor.jpg
+kobold_drill_sergeant.jpg		http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
+kobold_taskmaster.jpg			http://www.wizards.com/global/images/magic/general/kobold_taskmaster.jpg
+rage_reflection.jpg			http://www.wizards.com/global/images/magic/general/rage_reflection.jpg
+boartusk_liege.jpg			http://www.wizards.com/global/images/magic/general/boartusk_liege.jpg
+furious_assault.jpg			http://www.wizards.com/global/images/magic/general/furious_assault.jpg
 day_of_destiny.jpg			http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
 oathsworn_giant.jpg			http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
 hannas_custody.jpg			http://www.wizards.com/global/images/magic/general/hannas_custody.jpg
