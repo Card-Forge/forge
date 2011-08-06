@@ -1,0 +1,10 @@
+Name:Folk Medicine
+ManaCost:2 G
+Types:Instant
+Text:no text
+K:spGainLife:X:You gain 1 life for each creature you control.:Folk Medicine - player gains X life
+SVar:X:Count$TypeYouCtrl.Creature
+K:Flashback:1 W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_medicine.jpg
+End
