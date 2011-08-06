@@ -257,6 +257,12 @@ public class CombatUtil {
         
         if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
+
+        if (AllZone.Combat.getAllBlockers().size() > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
+        	return false;
+        
+        if (AllZone.Combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
+        	return false;
         
         CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
         if (kulrath.size() > 0)
@@ -344,12 +350,22 @@ public class CombatUtil {
         }
         
         if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
-                || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) || c.getKeyword().contains("CARDNAME can't attack.")
+                || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) 
+                || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")
                 || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
         	return false;
         
         if (c.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
+        	return false;
+        
+        if (AllZone.Combat.getAttackers().length > 1 && AllZoneUtil.isCardInPlay("Crawlspace",c.getController().getOpponent()))
+        	return false;
+        
+        if (AllZone.Combat.getAttackers().length > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
+        	return false;
+        
+        if (AllZone.Combat.getAttackers().length > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
         	return false;
         
         if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
