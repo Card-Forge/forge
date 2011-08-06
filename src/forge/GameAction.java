@@ -2248,12 +2248,22 @@ public class GameAction {
 
         for (Card c : human)
         {
+        	for(Trigger trig : c.getTriggers())
+            {
+            	AllZone.TriggerHandler.registerTrigger(trig);
+            }
+        	
         	AllZone.Human_Battlefield.add(c);
         	c.setSickness(true);
         }
          
         for (Card c: computer)
         {
+        	for(Trigger trig : c.getTriggers())
+            {
+            	AllZone.TriggerHandler.registerTrigger(trig);
+            }
+        	
         	AllZone.Computer_Battlefield.add(c);
         	c.setSickness(true);
         }
