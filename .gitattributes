@@ -5757,6 +5757,7 @@ res/cardsfolder/stoic_angel.txt -text svneol=native#text/plain
 res/cardsfolder/stoic_champion.txt -text svneol=native#text/plain
 res/cardsfolder/stoic_rebuttal.txt svneol=native#text/plain
 res/cardsfolder/stolen_grain.txt -text svneol=native#text/plain
+res/cardsfolder/stomp_and_howl.txt svneol=native#text/plain
 res/cardsfolder/stomper_cub.txt -text svneol=native#text/plain
 res/cardsfolder/stomping_ground.txt -text svneol=native#text/plain
 res/cardsfolder/stone_calendar.txt -text svneol=native#text/plain
