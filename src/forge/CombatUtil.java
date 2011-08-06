@@ -600,7 +600,7 @@ public class CombatUtil {
         //if (AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers))
         if( /*AllZone.Phase.getPhase().equals("Declare Blockers") || */
         AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
-            if (!c.getCreatureAttackedThisTurn())
+            if (!c.getCheckedPropagandaThisTurn())
             {
 	            String cost = CardFactoryUtil.getPropagandaCost(c);
 	            if(!cost.equals("0")) {
@@ -644,7 +644,7 @@ public class CombatUtil {
 	                }
 	            }
 	        }
-            c.setCreatureAttackedThisTurn(true);
+            c.setCheckedPropagandaThisTurn(true);
         }
         return canAttack[0];
     }

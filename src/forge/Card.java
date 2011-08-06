@@ -39,6 +39,7 @@ public class Card extends MyObservable {
     private boolean                      tapped;
     private boolean                      sickness                          = true;                              //summoning sickness
     private boolean                      token                             = false;
+    private boolean 					 checkedPropagandaThisTurn		   = false;
     private boolean                      creatureAttackedThisTurn          = false;
     private boolean                      creatureBlockedThisTurn           = false;
     private boolean                      creatureGotBlockedThisTurn        = false;
@@ -147,6 +148,16 @@ public class Card extends MyObservable {
     }
     
     //***************/
+    
+    public void setCheckedPropagandaThisTurn(boolean b)
+    {
+    	checkedPropagandaThisTurn = b;
+    }
+    
+    public boolean getCheckedPropagandaThisTurn()
+    {
+    	return checkedPropagandaThisTurn;
+    }
     
     //used to see if an attacking creature with a triggering attack ability triggered this turn:
     public void setCreatureAttackedThisTurn(boolean b) {

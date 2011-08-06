@@ -2593,6 +2593,7 @@ public class GameActionUtil {
         
         for(int i = 0; i < list.size(); i++) {
             Card c = list.get(i);
+            if(c.getCheckedPropagandaThisTurn()) c.setCheckedPropagandaThisTurn(false);
             if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
             if(c.getCreatureBlockedThisTurn()) c.setCreatureBlockedThisTurn(false);
             
