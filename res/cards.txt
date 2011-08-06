@@ -1,3 +1,43 @@
+Sire of the Storm
+4 U U
+Creature Spirit 
+no text
+3/3
+Flying
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may draw a card.
+
+Merchant Ship
+U
+Creature Human
+no text
+0/2
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice CARDNAME.
+WheneverKeyword:isUnblocked:Self:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever Merchant Ship attacks and isn't blocked, you gain 2 life.
+
+Surveilling Sprite
+1 U
+Creature Faerie Rogue
+no text
+1/1
+Flying
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:When Surveilling Sprite is put into a graveyard from the battlefield, you may draw a card.
+
+Merfolk Seer
+2 U
+Creature Merfolk Wizard
+no text
+2/2
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1 U:No Special Condition:When Merfolk Seer is put into a graveyard from the battlefield, you may pay {1}{U}. If you do, draw a card.
+
+Kingfisher
+3 U
+Creature Bird
+no text
+2/2
+Flying
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Kingfisher is put into a graveyard from the battlefield, draw a card.
+
 Brass Gnat
 1
 Artifact Creature Insect

@@ -38,7 +38,12 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
-brass_gnat.jpg              	 http://www.wizards.com/global/images/magic/general/brass_gnat.jpg
+surveilling_sprite.jpg              	http://www.wizards.com/global/images/magic/general/surveilling_sprite.jpg
+merfolk_seer.jpg                  	http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
+kingfisher.jpg				http://www.wizards.com/global/images/magic/general/kingfisher.jpg
+sire_of_the_storm.jpg			http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg
+merchant_ship.jpg              		http://www.wizards.com/global/images/magic/general/merchant_ship.jpg
+brass_gnat.jpg              	 	http://www.wizards.com/global/images/magic/general/brass_gnat.jpg
 brass_man.jpg                  		http://www.wizards.com/global/images/magic/general/brass_man.jpg
 goblin_dirigible.jpg			http://www.wizards.com/global/images/magic/general/goblin_dirigible.jpg
 ajanis_mantra.jpg			http://www.wizards.com/global/images/magic/general/ajanis_mantra.jpg

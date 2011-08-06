@@ -537,6 +537,7 @@ Marisi's Twinclaws
 Mask of Riddles
 Megrim
 Melesse Spirit
+Merchant Ship
 Merrow Harbinger
 Messenger Falcons
 Might Sliver
@@ -739,6 +740,7 @@ Silkenfist Order
 Silver Erne
 Silver Knight
 Sir Shandlar of Eberyn
+Sire of the Storm
 Sivitri Scarzam
 Skarrg, the Rage Pits
 Skeletal Wurm

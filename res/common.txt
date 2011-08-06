@@ -735,6 +735,7 @@ Khalni Garden
 Khalni Heart Expedition
 Kindle
 Kindled Fury
+Kingfisher
 Kird Ape
 Kitesail
 Kitsune Blademaster
@@ -842,6 +843,7 @@ Meng Huo's Horde
 Merchant of Secrets
 Merfolk Looter
 Merfolk of the Pearl Trident
+Merfolk Seer
 Merrow Levitator
 Mesa Falcon
 Metallic Sliver
@@ -1354,6 +1356,7 @@ Surging Flame
 Surging Might
 Surging Sentinels
 Surrakar Marauder
+Surveilling Sprite
 Swamp Mosquito
 Sylvan Bounty
 Sylvan Ranger
