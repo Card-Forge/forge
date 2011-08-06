@@ -18,7 +18,115 @@ class CardFactory_Equipment {
     public static Card getCard(final Card card, String cardName, String owner) {
         
         //*************** START *********** START **************************
-        if(cardName.equals("Lightning Greaves")) {
+        if(cardName.equals("Skullclamp")) {
+            final Ability equip = new Ability(card, "1") {
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        if(card.isEquipping()) {
+                            Card crd = card.getEquipping().get(0);
+                            if(crd.equals(getTargetCard())) return;
+                            
+                            card.unEquipCard(crd);
+                        }
+                        card.equipCard(getTargetCard());
+                    }
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.Phase.getActivePlayer().equals(card.getController())
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2"));
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0 && !card.isEquipping();
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(target);
+                }
+                
+                CardList getCreature() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                                    && CardFactoryUtil.canTarget(card, c)
+                                    && (!c.getKeyword().contains("Defender"));
+                        }
+                    });
+                    return list;
+                }//getCreature()
+                
+            };//equip ability
+            
+
+            Command onEquip = new Command() {
+                private static final long serialVersionUID = 277714373478367657L;
+                
+                public void execute() {
+                    if(card.isEquipping()) {
+                        Card crd = card.getEquipping().get(0);
+                        
+                        crd.addSemiPermanentAttackBoost(1);
+                        crd.addSemiPermanentDefenseBoost(-1);
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEquip = new Command() {
+                
+                private static final long serialVersionUID = 6496501799243208207L;
+                
+                public void execute() {
+                    if(card.isEquipping()) {
+                        Card crd = card.getEquipping().get(0);
+                        
+                        crd.addSemiPermanentAttackBoost(-1);
+                        crd.addSemiPermanentDefenseBoost(1);
+                    }
+                    
+                }//execute()
+            };//Command
+            
+
+            Input runtime = new Input() {
+                private static final long serialVersionUID = -5844375382897176476L;
+                
+                @Override
+                public void showMessage() {
+                    //get all creatures you control
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list,
+                            "Select target creature to equip", true, false));
+                }
+            };//Input
+            
+            equip.setBeforePayMana(runtime);
+            
+            equip.setDescription("Equip: 1");
+            card.addSpellAbility(equip);
+            
+            card.addEquipCommand(onEquip);
+            card.addUnEquipCommand(onUnEquip);
+            
+        } //*************** END ************ END **************************
+    	
+        
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lightning Greaves")) {
             final Ability equip = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -123,7 +231,9 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
             
         } //*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Loxodon Warhammer")) {
             final Ability equip = new Ability(card, "3") {
@@ -233,7 +343,7 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
             
         } //*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
@@ -453,114 +563,6 @@ class CardFactory_Equipment {
             
         } //*************** END ************ END **************************
 */
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Skullclamp")) {
-            final Ability equip = new Ability(card, "1") {
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
-                            Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
-                            
-                            card.unEquipCard(crd);
-                        }
-                        card.equipCard(getTargetCard());
-                    }
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2"));
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(target);
-                }
-                
-                CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
-                                    && CardFactoryUtil.canTarget(card, c)
-                                    && (!c.getKeyword().contains("Defender"));
-                        }
-                    });
-                    return list;
-                }//getCreature()
-                
-            };//equip ability
-            
-
-            Command onEquip = new Command() {
-                private static final long serialVersionUID = 277714373478367657L;
-                
-                public void execute() {
-                    if(card.isEquipping()) {
-                        Card crd = card.getEquipping().get(0);
-                        
-                        crd.addSemiPermanentAttackBoost(1);
-                        crd.addSemiPermanentDefenseBoost(-1);
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEquip = new Command() {
-                
-                private static final long serialVersionUID = 6496501799243208207L;
-                
-                public void execute() {
-                    if(card.isEquipping()) {
-                        Card crd = card.getEquipping().get(0);
-                        
-                        crd.addSemiPermanentAttackBoost(-1);
-                        crd.addSemiPermanentDefenseBoost(1);
-                    }
-                    
-                }//execute()
-            };//Command
-            
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -5844375382897176476L;
-                
-                @Override
-                public void showMessage() {
-                    //get all creatures you control
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list,
-                            "Select target creature to equip", true, false));
-                }
-            };//Input
-            
-            equip.setBeforePayMana(runtime);
-            
-            equip.setDescription("Equip: 1");
-            card.addSpellAbility(equip);
-            
-            card.addEquipCommand(onEquip);
-            card.addUnEquipCommand(onUnEquip);
-            
-        } //*************** END ************ END **************************
-        
         
 /*
         //*************** START *********** START **************************

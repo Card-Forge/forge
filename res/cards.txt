@@ -7737,11 +7737,13 @@ Loxodon Warhammer
 3
 Artifact Equipment
 Equipped creature gets +3/+0 and has lifelink and trample.
+VanillaEquipment:3:0:3:Trample:Lifelink:none
 
 Lightning Greaves
 2
 Artifact Equipment
 Equipped creature has haste and shroud.
+VanillaEquipment:0:0:0:Haste:Shroud:none
 
 Behemoth Sledge
 1 G W
