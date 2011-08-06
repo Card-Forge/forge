@@ -2,7 +2,7 @@ Name:Night's Whisper
 ManaCost:1 B
 Types:Sorcery
 Text:no text
-K:spDrawCards:2:Drawback$YouLoseLife/2:You draw two cards and you lose 2 life.:Night's Whisper - draw 2 cards and lose 2 life.
+A:SP$Draw | Cost$ 1 B | NumCards$ 2 | SpellDescription$ You draw two cards and you lose 2 life. | SubAbility$ YouLoseLife/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51178.jpg
 End

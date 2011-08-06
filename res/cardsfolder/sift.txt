@@ -2,7 +2,7 @@ Name:Sift
 ManaCost:3 U
 Types:Sorcery
 Text:no text
-K:spDrawCards:3:Drawback$YouDiscard/1:Draw three cards, then discard a card.:Sift - Draw 3 cards, then discard 1 card.
+A:SP$Draw | Cost$ 3 U | NumCards$ 3 | SpellDescription$ Draw three cards, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sift.jpg
 End
