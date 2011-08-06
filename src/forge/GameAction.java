@@ -458,6 +458,9 @@ public class GameAction {
     	if (AllZone.Stack.getResolving()) 
     		return;
     	
+    	boolean refreeze = AllZone.Stack.isFrozen();
+    	AllZone.Stack.setFrozen(true);
+    	
         JFrame frame = (JFrame) AllZone.Display;
         if(!frame.isDisplayable()) return;
 
@@ -559,6 +562,9 @@ public class GameAction {
         
         destroyLegendaryCreatures();
         destroyPlaneswalkers();
+        
+        if (!refreeze)
+        	AllZone.Stack.unfreezeStack();
     }//checkStateEffects()
     
 
@@ -2060,18 +2066,10 @@ public class GameAction {
         
         boolean persist = (c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0);
         
-        if(c.isEquipped()){	// when equipped creature goes to the grave here.
-        	// Deathrender & Oathkeeper, Takeno's Daisho have similar triggers to Skullclamp
-        	skullClamp_destroy(c);
-        	c.unEquipAllCards();
-        }
         //tokens don't go into the graveyard
         //TODO: must change this if any cards have effects that trigger "when creatures go to the graveyard"
         //resets the card, untaps the card, removes anything "extra", resets attack and defense
-        
-        
-        
-        
+
         Card newCard = moveToGraveyard(c);
         
         // Destroy needs to be called with Last Known Information

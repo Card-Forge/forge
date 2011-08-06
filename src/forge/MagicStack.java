@@ -19,6 +19,14 @@ public class MagicStack extends MyObservable {
 	private Object ComputerSpellCount;
 	private Object ComputerCreatureSpellCount;
 
+	public boolean isFrozen() {
+		return frozen;
+	}
+
+	public void setFrozen(boolean frozen) {
+		this.frozen = frozen;
+	}
+
 	public void reset() {
 		stack.clear();
 		frozen = false;
@@ -70,12 +78,14 @@ public class MagicStack extends MyObservable {
 
 	public void unfreezeStack() {
 		frozen = false;
+		boolean checkState = !frozenStack.isEmpty();
 		while (!frozenStack.isEmpty()) {
 			SpellAbility sa = frozenStack.get(0);
 			frozenStack.remove(0);
 			this.add(sa);
 		}
-		AllZone.GameAction.checkStateEffects();
+		if (checkState)
+			AllZone.GameAction.checkStateEffects();
 	}
 
 	public void clearFrozen() {
