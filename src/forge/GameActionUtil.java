@@ -11764,11 +11764,6 @@ public class GameActionUtil {
 		}
 
 		final void removeMana(Card c) {
-
-			/*
-                                                              for (int i = 0; i < keyword.length; i++)
-                                                              	c.removeExtrinsicKeyword(keyword[i]);
-			 */
 			c.removeAllExtrinsicManaAbilities();
 		}
 
@@ -11791,8 +11786,7 @@ public class GameActionUtil {
 				// a
 				// cheat
 			{
-				CardList creature = new CardList(
-						zone[outer].getCards());
+				CardList creature = new CardList(zone[outer].getCards());
 				creature = creature.getType("Land");
 
 				for(int i = 0; i < creature.size(); i++) {
@@ -11808,20 +11802,15 @@ public class GameActionUtil {
 	
 	public static Command Gemhide_Sliver              = new Command() {
 		private static final long serialVersionUID   = -2941784982910968772L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		String[]                  keyword            = {
-				"tap: add B", "tap: add W", "tap: add G", "tap: add U", "tap: add R"                       };
+		
+		CardList gloriousAnthemList = new CardList();
+		String[] keyword = {"tap: add B", "tap: add W", "tap: add G", "tap: add U", "tap: add R"};
 
 		final void addMana(Card c) {
 
 			for(int i = 0; i < keyword.length; i++) {
-				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(
-						keyword[i])) {
-					//c.addExtrinsicKeyword(keyword[i]);
-					SpellAbility mana = new Ability_Mana(c,
-							keyword[i]) {
+				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(keyword[i])) {
+					SpellAbility mana = new Ability_Mana(c, keyword[i]) {
 						private static final long serialVersionUID = -8909660504657778172L;
 					};
 					mana.setType("Extrinsic");
@@ -11831,10 +11820,6 @@ public class GameActionUtil {
 		}
 
 		final void removeMana(Card c) {
-			/*
-                                                              for (int i = 0; i < keyword.length; i++)
-                                                              	c.removeExtrinsicKeyword(keyword[i]);
-			 */
 			c.removeAllExtrinsicManaAbilities();
 		}
 
@@ -11849,14 +11834,8 @@ public class GameActionUtil {
 
 			// add +1/+1 to cards
 			list.clear();
-			PlayerZone[] zone = getZone("Gemhide Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length && outer < 1; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Battlefield.getCards());
-				creature.addAll(AllZone.Computer_Battlefield.getCards());
-				creature = creature.getType("Sliver");
+			
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -11864,7 +11843,6 @@ public class GameActionUtil {
 
 					gloriousAnthemList.add(c);
 				}// for inner
-			}// for outer
 		}// execute()
 	}; // Gemhide_Sliver
 
