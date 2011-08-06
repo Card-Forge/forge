@@ -15480,10 +15480,10 @@ public class GameActionUtil {
 			for(Card oldman:list) {
 				if(!oldman.getGainControlTargets().isEmpty()) {
 					if(oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
-						for(Command c:oldman.getGainControlReleaseCommands()) {
-							c.execute();
+						ArrayList<Command> coms = oldman.getGainControlReleaseCommands();
+						for(int i = 0; i < coms.size(); i++) {
+							coms.get(i).execute();
 						}
-						oldman.clearGainControlReleaseCommands();
 					}
 				}
 			}

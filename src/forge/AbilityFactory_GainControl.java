@@ -330,6 +330,7 @@ public class AbilityFactory_GainControl {
     		public void execute() {
     			Card c = movedCards[i];
     			//ArrayList<Card> c = hostCard.getGainControlTargets();
+    			if(null == c) return;
 
     			if(AllZone.GameAction.isCardInPlay(c)) {
     				((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
@@ -364,6 +365,7 @@ public class AbilityFactory_GainControl {
     			}//if
     			hostCard.clearGainControlTargets();
     			hostCard.clearGainControlReleaseCommands();
+    			movedCards[i] = null;
     		}//execute()
     	};
     	
