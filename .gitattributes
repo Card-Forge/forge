@@ -4316,6 +4316,7 @@ res/cardsfolder/night_soil.txt -text svneol=native#text/plain
 res/cardsfolder/nightguard_patrol.txt -text svneol=native#text/plain
 res/cardsfolder/nighthaze.txt -text svneol=native#text/plain
 res/cardsfolder/nightmare.txt -text svneol=native#text/plain
+res/cardsfolder/nightmare_incursion.txt -text svneol=native#text/plain
 res/cardsfolder/nightmare_lash.txt svneol=native#text/plain
 res/cardsfolder/nightmare_void.txt -text svneol=native#text/plain
 res/cardsfolder/nights_whisper.txt -text svneol=native#text/plain
