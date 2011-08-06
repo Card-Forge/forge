@@ -597,11 +597,11 @@ public class CombatUtil {
     }
     
     //Returns the damage an unblocked attacker would deal
-    public static int damageIfUnblocked(Card attacker, Player attacked)
+    public static int damageIfUnblocked(Card attacker, Player attacked, Combat combat)
     {
 	  int damage = attacker.getNetCombatDamage();
 	  int sum = 0;
-	  damage += predictPowerBonusOfAttacker(attacker,null,null);
+	  damage += predictPowerBonusOfAttacker(attacker,null,combat);
 	  if (!attacker.hasKeyword("Infect")) {
 		  sum = attacked.predictDamage(damage, attacker, true);
 		  if (attacker.hasKeyword("Double Strike")) sum += attacked.predictDamage(damage, attacker, true);
@@ -610,7 +610,7 @@ public class CombatUtil {
     }
  
     //Returns the poison an unblocked attacker would deal
-    public static int poisonIfUnblocked(Card attacker, Player attacked)
+    public static int poisonIfUnblocked(Card attacker, Player attacked, Combat combat)
     {
 	  int damage = attacker.getNetCombatDamage();
 	  int poison = 0;
@@ -628,7 +628,7 @@ public class CombatUtil {
     {
        int sum = 0;
  	  for(Card attacker: attackers) {
- 		  sum += damageIfUnblocked(attacker, attacked);
+ 		  sum += damageIfUnblocked(attacker, attacked, null);
  	  }
       return sum;
     }
@@ -638,7 +638,7 @@ public class CombatUtil {
     {
       int sum = 0;
       for(Card attacker: attackers) {
-  		  sum += poisonIfUnblocked(attacker, attacked);
+  		  sum += poisonIfUnblocked(attacker, attacked, null);
   	  }
       return sum;
     }

@@ -66,6 +66,19 @@ public class ComputerUtil_Attack2 {
       return list;
     }//sortAttackers()
 	
+	//Is there any reward for attacking? (for 0/1 creatures there is not)
+	public boolean isEffectiveAttacker(Card attacker, Combat combat)
+    {
+		if (CombatUtil.damageIfUnblocked(attacker, AllZone.HumanPlayer, combat) > 0) return true;
+		if (CombatUtil.poisonIfUnblocked(attacker, AllZone.HumanPlayer, combat) > 0) return true;
+		
+		ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
+		for(Trigger trigger : registeredTriggers)
+			if (CombatUtil.combatTriggerWillTrigger(attacker,null,trigger, combat)) return true;
+		
+		return false;
+    }
+	
 	public CardList getPossibleAttackers(CardList in)
     {
       CardList list = new CardList(in.toArray());
@@ -239,14 +252,6 @@ public class ComputerUtil_Attack2 {
                 attackersLeft.remove(attacker);
              }
           }
-          
-        attackersLeft = attackersLeft.filter(new CardListFilter() {
-  		  	public boolean addCard(Card c) {
-  		  		return (0 < AllZone.HumanPlayer.predictDamage(c.getNetCombatDamage(),c,true) || c.getName().equals("Guiltfeeder"));
-  		  	}
-  		});
-        
-        if (attackersLeft.isEmpty()) return combat;
 
            // *******************
            // start of edits
@@ -289,7 +294,7 @@ public class ComputerUtil_Attack2 {
             	   
                    candidateAttackers.add(pCard);
                    if(pCard.getNetCombatDamage() > 0){
-                       candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard,AllZone.HumanPlayer);
+                       candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard,AllZone.HumanPlayer,combat);
                        computerForces += 1;
                    }
 
@@ -330,7 +335,7 @@ public class ComputerUtil_Attack2 {
            }
            // until the attackers are used up or the player would run out of life
            int attackRounds = 1;
-           while(attritionalAttackers.size() > 0 && playerLife > 0){
+           while(attritionalAttackers.size() > 0 && playerLife > 0 && attackRounds < 99){
                //   sum attacker damage
                int damageThisRound = 0;
                for(int y = 0; y < attritionalAttackers.size(); y++){
@@ -367,7 +372,7 @@ public class ComputerUtil_Attack2 {
                     }
                }
                if(isUnblockableCreature){
-                   unblockableDamage += CombatUtil.damageIfUnblocked(attacker,AllZone.HumanPlayer);
+                   unblockableDamage += CombatUtil.damageIfUnblocked(attacker,AllZone.HumanPlayer,combat);
                }
            }
            if(unblockableDamage > 0){turnsUntilDeathByUnblockable = AllZone.HumanPlayer.life/unblockableDamage;}
@@ -426,9 +431,9 @@ public class ComputerUtil_Attack2 {
           
           //do assault (all creatures attack) if the computer would win the game
           //or if the computer has 4 creatures and the player has 1
-          else if(bAssault || (humanList.size() == 1 && 3 < attackers.size()))
+          else if(bAssault)
           {
-              System.out.println("Assault");
+             System.out.println("Assault");
         	 CardListUtil.sortAttack(attackersLeft);
              for(int i = 0; i < attackersLeft.size(); i++)
             	 if (CombatUtil.canAttack(attackersLeft.get(i), combat)) combat.addAttacker(attackersLeft.get(i));
@@ -490,6 +495,8 @@ public class ComputerUtil_Attack2 {
     	boolean canKillAllDangerous = true; // indicates if the attacker can kill all single blockers with wither or infect
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
+        
+        if (!isEffectiveAttacker(attacker,combat)) return false;
 
         // look at the attacker in relation to the blockers to establish a number of factors about the attacking
         // context that will be relevant to the attackers decision according to the selected strategy
