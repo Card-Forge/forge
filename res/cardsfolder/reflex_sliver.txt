@@ -1,8 +1,9 @@
 Name:Reflex Sliver
 ManaCost:3 G
 Types:Creature Sliver
-Text:All Slivers have haste.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Sliver:0/0/Haste:no Condition:All Sliver creatures have haste.
 SVar:PlayMain1:TRUE
 SVar:AntiBuffedBy:Sliver
 SVar:Rarity:Common

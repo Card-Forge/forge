@@ -172,10 +172,7 @@ public class StaticEffects
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
 		
 		cardToEffectsList.put("Sliver Legion", new String[] {"Sliver_Legion"});
-		cardToEffectsList.put("Heart Sliver", new String[] {"Heart_Sliver"});
-		cardToEffectsList.put("Reflex Sliver", new String[] {"Reflex_Sliver"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
-		cardToEffectsList.put("Blade Sliver", new String[] {"Blade_Sliver"});
 		
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});

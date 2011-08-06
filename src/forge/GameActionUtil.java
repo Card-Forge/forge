@@ -11524,45 +11524,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Marrow-Gnawer
 
-	public static Command Blade_Sliver                = new Command() {
-		private static final long serialVersionUID   = 5059367392983499740L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			int pumpAttack = 1;
-			int pumpDefense = 0;
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pumpAttack);
-				c.addSemiPermanentDefenseBoost(-pumpDefense);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Blade Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(pumpAttack);
-					c.addSemiPermanentDefenseBoost(pumpDefense);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
+	
 
 	public static Command Gemhide_Sliver              = new Command() {
 		private static final long serialVersionUID   = -2941784982910968772L;
@@ -11624,82 +11586,9 @@ public class GameActionUtil {
 				}// for inner
 			}// for outer
 		}// execute()
-	}; // Muscles_Sliver
+	}; // Gemhide_Sliver
 
-	public static Command Heart_Sliver                = new Command() {
-		private static final long serialVersionUID   = -3213253353499680447L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Haste";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Heart Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Heart_Sliver
-
-	public static Command Reflex_Sliver               = new Command() {
-		private static final long serialVersionUID   = -6606809422365563893L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Haste";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Reflex Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Reflex_Sliver
-
+	
 	public static Command Knighthood                  = new Command() {
 
 		private static final long serialVersionUID   = -6904191523315339355L;
@@ -19821,6 +19710,7 @@ public class GameActionUtil {
 		commands.put("Faerie_Swarm", Faerie_Swarm);
 		
 		commands.put("Gaeas_Anthem", Gaeas_Anthem);
+		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		commands.put("Glorious_Anthem", Glorious_Anthem);
 		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
@@ -20010,19 +19900,11 @@ public class GameActionUtil {
 		commands.put("Rolling_Stones", Rolling_Stones);
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
 		
-		
 		////////////////////
 
 		commands.put("Sliver_Legion", Sliver_Legion);
 		
-		commands.put("Heart_Sliver", Heart_Sliver);
-		commands.put("Reflex_Sliver", Reflex_Sliver);
-		commands.put("Gemhide_Sliver", Gemhide_Sliver);
-		commands.put("Blade_Sliver", Blade_Sliver);
-		
 		///////////////////
-
-		
 		
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
