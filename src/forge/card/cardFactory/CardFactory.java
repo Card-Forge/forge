@@ -5905,12 +5905,12 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
  
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Tormod's Crypt")) {
         	/*
         	 * Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
-        	 */
+        	 *
         	Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Cost abCost = new Cost("T Sac<1/CARDNAME>", cardName, true);
         	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
@@ -5943,7 +5943,7 @@ public class CardFactory implements NewConstants {
         	ability.setStackDescription(card+" - Exile all cards from target player's graveyard.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mirror Universe")) {
