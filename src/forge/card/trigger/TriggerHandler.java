@@ -507,6 +507,11 @@ public class TriggerHandler {
 				}
 				
 				@Override
+				public String getReplicateManaCost() {
+					return sa[0].getReplicateManaCost();
+				}
+				
+				@Override
 				public SpellAbility_Restriction getRestrictions()
 				{
 					return sa[0].getRestrictions();
@@ -651,6 +656,11 @@ public class TriggerHandler {
 				}
 				
 				@Override
+				public boolean isReplicate() {
+					return sa[0].isReplicate();
+				}
+				
+				@Override
 				public boolean isSpell()
 				{
 					return sa[0].isSpell();
@@ -790,6 +800,11 @@ public class TriggerHandler {
 				}
 				
 				@Override
+				public void setIsReplicate(boolean b) {
+					sa[0].setIsReplicate(b);
+				}
+				
+				@Override
 				public void setIsXCost(boolean b)
 				{
 					sa[0].setIsXCost(b);
@@ -817,6 +832,11 @@ public class TriggerHandler {
 				public void setMultiKickerManaCost(String cost)
 				{
 					sa[0].setMultiKickerManaCost(cost);
+				}
+				
+				@Override
+				public void setReplicateManaCost(String cost) {
+					sa[0].setReplicateManaCost(cost);
 				}
 				
 				@Override

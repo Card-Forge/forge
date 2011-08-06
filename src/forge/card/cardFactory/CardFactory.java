@@ -249,6 +249,8 @@ public class CardFactory implements NewConstants {
     		c.addXManaCostPaid(original.getXManaCostPaid());
     		c.addMultiKickerMagnitude(original.getMultiKickerMagnitude());
     		if(original.isKicked()) c.setKicked(true);
+    		c.addReplicateMagnitude(original.getReplicateMagnitude());
+    		if(sa.isReplicate()) copySA.setIsReplicate(true);
     	}
     	
     	if(source.getController().equals(AllZone.HumanPlayer))
@@ -302,6 +304,8 @@ public class CardFactory implements NewConstants {
     		c.addXManaCostPaid(original.getXManaCostPaid());
     		c.addMultiKickerMagnitude(original.getMultiKickerMagnitude());
     		if(original.isKicked()) c.setKicked(true);
+    		c.addReplicateMagnitude(original.getReplicateMagnitude());
+    		if(sa.isReplicate()) copySA.setIsReplicate(true);
 
     		// I have no idea what get choice does?
     		if(c.hasChoices()) {
@@ -513,6 +517,7 @@ public class CardFactory implements NewConstants {
         if (hasKeyword(card, "Replicate") != -1) {
         	int n = hasKeyword(card, "Replicate");
         	if (n!= -1) {
+        		System.out.println("Got replicate for: "+card);
         		String parse = card.getKeyword().get(n).toString();
         		String k[] = parse.split("cate ");
         	

@@ -192,6 +192,13 @@ public class MagicStack extends MyObservable {
 
 		return manaCost;
 	}
+	
+	//TODO - this may be able to use a straight copy of MultiKicker cost change
+	public ManaCost getReplicateSpellCostChange(SpellAbility sa) {
+		ManaCost manaCost = new ManaCost(sa.getManaCost());
+		//String Mana = manaCost.toString();
+		return manaCost;
+	}
 
 	public void add(final SpellAbility sp) {
 		if (sp instanceof Ability_Mana) { // Mana Abilities go straight through
@@ -266,7 +273,10 @@ public class MagicStack extends MyObservable {
 				if (sp.getSourceCard().isCopiedSpell())
 					push(sp);
 				
-				else if (!sp.isMultiKicker() && !sp.isXCost()) {
+				else if (!sp.isMultiKicker() && !sp.isReplicate() && !sp.isXCost()) {
+					if(sp.getSourceCard().getName().equals("Gigadrowse")) {
+						System.out.println("Gigadrowse is not recognized as replicate: "+sp.isReplicate());
+					}
 					push(sp);
 				}
 				
@@ -394,6 +404,77 @@ public class MagicStack extends MyObservable {
 									+ "\r\n" + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
 									manaCost.toString(), paidCommand, unpaidCommand));
 							}
+						}
+					} 
+					
+					else // computer
+					{
+						while (ComputerUtil.canPayCost(ability))
+							ComputerUtil.playNoStack(ability);
+						push(sa);
+					}
+				}
+				
+				else if (sp.isReplicate()){
+					// todo: convert multikicker/replicate support in abCost so this doesn't happen here
+					// X and multi and replicate are not supported yet
+					System.out.println("This spell is definitely replicate: "+sp.getSourceCard());
+				
+					final SpellAbility sa = sp;
+					final Ability ability = new Ability(sp.getSourceCard(), sp.getReplicateManaCost()) {
+						public void resolve() {
+							this.getSourceCard().addReplicateMagnitude(1);
+						}
+					};
+
+					final Command unpaidCommand = new Command() {
+						private static final long serialVersionUID = -3180458633098297855L;
+
+						public void execute() {
+							push(sa);
+						}
+					};
+
+					final Command paidCommand = new Command() {
+						private static final long serialVersionUID = 132624005072267304L;
+
+						public void execute() {
+							ability.resolve();
+							ManaCost manaCost = getReplicateSpellCostChange(ability);
+							if (manaCost.isPaid()) {
+								this.execute();
+							} else {
+								/*
+								if (AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid == 0
+										&& AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
+									
+									AllZone.InputControl.setInput(new Input_PayManaCost_Ability(
+											"Replicate for "+ sa.getSourceCard() + "\r\n"
+											+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
+											manaCost.toString(), this, unpaidCommand));
+								} 
+								
+								else {*/
+									AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Replicate for "
+											+ sa.getSourceCard() + "\r\n" 
+											+ "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n", 
+									manaCost.toString(), this, unpaidCommand));
+								//}
+							}
+						}
+					};
+
+					if (sp.getSourceCard().getController().equals(
+							AllZone.HumanPlayer)) {
+						ManaCost manaCost = getMultiKickerSpellCostChange(ability);
+
+						if (manaCost.isPaid()) {
+							paidCommand.execute();
+						} else {
+								AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Replicate for "
+									+ sa.getSourceCard() + "\r\n" + 
+									"Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n", 
+									manaCost.toString(), paidCommand, unpaidCommand));
 						}
 					} 
 					
