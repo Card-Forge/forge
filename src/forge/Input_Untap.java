@@ -79,14 +79,15 @@ public class Input_Untap extends Input {
     	});
     	list = list.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
-    			if(AllZoneUtil.isCardInPlay("Damping Field") && c.isArtifact()) return false;
+    			if((AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue"))
+    					&& c.isArtifact()) return false;
     			return true;
     		}
     	});
     	list = list.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
-    			if((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))
-    					&& c.isCreature())
+    			if((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel")
+    					|| AllZoneUtil.isCardInPlay("Intruder Alarm")) && c.isCreature())
     				return false;
     			return true;
     		}

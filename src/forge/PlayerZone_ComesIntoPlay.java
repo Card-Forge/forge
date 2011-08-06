@@ -82,7 +82,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     }
                 };
                 ability.setStackDescription("Amulet of Vigor - Untap " + c);
-                for(int i = 0; i < CardFactoryUtil.getCards("Amulet of Vigor", c.getController()).size(); i++)
+                for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Amulet of Vigor").size(); i++)
                     AllZone.Stack.add(ability);
             }
             
@@ -94,6 +94,22 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 for(Card var:list) {
                     GameActionUtil.Elvish_Vanguard(var);
                 }
+            }
+            
+            if(c.isCreature() && AllZoneUtil.isCardInPlay("Intruder Alarm")) {
+            	CardList alarms = AllZoneUtil.getCardsInPlay("Intruder Alarm");
+            	for(Card alarm:alarms) {
+            		final Card triggerer = alarm;
+            		Ability ability = new Ability(triggerer, "0") {
+            			@Override
+            			public void resolve() {
+            				CardList creatures = AllZoneUtil.getCreaturesInPlay();
+            				for(Card cr:creatures) cr.untap();
+            			}
+            		};
+            		ability.setStackDescription(triggerer.getName()+" - untap all creatures.");
+            		AllZone.Stack.add(ability);
+            	}
             }
             
             if(c.isLand()) {

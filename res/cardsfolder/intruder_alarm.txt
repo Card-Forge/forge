@@ -1,0 +1,7 @@
+Name:Intruder Alarm
+ManaCost:2 U
+Types:Enchantment
+Text:Creatures don't untap during their controllers' untap steps.\r\nWhenever a creature enters the battlefield, untap all creatures.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/intruder_alarm.jpg
+End
