@@ -1,0 +1,70 @@
+BasicLandPercentage=14
+
+[Group MaxCnt=4 Percentage=21]
+Taiga
+Stomping Ground
+Wooded Foothills
+Kazandu Refuge
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Boartusk Liege
+Runes of the Deus
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Tattermunge Duo
+Jund Hackblade
+Naya Hushblade
+Thornscape Familiar
+Thunderscape Familiar
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Artifact Mutation
+Colossal Might
+Nacatl Outlander
+Rip-Clan Crasher
+Scarwood Goblins
+Scuzzback Scrapper
+Tattermunge Maniac
+Yavimaya Barbarian
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Boggart Ram-Gang
+Centaur Archer
+Fires of Yavimaya
+Jungle Troll
+Raging Kavu
+Violent Outburst
+Vithian Renegades
+Windreaper Falcon
+[/Group]
+
+[Group MaxCnt=1 Percentage=10]
+Bloodbraid Elf
+Giant Solifuge
+Rhox Brute
+Rumbling Slum
+Sarkhan Vol
+Wreak Havoc
+[/Group]
+
+[Group MaxCnt=1 Percentage=10]
+Gorger Wurm
+Dragon Broodmother
+Jerrard of the Closed Fist
+Livonya Silone
+Loamdragger Giant
+Marhault Elsdragon
+Sangrite Surge
+Scuzzback Marauders
+Stonebrow, Krosan Hero
+Streetbreaker Wurm
+The Lady of the Mountain
+Tuknir Deathlock
+Viashivan Dragon
+[/Group]
+
+End
