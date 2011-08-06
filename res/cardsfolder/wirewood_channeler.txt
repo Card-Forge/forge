@@ -9,6 +9,7 @@ A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add U to your
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add G to your mana pool for each Elf on the battlefield.
 A:AB$ Mana | Cost$ T | Produced$ R | Amount$ X | SpellDescription$ Add R to your mana pool for each Elf on the battlefield.
 SVar:X:Count$Valid Elf
+SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_channeler.jpg
