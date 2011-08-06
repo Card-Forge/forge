@@ -1,8 +1,8 @@
 Name:Preemptive Strike
 ManaCost:1 U
 Types:Instant
-Text:Counter target creature spell.
-K:spCounter:Spell:Type(Creature):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | CounterValid$ Creature | SpellDescription$ Counter target creature spell.
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=10530&type=card
 SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/50.jpg

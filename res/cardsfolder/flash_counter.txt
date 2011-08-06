@@ -1,8 +1,8 @@
 Name:Flash Counter
 ManaCost:1 U
 Types:Instant
-Text:Counter target instant spell.
-K:spCounter:Spell:Type(Instant):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | CounterValid$ Instant | SpellDescription$ Counter target instant spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_counter.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/78.jpg

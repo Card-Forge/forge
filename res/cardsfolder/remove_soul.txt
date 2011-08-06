@@ -1,8 +1,8 @@
 Name:Remove Soul
 ManaCost:1 U
 Types:Instant
-Text:Counter target creature spell.
-K:spCounter:Spell:Type(Creature):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | CounterValid$ Creature | SpellDescription$ Counter target creature spell.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83228.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/95.jpg

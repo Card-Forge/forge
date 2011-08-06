@@ -1,8 +1,8 @@
 Name:Traumatic Visions
 ManaCost:3 U U
 Types:Instant
-Text:Counter target spell.
-K:spCounter:Spell:None:Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 3 U U | Type$ Spell | SpellDescription$ Counter target spell.
 K:TypeCycling:Basic:1 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traumatic_visions.jpg

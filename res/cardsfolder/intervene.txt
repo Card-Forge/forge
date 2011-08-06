@@ -1,8 +1,8 @@
 Name:Intervene
 ManaCost:U
 Types:Instant
-Text:Counter target spell that targets a creature.
-K:spCounter:Spell:Targets(Creature):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ U | Type$ Spell | SpellTarget$ Creature | SpellDescription$ Counter target spell that targets a creature. 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intervene.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/33.jpg

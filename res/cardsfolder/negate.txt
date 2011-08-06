@@ -1,8 +1,8 @@
 Name:Negate
 ManaCost:1 U
 Types:Instant
-Text:Counter target noncreature spell.
-K:spCounter:Spell:Type(Non-Creature):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | CounterValid$ nonCreature | SpellDescription$ Counter target noncreature spell. 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/negate.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/68.jpg

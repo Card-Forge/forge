@@ -1,8 +1,8 @@
 Name:Artifact Blast
 ManaCost:R
 Types:Instant
-Text:Counter target artifact spell.
-K:spCounter:Spell:Type(Artifact):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ R | Type$ Spell | CounterValid$ Artifact | SpellDescription$ Counter target artifact spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_blast.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/87.jpg

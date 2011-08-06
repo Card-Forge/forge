@@ -1,8 +1,8 @@
 Name:False Summoning
 ManaCost:1 U
 Types:Instant
-Text:Counter target creature spell.
-K:spCounter:Spell:Type(Creature):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | CounterValid$ Creature | SpellDescription$ Counter target creature spell.
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=6533&type=card
 SetInfo:P02|Common|http://magiccards.info/scans/en/po2/40.jpg

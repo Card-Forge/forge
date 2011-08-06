@@ -1,8 +1,8 @@
 Name:Memory Lapse
 ManaCost:1 U
 Types:Instant
-Text:Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
-K:spCounter:Spell:None:Topdeck:None
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | Destination$ TopDeck | SpellDescription$ Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_lapse.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/40.jpg

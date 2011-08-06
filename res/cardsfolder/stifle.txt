@@ -1,8 +1,8 @@
 Name:Stifle
 ManaCost:U
 Types:Instant
-Text:Counter target activated or triggered ability.
-K:spCounter:Ability:None:None:None
+Text:no text
+A:SP$Counter | Cost$ U | Type$ Ability | SpellDescription$ Counter target activated or triggered ability.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stifle.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/52.jpg

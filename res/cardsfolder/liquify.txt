@@ -1,8 +1,8 @@
 Name:Liquify
 ManaCost:2 U
 Types:Instant
-Text:Counter target spell with converted mana cost 3 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-K:spCounter:Spell:CMC(<=,3):Exile:None
+Text:no text
+A:SP$Counter | Cost$ 2 U | Type$ Spell | CounterValid$ Card.cmcLE3 | Destination$ Exile | SpellDescription$ Counter target spell with converted mana cost 3 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liquify.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/41.jpg

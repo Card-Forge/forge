@@ -1,8 +1,8 @@
 Name:Rebuff the Wicked
 ManaCost:W
 Types:Instant
-Text:Counter target spell that targets a permanent you control.
-K:spCounter:Spell:Targets(My-Creature,My-Land,My-Enchantment,My-Artifact,My-Planeswalker,My-Equipment):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ W | Type$ Spell | SpellTarget$ Permanent.YouCtrl | SpellDescription$ Counter target spell that targets a permanent you control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuff_the_wicked.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/12.jpg

@@ -2,8 +2,6 @@ Name:Counterspell
 ManaCost:U U
 Types:Instant
 Text:no text
-#Counter target spell.
-#K:spCounter:Spell:None:Graveyard:None
 A:SP$Counter|Cost$U U|Type$Spell|Destination$Graveyard|SpellDescription$Counter target spell.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19570.jpg

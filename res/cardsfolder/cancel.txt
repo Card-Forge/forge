@@ -1,8 +1,8 @@
 Name:Cancel
 ManaCost:1 U U
 Types:Instant
-Text:Counter target spell.
-K:spCounter:Spell:None:Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 1 U U | Type$ Spell | SpellDescription$ Counter target spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/44.jpg

@@ -1,8 +1,8 @@
 Name:Last Word
 ManaCost:2 U U
 Types:Instant
-Text:Counter target spell.
-K:spCounter:Spell:None:Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 2 U U | Type$ Spell | SpellDescription$ Counter target spell.
 K:CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_word.jpg

@@ -1,8 +1,8 @@
 Name:Extinguish
 ManaCost:1 U
 Types:Instant
-Text:Counter target sorcery spell.
-K:spCounter:Spell:Type(Sorcery):Graveyard:None
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | CounterValid$ Sorcery | SpellDescription$ Counter target sorcery spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extinguish.jpg
 SetInfo:P02|Common|http://magiccards.info/scans/en/po2/38.jpg
