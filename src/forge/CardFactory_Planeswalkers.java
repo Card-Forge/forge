@@ -163,7 +163,14 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return true;
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    list = list.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isEmblem() && c.getKeyword().contains("Artifacts, creatures, enchantments, and lands you control are indestructible.");
+                    	}
+                    });
+                	return list.size() == 0 && card2.getCounters(Counters.LOYALTY) > 8;
                 }
             };
             ability3.setBeforePayMana(new Input() {
@@ -240,8 +247,8 @@ class CardFactory_Planeswalkers {
             
             card2.addSpellAbility(ability2);
             
-            ability3.setDescription("-8: For the rest of the game, artifacts, creatures, enchantments, and lands you control are indestructible.");
-            ability3.setStackDescription("Elspeth, Knight-Errant - Make everything indestructible.");
+            ability3.setDescription("-8: You get an emblem with \"Artifacts, creatures, enchantments, and lands you control are indestructible.\"");
+            ability3.setStackDescription("Elspeth, Knight-Errant - You get an emblem with \"Artifacts, creatures, enchantments, and lands you control are indestructible.\"");
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
