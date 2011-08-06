@@ -434,7 +434,10 @@ public class QuestData implements NewConstants {
         cardPool.addAll(newCards);
         newCardList.addAll(newCards);
         
-        return GuiDisplayUtil.cleanString(newCards.get(0));
+        Card c = AllZone.CardFactory.getCard(newCards.get(0), AllZone.HumanPlayer);
+        c.setCurSetCode(c.getMostRecentSet());
+        return CardUtil.buildFilename(c);
+        //return GuiDisplayUtil.cleanString(newCards.get(0));
     }
     
     public void addCard(Card c)
