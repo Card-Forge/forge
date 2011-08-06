@@ -211,7 +211,12 @@ class TableModel extends AbstractTableModel {
             	return "";
             case 6:
                 String rarity = c.getRarity();
-                if(rarity.length() > 0) rarity = rarity.substring(0, 1);
+                //if(rarity.length() > 0) rarity = rarity.substring(0, 1);
+                if (rarity.equals("new"))
+                	return "n";
+                else
+                	rarity = rarity.substring(0,1);
+                
                 if (!c.getCurSetCode().equals("")){
                 	SetInfo si = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode());
                 	if (si != null)
