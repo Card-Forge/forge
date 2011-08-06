@@ -1,10 +1,12 @@
+
 package forge;
+
+
 /**
  * QuestData_State.java
  * 
  * Created on 26.10.2009
  */
-
 
 
 import java.io.Serializable;
@@ -33,5 +35,13 @@ public class QuestData_State implements Serializable {
      * This constructor is used by QestData_State in the default package to create a replacement object for the
      * obsolete class.
      */
-    public QuestData_State(int rankIndex, int win, int lost, String difficulty, ArrayList<String> cardPool, HashMap<String, Deck> myDecks, HashMap<String, Deck> aiDecks) {}
+    public QuestData_State(int rankIndex, int win, int lost, String difficulty, ArrayList<String> cardPool, HashMap<String, Deck> myDecks, HashMap<String, Deck> aiDecks) {
+        this.rankIndex = rankIndex;
+        this.win = win;
+        this.lost = lost;
+        this.difficulty = difficulty;
+        this.cardPool = cardPool;
+        this.myDecks = myDecks;
+        this.aiDecks = aiDecks;
+    }
 }
