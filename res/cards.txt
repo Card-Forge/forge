@@ -1,3 +1,12 @@
+Renewed Faith
+2 W
+Instant
+When you cycle Renewed Faith, you may gain 2 life.\r\n
+spGainLife:6
+Cycling:1 W
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41153.jpg
+
 Arashi, the Sky Asunder
 3 G G
 Legendary Creature Spirit
@@ -24813,15 +24822,6 @@ no text
 Haste
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_troops.jpg
-
-Renewed Faith
-2 W
-Instant
-When you cycle Renewed Faith, you may gain 2 life.
-spGainLife:6
-Cycling:1 W
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41153.jpg
 
 Renewing Dawn
 1 W

@@ -1,7 +1,7 @@
 Name:Renewed Faith
 ManaCost:2 W
 Types:Instant
-Text:When you cycle Renewed Faith, you may gain 2 life.
+Text:When you cycle Renewed Faith, you may gain 2 life.\r\n
 K:spGainLife:6
 K:Cycling:1 W
 K:SVar:Rarity:Common
