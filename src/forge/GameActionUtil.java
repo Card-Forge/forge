@@ -186,7 +186,6 @@ public class GameActionUtil {
 		playCard_Shorecrasher_Mimic(c);
 		playCard_Woodlurker_Mimic(c);
 		playCard_Forced_Fruition(c);
-		playCard_Gelectrode(c);
 		playCard_Standstill(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Curse_of_Wizardry(c);
@@ -1134,49 +1133,6 @@ public class GameActionUtil {
 
 		}
 	} // Dovescape
-
-    public static void playCard_Gelectrode(Card c) {
-        final Player controller = c.getController();
-
-        final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-        CardList list = new CardList();
-        list.addAll(play.getCards());
-
-        list = list.getName("Gelectrode");
-
-        if (list.size() > 0 && (c.getType().contains("Instant") || c.getType().contains("Sorcery")) && !c.isCopiedSpell()) {
-
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-
-                Ability ability2 = new Ability(card, "0") {
-                    @Override
-                    public void resolve() {
-
-                        if (card.getController().equals(AllZone.HumanPlayer)) {
-                            String question = "You cast an instant or sorcery spell, will you untap Gelectrode?";
-                            
-                            if (GameActionUtil.showYesNoDialog(card, question)) {
-                                card.untap();
-                            }
-                        }
-                        if (card.getController().equals(AllZone.ComputerPlayer)) {
-                            card.untap();
-                        }
-                    }
-
-                }; // ability2
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - ").append(c.getController());
-                sb.append(" played an instant or sorcery spell and may untap Gelectrode.");
-                ability2.setStackDescription(sb.toString());
-                
-                AllZone.Stack.add(ability2);
-            }
-        }
-    }// Gelectrode
 
 	public static void playCard_Forced_Fruition(Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay("Forced Fruition");
