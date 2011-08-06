@@ -368,6 +368,37 @@ public class GameAction {
     	   }
     }
     
+    //do this during combat damage:
+    public void checkWinLoss()
+    {
+    	JFrame frame = (JFrame) AllZone.Display;
+        if(!frame.isDisplayable()) return;
+        
+        boolean stop = false;
+        
+        if (isAliFromCairoInPlay(AllZone.Computer_Play) && AllZone.Computer_Life.getLife() < 1) 
+        	AllZone.Computer_Life.setLife(1);
+        
+        if (isAliFromCairoInPlay(AllZone.Human_Play) && AllZone.Human_Life.getLife() < 1) 
+        	AllZone.Human_Life.setLife(1);
+        
+        if(AllZone.Computer_Life.getLife() <= 0 || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10) {
+            Constant.Runtime.WinLose.addWin();
+            stop = true;
+        }
+        if(AllZone.Human_Life.getLife() <= 0 || AllZone.Human_PoisonCounter.getPoisonCounters() >= 10) {
+            Constant.Runtime.WinLose.addLose();
+            stop = true;
+        }
+        
+        if(stop) {
+            frame.dispose();
+            new Gui_WinLose();
+            return;
+        }
+        destroyPlaneswalkers();
+    }
+    
     public void checkStateEffects() {
 //    System.out.println("checking !!!");
 //    RuntimeException run = new RuntimeException();
@@ -473,7 +504,6 @@ public class GameAction {
             }
         }//while iter.hasNext()
         
-
         destroyLegendaryCreatures();
         destroyPlaneswalkers();
     }//checkStateEffects()

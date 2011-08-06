@@ -223,7 +223,7 @@ public class CardListUtil
     {
       public boolean addCard(Card c)
       {
-        return CardUtil.getColor(c).equals(color);
+        return CardUtil.getColors(c).contains(color);
       }
     });
   }//getColor()

@@ -245,7 +245,7 @@ public class Input_CombatDamage extends Input {
                 }
                 AllZone.GameAction.addDamage(c, damageMap);
                 
-                AllZone.GameAction.checkStateEffects();
+                AllZone.GameAction.checkWinLoss();
                 
                 damageMap.clear();
                 c.clearAssignedDamage();

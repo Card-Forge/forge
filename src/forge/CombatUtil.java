@@ -223,8 +223,8 @@ public class CombatUtil {
         int defenderLife = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
         int attackerLife = attacker.getNetDefense() + attBushidoMagnitude;
         
-        if(defender.getKeyword().contains("Double Strike")) {
-            if(defender.getKeyword().contains("Deathtouch")) return true;
+        if(defender.getKeyword().contains("Double Strike") ) {
+            if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
             
             if(attacker.getKeyword().contains("Double Strike")) {
                 if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
@@ -246,7 +246,7 @@ public class CombatUtil {
         }//defender double strike
         
         else if(defender.getKeyword().contains("First Strike")) {
-            if(defender.getKeyword().contains("Deathtouch")) return true;
+            if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
             
             if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
         }//defender first strike
@@ -269,7 +269,7 @@ public class CombatUtil {
                         && attackerDamage < defenderLife - defender.getDamage()) return true;
             } else //no double nor first strike for attacker
             {
-                if(defender.getKeyword().contains("Deathtouch")) return true;
+                if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
                 
                 return defenderDamage >= attackerLife - attacker.getDamage();
             }
@@ -333,7 +333,7 @@ public class CombatUtil {
         int attackerLife = attacker.getNetDefense() + attBushidoMagnitude;
         
         if(attacker.getKeyword().contains("Double Strike")) {
-            if(attacker.getKeyword().contains("Deathtouch")) return true;
+            if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
             
             if(defender.getKeyword().contains("Double Strike")) {
                 if(defenderDamage >= attackerLife - attacker.getDamage()) return true;
@@ -355,7 +355,7 @@ public class CombatUtil {
         }//attacker double strike
         
         else if(attacker.getKeyword().contains("First Strike")) {
-            if(attacker.getKeyword().contains("Deathtouch")) return true;
+            if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
             if(attackerDamage >= defenderLife - defender.getDamage()) return true;
         }//attacker first strike
         
@@ -370,7 +370,7 @@ public class CombatUtil {
                         && defenderDamage < attackerLife - attacker.getDamage()) return true;
             } else //no double nor first strike for defender
             {
-                if(attacker.getKeyword().contains("Deathtouch")) return true;
+                if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
                 
                 return attackerDamage >= defenderLife - defender.getDamage();
             }

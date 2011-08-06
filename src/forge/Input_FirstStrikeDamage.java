@@ -178,7 +178,7 @@ public class Input_FirstStrikeDamage extends Input {
                 
                 AllZone.GameAction.addDamage(c, damageMap);
                 
-                AllZone.GameAction.checkStateEffects();
+                AllZone.GameAction.checkWinLoss();
                 
                 damageMap.clear();
                 c.clearAssignedDamage();
