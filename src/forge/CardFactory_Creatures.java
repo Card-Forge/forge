@@ -9696,13 +9696,7 @@ public class CardFactory_Creatures {
             destroy.setBeforePayMana(CardFactoryUtil.input_targetCreature(destroy));
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Ghost-Lit Redeemer")) {
-			// Does not have Channel Ability
-        }//*************** END ************ END **************************
-        
-        
+        /* Keyworded
         //*************** START *********** START **************************
         else if(cardName.equals("Ramosian Revivalist")) {
             int a = Integer.parseInt("6");
@@ -9779,7 +9773,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Marrow-Gnawer")) {
