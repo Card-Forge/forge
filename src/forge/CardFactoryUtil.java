@@ -1444,6 +1444,35 @@ public class CardFactoryUtil
     };
     return target;
   }//input_targetPlayer()
+  
+  public static Input input_targetPlayer(final SpellAbility spell, final Command command)
+  {
+    Input target = new Input()
+    {
+	  private static final long serialVersionUID = 8736682807625129068L;
+	
+	  public void showMessage()
+      {
+        AllZone.Display.showMessage("Select target player");
+        ButtonUtil.enableOnlyCancel();
+      }
+      public void selectButtonCancel() {stop();}
+      public void selectPlayer(String player)
+      {
+    	command.execute();
+    	  
+        spell.setTargetPlayer(player);
+        if(spell.getManaCost().equals("0"))
+        {
+          AllZone.Stack.add(spell);
+          stop();
+        }
+        else
+          stopSetNext(new Input_PayManaCost(spell));
+      }
+    };
+    return target;
+  }//input_targetPlayer()
 
   public static CardList AI_getHumanCreature(final Card spell, boolean targeted)
   {

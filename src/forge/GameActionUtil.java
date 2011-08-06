@@ -3951,6 +3951,12 @@ public class GameActionUtil
 
 		CardList list = new CardList(playZone.getCards());
 		CardList playList = new CardList(playZone.getCards());
+		playList = playList.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c) {
+				return !c.getName().equals("Mana Pool");
+			}
+		});
 		
 		list = list.getName("Barren Glory");
 

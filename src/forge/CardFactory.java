@@ -16878,6 +16878,87 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
     
+    //*************** START *********** START **************************
+    else if(cardName.equals("Kaervek's Spite"))
+    {
+      final SpellAbility spell = new Spell(card)
+      {
+		private static final long serialVersionUID = -6259614160639535500L;
+
+		public boolean canPlayAI()
+		{
+			if(AllZone.Human_Life.getLife() <= 5)
+				return true;
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+			
+			CardList playList = new CardList(play.getCards());
+			CardList libList = new CardList(lib.getCards());
+			
+			playList = playList.getName("Academy Rector");
+			libList = libList.getName("Barren Glory");
+			
+			return (AllZone.Human_Life.getLife() <= 5) || (playList.size() == 1 && libList.size() >= 1);
+		}
+		
+		public void resolve()
+        {
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			PlayerZone hand = AllZone.getZone(Constant.Zone.Play, card.getController());
+			CardList list = new CardList(play.getCards());
+			list = list.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c) {
+					return !c.getName().equals("Mana Pool");
+				}
+			});
+			CardList handList = new CardList(hand.getCards());
+			
+			for (Card c : list)
+			{
+				AllZone.GameAction.sacrifice(c);
+			}
+			AllZone.GameAction.discardRandom(card.getController(), handList.size());
+			
+          PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
+          life.subtractLife(5);
+        }
+      };
+      spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+      card.clearSpellAbility();
+      card.addSpellAbility(spell);
+      
+      /*
+      final Command sac = new Command(){
+		private static final long serialVersionUID = 1643946454479782123L;
+
+		public void execute() {
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			PlayerZone hand = AllZone.getZone(Constant.Zone.Play, card.getController());
+			CardList list = new CardList(play.getCards());
+			list = list.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c) {
+					return !c.getName().equals("Mana Pool");
+				}
+			});
+			CardList handList = new CardList(hand.getCards());
+			
+			for (Card c : list)
+			{
+				AllZone.GameAction.sacrifice(c);
+			}
+			AllZone.GameAction.discardRandom(card.getController(), handList.size());
+		}
+    	  
+      };
+      */
+
+      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+    }//*************** END ************ END **************************
+    
+    
+    
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found
     if (hasKeyword(card, "Cycling") != -1)

@@ -1420,7 +1420,7 @@ public class CardFactory_Creatures {
 	    }//*************** END ************ END **************************
 	    
 	  //*************** START *********** START **************************
-	    else if(cardName.equals("Loxodon Hierarch"))
+	    if(cardName.equals("Loxodon Hierarch"))
 	    {
 	      final Ability ability = new Ability(card, "G W")
 	      {
@@ -16085,6 +16085,74 @@ public class CardFactory_Creatures {
   	        a1.setDescription("1 U: Return Fleeting Image to its owner's hand.");
   	    
   	   }//*************** END ************ END **************************
+	      
+  	    else if (cardName.equals("Academy Rector"))
+  	    {
+  	    	final Command destroy = new Command()
+  	    	{
+				private static final long serialVersionUID = -4352349741511065318L;
+
+				public void execute() {
+					if (card.getController().equals("Human"))
+					{
+						String[] choices = { "Yes", "No" };
+						Object q = null;
+
+						q = AllZone.Display.getChoiceOptional("Exile " + card.getName() + "?", choices);
+
+						if (q == null || q.equals("No"))	
+							;
+						else
+						{
+							PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+							CardList list = new CardList(lib.getCards());
+							list = list.filter(new CardListFilter()
+							{
+								public boolean addCard(Card c) {
+									return c.isEnchantment();
+								}	
+							});
+							
+							if (list.size() > 0)
+							{
+								Object o = AllZone.Display.getChoiceOptional("Choose enchantment card to put onto the battlefield", list.toArray());
+								if (o != null)
+								{
+									PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+									Card c = (Card)o;
+									lib.remove(c);
+									play.add(c);
+								}
+							}
+							AllZone.GameAction.removeFromGame(card);
+						}
+					}//if human
+					else
+					{
+						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+						CardList list = new CardList(lib.getCards());
+						list = list.filter(new CardListFilter()
+						{
+							public boolean addCard(Card c) {
+								return c.isEnchantment() && !c.isAura();
+							}
+						});
+						
+						if (list.size() > 0)
+						{
+							PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+							Card c = CardFactoryUtil.AI_getBestEnchantment(list, card, false);
+							lib.remove(c);
+							play.add(c);
+							AllZone.GameAction.removeFromGame(card);
+							
+						}
+					}
+				}	
+  	    	};
+  	    	
+  	    	card.addDestroyCommand(destroy);
+  	    }
 
 	      	    
 	      // Cards with Cycling abilities

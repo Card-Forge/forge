@@ -1,3 +1,14 @@
+Academy Rector
+3 W
+Creature Human Cleric
+When Academy Rector is put into a graveyard from the battlefield, you may exile it. If you do, search your library for an enchantment card and put that card onto the battlefield. Then shuffle your library.
+1/2
+
+Kaervek's Spite
+B B B
+Instant
+As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand. Target player loses 5 life.
+
 Sea Monster
 4 U U
 Creature Serpent

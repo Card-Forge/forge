@@ -219,7 +219,7 @@
       <object class="java.awt.Rectangle"> 
        <int>252</int> 
        <int>0</int> 
-       <int>926</int> 
+       <int>911</int> 
        <int>827</int> 
       </object> 
      </void> 
@@ -230,7 +230,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>0</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>163</int> 
          </object> 
         </void> 
@@ -251,7 +251,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>163</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -266,7 +266,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>173</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>166</int> 
          </object> 
         </void> 
@@ -287,7 +287,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>339</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -302,7 +302,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>349</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>140</int> 
          </object> 
         </void> 
@@ -323,7 +323,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>489</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -338,7 +338,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>499</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>150</int> 
          </object> 
         </void> 
@@ -359,7 +359,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>649</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -374,7 +374,7 @@
          <object class="java.awt.Rectangle"> 
           <int>252</int> 
           <int>659</int> 
-          <int>926</int> 
+          <int>911</int> 
           <int>168</int> 
          </object> 
         </void> 
@@ -408,7 +408,7 @@
     <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>1178</int> 
+       <int>1163</int> 
        <int>0</int> 
        <int>10</int> 
        <int>827</int> 
@@ -423,9 +423,9 @@
     <object id="MultiSplitLayout$Split3" class="org.jdesktop.swingx.MultiSplitLayout$Split"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>1188</int> 
+       <int>1173</int> 
        <int>0</int> 
-       <int>252</int> 
+       <int>267</int> 
        <int>827</int> 
       </object> 
      </void> 
@@ -434,9 +434,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1188</int> 
+          <int>1173</int> 
           <int>0</int> 
-          <int>252</int> 
+          <int>267</int> 
           <int>424</int> 
          </object> 
         </void> 
@@ -455,9 +455,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1188</int> 
+          <int>1173</int> 
           <int>424</int> 
-          <int>252</int> 
+          <int>267</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -470,9 +470,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1188</int> 
+          <int>1173</int> 
           <int>434</int> 
-          <int>252</int> 
+          <int>267</int> 
           <int>393</int> 
          </object> 
         </void> 
