@@ -34,7 +34,6 @@ public class GameActionUtil {
 		upkeep_Yawgmoth_Demon();
 		upkeep_Lord_of_the_Pit();
 		upkeep_Drop_of_Honey();
-		upkeep_Planar_Collapse();
 		upkeep_Demonic_Hordes();
 		upkeep_Fallen_Empires_Storage_Lands();
 		upkeep_Carnophage();
@@ -6332,45 +6331,6 @@ public class GameActionUtil {
 
 		}// for
 	}// upkeep_Convalescence()
-
-		
-	/*
-	 * At the beginning of your upkeep, if there are four or more creatures
-	 * on the battlefield, sacrifice Planar Collapse and destroy all creatures.
-	 * They can't be regenerated.
-	 * 
-	 * Ruling: This ability does not trigger at all if there are not 4 or more
-	 * creatures on the battlefield. It also checks this at the start of
-	 * resolution and does nothing if this is not still true. 
-	 */
-	private static void upkeep_Planar_Collapse() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList planars = AllZoneUtil.getPlayerCardsInPlay(player, "Planar Collapse");
-
-		for(Card c:planars) {
-			final Card source = c;
-			int num = AllZoneUtil.getCreaturesInPlay().size();
-			final Ability ability = new Ability(source, "0") {
-				public void resolve() {
-					CardList creatures = AllZoneUtil.getCreaturesInPlay();
-					if( creatures.size() >= 4 ) {
-						for(Card creature:creatures) {
-							AllZone.GameAction.destroyNoRegeneration(creature);
-						}
-						AllZone.GameAction.sacrifice(source);
-					}
-				} 
-			};//Ability
-
-			StringBuilder sb = new StringBuilder();
-			sb.append(source).append(" - ").append("destroy all creatures.  They can't be regenerated.");
-			ability.setStackDescription(sb.toString());
-			if(num >= 4) {
-				AllZone.Stack.add(ability);
-			}
-		}//for
-	}//upkeep_Planar_Collapse()
 	
 	private static void upkeep_Dega_Sanctuary() {
 		final Player player = AllZone.Phase.getPlayerTurn();
