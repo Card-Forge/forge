@@ -6605,9 +6605,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
         
-        
-        
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Turtleshell Changeling")) {
             //mana ability - targets itself - until EOT
@@ -6651,7 +6649,7 @@ public class CardFactory_Creatures {
             ability.setDescription("1 U: Switch Turtleshell Changeling's power and toughness until end of turn.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Jugan, the Rising Star")) {
@@ -11163,6 +11161,7 @@ public class CardFactory_Creatures {
             ability2.setStackDescription("Molten Hydra deals damage to number of counters on it to target creature or player.");
         }//*************** END ************ END **************************
 
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Windreaver")) {
             final SpellAbility a1 = new Ability(card, "U") {
@@ -11174,10 +11173,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    /*
+                    
                     AllZone.getZone(card).remove(card);
                     hand.add(card);
-                    */
+                    
                     if(card.isToken()) AllZone.getZone(card).remove(card);
                     else AllZone.GameAction.moveTo(hand, card);
                     
@@ -11232,7 +11231,7 @@ public class CardFactory_Creatures {
             
             a2.setDescription("U: Switch Windreaver's power and toughness until end of turn. ");
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Academy Rector")) {

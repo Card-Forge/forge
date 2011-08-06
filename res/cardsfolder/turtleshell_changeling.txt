@@ -4,6 +4,8 @@ Types:Creature Shapeshifter
 Text:no text
 PT:1/4
 K:Changeling
+A:AB$Pump | Cost$ 1 U | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turtleshell_changeling.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/94.jpg
