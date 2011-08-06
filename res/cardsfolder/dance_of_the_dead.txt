@@ -1,0 +1,8 @@
+Name:Dance of the Dead
+ManaCost:1 B
+Types:Enchantment Aura
+Text:Enchant creature card in a graveyard\r\n\r\nWhen CARDNAME enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with CARDNAME." Return enchanted creature card to the battlefield tapped under your control and attach CARDNAME to it. When CARDNAME leaves the battlefield, that creature's controller sacrifices it.\r\n\r\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay 1 B. If he or she does, untap that creature.
+K:stPumpEnchanted:Creature:1/1/CARDNAME doesn't untap during your untap step.:No Condition:Enchanted creature gets +1/+1 and doesn't untap during its controller's untap step.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_of_the_dead.jpg
+End

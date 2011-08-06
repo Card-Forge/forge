@@ -1507,7 +1507,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Animate Dead")) {
+        else if(cardName.equals("Animate Dead") || cardName.equals("Dance of the Dead")) {
         	final Card[] targetC = new Card[1];
         	// need to override what happens when this is cast.
         	final Spell_Permanent animate = new Spell_Permanent(card) {
@@ -1595,7 +1595,7 @@ class CardFactory_Auras {
                     }
                     
                     // Everything worked out perfectly.
-                    animated.addSemiPermanentAttackBoost(-1);
+                    if(card.getName().equals("Animate Dead")) animated.addSemiPermanentAttackBoost(-1);
         		}
         	};//Ability
 
@@ -1616,7 +1616,7 @@ class CardFactory_Auras {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     if(AllZone.GameAction.isCardInZone(c, play)) {
-                        c.addSemiPermanentAttackBoost(+1);
+                        if(card.getName().equals("Animate Dead")) c.addSemiPermanentAttackBoost(+1);
                         AllZone.GameAction.sacrifice(c);
                     }
         		}
@@ -1639,9 +1639,9 @@ class CardFactory_Auras {
         	
             card.addSpellAbility(animate);
 			
-			attach.setStackDescription("Attaching Animate Dead to animated Creature.");
+			attach.setStackDescription("Attaching "+cardName+" to creature in graveyard.");
         	card.addComesIntoPlayCommand(attachCmd);
-        	detach.setStackDescription("Animate Dead left play. Sacrificing Animated Creature if still around.");
+        	detach.setStackDescription(cardName+" left play. Sacrificing creature if still around.");
         	card.addLeavesPlayCommand(detachCmd);
         	card.addUnEnchantCommand(detachCmd);
         }//*************** END ************ END **************************

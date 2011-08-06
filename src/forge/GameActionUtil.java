@@ -50,6 +50,7 @@ public class GameActionUtil {
 		upkeep_Land_Tax();
 		upkeep_Tangle_Wire();
 		upkeep_Mana_Vault();
+		upkeep_Dance_of_the_Dead();
 		upkeep_Mana_Crypt();
 		upkeep_Feedback();
 		upkeep_Farmstead();
@@ -6921,6 +6922,42 @@ public class GameActionUtil {
 					}
 				};
 				vaultChoice.setStackDescription(thisVault.getName()+" - Untap during Upkeep?");
+				AllZone.Stack.add(vaultChoice);
+			}
+		}
+	}
+	
+	private static void upkeep_Dance_of_the_Dead() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+		
+		CardList dances = AllZoneUtil.getPlayerCardsInPlay(player, "Dance of the Dead");
+		for(Card dance:dances) {
+			final Card source = dance;
+			final ArrayList<Card> list = source.getEnchanting();
+			final Card creature = list.get(0);
+			if(creature.isTapped()) {
+				Ability vaultChoice = new Ability(source, "0"){
+				
+					@Override
+					public void resolve(){
+						if(GameActionUtil.showYesNoDialog(source, "Untap "+creature.getName()+"?")) {
+							//prompt for pay mana cost, then untap
+							final SpellAbility untap = new Ability(source, "1 B") {
+								@Override
+								public void resolve() {
+									creature.untap();
+								}
+							};//Ability
+							
+							StringBuilder sb = new StringBuilder();
+							sb.append("Untap ").append(creature);
+							untap.setStackDescription(sb.toString());
+							
+							AllZone.GameAction.playSpellAbility(untap);
+						}
+					}
+				};
+				vaultChoice.setStackDescription(source.getName()+" - Untap creature during Upkeep?");
 				AllZone.Stack.add(vaultChoice);
 			}
 		}
