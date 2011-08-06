@@ -13502,8 +13502,15 @@ public class CardFactory_Creatures {
 	        	CardList all = new CardList();
 	        	all.addAll(AllZone.Human_Play.getCards());
 	        	all.addAll(AllZone.Computer_Play.getCards());
-	        	all = all.getType("Artifact");
+	        	all = all.filter(new CardListFilter(){
+	        		public boolean addCard(Card c)
+	        		{
+	        			return c.isArtifact() && CardFactoryUtil.canTarget(card, c);
+	        		}
+	        	});
 	        	
+	        	CardList humanList = new CardList(AllZone.Human_Play.getCards());
+	        	humanList = humanList.getType("Artifact");
 	        	
 	        	if (all.size() != 0) {
 	        		
@@ -13512,9 +13519,17 @@ public class CardFactory_Creatures {
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {
-	        			Card human = CardFactoryUtil.AI_getBestArtifact(all);
-	        			ability.setTargetCard(human);
-	        			AllZone.Stack.add(ability);
+	        			if (humanList.size() > 0 ){
+		        			Card human = CardFactoryUtil.AI_getBestArtifact(humanList);
+		        			ability.setTargetCard(human);
+		        			AllZone.Stack.add(ability);
+	        			}
+	        			else
+	        			{
+	        				Card comp = CardFactoryUtil.AI_getCheapestPermanent(all, card, true);
+	        				ability.setTargetCard(comp);
+	        				AllZone.Stack.add(ability);
+	        			}
 	        		}
 	        	}
 	          

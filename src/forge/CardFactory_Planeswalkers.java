@@ -2557,11 +2557,265 @@ class CardFactory_Planeswalkers {
 	      card2.addSpellAbility(ability3);
 	      
 	      return card2;
+	    }//*************** END ************ END **************************
 	    
-	    }
+	    //*************** START *********** START **************************
+	    else if(cardName.equals("Sarkhan Vol"))
+	    {
+	      final int turn[] = new int[1];
+	      turn[0] = -1;
+
+	      final Card card2 = new Card()
+	      {
+	        public void addDamage(int n)
+	        {
+	          subtractCounter(Counters.LOYALTY,n);
+	          AllZone.GameAction.checkStateEffects();
+	        }
+	      };
+	      card2.addCounter(Counters.LOYALTY,4);
+
+	      card2.setOwner(owner);
+	      card2.setController(owner);
+
+	      card2.setName(card.getName());
+	      card2.setType(card.getType());
+	      card2.setManaCost(card.getManaCost());
+	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      
+	      final SpellAbility ability1 = new Ability(card2, "0")
+	      {
+	        public void resolve()
+	        {
+	          card2.addCounter(Counters.LOYALTY, 1);
+	          turn[0] = AllZone.Phase.getTurn();
+
+	          final int boost = 1;
+	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+	          CardList list = new CardList(play.getCards());
+
+	          for(int i = 0; i < list.size(); i++)
+	          {
+	            final Card[] target = new Card[1];
+	            target[0] = list.get(i);
+
+	            final Command untilEOT = new Command()
+	            {
+				  private static final long serialVersionUID = 2893066467461166183L;
+
+				  public void execute()
+	              {
+	                if(AllZone.GameAction.isCardInPlay(target[0]))
+	                {
+	                  target[0].addTempAttackBoost(-boost);
+	                  target[0].addTempDefenseBoost(-boost);
+
+	                  target[0].removeExtrinsicKeyword("Haste");
+	                }
+	              }
+	            };//Command
+
+	            if(AllZone.GameAction.isCardInPlay(target[0]))
+	            {
+	              target[0].addTempAttackBoost(boost);
+	              target[0].addTempDefenseBoost(boost);
+
+	              target[0].addExtrinsicKeyword("Haste");
+
+	              AllZone.EndOfTurn.addUntil(untilEOT);
+	            }//if
+	          }//for
+
+	        }//resolve()
+	        public boolean canPlay()
+	        {
+	          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+	                  turn[0] != AllZone.Phase.getTurn() &&
+	          		  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+	          		  !AllZone.Phase.getPhase().equals("End of Turn") &&
+	          		  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	          		  && AllZone.Stack.size() == 0;
+	        }//canPlay()
+	        public boolean canPlayAI()
+	        {
+	          return AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && card2.getCounters(Counters.LOYALTY) < 7;
+	        }
+	      };//ability1
+	      Input runtime1 = new Input()
+	      {
+			private static final long serialVersionUID = 3843631106383444950L;
+
+			int check = -1;
+	        public void showMessage()
+	        {
+	          if(check != AllZone.Phase.getTurn())
+	          {
+	            check = AllZone.Phase.getTurn();
+	            turn[0] = AllZone.Phase.getTurn();
+
+	            AllZone.Stack.push(ability1);
+	            stop();
+	          }
+	        }
+	      };//Input
+	      ability1.setStackDescription(card2.getName() +" - Creatures you control get +1/+1 and gain haste until end of turn.");
+	      ability1.setDescription("+1: Creatures you control get +1/+1 and gain haste until end of turn.");
+	      ability1.setBeforePayMana(runtime1);
+	      card2.addSpellAbility(ability1);
+	      
+	      final PlayerZone[] orig = new PlayerZone[1];
+	      final PlayerZone[] temp = new PlayerZone[1];
+	      final String[] controllerEOT = new String[1];
+	      final Card[] target          = new Card[1];
+
+	      final Command untilEOT = new Command()
+	      {
+
+			private static final long serialVersionUID = -815595604846219653L;
+
+			public void execute()
+	        {
+	          //if card isn't in play, do nothing
+	          if(! AllZone.GameAction.isCardInPlay(target[0]))
+	            return;
+
+	          target[0].setController(controllerEOT[0]);
+
+	          ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
+	          ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
+
+	          //moveTo() makes a new card, so you don't have to remove "Haste"
+	          //AllZone.GameAction.moveTo(playEOT[0], target[0]);
+	          temp[0].remove(target[0]);
+	          orig[0].add(target[0]);
+	          target[0].untap();
+	          target[0].removeExtrinsicKeyword("Haste");
+	          
+	          ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(true);
+	          ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(true);
+	        }//execute()
+	      };//Command
+
+	      final Ability ability2 = new Ability(card, "0")
+	      {
+			
+			public void resolve()
+	        {
+	          if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card2, getTargetCard()) )
+	          {
+	        	card2.subtractCounter(Counters.LOYALTY, 2);
+	        	  
+	            orig[0]       = AllZone.getZone(getTargetCard());
+	            controllerEOT[0] = getTargetCard().getController();
+	            target[0]        = getTargetCard();
+
+	            //set the controller
+	            getTargetCard().setController(card.getController());
+
+	            ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
+	            ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
+
+	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	            play.add(getTargetCard());
+	            temp[0] = play;
+	            orig[0].remove(getTargetCard());
+
+	            ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(true);
+	            ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(true);
+
+
+	            getTargetCard().untap();
+	            getTargetCard().addExtrinsicKeyword("Haste");
+
+	            AllZone.EndOfTurn.addUntil(untilEOT);
+	          }//is card in play?
+	        }//resolve()
+	        public boolean canPlayAI()
+	        {
+	          return false;
+	        }//canPlayAI()
+	        
+	        public boolean canPlay()
+	        {
+	        	return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+                turn[0] != AllZone.Phase.getTurn() &&
+                  card2.getCounters(Counters.LOYALTY) >= 2 &&
+        		  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+        		  !AllZone.Phase.getPhase().equals("End of Turn") &&
+        		  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+        		  && AllZone.Stack.size() == 0;
+	        }
+	      };//SpellAbility
+	      ability2.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability2));
+	      ability2.setDescription("-2: Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.");
+	      card2.addSpellAbility(ability2);
+	      
+	      //ability3
+	      final Ability ability3 = new Ability(card2, "0")
+	      {
+	        public void resolve()
+	        {
+	          card2.subtractCounter(Counters.LOYALTY, 6);
+	          turn[0] = AllZone.Phase.getTurn();
+
+	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+	          for (int i=0;i<5;i++)
+	          {
+	        	  play.add(getToken());
+	          }
+	          
+	        }
+	        Card getToken()
+	        {
+	          Card c = new Card();
+
+	          c.setOwner(card.getController());
+	          c.setController(card.getController());
+	          
+	          c.setImageName("R 4 4 Dragon");
+	          c.setName("Dragon");
+	          c.setManaCost("R");
+	          c.setToken(true);
+
+	          c.addType("Creature");
+	          c.addType("Dragon");
+	          c.setBaseAttack(4);
+	          c.setBaseDefense(4);
+	          c.addIntrinsicKeyword("Flying");
+	
+	          return c;
+	        }//makeToken()
+
+	        public boolean canPlay()
+	        {
+	          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+	                  turn[0] != AllZone.Phase.getTurn() &&
+	                  card2.getCounters(Counters.LOYALTY) >=6 &&
+	                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+	                  !AllZone.Phase.getPhase().equals("End of Turn") && 
+	                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                  && AllZone.Stack.size() == 0;
+	        }//canPlay()
+	        public boolean canPlayAI()
+	        {
+	          return card2.getCounters(Counters.LOYALTY) > 6;
+	        }
+	      };//ability3
+	      ability3.setStackDescription(card2.getName() +" - Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
+	      ability3.setDescription("-6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
+	      card2.addSpellAbility(ability3);
+	      //end ability 2
+	      
+	      return card2;
+	    }//*************** END ************ END **************************
+	    
+	    
+	    
 	    
 	    return card;
 	}
+	
+	
 	
 	// copies stats like attack, defense, etc..
 	private static Card copyStats(Object o) {
