@@ -19580,7 +19580,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Channel the Suns")) {
             final SpellAbility spell = new Spell(card) {
                
@@ -19767,8 +19767,8 @@ public class CardFactory implements NewConstants {
 
 
         //*************** START *********** START **************************
-        if(cardName.equals("Explore"))
-       {
+        else if(cardName.equals("Explore"))
+        {
        	final SpellAbility spell = new Spell(card) {
    			private static final long serialVersionUID = 8377957584738695517L;
 
@@ -19818,7 +19818,7 @@ public class CardFactory implements NewConstants {
        	card.setSVar("PlayMain1", "TRUE");
        } //*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Rampant Growth")) {
             SpellAbility spell = new Spell(card) {
 
@@ -20039,7 +20039,7 @@ public class CardFactory implements NewConstants {
         }// *************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         if(cardName.equals("Bottle of Suleiman")) {
            /*
             * Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
@@ -20096,7 +20096,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Burst Lightning")) {
             final SpellAbility spell = new Spell(card) {
                 
@@ -20422,7 +20422,7 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Hellion Eruption")) {
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 5820870438419741058L;
@@ -20720,7 +20720,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Slate of Ancestry")) {
         	/*
         	 * 4, Tap, Discard your hand: Draw a card for each creature you control.
@@ -20782,6 +20782,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        //*************** START *********** START **************************
         else if(cardName.equals("Everflowing Chalice")) {
         	final Ability_Mana addMana = new Ability_Mana(card, "tap: add 1 to your mana pool for each charge counter on Everflowing Chalice.") {
  				private static final long serialVersionUID = -2661488839088242789L;
@@ -20816,7 +20817,7 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
 
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if (cardName.equals("Burning Inquiry")) {
         	final SpellAbility spell = new Spell(card){
 				private static final long serialVersionUID = 7133052973770045886L;
@@ -20843,7 +20844,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Chromatic Star")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -20888,7 +20889,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Growth Spasm")) {
             SpellAbility spell = new Spell(card) {
 
@@ -21127,7 +21128,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Acidic Soil")) {
         	/*
         	 * Acidic Soil deals damage to each player equal to the number of
@@ -21331,7 +21332,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Fabricate")) {
             SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 5274602734116058876L;
@@ -21469,7 +21470,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Curse of Wizardry")) {
             final Ability ability = new Ability(card, "0") {
                 @Override
@@ -21508,7 +21509,7 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if (cardName.equals("Oust")) {
         	/*
         	 * Put target creature into its owner's library second from the
@@ -21893,7 +21894,7 @@ public class CardFactory implements NewConstants {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Sound the Call")) {
             SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = -2359398136467055521L;
@@ -21997,7 +21998,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Recall")) {
         	/*
         	 * Discard X cards, then return a card from your graveyard to your
@@ -22463,7 +22464,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Journey To Nowhere")) {
+        else if(cardName.equals("Journey to Nowhere")) {
 
         	final CommandReturn getPerm = new CommandReturn() {
         		public Object execute() {
