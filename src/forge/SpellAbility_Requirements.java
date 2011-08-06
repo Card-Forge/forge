@@ -15,13 +15,16 @@ public class SpellAbility_Requirements {
 	}
 	
 	public void fillRequirements(){
-		if (ability instanceof Spell && !bCasting){
+		if (ability instanceof Spell && !bCasting && !ability.getSourceCard().isCopiedSpell()){
 			// remove from hand, todo(sol) be careful of spell copies if spells start using this
 			bCasting = true;
 			Card c = ability.getSourceCard();
 			fromZone = AllZone.getZone(c);
 			fromZone.remove(c);
 		}
+		
+		// freeze Stack. No abilities should go onto the stack while I'm filling requirements.
+		AllZone.Stack.freezeStack();
 		
 		if (select.doesTarget()){
 			select.setRequirements(this);
@@ -67,7 +70,7 @@ public class SpellAbility_Requirements {
 	
 	public void addAbilityToStack(){
 		AllZone.ManaPool.clearPay(false);
-		AllZone.Stack.add(ability);
+		AllZone.Stack.addAndUnfreeze(ability);
 		if (select != null)
 			select.resetTargets();
 	}

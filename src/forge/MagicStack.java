@@ -4,6 +4,10 @@ import java.util.*;
 public class MagicStack extends MyObservable
 {
   private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
+  private ArrayList<SpellAbility> frozenStack = new ArrayList<SpellAbility>();
+  private boolean frozen = false;
+  public void freezeStack() { frozen = true; }
+  
   private Object StormCount;
   private Object PlayerSpellCount;
   private Object PlayerCreatureSpellCount;   
@@ -14,6 +18,15 @@ public class MagicStack extends MyObservable
   {
 	  stack.clear();
 	  this.updateObservers();
+  }
+  
+  public void addAndUnfreeze(SpellAbility sp){
+	  frozen = false;
+	  this.add(sp);
+	  while(!frozenStack.isEmpty()){
+		  this.add(frozenStack.get(0));
+		  frozenStack.remove(0);
+	  }
   }
   
   public void add(SpellAbility sp, boolean useX)
@@ -30,12 +43,12 @@ public class MagicStack extends MyObservable
   }
 
   public ManaCost GetMultiKickerSpellCostChange(SpellAbility sa) { 
-	  int Max = 25;
+	  	int Max = 25;
      	String[] Numbers = new String[Max];
    	for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
-		  ManaCost manaCost = new ManaCost(sa.getManaCost());
-		  String Mana = manaCost.toString();
-		 int MultiKickerPaid = AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid;
+     	ManaCost manaCost = new ManaCost(sa.getManaCost());
+		String Mana = manaCost.toString();
+		int MultiKickerPaid = AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid;
        	for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
        	String Number_ManaCost = " ";
    		if(Mana.toString().length() == 1) Number_ManaCost = Mana.toString().substring(0, 1);
@@ -80,33 +93,39 @@ public class MagicStack extends MyObservable
   boolean ActualEffectTriggered = false; // WheneverKeyword Test
   public void add(SpellAbility sp)
   {
+	  if (frozen){
+		  frozenStack.add(sp);
+		  return;
+	  }
+	  
 	  // if activating player slips through the cracks, assign activating Player to the controller here
 	  if (sp.getActivatingPlayer().equals("")){
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			//System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 	  }
 	  // WheneverKeyword Test
-		  ActualEffectTriggered = false;
-		  if(sp.getSourceCard().getKeyword().toString().contains("WheneverKeyword")) {
-		        ArrayList<String> a = sp.getSourceCard().getKeyword();
-			        int WheneverKeywords = 0;
-			        int WheneverKeyword_Number[] = new int[a.size()];
-			        for(int x = 0; x < a.size(); x++)
-			            if(a.get(x).toString().startsWith("WheneverKeyword")) {
-			            	WheneverKeyword_Number[WheneverKeywords] = x;
-			            	WheneverKeywords = WheneverKeywords + 1;
-			            }
-			        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
-	             String parse = sp.getSourceCard().getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
-	             String k[] = parse.split(":");
-	             if(k[1].equals("ActualSpell") && ActualEffectTriggered == false) {
-	            	 AllZone.GameAction.CheckWheneverKeyword(sp.getSourceCard(),"ActualSpell",null);
-	            	 sp.getSourceCard().removeIntrinsicKeyword(parse);
-	            	 ActualEffectTriggered = true;
-	             }
-			        }
+	  ActualEffectTriggered = false;
+	  if(sp.getSourceCard().getKeyword().toString().contains("WheneverKeyword")) {
+		ArrayList<String> a = sp.getSourceCard().getKeyword();
+		int WheneverKeywords = 0;
+		int WheneverKeyword_Number[] = new int[a.size()];
+		for(int x = 0; x < a.size(); x++)
+		    if(a.get(x).toString().startsWith("WheneverKeyword")) {
+		    	WheneverKeyword_Number[WheneverKeywords] = x;
+		    	WheneverKeywords = WheneverKeywords + 1;
+		    }
+		
+		for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+			 String parse = sp.getSourceCard().getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
+			 String k[] = parse.split(":");
+			 if(k[1].equals("ActualSpell") && ActualEffectTriggered == false) {
+				 AllZone.GameAction.CheckWheneverKeyword(sp.getSourceCard(),"ActualSpell",null);
+			    	 sp.getSourceCard().removeIntrinsicKeyword(parse);
+			    	 ActualEffectTriggered = true;
+		     }
+		}
 		  
-		  }
+	  }
 		 if(ActualEffectTriggered == false) {
 		  //  // WheneverKeyword Test: Added one } at end
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
@@ -255,35 +274,35 @@ public class MagicStack extends MyObservable
   {
     return stack.size();
   }
-  public void push(SpellAbility sp)
-  {
-	    if (stack.size() == 0) {
-	     }
-    stack.add(0, sp);
 
-    this.updateObservers();
-    if(sp.isSpell() && !sp.getSourceCard().isCopiedSpell())
-    {
-   	    Phase.StormCount = Phase.StormCount + 1;
-   	    if(sp.getSourceCard().getController() == "Human") {
-   	   	    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
-   	   	    if(sp.getSourceCard().isCreature() == true) {
-   	   	   	    Phase.PlayerCreatureSpellCount = Phase.PlayerCreatureSpellCount + 1;   	    	
-   	   	    }
-   	   	    } else {
-   	   	    Phase.ComputerSpellCount = Phase.ComputerSpellCount + 1;
-   	   	    if(sp.getSourceCard().isCreature() == true) {
-   	   	    Phase.ComputerCreatureSpellCount = Phase.ComputerCreatureSpellCount + 1;
-   	   	    }
-   	   	    }
-    	//attempt to counter human spell
-    	if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
-    		CardFactoryUtil.isCounterable(sp.getSourceCard()) )
-    		ComputerAI_counterSpells2.counter_Spell(sp);	
-    	//put code for Standstill here
-    	GameActionUtil.executePlayCardEffects(sp);
-    	
-    }
+public void push(SpellAbility sp)
+{
+	stack.add(0, sp);
+	
+	this.updateObservers();
+	if(sp.isSpell() && !sp.getSourceCard().isCopiedSpell())
+	{
+	    Phase.StormCount = Phase.StormCount + 1;
+	    if(sp.getSourceCard().getController() == "Human") {
+		    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
+		    if(sp.getSourceCard().isCreature() == true) {
+		   	    Phase.PlayerCreatureSpellCount = Phase.PlayerCreatureSpellCount + 1;   	    	
+		    }
+	    } else {
+		    Phase.ComputerSpellCount = Phase.ComputerSpellCount + 1;
+		    if(sp.getSourceCard().isCreature() == true) {
+		    	Phase.ComputerCreatureSpellCount = Phase.ComputerCreatureSpellCount + 1;
+		    }
+	    }
+		//attempt to counter human spell
+		if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
+			CardFactoryUtil.isCounterable(sp.getSourceCard()) )
+			ComputerAI_counterSpells2.counter_Spell(sp);	
+		//put code for Standstill here
+		
+		GameActionUtil.executePlayCardEffects(sp);
+			
+	}
   }
   public SpellAbility pop()
   {
