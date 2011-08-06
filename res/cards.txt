@@ -3107,7 +3107,7 @@ tap: add 1
 
 Nantuko Elder
 2 G
-Creature Elf Druid
+Creature Insect Druid
 no text
 1/2
 tap: add 1G

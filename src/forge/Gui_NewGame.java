@@ -675,6 +675,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 if(index == -1) return;
                 Constant.Runtime.width[0] = widths[index];
                 Constant.Runtime.height[0] = heights[index];
+                ImageCache.dumpCache();
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
             }

@@ -9530,7 +9530,7 @@ public class CardFactory_Creatures {
 	            {
 	              public boolean addCard(Card c)
 	              {
-	                return c.isCreature() && (!c.isArtifact());
+	                return c.isCreature() && (!c.isArtifact()) && CardFactoryUtil.canTarget(card, c);
 	              }
 	            });
 	            return list;
@@ -9587,8 +9587,12 @@ public class CardFactory_Creatures {
 	          CardList getArtifactCreatures()
 	          {
 	            CardList list = new CardList(AllZone.Human_Play.getCards());
-	            list = list.getType("Artifact");
-	            list = list.getType("Creature");
+	            list = list.filter(new CardListFilter(){
+	            	public boolean addCard(Card c)
+	            	{
+	            		return c.isCreature() && c.isArtifact() && CardFactoryUtil.canTarget(card, c);
+	            	}
+	            });
 	            return list;
 	          }
 	        };//SpellAbility
