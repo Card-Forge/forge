@@ -616,7 +616,7 @@ public class CardFactory implements NewConstants {
         				
         				if(ActionID.equals("Draw"))
         				{
-        					AllZone.GameAction.drawCards(Target, Integer.parseInt(SplitActionParams[0]));
+        					Target.drawCards(Integer.parseInt(SplitActionParams[0]));
         				}
         				else if(ActionID.equals("Discard"))
         				{
@@ -4318,7 +4318,7 @@ public class CardFactory implements NewConstants {
                     Player TgtPlayer = (abTgt == null) ? card.getController() : getTargetPlayer();
                     
                     for(int i = 0; i < ncards; i++)
-                        AllZone.GameAction.drawCard(TgtPlayer);
+                        TgtPlayer.drawCard();
                     
                     if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
                             card.getController(), card.getController().getOpponent(),
@@ -4416,7 +4416,7 @@ public class CardFactory implements NewConstants {
                     if(Tgt[0]) TgtPlayer = getTargetPlayer();
                     
                     for(int i = 0; i < ncards; i++)
-                        AllZone.GameAction.drawCard(TgtPlayer);
+                        TgtPlayer.drawCard();
                     
                     if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
                             card.getController(), card.getController().getOpponent(), TgtPlayer,
@@ -5153,7 +5153,7 @@ public class CardFactory implements NewConstants {
                         
                         if(card.getName().equals("Skullmulcher")) {
                             for(int i = 0; i < numCreatures[0]; i++) {
-                                AllZone.GameAction.drawCard(card.getController());
+                                card.getController().drawCard();
                             }
                         } else if(card.getName().equals("Caldera Hellion")) {
                             PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
@@ -5775,7 +5775,7 @@ public class CardFactory implements NewConstants {
                 		drawCardsNum = 2;
                 	}
                 	for (int i = 0; i < drawCardsNum; i++) {
-                        AllZone.GameAction.drawCard(card.getController());
+                        card.getController().drawCard();
                 	}//for loop
                 }//resolve()
             };//SpellAbility
@@ -7882,7 +7882,7 @@ public class CardFactory implements NewConstants {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    	AllZone.GameAction.drawCard(card.getController());
+                    	card.getController().drawCard();
                 }
                 
                 @Override
@@ -8143,9 +8143,7 @@ public class CardFactory implements NewConstants {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCards(card.getController(), 3);
-                    //AllZone.GameAction.drawCard(card.getController());
-                    //AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCards(3);
                 }
             };
             
@@ -8159,7 +8157,6 @@ public class CardFactory implements NewConstants {
             };
             
             card.addDestroyCommand(draw3Cards);
-            
         }//*************** END ************ END **************************  
         
 
@@ -8409,14 +8406,9 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                 	Player player = card.getController();
-                	Player owner = card.getOwner();
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, owner);
-                    
-                    AllZone.GameAction.drawCard(player);
-                    play.remove(card);
-                    lib.add(card, 0); //move divining top to top of library
+                    player.drawCard();
+                    AllZone.GameAction.moveToTopOfLibrary(card); //move divining top to top of library
                     card.untap();
                     
                 }
@@ -8787,8 +8779,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCards(2);
                     AllZone.GameAction.sacrifice(getSourceCard());
                 }
             };
@@ -10441,7 +10432,7 @@ public class CardFactory implements NewConstants {
         				private static final long serialVersionUID = 8293374203043368969L;
 
         				public void execute() {
-        					AllZone.GameAction.drawCard(getTargetPlayer());
+        					getTargetPlayer().drawCard();
         				}
         			};
         			AllZone.EndOfTurn.addAt(draw);
@@ -10571,7 +10562,7 @@ public class CardFactory implements NewConstants {
 				public void resolve() {
 					final Player player = card.getController();
 					AllZone.GameAction.sacrifice(card);
-					AllZone.GameAction.drawCards(player, 3);
+					player.drawCards(3);
 				}
         	};
         	ability.setDescription("3, tap: Sacrifice Dreamstone Hedron: Draw 3 cards.");
@@ -10600,8 +10591,7 @@ public class CardFactory implements NewConstants {
                     
                     // Draw a card for each creature
                     CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
-                    for(int i = 0; i < creatures.size(); i++)
-                        AllZone.GameAction.drawCard(player);
+                    player.drawCards(creatures.size());
                 	
                 }//resolve()
 
@@ -10692,7 +10682,7 @@ public class CardFactory implements NewConstants {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCard();
                 }
             };
             Command destroy = new Command() {

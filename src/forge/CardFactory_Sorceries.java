@@ -61,8 +61,7 @@ public class CardFactory_Sorceries {
                     AllZone.GameAction.shuffle(player);
                     
                     // Draw seven cards
-                    for(int i = 0; i < 7; i++)
-                        AllZone.GameAction.drawCard(player);
+                    player.drawCards(7);
                     
                     if(card.getController().equals(player)) {
                         library.remove(card);
@@ -1129,9 +1128,8 @@ public class CardFactory_Sorceries {
                     }
                     }
 					// Player Draws 3 Cards
-                    for(int i = 0; i < 3; i++) {
-                        AllZone.GameAction.drawCard(card.getController());
-                    }
+                    card.getController().drawCards(3);
+                    
 					// Player Gains 5 Life
                     //AllZone.GameAction.gainLife(card.getController(), 5);
                     card.getController().gainLife(5);
@@ -2800,7 +2798,7 @@ public class CardFactory_Sorceries {
                     for(int i = 0; i < all.size(); i++) {
                         Card c = all.get(i);
                         if(c.isCreature()) AllZone.GameAction.destroy(c);
-                        AllZone.GameAction.drawCard(card.getController());
+                        card.getController().drawCard();
                     }
                 }//resolve()
 
@@ -2837,8 +2835,7 @@ public class CardFactory_Sorceries {
                     for(int i = 0; i < c.length; i++)
                         AllZone.GameAction.discard(c[i], this);
                     
-                    for(int i = 0; i < 7; i++)
-                        AllZone.GameAction.drawCard(player);
+                    player.drawCards(7);
                 }
             };//SpellAbility
             card.clearSpellAbility();
@@ -3003,8 +3000,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCards(2);
                 }
                 
                 @Override
@@ -3031,8 +3027,7 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     int n = countLandTypes();
                     
-                    for(int i = 0; i < n; i++)
-                        AllZone.GameAction.drawCard(getTargetPlayer());
+                    getTargetPlayer().drawCards(n);
                 }
                 
                 int countLandTypes() {
@@ -3872,7 +3867,7 @@ public class CardFactory_Sorceries {
                     CardList topTwo = new CardList();
                     
                     if(lib.size() == 1) {
-                        AllZone.GameAction.drawCard(card.getController());
+                        card.getController().drawCard();
                     } else {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
                             topTwo.add(lib.get(0));
@@ -5174,8 +5169,8 @@ public class CardFactory_Sorceries {
       		{
       			  for (int i=0;i<card.getXManaCostPaid();i++)
       			  {
-      				  AllZone.GameAction.drawCard(AllZone.HumanPlayer);
-      				  AllZone.GameAction.drawCard(AllZone.ComputerPlayer);
+      				  AllZone.HumanPlayer.drawCard();
+      				  AllZone.ComputerPlayer.drawCard();
       			  }
       			  card.setXManaCostPaid(0);
       		}
@@ -5331,14 +5326,11 @@ public class CardFactory_Sorceries {
   			private static final long serialVersionUID = -7141472916367953810L;
 
   			public void resolve()
-      		  {
+  			{
   				Player player = getTargetPlayer();
-      			  for(int i=0;i<card.getXManaCostPaid();i++)
-      			  {
-      				  AllZone.GameAction.drawCard(player);
-      			  }
-      			  card.setXManaCostPaid(0);
-      		  }
+  				player.drawCards(card.getXManaCostPaid());
+  				card.setXManaCostPaid(0);
+  			}
       		  
       		  public boolean canPlayAI()
       		  {
@@ -6980,45 +6972,44 @@ public class CardFactory_Sorceries {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Windfall")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7707012960887790709L;
-            
-                @Override
-                public boolean canPlayAI() {
-                    /*
-                     *  We want compy to have less cards in hand than the human
-                     */
-                    CardList Hhand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
-                    CardList Chand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-                    return Chand.size() < Hhand.size();
-                }
-                
-            @Override
-            public void resolve() {
-                discardDraw(AllZone.HumanPlayer);
-                discardDraw(AllZone.ComputerPlayer);
-            }//resolve()
-            
-            void discardDraw(Player player) {
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                CardList Hhand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
-                CardList Chand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-                int draw;
-                if(Hhand.size() >= Chand.size()) {
-                    draw = Hhand.size();
-                } else {
-                    draw = Chand.size();
-                }
-                Card[] c = hand.getCards();
-                for(int i = 0; i < c.length; i++)
-                    AllZone.GameAction.discard(c[i], null);
-            
-                for(int i = 0; i < draw; i++)
-                    AllZone.GameAction.drawCard(player);
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
+        	final SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = -7707012960887790709L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			/*
+        			 *  We want compy to have less cards in hand than the human
+        			 */
+        			CardList Hhand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
+        			CardList Chand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+        			return Chand.size() < Hhand.size();
+        		}
+
+        		@Override
+        		public void resolve() {
+        			discardDraw(AllZone.HumanPlayer);
+        			discardDraw(AllZone.ComputerPlayer);
+        		}//resolve()
+
+        		void discardDraw(Player player) {
+        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+        			CardList Hhand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
+        			CardList Chand = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+        			int draw;
+        			if(Hhand.size() >= Chand.size()) {
+        				draw = Hhand.size();
+        			} else {
+        				draw = Chand.size();
+        			}
+        			Card[] c = hand.getCards();
+        			for(int i = 0; i < c.length; i++)
+        				AllZone.GameAction.discard(c[i], null);
+
+        			player.drawCards(draw);
+        		}
+        	};//SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
         
