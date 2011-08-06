@@ -164,7 +164,9 @@ Dragon Broodmother
 Dragon Engine
 Dragon Roost
 Dragonmaster Outcast
+Dragonskull Summit
 Drifting Djinn
+Drowned Catacomb
 Dwarven Pony
 Earthcraft
 Earthquake
@@ -231,6 +233,7 @@ Giant Solifuge
 Gilded Lotus
 Gilt-Leaf Archdruid
 Giltspire Avenger
+Glacial Fortress
 Glimpse the Unthinkable
 Glint-Eye Nephilim
 Global Ruin
@@ -514,6 +517,7 @@ Rockshard Elemental
 Rofellos, Llanowar Emissary
 Rolling Earthquake
 Rolling Stones
+Rootbound Crag
 Rootwater Thief
 Rorix Bladewing
 Royal Assassin
@@ -597,6 +601,7 @@ Stomping Ground
 Stoneforge Mystic
 Storm Herd
 Storm Spirit
+Stormscape Master
 Stroke of Genius
 Stuffy Doll
 Sun Ce, Young Conquerer
@@ -604,6 +609,7 @@ Sun Quan, Lord of Wu
 Sunglasses of Urza
 Sungrass Prairie
 Sunken Ruins
+Sunpetal Grove
 Sunweb
 Supreme Exemplar
 Survival of the Fittest

@@ -460,6 +460,7 @@ Pendelhaven
 Penumbra Kavu
 Peregrine Drake
 Peregrine Mask
+Perimeter Captain
 Perish
 Pestilence
 Phantom Centaur
@@ -545,6 +546,7 @@ Seashell Cameo
 Seaside Citadel
 Seedcradle Witch
 Segovian Leviathan
+Sejiri Merfolk
 Sejiri Refuge
 Sengir Autocrat
 Sensei's Divining Top

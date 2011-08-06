@@ -293,6 +293,7 @@ Drake Hatchling
 Dream Cache
 Dream Stalker
 Dreg Reaver
+Drelnoch
 Drift of Phantasms
 Drifter il-Dal
 Drifting Meadow
@@ -489,6 +490,7 @@ Guided Strike
 Guilty Conscience
 Gush
 Guul Draz Vampire
+Hagra Crocodile
 Halberdier
 Hand of Death
 Harvest Gwyllion
@@ -497,6 +499,7 @@ Headless Horseman
 Heart Sliver
 Heartwood Dryad
 Heat Ray
+Hedron Rover
 Helionaut
 Hematite Golem
 Henchfiend of Ukor
@@ -803,6 +806,7 @@ Pincher Beetles
 Pit Imp
 Pit Scorpion
 Plague Beetle
+Plated Geopede
 Plated Rootwalla
 Plated Sliver
 Plated Spider
@@ -1058,6 +1062,7 @@ Steadfast Guard
 Steadfastness
 Steam Frigate
 Steel Leaf Paladin
+Steppe Lynx
 Steward of Valeron
 Stinging Barrier
 Stone Kavu
@@ -1067,6 +1072,7 @@ Stonewood Invoker
 Stonework Puma
 Storm Crow
 Stormfront Pegasus
+Stormscape Apprentice
 Strangling Soot
 Straw Soldiers
 Stream Hopper
@@ -1086,6 +1092,7 @@ Synchronous Sliver
 Talas Air Ship
 Talas Merchant
 Talas Scout
+Talon Sliver
 Talon Trooper
 Talruum Minotaur
 Tanglebloom
@@ -1102,6 +1109,7 @@ Tendrils of Corruption
 Terminate
 Teroh's Faithful
 Terramorphic Expanse
+Territorial Baloth
 Terror
 Thalakos Sentry
 Thallid
@@ -1116,6 +1124,7 @@ Thornscape Apprentice
 Thornweald Archer
 Thornwind Faeries
 Thought Courier
+Thunderscape Apprentice
 Tidehollow Strix
 Tiger Claws
 Timbermaw Larva
@@ -1267,6 +1276,7 @@ Willow Elf
 Willow Faerie
 Wind Drake
 Winding Wurm
+Windrider Eel
 Windseeker Centaur
 Windwright Mage
 Winged Coatl
