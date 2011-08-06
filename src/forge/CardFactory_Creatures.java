@@ -20408,6 +20408,34 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(cip);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Temporal Adept")) {
+        	final Ability_Tap ability = new Ability_Tap(card, "U U U") {
+				@Override
+        		public void resolve() {
+        			Card target = getTargetCard();
+        			if( CardFactoryUtil.canTarget(card, target)) {
+        				AllZone.GameAction.moveToHand(target);
+        			}
+        		}
+        		
+        		@Override
+        		public boolean canPlay() {
+        			CardList targets = AllZoneUtil.getCardsInPlay();
+        			return AllZoneUtil.isCardInPlay(card) && targets.size() > 0 && super.canPlay();
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        	};//SpellAbility
+        	
+        	card.addSpellAbility(ability);
+        	ability.setStackDescription(card.getName() + " - return target permanent to owner's hand.");
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

@@ -1,0 +1,8 @@
+Name:Temporal Adept
+ManaCost:1 U U
+Types:Creature Human Wizard
+Text:U U U, tap: Return target permanent to its owner's hand.
+PT:1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_adept.jpg
+End
