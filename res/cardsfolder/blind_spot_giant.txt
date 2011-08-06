@@ -5,6 +5,7 @@ Text:no text
 PT:4/3
 K:stPumpSelf:Creature:0/0/HIDDEN CARDNAME can't attack or block.:isNotPresent Giant.Other+YouCtrl:Blind-Spot Giant can't attack or block unless you control another Giant.
 SVar:BuffedBy:Giant
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_spot_giant.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/153.jpg
