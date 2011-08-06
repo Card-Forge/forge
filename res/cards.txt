@@ -1,3 +1,30 @@
+Phantom Nishoba
+5 G W
+Creature Cat Beast Spirit
+Phantom Nishoba enters the battlefield with seven +1/+1 counters on it. (NOTE: "Whenever Phantom Nishoba deals damage, you gain that much life." not implemented, instead Lifelink.) If damage would be dealt to Phantom Nishoba, prevent that damage. Remove a +1/+1 counter from Phantom Nishoba.
+0/0
+Lifelink
+Trample
+
+Gaddock Teeg
+G W
+Legendary Creature Kithkin Advisor
+Noncreature spells with converted mana cost 4 or greater can't be cast. (NOTE: "Noncreature spells with {X} in their mana costs can't be cast." is not implemented.)
+2/2
+
+Iona, Shield of Emeria
+6 W W W
+Legendary Creature Angel
+As Iona, Shield of Emeria enters the battlefield, choose a color. Your opponents can't cast spells of the chosen color.
+7/7
+Flying
+
+Meddling Mage
+U W
+Creature Human Wizard
+As Meddling Mage enters the battlefield, name a nonland card. The named card can't be cast.
+2/2
+
 Shorecrasher Mimic
 1 GU
 Creature Shapeshifter
@@ -2601,7 +2628,7 @@ Flame Jet
 1 R
 Sorcery
 no text
-spDamageP:3
+spDamageTgtP:3
 Cycling:2
 
 Slippery Bogle
@@ -4544,7 +4571,7 @@ Ember Shot
 6 R
 Instant
 Draw a card. 
-spDamageCP:3
+spDamageTgtCP:3
 Cantrip
 
 Noble Steeds
@@ -4557,7 +4584,7 @@ Zap
 2 R
 Instant
 Draw a card.
-spDamageCP:1
+spDamageTgtCP:1
 Cantrip
 
 Black Lotus
@@ -5541,7 +5568,7 @@ Breath of Malfegor
 3 B R
 Instant
 no text
-spDamageP:5
+spDamageTgtP:5
 
 Cerodon Yearling
 R W
@@ -6228,7 +6255,7 @@ Flame Javelin
 2/R 2/R 2/R
 Instant
 no text
-spDamageCP:4
+spDamageTgtCP:4
 
 Wilt-Leaf Cavaliers
 GW GW GW
@@ -7113,7 +7140,7 @@ Lava Axe
 4 R
 Sorcery
 no text
-spDamageP:5
+spDamageTgtP:5
 
 Norwood Archers
 3 G
@@ -7253,56 +7280,56 @@ Bee Sting
 3 G
 Sorcery
 no text
-spDamageCP:2
+spDamageTgtCP:2
 
 Cinder Storm
 6 R
 Sorcery
 no text
-spDamageCP:7
+spDamageTgtCP:7
 
 Fire Ambush
 1 R
 Sorcery
 no text
-spDamageCP:3
+spDamageTgtCP:3
 
 Ghostfire
 2 R
 Instant
 no text
-spDamageCP:3
+spDamageTgtCP:3
 Ghostfire is colorless.
 
 Lightning Blast
 3 R
 Instant
 no text
-spDamageCP:4
+spDamageTgtCP:4
 
 Scorching Spear
 R
 Sorcery
 no text
-spDamageCP:1
+spDamageTgtCP:1
 
 Searing Wind
 8 R
 Instant
 no text
-spDamageCP:10
+spDamageTgtCP:10
 
 Tarfire
 R
 Tribal Instant Goblin
 no text
-spDamageCP:2
+spDamageTgtCP:2
 
 Unyaro Bee Sting
 3 G
 Sorcery
 no text
-spDamageCP:2
+spDamageTgtCP:2
 
 Blistering Firecat
 1 R R R
@@ -7317,7 +7344,7 @@ Lava Spike
 R
 Sorcery 
 no text
-spDamageP:3
+spDamageTgtP:3
 
 Caldera Hellion
 3 R R
@@ -7401,19 +7428,19 @@ Lightning Bolt
 R
 Instant
 no text
-spDamageCP:3
+spDamageTgtCP:3
 
 Volcanic Hammer
 1 R
 Sorcery
 no text
-spDamageCP:3
+spDamageTgtCP:3
 
 Shock
 R
 Instant
 no text
-spDamageCP:2
+spDamageTgtCP:2
 
 Imperial Hellkite
 5 R R

@@ -2,6 +2,8 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 public class CardFactory_Creatures {
 	
 	public static int shouldCycle(Card c) {
@@ -17678,7 +17680,113 @@ public class CardFactory_Creatures {
 	            a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
 	          }//*************** END ************ END **************************
 
-	      
+	       	  //*************** START *********** START **************************
+	          else if (cardName.equals("Meddling Mage"))
+	          {
+	        	  final String[] input = new String[1];
+	        	  final Ability ability = new Ability(card, "0")
+	        	  {
+	        		  public void resolve()
+	        		  {
+	        			  if (card.getController().equals(Constant.Player.Human)) {
+	        				  input[0] = (String)JOptionPane.showInputDialog(null, "Which card?", "Pick card", JOptionPane.QUESTION_MESSAGE);
+	        				  card.setNamedCard(input[0]);
+	        			  }
+	        		  }
+	        	  };
+	        	  Command comesIntoPlay = new Command()
+	    	      {
+	    			private static final long serialVersionUID = 8485080996453793968L;
+
+	    			public void execute()
+	    	        {
+	    	          AllZone.Stack.add(ability);
+	    	        }
+	    	      };//Command
+	    	      ability.setStackDescription("As Meddling Mage enters the battlefield, name a nonland card.");
+	    	      card.addComesIntoPlayCommand(comesIntoPlay);
+	          }//*************** END ************ END **************************
+	       
+	       	  //*************** START *********** START **************************
+	          else if (cardName.equals("Iona, Shield of Emeria"))
+	          {
+	        	  final Ability ability = new Ability(card, "0")
+	        	  {
+	        		  public void resolve()
+	        		  {
+	        			  if (card.getController().equals(Constant.Player.Human)) {
+
+	                          String color = new String();
+	                          String[] colors = Constant.Color.Colors;
+	                          colors[colors.length-1] = "";
+	                          
+	                          Object o = AllZone.Display.getChoice("Choose color", colors);
+	                          color = (String)o;
+	                          card.setChosenColor(color);
+	        			  }
+	        			  else
+	        			  {
+	        				  
+	        			  }
+	        		  }
+	        	  };
+	        	  Command comesIntoPlay = new Command()
+	    	      {
+					private static final long serialVersionUID = 3331342605626623161L;
+
+					public void execute()
+	    	        {
+	    	          AllZone.Stack.add(ability);
+	    	        }
+	    	      };//Command
+	    	      ability.setStackDescription("As Iona, Shield of Emeria enters the battlefield, choose a color.");
+	    	      card.addComesIntoPlayCommand(comesIntoPlay);
+	       }//*************** END ************ END **************************
+	       
+	      else if (cardName.equals("Phantom Nishoba"))
+	      {
+	    	  final Card newCard = new Card()
+	    	  {
+		    	  public void addDamage(final int n)
+			      {
+		    		  this.subtractCounter(Counters.P1P1, 1);
+			      }
+	    	  };
+	    	  
+	    	  newCard.setOwner(card.getOwner());
+		      newCard.setController(card.getController());
+
+		      newCard.setManaCost(card.getManaCost());
+		      newCard.setName(card.getName());
+		      newCard.addType("Creature");
+		      newCard.addType("Cat");
+		      newCard.addType("Beast");
+		      newCard.addType("Spirit");
+		      newCard.setText(card.getSpellText());
+		      newCard.setBaseAttack(card.getBaseAttack());
+		      newCard.setBaseDefense(card.getBaseDefense());
+		      
+		      newCard.addIntrinsicKeyword("Trample");
+		      newCard.addIntrinsicKeyword("Lifelink");
+
+		      newCard.addSpellAbility(new Spell_Permanent(newCard));
+		      
+		      Command comesIntoPlay = new Command()
+    	      {
+				private static final long serialVersionUID = -2570661526160966399L;
+
+				public void execute()
+    	        {
+    	           newCard.addCounter(Counters.P1P1, 7);
+    	        }
+    	      };//Command
+		      
+    	      newCard.addComesIntoPlayCommand(comesIntoPlay);
+    	      
+		      return newCard;
+	      }
+	       
+	       
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)

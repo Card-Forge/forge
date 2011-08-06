@@ -30,6 +30,7 @@ public class Card extends MyObservable
   
   private HashMap<Card, Integer> receivedDamageFromThisTurn = new HashMap<Card, Integer>();
 
+  private boolean unCastable;
   private boolean tapped;
   private boolean sickness = true;//summoning sickness
   private boolean token = false;
@@ -79,6 +80,9 @@ public class Card extends MyObservable
   private String text         = "";
   private String manaCost = "";
   private String chosenType = "";
+  private String chosenColor = "";
+  private String namedCard = "";
+  
 
   public ArrayList<Ability_Triggered> zcTriggers = new ArrayList<Ability_Triggered>();
   /*private ArrayList<Command> comesIntoPlayCommandList = new ArrayList<Command>();
@@ -246,7 +250,14 @@ public class Card extends MyObservable
   //used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
   public String getChosenType() { return chosenType;}
   public void setChosenType(String s) {chosenType = s;}
-    
+  
+  public String getChosenColor() { return chosenColor;}
+  public void setChosenColor(String s) {chosenColor= s;}
+  
+  //used for cards like Meddling Mage...
+  public String getNamedCard() { return namedCard; }
+  public void setNamedCard(String s) {namedCard = s;}
+  
   public String getSpellText() {return text;}
 
   public void setText(String t) {text = t;}
@@ -751,6 +762,9 @@ public class Card extends MyObservable
   public void setTapped(boolean b) {tapped = b;  updateObservers();}
   public void tap()                        {setTapped(true);}
   public void untap()                     {setTapped(false);}
+  
+  public boolean isUnCastable() { return unCastable; }
+  public void setUnCastable(boolean b) { unCastable = b; updateObservers();} 
 
   //keywords are like flying, fear, first strike, etc...
   public ArrayList<String> getKeyword()      

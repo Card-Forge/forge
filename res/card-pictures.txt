@@ -18,6 +18,9 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+phantom_nishoba.jpg			http://www.wizards.com/global/images/magic/general/phantom_nishoba.jpg
+iona_shield_of_emeria.jpg	http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
+gaddock_teeg.jpg			http://www.wizards.com/global/images/magic/general/gaddock_teeg.jpg
 shorecrasher_mimic.jpg      http://www.wizards.com/global/images/magic/general/Shorecrasher_Mimic.jpg
 woodlurker_mimic.jpg        http://www.wizards.com/global/images/magic/general/Woodlurker_Mimic.jpg
 battlegate_mimic.jpg        http://www.wizards.com/global/images/magic/general/Battlegate_Mimic.jpg

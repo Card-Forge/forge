@@ -12459,6 +12459,169 @@ public class GameActionUtil
 			}// for outer
 		}// execute()
 	};// Muraganda_Petroglyphs
+	
+	public static Command Meddling_Mage = new Command()
+	{
+		private static final long serialVersionUID = 738264163993370439L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for (int i = 0; i < list.size(); i++)
+			{
+				c = list.get(i);
+				//c.removeIntrinsicKeyword("This card can't be cast");
+				c.setUnCastable(false);
+			}
+
+			list.clear();
+			
+			PlayerZone cplay = AllZone.Computer_Play;
+			PlayerZone hplay = AllZone.Human_Play;
+			
+			CardList cl = new CardList();
+			cl.addAll(cplay.getCards());
+			cl.addAll(hplay.getCards());
+			cl = cl.getName("Meddling Mage");
+			
+			for (int i=0;i<cl.size();i++)
+			{
+				final Card crd = cl.get(i);
+				
+				CardList spells = new CardList();
+				spells.addAll(AllZone.Human_Graveyard.getCards());
+				spells.addAll(AllZone.Human_Hand.getCards());
+				spells.addAll(AllZone.Computer_Hand.getCards());
+				spells.addAll(AllZone.Computer_Graveyard.getCards());
+				spells = spells.filter(new CardListFilter(){
+					public boolean addCard(Card c) {
+						return !c.isLand() && c.getName().equals(crd.getNamedCard());
+					}
+				});
+
+				for (int j = 0; j < spells.size(); j++)
+				{
+					c = spells.get(j);
+					if (!c.isLand()) {
+						//c.addIntrinsicKeyword("This card can't be cast");
+						c.setUnCastable(true);
+						gloriousAnthemList.add(c);
+					}
+				}// for inner
+			}// for outer
+		}// execute()
+	};// Meddling_Mage
+	
+	public static Command Gaddock_Teeg = new Command()
+	{
+		private static final long serialVersionUID = -479252814191086571L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for (int i = 0; i < list.size(); i++)
+			{
+				c = list.get(i);
+				//c.removeIntrinsicKeyword("This card can't be cast");
+				c.setUnCastable(false);
+			}
+
+			list.clear();
+			
+			PlayerZone cplay = AllZone.Computer_Play;
+			PlayerZone hplay = AllZone.Human_Play;
+			
+			CardList cl = new CardList();
+			cl.addAll(cplay.getCards());
+			cl.addAll(hplay.getCards());
+			cl = cl.getName("Gaddock Teeg");
+			
+			for (int i=0;i<cl.size();i++)
+			{
+				CardList spells = new CardList();
+				spells.addAll(AllZone.Human_Graveyard.getCards());
+				spells.addAll(AllZone.Human_Hand.getCards());
+				spells.addAll(AllZone.Computer_Hand.getCards());
+				spells.addAll(AllZone.Computer_Graveyard.getCards());
+				spells = spells.filter(new CardListFilter(){
+					public boolean addCard(Card c) {
+						return !c.isLand() && !c.isCreature() && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4;
+					}
+				});
+
+				for (int j = 0; j < spells.size(); j++)
+				{
+					c = spells.get(j);
+					if (!c.isLand()) {
+						c.setUnCastable(true);
+						gloriousAnthemList.add(c);
+					}
+				}// for inner
+			}// for outer
+		}// execute()
+	};//
+	
+	public static Command Iona_Shield_of_Emeria = new Command()
+	{
+		private static final long serialVersionUID = 7349652597673216545L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for (int i = 0; i < list.size(); i++)
+			{
+				c = list.get(i);
+				//c.removeIntrinsicKeyword("This card can't be cast");
+				c.setUnCastable(false);
+			}
+
+			list.clear();
+			
+			PlayerZone cplay = AllZone.Computer_Play;
+			PlayerZone hplay = AllZone.Human_Play;
+			
+			CardList cl = new CardList();
+			cl.addAll(cplay.getCards());
+			cl.addAll(hplay.getCards());
+			cl = cl.getName("Iona, Shield of Emeria");
+			
+			for (int i=0;i<cl.size();i++)
+			{
+				final Card crd = cl.get(i);
+				
+				CardList spells = new CardList();
+				spells.addAll(AllZone.Human_Graveyard.getCards());
+				spells.addAll(AllZone.Human_Hand.getCards());
+				spells.addAll(AllZone.Computer_Hand.getCards());
+				spells.addAll(AllZone.Computer_Graveyard.getCards());
+				spells = spells.filter(new CardListFilter(){
+					public boolean addCard(Card c) {
+						return !c.isLand() && CardUtil.getColors(c).contains(crd.getChosenColor());
+					}
+				});
+
+				for (int j = 0; j < spells.size(); j++)
+				{
+					c = spells.get(j);
+					if (!c.isLand()) {
+						c.setUnCastable(true);
+						gloriousAnthemList.add(c);
+					}
+				}// for inner
+			}// for outer
+		}// execute()
+	};//
+	
+	
 
 	// returns all PlayerZones that has at least 1 Glorious Anthem
 	// if Computer has 2 Glorious Anthems, AllZone.Computer_Play will be
@@ -12638,6 +12801,9 @@ public class GameActionUtil
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 
 		commands.put("Joiner_Adept", Joiner_Adept);
+		commands.put("Meddling_Mage", Meddling_Mage);
+		commands.put("Gaddock_Teeg", Gaddock_Teeg);
+		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		System.out.println("size of commands: " + commands.size());
 		
 	}

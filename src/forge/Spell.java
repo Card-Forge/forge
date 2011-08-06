@@ -33,6 +33,9 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         String activePlayer = AllZone.Phase.getActivePlayer();
         PlayerZone zone = AllZone.getZone(card);
         
+        if (card.isUnCastable())
+        	return false;
+        
         if(card.isInstant()) return true;
         else if((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
                 && controller.equals(activePlayer) && AllZone.Stack.size() == 0 && zone.is(Constant.Zone.Hand)) {

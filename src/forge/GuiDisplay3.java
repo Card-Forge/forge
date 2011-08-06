@@ -138,7 +138,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             @Override
             protected void doAction(Card c) {
                 SpellAbility[] sa = c.getSpellAbility();
-                if(sa[1].canPlay()) AllZone.GameAction.playSpellAbility(sa[1]);
+                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
             }
         };
         COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.Computer_Graveyard, COMPUTER_GRAVEYARD);
@@ -471,6 +471,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         
         String chosenTypeText = "";
         if(c.getChosenType() != "") chosenTypeText = "(chosen type: " + c.getChosenType() + ")";
+       
+        String chosenColorText = "";
+        if(c.getChosenColor() != "") chosenColorText = "(chosen color: " + c.getChosenColor() + ")";
         
         String equippingText = "";
         if(c.getEquipping().size() > 0) equippingText = "=Equipping " + c.getEquipping().get(0) + "=";
@@ -499,8 +502,12 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             enchantedByText += "*";
         }
         
+        String uncastableText = "";
+        if (c.isUnCastable())
+        	uncastableText = "This card can't be cast.";
+        
         if(!c.isFaceDown()) this.cdArea.setText(tokenText + c.getText() + counterText + chosenTypeText
-                + equippingText + equippedByText + enchantingText + enchantedByText);
+                +chosenColorText + equippingText + equippedByText + enchantingText + enchantedByText + uncastableText);
         else this.cdArea.setText(tokenText + counterText);
         
         cdPanel.setBorder(GuiDisplayUtil.getBorder(c));
