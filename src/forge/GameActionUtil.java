@@ -48,7 +48,6 @@ public class GameActionUtil {
 		upkeep_Dance_of_the_Dead();
 		upkeep_Mana_Crypt();
 		upkeep_Farmstead();
-		upkeep_Unstable_Mutation();
 		
 		/* Converteded to AF Trigger
 		upkeep_Plague_Spitter();
@@ -4823,43 +4822,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ab);
 		}
 	}//upkeep_Mana_Crypt
-	
-	private static void upkeep_Unstable_Mutation() {
-		final String auraName = "Unstable Mutation";
-        final Player player = AllZone.Phase.getPlayerTurn();
-        
-        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isCreature() && c.isEnchanted();
-            }
-        });
-        
-        if(list.size() > 0) {
-        	Ability ability;
-        	for(final Card creature:list) {
-        		if(creature.isEnchantedBy(auraName)) {
-        			CardList auras = new CardList(creature.getEnchantedBy().toArray());
-        			auras = auras.getName(auraName);
-        			for(Card aura:auras) {
-        				final Card source = aura;
-        				ability = new Ability(source, "0") {
-        					@Override
-        					public void resolve() {
-        						creature.addCounter(Counters.M1M1, 1);
-        					}
-        				};
-        				
-        				StringBuilder sb = new StringBuilder();
-        				sb.append(source.getName()).append(" -  put a -1/-1 counter on ").append(creature.getName());
-        				ability.setStackDescription(sb.toString());
-        				
-                        AllZone.Stack.add(ability);
-        			} 
-        		}
-        	}
-        }//list > 0
-    }//upkeep_Unstable_Mutation()
 	
 	private static void upkeep_Farmstead() {
 		final String auraName = "Farmstead";
