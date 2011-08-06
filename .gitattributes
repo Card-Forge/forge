@@ -4119,6 +4119,7 @@ res/cardsfolder/nether_traitor.txt -text svneol=native#text/plain
 res/cardsfolder/netherborn_phalanx.txt svneol=native#text/plain
 res/cardsfolder/nettle_sentinel.txt -text svneol=native#text/plain
 res/cardsfolder/nettletooth_djinn.txt -text svneol=native#text/plain
+res/cardsfolder/nettling_curse.txt svneol=native#text/plain
 res/cardsfolder/neurok_commando.txt -text svneol=native#text/plain
 res/cardsfolder/neurok_hoversail.txt -text svneol=native#text/plain
 res/cardsfolder/neurok_invisimancer.txt -text svneol=native#text/plain
