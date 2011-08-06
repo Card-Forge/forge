@@ -7001,6 +7001,38 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Biorhythm")) {
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -6042020870286943301L;
+
+				@Override
+        		public boolean canPlayAI() {
+					CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+					CardList comp = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+					int hLife = AllZone.HumanPlayer.getLife();
+					int cLife = AllZone.ComputerPlayer.getLife();
+        			return comp.size() > 0 && human.size() < hLife && ((cLife < 4 && hLife > 4) || (hLife - cLife > 12));
+        		}
+
+        		@Override
+        		public void resolve() {
+        			CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+					CardList comp = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+					AllZone.HumanPlayer.setLife(human.size(), card);
+					AllZone.ComputerPlayer.setLife(comp.size(), card);
+        		}
+        	};//SpellAbility
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card.getName()).append(" - Each player's life total becomes the lowest life total among all players.");
+        	spell.setStackDescription(sb.toString());
+        	
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
