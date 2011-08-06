@@ -1,3 +1,15 @@
+Feast of Flesh
+B
+Sorcery
+no text
+spDamageTgtC:Count$NamedInAllYards.Feast of Flesh/Plus.1:Drawback$YouGainLife/X:Feast of Flesh deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards.:Feast of Flesh - deals X damage.
+
+First Volley
+1 R
+Instant - Arcane
+no text
+spDamageTgtC:1:Drawback$DamageTgt/1:First Volley deals 1 damage to target creature and 1 damage to that creature's controller.:First Volley - deals 1 damage to creature and 1 damage to its controller.
+
 Drove of Elves
 3 G
 Creature Elf
