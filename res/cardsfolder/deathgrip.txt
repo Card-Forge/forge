@@ -1,0 +1,7 @@
+Name:Deathgrip
+ManaCost:B B
+Types:Enchantment
+Text:B B: Counter target green spell.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgrip.jpg
+End

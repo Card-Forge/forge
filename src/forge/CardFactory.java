@@ -11860,6 +11860,80 @@ public class CardFactory implements NewConstants {
         	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lifeforce")) {
+        	final SpellAbility counter = new Ability(card, "G G") {
+        		
+        		@Override
+        		public boolean canPlayAI() {
+        			System.out.println("AI is pondering using "+cardName);
+        			return canPlay();
+        		}
+
+				@Override
+				public boolean canPlay() {
+					if(AllZone.Stack.size() == 0){
+        				return false;
+        			}
+					else {
+						SpellAbility sa = AllZone.Stack.peek();
+						if(sa.isAbility()) return false;
+						Card tgtCard = sa.getSourceCard();
+						if(tgtCard.isBlack()) return true;
+					}
+					return false;
+				}
+
+        		@Override
+        		public void resolve() {
+        			System.out.println("Resolving " + card.getName());
+        			SpellAbility sa = AllZone.Stack.pop();
+        			AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+        		}
+
+        	};//Ability
+        	counter.setStackDescription(cardName+" - counter target black spell.");
+        	card.addSpellAbility(counter);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Deathgrip")) {
+        	final SpellAbility counter = new Ability(card, "B B") {
+        		
+        		@Override
+        		public boolean canPlayAI() {
+        			System.out.println("AI is pondering using "+cardName);
+        			return canPlay();
+        		}
+
+				@Override
+				public boolean canPlay() {
+					if(AllZone.Stack.size() == 0){
+        				return false;
+        			}
+					else {
+						SpellAbility sa = AllZone.Stack.peek();
+						if(sa.isAbility()) return false;
+						Card tgtCard = sa.getSourceCard();
+						if(tgtCard.isGreen()) return true;
+					}
+					return false;
+				}
+
+        		@Override
+        		public void resolve() {
+        			System.out.println("Resolving " + card.getName());
+        			SpellAbility sa = AllZone.Stack.pop();
+        			AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+        		}
+
+        	};//Ability
+        	counter.setStackDescription(cardName+" - counter target green spell.");
+        	card.addSpellAbility(counter);
+        }//*************** END ************ END **************************
+        
+        
 
         return postFactoryKeywords(card);
     }//getCard2
