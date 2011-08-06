@@ -11,7 +11,6 @@ import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
@@ -260,7 +259,6 @@ public class AbilityFactory_Animate {
 		HashMap<String,String> params = af.getMapParams();
 		Card source = sa.getSourceCard();
 		Card host = af.getHostCard();
-		String db = params.get("SubAbility");
 		Hashtable<String,String> svars = host.getSVars();
 
 		//AF specific params
@@ -348,14 +346,13 @@ public class AbilityFactory_Animate {
 			}
 		}
 
-		if (af.hasSubAbility()){
+		if(af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
+			if(abSub != null) {
 				abSub.resolve();
 			}
-			else
-				CardFactoryUtil.doDrawBack(db, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, tgts.get(0), sa);
 		}
+		
 	}
 
 	private static long doAnimate(Card c, AbilityFactory af, int power, int toughness, ArrayList<String> types, String colors, ArrayList<String> keywords) {

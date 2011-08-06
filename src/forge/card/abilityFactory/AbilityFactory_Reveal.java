@@ -591,7 +591,6 @@ public class AbilityFactory_Reveal {
 
 	private static void revealHandResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		Card source = sa.getSourceCard();
 
 		ArrayList<Player> tgtPlayers;
 
@@ -620,17 +619,13 @@ public class AbilityFactory_Reveal {
 			}
 		}
 
-		if (af.hasSubAbility()){
+		if(af.hasSubAbility()) {
 			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
+			if(abSub != null) {
 				abSub.resolve();
 			}
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
-			}
 		}
+		
 	}
 
 	//**********************************************************************
