@@ -292,6 +292,8 @@ public abstract class Player extends MyObservable{
     	//specific cards
     	if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
     	
+    	if (AllZoneUtil.isCardInPlay("Energy Field") && !source.getController().equals(this)) return 0;
+    	
     	if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this) && !source.getController().equals(this)
     			&& restDamage > 0) restDamage = restDamage - 1;
     	
