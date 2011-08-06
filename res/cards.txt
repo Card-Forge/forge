@@ -1,3 +1,33 @@
+Emberstrike Duo
+1 BR
+Creature Elemental Warrior Shaman
+Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.  Whenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
+1/1
+
+Gravelgill Duo
+2 UB
+Creature Merfolk Rogue Warrior
+Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.  Whenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can’t be blocked except by artifact creatures and/or black creatures.)
+2/1
+
+Safehold Duo
+3 GW
+Creature Elf Warrior Shaman
+Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.  Whenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
+2/4
+
+Tattermunge Duo
+2 RG
+Creature Goblin Warrior Shaman
+Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.  Whenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
+2/3
+
+Thistledown Duo
+2 WU
+Creature Kithkin Soldier Wizard
+Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.  Whenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
+2/2
+
 Phantom Centaur
 2 G G
 Creature Centaur Spirit

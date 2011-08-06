@@ -83,6 +83,11 @@ public class GameActionUtil
 		// card gets played
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
+		playCard_Emberstrike_Duo(c);
+		playCard_Gravelgill_Duo(c);
+		playCard_Safehold_Duo(c);
+		playCard_Tattermunge_Duo(c);
+		playCard_Thistledown_Duo(c);
 		playCard_Battlegate_Mimic(c);
 		playCard_Nightsky_Mimic(c);
 		playCard_Riverfall_Mimic(c);
@@ -108,6 +113,445 @@ public class GameActionUtil
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 	}
+	public static void playCard_Emberstrike_Duo(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Emberstrike Duo");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Black))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+					        	  card.addTempAttackBoost(-1);
+								  card.addTempDefenseBoost(-1);
+								
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.addTempAttackBoost(1);
+								card.addTempDefenseBoost(1);
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a black spell, Emberstrike Duo gets +1/+1 until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.Red))
+			{
+					for (int i=0;i<list.size();i++)
+					{final Card card = list.get(i);
+					final Command untilEOT = new Command()
+				      {
+						private static final long serialVersionUID = -4569751606008597903L;
+
+						public void execute()
+				        {
+				          if(AllZone.GameAction.isCardInPlay(card))
+				          {
+							card.removeIntrinsicKeyword("First Strike");
+
+				          }
+				        }
+				      };
+		
+					Ability ability2 = new Ability(card, "0")
+					{
+						public void resolve()
+						{
+							if (!card.getIntrinsicKeyword().contains("First Strike"))
+								card.addIntrinsicKeyword("First Strike"); 
+							AllZone.EndOfTurn.addUntil(untilEOT);
+						}
+						}; // ability2
+		
+					ability2.setStackDescription(card.getName() + " - "
+							+ c.getController() + " played a red spell, Emberstrike Duo gains first strike until end of turn.");
+					AllZone.Stack.add(ability2);
+					}
+			}//if
+			
+
+	}//Emberstrike Duo
+	
+	public static void playCard_Gravelgill_Duo(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Gravelgill Duo");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Blue))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+					        	  card.addTempAttackBoost(-1);
+								  card.addTempDefenseBoost(-1);
+								
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.addTempAttackBoost(1);
+								card.addTempDefenseBoost(1);
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a blue spell, Gravelgill Duo gets +1/+1 until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.Black))
+			{
+					for (int i=0;i<list.size();i++)
+					{final Card card = list.get(i);
+					final Command untilEOT = new Command()
+				      {
+						private static final long serialVersionUID = -4569751606008597903L;
+
+						public void execute()
+				        {
+				          if(AllZone.GameAction.isCardInPlay(card))
+				          {
+							card.removeIntrinsicKeyword("Fear");
+
+				          }
+				        }
+				      };
+		
+					Ability ability2 = new Ability(card, "0")
+					{
+						public void resolve()
+						{
+							if (!card.getIntrinsicKeyword().contains("Fear"))
+								card.addIntrinsicKeyword("Fear"); 
+							AllZone.EndOfTurn.addUntil(untilEOT);
+						}
+						}; // ability2
+		
+					ability2.setStackDescription(card.getName() + " - "
+							+ c.getController() + " played a black spell, Emberstrike Duo gains fear until end of turn.");
+					AllZone.Stack.add(ability2);
+					}
+			}//if
+			
+
+	}//Gravelgill Duo
+	
+	public static void playCard_Safehold_Duo(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Safehold Duo");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Green))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+					        	  card.addTempAttackBoost(-1);
+								  card.addTempDefenseBoost(-1);
+								
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.addTempAttackBoost(1);
+								card.addTempDefenseBoost(1);
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a green spell, Safehold Duo gets +1/+1 until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.White))
+			{
+					for (int i=0;i<list.size();i++)
+					{final Card card = list.get(i);
+					final Command untilEOT = new Command()
+				      {
+						private static final long serialVersionUID = -4569751606008597903L;
+
+						public void execute()
+				        {
+				          if(AllZone.GameAction.isCardInPlay(card))
+				          {
+							card.removeIntrinsicKeyword("Vigilance");
+
+				          }
+				        }
+				      };
+		
+					Ability ability2 = new Ability(card, "0")
+					{
+						public void resolve()
+						{
+							if (!card.getIntrinsicKeyword().contains("Vigilance"))
+								card.addIntrinsicKeyword("Vigilance"); 
+							AllZone.EndOfTurn.addUntil(untilEOT);
+						}
+						}; // ability2
+		
+					ability2.setStackDescription(card.getName() + " - "
+							+ c.getController() + " played a white spell, Safehold Duo gains vigilance until end of turn.");
+					AllZone.Stack.add(ability2);
+					}
+			}//if
+			
+
+	}//Safehold Duo
+	
+	public static void playCard_Tattermunge_Duo(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Tattermunge Duo");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Red))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+					        	  card.addTempAttackBoost(-1);
+								  card.addTempDefenseBoost(-1);
+								
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.addTempAttackBoost(1);
+								card.addTempDefenseBoost(1);
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a red spell, Tattermunge Duo gets +1/+1 until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.Green))
+			{
+					for (int i=0;i<list.size();i++)
+					{final Card card = list.get(i);
+					final Command untilEOT = new Command()
+				      {
+						private static final long serialVersionUID = -4569751606008597903L;
+
+						public void execute()
+				        {
+				          if(AllZone.GameAction.isCardInPlay(card))
+				          {
+							card.removeIntrinsicKeyword("Forestwalk");
+
+				          }
+				        }
+				      };
+		
+					Ability ability2 = new Ability(card, "0")
+					{
+						public void resolve()
+						{
+							if (!card.getIntrinsicKeyword().contains("Forestwalk"))
+								card.addIntrinsicKeyword("Forestwalk"); 
+							AllZone.EndOfTurn.addUntil(untilEOT);
+						}
+						}; // ability2
+		
+					ability2.setStackDescription(card.getName() + " - "
+							+ c.getController() + " played a green spell, Tattermunge Duo gains forestwalk until end of turn.");
+					AllZone.Stack.add(ability2);
+					}
+			}//if
+			
+
+	}//Tattermunge Duo
+	
+	public static void playCard_Thistledown_Duo(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Thistledown Duo");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.White))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+					        	  card.addTempAttackBoost(-1);
+								  card.addTempDefenseBoost(-1);
+								
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.addTempAttackBoost(1);
+								card.addTempDefenseBoost(1);
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a white spell, Thistledown Duo gets +1/+1 until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.Blue))
+			{
+					for (int i=0;i<list.size();i++)
+					{final Card card = list.get(i);
+					final Command untilEOT = new Command()
+				      {
+						private static final long serialVersionUID = -4569751606008597903L;
+
+						public void execute()
+				        {
+				          if(AllZone.GameAction.isCardInPlay(card))
+				          {
+							card.removeIntrinsicKeyword("Flying");
+
+				          }
+				        }
+				      };
+		
+					Ability ability2 = new Ability(card, "0")
+					{
+						public void resolve()
+						{
+							if (!card.getIntrinsicKeyword().contains("Flying"))
+								card.addIntrinsicKeyword("Flying"); 
+							AllZone.EndOfTurn.addUntil(untilEOT);
+						}
+						}; // ability2
+		
+					ability2.setStackDescription(card.getName() + " - "
+							+ c.getController() + " played a blue spell, Thistledown Duo gains flying until end of turn.");
+					AllZone.Stack.add(ability2);
+					}
+			}//if
+			
+
+	}//Thistledown Duo
 	public static void playCard_Shorecrasher_Mimic(Card c)
 	{
 		final String controller = c.getController();
@@ -155,7 +599,7 @@ public class GameActionUtil
 							}; // ability2
 			
 						ability2.setStackDescription(card.getName() + " - "
-								+ c.getController() + " played a a spell that’s both green and blue, it becomes 5/3 and gains trample until end of turn.");
+								+ c.getController() + " played a spell that’s both green and blue, it becomes 5/3 and gains trample until end of turn.");
 						AllZone.Stack.add(ability2);
 					}
 				}//if
@@ -210,7 +654,7 @@ public class GameActionUtil
 							}; // ability2
 			
 						ability2.setStackDescription(card.getName() + " - "
-								+ c.getController() + " played a a spell that’s both red and white, it becomes 4/2 and gains first strike until end of turn.");
+								+ c.getController() + " played a spell that’s both red and white, it becomes 4/2 and gains first strike until end of turn.");
 						AllZone.Stack.add(ability2);
 					}
 				}//if
@@ -265,7 +709,7 @@ public class GameActionUtil
 							}; // ability2
 			
 						ability2.setStackDescription(card.getName() + " - "
-								+ c.getController() + " played a a spell that’s both black and white, it becomes 4/4 and gains flying until end of turn.");
+								+ c.getController() + " played a spell that’s both black and white, it becomes 4/4 and gains flying until end of turn.");
 						AllZone.Stack.add(ability2);
 					}
 				}//if
@@ -320,7 +764,7 @@ public class GameActionUtil
 							}; // ability2
 			
 						ability2.setStackDescription(card.getName() + " - "
-								+ c.getController() + " played a a spell that’s both red and blue, it becomes 3/3 and is unblockable until end of turn.");
+								+ c.getController() + " played a spell that’s both red and blue, it becomes 3/3 and is unblockable until end of turn.");
 						AllZone.Stack.add(ability2);
 					}
 				}//if
@@ -375,7 +819,7 @@ public class GameActionUtil
 							}; // ability2
 			
 						ability2.setStackDescription(card.getName() + " - "
-								+ c.getController() + " played a a spell that’s both green and black, it becomes 4/5 and gains wither until end of turn.");
+								+ c.getController() + " played a spell that’s both green and black, it becomes 4/5 and gains wither until end of turn.");
 						AllZone.Stack.add(ability2);
 					}
 				}//if
