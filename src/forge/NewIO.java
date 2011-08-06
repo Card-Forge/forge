@@ -98,7 +98,7 @@ public class NewIO {
             throw new RuntimeException("IO : readData() - error - " + ex);
         }
         
-        if(o instanceof HashMap) map = (HashMap) o;
+        if(o instanceof HashMap) map = (HashMap<String, Serializable>) o;
     }
     
     private void createBlankFile() {
