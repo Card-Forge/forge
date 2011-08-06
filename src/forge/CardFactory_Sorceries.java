@@ -3023,7 +3023,7 @@ public class CardFactory_Sorceries {
             
         }//*************** END ************ END **************************
         */
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Acorn Harvest")) {
             SpellAbility spell = new Spell(card) {
@@ -3051,6 +3051,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "1 G", "3"));
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Parallel Evolution")) {

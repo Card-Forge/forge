@@ -1,7 +1,9 @@
 Name:Acorn Harvest
 ManaCost:3 G
 Types:Sorcery
-Text:no text
+Text:Put two 1/1 green Squirrel creature tokens onto the battlefield.
+K:spMakeToken<>2<>Squirrel<>G 1 1 Squirrel<>Controller<>G<>Creature;Squirrel<>1<>1<>None
+K:Flashback:1 G,3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_harvest.jpg
 End
