@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Sliver
 Text:no text
 PT:2/2
-K:StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!Type.Sliver:All Sliver creatures have reach. (They can block creatures with flying.)
+K:stPumpAll:Creature.Sliver:0/0/Reach:No Condition:All Sliver creatures have reach. (They can block creatures with flying.)
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinneret_sliver.jpg

@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Horror
 Text:no text
 PT:4/3
-K:StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black creatures get -1/-1.
+K:stPumpAll:Creature.Black+Other:-1/-1:No Condition:Other black creatures get -1/-1.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_shambler.jpg
