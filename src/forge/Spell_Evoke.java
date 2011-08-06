@@ -14,7 +14,11 @@ public class Spell_Evoke extends Spell_Permanent {
     public Spell_Evoke(Card sourceCard, String manaCost) {
         super(sourceCard);
         this.setManaCost(manaCost);
-        this.setDescription("Evoke " + manaCost + " - Sacrifice this creature when it comes into play.");
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("Evoke ").append(manaCost);
+        sb.append(" - Sacrifice this creature when it comes into play.");
+        this.setDescription(sb.toString());
     }
     
     @Override
@@ -30,7 +34,10 @@ public class Spell_Evoke extends Spell_Permanent {
             }
         };
         
-        ability.setStackDescription("Evoke - sacrifice " + card);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Evoke - sacrifice ").append(card);
+        ability.setStackDescription(sb.toString());
+        
         AllZone.Stack.add(ability);
     }//resolve()
 }
