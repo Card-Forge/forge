@@ -522,7 +522,26 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             if(human.equals("New Draft")) {
                 dispose();
                 Gui_BoosterDraft draft = new Gui_BoosterDraft();
-                draft.showGui(new BoosterDraft_1());
+                //draft.showGui(new BoosterDraft_1());
+                
+                //determine what kind of booster draft to run
+                ArrayList<String> draftTypes = new ArrayList<String>();
+                draftTypes.add("Full Cardpool Draft");
+                draftTypes.add("Block Draft");
+                draftTypes.add("Custom Draft");
+                
+                String prompt = "Choose Draft Type:";
+                Object o = GuiUtils.getChoice(prompt, draftTypes.toArray());
+                
+                if (o.toString().equals("Full Cardpool Draft"))
+                	draft.showGui(new BoosterDraft_1("Full"));
+                
+                else if (o.toString().equals("Block Draft"))
+                	draft.showGui(new BoosterDraft_1("Block"));
+                
+                else if (o.toString().equals("Custom Draft"))
+                	draft.showGui(new BoosterDraft_1("Custom"));
+                
                 return;
             } else//load old draft
             {

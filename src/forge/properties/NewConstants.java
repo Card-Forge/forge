@@ -62,6 +62,7 @@ public interface NewConstants {
     public static final String CARDSFOLDER   = "cardsfolder";
     public static final String REMOVED       = "removed-cards";
     public static final String NAME_MUTATOR  = "name-mutator";
+    public static final String BOOSTERDATA   = "boosterdata";
     
     public static final String IMAGE_BASE    = "image/base";
     public static final String IMAGE_TOKEN   = "image/token";

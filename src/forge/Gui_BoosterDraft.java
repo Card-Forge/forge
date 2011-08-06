@@ -501,11 +501,11 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
     private void showChoices(CardList list) {
         allCardModel.clear();
         
-        ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
+        //ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
         Card c;
         for(int i = 0; i < list.size(); i++) {
             c = list.get(i);
-            c.setRarity(pack.getRarity(c.getName()));
+            //c.setRarity(pack.getRarity(c.getName()));
             
             //String PC = c.getSVar("PicCount");
             Random r = MyRandom.random;
@@ -524,6 +524,8 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
                 	c.setRandomPicture(r.nextInt(n-1) + 1);
             
             	c.setImageFilename(CardUtil.buildFilename(c));
+            	
+            	c.setRarity(SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).Rarity);
             }
             
             allCardModel.addCard(c);
@@ -540,15 +542,15 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         //add sideboard to deck
         CardList list = deckModel.getCards();
         for(int i = 0; i < list.size(); i++)
-            deck.addSideboard(list.get(i).getName());
+            deck.addSideboard(list.get(i).getName() + "|" + list.get(i).getCurSetCode());
         
 
-        for(int i = 0; i < 40; i++) {
-            deck.addSideboard("Forest");
-            deck.addSideboard("Mountain");
-            deck.addSideboard("Swamp");
-            deck.addSideboard("Island");
-            deck.addSideboard("Plains");
+        for(int i = 0; i < 20; i++) {
+            deck.addSideboard("Forest|" + boosterDraft.LandSetCode[0]);
+            deck.addSideboard("Mountain|" + boosterDraft.LandSetCode[0]);
+            deck.addSideboard("Swamp|" + boosterDraft.LandSetCode[0]);
+            deck.addSideboard("Island|" + boosterDraft.LandSetCode[0]);
+            deck.addSideboard("Plains|" + boosterDraft.LandSetCode[0]);
         }
         
         return deck;

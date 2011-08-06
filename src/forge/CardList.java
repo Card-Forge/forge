@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-
 import forge.card.cardFactory.CardFactoryUtil;
 
 
@@ -57,6 +56,25 @@ public class CardList implements Iterable<Card> {
         return list;
     }//getColor()
     
+    public CardList getOnly2Colors(final String clr1, final String clr2) {
+    	CardList list = new CardList();
+    	list.add(this);
+    	
+    	CardListFilter clrF = new CardListFilter(){
+			public boolean addCard(Card c){
+				ArrayList<Card_Color> cClrs = c.getColor();
+				for (int i=0; i<cClrs.size(); i++)
+				{
+					if (!cClrs.get(i).toStringArray().get(0).equals(clr1) && !cClrs.get(i).toStringArray().get(0).equals(clr2))
+						return false;
+				}
+				return true;
+			}
+		};
+		
+		return list.filter(clrF);
+    }
+    
     public void reverse() {
         Collections.reverse(list);
     }
@@ -86,22 +104,6 @@ public class CardList implements Iterable<Card> {
                 + cardName + " - contents of Arraylist:" + list);
         
     }//remove(String cardName)
-    
-    //removes one copy of that card, from given set (if set not found - just use regular remove(String cardName) ):
-    public void remove(final String cardName, final String setCode) {
-        CardList find = this.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getName().equals(cardName) && c.getCurSetCode().equals(setCode);
-            }
-        });
-        
-        if(0 < find.size()) this.remove(find.get(0));
-        /*else throw new RuntimeException("CardList : remove(String cardname, String setCode), error - card name not found: "
-                + cardName + " from set: " +setCode + " - contents of Arraylist:" + list);*/
-        else
-        	remove(cardName);
-        
-    }//remove(String cardName, final String setCode)
     
     public int size() {
         return list.size();
@@ -401,5 +403,13 @@ public class CardList implements Iterable<Card> {
     		total += get(i).getCMC();
     	}
     	return total;
+    }
+    
+    public CardList getColored() {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return (!c.isColorless());
+    		}
+    	});
     }
 }

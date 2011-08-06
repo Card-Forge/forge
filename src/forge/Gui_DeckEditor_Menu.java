@@ -939,7 +939,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         CardList top = new CardList();
         for(int i = 0; i < deck.countSideboard(); i++) {
-        	String cardName = deck.getMain(i);
+        	String cardName = deck.getSideboard(i);
         	String setCode = "";
             if (cardName.contains("|"))
             {
@@ -948,7 +948,14 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             	setCode = s[1];
             }
 
-        	top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+            Card c = AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer);
+            
+            if (!setCode.equals(""))
+            	c.setCurSetCode(setCode);
+            else if ((c.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
+            	c.setRandomSetCode();
+        	
+            top.add(c);
         }
         
         CardList bottom = new CardList();
@@ -962,7 +969,14 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             	setCode = s[1];
             }
 
-        	bottom.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+            Card c = AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer);
+            
+            if (!setCode.equals(""))
+            	c.setCurSetCode(setCode);
+            else if ((c.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
+            	c.setRandomSetCode();
+
+        	bottom.add(c);
         }
         
         deckDisplay.updateDisplay(top, bottom);
@@ -1173,7 +1187,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         JMenuItem openDraft = new JMenuItem("Open Deck - Draft");
         
         newDraftItem = newDraft;
-        newDraftItem.setEnabled(false);
+        //newDraftItem.setEnabled(false);
         
         JMenuItem save = new JMenuItem("Save");
         JMenuItem saveAs = new JMenuItem("Save As");

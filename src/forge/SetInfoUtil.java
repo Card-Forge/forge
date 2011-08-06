@@ -13,8 +13,8 @@ public class SetInfoUtil {
 		{"AQ", "ATQ", "Antiquities"},
 		{"R", "3ED", "Revised Edition"},
 		{"LG", "LEG", "Legends"},
-		{"FE", "FEM", "Fallen Empires"},
 		{"DK", "DRK", "The Dark"},
+		{"FE", "FEM", "Fallen Empires"},
 		{"4E", "4ED", "Fourth Edition"},
 		{"IA", "ICE", "Ice Age"},
 		{"CH", "CHR", "Chronicles"},
@@ -220,4 +220,78 @@ public class SetInfoUtil {
 		return 0;
 	}
 
+	private static String[][] blocks = {
+		{"A", "", "", "Alpha", "3"},
+		{"B", "", "", "Beta", "3"},
+		{"2ED", "", "", "Unlimited", "3"},
+		{"ARN", "", "", "Arabian Nights", "5"},
+		{"ATQ", "", "", "Antiquities", "5"},
+		{"3ED", "", "", "Revised", "3"},
+		{"LEG", "", "", "Legends", "3"},
+		{"DRK", "", "", "The Dark", "5"},
+		{"FEM", "", "", "Fallen Empires", "5"},
+		{"4ED", "", "", "Fourth Edition", "3"},
+		{"ICE", "ALL", "CSP", "Ice Age", "3"},
+		{"CHR", "", "", "Chronicles", "4"},
+		{"HML", "", "", "Homelands", "5"},
+		{"MIR", "VIS", "WTH", "Mirage", "3"},
+		{"5ED", "", "", "Fifth Edition", "3"},
+		{"POR", "", "", "Portal", "3"},
+		{"TMP", "STH", "EXO", "Tempest", "3"},
+		{"PO2", "", "", "Portal Second Age", "3"},
+		{"USG", "ULG", "UDS", "Urza", "3"},
+		{"6ED", "", "", "Sixth Edition", "3"},
+		{"PTK", "", "", "Portal Three Kingdoms", "5"},
+		{"MMQ", "NMS", "PCY", "Masques", "3"},
+		{"INV", "PLS", "APC", "Invasion", "3"},
+		{"7ED", "", "", "Seventh Edition", "3"},
+		{"ODY", "TOR", "JUD", "Odyssey", "3"},
+		{"ONS", "LGN", "SCG", "Onslaught", "3"},
+		{"8ED", "", "", "Eighth Edition", "3"},
+		{"MRD", "DST", "5DN", "Mirrodin", "3"},
+		{"CHK", "BOK", "SOK", "Kamigawa", "3"},
+		{"9ED", "", "", "Ninth Edition", "3"},
+		{"RAV", "GPT", "DIS", "Ravnica", "3"},
+		{"TSP", "PLC", "FUT", "Time Spiral", "3"},
+		{"10E", "", "", "Tenth Edition", "3"},
+		{"LRW", "MOR", "", "Lorwyn", "3"},
+		{"SHM", "EVE", "", "Shadowmoor", "3"},
+		{"ALA", "CFX", "ARB", "Shards of Alara", "3"},
+		{"M10", "", "", "Magic 2010", "3"},
+		{"ZEN", "WWK", "", "Zendikar", "3"},
+		{"ROE", "", "", "Rise of the Eldrazi", "3"},
+		{"M11", "", "", "Magic 2011", "3"},
+		{"SOM", "MBS", "", "Scars of Mirrodin", "3"}
+	};
+	
+	public static ArrayList<String> getBlockNameList() {
+		ArrayList<String> bnl = new ArrayList<String>();
+		
+		for (int i=0; i<blocks.length; i++)
+			bnl.add(blocks[i][3]);
+		
+		return bnl;
+	}
+	
+	public static ArrayList<String> getSets_BlockName(String blockName) {
+		ArrayList<String> sets = new ArrayList<String>();
+		
+		for (int i=0; i<blocks.length; i++) {
+			if (blocks[i][3].equals(blockName)) {
+				for (int j=0; j<3; j++)
+					sets.add(blocks[i][j]);
+			}
+		}
+		
+		return sets;
+	}
+	
+	public static int getPackCount(String blockName) {
+		for (int i=0; i<blocks.length; i++) {
+			if (blocks[i][3].equals(blockName))
+				return Integer.parseInt(blocks[i][4]);
+		}
+		
+		return 0;
+	}
 }
