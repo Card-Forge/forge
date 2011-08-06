@@ -54,7 +54,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         */
 
         this.sourceCard = sourceCard;
-        this.orig = (sourceCard.getName().isEmpty() ? orig : orig.replaceAll(sourceCard.getName(), "CARDNAME"));
+        this.orig = (sourceCard.getName().length() == 0? orig:orig.replaceAll(sourceCard.getName(), "CARDNAME"));
         setDescription(orig);
         
         /*
@@ -208,7 +208,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
             m = m.replaceAll(" add ", "");
             //TOhaveDOne: make this handle "multiple-mana symbol" cases, if they are ever needed
             m = m.substring(0, 2);*/
-        	String m = orig.split(": add ")[1].split(" to ")[0];
+            String m = orig.split(": add ")[1].split(" to ")[0];
             
             String[] parts = orig.split(" for each ");
             int index = parts[1].indexOf(' ');
@@ -247,16 +247,13 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     @Override
     public boolean canPlay() {
         Card card = getSourceCard();
-        if(AllZone.GameAction.isCardInPlay(card) &!
-        	((isTapAbility() && card.isTapped()) ||
-        		(isUntapAbility() && card.isUntapped()))) {
+        if(AllZone.GameAction.isCardInPlay(card)
+                & !((isTapAbility() && card.isTapped()) || (isUntapAbility() && card.isUntapped()))) {
             if(card.isFaceDown()) return false;
             
-            if(card.isArtifact() && card.isCreature()) return !(card.hasSickness() &&
-            	(isTapAbility() || isUntapAbility()));
+            if(card.isArtifact() && card.isCreature()) return !(card.hasSickness() && (isTapAbility() || isUntapAbility()));
             
-            if(card.isCreature() && !(card.hasSickness() &&
-            	(isTapAbility() || isUntapAbility()))) return true;
+            if(card.isCreature() && !(card.hasSickness() && (isTapAbility() || isUntapAbility()))) return true;
             //Dryad Arbor, Mishra's Factory, Mutavault, ...
             else if(card.isCreature() && card.isLand() && card.hasSickness()) return false;
             else if(card.isArtifact() || card.isGlobalEnchantment() || card.isLand()) return true;
