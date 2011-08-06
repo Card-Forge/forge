@@ -139,10 +139,18 @@ public class AbilityFactory_Counters {
 		if(amount != 1) sb.append("s");
 		sb.append(" on");
 		
-		ArrayList<Card> tgts = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+		ArrayList<Card> tgtCards;
 
-		for (Card c : tgts)
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+		}
+
+		for (Card c : tgtCards) {
 			sb.append(" ").append(c.getName());
+		}
 
 		sb.append(".");
 		
@@ -483,13 +491,14 @@ public class AbilityFactory_Counters {
 			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
 		}
 		
-		for(Card tgtCard : tgtCards)
+		for(Card tgtCard : tgtCards) {
 			if(tgt == null || CardFactoryUtil.canTarget(card, tgtCard)){
 				if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield))
 					tgtCard.addCounter(Counters.valueOf(type), counterAmount);
 				else	// adding counters to something like re-suspend cards
 					tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
 			}
+		}
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
