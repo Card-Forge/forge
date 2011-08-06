@@ -1,3 +1,49 @@
+Brassclaw Orcs
+2 R
+Creature Orc
+no text
+3/2
+CARDNAME can't block creatures with power 2 or greater.
+
+Ironclaw Buzzardiers
+2 R
+Creature Orc Scout
+no text
+2/2
+CARDNAME can't block creatures with power 2 or greater.
+abPump R:Flying
+
+Ironclaw Curse
+R
+Enchantment Aura
+Enchanted creature gets -0/-1 and can't block creatures with power equal to or greater than the enchanted creature's toughness.
+Enchant creature
+enPumpCurse:-0/-1/CARDNAME can't block creatures with power equal to or greater than CARDNAME's toughness.
+
+Ironclaw Orcs
+1 R
+Creature Orc
+no text
+2/2
+CARDNAME can't block creatures with power 2 or greater.
+
+Spitfire Handler
+1 R
+Creature Goblin
+no text
+1/1
+CARDNAME can't block creatures with power greater than CARDNAME's power.
+abPump R:+1/+0
+
+Sunweb
+3 W
+Creature Wall
+no text
+5/6
+Flying
+Defender
+CARDNAME can't block creatures with power 2 or less.
+
 Sacred Nectar
 1 W
 Sorcery
@@ -326,12 +372,6 @@ Enchanted creature gets -3/-0.
 Flash
 Enchant creature
 enPumpCurse:-3/-0
-
-Ironclaw Orcs
-1 R
-Creature Orc
-Ironclaw Orcs can't block creatures with power 2 or greater.
-2/2
 
 Copper Tablet
 2
@@ -11823,14 +11863,6 @@ Sorcery
 no text
 spDamageTgtCP:X:Drawback$YouGainLife/X:Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way.:Corrupt deals damage and you gain life.
 SVar:X:Count$TypeYouCtrl.Swamp
-
-Sunweb
-3 W
-Creature Wall
-Sunweb can't block creatures with power 2 or less.
-5/6
-Flying
-Defender
 
 Blazing Archon
 6 W W W

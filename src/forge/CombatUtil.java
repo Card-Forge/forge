@@ -24,8 +24,44 @@ public class CombatUtil {
         
         if(!attacker.getKeyword().contains("Shadow") && blocker.getKeyword().contains("Shadow")) return false;
         
-        if(attacker.getNetAttack() <= 2 && blocker.getName().equals("Sunweb")) return false;
-        if(attacker.getNetAttack() >= 2 && blocker.getName().equals("Ironclaw Orcs")) return false;
+//      if(attacker.getNetAttack() <= 2 && blocker.getName().equals("Sunweb")) return false;
+//      if(attacker.getNetAttack() >= 2 && blocker.getName().equals("Ironclaw Orcs")) return false;
+
+        // CARDNAME can't block creatures with power ...
+
+        int powerLimit[] = {0};
+        int keywordPosition = 0;
+        boolean hasKeyword = false;
+        
+        ArrayList<String> blockerKeywords = blocker.getKeyword();
+        for (int i = 0; i < blockerKeywords.size(); i++) {
+        	if (blockerKeywords.get(i).toString().startsWith("CARDNAME can't block creatures with power")) {
+        		hasKeyword = true;
+        		keywordPosition = i;
+        	}
+        }
+        
+        if (hasKeyword) {    // The keyword "CARDNAME can't block creatures with power" ... is present
+        	String tmpString = blocker.getKeyword().get(keywordPosition).toString();
+        	String asSeparateWords[]  = tmpString.trim().split(" ");
+        	
+        	if (asSeparateWords.length >= 9) {
+        		if (asSeparateWords[6].matches("[0-9][0-9]?")) {
+        			powerLimit[0] = Integer.parseInt((asSeparateWords[6]).trim());
+        			
+        			if (attacker.getNetAttack() >= powerLimit[0] && blocker.getKeyword().contains
+        					("CARDNAME can't block creatures with power " + powerLimit[0] + " or greater.")) return false;
+        			if (attacker.getNetAttack() <= powerLimit[0] && blocker.getKeyword().contains
+        					("CARDNAME can't block creatures with power " + powerLimit[0] + " or less.")) return false;
+        		}
+        	}
+        	
+        	if (attacker.getNetAttack() > blocker.getNetAttack()
+					&& blocker.getKeyword().contains("CARDNAME can't block creatures with power greater than CARDNAME's power.")) return false;
+        	if (attacker.getNetAttack() >= blocker.getNetDefense()
+        			&& blocker.getKeyword().contains("CARDNAME can't block creatures with power equal to or greater than CARDNAME's toughness.")) return false;
+        	
+        }// hasKeyword CARDNAME can't block creatures with power ...
 
         PlayerZone blkPZ = AllZone.getZone(Constant.Zone.Play, blocker.getController());
         CardList blkCL = new CardList(blkPZ.getCards());

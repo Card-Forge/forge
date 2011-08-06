@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+brassclaw_orcs.jpg		http://www.wizards.com/global/images/magic/general/brassclaw_orcs.jpg
+ironclaw_buzzardiers.jpg		http://www.wizards.com/global/images/magic/general/ironclaw_buzzardiers.jpg
+ironclaw_curse.jpg		http://www.wizards.com/global/images/magic/general/ironclaw_curse.jpg
+spitfire_handler.jpg		http://www.wizards.com/global/images/magic/general/spitfire_handler.jpg
 jandors_saddlebags.jpg			http://www.wizards.com/global/images/magic/general/jandors_saddlebags.jpg
 people_of_the_woods.jpg			http://www.wizards.com/global/images/magic/general/people_of_the_woods.jpg
 diamond_valley.jpg				http://www.wizards.com/global/images/magic/general/diamond_valley.jpg
