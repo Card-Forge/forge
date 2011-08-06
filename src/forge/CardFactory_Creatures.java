@@ -14753,6 +14753,8 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Acolyte of Xathrid")) {
             final SpellAbility ability = new Ability_Tap(card, "1 B") {
@@ -14782,6 +14784,7 @@ public class CardFactory_Creatures {
             ability.setDescription("1 B, tap: Target player loses 1 life.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************

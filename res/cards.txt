@@ -3811,6 +3811,7 @@ B
 Creature Human Cleric
 no text
 0/1
+abLoseLifeTgt 1 B T:1
 
 Barren Glory
 4 W W
