@@ -2,7 +2,7 @@ Name:Glasses of Urza
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$RevealHand | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Look at target player's hand.
+A:AB$ RevealHand | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Look at target player's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
