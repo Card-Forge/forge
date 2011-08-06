@@ -3203,7 +3203,8 @@ Borrowing 100,000 Arrows
 2 U
 Sorcery
 no text
-spDrawCards:Count$TypeOppCtrlTapped.Creature:Draw a card for each tapped creature target opponent controls.:Borrowing 100,000 Arrows - Draw cards.
+spDrawCards:X:Draw a card for each tapped creature target opponent controls.:Borrowing 100,000 Arrows - Draw cards.
+SVar:X:Count$TypeOppCtrlTapped.Creature
 
 Cruel Bargain
 B B B
@@ -3221,7 +3222,8 @@ Theft of Dreams
 2 U
 Sorcery
 no text
-spDrawCards:Count$TypeOppCtrlTapped.Creature:Draw a card for each tapped creature target opponent controls.:Theft of Dreams - Draw cards.
+spDrawCards:X:Draw a card for each tapped creature target opponent controls.:Theft of Dreams - Draw cards.
+SVar:X:Count$TypeOppCtrlTapped.Creature
 
 Night's Whisper
 1 B
@@ -3275,7 +3277,8 @@ Minions' Murmurs
 2 B B
 Sorcery
 no text
-spDrawCards:Count$TypeYouCtrl.Creature:Drawback$YouLoseLife/X:You draw X cards and you lose X life, where X is the number of creatures you control.:Minion's Murmurs - draw cards and lose life.
+spDrawCards:X:Drawback$YouLoseLife/X:You draw X cards and you lose X life, where X is the number of creatures you control.:Minion's Murmurs - draw cards and lose life.
+SVar:X:Count$TypeYouCtrl.Creature
 
 Brainstorm
 U
@@ -5628,13 +5631,15 @@ Airborne Aid
 3 U
 Sorcery
 no text
-spDrawCards:Count$TypeOnBattlefield.Bird:Draw a card for each Bird on the battlefield.:Airborne Aid - draw cards.
+spDrawCards:X:Draw a card for each Bird on the battlefield.:Airborne Aid - draw cards.
+SVar:X:Count$TypeOnBattlefield.Bird
 
 Collective Unconscious
 4 G G
 Sorcery
 no text
-spDrawCards:Count$TypeYouCtrl.Creature:Draw a card for each creature you control.:Collective Unconscious - draw cards.
+spDrawCards:X:Draw a card for each creature you control.:Collective Unconscious - draw cards.
+SVar:X:Count$TypeYouCtrl.Creature
 
 Compulsive Research
 2 U
@@ -5652,7 +5657,8 @@ Flow of Ideas
 5 U
 Sorcery
 no text
-spDrawCards:Count$TypeYouCtrl.Island:Draw a card for each Island you control.:Flow of Ideas - draw cards.
+spDrawCards:X:Draw a card for each Island you control.:Flow of Ideas - draw cards.
+SVar:X:Count$TypeYouCtrl.Island
 
 Opportunity
 4 U U
@@ -5664,7 +5670,8 @@ Ribbons of the Reikai
 4 U
 Sorcery Arcane
 no text
-spDrawCards:Count$TypeYouCtrl.Spirit:Draw a card for each Spirit you control.:Ribbons of the Reikai - draw cards.
+spDrawCards:X:Draw a card for each Spirit you control.:Ribbons of the Reikai - draw cards.
+SVar:X:Count$TypeYouCtrl.Spirit
 
 Sift
 3 U
@@ -5713,7 +5720,8 @@ Biomantic Mastery
 4 UG UG UG
 Sorcery
 no text
-spDrawCards:Count$TypeOnBattlefield.Creature:Draw a card for each creature target player controls, then draw a card for each creature another target player controls.:Biomantic Mastery - Draw cards.
+spDrawCards:X:Draw a card for each creature target player controls, then draw a card for each creature another target player controls.:Biomantic Mastery - Draw cards.
+SVar:X:Count$TypeOnBattlefield.Creature
 
 Infiltrate
 U
