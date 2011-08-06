@@ -51,7 +51,7 @@ class CardFactory_Lands {
                         targ.addCounter(Counters.P1P1, 1);
                 }
             };
-            ability.setDescription("tap: Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
+            ability.setDescription(abCost+"Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
             ability.setStackDescription("Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
             card.addSpellAbility(ability);
         }
@@ -110,28 +110,6 @@ class CardFactory_Lands {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Kabira Crossroads")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().gainLife(2, card);
-                }
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -4550013855602477643L;
-                
-                public void execute() {
-                    card.tap();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 2 life");
-                    ability.setStackDescription(sb.toString());
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Bojuka Bog")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -167,127 +145,129 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Sejiri Steppe")) {
-            final HashMap<Card, String[]> creatureMap = new HashMap<Card, String[]>();
-            final SpellAbility[] a = new SpellAbility[1];
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = 5106629534549783845L;
-                
-                public void execute() {
-                	Card c = a[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        String[] colors = creatureMap.get(c);
-                        for(String col:colors) {
-                            c.removeExtrinsicKeyword("Protection from " + col);
-                        }
-                }
-            };
-            };
-            a[0] = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-		    		String Color = "";
+        	final HashMap<Card, String[]> creatureMap = new HashMap<Card, String[]>();
+        	final SpellAbility[] a = new SpellAbility[1];
+        	final Command eot1 = new Command() {
+        		private static final long serialVersionUID = 5106629534549783845L;
 
-		        	if(card.getController() == AllZone.HumanPlayer){
-	                    if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
-	                        Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.ColorsOnly);
-	                        Color = (String) o;
-	                    }
+        		public void execute() {
+        			Card c = a[0].getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(c)) {
+        				String[] colors = creatureMap.get(c);
+        				for(String col:colors) {
+        					c.removeExtrinsicKeyword("Protection from " + col);
+        				}
+        			}
+        		};
+        	};
+        	a[0] = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			String Color = "";
 
-                } else {
-                    CardList creature = new CardList();
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);             
-                    if(zone != null) {
-                    creature.addAll(zone.getCards());
-                    creature = creature.getType("Creature"); 
-                    creature = creature.filter(new CardListFilter()
-                	{
-                		public boolean addCard(Card c)
-                		{
-                			return (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(a[0], c) && !c.hasKeyword("Defender"));
-                		}
-                	});
-                    Card biggest = null;
-                           if(creature.size() > 0) {
-                        	   biggest = creature.get(0);
-                           
-                            for(int i = 0; i < creature.size(); i++) {
-                                if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);   
-                            }
-                         		setTargetCard(biggest);
-                    	
-                    }
-                    }
-                    PlayerZone Hzone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);  
-                    if(zone != null) {
-                        CardList creature2 = new CardList();
-                        creature2.addAll(Hzone.getCards());
-                        creature2 = creature2.getType("Creature"); 
-                        creature2 = creature2.filter(new CardListFilter()
-                    	{
-                    		public boolean addCard(Card c)
-                    		{
-                    			return (!c.isTapped() && !CardUtil.getColors(c).contains(Constant.Color.Colorless));
-                    		}
-                    	});
-                        Card biggest2 = null;
-                        if(creature2.size() > 0) {
-                                 biggest2 = creature2.get(0);
-                                for(int i = 0; i < creature2.size(); i++) {
-                                    if(biggest2.getNetAttack() < creature2.get(i).getNetAttack()) biggest2 = creature2.get(i);   
-                                }
-                             		if(biggest2 != null) {  
-                             			if(biggest2.isGreen()) Color = "green";
-                             			if(biggest2.isBlue()) Color = "blue";
-                             			if(biggest2.isWhite()) Color = "white";
-                             			if(biggest2.isRed()) Color = "red";
-                             			if(biggest2.isBlack()) Color = "black";
-                             		} else {
-                             			Color = "black";          			
-                             		}
-                                		
-                        } else {
-                        	Color = "black"; 
-                        }
-                    }
-                }
-		        	Card Target = getTargetCard();
-					if(Color != "" && Target != null) Target.addExtrinsicKeyword("Protection from " + Color);;
-                    if(creatureMap.containsKey(Target)) {
-                        int size = creatureMap.get(Target).length;
-                        String[] newString = new String[size + 1];
-                        
-                        for(int i = 0; i < size; i++) {
-                            newString[i] = creatureMap.get(Target)[i];
-                        }
-                        newString[size] = Color;
-                        creatureMap.put(Target, newString);
-                    } else creatureMap.put(Target, new String[] {Color});
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 5055232386220487221L;
-                
-                public void execute() {
-                    CardList creats = new CardList(
-                            AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
-                    creats = creats.getType("Creature");
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - target creature you control gains protection from the color of your choice until end of turn");
-                    a[0].setStackDescription(sb.toString());
-		        	if(card.getController() == AllZone.HumanPlayer) {
-		        		AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(a[0], creats, "Select target creature you control", false, false));
-		        	} else {
-	                    AllZone.Stack.add(a[0]);  		
-		        	}
-                    }
-            };         
-            card.addComesIntoPlayCommand(intoPlay);
-        
+        			if(card.getController() == AllZone.HumanPlayer){
+        				if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
+        					Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.ColorsOnly);
+        					Color = (String) o;
+        				}
+
+        			} else {
+        				CardList creature = new CardList();
+        				PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);             
+        				if(zone != null) {
+        					creature.addAll(zone.getCards());
+        					creature = creature.getType("Creature"); 
+        					creature = creature.filter(new CardListFilter()
+        					{
+        						public boolean addCard(Card c)
+        						{
+        							return (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(a[0], c) && !c.hasKeyword("Defender"));
+        						}
+        					});
+        					Card biggest = null;
+        					if(creature.size() > 0) {
+        						biggest = creature.get(0);
+
+        						for(int i = 0; i < creature.size(); i++) {
+        							if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);   
+        						}
+        						setTargetCard(biggest);
+
+        					}
+        				}
+        				PlayerZone Hzone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);  
+        				if(zone != null) {
+        					CardList creature2 = new CardList();
+        					creature2.addAll(Hzone.getCards());
+        					creature2 = creature2.getType("Creature"); 
+        					creature2 = creature2.filter(new CardListFilter()
+        					{
+        						public boolean addCard(Card c)
+        						{
+        							return (!c.isTapped() && !CardUtil.getColors(c).contains(Constant.Color.Colorless));
+        						}
+        					});
+        					Card biggest2 = null;
+        					if(creature2.size() > 0) {
+        						biggest2 = creature2.get(0);
+        						for(int i = 0; i < creature2.size(); i++) {
+        							if(biggest2.getNetAttack() < creature2.get(i).getNetAttack()) biggest2 = creature2.get(i);   
+        						}
+        						if(biggest2 != null) {  
+        							if(biggest2.isGreen()) Color = "green";
+        							if(biggest2.isBlue()) Color = "blue";
+        							if(biggest2.isWhite()) Color = "white";
+        							if(biggest2.isRed()) Color = "red";
+        							if(biggest2.isBlack()) Color = "black";
+        						} else {
+        							Color = "black";          			
+        						}
+
+        					} else {
+        						Color = "black"; 
+        					}
+        				}
+        			}
+        			Card Target = getTargetCard();
+        			if(Color != "" && Target != null) Target.addExtrinsicKeyword("Protection from " + Color);;
+        			if(creatureMap.containsKey(Target)) {
+        				int size = creatureMap.get(Target).length;
+        				String[] newString = new String[size + 1];
+
+        				for(int i = 0; i < size; i++) {
+        					newString[i] = creatureMap.get(Target)[i];
+        				}
+        				newString[size] = Color;
+        				creatureMap.put(Target, newString);
+        			} else creatureMap.put(Target, new String[] {Color});
+        			AllZone.EndOfTurn.addUntil(eot1);
+        		}
+        	};
+
+        	Command intoPlay = new Command() {
+        		private static final long serialVersionUID = 5055232386220487221L;
+
+        		public void execute() {
+        			CardList creats = new CardList(
+        					AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
+        			creats = creats.getType("Creature");
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName()).append(" - target creature you control gains protection from the color of your choice until end of turn");
+        			a[0].setStackDescription(sb.toString());
+        			if(card.getController() == AllZone.HumanPlayer) {
+        				AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(a[0], creats, "Select target creature you control", false, false));
+        			} else {
+        				AllZone.Stack.add(a[0]);  		
+        			}
+        		}
+        	};         
+        	card.addComesIntoPlayCommand(intoPlay);
+
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gemstone Mine")) {
