@@ -133,7 +133,6 @@ public class GameActionUtil {
 		upkeep_Eldrazi_Monument();
 		upkeep_Blaze_Counters();
 		upkeep_Dark_Confidant(); // keep this one semi-last
-		upkeep_Sulfuric_Vortex();
 		upkeep_Power_Surge();	
 		upkeep_AI_Aluren(); 
 		// experimental, AI abuse aluren
@@ -7673,33 +7672,7 @@ public class GameActionUtil {
 		}// for
 	}
 		
-	private static void upkeep_Sulfuric_Vortex() {
-		/*
-		 * At the beginning of each player's upkeep, Sulfuric Vortex deals 2
-		 * damage to that player.
-		 */
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getCardsInPlay("Sulfuric Vortex");
-
-		Ability ability;
-		for(Card tablet:list) {
-			final Card source = tablet;
-			ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(2, source);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(source).append(" - deals 2 damage to ").append(player);
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Sulfuric_Vortex()
-	
-	private static void upkeep_Power_Surge() {
+		private static void upkeep_Power_Surge() {
 		/*
 		 * At the beginning of each player's upkeep, Power Surge deals X
 		 * damage to that player, where X is the number of untapped
