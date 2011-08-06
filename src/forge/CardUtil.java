@@ -246,14 +246,14 @@ public class CardUtil {
         else
         	path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
         
+        StringBuilder sbKey = new StringBuilder();
+        
     	File  f = null;
         if (!card.getCurSetCode().equals(""))
         {
             String nn = "";
         	if (card.getRandomPicture() > 0)
                 nn = Integer.toString(card.getRandomPicture() + 1);
-        	
-        	StringBuilder sbKey = new StringBuilder();
         	
         	//First try 3 letter set code with MWS filename format 
         	sbKey.append(card.getCurSetCode() + "/");
@@ -285,26 +285,27 @@ public class CardUtil {
         	
         	sbKey = new StringBuilder();
         	
-        	//Last, give up with set images, go with the old picture type
-        	sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
-        	if (card.getRandomPicture() > 1)
-        		sbKey.append(card.getRandomPicture());
-        	
-        	f = new File(path, sbKey.toString() + ".jpg");
-        	if (f.exists())
-        		return sbKey.toString();
-        	
-        	sbKey = new StringBuilder();
-        	
-        	//Really last-ditch effort, forget the picture number
-        	sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
-        	
-        	f = new File(path, sbKey.toString() + ".jpg");
-        	if (f.exists())
-        		return sbKey.toString();
-        	
-        	//if still no file, download if option enabled?
         }
+    	
+        //Last, give up with set images, go with the old picture type
+    	sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
+    	if (card.getRandomPicture() > 1)
+    		sbKey.append(card.getRandomPicture());
+    	
+    	f = new File(path, sbKey.toString() + ".jpg");
+    	if (f.exists())
+    		return sbKey.toString();
+    	
+    	sbKey = new StringBuilder();
+    	
+    	//Really last-ditch effort, forget the picture number
+    	sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
+    	
+    	f = new File(path, sbKey.toString() + ".jpg");
+    	if (f.exists())
+    		return sbKey.toString();
+    	
+    	//if still no file, download if option enabled?
 
     	return "none";
     }
