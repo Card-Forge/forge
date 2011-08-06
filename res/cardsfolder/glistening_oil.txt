@@ -2,6 +2,7 @@ Name:Glistening Oil
 ManaCost:B B
 Types:Enchantment Aura
 Text:no text
+K:Enchant creature
 K:enPump:Infect
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1
