@@ -6,6 +6,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
 	private ArrayList<Command> runcommands = new ArrayList<Command>();
 	public String orig;
 	private String Mana;
+	private Card sourceCard;
 	
 	public boolean isBasic()
 	{
@@ -42,8 +43,23 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
 	   }
 	   */
 	   
+	   this.sourceCard = sourceCard;
 	   this.orig=orig;
 	   setDescription(orig);
+	  
+	   /*
+	   String parts[] = orig.split(":");
+	   System.out.println("0:" +parts[0]);
+	   System.out.println("1:" +parts[1]);
+	   StringBuilder sb = new StringBuilder();
+	   
+	   sb.append(parts[0]);
+	   sb.append(parts[1]);
+	   sb.append(" to your mana pool for each ");
+	   
+	   setDescription(sb.toString());
+	   */
+	   
 	   if(isBasic())//lowers memory usage drastically
 	   {
 		   Mana = "" + orig.charAt(9);
@@ -76,9 +92,6 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
 	    if(pain.contains(sourceCard.getName()) && !Mana.equals("1"))
 	    runcommands.add(new Command()
 	    {
-	    	/**
-			 * 
-			 */
 			private static final long serialVersionUID = -5904507275105961979L;
 	
 			public void execute(){
@@ -155,7 +168,43 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     }
     public int getX(){return getSourceCard().getX();}//override these when not defined by card,
     public void setX(int X){getSourceCard().setX(X);}//i.e. "T, remove X charge counters from {name}: add X+1 <color> mana to your mana pool"
-    public String Mana(){return Mana;}//override for all non-X variable mana,
+    public String Mana(){
+    	if(!orig.contains("for each"))
+    		return Mana;
+        else
+        {
+        	String[] manaPart = orig.split(":");
+        	String m = manaPart[1];
+        	m = m.replaceAll(" add ", "");
+        	//TODO: make this handle "multiple-mana symbol" cases, if they are ever needed
+        	m = m.substring(0, 2);
+        	
+        	String[] parts = orig.split(" for each ");
+        	int index = parts[1].indexOf(' ');
+        	String s1 = parts[1].substring(0, index);
+        	String s2 = parts[1].substring(index);
+
+        	if (s2.equals(" on the battlefield."))
+        		s2 = "TypeOnBattlefield";
+        	else if (s2.equals(" you control."))
+        		s2 = "TypeYouCtrl";
+        	
+        	StringBuilder countSB = new StringBuilder();
+        	countSB.append("Count$");
+        	countSB.append(s2);
+        	countSB.append(".");
+        	countSB.append(s1);
+        	
+        	int count = CardFactoryUtil.xCount(sourceCard, countSB.toString());
+
+        	StringBuilder sb = new StringBuilder();
+        	for (int i=0;i<count;i++)
+      		   sb.append(m);
+        	return sb.toString();
+          
+        }
+    	
+    }//override for all non-X variable mana,
     public String getController(){return getSourceCard().getController();}
    
     public boolean canPlayAI(){return false;}

@@ -385,8 +385,17 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                             }
                         }
                     }
+                    //right click:
+                    if (e.isMetaDown()) {
+                    	if (att.contains(cardPanel.getCard()) )
+                    	{
+                    		cardPanel.getCard().untap();
+                    		AllZone.Combat.removeFromCombat(cardPanel.getCard());
+                    	}
+                    } 
                     
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    else
+                    	inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
                 }
             }
         });
@@ -625,9 +634,12 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         cCardHQ = c;       
     }
     public void updateCardDetailPicture(Card c)
-    {
+    {	
+    	String imageName = c.getImageName();
+    	if (c.isFaceDown())
+    		imageName = "Morph";
     	
-    	if (c.getImageName().equals(current_picture) /*&& !c.isBasicLand()*/)
+    	if (imageName.equals(current_picture) /*&& !c.isBasicLand()*/)
     		return;
     		
         //picture
@@ -642,18 +654,18 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
 
     	*/
     	
-    	current_picture = c.getImageName();
+    	current_picture = imageName;
     	
     	BufferedImage srcImage = null;
-    	if(imageCache.containsKey(c.getImageName()))
-    		srcImage = imageCache.get(c.getImageName());
+    	if(imageCache.containsKey(imageName))
+    		srcImage = imageCache.get(imageName);
     	else {
     		InputStream stream;
 			try {
 				//stream = new URL(GuiDisplayUtil.getURL(c)).openStream();
 				stream = GuiDisplayUtil.getURL(c).openStream();
 				srcImage = ImageIO.read(stream);
-	    		imageCache.put(c.getImageName(), srcImage);
+	    		imageCache.put(imageName, srcImage);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

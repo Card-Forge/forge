@@ -134,7 +134,7 @@ public void execute(Object o) {}};
 
   //setDescription() includes mana cost and everything like
   //"G, tap: put target creature from your hand into play"
-  public void setDescription(String s)  {description = s;}
+  public void setDescription(String s)  	   {description = s;}
   public String toString()                     {return description;}
 
   public Card getTargetCard()

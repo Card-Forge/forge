@@ -2172,11 +2172,13 @@ Magus of the Coffers
 Creature Human Wizard
 no text
 4/4
+2,tap: add B to your mana pool for each Swamp you control.
 
 Cabal Coffers
 no cost
 Land
 no text
+2,tap: add B to your mana pool for each Swamp you control.
 
 Xiahou Dun, the One-Eyed
 2 B B
@@ -5821,6 +5823,7 @@ Elvish Archdruid
 Creature Elf Druid
 Other Elf creatures you control get +1/+1.
 2/2
+tap: add G to your mana pool for each Elf you control.
 
 Warren-Scourge Elf
 1 G
@@ -6488,21 +6491,25 @@ Priest of Titania
 Creature Elf Druid
 no text
 1/1
+tap: add G to your mana pool for each Elf on the battlefield.
 
 Serra's Sanctum
 no cost
 Legendary Land
 no text
+tap: add W to your mana pool for each Enchantment you control.
 
 Tolarian Academy
 no cost
 Legendary Land
 no text
+tap: add U to your mana pool for each Artifact you control.
 
 Gaea's Cradle
 no cost
 Legendary Land
 no text
+tap: add G to your mana pool for each Creature you control.
 
 Sol Ring
 1 

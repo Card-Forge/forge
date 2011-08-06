@@ -80,4 +80,9 @@ public void showMessage()
       CombatUtil.showCombat();
     }
   }//selectCard()
+  
+  public void unselectCard(Card card, PlayerZone zone)
+  {
+	  
+  }
 }

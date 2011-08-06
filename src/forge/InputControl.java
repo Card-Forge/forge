@@ -315,13 +315,13 @@ import java.util.*;
 
        return new Input()
        {
-		private static final long serialVersionUID = 7378891097354547936L;
+    	   private static final long serialVersionUID = 7378891097354547936L;
 
-		public void showMessage()
-                {
-                  AllZone.Display.showMessage("InputControl : Error nothing found");
-                  throw new RuntimeException("InputControl : getInput() error, should not be here, phase " +phase +", player " +player);
-                }
+			public void showMessage()
+            {
+				AllZone.Display.showMessage("InputControl : Error nothing found");
+				throw new RuntimeException("InputControl : getInput() error, should not be here, phase " +phase +", player " +player);
+            }
        };
         }//getInput()
         private boolean skipPhase()
