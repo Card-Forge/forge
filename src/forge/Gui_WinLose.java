@@ -297,6 +297,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	
     	sb.append("<html>");
     	
+    	QuestData_Prefs qdPrefs = q.qdPrefs;
+    	
     	for (String s : wins)
     	{
     		if (s != null) {
@@ -307,15 +309,15 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     			sb.append("! Bonus: <b>+");
     			
     			if (s.equals("Poison Counters"))
-    				sb.append(q.qdPrefs.getMatchRewardPoisonWinBonus());
+    				sb.append(qdPrefs.getMatchRewardPoisonWinBonus());
     			else if (s.equals("Milled"))
-    				sb.append(q.qdPrefs.getMatchRewardMilledWinBonus());
+    				sb.append(qdPrefs.getMatchRewardMilledWinBonus());
     			else if (s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
 	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience") ||
 	    			s.equals("Mortal Combat") || s.equals("Test of Endurance") ) {
 
-	    			sb.append(q.qdPrefs.getMatchRewardAltWinBonus());
+	    			sb.append(qdPrefs.getMatchRewardAltWinBonus());
 	    		}
     			
     			sb.append(" credits</b>.<br>");
@@ -329,14 +331,14 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     		System.out.println("Quest, won by turn:" + i);
     		if (i != 0)
     		{
-    			if (i == 1)
-    				sb.append("Won in one turn! Bonus: <b>+1500 credits</b>.<br>");
+        		if (i == 1)
+        			creds += qdPrefs.getMatchRewardWinFirst();
     			else if (i <= 5)
-    				sb.append("Won by turn 5! Bonus: <b>+250 credits</b>.<br>");
+    				creds += qdPrefs.getMatchRewardWinByFifth();
     			else if (i <= 10)
-    				sb.append("Won by turn 10! Bonus: <b>+50 credits</b>.<br>");
+    				creds += qdPrefs.getMatchRewardWinByTen();
     			else if (i <= 15)
-    				sb.append("Won by turn 15! Bonus: <b>+5 credits</b>.<br>");
+    				creds += qdPrefs.getMatchRewardWinByFifteen();
     		}
     	}
     	
@@ -344,14 +346,15 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
     	for (boolean b : mulliganedToZero)
     	{
-    		if (b == true)
-    		{
-    			sb.append("Mulliganed to zero and still won! Bonus: <b>+500 credits</b>.<br>");
+    		if (b){
+    			sb.append("Mulliganed to zero and still won! Bonus: <b>+");
+    			sb.append(qdPrefs.getMatchMullToZero()).append(" credits</b>.<br>");
     		}
     	}
     	
     	if (winLose.getLose()==0)
-    		sb.append("You have not lost once! Bonus: <b>+10 credits</b>.<br>");
+    		sb.append("You have not lost once! Bonus: <b>+");
+    		sb.append(qdPrefs.getMatchRewardNoLosses()).append(" credits</b>.<br>");
     	
     	if(q.getEstatesLevel() == 1)
     		sb.append("Estates bonus: <b>10%</b>.<br>");

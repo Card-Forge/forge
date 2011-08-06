@@ -13,6 +13,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -132,8 +133,8 @@ public class Gui_QuestOptions extends JFrame {
         gridLayout1.setRows(4);
         
         easyRadio.setText("Easy - 50 games");
-        hardRadio.setText("Hard - 200 games");
         mediumRadio.setText("Medium - 100 games");
+        hardRadio.setText("Hard - 200 games");
         veryHardRadio.setText("Very Hard - 300 games");
         realisticRadio.setText("Realistic");
         fantasyRadio.setText("Fantasy");
@@ -207,10 +208,7 @@ public class Gui_QuestOptions extends JFrame {
     void newQuestButton_actionPerformed(ActionEvent e) {
         int difficulty = 0;
 
-        String mode = "Realistic";
-        
-        if (fantasyRadio.isSelected())
-        	mode = "Fantasy";
+        String mode = fantasyRadio.isSelected() ? "Fantasy" : "Realistic";
         
         if(easyRadio.isSelected()) difficulty = 0;
         
@@ -220,8 +218,19 @@ public class Gui_QuestOptions extends JFrame {
         
         else if(veryHardRadio.isSelected()) difficulty = 3;
         
-        else //user didn't select a difficulty
-        return;
+        else //user didn't select a difficulty{
+        	return;
+        
+        if (questData.hasSaveFile()){
+        	// this will overwrite your save file!
+			Object[] possibleValues = {"Yes", "No"};
+        	Object choice = JOptionPane.showOptionDialog(null, "Starting a new quest will overwrite your current quest. Continue?", 
+        			"Start New Quest?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+        			null, possibleValues, possibleValues[0]);
+        	
+        	if (!choice.equals(0))
+        		return;
+        }
         
         //give the user a few cards to build a deck
         questData.newGame(difficulty, mode);
