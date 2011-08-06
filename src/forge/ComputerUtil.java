@@ -743,7 +743,7 @@ public class ComputerUtil
 	  list = list.filter(new CardListFilter()
 	  {
 		public boolean addCard(Card c) {
-			return c.isCreature() && CombatUtil.canAttack(c);
+			return CombatUtil.canAttack(c);
 		}
 	  });
 	  return list;

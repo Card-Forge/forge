@@ -52,15 +52,10 @@ public class Input_Block extends Input {
     
     @Override
     public void selectButtonOK() {
+        // Done blocking
         ButtonUtil.reset();
-        if(AllZone.pwCombat.getAttackers().length == 0) {
-            
-            //AllZone.Phase.nextPhase();
-            //for debugging: System.out.println("need to nextPhase(Input_Cleanup.showMessage(), n<=7) = true");
-            AllZone.Phase.setNeedToNextPhase(true);
-        } else {
-            AllZone.InputControl.setInput(new Input_Block_Planeswalker());
-        }
+
+        AllZone.Phase.setNeedToNextPhase(true);
     }
     
     @Override

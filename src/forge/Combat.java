@@ -13,31 +13,28 @@ public class Combat {
 	private HashMap<Card, Integer> defendingFirstStrikeDamageMap = new HashMap<Card, Integer>();
 	private HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
 
-	private int attackingDamage;
-	// private int defendingDamage;
-
-	// private int defendingFirstStrikeDamage;
-	// private int trampleDamage;
-	// private int trampleFirstStrikeDamage;
-
-	private Player attackingPlayer;
-	private Player defendingPlayer;
-
-	private int declaredAttackers;
-
-	private Card planeswalker;
+	// Defenders are the Defending Player + Each Planeswalker that player controls
+	private ArrayList<Object> defenders = new ArrayList<Object>();
+	private int currentDefender = 0;
+	private int nextDefender = 0;
 	
+	// This Hash keeps track of 
+	private HashMap<Card, Object> attackerToDefender = new HashMap<Card, Object>();
+	
+	private int attackingDamage;
+
+	private Player attackingPlayer = null;
+	private Player defendingPlayer = null;
+
 	private CardList attackersWithLure = new CardList();
 	private CardList canBlockAttackerWithLure = new CardList();
 
 	public Combat() {
-		reset();
+		// Let the Begin Turn/Untap Phase Reset Combat properly
 	}
 
 	public void reset() {
-		planeswalker = null;
-
-		map.clear();
+		resetAttackers();
 		blocked.clear();
 
 		unblockedMap.clear();
@@ -46,24 +43,70 @@ public class Combat {
 		defendingDamageMap.clear();
 		defendingFirstStrikeDamageMap.clear();
 
-		declaredAttackers = 0;
 		attackingPlayer = null;
 		defendingPlayer = null;
 		
-		attackersWithLure = new CardList();
-		canBlockAttackerWithLure = new CardList();
+		attackersWithLure.clear();
+		canBlockAttackerWithLure.clear();
+		
+		defenders.clear();
+		currentDefender = 0;
+		nextDefender = 0;
+		
+		initiatePossibleDefenders(AllZone.Phase.getPlayerTurn().getOpponent());
 	}
 
-	public void setPlaneswalker(Card c) {
-		planeswalker = c;
+	public void initiatePossibleDefenders(Player defender){
+		defenders.add(defender);
+		CardList planeswalkers = AllZoneUtil.getPlayerCardsInPlay(defender);
+		planeswalkers = planeswalkers.getType("Planeswalker");
+		for(Card pw : planeswalkers)
+			defenders.add(pw);
 	}
+	
+	public Object nextDefender(){
+		if (nextDefender >= defenders.size())
+			return null;
+		
+		currentDefender = nextDefender;
+		nextDefender++;
 
-	public Card getPlaneswalker() {
-		return planeswalker;
+		return defenders.get(currentDefender);
+	}
+	
+	public void setCurrentDefender(int def){
+		currentDefender = def;
+	}
+	
+	public int getRemainingDefenders(){
+		return defenders.size() - nextDefender;
+	}
+	
+	public ArrayList<Object> getDefenders(){
+		return defenders;
+	}
+	
+	public void setDefenders(ArrayList<Object> newDef){
+		defenders = newDef;
+	}
+	
+	public Card[] getDefendingPlaneswalkers(){
+		Card[] pwDefending = new Card[defenders.size()-1];
+		
+		int i = 0;
+		
+		for(Object o : defenders){
+			if (o instanceof Card){
+				pwDefending[i] = (Card)o;
+				i++;
+			}
+		}
+		
+		return pwDefending;
 	}
 
 	public int getDeclaredAttackers() {
-		return declaredAttackers;
+		return attackerToDefender.size();
 	}
 
 	public void setAttackingPlayer(Player player) {
@@ -162,12 +205,9 @@ public class Combat {
 					damageDealt = att.get(i).getNetDefense();
 
 				if (damageDealt > 0) {
-					// if the creature has first strike do not do damage in the
-					// normal combat phase
-					// if(att.get(i).hasSecondStrike())
+					// if the creature has first strike do not do damage in the normal combat phase
 					if (!att.get(i).hasFirstStrike()
-							|| (att.get(i).hasFirstStrike() && att.get(i)
-									.hasDoubleStrike()))
+							|| (att.get(i).hasFirstStrike() && att.get(i).hasDoubleStrike()))
 						addDefendingDamage(damageDealt, att.get(i));
 				}
 			} // ! isBlocked...
@@ -185,8 +225,7 @@ public class Combat {
 					damageDealt = att.get(i).getNetDefense();
 
 				if (damageDealt > 0) {
-					// if the creature has first strike or double strike do
-					// damage in the first strike combat phase
+					// if the creature has first strike or double strike do damage in the first strike combat phase
 					if (att.get(i).hasFirstStrike()
 							|| att.get(i).hasDoubleStrike()) {
 						addDefendingFirstStrikeDamage(damageDealt, att.get(i));
@@ -197,6 +236,16 @@ public class Combat {
 	}
 
 	public void addDefendingDamage(int n, Card source) {
+		String slot = getDefenderByAttacker(source).toString();		
+		Object o = defenders.get(Integer.parseInt(slot));
+		
+		if (o instanceof Card){
+			Card pw = (Card)o;
+			pw.addAssignedDamage(n, source);
+			
+			return;
+		}
+		
 		if (!defendingDamageMap.containsKey(source))
 			defendingDamageMap.put(source, n);
 		else {
@@ -205,11 +254,21 @@ public class Combat {
 	}
 
 	public void addDefendingFirstStrikeDamage(int n, Card source) {
+		String slot = getDefenderByAttacker(source).toString();		
+		Object o = defenders.get(Integer.parseInt(slot));
+		
+		if (o instanceof Card){
+			Card pw = (Card)o;
+			pw.addAssignedDamage(n, source);
+			
+			return;
+		}
+		
 		if (!defendingFirstStrikeDamageMap.containsKey(source))
 			defendingFirstStrikeDamageMap.put(source, n);
 		else {
 			defendingFirstStrikeDamageMap.put(source,
-					defendingFirstStrikeDamageMap.get(source) + n);
+			defendingFirstStrikeDamageMap.get(source) + n);
 		}
 	}
 
@@ -221,19 +280,41 @@ public class Combat {
 		return attackingDamage;
 	}
 
+	public CardList[] sortAttackerByDefender(){
+		CardList attackers[] = new CardList[defenders.size()];
+		for(int i = 0; i < attackers.length; i++)
+			attackers[i] = new CardList();
+
+		for(Card atk : attackerToDefender.keySet()){
+			Object o = attackerToDefender.get(atk);
+			int i = Integer.parseInt(o.toString());
+			attackers[i].add(atk);
+		}
+
+		return attackers;
+	}
+
+	public boolean isAttacking(Card c) {
+		return map.get(c) != null;
+	}
+	
 	public void addAttacker(Card c) {
 		map.put(c, new CardList());
-		declaredAttackers++;
+		attackerToDefender.put(c, currentDefender);
+	}
+	
+	public Object getDefenderByAttacker(Card c) {
+		return attackerToDefender.get(c);
 	}
 
 	public void resetAttackers() {
 		map.clear();
+		attackerToDefender.clear();
 	}
 
 	public Card[] getAttackers() {
 		CardList out = new CardList();
 		Iterator<Card> it = map.keySet().iterator();
-		// int i = 0; //unused
 
 		while (it.hasNext()) {
 			out.add((Card) it.next());
@@ -284,8 +365,10 @@ public class Combat {
 	public void removeFromCombat(Card c) {
 		// is card an attacker?
 		CardList att = new CardList(getAttackers());
-		if (att.contains(c))
+		if (att.contains(c)){
 			map.remove(c);
+			attackerToDefender.remove(c);
+		}
 		else// card is a blocker
 		{
 			for (int i = 0; i < att.size(); i++)
@@ -312,8 +395,6 @@ public class Combat {
 		CardList block;
 		CardList attacking = new CardList(getAttackers());
 		for (int i = 0; i < attacking.size(); i++) {
-			// if(attacking.get(i).hasFirstStrike() ||
-			// (attacking.get(i).hasDoubleStrike() )){
 			block = getBlockers(attacking.get(i));
 
 			// attacker always gets all blockers' attack
@@ -327,16 +408,12 @@ public class Combat {
 				}
 			}
 
-			if (block.size() == 0)// this damage is assigned to a player by
-									// setPlayerDamage()
-			{
-				// GameActionUtil.executePlayerCombatDamageEffects(attacking.get(i));
+			if (block.size() == 0){
+				// this damage is assigned to a player by  setPlayerDamage()
 				addUnblockedAttacker(attacking.get(i));
 			}
 
-			else if (attacking.get(i).hasFirstStrike()
-					|| (attacking.get(i).hasDoubleStrike())) {
-
+			else if (attacking.get(i).hasFirstStrike() || (attacking.get(i).hasDoubleStrike())) {
 				if (block.size() == 1) {
 					if (attacking.get(i).hasFirstStrike()
 							|| attacking.get(i).hasDoubleStrike()) {
@@ -371,49 +448,20 @@ public class Combat {
 						addAssignedFirstStrikeDamage(attacking.get(i), block,
 								damageDealt);
 					}
-				} else// human
-				{
-					if (attacking.get(i).hasFirstStrike()
-							|| attacking.get(i).hasDoubleStrike()) {
-						// GuiDisplay2 gui = (GuiDisplay2) AllZone.Display;
+				} 
+				else{
+					// human
+					if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
 						int damageDealt = attacking.get(i).getNetAttack();
 						if (CombatUtil.isDoranInPlay())
 							damageDealt = attacking.get(i).getNetDefense();
-						AllZone.Display.assignDamage(attacking.get(i), block,
-								damageDealt);
+						AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
 
-						/*
-						 * for (Card b : block) {
-						 * AllZone.Display.assignDamage(attacking.get(i), b,
-						 * damageDealt);//System.out.println(
-						 * "setAssignedFirstStrikeDmg called for:" + damageDealt
-						 * + " damage."); }
-						 * AllZone.Display.addAssignDamage(attacking
-						 * .get(i),damageDealt);
-						 */
 					}
 				}
 
 			}// if(hasFirstStrike || doubleStrike)
 		}// for
-
-		// should first strike affect the following?
-		if (getPlaneswalker() != null) {
-			// System.out.println("defendingDmg (setAssignedFirstStrikeDamage) :"
-			// +defendingFirstStrikeDamage);
-			//
-
-			Iterator<Card> iter = defendingFirstStrikeDamageMap.keySet()
-					.iterator();
-			while (iter.hasNext()) {
-				Card crd = iter.next();
-				planeswalker.addAssignedDamage(defendingFirstStrikeDamageMap
-						.get(crd), crd);
-			}
-
-			defendingFirstStrikeDamageMap.clear();
-		}
-
 	}// setAssignedFirstStrikeDamage()
 
 	private void addAssignedFirstStrikeDamage(Card attacker, CardList block,
@@ -449,16 +497,9 @@ public class Combat {
 		CardList block;
 		CardList attacking = new CardList(getAttackers());
 		for (int i = 0; i < attacking.size(); i++) {
-			// if(!attacking.get(i).hasSecondStrike() ){
-			// if(!attacking.get(i).hasFirstStrike() ||
-			// (attacking.get(i).hasFirstStrike() &&
-			// attacking.get(i).hasDoubleStrike() )){
 			block = getBlockers(attacking.get(i));
 
 			// attacker always gets all blockers' attack
-			// attacking.get(i).setAssignedDamage(CardListUtil.sumAttack(block));
-			// AllZone.GameAction.setAssignedDamage(attacking.get(i), block,
-			// CardListUtil.sumAttack(block));
 
 			for (Card b : block) {
 				if (!b.hasFirstStrike()
@@ -470,17 +511,12 @@ public class Combat {
 				}
 			}
 
-			if (block.size() == 0)// this damage is assigned to a player by
-									// setPlayerDamage()
-			{
-				// GameActionUtil.executePlayerCombatDamageEffects(attacking.get(i));
+			if (block.size() == 0){
+				// this damage is assigned to a player by setPlayerDamage()
 				addUnblockedAttacker(attacking.get(i));
 			}
 
-			else if (!attacking.get(i).hasFirstStrike()
-					|| (attacking.get(i).hasFirstStrike() && attacking.get(i)
-							.hasDoubleStrike())) {
-
+			else if (!attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
 				if (block.size() == 1) {
 					int damageDealt = attacking.get(i).getNetAttack();
 					if (CombatUtil.isDoranInPlay())
@@ -503,70 +539,22 @@ public class Combat {
 						damageDealt = attacking.get(i).getNetDefense();
 					addAssignedDamage(attacking.get(i), block, damageDealt);
 
-				} else// human attacks
-				{
-					// GuiDisplay2 gui = (GuiDisplay2) AllZone.Display;
+				} 
+				else{ // human attacks
 					int damageDealt = attacking.get(i).getNetAttack();
 					if (CombatUtil.isDoranInPlay())
 						damageDealt = attacking.get(i).getNetDefense();
 
-					AllZone.Display.assignDamage(attacking.get(i), block,
-							damageDealt);
+					AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
 
-					/*
-					 * 
-					 * 
-					 * for (Card b :block)
-					 * AllZone.Display.addAssignDamage(attacking.get(i), b,
-					 * damageDealt);
-					 * //System.out.println("setAssignedDmg called for:" +
-					 * damageDealt + " damage.");
-					 */
 				}
 
 			}// if !hasFirstStrike ...
-			// hacky code, to ensure surviving non-first-strike blockers will
-			// hit first strike attackers:
-			/*
-			 * else { block = getBlockers(attacking.get(i));
-			 * //System.out.println("block size: " + block.size()); if(
-			 * (attacking.get(i).hasFirstStrike() ||
-			 * attacking.get(i).hasDoubleStrike()) ) { for(int j=0; j <
-			 * block.size(); j++) { //blockerDamage +=
-			 * block.get(j).getNetAttack(); int damage =
-			 * block.get(j).getNetAttack(); if (CombatUtil.isDoranInPlay())
-			 * damage = block.get(j).getNetDefense();
-			 * AllZone.GameAction.addAssignedDamage(attacking.get(i),
-			 * block.get(j), damage); }
-			 * //attacking.get(i).setAssignedDamage(blockerDamage);
-			 * //AllZone.GameAction.setAssignedDamage(attacking.get(i), block ,
-			 * blockerDamage); } }
-			 */
 		}// for
 
 		// should first strike affect the following?
-		if (getPlaneswalker() != null) {
-			// System.out.println("defendingDmg (setAssignedDamage): " +
-			// defendingDamage);
-			Iterator<Card> iter = defendingDamageMap.keySet().iterator();
-			while (iter.hasNext()) {
-				Card crd = iter.next();
-				planeswalker
-						.addAssignedDamage(defendingDamageMap.get(crd), crd);
-			}
-			defendingDamageMap.clear();
-		}
-	}// assignDamage()
 
-	/*
-	 * private void setAssignedDamage(Card attacker, CardList list, int damage)
-	 * { CardListUtil.sortAttack(list); Card c; for(int i = 0; i < list.size();
-	 * i++) { c = list.get(i); //if(!c.hasFirstStrike() || (c.hasFirstStrike()
-	 * && c.hasDoubleStrike()) ){ if(c.getKillDamage() <= damage) { damage -=
-	 * c.getKillDamage(); CardList cl = new CardList(); cl.add(attacker);
-	 * AllZone.GameAction.addAssignedDamage(c, cl, c.getKillDamage());
-	 * //c.setAssignedDamage(c.getKillDamage()); } //} }//for }//assignDamage()
-	 */
+	}// assignDamage()
 
 	private void addAssignedDamage(Card attacker, CardList block, int damage) {
 		Card c = attacker;
@@ -617,85 +605,33 @@ public class Combat {
         	}
         }
         
-        /*
-        if (bFirstStrike){
-            CardList pwAttackers = new CardList(AllZone.pwCombat.getAttackers());
-            CardList pwBlockers = new CardList(AllZone.pwCombat.getAllBlockers().toArray());
-            
-
-            for(int i = 0; i < pwAttackers.size(); i++) {
-                if((pwAttackers.getCard(i).hasFirstStrike() || pwAttackers.getCard(i).hasDoubleStrike())) {
-                    CombatUtil.executeCombatDamageEffects(pwAttackers.getCard(i));
-                }
-            }
-            for(int i = 0; i < pwBlockers.size(); i++) {
-                if((pwBlockers.getCard(i).hasFirstStrike() || pwBlockers.getCard(i).hasDoubleStrike())) {
-                    CombatUtil.executeCombatDamageEffects(pwBlockers.getCard(i));
-                }
-            }
-        }*/
+        // this can be much better below here...
         
-        //get all attackers and blockers
-        CardList check = new CardList();
-        check.addAll(AllZone.Human_Battlefield.getCards());
-        check.addAll(AllZone.Computer_Battlefield.getCards());
-        
-        CardList all = check.getType("Creature");
-        
-        if(AllZone.pwCombat.getPlaneswalker() != null) all.add(AllZone.pwCombat.getPlaneswalker());
-        
-
-        CardList pwAttackers = new CardList(AllZone.pwCombat.getAttackers());
-        CardList pwBlockers = new CardList(AllZone.pwCombat.getAllBlockers().toArray());
-        
-        if (!bFirstStrike){
-        	/*
-	        for(int i = 0; i < pwAttackers.size(); i++) {
-	            //System.out.println("attacker #" + i + ": " + attackers.getCard(i).getName() +" " + attackers.getCard(i).getAttack());
-	            if((!pwAttackers.getCard(i).hasFirstStrike() || (pwAttackers.getCard(i).hasFirstStrike() && pwAttackers.getCard(
-	                    i).hasDoubleStrike()))) {
-	                CombatUtil.executeCombatDamageEffects(pwAttackers.getCard(i));
-	            }
-	        }
-	        for(int i = 0; i < pwBlockers.size(); i++) {
-	            if((!pwBlockers.getCard(i).hasFirstStrike() || (pwBlockers.getCard(i).hasFirstStrike() && pwBlockers.getCard(
-	                    i).hasDoubleStrike()))) {
-	                CombatUtil.executeCombatDamageEffects(pwBlockers.getCard(i));
-	                
-	            }
-	        }
-	        */
-	        
-	        //hacky stuff, hope it won't cause any bugs:
-	        for(int i = 0; i < pwAttackers.size(); i++) {
-	            AllZone.pwCombat.removeFromCombat(pwAttackers.get(i));
-	        }
-	        
-	        for(int i = 0; i < pwBlockers.size(); i++) {
-	            AllZone.pwCombat.removeFromCombat(pwBlockers.get(i));
-	        }
-        }
-        
+        CardList combatants = new CardList();
+        combatants.addAll(AllZone.Combat.getAttackers());
+        combatants.add(AllZone.Combat.getAllBlockers());
+        combatants.addAll(AllZone.Combat.getDefendingPlaneswalkers());
 
         Card c;
-        for(int i = 0; i < all.size(); i++) {
-            c = all.get(i);
-            //because this sets off Jackal Pup, and Filthly Cur damage ability
-            //and the stack says "Jack Pup causes 0 damage to the Computer"
-            if(c.getTotalAssignedDamage() != 0) {
-                HashMap<Card, Integer> assignedDamageMap = c.getAssignedDamageHashMap();
-                HashMap<Card, Integer> damageMap = new HashMap<Card, Integer>();
-                
-                for(Entry<Card, Integer> entry : assignedDamageMap.entrySet()){
-                    Card crd = entry.getKey();
-                    if(CardFactoryUtil.canDamage(crd, c))
-                    	damageMap.put(crd, entry.getValue());
-                }
-                c.addCombatDamage(damageMap);
-                
-                damageMap.clear();
-                c.clearAssignedDamage();
+        for(int i = 0; i < combatants.size(); i++) {
+            c = combatants.get(i);
+ 
+            // if no assigned damage to resolve, move to next
+            if(c.getTotalAssignedDamage() == 0)
+            	continue;
+
+            HashMap<Card, Integer> assignedDamageMap = c.getAssignedDamageHashMap();
+            HashMap<Card, Integer> damageMap = new HashMap<Card, Integer>();
+            
+            for(Entry<Card, Integer> entry : assignedDamageMap.entrySet()){
+                Card crd = entry.getKey();
+                if(CardFactoryUtil.canDamage(crd, c))
+                	damageMap.put(crd, entry.getValue());
             }
+            c.addCombatDamage(damageMap);
+            
+            damageMap.clear();
+            c.clearAssignedDamage();
         }
 	}
 	

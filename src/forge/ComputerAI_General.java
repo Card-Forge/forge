@@ -183,25 +183,17 @@ public class ComputerAI_General implements Computer {
 	}
     
     public void declare_attackers() {
-        final Combat c = ComputerUtil.getAttackers();
-        c.setAttackingPlayer(AllZone.Combat.getAttackingPlayer());
-        c.setDefendingPlayer(AllZone.Combat.getDefendingPlayer());
-        
-        //check for planeswalker
-        Card walker = AllZone.HumanPlayer.getPlaneswalker();
-        
-        if(walker != null && MyRandom.random.nextBoolean()) {
-            c.setPlaneswalker(walker);
-            AllZone.pwCombat = c;
-        } else AllZone.Combat = c;
-        
+    	// 12/2/10(sol) the decision making here has moved to getAttackers()
+    	
+    	AllZone.Combat = ComputerUtil.getAttackers();
 
-        Card[] att = c.getAttackers();
+        Card[] att = AllZone.Combat.getAttackers();
         if (att.length > 0)
             AllZone.Phase.setCombat(true);
         
         for(int i = 0; i < att.length; i++) {
-            if(!att[i].getKeyword().contains("Vigilance")) att[i].tap();
+        	// tapping of attackers happens after Propaganda is paid for
+            //if(!att[i].getKeyword().contains("Vigilance")) att[i].tap();
             Log.debug("Computer just assigned " + att[i].getName() + " as an attacker.");
         }
         
@@ -218,24 +210,8 @@ public class ComputerAI_General implements Computer {
     
     public void declare_blockers() {
         CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
-        
-        //If Player life is in danger protect it first
-        if(CombatUtil.lifeInDanger(AllZone.Combat)) {
-        	AllZone.Combat = ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
-            CardList remove = AllZone.Combat.getAllBlockers();
-            for(int i = 0; i < remove.size(); i++)
-                blockers.remove(remove.get(i));
-            
-            AllZone.pwCombat = ComputerUtil_Block2.getBlockers(AllZone.pwCombat, blockers);
-        } else { // Otherwise protect Planeswalkers first
-	        AllZone.pwCombat = ComputerUtil_Block2.getBlockers(AllZone.pwCombat, blockers);
-	        
-	        CardList remove = AllZone.pwCombat.getAllBlockers();
-	        for(int i = 0; i < remove.size(); i++)
-	            blockers.remove(remove.get(i));
-	        
-	        AllZone.Combat = ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
-        }
+
+        AllZone.Combat = ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
         
         CombatUtil.showCombat();
         
@@ -245,27 +221,7 @@ public class ComputerAI_General implements Computer {
     public void declare_blockers_after() {
     	stackResponse();
     }
-    
-    /*
-    private Combat getCombat(Card[] attackers, CardList availableBlockers) {
-    	
-    	
-        ComputerUtil_Block2 com = new ComputerUtil_Block2(attackers, availableBlockers.toArray(),
-                AllZone.ComputerPlayer.getLife());
-        
-        Combat c = com.getBlockers();
-        c.setAttackingPlayer(AllZone.Combat.getAttackingPlayer());
-        c.setDefendingPlayer(AllZone.Combat.getDefendingPlayer());
-        
-    	
-    	CardList attacks = new CardList(attackers);
-    	
-    	Combat c = ComputerUtil_Block2.getBlockers(attacks,availableBlockers);
-        
-        return c;
-    }
-    */
-    
+
     public void end_of_combat(){
     	stackResponse();
     }

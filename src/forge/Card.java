@@ -2710,14 +2710,11 @@ public class Card extends MyObservable {
 	}
 	
 	public boolean isAttacking() {
-		CardList attackers = new CardList(AllZone.Combat.getAttackers());
-        attackers.addAll(AllZone.pwCombat.getAttackers());
-        return attackers.contains(this);
+		return AllZone.Combat.isAttacking(this);
 	}
 	
 	public boolean isBlocking() {
 		CardList blockers = AllZone.Combat.getAllBlockers();
-        blockers.add(AllZone.pwCombat.getAllBlockers());
      	return blockers.contains(this);
 	}
 	

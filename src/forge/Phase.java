@@ -191,8 +191,7 @@ public class Phase extends MyObservable
         
 	    else if(phase.equals(Constant.Phase.Combat_Begin)){
 	    	if (AllZone.Display.stopAtPhase(turn, phase)){
-	    		AllZone.Combat.verifyCreaturesInPlay();
-	            CombatUtil.showCombat();
+	    		PhaseUtil.verifyCombat();
 	    	}
             else {
                 this.setNeedToNextPhase(true);
@@ -201,8 +200,7 @@ public class Phase extends MyObservable
         
 	    else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)){
             if(inCombat()) {
-	            AllZone.Combat.verifyCreaturesInPlay();
-	            CombatUtil.showCombat();
+            	PhaseUtil.handleDeclareAttackers();
             }
             else
             	AllZone.Phase.setNeedToNextPhase(true);
@@ -211,8 +209,7 @@ public class Phase extends MyObservable
         // we can skip AfterBlockers and AfterAttackers if necessary
 	    else if(phase.equals(Constant.Phase.Combat_Declare_Blockers)){
             if(inCombat()) {
-	            AllZone.Combat.verifyCreaturesInPlay();
-	            CombatUtil.showCombat();
+	            PhaseUtil.verifyCombat();
             }
             else
             	AllZone.Phase.setNeedToNextPhase(true);
@@ -223,40 +220,7 @@ public class Phase extends MyObservable
             if(!inCombat()) 
             	AllZone.Phase.setNeedToNextPhase(true);
             else{
-	            AllZone.Combat.verifyCreaturesInPlay();
- 	
-		    	AllZone.Stack.freezeStack();
-	        	CardList list = new CardList();
-	            list.addAll(AllZone.Combat.getAllBlockers().toArray());
-	            list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
-	            list = list.filter(new CardListFilter(){
-	            	public boolean addCard(Card c)
-	            	{
-	            		return !c.getCreatureBlockedThisCombat();
-	            	}
-	            });
-	            
-	            CardList attList = new CardList();
-	            attList.addAll(AllZone.Combat.getAttackers());
-	            
-	            CardList pwAttList = new CardList();
-	            pwAttList.addAll(AllZone.pwCombat.getAttackers());
-	
-	            CombatUtil.checkDeclareBlockers(list);
-	            
-	            for (Card a:attList){
-	            	CardList blockList = AllZone.Combat.getBlockers(a);
-	            	for (Card b:blockList)
-	            		CombatUtil.checkBlockedAttackers(a, b);
-	            }
-	            
-	            for (Card a:pwAttList){
-	            	CardList blockList = AllZone.pwCombat.getBlockers(a);
-	            	for (Card b:blockList)
-	            		CombatUtil.checkBlockedAttackers(a, b);
-	            }
-	            AllZone.Stack.unfreezeStack();
-	            CombatUtil.showCombat();
+            	PhaseUtil.handleDeclareBlockers();
             }
 	    }
         
@@ -265,10 +229,8 @@ public class Phase extends MyObservable
 	    		AllZone.Phase.setNeedToNextPhase(true);
 	    	else{
 	    		AllZone.Combat.verifyCreaturesInPlay();
-	            AllZone.pwCombat.verifyCreaturesInPlay();
 
 				AllZone.Combat.setAssignedFirstStrikeDamage();
-				AllZone.pwCombat.setAssignedFirstStrikeDamage();
 				
 		    	if (!AllZone.GameInfo.isPreventCombatDamageThisTurn())
 		    		 Combat.dealAssignedDamage();
@@ -283,10 +245,8 @@ public class Phase extends MyObservable
 	    		AllZone.Phase.setNeedToNextPhase(true);
 	    	else{
 	    		AllZone.Combat.verifyCreaturesInPlay();
-	            AllZone.pwCombat.verifyCreaturesInPlay();
 	    		
 		        AllZone.Combat.setAssignedDamage();
-		        AllZone.pwCombat.setAssignedDamage();
 	            
 	    		if (!AllZone.GameInfo.isPreventCombatDamageThisTurn())
 	    			Combat.dealAssignedDamage();
@@ -350,33 +310,6 @@ public class Phase extends MyObservable
         if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
         	AllZone.Stack.unfreezeStack();
         	nCombatsThisTurn++;
-        	CardList list = new CardList();
-	        list.addAll(AllZone.Combat.getAttackers());
-	        
-	        // Remove illegal Propaganda attacks first only for attacking the Player
-	        for(Card c:list)
-	            CombatUtil.checkPropagandaEffects(c);
-	        
-	        list.addAll(AllZone.pwCombat.getAttackers());
-	        
-	        // Then run other Attacker bonuses
-	        //check for exalted:
-	        if (list.size() == 1){
-	        	AllZone.GameAction.checkWheneverKeyword(list.get(0), "Attack - Alone", null);
-	            Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
-	            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, attackingPlayer);
-	            CardList exalted = new CardList(play.getCards());
-	            exalted = exalted.filter(new CardListFilter() {
-	                public boolean addCard(Card c) {
-	                    return c.getKeyword().contains("Exalted");
-	                }
-	            });
-	            if(exalted.size() > 0) CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
-	            // Make sure exalted effects get applied only once per combat
-	        }
-	        
-	        for(Card c:list)
-	            CombatUtil.checkDeclareAttackers(c);
         } 
         else if (getPhase().equals(Constant.Phase.Untap)) {
         	nCombatsThisTurn = 0;
@@ -384,7 +317,6 @@ public class Phase extends MyObservable
         
         if (getPhase().equals(Constant.Phase.Combat_End)) {
             AllZone.Combat.reset();
-            AllZone.pwCombat.reset();
             AllZone.Display.showCombat("");
         	resetAttackedThisCombat(getPlayerTurn());
         	this.bCombat = false;
@@ -408,9 +340,6 @@ public class Phase extends MyObservable
         	bCombat = true;
         	extraCombats--;
         	AllZone.Combat.reset();
-        	AllZone.Combat.setAttackingPlayer(player);
-        	AllZone.Combat.setDefendingPlayer(opp);
-        	AllZone.pwCombat.reset();
         	AllZone.Combat.setAttackingPlayer(player);
         	AllZone.Combat.setDefendingPlayer(opp);
         	phaseIndex = findIndex(Constant.Phase.Combat_Declare_Attackers);

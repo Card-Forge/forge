@@ -1,6 +1,8 @@
 
 package forge;
 
+import java.util.ArrayList;
+
 
 public class ComputerUtil_Block2
 {
@@ -481,7 +483,7 @@ public class ComputerUtil_Block2
 		  if(CombatUtil.canBlock(attacker,blocker,combat)) blockers.add(blocker);
 	  }
 		  
-   return blockers;   
+	  return blockers;   
    }
    
    //finds blockers that won't be destroyed
@@ -493,7 +495,7 @@ public class ComputerUtil_Block2
 		  if(!CombatUtil.canDestroyBlocker(b,attacker)) blockers.add(b);
 	  }
 	  
-   return blockers;   
+	  return blockers;   
    }
    
    //finds blockers that destroy the attacker
@@ -505,14 +507,49 @@ public class ComputerUtil_Block2
 		   if(CombatUtil.canDestroyAttacker(attacker,b)) blockers.add(b);
 	  }
 	   
-   return blockers;   
+	  return blockers;   
    }
    
-  public static Combat getBlockers(Combat originalCombat, CardList possibleBlockers) {
+   public static CardList sortPotentialAttackers(Combat combat){
+	   CardList[] attackerLists = combat.sortAttackerByDefender();
+	   CardList sortedAttackers = new CardList();
+	   
+	   ArrayList<Object> defenders = combat.getDefenders();
+	   
+	   // If I don't have any planeswalkers than sorting doesn't really matter
+	   if (defenders.size() == 1)
+		   return attackerLists[0];
+	   
+	   boolean bLifeInDanger = CombatUtil.lifeInDanger(combat);
+	   
+	   // todo: Add creatures attacking Planeswalkers in order of which we want to protect
+       // defend planeswalkers with more loyalty before planeswalkers with less loyalty
+	   // if planeswalker will be too difficult to defend don't even bother
+	   for(int i = 1; i < attackerLists.length; i++){
+		   for(Card c : attackerLists[i])
+			   sortedAttackers.add(c);
+	   }
+	   
+	   if(bLifeInDanger) {
+		   // add creatures attacking the Player to the front of the list
+		   for(Card c : attackerLists[0])
+			   sortedAttackers.add(0, c);
+
+	   }
+	   else{
+			// add creatures attacking the Player to the back of the list
+		   for(Card c : attackerLists[0])
+			   sortedAttackers.add(c);
+	   }
+
+	   return sortedAttackers;
+   }
+
+   public static Combat getBlockers(Combat originalCombat, CardList possibleBlockers) {
 	  
 	  Combat combat = originalCombat;
 	  
-	  CardList attackers = new CardList(combat.getAttackers());
+	  CardList attackers = sortPotentialAttackers(combat);
       
 	  if (attackers.size() == 0)
 		  return combat;
@@ -564,8 +601,10 @@ public class ComputerUtil_Block2
 		  if(!CombatUtil.canBlock(b, combat)) blockersLeft.remove(b);
 	  }
 	  
+	  boolean bLifeInDanger = CombatUtil.lifeInDanger(combat);
+	  
 	  //These creatures won't prevent any damage
-	  if (CombatUtil.lifeInDanger(combat)) 
+	  if (bLifeInDanger) 
 		  blockersLeft = blockersLeft.getNotKeyword("Whenever CARDNAME is dealt damage, you lose that much life.");
 	   
 	  if (blockersLeft.size() == 0)
@@ -624,7 +663,7 @@ public class ComputerUtil_Block2
 	  if(blockersLeft.size() == 0) return combat;
 	  
 	  //choose necessary trade blocks if life is in danger
-	  if (CombatUtil.lifeInDanger(combat))
+	  if (bLifeInDanger)
 		  for(int i = 0; i < attackersLeft.size(); i++) {
 		  	  attacker = attackersLeft.get(i);
 			  killingBlockers = 
@@ -640,7 +679,7 @@ public class ComputerUtil_Block2
 	  attackersLeft = new CardList(currentAttackers.toArray());
 	   
 	  //choose necessary chump blocks if life is still in danger
-	  if (CombatUtil.lifeInDanger(combat))
+	  if (bLifeInDanger)
 		  for(int i = 0; i < attackersLeft.size(); i++) {
 			  attacker = attackersLeft.get(i);	  
 			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
@@ -656,7 +695,7 @@ public class ComputerUtil_Block2
 	  attackersLeft = new CardList(currentAttackers.toArray()); 
 	  
 	 //Reinforce blockers blocking attackers with trample if life is still in danger
-	  if (CombatUtil.lifeInDanger(combat)) {
+	  if (bLifeInDanger) {
 		  tramplingAttackers = attackers.getKeyword("Trample");
 		  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
 		  tramplingAttackers = tramplingAttackers.

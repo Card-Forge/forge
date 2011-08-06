@@ -350,7 +350,8 @@ public class CombatUtil {
     
   //can a creature attack att all?
     public static boolean canAttack(Card c) {
-        
+    	if (!c.isCreature()) return false;
+    	
         if(AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
         
         if((AllZoneUtil.isCardInPlay("Moat") || AllZoneUtil.isCardInPlay("Magus of the Moat"))
@@ -412,7 +413,7 @@ public class CombatUtil {
             if(allislands.size() < 5) return false;
         }
         
-        if(c.isTapped() || c.hasSickness()
+        if(c.isTapped() || c.isSick()
                 || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) 
                 || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")
@@ -459,7 +460,7 @@ public class CombatUtil {
         			return false;
         	}
         }
-        //if Card has Haste, Card.hasSickness() will return false
+
         return true;
     }//canAttack()
     
@@ -522,10 +523,12 @@ public class CombatUtil {
     
     //Checks if the life of the attacked Player/Planeswalker is in danger 
     public static boolean lifeInDanger(Combat combat) {
- 	   
+  	   // life in danger only cares about the player's life. Not about a Planeswalkers life
+    	
  	   int damage = 0;
  	   int poison = 0;
- 	   CardList attackers = new CardList(combat.getAttackers());
+
+ 	   CardList attackers = combat.sortAttackerByDefender()[0];
  	   CardList unblocked = new CardList();
  	   CardList blockers = new CardList();
  	   Card attacker = new Card();
@@ -549,14 +552,7 @@ public class CombatUtil {
  	   damage += sumAttack(unblocked, AllZone.ComputerPlayer);
  	   poison += sumPoison(unblocked, AllZone.ComputerPlayer);
  	   
- 	   if (combat.getPlaneswalker() == null) {
- 		   if (damage + 3 > AllZone.ComputerPlayer.getLife() || poison + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters())
- 			   return true;
- 	   } else {
- 		   if (damage + 1 > combat.getPlaneswalker().getCounters(Counters.LOYALTY))
- 			   return true;
- 	   }
-    return false;   
+	   return (damage + 3 > AllZone.ComputerPlayer.getLife() || poison + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters());
     }
     
     // This calculates the amount of damage a blockgang can deal to the attacker (first strike not supported)
@@ -816,104 +812,59 @@ public class CombatUtil {
     }
     
     public static void showCombat() {
-        //clear
         AllZone.Display.showCombat("");
         
         Card attack[] = AllZone.Combat.getAttackers();
         Card defend[] = null;
         StringBuilder display = new StringBuilder();
-        String attackerName = "";
-        String blockerName = "";
         
-        //loop through attackers
-        for(int i = 0; i < attack.length; i++) {
-            //GameActionUtil.executeExaltedEffects2(attack[i], AllZone.Combat);
-            //checkDeclareAttackers(attack[i]);
-            attackerName = attack[i].getName();
-            if(attack[i].isFaceDown()) attackerName = "Morph";
-            display.append(attackerName);
-            display.append(" (");
-            display.append(attack[i].getUniqueNumber());
-            display.append(") ");
-            display.append(attack[i].getNetAttack());
-            display.append("/");
-            display.append(attack[i].getNetDefense());
-            display.append(" is attacking \n");
-            
-            defend = AllZone.Combat.getBlockers(attack[i]).toArray();
-            
-            //loop through blockers
-            for(int inner = 0; inner < defend.length; inner++) {
-                //checkDeclareBlockers(defend[inner]);
-                blockerName = defend[inner].getName();
-                if(defend[inner].isFaceDown()) blockerName = "Morph";
-                
-                display.append("     ");
-                display.append(blockerName);
-                display.append(" (");
-                display.append(defend[inner].getUniqueNumber());
-                display.append(") ");
-                display.append(defend[inner].getNetAttack());
-                display.append("/");
-                display.append(defend[inner].getNetDefense());
-                display.append(" is blocking \n");
-                
-            }
-        }//while - loop through attackers
-        String s = display.toString() + getPlaneswalkerBlockers();
-        AllZone.Display.showCombat(s.trim());
+        // Loop through Defenders
+        // Append Defending Player/Planeswalker
+        ArrayList<Object> defenders = AllZone.Combat.getDefenders();
+        CardList attackers[] = AllZone.Combat.sortAttackerByDefender();
+        
+        // Not a big fan of the triple nested loop here
+        for(int def = 0; def < defenders.size(); def++){
+        	if (attackers[def] == null || attackers[def].size() == 0)
+        		continue;
+        	
+        	if (def > 0) 
+        		display.append("\n");
+        	
+        	display.append("Defender - ");
+        	display.append(defenders.get(def).toString());
+        	display.append("\n");
+        		
+        	int len = attackers[def].size();
+	        //loop through attackers
+	        for(int i = 0; i < len; i++) {
+	            display.append("-> ");
+	        	display.append(combatantToString(attack[i])).append("\n");
+	
+	            defend = AllZone.Combat.getBlockers(attack[i]).toArray();
+	            
+	            //loop through blockers
+	            for(int inner = 0; inner < defend.length; inner++) {
+	                display.append("---< ");
+	                display.append(combatantToString(defend[inner])).append("\n"); 
+	            }
+	        }//loop through attackers
+        }
+        AllZone.Display.showCombat(display.toString().trim());
         
     }//showBlockers()
     
-    private static String getPlaneswalkerBlockers() {
-        Card attack[] = AllZone.pwCombat.getAttackers();
-        Card defend[] = null;
-        StringBuilder display = new StringBuilder();
-        
-        if(attack.length != 0) display.append("Planeswalker Combat\r\n");
-        
-        String attackerName = "";
-        String blockerName = "";
-        //loop through attackers
-        for(int i = 0; i < attack.length; i++) {
-            //GameActionUtil.executeExaltedEffects2(attack[i], AllZone.pwCombat);
-            
-            //checkDeclareAttackers(attack[i]);
-            attackerName = attack[i].getName();
-            if(attack[i].isFaceDown()) attackerName = "Morph";
-            
-            display.append(attackerName);
-            display.append(" (");
-            display.append(attack[i].getUniqueNumber());
-            display.append(") ");
-            display.append(attack[i].getNetAttack());
-            display.append("/");
-            display.append(attack[i].getNetDefense());
-            display.append(" is attacking \n");
-            
-            defend = AllZone.pwCombat.getBlockers(attack[i]).toArray();
-            
-            //loop through blockers
-            for(int inner = 0; inner < defend.length; inner++) {
-                //checkDeclareBlockers(defend[inner]);
-                blockerName = defend[inner].getName();
-                if(defend[inner].isFaceDown()) blockerName = "Morph";
-                
-                display.append("     ");
-                display.append(blockerName);
-                display.append(" (");
-                display.append(defend[inner].getUniqueNumber());
-                display.append(") ");
-                display.append(defend[inner].getNetAttack());
-                display.append("/");
-                display.append(defend[inner].getNetDefense());
-                display.append(" is blocking \n");
-            }
-        }//while - loop through attackers
-        
-        return display.toString();
-    }//getPlaneswalkerBlockers()
-    
+    private static String combatantToString(Card c){
+    	StringBuilder sb = new StringBuilder();
+    	
+        String name = (c.isFaceDown()) ? "Morph" : c.getName();
+
+        sb.append(name);
+        sb.append(" (").append(c.getUniqueNumber()).append(") ");
+        sb.append(c.getNetAttack()).append("/").append(c.getNetDefense());
+    	
+    	return sb.toString();
+    }
     
     public static boolean isDoranInPlay() {
     	return AllZoneUtil.isCardInPlay("Doran, the Siege Tower");
@@ -921,14 +872,19 @@ public class CombatUtil {
     
     public static boolean checkPropagandaEffects(Card c) {
     	String cost = CardFactoryUtil.getPropagandaCost(c);
-        if(cost.equals("0")) 
+        if(cost.equals("0")){
+        	if(!c.getKeyword().contains("Vigilance")) 
+        		c.tap();
         	return true;
+        }
         
         final Card crd = c;
         final boolean[] canAttack = new boolean[1];
         canAttack[0] = false;
 
-        if( AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
+        String phase = AllZone.Phase.getPhase();
+        
+        if(phase.equals(Constant.Phase.Combat_Declare_Attackers) || phase.equals(Constant.Phase.Combat_Declare_Attackers)) {
             if(!cost.equals("0")) {
                 final Ability ability = new Ability(c, cost) {
                     @Override
@@ -943,8 +899,8 @@ public class CombatUtil {
                     
                     public void execute() {
                         canAttack[0] = false;
+                        // TODO: remove the below line after Propaganda occurs during Declare_Attackers
                         AllZone.Combat.removeFromCombat(crd);
-                        crd.untap();
                     }
                 };
                 
@@ -952,6 +908,9 @@ public class CombatUtil {
                     private static final long serialVersionUID = -8303368287601871955L;
                     
                     public void execute() {
+                    	// if Propaganda is paid, tap this card
+                    	if(!crd.getKeyword().contains("Vigilance")) 
+                    		crd.tap();   
                         canAttack[0] = true;
                     }
                 };
@@ -959,13 +918,18 @@ public class CombatUtil {
                 if(c.getController().isHuman()) {
                     AllZone.InputControl.setInput(new Input_PayManaCost_Ability(c + " - Pay to Attack\r\n",
                             ability.getManaCost(), paidCommand, unpaidCommand));
-                } else //computer
-                {
-                    if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+                } 
+                else{ //computer
+                    if(ComputerUtil.canPayCost(ability)){
+                    	ComputerUtil.playNoStack(ability);
+                    	if(!crd.getKeyword().contains("Vigilance")) 
+                    		crd.tap();
+                    }
                     else {
                         canAttack[0] = false;
+                        // TODO: remove the below two lines after Propaganda occurs during Declare_Attackers
                         AllZone.Combat.removeFromCombat(crd);
-                        crd.untap();
+                        //crd.untap();
                     }
                 }
             }
@@ -1105,7 +1069,7 @@ public class CombatUtil {
   				}
             }//Raging Ravine
             
-            if ((AllZone.Combat.getAttackers().length + AllZone.pwCombat.getAttackers().length) == 1)
+            if (AllZone.Combat.getAttackers().length == 1)
             {
 	            if (c.getKeyword().contains("Whenever this creature attacks alone, it gets +2/+0 until end of turn.") || 
 	            	c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn."))
@@ -1568,13 +1532,9 @@ public class CombatUtil {
                     public void resolve() {
                         CardList list = new CardList();
                         list.addAll(AllZone.Combat.getAttackers());
-                        list.addAll(AllZone.pwCombat.getAttackers());
-                        list = list.filter(new CardListFilter() {
-                            public boolean addCard(Card card) {
-                                return (!card.equals(piledriver) && card.isCreature() && (card.getType().contains(
-                                        "Goblin") || card.getKeyword().contains("Changeling")));
-                            }
-                        });
+                        list = list.getType("Goblin");
+                        list.remove(piledriver);
+                        
                         final int otherGoblins = list.size();
                         
                         final Command untilEOT = new Command() {

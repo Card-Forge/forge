@@ -42,7 +42,6 @@ public class AllZone implements NewConstants {
     //shared between Input_Attack, Input_Block, Input_CombatDamage , InputState_Computer
     
     public static Combat Combat   = new Combat();
-    public static Combat pwCombat = new Combat();//for Planeswalker combat
 
     //Human_Play, Computer_Play is different because Card.comesIntoPlay() is called when a card is added by PlayerZone.add(Card)
     public final static PlayerZone Human_Battlefield	= new PlayerZone_ComesIntoPlay(Constant.Zone.Battlefield, AllZone.HumanPlayer);

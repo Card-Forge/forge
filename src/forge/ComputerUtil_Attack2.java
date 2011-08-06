@@ -32,6 +32,7 @@ public class ComputerUtil_Attack2 {
 		blockers  = getPossibleBlockers(possibleBlockers);
 		this.blockerLife = blockerLife;
 		
+		// todo: get rid of valuable
 		final ArrayList<String> valuable = new ArrayList<String>();
 		valuable.add("Kamahl, Pit Fighter");
 		valuable.add("Elvish Piper");
@@ -50,7 +51,7 @@ public class ComputerUtil_Attack2 {
       CardList list = new CardList(in.toArray());
       list = list.filter(new CardListFilter()
       {
-        public boolean addCard(Card c) { return c.isCreature() && CombatUtil.canAttack(c); }
+        public boolean addCard(Card c) { return CombatUtil.canAttack(c); }
       });
       return list;
     }//getUntappedCreatures()
@@ -159,6 +160,24 @@ public class ComputerUtil_Attack2 {
           return blockerLife <= totalAttack;
        }//doAssault()
 
+       public void chooseDefender(Combat c, boolean bAssault){
+    	// TODO: split attackers to different planeswalker/human
+    	   // AI will only attack one Defender per combat for now
+    	   ArrayList<Object> defs = c.getDefenders();
+
+    	   if (defs.size() == 1 || bAssault){
+    		   c.setCurrentDefender(0);
+    		   return;
+    	   }
+    	   
+    	   // Randomnly determine who EVERYONE is attacking
+    	   // would be better to determine more individually
+    	   int n = MyRandom.random.nextInt(defs.size());
+    	   c.setCurrentDefender(n);
+    	   return;
+       }
+       
+       
        public Combat getAttackers()
        {
           //if this method is called multiple times during a turn,
@@ -169,11 +188,19 @@ public class ComputerUtil_Attack2 {
           random.setSeed(AllZone.Phase.getTurn() + randomInt);
 
           Combat combat = new Combat();
+          combat.setAttackingPlayer(AllZone.Combat.getAttackingPlayer());
+          combat.setDefendingPlayer(AllZone.Combat.getDefendingPlayer());
+          
+          combat.setDefenders(AllZone.Combat.getDefenders());
+
+          boolean bAssault = doAssault();
+       // Determine who will be attacked
+          chooseDefender(combat, bAssault);
           
           CardList attackersLeft = new CardList(attackers.toArray());
           
           //Atackers that don't really have a choice
-          for (int i=0; i<attackersLeft.size();i++)
+          for (int i=0; i < attackersLeft.size(); i++)
           {
         	  Card attacker = attackersLeft.get(i);
              if ( (attacker.getKeyword().contains("CARDNAME attacks each turn if able.") 
@@ -192,8 +219,9 @@ public class ComputerUtil_Attack2 {
           if (combat.getAttackers().length == 0 && (countExaltedBonus(AllZone.ComputerPlayer) >= 3 ||
         		  AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.ComputerPlayer) ||
                    AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Battlegrace Angel").size() >= 2 ||
-                   (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Finest Hour").size()>=1) && AllZone.Phase.isFirstCombat())
-                   && !doAssault())
+                   (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Finest Hour").size()>=1) &&
+                   AllZone.Phase.isFirstCombat())
+                   && !bAssault)
           {
              int biggest = 0;
              Card att = null;
@@ -209,7 +237,7 @@ public class ComputerUtil_Attack2 {
           
           //do assault (all creatures attack) if the computer would win the game
           //or if the computer has 4 creatures and the player has 1
-          else if(doAssault() || (humanList.size() == 1 && 3 < attackers.size()))
+          else if(bAssault || (humanList.size() == 1 && 3 < attackers.size()))
           {
         	 CardListUtil.sortAttack(attackersLeft);
              for(int i = 0; i < attackersLeft.size(); i++)
@@ -254,31 +282,10 @@ public class ComputerUtil_Attack2 {
              }
           }//getAttackers()
 
+          
+          
     return combat;
   }//getAttackers()
-
-  /*
-  //returns null if no blockers found
-  public Card getBiggestAttack(Card attack)
-  {
-    CardListUtil.sortAttack(blockers);
-    for(int i = 0; i < blockers.size(); i++)
-      if(CombatUtil.canBlock(attack, blockers.get(i)))
-        return blockers.get(i);
-
-    return null;
-  }
-
-  	//returns null if no blockers found
-	public Card getBiggestDefense(Card attack)
-	{
-		CardListUtil.sortDefense(blockers);
-		for(int i = 0; i < blockers.size(); i++)
-		  if(CombatUtil.canBlock(attack, blockers.get(i)))
-		    return blockers.get(i);
-		
-		return null;
-	}*/
 
    public int countExaltedBonus(Player player)
    {
@@ -348,9 +355,7 @@ public class ComputerUtil_Attack2 {
 			if(CombatUtil.canAttack(c, combat)) attackersLeft.add(c);
 			else if(CombatUtil.canBlock(c)) plannedBlockers.add(c);
 		}
-		
-		
-		
+
 		return combat;
     }
  }

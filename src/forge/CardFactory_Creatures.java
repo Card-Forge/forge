@@ -5802,9 +5802,6 @@ public class CardFactory_Creatures {
                         CardList list = new CardList(AllZone.Combat.getAttackers());
                         if(list.contains(c)) AllZone.Combat.removeFromCombat(c);
                         
-                        CardList pwlist = new CardList(AllZone.pwCombat.getAttackers());
-                        if(pwlist.contains(c)) AllZone.pwCombat.removeFromCombat(c);
-                        
                         PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
                         to.add(c);
                         

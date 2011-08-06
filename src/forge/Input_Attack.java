@@ -7,20 +7,31 @@ public class Input_Attack extends Input {
     
     @Override
     public void showMessage() {
+    	// TODO: still seems to have some issues with multiple planeswalkers
+    	
         ButtonUtil.enableOnlyOK();
-        AllZone.Display.showMessage("Declare Attackers: Select creatures that you want to attack with");
+
+        Object o = AllZone.Combat.nextDefender();        
+        if (o == null){
+        	return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Declare Attackers: Select Creatures to Attack ");
+        sb.append(o.toString());
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-        CardList creats = new CardList(play.getCards());
-        creats = creats.getType("Creature");
+        AllZone.Display.showMessage(sb.toString());
         
-        if(getPlaneswalker() == null) {
-            for(int i = 0; i < creats.size(); i++) {
-                Card c = creats.get(i);
-                if(CombatUtil.canAttack(c) && c.getKeyword().contains("CARDNAME attacks each turn if able.")) {
-                    
+        if(AllZone.Combat.getRemainingDefenders() == 0) {
+        	// Nothing left to attack, has to attack this defender
+            CardList possibleAttackers = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+            possibleAttackers = possibleAttackers.getType("Creature");
+            for(int i = 0; i < possibleAttackers.size(); i++) {
+                Card c = possibleAttackers.get(i);
+                if(c.getKeyword().contains("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c) && !c.isAttacking()) {
                     AllZone.Combat.addAttacker(c);
-                    if(!c.getKeyword().contains("Vigilance")) c.tap();
+                    //if(!c.getKeyword().contains("Vigilance")) 
+                    //	c.tap();
                 }
             }
         }
@@ -30,38 +41,24 @@ public class Input_Attack extends Input {
     public void selectButtonOK() {
     	if (AllZone.Combat.getAttackers().length > 0)
     		AllZone.Phase.setCombat(true);
-    	
-        Card check = getPlaneswalker();
-        if(check == null) {
-            AllZone.Phase.setNeedToNextPhase(true);
-        } else {
-            AllZone.pwCombat.setPlaneswalker(check);
-            AllZone.InputControl.setInput(new Input_Attack_Planeswalker());
-        }
-    }
     
-    //return Computer's planeswalker if there is one
-    //just returns 1, does not return multiple planeswalkers
-    private Card getPlaneswalker() {
-        CardList c = new CardList(AllZone.Computer_Battlefield.getCards());
-        c = c.getType("Planeswalker");
-        
-        if(c.isEmpty()) return null;
-        
-        return c.get(0);
+    	if (AllZone.Combat.getRemainingDefenders() != 0)
+    		AllZone.Phase.repeatPhase();
+    	
+    	AllZone.Phase.setNeedToNextPhase(true);
+    	AllZone.InputControl.resetInput();
     }
     
     @Override
     public void selectCard(Card card, PlayerZone zone) {
-        if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
-                && CombatUtil.canAttack(card)) {
+        if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && CombatUtil.canAttack(card) && !card.isAttacking()) {
             
-            if(!card.getKeyword().contains("Vigilance")) {
-                card.tap();
-                //otherwise cards stay untapped, not sure why this is needed but it works
-                AllZone.Human_Battlefield.updateObservers();
-            }
+        	// todo add the propaganda code here and remove it in Phase.nextPhase()
+        	// if (!CombatUtil.checkPropagandaEffects(card))
+        	// 		return;
+        	         
             AllZone.Combat.addAttacker(card);
+            AllZone.Human_Battlefield.updateObservers();	// just to make sure the attack symbol is marked
             
             //for Castle Raptors, since it gets a bonus if untapped
             for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {

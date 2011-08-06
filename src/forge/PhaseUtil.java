@@ -30,10 +30,6 @@ public class PhaseUtil {
         AllZone.Combat.setAttackingPlayer(turn);
         AllZone.Combat.setDefendingPlayer(turn.getOpponent());
         
-        AllZone.pwCombat.reset();
-        AllZone.pwCombat.setAttackingPlayer(turn);
-        AllZone.pwCombat.setDefendingPlayer(turn.getOpponent());
-        
         // For tokens a player starts the game with they don't recover from Sum. Sickness on first turn
         if (turn.getTurn() > 0){
 	        for(int i = 0; i < c.length; i++)
@@ -349,6 +345,77 @@ public class PhaseUtil {
     	return false;
 	}	
 	
+	// ********* Declare Attackers ***********
+	
+	public static void verifyCombat(){
+        AllZone.Combat.verifyCreaturesInPlay();
+        CombatUtil.showCombat();
+	}
+	
+	public static void handleDeclareAttackers(){
+		verifyCombat();
+    	CardList list = new CardList();
+        list.addAll(AllZone.Combat.getAttackers());
+        
+        // TODO move propaganda to happen as the Attacker is Declared
+        // Remove illegal Propaganda attacks first only for attacking the Player
+        for(Card c:list)
+            CombatUtil.checkPropagandaEffects(c);
+        
+        AllZone.Stack.freezeStack();
+        // Then run other Attacker bonuses
+        //check for exalted:
+        if (list.size() == 1){
+        	AllZone.GameAction.checkWheneverKeyword(list.get(0), "Attack - Alone", null);
+            Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
+            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, attackingPlayer);
+            CardList exalted = new CardList(play.getCards());
+            exalted = exalted.filter(new CardListFilter() {
+                public boolean addCard(Card c) {
+                    return c.getKeyword().contains("Exalted");
+                }
+            });
+            if(exalted.size() > 0) CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
+            // Make sure exalted effects get applied only once per combat
+        }
+        
+        for(Card c:list)
+            CombatUtil.checkDeclareAttackers(c);
+        AllZone.Stack.unfreezeStack();
+	}
+	
+	public static void handleDeclareBlockers(){
+		verifyCombat();
+     	
+    	AllZone.Stack.freezeStack();
+    	CardList list = new CardList();
+        list.addAll(AllZone.Combat.getAllBlockers().toArray());
+
+        list = list.filter(new CardListFilter(){
+        	public boolean addCard(Card c)
+        	{
+        		return !c.getCreatureBlockedThisCombat();
+        	}
+        });
+        
+        CardList attList = new CardList();
+        attList.addAll(AllZone.Combat.getAttackers());
+
+        CombatUtil.checkDeclareBlockers(list);
+        
+        for (Card a:attList){
+        	CardList blockList = AllZone.Combat.getBlockers(a);
+        	for (Card b:blockList)
+        		CombatUtil.checkBlockedAttackers(a, b);
+        }
+
+        AllZone.Stack.unfreezeStack();
+        CombatUtil.showCombat();
+	}
+	
+	
+	// ***** Combat Utility **********
+	// todo: the below functions should be removed and the code blocks that use them should instead use SA_Restriction
 	public static boolean isBeforeAttackersAreDeclared() {
 		String phase = AllZone.Phase.getPhase();
 		return phase.equals(Constant.Phase.Untap) || phase.equals(Constant.Phase.Upkeep)

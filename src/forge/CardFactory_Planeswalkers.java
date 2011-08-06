@@ -2902,7 +2902,7 @@ class CardFactory_Planeswalkers {
                     {
                     	public boolean addCard(Card crd)
                     	{
-                    		return crd.isCreature() && CombatUtil.canAttack(crd);
+                    		return CombatUtil.canAttack(crd);
                     	}
                     });
                     
