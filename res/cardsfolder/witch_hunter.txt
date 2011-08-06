@@ -3,8 +3,10 @@ ManaCost:2 W W
 Types:Creature Human Cleric
 Text:no text
 PT:1/1
-#K:abDamageTgtP T:1
-A:AB$DealDamage|Cost$T|NumDmg$1|Tgt$TgtP|SpellDescription$CARDNAME deals 1 damage to target player.
+A:AB$DealDamage | Cost$ T | NumDmg$ 1 | Tgt$ TgtP | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_hunter.jpg
 End
+#
+#K:abDamageTgtP T:1
+#

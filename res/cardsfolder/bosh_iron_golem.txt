@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Golem
 Text:no text
 PT:6/7
 K:Trample
-A:AB$DealDamage|Cost$3 R Sac<1/Artifact>|Tgt$TgtCP|NumDmg$X|SpellDescription$CARDNAME deals damage equal to the sacrificed artifact's converted mana cost to target creature or player.
+A:AB$DealDamage | Cost$ 3 R Sac<1/Artifact> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed artifact's converted mana cost to target creature or player.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

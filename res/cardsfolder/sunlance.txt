@@ -2,7 +2,7 @@ Name:Sunlance
 ManaCost:W
 Types:Sorcery
 Text:no text
-A:SP$DealDamage|Cost$W|ValidTgts$Creature.nonWhite|TgtPrompt$Select target nonwhite Creature|NumDmg$3|SpellDescription$Sunlance deals 3 damage to target nonwhite creature.
+A:SP$DealDamage | Cost$ W | ValidTgts$ Creature.nonWhite | TgtPrompt$ Select target nonwhite Creature | NumDmg$ 3 | SpellDescription$ Sunlance deals 3 damage to target nonwhite creature.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122355.jpg
 End
