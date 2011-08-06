@@ -1669,7 +1669,7 @@ public class GameAction {
     }
     
     
-    private boolean shouldDraw       = true;
+    private boolean shouldDraw       = false;	// Starts false to skip first draw
     private String  lastPlayerToDraw = Constant.Player.Human;
     
     public String getLastPlayerToDraw() {
@@ -1699,9 +1699,11 @@ public class GameAction {
         boolean isDrawPhase = AllZone.Phase.getPhase().equals(Constant.Phase.Draw);
         if(isDrawPhase) {
             String currentPlayer = AllZone.Phase.getActivePlayer();
-            if(!currentPlayer.equals(lastPlayerToDraw)) {
+
+            if(!currentPlayer.equals(lastPlayerToDraw) && AllZone.Phase.getTurn() != 1) {
                 shouldDraw = true;
             }
+
             lastPlayerToDraw = currentPlayer;
             
             if(!shouldDraw) {
@@ -1917,7 +1919,7 @@ public class GameAction {
         Constant.Quest.fantasyQuest[0] = true;
     }
     
-    boolean Start_Cut = true;
+    boolean Start_Cut = false;
     public void newGame(Deck humanDeck, Deck computerDeck) {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
