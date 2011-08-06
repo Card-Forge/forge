@@ -195,7 +195,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Jon Stewart 2", "medium", "WG Midrange deck");
 //        addToDeckList("Jon Stewart 3", "hard", "WG Extended deck");
         
-//        addToDeckList("Kang 2", "medium", "UB Singleton deck");
+        addToDeckList("Kang 2", "medium", "UB deck with Glen Elendra Liege, Gravelgill Duo and Dire Undercurrents");
         addToDeckList("Kang 3", "hard", "UB deck with Glen Elendra Liege and Dire Undercurrents");
         addToDeckList("King Arthur 1", "easy", "WG Knight deck with Wilt-Leaf Cavaliers, Knight of the Skyward Eye and Leonin Skyhunter");
         addToDeckList("King Arthur 2", "medium", "WG Knight deck with Wilt-Leaf Cavaliers and Knights with flanking");
