@@ -563,7 +563,9 @@ public class Card extends MyObservable {
         if(isInstant() || isSorcery()) {
             String s = getSpellText();
             StringBuilder sb = new StringBuilder();
-            sb.append(s);
+            
+            // Give spellText line breaks for easier reading
+            sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
             
             // NOTE:
             if (sb.toString().contains(" (NOTE: ")) {
@@ -597,9 +599,9 @@ public class Card extends MyObservable {
             
             // Storm
             if (getKeyword().contains("Storm") && !sb.toString().contains("Storm (When you ")) {
-            	if (sb.toString().endsWith("\r\n\r\n")) {
-            		sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
-            	}
+                if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
+                }
                 sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
                     sb.append(" You may choose new targets for the copies.");
@@ -661,8 +663,10 @@ public class Card extends MyObservable {
                }
                 }
         }
+        
+        // Give spellText line breaks for easier reading
         sb.append("\r\n");
-        sb.append(text);
+        sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
         sb.append("\r\n");
         
         SpellAbility[] sa = getSpellAbility();
