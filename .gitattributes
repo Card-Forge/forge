@@ -1929,6 +1929,7 @@ res/cardsfolder/drudge_skeletons.txt -text svneol=native#text/plain
 res/cardsfolder/drudge_spell.txt svneol=native#text/plain
 res/cardsfolder/druid_lyrist.txt -text svneol=native#text/plain
 res/cardsfolder/druid_of_the_anima.txt -text svneol=native#text/plain
+res/cardsfolder/druids_call.txt -text svneol=native#text/plain
 res/cardsfolder/drumhunter.txt -text svneol=native#text/plain
 res/cardsfolder/dry_spell.txt -text svneol=native#text/plain
 res/cardsfolder/dryad_arbor.txt -text svneol=native#text/plain
