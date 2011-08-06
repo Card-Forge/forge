@@ -91,6 +91,7 @@ public class AbilityFactory_Counters {
 	}
 	
 	public static String putStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
 
 		if (!(sa instanceof Ability_Sub))
@@ -99,21 +100,18 @@ public class AbilityFactory_Counters {
 			sb.append(" ");
 
 		Counters cType = Counters.valueOf(af.getMapParams().get("CounterType"));
-		String name = af.getHostCard().getName();
+		Card card = af.getHostCard();
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("CounterNum"), sa);
 
 		sb.append("Put ").append(amount).append(" ").append(cType.getName())
 				.append(" counter");
 		if(amount != 1) sb.append("s");
 		sb.append(" on");
+		
+		ArrayList<Card> tgts = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
 
-		if (af.getAbTgt() == null)
-			sb.append(" ").append(name);
-		else {
-			ArrayList<Card> tgts = af.getAbTgt().getTargetCards();
-			for (Card c : tgts)
-				sb.append(" ").append(c.getName());
-		}
+		for (Card c : tgts)
+			sb.append(" ").append(c.getName());
 
 		sb.append(".");
 		
@@ -368,8 +366,7 @@ public class AbilityFactory_Counters {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(card);
+			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
 		}
 		
 		for(Card tgtCard : tgtCards)
