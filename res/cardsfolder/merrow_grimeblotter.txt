@@ -5,5 +5,5 @@ Text:no text
 PT:2/2
 K:abPumpTgtC 1 UB Untap:-2/-0
 K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://magiccards.info/scans/en/shm/171.jpg
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_grimeblotter.jpg
 End
