@@ -1,56 +1,56 @@
-Abraham Lincoln
+Abraham Lincoln 3
 Albert Einstein 3
 Bart Simpson 3
-Batman
-Bela Lugosi
-Blackbeard
-Boba Fett
+Batman 3
+Bela Lugosi 3
+Blackbeard 3
+Boba Fett 3
 Buffy 3
-C3PO
-Comic Book Guy
+C3PO 3
+Comic Book Guy 3
 Crocodile Dundee 3
-Cyclops
+Cyclops 3
 Da Vinci 3
-Darth Vador
-Data
+Darth Vador 3
+Data 3
 Doc Holiday 3
-Dr No
+Dr No 3
 Fat Albert 3
 Frodo 3
 Genghis Khan 3
-Gold Finger
-Green Lantern
-Han Solo
-Harry Potter
+Gold Finger 3
+Green Lantern 3
+Han Solo 3
+Harry Potter 3
 Homer Simpson 3
-Iceman
+Iceman 3
 Indiana Jones 3
-Jabba the Hut
+Jabba the Hut 3
 James Bond 3
-James T Kirk
+James T Kirk 3
 King Edward 3
 King Kong 3
 Kojak 3
-Lisa Simpson
-Luke Skywalker
-Magneto
-Marge Simpson
-Morpheus
-Napoleon
-Neo
-Newton
-Picard
-Pinky and the Brain
-Professor X
-R2-D2
+Lisa Simpson 3
+Luke Skywalker 3
+Magneto 3
+Marge Simpson 3
+Morpheus 3
+Napoleon 3
+Neo 3
+Newton 3
+Picard 3
+Pinky and the Brain 3
+Professor X 3
+R2-D2 3
 Rocky 3
-Rogue
-Scooby Doo
+Rogue 3
+Scooby Doo 3
 Seabiscuit 3
 Sherlock Holmes 3
-Silver Surfer
+Silver Surfer 3
 Storm 3
-Terminator
-Uncle Owen
-Wolverine
+Terminator 3
+Uncle Owen 3
+Wolverine 3
 Wyatt Earp 3

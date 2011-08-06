@@ -15,11 +15,11 @@ King Edward 2
 King Kong 2
 Kojak 2
 Rocky 2
-Scotty
+Scotty 2
 Seabiscuit 2
 Sherlock Holmes 2
-Spiderman
-Spock
+Spiderman 2
+Spock 2
 Storm 2
 Superman 2
 Tarzan 2
