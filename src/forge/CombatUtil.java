@@ -461,8 +461,10 @@ public class CombatUtil {
             
         }//flanking
         
-        if(attacker.hasStartOfKeyword("Prevent all combat damage that would be dealt to") ||
-           attacker.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) return false;
+        if(attacker.hasStartOfKeyword("Prevent all combat damage that would be dealt to")) return false;
+        if(defender.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
+        		defender.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME")) return false;
+        
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
         
@@ -588,8 +590,9 @@ public class CombatUtil {
     		if(defender.isValidCard(restrictions)) return true;
         }
         
-        if(defender.hasStartOfKeyword("Prevent all combat damage that would be dealt to")||
-           defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) return false;
+        if(defender.hasStartOfKeyword("Prevent all combat damage that would be dealt to")) return false;
+        if(attacker.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
+        		attacker.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME")) return false;
         
         if(defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
         		&& attacker.isCreature() && attacker.isArtifact()) return false;
