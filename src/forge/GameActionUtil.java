@@ -470,9 +470,7 @@ public class GameActionUtil {
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
 		
-		if (c.getName().equals("Kozilek, Butcher of Truth"))
-			playCard_Kozilek(c);
-		else if (c.getName().equals("Ulamog, the Infinite Gyre"))
+		if (c.getName().equals("Ulamog, the Infinite Gyre"))
 			playCard_Ulamog(c);
 		else if (c.getName().equals("Emrakul, the Aeons Torn"))
 			playCard_Emrakul(c);
@@ -528,20 +526,6 @@ public class GameActionUtil {
 		playCard_Presence_of_the_Master(c);
 		
 		AllZone.GameAction.checkWheneverKeyword(c,"CastSpell",null);
-	}
-
-	public static void playCard_Kozilek(Card c)
-	{
-		final Player controller = c.getController();
-		final Ability ability = new Ability(c, "0")
-		{
-			public void resolve()
-			{
-				controller.drawCards(4);
-			}
-		};
-		ability.setStackDescription("Kozilek - draw four cards.");
-		AllZone.Stack.add(ability);
 	}
 	
 	public static void playCard_Ulamog(Card c)
