@@ -5334,25 +5334,24 @@ public class GameActionUtil {
 	}
 	
 	//not restricted to combat damage, not restricted to dealing damage to creatures
-	public static void executeDamageDealingEffects(final Card source, final Card affected, int damage) {
-		
-		final Player player = affected.getController();
+	public static void executeDamageDealingEffects(final Card source, int damage) {
 		
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
         
         if(source.getKeyword().contains("Whenever CARDNAME deals damage, you gain that much life.")) {
 			final int life = damage;
+			final Player player = source.getController();
 			
 	    	Ability ability = new Ability(source, "0") {
 	    		@Override
 	    		public void resolve() {
-	    			player.gainLife(life, affected);
+	    			player.gainLife(life, source);
 	    		}
 	    	};
 	    	StringBuilder sb = new StringBuilder();
 	        sb.append(source.getName()+" - ").append(player).append(" gains ").append(life).append(" life");
 	        ability.setStackDescription(sb.toString());
-        	int amount = affected.getAmountOfKeyword("Whenever CARDNAME deals damage, you gain that much life.");
+        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals damage, you gain that much life.");
 	        
 	        for(int i=0 ; i < amount ; i++)
 	        	AllZone.Stack.add(ability);

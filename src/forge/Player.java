@@ -220,12 +220,7 @@ public abstract class Player extends MyObservable{
         	loseLife(damageToDo, source);
         }
         	
-        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damageToDo);
-        
-        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
-        for(Card c:cl) {
-            GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToDo);
-        }
+        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
         
         GameActionUtil.executePlayerDamageEffects(this, source, damageToDo, false);
 	}

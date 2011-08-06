@@ -3,7 +3,7 @@ ManaCost:2 R W
 Types:Creature Giant Soldier
 Text:no text
 PT:2/4
-K:Lifelink
+K:Whenever CARDNAME deals damage, you gain that much life.
 A:AB$Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ Sunhome Enforcer gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunhome_enforcer.jpg
