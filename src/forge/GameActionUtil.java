@@ -15874,19 +15874,7 @@ public class GameActionUtil {
 				c.setBaseAttack(AllZoneUtil.getCreaturesInPlay(c.getController()).size());
 				c.setBaseDefense(1);
 			}
-
 		}// execute()
-
-		private int countCreatures(Card c) {
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-			CardList creatures = new CardList(play.getCards());
-			creatures = creatures.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature();
-				}
-			});
-			return creatures.size();
-		}
 	};
 	
 	public static void Elvish_Vanguard(Card c) {
