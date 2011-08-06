@@ -50,7 +50,6 @@ public class GameActionUtil {
 		*/
 		
 		upkeep_Greener_Pastures();
-		upkeep_Scute_Mob();
 		upkeep_Heartmender();
 		upkeep_Nath();
 		upkeep_Anowon();
@@ -4751,34 +4750,6 @@ public class GameActionUtil {
 			}
 		}
 	}//upkeep_Farmstead()
-
-	private static void upkeep_Scute_Mob() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Scute Mob");
-
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-				CardList lands = new CardList(playZone.getCards());
-				lands = lands.getType("Land");
-
-				if(lands.size() >= 5) {
-					final Card c = list.get(i);
-					Ability ability = new Ability(list.get(i), "0") {
-						@Override
-						public void resolve() {
-							c.addCounter(Counters.P1P1, 4);
-						}
-
-					};// Ability
-					ability.setStackDescription("Scute Mob - put four +1/+1 counters on Scute Mob.");
-					AllZone.Stack.add(ability);
-				}
-			} // for
-		} // if creatures > 0
-	}//Scute Mob
 	
 	private static void upkeep_Heartmender() {
 		final Player player = AllZone.Phase.getPlayerTurn();
