@@ -1197,6 +1197,7 @@ public class CardFactoryUtil {
                 CardList rebels = new CardList();
                 CardList list = new CardList(lib.getCards());
                 list = list.getType("Rebel");
+                list = list.getPermanents();
                 
                 if(list.size() == 0) return;
                 

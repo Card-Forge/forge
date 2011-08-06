@@ -208,6 +208,14 @@ public class CardList implements Iterable<Card> {
     		}
     	});
     }
+    
+    public CardList getPermanents() {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return c.isPermanent();
+    		}
+    	});
+    }
 
     public CardList getTapState(String TappedOrUntapped)
     {
