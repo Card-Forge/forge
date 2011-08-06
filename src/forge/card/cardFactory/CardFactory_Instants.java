@@ -1563,8 +1563,9 @@ public class CardFactory_Instants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Berserk")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -4271469206538681785L;
+        	Cost cost = new Cost("G", cardName, false);
+        	final SpellAbility spell = new Spell(card, cost, new Target(card, "TgtC")) {
+				private static final long serialVersionUID = 6480841474890362249L;
 
 				@Override
                 public boolean canPlayAI() {
@@ -1597,12 +1598,6 @@ public class CardFactory_Instants {
 						AllZone.EndOfTurn.addUntil(untilEOT);
 					}
 				}//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                	CardList creatures = AllZoneUtil.getCreaturesInPlay();
-                	return PhaseUtil.isBeforeCombatDamage() && creatures.size() > 0;
-                }
             };//SpellAbility
             
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
@@ -1611,6 +1606,8 @@ public class CardFactory_Instants {
             
             card.setSVar("PlayMain1", "TRUE");
             
+            String phase = AllZone.Phase.buildActivateString(Constant.Phase.Upkeep, Constant.Phase.Combat_Declare_Blockers_InstantAbility);
+            spell.getRestrictions().setActivatePhases(phase);
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
