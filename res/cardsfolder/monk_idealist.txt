@@ -3,6 +3,7 @@ ManaCost:2 W
 Types:Creature Human Monk Cleric
 Text:When CARDNAME enters the battlefield, return target enchantment card from your graveyard to your hand.
 PT:2/2
+K:etbReturnTgt:1:Enchantment:Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_idealist.jpg
 End

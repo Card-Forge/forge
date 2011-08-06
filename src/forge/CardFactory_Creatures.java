@@ -3572,7 +3572,7 @@ public class CardFactory_Creatures {
 
         }//*************** END ************ END **************************
         */
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Eternal Witness")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -3615,9 +3615,9 @@ public class CardFactory_Creatures {
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        */
         
-        
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Sun Titan")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -3733,7 +3733,7 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp") || cardName.equals("Mnemonic Wall") || cardName.equals("Corpse Cur")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -3790,7 +3790,7 @@ public class CardFactory_Creatures {
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Strongarm Thug")) {
@@ -3884,7 +3884,7 @@ public class CardFactory_Creatures {
 
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Anarchist")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -3926,7 +3926,7 @@ public class CardFactory_Creatures {
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Penumbra Kavu")) {
@@ -15003,7 +15003,7 @@ public class CardFactory_Creatures {
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Cartographer")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -15045,6 +15045,7 @@ public class CardFactory_Creatures {
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Feral Hydra")) { 
@@ -15524,6 +15525,7 @@ public class CardFactory_Creatures {
             ability2.setStackDescription("Molten Hydra deals damage to number of counters on it to target creature or player.");
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Auramancer") || cardName.equals("Monk Idealist")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -15566,7 +15568,7 @@ public class CardFactory_Creatures {
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Merfolk Sovereign")) {
@@ -20343,6 +20345,7 @@ public class CardFactory_Creatures {
         	//ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START ************************
         if(cardName.equals("Sanctum Gargoyle")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -20392,7 +20395,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription(cardName + " - return target artifact from your graveyard to your hand.");
             card.addComesIntoPlayCommand(cip);
         }//*************** END ************ END **************************
-        
+        */
+        /*
         //*************** START *********** START ************************
         if(cardName.equals("Sharuum the Hegemon")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -20443,8 +20447,9 @@ public class CardFactory_Creatures {
             ability.setStackDescription(cardName + " - return target artifact from your graveyard to the battlefield.");
             card.addComesIntoPlayCommand(cip);
         }//*************** END ************ END **************************
+        */
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Temporal Adept")) {
         	final Ability_Tap ability = new Ability_Tap(card, "U U U") {
 				private static final long serialVersionUID = 6775250144167556206L;
