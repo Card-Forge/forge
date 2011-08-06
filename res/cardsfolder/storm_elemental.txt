@@ -9,4 +9,5 @@ A:AB$Pump | Cost$ U ExileFromTop<1/Card> | Defined$ Self | NumAtt$ +X | NumDef$ 
 SVar:X:Exiled$Valid Land.Snow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_elemental.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/56.jpg
 End
