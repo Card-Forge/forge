@@ -1,3 +1,12 @@
+Radiant's Dragoons
+3 W
+Creature Human Soldier
+When Radiant's Dragoons enters the battlefield, you gain 5 life.
+2/5
+Echo:3 W
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_dragoons.jpg
+
 Abandoned Outpost
 no cost
 Land
@@ -22229,15 +22238,6 @@ Flying
 Vigilance
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/gu/en-us/card12368.jpg
-
-Radiant's Dragoons
-3 W
-Creature Human Soldier
-no text
-2/5
-Echo:3 W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_dragoons.jpg
 
 Rafiq of the Many
 1 G W U
