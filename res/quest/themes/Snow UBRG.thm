@@ -1,14 +1,14 @@
 BasicLandPercentage=0
 
-[Group MaxCnt=4 Percentage=10]
+[Group MaxCnt=4 Percentage=7]
 Snow-Covered Forest
-Snow-Covered Forest
-Snow-Covered Forest
+[/Group]
+
+[Group MaxCnt=3 Percentage=4]
 Snow-Covered Island
 [/Group]
 
-[Group MaxCnt=1 Percentage=5]
-Snow-Covered Island
+[Group MaxCnt=1 Percentage=4]
 Snow-Covered Mountain
 Snow-Covered Swamp
 [/Group]
