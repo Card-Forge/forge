@@ -27,7 +27,7 @@ public class StaticEffects
 		cardToEffectsList.put("Coat of Arms", new String[] {"Coat_of_Arms"});
 		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
-		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
+		//cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		
 		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});

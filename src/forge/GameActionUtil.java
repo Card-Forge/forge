@@ -5667,126 +5667,6 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Mul Daya
-	
-
-	//moved to Card.addExtrinsicAbilities
-	/*
-	public static Command Joiner_Adept                = new Command() {
-		private static final long serialVersionUID   = -2543659953307485051L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		String[]                  keyword            = { "B", "W", "G", "U", "R"  };
-
-		final void addMana(Card c) {
-			for(int i = 0; i < keyword.length; i++) {
-				//don't add an extrinsic mana ability if the land can already has the same intrinsic mana ability
-				//eg. "tap: add G"
-				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(
-						keyword[i])) {
-					//c.addExtrinsicKeyword(keyword[i]);
-					SpellAbility mana = new Ability_Mana(c, "T", keyword[i]) {
-						private static final long serialVersionUID = 2384540533244132975L;
-					};
-					StringBuilder sb = new StringBuilder();
-					sb.append("T: Add ").append(keyword[i]).append(" to your mana pool.");
-					
-					mana.setType("Extrinsic");
-					mana.setDescription(sb.toString());
-					c.addSpellAbility(mana);
-				}
-			}
-		}
-
-		final void removeMana(Card c) {
-			c.removeAllExtrinsicManaAbilities();
-		}
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				removeMana(c);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Joiner Adept");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length && outer < 1; outer++) // 1
-				// is
-				// a
-				// cheat
-			{
-				CardList creature = new CardList(zone[outer].getCards());
-				creature = creature.getType("Land");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					addMana(c);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
-	*/
-	
-	public static Command Gemhide_Sliver              = new Command() {
-		private static final long serialVersionUID   = -2941784982910968772L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		String[]                  keyword            = { "B", "W", "G", "U", "R" };
-
-		final void addMana(Card c) {
-
-			for(int i = 0; i < keyword.length; i++) {
-				if(!c.getIntrinsicManaAbilitiesDescriptions().contains(
-						keyword[i])) {
-					//c.addExtrinsicKeyword(keyword[i]);
-					SpellAbility mana = new Ability_Mana(c, "T", keyword[i]) {
-						private static final long serialVersionUID = -8909660504657778172L;
-					};
-					StringBuilder sb = new StringBuilder();
-					sb.append("T: Add ").append(keyword[i]).append(" to your mana pool.");
-					
-					mana.setType("Extrinsic");
-					mana.setDescription(sb.toString());
-					c.addSpellAbility(mana);
-				}
-			}
-		}
-
-		final void removeMana(Card c) {
-			c.removeAllExtrinsicManaAbilities();
-		}
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				removeMana(c);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					addMana(c);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-		}// execute()
-	}; // Gemhide_Sliver
 
 	
 	public static Command Elspeth_Emblem 			  = new Command() {
@@ -7639,7 +7519,7 @@ public class GameActionUtil {
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
-		commands.put("Gemhide_Sliver", Gemhide_Sliver);
+		//commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		commands.put("Homarid", Homarid);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
