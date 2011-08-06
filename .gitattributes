@@ -3230,6 +3230,7 @@ res/cardsfolder/incinerate.txt -text svneol=native#text/plain
 res/cardsfolder/incurable_ogre.txt -text svneol=native#text/plain
 res/cardsfolder/indebted_samurai.txt -text svneol=native#text/plain
 res/cardsfolder/independent_troops.txt -text svneol=native#text/plain
+res/cardsfolder/indestructible_aura.txt -text svneol=native#text/plain
 res/cardsfolder/index.txt -text svneol=native#text/plain
 res/cardsfolder/indomitable_ancients.txt -text svneol=native#text/plain
 res/cardsfolder/indomitable_archangel.txt -text svneol=native#text/plain
