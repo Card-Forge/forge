@@ -489,7 +489,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
 */
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Holy Strength")) {
             final SpellAbility spell = new Spell(card) {
@@ -578,6 +578,8 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Unholy Strength")) {
@@ -1169,7 +1171,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
 */
         
-        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Indomitable Will")) {
             final SpellAbility spell = new Spell(card) {
@@ -1265,6 +1267,8 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Uncontrollable Anger")) {
@@ -1723,6 +1727,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin War Paint")) {
             final SpellAbility spell = new Spell(card) {
@@ -1815,7 +1821,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************

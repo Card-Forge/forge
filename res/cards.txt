@@ -1,3 +1,24 @@
+Leshrac's Rite
+B
+Enchantment Aura
+Enchanted creature has swampwalk.
+Enchant creature
+enPump:Swampwalk
+
+Lifelink
+W
+Enchantment Aura
+Enchanted creature has lifelink.
+Enchant creature
+enPump:Lifelink
+
+Oakenform
+2 G
+Enchantment Aura
+Enchanted creature gets +3/+3.
+Enchant creature
+enPump:+3/+3
+
 Air Bladder
 U
 Enchantment Aura
@@ -5241,6 +5262,7 @@ Goblin War Paint
 Enchantment Aura
 Enchanted creature gets +2/+2 and has haste.
 Enchant creature
+enPump:+2/+2/Haste
 
 Vithian Renegades
 1 R G
@@ -6072,6 +6094,7 @@ Enchantment Aura
 Enchanted creature gets +1/+2.
 Flash
 Enchant creature
+enPump:+1/+2
 
 Cleanfall
 2 W
@@ -7804,6 +7827,7 @@ W
 Enchantment Aura
 Enchanted creature gets +1/+2.
 Enchant creature
+enPump:+1/+2
 
 Giant Growth
 G
