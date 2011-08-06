@@ -1,0 +1,8 @@
+Name:Into the North
+ManaCost:1 G
+Types:Sorcery
+Text:no text
+A:SP$Fetch|Cost$1 G|Destination$Battlefield|FetchType$Land.Snow|Tapped$True|FetchNum$1|SpellDescription$Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_north.jpg
+End

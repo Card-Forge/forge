@@ -5933,7 +5933,7 @@ public class CardFactory_Sorceries {
        	card.setSVar("PlayMain1", "TRUE");
        } //*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Rampant Growth")) {
             SpellAbility spell = new Spell(card) {
@@ -5985,7 +5985,7 @@ public class CardFactory_Sorceries {
             spell.setDescription(desc);
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
                 
         //*************** START *********** START **************************
         else if(cardName.equals("Hellion Eruption")) {
