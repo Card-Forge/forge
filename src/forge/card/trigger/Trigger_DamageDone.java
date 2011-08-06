@@ -45,6 +45,46 @@ public class Trigger_DamageDone extends Trigger {
                     return false;
 			}
 		}
+
+        if(mapParams.containsKey("DamageAmount"))
+        {
+            String fullParam = mapParams.get("DamageAmount");
+
+            String operator = fullParam.substring(0,2);
+            int operand = Integer.parseInt(fullParam.substring(2));
+            int actualAmount = (Integer)runParams.get("DamageAmount");
+
+            if(operator.equals("LT"))
+            {
+                if(!(actualAmount < operand))
+                    return false;
+            }
+            else if (operator.equals("LE"))
+            {
+                if(!(actualAmount <= operand))
+                    return false;
+            }
+            else if (operator.equals("EQ"))
+            {
+                if(!(actualAmount == operand))
+                    return false;
+            }
+            else if (operator.equals("GE"))
+            {
+                if(!(actualAmount >= operand))
+                    return false;
+            }
+            else if (operator.equals("GT"))
+            {
+                if(!(actualAmount > operand))
+                    return false;
+            }
+
+            System.out.print("DamageDone Amount Operator: ");
+            System.out.println(operator);
+            System.out.print("DamageDone Amount Operand: ");
+            System.out.println(operand);
+        }
 		
 		return true;
 	}
