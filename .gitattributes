@@ -5168,6 +5168,7 @@ res/quest/quests.txt -text svneol=native#text/plain
 res/quest/rare.txt -text svneol=native#text/plain
 res/quest/themes/Dermageddon[!!-~]WG.thm -text
 res/quest/themes/Domain.thm -text
+res/quest/themes/Equipment[!!-~]W.thm -text
 res/quest/themes/Goblins[!!-~]BR.thm -text
 res/quest/themes/Goblins[!!-~]R.thm -text
 res/quest/themes/Indestructibility[!!-~]WB.thm -text
