@@ -1,0 +1,10 @@
+Name:Enervate
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$Tap|Cost$1 U|TgtPrompt$Choose target artifact, creature or land|ValidTgts$Artifact,Creature,Land|SpellDescription$Tap target artifact, creature or land.
+K:Draw a card at the beginning of the next turn's upkeep.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enervate.jpg
+End

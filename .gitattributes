@@ -1356,6 +1356,7 @@ res/cardsfolder/enemy_of_the_guildpact.txt -text svneol=native#text/plain
 res/cardsfolder/energizer.txt -text svneol=native#text/plain
 res/cardsfolder/energy_flux.txt -text svneol=native#text/plain
 res/cardsfolder/energy_tap.txt -text svneol=native#text/plain
+res/cardsfolder/enervate.txt -text svneol=native#text/plain
 res/cardsfolder/enfeeblement.txt -text svneol=native#text/plain
 res/cardsfolder/engineered_plague.txt -text svneol=native#text/plain
 res/cardsfolder/enlightened_tutor.txt -text svneol=native#text/plain
