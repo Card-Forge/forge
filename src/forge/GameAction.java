@@ -435,7 +435,8 @@ public class GameAction {
 	                               && !perm.getType().contains("Creature"))
 	                            || (c.getKeyword().contains("Enchant tapped creature") && perm.isUntapped() ) ) {
 	                        c.unEnchantCard(perm);
-	                        destroy(c);
+	                        //changed from destroy (and rules-wise, I don't think it's a sacrifice)
+	                        moveToGraveyard(c);
 	                    }
 	                }
 	            }//if isAura
