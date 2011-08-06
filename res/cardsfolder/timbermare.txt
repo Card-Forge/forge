@@ -1,7 +1,7 @@
 Name:Timbermare
 ManaCost:3 G
 Types:Creature Elemental Horse
-Text:no text
+Text:When CARDNAME enters the battlefield, tap all other creatures.
 PT:5/5
 K:Haste
 K:Echo:5 G
