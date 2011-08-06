@@ -502,7 +502,6 @@ public class GameActionUtil {
 		playCard_Gelectrode(c);
 		playCard_Standstill(c);
 		playCard_SolKanar(c);
-		playCard_Gilt_Leaf_Archdruid(c);
 		playCard_Reki(c);
 		playCard_Vedalken_Archmage(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
@@ -2108,14 +2107,7 @@ public class GameActionUtil {
     }// Gelectrode
 
 	public static void playCard_Forced_Fruition(Card c) {
-		PlayerZone hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-		PlayerZone cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-
-		CardList list = new CardList();
-		list.addAll(hplay.getCards());
-		list.addAll(cplay.getCards());
-
-		list = list.getName("Forced Fruition");
+		CardList list = AllZoneUtil.getCardsInPlay("Forced Fruition");
 
 		for(int i = 0; i < list.size(); i++) {
 			final Card card = list.get(i);
@@ -2254,32 +2246,6 @@ public class GameActionUtil {
         }// if isEnchantment()
     }// playCard_Enchantress_Draw()
 	*/
-
-	public static void playCard_Gilt_Leaf_Archdruid(Card c) {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Gilt-Leaf Archdruid");
-		
-		if(c.getType().contains("Druid") || c.getKeyword().contains("Changeling")) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(0);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						// draws a card
-						card.getController().drawCard();
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" plays a Druid spell and draws a card");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-
-			} // for
-		}// if druid
-	}
 
 	public static void playCard_Reki(Card c) {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Reki, the History of Kamigawa");
