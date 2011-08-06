@@ -3185,8 +3185,8 @@ public class CardFactoryUtil
 	  c.setName(name);
 	  c.setImageName(imageName);
 	  
-	  c.setController(source.getController());
-	  c.setOwner(source.getOwner());
+	  //c.setController(source.getController());
+	  //c.setOwner(source.getOwner());
 	  
 	  c.setManaCost(manaCost);
 	  c.setToken(true);
@@ -3210,6 +3210,8 @@ public class CardFactoryUtil
 	  for (int i=0;i<multiplier;i++) {
 		  Card temp = CardFactory.copyStats(c);
 		  temp.setToken(true);
+		  temp.setController(source.getController());
+		  temp.setOwner(source.getOwner());
 		  play.add(temp);
 		  list.add(temp);
 	  }
@@ -3225,8 +3227,8 @@ public class CardFactoryUtil
 		c.setName(name);
 		c.setImageName(imageName);
 		
-		c.setController(controller);
-		c.setOwner(controller);
+		//c.setController(controller);
+		//c.setOwner(controller);
 		
 		c.setManaCost(manaCost);
 		c.setToken(true);
@@ -3249,6 +3251,8 @@ public class CardFactoryUtil
 		
 		for (int i=0;i<multiplier;i++) {
 			Card temp = CardFactory.copyStats(c);
+			temp.setController(controller);
+			temp.setOwner(controller);
 			temp.setToken(true);
 			play.add(temp);
 			list.add(temp);

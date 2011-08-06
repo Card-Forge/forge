@@ -17262,11 +17262,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		c.setText(sim.getSpellText());
 		c.setManaCost(sim.getManaCost());
 		
-		if (!sim.getOwner().equals(""))
-			c.setOwner(sim.getOwner());
-		if (!sim.getController().equals(""))
-			c.setController(sim.getController());
-		
 		return c;
 	}// copyStats()
 
