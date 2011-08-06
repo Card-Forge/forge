@@ -1,31 +1,3 @@
-Ancestral Vision
-no cost
-Sorcery
-(NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
-CARDNAME is blue.
-Suspend:4:U
-spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
-SVar:RemAIDeck:True
-SVar:Rarity:None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
-
-Ghostfire
-2 R
-Instant
-no text
-spDamageTgtCP:3
-CARDNAME is colorless.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostfire.jpg
-
-Deathbringer Thoctar
-4 B R
-Creature Zombie Beast
-no text
-3/3
-WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Deathbringer Thoctar.
-abDamageTgtCP 0 SubCounter<P1P1/1>:1
-
 Abandoned Outpost
 no cost
 Land
@@ -992,6 +964,17 @@ no text
 spDrawCardsTgt:3:Target player draws three cards.:Ancestral Recall - draw 3 cards.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
+
+Ancestral Vision
+no cost
+Sorcery
+(NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+CARDNAME is blue.
+Suspend:4:U
+spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
 
 Ancient Craving
 3 B
@@ -7241,6 +7224,16 @@ spDestroyTgt:Creature.tapped
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_stroke.jpg
 
+Deathbringer Thoctar
+4 B R
+Creature Zombie Beast
+no text
+3/3
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Deathbringer Thoctar.
+abDamageTgtCP 0 SubCounter<P1P1/1>:1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbringer_thoctar.jpg
+
 Deathgreeter
 B
 Creature Human Shaman
@@ -11856,6 +11849,15 @@ no text
 abPumpTgtC T:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96901.jpg
+
+Ghostfire
+2 R
+Instant
+no text
+spDamageTgtCP:3
+CARDNAME is colorless.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostfire.jpg
 
 Ghostly Changeling
 2 B
