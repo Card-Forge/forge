@@ -5,7 +5,7 @@ Text:no text
 A:SP$ChangeZoneAll | Cost$ 2 U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True  | SubAbility$ SVar=DBChangeAll | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library
 SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ SVar=DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ SVar=DBChange | SpellDescription$ , then draws seven cards.
-SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Graveyard | SpellDescription$ CARDNAME goes into a new graveyard.
+SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Graveyard
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timetwister.jpg

@@ -321,10 +321,7 @@ public class CombatUtil {
     	if (!c.isCreature()) return false;
     	
         if(AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
-        
-        if((AllZoneUtil.isCardInPlay("Moat") || AllZoneUtil.isCardInPlay("Magus of the Moat"))
-            && !c.getKeyword().contains("Flying")) return false;
-        
+                
         // CARDNAME can't attack if defending player controls an untapped creature with power ...
         final int powerLimit[] = {0};
         int keywordPosition = 0;
