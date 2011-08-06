@@ -38,7 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
-hada_spy_patrol					http://www.wizards.com/global/images/magic/general/hada_spy_patrol.jpg
+tuktuk_the_explorer.jpg		http://www.wizards.com/global/images/magic/general/tuktuk_the_explorer.jpg
+kazandu_tuskcaller.jpg		http://www.wizards.com/global/images/magic/general/kazandu_tuskcaller.jpg
+hada_spy_patrol.jpg				http://www.wizards.com/global/images/magic/general/hada_spy_patrol.jpg
 dreamstone_hedron.jpg			http://www.wizards.com/global/images/magic/general/dreamstone_hedron.jpg
 beastbreaker_of_bala_ged.jpg	http://www.wizards.com/global/images/magic/general/beastbreaker_of_bala_ged.jpg
 hedron_matrix.jpg				http://www.wizards.com/global/images/magic/general/hedron_matrix.jpg
