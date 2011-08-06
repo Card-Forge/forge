@@ -104,6 +104,7 @@ public class Card extends MyObservable
   private ArrayList<Command> cycleCommandList		  = new ArrayList<Command>();
   
   private Hashtable<Counters,Integer> counters = new Hashtable<Counters,Integer>();
+  private Hashtable<String,String> SVars = new Hashtable<String,String>(); 
   
   //hacky code below, used to limit the number of times an ability
   //can be used per turn like Vampire Bats
@@ -224,6 +225,20 @@ public class Card extends MyObservable
 	  this.updateObservers();
   }
   
+  public String getSVar(String Var)
+  {
+	  if (SVars.contains(Var))
+		  return SVars.get(Var);
+	  else
+		  return new String("");
+  }
+  public void SetSVar(String Var, String str)
+  {
+	  if (SVars.contains(Var))
+		  SVars.remove(Var);
+	  
+	  SVars.put(Var, str);
+  }
   public int sumAllCounters()
   {
 	  Object[] values = counters.values().toArray();
