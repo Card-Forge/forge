@@ -479,11 +479,11 @@ public class CardFactory_Sorceries {
             spell_two.setManaCost("4 B");
             spell_two.setAdditionalManaCost("4");
             
-            spell_one.setDescription("Put a 1/1 black Rat token into play.");
+            spell_one.setDescription("Put a 1/1 black Rat token onto the battlefield.");
             spell_two.setDescription("Buyback 4 (You may pay an additional 4 as you cast this spell. If you do, put this card into your hand as it resolves.)");
             
-            spell_one.setStackDescription("Lab Rats - Put a 1/1 black Rat token into play");
-            spell_two.setStackDescription("Lab Rats - Buyback, Put a 1/1 black Rat token into play");
+            spell_one.setStackDescription("Lab Rats - Put a 1/1 black Rat token onto the battlefield");
+            spell_two.setStackDescription("Lab Rats - Buyback, Put a 1/1 black Rat token onto the battlefield");
             
             spell_two.setIsBuyBackAbility(true);
             
@@ -2455,7 +2455,7 @@ public class CardFactory_Sorceries {
                 }
                 
                 public void humanResolve() {
-                    //choose creature from opponents library to put into play
+                    //choose creature from opponents library to put onto the battlefield
                     //shuffle opponent's library
                     Player opponent = card.getController().getOpponent();
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, opponent);
@@ -2685,7 +2685,7 @@ public class CardFactory_Sorceries {
             };//SpellAbility
             
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" Puts 2/2 green Bear tokens into play.");
+            sb.append(card.getController()).append(" Puts 2/2 green Bear tokens onto the battlefield.");
             spell.setStackDescription(sb.toString());
             
             card.setFlashback(true);
@@ -2868,7 +2868,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                	// Look for two basic lands: one goes into play tapped, one
+                	// Look for two basic lands: one goes onto the battlefield tapped, one
                 	// goes into your hand
                 	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
                 			Constant.Zone.Battlefield, true, 

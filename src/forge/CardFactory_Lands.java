@@ -861,7 +861,7 @@ class CardFactory_Lands {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - put a 1/1 Spirit creature token into play");
+                	sb.append(card.getName()).append(" - put a 1/1 Spirit creature token onto the battlefield");
                 	ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
@@ -895,7 +895,7 @@ class CardFactory_Lands {
                     {
                         if(plains.size() > 0) {
                             Object o = AllZone.Display.getChoiceOptional(
-                                    "Select plains card to put into play tapped: ", plains.toArray());
+                                    "Select plains card to put onto the battlefield tapped: ", plains.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
                                 lib.remove(c);
@@ -914,7 +914,7 @@ class CardFactory_Lands {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - search library for a plains card and put it into play tapped.");
+                	sb.append(card.getName()).append(" - search library for a plains card and put it onto the battlefield tapped.");
                 	ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
@@ -922,6 +922,7 @@ class CardFactory_Lands {
             
             card.addDestroyCommand(fetchPlains);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mutavault")) {

@@ -1582,7 +1582,7 @@ class CardFactory_Auras {
                     	return;
                     }
                     
-                    // Bring creature into play under your control (should trigger etb Abilities)
+                    // Bring creature onto the battlefield under your control (should trigger etb Abilities)
                     animated.setController(card.getController());
                     grave.remove(animated);
                     play.add(animated);

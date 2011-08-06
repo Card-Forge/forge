@@ -458,11 +458,11 @@ public class CardFactory_Instants {
             spell_two.setManaCost("4 G");
             spell_two.setAdditionalManaCost("3");
             
-            spell_one.setDescription("Put a 1/1 green Saproling token into play.");
+            spell_one.setDescription("Put a 1/1 green Saproling token onto the battlefield.");
             spell_two.setDescription("Buyback 3 (You may pay an additional 3 as you cast this spell. If you do, put this card into your hand as it resolves.)");
             
-            spell_one.setStackDescription("Sprout Swarm - Put a 1/1 green Saproling token into play");
-            spell_two.setStackDescription("Sprout Swarm - Buyback, Put a 1/1 green Saproling token into play");
+            spell_one.setStackDescription("Sprout Swarm - Put a 1/1 green Saproling token onto the battlefield");
+            spell_two.setStackDescription("Sprout Swarm - Buyback, Put a 1/1 green Saproling token onto the battlefield");
             
             spell_two.setIsBuyBackAbility(true);
             
@@ -3565,7 +3565,7 @@ public class CardFactory_Instants {
                 	CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
                 	for(Card creature:creatures) {
                 		//skip walls, skip creatures with summoning sickness
-                		//also skip creatures with haste if they came into play this turn
+                		//also skip creatures with haste if they came onto the battlefield this turn
                 		if((!creature.isWall() && !creature.hasSickness())
                 				|| (creature.getKeyword().contains("Haste") && creature.getTurnInZone() != 1)) {
                 			creature.setSirenAttackOrDestroy(true);
