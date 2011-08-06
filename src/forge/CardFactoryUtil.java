@@ -2969,7 +2969,7 @@ public class CardFactoryUtil {
     }
     
     public static boolean isCounterable(Card c) {
-        if(!c.getKeyword().contains("This card can't be countered.")) return true;
+        if(!c.getKeyword().contains("CARDNAME can't be countered.")) return true;
         else return false;
     }
     

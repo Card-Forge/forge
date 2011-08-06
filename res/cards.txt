@@ -1,3 +1,92 @@
+Akroma, Angel of Fury
+5 R R R
+Legendary Creature Angel
+no text
+6/6
+Flying
+Trample
+Protection from white
+Protection from blue
+abPump R:+1/+0
+Morph:3 R R R
+CARDNAME can't be countered.
+
+Blurred Mongoose
+1 G
+Creature Mongoose
+no text
+2/1
+CARDNAME can't be countered.
+Shroud
+
+Emrakul, the Aeons Torn
+15
+Legendary Creature Eldrazi
+When you cast Emrakul, take an extra turn after this one.
+15/15
+CARDNAME can't be countered.
+Flying
+Protection from colored spells
+Annihilator 6
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
+Great Sable Stag
+1 G G
+Creature Elk
+no text
+3/3
+Protection from blue
+Protection from black
+CARDNAME can't be countered.
+
+Last Word
+2 U U
+Instant
+no text 
+CARDNAME can't be countered.
+
+Obliterate
+6 R R
+Sorcery
+Destroy all artifacts, creatures, and lands. They can't be regenerated.
+CARDNAME can't be countered.
+
+Scragnoth
+4 G
+Creature Beast
+no text
+3/4
+Protection from blue
+CARDNAME can't be countered.
+
+Terra Stomper
+3 G G G
+Creature Beast
+no text
+8/8
+Trample
+CARDNAME can't be countered.
+
+Vexing Beetle
+4 G
+Creature Insect
+Vexing Beetle gets +3/+3 as long as no opponent controls a creature.
+3/3
+CARDNAME can't be countered.
+
+Volcanic Fallout
+1 R R
+Instant
+Volcanic Fallout can't be countered. Volcanic Fallout deals 2 damage to each creature and each player.
+CARDNAME can't be countered.
+
+Wreak Havoc
+2 R G
+Sorcery
+Wreak Havoc can't be countered by spells or abilities. Destroy target artifact or land.
+spDestroyTgt:Artifact,Land
+CARDNAME can't be countered.
+
 Darksteel Colossus
 11
 Artifact Creature Golem
@@ -5,17 +94,6 @@ no text
 11/11
 Trample
 Indestructible
-When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
-
-Emrakul, the Aeons Torn
-15
-Legendary Creature Eldrazi
-When you cast Emrakul, take an extra turn after this one.
-15/15
-This card can't be countered.
-Flying
-Protection from colored spells
-Annihilator 6
 When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 
 Kozilek, Butcher of Truth
@@ -8258,13 +8336,6 @@ Enchanted creature gets +1/+2 and has flying.
 Enchant creature
 enPump:+1/+2/Flying
 
-Vexing Beetle
-4 G
-Creature Insect
-Vexing Beetle gets +3/+3 as long as no opponent controls a creature.
-3/3
-This card can't be countered.
-
 Loxodon Punisher
 3 W
 Creature Elephant Soldier
@@ -8789,12 +8860,6 @@ no text
 4/4
 tap: add 2
 
-Last Word
-2 U U
-Instant
-no text 
-This card can't be countered.
-
 Madrush Cyclops
 1 B R G
 Creature Cyclops Warrior
@@ -9040,19 +9105,6 @@ When Cao Ren, Wei Commander enters the battlefield, you lose 3 life.
 3/3
 Horsemanship
 
-Volcanic Fallout
-1 R R
-Instant
-Volcanic Fallout can't be countered. Volcanic Fallout deals 2 damage to each creature and each player.
-This card can't be countered.
-
-Wreak Havoc
-2 R G
-Sorcery
-Wreak Havoc can't be countered by spells or abilities. Destroy target artifact or land.
-spDestroyTgt:Artifact,Land
-This card can't be countered.
-
 Think Twice
 1 U
 Instant
@@ -9221,58 +9273,6 @@ Whispers of the Muse
 U
 Instant
 no text
-
-Terra Stomper
-3 G G G
-Creature Beast
-no text
-8/8
-Trample
-This card can't be countered.
-
-Scragnoth
-4 G
-Creature Beast
-no text
-3/4
-Protection from blue
-This card can't be countered.
-
-Obliterate
-6 R R
-Sorcery
-Destroy all artifacts, creatures, and lands. They can't be regenerated.
-This card can't be countered.
-
-Great Sable Stag
-1 G G
-Creature Elk
-no text
-3/3
-Protection from blue
-Protection from black
-This card can't be countered.
-
-Blurred Mongoose
-1 G
-Creature Mongoose
-no text
-2/1
-This card can't be countered.
-Shroud
-
-Akroma, Angel of Fury
-5 R R R
-Legendary Creature Angel
-no text
-6/6
-Flying
-Trample
-Protection from white
-Protection from blue
-abPump R:+1/+0
-Morph:3 R R R
-This card can't be countered.
 
 Dismiss
 2 U U 
