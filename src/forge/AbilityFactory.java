@@ -785,7 +785,10 @@ public class AbilityFactory {
 	
 	public static SpellAbility findParentsTargetedCard(SpellAbility sa){
 		SpellAbility parent = sa;
+		
 		do{
+			if (!(parent instanceof Ability_Sub))
+				return parent;
 			parent = ((Ability_Sub)parent).getParent();
 		}while(parent.getTarget() == null || parent.getTarget().getTargetCards().size() == 0);
 		
