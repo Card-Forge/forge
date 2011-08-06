@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:+2/+2/Trample & SVar=ABPump:isPresent Card.enchanted+Self:
 SVar:ABPump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flaring_flame_kin.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/62.jpg
 End

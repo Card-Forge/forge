@@ -10,4 +10,5 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_boundless_growth.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/152.jpg
 End

@@ -11,4 +11,5 @@ A:AB$Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ R | SpellDescription$ Add R
 A:AB$Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrodins_core.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/165.jpg
 End

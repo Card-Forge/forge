@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ PG | Origin$ Graveyard | Destination$ Library | Library
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_revival.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/118.jpg
 End

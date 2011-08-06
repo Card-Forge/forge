@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 6
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_harvest.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/125.jpg
 End

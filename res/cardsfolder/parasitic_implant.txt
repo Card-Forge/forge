@@ -8,4 +8,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ EnchantedController | SacValid$ C
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parasitic_implant.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/67.jpg
 End

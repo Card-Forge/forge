@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtProm
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_twisted_reflection.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/71.jpg
 End
