@@ -355,7 +355,7 @@ public class CombatUtil {
         	if (Compi.getName("Ensnaring Bridge").size() > 0) {
         		CardList Hand = new CardList();
         		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, "Computer").getCards());
-        		if (Hand.size() > limit) limit = Hand.size();
+        		if (Hand.size() < limit) limit = Hand.size();
         	}
         	if (c.getNetAttack() > limit) return false;
         }

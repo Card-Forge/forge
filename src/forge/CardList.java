@@ -149,6 +149,7 @@ public class CardList implements Iterable<Card> {
         return c;
     }
     
+    /* no longer needed
     private String toMixedCase(String s)
     {
     	String fc = "";
@@ -159,8 +160,18 @@ public class CardList implements Iterable<Card> {
     	
     	return fc + lcs;
     }
+    */
     
-    //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
+  //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
+    public CardList getType(final String cardType) {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return c.isType(cardType);
+    		}
+    	});
+    }
+    
+    /*
     public CardList getType(String cardType) {
         CardList c = new CardList();
         Card card;
@@ -184,6 +195,7 @@ public class CardList implements Iterable<Card> {
         }
         return c;
     }//getType()
+    */
     
     public CardList getTapState(String TappedOrUntapped)
     {
