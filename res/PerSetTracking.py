@@ -68,6 +68,11 @@ currentImplemented = []
 total = 0
 percentage = 0
 for currentSet in setCodes :
+        if currentSet == 'UNH' or currentSet == 'UGL' : continue #skip Unhinged and Unglued since they are only counting basic lands anyway
+        #if currentSet == 'VG1' or currentSet == 'VG2' or currentSet == 'VG3' : continue
+        #if currentSet == 'VG4' or currentSet == 'VGO' or currentSet == 'VG ' : continue
+        #if currentSet == 'SDC' or currentSet == 'AST' or currentSet == 'DKM' : continue
+        #if currentSet == 'ATH' or currentSet == 'MBS' : continue
         for card in mtgDataCards.keys() :
                 if mtgDataCards[card].count(currentSet) > 0 :
                         if card in forgeCards :
@@ -75,7 +80,7 @@ for currentSet in setCodes :
                         else :
                                 currentMissing.append(card)
         total = len(currentMissing)+len(currentImplemented)
-        percentage = 100        
+        percentage = 0       
         if total > 0 :
                 percentage = (float(len(currentImplemented))/float(total))*100
         
@@ -98,7 +103,7 @@ for currentSet in setCodes :
         del currentImplemented[:]
 
 #UNTESTED sort sets by percentage completed
-#totalData = sorted(totalData,key=lambda entry: entry[3],reverse=True)
+totalDataList = sorted(totalData.items(), key=lambda (key,entry): entry[3], reverse=True)
 #UNTESTED
 
 totalPercentage = 0
@@ -107,11 +112,11 @@ totalImplemented = 0
 fullTotal = 0
 with open(sys.path[0] + os.sep + "PerSetTracking Results" + os.sep + "CompleteStats.txt", "w") as statsfile:
         statsfile.write("Set: Implemented (Missing) / Total = Percentage Implemented\n")
-        for dataKey in sorted(totalData.keys()) :
-                totalImplemented += totalData[dataKey][0]
-                totalMissing += totalData[dataKey][1]
-                fullTotal += totalData[dataKey][2]
-                statsfile.write(dataKey + ": " + str(totalData[dataKey][0]) + " (" + str(totalData[dataKey][1]) + ") / " + str(totalData[dataKey][2]) + " = " + str(round(totalData[dataKey][3], 2)) + "%\n")
+        for k,dataKey in totalDataList :
+                totalImplemented += dataKey[0]
+                totalMissing += dataKey[1]
+                fullTotal += dataKey[2]
+                statsfile.write(k + ": " + str(dataKey[0]) + " (" + str(dataKey[1]) + ") / " + str(dataKey[2]) + " = " + str(round(dataKey[3], 2)) + "%\n")
         totalPercentage = totalImplemented / fullTotal
         statsfile.write("\n")
         statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
