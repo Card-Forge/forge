@@ -2538,7 +2538,8 @@ class CardFactory_Lands {
         }
         //*************** END ************ END **************************        
         
-
+        
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Orzhova, the Church of Deals")) {
             card.clearSpellKeepManaAbility();
@@ -2561,6 +2562,8 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
         }
         //*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Svogthos, the Restless Tomb")) {

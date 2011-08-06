@@ -2588,6 +2588,7 @@ no cost
 Land
 no text
 tap: add 1
+abLoseLifeTgt 3 W B T:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
 
 Rix Maadi, Dungeon Palace
 no cost
@@ -4319,6 +4320,7 @@ Onyx Goblet
 2 B
 Artifact
 no text
+abLoseLifeTgt T:1
 
 Lightning Talons
 2 R
