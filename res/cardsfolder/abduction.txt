@@ -1,7 +1,7 @@
 Name:Abduction
 ManaCost:2 U U
 Types:Enchantment Aura
-Text:no text
+Text:You control enchanted creature.
 K:Enchant creature
 K:enControlCreature
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap enchanted creature.
