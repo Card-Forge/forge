@@ -4366,6 +4366,7 @@ res/cardsfolder/prowling_nightstalker.txt -text svneol=native#text/plain
 res/cardsfolder/psionic_blast.txt -text svneol=native#text/plain
 res/cardsfolder/psionic_entity.txt -text svneol=native#text/plain
 res/cardsfolder/psionic_gift.txt -text svneol=native#text/plain
+res/cardsfolder/psionic_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/psychatog.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_drain.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_membrane.txt -text svneol=native#text/plain
