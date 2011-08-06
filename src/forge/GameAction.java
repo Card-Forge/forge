@@ -3114,7 +3114,7 @@ public class GameAction {
         
         for(SpellAbility sa:abilities) {
         	// for uncastables like lotus bloom, check if manaCost is blank
-            if(sa.canPlay() && !sa.getManaCost().equals("")) {
+            if(sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
                 choices.add(sa.toString());
                 map.put(sa.toString(), sa);
             }

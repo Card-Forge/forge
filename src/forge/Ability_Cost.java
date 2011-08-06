@@ -152,7 +152,8 @@ public class Ability_Cost {
 	}
 	
 	public void changeCost(SpellAbility sa){
-		manaCost = AllZone.GameAction.GetSpellCostChange(sa).toString();
+		if (manaCost != "0")
+			manaCost = AllZone.GameAction.GetSpellCostChange(sa).toString();
 	}
 	
 	public String toString()
