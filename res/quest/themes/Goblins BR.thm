@@ -48,6 +48,7 @@ Tarfire
 [Group MaxCnt=4 Percentage=5]
 Crazed Goblin
 Boros Recruit
+Festering Goblin
 Goblin Arsonist
 Goblin Arsonist
 Goblin Balloon Brigade
@@ -126,6 +127,7 @@ Tuktuk the Explorer
 Blackcleave Goblin
 Goblin Berserker
 Goblin Settler
+Hornet Harasser
 Murderous Redcap
 Murderous Redcap
 Murderous Redcap
@@ -134,8 +136,9 @@ Tar Pitcher
 
 [Group MaxCnt=1 Percentage=2]
 Battle Squadron
-Kiki-Jiki, Mirror Breaker
+Goblin Commando
 Scuzzback Marauders
+Tuktuk Grunts
 [/Group]
 
 End
