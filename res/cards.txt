@@ -1,7 +1,7 @@
 Ulamog, the Infinite Gyre
 11
 Legendary Creature Eldrazi
-no text
+When you cast Ulamog, the Infinite Gyre, destroy target permanent.
 10/10
 Indestructible
 Annihilator 4
