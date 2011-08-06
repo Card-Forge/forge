@@ -181,7 +181,7 @@ import java.util.*;
 
           if (combat.getAttackers().length == 0 && (countExaltedBonus(AllZone.ComputerPlayer) >= 3 ||
                    GameActionUtil.isRafiqInPlay(AllZone.ComputerPlayer) ||
-                   GameActionUtil.getBattleGraceAngels(AllZone.ComputerPlayer) >= 2 ||
+                   AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Battlegrace Angel").size() >= 2 ||
                    (GameActionUtil.countFinestHours(AllZone.ComputerPlayer)>=1) && AllZone.Phase.isFirstCombat())
                    && !doAssault())
           {

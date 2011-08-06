@@ -2667,7 +2667,7 @@ public class CombatUtil {
             AllZone.Stack.add(ability2);
         }
         
-        if(GameActionUtil.getBattleGraceAngels(phasingPlayer) > 0) {
+        if(AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Battlegrace Angel").size() > 0) {
             Ability ability3 = new Ability(c, "0") {
                 @Override
                 public void resolve() {
@@ -2689,8 +2689,8 @@ public class CombatUtil {
             ability3.setStackDescription(c + " - (Exalted) gets Lifelink until EOT.");
             AllZone.Stack.add(ability3);
         }
-        if(GameActionUtil.get_Sovereigns_of_Lost_Alaras(phasingPlayer) > 0) {
-            for(int i = 0; i < GameActionUtil.get_Sovereigns_of_Lost_Alaras(phasingPlayer); i++) { 
+        if(AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alaras").size() > 0) {
+            for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alaras").size(); i++) { 
             	final Card attacker = c;
             Ability ability4 = new Ability(c, "0") {
                 @Override
