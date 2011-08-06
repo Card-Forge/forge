@@ -1,3 +1,33 @@
+Cosi's Ravager
+3 R
+Creature Elemental
+no text
+2/2
+WheneverKeyword:EntersBattleField:Type/Land:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player.
+
+Fires of Yavimaya
+1 R G
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
+abPumpTgtC 0 Sac-CARDNAME:+2/+2
+
+Yuki-Onna
+3 R
+Creature Spirit
+When Yuki-Onna enters the battlefield, destroy target artifact.
+3/1
+etbDestroyTgt:Artifact
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Yuki-Onna to its owner's hand.
+
+Psychic Membrane
+2 U
+Creature Wall
+no text
+0/3
+Defender
+WheneverKeyword:Blocks:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Psychic Membrane blocks, you may draw a card.
+
 Ancestral Vision
 no cost
 Sorcery
