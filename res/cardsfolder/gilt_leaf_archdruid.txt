@@ -1,7 +1,7 @@
 Name:Gilt-Leaf Archdruid
 ManaCost:3 G G
 Types:Creature Elf Druid
-Text:Whenever you cast a Druid spell, you may draw a card.
+Text:no text
 PT:3/3
 T:Mode$SpellCast | ValidCard$ Card.Druid+YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | Optional$ True | TriggerDescription$ Whenever you cast a Druid spell, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 

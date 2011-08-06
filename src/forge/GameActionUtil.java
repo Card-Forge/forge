@@ -505,8 +505,6 @@ public class GameActionUtil {
 		playCard_Vedalken_Archmage(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Merrow_Levitator(c);
-		playCard_Primordial_Sage(c);
-		playCard_Quirion_Dryad(c);
 		//playCard_Enchantress_Draw(c);
 		//playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
@@ -2332,106 +2330,6 @@ public class GameActionUtil {
 			} // for
 		}// if is blue spell
 	}//merrow levitator
-
-	public static void playCard_Primordial_Sage(Card c) {
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Primordial Sage");
-		if(c.getType().contains("Creature")) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(0);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						// draws a card
-						card.getController().drawCard();
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" plays a Creature spell and draws a card");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-
-			} // for
-		}// if Creature
-	}//primordial sage
-
-	public static void playCard_Quirion_Dryad(Card c) {
-		Player controller = c.getController();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Quirion Dryad");
-
-		if(list.size() > 0 && (c.isWhite() ||c.isBlue() || c.isBlack() || c.isRed())) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						card.addCounter(Counters.P1P1, 1);
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a white, blue, black or red spell, ");
-				sb.append(card.getName()).append(" gets a +1/+1 counter.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-			}
-		}
-
-	}//Quirion
-	
-	/*
-	public static void playCard_Mold_Adder(Card c) {
-		Player opponent = c.getController().getOpponent();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Mold Adder");
-
-		if(list.size() > 0 && (c.isBlue() || c.isBlack())) {
-			for(int i = 0; i < list.size(); i++) {
-
-				final Card card = list.get(i);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						card.addCounter(Counters.P1P1, 1);
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a blue or black spell, ").append(card.getName());
-				sb.append(" gets a +1/+1 counter.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-
-			}
-		}
-
-	}//Quirion*/
 
 	public static void playCard_Fable_of_Wolf_and_Owl(Card c) {
 		final Player controller = c.getController();
