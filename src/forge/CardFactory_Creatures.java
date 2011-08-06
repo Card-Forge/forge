@@ -7041,7 +7041,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Gwendlyn Di Corci")) {
             //mana tap ability
@@ -7100,6 +7100,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        */
                
 
         //*************** START *********** START **************************
