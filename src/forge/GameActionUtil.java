@@ -14444,7 +14444,7 @@ public class GameActionUtil {
 				if(old.contains(current.get(outer))) continue;
 
 				final CardList test = all.getName("Baru, Fist of Krosa");
-				SpellAbility ability = new Ability(new Card(), "0") {
+				SpellAbility ability = new Ability(current.get(outer), "0") {
 					@Override
 					public void resolve() {
 						Card c = test.get(0);
@@ -14541,8 +14541,7 @@ public class GameActionUtil {
 				n[0] += newHivemaster.size();
 				final Card crd = hivemasterList.get(outer);
 
-				SpellAbility ability = new Ability(new Card(),
-						"0") {
+				SpellAbility ability = new Ability(crd, "0") {
 
 					@Override
 					public void resolve() {
