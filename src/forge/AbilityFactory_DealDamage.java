@@ -519,27 +519,30 @@ public class AbilityFactory_DealDamage {
 	}
 
 	private boolean damageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa){
-		return false;
-		/*
     		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
     		Random r = new Random();
     		Ability_Cost abCost = sa.getPayCosts();
     		final Card source = sa.getSourceCard();
     		final HashMap<String,String> params = af.getMapParams();
-    		String Valid = "";
+    		int dmg = getNumDamage(sa); 
+    		String validC = "";
+    		String validP = "";
 
     		if(params.containsKey("ValidCards")) 
-    			Valid = params.get("ValidCards");
+    			validC = params.get("ValidCards");
+    		if(params.containsKey("ValidPlayers"))
+    			validP = params.get("ValidPlayers");
 
-    		CardList humanlist = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-    		CardList computerlist = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+    		CardList humanlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+    		CardList computerlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 
-    		humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
-    		computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
+    		humanlist = humanlist.getValidCards(validC.split(","), source.getController(), source);
+    		computerlist = computerlist.getValidCards(validC.split(","), source.getController(), source);
 
     		humanlist = humanlist.getNotKeyword("Indestructible");
     		computerlist = computerlist.getNotKeyword("Indestructible");
-
+    		
+    		//abCost stuff that should probably be centralized...
     		if (abCost != null){
     			// AI currently disabled for some costs
     			if (abCost.getSacCost()){ 
@@ -558,23 +561,22 @@ public class AbilityFactory_DealDamage {
 
     		if (!ComputerUtil.canPayCost(sa))
     			return false;
+    		/////
+    		
+    		//if we can kill human, do it
+    		if((validP.contains("Each") || validP.contains("EachOpponent")) && AllZone.HumanPlayer.getLife() <= dmg) {
+    			return true;
+    		}
 
     		 // prevent run-away activations - first time will always return true
     		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 
-    		 // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
-    		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
-    			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
-    				 return false;
-    		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
-    		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluateCreatureList(humanlist))
-    			 return false;
+    		 chance &= AllZone.ComputerPlayer.getLife() > dmg && !(humanlist.size() == 0 && 0 < computerlist.size());
 
     		 Ability_Sub subAb = sa.getSubAbility();
     		 if (subAb != null)
     		 	chance &= subAb.chkAI_Drawback();
 
     		 return ((r.nextFloat() < .6667) && chance);
-		 */
 	}
 }
