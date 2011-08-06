@@ -641,7 +641,7 @@ public class Cost_Payment {
         	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCost("0"); 
         	} else {
-    		    String mana = payment.getCost().getMana();
+    		    String mana = payment.getCost().getMana().replace("X", "").trim();
         		manaCost = new ManaCost(mana);
         		manaCost.increaseColorlessMana(manaToAdd);
         	}
@@ -696,7 +696,8 @@ public class Cost_Payment {
 		    @Override
 		    public void showMessage() {
 		        ButtonUtil.enableOnlyCancel();
-		        AllZone.Display.showMessage("Pay Mana Cost: " + mana.toString());
+		        String displayMana = mana.toString().replace("X", "").trim();
+		        AllZone.Display.showMessage("Pay Mana Cost: " + displayMana);
 		        if(mana.isPaid()) 
 		        	done(); 
 		    }

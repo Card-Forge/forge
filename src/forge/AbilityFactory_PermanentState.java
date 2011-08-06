@@ -133,57 +133,15 @@ public class AbilityFactory_PermanentState {
 		Card source = sa.getSourceCard();
 		
 		Random r = new Random();
-		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()+1);
 		
 		if (tgt == null){
 			if (sa.getSourceCard().isUntapped())
 				return false;
 		}
 		else{
-			tgt.resetTargets();
-			CardList untapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			untapList = untapList.filter(AllZoneUtil.tapped);
-			untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
-			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
-			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
-			untapList = untapList.getValidCards(tappablePermanents, source.getController(), source);
-
-			if (untapList.size() == 0)
+			if (!untapPrefTargeting(tgt, af, sa, false))
 				return false;
-			
-			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
-				Card choice = null;
-				
-				if (untapList.size() == 0){
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				if (untapList.getNotType("Creature").size() == 0)
-	        		choice = CardFactoryUtil.AI_getBestCreature(untapList); //if only creatures take the best
-	        	else
-	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(untapList, af.getHostCard(), false);
-				
-				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				untapList.remove(choice);
-				tgt.addTarget(choice);
-			}
 		}
 		
         Ability_Sub subAb = sa.getSubAbility();
@@ -193,10 +151,36 @@ public class AbilityFactory_PermanentState {
 		return randomReturn;
 	}
 	
+	public static boolean untapTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Target tgt = sa.getTarget();
+		
+		if (tgt == null){
+			if (mandatory)
+				return true;
+			
+			// todo: use Defined to determine, if this is an unfavorable result
+			
+			return true;
+		}
+		else{
+			if (untapPrefTargeting(tgt, af, sa, mandatory)){
+				return true;
+			}
+			else if (mandatory){
+				// not enough preferred targets, but mandatory so keep going:
+				return untapUnpreferredTargeting(af, sa, mandatory);
+			}
+		}
+		
+		return false;
+	}
+	
 	public static boolean untapPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
 		// AI cannot use this properly until he can use SAs during Humans turn
 		Target tgt = af.getAbTgt();
-		Card source = sa.getSourceCard();
 
 		boolean randomReturn = true;
 		
@@ -204,49 +188,8 @@ public class AbilityFactory_PermanentState {
 			// who cares if its already untapped, it's only a subability?
 		}
 		else{
-			CardList untapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			untapList = untapList.filter(AllZoneUtil.tapped);
-			untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
-			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
-			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
-			untapList = untapList.getValidCards(tappablePermanents, source.getController(), source);
-
-			if (untapList.size() == 0)
+			if (!untapPrefTargeting(tgt, af, sa, false))
 				return false;
-			
-			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
-				Card choice = null;
-				
-				if (untapList.size() == 0){
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				if (untapList.getNotType("Creature").size() == 0)
-	        		choice = CardFactoryUtil.AI_getBestCreature(untapList); //if only creatures take the best
-	        	else
-	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(untapList, af.getHostCard(), false);
-				
-				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				untapList.remove(choice);
-				tgt.addTarget(choice);
-			}
 		}
 		
         Ability_Sub subAb = sa.getSubAbility();
@@ -254,6 +197,132 @@ public class AbilityFactory_PermanentState {
         	randomReturn &= subAb.chkAI_Drawback();
 		
 		return randomReturn;
+	}
+	
+	public static boolean untapPrefTargeting(Target tgt, AbilityFactory af, SpellAbility sa, boolean mandatory){
+		Card source = sa.getSourceCard();
+		
+		CardList untapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+		untapList = untapList.filter(AllZoneUtil.tapped);
+		untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
+		// filter out enchantments and planeswalkers, their tapped state doesn't matter.
+		String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
+		untapList = untapList.getValidCards(tappablePermanents, source.getController(), source);
+
+		if (untapList.size() == 0)
+			return false;
+		
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
+			Card choice = null;
+			
+			if (untapList.size() == 0){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			if (untapList.getNotType("Creature").size() == 0)
+        		choice = CardFactoryUtil.AI_getBestCreature(untapList); //if only creatures take the best
+        	else
+        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(untapList, af.getHostCard(), false);
+			
+			if (choice == null){	// can't find anything left
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			untapList.remove(choice);
+			tgt.addTarget(choice);
+		}
+		return true;
+	}
+	
+	public static boolean untapUnpreferredTargeting(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		Card source = sa.getSourceCard();
+		Target tgt = sa.getTarget();
+		
+		CardList list = AllZoneUtil.getCardsInPlay();
+		
+		list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
+		list = list.getTargetableCards(source);
+		
+		// filter by enchantments and planeswalkers, their tapped state doesn't matter.
+		String[] tappablePermanents = {"Enchantment", "Planeswalker"}; 
+		CardList tapList = list.getValidCards(tappablePermanents, source.getController(), source);
+
+		if (untapTargetList(source, tgt, af, sa, mandatory, tapList))
+			return true;
+		
+		// try to just tap already tapped things
+		tapList = list.filter(AllZoneUtil.untapped);
+		
+		if (untapTargetList(source, tgt, af, sa, mandatory, tapList))
+			return true;
+		
+		// just tap whatever we can
+		tapList = list;
+		
+		if (untapTargetList(source, tgt, af, sa, mandatory, tapList))
+			return true;
+		
+		return false;
+	}
+	
+	public static boolean untapTargetList(Card source, Target tgt, AbilityFactory af, SpellAbility sa, boolean mandatory, CardList tapList){
+		for(Card c : tgt.getTargetCards())
+			tapList.remove(c);
+		
+		if (tapList.size() == 0)
+			return false;
+		
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)){ 
+			Card choice = null;
+			
+			if (tapList.size() == 0){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(source, sa) || tgt.getNumTargeted() == 0){
+					if (!mandatory)
+						tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			if (tapList.getNotType("Creature").size() == 0)
+        		choice = CardFactoryUtil.AI_getBestCreature(tapList); //if only creatures take the best
+        	else
+        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
+			
+			if (choice == null){	// can't find anything left
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					if (!mandatory)
+						tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			tapList.remove(choice);
+			tgt.addTarget(choice);
+		}
+		
+		return true;
 	}
 	
 	public static void untapResolve(final AbilityFactory af, final SpellAbility sa){
@@ -428,50 +497,8 @@ public class AbilityFactory_PermanentState {
 		}
 		else{
 			tgt.resetTargets();
-			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-			tapList = tapList.filter(AllZoneUtil.untapped);
-			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
-			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
-			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
-			tapList = tapList.getValidCards(tappablePermanents, source.getController(), source);
-			tapList = tapList.getTargetableCards(source);
-
-			if (tapList.size() == 0)
+			if (!tapPrefTargeting(source, tgt, af, sa, false))
 				return false;
-			
-			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
-				Card choice = null;
-				
-				if (tapList.size() == 0){
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				if (tapList.getNotType("Creature").size() == 0)
-	        		choice = CardFactoryUtil.AI_getBestCreature(tapList); //if only creatures take the best
-	        	else
-	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
-				
-				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				tapList.remove(choice);
-				tgt.addTarget(choice);
-			}
 		}
 		
         Ability_Sub subAb = sa.getSubAbility();
@@ -479,6 +506,34 @@ public class AbilityFactory_PermanentState {
         	randomReturn &= subAb.chkAI_Drawback();
 		
 		return randomReturn;
+	}
+	
+	public static boolean tapTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Target tgt = sa.getTarget();
+		Card source = sa.getSourceCard();
+		
+		if (tgt == null){
+			if (mandatory)
+				return true;
+			
+			// todo: use Defined to determine, if this is an unfavorable result
+			
+			return true;
+		}
+		else{
+			if (tapPrefTargeting(source, tgt, af, sa, mandatory)){
+				return true;
+			}
+			else if (mandatory){
+				// not enough preferred targets, but mandatory so keep going:
+				return tapUnpreferredTargeting(af, sa, mandatory);
+			}
+		}
+		
+		return false;
 	}
 	
 	public static boolean tapPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
@@ -493,49 +548,9 @@ public class AbilityFactory_PermanentState {
 		}
 		else{
 			// target section, maybe pull this out?
-			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			tapList = tapList.filter(AllZoneUtil.untapped);
-			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
-			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
-			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
-			tapList = tapList.getValidCards(tappablePermanents, source.getController(), source);
-
-			if (tapList.size() == 0)
+			tgt.resetTargets();
+			if (!tapPrefTargeting(source, tgt, af, sa, false))
 				return false;
-			
-			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
-				Card choice = null;
-				
-				if (tapList.size() == 0){
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				if (tapList.getNotType("Creature").size() == 0)
-	        		choice = CardFactoryUtil.AI_getBestCreature(tapList); //if only creatures take the best
-	        	else
-	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
-				
-				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-						tgt.resetTargets();
-						return false;
-					}
-					else{
-						// todo is this good enough? for up to amounts?
-						break;
-					}
-				}
-				
-				tapList.remove(choice);
-				tgt.addTarget(choice);
-			}
 		}
 		
         Ability_Sub subAb = sa.getSubAbility();
@@ -543,6 +558,136 @@ public class AbilityFactory_PermanentState {
         	randomReturn &= subAb.chkAI_Drawback();
 		
 		return randomReturn;
+	}
+	
+	public static boolean tapPrefTargeting(Card source, Target tgt, AbilityFactory af, SpellAbility sa, boolean mandatory){
+		CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+		tapList = tapList.filter(AllZoneUtil.untapped);
+		tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
+		// filter out enchantments and planeswalkers, their tapped state doesn't matter.
+		String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
+		tapList = tapList.getValidCards(tappablePermanents, source.getController(), source);
+		tapList = tapList.getTargetableCards(source);
+
+		if (tapList.size() == 0)
+			return false;
+		
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)){ 
+			Card choice = null;
+			
+			if (tapList.size() == 0){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(source, sa) || tgt.getNumTargeted() == 0){
+					if (!mandatory)
+						tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			if (tapList.getNotType("Creature").size() == 0)
+        		choice = CardFactoryUtil.AI_getBestCreature(tapList); //if only creatures take the best
+        	else
+        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
+			
+			if (choice == null){	// can't find anything left
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					if (!mandatory)
+						tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			tapList.remove(choice);
+			tgt.addTarget(choice);
+		}
+		
+		return true;
+	}
+	
+	public static boolean tapUnpreferredTargeting(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		Card source = sa.getSourceCard();
+		Target tgt = sa.getTarget();		
+		
+		CardList list = AllZoneUtil.getCardsInPlay();
+		list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
+		list = list.getTargetableCards(source);
+		
+		// filter by enchantments and planeswalkers, their tapped state doesn't matter.
+		String[] tappablePermanents = {"Enchantment", "Planeswalker"}; 
+		CardList tapList = list.getValidCards(tappablePermanents, source.getController(), source);
+
+		if (tapTargetList(af, sa, tapList, mandatory))
+			return true;
+		
+		// try to just tap already tapped things
+		tapList = list.filter(AllZoneUtil.tapped);
+		
+		if (tapTargetList(af, sa, tapList, mandatory))
+			return true;
+		
+		// just tap whatever we can
+		tapList = list;
+		
+		if (tapTargetList(af, sa, tapList, mandatory))
+			return true;
+		
+		return false;
+	}
+	
+	public static boolean tapTargetList(AbilityFactory af, SpellAbility sa, CardList tapList, boolean mandatory){
+		Card source = sa.getSourceCard();
+		Target tgt = sa.getTarget();
+		
+		for(Card c : tgt.getTargetCards())
+			tapList.remove(c);
+		
+		if (tapList.size() == 0)
+			return false;
+		
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)){ 
+			Card choice = null;
+			
+			if (tapList.size() == 0){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(source, sa) || tgt.getNumTargeted() == 0){
+					if (!mandatory)
+						tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			if (tapList.getNotType("Creature").size() == 0)
+        		choice = CardFactoryUtil.AI_getBestCreature(tapList); //if only creatures take the best
+        	else
+        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
+			
+			if (choice == null){	// can't find anything left
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					if (!mandatory)
+						tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			tapList.remove(choice);
+			tgt.addTarget(choice);
+		}
+		
+		return true;
 	}
 	
 	public static void tapResolve(final AbilityFactory af, final SpellAbility sa){
@@ -600,7 +745,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return untapAllCanPlayAI(af, this);
+				return untapAllTrigger(af, this, mandatory);
 			}
 
 		};
@@ -663,6 +808,17 @@ public class AbilityFactory_PermanentState {
 		return false;
 	}
 
+	public static boolean untapAllTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		if (mandatory)
+			return true;
+		
+		
+		return false;
+	}
+	
 	private static String untapAllStackDescription(AbilityFactory af, SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		// when getStackDesc is called, just build exactly what is happening
@@ -709,7 +865,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return tapAllCanPlayAI(af, this);
+				return tapAllTrigger(af, this, mandatory);
 			}
 
 		};
@@ -796,30 +952,35 @@ public class AbilityFactory_PermanentState {
 	}
 
 	private static boolean tapAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-		/*
-		 * All cards using this currently have SVar:RemAIDeck:True
-		 */
-		return false;
+		// If tapping all creatures do it either during declare attackers of AIs turn
+		// or during upkeep/begin combat?
 		
-		//Here is the code used in the keyword version:
-		/*
-		if (!ComputerUtil.canPayCost(this) || !super.canPlayAI())
+		
+		if (!ComputerUtil.canPayCost(sa))
 			return false;
 
-		CardList hCards = getTargets();
+		Card source = sa.getSourceCard();
+		HashMap<String,String> params = af.getMapParams();
+
+		String valid = "";
+		if(params.containsKey("ValidCards")) 
+			valid = params.get("ValidCards");
+		
+		
+		CardList validTappables = getTapAllTargets(valid, source);
 
 		Random r = new Random();
 		boolean rr = false;
-		if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+		if (r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()))
 			rr = true;
 
-		if(hCards.size() > 0) {
-			CardList human = hCards.filter(new CardListFilter() {
+		if(validTappables.size() > 0) {
+			CardList human = validTappables.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.getController().equals(AllZone.HumanPlayer);
 				}
 			});
-			CardList compy = hCards.filter(new CardListFilter() {
+			CardList compy = validTappables.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.getController().equals(AllZone.HumanPlayer);
 				}
@@ -829,17 +990,16 @@ public class AbilityFactory_PermanentState {
 			}
 		}
 		return false;
-		*/
-		
-		/*private CardList getTargets() {
-        			CardList tmpList = AllZoneUtil.getCardsInPlay();
-        			tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
-        			tmpList = tmpList.getTargetableCards(card);
-        			tmpList = tmpList.filter(AllZoneUtil.untapped);
-        			return tmpList;
-        		}
-		 */
 	}
+
+	private static CardList getTapAllTargets(String valid, Card source) {
+		CardList tmpList = AllZoneUtil.getCardsInPlay();
+		tmpList = tmpList.getValidCards(valid, source.getController(), source);
+		tmpList = tmpList.getTargetableCards(source);
+		tmpList = tmpList.filter(AllZoneUtil.untapped);
+		return tmpList;
+	}
+
 
 	private static String tapAllStackDescription(AbilityFactory af, SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
@@ -860,6 +1020,46 @@ public class AbilityFactory_PermanentState {
 			sb.append(subAb.getStackDescription());
 
 		return sb.toString();
+	}
+	
+	public static boolean tapAllTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		if (mandatory)
+			return true;
+		
+		Card source = sa.getSourceCard();
+		HashMap<String,String> params = af.getMapParams();
+
+		String valid = "";
+		if(params.containsKey("ValidCards")) 
+			valid = params.get("ValidCards");
+		
+		CardList validTappables = getTapAllTargets(valid, source);
+
+		Random r = new Random();
+		boolean rr = false;
+		if (r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()))
+			rr = true;
+
+		if(validTappables.size() > 0) {
+			CardList human = validTappables.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getController().equals(AllZone.HumanPlayer);
+				}
+			});
+			CardList compy = validTappables.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getController().equals(AllZone.HumanPlayer);
+				}
+			});
+			if(human.size() > compy.size()) {
+				return rr;
+			}
+		}
+		
+		return false;
 	}
 	
 	private static boolean tapAllPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
