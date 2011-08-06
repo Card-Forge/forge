@@ -88,7 +88,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         //center window on the screen
         Dimension screen = this.getToolkit().getScreenSize();
         setBounds(screen.width / 4, 50, //position
-                500, 660); //size
+                500, 615); //size
         
         //if user closes this window, go back to "Quest Options" screen
         this.addWindowListener(new WindowAdapter() {
@@ -250,12 +250,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         deckComboBox.setBounds(new Rectangle(98, 152, 185, 29));
         petComboBox.setBounds(new Rectangle(338, 437, 142, 38));
         smoothLandCheckBox.setText("Stack AI land");
-        smoothLandCheckBox.setBounds(new Rectangle(154, 455, 153, 21));
+        smoothLandCheckBox.setBounds(new Rectangle(80, 490, 153, 21));
         //smoothLandCheckBox.setSelected(true);
         resizeCheckbox.setText("Resizable Game Area");
-        resizeCheckbox.setBounds(new Rectangle(154, 424, 165, 24));
+        resizeCheckbox.setBounds(new Rectangle(80, 449, 165, 24));
         millLoseCheckBox.setText("Milling = Loss Condition");
-        millLoseCheckBox.setBounds(new Rectangle(154, 484, 190, 25));
+        millLoseCheckBox.setBounds(new Rectangle(80, 529, 190, 25));
         
         //resizeCheckbox.setSelected(true);
         this.getContentPane().add(rankLabel, null);
