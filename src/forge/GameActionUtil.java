@@ -9984,8 +9984,8 @@ public class GameActionUtil {
 				}
 				else
 				{
-					c.setBaseAttack(5);
-					c.setBaseDefense(5);
+					c.setBaseAttack(3);
+					c.setBaseDefense(10);
 					c.addNonStackingIntrinsicKeyword("Vigilance");
 				}
 			}
