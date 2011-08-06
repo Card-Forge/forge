@@ -1160,7 +1160,7 @@ public class GameAction {
             AllZone.Computer_Library.setCards(AllZone.Computer_Library.getCards());
             this.shuffle(Constant.Player.Computer);
         }
-        
+        seeWhoPlaysFirst(); // New code to determine who goes first. Delete this if it doesn't work properly
         for(int i = 0; i < 7; i++) {
             this.drawCard(Constant.Player.Computer);
             this.drawCard(Constant.Player.Human);
@@ -1191,14 +1191,15 @@ public class GameAction {
         
         try {
             //mana weave, total of 7 land
-            library.add(7, land.get(0));
-            library.add(8, land.get(1));
-            library.add(9, land.get(2));
-            library.add(10, land.get(3));
-            library.add(11, land.get(4));
+        	//  The Following have all been reduced by 1, to account for the computer starting first.
+            library.add(6, land.get(0));
+            library.add(7, land.get(1));
+            library.add(8, land.get(2));
+            library.add(9, land.get(3));
+            library.add(10, land.get(4));
             
-            library.add(13, land.get(5));
-            library.add(16, land.get(6));
+            library.add(12, land.get(5));
+            library.add(15, land.get(6));
         } catch(IndexOutOfBoundsException e) {
             System.err.println("Error: cannot smooth mana curve, not enough land");
             return in;
@@ -1304,33 +1305,44 @@ public class GameAction {
     
     
     //decides who goes first when starting another game, used by newGame()
-    public void chooseWhoPlaysFirst() {
-        //lets the user decides who plays first
-        boolean humanChoose = false;
-        if(Constant.Runtime.WinLose.getWin() == 0 && Constant.Runtime.WinLose.getLose() == 0) humanChoose = MyRandom.random.nextBoolean();
-        else if(!Constant.Runtime.WinLose.didWinRecently()) humanChoose = true;
-        
-        //does the player go first?
-        boolean humanFirst;
-        
-        if(humanChoose) {
-            int n = JOptionPane.showConfirmDialog(null, "Do you want to play first?", "",
-                    JOptionPane.YES_NO_OPTION);
-            if(n == JOptionPane.YES_OPTION) humanFirst = true;
-            else humanFirst = false;
-        } else //computer randomly decides who goes first
-        humanFirst = MyRandom.random.nextBoolean();
-        
-        String message;
-        if(humanFirst) message = "You play first";
+    public void seeWhoPlaysFirst() {
+
+    	CardList HLibrary = new CardList(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human).getCards());
+        HLibrary = HLibrary.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return !c.isLand();
+            }
+        });
+    	CardList CLibrary = new CardList(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).getCards());
+        CLibrary = CLibrary.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return !c.isLand();
+            }
+        });
+        Card HumanCut = null;
+        Card ComputerCut = null;
+        if(HLibrary.size() > 0) HumanCut = HLibrary.get(MyRandom.random.nextInt(HLibrary.size()));
         else {
-            message = "Computer plays first";
-            AllZone.Phase.setPhase(Constant.Phase.Main1, Constant.Player.Computer);
+        	AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
+        	JOptionPane.showMessageDialog(null, "Human has no cards with a converted mana cost in library." + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+        	return;
+        }
+        if(CLibrary.size() > 0) ComputerCut = CLibrary.get(MyRandom.random.nextInt(CLibrary.size()));
+        else {
+        	JOptionPane.showMessageDialog(null, "Computer has no cards with a converted mana cost in library." + "\r\n" + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
+        	return;
         }
         
-        //show message if player doesn't get to choose
-        if(!humanChoose) JOptionPane.showMessageDialog(null, message);
-    }//choooseWhoPlaysFirst()
+        StringBuilder sb = new StringBuilder();
+        sb.append("Human cuts his / her deck to : " + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
+        sb.append("Computer cuts it's deck to : " + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");
+        if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) > CardUtil.getConvertedManaCost(HumanCut.getManaCost()))
+        {
+        	AllZone.Phase.setPhase(Constant.Phase.Untap, Constant.Player.Computer);
+        	JOptionPane.showMessageDialog(null, sb + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+        } else JOptionPane.showMessageDialog(null, sb + "\r\n" + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
+        	
+    }//seeWhoPlaysFirst()
     
     //if Card had the type "Aura" this method would always return true, since local enchantments are always attached to something
     //if Card is "Equipment", returns true if attached to something
