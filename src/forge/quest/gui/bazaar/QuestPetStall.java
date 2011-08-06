@@ -25,7 +25,7 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
             if (pet.getLevel() < pet.getMaxLevel()){
                 itemList.add(new QuestAbstractBazaarItem(
                         pet.getName(),
-                        pet.getUpgradeDescription(), 
+                        formatDescription(pet),
                         pet.getUpgradePrice(),
                         GuiUtils.getIconFromFile(pet.getImageName())) {
                     @Override
@@ -37,6 +37,17 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
         }
 
         return itemList;
+    }
+
+    private String formatDescription(QuestPetAbstract pet) {
+        String description = "<html>"+
+                "<em>"+pet.getDescription()+"</em><br>" + pet.getUpgradeDescription()+
+                "<br><br><u>Current stats:</u> " + pet.getStats()+
+                "<br><u>Upgraded stats:</u> " + pet.getUpgradedStats()+
+                "</html>";
+        
+
+        return description;
     }
 
 

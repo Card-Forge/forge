@@ -30,6 +30,9 @@ public abstract class QuestPetAbstract implements Comparable{
     public String getStats(){
         return getAllStats()[level];
     }
+    public String getUpgradedStats(){
+        return getAllStats()[level+1];
+    }
 
 
     public int getLevel() {

@@ -50,7 +50,7 @@ public class QuestPetCrocodile extends QuestPetAbstract{
 
     public QuestPetCrocodile() {
         super("Crocodile",
-                "With its razor sharp teeth, this swamp-dwelling monster is extremely dangerous",
+                "With its razor sharp teeth, this swamp-dwelling monster is extremely dangerous.",
                 4);
     }
 

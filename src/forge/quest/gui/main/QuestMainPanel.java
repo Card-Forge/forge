@@ -306,6 +306,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
                     questData.getPetManager().usePlant=plantBox.isSelected();
                 }
             });
+
+            GuiUtils.addGap(petPanel, 10);
             petPanel.add(this.plantBox);
 
             matchPanel.add(petPanel);
