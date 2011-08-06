@@ -1600,6 +1600,10 @@ public class CombatUtil {
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
+        } else if(a.getName().equals("Drelnoch") && !a.getCreatureBlockedThisTurn()) {
+            String player = a.getController();
+            AllZone.GameAction.drawCard(player);
+            AllZone.GameAction.drawCard(player);
         } else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
                 && !a.getCreatureBlockedThisTurn()) {
             a.untap();

@@ -33,3 +33,8 @@
 [T]w_0_1_goat.jpg		http://www.magickartenmarkt.de/img/cards/Eventide/goat_token_white_01.jpg
 [T]w_1_1_soldier.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/soldier_token_white_11.jpg
 [T]w_5_5_giant_warrior.jpg		http://www.magickartenmarkt.de/img/cards/Morningtide/giant_warrior_token.jpg
+[T]c_3_4_gargoyle.jpg		http://www.mtgmintcard.com/images/products/458/MAGIC-THE-GATHERING-GARGOYLE-TOKEN-M10C8.jpg
+[T]g_1_1_insect.jpg		http://www.mtgmintcard.com/images/products/413/MAGIC-THE-GATHERING-INSECT-TOKEN-M10C6.jpg
+[T]g_1_1_snake.jpg		http://www.mtgmintcard.com/images/products/408/MAGIC-THE-GATHERING-SNAKE-TOKEN-ZENC112.jpg
+[T]w_1_1_kor_soldier.jpg		http://www.mtgmintcard.com/images/products/396/MAGIC-THE-GATHERING-KOR-SOLDIER-TOKEN-ZENC103.jpg
+[T]w_4_4_elemental.jpg		http://www.mtgmintcard.com/images/products/286/MAGIC-THE-GATHERING-TOKEN-ELEMENTAL-TOKEN-LORC130.jpg

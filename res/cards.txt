@@ -1,3 +1,9 @@
+Drelnoch
+4 U
+Creature Yeti Mutant
+Whenever Drelnoch becomes blocked, you may draw two cards.
+3/3
+
 Psychic Drain
 X U B
 Sorcery
@@ -386,7 +392,7 @@ SVar:X:Count$xPaid
 
 Fault Line
 X R R
-Sorcery
+Instant
 no text
 
 Braingeyser
