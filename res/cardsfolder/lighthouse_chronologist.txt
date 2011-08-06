@@ -1,8 +1,9 @@
 Name:Lighthouse Chronologist
 ManaCost:1 U
 Types:Creature Human Wizard
-Text:LEVEL 4-6 2/4 LEVEL 7+ 3/5 At the beginning of each end step, if it's not your turn, take an extra turn after this one.
+Text:no text
 PT:1/3
+K:stSetPT:1:3:LevelGE4:2:4:LevelGE7:3:5:LEVEL 4-6 2/4 LEVEL 7+ 3/5 At the beginning of each end step, if it's not your turn, take an extra turn after this one.
 K:Level up:U
 K:maxLevel:7
 SVar:Rarity:Mythic

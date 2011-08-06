@@ -70,7 +70,7 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Leyline of Singularity", new String[] {"Leyline_of_Singularity"});
 		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
-		cardToEffectsList.put("Lighthouse Chronologist", new String[] {"Lighthouse_Chronologist"});
+		//cardToEffectsList.put("Lighthouse Chronologist", new String[] {"Lighthouse_Chronologist"});
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
 		//cardToEffectsList.put("Lord of Extinction", new String[] {"Lord_of_Extinction"});
 		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
@@ -107,7 +107,7 @@ public class StaticEffects
 		
 		//cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
 		//cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
-		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
+		//cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
 		//cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
 		//cardToEffectsList.put("Student of Warfare", new String[]{"Student_of_Warfare"});
 		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
@@ -124,7 +124,7 @@ public class StaticEffects
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
 		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
 		
-		cardToEffectsList.put("Zulaport Enforcer", new String[] {"Zulaport_Enforcer"});
+		//cardToEffectsList.put("Zulaport Enforcer", new String[] {"Zulaport_Enforcer"});
 	}
 	
 	public HashMap<String, String[]> getCardToEffectsList()

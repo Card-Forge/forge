@@ -1,8 +1,10 @@
 Name:Skywatcher Adept
 ManaCost:U
 Types:Creature Merfolk Wizard
-Text:LEVEL 1-2 2/2 Flying LEVEL 3+ 4/2 Flying
+Text:no text
 PT:1/1
+K:stSetPT:1:1:LevelGE1:2:2:LevelGE3:4:2:LEVEL 1-2 2/2 Flying LEVEL 3+ 4/2 Flying
+K:stPumpSelf:Creature.countersGE1LEVEL:0/0/Flying:No Condition:no text
 K:Level up:3
 K:maxLevel:3
 SVar:Rarity:Common

@@ -13206,7 +13206,7 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // Wirewood_Hivemaster
-	
+	/*
 	public static Command Lighthouse_Chronologist  = new Command() {
 		
 		private static final long serialVersionUID = 2627513737024865169L;
@@ -13236,7 +13236,8 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	*/
+	/*
 	public static Command Skywatcher_Adept  = new Command() {
 		private static final long serialVersionUID = -7568530551652446195L;
 
@@ -13268,6 +13269,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	/*
 	public static Command Caravan_Escort  = new Command() {
 		private static final long serialVersionUID = -6996623102170747897L;
@@ -13500,7 +13502,7 @@ public class GameActionUtil {
 	 * Level up 4
 	 * LEVEL 1-2 3/3
 	 * LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures.
-	 */
+	 *
 	public static Command Zulaport_Enforcer  = new Command() {
 		private static final long serialVersionUID = -679141054963080569L;
 
@@ -13525,6 +13527,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	/*
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
@@ -16048,7 +16051,7 @@ public class GameActionUtil {
 		
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Lhurgoyf", Lhurgoyf);
-		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
+		//commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Liu_Bei", Liu_Bei);
 		//commands.put("Lord_of_Extinction", Lord_of_Extinction);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);
@@ -16085,7 +16088,7 @@ public class GameActionUtil {
 		
 		//commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		//commands.put("Serra_Avatar", Serra_Avatar);
-		commands.put("Skywatcher_Adept", Skywatcher_Adept);
+		//commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		//commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
 		//commands.put("Student_of_Warfare", Student_of_Warfare);
@@ -16102,7 +16105,7 @@ public class GameActionUtil {
 		
 		commands.put("Windwright_Mage", Windwright_Mage);
 		
-		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
+		//commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		
 		///The commands above are in alphabetical order by cardname.
 	}

@@ -1,11 +1,14 @@
 Name:Zulaport Enforcer
 ManaCost:B
 Types:Creature Human Warrior
-Text:LEVEL 1-2 3/3 LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures.
+Text:no text
 PT:1/1
+K:stSetPT:1:1:LevelGE1:3:3:LevelGE3:5:5:LEVEL 1-2 3/3 LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures.
+K:stPumpSelf:Creature.countersGE3LEVEL:0/0/CARDNAME can't be blocked except by black creatures.:No Condition:no text
 K:Level up:4
 K:maxLevel:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zulaport_enforcer.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/133.jpg
 End
+
