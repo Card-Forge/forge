@@ -2,7 +2,7 @@ Name:Brilliant Plan
 ManaCost:4 U
 Types:Sorcery
 Text:no text
-K:spDrawCards:3:Draw three cards.:Brilliant Plan - Draw 3 cards.
+A:SP$Draw | Cost$ 4 U | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/brilliant_plan.jpg
 End
