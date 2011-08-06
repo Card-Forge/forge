@@ -912,6 +912,7 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
+            	if(choices.size() == 0) stop();
                 AllZone.Display.showMessage(message);
                 ButtonUtil.disableAll();
             }
@@ -919,7 +920,6 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(choices.contains(card)) {
-                    //AllZone.getZone(card).remove(card);
                     AllZone.GameAction.sacrifice(card);
                     stop();
                 }
@@ -2566,6 +2566,7 @@ public class CardFactoryUtil {
             @Override
             public void showMessage() {
             	if (AllZone.Human_Hand.getCards().length == 0) stop();
+            	if( nCards == 0) stop();
             	
                 AllZone.Display.showMessage("Select a card to discard");
                 ButtonUtil.disableAll();
