@@ -3,7 +3,8 @@ ManaCost:2
 Types:Legendary Artifact Equipment
 Text:Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
 K:abPumpEquipped SubCounter<1/CHARGE>:+2/+2
-A:AB$Pump | Cost$ SubCounter<1/CHARGE> | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
+#A:AB$Pump | Cost$ SubCounter<1/CHARGE> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Equipped creature gets +2/+2 until end of turn.
+A:AB$Pump | Cost$ SubCounter<1/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 A:AB$GainLife | Cost$ SubCounter<1/CHARGE> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umezawas_jitte.jpg

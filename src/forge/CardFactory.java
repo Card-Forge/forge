@@ -1593,6 +1593,8 @@ public class CardFactory implements NewConstants {
         	}
         }
         
+        // We only have 1 card left out of the approximately 450+ ab/spPump cards to convert over to AbilityFactory.
+        // Umezawa's Jitte has an ability that will require some changes to AF_Pump.
         while(hasKeyword(card, "abPump") != -1) {
             int n = hasKeyword(card, "abPump");
             if(n != -1) {
