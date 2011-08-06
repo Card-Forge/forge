@@ -1,3 +1,9 @@
+Psychic Venom
+1 U
+Enchantment Aura
+Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.
+Enchant Land Curse
+
 Wanderlust
 2 G
 Enchantment Aura

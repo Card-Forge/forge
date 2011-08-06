@@ -111,6 +111,8 @@ public class GameActionUtil {
 	}
 
 	public static void executeTapSideEffects(Card c) {
+		
+		final String activePlayer = AllZone.Phase.getActivePlayer();
 
 		/* cards with Tap side effects can be listed here, just like in
 		 * the CardFactory classes
@@ -187,6 +189,27 @@ public class GameActionUtil {
 						}
 					};//Ability
 					ability.setStackDescription(blight.getName()+" - Destroy enchanted land.");
+					AllZone.Stack.add(ability);
+				}
+			}
+		}//end Blight
+		
+		/*
+		 * Psychic Venom - When enchanted land becomes tapped, it deals 2 damage
+		 * to enchanted lands' controller
+		 */
+		if(c.isEnchantedBy("Psychic Venom")) {
+			final ArrayList<Card> cards = c.getEnchantedBy();
+			for(Card card:cards) {
+				final Card source = card;
+				if(card.getName().equals("Psychic Venom")) {
+					Ability ability = new Ability(card, "0") {
+						@Override
+						public void resolve() {
+							AllZone.GameAction.addDamage(activePlayer, source, 2);
+						}
+					};//Ability
+					ability.setStackDescription(card.getName()+" - deals 2 damage to "+activePlayer);
 					AllZone.Stack.add(ability);
 				}
 			}
