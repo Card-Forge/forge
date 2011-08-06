@@ -113,7 +113,7 @@ public class AbilityFactory_Reveal {
 		else
 			sb.append(" ");
 
-		/*
+		
 		ArrayList<Player> tgtPlayers;
 
 		Target tgt = af.getAbTgt();
@@ -121,14 +121,20 @@ public class AbilityFactory_Reveal {
 			tgtPlayers = tgt.getTargetPlayers();
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-		 */
-
-		//TODO - need to update if human targets computer for looking
-
+		
 		sb.append(host.getController()).append(" looks at the top ").append(numToDig);
 		sb.append(" card");
 		if(numToDig != 1) sb.append("s");
-		sb.append(" of his or her library.");
+		sb.append(" of ");
+		if(tgtPlayers.contains(host.getController())) {
+			sb.append("his or her");
+		}
+		else {
+			for(Player p:tgtPlayers) {
+				sb.append(p).append("'s");
+			}
+		}
+		sb.append(" library.");
 
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
