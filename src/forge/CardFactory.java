@@ -902,9 +902,9 @@ public class CardFactory implements NewConstants {
                     }
                     
                     if(NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
-                    sbD.append("+");
+                    	sbD.append("+");
                     else if(NumAttack[0] < 0 || (NumAttack[0] == 0 && NumDefense[0] < 0)) // -0/-1
-                    sbD.append("-");
+                    	sbD.append("-");
                     
                     sbD.append(Math.abs(NumAttack[0]) + "/");
                     
@@ -1068,7 +1068,7 @@ public class CardFactory implements NewConstants {
                         @Override
                         public void resolve() {
                             if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                    && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                                    && (CardFactoryUtil.canTarget(card, getTargetCard()) || !Tgt[0] )) {
                                 final Card[] creature = new Card[1];
                                 if(Tgt[0] == true) creature[0] = getTargetCard();
                                 else creature[0] = card;
