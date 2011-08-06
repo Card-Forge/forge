@@ -5,5 +5,5 @@ Text:Cast CARDNAME only during the declare attackers step and only if you've bee
 A:SP$DamageAll | Cost$ R | NumDmg$ 1 | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | OpponentTurn$ True | ActivatingPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_winds.jpg
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/scorching_winds.jpg
 End
