@@ -8,6 +8,10 @@ public class Input_PayManaCostUtil
   //taps any card that has mana ability, not just land
   public static ManaCost tapCard(Card card, ManaCost manaCost)
   {
+	//make sure computer's lands aren't selected
+	if(card.getController().equals(Constant.Player.Computer))
+		return manaCost;
+	
     if(card instanceof ManaPool) return ((ManaPool)card).subtractMana(manaCost);
 	ArrayList<Ability_Mana> abilities = getManaAbilities(card);
 
@@ -24,6 +28,7 @@ public class Input_PayManaCostUtil
     }
     if(abilities.isEmpty())
     	return manaCost;
+    
     //String color;
     Ability_Mana chosen = abilities.get(0);
     if(1 < abilities.size())
