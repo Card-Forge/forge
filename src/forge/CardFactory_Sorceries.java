@@ -7613,10 +7613,10 @@ public class CardFactory_Sorceries {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Reanimate")) {
-        	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 2940635076296411568L;
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 2940635076296411568L;
 
-				@Override
+                @Override
                 public void resolve() {
                     Card c = getTargetCard();
                     int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
@@ -7631,14 +7631,28 @@ public class CardFactory_Sorceries {
                 }//resolve()
                 
                 @Override
+                public boolean canPlayAI() {
+                    return getCreatures().size() > 0;
+                }
+                
+                @Override
                 public boolean canPlay() {
                     return super.canPlay() && getCreatures().size() > 0;
                 }
                 
                 public CardList getCreatures() {
                     CardList creatures = AllZoneUtil.getCardsInGraveyard();
-                    return creatures.filter(AllZoneUtil.creatures);
-                }
+                    creatures.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) 
+                                    && c.getType().contains("Creature") 
+                                    /* && !c.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.") */ ;
+                        }
+                    });
+                    // The keyword filter above does not work, the one below does work.
+                    creatures = creatures.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                    return creatures;
+                }//getCreatures()
                 
                 @Override
                 public void chooseTargetAI() {
@@ -7646,7 +7660,7 @@ public class CardFactory_Sorceries {
                     Card biggest = creatures.get(0);
                     for(int i = 0; i < creatures.size(); i++)
                         if(biggest.getNetAttack() < creatures.get(i).getNetAttack()) {
-                        	biggest = creatures.get(i);
+                            biggest = creatures.get(i);
                         }
                     setTargetCard(biggest);
                 }
@@ -7655,9 +7669,9 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             
             Input target = new Input() {
-				private static final long serialVersionUID = -5293899159488141547L;
+                private static final long serialVersionUID = -5293899159488141547L;
 
-				@Override
+                @Override
                 public void showMessage() {
                     Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
                     if(check != null) {
@@ -7667,13 +7681,12 @@ public class CardFactory_Sorceries {
                 }//showMessage()
                 
                 public Card[] getCreatures() {
-                	CardList creatures = AllZoneUtil.getCardsInGraveyard();
+                    CardList creatures = AllZoneUtil.getCardsInGraveyard();
                     return creatures.filter(AllZoneUtil.creatures).toArray();
                 }
             };//Input
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Recall")) {
