@@ -20,7 +20,7 @@ public abstract class Player extends MyObservable{
 	protected boolean altLose = false;
 	protected String loseCondition = "";
 	
-	protected boolean bFirstTurn;
+	protected int nTurns = 0;
 	
 	protected Card lastDrawnCard;
 	protected int numDrawnThisTurn = 0;
@@ -40,7 +40,7 @@ public abstract class Player extends MyObservable{
 		preventNextDamage = 0;
 		lastDrawnCard = null;
 		numDrawnThisTurn = 0;
-		bFirstTurn = true;
+		nTurns = 0;
 		altWin = false;
 		altLose = false;
 		winCondition = "";
@@ -57,7 +57,7 @@ public abstract class Player extends MyObservable{
 		lastDrawnCard = null;
 		numDrawnThisTurn = 0;
 		slowtripList = new CardList();
-		bFirstTurn = true;
+		nTurns = 0;
 		altWin = false;
 		altLose = false;
 		winCondition = "";
@@ -653,8 +653,8 @@ public abstract class Player extends MyObservable{
     	slowtripList.add(card);
     }
 	
-    public boolean isFirstTurn() { return bFirstTurn; }
-    public void setFirstTurn(boolean b) { bFirstTurn = b; }
+    public int getTurn() { return nTurns; }
+    public void incrementTurn() { nTurns++; }
     
     ////////////////////////////////
     public abstract void sacrificePermanent(String prompt, CardList choices);

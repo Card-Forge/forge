@@ -21,11 +21,11 @@ public class PhaseUtil {
         AllZone.pwCombat.setDefendingPlayer(turn.getOpponent());
         
         // For tokens a player starts the game with they don't recover from Sum. Sickness on first turn
-        if (!turn.isFirstTurn()){
+        if (turn.getTurn() > 0){
 	        for(int i = 0; i < c.length; i++)
 	            c[i].setSickness(false);
         }
-        turn.setFirstTurn(false);
+        turn.incrementTurn();
         
         // Phasing would happen around here
         

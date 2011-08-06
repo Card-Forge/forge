@@ -406,7 +406,11 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return super.canPlay() && 6 < AllZone.Phase.getTurn();
+                	Player turn = AllZone.Phase.getPlayerTurn();
+                	if (turn.equals(card.getController()) && turn.getTurn() <= 3)
+                		return false;
+                	
+                    return super.canPlay();
                 }
             };
             card.clearSpellAbility();
