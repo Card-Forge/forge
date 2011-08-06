@@ -618,10 +618,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         {
         	Object pet = petComboBox.getSelectedItem();
         	if (pet != null)
-        	{
-        		//System.out.println("Selected Pet:" +pet.toString());
         		questData.setSelectedPet(pet.toString());
-        	}
+        	
         	CardList hCl = QuestUtil.getHumanPlantAndPet(questData);
         	int hLife = QuestUtil.getLife(questData);
             AllZone.GameAction.newGame(human, computer, hCl, new CardList(), hLife, 20, null);
@@ -651,6 +649,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         else
         	Constant.Runtime.Mill[0] = false;
         
+        Object pet = petComboBox.getSelectedItem();
+    	if (pet != null)
+    		questData.setSelectedPet(pet.toString());
     	
     	Gui_Quest_Assignments g = new Gui_Quest_Assignments(this, human);
         g.setVisible(true);

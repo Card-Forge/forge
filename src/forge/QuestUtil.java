@@ -34,10 +34,13 @@ public class QuestUtil {
 	{
 		CardList list = new CardList();
 		
-		if (qd.getSelectedPet().equals("Wolf") && qd.getWolfPetLevel() > 0)
-			list.add(getWolfPetToken(qd.getWolfPetLevel()));
-		else if (qd.getSelectedPet().equals("Croc") && qd.getCrocPetLevel() > 0)
-			list.add(getCrocPetToken(qd.getCrocPetLevel()));
+		if (qd.getSelectedPet() != null)
+		{
+			if (qd.getSelectedPet().equals("Wolf") && qd.getWolfPetLevel() > 0)
+				list.add(getWolfPetToken(qd.getWolfPetLevel()));
+			else if (qd.getSelectedPet().equals("Croc") && qd.getCrocPetLevel() > 0)
+				list.add(getCrocPetToken(qd.getCrocPetLevel()));
+		}
 		
 		if (qd.getPlantLevel() > 0) 
 			list.add(getPlantToken(qd.getPlantLevel()));
