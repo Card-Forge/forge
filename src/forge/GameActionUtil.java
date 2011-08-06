@@ -23,6 +23,7 @@ public class GameActionUtil {
 		
 		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
 		
+		upkeep_Yawgmoth_Demon();
 		upkeep_Lord_of_the_Pit();
 		upkeep_Drop_of_Honey();
 		upkeep_Genesis();
@@ -3265,6 +3266,63 @@ public class GameActionUtil {
 			}
 		}
 	}//damageUpkeepCost
+
+	private static void upkeep_Yawgmoth_Demon() {
+		/*
+		 * At the beginning of your upkeep, you may sacrifice an artifact. If
+		 * you don't, tap Yawgmoth Demon and it deals 2 damage to you.
+		 */
+		final String player = AllZone.Phase.getActivePlayer();
+		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Yawgmoth Demon");
+
+		for(int i = 0; i < cards.size(); i++) {
+			final Card c = cards.get(i);
+
+			final Ability sacrificeArtifact = new Ability(c, "") {
+				@Override
+				public void resolve() {
+					CardList artifacts = AllZoneUtil.getPlayerCardsInPlay(player);
+					artifacts = artifacts.filter(AllZoneUtil.artifacts);
+					
+					if(player.equals(Constant.Player.Human)) {
+						AllZone.InputControl.setInput( new Input() {
+							private static final long serialVersionUID = -1698502376924356936L;
+							public void showMessage() {
+								AllZone.Display.showMessage("Yawgmoth Demon - Select one artifact to sacrifice or be dealt 2 damage");
+								ButtonUtil.enableOnlyCancel();
+							}
+							public void selectButtonCancel() {
+								tapAndDamage(player);
+								stop();
+							}
+							public void selectCard(Card artifact, PlayerZone zone) {
+								//probably need to restrict by controller also
+								if(artifact.isArtifact() && zone.is(Constant.Zone.Play)
+										&& zone.getPlayer().equals(Constant.Player.Human)) {
+									AllZone.GameAction.sacrifice(artifact);
+									stop();
+								}
+							}//selectCard()
+						});//Input
+					}
+					else { //computer
+						Card target = CardFactoryUtil.AI_getCheapestPermanent(artifacts, c, false);
+						if(null == target) {
+							tapAndDamage(player);
+						}
+						else AllZone.GameAction.sacrifice(target);
+					}
+				}//resolve
+
+				private void tapAndDamage(String player) {
+					c.tap();
+					AllZone.GameAction.addDamage(player, c, 2);
+				}
+			};
+			sacrificeArtifact.setStackDescription(c.getName()+" - sacrifice an artifact or "+c.getName()+" becomes tapped and deals 2 damage to you.");
+			AllZone.Stack.add(sacrificeArtifact);
+		}//end for
+	}
 	
 	private static void upkeep_Lord_of_the_Pit() {
 		/*
