@@ -78,6 +78,11 @@ public class GameAction {
         moveTo(hand, c);
     }
     
+    public void moveToPlay(Card c) {
+        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+        moveTo(play, c);
+    }
+    
     public void moveToTopOfLibrary(Card c) {
         PlayerZone p = AllZone.getZone(c);
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());

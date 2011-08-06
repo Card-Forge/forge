@@ -24,6 +24,7 @@ public class GameActionUtil {
 		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
 		
 		upkeep_The_Abyss();
+		upkeep_All_Hallows_Eve();
 		upkeep_Defiler_of_Souls();
 		upkeep_Yawgmoth_Demon();
 		upkeep_Lord_of_the_Pit();
@@ -3627,7 +3628,7 @@ public class GameActionUtil {
 			};//sacrificeCreature
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append(abyss.getName()).append(" - destroy a nonartifact creatur of your choice.");
+			sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
 			sacrificeCreature.setStackDescription(sb.toString());
 			
 			if(abyss_getTargets(player,abyss).size() > 0)
@@ -3641,6 +3642,53 @@ public class GameActionUtil {
 		creats = creats.getTargetableCards(card);
 		return creats;
 	}
+	
+	private static void upkeep_All_Hallows_Eve() {
+		/*
+		 * At the beginning of your upkeep, if All Hallow's Eve is exiled
+		 * with a scream counter on it, remove a scream counter from it.
+		 * If there are no more scream counters on it, put it into your
+		 * graveyard and each player returns all creature cards from his
+		 * or her graveyard to the battlefield.
+		 */
+		final Player player = AllZone.Phase.getPlayerTurn();
+		CardList eves = AllZoneUtil.getPlayerCardsRemovedFromGame(player, "All Hallow's Eve");
+		
+		for(Card c:eves) {
+			final Card eve = c;
+			eve.clearSpellAbility();
+			
+			final Ability hallow = new Ability(eve, "") {
+				@Override
+				public void resolve() {
+					
+					if(AllZone.GameAction.isCardExiled(eve) && eve.getCounters(Counters.SCREAM) > 0) {
+						eve.subtractCounter(Counters.SCREAM, 1);
+
+						if(eve.getCounters(Counters.SCREAM) == 0) {
+							eve.clearReplaceMoveToGraveyardCommandList();
+							AllZone.GameAction.moveToGraveyard(eve);
+
+							CardList compGrave = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+							compGrave = compGrave.filter(AllZoneUtil.creatures);
+							CardList humanGrave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
+							humanGrave = humanGrave.filter(AllZoneUtil.creatures);
+
+							for(Card cc:compGrave) AllZone.GameAction.moveToPlay(cc);
+							for(Card hc:humanGrave) AllZone.GameAction.moveToPlay(hc);
+						}
+					}
+				}//resolve
+			};//sacrificeCreature
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(eve.getName()).append(" - remove a scream counter and return creatures to play.");
+			hallow.setStackDescription(sb.toString());
+			if(AllZone.GameAction.isCardExiled(eve)) {
+				AllZone.Stack.add(hallow);
+			}
+		}//end for
+	}//The Abyss
 
 	private static void upkeep_Defiler_of_Souls() {
 		/*
@@ -5256,15 +5304,24 @@ public class GameActionUtil {
                     && a.get(i).toString().startsWith(
                             "Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
                 final Card thisCard = c;
+                final String kw = a.get(i).toString();
                 Ability ability2 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        if(AllZone.GameAction.isCardInPlay(thisCard)) thisCard.addCounter(Counters.P1P1, 1);
+                    	Counters counter = Counters.P1P1;
+                    	if(kw.contains("+2/+2")) counter = Counters.P2P2;
+                        if(AllZone.GameAction.isCardInPlay(thisCard)) thisCard.addCounter(counter, 1);
                     }
                 }; // ability2
                 
                 StringBuilder sb = new StringBuilder();
-                sb.append(c.getName()).append(" - gets a +1/+1 counter");
+                sb.append(c.getName());
+                if(kw.contains("+2/+2")) {
+                	sb.append(" - gets a +2/+2 counter");
+                }
+                else {
+                	sb.append(" - gets a +1/+1 counter");
+                }
                 ability2.setStackDescription(sb.toString());
                 
                 AllZone.Stack.add(ability2);

@@ -218,6 +218,19 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	/**
+	 * gets a list of all cards with a given name in a certain player's exile
+	 * 
+	 * @param player the player whose exile we want to get
+	 * @param cardName the card name to find in the exile
+	 * @return a CardList containing all cards with that name in the target exile
+	 */
+	public static CardList getPlayerCardsRemovedFromGame(final Player player, final String cardName) {
+		CardList cards = getPlayerCardsRemovedFromGame(player);
+		cards = cards.getName(cardName);
+		return cards;
+	}
+	
 	//////////////////////// LIBRARY
 	
 	/**

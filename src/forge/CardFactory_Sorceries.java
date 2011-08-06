@@ -8011,6 +8011,43 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("All Hallow's Eve")) {
+        	/*
+        	 * Exile All Hallow's Eve with 2 scream counters on it.
+        	 */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 2756905332132706863L;
+
+				@Override
+				public void resolve() {
+					card.addReplaceMoveToGraveyardCommand(new Command() {
+						private static final long serialVersionUID = -1840315433449918025L;
+
+						public void execute() {
+							//when this is in exile, and on the stack, this must get called again...
+							if(!AllZone.GameAction.isCardExiled(card)) {
+								AllZone.GameAction.exile(card);
+								card.addCounter(Counters.SCREAM, 2);
+							}
+						}
+					});
+				}//resolve()
+				
+				public boolean canPlayAI() {
+					CardList compGrave = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+					compGrave = compGrave.filter(AllZoneUtil.creatures);
+					CardList humanGrave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
+					humanGrave = humanGrave.filter(AllZoneUtil.creatures);
+					if(compGrave.size() > humanGrave.size()) return true;
+					else return false;
+				}
+                
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
