@@ -4917,9 +4917,7 @@ public class GameActionUtil {
 				else if(color.equals("red")) color = "R";
 				else if(color.equals("green")) color = "G";
 
-				//CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-				//list = list.getName("Mana Pool");
-				Card mp = AllZone.ManaPool;//list.getCard(0);
+				Card mp = AllZone.ManaPool;
 
 				mp.addExtrinsicKeyword("ManaPool:" + color);
 			}
@@ -5028,25 +5026,24 @@ public class GameActionUtil {
 		final Card crd = c;
 		Card biggest = null;
 		if(c.getController() == AllZone.ComputerPlayer) {
-            CardList Vessels = new CardList();
-            PlayerZone zone = AllZone.getZone(Constant.Zone.Play, c.getController());
-            if(zone != null) {
-            Vessels.addAll(zone.getCards());
-            Vessels = Vessels.getName("Eternity Vessel");
-                 biggest = Vessels.get(0);
-                 for(int i = 0; i < Vessels.size(); i++)
-                     if(biggest.getCounters(Counters.CHARGE) < Vessels.get(i).getCounters(Counters.CHARGE)) biggest = Vessels.get(i);                         
+			CardList vessels = new CardList();
+			PlayerZone zone = AllZone.getZone(Constant.Zone.Play, c.getController());
+			if(zone != null) {
+				vessels.addAll(zone.getCards());
+				vessels = vessels.getName("Eternity Vessel");
+				biggest = vessels.get(0);
+				for(int i = 0; i < vessels.size(); i++)
+					if(biggest.getCounters(Counters.CHARGE) < vessels.get(i).getCounters(Counters.CHARGE)) biggest = vessels.get(i);                         
+			}
 		}
-		}
-        final Card CompVessel = biggest;
+        final Card compVessel = biggest;
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
 				Card Target = null;
 				if(crd.getController() == AllZone.HumanPlayer) Target = crd;
-				else Target = CompVessel;
+				else Target = compVessel;
 				
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(Target.getController());
                         int lifeGain = Target.getCounters(Counters.CHARGE);
                         Target.getController().setLife(lifeGain);
 			}
@@ -5066,7 +5063,7 @@ public class GameActionUtil {
             	Hexmages.addAll(zone.getCards());
             	Hexmages = Hexmages.getName("Vampire Hexmage");
             int clife = AllZone.ComputerPlayer.getLife();			
-			if(CompVessel.getCounters(Counters.CHARGE) > clife && (Hexmages.size() == 0)) AllZone.Stack.add(ability);
+			if(compVessel.getCounters(Counters.CHARGE) > clife && (Hexmages.size() == 0)) AllZone.Stack.add(ability);
 		}
 		}
 
@@ -5087,7 +5084,6 @@ public class GameActionUtil {
 		Ability ability2 = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				//AllZone.GameAction.gainLife(player, power);
 				player.gainLife(power);
 			}
 		}; // ability2
@@ -5180,7 +5176,6 @@ public class GameActionUtil {
                     }
 				}
 				
-				//AllZone.GameAction.gainLife(src.getController(), 3);
 				src.getController().gainLife(3);
 			}
 		}; // ability
@@ -5239,10 +5234,7 @@ public class GameActionUtil {
 				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", src.getController(), "G",
 						new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
 				
-				
 				AllZone.GameAction.mill(opponent,10);
-				
-				//AllZone.GameAction.getPlayerLife(src.getController()).addLife(3);
 			}
 		}; // ability
 		
@@ -5301,7 +5293,6 @@ public class GameActionUtil {
     					Ability ability = new Ability(source, "0") {
     						@Override
     						public void resolve() {
-    							//AllZone.GameAction.addDamage(c.getController(), source, damage);
     							c.getController().addDamage(damage, source);
     						}
     					};
@@ -5442,29 +5433,6 @@ public class GameActionUtil {
 		if (c.getKeyword().contains("Whenever CARDNAME deals combat damage to a player, proliferate."))
 			AllZone.GameAction.proliferate(c, "0");
 		
-		/*
-		if (c.getKeyword().contains("Infect"))
-		{
-			final String player = AllZone.GameAction.getOpponent(c.getController());
-			final int power = c.getNetAttack();
-
-			if(power > 0) {
-				Ability ability2 = new Ability(c, "0") {
-					@Override
-					public void resolve() {
-						if(player.equals(AllZone.HumanPlayer)) 
-							AllZone.Human_PoisonCounter.addPoisonCounters(power);
-						else
-							AllZone.ComputerPlayer.addPoisonCounters(power);
-					}
-				};// ability2
-
-				ability2.setStackDescription(c.getName() + " - " + player + " gets " + power + " poison counter(s).");
-				AllZone.Stack.add(ability2);
-			} // if
-		}
-		*/
-		
 		if(CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles") > 0 && c.getNetAttack() > 0) {
 			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles"); k++) {
 				playerCombatDamage_May_draw(c);
@@ -5505,40 +5473,9 @@ public class GameActionUtil {
 
 	}
 
-	/*
-    public static void executePlayerCombatDmgOptionalEffects(Card[] c)
-    {
-    	for (int i=0;i< c.length;i++)
-    	{
-    		if (c[i].getName().equals("Treva, the Renewer"))
-    		{
-    			SpellAbility[] sa = c[i].getSpellAbility();
-    			if (c[i].getController().equals(AllZone.HumanPlayer))
-    				AllZone.GameAction.playSpellAbility(sa[1]);
-    			else
-    				ComputerUtil.playNoStack(sa[1]);
-    		}
-
-    		else if (c[i].getName().equals("Rootwater Thief"))
-    		{
-    			SpellAbility[] sa = c[i].getSpellAbility();
-    			if (c[i].getController().equals(AllZone.HumanPlayer))
-    				AllZone.GameAction.playSpellAbility(sa[2]); //because sa[1] is the kpump u: flying
-    			else
-    				ComputerUtil.playNoStack(sa[2]);
-    		}
-
-
-    	}//for
-    }
-	 */
-
 	private static void playerCombatDamage_PoisonCounter(Card c, int n) {
-		final Player player = c.getController();
-		final Player opponent = player.getOpponent();
-
-		if(opponent.equals(AllZone.HumanPlayer)) AllZone.HumanPlayer.addPoisonCounters(n);
-		else AllZone.ComputerPlayer.addPoisonCounters(n);
+		final Player opponent = c.getController().getOpponent();
+		opponent.addPoisonCounters(n);
 	}
 
 	private static void playerCombatDamage_Oros(Card c) {
@@ -6168,7 +6105,6 @@ public class GameActionUtil {
 						AllZone.Display.getChoiceOptional("Top card", cl.toArray());
 					};
 					Card top = lib.get(0);
-					//AllZone.GameAction.gainLife(player[0], CardUtil.getConvertedManaCost(top.getManaCost()));
 					player[0].gainLife(CardUtil.getConvertedManaCost(top.getManaCost()));
 					hand.add(top);
 					lib.remove(top);
@@ -6331,11 +6267,7 @@ public class GameActionUtil {
 		PlayerZone AIHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
 		PlayerZone AIPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 
-		CardList list = new CardList();
-		list.addAll(AllZone.Human_Play.getCards());
-		list.addAll(AllZone.Computer_Play.getCards());
-
-		list = list.getName("Aluren");
+		CardList list = AllZoneUtil.getCardsInPlay("Aluren");
 
 		CardList creatures = new CardList();
 
@@ -6510,7 +6442,6 @@ public class GameActionUtil {
         				ability = new Ability(aura, "0") {
         					@Override
         					public void resolve() {
-        						//AllZone.GameAction.addDamage(player, source, 1);
         						player.addDamage(1, source);
         					}
         				};
@@ -6549,7 +6480,6 @@ public class GameActionUtil {
         				ability = new Ability(aura, "0") {
         					@Override
         					public void resolve() {
-        						//AllZone.GameAction.addDamage(player, source, 1);
         						player.addDamage(1, source);
         					}
         				};
@@ -6583,7 +6513,6 @@ public class GameActionUtil {
 						ability = new Ability(aura, "0") {
 							@Override
 							public void resolve() {
-								//AllZone.GameAction.loseLife(player, 1);
 								player.loseLife(1);
 							}
 						};
@@ -6622,7 +6551,6 @@ public class GameActionUtil {
         				ability = new Ability(aura, "0") {
         					@Override
         					public void resolve() {
-        						//AllZone.GameAction.addDamage(player, source, 1);
         						player.addDamage(1, source);
         					}
         				};
@@ -6693,7 +6621,6 @@ public class GameActionUtil {
         		ability2 = new Ability(source, "0") {
         			@Override
         			public void resolve() {
-        				//add an infection counter
         				source.addCounter(Counters.INFECTION, 1);
         			}
         		};
@@ -6733,7 +6660,6 @@ public class GameActionUtil {
         					@Override
         					public void resolve() {
         						int damage = source.getCounters(Counters.INFECTION);
-        						//AllZone.GameAction.addDamage(enchantedCard.getController(), source, damage );
         						enchantedCard.getController().addDamage(damage, source);
         					}
         				};
@@ -6751,7 +6677,6 @@ public class GameActionUtil {
 
 	private static void upkeep_Squee() {
 		final Player player = AllZone.Phase.getActivePlayer();
-		//PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player); //unused
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
 		CardList list = new CardList(graveyard.getCards());
@@ -6998,7 +6923,6 @@ public class GameActionUtil {
 	private static void upkeep_Ratcatcher() {
 		final Player player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		//PlayerZone hand = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
 		CardList creatures = new CardList(library.getCards());
@@ -7060,10 +6984,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					//PlayerZone hand = AllZone.getZone(Constant.Zone.Hand,AllZone.HumanPlayer); //unused
-
 					AllZone.GameAction.discardRandom(opponent, this);
-
 				}
 			}; // ability
 			
@@ -7111,7 +7032,6 @@ public class GameActionUtil {
 
 	private static void upkeep_Cunning_Lethemancer() {
 		final Player player = AllZone.Phase.getActivePlayer();
-		//final String opponent = player.getOpponent();
 
 		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Play, player);
 
@@ -7288,14 +7208,12 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					//PlayerZone play = AllZone.getZone(Constant.Zone.Play,player); //unused
 					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
 					String creatureType = library.get(0).getType().toString();
 
 					if(creatureType.contains("Faerie") || creatureType.contains("Wizard")
 							|| library.get(0).getKeyword().contains("Changeling")) {
-						//AllZone.GameAction.getPlayerLife(opponent).subtractLife(2,F_card);
 						opponent.subtractLife(2, F_card);
 					}
 
@@ -7613,7 +7531,6 @@ public class GameActionUtil {
 				public void resolve() {
 					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-					//AllZone.GameAction.getPlayerLife(player).subtractLife(convertedManaCost,F_card);
 					player.subtractLife(convertedManaCost, F_card);
 
 					// AllZone.GameAction.drawCard(player);
