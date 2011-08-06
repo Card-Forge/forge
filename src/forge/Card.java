@@ -75,6 +75,7 @@ public class Card extends MyObservable {
     
     private boolean						 madness						   = false;
     private boolean						 suspendCast					   = false;
+    private boolean						 suspend						   = false;
     
     private int                          exaltedMagnitude                  = 0;
     
@@ -1801,7 +1802,15 @@ public class Card extends MyObservable {
     	madnessCost = cost;
     }
     
-    public boolean hasSuspendCast() {
+    public boolean hasSuspend() {
+        return suspend;
+    }
+    
+    public void setSuspend(boolean b) {
+    	suspend = b;
+    }
+    
+    public boolean wasSuspendCast() {
         return suspendCast;
     }
     
