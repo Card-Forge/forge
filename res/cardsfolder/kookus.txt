@@ -4,8 +4,8 @@ Types:Creature Djinn
 Text:no text
 PT:3/5
 K:Trample
-A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+namedKeeper of Kookus | PresentCompare$ EQ0 | Execute$ TrigNoKeeper | TriggerDescription$ At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, CARDNAME deals 3 damage to you and attacks this turn if able.
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+namedKeeper of Kookus | PresentCompare$ EQ0 | Execute$ TrigNoKeeper | TriggerDescription$ At the beginning of your upkeep, if you don't control a creature named CARDNAME, CARDNAME deals 3 damage to you and attacks this turn if able.
 SVar:TrigNoKeeper:DB$DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ SVar=DBMustAttack
 SVar:DBMustAttack:DB$Pump | KW$ HIDDEN CARDNAME attacks each turn if able. | Defined$ Self | SpellDescription$ CARDNAME attacks this turn if able.
 SVar:RemRandomDeck:True
