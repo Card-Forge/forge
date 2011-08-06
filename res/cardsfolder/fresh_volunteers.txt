@@ -1,0 +1,8 @@
+Name:Fresh Volunteers
+ManaCost:1 W
+Types:Creature Human Rebel
+Text:no text
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19542.jpg
+End

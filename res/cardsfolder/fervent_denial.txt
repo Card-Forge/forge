@@ -1,0 +1,9 @@
+Name:Fervent Denial
+ManaCost:3 U U
+Types:Instant
+Text:Counter target spell.
+K:spCounter:Spell:None:Graveyard:None
+K:Flashback:5 U U
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_denial.jpg
+End

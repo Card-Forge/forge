@@ -1,0 +1,10 @@
+Name:Furnace Whelp
+ManaCost:2 R R
+Types:Creature Dragon
+Text:no text
+PT:2/2
+K:Flying
+K:abPump R:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73578.jpg
+End

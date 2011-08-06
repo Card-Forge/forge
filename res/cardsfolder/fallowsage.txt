@@ -1,0 +1,9 @@
+Name:Fallowsage
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:2/2
+K:WheneverKeyword:BecomesTapped:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Fallowsage becomes tapped, you may draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fallowsage.jpg
+End

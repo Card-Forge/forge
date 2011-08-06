@@ -1,0 +1,9 @@
+Name:Flowstone Slide
+ManaCost:X 2 R R
+Types:Sorcery
+Text:no text
+K:spAllPump:All:+X/-X:All Creatures get +X/-X until end of turn.:Flowstone Slide - All creatures get +X/-X until EOT
+K:SVar:X:Count$xPaid
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_slide.jpg
+End

@@ -1,0 +1,8 @@
+Name:Fear
+ManaCost:B B
+Types:Enchantment Aura
+Text:Enchanted creature has fear.
+K:Enchant creature
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fear.jpg
+End

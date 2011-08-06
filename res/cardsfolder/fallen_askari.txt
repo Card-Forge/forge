@@ -1,0 +1,10 @@
+Name:Fallen Askari
+ManaCost:1 B
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Flanking
+K:CARDNAME can't block.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_askari.jpg
+End

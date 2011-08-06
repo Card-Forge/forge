@@ -1,0 +1,8 @@
+Name:Fissure
+ManaCost:3 R R
+Types:Instant
+Text:Destroy target creature or land. It can't be regenerated.
+K:spDestroyTgt:Creature,Land:NoRegen
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fissure.jpg
+End

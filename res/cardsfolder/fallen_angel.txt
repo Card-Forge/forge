@@ -1,0 +1,9 @@
+Name:Fallen Angel
+ManaCost:3 B B
+Types:Creature Angel
+Text:no text
+PT:3/3
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_angel.jpg
+End

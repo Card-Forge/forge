@@ -1,0 +1,8 @@
+Name:Faerie Conclave
+ManaCost:no cost
+Types:Land
+Text:Faerie Conclave comes into play tapped.
+K:tap: add U
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_conclave.jpg
+End

@@ -1,0 +1,9 @@
+Name:Frozen Shade
+ManaCost:2 B
+Types:Creature Shade
+Text:no text
+PT:0/1
+K:abPump B:+1/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frozen_shade.jpg
+End

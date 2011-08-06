@@ -1,0 +1,8 @@
+Name:Faerie Trickery
+ManaCost:1 U U
+Types:Tribal Instant Faerie
+Text:Counter target non-Faerie spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+K:spCounter:Spell:Type(Non-Faerie):Exile:None
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_trickery.jpg
+End

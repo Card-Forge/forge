@@ -1,0 +1,9 @@
+Name:Flowstone Giant
+ManaCost:2 R R
+Types:Creature Giant
+Text:no text
+PT:3/3
+K:abPump R:+2/-2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_giant.jpg
+End

@@ -1,0 +1,7 @@
+Name:Frozen AEther
+ManaCost:3 U
+Types:Enchantment
+Text:Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frozen_aether.jpg
+End

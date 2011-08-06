@@ -1,0 +1,8 @@
+Name:Flying Carpet
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abPumpTgtC 2 T:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flying_carpet.jpg
+End

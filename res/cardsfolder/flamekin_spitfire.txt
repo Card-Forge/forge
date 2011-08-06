@@ -1,0 +1,9 @@
+Name:Flamekin Spitfire
+ManaCost:1 R
+Types:Creature Elemental Shaman
+Text:no text
+PT:1/1
+K:abDamageTgtCP 3 R:1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_spitfire.jpg
+End

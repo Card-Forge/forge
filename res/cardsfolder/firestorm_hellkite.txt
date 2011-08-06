@@ -1,0 +1,11 @@
+Name:Firestorm Hellkite
+ManaCost:4 U R
+Types:Creature Dragon
+Text:no text
+PT:6/6
+K:Flying
+K:Trample
+K:Cumulative upkeep:U R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm_hellkite.jpg
+End

@@ -1,0 +1,12 @@
+Name:Forbidden Orchard
+ManaCost:no cost
+Types:Land
+Text:Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
+K:tap: add W
+K:tap: add U
+K:tap: add B
+K:tap: add R
+K:tap: add G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
+End

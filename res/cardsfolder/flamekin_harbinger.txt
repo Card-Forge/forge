@@ -1,0 +1,8 @@
+Name:Flamekin Harbinger
+ManaCost:R
+Types:Creature Elemental Shaman
+Text:When Flamekin Harbinger enters the battlefield, you may search your library for an Elemental card, reveal it, then shuffle your library and put that card on top of it.
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_harbinger.jpg
+End

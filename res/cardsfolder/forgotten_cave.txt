@@ -1,0 +1,10 @@
+Name:Forgotten Cave
+ManaCost:no cost
+Types:Land
+Text:no text
+K:Comes into play tapped.
+K:tap: add R
+K:Cycling:R
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_cave.jpg
+End

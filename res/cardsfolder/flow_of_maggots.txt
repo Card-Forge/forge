@@ -1,0 +1,10 @@
+Name:Flow of Maggots
+ManaCost:2 B
+Types:Creature Insect
+Text:no text
+PT:2/2
+K:Cumulative upkeep:1
+K:CARDNAME can't be blocked except by Walls.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_maggots.jpg
+End

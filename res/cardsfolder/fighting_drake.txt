@@ -1,0 +1,9 @@
+Name:Fighting Drake
+ManaCost:2 U U
+Types:Creature Drake
+Text:no text
+PT:2/4
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4700.jpg
+End

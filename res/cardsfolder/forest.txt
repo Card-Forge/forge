@@ -1,0 +1,9 @@
+Name:Forest
+ManaCost:no cost
+Types:Basic Land Forest
+Text:no text
+K:tap: add G
+K:SVar:PicCount:4
+K:SVar:Rarity:Land
+K:SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+End

@@ -1,0 +1,10 @@
+Name:Flowstone Surge
+ManaCost:1 R
+Types:Enchantment
+Text:no text
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/-1:Type.Creature:Creatures you control get +1/-1.
+K:SVar:RemAIDeck:True
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_surge.jpg
+End

@@ -1,0 +1,10 @@
+Name:Feral Animist
+ManaCost:1 R G
+Types:Creature Goblin Shaman
+Text:no text
+PT:2/1
+K:abPump 3:+X/+0:Feral Animist gets +X/+0 until end of turn, where X is its power.
+K:SVar:X:Count$CardPower
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_animist.jpg
+End

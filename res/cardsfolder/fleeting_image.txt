@@ -1,0 +1,9 @@
+Name:Fleeting Image
+ManaCost:2 U
+Types:Creature Illusion
+Text:no text
+PT:2/1
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_image.jpg
+End

@@ -1,0 +1,12 @@
+Name:Fetid Heath
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:WB, tap: add W W
+K:WB, tap: add W B
+K:WB, tap: add B B
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fetid_heath.jpg
+End

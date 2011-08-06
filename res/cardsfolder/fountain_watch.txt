@@ -1,0 +1,10 @@
+Name:Fountain Watch
+ManaCost:3 W W
+Types:Creature Human Cleric
+Text:no text
+PT:2/4
+K:StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Artifact:Artifacts and enchantments you control have shroud.
+K:StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Enchantment:(They can't be the targets of spells or abilities.)
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_watch.jpg
+End

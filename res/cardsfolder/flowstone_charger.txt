@@ -1,0 +1,8 @@
+Name:Flowstone Charger
+ManaCost:2 R W
+Types:Creature Beast
+Text:Whenever Flowstone Charger attacks, it gets +3/-3 until end of turn.
+PT:2/5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_charger.jpg
+End

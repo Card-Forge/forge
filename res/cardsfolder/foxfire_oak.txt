@@ -1,0 +1,9 @@
+Name:Foxfire Oak
+ManaCost:5 G
+Types:Creature Treefolk Shaman
+Text:no text
+PT:3/6
+K:abPump RG RG RG:+3/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/foxfire_oak.jpg
+End

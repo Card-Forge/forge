@@ -1,0 +1,8 @@
+Name:Flame Javelin
+ManaCost:2/R 2/R 2/R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_javelin.jpg
+End

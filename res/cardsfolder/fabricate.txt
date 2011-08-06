@@ -1,0 +1,9 @@
+Name:Fabricate
+ManaCost:2 U
+Types:Sorcery
+Text:Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
+K:spTutor:Artifact:Hand
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
+End

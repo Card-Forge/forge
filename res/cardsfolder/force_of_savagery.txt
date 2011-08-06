@@ -1,0 +1,10 @@
+Name:Force of Savagery
+ManaCost:2 G
+Types:Creature Elemental
+Text:no text
+PT:8/0
+K:Trample
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130713.jpg
+End

@@ -1,0 +1,9 @@
+Name:Fleetfoot Panther
+ManaCost:1 G W
+Types:Creature Cat
+Text:When Fleetfoot Panther comes into play, return a green or white creature you control to its owner's hand.
+PT:3/4
+K:Flash
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fleetfoot_panther.jpg
+End

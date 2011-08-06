@@ -1,0 +1,8 @@
+Name:Force of Will
+ManaCost:3 U U
+Types:Instant
+Text:no text
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_will.jpg
+End

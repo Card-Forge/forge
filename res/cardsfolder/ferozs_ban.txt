@@ -1,0 +1,9 @@
+Name:Feroz's Ban
+ManaCost:6
+Types:Artifact
+Text:Creature spells cost 2 more to cast.
+K:CostChange:All:More:2:Spell:All:Creature:NoSpecial
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ferozs_ban.jpg
+End

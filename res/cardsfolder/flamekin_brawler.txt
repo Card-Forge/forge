@@ -1,0 +1,9 @@
+Name:Flamekin Brawler
+ManaCost:R
+Types:Creature Elemental Warrior
+Text:no text
+PT:0/2
+K:abPump R:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_brawler.jpg
+End

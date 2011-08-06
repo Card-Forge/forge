@@ -1,0 +1,8 @@
+Name:Frazzle
+ManaCost:3 U
+Types:Instant
+Text:Counter target nonblue spell.
+K:spCounter:Spell:Color(Non-blue):Graveyard:None
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frazzle.jpg
+End

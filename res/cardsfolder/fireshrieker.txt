@@ -1,0 +1,8 @@
+Name:Fireshrieker
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature has double strike.
+K:eqPump 2:Double Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fireshrieker.jpg
+End

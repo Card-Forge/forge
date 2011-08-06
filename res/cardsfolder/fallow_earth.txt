@@ -1,0 +1,8 @@
+Name:Fallow Earth
+ManaCost:2 G
+Types:Sorcery
+Text:Put target land on top of its owner's library.
+K:spBounceTgt:Land:TopofLibrary
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fallow_earth.jpg
+End

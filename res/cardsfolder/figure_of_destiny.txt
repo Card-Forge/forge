@@ -1,0 +1,8 @@
+Name:Figure of Destiny
+ManaCost:RW
+Types:Creature Kithkin
+Text:no text
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/figure_of_destiny.jpg
+End

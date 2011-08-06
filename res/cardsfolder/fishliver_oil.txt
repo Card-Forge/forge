@@ -1,0 +1,9 @@
+Name:Fishliver Oil
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted creature has islandwalk.
+K:Enchant creature
+K:enPump:Islandwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fishliver_oil.jpg
+End

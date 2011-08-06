@@ -1,0 +1,9 @@
+Name:Fetid Horror
+ManaCost:3 B
+Types:Creature Shade Horror
+Text:no text
+PT:1/2
+K:abPump B:+1/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fetid_horror.jpg
+End

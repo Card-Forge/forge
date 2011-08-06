@@ -1,0 +1,9 @@
+Name:Ferocious Charge
+ManaCost:2 G
+Types:Instant
+Text:no text
+K:spPumpTgt:+4/+4:
+K:Scry 2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ferocious_charge.jpg
+End

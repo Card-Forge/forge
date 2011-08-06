@@ -1,0 +1,10 @@
+Name:Fire-Belly Changeling
+ManaCost:1 R
+Types:Creature Shapeshifter
+Text:Play this ability no more than twice each turn.
+PT:1/1
+K:Changeling
+K:abPump R:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_belly_changeling.jpg
+End

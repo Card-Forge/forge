@@ -1,0 +1,10 @@
+Name:Flowstone Wall
+ManaCost:2 R
+Types:Creature Wall
+Text:no text
+PT:0/6
+K:Defender
+K:abPump R:+1/-1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_wall.jpg
+End

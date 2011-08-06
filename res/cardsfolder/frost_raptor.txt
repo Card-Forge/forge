@@ -1,0 +1,10 @@
+Name:Frost Raptor
+ManaCost:2 U
+Types:Snow Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+K:abPump S S:Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_raptor.jpg
+End

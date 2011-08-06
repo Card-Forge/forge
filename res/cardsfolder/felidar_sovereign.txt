@@ -1,0 +1,10 @@
+Name:Felidar Sovereign
+ManaCost:4 W W
+Types:Creature Cat Beast
+Text:At the beginning of your upkeep, if you have 40 or more life, you win the game.
+PT:4/6
+K:Vigilance
+K:Lifelink
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/felidar_sovereign.jpg
+End

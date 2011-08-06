@@ -1,0 +1,8 @@
+Name:Fog
+ManaCost:G
+Types:Instant
+Text:Prevent all combat damage that would be dealt this turn.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fog.jpg
+End

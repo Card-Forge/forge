@@ -1,0 +1,10 @@
+Name:Feebleness
+ManaCost:1 B
+Types:Enchantment Aura
+Text:Enchanted creature gets -2/-1.
+K:Flash
+K:Enchant creature
+K:enPumpCurse:-2/-1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/feebleness.jpg
+End

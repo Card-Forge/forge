@@ -1,0 +1,8 @@
+Name:Femeref Archers
+ManaCost:2 G
+Types:Creature Human Archer
+Text:no text
+PT:2/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_archers.jpg
+End

@@ -1,0 +1,10 @@
+Name:Flowstone Wyvern
+ManaCost:3 R R
+Types:Creature Drake
+Text:no text
+PT:3/3
+K:Flying
+K:abPump R:+2/-2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_wyvern.jpg
+End

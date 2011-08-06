@@ -1,0 +1,9 @@
+Name:Flowstone Crusher
+ManaCost:3 R R
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:abPump R:+1/-1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_crusher.jpg
+End

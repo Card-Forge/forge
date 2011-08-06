@@ -1,0 +1,7 @@
+Name:Fleeting Distraction
+ManaCost:U
+Types:Instant
+Text:no text
+K:spPumpTgtCurse:-1/-0
+K:Draw a card.
+End

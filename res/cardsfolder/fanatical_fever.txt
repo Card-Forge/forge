@@ -1,0 +1,8 @@
+Name:Fanatical Fever
+ManaCost:2 G G
+Types:Instant
+Text:no text
+K:spPumpTgt:+3/+0/Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatical_fever.jpg
+End

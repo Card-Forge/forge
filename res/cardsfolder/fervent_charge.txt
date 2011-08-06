@@ -1,0 +1,7 @@
+Name:Fervent Charge
+ManaCost:1 W B R
+Types:Enchantment
+Text:Whenever a creature you control attacks, it gets +2/+2 until end of turn.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_charge.jpg
+End

@@ -1,0 +1,10 @@
+Name:Firefly
+ManaCost:3 R
+Types:Creature Insect
+Text:no text
+PT:1/1
+K:Flying
+K:abPump R:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/firefly.jpg
+End

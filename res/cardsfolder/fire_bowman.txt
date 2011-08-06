@@ -1,0 +1,8 @@
+Name:Fire Bowman
+ManaCost:R
+Types:Creature Human Soldier Archer
+Text:no text
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_bowman.jpg
+End

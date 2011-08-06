@@ -1,0 +1,9 @@
+Name:Frost Giant
+ManaCost:3 R R R
+Types:Creature Giant
+Text:no text
+PT:4/4
+K:Rampage 2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_giant.jpg
+End

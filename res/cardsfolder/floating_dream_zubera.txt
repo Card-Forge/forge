@@ -1,0 +1,8 @@
+Name:Floating-Dream Zubera
+ManaCost:1 U
+Types:Creature Zubera Spirit
+Text:When Floating-Dream Zubera is put into a graveyard from play, draw a card for each Zubera put into a graveyard from play this turn.
+PT:1/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80507.jpg
+End

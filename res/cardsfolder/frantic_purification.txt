@@ -1,0 +1,9 @@
+Name:Frantic Purification
+ManaCost:2 W
+Types:Instant
+Text:Destroy target enchantment.
+K:spDestroyTgt:Enchantment
+K:Madness:W
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_purification.jpg
+End

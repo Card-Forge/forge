@@ -1,0 +1,9 @@
+Name:Folk of the Pines
+ManaCost:4 G
+Types:Creature Dryad
+Text:no text
+PT:2/5
+K:abPump 1 G:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_of_the_pines.jpg
+End

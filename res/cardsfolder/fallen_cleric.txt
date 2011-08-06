@@ -1,0 +1,10 @@
+Name:Fallen Cleric
+ManaCost:4 B
+Types:Creature Zombie Cleric
+Text:no text
+PT:4/2
+K:Protection from Clerics
+K:Morph:4 B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_cleric.jpg
+End

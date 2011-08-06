@@ -1,0 +1,9 @@
+Name:Fruition
+ManaCost:G
+Types:Sorcery
+Text:no text
+K:spGainLife:X:You gain 1 life for each Forest on the battlefield.:Fruition - player gains X life
+K:SVar:X:Count$TypeOnBattlefield.Forest
+K:SVar:Rarity:Common
+K:SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/fruition.jpg
+End

@@ -1,0 +1,8 @@
+Name:Fire Ambush
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+K:spDamageTgtCP:3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/fire_ambush.jpg
+End
