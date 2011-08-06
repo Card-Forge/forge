@@ -73,6 +73,7 @@ public class DeckConverter {
             return o;
         } else if(o instanceof forge.Deck[]) {
             //a new-type booster deck
+        	//TODO: FIX this impossible cast
             Deck d = (Deck) o;
             return d.migrate();
         } else if(o instanceof Deck) {

@@ -199,7 +199,7 @@ public class ManaPool extends Card {
     }
     
     public void addMana(Ability_Mana am) {
-        (!isSnow() && am.isSnow()? smp:this).addMana(!am.Mana().contains("X")? am.Mana():am.Mana().replaceAll("X",
+        (!isSnow() && am.isSnow()? smp:this).addMana(!am.mana().contains("X")? am.mana():am.mana().replaceAll("X",
                 am.getX() + ""));
     }
     
@@ -245,7 +245,7 @@ public class ManaPool extends Card {
     }
     
     public static String[] getManaParts(Ability_Mana manaAbility) {
-        return getManaParts(manaAbility.Mana(), true);
+        return getManaParts(manaAbility.mana(), true);
     }//wrapper
     
     public static String[] getManaParts(String Mana_2)//turns "G G" -> {"G","G"}, "2 UG"->"{"2","U/G"}, "B W U R G" -> {"B","W","U","R","G"}, etc.

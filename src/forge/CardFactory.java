@@ -1061,7 +1061,7 @@ public class CardFactory implements NewConstants {
                 final boolean TgtPlayer[] = {false};
                 final boolean TgtCP[] = {false};
                 final boolean TgtOpp[] = {false};
-                String tmpCost = new String("");
+                String tmpCost = "";
                 
                 if(k[0].contains("CP")) {
                     TgtCP[0] = true;
@@ -13372,7 +13372,7 @@ public class CardFactory implements NewConstants {
                 }
                 
                 @Override
-                public String Mana() {
+                public String mana() {
                     return this.choices_made[0].toString();
                 }
                 
@@ -15982,7 +15982,7 @@ public class CardFactory implements NewConstants {
     		  public boolean canPlayAI()
     		  {
     			  int m = (int)Math.pow(2, CardFactoryUtil.getCards("Doubling Season", Constant.Player.Computer).size());
-    			  int n = Math.max(1, Math.min((int)Math.ceil((100-getSourceCard().getCounters(Counters.TOWER))/m),
+    			  int n = Math.max(1, Math.min((100-getSourceCard().getCounters(Counters.TOWER))/m,
     					           ComputerUtil.getAvailableMana().size())) ;
     			  setManaCost(n + "");
     			  return !(new CardList(AllZone.Computer_Hand.getCards()).containsName("Doubling Season") && n>=5 )

@@ -229,7 +229,7 @@ public class CardUtil {
 
     static public String addManaCosts(String mc1, String mc2)
     {
-       String tMC = new String("");
+       String tMC = "";
        
        Integer cl1, cl2, tCL;
        cl1 = Integer.valueOf(mc1.replaceAll("[WUBRGSX]", "").trim());

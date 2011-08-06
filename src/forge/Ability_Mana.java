@@ -200,7 +200,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         getSourceCard().setX(X);
     }//i.e. "T, remove X charge counters from {name}: add X+1 <color> mana to your mana pool"
     
-    public String Mana() {
+    public String mana() {
         if(!orig.contains("for each")) return Mana;
         else {
             /*String[] manaPart = orig.split(": add ");

@@ -16759,7 +16759,7 @@ public class CardFactory_Creatures {
         	{
 				private static final long serialVersionUID = 3818278127211421729L;
 
-				public String Mana()
+				public String mana()
         		{
         			StringBuilder sb = new StringBuilder();
                     for(int i = 0; i < card.getNetAttack(); i++)
