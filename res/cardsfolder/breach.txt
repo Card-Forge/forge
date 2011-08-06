@@ -2,7 +2,7 @@ Name:Breach
 ManaCost:2 B
 Types:Instant
 Text:no text
-K:spPumpTgt:+2/+0/Fear
+A:SP$Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Fear | SpellDescription$ Target creature gets +2/+0 and gains fear until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breach.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/120.jpg

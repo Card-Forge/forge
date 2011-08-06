@@ -2,7 +2,7 @@ Name:Bewilder
 ManaCost:2 U
 Types:Instant
 Text:no text
-K:spPumpTgtCurse:-3/-0
+A:SP$Pump | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn.
 K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
