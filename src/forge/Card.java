@@ -315,6 +315,10 @@ public class Card extends MyObservable {
         this.updateObservers();
     }
     
+    /**
+     * hasLevelUp() - checks to see if a creature has the "Level up" ability introduced in Rise of the Eldrazi
+     * @return true if this creature can "Level up", false otherwise
+     */
     public boolean hasLevelUp() {
     	return counters.containsKey(Counters.LEVEL);
     }
