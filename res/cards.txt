@@ -1,3 +1,9 @@
+Time Elemental
+2 U
+Creature Elemental
+When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.  2 U U, tap: Return target permanent that isn't enchanted to its owner's hand.
+0/2
+
 Old Man of the Sea
 1 U U
 Creature Djinn

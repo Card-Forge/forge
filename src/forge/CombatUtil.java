@@ -1593,6 +1593,41 @@ public class CombatUtil {
                 AllZone.Stack.add(ability);
             }//Pulse Tracker
             
+            if(c.getName().equals("Time Elemental")) {
+            	final Card source = c;
+            	final Ability damage = new Ability(c, "0") {
+            		@Override
+            		public void resolve() {
+            			final String player = source.getController();
+            			AllZone.GameAction.addDamage(player, source, 5);
+            		}
+            	};
+            	damage.setStackDescription(c + " - deals 5 damage to controller.");
+            	final Ability sacrifice = new Ability(c, "0") {
+            		@Override
+            		public void resolve() {
+            			AllZone.GameAction.sacrifice(source);
+            		}
+            	};
+            	sacrifice.setStackDescription("Sacrifice "+c);
+                
+                final Command atEOCdamage = new Command() {
+    				private static final long serialVersionUID = 1513673469721590317L;
+
+    				public void execute() {
+                        AllZone.Stack.add(damage);
+                    }
+                };
+                final Command atEOCsacrifice = new Command() {
+    				private static final long serialVersionUID = -510924602971034173L;
+
+    				public void execute() {
+                        if(AllZone.GameAction.isCardInPlay(source)) AllZone.Stack.add(sacrifice);
+                    }
+                };
+                AllZone.EndOfCombat.addAt(atEOCdamage);
+                AllZone.EndOfCombat.addAt(atEOCsacrifice);
+            }
 
             c.setCreatureAttackedThisCombat(true);
             
@@ -1967,6 +2002,42 @@ public class CombatUtil {
             };
             
             AllZone.EndOfCombat.addAt(atEOC);
+        }
+        
+        if(b.getName().equals("Time Elemental")) {
+        	final Card source = b;
+        	final Ability damage = new Ability(b, "0") {
+        		@Override
+        		public void resolve() {
+        			final String player = source.getController();
+        			AllZone.GameAction.addDamage(player, source, 5);
+        		}
+        	};
+        	damage.setStackDescription(b + " - deals 5 damage to controller.");
+        	final Ability sacrifice = new Ability(b, "0") {
+        		@Override
+        		public void resolve() {
+        			AllZone.GameAction.sacrifice(source);
+        		}
+        	};
+        	sacrifice.setStackDescription("Sacrifice "+b);
+            
+            final Command atEOCdamage = new Command() {
+				private static final long serialVersionUID = -1470724468078097507L;
+
+				public void execute() {
+                    AllZone.Stack.add(damage);
+                }
+            };
+            final Command atEOCsacrifice = new Command() {
+				private static final long serialVersionUID = 7644622095917060596L;
+
+				public void execute() {
+                    if(AllZone.GameAction.isCardInPlay(source)) AllZone.Stack.add(sacrifice);
+                }
+            };
+            AllZone.EndOfCombat.addAt(atEOCdamage);
+            AllZone.EndOfCombat.addAt(atEOCsacrifice);
         }
         
         a.setCreatureGotBlockedThisCombat(true);

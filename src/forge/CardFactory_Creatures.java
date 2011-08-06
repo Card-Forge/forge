@@ -18284,6 +18284,55 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Time Elemental")) {
+        	final Ability_Tap ability = new Ability_Tap(card, "2 U U") {
+				private static final long serialVersionUID = -8280274880866799294L;
+
+				@Override
+        		public void resolve() {
+        			Card target = getTargetCard();
+        			if( CardFactoryUtil.canTarget(card, target)) {
+        				AllZone.GameAction.moveToHand(target);
+        			}
+        		}
+        		
+        		@Override
+        		public boolean canPlay() {
+        			CardList targets = AllZoneUtil.getCardsInPlay();
+        			targets = targets.filter(AllZoneUtil.unenchanted);
+        			return AllZoneUtil.isCardInPlay(card) && targets.size() > 0;
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			//implemented, but not used.  This card is filtered from the computer's decks
+        			return canPlay();
+        		}
+        	};//SpellAbility
+        	
+        	Input runtime = new Input() {
+				private static final long serialVersionUID = 1044182904325733127L;
+				@Override
+        		public void showMessage() {
+        			AllZone.Display.showMessage("Select target unenchanted permanent");
+        			ButtonUtil.enableOnlyCancel();
+        		}
+        		@Override
+        		public void selectButtonCancel() { stop(); }
+        		@Override
+        		public void selectCard(Card card, PlayerZone zone) {
+        			if(card.isPermanent() && !card.isEnchanted() && zone.is(Constant.Zone.Play)) {
+        				ability.setTargetCard(card);
+        				stopSetNext(new Input_PayManaCost(ability));
+        			}
+        		}//selectCard()
+        	};
+        	
+        	card.addSpellAbility(ability);
+        	ability.setStackDescription(card.getName() + " - return target creature to owner's hand.");
+        	ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

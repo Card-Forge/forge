@@ -239,6 +239,11 @@ public class AllZoneUtil {
 	
 	///Check if a certain card is in play
 	
+	public static boolean isCardInPlay(Card card) {
+		return PlayerZoneUtil.isCardInZone(AllZone.Computer_Play, card)
+        	|| PlayerZoneUtil.isCardInZone(AllZone.Human_Play, card);
+	}
+	
 	/**
 	 * Answers the question: "Is <card name> in play?"
 	 * 
@@ -376,6 +381,15 @@ public class AllZoneUtil {
 	public static CardListFilter creatures = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isCreature();
+		}
+	};
+	
+	/**
+	 * a CardListFilter to get all unenchanted cards in a list
+	 */
+	public static CardListFilter unenchanted = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return !c.isEnchanted();
 		}
 	};
 }

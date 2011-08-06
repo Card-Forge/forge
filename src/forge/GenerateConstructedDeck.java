@@ -177,6 +177,7 @@ public class GenerateConstructedDeck
     remove.add("Vedalken Archmage");
     remove.add("Hatching Plans");
     remove.add("Sensation Gorger");
+    remove.add("Time Elemental");
     
     //semi useless
     
