@@ -1,10 +1,9 @@
-Name:Mortal Wound
-ManaCost:G
+Name:Mire Blight
+ManaCost:B
 Types:Enchantment Aura
 Text:When enchanted creature is dealt damage, destroy it.
 K:Enchant creature
 K:enPumpCurse:HIDDEN When CARDNAME is dealt damage, destroy it.
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mortal_wound.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/63.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_blight.jpg
 End

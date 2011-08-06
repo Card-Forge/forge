@@ -1,0 +1,9 @@
+Name:Frozen Solid
+ManaCost:1 U U
+Types:Enchantment Aura
+Text:Enchanted creature doesn't untap during its controller's untap step.\r\nWhen enchanted creature is dealt damage, destroy it.
+K:Enchant creature
+K:enPumpCurse:HIDDEN CARDNAME doesn't untap during your untap step.& HIDDEN When CARDNAME is dealt damage, destroy it.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frozen_solid.jpg
+End

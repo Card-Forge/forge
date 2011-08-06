@@ -2710,9 +2710,8 @@ public class Card extends MyObservable {
 	            /*
 	            if(source.getKeyword().contains("Deathtouch") && isCreature()) {
 	                AllZone.GameAction.destroy(this);
-	            }
-	            */
-	            
+	            }*/
+
 	            if(isCreature() 
 	            	&& source.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.")) 
 	            {
@@ -2949,7 +2948,19 @@ public class Card extends MyObservable {
         	AllZone.Stack.add(ability2);
         }
         
-        if(isEnchantedBy("Mortal Wound")) AllZone.GameAction.destroy(this);
+        if(getKeyword().contains("When CARDNAME is dealt damage, destroy it.")) {
+	        final Card damagedCard = this;
+	        final Ability ability = new Ability(source, "0") {
+	        	@Override
+	        	public void resolve() { AllZone.GameAction.destroy(damagedCard); }
+	        };
+	    
+	        StringBuilder sb = new StringBuilder();
+	    	sb.append(damagedCard).append(" - destroy");
+	    	ability.setStackDescription(sb.toString());
+	    
+	    	AllZone.Stack.add(ability);
+        }
         
         if(source.getKeyword().contains("Deathtouch") && this.isCreature()) AllZone.GameAction.destroy(this);
     }
