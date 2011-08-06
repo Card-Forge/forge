@@ -1574,7 +1574,7 @@ class CardFactory_Auras {
                     
                     // Bring creature onto the battlefield under your control (should trigger etb Abilities)
                     animated.setController(card.getController());
-                    AllZone.GameAction.moveToPlay(animated);
+                    AllZone.GameAction.moveToPlay(animated, card.getController());
                     card.enchantCard(animated);	// Attach before Targeting so detach Command will trigger
                     
                     if(CardFactoryUtil.hasProtectionFrom(card, animated)) {
