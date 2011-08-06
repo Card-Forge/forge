@@ -1,0 +1,8 @@
+Name:Venser's Journal
+ManaCost:5
+Types:Artifact
+Text:You have no maximum hand size.\r\nAt the beginning of your upkeep, you gain 1 life for each card in your hand.
+K:HandSize = INF Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vensers_journal.jpg
+End

@@ -37,6 +37,7 @@ public class GameActionUtil {
 		upkeep_Honden_of_Lifes_Web();
 		upkeep_Honden_of_Nights_Reach();
 		upkeep_Honden_of_Infinite_Rage();
+		upkeep_Vensers_Journal();
 		upkeep_Land_Tax();
 		upkeep_Mana_Vault();
 		upkeep_Feedback();
@@ -8018,6 +8019,28 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//for
 	}//upkeep_Ivory Tower()
+	
+	public static void upkeep_Vensers_Journal() {
+		final String player = AllZone.Phase.getActivePlayer();
+		final CardList hand = AllZoneUtil.getPlayerHand(player);
+		
+		if(0 == hand.size()) {
+			return;
+		}
+
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Venser's Journal");
+
+		for(Card journal:list) {
+			final Ability ability = new Ability(journal, "0") {
+				public void resolve() {
+						AllZone.GameAction.gainLife(player, hand.size());
+				}
+			};//Ability
+			ability.setStackDescription(journal.getName()+" - " +player+ " gains "+hand.size()+" life.");
+
+			AllZone.Stack.add(ability);
+		}//for
+	}//upkeep_Vensers_Journal()
 
 	//Forge doesn't distinguish between beginning and end of upkeep
 	//so, we'll put The Rack next to Black Vise
