@@ -5598,7 +5598,9 @@ public class CardFactory_Creatures {
                     CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
                     human = human.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isTapped() && !CardUtil.getColor(c).equals(Constant.Color.Black);
+                        	//slapshot5 - rule 202.2c tells me this needs to use getColors()
+                            //return c.isTapped() && !CardUtil.getColor(c).equals(Constant.Color.Black);
+                        	return c.isTapped() && !CardUtil.getColors(c).contains(Constant.Color.Black);
                         }
                     });
                     
@@ -5615,7 +5617,8 @@ public class CardFactory_Creatures {
                     Card c = getTargetCard();
                     
                     if(AllZone.GameAction.isCardInPlay(c) && c.isTapped() && CardFactoryUtil.canTarget(card, c)
-                            && !CardUtil.getColor(c).equals(Constant.Color.Black)) {
+                            && !CardUtil.getColor(c).contains(Constant.Color.Black)) {
+                    		//&& !CardUtil.getColor(c).equals(Constant.Color.Black)) {
                         AllZone.GameAction.destroy(c);
                     }
                 }//resolve()
@@ -5633,13 +5636,14 @@ public class CardFactory_Creatures {
                         public boolean addCard(Card c) {
                             PlayerZone zone = AllZone.getZone(c);
                             return c.isCreature() && zone.is(Constant.Zone.Play) && c.isTapped()
-                                    && !CardUtil.getColor(c).equals(Constant.Color.Black);
+                            		&& !CardUtil.getColors(c).contains(Constant.Color.Black);
+                                    //&& !CardUtil.getColor(c).equals(Constant.Color.Black);
                         }
                         
                     });
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(ability, slivers,
-                            "Select a tapped non-black creature", true, false));
+                            "Select a tapped nonblack creature", true, false));
                 }
             });
             
