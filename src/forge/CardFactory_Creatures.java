@@ -11891,7 +11891,6 @@ public class CardFactory_Creatures {
 		                 AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanent(ability, choice, "Select a land to sacrifice"));
 	                 else //compy
 	                 {
-	                	 //AllZone.GameAction.sacrificePermanent(AllZone.ComputerPlayer, ability, choice);
 	               		 ability.setTargetCard(choice.get(0));
 	                	 AllZone.Stack.add(ability);
 	                 }
@@ -12603,127 +12602,6 @@ public class CardFactory_Creatures {
         	};//Command
         	
         	card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Pestilence Demon")) {
-            final SpellAbility ability = new Ability(card, "B") {
-            	
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
-                    
-                    human = human.getType("Creature");
-                    computer = computer.getType("Creature");
-                    
-                    return AllZone.ComputerPlayer.getLife() > 2 
-                    			&& !(human.size() == 0 
-                    			&& 0 < computer.size()) 
-                    			&& card.getKillDamage() > 1;
-                }
-                
-                @Override
-                public void resolve() {
-                    //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
-                    }
-                    
-                    AllZone.HumanPlayer.addDamage(1, card);
-                    AllZone.ComputerPlayer.addDamage(1, card);
-                }//resolve()
-            };//SpellAbility
-            ability.setDescription("B: Pestilence Demon deals 1 damage to each creature and each player.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" deals 1 damage to each creature and each player.");
-            ability.setStackDescription(sb.toString());
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(new Spell_Permanent(card) {
-				private static final long serialVersionUID = -9008807568695047980L;
-
-				@Override
-                public boolean canPlayAI() {
-                    //get all creatures
-                    CardList list = AllZoneUtil.getCreaturesInPlay();
-                    
-                    return 0 < list.size();
-                }
-            });
-            
-            card.addSpellAbility(ability);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Thrashing Wumpus")) {
-            final SpellAbility ability = new Ability(card, "B") {
-            	
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
-                    
-                    human = human.getType("Creature");
-                    computer = computer.getType("Creature");
-                    
-                    return AllZone.ComputerPlayer.getLife() > 2 
-                    			&& !(human.size() == 0 
-                    			&& 0 < computer.size()) 
-                    			&& card.getKillDamage() > 1;
-                }
-                
-                @Override
-                public void resolve() {
-                    //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
-                    }
-                    
-                    AllZone.HumanPlayer.addDamage(1, card);
-                    AllZone.ComputerPlayer.addDamage(1, card);
-                }//resolve()
-            };//SpellAbility
-            ability.setDescription("B: Thrashing Wumpus deals 1 damage to each creature and each player.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" deals 1 damage to each creature and each player.");
-            ability.setStackDescription(sb.toString());
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(new Spell_Permanent(card) {
-				private static final long serialVersionUID = -9008807568695047980L;
-
-				@Override
-                public boolean canPlayAI() {
-                    //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
-                    
-                    return 0 < list.size();
-                }
-            });
-            
-            card.addSpellAbility(ability);
-            
-            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
         
