@@ -602,7 +602,6 @@ public class AbilityFactory_AlterLife {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
 				return poisonDoTriggerAI(af, this, mandatory);
 			}
 			

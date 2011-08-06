@@ -47,7 +47,34 @@ public class CardListUtil
     list.sort(com);
   }//sortAttack()
 
-
+  // sort by "best" using the EvaluateCreature function
+  // the best creatures will be first in the list
+  public static void sortByEvaluateCreature(CardList list)
+  {
+    Comparator<Card> com = new Comparator<Card>()
+    {
+      public int compare(Card a, Card b)
+      {
+    	return CardFactoryUtil.evaluateCreature(b) - CardFactoryUtil.evaluateCreature(a);
+      }
+    };
+    list.sort(com);
+  }//sortByEvaluateCreature()
+  
+  // sort by "best" using the EvaluateCreature function
+  // the best creatures will be first in the list
+  public static void sortByMostExpensive(CardList list)
+  {
+    Comparator<Card> com = new Comparator<Card>()
+    {
+      public int compare(Card a, Card b)
+      {
+    	return b.getCMC() - a.getCMC();
+      }
+    };
+    list.sort(com);
+  }//sortByEvaluateCreature()
+  
   //the lower the attack the better
   public static void sortAttackLowFirst(CardList list)
   {

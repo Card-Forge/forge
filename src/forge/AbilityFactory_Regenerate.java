@@ -3,11 +3,11 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Random;
 
 public class AbilityFactory_Regenerate {
 	
-	// Ex: A:SP$Regenerate|Cost$W|Tgt$TgtC|SpellDescription$Regenerate target creature.
+	// Ex: A:SP$Regenerate | Cost$W | Tgt$TgtC | SpellDescription$Regenerate target creature.
+	// http://www.slightlymagic.net/wiki/Forge_AbilityFactory#Regenerate
 
 	public static SpellAbility getAbility(final AbilityFactory af) {
 
@@ -32,7 +32,7 @@ public class AbilityFactory_Regenerate {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return doCanPlayAI(af, this);
+				return doTriggerAI(af, this, mandatory);
 			}
 			
 		};//Ability_Activated
@@ -44,11 +44,6 @@ public class AbilityFactory_Regenerate {
 
 		final SpellAbility spRegenerate = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = -3899905398102316582L;
-			
-			@Override
-			public boolean canPlay(){
-				return super.canPlay();
-			}
 
 			@Override
 			public boolean canPlayAI() {
@@ -109,14 +104,9 @@ public class AbilityFactory_Regenerate {
 	}
 
 	private static boolean doCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-		//final HashMap<String,String> params = af.getMapParams();
+		final HashMap<String,String> params = af.getMapParams();
 		final Card hostCard = af.getHostCard();
 		boolean chance = false;
-		//ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-		
-		// if there is no target and host card isn't in play, don't activate
-		if (af.getAbTgt() == null && !AllZone.GameAction.isCardInPlay(hostCard)) 
-    		return false;
 		
 		// temporarily disabled until better AI
 		if (af.getAbCost().getSacCost())	 return false;
@@ -126,58 +116,54 @@ public class AbilityFactory_Regenerate {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 
-		//TODO perhaps we could see if there is a spell on the stack that opponent
-		//controls targeting a regeneratable creature, and return a higher
-		//chance of true
+		Target tgt = sa.getTarget();
+		if (tgt == null){
+			// As far as I can tell these Defined Cards will only have one of them
+			ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+			
+			if (AllZone.Stack.size() > 0){
+			// check stack for something that will kill this
+			}
+			else{
+				if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
+					boolean flag = false;
+					
+					for(Card c : list){
+						if (c.getShield() == 0)
+							flag |= CombatUtil.combatantWouldBeDestroyed(c);
+					}
+					
+					chance = flag;
+				}
+				else{	// if nothing on the stack, and it's not declare blockers. no need to regen
+					return false;
+				}
+			}
+		}
+		else{
+			tgt.resetTargets();
+			// filter AIs battlefield by what I can target
+			CardList targetables = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, hostCard);
+			
+			if (targetables.size() == 0)
+				return false;
+			
+			if (AllZone.Stack.size() > 0){
+				// check stack for something on the stack will kill anything i control
+			}
+			else{
+				if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
+					CardList combatants = targetables.getType("Creature");
+					CardListUtil.sortByEvaluateCreature(combatants);
 
-		if(!CardFactoryUtil.AI_isMainPhase())	// this will need to be removed soon
-			return false;
-		
-		// TODO: Regenerate can't handle multi-targeting currently, structure is way different than other canPlayAIs
-		// so I didn't know where to start. Also, this section is unnecessary for self Regenerate, and doesn't
-		// seem to follow the targeting rules otherwise.
-		
-		CardList play = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
-		for(Card card:play) {
-			if(!card.canBeShielded() || card.getShield() > 0) return false;
-			if(CardFactoryUtil.AI_doesCreatureAttack(card)) {
-				//"Fuzzy logic" to determine if using a regenerate ability might be helpful because
-				//we can't wait to decide to play this ability during combat, like the human can
-				//weight[] is a set of probability percentages to be averaged later
-				int weight[] = new int[3];
-
-				// cards with real keywords (flying, trample, etc) are probably more desireable
-				if(card.getKeyword().size() > 0) weight[0] = 75;
-				else weight[0] = 0;
-
-				// if there are many cards in hand, then maybe it's not such a great idea to waste mana
-				CardList HandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
-
-				if(HandList.size() >= 4) weight[1] = 25;
-				else weight[1] = 75;
-
-				// compare the highest converted mana cost of cards in hand to the number of lands
-				// if there's spare mana, then regeneration might be viable
-				int hCMC = 0;
-				for(int i = 0; i < HandList.size(); i++)
-					if(CardUtil.getConvertedManaCost(HandList.getCard(i).getManaCost()) > hCMC) hCMC = CardUtil.getConvertedManaCost(HandList.getCard(
-							i).getManaCost());
-
-				CardList LandList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-				LandList = LandList.getType("Land");
-
-				//most regenerate abilities cost 2 or less
-				if(hCMC + 2 >= LandList.size()) weight[2] = 50;
-				else weight[2] = 0;
-
-				// ultimately, it's random fate that dictates if this was the right play
-				int aw = (weight[0] + weight[1] + weight[2]) / 3;
-				Random r = new Random();
-				if(r.nextInt(100) <= aw) {
-					if(af.isTargeted()) 
-						af.getAbTgt().addTarget(card);
-					chance = true;
-					break;
+					for(Card c : combatants){
+						if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)){
+							tgt.addTarget(c);
+							chance = true;
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -189,6 +175,85 @@ public class AbilityFactory_Regenerate {
 		return chance;
 	}
 
+	private static boolean doTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+		boolean chance = false;
+
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+
+		Target tgt = sa.getTarget();
+		if (tgt == null){
+			// If there's no target on the trigger, just say yes.
+			chance = true;
+		}
+		else{
+			chance = regenMandatoryTarget(af, sa, mandatory);
+		}
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.doTrigger(mandatory);
+		
+		return chance;
+	}
+	
+	private static boolean regenMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		final Card hostCard = af.getHostCard();
+		Target tgt = sa.getTarget();
+		tgt.resetTargets();
+		// filter AIs battlefield by what I can target
+		CardList targetables = AllZoneUtil.getCardsInPlay();
+		targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, hostCard);
+		CardList compTargetables = targetables.getController(AllZone.ComputerPlayer);
+		
+		if (targetables.size() == 0)
+			return false;
+		
+		if (!mandatory && compTargetables.size() == 0)
+			return false;
+		
+		if (compTargetables.size() > 0){
+			CardList combatants = compTargetables.getType("Creature");
+			CardListUtil.sortByEvaluateCreature(combatants);
+			if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
+				for(Card c : combatants){
+					if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)){
+						tgt.addTarget(c);
+						return true;
+					}
+				}
+			}
+	
+			// TODO see if something on the stack is about to kill something i can target
+			
+			// choose my best X without regen
+			if (compTargetables.getNotType("Creature").size() == 0){
+				for(Card c : combatants){
+					if (c.getShield() == 0){
+						tgt.addTarget(c);
+						return true;
+					}
+				}
+				tgt.addTarget(combatants.get(0));
+				return true;
+			}
+			else{
+				CardListUtil.sortByMostExpensive(compTargetables);
+				for(Card c : compTargetables){
+					if (c.getShield() == 0){
+						tgt.addTarget(c);
+						return true;
+					}
+				}
+				tgt.addTarget(compTargetables.get(0));
+				return true;
+			}
+		}
+
+		tgt.addTarget(CardFactoryUtil.AI_getCheapestPermanent(targetables, hostCard, true));
+		return true;
+	}
+	
 	private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
 		Card hostCard = af.getHostCard();
 		final HashMap<String,String> params = af.getMapParams();

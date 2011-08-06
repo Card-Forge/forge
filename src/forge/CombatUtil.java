@@ -594,18 +594,18 @@ public class CombatUtil {
     }//shieldDamage
     
   //For AI safety measures like Regeneration
-    public boolean combatantWouldBeDestroyed(Card combatant, Combat combat) {
+    public static boolean combatantWouldBeDestroyed(Card combatant) {
 
     	if(combatant.isAttacking())
-    		return attackerWouldBeDestroyed(combatant, combat);
+    		return attackerWouldBeDestroyed(combatant);
     	if(combatant.isBlocking())
-    		return blockerWouldBeDestroyed(combatant, combat);
+    		return blockerWouldBeDestroyed(combatant);
     	return false;
     }
     
     //For AI safety measures like Regeneration
-    public boolean attackerWouldBeDestroyed(Card attacker, Combat combat) {
-    	CardList blockers = combat.getBlockers(attacker);
+    public static boolean attackerWouldBeDestroyed(Card attacker) {
+    	CardList blockers = AllZone.Combat.getBlockers(attacker);
     	
     	for (Card defender:blockers) {
     			if(CombatUtil.canDestroyAttacker(attacker, defender) && 
@@ -694,8 +694,8 @@ public class CombatUtil {
     } //canDestroyAttacker
     
     //For AI safety measures like Regeneration
-    public boolean blockerWouldBeDestroyed(Card blocker, Combat combat) {
-    	Card attacker = combat.getAttackerBlockedBy(blocker);
+    public static boolean blockerWouldBeDestroyed(Card blocker) {
+    	Card attacker = AllZone.Combat.getAttackerBlockedBy(blocker);
     	
     	if(canDestroyBlocker(blocker, attacker) && 
     					!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect")))
