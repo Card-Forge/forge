@@ -1,5 +1,5 @@
 Name:Enigma Sphinx
-ManaCost:4 U W B
+ManaCost:4 W U B
 Types:Artifact Creature Sphinx
 Text:no text
 PT:5/4
