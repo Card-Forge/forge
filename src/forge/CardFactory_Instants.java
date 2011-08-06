@@ -1288,55 +1288,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if (cardName.equals("Starstorm"))
-        {
-      	  final SpellAbility spell = new Spell(card)
-      	  {
- 
-			private static final long serialVersionUID = -3554283811532201543L;
-			public void resolve()
-      		{
-  				CardList all = AllZoneUtil.getCreaturesInPlay();
-                  
-                  for(int i = 0; i < all.size(); i++) {
-                      		all.get(i).addDamage(card.getXManaCostPaid(), card);
-                  }
-                  
-      			card.setXManaCostPaid(0);
-      		}
-  			public boolean canPlayAI()
-  			{
-  				final int maxX = ComputerUtil.getAvailableMana().size() - 1;
-  								
-  				CardListFilter filter = new CardListFilter(){
-  					public boolean addCard(Card c)
-  					{
-  						return c.isCreature() && maxX >= (c.getKillDamage());
-  					}
-  				};
-  				
-  				CardList humanAll = new CardList(AllZone.Human_Battlefield.getCards());
-  			    humanAll = humanAll.filter(filter);
-  			    
-  			    CardList compAll = new CardList(AllZone.Computer_Battlefield.getCards());
-  			    compAll = compAll.filter(filter);
-  			    
-  			    return humanAll.size() > (compAll.size() + 2);
-  			}
-      	  };
-      	  StringBuilder sbDesc = new StringBuilder();
-      	  sbDesc.append(cardName).append(" deals X damage to each creature.");
-      	  spell.setDescription(sbDesc.toString());
-      	  
-      	  StringBuilder sbStack = new StringBuilder();
-      	  sbStack.append(cardName).append(" - deals X damage to each creature.");
-      	  spell.setStackDescription(sbStack.toString());
-      	  
-      	  card.clearSpellAbility();
-      	  card.addSpellAbility(spell);
-        } 
-        //*************** END ************ END **************************
         
             
         //*************** START *********** START **************************
