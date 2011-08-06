@@ -625,7 +625,6 @@ public class CardFactory implements NewConstants {
         	});
         }
 
-        
         // Support for using string variables to define Count$ for X or Y
         // Or just about any other String that a card object needs at any given time
         while(hasKeyword(card, "SVar") != -1) {
@@ -3087,8 +3086,10 @@ public class CardFactory implements NewConstants {
             final String Drawback[] = {"none"};
             if (k.length > 3)
             {
-            	if (k[3].contains("Drawback$"))
-            		Drawback[0] = k[3];
+            	if (k[3].contains("Drawback$")){
+                    String kk[] = k[3].split("\\$");
+                    Drawback[0] = kk[1];
+            	}
             }
             
             final String Selec[] = {"Select a target "};
@@ -10372,7 +10373,7 @@ public class CardFactory implements NewConstants {
         	else if (card.getManaCost().startsWith("X"))
         		sa.setXManaCost("1");
         }//X
-        
+
         return card;
     }//getCard2
     
