@@ -425,7 +425,7 @@ public class Ability_Cost {
 				cost.append(" counter");
 				if (counterAmount != 1)
 					cost.append("s");
-				cost.append(" from ");
+				cost.append(" on ");
 				cost.append(name);
 			}
 			first = false;
