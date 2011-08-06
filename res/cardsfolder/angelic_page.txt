@@ -1,0 +1,10 @@
+Name:Angelic Page
+ManaCost:1 W
+Types:Creature Angel Spirit
+Text:no text
+PT:1/1
+K:Flying
+A:AB$Pump | Cost$ T | NumAtt$ +1 | NumDef$ +1 | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SpellDescription$ Target attacking or blocking creature gets +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_page.jpg
+End
