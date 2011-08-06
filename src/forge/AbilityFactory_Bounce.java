@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -75,8 +76,15 @@ public class AbilityFactory_Bounce {
 
 					 StringBuilder sb = new StringBuilder();
 					 String name = af.getHostCard().getName();
-
-					 sb.append(name).append(" - Return ").append(getTargetCard().getName()).append(" to its owners hand.");
+					 
+					 sb.append(name).append(" - Return ");
+					 
+					 ArrayList<Card> tgts = af.getAbTgt().getTargetCards();
+					 for(Card c : tgts)
+						 sb.append(c.getName()).append(" ");
+					 
+					 sb.append(" to ");
+					 sb.append(destination);
 
 					 return sb.toString();
 				}
@@ -107,7 +115,6 @@ public class AbilityFactory_Bounce {
 		Target abTgt = sa.getTarget();
 		final Card source = sa.getSourceCard();
 		CardList list;
-		Card choice = null;
 		
 		list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
 		list = list.filter(new CardListFilter() {
@@ -117,12 +124,8 @@ public class AbilityFactory_Bounce {
 		});
 		
 		if (abTgt != null){
-			if (abTgt.canTgtCreature()){
-				list = list.getType("creature");
-			}
-			else{
-				list = list.getValidCards(abTgt.getValidTgts(), source.getController());
-			}
+			list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
+
 			if (list.size() == 0)
 				return false;
 		}
@@ -153,17 +156,44 @@ public class AbilityFactory_Bounce {
 		 
 		 // Targeting
 		 if (abTgt != null){
-			 if (list.getNotType("Creature").size() == 0)
-	        	choice = CardFactoryUtil.AI_getBestCreature(list); //if the targets are only creatures, take the best
-	        else 
-	        	choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), true);
+			 abTgt.resetTargets();
+			 // target loop
+			while(abTgt.getNumTargeted() < abTgt.getMaxTargets()){ 
+				if (list.size() == 0){
+					if (abTgt.getNumTargeted() < abTgt.getMinTargets() || abTgt.getNumTargeted() == 0){
+						abTgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+				
+				Card choice = null;
+				if (list.getNotType("Creature").size() == 0)
+					choice = CardFactoryUtil.AI_getBestCreature(list); //if the targets are only creatures, take the best
+				else 
+					choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), true);
+				
+				if (choice == null){	// can't find anything left
+					if (abTgt.getNumTargeted() < abTgt.getMinTargets() || abTgt.getNumTargeted() == 0){
+						abTgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+				list.remove(choice);
+				abTgt.addTarget(choice);
+			}
 
-			 if (choice == null)
-				 return false;
-			 sa.setTargetCard(choice);
 		 }
 		 else{
-				 return false;
+			 // todo: Bounce ~ if about to die
+			 return false;
 		 }
 		 
 		 return ((r.nextFloat() < .6667) && chance);
@@ -174,34 +204,43 @@ public class AbilityFactory_Bounce {
 		String DrawBack = params.get("SubAbility");
 		Card card = af.getHostCard();
 		
-		Card tgtC = (sa.getTarget() == null) ? card : sa.getTargetCard();
-        
- 	   if(AllZone.GameAction.isCardInPlay(tgtC)
-                 && CardFactoryUtil.canTarget(card, tgtC)) 
-         {
-         	if(tgtC.isToken())
-         		AllZone.getZone(tgtC).remove(tgtC);
-         	else 
-         	{  
-         		if(Destination.equals("TopofLibrary"))
-         			AllZone.GameAction.moveToTopOfLibrary(tgtC);
-         		else if(Destination.equals("BottomofLibrary")) 
-         			AllZone.GameAction.moveToBottomOfLibrary(tgtC);
-         		else if(Destination.equals("ShuffleIntoLibrary"))
-         		{
-         			AllZone.GameAction.moveToTopOfLibrary(tgtC);
-         			tgtC.getOwner().shuffle();
-         		}
-         		else if(Destination.equals("Exile"))
-         			AllZone.GameAction.exile(tgtC); 
-         		else if(Destination.equals("Hand"))
-         		{
-             		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, tgtC.getOwner());
-            	 		AllZone.GameAction.moveTo(hand, tgtC);
-         		}
-         	}
-         	if (af.hasSubAbility())
+		ArrayList<Card> tgtCards;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(card);
+		}
+		
+		for(Card tgtC : tgtCards){
+	 	   if(AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
+	         	if(tgtC.isToken())
+	         		AllZone.getZone(tgtC).remove(tgtC);
+	         	else 
+	         	{  
+	         		if(Destination.equals("TopofLibrary"))
+	         			AllZone.GameAction.moveToTopOfLibrary(tgtC);
+	         		else if(Destination.equals("BottomofLibrary")) 
+	         			AllZone.GameAction.moveToBottomOfLibrary(tgtC);
+	         		else if(Destination.equals("ShuffleIntoLibrary"))
+	         		{
+	         			AllZone.GameAction.moveToTopOfLibrary(tgtC);
+	         			tgtC.getOwner().shuffle();
+	         		}
+	         		else if(Destination.equals("Exile"))
+	         			AllZone.GameAction.exile(tgtC); 
+	         		else if(Destination.equals("Hand"))
+	         		{
+	             		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, tgtC.getOwner());
+	            	 		AllZone.GameAction.moveTo(hand, tgtC);
+	         		}
+	         	}
+	         }
+		}
+		
+		if (af.hasSubAbility())
 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-         }
-	}
+     }
 }

@@ -38,27 +38,21 @@ public class Target_Selection {
 			target.resetTargets();
 	}
 	
-	public void incrementTargets(){
-		if (target != null)
-			target.incrementTargets();
-	}
-	
 	public boolean chooseTargets(){
 		// if not enough targets chosen, reset and cancel Ability
-		if (bCancel || bDoneTarget && target.getNumTargeted() < target.getMinTargets()){
+		if (bCancel || (bDoneTarget && !target.isMinTargetsChosen())){
 			bCancel = true;
-			target.resetTargets();
+			req.finishedTargeting();
 			return false;
 		}
-		
-		// if we haven't reached minimum targets, or we're still less than Max targets keep choosing
-		// targeting, with forward code for multiple target abilities
-		if (!bDoneTarget && target.getMinTargets() > 0 && target.getNumTargeted() < target.getMaxTargets()){
-	        changeInput.stopSetNext(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req));
-	        return false;
+		else if (bDoneTarget && target.isMinTargetsChosen() || target.isMaxTargetsChosen()){
+			req.finishedTargeting();
+			return true;
 		}
 		
-		return true;
+		//targets still needed
+        changeInput.stopSetNext(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req));
+        return false;
 	}
 
     // these have been copied over from CardFactoryUtil as they need two extra parameters for target selection.
@@ -98,8 +92,22 @@ public class Target_Selection {
 
 			@Override
             public void showMessage() {
-                AllZone.Display.showMessage(message);
-                ButtonUtil.enableOnlyCancel();
+				// TODO: Update choices here, remove anything already targeted
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Targeted: ");
+				sb.append(select.getTgt().getTargetedString());
+				sb.append("\n");
+				sb.append(message);
+				
+                AllZone.Display.showMessage(sb.toString());
+                
+                Target t = select.getTgt();
+                // If reached Minimum targets, enable OK button
+                if (t.getMinTargets() > t.getNumTargeted())
+                	ButtonUtil.enableOnlyCancel();
+                else
+                	ButtonUtil.enableAll();
             }
             
             @Override
@@ -110,28 +118,33 @@ public class Target_Selection {
             }
             
             @Override
+            public void selectButtonOK() {	
+            	done();
+            }
+            
+            @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(targeted && !CardFactoryUtil.canTarget(spell, card)) {
                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } 
                 else if(choices.contains(card)) {
-                    spell.setTargetCard(card);
+                	select.getTgt().addTarget(card);
                     done();
                 }
             }//selectCard()
             
             @Override
             public void selectPlayer(Player player) {
-            	if (bTgtPlayer && !player.hasShroud()){	// todo: check if the player has Shroud too
-	            	spell.setTargetPlayer(player);
+            	if (bTgtPlayer && player.canTarget(spell.getSourceCard())){
+            		select.getTgt().addTarget(player);
 	                done();
             	}
             }
             
             void done() {
-            	select.incrementTargets();
                 stop();
-                req.finishedTargeting();
+
+                select.chooseTargets();
             }
         };
         return target;
@@ -148,8 +161,8 @@ public class Target_Selection {
 	        public void showMessage() {
 	            Object check = AllZone.Display.getChoiceOptional(message, choices.toArray());
 	            if(check != null) {
-	            	spell.setTargetCard((Card) check);
-	            	select.incrementTargets();
+	            	Card c = (Card) check;
+                	select.getTgt().addTarget(c);
 	            } 
 	            else
 	            	select.setCancel(true);
@@ -159,7 +172,7 @@ public class Target_Selection {
 	        
 	        public void done(){
                 stop();
-                req.finishedTargeting();
+                select.chooseTargets();
 	        }
 	    };//Input
 	    return target;

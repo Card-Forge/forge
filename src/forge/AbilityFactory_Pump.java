@@ -168,14 +168,6 @@ public class AbilityFactory_Pump {
                         
             @Override
             public void resolve() {
-//                final Card[] creature = new Card[1];
-//                if(abTgt.doesTarget()) 
-//                	creature[0] = getTargetCard();
-//                else if (bPumpEquipped)
-//                	creature[0] = card.getEquippingCard();
-//                else 
-//                	creature[0] = card;
-
                 doResolve(this);
                 
                 hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
@@ -264,30 +256,59 @@ public class AbilityFactory_Pump {
         if(curPhase.equals(Constant.Phase.Main2) && !(AF.isCurse() && defense < 0))
         	return false;
         
-		boolean goodt = false;
-		Card t = new Card();
+		Target tgt = AF.getAbTgt();
+		CardList list;
+        if (AF.isCurse())  // Curse means spells with negative effect
+        	list = getCurseCreatures();
+        else
+        	list = getPumpCreatures();
 		
-        if (AF.isCurse()) {  // Curse means spells with negative effect
-        	CardList list = getCurseCreatures();
-        	if (!list.isEmpty()) {
-        		t = CardFactoryUtil.AI_getBestCreature(list);
-        		goodt = true;
-        	}
-        }
-        else { // no Curse means spell with positive effect
-        	CardList list = getPumpCreatures();
-        	if(!list.isEmpty()) {
-        		while(goodt == false && !list.isEmpty()) {
+        if (list.isEmpty())
+        	return false;
+        
+		while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+			Card t = null;
+			boolean goodt = false;
+			
+			if (list.isEmpty()){
+				if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+			
+			if (AF.isCurse()){
+				t = CardFactoryUtil.AI_getBestCreature(list);
+				goodt = true;
+			}
+			else{
+        		while(!goodt && !list.isEmpty()) {
         			t = CardFactoryUtil.AI_getBestCreature(list);
-        			if((t.getNetDefense() + defense) > 0) goodt = true;
+        			if((t.getNetDefense() + defense) > t.getDamage()) goodt = true;
         			else list.remove(t);
         		}
-            }
-        }
-        if(goodt == true) {
-                sa.setTargetCard(t);
-                return true;  
-        }
+	        }
+	        
+	        if(goodt){
+	        	tgt.addTarget(t);
+	        	list.remove(t);
+	        }
+	        
+			if (list.isEmpty()){
+				if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					tgt.resetTargets();
+					return false;
+				}
+				else{
+					// todo is this good enough? for up to amounts?
+					break;
+				}
+			}
+		}
         
         return false;
 
@@ -295,65 +316,72 @@ public class AbilityFactory_Pump {
     
     private void doResolve(SpellAbility sa)
     {
-        Card tgtCard = sa.getTargetCard();
-        
-        final Card[] creature = new Card[1];
-        if (AF.isTargeted())
-        {
-        	if (!CardFactoryUtil.canTarget(hostCard, tgtCard))
-        		return;
-        	else
-        		creature[0] = tgtCard;
-        }
-        //else if equipped
-        
-        else
-        	creature[0] = hostCard;
+		ArrayList<Card> tgtCards;
+		Target tgt = AF.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(hostCard);
+		}
 
-        if(!AllZone.GameAction.isCardInPlay(creature[0])) 
-        	return;
+		int size = tgtCards.size();
+		for(int j = 0; j < size; j++){
+			final Card tgtC = tgtCards.get(j);
+			
+			// only pump things in play
+			if (!AllZone.GameAction.isCardInPlay(tgtC))
+				continue;
+
+			// if pump is a target, make sure we can still target now
+			if (tgt != null && !CardFactoryUtil.canTarget(AF.getHostCard(), tgtC))
+				continue;
+			
+	        final int a = getNumAttack();
+	        final int d = getNumDefense();
+	        
+	        final Command untilEOT = new Command() {
+	            private static final long serialVersionUID = -42244224L;
+	            
+	            public void execute() {
+	                if(AllZone.GameAction.isCardInPlay(tgtC)) {
+	                	tgtC.addTempAttackBoost(-1 * a);
+	                	tgtC.addTempDefenseBoost(-1 * d);
+	                    
+	                    if(Keywords.size() > 0)
+	                    {
+	                    	for (int i=0; i<Keywords.size(); i++)
+	                    	{
+	                    		if (!Keywords.get(i).equals("none"))
+	                    			tgtC.removeExtrinsicKeyword(Keywords.get(i));
+	                    	}
+	                    }
+	                    	
+	                }
+	            }
+	        };
+	        
+	        tgtC.addTempAttackBoost(a);
+	        tgtC.addTempDefenseBoost(d);
+	        if(Keywords.size() > 0)
+	        {
+	        	for (int i=0; i<Keywords.size(); i++)
+	        	{
+	        		if (!Keywords.get(i).equals("none"))
+	        			tgtC.addExtrinsicKeyword(Keywords.get(i));
+	        	}
+	        }
+	        
+	        AllZone.EndOfTurn.addUntil(untilEOT);
         
-        final int a = getNumAttack();
-        final int d = getNumDefense();
-        
-        final Command untilEOT = new Command() {
-            private static final long serialVersionUID = -42244224L;
-            
-            public void execute() {
-                if(AllZone.GameAction.isCardInPlay(creature[0])) {
-                    creature[0].addTempAttackBoost(-1 * a);
-                    creature[0].addTempDefenseBoost(-1 * d);
-                    
-                    if(Keywords.size() > 0)
-                    {
-                    	for (int i=0; i<Keywords.size(); i++)
-                    	{
-                    		if (!Keywords.get(i).equals("none"))
-                    			creature[0].removeExtrinsicKeyword(Keywords.get(i));
-                    	}
-                    }
-                    	
-                }
-            }
-        };
-        
-        creature[0].addTempAttackBoost(a);
-        creature[0].addTempDefenseBoost(d);
-        if(Keywords.size() > 0)
-        {
-        	for (int i=0; i<Keywords.size(); i++)
-        	{
-        		if (!Keywords.get(i).equals("none"))
-        			creature[0].addExtrinsicKeyword(Keywords.get(i));
-        	}
-        }
-        
-        AllZone.EndOfTurn.addUntil(untilEOT);
-        
+		}
+		
+		Card first = tgtCards.get(0);
+		
         if(AF.hasSubAbility()) 
         	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
                 hostCard.getController(), hostCard.getController().getOpponent(),
-                creature[0].getController(), hostCard, creature[0], sa);
+                first.getController(), hostCard, first, sa);
         
     }
 }

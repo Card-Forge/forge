@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -247,8 +248,13 @@ public class AbilityFactory_AlterLife {
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		 
-		 sa.setTargetPlayer(AllZone.ComputerPlayer);
+		 Target tgt = sa.getTarget();
 		 
+		 if (sa.getTarget() != null){
+			 tgt.resetTargets();
+			 sa.getTarget().addTarget(AllZone.ComputerPlayer);
+		 }
+
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
@@ -257,15 +263,22 @@ public class AbilityFactory_AlterLife {
 		String DrawBack = params.get("SubAbility");
 		Card card = af.getHostCard();
 		
-		Player player = sa.getActivatingPlayer();
-		if (af.getAbTgt() != null)
-			player = sa.getTargetPlayer();
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else{
+			tgtPlayers = new ArrayList<Player>();
+			tgtPlayers.add(sa.getActivatingPlayer());
+		}
 		
-		//AllZone.GameAction.gainLife(player, lifeAmount);
-		player.gainLife(lifeAmount, sa.getSourceCard());
+		for(Player p : tgtPlayers)
+			if (tgt == null || p.canTarget(af.getHostCard()))
+				p.gainLife(lifeAmount, sa.getSourceCard());
 		
 		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
 	}
 	
 	public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
@@ -303,7 +316,12 @@ public class AbilityFactory_AlterLife {
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		 
-		 sa.setTargetPlayer(AllZone.ComputerPlayer);
+		 Target tgt = sa.getTarget();
+		 
+		 if (sa.getTarget() != null){
+			 tgt.resetTargets();
+			 sa.getTarget().addTarget(AllZone.HumanPlayer);
+		 }
 		 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
@@ -313,13 +331,21 @@ public class AbilityFactory_AlterLife {
 		String DrawBack = params.get("SubAbility");
 		Card card = af.getHostCard();
 		
-		Player player = sa.getActivatingPlayer().getOpponent();
-		if (af.getAbTgt() != null)
-			player = sa.getTargetPlayer();
+		ArrayList<Player> tgtPlayers;
 		
-		player.loseLife(lifeAmount, sa.getSourceCard());
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else{
+			tgtPlayers = new ArrayList<Player>();
+			tgtPlayers.add(sa.getActivatingPlayer());
+		}
+		
+		for(Player p : tgtPlayers)
+			if (tgt == null || p.canTarget(af.getHostCard()))
+				p.loseLife(lifeAmount, sa.getSourceCard());
 		
 		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
 	}
 }

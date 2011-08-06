@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -96,6 +97,8 @@ public class AbilityFactory_ZoneAffecting {
 		}
 		
 		if (tgt != null){
+			tgt.resetTargets();
+			
 			// todo: handle deciding what X would be around here for Braingeyser type cards
 			int numCards = 1;
 			if (params.containsKey("NumCards"))
@@ -103,7 +106,7 @@ public class AbilityFactory_ZoneAffecting {
 			
 			if (numCards >= AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size()){
 				// Deck the Human? DO IT!
-				sa.setTargetPlayer(AllZone.ComputerPlayer);
+				tgt.addTarget(AllZone.ComputerPlayer);
 				return true;
 			}
 			
@@ -112,7 +115,7 @@ public class AbilityFactory_ZoneAffecting {
 				return false;
 			}
 			
-			sa.setTargetPlayer(AllZone.ComputerPlayer);
+			tgt.addTarget(AllZone.ComputerPlayer);
 		}
 		
 		Random r = new Random();
@@ -127,20 +130,21 @@ public class AbilityFactory_ZoneAffecting {
 		HashMap<String,String> params = af.getMapParams();
 		
 		Card source = sa.getSourceCard();
-		
 		int numCards = Integer.parseInt(params.get("NumCards"));
-		Player player;
 		
-		Player target = sa.getTargetPlayer();
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else{
+			tgtPlayers = new ArrayList<Player>();
+			tgtPlayers.add(sa.getActivatingPlayer());
+		}
 		
-		if (af.getAbTgt() == null)
-			player = sa.getActivatingPlayer();
-		else if(CardFactoryUtil.canTarget(source, target))
-			player = target;
-		else	// Fizzle?
-			return;
-		
-		player.drawCards(numCards);
+		for(Player p : tgtPlayers)
+			if (tgt == null || p.canTarget(af.getHostCard()))
+				p.drawCards(numCards);		
 
 		String DrawBack = params.get("SubAbility");
 		if (af.hasSubAbility())

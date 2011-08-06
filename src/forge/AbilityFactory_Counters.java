@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -141,12 +142,8 @@ public class AbilityFactory_Counters {
 		});
 		
 		if (abTgt != null){
-			if (abTgt.canTgtCreature()){
-				list = list.getType("creature");
-			}
-			else{
-				list = list.getValidCards(abTgt.getValidTgts());
-			}
+			list = list.getValidCards(abTgt.getValidTgts());
+
 			if (list.size() == 0)
 				return false;
 		}
@@ -180,39 +177,64 @@ public class AbilityFactory_Counters {
 		 
 		 // Targeting
 		 if (abTgt != null){
-			 if (af.isCurse()){
-				 if (type.equals("M1M1")){
-					 // try to kill the best killable creature, or reduce the best one 
-					 CardList killable = list.filter(new CardListFilter() {
-						public boolean addCard(Card c) {
-							return c.getNetDefense() <= amount;
-						}
-					 });
-					 if (killable.size() > 0)
-						 choice = CardFactoryUtil.AI_getBestCreature(killable);
-					 else
+			 abTgt.resetTargets();
+			 // target loop
+			while(abTgt.getNumTargeted() < abTgt.getMaxTargets()){ 
+				if (list.size() == 0){
+					if (abTgt.getNumTargeted() < abTgt.getMinTargets() || abTgt.getNumTargeted() == 0){
+						abTgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+				
+				 if (af.isCurse()){
+					 if (type.equals("M1M1")){
+						 // try to kill the best killable creature, or reduce the best one 
+						 CardList killable = list.filter(new CardListFilter() {
+							public boolean addCard(Card c) {
+								return c.getNetDefense() <= amount;
+							}
+						 });
+						 if (killable.size() > 0)
+							 choice = CardFactoryUtil.AI_getBestCreature(killable);
+						 else
+							 choice = CardFactoryUtil.AI_getBestCreature(list);
+					 }
+					 else{
+						 // improve random choice here
+						 list.shuffle();
+						 choice = list.get(0);
+					 }
+				 }
+				 else{
+					 if (type.equals("P1P1")){
 						 choice = CardFactoryUtil.AI_getBestCreature(list);
+					 }
+					 else{
+						 // The AI really should put counters on cards that can use it. 
+						 // Charge counters on things with Charge abilities, etc. Expand these above
+						 list.shuffle();
+						 choice = list.get(0);
+					 } 
 				 }
-				 else{
-					 // improve random choice here
-					 list.shuffle();
-					 choice = list.get(0);
-				 }
-			 }
-			 else{
-				 if (type.equals("P1P1")){
-					 choice = CardFactoryUtil.AI_getBestCreature(list);
-				 }
-				 else{
-					 // The AI really should put counters on cards that can use it. 
-					 // Charge counters on things with Charge abilities, etc. Expand these above
-					 list.shuffle();
-					 choice = list.get(0);
-				 } 
-			 }
-			 if (choice == null)
-				 return false;
-			 sa.setTargetCard(choice);
+				 
+				if (choice == null){	// can't find anything left
+					if (abTgt.getNumTargeted() < abTgt.getMinTargets() || abTgt.getNumTargeted() == 0){
+						abTgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+				list.remove(choice);
+				abTgt.addTarget(choice);
+			}
 		 }
 		 else{
 			// Placeholder: No targeting necessary
@@ -230,11 +252,25 @@ public class AbilityFactory_Counters {
 		String DrawBack = params.get("SubAbility");
 		Card card = af.getHostCard();
 		
-		Card tgtCard = (sa.getTarget() == null) ? card : sa.getTargetCard();
-		tgtCard.addCounter(Counters.valueOf(type), counterAmount);
+		ArrayList<Card> tgtCards;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(card);
+		}
+		
+		for(Card tgtCard : tgtCards)
+			if(AllZone.GameAction.isCardInPlay(tgtCard) && (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)))
+				tgtCard.addCounter(Counters.valueOf(type), counterAmount);
 		
 		if (af.hasSubAbility())
 			 CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
 
 	}
+	
+	
+	// move proliferate here? AB$Proliferate|NumProliferate$2
 }

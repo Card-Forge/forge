@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -79,43 +80,53 @@ public class AbilityFactory_PermanentState {
 		Random r = new Random();
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
-		
-		
 		if (tgt == null){
 			if (sa.getSourceCard().isUntapped())
 				return false;
 		}
 		else{
 			CardList untapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			untapList = untapList.getTargetableCards(source);
 			untapList = untapList.filter(AllZoneUtil.tapped);
+			untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController());
+			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
+			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
+			untapList = untapList.getValidCards(tappablePermanents);
+
+			if (untapList.size() == 0)
+				return false;
 			
-			if (tgt.doesTarget()){
-    			untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController());
-    			
-    			if (untapList.size() == 0)
-    				return false;
-    			
-				Card c = null;
-				CardList dChoices = new CardList();
-				String[] Tgts = tgt.getValidTgts();
-
-				for(int i = 0; i < Tgts.length; i++) {
-					if (Tgts[i].startsWith("Creature")) {
-						c = CardFactoryUtil.AI_getBestCreature(untapList);
-						if (c != null)
-							dChoices.add(c);
+			while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+				Card choice = null;
+				
+				if (untapList.size() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+						tgt.resetTargets();
+						return false;
 					}
-
-					CardListUtil.sortByTextLen(untapList);
-					dChoices.add(untapList.get(0));
-
-					CardListUtil.sortCMC(untapList);
-					dChoices.add(untapList.get(0));
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
 				}
-
-				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
-				sa.setTargetCard(c);
+				
+				if (untapList.getNotType("Creature").size() == 0)
+	        		choice = CardFactoryUtil.AI_getBestCreature(untapList); //if only creatures take the best
+	        	else
+	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(untapList, af.getHostCard(), false);
+				
+				if (choice == null){	// can't find anything left
+					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+						tgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+				
+				untapList.remove(choice);
+				tgt.addTarget(choice);
 			}
 		}
 		
@@ -126,18 +137,25 @@ public class AbilityFactory_PermanentState {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
 		
-		Card target = sa.getTargetCard();
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(card);
+		}
 
-		if (af.getAbTgt() == null)
-			card.untap();
-		else if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target))
-			target.untap();
-		else	// Fizzle?
-			return;
+		for(Card tgtC : tgtCards){
+			if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(af.getHostCard(), tgtC)))
+				tgtC.untap();
+		}
+
+		Card c = tgtCards.get(0);
 		
 		String DrawBack = params.get("SubAbility");
 		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
 
 	}
 	
@@ -223,36 +241,48 @@ public class AbilityFactory_PermanentState {
 				return false;
 		}
 		else{
-			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-			tapList = tapList.getTargetableCards(source);
+			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 			tapList = tapList.filter(AllZoneUtil.untapped);
+			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController());
+			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
+			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
+			tapList = tapList.getValidCards(tappablePermanents);
+
+			if (tapList.size() == 0)
+				return false;
 			
-			if (tgt.doesTarget()){
-    			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController());
-    			
-    			if (tapList.size() == 0)
-    				return false;
-    			
-				Card c = null;
-				CardList dChoices = new CardList();
-				String[] Tgts = tgt.getValidTgts();
-
-				for(int i = 0; i < Tgts.length; i++) {
-					if (Tgts[i].startsWith("Creature")) {
-						c = CardFactoryUtil.AI_getBestCreature(tapList);
-						if (c != null)
-							dChoices.add(c);
+			while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+				Card choice = null;
+				
+				if (tapList.size() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+						tgt.resetTargets();
+						return false;
 					}
-
-					CardListUtil.sortByTextLen(tapList);
-					dChoices.add(tapList.get(0));
-
-					CardListUtil.sortCMC(tapList);
-					dChoices.add(tapList.get(0));
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
 				}
-
-				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
-				sa.setTargetCard(c);
+				
+				if (tapList.getNotType("Creature").size() == 0)
+	        		choice = CardFactoryUtil.AI_getBestCreature(tapList); //if only creatures take the best
+	        	else
+	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
+				
+				if (choice == null){	// can't find anything left
+					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+						tgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+				
+				tapList.remove(choice);
+				tgt.addTarget(choice);
 			}
 		}
 		
@@ -263,18 +293,25 @@ public class AbilityFactory_PermanentState {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
 		
-		Card target = sa.getTargetCard();
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(card);
+		}
 
-		if (af.getAbTgt() == null)
-			card.tap();
-		else if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target))
-			target.tap();
-		else	// Fizzle?
-			return;
+		for(Card tgtC : tgtCards){
+			if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(af.getHostCard(), tgtC)))
+				tgtC.tap();
+		}
+		
+		Card c = tgtCards.get(0);
 		
 		String DrawBack = params.get("SubAbility");
 		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
 
 	}
 	

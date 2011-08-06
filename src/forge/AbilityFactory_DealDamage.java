@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class AbilityFactory_DealDamage {
@@ -63,8 +64,7 @@ public class AbilityFactory_DealDamage {
 
             @Override
             public boolean canPlay(){
-                return (Cost_Payment.canPayAdditionalCosts(AF.getAbCost(), this) 
-                		&& super.canPlay());
+                return super.canPlay();
             }
             
             @Override
@@ -165,7 +165,7 @@ public class AbilityFactory_DealDamage {
 		// TODO handle proper calculation of X values based on Cost
         int damage = getNumDamage(saMe);
         
-        boolean rr = false;
+        boolean rr = AF.isSpell();
         
         if (AF.isAbility())
         {
@@ -173,71 +173,102 @@ public class AbilityFactory_DealDamage {
         	if(r.nextFloat() <= Math.pow(.6667, AF.getHostCard().getAbilityUsed())) 
         		rr = true;
         }
-        else if (AF.isSpell())
-        	rr = true;
         
-        // TODO: Consider targeting the planeswalker
-        if(AF.getAbTgt().canTgtCreatureAndPlayer()) {
-            if(shouldTgtP(damage)) {
-                saMe.setTargetPlayer(AllZone.HumanPlayer);
-                return rr;
-            }
-            
-            Card c = chooseTgtC(damage);
-            if(c != null) {
-                saMe.setTargetCard(c);
-                return rr;
-            }
-        }
+        Target tgt = AF.getAbTgt();
+        // AI handle multi-targeting?
+        tgt.resetTargets();
+		 // target loop
+		while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+	        // TODO: Consider targeting the planeswalker
+	        if(tgt.canTgtCreatureAndPlayer()) {
+
+	            if(shouldTgtP(damage)) {
+	            	tgt.addTarget(AllZone.HumanPlayer);
+	                continue;
+	            }
+	            
+	            Card c = chooseTgtC(damage);
+	            if(c != null) {
+	            	tgt.addTarget(c);
+	                continue;
+	            }
+	        }
+	        
+	        if(tgt.canTgtPlayer() || TgtOpp) {
+	        	tgt.addTarget(AllZone.HumanPlayer);
+	            continue;
+	        }
+	        
+	        if(tgt.canTgtCreature()) {
+	            Card c = chooseTgtC(damage);
+	            if(c != null) {
+	            	tgt.addTarget(c);
+	                continue;
+	            }
+	        }
+	        // fell through all the choices, no targets left?
+			if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+				tgt.resetTargets();
+				return false;
+			}
+			else{
+				// todo is this good enough? for up to amounts?
+				break;
+			}
+		}
         
-        if(AF.getAbTgt().canTgtPlayer() || TgtOpp == true) {
-            saMe.setTargetPlayer(AllZone.HumanPlayer);
-            return rr;
-        }
-        
-        if(AF.getAbTgt().canTgtCreature()) {
-            Card c = chooseTgtC(damage);
-            if(c != null) {
-                saMe.setTargetCard(c);
-                return rr;
-            }
-        }
-        return false;
+        return rr;
     	
     }
     
     private void doResolve(SpellAbility saMe)
     {
         int damage = getNumDamage(saMe);
-        Player tgtP = null;
         
-        if(TgtOpp == true) {
-            tgtP = AF.getHostCard().getController().getOpponent();
-            saMe.setTargetPlayer(tgtP);
-        }
-        
-        Card c = saMe.getTargetCard();
-        if(c != null) {
-            if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(AF.getHostCard(), c)) {
-                c.addDamage(damage, AF.getHostCard());
-                tgtP = c.getController();
-                
-                if(AF.hasSubAbility())
-                	CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), damage,
-                        AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(),
-                        tgtP, AF.getHostCard(), c, saMe);
-
-            }
-        } else {
-            tgtP = saMe.getTargetPlayer();
-            tgtP.addDamage(damage, AF.getHostCard());
-            
-            if(AF.hasSubAbility()) 
-            	CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), damage,
-                    AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(),
-                    tgtP, AF.getHostCard(), null, saMe);
-
+        ArrayList<Object> tgts;
+        Target tgt = AF.getAbTgt();
+        if (tgt != null)
+        	tgts = tgt.getTargets();
+        else{
+        	tgts = new ArrayList<Object>();
+        	if (TgtOpp)
+        		tgts.add(AF.getHostCard().getController().getOpponent());
         }
 
+        if (tgts.size() == 0){
+        	System.out.println("No targets?");
+        	return;
+        }
+        
+        for(Object o : tgts){
+        	if (o instanceof Card){
+        		 Card c = (Card)o;
+        		 if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(AF.getHostCard(), c))
+                     c.addDamage(damage, AF.getHostCard());
+        	}
+        	else if (o instanceof Player){
+        		Player p = (Player) o;
+        		if (p.canTarget(AF.getHostCard()))
+        			p.addDamage(damage, AF.getHostCard());
+        	}
+        }
+        
+        Object obj = tgts.get(0);
+        
+        Player pl = null;
+        Card c = null;
+        
+        if (obj instanceof Card){
+        	c = (Card)obj;
+        	pl = c.getController();
+        }
+        else{
+        	pl = (Player)obj;
+        }
+        
+        if(AF.hasSubAbility())
+        	CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), damage,
+                AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(),
+                pl, AF.getHostCard(), c, saMe);
     }
 }

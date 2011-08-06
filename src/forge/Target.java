@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.ArrayList;
+
 public class Target {	
 	private boolean tgtValid = false;
 	private String ValidTgts[];
@@ -14,16 +16,72 @@ public class Target {
 	private int maxTargets = 1;
 	public int getMaxTargets() { return maxTargets; }
 	
+	public boolean isMaxTargetsChosen() { return maxTargets == numTargeted; }
+	public boolean isMinTargetsChosen() { return minTargets <= numTargeted; }
+	
 	private String tgtZone = Constant.Zone.Play;
 	public void setZone(String tZone) { tgtZone = tZone; }
 	public String getZone() { return tgtZone; }
 	
-	// add array of targets here?
+	// Card or Player are legal targets.
+	private ArrayList<Card> targetCards = new ArrayList<Card>();
+	private ArrayList<Player> targetPlayers = new ArrayList<Player>();
+	
+	public void addTarget(Object o){
+		if (o instanceof Player){
+			Player p = (Player)o;
+			if (!targetCards.contains(p))
+				targetPlayers.add(p);
+		}
+		if (o instanceof Card){
+			Card c = (Card)o;
+			if (!targetCards.contains(c))
+				targetCards.add(c);
+		}
+	}
+	
+	public boolean addTarget(Card c){
+		if (!targetCards.contains(c)){
+			targetCards.add(c);
+			numTargeted++;
+			return true;
+		}
+		return false;
+	}
 
+	public boolean addTarget(Player p){
+		if (!targetPlayers.contains(p)){
+			targetPlayers.add(p);
+			numTargeted++;
+			return true;
+		}
+		return false;
+	}
+
+	public ArrayList<Card> getTargetCards(){
+		return targetCards;
+	}
+	
+	public ArrayList<Player> getTargetPlayers(){
+		return targetPlayers;
+	}
+	
+	public ArrayList<Object> getTargets(){
+		ArrayList<Object> tgts = new ArrayList<Object>();
+		tgts.addAll(targetPlayers);
+		tgts.addAll(targetCards);
+
+		return tgts;
+	}
+	
 	private int numTargeted = 0;
 	public int getNumTargeted() { return numTargeted; }
-	public void incrementTargets() { numTargeted++; }
-	public void resetTargets() { numTargeted = 0; }
+	
+	public void resetTargets() { 
+		numTargeted = 0; 
+		targetCards.clear();
+		targetPlayers.clear();
+	}
 	
 	public Target(String parse){
 		this(parse, 1, 1);
@@ -79,6 +137,25 @@ public class Target {
 		minTargets = min;
 		maxTargets = max;
 	}
+	
+	public String getTargetedString(){
+		ArrayList<Object> tgts = getTargets();
+		StringBuilder sb = new StringBuilder("");
+		for(Object o : tgts){
+			if (o instanceof Player){
+				Player p = (Player)o;
+				sb.append(p.getName());
+			}
+			if (o instanceof Card){
+				Card c = (Card)o;
+				sb.append(c);
+			}
+			sb.append(" ");
+		}
+		
+		return sb.toString();
+	}
+	
 	
 	// These below functions are quite limited to the damage classes, we should find a way to move them into AF_DealDamage
 	public boolean canTgtPlayer() {

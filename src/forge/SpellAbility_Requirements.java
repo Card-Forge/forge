@@ -30,6 +30,7 @@ public class SpellAbility_Requirements {
 		
 		if (select.doesTarget()){
 			select.setRequirements(this);
+			select.resetTargets();
 			select.chooseTargets();
 		}
 		else
@@ -76,7 +77,5 @@ public class SpellAbility_Requirements {
 		ability.getRestrictions().abilityActivated();
 		AllZone.ManaPool.clearPay(false);
 		AllZone.Stack.addAndUnfreeze(ability);
-		if (select != null)
-			select.resetTargets();
 	}
 }

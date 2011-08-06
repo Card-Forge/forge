@@ -26,9 +26,7 @@ public class AbilityFactory_Fetch {
 			
 			@Override
 			public void resolve() {
-				Player tgt = getTargetPlayer();
-				if(null == tgt) tgt = this.getActivatingPlayer();
-				doFetch(af, this, tgt);
+				doFetch(af, this);
 			}
 		
 		};
@@ -52,17 +50,27 @@ public class AbilityFactory_Fetch {
 			
 			@Override
 			public void resolve() {
-				Player tgt = getTargetPlayer();
-				if(null == tgt) tgt = this.getActivatingPlayer();
-				doFetch(af, this, tgt);
+				doFetch(af, this);
 			}		
 		};
 		return spFetch;
 	}
 	
-	private static void doFetch(AbilityFactory af, final SpellAbility sa, Player player){
+	private static void doFetch(AbilityFactory af, final SpellAbility sa){
+		// todo handle targeting changes
+		Target tgt = af.getAbTgt();
+		Player player;
+		if (tgt != null){
+			player = tgt.getTargetPlayers().get(0);
+			if (!player.canTarget(sa.getSourceCard()))
+				return;
+		}
+		else{
+			player = sa.getActivatingPlayer();
+		}
+		
 		if (player.isComputer()){
-			doFetchAI(af, sa, player);
+			doFetchAI(af, sa);
 			return;
 		}
 				
@@ -100,6 +108,7 @@ public class AbilityFactory_Fetch {
 	                	if (params.containsKey("Tapped"))
 	                		c.tap();
 	            	}
+
 	            }
 	            if (af.hasSubAbility())
 	    			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
@@ -107,7 +116,9 @@ public class AbilityFactory_Fetch {
         }
 	}
 	
-	private static void doFetchAI(AbilityFactory af, final SpellAbility sa, Player player){
+	private static void doFetchAI(AbilityFactory af, final SpellAbility sa){
+		Player player = AllZone.ComputerPlayer;
+		
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 		CardList library = AllZoneUtil.getPlayerCardsInLibrary(player);
@@ -198,7 +209,7 @@ public class AbilityFactory_Fetch {
 		
 		Target tgt = af.getAbTgt();
 		if(tgt != null && tgt.canTgtPlayer()) {
-			sa.setTargetPlayer(AllZone.ComputerPlayer);
+			tgt.addTarget(AllZone.ComputerPlayer);
 		}
 
 		// todo: add more decision making for Fetching
@@ -323,18 +334,7 @@ public class AbilityFactory_Fetch {
 			
 			@Override
 			public void resolve() {
-				Card retrieval = getTargetCard();
-				
-				if(null == retrieval){
-				// see if the choice is defined, like "Top" or "Random"
-					if (AF.getMapParams().containsKey("Defined"))
-						retrieval = retrieveDetermineDefined(AF.getMapParams().get("Defined"), getActivatingPlayer());
-					else
-						retrieval = this.getSourceCard();
-				}
-				
-				if (null != retrieval)
-					doRetrieve(af, this, retrieval);
+				doRetrieve(af, this);
 			}
 		
 		};
@@ -360,18 +360,7 @@ public class AbilityFactory_Fetch {
 			
 			@Override
 			public void resolve() {
-				Card retrieval = getTargetCard();
-				
-				if(null == retrieval){
-				// see if the choice is defined, like "Top" or "Random"
-					if (AF.getMapParams().containsKey("Defined"))
-						retrieval = retrieveDetermineDefined(AF.getMapParams().get("Defined"), getActivatingPlayer());
-					else
-						retrieval = this.getSourceCard();
-				}
-				
-				if (null != retrieval)
-					doRetrieve(af, this, retrieval);
+				doRetrieve(af, this);
 			}		
 		};
 		if (spRetrieve.getTarget() != null && !AF.getMapParams().containsKey("TgtZone"))
@@ -423,34 +412,61 @@ public class AbilityFactory_Fetch {
 		
 		Target tgt = af.getAbTgt();
 		if(tgt != null) {
-			// AI Targeting 
+			tgt.resetTargets();
+			 // target loop
 			CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
 			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer);
-			Card c = new Card();
-			
+			 
 			if (list.size() == 0)
 				return false;
 			
-			list.shuffle();
-			if (list.getNotType("Creature").size() == 0 && destination.equals("Battlefield"))
-        		c = CardFactoryUtil.AI_getBestCreature(list); //if only creatures take the best
-        	else if (destination.equals("Battlefield"))
-        		c = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
-        	else
-        		c = list.get(0);
-			sa.setTargetCard(c);
-			// todo: the AI actually needs a "smart" way to choose before we add any Retrieve cards that tgt.
-			// reuse some code from spReturn here
+			
+			while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+				// AI Targeting 
+				Card choice;
+				
+				if (list.size() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+						tgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+
+				if (list.getNotType("Creature").size() == 0 && destination.equals("Battlefield"))
+	        		choice = CardFactoryUtil.AI_getBestCreature(list); //if only creatures take the best
+	        	else if (destination.equals("Battlefield"))
+	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+	        	else{
+					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
+	        		list.shuffle();
+	        		choice = list.get(0);
+	        	}
+				if (choice == null){	// can't find anything left
+					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+						tgt.resetTargets();
+						return false;
+					}
+					else{
+						// todo is this good enough? for up to amounts?
+						break;
+					}
+				}
+				
+				list.remove(choice);
+				tgt.addTarget(choice);
+			}
 		}
 		else{
+			// non-targeted retrieval
 			Card retrieval;
 			if (af.getMapParams().containsKey("Defined")){
 				retrieval = retrieveDetermineDefined(af.getMapParams().get("Defined"), sa.getActivatingPlayer());
 				if (retrieval == null)
 					return false;
-			}
-			else{
-				retrieval = sa.getSourceCard();
 			}
 		}
 
@@ -459,44 +475,65 @@ public class AbilityFactory_Fetch {
 		return ((r.nextFloat() < .8) && chance);
 	}
 	
-	private static void doRetrieve(AbilityFactory af, final SpellAbility sa, Card tgt){
-		// retrieve currently can't target things due to a lack of an input method
-		HashMap<String,String> params = af.getMapParams();
-		
+	private static void doRetrieve(AbilityFactory af, final SpellAbility sa){
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			Card retrieval;
+			if (af.getMapParams().containsKey("Defined"))
+				retrieval = retrieveDetermineDefined(af.getMapParams().get("Defined"), sa.getActivatingPlayer());
+			else
+				retrieval = sa.getSourceCard();
+			tgtCards.add(retrieval);
+		}
+
 		Player player = sa.getActivatingPlayer();
-		CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-		grave = filterListByType(grave, params, "RetrieveType");
 		
-		String DrawBack = params.get("SubAbility");
-        String destination = params.get("Destination");
-        Card card = af.getHostCard();
-        
-        if(grave.size() == 0 || destination == null) 
-        	return;
-        	
-    	grave.remove(tgt);
-    	AllZone.getZone(tgt).remove(tgt);
-    	
-    	if (destination.equals("Hand")) 
-    		AllZone.getZone(Constant.Zone.Hand, player).add(tgt);         			//move to hand
-    	else if (destination.equals("Library")){
-           int libraryPosition = 0;        // this needs to be zero indexed. Top = 0, Third = 2, -1 = Bottom
-           if (params.containsKey("LibraryPosition"))
-        	   libraryPosition = Integer.parseInt(params.get("LibraryPosition"));
-            
-           if (libraryPosition == -1)
-        	   libraryPosition = AllZone.Human_Library.size();
-    		
-           AllZone.getZone(Constant.Zone.Library, player).add(tgt, libraryPosition); //move to library
-    	}
-    	else if (destination.equals("Battlefield")){
-        	AllZone.getZone(Constant.Zone.Play, player).add(tgt); //move to battlefield
-        	if (params.containsKey("Tapped"))
-        		tgt.tap();
-        	if (params.containsKey("GainControl"))
-        		tgt.setController(sa.getActivatingPlayer());
-    	}
-            	
+		for(Card tgtC : tgtCards){
+			HashMap<String,String> params = af.getMapParams();
+			
+			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+			grave = filterListByType(grave, params, "RetrieveType");
+			
+	        String destination = params.get("Destination");
+	        
+	        if(grave.size() == 0 || destination == null) 
+	        	return;
+	        
+	        // targeting check would go here, but shroud and protection doesn't matter in graveyards
+	        
+	    	grave.remove(tgtC);
+	    	AllZone.getZone(tgtC).remove(tgt);
+	    	
+	    	if (destination.equals("Hand")) 
+	    		AllZone.getZone(Constant.Zone.Hand, player).add(tgt);         			//move to hand
+	    	else if (destination.equals("Library")){
+	           int libraryPosition = 0;        // this needs to be zero indexed. Top = 0, Third = 2, -1 = Bottom
+	           if (params.containsKey("LibraryPosition"))
+	        	   libraryPosition = Integer.parseInt(params.get("LibraryPosition"));
+	            
+	           if (libraryPosition == -1)
+	        	   libraryPosition = AllZone.Human_Library.size();
+	    		
+	           AllZone.getZone(Constant.Zone.Library, player).add(tgtC, libraryPosition); //move to library
+	           
+	           if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
+	        	   player.shuffle();
+	    	}
+	    	else if (destination.equals("Battlefield")){
+	        	AllZone.getZone(Constant.Zone.Play, player).add(tgt); //move to battlefield
+	        	if (params.containsKey("Tapped"))
+	        		tgtC.tap();
+	        	if (params.containsKey("GainControl"))
+	        		tgtC.setController(sa.getActivatingPlayer());
+	    	}
+		}
+		String DrawBack = af.getMapParams().get("SubAbility");
+		Card card = sa.getSourceCard();
+		
         if (af.hasSubAbility())
 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
     }//if

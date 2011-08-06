@@ -1,6 +1,8 @@
 
 package forge;
 
+import java.util.ArrayList;
+
 
 //only SpellAbility can go on the stack
 //override any methods as needed
@@ -312,30 +314,43 @@ public abstract class SpellAbility {
     }
     
     public Card getTargetCard() {
-        if(targetCard == null) return null;
+        if(targetCard == null){
+        	Target tgt = this.getTarget();
+        	if (tgt != null){
+	        	ArrayList<Card> list = tgt.getTargetCards();
+	        	
+	        	if (!list.isEmpty())
+	        		return list.get(0);
+        	}
+        	return null;
+        }
         
         return targetCard;
     }
     
     public void setTargetCard(Card card) {
-    	targetPlayer = null;//reset setTargetPlayer()
-
-    	targetCard = card;
+    	if (card == null){
+    		System.out.println(getSourceCard()+" - SpellAbility.setTargetCard() called with null for target card.");
+    		return;
+    	}
+    	
+    	Target tgt = this.getTarget();
+    	if (tgt != null){
+    		tgt.addTarget(card);
+    	}
+    	else{
+	    	targetPlayer = null;//reset setTargetPlayer()
+	    	targetCard = card;
+    	}
     	String desc = "";
     	if(null != card) {
     		if(!card.isFaceDown()) desc = getSourceCard().getName() + " - targeting " + card;
     		else desc = getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
     		setStackDescription(desc);
     	}
-    	else {
-    		System.out.println(getSourceCard()+" - SpellAbility.setTargetCard() called with null for target card.");
-    	}
-        //System.out.println(card + " has become target of a spell or ability (" +this.getSourceCard() + ")");
     }
     
     public CardList getTargetList() {
-        if (targetList == null) return null;
-        
         return targetList;
     }
     
@@ -358,15 +373,31 @@ public abstract class SpellAbility {
     }
     
     public void setTargetPlayer(Player p) {
-        targetCard = null;//reset setTargetCard()
-        
         if(p == null || (!(p.isHuman() || p.isComputer()))) throw new RuntimeException(
                 "SpellAbility : setTargetPlayer() error, argument is " + p + " source card is " + getSourceCard());
-        targetPlayer = p;
+        
+    	Target tgt = this.getTarget();
+    	if (tgt != null){
+    		tgt.addTarget(p);
+    	}
+    	else{
+	        targetCard = null;//reset setTargetCard()
+	        targetPlayer = p;
+    	}
         setStackDescription(getSourceCard().getName() + " - targeting " + p);
     }
     
     public Player getTargetPlayer() {
+        if(targetPlayer == null){
+        	Target tgt = this.getTarget();
+        	if (tgt != null){
+	        	ArrayList<Player> list = tgt.getTargetPlayers();
+	        	
+	        	if (!list.isEmpty())
+	        		return list.get(0);
+        	}
+        	return null;
+        }
         return targetPlayer;
     }
     

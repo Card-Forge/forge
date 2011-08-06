@@ -435,22 +435,38 @@ public class MagicStack extends MyObservable {
 		SpellAbility sa = AllZone.Stack.pop();
 		
 		AllZone.Phase.resetPriority();	// ActivePlayer gains priority first after Resolve
-		Card c = sa.getSourceCard();
+		Card source = sa.getSourceCard();
 		boolean fizzle = false;
 
-		if (sa.getTargetCard() != null) {
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			fizzle = true;
+			// With multi-targets, as long as one target is still legal, we'll try to go through as much as possible
+			ArrayList<Object> tgts = tgt.getTargets();
+			for(Object o : tgts){
+				if (o instanceof Player){
+					Player p = (Player)o;
+					fizzle &= !(p.canTarget(sa.getTargetCard()));
+				}
+				if (o instanceof Card){
+					Card card = (Card)o;
+					fizzle &= !(CardFactoryUtil.isTargetStillValid(sa, card));
+				}
+			}
+		}
+		else if (sa.getTargetCard() != null) {
 			// Fizzling will only work for Abilities that use the Target class,
 			// since the info isn't available otherwise
 			fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
 		} 
 		else if (sa.getTargetPlayer() != null) {
-			fizzle = !CardFactoryUtil.canTarget(c, sa.getTargetPlayer());
+			fizzle = !sa.getTargetPlayer().canTarget(source);
 		}
 
 		if (!fizzle) {
-			final Card crd = c;
+			final Card crd = source;
 			if (sa.isBuyBackAbility()) {
-				c.addReplaceMoveToGraveyardCommand(new Command() {
+				source.addReplaceMoveToGraveyardCommand(new Command() {
 					private static final long serialVersionUID = -2559488318473330418L;
 
 					public void execute() {
@@ -462,7 +478,7 @@ public class MagicStack extends MyObservable {
 
 			// To stop Copied Spells from going into the graveyard.
 			if (sa.getSourceCard().isCopiedSpell()) {
-				c.addReplaceMoveToGraveyardCommand(new Command() {
+				source.addReplaceMoveToGraveyardCommand(new Command() {
 					private static final long serialVersionUID = -2559488318473330418L;
 
 					public void execute() {
@@ -489,28 +505,28 @@ public class MagicStack extends MyObservable {
 			}
 		} else {
 			// TODO: Spell fizzles, what's the best way to alert player?
-			Log.debug(c.getName() + " ability fizzles.");
+			Log.debug(source.getName() + " ability fizzles.");
 		}
 
 		// Handle cards that need to be moved differently
 		if (sa.isFlashBackAbility()){
-			AllZone.GameAction.exile(c);
+			AllZone.GameAction.exile(source);
 			sa.setFlashBackAbility(false);
 		}
 
 		else if (fizzle && sa.isSpell())
-			AllZone.GameAction.moveToGraveyard(c);
+			AllZone.GameAction.moveToGraveyard(source);
 		
 		else if (sa.isAbility())
 		{}	// don't send to graveyard if the spell is using an ability
 
-		else if ((c.isInstant() || c.isSorcery()) && (!c.getName().startsWith("Beacon of"))
-				&& (!c.getName().startsWith("Pulse of the")))												
+		else if ((source.isInstant() || source.isSorcery()) && (!source.getName().startsWith("Beacon of"))
+				&& (!source.getName().startsWith("Pulse of the")))												
 		{
-			if (c.getReplaceMoveToGraveyard().size() == 0)
-				AllZone.GameAction.moveToGraveyard(c);
+			if (source.getReplaceMoveToGraveyard().size() == 0)
+				AllZone.GameAction.moveToGraveyard(source);
 			else
-				c.replaceMoveToGraveyard();
+				source.replaceMoveToGraveyard();
 		}
 
 		AllZone.InputControl.setResolving(false);
