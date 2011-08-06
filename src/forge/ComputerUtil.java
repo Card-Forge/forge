@@ -21,31 +21,30 @@ public class ComputerUtil
 	    sortSpellAbilityByCost(all);
 	//    MyRandom.shuffle(all);
 	
-	    for(int i = 0; i < all.length; i++)
-	    {
-	    	all[i].setActivatingPlayer(AllZone.ComputerPlayer);
-	    	if(canPayCost(all[i]) && all[i].canPlay() && all[i].canPlayAI())
+	    for(SpellAbility sa : all){
+	    	sa.setActivatingPlayer(AllZone.ComputerPlayer);
+	    	if(canPayCost(sa) && sa.canPlay() && sa.canPlayAI())
 	    	{
 		    	AllZone.Stack.freezeStack();
+		    	Card source = sa.getSourceCard();
 		    	
-		    	// todo(sol) this conditional will be removed when Stack Zone is in
-	    		if(all[i].isSpell() && AllZone.GameAction.isCardInZone(all[i].getSourceCard(),AllZone.Computer_Hand))
-		        	AllZone.Computer_Hand.remove(all[i].getSourceCard());
+	    		if(sa.isSpell() && !source.isCopiedSpell())
+	    			AllZone.GameAction.moveToStack(source);
 		
-		        Ability_Cost cost = all[i].getPayCosts();
-		        Target tgt = all[i].getTarget();
+		        Ability_Cost cost = sa.getPayCosts();
+		        Target tgt = sa.getTarget();
 		        
 		        if (cost == null){
-			        payManaCost(all[i]);
-			        all[i].chooseTargetAI();
-			        all[i].getBeforePayManaAI().execute();
-			        AllZone.Stack.addAndUnfreeze(all[i]);
+			        payManaCost(sa);
+			        sa.chooseTargetAI();
+			        sa.getBeforePayManaAI().execute();
+			        AllZone.Stack.addAndUnfreeze(sa);
 		        }
 		        else{
 		        	if (tgt != null && tgt.doesTarget())
-		        		all[i].chooseTargetAI();
+		        		sa.chooseTargetAI();
 		        	
-		        	Cost_Payment pay = new Cost_Payment(cost, all[i]);
+		        	Cost_Payment pay = new Cost_Payment(cost, sa);
 		        	pay.payComputerCosts();
 		        }
 		
@@ -60,21 +59,18 @@ public class ComputerUtil
   {
 	  if (canPayCost(sa))
 	  {
-		  if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
-	    		AllZone.Computer_Hand.remove(sa.getSourceCard());
+		  Card source = sa.getSourceCard();
+		  if(sa.isSpell() && !source.isCopiedSpell())
+  				AllZone.GameAction.moveToStack(source);
 	  
 		  sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	  
-		  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
-			  sa.getSourceCard().getController().drawCard();
-		  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
-			  sa.getSourceCard().getController().addSlowtripList(sa.getSourceCard());
+
 		  payManaCost(sa);
 		  
 		  AllZone.Stack.add(sa);
 		  
-		  if(sa.isSpell())
-		  {
+		  if(sa.isSpell()){
 			  //Run triggers
 			  HashMap<String,Object> runParams = new HashMap<String,Object>();
 			  runParams.put("CastSA", sa);
@@ -87,40 +83,33 @@ public class ComputerUtil
   {
 	  sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	  
-	  if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
-		  AllZone.Computer_Hand.remove(sa.getSourceCard());
-	  
-	  
-	  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
-		  sa.getSourceCard().getController().drawCard();
-	  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
-		  sa.getSourceCard().getController().addSlowtripList(sa.getSourceCard());
-		  
+	  Card source = sa.getSourceCard();
+	  if(sa.isSpell() && !source.isCopiedSpell())
+				AllZone.GameAction.moveToStack(source);
+
 	  AllZone.Stack.add(sa);
   }
   
   final static public void playNoStack(SpellAbility sa)
   {
+	  // todo: We should really restrict what doesn't use the Stack
+	  
     if(canPayCost(sa))
     {
-      if(sa.isSpell())
-      {
-    	if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
-    		AllZone.Computer_Hand.remove(sa.getSourceCard());
-        //probably doesn't really matter anyways
-        //sa.getSourceCard().comesIntoPlay(); - messes things up, maybe for the future fix this
-      }
+    	Card source = sa.getSourceCard();
+		if(sa.isSpell() && !source.isCopiedSpell())
+			AllZone.GameAction.moveToStack(source);
 
       sa.setActivatingPlayer(AllZone.ComputerPlayer);
       
       payManaCost(sa);
-      // todo(sol): if sa has targets, if all of them are invalid, counter the spell
+
       sa.resolve();
 
-      if (sa.getSourceCard().getKeyword().contains("Draw a card."))
-    	  sa.getSourceCard().getController().drawCard();
-	  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
-		  sa.getSourceCard().getController().addSlowtripList(sa.getSourceCard());
+      if (source.getKeyword().contains("Draw a card."))
+    	  source.getController().drawCard();
+	  if (source.getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
+		  source.getController().addSlowtripList(source);
 
       for (int i=0; i<sa.getSourceCard().getKeyword().size(); i++)
       {

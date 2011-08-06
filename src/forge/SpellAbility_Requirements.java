@@ -25,10 +25,8 @@ public class SpellAbility_Requirements {
 			if (!ability.getSourceCard().isCopiedSpell()){
 				Card c = ability.getSourceCard();
 
-				// todo(sol): move Spell to Stack here?
 				fromZone = AllZone.getZone(c);
-				if (fromZone != null)
-					fromZone.remove(c);	
+				AllZone.GameAction.moveToStack(c);
 			}
 		}
 		
@@ -48,9 +46,10 @@ public class SpellAbility_Requirements {
 	public void finishedTargeting(){
 		if (select.isCanceled()){
 			// cancel ability during target choosing
-			if (bCasting && !ability.getSourceCard().isCopiedSpell()){	// and not a copy
+			Card c = ability.getSourceCard();
+			if (bCasting && !c.isCopiedSpell()){	// and not a copy
 				// add back to hand
-				fromZone.add(ability.getSourceCard());
+				AllZone.GameAction.moveToHand(c);
 			}
 			
 			select.resetTargets();
@@ -77,8 +76,11 @@ public class SpellAbility_Requirements {
 		if (isFree || payment.isAllPaid())
 			addAbilityToStack();
 		else if (payment.isCanceled()){
-			if (bCasting && !ability.getSourceCard().isCopiedSpell())
-				fromZone.add(ability.getSourceCard()); // add back to hand
+			Card c = ability.getSourceCard();
+			if (bCasting && !c.isCopiedSpell()){	// and not a copy
+				// add back to hand
+				AllZone.GameAction.moveToHand(c);
+			}
 			
 			if (select != null)
 				select.resetTargets();

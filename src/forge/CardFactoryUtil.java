@@ -989,8 +989,7 @@ public class CardFactoryUtil {
                 sourceCard.setType(new ArrayList<String>()); //remove all types
                 sourceCard.addType("Creature");
                 
-                hand.remove(sourceCard);
-                play.add(sourceCard);
+                AllZone.GameAction.moveToPlay(sourceCard);
             }
             
             @Override
@@ -1774,14 +1773,13 @@ public class CardFactoryUtil {
             }//canPlayAI()
 
 			public void resolve() {
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
-                play.add(sourceCard);
-                
+				AllZone.GameAction.moveToPlay(sourceCard);
+
                 Card c = getTargetCard();
                 
+                // i think this is checked for already in fizzle?
                 if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
                 	sourceCard.enchantCard(c);
-                    //System.out.println("Enchanted: " +getTargetCard());
                 }
             }//resolve()
         };//enchant ability

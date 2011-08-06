@@ -3833,21 +3833,18 @@ public class CardFactory_Creatures {
                 public void resolve() {
                 	CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
                 	if(library.size() == 0) return;	// maybe provide some notification that library is empty?
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-
+ 
 					CardList revealed = new CardList();
 
 					Card basicGrab = null;
-					Card top;
+
 					int count = 0;
 					// reveal top card until library runs out or hit a basic land
 					while(basicGrab == null) {
-						top = library.get(count);
+						Card top = library.get(count);
 						count++;
 						revealed.add(top);
-						lib.remove(top);
+
 						if (top.isBasicLand())
 							basicGrab = top;
 
@@ -3858,12 +3855,12 @@ public class CardFactory_Creatures {
 					
 					if (basicGrab != null){
 						// put basic in hand
-						hand.add(basicGrab);
+						AllZone.GameAction.moveToHand(basicGrab);
 						revealed.remove(basicGrab);
 					}
 					// place revealed cards in graveyard (todo: player should choose order)
 					for(Card c : revealed){
-						grave.add(c);
+						AllZone.GameAction.moveToGraveyard(c);
 					}
                 }
             };
@@ -4283,8 +4280,7 @@ public class CardFactory_Creatures {
 	                                "Put a creature with a power 5 or greater onto the battlefield: ", TopCreatures.toArray());
 	                        if(o2 != null) {
 	                            Card c = (Card) o2;
-	                            lib.remove(c);
-	                            play.add(c);
+	                            AllZone.GameAction.moveToPlay(c);
 	                            TopCards.remove(c);
 	                        }
                         } else 
@@ -4312,8 +4308,7 @@ public class CardFactory_Creatures {
                         });
                         if(TopCreatures.size() > 0) {
                         	Card c = CardFactoryUtil.AI_getBestCreature(TopCreatures);
-                            lib.remove(c);
-                            play.add(c);
+                        	AllZone.GameAction.moveToPlay(c);
                             TopCards.remove(c);
                         Count = TopCards.size();
                     	for(int i = 0; i < Count; i++) {

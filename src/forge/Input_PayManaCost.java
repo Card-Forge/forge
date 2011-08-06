@@ -80,11 +80,10 @@ public class Input_PayManaCost extends Input {
 			if (spell.isUntapAbility())
 				originalCard.untap();
 
-			// this seems to remove a card if it is in the player's hand
-			// and trys to remove abilities, but no error messsage is generated
-			
-			// todo(sol) if spell but not copied spell, move to stack
-			AllZone.Human_Hand.remove(originalCard);
+			// if this is a spell, move it to the Stack ZOne
+
+			if (spell.isSpell())	// already checked for if its a copy
+				AllZone.GameAction.moveToStack(originalCard);
 
 			if (spell.getAfterPayMana() != null)
 				stopSetNext(spell.getAfterPayMana());

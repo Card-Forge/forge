@@ -78,6 +78,11 @@ public class GameAction {
         return moving;
     }
     
+    public Card moveToStack(Card c){
+    	PlayerZone stack = AllZone.getZone(Constant.Zone.Stack, null);
+    	return moveTo(stack, c);
+    }
+    
     //card can be anywhere like in Hand or in Play
     public Card moveToGraveyard(Card c) {
     	
@@ -2139,12 +2144,6 @@ public class GameAction {
     	if(!c.isToken()) removed.add(c);
     }
     
-    public void removeUnearth(Card c)
-    {
-    	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
-    	removed.add(c);
-    }
-    
     //is this card a permanent that is in play?
     public boolean isCardInPlay(Card c) {
         return PlayerZoneUtil.isCardInZone(AllZone.Computer_Battlefield, c)
@@ -3179,8 +3178,10 @@ public class GameAction {
 	    	}      
 	        if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
 	        	if (sa.getAfterPayMana() == null){
-		        	CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
-		        	if(HHandList.contains(sa.getSourceCard())) AllZone.Human_Hand.remove(sa.getSourceCard());
+	        		Card source = sa.getSourceCard();
+	        		if(sa.isSpell() && !source.isCopiedSpell())
+	        			AllZone.GameAction.moveToStack(source);
+
 		            AllZone.Stack.add(sa);
 		            if(sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
 		            if(sa.isUntapAbility()) sa.getSourceCard().untap();

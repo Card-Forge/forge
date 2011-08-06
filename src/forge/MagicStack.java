@@ -53,6 +53,12 @@ public class MagicStack extends MyObservable {
 		}
 		frozen = false;
 		this.add(ability);
+
+		// if the ability is a spell, but not a copied spell and its not already on the stack zone, move there
+		Card source = ability.getSourceCard();
+		if (ability.isSpell() && !source.isCopiedSpell() && !AllZone.getZone(source).is(Constant.Zone.Stack))
+			AllZone.GameAction.moveToStack(source);
+		
 		unfreezeStack();
 	}
 
@@ -582,7 +588,8 @@ public class MagicStack extends MyObservable {
 					Phase.ComputerCreatureSpellCount = Phase.ComputerCreatureSpellCount + 1;
 				}
 			}
-			// attempt to counter human spell (todo(sol) fix this to go with new ai stuff)
+			// attempt to counter human spell 
+			// TODO this needs to move to the stack response section for the AI
 			if (sp.getSourceCard().getController().equals(AllZone.HumanPlayer) && CardFactoryUtil.isCounterable(sp.getSourceCard()))
 				ComputerAI_counterSpells2.counter_Spell(sp);
 
