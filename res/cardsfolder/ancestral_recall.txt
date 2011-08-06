@@ -2,8 +2,10 @@ Name:Ancestral Recall
 ManaCost:U
 Types:Instant
 Text:no text
-#K:spDrawCardsTgt:3:Target player draws three cards.:Ancestral Recall - draw 3 cards.
-A:SP$Draw|Cost$U|NumCards$3|Tgt$TgtP|SpellDescription$Target player draws three cards.
+A:SP$Draw | Cost$ U | NumCards$ 3 | Tgt$ TgtP | SpellDescription$ Target player draws three cards.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
 End
+#
+#K:spDrawCardsTgt:3:Target player draws three cards.:Ancestral Recall - draw 3 cards.
+#
