@@ -7,5 +7,5 @@ K:enPump:+1/+1
 K:WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
 K:Totem armor
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curiosity.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_umbra.jpg
 End
