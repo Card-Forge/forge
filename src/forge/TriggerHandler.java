@@ -37,6 +37,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_ChangesZone(mapParams,host);
 		}
+		else if(mode.equals("Cycled"))
+		{
+			ret = new Trigger_Cycled(mapParams,host);
+		}
 		else if(mode.equals("DamageDone"))
 		{
 			ret = new Trigger_DamageDone(mapParams,host);

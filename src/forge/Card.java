@@ -925,7 +925,7 @@ public class Card extends MyObservable {
             if (sb.toString().contains("(NOTE: ") && sb.toString().endsWith(".)") && !sb.toString().endsWith("\r\n")) {
                 sb.append("\r\n");
             }
-            
+
             // Add SpellAbilities
             SpellAbility[] sa = getSpellAbility();
             for (int i = 0; i < sa.length; i++) {
@@ -934,6 +934,12 @@ public class Card extends MyObservable {
             
             // Add Keywords
             ArrayList<String> kw = getKeyword();
+            
+         // Triggered abilities
+            for(Trigger trig : triggers)
+            {
+            	sb.append(trig.toString() + "\r\n");
+            }
             
             // Ripple + Dredge + Madness + CARDNAME is {color} + Recover.
             for (int i = 0; i < kw.size(); i++) {
@@ -1436,6 +1442,11 @@ public class Card extends MyObservable {
     public void cycle() {
         for(Command var:cycleCommandList)
             var.execute();
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Card", this);
+        AllZone.TriggerHandler.runTrigger("Cycled", runParams);
     }
     
     public void setSickness(boolean b) {
