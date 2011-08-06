@@ -1,5 +1,5 @@
 Name:Executioner's Capsule
-ManaCost:1 B
+ManaCost:B
 Types:Artifact
 Text:no text
 K:abDestroyTgtV 1 B T Sac<1/CARDNAME>:Creature.nonBlack:Destroy target nonblack creature.
