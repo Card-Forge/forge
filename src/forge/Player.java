@@ -664,9 +664,14 @@ public abstract class Player extends MyObservable{
         }
         
         //Run triggers
+        Card cause = null;
+        if(sa != null)
+        {
+        	cause = sa.getSourceCard();
+        }
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Card", c);
-        runParams.put("Cause", sa.getSourceCard());
+        runParams.put("Cause", cause);
         AllZone.TriggerHandler.runTrigger("Discarded", runParams);
         
     }//end doDiscard

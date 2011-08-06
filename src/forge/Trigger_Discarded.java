@@ -20,6 +20,10 @@ public class Trigger_Discarded extends Trigger {
 		
 		if(mapParams.containsKey("ValidCause"))
 		{
+			if(runParams.get("Cause") == null)
+			{
+				return false;
+			}
 			if(!matchesValid(runParams.get("Cause"),mapParams.get("ValidCause").split(","),hostCard))
 			{
 				return false;
