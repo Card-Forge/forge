@@ -2178,6 +2178,7 @@ res/cardsfolder/infectious_horror.txt -text svneol=native#text/plain
 res/cardsfolder/infernal_contract.txt -text svneol=native#text/plain
 res/cardsfolder/infernal_kirin.txt -text svneol=native#text/plain
 res/cardsfolder/infernal_medusa.txt -text svneol=native#text/plain
+res/cardsfolder/infernal_tribute.txt -text svneol=native#text/plain
 res/cardsfolder/inferno.txt -text svneol=native#text/plain
 res/cardsfolder/inferno_titan.txt -text svneol=native#text/plain
 res/cardsfolder/infest.txt -text svneol=native#text/plain
