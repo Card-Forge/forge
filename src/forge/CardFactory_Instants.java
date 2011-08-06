@@ -4024,6 +4024,100 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Firestorm")) {
+        	final ArrayList<Object> targets = new ArrayList<Object>();
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -3763504534745192451L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	int dmg = targets.size();
+                    for(Object o:targets) {
+                    	if(o instanceof Player) {
+                    		if(((Player) o).canTarget(card)) {
+                    			((Player) o).addDamage(dmg, card);
+                    		}
+                    	}
+                    	else if(o instanceof Card) {
+                    		if(AllZone.GameAction.isCardInPlay((Card)o) && CardFactoryUtil.canTarget(card, (Card)o)) {
+                    			((Card)o).addDamage(dmg, card);
+                    		}//if isCardInPlay
+                    	}
+                    }
+                    targets.clear();
+                }
+            };
+
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 5261183989797221059L;
+
+				@Override
+                public void showMessage() {
+					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+					hand.remove(card);
+					hand.updateObservers();
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - Select target creatures, players, and/or planeswalkers.  Currently, (");
+					sb.append(targets.size()).append(") selected.");
+					sb.append(" Press OK when done.");
+                    AllZone.Display.showMessage(sb.toString());
+                    ButtonUtil.enableAll();
+                }
+				
+				@Override
+	            public void selectButtonCancel() { 
+					targets.clear();
+					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+					hand.add(card);
+					stop();
+				}
+				
+				@Override
+                public void selectCard(Card c, PlayerZone zone) {
+					if(zone.is(Constant.Zone.Battlefield) && !targets.contains(c)
+							&& CardFactoryUtil.canTarget(card, c) && 
+							(c.isCreature() || c.isPlaneswalker())) {
+						targets.add(c);
+						showMessage();
+					}
+				}
+				
+				@Override
+				public void selectPlayer(Player p) {
+					if(p.canTarget(card) && !targets.contains(p)) {
+						targets.add(p);
+						showMessage();
+					}
+				}
+				
+				@Override
+				public void selectButtonOK() {
+					done();
+				}
+				
+				private void done() {
+					if(targets.size() > AllZoneUtil.getPlayerHand(card.getController()).size()) stop();
+					else {
+						card.getController().discard(targets.size(), spell, true);
+						stopSetNext(new Input_PayManaCost(spell));
+					}
+					
+				}
+            };
+            spell.setStackDescription(cardName+" - deals X damage to each of X target creatures and/or players.");
+            spell.setBeforePayMana(runtime);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
