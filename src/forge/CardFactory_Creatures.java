@@ -4083,48 +4083,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Monk Idealist")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) {
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                        AllZone.GameAction.moveTo(hand, getTargetCard());
-                    }
-                }//resolve()
-            };
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = 6483805330273377116L;
-
-				public void execute() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    CardList enchant = new CardList(grave.getCards());
-                    enchant = enchant.getType("Enchantment");
-                    
-                    String controller = card.getController();
-                    
-                    if(enchant.size() == 0) return;
-                    
-                    if(controller.equals(Constant.Player.Human)) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target card", enchant.toArray());
-                        if(o != null) {
-                            ability.setTargetCard((Card) o);
-                            AllZone.Stack.add(ability);
-                        }
-                    } else //computer
-                    {
-                    	enchant.shuffle();
-                        ability.setTargetCard(enchant.get(0));
-                        AllZone.Stack.add(ability);
-                    }
-                    
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Penumbra Kavu")) {
@@ -15751,7 +15709,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Auramancer")) {
+        else if(cardName.equals("Auramancer") || cardName.equals("Monk Idealist")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -15782,19 +15740,16 @@ public class CardFactory_Creatures {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
                         }
-                    } else //computer
-                    {
+                    } 
+                    else{ //computer
                         enchantments.shuffle();
                         ability.setTargetCard(enchantments.get(0));
                         AllZone.Stack.add(ability);
                     }
-                    
                 }//execute()
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-                
 
         //*************** START *********** START **************************
         else if(cardName.equals("Merfolk Sovereign")) {
