@@ -5261,9 +5261,17 @@ class CardFactory_Auras {
                 String k[] = parse.split(":");
                 String keywordsUnsplit = "";
                 String extrinsicKeywords[] = {"none"};    // for equips with no keywords to add
+                
+                final String spDesc[] = {"none"};
+                final String stDesc[] = {"none"};
+                StringBuilder sbD = new StringBuilder();
+                StringBuilder sbSD = new StringBuilder();
 
                 int Power = 0;
                 int Tough = 0;
+                
+                sbD.append("Enchanted creature ");
+
                 
                 String ptk[] = k[1].split("/");
                 
@@ -5274,6 +5282,11 @@ class CardFactory_Auras {
                 
                 else    // parse the power/toughness boosts in first two cells
                 {
+                    sbD.append("gets ");
+                    sbD.append(ptk[0].trim());
+                    sbD.append("/");
+                    sbD.append(ptk[1].trim());
+                    
                     for (int i = 0; i < 2; i ++)
                     {
                         if (ptk[i].matches("[\\+\\-][0-9]")) ptk[i] =ptk[i].replace("+", "");
@@ -5282,25 +5295,44 @@ class CardFactory_Auras {
                     Tough = Integer.parseInt(ptk[1].trim());
                     
                     if (ptk.length > 2)     // keywords in third cell
+                    {
                         keywordsUnsplit = ptk[2];
+                        sbD.append(" and ");
+                    }
                 }
                 
                 if (keywordsUnsplit.length() > 0)    // then there is at least one extrinsic keyword to assign
                 {
+                	sbD.append("has ");
+                	
                     String tempKwds[] = keywordsUnsplit.split("&");
                     extrinsicKeywords = new String[tempKwds.length];
                     
                     for (int i = 0; i < tempKwds.length; i ++)
                     {
                         extrinsicKeywords[i] = tempKwds[i].trim();
+                        
+                        sbD.append(extrinsicKeywords[i].toLowerCase());
+                        if (i < tempKwds.length - 2)    {    sbD.append(", ");    }
+                        if (i == tempKwds.length - 2)    {    sbD.append(" and ");    }
                     }
                 }
-                card.clearSpellAbility();
-                card.addSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords));
+                sbD.append(".");
+                spDesc[0] = sbD.toString();
                 
-                card.addEnchantCommand(CardFactoryUtil.enPump_onEnchant(card, Power, Tough, extrinsicKeywords));
-                card.addUnEnchantCommand(CardFactoryUtil.enPump_unEnchant(card, Power, Tough, extrinsicKeywords));
-                card.addLeavesPlayCommand(CardFactoryUtil.enPump_LeavesPlay(card, Power, Tough, extrinsicKeywords));
+                sbSD.append(cardName);
+                sbSD.append(" - ");
+                sbSD.append("enchants target creature.");
+                stDesc[0] = sbSD.toString();
+                
+                if (k.length > 2)    {    spDesc[0] = k[2].trim();    }    // Use the spell and stack descriptions included
+                if (k.length > 3)    {    stDesc[0] = k[3].trim();    }    // with the keyword if they are present.
+                
+                card.clearSpellAbility();
+                card.addSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                card.addEnchantCommand(CardFactoryUtil.enPump_onEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                card.addUnEnchantCommand(CardFactoryUtil.enPump_unEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                card.addLeavesPlayCommand(CardFactoryUtil.enPump_LeavesPlay(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
             }
         }// enPump
         

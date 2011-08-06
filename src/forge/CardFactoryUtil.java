@@ -1388,9 +1388,21 @@ public class CardFactoryUtil {
         return onUnEquip;
     }//eqPump_unEquip ( was vanila_unequip() )
     
-    public static SpellAbility enPump_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+    public static SpellAbility enPump_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
+    		final String[] spellDescription, final String[] stackDescription) {
+    	
         final SpellAbility enchant = new Spell(sourceCard) {
 			private static final long serialVersionUID = -8259560434384053776L;
+			
+			@Override
+            public boolean canPlay() {
+                return (sourceCard.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || 
+                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand))    // for flash, which is not working through the keyword for some reason
+                            ||
+                       (! sourceCard.getKeyword().contains("Flash") &&    // if not flash then limit to main 1 and 2 on controller's turn
+                       (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
+                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
+            }
 			
             public boolean canPlayAI() {
                 CardList list = new CardList(AllZone.Computer_Play.getCards());
@@ -1424,12 +1436,14 @@ public class CardFactoryUtil {
             }//resolve()
         };//enchant ability
         enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
-        enchant.setDescription("This is a test of a setDescription");
+        enchant.setDescription(spellDescription[0]);
+        enchant.setStackDescription(stackDescription[0]);
         
 		return enchant;
     }//enPump_Enchant()
     
-    public static Command enPump_onEnchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+    public static Command enPump_onEnchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
+    		final String[] spellDescription, final String[] stackDescription) {
     	
         Command onEnchant = new Command() {
             
@@ -1453,7 +1467,8 @@ public class CardFactoryUtil {
         return onEnchant;
     }//enPump_onEnchant
     
-    public static Command enPump_unEnchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+    public static Command enPump_unEnchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
+    		final String[] spellDescription, final String[] stackDescription) {
         
     	Command onUnEnchant = new Command() {
             
@@ -1476,7 +1491,8 @@ public class CardFactoryUtil {
         return onUnEnchant;
     }//enPump_unEnchant
     
-    public static Command enPump_LeavesPlay(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+    public static Command enPump_LeavesPlay(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
+    		final String[] spellDescription, final String[] stackDescription) {
     	
     	Command onLeavesPlay = new Command() {
     		
