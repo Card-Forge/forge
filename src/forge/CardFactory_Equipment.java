@@ -486,6 +486,123 @@ class CardFactory_Equipment {
             
         } //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Hedron Matrix")) {
+        	/*
+        	 * Equipped creature gets +X/+X, where X is its converted mana cost.
+        	 */
+        	final Ability equip = new Ability(card, "4") {
+
+        		//not changed
+        		@Override
+        		public void resolve() {
+        			if(AllZone.GameAction.isCardInPlay(getTargetCard())
+        					&& CardFactoryUtil.canTarget(card, getTargetCard())) {
+        				if(card.isEquipping()) {
+        					Card crd = card.getEquipping().get(0);
+        					if(crd.equals(getTargetCard())) return;
+
+        					card.unEquipCard(crd);
+        				}
+        				card.equipCard(getTargetCard());
+        			}
+        		}
+
+        		//not changed
+        		@Override
+        		public boolean canPlay() {
+        			return AllZone.getZone(card).is(Constant.Zone.Play)
+        			&& AllZone.Phase.getActivePlayer().equals(card.getController())
+        			&& (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+        			"Main2"));
+        		}
+
+        		//not changed
+        		@Override
+        		public boolean canPlayAI() {
+        			return getCreature().size() != 0 && !card.isEquipping();
+        		}
+
+        		//not changed
+        		@Override
+        		public void chooseTargetAI() {
+        			Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+        			setTargetCard(target);
+        		}
+
+        		//not changed
+        		CardList getCreature() {
+        			CardList list = new CardList(AllZone.Computer_Play.getCards());
+        			list = list.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+        					&& CardFactoryUtil.canTarget(card, c)
+        					&& (!c.getKeyword().contains("Defender"));
+        				}
+        			});
+
+        			// is there at least 1 Loxodon Punisher to target
+        			CardList equipMagnetList = list.getName("Loxodon Punisher");
+        			if (equipMagnetList.size() != 0) {
+        				return equipMagnetList;
+        			}
+
+        			return list;
+        		}//getCreature()
+
+        	};//equip ability
+
+
+        	Command onEquip = new Command() {
+        		public void execute() {
+        			if(card.isEquipping()) {
+        				Card crd = card.getEquipping().get(0);
+        				int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
+        				crd.addSemiPermanentAttackBoost(pump);
+        				crd.addSemiPermanentDefenseBoost(pump);
+        			}
+        		}//execute()
+        	};//Command
+
+
+        	Command onUnEquip = new Command() {
+        		public void execute() {
+        			if(card.isEquipping()) {
+        				Card crd = card.getEquipping().get(0);
+        				int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
+        				crd.addSemiPermanentAttackBoost(-pump);
+        				crd.addSemiPermanentDefenseBoost(-pump);
+
+        			}
+
+        		}//execute()
+        	};//Command
+
+
+        	Input runtime = new Input() {
+        		
+        		@Override
+        		public void showMessage() {
+        			//get all creatures you control
+        			CardList list = new CardList();
+        			list.addAll(AllZone.Human_Play.getCards());
+        			list = list.getType("Creature");
+
+        			stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list,
+        					"Select target creature to equip", true, false));
+        		}
+        	};//Input
+
+        	equip.setBeforePayMana(runtime);
+
+        	equip.setDescription("Equip: 4");
+        	card.addSpellAbility(equip);
+
+        	card.addEquipCommand(onEquip);
+        	card.addUnEquipCommand(onUnEquip);
+
+        } //*************** END ************ END **************************
+        
 
         if (shouldEquip(card) != -1) {
             int n = shouldEquip(card);
