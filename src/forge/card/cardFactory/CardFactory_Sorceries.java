@@ -2309,25 +2309,6 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Stitch in Time")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 8869467398554803600L;
-
-				@Override
-                public void resolve() {
-                	if(GameActionUtil.flipACoin(card.getController(), card)) {
-                		AllZone.Phase.addExtraTurn(card.getController());
-                	}
-                }
-            };
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************        
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Traumatize")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 42470566751344693L;
