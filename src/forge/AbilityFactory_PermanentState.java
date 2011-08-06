@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import forge.gui.GuiUtils;
+
 public class AbilityFactory_PermanentState {
 	// ****************************************
 	// ************** Untapping *****************
@@ -357,6 +359,7 @@ public class AbilityFactory_PermanentState {
 	        }
 		}
 	}
+	
 	// ****************************************
 	// ************** Tapping *****************
 	// ****************************************
@@ -722,6 +725,7 @@ public class AbilityFactory_PermanentState {
 	        }
 		}
 	}
+	
 	// ****************************************
 	// ************** UntapAll *****************
 	// ****************************************
@@ -1069,4 +1073,246 @@ public class AbilityFactory_PermanentState {
 	}
 	
 	//Phasing? Something else? Who knows!
+	
+	
+	// ****************************************
+	// ************** Tap or Untap ************
+	// ****************************************
+	
+	public static SpellAbility createAbilityTapOrUntap(final AbilityFactory AF){
+		final SpellAbility abTapOrUntap = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -4713183763302932079L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return tapOrUntapStackDescription(af, this);
+			}
+			
+			public boolean canPlayAI()
+			{
+				return tapOrUntapCanPlayAI(af,this);
+			}
+			
+			@Override
+			public void resolve() {
+				tapOrUntapResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return tapOrUntapTrigger(af, this, mandatory);
+			}
+			
+		};
+		return abTapOrUntap;
+	}
+	
+	public static SpellAbility createSpellTapOrUntap(final AbilityFactory AF){
+		final SpellAbility spTapOrUntap = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -8870476840484788521L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return tapOrUntapStackDescription(af, this);
+			}
+			
+			public boolean canPlayAI()
+			{
+				return tapOrUntapCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				tapOrUntapResolve(af, this);
+			}
+			
+		};
+		return spTapOrUntap;
+	}
+	
+	public static SpellAbility createDrawbackTapOrUntap(final AbilityFactory AF){
+		final SpellAbility dbTapOrUntap = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -8282868583712773337L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return tapOrUntapStackDescription(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				tapOrUntapResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return tapOrUntapPlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return tapOrUntapTrigger(af, this, mandatory);
+			}
+			
+		};
+		return dbTapOrUntap;
+	}
+	
+	public static String tapOrUntapStackDescription(AbilityFactory af, SpellAbility sa){
+		// when getStackDesc is called, just build exactly what is happening
+		 StringBuilder sb = new StringBuilder();
+		 
+		 if (sa instanceof Ability_Sub)
+			 sb.append(" ");
+		 else
+			 sb.append(sa.getSourceCard()).append(" - ");
+		 
+		 sb.append("Tap or untap ");
+		 
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		}
+		
+		for(Card c : tgtCards)
+			sb.append(c.getName()).append(", ");
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	sb.append(subAb.getStackDescription());
+		
+		 return sb.toString();
+	}
+	
+	public static boolean tapOrUntapCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		// AI cannot use this properly until he can use SAs during Humans turn
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Target tgt = af.getAbTgt();
+		Card source = sa.getSourceCard();
+		
+		Random r = new Random();
+		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		
+		if (tgt == null){
+			//assume we are looking to tap human's stuff
+			//TODO - check for things with untap abilities, and don't tap those.
+			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, af.getMapParams().get("Defined"), sa);
+			
+			boolean bFlag = false;
+			for(Card c : defined)
+				bFlag |= c.isUntapped();
+			
+			if (!bFlag)	// All of the defined stuff is tapped, not very useful
+				return false;
+		}
+		else{
+			tgt.resetTargets();
+			if (!tapPrefTargeting(source, tgt, af, sa, false))
+				return false;
+		}
+		
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	randomReturn &= subAb.chkAI_Drawback();
+		
+		return randomReturn;
+	}
+	
+	public static boolean tapOrUntapTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Target tgt = sa.getTarget();
+		Card source = sa.getSourceCard();
+		
+		if (tgt == null){
+			if (mandatory)
+				return true;
+			
+			// TODO: use Defined to determine if this is an unfavorable result
+			
+			return true;
+		}
+		else{
+			if (tapPrefTargeting(source, tgt, af, sa, mandatory)){
+				return true;
+			}
+			else if (mandatory){
+				// not enough preferred targets, but mandatory so keep going:
+				return tapUnpreferredTargeting(af, sa, mandatory);
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean tapOrUntapPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
+		// AI cannot use this properly until he can use SAs during Humans turn
+		Target tgt = af.getAbTgt();
+		Card source = sa.getSourceCard();
+		
+		boolean randomReturn = true;
+		
+		if (tgt == null){
+			// either self or defined, either way should be fine
+		}
+		else{
+			// target section, maybe pull this out?
+			tgt.resetTargets();
+			if (!tapPrefTargeting(source, tgt, af, sa, false))
+				return false;
+		}
+		
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	randomReturn &= subAb.chkAI_Drawback();
+		
+		return randomReturn;
+	}
+	
+	public static void tapOrUntapResolve(final AbilityFactory af, final SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		Card card = sa.getSourceCard();
+		
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+		}
+
+		for(Card tgtC : tgtCards){
+			if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(af.getHostCard(), tgtC))){
+				String[] tapOrUntap = new String[] {"Tap", "Untap"};
+				Object z = GuiUtils.getChoiceOptional("Tap or Untap?", tapOrUntap);
+				if(null == z) continue;
+				boolean tap = (z.equals("Tap")) ? true : false;
+				
+				if(tap) tgtC.tap();
+				else tgtC.untap();
+			}
+		}
+		
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   abSub.resolve();
+	        }
+	        else{
+	    		Card c = tgtCards.get(0);
+	    		String DrawBack = params.get("SubAbility");
+	    		if (af.hasSubAbility())
+	    			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
+	        }
+		}
+	}
 }
