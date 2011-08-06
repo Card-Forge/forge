@@ -15318,71 +15318,6 @@ public class GameActionUtil {
 
 	};
 
-	public static Command Privileged_Position         = new Command() {
-		private static final long serialVersionUID   = -6677858046910868126L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.removeExtrinsicKeyword("CARDNAME can't be the target of spells or abilities your opponents control.");
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Privileged Position");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList perms = new CardList(
-						zone[outer].getCards());
-
-				for(int i = 0; i < perms.size(); i++) {
-					c = perms.get(i);
-					if(c.isPermanent()
-							&& !c.getName().equals(
-									"Privileged Position")
-									&& !c.getExtrinsicKeyword().contains(
-									"CARDNAME can't be the target of spells or abilities your opponents control.")) {
-						c.addExtrinsicKeyword("CARDNAME can't be the target of spells or abilities your opponents control.");
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Priviliged_Position
-
-	public static Command Privileged_Position_Other   = new Command() {
-		private static final long serialVersionUID = -220264241686906985L;
-		int                       otherPPs         = 0;
-
-		private int countOtherPPs(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList pps = new CardList(play.getCards());
-			pps = pps.getName("Privileged Position");
-			return pps.size() - 1;
-
-		}
-
-		public void execute() {
-			CardList pp = AllZoneUtil.getCardsInPlay("Privileged Position");
-
-			for(int i = 0; i < pp.size(); i++) {
-				Card c = pp.get(i);
-				otherPPs = countOtherPPs(c);
-				if(otherPPs > 0) c.addExtrinsicKeyword("CARDNAME can't be the target of spells or abilities your opponents control.");
-				//else if
-			}// for inner
-		}// execute()
-
-	}; //Privileged_Position_Other
-
 	public static Command Broodwarden      = new Command() {
 
 		private static final long serialVersionUID = -9033688979680507210L;
@@ -19381,8 +19316,6 @@ public class GameActionUtil {
 		commands.put("Master_of_Etherium_Other", Master_of_Etherium_Other);
 		commands.put("Squirrel_Mob_Other", Squirrel_Mob_Other);
 		commands.put("Relentless_Rats_Other", Relentless_Rats_Other);
-		commands.put("Privileged_Position", Privileged_Position);
-		commands.put("Privileged_Position_Other", Privileged_Position_Other);
 		commands.put("Broodwarden", Broodwarden);
 		commands.put("Elvish_Archdruid_Pump", Elvish_Archdruid_Pump);
 		commands.put("Elvish_Archdruid_Other", Elvish_Archdruid_Other);
