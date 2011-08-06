@@ -7,4 +7,6 @@ A:AB$Pump | Cost$ Sac<1/CARDNAME> | KW$ HIDDEN Prevent all combat damage that wo
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resistance_fighter.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/118.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/38.jpg
 End
