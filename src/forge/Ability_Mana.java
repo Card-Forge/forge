@@ -76,8 +76,10 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         this.orig = (sourceCard.getName().length() == 0? orig:orig.replaceAll(sourceCard.getName(), "CARDNAME"));
         setDescription(orig);
         
+        /*
         if (sourceCard.getName().equals("Black Lotus"))
         	System.out.println("BLACK LOTUS!");
+        */
         
         /*
         String parts[] = orig.split(":");
