@@ -82,7 +82,7 @@ public class AbilityFactory_Counters {
 		list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				return AllZone.GameAction.canTarget(c, source);
+				return CardFactoryUtil.canTarget(c, source);
 			}
 		});
 		

@@ -3087,12 +3087,6 @@ public class GameAction {
         return true;
     }
     
-    public boolean canTarget(Card target, Card source) {
-        if(target.getKeyword().contains("Cannot be target of spells or abilities")) return false;
-        
-        return true;
-    }
-    
     public void playCard(Card c) {
         HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
