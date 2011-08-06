@@ -14352,7 +14352,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Seal of Fire")) {
+        else if(cardName.equals("Seal of Fire") || cardName.equals("Moonglove Extract")) {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public boolean canPlayAI() {
@@ -14393,7 +14393,7 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("Sacrifice Seal of Fire: Seal of Fire deals 2 damage to target creature or player.");
+            ability.setDescription("Sacrifice " + cardName + ": Seal of Fire deals 2 damage to target creature or player.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command() {
                 private static final long serialVersionUID = 4180346673509230280L;
                 
