@@ -11242,14 +11242,12 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			//TODO: This should be limited to Upkeep when we have a phase for that
-        			return super.canPlay() && AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
+        			return super.canPlay() && AllZone.Phase.getPhase().equals(Constant.Phase.Upkeep)
+        				&& AllZone.Phase.getPlayerTurn().equals(card.getController());
         		}
 
         		@Override
         		public boolean canPlayAI() {
-        			//PlayerLife compy = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
-        			//PlayerLife human = AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer);
         			if(AllZone.ComputerPlayer.getLife() < 5 && AllZone.HumanPlayer.getLife() > 5) {
         				return true;
         			}
