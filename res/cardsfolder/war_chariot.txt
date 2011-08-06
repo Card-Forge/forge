@@ -2,7 +2,7 @@ Name:War Chariot
 ManaCost:3
 Types:Artifact
 Text:no text
-K:abPumpTgtC 3 T:Trample
+A:AB$Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_chariot.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/323.jpg

@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:abPumpTgtC 1 T:Protection from artifacts
+A:AB$Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from artifacts | SpellDescription$ Target creature gains protection from artifacts until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_the_magistrate.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/330.jpg
