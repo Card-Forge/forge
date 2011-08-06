@@ -190,7 +190,7 @@ public class ImageCache implements NewConstants {
         BufferedImage image = new BufferedImage(tgtWidth, tgtHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 3, 1.0f):original, at, null);
+        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
         g2d.dispose();
         return image;
     }
@@ -214,7 +214,7 @@ public class ImageCache implements NewConstants {
         BufferedImage image = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 3, 1.0f):original, at, null);
+        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
         g2d.dispose();
         return image;
     }

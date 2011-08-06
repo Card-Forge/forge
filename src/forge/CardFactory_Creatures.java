@@ -747,10 +747,10 @@ public class CardFactory_Creatures {
 	        	{
 	        		Card c = getTargetCard();
 	        		
-	        		
 	        		copy = new Card();
 	        		
 	        		copy.setName(c.getName());
+	        		copy.setImageName(c.getImageName());
 
 	                copy.setOwner(c.getController());
 	                copy.setController(c.getController());
@@ -5076,7 +5076,7 @@ public class CardFactory_Creatures {
 	          list.addAll(AllZone.Computer_Play.getCards());
 	          list = list.filter(new CardListFilter(){
 				public boolean addCard(Card c) {
-					return c.isPermanent() && CardFactoryUtil.canTarget(card,c) && CardUtil.getColor(c).equals(Constant.Color.Black);
+					return c.isPermanent() && CardFactoryUtil.canTarget(card,c) && CardUtil.getColors(c).contains(Constant.Color.Black);
 				}
 	          });
 
@@ -5131,9 +5131,8 @@ public class CardFactory_Creatures {
 	            human = human.filter(new CardListFilter()
 	            {
 					public boolean addCard(Card c) {
-						return c.isPermanent() && CardUtil.getColor(c).equals(Constant.Color.Black);
+						return c.isPermanent() && CardUtil.getColors(c).contains(Constant.Color.Black);
 					}
-	            	
 	            });
 	            //target = CardFactoryUtil.AI_getBestCreature(human);//returns null if list is empty
 	            human.shuffle();
@@ -5148,9 +5147,8 @@ public class CardFactory_Creatures {
 	              computer = computer.filter(new CardListFilter()
 	              {
 					public boolean addCard(Card c) {
-						return c.isPermanent() && CardUtil.getColor(c).equals(Constant.Color.Black);
+						return c.isPermanent() && CardUtil.getColors(c).contains(Constant.Color.Black);
 					}
-	            	  
 	              });
 
 	              computer.shuffle();

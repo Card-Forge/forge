@@ -77,6 +77,7 @@ public class GameActionUtil
 		upkeep_Aven_Riftwatcher();
 		upkeep_Calciderm();
 		upkeep_Blastoderm();
+		upkeep_Masticore();
 		upkeep_Eldrazi_Monument();
 		upkeep_Blaze_Counters();
 		upkeep_Dark_Confidant(); // keep this one semi-last
@@ -6883,6 +6884,70 @@ public class GameActionUtil
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Bitterblossom()
+	
+    private static void upkeep_Masticore()
+    {
+       final String player = AllZone.Phase.getActivePlayer();
+       PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+       
+       CardList list = new CardList(playZone.getCards());
+       list = list.getName("Masticore");
+       
+       Ability ability;
+       for (int i = 0; i < list.size(); i++)
+       {
+    	   final Card crd = list.get(i);
+    	   
+    	   final Input discard = new Input()
+    	   {
+			    private static final long serialVersionUID = 2252076866782738069L;
+				public void showMessage()
+	            {
+	              AllZone.Display.showMessage(crd + " - Discard a card from your hand");
+	              ButtonUtil.enableOnlyCancel();
+	            }
+	            public void selectCard(Card c, PlayerZone zone)
+	            {
+	              if(zone.is(Constant.Zone.Hand))
+	              {
+	                AllZone.GameAction.discard(c);
+	                stop();
+	              }
+	             }
+	             public void selectButtonCancel()
+	             {
+	            	AllZone.GameAction.sacrifice(crd);
+	            	stop();
+	             }
+           };//Input
+           
+          ability = new Ability(crd, "0")
+ 	      {
+ 	        public void resolve()
+ 	        {
+ 	          if(crd.getController().equals(Constant.Player.Human))
+ 	          {
+ 	            if(AllZone.Human_Hand.getCards().length == 0)
+ 	              AllZone.GameAction.sacrifice(crd);
+ 	            else
+ 	              AllZone.InputControl.setInput(discard);
+ 	          }
+ 	          else //comp
+ 	          {
+ 	            CardList list = new CardList(AllZone.Computer_Hand.getCards());
+ 	            
+ 	            if (list.size() != 0)
+ 	            	AllZone.GameAction.discard(list.get(0));
+ 	            else 
+ 	                AllZone.GameAction.sacrifice(crd);
+ 	          }//else
+ 	        }//resolve()
+ 	      };//Ability
+ 	      ability.setStackDescription(crd + " - sacrifice Masticore unless you discard a card.");
+          AllZone.Stack.add(ability);
+       }// for
+    }//upkeep_Masticore
+
 	
 	private static void upkeep_Eldrazi_Monument()
 	{
