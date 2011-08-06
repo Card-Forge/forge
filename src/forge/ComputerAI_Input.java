@@ -18,7 +18,7 @@ public class ComputerAI_Input extends Input
     public void showMessage()
     {
 	ButtonUtil.disableAll();
-	AllZone.Display.showMessage("Phase: " +AllZone.Phase.getPhase() +"\nComputer is thinking");
+	AllZone.Display.showMessage("Phase: " +AllZone.Phase.getPhase() + "\nAn error may have occurred. Please send the \"Stack Report\" and the \"Detailed Error Trace\" to the Forge forum.");
 	
 	think();
     }//getMessage();
