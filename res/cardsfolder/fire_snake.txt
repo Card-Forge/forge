@@ -6,5 +6,5 @@ PT:3/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target land.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land 
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_snake.jpg
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/fire_snake.jpg
 End
