@@ -1,3 +1,21 @@
+Burrowing
+R
+Enchantment Aura
+Enchanted creature has mountainwalk.
+Enchant creature
+enPump:Mountainwalk
+
+Prophetic Prism
+2
+Artifact
+no text
+When CARDNAME enters the battlefield, draw a card.
+1, tap: add W
+1, tap: add B
+1, tap: add U
+1, tap: add R
+1, tap: add G
+
 Machinate
 1 U U
 Instant
@@ -818,17 +836,6 @@ no text
 2/1
 When CARDNAME enters the battlefield, draw a card.
 Echo:G G
-
-Prophetic Prism
-2
-Artifact
-no text
-When CARDNAME enters the battlefield, draw a card.
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
 
 Scavenged Weaponry
 2 B
@@ -2120,13 +2127,6 @@ Enchanted creature has shroud.
 Flash
 Enchant creature
 enPump:Shroud
-
-Burrowing
-R
-Enchantment 
-Enchanted creature has mountainwalk.
-Enchant creature
-enPump:Mountainwalk
 
 Improvised Armor
 3 W
