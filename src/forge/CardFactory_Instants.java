@@ -3755,8 +3755,7 @@ public class CardFactory_Instants {
 				
 				@Override
         		public boolean canPlayAI() {
-					Player player = getTargetPlayer();
-        			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, player);
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
         			CardList graveList = new CardList(grave.getCards());
         			
         			//int computerLife = AllZone.ComputerPlayer.getLife();
