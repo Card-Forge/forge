@@ -1,0 +1,8 @@
+Name:Ichor Rats
+ManaCost:1 B B
+Types:Creature Rat
+Text:When Ichor Rats enters the battlefield, each player gets a poison counter.
+PT:2/1
+K:Infect
+SVar:Rarity:Uncommon
+End

@@ -17670,6 +17670,29 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(addLevelCounters);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Ichor Rats")) {
+
+        	final Ability ability = new Ability(card, "0") {
+        		
+        		@Override
+        		public void resolve() {
+        			AllZone.Human_PoisonCounter.addPoisonCounters(1);
+        			AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+        		}//resolve()
+        	};//Ability
+
+        	Command addPsnCounters = new Command() {
+				private static final long serialVersionUID = 454918862752568246L;
+
+				public void execute() {
+        			ability.setStackDescription(card + " - Each player gets a poison counter.");
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	card.addComesIntoPlayCommand(addPsnCounters);
+        }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Tuktuk the Explorer")) {
