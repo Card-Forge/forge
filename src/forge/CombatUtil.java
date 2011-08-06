@@ -424,7 +424,8 @@ public class CombatUtil {
         }//flanking
         
         if(attacker.getName().equals("Cho-Manno, Revolutionary")) return false;
-        if(attacker.getKeyword().contains("Indestructible")) return false;
+        if(attacker.getKeyword().contains("Indestructible") && 
+        		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
         
         //this usually doesn't happen, unless the attacker got pro {color} after being blocked, or the defender became {color}
         if(attacker.getKeyword().contains("Protection from white")
@@ -522,17 +523,6 @@ public class CombatUtil {
     
     public static boolean canDestroyBlocker(Card defender, Card attacker) {
     	
-        if(defender.getKeyword().contains("Indestructible")) return false;
-        if(attacker.getName().equals("Sylvan Basilisk")) return true;
-        
-        if(attacker.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
-        	int KeywordPosition = attacker.getKeywordPosition("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
-        	String parse = attacker.getKeyword().get(KeywordPosition).toString();
-    		String k[] = parse.split(":");
-    		final String restrictions[] = k[1].split(",");
-    		if(defender.isValidCard(restrictions)) return true;
-        }
-        
         int flankingMagnitude = 0;
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
             
@@ -543,9 +533,22 @@ public class CombatUtil {
                 kw = list.get(i);
                 if(kw.equals("Flanking")) flankingMagnitude++;
             }
-            if(flankingMagnitude >= defender.getNetDefense() - defender.getDamage()) return true;
-            
+            if(flankingMagnitude >= defender.getNetDefense()) return true;
+            if((flankingMagnitude >= defender.getNetDefense() - defender.getDamage()) && !defender.getKeyword().contains("Indestructible")) return true;    
         }//flanking
+        
+        if(defender.getKeyword().contains("Indestructible") && 
+        		!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect"))) return false;
+        if(attacker.getName().equals("Sylvan Basilisk")) return true;
+        
+        if(attacker.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
+        	int KeywordPosition = attacker.getKeywordPosition("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
+        	String parse = attacker.getKeyword().get(KeywordPosition).toString();
+    		String k[] = parse.split(":");
+    		final String restrictions[] = k[1].split(",");
+    		if(defender.isValidCard(restrictions)) return true;
+        }
+        
         if(defender.getName().equals("Cho-Manno, Revolutionary")) return false;
         
         if(defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
