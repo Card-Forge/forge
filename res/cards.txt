@@ -1,3 +1,8 @@
+Time Reversal
+3 U U
+Sorcery
+Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. Exile Time Reversal.
+
 Primeval Titan
 4 G G
 Creature Giant

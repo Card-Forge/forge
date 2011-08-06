@@ -4828,7 +4828,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Timetwister")) {
+        else if(cardName.equals("Timetwister") || cardName.equals("Time Reversal")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 505983020365091226L;
                 
@@ -4836,6 +4836,9 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     discardDraw7(Constant.Player.Human);
                     discardDraw7(Constant.Player.Computer);
+                    
+                    if (cardName.equals("Time Reversal"))
+                    	AllZone.GameAction.removeFromGame(card);
                 }//resolve()
                 
                 void discardDraw7(String player) {
