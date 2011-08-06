@@ -1,0 +1,10 @@
+Name:Wall of Roots
+ManaCost:1 G
+Types:Creature Plant Wall
+Text:no text
+PT:0/5
+K:Defender
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_roots.jpg
+End

@@ -31,6 +31,7 @@ public enum Counters {
     KI(),
     LEVEL(),
     LOYALTY(),
+    M0M1("-0/-1"),
     M1M1("-1/-1"),
     MANA(),
     MINING(),

@@ -13706,6 +13706,40 @@ public class CardFactory_Creatures {
             card.addSpellAbility(kicker);
         }//*************** END ************ END **************************
         
+        
+        //*************** START ************ START **************************
+        else if(cardName.equals("Wall of Roots")) {
+        	/*
+        	 * Put a -0/-1 counter on Wall of Roots: Add  to your mana pool. Activate this ability only once each turn.
+        	 */
+        	Ability_Cost abCost = new Ability_Cost("AddCounter<1/M0M1>", cardName, true);
+        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = 5369063561394954892L;
+
+				@Override
+        		public void resolve() {
+        			AllZone.ManaPool.addManaToFloating("G", card);
+        		}
+				
+				@Override
+				public boolean canPlayAI() {
+					return false;
+				}
+        	};
+        	
+        	mana.getRestrictions().setActivationLimit(1);
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append(abCost).append("Add G to your mana pool. Activate this ability only once each turn.");
+        	mana.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(cardName).append(" - add G to your mana pool.");
+        	mana.setStackDescription(sbStack.toString());
+        	
+        	card.addSpellAbility(mana);
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
