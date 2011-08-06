@@ -931,7 +931,9 @@ public class AbilityFactory_ChangeZone {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
-		if (changeKnownPreferredTarget(af, sa, mandatory)){
+		if (sa.getTarget() == null)	// Just in case of Defined cases
+			; // do nothing
+		else if (changeKnownPreferredTarget(af, sa, mandatory)){
 			; // do nothing
 		}
 		else if (!changeKnownUnpreferredTarget(af, sa, mandatory))
