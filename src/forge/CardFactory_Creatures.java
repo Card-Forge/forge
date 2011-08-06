@@ -1871,7 +1871,8 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         */
-
+        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Inner-Flame Acolyte") || cardName.equals("Vulshok Heartstoker")) {
             final CommandReturn getCreature = new CommandReturn() {
@@ -1972,7 +1973,7 @@ public class CardFactory_Creatures {
                 });
             }
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Slaughterhouse Bouncer")) {
