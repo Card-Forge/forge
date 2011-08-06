@@ -1,0 +1,8 @@
+Name:Battlegrowth
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$PutCounter | Cost$ G | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+End

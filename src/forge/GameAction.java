@@ -338,6 +338,7 @@ public class GameAction {
                 c.setName("Elf Warrior");
                 c.setImageName("G 1 1 Elf Warrior");
                 c.setManaCost("G");
+                c.addColor("G");
                 c.setToken(true);
                 
                 c.addType("Creature");
