@@ -20,13 +20,7 @@ public class EndOfTurn implements java.io.Serializable
   public void executeAt()
   {
 	  AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"BeginningOfEndStep",null);
-	  
-	//Run Triggers
-  	HashMap<String,Object> runParams = new HashMap<String,Object>();
-  	runParams.put("Phase", Constant.Phase.End_Of_Turn);
-  	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-  	AllZone.TriggerHandler.runTrigger("Phase", runParams);
-	  
+
     //Pyrohemia and Pestilence
     CardList all = AllZoneUtil.getCardsInPlay();
 

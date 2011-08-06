@@ -162,6 +162,12 @@ public class Phase extends MyObservable
         final String phase = AllZone.Phase.getPhase();
         final Player turn = AllZone.Phase.getPlayerTurn();
         AllZone.Phase.setSkipPhase(true);
+
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+		runParams.put("Phase", phase);
+		runParams.put("Player", turn);
+		AllZone.TriggerHandler.runTrigger("Phase", runParams);
         
         if(phase.equals(Constant.Phase.Untap)) {
             PhaseUtil.handleUntap();
@@ -199,12 +205,6 @@ public class Phase extends MyObservable
         
 	    else if(phase.equals(Constant.Phase.Combat_Begin)){
 	    	PhaseUtil.verifyCombat();
-	    	
-	    	//Run triggers
-	    	HashMap<String,Object> runParams = new HashMap<String,Object>();
-	    	runParams.put("Phase", phase);
-	    	runParams.put("Player", getPlayerTurn());
-	    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 	    }
         
 	    else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)){
@@ -277,11 +277,6 @@ public class Phase extends MyObservable
 			else{
 				AllZone.EndOfCombat.executeUntil();
 				AllZone.EndOfCombat.executeAt();
-				
-		    	HashMap<String,Object> runParams = new HashMap<String,Object>();
-		    	runParams.put("Phase", phase);
-		    	runParams.put("Player", getPlayerTurn());
-		    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 			}
         }
 

@@ -46,13 +46,7 @@ public class PhaseUtil {
     		AllZone.Phase.setNeedToNextPhase(true);
     		return;
     	}
-		
-    	//Run triggers
-    	HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	runParams.put("Phase", Constant.Phase.Untap);
-    	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
-		
+
         // Phasing would happen here
         
         doUntap();
@@ -310,12 +304,6 @@ public class PhaseUtil {
 	        return;
 		}
 		
-    	//Run triggers
-    	HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	runParams.put("Phase", Constant.Phase.Upkeep);
-    	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
-		
         GameActionUtil.executeUpkeepEffects();
 	}
 	
@@ -340,13 +328,7 @@ public class PhaseUtil {
     		AllZone.Phase.setNeedToNextPhase(true);
     		return;
     	}
-		
-    	//Run triggers
-    	HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	runParams.put("Phase", Constant.Phase.Draw);
-    	runParams.put("Player", playerTurn);
-    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
-    	
+
     	playerTurn.drawCard();
         GameActionUtil.executeDrawStepEffects();
     }
