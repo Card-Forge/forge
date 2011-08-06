@@ -2772,6 +2772,9 @@ public class GameAction {
         
         if(sa == null) return;
         
+        // Ripple causes a crash because it doesn't set the activatingPlayer in this entrance
+        if (sa.getActivatingPlayer() == null)
+        	sa.setActivatingPlayer(AllZone.HumanPlayer);
         playSpellAbilityForFree(sa);
     }
     
