@@ -438,6 +438,8 @@ public class Card extends MyObservable {
     
     //for Planeswalker abilities and Combat Damage (like Wither), Doubling Season gets ignored.
     public void addCounterFromNonEffect(Counters counterName, int n) {
+    	if(this.hasKeyword("CARDNAME can't have counters placed on it."))
+    		return;
         if(counters.containsKey(counterName)) {
             Integer aux = counters.get(counterName) + n;
             counters.put(counterName, aux);
@@ -448,6 +450,8 @@ public class Card extends MyObservable {
     }
     
     public void addCounter(Counters counterName, int n) {
+    	if(this.hasKeyword("CARDNAME can't have counters placed on it."))
+    		return;
     	int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(this.getController());
         if(counters.containsKey(counterName)) {
             Integer aux = counters.get(counterName) + (multiplier * n);
@@ -526,6 +530,8 @@ public class Card extends MyObservable {
     }
     
     public void setCounter(Counters counterName, int n, boolean bSetValue) {
+    	if(this.hasKeyword("CARDNAME can't have counters placed on it."))
+    		return;
     	if (bSetValue)	// sometimes you just need to set the value without being affected by DoublingSeason
     		counters.put(counterName, Integer.valueOf(n));
     	else{

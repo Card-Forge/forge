@@ -155,6 +155,12 @@ public class AbilityFactory_Counters {
 				return CardFactoryUtil.canTarget(source, c);
 			}
 		});
+		
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return !c.hasKeyword("CARDNAME can't have counters placed on it.");
+			}
+		});
 
 		if (abTgt != null){
 			list = list.getValidCards(abTgt.getValidTgts(),source.getController(),source);
