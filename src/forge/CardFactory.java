@@ -19842,6 +19842,7 @@ public class CardFactory implements NewConstants {
             };//Input
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Expedition Map")) {
         	final Ability_Tap ability = new Ability_Tap(card, "2") {
@@ -19912,6 +19913,49 @@ public class CardFactory implements NewConstants {
         	spell.setStackDescription(card.getName()+" - discard X cards and return X cards to your hand.");
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Windfall")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -7707012960887790709L;
+            
+                @Override
+                public boolean canPlayAI() {
+                    /*
+                     *  We want compy to have less cards in hand than the human
+                     */
+                    CardList Hhand = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
+                    CardList Chand = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
+                    return Chand.size() < Hhand.size();
+                }
+                
+            @Override
+            public void resolve() {
+                discardDraw(Constant.Player.Human);
+                discardDraw(Constant.Player.Computer);
+            }//resolve()
+            
+            void discardDraw(String player) {
+                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+                CardList Hhand = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
+                CardList Chand = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
+                int draw;
+                if(Hhand.size() >= Chand.size()) {
+                    draw = Hhand.size();
+                } else {
+                    draw = Chand.size();
+                }
+                Card[] c = hand.getCards();
+                for(int i = 0; i < c.length; i++)
+                    AllZone.GameAction.discard(c[i]);
+            
+                for(int i = 0; i < draw; i++)
+                    AllZone.GameAction.drawCard(player);
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
         

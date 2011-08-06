@@ -1,3 +1,8 @@
+Windfall
+2 U
+Sorcery
+Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+
 Oath of Druids
 1 G
 Enchantment
