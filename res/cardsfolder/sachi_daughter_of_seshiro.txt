@@ -9,4 +9,5 @@ SVar:Mana:AB$Mana | Cost$ T | Produce$ G | Amount$ 2 | SpellDescription$ Add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 Svar:Picture:http://www.wizards.com/global/images/magic/general/sachi_daughter_of_seshiro.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/238.jpg
 End

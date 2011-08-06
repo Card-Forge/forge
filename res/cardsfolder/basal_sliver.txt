@@ -8,4 +8,5 @@ SVar:Mana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produce$ B | Amount$ 2 | SpellDescri
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 Svar:Picture:http://www.wizards.com/global/images/magic/general/basal_sliver.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/96.jpg
 End

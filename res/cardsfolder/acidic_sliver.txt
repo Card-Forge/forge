@@ -8,4 +8,5 @@ SVar:Damage:AB$DealDamage | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Creature,Player
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_sliver.jpg
 SVar:Rarity:Common
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/138.jpg
 End

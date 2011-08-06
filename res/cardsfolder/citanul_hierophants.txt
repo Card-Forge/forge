@@ -7,4 +7,5 @@ K:stPumpAll:Creature.YouCtrl:0/0/SVar=Mana:no Condition:Creatures you control ha
 SVar:Mana:AB$Mana | Cost$ T | Produce$ G | Amount$ 1 | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Rare
 Svar:Picture:http://www.wizards.com/global/images/magic/general/citanul_hierophants.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/244.jpg
 End
