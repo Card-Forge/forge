@@ -1,3 +1,70 @@
+Thran Quarry
+no cost
+Land
+At the beginning of the end step, if you control no creatures, sacrifice CARDNAME.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
+
+Tigereye Cameo
+3
+Artifact
+no text
+tap: add W
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
+
+Troll-Horn Cameo
+3
+Artifact
+no text
+tap: add R
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/troll_horn_cameo.jpg
+
+Undiscovered Paradise
+no cost
+Land
+Whenever you tap CARDNAME for mana, return it to it's owner's hand during the controller's next untap phase.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
+
+Urborg Elf
+1 G
+Creature Elf Druid
+no text
+1/1
+tap: add U
+tap: add B
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
+
+Utopia Tree
+1 G
+Creature Plant
+no text
+0/2
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84434.jpg
+
 Seashell Cameo
 3
 Artifact
@@ -31203,19 +31270,6 @@ StaticEffect:Play:Self:PTBonus/2/2!Keyword/Flying!Keyword/First Strike!Keyword/T
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
 
-Thran Quarry
-no cost
-Land
-At the beginning of the end step, if you control no creatures, sacrifice CARDNAME.
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
-
 Thran War Machine
 4
 Artifact Creature Construct
@@ -31404,15 +31458,6 @@ Enchant creature
 enPump:+1/+1/Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tiger_claws.jpg
-
-Tigereye Cameo
-3
-Artifact
-no text
-tap: add G
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
 
 Timber Protector
 4 G
@@ -32195,15 +32240,6 @@ CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49828.jpg
 
-Troll-Horn Cameo
-3
-Artifact
-no text
-tap: add G
-tap: add R
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/troll_horn_cameo.jpg
-
 Tromp the Domains
 5 G
 Sorcery
@@ -32554,18 +32590,6 @@ Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or he
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underworld_dreams.jpg
 
-Undiscovered Paradise
-no cost
-Land
-Whenever you tap CARDNAME for mana, return it to it's owner's hand during the controller's next untap phase.
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
-
 Undying Beast
 3 B
 Creature Beast
@@ -32718,17 +32742,6 @@ CARDNAME attacks each turn if able.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_drake.jpg
 
-Urborg Elf
-1 G
-Creature Elf Druid
-no text
-1/1
-tap: add G
-tap: add U
-tap: add B
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
-
 Urborg Shambler
 2 B B
 Creature Horror
@@ -32809,19 +32822,6 @@ no text
 RegenerateMe:R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uthden_troll.jpg
-
-Utopia Tree
-1 G
-Creature Plant
-no text
-0/2
-tap: add G
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84434.jpg
 
 Utvara Scalper
 1 R
