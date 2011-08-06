@@ -4,6 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | ValidPlayers$ Each | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying and each player.
 SVar:X:Count$xPaid
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurricane.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/109.jpg
