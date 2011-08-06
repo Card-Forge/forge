@@ -869,6 +869,13 @@ public class GameActionUtil {
 		    					else if(StormCard.getName().equals("Mind's Desire")) {
 		        					String player = AllZone.Phase.getActivePlayer();
 		        					if(player == "Human") AllZone.GameAction.shuffle(StormCard.getController());
+		        					// New
+		        				PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);	
+		        				
+		        				if(AllZone.GameAction.isCardInZone(StormCard,Play) == false) {
+		        					Play.add(StormCard);
+		        				} else {
+		        				// New
 		    			        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 		    			        CardList libList = new CardList(lib.getCards());
 		    			        Card c = null;
@@ -880,6 +887,7 @@ public class GameActionUtil {
 		                            AllZone.GameAction.moveTo(RFG, c);
 		                            StormCard.attachCard(c);  
 		    	                }
+		        				}
 		    	                    } // Mind's Desire
  
 		    				} // Resolve

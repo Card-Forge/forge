@@ -1,3 +1,8 @@
+Doomsday
+B B B
+Sorcery
+Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.
+
 Eternal Dragon
 5 W W
 Creature Dragon Spirit

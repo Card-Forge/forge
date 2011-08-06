@@ -7960,14 +7960,7 @@ public class CardFactory implements NewConstants {
   	   					} else {
   	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
   	   					}
-  				/**	} else if(c.getName().equals("Recall")) {
-  						// Fake playing the spell
-  						Phase.StormCount = Phase.StormCount + 1;
-  						if(c.getController() == "Human") {
-  					   	    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
-  						} else Phase.ComputerSpellCount = Phase.ComputerSpellCount + 1;
-  						card.unattachCard(c); 
-  				**/		} else if(c.isPermanent() == true && c.isAura() == false) {
+  					} else if(c.isPermanent() == true && c.isAura() == false) {
   						c.removeIntrinsicKeyword("Flash"); // Stops the player from re-casting the flash spell.
   						PlayCreature.setStackDescription(c.getName() + " - Copied from Mind's Desire");
   	                	Card [] ReAttach = new Card[Attached.length]; 
@@ -8003,46 +7996,43 @@ public class CardFactory implements NewConstants {
   			
             };
             freeCast.setStackDescription("Mind's Desire - play card without paying its mana cost.");
-            
-            
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-        					String player = AllZone.Phase.getActivePlayer();
-        					if(player == "Human") AllZone.GameAction.shuffle(card.getController());
-    			        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-    			        CardList libList = new CardList(lib.getCards());
-    			        Card c = null;
-    			        if(libList.size() > 0) {
-    			        	c = libList.get(0);
-    			        }
-    	                if(c != null) {
-        			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
-                            AllZone.GameAction.moveTo(RFG, c);
-                            card.attachCard(c);  
-    	                }
-    	                JOptionPane.showMessageDialog(null, "Click Mind's Desire to see the available cards to play without paying its mana cost.", "", JOptionPane.INFORMATION_MESSAGE);
-                            final Card Minds = card;  
-        	            	AllZone.GameAction.exile(Minds);                          
-                            Command untilEOT = new Command() {
-                                private static final long serialVersionUID = -28032591440730370L;
-                                
-                                public void execute() {
-                                	String player = AllZone.Phase.getActivePlayer();
-                					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                			        	play.remove(Minds);
-                                        }
-                            };
-                            AllZone.EndOfTurn.addUntil(untilEOT);
-                }//resolve()
-            };//SpellAbility
-            
+
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 920148510259054021L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getController() + " - Shuffle your library. Then exile the top card of your library.");
-                    AllZone.Stack.add(ability);
+					String player = AllZone.Phase.getActivePlayer();
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+					if(player == "Human") AllZone.GameAction.shuffle(card.getController());
+                		CardList MindsList = new CardList(Play.getCards());
+                		MindsList = MindsList.getName("Mind's Desire");
+                		MindsList.remove(card);
+                		if(MindsList.contains(card) == true) {
+                			Play.remove(card);                			                	 
+                		} else JOptionPane.showMessageDialog(null, "Click Mind's Desire to see the available cards to play without paying its mana cost.", "", JOptionPane.INFORMATION_MESSAGE);			
+        			        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			        CardList libList = new CardList(lib.getCards());
+        			        Card c = null;
+        			        if(libList.size() > 0) {
+        			        	c = libList.get(0);
+        			        }
+        	                if(c != null) {
+            			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+                                AllZone.GameAction.moveTo(RFG, c);
+                                card.attachCard(c);  
+        	                }
+                                final Card Minds = card;  
+            	            //	AllZone.GameAction.exile(Minds);                         
+                                Command untilEOT = new Command() {
+                                    private static final long serialVersionUID = -28032591440730370L;
+                                    
+                                    public void execute() {
+                                    	String player = AllZone.Phase.getActivePlayer();
+                    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    			        	play.remove(Minds);
+                                            }
+                                };
+                                AllZone.EndOfTurn.addUntil(untilEOT);
                 }
                 
             };
@@ -8059,7 +8049,54 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
             card.addSpellAbility(freeCast);
         }
-        //*************** END ************ END **************************  
+        //*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Doomsday")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 1481112451519L;
+                
+                @Override
+                public void resolve() {
+                	CardList GraveandLibrary = new CardList();
+                	String Player = card.getController();
+                	GraveandLibrary.add(new CardList(AllZone.getZone(Constant.Zone.Library, Player).getCards()));
+                	GraveandLibrary.add(new CardList(AllZone.getZone(Constant.Zone.Graveyard, Player).getCards()));
+                	CardList NewLibrary = new CardList();
+                	int Count = 5;
+                	if(GraveandLibrary.size() < 5) Count = GraveandLibrary.size();
+                	
+                	for(int i = 0; i < Count; i++) {   
+                	Card[] Search = GraveandLibrary.toArray();
+                    AllZone.Display.showMessage("Select a card to put " + i + " from the top of the new library: "  + (Count - i) + " Choices to go.");
+                    ButtonUtil.enableOnlyCancel();
+                    Object check = AllZone.Display.getChoice("Select a card: ", Search);   
+                    NewLibrary.add((Card) check);
+                    GraveandLibrary.remove((Card) check);
+                    
+                	}
+                	
+			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Player);   
+			        PlayerZone Library = AllZone.getZone(Constant.Zone.Library, Player);  
+                    for(int i = 0; i < GraveandLibrary.size(); i++) AllZone.GameAction.moveTo(RFG,GraveandLibrary.get(i));
+                    AllZone.GameAction.moveTo(RFG,card); // Not sure if Doomsday is supposed to be exiled
+                    for(int i = 0; i < NewLibrary.size(); i++) AllZone.GameAction.moveTo(Library,NewLibrary.get(i));
+                	
+                    //lose half life
+                        String player = Constant.Player.Human;
+                        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+                        life.subtractLife(life.getLife() / 2);
+                }
+                        
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Temporal Fissure")) {
             final SpellAbility spell = new Spell(card) {
