@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Sorcery
 Text:no text
 K:spDamageAll:Creature:2:Pyroclasm deals 2 damage to each creature.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83216.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83216.jpg
 End
