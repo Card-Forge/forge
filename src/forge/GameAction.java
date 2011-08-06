@@ -569,14 +569,6 @@ public class GameAction {
         if(!frame.isDisplayable()) return;
         
         boolean stop = false;
-        /*
-        //Ali from Cairo is now checked in addDamage()
-        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Computer) && AllZone.Computer_Life.getLife() < 1) 
-        	AllZone.Computer_Life.setLife(1);
-        
-        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
-        	AllZone.Human_Life.setLife(1);
-        */
 		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Computer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Human)) {
 	        if(AllZone.Computer_Life.getLife() <= 0 || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10) {
 	            Constant.Runtime.WinLose.addWin();
@@ -611,14 +603,6 @@ public class GameAction {
         if(!frame.isDisplayable()) return;
         
         boolean stop = false;
-        /*
-        //Ali from Cairo is now checked in addDamage()
-        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Computer) && AllZone.Computer_Life.getLife() < 1) 
-        	AllZone.Computer_Life.setLife(1);
-        
-        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
-        	AllZone.Human_Life.setLife(1);
-        */
         // Win / Lose
 		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Computer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Human)) {
         if(AllZone.Computer_Life.getLife() <= 0 ) {
