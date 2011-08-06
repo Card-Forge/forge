@@ -873,94 +873,113 @@ public class CardFactory implements NewConstants {
 
         String ptk[] = k[1].split("/");            
        
-        if (ptk.length == 1)
+        if (ptk.length == 1)	// keyword only
            Keyword[0] = ptk[0];
        
-        if (ptk.length >= 2)
+        if (ptk.length >= 2)	// power/toughness
         {
-           if (ptk[0].length() <= 3)
-              NumAttack[0] = Integer.parseInt(ptk[0].replace("+", ""));
-           else
-              if (ptk[0].startsWith("Count$"))
-              {
-                 String kk[] = ptk[0].split("\\$");
-                 AttackX[0] = kk[1].replace("\\", "/");
-              }
-              
-           if (ptk[1].length() <= 3)
-              NumDefense[0] = Integer.parseInt(ptk[1].replace("+", ""));
-           else
-              if (ptk[1].startsWith("Count$"))
-              {
-                 String kk[] = ptk[1].split("\\$");
-                 DefenseX[0] = kk[1].replace("\\", "/");
-              }
+        	if (ptk[0].matches("[\\+\\-][XY]"))
+        	{
+        		String xy = card.getSVar(ptk[0].replaceAll("[\\+\\-]", ""));
+        		if (xy.startsWith("Count$"))
+        		{
+        			String kk[] = xy.split("\\$");
+        			AttackX[0] = kk[1];
+
+        			if (ptk[0].contains("-"))	// handle "-X" or "-Y"
+        				if (AttackX[0].contains("/"))	// already contains math element
+        					AttackX[0].replace("/", "/Negative");	// insert into existing math element
+        				else
+        					AttackX[0] += "/Negative";	// add math element
+        		}
+        	}
+        	else if (ptk[0].matches("[\\+\\-][0-9]"))
+        		NumAttack[0] = Integer.parseInt(ptk[0].replace("+", ""));
+
+        	if (ptk[1].matches("[\\+\\-][XY]"))
+        	{
+        		String xy = card.getSVar(ptk[1].replaceAll("[\\+\\-]", ""));
+        		if (xy.startsWith("Count$"))
+        		{
+        			String kk[] = xy.split("\\$");
+        			DefenseX[0] = kk[1];
+
+        			if (ptk[1].contains("-"))	//handle "-X" or "-Y"
+        				if (DefenseX[0].contains("/"))	// already contains math element
+        					DefenseX[0].replace("/", "/Negative");	// insert into existing math element
+        				else
+        					DefenseX[0] += "/Negative";	// add math element
+        		}
+        	}
+        	else if (ptk[1].matches("[\\+\\-][0-9]"))
+        		NumDefense[0] = Integer.parseInt(ptk[1].replace("+", ""));
         }
-       
-        if (ptk.length == 3)
-           Keyword[0] = ptk[2];
+
+        if (ptk.length == 3)	// power/toughness/keyword
+        	Keyword[0] = ptk[2];
        
         final String DrawBack[] = {"none"};
         final String spDesc[] = {"none"};
         final String stDesc[] = {"none"};
         String d = "none";
+        StringBuilder sbD = new StringBuilder();
        
         if ((AttackX[0].equals("none") && !(NumAttack[0] == -1138)) && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && Keyword[0].equals("none"))
         {
            // pt boost
            if (Tgt[0] == true)
-              d = "Target creature gets ";
+              sbD.append("Target creature gets ");
            else
-              d = cardName + " gets ";
+              sbD.append(cardName + " gets ");
           
            if (NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
-              d = d + "+";
+              sbD.append("+");
            else if (NumAttack[0] < 0 || (NumAttack[0] == 0 && NumDefense[0] < 0)) // -0/-1
-              d = d + "-";
+              sbD.append("-");
                        
-           d = d + Math.abs(NumAttack[0]) + "/";
+           sbD.append(Math.abs(NumAttack[0]) + "/");
           
            if (NumDefense[0] > 0 || (NumDefense[0] == 0 && NumAttack[0] > 0)) // +1/+0
-              d = d + "+";
+              sbD.append("+");
            else if (NumDefense[0] < 0 || (NumDefense[0] == 0 && NumAttack[0] < 0)) // -1/-0
-              d = d + "-";
+              sbD.append("-");
           
-           d = d + Math.abs(NumDefense[0]) + " until end of turn.";
+           sbD.append(Math.abs(NumDefense[0]) + " until end of turn.");
         }
         if ((AttackX[0].equals("none") && NumAttack[0] == -1138) && (DefenseX[0].equals("none") && NumDefense[0] == -1138) && !Keyword[0].equals("none"))
         {
            // k boost
            if (Tgt[0] == true)
-              d = "Target creature gains ";
+              sbD.append("Target creature gains ");
            else
-              d = cardName + " gains ";
+              sbD.append(cardName + " gains ");
           
-           d = d + Keyword[0] + " until end of turn.";
+           sbD.append(Keyword[0] + " until end of turn.");
         }
         if ((AttackX[0].equals("none") && !(NumAttack[0] == -1138)) && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && !Keyword[0].equals("none"))
         {
            // ptk boost
            if (Tgt[0] == true)
-              d = "Target creature gets ";
+              sbD.append("Target creature gets ");
            else
-              d = cardName + " gets ";
+              sbD.append(cardName + " gets ");
           
            if (NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
-              d = d + "+";
+              sbD.append("+");
            else if (NumAttack[0] < 0 || (NumAttack[0] == 0 && NumDefense[0] < 0)) // -0/-1
-              d = d + "-";
+              sbD.append("-");
           
-           d = d + Math.abs(NumAttack[0]) + "/";
+           sbD.append(Math.abs(NumAttack[0]) + "/");
           
            if (NumDefense[0] > 0 || (NumDefense[0] == 0 && NumAttack[0] > 0)) // +1/+0
-              d = d + "+";
+              sbD.append("+");
            else if (NumDefense[0] < 0 || (NumDefense[0] == 0 && NumAttack[0] < 0)) // -1/-0
-              d = d + "-";
+              sbD.append("-");
           
-           d = d + Math.abs(NumDefense[0]);
-          
-           d = d + " and gains " + Keyword[0] + " until end of turn.";
+           sbD.append(Math.abs(NumDefense[0]) + " and gains " + Keyword[0] + " until end of turn.");
         }
+        if (!sbD.toString().isEmpty())
+        	d = sbD.toString();
        
         if (k.length > 2)
         {
