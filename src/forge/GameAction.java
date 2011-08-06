@@ -2404,6 +2404,8 @@ public class GameAction {
                     card.setRandomPicture(generator.nextInt(n));
                     //System.out.println("computer random number:" + card.getRandomPicture());
                 //}
+                if (card.getSets().size() > 0)
+                	card.setRandomSetCode();
                 
                 AllZone.Computer_Library.add(card);
                 
