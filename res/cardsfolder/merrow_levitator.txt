@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Merfolk Wizard
 Text:Whenever you play a blue spell, you may untap Merrow Levitator.
 PT:2/3
-K:abPump T:Flying
+K:abPumpTgtC T:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_levitator.jpg
 End
