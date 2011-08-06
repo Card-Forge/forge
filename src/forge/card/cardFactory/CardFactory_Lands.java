@@ -887,7 +887,7 @@ class CardFactory_Lands {
 				private static final long serialVersionUID = -5777499632266148456L;
 
 				public void execute() {
-        			AllZone.Stack.add(sacOrNo);
+        			AllZone.Stack.addSimultaneousStackEntry(sacOrNo);
         		}
         	};
 
