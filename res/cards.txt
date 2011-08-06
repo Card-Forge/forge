@@ -2,24 +2,24 @@ Raging Ravine
 no cost
 Land
 no text
-tap add: R
-tap add: G
+tap: add R
+tap: add G
 Comes into play tapped.
 
 Creeping Tar Pit
 no cost
 Land
 no text
-tap add: U
-tap add: B
+tap: add U
+tap: add B
 Comes into play tapped.
 
 Stirring Wildwood
 no cost
 Land
 no text
-tap add: G
-tap add: W
+tap: add G
+tap: add W
 Comes into play tapped.
 
 Celestial Colonnade
