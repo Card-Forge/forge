@@ -2706,14 +2706,18 @@ public class CardFactory implements NewConstants {
             {
                SpellAbility bbBnceTgt = spBnceTgt.copy();
                bbBnceTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-               bbBnceTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               
+               StringBuilder sb = new StringBuilder();
+               sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+               sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbBnceTgt.setDescription(sb.toString());
+               // bbBnceTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
                bbBnceTgt.setIsBuyBackAbility(true);
                
                bbBnceTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbBnceTgt, Tgts, Selec[0]));
                
                card.addSpellAbility(bbBnceTgt);
             }
-
         }//spBounceTgt
 
         // Generic bounce all card
