@@ -589,11 +589,13 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Rogue 3		hard	Dragons including Tarox Bladewing, Dragon Roost, Chandra Nalaar");
         sb.append("\r\n");
-        sb.append("Samantha Stephens 3	hard	Sloth' Painter's Servant Grindstone deck, an interesting combo");
+        sb.append("Samantha Stephens 3	hard	Sloth' Painter's Servant Grindstone deck, an interesting combo");Sauron 2
         sb.append("\r\n");
 	  sb.append("Saruman 2		medium	Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         sb.append("\r\n");
         sb.append("Saruman 3		hard	Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
+        sb.append("\r\n");
+	  sb.append("Sauron 2		medium	Black Vise and Underworld Dreams with lots of card draw for both players");
         sb.append("\r\n");
         sb.append("Scooby Doo 3   	hard   	Rares' Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
         sb.append("\r\n");
