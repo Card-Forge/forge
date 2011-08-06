@@ -6548,7 +6548,8 @@ public class CardFactory implements NewConstants {
                     final String col = color;
                     //card.setChosenType(input[0]);
                     
-                    final Ability_Tap a1 = new Ability_Tap(card, "3") {
+                    Ability_Cost a1Cost = new Ability_Cost("3 T", cardName, true);
+                    final Ability_Activated a1 = new Ability_Activated(card, a1Cost, null) {
                         
                         private static final long serialVersionUID = -2114111483117171609L;
                         
@@ -8005,7 +8006,9 @@ public class CardFactory implements NewConstants {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Door to Nothingness")) {
-            Ability_Tap ab1 = new Ability_Tap(card, "G G R R B B U U W W") {
+        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("G G R R B B U U W W T Sac<1/CARDNAME>", cardName, true);
+        	Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
                 
                 private static final long serialVersionUID = 6665327569823149191L;
                 
@@ -8020,8 +8023,8 @@ public class CardFactory implements NewConstants {
                 }
             };
             ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
-            ab1.setDescription("WWUUBBRRGG, tap, sacrifice Door to Nothingness: Target player loses the game.");
+            //ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
+            ab1.setDescription(abCost+"Target player loses the game.");
             card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
         
