@@ -2,9 +2,9 @@ Name:Battle Squadron
 ManaCost:3 R R
 Types:Creature Goblin
 Text:no text
-PT:0/1
+PT:*/*
 K:Flying
-K:StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:Permanents you Control:Battle Squadron's power and toughness are each equal to the number of creatures you control.
+K:stSetPT:Count$NumTypeYouCtrl.Creature:Count$NumTypeYouCtrl.Creature:Battle Squadron's power and toughness are each equal to the number of creatures you control.
 SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_squadron.jpg

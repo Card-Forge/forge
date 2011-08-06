@@ -5,7 +5,7 @@ Text:no text
 PT:0/1
 K:Indestructible
 K:CARDNAME attacks each turn if able.
-K:StaticEffect:Play:Self:SetPT/Type.Artifact/Type.Artifact:Permanents you Control:Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.
+K:stSetPT:Count$NumTypeYouCtrl.Artifact:Count$NumTypeYouCtrl.Artifact:Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.
 SVar:BuffedBy:Artifact
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_juggernaut.jpg
