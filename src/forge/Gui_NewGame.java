@@ -75,7 +75,10 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private JRadioButton            draftRadioButton     = new JRadioButton();
     private JPanel                  jPanel1              = new JPanel();
     private Border                  border2;
-    @SuppressWarnings("unused")
+    private JPanel                  jPanel3              = new JPanel();
+    private Border                  border3;
+    private TitledBorder            titledBorder3;
+    // @SuppressWarnings("unused")
     // titledBorder2
     private TitledBorder            titledBorder2;
     private static JCheckBox        newGuiCheckBox       = new JCheckBox("", true);
@@ -194,8 +197,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         Dimension screen = getToolkit().getScreenSize();
         Rectangle bounds = getBounds();
-        bounds.width = 460;
-        bounds.height = 610;
+        bounds.width = 520;
+        bounds.height = 553;
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
         setBounds(bounds);
@@ -284,30 +287,102 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         titledBorder1 = new TitledBorder(border1, "Game Type");
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder2 = new TitledBorder(border2, "Library");
-        titleLabel.setBounds(new Rectangle(155, 8, 171, 57));
+        border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
+        titledBorder3 = new TitledBorder(border3, "Settings");
+        titleLabel.setBounds(new Rectangle(1, 8, 518, 57));
         titleLabel.setText("New Game");
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         this.getContentPane().setLayout(null);
+
+        /*
+         *  Game Type Panel
+         */
+        
+        jPanel2.setBorder(titledBorder1);
+        jPanel2.setBounds(new Rectangle(20, 71, 480, 137));
+        jPanel2.setLayout(null);
+        
+        singleRadioButton.setText("Constructed (Easy) - Use all of the cards to defeat the computer");
+        singleRadioButton.setBounds(new Rectangle(20, 24, 445, 31));
+        singleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                singleRadioButton_actionPerformed(e);
+            }
+        });
+        
+        sealedRadioButton.setToolTipText("");
+        sealedRadioButton.setText("Sealed Deck (Medium) - Create your deck from 75 available cards");
+        sealedRadioButton.setBounds(new Rectangle(20, 59, 445, 28));
+        sealedRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                sealedRadioButton_actionPerformed(e);
+            }
+        });
+        
+        draftRadioButton.setToolTipText("");
+        draftRadioButton.setText("Booster Draft (Hard) - Pick cards 1 at a time to create your deck");
+        draftRadioButton.setBounds(new Rectangle(20, 91, 445, 25));
+        draftRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                draftRadioButton_actionPerformed(e);
+            }
+        });
+        
+        /*
+         *  Library Panel
+         */
+        
+        jPanel1.setBorder(titledBorder2);
+        // jPanel1.setBorder(BorderFactory.createEtchedBorder());
+        jPanel1.setBounds(new Rectangle(20, 219, 317, 120));
+        jPanel1.setLayout(null);
+        
         jLabel2.setText("Your Deck");
-        jLabel2.setBounds(new Rectangle(9, 12, 85, 27));
+        jLabel2.setBounds(new Rectangle(18, 27, 85, 27));
         jLabel3.setText("Opponent");
-        jLabel3.setBounds(new Rectangle(9, 45, 85, 27));
-        humanComboBox.setBounds(new Rectangle(75, 14, 197, 23));
+        jLabel3.setBounds(new Rectangle(18, 70, 85, 27));
+        
+        humanComboBox.setBounds(new Rectangle(88, 29, 207, 23));
         humanComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 humanComboBox_actionPerformed(e);
             }
         });
-        computerComboBox.setBounds(new Rectangle(75, 47, 197, 23));
-        deckEditorButton.setBounds(new Rectangle(278, 24, 124, 36));
+        computerComboBox.setBounds(new Rectangle(88, 72, 207, 23));
+
+        /*
+         *  Settings Panel
+         */
+        
+        jPanel3.setBorder(titledBorder3);
+        jPanel3.setBounds(new Rectangle(20, 350, 317, 140));
+        jPanel3.setLayout(null);
+        
+        newGuiCheckBox.setText("Resizable Game Area");
+        newGuiCheckBox.setBounds(new Rectangle(102, 376, 190, 25));
+        // newGuiCheckBox.setSelected(true);
+        smoothLandCheckBox.setText("Stack AI land");
+        smoothLandCheckBox.setBounds(new Rectangle(102, 409, 190, 25));
+        // smoothLandCheckBox.setSelected(true);
+        millLoseCheckBox.setText("Milling = Loss Condition");
+        millLoseCheckBox.setBounds(new Rectangle(102, 442, 190, 25));
+        
+        /*
+         *  Buttons
+         */
+        
+        deckEditorButton.setBounds(new Rectangle(364, 261, 124, 36));
         deckEditorButton.setToolTipText("");
+        deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 15));
         deckEditorButton.setText("Deck Editor");
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 deckEditorButton_actionPerformed(e);
             }
         });
-        startButton.setBounds(new Rectangle(159, 410, 139, 54));
+        
+        startButton.setBounds(new Rectangle(356, 380, 142, 37));
         startButton.setFont(new java.awt.Font("Dialog", 0, 18));
         startButton.setHorizontalTextPosition(SwingConstants.LEADING);
         startButton.setText("Start Game");
@@ -316,45 +391,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 startButton_actionPerformed(e);
             }
         });
-        sealedRadioButton.setToolTipText("");
-        sealedRadioButton.setText("Sealed Deck (Medium) - Create your deck from 75 available cards");
-        sealedRadioButton.setBounds(new Rectangle(14, 51, 406, 28));
-        sealedRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                sealedRadioButton_actionPerformed(e);
-            }
-        });
-        singleRadioButton.setText("Constructed (Easy) - Use all of the cards to defeat the computer");
-        singleRadioButton.setBounds(new Rectangle(14, 17, 403, 31));
-        singleRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                singleRadioButton_actionPerformed(e);
-            }
-        });
-        jPanel2.setBorder(titledBorder1);
-        jPanel2.setBounds(new Rectangle(10, 71, 425, 120));
-        jPanel2.setLayout(null);
-        draftRadioButton.setToolTipText("");
-        draftRadioButton.setText("Booster Draft (Hard)  - Pick cards 1 at a time to create your deck");
-        draftRadioButton.setBounds(new Rectangle(14, 82, 399, 25));
-        draftRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                draftRadioButton_actionPerformed(e);
-            }
-        });
-        jPanel1.setBorder(BorderFactory.createEtchedBorder());
-        jPanel1.setBounds(new Rectangle(10, 209, 425, 190));
-        jPanel1.setLayout(null);
-        newGuiCheckBox.setText("Resizable Game Area");
-        newGuiCheckBox.setBounds(new Rectangle(140, 305, 164, 25));
-        //newGuiCheckBox.setSelected(true);
-        smoothLandCheckBox.setText("Stack AI land");
-        smoothLandCheckBox.setBounds(new Rectangle(140, 330, 165, 25));
-        //smoothLandCheckBox.setSelected(true);
-        millLoseCheckBox.setText("Milling = Loss Condition");
-        millLoseCheckBox.setBounds(new Rectangle(140, 355, 165, 25));
-        
-        questButton.setBounds(new Rectangle(137, 470, 187, 53));
+
+        questButton.setBounds(new Rectangle(356, 430, 142, 37));
         questButton.setFont(new java.awt.Font("Dialog", 0, 18));
         questButton.setText("Quest Mode");
         
@@ -363,13 +401,14 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         jPanel1.add(humanComboBox, null);
         jPanel1.add(jLabel2, null);
         jPanel1.add(jLabel3, null);
-        jPanel1.add(deckEditorButton, null);
+        this.getContentPane().add(deckEditorButton, null);
         this.getContentPane().add(startButton, null);
         this.getContentPane().add(newGuiCheckBox, null);
         this.getContentPane().add(smoothLandCheckBox, null);
         this.getContentPane().add(millLoseCheckBox, null);
         this.getContentPane().add(questButton, null);
         this.getContentPane().add(jPanel2, null);
+        this.getContentPane().add(jPanel3, null);
         jPanel2.add(singleRadioButton, null);
         jPanel2.add(sealedRadioButton, null);
         jPanel2.add(draftRadioButton, null);
