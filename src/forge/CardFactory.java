@@ -5439,21 +5439,6 @@ public class CardFactory implements NewConstants {
                 card.setMadnessCost(k[1]);
             }
         }//madness
-        
-        if(hasKeyword(card, "Suspend") != -1) {
-        	// Suspend:<TimeCounters>:<Cost>
-            int n = hasKeyword(card, "Suspend");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                card.setSuspend(true);
-                String k[] = parse.split(":");
-
-                final int timeCounters = Integer.parseInt(k[1]);
-                final String cost = k[2];
-                card.addSpellAbility(CardFactoryUtil.ability_suspend(card, cost, timeCounters));
-            }
-        }//madness
 
         if(hasKeyword(card, "Devour") != -1) {
             int n = hasKeyword(card, "Devour");
@@ -12252,6 +12237,21 @@ public class CardFactory implements NewConstants {
             card.addLeavesPlayCommand(leavesPlay);
             card.addChangeControllerCommand(controllerChanges);
          } //HandSize
+        
+        if(hasKeyword(card, "Suspend") != -1) {
+        	// Suspend:<TimeCounters>:<Cost>
+            int n = hasKeyword(card, "Suspend");
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                card.setSuspend(true);
+                String k[] = parse.split(":");
+
+                final int timeCounters = Integer.parseInt(k[1]);
+                final String cost = k[2];
+                card.addSpellAbility(CardFactoryUtil.ability_suspend(card, cost, timeCounters));
+            }
+        }//Suspend
         
         if (card.getManaCost().contains("X"))
         {
