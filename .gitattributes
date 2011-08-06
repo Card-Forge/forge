@@ -908,6 +908,7 @@ res/cardsfolder/carnophage.txt -text svneol=native#text/plain
 res/cardsfolder/carrier_pigeons.txt -text svneol=native#text/plain
 res/cardsfolder/carrion_ants.txt -text svneol=native#text/plain
 res/cardsfolder/carrion_call.txt -text svneol=native#text/plain
+res/cardsfolder/carrion_feeder.txt -text svneol=native#text/plain
 res/cardsfolder/carrion_howler.txt -text svneol=native#text/plain
 res/cardsfolder/carrion_thrash.txt -text svneol=native#text/plain
 res/cardsfolder/carrion_wall.txt -text svneol=native#text/plain
