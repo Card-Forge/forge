@@ -12551,42 +12551,7 @@ public class GameActionUtil {
 		}// execute
 	}; // Coat of Arms
 	
-	public static Command Daru_Warchief           = new Command() {
-		private static final long serialVersionUID   = 5835056455026735693L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-2);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Daru Warchief");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Soldier");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(2);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute
-	}; // Daru Warchief()
-    
+	
 	public static Command Leyline_of_Singularity                = new Command() {
 
 		private static final long serialVersionUID   = -67071835355151830L;
@@ -17177,7 +17142,6 @@ public class GameActionUtil {
 		commands.put("Crucible_of_Fire", Crucible_of_Fire);
 		
 		commands.put("Dakkon", Dakkon);
-		commands.put("Daru_Warchief", Daru_Warchief);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("Deaths_Shadow", Deaths_Shadow);
 		commands.put("Deranged_Hermit", Deranged_Hermit);
