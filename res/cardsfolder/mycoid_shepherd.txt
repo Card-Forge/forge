@@ -1,0 +1,11 @@
+Name:Mycoid Shepherd
+ManaCost:1 G G W
+Types:Creature Fungus
+Text:no text
+PT:5/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Optional$ True | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME or another creature you control with power 5 or greater is put into a graveyard from the battlefield, you may gain 5 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.powerGE5 | Optional$ True | TriggerZones$ Battlefield | Execute$ TrigGainLife
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoid_shepherd.jpg
+End

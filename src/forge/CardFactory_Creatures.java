@@ -5918,7 +5918,7 @@ public class CardFactory_Creatures {
             ability2.setStackDescription(sb2.toString());
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************  
         else if(cardName.equals("Anodet Lurker")) {
             
@@ -5995,7 +5995,7 @@ public class CardFactory_Creatures {
             
             card.addDestroyCommand(gain2Life);
         }//*************** END ************ END **************************  
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Cromat")) {

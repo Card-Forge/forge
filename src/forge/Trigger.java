@@ -43,7 +43,10 @@ public abstract class Trigger {
 	
 	public String toString()
 	{
-		return mapParams.get("TriggerDescription");
+		if (mapParams.containsKey("TriggerDescription")) {
+			return mapParams.get("TriggerDescription");
+		}
+		else return "";
 	}
 	
 	public boolean zonesCheck()

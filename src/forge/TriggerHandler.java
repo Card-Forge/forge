@@ -206,7 +206,7 @@ public class TriggerHandler {
 			sa[0].setActivatingPlayer(regtrig.getHostCard().getController());
 			if(sa[0].getStackDescription().equals(""))
 			{
-				sa[0].setStackDescription(trigParams.get("TriggerDescription"));
+				sa[0].setStackDescription(sa[0].toString());
 			}
 			if(trigParams.containsKey("Optional"))
 			{
