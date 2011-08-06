@@ -2,7 +2,7 @@ Name:Active Volcano
 ManaCost:R
 Types:Instant
 Text:no text
-A:SP$Destroy|Cost$R|ValidTgts$Permanent.Blue|TgtPrompt$Select target blue permanent|PrecostDesc$Choose one - |SpellDescription$Destroy target blue permanent;
+A:SP$Destroy | Cost$ R | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | PrecostDesc$ Choose one - | SpellDescription$ Destroy target blue permanent;
 A:SP$Bounce | Cost$ R | ValidTgts$ Island | TgtPrompt$ Select target Island | Destination$ Hand | SpellDescription$ or return target Island to its owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

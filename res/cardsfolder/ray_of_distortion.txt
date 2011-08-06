@@ -2,7 +2,7 @@ Name:Ray of Distortion
 ManaCost:3 W
 Types:Instant
 Text:no text
-A:SP$Destroy|Cost$3 W|ValidTgts$Artifact,Enchantment|TgtPrompt$Select target artifact or enchantment.|SpellDescription$Destroy target artifact or enchantment.
+A:SP$Destroy | Cost$ 3 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment. | SpellDescription$ Destroy target artifact or enchantment.
 K:Flashback:4 W W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_distortion.jpg

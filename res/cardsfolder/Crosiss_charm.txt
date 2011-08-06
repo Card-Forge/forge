@@ -3,8 +3,8 @@ ManaCost:U B R
 Types:Instant
 Text:no text
 A:SP$Bounce | Cost$ U B R | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Destination$ Hand | PrecostDesc$ Choose one - | SpellDescription$ Return target permanent to its owner's hand;
-A:SP$Destroy|Cost$U B R|ValidTgts$Creature.nonBlack|TgtPrompt$Select target nonblack creature|NoRegen$True|SpellDescription$or destroy target nonblack creature, and it can't be regenerated;
-A:SP$Destroy|Cost$U B R|ValidTgts$Artifact|TgtPrompt$Select target artifact|SpellDescription$or destroy target artifact.
+A:SP$Destroy | Cost$ U B R | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ or destroy target nonblack creature, and it can't be regenerated;
+A:SP$Destroy | Cost$ U B R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ or destroy target artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Crosiss_charm.jpg

@@ -2,7 +2,7 @@ Name:Flash Flood
 ManaCost:U
 Types:Instant
 Text:no text
-A:SP$Destroy|Cost$U|ValidTgts$Permanent.Red|TgtPrompt$Select target red permanent|PrecostDesc$Choose one - |SpellDescription$Destroy target red permanent;
+A:SP$Destroy | Cost$ U | ValidTgts$ Permanent.Red | TgtPrompt$ Select target red permanent | PrecostDesc$ Choose one - | SpellDescription$ Destroy target red permanent;
 A:SP$Bounce | Cost$ U | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | Destination$ Hand | SpellDescription$ or return target Mountain to its owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

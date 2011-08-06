@@ -2,7 +2,7 @@ Name:Ray of Revelation
 ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$Destroy|Cost$1 W|ValidTgts$Enchantment|TgtPrompt$Select target enchantment.|SpellDescription$Destroy target enchantment.
+A:SP$Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment. | SpellDescription$ Destroy target enchantment.
 K:Flashback:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_revelation.jpg
