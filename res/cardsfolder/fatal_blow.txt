@@ -5,4 +5,6 @@ Text:no text
 A:SP$Destroy | Cost$ B | ValidTgts$ Creature.wasDealtDamageThisTurn | NoRegen$ True | TgtPrompt$ Select target creature that was dealt damage this turn | SpellDescription$ Destroy target creature that was dealt damage this turn. It can't be regenerated.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_blow.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/9.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/128.jpg
 End

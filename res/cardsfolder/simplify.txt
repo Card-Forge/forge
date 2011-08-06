@@ -5,4 +5,5 @@ A:SP$Sacrifice | Cost$ G | SacValid$ Enchantment | Defined$ Each | SpellDescript
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simplify.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/269.jpg
 End

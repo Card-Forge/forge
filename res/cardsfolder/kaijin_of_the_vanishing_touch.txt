@@ -6,4 +6,5 @@ PT:0/3
 K:Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaijin_of_the_vanishing_touch.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/39.jpg
 End

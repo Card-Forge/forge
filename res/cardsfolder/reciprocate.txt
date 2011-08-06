@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ W | ValidTgts$ Creature.dealtDamageToYouThisTurn | TgtPrompt
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reciprocate.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/40.jpg
 End

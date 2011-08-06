@@ -7,4 +7,6 @@ K:All creatures able to block CARDNAME do so.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taunting_elf.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/122.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/290.jpg
 End

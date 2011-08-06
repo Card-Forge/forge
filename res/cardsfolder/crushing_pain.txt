@@ -5,4 +5,5 @@ Text:no text
 A:SP$DealDamage | Cost$ 1 R | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target creature that was dealt damage this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crushing_pain.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/162.jpg
 End

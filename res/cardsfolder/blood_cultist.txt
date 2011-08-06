@@ -7,4 +7,5 @@ A:AB$DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creat
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_cultist.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/157.jpg
 End
