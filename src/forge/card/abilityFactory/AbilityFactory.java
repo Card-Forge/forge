@@ -832,7 +832,7 @@ public class AbilityFactory {
 		}
 		
 		else if (defined.startsWith("Triggered")){
-            Object crd = sa.getSourceCard().getTriggeringObject(defined.substring(9));
+            Object crd = hostCard.getTriggeringObject(defined.substring(9));
             if(crd instanceof Card)
             {
                 c = AllZoneUtil.getCardState((Card)crd);
