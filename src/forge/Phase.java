@@ -402,4 +402,9 @@ public class Phase extends MyObservable
         return false;
     }
 
+	public static boolean canCastSorcery(String player)
+	{
+		return (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) 
+				&& AllZone.GameAction.getLastPlayerToDraw().equals(player)) && AllZone.Stack.size() == 0);
+	}
 }

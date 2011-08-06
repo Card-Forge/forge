@@ -175,6 +175,18 @@ public class ComputerAI_General implements Computer {
         all.addAll(hand.toArray());
         all.addAll(AllZone.Computer_Play.getCards());
         
+        CardList humanPlayable = new CardList();
+        humanPlayable.addAll(AllZone.Human_Play.getCards());
+        humanPlayable = humanPlayable.filter(new CardListFilter()
+        {
+          public boolean addCard(Card c)
+          {
+            return (c.canAnyPlayerActivate());
+          }
+        });
+        
+        all.addAll(humanPlayable.toArray());
+        
         return getPlayable(all);
     }//getMain1()
     
@@ -192,6 +204,17 @@ public class ComputerAI_General implements Computer {
             }
         });
         
+        CardList humanPlayable = new CardList();
+        humanPlayable.addAll(AllZone.Human_Play.getCards());
+        humanPlayable = humanPlayable.filter(new CardListFilter()
+        {
+          public boolean addCard(Card c)
+          {
+            return (c.canAnyPlayerActivate());
+          }
+        });
+        all.addAll(humanPlayable.toArray());
+        
         return getPlayable(all);
     }//getMain2()
     
@@ -204,7 +227,9 @@ public class ComputerAI_General implements Computer {
             for(SpellAbility sa:c.getSpellAbility())
                 //This try/catch should fix the "computer is thinking" bug
                 try {
-                    if(sa.canPlayAI() && ComputerUtil.canPayCost(sa)) spellAbility.add(sa);
+                    if(sa.canPlayAI() && ComputerUtil.canPayCost(sa) && 
+                    		(sa.isAnyPlayer() || sa.getSourceCard().getController().equals(Constant.Player.Computer)))
+                    			spellAbility.add(sa);
                 } catch(Exception ex) {
                     showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
                 }

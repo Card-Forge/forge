@@ -15870,7 +15870,131 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END ************************** 
 
+        //*************** START *********** START **************************
+        else if(cardName.equals("Volrath's Dungeon")) {
+            final SpellAbility dungeon = new Ability(card, "0") {
+            	// todo(sol) discard really needs to happen as a cost but in resolution for now :(
+            	
+                @Override
+                public void chooseTargetAI() {
+                    setTargetPlayer(Constant.Player.Human);
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return Phase.canCastSorcery(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card) && super.canPlay() &&
+                    		AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards().length > 0;
+                }
+                
+                @Override
+                public void resolve() {
+                	String player = getActivatingPlayer();
+                    String target = getTargetPlayer();
+                    CardList playerHand = new CardList(AllZone.getZone(Constant.Zone.Hand, player).getCards());
+                    CardList targetHand = new CardList(AllZone.getZone(Constant.Zone.Hand, target).getCards());
+                    
+                    if(playerHand.size() == 0) return;
+                    
+                    if (player == Constant.Player.Human){
+                    	if (!humanDiscard(playerHand, false))
+                    		return;
+                    }
+                    else if (player == Constant.Player.Computer){
+                    	if (!computerDiscard(playerHand, false))
+                    		return;
+                    }
+                    
+                    if (targetHand.size() == 0) return;
+                    
+                    if (target == Constant.Player.Human){
+                    	if (!humanDiscard(targetHand, true))
+                    		return;
+                    }
+                    else if (target == Constant.Player.Computer){
+                    	if (!computerDiscard(targetHand, true))
+                    		return;
+                    }
+                }
+                
+                public boolean humanDiscard(CardList hand, boolean toLibrary)
+                {
+                	String destination = "discard";
+                	if (toLibrary)
+                		destination = "place on top of library.";
+                    Object discard = AllZone.Display.getChoiceOptional("Select Card to " + destination,
+                    		hand.toArray());
+                    if(discard == null) return false;
+                    
+                    Card card = (Card)discard;
+                    
+                    if (toLibrary)
+                    	AllZone.GameAction.moveToTopOfLibrary(card);
+                    else
+                    	AllZone.GameAction.discard(card);
+                    
+                	return true;
+                }
+                
+                public boolean computerDiscard(CardList hand, boolean toLibrary)
+                {
+                    if (toLibrary)
+                    	AllZone.GameAction.AI_handToLibrary("Top");
+                    else
+                    	AllZone.GameAction.AI_discard();
+                    
+                	return true;
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return (card.getController().equals(Constant.Player.Computer) && Phase.canCastSorcery(Constant.Player.Computer)
+                    		&& AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards().length > 0
+                    		&& AllZone.getZone(Constant.Zone.Hand, getTargetPlayer()).getCards().length > 0);
+                }
 
+            };//SpellAbility dungeon
+           
+            final SpellAbility bail = new Ability(card, "0") {
+            	// Life payment really should happen on activation, maybe can do with a popup?
+                @Override
+                public void resolve() {
+                	String player = getActivatingPlayer();
+                	
+                	if (AllZone.GameAction.payLife(player, 5, card))
+                		AllZone.GameAction.destroy(card);
+                }
+      
+                @Override
+                public boolean canPlay() {
+                    if(AllZone.Human_Life.getLife() >= 5 && AllZone.GameAction.getLastPlayerToDraw().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) 
+                    	return true;
+                    else return false;
+                }
+                                
+                @Override
+                public boolean canPlayAI() {
+                	if (card.getController().equals(Constant.Player.Human) && AllZone.Computer_Life.getLife() >= 9 && 
+                			AllZone.GameAction.getLastPlayerToDraw().equals(Constant.Player.Computer) && 
+                			AllZone.GameAction.isCardInPlay(card)) 
+                    	return true;
+                    else return false;
+                }
+
+            };//SpellAbility pay bail
+
+            dungeon.setBeforePayMana(CardFactoryUtil.input_targetPlayer(dungeon));
+            dungeon.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+            dungeon.setDescription("Discard a card: Target player puts a card from his or her hand on top of his or her library. Activate this ability only any time you could cast a sorcery.");
+            dungeon.setStackDescription("CARDNAME - Target player chooses a card in hand and puts on top of library.");
+            
+            bail.setAnyPlayer(true);
+            bail.setDescription("Pay 5 Life: Destroy Volrath's Dungeon. Any player may activate this ability but only during his or her turn.");
+            bail.setStackDescription("Destroy CARDNAME.");
+            
+            card.addSpellAbility(dungeon);
+            card.addSpellAbility(bail);
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Nameless Inversion")) {
             SpellAbility spell = new Spell(card) {

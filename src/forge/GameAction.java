@@ -248,17 +248,20 @@ public class GameAction {
                 AllZone.Computer_Hand.remove(card);
                 if(libPos.equals("top")) AllZone.Computer_Library.add(card, 0);
                 else AllZone.Computer_Library.add(card);
-                
                 return;
             }
             
             CardListUtil.sortAttackLowFirst(hand);
             CardListUtil.sortNonFlyingFirst(hand);
-            discard(hand.get(0));
+            if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
+            else AllZone.Computer_Library.add(hand.get(0));
+            AllZone.Computer_Hand.remove(hand.get(0));
             return;
         } else {
-            CardListUtil.sortCMC(hand);
-            discard(hand.get(0));
+            CardListUtil.sortCMC(hand); 
+            if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
+            else AllZone.Computer_Library.add(hand.get(0));
+            AllZone.Computer_Hand.remove(hand.get(0));
             return;
         }
     }
@@ -2825,7 +2828,6 @@ public class GameAction {
             }
             
             if(sa == null) return;
-            
             playSpellAbility(sa);
         }
     }
@@ -3276,7 +3278,8 @@ public class GameAction {
         ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
         
         for(int i = 0; i < sa.length; i++)
-            if(sa[i].canPlay()) list.add(sa[i]);
+            if(sa[i].canPlay() && (sa[i].getSourceCard().getController().equals(Constant.Player.Human) || sa[i].isAnyPlayer())) 
+            	list.add(sa[i]);
         
         SpellAbility[] array = new SpellAbility[list.size()];
         list.toArray(array);
