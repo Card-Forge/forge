@@ -428,7 +428,7 @@ public class QuestData implements NewConstants {
     
     public long getCreditsToAdd(WinLose winLose)
     {
-    	long creds = (long) (10 + (0.2 * win));
+    	long creds = (long) (10 + (0.3 * win));
     	String[] wins = winLose.getWinMethods();
     	
     	if (winLose.getLose() == 0)

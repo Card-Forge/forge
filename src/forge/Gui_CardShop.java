@@ -287,7 +287,10 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         
         double multiPercent = multi*100;
         NumberFormat formatter = new DecimalFormat("#0.00");
-        sellPercentageLabel.setText("(Sell percentage: " + formatter.format(multiPercent) +"% of value)" );
+        String maxSellingPrice = "";
+        if (questData.getWin() <= 50)
+        	maxSellingPrice = "     Max selling price: 500";
+        sellPercentageLabel.setText("(Sell percentage: " + formatter.format(multiPercent) +"% of value)" +maxSellingPrice);
         
         topModel.sort(1, true);
         bottomModel.sort(1, true);
@@ -352,7 +355,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
     }//addListeners()
     
     private void setup() {
-    	multi = 0.25 + (0.001 *questData.getWin());
+    	multi = 0.20 + (0.001 *questData.getWin());
         if (multi > 0.6)
         	multi = 0.6;
     	
@@ -450,7 +453,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         creditsLabel.setBounds(new Rectangle(19, 365, 720, 31));
         creditsLabel.setText("Total credits: " + questData.getCredits());
         if(!Gui_NewGame.useLAFFonts.isSelected()) creditsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        sellPercentageLabel.setBounds(new Rectangle(350, 403, 250, 31));
+        sellPercentageLabel.setBounds(new Rectangle(350, 403, 450, 31));
         sellPercentageLabel.setText("(Sell percentage: " + multi+")");
         if(!Gui_NewGame.useLAFFonts.isSelected()) sellPercentageLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
@@ -527,7 +530,11 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             //bottomModel.removeCard(c);
             questData.addCardToShopList(c);
             
-            questData.addCredits((long) (multi * c.getValue()));
+            long price = (long) (multi * c.getValue());
+            if (questData.getWin() <= 50 && price > 500)
+            	price = 500;
+
+            questData.addCredits(price);
             questData.removeCard(c);
             
             creditsLabel.setText("Total credits: " + questData.getCredits());
