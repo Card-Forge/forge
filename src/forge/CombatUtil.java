@@ -2127,8 +2127,6 @@ public class CombatUtil {
             System.out.println("destroyed blocker " + b.getName());
         } else if(a.getName().equals("Elven Warhounds")) {
         	AllZone.GameAction.moveToLibrary(b);
-        } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
-             b.getController().loseLife(4, a);
         }
         
         else if (b.getName().equals("Alaborn Zealot") || b.getName().equals("Loyal Sentry")) {
