@@ -6,4 +6,9 @@ K:Enchant Artifact
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_artifact.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/173.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/117.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/116.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/143.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/117.jpg
 End

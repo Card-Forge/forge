@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$ 1 U Sac<1/CARDNAME> | Tgt$ TgtC | Origin$ Battlefield | 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_replica.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/186.jpg
 End

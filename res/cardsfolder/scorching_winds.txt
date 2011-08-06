@@ -6,4 +6,5 @@ A:SP$DamageAll | Cost$ R | NumDmg$ 1 | ValidCards$ Creature.attacking | ValidDes
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/scorching_winds.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/155.jpg
 End

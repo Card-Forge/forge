@@ -9,4 +9,5 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/part_water.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/66.jpg
 End

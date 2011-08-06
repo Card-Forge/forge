@@ -7,4 +7,5 @@ K:Flying
 K:etbLoseLife:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_scudder.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/71.jpg
 End
