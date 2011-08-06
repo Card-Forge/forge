@@ -4218,10 +4218,9 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-                        
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+                    	PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
                         life.subtractLife(getTargetCard().getNetDefense());
+                        AllZone.GameAction.destroyNoRegeneration(getTargetCard());
                     }
                 }//resolve()
             };
