@@ -1,0 +1,10 @@
+Name:Krovikan Mist
+ManaCost:1 U
+Types:Creature Illusion
+Text:no text
+PT:*/*
+K:Flying
+K:stSetPT:Count$Valid Illusion:Count$Valid Illusion:Krovikan Mist's power and toughness are each equal to the number of Illusions on the battlefield.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_mist.jpg
+End

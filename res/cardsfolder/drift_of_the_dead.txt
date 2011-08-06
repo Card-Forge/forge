@@ -2,10 +2,9 @@ Name:Drift of the Dead
 ManaCost:3 B
 Types:Creature Wall
 Text:no text
-PT:0/0
+PT:*/*
 K:Defender
-K:stPumpSelf:Creature:X/X:Creature+Self:Drift of the Dead's power and toughness are each equal to the number of snow lands you control.
-SVar:X:Count$Valid Land.Snow+YouCtrl
+K:stSetPT:Count$Valid Land.Snow+YouCtrl:Count$Valid Land.Snow+YouCtrl:Drift of the Dead's power and toughness are each equal to the number of snow lands you control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drift_of_the_dead.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/11.jpg

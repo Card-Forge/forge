@@ -3545,7 +3545,8 @@ public class CardFactoryUtil {
         
         // count valid cards on the battlefield
         if(l[0].contains("Valid")) {
-        	final String restrictions = l[0].replace("Valid ", "");
+        	String restrictions = l[0].replace("Valid ", "");
+        	restrictions = restrictions.replace("Count$", "");
         	final String rest[] = restrictions.split(",");
         	CardList cardsonbattlefield = new CardList();
         	cardsonbattlefield.addAll(myField.getCards());
