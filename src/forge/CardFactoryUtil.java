@@ -1035,7 +1035,7 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-            	// unMorphing a card is a Special Action, and not effected by Linvala
+            	// unMorphing a card is a Special Action, and not affected by Linvala
             	return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown() 
             			&& AllZone.GameAction.isCardInPlay(sourceCard);
             }
@@ -1418,7 +1418,7 @@ public class CardFactoryUtil {
         cycle.setIsCycling(true);
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append(description).append("cycling (").append(abCost.toString()).append(" Search your library for a ");
-        sbDesc.append(description).append(" card, reveal it, and put it into your hand. Then shuffle your library.");
+        sbDesc.append(description).append(" card, reveal it, and put it into your hand. Then shuffle your library.)");
         cycle.setDescription(sbDesc.toString());
         
         StringBuilder sbStack = new StringBuilder();
@@ -1485,8 +1485,8 @@ public class CardFactoryUtil {
         };
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Transmute (").append(abCost.toString());
-        sbDesc.append("Search your library for a card with the same converted mana cost as the discarded card, reveal that card, ");
-        sbDesc.append("and put it into your hand. Then shuffle your library. Play this ability only any time you could play a sorcery.)");
+        sbDesc.append("Search your library for a card with the same converted mana cost as this card, reveal it, ");
+        sbDesc.append("and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)");
         transmute.setDescription(sbDesc.toString());
 
         StringBuilder sbStack = new StringBuilder();
