@@ -1157,6 +1157,7 @@ public class CombatUtil {
                         	PhaseUtil.handleAttackingTriggers();
                     }
                 };
+
                 
                 final Command paidCommand = new Command() {
                     private static final long serialVersionUID = -8303368287601871955L;
@@ -1197,6 +1198,9 @@ public class CombatUtil {
         	//Run triggers
         	HashMap<String,Object> runParams = new HashMap<String,Object>();
         	runParams.put("Attacker", c);
+            CardList otherAttackers = new CardList(AllZone.Combat.getAttackers());
+            otherAttackers.remove(c);
+            runParams.put("OtherAttackers",otherAttackers);
         	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
         	
         	//Annihilator:
