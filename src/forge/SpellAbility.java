@@ -50,6 +50,8 @@ public abstract class SpellAbility {
     private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
     private Ability_Sub 	subAbility 			= null;
     
+    private AbilityFactory  abilityFactory 	   = null;
+    
     private CardList 		sacrificedCards	   = null;
     private CardList 		discardedCards	   = null;
     
@@ -266,9 +268,18 @@ public abstract class SpellAbility {
     	return restrictions;
     }
     
+    public void setAbilityFactory(AbilityFactory af){
+    	abilityFactory = af;
+    }
+    
+    public AbilityFactory getAbilityFactory(){
+    	return abilityFactory;
+    }
+    
     public void addSacrificedCost(Card c){
     	if (sacrificedCards == null)
     		sacrificedCards = new CardList();
+    	
     	sacrificedCards.add(c);
     }
     
