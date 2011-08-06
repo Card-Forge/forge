@@ -1,0 +1,9 @@
+Name:Panic Spellbomb
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+K:WheneverKeyword:PermanentIntoGraveyard:Self:Any:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/R:No Special Condition:When Panic Spellbomb is put into a graveyard from the battlefield, you may pay R. If you do, draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/panic_spellbomb.jpg
+End

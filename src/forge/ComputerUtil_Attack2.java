@@ -22,16 +22,14 @@ public class ComputerUtil_Attack2 {
 
 	public ComputerUtil_Attack2(CardList possibleAttackers, CardList possibleBlockers, int blockerLife)
 	{
-		Combat combat = new Combat();
-		
 		humanList = new CardList(possibleBlockers.toArray());
 		humanList = humanList.getType("Creature");
 		
 		computerList = new CardList(possibleAttackers.toArray()); 
 		computerList = computerList.getType("Creature");
 		
-		attackers = getPossibleAttackers(possibleAttackers, combat);
-		blockers  = getPossibleBlockers(possibleBlockers, combat);
+		attackers = getPossibleAttackers(possibleAttackers);
+		blockers  = getPossibleBlockers(possibleBlockers);
 		this.blockerLife = blockerLife;
 		
 		final ArrayList<String> valuable = new ArrayList<String>();
@@ -47,7 +45,7 @@ public class ComputerUtil_Attack2 {
 		});
 	}//constructor
        
-	public CardList getPossibleAttackers(CardList in, final Combat combat)
+	public CardList getPossibleAttackers(CardList in)
     {
       CardList list = new CardList(in.toArray());
       list = list.filter(new CardListFilter()
@@ -57,7 +55,7 @@ public class ComputerUtil_Attack2 {
       return list;
     }//getUntappedCreatures()
 	
-      public CardList getPossibleBlockers(CardList in, final Combat combat)
+      public CardList getPossibleBlockers(CardList in)
       {
         CardList list = new CardList(in.toArray());
         list = list.filter(new CardListFilter()
@@ -76,7 +74,7 @@ public class ComputerUtil_Attack2 {
           CardListUtil.sortAttack(humanList);
           int blockersNeeded = computerList.size();
           
-          CardList list = getPossibleBlockers(computerList, combat);
+          CardList list = getPossibleBlockers(computerList);
           
           for(int i = 0; i < list.size(); i++) {
              if(!doesHumanAttackAndWin(i)) {
@@ -325,12 +323,12 @@ public class ComputerUtil_Attack2 {
 		CardList humanBlockers = new CardList();
 		
 		for(Card c:defenderPermanents) {
-			if(c.isCreature() && CombatUtil.canBlock(c, combat)) humanBlockers.add(c);
+			if(c.isCreature() && CombatUtil.canBlock(c)) humanBlockers.add(c);
 		}
 		
 		for(Card c:attackerCreatures) {
 			if(CombatUtil.canAttack(c, combat)) attackersLeft.add(c);
-			else if(CombatUtil.canBlock(c, combat)) plannedBlockers.add(c);
+			else if(CombatUtil.canBlock(c)) plannedBlockers.add(c);
 		}
 		
 		

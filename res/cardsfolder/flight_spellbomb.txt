@@ -1,0 +1,10 @@
+Name:Flight Spellbomb
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+K:WheneverKeyword:PermanentIntoGraveyard:Self:Any:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/U:No Special Condition:When Panic Spellbomb is put into a graveyard from the battlefield, you may pay U. If you do, draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flight_spellbomb.jpg
+End

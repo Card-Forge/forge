@@ -49,6 +49,9 @@ public class Combat {
 		declaredAttackers = 0;
 		attackingPlayer = null;
 		defendingPlayer = null;
+		
+		attackersWithLure = new CardList();
+		canBlockAttackerWithLure = new CardList();
 	}
 
 	public void setPlaneswalker(Card c) {
