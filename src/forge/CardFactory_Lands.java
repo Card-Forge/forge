@@ -2983,6 +2983,71 @@ class CardFactory_Lands {
 
            card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
+        if(cardName.equals("Scorched Ruins")) {
+            final Command comesIntoPlay = new Command() {
+               private static final long serialVersionUID = 6175830918425915833L;
+               final Player player = card.getController();
+               public void execute() {
+                  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                  CardList plains = new CardList(play.getCards());
+                  plains = plains.getType("Land");
+                  plains = plains.getTapState("Untapped");
+
+                  if( player.equals(AllZone.ComputerPlayer)) {
+                     if( plains.size() > 1 ) {
+                        CardList tappedPlains = new CardList(plains.toArray());
+                        tappedPlains = tappedPlains.getType("Basic");
+                        for(Card c : tappedPlains)
+                        	   AllZone.GameAction.sacrifice(c);
+                        for(int i = 0; i < tappedPlains.size(); i++){
+                           AllZone.GameAction.sacrifice(plains.get(i));
+                        }
+                        //if any are tapped, sacrifice it
+                        //else sacrifice random
+                     }
+                     else {
+                        AllZone.GameAction.sacrifice(card);
+                     }
+                  }
+                  else { //this is the human resolution
+                     //this works with correct input
+                     //really, what I want is Cancel to sacrifice Kjeldoran Outpost
+                     final int[] paid = {0};
+                     if ((new CardList(AllZone.Human_Play.getCards())
+                     .getType("Land").getTapState("Untapped").size() < 2))
+                    	{
+                    	 AllZone.GameAction.sacrifice(card);
+                    	 return;
+                    	}
+                     Input target = new Input() {
+                        private static final long serialVersionUID = 6653677835621129465L;
+                        public void showMessage() {
+                           AllZone.Display.showMessage("Scorched Ruins - Select an untapped land to sacrifice");
+                           ButtonUtil.enableOnlyCancel();
+                        }
+                        public void selectButtonCancel() {
+                     	   AllZone.GameAction.sacrifice(card);
+                     	   stop();
+                        }
+                        public void selectCard(Card c, PlayerZone zone) {
+                           if(c.isLand() && zone.is(Constant.Zone.Play) && c.isUntapped()) {
+                              AllZone.GameAction.sacrifice(c);
+                              if(paid[0] < 1){
+                            	  paid[0]++;
+                            	  AllZone.Display.showMessage("Scorched Ruins - Select an untapped land to sacrifice");
+                              }
+                              else stop();
+                           }
+                        }//selectCard()
+                     };//Input
+                     AllZone.InputControl.setInput(target);
+                  }
+               }
+            };
+
+            card.addComesIntoPlayCommand(comesIntoPlay);
+         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Halimar Depths")) {

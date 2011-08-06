@@ -4064,6 +4064,7 @@ public class CardFactory_Sorceries {
                     if(zone != null) {
                     CardList creature = new CardList();
                     creature.addAll(zone.getCards());
+                    creature.addAll(AllZone.getZone(Constant.Zone.Play, card.getController().getOpponent()).getCards());
                     creature = creature.getType("Creature"); 
                     creature = creature.filter(new CardListFilter() {
 						public boolean addCard(Card card) {
@@ -7469,7 +7470,7 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if(cardName.equals("Sanity Grinding")) {
         	/*
-        	 * Chroma — Reveal the top ten cards of your library. For each blue
+        	 * Chroma ï¿½ Reveal the top ten cards of your library. For each blue
         	 * mana symbol in the mana costs of the revealed cards, target opponent
         	 * puts the top card of his or her library into his or her graveyard.
         	 * Then put the cards you revealed this way on the bottom of your
@@ -7752,7 +7753,7 @@ public class CardFactory_Sorceries {
         	/*
         	 * Each player shuffles the cards from his or her hand into his
         	 * or her library, then draws that many cards.
-        	 * Metalcraft — If you control three or more artifacts, Molten
+        	 * Metalcraft ï¿½ If you control three or more artifacts, Molten
         	 * Psyche deals damage to each opponent equal to the number of
         	 * cards that player has drawn this turn.
         	 */

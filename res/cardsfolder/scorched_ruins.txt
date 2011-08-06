@@ -1,0 +1,9 @@
+Name:Scorched Ruins
+Types:Land
+Text:If CARDNAME would enter the battlefield, two untapped Lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+K:Tap: add 4
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_ruins.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/166.jpg
+End
