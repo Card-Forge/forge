@@ -104,6 +104,12 @@ public class Quest_Assignment {
 	public void addCompy(String s) {
 		this.compy.add(s);
 	}
+	
+	public void clearCompy()
+	{
+		this.compy.clear();
+	}
+	
 
 	public ArrayList<String> getCompy() {
 		return compy;

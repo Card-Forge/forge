@@ -105,7 +105,7 @@ public class Gui_Treasury extends JFrame implements NewConstants{
     	else 
     	{
     		sb.append("<u>Estates Level Maxed out</u>.<br>");
-    		sb.append("Current Level:<br>");
+    		sb.append("Current Level: 3/3<br>");
     		sb.append("Gives a bonus of <b>20%</b> to match winnings.<br>");
     		sb.append("Improves sell percentage by <b>2.5%</b>.");
     	}

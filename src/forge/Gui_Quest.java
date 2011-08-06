@@ -259,6 +259,13 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	jPanel2.add(otherShopsButton, null);
         	this.getContentPane().add(lifeLabel,null);
         	this.getContentPane().add(questsButton, null);
+        	
+        	int questsPlayed = questData.getQuestsPlayed();
+        	System.out.println("questsPlayed: " + questsPlayed);
+        	if (questData.getWin() / 5 < questsPlayed || questData.getWin() < 25)
+        		questsButton.setEnabled(false);
+        	else
+        		questsButton.setEnabled(true);
         }
         jPanel2.add(cardShopButton, null);
         jPanel2.add(deckEditorButton, null);

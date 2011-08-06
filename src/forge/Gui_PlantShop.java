@@ -112,6 +112,10 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     		sb.append("Grow venomous thorns on your plant.<br>");
     		sb.append("<u><b>Level 5</b></u>: Deathtouch<br>");
     	}
+    	else
+    	{
+    		sb.append("Plant Level Maxed out.");
+    	}
     	
     	sb.append("</html>");
     	return sb.toString();

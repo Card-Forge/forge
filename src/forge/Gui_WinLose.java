@@ -360,6 +360,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             	
             	if (AllZone.QuestAssignment!=null)
             	{
+            		AllZone.QuestData.addQuestsPlayed();
             		Quest_Assignment qa = AllZone.QuestAssignment;
             		
             		StringBuilder sb = new StringBuilder();

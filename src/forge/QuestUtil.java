@@ -176,14 +176,14 @@ public class QuestUtil {
 		 */
 		
 		QuestData_BoosterPack pack = new QuestData_BoosterPack(); 
+		qa.clearCompy();
 		
 		int id = qa.getId();
 		if (id == 1) //White Dungeon
 		{
 			for (int i=0;i<2;i++)
-			{
 				qa.addCompy("Savannah Lions");
-			}
+			
 			qa.setCardRewardList(pack.getRare(3, 6));
 		}
 		else if (id == 2) //Blue Dungeon
@@ -204,6 +204,8 @@ public class QuestUtil {
 		}
 		else if (id == 6) //Colorless Dungeon
 		{
+			for (int i=0;i<2;i++)
+				qa.addCompy("Ornithopter");
 			qa.setCardRewardList(pack.getRare(3, 1));
 		}
 		else if (id == 7) //Gold Dungeon

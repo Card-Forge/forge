@@ -2052,6 +2052,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void resolve() {
+                	turn[0] = AllZone.Phase.getTurn();
                     card2.subtractCounter(Counters.LOYALTY, 2);
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())

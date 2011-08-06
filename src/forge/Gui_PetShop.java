@@ -111,6 +111,10 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     		sb.append("Gives Flanking to your Wolf.<br>");
     		sb.append("<u><b>Level 4</b></u>: 2/2 Flanking<br>");
     	}
+    	else
+    	{
+    		sb.append("Wolf Level Maxed out.<br>");
+    	}
     	
     	sb.append("</html>");
     	return sb.toString();
