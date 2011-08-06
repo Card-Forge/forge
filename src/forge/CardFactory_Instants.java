@@ -912,7 +912,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        /* converted to spMakeToken keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Raise the Alarm")) {
             SpellAbility spell = new Spell(card) {
@@ -928,8 +928,9 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        */
         
-        
+        /* converted to spMakeToken keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Hunting Pack")) {
             SpellAbility spell = new Spell(card) {
@@ -947,7 +948,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Astral Steel")) {
@@ -1510,7 +1511,8 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************    
         
-      //*************** START *********** START **************************
+        /* converted to spMakeToken keyword
+        //*************** START *********** START **************************
         else if(cardName.equals("Reach of Branches")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 2723115210677439611L;
@@ -1524,6 +1526,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        */
     	
         //*************** START *********** START **************************
         else if(cardName.equals("Volcanic Fallout")) {
@@ -4053,7 +4056,8 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        /* converted to spMakeToken keyword
+      	//*************** START *********** START **************************
         else if(cardName.equals("Join the Ranks")) {
             SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 2700238195526474372L;
@@ -4069,7 +4073,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-      
+      	*/
         
         
         //*************** START *********** START **************************

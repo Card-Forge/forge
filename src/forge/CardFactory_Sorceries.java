@@ -513,7 +513,8 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        /* converted to spMakeToken keyword
+        //*************** START *********** START **************************
         else if(cardName.equals("Spectral Procession")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 6118842682065463016L;
@@ -529,6 +530,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        */
         
         /* converted to keyword
         //*************** START *********** START **************************
@@ -3817,9 +3819,8 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
-        
+          
+        /* converted to spMakeToken keyword
         //*************** START *********** START **************************
         if(cardName.equals("Storm Herd")) {
             final SpellAbility spell = new Spell(card) {
@@ -3837,7 +3838,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+        */
        
         //*************** START *********** START **************************
         else if(cardName.equals("Global Ruin")) {
@@ -6956,7 +6957,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+        /* converted to spMakeToken keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Skittering Invasion")) {
         	final SpellAbility spell = new Spell(card)
@@ -6980,7 +6981,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Buried Alive")) {
@@ -7602,7 +7603,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+        /* converted to spMakeToken keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Sound the Call")) {
             SpellAbility spell = new Spell(card) {
@@ -7617,7 +7618,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Reanimate")) {
