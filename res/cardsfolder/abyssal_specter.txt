@@ -1,11 +1,11 @@
 Name:Abyssal Specter
 ManaCost:2 B B
 Types:Creature Specter
-Text:Whenever Abyssal Specter deals damage to a player, that player discards a card.
+Text:no text
 PT:2/3
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent  | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards a card.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player  | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_specter.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/117.jpg
