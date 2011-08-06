@@ -698,6 +698,10 @@ public class AbilityFactory {
 				else if (calcX[0].startsWith("Discarded"))
 					list = findRootAbility(ability).getDiscardedCost();
 				
+				else if( calcX[0].startsWith("Exiled")) {
+					list = findRootAbility(ability).getExiledCost();
+				}
+				
 				else if (calcX[0].startsWith("Targeted")){
 					SpellAbility saTargeting = (ability.getTarget() == null) ?  findParentsTargetedCard(ability) : ability;
 					list = new CardList(saTargeting.getTarget().getTargetCards().toArray());

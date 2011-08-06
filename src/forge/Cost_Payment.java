@@ -946,6 +946,7 @@ public class Cost_Payment {
                 			null, possibleValues, possibleValues[0]);
                     if(choice.equals(0)) {
                     	payment.setPayExile(true);
+                    	payment.getAbility().addExiledCost(card);
                     	AllZone.GameAction.exile(card);
                     	stop();
                     	payment.payCost();
@@ -1060,6 +1061,7 @@ public class Cost_Payment {
             public void selectCard(Card card, PlayerZone zone) {
                 if(typeList.contains(card)) {
                 	nExiles++;
+                	payment.getAbility().addExiledCost(card);
                 	AllZone.GameAction.exile(card);
                 	typeList.remove(card);
                     //in case nothing else to exile

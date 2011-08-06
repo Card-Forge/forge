@@ -411,6 +411,11 @@ public class TriggerHandler {
 				}
 				
 				@Override
+				public CardList getExiledCost() {
+					return sa[0].getExiledCost();
+				}
+				
+				@Override
 				public Card getSourceCard()
 				{
 					return sa[0].getSourceCard();
@@ -567,6 +572,12 @@ public class TriggerHandler {
 				public void resetSacrificedCost()
 				{
 					sa[0].resetSacrificedCost();
+				}
+				
+				@Override
+				public void resetExiledCost()
+				{
+					sa[0].resetExiledCost();
 				}
 				
 				@Override
