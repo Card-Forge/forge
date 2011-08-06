@@ -135,6 +135,40 @@ public class CardUtil {
         return new ArrayList<String>(colors);
     }
     
+    public static ArrayList<String> getOnlyColors(Card c) {
+        String m = c.getManaCost();
+        Set<String> colors = new HashSet<String>();
+        
+        for(int i = 0; i < m.length(); i++) {
+            switch(m.charAt(i)) {
+                case ' ':
+                break;
+                case 'G':
+                    colors.add(Constant.Color.Green);
+                break;
+                case 'W':
+                    colors.add(Constant.Color.White);
+                break;
+                case 'B':
+                    colors.add(Constant.Color.Black);
+                break;
+                case 'U':
+                    colors.add(Constant.Color.Blue);
+                break;
+                case 'R':
+                    colors.add(Constant.Color.Red);
+                break;
+            }
+        }
+        for(String kw : c.getKeyword())
+        	if(kw.startsWith(c.getName()+" is "))
+        		for(String color : Constant.Color.Colors)
+        			if(kw.endsWith(color+"."))
+        				colors.add(color); 
+        return new ArrayList<String>(colors);
+    }
+    
+    
     public static boolean hasCardName(String cardName, ArrayList<Card> list) {
         Card c;
         boolean b = false;

@@ -37,6 +37,9 @@ public class AllZone implements NewConstants {
 
     public static PlayerLife Human_Life    = new PlayerLife();
     public static PlayerLife Computer_Life = new PlayerLife();
+    
+    public static PlayerPoisonCounter Human_PoisonCounter = new PlayerPoisonCounter();
+    public static PlayerPoisonCounter Computer_PoisonCounter = new PlayerPoisonCounter();
 
     //Human_Play, Computer_Play is different because Card.comesIntoPlay() is called when a card is added by PlayerZone.add(Card)
     public final static PlayerZone Human_Play      = new PlayerZone_ComesIntoPlay(Constant.Zone.Play, Constant.Player.Human);

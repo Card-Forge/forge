@@ -15418,16 +15418,19 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     			private static final long serialVersionUID = -1319202902385425204L;
 				public void showMessage()
     			{
-				    AllZone.Display.showMessage("Discard from your hand a land card");
+				    AllZone.Display.showMessage("Discard a land card (or select Mox Diamond to sacrifice it)");
 				    ButtonUtil.enableOnlyCancel();
 				}
 				public void selectCard(Card c, PlayerZone zone)
 				{
-				    if(zone.is(Constant.Zone.Hand))
+				    if(zone.is(Constant.Zone.Hand) && c.isLand())
 				    {
 				    	AllZone.GameAction.discard(c);
-				    	if(!c.isLand())
-				    		AllZone.GameAction.sacrifice(card);
+				    	stop();
+				    }
+				    else if (c.equals(card))
+				    {
+				    	AllZone.GameAction.sacrifice(card);
 				    	stop();
 				    }
 				}
@@ -15488,7 +15491,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    				return (c.isLand());
 	    			}
 	    		});
-	    		return list.size() != 0;
+	    		return list.size() != 0 && super.canPlay();
 	    	}//canPlay()
 	    };
 	    card.addComesIntoPlayCommand(intoPlay);
@@ -17355,6 +17358,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	       card.addSpellAbility(ab1);
 	    }//*************** END ************ END **************************
 	  
+	
+	  
 	  
 	//*************** START *********** START **************************
 	    else if(cardName.equals("Path to Exile"))
@@ -17763,6 +17768,28 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	      card.clearSpellAbility();
 	      card.addSpellAbility(spell);
 	    }//*************** END ************ END **************************
+	    
+	  //*************** START *********** START **************************
+	    if (cardName.equals("Flame Rift"))
+	    {
+	    	final SpellAbility spell = new Spell(card)
+	    	{
+				private static final long serialVersionUID = -6008296722680155321L;
+
+				public void resolve()
+	    		{
+	    			AllZone.Human_Life.subtractLife(4);
+	    	        AllZone.Computer_Life.subtractLife(4);
+	    		}
+				
+				public boolean canPlayAI()
+				{
+					return AllZone.Computer_Life.getLife() > 7 && AllZone.Human_Life.getLife() < 7;
+				}
+	    	};
+	    	card.clearSpellAbility();
+	    	card.addSpellAbility(spell);
+	    }
 
 	        
     // Cards with Cycling abilities

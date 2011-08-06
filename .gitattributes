@@ -210,6 +210,7 @@ src/forge/PhaseObserver.java svneol=native#text/plain
 src/forge/PicturePanel.java svneol=native#text/plain
 src/forge/PicturePanelResize.java -text svneol=native#text/plain
 src/forge/PlayerLife.java svneol=native#text/plain
+src/forge/PlayerPoisonCounter.java -text svneol=native#text/plain
 src/forge/PlayerZone.java svneol=native#text/plain
 src/forge/PlayerZoneUtil.java svneol=native#text/plain
 src/forge/PlayerZone_ComesIntoPlay.java svneol=native#text/plain

@@ -46,9 +46,9 @@ package forge;
        {
            if(phase.equals(Constant.Phase.Untap))
            {
-             AllZone.Combat.reset();
-             AllZone.Combat.setAttackingPlayer(Constant.Player.Human);
-             AllZone.Combat.setDefendingPlayer(Constant.Player.Computer);
+               AllZone.Combat.reset();
+               AllZone.Combat.setAttackingPlayer(Constant.Player.Human);
+               AllZone.Combat.setDefendingPlayer(Constant.Player.Computer);
        
                AllZone.pwCombat.reset();
                AllZone.pwCombat.setAttackingPlayer(Constant.Player.Human);
@@ -83,8 +83,18 @@ package forge;
            
            else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility))
            {
-        	   if (! skipPhase())
+        	   if (! skipPhase()) 
+        	   {
+        		   CardList list = new CardList();
+        	   	   list.addAll(AllZone.Combat.getAttackers());
+        	   	   list.addAll(AllZone.pwCombat.getAttackers());
+        	   	   for (Card c : list)
+        	   	   {
+        	   		   CombatUtil.checkDeclareAttackers(c);
+        	   	   }
+        	   	   
         		   return new Input_Attack_Instant();
+        	   }
         	   else
         	   {
         		   AllZone.Phase.setNeedToNextPhase(true);
@@ -201,8 +211,19 @@ package forge;
            //takes place during the computer's turn, like blocking etc...
            else if(phase.equals(Constant.Phase.Combat_Declare_Blockers))
            {
-          if(! skipPhase())
-              return new Input_Block();
+          if(! skipPhase()) 
+          {
+        	  /*
+			   CardList list = new CardList();
+		   	   list.addAll(AllZone.Combat.getAttackers());
+		   	   list.addAll(AllZone.pwCombat.getAttackers());
+		   	   for (Card c : list)
+		   	   {
+		   		   CombatUtil.checkDeclareAttackers(c);
+		   	   }
+		   	   */
+               return new Input_Block();
+          }
           else
           {
              //AllZone.Phase.nextPhase();
@@ -221,25 +242,36 @@ package forge;
        {  //computer
            if(phase.equals(Constant.Phase.Untap))
            {
-          AllZone.Combat.reset();
-          AllZone.Combat.setAttackingPlayer(Constant.Player.Computer);
-          AllZone.Combat.setDefendingPlayer(Constant.Player.Human);
-
-                    AllZone.pwCombat.reset();
-                    AllZone.pwCombat.setAttackingPlayer(Constant.Player.Computer);
-                    AllZone.pwCombat.setDefendingPlayer(Constant.Player.Human);
-
-          return new Input_Untap();
-           }
+	          AllZone.Combat.reset();
+	          AllZone.Combat.setAttackingPlayer(Constant.Player.Computer);
+	          AllZone.Combat.setDefendingPlayer(Constant.Player.Human);
+	
+              AllZone.pwCombat.reset();
+              AllZone.pwCombat.setAttackingPlayer(Constant.Player.Computer);
+              AllZone.pwCombat.setDefendingPlayer(Constant.Player.Human);
+	
+	          return new Input_Untap();
+	       }
            else if(phase.equals(Constant.Phase.Draw))
-          return new Computer_Draw();
+        	   return new Computer_Draw();
 
            else if(phase.equals(Constant.Phase.Cleanup))
-                {
+           {
                   return new Computer_Cleanup();
-                }
+           }
+           else if (phase.equals(Constant.Phase.Combat_Declare_Blockers))
+           {
+    		   CardList list = new CardList();
+    	   	   list.addAll(AllZone.Combat.getAttackers());
+    	   	   list.addAll(AllZone.pwCombat.getAttackers());
+    	   	   for (Card c : list)
+    	   	   {
+    	   		   CombatUtil.checkDeclareAttackers(c);
+    	   	   }
+        	   return AllZone.Computer;
+           }
            else
-          return AllZone.Computer;
+        	   return AllZone.Computer;
        }//Computer
 
        return new Input()

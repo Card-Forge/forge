@@ -317,12 +317,14 @@ private Card getCurrentCard(int ID)
 
     boolean stop = false;
 
-    if(AllZone.Computer_Life.getLife() <= 0)
+    if(AllZone.Computer_Life.getLife() <= 0 
+       || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10 )
     {
       Constant.Runtime.WinLose.addWin();
       stop = true;
     }
-    if(AllZone.Human_Life.getLife() <= 0)
+    if(AllZone.Human_Life.getLife() <= 0
+       || AllZone.Human_PoisonCounter.getPoisonCounters() >= 10)
     {
       Constant.Runtime.WinLose.addLose();
       stop = true;
@@ -1146,7 +1148,8 @@ private int getDifferentLand(CardList list, String land)
 		
 		ArrayList<String> choices = new ArrayList<String>();
 		
-		if (Input_Main.canPlayNumberOfLands > 0)
+		if (Input_Main.canPlayNumberOfLands > 0 && 
+			(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) )
 			choices.add("Play land");
 		
 		for (SpellAbility sa: sas)

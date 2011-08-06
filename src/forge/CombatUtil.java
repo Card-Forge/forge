@@ -509,7 +509,7 @@ public class CombatUtil
     for(int i = 0; i < attack.length; i++)
     {
       GameActionUtil.executeExaltedEffects2(attack[i], AllZone.Combat);
-      checkDeclareAttackers(attack[i]);
+      //checkDeclareAttackers(attack[i]);
       attackerName = attack[i].getName();
       if (attack[i].isFaceDown())
     	  attackerName = "Morph";
@@ -547,7 +547,7 @@ public class CombatUtil
     for(int i = 0; i < attack.length; i++)
     {
       GameActionUtil.executeExaltedEffects2(attack[i], AllZone.pwCombat);
-      checkDeclareAttackers(attack[i]);
+      //checkDeclareAttackers(attack[i]);
       attackerName = attack[i].getName();
          if (attack[i].isFaceDown())
        	  attackerName = "Morph";
@@ -658,9 +658,11 @@ public class CombatUtil
 		  return false;
   }
   
-  private static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers
+  public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers
   {  
-	  if (AllZone.Phase.getPhase().equals("Declare Attackers"))
+	  //human does not have an "attackers_instantAbility" phase during his turn (yet), so triggers will happen at the beginning of declare blockers
+	  if (AllZone.Phase.getPhase().equals("Declare Blockers") ||
+		  AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility))
 	  {
 		  
 		  //Beastmaster Ascension
@@ -875,6 +877,48 @@ public class CombatUtil
 	         };
 	         
 	         ability2.setStackDescription(c.getName() + " - Goblin creatures you control get +1/+1 until end of turn.");
+			 AllZone.Stack.add(ability2);
+		  }//Goblin General
+		  
+		  if (c.getName().equals("Pianna, Nomad Captain") && !c.getCreatureAttackedThisTurn())
+		  {
+			 
+	         //final Card crd = c;
+	         Ability ability2 = new Ability(c,"0")
+	         {
+	        	 public void resolve() 
+	        	 {
+	        		 CardList cl = new CardList(AllZone.Combat.getAttackers());
+	        		 final CardList creatures = cl;
+	        		 
+		        	 final Command untilEOT = new Command()
+			         {
+						private static final long serialVersionUID = -7050310805245783042L;
+
+						public void execute()
+			            {
+							  for (Card creat:creatures){
+					              if(AllZone.GameAction.isCardInPlay(creat))
+					              {
+					                creat.addTempAttackBoost(-1);
+					                creat.addTempDefenseBoost(-1);
+					              }
+							  }
+				            }
+				     	};//Command
+		
+				        for (Card creat:creatures){  
+						    if(AllZone.GameAction.isCardInPlay(creat) )
+						    {
+						        creat.addTempAttackBoost(1);
+						        creat.addTempDefenseBoost(1);
+						    }
+				        }
+				        AllZone.EndOfTurn.addUntil(untilEOT);
+	        	 }
+	         };
+	         
+	         ability2.setStackDescription(c.getName() + " - attacking creatures get +1/+1 until end of turn.");
 			 AllZone.Stack.add(ability2);
 		  }//Goblin General
 		  
@@ -1124,7 +1168,6 @@ public class CombatUtil
 			            }
 			          };//Command
 
-			          
 			          if(AllZone.GameAction.isCardInPlay(charger))
 			          {
 			            charger.addTempAttackBoost(k);
@@ -1141,6 +1184,50 @@ public class CombatUtil
 			  
 			  
 		  }//Knotvine Paladin
+		  
+
+		  else if(c.getName().equals("Goblin Piledriver") && !c.getCreatureAttackedThisTurn())
+		  {
+			  final Card piledriver = c;
+			  Ability ability2 = new Ability(c,"0")
+			  {
+				 public void resolve() 
+				 {
+					 CardList list = new CardList();
+					 list.addAll(AllZone.Combat.getAttackers());
+					 list = list.filter(new CardListFilter(){
+		                    public boolean addCard(Card card) {
+		                       return (!card.equals(piledriver) && card.isCreature() && (card.getType().contains("Goblin") || card.getKeyword().contains("Changeling")));
+		                    }
+		             });
+					 final int otherGoblins = list.size();					 
+					 					 
+			         final Command untilEOT = new Command()
+			         {
+						private static final long serialVersionUID = -4154121199693045635L;
+
+						public void execute()
+			            {
+			              if(AllZone.GameAction.isCardInPlay(piledriver))
+			              {
+			                piledriver.addTempAttackBoost(-2*otherGoblins);
+			              }
+			            }
+			          };//Command
+
+			          if(AllZone.GameAction.isCardInPlay(piledriver))
+			          {
+			            piledriver.addTempAttackBoost(2*otherGoblins);
+			            AllZone.EndOfTurn.addUntil(untilEOT);
+			          }
+				 }//resolve
+				 
+			  };//ability
+			  
+			  ability2.setStackDescription(c.getName() + " - gets +2/+0 until end of turn for each other attacking Goblin.");
+			  AllZone.Stack.add(ability2);
+			  
+		  }//Goblin Piledriver
 
 		  else if((c.getName().equals("Charging Bandits") || c.getName().equals("Wei Ambush Force") 
 				  || c.getName().equals("Ravenous Skirge") || c.getName().equals("Vicious Kavu")  
@@ -1184,6 +1271,42 @@ public class CombatUtil
 			  			  
 		  }//+2+0 Chargers
 		  
+		  else if (c.getName().equals("Spectral Bears"))
+		  {
+			  String opp = AllZone.GameAction.getOpponent(c.getController());
+			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, opp);
+			  CardList list = new CardList(play.getCards());
+			  list = list.filter(new CardListFilter()
+			  {
+				 public boolean addCard(Card crd)
+				 {
+					 return CardUtil.getColors(crd).contains(Constant.Color.Black) && !crd.isToken();
+				 }
+			  });
+			  if (list.size() == 0)
+			  {
+				  c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+			  }
+		  }
+		  
+		  else if (c.getName().equals("Spectral Force"))
+		  {
+			  String opp = AllZone.GameAction.getOpponent(c.getController());
+			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, opp);
+			  CardList list = new CardList(play.getCards());
+			  list = list.filter(new CardListFilter()
+			  {
+				 public boolean addCard(Card crd)
+				 {
+					 return CardUtil.getColors(crd).contains(Constant.Color.Black);
+				 }
+			  });
+			  if (list.size() == 0)
+			  {
+				  c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+			  }
+		  }
+			 
 		  else if(c.getName().equals("Witch-Maw Nephilim") && !c.getCreatureAttackedThisTurn() && c.getNetAttack() >= 10)
 		  {
 			  final Card charger = c;
@@ -1216,7 +1339,7 @@ public class CombatUtil
 				 
 			  };//ability
 			  
-			  ability2.setStackDescription(c.getName() + " -  gains trample until end of turn if its power is 10 or greater.");
+			  ability2.setStackDescription(c.getName() + " - gains trample until end of turn if its power is 10 or greater.");
 			  AllZone.Stack.add(ability2);
 			  
 			  
@@ -1332,7 +1455,6 @@ public class CombatUtil
 		  {
 			     String player =  c.getController();
 			    
-	             
 	             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 	             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 	             if (lib.size() > 0 ) {
@@ -1342,12 +1464,12 @@ public class CombatUtil
                                      };
 	            Card top = lib.get(0);
 	            if (top.getType().contains("Creature")) 
-	                                                  {
+	            {
 	            	AllZone.GameAction.getPlayerLife(player).addLife(top.getBaseDefense());
 	            	AllZone.GameAction.getPlayerLife(player).subtractLife(top.getBaseAttack());
 	            	hand.add(top);
 	            	lib.remove(top);
-	            	                                  };
+	            };
 	            	                                  
 
 		  }//Sapling of Colfenor
@@ -1355,6 +1477,49 @@ public class CombatUtil
 		  
 	  }//if Phase = declare attackers
   }//checkDeclareAttackers
+  
+  public static void checkUnblockedAttackers(Card c)
+  {
+	  if (c.getName().equals("Guiltfeeder"))
+	  {
+		    final String player = c.getController();
+			final String opponent = AllZone.GameAction.getOpponent(player);
+
+			Ability ability2 = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+
+					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard,
+							opponent);
+					CardList cardsInGrave = new CardList(graveyard.getCards());
+					PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+
+					life.subtractLife(cardsInGrave.size());
+
+				}
+			};// ability2
+
+			ability2.setStackDescription(c.getName() + " - " + opponent
+					+ " loses life equal to cards in graveyard.");
+			AllZone.Stack.add(ability2);
+
+	  }
+	  else if (c.getName().equals("Crypt Cobra") || c.getName().equals("Suq'Ata Assassin")  ||
+			   c.getName().equals("Swamp Mosquito"))
+	  {
+		  String controller = c.getController();
+		  String opp = AllZone.GameAction.getOpponent(controller);
+		  
+		  if (opp.equals(Constant.Player.Human))
+			  AllZone.Human_PoisonCounter.addPoisonCounters(1);
+		  else
+			  AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+	  }
+		  
+	  
+  }
+  
   private static void checkDeclareBlockers(Card c)
   {
 	  if (AllZone.Phase.getPhase().equals("Declare Blockers"))
@@ -1647,9 +1812,7 @@ public class CombatUtil
 		  
 		  AllZone.EndOfCombat.addAt(atEOC);
 	  }
-	  
-	  
-	  	  
+	  	  	  
 	  a.setCreatureGotBlockedThisTurn(true);
   }
 }//Class CombatUtil

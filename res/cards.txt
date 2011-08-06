@@ -1,3 +1,54 @@
+Swamp Mosquito
+1 B
+Creature Insect
+Whenever Swamp Mosquito attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
+0/1
+Flying
+
+Suq'Ata Assassin
+1 B B
+Creature Human Assassin
+Whenever Suq'Ata Assassin attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
+1/1
+Fear
+
+Crypt Cobra
+3 B
+Creature Snake
+Whenever Crypt Cobra attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
+3/3
+
+Pianna, Nomad Captain
+1 W W
+Legendary Creature Human Nomad
+Whenever Pianna, Nomad Captain attacks, attacking creatures get +1/+1 until end of turn.
+2/2
+
+Spectral Force
+3 G G
+Creature Elemental Spirit
+Whenever Spectral Force attacks, if defending player controls no black permanents, it doesn't untap during your next untap step.
+8/8
+Trample
+
+Spectral Bears
+1 G
+Creature Bear Spirit
+Whenever Spectral Bears attacks, if defending player controls no black nontoken permanents, it doesn't untap during your next untap step.
+3/3
+
+Goblin Piledriver
+1 R
+Creature Goblin Warrior
+Whenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
+1/2
+Protection from blue
+
+Flame Rift
+1 R
+Sorcery
+Flame Rift deals 4 damage to each player.
+
 Prowess of the Fair
 1 B
 Tribal Enchantment Elf
@@ -503,7 +554,7 @@ RegenerateMe:B
 Headhunter
 1 B
 Creature Human Cleric
-Whenever Headhunter deals combat damage to a player, that player discards a card
+Whenever Headhunter deals combat damage to a player, that player discards a card.
 1/1
 Morph:B
 

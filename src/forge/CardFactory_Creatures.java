@@ -1665,7 +1665,6 @@ public class CardFactory_Creatures {
 
 
 
-	 
 
 	  //*************** START *********** START **************************
 	    else if(cardName.equals("Filigree Angel"))
@@ -6097,6 +6096,63 @@ public class CardFactory_Creatures {
 
 
 	    //*************** START *********** START **************************
+	    else if (cardName.equals("Elvish Piper"))
+	    {
+	    	final SpellAbility ability = new Ability_Tap(card, "G")
+		    {
+				private static final long serialVersionUID = 4414609319033894302L;
+				public boolean canPlayAI() {return getCreature().size() != 0;}
+		        public void chooseTargetAI()
+		        {
+		          card.tap();
+		          Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+		          setTargetCard(target);
+		        }
+		        CardList getCreature()
+		        {
+		          CardList list = new CardList(AllZone.Computer_Hand.getCards());
+		          list = list.getType("Creature");
+		          return list;
+		        }
+	    		public void resolve()
+	    		{
+	    			Card c = getTargetCard();
+	  	          	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+	  	          	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+
+	  	          	if(AllZone.GameAction.isCardInZone(c, hand))
+	  	          	{
+	  	          		hand.remove(c);
+	  	          		play.add(c);
+	  	          	}
+	    		}
+		    };
+		    
+		    ability.setBeforePayMana(new Input()
+		    { 
+               private static final long serialVersionUID = -1647181037510967127L;
+
+			   public void showMessage()
+		       {
+		   		   	String controller = card.getController();
+		            CardList creats = new CardList(AllZone.getZone(Constant.Zone.Hand, controller).getCards());
+		            creats = creats.filter(new CardListFilter()
+		            {
+						public boolean addCard(Card c)
+						{
+							PlayerZone zone = AllZone.getZone(c);
+							return c.isCreature() && zone.is(Constant.Zone.Hand);
+						}
+		            	
+		            });
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a creature", false));
+		          }
+		      });
+		      card.addSpellAbility(ability);
+	    }//*************** END ************ END **************************
+	    
+	    /*
+	    //*************** START *********** START **************************
 	    else if(cardName.equals("Elvish Piper"))
 	    {
 	      final SpellAbility ability = new Ability_Tap(card, "G")
@@ -6181,7 +6237,7 @@ public class CardFactory_Creatures {
 	      ability.setBeforePayMana(target);
 	    }//*************** END ************ END **************************
 	    
-
+	     */
 
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Weathered Wayfarer"))
@@ -12335,9 +12391,8 @@ public class CardFactory_Creatures {
 		  	
 	   }//*************** END ************ END **************************
 	    
-	    
 	      
-  //*************** START *********** START **************************
+	    //*************** START *********** START **************************
 	    else if (cardName.equals("Oros, the Avenger"))
 	    {
 		  	final Ability ability2 = new Ability(card, "2 W")
@@ -15879,7 +15934,7 @@ public class CardFactory_Creatures {
 		        {
 				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
 				  list = list.getType("Artifact");
-		          return super.canPlay() && list.size() > 0;
+		          return super.canPlayAI() && list.size() > 0;
 		        }
 		      };
 		      card.clearSpellAbility();
@@ -15898,13 +15953,114 @@ public class CardFactory_Creatures {
 		        {
 				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
 				  list = list.getType("Enchantment");
-		          return super.canPlay() && list.size() > 0;
+		          return super.canPlayAI() && list.size() > 0;
 		        }
 		      };
 		      card.clearSpellAbility();
 		      card.addSpellAbility(spell);
 		    }
 		    //*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Cantivore"))
+		    {
+		      SpellAbility spell = new Spell_Permanent(card)
+		      {
+				private static final long serialVersionUID = 7254358703158629514L;
+
+				public boolean canPlayAI()
+		        {
+				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer).getCards());
+				  list.addAll(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human).getCards());
+				  list = list.getType("Enchantment");
+		          return super.canPlayAI() && list.size() > 0;
+		        }
+		      };
+		      card.clearSpellAbility();
+		      card.addSpellAbility(spell);
+		    }
+		    //*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Terravore"))
+		    {
+		      SpellAbility spell = new Spell_Permanent(card)
+		      {
+				private static final long serialVersionUID = 7316190829288665283L;
+
+				public boolean canPlayAI()
+		        {
+				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer).getCards());
+				  list.addAll(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human).getCards());
+				  list = list.getType("Land");
+		          return super.canPlayAI() && list.size() > 0;
+		        }
+		      };
+		      card.clearSpellAbility();
+		      card.addSpellAbility(spell);
+		    }
+		    //*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Mortivore"))
+		    {
+		      SpellAbility spell = new Spell_Permanent(card)
+		      {
+				private static final long serialVersionUID = -7118801410173525870L;
+
+				public boolean canPlayAI()
+		        {
+				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer).getCards());
+				  list.addAll(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human).getCards());
+				  list = list.getType("Creature");
+		          return super.canPlayAI() && list.size() > 0;
+		        }
+		      };
+		      card.clearSpellAbility();
+		      card.addSpellAbility(spell);
+		    }
+		    //*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Cognivore"))
+		    {
+		      SpellAbility spell = new Spell_Permanent(card)
+		      {
+				private static final long serialVersionUID = -2216181341715046786L;
+
+				public boolean canPlayAI()
+		        {
+				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer).getCards());
+				  list.addAll(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human).getCards());
+				  list = list.getType("Instant");
+		          return super.canPlayAI() && list.size() > 0;
+		        }
+		      };
+		      card.clearSpellAbility();
+		      card.addSpellAbility(spell);
+		    }
+		    //*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Magnivore"))
+		    {
+		      SpellAbility spell = new Spell_Permanent(card)
+		      {
+				private static final long serialVersionUID = -2252263708643462897L;
+
+				public boolean canPlayAI()
+		        {
+				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer).getCards());
+				  list.addAll(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human).getCards());
+				  list = list.getType("Sorcery");
+		          return super.canPlayAI() && list.size() > 0;
+		        }
+		      };
+		      card.clearSpellAbility();
+		      card.addSpellAbility(spell);
+		    }
+		    //*************** END ************ END **************************
+	      
 	      
 	      //*************** START *********** START **************************
 	      if(cardName.equals("Magus of the Library"))
@@ -18667,15 +18823,7 @@ public class CardFactory_Creatures {
 	    	  {
 		    	  public void addDamage(final int n, final Card source)
 			      {
-		    		  final Ability ability = new Ability(card, "0")
-		    		  {
-		    			  public void resolve(){
-				    		  for (int i=0;i<n;i++)
-				    		  	card.addCounter(Counters.P1P1, n);
-		    			  }
-		    		  };
-		    		  ability.setStackDescription(card.getName() + " - gets " + n +" +1/+1 counters.");
-			          AllZone.Stack.add(ability);
+		    		  this.addCounter(Counters.P1P1, n);
 			      }
 	    	  };
 	    	  

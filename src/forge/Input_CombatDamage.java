@@ -72,7 +72,8 @@ private void playerDamage(PlayerLife p)
     	//if (unblocked.getCard(j).hasSecondStrike()) {
     	if (!unblocked.getCard(j).hasFirstStrike() ||
     		(unblocked.getCard(j).hasFirstStrike() && unblocked.getCard(j).hasDoubleStrike())) {
-    		GameActionUtil.executePlayerCombatDamageEffects(unblocked.get(j));       
+    		GameActionUtil.executePlayerCombatDamageEffects(unblocked.get(j));     
+    		CombatUtil.checkUnblockedAttackers(unblocked.get(j));
     	}
 
     }    

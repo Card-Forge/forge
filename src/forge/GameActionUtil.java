@@ -3596,8 +3596,6 @@ public class GameActionUtil
 			playerCombatDamage_Augury_Adept(c);
 		else if (c.getName().equals("Warren Instigator"))
 			playerCombatDamage_Warren_Instigator(c);
-		else if (c.getName().equals("Guiltfeeder"))
-			playerCombatDamage_Guiltfeeder(c);
 		else if (c.getName().equals("Spawnwrithe"))
 			playerCombatDamage_Spawnwrithe(c);
 		else if (c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie") )
@@ -3665,13 +3663,11 @@ public class GameActionUtil
 	*/
 	private static void playerCombatDamage_Oros(Card c)
 	{
-		System.out.println("Oros swung unblocked.");
 		SpellAbility[] sa = c.getSpellAbility();
 		if (c.getController().equals(Constant.Player.Human))
 			AllZone.GameAction.playSpellAbility(sa[1]);
 		else
 			ComputerUtil.playNoStack(sa[1]);
-
 	}
 	
 	private static void playerCombatDamage_Dimir_Cutpurse(Card c)
@@ -4110,6 +4106,7 @@ public class GameActionUtil
 		AllZone.Stack.add(ability2);
 	}
 
+	/*
 	private static void playerCombatDamage_Guiltfeeder(Card c)
 	{
 		final String player = c.getController();
@@ -4133,8 +4130,8 @@ public class GameActionUtil
 		ability2.setStackDescription(c.getName() + " - " + opponent
 				+ " loses life equal to cards in graveyard.");
 		AllZone.Stack.add(ability2);
-
 	}
+	*/
 	
 	private static void playerCombatDamage_Goblin_Lackey(Card c)
 	{
@@ -4236,7 +4233,6 @@ public class GameActionUtil
 		}
 	}//warren instigator
 
-	
 	
 
 	private static void playerCombatDamage_Shadowmage_Infiltrator(Card c)

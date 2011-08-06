@@ -18,6 +18,14 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+swamp_mosquito.jpg			http://www.wizards.com/global/images/magic/general/swamp_mosquito.jpg
+suqata_assassin.jpg			http://www.wizards.com/global/images/magic/general/suqata_assassin.jpg
+crypt_cobra.jpg				http://www.wizards.com/global/images/magic/general/crypt_cobra.jpg
+pianna_nomad_captain.jpg	http://www.wizards.com/global/images/magic/general/pianna_nomad_captain.jpg
+spectral_force.jpg			http://www.wizards.com/global/images/magic/general/spectral_force.jpg
+spectral_bears.jpg			http://www.wizards.com/global/images/magic/general/spectral_bears.jpg
+goblin_piledriver.jpg		http://www.wizards.com/global/images/magic/general/goblin_piledriver.jpg
+flame_rift.jpg				http://www.wizards.com/global/images/magic/general/flame_rift.jpg
 prowess_of_the_fair.jpg     http://www.wizards.com/global/images/magic/general/prowess_of_the_fair.jpg
 abomination.jpg             http://www.wizards.com/global/images/magic/general/abomination.jpg
 time_warp.jpg				http://www.wizards.com/global/images/magic/general/time_warp.jpg

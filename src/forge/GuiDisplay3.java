@@ -85,6 +85,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
 
     public static Color       c1               = new Color(204, 204, 204);
     public static Color       c2               = new Color(204, 204, 204);
+    public static Color 	  c3 			   = new Color(0, 164, 0);
     
     private Action            HUMAN_GRAVEYARD_ACTION;
     private Action            HUMAN_REMOVED_ACTION;
@@ -583,6 +584,15 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         });
         AllZone.Computer_Life.updateObservers();
         
+        oppPCLabel.setText("Poison Counters: " + AllZone.Computer_PoisonCounter.getPoisonCounters());
+        AllZone.Computer_PoisonCounter.addObserver(new Observer() {
+            public void update(Observable a, Object b) {
+                int pcs = AllZone.Computer_PoisonCounter.getPoisonCounters();
+                oppPCLabel.setText("Poison Counters: " + pcs);
+            }
+        });
+        AllZone.Computer_PoisonCounter.updateObservers();
+        
         //player life
         playerLifeLabel.setText("" + AllZone.Human_Life.getLife());
         AllZone.Human_Life.addObserver(new Observer() {
@@ -592,6 +602,15 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             }
         });
         AllZone.Human_Life.updateObservers();
+        
+        playerPCLabel.setText("Poison Counters: " + AllZone.Human_PoisonCounter.getPoisonCounters());
+        AllZone.Human_PoisonCounter.addObserver(new Observer() {
+            public void update(Observable a, Object b) {
+                int pcs = AllZone.Human_PoisonCounter.getPoisonCounters();
+                playerPCLabel.setText("Poison Counters: " + pcs);
+            }
+        });
+        AllZone.Human_PoisonCounter.updateObservers();
         
         //stack
         AllZone.Stack.addObserver(new Observer() {
@@ -849,7 +868,11 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     
     private void initOpp(JPanel pane) {
         oppLifeLabel.setFont(lifeFont);
-        oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        //oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        oppPCLabel.setFont(statFont);
+        //oppPCLabel.setHorizontalAlignment(SwingConstants.TOP);
+        oppPCLabel.setForeground(c3);
         
         JLabel oppLibraryLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_LIBRARY.TITLE),
                 SwingConstants.TRAILING);
@@ -905,6 +928,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         oppPanel.setLayout(new BorderLayout());
         oppPanel.add(oppNumbersPanel, BorderLayout.WEST);
         oppPanel.add(oppLifeLabel, BorderLayout.EAST);
+        oppPanel.add(oppPCLabel, BorderLayout.AFTER_LAST_LINE);
         pane.add(new ExternalPanel(oppPanel), "compy");
     }
     
@@ -932,7 +956,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         playerLifeLabel.setFont(lifeFont);
         playerLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-
+        playerPCLabel.setFont(statFont);
+        playerPCLabel.setForeground(c3);
+        
         JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.TITLE),
                 SwingConstants.TRAILING);
         playerLibraryLabel.setFont(statFont);
@@ -1002,6 +1028,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         playerPanel.setLayout(new BorderLayout());
         playerPanel.add(playerNumbersPanel, BorderLayout.WEST);
         playerPanel.add(playerLifeLabel, BorderLayout.EAST);
+        playerPanel.add(playerPCLabel, BorderLayout.AFTER_LAST_LINE);
         pane.add(new ExternalPanel(playerPanel), "human");
     }
     
@@ -1117,6 +1144,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
    public  JPanel                          picturePanel        = new JPanel();
     JLabel                          oppLifeLabel        = new JLabel();
     JLabel                          playerLifeLabel     = new JLabel();
+    JLabel 							oppPCLabel			= new JLabel();
+    JLabel							playerPCLabel		= new JLabel();
     JLabel                          cdLabel1            = new JLabel();
     JLabel                          cdLabel2            = new JLabel();
     JLabel                          cdLabel3            = new JLabel();
