@@ -242,7 +242,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 	}
 	
 	private boolean tokenDoTriggerAI(SpellAbility sa, boolean mandatory){
-		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
+		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
 		return true;

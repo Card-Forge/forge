@@ -52,7 +52,7 @@ public class Input_Mulligan extends Input {
 
         Card dummy = CHandList.get(0);
         //Computer mulligans if there are no cards with converted mana cost of 0 in its hand
-        while(CHandList.size() > 4 && CHandList.getValidCards("Card.cmcEQ0",AllZone.ComputerPlayer,dummy).size() == 0) {
+        while(CHandList.size() > 5 && CHandList.getValidCards("Card.cmcEQ0",AllZone.ComputerPlayer,dummy).size() < 2) {
         	for(Card c : CHandList)
         		AllZone.GameAction.moveToLibrary(c);
 	        

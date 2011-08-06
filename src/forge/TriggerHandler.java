@@ -230,6 +230,9 @@ public class TriggerHandler {
 				return;
 			}				
 			
+			// Any trigger should cause the phase not to skip
+			AllZone.Phase.setSkipPhase(false);
+			
 			regtrig.setRunParams(runParams);
 			
 			//All tests passed, execute ability.
@@ -775,7 +778,8 @@ public class TriggerHandler {
 						}
 						else
 						{
-							if(!sa[0].canPlayAI())
+							// This isn't quite right, but better than canPlayAI
+							if(!sa[0].doTrigger(isMandatory))
 							{
 								return;
 							}

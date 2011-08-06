@@ -496,6 +496,7 @@ public class Card extends MyObservable {
 
 				if(hasVanish && AllZone.GameAction.isCardInPlay(this))
 					AllZone.GameAction.sacrifice(this);
+				
 				if(hasSuspend() && AllZone.GameAction.isCardExiled(this))
 				{
 					final Card c = this;
@@ -503,6 +504,8 @@ public class Card extends MyObservable {
 					c.setSuspendCast(true);
 					// set activating player for base spell ability
 					c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
+					// Any trigger should cause the phase not to skip
+					AllZone.Phase.setSkipPhase(false);
 					AllZone.GameAction.playCardNoCost(c);
 				}
 			}
