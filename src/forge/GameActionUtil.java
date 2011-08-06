@@ -14900,7 +14900,7 @@ public class GameActionUtil {
 
 	}; //Nyxathid
 
-
+	/*
 	public static Command Lord_of_Extinction          = new Command() {
 		private static final long serialVersionUID = -8778900687347191964L;
 
@@ -14916,7 +14916,7 @@ public class GameActionUtil {
 			}
 		}
 	}; //Lord of Extinction
-
+	*/
 	/*
 	public static Command Terravore                   = new Command() {
 		private static final long serialVersionUID = -7848248012651247059L;
@@ -15996,7 +15996,7 @@ public class GameActionUtil {
 		commands.put("Lhurgoyf", Lhurgoyf);
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Liu_Bei", Liu_Bei);
-		commands.put("Lord_of_Extinction", Lord_of_Extinction);
+		//commands.put("Lord_of_Extinction", Lord_of_Extinction);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);
 		
 		//commands.put("Magnivore", Magnivore);

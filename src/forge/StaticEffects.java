@@ -72,7 +72,7 @@ public class StaticEffects
 		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
 		cardToEffectsList.put("Lighthouse Chronologist", new String[] {"Lighthouse_Chronologist"});
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
-		cardToEffectsList.put("Lord of Extinction", new String[] {"Lord_of_Extinction"});
+		//cardToEffectsList.put("Lord of Extinction", new String[] {"Lord_of_Extinction"});
 		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
 		
 		//cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
