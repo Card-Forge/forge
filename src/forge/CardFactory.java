@@ -17557,6 +17557,55 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
 
 
+        //*************** START *********** START **************************
+        if(cardName.equals("Explore"))
+       {
+       	final SpellAbility spell = new Spell(card) {
+   			private static final long serialVersionUID = 8377957584738695517L;
+
+   			public boolean canPlayAI() {
+   				// The computer should only play this card if it has at least 
+   				// one land in its hand. Because of the way the computer turn
+   				// is structured, it will already have played its first land.
+   				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand,
+   						Constant.Player.Computer);
+
+   				CardList list = new CardList(hand.getCards());
+
+   				list = list.getType("Land");
+   				if (list.size() > 0)
+   					return true;
+   				else
+   					return false;
+   			}
+   			
+   			public void resolve() {
+   				final String thePlayer = card.getController();
+   				if (thePlayer.equals(Constant.Player.Human))
+   					AllZone.GameInfo.addHumanCanPlayNumberOfLands(1);
+   				else
+   					AllZone.GameInfo.addComputerCanPlayNumberOfLands(1);
+   				
+   				Command untilEOT = new Command()
+   				{
+   					
+   					private static final long serialVersionUID = -2618916698575607634L;
+
+   					public void execute()
+       	            	{
+   						if (thePlayer.equals(Constant.Player.Human))
+   							AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+   						// There's no corresponding 'if' for the computer
+   						// The computer's land total gets reset to the right value 
+   						// every turn	
+     	            	}
+       	          	};
+       	          AllZone.EndOfTurn.addUntil(untilEOT);
+       		}
+       	};
+       	card.clearSpellAbility();
+       	card.addSpellAbility(spell);
+       } //*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

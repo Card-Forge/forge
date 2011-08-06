@@ -21,6 +21,7 @@ public class ComputerAI_General implements Computer {
     
     public void main1() {
         if(AllZone.GameInfo.getComputerCanPlayNumberOfLands() > 0) {
+
         	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
             ComputerUtil.playLand();
             for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
@@ -52,7 +53,8 @@ public class ComputerAI_General implements Computer {
     	AllZone.GameInfo.setComputerCanPlayNumberOfLands(CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer));
         
         playCards(Constant.Phase.Main2);
-    }
+
+   }
     
     private void playCards(final String phase) {
         SpellAbility[] sp = phase.equals(Constant.Phase.Main1)? getMain1():getMain2();
@@ -100,6 +102,7 @@ public class ComputerAI_General implements Computer {
         play.add("Epic Proportions");
         
         play.add("Erratic Explosion");
+        play.add("Explore");
         play.add("Expunge");
         play.add("Faceless Butcher");
         play.add("Feral Lightning");
