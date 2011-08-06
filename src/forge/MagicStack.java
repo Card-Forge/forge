@@ -17,6 +17,8 @@ public class MagicStack extends MyObservable
   public void reset()
   {
 	  stack.clear();
+	  frozen = false;
+	  frozenStack.clear();
 	  this.updateObservers();
   }
   
@@ -27,6 +29,12 @@ public class MagicStack extends MyObservable
 		  this.add(frozenStack.get(0));
 		  frozenStack.remove(0);
 	  }
+  }
+  
+  public void clearFrozen(){
+	  // todo: frozen triggered abilities and undoable costs have nasty consequences
+	  frozen = false;
+	  frozenStack.clear();
   }
   
   public void add(SpellAbility sp, boolean useX)

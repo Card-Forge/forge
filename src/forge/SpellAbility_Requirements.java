@@ -65,6 +65,7 @@ public class SpellAbility_Requirements {
 				select.resetTargets();
 			
 			payment.cancelPayment();
+			AllZone.Stack.clearFrozen();
 		}
 	}
 	
