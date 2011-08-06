@@ -133,6 +133,7 @@ public class StaticEffects
 		cardToEffectsList.put("Lord of Atlantis", new String[] {"Lord_of_Atlantis_Pump","Lord_of_Atlantis_Other"});
 		cardToEffectsList.put("Elvish Champion", new String[] {"Elvish_Champion_Pump","Elvish_Champion_Other"});
 		cardToEffectsList.put("Field Marshal", new String[] {"Field_Marshal_Pump", "Field_Marshal_Other"});
+		cardToEffectsList.put("Death Baron", new String[] {"Death_Baron_Pump","Death_Baron_Other"});
 		cardToEffectsList.put("Lovisa Coldeyes", new String[] {"Lovisa_Coldeyes_Pump"});
 		cardToEffectsList.put("Aven Brigadier", new String[] {"Aven_Brigadier_Soldier_Pump", "Aven_Brigadier_Bird_Pump", "Aven_Brigadier_Other"});
 		cardToEffectsList.put("Scion of Oona", new String[] {"Scion_of_Oona_Pump", "Scion_of_Oona_Other"});

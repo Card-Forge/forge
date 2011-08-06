@@ -16031,6 +16031,94 @@ public class GameActionUtil {
 		}// execute()
 
 	}; //Field Marshal Other
+	
+	
+	public static Command Death_Baron_Pump = new Command() {
+
+		private static final long serialVersionUID = 6864062675875861848L;
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for(int i = 0; i < cList.size(); i++) {
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Death Baron");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(zone[outer].getCards());
+
+				creature = creature.filter(new CardListFilter()
+				{
+					public boolean addCard(Card crd)
+					{
+						return crd.isCreature() && ( (crd.getType().contains("Zombie") && !crd.getName().equals("Death Baron"))
+							   || crd.getType().contains("Skeleton") || crd.getKeyword().contains("Changeling"));
+					}
+				});
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					c.addSemiPermanentAttackBoost(1);
+					c.addSemiPermanentDefenseBoost(1);
+					if(!c.getExtrinsicKeyword().contains("Deathtouch")) 
+						c.addExtrinsicKeyword("Deathtouch");
+					gloriousAnthemList.add(c);
+				
+				} // for
+			} // for
+
+		}// execute()
+
+	}; //Death Baron Pump
+	
+	public static Command Death_Baron_Other  = new Command() {
+
+		private static final long serialVersionUID = -8650631555036321809L;
+		int                       otherBarons      = 0;
+
+		private int countOtherBarons(Card c) {
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+			CardList barons = new CardList(play.getCards());
+			barons = barons.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getName().equals("Death Baron") && (c.getType().contains("Zombie")) && 
+						   !c.getType().contains("Skeleton");
+				}
+			});
+			return barons.size() - 1;
+
+		}
+
+		public void execute() {
+
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+
+			creature = creature.getName("Death Baron");
+
+			for(int i = 0; i < creature.size(); i++) {
+				Card c = creature.get(i);
+				otherBarons = countOtherBarons(c);
+				c.setOtherAttackBoost(otherBarons);
+				c.setOtherDefenseBoost(otherBarons);
+				if(!c.getExtrinsicKeyword().contains("Deathtouch") && otherBarons > 0) 
+					c.addExtrinsicKeyword("Deathtouch");
+				else 
+					c.removeExtrinsicKeyword("Deathtouch");
+
+			}// for inner
+		}// execute()
+
+	}; //Death Baron Other
 
 	public static Command Lovisa_Coldeyes_Pump = new Command() {
 
@@ -16061,7 +16149,7 @@ public class GameActionUtil {
 					public boolean addCard(Card crd)
 					{
 						return crd.isCreature() && ( (crd.getType().contains("Barbarian") && !crd.getName().equals("Lovisa Coldeyes"))
-							   || crd.getType().contains("Berserker") || crd.getType().contains("Warrior"));
+							   || crd.getType().contains("Berserker") || crd.getType().contains("Warrior") || crd.getKeyword().contains("Changeling"));
 					}
 				});
 
@@ -16077,7 +16165,7 @@ public class GameActionUtil {
 
 		}// execute()
 
-	}; //Aven Brigadier Soldier Pump
+	}; //Lovisa Coldeyes Pump
 	
 	public static Command Aven_Brigadier_Soldier_Pump = new Command() {
 		private static final long serialVersionUID   = -2052700621466065388L;
@@ -19765,6 +19853,8 @@ public class GameActionUtil {
 		commands.put("Goblin_King_Other", Goblin_King_Other);
 		commands.put("Field_Marshal_Pump", Field_Marshal_Pump);
 		commands.put("Field_Marshal_Other", Field_Marshal_Other);
+		commands.put("Death_Baron_Pump", Death_Baron_Pump);
+		commands.put("Death_Baron_Other", Death_Baron_Other);
 		commands.put("Lovisa_Coldeyes_Pump", Lovisa_Coldeyes_Pump);
 		commands.put("Aven_Brigadier_Soldier_Pump", Aven_Brigadier_Soldier_Pump);
 		commands.put("Aven_Brigadier_Bird_Pump", Aven_Brigadier_Bird_Pump);
