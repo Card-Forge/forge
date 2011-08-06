@@ -7,4 +7,5 @@ K:abUntapTgt T:Land:Untap target land.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_druid.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/139.jpg
 End

@@ -5,4 +5,7 @@ Text:2: Jade Statue becomes a 3/6 Golem artifact creature until end of combat. A
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_statue.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/255.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/300.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/254.jpg
 End

@@ -6,4 +6,5 @@ K:spPumpTgt:+0/+4
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_will.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/10.jpg
 End

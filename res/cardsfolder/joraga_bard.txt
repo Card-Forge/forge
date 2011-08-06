@@ -6,4 +6,5 @@ PT:1/4
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_bard.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/166.jpg
 End

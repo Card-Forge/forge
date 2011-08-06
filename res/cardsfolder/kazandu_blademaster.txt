@@ -8,4 +8,5 @@ K:Vigilance
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_blademaster.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/16.jpg
 End

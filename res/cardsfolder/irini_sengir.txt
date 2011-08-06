@@ -6,4 +6,5 @@ PT:2/2
 K:CostChange:All:More:2:Spell:white/green:Enchantment:OnlyOneBonus
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irini_sengir.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/17.jpg
 End

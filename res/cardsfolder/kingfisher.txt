@@ -7,4 +7,5 @@ K:Flying
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Kingfisher is put into a graveyard from the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kingfisher.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/36.jpg
 End

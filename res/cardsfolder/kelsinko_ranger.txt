@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ 1 W | TgtPrompt$ Choose target green creature | ValidTgts$ Cre
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kelsinko_ranger.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/257.jpg
 End

@@ -5,4 +5,5 @@ Text:When Journey to Nowhere enters the battlefield, exile target creature.\r\nW
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/14.jpg
 End

@@ -7,4 +7,5 @@ K:Bushido 2
 K:abAllPump T Sac<1/Samurai>:YouCtrl/Samurai:Double Strike:Samurai creatures you control gain double strike until end of turn.:Iizuka the Ruthless - Samurai creatures you control gain double strike until EOT
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iizuka_the_ruthless.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/104.jpg
 End

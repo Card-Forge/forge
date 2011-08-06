@@ -7,4 +7,5 @@ K:abPump 1 W:+0/+X:Kitsune Loreweaver get +0/+X until end of turn, where X is th
 SVar:X:Count$NumCardsInYourHand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_loreweaver.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/17.jpg
 End

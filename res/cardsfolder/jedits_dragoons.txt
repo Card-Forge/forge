@@ -6,4 +6,5 @@ PT:2/5
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jedits_dragoons.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/25.jpg
 End

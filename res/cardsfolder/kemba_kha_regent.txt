@@ -5,4 +5,6 @@ Text:At the beginning of your upkeep, put a 2/2 white Cat creature token onto th
 PT:2/4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kemba_kha_regent.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/12.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/12.jpg
 End

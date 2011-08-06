@@ -5,4 +5,5 @@ Text:no text
 K:abPumpTgtC 3 T:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_lance.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/300.jpg
 End

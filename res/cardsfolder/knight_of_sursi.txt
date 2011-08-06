@@ -8,4 +8,5 @@ K:Flanking
 K:Suspend:3:W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_sursi.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/10.jpg
 End

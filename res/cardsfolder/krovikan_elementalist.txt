@@ -8,4 +8,5 @@ A:AB$Pump | Cost$ U U | TgtPrompt$ Target creature you control | ValidTgts$ Crea
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_elementalist.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/27.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 K:spGainLifeTgt:7:Drawback$TgtDrawCards/2:Target player gains 7 life and draws two cards.:Kiss of the Amesha - target player gains 7 life and draws 2 cards
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiss_of_the_amesha.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/177.jpg
 End

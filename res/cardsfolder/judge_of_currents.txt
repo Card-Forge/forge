@@ -8,4 +8,5 @@ PT:1/1
 K:WheneverKeyword:BecomesTapped:Type/Merfolk:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Merfolk you control becomes tapped, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/judge_of_currents.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/22.jpg
 End

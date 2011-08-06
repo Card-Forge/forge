@@ -6,4 +6,6 @@ A:SP$Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6519.jpg
+SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/137.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/137.jpg
 End

@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:1/2/Vigilance:isPresent Samurai.Legendary+YouCtrl:As long 
 SVar:BuffedBy:Samurai.Legendary
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kondas_hatamoto.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/31.jpg
 End

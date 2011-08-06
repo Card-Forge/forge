@@ -5,4 +5,6 @@ Text:Destroy target land.
 K:spDestroyTgt:Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ice_storm.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/110.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/110.jpg
 End

@@ -9,4 +9,5 @@ K:First Strike
 K:Cumulative upkeep:U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_wall.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/78.jpg
 End

@@ -7,4 +7,5 @@ K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:StatsPum
 SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_hunt.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/219.jpg
 End

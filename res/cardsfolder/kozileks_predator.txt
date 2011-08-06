@@ -5,4 +5,5 @@ Text:When Kozilek's Predator enters the battlefield, put two 0/1 colorless Eldra
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kozileks_predator.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/193.jpg
 End

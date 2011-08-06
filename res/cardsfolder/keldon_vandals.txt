@@ -7,4 +7,5 @@ K:Echo:2 R
 K:etbDestroyTgt:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_vandals.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/91.jpg
 End

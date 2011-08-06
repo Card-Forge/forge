@@ -8,4 +8,5 @@ A:AB$Token | Cost$ G T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ C
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperious_perfect.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/220.jpg
 End

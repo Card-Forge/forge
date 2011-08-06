@@ -4,4 +4,5 @@ Types:Artifact
 Text:Players can't untap more than one artifact during their untap steps.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imi_statue.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/255.jpg
 End

@@ -6,4 +6,5 @@ PT:3/1
 K:abPumpTgtC W T:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jamuraan_lion.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/110.jpg
 End

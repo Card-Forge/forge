@@ -5,4 +5,5 @@ Text:Whenever enchanted creature becomes tapped, Insolence deals 2 damage to tha
 K:Enchant Creature Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insolence.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/63.jpg
 End

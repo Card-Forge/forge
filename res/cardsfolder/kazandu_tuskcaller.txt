@@ -7,4 +7,5 @@ K:Level up:1 G
 K:maxLevel:6
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_tuskcaller.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/191.jpg
 End

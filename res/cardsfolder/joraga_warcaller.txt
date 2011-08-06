@@ -8,4 +8,5 @@ K:stPumpAll:Creature.Elf+Other+YouCtrl:X/X:no Condition:Other Elf creatures you 
 SVar:X:Count$CardCounters.P1P1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_warcaller.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/106.jpg
 End

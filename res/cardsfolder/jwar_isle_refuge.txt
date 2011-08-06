@@ -6,4 +6,5 @@ K:tap: add U
 K:tap: add B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jwar_isle_refuge.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/215.jpg
 End

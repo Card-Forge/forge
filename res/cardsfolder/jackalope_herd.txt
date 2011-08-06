@@ -6,4 +6,5 @@ PT:4/5
 K:WheneverKeyword:CastSpell/Controller:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When you cast a spell, return Jackalope Herd to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jackalope_herd.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/111.jpg
 End

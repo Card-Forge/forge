@@ -5,4 +5,9 @@ Text:no text
 PT:3/5
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3988.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/167.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/112.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/111.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/137.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/112.jpg
 End

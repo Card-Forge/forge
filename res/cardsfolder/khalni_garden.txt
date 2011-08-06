@@ -7,4 +7,5 @@ K:etbMakeToken<>1<>Plant<>G 0 1 Plant<>Controller<>G<>Creature;Plant<>0<>1<>None
 K:tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_garden.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/138.jpg
 End

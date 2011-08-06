@@ -5,4 +5,5 @@ Text:(NOTE: "Spend only mana produced by basic lands to play Imperiosaur." is no
 PT:5/5
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130634.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/145.jpg
 End

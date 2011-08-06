@@ -7,4 +7,5 @@ K:Flying
 K:Unearth:2 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kathari_screecher.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/47.jpg
 End

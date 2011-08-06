@@ -5,4 +5,6 @@ Text:no text
 PT:1/7
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83461.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/22.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/24.jpg
 End

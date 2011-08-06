@@ -5,4 +5,5 @@ Text:Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each o
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_borderguard.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/14.jpg
 End

@@ -7,4 +7,5 @@ K:Annihilator 4
 K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kozilek_butcher_of_truth.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/6.jpg
 End

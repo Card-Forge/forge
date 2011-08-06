@@ -6,4 +6,5 @@ PT:2/3
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_skyfisher.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/23.jpg
 End

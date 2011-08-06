@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:1/1/First Strike:isPresent Giant.YouCtrl:As long as you co
 SVar:BuffedBy:Giant
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_greatheart.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/25.jpg
 End

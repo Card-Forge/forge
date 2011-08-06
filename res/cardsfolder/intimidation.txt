@@ -6,4 +6,5 @@ K:StaticEffect:Play:Permanents you Control:Keyword/Fear:Type.Creature:Creatures 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidation.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/142.jpg
 End

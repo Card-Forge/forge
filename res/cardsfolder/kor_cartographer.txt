@@ -5,4 +5,5 @@ Text:When Kor Cartographer enters the battlefield, you may search your library f
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_cartographer.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/18.jpg
 End

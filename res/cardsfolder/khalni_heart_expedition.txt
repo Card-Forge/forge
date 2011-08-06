@@ -5,4 +5,5 @@ Text:Landfall - Whenever a land enters the battlefield under your control, you m
 K:Landfall
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_heart_expedition.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/167.jpg
 End

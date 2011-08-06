@@ -7,4 +7,5 @@ K:Level up:4
 K:maxLevel:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ikiral_outrider.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/27.jpg
 End

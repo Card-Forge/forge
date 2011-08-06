@@ -5,4 +5,5 @@ Text:no text
 K:abPumpTgtC 1 T:Flanking
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jabaris_banner.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/150.jpg
 End

@@ -5,4 +5,5 @@ Text:Kabira Crossroads enters the battlefield tapped.\r\nWhen Kabira Crossroads 
 K:tap: add W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_crossroads.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/216.jpg
 End

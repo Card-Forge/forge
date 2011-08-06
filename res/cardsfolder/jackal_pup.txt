@@ -5,4 +5,5 @@ Text:Whenever Jackal Pup is dealt damage, it deals that much damage to you.
 PT:2/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4825.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/183.jpg
 End

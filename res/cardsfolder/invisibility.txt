@@ -6,4 +6,7 @@ K:Enchant creature
 K:enPump:CARDNAME can't be blocked except by Walls.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisibility.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/87.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/60.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/60.jpg
 End

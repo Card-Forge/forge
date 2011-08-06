@@ -6,4 +6,5 @@ PT:9/9
 K:Morph:6 G G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_colossus.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/270.jpg
 End

@@ -9,4 +9,7 @@ K:When you control no Islands, sacrifice CARDNAME.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/U U U:ControllerUpkeep:At the beginning of your upkeep, you may pay U U U. If you do, untap Island Fish Jasconius.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/island_fish_jasconius.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/61.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/78.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/22.jpg
 End

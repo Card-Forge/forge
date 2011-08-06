@@ -6,4 +6,5 @@ PT:8/8
 K:Trample
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_hydra.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/192.jpg
 End

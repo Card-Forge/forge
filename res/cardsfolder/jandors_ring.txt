@@ -6,4 +6,5 @@ A:AB$Draw | Cost$ 2 T Discard<1/LastDrawn> | NumCards$ 1 | SpellDescription$  Dr
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jandors_ring.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/78.jpg
 End

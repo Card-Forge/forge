@@ -5,4 +5,5 @@ Text:Counter target spell that targets a creature.
 K:spCounter:Spell:Targets(Creature):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intervene.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/33.jpg
 End

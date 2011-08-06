@@ -7,4 +7,6 @@ K:Flying
 K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Kemba's Skyguard enters the battlefield, you gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kembas_skyguard.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/13.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/13.jpg
 End

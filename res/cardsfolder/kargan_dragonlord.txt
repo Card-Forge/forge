@@ -7,4 +7,5 @@ K:Level up:R
 K:maxLevel:8
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kargan_dragonlord.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/152.jpg
 End

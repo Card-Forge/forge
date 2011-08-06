@@ -6,4 +6,5 @@ PT:4/5
 A:AB$Bounce | Cost$ 1 U T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green Creature | Destination$ TopofLibrary | SpellDescription$ Put target green creature on top of its owner's library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/king_crab.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/34.jpg
 End

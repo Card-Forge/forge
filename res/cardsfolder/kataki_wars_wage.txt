@@ -6,4 +6,5 @@ PT:2/1
 K:stPumpAll:Artifact:0/0/At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1:No Condition:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay 1."
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kataki_wars_wage.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/14.jpg
 End

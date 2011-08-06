@@ -11,4 +11,5 @@ K:abPump W W:Protection from red
 K:abPump W W:Protection from white
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/238.jpg
 End

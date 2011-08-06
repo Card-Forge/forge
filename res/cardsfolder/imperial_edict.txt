@@ -4,4 +4,6 @@ Types:Sorcery
 Text:Target opponent sacrifices a creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_edict.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/77.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/77.jpg
 End

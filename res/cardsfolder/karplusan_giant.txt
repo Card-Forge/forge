@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ tapXType<1/Land.Snow> | NumAtt$ +1 | NumDef$ +1 | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_giant.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/196.jpg
 End

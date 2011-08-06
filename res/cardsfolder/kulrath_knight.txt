@@ -7,4 +7,5 @@ K:Flying
 K:Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kulrath_knight.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/190.jpg
 End

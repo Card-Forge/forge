@@ -7,4 +7,5 @@ K:stPumpAll:Creature.Kobold+Other+YouCtrl:1/0:No Condiion:Other Kobold creatures
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_taskmaster.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/154.jpg
 End

@@ -6,4 +6,5 @@ PT:2/2
 K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/keen_eyed_archers.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/181.jpg
 End

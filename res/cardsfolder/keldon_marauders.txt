@@ -8,4 +8,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:Damage/1:NormalInput/Player:ASAP:N
 K:WheneverKeyword:LeavesBattleField:Self:Any:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Keldon Marauders leaves the battlefield, it deals 1 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_marauders.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/102.jpg
 End

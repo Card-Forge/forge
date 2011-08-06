@@ -7,4 +7,5 @@ K:Defender
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_barrier.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/106.jpg
 End

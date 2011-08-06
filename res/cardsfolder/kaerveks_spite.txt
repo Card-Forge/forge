@@ -4,4 +4,5 @@ Types:Instant
 Text:As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand. Target player loses 5 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_spite.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/13.jpg
 End

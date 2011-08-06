@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Each player sacrifices a creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocent_blood.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/145.jpg
 End

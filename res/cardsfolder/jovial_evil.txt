@@ -6,4 +6,5 @@ K:spDamageTgtOpp:X:Jovial Evil deals X damage to target opponent, where X is twi
 SVar:X:Count$NumTypeWhiteOppCtrl.Creature/Twice
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jovial_evil.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/23.jpg
 End

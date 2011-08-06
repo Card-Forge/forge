@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_sniper.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/199.jpg
 End

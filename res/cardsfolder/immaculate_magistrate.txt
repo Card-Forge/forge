@@ -5,4 +5,5 @@ Text:no text
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immaculate_magistrate.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/219.jpg
 End

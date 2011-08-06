@@ -4,4 +4,5 @@ Types:Planeswalker - Jace
 Text:no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_the_mind_sculptor.jpg
+SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/31.jpg
 End

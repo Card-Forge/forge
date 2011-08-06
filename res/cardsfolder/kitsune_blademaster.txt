@@ -7,4 +7,5 @@ K:First Strike
 K:Bushido 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_blademaster.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/25.jpg
 End

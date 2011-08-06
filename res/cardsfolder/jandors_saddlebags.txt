@@ -7,4 +7,9 @@ A:AB$Untap | Cost$ 3 T | Tgt$ TgtC | SpellDescription$ Untap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jandors_saddlebags.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/383.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/257.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/348.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/79.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/304.jpg
 End

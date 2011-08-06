@@ -8,4 +8,6 @@ K:abPump B:First Strike
 K:abPump B B:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_stromgald.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/33.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/26.jpg
 End

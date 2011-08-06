@@ -8,4 +8,5 @@ K:First Strike
 K:Lifelink
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_gargoyle.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/10.jpg
 End

@@ -5,4 +5,5 @@ Text:When Inner-Flame Acolyte comes into play, target creature gets +2/+0 and ga
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_flame_acolyte.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/181.jpg
 End

@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Coun
 SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/130.jpg
 End

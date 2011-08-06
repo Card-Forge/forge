@@ -9,4 +9,5 @@ SVar:X:Count$CardCounters.AGE
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_javelineer.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/11.jpg
 End

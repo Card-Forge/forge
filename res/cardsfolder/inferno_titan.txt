@@ -8,4 +8,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:Damage/3:InputType - CreatureORPla
 K:WheneverKeyword:Attacks:Self:Play:Damage/3:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_titan.jpg
+SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/146.jpg
 End

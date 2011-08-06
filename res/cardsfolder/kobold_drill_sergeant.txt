@@ -7,4 +7,5 @@ K:stPumpAll:Creature.Kobold+Other+YouCtrl:0/1/Trample:No Condition:Other Kobold 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/152.jpg
 End

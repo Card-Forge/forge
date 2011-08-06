@@ -6,4 +6,5 @@ K:spDestroyTgt:Land
 K:Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/implode.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/62.jpg
 End

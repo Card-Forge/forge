@@ -4,4 +4,6 @@ Types:Sorcery
 Text:All creatures get -2/-2 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card23280.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/157.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/80.jpg
 End

@@ -6,4 +6,5 @@ PT:3/3
 K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jenara_asura_of_war.jpg
+SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/128.jpg
 End

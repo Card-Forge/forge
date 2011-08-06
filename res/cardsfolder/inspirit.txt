@@ -5,4 +5,6 @@ Text:no text
 K:spPumpTgt:+2/+4:Drawback$UntapTgt:Untap target creature. It gets +2/+4 until end of turn.:Insprit - Untap target creature. It gets +2/+4 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84552.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/41.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/22.jpg
 End

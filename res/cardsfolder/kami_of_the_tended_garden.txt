@@ -7,4 +7,5 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G
 K:Soulshift:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_tended_garden.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/134.jpg
 End

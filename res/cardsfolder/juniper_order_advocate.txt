@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_advocate.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/132.jpg
 End

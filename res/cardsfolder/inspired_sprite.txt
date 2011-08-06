@@ -9,4 +9,5 @@ K:WheneverKeyword:CastSpell/Controller:Type/Wizard:Play:UntapPermanent:Self:ASAP
 K:abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Inspired Sprite - draw a card and discard a card
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspired_sprite.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/37.jpg
 End

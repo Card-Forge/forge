@@ -6,4 +6,5 @@ PT:3/3
 K:abDestroyTgtV R R R T:Artifact.nonCreature:Destroy target noncreature artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joven.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/97.jpg
 End

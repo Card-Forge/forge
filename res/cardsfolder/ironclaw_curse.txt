@@ -6,4 +6,6 @@ K:Enchant creature
 K:enPumpCurse:-0/-1/CARDNAME can't block creatures with power equal to or greater than CARDNAME's toughness.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_curse.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/96.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/244.jpg
 End

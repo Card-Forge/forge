@@ -6,4 +6,5 @@ PT:3/3
 K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_kirin.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/72.jpg
 End

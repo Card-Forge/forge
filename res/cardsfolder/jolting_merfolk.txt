@@ -8,4 +8,5 @@ K:abTapTgt SubCounter<1/FADE>:Creature:Tap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolting_merfolk.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/34.jpg
 End

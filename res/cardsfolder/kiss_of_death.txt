@@ -5,4 +5,6 @@ Text:no text
 K:spDamageTgtOpp:4:Drawback$YouGainLife/4:Kiss of Death deals 4 damage to target opponent. You gain 4 life.:Kiss of Death - deals 4 damage; you gain 4 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/kiss_of_death.jpg
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/16.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/16.jpg
 End

@@ -6,4 +6,5 @@ PT:3/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jagwasp_swarm.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/58.jpg
 End

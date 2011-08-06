@@ -6,4 +6,5 @@ PT:0/2
 SVar:EnchantMe:Multiple
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_spiritdancer.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/31.jpg
 End

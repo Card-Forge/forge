@@ -9,4 +9,5 @@ K:abPump 0:-1/-1/Vigilance
 K:abPump 0:-1/-1/Shadow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jodahs_avenger.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/42.jpg
 End

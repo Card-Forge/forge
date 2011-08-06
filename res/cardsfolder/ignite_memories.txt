@@ -5,4 +5,5 @@ Text:Target player reveals a card at random from his or her hand. Ignite Memorie
 K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_memories.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/164.jpg
 End

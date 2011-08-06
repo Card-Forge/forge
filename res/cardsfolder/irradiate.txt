@@ -7,4 +7,5 @@ SVar:X:Count$NumTypeYouCtrl.Artifact
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irradiate.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/67.jpg
 End

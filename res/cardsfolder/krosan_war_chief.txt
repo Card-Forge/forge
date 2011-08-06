@@ -7,4 +7,5 @@ A:AB$Regenerate | Cost$ 1 G | ValidTgts$ Beast | TgtPrompt$ Select target Beast.
 K:CostChange:Player:Less:1:Spell:All:Beast:NoSpecial
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_warchief.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/123.jpg
 End

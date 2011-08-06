@@ -6,4 +6,5 @@ K:Cycling:2
 K:Madness:3 B
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130683.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/68.jpg
 End

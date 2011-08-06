@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ 5 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifac
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_thin_air.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/33.jpg
 End

@@ -5,4 +5,5 @@ Text:Tap: Look at the top X cards of your library, where X is the number of Wiza
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/information_dealer.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/88.jpg
 End

@@ -6,4 +6,5 @@ K:1, tap: add U R
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_signet.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/152.jpg
 End

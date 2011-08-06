@@ -6,4 +6,5 @@ PT:2/2
 K:Protection from red
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_firewalker.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/11.jpg
 End

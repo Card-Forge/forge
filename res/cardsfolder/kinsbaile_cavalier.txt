@@ -6,4 +6,5 @@ PT:2/2
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_cavalier.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/15.jpg
 End

@@ -6,4 +6,5 @@ PT:5/2
 K:abPump 1 W:+0/+3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kranioceros.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/67.jpg
 End

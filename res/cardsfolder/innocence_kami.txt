@@ -8,4 +8,5 @@ K:abTapTgt W T:Creature:Tap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocence_kami.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/18.jpg
 End

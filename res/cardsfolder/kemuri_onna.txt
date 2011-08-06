@@ -6,4 +6,5 @@ PT:3/3
 K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84705.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/76.jpg
 End

@@ -5,4 +5,5 @@ Text:Look at the top four cards of your library. Put one of them into your hand 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3641.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/34.jpg
 End

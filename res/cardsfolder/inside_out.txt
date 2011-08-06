@@ -6,4 +6,5 @@ K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inside_out.jpg
 SVar:RemAIDeck:True
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/103.jpg
 End

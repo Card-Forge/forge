@@ -7,4 +7,5 @@ K:abPump W:+0/+1
 K:abPump U:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_glider.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/64.jpg
 End

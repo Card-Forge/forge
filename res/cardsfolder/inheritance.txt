@@ -5,4 +5,5 @@ Text:no text
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/3:No Special Condition:Whenever a creature is put into a graveyard from the battlefield, you may pay 3. If you do, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inheritance.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/130.jpg
 End

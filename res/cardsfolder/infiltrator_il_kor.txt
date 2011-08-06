@@ -7,4 +7,5 @@ K:Shadow
 K:Suspend:2:1 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltrator_il_kor.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/37.jpg
 End

@@ -7,4 +7,7 @@ K:Flying
 K:abPump G:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/killer_bees.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/169.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/138.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/106.jpg
 End

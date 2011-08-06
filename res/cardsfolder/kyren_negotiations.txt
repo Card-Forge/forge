@@ -5,4 +5,5 @@ Text:no text
 K:abDamageTgtP tapXType<1/Creature>:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_negotiations.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/198.jpg
 End

@@ -7,4 +7,5 @@ K:tap: add R
 A:AB$DealDamage | Cost$ 1 R T | Tgt$ TgtCP | NumDmg$ 1 | ActivatingCardsInHand$ 0 | PrecostDesc$ Hellbent - | SpellDescription$ Keldon Megaliths deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_megaliths.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/170.jpg
 End

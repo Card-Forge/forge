@@ -6,4 +6,5 @@ K:tap: add 1
 K:abDamageTgtCP 4 R T Sac<1/Creature>:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/325.jpg
 End

@@ -6,4 +6,12 @@ K:WheneverKeyword:CastSpell/Any:Color/red:Play:ModifyLife/1:ControllingPlayer_Se
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_star.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/304.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/252.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/301.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/379.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/344.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/290.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/252.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/251.jpg
 End

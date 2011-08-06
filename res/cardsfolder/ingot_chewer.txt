@@ -7,4 +7,5 @@ K:etbDestroyTgt:Artifact
 SVar:Evoke:R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ingot_chewer.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/180.jpg
 End

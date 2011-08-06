@@ -6,4 +6,5 @@ PT:2/2
 K:First Strike
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_white_orchid.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/16.jpg
 End

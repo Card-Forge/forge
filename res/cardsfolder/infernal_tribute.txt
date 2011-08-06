@@ -6,4 +6,5 @@ A:AB$Draw | Cost$ 2 Sac<1/Permanent.nonToken> | NumCards$ 1 | CostDesc$ 2, Sacri
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_tribute.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/15.jpg
 End

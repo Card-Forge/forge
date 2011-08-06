@@ -8,4 +8,5 @@ K:stPumpAll:Creature.Kobold+Other+YouCtrl:0/0/First Strike:No Condiion:Other Kob
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_overlord.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/153.jpg
 End

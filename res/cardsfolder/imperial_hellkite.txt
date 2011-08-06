@@ -7,4 +7,5 @@ K:Flying
 K:Morph:6 R R
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_hellkite.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/103.jpg
 End

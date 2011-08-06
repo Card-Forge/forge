@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:BecomesBlocked:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:Yes_No:SingleTarget:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_wolverine.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/87.jpg
 End

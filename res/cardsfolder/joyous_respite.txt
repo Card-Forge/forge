@@ -6,4 +6,5 @@ K:spGainLife:X:You gain 1 life for each land you control.:Joyous Respite - playe
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joyous_respite.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/216.jpg
 End

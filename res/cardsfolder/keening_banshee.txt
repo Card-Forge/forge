@@ -7,4 +7,5 @@ K:Flying
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83599.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/92.jpg
 End

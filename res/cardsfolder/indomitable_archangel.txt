@@ -8,4 +8,6 @@ K:stPumpAll:Artifact.YouCtrl:0/0/Shroud:Metalcraft:Metalcraft - Artifacts you co
 SVar:BuffedBy:Artifact
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indomitable_archangel.jpg
+SetInfo:MRD|Mythic|http://magiccards.info/scans/en/som/11.jpg
+SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/11.jpg
 End

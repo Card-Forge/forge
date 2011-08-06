@@ -5,4 +5,9 @@ Text:no text
 K:spPumpTgt:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jump.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/59.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/61.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/62.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/79.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/61.jpg
 End
