@@ -1,3 +1,21 @@
+Bituminous Blast
+3 B R
+Instant
+no text
+Cascade
+spDamageTgtC:4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bituminous_blast.jpg
+
+Deny Reality
+3 U B
+Instant
+Return target permanent to its owner's hand.
+Cascade
+spBounceTgt:Permanent:Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
+
 Goldenglow Moth
 W
 Creature Insect
@@ -3100,14 +3118,6 @@ Tribal Enchantment Faerie
 At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying into play.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bitterblossom.jpg
-
-Bituminous Blast
-3 B R
-Instant
-Cascade. 
-spDamageTgtC:4
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bituminous_blast.jpg
 
 Black Knight
 B B
@@ -7242,15 +7252,6 @@ Destroy target enchantment.
 spDestroyTgt:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demystify.jpg
-
-Deny Reality
-3 U B
-Instant
-Cascade, Return target permanent to its owner's hand.
-Cascade
-spBounceTgt:Permanent:Hand
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
 
 Deranged Hermit
 3 G G

@@ -545,8 +545,17 @@ public class Card extends MyObservable {
             for(int i = 0; i < sa.length; i++)
                 sb.append(sa[i].toString() + "\r\n");
             
+            // Cascade
+            if (getKeyword().contains("Cascade") && !sb.toString().contains("Cascade")) {
+                if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
+                sb.append("Cascade\r\n");
+            }
+
             // Cantrip -> Draw a card.
-            if(getKeyword().contains("Draw a card.") && !sb.toString().contains("Draw a card.")) sb.append("Draw a card.\r\n");
+            if (getKeyword().contains("Draw a card.") && !sb.toString().contains("Draw a card.")) {
+                if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
+                sb.append("Draw a card.\r\n");
+            }
             
             if(!sb.toString().contains("Scry")) for(int i = 0; i < getKeyword().size(); i++) {
                 String k = getKeyword().get(i);
