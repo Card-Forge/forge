@@ -389,11 +389,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Comic Book Guy 3	hard	Roc and Rukh Eggs, Flamebrake, Earthquake, Auriok Champion, Kor Firewalker");
         sb.append("\r\n");
-        sb.append("Crocodile Dundee 1	easy	Some Mountainwalk creatures, Rakka Mar");
+        sb.append("Crocodile Dundee 1	easy	Mone red deck with Mudbrawler Cohort and Bloodmark Mentor");
         sb.append("\r\n");
-        sb.append("Crocodile Dundee 2	medium	Some Mountainwalk creatures, Kamahl, Pit Fighter");
+        sb.append("Crocodile Dundee 2	medium	Mone red deck with Mudbrawler Cohort and Bloodmark Mentor");
         sb.append("\r\n");
-        sb.append("Crocodile Dundee 3	hard	Some Mountainwalk creatures, Kamahl, Pit Fighter");
+        sb.append("Crocodile Dundee 3	hard	Mone red deck with Mudbrawler Cohort and Bloodmark Mentor");
         sb.append("\r\n");
         sb.append("Cyclops 3		hard	Slivers mainly, some spells");
         sb.append("\r\n");
