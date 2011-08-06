@@ -2609,13 +2609,14 @@ public class GameActionUtil {
 		}
 
 	}
-
+	
+	/*
     public static void playCard_Enchantress_Draw(Card c) {
         CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
 
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card crd) {
-                if (crd.getName().equals("Verduran Enchantress")    || crd.getName().equals("Enchantress's Presence")
+                if (crd.getName().equals("Verduran Enchantress") 
                         || crd.getName().equals("Mesa Enchantress") || crd.getName().equals("Kor Spiritdancer")) return true;
                 else return false;
             }
@@ -2669,6 +2670,7 @@ public class GameActionUtil {
             }// for
         }// if isEnchantment()
     }// playCard_Enchantress_Draw()
+	*/
 
 	public static void playCard_Gilt_Leaf_Archdruid(Card c) {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Gilt-Leaf Archdruid");

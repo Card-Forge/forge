@@ -1,8 +1,10 @@
 Name:Verduran Enchantress
 ManaCost:1 G G
 Types:Creature Human Druid
-Text:Whenever you cast an enchantment spell, you may draw a card.
+Text:no text
 PT:0/2
+T:Mode$ SpellCast | ValidCard$ Card.Enchantment+YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | Optional$ True | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verduran_enchantress.jpg
