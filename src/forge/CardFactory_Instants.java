@@ -8,14 +8,6 @@ import javax.swing.JOptionPane;
 
 public class CardFactory_Instants {
 
-	private static final int hasKeyword(Card c, String k) {
-        ArrayList<String> a = c.getKeyword();
-        for(int i = 0; i < a.size(); i++)
-            if(a.get(i).toString().startsWith(k)) return i;
-        
-        return -1;
-    }
-    
     public static Card getCard(final Card card, final String cardName, Player owner) {
     	
     	
