@@ -3831,11 +3831,106 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         if (cardName.equals("Brave the Elements")) {
-        	
         	/**
-        	 *  This card is currently under construction
+        	 *  This card is currently under construction.
+        	 *  This card now works slightly better than it did before the spAllPump 
+        	 *  keyword was created. The AI is too simple and needs some work.
         	 */
-        	
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -7998437920995642451L;
+				
+				@Override
+                public boolean canPlayAI() {
+					card.setSVar("PlayMain1", "TRUE");
+                    return getAttacker() != null;
+                }
+				
+				public Card getAttacker() {
+                    // target creatures that is going to attack
+                    Combat c = ComputerUtil.getAttackers();
+                    Card[] att = c.getAttackers();
+
+                    // Effect best used on at least a couple creatures
+                    if (att.length > 1) {
+                        return att[0];
+                    } else return null;
+                }//getAttacker()
+				
+				String getKeywordBoost() {
+					String theColor = getChosenColor();
+					return "Protection from " + theColor;
+                }//getKeywordBoost()
+				
+				String getChosenColor() {
+	                   // Choose color for protection in Brave the Elements
+	             	   String color = "";
+	             	   if (card.getController().equals(Constant.Player.Human)) {
+
+	             		   String[] colors = Constant.Color.Colors;
+	             		   colors[colors.length-1] = null;
+
+	             		   Object o = AllZone.Display.getChoice("Choose color", colors);
+	             		   color = (String)o;
+	             	   }
+	             	   else {
+	             		   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+	             		   PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+	             		   CardList list = new CardList();
+	             		   list.addAll(lib.getCards());
+	             		   list.addAll(hand.getCards());
+
+	             		   if (list.size() > 0) {  
+	             			   String mpcolor = CardFactoryUtil.getMostProminentColor(list);
+	             			   if (!mpcolor.equals(""))
+	             				   color = mpcolor;
+	             			   else
+	             				   color = "black";
+	             		   }
+	             		   else  {
+	             			   color = "black";
+	             		   }
+	             	   }
+	             	   return color;
+	                } // getChosenColor
+				
+				@Override
+				public void resolve() {
+					final String kboost = getKeywordBoost();
+					
+					CardList list = new CardList();
+					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    list.addAll(play.getCards());
+                    list = list.filter(new CardListFilter() {
+                       public boolean addCard(Card c) {
+                          return CardUtil.getColors(c).contains(Constant.Color.White);
+                       }
+                    });
+                    
+                    for (int i = 0; i < list.size(); i++) {
+                        final Card[] target = new Card[1];
+                        target[0] = list.get(i);
+                        
+                        final Command untilEOT = new Command() {
+							private static final long serialVersionUID = 6308754740309909072L;
+
+							public void execute() {
+                                if (AllZone.GameAction.isCardInPlay(target[0])) {
+                                	target[0].removeExtrinsicKeyword(kboost);
+                                }
+                            }
+                        };//Command
+                        
+                        if (AllZone.GameAction.isCardInPlay(target[0]) && 
+                        		!target[0].getKeyword().contains(kboost)) {
+                            target[0].addExtrinsicKeyword(kboost);
+                            
+                            AllZone.EndOfTurn.addUntil(untilEOT);
+                        }//if
+                    }//for
+				}//resolve
+        	};//SpellAbility
+        	card.clearSpellAbility();
+            card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
 /*
