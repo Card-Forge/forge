@@ -1,0 +1,10 @@
+Name:Snow Devil
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted creature has flying.
+K:Enchant creature
+K:enPump:+0/+0/Flying
+K:stPumpEnchanted:Creature.blocking:0/0/First Strike:isPresent Land.Snow+YouCtrl:Enchanted creature has first strike as long as it's blocking and you control a snow land.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_devil.jpg
+End

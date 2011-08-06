@@ -3186,6 +3186,13 @@ public class CardFactory implements NewConstants {
             	tgtType = tgtType.substring(0, i);
             	Selec[0] += tgtType + " to put on top of the library.";
             }
+            else if (Destination.equals("BottomofLibrary"))
+            {
+            	tgtType = card.getSpellText().substring("Put target ".length());
+            	int i = tgtType.indexOf(" on the bottom of its owner's library.");
+            	tgtType = tgtType.substring(0, i);
+            	Selec[0] += tgtType + " to put on the bottom of the library.";
+            }
             else
             {
             	Selec[0] = card.getSpellText();
@@ -3252,6 +3259,8 @@ public class CardFactory implements NewConstants {
                     	{  
                     		if(Destination.equals("TopofLibrary"))
                     			AllZone.GameAction.moveToTopOfLibrary(tgtC);
+                    		else if(Destination.equals("BottomofLibrary")) 
+                    			AllZone.GameAction.moveToBottomOfLibrary(tgtC);
                     		else if(Destination.equals("ShuffleIntoLibrary"))
                     		{
                     			AllZone.GameAction.moveToTopOfLibrary(tgtC);

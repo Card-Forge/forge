@@ -1,0 +1,10 @@
+Name:Chastise
+ManaCost:3 W
+Types:Instant
+Text:Destroy target attacking creature. You gain life equal to its power.
+K:spDestroyTgt:Creature.attacking:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chastise.jpg
+End
