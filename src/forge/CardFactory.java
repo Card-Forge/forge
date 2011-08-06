@@ -11453,6 +11453,38 @@ public class CardFactory implements NewConstants {
             addTurn.setStackDescription(cardName+" - take an extra turn after this one.");
             card.addSpellAbility(addTurn);
         }//*************** END ************ END **************************
+        
+        //*************** START ************ START **************************
+        else if(cardName.equals("Standing Stones")) {
+        	/*
+        	 * 1, Tap, Pay 1 life: Add one mana of any color to your mana pool.
+        	 */
+        	Ability_Cost abCost = new Ability_Cost("1 T PayLife<1>", card.getName(), true);
+        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -5393697921811242255L;
+
+				@Override
+        		public void resolve() {
+        			String color = "";
+
+        			Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.Colors);
+        			color = (String) o;
+
+        			if(color.equals("white")) color = "W";
+        			else if(color.equals("blue")) color = "U";
+        			else if(color.equals("black")) color = "B";
+        			else if(color.equals("red")) color = "R";
+        			else if(color.equals("green")) color = "G";
+
+        			Card mp = AllZone.ManaPool;
+        			mp.addExtrinsicKeyword("ManaPool:" + color);
+        		}
+        	};
+
+        	mana.setDescription(abCost+"Add one mana of any color to your mana pool.");
+        	mana.setStackDescription(cardName+" - add one mana of any color to your mana pool.");
+        	card.addSpellAbility(mana);
+        }//*************** END ************ END **************************
 
         return postFactoryKeywords(card);
     }//getCard2
