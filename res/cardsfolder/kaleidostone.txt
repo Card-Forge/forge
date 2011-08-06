@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 K:When CARDNAME enters the battlefield, draw a card.
-A:AB$Mana|Cost$5 T Sac<1/CARDNAME>|Produced$W U B R G|SpellDescription$Add W U B R G to your mana pool.
+A:AB$ Mana | Cost$ 5 T Sac<1/CARDNAME> | Produced$ W U B R G | SpellDescription$ Add W U B R G to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaleidostone.jpg

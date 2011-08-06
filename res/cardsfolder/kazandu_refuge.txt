@@ -2,8 +2,8 @@ Name:Kazandu Refuge
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Mana|Cost$T|Produced$R|SpellDescription$Add R to your mana pool.
-A:AB$Mana|Cost$T|Produced$G|SpellDescription$Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
