@@ -4048,26 +4048,28 @@ public class CardFactory implements NewConstants {
                         color = "B";
                     } else if(player.equals(Constant.Player.Human)) {
                         Object q = AllZone.Display.getChoiceOptional("Select type of creature", choices);
-                        if(q.equals("Citizen")) {
-                            type = "Citizen";
-                            imageName = "W 1 1 Citizen";
-                            color = "W";
-                        } else if(q.equals("Camarid")) {
-                            type = "Camarid";
-                            imageName = "U 1 1 Camarid";
-                            color = "U";
-                        } else if(q.equals("Thrull")) {
-                            type = "Thrull";
-                            imageName = "B 1 1 Thrull";
-                            color = "B";
-                        } else if(q.equals("Goblin")) {
-                            type = "Goblin";
-                            imageName = "R 1 1 Goblin";
-                            color = "R";
-                        } else if(q.equals("Saproling")) {
-                            type = "Saproling";
-                            imageName = "G 1 1 Saproling";
-                            color = "G";
+                        if(q != null){
+	                        if(q.equals("Citizen")) {
+	                            type = "Citizen";
+	                            imageName = "W 1 1 Citizen";
+	                            color = "W";
+	                        } else if(q.equals("Camarid")) {
+	                            type = "Camarid";
+	                            imageName = "U 1 1 Camarid";
+	                            color = "U";
+	                        } else if(q.equals("Thrull")) {
+	                            type = "Thrull";
+	                            imageName = "B 1 1 Thrull";
+	                            color = "B";
+	                        } else if(q.equals("Goblin")) {
+	                            type = "Goblin";
+	                            imageName = "R 1 1 Goblin";
+	                            color = "R";
+	                        } else if(q.equals("Saproling")) {
+	                            type = "Saproling";
+	                            imageName = "G 1 1 Saproling";
+	                            color = "G";
+	                        }
                         }
                     }
                     card.setChosenType(type);
@@ -21002,6 +21004,7 @@ public class CardFactory implements NewConstants {
 
         }//*************** END ************ END **************************
         
+    
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

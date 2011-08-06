@@ -34,6 +34,18 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     	return;
     }
     
+    if (is("Graveyard")
+        	&& c.getKeyword().contains("When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library."))
+    {
+       	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
+       	PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
+       	lib.add(c);
+       	lib.add(grave);
+       	grave.reset();
+       	AllZone.GameAction.shuffle(c.getOwner());
+       	return;
+    }
+    
     if (c.isUnearthed() && (is("Graveyard") || is("Hand")))
     {
     	PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());

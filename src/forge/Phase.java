@@ -161,7 +161,7 @@ public class Phase extends MyObservable
                     String[] choices = {"Yes", "No"};
                     Object q = null;
                     q = AllZone.Display.getChoiceOptional("Untap " + crd + "?", choices);
-                    if(q.equals("Yes")) {
+                    if("Yes".equals(q)) {
                         //AllZone.Stack.add(ability);
                         humanExtraTurns--;
                         crd.untap();

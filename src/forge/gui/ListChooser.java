@@ -158,7 +158,7 @@ public class ListChooser<T> {
             d.setVisible(true);
             d.dispose();
             value = (Integer) p.getValue();
-            if(value != OK_OPTION) jList.clearSelection();
+            if(value == null || value != OK_OPTION) jList.clearSelection();
             //can't stop closing by ESC, so repeat if cancelled
         } while(minChoices != 0 && value != OK_OPTION);
         //this assert checks if we really don't return on a cancel if input is mandatory

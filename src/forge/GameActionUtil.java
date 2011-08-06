@@ -2789,7 +2789,7 @@ public class GameActionUtil {
 						String[] choices = {"Yes", "No, target a creature instead"};
 
 						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
-						if(q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
+						if(q != null && q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
 								1);
 						else {
 							CardList cards = new CardList(oppPlay.getCards());
@@ -6656,7 +6656,7 @@ public class GameActionUtil {
 				String[] choices = {"Yes", "No"};
 
 				Object q = AllZone.Display.getChoiceOptional("Return Nether Spirit to play?", choices);
-				if(q.equals("Yes")) returnNether = true;
+				if(q != null && q.equals("Yes")) returnNether = true;
 			}
 
 			if(player.equals(Constant.Player.Computer) || returnNether) {
@@ -8388,7 +8388,7 @@ public class GameActionUtil {
 						String[] choices = {"Yes", "No, target a creature instead"};
 
 						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
-						if(q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
+						if(q != null && q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
 								hondlist.size());
 						else {
 							CardList cards = new CardList(oppPlay.getCards());
