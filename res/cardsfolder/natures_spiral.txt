@@ -1,0 +1,8 @@
+Name:Nature's Spiral
+ManaCost:1 G
+Types:Sorcery
+Text:Return target permanent card from your graveyard to your hand.
+K:spReturnTgt:1:Permanent:Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_spiral.jpg
+End

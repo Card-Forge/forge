@@ -1,0 +1,8 @@
+Name:Revive
+ManaCost:1 G
+Types:Sorcery
+Text:Return target green card from your graveyard to your hand.
+K:spReturnTgt:1:Artifact.Green,Creature.Green,Enchantment.Green,Land.Green,Instant.Green,Sorcery.Green:Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/revive.jpg
+End
