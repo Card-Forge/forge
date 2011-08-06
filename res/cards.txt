@@ -1,3 +1,64 @@
+Darba
+3 G
+Creature Bird Beast
+no text
+5/4
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
+
+Molting Harpy
+B
+Creature Harpy Mercenary
+no text
+2/1
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:2
+Flying
+
+Phantasmal Forces
+3 U
+Creature Illusion
+no text
+4/1
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
+Flying
+
+Pit Raptor
+2 B B
+Creature Bird Mercenary
+no text
+4/3
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:2 B B
+Flying
+First Strike
+
+School of Piranha
+1 U
+Creature Fish
+no text
+3/3
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 U
+
+Spindrift Drake
+U
+Creature Harpy Mercenary
+no text
+2/1
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
+Flying
+
+Whipstitched Zombie
+1 B
+Creature Zombie
+no text
+2/2
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B
+
+Wild Leotau
+2 G G
+Creature Cat
+no text
+5/4
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G
+
 Aluren
 2 G G
 Enchantment

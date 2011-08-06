@@ -38,6 +38,14 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+darba.jpg		http://www.wizards.com/global/images/magic/general/darba.jpg
+molting_harpy.jpg		http://www.wizards.com/global/images/magic/general/molting_harpy.jpg
+phantasmal_forces.jpg		http://www.wizards.com/global/images/magic/general/phantasmal_forces.jpg
+pit_raptor.jpg		http://www.wizards.com/global/images/magic/general/pit_raptor.jpg
+school_of_piranha.jpg		http://www.wizards.com/global/images/magic/general/school_of_piranha.jpg
+spindrift_drake.jpg		http://www.wizards.com/global/images/magic/general/spindrift_drake.jpg
+whipstitched_zombie.jpg		http://www.wizards.com/global/images/magic/general/whipstitched_zombie.jpg
+wild_leotau.jpg		http://www.wizards.com/global/images/magic/general/wild_leotau.jpg
 planar_gate.jpg			http://www.wizards.com/global/images/magic/general/planar_gate.jpg
 coat_of_arms.jpg     				 http://www.wizards.com/global/images/magic/general/coat_of_arms.jpg
 thrumming_stone.jpg     				 http://www.wizards.com/global/images/magic/general/thrumming_stone.jpg
