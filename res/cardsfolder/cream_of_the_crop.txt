@@ -8,4 +8,5 @@ SVar:X:TriggeredCard$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cream_of_the_crop.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/117.jpg
 End

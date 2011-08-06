@@ -9,4 +9,5 @@ SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | Chan
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_mechanist.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/27.jpg
 End

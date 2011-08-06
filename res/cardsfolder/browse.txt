@@ -6,4 +6,6 @@ A:AB$Dig | Cost$ 2 U U U | DigNum$ 5 | ChangeNum$ 1 | DestinationZone2$ Exile | 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/browse.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/59.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/38.jpg
 End
