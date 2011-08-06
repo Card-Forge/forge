@@ -1,104 +1,3 @@
-Sutured Ghoul
-4 B B B
-Creature Zombie
-As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard. Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-1/1
-Trample
-SVar:Rarity:Rare
-
-Patriarch's Bidding
-3 B B
-Sorcery
-Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield.
-SVar:Rarity:Rare
-
-Death Baron
-1 B B
-Creature Zombie Wizard
-Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.
-2/2
-SVar:Rarity:Rare
-
-Squadron Hawk
-1 W
-Creature Hawk
-no text
-1/1
-Flying
-When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
-SVar:Rarity:Common
-
-Skyshroud Sentinel
-2 G
-Creature Elf
-no text
-1/1
-When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
-SVar:Rarity:Common
-
-Nesting Wurm
-4 G G
-Creature Wurm
-no text
-4/3
-When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
-SVar:Rarity:Uncommon
-
-Howling Wolf
-2 G G
-Creature Wolf
-no text
-2/2
-When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
-SVar:Rarity:Common
-
-Lovisa Coldeyes
-3 R R
-Legendary Creature Human Barbarian
-Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
-3/3
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-
-Dragon Tyrant
-8 R R
-Creature Dragon
-no text
-6/6
-Flying
-Trample
-Double Strike
-At the beginning of your upkeep, sacrifice CARDNAME unless you pay:R R R R
-abPump R:+1/+0
-SVar:Rarity:Rare
-
-Chaosphere
-2 R
-World Enchantment
-no text
-StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
-StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!without.Flying:Creatures without flying have reach. (They can block creatures with flying.)
-SVar:PlayMain1:TRUE
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-
-Dense Canopy
-1 G
-Enchantment
-no text
-StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
-SVar:PlayMain1:TRUE
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-
-Seething Pathblazer
-2 R
-Creature Elemental Warrior
-no text
-2/2
-abPump 0 Sac-Elemental:+2/+0/First Strike
-SVar:Rarity:Common
-
 Abandoned Outpost
 no cost
 Land
@@ -5234,6 +5133,17 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/channel_the_suns.jpg
 
+Chaosphere
+2 R
+World Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
+StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!without.Flying:Creatures without flying have reach. (They can block creatures with flying.)
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chaosphere.jpg
+
 Char
 2 R
 Instant
@@ -7084,6 +6994,14 @@ Deathtouch
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_recluse.jpg
 
+Death Baron
+1 B B
+Creature Zombie Wizard
+Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.
+2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/death_baron.jpg
+
 Death Cultist
 B
 Creature Human Wizard
@@ -7414,6 +7332,16 @@ Destroy target enchantment.
 spDestroyTgt:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demystify.jpg
+
+Dense Canopy
+1 G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dense_canopy.jpg
 
 Deny Reality
 3 U B
@@ -8014,6 +7942,19 @@ Enchantment
 no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_roost.jpg
+
+Dragon Tyrant
+8 R R
+Creature Dragon
+no text
+6/6
+Flying
+Trample
+Double Strike
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:R R R R
+abPump R:+1/+0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_tyrant.jpg
 
 Dragonmaster Outcast
 R
@@ -14387,6 +14328,15 @@ At the beginning of each player's draw step, if Howling Mine is untapped, that p
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_mine.jpg
 
+Howling Wolf
+2 G G
+Creature Wolf
+no text
+2/2
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_wolf.jpg
+
 Hulking Cyclops
 3 R R
 Creature Cyclops
@@ -17971,6 +17921,15 @@ tap, Sacrifice CARDNAME: Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_petal.jpg
 
+Lovisa Coldeyes
+3 R R
+Legendary Creature Human Barbarian
+Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
+3/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lovisa_coldeyes.jpg
+
 Lowland Giant
 2 R R
 Creature Giant
@@ -20443,6 +20402,15 @@ When Nest Invader enters the battlefield, put a 0/1 colorless Eldrazi Spawn crea
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nest_invader.jpg
 
+Nesting Wurm
+4 G G
+Creature Wurm
+no text
+4/3
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nesting_wurm.jpg
+
 Nether Horror
 3 B
 Creature Horror
@@ -21781,6 +21749,13 @@ Instant
 Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/path_to_exile.jpg
+
+Patriarch's Bidding
+3 B B
+Sorcery
+Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/patriarchs_bidding.jpg
 
 Patrol Signaler
 1 W
@@ -25900,6 +25875,15 @@ WheneverKeyword:EntersBattleField:Type/Land:Play:DrawCards/1:ControllingPlayer_S
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_sundial.jpg
 
+Seething Pathblazer
+2 R
+Creature Elemental Warrior
+no text
+2/2
+abPump 0 Sac-Elemental:+2/+0/First Strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
+
 Seething Song
 2 R
 Instant
@@ -27334,6 +27318,15 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
 
+Skyshroud Sentinel
+2 G
+Creature Elf
+no text
+1/1
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_sentinel.jpg
+
 Skyshroud Troll
 2 G G
 Creature Troll Giant
@@ -28515,6 +28508,16 @@ Search your library for a basic land card, reveal that card, and put it into you
 Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
+
+Squadron Hawk
+1 W
+Creature Hawk
+no text
+1/1
+Flying
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squadron_hawk.jpg
 
 Squall Drifter
 1 W
@@ -29707,6 +29710,15 @@ abPumpTgtC 1 Sac-Land:+1/+1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sustenance.jpg
+
+Sutured Ghoul
+4 B B B
+Creature Zombie
+As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard. Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+1/1
+Trample
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
 
 Svogthos, the Restless Tomb
 no cost
