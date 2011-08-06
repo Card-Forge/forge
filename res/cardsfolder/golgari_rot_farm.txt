@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:Golgari Rot Farm enters the battlefield tapped.
 K:When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
-A:AB$Mana|Cost$T|Produced$B G|SpellDescription$Add B G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B G | SpellDescription$ Add B G to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_rot_farm.jpg

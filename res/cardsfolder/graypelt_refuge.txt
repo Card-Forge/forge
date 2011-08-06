@@ -2,8 +2,8 @@ Name:Graypelt Refuge
 ManaCost:no cost
 Types:Land
 Text:When CARDNAME enters the battlefield, you gain 1 life.
-A:AB$Mana|Cost$T|Produced$W|SpellDescription$Add W to your mana pool.
-A:AB$Mana|Cost$T|Produced$G|SpellDescription$Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:etbGainLife:1
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
