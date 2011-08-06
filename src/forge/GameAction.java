@@ -2304,7 +2304,7 @@ public class GameAction {
                 if (!card.getCurSetCode().equals("")) {
                 	int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
                 	if (n > 1)
-                		card.setRandomPicture(generator.nextInt(n));
+                		card.setRandomPicture(generator.nextInt(n-1) + 1);
                 
                 	card.setImageFilename(CardUtil.buildFilename(card));
                 }
@@ -2340,7 +2340,7 @@ public class GameAction {
                 if (!card.getCurSetCode().equals("")) {
                 	int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
                 	if (n > 1)
-                		card.setRandomPicture(generator.nextInt(n));
+                		card.setRandomPicture(generator.nextInt(n-1) + 1);
                 
                 	card.setImageFilename(CardUtil.buildFilename(card));
                 }

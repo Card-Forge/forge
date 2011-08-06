@@ -521,7 +521,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
             if (!c.getCurSetCode().equals("")) {
             	int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
             	if (n > 1)
-                	c.setRandomPicture(r.nextInt(n));
+                	c.setRandomPicture(r.nextInt(n-1) + 1);
             
             	c.setImageFilename(CardUtil.buildFilename(c));
             }

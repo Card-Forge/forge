@@ -132,7 +132,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         	if (!c.getCurSetCode().equals("")) {
         		int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
             	if (n > 1)
-            		c.setRandomPicture(r.nextInt(n));
+            		c.setRandomPicture(r.nextInt(n-1) + 1);
         	
         		c.setImageFilename(CardUtil.buildFilename(c));
         	}
@@ -162,7 +162,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             if (!c.getCurSetCode().equals("")) {
             	int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
             	if (n > 1)
-                	c.setRandomPicture(r.nextInt(n));
+                	c.setRandomPicture(r.nextInt(n-1) + 1);
             
             	c.setImageFilename(CardUtil.buildFilename(c));
             }
