@@ -1,7 +1,7 @@
 Name:Lava Hounds
 ManaCost:2 R R
 Types:Creature  Hound
-Text:no text
+Text:When CARDNAME enters the battlefield, it deals 4 damage to you.
 PT:4/4
 K:Haste
 SVar:Rarity:Rare
