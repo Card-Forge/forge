@@ -18801,6 +18801,65 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Buried Alive")) {
+        	final SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = 5676345736475L;
+
+        		@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			if(player.equals(Constant.Player.Human)) humanResolve();
+        			else computerResolve();
+        		}
+
+        		public void humanResolve() {
+        			for (int i=0;i<3;i++) {
+        				PlayerZone deck = AllZone.getZone(Constant.Zone.Library, card.getController());
+        				CardList list = new CardList(deck.getCards());
+        				list = list.getType("Creature");
+        				Object check = AllZone.Display.getChoiceOptional("Select a creature card", list.toArray());
+        				if(check != null) {
+        					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+        					AllZone.GameAction.moveTo(grave, (Card) check);
+        				}
+        				AllZone.GameAction.shuffle(Constant.Player.Human);
+        			}
+        		} // humanResolve
+        		
+        		public void computerResolve() {
+        			for (int i=0;i<3;i++) {
+        				Card[] library = AllZone.Computer_Library.getCards();
+        				CardList list = new CardList(library);
+        				list = list.getType("Creature");
+
+        				//pick best creature
+        				Card c = CardFactoryUtil.AI_getBestCreature(list);
+        				if(c == null) c = library[0];
+        				//System.out.println("computer picked - " +c);
+        				AllZone.Computer_Library.remove(c);
+        				AllZone.Computer_Graveyard.add(c);
+        			}
+        		} // computerResolve
+        		
+        		@Override
+        		public boolean canPlay() {
+        			PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			return library.getCards().length != 0;
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList creature = new CardList();
+        			creature.addAll(AllZone.Computer_Library.getCards());
+        			creature = creature.getType("Creature");
+        			return creature.size() > 2;
+        		}
+        	};//SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
