@@ -3,9 +3,9 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:UG, tap: add U U
-K:UG, tap: add U G
-K:UG, tap: add G G
+K:GU, tap: add U U
+K:GU, tap: add U G
+K:GU, tap: add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_grove.jpg

@@ -5,7 +5,7 @@ Text:Enchanted creature gets +1/+1 for each creature you control.
 K:Enchant creature
 K:enPump:+0/+0
 K:stPumpEnchanted:Creature:X/X:no Condition:no text
-K:Cycling:WG
+K:Cycling:GW
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Rarity:Common

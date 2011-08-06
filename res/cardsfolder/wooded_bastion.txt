@@ -3,9 +3,9 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:WG, tap: add W W
-K:WG, tap: add W G
-K:WG, tap: add G G
+K:GW, tap: add W W
+K:GW, tap: add W G
+K:GW, tap: add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wooded_bastion.jpg

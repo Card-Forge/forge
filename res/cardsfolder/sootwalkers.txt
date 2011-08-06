@@ -1,5 +1,5 @@
 Name:Sootwalkers
-ManaCost:2 RB RB
+ManaCost:2 BR BR
 Types:Creature Elemental Rogue
 Text:no text
 PT:3/3

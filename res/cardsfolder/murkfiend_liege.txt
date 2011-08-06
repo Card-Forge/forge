@@ -1,5 +1,5 @@
 Name:Murkfiend Liege
-ManaCost:2 UG UG UG
+ManaCost:2 GU GU GU
 Types:Creature Horror
 Text:Untap all green and/or blue creatures you control during each other player's untap step.
 PT:4/4
