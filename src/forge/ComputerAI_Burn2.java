@@ -14,8 +14,9 @@ public class ComputerAI_Burn2 implements Computer {
                 synchronized(ComputerAI_Burn2.this) {
                     if(AllZone.Stack.size() == 0
                             && AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer)) {
-                        SpellAbilityList list = null; //Move3.getBestMove();
-
+                    	//dead code
+                    	/* SpellAbilityList list = null; //Move3.getBestMove();
+                        
                         if(list != null && list.size() != 0) {
                             SpellAbility sa = list.get(0);
                             sa.setActivatingPlayer(AllZone.ComputerPlayer);
@@ -35,7 +36,7 @@ public class ComputerAI_Burn2 implements Computer {
                                     + " CardUtil.getConvertedManaCost(sa)-" + CardUtil.getConvertedManaCost(sa)
                                     + " ComputerUtil.getAvailableMana().size()-"
                                     + ComputerUtil.getAvailableMana().size());
-                        }//list.size != 0
+                        }//list.size != 0*/
                         if(AllZone.Stack.size() == 0
                                 && AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer)) {
                             
