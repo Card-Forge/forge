@@ -7730,14 +7730,8 @@ public class CardFactory_Creatures {
             final CommandReturn getCreature = new CommandReturn() {
                 public Object execute() {
                     //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
+                	CardList list = AllZoneUtil.getCreaturesInPlay();
+                	list = list.filter(AllZoneUtil.getCanTargetFilter(card));
                     
                     //remove "this card"
                     list.remove(card);
