@@ -176,7 +176,8 @@ public class CardParser {
 			if(String.class.isInstance(type))
 				return label.substring(1, label.length() - 1);
 			if(CommandArgs.class.isInstance(type));
-				return new CommandArgs(){public void execute(Object o)
+				return new CommandArgs(){@SuppressWarnings("unchecked")
+				public void execute(Object o)
 				{
 					if(o instanceof ArrayList && ((ArrayList<Object>)o).size() == 2 &&	((ArrayList<Object>)o).get(0) instanceof SpellAbility && ((ArrayList<Object>)o).get(1) instanceof Card)
 					{
