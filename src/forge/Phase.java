@@ -203,7 +203,6 @@ public class Phase extends MyObservable
             if(player.equals(Constant.Player.Computer)) computerExtraTurns--;
             else humanExtraTurns--;
             
-            AllZone.GameAction.setLastPlayerToDraw(opponent);
             setPhase(Constant.Phase.Untap, player);
         } else if((is(Constant.Phase.Cleanup, Constant.Player.Computer) && humanExtraTurns < 0)
                 || (is(Constant.Phase.Cleanup, Constant.Player.Human) && computerExtraTurns < 0)) {
@@ -212,7 +211,6 @@ public class Phase extends MyObservable
             if(player.equals(Constant.Player.Computer)) humanExtraTurns++;
             else computerExtraTurns++;
             
-            AllZone.GameAction.setLastPlayerToDraw(opp);
             setPhase(Constant.Phase.Untap, player);
         } else if ((is(Constant.Phase.End_Of_Combat, Constant.Player.Human) && humanExtraCombats > 0) ||
         		(is(Constant.Phase.End_Of_Combat, Constant.Player.Computer) && computerExtraCombats > 0) )

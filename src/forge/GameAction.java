@@ -1056,10 +1056,10 @@ public class GameAction {
                         if(Nullified == true) k[4] = "Null";
                  	}
                   	if(Special_Condition[y].contains("ControllerUpkeep")) {
-                        if(getLastPlayerToDraw().equals(card.getController())) k[4] = "Null";	
+                        if(!isPlayerTurn(card.getController())) k[4] = "Null";	
                  	}
                   	if(Special_Condition[y].contains("ControllerEndStep")) {
-                        if(!getLastPlayerToDraw().equals(card.getController())) k[4] = "Null";	
+                        if(!isPlayerTurn(card.getController())) k[4] = "Null";	
                  	}
                   	if(Special_Condition[y].contains("MoreCardsInHand")) {
                         if(((AllZone.getZone(Constant.Zone.Hand, card.getController())).getCards()).length 
@@ -2361,16 +2361,6 @@ public class GameAction {
     	return playerTurn;
     }
     
-    private String  lastPlayerToDraw = Constant.Player.Human;
-    
-    public String getLastPlayerToDraw() {
-        return lastPlayerToDraw;
-    }
-    
-    public void setLastPlayerToDraw(String s) {
-        lastPlayerToDraw = s;
-    }
-    
     /**
      * target player draws a certain number of cards
      * 
@@ -2612,8 +2602,6 @@ public class GameAction {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
     	
-        lastPlayerToDraw = Constant.Player.Human;
-        
         AllZone.GameInfo.setComputerMaxPlayNumberOfLands(1);
         AllZone.GameInfo.setHumanMaxPlayNumberOfLands(1);
         
@@ -3267,7 +3255,7 @@ public class GameAction {
                  		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
                  	}
                  	if(k[7].contains("OpponentTurn")) {
-                 		if(originalCard.getController().equals(lastPlayerToDraw)) k[3] = "0";             		
+                 		if(isPlayerTurn(originalCard.getController())) k[3] = "0";             		
                  	}
                  	if(k[7].contains("Affinity")) {
                           String spilt = k[7];                
@@ -3387,7 +3375,7 @@ public class GameAction {
                          		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
                          	}
                          	if(k[7].contains("OpponentTurn")) {
-                         		if(originalCard.getController().equals(lastPlayerToDraw)) k[3] = "0";             		
+                         		if(isPlayerTurn(originalCard.getController())) k[3] = "0";             		
                          	}
                          	if(k[7].contains("Affinity")) {
       	                            String spilt = k[7];                
