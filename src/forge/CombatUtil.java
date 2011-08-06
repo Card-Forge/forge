@@ -163,7 +163,7 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Unblockable")) return false;
         
-        if(blocker.getKeyword().contains("This creature cannot block")
+        if(blocker.getKeyword().contains("CARDNAME can't block.")
                 || blocker.getKeyword().contains("This creature can't attack or block")) return false;
         
         if(attacker.getKeyword().contains("Flying")) {

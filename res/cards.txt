@@ -1,3 +1,282 @@
+Aesthir Glider
+3
+Artifact Creature Bird
+no text
+2/1
+CARDNAME can't block.
+Flying
+
+Ashenmoor Gouger
+BR BR BR
+Creature Elemental Warrior
+no text
+4/4
+CARDNAME can't block.
+
+Bloodghast
+B B
+Creature Vampire Spirit
+Bloodghast has haste as long as an opponent has 10 or less life. Landfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
+2/1
+CARDNAME can't block.
+Landfall
+
+Bojuka Brigand
+1 B
+Creature Human Warrior Ally
+Whenever Bojuka Brigand or another Ally creature enters the battlefield under your control, you may put a +1/+1 counter on Bojuka Brigand.
+1/1
+CARDNAME can't block.
+
+Charging Slateback
+4 R
+Creature Beast
+no text
+4/3
+CARDNAME can't block.
+Morph:4 R
+
+Craven Giant
+2 R
+Creature Giant
+no text
+4/1
+CARDNAME can't block.
+
+Craven Knight
+1 B
+Creature Human Knight
+no text
+2/2
+CARDNAME can't block.
+
+Daggerclaw Imp
+2 B
+Creature Imp
+no text
+3/1
+Flying
+CARDNAME can't block.
+
+Fallen Askari
+1 B
+Creature Human Knight
+no text
+2/2
+Flanking
+CARDNAME can't block.
+
+Goblin Glider
+1 R
+Creature Goblin
+no text
+1/1
+Flying
+CARDNAME can't block.
+
+Goblin Raider
+1 R
+Creature Goblin Warrior
+no text
+2/2
+CARDNAME can't block.
+
+Goblin Rimerunner
+2 R
+Snow Creature Goblin Warrior
+no text
+2/2
+abPumpTgt T:CARDNAME can't block.
+abPump S:Haste
+
+Grixis Battlemage
+2 B
+Creature Human Wizard
+no text
+2/2
+abDrawCards U T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Grixis Battlemage - draw a card and discard a card
+abPumpTgt R T:CARDNAME can't block.:Target creature can't block this turn.:Grixis Battlemage - target creature cannot block this turn
+
+Hagra Crocodile
+3 B
+Creature Crocodile
+no text
+3/1
+CARDNAME can't block.
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Hulking Cyclops
+3 R R
+Creature Cyclops
+no text
+5/5
+CARDNAME can't block.
+
+Hulking Goblin
+1 R
+Creature Goblin
+no text
+2/2
+CARDNAME can't block.
+
+Hulking Ogre
+2 R
+Creature Ogre
+no text
+3/3
+CARDNAME can't block.
+
+Inkfathom Infiltrator
+UB UB
+Creature Merfolk Rogue
+no text
+2/1
+CARDNAME can't block.
+Unblockable
+
+Iron-Barb Hellion
+5 R
+Creature Hellion Beast
+no text
+5/4
+CARDNAME can't block.
+Haste
+
+Jamuraan Lion
+2 W
+Creature Cat
+no text
+3/1
+abPumpTgt W T:CARDNAME can't block.
+
+Jungle Lion
+G
+Creature Cat
+no text
+2/1
+CARDNAME can't block.
+
+Kyren Glider
+1 R
+Creature Goblin
+no text
+1/1
+Flying
+CARDNAME can't block.
+
+Maniacal Rage
+1 R
+Enchantment Aura
+Enchanted creature gets +2/+2 and can't block.
+Enchant creature
+enPump:+2/+2/CARDNAME can't block.
+
+Nezumi Cutthroat
+1 B
+Creature Rat Warrior
+no text
+2/1
+Fear
+CARDNAME can't block.
+
+Nightshade Stinger
+B
+Creature Faerie Rogue
+no text
+1/1
+Flying
+CARDNAME can't block.
+
+Ogre Taskmaster
+3 R
+Creature Ogre
+no text
+4/3
+CARDNAME can't block.
+
+Pygmy Pyrosaur
+1 R
+Creature Lizard
+no text
+1/1
+CARDNAME can't block.
+abPump R:+1/+0
+
+Scavenging Scarab
+3 B
+Creature Insect
+no text
+3/3
+CARDNAME can't block.
+
+Shambling Remains
+1 B R
+Creature Zombie Horror
+no text
+4/3
+CARDNAME can't block.
+Unearth:B R
+
+Sluggishness
+1 R
+Enchantment Aura
+Enchanted creature can't block.
+Enchant creature
+enPumpCurse:CARDNAME can't block.
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+
+Spineless Thug
+1 B
+Creature Zombie Mercenary
+no text
+2/2
+CARDNAME can't block.
+
+Undying Rage
+2 R
+Enchantment Aura
+Enchanted creature gets +2/+2 and can't block.
+Enchant creature
+enPump:+2/+2/CARDNAME can't block.
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+
+Villainous Ogre
+2 B
+Creature Ogre Warrior
+(NOTE: "As long as you control a Demon, Villainous Ogre has B: Regenerate Villainous Ogre." not implemented.)
+3/2
+CARDNAME can't block.
+
+Yellow Scarves Cavalry
+1 R
+Creature Human Soldier
+no text
+1/1
+Horsemanship
+CARDNAME can't block.
+
+Yellow Scarves General
+3 R
+Creature Human Soldier
+no text
+2/2
+Horsemanship
+CARDNAME can't block.
+
+Yellow Scarves Troops
+1 R
+Creature Human Soldier
+no text
+2/2
+CARDNAME can't block.
+
+Young Wei Recruits
+1 B
+Creature Human Soldier
+no text
+2/2
+CARDNAME can't block.
+
 Ashen Monstrosity
 5 R R
 Creature Spirit
@@ -1776,14 +2055,6 @@ Creature Lizard
 (NOTE: "Spend only mana produced by basic lands to play Imperiosaur." is not implemented.)
 5/5
 
-Hagra Crocodile
-3 B
-Creature Crocodile
-no text
-3/1
-This creature cannot block
-Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
-
 Junun Efreet
 1 B B
 Creature Efreet
@@ -1855,14 +2126,6 @@ no text
 3/4
 abPump R:+1/-1
 Unearth:2 B
-
-Shambling Remains
-1 B R
-Creature Zombie Horror
-no text
-4/3
-This creature cannot block
-Unearth:B R
 
 Sedraxis Specter
 U B R
@@ -3282,14 +3545,6 @@ Artifact
 no text
 abDrawCards 5 T:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Emmessi Tome - draw cards and discard a card
 
-Grixis Battlemage
-2 B
-Creature Human Wizard
-no text
-2/2
-abDrawCards U T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Grixis Battlemage - draw a card and discard a card
-abPumpTgt R T:This creature cannot block:Target creature can't block this turn.:Grixis Battlemage - target creature cannot block this turn
-
 Jalum Tome
 3
 Artifact
@@ -3897,13 +4152,6 @@ no text
 2/1
 Swampwalk
 
-Bojuka Brigand
-1 B
-Creature Human Warrior Ally
-Whenever Bojuka Brigand or another Ally creature enters the battlefield under your control, you may put a +1/+1 counter on Bojuka Brigand.
-1/1
-This creature cannot block
-
 Graypelt Hunter
 3 G
 Creature Human Warrior Ally
@@ -3992,14 +4240,6 @@ no text
 3/2
 Haste
 Cascade
-
-Bloodghast
-B B
-Creature Vampire Spirit
-Bloodghast has haste as long as an opponent has 10 or less life. Landfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
-2/1
-This creature cannot block
-Landfall
 
 Malakir Bloodwitch
 3 B B
@@ -6426,14 +6666,6 @@ no text
 Flying
 abPump S S:Shroud
 
-Goblin Rimerunner
-2 R
-Snow Creature Goblin Warrior
-no text
-2/2
-abPumpTgt T:This creature cannot block
-abPump S:Haste
-
 Rimebound Dead
 B
 Snow Creature Skeleton
@@ -6954,13 +7186,6 @@ Benalish Trapper
 Creature Human Soldier
 no text
 1/2
-
-Maniacal Rage
-1 R
-Enchantment Aura
-Enchanted creature gets +2/+2 and can't block.
-Enchant creature
-enPump:+2/+2/This creature cannot block
 
 Shield of Duty and Reason
 W
@@ -8342,22 +8567,6 @@ no text
 1/2
 Horsemanship
 
-Yellow Scarves Cavalry
-1 R
-Creature Human Soldier
-no text
-1/1
-Horsemanship
-This creature cannot block
-
-Yellow Scarves General
-3 R
-Creature Human Soldier
-no text
-2/2
-Horsemanship
-This creature cannot block
-
 Wings of Hope
 W U
 Enchantment Aura
@@ -8397,14 +8606,6 @@ Sorcery
 no text
 spGainLife:6
 Draw a card.
-
-Sluggishness
-1 R
-Enchantment Aura
-Enchanted creature can't block.
-Enchant creature
-enPumpCurse:This creature cannot block
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Aspect of Mongoose
 1 G
@@ -8452,14 +8653,6 @@ Enchantment Aura
 Enchanted creature gets +2/+0 and has trample.
 Enchant creature
 enPump:+2/+0/Trample
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
-
-Undying Rage
-2 R
-Enchantment Aura
-Enchanted creature gets +2/+2 and can't block.
-Enchant creature
-enPump:+2/+2/This creature cannot block
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Vedalken Plotter
@@ -11741,14 +11934,6 @@ no text
 Flanking
 RegenerateMe:1 B B
 
-Fallen Askari
-1 B
-Creature Human Knight
-no text
-2/2
-Flanking
-This creature cannot block
-
 Femeref Knight
 2 W
 Creature Human Knight
@@ -11890,14 +12075,6 @@ Flying
 Defender
 Wither
 
-Inkfathom Infiltrator
-UB UB
-Creature Merfolk Rogue
-no text
-2/1
-This creature cannot block
-Unblockable
-
 Hearthfire Hobgoblin
 RW RW RW
 Creature Goblin Soldier
@@ -11926,13 +12103,6 @@ Creature Merfolk Rogue
 Whenever Cold-Eyed Selkie deals combat damage to a player, you may draw that many cards.
 1/1
 Islandwalk
-
-Ashenmoor Gouger
-BR BR BR
-Creature Elemental Warrior
-no text
-4/4
-This creature cannot block
 
 Giant Solifuge
 2 RG RG
@@ -12628,14 +12798,6 @@ no text
 4/1
 Trample
 Morph:G
-
-Charging Slateback
-4 R
-Creature Beast
-no text
-4/3
-This creature cannot block
-Morph:4 R
 
 Crude Rampart
 3 W
@@ -13382,13 +13544,6 @@ Creature Dryad Shaman
 no text
 1/2
 abPumpTgt T:Forestwalk
-
-Jamuraan Lion
-2 W
-Creature Cat
-no text
-3/1
-abPumpTgt W T:This creature cannot block
 
 Pixie Queen
 2 G G
@@ -15225,14 +15380,6 @@ no text
 0/1
 abPump B:+1/+1
 
-Pygmy Pyrosaur
-1 R
-Creature Lizard
-no text
-1/1
-This creature cannot block
-abPump R:+1/+0
-
 Stone Kavu
 4 G
 Creature Kavu
@@ -16065,138 +16212,6 @@ Creature Kraken
 no text
 6/6
 Unblockable
-
-Aesthir Glider
-3
-Artifact Creature Bird
-no text
-2/1
-This creature cannot block
-Flying
-
-Craven Giant
-2 R
-Creature Giant
-no text
-4/1
-This creature cannot block
-
-Craven Knight
-1 B
-Creature Human Knight
-no text
-2/2
-This creature cannot block
-
-Goblin Glider
-1 R
-Creature Goblin
-no text
-1/1
-Flying
-This creature cannot block
-
-Goblin Raider
-1 R
-Creature Goblin Warrior
-no text
-2/2
-This creature cannot block
-
-Hulking Cyclops
-3 R R
-Creature Cyclops
-no text
-5/5
-This creature cannot block
-
-Hulking Goblin
-1 R
-Creature Goblin
-no text
-2/2
-This creature cannot block
-
-Hulking Ogre
-2 R
-Creature Ogre
-no text
-3/3
-This creature cannot block
-
-Iron-Barb Hellion
-5 R
-Creature Hellion Beast
-no text
-5/4
-This creature cannot block
-Haste
-
-Jungle Lion
-G
-Creature Cat
-no text
-2/1
-This creature cannot block
-
-Kyren Glider
-1 R
-Creature Goblin
-no text
-1/1
-Flying
-This creature cannot block
-
-Nezumi Cutthroat
-1 B
-Creature Rat Warrior
-no text
-2/1
-Fear
-This creature cannot block
-
-Nightshade Stinger
-B
-Creature Faerie Rogue
-no text
-1/1
-Flying
-This creature cannot block
-
-Ogre Taskmaster
-3 R
-Creature Ogre
-no text
-4/3
-This creature cannot block
-
-Scavenging Scarab
-3 B
-Creature Insect
-no text
-3/3
-This creature cannot block
-
-Spineless Thug
-1 B
-Creature Zombie Mercenary
-no text
-2/2
-This creature cannot block
-
-Yellow Scarves Troops
-1 R
-Creature Human Soldier
-no text
-2/2
-This creature cannot block
-
-Young Wei Recruits
-1 B
-Creature Human Soldier
-no text
-2/2
-This creature cannot block
 
 Anaconda
 3 G
@@ -18208,14 +18223,6 @@ Legendary Creature Demon Spirit
 At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
 6/5
 
-Daggerclaw Imp
-2 B
-Creature Imp
-no text
-3/1
-Flying
-This creature cannot block
-
 Echoing Decay
 1 B
 Instant
@@ -18250,13 +18257,6 @@ Creature Spirit
 When Keening Banshee comes into play, target creature gets -2/-2 until end of turn.
 2/2
 Flying
-
-Villainous Ogre
-2 B
-Creature Ogre Warrior
-(NOTE: "As long as you control a Demon, Villainous Ogre has B: Regenerate Villainous Ogre." not implemented.)
-3/2
-This creature cannot block
 
 Feral Lightning
 3 R R R

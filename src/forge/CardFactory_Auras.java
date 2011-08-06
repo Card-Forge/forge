@@ -1734,7 +1734,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature cannot block");
+                        crd.addExtrinsicKeyword("CARDNAME can't block.");
                     }
                 }//execute()
             };//Command
@@ -1747,7 +1747,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature cannot block");
+                        crd.removeExtrinsicKeyword("CARDNAME can't block.");
                         
                     }
                     
@@ -2752,7 +2752,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         crd.addSemiPermanentAttackBoost(+2);
                         crd.addSemiPermanentDefenseBoost(+2);
-                        crd.addExtrinsicKeyword("This creature cannot block");
+                        crd.addExtrinsicKeyword("CARDNAME can't block.");
                     }
                 }//execute()
             };//Command
@@ -2765,7 +2765,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature cannot block");
+                        crd.removeExtrinsicKeyword("CARDNAME can't block.");
                         crd.addSemiPermanentAttackBoost(-2);
                         crd.addSemiPermanentDefenseBoost(-2);
                     }
@@ -5068,7 +5068,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         crd.addSemiPermanentAttackBoost(2);
                         crd.addSemiPermanentDefenseBoost(2);
-                        crd.addExtrinsicKeyword("This creature cannot block");
+                        crd.addExtrinsicKeyword("CARDNAME can't block.");
                         
                     }
                 }//execute()
@@ -5084,7 +5084,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         crd.addSemiPermanentAttackBoost(-2);
                         crd.addSemiPermanentDefenseBoost(-2);
-                        crd.removeExtrinsicKeyword("This creature cannot block");
+                        crd.removeExtrinsicKeyword("CARDNAME can't block.");
                         
                     }
                     
