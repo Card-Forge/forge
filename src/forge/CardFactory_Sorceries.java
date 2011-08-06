@@ -1473,34 +1473,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Deep Analysis")) {
-            SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 6317660847906461825L;
-                
-                @Override
-                public void resolve() {
-                    card.getController().drawCards(2);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Computer_Hand.getCards().length <= 6;
-                }
-            };
-            spell.setDescription("Target player draws two cards.");
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - ").append(card.getController()).append(" draws two cards.");
-            spell.setStackDescription(sb.toString());
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "1 U PayLife<3>"));
-            card.setFlashback(true);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pulse of the Tangle")) {
