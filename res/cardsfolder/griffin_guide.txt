@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destina
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Griffin | TokenTypes$ Creature,Griffin | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_guide.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/21.jpg
 End

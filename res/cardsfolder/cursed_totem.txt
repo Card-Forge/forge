@@ -6,4 +6,6 @@ K:stPumpAll:Creature:0/0/HIDDEN CARDNAME's activated abilities can't be activate
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_totem.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/278.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/264.jpg
 End

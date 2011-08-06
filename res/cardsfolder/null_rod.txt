@@ -6,4 +6,5 @@ K:stPumpAll:Artifact:0/0/HIDDEN CARDNAME's activated abilities can't be activate
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/null_rod.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/154.jpg
 End

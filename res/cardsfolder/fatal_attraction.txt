@@ -10,4 +10,5 @@ SVar:TrigDamage4:AB$DealDamage | Cost$ 0 | Defined$ Enchanted | NumDmg$ 4
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_attraction.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/98.jpg
 End
