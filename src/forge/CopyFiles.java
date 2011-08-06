@@ -12,7 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-import javax.swing.SwingWorker;
+
+import org.jdesktop.swingworker.SwingWorker;
 
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
