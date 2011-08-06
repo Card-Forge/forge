@@ -509,6 +509,13 @@ public class AbilityFactory_Destroy {
 		if(params.containsKey("ValidCards")) 
 			Valid = params.get("ValidCards");
 		
+		if (Valid.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+			Valid.replace("X", Integer.toString(xPay));
+		}
+		
 		CardList humanlist = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
 		CardList computerlist = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
 		

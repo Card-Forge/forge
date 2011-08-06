@@ -199,12 +199,26 @@ public class AbilityFactory_ZoneAffecting {
         int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
         int computerMaxHandSize = AllZone.ComputerPlayer.getMaxHandSize();
         
-        // todo: handle deciding what X would be around here for Braingeyser type cards
         int numCards = 1;
         if (params.containsKey("NumCards"))
         	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
-        	
         
+        boolean xPaid = false;
+		String num = af.getMapParams().get("NumCards");
+		if (num != null && num.equals("X") && source.getSVar(num).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			if (sa instanceof Ability_Sub)
+				numCards = Integer.parseInt(source.getSVar("PayX"));
+			else{
+				numCards = ComputerUtil.determineLeftoverMana(sa);
+				source.setSVar("PayX", Integer.toString(numCards));
+			}
+			xPaid = true;
+		}
+        
+		// todo: if xPaid and one of the below reasons would fail, instead of bailing
+		// reduce toPay amount to acceptable level
+		
         if (tgt != null) {
             // ability is targeted
             tgt.resetTargets();
@@ -223,17 +237,32 @@ public class AbilityFactory_ZoneAffecting {
             }
             
             if (numCards >= computerLibrarySize) {
-                // Don't deck your self
-            	if (!mandatory)
-            		return false;
-            	tgtHuman = true;
+            	if (xPaid){
+    				numCards = computerLibrarySize-1;
+    				source.setSVar("PayX", Integer.toString(numCards));
+            	}
+            	else{
+	                // Don't deck your self
+	            	if (!mandatory)
+	            		return false;
+	            	tgtHuman = true;
+            	}
             }
             
             if (computerHandSize + numCards > computerMaxHandSize && AllZone.Phase.getPlayerTurn().isComputer()) {
-                // Don't draw too many cards and then risk discarding cards at EOT
-            	if (!(af.getMapParams().containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory)
-            		return false;
+            	if (xPaid){
+    				numCards = computerMaxHandSize - computerHandSize;
+    				source.setSVar("PayX", Integer.toString(numCards));
+            	}
+            	else{
+	                // Don't draw too many cards and then risk discarding cards at EOT
+	            	if (!(af.getMapParams().containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory)
+	            		return false;
+            	}
             }
+            
+            if (numCards == 0)
+            	return false;
             
             if ((!tgtHuman || !canTgtHuman) && canTgtComp)
             	tgt.addTarget(AllZone.ComputerPlayer);

@@ -212,7 +212,7 @@ public class AbilityFactory_ChangeZone {
 		else{
 			pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),  params.get("Defined"), sa);
 		}
-
+		
 		for(Player p : pDefined){
 			if (origin.equals("Hand")){
 				CardList hand = AllZoneUtil.getPlayerHand(p);
@@ -239,6 +239,14 @@ public class AbilityFactory_ChangeZone {
 				// todo: once sideboard is added
 				// canPlayAI for Wishes will go here
 			}
+		}
+		
+		// this works for hidden because the mana is paid first. 
+		String type = params.get("ChangeType");
+		if (type != null && type.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
 		}
 		
 		Ability_Sub subAb = sa.getSubAbility();

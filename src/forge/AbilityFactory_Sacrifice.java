@@ -140,13 +140,20 @@ public class AbilityFactory_Sacrifice {
 			String valid = params.get("SacValid");
 			String num = params.get("Amount");
 			num = (num == null) ? "1" : num;
-			int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
+			int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);		
 			
 			CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 			list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 			
 			if (list.size() == 0)
 				return false;
+			
+			Card source = sa.getSourceCard();
+			if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")){
+				// Set PayX here to maximum value.
+				int xPay = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
+				source.setSVar("PayX", Integer.toString(xPay));
+			}
 			
 			int half = amount / 2 + amount % 2;	// Half of amount rounded up
 			
@@ -167,7 +174,7 @@ public class AbilityFactory_Sacrifice {
 		boolean chance = sacrificeTgtAI(af, sa);
 
 		// todo: restrict the subAbility a bit
-		
+			
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			chance &= subAb.chkAI_Drawback();
@@ -221,6 +228,13 @@ public class AbilityFactory_Sacrifice {
 				String valid = params.get("SacValid");
 				String num = params.containsKey("Amount") ? params.get("Amount") : "1";
 				int amount = AbilityFactory.calculateAmount(card, num, sa);
+				
+				Card source = sa.getSourceCard();
+				if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")){
+					// Set PayX here to maximum value.
+					amount = Math.min(ComputerUtil.determineLeftoverMana(sa), amount);
+				}
+				
 				CardList humanList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 				humanList = humanList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 				CardList computerList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
