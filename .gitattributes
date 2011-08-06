@@ -3725,6 +3725,7 @@ res/cardsfolder/one_with_nothing.txt -text svneol=native#text/plain
 res/cardsfolder/onslaught.txt -text svneol=native#text/plain
 res/cardsfolder/onulet.txt -text svneol=native#text/plain
 res/cardsfolder/onyx_goblet.txt -text svneol=native#text/plain
+res/cardsfolder/onyx_talisman.txt -text svneol=native#text/plain
 res/cardsfolder/oonas_gatewarden.txt -text svneol=native#text/plain
 res/cardsfolder/ophidian_eye.txt -text svneol=native#text/plain
 res/cardsfolder/opportunist.txt -text svneol=native#text/plain

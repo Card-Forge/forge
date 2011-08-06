@@ -1,5 +1,5 @@
-Name:Ivory Cup
-ManaCost:1
+Name:Nacre Talisman
+ManaCost:2
 Types:Artifact
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ Whenever a player casts a white spell, you may pay 3. If you do, untap target permanent.
