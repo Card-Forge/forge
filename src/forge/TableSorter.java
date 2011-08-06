@@ -1,7 +1,8 @@
-package forge;
-import java.util.*;
 
-import forge.properties.ForgeProps;
+package forge;
+
+
+import java.util.*;
 import forge.properties.NewConstants;
 @SuppressWarnings("unchecked") // Comparable needs <type>
 
