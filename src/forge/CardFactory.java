@@ -8514,62 +8514,63 @@ public class CardFactory implements NewConstants {
                         for(int i = 0; i < Attached.length; i++) {	                      	
                         if(Attached[i].isInstant() == true || Attached[i].hasKeyword("Flash") == true) Config.add(Attached[i]);	
                 	}                       
-                        for(int i = 0; i < Config.size(); i++) {
-            				Card crd = Config.get(i);
-            				Choices[i] = crd;
-                        }
-                        if(Config.size() == 0) SystemsGo = false;
+                    for(int i = 0; i < Config.size(); i++) {
+        				Card crd = Config.get(i);
+        				Choices[i] = crd;
+                    }
+                    if(Config.size() == 0) SystemsGo = false;
                 	} else {
                         for(int i = 0; i < Attached.length; i++) {	
                         	Choices[i] =  Attached[i];               		
                 	}
-                	}
-                    Object check = null;
-                    if(SystemsGo == true) {
-                    	check = AllZone.Display.getChoiceOptional("Select Card to play for free", Choices);                   	
-                   if(check != null) {
-                       target = ((Card) check);
-                    }
-                    if(target != null) c = copyCard(target);
-                    
-  					if(c != null) {
-  					if(c.isLand() == true) {
-  	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
-    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		                play.add(c);
-  						card.unattachCard(c);
-  		                AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-  		                AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
-  	   					} else {
-  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
-  	   					}
-  					} else if(c.isPermanent() == true && c.isAura() == false) {
-  						c.removeIntrinsicKeyword("Flash"); // Stops the player from re-casting the flash spell.
-  						PlayCreature.setStackDescription(c.getName() + " - Copied from Mind's Desire");
-  	                	Card [] ReAttach = new Card[Attached.length]; 
-  	                	ReAttach[0] = c;
-  	                	int ReAttach_Count = 0;
-                        for(int i = 0; i < Attached.length; i++) {	                      	
-                        	if(Attached[i] != target) {
-                        		ReAttach_Count = ReAttach_Count + 1;
-                        		ReAttach[ReAttach_Count] = Attached[i];
-                        	}
-                    	}
-                        // Clear Attached List
-                        for(int i = 0; i < Attached.length; i++) {	                      	
-                        	card.unattachCard(Attached[i]);
-                        	}
-                        // Re-add
-                        for(int i = 0; i < ReAttach.length; i++) {	                      	
-                        	if(ReAttach[i] != null) card.attachCard(ReAttach[i]);
-                        	}	
-  						target.addSpellAbility(PlayCreature);
-  	                    AllZone.Stack.add(PlayCreature);
-  				} else {
-  	  						AllZone.GameAction.playCardNoCost(c);
-	  						card.unattachCard(c); 
-  				}
-  				} else JOptionPane.showMessageDialog(null, "Player cancelled or there is no more cards available on Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
+            	}
+                Object check = null;
+                if(SystemsGo == true) {
+                	check = AllZone.Display.getChoiceOptional("Select Card to play for free", Choices);                   	
+	                if(check != null) {
+	                   target = ((Card) check);
+	                }
+	                if(target != null) c = copyCard(target);
+	                
+					if(c != null) {
+						if(c.isLand() == true) {
+		   					if(CardFactoryUtil.canHumanPlayLand()) {
+		   					// todo(sol): would prefer this in GameAction.playLand somehow
+		    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+				                play.add(c);
+				                card.unattachCard(c);
+				                CardFactoryUtil.playLandEffects(c);
+		  		                AllZone.GameInfo.incrementHumanPlayedLands();
+		   					} else {
+		   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
+		   					}
+						} else if(c.isPermanent() == true && c.isAura() == false) {
+							c.removeIntrinsicKeyword("Flash"); // Stops the player from re-casting the flash spell.
+							PlayCreature.setStackDescription(c.getName() + " - Copied from Mind's Desire");
+		                	Card [] ReAttach = new Card[Attached.length]; 
+		                	ReAttach[0] = c;
+		                	int ReAttach_Count = 0;
+		                    for(int i = 0; i < Attached.length; i++) {	                      	
+		                    	if(Attached[i] != target) {
+		                    		ReAttach_Count = ReAttach_Count + 1;
+		                    		ReAttach[ReAttach_Count] = Attached[i];
+		                    	}
+		                	}
+		                    // Clear Attached List
+		                    for(int i = 0; i < Attached.length; i++) {	                      	
+		                    	card.unattachCard(Attached[i]);
+		                    }
+		                    // Re-add
+		                    for(int i = 0; i < ReAttach.length; i++) {	                      	
+		                    	if(ReAttach[i] != null) card.attachCard(ReAttach[i]);
+		                    }	
+							target.addSpellAbility(PlayCreature);
+		                    AllZone.Stack.add(PlayCreature);
+		  				} else {
+		  	  						AllZone.GameAction.playCardNoCost(c);
+			  						card.unattachCard(c); 
+		  				}
+	  				} else JOptionPane.showMessageDialog(null, "Player cancelled or there is no more cards available on Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
   				} else JOptionPane.showMessageDialog(null, "You can only play an instant at this point in time, but none are attached to Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
   			}
   			}
@@ -8804,11 +8805,9 @@ public class CardFactory implements NewConstants {
 	                          Object check = AllZone.Display.getChoiceOptional("Select spells to play in reserve order: ", Pile1.toArray());
 	                          if(check != null) {
 	              	  					if(((Card) check).isLand() == true) {
-	              	  	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
-	              	    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-	              			                play.add(check);
-	              	  		                AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-	              	  		                AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+	              	  	   					if(CardFactoryUtil.canHumanPlayLand()) {
+		              	    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+		              	    					GameAction.playLand((Card)check, play);
 	              	  	   					} else {
 	              	  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
 	              	  	   					}
@@ -8828,11 +8827,9 @@ public class CardFactory implements NewConstants {
 	                          Object check = AllZone.Display.getChoiceOptional("Select spells to play in reserve order: ", Pile2.toArray());
 	                          if(check != null) {
             	  					if(((Card) check).isLand() == true) {
-            	  	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
-            	    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-            			                play.add(check);
-            	  		                AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-            	  		                AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+            	  	   					if(CardFactoryUtil.canHumanPlayLand()) {
+            	  	   						PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+            	  	   						GameAction.playLand((Card)check, play);
             	  	   					} else {
             	  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
             	  	   					}
@@ -20658,7 +20655,55 @@ public class CardFactory implements NewConstants {
 	        card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
+        //*************** START *********** START **************************
+        else if(cardName.equals("Summer Bloom"))
+        {
+       	final SpellAbility spell = new Spell(card) {
+			private static final long serialVersionUID = 5559004016728325736L;
 
+			public boolean canPlayAI() {
+   				// The computer should only play this card if it has at least 
+   				// one land in its hand. Because of the way the computer turn
+   				// is structured, it will already have played land to it's limit
+   				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand,
+   						Constant.Player.Computer);
+
+   				CardList list = new CardList(hand.getCards());
+
+   				list = list.getType("Land");
+   				if (list.size() > 0)
+   					return true;
+   				else
+   					return false;
+   			}
+   			
+   			public void resolve() {
+   				final String thePlayer = card.getController();
+   				if (thePlayer.equals(Constant.Player.Human))
+   					AllZone.GameInfo.addHumanMaxPlayNumberOfLands(3);
+   				else
+   					AllZone.GameInfo.addComputerMaxPlayNumberOfLands(3);
+   				
+   				Command untilEOT = new Command()
+   				{
+					private static final long serialVersionUID = 1665720009691293263L;
+
+					public void execute(){
+   						if (thePlayer.equals(Constant.Player.Human))
+   							AllZone.GameInfo.addHumanMaxPlayNumberOfLands(-3);
+   						else
+   							AllZone.GameInfo.addComputerMaxPlayNumberOfLands(-3);
+ 	            	}
+   	          	};
+       	          AllZone.EndOfTurn.addUntil(untilEOT);
+       		}
+       	};
+       	card.clearSpellAbility();
+       	card.addSpellAbility(spell);
+       	
+       	card.setSVar("PlayMain1", "TRUE");
+       } //*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Explore"))
         {
@@ -20684,25 +20729,23 @@ public class CardFactory implements NewConstants {
    			public void resolve() {
    				final String thePlayer = card.getController();
    				if (thePlayer.equals(Constant.Player.Human))
-   					AllZone.GameInfo.addHumanCanPlayNumberOfLands(1);
+   					AllZone.GameInfo.addHumanMaxPlayNumberOfLands(1);
    				else
-   					AllZone.GameInfo.addComputerCanPlayNumberOfLands(1);
+   					AllZone.GameInfo.addComputerMaxPlayNumberOfLands(1);
    				
    				Command untilEOT = new Command()
    				{
    					
    					private static final long serialVersionUID = -2618916698575607634L;
 
-   					public void execute()
-       	            	{
+   					public void execute(){
    						if (thePlayer.equals(Constant.Player.Human))
-   							AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-   						// There's no corresponding 'if' for the computer
-   						// The computer's land total gets reset to the right value 
-   						// every turn	
-     	            	}
-       	          	};
-       	          AllZone.EndOfTurn.addUntil(untilEOT);
+   							AllZone.GameInfo.addHumanMaxPlayNumberOfLands(-1);
+   						else
+   							AllZone.GameInfo.addComputerMaxPlayNumberOfLands(-1);
+ 	            	}
+       	        };
+       	        AllZone.EndOfTurn.addUntil(untilEOT);
        		}
        	};
        	card.clearSpellAbility();
@@ -22311,7 +22354,7 @@ public class CardFactory implements NewConstants {
         	ability.setStackDescription(cardName+" - Player shuffles grave into library.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+
         //*************** START *********** START **************************
         else if(cardName.equals("Fabricate")) {
             SpellAbility spell = new Spell(card) {

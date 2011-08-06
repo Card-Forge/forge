@@ -22,40 +22,13 @@ public class ComputerAI_General implements Computer {
     }
     
     public void main1() {
-        if(AllZone.GameInfo.getComputerCanPlayNumberOfLands() > 0) {
-
-        	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
-            ComputerUtil.playLand();
-            for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
-                Command com = GameActionUtil.commands.get(effect);
-                com.execute();
-            }
-            GameActionUtil.executeCardStateEffects();            
-        }
-        
-        //    AllZone.Phase.nextPhase();
-        
+    	ComputerUtil.chooseLandsToPlay();
         playCards(Constant.Phase.Main1);
-        
-        //for cards like Exploration, Fastbond, Azusa, ...
-        while(AllZone.GameInfo.getComputerCanPlayNumberOfLands() > 0)
-        {
-        	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
-        	ComputerUtil.playLand();
-        	
-        	for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
-                Command com = GameActionUtil.commands.get(effect);
-                com.execute();
-            }
-            GameActionUtil.executeCardStateEffects();
-        }
     }//main1()
     
     public void main2() {
-    	AllZone.GameInfo.setComputerCanPlayNumberOfLands(CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer));
-        
+    	ComputerUtil.chooseLandsToPlay();	// in case we can play more lands now, or drew cards since first main phase
         playCards(Constant.Phase.Main2);
-
    }
     
     private void playCards(final String phase) {

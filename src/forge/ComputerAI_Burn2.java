@@ -6,21 +6,9 @@ import forge.error.ErrorViewer;
 
 
 public class ComputerAI_Burn2 implements Computer {
-    private volatile int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
-    
+
     public void main1() {
-        if(numberPlayLand > 0 ) {
-        	numberPlayLand--;
-            ComputerUtil.playLand();
-            
-            Card c[] = AllZone.Computer_Hand.getCards();
-            if(c.length != 0) {
-//        System.out.print("hand - ");
-//        for(int i = 0; i < c.length; i++)
-//          System.out.print(c[i] +" ");
-//        System.out.println();
-            }
-        }
+        ComputerUtil.chooseLandsToPlay();
         Runnable run = new Runnable() {
             public void run() {
                 synchronized(ComputerAI_Burn2.this) {
@@ -71,8 +59,7 @@ public class ComputerAI_Burn2 implements Computer {
     }//main1()
     
     public void main2() {
-    	numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
-        
+    	ComputerUtil.chooseLandsToPlay();
         //AllZone.Phase.nextPhase();
         //for debugging: System.out.println("need to nextPhase(ComputerAI_Burn2.main2) = true; Note, this is not tested, did it work?");
         AllZone.Phase.setNeedToNextPhase(true);
@@ -175,17 +162,7 @@ public class ComputerAI_Burn2 implements Computer {
         
         return library.toArray();
     }
-    
-    public void addNumberPlayLands(int n)
-    {
-    	numberPlayLand += n;
-    }
-    
-    public void setNumberPlayLands(int n)
-    {
-    	numberPlayLand = n;
-    }
-    
+
     public void stack_not_empty() {
         //same as Input.stop() method
         //ends the method

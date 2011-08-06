@@ -29,18 +29,37 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 && (c.isLand() || c.isCreature() || c.isArtifact())) c.tap();
         
         //cannot use addComesIntoPlayCommand - trigger might be set to false;
-        if(c.getName().equals("Exploration")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(1);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(1);
-        } else if(c.getName().equals("Azusa, Lost but Seeking")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(2);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(2);
-        } else if(c.getName().equals("Oracle of Mul Daya")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(1);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(1);
-        } else if(c.getName().equals("Fastbond")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(100);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(100);
+        // Keep track of max lands can play per turn
+        int addMax = 0;
+        boolean isHuman = c.getController().equals(Constant.Player.Human);
+        boolean adjustLandPlays = false;
+        boolean eachPlayer = false;
+        
+        if(c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
+        	addMax = 1;
+        	adjustLandPlays = true;
+        } 
+        else if(c.getName().equals("Azusa, Lost but Seeking")) {
+        	addMax = 2;
+        	adjustLandPlays = true;
+        }
+        else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")){
+        	// these two aren't in yet, but will just need the other part of the card to work with more lands
+        	adjustLandPlays = true;
+        	eachPlayer = true;
+        	addMax = 1;
+        }
+        // 7/13: fastbond code removed, fastbond should be unlimited and will be handled elsewhere.
+        
+        if (adjustLandPlays){
+        	if (eachPlayer){
+        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
+        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
+        	}
+        	else if (isHuman)
+        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
+        	else
+        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
         }
         
         if(trigger) {
@@ -234,19 +253,36 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
         Card c = (Card) o;
         
-        //cannot use addLeavesPlayCommand - trigger might be set to false
-        if(c.getName().equals("Exploration")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
+        // Keep track of max lands can play per turn
+        int addMax = 0;
+        boolean isHuman = c.getController().equals(Constant.Player.Human);
+        boolean adjustLandPlays = false;
+        boolean eachPlayer = false;
+        
+        if(c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
+        	addMax = -1;
+        	adjustLandPlays = true;
         } else if(c.getName().equals("Azusa, Lost but Seeking")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(-2);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(-2);
-        } else if(c.getName().equals("Oracle of Mul Daya")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
-        } else if(c.getName().equals("Fastbond")) {
-            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(-100);
-            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(-100);
+        	addMax = -2;
+        	adjustLandPlays = true;
+        } 
+        else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")){
+        	// once their second half of their abilities are programmed these two can be added in
+        	adjustLandPlays = true;
+        	eachPlayer = true;
+        	addMax = -1;
+        }
+        // 7/12: fastbond code removed, fastbond should be unlimited and will be handled elsewhere.
+        
+        if (adjustLandPlays){
+        	if (eachPlayer){
+        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
+        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
+        	}
+        	else if (isHuman)
+        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
+        	else
+        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
         }
         
 

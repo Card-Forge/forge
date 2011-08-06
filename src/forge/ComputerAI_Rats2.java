@@ -3,35 +3,30 @@ import java.util.*;
 
 public class ComputerAI_Rats2 implements Computer
 {
-	private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
-    
     private static Random random = new Random();
         
     public void main1()
     {
-	if(numberPlayLand > 0)
-	{
-	    numberPlayLand--;
-	    ComputerUtil.playLand();
-	}
-
-//	if(playActivatedAbilities() || playSorcery())
-//	    return;
-	Card[] c = AllZone.Computer_Hand.getCards();
-	System.out.println("Computer Thinking " +new CardList(c));	
+	    ComputerUtil.chooseLandsToPlay();
 	
-	//AllZone.Phase.nextPhase();
-	//for debugging: System.out.println("need to nextPhase(ComputerAI_Rats2.main1) = true");
-	AllZone.Phase.setNeedToNextPhase(true);
+	//	if(playActivatedAbilities() || playSorcery())
+	//	    return;
+		Card[] c = AllZone.Computer_Hand.getCards();
+		System.out.println("Computer Thinking " +new CardList(c));	
+		
+		//AllZone.Phase.nextPhase();
+		//for debugging: System.out.println("need to nextPhase(ComputerAI_Rats2.main1) = true");
+		AllZone.Phase.setNeedToNextPhase(true);
     }
+    
     public void main2()
     {
-    	numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
-	  
+    	ComputerUtil.chooseLandsToPlay();
 	  //AllZone.Phase.nextPhase();
 	  //for debugging: System.out.println("need to nextPhase(ComputerAI_Rats2.main2) = true");
-	  AllZone.Phase.setNeedToNextPhase(true);
+    	AllZone.Phase.setNeedToNextPhase(true);
     }
+    
     public void declare_blockers()
     {
 	if(random.nextBoolean() || AllZone.Computer_Life.getLife() < 10)
@@ -145,16 +140,6 @@ public class ComputerAI_Rats2 implements Computer
       AllZone.Phase.setNeedToNextPhase(true);
     }
 
-    public void addNumberPlayLands(int n)
-    {
-    	numberPlayLand += n;
-    }
-    
-    public void setNumberPlayLands(int n)
-    {
-    	numberPlayLand = n;
-    }
-    
     public void stack_not_empty() 
     {
 	  AllZone.InputControl.resetInput();

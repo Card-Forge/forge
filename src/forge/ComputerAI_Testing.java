@@ -1,20 +1,17 @@
 package forge;
 public class ComputerAI_Testing implements Computer 
 {
-    
-	private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
-	
     //must shuffle this
     public Card[] getLibrary() {return new Card[] {};}
 
     public void stack_not_empty() 
     {
-	System.out.println("Computer: not empty");
-	//same as Input.stop() method
-	//ends the method
-	//different than methods because this isn't a phase like Main1 or Declare Attackers
-	AllZone.InputControl.resetInput();
-	AllZone.InputControl.updateObservers();    
+		System.out.println("Computer: not empty");
+		//same as Input.stop() method
+		//ends the method
+		//different than methods because this isn't a phase like Main1 or Declare Attackers
+		AllZone.InputControl.resetInput();
+		AllZone.InputControl.updateObservers();    
     }
     
     public void main1() {AllZone.Phase.nextPhase();}
@@ -70,15 +67,5 @@ public class ComputerAI_Testing implements Computer
     	//AllZone.Phase.nextPhase();
     	//for debugging: System.out.println("need to nextPhase(ComputerAI_Testing.end_of_turn) = true");
         AllZone.Phase.setNeedToNextPhase(true);
-        }
-    
-    public void addNumberPlayLands(int n)
-    {
-    	numberPlayLand += n;
-    }
-    
-    public void setNumberPlayLands(int n)
-    {
-    	numberPlayLand = n;
     }
 }

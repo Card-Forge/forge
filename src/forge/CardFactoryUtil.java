@@ -3800,27 +3800,7 @@ public class CardFactoryUtil {
         list = list.getName("Necropotence");
         return list.size() > 0;
     }
-    
-    public static int getCanPlayNumberOfLands(String player) {
-        int count = 1;
-        CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getName().equals("Exploration") || c.getName().equals("Azusa, Lost but Seeking")
-                || c.getName().equals("Fastbond") || c.getName().equals("Oracle of Mul Daya");
-            }
-        });
         
-        for(Card var:list) {
-            if(var.getName().equals("Exploration")) count++;
-            else if(var.getName().equals("Azusa, Lost but Seeking")) count = count + 2;
-            else if(var.getName().equals("Oracle of Mul Daya")) count = count + 1;
-            else if(var.getName().equals("Fastbond")) count = 100;
-        }
-        
-        return count;
-    }
-    
     public static CardList getCards(String cardName)
     {
     	CardList list = new CardList();
@@ -3831,14 +3811,9 @@ public class CardFactoryUtil {
     }
     
     public static CardList getCards(String cardName, String player) {
-        CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
+    	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+        CardList list = new CardList(play.getCards());
         list = list.getName(cardName);
-        return list;
-    }
-    
-    public static CardList getFastbonds(String player) {
-        CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
-        list = list.getName("Fastbond");
         return list;
     }
     
@@ -4211,6 +4186,53 @@ public class CardFactoryUtil {
         c.setManaCost(cost);
     }
     
+    public static boolean canHumanPlayLand(){
+    	return (AllZone.GameInfo.humanNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Human").size() > 0);
+    }
+    
+    public static boolean canComputerPlayLand(){
+    	return (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Computer").size() > 0);
+    }
+    
+    public static void playLandEffects(Card c){
+    	final String player = c.getController();
+    	boolean extraLand;
+    	if (player.equals("Human")){
+    		extraLand = AllZone.GameInfo.humanPlayedFirstLandThisTurn();
+    	}
+    	else{
+    		extraLand = AllZone.GameInfo.computerPlayedFirstLandThisTurn();
+    	}
+    	
+		if(extraLand) {
+			CardList fastbonds = CardFactoryUtil.getCards("Fastbond", player);
+	        for(final Card f : fastbonds){
+	            SpellAbility ability = new Ability(f, "0") {
+	                @Override
+	                public void resolve() {
+	                    AllZone.GameAction.getPlayerLife(f.getController()).subtractLife(1,f);
+	                }
+	            };
+	            ability.setStackDescription("Fastbond - Deals 1 damage to you.");
+	            AllZone.Stack.add(ability);
+	        }
+        }
+		
+		CardList greedy = CardFactoryUtil.getCards("Horn of Greed");
+		if (!greedy.isEmpty()){
+			for(final Card g : greedy){
+	            SpellAbility ability = new Ability(g, "0") {
+	                @Override
+	                public void resolve() {
+	                	AllZone.GameAction.drawCard(player);
+	                }
+	            };
+	            ability.setStackDescription("Horn of Greed - " + player + " draws a card.");
+	            AllZone.Stack.add(ability);
+			}
+		}
+    }
+
     public static void main(String[] args) {
         
         CardList in = AllZone.CardFactory.getAllCards();

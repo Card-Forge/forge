@@ -29,16 +29,8 @@ public class Input_Main extends Input {
     public void selectCard(Card card, PlayerZone zone) {
         //these if statements cannot be combined
         if(card.isLand() && zone.is(Constant.Zone.Hand, Constant.Player.Human)) {
-            if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
-                CardList fastbonds = CardFactoryUtil.getFastbonds(Constant.Player.Human);
-                if(fastbonds.size() > 0) {
-                    if(AllZone.GameInfo.humanPlayedFirstLandThisTurn()) {
-                        AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(1,fastbonds.get(0));
-                    }
-                }
+            if(CardFactoryUtil.canHumanPlayLand()) {
                 InputUtil.playAnyCard(card, zone);
-                //canPlayNumberOfLands--;
-                //firstLandHasBeenPlayed = true;
                 AllZone.GameAction.checkStateEffects();
             }
 
@@ -53,13 +45,9 @@ public class Input_Main extends Input {
                     if(count > 0) InputUtil.playAnyCard(card, zone);
                 }
             }
-            //TODO: add code for exploration / fastbond here
-            
         } else {
-            //	    SpellAbility sa = card.getSpellAbility()[0];
-            //	    sa.setRandomTargetAI();
-            //	    AllZone.Stack.add(sa);
             InputUtil.playAnyCard(card, zone);
         }
+        AllZone.GameAction.checkStateEffects();
     }//selectCard()
 }

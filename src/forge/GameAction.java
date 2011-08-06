@@ -1654,8 +1654,8 @@ public class GameAction {
     	
         lastPlayerToDraw = Constant.Player.Human;
         
-        AllZone.GameInfo.setComputerCanPlayNumberOfLands(1);
-        AllZone.GameInfo.setHumanCanPlayNumberOfLands(1);
+        AllZone.GameInfo.setComputerMaxPlayNumberOfLands(1);
+        AllZone.GameInfo.setHumanMaxPlayNumberOfLands(1);
         
         AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
         AllZone.GameInfo.setHumanNumberOfTimesMulliganed(0);
@@ -2043,8 +2043,7 @@ public class GameAction {
             
             ArrayList<String> choices = new ArrayList<String>();
             
-            if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0
-                    && AllZone.Stack.size() == 0
+            if(AllZone.Stack.size() == 0 && CardFactoryUtil.canHumanPlayLand()
                     && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(
                             Constant.Phase.Main2))) choices.add("Play land");
             
@@ -2066,10 +2065,7 @@ public class GameAction {
             
             if(choice == null) ;
             else if(choice.equals("Play land")) {
-                AllZone.Human_Hand.remove(c);
-                AllZone.Human_Play.add(c);
-                AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-                AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+                playLand(c, AllZone.Human_Hand);
             } else {
                 SpellAbility sa = map.get(choice);
                 playSpellAbility(sa);
@@ -2092,6 +2088,16 @@ public class GameAction {
             
             playSpellAbility(sa);
         }
+    }
+    
+    static public void playLand(Card land, PlayerZone zone)
+    {
+    	if (CardFactoryUtil.canHumanPlayLand()){
+	    	zone.remove(land);
+			AllZone.Human_Play.add(land);
+			CardFactoryUtil.playLandEffects(land);
+			AllZone.GameInfo.incrementHumanPlayedLands();
+    	}
     }
     
     public void playCardNoCost(Card c) {

@@ -1,3 +1,13 @@
+Summer Bloom
+1 G
+Sorcery
+You may play up to three additional lands this turn.
+
+Horn of Greed
+3
+Artifact
+When a player plays a land, that player draws a card.
+
 Dune-Brood Nephilim
 B R G W
 Creature Nephilim
@@ -526,7 +536,7 @@ spDiscardTgt:TgtChoose:2:Target player discards two cards.:Mind Rot - target pla
 
 Mind Sludge
 4 B
-Sorcery
+ry
 no text
 spDiscardTgt:TgtChoose:X:Target player discards a card for each Swamp you control.:Mind Sludge - target player discards cards
 SVar:X:Count$TypeYouCtrl.Swamp

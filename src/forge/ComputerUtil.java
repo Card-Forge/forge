@@ -370,32 +370,34 @@ public class ComputerUtil
   }//getAvailableMana()
 
   //plays a land if one is available
-  static public void playLand()
+  static public void chooseLandsToPlay()
   {
-    ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
-    if(! landList.isEmpty())
-    { 
-      int ix = 0;
-      while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {
-    	  // Play reflected lands LAST so that there is colored mana in play
-    	  // Don't increment past the end of the list!
-    	  ix++;
-      }
-      AllZone.Computer_Hand.remove(landList.get(ix));
-      AllZone.Computer_Play.add(landList.get(ix));
-      
-      if (!AllZone.GameInfo.computerPlayedFirstLandThisTurn()) {
-    	  AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(true);
-      }
-      else
-      {
-    	  if (CardFactoryUtil.getFastbonds(Constant.Player.Computer).size() > 0)
-    		  AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(1,CardFactoryUtil.getFastbonds(Constant.Player.Computer).get(0));
-      }
-      
-      AllZone.GameAction.checkStateEffects();
-    }
+		ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
+		while(!landList.isEmpty() && (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 ||
+		    	CardFactoryUtil.getCards("Fastbond", "Computer").size() > 0)){
+			// play as many lands as you can
+		    int ix = 0;
+		    while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {
+		    	// Skip through reflected lands. Choose last if they are all reflected.
+		    	ix++;
+		    }
+
+	    	Card land = landList.get(ix);
+		    landList.remove(ix);
+		    playLand(land, AllZone.Computer_Hand);
+		    
+		    AllZone.GameAction.checkStateEffects();
+		}
   }
+  
+  static public void playLand(Card land, PlayerZone zone)
+  {
+	    zone.remove(land);
+	    AllZone.Computer_Play.add(land);
+	    CardFactoryUtil.playLandEffects(land);
+	    AllZone.GameInfo.incrementComputerPlayedLands();
+  }
+  
   static public void untapDraw()
   {
     AllZone.GameAction.drawCard(Constant.Player.Computer);

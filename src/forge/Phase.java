@@ -240,6 +240,7 @@ public class Phase extends MyObservable
             PlayerCreatureSpellCount = 0;   
             ComputerSpellCount = 0;
             ComputerCreatureSpellCount = 0;
+            AllZone.GameInfo.setHumanPlayedLands(0);
             turn++;
             /*
             if (humanExtraTurns > 0)
@@ -255,7 +256,7 @@ public class Phase extends MyObservable
             PlayerCreatureSpellCount = 0;   
             ComputerSpellCount = 0;
             ComputerCreatureSpellCount = 0;
-            AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(false);
+            AllZone.GameInfo.setComputerPlayedLands(0);
             turn++;
             
             /*
@@ -265,14 +266,12 @@ public class Phase extends MyObservable
               computerExtraTurns++;
               */
         }
-        if(is(Constant.Phase.Main1, Constant.Player.Human)) {
-        	if(turn == 1) {     	
+        if(turn == 1 && is(Constant.Phase.Main1, Constant.Player.Human)) {
         	StormCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   
             ComputerSpellCount = 0;
             ComputerCreatureSpellCount = 0;
-        	}
         }
         //for debugging: System.out.println(getPhase());
         //System.out.println(getPhase() + " " + getActivePlayer());

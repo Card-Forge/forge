@@ -2704,29 +2704,28 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
-                    CardList Fastbond = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                    Fastbond = Fastbond.getName("Fastbond");
-                    if(library.size() > 0) {
-                    if(library.get(0).getType().contains("Land")) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                        AllZone.GameAction.moveTo(play, library.get(0));
-                        if(card.getController() == Constant.Player.Human) {
-                        	AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
-                        	if(AllZone.GameInfo.humanPlayedFirstLandThisTurn() == true) {
-                        		for(int i = 0; i < Fastbond.size(); i++)
-                        			AllZone.GameAction.addDamage(card.getController(), 1,Fastbond.get(0));
-                        	}
-                        	AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+                    Card top = library.get(0);
+                    
+                    if(library.size() > 0 && top.getType().contains("Land") ) {
+                    	boolean canPlayLand = false;
+                    	boolean isHuman = false;
+                    	if(card.getController() == Constant.Player.Human){
+                    		canPlayLand = CardFactoryUtil.canHumanPlayLand();
+                    		isHuman = true;
+                    	}
+                        else{
+                        	canPlayLand = CardFactoryUtil.canComputerPlayLand();
                         }
-                        else {
-                        	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
-                        	if(AllZone.GameInfo.computerPlayedFirstLandThisTurn() == true) {
-                        		for(int i = 0; i < Fastbond.size(); i++)
-                        			AllZone.GameAction.addDamage(card.getController(), 1,Fastbond.get(0));
-                        	}
-                        	AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(true);
-                        }
-                    }
+                    	if (canPlayLand){
+                    		 //todo(sol): would prefer to use GameAction.playLand(top, play) but it doesn't work
+	                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	                        Card land = AllZone.GameAction.moveTo(play, top);
+	                        CardFactoryUtil.playLandEffects(land);
+	                        if (isHuman)
+	                        	AllZone.GameInfo.incrementHumanPlayedLands();
+	                        else
+	                        	AllZone.GameInfo.incrementComputerPlayedLands();
+                    	}
                     }
                 }//resolve()
                 
@@ -2735,11 +2734,11 @@ public class CardFactory_Creatures {
                     CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
                     if(library.size() == 0) return false;
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());                                      
-                    int PlayLand = 0;
-                        if(card.getController() == Constant.Player.Human) PlayLand = AllZone.GameInfo.getHumanCanPlayNumberOfLands();
-                        else PlayLand = AllZone.GameInfo.getComputerCanPlayNumberOfLands();
+                    boolean canPlayLand = false;
+                        if(card.getController() == Constant.Player.Human) canPlayLand = CardFactoryUtil.canHumanPlayLand();
+                        else canPlayLand = CardFactoryUtil.canComputerPlayLand();
                         
-                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && PlayLand > 0) 
+                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && canPlayLand) 
                     && (AllZone.Stack.size() == 0) && AllZone.GameAction.getLastPlayerToDraw().equals(card.getController());
                 }
             }; 
