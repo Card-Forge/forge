@@ -1,0 +1,8 @@
+Name:Turn to Slag
+ManaCost:3 R R
+Types:Sorcery
+Text:no text
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_slag.jpg
+End

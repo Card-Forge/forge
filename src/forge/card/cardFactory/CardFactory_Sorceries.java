@@ -4756,6 +4756,36 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Turn to Slag")) {
+            Cost abCost = new Cost("3 R R", cardName, false);
+            Target target = new Target(card,"Select target creature", "Creature".split(","));
+            final SpellAbility spell = new Spell(card, abCost, target) {
+				private static final long serialVersionUID = 3848014348910653252L;
+
+				@Override
+                public boolean canPlayAI() {
+					return false;
+                }
+				
+                @Override
+                public void resolve() {
+                	Card tgt = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
+                    	tgt.addDamage(5, card);
+                    	CardList equipment = new CardList(tgt.getEquippedBy());
+                    	for(Card eq : equipment) AllZone.GameAction.destroy(eq);
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+            spell.setDescription(cardName+" deals 5 damage to target creature. Destroy all Equipment attached to that creature.");
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
         
     	return card;
     }//getCard

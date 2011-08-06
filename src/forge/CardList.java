@@ -25,6 +25,10 @@ public class CardList implements Iterable<Card> {
         addAll(c);
     }
     
+    public CardList(ArrayList<Card> al) {
+    	addAll(al.toArray());
+    }
+    
     public CardList(Object[] c) {
         addAll(c);
     }
