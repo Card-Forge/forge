@@ -9681,7 +9681,10 @@ public class GameActionUtil {
 					player.addDamage(1, crd);
 				}
 			};// Ability
-			ability.setStackDescription("Nettletooth Djinn - deals 1 damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Nettletooth Djinn - deals 1 damage to ").append(player);
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -9795,7 +9798,11 @@ public class GameActionUtil {
         				player.addDamage(1, vault);
         			}
         		};//Ability
-        		damage.setStackDescription(vault+" - does 1 damage to "+player);
+        		
+        		StringBuilder sb = new StringBuilder();
+        		sb.append(vault).append(" - does 1 damage to ").append(player);
+        		damage.setStackDescription(sb.toString());
+        		
         		AllZone.Stack.add(damage);
         	}
         }
@@ -9934,12 +9941,15 @@ public class GameActionUtil {
 					hondlist = hondlist.getType("Shrine");
 					player.gainLife(2*hondlist.size());
 				}
-			};
-			ability.setStackDescription(list.get(i) + " - " + list.get(i).getController()
-					+ " gains 2 life for each Shrine he controls.");
+			};// ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(list.get(i)).append(" - ").append(list.get(i).getController());
+			sb.append(" gains 2 life for each Shrine he controls.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
-
 	}// upkeep_Honden_of_Cleansing_Fire
 
 	private static void upkeep_Honden_of_Nights_Reach() {
@@ -9968,10 +9978,13 @@ public class GameActionUtil {
 						}
 					}
 				}
-			};
-			ability.setStackDescription(list.get(i) + " - "
-					+ list.get(i).getController().getOpponent()
-					+ " discards a card for each Shrine " + list.get(i).getController() + " controls.");
+			};// ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(list.get(i)).append(" - ").append(list.get(i).getController().getOpponent());
+			sb.append(" discards a card for each Shrine ").append(list.get(i).getController()).append(" controls.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -10052,12 +10065,14 @@ public class GameActionUtil {
 					}
 				}//resolve()
 			};//SpellAbility
-
-			ability.setStackDescription(list.get(i) + " - Deals " + hondlist.size()
-					+ " damage to target creature or player");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(list.get(i)).append(" - Deals ").append(hondlist.size());
+			sb.append(" damage to target creature or player");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
-
 	}// upkeep_Honden_of_Infinite_Rage
 
 
@@ -10084,12 +10099,15 @@ public class GameActionUtil {
 								"Creature", "Spirit"}, 1, 1, new String[] {""});
 					}
 				}
-			};
-			ability.setStackDescription(list.get(i) + " - " + list.get(i).getController()
-					+ " puts a 1/1 colorless Spirit creature token into play for each Shrine he controls.");
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(list.get(i)).append(" - ").append(list.get(i).getController());
+			sb.append(" puts a 1/1 colorless Spirit creature token into play for each Shrine he controls.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
-
 	}// upkeep_Honden_of_Lifes_Web
 
 	private static void upkeep_Seizan_Perverter_of_Truth() {
@@ -10109,8 +10127,12 @@ public class GameActionUtil {
 			public void resolve() {
 				player.subtractLife(2,F_card);
 			}
-		};
-		ability.setStackDescription("Seizan, Perverter of Truth - " + player + " loses 2 life and draws 2 cards");
+		};// Ability
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Seizan, Perverter of Truth - ").append(player);
+		sb.append(" loses 2 life and draws 2 cards");
+		ability.setStackDescription(sb.toString());
 
 		AllZone.Stack.add(ability);
 
@@ -10165,7 +10187,10 @@ public class GameActionUtil {
 						player.subtractLife(2,F_card);
 					}
 				};// Ability
-				ability.setStackDescription("Grinning Demon - " + player + " loses 2 life");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Grinning Demon - ").append(player).append(" loses 2 life");
+				ability.setStackDescription(sb.toString());
 
 				AllZone.Stack.add(ability);
 			}
@@ -10189,7 +10214,10 @@ public class GameActionUtil {
 					player.addDamage(1, crd);
 				}
 			};// Ability
-			ability.setStackDescription("Juzam Djinn - deals 1 damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Juzam Djinn - deals 1 damage to ").append(player);
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -10212,7 +10240,10 @@ public class GameActionUtil {
 					player.addDamage(1, crd);
 				}
 			};// Ability
-			ability.setStackDescription("Fledgling Djinn - deals 1 damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Fledgling Djinn - deals 1 damage to ").append(player);
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -10248,8 +10279,11 @@ public class GameActionUtil {
 					}
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Creakwood Liege - " + player
-					+ " puts a 1/1 Green Black Worm creature token into play.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Creakwood Liege - ").append(player);
+			sb.append(" puts a 1/1 Green Black Worm creature token into play.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -10284,9 +10318,13 @@ public class GameActionUtil {
 						crd.untap();
 					}
 				}
-			};
+			};// Ability
 			
-			ability.setStackDescription(card + " - Untap all green and/or blue creatures you control during each other player's untap step.");
+			StringBuilder sb = new StringBuilder();
+			sb.append(card);
+			sb.append(" - Untap all green and/or blue creatures you control during each other player's untap step.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -10320,9 +10358,13 @@ public class GameActionUtil {
 						crd.untap();
 					}
 				}
-			};
+			};// Ability
 			
-			ability.setStackDescription(card + " - Untap all permanents you control during each other player's untap step.");
+			StringBuilder sb = new StringBuilder();
+			sb.append(card);
+			sb.append(" - Untap all permanents you control during each other player's untap step.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
