@@ -294,7 +294,17 @@ public class Card extends MyObservable
       if (getKeyword().contains("Draw a card.") && !sb.toString().contains("Draw a card."))
     	  sb.append("Draw a card.\r\n");
 
-
+      if (!sb.toString().contains("Scry"))
+    	  for (int i=0; i < getKeyword().size(); i++)
+    	  {
+    		  String k = getKeyword().get(i);
+    		  if (k.startsWith("Scry"))
+    		  {
+    			  String kk[] = k.split(" ");
+    			  sb.append("Scry " + kk[1] + " (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
+    		  }
+    	  }
+            
       return sb.toString();
     }
 
