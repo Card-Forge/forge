@@ -925,17 +925,17 @@ public class GameAction {
                 		
                         for(int y = 0; y < Effects; y++) {  
                         	// Variables
-                           String AmountParse = Effect[y]; 
-                           int I_Amount = 0;
-                           String S_Amount = "";
+                           String AmountParse = Effect[y];                          
+                           String[] S_Amount = AmountParse.split("/");
+                           int[] I_Amount = new int[S_Amount.length - 1];
+                           int Multiple_Targets = 1;
                            
-                           if((AmountParse.split("/")).length > 1) {
-                           S_Amount = AmountParse.split("/")[1];
+                           for(int b = 0; b < S_Amount.length - 1; b++) {
                            
-                           if(S_Amount.equals("Toughness")) I_Amount = F_TriggeringCard.getNetDefense();
-                           else if(S_Amount.equals("Power")) I_Amount = F_TriggeringCard.getNetAttack();
-                           else if(S_Amount.equals("Life_Gained")) I_Amount = ((Integer)Custom_Parameters[0]);
-                           else if(S_Amount.contains("ControlledAmountType")) {
+                           if(S_Amount[b+1].equals("Toughness")) I_Amount[b] = F_TriggeringCard.getNetDefense();
+                           else if(S_Amount[b+1].equals("Power")) I_Amount[b] = F_TriggeringCard.getNetAttack();
+                           else if(S_Amount[b+1].equals("Life_Gained")) I_Amount[b] = ((Integer)Custom_Parameters[0]);
+                           else if(S_Amount[b+1].contains("ControlledAmountType")) {
                         	   final String[] TypeSplit =  AmountParse.split("/");
                         		CardList Cards_WithAllTypes = new CardList();
                         		Cards_WithAllTypes.add(new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards()));
@@ -946,19 +946,23 @@ public class GameAction {
                                          return false;
                                      }
                                  });
-                        		I_Amount = Cards_WithAllTypes.size();
+                        		I_Amount[b] = Cards_WithAllTypes.size();
                            }
-                           else I_Amount = Integer.valueOf(S_Amount);
-                           }
-                           int Multiple_Targets = 1;
+                           else if(!S_Amount[0].equals("KeywordPumpEOT")) I_Amount[b] = Integer.valueOf(S_Amount[b+1]);
+                           
+                           // NOTE: Multiple Targets and Groups of Integers is not supported
+                           
                            if(k[8].contains("MultipleTargets")) {
-                           	Multiple_Targets = I_Amount;
-                           	I_Amount = 1;
+                           	Multiple_Targets = I_Amount[0];
+                           	I_Amount[0] = 1;
                            }
+                           } // For
+                           
                            final int F_Multiple_Targets = Multiple_Targets; 
                        	   final Object[] Targets_Multi = new Object[Multiple_Targets];
                            final int[] index = new int[1];
-                           final int F_Amount = I_Amount;
+                           final int[] F_Amount = I_Amount;
+                           final String[] F_S_Amount = S_Amount;
                            final int F_Target = Effects_Count[0];
 
                 		
@@ -968,7 +972,7 @@ public class GameAction {
                                public void execute() {
                                	MultiTarget_Cancelled = false;
                                    for(int i = 0; i < F_Multiple_Targets; i++) {
-                                  	 AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(ability , i , F_Amount*F_Multiple_Targets,new Command() {
+                                  	 AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(ability , i , F_Amount[0]*F_Multiple_Targets,new Command() {
                                   	
                                         private static final long serialVersionUID = -328305150127775L;
                                         
@@ -985,7 +989,12 @@ public class GameAction {
                            };
                            if(k[8].contains("MultipleTargets")) CommandExecute[0] = MultiTargetsCommand;
                            else if(k[8].contains("SingleTarget")) CommandExecute[0] = MultiTargetsCommand;
-                           else CommandExecute[0] = Command.Blank;
+                           else {
+                        	   if(F_TargetPlayer[y] != null) Targets_Multi[index[0]] = F_TargetPlayer[y];
+                        	   if(F_TargetCard[y] != null) Targets_Multi[index[0]] = F_TargetCard[y];
+                        	   index[0]++; 
+                        	   CommandExecute[0] = Command.Blank;
+                           }
                            
                            // Null
                    		if(Effect[y].equals("Null")) {
@@ -999,12 +1008,80 @@ public class GameAction {
                             	private static final long serialVersionUID = 151367344511590317L;
 
                     			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone)) F_TargetCard[F_Target].addCounter(Counters.P1P1, F_Amount);
+                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone)) F_TargetCard[F_Target].addCounter(Counters.P1P1, F_Amount[0]);
                 			};
                 		};
                         Command_Effects[F_Target] = Proper_resolve;      
-                        StackDescription = StackDescription +  F_TargetCard[y] + " gets " + F_Amount + " +1/+1 counters";
+                        StackDescription = StackDescription +  F_TargetCard[y] + " gets " + F_Amount[0] + " +1/+1 counters";
                 	}
+                		// StatsPumpEOT/Power/Toughness
+                		if(Effect[y].contains("StatsPumpEOT")) {
+
+                			Command Proper_resolve = new Command() {
+                            	private static final long serialVersionUID = 151367344511590317L;
+
+                    			public void execute() {
+                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone)) {
+                                        final Command untilEOT = new Command() {
+                                            private static final long serialVersionUID = 1497565871061029469L;
+                                            
+                                            public void execute() {
+                                                if(AllZone.GameAction.isCardInPlay(F_card)) {
+                                                	F_card.addTempAttackBoost(- F_Amount[0]);
+                                                	F_card.addTempDefenseBoost(- F_Amount[1]);
+                                                }
+                                            }
+                                        };//Command
+                                        
+
+                                        	F_card.addTempAttackBoost(F_Amount[0]);
+                                        	F_card.addTempDefenseBoost(F_Amount[1]);
+                                            
+                                            AllZone.EndOfTurn.addUntil(untilEOT);
+                    				}
+                			};
+                		};
+                        Command_Effects[F_Target] = Proper_resolve;      
+                        StackDescription = StackDescription +  F_TargetCard[y] + " gets " + ((F_Amount[0] > -1)? "+" :"") + F_Amount[0] 
+                                           + "/" + ((F_Amount[1] > -1)? "+" :"") + F_Amount[1]  + " until End of Turn";
+                	}
+                	
+                		// KeywordPumpEOT/Keyword(s)
+                		if(Effect[y].contains("KeywordPumpEOT")) {
+
+                			Command Proper_resolve = new Command() {
+                            	private static final long serialVersionUID = 151367344511590317L;
+
+                    			public void execute() {
+                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone)) {
+                                        final Command untilEOT = new Command() {
+                                            private static final long serialVersionUID = 1497565871061029469L;
+                                            
+                                            public void execute() {
+                                                if(AllZone.GameAction.isCardInPlay(F_card)) {
+                                                    for(int i =0; i < F_S_Amount.length - 1; i++) {
+                                                        F_card.removeIntrinsicKeyword(F_S_Amount[i + 1]);
+                                                        }
+                                                }
+                                            }
+                                        };//Command
+                                        
+                                        for(int i =0; i < F_S_Amount.length - 1; i++) {
+                                        F_card.addIntrinsicKeyword(F_S_Amount[i + 1]);
+                                        }
+                                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    				}
+                			};
+                		};
+                		String Desc = "";
+                		for(int KW =0; KW < F_S_Amount.length - 1; KW++) {
+                		Desc = Desc + F_S_Amount[KW + 1];
+                		if(KW < F_S_Amount.length - 2) Desc = Desc + ", ";
+                		}
+                        Command_Effects[F_Target] = Proper_resolve;      
+                        StackDescription = StackDescription +  F_TargetCard[y] + " gets " + Desc + " until End of Turn";
+                	}
+                		
                 		// Gain Life
                 		if(Effect[y].contains("ModifyLife")) {
                 			Command Proper_resolve = new Command() {
@@ -1013,14 +1090,14 @@ public class GameAction {
                     			public void execute() {
                     				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
     			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer[F_Target]);
-    			        				if(F_Amount > -1) life.addLife(F_Amount);
-    			        				else life.subtractLife(F_Amount * -1,F_card);
+    			        				if(F_Amount[0] > -1) life.addLife(F_Amount[0]);
+    			        				else life.subtractLife(F_Amount[0] * -1,F_card);
     			                      }
 
 			                      }
                 			};
                             Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription +  F_TargetPlayer[F_Target] + ((F_Amount > -1)? " gains " + F_Amount:"") + ((F_Amount <= -1)? " loses " + F_Amount * -1:"") + " life";
+                            StackDescription = StackDescription +  F_TargetPlayer[F_Target] + ((F_Amount[0] > -1)? " gains " + F_Amount[0]:"") + ((F_Amount[0] <= -1)? " loses " + F_Amount[0] * -1:"") + " life";
                 		}
                 		
                 		// Draw Cards
@@ -1036,7 +1113,7 @@ public class GameAction {
     			                      }
                     		};
                             Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription +  F_TargetPlayer[F_Target] + " draws " + F_Amount + " card(s)";                     
+                            StackDescription = StackDescription +  F_TargetPlayer[F_Target] + " draws " + F_Amount[0] + " card(s)";                     
                 		}
                 		
                 		// Discard Cards
@@ -1046,13 +1123,13 @@ public class GameAction {
 
                         			public void execute() {
                         				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
-      			                    	  AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount);
+      			                    	  AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount[0]);
       			                      }
 
     			                      }
                     			};
                             Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription + F_TargetPlayer[F_Target] + " discards " + F_Amount + " card(s)";                        
+                            StackDescription = StackDescription + F_TargetPlayer[F_Target] + " discards " + F_Amount[0] + " card(s)";                        
                 		}
                 		
                 		// Make Token-Type-color-Power-Toughness-Keywords---Amount
@@ -1081,7 +1158,7 @@ public class GameAction {
                         				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
                         					String Color = F_TokenConditions[2];
                         					if(F_TokenConditions[2].equals("c")) Color = "1";
-                        					for(int z = 0; z < F_Amount; z++) 
+                        					for(int z = 0; z < F_Amount[0]; z++) 
                                             CardFactoryUtil.makeToken( F_TokenConditions[1] + " Token", F_TokenConditions[2]+ " " + 
                                             		Integer.valueOf(F_TokenConditions[3])+ " " + Integer.valueOf(F_TokenConditions[4])
                                              + " " + F_TokenConditions[1], F_card, Color, new String[] {
@@ -1092,7 +1169,7 @@ public class GameAction {
     			                      }
                     			};
                             Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription + F_TargetPlayer[F_Target] + " puts " + F_Amount + " " +  F_TokenConditions[3] + 
+                            StackDescription = StackDescription + F_TargetPlayer[F_Target] + " puts " + F_Amount[0] + " " +  F_TokenConditions[3] + 
                             "/" + F_TokenConditions[4] + " " + F_Color + " " + F_TokenConditions[1] + " creature token(s) onto the battlefield";                        
                 		}
                 		
@@ -1173,22 +1250,23 @@ public class GameAction {
       			                              if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
       			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
       			                                  Card c = (Card) Targets_Multi[z];
-      			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount);
+      			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount[0]);
       			                              }
       			                          } else {
-      			                             AllZone.GameAction.addDamage( (String) Targets_Multi[z], F_Amount,F_card);
+      			                             AllZone.GameAction.addDamage( (String) Targets_Multi[z], F_Amount[0],F_card);
       			                          }
       			                      }
       			                      }
-      			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount*F_Multiple_Targets,F_card);
+      			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount[0]*F_Multiple_Targets,F_card);
                       			}
                                     };
 
     			                      };
                             Command_Effects[F_Target] = Proper_resolve;      
-                            if(F_Multiple_Targets != 1) StackDescription = StackDescription + "deals " + F_Amount*F_Multiple_Targets + " damage" + " divided among up to " +  Multiple_Targets + " target creatures and/or players";
+                            if(F_Multiple_Targets != 1) StackDescription = StackDescription + "deals " + F_Amount[0]*F_Multiple_Targets + " damage" + " divided among up to " +  Multiple_Targets + " target creatures and/or players";
                             else if(F_card.getController().equals(Constant.Player.Computer)) StackDescription = StackDescription + "targeting Human ";
-                            else StackDescription = StackDescription + "targeting ?";
+                            else StackDescription = StackDescription + "targeting " + ((F_TargetCard[y] != null)? F_TargetCard[y]:"") + 
+                            ((F_TargetPlayer[y] != null)? F_TargetPlayer[y]:"");
                 		}
                 		
                 		Effects_Count[0]++;

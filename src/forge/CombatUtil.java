@@ -1964,6 +1964,9 @@ public class CombatUtil {
     }//checkDeclareAttackers
     
     public static void checkUnblockedAttackers(Card c) {
+    	
+    	AllZone.GameAction.CheckWheneverKeyword(c,"isUnblocked",null);
+    	
         if(c.getName().equals("Guiltfeeder")) {
             final String player = c.getController();
             final String opponent = AllZone.GameAction.getOpponent(player);
@@ -2004,6 +2007,8 @@ public class CombatUtil {
             
         	for (Card c:cl)
         	{
+        		AllZone.GameAction.CheckWheneverKeyword(c,"Blocks",null);
+        		
         		if (!c.getCreatureBlockedThisCombat()) {
                 	for(Ability ab:CardFactoryUtil.getBushidoEffects(c)) {
                 		AllZone.Stack.add(ab);
@@ -2088,6 +2093,8 @@ public class CombatUtil {
     public static void checkBlockedAttackers(Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
         
+    	AllZone.GameAction.CheckWheneverKeyword(a,"BecomesBlocked",null);
+    	
         if(!a.getCreatureGotBlockedThisCombat()) {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
@@ -2181,26 +2188,7 @@ public class CombatUtil {
         } else if(a.getName().equals("Sylvan Basilisk")) {
             AllZone.GameAction.destroy(b);
             System.out.println("destroyed blocker " + b.getName());
-        } else if(a.getName().equals("Alley Grifters") && !a.getCreatureGotBlockedThisCombat()) {
-            String player = a.getController();
-            String opp = b.getController();
-            
-            if(player.equals(Constant.Player.Computer)) {
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
-                CardList list = new CardList(hand.getCards());
-                
-                Object o = AllZone.Display.getChoiceOptional("Select card to discard", list.toArray());
-                if(o == null) AllZone.GameAction.discardRandom(opp);
-                else {
-                    Card c = (Card) o;
-                    AllZone.GameAction.discard(c);
-                }
-            } else //computer just discards at random
-            {
-                AllZone.GameAction.discardRandom(opp);
-            }
-        }//Alley Grifters
-          else if(a.getName().equals("Quagmire Lamprey")) {
+        } else if(a.getName().equals("Quagmire Lamprey")) {
             b.addCounter(Counters.M1M1, 1);
         } else if(a.getName().equals("Elven Warhounds")) {
             PlayerZone play = AllZone.getZone(Constant.Zone.Play, b.getController());

@@ -81,6 +81,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     //check for exalted:
                     if ((AllZone.Combat.getDeclaredAttackers() + AllZone.pwCombat.getDeclaredAttackers() == 1) &&
                     		!appliedExaltedEffects) {
+                    	
+                    	AllZone.GameAction.CheckWheneverKeyword(list.get(0), "Attack - Alone", null);
+                    	
 //                    if (list.size()==1) {
                         String attackingPlayer = AllZone.Combat.getAttackingPlayer();
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);

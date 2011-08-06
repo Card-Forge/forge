@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+battle_strain.jpg				http://www.wizards.com/global/images/magic/general/battle_strain.jpg
+abyssal_nightstalker.jpg		http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/abyssal_nightstalker.jpg
+fledgling_griffin.jpg			http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
 rogue_kavu.jpg		http://www.wizards.com/global/images/magic/general/rogue_kavu.jpg
 matca_rioters.jpg		http://www.wizards.com/global/images/magic/general/matca_rioters.jpg
 psychatog.jpg		http://www.wizards.com/global/images/magic/general/psychatog.jpg

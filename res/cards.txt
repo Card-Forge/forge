@@ -1,9 +1,36 @@
+Battle Strain
+1 R
+Enchantment
+no text
+WheneverKeyword:Blocks:No_Initiator:Play:Damage/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a creature blocks, Battle Strain deals 1 damage to that creature's controller.
+
+Alley Grifters
+1 B B
+Creature Human Mercenary
+no text
+2/2
+WheneverKeyword:BecomesBlocked:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Alley Grifters becomes blocked, defending player discards a card.
+
+Abyssal Nightstalker
+3 B
+Creature Nightstalker
+no text
+2/2
+WheneverKeyword:isUnblocked:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Abyssal Nightstalker attacks and isn't blocked, defending player discards a card.
+
+Fledgling Griffin
+1 W
+Creature Griffin
+no text
+2/2
+WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Flying:Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall — Whenever a land enters the battlefield under your control, Fledgling Griffin gains flying until end of turn.
+
 Rogue Kavu
 1 R
 Creature Kavu
 no text
 1/1
-Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn.
+WheneverKeyword:Attack - Alone:Self:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever Rogue Kavu attacks alone, it gets +2/+0 until end of turn.
 
 Niv-Mizzet, the Firemind
 2 U U R R
@@ -15794,12 +15821,6 @@ Quagmire Lamprey
 Creature Fish
 Whenever Quagmire Lamprey becomes blocked by a creature, put a -1/-1 counter on that creature.
 1/1
-
-Alley Grifters
-1 B B
-Creature Human Mercenary
-Whenever Alley Grifters becomes blocked, defending player discards a card.
-2/2
 
 Sylvan Basilisk
 3 G G
