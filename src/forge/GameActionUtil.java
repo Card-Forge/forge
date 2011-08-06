@@ -206,7 +206,7 @@ public class GameActionUtil {
 				
 				AllZone.Stack.add(ability);
 			}//for
-		}
+		}//end Lifeblood
 		
 		if(c.getType().contains("Forest")) {
 			final Player opponent = c.getController().getOpponent();
@@ -227,7 +227,7 @@ public class GameActionUtil {
 				
 				AllZone.Stack.add(ability);
 			}//for
-		}
+		}//end Lifetap
 		
 		/*
 		 * Blight - When enchanted land becomes tapped, destroy it.
@@ -375,10 +375,15 @@ public class GameActionUtil {
 						source.getController().addDamage(1, crd);
 					}
 				};//Ability
-				ability.setStackDescription(decree.getName()+" - does 1 damage to "+c.getController()+".  ("+c.getName()+" was tapped.)");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(decree.getName()).append(" - does 1 damage to ").append(c.getController());
+				sb.append(".  (").append(c.getName()).append(" was tapped.)");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}//for
-		}
+		}//end Royal Decree
 
 	}//end executeTapSideEffects()
 	
@@ -406,7 +411,12 @@ public class GameActionUtil {
 						}
 					}
 				};//Ability
-				ability.setStackDescription(orb.getName()+" - "+c+" was untapped, "+controller+" puts top card of library into graveyard.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(orb.getName()).append(" - ").append(c).append(" was untapped, ");
+				sb.append(controller).append(" puts top card of library into graveyard.");
+				ability.setStackDescription(sb.toString());
+				
 				if(AllZoneUtil.getPlayerCardsInLibrary(controller).size() > 0) {
 					AllZone.Stack.add(ability);
 				}
@@ -439,7 +449,12 @@ public class GameActionUtil {
 	                    AllZone.EndOfTurn.addUntil(untilEOT);
 					}
 				};//Ability
-				ability.setStackDescription(crd.getName()+" - gets +1/+1 until end of turn.  ("+c+" was untapped.)");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(crd.getName()).append(" - gets +1/+1 until end of turn.  (");
+				sb.append(c).append(" was untapped.)");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}//for
 		}//end Wake Thrasher
@@ -579,7 +594,11 @@ public class GameActionUtil {
 				AllZone.Phase.addExtraTurn(controller);
 			}
 		};
-		ability.setStackDescription(c + " - When you cast Emrakul, take an extra turn after this one.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c).append(" - When you cast Emrakul, take an extra turn after this one.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 	
@@ -621,7 +640,10 @@ public class GameActionUtil {
 				}
 			}
 		};
-		ability.setStackDescription(c + " - you may return target creature card from your graveyard to the battlefield.");
+		StringBuilder sb = new StringBuilder();
+		sb.append(c).append(" - you may return target creature card from your graveyard to the battlefield.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 	
@@ -727,7 +749,10 @@ public class GameActionUtil {
 						}
 					}
 				};
-				ability.setStackDescription(c + " - Cascade.");
+				StringBuilder sb = new StringBuilder();
+				sb.append(c).append(" - Cascade.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		};
@@ -832,13 +857,16 @@ public class GameActionUtil {
 							}
 					}
 				};
-				ability.setStackDescription(c + " - Ripple.");
+				StringBuilder sb = new StringBuilder();
+				sb.append(c).append(" - Ripple.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 			}
 		};
 		Ripple.execute();
-	}
+	}//playCard_Ripple()
 	
 	public static void playCard_Storm(Card c) {
 		if(c.getKeyword().contains("Storm") && !c.isCopiedSpell())
@@ -853,10 +881,13 @@ public class GameActionUtil {
 				};	// For
 				}
 			};
-			Storm.setStackDescription(c + " - Storm.");
+			StringBuilder sb = new StringBuilder();
+			sb.append(c).append(" - Storm.");
+			Storm.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(Storm);			
 		}
-	}
+	}//playCard_Storm()
 	
 	public static void playCard_Vengevine(Card c) {
 		if (c.isCreature() == true && (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2))
@@ -890,13 +921,17 @@ public class GameActionUtil {
 				        	}
 						}
 					}; // ability
-
-					ability.setStackDescription(card.getName() + " - " + "Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append("Whenever you cast a spell, if it's the second creature ");
+					sb.append("spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.");
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
-			}//if
+				}//if
+			}
 		}
-		}
-	}
+	}//playCard_Vengevine()
 	
 	public static void playCard_Hand_of_the_Praetors(Card c)
 	{
@@ -1062,9 +1097,12 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a black spell, Emberstrike Duo gets +1/+1 until end of turn.");
+					
+					StringBuilder sb2 = new StringBuilder();
+					sb2.append(card.getName()).append(" - ").append(c.getController());
+					sb2.append(" played a black spell, Emberstrike Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb2.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1091,13 +1129,15 @@ public class GameActionUtil {
 						AllZone.EndOfTurn.addUntil(untilEOT);
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a red spell, Emberstrike Duo gains first strike until end of turn.");
+				
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append(card.getName()).append(" - ").append(c.getController());
+				sb2.append(" played a red spell, Emberstrike Duo gains first strike until end of turn.");
+				ability2.setStackDescription(sb2.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}//if
-
 
 	}//Emberstrike Duo
 
@@ -1136,9 +1176,12 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a blue spell, Gravelgill Duo gets +1/+1 until end of turn.");
+					
+					StringBuilder sb2 = new StringBuilder();
+					sb2.append(card.getName()).append(" - ").append(c.getController());
+					sb2.append(" played a blue spell, Gravelgill Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb2.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1165,13 +1208,15 @@ public class GameActionUtil {
 						AllZone.EndOfTurn.addUntil(untilEOT);
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a black spell, Emberstrike Duo gains fear until end of turn.");
+				
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append(card.getName()).append(" - ").append(c.getController());
+				sb2.append(" played a black spell, Emberstrike Duo gains fear until end of turn.");
+				ability2.setStackDescription(sb2.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}//if
-
 
 	}//Gravelgill Duo
 	
@@ -1181,25 +1226,26 @@ public class GameActionUtil {
 
 		if(list.size() > 0) {
 			for(int i = 0; i < list.size(); i++) {
-			final Card card = list.get(i);
-			final SpellAbility sa = AllZone.Stack.peek();
-			Ability ability2 = new Ability(card, "0") {
-				@Override
-				public void resolve() {
-					AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-				}
-			}; // ability2
-
-			ability2.setStackDescription(card.getName() + " - " + c.getController()
-					+ " played a spell with same amount of charge counters on Chalice of the Void. The spell is countered");
-			
-                      
-            int convertedManaSpell = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());								
-			if(sa.isSpell() == true && card.getCounters(Counters.CHARGE) == convertedManaSpell) AllZone.Stack.add(ability2);	
-		}					
-			}//if
-		} // Chalice_of_the_Void 
+				final Card card = list.get(i);
+				final SpellAbility sa = AllZone.Stack.peek();
+				Ability ability2 = new Ability(card, "0") {
+					@Override
+					public void resolve() {
+						AllZone.Stack.pop();
+						AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+					}
+				}; // ability2
+				
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append(card.getName()).append(" - ").append(c.getController());
+				sb2.append(" played a spell with same amount of charge counters on Chalice of the Void. The spell is countered");
+				ability2.setStackDescription(sb2.toString());
+                
+				int convertedManaSpell = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());								
+				if(sa.isSpell() == true && card.getCounters(Counters.CHARGE) == convertedManaSpell) AllZone.Stack.add(ability2);	
+			}					
+		}//if
+	} // Chalice_of_the_Void 
 	
 	public static void playCard_Safehold_Duo(Card c) {
 		final Player controller = c.getController();
@@ -1222,8 +1268,6 @@ public class GameActionUtil {
 							if(AllZone.GameAction.isCardInPlay(card)) {
 								card.addTempAttackBoost(-1);
 								card.addTempDefenseBoost(-1);
-
-
 							}
 						}
 					};
@@ -1236,9 +1280,12 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a green spell, Safehold Duo gets +1/+1 until end of turn.");
+					
+					StringBuilder sb2 = new StringBuilder();
+					sb2.append(card.getName()).append(" - ").append(c.getController());
+					sb2.append(" played a green spell, Safehold Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb2.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1265,13 +1312,15 @@ public class GameActionUtil {
 						AllZone.EndOfTurn.addUntil(untilEOT);
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a white spell, Safehold Duo gains vigilance until end of turn.");
+				
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append(card.getName()).append(" - ").append(c.getController());
+				sb2.append(" played a white spell, Safehold Duo gains vigilance until end of turn.");
+				ability2.setStackDescription(sb2.toString());
+			    
 				AllZone.Stack.add(ability2);
 			}
 		}//if
-
 
 	}//Safehold Duo
 
@@ -1296,8 +1345,6 @@ public class GameActionUtil {
 							if(AllZone.GameAction.isCardInPlay(card)) {
 								card.addTempAttackBoost(-1);
 								card.addTempDefenseBoost(-1);
-
-
 							}
 						}
 					};
@@ -1310,9 +1357,12 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a red spell, Tattermunge Duo gets +1/+1 until end of turn.");
+					
+					StringBuilder sb2 = new StringBuilder();
+					sb2.append(card.getName()).append(" - ").append(c.getController());
+					sb2.append(" played a red spell, Tattermunge Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb2.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1327,7 +1377,6 @@ public class GameActionUtil {
 					public void execute() {
 						if(AllZone.GameAction.isCardInPlay(card)) {
 							card.removeIntrinsicKeyword("Forestwalk");
-
 						}
 					}
 				};
@@ -1339,13 +1388,15 @@ public class GameActionUtil {
 						AllZone.EndOfTurn.addUntil(untilEOT);
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a green spell, Tattermunge Duo gains forestwalk until end of turn.");
+				
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append(card.getName()).append(" - ").append(c.getController());
+				sb2.append(" played a green spell, Tattermunge Duo gains forestwalk until end of turn.");
+				ability2.setStackDescription(sb2.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}//if
-
 
 	}//Tattermunge Duo
 
@@ -1370,8 +1421,6 @@ public class GameActionUtil {
 							if(AllZone.GameAction.isCardInPlay(card)) {
 								card.addTempAttackBoost(-1);
 								card.addTempDefenseBoost(-1);
-
-
 							}
 						}
 					};
@@ -1384,9 +1433,12 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a white spell, Thistledown Duo gets +1/+1 until end of turn.");
+					
+					StringBuilder sb2 = new StringBuilder();
+					sb2.append(card.getName()).append(" - ").append(c.getController());
+					sb2.append(" played a white spell, Thistledown Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb2.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
