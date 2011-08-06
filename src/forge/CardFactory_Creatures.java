@@ -1516,7 +1516,8 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Shu Soldier-Farmers") || cardName.equals("Staunch Defenders")
                 || cardName.equals("Spiritual Guardian") || cardName.equals("Teroh's Faithful")
-                || cardName.equals("Jedit's Dragoons") || cardName.equals("Loxodon Hierarch")) {
+                || cardName.equals("Jedit's Dragoons") || cardName.equals("Loxodon Hierarch")
+                || cardName.equals("Lone Missionary")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
