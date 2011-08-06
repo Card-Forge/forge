@@ -2,7 +2,6 @@ Name:Plains
 ManaCost:no cost
 Types:Basic Land Plains
 Text:no text
-A:AB$ Mana | Cost $ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=8322&type=card\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=159288&type=card\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=4428

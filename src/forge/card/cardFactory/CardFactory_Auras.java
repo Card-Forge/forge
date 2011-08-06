@@ -21,7 +21,6 @@ import forge.Constant;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -226,37 +225,6 @@ class CardFactory_Auras {
                         	crd.removeType("Lair");
                         
                         	crd.addType(NewType[0]);
-                        	SpellAbility[] Abilities = crd.getSpellAbility();
-                        	for(int i = 0; i < Abilities.length; i++) {
-                        		if(Abilities[i].isIntrinsic()) {
-                        			card.addSpellAbility(Abilities[i]);
-                        			crd.removeSpellAbility(Abilities[i]);
-                        		}
-                        	}
-                        	String ManaCol = "";
-                        	if(NewType[0].equals("Plains"))
-                        	{
-                        		ManaCol = "W";
-                        	}
-                        	else if(NewType[0].equals("Island"))
-                        	{
-                        		ManaCol = "U";
-                        	}
-                        	else if(NewType[0].equals("Swamp"))
-                        	{
-                        		ManaCol = "B";
-                        	}
-                        	else if(NewType[0].equals("Mountain"))
-                        	{
-                        		ManaCol = "R";
-                        	}
-                        	else if(NewType[0].equals("Forest"))
-                        	{
-                        		ManaCol = "G";
-                        	}
-                        	crd.addSpellAbility(new Ability_Mana(card, "T", ManaCol) {
-                    			private static final long serialVersionUID = 787111012484588884L;
-                    		});
                         } else {
                         	Card Other_Seas = null;
                         	for(int i = 0; i < Seas.size(); i++) {

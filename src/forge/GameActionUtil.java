@@ -6168,6 +6168,59 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command stLandManaAbilities = new Command() {
+		private static final long serialVersionUID = 8005448956536998277L;
+
+		public void execute() {
+			CardList lands = AllZoneUtil.getCardsInGame();
+			lands = lands.filter(AllZoneUtil.lands);
+			
+			//remove all abilities granted by this Command
+			for(Card land : lands) {
+				ArrayList<Ability_Mana> sas = land.getManaAbility();
+				for(SpellAbility sa : sas) {
+					if(sa.getType().equals("BasicLandTypeMana")) {
+						land.removeSpellAbility(sa);
+					}
+				}
+			}
+			
+			//add all appropriate mana abilities based on current types
+			for(Card land : lands) {
+				if(land.isType("Swamp")) {
+					AbilityFactory AF = new AbilityFactory();
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.", land);
+					sa.setType("BasicLandTypeMana");
+					land.addSpellAbility(sa);
+				}
+				if(land.isType("Forest")) {
+					AbilityFactory AF = new AbilityFactory();
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.", land);
+					sa.setType("BasicLandTypeMana");
+					land.addSpellAbility(sa);
+				}
+				if(land.isType("Island")) {
+					AbilityFactory AF = new AbilityFactory();
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.", land);
+					sa.setType("BasicLandTypeMana");
+					land.addSpellAbility(sa);
+				}
+				if(land.isType("Mountain")) {
+					AbilityFactory AF = new AbilityFactory();
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.", land);
+					sa.setType("BasicLandTypeMana");
+					land.addSpellAbility(sa);
+				}
+				if(land.isType("Plains")) {
+					AbilityFactory AF = new AbilityFactory();
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.", land);
+					sa.setType("BasicLandTypeMana");
+					land.addSpellAbility(sa);
+				}
+			}
+		}// execute()
+
+	};//stLandManaAbilities
 
 	public static Command stSetPT = new Command() {
 		/*

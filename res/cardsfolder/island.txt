@@ -2,7 +2,6 @@ Name:Island
 ManaCost:no cost
 Types:Basic Land Island
 Text:no text
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73951.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159281\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159282\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=25964

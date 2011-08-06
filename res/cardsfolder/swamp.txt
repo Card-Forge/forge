@@ -2,7 +2,6 @@ Name:Swamp
 ManaCost:no cost
 Types:Basic Land Swamp
 Text:no text
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73973.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159290\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159291\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159292

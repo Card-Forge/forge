@@ -337,14 +337,7 @@ public class CardFactory implements NewConstants {
     	
     	else if(copySA.canPlayAI())
     		ComputerUtil.playStackFree(copySA);
-    }		
-    
-    /*
-    final public Card getCard(String cardName, String owner) {
-        cardName = AllZone.NameChanger.getOriginalName(cardName);
-        return getCard2(cardName, owner);
     }
-    */
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //this is the new getCard() method, you have to remove the old getCard()

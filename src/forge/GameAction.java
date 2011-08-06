@@ -579,6 +579,8 @@ public class GameAction {
         destroyLegendaryCreatures();
         destroyPlaneswalkers();
         
+        GameActionUtil.stLandManaAbilities.execute();
+        
         if (!refreeze)
         	AllZone.Stack.unfreezeStack();
     }//checkStateEffects()

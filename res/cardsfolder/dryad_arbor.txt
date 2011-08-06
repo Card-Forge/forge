@@ -4,7 +4,6 @@ Types:Land Creature Forest Dryad
 Text:no text
 PT:1/1
 K:Dryad Arbor is green.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136196.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/174.jpg
