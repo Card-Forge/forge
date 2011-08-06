@@ -1,0 +1,9 @@
+Name:Pulverize
+ManaCost:4 R R
+Types:Sorcery
+Text:Destroy all artifacts. They can't be regenerated.
+K:spDestroyAll:Artifact:NoRegen
+SVar:AltCost:Sac<2/Mountain>$You may sacrifice two Mountains rather than pay Pulverize's mana cost.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pulverize.jpg
+End
