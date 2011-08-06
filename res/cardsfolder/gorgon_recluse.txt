@@ -1,7 +1,7 @@
 Name:Gorgon Recluse
 ManaCost:3 B B
 Types:Creature Gorgon
-Text:Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+Text:no text
 PT:2/4
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.nonBlack | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.nonBlack | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.

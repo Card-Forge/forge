@@ -4,7 +4,7 @@ Types:Creature Dragon
 Text:no text
 PT:5/5
 K:Flying
-A:AB$Destroy | Cost$ 3 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ SVar=DBPump | SpellDescription$ Destroy target artifact. Hoard-Smelter Dragon gets +X/+0 until end of turn, where X is that artifact's converted mana cost.
+A:AB$ Destroy | Cost$ 3 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ SVar=DBPump | SpellDescription$ Destroy target artifact. CARDNAME gets +X/+0 until end of turn, where X is that artifact's converted mana cost.
 SVar:DBPump:DB$Pump | NumAtt$ X
 SVar:X:Targeted$CardManaCost
 SVar:Rarity:Rare
