@@ -353,32 +353,27 @@ public class MagicStack extends MyObservable {
 
 						@Override
 						public void selectCard(Card c, PlayerZone zone) {
-							if(zone.is(Constant.Zone.Play, AllZone.HumanPlayer)) {
+							if(zone.is(Constant.Zone.Play) && c.getController().equals(AllZone.HumanPlayer)
+									&& c.isLand()) {
 								AllZone.GameAction.sacrifice(c);
-
-								//if (free)
-									//this.setFree(true);
-
-								//if(spell.getManaCost().equals("0") || this.isFree()) {
-									//this.setFree(false);
-									//AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-									stop();
-								//} else stopSetNext(new Input_PayManaCost(spell));
+								stop();
 							}
 						}
 					};
-					
-					if(sp.getSourceCard().getController().isHuman()) {
-						AllZone.InputControl.setInput(in);
-					}
-					else {//Computer
-						CardList lands = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
-						if(!lands.isEmpty()) {
-							AllZone.ComputerPlayer.sacrificePermanent("prompt", lands);
+					SpellAbility prev = peek();
+					if(prev instanceof Spell_Permanent && prev.getSourceCard().getName().equals("Mana Vortex")) {
+						if(sp.getSourceCard().getController().isHuman()) {
+							AllZone.InputControl.setInput(in);
 						}
-						else {
-							AllZone.Stack.pop();
-							AllZone.GameAction.moveToGraveyard(sp.getSourceCard());
+						else {//Computer
+							CardList lands = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
+							if(!lands.isEmpty()) {
+								AllZone.ComputerPlayer.sacrificePermanent("prompt", lands);
+							}
+							else {
+								AllZone.Stack.pop();
+								AllZone.GameAction.moveToGraveyard(sp.getSourceCard());
+							}
 						}
 					}
 					
