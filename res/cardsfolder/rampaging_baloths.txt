@@ -1,7 +1,7 @@
 Name:Rampaging Baloths
 ManaCost:4 G G
 Types:Creature Beast
-Text:
+Text:no text
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may put a 4/4 green Beast creature token onto the battlefield.
