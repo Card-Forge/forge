@@ -315,7 +315,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
 	    					if (imgFN.equals("none") || (!imgFN.contains(SC3) && !imgFN.contains(SC2)))
 	    					{
     							String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + n + ".full.jpg";
-    							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn)));
+    							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true)));
 	    					}    							
 	    				}
     				}
@@ -327,7 +327,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     					if (imgFN.equals("none") ||	(!imgFN.contains(SC3) && !imgFN.contains(SC2)))
 						{
 							String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + ".full.jpg";
-							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn)));
+							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true)));
 							
 						}    							
 

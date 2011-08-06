@@ -55,6 +55,15 @@ private static byte[]    map2 = new byte[128];
 public static String encodeString (String s) {
    return new String(encode(s.getBytes())); }
 
+public static String encodeString (String s, boolean noPad) {
+	String t = new String(encode(s.getBytes()));
+	
+	if (noPad)
+		t = t.replace("=", "");
+	
+	return t;
+}
+
 /**
 * Encodes a byte array into Base 64 format and breaks the output into lines of 76 characters.
 * This method is compatible with <code>sun.misc.BASE64Encoder.encodeBuffer(byte[])</code>.
