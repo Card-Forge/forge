@@ -2370,6 +2370,7 @@ public class CombatUtil {
              b.getController().loseLife(4, a);
         }
         
+        /*
         else if ((a.getName().equals("Chambered Nautilus") || a.getName().equals("Saprazzan Heir") 
                 || a.getName().equals("Drelnoch")) && !a.getCreatureBlockedThisCombat()) {
             Player player = a.getController();
@@ -2391,7 +2392,7 @@ public class CombatUtil {
                 player.drawCards(numCards);
             }
         }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
-        
+        */
         if(b.getName().equals("Frostweb Spider") && (a.getKeyword().contains("Flying"))) {
             final Card spider = b;
             
