@@ -131,7 +131,7 @@ public abstract class Player extends MyObservable{
 		boolean newLifeSet = false;
 		if(!canLoseLife()) return false;
 		if(toLose > 0) {
-			life -= toLose;
+			subtractLife(toLose);
 			newLifeSet = true;
 			this.updateObservers();
 		}

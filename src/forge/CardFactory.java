@@ -963,7 +963,6 @@ public class CardFactory implements NewConstants {
         				}
         				else if(ActionID.equals("LoseLife"))
         				{
-        					//AllZone.GameAction.getPlayerLife(Target).subtractLife(Integer.parseInt(SplitActionParams[0]), card);
         					Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
         				}
         				else if(ActionID.equals("GainLife"))
@@ -4895,7 +4894,6 @@ public class CardFactory implements NewConstants {
                       else
                          TgtPlayer = card.getController();
                      
-                      //AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(nlife,card);
                       TgtPlayer.loseLife(nlife, card);
                      
                       if (!DrawBack[0].equals("none"))
@@ -6947,17 +6945,13 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < list.size(); i++) {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
                     AllZone.HumanPlayer.addDamage(1, card);
-                    //AllZone.ComputerPlayer.subtractLife(1,card);
                     AllZone.ComputerPlayer.addDamage(1, card);
                 }//resolve()
             };//SpellAbility

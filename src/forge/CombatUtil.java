@@ -1882,10 +1882,8 @@ public class CombatUtil {
                 };
                 Card top = lib.get(0);
                 if(top.getType().contains("Creature")) {
-                    //AllZone.GameAction.gainLife(player, top.getBaseDefense());
-                	player.gainLife(top.getBaseDefense(), c);
-                    //AllZone.GameAction.getPlayerLife(player).subtractLife(top.getBaseAttack(),c);
-                	player.loseLife(top.getBaseAttack(), c);
+                    player.gainLife(top.getBaseDefense(), c);
+                    player.loseLife(top.getBaseAttack(), c);
                     hand.add(top);
                     lib.remove(top);
                 };
@@ -1928,8 +1926,7 @@ public class CombatUtil {
                 Ability ability = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        //AllZone.GameAction.getPlayerLife(opp).subtractLife(1,F_card);
-                    	opp.loseLife(1, F_card);
+                        opp.loseLife(1, F_card);
                     }
                 };
                 ability.setStackDescription("Pulse Tracker - Whenever Pulse Tracker attacks, each opponent loses 1 life.");

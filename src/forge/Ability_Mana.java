@@ -34,11 +34,6 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     
     private static final long serialVersionUID = 8292723782268822439L;
     
-    /*public Ability_Mana(Card sourceCard, String mana)
-    {
-    this(sourceCard, "0");
-    }*/
-    
     public void setReflectedMana(boolean b) {
     	this.reflectedMana = b;
     }
@@ -62,42 +57,10 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     
     public Ability_Mana(Card sourceCard, String orig) {
         super(isTapAbility(orig)? SpellAbility.Ability_Tap:SpellAbility.Ability, sourceCard);
-                
-        /*
-        if (orig.contains("$"))
-        {
-           String[] k = orig.split(":");
-           String mana = k[1];
-           int count = CardFactoryUtil.xCount(sourceCard, k[2]);
-           StringBuilder sb = new StringBuilder();
-           sb.append("tap: add ");
-           for (int i=0;i<count;i++)
-        	   sb.append(mana);
-           orig = sb.toString();
-        }
-        */
-
+        
         this.sourceCard = sourceCard;
         this.orig = (sourceCard.getName().length() == 0? orig:orig.replaceAll(sourceCard.getName(), "CARDNAME"));
         setDescription(orig);
-        
-        /*
-        if (sourceCard.getName().equals("Black Lotus"))
-        	System.out.println("BLACK LOTUS!");
-        */
-        
-        /*
-        String parts[] = orig.split(":");
-        System.out.println("0:" +parts[0]);
-        System.out.println("1:" +parts[1]);
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append(parts[0]);
-        sb.append(parts[1]);
-        sb.append(" to your mana pool for each ");
-        
-        setDescription(sb.toString());
-        */
         
         if (sourceCard.getName().equals("Forbidden Orchard"))
         {
@@ -158,39 +121,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         //cost = cost.replaceAll("T, ", "");
         setManaCost(cost.replaceAll("T", "").split(",")[0]);
         if(getManaCost().equals("")) setManaCost("0");
-        /**
-        //pain lands
-        ArrayList<String> pain = new ArrayList<String>();
-        pain.add("Battlefield Forge");
-        pain.add("Caves of Koilos");
-        pain.add("Llanowar Wastes");
-        pain.add("Shivan Reef");
-        pain.add("Yavimaya Coast");
-        pain.add("Adarkar Wastes");
-        pain.add("Brushland");
-        pain.add("Karplusan Forest");
-        pain.add("Underground River");
-        pain.add("Sulfurous Springs");
-        if(pain.contains(sourceCard.getName()) && !Mana.equals("1")) runcommands.add(new Command() {
-            private static final long serialVersionUID = -5904507275105961979L;
-            
-            public void execute() {
-                
-                AllZone.GameAction.getPlayerLife(getController()).subtractLife(1);
-            }
-        });
-        **/
-        //parseCosts();
-        /*for(String subcost : cost.split(","))
-        {
-        	subcost.trim();
-        	if (subcost.equals("") || subcost.equals("T") ||
-        			subcost.equals(getManaCost())) continue;
-        	if (subcost.startsWith("Sacrifice a")){
-        		String sactype= subcost.substring(12).trim();//will remove both "Sac a " and "Sac an" :P
-        		Input bpM_old = getBeforePayMana();
-        	}
-        }*/
+        
     }
     
     @Override

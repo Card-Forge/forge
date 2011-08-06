@@ -1475,53 +1475,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-/*    	
-        //*************** START *********** START **************************
-        else if(cardName.equals("Volcanic Fallout")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 8274309635261086286L;
-                
-                @Override
-                public void resolve() {
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
-                    all = all.getType("Creature");
-                    
-                    for(int i = 0; i < all.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, all.get(i))) all.get(i).addDamage(2, card);
-                    }
-                    
-                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
-                    compLife.subtractLife(2,card);
-                    
-                    PlayerLife humLife = AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer);
-                    humLife.subtractLife(2,card);
-                    
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
-                    
-                    human = human.getType("Creature");
-                    computer = computer.getType("Creature");
-                    
-                    human = CardListUtil.filterToughness(human, 2);
-                    computer = CardListUtil.filterToughness(computer, 2);
-                    
-                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
-                    
-                    //the computer will at least destroy 2 more human creatures
-                    return computer.size() < human.size() - 1 && compLife.getLife() > 3;
-                }//canPlayAI()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-*/        
+       
         
         //*************** START *********** START **************************
         else if (cardName.equals("Renewed Faith")) { 
