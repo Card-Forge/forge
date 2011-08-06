@@ -232,6 +232,26 @@ public class GameAction {
         discardRandom(player, list.size(), sa);
     }
     
+    public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
+        CardList hand = new CardList();
+        hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
+        CardList tHand = hand.getValidCards(uTypes);
+        
+        if(tHand.size() >= numDiscard) {
+            CardListUtil.sortCMC(tHand);
+            tHand.reverse();
+            for(int i = 0; i < numDiscard; i++)
+            	discard(tHand.get(i), sa);
+            return true;
+        }
+        return false;
+    }
+    
+    public void AI_discardNum(int numDiscard, SpellAbility sa) {
+        for(int i = 0; i < numDiscard; i++)
+            AI_discard(sa);
+    }
+    
     public void AI_discardNumUnless(int numDiscard, String uType, SpellAbility sa) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
