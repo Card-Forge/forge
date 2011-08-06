@@ -5,4 +5,5 @@ Text:no text
 PT:2/2
 K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Myr!NotSelf:Other Myr creatures you control get +1/+1.
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_galvanizer.jpg
 End

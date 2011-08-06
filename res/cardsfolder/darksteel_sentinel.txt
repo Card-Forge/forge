@@ -7,4 +7,5 @@ K:Vigilance
 K:Indestructible
 K:Flash
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_sentinel.jpg
 End
