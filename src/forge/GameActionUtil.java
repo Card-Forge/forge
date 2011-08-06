@@ -6130,13 +6130,20 @@ public class GameActionUtil {
 		if(AllZoneUtil.isCardInPlay("Ageless Entity", player)) {
 			CardList entities = AllZoneUtil.getPlayerCardsInPlay(player, "Ageless Entity");
 			for(Card entity:entities) {
-				card_Add_Counters(entity, Counters.P1P1, gain);
+				card_Add_Counters(entity, Counters.P1P1, gain, false);
+			}
+		}
+		
+		if(AllZoneUtil.isCardInPlay("Ajani's Pridemate", player)) {
+			CardList entities = AllZoneUtil.getPlayerCardsInPlay(player, "Ajani's Pridemate");
+			for(Card entity:entities) {
+				card_Add_Counters(entity, Counters.P1P1, 1, true);
 			}
 		}
 
 	}//executeLifeGainEffects
 	
-	private static void card_Add_Counters(final Card card, final Counters type, final int num) {
+	private static void card_Add_Counters(final Card card, final Counters type, final int num, final boolean may) {
 		//should be triggered
 		Ability addCounters = new Ability(card, "0") {
 			public void resolve() {
@@ -6144,7 +6151,10 @@ public class GameActionUtil {
 			}
 		};
 		addCounters.setStackDescription(card.getName()+" - Put "+num+" "+type.getName()+" counters on "+card+".");
-		AllZone.Stack.add(addCounters);
+		String mayString = "Put "+num+" "+type.getName()+" counters on "+card+"?";
+		if(!may || GameActionUtil.showYesNoDialog(card, mayString)) {
+			AllZone.Stack.add(addCounters);
+		}
 	}
 	
 	private static void target_Opponent_Lose_Life(final Player player, final int loss, final Card source) {

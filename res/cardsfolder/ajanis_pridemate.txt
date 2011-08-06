@@ -1,11 +1,9 @@
 Name:Ajani's Pridemate
 ManaCost:1 W
 Types:Creature Cat Soldier
-Text:(NOTE: This spell is rather buggy and should not be used at this time.)
+Text:Whenever you gain life, you may put a +1/+1 counter on CARDNAME. (For example, if an effect causes you to gain 3 life, you may put one +1/+1 counter on this creature.)
 PT:2/2
-K:WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
-SVar:RemAIDeck:True
-SVar:Rarity:None
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_pridemate.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/3.jpg
 End
