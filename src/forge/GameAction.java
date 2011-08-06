@@ -111,6 +111,8 @@ public class GameAction {
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
 
+        AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
+
         return c;
     }
     
