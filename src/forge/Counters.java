@@ -33,6 +33,7 @@ public enum Counters {
     FADE(),
     FUSE(),
     GLYPH(),
+    GROWTH(),
     HATCHLING(),
     HEALING(),
     HOOFPRINT(),
