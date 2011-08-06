@@ -5420,21 +5420,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
-	
-	@SuppressWarnings("unused")
-	// upkeep_CheckEmptyDeck_Lose
-	private static void upkeep_CheckEmptyDeck_Lose() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, player);
-
-		System.out.println("libraryZone.size: " + libraryZone.size() + " phase: " + AllZone.Phase.getPhase()
-				+ "Turn: " + AllZone.Phase.getTurn());
-		if(libraryZone.size() == 0 && AllZone.Phase.getPhase().equals(Constant.Phase.Untap)
-				&& AllZone.Phase.getTurn() > 1) {
-			player.setLife(0, null);
-			// TODO display this somehow!!!
-		}// if
-	}// upkeep_CheckEmptyDeck_Lose
 
 	private static void upkeep_AI_Aluren() {
 		CardList alurens = AllZoneUtil.getCardsInPlay("Aluren");

@@ -24,12 +24,17 @@ public class Gui_QuestOptions extends JFrame {
     private JPanel            jPanel1             = new JPanel();
     private JPanel            jPanel2             = new JPanel();
     private GridLayout        gridLayout1         = new GridLayout();
+    
     private JRadioButton      easyRadio           = new JRadioButton();
     private JRadioButton      hardRadio           = new JRadioButton();
     private JRadioButton      mediumRadio         = new JRadioButton();
     private JRadioButton      veryHardRadio       = new JRadioButton();
+    
     private JRadioButton 	  fantasyRadio 		  = new JRadioButton();
     private JRadioButton	  realisticRadio	  = new JRadioButton();
+    
+    private JCheckBox		  cbStandardStart	  = new JCheckBox();
+    
     private JButton           newQuestButton      = new JButton();
     private JTextArea         jTextArea1          = new JTextArea();
     private ButtonGroup       buttonGroup1        = new ButtonGroup();
@@ -126,6 +131,8 @@ public class Gui_QuestOptions extends JFrame {
         
         realisticRadio.setSelected(true);
         
+        cbStandardStart.setText("Standard Starting Pool");
+        
         newQuestButton.setBounds(new Rectangle(117, 292, 145, 38));
         newQuestButton.setFont(new java.awt.Font("Dialog", 0, 16));
         newQuestButton.setText("New Quest");
@@ -165,6 +172,7 @@ public class Gui_QuestOptions extends JFrame {
         jPanel2.add(hardRadio, null);
         jPanel2.add(new JLabel(""));  // for empty cell
         jPanel2.add(veryHardRadio, null);
+        jPanel2.add(cbStandardStart, null);
         
         jPanel1.add(newQuestButton, null);
         jPanel1.add(jTextArea1, null);
@@ -229,9 +237,9 @@ public class Gui_QuestOptions extends JFrame {
         	if (!choice.equals(0))
         		return;
         }
-        
+
         //give the user a few cards to build a deck
-        questData.newGame(difficulty, mode);
+        questData.newGame(difficulty, mode, cbStandardStart.isSelected());
         
         questData.saveData();
         

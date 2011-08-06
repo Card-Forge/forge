@@ -126,13 +126,15 @@ public class QuestData {
 
 
     //adds cards to card pool and sets difficulty
-    public void newGame(int difficulty, String m) {
+    public void newGame(int difficulty, String m, boolean standardStart) {
         setDifficulty(difficulty);
 
+        CardList allCards = AllZone.CardFactory.getCards();
+        
         ArrayList<String> list = new ArrayList<String>();
-        list.addAll(boosterPack.getCommon(preferences.getStartingCommons(difficulty)));
-        list.addAll(boosterPack.getUncommon(preferences.getStartingUncommons(difficulty)));
-        list.addAll(boosterPack.getRare(preferences.getStartingRares(difficulty)));
+        
+        list.addAll(boosterPack.getQuestStarterDeck(allCards, preferences.getStartingCommons(difficulty), 
+        		preferences.getStartingUncommons(difficulty), preferences.getStartingRares(difficulty), standardStart));
 
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
@@ -470,15 +472,15 @@ public class QuestData {
     //adds 11 cards, to the current card pool
     //(I chose 11 cards instead of 15 in order to make things more challenging)
     public void addCards() {
+    	CardList cards = AllZone.CardFactory.getCards();
         int nCommon = preferences.getNumCommon();
         int nUncommon = preferences.getNumUncommon();
         int nRare = preferences.getNumRare();
 
         ArrayList<String> newCards = new ArrayList<String>();
-        newCards.addAll(boosterPack.getCommon(nCommon));
-        newCards.addAll(boosterPack.getUncommon(nUncommon));
-        newCards.addAll(boosterPack.getRare(nRare));
-
+        newCards.addAll(boosterPack.generateCards(cards, nCommon, Constant.Rarity.Common, null));
+        newCards.addAll(boosterPack.generateCards(cards, nUncommon, Constant.Rarity.Uncommon, null));
+        newCards.addAll(boosterPack.generateCards(cards, nRare, Constant.Rarity.Rare, null));
 
         cardPool.addAll(newCards);
 
@@ -487,26 +489,18 @@ public class QuestData {
 
     }
 
-    public void addRandomRare(int n) {
+    public ArrayList<String> addRandomRare(int n) {
         ArrayList<String> newCards = new ArrayList<String>();
-        newCards.addAll(boosterPack.getRare(n));
+        newCards.addAll(boosterPack.generateCards(AllZone.CardFactory.getCards(), n, Constant.Rarity.Rare, null));
 
         cardPool.addAll(newCards);
         newCardList.addAll(newCards);
+        
+        return newCards;
     }
 
     public String addRandomRare() {
-
-        ArrayList<String> newCards = new ArrayList<String>();
-        newCards.addAll(boosterPack.getRare(1));
-
-        cardPool.addAll(newCards);
-        newCardList.addAll(newCards);
-
-        Card c = AllZone.CardFactory.getCard(newCards.get(0), AllZone.HumanPlayer);
-        c.setCurSetCode(c.getMostRecentSet());
-        return CardUtil.buildFilename(c);
-        //return GuiDisplayUtil.cleanString(newCards.get(0));
+    	return addRandomRare(1).get(0);
     }
 
     public void addCard(Card c) {

@@ -59,21 +59,13 @@ public class QuestUtil {
 	
 	public static void setupQuest(Quest_Assignment qa)
 	{
-		/*
-		 *  Gold = 0
-		 *  Colorless = 1
-		 *  Black = 2
-		 *  Blue = 3
-		 *  Green = 4
-		 *  Red = 5
-		 *  White = 6
-		 */
-		
 		QuestBoosterPack pack = new QuestBoosterPack();
 		qa.clearCompy();
 		
 		int id = qa.getId();
-		
+
+        CardList cards = AllZone.CardFactory.getCards();
+
 		if (id == 1) //White Dungeon
 		{
 			CardList humanList = new CardList();
@@ -88,8 +80,8 @@ public class QuestUtil {
 
 			for (int i=0;i<2;i++)
 				qa.addCompy("Savannah Lions");
-			
-			qa.setCardRewardList(pack.getRare(3, 6));
+
+            qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.White));
 		}
 		
 		else if (id == 2) //Blue Dungeon
@@ -97,12 +89,12 @@ public class QuestUtil {
 			for (int i=0;i<3;i++)
 				qa.addCompy("Merfolk of the Pearl Trident");
 			
-			qa.setCardRewardList(pack.getRare(3, 3));
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Blue));
 		}
 		
 		else if (id == 3) //Black Dungeon
 		{
-			qa.setCardRewardList(pack.getRare(3, 2));
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Black));
 		}
 		
 		else if (id == 4) //Red Dungeon
@@ -110,19 +102,19 @@ public class QuestUtil {
 			for (int i=0;i<3;i++)
 				qa.addCompy("Mons's Goblin Raiders");
 			
-			qa.setCardRewardList(pack.getRare(3, 5));
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Red));
 		}
 		
 		else if (id == 5) //Green Dungeon
 		{
-			qa.setCardRewardList(pack.getRare(3, 4));
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Green));
 		}
 		
 		else if (id == 6) //Colorless Dungeon
 		{
 			for (int i=0;i<2;i++)
 				qa.addCompy("Ornithopter");
-			qa.setCardRewardList(pack.getRare(3, 1));
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Colorless));
 		}
 		
 		else if (id == 7) //Gold Dungeon
@@ -136,7 +128,7 @@ public class QuestUtil {
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
-			qa.setCardRewardList(pack.getRare(3, 0));			
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, "Multicolor"));
 		}
 		
 		else if (id == 8)
@@ -165,7 +157,7 @@ public class QuestUtil {
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
-			qa.setCardRewardList(pack.getRare(3));			
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, null));			
 		}
 		
 		else if (id == 9)
@@ -183,7 +175,7 @@ public class QuestUtil {
 			for (int i=0;i<3;i++)
 				qa.addCompy("Wall of Wood");
 			
-			qa.setCardRewardList(pack.getRare(4, 4));			
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Green));			
 		}
 		
 		else if (id == 10)
@@ -225,7 +217,7 @@ public class QuestUtil {
 				qa.addCompy("Scathe Zombies");
 			qa.addCompy("Mass of Ghouls");
 			
-			qa.setCardRewardList(pack.getRare(4, 2));	
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Black));	
 		}
 		
 		else if (id == 11)  // The King's Contest
@@ -242,7 +234,7 @@ public class QuestUtil {
 			
 			qa.addCompy("Loyal Retainers");
 			
-			qa.setCardRewardList(pack.getRare(3));
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, null));
 		}
 		
 		else if (id == 12)  // Barroom Brawl
@@ -276,7 +268,7 @@ public class QuestUtil {
 			
 			qa.addCompy("Lowland Giant");
 			
-			qa.setCardRewardList(pack.getRare(4));
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, null));
 		}
 		
 		else if (id == 13)  // The Court Jester
@@ -293,7 +285,7 @@ public class QuestUtil {
 			
 			qa.addCompy("Teferi's Puzzle Box");
 			
-			qa.setCardRewardList(pack.getRare(4, 0));
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, "Multicolor"));
 		}
 		
 		else if (id == 14)  // Ancient Battlefield
@@ -319,7 +311,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 			
-			qa.setCardRewardList(pack.getRare(4));
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, null));
 		}
 		
 		else if (id == 15)  // Don't Play With Matches
@@ -345,7 +337,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 			
-			qa.setCardRewardList(pack.getRare(4, 5));
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Red));
 		}
 		
 		else if (id == 16)  // Mines of Kazum Durl
@@ -372,7 +364,7 @@ public class QuestUtil {
                 qa.addCompy(compySetupCards[i]);
             }
 			
-			qa.setCardRewardList(pack.getRare(4, 4));
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Green));
 		}
 		
 		else if (id == 17)  // House Party
@@ -398,7 +390,7 @@ public class QuestUtil {
 				qa.addCompy(compySetupCards[i]);
 			}
 			
-			qa.setCardRewardList(pack.getRare(4, 1));
+			qa.setCardRewardList(pack.generateCards(cards, 4, Constant.Rarity.Rare, Constant.Color.Colorless));
 		}
 		
 		else if (id == 18)  // Crows in the Field
@@ -424,7 +416,7 @@ public class QuestUtil {
 				qa.addCompy(compySetupCards[i]);
 			}
 			
-			qa.setCardRewardList(pack.getRare(5));
+			qa.setCardRewardList(pack.generateCards(cards, 5, Constant.Rarity.Rare, null));
 		}
 		
 		else if (id == 19)  // The Desert Caravan
@@ -450,7 +442,7 @@ public class QuestUtil {
 				qa.addCompy(compySetupCards[i]);
 			}
 			
-			qa.setCardRewardList(pack.getRare(5));
+			qa.setCardRewardList(pack.generateCards(cards, 5, Constant.Rarity.Rare, null));
 		}
 		
 		else if (id == 20)  // Blood Oath
@@ -476,7 +468,7 @@ public class QuestUtil {
 				qa.addCompy(compySetupCards[i]);
 			}
 			
-			qa.setCardRewardList(pack.getRare(5, 1));
+			qa.setCardRewardList(pack.generateCards(cards, 5, Constant.Rarity.Rare, Constant.Color.Colorless));
 		}
 		
 		else if (id == 21) // Private Domain
@@ -497,7 +489,7 @@ public class QuestUtil {
 			for (int i = 0; i < 5; i ++)
 				qa.addCompy(compySetupCards[i]);
 			
-			qa.setCardRewardList(pack.getRare(6));
+			qa.setCardRewardList(pack.generateCards(cards, 6, Constant.Rarity.Rare, null));
 		}
 
 		else if (id == 22) // Pied Piper
@@ -521,7 +513,7 @@ public class QuestUtil {
 			for (int i = 0; i < 2; i ++)
 				qa.addCompy(compySetupCards[i]);
 			
-			qa.setCardRewardList(pack.getRare(3));
+			qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, null));
 		}
 			
 	}

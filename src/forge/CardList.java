@@ -28,17 +28,31 @@ public class CardList implements Iterable<Card> {
         addAll(c);
     }
     
-//    cardColor is like "R" or "G",  returns a new CardList that is a subset of current CardList
-    public CardList getColor(String cardColor) {
-        CardList c = new CardList();
-        Card card;
-        for(int i = 0; i < size(); i++) {
-            card = getCard(i);
-            
-            if(-1 < card.getManaCost().indexOf(cardColor)) //hopefully this line works
-            c.add(getCard(i));
+// get any cards that exist in the passed in sets list
+    public CardList getSets(ArrayList<String> sets) {
+        CardList list = new CardList();
+        for(Card c : this){
+        	for(SetInfo set : c.getSets())
+        		if (sets.contains(set.toString())){
+        			list.add(c);
+        			break;
+        		}
         }
-        return c;
+
+        return list;
+    }//getSets()
+    
+    
+    public CardList getColor(String cardColor) {
+        CardList list = new CardList();
+        for(Card c : this){
+            if (cardColor.equals("Multicolor") && c.getColor().size() > 1)
+                list.add(c);
+            else if (c.isColor(cardColor) && c.getColor().size() == 1)
+                list.add(c);
+        }
+
+        return list;
     }//getColor()
     
     public void reverse() {
@@ -164,7 +178,19 @@ public class CardList implements Iterable<Card> {
     		}
     	});
     }
-    
+
+    public CardList getRarity(final String rarity) {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+			// TODO spin off Mythic from Rare when the time comes
+    			String r = c.getSVar("Rarity");
+                return r.equals(rarity) ||
+                        rarity.equals(Constant.Rarity.Rare) && r.equals(Constant.Rarity.Mythic);
+    		}
+    	});
+    }
+
+
   //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     public CardList getType(final String cardType) {
     	return this.filter(new CardListFilter() {
@@ -173,7 +199,7 @@ public class CardList implements Iterable<Card> {
     		}
     	});
     }
-    
+
   //cardType is like "Land" or "Goblin", returns a new CardList with cards that do not have this type
     public CardList getNotType(final String cardType) {
     	return this.filter(new CardListFilter() {
@@ -182,7 +208,7 @@ public class CardList implements Iterable<Card> {
     		}
     	});
     }
-    
+
     public CardList getTapState(String TappedOrUntapped)
     {
     	CardList cl = new CardList();

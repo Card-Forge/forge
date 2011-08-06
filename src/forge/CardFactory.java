@@ -84,6 +84,11 @@ public class CardFactory implements NewConstants {
     public CardList getAllCards() {
         return new CardList(allCards.toArray());
     }// getAllCards()
+
+    public CardList getCards() {
+        return allCards;
+    }// getAllCards()
+
     
     private void readCards(File file) {
         map.clear();
