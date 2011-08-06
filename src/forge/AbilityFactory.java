@@ -450,6 +450,11 @@ public class AbilityFactory {
         if (mapParams.containsKey("ActivatingZone"))
         	restrict.setActivateZone(mapParams.get("ActivatingZone"));
         
+        if (mapParams.containsKey("Flashback")){
+        	SA.setFlashBackAbility(true);
+        	restrict.setActivateZone("Graveyard");
+        }
+        
         if (mapParams.containsKey("SorcerySpeed"))
         	restrict.setSorcerySpeed(true);
         

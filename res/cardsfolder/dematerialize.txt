@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Sorcery
 Text:no text
 A:SP$Bounce | Cost$ 3 U | ValidTgts$ Permanent | Destination$ Hand | TgtPrompt$ Select target permanent. | SpellDescription$ Return target permanent to its owner's hand.
-K:Flashback:5 U U
+A:SP$Bounce | Cost$ 5 U U | ValidTgts$ Permanent | Destination$ Hand | TgtPrompt$ Select target permanent. | CostDesc$ Flashback 5 U U | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dematerialize.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/81.jpg

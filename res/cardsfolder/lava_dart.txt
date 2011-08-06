@@ -3,7 +3,7 @@ ManaCost:R
 Types:Instant
 Text:no text
 A:SP$DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-K:Flashback:Sac<1/Mountain>
+A:SP$DealDamage | Cost$ Sac<1/Mountain> | Tgt$ TgtCP | NumDmg$ 1 | Flashback$ True | CostDesc$ Flashback Sacrifice a Mountain | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_dart.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/94.jpg

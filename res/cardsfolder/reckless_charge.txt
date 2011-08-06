@@ -3,7 +3,7 @@ ManaCost:R
 Types:Sorcery
 Text:no text
 A:SP$Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ Haste | SpellDescription$ Target creature gets +3/+0 and gains haste until end of turn.
-K:Flashback:2 R
+A:SP$Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ Haste | Flashback$ True | CostDesc$ Flashback 2 R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_charge.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/215.jpg
