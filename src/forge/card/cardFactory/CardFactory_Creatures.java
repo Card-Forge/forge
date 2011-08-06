@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
-import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
@@ -157,6 +156,7 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Kiki-Jiki, Mirror Breaker")) {
             final CardFactory cfact = cf;
@@ -3061,50 +3061,6 @@ public class CardFactory_Creatures {
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" - For each creature token you control, put a token that's a copy of that creature onto the battlefield.");
             copyTokens1.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Mystic Snake")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if(AllZone.Stack.size() > 0) {
-                        SpellAbility sa = AllZone.Stack.peek();
-                        if(sa.isSpell() && CardFactoryUtil.isCounterable(sa.getSourceCard())) {
-                            sa = AllZone.Stack.pop();
-                            AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                        }
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -6564365394043612388L;
-                
-                public void execute() {
-                    if(AllZone.Stack.size() > 0) {
-                    	StringBuilder sb = new StringBuilder();
-                    	sb.append("Mystic Snake counters ").append(AllZone.Stack.peek().getSourceCard().getName());
-                    	ability.setStackDescription(sb.toString());
-                        
-                        AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                    }
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(new Spell_Permanent(card) {
-                private static final long serialVersionUID = 6440845807532409545L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            });            
         }//*************** END ************ END **************************
         
         
