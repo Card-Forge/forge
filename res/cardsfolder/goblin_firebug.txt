@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | SacValid$ Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_firebug.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/98.jpg
 End
