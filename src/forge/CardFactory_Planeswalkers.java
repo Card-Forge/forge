@@ -2899,6 +2899,207 @@ class CardFactory_Planeswalkers {
             
             return card2;
         }//*************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sarkhan the Mad")) {
+
+        	//Planeswalker book-keeping
+        	final int turn[] = new int[1];
+        	turn[0] = -1;
+            
+            final Card card2 = new Card() {
+                @Override
+                public void addDamage(int n, Card source) {
+                    subtractCounter(Counters.LOYALTY, n);
+                    AllZone.GameAction.checkStateEffects();
+                }
+            };
+            card2.setOwner(owner);
+            card2.setController(owner);
+            
+            card2.setName(card.getName());
+            card2.setType(card.getType());
+            card2.setManaCost(card.getManaCost());
+            card2.addSpellAbility(new Spell_Permanent(card2));
+            //Sarkhan starts with 7 loyalty counters
+            card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 7));
+            
+            //ability1
+            /*
+             * 0: Reveal the top card of your library and put it into your hand. Sarkhan
+             * the Mad deals damage to himself equal to that card's converted mana cost.
+             */
+            final SpellAbility ability1 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.addCounterFromNonEffect(Counters.LOYALTY, 0);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    final String player = card.getController();
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+                    Card topCard = lib.get(0);
+                    int convertedManaTopCard = CardUtil.getConvertedManaCost(topCard.getManaCost());
+                    CardList showTop = new CardList();
+                    showTop.add(topCard);
+                    AllZone.Display.getChoiceOptional("Revealed top card: ", showTop.toArray());
+                    
+                    //now, move it to player's hand
+                    lib.remove(topCard);
+                    hand.add(topCard);                    
+                    
+                    //now, do X damage to Sarkhan
+                    card2.addDamage(convertedManaTopCard, card);
+                    
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                	//the computer isn't really smart enough to play this effectively, and it doesn't really
+                	//help unless there are no cards in his hand
+                	return false;
+                }
+                
+                @Override
+                public boolean canPlay() {
+                	//looks like standard Planeswalker stuff...
+                	//maybe should check if library is empty, or 1 card?
+                	final String player = card.getController();
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    
+                    return AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0 && lib.size() != 0;
+                }//canPlay()
+            };
+            ability1.setDescription("0: Reveal the top card of your library and put it into your hand. Sarkhan the Mad deals damage to himself equal to that card's converted mana cost.");
+            ability1.setStackDescription(cardName + " - Reveal top card and do damage.");
+            
+            //ability2
+            /*
+             * -2: Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon
+             * creature token with flying onto the battlefield.
+             */
+            final SpellAbility ability2 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.subtractCounter(Counters.LOYALTY, 2);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    Card target = getTargetCard();
+                    AllZone.GameAction.sacrifice(target);
+                    //in makeToken, use target for source, so it goes into the correct Zone
+                    CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", target, "", new String[] {"Creature", "Dragon"}, 5, 5, new String[] {"Flying"});
+                    
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList creatures = new CardList(play.getCards());
+                    creatures = creatures.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.isCreature();
+                    	}
+                    });
+                	return creatures.size() >= 1;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList cards = new CardList(play.getCards());
+                    //avoid targeting the dragon tokens we just put in play...
+                    cards = cards.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return !(c.isToken() && c.getType().contains("Dragon"));
+                    	}
+                    });
+                	setTargetCard(CardFactoryUtil.AI_getCheapestCreature(cards, card2, true));
+                	//DEBUG
+                	/*
+                	System.out.println("Sarkhan the Mad caused sacrifice of: "+
+                			CardFactoryUtil.AI_getCheapestCreature(cards, card2, true).getName()); */
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && card2.getCounters(Counters.LOYALTY) >= 2
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+            };
+            ability2.setDescription("-2: Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.");
+            ability2.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability2));
+            
+            //ability3
+            /*
+             * -4: Each Dragon creature you control deals damage equal to its
+             * power to target player.
+             */
+            final SpellAbility ability3 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.subtractCounter(Counters.LOYALTY, 4);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    final String target = getTargetPlayer();
+                    final String player = card2.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    CardList dragons = new CardList(play.getCards());
+                    dragons = dragons.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.getType().contains("Dragon");
+                    	}
+                    });
+                    for(int i = 0; i < dragons.size(); i++) {
+                    	Card dragon = dragons.get(i);
+                    	int damage = dragon.getNetAttack();
+                    	AllZone.GameAction.addDamage(target, damage, dragon);
+                    }
+                    
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    setTargetPlayer(Constant.Player.Human);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList dragons = new CardList(play.getCards());
+                    dragons = dragons.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.getType().contains("Dragon");
+                    	}
+                    });
+                    return card2.getCounters(Counters.LOYALTY) >= 4 && dragons.size() >= 1;
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && card2.getCounters(Counters.LOYALTY) >= 4
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+            };
+            ability3.setDescription("-4: Each Dragon creature you control deals damage equal to its power to target player.");
+            ability3.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability3));
+            
+            card2.addSpellAbility(ability1);
+            card2.addSpellAbility(ability2);
+            card2.addSpellAbility(ability3);
+            
+            return card2;
+        }//*************** END ************ END **************************
         
         return card;
     }

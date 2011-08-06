@@ -45,6 +45,16 @@ public class CardFactoryUtil {
         
     }
     
+  //for Sarkhan the Mad
+    public static Card AI_getCheapestCreature(CardList list, final Card spell, boolean targeted) {
+    	list = list.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return c.isCreature();
+    		}
+    	});
+    	return AI_getCheapestPermanent(list, spell, targeted);
+    }
+    
     public static Card AI_getCheapestPermanent(CardList list, final Card spell, boolean targeted) {
         CardList all = list;
         if(targeted) {
