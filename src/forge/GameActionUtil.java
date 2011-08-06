@@ -62,6 +62,7 @@ public class GameActionUtil {
 		upkeep_Wandering_Graybeard();
 		upkeep_Wolf_Skull_Shaman();
 		upkeep_Leaf_Crowned_Elder();
+		upkeep_Ink_Dissolver();
 		upkeep_Debtors_Knell();
 		upkeep_Reya();
 		upkeep_Emeria();
@@ -6800,6 +6801,70 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Leaf_Crowned_Elder()
+	
+    private static void upkeep_Ink_Dissolver() {
+        final String player = AllZone.Phase.getActivePlayer();
+        final String opponent = AllZone.GameAction.getOpponent(player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playerLibrary = AllZone.getZone(Constant.Zone.Library, player);
+
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Ink Dissolver");
+        
+        Ability ability;
+        for (int i = 0; i < list.size(); i++) {
+            if (playerLibrary.size() <= 0) return;
+            
+            String creatureType = playerLibrary.get(0).getType().toString();
+            String topCardName = playerLibrary.get(0).getName();
+
+            ability = new Ability(list.get(i), "0") {
+                @Override
+                public void resolve() {
+                    
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    String creatureType = library.get(0).getType().toString();
+
+                    if (creatureType.contains("Merfolk") 
+                            || creatureType.contains("Wizard")
+                            || library.get(0).getKeyword().contains("Changeling")) {
+                        
+                        if (player.equals(Constant.Player.Human)) {
+                            
+                            String title = "Ink Dissolver - Ability";
+                            Object message = "Opponent puts the top three cards of his or her library into his or her graveyard?";
+                            
+                            int choice = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+                            
+                            if (choice == JOptionPane.YES_OPTION) {
+                                AllZone.GameAction.mill(opponent,3);
+                            }
+                        } else {
+                            AllZone.GameAction.mill(opponent,3);
+                        }
+                    }
+                }//resolve()
+            };// Ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Ink Dissolver - ").append(player);
+            
+            if (creatureType.contains("Merfolk") 
+                    || creatureType.contains("Wizard") 
+                    || playerLibrary.get(0).getKeyword().contains("Changeling")) {
+                
+                sb.append(" reveals: ").append(topCardName);
+                sb.append(", and opponent puts the top three cards of his or her library into his or her graveyard.");
+                
+            } else {
+                
+                sb.append(" reveals top card: ").append(topCardName).append(".");
+                
+            }
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Ink_Dissolver()
 
 
 	private static void upkeep_Dark_Confidant() {
