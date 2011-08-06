@@ -5928,6 +5928,7 @@ res/cardsfolder/summon_the_school.txt -text svneol=native#text/plain
 res/cardsfolder/summoners_bane.txt -text svneol=native#text/plain
 res/cardsfolder/summoning_station.txt -text svneol=native#text/plain
 res/cardsfolder/sun_ce_young_conquerer.txt -text svneol=native#text/plain
+res/cardsfolder/sun_clasp.txt svneol=native#text/plain
 res/cardsfolder/sun_quan_lord_of_wu.txt -text svneol=native#text/plain
 res/cardsfolder/sun_titan.txt -text svneol=native#text/plain
 res/cardsfolder/sunastian_falconer.txt -text svneol=native#text/plain
