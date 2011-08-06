@@ -35,9 +35,6 @@ public class ComputerUtil
 		        Target tgt = all[i].getTarget();
 		        
 		        if (cost == null){
-			        if(all[i] instanceof Ability_Tap)
-			        	all[i].getSourceCard().tap();
-			
 			        payManaCost(all[i]);
 			        all[i].chooseTargetAI();
 			        all[i].getBeforePayManaAI().execute();
@@ -106,9 +103,6 @@ public class ComputerUtil
       }
 
       sa.setActivatingPlayer(AllZone.ComputerPlayer);
-      
-      if(sa instanceof Ability_Tap)
-        sa.getSourceCard().tap();
       
       payManaCost(sa);
       // todo(sol): if sa has targets, if all of them are invalid, counter the spell

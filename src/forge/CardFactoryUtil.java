@@ -682,9 +682,7 @@ public class CardFactoryUtil {
             void done() {
                 paid.execute();
                 
-                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) 
-                	stopSetNext(new Input_NoCost_TapAbility((Ability_Tap) spell));
-                else if(spell.getManaCost().equals("0") || this.isFree()) {
+                if(spell.getManaCost().equals("0") || this.isFree()) {
                 	if (spell.getAfterPayMana() == null){
 	                    this.setFree(false);
 	                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
@@ -724,9 +722,7 @@ public class CardFactoryUtil {
            
             void done() {
             	choices.clear();
-                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
-                        (Ability_Tap) spell));
-                else if(spell.getManaCost().equals("0") || this.isFree()) {
+                if(spell.getManaCost().equals("0") || this.isFree()) {
                 	if(spell.getTargetCard() != null) AllZone.Stack.add(spell);               	
                 	stop();
                 }
@@ -762,9 +758,7 @@ public class CardFactoryUtil {
             void done() {
                 paid.execute();
                 
-                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
-                        (Ability_Tap) spell));
-                else if(spell.getManaCost().equals("0") || this.isFree()) {
+                if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
                     AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     stop();
@@ -799,9 +793,7 @@ public class CardFactoryUtil {
             
             void done() {
                 
-                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
-                        (Ability_Tap) spell));
-                else if(spell.getManaCost().equals("0") || this.isFree()) {
+                if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
                     AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     stop();
@@ -2364,9 +2356,7 @@ public class CardFactoryUtil {
                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if(choices.contains(card)) {
                     spell.setTargetCard(card);
-                    if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
-                            (Ability_Tap) spell));
-                    else if(spell.getManaCost().equals("0") || free) {
+                    if(spell.getManaCost().equals("0") || free) {
                         this.setFree(false);
                         AllZone.Stack.add(spell);
                         stop();
@@ -2402,9 +2392,7 @@ public class CardFactoryUtil {
                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if(choices.contains(card)) {
                     spell.setTargetCard(card);
-                    if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
-                            (Ability_Tap) spell));
-                    else if(spell.getManaCost().equals("0") || free) {
+                    if(spell.getManaCost().equals("0") || free) {
                         this.setFree(false);
                         AllZone.Stack.add(spell);
                         stop();
@@ -2649,9 +2637,7 @@ public class CardFactoryUtil {
             }
             
             void done() {
-                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) 
-                	stopSetNext(new Input_NoCost_TapAbility((Ability_Tap) spell));
-                else if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
+                if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
                 {
                 	if (spell.getAfterPayMana() == null){
 	                    this.setFree(false);
@@ -2669,66 +2655,6 @@ public class CardFactoryUtil {
         return target;
     }//input_targetCreature()
     
-    public static Input input_targetCreature_NoCost_TapAbility(final Ability_Tap spell) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 6027194502614341779L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target creature");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(card.isCreature() && zone.is(Constant.Zone.Battlefield) && canTarget(spell, card)) {
-                    spell.setTargetCard(card);
-                    spell.getSourceCard().tap();
-                    AllZone.Stack.add(spell);
-                    stop();
-                }
-            }
-        };
-        return target;
-    }//input_targetCreature()
-    
-    /*
-     * copied from input_targetCreature_NoCost_TapAbility
-     * Note: that function should probably call this one to reuse code
-     */
-    public static Input input_targetCreatureKeyword_NoCost_TapAbility(final String keyword, final Ability_Tap spell) {
-        Input target = new Input() {
-			private static final long serialVersionUID = 5458576880476178627L;
-
-			@Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target creature with "+keyword);
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(card.isCreature() && zone.is(Constant.Zone.Battlefield) && canTarget(spell, card)
-                		&& card.getKeyword().contains(keyword)) {
-                    spell.setTargetCard(card);
-                    spell.getSourceCard().tap();
-                    AllZone.Stack.add(spell);
-                    stop();
-                }
-            }
-        };
-        return target;
-    }//input_targetCreature()
     
     public static Input MasteroftheWildHunt_input_targetCreature(final SpellAbility spell, final CardList choices, final Command paid) {
         Input target = new Input() {
@@ -2828,39 +2754,6 @@ public class CardFactoryUtil {
         return target;
     }//input_Lorthos_input_targetPermanent()
     
-    public static Input input_targetCreature_NoCost_TapAbility_NoTargetSelf(final Ability_Tap spell) {
-        Input target = new Input() {
-            private static final long serialVersionUID = -6310420275914649718L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target creature other than " + spell.getSourceCard().getName());
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(card == spell.getSourceCard()) {
-                    AllZone.Display.showMessage("You must select a target creature other than "
-                            + spell.getSourceCard().getName());
-                } else if(card.isCreature() && zone.is(Constant.Zone.Battlefield)
-                        && !card.getKeyword().contains("Shroud")) {
-                    spell.setTargetCard(card);
-                    spell.getSourceCard().tap();
-                    AllZone.Stack.add(spell);
-                    stop();
-                }
-            }
-        };
-        return target;
-    }//input_targetCreature_NoCost_TapAbility_NoTargetSelf
-    
-
     public static Input input_targetPlayer(final SpellAbility spell) {
         Input target = new Input() {
             private static final long serialVersionUID = 8736682807625129068L;

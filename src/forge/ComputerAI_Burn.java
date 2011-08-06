@@ -22,10 +22,6 @@ public class ComputerAI_Burn implements Computer {
                             if(ComputerUtil.canPayCost(all[i]) && all[i].canPlay()) {
                                 if(all[i].isSpell()) AllZone.Computer_Hand.remove(all[i].getSourceCard());
                                 
-                                if(all[i] instanceof Ability_Tap) {
-                                    all[i].getSourceCard().tap();
-                                }
-                                
                                 ComputerUtil.payManaCost(all[i]);
                                 String name = all[i].getSourceCard().getName();
                                 if(name.equals("Shock") || name.equals("Lightning Bolt") || name.equals("Char")) all[i].setTargetPlayer(AllZone.HumanPlayer);

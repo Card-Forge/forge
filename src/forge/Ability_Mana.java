@@ -56,7 +56,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     }
     
     public Ability_Mana(Card sourceCard, String orig) {
-        super(isTapAbility(orig)? SpellAbility.Ability_Tap:SpellAbility.Ability, sourceCard);
+    	super(SpellAbility.Ability, sourceCard);
         
         this.sourceCard = sourceCard;
         this.orig = (sourceCard.getName().length() == 0? orig:orig.replaceAll(sourceCard.getName(), "CARDNAME"));

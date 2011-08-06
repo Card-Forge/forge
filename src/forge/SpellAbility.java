@@ -11,7 +11,6 @@ public abstract class SpellAbility {
     //choices for constructor isPermanent argument
     public static final int Spell              = 0;
     public static final int Ability            = 1;
-    public static final int Ability_Tap        = 2;
     
     private String          description        = "";
     private Player          targetPlayer       = null;
@@ -68,10 +67,6 @@ public abstract class SpellAbility {
     public SpellAbility(int spellOrAbility, Card i_sourceCard) {
         if(spellOrAbility == Spell) spell = true;
         else if(spellOrAbility == Ability) spell = false;
-        else if(spellOrAbility == Ability_Tap) {
-            spell = false;
-            tapAbility = true;
-        }
 
         else throw new RuntimeException("SpellAbility : constructor error, invalid spellOrAbility argument = "
                 + spellOrAbility);

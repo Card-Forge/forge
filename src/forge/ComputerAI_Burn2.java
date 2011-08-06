@@ -14,29 +14,7 @@ public class ComputerAI_Burn2 implements Computer {
                 synchronized(ComputerAI_Burn2.this) {
                     if(AllZone.Stack.size() == 0
                             && AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer)) {
-                    	//dead code
-                    	/* SpellAbilityList list = null; //Move3.getBestMove();
-                        
-                        if(list != null && list.size() != 0) {
-                            SpellAbility sa = list.get(0);
-                            sa.setActivatingPlayer(AllZone.ComputerPlayer);
-                            if(ComputerUtil.canPlay(sa) && sa.canPlay()) {
-                                if(sa.isSpell()) {
-                                    AllZone.Computer_Hand.remove(sa.getSourceCard());
-                                    sa.getSourceCard().comesIntoPlay();
-                                }
-                                
-                                if(sa instanceof Ability_Tap) sa.getSourceCard().tap();
-                                
-                                ComputerUtil.payManaCost(sa);
-                                AllZone.Stack.add(sa);
-                            } else throw new RuntimeException("ComputerAI_Burn2 error, cannot pay for spell "
-                                    + sa.getSourceCard() + " is spell? " + sa.isSpell() + "  sa.canPlayAI()-"
-                                    + sa.canPlayAI() + " sa.canPlay()-" + sa.canPlay()
-                                    + " CardUtil.getConvertedManaCost(sa)-" + CardUtil.getConvertedManaCost(sa)
-                                    + " ComputerUtil.getAvailableMana().size()-"
-                                    + ComputerUtil.getAvailableMana().size());
-                        }//list.size != 0*/
+                    	
                         if(AllZone.Stack.size() == 0
                                 && AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer)) {
                             

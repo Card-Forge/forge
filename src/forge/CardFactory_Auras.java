@@ -111,7 +111,6 @@ class CardFactory_Auras {
             card.addSpellAbility(spell);
             
             Ability_Cost abCost = new Ability_Cost("W W T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
-            //final SpellAbility produceCaribou = new Ability_Tap(spell.getTargetCard(), "W W") {
             final Ability_Activated produceCaribou = new Ability_Activated(spell.getTargetCard(), abCost, null) {
                 
                 private static final long serialVersionUID = 1358032097310954750L;
@@ -306,8 +305,7 @@ class CardFactory_Auras {
             
             Ability_Cost abCost = new Ability_Cost("G U T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
             final Ability_Activated produceDrakes = new Ability_Activated(spell.getTargetCard(), abCost, null) {
-            	//final SpellAbility produceDrakes = new Ability_Tap(spell.getTargetCard(), "G U") {
-                
+            	
                 private static final long serialVersionUID = -3849765771560556442L;
                 
                 @Override
@@ -426,8 +424,7 @@ class CardFactory_Auras {
             
             Ability_Cost abCost = new Ability_Cost("T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
             final Ability_Activated produceSquirrels = new Ability_Activated(spell.getTargetCard(), abCost, null) {
-            	//final SpellAbility produceSquirrels = new Ability_Tap(spell.getTargetCard()) {
-                private static final long serialVersionUID = -4800170026789001271L;
+            	private static final long serialVersionUID = -4800170026789001271L;
                 
                 @Override
                 public void resolve() {
