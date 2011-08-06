@@ -538,7 +538,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 return;
             } else//load old draft
             {
-                Deck[] deck = deckManager.readBoosterDeck(human);
+                Deck[] deck = deckManager.getBoosterDeck(human);
                 int index = Integer.parseInt(computer);
                 
                 Constant.Runtime.HumanDeck[0] = deck[0];

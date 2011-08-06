@@ -343,7 +343,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         currentGameType = Constant.GameType.Draft;
 
         //move all cards from deck main and sideboard to CardList
-        Deck deck = deckManager.readBoosterDeck(currentDeckName)[0];
+        Deck deck = deckManager.getBoosterDeck(currentDeckName)[0];
         setDeckData("", false);
 
         CardList top = new CardList();
@@ -614,14 +614,14 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         //many Deck objects if it is a draft deck
         Deck deck = getDeck();
 
-        deck.setName(filename.getName());
+        deck.setName(filename.getName().substring(0,filename.getName().length()-4));
 
         //export Draft decks, this is a little hacky
         //a Draft deck holds 8 decks, [0] is the player's deck
         //and the other 7 are the computer's deck
         if (currentGameType.equals(Constant.GameType.Draft)) {
             //read all draft decks
-            Deck d[] = deckManager.readBoosterDeck(currentDeckName);
+            Deck d[] = deckManager.getBoosterDeck(currentDeckName);
 
             //replace your deck
             d[0] = deck;
@@ -885,7 +885,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         currentGameType = Constant.GameType.Draft;
         newDraftItem.setEnabled(true);
 
-        Deck deck = deckManager.readBoosterDeck(name)[0];
+        Deck deck = deckManager.getBoosterDeck(name)[0];
         showDraftDeck(deck);
     }//open draft
 
@@ -894,12 +894,10 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 
         CardList top = new CardList();
         for (int i = 0; i < deck.countSideboard(); i++) {
-            String cardName = deck.getMain(i);
-            String setCode = "";
+            String cardName = deck.getSideboard(i);
             if (cardName.contains("|")) {
                 String s[] = cardName.split("\\|", 2);
                 cardName = s[0];
-                setCode = s[1];
             }
 
             top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
@@ -908,11 +906,9 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         CardList bottom = new CardList();
         for (int i = 0; i < deck.countMain(); i++) {
             String cardName = deck.getMain(i);
-            String setCode = "";
             if (cardName.contains("|")) {
                 String s[] = cardName.split("\\|", 2);
                 cardName = s[0];
-                setCode = s[1];
             }
 
             bottom.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
@@ -932,7 +928,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         else if (currentGameType.equals(Constant.GameType.Draft)) {
             setDeckData(currentDeckName, true);
             //write booster deck
-            Deck[] all = deckManager.readBoosterDeck(currentDeckName);
+            Deck[] all = deckManager.getBoosterDeck(currentDeckName);
             all[0] = getDeck();
             deckManager.addBoosterDeck(all);
         }
@@ -956,7 +952,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         }
         else if (currentGameType.equals(Constant.GameType.Draft)) {
             //MUST copy array
-            Deck[] read = deckManager.readBoosterDeck(currentDeckName);
+            Deck[] read = deckManager.getBoosterDeck(currentDeckName);
             Deck[] all = new Deck[read.length];
 
             System.arraycopy(read, 0, all, 0, read.length);

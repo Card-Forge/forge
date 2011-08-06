@@ -86,10 +86,10 @@ public class DeckManager {
         deckMap.remove(deckName);
     }
 
-    public Deck[] readBoosterDeck(String deckName) {
+    public Deck[] getBoosterDeck(String deckName) {
         if (!boosterMap.containsKey(deckName)) {
             throw new RuntimeException(
-                    "DeckManager : readBoosterDeck() error, deck name not found - " + deckName);
+                    "DeckManager : getBoosterDeck() error, deck name not found - " + deckName);
         }
 
         return boosterMap.get(deckName);
