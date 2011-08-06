@@ -491,6 +491,8 @@ public class AbilityFactory_Fetch {
         	AllZone.getZone(Constant.Zone.Play, player).add(tgt); //move to battlefield
         	if (params.containsKey("Tapped"))
         		tgt.tap();
+        	if (params.containsKey("GainControl"))
+        		tgt.setController(sa.getActivatingPlayer());
     	}
             	
         if (af.hasSubAbility())
