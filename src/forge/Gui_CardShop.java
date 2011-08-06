@@ -219,7 +219,19 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
 	        for (int i = 0; i <shop.size();i++)
 	        {
 	        	Card crd = shop.get(i);
-	        	crd.setValue(map.get(crd.getName()));
+	        	if (map.containsKey(crd.getName())) 
+	        		crd.setValue(map.get(crd.getName()));
+	        	else
+	        	{
+	        		System.out.println("Card " + crd.getName() + " is not in the price list.");
+	        		crd.setValue(10);
+	        		if (crd.getRarity().equals("Common"))
+	            		crd.setValue(10);
+	            	else if (crd.getRarity().equals("Uncommon"))
+	            		crd.setValue(50);
+	            	else if (crd.getRarity().equals("Rare"))
+	            		crd.setValue(200);
+	        	}
 	        	shopListToBeSaved.add(crd.getName());
 	        }
 	        questData.setShopList(shopListToBeSaved);
