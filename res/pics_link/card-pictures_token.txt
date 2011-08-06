@@ -17,7 +17,7 @@
 [T]g_2_2_bear.jpg	http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/bear_token1.jpg
 [T]g_2_5_treefolk_shaman.jpg	http://www.magickartenmarkt.de/img/cards/Morningtide/treefolk_shaman_token.jpg
 [T]g_3_3_beast.jpg		http://www.magickartenmarkt.de/img/cards/Eventide/beast_token_green_33.jpg
-[T]c_20_20_marit_lage.jpg		http://www.magickartenmarkt.de/img/cards/Game_Day_Cards/marit_lage_token.jpg
+[T]b_20_20_marit_lage.jpg		http://www.magickartenmarkt.de/img/cards/Game_Day_Cards/marit_lage_token.jpg
 [T]r_1_1_goblin.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/goblin_token_red_11.jpg
 [T]r_3_1_elemental.jpg		http://www.magickartenmarkt.de/img/cards/Conflux/elemental_token_red_31.jpg
 [T]r_4_4_dragon.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/dragon_token_red_44.jpg
