@@ -55,7 +55,7 @@ private static Random random = new Random();
 	    		AllZone.Computer_Hand.remove(sa.getSourceCard());
 	  
 	  
-		  if (sa.getSourceCard().getKeyword().contains("Cantrip"))
+		  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
 		      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
 		  payManaCost(sa);
 		  
@@ -79,7 +79,7 @@ private static Random random = new Random();
       if(sa instanceof Ability_Tap)
         sa.getSourceCard().tap();
 
-      if (sa.getSourceCard().getKeyword().contains("Cantrip"))
+      if (sa.getSourceCard().getKeyword().contains("Draw a card."))
       	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
       
       payManaCost(sa);
