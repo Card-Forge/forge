@@ -119,41 +119,44 @@ public class AIPlayer extends Player{
 	public void handToLibrary(final int numToLibrary, final String libPosIn) {
 		String libPos = libPosIn;
 		for(int i = 0; i < numToLibrary; i++) {
-            if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
-            else {
-                Random r = new Random();
-                if(r.nextBoolean()) libPos = "top";
-                else libPos = "bottom";
-            }
-            CardList hand = new CardList();
-            hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-            
-            CardList blIP = new CardList();
-            blIP.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
-            blIP = blIP.getType("Basic");
-            if(blIP.size() > 5) {
-                CardList blIH = hand.getType("Basic");
-                if(blIH.size() > 0) {
-                    Card card = blIH.get(CardUtil.getRandomIndex(blIH));
-                    AllZone.Computer_Hand.remove(card);
-                    if(libPos.equals("top")) AllZone.Computer_Library.add(card, 0);
-                    else AllZone.Computer_Library.add(card);
-                    return;
-                }
-                
-                CardListUtil.sortAttackLowFirst(hand);
-                CardListUtil.sortNonFlyingFirst(hand);
-                if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
-                else AllZone.Computer_Library.add(hand.get(0));
-                AllZone.Computer_Hand.remove(hand.get(0));
-                return;
-            } else {
-                CardListUtil.sortCMC(hand); 
-                if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
-                else AllZone.Computer_Library.add(hand.get(0));
-                AllZone.Computer_Hand.remove(hand.get(0));
-                return;
-            }
+			if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
+			else {
+				Random r = new Random();
+				if(r.nextBoolean()) libPos = "top";
+				else libPos = "bottom";
+			}
+			CardList hand = new CardList();
+			hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+
+			CardList blIP = new CardList();
+			blIP.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+			blIP = blIP.getType("Basic");
+			if(blIP.size() > 5) {
+				CardList blIH = hand.getType("Basic");
+				if(blIH.size() > 0) {
+					Card card = blIH.get(CardUtil.getRandomIndex(blIH));
+					AllZone.Computer_Hand.remove(card);
+					if(libPos.equals("top")) AllZone.Computer_Library.add(card, 0);
+					else AllZone.Computer_Library.add(card);
+					//return;
+				}
+				else {
+
+					CardListUtil.sortAttackLowFirst(hand);
+					CardListUtil.sortNonFlyingFirst(hand);
+					if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
+					else AllZone.Computer_Library.add(hand.get(0));
+					AllZone.Computer_Hand.remove(hand.get(0));
+					//return;
+				}
+			} 
+			else {
+				CardListUtil.sortCMC(hand); 
+				if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
+				else AllZone.Computer_Library.add(hand.get(0));
+				AllZone.Computer_Hand.remove(hand.get(0));
+				//return;
+			}
         }
 	}
 	

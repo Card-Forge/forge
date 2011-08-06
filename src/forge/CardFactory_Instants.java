@@ -1775,7 +1775,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    Player opponent = card.getController().getOpponent();
+                    //Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     //is spell?, did opponent play it?, is this a creature spell?
@@ -1837,7 +1837,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    Player opponent = card.getController().getOpponent();
+                    //Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     return sa.isSpell() //&& opponent.equals(sa.getSourceCard().getController())
@@ -2525,8 +2525,9 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    if (AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
-                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    //if (AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
+                    //else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                	getTargetPlayer().discard(this);
                 }//resolve()
             };//SpellAbility
             
