@@ -1,0 +1,12 @@
+Name:Primal Whisperer
+ManaCost:4 G
+Types:Creature Elf Soldier
+Text:no text
+PT:2/2
+K:stPumpSelf:Creature:X/X:no Condition:Primal Whisperer gets +2/+2 for each face-down creature on the battlefield.
+K:Morph:3 R
+SVar:X:Count$Valid Creature.faceDown+YouCtrl/Times.2
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_whisperer.jpg
+End
