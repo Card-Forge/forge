@@ -763,6 +763,80 @@ public class CombatUtil {
     	return toughness;
     }
     
+    //Predict the Power bonus of the blocker if blocking the attacker (Flanking, Bushido and other triggered abilities)
+    public static int predictPowerBonusOfAttacker(Card attacker, Card defender) {
+    	int power = 0;
+        	
+        power += attacker.getKeywordMagnitude("Bushido");
+        
+        ArrayList<Trigger> triggers = attacker.getTriggers();
+		for(Trigger trigger : triggers)
+		{
+			HashMap<String,String> trigParams = trigger.getMapParams();
+			if (trigParams.get("Mode").equals("AttackerBlocked")) {
+				boolean willTrigger = true;
+				if(trigParams.containsKey("ValidBlocker"))
+					if(!trigger.matchesValid(defender, trigParams.get("ValidBlocked").split(","), attacker))
+						willTrigger = false;
+				if(trigParams.containsKey("ValidCard"))
+					if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), attacker))
+						willTrigger = false;
+				if(willTrigger && trigParams.containsKey("Execute")) {
+					String ability = attacker.getSVar(trigParams.get("Execute"));
+					AbilityFactory AF = new AbilityFactory();
+	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, attacker);
+	        		if (abilityParams.containsKey("AB")) { 
+						if (abilityParams.get("AB").equals("Pump")) 
+							if (abilityParams.containsKey("NumAtt")){
+								String att = abilityParams.get("NumAtt");
+								if (att.startsWith("+"))
+									att = att.substring(1);
+								power += Integer.parseInt(att);
+							}
+	        		}
+				}
+			}
+		}
+    	return power;
+    }
+    
+    //Predict the Toughness bonus of the blocker if blocking the attacker (Flanking, Bushido and other triggered abilities)
+    public static int predictToughnessBonusOfAttacker(Card attacker, Card defender) {
+    	int toughness = 0;
+        	
+        toughness += attacker.getKeywordMagnitude("Bushido");
+        
+        ArrayList<Trigger> triggers = attacker.getTriggers();
+		for(Trigger trigger : triggers)
+		{
+			HashMap<String,String> trigParams = trigger.getMapParams();
+			if (trigParams.get("Mode").equals("AttackerBlocked")) {
+				boolean willTrigger = true;
+				if(trigParams.containsKey("ValidBlocker"))
+					if(!trigger.matchesValid(defender, trigParams.get("ValidBlocked").split(","), attacker))
+						willTrigger = false;
+				if(trigParams.containsKey("ValidCard"))
+					if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), attacker))
+						willTrigger = false;
+				if(willTrigger && trigParams.containsKey("Execute")) {
+					String ability = attacker.getSVar(trigParams.get("Execute"));
+					AbilityFactory AF = new AbilityFactory();
+	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, attacker);
+	        		if (abilityParams.containsKey("AB")) {
+						if (abilityParams.get("AB").equals("Pump")) 
+							if (abilityParams.containsKey("NumDef")) {
+								String def = abilityParams.get("NumDef");
+								if (def.startsWith("+"))
+									def = def.substring(1);
+								toughness += Integer.parseInt(def);
+							}
+	        		}
+				}
+			}
+		}
+    	return toughness;
+    }
+    
     //can the blocker destroy the attacker?
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
@@ -795,16 +869,18 @@ public class CombatUtil {
         attBushidoMagnitude += attacker.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
-        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) 
+        int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
+        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
         	defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
-        int attackerDamage = attacker.getNetCombatDamage() + attBushidoMagnitude;
+        	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender);
+        }
         
         // consider Damage Prevention/Replacement
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
         attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
-        int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
+        int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender);
         
         if(defender.getKeyword().contains("Double Strike") ) {
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
@@ -884,16 +960,18 @@ public class CombatUtil {
         		"Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
-        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower"))
+        int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
+        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
         	defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
-        int attackerDamage = attacker.getNetCombatDamage() + attBushidoMagnitude;
+        	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender);
+        }
         
         // consider Damage Prevention/Replacement
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
         attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
-        int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
+        int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender);
         
         if(attacker.getKeyword().contains("Double Strike") ) {
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
