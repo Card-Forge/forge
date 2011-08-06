@@ -13,7 +13,6 @@ res/AllTokens.txt -text svneol=native#text/plain
 res/PerSetTracking.py -text svneol=native#text/x-python
 res/booster-decks -text svneol=unset#unset
 res/card-pictures-token.txt -text svneol=native#text/plain
-res/card-pictures.txt -text svneol=native#text/plain
 res/cardsfolder/abandoned_outpost.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_gargoyles.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_matron.txt svneol=native#text/plain
@@ -6054,7 +6053,6 @@ res/cardsfolder/zur_the_enchanter.txt -text svneol=native#text/plain
 res/cardsfolder/zuran_enchanter.txt -text svneol=native#text/plain
 res/cardsfolder/zuran_orb.txt -text svneol=native#text/plain
 res/cardsfolder/zuran_spellcaster.txt -text svneol=native#text/plain
-res/common.txt -text svneol=native#text/plain
 res/draft/common.txt -text svneol=native#text/plain
 res/draft/draft.properties -text svneol=native#text/plain
 res/draft/rare.txt -text svneol=native#text/plain
@@ -6202,7 +6200,6 @@ res/pics_link/card-pictures_x.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_y.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_z.txt -text svneol=native#text/plain
 res/quest/all-prices.txt -text svneol=native#text/plain
-res/quest/common.txt -text svneol=native#text/plain
 res/quest/decks/Abraham[!!-~]Lincoln[!!-~]3.dck -text
 res/quest/decks/Albert[!!-~]Einstein[!!-~]2.dck -text
 res/quest/decks/Albert[!!-~]Einstein[!!-~]3.dck -text
@@ -6411,7 +6408,6 @@ res/quest/quest.preferences -text
 res/quest/quest.properties svneol=native#text/plain
 res/quest/questData -text svneol=unset#unset
 res/quest/quests.txt -text svneol=native#text/plain
-res/quest/rare.txt -text svneol=native#text/plain
 res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WG.thm -text
 res/quest/themes/Anti[!!-~]Red[!!-~]WR.thm -text
@@ -6465,11 +6461,8 @@ res/quest/themes/Vampires[!!-~]B.thm -text
 res/quest/themes/Vigilance[!!-~]Meekstone[!!-~]W.thm -text
 res/quest/themes/White.thm -text
 res/quest/themes/Wolves[!!-~]WG.thm -text
-res/quest/uncommon.txt -text svneol=native#text/plain
-res/rare.txt -text svneol=native#text/plain
 res/setInfoScript.py -text svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
-res/uncommon.txt -text svneol=native#text/plain
 src/Deck.java svneol=native#text/plain
 src/DeckConverter.java svneol=native#text/plain
 src/OldDeckIO.java svneol=native#text/plain
