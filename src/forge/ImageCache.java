@@ -5,6 +5,8 @@ package forge;
 import static java.lang.Double.*;
 import static java.lang.Math.*;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Map;
@@ -205,10 +207,10 @@ public class ImageCache implements NewConstants {
         int tgtWidth = Constant.Runtime.width[0];
         int tgtHeight = Constant.Runtime.height[0];
         
-//        AffineTransform at = new AffineTransform();
+        AffineTransform at = new AffineTransform();
 //        at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
-//        at.translate(srcHeight, 0);
-//        at.rotate(Math.PI / 2);
+        at.translate(tgtHeight, 0);
+        at.rotate(Math.PI / 2);
 //        
 //        double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
 //        
@@ -219,7 +221,11 @@ public class ImageCache implements NewConstants {
 //        g2d.dispose();
         ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight); //defaults to Lanczos3
         BufferedImage image = resampleOp.filter(original, null);
-        return image;
+        BufferedImage rotatedImage = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = (Graphics2D) rotatedImage.getGraphics();
+        g2d.drawImage(image, at, null);
+        g2d.dispose();
+        return rotatedImage;
     }
     
     /**
