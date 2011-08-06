@@ -33,6 +33,7 @@ Goblin Digging Team
 Goblin Firestarter
 Goblin Gaveleer
 Goblin Guide
+Goblin Masons
 Goblin Mountaineer
 Goblin Patrol
 Mogg Fanatic
@@ -99,6 +100,7 @@ Tuktuk the Explorer
 [Group MaxCnt=4 Percentage=4]
 Boartusk Liege
 Goblin Berserker
+Goblin Gardener
 Goblin Settler
 Murderous Redcap
 Tar Pitcher
@@ -106,6 +108,7 @@ Tar Pitcher
 
 [Group MaxCnt=1 Percentage=2]
 Battle Squadron
+Goblin Commando
 Kiki-Jiki, Mirror Breaker
 Scuzzback Marauders
 [/Group]
