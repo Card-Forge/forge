@@ -754,10 +754,10 @@ public class CardFactory_Creatures {
 		           }
 		       });
 		       
-			  ability.setDescription("3:Search your library for a Sliver card, reveal that card, and put it into your hand. Then shuffle your library.");
+			  ability.setDescription("3: Search your library for a Sliver card, reveal that card, and put it into your hand. Then shuffle your library.");
 			  ability.setStackDescription(card.getName() +" - search for a Sliver card and put it into your hand.");
 			  
-			  ability2.setDescription("3:Gain control of target Sliver.");
+			  ability2.setDescription("3: Gain control of target Sliver.");
 			  ability.setStackDescription(card.getName() +" - Gain control of target Sliver.");
 			  
 			  card.addSpellAbility(ability);
@@ -14993,6 +14993,7 @@ public class CardFactory_Creatures {
 			};// ability2
 			
 			ability2.setStackDescription(card.getName() + " - gets a +1/+1 counter.");
+			ability2.setDescription("1 W: Put a +1/+1 counter on Jenara, Asura of War.");
 			card.addSpellAbility(ability2);
 	    }//*************** END ************ END **************************
 	    

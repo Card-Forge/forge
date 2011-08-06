@@ -1,3 +1,22 @@
+Boggart Birth Rite
+B
+Tribal Sorcery Goblin
+no text
+spRaiseDead:1/Goblin
+
+Death's Duet
+2 B
+Sorcery
+no text
+spRaiseDead:2
+
+Urborg Uprising
+4 B
+Sorcery
+Draw a card.
+spRaiseDead:2/Some
+Cantrip
+
 Sarkhan Vol
 2 R G
 Planeswalker - Sarkhan

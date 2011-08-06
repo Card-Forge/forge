@@ -2141,7 +2141,7 @@ class CardFactory_Planeswalkers {
 		          }//showMessage()
 		       });
 		        */
-		       ability1.setDescription("+1: Target permanent doesn't untap during its controller's next untap step..");
+		       ability1.setDescription("+1: Target permanent doesn't untap during its controller's next untap step.");
 		       ability1.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability1));
 		       
 		       
