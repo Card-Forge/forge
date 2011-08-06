@@ -4810,9 +4810,7 @@ public class GameActionUtil {
 			if (kw.equals("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn."))
 			landfall_Generic_P2P2_UntilEOT(c);
 		}
-
-		if(c.getName().equals("Rampaging Baloths")) landfall_Rampaging_Baloths(c);
-		else if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
+		if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
 		else if(c.getName().equals("Ob Nixilis, the Fallen")) landfall_Ob_Nixilis(c);
 		else if(c.getName().equals("Ior Ruin Expedition")
 				|| c.getName().equals("Khalni Heart Expedition")) landfall_AddQuestCounter(c);
@@ -5031,28 +5029,6 @@ public class GameActionUtil {
 		AllZone.Stack.add(ability);
 	}
 
-	private static void landfall_Rampaging_Baloths(Card c) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", crd.getController(), "G", new String[] {"Creature", "Beast"}, 4,
-						4, new String[] {""});
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - Landfall: ").append(c.getController());
-		sb.append(" puts a 4/4 green Beast creature token onto the battlefield.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
-
-	}
 
 	private static void landfall_Emeria_Angel(Card c) {
 		final Card crd = c;
