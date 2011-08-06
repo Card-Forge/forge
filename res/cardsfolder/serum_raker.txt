@@ -1,0 +1,12 @@
+Name:Serum Raker
+ManaCost:2 U U
+Types:Creature Drake
+Text:no text
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | NumCards$ 1 | Defined$ Each | Mode$ TgtChoose
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_raker.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/31.jpg
+End
