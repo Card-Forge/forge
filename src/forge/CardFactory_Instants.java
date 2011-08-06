@@ -635,7 +635,9 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void chooseTargetAI() {
-                    setTargetCard(getAttacker());
+                	//this can happen if the AI is tapping a creature for mana
+                	if(null != getAttacker())
+                		setTargetCard(getAttacker());
                 }
                 
                 public Card getAttacker() {
