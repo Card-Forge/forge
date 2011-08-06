@@ -794,7 +794,7 @@ public class GameAction {
             int gameNumber = 0;
             if (Constant.Runtime.WinLose.getWin()==1)
             	gameNumber = 1;
-            Constant.Runtime.WinLose.setWinMethod(gameNumber,"Battle of Wits");
+            Constant.Runtime.WinLose.setWinMethod(gameNumber,"Milled");
             
             life.setLife(0);
             checkStateEffects();

@@ -246,7 +246,10 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             else
             {
             	quest.subtractCredits(15);
-            	JOptionPane.showMessageDialog(null, "You FAIL! You have lost 15 credits.");
+            	String fileName = "HeartIcon.png";
+            	ImageIcon icon = getIcon(fileName);
+            	
+            	JOptionPane.showMessageDialog(null, "You FAIL! You have lost 15 credits.", "Awwww", JOptionPane.INFORMATION_MESSAGE, icon);
             }
             
             if(quest.shouldAddAdditionalCards(winLose.didWinRecently())) {
