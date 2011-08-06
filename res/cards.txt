@@ -1,3 +1,17 @@
+Crowd Favorites
+6 W
+Creature Human Soldier
+no text
+4/4
+abPump 3 W:+0/+5
+
+Naya Battlemage
+2 G
+Creature Human Shaman
+no text
+2/2
+abPumpTgt R T:+2/+0
+
 Near-Death Experience
 2 W W W
 Enchantment

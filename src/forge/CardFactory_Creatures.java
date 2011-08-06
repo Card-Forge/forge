@@ -8736,7 +8736,8 @@ public class CardFactory_Creatures {
                 || cardName.equals("Master Decoy") || cardName.equals("Benalish Trapper")
                 || cardName.equals("Whipcorder") || cardName.equals("Blinding Mage")
                 || cardName.equals("Ostiary Thrull") || cardName.equals("Squall Drifter")
-                || cardName.equals("Stormscape Apprentice")) {
+                || cardName.equals("Stormscape Apprentice") || cardName.equals("Thornscape Apprentice")
+                || cardName.equals("Naya Battlemage")) {
             final SpellAbility ability = new Ability_Tap(card, "W") {
                 
                 private static final long serialVersionUID = 4424848120984319655L;
@@ -8749,8 +8750,37 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return false;
-                }
+                	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                	human = human.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isUntapped() && CardFactoryUtil.canTarget(card, c);
+                		}
+                	});
+                	
+                    if (human.size() > 0) {
+                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortFlying(human);
+                    	setTargetCard(human.get(0));
+                    }
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList assassins = new CardList();
+                    assassins.addAll(play.getCards());
+                    
+                    assassins = assassins.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                            return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
+                    	}
+                    });
+                    
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                	
+                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
+                    		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
+                    
+                }//canPlayAI
             };//SpellAbility
             card.addSpellAbility(ability);
             ability.setDescription("W, tap: Tap target creature.");
@@ -8772,8 +8802,37 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return false;
-                }
+                	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                	human = human.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isUntapped() && CardFactoryUtil.canTarget(card, c);
+                		}
+                	});
+                	
+                    if (human.size() > 0) {
+                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortFlying(human);
+                    	setTargetCard(human.get(0));
+                    }
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList assassins = new CardList();
+                    assassins.addAll(play.getCards());
+                    
+                    assassins = assassins.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                            return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
+                    	}
+                    });
+                    
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                	
+                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
+                    		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
+                    
+                }//canPlayAI
             };//SpellAbility
             card.addSpellAbility(ability);
             ability.setDescription("B, tap: Tap target creature.");
@@ -8795,11 +8854,91 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return false;
-                }
+                	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                	human = human.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isUntapped() && CardFactoryUtil.canTarget(card, c);
+                		}
+                	});
+                	
+                    if (human.size() > 0) {
+                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortFlying(human);
+                    	setTargetCard(human.get(0));
+                    }
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList assassins = new CardList();
+                    assassins.addAll(play.getCards());
+                    
+                    assassins = assassins.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                            return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
+                    	}
+                    });
+                    
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                	
+                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
+                    		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
+                    
+                }//canPlayAI
             };//SpellAbility
             card.addSpellAbility(ability);
             ability.setDescription("tap: Tap target creature.");
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Crowd Favorites")) {
+            final SpellAbility ability = new Ability_Tap(card, "3 W") {
+				private static final long serialVersionUID = -5819767122230717160L;
+
+				@Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    c.tap();
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                	human = human.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isUntapped() && CardFactoryUtil.canTarget(card, c);
+                		}
+                	});
+                	
+                    if (human.size() > 0) {
+                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortFlying(human);
+                    	setTargetCard(human.get(0));
+                    }
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList assassins = new CardList();
+                    assassins.addAll(play.getCards());
+                    
+                    assassins = assassins.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                            return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
+                    	}
+                    });
+                    
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                	
+                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
+                    		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
+                    
+                }//canPlayAI
+            };//SpellAbility
+            card.addSpellAbility(ability);
+            ability.setDescription("3 W, tap: Tap target creature.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
         }//*************** END ************ END **************************
@@ -13699,7 +13838,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
                 
-
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Thornscape Apprentice")) {
             final SpellAbility ability = new Ability_Tap(card, "W") {
@@ -13722,6 +13861,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
