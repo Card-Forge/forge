@@ -1,0 +1,8 @@
+Name:Tangle Wire
+ManaCost:3
+Types:Artifact
+Text:At the beginning of each player's upkeep, that player taps an untapped artifact, creature, or land he or she controls for each fade counter on CARDNAME.
+K:Fading:4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_wire.jpg
+End

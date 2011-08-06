@@ -590,7 +590,7 @@ public class CardFactoryUtil {
         return biggest;
     }
     
-  //returns null if list.size() == 0
+    //returns null if list.size() == 0
     public static Card AI_getWorstCreature(CardList list) {
         CardList all = list;
         all = all.getType("Creature");
@@ -604,6 +604,45 @@ public class CardFactoryUtil {
                 if(evaluateCreature(smallest) > evaluateCreature(all.get(i))) smallest = all.get(i);
         }
         return smallest;
+    }
+    
+    public static Card AI_getWorstPermanent(final CardList list, boolean biasEnch, boolean biasLand, boolean biasArt, boolean biasCreature) {
+        if(list.size() == 0) return null;
+    	
+    	if(biasEnch && list.getType("Enchantment").size() > 0) {
+        	return AI_getCheapestPermanent(list.getType("Enchantment"), null, false);
+        }
+        
+        if(biasArt && list.getType("Artifact").size() > 0) {
+        	return AI_getCheapestPermanent(list.getType("Artifact"), null, false);
+        }
+        
+        if(biasLand && list.getType("Land").size() > 0) {
+        	return getWorstLand(list.getType("Land"));
+        }
+        
+        if(biasCreature && list.getType("Creature").size() > 0) {
+        	return AI_getWorstCreature(list.getType("Creature"));
+        }
+        
+        if(list.getType("Land").size() > 6) {
+        	return getWorstLand(list.getType("Land"));
+        }
+        
+        if(list.getType("Artifact").size() > 0 || list.getType("Enchantment").size() > 0) {
+        	return AI_getCheapestPermanent(list.filter(new CardListFilter() {
+        		public boolean addCard(Card c) {
+        			return c.isArtifact() || c.isEnchantment();
+        		}
+        	}), null, false);
+        }
+        
+        if(list.getType("Creature").size() > 0) {
+        	return AI_getWorstCreature(list.getType("Creature"));
+        }
+        
+        //Planeswalkers fall through to here, lands will fall through if there aren't very many
+        return AI_getCheapestPermanent(list, null, false);
     }
     
     public static Input input_targetCreaturePlayer(final SpellAbility spell, boolean targeted, boolean free) {
@@ -4464,8 +4503,12 @@ public class CardFactoryUtil {
      * @return the worst land found based on the description above
      */
     public static Card getWorstLand(Player player) {
-    	Card worstLand = null;
     	CardList lands = AllZoneUtil.getPlayerLandsInPlay(player);
+    	return getWorstLand(lands);
+    }//end getWorstLand
+    
+    public static Card getWorstLand(CardList lands) {
+    	Card worstLand = null;
     	//first, check for tapped, basic lands
     	for( int i = 0; i < lands.size(); i++ ) {
     		Card tmp = lands.get(i);

@@ -4796,6 +4796,7 @@ res/cardsfolder/talruum_minotaur.txt -text svneol=native#text/plain
 res/cardsfolder/tangle_asp.txt -text svneol=native#text/plain
 res/cardsfolder/tangle_golem.txt -text svneol=native#text/plain
 res/cardsfolder/tangle_spider.txt -text svneol=native#text/plain
+res/cardsfolder/tangle_wire.txt -text svneol=native#text/plain
 res/cardsfolder/tanglebloom.txt -text svneol=native#text/plain
 res/cardsfolder/taoist_hermit.txt -text svneol=native#text/plain
 res/cardsfolder/taoist_mystic.txt -text svneol=native#text/plain

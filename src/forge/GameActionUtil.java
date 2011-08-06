@@ -48,6 +48,7 @@ public class GameActionUtil {
 		upkeep_Honden_of_Infinite_Rage();
 		upkeep_Vensers_Journal();
 		upkeep_Land_Tax();
+		upkeep_Tangle_Wire();
 		upkeep_Mana_Vault();
 		upkeep_Feedback();
 		upkeep_Farmstead();
@@ -10114,6 +10115,53 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//foreach(Card)
 	}//upkeep_Shapeshifter
+	
+	private static void upkeep_Tangle_Wire() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+		CardList wires = AllZoneUtil.getCardsInPlay("Tangle Wire");
+
+		for(final Card source:wires) {
+			SpellAbility ability = new Ability(source, "0") {
+				@Override
+				public void resolve() {
+					final int num = source.getCounters(Counters.FADE);
+					final CardList list = AllZoneUtil.getPlayerCardsInPlay(player).filter(new CardListFilter() {
+						public boolean addCard(Card c) {
+							return (c.isArtifact() || c.isLand() || c.isEnchantment()) && c.isUntapped();
+						}
+					});
+					for(int i = 0; i < num; i++) {
+						if(player.isComputer()) {
+							Card toTap = CardFactoryUtil.AI_getWorstPermanent(list, false, false, false, false);
+							if(null != toTap) {
+								toTap.tap();
+								list.remove(toTap);
+							}
+						}
+						else {
+							AllZone.InputControl.setInput(new Input() {
+								private static final long serialVersionUID = 5313424586016061612L;
+								public void showMessage() {
+									if(list.size() == 0) stop();
+						             AllZone.Display.showMessage(source.getName()+" - Select "+num+" untapped artifact(s), creature(s), or land(s) you control");
+						             ButtonUtil.disableAll();
+						          }
+								public void selectCard(Card card, PlayerZone zone) {
+						        	  if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && list.contains(card)) {
+						                card.tap();
+						                list.remove(card);
+						                stop();
+						             }
+						          }
+							});
+						}
+					}
+				}
+			};
+			ability.setStackDescription(source.getName()+" - "+player+" taps X artifacts, creatures or lands he or she controls.");
+			AllZone.Stack.add(ability);
+		}//foreach(wire)
+	}//upkeep_Tangle_Wire()
 
 	private static void upkeep_Pillory_of_the_Sleepless() {
 		final Player player = AllZone.Phase.getPlayerTurn();
