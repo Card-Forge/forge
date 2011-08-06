@@ -14585,8 +14585,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
-
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Might of Oaks"))
     {
@@ -14643,8 +14642,10 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
-  //*************** START *********** START **************************
+*/
+    
+/*
+    //*************** START *********** START **************************
     else if(cardName.equals("Guided Strike"))
     {
       final Card[] target = new Card[1];
@@ -14701,8 +14702,9 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+*/
     
-
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Aggressive Urge"))
     {
@@ -14760,7 +14762,7 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-    
+*/
     
 /*
     //*************** START *********** START **************************

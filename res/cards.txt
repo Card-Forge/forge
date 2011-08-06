@@ -9447,6 +9447,8 @@ Guided Strike
 1 W
 Instant
 Target creature gets +1/+0 and gains first strike until end of turn. Draw a card.
+spPumpTgt:+1/+0/First Strike
+Cantrip
 
 Mobilization
 2 W
@@ -15014,6 +15016,8 @@ Aggressive Urge
 1 G
 Instant
 Target creature gets +1/+1 until end of turn. Draw a card.
+spPumpTgt:+1/+1
+Cantrip
 
 Needle Storm
 2 G
@@ -15518,6 +15522,7 @@ Might of Oaks
 3 G
 Instant
 Target creature gets +7/+7 until end of turn.
+spPumpTgt:+7/+7
 
 Spined Wurm
 4 G
