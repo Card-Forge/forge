@@ -35,7 +35,7 @@ public class QuestGearStall extends QuestAbstractBazaarStall{
         if(questData.getGearLevel() == 1){
             itemList.add(new QuestAbstractBazaarItem("Zeppelin",
                     "This extremely comfortable airship allows for more efficient and safe travel<br>to faraway destinations. <br>"+
-                            "<u>Quest assignments become available more frequently, adds +3 to max life</u>.",
+                            "<u>Quest assignments become available more frequently<br>Adds +3 to max life during quest games</u>.",
                     5000,
                     GuiUtils.getIconFromFile("ZeppelinIcon.png")) {
                 @Override

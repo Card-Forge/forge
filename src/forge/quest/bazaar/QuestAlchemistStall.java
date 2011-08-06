@@ -21,7 +21,7 @@ public class QuestAlchemistStall extends QuestAbstractBazaarStall {
     protected List<QuestAbstractBazaarItem> populateItems() {
         if (questData.getLife()>30)
         {
-            return null;
+            return new ArrayList<QuestAbstractBazaarItem>();
         }
 
         List<QuestAbstractBazaarItem> itemList = new ArrayList<QuestAbstractBazaarItem>();

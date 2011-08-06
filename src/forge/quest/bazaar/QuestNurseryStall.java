@@ -16,7 +16,7 @@ public class QuestNurseryStall extends QuestAbstractBazaarStall{
     @Override
     protected List<QuestAbstractBazaarItem> populateItems() {
         if (questData.getPlantLevel()>=6){
-            return null;
+            return new ArrayList<QuestAbstractBazaarItem>();
         }
 
         List<QuestAbstractBazaarItem> itemList = new ArrayList<QuestAbstractBazaarItem>();
