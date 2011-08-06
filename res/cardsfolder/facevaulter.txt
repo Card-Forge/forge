@@ -1,0 +1,9 @@
+Name:Facevaulter
+ManaCost:B
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+A:AB$Pump|Cost$B Sac<1/Goblin>|NumAtt$+|NumDef$+2|SpellDescription$CARDNAME gets +2/+2 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/facevaulter.jpg
+End
