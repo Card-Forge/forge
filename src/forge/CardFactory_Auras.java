@@ -707,67 +707,6 @@ class CardFactory_Auras {
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cursed Land")) {
-            
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 5394181222737344498L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
-                    list = list.getType("Land");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    setTargetCard(list.get(0));
-                    return super.canPlayAI();
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                	AllZone.GameAction.moveToPlay(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) 
-                    		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
-                    
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = 1395122135234314967L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            Input runtime = new Input() {
-                
-                private static final long serialVersionUID = -6237279587146079880L;
-                
-                @Override
-                public void showMessage() {
-                    CardList land = AllZoneUtil.getLandsInPlay();
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true,
-                            false));
-                }
-            };
-            spell.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-
         
         // *****************************************************************
         // Enchant artifacts:   ********************************************

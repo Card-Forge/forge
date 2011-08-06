@@ -87,7 +87,6 @@ public class GameActionUtil {
 		upkeep_Vampire_Lacerator();
 		upkeep_Seizan_Perverter_of_Truth();
 		upkeep_Sleeper_Agent();
-		upkeep_Cursed_Land();
 		upkeep_Pillory_of_the_Sleepless();
 		upkeep_Creakwood_Liege();
 		upkeep_Mirror_Sigil_Sergeant();
@@ -7062,44 +7061,7 @@ public class GameActionUtil {
 
 			AllZone.Stack.add(ability);
 		}
-	}
-
-	private static void upkeep_Cursed_Land() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		//list = list.getName("Cursed Land");
-		list = list.filter(new CardListFilter() {
-
-			public boolean addCard(Card c) {
-				return c.isLand() && c.isEnchanted();
-			}
-		});
-
-		if(list.size() > 0) {
-			ArrayList<Card> enchants;
-			Ability ability;
-			for(int i = 0; i < list.size(); i++) {
-				enchants = list.get(i).getEnchantedBy();
-				final Card F_card = list.get(i);
-				for(Card enchant:enchants) {
-					if(enchant.getName().equals("Cursed Land")) {
-						//final Card c = enchant;
-						ability = new Ability(enchant, "0") {
-
-							@Override
-							public void resolve() {
-								player.addDamage(1, F_card);
-							}
-						};
-						ability.setStackDescription("Cursed Land deals one damage to enchanted land's controller.");
-						AllZone.Stack.add(ability);
-					}
-				}
-			}
-		}//list > 0
-	}//cursed land
+	}//upkeep_Sleeper_Agent
 	
 	private static void upkeep_Shapeshifter() {
 		final Player player = AllZone.Phase.getPlayerTurn();
