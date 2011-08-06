@@ -4,7 +4,7 @@ Types:Creature Thrull
 Text:no text
 PT:1/1
 K:Flying
-K:Lifelink
+K:Whenever CARDNAME deals damage, you gain that much life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning_thrull.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/146.jpg

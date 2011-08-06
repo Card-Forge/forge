@@ -2853,24 +2853,22 @@ public class Card extends MyObservable {
         System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
         
-        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
+        GameActionUtil.executeDamageDealingEffects(source, this, damageToAdd);
         
-        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
-        for(Card c:cl) {
-            GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
+        if(this.isPlaneswalker()) {
+        	this.subtractCounter(Counters.LOYALTY, damageToAdd);
+        	return;
         }
+        
+        GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
         
         if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && this.isCreature()) {
         	this.addCounterFromNonEffect(Counters.M1M1, damageToAdd);
         	damageToAdd = 0;
         }
         
-        if(this.isPlaneswalker()) {
-        	this.subtractCounter(Counters.LOYALTY, damageToAdd);
-        } else
-            if(AllZoneUtil.isCardInPlay(this)) damage += damageToAdd;
+        if(AllZoneUtil.isCardInPlay(this)) damage += damageToAdd;
         
-        GameActionUtil.executeCreatureDamageEffects(source, this, damageToAdd);
     }
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
     private String curSetCode = "";

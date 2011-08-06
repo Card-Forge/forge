@@ -5333,8 +5333,39 @@ public class GameActionUtil {
 		AllZone.Stack.add(ability2);
 	}
 	
-	//not restricted to combat damage
-	public static void executeCreatureDamageEffects(final Card source, final Card affected, int damage) {
+	//not restricted to combat damage, not restricted to dealing damage to creatures
+	public static void executeDamageDealingEffects(final Card source, final Card affected, int damage) {
+		
+		final Player player = affected.getController();
+		
+        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
+        
+        if(source.getKeyword().contains("Whenever CARDNAME deals damage, you gain that much life.")) {
+			final int life = damage;
+			
+	    	Ability ability = new Ability(source, "0") {
+	    		@Override
+	    		public void resolve() {
+	    			player.gainLife(life, affected);
+	    		}
+	    	};
+	    	StringBuilder sb = new StringBuilder();
+	        sb.append(source.getName()+" - ").append(player).append(" gains ").append(life).append(" life");
+	        ability.setStackDescription(sb.toString());
+        	int amount = affected.getAmountOfKeyword("Whenever CARDNAME deals damage, you gain that much life.");
+	        
+	        for(int i=0 ; i < amount ; i++)
+	        	AllZone.Stack.add(ability);
+        }
+        
+        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
+        for(Card c:cl) {
+            GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
+        }
+	}
+	
+	//not restricted to combat damage, restricted to dealing damage to creatures
+	public static void executeDamageToCreatureEffects(final Card source, final Card affected, int damage) {
 		
 		final Player player = affected.getController();
 		
