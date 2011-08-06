@@ -1,3 +1,165 @@
+Bloodrite Invoker
+2 B
+Creature Vampire Shaman
+no text
+3/1
+abLoseLifeTgt 8:3:Drawback$YouGainLife/3:Target player loses 3 life and you gain 3 life.
+
+Daggerback Basilisk
+2 G
+Creature Basilisk
+no text
+2/2
+Deathtouch
+
+Deathless Angel
+4 W W
+Creature Angel
+no text
+5/7
+Flying
+abPumpTgt W W:Indestructible
+
+Flame Slash
+R
+Sorcery
+no text
+spDamageTgtC:4:Flame Slash deals 4 damage to target creature.
+
+Gloomhunter
+2 B
+Creature Bat
+no text
+2/1
+Flying
+
+Guard Duty
+W
+Enchantment Aura
+Enchanted creature has defender.
+Enchant creature
+enPumpCurse:Defender
+
+Jwari Scuttler
+2 U
+Creature Crab
+no text
+2/3
+
+Lagac Lizard
+3 R
+Creature Lizard
+no text
+3/3
+
+Last Kiss
+2 B
+Instant
+no text
+spDamageTgtC:2:Drawback$YouGainLife/2:Last Kiss deals 2 damage to target creature and you gain 2 life.
+
+Makindi Griffin
+3 W
+Creature Griffin
+no text
+2/4
+Flying
+
+Might of the Masses
+G
+Instant
+no text
+spPumpTgt:+X/+X:Target creature gets +1/+1 until end of turn for each creature you control.
+SVar:X:Count$TypeYouCtrl.Creature
+
+Nema Siltlurker
+4 G
+Creature Lizard
+no text
+3/5
+
+Nighthaze
+B
+Sorcery
+no text
+spPumpTgt:Swampwalk
+Draw a card.
+
+Ogre Sentry
+1 R
+Creature Ogre Warrior
+no text
+3/3
+Defender
+
+Ogre's Cleaver
+2
+Artifact Equipment
+Equipped creature gets +5/+0.
+eqPump 5:+5/+0
+
+Prophetic Prism
+2
+Artifact
+no text
+When this card comes into play, draw a card.
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+
+Skeletal Wurm
+7 B
+Creature Skeleton Wurm
+no text
+7/6
+RegenerateMe:B
+
+Soulbound Guardians
+4 W
+Creature Kor Spirit
+no text
+4/5
+Defender
+Flying
+
+Sporecap Spider
+2 G
+Creature Spider
+no text
+1/5
+Reach
+
+Stomper Cub
+3 G G
+Creature Beast
+no text
+5/3
+Trample
+
+Wall of Omens
+1 W
+Creature Wall
+no text
+0/4
+Defender
+When this card comes into play, draw a card.
+
+Wildheart Invoker
+2 G G
+Creature Elf Shaman
+no text
+4/3
+abPumpTgt 8:+5/+5/Trample
+
+Zof Shade
+3 B
+Creature Shade
+no text
+2/2
+abPump 2 B:+2/+2
+
 Veteran's Reflexes
 W
 Instant
