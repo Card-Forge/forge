@@ -925,7 +925,7 @@ class CardFactory_Equipment {
                         Card crd = card.getEquipping().get(0);
                         crd.addSemiPermanentAttackBoost(-2);
                         crd.addSemiPermanentDefenseBoost(-2);
-                        crd.removeExtrinsicKeyword("Protection from red");
+                        crd.removeExtrinsicKeyword("Protection from green");
                         crd.removeExtrinsicKeyword("Protection from blue");
                     }
                     
