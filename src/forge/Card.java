@@ -2605,7 +2605,11 @@ public class Card extends MyObservable {
 	                        thisCard.addCounter(Counters.P1P1, 1);
 	                    }
 	                }; // ability2
-	                ability2.setStackDescription(thisCard.getName() + " - gets a +1/+1 counter");
+	                
+	                StringBuilder sb2 = new StringBuilder();
+	                sb2.append(thisCard.getName()).append(" - gets a +1/+1 counter");
+	                ability2.setStackDescription(sb2.toString());
+	                
 	                AllZone.Stack.add(ability2);
 	            }
 	            if(source.getKeyword().contains("Deathtouch") && isCreature()) {
@@ -2680,7 +2684,11 @@ public class Card extends MyObservable {
         			source.addCounter(Counters.P1P1, 1);
         		}
         	}; // ability2
-        	ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
+        	
+        	StringBuilder sb2 = new StringBuilder();
+        	sb2.append(source.getName()).append(" - gets a +1/+1 counter");
+        	ability2.setStackDescription(sb2.toString());
+        	
         	AllZone.Stack.add(ability2);
         }
         
