@@ -18634,6 +18634,25 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Chromatic Star")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.drawCard(card.getController());
+                }
+            };
+            Command destroy = new Command() {
+				private static final long serialVersionUID = 7982507967024313067L;
+
+				public void execute() {
+                    ability.setStackDescription(card.getName() + " - " + card.getController() + " draws a card");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addDestroyCommand(destroy);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

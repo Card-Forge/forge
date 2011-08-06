@@ -1,3 +1,13 @@
+Chromatic Star
+1
+Artifact
+When Chromatic Star is put into a graveyard from the battlefield, draw a card.
+1, tap, Sacrifice CARDNAME: Add W to your mana pool.
+1, tap, Sacrifice CARDNAME: Add U to your mana pool.
+1, tap, Sacrifice CARDNAME: Add B to your mana pool.
+1, tap, Sacrifice CARDNAME: Add R to your mana pool.
+1, tap, Sacrifice CARDNAME: Add G to your mana pool.
+
 Burning Inquiry
 R
 Sorcery
