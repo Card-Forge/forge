@@ -1,3 +1,8 @@
+Resuscitate
+1 G
+Instant
+Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
+
 Lightning Serpent
 X R
 Creature Elemental Serpent
@@ -10630,11 +10635,6 @@ Steadfastness
 1 W
 Sorcery
 Creatures you control get +0/+3 until end of turn.
-
-Resuscitate
-1 G
-Instant
-Until end of turn, creatures you control gain "1: Regenerate this creature."
 
 Nature's Cloak
 2 G
