@@ -2,8 +2,13 @@
 package forge;
 
 
-import static java.lang.Double.parseDouble;
-import static java.lang.Math.min;
+import arcane.ui.util.ImageUtil;
+import com.google.common.base.Function;
+import com.google.common.collect.ComputationException;
+import com.google.common.collect.MapMaker;
+import com.mortennobel.imagescaling.ResampleOp;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -13,15 +18,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import arcane.ui.util.ImageUtil;
-
-import com.google.common.base.Function;
-import com.google.common.collect.ComputationException;
-import com.google.common.collect.MapMaker;
-import com.mortennobel.imagescaling.ResampleOp;
-
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
+import static java.lang.Double.parseDouble;
+import static java.lang.Math.min;
 
 
 /**
@@ -321,5 +319,10 @@ public class ImageCache implements NewConstants {
                 (int) (original.getHeight() * scale)); //defaults to Lanczos3
         BufferedImage image = resampleOp.filter(original, null);
         return image;
+    }
+
+
+    public static void clear(){
+        imageCache.clear();
     }
 }

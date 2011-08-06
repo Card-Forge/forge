@@ -501,6 +501,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }//card shop button
 
     private void launchGame() {
+
+        //TODO: This is a temporary hack to see if the image cache affects the heap usage significantly.
+        ImageCache.clear();
+
         String humanDeckName = (String) deckComboBox.getSelectedItem();
         Deck humanDeck = questData.getDeck(humanDeckName);
         Constant.Runtime.HumanDeck[0] = humanDeck;
