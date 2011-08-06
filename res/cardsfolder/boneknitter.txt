@@ -3,7 +3,8 @@ ManaCost:1 B
 Types:Creature Zombie Cleric
 Text:no text
 PT:1/1
-A:AB$Regenerate | ValidTgts$ Creature.Zombie | TgtPrompt$ Select target Zombie. |Cost$ 1 B | SpellDescription$ Regenerate target Zombie.
+A:AB$Regenerate | ValidTgts$ Zombie | TgtPrompt$ Select target Zombie. |Cost$ 1 B | SpellDescription$ Regenerate target Zombie.
+K:Morph:2 B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boneknitter.jpg
 End

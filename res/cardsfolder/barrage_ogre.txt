@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Ogre Warrior
 Text:no text
 PT:3/3
-K:abDamageTgtCP T Sac<1/Artifact>:2
+A:AB$DealDamage | Cost$ T Sac<1/Artifact> | Tgt$ CP | NumDmg$2 | SpellDescription$ Barrage Ogre deals 2 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrage_ogre.jpg
