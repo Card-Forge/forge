@@ -2,7 +2,7 @@ Name:Inspirit
 ManaCost:2 W
 Types:Instant
 Text:no text
-K:spPumpTgt:+2/+4:Drawback$UntapTgt:Untap target creature. It gets +2/+4 until end of turn.:Insprit - Untap target creature. It gets +2/+4 until end of turn.
+A:SP$Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +4 | SubAbility$ UntapTgt | SpellDescription$ Untap target creature. It gets +2/+4 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84552.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/41.jpg

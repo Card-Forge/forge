@@ -2,7 +2,7 @@ Name:Burning Cloak
 ManaCost:R
 Types:Sorcery
 Text:no text
-K:spPumpTgt:+2/+0:Drawback$DamageTgtCard/2:Target creature gets +2/+0 until end of turn. Burning Cloak deals 2 damage to that creature.
+A:SP$Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SubAbility$ DamageTgtCard/2 | SpellDescription$ Target creature gets +2/+0 until end of turn. Burning Cloak deals 2 damage to that creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/burning_cloak.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/125.jpg
