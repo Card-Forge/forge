@@ -516,13 +516,13 @@ public class Card extends MyObservable {
     public void addColor(String s){
     	if (s.equals(""))
     		s = "0";
-    	cardColor.add(new Card_Color(new ManaCost(s), this, false));
+    	cardColor.add(new Card_Color(new ManaCost(s), this, false, true));
     }
     
     public long addColor(String s, Card c, boolean addToColors, boolean bIncrease){
     	if (bIncrease)
     		Card_Color.increaseTimestamp();
-    	cardColor.add(new Card_Color(new ManaCost(s), c, addToColors));
+    	cardColor.add(new Card_Color(new ManaCost(s), c, addToColors, false));
     	return Card_Color.getTimestamp();
     }
     

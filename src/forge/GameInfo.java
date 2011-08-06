@@ -143,7 +143,7 @@ public class GameInfo {
 	public long addColorChanges(String s, Card c, boolean addToColors, boolean bIncrease) {
     	if (bIncrease)
     		Card_Color.increaseTimestamp();
-    	globalColorChanges.add(new Card_Color(new ManaCost(s), c, addToColors));
+    	globalColorChanges.add(new Card_Color(new ManaCost(s), c, addToColors, false));
     	return Card_Color.getTimestamp();
 	}
 

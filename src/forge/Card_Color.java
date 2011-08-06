@@ -15,11 +15,14 @@ public class Card_Color {
 	private static long timeStamp = 0;
 	public static long getTimestamp() {	return timeStamp;	}
 	
-	Card_Color(ManaCost mc, Card c, boolean addToColors){
+	Card_Color(ManaCost mc, Card c, boolean addToColors, boolean baseColor){
 		additional = addToColors;
 		col = Color.ConvertManaCostToColor(mc);
 		effectingCard = c;
-		stamp = timeStamp;
+		if (baseColor)
+			stamp = 0;
+		else
+			stamp = timeStamp;
 	}
 
 	public Card_Color(Card c) {
