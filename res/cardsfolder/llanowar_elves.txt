@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Druid
 Text:no text
 PT:1/1
-A:AB$Mana|Cost$T|Produced$G|SpellDescription$Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83515.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/119.jpg
