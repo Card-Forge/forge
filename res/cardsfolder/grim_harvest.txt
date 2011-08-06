@@ -2,7 +2,7 @@ Name:Grim Harvest
 ManaCost:1 B
 Types:Instant
 Text:no text
-A:SP$Retrieve | Cost$ 1 B | Tgt$ TgtC | SpellDescription$ Return target creature card from your graveyard to your hand.
+A:SP$Retrieve | Cost$ 1 B | Destination$Hand| Tgt$ TgtC | SpellDescription$ Return target creature card from your graveyard to your hand.
 K:Recover:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_harvest.jpg
