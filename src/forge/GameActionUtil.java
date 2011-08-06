@@ -23,6 +23,7 @@ public class GameActionUtil {
 		
 		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
 		
+		upkeep_Lord_of_the_Pit();
 		upkeep_Drop_of_Honey();
 		upkeep_Genesis();
 		upkeep_Phyrexian_Arena();
@@ -3528,6 +3529,54 @@ public class GameActionUtil {
 			}
 		}
 	}//damageUpkeepCost
+	
+	private static void upkeep_Lord_of_the_Pit() {
+		/*
+		 * At the beginning of your upkeep, sacrifice a creature other than
+		 * Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
+		 */
+		final String player = AllZone.Phase.getActivePlayer();
+		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Lord of the Pit");
+		
+		for(int i = 0; i < cards.size(); i++) {
+			final Card c = cards.get(i);
+			
+			final Ability sacrificeCreature = new Ability(c, "") {
+				@Override
+				public void resolve() {
+					//TODO: this should handle the case where you sacrifice 2 LOTPs to each other
+					CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
+					creatures.remove(c);
+					if(player.equals(Constant.Player.Human)) {
+        				AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanent(creatures, c.getName()+" - Select a creature to sacrifice."));
+        			}
+					else { //computer
+						Card target = CardFactoryUtil.AI_getWorstCreature(creatures);
+						AllZone.GameAction.sacrifice(target);
+					}
+				}//resolve
+			};
+			
+			final Ability sevenDamage = new Ability(c, "") {
+				@Override
+				public void resolve() {
+					AllZone.GameAction.addDamage(player, c, 7);
+				}
+			};
+			
+			CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
+			creatures.remove(c);
+			if(creatures.size() == 0) {
+				//there are no creatures to sacrifice, so we must do the 7 damage
+				sevenDamage.setStackDescription(c.getName()+" - deals 7 damage to controller");
+				AllZone.Stack.add(sevenDamage);
+			}
+			else {
+				sacrificeCreature.setStackDescription(c.getName()+" - sacrifice a creature.");
+				AllZone.Stack.add(sacrificeCreature);
+			}
+		}//end for
+	}
 	
 	private static void upkeep_Drop_of_Honey() {
 		/*
