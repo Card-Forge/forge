@@ -5494,7 +5494,8 @@ public class CardFactory implements NewConstants {
         {
           CardList play = new CardList(AllZone.Human_Play.getCards());
           Card target = CardFactoryUtil.AI_getBestCreature(play, card);
-          setTargetCard(target);
+          if (target!=null)
+        	  setTargetCard(target);
         }
       };
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
@@ -9924,7 +9925,7 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-		  CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card, "G", new String[]{"Creature", "Beast"}, 1, 1, new String[] {""});
+		  CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card, "G", new String[]{"Creature", "Beast"}, 3, 3, new String[] {""});
 
           //return card to hand if necessary
           String opponent = AllZone.GameAction.getOpponent(card.getController());
@@ -16949,6 +16950,23 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		    	  card.addSpellAbility(spell);
 		      }//*************** END ************ END **************************
 		    
+		      //*************** START *********** START **************************
+		      else if (cardName.equals("Bestial Menace"))
+		      {
+		    	  SpellAbility spell = new Spell(card)
+		          {
+		    		private static final long serialVersionUID = 523613120207836692L;
+
+		    		public void resolve()
+		            {
+		    			CardFactoryUtil.makeToken("Snake", "G 1 1 Snake", card, "G", new String[]{"Creature", "Snake"}, 1, 1, new String[] {""});
+		    			CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[]{"Creature", "Wolf"}, 2, 2, new String[] {""});
+		    			CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[]{"Creature", "Elephant"}, 3, 3, new String[] {""});
+		            }//resolve()
+		          };
+		          card.clearSpellAbility();
+		          card.addSpellAbility(spell);
+  			  }//*************** END ************ END **************************
 	        
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

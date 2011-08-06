@@ -3697,6 +3697,8 @@ public class GameActionUtil
 			landfall_Hedron_Crab(c);
 		else if (c.getName().equals("Bloodghast"))
 			landfall_Bloodghast(c);
+		else if (c.getName().equals("Avenger of Zendikar"))
+			landfall_Avenger_of_Zendikar(c);
 	}
 	
 	private static boolean showLandfallDialog(Card c)
@@ -3916,6 +3918,38 @@ public class GameActionUtil
 	    }
 			
 	}//landfall_Bloodghast
+	
+	private static void landfall_Avenger_of_Zendikar(Card c)
+	{
+		final Card crd = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				CardList plants = new CardList(play.getCards());
+				plants = plants.filter(new CardListFilter(){
+					public boolean addCard(Card card)
+					{
+						return card.isCreature() && card.getType().contains("Plant");
+					}
+				});
+				
+				for (Card plant : plants)
+					plant.addCounter(Counters.P1P1, 1);
+			}
+		};
+		ability.setStackDescription(c + " - put a +1/+1 counter on each Plant creature you control.");
+		
+		if (c.getController().equals(Constant.Player.Human)) {
+			if (showLandfallDialog(c))
+				AllZone.Stack.add(ability);
+		}
+		else if (c.getController().equals(Constant.Player.Computer)) {
+    	  AllZone.Stack.add(ability);     
+		}
+		
+	}//landfall_Avenger
 
 	public static void executeLifeLinkEffects(Card c)
 	{
@@ -7452,6 +7486,7 @@ public class GameActionUtil
 			AllZone.GameAction.drawCard(player);
 			AllZone.GameAction.getPlayerLife(player).subtractLife(1);
 		}
+		AllZone.GameAction.checkStateEffects();
 	}// upkeep_Phyrexian_Arena
 	
 	private static void upkeep_Honden_of_Seeing_Winds()

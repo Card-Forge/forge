@@ -1501,28 +1501,10 @@ public class CombatUtil
 			  {
 				 public void resolve() 
 				 {
-					 Card card = new Card();
-
-			          card.setOwner(jedit.getController());
-			          card.setController(jedit.getController());
-			          
-					  card.setName("Cat Warrior");
-			          card.setImageName("G 2 2 Cat Warrior");
-			          card.setManaCost("G");
-			          card.setToken(true);
-			          card.addIntrinsicKeyword("Forestwalk");
-			          
-			          card.addType("Creature");
-			          card.addType("Cat");
-			          card.addType("Warrior");
-			          card.setBaseAttack(2);
-			          card.setBaseDefense(2);
-			          
-			          PlayerZone play = AllZone.getZone(Constant.Zone.Play, jedit.getController());
-			          play.add(card);
-			          
+					 CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", jedit, "G", new String[]{"Creature", "Cat", "Warrior"},
+							 				   2, 2, new String[] {"Forestwalk"});
 			          //(anger) :
-			          GameActionUtil.executeCardStateEffects(); 
+			          //GameActionUtil.executeCardStateEffects(); 
 			          
 				 }
 			 }; //Ability

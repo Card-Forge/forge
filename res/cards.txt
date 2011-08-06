@@ -1,3 +1,15 @@
+Avenger of Zendikar
+5 G G
+Creature Elemental
+When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control. Landfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
+5/5
+Landfall
+
+Bestial Menace
+3 G G
+Sorcery
+Put a 1/1 green Snake creature token, a 2/2 green Wolf creature token, and a 3/3 green Elephant creature token onto the battlefield.
+
 Doubling Season
 4 G
 Enchantment

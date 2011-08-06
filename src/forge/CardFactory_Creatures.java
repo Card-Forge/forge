@@ -715,6 +715,7 @@ public class CardFactory_Creatures {
 	          if(AllZone.GameAction.isCardInPlay(getTargetCard()) && getTargetCard().getController().equals(card.getController()) 
 	       		  && CardFactoryUtil.canTarget(card,getTargetCard()) )
 	          {
+	        	  
 	        	Card copy;
 	        	if (!getTargetCard().isToken())
 	        	{
@@ -724,7 +725,11 @@ public class CardFactory_Creatures {
 		            //copy creature and put it into play
 		            //copy = getCard(getTargetCard(), getTargetCard().getName(), card.getController());
 		            copy = cfact.getCard(getTargetCard().getName(), getTargetCard().getOwner());
-	        		copy.setToken(true);
+		            
+		            //when copying something stolen:
+		            copy.setController(getTargetCard().getController());
+	        		
+		            copy.setToken(true);
 		            
 		            if (getTargetCard().isFaceDown()) {
 		            	copy.setIsFaceDown(true);
@@ -741,6 +746,8 @@ public class CardFactory_Creatures {
 	        	else //isToken()
 	        	{
 	        		Card c = getTargetCard();
+	        		
+	        		
 	        		copy = new Card();
 	        		
 	        		copy.setName(c.getName());
@@ -8476,13 +8483,202 @@ public class CardFactory_Creatures {
 	              AllZone.Stack.push(ability);
 	            }
 
-
 	          }//execute()
 	        };//Command
 
 	        card.addDestroyCommand(leavesPlay);
 	      }//*************** END ************ END **************************
-	      
+	   
+	    
+	      //*************** START *********** START **************************
+	      else if(cardName.equals("Sower of Temptation"))
+	      {
+	    	  final Card movedCreature[] = new Card[1];
+	    	  
+	    	  final CommandReturn getCreature = new CommandReturn()
+		      {
+		        public Object execute()
+		        {
+		          //get all creatures
+		          CardList list = new CardList();
+		          list.addAll(AllZone.Human_Play.getCards());
+		          list.addAll(AllZone.Computer_Play.getCards());
+		          list = list.filter(new CardListFilter(){
+					public boolean addCard(Card c) {
+						return c.isCreature() && CardFactoryUtil.canTarget(card,c);
+					}
+		          });
+		          
+		          //remove "this card"
+		          list.remove(card);
+
+		          return list;
+		        }
+		      };//CommandReturn
+	    	  
+	    	  
+	    	  final SpellAbility comesAbility = new Ability(card,"0")
+		      {
+		          public void resolve()
+		          {
+		            //super.resolve();
+
+		            Card c = getTargetCard();
+		            movedCreature[0] = c;
+
+		            if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c) )
+		            {
+		            	//set summoning sickness
+		        		if(c.getKeyword().contains("Haste")){
+		        		  c.setSickness(false);
+		        		}
+		        		else{
+		        		  c.setSickness(true);
+		        		}
+		        		
+		              ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
+		              ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
+
+		              c.setSickness(true);
+		              c.setController(card.getController());
+
+		              PlayerZone from = AllZone.getZone(c);
+		              from.remove(c);
+
+		              PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+		              to.add(c);
+
+		              ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(true);
+		              ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(true);
+		            }
+		          }//resolve()
+		        };//SpellAbility
+		        
+		        final Input inputComes = new Input()
+			    {
+					private static final long serialVersionUID = -8449238833091942579L;
+
+					public void showMessage()
+			        {
+			          CardList choice = (CardList)getCreature.execute();
+
+			          stopSetNext(CardFactoryUtil.input_targetSpecific(comesAbility, choice, "Select target creature to gain control of: ", true, false));
+			          ButtonUtil.disableAll();//to disable the Cancel button
+			        }
+			    };
+			    
+			    final Command commandCIP = new Command()
+			    {
+					private static final long serialVersionUID = -5675532512302863456L;
+
+					public void execute()
+			        {
+			          CardList creature = (CardList)getCreature.execute();
+			          String s = card.getController();
+			          if(creature.size() == 0)
+			            return;
+			          else if(s.equals(Constant.Player.Human))
+			            AllZone.InputControl.setInput(inputComes);
+			          else //computer
+			          {
+			            Card target;
+			            //try to target human creature
+			            CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+			            target = CardFactoryUtil.AI_getBestCreature(human);//returns null if list is empty
+
+			            if(target == null)
+			            {
+			              //must target computer creature
+			              CardList computer = new CardList(AllZone.Computer_Play.getCards());
+			              computer = computer.getType("Creature");
+			              computer.remove(card);
+
+			              computer.shuffle();
+			              if (computer.size()!= 0)
+			            	  target = computer.get(0);
+			            }
+			            comesAbility.setTargetCard(target);
+			            AllZone.Stack.add(comesAbility);
+			          }//else
+			        }//execute()
+			    };//CommandComes
+			    card.addComesIntoPlayCommand(commandCIP);
+			    card.addLeavesPlayCommand(new Command()
+		        {
+				  private static final long serialVersionUID = 6737424952039552060L;
+
+				  public void execute()
+		          {
+		            Card c = movedCreature[0];
+
+		            if(AllZone.GameAction.isCardInPlay(c))
+		            {
+		              ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
+		              ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
+
+		              c.setSickness(true);
+		              c.setController(AllZone.GameAction.getOpponent(c.getController()));
+		              
+		              PlayerZone from = AllZone.getZone(c);
+		              from.remove(c);
+
+		              //make sure the creature is removed from combat:
+		              CardList list = new CardList(AllZone.Combat.getAttackers());
+		              if (list.contains(c))
+		            	  AllZone.Combat.removeFromCombat(c);
+		              
+		              CardList pwlist = new CardList(AllZone.pwCombat.getAttackers());
+		              if (pwlist.contains(c))
+		            	  AllZone.pwCombat.removeFromCombat(c);
+		              
+		              PlayerZone to = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+		              to.add(c);
+
+		              ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(true);
+		              ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(true);
+		            }//if
+		          }//execute()
+		        });//Command
+		        
+		        card.clearSpellAbility();
+			    card.addSpellAbility(new Spell_Permanent(card)
+			    {
+					private static final long serialVersionUID = -6810781646652311270L;
+					
+					public boolean canPlay()
+					{
+						CardList choice = (CardList)getCreature.execute();
+						return choice.size() > 0;
+					}
+					
+					public boolean canPlayAI()
+			        {
+						CardList c = CardFactoryUtil.AI_getHumanCreature(card, true);
+			            CardListUtil.sortAttack(c);
+			            CardListUtil.sortFlying(c);
+
+			            if(c.isEmpty())
+			              return false;
+
+			            if(2 <= c.get(0).getNetAttack() && c.get(0).getKeyword().contains("Flying"))
+			            {
+			              setTargetCard(c.get(0));
+			              return true;
+			            }
+
+			            CardListUtil.sortAttack(c);
+			            if(4 <= c.get(0).getNetAttack())
+			            {
+			              setTargetCard(c.get(0));
+			              return true;
+			            }
+
+			            return false;
+			        }
+			    });
+		  }//*************** END ************ END **************************
+	    
+	    /*
 	    //*************** START *********** START **************************
 	      //destroy doesn't work
 	      else if(cardName.equals("Sower of Temptation"))
@@ -8593,8 +8789,8 @@ public class CardFactory_Creatures {
 	          }//execute()
 	        });//Command
 	      }//*************** END ************ END **************************
-
-
+	      */
+	    
 	      //*************** START *********** START **************************
 	      else if(cardName.equals("Frostling"))
 	      {
@@ -18419,6 +18615,36 @@ public class CardFactory_Creatures {
 		  		
 		  		card.addComesIntoPlayCommand(commandComes);
 	      }//*************** END ************ END **************************
+	      
+	      
+	    //*************** START *********** START **************************
+	        else if (cardName.equals("Avenger of Zendikar"))
+	        {
+	        	final Ability ability = new Ability(card, "0")
+	        	{
+	        		public void resolve()
+	        		{
+	        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	        			CardList land = new CardList(play.getCards());
+	        			land = land.getType("Land");
+	        			for (int i=0;i<land.size();i++)
+	        				CardFactoryUtil.makeToken("Plant", "G 0 1 Plant", card, "G", new String[] {"Creature", "Plant"}, 0, 1, new String[] {""} );
+	        		}
+	        	};
+	        	ability.setStackDescription("When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control.");
+	        	
+	        	final Command comesIntoPlay = new Command()
+	        	{
+					private static final long serialVersionUID = 4245563898487609274L;
+
+					public void execute()
+	        		{
+	        			AllZone.Stack.add(ability);
+	        		}
+	        	};
+	        	card.clearSpellKeepManaAbility();
+	        	card.addComesIntoPlayCommand(comesIntoPlay);
+	        }//*************** END ************ END **************************
 	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
