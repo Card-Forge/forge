@@ -19,10 +19,6 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable
     SpellAbility sa = AllZone.Stack.pop();
     Card c = sa.getSourceCard();
 
-    if (sa.getSourceCard().getKeyword().contains("Draw a card."))
-      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
-    
-
     final Card crd = c;
     if (sa.isBuyBackAbility())
     {
@@ -37,6 +33,20 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable
     }
     
     sa.resolve();
+    
+    if (sa.getSourceCard().getKeyword().contains("Draw a card."))
+      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
+    
+    for (int i=0; i<sa.getSourceCard().getKeyword().size(); i++)
+    {
+    	String k = sa.getSourceCard().getKeyword().get(i);
+    	if (k.startsWith("Scry"))
+    	{
+    		String kk[] = k.split(" ");
+    		AllZone.GameAction.scry(sa.getSourceCard().getController(), Integer.parseInt(kk[1]));
+    	}
+    }
+    
     AllZone.GameAction.checkStateEffects();
 
     //special consideration for "Beacon of Unrest" and other "Beacon" cards
