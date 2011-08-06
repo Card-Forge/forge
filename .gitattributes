@@ -1774,6 +1774,7 @@ res/cardsfolder/fertilid.txt -text svneol=native#text/plain
 res/cardsfolder/fervent_charge.txt -text svneol=native#text/plain
 res/cardsfolder/fervent_denial.txt -text svneol=native#text/plain
 res/cardsfolder/fervor.txt -text svneol=native#text/plain
+res/cardsfolder/festering_evil.txt svneol=native#text/plain
 res/cardsfolder/festering_wound.txt -text svneol=native#text/plain
 res/cardsfolder/festival_of_trokin.txt -text svneol=native#text/plain
 res/cardsfolder/fetid_heath.txt -text svneol=native#text/plain
