@@ -15,6 +15,15 @@ public class CardFactory_Creatures {
 		return -1;
 	}
 	
+	public static int shouldTypeCycle(Card c) {
+		ArrayList<String> a = c.getKeyword();
+		for (int i = 0; i < a.size(); i++)
+			if (a.get(i).toString().startsWith("TypeCycling"))
+				return i;
+
+		return -1;
+	}
+	
 	public static int shouldTransmute(Card c) {
 		ArrayList<String> a = c.getKeyword();
 		for (int i = 0; i < a.size(); i++)
@@ -18222,6 +18231,22 @@ public class CardFactory_Creatures {
 	        }
 	      }//Cycling
 
+	      while (shouldTypeCycle(card) != -1)
+	      {
+	        int n = shouldTypeCycle(card);
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          card.removeIntrinsicKeyword(parse);
+	
+	          String k[] = parse.split(":");
+	          final String type = k[1];
+	          final String manacost = k[2];
+	
+	          card.addSpellAbility(CardFactoryUtil.ability_typecycle(card, manacost, type));
+	        }
+	      }//TypeCycling
+	      
 	      if (shouldTransmute(card) != -1)
 	      {
 	        int n = shouldTransmute(card);

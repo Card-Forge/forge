@@ -9304,7 +9304,7 @@ public class CardFactory implements NewConstants {
 
 
     //*************** START *********** START **************************
-    else if(cardName.equals("Counterspell") || cardName.equals("Cancel") || cardName.equals("Last Word"))
+    else if(cardName.equals("Counterspell") || cardName.equals("Cancel") || cardName.equals("Last Word") || cardName.equals("Traumatic Visions"))
     {
       SpellAbility spell = new Spell(card)
       {
@@ -17713,6 +17713,22 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
         card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
       }
     }//Cycling
+    
+    while (hasKeyword(card, "TypeCycling") != -1)
+    {
+      int n = hasKeyword(card, "TypeCycling");
+      if (n != -1)
+      {
+        String parse = card.getKeyword().get(n).toString();
+        card.removeIntrinsicKeyword(parse);
+
+        String k[] = parse.split(":");
+        final String type = k[1];
+        final String manacost = k[2];
+
+        card.addSpellAbility(CardFactoryUtil.ability_typecycle(card, manacost,type));
+      }
+    }//TypeCycling
 
     if (hasKeyword(card, "Transmute") != -1)
     {

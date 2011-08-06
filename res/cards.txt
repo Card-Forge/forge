@@ -1,3 +1,122 @@
+Traumatic Visions
+3 U U
+Instant
+Counter target spell.
+TypeCycling:Basic:1 B
+
+Fiery Fall
+5 R
+Instant
+no text
+spDamageTgtC:5
+TypeCycling:Basic:1 R
+
+Absorb Vis
+6 B
+Sorcery
+no text
+spLoseLifeGainLife:4
+TypeCycling:Basic:1 B
+
+Ethereal Usher
+5 U
+Creature Spirit
+no text
+2/3
+TgtKPump U T:Unblockable
+Transmute:1 U U
+
+Chartooth Cougar
+5 R
+Creature Cat Beast
+no text
+4/4
+PTPump R:+1/+0
+TypeCycling:Mountain:2
+
+Elvish Aberration
+5 G
+Creature Elf Mutant
+no text
+4/5
+tap: add G G G
+TypeCycling:Forest:2
+
+Noble Templar
+5 W
+Creature Human Cleric Soldier
+no text
+3/6
+Vigilance
+TypeCycling:Plains:2
+
+Shoreline Ranger
+5 U
+Creature Bird Soldier
+no text
+3/4
+Flying
+TypeCycling:Island:2
+
+Twisted Abomination
+5 B
+Creature Zombie Mutant
+no text
+5/3
+RegenerateMe:B
+TypeCycling:Swamp:2
+
+Wirewood Guardian
+5 G G
+Creature Elf Mutant
+no text
+6/6
+TypeCycling:Forest:2
+
+Valley Rannet
+4 R G
+Creature Beast
+no text
+6/3
+TypeCycling:Forest:2
+TypeCycling:Mountain:2
+
+Sanctum Plowbeast
+4 W U
+Artifact Creature Beast
+no text
+3/6
+Defender
+TypeCycling:Island:2
+TypeCycling:Plains:2
+
+Pale Recluse
+4 G W
+Creature Spider
+no text
+4/5
+Reach
+TypeCycling:Forest:2
+TypeCycling:Plains:2
+
+Jhessian Zombies
+4 U B
+Creature Zombie
+no text
+2/4
+Fear
+TypeCycling:Swamp:2
+TypeCycling:Island:2
+
+Igneous Pouncer
+4 B R
+Creature Elemental
+no text
+5/1
+Haste
+TypeCycling:Swamp:2
+TypeCycling:Mountain:2
+
 Dimir Infiltrator
 U B
 Creature Spirit
@@ -10169,13 +10288,6 @@ Creature Dragon
 (NOTE: "Suspend" not implemented.)
 4/4
 Flying
-PTPump R:+1/+0
-
-Chartooth Cougar
-5 R
-Creature Cat Beast
-no text
-4/4
 PTPump R:+1/+0
 
 Aven Flock
