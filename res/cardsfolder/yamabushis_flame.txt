@@ -1,0 +1,9 @@
+Name:Yamabushi's Flame
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$DealDamage | Cost$ 2 R | Tgt$ TgtCP | NumDmg$ 3 |SubAbility$SVar=DB| SpellDescription$ CARDNAME deals 3 damage to target creature or player. If a creature dealt damage this way would be put into a graveyard this turn, exile it instead.
+SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard this turn, exile it instead. | Defined$Targeted
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yamabushis_flame.jpg
+End
