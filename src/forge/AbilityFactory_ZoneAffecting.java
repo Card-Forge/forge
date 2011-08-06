@@ -115,19 +115,21 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		
-		for(Player p : tgtPlayers)
-			sb.append(p.toString()).append(" ");
-
-        int numCards = 1;
-        if (af.getMapParams().containsKey("NumCards"))
-        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
-		
-		sb.append("draws (").append(numCards).append(")");
-		
-		if (af.getMapParams().containsKey("NextUpkeep"))
-			sb.append(" at the beginning of the next upkeep");
-		
-		sb.append(".");
+		if (tgtPlayers.size() > 0){
+			for(Player p : tgtPlayers)
+				sb.append(p.toString()).append(" ");
+	
+	        int numCards = 1;
+	        if (af.getMapParams().containsKey("NumCards"))
+	        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
+			
+			sb.append("draws (").append(numCards).append(")");
+			
+			if (af.getMapParams().containsKey("NextUpkeep"))
+				sb.append(" at the beginning of the next upkeep");
+			
+			sb.append(".");
+		}
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null){
@@ -789,28 +791,31 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
-		for(Player p : tgtPlayers)
-			sb.append(p.toString()).append(" ");
-		
-		if(mode.equals("RevealYouChoose")) 
-			sb.append("reveals his or her hand.").append("  You choose (");
-		else 
-			sb.append("discards (");
-		
-		if(mode.equals("Hand"))
-			sb.append("his or her hand");
-		else 
-			sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa));
+		if (tgtPlayers.size() > 0){
 			
-		sb.append(")");
-		
-		if(mode.equals("RevealYouChoose")) 
-			sb.append(" to discard");
-		
-		if(mode.equals("Random"))
-			sb.append(" at random.");
-		else 
-			sb.append(".");
+			for(Player p : tgtPlayers)
+				sb.append(p.toString()).append(" ");
+			
+			if(mode.equals("RevealYouChoose")) 
+				sb.append("reveals his or her hand.").append("  You choose (");
+			else 
+				sb.append("discards (");
+			
+			if(mode.equals("Hand"))
+				sb.append("his or her hand");
+			else 
+				sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa));
+				
+			sb.append(")");
+			
+			if(mode.equals("RevealYouChoose")) 
+				sb.append(" to discard");
+			
+			if(mode.equals("Random"))
+				sb.append(" at random.");
+			else 
+				sb.append(".");
+		}
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null)

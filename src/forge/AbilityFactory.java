@@ -732,6 +732,9 @@ public class AbilityFactory {
 			SpellAbility parent = sa;
 
 			do{
+				
+				if (!(parent instanceof Ability_Sub)) // did not find any targets
+					return players;
 				parent = ((Ability_Sub)parent).getParent();
 				tgt = parent.getTarget();
 			}while(tgt == null || tgt.getTargetPlayers().size() == 0);
