@@ -18,6 +18,10 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+burning_fields.jpg		http://www.wizards.com/global/images/magic/general/burning_fields.jpg
+searing_flesh.jpg		http://www.wizards.com/global/images/magic/general/searing_flesh.jpg
+eternal_flame.jpg		http://www.wizards.com/global/images/magic/general/eternal_flame.jpg
+jovial_evil.jpg		http://www.wizards.com/global/images/magic/general/jovial_evil.jpg
 arctic_wolves.jpg		http://www.wizards.com/global/images/magic/general/arctic_wolves.jpg
 arnjlots_ascent.jpg		http://www.wizards.com/global/images/magic/general/arnjlots_ascent.jpg
 firestorm_hellkite.jpg		http://www.wizards.com/global/images/magic/general/firestorm_hellkite.jpg

@@ -5501,7 +5501,8 @@ public class CardFactory implements NewConstants {
       spell.setBeforePayMana(runtime);
     }//*************** END ************ END **************************
 
-
+    
+/*
 	// *************** START *********** START **************************
 	if (cardName.equals("Lay Waste") || cardName.equals("Stone Rain")
 			|| cardName.equals("Ice Storm") || cardName.equals("Sinkhole"))
@@ -5563,7 +5564,7 @@ public class CardFactory implements NewConstants {
 		}
 			return card;
 	}// *************** END ************ END **************************
-	
+*/
 
 
     //*************** START *********** START **************************

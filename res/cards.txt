@@ -13539,16 +13539,19 @@ Sinkhole
 B B
 Sorcery
 Destroy target land.
+spDestroyTgt:Land
 
 Ice Storm
 2 G
 Sorcery
 Destroy target land.
+spDestroyTgt:Land
 
 Stone Rain
 2 R
 Sorcery
 Destroy target land.
+spDestroyTgt:Land
 
 Resurrection
 2 W W
@@ -14687,7 +14690,9 @@ Creatures you control get +2/+0 until end of turn.
 Lay Waste
 3 R
 Sorcery
-no text
+Destroy target land.
+spDestroyTgt:Land
+Cycling:2
 
 Threaten
 2 R
