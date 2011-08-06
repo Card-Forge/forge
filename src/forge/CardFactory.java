@@ -16250,6 +16250,23 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Join the Ranks")) {
+            SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 2700238195526474372L;
+
+				@Override
+                public void resolve() {
+                    CardFactoryUtil.makeToken("Soldier Ally", "W 1 1 Soldier Ally", card, "W",
+                            new String[] {"Creature", "Soldier", "Ally"}, 1, 1, new String[] {""});
+                    CardFactoryUtil.makeToken("Soldier Ally", "W 1 1 Soldier Ally", card, "W",
+                            new String[] {"Creature", "Soldier", "Ally"}, 1, 1, new String[] {""});
+                }//resolve()
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
