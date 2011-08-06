@@ -6153,44 +6153,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(bail);
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Khalni Heart Expedition")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public boolean canPlay() {
-                    return card.getCounters(Counters.QUEST) >= 3 && AllZone.GameAction.isCardInPlay(card)
-                            && !AllZone.Stack.getSourceCards().contains(card);//in play and not already activated(Sac cost problems)
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return (AllZone.Computer_Library.size() > 0);
-                }
-                
-                @Override
-                public void resolve() {
-                	// Sacrifice this first, otherwise the land search triggers 
-                	// the landfall ability
-                    AllZone.GameAction.sacrifice(getSourceCard());
-
-                	// Put two basic lands onto the battlefield tapped
-                	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
-                			Constant.Zone.Battlefield, true, Constant.Zone.Battlefield, true);
-                }
-            };
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("Remove three quest counters from Khalni Heart Expedition and sacrifice it: search ");
-            sbDesc.append("your library for two basic lands and put them onto the battlefield tapped.");
-            ability.setDescription(sbDesc.toString());
-
-            StringBuilder sbStack = new StringBuilder();
-            sbStack.append(card.getName()).append(" - Search for land.");
-            ability.setStackDescription(sbStack.toString());
-            
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-
 
         //*************** START *********** START **************************
         else if(cardName.equals("Mox Diamond")) {
