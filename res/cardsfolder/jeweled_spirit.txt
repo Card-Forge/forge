@@ -12,5 +12,5 @@ A:AB$Pump | Cost$ Sac<2/Land> | KW$ Protection from green | SpellDescription$ Je
 A:AB$Pump | Cost$ Sac<2/Land> | KW$ Protection from artifacts | SpellDescription$ Jeweled Spirit gains protection from artifacts until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_spirit.jpg
-SetInfo:PR|Rare|http://magiccards.info/scans/en/pr/12.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/12.jpg
 End
