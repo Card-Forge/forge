@@ -10157,6 +10157,7 @@ public class GameActionUtil {
 								newCopy.setCloneLeavesPlayCommand(c.getCloneLeavesPlayCommand());
 
 								newCopy.addExtrinsicKeyword(keyword);
+								newCopy.addColor("U", newCopy, false, true);
 								newCopy.setCloneOrigin(c.getCloneOrigin());
 								newCopy.getCloneOrigin().setCurrentlyCloningCard(newCopy);
 								c.setCloneOrigin(null);
