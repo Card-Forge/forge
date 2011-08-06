@@ -13487,7 +13487,7 @@ Nevinyrral's Disk comes into play tapped.
 Renewed Faith
 2 W
 Instant
-You gain 6 life. Cycling 1W. When you cycle Renewed Faith, you may gain 2 life.
+no text
 
 Hymn to Tourach
 B B

@@ -6783,7 +6783,12 @@ public class CardFactory implements NewConstants {
           life.addLife(6);
         }
       };
-      spell.setDescription("You gain 6 life.");
+      String desc = "You gain 6 life.";
+      
+      if (cardName.equals("Renewed Faith"))
+    	   desc = desc + "\r\n\r\nWhen you cycle Renewed Faith, you may gain 2 life.\r\n";
+      
+      spell.setDescription(desc);
 
       card.clearSpellAbility();
       card.addSpellAbility(spell);
