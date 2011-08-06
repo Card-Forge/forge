@@ -546,6 +546,10 @@ public class ComputerUtil_Block2
 		  b = possibleBlockers.get(i);
 		  if(!CombatUtil.canBlock(b)) blockersLeft.remove(b);
 	  }
+	  
+	  //These creatures won't prevent any damage
+	  if (CombatUtil.lifeInDanger(combat)) 
+		  blockersLeft = blockersLeft.getNotKeyword("Whenever CARDNAME is dealt damage, you lose that much life.");
 	   
 	  if (blockersLeft.size() == 0)
 		  return combat;

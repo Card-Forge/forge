@@ -447,6 +447,12 @@ public class CardFactoryUtil {
         //Doran
         if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) power = toughness;
         
+        if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.") 
+        		|| c.hasKeyword("Prevent all damage that would be dealt by CARDNAME.") 
+        		|| c.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") 
+        		|| c.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) 
+        	power = 0;
+        
         value += power * 15;
         value += toughness * 10;
         value += c.getCMC() * 5;
@@ -472,6 +478,7 @@ public class CardFactoryUtil {
         value += c.getAmountOfKeyword("Exalted") * 15;
         if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 15;
         if (c.hasKeyword("Lifelink")) value += power * 10;
+        value += c.getAmountOfKeyword("Whenever CARDNAME deals damage, you gain that much life.") * power * 10;
         if (c.hasKeyword("Trample")) value += power * 3;
         if (c.hasKeyword("Vigilance")) value += power * 5 + toughness * 5;
         if (c.hasKeyword("Wither")) value += power * 10;
@@ -484,6 +491,7 @@ public class CardFactoryUtil {
         		&& power > 0) value += 2;
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +2/+2 counter on CARDNAME.") 
         		&& power > 0) value += 4;
+        if (c.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.") && power > 0) value += 10;
         
         //Defensive Keywords
         if (c.hasKeyword("Reach")) value += 5;
@@ -492,21 +500,27 @@ public class CardFactoryUtil {
 
         //Protection
         if (c.hasKeyword("Indestructible")) value += 70;
+        if (c.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) value += 60;
+        if (c.hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) value += 50;
         if (c.hasKeyword("Shroud")) value += 30;
         if (c.hasKeyword("CARDNAME can't be the target of spells or abilities your opponents control.")) value += 35;
         if (c.hasStartOfKeyword("Protection")) value += 20;
         if (c.hasStartOfKeyword("PreventAllDamageBy")) value += 10;
+        value += c.getKeywordMagnitude("Absorb") * 11;
         
         //Activated Abilities
         if (c.hasStartOfKeyword("ab")) value += 10;
         
         //Bad keywords
-        if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) value -= power * 10 + 50;
+        if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) value -= power * 9 + 40;
         if (c.hasKeyword("CARDNAME can't block.")) value -= 10;
         if (c.hasKeyword("CARDNAME attacks each turn if able.")) value -= 10;
         if (c.hasKeyword("CARDNAME can block only creatures with flying.")) value -= toughness * 5;
         
-        if (c.hasKeyword("CARDNAME can't attack or block.")) value = 100 + c.getCMC() * 5; //reset everything - useless
+        if (c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) value -= (toughness - 1) * 9;
+        if (c.hasStartOfKeyword("Whenever CARDNAME is dealt damage, you lose that much life.")) value -= 15;
+        
+        if (c.hasKeyword("CARDNAME can't attack or block.")) value = 90 + c.getCMC() * 5; //reset everything - useless
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) value -= 50;
