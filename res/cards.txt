@@ -1,3 +1,141 @@
+Ashen Monstrosity
+5 R R
+Creature Spirit
+no text
+7/4
+Haste
+CARDNAME attacks each turn if able.
+
+Battle-Mad Ronin
+1 R
+Creature Human Samurai
+no text
+1/1
+CARDNAME attacks each turn if able.
+Bushido 2
+
+Berserkers of Blood Ridge
+4 R
+Creature Human Berserker
+no text
+4/4
+CARDNAME attacks each turn if able.
+
+Bloodrock Cyclops
+2 R
+Creature Cyclops
+no text
+3/3
+CARDNAME attacks each turn if able.
+
+Bloodshed Fever
+R
+Enchantment Aura
+Enchanted creature attacks each turn if able.
+Enchant creature
+enPumpCurse:CARDNAME attacks each turn if able.
+
+Crazed Goblin
+R
+Creature Goblin Warrior
+no text
+1/1
+CARDNAME attacks each turn if able.
+
+Dauthi Slayer
+B B
+Creature Dauthi Soldier
+no text
+2/2
+Shadow
+CARDNAME attacks each turn if able.
+
+Goblin Brigand
+1 R
+Creature Goblin Warrior
+no text
+2/2
+CARDNAME attacks each turn if able.
+
+Juggernaut
+4
+Artifact Creature Juggernaut
+no text
+5/3
+CARDNAME attacks each turn if able.
+CARDNAME can't be blocked by Walls.
+
+Monstrous Carabid
+3 B R
+Creature Insect
+no text
+4/4
+CARDNAME attacks each turn if able.
+Cycling:BR
+
+Phyrexian Snowcrusher
+6
+Snow Artifact Creature Juggernaut
+no text
+6/5
+CARDNAME attacks each turn if able.
+abPump 1 S:+1/+0
+
+Tattermunge Maniac
+RG
+Creature Goblin Warrior
+no text
+2/1
+CARDNAME attacks each turn if able.
+
+Tectonic Fiend
+4 R R
+Creature Elemental
+no text
+7/7
+CARDNAME attacks each turn if able.
+Echo:4 R R
+
+Thran War Machine
+4
+Artifact Creature Construct
+no text
+4/5
+CARDNAME attacks each turn if able.
+Echo:4
+
+Ulamog's Crusher
+8
+Creature Eldrazi
+no text
+8/8
+Annihilator 2
+CARDNAME attacks each turn if able.
+
+Uncontrollable Anger
+2 R R
+Enchantment Aura
+Enchanted creature gets +2/+2 and attacks each turn if able.
+Enchant creature
+enPump:+2/+2/CARDNAME attacks each turn if able.
+Flash
+
+Urborg Drake
+1 U B
+Creature Drake
+no text
+2/3
+Flying
+CARDNAME attacks each turn if able.
+
+Utvara Scalper
+1 R
+Creature Goblin Scout
+no text
+1/2
+Flying
+CARDNAME attacks each turn if able.
+
 Oust
 W
 Sorcery
@@ -976,27 +1114,11 @@ no text
 1/1
 CARDNAME can't be blocked by Walls.
 
-Juggernaut
-4
-Artifact Creature Juggernaut
-no text
-5/3
-This card attacks each turn if able.
-CARDNAME can't be blocked by Walls.
-
 Phyrexian War Beast
 3
 Artifact Creature Beast
 When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
 3/4
-
-Ulamog's Crusher
-8
-Creature Eldrazi
-no text
-8/8
-Annihilator 2
-This card attacks each turn if able.
 
 Kozilek, Butcher of Truth
 10
@@ -1967,13 +2089,6 @@ Copper Tablet
 2
 Artifact
 At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
-
-Bloodshed Fever
-R
-Enchantment Aura
-Enchanted creature attacks each turn if able.
-Enchant creature
-enPumpCurse:This card attacks each turn if able.
 
 Wings of Aesthir
 W U
@@ -3471,14 +3586,6 @@ no text
 abPump B:+1/+1
 Bushido 1
 
-Battle-Mad Ronin
-1 R
-Creature Human Samurai
-no text
-1/1
-This card attacks each turn if able.
-Bushido 2
-
 Araba Mothrider
 1 W
 Creature Human Samurai
@@ -4402,22 +4509,6 @@ no text
 Flying
 Haste
 Echo:1 G G
-
-Thran War Machine
-4
-Artifact Creature Construct
-no text
-4/5
-This card attacks each turn if able.
-Echo:4
-
-Tectonic Fiend
-4 R R
-Creature Elemental
-no text
-7/7
-This card attacks each turn if able.
-Echo:4 R R
 
 Simian Grunts
 2 G
@@ -6343,14 +6434,6 @@ no text
 abPumpTgt T:This creature cannot block
 abPump S:Haste
 
-Phyrexian Snowcrusher
-6
-Snow Artifact Creature Juggernaut
-no text
-6/5
-This card attacks each turn if able.
-abPump 1 S:+1/+0
-
 Rimebound Dead
 B
 Snow Creature Skeleton
@@ -7945,14 +8028,6 @@ Enchantment Aura
 Enchanted creature has double strike.
 Enchant creature
 enPump:Double Strike
-
-Uncontrollable Anger
-2 R R
-Enchantment Aura
-Enchanted creature gets +2/+2 and attacks each turn if able.
-Enchant creature
-enPump:+2/+2/This card attacks each turn if able.
-Flash
 
 Soulscour
 7 W W W
@@ -9764,13 +9839,6 @@ Creature Centaur Warrior
 no text
 3/3
 
-Berserkers of Blood Ridge
-4 R
-Creature Human Berserker
-no text
-4/4
-This card attacks each turn if able.
-
 Weakness
 B
 Enchantment Aura
@@ -10559,74 +10627,6 @@ Nyxathid
 Creature Elemental
 As Nyxathid comes into play, choose an opponent. Nyxathid gets -1/-1 for each card in the chosen player's hand.
 7/7
-
-Utvara Scalper
-1 R
-Creature Goblin Scout
-no text
-1/2
-Flying
-This card attacks each turn if able.
-
-Urborg Drake
-1 U B
-Creature Drake
-no text
-2/3
-Flying
-This card attacks each turn if able.
-
-Monstrous Carabid
-3 B R
-Creature Insect
-no text
-4/4
-This card attacks each turn if able.
-Cycling:BR
-
-Ashen Monstrosity
-5 R R
-Creature Spirit
-no text
-7/4
-Haste
-This card attacks each turn if able.
-
-Bloodrock Cyclops
-2 R
-Creature Cyclops
-no text
-3/3
-This card attacks each turn if able.
-
-Goblin Brigand
-1 R
-Creature Goblin Warrior
-no text
-2/2
-This card attacks each turn if able.
-
-Tattermunge Maniac
-RG
-Creature Goblin Warrior
-no text
-2/1
-This card attacks each turn if able.
-
-Dauthi Slayer
-B B
-Creature Dauthi Soldier
-no text
-2/2
-Shadow
-This card attacks each turn if able.
-
-Crazed Goblin
-R
-Creature Goblin Warrior
-no text
-1/1
-This card attacks each turn if able.
 
 Unsummon
 U

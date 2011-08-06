@@ -2476,7 +2476,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         crd.addSemiPermanentAttackBoost(2);
                         crd.addSemiPermanentDefenseBoost(2);
-                        crd.addExtrinsicKeyword("This card attacks each turn if able.");
+                        crd.addExtrinsicKeyword("CARDNAME attacks each turn if able.");
                     }
                 }//execute()
             };//Command
@@ -2491,7 +2491,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         crd.addSemiPermanentAttackBoost(-2);
                         crd.addSemiPermanentDefenseBoost(-2);
-                        crd.removeExtrinsicKeyword("This card attacks each turn if able.");
+                        crd.removeExtrinsicKeyword("CARDNAME attacks each turn if able.");
                     }
                     
                 }//execute()

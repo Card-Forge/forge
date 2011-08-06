@@ -18,7 +18,7 @@ public class Input_Attack_Planeswalker extends Input {
         
         for(int i = 0; i < creats.size(); i++) {
             Card c = creats.get(i);
-            if(CombatUtil.canAttack(c) && c.getKeyword().contains("This card attacks each turn if able.")
+            if(CombatUtil.canAttack(c) && c.getKeyword().contains("CARDNAME attacks each turn if able.")
                     && !attackers.contains(c)) {
                 AllZone.pwCombat.addAttacker(c);
                 if(!c.getKeyword().contains("Vigilance")) c.tap();

@@ -8731,7 +8731,7 @@ public class GameActionUtil {
 		CardList                  gloriousAnthemList = new CardList();
 
 		public void execute() {
-			String keyword = "This card attacks each turn if able.";
+			String keyword = "CARDNAME attacks each turn if able.";
 
 			CardList list = gloriousAnthemList;
 			Card c;

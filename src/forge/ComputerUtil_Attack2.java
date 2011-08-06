@@ -168,7 +168,7 @@ import java.util.*;
 
           for (int i=0; i<attackers.size();i++)
           {
-             if (attackers.get(i).getKeyword().contains("This card attacks each turn if able."))
+             if (attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able."))
                 combat.addAttacker(attackers.get(i));
           }
 
