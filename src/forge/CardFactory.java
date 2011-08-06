@@ -5911,6 +5911,102 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(AbTapAll);
         	card.setSVar("PlayMain1", "TRUE");
         }//End abTapAll
+        
+     // Generic untap target ___ activated ability
+        //abUntapTgt {Ability_Cost}:{Valid Targets}:{Description}
+        if (hasKeyword(card, "abUntapTgt") != -1)
+        {
+        	int n = hasKeyword(card, "abUntapTgt");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+
+        	String tmpCost = k[0].substring(10);
+        	final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName(), true);
+
+        	final Target untapTargets = new Target("TgtV");
+        	final String Tgts[] = k[1].split(",");
+        	untapTargets.setValidTgts(Tgts);
+        	final String abDesc[] = {"none"};
+        	abDesc[0] = k[2];
+
+        	String tmpDesc = abDesc[0].substring(13);
+        	int i = tmpDesc.indexOf(".");
+        	tmpDesc = tmpDesc.substring(0, i);
+        	untapTargets.setVTSelection("Select target " + tmpDesc + " to untap.");
+
+        	abDesc[0] = abCost.toString() + abDesc[0];
+
+        	final SpellAbility AbUntapTgt = new Ability_Activated(card, abCost, untapTargets) {
+				private static final long serialVersionUID = 6286367744794697322L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			if (!ComputerUtil.canPayCost(this))
+        				return false;
+
+        			CardList hCards = getTargets();
+
+        			Random r = new Random();
+        			boolean rr = false;
+        			if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+        				rr = true;
+
+        			if(hCards.size() > 0) {
+        				Card c = null;
+        				CardList dChoices = new CardList();
+
+        				for(int i = 0; i < Tgts.length; i++) {
+        					if (Tgts[i].startsWith("Creature")) {
+        						c = CardFactoryUtil.AI_getBestCreature(hCards);
+        						if (c != null)
+        							dChoices.add(c);
+        					}
+
+        					CardListUtil.sortByTextLen(hCards);
+        					dChoices.add(hCards.get(0));
+
+        					CardListUtil.sortCMC(hCards);
+        					dChoices.add(hCards.get(0));
+        				}
+
+        				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+        				setTargetCard(c);
+
+        				return rr;
+        			}
+
+        			return false;
+        		}
+
+        		CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getTargetableCards(card);
+        			return tmpList;
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			Cost_Payment pay = new Cost_Payment(abCost, this);
+        			return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        		}
+
+        		@Override
+        		public void resolve() {
+        			Card tgtC = getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(tgtC)
+        					&& CardFactoryUtil.canTarget(card, tgtC)) {
+        				tgtC.untap();
+        			}
+        		}
+        	}; //AbTapTgt
+
+        	AbUntapTgt.setDescription(abDesc[0]);
+        	card.addSpellAbility(AbUntapTgt);
+        }//End abUntapTgt
         	
         //******************************************************************
         //************** Link to different CardFactories ******************* 
