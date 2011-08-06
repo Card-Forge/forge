@@ -1141,6 +1141,7 @@ public class CardFactory implements NewConstants {
              }
          }//spAllPump
         
+        /* Cards converted to AB$PumpAll
         while (hasKeyword(card, "abAllPump") != -1)
         {
         	int n = hasKeyword(card, "abAllPump");
@@ -1403,7 +1404,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(abAllPump);
         	}
         }
-        
+        */
         /* Cards converted to AB$Pump
         while(hasKeyword(card, "abPump") != -1) {
             int n = hasKeyword(card, "abPump");
