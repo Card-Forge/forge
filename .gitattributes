@@ -7134,6 +7134,7 @@ res/cardsfolder/wandering_ones.txt -text svneol=native#text/plain
 res/cardsfolder/wandering_stream.txt -text svneol=native#text/plain
 res/cardsfolder/wanderlust.txt -text svneol=native#text/plain
 res/cardsfolder/wanderwine_hub.txt -text svneol=native#text/plain
+res/cardsfolder/wanderwine_prophets.txt svneol=native#text/plain
 res/cardsfolder/waning_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/war_chariot.txt -text svneol=native#text/plain
 res/cardsfolder/war_dance.txt -text svneol=native#text/plain
