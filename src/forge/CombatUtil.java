@@ -219,7 +219,9 @@ public class CombatUtil {
         
 //      if(attacker.getName().equals("Goldmeadow Dodger")) return blocker.getNetAttack() < 4;
         
-        if(attacker.getName().equals("Juggernaut") && blocker.getType().contains("Wall")) return false;
+//      if(attacker.getName().equals("Juggernaut") && blocker.getType().contains("Wall")) return false;
+        
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked by Walls.") && blocker.getType().contains("Wall")) return false;
         
         return true;
     }//canBlock()

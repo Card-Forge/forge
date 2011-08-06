@@ -1,3 +1,25 @@
+Bog Rats
+B
+Creature Rat
+no text
+1/1
+CARDNAME can't be blocked by Walls.
+
+Rampart Crawler
+B
+Creature Lizard Mercenary
+no text
+1/1
+CARDNAME can't be blocked by Walls.
+
+Juggernaut
+4
+Artifact Creature Juggernaut
+no text
+5/3
+This card attacks each turn if able.
+CARDNAME can't be blocked by Walls.
+
 Phyrexian War Beast
 3
 Artifact Creature Beast
@@ -9808,13 +9830,6 @@ Nyxathid
 Creature Elemental
 As Nyxathid comes into play, choose an opponent. Nyxathid gets -1/-1 for each card in the chosen player's hand.
 7/7
-
-Juggernaut
-4
-Artifact Creature Juggernaut
-Juggernaut can't be blocked by Walls.
-5/3
-This card attacks each turn if able.
 
 Utvara Scalper
 1 R
