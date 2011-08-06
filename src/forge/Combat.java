@@ -366,6 +366,16 @@ public class Combat {
 		else
 			return new CardList(getList(attacker).toArray());
 	}
+	
+	public Card getAttackerBlockedBy(Card blocker) {
+		CardList att = new CardList(getAttackers());
+		
+		for (int i = 0; i < att.size(); i++) {
+			if(getBlockers(att.get(i)).contains(blocker)) return att.get(i);
+		} // for
+		
+		return null;
+	}
 
 	private CardList getList(Card attacker) {
 		return (CardList) map.get(attacker);

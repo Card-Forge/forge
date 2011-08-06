@@ -321,7 +321,7 @@ public class CombatUtil {
     	return canAttack(c);
     }
     
-  //can a creature attack att all?
+    //can a creature attack at all?
     public static boolean canAttack(Card c) {
     	if (!c.isCreature()) return false;
     	
@@ -593,6 +593,29 @@ public class CombatUtil {
         return defenderDefense;
     }//shieldDamage
     
+  //For AI safety measures like Regeneration
+    public boolean combatantWouldBeDestroyed(Card combatant, Combat combat) {
+
+    	if(combatant.isAttacking())
+    		return attackerWouldBeDestroyed(combatant, combat);
+    	if(combatant.isBlocking())
+    		return blockerWouldBeDestroyed(combatant, combat);
+    	return false;
+    }
+    
+    //For AI safety measures like Regeneration
+    public boolean attackerWouldBeDestroyed(Card attacker, Combat combat) {
+    	CardList blockers = combat.getBlockers(attacker);
+    	
+    	for (Card defender:blockers) {
+    			if(CombatUtil.canDestroyAttacker(attacker, defender) && 
+    					!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect")))
+    				return true;
+    	}
+    	
+    	return totalDamageOfBlockers(attacker, blockers) < attacker.getKillDamage();
+    }
+    
     
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
@@ -669,6 +692,16 @@ public class CombatUtil {
         }//defender no double strike
         return false; //should never arrive here
     } //canDestroyAttacker
+    
+    //For AI safety measures like Regeneration
+    public boolean blockerWouldBeDestroyed(Card blocker, Combat combat) {
+    	Card attacker = combat.getAttackerBlockedBy(blocker);
+    	
+    	if(canDestroyBlocker(blocker, attacker) && 
+    					!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect")))
+    			return true;
+    	return false;
+    }
     
     
     public static boolean canDestroyBlocker(Card defender, Card attacker) {
