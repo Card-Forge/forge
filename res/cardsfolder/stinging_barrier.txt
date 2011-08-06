@@ -4,7 +4,6 @@ Types:Creature Wall
 Text:no text
 PT:0/4
 K:Defender
-#K:abDamageTgtCP U T:1
 A:AB$DealDamage | Cost$ U T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinging_barrier.jpg

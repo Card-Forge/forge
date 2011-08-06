@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Elemental Shaman
 Text:Whenever you cast a red spell, you may untap Cinder Pyromancer.
 PT:0/1
-#K:abDamageTgtP T:1
 A:AB$DealDamage | Cost$ T | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_pyromancer.jpg

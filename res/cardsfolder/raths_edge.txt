@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add 1
-#K:abDamageTgtCP 4 T Sac<1/Land>:1
 A:AB$DealDamage | Cost$ 4 T Sac<1/Land> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raths_edge.jpg

@@ -4,8 +4,7 @@ Types:Creature Griffin
 Text:no text
 PT:3/2
 K:Flying
-#K:abDamageTgtV T Sac<1/CARDNAME>:3:Creature.attacking,Creature.blocking:Divebomber Griffin deals 3 damage to target attacking or blocking creature.
-A:AB$DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | NumDmg$ 3 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
+A:AB$DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divebomber_griffin.jpg

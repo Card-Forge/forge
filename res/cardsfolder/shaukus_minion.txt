@@ -3,8 +3,7 @@ ManaCost:1 B R
 Types:Creature Human Minion
 Text:no text
 PT:2/2
-#K:abDamageTgtV B R T:2:Creature.White:Shauku's Minion deals 2 damage to target white creature.
-A:AB$DealDamage | Cost$ B R T | ValidTgts$ Creature.White | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target white creature.
+A:AB$DealDamage | Cost$ B R T | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target white creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaukus_minion.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/343.jpg

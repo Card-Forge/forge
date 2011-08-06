@@ -4,7 +4,6 @@ Types:Artifact Creature Gnome
 Text:no text
 PT:3/3
 K:Echo:3
-#K:abDamageTgtCP Sac<1/CARDNAME>:1
 A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ticking_gnomes.jpg

@@ -2,7 +2,6 @@ Name:Meteor Storm
 ManaCost:R G
 Types:Enchantment
 Text:no text
-#K:abDamageTgtCP 2 R G Discard<2/Random>:4
 A:AB$DealDamage | Cost$ 2 R G Discard<2/Random> | Tgt$ TgtCP | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_storm.jpg

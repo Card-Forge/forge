@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Human Wizard
 Text:no text
 PT:2/2
-#K:abDamageTgtCP T Discard<1/Random>:1
 A:AB$DealDamage | Cost$ T Discard<1/Random> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mage_il_vec.jpg

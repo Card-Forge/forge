@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Creature Elemental Shaman
 Text:no text
 PT:1/1
-#K:abDamageTgtCP 3 R:1
 A:AB$DealDamage | Cost$ 3 R | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_spitfire.jpg

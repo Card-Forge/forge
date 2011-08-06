@@ -3,7 +3,6 @@ ManaCost:1 B R
 Types:Creature Zombie
 Text:no text
 PT:2/1
-#K:abDamageTgtCP 1 R R Sac<1/CARDNAME>:2
 A:AB$DealDamage | Cost$ 1 R R Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay 1 B B. If you do, return Pyre Zombie from your graveyard to your hand.
 SVar:Rarity:Rare

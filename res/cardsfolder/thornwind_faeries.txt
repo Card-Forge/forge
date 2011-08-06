@@ -4,7 +4,6 @@ Types:Creature Faerie
 Text:no text
 PT:1/1
 K:Flying
-#K:abDamageTgtCP T:1
 A:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornwind_faeries.jpg

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin Shaman
 Text:no text
 PT:2/1
-A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | NumDmg$ 3 | PlayerTurn$ True | ActivatingPhases$ Upkeep | SpellDescription$ Emberwilde Augur deals 3 damage to target player. Activate this ability only during your upkeep.
+A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | NumDmg$ 3 | Tgt$ TgtP | PlayerTurn$ True | ActivatingPhases$ Upkeep | SpellDescription$ Emberwilde Augur deals 3 damage to target player. Activate this ability only during your upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberwilde_augur.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/97.jpg
