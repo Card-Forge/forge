@@ -5395,7 +5395,9 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wojek Embermage")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            Target tgt = new Target("TgtC");
+            final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
                 private static final long serialVersionUID = -1208482961653326721L;
                 
                 @Override
@@ -5424,11 +5426,7 @@ public class CardFactory_Creatures {
                 
                 //parameter Card c, is included in CardList
                 //no multi-colored cards
-                
-
                 CardList getRadiance(Card c) {
-                	//String color = CardUtil.getColor(c);
-                    //if(color.equals(Constant.Color.Colorless)) {
                 	if(CardUtil.getColors(c).contains(Constant.Color.Colorless)) {
                         CardList list = new CardList();
                         list.add(c);
@@ -5436,8 +5434,6 @@ public class CardFactory_Creatures {
                     }
                     
                     CardList sameColor = new CardList();
-                    
-                    //get all creatures
                     CardList list = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < list.size(); i++)
@@ -5448,9 +5444,8 @@ public class CardFactory_Creatures {
                 
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("Radiance - tap: Wojek Embermage deals 1 damage to target creature and each other creature that shares a color with it.");
+            ability.setDescription("Radiance - "+abCost+cardName+" deals 1 damage to target creature and each other creature that shares a color with it.");
             
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
 
         
@@ -7672,102 +7667,6 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(leavesPlay);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Knight of the Reliquary")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
-                private static final long serialVersionUID = 7554368501399705784L;
-                
-                @Override
-                public void resolve() {
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
-                    Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        AllZone.GameAction.sacrifice(c);
-                        
-                        CardList landInLib = new CardList(lib.getCards());
-                        landInLib = landInLib.getType("Land");
-                        
-                        if(landInLib.size() > 0) {
-                            if(card.getController().equals(AllZone.ComputerPlayer)) {
-                                lib.remove(landInLib.get(0));
-                                play.add(landInLib.get(0));
-                            } else {
-                                Object o = AllZone.Display.getChoiceOptional(
-                                        "Select land card to put into play: ", landInLib.toArray());
-                                if(o != null) {
-                                    Card crd = (Card) o;
-                                    lib.remove(crd);
-                                    play.add(crd);
-                                }
-                            }
-                            card.getController().shuffle();
-                        }
-                    }//if(isCardInPlay)
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList landInLib = new CardList(AllZone.getZone(Constant.Zone.Library,
-                            AllZone.ComputerPlayer).getCards());
-                    CardList landInPlay = new CardList(AllZone.getZone(Constant.Zone.Battlefield,
-                            AllZone.ComputerPlayer).getCards());
-                    
-                    landInLib = landInLib.getType("Land");
-                    landInPlay = landInPlay.getType("Land");
-                    
-                    if(landInLib.size() > 0 && landInPlay.size() > 0
-                            && (AllZone.Phase.getPhase().equals("Main2") || card.getNetAttack() < 5)) return true;
-                    else return false;
-                    
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList land = new CardList(
-                            AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            if(c.getType().contains("Plains") || c.getType().contains("Forest")) return true;
-                            else return false;
-                        }
-                    });
-                    if(land.size() > 0) setTargetCard(land.get(0));
-                }
-            };
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4320917612145305541L;
-                
-                @Override
-                public void showMessage() {
-                    CardList land = new CardList(
-                            AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            if(c.getType().contains("Plains") || c.getType().contains("Forest")) return true;
-                            else return false;
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, land,
-                            "Select a Plains or Forest to sacrifice.", false, false));
-                }
-            };
-            ability.setBeforePayMana(runtime);
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("\r\n").append("tap, Sacrifice a Forest or Plains: Search your library ");
-            sbDesc.append("for a land card, put it into play, then shuffle your library.");
-            ability.setDescription(sbDesc.toString());
-            
-            StringBuilder sbStack = new StringBuilder();
-            sbStack.append(card.getName()).append(" - Search your library for a card and put it into play, then shuffle your library");
-            ability.setStackDescription(sbStack.toString());
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Knight of the White Orchid")) {
