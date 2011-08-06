@@ -557,7 +557,9 @@ public abstract class Player extends MyObservable{
 			c.setDrawnThisTurn(true);
 			numDrawnThisTurn++;
 
-			GameActionUtil.executeDrawCardTriggeredEffects(this);
+			Object[] DrawCard_Whenever_Parameters = new Object[1];
+	    	DrawCard_Whenever_Parameters[0] = this;
+			AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
 			
 			//Run triggers
 			HashMap<String,Object> runParams = new HashMap<String,Object>();

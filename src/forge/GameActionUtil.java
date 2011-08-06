@@ -114,7 +114,6 @@ public class GameActionUtil {
 		draw_Howling_Mine(player);
 		draw_Rites_of_Flourishing(player);
 		draw_Anvil_of_Bogardan(player);
-		draw_Spiteful_Visions(player);
 		draw_Kami_Crescent_Moon(player);
 		draw_Font_of_Mythos(player);
 		draw_Overbeing_of_Myth(player);
@@ -1240,35 +1239,6 @@ public class GameActionUtil {
 			}//if
 		}//if
 	}//Curse of Wizardry
-
-
-	public static void executeDrawCardTriggeredEffects(Player player) {
-    	Object[] DrawCard_Whenever_Parameters = new Object[1];
-    	DrawCard_Whenever_Parameters[0] = player;
-		AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
-		
-		drawCardTriggered_Spiteful_Visions(player);
-	}
-	
-	private static void drawCardTriggered_Spiteful_Visions(final Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
-
-		for(int i = 0; i < list.size(); i++) {
-			final Card source = list.get(i);
-			final Ability ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(1, source);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(source).append(" - deals 1 damage to ").append(player).append(".");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}
 
 	//UPKEEP CARDS:
 
@@ -6087,11 +6057,6 @@ public class GameActionUtil {
 				player.discard(null);
 		}
 	}// Howling_Mine()
-	
-	private static void draw_Spiteful_Visions(final Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
-		player.drawCards(list.size());
-	}// Spiteful_Visions()
 	
 	private static void draw_Sylvan_Library(final Player player) {
 		/*
