@@ -6407,7 +6407,7 @@ public class CardFactory implements NewConstants {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         			tmpList = tmpList.getValidCards(Tgts);
         			tmpList = tmpList.getTargetableCards(card);
-        			tmpList = tmpList.filter(AllZoneUtil.tapped);
+        			tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
         		}
 
@@ -6499,7 +6499,7 @@ public class CardFactory implements NewConstants {
         			CardList tmpList = AllZoneUtil.getCardsInPlay();
         			tmpList = tmpList.getValidCards(Tgts);
         			tmpList = tmpList.getTargetableCards(card);
-        			tmpList = tmpList.filter(AllZoneUtil.tapped);
+        			tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
         		}
 
@@ -6710,7 +6710,7 @@ public class CardFactory implements NewConstants {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         			tmpList = tmpList.getValidCards(Tgts, card.getController());
         			tmpList = tmpList.getTargetableCards(card);
-        			tmpList = tmpList.filter(AllZoneUtil.untapped);
+        			tmpList = tmpList.filter(AllZoneUtil.tapped);
         			return tmpList;
         		}
 
@@ -6802,7 +6802,7 @@ public class CardFactory implements NewConstants {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         			tmpList = tmpList.getValidCards(Tgts, card.getController());
         			tmpList = tmpList.getTargetableCards(card);
-        			tmpList = tmpList.filter(AllZoneUtil.tapped);
+        			tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
         		}
         		
@@ -6919,7 +6919,7 @@ public class CardFactory implements NewConstants {
         			tmpList = tmpList.getValidCards(Tgts, card.getController());
         			//I don't think this is targeted
         			//tmpList = tmpList.getTargetableCards(card);
-        			//tmpList = tmpList.filter(AllZoneUtil.untapped);
+        			//tmpList = tmpList.filter(AllZoneUtil.tapped);
         			return tmpList;
         		}
 
