@@ -5038,13 +5038,6 @@ public class GameActionUtil {
 				card_Add_Counters(entity, Counters.P1P1, gain, false);
 			}
 		}
-		
-		if(AllZoneUtil.isCardInPlay("Ajani's Pridemate", player)) {
-			CardList entities = AllZoneUtil.getPlayerCardsInPlay(player, "Ajani's Pridemate");
-			for(Card entity:entities) {
-				card_Add_Counters(entity, Counters.P1P1, 1, true);
-			}
-		}
 
 	}//executeLifeGainEffects
 	
