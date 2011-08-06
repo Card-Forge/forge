@@ -1267,7 +1267,7 @@ public class CombatUtil {
   					AllZone.Combat.removeFromCombat(c);
   					c.tap();
   				}
-            }//Raging Ravine
+            }//Mijae Djinn
             
             if (AllZone.Combat.getAttackers().length == 1)
             {
@@ -1344,55 +1344,6 @@ public class CombatUtil {
 		                AllZone.Stack.add(ability2);
 		            }
             }
-            
-            
-           
-            
-            if(c.getName().equals("Zhang He, Wei General") && !c.getCreatureAttackedThisCombat()) {
-                final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-                
-                //final Card crd = c;
-                Ability ability2 = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        CardList cl = new CardList(play.getCards());
-                        cl = cl.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.isCreature() && !c.getName().equals("Zhang He, Wei General");
-                            }
-                        });
-                        
-                        final CardList creatures = cl;
-                        
-                        final Command untilEOT = new Command() {
-                            
-                            private static final long serialVersionUID = 8799962485775380711L;
-                            
-                            
-                            public void execute() {
-                                for(Card creat:creatures) {
-                                    if(AllZone.GameAction.isCardInPlay(creat)) {
-                                        creat.addTempAttackBoost(-1);
-                                    }
-                                }
-                            }
-                        };//Command
-                        
-                        for(Card creat:creatures) {
-                            if(AllZone.GameAction.isCardInPlay(creat)) {
-                                creat.addTempAttackBoost(1);
-                            }
-                        }
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                };
-                
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - all other creatures you control get +1/+0 until end of turn.");
-                ability2.setStackDescription(sb2.toString());
-                
-                AllZone.Stack.add(ability2);
-            }//Zhang He
             
             if(c.getName().equals("Soltari Champion") && !c.getCreatureAttackedThisCombat()) {
                 final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
