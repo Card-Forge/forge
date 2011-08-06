@@ -113,6 +113,7 @@ public class Card extends MyObservable {
     private String                       chosenColor                       = "";
     private String                       namedCard                         = "";
     private String						 topCardName					   = "";
+    private String						 reflectableMana				   = "";
     private Card						oldManTarget;
     private Command						oldManReleaseCommand;
     
@@ -465,6 +466,14 @@ public class Card extends MyObservable {
     
     public void setTopCardName(String s) {
         topCardName = s;
+    }
+    
+    public String getReflectableMana() {
+        return reflectableMana;
+    }
+    
+    public void setReflectableMana(String s) {
+    	reflectableMana = s;
     }
     
     /**

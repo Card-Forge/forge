@@ -123,9 +123,10 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 		}
 
 		// Build the list of cards to search for mana colors
-		// First, add all the cards owned by the target player
+		// First, add all the cards owned by the target player and sort out non-lands
     	CardList cl = new CardList();
     	cl.addAll(AllZone.getZone(Constant.Zone.Play,player).getCards());
+    	cl = cl.getType("Land");
     	
 		// Narrow down the card list to only non-reflected lands
 		// If during this search we find another reflected land, and it targets a different player
@@ -134,29 +135,24 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 		int ix = 0;
 		while (ix < cl.size()) {
     		Card otherCard = cl.get(ix);
-    		if (otherCard.isLand()) {
-    			if (otherCard.isReflectedLand() && !addOtherPlayerLands) {    				
-    				ArrayList<Ability_Mana> amList = otherCard.getManaAbility();
-    				// We assume reflected lands have only one mana ability
-    				// Find out which player it targets
-    				Ability_Mana am = amList.get(0);
-    				String otherTargetPlayer = am.getTargetPlayer();
-    				
-    				// If the target player of the other land isn't the same as the target player
-    				// of this land, we need to search the sets of mana he can produce as well.
-    				if (!otherTargetPlayer.equals(player)) {
-    					addOtherPlayerLands = true; // We only need to record this decision once
-    				}
-    				// Don't keep reflected lands in the list of lands
-    				cl.remove(ix);
-    			} else {
-    				// Other card is a land but not a reflected land
-    				ix++; // leave in list & look at next card
-    			}
-    		} else {
-    			// Other card is not a land -- remove it
-    			cl.remove(ix);
-    		}
+			if (otherCard.isReflectedLand() && !addOtherPlayerLands) {    				
+				ArrayList<Ability_Mana> amList = otherCard.getManaAbility();
+				// We assume reflected lands have only one mana ability
+				// Find out which player it targets
+				Ability_Mana am = amList.get(0);
+				String otherTargetPlayer = am.getTargetPlayer();
+				
+				// If the target player of the other land isn't the same as the target player
+				// of this land, we need to search the sets of mana he can produce as well.
+				if (!otherTargetPlayer.equals(player)) {
+					addOtherPlayerLands = true; // We only need to record this decision once
+				}
+				// Don't keep reflected lands in the list of lands
+				cl.remove(ix);
+			} else {
+				// Other card is a land but not a reflected land
+				ix++; // leave in list & look at next card
+			}
     	} // while ix < cl.size
 
 		getManaFromCardList(cl, colorsPlayerCanProduce, colorsToLookFor);
@@ -194,7 +190,10 @@ public class Ability_Reflected_Mana extends Ability_Mana {
     		for (int im = 0; im < amList.size(); im++) {
     			// Search all the mana abilities and add colors of mana
     			Ability_Mana am = amList.get(im);
-    			String newMana = am.mana(); // This call would break for a reflected mana ability
+    			String newMana = otherCard.getReflectableMana(); 
+    			if (newMana == "")
+    				newMana = am.mana(); // This call would break for a reflected mana ability
+
     			int ic = 0;
     			// Check if any of the remaining colors are in this mana ability
     			while (ic < colorsToLookFor.size()) {

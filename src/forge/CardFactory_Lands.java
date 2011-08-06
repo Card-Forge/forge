@@ -355,6 +355,7 @@ class CardFactory_Lands {
                 }
             });
 
+            card.setReflectableMana("WUBRG");
             card.addSpellAbility(mine);
             mine.setDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
             mine.setStackDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
@@ -416,6 +417,7 @@ class CardFactory_Lands {
                 }
             });
             
+            card.setReflectableMana("WUBRG");
             card.addSpellAbility(vivid);
             vivid.setDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
             vivid.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");

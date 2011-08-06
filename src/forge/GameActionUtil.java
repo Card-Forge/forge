@@ -1928,7 +1928,7 @@ public class GameActionUtil {
 					ability2.setStackDescription(card.getName()
 							+ " - "
 							+ c.getController()
-							+ " played a spell that�s both black and white, it becomes 4/4 and gains flying until end of turn.");
+							+ " played a spell that's both black and white, it becomes 4/4 and gains flying until end of turn.");
 					AllZone.Stack.add(ability2);
 				}
 			}//if
