@@ -6,5 +6,6 @@ A:SP$Retrieve | Cost$ G | Destination$ Library | TargetMin$ 0 | TargetMax$ X | S
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/renewing_touch.jpg
+#SVar:Picture:http://www.wizards.com/global/images/magic/general/renewing_touch.jpg
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=20357&type=card
 End
