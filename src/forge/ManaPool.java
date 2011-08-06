@@ -261,8 +261,11 @@ public class ManaPool extends Card {
     	        		normalMana[map.get(m.getColor())] += m.getAmount();
     	    	}
     	    	
+    	    	int totalMana = 0;
     	    	ArrayList<String> alChoice = new ArrayList<String>();
     	    	for(int i = 0; i < normalMana.length; i++){
+    	    		totalMana += normalMana[i];
+    	    		totalMana += snowMana[i];
     	    		if (normalMana[i] > 0){
     	    			alChoice.add(manaStrings[i]+"("+normalMana[i]+")");
     	    		}
@@ -271,7 +274,17 @@ public class ManaPool extends Card {
     	    		}
     	    	}
     	    	
-    			
+    	    	if (alChoice.size() == 1){
+    	    		choice = manaChoices.get(0);
+    	    		return choice;
+    	    	}
+    	    	
+    	    	int numColorless = Integer.parseInt(manaStr);
+    	    	if (numColorless >= totalMana){
+    	    		choice = manaChoices.get(0);
+    	    		return choice;
+    	    	}
+    	    	
 	    		Object o = AllZone.Display.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
 	    		if (o != null){
 	    			String ch = o.toString();
