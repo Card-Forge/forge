@@ -18190,7 +18190,9 @@ public class CardFactory_Creatures {
 							return c.getNetAttack() <= power &&CardFactoryUtil.canTarget(card, getTargetCard());
 						}
 					});
-					setTargetCard(human.get(0));
+					if(human.size() > 0) {
+						setTargetCard(human.get(0));
+					}
 					return human.size() > 0;
 				}
 				@Override
