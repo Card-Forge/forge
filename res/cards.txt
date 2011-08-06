@@ -1,3 +1,8 @@
+Fireball
+X R
+Sorcery
+Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.  Fireball costs 1 more to cast for each target beyond the first.
+
 Inferno
 5 R R
 Instant

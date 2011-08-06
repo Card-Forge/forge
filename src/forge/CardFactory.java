@@ -19430,6 +19430,208 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Fireball")) {
+        	//no reason this should never be enough targets
+        	final Card[] target = new Card[100];
+        	final int[] index = new int[1];
+        	//it can target up to two players also
+        	final String[] targetPlayers = new String[2];
+        	final int[] index2 = new int[1];
+
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -6293612568525319357L;
+
+				@Override
+        		public boolean canPlayAI() {
+					final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+					int humanLife = AllZone.Human_Life.getLife();
+					if(maxX >= humanLife) {
+						index2[0] = 0;
+						targetPlayers[index2[0]] = Constant.Player.Human;
+						//index2[0] = 1;
+						return true;
+					}
+        			return false;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			int damage = (card.getXManaCostPaid() - getNumTargets() + 1) / getNumTargets();
+        			//add that much damage to each creature
+        			//DEBUG
+        			System.out.println("Fireball - damage to each target: "+damage);
+        			System.out.print("Fireball - card targets: ");
+        			printCardTargets();
+        			System.out.print("Fireball - player targets: ");
+        			printPlayerTargets();
+        			if(card.getController().equals(Constant.Player.Computer)) {
+        				StringBuilder sb = new StringBuilder();
+        				sb.append(cardName+" - Computer causes "+damage+" to:\n\n");
+        				for(int i = 0; i < target.length; i++) {
+            				if(AllZone.GameAction.isCardInPlay(target[i])
+            						&& CardFactoryUtil.canTarget(card, target[i])
+            						&& null != target[i]) {
+            					sb.append(target[i]+"\n");
+            				}
+            			}
+            			for(int i = 0; i < targetPlayers.length; i++) {
+            				if( null != targetPlayers[i] ) {
+            					sb.append(targetPlayers[i]+"\n");
+            				}
+            			}
+        				javax.swing.JOptionPane.showMessageDialog(null, sb.toString());
+        			}
+        			for(int i = 0; i < target.length; i++) {
+        				if(AllZone.GameAction.isCardInPlay(target[i])
+        						&& CardFactoryUtil.canTarget(card, target[i])
+        						&& null != target[i]) {
+        					//DEBUG
+        					System.out.println("Fireball does "+damage+" to: "+target[i]);
+        					AllZone.GameAction.addDamage(target[i], card, damage);
+        				}
+        			}
+        			for(int i = 0; i < targetPlayers.length; i++) {
+        				if( null != targetPlayers[i] ) {
+        					//DEBUG
+        					System.out.println("Fireball does "+damage+" to: "+targetPlayers[i]);
+        					AllZone.GameAction.addDamage(targetPlayers[i], card, damage);
+        				}
+        			}
+        		}//resolve()
+        		
+        		//DEBUG
+        		private void printCardTargets() {
+        			System.out.print("[");
+        			for(int i = 0; i < target.length; i++) {
+        				System.out.print(target[i]+",");
+        			}
+        			System.out.println("]");
+        		}
+        		//DEBUG
+        		private void printPlayerTargets() {
+        			System.out.print("[");
+        			for(int i = 0; i < targetPlayers.length; i++) {
+        				System.out.print(targetPlayers[i]+",");
+        			}
+        			System.out.println("]");
+        		}
+        		
+        		private int getNumTargets() {
+        			int numTargets = 0;
+        			for( int j = 0; j < target.length; j++ ) {
+        				if( null != target[j] ) {
+        					numTargets++;
+        				}
+        			}
+        			for( int k = 0; k < targetPlayers.length; k++ ) {
+        				if( null != targetPlayers[k] ) {
+        					numTargets++;
+        				}
+        			}
+        			//DEBUG
+        			System.out.println("Fireball - numTargets = "+numTargets);
+        			return numTargets;
+        		}
+        		
+        	};//SpellAbility
+
+        	final Input input = new Input() {
+				private static final long serialVersionUID = 1099272655273322957L;
+
+				@Override
+        		public void showMessage() {
+        			AllZone.Display.showMessage("Select target creatures and/or players.  Currently, "+getNumTargets()+" targets.  Click OK when done.");
+        		}
+				
+				private int getNumTargets() {
+        			int numTargets = 0;
+        			for( int j = 0; j < target.length; j++ ) {
+        				if( null != target[j] ) {
+        					numTargets++;
+        				}
+        			}
+        			for( int k = 0; k < targetPlayers.length; k++ ) {
+        				if( null != targetPlayers[k] ) {
+        					numTargets++;
+        				}
+        			}
+        			//DEBUG
+        			System.out.println("Fireball - numTargets = "+numTargets);
+        			return numTargets;
+        		}
+
+        		@Override
+        		public void selectButtonCancel() { stop(); }
+        		
+        		@Override
+        		public void selectButtonOK() {
+        			if(this.isFree()) {
+						this.setFree(false);
+						AllZone.Stack.add(spell);
+						stop();
+					} else stopSetNext(new Input_PayManaCost(spell));
+        		}
+
+        		@Override
+        		public void selectCard(Card c, PlayerZone zone) {
+        			if( !CardFactoryUtil.canTarget(card, c)) {
+        				AllZone.Display.showMessage("Cannot target this card.");
+    					return; //cannot target
+        			}
+        			for(int i = 0; i < index[0]; i++) {
+        				if(c.equals(target[i])) {
+        					AllZone.Display.showMessage("You have already selected this target.");
+        					return; //cannot target the same creature twice.
+        				}
+        			}
+
+        			if(c.isCreature() && zone.is(Constant.Zone.Play)) {
+        				target[index[0]] = c;
+        				index[0]++;
+        				showMessage();
+
+        				/*if(index[0] == target.length) {
+        					if(this.isFree()) {
+        						this.setFree(false);
+        						AllZone.Stack.add(spell);
+        						stop();
+        					} else stopSetNext(new Input_PayManaCost(spell));
+        				}*/
+        			}
+        		}//selectCard()
+        		
+        		@Override
+                public void selectPlayer(String player) {
+        			for(int i = 0; i < index2[0]; i++) {
+        				if(player.equals(targetPlayers[i])) {
+        					AllZone.Display.showMessage("You have already selected this player.");
+        					return; //cannot target the same player twice.
+        				}
+        			}
+                    //spell.setTargetPlayer(player);
+                    targetPlayers[index2[0]] = player;
+                    index2[0]++;
+                    showMessage();
+                }
+        	};//Input
+
+        	Input runtime = new Input() {
+        		private static final long serialVersionUID = 3522833806455511494L;
+
+        		@Override
+        		public void showMessage() {
+        			index[0] = 0;
+        			index2[0] = 0;
+        			stopSetNext(input);
+        		}
+        	};//Input
+
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        	spell.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
