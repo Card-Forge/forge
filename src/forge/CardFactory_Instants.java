@@ -1178,7 +1178,7 @@ public class CardFactory_Instants {
                     int j = 4;
                     if(library.size() < 4) j = library.size();
                     for(int i = 0; i < j; i++) {
-                        top.add(library.get(0));
+                        top.add(library.get(i));
                     }
                     
                     if(top.size() > 0) {
