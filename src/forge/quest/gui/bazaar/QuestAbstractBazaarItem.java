@@ -2,14 +2,13 @@ package forge.quest.gui.bazaar;
 
 import forge.AllZone;
 import forge.gui.GuiUtils;
+import forge.gui.MultiLineLabel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -59,7 +58,7 @@ public abstract class QuestAbstractBazaarItem {
         JLabel nameLabel = new JLabel(name);
         nameLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
 
-        JLabel descriptionLabel = new JLabel("<html>" + description + "</html>");
+        JLabel descriptionLabel = new MultiLineLabel("<html>" + description + "</html>");
         descriptionLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 
         JLabel priceLabel = new JLabel("<html><b>Cost:</b> " + price + " credits</html>");
@@ -80,29 +79,63 @@ public abstract class QuestAbstractBazaarItem {
             purchaseButton.setEnabled(false);
         }
 
-
-        JPanel itemPanel = new JPanel();
-        BorderLayout layout = new BorderLayout();
-        layout.setHgap(3);
+        JPanel itemPanel = new JPanel(){
+            @Override
+            public Dimension getPreferredSize() {
+                Dimension realSize = super.getPreferredSize();
+                realSize.width = 100;
+                return realSize;
+            }
+        };
+        GridBagLayout layout = new GridBagLayout();
         itemPanel.setLayout(layout);
 
+        GridBagConstraints constraints = new GridBagConstraints(
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                new Insets(2,2,2,2),
+                0,
+                0
+        );
 
-        layout = new BorderLayout();
-        layout.setVgap(3);
-        JPanel centerPanel = new JPanel(layout);
+        constraints.gridheight = GridBagConstraints.REMAINDER;
+        layout.setConstraints(iconLabel, constraints);
+        itemPanel.add(iconLabel);
 
-        centerPanel.add(nameLabel, BorderLayout.NORTH);
-        centerPanel.add(descriptionLabel, BorderLayout.CENTER);
-        centerPanel.add(priceLabel, BorderLayout.SOUTH);
+        constraints.gridheight = 1;
+        constraints.gridx = 1;
+        constraints.weightx = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
 
-        JPanel buyPanel = new JPanel(new BorderLayout());
-        buyPanel.add(purchaseButton, BorderLayout.SOUTH);
+        layout.setConstraints(nameLabel, constraints);
+        itemPanel.add(nameLabel);
 
-        itemPanel.add(iconPanel, BorderLayout.WEST);
-        itemPanel.add(centerPanel, BorderLayout.CENTER);
-        itemPanel.add(buyPanel, BorderLayout.EAST);
+        constraints.gridy = 1;
+        layout.setConstraints(descriptionLabel, constraints);
+        itemPanel.add(descriptionLabel);
+
+        constraints.gridy = 2;
+        layout.setConstraints(priceLabel, constraints);
+        itemPanel.add(priceLabel);
+
+        constraints.gridy = 2;
+        constraints.gridx=2;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.gridheight= 1;
+        constraints.weightx = 0;
+        layout.setConstraints(purchaseButton,constraints);
+        itemPanel.add(purchaseButton);
 
         itemPanel.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 1), new EmptyBorder(5, 5, 5, 5)));
+
+        itemPanel.setMinimumSize(new Dimension(0,0));
+
 
         return itemPanel;
     }

@@ -90,6 +90,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         populateInventory(populateItems());
 
         JScrollPane scrollPane = new JScrollPane(inventoryPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBorder(new EmptyBorder(0,0,0,0));
         layout.setConstraints(scrollPane, constraints);
         this.add(scrollPane);
