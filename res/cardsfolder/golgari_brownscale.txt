@@ -8,4 +8,5 @@ K:Dredge 2
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_brownscale.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/166.jpg
 End

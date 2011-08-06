@@ -9,4 +9,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Tideforce_Elemental.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/41.jpg
 End

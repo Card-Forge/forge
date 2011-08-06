@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | GainC
 SVar:X:Count$Valid Ally.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agadeem_occultist.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/48.jpg
 End

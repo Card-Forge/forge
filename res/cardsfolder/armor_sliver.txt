@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_sliver.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/216.jpg
 End

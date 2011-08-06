@@ -7,4 +7,5 @@ A:SP$Destroy | Cost$ 3 G | ValidTgts$ Creature.attacking+withFlying | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Slingbow_Trap.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/111.jpg
 End

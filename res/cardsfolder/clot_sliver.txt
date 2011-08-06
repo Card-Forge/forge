@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clot_sliver.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/6.jpg
 End

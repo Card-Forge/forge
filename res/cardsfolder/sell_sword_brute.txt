@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | DmgAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sell_sword_brute.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/142.jpg
 End

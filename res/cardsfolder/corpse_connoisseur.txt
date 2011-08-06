@@ -9,4 +9,5 @@ K:Unearth:3 B
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_connoisseur.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/68.jpg
 End

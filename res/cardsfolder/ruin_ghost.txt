@@ -8,4 +8,5 @@ SVar:DBReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | De
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruin_ghost.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/19.jpg
 End

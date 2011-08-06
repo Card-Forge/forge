@@ -7,4 +7,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST
 K:stPumpAll:Creature.YouCtrl:2/0:isPresent Card.Self+countersGE5QUEST:As long as CARDNAME has five or more quest counters on it, creatures you control get +2/+0.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_the_goblin_lord.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/86.jpg
 End

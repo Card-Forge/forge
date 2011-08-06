@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | IsCurse$ True | KW$ HIDD
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Smoldering_Spires.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/143.jpg
 End

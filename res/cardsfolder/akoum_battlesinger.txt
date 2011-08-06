@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Ally+YouCtrl | NumAtt$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Akoum_Battlesinger.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/71.jpg
 End
-

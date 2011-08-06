@@ -10,4 +10,5 @@ SVar:AltCost:ExileFromHand<1/Card.Red>$You may exile a red card from your hand r
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrokinesis.jpg
 SVar:Rarity:Uncommon
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/115.jpg
 End

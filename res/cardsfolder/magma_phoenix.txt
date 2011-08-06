@@ -8,4 +8,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 3 | ValidDescription$ each creature and each player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_phoenix.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/150.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/148.jpg
 End

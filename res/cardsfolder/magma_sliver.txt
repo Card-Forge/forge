@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_slive.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/107.jpg
 End

@@ -11,5 +11,5 @@ A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ R | SpellDescription$ Add 
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_the_suns.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/mbs/134.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/134.jpg
 End
