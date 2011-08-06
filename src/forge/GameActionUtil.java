@@ -12404,6 +12404,7 @@ public class GameActionUtil
 					else if (c.getType().contains("Forest"))
 					{
 						c.addExtrinsicKeyword("Indestructible");
+						gloriousAnthemList.add(c);
 					}
 
 				} // for

@@ -39,7 +39,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ConcurrentMap;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;

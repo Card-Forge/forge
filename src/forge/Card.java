@@ -187,6 +187,21 @@ public class Card extends MyObservable
 	  return !hasFirstStrike() || (hasFirstStrike() && hasDoubleStrike());
   };
   
+  //for Planeswalker abilities and Effects (like Wither), Doubling Season gets ignored.
+  public void addCounterFromCostOrEffect(Counters counterName, int n)
+  {
+	  if(counters.containsKey(counterName))
+	  {
+		  Integer aux = counters.get(counterName) + n;
+		  counters.put(counterName,aux);
+	  }
+	  else
+	  {
+		  counters.put(counterName, Integer.valueOf(n));
+	  }
+	  this.updateObservers();
+  }
+  
   public void addCounter(Counters counterName, int n)
   {
 	  int multiplier = 1;

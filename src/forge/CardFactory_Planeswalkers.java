@@ -34,9 +34,9 @@ class CardFactory_Planeswalkers {
 	      {
 	   	   
 	   	   public void resolve()
-	          {
+	       {
 	   		   
-	   		 card2.addCounter(Counters.LOYALTY, 1);
+	   		 card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 	   		 
 	   		 turn[0] = AllZone.Phase.getTurn();
 	   		 
@@ -176,7 +176,7 @@ class CardFactory_Planeswalkers {
 	      {
 	        public void resolve()
 	        {
-	          card2.addCounter(Counters.LOYALTY, 1);
+	          card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 	          turn[0] = AllZone.Phase.getTurn();
 	          
 	          CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card2, "W", new String[]{"Creature", "Soldier"}, 1, 1, new String[] {""});
@@ -267,7 +267,7 @@ class CardFactory_Planeswalkers {
 	    	   public void resolve()
 	           {
 	    		   
-	    		 card2.addCounter(Counters.LOYALTY, 1);
+	    		 card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 	    		 
 	    		 turn[0] = AllZone.Phase.getTurn();
 	    		 
@@ -394,7 +394,7 @@ class CardFactory_Planeswalkers {
 	       {
 	         public void resolve()
 	         {
-	           card2.addCounter(Counters.LOYALTY, 1);
+	           card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 	           turn[0] = AllZone.Phase.getTurn();
 	           
 	           if (card2.getController().equals(Constant.Player.Human)){
@@ -722,7 +722,7 @@ class CardFactory_Planeswalkers {
 	       {
 	         public void resolve()
 	         {
-	           card2.addCounter(Counters.LOYALTY, 3);
+	           card2.addCounterFromCostOrEffect(Counters.LOYALTY, 3);
 	           turn[0] = AllZone.Phase.getTurn();
 	           
 	           Card c = getTargetCard();
@@ -993,7 +993,7 @@ class CardFactory_Planeswalkers {
 	      {
 	        public void resolve()
 	        {
-	          card2.addCounter(Counters.LOYALTY, 1);
+	          card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 	          turn[0] = AllZone.Phase.getTurn();
 	          
 	          
@@ -1232,7 +1232,7 @@ class CardFactory_Planeswalkers {
 	      {
 	        public void resolve()
 	        {
-	          card2.addCounter(Counters.LOYALTY,1);
+	          card2.addCounterFromCostOrEffect(Counters.LOYALTY,1);
 	          turn[0] = AllZone.Phase.getTurn();
 
 	          String s = getTargetPlayer();
@@ -1328,7 +1328,7 @@ class CardFactory_Planeswalkers {
 	      {
 	        public void resolve()
 	        {
-	          card2.addCounter(Counters.LOYALTY, 1);
+	          card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 	          turn[0] = AllZone.Phase.getTurn();
 	          
 	          if(getTargetCard() != null)
@@ -1595,7 +1595,7 @@ class CardFactory_Planeswalkers {
 	      {
 	        public void resolve()
 	        {
-	          card2.addCounter(Counters.LOYALTY, 1);
+	          card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 
 	          turn[0] = AllZone.Phase.getTurn();
 
@@ -1649,7 +1649,7 @@ class CardFactory_Planeswalkers {
 	          {
 	            count = 0;
 	            turn[0] = AllZone.Phase.getTurn();
-	            card2.addCounter(Counters.LOYALTY,1);
+	            card2.addCounterFromCostOrEffect(Counters.LOYALTY,1);
 	            stop();
 	          }
 	        }//selectCard()
@@ -1843,7 +1843,7 @@ class CardFactory_Planeswalkers {
 		      {
 		        public void resolve()
 		        {
-		          card2.addCounter(Counters.LOYALTY, 2);
+		          card2.addCounterFromCostOrEffect(Counters.LOYALTY, 2);
 
 		          turn[0] = AllZone.Phase.getTurn();
 		          
@@ -1981,7 +1981,7 @@ class CardFactory_Planeswalkers {
 		       {
 		         public void resolve()
 		         {
-		           card2.addCounter(Counters.LOYALTY, 1);
+		           card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 		           turn[0] = AllZone.Phase.getTurn();
 		           
 		           Card c = getTargetCard();
@@ -2215,7 +2215,7 @@ class CardFactory_Planeswalkers {
 	      {
 	        public void resolve()
 	        {
-	          card2.addCounter(Counters.LOYALTY, 1);
+	          card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 
 	          turn[0] = AllZone.Phase.getTurn();
 
@@ -2269,7 +2269,7 @@ class CardFactory_Planeswalkers {
 	          {
 	            count = 0;
 	            turn[0] = AllZone.Phase.getTurn();
-	            card2.addCounter(Counters.LOYALTY,1);
+	            card2.addCounterFromCostOrEffect(Counters.LOYALTY,1);
 	            stop();
 	          }
 	        }//selectCard()
@@ -2525,7 +2525,7 @@ class CardFactory_Planeswalkers {
 	      {
 	        public void resolve()
 	        {
-	          card2.addCounter(Counters.LOYALTY, 1);
+	          card2.addCounterFromCostOrEffect(Counters.LOYALTY, 1);
 	          turn[0] = AllZone.Phase.getTurn();
 
 	          final int boost = 1;
