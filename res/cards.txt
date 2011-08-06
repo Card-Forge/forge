@@ -1,3 +1,39 @@
+Fencer's Magemark
+2 R
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Permanents you Control:PTBonus/1/1!Keyword/First Strike:Type.Creature!enchanted:Creatures you control that are enchanted get +1/+1 and have first strike.
+SVar:PlayMain1:TRUE
+
+Fists of the Demigod
+1 BR
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Wither:Color.black:As long as enchanted creature is black, it gets +1/+1 and has wither. (It deals damage to creatures in the form of -1/-1 counters.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/First Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has first strike.
+SVar:PlayMain1:TRUE
+
+Pyre Zombie
+1 B R
+Creature Zombie
+no text
+2/1
+abDamageTgtCP 1 R R Sac-CARDNAME:2
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie from your graveyard to your hand.
+
+Slinking Giant
+2 R R
+Creature Giant Rogue
+no text
+4/4
+Wither
+WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant blocks, it gets -3/-0 until end of turn.
+WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant becomes blocked, it gets -3/-0 until end of turn.
+
 Serra Aviary
 3 W
 World Enchantment

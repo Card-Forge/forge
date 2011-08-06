@@ -10362,6 +10362,14 @@ public class GameActionUtil {
 	                            }
 	                		});
 			      		}
+		      			if(Specific[i].contains("enchanted")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+	                            public boolean addCard(Card c) {
+	                                if(c.isEnchanted()) return true;
+	                                return false;
+	                            }
+	                		});
+			      		}
 		      			if(Specific[i].equals("NotSelf")) {
 		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
