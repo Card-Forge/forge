@@ -2058,38 +2058,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Innocent Blood")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 3915880400376059369L;
-                
-                @Override
-                public void resolve() {
-                    AllZone.HumanPlayer.sacrificeCreature();
-                    AllZone.ComputerPlayer.sacrificeCreature();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList hList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-                    CardList cList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-                    CardList smallCreats = cList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && c.getNetAttack() < 2 && c.getNetDefense() < 3;
-                        }
-                    });
-                    
-                    hList = hList.getType("Creature");
-                    
-                    if(hList.size() == 0) return false;
-                    
-                    return smallCreats.size() > 0;
-                }
-            };
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
