@@ -3929,71 +3929,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        /* converted to keyword
-        //*************** START *********** START **************************
-        else if(cardName.equals("Feral Lightning")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -1841642966580694848L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
-                }
-                
-                @Override
-                public void resolve() {
-                    int multiplier = 1;
-                    int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
-                    if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-                    
-                    final Card[] token = new Card[3 * multiplier];
-                    final Command atEOT = new Command() {
-                        private static final long serialVersionUID = -1928884889370422828L;
-                        
-                        public void execute() {
-                            //destroy tokens at end of turn
-                            for(int i = 0; i < token.length; i++)
-                                if(AllZone.GameAction.isCardInPlay(token[i])) AllZone.GameAction.destroy(token[i]);
-                        }
-                    };
-                    AllZone.EndOfTurn.addAt(atEOT);
-                    
-                    for(int i = 0; i < token.length; i++)
-                        token[i] = makeToken();
-                }//resolve()
-                
-                Card makeToken() {
-                    Card c = new Card();
-                    
-                    c.setOwner(card.getController());
-                    c.setController(card.getController());
-                    
-                    c.setName("Elemental");
-                    c.setImageName("R 3 1 Elemental");
-                    c.setManaCost("R");
-                    c.setToken(true);
-                    
-                    c.addType("Creature");
-                    c.addType("Elemental");
-                    c.setBaseAttack(3);
-                    c.setBaseDefense(1);
-                    c.addIntrinsicKeyword("Haste");
-                    c.setSacrificeAtEOT(true);
-                    
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(c);
-                    
-                    return c;
-                }//makeToken()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
-        */
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Hammer of Bogardan")) {
             final Ability ability2 = new Ability(card, "2 R R R") {
@@ -5470,44 +5405,7 @@ public class CardFactory_Sorceries {
       	  card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
-          
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Goblin Offensive"))
-        {
-      	  final SpellAbility spell = new Spell(card){
-  			  private static final long serialVersionUID = -8830760963758230870L;
-
-  			  public void resolve()
-      		  {
-  				  for (int i = 0; i < card.getXManaCostPaid(); i ++)
-  				  {
-  					  makeToken();
-  				  }
-      			  card.setXManaCostPaid(0);
-      		  }
-  			  
-  			  public void makeToken()
-  	          {
-  	             CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[]{"Creature", "Goblin"}, 1, 1, new String[] {""});
-  	          }
-      		  
-      		  public boolean canPlayAI()
-      		  {
-      			  final int maxX = ComputerUtil.getAvailableMana().size() - 3;
-      			  return maxX > 2;
-      		  }
-      	  };
-      	  spell.setDescription("Put X 1/1 red Goblin creature tokens onto the battlefield.");
-      	  spell.setStackDescription("Goblin Offensive - put X 1/1 red Goblin creature tokens onto the battlefield.");
-      	  
-      	  card.clearSpellAbility();
-      	  card.addSpellAbility(spell);
-        }
-        //*************** END ************ END **************************
-        */
-          
-                
+        
         //*************** START *********** START **************************
         else if (cardName.equals("Lavalanche"))
         {
@@ -6212,32 +6110,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        /* converted to spMakeToken keyword
-        //*************** START *********** START **************************
-        else if(cardName.equals("Skittering Invasion")) {
-        	final SpellAbility spell = new Spell(card)
-        	{
-				private static final long serialVersionUID = -8303724057068847270L;
-
-				public void resolve()
-        		{
-        			CardList cl;
-
-        			for (int i=0;i<5;i++)
-        			{
-	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
-								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
-	        			for (Card crd:cl)
-	        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
-        			}
-        		}
-        	};
-        	spell.setStackDescription(cardName+" - " + card.getController() + " puts one or three 0/1 Eldrazi Spawn creature tokens onto the battlefield.");
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        */
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Buried Alive")) {
         	final SpellAbility spell = new Spell(card) {
@@ -6861,23 +6733,6 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        /* converted to spMakeToken keyword
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sound the Call")) {
-            SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -2359398136467055521L;
-
-				@Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Wolf", "G 1 1 Wolf", card, "G", new String[] {"Creature", "Wolf"},
-                            1, 1, new String[] {"This creature gets +1/+1 for each card named Sound the Call in each graveyard."});
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Reanimate")) {
