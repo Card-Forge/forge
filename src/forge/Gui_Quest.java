@@ -1,4 +1,10 @@
 package forge;
+import forge.error.ErrorViewer;
+import forge.properties.NewConstants;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -7,22 +13,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-
-import forge.error.ErrorViewer;
-import forge.properties.NewConstants;
 
 
 //presumes AllZone.QuestData is not null
@@ -100,7 +90,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         rankLabel.setText(questData.getRank());
         creditsLabel.setText("Credits: " + questData.getCredits());
         
-        if (questData.getMode().equals("Fantasy"))
+        if (questData.getMode().equals(QuestData.FANTASY))
         {
 	        int life = questData.getLife();
 	        if (life<15)
@@ -128,7 +118,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         if(Constant.Runtime.HumanDeck[0] != null) deckComboBox.setSelectedItem(Constant.Runtime.HumanDeck[0].getName());
         
-        if ("Fantasy".equals(questData.getMode()))
+        if (QuestData.FANTASY.equals(questData.getMode()))
         {
         	
         }
@@ -178,7 +168,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         });
         
         //if (questData.getMode().equals("Fantasy"))
-        if ("Fantasy".equals(questData.getMode()))
+        if (QuestData.FANTASY.equals(questData.getMode()))
         {
         	refreshPets();
         	
@@ -272,7 +262,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jPanel2.add(oppOneRadio, null);
         jPanel2.add(oppTwoRadio, null);
         jPanel2.add(oppThreeRadio, null);
-        if ("Fantasy".equals(questData.getMode())) {
+        if (QuestData.FANTASY.equals(questData.getMode())) {
         	this.getContentPane().add(otherShopsButton, null);
         	this.getContentPane().add(lifeLabel,null);
         	this.getContentPane().add(questsButton, null);
@@ -413,7 +403,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
         
-        if (questData.getMode().equals("Realistic"))
+        if (questData.getMode().equals(QuestData.REALISTIC))
         	AllZone.GameAction.newGame(human, computer);
         else
         {

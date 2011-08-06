@@ -1,23 +1,13 @@
 
 package forge;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+
+import java.io.*;
+import java.util.*;
 
 
 //when you create QuestData and AFTER you copy the AI decks over
@@ -83,6 +73,10 @@ public class QuestData implements NewConstants {
             "Level 6 - Regressed into Timmy", "Level 7 - Loves Blue Control", "Level 8 - Immobilized by Fear",
             "Level 9 - Lands = Friends", "Saltblasted for your talent", "Serra Angel is your girlfriend",};
 
+
+    public static final String FANTASY = "Fantasy";
+    public static final String REALISTIC = "Realistic";
+
     public QuestData(){
     	qdPrefs = new QuestData_Prefs();		
     	
@@ -102,7 +96,7 @@ public class QuestData implements NewConstants {
             cardPool.add("Snow-Covered Plains");
         }
     }//QuestData
-    
+
     //adds cards to card pool and sets difficulty
     public void newGame(int difficulty, String m) {
         setDifficulty(difficulty);
@@ -117,7 +111,7 @@ public class QuestData implements NewConstants {
         credits = qdPrefs.getStartingCredits();
         
         mode = m;
-        if (mode.equals("Fantasy"))
+        if (mode.equals(FANTASY))
         	life = 15;
         else
         	life = 20;
@@ -207,7 +201,7 @@ public class QuestData implements NewConstants {
             
             data.mode = state.mode;
             if (data.mode == null)
-            	data.mode = "Realistic";
+            	data.mode = REALISTIC;
             
             data.plantLevel = state.plantLevel;
             data.wolfPetLevel = state.wolfPetLevel;
@@ -868,7 +862,9 @@ public class QuestData implements NewConstants {
             QuestData.saveData(q);
             QuestData.loadData();
         }
-        
+
         System.exit(1);
     }
+
+
 }
