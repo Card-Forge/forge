@@ -2423,7 +2423,7 @@ public class CardFactory_Sorceries {
                 public void change(PlayerZone play, Player owner) {
                     Card[] c = play.getCards();
                     for(int i = 0; i < c.length; i++) {
-                        if(c[i].isCreature()) {
+                        if(c[i].isCreature() && !c[i].hasKeyword("Indestructible")) {
                             AllZone.GameAction.destroyNoRegeneration(c[i]);
                             CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", c[i].getController(), "W", new String[] {
                                     "Creature", "Spirit"}, 1, 1, new String[] {"Flying"});
