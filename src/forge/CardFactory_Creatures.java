@@ -20986,6 +20986,66 @@ public class CardFactory_Creatures {
                 //card.addSpellAbility(CardFactoryUtil.ability_Devour(card, magnitude));
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Ravenous Baloth")) {
+        	final SpellAbility ability = new Ability_Activated(card,"0") {
+
+				private static final long serialVersionUID = 4242089395799673253L;
+				public boolean canPlayAI() {
+        			CardList creats = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+        			creats = creats.filter(new CardListFilter()
+        			{
+        				public boolean addCard(Card c)
+        				{
+        					return c.getType().contains("Beast") || c.getKeyword().contains("Changeling") 
+        						   && CardFactoryUtil.canTarget(card, c);
+        				}
+        			});
+        			if( creats.size() > 0) {
+        				if (AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() < 5 ) {
+        					CardListUtil.sortAttackLowFirst(creats);
+        					setTargetCard(creats.get(0));
+        					return true;
+        				}
+        				else {
+        					return false;
+        				}
+        			}
+        			else return false;
+        		}
+
+        		public void resolve() {
+        			AllZone.GameAction.getPlayerLife(card.getController()).addLife(4);
+        			AllZone.GameAction.sacrifice(getTargetCard());
+        		}
+        	};//SpellAbility
+
+        	Input runtime = new Input() {
+        		
+				private static final long serialVersionUID = 6566691243159414430L;
+
+				public void showMessage() {
+        			//ability.setStackDescription(card +" - Sacrifice a land to gain 2 life.");
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+        			CardList choice = new CardList(play.getCards());
+        			choice  = choice.filter(new CardListFilter()
+        			{
+        				public boolean addCard(Card c)
+        				{
+        				   return c.getType().contains("Beast") || c.getKeyword().contains("Changeling") 
+ 						   		  && CardFactoryUtil.canTarget(card, c);
+        				}
+        			});
+        			stopSetNext(CardFactoryUtil.input_sacrifice(ability,choice,"Select a Beast to sacrifice."));
+        		}
+        	};
+        	ability.setDescription("Sacrifice a Beast: You gain 4 life.");
+        	ability.setStackDescription(card + " - You gain 4 life.");
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

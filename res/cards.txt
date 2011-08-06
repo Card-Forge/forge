@@ -1,3 +1,9 @@
+Ravenous Baloth
+2 G G
+Creature Beast
+no text
+4/4
+
 Elven Cache
 2 G G
 Sorcery
