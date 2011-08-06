@@ -1,0 +1,9 @@
+Name:Mageta the Lion
+ManaCost:2 W W
+Types:Legendary Creature Human Spellshaper
+Text:no text
+PT:3/3
+A:AB$DestroyAll | Cost$ 2 W W T Discard<2/Any> | ValidCards$ Creature.Other | NoRegen$ True | SpellDescription$ Destroy all creatures except for Mageta the Lion. Those creatures can't be regenerated.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mageta_the_lion.jpg
+End

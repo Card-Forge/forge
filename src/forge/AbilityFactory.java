@@ -302,6 +302,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("DestroyAll")){
+			if (isAb)
+				SA = AbilityFactory_Destroy.createAbilityDestroyAll(this);
+			if (isSp){
+				SA = AbilityFactory_Destroy.createSpellDestroyAll(this);
+			}
+		}
+		
 		if(API.equals("Token")){
 			AbilityFactory_Token AFT = new AbilityFactory_Token(this);
 			
