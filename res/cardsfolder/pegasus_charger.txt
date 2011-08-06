@@ -1,0 +1,10 @@
+Name:Pegasus Charger
+ManaCost:2 W
+Types:Creature Pegasus
+Text:no text
+PT:2/1
+K:Flying
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pegasus_charger.jpg
+End

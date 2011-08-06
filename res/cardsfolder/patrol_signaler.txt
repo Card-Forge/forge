@@ -1,0 +1,8 @@
+Name:Patrol Signaler
+ManaCost:1 W
+Types:Creature Kithkin Soldier
+Text:no text
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/patrol_signaler.jpg
+End

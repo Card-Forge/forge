@@ -1,0 +1,9 @@
+Name:Primal Rage
+ManaCost:1 G
+Types:Enchantment
+Text:no text
+K:StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature:Creatures you control have trample. (If a creature you control would deal enough damage to its blockers to destroy them, you may have it deal the rest of its damage to defending player or planeswalker.)
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_rage.jpg
+End

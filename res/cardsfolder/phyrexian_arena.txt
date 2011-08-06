@@ -1,0 +1,7 @@
+Name:Phyrexian Arena
+ManaCost:1 B B
+Types:Enchantment
+Text:At the beginning of your upkeep, you draw a card and you lose 1 life.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_arena.jpg
+End

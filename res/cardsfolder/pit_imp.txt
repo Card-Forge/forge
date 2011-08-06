@@ -1,0 +1,10 @@
+Name:Pit Imp
+ManaCost:B
+Types:Creature Imp
+Text:Play this ability no more than twice each turn.
+PT:0/1
+K:Flying
+K:abPump B:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_imp.jpg
+End

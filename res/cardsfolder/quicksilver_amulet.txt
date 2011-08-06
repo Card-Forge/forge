@@ -1,0 +1,7 @@
+Name:Quicksilver Amulet
+ManaCost:4
+Types:Artifact
+Text:4, tap: You may put a creature card from your hand onto the battlefield.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_amulet.jpg
+End

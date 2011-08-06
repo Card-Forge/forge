@@ -1,0 +1,11 @@
+Name:Paladin en-Vec
+ManaCost:1 W W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:First Strike
+K:Protection from black
+K:Protection from red
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/paladin_en_vec.jpg
+End

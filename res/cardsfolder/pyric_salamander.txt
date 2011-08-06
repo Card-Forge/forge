@@ -1,0 +1,10 @@
+Name:Pyric Salamander
+ManaCost:1 R
+Types:Creature Salamander
+Text:no text
+PT:1/1
+K:abPump R:+1/+0/At the beginning of the end step, sacrifice CARDNAME.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pyric_salamander.jpg
+End

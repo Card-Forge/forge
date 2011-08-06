@@ -1,0 +1,9 @@
+Name:Phyrexian Monitor
+ManaCost:3 B
+Types:Creature Skeleton
+Text:no text
+PT:2/2
+K:RegenerateMe:B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_monitor.jpg
+End

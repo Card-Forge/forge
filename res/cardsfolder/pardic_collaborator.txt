@@ -1,0 +1,10 @@
+Name:Pardic Collaborator
+ManaCost:3 R
+Types:Creature Human Barbarian
+Text:no text
+PT:2/2
+K:First Strike
+K:abPump B:+1/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_collaborator.jpg
+End

@@ -1,0 +1,8 @@
+Name:Phyrexian War Beast
+ManaCost:3
+Types:Artifact Creature Beast
+Text:When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
+PT:3/4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_war_beast.jpg
+End

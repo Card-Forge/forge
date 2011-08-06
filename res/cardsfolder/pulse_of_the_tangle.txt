@@ -1,0 +1,7 @@
+Name:Pulse of the Tangle
+ManaCost:1 G G
+Types:Sorcery
+Text:Put a 3/3 green Beast creature token into play. Then if an opponent controls more creatures than you, return Pulse of the Tangle to its owner's hand.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card39690.jpg
+End

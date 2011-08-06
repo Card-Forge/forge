@@ -1,0 +1,13 @@
+Name:Prophetic Prism
+ManaCost:2
+Types:Artifact
+Text:no text
+K:When CARDNAME enters the battlefield, draw a card.
+K:1, tap: add W
+K:1, tap: add U
+K:1, tap: add B
+K:1, tap: add R
+K:1, tap: add G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_prism.jpg
+End

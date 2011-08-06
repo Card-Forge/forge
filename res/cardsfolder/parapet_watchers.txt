@@ -1,0 +1,9 @@
+Name:Parapet Watchers
+ManaCost:2 U
+Types:Creature Kithkin Soldier
+Text:no text
+PT:2/2
+K:abPump WU:+0/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/parapet_watchers.jpg
+End

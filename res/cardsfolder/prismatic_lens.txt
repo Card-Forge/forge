@@ -1,0 +1,14 @@
+Name:Prismatic Lens
+ManaCost:2
+Types:Artifact
+Text:no text
+K:tap: add 1
+K:1, tap: add W
+K:1, tap: add U
+K:1, tap: add B
+K:1, tap: add R
+K:1, tap: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_lens.jpg
+End

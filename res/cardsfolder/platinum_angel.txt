@@ -1,0 +1,9 @@
+Name:Platinum Angel
+ManaCost:7
+Types:Artifact Creature Angel
+Text:You can't lose the game and your opponents can't win the game.
+PT:4/4
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/platinum_angel.jpg
+End

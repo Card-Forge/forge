@@ -1,0 +1,8 @@
+Name:Proper Burial
+ManaCost:3 W
+Types:Enchantment
+Text:no text
+K:Whenever a creature you control is put into a graveyard from the battlefield, you gain life equal to that creature's toughness.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/proper_burial.jpg
+End

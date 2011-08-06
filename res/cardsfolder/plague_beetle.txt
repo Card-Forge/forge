@@ -1,0 +1,9 @@
+Name:Plague Beetle
+ManaCost:B
+Types:Creature Insect
+Text:no text
+PT:1/1
+K:Swampwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129678.jpg
+End

@@ -1,0 +1,9 @@
+Name:Primeval Shambler
+ManaCost:4 B
+Types:Creature Horror Mercenary
+Text:no text
+PT:3/3
+K:abPump B:+1/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_shambler.jpg
+End

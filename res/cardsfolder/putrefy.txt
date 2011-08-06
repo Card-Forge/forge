@@ -1,0 +1,8 @@
+Name:Putrefy
+ManaCost:1 B G
+Types:Instant
+Text:Destroy target artifact or creature. It can't be regenerated.
+K:spDestroyTgt:Artifact,Creature:NoRegen
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefy.jpg
+End

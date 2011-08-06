@@ -1,0 +1,8 @@
+Name:Phyrexian Walker
+ManaCost:0
+Types:Artifact Creature Construct
+Text:no text
+PT:0/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3600.jpg
+End

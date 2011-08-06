@@ -1,0 +1,8 @@
+Name:Pearled Unicorn
+ManaCost:2 W
+Types:Creature Unicorn
+Text:no text
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card4147.jpg
+End

@@ -1,0 +1,9 @@
+Name:Plateau
+ManaCost:no cost
+Types:Land Mountain Plains
+Text:no text
+K:tap: add W
+K:tap: add R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/plateau.jpg
+End

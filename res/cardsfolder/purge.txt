@@ -1,0 +1,8 @@
+Name:Purge
+ManaCost:1 W
+Types:Instant
+Text:Destroy target artifact creature or black creature. It can't be regenerated.
+K:spDestroyTgt:Creature.Artifact,Creature.Black:NoRegen
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/purge.jpg
+End

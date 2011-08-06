@@ -1,0 +1,7 @@
+Name:Privileged Position
+ManaCost:2 GW GW GW
+Types:Enchantment
+Text:Other permanents you control can't be the targets of spells or abilities your opponents control.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/privileged_position.jpg
+End

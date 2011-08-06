@@ -1,0 +1,8 @@
+Name:Phyrexian Hulk
+ManaCost:6
+Types:Artifact Creature Golem
+Text:no text
+PT:5/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83203.jpg
+End

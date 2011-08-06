@@ -1,0 +1,9 @@
+Name:Preeminent Captain
+ManaCost:2 W
+Types:Creature Kithkin Soldier
+Text:Whenever Preeminent Captain attacks, you may put a Soldier creature card from your hand into play tapped and attacking.
+PT:2/2
+K:First Strike
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/preeminent_captain.jpg
+End

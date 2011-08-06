@@ -1,0 +1,9 @@
+Name:Perimeter Captain
+ManaCost:W
+Types:Creature Human Soldier
+Text:Whenever a creature you control with defender blocks, you may gain 2 life.
+PT:0/4
+K:Defender
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg
+End

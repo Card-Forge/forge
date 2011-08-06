@@ -1,0 +1,8 @@
+Name:Painter's Servant
+ManaCost:2
+Types:Artifact Creature Scarecrow
+Text:As Painter's Servant enters the battlefield, choose a color.\r\nAll cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
+PT:1/3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/painters_servant.jpg
+End

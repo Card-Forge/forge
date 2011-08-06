@@ -1,0 +1,9 @@
+Name:Plated Slagwurm
+ManaCost:4 G G G
+Types:Creature Wurm
+Text:no text
+PT:8/8
+K:CARDNAME can't be the target of spells or abilities your opponents control.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_slagwurm.jpg
+End

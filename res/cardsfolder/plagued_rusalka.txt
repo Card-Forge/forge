@@ -1,0 +1,10 @@
+Name:Plagued Rusalka
+ManaCost:B
+Types:Creature Spirit
+Text:no text
+PT:1/1
+K:abPumpTgtC B Sac-Creature:-1/-1
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/plagued_rusalka.jpg
+End

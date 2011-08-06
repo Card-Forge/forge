@@ -1,0 +1,7 @@
+Name:Psychic Drain
+ManaCost:X U B
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_drain.jpg
+End

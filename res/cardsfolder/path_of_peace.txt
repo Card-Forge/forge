@@ -1,0 +1,9 @@
+Name:Path of Peace
+ManaCost:3 W
+Types:Sorcery
+Text:Destroy target creature. Its owner gains 4 life.
+K:spDestroyTgt:Creature:Drawback$GainLifeTgtOwner/4
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/path_of_peace.jpg
+End

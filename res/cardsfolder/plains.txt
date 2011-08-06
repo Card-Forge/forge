@@ -1,0 +1,9 @@
+Name:Plains
+ManaCost:no cost
+Types:Basic Land Plains
+Text:no text
+K:tap: add W
+K:SVar:PicCount:4
+K:SVar:Rarity:Land
+K:SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=8322&type=card\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=159288&type=card\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=4428
+End

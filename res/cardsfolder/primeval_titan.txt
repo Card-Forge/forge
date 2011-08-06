@@ -1,0 +1,9 @@
+Name:Primeval Titan
+ManaCost:4 G G
+Types:Creature Giant
+Text:Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
+PT:6/6
+K:Trample
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_titan.jpg
+End

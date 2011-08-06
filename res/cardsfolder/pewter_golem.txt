@@ -1,0 +1,9 @@
+Name:Pewter Golem
+ManaCost:5
+Types:Artifact Creature Golem
+Text:no text
+PT:4/2
+K:RegenerateMe:1 B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pewter_golem.jpg
+End

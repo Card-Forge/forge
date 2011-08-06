@@ -1,0 +1,8 @@
+Name:Power Matrix
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abPumpTgtC T:+1/+1/Flying & First Strike & Trample
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/power_matrix.jpg
+End

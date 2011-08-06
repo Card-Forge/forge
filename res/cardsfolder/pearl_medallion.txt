@@ -1,0 +1,9 @@
+Name:Pearl Medallion
+ManaCost:2
+Types:Artifact
+Text:White spells you cast cost 1 less to cast.
+K:CostChange:Player:Less:1:Spell:white:All:NoSpecial
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pearl_medallion.jpg
+End

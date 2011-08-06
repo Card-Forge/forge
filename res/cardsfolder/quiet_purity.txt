@@ -1,0 +1,8 @@
+Name:Quiet Purity
+ManaCost:W
+Types:Instant Arcane
+Text:Destroy target enchantment.
+K:spDestroyTgt:Enchantment
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/quiet_purity.jpg
+End

@@ -1,0 +1,8 @@
+Name:Phyrexian Rager
+ManaCost:2 B
+Types:Creature Horror
+Text:When Phyrexian Rager comes into play, you draw a card and you lose 1 life.
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27660.jpg
+End

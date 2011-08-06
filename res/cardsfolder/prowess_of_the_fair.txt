@@ -1,0 +1,8 @@
+Name:Prowess of the Fair
+ManaCost:1 B
+Types:Tribal Enchantment Elf
+Text:no text
+K:Whenever another nontoken Elf is put into your graveyard from the battlefield, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/prowess_of_the_fair.jpg
+End

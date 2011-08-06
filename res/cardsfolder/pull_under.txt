@@ -1,0 +1,6 @@
+Name:Pull Under
+ManaCost:5 B
+Types:Instant Arcane
+Text:no text
+K:spPumpTgtCurse:-5/-5
+End

@@ -1,0 +1,10 @@
+Name:Phyrexian Ironfoot
+ManaCost:3
+Types:Snow Artifact Creature Construct
+Text:no text
+PT:3/4
+K:CARDNAME doesn't untap during your untap step.
+K:Untap:1 S
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_ironfoot.jpg
+End

@@ -1,0 +1,8 @@
+Name:Phyrexian Ghoul
+ManaCost:2 B
+Types:Creature Zombie
+Text:no text
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_ghoul.jpg
+End

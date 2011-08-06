@@ -1,0 +1,8 @@
+Name:Primordial Sage
+ManaCost:4 G G
+Types:Creature Spirit
+Text:Whenever you play a creature spell, you may draw a card.
+PT:4/5
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_sage.jpg
+End

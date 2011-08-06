@@ -1,0 +1,8 @@
+Name:Predator's Strike
+ManaCost:1 G
+Types:Instant
+Text:no text
+K:spPumpTgt:+3/+3/Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_strike.jpg
+End

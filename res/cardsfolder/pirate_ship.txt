@@ -1,0 +1,11 @@
+Name:Pirate Ship
+ManaCost:4 U
+Types:Creature Human Pirate
+Text:no text
+PT:4/3
+K:CARDNAME can't attack unless defending player controls an Island.
+K:When you control no Islands, sacrifice CARDNAME.
+K:abDamageTgtCP T:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pirate_ship.jpg
+End

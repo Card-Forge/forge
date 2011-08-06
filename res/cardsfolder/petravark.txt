@@ -1,0 +1,11 @@
+Name:Petravark
+ManaCost:3 R
+Types:Creature Nightmare Beast
+Text:(NOTE: This spell is rather buggy and should not be used at this time.)
+PT:2/2
+K:WheneverKeyword:EntersBattleField:Self:Play:MoveFrom-Play-Exiled:NormalInput/Specific/Type.Land:ASAP:Yes_No:AttachTarget:When Petravark enters the battlefield, exile target land.
+K:WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:None
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
+End

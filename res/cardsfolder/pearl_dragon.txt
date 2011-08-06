@@ -1,0 +1,10 @@
+Name:Pearl Dragon
+ManaCost:4 W W
+Types:Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+K:abPump 1 W:+0/+1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pearl_dragon.jpg
+End

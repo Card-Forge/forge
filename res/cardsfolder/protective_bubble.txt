@@ -1,0 +1,9 @@
+Name:Protective Bubble
+ManaCost:3 U
+Types:Enchantment Aura
+Text:Enchanted creature is unblockable and has shroud.
+K:Enchant creature
+K:enPump:Unblockable & Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/protective_bubble.jpg
+End

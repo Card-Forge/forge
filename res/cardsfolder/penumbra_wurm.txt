@@ -1,0 +1,9 @@
+Name:Penumbra Wurm
+ManaCost:5 G G
+Types:Creature Wurm
+Text:When Penumbra Wurm is put into a graveyard from play, put a 6/6 black Wurm creature token with trample into play.
+PT:6/6
+K:Trample
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/penumbra_wurm.jpg
+End
