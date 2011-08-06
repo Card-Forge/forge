@@ -6446,6 +6446,7 @@ res/cardsfolder/soul_channeling.txt svneol=native#text/plain
 res/cardsfolder/soul_collector.txt svneol=native#text/plain
 res/cardsfolder/soul_exchange.txt svneol=native#text/plain
 res/cardsfolder/soul_feast.txt -text svneol=native#text/plain
+res/cardsfolder/soul_foundry.txt svneol=native#text/plain
 res/cardsfolder/soul_kiss.txt -text svneol=native#text/plain
 res/cardsfolder/soul_link.txt svneol=native#text/plain
 res/cardsfolder/soul_manipulation.txt -text svneol=native#text/plain
