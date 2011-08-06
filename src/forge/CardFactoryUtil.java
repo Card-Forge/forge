@@ -3092,6 +3092,8 @@ public class CardFactoryUtil {
 	            if(card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Play)
 	                    && CardFactoryUtil.canTarget(ability, card)) {
 	            	ability.setTargetCard(card2);
+	            	ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
+                            + " +1/+1 counter/s from " + card + " on " + card2);
                     AllZone.Stack.add(ability);
 	                stop();
 	            }

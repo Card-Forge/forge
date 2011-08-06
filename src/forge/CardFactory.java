@@ -5263,8 +5263,6 @@ public class CardFactory implements NewConstants {
                     private static final long serialVersionUID = 304026662487997331L;
                     
                     public void execute() {
-                        ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
-                                + " +1/+1 counter/s from " + card + " on target artifact creature.");
                         // Target as Modular is Destroyed
                         if(card.getController().equals(AllZone.ComputerPlayer)) {
                             CardList choices = new CardList(AllZone.Computer_Play.getCards()).filter(new CardListFilter() {
@@ -5274,11 +5272,17 @@ public class CardFactory implements NewConstants {
                             });
                             if(choices.size() != 0){
                             	ability.setTargetCard(CardFactoryUtil.AI_getBestCreature(choices));
-                            	AllZone.Stack.add(ability);
+                            	
+                            	if (ability.getTargetCard() != null){
+	                            	ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
+	                                        + " +1/+1 counter/s from " + card + " on " + ability.getTargetCard());
+	                            	AllZone.Stack.add(ability);
+                            	}
                             }
                         }
-                        else
+                        else{
                         	AllZone.InputControl.setInput(CardFactoryUtil.modularInput(ability, card));
+                        }
                     }
                 });
                 

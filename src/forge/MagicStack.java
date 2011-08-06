@@ -144,6 +144,10 @@ public class MagicStack extends MyObservable {
 			System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 		}
 		
+		if (AllZone.Phase.is(Constant.Phase.Cleanup)){	// If something triggers during Cleanup, need to repeat
+			AllZone.Phase.repeatPhase();
+		}
+		
 		// TODO: triggered abilities need to be fixed 
 		if (!(sp instanceof Ability_Triggered || sp instanceof Ability_Static))	
 			AllZone.Phase.setPriority(sp.getActivatingPlayer());	// when something is added we need to setPriority

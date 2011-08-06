@@ -93,6 +93,11 @@ public class Phase extends MyObservable
     	bCombat = b;
     } 
     
+    private boolean bRepeat = false;
+    public void repeatPhase() {
+    	bRepeat = true;
+    } 
+    
 	private String phaseOrder[] = {
 			Constant.Phase.Untap,
 			Constant.Phase.Upkeep,
@@ -127,6 +132,7 @@ public class Phase extends MyObservable
         nCombatsThisTurn = 0;
         extraCombats = 0;
         bCombat = false;
+        bRepeat = false;
         this.updateObservers();
     }
     
@@ -144,9 +150,6 @@ public class Phase extends MyObservable
     }
 
 	public void handleBeginPhase(){
-		if (Phase.GameBegins == 0)
-			return;
-		
 		AllZone.Phase.setPhaseEffects(false);
 		// Handle effects that happen at the beginning of phases
         final String phase = AllZone.Phase.getPhase();
@@ -164,7 +167,7 @@ public class Phase extends MyObservable
 	    }
 	    	
 	    else if (phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2)){
-	    	// TODO: Move the function to Player class, and use gainMamanaDrainMana() instead
+	    	// TODO: Move the function to Player class, and use gainManaDrainMana() instead
 	    	// turn.gainManaDrainMana();
 	    	
 	    	if (turn.isHuman() && Phase.ManaDrain_BonusMana_Human.size() != 0){
@@ -388,7 +391,8 @@ public class Phase extends MyObservable
         }
         
         if (phaseOrder[phaseIndex].equals(Constant.Phase.Cleanup))
-        	AllZone.Phase.setPlayerTurn(handleNextTurn());
+        	if (!bRepeat)
+        		AllZone.Phase.setPlayerTurn(handleNextTurn());
         
         if (is(Constant.Phase.Combat_Declare_Blockers)){        	
          	AllZone.Stack.unfreezeStack();
@@ -412,8 +416,12 @@ public class Phase extends MyObservable
         	phaseIndex = findIndex(Constant.Phase.Combat_Declare_Attackers);
         }  
         else {
-            phaseIndex++;
-            phaseIndex %= phaseOrder.length;
+        	if (!bRepeat){	// for when Cleanup needs to repeat itself
+	            phaseIndex++;
+	            phaseIndex %= phaseOrder.length;
+        	}
+        	else
+        		bRepeat = false;
         }
         
         // **** Anything BELOW Here is actually in the next phase. Maybe move this to handleBeginPhase

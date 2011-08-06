@@ -55,8 +55,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return input;
         }
         
-        if (AllZone.Phase.doPhaseEffects())
+        if (Phase.GameBegins != 0 && AllZone.Phase.doPhaseEffects()){
+        	// Handle begin phase stuff, then start back from the top
         	AllZone.Phase.handleBeginPhase();
+        	return updateInput();
+        }
         
     	// If the Phase we're in doesn't allow for Priority, return null to move to next phase
         if (AllZone.Phase.isNeedToNextPhase())	
@@ -100,7 +103,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         }
         
         else if(phase.equals(Constant.Phase.Cleanup))	// Player needs to discard
-        	return new Input_Cleanup();
+        	if (AllZone.Stack.size() == 0)	// fall through to resolve things like Madness
+        		return new Input_Cleanup();
 
         // *********************
         // Special phases handled above, everything else is handled simply by priority
