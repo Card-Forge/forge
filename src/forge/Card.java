@@ -2311,6 +2311,10 @@ public class Card extends MyObservable {
                     		r = r && (y > x);
                     }
         			
+                    else if (exR[j].startsWith("attacking")) r = r && isAttacking();
+        			
+                    else if (exR[j].startsWith("blocking")) r = r && isBlocking();
+        			
                     //TODO: enchanting
                     //TODO: counters
                     else if(exR[j].startsWith("named")) //by name
@@ -2357,6 +2361,18 @@ public class Card extends MyObservable {
 	
 	public boolean isWhite() {
 		return CardUtil.getColors(this).contains(Constant.Color.White);
+	}
+	
+	public boolean isAttacking() {
+		CardList attackers = new CardList(AllZone.Combat.getAttackers());
+        attackers.addAll(AllZone.pwCombat.getAttackers());
+        return attackers.contains(this);
+	}
+	
+	public boolean isBlocking() {
+		CardList blockers = AllZone.Combat.getAllBlockers();
+        blockers.add(AllZone.pwCombat.getAllBlockers());
+     	return blockers.contains(this);
 	}
 
 }
