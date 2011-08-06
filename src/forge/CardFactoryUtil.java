@@ -3577,7 +3577,7 @@ public class CardFactoryUtil {
         PlayerZone opHand = AllZone.getZone(Constant.Zone.Hand, oppController);
         
         PlayerZone myLibrary = AllZone.getZone(Constant.Zone.Library, cardController);
-        PlayerZone opLibrary = AllZone.getZone(Constant.Zone.Library, oppController);    
+        //PlayerZone opLibrary = AllZone.getZone(Constant.Zone.Library, oppController);    
         
         final String[] l;
         l = s.split("/"); // separate the specification from any math

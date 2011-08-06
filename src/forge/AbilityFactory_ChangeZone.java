@@ -807,6 +807,9 @@ public class AbilityFactory_ChangeZone {
 	    	if (!destination.equals("Battlefield"))
 	    		pl = tgtC.getOwner();
 	    	
+	    	if (tgtC.isToken())	// todo: moveTo should handle the isToken check
+	    		continue;
+	    	
 	    	if (destination.equals("Library")){
 	    		// library position is zero indexed
 	    		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;        
