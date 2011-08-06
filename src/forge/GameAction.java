@@ -22,7 +22,7 @@ public class GameAction
   }
 
   @SuppressWarnings("unused") // getCurrentCard
-private Card getCurrentCard(int ID)
+  private Card getCurrentCard(int ID)
   {
     CardList all = new CardList();
     all.addAll(AllZone.Human_Graveyard.getCards());

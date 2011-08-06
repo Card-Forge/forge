@@ -6349,20 +6349,17 @@ public class GameActionUtil
 		PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Play, opponent);
 		CardList opponentList = new CardList(opponentZone.getCards());
 		opponentList = opponentList.getType("Creature");
-		//System.out.println("opponent has " + opponentList.size() + " creatures");
 		
+		/*
 		for (int i = 0; i < opponentList.size(); i++)
 		{
 			Card tmpCard = opponentList.get(i);
 			System.out.println("opponent has: " + tmpCard);
 		}
+		*/
 		
 		if (3 > opponentList.size())
-		{
-			// they do not have 3 or more creatures in play, so Defense of the
-			// Heart would not be able to be sacrificed.
 			return;
-		}
 
 		// opponent has more than 3 creatures in play, so check if Defense of
 		// the Heart is in play and sacrifice it for the effect.

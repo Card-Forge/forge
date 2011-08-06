@@ -18691,7 +18691,6 @@ public class CardFactory_Creatures {
 	        			AllZone.Stack.add(ability);
 	        		}
 	        	};
-	        	card.clearSpellKeepManaAbility();
 	        	card.addComesIntoPlayCommand(comesIntoPlay);
 	        }//*************** END ************ END **************************
 	      
