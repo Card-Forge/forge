@@ -12,10 +12,12 @@ Da Vinci 3
 Darth Vador
 Data
 Doc Holiday 3
+Dr No
 Frodo 3
 Genghis Khan 3
 Green Lantern
 Han Solo
+Harry Potter
 Homer Simpson 3
 Iceman
 Indiana Jones 3
@@ -33,6 +35,7 @@ Newton
 Picard
 Pinky and the Brain
 Professor X
+R2-D2
 Rocky 3
 Rogue
 Seabiscuit 3
