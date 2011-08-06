@@ -85,7 +85,7 @@ public class AllZoneUtil {
 		CardList cards = new CardList();
 		cards.add(getPlayerCardsInPlay(Constant.Player.Human));
 		cards.add(getPlayerCardsInPlay(Constant.Player.Computer));
-		if( cardName != null && cardName != "" ) {
+		if( cardName != null && !"".equals(cardName) ) {
 			cards = cards.getName(cardName);
 		}
 		return cards;
@@ -147,8 +147,7 @@ public class AllZoneUtil {
 	 * @return a CardList containing all cards with that name in the target graveyard
 	 */
 	public static CardList getPlayerGraveyard(final String player, final String cardName) {
-		CardList cards = new CardList();
-		cards = getPlayerGraveyard(player);
+		CardList cards = getPlayerGraveyard(player);
 		cards = cards.getName(cardName);
 		return cards;
 	}
@@ -223,8 +222,7 @@ public class AllZoneUtil {
 	 * @return a CardList of all cards of the given name in the given player's library
 	 */
 	public static CardList getPlayerCardsInLibrary(final String player, final String cardName) {
-		CardList cards = new CardList();
-		cards = getPlayerCardsInLibrary(player);
+		CardList cards = getPlayerCardsInLibrary(player);
 		return cards.getName(cardName);
 	}
 	

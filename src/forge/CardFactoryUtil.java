@@ -1731,9 +1731,9 @@ public class CardFactoryUtil {
     	
     	String whoString;
     	if (who.startsWith("Opp")) {
-    		whoString = new String("an opponent controls");
+    		whoString = "an opponent controls";
     	} else
-    		whoString = new String("you control");
+    		whoString = "you control";
     	
     	String abString = "tap: add to your mana pool one mana of any " + colorOrType.toLowerCase() +
     		" that a land " + whoString + " could produce.";

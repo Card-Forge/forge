@@ -16,7 +16,7 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 		this.colorOrType = new String(colorOrType);
 		this.who = new String(who);
 		this.setReflectedMana(true);
-		this.colorChosen = new String("0"); // Default -- add no mana
+		this.colorChosen = "0"; // Default -- add no mana
 		this.undoable = true;
 	}
 	
