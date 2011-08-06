@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Elf Warrior
 Text:no text
 PT:4/4
-K:stPumpSelf:Creature:+4/+4/Trample:Metalcraft:Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample.
+K:stPumpSelf:Creature:4/4/Trample:Metalcraft:Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ezuris_brigade.jpg
 End
