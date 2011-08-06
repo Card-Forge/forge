@@ -1040,7 +1040,7 @@ public class CardFactory_Sorceries {
                     CardList creature2 = new CardList();
                     creature2.addAll(play.getCards());
                     creature2 = creature2.getType("Creature");                   
-                    if(player != "Human"){
+                    if(player != Constant.Player.Human){
                 		if(creature2.size() > 0) {
                         Card[] Target = new Card[creature2.size()];
                         for(int i = 0; i < creature2.size(); i++) {
@@ -1093,7 +1093,7 @@ public class CardFactory_Sorceries {
 			        target.subtractLife(5,card);
 
 					// Player Returns Creature Card from Graveyard to Hand
-                    if(player == "Human") {                 	
+                    if(player == Constant.Player.Human) {                 	
                         AllZone.Display.showMessage("Return a creature from your graveyard to your hand: ");
                         ButtonUtil.enableOnlyCancel();
                         }
@@ -1104,7 +1104,7 @@ public class CardFactory_Sorceries {
                     creature.addAll(zone.getCards());
                     creature = creature.getType("Creature"); 
 
-                    if(player == "Human"){
+                    if(player == Constant.Player.Human){
                         Card[] Target = new Card[creature.size()];
                         for(int i = 0; i < creature.size(); i++) {
             				Card crd = creature.get(i);
@@ -1325,7 +1325,7 @@ public class CardFactory_Sorceries {
             	Card target = null;
             	Card c = null;
                 String player = card.getController();
-                if(player == "Human"){
+                if(player == Constant.Player.Human){
                 	Card[] Attached = getSourceCard().getAttachedCards(); 
                 	Card [] Choices = new Card[Attached.length];
                 	boolean SystemsGo = true;
@@ -1408,7 +1408,7 @@ public class CardFactory_Sorceries {
 					String player = AllZone.Phase.getActivePlayer();
 					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
 					Card Minds_D = card;
-					if(player == "Human") AllZone.GameAction.shuffle(card.getController());
+					if(player == Constant.Player.Human) AllZone.GameAction.shuffle(card.getController());
                 		CardList MindsList = new CardList(Play.getCards());
                 		MindsList = MindsList.getName("Mind's Desire");
                 		MindsList.remove(card);
@@ -1706,7 +1706,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     String player = card.getController();
-                    if(player == "Human"){
+                    if(player == Constant.Player.Human){
                         CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
                         CardList dragons = new CardList();
                         
@@ -3788,7 +3788,7 @@ public class CardFactory_Sorceries {
 
 				@Override
                 public boolean canPlayAI() {
-                    PlayerLife compLife = AllZone.GameAction.getPlayerLife("Computer");
+                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
                     int life = compLife.getLife();
                     if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
                     else return false;
@@ -4654,8 +4654,8 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                 	// Haunting Echoes shouldn't be cast if only basic land in graveyard or library is empty
-                	CardList graveyard = AllZoneUtil.getPlayerGraveyard("Human");
-                	CardList library = AllZoneUtil.getPlayerCardsInLibrary("Human");
+                	CardList graveyard = AllZoneUtil.getPlayerGraveyard(Constant.Player.Human);
+                	CardList library = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
                 	int graveCount =  graveyard.size();
             		graveyard = graveyard.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
