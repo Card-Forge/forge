@@ -275,17 +275,18 @@ public class CardFactory implements NewConstants {
         
         //look for "Comes into play tapped." in the "no text" line
         //of card.txt and add the appropriate code to make that happen
+        /* slapshot5 - I cleaned up all cards manually on 12/30/10
         while(card.getKeyword().contains("Comes into play tapped."))
         {
         	card.removeIntrinsicKeyword("Comes into play tapped.");
         	card.addIntrinsicKeyword("CARDNAME enters the battlefield tapped.");
-        }
+        }*/
         if(card.getKeyword().contains("CARDNAME enters the battlefield tapped.")) {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 203335252453049234L;
                 
                 public void execute() {
-                	System.out.println("Executing previous keyword");
+                	//System.out.println("Executing previous keyword");
                     card.tap();
                 }
             });
@@ -2029,6 +2030,10 @@ public class CardFactory implements NewConstants {
 
         
         //Keyword for spells, that damage all creatures
+        /*
+         * Converted all cards to AbilityFactory DamageAll. 12/30/10.  Let this code hang around for a beta or two
+         * to make sure the AF code is at least as solid.
+         * 
         if (hasKeyword(card, "spDamageAll") != -1)
         {
         	int n = hasKeyword(card, "spDamageAll");
@@ -2184,6 +2189,7 @@ public class CardFactory implements NewConstants {
                   }
         	}
         }//spDamageAll
+        */
         
         /* Cards converted to AF_AB$Damage
         while(hasKeyword(card, "abDamage") != -1) {
