@@ -17,6 +17,7 @@ Air Elemental
 Ajani's Pridemate
 Akki Raider
 Akoum Refuge
+Alaborn Cavalier
 Alaborn Zealot
 Albino Troll
 Alert Shu Infantry
@@ -300,6 +301,7 @@ Flame Spirit
 Flamekin Harbinger
 Flamekin Spitfire
 Flametongue Kavu
+Flanking Troops
 Flashfires
 Fledgling Mawcor
 Fleetfoot Panther
@@ -713,6 +715,7 @@ Searing Flesh
 Seascape Aerialist
 Seashell Cameo
 Seaside Citadel
+Seasoned Marshal
 Seedcradle Witch
 Segovian Leviathan
 Sejiri Merfolk

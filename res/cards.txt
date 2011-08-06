@@ -1,3 +1,46 @@
+Soltari Trooper
+1 W
+Creature Soltari Soldier
+no text
+1/1
+Shadow
+WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Soltari Trooper attacks, it gets +1/+1 until end of turn.
+
+Seasoned Marshal
+2 W W
+Creature Human Knight
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Seasoned Marshal attacks, you may tap target creature.
+
+Order of the Golden Cricket 
+1 W
+Creature Kithkin Knight
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/Flying:Self:ASAP:PayMana/W:No Special Condition:Whenever Order of the Golden Cricket attacks, you may pay {W}. If you do, it gains flying until end of turn.
+
+Flanking Troops
+2 W W
+Creature Human Soldier
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Flanking Troops attacks, you may tap target creature.
+
+Charging Paladin
+2 W
+Creature Human Knight
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/0/3:Self:ASAP:No_Condition:No Special Condition:Whenever Charging Paladin attacks, it gets +0/+3 until end of turn.
+
+Alaborn Cavalier
+2 W W
+Creature Human Knight
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Alaborn Cavalier attacks, you may tap target creature.
+
 Volrath's Dungeon
 2 B B
 Enchantment

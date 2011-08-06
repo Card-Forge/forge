@@ -231,6 +231,7 @@ Ceta Disciple
 Champion's Drake
 Chandra's Outrage
 Changeling Sentinel
+Charging Paladin
 Charging Slateback
 Chartooth Cougar
 Chatter of the Squirrel
@@ -967,6 +968,7 @@ Oraxid
 Orcish Cannonade
 Order of Leitbur
 Order of the Ebon Hand
+Order of the Golden Cricket 
 Order of the Sacred Bell
 Ornithopter
 Orochi Leafcaller
@@ -1276,6 +1278,7 @@ Sneaky Homunculus
 Sokenzan Bruiser
 Solidarity
 Soltari Foot Soldier
+Soltari Trooper
 Somber Hoverguard
 Sootfeather Flock
 Soothing Balm

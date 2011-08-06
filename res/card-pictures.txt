@@ -38,6 +38,12 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+soltari_trooper.jpg              	http://www.wizards.com/global/images/magic/general/soltari_trooper.jpg
+seasoned_marshal.jpg                  	http://www.wizards.com/global/images/magic/general/seasoned_marshal.jpg
+order_of_the_golden_cricket.jpg		http://www.wizards.com/global/images/magic/general/order_of_the_golden_cricket.jpg
+flanking_troops.jpg			http://www.wizards.com/global/images/magic/general/flanking_troops.jpg
+charging_paladin.jpg              	http://www.wizards.com/global/images/magic/general/charging_paladin.jpg
+alaborn_cavalier.jpg              	http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_cavalier.jpg
 volraths_dungeon.jpg              	http://www.wizards.com/global/images/magic/general/volraths_dungeon.jpg
 surveilling_sprite.jpg              	http://www.wizards.com/global/images/magic/general/surveilling_sprite.jpg
 merfolk_seer.jpg                  	http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
