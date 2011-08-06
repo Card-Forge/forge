@@ -3738,7 +3738,7 @@ public class GameAction {
             
             if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && card.isCreature()) {
                 damageToAdd = 0;
-                card.addCounterFromNonEffect(Counters.M1M1, damage);
+                card.addCounter(Counters.M1M1, damage);
             }
             if(card.isCreature() && (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) ) {
                 final Card thisCard = source;
@@ -3779,7 +3779,7 @@ public class GameAction {
         int damageToAdd = damage;
         if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && card.isCreature()) {
             damageToAdd = 0;
-            card.addCounterFromNonEffect(Counters.M1M1, damage);
+            card.addCounter(Counters.M1M1, damage);
         }
         if(source.getName().equals("Spiritmonger")) {
             final Card thisCard = source;
