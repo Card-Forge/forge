@@ -10031,7 +10031,7 @@ public class CardFactory implements NewConstants {
             ability.setDescription("Tap: Take an extra turn after this one.");
         }//*************** END ************ END **************************
 
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Millstone") || cardName.equals("Tower of Murmurs")) {
         	final int millCards = cardName.equals("Millstone") ? 2 : 8;
@@ -10062,7 +10062,7 @@ public class CardFactory implements NewConstants {
             ab1.setDescription(desc);
             card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         if(cardName.equals("Serpent Generator")) {
