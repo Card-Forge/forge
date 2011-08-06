@@ -4,6 +4,7 @@ Types:Instant
 Text:no text
 K:spDamageTgtP:X:Feedback Bolt deals damage to target player equal to the number of artifacts you control.:Feedback Bolt - deals damage to target player equal to the number of artifacts you control.
 SVar:X:Count$TypeYouCtrl.Artifact
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feedback_bolt.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/64.jpg

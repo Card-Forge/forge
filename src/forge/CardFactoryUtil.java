@@ -4264,15 +4264,17 @@ public class CardFactoryUtil {
     
     public static String getMostProminentCreatureType(CardList list) {
         
+    	if(list.size() == 0) return "";
+    	
         Map<String, Integer> map = new HashMap<String, Integer>();
         
         for(Card c : list) {
             ArrayList<String> typeList = c.getType();
             
             for(String var:typeList) {
-                if(CardUtil.isACreatureType(var) && !map.containsKey(var)) map.put(var, 1);
-                else {
-                    map.put(var, map.get(var) + 1);
+                if(CardUtil.isACreatureType(var)) {
+                	if (!map.containsKey(var)) map.put(var, 1);
+                	else map.put(var, map.get(var) + 1);
                 }
             }
         }//for
@@ -4282,7 +4284,7 @@ public class CardFactoryUtil {
         
         for(Entry<String, Integer> entry : map.entrySet()){
             String type = entry.getKey();
-            Log.debug(type + " - " + entry.getValue());
+            //Log.debug(type + " - " + entry.getValue());
             
             if(max < entry.getValue()) {
                 max = entry.getValue();
@@ -4341,14 +4343,17 @@ public class CardFactoryUtil {
         PlayerZone compHandZone = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
         
         CardList compPlay = new CardList(compPlayZone.getCards());
-        CardList compLib = new CardList(compLibZone.getCards());
         CardList compHand = new CardList(compHandZone.getCards());
+        CardList compAll = new CardList(compPlayZone.getCards());
+        compAll.addAll(compLibZone.getCards());
+        compAll.addAll(compHandZone.getCards());
         
         humanPlay = humanPlay.getType("Creature");
         humanLib = humanLib.getType("Creature");
         
         compPlay = compPlay.getType("Creature");
-        compLib = compLib.getType("Creature");
+        compHand = compHand.getType("Creature");
+        compAll = compAll.getType("Creature");
         
         //Buffs
         if(c.getName().equals("Conspiracy") || c.getName().equals("Cover of Darkness")
@@ -4357,34 +4362,31 @@ public class CardFactoryUtil {
             
             String type = "";
             int number = 0;
-            if((c.getName().equals("Shared Triumph") || c.getName().equals("Cover of Darkness") || c.getName().equals(
-                    "Steely Resolve"))
-                    && compPlay.size() > 7) {
+            
+            type = getMostProminentCreatureType(compAll);
+            number = getNumberOfMostProminentCreatureType(compAll, type);
+            if(number >= 5) s = type;
+
+            if((c.getName().equals("Shared Triumph") || c.getName().equals("Cover of Darkness") 
+            		|| c.getName().equals("Steely Resolve")) && compPlay.size() > 7) {
                 type = getMostProminentCreatureType(compPlay);
                 number = getNumberOfMostProminentCreatureType(compPlay, type);
-                
+                if(number >= 3) s = type;
             }
-            
-            if(number >= 3) s = type;
-            else {
-                type = getMostProminentCreatureType(compLib);
-                number = getNumberOfMostProminentCreatureType(compLib, type);
-                if(number >= 5) s = type;
-                
+            else if((c.getName().equals("Belbe's Portal")) && compHand.size() > 1) {
+                type = getMostProminentCreatureType(compHand);
+                number = getNumberOfMostProminentCreatureType(compHand, type);
+                if(number >= 2) s = type;
             }
-            
-            CardList turnTimber = new CardList();
-            turnTimber.addAll(compPlay.toArray());
-            turnTimber.addAll(compLib.toArray());
-            turnTimber.addAll(compHand.toArray());
-            
-            turnTimber = turnTimber.getName("Turntimber Ranger");
-            
-            if(c.getName().equals("Conspiracy") && turnTimber.size() > 0) s = "Ally";
+            else if((c.getName().equals("Conspiracy")) && compAll.size() > 1) {
+	            CardList turnTimber = compAll;
+	            turnTimber = turnTimber.getName("Turntimber Ranger");
+	            if(c.getName().equals("Conspiracy") && turnTimber.size() > 0) s = "Ally";
+            }
             
         }
         //Debuffs
-        else if(c.getName().equals("Engineered Plague")) {
+        else if(c.getName().equals("Enginered Plague")) {
             String type = "";
             int number = 0;
             if(c.getName().equals("Engineered Plague") && humanPlay.size() > 6) {
