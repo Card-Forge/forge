@@ -668,10 +668,11 @@ public class CardFactory implements NewConstants {
                     public void execute() {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                         CardList choice = new CardList(play.getCards()).getType("Land");
-                        AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, choice,
+                        if (!choice.isEmpty()) {
+                        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, choice,
                                 "Select a land you control.", false, false));
-                        ButtonUtil.disableAll();
-                        
+                        	ButtonUtil.disableAll();
+                        }
                     }//execute()
                 };//Command
                 card.addComesIntoPlayCommand(intoPlay);
