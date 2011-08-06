@@ -2486,8 +2486,14 @@ public class Card extends MyObservable {
              	{ if(!getName().equals(Property.substring(5))) return false;}
              else if(Property.startsWith("non")) // ... Other Card types
              	{ if(isType(Property.substring(3))) return false;}
-             else
-             	if(!isType(Property)) return false;
+             else {
+            	 if(Property.equals("ChosenType")) {
+            		 if(!isType(source.getChosenType())) return false;
+            	 }
+            	 else {
+            		 if(!isType(Property)) return false;
+            	 }
+             }
        return true;
 	}//hasProperty
 

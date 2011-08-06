@@ -41,7 +41,6 @@ public class StaticEffects
 		cardToEffectsList.put("Coat of Arms", new String[] {"Coat_of_Arms"});
 		cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
 		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
-		cardToEffectsList.put("Cover of Darkness", new String[] {"Cover_of_Darkness"});
 		cardToEffectsList.put("Covetous Dragon", new String[] {"Covetous_Dragon"});
 		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
 		cardToEffectsList.put("Crucible of Fire", new String[] {"Crucible_of_Fire"});

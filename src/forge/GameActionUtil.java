@@ -12749,43 +12749,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command Cover_of_Darkness           = new Command() {
-		private static final long serialVersionUID   = -6707183535529395830L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword("Fear");
-			}
-
-			list.clear();
-			CardList cards = AllZoneUtil.getCardsInPlay("Cover of Darkness");
-
-			for(int outer = 0; outer < cards.size(); outer++) {
-				Card card = cards.get(outer);
-
-				CardList creature = AllZoneUtil.getTypeInPlay(card.getChosenType());
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.getType().contains(card.getChosenType())
-							|| c.getKeyword().contains("Changeling")) {
-						c.addExtrinsicKeyword("Fear");
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Cover of Darkness
-
+	
 	public static Command Steely_Resolve              = new Command() {
 
 		private static final long serialVersionUID   = 2005579284163773044L;
@@ -17100,7 +17064,6 @@ public class GameActionUtil {
 		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
-		commands.put("Cover_of_Darkness", Cover_of_Darkness);
 		commands.put("Covetous_Dragon", Covetous_Dragon);
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		commands.put("Crucible_of_Fire", Crucible_of_Fire);
