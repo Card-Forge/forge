@@ -21,6 +21,7 @@ Darrin Stephens 3
 Darth Vader 3
 Data 3
 Deadpool 3
+Demon 3
 Dino 3
 Doc Holiday 3
 Doran 3
@@ -70,6 +71,7 @@ Neo 3
 Newton 3
 Oberon 3
 Odin 3
+Optimus Prime 3
 Pebbles Flintstone 3
 Picard 3
 Pointy Haired Boss 3

@@ -96,6 +96,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Data 3", "hard", "B deck with Korlash, Heir to Blackblade and Liliana Vess");
         addToDeckList("Deadpool 2", "medium", "BR deck with Ashenmoor Liege and Grixis Grimblade");
         addToDeckList("Deadpool 3", "hard", "BR deck with Ashenmoor Liege and Grixis Grimblade");
+        addToDeckList("Demon 3", "hard", "Mono B Demon deck");
 //        addToDeckList("Dick Grayson 3", "hard", "WU Constructed");
         addToDeckList("Dino 2", "medium", "Mono brown affinity deck with Affinity for artifacts and Modular cards");
         addToDeckList("Dino 3", "hard", "Mono brown affinity deck with Affinity for artifacts and Modular cards");
@@ -156,6 +157,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Grampa Simpson 3", "hard", "WRG Double Strike deck with equipments and auras");
 //        addToDeckList("Green Arrow 2", "medium", "G Anti-Air deck");
 //        addToDeckList("Green Arrow 3", "hard", "G Angry Large Monsters deck");
+        addToDeckList("Green Arrow 2", "medium", "Mono G Archer deck");
         addToDeckList("Green Lantern 3", "hard", "UBR Deathtouch deck with auras and several equipments");
 //        addToDeckList("Gunslinger 3", "hard", "WBRG Cascade deck");
         
@@ -251,6 +253,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Oberon 2", "medium", "UB Faerie deck");
         addToDeckList("Oberon 3", "hard", "UB Faerie deck");
         addToDeckList("Odin 3", "hard", "WU deck with Thistledown Liege and Grand Arbiter Augustin IV");
+        addToDeckList("Optimus Prime 3", "hard", "Mono U deck with Modular creatures and proliferate spells");
 //        addToDeckList("Owlman 2", "medium", "U Ebony Owl deck");
 //        addToDeckList("Owlman 3", "hard", "B Control Standard deck");
         
