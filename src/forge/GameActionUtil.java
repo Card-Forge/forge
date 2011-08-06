@@ -48,6 +48,7 @@ public class GameActionUtil
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 		upkeep_Bitterblossom();
 		upkeep_Battle_of_Wits();
+		upkeep_Barren_Glory();
 		upkeep_Felidar_Sovereign();
 		upkeep_Klass();
 		upkeep_Convalescence();
@@ -1133,8 +1134,7 @@ public class GameActionUtil
 					    }
 			        }
 			        AllZone.EndOfTurn.addUntil(untilEOT);
-				
-				
+						
 			}
 		};
 		
@@ -1211,8 +1211,10 @@ public class GameActionUtil
 	{
 		if (destroyed.isCreature())
 			executeDestroyCreatureCardEffects(c, destroyed);
-		else if (destroyed.isLand())
+		if (destroyed.isLand())
 			executeDestroyLandCardEffects(c, destroyed);
+		if (destroyed.isEnchantment())
+			executeDestroyEnchantmentCardEffects(c, destroyed);
 	}
 	
 	private static boolean showDialog(Card c)
@@ -1433,6 +1435,37 @@ public class GameActionUtil
 	
 	
 	//***LANDS END HERE***
+	
+	//***ENCHANTMENTS START HERE***
+	
+	public static void executeDestroyEnchantmentCardEffects(Card c, Card destroyed)
+	{
+		if (c.getName().equals("Femeref Enchantress"))
+			destroyEnchantment_Femeref_Enchantress(c, destroyed);
+	}
+	
+	
+	//***
+	
+	public static void destroyEnchantment_Femeref_Enchantress(Card c, Card destroyed)
+	{
+		final Card crd = c;
+
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				String player = crd.getController();
+				AllZone.GameAction.drawCard(player);
+			}
+		};
+		ability.setStackDescription("Femeref Enchantress - " + c.getController() + " draws a card.");
+		
+		AllZone.Stack.add(ability);
+	}
+	
+	
+	//***ENCHANTMENTS END HERE***
 	
 	public static void executeLandfallEffects(Card c)
 	{
@@ -3909,6 +3942,36 @@ public class GameActionUtil
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Battle_of_Wits
+	
+	private static void upkeep_Barren_Glory()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone handZone = AllZone.getZone(Constant.Zone.Hand, player);
+
+		CardList list = new CardList(playZone.getCards());
+		CardList playList = new CardList(playZone.getCards());
+		
+		list = list.getName("Barren Glory");
+
+		if (playList.size() == 1 && list.size() == 1 &&  handZone.size() == 0)
+		{
+			Ability ability = new Ability(list.get(0), "0")
+			{
+				public void resolve()
+				{
+					String opponent = AllZone.GameAction.getOpponent(player);
+					PlayerLife life = AllZone.GameAction
+							.getPlayerLife(opponent);
+					life.setLife(0);
+				}
+			};// Ability
+
+			ability.setStackDescription("Barren Glory - " + player
+					+ " wins the game");
+			AllZone.Stack.add(ability);
+		}// if
+	}// upkeep_Barren_Glory
 	
 	private static void upkeep_Sleeper_Agent()
 	{

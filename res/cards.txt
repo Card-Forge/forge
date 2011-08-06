@@ -1,3 +1,71 @@
+Barren Glory
+4 W W
+Enchantment
+At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
+
+Treetop Scout
+G
+Creature Elf Scout
+no text
+1/1
+This creature can't be blocked except by creatures with flying
+
+Treetop Rangers
+2 G
+Creature Elf
+no text
+2/2
+This creature can't be blocked except by creatures with flying
+
+Treetop Bracers
+1 G
+Enchantment Aura
+Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
+Enchant creature
+
+Silhana Ledgewalker
+1 G
+Creature Elf Rogue
+no text
+1/1
+This creature can't be blocked except by creatures with flying
+This card can't be the target of spells or abilities your opponents control.
+
+Auramancer
+2 W
+Creature Human
+When Auramancer enters the battlefield, you may return target card from your graveyard to your hand.
+2/2
+
+Cartographer
+2 G
+Creature Human
+When Cartographer enters the battlefield, you may return target land card from your graveyard to your hand.
+2/2
+
+Scarland Thrinax
+B R G
+Creature Lizard
+no text
+2/2
+
+Femeref Enchantress
+G W
+Creature Human Druid
+no text
+1/2
+Whenever an enchantment is put into a graveyard from the battlefield, draw a card.
+
+Conqueror's Pledge
+2 W W W
+Sorcery
+no text
+
+Seal of Removal
+U
+Enchantment
+no text
+
 Seal of Fire
 R
 Enchantment

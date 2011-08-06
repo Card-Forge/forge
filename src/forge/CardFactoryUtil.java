@@ -2407,6 +2407,21 @@ public class CardFactoryUtil
 	  return list;
   }
   
+  //do card1 and card2 share any colors?
+  public static boolean sharesColorWith(Card card1, Card card2)
+  {
+	  ArrayList<String> card1Colors = CardUtil.getColors(card1);
+	  ArrayList<String> card2Colors = CardUtil.getColors(card2);
+	  
+	  for (String color : card1Colors)
+	  {
+		  if (card2Colors.contains(color))
+			  return true;
+	  }
+	  
+	  return false;
+  }
+  
   //may return null
   static public Card getRandomCard(CardList list)
   {

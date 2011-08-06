@@ -14527,13 +14527,12 @@ public class CardFactory implements NewConstants {
           //TODO
         }
         
+        public boolean canPlayAI() { return false; }
         
       };//SpellAbility
       
       //card.clearSpellAbility();
       ability.setDescription("G: Discard a creature card: Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.");
-      //ability.setBeforePayMana(new Input_NoCost_TapAbility((Ability) ability));
-      //ability.setBeforePayMana(new Input_PayManaCost(ability));
       ability.setStackDescription("Survival of the Fittest - search for a creature card and put into hand");
       card.addSpellAbility(ability);
     }//*************** END ************ END **************************
@@ -16687,7 +16686,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     {
       final Ability ability = new Ability(card, "0")
       {
-        public boolean canPlayAI() {return getCreature().size() != 0;}
+        public boolean canPlayAI() {return getCreature().size() != 0 || AllZone.Human_Life.getLife() < 4;}
 
         public void chooseTargetAI()
         {
@@ -16709,7 +16708,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
           {
             public boolean addCard(Card c)
             {
-              //only get 1/1 flyers or 2/1 creatures
+              //only get 1/1 flyers or 2/1 or bigger creatures
               return (2 <= c.getNetAttack()) || c.getKeyword().contains("Flying");
             }
           });
@@ -16739,6 +16738,140 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
           AllZone.GameAction.sacrifice(card);
         }
       }, true));
+    }//*************** END ************ END **************************
+    
+  //*************** START *********** START **************************
+    else if(cardName.equals("Seal of Removal"))
+    {
+      final Ability ability = new Ability(card, "0")
+      {
+        public boolean canPlayAI() {return getCreature().size() != 0;}
+
+        public void chooseTargetAI()
+        {
+          CardList list = getCreature();
+          list.shuffle();
+          setTargetCard(list.get(0));
+
+          AllZone.GameAction.sacrifice(card);
+        }//chooseTargetAI()
+        CardList getCreature()
+        {
+          CardList list = new CardList(AllZone.Computer_Play.getCards());
+          list = list.filter(new CardListFilter()
+          {
+            public boolean addCard(Card c)
+            {
+              return c.isCreature() && (c.getNetAttack() >= 3|| c.getKeyword().contains("Flying") ||
+            		 c.isEnchanted());
+            }
+          });
+          return list;
+        }//getCreature()
+
+        public void resolve()
+        {
+          if(getTargetCard() != null)
+          {
+        	  
+            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+            {
+            	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
+            	AllZone.GameAction.moveTo(hand, getTargetCard());
+            }
+          }
+        }//resolve()
+      };//SpellAbility
+
+      card.addSpellAbility(ability);
+      ability.setDescription("Sacrifice Seal of Removal: return target creature to its owner's hand.");
+      ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability, new Command()
+      {
+		
+		private static final long serialVersionUID = 2565599788533507611L;
+
+		public void execute()
+        {
+          AllZone.GameAction.sacrifice(card);
+        }
+      }));
+    }//*************** END ************ END **************************
+    
+
+    //*************** START *********** START **************************
+    else if(cardName.equals("Conqueror's Pledge"))
+    {   	
+      SpellAbility spell = new Spell(card)
+      {
+		private static final long serialVersionUID = -2902179434079334177L;
+
+		public void resolve()
+        {
+          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+          for (int i = 0; i < 6; i++)
+          {
+            Card c = new Card();
+
+            c.setOwner(card.getController());
+            c.setController(card.getController());
+
+            c.setName("Kor Soldier");
+            c.setImageName("W 1 1 Kor Soldier");
+            c.setManaCost("W");
+            c.setToken(true);
+
+            c.addType("Creature");
+            c.addType("Kor");
+            c.addType("Soldier");
+            c.setBaseAttack(1);
+            c.setBaseDefense(1);
+
+            play.add(c);
+          }//for
+        }//resolve()
+      };
+      
+      spell.setDescription("Put six 1/1 white Kor Soldier creature tokens onto the battlefield.");
+      spell.setStackDescription(card.getName() + " - " + card.getController() + " puts six 1/1 white Kor Soldier creature tokens onto the battlefield.");
+      
+      SpellAbility kicker = new Spell(card)
+      {
+
+		private static final long serialVersionUID = 1376255732058673590L;
+
+		public void resolve()
+        {
+          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+          for (int i = 0; i < 12; i++)
+          {
+            Card c = new Card();
+
+            c.setOwner(card.getController());
+            c.setController(card.getController());
+
+            c.setName("Kor Soldier");
+            c.setImageName("W 1 1 Kor Soldier");
+            c.setManaCost("W");
+            c.setToken(true);
+
+            c.addType("Creature");
+            c.addType("Kor");
+            c.addType("Soldier");
+            c.setBaseAttack(1);
+            c.setBaseDefense(1);
+
+            play.add(c);
+          }//for
+        }//resolve()
+      };
+      
+      kicker.setManaCost("8 W W W");
+      kicker.setDescription("Kicker 6: If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.");
+      kicker.setStackDescription(card.getName() + " - " + card.getController() + " puts twelve 1/1 white Kor Soldier creature tokens onto the battlefield.");
+      
+      card.clearSpellAbility();
+      card.addSpellAbility(spell);
+      card.addSpellAbility(kicker);
     }//*************** END ************ END **************************
     
     

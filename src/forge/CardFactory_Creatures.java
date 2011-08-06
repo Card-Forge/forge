@@ -56,8 +56,6 @@ public class CardFactory_Creatures {
 
 
 
-
-
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Shinka Gatekeeper"))
 	    {
@@ -6808,12 +6806,16 @@ public class CardFactory_Creatures {
 	            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
 	            {
 	              CardList list = getRadiance(getTargetCard());
-	              for(int i = 0; i < list.size(); i++)
-	                list.get(i).addDamage(1);
+	              for(int i = 0; i < list.size(); i++) {
+	                if (CardFactoryUtil.canDamage(card, list.get(i)))
+	            	  list.get(i).addDamage(1);
+	              }
 	            }
 	          }//resolve()
 	          //parameter Card c, is included in CardList
 	          //no multi-colored cards
+	          
+	          
 	          CardList getRadiance(Card c)
 	          {
 	            String color = CardUtil.getColor(c);
@@ -6833,11 +6835,12 @@ public class CardFactory_Creatures {
 	            list = list.getType("Creature");
 
 	            for(int i = 0; i < list.size(); i++)
-	              if(CardUtil.getColor(list.get(i)).equals(color))
+	              if(CardFactoryUtil.sharesColorWith(list.get(i), c))
 	                sameColor.add(list.get(i));
 
 	            return sameColor;
 	          }
+	          
 	        };//SpellAbility
 	        card.addSpellAbility(ability);
 	        ability.setDescription("Radiance - tap: Wojek Embermage deals 1 damage to target creature and each other creature that shares a color with it.");
@@ -9101,15 +9104,16 @@ public class CardFactory_Creatures {
 	          {
 	            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
 	            {
-	              //gain control of target artifact
+	              
+	              ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
+		          ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
+	              
+		          //gain control of target artifact
 	              PlayerZone from = AllZone.getZone(Constant.Zone.Play, getTargetCard().getController());
 	              from.remove(getTargetCard());
 
 
 	              getTargetCard().setController(card.getController());
-
-	              ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
-	              ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
 
 	              PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
 	              to.add(getTargetCard());
@@ -15681,6 +15685,170 @@ public class CardFactory_Creatures {
 		      ability.setDescription("1 G, tap: Target creature doesn't untap during its controller's next untap step.");
 
 		      ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+		    }//*************** END ************ END **************************
+	      
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Scarland Thrinax"))
+		    {
+		      
+		      final SpellAbility a2 = new Ability(card, "0")
+		      {
+		        public void resolve()
+		        {
+		          Card c = getTargetCard();
+		          if(AllZone.GameAction.isCardInPlay(c))
+		          {
+		            //AllZone.getZone(c).remove(c);
+		        	AllZone.GameAction.sacrifice(c);
+		            
+		        	if(AllZone.GameAction.isCardInPlay(card)) 
+		        		card.addCounter(Counters.P1P1, 1);
+		          }
+		        }
+		        public boolean canPlayAI()
+		        {
+		          return false;
+		        }
+		        public boolean canPlay()
+		        {
+		        	SpellAbility sa;
+		            //this is a hack, check the stack to see if this card has an ability on the stack
+		            //if so, we can't use the ability: this is to prevent using a limited ability too many times
+		            for (int i=0; i<AllZone.Stack.size(); i++)
+		            {
+		            	sa = AllZone.Stack.peek(i);
+		            	if (sa.getSourceCard().equals(card))
+		            			return false;
+		            }
+		            if (super.canPlay())
+		            	return true;
+		            return false;
+		        }
+		      };//SpellAbility
+		      
+		      Input runtime = new Input()
+		      {
+		        private static final long serialVersionUID = 8445133749305465286L;
+
+				public void showMessage()
+		        {
+		          CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+		          creats = creats.getType("Creature");
+		          
+		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.",false));
+		        }
+		      };
+
+		      card.addSpellAbility(a2);
+		      a2.setDescription("Sacrifice a creature: Put a +1/+1 counter on " +card.getName() +".");
+		      a2.setStackDescription(card.getName() + " gets a +1/+1 counter.");
+
+		      a2.setBeforePayMana(runtime);
+		    }//*************** END ************ END **************************
+	      
+	      
+	      //*************** START *********** START **************************
+		    else if(cardName.equals("Cartographer"))
+		    {
+		      final SpellAbility ability = new Ability(card, "0")
+		      {
+		        public void resolve()
+		        {
+		          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+		          if(AllZone.GameAction.isCardInZone(getTargetCard(), grave))
+		          {
+		            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+		            AllZone.GameAction.moveTo(hand, getTargetCard());
+		          }
+		        }//resolve()
+		      };
+		      Command intoPlay = new Command()
+		      {
+				private static final long serialVersionUID = -3887243972980889087L;
+
+				public void execute()
+		        {
+		          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+		          CardList lands = new CardList(grave.getCards());
+		          lands = lands.getType("Land");
+
+		          String controller = card.getController();
+
+		          if(lands.size() == 0)
+		            return;
+
+		          if(controller.equals(Constant.Player.Human))
+		          {
+		            Object o = AllZone.Display.getChoiceOptional("Select target land", lands.toArray());
+		            if(o != null)
+		            {
+		              ability.setTargetCard((Card)o);
+		              AllZone.Stack.add(ability);
+		            }
+		          }
+		          else //computer
+		          {
+		            lands.shuffle();
+		            ability.setTargetCard(lands.get(0));
+		            AllZone.Stack.add(ability);
+		          }
+
+		        }//execute()
+		      };//Command
+		      card.addComesIntoPlayCommand(intoPlay);
+		    }//*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Auramancer"))
+		    {
+		      final SpellAbility ability = new Ability(card, "0")
+		      {
+		        public void resolve()
+		        {
+		          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+		          if(AllZone.GameAction.isCardInZone(getTargetCard(), grave))
+		          {
+		            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+		            AllZone.GameAction.moveTo(hand, getTargetCard());
+		          }
+		        }//resolve()
+		      };
+		      Command intoPlay = new Command()
+		      {
+		    	  
+				private static final long serialVersionUID = 25590819729244894L;
+
+				public void execute()
+		        {
+		          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+		          CardList enchantments = new CardList(grave.getCards());
+		          enchantments = enchantments.getType("Enchantment");
+
+		          String controller = card.getController();
+
+		          if(enchantments.size() == 0)
+		            return;
+
+		          if(controller.equals(Constant.Player.Human))
+		          {
+		            Object o = AllZone.Display.getChoiceOptional("Select target enchantment", enchantments.toArray());
+		            if(o != null)
+		            {
+		              ability.setTargetCard((Card)o);
+		              AllZone.Stack.add(ability);
+		            }
+		          }
+		          else //computer
+		          {
+		            enchantments.shuffle();
+		            ability.setTargetCard(enchantments.get(0));
+		            AllZone.Stack.add(ability);
+		          }
+
+		        }//execute()
+		      };//Command
+		      card.addComesIntoPlayCommand(intoPlay);
 		    }//*************** END ************ END **************************
 
 

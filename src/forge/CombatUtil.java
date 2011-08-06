@@ -115,6 +115,10 @@ public class CombatUtil
     		return false;
     }
     
+    if (attacker.getKeyword().contains("This creature can't be blocked except by creatures with flying") && !blocker.getKeyword().contains("Flying"))
+    	return false;
+
+    
     if (attacker.getKeyword().contains("Horsemanship"))
     {
     	if (!blocker.getKeyword().contains("Horsemanship"))

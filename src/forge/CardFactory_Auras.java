@@ -246,12 +246,9 @@ class CardFactory_Auras {
 		  Command onEnchant = new Command()
 		  {   
 
-		   /**
-			 * 
-			 */
 			private static final long serialVersionUID = 4941909585318384005L;
 
-		public void execute()
+			public void execute()
 		      {
 		         if (card.isEnchanting())
 		         {
@@ -5195,8 +5192,8 @@ class CardFactory_Auras {
 		         if (card.isEnchanting())
 		         {
 		            Card crd = card.getEnchanting().get(0);
-		      crd.addSemiPermanentAttackBoost(3);
-		      crd.addExtrinsicKeyword("First Strike");
+		            crd.addSemiPermanentAttackBoost(3);
+		            crd.addExtrinsicKeyword("First Strike");
 		           
 		         }
 		      }//execute()
@@ -5540,6 +5537,110 @@ class CardFactory_Auras {
 		            card.unEnchantCard(crd);
 		         }
 		    }
+		   };
+
+		  card.addEnchantCommand(onEnchant);
+		  card.addUnEnchantCommand(onUnEnchant);
+		  card.addLeavesPlayCommand(onLeavesPlay);
+
+		  spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+		}//*************** END ************ END **************************
+		
+		//*************** START *********** START **************************
+	    else if(cardName.equals("Treetop Bracers"))
+		{
+		  final SpellAbility spell = new Spell(card)
+		  {
+
+			private static final long serialVersionUID = -2869740221361303938L;
+			public boolean canPlayAI()
+		    {
+		      CardList list = new CardList(AllZone.Computer_Play.getCards());
+		      list = list.getType("Creature");
+
+		      if(list.isEmpty())
+		       return false;
+
+		      //else
+		      CardListUtil.sortAttack(list);
+		      CardListUtil.sortFlying(list);
+
+		      for (int i=0;i<list.size();i++) {
+		         if (CardFactoryUtil.canTarget(card, list.get(i)))
+		         {
+		            setTargetCard(list.get(i));
+		            return true;
+		         }
+		      }
+		      return false;
+		    }//canPlayAI()
+		    public void resolve()
+		    {
+		      PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+		      play.add(card);
+		     
+		      Card c = getTargetCard();
+		     
+		      if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c) )
+		      {
+		         card.enchantCard(c);
+		         System.out.println("Enchanted: " +getTargetCard());
+		      }
+		    }//resolve()
+		  };//SpellAbility
+		  card.clearSpellAbility();
+		  card.addSpellAbility(spell);
+
+		  Command onEnchant = new Command()
+		  {   
+
+			private static final long serialVersionUID = 8913162899595309494L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+		            Card crd = card.getEnchanting().get(0);
+		            crd.addSemiPermanentAttackBoost(1);
+		            crd.addSemiPermanentDefenseBoost(1);
+		            crd.addExtrinsicKeyword("This creature can't be blocked except by creatures with flying");
+		           
+		         }
+		      }//execute()
+		  };//Command
+
+
+		  Command onUnEnchant = new Command()
+		  {   
+			private static final long serialVersionUID = -7746673124406658713L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+		            Card crd = card.getEnchanting().get(0);
+		            crd.addSemiPermanentAttackBoost(-1);
+		            crd.addSemiPermanentDefenseBoost(-1);
+		            crd.removeExtrinsicKeyword("This creature can't be blocked except by creatures with flying");          
+
+		         }
+		     
+		      }//execute()
+		   };//Command
+		   
+		   Command onLeavesPlay = new Command()
+		   {
+
+			private static final long serialVersionUID = 6516555370663902900L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+		            Card crd = card.getEnchanting().get(0);
+		            card.unEnchantCard(crd);
+		         }
+		      }
 		   };
 
 		  card.addEnchantCommand(onEnchant);
