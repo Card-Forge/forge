@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+argothian_pixies.jpg			http://www.wizards.com/global/images/magic/general/argothian_pixies.jpg
 arc_slogger.jpg					http://www.wizards.com/global/images/magic/general/arc_slogger.jpg
 fireball.jpg					http://www.wizards.com/global/images/magic/general/fireball.jpg
 inferno.jpg						http://www.wizards.com/global/images/magic/general/inferno.jpg

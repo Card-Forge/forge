@@ -1,3 +1,11 @@
+Argothian Pixies
+1 G
+Creature Faerie
+no text
+2/1
+Prevent all damage that would be dealt to CARDNAME by artifact creatures.
+CARDNAME can't be blocked by artifact creatures.
+
 Arc-Slogger
 3 R R
 Creature Beast

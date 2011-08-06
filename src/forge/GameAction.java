@@ -1438,6 +1438,8 @@ public class GameAction {
         
         int assignedDamage = damage;
         card.addReceivedDamageFromThisTurn(sourceCard, damage);
+        if(card.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
+        		&& sourceCard.isCreature() && sourceCard.isArtifact()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from white")
                 && CardUtil.getColors(sourceCard).contains(Constant.Color.White)) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from blue")

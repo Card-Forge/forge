@@ -2808,6 +2808,8 @@ public class CardFactoryUtil {
         for(int i = 0; i < list.size(); i++) {
             kw = list.get(i);
             
+            if(kw.equals("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
+            		&& spell.isCreature() && spell.isArtifact()) return false;
             if(kw.equals("Protection from white") && CardUtil.getColors(spell).contains(Constant.Color.White)) return false;
             if(kw.equals("Protection from blue") && CardUtil.getColors(spell).contains(Constant.Color.Blue)) return false;
             if(kw.equals("Protection from black") && CardUtil.getColors(spell).contains(Constant.Color.Black)) return false;

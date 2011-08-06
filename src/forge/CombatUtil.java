@@ -431,7 +431,8 @@ public class CombatUtil {
         }//flanking
         if(defender.getName().equals("Cho-Manno, Revolutionary")) return false;
         
-
+        if(defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
+        		&& attacker.isCreature() && attacker.isArtifact()) return false;
         if(defender.getKeyword().contains("Protection from white")
                 && CardUtil.getColors(attacker).contains(Constant.Color.White)) return false;
         if(defender.getKeyword().contains("Protection from blue")
