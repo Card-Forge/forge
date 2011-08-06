@@ -20556,8 +20556,8 @@ public class CardFactory implements NewConstants {
 
         } //*************** END ************ END **************************
         
-      //*************** START *********** START **************************
-        else if(cardName.equals("Nature's Lore")) {
+        //*************** START *********** START **************************
+        else if(cardName.equals("Nature's Lore") || cardName.equals("Three Visits")) {
             SpellAbility spell = new Spell(card) {
 
 				private static final long serialVersionUID = -6598323179507468746L;
@@ -20578,7 +20578,7 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             String desc = "Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.";
-            spell.setStackDescription(desc);
+            spell.setStackDescription(cardName + " - " + desc);
             spell.setDescription(desc);
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
