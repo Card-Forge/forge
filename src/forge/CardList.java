@@ -33,7 +33,7 @@ public class CardList implements Iterable<Card> {
         addAll(c);
     }
     
-// get any cards that exist in the passed in sets list
+    // get any cards that exist in the passed in sets list
     public CardList getSets(ArrayList<String> sets) {
         CardList list = new CardList();
         for(Card c : this){
@@ -206,7 +206,7 @@ public class CardList implements Iterable<Card> {
     public CardList getRarity(final String rarity) {
     	return this.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
-			// TODO spin off Mythic from Rare when the time comes
+    			// TODO spin off Mythic from Rare when the time comes
     			String r = c.getSVar("Rarity");
                 return r.equals(rarity) ||
                         rarity.equals(Constant.Rarity.Rare) && r.equals(Constant.Rarity.Mythic);
@@ -214,8 +214,7 @@ public class CardList implements Iterable<Card> {
     	});
     }
 
-
-  //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
+    //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     public CardList getType(final String cardType) {
     	return this.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
@@ -224,7 +223,7 @@ public class CardList implements Iterable<Card> {
     	});
     }
 
-  //cardType is like "Land" or "Goblin", returns a new CardList with cards that do not have this type
+    //cardType is like "Land" or "Goblin", returns a new CardList with cards that do not have this type
     public CardList getNotType(final String cardType) {
     	return this.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
@@ -239,28 +238,6 @@ public class CardList implements Iterable<Card> {
     			return c.isPermanent();
     		}
     	});
-    }
-
-    public CardList getTapState(String TappedOrUntapped)
-    {
-    	CardList cl = new CardList();
-    	Card c;
-    	for (int i=0; i<size(); i++)
-    	{
-    		c = getCard(i);
-    		if (TappedOrUntapped.equals("Tapped"))
-    		{
-    			if (c.isTapped() == true)
-    				cl.add(c);
-    		}
-    		else if (TappedOrUntapped.equals("Untapped"))
-    		{
-    			if (c.isUntapped() == true)
-    				cl.add(c);
-    		}
-    	}
-    	
-    	return cl;
     }
     
     public CardList getKeyword(final String keyword) {
@@ -305,16 +282,6 @@ public class CardList implements Iterable<Card> {
         });
     }
     
-    /*no longer needed
-    public CardList canBeDamagedBy(final Card card) {
-        return this.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return CardFactoryUtil.canDamage(card, c);
-            }
-        });
-    }
-    */
-    
     public CardList filter(CardListFilter f) {
         CardList c = new CardList();
         for(int i = 0; i < size(); i++)
@@ -352,7 +319,7 @@ public class CardList implements Iterable<Card> {
     
     public void shuffle() {
     	// reseed Random each time we want to Shuffle
-    	MyRandom.random = MyRandom.random;
+    	//MyRandom.random = MyRandom.random;
         Collections.shuffle(list, MyRandom.random);
         Collections.shuffle(list, MyRandom.random);
         Collections.shuffle(list, MyRandom.random);
@@ -416,4 +383,5 @@ public class CardList implements Iterable<Card> {
     		}
     	});
     }
-}
+    
+}//end class CardList

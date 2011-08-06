@@ -3916,7 +3916,7 @@ public class CardFactoryUtil {
         	{
                 CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                 list = list.getType(d[2]);
-                list = list.getTapState("Tapped");
+                list = list.filter(AllZoneUtil.tapped);
                 
                 for(int i = 0; i < n && i < list.size(); i++)
                 {
