@@ -4858,11 +4858,12 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Righteousness")) {
             /*
              * Target blocking creature gets +7/+7 until end of turn.
-             */
+             *
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 1767183461782940041L;
 
@@ -4929,6 +4930,7 @@ public class CardFactory_Instants {
             };//Input target
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+    */
         
     	return card;
     }//getCard
