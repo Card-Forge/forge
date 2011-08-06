@@ -935,6 +935,424 @@ public class CardFactory implements NewConstants {
             }
 
         }
+        while (hasKeyword(card, "abAllPump") != -1)
+        {
+        	int n = hasKeyword(card, "abAllPump");
+        	if (n != -1)
+        	{
+        		String parse = card.getKeyword().get(n).toString();
+        		card.removeIntrinsicKeyword(parse);
+        		
+        		String k[] = parse.split(":");
+        		
+        		String tmpCost =  k[0].substring(9);
+        		
+        		final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName());        		
+        		
+        		final String Scope[] = k[1].split("/");
+        		
+            	final int NumAttack[] = {-1138};
+            	final String AttackX[] = {"none"};
+            	final int NumDefense[] = {-1138};
+            	final String DefenseX[] = {"none"};
+            	final String Keyword[] = {"none"};
+            	
+            	String ptk[] = k[2].split("/");
+            	
+            	if (ptk.length == 1)
+            		Keyword[0] = ptk[0];
+            	
+            	if (ptk.length >= 2)
+            	{
+            		if (ptk[0].matches("[\\+\\-][XY]"))
+            		{
+            			String xy = card.getSVar(ptk[0].replaceAll("[\\+\\-]", ""));
+            			if (xy.startsWith("Count$"))
+            			{
+            				String kk[] = xy.split("\\$");
+            				AttackX[0] = kk[1];
+            				
+            				if (ptk[0].contains("-"))
+            				{
+            					if (AttackX[0].contains("/"))
+            						AttackX[0] = AttackX[0].replace("/", "/Negative");
+            					else
+            						AttackX[0] += "/Negative";
+            				}
+            				
+            			}
+            		}
+            		else if (ptk[0].matches("[\\+\\-][0-9]"))
+            			NumAttack[0] = Integer.parseInt(ptk[0].replace("+", ""));
+            		
+            		if (ptk[1].matches("[\\+\\-][XY]"))
+            		{
+            			String xy = card.getSVar(ptk[1].replaceAll("[\\+\\-]", ""));
+            			if (xy.startsWith("Count$"))
+            			{
+            				String kk[] = xy.split("\\$");
+            				DefenseX[0] = kk[1];
+            				
+            				if (ptk[1].contains("-"))
+            				{
+            					if (DefenseX[0].contains("/"))
+            						DefenseX[0] = DefenseX[0].replace("/", "/Negative");
+            					else
+            						DefenseX[0] += "/Negative";
+            				}
+            				
+            			}
+            		}
+            		else if (ptk[1].matches("[\\+\\-][0-9]"))
+            			NumDefense[0] = Integer.parseInt(ptk[1].replace("+", ""));
+            	}
+            	
+            	if (ptk.length == 3)
+            		Keyword[0] = ptk[2];
+            	
+            	final String DrawBack[] = {"none"};
+            	final String spDesc[] = {"none"};
+            	final String stDesc[] = {"none"};
+            	
+            	if (k.length > 3)
+            	{
+            		if (k[3].contains("Drawback$"))
+            		{
+            			String kk[] = k[3].split("\\$");
+            			DrawBack[0] = kk[1];
+            			if (k.length > 4) spDesc[0] = k[4];
+            			if (k.length > 5) stDesc[0] = k[5];
+            		}
+            		else
+            		{
+            			if (k.length > 3) spDesc[0] = k[3];
+            			if (k.length > 4) stDesc[0] = k[4];
+            		}
+            	}
+            	
+            	if (!abCost.getTap())
+            	{
+            		SpellAbility abAllPump = new Ability_Activated(card, abCost.getMana())
+            		{
+            			private static final long serialVersionUID = 7783282947592874L;
+            			
+                        private int getNumAttack() {
+                            if(NumAttack[0] != -1138) return NumAttack[0];
+                            
+                            if(!AttackX[0].equals("none")) return CardFactoryUtil.xCount(card, AttackX[0]);
+                            
+                            return 0;
+                        }
+                        
+                        private int getNumDefense() {
+                            if(NumDefense[0] != -1138) return NumDefense[0];
+                            
+                            if(!DefenseX[0].equals("none")) return CardFactoryUtil.xCount(card, DefenseX[0]);
+                            
+                            return 0;
+                        }
+                        
+                        private int getNumKeyword()
+                        {
+                        	if (!Keyword[0].equals("none"))
+                        		return Keyword[0].split(" & ").length;
+                        	else return 0;
+                        }
+                        
+                        private CardList getScopeList()
+                        {
+                        	CardList l = new CardList();
+                        	
+                        	if (Scope[0].contains("YouCtrl"))
+                        		l.addAll(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                        	
+                        	if (Scope[0].contains("All")) {
+                        		l.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                        		l.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+                        	}
+                        	
+                        	String fc[] = {"Creature"};
+                        	l = l.getValidCards(fc);
+                        	
+                        	if (Scope.length > 1)
+                        	{
+                        		String v = Scope[1]; 
+                        		if (v.length() > 0)
+                        			l = l.getValidCards(v.split(","));
+                        	}
+                        	
+                        	return l;
+                        }
+
+                        public boolean canPlayAI()
+                        {
+                        	//Log.debug("spAllPump", "Phase - " + AllZone.Phase.getPhase());
+                        	String curPhase = AllZone.Phase.getPhase();
+                        	if (curPhase.equals(Constant.Phase.Main2)) 
+                        		return false;
+                        
+                        	CardList sl = getScopeList();
+                        	int NumScope = sl.size();
+                        	
+                        	int defense = getNumDefense();
+                        	int attack = getNumAttack();
+                        	int key = getNumKeyword();
+                        	int th = (attack + defense + key) / 2; // Benefit Threshold
+                        	
+                        	if (NumScope > th) // have enough creatures in play
+                        	{
+                        		Combat c = ComputerUtil.getAttackers();
+                        		if (c.getAttackers().length >= th) // have enough creatures that will attack
+                        		{
+                        			int ndead = 0;
+                        			for (int i=0; i<sl.size(); i++) // check to see if this will kill any creatures
+                        				if ((sl.get(i).getNetDefense() + defense) < 1)
+                        					ndead++;
+                        			if (!(ndead > (sl.size() / 2))) // don't kill more than half of the creatures
+                        					return true;
+                        		}
+                        	}
+                        	
+                        	return false;
+                        }
+                        
+                        public void resolve()
+                        {
+                        	final int attack = getNumAttack();
+                        	final int defense = getNumDefense();
+                        	
+                        	final CardList sl = getScopeList();
+                        	
+                        	//Log.debug("spAllPump", "Phase - " + AllZone.Phase.getPhase());
+                        	
+                        	final Command untilEOT = new Command()
+                        	{
+                        		private static final long serialVersionUID = 92848209484928L;
+                        		
+                        		public void execute()
+                        		{
+                        			for (int i=0; i<sl.size(); i++)
+                        			{
+                        				Card c = sl.get(i);
+                        				if (AllZone.GameAction.isCardInPlay(c))
+                        				{
+                        					c.addTempAttackBoost(-attack);
+                        					c.addTempDefenseBoost(-defense);
+                        					
+                        					if (!Keyword[0].equals("none"))
+                        					{
+                        						String kws[] = Keyword[0].split(" & ");
+                        						for (int j=0; j<kws.length; j++)
+                        							c.removeExtrinsicKeyword(kws[j]);
+                        					}
+                        				}
+                        			}
+                        		}
+                        	}; // untilEOT command
+                        	
+                        	for (int i=0; i<sl.size(); i++)
+                        	{
+                        		Card c = sl.get(i);
+                        		
+                        		if (AllZone.GameAction.isCardInPlay(c))
+                        		{
+                        			c.addTempAttackBoost(attack);
+                        			c.addTempDefenseBoost(defense);
+                        			
+                        			if (!Keyword[0].equals("none"))
+                        			{
+                        				String kws[] = Keyword[0].split(" & ");
+                        				for (int j=0; j<kws.length; j++)
+                        					c.addExtrinsicKeyword(kws[j]);
+                        			}
+                        		}
+                        	}
+                        	
+                        	AllZone.EndOfTurn.addUntil(untilEOT);
+                        	
+                        	if (!DrawBack[0].equals("none"))
+                        		CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card);
+                        } // resolve
+                	}; // abAllPump
+            		
+                	abAllPump.setDescription(abCost.toString() + spDesc[0]);
+                	abAllPump.setStackDescription(stDesc[0]);
+                	
+                	if (abCost.getSacCost())
+                	{
+                		if (abCost.getSacThis())
+                			abAllPump.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(abAllPump));
+                		else
+                			abAllPump.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abAllPump, abCost.getSacType(), abCost.sacString(true)));
+                	}
+                	
+                	card.addSpellAbility(abAllPump);
+            	}// !tapCost
+            	if (abCost.getTap())
+            	{
+                    final SpellAbility abAllPump = new Ability_Tap(card)
+                    {
+                    	private static final long serialVersionUID = 932792746592974L;
+                        private int getNumAttack() {
+                            if(NumAttack[0] != -1138) return NumAttack[0];
+                            
+                            if(!AttackX[0].equals("none")) return CardFactoryUtil.xCount(card, AttackX[0]);
+                            
+                            return 0;
+                        }
+                        
+                        private int getNumDefense() {
+                            if(NumDefense[0] != -1138) return NumDefense[0];
+                            
+                            if(!DefenseX[0].equals("none")) return CardFactoryUtil.xCount(card, DefenseX[0]);
+                            
+                            return 0;
+                        }
+                        
+                        private int getNumKeyword()
+                        {
+                        	if (!Keyword[0].equals("none"))
+                        		return Keyword[0].split(" & ").length;
+                        	else return 0;
+                        }
+                        
+                        private CardList getScopeList()
+                        {
+                        	CardList l = new CardList();
+                        	
+                        	if (Scope[0].contains("YouCtrl"))
+                        		l.addAll(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                        	
+                        	if (Scope[0].contains("All")) {
+                        		l.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                        		l.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+                        	}
+                        	
+                        	String fc[] = {"Creature"};
+                        	l = l.getValidCards(fc);
+                        	
+                        	if (Scope.length > 1)
+                        	{
+                        		String v = Scope[1]; 
+                        		if (v.length() > 0)
+                        			l = l.getValidCards(v.split(","));
+                        	}
+                        	
+                        	return l;
+                        }
+
+                        public boolean canPlayAI()
+                        {
+                        	//Log.debug("spAllPump", "Phase - " + AllZone.Phase.getPhase());
+                        	String curPhase = AllZone.Phase.getPhase();
+                        	if (curPhase.equals(Constant.Phase.Main2)) 
+                        		return false;
+                        	
+                        	if (CardFactoryUtil.AI_doesCreatureAttack(card))
+                        		return false;
+                        
+                        	CardList sl = getScopeList();
+                        	int NumScope = sl.size();
+                        	
+                        	int defense = getNumDefense();
+                        	int attack = getNumAttack();
+                        	int key = getNumKeyword();
+                        	int th = (attack + defense + key) / 2; // Benefit Threshold
+                        	
+                        	if (NumScope > th) // have enough creatures in play
+                        	{
+                        		Combat c = ComputerUtil.getAttackers();
+                        		if (c.getAttackers().length >= th) // have enough creatures that will attack
+                        		{
+                        			int ndead = 0;
+                        			for (int i=0; i<sl.size(); i++) // check to see if this will kill any creatures
+                        				if ((sl.get(i).getNetDefense() + defense) < 1)
+                        					ndead++;
+                        			if (!(ndead > (sl.size() / 2))) // don't kill more than half of the creatures
+                        					return true;
+                        		}
+                        	}
+                        	
+                        	return false;
+                        }
+                        
+                        public void resolve()
+                        {
+                        	final int attack = getNumAttack();
+                        	final int defense = getNumDefense();
+                        	
+                        	final CardList sl = getScopeList();
+                        	
+                        	Log.debug("spAllPump", "Phase - " + AllZone.Phase.getPhase());
+                        	
+                        	final Command untilEOT = new Command()
+                        	{
+                        		private static final long serialVersionUID = 92848209484928L;
+                        		
+                        		public void execute()
+                        		{
+                        			for (int i=0; i<sl.size(); i++)
+                        			{
+                        				Card c = sl.get(i);
+                        				if (AllZone.GameAction.isCardInPlay(c))
+                        				{
+                        					c.addTempAttackBoost(-attack);
+                        					c.addTempDefenseBoost(-defense);
+                        					
+                        					if (!Keyword[0].equals("none"))
+                        					{
+                        						String kws[] = Keyword[0].split(" & ");
+                        						for (int j=0; j<kws.length; j++)
+                        							c.removeExtrinsicKeyword(kws[j]);
+                        					}
+                        				}
+                        			}
+                        		}
+                        	}; // untilEOT command
+                        	
+                        	for (int i=0; i<sl.size(); i++)
+                        	{
+                        		Card c = sl.get(i);
+                        		
+                        		if (AllZone.GameAction.isCardInPlay(c))
+                        		{
+                        			c.addTempAttackBoost(attack);
+                        			c.addTempDefenseBoost(defense);
+                        			
+                        			if (!Keyword[0].equals("none"))
+                        			{
+                        				String kws[] = Keyword[0].split(" & ");
+                        				for (int j=0; j<kws.length; j++)
+                        					c.addExtrinsicKeyword(kws[j]);
+                        			}
+                        		}
+                        	}
+                        	
+                        	AllZone.EndOfTurn.addUntil(untilEOT);
+                        	
+                        	if (!DrawBack[0].equals("none"))
+                        		CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card);
+                        } // resolve
+                	}; // abAllPump
+            		
+                	abAllPump.setDescription(abCost.toString() + spDesc[0]);
+                	abAllPump.setStackDescription(stDesc[0]);
+                	
+                	if (abCost.getSacCost())
+                	{
+                		if (abCost.getSacThis())
+                			abAllPump.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(abAllPump));
+                		else
+                			abAllPump.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abAllPump, abCost.getSacType(), abCost.sacString(true)));
+                	}
+                	
+                	if (!abCost.hasNoManaCost())
+                		abAllPump.setManaCost(abCost.getMana());
+                	
+                	card.addSpellAbility(abAllPump);
+            	}//tapCost
+        	}
+        }
         
         while(hasKeyword(card, "abPump") != -1) {
             int n = hasKeyword(card, "abPump");
