@@ -12,6 +12,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.GameActionUtil;
+import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -145,8 +146,14 @@ public class AbilityFactory_CounterMagic {
 			else
 				toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
 			
-			if (toPay == 0 || toPay <= usableManaSources)
+			if (toPay == 0)
 				return false;
+			
+			if (toPay <= usableManaSources){
+				// If this is a reusable Resource, feel free to play it most of the time
+				if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4)
+					return false;
+			}
 			
 			if (setPayX)
 				source.setSVar("PayX", Integer.toString(toPay));
@@ -154,7 +161,7 @@ public class AbilityFactory_CounterMagic {
 		
 		// TODO: Improve AI
 		
-		// Will return true if this spell can counter (or will likely counter) and false if it can't
+		// Will return true if this spell can counter (or is Reusable and can force the Human into making decisions) 
 		
 		// But really it should be more picky about how it counters things
 

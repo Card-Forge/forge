@@ -108,7 +108,14 @@ public class ComputerUtil
 	  String unless = params.get("UnlessCost");
 	  if (unless != null){
 		  int amount = AbilityFactory.calculateAmount(source, unless, sa);
-		  restrict += 20 - (2*amount);
+		  
+		  int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.HumanPlayer);
+		  
+		  // If the Unless isn't enough, this should be less likely to be used
+		  if (amount > usableManaSources)
+			  restrict += 20 - (2*amount);
+		  else
+			  restrict -= (10 - (2*amount));
 	  }
 	  
 	  // Then base on Targeting Restriction
