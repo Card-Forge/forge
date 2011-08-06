@@ -147,9 +147,11 @@ public class AbilityFactory_ZoneAffecting {
 		if (!bFlag)
 			return false;
 		
-		ArrayList<Player> players = tgt.getTargetPlayers();
-		if (tgt != null && players.size() > 0 && players.get(0).equals(AllZone.HumanPlayer))
-			return true;
+		if (tgt != null){
+			ArrayList<Player> players = tgt.getTargetPlayers();
+			if (players.size() > 0 && players.get(0).equals(AllZone.HumanPlayer))
+				return true;
+		}
 		
 		Random r = new Random();
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
