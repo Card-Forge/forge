@@ -1,20 +1,20 @@
 package forge;
 
 
-//import java.io.BufferedReader;
-//import java.io.File;
-//import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
-//import forge.error.ErrorViewer;
-//import forge.properties.ForgeProps;
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
 
 public class ReadDraftBoosterPack implements NewConstants {
     
-//    final private static String comment = "//";
+    final private static String comment = "//";
     
     private CardList     commonCreatureList = new CardList();
     private CardList     commonNonCreatureList = new CardList();
@@ -165,22 +165,22 @@ public class ReadDraftBoosterPack implements NewConstants {
     }//getRandomCard()
     
     private void setup() {
-        //commonList = readFile(ForgeProps.getFile(DRAFT.COMMON));
-        //uncommonList = readFile(ForgeProps.getFile(DRAFT.UNCOMMON));
-        //rareList = readFile(ForgeProps.getFile(DRAFT.RARE));
+        commonList = readFile(ForgeProps.getFile(DRAFT.COMMON));
+        uncommonList = readFile(ForgeProps.getFile(DRAFT.UNCOMMON));
+        rareList = readFile(ForgeProps.getFile(DRAFT.RARE));
         
-        //System.out.println("commonList size:" + commonList.size());
-        //System.out.println("ucommonList size:" + uncommonList.size());
-        //System.out.println("rareList size:" + rareList.size());
+        System.out.println("commonList size:" + commonList.size());
+        System.out.println("ucommonList size:" + uncommonList.size());
+        System.out.println("rareList size:" + rareList.size());
         
-        //commonCreatureList = commonList.getType("Creature");
-        //commonNonCreatureList = commonList.filter(new CardListFilter() {
-        //    public boolean addCard(Card c) {
-        //        return !c.isCreature();
-        //    }
-        //});
+        commonCreatureList = commonList.getType("Creature");
+        commonNonCreatureList = commonList.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return !c.isCreature();
+            }
+        });
     	
-        CardList AllCards = AllZone.CardFactory.getAllCards();
+/*        CardList AllCards = AllZone.CardFactory.getAllCards();
         
         for (int i=0; i<AllCards.size(); i++)
         {
@@ -208,11 +208,11 @@ public class ReadDraftBoosterPack implements NewConstants {
         		rareList.add(aCard);
         	}
         		
-        }
+        }*/
     }//setup()
     
 
-/*    private CardList readFile(File file) {
+    private CardList readFile(File file) {
         CardList cardList = new CardList();
         
         BufferedReader in;
@@ -237,7 +237,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         }
         
         return cardList;
-    }//readFile()*/
+    }//readFile()
 }
 
 
