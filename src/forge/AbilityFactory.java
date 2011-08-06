@@ -416,9 +416,10 @@ public class AbilityFactory {
 			String produced = mapParams.get("Produced");
 			if (isAb)
 				SA = AbilityFactory_Mana.createAbilityMana(this, produced);
-			if (isSp){
+			if (isSp)
 				SA = AbilityFactory_Mana.createSpellMana(this, produced);
-			}
+			if (isDb)
+				SA = AbilityFactory_Mana.createDrawbackMana(this, produced);
 		}
 		
 		if (API.equals("ManaReflected")){

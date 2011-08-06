@@ -58,6 +58,38 @@ public class AbilityFactory_Mana {
 	}
 	
 	// Mana never really appears as a Drawback
+	public static Ability_Sub createDrawbackMana(final AbilityFactory AF, final String produced){
+		final Ability_Sub dbMana = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -5141246507533353605L;
+			
+			final AbilityFactory af = AF;
+			// To get the mana to resolve properly, we need the spell to contain an Ability_Mana
+			Ability_Cost tmp = new Ability_Cost("0", AF.getHostCard().getName(), false);
+			Ability_Mana tmpMana = new Ability_Mana(AF.getHostCard(), tmp, produced){
+				private static final long serialVersionUID = 1454043766057140491L;
+				
+			};
+			
+			@Override
+            public String getStackDescription(){
+            // when getStackDesc is called, just build exactly what is happening
+                return manaStackDescription(tmpMana, af);
+            }
+			
+			@Override
+			public void resolve() {
+				manaResolve(tmpMana, af);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				// todo: AI shouldn't use this until he has a mana pool
+				return false;
+			}
+			
+		};
+		return dbMana;
+	}
 	
 	public static boolean manaCanPlayAI(final AbilityFactory af){
 		// AI cannot use this properly until he has a ManaPool
@@ -68,6 +100,9 @@ public class AbilityFactory_Mana {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Add ").append(generatedMana(abMana, af)).append(" to your mana pool.");
 
+		if (abMana.getSubAbility() != null)
+			sb.append(abMana.getSubAbility().getStackDescription());
+		
 		return sb.toString();
 	}
 	
