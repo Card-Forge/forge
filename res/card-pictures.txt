@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+amrou_kithkin.jpg		http://www.wizards.com/global/images/magic/general/amrou_kithkin.jpg
+fleet_footed_monk.jpg		http://serv3.tcgimages.eu/img/cards/Portal/fleet_footed_monk.jpg
+sneaky_homunculus.jpg		http://www.wizards.com/global/images/magic/general/sneaky_homunculus.jpg
 mogg_jailer.jpg		http://www.wizards.com/global/images/magic/general/mogg_jailer.jpg
 goblin_mutant.jpg		http://www.wizards.com/global/images/magic/general/goblin_mutant.jpg
 orgg.jpg		http://www.wizards.com/global/images/magic/general/orgg.jpg

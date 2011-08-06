@@ -1,3 +1,32 @@
+Amrou Kithkin
+W W
+Creature Kithkin
+no text
+1/1
+CARDNAME can't be blocked by creatures with power 2 or greater.
+
+Fleet-Footed Monk
+1 W
+Creature Human Monk
+no text
+1/1
+CARDNAME can't be blocked by creatures with power 2 or greater.
+
+Goldmeadow Dodger
+W
+Creature Kithkin Rogue
+no text
+1/1
+CARDNAME can't be blocked by creatures with power 4 or greater.
+
+Sneaky Homunculus
+1 U
+Creature Homunculus Illusion
+no text
+1/1
+CARDNAME can't be blocked by creatures with power 2 or greater.
+CARDNAME can't block creatures with power 2 or greater.
+
 Riding the Dilu Horse
 2 G
 Sorcery
@@ -11265,12 +11294,6 @@ Kithkin Harbinger
 Creature Kithkin Wizard
 When Kithkin Harbinger comes into play, you may search your library for a Kithkin card, reveal it, then shuffle your library and put that card on top of it.
 1/3
-
-Goldmeadow Dodger
-W
-Creature Kithkin Rogue
-Goldmeadow Dodger can't be blocked by creatures with power 4 or greater.
-1/1
 
 Covetous Dragon
 4 R
