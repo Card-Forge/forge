@@ -191,9 +191,9 @@ public class ComputerUtil_Block2
 				  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 				  CardList firstStrikeBlockers = new CardList();
 				  CardList blockGang = new CardList();
-			      for(int i = 0; i < possibleBlockers.size(); i++)
-			         if(possibleBlockers.get(i).hasFirstStrike() || possibleBlockers.get(i).hasDoubleStrike())
-			        	 firstStrikeBlockers.add(possibleBlockers.get(i));
+			      for(int i = 0; i < blockers.size(); i++)
+			         if(blockers.get(i).hasFirstStrike() || blockers.get(i).hasDoubleStrike())
+			        	 firstStrikeBlockers.add(blockers.get(i));
 			      
 			      if(!firstStrikeBlockers.isEmpty()) {
 			    	  CardListUtil.sortAttack(firstStrikeBlockers);
