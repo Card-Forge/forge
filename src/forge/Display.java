@@ -31,4 +31,8 @@ public interface Display {
     //public void addAssignDamage(Card attacker, int damage);
 
 	public boolean stopAtPhase(Player turn, String phase);
+    
+    public boolean loadPhases();
+    
+    public boolean savePhases();
 }

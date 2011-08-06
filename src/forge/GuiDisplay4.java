@@ -76,6 +76,7 @@ import forge.gui.ForgeAction;
 import forge.gui.ListChooser;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPanel;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -84,10 +85,6 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private static final long serialVersionUID = 4519302185194841060L;
    
     private GuiInput          inputControl;
-   
-    //Font                      statFont         = new Font("MS Sans Serif", Font.PLAIN, 12);
-    //Font                      lifeFont         = new Font("MS Sans Serif", Font.PLAIN, 40);
-    //Font                      checkboxFont     = new Font("MS Sans Serif", Font.PLAIN, 9);
    
     Font                      statFont         = new Font("Dialog", Font.PLAIN, 12);
     Font                      lifeFont         = new Font("Dialog", Font.PLAIN, 40);
@@ -1004,6 +1001,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * Exit the Application
      */
     private void concede() {
+    	savePhases();
         dispose();
         Constant.Runtime.WinLose.addLose();
         if (!Constant.Quest.fantasyQuest[0])
@@ -1040,6 +1038,32 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     			return cbHumanDraw.isSelected();
     	}
     	return false;
+    }
+    
+    public boolean loadPhases(){
+    	ForgePreferences fp = Gui_NewGame.preferences;
+
+    	cbAIUpkeep.setSelected(fp.bAIUpkeep);
+    	cbAIDraw.setSelected(fp.bAIDraw);
+    	cbAIEndOfTurn.setSelected(fp.bAIEOT);
+    	cbHumanUpkeep.setSelected(fp.bHumanUpkeep);
+    	cbHumanDraw.setSelected(fp.bHumanDraw);
+    	cbHumanEndOfTurn.setSelected(fp.bHumanEOT);
+
+    	return true;
+    }
+    
+    public boolean savePhases(){
+    	ForgePreferences fp = Gui_NewGame.preferences;
+    	
+    	fp.bAIUpkeep = cbAIUpkeep.isSelected();
+    	fp.bAIDraw = cbAIDraw.isSelected();
+    	fp.bAIEOT = cbAIEndOfTurn.isSelected();
+    	fp.bHumanUpkeep = cbHumanUpkeep.isSelected();
+    	fp.bHumanDraw = cbHumanDraw.isSelected();
+    	fp.bHumanEOT = cbHumanEndOfTurn.isSelected();
+    	
+    	return true;
     }
    
     public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);

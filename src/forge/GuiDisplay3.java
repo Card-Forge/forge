@@ -69,6 +69,7 @@ import forge.gui.ListChooser;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPanel;
 import forge.gui.game.CardPicturePanel;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -77,10 +78,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     private static final long serialVersionUID = 4519302185194841060L;
     
     private GuiInput          inputControl;
-    
-    //Font                      statFont         = new Font("MS Sans Serif", Font.PLAIN, 12);
-    //Font                      lifeFont         = new Font("MS Sans Serif", Font.PLAIN, 40);
-    //Font                      checkboxFont     = new Font("MS Sans Serif", Font.PLAIN, 9);
     
     Font                      statFont         = new Font("Dialog", Font.PLAIN, 12);
     Font                      lifeFont         = new Font("Dialog", Font.PLAIN, 40);
@@ -171,7 +168,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     private void addMenu() {
         Object[] obj = {
                 HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
-                COMPUTER_REMOVED_ACTION, new JSeparator(), GuiDisplay3.eotCheckboxForMenu,
+                COMPUTER_REMOVED_ACTION, new JSeparator(), 
                 GuiDisplay3.playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
                 CONCEDE_ACTION};
         
@@ -183,8 +180,22 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             else throw new AssertionError();
         }
         
+        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(MENU_BAR.PHASE.TITLE)); 
+        
+        JMenuItem aiLabel = new JMenuItem("Computer");
+        JMenuItem humanLabel = new JMenuItem("Human");
+        
+        Component[] objPhases = { aiLabel, GuiDisplay3.cbAIUpkeep , GuiDisplay3.cbAIDraw , GuiDisplay3.cbAIEndOfTurn, new JSeparator(), 
+        						humanLabel, GuiDisplay3.cbHumanUpkeep, GuiDisplay3.cbHumanDraw, GuiDisplay3.cbHumanEndOfTurn };
+        
+        for(Component cmp:objPhases) {
+            gamePhases.add(cmp);
+        }
+
+        
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(gameMenu);
+        menuBar.add(gamePhases);
         menuBar.add(new MenuItem_HowToPlay());
         this.setJMenuBar(menuBar);
     }//addMenu()
@@ -1005,6 +1016,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
      * Exit the Application
      */
     private void concede() {
+    	savePhases();
         dispose();
         Constant.Runtime.WinLose.addLose();
         if (!Constant.Quest.fantasyQuest[0])
@@ -1023,18 +1035,61 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         }
     }
     
-	public boolean stopAtPhase(Player turn, String phase) {
-		// fill this in
+    public boolean stopAtPhase(Player turn, String phase) {
     	if (turn.isComputer()){
     		if (phase.equals(Constant.Phase.End_Of_Turn))
-    			return eotCheckboxForMenu.isSelected();
+    			return cbAIEndOfTurn.isSelected();
+    		else if (phase.equals(Constant.Phase.Upkeep))
+    			return cbAIUpkeep.isSelected();
+    		else if (phase.equals(Constant.Phase.Draw))
+    			return cbAIDraw.isSelected();
     	}
-    		
-		return true;
-	}
+    	else{
+    		if (phase.equals(Constant.Phase.End_Of_Turn))
+    			return cbHumanEndOfTurn.isSelected();
+    		else if (phase.equals(Constant.Phase.Upkeep))
+    			return cbHumanUpkeep.isSelected();
+    		else if (phase.equals(Constant.Phase.Draw))
+    			return cbHumanDraw.isSelected();
+    	}
+    	return false;
+    }
     
-    public static JCheckBoxMenuItem eotCheckboxForMenu       = new JCheckBoxMenuItem("Stop at End of Turn", true);
+    public boolean loadPhases(){
+    	ForgePreferences fp = Gui_NewGame.preferences;
+
+    	cbAIUpkeep.setSelected(fp.bAIUpkeep);
+    	cbAIDraw.setSelected(fp.bAIDraw);
+    	cbAIEndOfTurn.setSelected(fp.bAIEOT);
+    	cbHumanUpkeep.setSelected(fp.bHumanUpkeep);
+    	cbHumanDraw.setSelected(fp.bHumanDraw);
+    	cbHumanEndOfTurn.setSelected(fp.bHumanEOT);
+
+    	return true;
+    }
+    
+    public boolean savePhases(){
+    	ForgePreferences fp = Gui_NewGame.preferences;
+    	
+    	fp.bAIUpkeep = cbAIUpkeep.isSelected();
+    	fp.bAIDraw = cbAIDraw.isSelected();
+    	fp.bAIEOT = cbAIEndOfTurn.isSelected();
+    	fp.bHumanUpkeep = cbHumanUpkeep.isSelected();
+    	fp.bHumanDraw = cbHumanDraw.isSelected();
+    	fp.bHumanEOT = cbHumanEndOfTurn.isSelected();
+    	
+    	return true;
+    }
+    
     public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
+    
+    // Phases
+    public static JCheckBoxMenuItem cbAIUpkeep		       = new JCheckBoxMenuItem("Upkeep", true);
+    public static JCheckBoxMenuItem cbAIDraw		       = new JCheckBoxMenuItem("Draw", true);
+    public static JCheckBoxMenuItem cbAIEndOfTurn	       = new JCheckBoxMenuItem("End of Turn", true);
+    public static JCheckBoxMenuItem cbHumanUpkeep		   = new JCheckBoxMenuItem("Upkeep", true);
+    public static JCheckBoxMenuItem cbHumanDraw			   = new JCheckBoxMenuItem("Draw", true);
+    public static JCheckBoxMenuItem cbHumanEndOfTurn	   = new JCheckBoxMenuItem("End of Turn", true);
     
     JXMultiSplitPane                  pane                     = new JXMultiSplitPane();
     JButton                         cancelButton             = new JButton();

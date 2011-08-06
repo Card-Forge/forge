@@ -486,6 +486,7 @@ public class GameAction {
         if(!frame.isDisplayable()) return;
 
         if(checkEndGameSate()) {
+        	AllZone.Display.savePhases();
             frame.dispose();
             if (!Constant.Quest.fantasyQuest[0])
             	new Gui_WinLose();
@@ -2341,6 +2342,7 @@ public class GameAction {
         AllZone.Stack.reset();
         AllZone.Combat.reset();
         AllZone.Display.showCombat("");
+        AllZone.Display.loadPhases();
         
         AllZone.Human_Graveyard.reset();
         AllZone.Human_Hand.reset();

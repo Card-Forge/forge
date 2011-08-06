@@ -22,6 +22,13 @@ public class ForgePreferences extends Preferences {
 	public CardSizeType cardSize;
 	public boolean cardOverlay;
 	public boolean scaleLargerThanOriginal;
+	// Phases
+	public boolean bAIUpkeep;
+	public boolean bAIDraw;
+	public boolean bAIEOT;
+	public boolean bHumanUpkeep;
+	public boolean bHumanDraw;
+	public boolean bHumanEOT;
 
 	private List<SavePreferencesListener> saveListeners = new ArrayList<SavePreferencesListener>();
 	private final String fileName;
@@ -55,6 +62,14 @@ public class ForgePreferences extends Preferences {
 		stackOffset = StackOffsetType.valueOf(get("stack.offset", "tiny"));
 		maxStackSize = getInt("stack.max.size", 3);
 		scaleLargerThanOriginal = getBoolean("card.scale.larger.than.original", true);
+		
+		// Stop at Phases
+		bAIUpkeep = getBoolean("phase.ai.upkeep", true);
+		bAIDraw = getBoolean("phase.ai.draw", true);
+		bAIEOT = getBoolean("phase.ai.eot", true);
+		bHumanUpkeep = getBoolean("phase.human.upkeep", true);
+		bHumanDraw = getBoolean("phase.human.draw", true);
+		bHumanEOT = getBoolean("phase.human.eot", true);
 	}
 
 	public void save () throws Exception{
@@ -75,6 +90,13 @@ public class ForgePreferences extends Preferences {
 		for (SavePreferencesListener listeners : saveListeners)
 			listeners.savePreferences();
 
+		set("phase.ai.upkeep", bAIUpkeep);
+		set("phase.ai.draw", bAIDraw);
+		set("phase.ai.eot", bAIEOT);
+		set("phase.human.upkeep", bHumanUpkeep);
+		set("phase.human.draw", bHumanDraw);
+		set("phase.human.eot", bHumanEOT);
+		
 		try {
 			FileOutputStream stream = new FileOutputStream(fileName);
 			store(stream, "Forge");

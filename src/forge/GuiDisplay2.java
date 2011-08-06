@@ -892,5 +892,13 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
 		// is display2 even used?
 		return true;
 	}
+	
+    public boolean loadPhases(){
+    	
+    	return false;
+    }
     
+    public boolean savePhases(){
+    	return false;
+    }    
 }
