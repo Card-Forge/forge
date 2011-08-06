@@ -1,0 +1,10 @@
+Name:Angus Mackenzie
+ManaCost:W U G
+Types:Legendary Creature Human Cleric
+Text:no text
+PT:2/2
+A:AB$Fog | Cost$ W U G T | PlayerTurn$ True | ActivatingPhases$ Upkeep,Draw,Main1,BeginCombat,Declare Attackers - Play Instants and Abilities,Combat_Declare_Blockers_InstantAbility | SpellDescription$ Prevent all combat damage that would be dealt this turn. Activate this ability only before the combat damage step.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angus_mackenzie.jpg
+End
