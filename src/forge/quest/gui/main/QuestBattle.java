@@ -251,6 +251,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Pinky and the Brain 2", "medium", "WB Royal Assassin deck with white tap abilities");
 //        addToDeckList("Predator 2", "medium", "WG Purity Ramp deck");
 //        addToDeckList("Predator 3", "hard", "UG Beastmaster Ascension deck");
+        addToDeckList("Pointy Haired Boss 3", "hard", "WUG Combo deck with Hokori, Dust Drinker, Mana Leak and Sunscape Master");
         addToDeckList("Professor X 3", "hard", "WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade");
         
         addToDeckList("R2-D2 3", "hard", "U Black Vise deck with bounce (Boomerang) spells and Howling Mine");
