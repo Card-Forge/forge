@@ -10,7 +10,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
-import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -1619,7 +1618,6 @@ class CardFactory_Auras {
                 String k[] = parse.split(":");
                 
                 String option = "none";
-                boolean optionUnTapLands = false;
                 final boolean optionCmcTwoOrLess[] = {false};
                 final boolean optionRedOrGreen[] = {false};
                 
@@ -1631,15 +1629,6 @@ class CardFactory_Auras {
                 	if (k[1].startsWith("Option=")) {
                 		option = k[1].substring(7);
                 	}
-                }
-                
-                /*
-                 *  This is for the Treachery aura
-                 *  no need to parse the number of lands at this time
-                 */
-                if (option.contains("untap up to 5 lands") || 
-                		card.getKeyword().contains("When CARDNAME enters the battlefield, untap up to five lands.")) {
-                	optionUnTapLands = true;
                 }
                 
                 /* 
@@ -1658,68 +1647,6 @@ class CardFactory_Auras {
                 if (option.contains("red or green") || 
                 		card.getKeyword().contains("Enchant red or green creature")) {
                 	optionRedOrGreen[0] = true;
-                }
-                
-                /*
-                 *  I borrowed the code from Peregrine Drake
-                 */
-                final Input untap = new Input() {
-					private static final long serialVersionUID = -2208979487849617156L;
-					int                       stop             = 5;
-                    int                       count            = 0;
-                    
-                    @Override
-                    public void showMessage() {
-                        AllZone.Display.showMessage("Select a land to untap");
-                        ButtonUtil.enableOnlyCancel();
-                    }
-                    
-                    @Override
-                    public void selectButtonCancel() {
-                        stop();
-                    }
-                    
-                    @Override
-                    public void selectCard(Card card, PlayerZone zone) {
-                        if(card.isLand() && zone.is(Constant.Zone.Battlefield)) {
-                            card.untap();
-                            count++;
-                            if(count == stop) stop();
-                        }
-                    }//selectCard()
-                };// Input untap
-                
-                final SpellAbility untapAbility = new Ability(card, "0") {
-                    @Override
-                    public void resolve() {
-                        if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(untap);
-                        else {
-                            CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                            list = list.filter(new CardListFilter() {
-                                public boolean addCard(Card c) {
-                                    return c.isLand() && c.isTapped();
-                                }
-                            });
-                            for(int i = 0; i < 5 && i < list.size(); i++)
-                                list.get(i).untap();
-                        }//else
-                    }//resolve()
-                };// untapAbility
-                
-                Command intoPlay = new Command() {
-					private static final long serialVersionUID = -3310362768233358111L;
-
-					public void execute() {
-						StringBuilder sb = new StringBuilder();
-						sb.append(card.getController()).append(" untaps up to 5 lands.");
-						untapAbility.setStackDescription(sb.toString());
-
-                        AllZone.Stack.addSimultaneousStackEntry(untapAbility);
-
-                    }
-                };
-                if (optionUnTapLands) {
-                	card.addComesIntoPlayCommand(intoPlay);
                 }
                 
                 /*
