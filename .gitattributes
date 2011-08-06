@@ -1825,6 +1825,7 @@ res/cardsfolder/exclude.txt -text svneol=native#text/plain
 res/cardsfolder/excommunicate.txt -text svneol=native#text/plain
 res/cardsfolder/execute.txt -text svneol=native#text/plain
 res/cardsfolder/executioners_capsule.txt -text svneol=native#text/plain
+res/cardsfolder/exhaustion.txt -text svneol=native#text/plain
 res/cardsfolder/exhume.txt -text svneol=native#text/plain
 res/cardsfolder/exile.txt -text svneol=native#text/plain
 res/cardsfolder/exiled_boggart.txt -text svneol=native#text/plain
