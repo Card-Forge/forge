@@ -6,29 +6,24 @@ import javax.swing.JDialog;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
-
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
-
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import javax.swing.JCheckBox;
-
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JProgressBar;
+import java.beans.PropertyChangeEvent;
 
 public class GUI_ImportPicture extends JDialog implements NewConstants{	
 	private static final long serialVersionUID = -4191539152208389089L;
@@ -43,7 +38,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
 	GUI_ImportPicture frame;
 	private JLabel jLabelHDDFree = null;
 	private JLabel jLabelNeedSpace = null;
-	private JLabel jLabelTotalFiles = null;
+	public JLabel jLabelTotalFiles = null;
 	private List<File> listFiles;
 	private ArrayList<File> fileCopyList;
 	private long freeSpaceM;
@@ -164,8 +159,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
 										jLabelNeedSpace.setText("HDD Need Space: " + ff.getDirectorySize()/1024/1024 + " MB");
 										jProgressBar.setValue(0);
 										if((freeSpaceM>(ff.getDirectorySize()/1024/1024))&&(filesForCopy>0)){
-										jButtonStart.setEnabled(true);
-										jProgressBar.setMaximum(filesForCopy);
+										jButtonStart.setEnabled(true);										
 										}
 								
 					      }else{								    	  	
@@ -192,8 +186,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
 								    		jLabelNeedSpace.setText("HDD Need Space: " + filesToCopySize/1024/1024 + " MB");
 								    		jProgressBar.setValue(0);
 								    		if((freeSpaceM>(filesToCopySize/1024/1024))&&(filesForCopy>0)){
-												jButtonStart.setEnabled(true);
-												jProgressBar.setMaximum(filesForCopy);
+												jButtonStart.setEnabled(true);												
 											}								 
 					      }
 				    	  				    		
@@ -260,8 +253,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
 						jLabelNeedSpace.setText("HDD Need Space: " + ff.getDirectorySize()/1024/1024 + " MB");
 						jProgressBar.setValue(0);
 							if((freeSpaceM>(ff.getDirectorySize()/1024/1024))&&(filesForCopy>0)){
-							jButtonStart.setEnabled(true);
-							jProgressBar.setMaximum(filesForCopy);
+							jButtonStart.setEnabled(true);							
 							}							
 					}else{
 						
@@ -288,8 +280,7 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
 				    		jLabelNeedSpace.setText("HDD Need Space: " + filesToCopySize/1024/1024 + " MB");
 				    		jProgressBar.setValue(0);
 					    		if((freeSpaceM>(filesToCopySize/1024/1024))&&(filesForCopy>0)){
-									jButtonStart.setEnabled(true);
-									jProgressBar.setMaximum(filesForCopy);
+									jButtonStart.setEnabled(true);									
 								}					    	
 					}
 				}
@@ -325,7 +316,8 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
 		if (jProgressBar == null) {			
 			jProgressBar = new JProgressBar();
 			jProgressBar.setBounds(new Rectangle(15, 210, 363, 18));
-			jProgressBar.setMinimum(0);			
+			jProgressBar.setMinimum(0);	
+			jProgressBar.setMaximum(100);
 		}			
 		return jProgressBar;
 	}
@@ -334,23 +326,35 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
 
         public void mouseClicked(MouseEvent e) {
         	
-        	if(jButtonStart.isEnabled()){				
+        	if(jButtonStart.isEnabled()){	
+        		jLabelTotalFiles.setText("Please wait while all files are copying.");
 				if(jCheckBox.isSelected()){
-					jButtonStart.setEnabled(false);
-					for(int i=0; i<listFiles.size(); i++){	
-						copyFiles(listFiles.get(i).getAbsolutePath(),listFiles.get(i).getName());
-						jProgressBar.setValue(i); 
-					}						
-					jLabelTotalFiles.setText("All files were copied successfully.");
+					jButtonStart.setEnabled(false);	
+					jCheckBox.setEnabled(false);
+					jButtonSource.setEnabled(false);
+					CopyFiles cFiles = new 	CopyFiles(listFiles, jLabelTotalFiles, jProgressBar, jCheckBox, jButtonSource)	;
+					cFiles.addPropertyChangeListener(new PropertyChangeListener() {
+					      public void propertyChange(PropertyChangeEvent evt) {
+					        if ("progress".equals(evt.getPropertyName())) {
+					        	jProgressBar.setValue((Integer) evt.getNewValue());
+					        }
+					      }
+					    });				
+					cFiles.execute();	
 				}else
 				{
-					jButtonStart.setEnabled(false);						
-					for(int i=0; i<fileCopyList.size(); i++){						
-						copyFiles(fileCopyList.get(i).getAbsolutePath(),fileCopyList.get(i).getName());
-						jProgressBar.setValue(i);   
-						
-					}							
-					jLabelTotalFiles.setText("All files were copied successfully.");
+					jButtonStart.setEnabled(false);	
+					jCheckBox.setEnabled(false);
+					jButtonSource.setEnabled(false);
+					CopyFiles cFiles = new 	CopyFiles(fileCopyList, jLabelTotalFiles, jProgressBar, jCheckBox, jButtonSource)	;
+					cFiles.addPropertyChangeListener(new PropertyChangeListener() {
+					      public void propertyChange(PropertyChangeEvent evt) {
+					        if ("progress".equals(evt.getPropertyName())) {
+					        	jProgressBar.setValue((Integer) evt.getNewValue());
+					        }
+					      }
+					    });				
+					cFiles.execute();					
 				}
 			}
         }
@@ -372,37 +376,6 @@ public class GUI_ImportPicture extends JDialog implements NewConstants{
         }
    }
 	
-private void copyFiles(String source, String name){
-		
-		String cName;
-		cName = name.substring(0, name.length()-8);
-		cName = GuiDisplayUtil.cleanString(cName)+".jpg";
-		File sourceFile = new File(source);
-		File base = ForgeProps.getFile(IMAGE_BASE);
-		File reciever = new File(base, cName);
-		reciever.delete();
-    	
-    	try {    	    
-    		reciever.createNewFile();
-    	    FileOutputStream fos = new FileOutputStream(reciever);
-    	    FileInputStream fis = new FileInputStream(sourceFile);
-    	    byte[] buff = new byte[32*1024];
-    	    int length;
-    	    while(fis.available()>0){
-    	        length = fis.read(buff);
-    	        if (length>0)
-    	            fos.write(buff,0,length);
-    	    }
-    	    fos.flush();
-    	    fis.close();
-    	    fos.close(); 
-    	   
-    	    	 
-    	    
-    	} catch (IOException e1) {
-    	    e1.printStackTrace();
-    	}		
-		
-	}	
+
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

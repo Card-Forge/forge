@@ -114,6 +114,7 @@ src/forge/Computer_Cleanup.java svneol=native#text/plain
 src/forge/Computer_Draw.java svneol=native#text/plain
 src/forge/Computer_Race.java svneol=native#text/plain
 src/forge/Constant.java svneol=native#text/plain
+src/forge/CopyFiles.java -text svneol=native#text/plain
 src/forge/Deck.java svneol=native#text/plain
 src/forge/DeckIO.java svneol=native#text/plain
 src/forge/DefaultPlayerZone.java svneol=native#text/plain
