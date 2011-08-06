@@ -1,0 +1,10 @@
+Name:Stonehands
+ManaCost:2 R
+Types:Enchantment Aura
+Text:Enchanted creature gets +0/+2.
+K:Enchant creature
+K:enPump:+0/+2
+A:AB$Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehands.jpg
+End

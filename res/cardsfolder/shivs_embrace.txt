@@ -1,0 +1,10 @@
+Name:Shiv's Embrace
+ManaCost:2 R R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and has flying.
+K:Enchant creature
+K:enPump:+2/+2/Flying
+A:AB$Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shivs_embrace.jpg
+End

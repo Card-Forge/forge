@@ -1,0 +1,10 @@
+Name:Shadow Lance
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature has first strike.
+K:Enchant creature
+K:enPump:First Strike
+A:AB$Pump | Cost$ 1 B | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Enchanted creature gets +2/+2 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_lance.jpg
+End

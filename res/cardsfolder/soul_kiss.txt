@@ -1,0 +1,10 @@
+Name:Soul Kiss
+ManaCost:2 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+0/+0
+A:AB$Pump | Cost$ B PayLife<1> | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 3 | SpellDescription$ Enchanted creature gets +2/+2 until end of turn. Activate this ability no more than three times each turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_kiss.jpg
+End
