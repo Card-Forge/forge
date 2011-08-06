@@ -218,10 +218,17 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private void setupMenu() {
         Action[] actions = {
                 LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
-                CARD_STACK_OFFSET_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
+                CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
-        for(Action a:actions)
+        for (Action a:actions) {
             menu.add(a);
+            if (a.equals(LOOK_AND_FEEL_ACTION)
+                    || a.equals(IMPORT_PICTURE)
+                    || a.equals(CARD_STACK_OFFSET_ACTION)
+                    || a.equals(ErrorViewer.ALL_THREADS_ACTION)) {
+                menu.addSeparator();
+            }
+        }
         
         //useLAFFonts.setSelected(false);
         
