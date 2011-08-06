@@ -8261,6 +8261,68 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Last Stand")) {
+        	/*
+        	 * Target opponent loses 2 life for each Swamp you control.
+        	 * Last Stand deals damage equal to the number of Mountains
+        	 * you control to target creature.
+        	 * Put a 1/1 green Saproling creature token onto the battlefield
+        	 * for each Forest you control.
+        	 * You gain 2 life for each Plains you control.
+        	 * Draw a card for each Island you control, then discard that many cards.
+        	 */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 4475834103787262421L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	String player = card.getController();
+                	String opp = AllZone.GameAction.getOpponent(player);
+                    int numSwamps = AllZoneUtil.getPlayerTypeInPlay(player, "Swamp").size();
+                    int numMountains = AllZoneUtil.getPlayerTypeInPlay(player, "Mountain").size();
+                    int numForests = AllZoneUtil.getPlayerTypeInPlay(player, "Forest").size();
+                    int numPlains = AllZoneUtil.getPlayerTypeInPlay(player, "Plains").size();
+                    int numIslands = AllZoneUtil.getPlayerTypeInPlay(player, "Island").size();
+                    
+                    //swamps
+                    AllZone.GameAction.loseLife(opp, 2*numSwamps);
+                    
+                    //mountain
+                    AllZone.GameAction.addDamage(getTargetCard(), card, numMountains);
+                    
+                    //forest
+                    for(int i = 0; i < numForests; i++)
+                    	CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", player, "G",
+                    			new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""});
+                    
+                    //plains
+                    AllZone.GameAction.gainLife(player, 2*numPlains);
+                    
+                    //islands
+                    int max = Math.min(numIslands, AllZoneUtil.getPlayerCardsInLibrary(player).size());
+                    if(max > 0) {
+                    	AllZone.GameAction.drawCards(player, max);
+                    	if(player.equals(Constant.Player.Human)) {
+                    		AllZone.InputControl.setInput(CardFactoryUtil.input_discard(max, this));
+                    	}
+                    	else {
+                    		AllZone.GameAction.discardRandom(Constant.Player.Computer, max, this);
+                    	}
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
