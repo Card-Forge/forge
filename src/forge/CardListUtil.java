@@ -343,4 +343,18 @@ public class CardListUtil
     Log.debug("Total First Strike attack: " +attack);
     return attack;
   }//sumFirstStrikeAttack()
+
+ //Get the total converted mana cost of a card list
+  public static int sumCMC(CardList c)
+  {
+    int cmc = 0;
+    
+    for(int i  = 0; i < c.size(); i++){
+    	  cmc += CardUtil.getConvertedManaCost(c.get(i).getManaCost());
+    }
+	//System.out.println("Total CMC: " +cmc);
+
+    return cmc;
+
+  }//sumCMC
 }

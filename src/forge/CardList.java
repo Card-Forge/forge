@@ -177,6 +177,13 @@ public class CardList implements Iterable<Card> {
         });
     }
 
+    public CardList getTokens() {
+        return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isToken();
+            }
+        });
+    }
     
     public CardList filter(CardListFilter f) {
         CardList c = new CardList();

@@ -3112,11 +3112,17 @@ public class CardFactory implements NewConstants {
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
                     human = human.getValidCards(Tgts);
+                    int humanvalue = sumCMC(human);
+                    humanvalue += human.getType("Land").size();
+                    humanvalue += human.getTokens().size() * 3;          // X = total converted mana cost + number of lands + 3 * number of tokens (Human)
                     computer = computer.getValidCards(Tgts);
+                    int computervalue = sumCMC(computer);
+                    computervalue += computer.getType("Land").size();
+                    computervalue += computer.getTokens().size() * 3;    // Y = total converted mana cost + number of lands + 3 * number of tokens (Computer)
                     
-                    // the computer will at least bounce 2 more human permanents
+                    // the computer will play the spell if Y < X - 2
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-                    		(computer.size() < human.size() - 1);
+                    		(computervalue < humanvalue - 2);
                 }
 
                 @Override
@@ -3150,6 +3156,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spBnceAll);            
 
         }//spBounceAll
+
 
         while(hasKeyword(card, "abDrawCards") != -1) {
             int n = hasKeyword(card, "abDrawCards");
