@@ -13732,12 +13732,14 @@ Choose target creature or player.  The computer will randomly choose a nonland c
 Tribal Flames
 1 R
 Sorcery
-Tribal Flames deals X damage to target creature or player, where X is the number of basic land types among lands you control.
+no text
+spDamageTgtCP:Count$Domain:Tribal Flames deals X damage to target creature or player, where X is the number of basic land types among lands you control.:Tribal Flames - deals damage.
 
 Cackling Flames
 3 R
 Instant
-Cackling Flames deals 3 damage to target creature or player. Hellbent - Cackling Flames deals 5 damage to that creature or player instead if you have no cards in hand.
+no text
+spDamageTgtCP:Count$Hellbent.5.3:Cackling Flames deals 3 damage to target creature or player. Hellbent - Cackling Flames deals 5 damage to that creature or player instead if you have no cards in hand.:Cackling Flames - deals damage.
 
 Shinka Gatekeeper
 2 R
@@ -13996,7 +13998,8 @@ Return target creature card from your graveyard to play.
 Douse in Gloom
 2 B
 Instant
-Douse in Gloom deals 2 damage to target creature and you gain 2 life.
+no text
+spDamageTgtC:2:Drawback$YouGainLife/2:Douse in Gloom deals 2 damage to target creature and you gain 2 life.:Douse in Gloom - deals 2 damage and you gain 2 life.
 
 Infest
 1 B B

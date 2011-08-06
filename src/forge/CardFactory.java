@@ -7267,8 +7267,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
-
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Douse in Gloom"))
     {
@@ -7323,8 +7322,7 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
     }//*************** END ************ END **************************
-
-
+*/
 
 
     //*************** START *********** START **************************
@@ -7860,6 +7858,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Cackling Flames"))
     {
@@ -7933,7 +7932,7 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
     }//*************** END ************ END **************************
-    
+*/
     
 /*
   //*************** START *********** START **************************
@@ -7988,7 +7987,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 */
 
-
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Tribal Flames"))
     {
@@ -8094,7 +8093,8 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
     }//*************** END ************ END **************************
-
+*/
+    
 
     //*************** START *********** START **************************
     else if(cardName.equals("Erratic Explosion"))
