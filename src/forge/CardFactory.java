@@ -794,6 +794,17 @@ public class CardFactory implements NewConstants {
         	}
         }
         
+        if (hasKeyword(card, "Replicate") != -1) {
+        	int n = hasKeyword(card, "Replicate");
+        	if (n!= -1) {
+        		String parse = card.getKeyword().get(n).toString();
+        		String k[] = parse.split("cate ");
+        	
+        		SpellAbility sa = card.getSpellAbility()[0];
+        		sa.setIsReplicate(true);
+        		sa.setReplicateManaCost(k[1]);
+        	}
+        }
         
         /*
         //Creatures with self-regenerate abilities
@@ -7943,6 +7954,8 @@ public class CardFactory implements NewConstants {
         					if(freeCard.isLand() == true) {
         						if(CardFactoryUtil.canHumanPlayLand()) {
         							PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
+        							PlayerZone orig = AllZone.getZone(freeCard);
+            						orig.remove(freeCard);
         							play.add(freeCard);
         							CardFactoryUtil.playLandEffects(freeCard);
         							AllZone.GameInfo.incrementHumanPlayedLands();
@@ -7953,10 +7966,13 @@ public class CardFactory implements NewConstants {
         					}
         					else if(freeCard.isPermanent() == true) {
         						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
+        						PlayerZone orig = AllZone.getZone(freeCard);
+        						orig.remove(freeCard);
         						play.add(freeCard);
-        						//AllZone.GameAction.playCardNoCost(freeCard);
         					}
         					else { //sorceries and instants
+        						PlayerZone orig = AllZone.getZone(freeCard);
+        						orig.remove(freeCard);
         						AllZone.GameAction.playCardNoCost(freeCard);
         					}
         				}
