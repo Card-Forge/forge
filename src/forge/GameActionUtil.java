@@ -11515,17 +11515,7 @@ public class GameActionUtil {
 		
 		private static final long serialVersionUID = -7853346190458174501L;
 		private ArrayList<StaticEffect> storage = new ArrayList<StaticEffect>();
-			// storage stores the source card and the cards it gave its bonus to
-		
-		/*
-		int						  max			  		 = 100;
-		CardList[]                old            		 = new CardList[max];
-		CardList[]                next             	 	 = new CardList[max];
-		CardList                  CardsWithKeyword 	 	 = new CardList();
-		String[] 				  InfoStorage	   		 = new String[max];
-		int						  KeywordsActive		 = 0;
-		int						  ActivationNumber	     = 0;
-		*/
+			// storage stores the source card and the cards it gave its bonus to, to know what to remove
 		
 		public void execute() {
 			
@@ -11546,10 +11536,12 @@ public class GameActionUtil {
 			cards_WithKeyword.add(new CardList(Cplay.getCards()));
 			cards_WithKeyword.getKeywordsContain("stPump");
 			
+			// check each card
 			for (int i = 0; i < cards_WithKeyword.size(); i++) {
 	    		Card cardWithKeyword = cards_WithKeyword.get(i);
 	            ArrayList<String> keywords = cardWithKeyword.getKeyword();
 	            
+	            // check each keyword of the card
 	            for (int j = 0; j < keywords.size(); j++) {
 	            	String keyword = keywords.get(j);
 	            	
@@ -11557,7 +11549,7 @@ public class GameActionUtil {
 	            		StaticEffect se = new StaticEffect(); 	//create a new StaticEffect
 	            		se.setSource(cardWithKeyword);
 	            		se.setKeywordNumber(j);
-	            		se.setXValue(0); 						//ToDo
+
 	            		
 	            		//get the affected cards
 						String k[] = keyword.split(":");    
@@ -11568,123 +11560,38 @@ public class GameActionUtil {
 							final String specific[] = affected.split(",");
 							CardList affectedCards = AffectedCards(cardWithKeyword, k); // options are All, Other, Self. etc.
 							affectedCards = affectedCards.getValidCards(specific, cardWithKeyword.getController(), cardWithKeyword);
-	      				
-							addStaticEffects(affectedCards,k[2],j); //give the boni to the affected cards
 							se.setAffectedCards(affectedCards);
+							
+							int x = 0;
+		            		if (k[2].contains("X")) 
+		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X"));
+		                 	se.setXValue(x);	
+		            		
+							addStaticEffects(affectedCards,k[2],x); //give the boni to the affected cards
+
 							storage.add(se); // store the information
 						}
 	            	}
 	            }
 	    	}
-			
-			
-			// Initialize Variables
-			/*
-			if(old[0] == null) {
-				for(int i = 0; i < max; i++) {
-					old[i] = new CardList();
-					next[i] = new CardList();
-					old[i].clear();
-					next[i].clear();
-					InfoStorage[i] = "-1";
-				}
-			}
-			// Reset Variables at Start of Game
-			if(AllZone.GameAction.StaticEffectKeywordReset) {
-				AllZone.GameAction.StaticEffectKeywordReset = false;
-				
-				for(int i = 0; i < max; i++)	{
-					old[i] = new CardList();
-					next[i] = new CardList();
-					old[i].clear();
-					next[i].clear();
-					InfoStorage[i] = "-1";	
-				}
-			}
-			// Check if the Bonuses need to be removed
-			if(Phase.GameBegins == 1) {
-				for(int i = 0; i < max; i++)	{
-					String[] InfoSplit = InfoStorage[i].split(":");
-					for(int z = 0; z < CardsWithKeyword.size(); z++)
-						if(Integer.valueOf(InfoSplit[0]) == CardsWithKeyword.get(z).getUniqueNumber()) 
-							removeKeyword(old[i],CardsWithKeyword.get(z),i,Integer.valueOf(InfoSplit[1]),InfoSplit[2]);
-				}
-				// Gather Cards in Play and Graveyards with the Keyword
-				Cards_WithKeyword.add(new CardList(Hplay.getCards()));
-				Cards_WithKeyword.add(new CardList(Cplay.getCards()));
-				Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
-					public boolean addCard(Card c) {
-						if(c.getKeyword().toString().contains("stPump")) return true;
-						return false;
-					}
-				});
-				// For each card found, find the keywords which are the stPump Keywords
-				for(int i = 0; i < Cards_WithKeyword.size() ; i++) {
-					Card card = Cards_WithKeyword.get(i);
-					ArrayList<String> a = card.getKeyword();
-					int stPumpKeywords = 0;
-					int stPumpKeyword_Number[] = new int[a.size()];
-					for(int x = 0; x < a.size(); x++)
-						if(a.get(x).toString().startsWith("stPump")) {
-							stPumpKeyword_Number[stPumpKeywords] = x;
-							stPumpKeywords = stPumpKeywords + 1;
-     		            }
-					// For each keyword found, Record Data about the keyword and the source card
-					// Record Data Start
-					for(int CKeywords = 0; CKeywords < stPumpKeywords; CKeywords++) {
-						String parse = card.getKeyword().get(stPumpKeyword_Number[CKeywords]).toString();                
-						String k[] = parse.split(":");
-						int ANCount = 0;
-						KeywordsActive = 0;
-						while(InfoStorage[KeywordsActive] != "-1") {
-							KeywordsActive++;		
-						}
-     	     			
-						if(SpecialConditionsMet(card, k[3])) {
-							boolean ActivatedAlready = false;
-							// JOptionPane.showMessageDialog(null, ANCount + " " + CKeywords, "", JOptionPane.INFORMATION_MESSAGE); 
-							for(int y = 0; y < max; y++) {
-								if(InfoStorage[y].split(":")[0].equals(String.valueOf(card.getUniqueNumber()))) {
-									if(ANCount == CKeywords) {
-										ActivatedAlready = true;
-										ActivationNumber = y;	
-										break;
-									} else {
-										ANCount++;	
-									}
-								}
-							}
-							if(!ActivatedAlready) {
-								InfoStorage[KeywordsActive] = String.valueOf(card.getUniqueNumber()) + ":" + stPumpKeyword_Number[CKeywords] + ":" +  card.getController();
-								ActivationNumber = KeywordsActive;
-							}
-							CardList SourceCard_in_CardsWithKeyword = CardsWithKeyword.getName(card.getName());
-							for(int i1 = 0; i1 < SourceCard_in_CardsWithKeyword.size() ; i1++) {
-								if(!SourceCard_in_CardsWithKeyword.get(i1).equals(card)) 
-									SourceCard_in_CardsWithKeyword.remove(SourceCard_in_CardsWithKeyword.get(i1));	
-							}
-							// JOptionPane.showMessageDialog(null, ANCount + " " + SourceCard_in_CardsWithKeyword.size(), "", JOptionPane.INFORMATION_MESSAGE);
-							for(int i1 = 0; i1 < ANCount - SourceCard_in_CardsWithKeyword.size() + 1; i1++) {
-								if(CKeywords + 1 == stPumpKeywords) CardsWithKeyword.add(card);
-							}
-							// Record Data End
-     	     			
-							// Final Statement: For each keyword found, run addKeyword	
-							addKeyword(card,ActivationNumber,k);
-						}
-					}
-				}
-			}*/
 		}// execute()
 		
 		void addStaticEffects(CardList affectedCards, String Keyword_Details, int xValue) {
 			
+			int powerbonus = 0;
+			int toughnessbonus = 0;
 			String[] Keyword = Keyword_Details.replace("+","").split("/");
+			
+			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
+			else powerbonus = xValue; 		// the xCount takes places before
+			
+			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[0]);
+			else toughnessbonus = xValue;
 			
 			for(int i = 0; i < affectedCards.size(); i++) {
 				Card affectedCard = affectedCards.get(i);
-				affectedCard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]));
-				affectedCard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]));
+				affectedCard.addSemiPermanentAttackBoost(powerbonus);
+				affectedCard.addSemiPermanentDefenseBoost(toughnessbonus);
 				if (Keyword.length > 2) {
 					String Keywords[] = Keyword[2].split(" & ");
 					for(int j = 0; j < Keywords.length; j++) {
@@ -11694,52 +11601,11 @@ public class GameActionUtil {
 			}
 		}
 		
-		/*
-		void addKeyword(Card SourceCard, int ANumber, String[] Keyword_Details) {
-			// Initialize Variables
-			next[ANumber].clear();
-	      	CardList Cards_inZone = new CardList();
-	      		
-	      	if(AllZone.GameAction.isCardInPlay(SourceCard)) {
-	      		// Who gets the Bonus?
-	      		Cards_inZone.add(AffectedCards(SourceCard, Keyword_Details));
-	      		
-	      		// Special Conditions
-	      		final String Affected = Keyword_Details[1];			
-  				final String Specific[] = Affected.split(",");
-  				Cards_inZone = Cards_inZone.getValidCards(Specific, SourceCard.getController(), SourceCard);
-		      		
-  				// From the cards left, determine which cards have already got the bonus 		
-  				for(int i = 0; i < Cards_inZone.size(); i++) {
-  					if(!old[ANumber].contains(Cards_inZone.get(i))) next[ANumber].add(Cards_inZone.get(i));
-  				}
-  				// Final Statement: Run addKeyword noting which cards should have the bonus but don't have it yet
-  				addKeyword(SourceCard,next[ANumber],Keyword_Details,ANumber);
-	      	}
-		}
-
-		void addKeyword(Card SourceCard, CardList list, String[] Keyword_Details, int ANumber) {
-			// Add the boni of one card to a Cardlist
-			String[] Keyword = Keyword_Details[2].replace("+","").split("/");
-			for(int i = 0; i < list.size(); i++) {
-				old[ANumber].add(list.get(i));
-				list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]));
-				list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]));
-				if (Keyword.length > 2) {
-					String Keywords[] = Keyword[2].split(" & ");
-					for(int j = 0; j < Keywords.length; j++) {
-						list.get(i).addExtrinsicKeyword(Keywords[j]);
-					}
-				}
-			}
-		}
-		*/
-		
 		void removeStaticEffect(StaticEffect se) {
 			Card Source = se.getSource();
 			CardList affected = se.getAffectedCards();
 			int KeywordNumber = se.getKeywordNumber();
-			int xValue = se.getXValue();
+			int xValue = se.getXValue(); 		// the old xValue has to be removed, not the actual one!
             String parse = Source.getKeyword().get(KeywordNumber).toString();                
             String k[] = parse.split(":");
 			for(int i = 0; i < affected.size(); i++) {
@@ -11748,9 +11614,19 @@ public class GameActionUtil {
 		}
 		
 		void removeStaticEffect(Card affectedCard, String[] Keyword_Details, int xValue) {
+			
+			int powerbonus = 0;
+			int toughnessbonus = 0;
 			String[] Keyword = Keyword_Details[2].replace("+","").split("/");
-			affectedCard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]) * -1);
-			affectedCard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]) * -1);
+			
+			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
+			else powerbonus = xValue; 		
+			
+			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[0]);
+			else toughnessbonus = xValue;
+			
+			affectedCard.addSemiPermanentAttackBoost(powerbonus * -1);
+			affectedCard.addSemiPermanentDefenseBoost(toughnessbonus * -1);
 			if (Keyword.length > 2) {
 				String Keywords[] = Keyword[2].split(" & ");
 				for(int j = 0; j < Keywords.length; j++) {
@@ -11758,62 +11634,6 @@ public class GameActionUtil {
 				}
 			}
 		}
-		
-		/*
-		void removeKeyword(CardList list , Card Source,int ANumber, int AbilityNumber, String LastKnownController) {
-			// Initialize Variables
-            String parse = Source.getKeyword().get(AbilityNumber).toString();                
-            String k[] = parse.split(":");
-                     
-     		 // Is the Card in the right location	 
-            boolean SourceCardinRightZone = true;
-            if(!AllZone.GameAction.isCardInPlay(Source)) SourceCardinRightZone = false;
-            if(!LastKnownController.equals(Source.getController())) SourceCardinRightZone = false;
-            
-            // If Bonus uses XCount, always update it
-            if (k[2].contains("X")) {
-            	CardsWithKeyword.remove(Source);
-            	InfoStorage[ANumber] = "-1";
-            	old[ANumber].remove(Source);
-            }
-            
-      	    // If the Source Card is not in the right Location or the Special Conditions are no longer met - Then Remove Bonus
-            if(!SourceCardinRightZone || !SpecialConditionsMet(Source, k[3])) {
-        		for(int i = 0; i < list.size(); i++) {
-        			if(old[ANumber].contains(list.get(i))) {
-        				removeKeywords(Source, list.get(i), k, ANumber);
-        			}
-        		}
-            	CardsWithKeyword.remove(Source);
-            	InfoStorage[ANumber] = "-1";
-            }
-            // If a card under the influence of a source card is not in the right location or has lost the requirements - Then Remove Bonus
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-      	      	String Affected = k[1];
-      	      	final String Specific[] = Affected.split(",");
-      	      	final Player Controller = Source.getController();
-				if(old[ANumber].contains(c) && (!AffectedCards(Source, k).contains(c) || !c.isValidCard(Specific, Controller, Source))) {
-					old[ANumber].remove(c);
-					removeKeywords(Source, c, k, ANumber);
-				}
-     		 }         		
-		}
-		
-		void removeKeywords(Card SourceCard, Card affcard, String[] Keyword_Details, int ANumber) {
-			// Initialize Variables
-			String[] Keyword = Keyword_Details[2].replace("+","").split("/");
-			old[ANumber].remove(affcard);
-			affcard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]) * -1);
-			affcard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]) * -1);
-			if (Keyword.length > 2) {
-				String Keywords[] = Keyword[2].split(" & ");
-				for(int j = 0; j < Keywords.length; j++) {
-					affcard.removeExtrinsicKeyword(Keywords[j]);
-				}
-			}
-		}
-		*/
 		
     	// Special Conditions
 		boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
