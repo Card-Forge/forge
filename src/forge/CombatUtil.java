@@ -2225,7 +2225,58 @@ public class CombatUtil {
             ability3.setStackDescription(c + " - (Exalted) gets Lifelink until EOT.");
             AllZone.Stack.add(ability3);
         }
+        if(GameActionUtil.get_Sovereigns_of_Lost_Alaras(phasingPlayer) > 0) {
+            for(int i = 0; i < GameActionUtil.get_Sovereigns_of_Lost_Alaras(phasingPlayer); i++) { 
+            	final Card attacker = c;
+            Ability ability4 = new Ability(c, "0") {
+                @Override
+                public void resolve() {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, attacker.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, attacker.getController()); 
+                    
+                    CardList enchantments = new CardList(library.getCards());
+
+                    enchantments = enchantments.filter(new CardListFilter() {                      
+                        public boolean addCard(Card c) {
+                        	ArrayList<String> keywords = c.getKeyword();
+                        	for(String keyword:keywords) {
+                        		if(keyword.startsWith("Enchant " + "creature")) {
+                                    if(c.isEnchantment()) return true;                       			
+                        		}
+                        		}
+                             return false;
+                        }
+                    });
+	                    String player = attacker.getController();
+	                    Card Enchantment = null;
+	                    if(player == "Human"){
+                            Card[] Target = new Card[enchantments.size()];
+                            for(int i = 0; i < enchantments.size(); i++) {
+                				Card crd = enchantments.get(i);
+                				Target[i] = crd;
+                            }
+	                        Object check = AllZone.Display.getChoiceOptional("Select enchantment to enchant exalted creature", Target);
+	                        if(check != null) {
+	                           Enchantment = ((Card) check);	
+	                        }
+	                    } else {
+	                           Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments,attacker, false);
+	                    }
+	                    if(Enchantment != null && AllZone.GameAction.isCardInPlay(attacker)){
+	                    	library.remove(Enchantment);
+	                    	play.add(Enchantment);
+	                    	Enchantment.enchantCard(attacker);
+                            if(player == "Human") AllZone.GameAction.shuffle(attacker.getController());
+	                    }
+	                    
+                }//resolve
+            };// ability4
+            ability4.setStackDescription(c + " - (Exalted) searches library for an Aura card that could enchant that creature, put it into play attached to that creature, then shuffles library. ");
+            AllZone.Stack.add(ability4);
+            } // For
+        }
     }
+    
     
     /////////////////////////Rampage
     /**

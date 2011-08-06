@@ -742,8 +742,8 @@ public class GameActionUtil {
 		    	                    	CardList human3 = CardFactoryUtil.AI_getHumanEnchantment(StormCard, true);
 		    	                    	CardList human4 = CardFactoryUtil.getLandsInPlay(player);
 		    	                    	if(human != null) setTargetCard(CardFactoryUtil.AI_getBestCreature(human));
-		    	                    	else if(human2 != null) setTargetCard(CardFactoryUtil.AI_getBestArtifact(human));
-		    	                    	else if(human3 != null) setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human,StormCard, true));
+		    	                    	else if(human2 != null) setTargetCard(CardFactoryUtil.AI_getBestArtifact(human2));
+		    	                    	else if(human3 != null) setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human3,StormCard, true));
 		    	                    	else if(human4 != null) setTargetCard(CardFactoryUtil.AI_getBestLand(human4));
 		    	                    }
 
@@ -3664,7 +3664,18 @@ public class GameActionUtil {
 
 		return cards.size();
 	}
+	
+	public static int get_Sovereigns_of_Lost_Alaras(String player) {
+		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play, player);
 
+		CardList cards = new CardList();
+		cards.addAll(playerZone.getCards());
+
+		cards = cards.getName("Sovereigns of Lost Alara");
+
+		return cards.size();
+	}
+	
 	public static int countFinestHours(String controller) {
 		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play, controller);
 

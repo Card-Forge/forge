@@ -7362,8 +7362,8 @@ public class CardFactory implements NewConstants {
                 	CardList human3 = CardFactoryUtil.AI_getHumanEnchantment(card, true);
                 	CardList human4 = CardFactoryUtil.getLandsInPlay(player);
                 	if(human != null) setTargetCard(CardFactoryUtil.AI_getBestCreature(human));
-                	else if(human2 != null) setTargetCard(CardFactoryUtil.AI_getBestArtifact(human));
-                	else if(human3 != null) setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human,card, true));
+                	else if(human2 != null) setTargetCard(CardFactoryUtil.AI_getBestArtifact(human2));
+                	else if(human3 != null) setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human3,card, true));
                 	else if(human4 != null) setTargetCard(CardFactoryUtil.AI_getBestLand(human4));
                 }
                 
