@@ -8675,7 +8675,8 @@ public class CardFactory implements NewConstants {
         	/*
         	 * Tap, Exile Feldon's Cane: Shuffle your graveyard into your library.
         	 */
-        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+        	Ability_Cost abCost = new Ability_Cost("T Exile<1/CARDNAME>", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -1299603105585632846L;
 
 				@Override
@@ -8683,8 +8684,6 @@ public class CardFactory implements NewConstants {
         			final Player player = card.getController();
         			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
         			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-        			//exile Feldon's Cane
-        			AllZone.GameAction.exile(card);
         			
         			for(Card c:grave) {
         				lib.add(c);
@@ -8695,7 +8694,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlayAI() {
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
+        			CardList lib = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
         			return lib.size() < 5;
         		}
 
@@ -8704,16 +8703,18 @@ public class CardFactory implements NewConstants {
         	StringBuilder sb = new StringBuilder();
         	sb.append(cardName).append(" - Player shuffles grave into library.");
         	ability.setStackDescription(sb.toString());
-        	ability.setDescription("tap, Exile CARDNAME: Shuffle your graveyard into your library.");
+        	ability.setDescription(abCost+"Shuffle your graveyard into your library.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Elixir of Immortality")) {
         	/*
         	 * 2, Tap: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.
         	 */
-        	final Ability_Tap ability = new Ability_Tap(card, "2") {
+        	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -1299603105585632846L;
 
 				@Override
@@ -8742,7 +8743,7 @@ public class CardFactory implements NewConstants {
         	StringBuilder sb = new StringBuilder();
         	sb.append(cardName).append(" - Player shuffles grave into library.");
         	ability.setStackDescription(sb.toString());
-        	ability.setDescription("2, Tap: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.");
+        	ability.setDescription(abCost+"You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
@@ -8829,7 +8830,9 @@ public class CardFactory implements NewConstants {
         	/*
         	 * Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
         	 */
-        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("T Sac<1/CARDNAME>", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
 
 				private static final long serialVersionUID = -8877371657709894494L;
 
@@ -8840,8 +8843,6 @@ public class CardFactory implements NewConstants {
 					
         			final Player player = getTargetPlayer();
         			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-        			//sac tormod's crypt
-        			AllZone.GameAction.sacrifice(card);
         			
         			for(Card c:grave) {
         				AllZone.GameAction.exile(c);
@@ -8857,8 +8858,7 @@ public class CardFactory implements NewConstants {
         		}
 
         	};//SpellAbility
-        	ability.setDescription("Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.");
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+        	ability.setDescription(abCost+"Exile all cards from target player's graveyard.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
