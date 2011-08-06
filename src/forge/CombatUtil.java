@@ -361,12 +361,16 @@ public class CombatUtil {
             if(allislands.size() < 5) return false;
         }
         
-        if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
+        if(c.isTapped() || c.hasSickness() || moatPrevented
                 || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) 
                 || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")
                 || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
         	return false;
+        
+        if(c.getKeyword().contains("Defender") && !AllZoneUtil.isCardInPlay("Rolling Stones")) {
+        	return false;
+        }
         
         if (c.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;

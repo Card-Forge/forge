@@ -118,7 +118,6 @@ public class StaticEffects
 		cardToEffectsList.put("Primalcrux",new String[] {"Primalcrux"});
 		
 		cardToEffectsList.put("Rakdos Pit Dragon", new String[] {"Rakdos_Pit_Dragon"});
-		cardToEffectsList.put("Rolling Stones", new String[] {"Rolling_Stones"});
 		cardToEffectsList.put("Ruthless Cullblade", new String[] {"Ruthless_Cullblade"});
 		
 		cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});

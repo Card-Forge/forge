@@ -11262,45 +11262,6 @@ public class GameActionUtil {
 		}// execute()
 	}; //Conspiracy
 
-	
-	public static Command Rolling_Stones              = new Command() {
-		private static final long serialVersionUID   = -3317318747868440229L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Defender";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addIntrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Rolling Stones");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				//CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.getKeyword().contains(keyword)
-							&& c.isType("Wall")) {
-						c.removeIntrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Rolling Stones
-	
 	public static Command Mul_Daya_Channelers          = new Command() {
 		private static final long serialVersionUID   = -2543659953307485051L;
 
@@ -16559,7 +16520,6 @@ public class GameActionUtil {
 		commands.put("Primalcrux", Primalcrux);
 		
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
-		commands.put("Rolling_Stones", Rolling_Stones);
 		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
 		
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
