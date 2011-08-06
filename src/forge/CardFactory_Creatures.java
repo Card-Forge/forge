@@ -6866,13 +6866,6 @@ public class CardFactory_Creatures {
                     CardList land = new CardList(AllZone.Computer_Play.getCards());
                     land = land.getType("Land");
                     
-                    CardList canBlock = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    canBlock = canBlock.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isUntapped();
-                        }
-                    });
-                    
                     return (land.size() != 0) && (!card.getKeyword().contains("Flying"))
                             && CardFactoryUtil.AI_getHumanCreature("Flying", card, false).isEmpty()
                             && (!card.hasSickness()) && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1));
@@ -15895,7 +15888,7 @@ public class CardFactory_Creatures {
                         });
                         
                         if(list.size() > 0) {
-                            CardList rare = new CardList();
+                            CardList rare;
                             rare = list;
                             rare = rare.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {

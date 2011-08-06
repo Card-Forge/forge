@@ -3285,7 +3285,7 @@ public class CardFactory implements NewConstants {
                             list = list.getType(targetTypeToReturn);
                         } else // prevent the computer from using a Boggart Birth Rite to return a Boggart Birth Rite
                         {
-                            CardList tempList = new CardList(grave.getCards());
+                            CardList tempList;
                             tempList = list.getType(targetTypeToReturn);
                             list = new CardList();
                             for(int i = 0; i < tempList.size(); i++) {
@@ -14055,7 +14055,6 @@ public class CardFactory implements NewConstants {
                     });
                     
                     hList = hList.getType("Creature");
-                    cList = cList.getType("Creature");
                     
                     if(hList.size() == 0) return false;
                     

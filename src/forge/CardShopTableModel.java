@@ -79,10 +79,10 @@ class CardShopTableModel extends AbstractTableModel {
             }
         }//for
         
-        for(int j = 0; j < table.getColumnCount(); j++) {
+        /*for(int j = 0; j < table.getColumnCount(); j++) {
             column = table.getColumnModel().getColumn(j);
             //System.out.println("col Width:" + column.getPreferredWidth());
-        }
+        }*/
     }
     
     public void clear() {

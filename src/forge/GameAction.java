@@ -1039,7 +1039,7 @@ public class GameAction {
     @SuppressWarnings("unused")
     // getComputerLand
     private CardList getComputerLand(CardList in) {
-        CardList land = new CardList();
+        CardList land;
         land = in.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.isLand();

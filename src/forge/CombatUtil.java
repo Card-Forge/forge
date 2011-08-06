@@ -152,7 +152,7 @@ public class CombatUtil {
         
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(c.getController()));
         CardList list = new CardList(play.getCards());
-        CardList temp = new CardList();
+        CardList temp;
         
         if(c.getKeyword().contains("This creature can't attack unless defending player controls an Island")) {
             temp = list.getType("Island");

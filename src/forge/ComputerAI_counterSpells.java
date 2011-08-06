@@ -16,7 +16,7 @@ public class ComputerAI_counterSpells {
 		if (!hasPlayableCounterSpells() && !hasPlayableCreatureCounterSpells())
 			return;
 		
-		CardList counterSpells = new CardList();
+		CardList counterSpells;
 		if (hasPlayableCreatureCounterSpells())
 			counterSpells = getPlayableCreatureCounterSpells();
 		else
@@ -44,7 +44,7 @@ public class ComputerAI_counterSpells {
 		if (!hasPlayableCounterSpells())
 			return;
 		
-		CardList counterSpells = new CardList();
+		CardList counterSpells;
 		counterSpells = getPlayableCounterSpells();
 		
 		boolean countered = false;

@@ -5988,7 +5988,7 @@ public class GameActionUtil {
         });
         
         if(list.size() > 0) {
-            ArrayList<Card> enchants = new ArrayList<Card>();
+            ArrayList<Card> enchants;
             Ability ability;
             for(int i = 0; i < list.size(); i++) {
                 enchants = list.get(i).getEnchantedBy();
@@ -6030,7 +6030,7 @@ public class GameActionUtil {
         });
         
         if(list.size() > 0) {
-            ArrayList<Card> enchants = new ArrayList<Card>();
+            ArrayList<Card> enchants;
             Ability ability;
             for(int i = 0; i < list.size(); i++) {
                 enchants = list.get(i).getEnchantedBy();

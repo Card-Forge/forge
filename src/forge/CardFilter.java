@@ -5,7 +5,7 @@ public class CardFilter {
 	
 	public CardList CardListNameFilter(CardList all, String name)
 	{
-	Card CardName = new Card(); 
+	Card CardName; 
 	String s;
 	s="";
 	CardList listFilter = new CardList();
@@ -26,7 +26,7 @@ public class CardFilter {
 	
 	public CardList CardListTextFilter(CardList all, String name)
 	{
-	Card CardName = new Card(); 
+	Card CardName; 
 	String s;
 	s="";
 	CardList listFilter = new CardList();

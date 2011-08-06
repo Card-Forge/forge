@@ -516,7 +516,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	}
 	
 	private JList getJList1() {
-		CardList rList = new CardList();
+		CardList rList;
 		rList=tModel.getCards();
 		
     	rList.shuffle();    	
@@ -622,7 +622,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	}
 	
 	private JButton getJButton1() {
-		CardList rList = new CardList();		
+		CardList rList;		
 		rList=tModel.getCards();
 		if(jButtonRegenerate == null) {
 			if(rList.size()>=40){
@@ -729,7 +729,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	        	mFive = 0;
 	        	mSixMore = 0;
 	        	tManaCost = 0;
-        	CardList cList = new CardList();
+        	CardList cList;
         	cList=tModel.getCards();
         	for(int i=0; i<cList.size();i++){
         		c = cList.getCard(i);
@@ -874,7 +874,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			 dm.setDataVector(new Object[][] { {  }}, new Object[] { "Card", "Qty","1st","2nd","3rd","4th","5th","6th","7th" });
 
 			jTable1 = new JTable(dm);
-			CardList rList = new CardList();		
+			CardList rList;		
 			rList=tModel.getCards();
 			String[] cardsName =new String[rList.size()];
 			int cCount;

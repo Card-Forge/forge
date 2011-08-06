@@ -111,7 +111,7 @@ package forge;
 	{
 		CardList all = AllZone.CardFactory.getAllCards(); 
 		
-		Card gCard = new Card();
+		Card gCard;
 		for(int i=0;i<all.size();i++)
 		{
 			gCard = all.getCard(i);

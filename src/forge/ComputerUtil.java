@@ -160,7 +160,7 @@ public class ComputerUtil
     }
     
     ManaCost cost = new ManaCost(sa.getManaCost());
-    ArrayList<String> colors = new ArrayList<String>();
+    ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)
     {
@@ -194,7 +194,7 @@ public class ComputerUtil
     CardList land = getAvailableMana();
     
     ManaCost manacost = new ManaCost(cost);
-    ArrayList<String> colors = new ArrayList<String>();
+    ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)
     {
@@ -232,7 +232,7 @@ public class ComputerUtil
     }
     
     ManaCost cost = new ManaCost(sa.getManaCost());
-    ArrayList<String> colors = new ArrayList<String>();
+    ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)
     {
