@@ -1,8 +1,10 @@
 Name:Affa Guard Hound
 ManaCost:2 W
 Types:Creature Hound
-Text:When CARDNAME enters the battlefield, target creature gets +0/+3 until end of turn.
+Text:no text
 PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +0/+3 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +3
 K:Flash
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
