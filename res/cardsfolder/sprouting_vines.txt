@@ -1,0 +1,8 @@
+Name:Sprouting Vines
+ManaCost:2 G
+Types:Instant
+Text:Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+K:Storm
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
+End

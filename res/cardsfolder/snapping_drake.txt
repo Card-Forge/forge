@@ -1,0 +1,9 @@
+Name:Snapping Drake
+ManaCost:3 U
+Types:Creature Drake
+Text:no text
+PT:3/2
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87986.jpg
+End

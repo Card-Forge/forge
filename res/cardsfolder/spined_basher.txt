@@ -1,0 +1,9 @@
+Name:Spined Basher
+ManaCost:2 B
+Types:Creature Zombie Beast
+Text:no text
+PT:3/1
+K:Morph:2 B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_basher.jpg
+End

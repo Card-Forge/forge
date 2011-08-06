@@ -1,0 +1,9 @@
+Name:Soltari Emissary
+ManaCost:1 W
+Types:Creature Soltari Soldier
+Text:no text
+PT:2/1
+K:abPump W:Shadow
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_emissary.jpg
+End

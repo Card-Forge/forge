@@ -1,0 +1,10 @@
+Name:Somber Hoverguard
+ManaCost:5 U
+Types:Creature Drone
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+PT:3/2
+K:Flying
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/somber_hoverguard.jpg
+End

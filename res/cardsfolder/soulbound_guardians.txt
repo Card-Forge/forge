@@ -1,0 +1,10 @@
+Name:Soulbound Guardians
+ManaCost:4 W
+Types:Creature Kor Spirit
+Text:no text
+PT:4/5
+K:Defender
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soulbound_guardians.jpg
+End

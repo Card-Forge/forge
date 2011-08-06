@@ -1,0 +1,9 @@
+Name:Sylvok Explorer
+ManaCost:1 G
+Types:Creature Human Druid
+Text:no text
+PT:1/1
+K:abAddReflectedMana:Color:Opp
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvok_explorer.jpg
+End

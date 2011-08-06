@@ -1,0 +1,9 @@
+Name:Spike Feeder
+ManaCost:1 G G
+Types:Creature Spike
+Text:no text
+PT:0/0
+K:Spike 2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_feeder.jpg
+End

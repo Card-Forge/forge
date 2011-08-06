@@ -1,0 +1,8 @@
+Name:Shizo, Death's Storehouse
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+K:tap: add B
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Shizo_Deaths_Storehouse.jpg
+End

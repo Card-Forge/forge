@@ -1,0 +1,9 @@
+Name:Strength of Cedars
+ManaCost:4 G
+Types:Instant Arcane
+Text:no text
+K:spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of lands you control.:Strength of Cedars - Target creature gets +X/+X until end of turn.
+K:SVar:X:Count$TypeYouCtrl.Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_cedars.jpg
+End

@@ -1,0 +1,10 @@
+Name:Spike Weaver
+ManaCost:2 G G
+Types:Creature Spike
+Text:no text
+PT:0/0
+K:Spike 3
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_weaver.jpg
+End

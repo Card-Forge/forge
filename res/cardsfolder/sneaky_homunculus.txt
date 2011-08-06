@@ -1,0 +1,10 @@
+Name:Sneaky Homunculus
+ManaCost:1 U
+Types:Creature Homunculus Illusion
+Text:no text
+PT:1/1
+K:CARDNAME can't be blocked by creatures with power 2 or greater.
+K:CARDNAME can't block creatures with power 2 or greater.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sneaky_homunculus.jpg
+End

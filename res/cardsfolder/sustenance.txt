@@ -1,0 +1,9 @@
+Name:Sustenance
+ManaCost:1 G
+Types:Enchantment
+Text:no text
+K:abPumpTgtC 1 Sac-Land:+1/+1
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sustenance.jpg
+End

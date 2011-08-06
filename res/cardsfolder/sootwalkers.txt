@@ -1,0 +1,9 @@
+Name:Sootwalkers
+ManaCost:2 RB RB
+Types:Creature Elemental Rogue
+Text:no text
+PT:3/3
+K:CARDNAME can't be blocked by white creatures.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sootwalkers.jpg
+End

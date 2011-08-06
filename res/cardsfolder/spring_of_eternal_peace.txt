@@ -1,0 +1,8 @@
+Name:Spring of Eternal Peace
+ManaCost:3 G G
+Types:Sorcery
+Text:no text
+K:spGainLife:8
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spring_of_eternal_peace.jpg
+End

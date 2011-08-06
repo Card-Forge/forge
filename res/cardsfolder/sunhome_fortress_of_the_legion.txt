@@ -1,0 +1,9 @@
+Name:Sunhome, Fortress of the Legion
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:abPumpTgtC 2 R W T:Double Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunhome_fortress_of_the_legion.jpg
+End

@@ -1,0 +1,7 @@
+Name:Spell Pierce
+ManaCost:U
+Types:Instant
+Text:Counter target noncreature spell unless its controller pays 2.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_pierce.jpg
+End

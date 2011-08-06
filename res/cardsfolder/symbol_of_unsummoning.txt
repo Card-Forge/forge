@@ -1,0 +1,9 @@
+Name:Symbol of Unsummoning
+ManaCost:2 U
+Types:Sorcery
+Text:Return target creature to its owner's hand.
+K:spBounceTgt:Creature:Hand
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/symbol_of_unsummoning.jpg
+End

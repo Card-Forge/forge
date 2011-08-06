@@ -1,0 +1,9 @@
+Name:Seascape Aerialist
+ManaCost:4 U
+Types:Creature Merfolk Wizard Ally
+Text:Whenever Seascape Aerialist or another Ally enters the battlefield under your control, you may have Ally creatures you control gain flying until end of turn.
+PT:2/3
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/seascape_aerialist.jpg
+End

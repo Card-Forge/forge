@@ -1,0 +1,9 @@
+Name:Smash
+ManaCost:2 R
+Types:Instant
+Text:Destroy target artifact.
+K:spDestroyTgt:Artifact
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/smash.jpg
+End

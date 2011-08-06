@@ -1,0 +1,9 @@
+Name:Stone-Throwing Devils
+ManaCost:B
+Types:Creature Devil
+Text:no text
+PT:1/1
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_throwing_devils.jpg
+End

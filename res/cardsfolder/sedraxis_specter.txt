@@ -1,0 +1,10 @@
+Name:Sedraxis Specter
+ManaCost:U B R
+Types:Creature Specter
+Text:Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
+PT:3/2
+K:Flying
+K:Unearth:1 B
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sedraxis_specter.jpg
+End

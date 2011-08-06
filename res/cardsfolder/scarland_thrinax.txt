@@ -1,0 +1,8 @@
+Name:Scarland Thrinax
+ManaCost:B R G
+Types:Creature Lizard
+Text:no text
+PT:2/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scarland_thrinax.jpg
+End

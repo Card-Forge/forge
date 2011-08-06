@@ -1,0 +1,10 @@
+Name:Stratozeppelid
+ManaCost:4 U
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:Flying
+K:CARDNAME can block only creatures with flying.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stratozeppelid.jpg
+End

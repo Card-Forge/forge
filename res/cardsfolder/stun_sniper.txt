@@ -1,0 +1,9 @@
+Name:Stun Sniper
+ManaCost:W R
+Types:Creature Human Archer
+Text:no text
+PT:1/1
+K:abDamageTgtC 1 T:1:Drawback$TapTgt:Stun Sniper deals 1 damage to target creature. Tap that creature.:Stun Sniper - deals 1 damage to target creature. Tap that creature.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stun_sniper.jpg
+End

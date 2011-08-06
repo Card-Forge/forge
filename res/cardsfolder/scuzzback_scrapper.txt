@@ -1,0 +1,9 @@
+Name:Scuzzback Scrapper
+ManaCost:RG
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:Wither
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scuzzback_scrapper.jpg
+End

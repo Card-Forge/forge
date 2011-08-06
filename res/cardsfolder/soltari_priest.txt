@@ -1,0 +1,10 @@
+Name:Soltari Priest
+ManaCost:W W
+Types:Creature Soltari Cleric
+Text:no text
+PT:2/1
+K:Protection from red
+K:Shadow
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_priest.jpg
+End

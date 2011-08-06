@@ -1,0 +1,8 @@
+Name:Scalding Tarn
+ManaCost:no cost
+Types:Land
+Text:no text
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_tarn.jpg
+End

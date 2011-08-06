@@ -1,0 +1,10 @@
+Name:Shadow Sliver
+ManaCost:2 U
+Types:Creature Sliver
+Text:no text
+PT:1/1
+K:StaticEffect:Play:All Permanents:Keyword/Shadow:Type.Sliver:All Sliver creatures have shadow. (They can block or be blocked by only creatures with shadow.)
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_sliver.jpg
+End

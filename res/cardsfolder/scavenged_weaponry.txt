@@ -1,0 +1,10 @@
+Name:Scavenged Weaponry
+ManaCost:2 B
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+1.
+K:Enchant creature
+K:enPump:+1/+1
+K:When CARDNAME enters the battlefield, draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenged_weaponry.jpg
+End

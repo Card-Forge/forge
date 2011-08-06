@@ -1,0 +1,9 @@
+Name:Sparkmage Apprentice
+ManaCost:1 R
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+K:WheneverKeyword:EntersBattleField:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Sparkmage Apprentice enters the battlefield, it deals 1 damage to target creature or player.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sparkmage_apprentice.jpg
+End

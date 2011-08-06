@@ -1,0 +1,10 @@
+Name:Sabertooth Wyvern
+ManaCost:4 R
+Types:Creature Drake
+Text:no text
+PT:3/2
+K:Flying
+K:First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sabertooth_wyvern.jpg
+End

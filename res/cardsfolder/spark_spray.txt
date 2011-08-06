@@ -1,0 +1,9 @@
+Name:Spark Spray
+ManaCost:R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:1:Spark Spray deals 1 damage to target creature or player.:Spark Spray - deals 1 damage
+K:Cycling:R
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/scg/en-us/card44484.jpg
+End

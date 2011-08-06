@@ -1,0 +1,9 @@
+Name:Swans of Bryn Argoll
+ManaCost:2 WU WU
+Types:Creature Bird Spirit
+Text:If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
+PT:4/3
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/swans_of_bryn_argoll.jpg
+End

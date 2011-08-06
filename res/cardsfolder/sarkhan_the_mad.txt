@@ -1,0 +1,7 @@
+Name:Sarkhan the Mad
+ManaCost:3 B R
+Types:Planeswalker - Sarkhan
+Text:no text
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_the_mad.jpg
+End

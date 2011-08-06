@@ -1,0 +1,9 @@
+Name:Sylvan Bounty
+ManaCost:5 G
+Types:Instant
+Text:no text
+K:spGainLifeTgt:8
+K:TypeCycling:Basic:1 G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_bounty.jpg
+End

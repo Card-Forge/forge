@@ -1,0 +1,9 @@
+Name:Safehold Duo
+ManaCost:3 GW
+Types:Creature Elf Warrior Shaman
+Text:Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.\r\nWhenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
+PT:2/4
+K:SVar:BuffedBy:Spell.Green,Spell.White
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
+End

@@ -1,0 +1,10 @@
+Name:Spectral Lynx
+ManaCost:1 W
+Types:Creature Cat Spirit
+Text:no text
+PT:2/1
+K:Protection from green
+K:RegenerateMe:B
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_lynx.jpg
+End

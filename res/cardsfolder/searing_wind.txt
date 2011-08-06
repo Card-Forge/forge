@@ -1,0 +1,8 @@
+Name:Searing Wind
+ManaCost:8 R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:10
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_wind.jpg
+End

@@ -1,0 +1,10 @@
+Name:Stonybrook Banneret
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+Text:Merfolk spells and Wizard spells you cast cost 1 less to cast.
+PT:1/1
+K:Islandwalk
+K:CostChange:Player:Less:1:Spell:All:Merfolk/Wizard:OnlyOneBonus
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_banneret.jpg
+End

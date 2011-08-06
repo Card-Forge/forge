@@ -1,0 +1,9 @@
+Name:Solemn Offering
+ManaCost:2 W
+Types:Sorcery
+Text:Destroy target artifact or enchantment. You gain 4 life.
+K:spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/4
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_offering.jpg
+End

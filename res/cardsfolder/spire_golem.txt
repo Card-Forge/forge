@@ -1,0 +1,10 @@
+Name:Spire Golem
+ManaCost:6
+Types:Artifact Creature Golem
+Text:Affinity for Islands (This spell costs 1 less to cast for each Island you control.)
+PT:2/4
+K:Flying
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Island
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_golem.jpg
+End

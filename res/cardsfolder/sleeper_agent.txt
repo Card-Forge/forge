@@ -1,0 +1,8 @@
+Name:Sleeper Agent
+ManaCost:B
+Types:Creature Minion
+Text:When Sleeper Agent comes into play, target opponent gains control of it.\r\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
+PT:3/3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
+End

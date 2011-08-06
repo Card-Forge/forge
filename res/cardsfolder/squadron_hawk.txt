@@ -1,0 +1,10 @@
+Name:Squadron Hawk
+ManaCost:1 W
+Types:Creature Hawk
+Text:no text
+PT:1/1
+K:Flying
+K:When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/squadron_hawk.jpg
+End

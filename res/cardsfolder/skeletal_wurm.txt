@@ -1,0 +1,9 @@
+Name:Skeletal Wurm
+ManaCost:7 B
+Types:Creature Skeleton Wurm
+Text:no text
+PT:7/6
+K:RegenerateMe:B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_wurm.jpg
+End

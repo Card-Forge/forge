@@ -1,0 +1,8 @@
+Name:Scute Mob
+ManaCost:G
+Types:Creature Insect
+Text:At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on Scute Mob.
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scute_mob.jpg
+End

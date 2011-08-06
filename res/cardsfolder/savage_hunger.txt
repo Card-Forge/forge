@@ -1,0 +1,10 @@
+Name:Savage Hunger
+ManaCost:2 G
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+0 and has trample.
+K:Enchant creature
+K:enPump:+1/+0/Trample
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_hunger.jpg
+End

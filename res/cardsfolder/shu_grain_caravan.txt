@@ -1,0 +1,8 @@
+Name:Shu Grain Caravan
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:When Shu Grain Caravan enters the battlefield, you gain 2 life.
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_grain_caravan.jpg
+End

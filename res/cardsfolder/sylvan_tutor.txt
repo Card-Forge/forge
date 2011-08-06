@@ -1,0 +1,7 @@
+Name:Sylvan Tutor
+ManaCost:G
+Types:Sorcery
+Text:Search your library for a creature card and reveal that card. Shuffle your library, then put the revealed card back on top of it.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=4320&type=card
+End

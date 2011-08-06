@@ -1,0 +1,10 @@
+Name:Stronghold Discipline
+ManaCost:2 B B
+Types:Sorcery
+Text:no text
+K:spLoseLife:X:Drawback$OppLoseLife/dX:Each player loses 1 life for each creature he or she controls.:Stronghold Discipline - each player loses life
+K:SVar:X:Count$TypeYouCtrl.Creature
+K:SVar:dX:Count$TypeOppCtrl.Creature
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_discipline.jpg
+End

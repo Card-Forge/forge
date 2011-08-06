@@ -1,0 +1,8 @@
+Name:Survival of the Fittest
+ManaCost:1 G
+Types:Enchantment
+Text:no text
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_of_the_fittest.jpg
+End

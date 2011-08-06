@@ -1,0 +1,9 @@
+Name:Serra Avatar
+ManaCost:4 W W W
+Types:Creature Avatar
+Text:Serra Avatar's power and toughness are each equal to your life total. If Serra Avatar is destroyed, shuffle it into its owner's library instead.
+PT:1/1
+K:When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_avatar.jpg
+End

@@ -1,0 +1,11 @@
+Name:Slinking Giant
+ManaCost:2 R R
+Types:Creature Giant Rogue
+Text:no text
+PT:4/4
+K:Wither
+K:WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant blocks, it gets -3/-0 until end of turn.
+K:WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant becomes blocked, it gets -3/-0 until end of turn.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slinking_giant.jpg
+End

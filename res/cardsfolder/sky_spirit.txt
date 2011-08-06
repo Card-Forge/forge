@@ -1,0 +1,10 @@
+Name:Sky Spirit
+ManaCost:1 W U
+Types:Creature Spirit
+Text:no text
+PT:2/2
+K:Flying
+K:First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_spirit.jpg
+End

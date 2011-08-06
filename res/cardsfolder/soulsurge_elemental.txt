@@ -1,0 +1,9 @@
+Name:Soulsurge Elemental
+ManaCost:3 R
+Types:Creature Elemental
+Text:Soulsurge Elemental's power is equal to the number of creatures you control.
+PT:1/1
+K:First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsurge_elemental.jpg
+End

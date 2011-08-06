@@ -1,0 +1,8 @@
+Name:Skyshaper
+ManaCost:2
+Types:Artifact
+Text:no text
+K:abAllPump Sac-CARDNAME:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Skyshaper - Creatures gain flying until EOT
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshaper.jpg
+End

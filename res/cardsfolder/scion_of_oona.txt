@@ -1,0 +1,11 @@
+Name:Scion of Oona
+ManaCost:2 U
+Types:Creature Faerie Soldier
+Text:Other Faerie creatures you control get +1/+1. Other Faeries you control have shroud.
+PT:1/1
+K:Flash
+K:Flying
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_oona.jpg
+End

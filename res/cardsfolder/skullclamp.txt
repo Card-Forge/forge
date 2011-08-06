@@ -1,0 +1,8 @@
+Name:Skullclamp
+ManaCost:1
+Types:Artifact Equipment
+Text:Equipped creature gets +1/-1.\r\nWhen equipped creature is put into a graveyard, draw two cards.
+K:eqPump 1:+1/-1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
+End

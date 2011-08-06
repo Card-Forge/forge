@@ -1,0 +1,8 @@
+Name:Slaughter Cry
+ManaCost:2 R
+Types:Instant
+Text:no text
+K:spPumpTgt:+3/+0/First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter_cry.jpg
+End

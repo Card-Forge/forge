@@ -1,0 +1,8 @@
+Name:Spell Snare
+ManaCost:U
+Types:Instant
+Text:Counter target spell with converted mana cost 2.
+K:spCounter:Spell:CMC(==,2):Graveyard:None
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_snare.jpg
+End

@@ -1,0 +1,8 @@
+Name:Standstill
+ManaCost:1 U
+Types:Enchantment
+Text:When a player plays a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/standstill.jpg
+End

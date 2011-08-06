@@ -1,0 +1,8 @@
+Name:Slith Strider
+ManaCost:1 U U
+Types:Creature Slith
+Text:Whenever Slith Strider becomes blocked, draw a card.\r\nWhenever Slith Strider deals combat damage to a player, put a +1/+1 counter on it.
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
+End

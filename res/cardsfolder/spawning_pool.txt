@@ -1,0 +1,9 @@
+Name:Spawning Pool
+ManaCost:no cost
+Types:Land
+Text:no text
+K:Comes into play tapped.
+K:tap: add B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_pool.jpg
+End

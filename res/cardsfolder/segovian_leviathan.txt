@@ -1,0 +1,9 @@
+Name:Segovian Leviathan
+ManaCost:4 U
+Types:Creature Leviathan
+Text:no text
+PT:3/3
+K:Islandwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14538.jpg
+End

@@ -1,0 +1,9 @@
+Name:Slinking Serpent
+ManaCost:2 U B
+Types:Creature Serpent
+Text:no text
+PT:2/3
+K:Forestwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23149.jpg
+End

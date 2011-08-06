@@ -1,0 +1,7 @@
+Name:Sword of the Meek
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature gets +1/+2.\r\nWhenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_meek.jpg
+End

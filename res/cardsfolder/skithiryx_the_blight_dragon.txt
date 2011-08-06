@@ -1,0 +1,11 @@
+Name:Skithiryx, the Blight Dragon
+ManaCost:3 B B
+Types:Legendary Creature Dragon Skeleton
+Text:no text
+PT:4/4
+K:Flying
+K:Infect
+K:RegenerateMe:B B
+K:abPump B:Haste
+K:SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/skithiryx_the_blight_dragon.jpg
+End

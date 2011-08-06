@@ -1,0 +1,10 @@
+Name:Shambling Remains
+ManaCost:1 B R
+Types:Creature Zombie Horror
+Text:no text
+PT:4/3
+K:CARDNAME can't block.
+K:Unearth:B R
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_remains.jpg
+End

@@ -1,0 +1,9 @@
+Name:Serra Ascendant
+ManaCost:W
+Types:Creature Human Monk
+Text:As long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying.
+PT:1/1
+K:Lifelink
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_ascendant.jpg
+End

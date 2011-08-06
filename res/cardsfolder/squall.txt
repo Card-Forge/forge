@@ -1,0 +1,8 @@
+Name:Squall
+ManaCost:2 G
+Types:Sorcery
+Text:no text
+K:spDamageAll:Creature.withFlying:2:Squall deals 2 damage to each creature with flying.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/squall.jpg
+End

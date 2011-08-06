@@ -1,0 +1,14 @@
+Name:Sphinx of the Steel Wind
+ManaCost:5 W U B
+Types:Artifact Creature Sphinx
+Text:no text
+PT:6/6
+K:Flying
+K:First Strike
+K:Vigilance
+K:Lifelink
+K:Protection from red
+K:Protection from green
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_steel_wind.jpg
+End

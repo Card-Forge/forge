@@ -1,0 +1,10 @@
+Name:Sibilant Spirit
+ManaCost:5 U
+Types:Creature Spirit
+Text:no text
+PT:5/6
+K:Flying
+K:WheneverKeyword:Attacks:Self:Play:DrawCards/1:ControllingPlayer_Opponent:ASAP:Opponent_Yes_No:No Special Condition:Whenever Sibilant Spirit attacks, defending player may draw a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sibilant_spirit.jpg
+End

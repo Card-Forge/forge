@@ -1,0 +1,9 @@
+Name:Shock Troops
+ManaCost:3 R
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:abDamageTgtCP 0 Sac-CARDNAME:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shock_troops.jpg
+End

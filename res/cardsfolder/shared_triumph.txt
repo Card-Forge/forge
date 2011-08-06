@@ -1,0 +1,7 @@
+Name:Shared Triumph
+ManaCost:1 W
+Types:Enchantment
+Text:As Shared Triumph comes into play, choose a creature type. Creatures of the chosen type get +1/+1.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_triumph.jpg
+End

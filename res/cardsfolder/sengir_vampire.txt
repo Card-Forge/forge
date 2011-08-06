@@ -1,0 +1,10 @@
+Name:Sengir Vampire
+ManaCost:3 B B
+Types:Creature Vampire
+Text:no text
+PT:4/4
+K:Flying
+K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35086.jpg
+End

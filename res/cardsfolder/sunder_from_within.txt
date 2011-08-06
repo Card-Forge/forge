@@ -1,0 +1,8 @@
+Name:Sunder from Within
+ManaCost:2 R R
+Types:Sorcery Arcane
+Text:Destroy target artifact or land.
+K:spDestroyTgt:Artifact,Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunder_from_within.jpg
+End

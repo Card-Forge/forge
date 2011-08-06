@@ -1,0 +1,8 @@
+Name:Staff of Domination
+ManaCost:3
+Types:Artifact
+Text:no text
+K:Untap:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_domination.jpg
+End

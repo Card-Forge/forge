@@ -1,0 +1,9 @@
+Name:Shield Wall
+ManaCost:1 W
+Types:Instant
+Text:no text
+K:spAllPump:YouCtrl:+0/+2:Creatures you control get +0/+2 until end of turn.:Shield Wall - Creatures get +0/+2 until EOT
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card11499.jpg
+End

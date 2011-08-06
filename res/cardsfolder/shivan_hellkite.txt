@@ -1,0 +1,10 @@
+Name:Shivan Hellkite
+ManaCost:5 R R
+Types:Creature Dragon
+Text:no text
+PT:5/5
+K:Flying
+K:abDamageTgtCP 1 R:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_hellkite.jpg
+End

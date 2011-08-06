@@ -1,0 +1,9 @@
+Name:Sliver Legion
+ManaCost:W U B R G
+Types:Legendary Creature Sliver
+Text:All Sliver creatures get +1/+1 for each other Sliver in play.
+PT:7/7
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136146.jpg
+End

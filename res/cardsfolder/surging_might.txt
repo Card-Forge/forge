@@ -1,0 +1,10 @@
+Name:Surging Might
+ManaCost:2 G
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2.
+K:Enchant creature
+K:enPump:+2/+2
+K:Ripple:4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_might.jpg
+End

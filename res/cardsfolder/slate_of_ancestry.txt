@@ -1,0 +1,7 @@
+Name:Slate of Ancestry
+ManaCost:4
+Types:Artifact
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slate_of_ancestry.jpg
+End

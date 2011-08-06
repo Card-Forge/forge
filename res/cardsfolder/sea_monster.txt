@@ -1,0 +1,9 @@
+Name:Sea Monster
+ManaCost:4 U U
+Types:Creature Serpent
+Text:no text
+PT:6/6
+K:CARDNAME can't attack unless defending player controls an Island.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_monster.jpg
+End

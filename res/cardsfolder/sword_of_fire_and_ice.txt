@@ -1,0 +1,7 @@
+Name:Sword of Fire and Ice
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature gets +2/+2 and has protection from red and from blue.\r\nWhenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_fire_and_ice.jpg
+End

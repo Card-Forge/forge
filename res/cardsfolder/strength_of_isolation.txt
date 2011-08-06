@@ -1,0 +1,10 @@
+Name:Strength of Isolation
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+2 and has protection from black.
+K:Enchant creature
+K:enPump:+1/+2/Protection from black
+K:Madness:W
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_isolation.jpg
+End

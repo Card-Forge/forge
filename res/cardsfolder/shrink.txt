@@ -1,0 +1,7 @@
+Name:Shrink
+ManaCost:G
+Types:Instant
+Text:no text
+K:spPumpTgtCurse:-5/-0
+K:SVar:RemAIDeck:True
+End

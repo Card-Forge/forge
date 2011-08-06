@@ -1,0 +1,10 @@
+Name:Soltari Trooper
+ManaCost:1 W
+Types:Creature Soltari Soldier
+Text:no text
+PT:1/1
+K:Shadow
+K:WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Soltari Trooper attacks, it gets +1/+1 until end of turn.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_trooper.jpg
+End

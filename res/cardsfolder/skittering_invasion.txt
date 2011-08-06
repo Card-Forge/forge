@@ -1,0 +1,7 @@
+Name:Skittering Invasion
+ManaCost:7
+Types:Tribal Sorcery Eldrazi
+Text:Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_invasion.jpg
+End

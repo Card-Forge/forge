@@ -1,0 +1,9 @@
+Name:Slippery Bogle
+ManaCost:GU
+Types:Creature Beast
+Text:no text
+PT:1/1
+K:CARDNAME can't be the target of spells or abilities your opponents control.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slippery_bogle.jpg
+End

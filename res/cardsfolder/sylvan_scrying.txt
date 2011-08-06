@@ -1,0 +1,9 @@
+Name:Sylvan Scrying
+ManaCost:2 G
+Types:Sorcery
+Text:Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
+K:spTutor:Land:Hand
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_scrying.jpg
+End

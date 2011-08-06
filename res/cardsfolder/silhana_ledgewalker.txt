@@ -1,0 +1,10 @@
+Name:Silhana Ledgewalker
+ManaCost:1 G
+Types:Creature Elf Rogue
+Text:no text
+PT:1/1
+K:CARDNAME can't be blocked except by creatures with flying.
+K:CARDNAME can't be the target of spells or abilities your opponents control.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/silhana_ledgewalker.jpg
+End

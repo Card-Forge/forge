@@ -1,0 +1,10 @@
+Name:Storm Spirit
+ManaCost:3 W U G
+Types:Creature Elemental Spirit
+Text:no text
+PT:3/3
+K:Flying
+K:abDamageTgtC T:2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_spirit.jpg
+End

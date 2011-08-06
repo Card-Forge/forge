@@ -1,0 +1,10 @@
+Name:Stonebrow, Krosan Hero
+ManaCost:3 R G
+Types:Legendary Creature Centaur Warrior
+Text:no text
+PT:4/4
+K:Trample
+K:WheneverKeyword:Attacks:No_Initiator:Play:StatsPumpEOT/2/2:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Has Keyword/Trample:Whenever a creature you control with trample attacks, it gets +2/+2 until end of turn.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stonebrow_krosan_hero.jpg
+End

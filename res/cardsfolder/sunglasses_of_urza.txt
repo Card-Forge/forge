@@ -1,0 +1,9 @@
+Name:Sunglasses of Urza
+ManaCost:3
+Types:Artifact
+Text:You may spend white mana as though it were red mana.
+K:W: add R
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunglasses_of_urza.jpg
+End

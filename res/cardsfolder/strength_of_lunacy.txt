@@ -1,0 +1,10 @@
+Name:Strength of Lunacy
+ManaCost:1 B
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+1 and has protection from white.
+K:Enchant creature
+K:enPump:+2/+1/Protection from white
+K:Madness:B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_lunacy.jpg
+End

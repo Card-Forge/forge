@@ -1,0 +1,9 @@
+Name:Safehold Elite
+ManaCost:1 GW
+Types:Creature Elf Scout
+Text:no text
+PT:2/2
+K:Persist
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_elite.jpg
+End

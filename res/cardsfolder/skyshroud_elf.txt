@@ -1,0 +1,12 @@
+Name:Skyshroud Elf
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/1
+K:tap: add G
+K:1: add W
+K:1: add R
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_elf.jpg
+End

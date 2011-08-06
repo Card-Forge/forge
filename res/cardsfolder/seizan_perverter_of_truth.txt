@@ -1,0 +1,8 @@
+Name:Seizan, Perverter of Truth
+ManaCost:3 B B
+Types:Legendary Creature Demon Spirit
+Text:At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
+PT:6/5
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78965.jpg
+End

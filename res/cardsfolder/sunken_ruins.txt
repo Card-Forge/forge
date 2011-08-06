@@ -1,0 +1,12 @@
+Name:Sunken Ruins
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:UB, tap: add U U
+K:UB, tap: add U B
+K:UB, tap: add B B
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_ruins.jpg
+End

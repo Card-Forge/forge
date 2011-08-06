@@ -1,0 +1,10 @@
+Name:Supreme Exemplar
+ManaCost:6 U
+Types:Creature Elemental
+Text:Champion an Elemental
+PT:10/10
+K:Flying
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_exemplar.jpg
+End

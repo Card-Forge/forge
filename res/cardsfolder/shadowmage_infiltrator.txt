@@ -1,0 +1,9 @@
+Name:Shadowmage Infiltrator
+ManaCost:1 U B
+Types:Creature Wizard
+Text:Whenever Shadowmage Infiltrator deals combat damage to a player, you may draw a card.
+PT:1/3
+K:Fear
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowmage_infiltrator.jpg
+End

@@ -1,0 +1,8 @@
+Name:Stern Judge
+ManaCost:2 W
+Types:Creature Cleric
+Text:no text
+PT:2/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35082.jpg
+End

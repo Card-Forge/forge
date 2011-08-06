@@ -1,0 +1,9 @@
+Name:Shore Snapper
+ManaCost:2 B
+Types:Creature Beast
+Text:no text
+PT:2/2
+K:abPump U:Islandwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shore_snapper.jpg
+End

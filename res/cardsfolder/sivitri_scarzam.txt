@@ -1,0 +1,8 @@
+Name:Sivitri Scarzam
+ManaCost:5 U B
+Types:Legendary Creature Human
+Text:no text
+PT:6/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ch/en-us/card2879.jpg
+End

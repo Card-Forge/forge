@@ -1,0 +1,8 @@
+Name:Sacred Nectar
+ManaCost:1 W
+Types:Sorcery
+Text:no text
+K:spGainLife:4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_nectar.jpg
+End

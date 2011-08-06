@@ -1,0 +1,9 @@
+Name:Sygg, River Guide
+ManaCost:W U
+Types:Legendary Creature Merfolk Wizard
+Text:no text
+PT:2/2
+K:Islandwalk
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sygg_river_guide.jpg
+End

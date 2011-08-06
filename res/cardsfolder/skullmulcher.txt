@@ -1,0 +1,9 @@
+Name:Skullmulcher
+ManaCost:4 G
+Types:Creature Elemental
+Text:When Skullmulcher comes into play, draw a card for each creature it devoured.
+PT:3/3
+K:Devour:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skullmulcher.jpg
+End

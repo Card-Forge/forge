@@ -1,0 +1,8 @@
+Name:Sage's Knowledge
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+K:spRaiseDead:1/Sorcery
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_knowledge.jpg
+End

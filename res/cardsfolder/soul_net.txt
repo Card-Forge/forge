@@ -1,0 +1,8 @@
+Name:Soul Net
+ManaCost:1
+Types:Artifact
+Text:no text
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever a creature is put into a graveyard from the battlefield, you may pay 1. If you do, you gain 1 life.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_net.jpg
+End

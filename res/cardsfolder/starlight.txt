@@ -1,0 +1,10 @@
+Name:Starlight
+ManaCost:1 W
+Types:Sorcery
+Text:no text
+K:spGainLife:X:You gain life for each black creature target opponent controls.:Starlight - player gains X life
+K:SVar:X:Count$BlackTypeOppCtrl.Creature/Times.3
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/starlight.jpg
+End

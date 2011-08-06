@@ -1,0 +1,8 @@
+Name:Sunder
+ManaCost:3 U U
+Types:Sorcery
+Text:Return all lands to their owners' hands.
+K:spBounceAll:Land:Hand
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunder.jpg
+End

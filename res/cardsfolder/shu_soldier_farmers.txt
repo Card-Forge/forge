@@ -1,0 +1,8 @@
+Name:Shu Soldier-Farmers
+ManaCost:4 W
+Types:Creature Human Soldier
+Text:When Shu Soldier-Farmers comes into play, you gain 4 life.
+PT:2/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/shu_soldier_farmers.jpg
+End

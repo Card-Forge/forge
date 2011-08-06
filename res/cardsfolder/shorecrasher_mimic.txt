@@ -1,0 +1,9 @@
+Name:Shorecrasher Mimic
+ManaCost:1 GU
+Types:Creature Shapeshifter
+Text:Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
+PT:2/1
+K:SVar:BuffedBy:Spell.Blue+Green
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Shorecrasher_Mimic.jpg
+End

@@ -1,0 +1,9 @@
+Name:Severed Legion
+ManaCost:1 B B
+Types:Creature Zombie
+Text:no text
+PT:2/2
+K:Fear
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129693.jpg
+End

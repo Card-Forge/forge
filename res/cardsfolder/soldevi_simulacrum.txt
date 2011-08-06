@@ -1,0 +1,10 @@
+Name:Soldevi Simulacrum
+ManaCost:4
+Types:Artifact Creature Soldier
+Text:no text
+PT:2/4
+K:Cumulative upkeep:1
+K:abPump 1:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_simulacrum.jpg
+End

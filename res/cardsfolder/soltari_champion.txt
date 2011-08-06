@@ -1,0 +1,9 @@
+Name:Soltari Champion
+ManaCost:2 W
+Types:Creature Soltari Soldier
+Text:Whenever Soltari Champion attacks, all other creatures you control get +1/+1 until end of turn.
+PT:2/2
+K:Shadow
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_champion.jpg
+End

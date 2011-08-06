@@ -1,0 +1,9 @@
+Name:Slay
+ManaCost:2 B
+Types:Instant
+Text:Destroy target green creature. It can't be regenerated.
+K:spDestroyTgt:Creature.Green:NoRegen
+K:Draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slay.jpg
+End

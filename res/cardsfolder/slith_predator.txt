@@ -1,0 +1,9 @@
+Name:Slith Predator
+ManaCost:G G
+Types:Creature Slith
+Text:Whenever Slith Predator deals combat damage to a player, put a +1/+1 counter on it.
+PT:1/1
+K:Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_predator.jpg
+End

@@ -1,0 +1,10 @@
+Name:Steward of Valeron
+ManaCost:G W
+Types:Creature Human Druid Knight
+Text:no text
+PT:2/2
+K:tap: add G
+K:Vigilance
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/steward_of_valeron.jpg
+End

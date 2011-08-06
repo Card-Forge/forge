@@ -1,0 +1,8 @@
+Name:Scarblade Elite
+ManaCost:B B
+Types:Creature Elf Assassin
+Text:no text
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scarblade_elite.jpg
+End

@@ -1,0 +1,8 @@
+Name:Screaming Fury
+ManaCost:2 R
+Types:Sorcery
+Text:no text
+K:spPumpTgt:+5/+0/Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/screaming_fury.jpg
+End

@@ -1,0 +1,10 @@
+Name:Surging Sentinels
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/1
+K:First Strike
+K:Ripple:4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_sentinels.jpg
+End

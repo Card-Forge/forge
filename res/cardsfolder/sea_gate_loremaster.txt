@@ -1,0 +1,11 @@
+Name:Sea Gate Loremaster
+ManaCost:4 U
+Types:Creature Merfolk Wizard Ally
+Text:no text
+PT:1/3
+K:abDrawCards T:X:Draw a card for each Ally you control.
+K:SVar:X:Count$TypeYouCtrl.Ally
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_gate_loremaster.jpg
+End

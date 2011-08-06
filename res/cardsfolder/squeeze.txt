@@ -1,0 +1,9 @@
+Name:Squeeze
+ManaCost:3 U
+Types:Enchantment
+Text:Sorcery spells cost 3 more to cast.
+K:CostChange:All:More:3:Spell:All:Sorcery:NoSpecial
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/squeeze.jpg
+End

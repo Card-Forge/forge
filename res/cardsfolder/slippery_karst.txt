@@ -1,0 +1,10 @@
+Name:Slippery Karst
+ManaCost:no cost
+Types:Land
+Text:no text
+K:Comes into play tapped.
+K:tap: add G
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slippery_karst.jpg
+End

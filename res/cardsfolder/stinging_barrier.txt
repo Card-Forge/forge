@@ -1,0 +1,10 @@
+Name:Stinging Barrier
+ManaCost:2 U U
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+K:abDamageTgtCP U T:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stinging_barrier.jpg
+End

@@ -1,0 +1,9 @@
+Name:Scavenging Scarab
+ManaCost:3 B
+Types:Creature Insect
+Text:no text
+PT:3/3
+K:CARDNAME can't block.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46093.jpg
+End

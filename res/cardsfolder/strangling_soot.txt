@@ -1,0 +1,7 @@
+Name:Strangling Soot
+ManaCost:2 B
+Types:Instant
+Text:Destroy target creature with toughness 3 or less.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card109710.jpg
+End

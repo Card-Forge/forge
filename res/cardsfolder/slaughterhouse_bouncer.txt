@@ -1,0 +1,8 @@
+Name:Slaughterhouse Bouncer
+ManaCost:4 B
+Types:Creature Ogre Warrior
+Text:Hellbent - When Slaughterhouse Bouncer is put into a graveyard from play, if you have no cards in hand, target creature gets -3/-3 until end of turn.
+PT:3/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97073.jpg
+End

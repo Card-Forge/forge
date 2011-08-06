@@ -1,0 +1,8 @@
+Name:Sign in Blood
+ManaCost:B B
+Types:Sorcery
+Text:no text
+K:spDrawCardsTgt:2:Drawback$LoseLifeTgt/2:Target player draws two cards and loses 2 life.:Sign in Blood - Target player draws 2 cards and loses 2 life.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sign_in_blood.jpg
+End

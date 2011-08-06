@@ -1,0 +1,8 @@
+Name:Sangrite Surge
+ManaCost:4 R G
+Types:Sorcery
+Text:no text
+K:spPumpTgt:+3/+3/Double Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sangrite_surge.jpg
+End

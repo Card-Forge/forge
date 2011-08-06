@@ -1,0 +1,10 @@
+Name:Scavenger Drake
+ManaCost:3 B
+Types:Creature Drake
+Text:no text
+PT:1/1
+K:Flying
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Scavenger Drake.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenger_drake.jpg
+End

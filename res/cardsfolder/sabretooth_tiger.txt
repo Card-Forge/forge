@@ -1,0 +1,9 @@
+Name:Sabretooth Tiger
+ManaCost:2 R
+Types:Creature Cat
+Text:no text
+PT:2/1
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sabretooth_tiger.jpg
+End

@@ -1,0 +1,9 @@
+Name:Synchronous Sliver
+ManaCost:4 U
+Types:Creature Sliver
+Text:All Sliver creatures have vigilance.
+PT:3/3
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/synchronous_sliver.jpg
+End

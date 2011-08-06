@@ -1,0 +1,9 @@
+Name:Steel Leaf Paladin
+ManaCost:4 G W
+Types:Creature Knight
+Text:When Steel Leaf Paladin comes into play, return a green or white creature you control to its owner's hand.
+PT:4/4
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_leaf_paladin.jpg
+End

@@ -1,0 +1,9 @@
+Name:Sage Aven
+ManaCost:3 U
+Types:Creature Bird Soldier
+Text:When Sage Aven enters the battlefield, look at the top four cards of your library, then put them back in any order.
+PT:1/3
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_aven.jpg
+End

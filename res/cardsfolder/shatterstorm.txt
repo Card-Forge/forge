@@ -1,0 +1,8 @@
+Name:Shatterstorm
+ManaCost:2 R R
+Types:Sorcery
+Text:Destroy all artifacts. They can't be regenerated.
+K:spDestroyAll:Artifact:NoRegen
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterstorm.jpg
+End

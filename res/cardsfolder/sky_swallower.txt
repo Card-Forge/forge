@@ -1,0 +1,10 @@
+Name:Sky Swallower
+ManaCost:3 U U
+Types:Creature Leviathan
+Text:When Sky Swallower comes into play, target opponent gains control of all other permanents you control.
+PT:8/8
+K:Flying
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96835.jpg
+End

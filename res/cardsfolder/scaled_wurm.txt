@@ -1,0 +1,8 @@
+Name:Scaled Wurm
+ManaCost:7 G
+Types:Creature Wurm
+Text:no text
+PT:7/6
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83272.jpg
+End

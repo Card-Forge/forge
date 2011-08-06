@@ -1,0 +1,11 @@
+Name:Stromgald Crusader
+ManaCost:B B
+Types:Creature Zombie Knight
+Text:no text
+PT:2/1
+K:Protection from white
+K:abPump B:Flying
+K:abPump B B:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stromgald_crusader.jpg
+End

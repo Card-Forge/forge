@@ -1,0 +1,8 @@
+Name:Siege Mastodon
+ManaCost:4 W
+Types:Creature Elephant
+Text:no text
+PT:3/5
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_mastodon.jpg
+End

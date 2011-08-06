@@ -1,0 +1,9 @@
+Name:Storm Shaman
+ManaCost:2 R
+Types:Creature Human Cleric Shaman
+Text:no text
+PT:0/4
+K:abPump R:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_shaman.jpg
+End

@@ -1,0 +1,10 @@
+Name:Sturdy Hatchling
+ManaCost:3 GU
+Types:Creature Elemental
+Text:Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\r\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
+PT:6/6
+K:abPump GU:Shroud
+K:SVar:BuffedBy:Spell.Blue,Spell.Green
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Sturdy_Hatchling.jpg
+End

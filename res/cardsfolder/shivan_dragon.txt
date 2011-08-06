@@ -1,0 +1,10 @@
+Name:Shivan Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+Text:no text
+PT:5/5
+K:Flying
+K:abPump R:+1/+0
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card4088.jpg
+End

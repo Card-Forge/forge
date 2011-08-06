@@ -1,0 +1,10 @@
+Name:Shoreline Ranger
+ManaCost:5 U
+Types:Creature Bird Soldier
+Text:no text
+PT:3/4
+K:Flying
+K:TypeCycling:Island:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shoreline_ranger.jpg
+End

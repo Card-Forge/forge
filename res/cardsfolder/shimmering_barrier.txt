@@ -1,0 +1,11 @@
+Name:Shimmering Barrier
+ManaCost:1 W
+Types:Creature Wall
+Text:no text
+PT:1/3
+K:Defender
+K:First Strike
+K:Cycling:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmering_barrier.jpg
+End

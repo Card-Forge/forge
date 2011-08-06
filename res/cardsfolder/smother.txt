@@ -1,0 +1,7 @@
+Name:Smother
+ManaCost:1 B
+Types:Instant
+Text:Destroy target creature with converted mana cost 3 or less. It can't be regenerated.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/smother.jpg
+End

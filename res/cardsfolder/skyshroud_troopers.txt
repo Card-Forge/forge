@@ -1,0 +1,9 @@
+Name:Skyshroud Troopers
+ManaCost:3 G
+Types:Creature Elf Druid Warrior
+Text:no text
+PT:3/3
+K:tap: add G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5230.jpg
+End

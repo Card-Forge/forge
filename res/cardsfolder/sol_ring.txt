@@ -1,0 +1,9 @@
+Name:Sol Ring
+ManaCost:1
+Types:Artifact
+Text:no text
+K:tap: add 2
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sol_ring.jpg
+End

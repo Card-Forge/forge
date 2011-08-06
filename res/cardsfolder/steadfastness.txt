@@ -1,0 +1,9 @@
+Name:Steadfastness
+ManaCost:1 W
+Types:Sorcery
+Text:no text
+K:spAllPump:YouCtrl:+0/+3:Creatures you control get +0/+3 until end of turn.:Steadfastness - Creatures get +0/+3 until EOT
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=20399&type=card
+End

@@ -1,0 +1,8 @@
+Name:Sakura-Tribe Elder
+ManaCost:1 G
+Types:Creature Snake Shaman
+Text:no text
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50510.jpg
+End

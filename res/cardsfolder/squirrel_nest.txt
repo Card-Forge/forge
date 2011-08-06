@@ -1,0 +1,8 @@
+Name:Squirrel Nest
+ManaCost:1 G G
+Types:Enchantment Aura
+Text:Enchanted land has "Tap: Put a 1/1 green Squirrel creature token onto the battlefield.".
+K:Enchant land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_nest.jpg
+End

@@ -1,0 +1,10 @@
+Name:Scuzzback Marauders
+ManaCost:4 RG
+Types:Creature Goblin Warrior
+Text:no text
+PT:5/2
+K:Trample
+K:Persist
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scuzzback_marauders.jpg
+End

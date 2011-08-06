@@ -1,0 +1,9 @@
+Name:Spiritmonger
+ManaCost:3 B G
+Types:Creature Beast
+Text:Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger. (NOTE: "G: Spiritmonger becomes the color of your choice until end of turn." not implemented.)
+PT:6/6
+K:RegenerateMe:B
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritmonger.jpg
+End

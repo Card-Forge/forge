@@ -1,0 +1,10 @@
+Name:Soltari Crusader
+ManaCost:2 W
+Types:Creature Soltari Knight
+Text:no text
+PT:2/1
+K:Shadow
+K:abPump 1 W:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_crusader.jpg
+End

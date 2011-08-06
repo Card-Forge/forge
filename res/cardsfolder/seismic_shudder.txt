@@ -1,0 +1,8 @@
+Name:Seismic Shudder
+ManaCost:1 R
+Types:Instant
+Text:no text
+K:spDamageAll:Creature.withoutFlying:1:Seismic Shudder deals 1 damage to each creature without flying.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_shudder.jpg
+End

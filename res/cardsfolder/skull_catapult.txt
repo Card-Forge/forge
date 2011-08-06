@@ -1,0 +1,9 @@
+Name:Skull Catapult
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abDamageTgtCP 1 T Sac-Creature:2
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_catapult.jpg
+End

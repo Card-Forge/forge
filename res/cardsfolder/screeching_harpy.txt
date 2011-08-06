@@ -1,0 +1,10 @@
+Name:Screeching Harpy
+ManaCost:2 B B
+Types:Creature Harpy Beast
+Text:no text
+PT:2/2
+K:Flying
+K:RegenerateMe:1 B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_harpy.jpg
+End

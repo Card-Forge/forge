@@ -1,0 +1,9 @@
+Name:Symbiotic Beast
+ManaCost:4 G G
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MakeToken-Insect-G-1-1-None-/4:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Symbiotic Beast is put into a graveyard from the battlefield, put four 1/1 green Insect creature tokens onto the battlefield.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/symbiotic_beast.jpg
+End

@@ -1,0 +1,9 @@
+Name:Shifting Wall
+ManaCost:X 0
+Types:Artifact Creature Wall
+Text:Shifting Wall enters the battlefield with X +1/+1 counters on it.
+PT:0/0
+K:Defender
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_wall.jpg
+End

@@ -1,0 +1,9 @@
+Name:Sliver Overlord
+ManaCost:W U B R G
+Types:Legendary Creature Sliver Mutant
+Text:no text
+PT:7/7
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_overlord.jpg
+End

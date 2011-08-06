@@ -1,0 +1,9 @@
+Name:Serra's Embrace
+ManaCost:2 W W
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and has flying and vigilance.
+K:Enchant creature
+K:enPump:+2/+2/Flying & Vigilance
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_embrace.jpg
+End

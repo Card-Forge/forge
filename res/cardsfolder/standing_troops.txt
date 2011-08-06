@@ -1,0 +1,9 @@
+Name:Standing Troops
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:1/4
+K:Vigilance
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/standing_troops.jpg
+End

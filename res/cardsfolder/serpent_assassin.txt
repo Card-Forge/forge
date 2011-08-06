@@ -1,0 +1,9 @@
+Name:Serpent Assassin
+ManaCost:3 B B
+Types:Creature Snake Assassin
+Text:When Serpent Assassin enters the battlefield, you may destroy target nonblack creature.
+PT:2/2
+K:etbDestroyTgtMay:Creature.nonBlack
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/serpent_assassin.jpg
+End

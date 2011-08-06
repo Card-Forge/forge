@@ -1,0 +1,10 @@
+Name:Steel Wall
+ManaCost:1
+Types:Artifact Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48910.jpg
+End

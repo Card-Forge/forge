@@ -1,0 +1,9 @@
+Name:Silver Myr
+ManaCost:2
+Types:Artifact Creature Myr
+Text:no text
+PT:1/1
+K:tap: add U
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_myr.jpg
+End

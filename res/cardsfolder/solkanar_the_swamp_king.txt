@@ -1,0 +1,9 @@
+Name:Sol'kanar the Swamp King
+ManaCost:2 U B R
+Types:Legendary Creature Demon
+Text:Whenever a player plays a black spell, you gain 1 life.
+PT:5/5
+K:Swampwalk
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/solkanar_the_swamp_king.jpg
+End

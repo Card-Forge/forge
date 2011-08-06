@@ -1,0 +1,9 @@
+Name:Shattering Pulse
+ManaCost:1 R
+Types:Instant
+Text:Destroy target artifact.
+K:spDestroyTgt:Artifact
+K:SVar:Buyback:3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shattering_pulse.jpg
+End

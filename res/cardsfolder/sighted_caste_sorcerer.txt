@@ -1,0 +1,10 @@
+Name:Sighted-Caste Sorcerer
+ManaCost:1 W
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+K:Exalted
+K:abPump U:Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sighted_caste_sorcerer.jpg
+End

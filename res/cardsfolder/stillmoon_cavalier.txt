@@ -1,0 +1,13 @@
+Name:Stillmoon Cavalier
+ManaCost:1 WB WB
+Types:Creature Zombie Knight
+Text:no text
+PT:2/1
+K:Protection from white
+K:Protection from black
+K:abPump WB:Flying
+K:abPump WB:First Strike
+K:abPump WB WB:+1/+0
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stillmoon_cavalier.jpg
+End

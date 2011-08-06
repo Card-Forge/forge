@@ -1,0 +1,11 @@
+Name:Spark Elemental
+ManaCost:R
+Types:Creature Elemental
+Text:no text
+PT:3/1
+K:Trample
+K:Haste
+K:At the beginning of the end step, sacrifice CARDNAME.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73579.jpg
+End

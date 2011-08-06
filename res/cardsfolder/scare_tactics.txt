@@ -1,0 +1,8 @@
+Name:Scare Tactics
+ManaCost:B
+Types:Instant
+Text:no text
+K:spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Scare Tactics - Creatures get +1/+0 until EOT
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6086.jpg
+End

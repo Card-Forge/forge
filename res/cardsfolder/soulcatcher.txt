@@ -1,0 +1,10 @@
+Name:Soulcatcher
+ManaCost:1 W
+Types:Creature Bird Soldier
+Text:no text
+PT:1/1
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Has Keyword/Flying:Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soulcatcher.jpg
+End
