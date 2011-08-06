@@ -225,7 +225,7 @@ public class StaticEffects
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 		cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
 		cardToEffectsList.put("Omnath, Locus of Mana", new String[] {"Omnath"});
-		cardToEffectsList.put("Arena of the Ancients", new String[] {"Arena_of_the_Ancients"});
+		//cardToEffectsList.put("Arena of the Ancients", new String[] {"Arena_of_the_Ancients"});
 		cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});

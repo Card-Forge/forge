@@ -2,6 +2,7 @@ Name:Arena of the Ancients
 ManaCost:3
 Types:Artifact
 Text:Legendary creatures don't untap during their controllers' untap steps. When Arena of the Ancients enters the battlefield, tap all legendary creatures.
+K:Permanents don't untap during their controllers' untap steps:Creature.Legendary
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arena_of_the_ancients.jpg
 End

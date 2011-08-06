@@ -12301,6 +12301,7 @@ public class GameActionUtil {
 	/**
 	 * stores the Command to execute the "Legends don't untap during your untap step"
 	 */
+	/* keyworded
 	public static Command Arena_of_the_Ancients = new Command() {
 		private static final long serialVersionUID = -3233715310427996429L;
 		
@@ -12331,10 +12332,11 @@ public class GameActionUtil {
 			}//if
 		}// execute()
 	};
-	
+	*/
 	/**
 	 * stores the Command
 	 */
+	
 	public static Command Angry_Mob = new Command() {
 		private static final long serialVersionUID = 4129359648989610278L;
 
@@ -20562,7 +20564,7 @@ public class GameActionUtil {
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Heedless_One", Heedless_One);
 		commands.put("Omnath", Omnath);
-		commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
+		//commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
 		commands.put("Angry_Mob", Angry_Mob);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Umbra_Stalker", Umbra_Stalker);
