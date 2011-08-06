@@ -2,7 +2,7 @@ Name:Sutured Ghoul
 ManaCost:4 B B B
 Types:Creature Zombie
 Text:As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.\r\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-PT:1/1
+PT:*/*
 K:Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
