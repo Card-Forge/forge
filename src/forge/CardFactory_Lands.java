@@ -3346,6 +3346,79 @@ class CardFactory_Lands {
             card.addSpellAbility(addMana);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Saprazzan Skerry") || cardName.equals("Remote Farm") ||
+        		cardName.equals("Sandstone Needle") || cardName.equals("Peat Bog") ||
+        		cardName.equals("Hickory Woodlot")) {
+        	
+        	String shortTemp = "";
+        	if(cardName.equals("Saprazzan Skerry")) shortTemp = "U";
+        	if(cardName.equals("Remote Farm")) shortTemp = "W";
+        	if(cardName.equals("Sandstone Needle")) shortTemp = "R";
+        	if(cardName.equals("Peat Bog")) shortTemp = "B";
+        	if(cardName.equals("Hickory Woodlot")) shortTemp = "G";
+        	
+        	final String shortString = shortTemp;
+        	StringBuilder desc = new StringBuilder();
+        	desc.append("tap, Remove a depletion counter from ");
+        	desc.append(cardName);
+        	desc.append(": Add ");
+        	desc.append(shortString).append(" ").append(shortString);
+        	desc.append(" to your mana pool. If there are no depletion counters on ");
+        	desc.append(cardName).append(", sacrifice it.");
+        	
+            final Ability_Mana ability = new Ability_Mana(card, desc.toString()) {
+				private static final long serialVersionUID = -1147974499024433438L;
+
+				@Override
+                public boolean canPlayAI() {
+					return false;
+                }
+				
+				@Override
+                public void undo() {
+					card.addCounterFromNonEffect(Counters.DEPLETION, 1);
+                    card.untap();
+                    //if it got sacrificed, you're kind of screwed
+                }
+               
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.DEPLETION, 1);
+                    if(card.getCounters(Counters.DEPLETION) == 0) {
+                    	AllZone.GameAction.sacrifice(card);
+                    }
+                    super.resolve();
+                }
+                
+                @Override
+                public String mana() {
+                	StringBuilder mana = new StringBuilder();
+                	for(int i = 0; i < 2; i++) {
+                		mana.append(shortString).append(" ");
+                	}
+                	return mana.toString().trim();
+                }
+            };
+           
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -7876248316975077074L;
+
+				@Override
+                public void showMessage() {
+                    if(GameActionUtil.showYesNoDialog(card, "Remove a Depletion counter?")) {
+                    	card.tap();
+                    	AllZone.Stack.add(ability);
+                    	stop();
+                    }
+                    else stop();
+                }
+            };
+
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         return card;
     }
     

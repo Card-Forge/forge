@@ -19,6 +19,7 @@ public enum Counters {
     BRIBERY(),
     CHARGE(),
     CORPSE(),
+    DEPLETION(),
     DIVINITY(),
     DOOM(),
     EON(),

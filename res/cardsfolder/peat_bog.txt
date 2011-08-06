@@ -1,0 +1,9 @@
+Name:Peat Bog
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+K:etbCounter:DEPLETION:2
+SVar:Rarity:Common
+SVar:Picture:http://wizards.com/global/images/magic/general/peat_bog.jpg
+End
