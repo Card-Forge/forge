@@ -1,3 +1,23 @@
+The Rack
+1
+Artifact
+At the beginning of opponent's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
+
+Crumble
+G
+Instant
+Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
+
+Flashfires
+3 R
+Sorcery
+Destroy all Plains.
+
+Karma
+2 W W
+Enchantment
+At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
+
 Clinging Darkness
 1 B
 Enchantment Aura
@@ -88,7 +108,6 @@ Paralyzing Grasp
 Enchantment Aura
 Enchanted creature doesn't untap during its controller's untap step.
 Enchant creature
-enPumpCurse:This card doesn't untap during your untap step.
 
 Artifact Ward
 W
@@ -4720,9 +4739,8 @@ Eternity Snare
 5 U
 Enchantment Aura
 Enchanted creature doesn't untap during its controller's untap step.
-Enchant creature
-enPumpCurse:This card doesn't untap during your untap step.
 When this card comes into play, draw a card.
+Enchant creature
 
 Elvish Hunter
 1 G
@@ -4966,10 +4984,9 @@ enPump:+3/+0/First Strike
 Despondency
 1 B
 Enchantment Aura
-Enchanted creature gets -2/-0.
-Enchant creature
-enPumpCurse:-2/-0
+Enchanted creature gets -2/+0.
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+Enchant creature
 
 Snow-Covered Forest
 no cost
@@ -5567,23 +5584,20 @@ Cessation
 2 W
 Enchantment Aura
 Enchanted creature can't attack.
-Enchant creature
-enPumpCurse:This creature can't attack
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+Enchant creature
 
 Pacifism
 1 W
 Enchantment Aura
 Enchanted creature can't attack or block.
 Enchant creature
-enPumpCurse:This creature can't attack or block
 
 Bound in Silence
 2 W
 Tribal Enchantment Rebel Aura
 Enchanted creature can't attack or block.
 Enchant creature
-enPumpCurse:This creature can't attack or block
 
 Barrenton Cragtreads
 2 WU WU
@@ -6577,9 +6591,8 @@ Sluggishness
 1 R
 Enchantment Aura
 Enchanted creature can't block.
-Enchant creature
-enPumpCurse:This creature cannot block
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+Enchant creature
 
 Aspect of Mongoose
 1 G
@@ -8025,7 +8038,6 @@ B
 Enchantment Aura
 Enchanted creature gets -2/-1.
 Enchant creature
-enPumpCurse:-2/-1
 
 Unholy Strength
 B

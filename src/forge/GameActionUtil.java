@@ -73,6 +73,7 @@ public class GameActionUtil {
         upkeep_Klass();
         upkeep_Convalescence();
         upkeep_Convalescent_Care();
+        upkeep_Karma();
         upkeep_Defense_of_the_Heart();
         upkeep_Mycoloth();
         upkeep_Spore_Counters();
@@ -86,6 +87,7 @@ public class GameActionUtil {
         upkeep_Dark_Confidant(); // keep this one semi-last
         
         upkeep_Copper_Tablet();
+        upkeep_The_Rack();
         upkeep_BlackVise(); 
         upkeep_Ivory_Tower();
 
@@ -5701,6 +5703,43 @@ public class GameActionUtil {
         }// if
     }// upkeep_Defense of the Heart
     
+    private static void upkeep_Karma() {
+        final String player = AllZone.Phase.getActivePlayer();
+        String opponent = AllZone.GameAction.getOpponent(player);
+       
+        PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);
+       
+        CardList karma = new CardList(opponentPlayZone.getCards());
+        karma = karma.getName("Karma");
+       
+        PlayerZone activePlayZone = AllZone.getZone(Constant.Zone.Play, player);
+        CardList swamps = new CardList(activePlayZone.getCards());
+        swamps = swamps.getType("Swamp");
+       
+        // determine how much damage to deal the current player
+        final int damage = swamps.size();
+       
+        // if there are 1 or more Karmas owned by the opponent of the
+        // current player have each of them deal damage.
+        if(0 < karma.size()) {
+            for(int i = 0; i < karma.size(); i++) {
+                Ability ability = new Ability(karma.get(0), "0") {
+                    @Override
+                    public void resolve() {
+                       if(damage>0){
+                          PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+                          life.setLife(life.getLife() - damage);
+                       }
+                    }
+                };// Ability
+                if(damage>0){
+                   ability.setStackDescription("Karma deals " + damage + " damage to " + player);
+                   AllZone.Stack.add(ability);
+                }
+            }
+        }// if
+    }// upkeep_Karma()
+    
     private static void upkeep_Convalescence() {
         final String player = AllZone.Phase.getActivePlayer();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -5785,7 +5824,46 @@ public class GameActionUtil {
        }//for
      }//upkeep_Ivory Tower()
 
-    
+    //Forge doesn't distinguish between beginning and end of upkeep
+    //so, we'll put The Rack next to Black Vise
+    private static void upkeep_The_Rack() {
+        // sanity check. If a player has >= 3 cards The Rack does nothing.
+        final String player = AllZone.Phase.getActivePlayer();
+        final int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
+       
+        if(playerHandSize >= 3) {
+            return;
+        }
+       
+        // if a player has 2 or fewer cards The Rack does damage
+        // so, check if opponent of the current player has The Rack
+        String opponent = AllZone.GameAction.getOpponent(player);
+       
+        PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);
+       
+        CardList theRack = new CardList(opponentPlayZone.getCards());
+        theRack = theRack.getName("The Rack");
+       
+        // determine how much damage to deal the current player
+        final int damage = 3 - playerHandSize;
+       
+        // if there are 1 or more The Racks owned by the opponent of the
+        // current player have each of them deal damage.
+        if(0 < theRack.size()) {
+            for(int i = 0; i < theRack.size(); i++) {
+                Ability ability = new Ability(theRack.get(0), "0") {
+                    @Override
+                    public void resolve() {
+                        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+                        life.setLife(life.getLife() - damage);
+                    }
+                };// Ability
+               
+                ability.setStackDescription("The Rack -  deals " + damage + " damage to " + player);
+                AllZone.Stack.add(ability);
+            }
+        }// if
+    }// upkeep_The_Rack
     
     // Currently we don't determine the difference between beginning and end of
     // upkeep in MTG forge.

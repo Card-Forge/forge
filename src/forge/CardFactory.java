@@ -17255,6 +17255,81 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Flashfires")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -5951776277564352958L;
+               
+                @Override
+                public void resolve() {
+                    CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                   
+                    for(int i = 0; i < all.size(); i++) {
+                        Card c = all.get(i);
+                        if(c.getType().contains("Plains")) AllZone.GameAction.destroy(c);
+                    }
+                }//resolve()
+               
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Plains");
+                   
+                    return 3 < list.size();
+                }
+            };//SpellAbility
+            spell.setStackDescription(card.getName() + " - destroy all Plains.");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Crumble")) {
+            SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 4752943254606319269L;
+               
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        //add life
+                        String player = getTargetCard().getController();
+                        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+                        life.addLife(CardUtil.getConvertedManaCost(getTargetCard()));
+                       
+                        //remove card from play
+                        AllZone.GameAction.removeFromGame(getTargetCard());
+                    }
+                }//resolve()
+               
+                @Override
+                public boolean canPlayAI() {
+                    CardList artifacts = new CardList(AllZone.Human_Play.getCards());
+                    artifacts = artifacts.getType("Artifact");
+                    artifacts = artifacts.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    return artifacts.size() != 0 && (AllZone.Phase.getTurn() > 4);
+                }
+               
+                @Override
+                public void chooseTargetAI() {
+                    CardList play = new CardList(AllZone.Human_Play.getCards());
+                    Card target = CardFactoryUtil.AI_getBestArtifact(play);
+                    if(target != null) setTargetCard(target);
+                }
+            };
+            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Artifact"));
+           
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

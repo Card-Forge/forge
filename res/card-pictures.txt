@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+the_rack.jpg					http://www.wizards.com/global/images/magic/general/the_rack.jpg
+crumble.jpg						http://www.wizards.com/global/images/magic/general/crumble.jpg
+flashfires.jpg 					http://www.wizards.com/global/images/magic/general/flashfires.jpg
+karma.jpg 				http://www.wizards.com/global/images/magic/general/karma.jpg
 clinging_darkness.jpg		http://www.wizards.com/global/images/magic/general/clinging_darkness.jpg
 enfeeblement.jpg		http://www.wizards.com/global/images/magic/general/enfeeblement.jpg
 feebleness.jpg		http://www.wizards.com/global/images/magic/general/feebleness.jpg
