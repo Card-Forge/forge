@@ -30,6 +30,7 @@ import javax.swing.SwingUtilities;
 import forge.Card;
 import forge.CardContainer;
 import forge.Counters;
+import forge.Gui_NewGame;
 import forge.ImageCache;
 import arcane.ui.ScaledImagePanel;
 import arcane.ui.ScaledImagePanel.MultipassType;
@@ -290,8 +291,10 @@ public class CardPanel extends JPanel implements CardContainer{
         Insets i = getInsets();
         Image image = card == null? null:ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight()
                 - i.top - i.bottom);
-        setText(gameCard, true);
-        showCastingCost = true;
+        if(Gui_NewGame.cardOverlay.isSelected()){
+	        setText(gameCard, true);
+	        showCastingCost = true;
+        }
         
         if(image != imagePanel.srcImage) {
             setImage(image, image);

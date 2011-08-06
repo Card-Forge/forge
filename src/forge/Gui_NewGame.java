@@ -48,6 +48,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.gui.ListChooser;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.MENU;
@@ -99,7 +100,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_ARTIFACTS));
     public static JCheckBoxMenuItem useLAFFonts          = new JCheckBoxMenuItem(
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.FONT));
-    
+    public static JCheckBoxMenuItem cardOverlay          = new JCheckBoxMenuItem(
+            													 ForgeProps.getLocalized(MENU_BAR.OPTIONS.CARD_OVERLAY));
     private JButton                 questButton          = new JButton();
     
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
@@ -112,11 +114,25 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private Action                  ABOUT_ACTION         = new AboutAction();
     private Action					DNLD_PRICES_ACTION	 = new DownloadPriceAction(); 
     
+    static public ForgePreferences preferences;
     public static void main(String[] args) {
         ExceptionHandler.registerErrorHandling();
+        try {
+        	preferences = new ForgePreferences("forge.preferences");
+        	useLAFFonts.setSelected(preferences.lafFonts);
+        	newGuiCheckBox.setSelected(preferences.newGui);
+        	smoothLandCheckBox.setSelected(preferences.stackAiLand);
+        	millLoseCheckBox.setSelected(preferences.millingLossCondition);
+        	cardOverlay.setSelected(preferences.cardOverlay);
+		} catch (Exception e) {
+			Log.error("Error loading preferences");
+		}
         
         try {
-        	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        	if(preferences.laf.equals(""))
+        		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        	else
+        		UIManager.setLookAndFeel(preferences.laf);
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
@@ -133,25 +149,6 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         try {
             Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
             AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
-            
-            /*
-            JFrame.setDefaultLookAndFeelDecorated(true);
-            SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        try {
-                            UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.ChallengerDeepSkin");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                       
-            SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        new Gui_NewGame();
-                    }
-            });
-            */
 
             new Gui_NewGame();
             
@@ -235,6 +232,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         optionsMenu.add(generatedDeck);
         
         optionsMenu.add(useLAFFonts);
+        optionsMenu.addSeparator();
+        optionsMenu.add(cardOverlay);
         
         JMenuBar bar = new JMenuBar();
         bar.add(menu);
@@ -721,6 +720,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 int index = ch.getSelectedIndex();
                 if(index == -1) return;
                 //UIManager.setLookAndFeel(info[index].getClassName());
+                preferences.laf = LAFMap.get(name);
                 UIManager.setLookAndFeel(LAFMap.get(name));
                 
                 SwingUtilities.updateComponentTreeUI(c);
@@ -885,4 +885,32 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             JOptionPane.showMessageDialog(null, area, "About", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+    
+	public boolean exit () {
+		try {
+			preferences.laf = UIManager.getLookAndFeel().getClass().getName();
+			preferences.lafFonts = useLAFFonts.isSelected();
+			preferences.newGui = newGuiCheckBox.isSelected();
+			preferences.stackAiLand = smoothLandCheckBox.isSelected();
+			preferences.millingLossCondition = millLoseCheckBox.isSelected();
+			preferences.cardOverlay = cardOverlay.isSelected();
+			preferences.save();
+		} catch (Exception ex) {
+			int result = JOptionPane.showConfirmDialog(this,
+				"Preferences could not be saved. Continue to close without saving ?", "Confirm Exit",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+			if (result != JOptionPane.OK_OPTION) return false;
+		}
+
+		setVisible(false);
+		dispose();
+		return true;
+	}
+
+	protected void processWindowEvent (WindowEvent event) {
+		if (event.getID() == WindowEvent.WINDOW_CLOSING) {
+			if (!exit()) return;
+		}
+		super.processWindowEvent(event);
+	}
 }
