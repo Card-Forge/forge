@@ -503,6 +503,13 @@ public class AbilityFactory_ZoneAffecting {
 			randomReturn = true;
 		// some other variables here, like deck size, and phase and other fun stuff
 
+		if (af.getMapParams().get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), 
+					AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size());
+			source.setSVar("PayX", Integer.toString(cardsToDiscard));
+		}
+		
 		return randomReturn;
 	}
 	
@@ -567,6 +574,14 @@ public class AbilityFactory_ZoneAffecting {
     	
 		if (!millTargetAI(af, sa, mandatory))
 			return false;
+		
+		Card source = sa.getSourceCard();
+		if (af.getMapParams().get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), 
+					AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size());
+			source.setSVar("PayX", Integer.toString(cardsToDiscard));
+		}
 		
 		// check SubAbilities DoTrigger?
 		Ability_Sub abSub = sa.getSubAbility();

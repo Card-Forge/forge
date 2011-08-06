@@ -23,12 +23,7 @@ public class AbilityFactory_AlterLife {
 				// when getStackDesc is called, just build exactly what is happening
 				return gainLifeStackDescription(af, this);
 			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
+
 			public boolean canPlayAI()
 			{
 				return gainLifeCanPlayAI(af, this);
@@ -58,11 +53,6 @@ public class AbilityFactory_AlterLife {
 			public String getStackDescription(){
 			// when getStackDesc is called, just build exactly what is happening
 				return gainLifeStackDescription(af, this);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
 			}
 			
 			public boolean canPlayAI()
@@ -161,14 +151,12 @@ public class AbilityFactory_AlterLife {
 		if (abCost != null){
 			// AI currently disabled for these costs
 			if (abCost.getSacCost()){
-				if (amountStr.contains("X"))
-					return false;
 				if (life > 4)
 					return false;
 			}
 			if (abCost.getLifeCost() && life > 5)	 return false;
 			if (abCost.getDiscardCost() && life > 5) return false;
-			
+
 			if (abCost.getSubCounter() && life > 7){
 				// A card has a 25% chance per counter to be able to pass through here
 				// 4+ counters will always pass. 0 counters will never
@@ -178,52 +166,66 @@ public class AbilityFactory_AlterLife {
 					return false;
 			}
 		}
-		
+
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
-		
+
 		if (!AllZone.ComputerPlayer.canGainLife())
 			return false;
-		
+
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
-		
-		 // prevent run-away activations - first time will always return true
-		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		 
-		 Target tgt = sa.getTarget();
-		 if (tgt != null){
-			 tgt.resetTargets();
-			 if (tgt.canOnlyTgtOpponent())
-				 tgt.addTarget(AllZone.HumanPlayer);
-			 else
-				 tgt.addTarget(AllZone.ComputerPlayer);		
-		 }
 
-		 return ((r.nextFloat() < .6667) && chance);
+		// prevent run-away activations - first time will always return true
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			tgt.resetTargets();
+			if (tgt.canOnlyTgtOpponent())
+				tgt.addTarget(AllZone.HumanPlayer);
+			else
+				tgt.addTarget(AllZone.ComputerPlayer);		
+		}
+
+		if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+		}
+
+		return ((r.nextFloat() < .6667) && chance);
 	}
 	
 	public static boolean gainLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
 			return false;
-		
+
 		// If the Target is gaining life, target self.
 		// if the Target is modifying how much life is gained, this needs to be handled better
-		 Target tgt = sa.getTarget();
-		 if (tgt != null){
-			 tgt.resetTargets();
-			 if (tgt.canOnlyTgtOpponent())
-				 tgt.addTarget(AllZone.HumanPlayer);
-			 else
-				 tgt.addTarget(AllZone.ComputerPlayer);		
-		 }
-		 
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			tgt.resetTargets();
+			if (tgt.canOnlyTgtOpponent())
+				tgt.addTarget(AllZone.HumanPlayer);
+			else
+				tgt.addTarget(AllZone.ComputerPlayer);		
+		}
+
+		Card source = sa.getSourceCard();
+		String amountStr = af.getMapParams().get("LifeAmount");
+		if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+		}
+
 		// check SubAbilities DoTrigger?
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
 			return abSub.doTrigger(mandatory);
 		}
-		
+
 		return true;
 	}
 	
@@ -435,6 +437,12 @@ public class AbilityFactory_AlterLife {
 			 sa.getTarget().addTarget(AllZone.HumanPlayer);
 		 }
 		 
+		 if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
+			 // Set PayX here to maximum value.
+			 int xPay = ComputerUtil.determineLeftoverMana(sa);
+			 source.setSVar("PayX", Integer.toString(xPay));
+		 }
+
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
@@ -445,6 +453,14 @@ public class AbilityFactory_AlterLife {
 		 Target tgt = sa.getTarget();
 		 if (tgt != null){
 			 tgt.addTarget(AllZone.HumanPlayer);
+		 }
+		 
+		 Card source = sa.getSourceCard();
+		 String amountStr = af.getMapParams().get("LifeAmount");
+		 if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
+			 // Set PayX here to maximum value.
+			 int xPay = ComputerUtil.determineLeftoverMana(sa);
+			 source.setSVar("PayX", Integer.toString(xPay));
 		 }
 		 
 		// check SubAbilities DoTrigger?
