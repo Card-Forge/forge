@@ -11447,6 +11447,7 @@ public class GameActionUtil {
 
 		Sacrifice_NoIslands.execute();
 		Sacrifice_NoForests.execute();
+		Sacrifice_NoArtifacts.execute();
 		Sacrifice_NoLands.execute();
 		Sacrifice_NoCreatures.execute();
 		
@@ -14130,33 +14131,6 @@ public class GameActionUtil {
 
 	};//Plague_Rats
 	
-	public static Command Covetous_Dragon             = new Command() {
-		private static final long serialVersionUID = -8898010588711890705L;
-
-		int                       artifacts        = 0;
-
-		public void execute() {
-			CardList creature = AllZoneUtil.getCardsInPlay("Covetous Dragon");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				artifacts = countArtifacts(c);
-				if(artifacts == 0) {
-					AllZone.GameAction.sacrifice(c);
-				}
-			}
-
-		}//execute()
-
-		private int countArtifacts(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, c.getController());
-			CardList artifacts = new CardList(play.getCards());
-			artifacts = artifacts.getType("Artifact");
-			return artifacts.size();
-		}
-	};
-	
 	public static Command Phylactery_Lich             = new Command() {
 
 		private static final long serialVersionUID = -1606115081917467754L;
@@ -14297,6 +14271,36 @@ public class GameActionUtil {
 			}
 
 		}//execute()
+	};
+	
+	public static Command Sacrifice_NoArtifacts = new Command() {
+		private static final long serialVersionUID = -2546650213674544590L;
+		int artifacts = 0;
+
+		public void execute() {
+			CardList list = AllZoneUtil.getCardsInPlay();
+
+			list = list.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains("When you control no artifacts, sacrifice CARDNAME.");
+				}
+			});
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				artifacts = countArtifacts(c);
+				if(artifacts == 0) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
+
+		private int countArtifacts(Card c) {
+			CardList artifacts = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Artifact");
+			return artifacts.size();
+		}
+
 	};
 	
 	public static Command Sacrifice_NoLands = new Command() {
@@ -15985,7 +15989,6 @@ public class GameActionUtil {
 		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		//commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
-		commands.put("Covetous_Dragon", Covetous_Dragon);
 		//commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		
 		//commands.put("Dakkon_Blackblade", Dakkon_Blackblade);
