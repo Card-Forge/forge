@@ -833,7 +833,34 @@ public class GameAction {
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
         
-        if(library.size() != 0) {
+        if(0 < getDredge().size()) {
+            String choices[] = {"Yes", "No"};
+            Object o = AllZone.Display.getChoice("Do you want to dredge?", choices);
+            if(o.equals("Yes")) {
+                Card c = (Card) AllZone.Display.getChoice("Select card to dredge", getDredge().toArray());
+                
+                //might have to make this more sophisticated
+                //dredge library, put card in hand
+                AllZone.Human_Hand.add(c);
+                AllZone.Human_Graveyard.remove(c);
+                
+                for(int i = 0; i < getDredgeNumber(c); i++) {
+                    Card c2 = AllZone.Human_Library.get(0);
+                    AllZone.Human_Library.remove(0);
+                    AllZone.Human_Graveyard.add(c2);
+                }
+            }
+            else {
+            	doDraw(player, library, hand);
+            }
+        }//if(0 < getDredge().size())
+        else {
+        	doDraw(player, library, hand);
+        }
+    }
+    
+    private void doDraw(String player, PlayerZone library, PlayerZone hand) {
+    	if(library.size() != 0) {
             Card c = library.get(0);
             library.remove(0);
             hand.add(c);
@@ -853,6 +880,31 @@ public class GameAction {
             checkStateEffects();
         }
     }
+    
+    private ArrayList<Card> getDredge() {
+        ArrayList<Card> dredge = new ArrayList<Card>();
+        Card c[] = AllZone.Human_Graveyard.getCards();
+        
+        for(int outer = 0; outer < c.length; outer++) {
+            ArrayList<String> a = c[outer].getKeyword();
+            for(int i = 0; i < a.size(); i++)
+                if(a.get(i).toString().startsWith("Dredge")) {
+                    if(AllZone.Human_Library.size() >= getDredgeNumber(c[outer])) dredge.add(c[outer]);
+                }
+        }
+        return dredge;
+    }//hasDredge()
+    
+    private int getDredgeNumber(Card c) {
+        ArrayList<String> a = c.getKeyword();
+        for(int i = 0; i < a.size(); i++)
+            if(a.get(i).toString().startsWith("Dredge")) {
+                String s = a.get(i).toString();
+                return Integer.parseInt("" + s.charAt(s.length() - 1));
+            }
+        
+        throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
+    }//getDredgeNumber()
     
     //is this card a permanent that is in play?
     public boolean isCardInPlay(Card c) {

@@ -1,3 +1,10 @@
+Greater Mossdog
+3 G
+Creature Plant Hound
+no text
+3/3
+Dredge 3
+
 Reanimate
 B
 Sorcery
