@@ -3122,6 +3122,8 @@ public class CardFactoryUtil {
     		c.unEquipAllCards();
     }
     */
+    
+    
     //may return null
     static public Card getRandomCard(CardList list) {
         if(list.size() == 0) return null;

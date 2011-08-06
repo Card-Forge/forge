@@ -291,6 +291,12 @@ public class ComputerAI_General implements Computer {
             CardList list = new CardList();
             list.addAll(AllZone.Combat.getAllBlockers().toArray());
             list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
+            list = list.filter(new CardListFilter(){
+            	public boolean addCard(Card c)
+            	{
+            		return !c.getCreatureBlockedThisTurn();
+            	}
+            });
             
             CardList attList = new CardList();
             attList.addAll(AllZone.Combat.getAttackers());
@@ -298,8 +304,7 @@ public class ComputerAI_General implements Computer {
             CardList pwAttList = new CardList();
             pwAttList.addAll(AllZone.pwCombat.getAttackers());
 
-            for(Card c:list)
-                CombatUtil.checkDeclareBlockers(c);
+            CombatUtil.checkDeclareBlockers(list);
             
             for (Card a:attList){
             	CardList blockList = AllZone.Combat.getBlockers(a);

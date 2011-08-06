@@ -1,3 +1,10 @@
+Perimeter Captain
+W
+Creature Human Soldier
+Whenever a creature you control with defender blocks, you may gain 2 life.
+0/4
+Defender
+
 Sejiri Merfolk
 1 U
 Creature Merfolk Soldier

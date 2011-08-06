@@ -1449,64 +1449,87 @@ public class CombatUtil {
 
     }
     
-    static void checkDeclareBlockers(Card c) {
+    static void checkDeclareBlockers(CardList cl) {
         if(AllZone.Phase.getPhase().equals(Constant.Phase.Combat_After_Declare_Blockers)) {
             
-            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisTurn()) {
-                Card card = new Card();
-                
-                card.setOwner(c.getController());
-                card.setController(c.getController());
-                
-                card.setName("Cat Warrior");
-                card.setImageName("G 2 2 Cat Warrior");
-                card.setManaCost("G");
-                card.setToken(true);
-                card.addIntrinsicKeyword("Forestwalk");
-                
-                card.addType("Creature");
-                card.addType("Cat");
-                card.addType("Warrior");
-                card.setBaseAttack(2);
-                card.setBaseDefense(2);
-                
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-                play.add(card);
-                
-                //(anger) :
-                GameActionUtil.executeCardStateEffects();
-                
-                c.setCreatureBlockedThisTurn(true);
-                
-
-            }//Jedit
-            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisTurn()) {
-                //int toughness = c.getNetDefense();
-                //c.setDefense(toughness-1);
-                c.addCounter(Counters.P0M1, 1);
-                
-                c.setCreatureBlockedThisTurn(true);
-                
-                //ability2.setStackDescription(c.getName() + " blocks and gets a 0/-1 counter.");
-                //AllZone.Stack.add(ability2);
-                
-            }//Shield Sphere
+        	for (Card c:cl)
+        	{
+	        	if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisTurn())
+	        	{
+	        		final Card crd = c;
+	        		CardList pcs = CardFactoryUtil.getCards("Perimeter Captain", c.getController());
+		        	for (int i = 0; i < pcs.size();i++)
+		        	{
+		        		Ability ability = new Ability(pcs.get(i), "0")
+		        		{
+		        			public void resolve()
+		        			{
+		        				AllZone.GameAction.addLife(crd.getController(), 2);
+		        			}
+		        		};
+		        		ability.setStackDescription(pcs.get(i) + " - " + c.getController() + " gains 2 life.");
+		        		
+		        		if (c.getController().equals(Constant.Player.Human)) {
+			        		String[] choices = {"Yes", "No"};
+			        		Object q = null;
+			                q = AllZone.Display.getChoiceOptional("Gain 2 life from Perimeter Captain?", choices);
+			                if (q != null)
+			                	if (q.equals("Yes"))
+			                		AllZone.Stack.add(ability);
+		        		}
+		        		else
+		        			AllZone.Stack.add(ability);
+		        	}
+	        	}
+	        	
+	            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisTurn()) {
+	                Card card = new Card();
+	                
+	                card.setOwner(c.getController());
+	                card.setController(c.getController());
+	                
+	                card.setName("Cat Warrior");
+	                card.setImageName("G 2 2 Cat Warrior");
+	                card.setManaCost("G");
+	                card.setToken(true);
+	                card.addIntrinsicKeyword("Forestwalk");
+	                
+	                card.addType("Creature");
+	                card.addType("Cat");
+	                card.addType("Warrior");
+	                card.setBaseAttack(2);
+	                card.setBaseDefense(2);
+	                
+	                PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+	                play.add(card);
+	                
+	                //(anger) :
+	                GameActionUtil.executeCardStateEffects();
+	            }//Jedit
+	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisTurn()) {
+	                //int toughness = c.getNetDefense();
+	                //c.setDefense(toughness-1);
+	                c.addCounter(Counters.P0M1, 1);
+	                //ability2.setStackDescription(c.getName() + " blocks and gets a 0/-1 counter.");
+	                //AllZone.Stack.add(ability2);
+	                
+	            }//Shield Sphere
+	            
+	            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisTurn()) {
+	                PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
+	                oppLife.subtractLife(c.getNetAttack());
+	                
+	                //ability2.setStackDescription(c.getName() + " blocks and deals damage equal to its power to attacking player.");
+	                //AllZone.Stack.add(ability2);
+	                
+	            }//Shield Sphere
+	            c.setCreatureBlockedThisTurn(true);
+        	}//for
             
-            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisTurn()) {
-                PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
-                oppLife.subtractLife(c.getNetAttack());
-                
-
-                c.setCreatureBlockedThisTurn(true);
-                
-                //ability2.setStackDescription(c.getName() + " blocks and deals damage equal to its power to attacking player.");
-                //AllZone.Stack.add(ability2);
-                
-            }//Shield Sphere
-            
-        }//if Phase == declare blockers
+        }//if Phase == after declare blockers
     }//checkDeclareBlockers
     
+   
     public static void checkBlockedAttackers(Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
         
