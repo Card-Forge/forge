@@ -3291,6 +3291,7 @@ res/cardsfolder/sleeper_agent.txt -text svneol=native#text/plain
 res/cardsfolder/sleepers_guile.txt -text svneol=native#text/plain
 res/cardsfolder/sleepers_robe.txt -text svneol=native#text/plain
 res/cardsfolder/sleight_of_hand.txt -text svneol=native#text/plain
+res/cardsfolder/slice_in_twain.txt -text svneol=native#text/plain
 res/cardsfolder/slinking_giant.txt -text svneol=native#text/plain
 res/cardsfolder/slinking_serpent.txt -text svneol=native#text/plain
 res/cardsfolder/slippery_bogle.txt -text svneol=native#text/plain

@@ -1,0 +1,8 @@
+Name:Slice in Twain
+ManaCost:2 G G
+Types:Instant
+Text:Destroy target artifact or enchantment.
+K:spDestroyTgt:Artifact,Enchantment
+K:Draw a card.
+SVar:Rarity:Uncommon
+End
