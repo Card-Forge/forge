@@ -324,6 +324,14 @@ public class CombatUtil {
             temp = list.getType("Island");
             if(temp.isEmpty()) return false;
         }
+    	
+        if(c.getName().equals("Harbor Serpent")) {
+        	CardList allislands = new CardList();
+        	allislands.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+        	allislands.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+        	allislands = allislands.getType("Island");
+            if(allislands.size() < 5) return false;
+        }
         
         if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
                 || oppControlsBlazingArchon(c) || c.getKeyword().contains("CARDNAME can't attack.")
@@ -336,7 +344,7 @@ public class CombatUtil {
         {
         	CardList all = new CardList();
         	all.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-        	all.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer). getCards());
+        	all.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
         	
         	all = all.getName("Kulrath Knight");
         	for (int i=0; i<all.size(); i++)

@@ -1,0 +1,9 @@
+Name:Harbor Serpent
+ManaCost:4 U U
+Types:Creature Serpent
+Text:Harbor Serpent can't attack unless there are five or more Islands on the battlefield.
+PT:5/5
+K:Islandwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_serpent.jpg
+End
