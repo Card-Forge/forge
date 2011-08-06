@@ -2424,7 +2424,7 @@ Peacekeeper
 Creature Human
 Creatures can't attack
 1/1
-Upkeep:1 W
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 W
 
 Arctic Nishoba
 5 G
@@ -5180,6 +5180,7 @@ Rejuvenate
 3 G
 Sorcery
 no text
+spGainLife:6
 Cycling:2
 
 Absolute Grace
@@ -5196,6 +5197,7 @@ Braidwood Cup
 3
 Artifact
 no text
+abGainLife T:1
 
 Onyx Goblet
 2 B
@@ -5701,6 +5703,7 @@ Goblin War Paint
 Enchantment Aura
 Enchanted creature gets +2/+2 and has haste.
 Enchant creature
+enPump:+2/+2/Haste
 
 Vithian Renegades
 1 R G
@@ -6374,6 +6377,7 @@ Silent Attendant
 Creature Human Cleric
 no text
 0/2
+abGainLife T:1
 
 Zephid's Embrace
 2 U U
@@ -6412,19 +6416,22 @@ Protective Bubble
 Enchantment Aura
 Enchanted creature is unblockable and has shroud.
 Enchant creature
+enPump:Unblockable & Shroud
 
 Diplomatic Immunity
 1 U
 Enchantment Aura
 Enchanted creature has shroud.
-Shroud
 Enchant creature
+enPump:Shroud
+Shroud
 
 Robe of Mirrors
 U
 Enchantment Aura
 Enchanted creature has shroud.
 Enchant creature
+enPump:Shroud
 
 Fear
 B B
@@ -6539,6 +6546,7 @@ Enchantment Aura
 Enchanted creature gets +1/+2.
 Flash
 Enchant creature
+enPump:+1/+2
 
 Cleanfall
 2 W
@@ -6556,6 +6564,7 @@ Nourish
 G G
 Instant
 no text
+spGainLife:6
 
 Arcbound Bruiser
 5
@@ -6780,6 +6789,7 @@ W U
 Enchantment Aura
 Enchanted creature gets +1/+3 and has flying.
 Enchant creature
+enPump:+1/+3/Flying
 
 Serra's Embrace
 2 W W
@@ -6811,6 +6821,7 @@ Dosan's Oldest Chant
 4 G
 Sorcery
 no text
+spGainLife:6
 Draw a card.
 
 Sluggishness
@@ -6825,8 +6836,9 @@ Aspect of Mongoose
 1 G
 Enchantment Aura
 Enchanted creature has shroud.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:Shroud
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Launch
 1 U
@@ -6837,11 +6849,12 @@ enPump:Flying
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Sleeper's Guile
-1 B
+2 B
 Enchantment Aura
 Enchanted creature has fear.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:Fear
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Weatherseed Treefolk
 2 G G G
@@ -13230,7 +13243,9 @@ Put X 1/1 white Pegasus creature tokens with flying into play, where X is your l
 Festival of Trokin
 W
 Sorcery
-For each creature you have in play, you gain 2 life.
+no text
+spGainLife:X:You gain 2 life for each creature you control.:Festival of Trokin - player gains X life
+SVar:X:Count$TypeYouCtrl.Creature/Times.2
 
 Savannah
 no cost
@@ -16725,6 +16740,8 @@ Wellwisher
 Creature Elf
 no text
 1/1
+abGainLife T:X:You gain 1 life for each Elf on the battlefield.:Wellwisher - you gain life
+SVar:X:Count$TypeOnBattlefield.Elf
 
 Sylvan Messenger
 3 G
@@ -17426,7 +17443,9 @@ Search your library for two basic land cards, reveal those cards, and put one in
 Wandering Stream
 2 G
 Sorcery
-You gain 2 life for each basic land type among lands you control.
+no text
+spGainLife:X:Domain - You gain 2 life for each basic land type among lands you control.:Wandering Stream - player gains X life
+SVar:X:Count$Domain/Times.2
 
 Aggressive Urge
 1 G
@@ -17714,7 +17733,8 @@ Tap all nonwhite creatures.
 Reviving Dose
 2 W
 Instant
-You gain 3 life.
+no text
+spGainLife:3
 Draw a card.
 
 Angelic Blessing
@@ -17772,6 +17792,7 @@ Tanglebloom
 1
 Artifact
 no text
+abGainLife 1 T:1
 
 Nevinyrral's Disk
 4
@@ -17781,7 +17802,8 @@ Nevinyrral's Disk comes into play tapped.
 Renewed Faith
 2 W
 Instant
-no text
+When you cycle Renewed Faith, you may gain 2 life.
+spGainLife:6
 Cycling:1 W
 
 Hymn to Tourach
