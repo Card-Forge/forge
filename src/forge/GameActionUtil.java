@@ -5924,6 +5924,11 @@ public class GameActionUtil {
 								affectedCard.setSVar(keyword.split("SVar=")[1], sVar);								
 							}
 						}
+						else if(keyword.startsWith("Types=")) {
+							String[] tmptypes = keyword.split("=");
+							String[] types = tmptypes[1].split(",");
+							for(String type : types) affectedCard.addType(type);
+						}
 						else affectedCard.addExtrinsicKeyword(keyword);
 					}
 				}
@@ -5975,6 +5980,11 @@ public class GameActionUtil {
 									affectedCard.removeSpellAbility(s);
 							}
 						}
+					}
+					else if(keyword.startsWith("Types=")) {
+						String[] tmptypes = keyword.split("=");
+						String[] types = tmptypes[1].split(",");
+						for(String type : types) affectedCard.removeType(type);
 					}
 					affectedCard.removeExtrinsicKeyword(keyword);
 				}
