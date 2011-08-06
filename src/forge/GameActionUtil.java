@@ -6065,10 +6065,58 @@ public class GameActionUtil {
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		else if(c.getName().equals("Vorosh, the Hunter")) playerCombatDamage_Vorosh(c);
 		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_Card_You_Choose(c);
+		else if(c.getName().equals("The Unspeakable")) may_Return_Graveyard_to_Hand(c, "Arcane".split(","));
 		
 		//Unused variable
 		//c.setDealtCombatDmgToOppThisTurn(true); 
 
+	}
+	
+	private static void may_Return_Graveyard_to_Hand(final Card source, final String[] valid) {
+		final Player player = source.getController();
+		final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+		final boolean mayReturn = true;
+		
+		final SpellAbility returnTgt = new Ability(source, "0") {
+
+			@Override
+			public void resolve() {
+				Card target = getTargetCard();
+				if (AllZone.GameAction.isCardInZone(target, grave)) {
+					AllZone.GameAction.moveToHand(target);
+				}
+			}//resolve()
+        };// returnTgt
+        
+		
+        CardList choices = new CardList(grave.getCards());
+        choices = choices.getValidCards(valid, player, source);
+        
+        if( choices.isEmpty() ) return;
+
+        if( player.isHuman() ) {
+        	if (grave.size() > 0) {
+        		Object o;
+        		if (mayReturn) {
+        			o = AllZone.Display.getChoiceOptional("Select a card", choices.toArray());
+        		} else {
+        			o = AllZone.Display.getChoice("Select a card", choices.toArray());
+        		}
+        		if (o != null) {
+        			Card c_1 = (Card) o;
+        			returnTgt.setTargetCard(c_1);
+        			AllZone.Stack.add(returnTgt);
+        		}
+        	}
+        }// if HumanPlayer
+
+        else { // ComputerPlayer
+
+        	if (choices.size() > 0) {
+        		returnTgt.setTargetCard(choices.get(0));
+        		AllZone.Stack.add(returnTgt);
+        	}
+        }// ComputerPlayer
 	}
 
 	private static void playerCombatDamage_PoisonCounter(Card c, int n) {
