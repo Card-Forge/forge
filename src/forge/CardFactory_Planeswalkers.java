@@ -2725,7 +2725,7 @@ class CardFactory_Planeswalkers {
             return card2;
         }//*************** END ************ END **************************    
         
-
+        
         //*************** START *********** START **************************
         if(cardName.equals("Jace, the Mind Sculptor")) {
             final int turn[] = new int[1];
@@ -2748,10 +2748,10 @@ class CardFactory_Planeswalkers {
             card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
             /*
             card2.addComesIntoPlayCommand(new Command() {
-            	public void execute()
-            	{
-            		turn[0] = -1;
-            	}
+                public void execute()
+                {
+                    turn[0] = -1;
+                }
             });
             */
             
@@ -2810,8 +2810,10 @@ class CardFactory_Planeswalkers {
                 }//canPlay()
             };
             ability1.setDescription("+2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.");
-            ability1.setStackDescription(card2
-                    + " - Look at the top card of target player's library. You may put that card on the bottom of that player's library.");
+            StringBuilder stack1 = new StringBuilder();
+            stack1.append(cardName).append(" - Look at the top card of target player's library. You may put that card on the bottom of that player's library.");
+            ability1.setStackDescription(stack1.toString());
+            
             ability1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability1));
             ability1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card2.addSpellAbility(ability1);
@@ -2868,8 +2870,9 @@ class CardFactory_Planeswalkers {
                 }//canPlay()
             };
             ability2.setDescription("0: Draw three cards, then put two cards from your hand on top of your library in any order.");
-            ability2.setStackDescription(card2
-                    + " - Draw three cards, then put two cards from your hand on top of your library in any order.");
+            StringBuilder stack2 = new StringBuilder();
+            stack2.append(cardName).append(" - Draw three cards, then put two cards from your hand on top of your library in any order.");
+            ability2.setStackDescription(stack2.toString());
             card2.addSpellAbility(ability2);
             
             final Ability ability3 = new Ability(card, "0") {
@@ -2900,6 +2903,10 @@ class CardFactory_Planeswalkers {
                 }
             };
             ability3.setDescription("-1: Return target creature to its owner's hand.");
+            StringBuilder stack3 = new StringBuilder();
+            stack3.append(cardName).append(" - Return target creature to its owner's hand.");
+            ability3.setStackDescription(stack3.toString());
+            
             ability3.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability3));
             card2.addSpellAbility(ability3);
             
@@ -2946,8 +2953,10 @@ class CardFactory_Planeswalkers {
                 }
             };
             ability4.setDescription("-12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
-            ability4.setStackDescription(card2
-                    + " - Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
+            StringBuilder stack4 = new StringBuilder();
+            stack4.append(cardName).append(" - Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
+            ability4.setStackDescription(stack4.toString());
+            
             ability4.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability4));
             ability4.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card2.addSpellAbility(ability4);
@@ -2956,6 +2965,7 @@ class CardFactory_Planeswalkers {
             
             return card2;
         }//*************** END ************ END **************************
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sarkhan the Mad")) {
