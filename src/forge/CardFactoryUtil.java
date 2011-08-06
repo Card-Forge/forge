@@ -3584,6 +3584,12 @@ public class CardFactoryUtil {
         final String m[] = {"none"};
         if(l.length > 1) m[0] = l[1];
         
+        //accept straight numbers
+        if(l[0].contains("Number$")) {
+        	String number = l[0].replace("Number$", "");
+        	return Integer.parseInt(number);
+        }
+        
         // count valid cards on the battlefield
         if(l[0].contains("Valid")) {
         	String restrictions = l[0].replace("Valid ", "");

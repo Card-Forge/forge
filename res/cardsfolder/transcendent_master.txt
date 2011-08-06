@@ -5,9 +5,10 @@ Text:no text
 PT:3/3
 K:stSetPT:3:3:LevelGE6:6:6:LevelGE12:9:9:LEVEL 6-11 6/6 Lifelink LEVEL 12+ 9/9 Lifelink Indestructible
 K:stPumpSelf:Creature.countersGE6LEVEL:0/0/Lifelink:No Condition:no text
-K:stPumpSelf:Creature.countersGE12LEVEL:0/0/HIDDEN Indestructible:No Condition:no text
+K:stPumpSelf:Creature.countersGEXLEVEL:0/0/HIDDEN Indestructible:No Condition:no text
 K:Level up:1
 K:maxLevel:12
+SVar:X:Number$12
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transcendent_master.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/51.jpg

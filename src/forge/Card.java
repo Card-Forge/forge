@@ -2578,9 +2578,21 @@ public class Card extends MyObservable {
              	if (!compare(y, Property, x))
              		return false;
              }
-			
-             else if (Property.startsWith("counters")) // syntax example: countersGE9 P1P1 or countersLT12TIME (greater number than 99 not supported)
+			// syntax example: countersGE9 P1P1 or countersLT12TIME (greater number than 99 not supported)
+			/*
+			 * slapshot5 - fair warning, you cannot use numbers with 2 digits (greater number than 9 not supported
+			 * you can use X and the SVar:X:Number$12 to get two digits.  This will need a better fix, and I have the
+			 * beginnings of a regex below
+			 */
+             else if (Property.startsWith("counters")) 
              {
+            	 /*
+            	 Pattern p = Pattern.compile("[a-z]*[A-Z][A-Z][X0-9]+.*$");
+            	 String[] parse = ???
+            	 System.out.println("Parsing completed of: "+Property);
+            	 for(int i = 0; i < parse.length; i++) {
+            		 System.out.println("parse["+i+"]: "+parse[i]);
+            	 }*/
             	int number = 0;
               	if (Property.substring(10,11).equals("X"))
               		number = CardFactoryUtil.xCount(source, getSVar("X"));
