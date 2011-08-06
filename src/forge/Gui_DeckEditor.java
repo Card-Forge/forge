@@ -7,18 +7,12 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Rectangle;
-// import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
-// import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
-//import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import java.awt.event.ItemEvent;
-// import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -41,7 +35,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-// import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -137,6 +130,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     
     private JTextField	      searchTextField2	   = new JTextField();
     private JTextField	      searchTextField3	   = new JTextField();
+    private JButton           clearFilterButton    = new JButton();
     
     private CardList          top;
     private CardList          bottom;
@@ -622,8 +616,17 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             	filterButton_actionPerformed(e);
             }
         });
-        if(!Gui_NewGame.useLAFFonts.isSelected()) filterButton.setFont(new java.awt.Font("Dialog", 0, 13));
         /*CHOPPIC*/
+        
+        if (!Gui_NewGame.useLAFFonts.isSelected()) addButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        
+        clearFilterButton.setText("Clear Filter");
+        clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	clearFilterButton_actionPerformed(e);
+            }
+        });
+        if(!Gui_NewGame.useLAFFonts.isSelected()) filterButton.setFont(new java.awt.Font("Dialog", 0, 13));
         
         analysisButton.setText("Deck Analysis");
         analysisButton.addActionListener(new java.awt.event.ActionListener() {
@@ -696,7 +699,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().setLayout(new MigLayout("fill"));
                 
         // this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, split 16");
-        this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, grow, split 14");
+        this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, grow, split 15");
         this.getContentPane().add(creatureCheckBox, "grow");
         this.getContentPane().add(sorceryCheckBox, "grow");
         this.getContentPane().add(instantCheckBox, "grow");
@@ -787,6 +790,30 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     	updateDisplay();
     }
 	/*CHOPPIC*/
+    
+    void clearFilterButton_actionPerformed(ActionEvent e) {
+        
+        if (! landCheckBox.isSelected())         landCheckBox.doClick();
+        if (! creatureCheckBox.isSelected())     creatureCheckBox.doClick();
+        if (! sorceryCheckBox.isSelected())      sorceryCheckBox.doClick();
+        if (! instantCheckBox.isSelected())      instantCheckBox.doClick();
+        if (! planeswalkerCheckBox.isSelected()) planeswalkerCheckBox.doClick();
+        if (! artifactCheckBox.isSelected())     artifactCheckBox.doClick();
+        if (! enchantmentCheckBox.isSelected())  enchantmentCheckBox.doClick();
+        
+        if (! whiteCheckBox.isSelected())     whiteCheckBox.doClick();
+        if (! blueCheckBox.isSelected())      blueCheckBox.doClick();
+        if (! blackCheckBox.isSelected())     blackCheckBox.doClick();
+        if (! redCheckBox.isSelected())       redCheckBox.doClick();
+        if (! greenCheckBox.isSelected())     greenCheckBox.doClick();
+        if (! colorlessCheckBox.isSelected()) colorlessCheckBox.doClick();
+        
+        searchTextField.setText("");
+        searchTextField2.setText("");
+        searchTextField3.setText("");
+        
+        updateDisplay();
+    }// clearFilterButton_actionPerformed
     
     void analysisButton_actionPerformed(ActionEvent e) {
         
