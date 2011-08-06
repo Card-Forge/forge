@@ -1,0 +1,7 @@
+Name:Ebony Owl Netsuke
+ManaCost:2
+Types:Artifact
+Text:At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_owl_netsuke.jpg
+End

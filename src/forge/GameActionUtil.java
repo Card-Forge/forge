@@ -160,7 +160,8 @@ public class GameActionUtil {
 		upkeep_Power_Surge();
 		upkeep_The_Rack();
 		upkeep_Storm_World();
-		upkeep_BlackVise(); 
+		upkeep_Black_Vise();
+		upkeep_Ebony_Owl_Netsuke();
 		upkeep_Ivory_Tower();		
 		
 		upkeep_AI_Aluren(); 
@@ -9264,7 +9265,7 @@ public class GameActionUtil {
 		}
 	}// upkeep_Storm_World
 
-	private static void upkeep_BlackVise() {
+	private static void upkeep_Black_Vise() {
 		// Vise should always trigger, just in case the draw cards while Ability is on the stack
 		final Player player = AllZone.Phase.getPlayerTurn();
 
@@ -9295,7 +9296,36 @@ public class GameActionUtil {
 			
 			AllZone.Stack.add(ability);
 		}
-	}// upkeep_BlackVice
+	}// upkeep_Black_Vise
+	
+	private static void upkeep_Ebony_Owl_Netsuke() {
+		/*
+		 * At the beginning of each opponent's upkeep, if that player has seven
+		 * or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
+		 */
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList owls = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Ebony Owl Netsuke");
+		final CardList hand = AllZoneUtil.getPlayerHand(player);
+
+		// Each owl triggers
+		for(final Card owl:owls) {
+			Ability ability = new Ability(owl, "0") {
+				@Override
+				public void resolve() {
+					player.addDamage(4, owl);
+				}
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(owl.getName()).append(" deals 4 damage to ").append(player);
+			sb.append(".");
+			ability.setStackDescription(sb.toString());
+			if(hand.size() >= 7) {
+				AllZone.Stack.add(ability);
+			}
+		}
+	}// upkeep_Ebony_Owl_Netsuke
 
 	private static void upkeep_Copper_Tablet() {
 		/*
