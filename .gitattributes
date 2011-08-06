@@ -189,6 +189,7 @@ res/quest/decks/Wyatt[!!-~]Earp[!!-~]3.dck -text
 res/quest/decks/quest1.dck -text
 res/quest/decks/quest2.dck -text
 res/quest/decks/quest3.dck -text
+res/quest/decks/quest4.dck -text
 res/quest/decks/quest8.dck -text
 res/quest/easy.txt -text svneol=native#text/plain
 res/quest/hard.txt -text svneol=native#text/plain
