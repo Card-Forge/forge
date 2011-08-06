@@ -5556,38 +5556,8 @@ public class CardFactory_Creatures {
             StringBuilder sb = new StringBuilder();
             sb.append(card).append(" deals 1 damage to each creature with flying.");
             ability.setStackDescription(sb.toString());
-            ability.setDescription("Sacrifice a land: Spitting Spider deals 1 damage to each creature with flying.");
+            ability.setDescription(abCost+"Spitting Spider deals 1 damage to each creature with flying.");
             
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Killer Whale")) {
-            final Ability ability = new Ability(card, "U") {
-                
-                @Override
-                public void resolve() {
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -8494294720368074013L;
-                        
-                        public void execute() {
-                            card.removeIntrinsicKeyword("Flying");
-                        }
-                    };
-                    
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addIntrinsicKeyword("Flying");
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gains flying until end of turn.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("U: Killer Whale gains flying until end of turn.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         

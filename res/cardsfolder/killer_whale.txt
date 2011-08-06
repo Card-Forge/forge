@@ -3,6 +3,7 @@ ManaCost:3 U U
 Types:Creature Whale
 Text:no text
 PT:3/5
+A:AB$Pump | Cost$ U | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6065.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/37.jpg
