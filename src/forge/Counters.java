@@ -28,7 +28,8 @@ public enum Counters {
     P1P1("+1/+1"),
     QUEST(),
     SPORE(),
-    TIME();
+    TIME(),
+    TOWER("tower");
     
     private String name;
     

@@ -28,6 +28,12 @@ When Wolfbriar Elemental enters the battlefield, put a 2/2 green Wolf creature t
 4/4
 Multikicker G
 
+Helix Pinnacle
+G
+Enchantment
+At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
+Shroud
+
 Isochron Scepter
 2
 Artifact

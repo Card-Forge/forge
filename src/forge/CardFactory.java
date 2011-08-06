@@ -16814,6 +16814,57 @@ public class CardFactory implements NewConstants {
       }
       //*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+      else if(cardName.equals("Helix Pinnacle"))
+      {
+    	  final Ability ability = new Ability(card, "0")
+    	  {
+    		  public void resolve()
+    		  {
+    			  getSourceCard().addCounter(Counters.TOWER, getSourceCard().getX());
+    		  }
+    		  public boolean canPlayAI()
+    		  {
+    			  getSourceCard().setX(ComputerUtil.getAvailableMana().size());
+    			  setManaCost(getSourceCard().getX() + "");
+    			  int n = getSourceCard().getX();
+    			  for (Card c : AllZone.Computer_Play.getCards())
+    			  {
+    				  if (c.getName().equals("Doubling Season"))
+    					  n*=2;
+    				  if (n > 20)
+    					  return true;
+    			  }
+    			  return false;
+    		  }
+    	  };
+    	  ability.setBeforePayMana(new Input()
+    	  {
+    		 /**
+			 * 
+			 */
+			private static final long serialVersionUID = 43786418486732L;
+
+			public void showMessage()
+    		 {
+    			 String s = JOptionPane.showInputDialog("What would you like X to be?");
+    	  		 try {
+    	  				 ability.getSourceCard().setX(Integer.parseInt(s));
+    	  				 ability.setManaCost(s);
+    	  				 stopSetNext(new Input_PayManaCost(ability));
+    	  			 }
+    	  			 catch(NumberFormatException e){
+    	  				 AllZone.Display.showMessage("\"" + s + "\" is not a number.");
+    	  				 stop();
+    	  			 }
+    		 }
+    	  });
+    	  ability.setDescription("X: Put X tower counters on Helix Pinnacle.");
+    	  ability.setStackDescription("Put X counters on Helix Pinnacle");
+    	  card.addSpellAbility(ability);
+      }
+      //*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

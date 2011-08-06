@@ -67,6 +67,7 @@ public class GameActionUtil {
         upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
         upkeep_Bitterblossom();
         upkeep_Battle_of_Wits();
+        upkeep_Helix_Pinnacle();
         upkeep_Barren_Glory();
         upkeep_Felidar_Sovereign();
         upkeep_Klass();
@@ -5726,6 +5727,29 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// if
     }// upkeep_Battle_of_Wits
+    
+    private static void upkeep_Helix_Pinnacle() {
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Helix Pinnacle");
+        
+        for(Card c : list) {
+            if (c.getCounters(Counters.TOWER) < 100) continue;
+        	Ability ability = new Ability(list.get(0), "0") {
+            	@Override
+            	public void resolve() 
+            	{
+            		AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(player))
+            			.setLife(0);
+            	}
+            };
+            
+            ability.setStackDescription("Helix Pinnacle - " + player + " wins the game");
+            AllZone.Stack.add(ability);
+        }// if
+    }// upkeep_Helix_Pinnacle
     
     private static void upkeep_Barren_Glory() {
         final String player = AllZone.Phase.getActivePlayer();
