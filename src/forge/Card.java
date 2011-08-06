@@ -187,6 +187,22 @@ public class Card extends MyObservable {
     	return triggers;
     }
     
+    public Trigger getNamedTrigger(String name)
+    {
+    	for(Trigger t : triggers)
+    	{
+    		if(t.getName() != null)
+    		{
+    			if(t.getName().equals(name))
+    			{
+    				return t;
+    			}
+    		}
+    	}
+    	
+    	return null;
+    }
+    
     public void setTriggers(ArrayList<Trigger> trigs)
     {
     	for(Trigger t : trigs)

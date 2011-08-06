@@ -5,10 +5,30 @@ import java.util.HashMap;
 
 public abstract class Trigger {
 	
+	protected String name;
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String n)
+	{
+		name = n;
+	}
+	
 	protected HashMap<String,String> mapParams = new HashMap<String,String>();
 	public HashMap<String,String> getMapParams()
 	{
 		return mapParams;
+	}
+	
+	protected HashMap<String,Object> runParams;
+	public void setRunParams(HashMap<String,Object> rp)
+	{
+		runParams = rp;
+	}
+	public HashMap<String,Object> getRunParams()
+	{
+		return runParams;
 	}
 	
 	protected SpellAbility overridingAbility = null;
@@ -29,6 +49,17 @@ public abstract class Trigger {
 	public void setHostCard(Card c)
 	{
 		hostCard = c;
+	}
+	
+	public Trigger(String n,HashMap<String,String> params, Card host)
+	{
+		name = n;
+		mapParams = new HashMap<String,String>();
+		for(String key : params.keySet())
+		{
+			mapParams.put(key,params.get(key));
+		}
+		hostCard = host;
 	}
 	
 	public Trigger(HashMap<String,String> params, Card host)

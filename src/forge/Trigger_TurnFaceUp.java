@@ -23,7 +23,14 @@ public class Trigger_TurnFaceUp extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_TurnFaceUp(mapParams,hostCard);
+		Trigger copy = new Trigger_TurnFaceUp(mapParams,hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 	
 	@Override

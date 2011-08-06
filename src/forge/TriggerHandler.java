@@ -7,6 +7,13 @@ public class TriggerHandler {
 
 	private ArrayList<Trigger> registeredTriggers = new ArrayList<Trigger>();
 	
+	public static Trigger parseTrigger(String name,String trigParse,Card host)
+	{
+		Trigger ret = TriggerHandler.parseTrigger(trigParse, host);
+		ret.setName(name);
+		return ret;
+	}
+	
 	public static Trigger parseTrigger(String trigParse,Card host)
 	{
 		HashMap<String,String> mapParams = parseParams(trigParse);
@@ -201,6 +208,8 @@ public class TriggerHandler {
 			{
 				return;
 			}				
+			
+			regtrig.setRunParams(runParams);
 			
 			//All tests passed, execute ability.
 			AbilityFactory AF = new AbilityFactory();

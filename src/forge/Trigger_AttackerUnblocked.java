@@ -23,7 +23,14 @@ public class Trigger_AttackerUnblocked extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_AttackerUnblocked(mapParams,hostCard);
+		Trigger copy = new Trigger_AttackerUnblocked(mapParams,hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 	
 	@Override

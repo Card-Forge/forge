@@ -26,7 +26,14 @@ public class Trigger_Taps extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_Taps(mapParams,hostCard);
+		Trigger copy = new Trigger_Taps(mapParams,hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 	
 	@Override

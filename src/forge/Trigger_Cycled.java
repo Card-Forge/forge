@@ -10,7 +10,14 @@ public class Trigger_Cycled extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_Cycled(mapParams, hostCard);
+		Trigger copy = new Trigger_Cycled(mapParams, hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 
 	@Override

@@ -47,7 +47,14 @@ public class Trigger_ChangesZone extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_ChangesZone(mapParams,hostCard);
+		Trigger copy = new Trigger_ChangesZone(mapParams,hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 	
 	@Override

@@ -101,7 +101,14 @@ public class Trigger_SpellAbilityCast extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_SpellAbilityCast(mapParams,hostCard);
+		Trigger copy = new Trigger_SpellAbilityCast(mapParams,hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 	
 	@Override

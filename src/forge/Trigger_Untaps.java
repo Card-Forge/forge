@@ -26,7 +26,14 @@ public class Trigger_Untaps extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_Untaps(mapParams,hostCard);
+		Trigger copy = new Trigger_Untaps(mapParams,hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 	
 	@Override

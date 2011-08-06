@@ -34,7 +34,14 @@ public class Trigger_Discarded extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_Discarded(mapParams,hostCard);
+		Trigger copy = new Trigger_Discarded(mapParams,hostCard);
+		if(overridingAbility != null)
+		{
+			copy.setOverridingAbility(overridingAbility);
+		}
+		copy.setName(name);
+		
+		return copy;
 	}
 	
 	@Override
