@@ -585,7 +585,16 @@ public class GameActionUtil {
 				final String controller = c.getController();
 				final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
 				final Card RippleCard = c;
-
+				boolean Activate_Ripple = false;
+	        	if(controller == "Human"){
+		        	Object[] possibleValues = {"Yes", "No"};
+                    AllZone.Display.showMessage("Activate Ripple? ");
+		        	Object q = JOptionPane.showOptionDialog(null, "Activate Ripple for " + c, "Ripple", 
+		        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+		        			null, possibleValues, possibleValues[0]);
+                      if(q.equals(0)) Activate_Ripple = true;
+	        	} else Activate_Ripple = true;
+	        	if(Activate_Ripple == true) {
 				final Ability ability = new Ability(c, "0") {
 					@Override
 					public void resolve() {
@@ -639,6 +648,7 @@ public class GameActionUtil {
 				};
 				ability.setStackDescription(c + " - Ripple.");
 				AllZone.Stack.add(ability);
+			}
 			}
 		};
 		Ripple.execute();
