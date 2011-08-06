@@ -7248,6 +7248,7 @@ src/forge/Trigger_Cycled.java -text svneol=native#text/plain
 src/forge/Trigger_DamageDone.java -text svneol=native#text/plain
 src/forge/Trigger_Discarded.java -text svneol=native#text/plain
 src/forge/Trigger_Drawn.java -text svneol=native#text/plain
+src/forge/Trigger_LandPlayed.java -text svneol=native#text/plain
 src/forge/Trigger_LifeGained.java -text svneol=native#text/plain
 src/forge/Trigger_LifeLost.java -text svneol=native#text/plain
 src/forge/Trigger_Phase.java -text svneol=native#text/plain

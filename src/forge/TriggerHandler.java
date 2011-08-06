@@ -71,6 +71,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_Drawn(mapParams,host);
 		}
+		else if(mode.equals("LandPlayed"))
+		{
+			ret = new Trigger_LandPlayed(mapParams,host);
+		}
 		else if(mode.equals("LifeGained"))
 		{
 			ret = new Trigger_LifeGained(mapParams,host);

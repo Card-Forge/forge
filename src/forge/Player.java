@@ -773,6 +773,11 @@ public abstract class Player extends MyObservable{
     		AllZone.GameAction.moveToPlay(land);
 			CardFactoryUtil.playLandEffects(land);
 			numLandsPlayed++;
+			
+			//Run triggers
+			HashMap<String, Object> runParams = new HashMap<String, Object>();
+			runParams.put("Card", land);
+			AllZone.TriggerHandler.runTrigger("LandPlayed", runParams);
     	}
     	
     	AllZone.Stack.unfreezeStack();
