@@ -59,9 +59,9 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Boromir 3", "hard", "G Elvish Piper deck with Quicksilver Amulet and huge creatures");
         addToDeckList("Boromir 4", "very hard", "UG Show and Tell deck with huge creatures");
 //        addToDeckList("Brood 2", "medium", "W Battlecry deck");
-        addToDeckList("Buffy 1", "easy", "BRG Vampires deck with wither and Sorceress Queen");
-        addToDeckList("Buffy 2", "medium", "BRG Vampires deck with wither and Sorceress Queen");
-        addToDeckList("Buffy 3", "hard", "BRG Vampires deck with wither and Sorceress Queen");
+        addToDeckList("Buffy 1", "easy", "Mono B Zombie deck");
+        addToDeckList("Buffy 2", "medium", "Mono B Zombie deck");
+        addToDeckList("Buffy 3", "hard", "Mono B Zombie deck");
         
         addToDeckList("C3PO 1", "easy", "BR Goblin deck with Goblin Ringleader, Mad Auntie and Sensation Gorger");
         addToDeckList("C3PO 2", "medium", "BR Goblin deck with Goblin Ringleader, Kiki-Jiki, Mad Auntie and Sensation Gorger");
@@ -232,6 +232,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Mr Slate 3", "hard", "WUG Merfolk deck with Lord of Atlantis, Stonybrook Banneret and Stonybrook Schoolmaster");
 //        addToDeckList("Mummy 1", "easy", "W Life deck");
         
+        addToDeckList("Nagini 2", "medium", "Mono G Snake deck");
 //        addToDeckList("Namor 2", "medium", "U Control deck");
 //        addToDeckList("Namor 3", "hard", "U Standard Constructed deck");
         addToDeckList("Napoleon 3", "hard", "WBG Wall deck with Rolling Stones and Doran, the Siege Tower");
