@@ -151,6 +151,10 @@ public class Ability_Cost {
     	return parse.replace(str, "").trim();
 	}
 	
+	public void changeCost(SpellAbility sa){
+		manaCost = AllZone.GameAction.GetSpellCostChange(sa).toString();
+	}
+	
 	public String toString()
 	{
 		if (isAbility)
