@@ -1,3 +1,46 @@
+Blazing Specter
+2 B R
+Creature Specter
+Whenever Blazing Specter deals combat damage to a player, that player discards a card from his or her hand.
+2/2
+Flying
+Haste
+
+Guul Draz Specter
+2 B B
+Creature Specter
+Guul Draz Specter gets +3/+3 as long as an opponent has no cards in hand.  Whenever Guul Draz Specter deals combat damage to a player, that player discards a card.
+2/2
+Flying
+
+Chilling Apparition
+2 B
+Creature Spirit
+Whenever Chilling Apparition deals combat damage to a player, that player discards a card.
+1/1
+RegenerateMe:B
+
+Headhunter
+1 B
+Creature Human Cleric
+Whenever Headhunter deals combat damage to a player, that player discards a card
+1/1
+Morph: B
+
+Riptide Pilferer
+1 U
+Creature Merfolk Rogue
+Whenever Riptide Pilferer deals combat damage to a player, that player discards a card.
+1/1
+Morph: U
+
+Scalpelexis
+4 U
+Creature Beast
+Whenever Scalpelexis deals combat damage to a player, that player removes the top four cards of his or her library from the game.  If two or more of those cards have the same name, repeat this process.
+1/5
+Flying
+
 Arcbound Slith
 2
 Artifact Creature Slith

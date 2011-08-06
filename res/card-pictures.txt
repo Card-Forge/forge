@@ -18,6 +18,12 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+scalpelexis.jpg             http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
+riptide_pilferer.jpg        http://www.wizards.com/global/images/magic/general/riptide_pilferer.jpg
+headhunter.jpg              http://www.wizards.com/global/images/magic/general/headhunter.jpg
+chilling_apparition.jpg     http://www.wizards.com/global/images/magic/general/chilling_apparition.jpg
+guul_draz_specter.jpg       http://www.wizards.com/global/images/magic/general/guul_draz_specter.jpg
+blazing_specter.jpg         http://www.wizards.com/global/images/magic/general/blazing_specter.jpg
 arcbound_slith.jpg          http://www.wizards.com/global/images/magic/general/arcbound_slith.jpg
 minister_of_impediments.jpg http://www.wizards.com/global/images/magic/general/minister_of_impediments.jpg
 demigod_of_revenge.jpg      http://www.wizards.com/global/images/magic/general/demigod_of_revenge.jpg

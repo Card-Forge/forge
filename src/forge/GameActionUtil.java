@@ -3010,9 +3010,17 @@ public class GameActionUtil
 			playerCombatDamage_Hypnotic_Specter(c);
 		else if (c.getName().equals("Dimir Cutpurse"))
 			playerCombatDamage_Dimir_Cutpurse(c);
+		else if (c.getName().equals("Garza Zol, Plague Queen"))
+		     playerCombatDamage_May_draw(c);
+		else if (c.getName().equals("Scalpelexis"))
+		     playerCombatDamage_Scalpelexis(c);
+		else if (c.getName().equals("Blazing Specter") || c.getName().equals("Guul Draz Specter") || 
+				c.getName().equals("Chilling Apparition") )
+		     playerCombatDamage_Simple_Discard(c);
+		else if ((c.getName().equals("Headhunter") ||c.getName().equals("Riptide Pilferer")  ) && !c.isFaceDown())
+			playerCombatDamage_Simple_Discard(c);
 		else if (c.getName().equals("Shadowmage Infiltrator")
 				|| c.getName().equals("Thieving Magpie")
-				|| c.getName().equals("Garza Zol, Plague Queen")
 				|| c.getName().equals("Lu Xun, Scholar General"))
 			playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if (c.getName().equals("Goblin Lackey"))
@@ -3226,11 +3234,6 @@ public class GameActionUtil
          {
             public void resolve()
             {
-               AllZone.GameAction.discardRandom(opponent);
-               
-               ////////////
-               
-                   
                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opponent);
                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, opponent);
                    CardList libList = new CardList(lib.getCards());
@@ -3253,7 +3256,116 @@ public class GameActionUtil
          AllZone.Stack.add(ability);
        }
     }
+
+	private static void playerCombatDamage_May_draw(Card c)
+	{
+		final String player = c.getController();		
+
+		if (c.getNetAttack() > 0)
+		{
+			Ability ability2 = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+					if (player.equals("Human"))
+		            {
+		               String[] choices =
+		               { "Yes", "No" };
+		               Object choice = AllZone.Display.getChoice(
+		                     "Draw a card?", choices);
+		               if (choice.equals("Yes"))
+		               {
+		            	   AllZone.GameAction.drawCard(player);
+		               }
+		            }
+					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+					CardList libList = new CardList(lib.getCards());
+					if (player.equals("Computer") && (libList.size() > 3))
+					AllZone.GameAction.drawCard(player);
+				}
+			};// ability2
+
+			ability2.setStackDescription(c.getName() + " - " + player
+					+ " draws a card.");
+			AllZone.Stack.add(ability2);
+		}
+
+	}
 	
+	private static void playerCombatDamage_Simple_Discard(Card c)
+	{
+		final String player = c.getController();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+
+		if (c.getNetAttack() > 0)
+		{
+			Ability ability2 = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+						
+					if(opponent.equals(Constant.Player.Human))
+			            AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+			          else
+			            AllZone.GameAction.discardRandom(Constant.Player.Computer); // Should be changed to wise discard  
+
+				}
+			};// ability2
+
+			ability2.setStackDescription(c.getName() + " - " + "opponent discards a card.");
+			AllZone.Stack.add(ability2);
+		}
+	}
+	
+	private static void playerCombatDamage_Scalpelexis(Card c)
+    {
+      final String player = c.getController();
+      final String opponent = AllZone.GameAction.getOpponent(player);
+
+      if (c.getNetAttack() > 0)
+      {
+         Ability ability = new Ability(c, "0")
+         {
+            public void resolve()
+            {         
+                   
+                   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opponent);
+                   PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, opponent);
+                   CardList libList = new CardList(lib.getCards());
+                   int count=0;                   
+                   int broken=0;
+                   for (int i=0;i<libList.size();i = i+4)
+                   {
+                	  Card c1 = null ; Card c2 = null; Card c3=null; Card c4=null;
+                	  if (i<libList.size()) c1 = libList.get(i); else broken = 1;
+                      if (i+1<libList.size()) c2 = libList.get(i+1); else broken = 1;
+                      if (i+2<libList.size()) c3 = libList.get(i+2); else broken = 1;
+                      if (i+3<libList.size()) c4 = libList.get(i+3); else broken = 1;
+                      if ( broken ==0 ) { if ( (c1.getName().contains(c2.getName()) || c1.getName().contains(c3.getName()) ||
+                    		  c1.getName().contains(c4.getName()) || c2.getName().contains(c3.getName()) ||
+                    		  c2.getName().contains(c4.getName()) || c3.getName().contains(c4.getName())))                    		  
+                      { count = count+1; } else {broken=1;}}
+                     
+                   }
+                   count = (count*4)+4;
+                   int max = count;
+                   if (libList.size() < count)
+                       max = libList.size();
+                   
+                       for (int j=0;j<max;j++)
+                   {
+                       Card c = libList.get(j);
+                       lib.remove(c);
+                       exiled.add(c);
+                    }
+            }
+         };// ability
+
+         ability.setStackDescription("Scalpelexis - " + opponent
+               + " removes the top four cards of his or her library from the game.  If two or more of those cards have the same name, repeat this process.");
+         AllZone.Stack.add(ability);
+       }
+    }
 	private static void playerCombatDamage_Hystrodon(Card c)
 	{
 		final String player = c.getController();
@@ -11829,6 +11941,52 @@ public class GameActionUtil
 	               
 	   };//Maro
 	   
+	   public static Command Guul_Draz_Specter = new Command()
+       {
+          private static final long serialVersionUID = -8778902687347191964L;
+          public void execute()
+          {
+             // get all creatures
+             CardList list = new CardList();
+             list.addAll(AllZone.Human_Play.getCards());
+             list.addAll(AllZone.Computer_Play.getCards());
+             list = list.getName("Guul Draz Specter");
+
+             for (int i = 0; i < list.size(); i++)
+             {
+                Card c = list.get(i);
+                int k = 0;
+                if (c.getController().equals(Constant.Player.Computer)) 
+                	{k = countHand_Human ();}
+                 else  k = countHand_Computer();
+                if (k == 0 ) 
+                {
+                c.setBaseAttack(5);
+                c.setBaseDefense(5);
+                }
+                else {
+              	  c.setBaseAttack(3);
+                    c.setBaseDefense(3);
+                }
+             }
+          }   
+             private int countHand_Human()
+             {
+                PlayerZone Play = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+                CardList list = new CardList();
+                list.addAll(Play.getCards());
+                return list.size();
+             }
+             private int countHand_Computer()
+             {
+                PlayerZone Play = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+                CardList list = new CardList();
+                list.addAll(Play.getCards());
+                return list.size();
+             }      
+       
+ };//Guul Draz Specter
+	   
 	   public static Command Mortivore = new Command()
 	   {
 	      private static final long serialVersionUID = -8778902687347191964L;
@@ -13772,6 +13930,10 @@ public class GameActionUtil
 		commands.put("Terravore", Terravore);
 		commands.put("Magnivore", Magnivore);
 		commands.put("Tarmogoyf", Tarmogoyf);
+		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
+		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
+		commands.put("Maro", Maro);
+		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		commands.put("Dakkon", Dakkon);
 		commands.put("Korlash", Korlash);
 
