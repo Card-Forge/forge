@@ -3035,7 +3035,8 @@ public class GameActionUtil
 				 c.getName().equals("Slith Bloodletter") || c.getName().equals("Slith Firewalker") ||
 				 c.getName().equals("Slith Predator"))
 			playerCombatDamage_Slith(c);
-		else if (c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw"))
+		else if (c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw") ||
+				c.getName().equals("Arcbound Slith"))
 			playerCombatDamage_Whirling_Dervish(c);
 		else if (c.getName().equals("Oros, the Avenger"))
 			playerCombatDamage_Oros(c);

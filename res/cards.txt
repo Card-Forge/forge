@@ -1,3 +1,10 @@
+Arcbound Slith
+2
+Artifact Creature Slith
+Whenever Arcbound Slith deals combat damage to a player, put a +1/+1 counter on it.
+0/0
+Modular 1
+
 Minister of Impediments
 2 WU
 Creature Human Advisor
