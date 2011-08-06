@@ -50,7 +50,6 @@ public class GameActionUtil {
 		upkeep_Honden_of_Infinite_Rage();
 		upkeep_Dega_Sanctuary();
 		upkeep_Sheltered_Valley();
-		upkeep_Land_Tax();
 		upkeep_Living_Artifact();
 		upkeep_Tangle_Wire();
 		upkeep_Mana_Vault();
@@ -73,8 +72,6 @@ public class GameActionUtil {
 		upkeep_Scute_Mob();
 		upkeep_Lichenthrope();
 		upkeep_Heartmender();
-		//upkeep_AEther_Vial();
-		upkeep_Ratcatcher();
 		upkeep_Nath();
 		upkeep_Anowon();
 		upkeep_Cunning_Lethemancer();
@@ -94,9 +91,6 @@ public class GameActionUtil {
 		upkeep_Winnower_Patrol();
 		upkeep_Wolf_Skull_Shaman();
 		
-		upkeep_Debtors_Knell();
-		upkeep_Reya();
-		upkeep_Emeria();
 		upkeep_Oversold_Cemetery();
 		upkeep_Nether_Spirit();
 		upkeep_Nettletooth_Djinn();
@@ -7063,102 +7057,6 @@ public class GameActionUtil {
 			AllZone.GameAction.playSpellAbilityForFree(c.getSpellPermanent());
 	}
 
-    private static void upkeep_Land_Tax() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Land Tax");
-
-        PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
-
-        CardList self = new CardList(playZone.getCards());
-        CardList opp = new CardList(oppPlayZone.getCards());
-
-        self = self.getType("Land");
-        opp = opp.getType("Land");
-
-        if (self.size() < opp.size()) {
-
-            for(int i = 0; i < list.size(); i++) {
-                final Card c = list.get(i);
-                Ability ability = new Ability(list.get(i), "0") {
-                    @Override
-                    public void resolve() {
-                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-
-                        CardList lands = new CardList(lib.getCards());
-                        lands = lands.getType("Basic");
-
-                        if (player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
-                            StringBuilder question = new StringBuilder();
-                            question.append("Search your library for up to 3 basic land cards, ");
-                            question.append("reveal them, and put them into your hand?");
-                            if (GameActionUtil.showYesNoDialog(c, question.toString())) {
-                                String title = "Pick a basic land card?";
-                                
-                                Object o = GuiUtils.getChoiceOptional(title, lands.toArray());
-                                if (o != null) {
-                                    Card card = (Card) o;
-                                    lib.remove(card);
-                                    hand.add(card);
-                                    lands.remove(card);
-
-                                    if (lands.size() > 0) {
-                                        o = GuiUtils.getChoiceOptional(title, lands.toArray());
-                                        if (o != null) {
-                                            card = (Card) o;
-                                            lib.remove(card);
-                                            hand.add(card);
-                                            lands.remove(card);
-                                            
-                                            if (lands.size() > 0) {
-                                                o = GuiUtils.getChoiceOptional(title, lands.toArray());
-                                                if (o != null) {
-                                                    card = (Card) o;
-                                                    lib.remove(card);
-                                                    hand.add(card);
-                                                    lands.remove(card);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                AllZone.HumanPlayer.shuffle();
-                            }// if choice yes
-                        } // player equals human
-                        else if (player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
-                            Card card = lands.get(0);
-                            lib.remove(card);
-                            hand.add(card);
-                            lands.remove(card);
-
-                            if (lands.size() > 0) {
-                                card = lands.get(0);
-                                lib.remove(card);
-                                hand.add(card);
-                                lands.remove(card);
-
-                                if (lands.size() > 0) {
-                                    card = lands.get(0);
-                                    lib.remove(card);
-                                    hand.add(card);
-                                    lands.remove(card);
-                                }
-                            }
-                            AllZone.ComputerPlayer.shuffle();
-                        }
-                    }
-
-                };// Ability
-                ability.setStackDescription("Land Tax - search library for up to three basic land cards and put them into your hand");
-                AllZone.Stack.add(ability);
-
-            }// for
-        }// if fewer lands than opponent
-    }// upkeep_Land_Tax()
-	
 	private static void upkeep_Mana_Vault() {
 		//this card is filtered out for the computer, so we will only worry about Human here
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7837,53 +7735,6 @@ public class GameActionUtil {
 			} // for
 		} // if creatures > 0
 	}//heartmender
-
-	private static void upkeep_Ratcatcher() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-		CardList creatures = new CardList(library.getCards());
-		creatures = creatures.getType("Rat");
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Ratcatcher");
-
-		if(creatures.size() > 0 && list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-
-				Ability ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-
-						CardList rats = new CardList(lib.getCards());
-						rats = rats.getType("Rat");
-
-						if(rats.size() > 0) {
-							if(player.equals(AllZone.HumanPlayer)) {
-								Object o = GuiUtils.getChoiceOptional("Pick a Rat to put into your hand",
-										rats.toArray());
-								if(o != null) {
-									Card card = (Card) o;
-
-									AllZone.GameAction.moveToHand(card);
-								}
-							} else if(player.equals(AllZone.ComputerPlayer)) {
-								Card card = rats.get(0);
-
-								AllZone.GameAction.moveToHand(card);
-							}
-							player.shuffle();
-						}
-					}
-
-				};// Ability
-				ability.setStackDescription("Ratcatcher - search library for a rat and put into your hand");
-				AllZone.Stack.add(ability);
-			} // for
-		} // if creatures > 0
-	}
 
 	private static void upkeep_Nath() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -8987,112 +8838,6 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Dark_Confidant()
 
-	private static void upkeep_Debtors_Knell() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-		PlayerZone oppGrave = AllZone.getZone(Constant.Zone.Graveyard, player.getOpponent());
-
-		CardList creatures = new CardList();
-		creatures.addAll(grave.getCards());
-		creatures.addAll(oppGrave.getCards());
-		creatures = creatures.getType("Creature");
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Debtors' Knell");
-
-		if(creatures.size() > 0 && list.size() > 0) for(int i = 0; i < list.size(); i++) {
-			{
-				Ability ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-						PlayerZone oppGrave = AllZone.getZone(Constant.Zone.Graveyard,
-								player.getOpponent());
-						PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-						CardList creatures = new CardList();
-						creatures.addAll(grave.getCards());
-						creatures.addAll(oppGrave.getCards());
-
-						creatures = creatures.getType("Creature");
-
-						if(player.equals(AllZone.HumanPlayer)) {
-							Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
-									creatures.toArray());
-							if(o != null) {
-								Card card = (Card) o;
-								PlayerZone graveyard = AllZone.getZone(card);
-								graveyard.remove(card);
-								card.setController(player);
-								playZone.add(card);
-							}
-						} else if(player.equals(AllZone.ComputerPlayer)) {
-							Card card = creatures.get(0);
-							PlayerZone graveyard = AllZone.getZone(card);
-							graveyard.remove(card);
-							card.setController(player);
-							playZone.add(card);
-
-						}
-					}
-				};// Ability
-				ability.setStackDescription("Debtors' Knell returns creature from graveyard to the battlefield.");
-				AllZone.Stack.add(ability);
-			}//for
-		} // if creatures > 0
-
-	}
-
-	private static void upkeep_Emeria() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-		CardList creatures = new CardList(graveyard.getCards());
-		creatures = creatures.getType("Creature");
-
-		CardList land = new CardList(playZone.getCards());
-		land = land.getType("Plains");
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Emeria, the Sky Ruin");
-
-		if(land.size() >= 7 && creatures.size() >= 1) {
-			for(int i = 0; i < list.size(); i++) {
-				Ability ability = new Ability(list.get(0), "0") {
-					@Override
-					public void resolve() {
-						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-						PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-						CardList creatures = new CardList(graveyard.getCards());
-						creatures = creatures.getType("Creature");
-
-						if(player.equals(AllZone.HumanPlayer)) {
-							Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
-									creatures.toArray());
-							if(o != null) {
-								Card card = (Card) o;
-								graveyard.remove(card);
-								playZone.add(card);
-							}
-						} else if(player.equals(AllZone.ComputerPlayer)) {
-							Card card = creatures.get(0);
-							graveyard.remove(card);
-							playZone.add(card);
-
-						}
-					}
-
-				};// Ability
-				ability.setStackDescription("Emeria, the Sky Ruin returns creature from graveyard to the battlefield.");
-				AllZone.Stack.add(ability);
-
-			}
-		}
-	}
-
 	private static void upkeep_Oversold_Cemetery() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList cemeteryList = AllZoneUtil.getPlayerCardsInPlay(player, "Oversold Cemetery");
@@ -9130,46 +8875,6 @@ public class GameActionUtil {
 			}
 		}
 	}//Oversold Cemetery
-
-	private static void upkeep_Reya() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-		CardList creatures = new CardList(graveyard.getCards());
-		creatures = creatures.getType("Creature");
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Reya Dawnbringer");
-
-		if(creatures.size() > 0 && list.size() > 0) {
-			Ability ability = new Ability(list.get(0), "0") {
-				@Override
-				public void resolve() {
-					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-					CardList creatures = new CardList(graveyard.getCards());
-					creatures = creatures.getType("Creature");
-
-					if(player.equals(AllZone.HumanPlayer)) {
-						Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
-								creatures.toArray());
-						if(o != null) {
-							Card card = (Card) o;
-
-							AllZone.GameAction.moveToPlay(card);
-						}
-					} else if(player.equals(AllZone.ComputerPlayer)) {
-						Card card = creatures.get(0);
-						AllZone.GameAction.moveToPlay(card);
-					}
-				}
-
-			};// Ability
-			ability.setStackDescription("Reya returns creature from graveyard to the battlefield.");
-			AllZone.Stack.add(ability);
-		} // if creatures > 0
-	} // reya
 
     private static void upkeep_Nether_Spirit() {
         final Player player = AllZone.Phase.getPlayerTurn();
@@ -11778,7 +11483,6 @@ public class GameActionUtil {
 		Dauntless_Escort.execute();
 	
 		Baru.execute();
-		Sosukes_Summons.execute();
 
 		//Souls_Attendant.execute();
 		Wirewood_Hivemaster.execute();
@@ -12840,55 +12544,6 @@ public class GameActionUtil {
 			}// for
 		}// execute
 	}; // Windwright Mage
-	
-	// Copied from Reach of Branches
-	public static Command Sosukes_Summons= new Command() {
-		private static final long serialVersionUID = -6316413742244380102L;
-		CardList oldSnakes = new CardList();
-
-		public void execute() {
-			final Player player = AllZone.Phase.getPlayerTurn();
-			final CardList nCard = AllZoneUtil.getPlayerGraveyard(player, "Sosuke's Summons");
-
-			// get all Snakes that player has
-			CardList newSnakes = AllZoneUtil.getPlayerTypeInPlay(player, "Snake");
-			newSnakes = newSnakes.filter(AllZoneUtil.nonToken);
-
-			// if "Sosuke's Summons" is in graveyard and played a Forest
-			if(0 < nCard.size()	&& newSnake(oldSnakes, newSnakes)) {
-				SpellAbility ability = new Ability( new Card(), "0" ) {
-					@Override
-					public void resolve() {
-						// return all Summons' to hand
-						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-						PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-						for(int i = 0; i < nCard.size(); i++) {
-							grave.remove(nCard.get(i));
-							hand.add(nCard.get(i));
-						}
-					}// resolve()
-				};// SpellAbility
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Sosuke's Summons - return card to ").append(player).append("'s hand");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}// if
-
-			// potential problem: if a snake is bounced to your hand - won't trigger when you play that snake
-			oldSnakes.addAll(newSnakes.toArray());
-		}// execute
-
-		// check if newList has anything that oldList doesn't have
-		boolean newSnake(CardList oldList, CardList newList) {
-			// check if a Snake enters the battlefield under your control
-			for(int i = 0; i < newList.size(); i++)
-				if(!oldList.contains(newList.get(i))) return true;
-
-			return false;
-		}// newSnake()
-	}; // Sosukes Summons
 	
 	public static Command Baru                        = new Command() {
 		private static final long serialVersionUID = 7535910275326543185L;

@@ -1,10 +1,14 @@
 Name:Stonecloaker
 ManaCost:2 W
 Types:Creature Gargoyle
-Text:When CARDNAME enters the battlefield, return a creature you control to its owner's hand.\r\n\When CARDNAME enters the battlefield, exile target card from a graveyard.
+Text:no text
 PT:3/2
 K:Flash
 K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
+SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | ChangeType$ Creature.YouCtrl
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from a graveyard.
+SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Cost$ 0
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
