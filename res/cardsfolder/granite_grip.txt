@@ -5,7 +5,7 @@ Text:Enchanted creature gets +1/+0 for each Mountain you control.
 K:Enchant creature
 K:enPump:0/0
 K:stPumpEnchanted:Creature:X/0:no Condition:no text
-SVar:X:Count$TypeYouCtrl.Mountain
+SVar:X:Count$Valid Mountain.YouCtrl/Times.1
 SVar:BuffedBy:Mountain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_grip.jpg

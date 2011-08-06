@@ -2228,6 +2228,14 @@ public class Card extends MyObservable {
                 else st = Restriction[i].replaceAll(".Self", "");
                 Restriction[i] = st;
             }
+        	if (Restriction[i].contains("Attached"))			// is this card attached to the source?
+            {
+        		if (!this.equipping.contains(source) && !this.enchanting.contains(source)) {
+                    st = "False"; 								//False restriction entries in the array will return false
+                 }
+                else st = Restriction[i].replaceAll(".Attached", "");
+                Restriction[i] = st;
+            }    
             if (Restriction[i].contains("YouCtrl"))
             {
                 if (!getController().isPlayer(You)) {
@@ -2248,7 +2256,7 @@ public class Card extends MyObservable {
         return isValidCard(Restriction);
     }
     
-    // This takes a card argument Self and Other
+    // This takes a card argument Self, Attached and Other
     public boolean isValidCard(String Restris[], Card source) {
     	
     	String Restriction[] = new String[Restris.length];
@@ -2272,6 +2280,14 @@ public class Card extends MyObservable {
                 else st = Restriction[i].replaceAll(".Self", "");
                 Restriction[i] = st;
             }
+        	if (Restriction[i].contains("Attached"))			// is this card attached to the source?
+            {
+        		if (!this.equipping.contains(source) && !this.enchanting.contains(source)) {
+                    st = "False"; 								//False restriction entries in the array will return false
+                 }
+                else st = Restriction[i].replaceAll(".Attached", "");
+                Restriction[i] = st;
+            }    
         }
         return isValidCard(Restriction);
     }
