@@ -80,6 +80,10 @@ public class HumanPlayer extends Player{
 		return new CardList();
 	}
 	
+	public void discardUnless(int num, String uType, SpellAbility sa) {
+		AllZone.InputControl.setInput(CardFactoryUtil.input_discardNumUnless(num, uType, sa));
+	}
+	
 	public void handToLibrary(final int numToLibrary, String libPos) {
 		if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
         else {

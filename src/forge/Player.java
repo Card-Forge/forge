@@ -391,6 +391,8 @@ public abstract class Player extends MyObservable{
     	}
     }
     
+    public abstract void discardUnless(int num, String uType, SpellAbility sa);
+    
     public abstract void handToLibrary(final int numToLibrary, String libPos);
     
     ////////////////////////////////

@@ -929,7 +929,7 @@ public class CardFactory implements NewConstants {
                 		//String opp = card.getController().getOpponent();
                 		
                 		if (!UnlessType[0].equals("none"))
-                			AllZone.GameAction.discardUnless(discardingPlayer, nCards, UnlessType[0], this);
+                			discardingPlayer.discardUnless(nCards, UnlessType[0], this);
                 		else
                 			discardingPlayer.discard(nCards, this);
                 	}

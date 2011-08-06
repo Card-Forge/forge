@@ -118,6 +118,19 @@ public class AIPlayer extends Player{
 		return discarded;
 	}//end discard
 	
+	public void discardUnless(int num, String uType, SpellAbility sa) {
+		CardList hand = AllZoneUtil.getPlayerHand(this);
+        CardList tHand = hand.getType(uType);
+        
+        if(tHand.size() > 0) {
+            CardListUtil.sortCMC(tHand);
+            tHand.reverse();
+            tHand.get(0).getController().discard(tHand.get(0), sa);  //this got changed to doDiscard basically
+            return;
+        }
+        AllZone.ComputerPlayer.discard(num, sa);
+	}
+	
 	public void handToLibrary(final int numToLibrary, final String libPosIn) {
 		String libPos = libPosIn;
 		for(int i = 0; i < numToLibrary; i++) {

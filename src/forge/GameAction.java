@@ -170,12 +170,14 @@ public class GameAction {
         }
     }
     */
-    
+    /*
+    @Deprecated
     public void discardUnless(Player player, int numDiscard, String uType, SpellAbility sa) {
         if(player.isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_discardNumUnless(
                 numDiscard, uType, sa));
         else AI_discardNumUnless(numDiscard, uType, sa);
     }
+    */
     /*
     public void discardHand(Player player, SpellAbility sa) {
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
@@ -203,7 +205,7 @@ public class GameAction {
         for(int i = 0; i < numDiscard; i++)
             AI_discard(sa);
     }*/
-    
+    /*
     @Deprecated
     public void AI_discardNumUnless(int numDiscard, String uType, SpellAbility sa) {
         CardList hand = new CardList();
@@ -219,6 +221,7 @@ public class GameAction {
         for(int i = 0; i < numDiscard; i++)
             AllZone.ComputerPlayer.discard(sa);
     }
+    */
     /*
     public void AI_discard(SpellAbility sa) {
         CardList hand = new CardList();

@@ -3873,7 +3873,7 @@ public class CardFactoryUtil {
             if(d.length > 2) {
                 if(d[2].contains("UnlessDiscardType")) {
                     String dd[] = d[2].split("\\.");
-                    AllZone.GameAction.discardUnless(dbPlayer, X, dd[1], sa);
+                    dbPlayer.discardUnless(X, dd[1], sa);
                 }
                 if(d[2].contains("AtRandom")) dbPlayer.discardRandom(X, sa);
             } 
