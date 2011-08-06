@@ -302,6 +302,17 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         if(sourceCard.getName().equals("Rainbow Vale")) {
         	sourceCard.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
         }
+        
+        if(sourceCard.isLand() && sourceCard.isEnchantedBy("Wild Growth")) {
+        	if(sourceCard.getController().equals(AllZone.HumanPlayer)) {
+        		AllZone.ManaPool.addExtrinsicKeyword("ManaPool:G");
+        	}
+        	else {
+        		//only works for human since compy doesn't have the concept of
+        		//a mana pool.  Also, that code would currently go in ComputerUtil.payManaCost
+        		//(like the code for Manabarbs)
+        	}
+        }
 
         if(!runcommands.isEmpty()) for(Command c:runcommands)
             c.execute();
