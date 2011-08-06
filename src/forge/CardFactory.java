@@ -8120,7 +8120,108 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Temporal Aperture")){
+        	/*
+        	 * 5, Tap: Shuffle your library, then reveal the top card. Until end
+        	 * of turn, for as long as that card remains on top of your library,
+        	 * play with the top card of your library revealed and you may play that
+        	 * card without paying its mana cost. (If it has X in its mana cost, X is 0.)
+        	 */
+        	final Card[] topCard = new Card[1];
+        	
+        	final Ability freeCast = new Ability(card, "0") {
+        		
+        		@Override
+        		public boolean canPlay() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			return super.canPlay() && (lib.size() > 0 && lib.get(0).equals(topCard[0]));
+        		}
+
+        		@Override
+        		public void resolve() {
+        			Card freeCard = topCard[0];
+        			Player player = card.getController();
+        				if(freeCard != null) {
+        					if(freeCard.isLand() == true) {
+        						if(CardFactoryUtil.canHumanPlayLand()) {
+        							PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
+        							play.add(freeCard);
+        							CardFactoryUtil.playLandEffects(freeCard);
+        							AllZone.GameInfo.incrementHumanPlayedLands();
+        						}
+        						else {
+        							JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
+        						}
+        					}
+        					else if(freeCard.isPermanent() == true) {
+        						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
+        						play.add(freeCard);
+        						//AllZone.GameAction.playCardNoCost(freeCard);
+        					}
+        					else { //sorceries and instants
+        						AllZone.GameAction.playCardNoCost(freeCard);
+        					}
+        				}
+        				else JOptionPane.showMessageDialog(null, "Error in "+cardName+".  freeCard is null", "", JOptionPane.INFORMATION_MESSAGE);
+        			
+        		}
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+
+        	};
+        	freeCast.setDescription("Play the previously revealed top card of your library for free.");
+        	freeCast.setStackDescription(cardName+" - play card without paying its mana cost.");
+
+        	Ability_Cost abCost = new Ability_Cost("5 T", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -7328518969488588777L;
+
+				@Override
+        		public void resolve() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			if(lib.size() > 0) {
+
+        				//shuffle your library
+        				card.getController().shuffle();
+
+        				//reveal the top card
+        				topCard[0] = lib.get(0);
+        				JOptionPane.showMessageDialog(null, "Revealed card:\n"+topCard[0].getName(), card.getName(), JOptionPane.PLAIN_MESSAGE);
+        			
+        				card.addSpellAbility(freeCast);
+        				card.addExtrinsicKeyword("Play with the top card of your library revealed.");
+                        AllZone.EndOfTurn.addUntil(new Command() {
+							private static final long serialVersionUID = -2860753262177388046L;
+
+							public void execute() {
+                                card.removeSpellAbility(freeCast);
+                                card.removeExtrinsicKeyword("Play with the top card of your library revealed.");
+                            }
+                        });
+        			}
+        		}//resolve
+        		
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        	};
+
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(card).append(" - Shuffle your library, then reveal the top card.");
+        	ability.setStackDescription(sbStack.toString());
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append("Shuffle your library, then reveal the top card. ");
+        	sbDesc.append("Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed ");
+        	sbDesc.append("and you may play that card without paying its mana cost. ");
+        	sbDesc.append("(If it has X in its mana cost, X is 0.)");
+        	ability.setDescription(abCost+sbDesc.toString());
+
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
         
 
         return postFactoryKeywords(card);
