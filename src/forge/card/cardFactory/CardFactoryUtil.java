@@ -3298,12 +3298,26 @@ public class CardFactoryUtil {
     
     //parser for player targeted X variables
     public static int playerXCount(ArrayList<Player> players, String s, Card source) {
+    	if(players.size() == 0) return 0;
+    	
     	final String[] l;
         l = s.split("/");
         final String m[] = {"none"};
         if(l.length > 1) m[0] = l[1];
         
         int n = 0;
+        
+        // count valid cards on the battlefield
+        if(l[0].contains("Valid")) {
+        	String restrictions = l[0].replace("Valid ", "");
+        	final String rest[] = restrictions.split(",");
+        	CardList cardsonbattlefield = AllZoneUtil.getCardsInPlay();
+        	cardsonbattlefield = cardsonbattlefield.getValidCards(rest, players.get(0), source);
+
+        	n = cardsonbattlefield.size();
+
+        	return doXMath(n, m);
+        }
         
         final String[] sq;
         sq = l[0].split("\\.");
