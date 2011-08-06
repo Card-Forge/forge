@@ -4424,7 +4424,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
 		else if(c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie")) playerCombatDamage_Glint_Eye_Nephilim(c);
 		else if(c.getName().equals("Hystrodon") && !c.isFaceDown()) playerCombatDamage_Hystrodon(c);
-		else if(c.getName().equals("Slith Strider") || c.getName().equals("Slith Ascendant")
+		else if(c.getName().equals("Slith Ascendant")
 				|| c.getName().equals("Slith Bloodletter") || c.getName().equals("Slith Firewalker")
 				|| c.getName().equals("Slith Predator")) playerCombatDamage_Slith(c);
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
@@ -4911,29 +4911,7 @@ public class GameActionUtil {
 		
 		AllZone.Stack.add(ability2);
 	}
-
-	private static void playerCombatDamage_Nicol_Bolas(Card c) {
-		final Player[] opp = new Player[1];
-		final Card crd = c;
-
-		if(c.getNetAttack() > 0) {
-			Ability ability = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					opp[0] = crd.getController().getOpponent();
-					opp[0].discardHand(this);
-				}
-			};
-			opp[0] = c.getController().getOpponent();
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(opp[0]).append(" discards his or her hand.");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}//nicol bolas
-
+	
 	private static void playerCombatDamage_Augury_Adept(Card c) {
 		final Player[] player = new Player[1];
 		final Card crd = c;
