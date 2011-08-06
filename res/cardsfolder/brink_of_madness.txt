@@ -7,4 +7,5 @@ SVar:TrigSacDiscard:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ SVar=DB
 SVar:DBDiscard:DB$Discard | Defined$ Opponent | Mode$ Hand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_madness.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/50.jpg
 End

@@ -7,4 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_pioneer.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/243.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/257.jpg
 End

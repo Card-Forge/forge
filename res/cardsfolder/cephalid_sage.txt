@@ -9,4 +9,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:DBDiscard:DB$Discard | NumCards$ 2 | Mode$ TgtChoose | Defined$ You
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_sage.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/29.jpg
 End

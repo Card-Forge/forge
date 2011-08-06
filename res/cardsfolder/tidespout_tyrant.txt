@@ -8,4 +8,5 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidespout_tyrant.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/34.jpg
 End

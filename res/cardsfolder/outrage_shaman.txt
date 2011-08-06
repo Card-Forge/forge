@@ -7,4 +7,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtC | NumDmg$ X
 SVar:X:Count$Chroma.R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outrage_shaman.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/59.jpg
 End
