@@ -300,9 +300,14 @@ public class AbilityFactory_DealDamage {
 					tgt.addTarget(c);
 					continue;
 				}
+				
+				// When giving priority to targeting Creatures for mandatory triggers
+				// feel free to add the Human after we run out of good targets
+				if (mandatory && tgt.addTarget(AllZone.HumanPlayer))
+					continue;
 			}
 
-			if (tgt.canTgtCreature()) {
+			else if (tgt.canTgtCreature()) {
 				Card c = chooseTgtC(dmg, noPrevention, AllZone.HumanPlayer, mandatory);
 				if (c != null) {
 					tgt.addTarget(c);
@@ -311,7 +316,7 @@ public class AbilityFactory_DealDamage {
 			}
 
 			// todo: Improve Damage, we shouldn't just target the player just because we can
-			if (tgt.canTgtPlayer()) {
+			else if (tgt.canTgtPlayer()) {
 				if (tgt.addTarget(AllZone.HumanPlayer))
 					continue;
 			}
