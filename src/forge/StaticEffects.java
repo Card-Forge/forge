@@ -123,7 +123,6 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
 		
-		cardToEffectsList.put("Vampire Nocturnus", new String[]{"Vampire_Nocturnus"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
 		
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});

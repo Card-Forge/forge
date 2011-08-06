@@ -12470,6 +12470,10 @@ public class GameActionUtil {
 	      		CardList oppHand = AllZoneUtil.getPlayerHand(SourceCard.getController().getOpponent());
 	      		if(!(oppHand.size() == 0)) return false;
 	      	}
+  	      	if(SpecialConditions.contains("TopCardOfLibraryIsBlack")) {
+	      		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, SourceCard.getController());
+	      		if(!(lib.get(0).isBlack())) return false;
+	      	}
   	      	if(SpecialConditions.contains("LibraryLE")) {
   	      		CardList Library = new CardList();
   	      		Library.addAll(AllZone.getZone(Constant.Zone.Library, SourceCard.getController()).getCards());
@@ -13641,48 +13645,6 @@ public class GameActionUtil {
 			return swamps.size();
 		}
 	};
-	
-	public static Command Vampire_Nocturnus                       = new Command() {
-
-		private static final long serialVersionUID = 666334034902503917L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-2);
-				c.addSemiPermanentDefenseBoost(-1);
-				c.removeExtrinsicKeyword("Flying");
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Vampire Nocturnus");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Vampire");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if (CardFactoryUtil.getTopCard(c) != null)
-					{
-						if((CardFactoryUtil.getTopCard(c)).isBlack()) {
-							c.addSemiPermanentAttackBoost(2);
-							c.addSemiPermanentDefenseBoost(1);
-							c.addExtrinsicKeyword("Flying");
-							gloriousAnthemList.add(c);
-						}
-					}//topCard!=null
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Vampire Nocturnus
 	
 	/*
 	public static Command Dauntless_Dourbark          = new Command() {
@@ -16113,7 +16075,6 @@ public class GameActionUtil {
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
 		
-		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
 		
 		commands.put("Windwright_Mage", Windwright_Mage);
