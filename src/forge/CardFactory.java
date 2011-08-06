@@ -7275,12 +7275,32 @@ public class CardFactory implements NewConstants {
             	Card c = null;
                 String player = card.getController();
                 if(player == "Human"){
-                    Object check = AllZone.Display.getChoiceOptional("Select Card to play for free", getSourceCard().getAttachedCards());
-                    if(check != null) {
+                	Card[] Attached = getSourceCard().getAttachedCards(); 
+                	Card [] Choices = new Card[Attached.length];
+                	boolean SystemsGo = true;
+                	if(AllZone.Stack.size() > 0) {
+                        CardList Config = new CardList();            		
+                        for(int i = 0; i < Attached.length; i++) {	                      	
+                        if(Attached[i].isInstant() == true) Config.add(Attached[i]);	
+                	}                       
+                        for(int i = 0; i < Config.size(); i++) {
+            				Card crd = Config.get(i);
+            				Choices[i] = crd;
+                        }
+                        if(Config.size() == 0) SystemsGo = false;
+                	} else {
+                        for(int i = 0; i < Attached.length; i++) {	
+                        	Choices[i] =  Attached[i];               		
+                	}
+                	}
+                    Object check = null;
+                    if(SystemsGo == true) {
+                    	check = AllZone.Display.getChoiceOptional("Select Card to play for free", Choices);                   	
+                   if(check != null) {
                        target = ((Card) check);
                     }
-                    if(target != null) c = copyCard(target); 
-                }				
+                    if(target != null) c = copyCard(target);
+                    
   					if(c != null) {
   					if((c.isLand()) == true) {
   	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
@@ -7293,13 +7313,20 @@ public class CardFactory implements NewConstants {
 							Object q = null;
 				    		q = AllZone.Display.getChoiceOptional("You can't play any more lands this turn", choices);
   	   					}
-  					} else {
-  						AllZone.GameAction.playCardNoCost(c);
-  						card.unattachCard(c);
-  					}
-  				}
-  				}
- 
+  					} else if(c.getName().equals("Recall")) {
+  						// Fake playing the spell
+  						Phase.StormCount = Phase.StormCount + 1;
+  						if(c.getController() == "Human") {
+  					   	    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
+  						} else Phase.ComputerSpellCount = Phase.ComputerSpellCount + 1;
+  						card.unattachCard(c); 
+  						} else 
+  	  						AllZone.GameAction.playCardNoCost(c);
+	  						card.unattachCard(c); 
+  				} else JOptionPane.showMessageDialog(null, "There is no more cards available on Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
+  				} else JOptionPane.showMessageDialog(null, "You can only play an instant at this point in time, but none are attached to Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
+  			}
+  			}
   			public boolean canPlayAI() {
             	return false;
   			}
@@ -7324,7 +7351,7 @@ public class CardFactory implements NewConstants {
                             AllZone.GameAction.moveTo(RFG, c);
                             card.attachCard(c);  
     	                }
-
+    	                JOptionPane.showMessageDialog(null, "Click Mind's Desire to see the available cards to play without paying its mana cost.", "", JOptionPane.INFORMATION_MESSAGE);
                             final Card Minds = card;  
         	            	AllZone.GameAction.exile(Minds);                          
                             Command untilEOT = new Command() {
