@@ -1112,6 +1112,17 @@ public class CombatUtil {
                     AllZone.Stack.add(ability);
             }//Raging Ravine
             
+            //Mijae Djinn
+            if(c.getName().equals("Mijae Djinn")) {
+  				if( GameActionUtil.flipACoin(c.getController(), c)) {
+  					//attack as normal
+  				}
+  				else{
+  					AllZone.Combat.removeFromCombat(c);
+  					c.tap();
+  				}
+            }//Raging Ravine
+            
             if ((AllZone.Combat.getAttackers().length + AllZone.pwCombat.getAttackers().length) == 1)
             {
 	            if (c.getKeyword().contains("Whenever this creature attacks alone, it gets +2/+0 until end of turn.") || 

@@ -4626,6 +4626,27 @@ public class GameActionUtil {
         if (answer == JOptionPane.YES_OPTION) return true;
         else return false;
     }
+    
+    public static boolean flipACoin(Player caller, Card source) {
+    	String choice = "";
+    	String choices[] = {"heads","tails"};
+    	boolean flip = MyRandom.percentTrue(50);
+    	if(caller.isHuman()) {
+    		choice = (String) AllZone.Display.getChoice(source.getName()+" - Call coin flip", choices);
+    	}
+    	else {
+    		choice = choices[MyRandom.random.nextInt(2)];
+    	}
+
+    	if( (flip == true && choice.equals("heads")) || (flip == false && choice.equals("tails"))) {
+    		JOptionPane.showMessageDialog(null, source.getName()+" - "+caller+" wins flip.", source.getName(), JOptionPane.PLAIN_MESSAGE);
+    		return true;
+    	}
+    	else{
+    		JOptionPane.showMessageDialog(null, source.getName()+" - "+caller+" loses flip.", source.getName(), JOptionPane.PLAIN_MESSAGE);
+    		return false;
+    	}
+    }
 /*
     private static boolean showDialog(Card c) {
         String[] choices = {"Yes", "No"};
