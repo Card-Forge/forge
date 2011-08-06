@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorcerous_sight.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/69.jpg
 End

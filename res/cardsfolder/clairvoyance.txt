@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clairvoyance.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/63.jpg
 End

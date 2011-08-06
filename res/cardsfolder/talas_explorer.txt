@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPeek:AB$RevealHand | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talas_explorer.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/49.jpg
 End
