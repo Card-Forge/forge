@@ -20254,14 +20254,19 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START ********** START *************************
-        else if(cardName.equals("Niall Silvain")) {
+        else if(cardName.equals("Niall Silvain") || cardName.equals("Ragnar")) {
         	/*
         	 * G G G G, Tap: Regenerate target creature.
+        	 * U W G, Tap: Regenerate target creature.
         	 */
 
         	final String Tgts[] = {"Creature"};
         	Target target = new Target("TgtV", "Select target creature.", Tgts);
-        	final Ability_Cost abCost = new Ability_Cost("G G G G T", card.getName(), true);
+        	//final Ability_Cost abCost = new Ability_Cost("G G G G T", card.getName(), true);
+        	
+        	final Ability_Cost abCost = cardName.equals("Niall Silvain") ? 
+        			new Ability_Cost("G G G G T", card.getName(), true) :
+        			new Ability_Cost("U W G T", card.getName(), true);
 
         	final Card[] tgt = new Card[1];
         	final Command untilEOT = new Command() {
