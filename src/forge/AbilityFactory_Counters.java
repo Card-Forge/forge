@@ -736,8 +736,12 @@ public class AbilityFactory_Counters {
 		}
 		
 		for(Card tgtCard : tgtCards)
-			if(AllZone.GameAction.isCardInPlay(tgtCard) && (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)))
-				tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
+			if(tgt == null || CardFactoryUtil.canTarget(card, tgtCard)){
+				PlayerZone zone = AllZone.getZone(tgtCard);
+				
+				if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile))
+					tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
+			}
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
