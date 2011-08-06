@@ -230,7 +230,16 @@ public class CardList implements Iterable<Card> {
         Collections.sort(list, c);
     }
     
-    public CardList getValidCards(String Restrictions[]) {
+    public CardList getValidCards(final String Restrictions[]) {
+        return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isValidCard(Restrictions);
+
+            }
+        });
+    }//getValidCards
+    
+ /*   public CardList getValidCards(String Restrictions[]) {
         CardList tmpList = new CardList(toArray());
         CardList retList = new CardList();
         
@@ -282,6 +291,5 @@ public class CardList implements Iterable<Card> {
         if(retList.containsName("Mana Pool")) retList.remove("Mana Pool");
         return retList;
     }//getValidCards
-    
-
+    */
 }

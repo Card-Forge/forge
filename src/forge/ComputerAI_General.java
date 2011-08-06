@@ -153,6 +153,18 @@ public class ComputerAI_General implements Computer {
             	
                 if(c.isLand()) return false;
                 if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
+
+                CardList buffed = new CardList(AllZone.Computer_Play.getCards());
+                // buffed.getKeyword("BuffedBy");  //get all cards the computer controls with BuffedBy
+                for(int i = 0; i < buffed.size(); i++) {
+                	Card buffedcard = buffed.get(i);
+                	if (buffedcard.getSVar("Buffedby").length() > 0) {
+                			String buffedby = buffedcard.getSVar("Buffedby");
+                			final String bffdby[] = buffedby.split(",");
+                			if (c.isValidCard(bffdby)) return true;
+                	}
+       
+                }
                 CardList Vengevines = new CardList();
                 Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, "Computer").getCards());       
                 Vengevines = Vengevines.getName("Vengevine");
