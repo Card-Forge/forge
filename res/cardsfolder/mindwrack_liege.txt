@@ -3,8 +3,8 @@ ManaCost:3 UR UR UR
 Types:Creature Horror
 Text:UR UR UR UR: You may put a blue or red creature card from your hand onto the battlefield.
 PT:4/4
-K:stPumpOther:Creature.Blue+YouCtrl:1/1:No Condition:Other blue creatures you control get +1/+1.
-K:stPumpOther:Creature.Red+YouCtrl:1/1:No Condition:Other red creatures you control get +1/+1.
+K:stPumpAll:Creature.Blue+Other+YouCtrl:1/1:No Condition:Other blue creatures you control get +1/+1.
+K:stPumpAll:Creature.Red+Other+YouCtrl:1/1:No Condition:Other red creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindwrack_liege.jpg

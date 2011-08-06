@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Human Knight
 Text:no text
 PT:1/2
-K:stPumpOther:Creature.Green+YouCtrl:1/1:isUntapped:As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.
+K:stPumpAll:Creature.Green+Other+YouCtrl:1/1:isUntapped:As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon

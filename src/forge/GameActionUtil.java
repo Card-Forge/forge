@@ -12394,28 +12394,13 @@ public class GameActionUtil {
 			CardList Cards_inZone = new CardList();
 			String Range = Keyword_Details[0].replaceFirst("stPump", "");
 			
-      		if(Range.equals("Self")) {
-	      		Cards_inZone.add(SourceCard);
-	      		}
-      		
+			if(Range.equals("Self")) {
+				Cards_inZone.add(SourceCard);
+			}
       		if(Range.equals("All")) {
       			Cards_inZone.addAll(AllZone.Human_Play.getCards());
-	      		Cards_inZone.addAll(AllZone.Computer_Play.getCards());
-	      		}
-      		
-      		//no longer needed: use All with Other as restriction of ValidCard
-      		if(Range.equals("Other")) {
-      			Cards_inZone.addAll(AllZone.Human_Play.getCards());
-	      		Cards_inZone.addAll(AllZone.Computer_Play.getCards());
-	      		final Card F_SourceCard = SourceCard;
-	      		Cards_inZone = Cards_inZone.filter(new CardListFilter() {
-					public boolean addCard(Card c) {
-						if(!c.equals(F_SourceCard)) return true;
-						return false;
-					}
-	      		});
-	      	}
-
+      			Cards_inZone.addAll(AllZone.Computer_Play.getCards());
+      		}
       		if(Range.equals("Enchanted")) {
       			if (SourceCard.getEnchanting().size() > 0)
       				Cards_inZone.addAll(SourceCard.getEnchanting().toArray());
