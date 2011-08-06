@@ -73,17 +73,24 @@ public class AbilityFactory_Regenerate {
 		final HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
 		String name = af.getHostCard().getName();
-		sb.append(name).append(" - regenerate ");
-		Card tgt = sa.getTargetCard();
-		if (tgt != null) {
-			if(tgt.isFaceDown()) sb.append("Morph");
-			else sb.append(tgt.getName());
-		}
-		else {
-			ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-			for(Card c:tgtCards) {
-				if(c.isFaceDown()) sb.append("Morph ");
-				else sb.append(c.getName()).append(" ");
+
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+
+		if(tgtCards.size() > 0) {
+			if (sa instanceof Ability_Sub)
+				sb.append(" ");
+			else
+				sb.append(name).append(" - ");
+
+			sb.append("Regenerate ");
+			for(Card tgtC:tgtCards) {
+				if(tgtC.isFaceDown()) sb.append("Morph ");
+				else sb.append(tgtC.getName()).append(" ");
 			}
 		}
 		sb.append(".");
@@ -97,9 +104,14 @@ public class AbilityFactory_Regenerate {
 	}
 
 	private static boolean doCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-		//final HashMap<String,String> params = af.getMapParams();
+		final HashMap<String,String> params = af.getMapParams();
+		final Card hostCard = af.getHostCard();
 		boolean chance = false;
-		//ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+		ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+		
+		// if there is no target and host card isn't in play, don't activate
+		if (af.getAbTgt() == null && !AllZone.GameAction.isCardInPlay(hostCard)) 
+    		return false;
 		
 		// temporarily disabled until better AI
 		if (af.getAbCost().getSacCost())	 return false;
@@ -175,16 +187,15 @@ public class AbilityFactory_Regenerate {
 	}
 
 	private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
-		//Card hostCard = af.getHostCard();
+		Card hostCard = af.getHostCard();
 		final HashMap<String,String> params = af.getMapParams();
 		
 		ArrayList<Card> tgtCards;
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
-		else{
-			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-		}
+		else
+			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
 		for(final Card tgtC : tgtCards){
 			final Command untilEOT = new Command() {
@@ -195,7 +206,7 @@ public class AbilityFactory_Regenerate {
 				}
 			};
 			
-			if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(af.getHostCard(), tgtC))){
+			if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(hostCard, tgtC))){
 				tgtC.addShield();
 				AllZone.EndOfTurn.addUntil(untilEOT);
 			}
@@ -205,6 +216,12 @@ public class AbilityFactory_Regenerate {
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
 			   abSub.resolve();
+			}
+			else{
+				Card first = tgtCards.get(0);
+	        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
+	                hostCard.getController(), hostCard.getController().getOpponent(),
+	                first.getController(), hostCard, first, sa);
 			}
 		}
 	}//doResolve
