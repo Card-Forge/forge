@@ -1,26 +1,25 @@
 package forge;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class AbilityFactory {
 	
-	private static Card hostC = null;
+	private Card hostC = null;
 	
 	public Card getHostCard()
 	{
 		return hostC;
 	}
 	
-	private static HashMap<String,String> mapParams = new HashMap<String,String>();
+	private HashMap<String,String> mapParams = new HashMap<String,String>();
 	
 	public HashMap<String,String> getMapParams()
 	{
 		return mapParams;
 	}
 	
-	private static boolean isAb = false;
-	private static boolean isSp = false;
+	private boolean isAb = false;
+	private boolean isSp = false;
 	
 	public boolean isAbility()
 	{
@@ -32,16 +31,16 @@ public class AbilityFactory {
 		return isSp;
 	}
 	
-	private static Ability_Cost abCost = null;
+	private Ability_Cost abCost = null;
 	
 	public Ability_Cost getAbCost()
 	{
 		return abCost;
 	}
 	
-	private static boolean isTargeted = false;
-	private static boolean hasValid = false;
-	private static Target abTgt = null;
+	private boolean isTargeted = false;
+	private boolean hasValid = false;
+	private Target abTgt = null;
 	
 	public boolean isTargeted()
 	{
@@ -58,7 +57,12 @@ public class AbilityFactory {
 		return abTgt;
 	}
 
-	private static boolean hasSubAb = false;
+	private boolean isCurse = false;
+	public boolean isCurse(){
+		return isCurse;
+	}
+	
+	private boolean hasSubAb = false;
 	
 	public boolean hasSubAbility()
 	{
@@ -74,8 +78,6 @@ public class AbilityFactory {
 
 	public SpellAbility getAbility(String abString, final Card hostCard){
 		SpellAbility SA = null;
-		
-		//final HashMap<String,String> mapParams = new HashMap<String,String>();
 		
 		hostC = hostCard;
 		
@@ -97,11 +99,9 @@ public class AbilityFactory {
 			mapParams.put(aa[0], aa[1]);
 		}
 		
-		
-		//final boolean isAb[] = {false};
-		//final boolean isSp[] = {false};
 		String abAPI = "";
 		String spAPI = "";
+		
 		// additional ability types here
 		if (mapParams.containsKey("AB"))
 		{
@@ -121,17 +121,10 @@ public class AbilityFactory {
 			throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
 		abCost = new Ability_Cost(mapParams.get("Cost"), hostCard.getName(), isAb);
 		
-		
-		//final boolean isTargeted[] = {false};
-		//final boolean hasValid[] = {false};
-		//final Target abTgt[] = {null};
 		if (mapParams.containsKey("ValidTgts"))
 		{
 			hasValid = true;
 			isTargeted = true;
-			abTgt = new Target("TgtV");
-			abTgt.setValidTgts(mapParams.get("ValidTgts").split(","));
-			abTgt.setVTSelection(mapParams.get("TgtPrompt"));
 		}
 		
 		if (mapParams.containsKey("ValidCards"))
@@ -140,26 +133,30 @@ public class AbilityFactory {
 		if (mapParams.containsKey("Tgt"))
 		{
 			isTargeted = true;
-			abTgt = new Target(mapParams.get("Tgt"));
 		}
 		
+		if (isTargeted)
+		{
+			if (hasValid)
+				abTgt = new Target("TgtV", mapParams.get("TgtPrompt"), mapParams.get("ValidTgts").split(","));
+			else
+				abTgt = new Target(mapParams.get("Tgt"));
+		}
+		else{
+			abTgt = null;
+		}
 		
-		//final String SubAbility[] = {"none"};
-		//final boolean hasSubAb[] = {false};
+		if (mapParams.containsKey("IsCurse")){
+			isCurse = true;
+		}
+		
 		if (mapParams.containsKey("SubAbility"))
 			hasSubAb = true;
-			//SubAbility[0] = mapParams;
-		
-		//final String spDescription[] = {"none"};
-		//final boolean hasSpDesc[] = {false};
-		//String tmpSpDesc = mapParams.get("SpellDescription");
+
 		if (mapParams.containsKey("SpellDescription"))
-		{
 			hasSpDesc = true;
-			//spDescription[0] = abCost.toString() + mapParams.get("SpellDescription");
-		}
 		
-		
+
 		if (abAPI.equals("DealDamage"))
 		{
 			final int NumDmg[] = {-1};
@@ -183,13 +180,23 @@ public class AbilityFactory {
 		}
 		
 		// additional keywords here
-
+		if (abAPI.equals("PutCounter")){
+			if (isAb)
+				SA = AbilityFactory_Counters.createAbilityPutCounters(this);
+			if (isSp){
+				// todo: createSpellPutCounters
+			}
+		}
 
 		// set universal properties of the SpellAbility
-        if (isTargeted)
-        	SA.setTarget(abTgt);
-        
-        SA.setPayCosts(abCost);
+		if (isSp){	
+			// Ability_Activated sets abTgt and abCost in the constructor so this only needs to be set for Spells
+			// Once Spells are more compatible with Tgt and abCost this block should be removed
+	        if (isTargeted)
+	        	SA.setTarget(abTgt);
+	        
+	        SA.setPayCosts(abCost);
+		}
         
         if (hasSpDesc)
         	SA.setDescription(abCost.toString() + mapParams.get("SpellDescription"));

@@ -6093,14 +6093,14 @@ public class CardFactory implements NewConstants {
         // AbilityFactory cards
         ArrayList<String> IA = card.getIntrinsicAbilities();
         if (IA.size() > 0)
-        {
-        	AbilityFactory AF = new AbilityFactory();
-        	
+        {       	
         	if (card.isInstant() || card.isSorcery())
         		card.clearSpellAbility();
         	
-        	for (int i=0; i<IA.size(); i++)
+        	for (int i=0; i<IA.size(); i++){
+            	AbilityFactory AF = new AbilityFactory();
         		card.addSpellAbility(AF.getAbility(IA.get(i), card));
+        	}
 
         }
 
