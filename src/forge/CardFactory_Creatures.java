@@ -15789,10 +15789,11 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Workhorse")) {      
             
-            final Ability_Mana ability = new Ability_Mana(card, "0: add 1") {
+            final Ability_Mana ability = new Ability_Mana(card, "0: Add 1") {
 				private static final long serialVersionUID = -6764282980691397966L;
 
 				@Override
@@ -15813,21 +15814,12 @@ public class CardFactory_Creatures {
 					return "1";
             	}
             };
-            ability.setStackDescription(card + " adds 1 mana to mana pool. ");
-            ability.setDescription("Remove a +1/+1 counter: add 1 to your mana pool.");
+            ability.setStackDescription(cardName + " add 1 mana to mana pool. ");
+            ability.setDescription("Remove a +1/+1 counter from Workhorse: Add 1 to your mana pool.");
             card.addSpellAbility(ability);
-            
-            Command intoPlay = new Command() {
-                
-                private static final long serialVersionUID = 255901529244894L;
-                
-                public void execute() {
-                    card.addCounter(Counters.P1P1, 4);                   
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        /*keyworded
         //*************** START *********** START **************************
         else if(cardName.equals("Mindless Automaton")) {      
             
@@ -15854,7 +15846,7 @@ public class CardFactory_Creatures {
                 }
             };
             
-            ability1.setStackDescription(card + " gets a +1/+1 counter. ");
+            ability1.setStackDescription(cardName + " gets a +1/+1 counter. ");
             ability1.setDescription("1, Discard a card: put a +1/+1 counter on Mindless Automaton.");
             card.addSpellAbility(ability1);
             ability1.setBeforePayMana(runtime1);
@@ -15869,19 +15861,10 @@ public class CardFactory_Creatures {
         	};
         	
             ability2.setStackDescription("Remove two +1/+1 counters: Draw a card.");
-            ability2.setDescription("Remove two +1/+1 counters: Draw a card.");
+            ability2.setDescription("Remove two +1/+1 counters from Mindless Automaton: Draw a card.");
             card.addSpellAbility(ability2);
-            
-            Command intoPlay = new Command() {
-                
-                private static final long serialVersionUID = 255901520244894L;
-                
-                public void execute() {
-                    card.addCounter(Counters.P1P1, 2);                   
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Spitting Hydra")) {      
