@@ -27,6 +27,12 @@ public class AbilityFactory_Clash {
             }
 
             @Override
+            public String getStackDescription()
+            {
+                return "Clash with an opponent.";
+            }
+
+            @Override
             public void resolve()
             {
                 clashResolve(AF,this);
@@ -56,6 +62,12 @@ public class AbilityFactory_Clash {
             public boolean doTrigger(boolean mandatory)
             {
                 return true;
+            }
+
+            @Override
+            public String getStackDescription()
+            {
+                return "Clash with an opponent.";
             }
 
             @Override
@@ -93,6 +105,12 @@ public class AbilityFactory_Clash {
             public boolean doTrigger(boolean mandatory)
             {
                 return true;
+            }
+
+            @Override
+            public String getStackDescription()
+            {
+                return "Clash with an opponent.";
             }
 
             @Override
