@@ -1,0 +1,59 @@
+BasicLandPercentage=14
+
+[Group MaxCnt=4 Percentage=21]
+Underground Sea
+Badlands
+Crumbling Necropolis
+Bloodstained Mire
+Polluted Delta
+Mikokoro, Center of the Sea
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Underworld Dreams
+Underworld Dreams
+Underworld Dreams
+Mind's Eye
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Burning Inquiry
+Burning Inquiry
+Winds of Change
+[/Group]
+
+[Group MaxCnt=4 Percentage=17]
+Anvil of Bogardan
+Kami of the Crescent Moon
+Howling Mine
+Lore Broker
+Runed Servitor
+Vision Skeins
+Vision Skeins
+Words of Wisdom
+[/Group]
+
+[Group MaxCnt=1 Percentage=10]
+Dream Fracture
+Jace Beleren
+Molten Psyche
+Temple Bell
+Timetwister
+Wheel of Fortune
+Windfall
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Wheel and Deal
+Font of Mythos
+Spiteful Visions
+Swans of Bryn Argoll
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Time Reversal
+Seizan, Perverter of Truth
+Forced Fruition
+[/Group]
+
+End
