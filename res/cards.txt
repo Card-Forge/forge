@@ -1,3 +1,66 @@
+Beastmaster Ascension
+2 G
+Enchantment
+Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.\r\nAs long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg
+
+Belbe's Portal
+5
+Artifact
+As Belbe's Portal comes into play, choose a creature type.\r\n3, tap: You may put a creature card of the chosen type from your hand onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_portal.jpg
+
+Belligerent Hatchling
+3 RW
+Creature Elemental
+Belligerent Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.\r\nWhenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
+6/6
+First Strike
+SVar:BuffedBy:Spell.Red,Spell.White
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Belligerent_Hatchling.jpg
+
+Blinkmoth Infusion
+12 U U
+Instant
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nUntap all artifacts.
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+spAllPump:YouCtrl/None:+0/+0:Drawback$UntapAllTypeYouCtrl.Artifact:
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
+
+Bloodghast
+B B
+Creature Vampire Spirit
+Bloodghast has haste as long as an opponent has 10 or less life.\r\nLandfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
+2/1
+CARDNAME can't block.
+Landfall
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
+
+Bridge from Below
+B B B
+Enchantment
+Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.\r\nWhen a creature is put into an opponent's graveyard from the battlefield, if Bridge from Below is in your graveyard, exile Bridge from Below.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg
+
+Broodstar
+8 U U
+Creature Beast
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nBroodstar's power and toughness are each equal to the number of artifacts you control.
+1/1
+Flying
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
+
 Apocalypse Hydra
 X G R
 Creature Hydra
@@ -2837,14 +2900,6 @@ maxLevel:6
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastbreaker_of_bala_ged.jpg
 
-Beastmaster Ascension
-2 G
-Enchantment
-Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension. As long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg
-
 Bee Sting
 3 G
 Sorcery
@@ -2878,23 +2933,6 @@ Flying
 CARDNAME can block only creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_percher.jpg
-
-Belbe's Portal
-5
-Artifact
-As Belbe's Portal comes into play, choose a creature type. 3, T: You may put a creature card of the chosen type from your hand onto the battlefield.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_portal.jpg
-
-Belligerent Hatchling
-3 RW
-Creature Elemental
-Belligerent Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling. Whenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
-6/6
-First Strike
-SVar:BuffedBy:Spell.Red,Spell.White
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Belligerent_Hatchling.jpg
 
 Beloved Chaplain
 1 W
@@ -3260,16 +3298,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_mage.jpg
 
-Blinkmoth Infusion
-12 U U
-Instant
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Untap all artifacts.
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-spAllPump:YouCtrl/None:+0/+0:Drawback$UntapAllTypeYouCtrl.Artifact:
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
-
 Blinkmoth Nexus
 no cost
 Land
@@ -3403,16 +3431,6 @@ spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg
-
-Bloodghast
-B B
-Creature Vampire Spirit
-Bloodghast has haste as long as an opponent has 10 or less life. Landfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
-2/1
-CARDNAME can't block.
-Landfall
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
 
 Bloodmark Mentor
 1 R
@@ -4129,14 +4147,6 @@ Search target opponent's library for a creature card and put that card into play
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card21300.jpg
 
-Bridge from Below
-B B B
-Enchantment
-Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield. When a creature is put into an opponent's graveyard from the battlefield, if Bridge from Below is in your graveyard, exile Bridge from Below.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg
-
 Brilliant Halo
 1 W
 Enchantment Aura
@@ -4223,16 +4233,6 @@ When Broodmate Dragon comes into play, put a 4/4 red Dragon creature token with 
 Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodmate_dragon.jpg
-
-Broodstar
-8 U U
-Creature Beast
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Broodstar's power and toughness are each equal to the number of artifacts you control.
-1/1
-Flying
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
 
 Broodwarden
 3 G G
