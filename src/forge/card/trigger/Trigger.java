@@ -17,7 +17,7 @@ public abstract class Trigger {
 
     public static void resetIDs()
     {
-        nextID = 0;
+        nextID = 50000;
     }
 
     protected int ID = nextID++;
