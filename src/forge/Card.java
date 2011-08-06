@@ -2657,6 +2657,7 @@ public class Card extends MyObservable {
         if( reduceDamageToZero(source, false) ) {
         	damageToAdd = 0;
         }
+        
         if( damageToAdd == 0 ) return;  //Rule 119.8
         
         if(this.isPlaneswalker()) {
@@ -2664,14 +2665,13 @@ public class Card extends MyObservable {
         }
         
         if(source.getName().equals("Spiritmonger")) {
-        	final Card thisCard = source;
-        	Ability ability2 = new Ability(thisCard, "0") {
+        	Ability ability2 = new Ability(source, "0") {
         		@Override
         		public void resolve() {
-        			thisCard.addCounter(Counters.P1P1, 1);
+        			source.addCounter(Counters.P1P1, 1);
         		}
         	}; // ability2
-        	ability2.setStackDescription(thisCard.getName() + " - gets a +1/+1 counter");
+        	ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
         	AllZone.Stack.add(ability2);
         }
         

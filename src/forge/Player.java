@@ -136,12 +136,7 @@ public abstract class Player extends MyObservable{
     	if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
     			|| source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))
         	damage = 0;
-    	if (source.getKeyword().contains("Infect")) {
-    		//addPoison(player, damage);
-    	}
-        else {
-        	addDamage(damage, source);
-        }
+        addDamage(damage, source);
     	
     	//GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
     	GameActionUtil.executePlayerCombatDamageEffects(source);
@@ -191,8 +186,13 @@ public abstract class Player extends MyObservable{
 		return new CardList();
 	}
 	
-	//public abstract void discard(int n, SpellAbility sa);
+	@Override
+	public boolean equals(Object o) {
+		Player p1 = (Player)o;
+		return p1.getName().equals(name);
+	}
 	
+	@Override
 	public String toString() {
 		return name;
 	}
