@@ -730,8 +730,10 @@ public class ComputerUtil
     {
       public boolean addCard(Card c)
       {
-        for (Ability_Mana am : c.getAIPlayableMana())
+        for (Ability_Mana am : c.getAIPlayableMana()) {
+        	am.setActivatingPlayer(AllZone.ComputerPlayer);
         	if (am.canPlay()) return true;
+        }
                 
         return false;
       }
