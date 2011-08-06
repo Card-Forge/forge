@@ -2679,15 +2679,21 @@ public class CardFactoryUtil {
                 kw = list.get(i);
                 
 
-                if(kw.equals("Protection from white") && CardUtil.getColors(card).contains(Constant.Color.White)) return true;
-                if(kw.equals("Protection from blue") && CardUtil.getColors(card).contains(Constant.Color.Blue)) return true;
-                if(kw.equals("Protection from black") && CardUtil.getColors(card).contains(Constant.Color.Black)) return true;
-                if(kw.equals("Protection from red") && CardUtil.getColors(card).contains(Constant.Color.Red)) return true;
-                if(kw.equals("Protection from green") && CardUtil.getColors(card).contains(Constant.Color.Green)) return true;
+                if(kw.equals("Protection from white") && CardUtil.getColors(card).contains(Constant.Color.White) && 
+                		!card.getName().contains("White Ward")) return true;
+                if(kw.equals("Protection from blue") && CardUtil.getColors(card).contains(Constant.Color.Blue) && 
+                		!card.getName().contains("Blue Ward")) return true;
+                if(kw.equals("Protection from black") && CardUtil.getColors(card).contains(Constant.Color.Black) && 
+                		!card.getName().contains("Black Ward")) return true;
+                if(kw.equals("Protection from red") && CardUtil.getColors(card).contains(Constant.Color.Red) && 
+                		!card.getName().contains("Red Ward")) return true;
+                if(kw.equals("Protection from green") && CardUtil.getColors(card).contains(Constant.Color.Green) && 
+                		!card.getName().contains("Green Ward")) return true;
                 
                 if(kw.equals("Protection from creatures") && card.isCreature()) return true;
                 
-                if(kw.equals("Protection from artifacts") && card.isArtifact()) return true;
+                if(kw.equals("Protection from artifacts") && card.isArtifact() && 
+                		!card.getName().contains("Artifact Ward")) return true;
                 
                 if(kw.equals("Protection from everything")) return true;
                 
@@ -2698,7 +2704,8 @@ public class CardFactoryUtil {
                 if(kw.equals("Protection from Goblins")
                         && (card.getType().contains("Goblin") || card.getKeyword().contains("Changeling"))) return true;
                 
-                if(kw.equals("Protection from enchantments") && card.getType().contains("Enchantment")) return true;
+                if(kw.equals("Protection from enchantments") && card.getType().contains("Enchantment") && 
+                		!card.getName().contains("Tattoo Ward")) return true;
             }
         }
         return false;
