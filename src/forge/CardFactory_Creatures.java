@@ -5496,7 +5496,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Puppeteer")) {
             //tap - target creature
@@ -5540,7 +5540,7 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mirror Entity"))
