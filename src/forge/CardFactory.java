@@ -5410,49 +5410,6 @@ public class CardFactory implements NewConstants {
             enchantment.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchantment));
         }//*************** END ************ END **************************
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Take Possession")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7359291736123492910L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return 0 < CardFactoryUtil.AI_getHumanCreature(card, true).size();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card best = CardFactoryUtil.AI_getBestCreature(CardFactoryUtil.AI_getHumanCreature(card, true));
-                    setTargetCard(best);
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    c.setController(card.getController());
-                    
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                    
-                    PlayerZone from = AllZone.getZone(c);
-                    PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
-                    from.remove(c);
-                    to.add(c);
-                    
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
-                    
-                }//resolve()
-            };
-            
-            card.clearSpellAbility();
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "All"));
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("That Which Was Taken")) {

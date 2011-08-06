@@ -31,4 +31,6 @@ interface IPlayerZone
 
   public Player getPlayer();//the Player that owns this zone
   public String getZoneName();//returns the Zone's name like Graveyard
+  
+  public String toString();
 }

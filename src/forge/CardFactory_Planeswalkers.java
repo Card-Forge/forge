@@ -757,11 +757,9 @@ class CardFactory_Planeswalkers {
                         Object o = GuiUtils.getChoiceOptional("Select any card", list.toArray());
                         
                         card.getController().shuffle();
-                        if(o != null) {
-                            //put creature on top of library
-                            library.remove(o);
-                            library.add((Card) o, 0);
-                        }
+                        if(o != null)  //put creature on top of library
+                            AllZone.GameAction.moveToLibrary((Card) o);
+
                     }//if
                 }//resolve()
                 
@@ -1938,15 +1936,13 @@ class CardFactory_Planeswalkers {
                     if(o != null) {
                         Card c1 = (Card) o;
                         putOnTop.remove(c1);
-                        hand.remove(c1);
-                        lib.add(c1, 0);
+                        AllZone.GameAction.moveToLibrary(c1);
                     }
                     o = GuiUtils.getChoiceOptional("Second card to put on top: ", putOnTop.toArray());
                     if(o != null) {
                         Card c2 = (Card) o;
                         putOnTop.remove(c2);
-                        hand.remove(c2);
-                        lib.add(c2, 0);
+                        AllZone.GameAction.moveToLibrary(c2);
                     }
                 }
                 

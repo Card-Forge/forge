@@ -1,8 +1,9 @@
 Name:Take Possession
 ManaCost:5 U U
-Types:Sorcery
-Text:Gain control of target permanent. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
+Types:Enchantment Aura
+Text:You control enchanted permanent.
 K:Split second
+K:Enchant permanent
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136199.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/44.jpg

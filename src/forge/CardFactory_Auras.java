@@ -1587,8 +1587,7 @@ class CardFactory_Auras {
                     
                     // Bring creature onto the battlefield under your control (should trigger etb Abilities)
                     animated.setController(card.getController());
-                    grave.remove(animated);
-                    play.add(animated);
+                    AllZone.GameAction.moveToPlay(animated);
                     card.enchantCard(animated);	// Attach before Targeting so detach Command will trigger
                     
                     if(CardFactoryUtil.hasProtectionFrom(card, animated)) {
@@ -1647,6 +1646,77 @@ class CardFactory_Auras {
         	card.addUnEnchantCommand(detachCmd);
         }//*************** END ************ END **************************
         
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Take Possession")) {	
+            final Player[] prevController = new Player[1];
+            prevController[0] = null;
+            
+            Ability_Cost cost = new Ability_Cost("5 U U", cardName, false);
+            Target tgt = new Target("Select target Permanent", "Permanent".split(","));
+            
+            final SpellAbility spell = new Spell(card, cost, tgt) {
+                private static final long serialVersionUID = -7359291736123492910L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    Card best = CardFactoryUtil.AI_getBestCreature(CardFactoryUtil.AI_getHumanCreature(card, true));
+                    setTargetCard(best);
+                    return best != null;
+                }
+
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    if(!AllZone.GameAction.isCardInPlay(c))
+                    	return; 
+                    
+                    prevController[0] = c.getController();
+                    AllZone.GameAction.moveToPlay(card);
+                	c.attachCard(card);
+                	AllZone.GameAction.changeController(new CardList(c), c.getController(), card.getController());     
+                }//resolve()
+            };
+            
+            Command onUnEnchant = new Command() {
+				private static final long serialVersionUID = 3426441132121179288L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        if(AllZone.GameAction.isCardInPlay(crd)) {
+                            if(crd.getKeyword().contains("Haste")) {
+                                crd.setSickness(false);
+                            } else {
+                                crd.setSickness(true);
+                            }
+                            
+                            AllZone.GameAction.changeController(new CardList(crd), crd.getController(), prevController[0]);
+                        }
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+				private static final long serialVersionUID = -639204333673364477L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };//Command
+            
+            card.clearFirstSpellAbility();
+            card.addSpellAbility(spell);
+            
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************
         
         //**************************************************************
         // This card can't be converted to keyword, problem with Fear  *
@@ -2283,6 +2353,9 @@ class CardFactory_Auras {
                 card.clearSpellAbility();
                 card.addSpellAbility(spell);
                 
+                final Player[] prevController = new Player[1];
+                prevController[0] = null;
+                
                 Command onEnchant = new Command() {
 					private static final long serialVersionUID = -6323085271405286813L;
 
@@ -2296,19 +2369,8 @@ class CardFactory_Auras {
                                 crd.setSickness(true);
                             }
                             
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                            
-                            PlayerZone from = AllZone.getZone(crd);
-                            from.remove(crd);
-                            
-                            crd.setController(card.getController());
-                            
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                            to.add(crd);
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                            prevController[0] = crd.getController();
+                            AllZone.GameAction.changeController(new CardList(crd), crd.getController(), card.getController());
                         }
                     }//execute()
                 };//Command
@@ -2326,22 +2388,7 @@ class CardFactory_Auras {
                                     crd.setSickness(true);
                                 }
                                 
-                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                                
-                                PlayerZone from = AllZone.getZone(crd);
-                                from.remove(crd);
-                                
-                                AllZone.Combat.removeFromCombat(crd);
-                                
-                                Player opp = crd.getController().getOpponent();
-                                crd.setController(opp);
-                                
-                                PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, opp);
-                                to.add(crd);
-                                
-                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                                AllZone.GameAction.changeController(new CardList(crd), crd.getController(), prevController[0]);
                             }
                         }
                         
@@ -2447,6 +2494,9 @@ class CardFactory_Auras {
                 card.clearSpellAbility();
                 card.addSpellAbility(spell);
                 
+                final Player[] prevController = new Player[1];
+                prevController[0] = null;
+                
                 Command onEnchant = new Command() {
 					private static final long serialVersionUID = -2519887209491512000L;
 
@@ -2459,20 +2509,9 @@ class CardFactory_Auras {
                             } else {
                                 crd.setSickness(true);
                             }
+                            prevController[0] = crd.getController();
                             
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                            
-                            PlayerZone from = AllZone.getZone(crd);
-                            from.remove(crd);
-                            
-                            crd.setController(card.getController());
-                            
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                            to.add(crd);
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                            AllZone.GameAction.changeController(new CardList(crd), prevController[0], card.getController());
                         }
                     }//execute()
                 };//Command
@@ -2490,22 +2529,7 @@ class CardFactory_Auras {
                                     crd.setSickness(true);
                                 }
                                 
-                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                                
-                                PlayerZone from = AllZone.getZone(crd);
-                                from.remove(crd);
-                                
-                                AllZone.Combat.removeFromCombat(crd);
-                                
-                                Player opp = crd.getController().getOpponent();
-                                crd.setController(opp);
-                                
-                                PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, opp);
-                                to.add(crd);
-                                
-                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                                AllZone.GameAction.changeController(new CardList(crd), crd.getController(), prevController[0]);
                             }
                         }
                         

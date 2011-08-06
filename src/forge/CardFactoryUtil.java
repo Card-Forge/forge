@@ -974,9 +974,6 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                
                 //card.setName("Morph");
                 sourceCard.setIsFaceDown(true);
                 sourceCard.setManaCost("");
@@ -1969,14 +1966,12 @@ public class CardFactoryUtil {
             }//canPlayAI()
 
 			public void resolve() {
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
-                play.add(sourceCard);
-                
+				Card aura = AllZone.GameAction.moveToPlay(sourceCard);
+
                 Card c = getTargetCard();
                 
                 if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
-                	sourceCard.enchantCard(c);
-                    //System.out.println("Enchanted: " +getTargetCard());
+                	aura.enchantCard(c);
                 }
             }//resolve()
         };//enchant ability

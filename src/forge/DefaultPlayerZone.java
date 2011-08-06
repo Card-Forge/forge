@@ -163,4 +163,12 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
   }
   public void setUpdate(boolean b) {update = b;}
   public boolean getUpdate() {return update;}
+  
+  public String toString(){
+	  StringBuilder sb = new StringBuilder();
+	  if (player != null)
+		  sb.append(player.toString()).append(" ");
+	  sb.append(zoneName);
+	  return sb.toString();
+  }
 }

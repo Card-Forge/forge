@@ -222,17 +222,7 @@ public class AbilityFactory_GainControl {
                     tgtC.setSickness(true);
                 }
                 
-                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                
-                //tgtC.setSickness(true);
-                tgtC.setController(hostCard.getController());
-                
-                PlayerZone from = AllZone.getZone(tgtC);
-                from.remove(tgtC);
-                
-                PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, tgtC.getController());
-                to.add(tgtC);
+                AllZone.GameAction.changeController(new CardList(tgtC), tgtC.getController(), sa.getActivatingPlayer());
                 
                 if(bUntap) tgtC.untap();
                 
@@ -241,11 +231,7 @@ public class AbilityFactory_GainControl {
 						tgtC.addExtrinsicKeyword(kw);
 					}
 				}
-                
-                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
             }
-			
 			
 			//end copied
             
@@ -333,22 +319,10 @@ public class AbilityFactory_GainControl {
     			if(null == c) return;
 
     			if(AllZone.GameAction.isCardInPlay(c)) {
-    				((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-    				((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
+    				AllZone.GameAction.changeController(new CardList(c), c.getController(), c.getController().getOpponent());
 
     				c.setSickness(true);
-    				c.setController(c.getController().getOpponent());
 
-    				PlayerZone from = AllZone.getZone(c);
-    				from.remove(c);
-
-    				//make sure the creature is removed from combat:
-    				CardList list = new CardList(AllZone.Combat.getAttackers());
-    				if(list.contains(c)) AllZone.Combat.removeFromCombat(c);
-
-    				PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-    				to.add(c);
-    				
     				if(bTapOnLose) c.tap();
     				
     				if(null != kws) {
@@ -356,9 +330,6 @@ public class AbilityFactory_GainControl {
     						c.removeExtrinsicKeyword(kw);
     					}
     				}
-
-    				((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-    				((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
     			}//if
     			hostCard.clearGainControlTargets();
     			hostCard.clearGainControlReleaseCommands();

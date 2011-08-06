@@ -265,25 +265,10 @@ public class CardFactory_Sorceries {
                     Card crd1 = target[1];
                     
                     if(crd0 != null && crd1 != null) {
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        
-                        PlayerZone from0 = AllZone.getZone(crd0);
-                        from0.remove(crd0);
-                        PlayerZone from1 = AllZone.getZone(crd1);
-                        from1.remove(crd1);
-                        
-                        crd0.setController(card.getController().getOpponent());
-                        crd1.setController(card.getController());
-                        
-                        PlayerZone to0 = AllZone.getZone(Constant.Zone.Battlefield,
-                                card.getController().getOpponent());
-                        to0.add(crd0);
-                        PlayerZone to1 = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        to1.add(crd1);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                    	Player p0 = crd0.getController();
+                    	Player p1 = crd1.getController();
+                    	AllZone.GameAction.changeController(new CardList(crd0), p0, p1);
+                    	AllZone.GameAction.changeController(new CardList(crd1), p1, p0);
                     }
                     
                 }//resolve()
@@ -503,20 +488,12 @@ public class CardFactory_Sorceries {
                 	int i = 0;
                 	for(Card target:targets) {
                 		//if card isn't in play, do nothing
-                		if(!AllZone.GameAction.isCardInPlay(target)) break;
+                		if(!AllZone.GameAction.isCardInPlay(target)) continue;
 
-                		target.setController(controllerEOT.get(i));
+                		AllZone.GameAction.changeController(new CardList(target), card.getController(), controllerEOT.get(i));
 
-                		((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-
-                		newZone[0].remove(target);
-                		orig.get(i).add(target);
-                		target.untap();
                 		target.removeExtrinsicKeyword("Haste");
 
-                		((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                 		i++;
                 	}
                 }//execute()
@@ -536,17 +513,7 @@ public class CardFactory_Sorceries {
                 			controllerEOT.add(i, target.getController());
                 			targets.add(i, target);
 
-                			//set the controller
-                			target.setController(card.getController());
-
-                			((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                			
-                			newZone[0].add(target);
-                			orig.get(i).remove(target);
-
-                			((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                			AllZone.GameAction.changeController(new CardList(target), target.getController(), card.getController());
 
                 			target.untap();
                 			target.addExtrinsicKeyword("Haste");
@@ -3892,21 +3859,10 @@ public class CardFactory_Sorceries {
                     Card c = getTargetCard();
                     
                     if(c != null && AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    	// Donate should target both the player and the creature
                         if(!c.isAura()) {
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                            
-                            PlayerZone from = AllZone.getZone(c);
-                            from.remove(c);
-                            
-                            c.setController(card.getController().getOpponent());
-                            
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield,
-                                    card.getController().getOpponent());
-                            to.add(c);
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                        	AllZone.GameAction.changeController(new CardList(c), c.getController(), c.getController().getOpponent());
+
                         } else //Aura
                         {
                             c.setController(card.getController().getOpponent());
@@ -6104,51 +6060,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Take Possession")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7359291736123492910L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return 0 < CardFactoryUtil.AI_getHumanCreature(card, true).size();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card best = CardFactoryUtil.AI_getBestCreature(CardFactoryUtil.AI_getHumanCreature(card, true));
-                    setTargetCard(best);
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    c.setController(card.getController());
-                    
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                    
-                    PlayerZone from = AllZone.getZone(c);
-                    PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
-                    from.remove(c);
-                    to.add(c);
-                    
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
-                    
-                }//resolve()
-            };
-            
-            card.clearSpellAbility();
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "All"));
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Leeches")) {

@@ -546,7 +546,7 @@ public class GameActionUtil {
 		playCard_Merrow_Levitator(c);
 		playCard_Primordial_Sage(c);
 		playCard_Quirion_Dryad(c);
-		playCard_Enchantress_Draw(c);
+		//playCard_Enchantress_Draw(c);
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 		playCard_Kor_Firewalker(c);

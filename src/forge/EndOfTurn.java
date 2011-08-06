@@ -126,19 +126,8 @@ public class EndOfTurn implements java.io.Serializable
     			@Override
     			public void resolve() {
     				if(AllZone.GameAction.isCardInPlay(vale)) {
-    					((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        
-                        vale.setController(vale.getController().getOpponent());
-                        
-                        PlayerZone from = AllZone.getZone(vale);
-                        from.remove(vale);
-                        
-                        PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, vale.getController());
-                        to.add(vale);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+    					AllZone.GameAction.changeController(new CardList(vale), vale.getController(), vale.getController().getOpponent());
+
                         vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
     				}
     			}

@@ -78,6 +78,30 @@ public class GameAction {
         return moving;
     }
     
+    public void changeController(CardList list, Player oldController, Player newController){
+    	if (oldController.equals(newController))
+    		return;
+    	
+    	// Consolidating this code for now. In the future I want moveTo to handle this garbage
+    	PlayerZone oldBattlefield = AllZone.getZone(Constant.Zone.Battlefield, oldController);
+    	PlayerZone newBattlefield = AllZone.getZone(Constant.Zone.Battlefield, newController);
+    	
+        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
+        //so "enters the battlefield" abilities don't trigger
+        
+        for(Card c : list){
+        	oldBattlefield.remove(c);
+        	c.setController(newController);
+        	newBattlefield.add(c);
+        	if (c.isCreature())
+        		AllZone.Combat.removeFromCombat(c);
+        }
+        
+        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+    }
+    
     public Card moveToStack(Card c){
     	PlayerZone stack = AllZone.getZone(Constant.Zone.Stack, null);
     	return moveTo(stack, c);
@@ -2133,15 +2157,11 @@ public class GameAction {
      * @param c the card to be exiled
      */
     public void exile(Card c) {
-    	//removeFromGame(c);
     	if(AllZone.GameAction.isCardExiled(c)) return;
 
-    	PlayerZone zone = AllZone.getZone(c); //could be hand, grave, play, ...
     	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
 
-    	if (zone != null)	// for suspend
-    		zone.remove(c);
-    	if(!c.isToken()) removed.add(c);
+    	AllZone.GameAction.moveTo(removed, c);
     }
     
     //is this card a permanent that is in play?

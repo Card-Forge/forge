@@ -1574,24 +1574,12 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    
+
                     //get top 4 cards of the library
                     CardList top = new CardList();
                     Card[] library = libraryZone.getCards();
                     for(int i = 0; i < 4 && i < library.length; i++)
                         top.add(library[i]);
-                    
-                    //put top 4 cards on bottom of library
-                    for(int i = 0; i < top.size(); i++) {
-                        libraryZone.remove(top.get(i));
-                        libraryZone.add(top.get(i));
-                    }
-                    
-                    CardList typeLimitedTop = top.getType(typeToGet[0]);
-                    
-                    for(int i = 0; i < typeLimitedTop.size(); i++)
-                        AllZone.GameAction.moveTo(hand, typeLimitedTop.get(i));
                     
                     if (card.getController().equals(AllZone.ComputerPlayer))
                     {
@@ -1604,6 +1592,18 @@ public class CardFactory_Creatures {
                     	sb.append("</b></html>");
                     	JOptionPane.showMessageDialog(null, sb.toString(), "Computer reveals:", JOptionPane.INFORMATION_MESSAGE); 
                     }
+                    
+                    CardList typeLimitedTop = top.getType(typeToGet[0]);
+                    
+                    for(Card c : typeLimitedTop){
+                    	AllZone.GameAction.moveToHand(c);
+                    	top.remove(c);
+                    }
+                    
+                    for(Card c : top){
+                    	AllZone.GameAction.moveToBottomOfLibrary(c);
+                    }
+
                 }//resolve()
             };//SpellAbility
             
@@ -1678,21 +1678,8 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                    
-                    PlayerZone from = AllZone.getZone(card);
-                    from.remove(card);
-                    
-                    card.setController(card.getOwner().getOpponent());
-                    
-                    PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield,
-                            card.getOwner().getOpponent());
-                    to.add(card);
-                    Log.debug("Sleeper Agent", "cards controller = " + card.getController());
-                    
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                	// Todo: this need to be targeted
+                	AllZone.GameAction.changeController(new CardList(card), card.getController(), card.getController().getOpponent());
                 }
             };
             
@@ -2803,33 +2790,11 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	Player opp = card.getController().getOpponent();
-                    PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Battlefield, opp);
-                    PlayerZone myPlay = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
-                    CardList list = new CardList(myPlay.getCards());
-                    //list.remove(card);//doesn't move Sky Swallower
-                    
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.equals(card) && !c.getName().equals("Mana Pool");
-                        }
-                    });
-                    
-                    while(!list.isEmpty()) {
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        //so "enters the battlefield" abilities don't trigger
-                        ///list.get(0).addComesIntoPlayCommand(Command.Blank);
-                        
-                        oppPlay.add(list.get(0));
-                        myPlay.remove(list.get(0));
-                        
-                        list.get(0).setController(opp);
-                        list.remove(0);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
-                    }
+                    CardList list = AllZoneUtil.getCardsInPlay();
+                    list = list.getValidCards("Card.Other+YouCtrl".split(","),card.getController(), card);
+
+                    AllZone.GameAction.changeController(list, card.getController(), opp);
                 }//resolve()
             };//SpellAbility
             
@@ -3389,24 +3354,10 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        PlayerZone oldPlay = AllZone.getZone(getTargetCard());
-                        
-                        //so "enters the battlefield" abilities don't trigger
-                        //getTargetCard().addComesIntoPlayCommand(Command.Blank);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        
-                        play.add(getTargetCard());
-                        oldPlay.remove(getTargetCard());
-                        
-                        getTargetCard().setController(card.getController());
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                	Card tgt = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(tgt)
+                            && CardFactoryUtil.canTarget(card, tgt)) {
+                    	AllZone.GameAction.changeController(new CardList(tgt), tgt.getController(), card.getController());
                     }
                 }//resolve()
             };
@@ -3958,31 +3909,14 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    
                     Card crd0 = target[0];
                     Card crd1 = target[1];
                     
                     if(crd0 != null && crd1 != null) {
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        
-                        PlayerZone from0 = AllZone.getZone(crd0);
-                        from0.remove(crd0);
-                        PlayerZone from1 = AllZone.getZone(crd1);
-                        from1.remove(crd1);
-                        
-                        crd0.setController(card.getController().getOpponent());
-                        crd1.setController(card.getController());
-                        
-                        PlayerZone to0 = AllZone.getZone(Constant.Zone.Battlefield,
-                                card.getController().getOpponent());
-                        to0.add(crd0);
-                        PlayerZone to1 = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        to1.add(crd1);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                    	Player p0 = crd0.getController();
+                    	Player p1 = crd1.getController();
+                    	AllZone.GameAction.changeController(new CardList(crd0), p0, p1);
+                    	AllZone.GameAction.changeController(new CardList(crd1), p1, p0);
                     }
                     
                 }//resolve()
@@ -4229,7 +4163,7 @@ public class CardFactory_Creatures {
 				@Override
                 public void resolve() {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+
                     CardList Library = new CardList(lib.getCards());
                     int Count = 5;
                     if(Library.size() < 5) Count = Library.size();
@@ -5019,7 +4953,9 @@ public class CardFactory_Creatures {
                 }
             };//CommandReturn
             
-
+            final Player[] prevController = new Player[1];
+            prevController[0] = null;
+            
             final SpellAbility comesAbility = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -5027,6 +4963,7 @@ public class CardFactory_Creatures {
                     
                     Card c = getTargetCard();
                     movedCreature[0] = c;
+                    prevController[0] = c.getController();
                     
                     if(AllZone.GameAction.isCardInPlay(card) && AllZone.GameAction.isCardInPlay(c) && 
                     		CardFactoryUtil.canTarget(card, c)) {
@@ -5037,20 +4974,7 @@ public class CardFactory_Creatures {
                             c.setSickness(true);
                         }
                         
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        
-                        c.setSickness(true);
-                        c.setController(card.getController());
-                        
-                        PlayerZone from = AllZone.getZone(c);
-                        from.remove(c);
-                        
-                        PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        to.add(c);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                        AllZone.GameAction.changeController(new CardList(c), c.getController(), card.getController());
                     }
                 }//resolve()
             };//SpellAbility
@@ -5108,24 +5032,7 @@ public class CardFactory_Creatures {
                     Card c = movedCreature[0];
                     
                     if(AllZone.GameAction.isCardInPlay(c)) {
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        
-                        c.setSickness(true);
-                        c.setController(c.getController().getOpponent());
-                        
-                        PlayerZone from = AllZone.getZone(c);
-                        from.remove(c);
-                        
-                        //make sure the creature is removed from combat:
-                        CardList list = new CardList(AllZone.Combat.getAttackers());
-                        if(list.contains(c)) AllZone.Combat.removeFromCombat(c);
-                        
-                        PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-                        to.add(c);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                    	AllZone.GameAction.changeController(new CardList(c), c.getController(), prevController[0]);
                     }//if
                 }//execute()
             });//Command
@@ -7782,17 +7689,7 @@ public class CardFactory_Creatures {
                                 land.setSickness(true);
                             }
                             
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                            
-                            PlayerZone from = AllZone.getZone(land);
-                            from.remove(land);
-                            
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                            to.add(land);
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                            AllZone.GameAction.changeController(new CardList(land), land.getController(), card.getController());
                         }//if
                     }
                 }
