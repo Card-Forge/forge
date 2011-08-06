@@ -2,7 +2,7 @@ Name:Destructive Force
 ManaCost:5 R R
 Types:Sorcery
 Text:no text
-A:SP$Sacrifice | Cost$ 4 R R | Defined$ Each | SacValid$ Land | Amount$ 5 | SpellDescription$ Each player sacrifices five lands. CARDNAME deals 5 damage to each creature. | SubAbility$ SVar=DBDamage
+A:SP$ Sacrifice | Cost$ 4 R R | Defined$ Each | SacValid$ Land | Amount$ 5 | SpellDescription$ Each player sacrifices five lands. CARDNAME deals 5 damage to each creature. | SubAbility$ SVar=DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 5 | ValidCards$ Creature 
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

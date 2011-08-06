@@ -3,7 +3,7 @@ ManaCost:U U
 Types:Creature Illusion
 Text:no text
 PT:1/2
-A:AB$Counter | Cost$ U | Type$ Spell | SpellTarget$ Card.Self | SpellDescription$ Counter target spell that targets CARDNAME.
+A:AB$ Counter | Cost$ U | Type$ Spell | SpellTarget$ Card.Self | SpellDescription$ Counter target spell that targets CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistfolk.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/84.jpg

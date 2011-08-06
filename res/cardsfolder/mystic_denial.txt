@@ -2,7 +2,7 @@ Name:Mystic Denial
 ManaCost:1 U U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 1 U U | Type$ Spell | CounterValid$ Creature,Sorcery | SpellDescription$ Counter target creature or sorcery spell.
+A:SP$ Counter | Cost$ 1 U U | Type$ Spell | CounterValid$ Creature,Sorcery | SpellDescription$ Counter target creature or sorcery spell.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_denial.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/41.jpg

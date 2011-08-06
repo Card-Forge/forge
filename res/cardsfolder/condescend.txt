@@ -2,7 +2,7 @@ Name:Condescend
 ManaCost:X U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ X U | Type$ Spell | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays X.
+A:SP$ Counter | Cost$ X U | Type$ Spell | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays X.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Common

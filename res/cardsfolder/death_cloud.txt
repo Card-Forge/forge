@@ -2,7 +2,7 @@ Name:Death Cloud
 ManaCost:X B B B
 Types:Sorcery
 Text:no text
-A:SP$LoseLife | Cost$ X B B B | Defined$ Each | LifeAmount$ X | SpellDescription$ Each player loses X life, then discards X cards, then sacrifices X creatures, then sacrifices X lands. | SubAbility$ SVar=DBDiscard
+A:SP$ LoseLife | Cost$ X B B B | Defined$ Each | LifeAmount$ X | SpellDescription$ Each player loses X life, then discards X cards, then sacrifices X creatures, then sacrifices X lands. | SubAbility$ SVar=DBDiscard
 SVar:DBDiscard:DB$Discard | NumCards$ X | Mode$ TgtChoose | Defined$ Each | SubAbility$ SVar=DBSacCreature
 SVar:DBSacCreature:DB$Sacrifice | Amount$ X | SacValid$ Creature | Defined$ Each | SubAbility$ SVar=DBSacLand
 SVar:DBSacLand:DB$Sacrifice | Amount$ X | SacValid$ Land | Defined$ Each

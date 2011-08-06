@@ -2,7 +2,7 @@ Name:Annul
 ManaCost:U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ U | Type$ Spell | CounterValid$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell.
+A:SP$ Counter | Cost$ U | Type$ Spell | CounterValid$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/annul.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/29.jpg

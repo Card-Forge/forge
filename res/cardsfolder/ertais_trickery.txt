@@ -2,7 +2,7 @@ Name:Ertai's Trickery
 ManaCost:U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ U | Type$ Spell | CounterValid$ Card.kicked | SpellDescription$ Counter target spell if it was kicked.
+A:SP$ Counter | Cost$ U | Type$ Spell | CounterValid$ Card.kicked | SpellDescription$ Counter target spell if it was kicked.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ertais_trickery.jpg

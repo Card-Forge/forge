@@ -2,7 +2,7 @@ Name:Controvert
 ManaCost:2 U U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 2 U U | Type$ Spell | SpellDescription$ Counter target spell.
+A:SP$ Counter | Cost$ 2 U U | Type$ Spell | SpellDescription$ Counter target spell.
 K:Recover:2 U U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/controvert.jpg
