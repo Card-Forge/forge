@@ -1305,8 +1305,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         return eotCheckboxForMenu.isSelected();
     }   
     
-    public static JCheckBoxMenuItem eotCheckboxForMenu  = new JCheckBoxMenuItem("Stop at End of Turn", false);
-    public static JCheckBoxMenuItem playsoundCheckboxForMenu  = new JCheckBoxMenuItem("Play Sound", true);
+    public static JCheckBoxMenuItem eotCheckboxForMenu  = new JCheckBoxMenuItem("Stop at End of Turn", true);
+    public static JCheckBoxMenuItem playsoundCheckboxForMenu  = new JCheckBoxMenuItem("Play Sound", false);
     
     MultiSplitPane                  pane                = new MultiSplitPane();
     JButton                         cancelButton        = new JButton();
