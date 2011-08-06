@@ -222,7 +222,7 @@ public class TriggerHandler {
 		HashMap<String,String> trigParams = regtrig.getMapParams();
 		final Player[] decider = new Player[1];
 		final boolean isOptional = false;
-		
+
 		if(mode.equals(trigParams.get("Mode")))
 		{
 			if(!regtrig.performTest(runParams))
@@ -249,26 +249,32 @@ public class TriggerHandler {
 			{
 				sa[0].setStackDescription(sa[0].toString());
 			}
+			
+			boolean mand = false;
 			if(trigParams.containsKey("Optional"))
 			{				
 				if(trigParams.get("Optional").equals("True"))
 				{
 					decider[0] = host.getController();
+					mand = false;
 					if (sa[0].getTarget() != null)
 						sa[0].getTarget().setMandatory(false);
 				}
 				else if(trigParams.get("Optional").equals("OpponentDecides"))
 				{
+					mand = false;
 					decider[0] = host.getController().getOpponent();
 				}				
 			}
 			else
 			{
+				mand = true;
 				if(sa[0].getTarget() != null)
 				{
 					sa[0].getTarget().setMandatory(true);
 				}
 			}
+			final boolean isMandatory = mand;
 
 			//Wrapper ability that checks the requirements again just before resolving, for intervening if clauses.
 			//Yes, it must wrap ALL SpellAbility methods in order to handle possible corner cases.
@@ -761,8 +767,7 @@ public class TriggerHandler {
 					}
 					else
 					{
-						final boolean mandatory = sa[0].getTarget().getMandatory();
-						sa[0].doTrigger(mandatory);
+						sa[0].doTrigger(isMandatory);
 						ComputerUtil.playNoStack(sa[0]);
 					}
 				}
@@ -775,7 +780,7 @@ public class TriggerHandler {
 			}
 			else
 			{
-				wrapperAbility.canPlayAI();
+				wrapperAbility.doTrigger(isMandatory);
 				ComputerUtil.playStack(wrapperAbility);
 			}
 		}
