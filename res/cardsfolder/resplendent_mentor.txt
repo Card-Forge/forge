@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Kithkin Cleric
 Text:no text
 PT:2/2
-K:stPumpAll:Creature.White+YouCtrl:0/0/SVar=GainLife:no Condition:White creatures you control have "T: You gain 1 life."
+K:stPumpAll:Creature.White+YouCtrl:0/0/SVar=GainLife:no Condition:White creatures you control have "Tap: You gain 1 life."
 SVar:GainLife:AB$GainLife | Cost$ T | LifeAmount$ 1 | Defined$ You | SpellDescription$ You gain 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resplendent_mentor.jpg

@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Sliver
 Text:no text
 PT:2/2
-K:stPumpAll:Sliver:0/0/SVar=Regen:no Condition:All Slivers have "2, T, Regenerate target Sliver."
+K:stPumpAll:Sliver:0/0/SVar=Regen:no Condition:All Slivers have "2, Tap, Regenerate target Sliver."
 SVar:Regen:AB$Regenerate | Cost$ 2 T | ValidTgts$ Sliver | TgtPrompt$ Select a target Sliver. | SpellDescription$ Regenerate a target Sliver.
 SVar:RemAIDeck:True
 SVar:BuffedBy:Sliver
