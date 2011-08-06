@@ -2769,6 +2769,8 @@ public class CardFactoryUtil
         return (int) (Math.ceil(num / 2));
      else if (s[0].contains("HalfDown"))
         return (int) (Math.floor(num / 2));
+     else if (s[0].contains("Negative")) // 2/10
+    	 return (int) num * -1;
     
      return num;
   }
