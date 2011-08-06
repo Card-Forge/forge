@@ -6436,6 +6436,7 @@ res/cardsfolder/spectral_searchlight.txt -text svneol=native#text/plain
 res/cardsfolder/spectral_shield.txt svneol=native#text/plain
 res/cardsfolder/spectral_sliver.txt svneol=native#text/plain
 res/cardsfolder/spell_blast.txt svneol=native#text/plain
+res/cardsfolder/spell_burst.txt -text svneol=native#text/plain
 res/cardsfolder/spell_contortion.txt -text svneol=native#text/plain
 res/cardsfolder/spell_pierce.txt -text svneol=native#text/plain
 res/cardsfolder/spell_snare.txt -text svneol=native#text/plain
