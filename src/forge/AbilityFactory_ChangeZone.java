@@ -462,8 +462,13 @@ public class AbilityFactory_ChangeZone {
         		c.tap();
         }
         
-        if (!destination.equals("Battlefield") && !type.equals("Card")) 
-        	AllZone.Display.getChoice(af.getHostCard().getName() + " - Computer picked:", fetched.toArray());
+        if (!destination.equals("Battlefield") && !type.equals("Card")){
+        	String picked = af.getHostCard().getName() + " - Computer picked:";
+        	if (fetched.size() > 0)
+        		AllZone.Display.getChoice(picked, fetched.toArray());
+        	else
+        		AllZone.Display.getChoice(picked, new String[]{ "<Nothing>" } );
+        }
         
 		String DrawBack = params.get("SubAbility");
         
