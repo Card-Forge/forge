@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoid_shepherd.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/73.jpg
 End

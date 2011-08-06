@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature+YouCtrl | Cost$ 0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paleoloth.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/88.jpg
 End

@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.Other+YouCtrl | Cost$ 0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/junk_diver.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/132.jpg
 End

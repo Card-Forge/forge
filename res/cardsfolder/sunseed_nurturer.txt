@@ -8,4 +8,5 @@ A:AB$Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:TrigLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunseed_nurturer.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/29.jpg
 End

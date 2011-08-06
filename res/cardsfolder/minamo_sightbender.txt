@@ -8,4 +8,5 @@ SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_sightbender.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/41.jpg
 End

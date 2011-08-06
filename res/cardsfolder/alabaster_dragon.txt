@@ -7,4 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Optional$ T
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_dragon.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/118.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/163.jpg
 End

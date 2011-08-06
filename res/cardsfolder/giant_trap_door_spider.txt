@@ -8,4 +8,5 @@ SVar:ExileME:DB$ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_trap_door_spider.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/371.jpg
 End

@@ -8,4 +8,5 @@ A:AB$PumpAll | Cost$ 1 G | ValidCards$ Creature | NumAtt$ -1 | IsCurse$ True | S
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_pollen.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/133.jpg
 End

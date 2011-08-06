@@ -6,4 +6,5 @@ A:SP$ChangeZone | Cost$ X B | Origin$ Graveyard | Destination$ Battlefield | Tgt
 SVar:X:Targeted$CardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stir_the_grave.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/85.jpg
 End
