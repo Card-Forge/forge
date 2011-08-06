@@ -1746,6 +1746,7 @@ Ashenmoor Cohort
 Creature Elemental Warrior
 Ashenmoor Cohort gets +1/+1 as long as you control another black creature.
 4/3
+SVar:BuffedBy:Creature.Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashenmoor_cohort.jpg
 
@@ -2285,6 +2286,7 @@ Creature Kithkin Soldier
 Ballynock Cohort gets +1/+1 as long as you control another white creature.
 2/2
 First Strike
+SVar:BuffedBy:Creature.White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_cohort.jpg
 
@@ -2361,6 +2363,7 @@ GU W
 Creature Human Soldier
 As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.
 2/1
+SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sureblade.jpg
 
@@ -4012,6 +4015,7 @@ Creature Faerie Soldier
 Briarberry Cohort gets +1/+1 as long as you control another blue creature.
 1/1
 Flying
+SVar:BuffedBy:Creature.Blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarberry_cohort.jpg
 
@@ -6045,6 +6049,7 @@ Crabapple Cohort
 Creature Treefolk Warrior
 Crabapple Cohort gets +1/+1 as long as you control another green creature.
 4/4
+SVar:BuffedBy:Creature.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crabapple_cohort.jpg
 
@@ -6557,6 +6562,7 @@ Dakkon Blackblade
 Legendary Creature Human Warrior
 Dakkon Blackblade's power and toughness are each equal to the number of lands you control.
 1/1
+SVar:BuffedBy:Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakkon_blackblade.jpg
 
@@ -9173,6 +9179,7 @@ WB U
 Artifact Creature Vedalken Wizard
 As long as you control another multicolored permanent, Esper Stormblade gets +1/+1 and has flying.
 2/1
+SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_stormblade.jpg
 
@@ -9515,6 +9522,7 @@ Faceless Butcher
 Creature Nightmare Horror
 When Faceless Butcher comes into play, remove target creature other than Faceless Butcher from the game. -- When Faceless Butcher is destroyed, return the removed card to play under its owner's control.
 2/3
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
 
@@ -9549,6 +9557,7 @@ Creature Faerie
 Faerie Swarm's power and toughness are each equal to the number of blue permanents you control.
 1/1
 Flying
+SVar:BuffedBy:Permanent.Blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg
 
@@ -12926,6 +12935,7 @@ UR B
 Creature Zombie Warrior
 As long as you control another multicolored permanent, Grixis Grimblade gets +1/+1 and has deathtouch.
 2/1
+SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_grimblade.jpg
 
@@ -13164,7 +13174,7 @@ W
 Creature Human Soldier Ally
 Whenever Hada Freeblade or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Hada Freeblade.
 0/1
-SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hada_freeblade.jpg
 
@@ -15626,6 +15636,7 @@ BG R
 Creature Goblin Berserker
 As long as you control another multicolored permanent, Jund Hackblade gets +1/+1 and has haste.
 2/1
+SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_hackblade.jpg
 
@@ -16394,6 +16405,7 @@ no text
 2/3
 Bushido 1
 WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:When Kitsune Dawnblade enters the battlefield, you may tap target creature.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_dawnblade.jpg
 
@@ -16711,6 +16723,7 @@ Legendary Creature Zombie Warrior
 Korlash, Heir to Blackblade's power and toughness are each equal to the number of Swamps you control. 
 1/1
 RegenerateMe:1 B
+SVar:BuffedBy:Swamp
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136208.jpg
 
@@ -19800,6 +19813,7 @@ Creature Goblin Warrior
 Mudbrawler Cohort gets +1/+1 as long as you control another red creature.
 1/1
 Haste
+SVar:BuffedBy:Creature.Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_cohort.jpg
 
@@ -20160,6 +20174,7 @@ RW G
 Creature Elf Rogue
 As long as you control another multicolored permanent, Naya Hushblade gets +1/+1 and has shroud.
 2/1
+SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_hushblade.jpg
 
@@ -27692,6 +27707,7 @@ Creature Kithkin Wizard
 no text
 2/1
 WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:When Somnomancer enters the battlefield, you may tap target creature.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somnomancer.jpg
 
