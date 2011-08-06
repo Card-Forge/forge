@@ -1,0 +1,9 @@
+Name:Seismic Mage
+ManaCost:3 R
+Types:Creature Human Spellshaper
+Text:no text
+PT:1/1
+K:abDestroyTgtV 2 R T Discard<1/Any>:Land:Destroy target land.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_mage.jpg
+End
