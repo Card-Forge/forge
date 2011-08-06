@@ -3601,6 +3601,9 @@ public class CardFactoryUtil {
         if(sq[0].contains("CardToughness")) return doXMath(c.getNetDefense(), m);
         // Count$CardManaCost
         if(sq[0].contains("CardManaCost")) return doXMath(CardUtil.getConvertedManaCost(c), m);
+        // Count$CardCounters.<counterType>
+        if (sq[0].contains("CardCounters"))
+        	return doXMath(c.getCounters(Counters.getType(sq[1])), m);
         
         //Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase"))
