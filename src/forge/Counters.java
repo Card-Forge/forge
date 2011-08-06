@@ -16,6 +16,7 @@ package forge;
 public enum Counters {
     AGE(),
     ARROW(),
+    ARROWHEAD(),
     BLAZE(),
     BLOOD(),
     BOUNTY(),
@@ -59,6 +60,7 @@ public enum Counters {
     MINING(),
     MIRE(),
     OMEN(),
+    ORE(),
     PAGE(),
     PETAL(),
     PRESSURE(),
