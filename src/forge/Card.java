@@ -948,6 +948,17 @@ public class Card extends MyObservable {
                 }
             }
             
+            // Chapmion
+            if(!sb.toString().contains("Champion")) for(int i = 0; i < getKeyword().size(); i++) {
+                String k = getKeyword().get(i);
+                if(k.startsWith("Champion")) {
+                    String kk[] = k.split(":");
+                    sb.append("Champion a(n) ");
+                    sb.append(kk[1]);
+                    sb.append(" (When this enters the battlefield, sacrifice it unless you exile another "+kk[1]+" you control. When this leaves the battlefield, that card returns to the battlefield.)\r\n");
+                }
+            }
+            
             
             while (sb.toString().endsWith("\r\n")) {
                 sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);

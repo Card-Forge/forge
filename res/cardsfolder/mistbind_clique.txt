@@ -1,0 +1,11 @@
+Name:Mistbind Clique
+ManaCost:3 U
+Types:Creature Faerie Wizard
+Text:Champion a Faerie (When this enters the battlefield, sacrifice it unless you exile another Faerie you control. When this leaves the battlefield, that card returns to the battlefield.)\r\n\r\nWhen a Faerie is championed with CARDNAME, tap all lands target player controls.
+PT:4/4
+K:Flash
+K:Flying
+K:Champion:Faerie
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mistbind_clique.jpg
+End

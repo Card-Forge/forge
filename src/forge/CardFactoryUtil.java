@@ -2398,6 +2398,11 @@ public class CardFactoryUtil {
                         AllZone.Stack.add(spell);
                         stop();
                     } else stopSetNext(new Input_PayManaCost(spell));
+                    //TODO - needs to be targeted
+                    if(crd.getName().equals("Mistbind Clique")) {
+                    	CardList list = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
+                    	for(Card c:list) c.tap();
+                    }
                 }
             }//selectCard()
         };
