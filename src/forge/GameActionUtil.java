@@ -7353,54 +7353,6 @@ public class GameActionUtil {
 
 	}; //Sound_the_Call_Wolf
 
-	public static Command Svogthos_the_Restless_Tomb  = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Svogthos, the Restless Tomb");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				int x = 0;
-				if(c.getController() == AllZone.HumanPlayer) x = countCreatures_Hum();
-				else x = countCreatures_Comp();
-				if(c.isCreature()) {
-					c.setBaseAttack(x);
-					c.setBaseDefense(x);
-				}
-			}
-		}
-
-		private int countCreatures_Comp() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature();
-				}
-			});
-			return list.size();
-		}
-
-		private int countCreatures_Hum() {
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(humGrave.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature();
-				}
-			});
-			return list.size();
-		}
-
-	}; //Svogthos, the Restless Tomb
-
 	public static Command Tarmogoyf                   = new Command() {
 		private static final long serialVersionUID = 5895665460018262987L;
 
@@ -8042,7 +7994,6 @@ public class GameActionUtil {
 		commands.put("Plague_Rats", Plague_Rats);
 		
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
 		commands.put("Tarmogoyf", Tarmogoyf);
 		

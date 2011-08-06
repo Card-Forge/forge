@@ -342,57 +342,6 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
         }
         //*************** END ************ END **************************
-
-       
-        //*************** START *********** START **************************
-        else if(cardName.equals("Svogthos, the Restless Tomb")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "3 B G") {
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone compGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-                    CardList list = new CardList();
-                    list.addAll(compGrave.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature();
-                        }
-                    });
-                    return ((list.size() > 0) & !card.getType().contains("Creature")) && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Creature", "Zombie", "Plant" };
-                    String[] keywords = {  };
-
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "B G");
-
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = -8535770979347971863L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-                            String[] types = { "Creature", "Zombie", "Plant" };
-                            String[] keywords = {  };
-
-                            CardFactoryUtil.revertManland(c, types, keywords, "B G", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" becomes a black and green Plant Zombie creature with power and toughness each equal to the number of creature cards in your graveyard until EOT");
-            a1.setStackDescription(sb.toString());            
-            a1.setDescription("3 B G: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with This creature's power and toughness are each equal to the number of creature cards in your graveyard. It's still a land.");
-        }//*************** END ************ END **************************
         
  
         //*************** START *********** START **************************

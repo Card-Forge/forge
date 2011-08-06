@@ -2,6 +2,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Arrays;
 
 public class AbilityFactory_Animate {
@@ -87,6 +88,7 @@ public class AbilityFactory_Animate {
 	private static String animateStackDescription(final AbilityFactory af, SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
 		Card host = af.getHostCard();
+		Hashtable<String,String> svars = host.getSVars();
 
 		int power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
 		int toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
@@ -96,6 +98,14 @@ public class AbilityFactory_Animate {
 		if(params.containsKey("Types")) types.addAll(Arrays.asList(params.get("Types").split(",")));
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
+		//allow SVar substitution for keywords
+		for(int i = 0; i < keywords.size(); i++) {
+			String k = keywords.get(i);
+			if(svars.containsKey(k)) {
+				keywords.add("\""+k+"\"");
+				keywords.remove(k);
+			}
+		}
 		ArrayList<String> colors = new ArrayList<String>();
 		if(params.containsKey("Colors")) colors.addAll(Arrays.asList(params.get("Colors").split(",")));
 
@@ -232,6 +242,7 @@ public class AbilityFactory_Animate {
 		Card source = sa.getSourceCard();
 		Card host = af.getHostCard();
 		String db = params.get("SubAbility");
+		Hashtable<String,String> svars = host.getSVars();
 
 		//AF specific params
 		int power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
@@ -244,6 +255,14 @@ public class AbilityFactory_Animate {
 		
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
+		//allow SVar substitution for keywords
+		for(int i = 0; i < keywords.size(); i++) {
+			String k = keywords.get(i);
+			if(svars.containsKey(k)) {
+				keywords.add(svars.get(k));
+				keywords.remove(k);
+			}
+		}
 		
 		ArrayList<String> colors = new ArrayList<String>();
 		if(params.containsKey("Colors")) colors.addAll(Arrays.asList(params.get("Colors").split(",")));
