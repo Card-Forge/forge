@@ -17404,48 +17404,62 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
-        else if(cardName.equals("Crumble")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 4752943254606319269L;
-               
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        //add life
-                        String player = getTargetCard().getController();
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.addLife(CardUtil.getConvertedManaCost(getTargetCard()));
-                       
-                        //remove card from play
-                        AllZone.GameAction.removeFromGame(getTargetCard());
-                    }
-                }//resolve()
-               
-                @Override
-                public boolean canPlayAI() {
-                    CardList artifacts = new CardList(AllZone.Human_Play.getCards());
-                    artifacts = artifacts.getType("Artifact");
-                    artifacts = artifacts.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-                    return artifacts.size() != 0 && (AllZone.Phase.getTurn() > 4);
-                }
-               
-                @Override
-                public void chooseTargetAI() {
-                    CardList play = new CardList(AllZone.Human_Play.getCards());
-                    Card target = CardFactoryUtil.AI_getBestArtifact(play);
-                    if(target != null) setTargetCard(target);
-                }
-            };
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Artifact"));
-           
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
+        //*************** START *********** START **************************
+        else if(cardName.equals("Crumble") || cardName.equals("Divine Offering")) {
+        	/*
+        	 * Destroy target artifact. It can't be regenerated. That artifact's controller 
+        	 * gains life equal to its converted mana cost.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = 4752943254606319269L;
+
+        		@Override
+        		public void resolve() {
+        			Card target = getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(target)
+        					&& CardFactoryUtil.canTarget(card, target)) {
+        				//add life
+        				String player;
+        				if(cardName.equals("Crumble")) {
+        					player = target.getController();
+        				}
+        				else {
+        					player = card.getController();
+        				}
+        				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+        				life.addLife(CardUtil.getConvertedManaCost(target));
+
+        				if(cardName.equals("Crumble")) {
+        					AllZone.GameAction.destroyNoRegeneration(target);
+        				}
+        				else { //Divine Offering
+        					AllZone.GameAction.destroy(target);
+        				}                     
+        			}
+        		}//resolve()
+
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList artifacts = new CardList(AllZone.Human_Play.getCards());
+        			artifacts = artifacts.getType("Artifact");
+        			artifacts = artifacts.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return CardFactoryUtil.canTarget(card, c);
+        				}
+        			});
+        			return artifacts.size() != 0 && (AllZone.Phase.getTurn() > 4);
+        		}
+
+        		@Override
+        		public void chooseTargetAI() {
+        			CardList play = new CardList(AllZone.Human_Play.getCards());
+        			Card target = CardFactoryUtil.AI_getBestArtifact(play);
+        			if(target != null) setTargetCard(target);
+        		}
+        	};
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Artifact"));        
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
         

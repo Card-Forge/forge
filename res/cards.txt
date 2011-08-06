@@ -1,3 +1,8 @@
+Divine Offering
+1 W
+Instant
+Destroy target artifact. You gain life equal to its converted mana cost.
+
 Argothian Pixies
 1 G
 Creature Faerie
