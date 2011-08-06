@@ -72,6 +72,14 @@ public interface NewConstants {
         public static final String UNCOMMON = "regular/uncommon";
         public static final String RARE     = "regular/rare";
     }
+    /**
+     * properties for booster draft
+     */
+    public static interface DRAFT {
+    	public static final String COMMON 	= "draft/common";
+    	public static final String UNCOMMON = "draft/uncommon";
+        public static final String RARE     = "draft/rare";
+    }
     
     /**
      * properties for quest game

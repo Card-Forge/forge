@@ -68,7 +68,7 @@ class BoosterDraft_1 implements BoosterDraft
       new CardList(),
       new CardList(),
     };
-    ReadBoosterPack pack = new ReadBoosterPack();
+    ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
 
     for(int i = 0; i < list.length; i++)
       list[i].addAll(pack.getBoosterPack().toArray());
@@ -110,7 +110,7 @@ class BoosterDraftTest implements BoosterDraft
   public CardList nextChoice()
   {
     n--;
-    ReadBoosterPack pack = new ReadBoosterPack();
+    ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
     return pack.getBoosterPack();
   }
   public void setChoice(Card c) {System.out.println(c.getName());}

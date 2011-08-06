@@ -183,7 +183,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
     
     private void jbInit() throws Exception {
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
-                "Previous Picked Cards");
+                "Previously Picked Cards");
         titledBorder2 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "Choose one card");
         border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
@@ -424,7 +424,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         deckModel.clear();
         
         Card c;
-        ReadBoosterPack pack = new ReadBoosterPack();
+        ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
         for(int i = 0; i < deck.countMain(); i++) {
             c = AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human);
             
@@ -498,7 +498,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
     private void showChoices(CardList list) {
         allCardModel.clear();
         
-        ReadBoosterPack pack = new ReadBoosterPack();
+        ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
         Card c;
         for(int i = 0; i < list.size(); i++) {
             c = list.get(i);

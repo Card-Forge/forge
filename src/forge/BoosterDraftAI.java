@@ -46,7 +46,7 @@ public class BoosterDraftAI
   //throws Exception if error
   public void runTest(BoosterDraftAI ai)
   {
-    ReadBoosterPack booster = new ReadBoosterPack();
+    ReadDraftBoosterPack booster = new ReadDraftBoosterPack();
     for(int outer = 0; outer < 1; outer++)
     {
       CardList allBooster = new CardList();
