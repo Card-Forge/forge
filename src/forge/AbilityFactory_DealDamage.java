@@ -131,19 +131,17 @@ import java.util.Random;
         }
        
         private Card chooseTgtC(final int d, final boolean noPrevention) {
-           
-            PlayerZone human = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-            CardList hPlay = new CardList(human.getCards());
+           CardList hPlay = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+        	hPlay = hPlay.getValidCards(AF.getAbTgt().getValidTgts(), AllZone.ComputerPlayer, AF.getHostCard());
+
             hPlay = hPlay.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
                 	int restDamage = d;
                 	if (!noPrevention)
                 		restDamage = c.staticDamagePrevention(d,AF.getHostCard(),false);
                     // will include creatures already dealt damage
-                    return c.isCreature() && (c.getKillDamage() <= restDamage)
-                            && CardFactoryUtil.canTarget(AF.getHostCard(), c)
-                            && !c.getKeyword().contains("Indestructible")
-                            && !(c.getSVar("SacMe").length() > 0);
+                    return c.getKillDamage() <= restDamage && CardFactoryUtil.canTarget(AF.getHostCard(), c)
+                            && !c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
                 }
             });
            
@@ -151,14 +149,6 @@ import java.util.Random;
                 Card best = CardFactoryUtil.AI_getBestCreature(hPlay);
                 return best;
             }
-            
-            // Combo alert!! Casting burn on your own Stuffy Dolls is a waste
-            /*
-            PlayerZone compy = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-            CardList cPlay = new CardList(compy.getCards());
-            if(cPlay.size() > 0) for(int i = 0; i < cPlay.size(); i++)
-                if(cPlay.get(i).getName().equals("Stuffy Doll")) return cPlay.get(i);
-             */
             
             return null;
         }
@@ -188,7 +178,7 @@ import java.util.Random;
 
           // TODO handle proper calculation of X values based on Cost
            
-           // todo: this should only happen during Players EOT
+           // todo: this should only happen during Players EOT or if Stuffy is going to die
            if(AF.getHostCard().equals("Stuffy Doll")) {
         	   return true;
            }
