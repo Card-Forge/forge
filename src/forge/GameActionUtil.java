@@ -183,9 +183,7 @@ public class GameActionUtil {
         playCard_Enchantress_Draw(c);
         playCard_Mold_Adder(c);
         playCard_Fable_of_Wolf_and_Owl(c);
-        
-        
-        
+        playCard_Kor_Firewalker(c);       
     }
     
     public static void playCard_Cascade(Card c) {
@@ -2045,6 +2043,42 @@ public class GameActionUtil {
         }//if
     }//Fable
     
+    public static void playCard_Kor_Firewalker(Card c) {
+        
+        final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+                Constant.Player.Human);
+        final PlayerZone comp = AllZone.getZone(Constant.Zone.Play,
+                Constant.Player.Computer);
+        
+        CardList list = new CardList();
+        list.addAll(play.getCards());
+        list.addAll(comp.getCards());
+
+        list = list.getName("Kor Firewalker");
+
+        if (list.size() > 0){
+            ArrayList<String> cl=CardUtil.getColors(c);
+            if (cl.contains(Constant.Color.Red))
+            {
+                    for (int i=0;i<list.size();i++)
+                    {
+                        final Card card = list.get(i);                  
+                        Ability ability2 = new Ability(card, "0")
+                        {
+                            public void resolve()
+                            {
+                                AllZone.GameAction.getPlayerLife(card.getController()).addLife(1);                      
+                            } //resolve
+                        };   //ability
+                        ability2.setStackDescription(card.getName() + " - "
+                                + c.getController() + " played a Red spell," + card.getController()+" gains 1 life.");
+                        AllZone.Stack.add(ability2);
+                    }
+                }//if
+            }                   
+
+    }//Kor Firewalker
+
 
     public static void executeDrawCardTriggeredEffects(String player) {
         drawCardTriggered_Niv_Mizzet(player);
