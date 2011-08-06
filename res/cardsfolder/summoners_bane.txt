@@ -6,5 +6,5 @@ A:SP$Counter | Cost$ 2 U U | ValidCard$ Creature | Destination$ Graveyard | SubA
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Illusion | TokenTypes$ Creature,Illusion | TokenOwner$ Controller | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ B 2 2 Illusion
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summoners_bane.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/71.jpg
 End
-

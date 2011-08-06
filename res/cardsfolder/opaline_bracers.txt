@@ -8,4 +8,5 @@ K:Sunburst
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opaline_bracers.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/141.jpg
 End

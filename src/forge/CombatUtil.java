@@ -754,8 +754,7 @@ public class CombatUtil {
     
     public static void showCombat() {
         AllZone.Display.showCombat("");
-        
-        Card attack[] = AllZone.Combat.getAttackers();
+
         Card defend[] = null;
         StringBuilder display = new StringBuilder();
         
@@ -775,18 +774,19 @@ public class CombatUtil {
         	display.append("Defender - ");
         	display.append(defenders.get(def).toString());
         	display.append("\n");
-        		
-        	int len = attackers[def].size();
-	        //loop through attackers
-	        for(int i = 0; i < len; i++) {
+        	
+        	CardList list = attackers[def];
+        	
+        	for(Card c : list){
+        		//loop through attackers
 	            display.append("-> ");
-	        	display.append(combatantToString(attack[i])).append("\n");
+	        	display.append(combatantToString(c)).append("\n");
 	
-	            defend = AllZone.Combat.getBlockers(attack[i]).toArray();
+	            defend = AllZone.Combat.getBlockers(c).toArray();
 	            
 	            //loop through blockers
 	            for(int inner = 0; inner < defend.length; inner++) {
-	                display.append("---< ");
+	                display.append(" [ ");
 	                display.append(combatantToString(defend[inner])).append("\n"); 
 	            }
 	        }//loop through attackers

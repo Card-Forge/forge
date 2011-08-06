@@ -426,41 +426,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Mudbutton Torchrunner")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if(getTargetCard() != null
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(3, card);
-                    else getTargetPlayer().addDamage(3, card);
-                }
-            };
-            Command leavesPlay = new Command() {
-                private static final long serialVersionUID = 2740098107360213191L;
-                
-                public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(
-                            ability, true, false));
-                    else {
-                        CardList list = CardFactoryUtil.AI_getHumanCreature(3, card, true);
-                        CardListUtil.sortAttack(list);
-                        
-                        if(MyRandom.percentTrue(50)) CardListUtil.sortFlying(list);
-                        
-                        for(int i = 0; i < list.size(); i++)
-                            if(2 <= list.get(i).getNetAttack()) ability.setTargetCard(list.get(i));
-                        
-                        if(ability.getTargetCard() == null) ability.setTargetPlayer(AllZone.HumanPlayer);
-                        
-                        AllZone.Stack.add(ability);
-                    }
-                }//execute()
-            };//Command
-            card.addDestroyCommand(leavesPlay);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Crater Hellion")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override

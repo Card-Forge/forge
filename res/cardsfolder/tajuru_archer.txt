@@ -3,10 +3,11 @@ ManaCost:2 G
 Types:Creature Elf Archer Ally
 Text:no text
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control,
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | Optional$ True | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ you may have CARDNAME deal damage to target creature with flying equal to the number of Allies you control.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.withFlying | NumDmg$ NumAllies | TgtPrompt$ Select a target creature with flying.
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_archer.jpg
 SVar:Rarity:Uncommon
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/185.jpg
 End
