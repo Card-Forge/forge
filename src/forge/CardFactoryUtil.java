@@ -3345,6 +3345,8 @@ public class CardFactoryUtil {
         
         if (target.getName().equals("Gaea's Revenge") && !spell.isGreen()) return false;
         
+        if(hasProtectionFrom(spell,target)) return false;
+        
         if(target.getKeyword() != null) {
             ArrayList<String> list = target.getKeyword();
             
@@ -3361,6 +3363,7 @@ public class CardFactoryUtil {
                     if(spell.isAura()) return false;
                 }
                 
+                /* taken care of by hasProtectionFrom
                 if(kw.equals("Protection from white") && spell.isWhite()) return false;
                 if(kw.equals("Protection from blue") && spell.isBlue()) return false;
                 if(kw.equals("Protection from black") && spell.isBlack()) return false;
@@ -3386,6 +3389,7 @@ public class CardFactoryUtil {
                 
                 if(kw.equals("Protection from colored spells") && (spell.isInstant() || spell.isSorcery() || spell.isAura() ) &&
                    isColored(spell)) return false;
+                */
             }
         }
         return true;
@@ -3422,7 +3426,13 @@ public class CardFactoryUtil {
                 if(kw.equals("Protection from artifacts") && card.isArtifact() && 
                 		!card.getName().contains("Artifact Ward")) return true;
                 
+                if(kw.equals("Protection from enchantments") && card.getType().contains("Enchantment") && 
+                		!card.getName().contains("Tattoo Ward")) return true;
+                
                 if(kw.equals("Protection from everything")) return true;
+                
+                if(kw.equals("Protection from colored spells") && (card.isInstant() || card.isSorcery() || card.isAura() ) &&
+                        isColored(card)) return true;
                 
                 if(kw.equals("Protection from Dragons")
                         && (card.getType().contains("Dragon") || card.getKeyword().contains("Changeling"))) return true;
@@ -3433,8 +3443,6 @@ public class CardFactoryUtil {
                 if(kw.equals("Protection from Clerics")
                         && (card.getType().contains("Cleric") || card.getKeyword().contains("Changeling"))) return false;
                 
-                if(kw.equals("Protection from enchantments") && card.getType().contains("Enchantment") && 
-                		!card.getName().contains("Tattoo Ward")) return true;
             }
         }
         return false;
@@ -3445,12 +3453,16 @@ public class CardFactoryUtil {
         //and also combat damage?
         ArrayList<String> list = receiver.getKeyword();
         
+        if(hasProtectionFrom(spell,receiver)) return false;
+        
         String kw = "";
         for(int i = 0; i < list.size(); i++) {
             kw = list.get(i);
             
             if(kw.equals("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
             		&& spell.isCreature() && spell.isArtifact()) return false;
+            
+            /* taken care of by hasProtectionFrom
             if(kw.equals("Protection from white") && spell.isWhite()) return false;
             if(kw.equals("Protection from blue") && spell.isBlue()) return false;
             if(kw.equals("Protection from black") && spell.isBlack()) return false;
@@ -3475,6 +3487,7 @@ public class CardFactoryUtil {
             if(kw.equals("Protection from everything")) return false;
             
             if(kw.equals("Protection from colored spells") && !spell.isPermanent() && isColored(spell) ) return false;
+            */
         }
         
         return true;

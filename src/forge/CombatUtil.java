@@ -17,7 +17,7 @@ public class CombatUtil {
         
         if(attacker == null || blocker == null) return false;
         
-        if(!canBlockProtection(attacker, blocker)) return false;
+        if(CardFactoryUtil.hasProtectionFrom(attacker,blocker)) return false;
         
         //rare case:
         if(blocker.getKeyword().contains("Shadow")
@@ -838,12 +838,14 @@ public class CombatUtil {
     	}//canDamage
     }
     
+    /*no longer needed
     private static boolean canBlockProtection(Card attacker, Card blocker) {
         ArrayList<String> list = attacker.getKeyword();
         
         String kw = "";
         for(int i = 0; i < list.size(); i++) {
             kw = list.get(i);
+            
             
             if(kw.equals("Protection from creatures") || kw.equals("Protection from everything")) return false;
             if(kw.equals("Protection from artifacts") && blocker.isArtifact()) return false;
@@ -864,6 +866,7 @@ public class CombatUtil {
         }
         return true;
     }
+    */
     
     public static boolean isDoranInPlay() {
         CardList all = new CardList();
