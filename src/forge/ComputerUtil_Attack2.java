@@ -255,10 +255,12 @@ import java.util.*;
         
                 //if attacker can destroy biggest blocker or
                 //biggest blocker cannot destroy attacker
-            	if (bigDef.equals(null)) {combat.addAttacker(attackers.get(i));}
+            	if (bigDef == null) {
+            		combat.addAttacker(attackers.get(i));
+            	}
             	else if ( (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)) ||
-                   (! CombatUtil.canDestroyAttacker(attackers.get(i), bigAtt))) &&
-                      totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() ){
+            			( bigAtt != null && !CombatUtil.canDestroyAttacker(attackers.get(i), bigAtt) ) ) &&
+            			totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() ){
                    combat.addAttacker(attackers.get(i));
                 }
                 else if(attackers.get(i).getSacrificeAtEOT()){
@@ -270,7 +272,7 @@ import java.util.*;
     return combat;
   }//getAttackers()
 
-  //returns 0/1 Card if no blockers found
+  //returns null if no blockers found
   public Card getBiggestAttack(Card attack)
   {
     CardListUtil.sortAttack(blockers);
@@ -278,10 +280,10 @@ import java.util.*;
       if(CombatUtil.canBlock(attack, blockers.get(i)))
         return blockers.get(i);
 
-    return AllZone.CardFactory.getCard("Birds of Paradise", null);
+    return null;
   }
 
-  //returns 1/1 Card if no blockers found
+  //returns null if no blockers found
   public Card getBiggestDefense(Card attack)
   {
     CardListUtil.sortDefense(blockers);
@@ -289,7 +291,7 @@ import java.util.*;
       if(CombatUtil.canBlock(attack, blockers.get(i)))
         return blockers.get(i);
 
-    return AllZone.CardFactory.getCard("Elvish Piper", null);
+    return null;
   }
 
        public int countExaltedBonus(Player player)
