@@ -17207,6 +17207,8 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Qasali Pridemage")) {
             final Ability ability = new Ability(card, "1") {
@@ -17280,6 +17282,8 @@ public class CardFactory_Creatures {
             });
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Viridian Zealot")) {

@@ -1,9 +1,9 @@
 Name:King Suleiman
 ManaCost:1 W
 Types:Creature Human
-Text:tap: Destroy target Djinn or Efreet.
+Text:no text
 PT:1/1
-K:abTapDestroyTgt:Creature.Djinn,Creature.Efreet
+K:abDestroyTgtV T:Djinn,Efreet:Destroy target Djinn or Efreet.
 K:SVars:Rarity:Rare
 K:SVars:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
 End
