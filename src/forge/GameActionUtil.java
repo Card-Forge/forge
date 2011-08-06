@@ -6792,102 +6792,101 @@ public class GameActionUtil {
 
 	}
 
-	private static void upkeep_Land_Tax() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
+    private static void upkeep_Land_Tax() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Land Tax");
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Land Tax");
 
-		PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
+        PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
 
-		CardList self = new CardList(playZone.getCards());
-		CardList opp = new CardList(oppPlayZone.getCards());
+        CardList self = new CardList(playZone.getCards());
+        CardList opp = new CardList(oppPlayZone.getCards());
 
-		self = self.getType("Land");
-		opp = opp.getType("Land");
+        self = self.getType("Land");
+        opp = opp.getType("Land");
 
-		if(self.size() < opp.size()) {
+        if (self.size() < opp.size()) {
 
-			for(int i = 0; i < list.size(); i++) {
-				Ability ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+            for(int i = 0; i < list.size(); i++) {
+                final Card c = list.get(i);
+                Ability ability = new Ability(list.get(i), "0") {
+                    @Override
+                    public void resolve() {
+                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 
-						CardList lands = new CardList(lib.getCards());
-						lands = lands.getType("Basic");
+                        CardList lands = new CardList(lib.getCards());
+                        lands = lands.getType("Basic");
 
-						if(player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
-							String[] choices = {"Yes", "No"};
-							Object choice = AllZone.Display.getChoice("Use Land Tax?", choices);
-							if(choice.equals("Yes")) {
-								Object o = AllZone.Display.getChoiceOptional(
-										"Pick a basic land card to put into your hand", lands.toArray());
-								if(o != null) {
-									Card card = (Card) o;
-									lib.remove(card);
-									hand.add(card);
-									lands.remove(card);
+                        if (player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Search your library for up to 3 basic land cards, ");
+                            question.append("reveal them, and put them into your hand?");
+                            if (GameActionUtil.showYesNoDialog(c, question.toString())) {
+                                String title = "Pick a basic land card?";
+                                
+                                Object o = AllZone.Display.getChoiceOptional(title, lands.toArray());
+                                if (o != null) {
+                                    Card card = (Card) o;
+                                    lib.remove(card);
+                                    hand.add(card);
+                                    lands.remove(card);
 
-									if(lands.size() > 0) {
-										o = AllZone.Display.getChoiceOptional(
-												"Pick a basic land card to put into your hand", lands.toArray());
-										if(o != null) {
-											card = (Card) o;
-											lib.remove(card);
-											hand.add(card);
-											lands.remove(card);
-											if(lands.size() > 0) {
-												o = AllZone.Display.getChoiceOptional(
-														"Pick a basic land card to put into your hand",
-														lands.toArray());
-												if(o != null) {
-													card = (Card) o;
-													lib.remove(card);
-													hand.add(card);
-													lands.remove(card);
-												}
-											}
-										}
+                                    if (lands.size() > 0) {
+                                        o = AllZone.Display.getChoiceOptional(title, lands.toArray());
+                                        if (o != null) {
+                                            card = (Card) o;
+                                            lib.remove(card);
+                                            hand.add(card);
+                                            lands.remove(card);
+                                            
+                                            if (lands.size() > 0) {
+                                                o = AllZone.Display.getChoiceOptional(title, lands.toArray());
+                                                if (o != null) {
+                                                    card = (Card) o;
+                                                    lib.remove(card);
+                                                    hand.add(card);
+                                                    lands.remove(card);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                AllZone.HumanPlayer.shuffle();
+                            }// if choice yes
+                        } // player equals human
+                        else if (player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
+                            Card card = lands.get(0);
+                            lib.remove(card);
+                            hand.add(card);
+                            lands.remove(card);
 
-									}
-								}
-								AllZone.HumanPlayer.shuffle();
-							}// if choice yes
-						} // player equals human
-						else if(player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
-							Card card = lands.get(0);
-							lib.remove(card);
-							hand.add(card);
-							lands.remove(card);
+                            if (lands.size() > 0) {
+                                card = lands.get(0);
+                                lib.remove(card);
+                                hand.add(card);
+                                lands.remove(card);
 
-							if(lands.size() > 0) {
-								card = lands.get(0);
-								lib.remove(card);
-								hand.add(card);
-								lands.remove(card);
+                                if (lands.size() > 0) {
+                                    card = lands.get(0);
+                                    lib.remove(card);
+                                    hand.add(card);
+                                    lands.remove(card);
+                                }
+                            }
+                            AllZone.ComputerPlayer.shuffle();
+                        }
+                    }
 
-								if(lands.size() > 0) {
-									card = lands.get(0);
-									lib.remove(card);
-									hand.add(card);
-									lands.remove(card);
-								}
-							}
-							AllZone.ComputerPlayer.shuffle();
-						}
-					}
+                };// Ability
+                ability.setStackDescription("Land Tax - search library for up to three basic land cards and put them into your hand");
+                AllZone.Stack.add(ability);
 
-				};// Ability
-				ability.setStackDescription("Land Tax - search library for up to three basic land cards and put them into your hand");
-				AllZone.Stack.add(ability);
-
-			}// for
-		}// if fewer lands than opponent
-
-	}
+            }// for
+        }// if fewer lands than opponent
+    }// upkeep_Land_Tax()
 	
 	private static void upkeep_Mana_Vault() {
 		//this card is filtered out for the computer, so we will only worry about Human here
