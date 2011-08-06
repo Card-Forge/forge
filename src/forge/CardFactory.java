@@ -9627,14 +9627,14 @@ public class CardFactory implements NewConstants {
         //****************END*******END***********************
         */
  
-        
+        /*
         //*****************************START*******************************
         else if(cardName.equals("Jandor's Saddlebags")) {
         	/* Assuing the Rules state that this can target an untapped card,
         	 * but it won't do anything useful
         	 *
         	 * This would bring the ruling in line with Icy Manipulator
-        	 * */
+        	 * 
 
         	final Ability_Tap ability = new Ability_Tap(card, "3") {
         		private static final long serialVersionUID = 6349074098650621348L;
@@ -9656,6 +9656,7 @@ public class CardFactory implements NewConstants {
         	ability.setDescription("3, tap: Untap target creature.");
         	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Creature"));
         }//****************END*******END***********************
+    	*/
         
        
         //*************** START *********** START **************************
