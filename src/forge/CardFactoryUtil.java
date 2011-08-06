@@ -3423,7 +3423,7 @@ public class CardFactoryUtil {
     }
     
     public static boolean canTarget(Card spell, Player player) {
-    	return player.hasShroud();
+    	return !player.hasShroud();
     }
     
     public static boolean canTarget(Card spell, Card target) {
