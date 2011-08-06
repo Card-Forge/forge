@@ -1,5 +1,6 @@
 package forge.quest.bazaar;
 
+import forge.quest.QuestAbstractPanel;
 import forge.quest.QuestFrame;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class QuestBazaarPanel extends JPanel{
+public class QuestBazaarPanel extends QuestAbstractPanel{
 	private static final long serialVersionUID = 1418913010051869222L;
 	
 	QuestFrame mainFrame;
@@ -124,4 +125,8 @@ public class QuestBazaarPanel extends JPanel{
         }
     }
 
+    @Override
+    public void refreshState() {
+        refreshLastInstance();
+    }
 }

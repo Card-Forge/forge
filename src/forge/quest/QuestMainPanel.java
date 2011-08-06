@@ -21,7 +21,7 @@ import java.util.List;
 //presumes AllZone.QuestData is not null
 
 //AllZone.QuestData should be set by Gui_QuestOptions
-public class QuestMainPanel extends JPanel {
+public class QuestMainPanel extends QuestAbstractPanel {
     private QuestData questData;
 
     private QuestFrame mainFrame;
@@ -35,6 +35,7 @@ public class QuestMainPanel extends JPanel {
     JComboBox deckComboBox = new JComboBox();
 
     JButton questButton = new JButton("Quest");
+    JButton playButton = new JButton("Play");
 
     QuestOpponent selectedOpponent = null;
 
@@ -143,7 +144,6 @@ public class QuestMainPanel extends JPanel {
         }
 
 
-
         questButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 QuestMainPanel.this.showQuests();
@@ -154,7 +154,6 @@ public class QuestMainPanel extends JPanel {
         questButton.setPreferredSize(new Dimension(0, 60));
 
 
-        JButton playButton = new JButton("Play");
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 QuestMainPanel.this.launchGame();
@@ -213,8 +212,6 @@ public class QuestMainPanel extends JPanel {
             opponent.addMouseListener(new OpponentAdapter(opponent));
 
             GuiUtils.addGap(opponentPanel, 3);
-
-
         }
 
         opponentPanel.setAlignmentX(LEFT_ALIGNMENT);
@@ -228,6 +225,13 @@ public class QuestMainPanel extends JPanel {
         JLabel deckLabel = new JLabel("Use Deck");
         deckPanel.add(deckLabel);
         GuiUtils.addGap(deckPanel);
+
+        this.deckComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                playButton.setEnabled(canGameBeLaunched());
+            }
+        });
+
         deckPanel.add(this.deckComboBox);
         GuiUtils.addGap(deckPanel);
 
@@ -248,8 +252,32 @@ public class QuestMainPanel extends JPanel {
         if (questData.getMode().equals(QuestData.FANTASY)) {
             JPanel petPanel = new JPanel();
             petPanel.setLayout(new BoxLayout(petPanel, BoxLayout.X_AXIS));
+
+            this.petCheckBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
+                    if (petCheckBox.isSelected()) {
+                        questData.setSelectedPet((String) petComboBox.getSelectedItem());
+                    }
+                    else {
+                        questData.setSelectedPet("");
+                    }
+
+                    petComboBox.setEnabled(petCheckBox.isSelected());
+                }
+            });
+
             petPanel.add(this.petCheckBox);
             GuiUtils.addGap(petPanel);
+            this.petComboBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
+                    if (petCheckBox.isSelected()) {
+                        questData.setSelectedPet((String) petComboBox.getSelectedItem());
+                    }
+                    else {
+                        questData.setSelectedPet("");
+                    }
+                }
+            });
             petPanel.add(this.petComboBox);
             mainPanel.add(petPanel);
             petPanel.setMaximumSize(petPanel.getPreferredSize());
@@ -289,6 +317,8 @@ public class QuestMainPanel extends JPanel {
 
         questButton.setEnabled(shouldQuestsBeEnabled());
 
+        playButton.setEnabled(canGameBeLaunched());
+
         if (questData.getMode().equals(QuestData.FANTASY)) {
             lifeLabel.setText("Starting Life: " + questData.getLife());
             petComboBox.removeAllItems();
@@ -307,6 +337,15 @@ public class QuestMainPanel extends JPanel {
                 petComboBox.addItem("No pets available");
                 petComboBox.setEnabled(false);
                 petCheckBox.setEnabled(false);
+            }
+
+            if (questData.getSelectedPet().equals("")) {
+                petCheckBox.setSelected(false);
+                petComboBox.setEnabled(false);
+            }
+            else {
+                petCheckBox.setSelected(true);
+                petComboBox.setSelectedItem(questData.getSelectedPet());
             }
         }
     }
@@ -351,9 +390,9 @@ public class QuestMainPanel extends JPanel {
 
     void showCardShop() {
         Command exit = new Command() {
-			private static final long serialVersionUID = 8567193482568076362L;
+            private static final long serialVersionUID = 8567193482568076362L;
 
-			public void execute() {
+            public void execute() {
                 //saves all deck data
                 QuestData.saveData(AllZone.QuestData);
 
@@ -405,9 +444,14 @@ public class QuestMainPanel extends JPanel {
             AllZone.GameAction.newGame(human, computer);
         }
         else {
-            Object pet = petComboBox.getSelectedItem();
-            if (pet != null) {
-                questData.setSelectedPet(pet.toString());
+            if (petCheckBox.isSelected()) {
+                Object pet = petComboBox.getSelectedItem();
+                if (!pet.equals("")) {
+                    questData.setSelectedPet(pet.toString());
+                }
+            }
+            else {
+                questData.setSelectedPet("");
             }
 
             CardList hCl = QuestUtil.getHumanPlantAndPet(questData);
@@ -425,7 +469,7 @@ public class QuestMainPanel extends JPanel {
 
     private String getSelectedOpponent() {
         if (selectedOpponent == null) {
-            return "";
+            return null;
         }
 
         return selectedOpponent.getName();
@@ -471,7 +515,18 @@ public class QuestMainPanel extends JPanel {
             opponent.setSelected(true);
 
             selectedOpponent = opponent;
+            playButton.setEnabled(canGameBeLaunched());
         }
     }
 
+
+    boolean canGameBeLaunched() {
+        return !(NO_DECKS_AVAILABLE.equals(deckComboBox.getSelectedItem()) ||
+                getSelectedOpponent() == null);
+    }
+
+    @Override
+    public void refreshState() {
+        this.refresh();
+    }
 }

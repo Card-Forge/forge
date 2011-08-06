@@ -11,6 +11,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuestFrame extends JFrame {
 	private static final long serialVersionUID = -2832625381531838412L;
@@ -21,6 +23,8 @@ public class QuestFrame extends JFrame {
     public static final String MAIN_PANEL = "Main";
     public static final String BAZAAR_PANEL = "Bazaar";
 
+    Map<String, QuestAbstractPanel> subPanelMap = new HashMap<String, QuestAbstractPanel>();
+
     public QuestFrame() throws HeadlessException {
         this.setTitle("Quest Mode");
 
@@ -28,8 +32,14 @@ public class QuestFrame extends JFrame {
         visiblePanel.setBorder(new EmptyBorder(2,2,2,2));
         questLayout = new CardLayout();
         visiblePanel.setLayout(questLayout);
-        visiblePanel.add(new QuestMainPanel(this), MAIN_PANEL);
-        visiblePanel.add(new QuestBazaarPanel(this), BAZAAR_PANEL);
+
+        QuestAbstractPanel newPanel = new QuestMainPanel(this);
+        visiblePanel.add(newPanel, MAIN_PANEL);
+        subPanelMap.put(MAIN_PANEL, newPanel);
+
+        newPanel = new QuestBazaarPanel(this);
+        visiblePanel.add(newPanel, BAZAAR_PANEL);
+        subPanelMap.put(BAZAAR_PANEL, newPanel);
 
 
         this.getContentPane().setLayout(new BorderLayout());
@@ -46,6 +56,7 @@ public class QuestFrame extends JFrame {
     }
 
     public void showPane(String paneName){
+        subPanelMap.get(paneName).refreshState();
         questLayout.show(visiblePanel, paneName);
     }
 
