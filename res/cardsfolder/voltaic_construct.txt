@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Golem Construct
 Text:no text
 PT:2/2
-K:abUntapTgt 2:Creature.Artifact:Untap target artifact creature.
+A:AB$Untap | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Untap target artifact creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_construct.jpg

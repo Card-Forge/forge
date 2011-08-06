@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:abUntapTgt G T:Elf:Untap target Elf.
+A:AB$Untap | Cost$ G T | ValidTgts$ Elf | TgtPrompt$ Select target Elf | SpellDescription$ Untap target Elf.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_lodge.jpg

@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Ouphe
 Text:no text
 PT:1/1
-K:abUntapTgt 2 G T:Creature:Untap target creature.
+A:AB$Untap | Cost$ 2 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_brownie.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/231.jpg

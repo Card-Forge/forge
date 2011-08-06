@@ -4,7 +4,7 @@ Types:Creature Human Druid
 Text:no text
 PT:1/1
 K:WheneverKeyword:EntersBattleField:Type/Land:Play:UntapPermanent:Self:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, untap Stone-Seeder Hierophant.
-K:abUntapTgt T:Land:Untap target land.
+A:AB$Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap target land.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_seeder_hierophant.jpg

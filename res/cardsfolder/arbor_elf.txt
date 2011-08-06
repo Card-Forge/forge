@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Druid
 Text:no text
 PT:1/1
-K:abUntapTgt T:Forest:Untap target forest.
+A:AB$Untap | Cost$ T | ValidTgts$ Forest | TgtPrompt$ Select target forest | SpellDescription$ Untap target Forest.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbor_elf.jpg

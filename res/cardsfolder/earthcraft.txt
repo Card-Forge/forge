@@ -2,7 +2,7 @@ Name:Earthcraft
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-K:abUntapTgt tapXType<1/Creature>:Land.Basic:Untap target basic land.
+A:AB$Untap | Cost$ tapXType<1/Creature> | ValidTgts$ Land.Basic | TgtPrompt$ Select target basic land | SpellDescription$ Untap target basic land.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthcraft.jpg

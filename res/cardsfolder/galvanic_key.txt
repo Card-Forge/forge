@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 K:Flash
-K:abUntapTgt 3 T:Artifact:Untap target artifact.
+A:AB$Untap | Cost$ 3 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_key.jpg
