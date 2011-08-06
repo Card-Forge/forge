@@ -111,6 +111,7 @@ public class StateBasedEffects
 		cardToEffectsList.put("Engineered Plague", new String[] {"Engineered_Plague"});
 		cardToEffectsList.put("Night of Souls' Betrayal", new String[] {"Night_of_Souls_Betrayal"});
 		cardToEffectsList.put("Thelonite Hermit", new String[] {"Thelonite_Hermit"});
+		cardToEffectsList.put("Deranged Hermit", new String[] {"Deranged_Hermit"});
 		cardToEffectsList.put("Jacques le Vert", new String[] {"Jacques"});
 		cardToEffectsList.put("Kaysa", new String[] {"Kaysa"});
 		cardToEffectsList.put("Meng Huo, Barbarian King", new String[] {"Meng_Huo"});

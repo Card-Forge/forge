@@ -185,6 +185,7 @@ import java.util.*;
            {
         	  System.out.println("Cache size: " + ImageCache.cache.size());
         	  
+        	  /*
         	  CardList visibleCards = new CardList();
         	  PlayerZone hPlay = AllZone.Human_Play;
         	  PlayerZone hand = AllZone.Human_Hand;
@@ -211,7 +212,7 @@ import java.util.*;
         		ImageCache.cache.remove(s);
   				System.out.println("Removing " + s + " from cache.");
         	  }
-        	  
+        	  */
         	  
               if(AllZone.Display.stopEOT())
                 return new Input_EOT();

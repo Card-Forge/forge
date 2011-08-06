@@ -1,4 +1,5 @@
 package forge;
+
 //only SpellAbility can go on the stack
 //override any methods as needed
 public abstract class SpellAbility
@@ -26,6 +27,8 @@ public abstract class SpellAbility
   private Input beforePayMana;
   private Input afterResolve;
   private Input afterPayMana;
+  
+  private Command cancelCommand = null;
 
   private CommandArgs randomTarget = new CommandArgs() {
   
@@ -154,4 +157,12 @@ public void execute(Object o) {}};
     setStackDescription(getSourceCard().getName() +" - targeting " +p);
   }
   public String getTargetPlayer()            {return targetPlayer;}
+  
+    public Command getCancelCommand() {
+		return cancelCommand;
+	}
+
+	public void setCancelCommand(Command cancelCommand) {
+		this.cancelCommand = cancelCommand;
+	}
 }

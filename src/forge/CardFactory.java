@@ -18463,6 +18463,155 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		    	card.addSpellAbility(ability);
 		    	
 		    }//*************** END ************ END **************************
+		    
+		    
+		      //*************** START *********** START **************************
+		      else if(cardName.equals("Urza's Blueprints"))
+		      {
+		       final SpellAbility ability = new Ability_Tap(card, "0")
+		       {
+				    private static final long serialVersionUID = -1802481790805608497L;
+
+					public boolean canPlayAI() {return AllZone.Phase.getPhase().equals(Constant.Phase.Main1);}
+	
+			        public void resolve()
+			        {
+			          	 AllZone.GameAction.drawCard(card.getController());
+			        } 
+		        };//SpellAbility
+		        card.addSpellAbility(ability);
+		        ability.setDescription("tap: Draw a card.");
+		        ability.setStackDescription(card.getName() + " - draw a card.");
+		      }//*************** END ************ END **************************
+		    
+		      //*************** START *********** START **************************
+		      else if(cardName.equals("Illusions of Grandeur"))
+		      {
+		    	  final SpellAbility gainLife = new Ability(card, "0")
+			      {
+			        public void resolve()
+			        {
+			          Card c = card;
+			          PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
+			          life.addLife(20);
+			        }
+			      };
+			      
+			      final SpellAbility loseLife = new Ability(card, "0")
+			      {
+			        public void resolve()
+			        {
+			          Card c = card;
+			          PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
+			          life.subtractLife(20);
+			        }
+			      };
+			      
+			      Command intoPlay = new Command()
+			      {
+					private static final long serialVersionUID = 502892931516451254L;
+
+					public void execute()
+			        {
+			          gainLife.setStackDescription(card.getController() +" gains 20 life");
+			          AllZone.Stack.add(gainLife);
+			        }
+			      };
+			      
+			      Command leavesPlay = new Command()
+			      {
+					private static final long serialVersionUID = 5772999389072757369L;
+
+					public void execute()
+			    	{
+			    		  loseLife.setStackDescription(card.getController() +" loses 20 life");
+				          AllZone.Stack.add(loseLife);
+			    	}
+			      };
+			      
+			      card.addComesIntoPlayCommand(intoPlay);
+			      card.addLeavesPlayCommand(leavesPlay);
+			      
+		      }//*************** END ************ END **************************
+		    
+		      //*************** START *********** START **************************
+		      else if(cardName.equals("Donate"))
+		      {
+		    	  final SpellAbility spell = new Spell(card)
+		    	  {
+					private static final long serialVersionUID = 782912579034503349L;
+
+					public void resolve()
+		    		{
+		    			  Card c = getTargetCard();
+		    			  
+		    			  if (c!=null && AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c))
+		    			  {
+		    				  if (!c.isAura()) 
+		    				  {
+		    					  ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
+		    					  ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
+		    					  
+		    					  PlayerZone from = AllZone.getZone(c);
+		    			          from.remove(c);
+		    			           
+		    			          c.setController(AllZone.GameAction.getOpponent(card.getController()));
+		    			          
+		    			          PlayerZone to = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(card.getController()));
+		    			          to.add(c);
+		    					  
+		    					  ((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(true);
+		    					  ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(true);
+		    				  }
+		    				  else //Aura
+		    				  {
+		    					  c.setController(AllZone.GameAction.getOpponent(card.getController()));
+		    				  }
+		    			  }
+		    		}
+					
+					public boolean canPlayAI()
+					{
+						CardList list = new CardList(AllZone.Computer_Play.getCards());
+						list = list.getName("Illusions of Grandeur");
+						
+						if (list.size() > 0){
+							setTargetCard(list.get(0));
+							return true;
+						}
+						return false;
+					}
+		    	  };
+		    	  
+		    	  Input runtime = new Input()
+		          {
+		    		  private static final long serialVersionUID = -7823269301012427007L;
+
+		    		  public void showMessage()
+		    		  {
+		    			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    	    	
+		    			  CardList perms = new CardList();
+		    			  perms.addAll(play.getCards());
+		    			  perms = perms.filter(new CardListFilter()
+		    			  {
+		    				  public boolean addCard(Card c)
+		    				  {
+		    					  return c.isPermanent() && !c.getName().equals("Mana Pool");
+		    				  }
+		    			  });
+
+		    			  stopSetNext(CardFactoryUtil.input_targetSpecific(spell, perms, "Select a permanent you control", true));
+
+		    		  }//showMessage()
+		          };//Input
+		    	  
+		    	  spell.setBeforePayMana(runtime);
+		    	  
+		    	  card.clearSpellAbility();
+		    	  card.addSpellAbility(spell);
+		      }//*************** END ************ END **************************
+		    
 	        
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

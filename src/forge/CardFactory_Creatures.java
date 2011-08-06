@@ -6,6 +6,16 @@ import javax.swing.JOptionPane;
 
 public class CardFactory_Creatures {
 	
+	private static final int hasKeyword(Card c, String k)
+    {
+    	ArrayList<String> a = c.getKeyword();
+    	for (int i = 0; i < a.size(); i++)
+    		if (a.get(i).toString().startsWith(k))
+    			return i;
+
+    	return -1;
+    }
+	
 	public static int shouldCycle(Card c) {
 		ArrayList<String> a = c.getKeyword();
 		for (int i = 0; i < a.size(); i++)
@@ -50,6 +60,8 @@ public class CardFactory_Creatures {
 
 		return -1;
 	}
+	
+	
 
 	
 	public static Card getCard(final Card card, String cardName, String owner, CardFactory cf)
@@ -1721,6 +1733,31 @@ public class CardFactory_Creatures {
 			public void execute()
 	        {
 	          ability.setStackDescription(card.getController() +" gains 2 life");
+	          AllZone.Stack.add(ability);
+	        }
+	      };
+	      card.addComesIntoPlayCommand(intoPlay);
+	    }//*************** END ************ END **************************
+	    
+	  //*************** START *********** START **************************
+	    else if(cardName.equals("Radiant's Dragoons"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	          Card c = card;
+	          PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
+	          life.addLife(5);
+	        }
+	      };
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = -7748429739046909730L;
+
+			public void execute()
+	        {
+	          ability.setStackDescription(card.getController() +" gains 5 life");
 	          AllZone.Stack.add(ability);
 	        }
 	      };
@@ -4037,7 +4074,7 @@ public class CardFactory_Creatures {
 
 
 	    //*************** START *********** START **************************
-	    else if(cardName.equals("Man-o'-War") || cardName.equals("Sun Ce, Young Conquerer"))
+	    else if(cardName.equals("Man-o'-War") || cardName.equals("Sun Ce, Young Conquerer") )
 	    {
 	      final SpellAbility ability = new Ability(card, "0")
 	      {
@@ -4045,7 +4082,7 @@ public class CardFactory_Creatures {
 	        {
 	          Card c = getTargetCard();
 	          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
-
+	          
 	          if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,getTargetCard()) )
 	          {
 	            AllZone.getZone(c).remove(c);
@@ -4263,9 +4300,81 @@ public class CardFactory_Creatures {
 	      card.addComesIntoPlayCommand(intoPlay);
 	    }//*************** END ************ END **************************
 
+	  //*************** START *********** START **************************
+	    else if(cardName.equals("Karmic Guide"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+	          if(AllZone.GameAction.isCardInZone(getTargetCard(), grave))
+	          {
+	            PlayerZone play = AllZone.getZone(Constant.Zone.Hand, card.getController());
+	            grave.remove(getTargetCard());
+	            play.add(getTargetCard());
+	          }
+	        }//resolve()
+	      };
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = 2128307240208621147L;
 
+			public void execute()
+	        {
+	          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+	          CardList list = new CardList(grave.getCards());
+	          list = list.getType("Creature");
 
+	          if(list.isEmpty())
+	            return;
 
+	          if(card.getController().equals(Constant.Player.Human))
+	          {
+	            Object o = AllZone.Display.getChoiceOptional("Select target card", list.toArray());
+	            if(o != null)
+	            {
+	              ability.setTargetCard((Card)o);
+	              AllZone.Stack.add(ability);
+	            }
+	          }//if
+	          else//computer
+	          {
+	            Card best = CardFactoryUtil.AI_getBestCreature(list);
+	            ability.setTargetCard(best);
+	            AllZone.Stack.add(ability);
+	          }
+	        }//execute()
+	      };//Command
+	      card.addComesIntoPlayCommand(intoPlay);
+	      
+	      card.clearSpellAbility();
+
+	      card.addSpellAbility(new Spell_Permanent(card)
+	      {
+			private static final long serialVersionUID = 4446838001015234917L;
+
+			public boolean canPlayAI()
+	        {
+	        	CardList creats = new CardList();
+	        	creats.addAll(AllZone.Computer_Graveyard.getCards());
+	        	creats = creats.filter(new CardListFilter()
+	        	{
+	        		public boolean addCard(Card c)
+	        		{
+	        			return c.isCreature() && c.getNetAttack() > 2;
+	        		}
+	        	});
+	        	
+	        	if (creats.size() > 0)
+	        		return true;
+	        	else 
+	        		return false;    	
+	        }
+	      });
+	    }//*************** END ************ END **************************
+	    
+	    
 
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Gravedigger"))
@@ -14065,7 +14174,8 @@ public class CardFactory_Creatures {
 	    
 	    
 	    //*************** START *********** START **************************
-	    else if(cardName.equals("Viridian Shaman") || cardName.equals("Uktabi Orangutan") || cardName.equals("Vithian Renegades"))
+	    else if(cardName.equals("Viridian Shaman") || cardName.equals("Uktabi Orangutan") || cardName.equals("Vithian Renegades") ||
+	    		cardName.equals("Keldon Vandals"))
 	    {
 	      final SpellAbility ability = new Ability(card, "0")
 	      {
@@ -14142,6 +14252,83 @@ public class CardFactory_Creatures {
 	        	artifacts = artifacts.getType("Artifact");
 	        	
 	        	if (artifacts.size() > 0)
+	        		return true;
+	        	else 
+	        		return false;    	
+	        }
+	      });
+	    }//*************** END ************ END **************************
+	    
+	    
+	    //*************** START *********** START **************************
+	    else if(cardName.equals("Avalanche Riders"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	         public void resolve()
+	        {
+	          Card c = getTargetCard();
+
+	          if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+	              AllZone.GameAction.destroy(c);
+	        }
+	      };
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = -8270520707155953207L;
+
+			public void execute()
+	        {
+	        	CardList all = new CardList();
+	        	all.addAll(AllZone.Human_Play.getCards());
+	        	all.addAll(AllZone.Computer_Play.getCards());
+	        	all = all.filter(new CardListFilter(){
+	        		public boolean addCard(Card c)
+	        		{
+	        			return c.isLand() && CardFactoryUtil.canTarget(card, c);
+	        		}
+	        	});
+	        	
+	        	CardList humanList = new CardList(AllZone.Human_Play.getCards());
+	        	humanList = humanList.getType("Land");
+	        	
+	        	if (all.size() != 0) {
+	        		
+	        		if(card.getController().equals(Constant.Player.Human)) {
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target artifact.", true));
+	        			ButtonUtil.disableAll();
+	        		}
+	        		else if (card.getController().equals(Constant.Player.Computer)) {
+	        			if (humanList.size() > 0 ){
+		        			ability.setTargetCard(humanList.get(0));
+		        			AllZone.Stack.add(ability);
+	        			}
+	        			else
+	        			{
+	        				Card comp = CardFactoryUtil.AI_getCheapestPermanent(all, card, true);
+	        				ability.setTargetCard(comp);
+	        				AllZone.Stack.add(ability);
+	        			}
+	        		}
+	        	}
+	          
+	        }//execute()
+	      };//Command
+	      card.addComesIntoPlayCommand(intoPlay);
+
+	      card.clearSpellAbility();
+
+	      card.addSpellAbility(new Spell_Permanent(card)
+	      {
+			private static final long serialVersionUID = -517667816379595978L;
+
+			public boolean canPlayAI()
+	        {
+	        	CardList lands = new CardList();
+	        	lands.addAll(AllZone.Human_Play.getCards());
+	        	lands = lands.getType("Land");
+	        	
+	        	if (lands.size() > 0)
 	        		return true;
 	        	else 
 	        		return false;    	
@@ -14579,6 +14766,106 @@ public class CardFactory_Creatures {
 	        }
 	      };
 	      card.addComesIntoPlayCommand(intoPlay);
+	    
+	  }//*************** END ************ END **************************
+	    
+	  //*************** START *********** START **************************
+	  else if(cardName.equals("Deranged Hermit"))
+	  { 
+		  final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	        	for (int i=0;i<4;i++)
+	        		makeToken();
+	        }//resolve()
+
+	        void makeToken()
+			{
+				  Card c = new Card();
+
+		          c.setOwner(card.getController());
+		          c.setController(card.getController());
+
+		          c.setName("Squirrel");
+		          c.setImageName("G 1 1 Squirrel");
+		          c.setManaCost("G");
+		          c.setToken(true);
+
+		          c.addType("Creature");
+		          c.addType("Squirrel");
+
+		          c.setBaseAttack(1);
+		          c.setBaseDefense(1);
+
+		          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+		          play.add(c);
+			 }
+	      };
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = 7299232424224916928L;
+
+			public void execute()
+	        {
+	          ability.setStackDescription("Deranged Hermit - put four green 1/1 Squirrel creature tokens onto the battlefield.");
+	          AllZone.Stack.add(ability);
+	        }
+	      };
+	      card.addComesIntoPlayCommand(intoPlay);
+	    
+	  }//*************** END ************ END **************************
+	    
+	  //*************** START *********** START **************************
+	  else if(cardName.equals("Mogg War Marshal") || cardName.equals("Goblin Marshal"))
+	  { 
+		  final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	        	makeToken();
+	        	if (card.getName().equals("Goblin Marshal"))
+	        		makeToken();
+	        }//resolve()
+
+	        void makeToken()
+			{
+				  Card c = new Card();
+
+		          c.setOwner(card.getController());
+		          c.setController(card.getController());
+
+		          c.setName("Goblin");
+		          c.setImageName("R 1 1 Goblin");
+		          c.setManaCost("R");
+		          c.setToken(true);
+
+		          c.addType("Creature");
+		          c.addType("Goblin");
+
+		          c.setBaseAttack(1);
+		          c.setBaseDefense(1);
+
+		          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+		          play.add(c);
+			 }
+	      };
+	      Command intoPlayDestroy = new Command()
+	      {
+			private static final long serialVersionUID = 5554242458006247407L;
+
+			public void execute()
+	        {
+			  if (card.getName().equals("Mogg War Marshal"))
+				  ability.setStackDescription("Mogg War Marshal - put a red 1/1 Goblin creature token onto the battlefield.");
+			  else if (card.getName().equals("Goblin Marshal"))
+				  ability.setStackDescription("Goblin Marshal - put two red 1/1 Goblin creature tokens onto the battlefield.");
+	          
+	          AllZone.Stack.add(ability);
+	        }
+	      };
+	      card.addComesIntoPlayCommand(intoPlayDestroy);
+	      card.addDestroyCommand(intoPlayDestroy);
 	    
 	  }//*************** END ************ END **************************
 		
@@ -18924,6 +19211,23 @@ public class CardFactory_Creatures {
 		      return newCard;
 		  }//*************** END ************ END **************************
 	       
+	       /*
+	      else if (cardName.equals("Acridian"))
+	      {
+	    	  card.setEchoCost(card.getManaCost());
+	    	  
+	    	  final Command intoPlay = new Command()
+	    	  {
+				private static final long serialVersionUID = 8930023870127082001L;
+
+				public void execute() {
+	    			  card.addIntrinsicKeyword("(Echo unpaid)");
+	    		  }
+	    	  };
+	    	  card.addComesIntoPlayCommand(intoPlay);
+	      }
+	      */
+	       
 	       
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
@@ -19003,6 +19307,59 @@ public class CardFactory_Creatures {
 	          card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
 	        }
 	      }//Vanishing
+	      
+	      if (hasKeyword(card, "Echo") != -1)
+	      {
+	        int n = hasKeyword(card, "Echo");
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          //card.removeIntrinsicKeyword(parse);
+
+	          String k[] = parse.split(":");
+	          final String manacost = k[1];
+
+	          card.setEchoCost(manacost);
+	          
+	          final Command intoPlay = new Command()
+	    	  {
+				private static final long serialVersionUID = 8930023870127082001L;
+
+				public void execute() {
+	    			  card.addIntrinsicKeyword("(Echo unpaid)");
+	    		}
+	    	  };
+	    	  card.addComesIntoPlayCommand(intoPlay);
+	          
+	        }
+	      }//echo
+	      
+	      /*
+	      if (hasKeyword(card, "Upkeep") != -1)
+	      {
+	        int n = hasKeyword(card, "Upkeep");
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          card.removeIntrinsicKeyword(parse);
+
+	          String k[] = parse.split(":");
+	          final String manacost = k[1];
+	          card.addIntrinsicKeyword("At the beginning of your upkeep, sacrifice " + card.getName() + " unless you pay " + manacost+".");
+	          
+	          final Command intoPlay = new Command()
+	    	  {
+				private static final long serialVersionUID = 925179072354331141L;
+
+				public void execute() {
+	    			  card.setUpkeepCost(manacost);
+	    		}
+	    	  };
+	    	  card.addComesIntoPlayCommand(intoPlay);
+	          
+	        }
+	      }//upkeep
+	      */
 	      
 		 return card;
 	}

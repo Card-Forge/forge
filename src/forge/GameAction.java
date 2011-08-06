@@ -130,6 +130,13 @@ private Card getCurrentCard(int ID)
      else
         AI_discardNumUnless(numDiscard, uType);
   }
+  
+  public void discardHand(String player)
+  {
+	  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+	  for (int i=0;i<hand.size();i++)
+		  discardRandom(player);
+  }
  
   public void AI_discardNumUnless(int numDiscard, String uType)
   {

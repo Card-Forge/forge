@@ -1,3 +1,276 @@
+Donate
+2 U
+Sorcery
+Target player gains control of target permanent you control.
+
+Illusions of Grandeur
+3 U
+Enchantment
+When Illusions of Grandeur enters the battlefield, you gain 20 life. When Illusions of Grandeur leaves the battlefield, you lose 20 life.
+Cumulative upkeep:2
+
+Drifting Djinn
+4 U U
+Creature Djinn
+At the beginning of your upkeep, sacrifice Drifting Djinn unless you pay:1 U
+5/5
+Flying
+Cycling:2
+
+Drifter il-Dal
+U
+Creature Human Wizard
+At the beginning of your upkeep, sacrifice Drifter il-Dal unless you pay:U
+2/1
+Shadow
+
+Karmic Guide
+3 W W 
+Creature Angel Spirit
+When Karmic Guide enters the battlefield, return target creature card from your graveyard to the battlefield.
+2/2
+Flying
+Protection from black
+Echo:3 W W
+
+Avalanche Riders
+3 R
+Creature Human Nomad
+When Avalanche Riders enters the battlefield, destroy target land.
+2/2
+Haste
+Echo:3 R
+
+Basalt Gargoyle
+2 R
+Creature Gargoyle
+no text
+3/2
+Flying
+Echo:2 R
+abPump R:+0/+1
+
+Keldon Vandals
+2 R
+Creature Human Rogue
+When Keldon Vandals enters the battlefield, destroy target artifact.
+4/1
+Echo:2 R
+
+Vaevictis Asmadi
+2 B B R R G G
+Legendary Creature Elder Dragon
+no text
+7/7
+Flying
+At the beginning of your upkeep, sacrifice Vaevictis Asmadi unless you pay:B R G
+abPump B:+1/+0
+abPump R:+1/+0
+abPump G:+1/+0
+
+Palladia-Mors
+2 W W R R G G
+Legendary Creature Elder Dragon
+no text
+7/7
+Flying
+At the beginning of your upkeep, sacrifice Palladia-Mors unless you pay:R G W
+
+Nicol Bolas
+2 U U B B R R
+Legendary Creature Elder Dragon
+Whenever Nicol Bolas deals damage to an opponent, that player discards his or her hand.
+7/7
+Flying
+At the beginning of your upkeep, sacrifice Nicol Bolas unless you pay:U B R
+
+Goblin Patrol
+R
+Creature Goblin
+no text
+2/1
+Echo:R
+
+Goblin Marshal
+4 R R
+Creature Goblin Warrior
+When Goblin Marshal enters the battlefield or is put into a graveyard from the battlefield, put two 1/1 red Goblin creature tokens onto the battlefield.
+3/3
+Echo:4 R R
+
+Mogg War Marshal
+1 R
+Creature Goblin Warrior
+When Mogg War Marshal enters the battlefield or is put into a graveyard from the battlefield, put a 1/1 red Goblin creature token onto the battlefield.
+1/1
+Echo:1 R
+
+Urza's Blueprints
+6
+Artifact
+no text
+Echo:6
+
+Deranged Hermit
+3 G G
+Creature Elf
+When Deranged Hermit enters the battlefield, put four 1/1 green Squirrel creature tokens onto the battlefield. Squirrel creatures get +1/+1.
+1/1
+Echo:3 G G
+
+Winding Wurm
+4 G
+Creature Wurm
+no text
+6/6
+Echo:4 G
+
+Vug Lizard
+1 R R
+Creature Lizard
+no text
+3/4
+Mountainwalk
+Echo:1 R R
+
+Viashino Outrider
+2 R
+Creature Viashino
+no text
+4/3
+Echo:2 R
+
+Uktabi Drake
+G
+Creature Drake
+no text
+2/1
+Flying
+Haste
+Echo:1 G G
+
+Thran War Machine
+4
+Artifact Creature Construct
+no text
+4/5
+This card attacks each turn if able.
+Echo:4
+
+Tectonic Fiend
+4 R R
+Creature Elemental
+no text
+7/7
+This card attacks each turn if able.
+Echo:4 R R
+
+Simian Grunts
+2 G
+Creature Ape
+no text
+3/4
+Flash
+Echo:2 G
+
+Shivan Raptor
+2 R
+Creature Lizard
+no text
+3/1
+First Strike
+Haste
+Echo:2 R
+
+Radiant's Dragoons
+3 W
+Creature Human Soldier
+no text
+2/5
+Echo:3 W
+
+Pouncing Jaguar
+G
+Creature Cat
+no text
+2/2
+Echo:G
+
+Multani's Acolyte
+G G
+Creature Elf
+no text
+2/1
+When this card comes into play, draw a card.
+Echo:G G
+
+Lightning Dragon
+2 R R
+Creature Dragon
+no text
+4/4
+Flying
+Haste
+Echo:2 R R
+abPump R:+1/+0
+
+Herald of Serra
+2 W W
+Creature Angel
+no text
+3/4
+Flying
+Vigilance
+Echo:2 W W
+
+Henchfiend of Ukor
+3 R
+Creature Ogre
+no text
+3/2
+Haste
+Echo:1 B
+abPump BR:+1/+0
+
+Goblin War Buggy
+1 R
+Creature Goblin
+no text
+2/2
+Haste
+Echo:1 R
+
+Cradle Guard
+1 G G
+Creature Treefolk
+no text
+4/4
+Trample
+Echo:1 G G
+
+Citanul Centaurs
+3 G
+Creature Centaur
+no text
+6/3
+Echo:3 G
+Shroud
+
+Albino Troll
+1 G
+Creature Ape
+no text
+3/3
+Echo:1 G
+RegenerateMe:1 G
+
+Acridian
+1 G
+Creature Insect
+no text
+2/4
+Echo:1 G
+
 Feral Animist
 1 R G
 Creature Goblic Shaman

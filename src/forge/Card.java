@@ -43,7 +43,6 @@ public class Card extends MyObservable
   private boolean dealtDmgToOppThisTurn = false;
   private boolean exaltedBonus = false;
   private boolean faceDown = false;
-  private boolean echoPaid = false;
   private boolean sacrificeAtEOT = false;
   
   private boolean firstStrike = false;
@@ -81,6 +80,8 @@ public class Card extends MyObservable
   private String rarity       = "";
   private String text         = "";
   private String manaCost = "";
+  private String upkeepCost = "";
+  private String echoCost = "";
   private String chosenType = "";
   private String chosenColor = "";
   private String namedCard = "";
@@ -243,12 +244,16 @@ public class Card extends MyObservable
   public int getTurnInZone()          {return turnInZone;}
   public void setTurnInZone(int turn) {turnInZone = turn;}
   
-  public boolean getEchoPaid() {return echoPaid;}
-  public void setEchoPaid(boolean b) {echoPaid = b;}
-
+  public void setEchoCost(String s) {echoCost = s;}
+  public String getEchoCost() 		{return echoCost;}
+  
   public void setManaCost(String s) {manaCost = s;}
   public String getManaCost()          {return manaCost;}
-
+  
+  public void setUpkeepCost(String s) {upkeepCost = s;}
+  public String getUpkeepCost()	{return upkeepCost;}
+  public boolean hasUpkeepCost(){return upkeepCost.length() > 0 && !upkeepCost.equals("0");}
+  
   //used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
   public String getChosenType() { return chosenType;}
   public void setChosenType(String s) {chosenType = s;}

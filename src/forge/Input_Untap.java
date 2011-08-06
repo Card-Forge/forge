@@ -5,7 +5,7 @@ public class Input_Untap extends Input
 	
   public void showMessage()
   {
-    GameActionUtil.executeUpkeepEffects();
+    //GameActionUtil.executeUpkeepEffects();
 
     PlayerZone p =  AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
     Card[] c = p.getCards();
@@ -18,6 +18,8 @@ public class Input_Untap extends Input
     else
       regularUntap();
 
+    GameActionUtil.executeUpkeepEffects();
+    
     //otherwise land seems to stay tapped when it is really untapped
     AllZone.Human_Play.updateObservers();
     

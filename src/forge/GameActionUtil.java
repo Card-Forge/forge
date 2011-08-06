@@ -8,7 +8,9 @@ public class GameActionUtil
 	{
 		
 		upkeep_removeDealtDamageToOppThisTurn();
-		//upkeep_Echo();
+		upkeep_UpkeepCost();
+		upkeep_CumulativeUpkeepCost();
+		upkeep_Echo();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		upkeep_Phyrexian_Arena();
 		upkeep_Honden_of_Cleansing_Fire();
@@ -2466,6 +2468,146 @@ public class GameActionUtil
 		}
 	}
 	
+	public static void upkeep_UpkeepCost()
+	{
+		String player = AllZone.Phase.getActivePlayer();
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				ArrayList<String> a = c.getKeyword();
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice "))
+					{
+						String k[] = a.get(i).toString().split(":");
+				        c.setUpkeepCost(k[1]);
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		for (int i=0; i<list.size();i++)
+		{
+			final Card c = list.get(i);
+						 
+		  	final Ability sacAbility = new Ability(c, c.getUpkeepCost())
+		  	{
+		  		public void resolve()
+		  		{
+		  			;
+		  		}
+		  	};
+		  	
+		  	final Command unpaidCommand = new Command() {
+
+				private static final long serialVersionUID = -8737736216222268696L;
+
+				public void execute() {
+	  				AllZone.GameAction.sacrifice(c);
+	  			}
+		  	};
+	  	
+		  	final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -1832975152887536245L;
+
+				public void execute() {
+		  			;
+		  		}
+		  	};
+		  	
+		  	//AllZone.Stack.add(sacAbility);
+		  	if (c.getController().equals(Constant.Player.Human)) {
+		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for "+ c +"\r\n", sacAbility.getManaCost(), paidCommand, unpaidCommand));
+		  	}
+		  	else //computer
+		  	{
+		  		if (ComputerUtil.canPayCost(sacAbility))
+		  			ComputerUtil.playNoStack(sacAbility);
+		  		else
+		  			AllZone.GameAction.sacrifice(c);
+		  	}	
+		}
+	}//upkeepCost
+	
+	public static void upkeep_CumulativeUpkeepCost()
+	{
+		String player = AllZone.Phase.getActivePlayer();
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				ArrayList<String> a = c.getKeyword();
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a.get(i).toString().startsWith("Cumulative upkeep"))
+					{
+						String k[] = a.get(i).toString().split(":");
+						c.addCounter(Counters.AGE, 1);
+						c.setUpkeepCost(CardFactoryUtil.multiplyManaCost(k[1], c.getCounters(Counters.AGE)));
+				        //c.setUpkeepCost(k[1]);
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		for (int i=0; i<list.size();i++)
+		{
+			final Card c = list.get(i);
+						 
+		  	final Ability sacAbility = new Ability(c, c.getUpkeepCost())
+		  	{
+		  		public void resolve()
+		  		{
+		  			;
+		  		}
+		  	};
+		  	
+		  	final Command unpaidCommand = new Command() {
+
+				private static final long serialVersionUID = -8737736216222268696L;
+
+				public void execute() {
+	  				AllZone.GameAction.sacrifice(c);
+	  			}
+		  	};
+	  	
+		  	final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -1832975152887536245L;
+
+				public void execute() {
+		  			;
+		  		}
+		  	};
+		  	
+		  	//AllZone.Stack.add(sacAbility);
+		  	if (c.getController().equals(Constant.Player.Human)) {
+		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for "+ c +"\r\n", sacAbility.getManaCost(), paidCommand, unpaidCommand));
+		  	}
+		  	else //computer
+		  	{
+		  		if (ComputerUtil.canPayCost(sacAbility))
+		  			ComputerUtil.playNoStack(sacAbility);
+		  		else
+		  			AllZone.GameAction.sacrifice(c);
+		  	}	
+		}
+	}//upkeepCost
+	
 	public static void upkeep_Echo()
 	{
 		String player = AllZone.Phase.getActivePlayer();
@@ -2473,20 +2615,58 @@ public class GameActionUtil
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
 		list.addAll(play.getCards());
-		list = list.getType("Creature");
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				return c.getKeyword().contains("(Echo unpaid)");
+			}
+		});
 		
 		for (int i=0; i<list.size();i++)
 		{
-			Card c = list.get(i);
-			if (c.getIntrinsicKeyword().contains("Echo") && (c.getTurnInZone()+2 == AllZone.Phase.getTurn() ))
+			final Card c = list.get(i);
+			if (c.getIntrinsicKeyword().contains("(Echo unpaid)") )
 			{
-				final SpellAbility[] sa = c.getSpellAbility();
-				AllZone.GameAction.playSpellAbility(sa[1]);
-				//AllZone.Stack.push(sa[1]);
-				if (c.getEchoPaid())
-					System.out.println("success");
-				else
-					System.out.println("crap");
+				 
+			  	final Ability sacAbility = new Ability(c, c.getEchoCost())
+			  	{
+			  		public void resolve()
+			  		{
+			  			System.out.println("Echo cost for " + c + " was paid.");
+			  		}
+			  	};
+			  	
+			  	final Command unpaidCommand = new Command() {
+				    private static final long serialVersionUID = -7354791599039157375L;
+					public void execute() {
+		  				AllZone.GameAction.sacrifice(c);
+		  			}
+			  	};
+		  	
+			  	final Command paidCommand = new Command() {
+					private static final long serialVersionUID = 4549981408026393913L;
+
+					public void execute() {
+			  			;
+			  		}
+			  	};
+			  	
+			  	//AllZone.Stack.add(sacAbility);
+			  	if (c.getController().equals(Constant.Player.Human)) {
+			  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Echo for "+ c +"\r\n", sacAbility.getManaCost(), paidCommand, unpaidCommand));
+			  	}
+			  	else //computer
+			  	{
+			  		if (ComputerUtil.canPayCost(sacAbility))
+			  			ComputerUtil.playNoStack(sacAbility);
+			  		else
+			  			AllZone.GameAction.sacrifice(c);
+			  	}
+			  	
+			  	
+				c.removeIntrinsicKeyword("(Echo unpaid)");
 			}	
 		}
 	}
@@ -3656,6 +3836,8 @@ public class GameActionUtil
 				|| c.getName().equals("Thieving Magpie")
 				|| c.getName().equals("Lu Xun, Scholar General"))
 			playerCombatDamage_Shadowmage_Infiltrator(c);
+		else if (c.getName().equals("Nicol Bolas"))
+			playerCombatDamage_Nicol_Bolas(c);
 		else if (c.getName().equals("Goblin Lackey"))
 			playerCombatDamage_Goblin_Lackey(c);
 		else if (c.getName().equals("Augury Adept"))
@@ -4311,7 +4493,27 @@ public class GameActionUtil
 		}
 	}//warren instigator
 
-	
+	private static void playerCombatDamage_Nicol_Bolas(Card c)
+	{
+		final String[] opp = new String[1];
+		final Card crd = c;
+		
+		if (c.getNetAttack() > 0)
+		{
+			Ability ability = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+					opp[0] = AllZone.GameAction.getOpponent(crd.getController());
+					AllZone.GameAction.discardHand(opp[0]);
+				}
+			};
+			opp[0] = AllZone.GameAction.getOpponent(c.getController());
+			ability.setStackDescription(c.getName() + " - " + opp[0]
+					+ " discards his or her hand.");
+			AllZone.Stack.add(ability);
+		}
+	}//nicol bolas
 
 	private static void playerCombatDamage_Shadowmage_Infiltrator(Card c)
 	{
@@ -15088,25 +15290,71 @@ public class GameActionUtil
 				CardList creature = new CardList();
 				creature.addAll(AllZone.Human_Play.getCards());
 				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
-
+				creature = creature.filter(new CardListFilter(){
+					public boolean addCard(Card c)
+					{
+						return c.getType().contains("Saproling") || c.getKeyword().contains("Changeling");
+					}
+				});
+				
 				for (int i = 0; i < creature.size(); i++)
 				{
 					c = creature.get(i);
-					if (c.getType().contains("Saproling"))
-					{
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						
-						gloriousAnthemList.add(c);
-						
-					}
-
+					c.addSemiPermanentAttackBoost(1);
+					c.addSemiPermanentDefenseBoost(1);
 					
+					gloriousAnthemList.add(c);
 				}// for inner
 			}// for outer
 		}// execute()
 	};// Thelonite Hermit
+	
+	public static Command Deranged_Hermit = new Command()
+	{	
+		private static final long serialVersionUID = -6105987998040015344L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for (int i = 0; i < list.size(); i++)
+			{
+				c = list.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+
+			}
+
+			// add +1/+1 to black cards
+			list.clear();
+			PlayerZone[] zone = getZone("Deranged Hermit");
+
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				// CardList creature = new CardList(zone[outer].getCards());
+				CardList creature = new CardList();
+				creature.addAll(AllZone.Human_Play.getCards());
+				creature.addAll(AllZone.Computer_Play.getCards());
+				creature = creature.filter(new CardListFilter(){
+					public boolean addCard(Card c)
+					{
+						return c.getType().contains("Squirrel") || c.getKeyword().contains("Changeling");
+					}
+				});
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);				
+					c.addSemiPermanentAttackBoost(1);
+					c.addSemiPermanentDefenseBoost(1);
+					
+					gloriousAnthemList.add(c);
+				}// for inner
+			}// for outer
+		}// execute()
+	};// Deranged Hermit
 	
 	
 
@@ -15461,6 +15709,7 @@ public class GameActionUtil
 		commands.put("Night_of_Souls_Betrayal", Night_of_Souls_Betrayal);
 		
 		commands.put("Thelonite_Hermit", Thelonite_Hermit);
+		commands.put("Deranged_Hermit", Deranged_Hermit);
 		commands.put("Jacques", Jacques);
 		commands.put("Kaysa", Kaysa);
 		commands.put("Meng_Huo", Meng_Huo);

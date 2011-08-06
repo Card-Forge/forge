@@ -2117,6 +2117,42 @@ public class CardFactoryUtil
 	  }
 	  return count;
   }
+  
+  public static String multiplyManaCost(String manacost, int multiplier)
+  {
+	  if (multiplier == 0)
+		  return "";
+	  if (multiplier == 1)
+		  return manacost;
+	  
+	  String result = "";
+	  String tokenized[] = manacost.split("\\s");
+	  
+	  if (Character.isDigit(tokenized[0].charAt(0))) //manacost starts with "colorless" number cost
+	  {
+		  int cost = Integer.parseInt(tokenized[0]);
+		  cost = multiplier * cost;
+		  tokenized[0] = "" + cost;
+		  result = result + " " + tokenized[0];
+	  }
+	  else {
+		  for (int i=0; i<multiplier; i++)
+			  //tokenized[0] = tokenized[0] + " " + tokenized[0];
+		  	  result = result + " " + tokenized[0];
+	  }
+	  
+	  for (int i=1;i<tokenized.length;i++){
+		  for (int j=0;j<multiplier;j++)
+		  {
+			  //tokenized[i] = tokenized[i] + " " + tokenized[i];
+			  result = result + " " + tokenized[i];
+		  }
+	  }
+	  
+	  result = result.trim();
+	  return result;
+  }
+  
   public static boolean canTarget(SpellAbility ability, Card target)
   {
 	  return canTarget(ability.getSourceCard(), target);
@@ -3017,6 +3053,16 @@ public class CardFactoryUtil
      list = list.getType("Creature");
      
      System.out.println("Most prominent creature type: " + getMostProminentCreatureType(list));
+     
+     
+     String manacost = "3 GW W W R B S";
+     String multipliedTwice = multiplyManaCost(manacost, 2);
+     String multipliedThrice = multiplyManaCost(manacost, 3);
+     
+     System.out.println(manacost + " times 2 = " + multipliedTwice);
+     System.out.println(manacost + " times 3 = " + multipliedThrice);
+     
+     
   }
   
 }

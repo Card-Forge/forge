@@ -7,6 +7,7 @@ public class Input_PayManaCost_Ability extends Input
 	private static final long serialVersionUID = 3836655722696348713L;
 	
 	private String originalManaCost;
+	private String message = "";
     private ManaCost manaCost;
     //private ArrayList<Card> tappedLand = new ArrayList<Card>();
 
@@ -14,6 +15,7 @@ public class Input_PayManaCost_Ability extends Input
     private Command unpaidCommand;
     @SuppressWarnings("unused") // isPaid
 	private boolean isPaid;
+
 
     //for Abilities that don't tap
     public Input_PayManaCost_Ability(String manaCost, Command paid)
@@ -25,15 +27,28 @@ public class Input_PayManaCost_Ability extends Input
     //or AllZone.Input.setState() with new InputState
     public Input_PayManaCost_Ability(String manaCost_2, Command paidCommand_2, Command unpaidCommand_2)
     {
-	originalManaCost = manaCost_2;
-
-	manaCost      = new ManaCost(originalManaCost);
-	paidCommand   = paidCommand_2;
-	unpaidCommand = unpaidCommand_2;
+		originalManaCost = manaCost_2;
+		message = "";
+	
+		manaCost      = new ManaCost(originalManaCost);
+		paidCommand   = paidCommand_2;
+		unpaidCommand = unpaidCommand_2;
     }
+    
+    public Input_PayManaCost_Ability(String m, String manaCost_2, Command paidCommand_2, Command unpaidCommand_2)
+    {
+		originalManaCost = manaCost_2;
+		message = m;
+	
+		manaCost      = new ManaCost(originalManaCost);
+		paidCommand   = paidCommand_2;
+		unpaidCommand = unpaidCommand_2;
+    }
+    
+    
     public void resetManaCost()
     {
-	manaCost      = new ManaCost(originalManaCost);
+    	manaCost      = new ManaCost(originalManaCost);
     }
     public void selectCard(Card card, PlayerZone zone)
     {
@@ -59,15 +74,15 @@ public class Input_PayManaCost_Ability extends Input
 
     public void selectButtonCancel()
     {
-	resetManaCost();
-	AllZone.ManaPool.unpaid();
-	unpaidCommand.execute();
-	stop();
+    	resetManaCost();
+    	AllZone.ManaPool.unpaid();
+    	unpaidCommand.execute();
+    	stop();
     }
     public void showMessage()
     {
     	ButtonUtil.enableOnlyCancel();
-    	AllZone.Display.showMessage("Pay Mana Cost: \r\n" +manaCost.toString());
+    	AllZone.Display.showMessage(message + "Pay Mana Cost: \r\n" +manaCost.toString());
     }
     
     
