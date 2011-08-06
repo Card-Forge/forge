@@ -5760,6 +5760,7 @@ res/cardsfolder/spoils_of_victory.txt -text svneol=native#text/plain
 res/cardsfolder/spontaneous_combustion.txt svneol=native#text/plain
 res/cardsfolder/spontaneous_generation.txt -text svneol=native#text/plain
 res/cardsfolder/spore_burst.txt -text svneol=native#text/plain
+res/cardsfolder/spore_cloud.txt -text svneol=native#text/plain
 res/cardsfolder/spore_flower.txt -text svneol=native#text/plain
 res/cardsfolder/spore_frog.txt -text svneol=native#text/plain
 res/cardsfolder/sporecap_spider.txt -text svneol=native#text/plain
