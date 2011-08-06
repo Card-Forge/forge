@@ -1,0 +1,9 @@
+Name:Hand of the Praetors
+ManaCost:3 B
+Types:Creature Zombie
+Text:Whenever you cast a spell with infect, target player gets a poison counter.
+PT:3/2
+K:Infect
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!with.Infect!NotSelf:Other creatures you control with infect get +1/+1.
+SVar:Rarity:Rare
+End

@@ -408,6 +408,7 @@ public class GameActionUtil {
 		playCard_Fable_of_Wolf_and_Owl(c);
 		playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
+		playCard_Hand_of_the_Praetors(c);
 		
 		AllZone.GameAction.CheckWheneverKeyword(c,"CastSpell",null);
 	}
@@ -1188,6 +1189,49 @@ public class GameActionUtil {
 					AllZone.Stack.add(ability);
 			}//if
 		}
+		}
+	}
+	
+	public static void playCard_Hand_of_the_Praetors(Card c)
+	{
+		final String controller = c.getController();
+
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Hand of the Praetors");
+		
+		for (int i=0;i<list.size();i++)
+		{
+			final Card card = list.get(i);
+			if (card.getKeyword().contains("Infect"))
+			{
+				final Ability ability = new Ability(card, "0")
+				{
+					public void resolve()
+					{
+						if (getTargetPlayer().equals(Constant.Player.Human))
+							AllZone.Human_PoisonCounter.addPoisonCounters(1);
+						else
+							AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+					}
+					
+					public void chooseTargetAI()
+					{
+						setTargetPlayer(Constant.Player.Human);
+					}
+				};
+				
+				ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+				if (controller.equals(Constant.Player.Human))
+					AllZone.GameAction.playSpellAbility(ability);
+				else {
+					ability.chooseTargetAI();
+					AllZone.Stack.add(ability);
+				}
+			}
 		}
 	}
 	
