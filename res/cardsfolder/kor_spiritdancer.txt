@@ -1,7 +1,7 @@
 Name:Kor Spiritdancer
 ManaCost:1 W
 Types:Creature Kor Wizard
-Text:no text
+Text:Whenever you cast an Aura spell, you may draw a card.
 PT:0/2
 K:stPumpSelf:Creature:X/X:no Condition:CARDNAME gets +2/+2 for each Aura attached to it.
 SVar:X:Count$Valid Aura.Attached/Times.2
