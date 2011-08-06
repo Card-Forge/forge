@@ -3339,30 +3339,38 @@ public class GameActionUtil {
 
     //***CREATURES START HERE***
 
-	public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
-		//if (AllZone.GameAction.isCardInPlay(c)){
-		if(c.getName().equals("Goblin Sharpshooter")) destroyCreature_Goblin_Sharpshooter(c, destroyed);
-		else if(c.getName().equals("Dingus Staff")) destroyCreature_Dingus_Staff(c, destroyed);
-		else if(c.getName().equals("Prowess of the Fair") && destroyed.isType("Elf")
-				&& !destroyed.isToken() && !c.equals(destroyed)
-				&& destroyed.getController().equals(c.getController())) destroyCreature_Prowess_of_the_Fair(c,
-						destroyed);
-		else if(c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
-		else if(c.getName().equals("Moonlit Wake")) destroyCreature_Moonlit_Wake(c, destroyed);
-		else if(c.getName().equals("Proper Burial") && destroyed.getController().equals(c.getController())) destroyCreature_Proper_Burial(
-				c, destroyed);
-		else if(c.getName().equals("Sek'Kuar, Deathkeeper") && !destroyed.isToken()
-				&& destroyed.getController().equals(c.getController()) && !destroyed.getName().equals(c.getName())) destroyCreature_SekKuar(
-						c, destroyed);
-		//}
-	}
+    public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
+        //if (AllZone.GameAction.isCardInPlay(c)){
+    	
+        /* Goblin Sharpshooter converted to trigger
+        if(c.getName().equals("Goblin Sharpshooter")) destroyCreature_Goblin_Sharpshooter(c, destroyed);
+        */
+    	
+        if (c.getName().equals("Dingus Staff")) destroyCreature_Dingus_Staff(c, destroyed);
+        else if (c.getName().equals("Prowess of the Fair") 
+                && destroyed.isType("Elf")
+                && !destroyed.isToken() 
+                && !c.equals(destroyed)
+                && destroyed.getController().equals(c.getController())) destroyCreature_Prowess_of_the_Fair(c, destroyed);
+        else if (c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
+        else if (c.getName().equals("Moonlit Wake")) destroyCreature_Moonlit_Wake(c, destroyed);
+        else if (c.getName().equals("Proper Burial") 
+                && destroyed.getController().equals(c.getController())) destroyCreature_Proper_Burial(c, destroyed);
+        else if (c.getName().equals("Sek'Kuar, Deathkeeper") 
+                && !destroyed.isToken()
+                && destroyed.getController().equals(c.getController()) 
+                && !destroyed.getName().equals(c.getName())) destroyCreature_SekKuar(c, destroyed);
+        //}
+    }
 
-	//***
+    //***
 
-	private static void destroyCreature_Goblin_Sharpshooter(Card c, Card destroyed) {
-		//not using stack for this one
-		if(AllZone.GameAction.isCardInPlay(c) && c.isTapped()) c.untap();
-	}
+    /* Goblin Sharpshooter converted to trigger
+    private static void destroyCreature_Goblin_Sharpshooter(Card c, Card destroyed) {
+        //not using stack for this one
+        if(AllZone.GameAction.isCardInPlay(c) && c.isTapped()) c.untap();
+    }
+    */
 
 	private static void destroyCreature_Dingus_Staff(Card c, Card destroyed) {
 		final Card crd = destroyed;
