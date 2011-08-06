@@ -243,8 +243,9 @@ public class Phase extends MyObservable
             else if(humanExtraTurns < 0)
               humanExtraTurns++;
               */
-        } else if(is(Constant.Phase.Untap, Constant.Player.Computer)) {
+        } else if(is(Constant.Phase.Untap, Constant.Player.Computer)) {       	
         	StormCount = 0;
+        	GameBegins = 1;
         	HighTideCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   
@@ -252,6 +253,7 @@ public class Phase extends MyObservable
             ComputerCreatureSpellCount = 0;
             AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(false);
             turn++;
+            
             /*
             if (computerExtraTurns > 0)
               computerExtraTurns--;

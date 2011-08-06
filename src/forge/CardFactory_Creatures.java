@@ -2421,16 +2421,26 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
+                    CardList Fastbond = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                    Fastbond = Fastbond.getName("Fastbond");
                     if(library.size() > 0) {
                     if(library.get(0).getType().contains("Land")) {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                         AllZone.GameAction.moveTo(play, library.get(0));
                         if(card.getController() == Constant.Player.Human) {
                         	AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+                        	if(AllZone.GameInfo.humanPlayedFirstLandThisTurn() == true) {
+                        		for(int i = 0; i < Fastbond.size(); i++)
+                        			AllZone.GameAction.addDamage(card.getController(), 1);
+                        	}
                         	AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
                         }
                         else {
                         	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
+                        	if(AllZone.GameInfo.computerPlayedFirstLandThisTurn() == true) {
+                        		for(int i = 0; i < Fastbond.size(); i++)
+                        			AllZone.GameAction.addDamage(card.getController(), 1);
+                        	}
                         	AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(true);
                         }
                     }
