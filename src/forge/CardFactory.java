@@ -231,7 +231,7 @@ public class CardFactory implements NewConstants {
         return getCard2(cardName, owner);
     }
     
-    private final int hasKeyword(Card c, String k) {
+    final static int hasKeyword(Card c, String k) {
         ArrayList<String> a = c.getKeyword();
         for(int i = 0; i < a.size(); i++)
             if(a.get(i).toString().startsWith(k)) return i;
@@ -10924,6 +10924,7 @@ public class CardFactory implements NewConstants {
     }//getCard2
     
     public Card postFactoryKeywords(Card card){
+    	// this function should handle any keywords that need to be added after a spell goes through the factory
 		card.addColor(card.getManaCost());
     	int cardnameSpot = hasKeyword(card, "CARDNAME is ");
     	if (cardnameSpot != -1){
@@ -10939,18 +10940,17 @@ public class CardFactory implements NewConstants {
             card.addColor(color);
     	}
 
-    	// this function should handle any keywords that need to be added after a spell goes through the factory
         if(hasKeyword(card, "Fading") != -1) {
             int n = hasKeyword(card, "Fading");
             if(n != -1) {
                 String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
                 
                 String k[] = parse.split(":");
                 final int power = Integer.parseInt(k[1]);
                 
 
                 card.addComesIntoPlayCommand(CardFactoryUtil.fading(card, power));
+                // todo: come up with better way to add description
                 card.addSpellAbility(CardFactoryUtil.fading_desc(card, power));
             }
         }//Fading    	
@@ -10959,13 +10959,12 @@ public class CardFactory implements NewConstants {
             int n = hasKeyword(card, "Vanishing");
             if(n != -1) {
                 String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
                 
                 String k[] = parse.split(":");
                 final int power = Integer.parseInt(k[1]);
                 
-
                 card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
+                // todo: come up with better way to add description
                 card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
             }
         }//Vanishing

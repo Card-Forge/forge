@@ -7397,14 +7397,7 @@ public class GameActionUtil {
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				SpellAbility[] sas = c.getSpellAbility();
-				boolean hasRegen = false;
-				for(SpellAbility sa:sas) {
-					if(sa.toString().contains(
-							"At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)")) //this is essentially ".getDescription()"
-						hasRegen = true;
-				}
-				return hasRegen;
+				return CardFactory.hasKeyword(c, "Vanishing") != -1;
 			}
 		});
 		if(list.size() > 0) {
@@ -7431,14 +7424,7 @@ public class GameActionUtil {
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				SpellAbility[] sas = c.getSpellAbility();
-				boolean isFading = false;
-				for(SpellAbility sa:sas) {
-					if(sa.toString().contains(
-							"At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)")) //this is essentially ".getDescription()"
-						isFading = true;
-				}
-				return isFading;
+				return CardFactory.hasKeyword(c, "Fading") != -1;
 			}
 		});
 		if(list.size() > 0) {

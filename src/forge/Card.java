@@ -390,12 +390,8 @@ public class Card extends MyObservable {
             counters.put(counterName, aux);
 			if(counterName.equals(Counters.TIME) && aux == 0)
 			{
-				boolean hasVanish=false;
-				for(SpellAbility sa:getSpellAbility()) {
-					if(sa.toString().contains(
-							"At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)")) //this is essentially ".getDescription()"
-						hasVanish = true;
-				}
+				boolean hasVanish = CardFactory.hasKeyword(this, "Vanishing") != -1;
+
 				if(hasVanish && AllZone.GameAction.isCardInPlay(this))
 					AllZone.GameAction.sacrifice(this);
 				if(hasSuspend() && AllZone.GameAction.isCardRemovedFromGame(this))

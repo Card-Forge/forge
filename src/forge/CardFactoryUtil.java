@@ -2258,9 +2258,7 @@ public class CardFactoryUtil {
             public void resolve() {}
         };
         // Be carefull changing this description cause it's crucial for ability to work (see GameActionUtil - vanishing for it)
-        desc.setDescription("Fading "
-                + power
-                + " (This permanent enters the battlefield with "
+        desc.setDescription("(This permanent enters the battlefield with "
                 + power
                 + " fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)");
         return desc;
@@ -2296,9 +2294,7 @@ public class CardFactoryUtil {
             public void resolve() {}
         };
         // Be carefull changing this description cause it's crucial for ability to work (see GameActionUtil - vanishing for it)
-        desc.setDescription("Vanishing "
-                + power
-                + " (This permanent enters the battlefield with "
+        desc.setDescription("(This permanent enters the battlefield with "
                 + power
                 + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)");
         return desc;
