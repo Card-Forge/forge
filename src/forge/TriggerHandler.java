@@ -735,6 +735,8 @@ public class TriggerHandler {
 					sa[0].resolve();
 				}
 			};
+			wrapperAbility.setTrigger(true);
+			
 			if(regtrig.getHostCard().getController().equals(AllZone.HumanPlayer))
 			{
 				AllZone.GameAction.playSpellAbility(wrapperAbility);

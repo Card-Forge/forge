@@ -51,15 +51,21 @@ public class MagicStack extends MyObservable {
 				ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions().getActivationNumberSacrifice()) {
 			ability.getSourceCard().addExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
 		}
-		frozen = false;
+		// triggered abilities should go on the frozen stack
+		if (!ability.isTrigger())
+			frozen = false;
+		
 		this.add(ability);
 
 		// if the ability is a spell, but not a copied spell and its not already on the stack zone, move there
-		Card source = ability.getSourceCard();
-		if (ability.isSpell() && !source.isCopiedSpell() && !AllZone.getZone(source).is(Constant.Zone.Stack))
-			AllZone.GameAction.moveToStack(source);
-		
-		unfreezeStack();
+		if (ability.isSpell()){
+			Card source = ability.getSourceCard();
+			if (!source.isCopiedSpell() && !AllZone.getZone(source).is(Constant.Zone.Stack))
+				AllZone.GameAction.moveToStack(source);
+		}
+
+		if (!ability.isTrigger())
+			unfreezeStack();
 	}
 
 	public void unfreezeStack() {

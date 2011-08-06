@@ -32,6 +32,8 @@ public abstract class SpellAbility {
     private CardList        targetList;
     
     private boolean         spell;
+    private boolean			trigger 		   = false;
+    
     private boolean         tapAbility;
     private boolean         untapAbility;
     private boolean         buyBackAbility     = false;        //false by default
@@ -547,5 +549,13 @@ public abstract class SpellAbility {
 
 	public boolean isKothThirdAbility() {
 		return kothThirdAbility;
+	}
+
+	public void setTrigger(boolean trigger) {
+		this.trigger = trigger;
+	}
+
+	public boolean isTrigger() {
+		return trigger;
 	}
 }
