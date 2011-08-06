@@ -17,7 +17,7 @@ public class EndOfTurn implements java.io.Serializable
 
   public void executeAt()
   {
-	  AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard,"BeginningOfEndStep",null);
+	  AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"BeginningOfEndStep",null);
 	  
     //Pyrohemia and Pestilence
     CardList all = new CardList();

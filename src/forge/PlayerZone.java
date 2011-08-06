@@ -31,5 +31,5 @@ interface IPlayerZone
   public boolean is(String zone, Player player);
 
   public Player getPlayer();//the Player that owns this zone
-  public String getZone();//returns the Zone's name like Graveyard
+  public String getZoneName();//returns the Zone's name like Graveyard
 }

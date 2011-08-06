@@ -1107,8 +1107,8 @@ public class Card extends MyObservable {
     {
     	SpellCopyingCard = b;
     }
-    public boolean CopiesSpells() {
-	return SpellCopyingCard;
+    public boolean copiesSpells() {
+    	return SpellCopyingCard;
     }
     public void setExaltedBonus(boolean b) {
         exaltedBonus = b;
@@ -2161,7 +2161,7 @@ public class Card extends MyObservable {
         return -1;
     }
 	
-	public boolean KeywordsContain(String keyword) {
+	public boolean keywordsContain(String keyword) {
         ArrayList<String> a = getKeyword();
         for(int i = 0; i < a.size(); i++)
             if(a.get(i).toString().contains(keyword)) return true;

@@ -220,7 +220,7 @@ public class Ability_Cost {
 	public void changeCost(SpellAbility sa){
 		if (getTotalMana() != "0"){	// 11/15/10 use getTotalMana() to account for X reduction
 		    String mana = getTotalMana();
-			manaCost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana)).toString();
+			manaCost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana)).toString();
 		}
 	}
 	

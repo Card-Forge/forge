@@ -67,7 +67,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         if(trigger) {
             c.setSickness(true);// summoning sickness
             c.comesIntoPlay();
-            AllZone.GameAction.CheckWheneverKeyword(c,"EntersBattleField",null);
+            AllZone.GameAction.checkWheneverKeyword(c,"EntersBattleField",null);
             
             PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
@@ -396,7 +396,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
 
         if(leavesTrigger) {
-        	AllZone.GameAction.CheckWheneverKeyword(c,"LeavesBattleField",null);
+        	AllZone.GameAction.checkWheneverKeyword(c,"LeavesBattleField",null);
         	c.leavesPlay();
         }
         

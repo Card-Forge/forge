@@ -964,7 +964,7 @@ public class CardFactory_Creatures {
                     PlayerZone p = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
-                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play) && super.canPlay();
+                    return 0 < list.size() && AllZone.getZone(card).getZoneName().equals(Constant.Zone.Play) && super.canPlay();
                 }
                 
                 @Override
@@ -1084,7 +1084,7 @@ public class CardFactory_Creatures {
                     PlayerZone p = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
-                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play) && super.canPlay();
+                    return 0 < list.size() && AllZone.getZone(card).getZoneName().equals(Constant.Zone.Play) && super.canPlay();
                 }
                 
                 @Override
@@ -1144,7 +1144,7 @@ public class CardFactory_Creatures {
                     PlayerZone p = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
-                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play) && super.canPlay();
+                    return 0 < list.size() && AllZone.getZone(card).getZoneName().equals(Constant.Zone.Play) && super.canPlay();
                 }
                 
                 @Override
@@ -20766,12 +20766,12 @@ public class CardFactory_Creatures {
         		public void resolve() {
         			int x = card.getXManaCostPaid();
         			if(getTargetPlayer() == null) {
-        				getTargetCard().addDamage((int)Math.floor(x/2), card);
+        				getTargetCard().addDamage((int)Math.floor(x/2.0), card);
         			}
         			else {
-        				getTargetPlayer().addDamage((int)Math.floor(x/2), card);
+        				getTargetPlayer().addDamage((int)Math.floor(x/2.0), card);
         			}
-        			card.getController().addDamage((int)Math.ceil(x/2), card);
+        			card.getController().addDamage((int)Math.ceil(x/2.0), card);
         			card.setXManaCostPaid(0);
         		}//resolve()
 				

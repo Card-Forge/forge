@@ -113,7 +113,7 @@ public class SpellAbility_Restriction {
 	SpellAbility_Restriction(){	}
 
 	public boolean canPlay(Card c, SpellAbility sa){
-		if (!AllZone.getZone(c).getZone().equals(activateZone))
+		if (!AllZone.getZone(c).getZoneName().equals(activateZone))
 			return false;
 		
 		Player activator = sa.getActivatingPlayer();

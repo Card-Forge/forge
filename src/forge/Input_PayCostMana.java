@@ -20,7 +20,7 @@ public class Input_PayCostMana extends Input {
                 	manaCost = new ManaCost("0"); 
         	} else {
     		    String mana = payment.getCost().getMana();
-        		manaCost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana)); 
+        		manaCost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana)); 
         	}    	
         }
         else

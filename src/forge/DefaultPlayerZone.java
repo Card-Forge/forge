@@ -135,7 +135,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
   {
     return player;
   }
-  public String getZone()
+  public String getZoneName()
   {
     return zoneName;
   }

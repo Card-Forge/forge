@@ -197,7 +197,7 @@ public class ComputerUtil
     String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
     ManaCost cost = new ManaCost(mana);
     
-    cost = AllZone.GameAction.GetSpellCostChange(sa, cost);
+    cost = AllZone.GameAction.getSpellCostChange(sa, cost);
     if(cost.isPaid())
         return canPayAdditionalCosts(sa);
  // Beached - Delete old
@@ -278,7 +278,7 @@ public class ComputerUtil
     		int discAmount = cost.getDiscardAmount();
     		
     		if (cost.getDiscardThis()){
-    			if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
+    			if (!AllZone.getZone(card).getZoneName().equals(Constant.Zone.Hand))
     				return false;
     		}
     		else if( discType.equals("LastDrawn")) {
@@ -398,7 +398,7 @@ public class ComputerUtil
     
     String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
     
-    ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana));
+    ManaCost cost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana));
     // Beached - Delete old
     if(cost.isPaid())
         return;

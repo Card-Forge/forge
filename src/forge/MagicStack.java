@@ -64,7 +64,7 @@ public class MagicStack extends MyObservable {
 		}
 	}
 
-	public ManaCost GetMultiKickerSpellCostChange(SpellAbility sa) {
+	public ManaCost getMultiKickerSpellCostChange(SpellAbility sa) {
 		int Max = 25;
 		String[] Numbers = new String[Max];
 		for (int no = 0; no < Max; no++)
@@ -171,7 +171,7 @@ public class MagicStack extends MyObservable {
 				String k[] = parse.split(":");
 				if (k[1].equals("ActualSpell")
 						&& ActualEffectTriggered == false) {
-					AllZone.GameAction.CheckWheneverKeyword(sp.getSourceCard(),
+					AllZone.GameAction.checkWheneverKeyword(sp.getSourceCard(),
 							"ActualSpell", null);
 					sp.getSourceCard().removeIntrinsicKeyword(parse);
 					ActualEffectTriggered = true;
@@ -273,7 +273,7 @@ public class MagicStack extends MyObservable {
 
 						public void execute() {
 							ability.resolve();
-							ManaCost manaCost = GetMultiKickerSpellCostChange(ability);
+							ManaCost manaCost = getMultiKickerSpellCostChange(ability);
 							if (manaCost.isPaid()) {
 								this.execute();
 							} else {
@@ -301,7 +301,7 @@ public class MagicStack extends MyObservable {
 
 					if (sp.getSourceCard().getController().equals(
 							AllZone.HumanPlayer)) {
-						ManaCost manaCost = GetMultiKickerSpellCostChange(ability);
+						ManaCost manaCost = getMultiKickerSpellCostChange(ability);
 
 						if (manaCost.isPaid()) {
 							paidCommand.execute();

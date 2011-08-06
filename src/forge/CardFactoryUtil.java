@@ -4706,7 +4706,7 @@ public class CardFactoryUtil {
 			}
 		}
 		
-		AllZone.GameAction.CheckWheneverKeyword(c, "PlayLand", null);
+		AllZone.GameAction.checkWheneverKeyword(c, "PlayLand", null);
     }
     
     

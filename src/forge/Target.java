@@ -30,7 +30,7 @@ public class Target {
 	public void addTarget(Object o){
 		if (o instanceof Player){
 			Player p = (Player)o;
-			if (!targetCards.contains(p))
+			if (!targetPlayers.contains(p))
 				targetPlayers.add(p);
 		}
 		if (o instanceof Card){

@@ -30,7 +30,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
 		
 		if(Pithing.size() != 0) return false;
         
-        if(c.isCreature() && AllZone.getZone(c).getZone().equals(Constant.Zone.Play)) {
+        if(c.isCreature() && AllZone.getZone(c).getZoneName().equals(Constant.Zone.Play)) {
 			CardList Silence = AllZoneUtil.getPlayerCardsInPlay(getSourceCard().getController().getOpponent());
 			Silence = Silence.getName("Linvala, Keeper of Silence");
 			if (Silence.size() != 0)

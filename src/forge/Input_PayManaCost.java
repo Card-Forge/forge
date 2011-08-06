@@ -32,7 +32,7 @@ public class Input_PayManaCost extends Input {
                     AllZone.Stack.add(spell);
                 }
         	} else {
-        		manaCost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(originalManaCost)); 
+        		manaCost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(originalManaCost)); 
         	}    	
         }
         else

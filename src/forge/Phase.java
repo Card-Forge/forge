@@ -362,7 +362,7 @@ public class Phase extends MyObservable
 	        // Then run other Attacker bonuses
 	        //check for exalted:
 	        if (list.size() == 1){
-	        	AllZone.GameAction.CheckWheneverKeyword(list.get(0), "Attack - Alone", null);
+	        	AllZone.GameAction.checkWheneverKeyword(list.get(0), "Attack - Alone", null);
 	            Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
 	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);
 	            CardList exalted = new CardList(play.getCards());

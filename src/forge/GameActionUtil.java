@@ -24,7 +24,7 @@ public class GameActionUtil {
 		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		
-		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
+		AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
 		
 		upkeep_The_Abyss();
 		upkeep_All_Hallows_Eve();
@@ -183,7 +183,7 @@ public class GameActionUtil {
 
 	public static void executeTapSideEffects(Card c) {
 		
-		AllZone.GameAction.CheckWheneverKeyword(c,"BecomesTapped",null);
+		AllZone.GameAction.checkWheneverKeyword(c,"BecomesTapped",null);
 		final Player activePlayer = AllZone.Phase.getPlayerTurn();
 
 		/* cards with Tap side effects can be listed here, just like in
@@ -547,7 +547,7 @@ public class GameActionUtil {
 		playCard_Venser_Emblem(c);
 		playCard_Presence_of_the_Master(c);
 		
-		AllZone.GameAction.CheckWheneverKeyword(c,"CastSpell",null);
+		AllZone.GameAction.checkWheneverKeyword(c,"CastSpell",null);
 	}
 
 	public static void playCard_Kozilek(Card c)
@@ -3022,7 +3022,7 @@ public class GameActionUtil {
 	public static void executeDrawCardTriggeredEffects(Player player) {
     	Object[] DrawCard_Whenever_Parameters = new Object[1];
     	DrawCard_Whenever_Parameters[0] = player;
-		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
+		AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
 		drawCardTriggered_Hoofprints_of_the_Stag(player);
 		drawCardTriggered_Lorescale_Coatl(player);
 		drawCardTriggered_Underworld_Dreams(player);
@@ -5513,7 +5513,7 @@ public class GameActionUtil {
     	Object[] DealsDamage_Whenever_Parameters = new Object[3];
     	DealsDamage_Whenever_Parameters[0] = c.getController().getOpponent();
     	DealsDamage_Whenever_Parameters[2] = c;
-    	AllZone.GameAction.CheckWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
+    	AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
 
 		if (c.hasStartOfKeyword("Poisonous"))
 		{
@@ -12395,7 +12395,7 @@ public class GameActionUtil {
      		 boolean SourceCardinRightZone = true;
      		 if(k[1].equals("Play") && !AllZone.GameAction.isCardInPlay(Source)) SourceCardinRightZone = false;
      		 if(k[1].equals("Graveyard") && !AllZone.GameAction.isCardInGrave(Source)) SourceCardinRightZone = false;
-     		 if(!LastKnownController.equals(Source.getController())) SourceCardinRightZone = false;
+     		 if(!LastKnownController.equals(Source.getController().getName())) SourceCardinRightZone = false;
      		  // Special Conditions
       	      boolean SpecialConditionsMet = true;
    	      	  CardList SpecialConditionsCardList = new CardList();

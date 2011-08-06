@@ -116,7 +116,7 @@ public class Cost_Payment {
     		int discAmount = cost.getDiscardAmount();
     		
     		if (cost.getDiscardThis()){
-    			if (!AllZone.getZone(card).getZone().equals(Constant.Zone.Hand))
+    			if (!AllZone.getZone(card).getZoneName().equals(Constant.Zone.Hand))
     				return false;
     		}
     		else if (discType.equals("Hand")){
@@ -428,7 +428,7 @@ public class Cost_Payment {
     		if(!AllZoneUtil.getPlayerHand(card.getController()).contains(card.getController().getLastDrawnCard())) {
     			return;
     		}
-			if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
+			if (!AllZone.getZone(card).getZoneName().equals(Constant.Zone.Hand))
 				return;
     	}
     	

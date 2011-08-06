@@ -849,7 +849,7 @@ public class CombatUtil {
     
     public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers
     {
-        	AllZone.GameAction.CheckWheneverKeyword(c,"Attacks",null);
+        	AllZone.GameAction.checkWheneverKeyword(c,"Attacks",null);
         	//Annihilator:
         	if (!c.getCreatureAttackedThisCombat())
         	{
@@ -1981,7 +1981,7 @@ public class CombatUtil {
     
     public static void checkUnblockedAttackers(Card c) {
     	
-    	AllZone.GameAction.CheckWheneverKeyword(c,"isUnblocked",null);
+    	AllZone.GameAction.checkWheneverKeyword(c,"isUnblocked",null);
     	
         if(c.getName().equals("Guiltfeeder")) {
             final Player player = c.getController();
@@ -2019,7 +2019,7 @@ public class CombatUtil {
     	//System.out.println("Phase during checkDeclareBlockers: " + AllZone.Phase.getPhase());
         	for (Card c:cl)
         	{
-        		AllZone.GameAction.CheckWheneverKeyword(c,"Blocks",null);
+        		AllZone.GameAction.checkWheneverKeyword(c,"Blocks",null);
         		
         		if (!c.getCreatureBlockedThisCombat()) {
                 	for(Ability ab:CardFactoryUtil.getBushidoEffects(c)) {
@@ -2080,7 +2080,7 @@ public class CombatUtil {
     public static void checkBlockedAttackers(Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
     	if(!a.getCreatureGotBlockedThisCombat()) 
-    		AllZone.GameAction.CheckWheneverKeyword(a,"BecomesBlocked",null);
+    		AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null);
     	
         if(!a.getCreatureGotBlockedThisCombat()) {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))

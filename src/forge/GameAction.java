@@ -690,7 +690,7 @@ public class GameAction {
     }
     
     // Whenever Keyword
-    public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) {
+    public void checkWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) {
     	checkStateEffects();
     	
         PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
@@ -733,7 +733,7 @@ public class GameAction {
                  String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
                  String k[] = parse.split(":");
                  if((k[1].contains(Event))) {
-                	 RunWheneverKeyword(Triggering_Card, Event, Custom_Parameters); // Beached
+                	 runWheneverKeyword(Triggering_Card, Event, Custom_Parameters); // Beached
                 	 Triggered = true;
                  }
  		        }
@@ -742,7 +742,7 @@ public class GameAction {
  		}	
     }
 	static boolean MultiTarget_Cancelled = false;
-    public void RunWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
+    public void runWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
     	/**
     	 * Custom_Parameters Info: 
     	 * For GainLife		: Custom_Parameters[0] = Amount of Life Gained
@@ -2097,7 +2097,7 @@ public class GameAction {
             }
         });
         
-        CheckWheneverKeyword(c, "PermanentIntoGraveyard",null);
+        checkWheneverKeyword(c, "PermanentIntoGraveyard",null);
         for(int i = 0; i < list.size(); i++)
             GameActionUtil.executeDestroyCardEffects(list.get(i), c);
         for(int i = 0; i < grv.size(); i++)
@@ -2821,7 +2821,7 @@ public class GameAction {
     
     int CostCutting_GetMultiMickerManaCostPaid = 0;
     String CostCutting_GetMultiMickerManaCostPaid_Colored = "";
-    public ManaCost GetSpellCostChange(SpellAbility sa, ManaCost originalCost) {
+    public ManaCost getSpellCostChange(SpellAbility sa, ManaCost originalCost) {
     	// Beached
         Card  originalCard = sa.getSourceCard();
         SpellAbility spell = sa;
@@ -3235,7 +3235,7 @@ public class GameAction {
 	    		manaCost = new ManaCost("0"); 
 	    	} else {
 	    		
-	    		manaCost = GetSpellCostChange(sa, new ManaCost(sa.getManaCost()));    		
+	    		manaCost = getSpellCostChange(sa, new ManaCost(sa.getManaCost()));    		
 	    	}      
 	        if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
 	        	if (sa.getAfterPayMana() == null){

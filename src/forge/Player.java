@@ -114,7 +114,7 @@ public abstract class Player extends MyObservable{
 		
 		Object[] Life_Whenever_Parameters = new Object[1];
     	Life_Whenever_Parameters[0] = toGain;
-    	AllZone.GameAction.CheckWheneverKeyword(getPlayerCard(), "GainLife", Life_Whenever_Parameters);
+    	AllZone.GameAction.checkWheneverKeyword(getPlayerCard(), "GainLife", Life_Whenever_Parameters);
 
 		return newLifeSet;
 	}
@@ -399,7 +399,7 @@ public abstract class Player extends MyObservable{
     		;
     	}
     	
-    	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
+    	AllZone.GameAction.checkWheneverKeyword(c,"DiscardsCard",null);
     	
     	/*
     	 * When a spell or ability an opponent controls causes you
