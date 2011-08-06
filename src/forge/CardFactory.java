@@ -5771,6 +5771,78 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//end MakeToken
+        
+        if(hasKeyword(card, "abMakeToken") != -1) {
+        	int n = hasKeyword(card, "abMakeToken");
+        	
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+            
+        	final String[] k = parse.split("<>");
+            final String numString = k[1].equals("X") ? card.getSVar("X") : k[1];
+            final boolean xString = k[1].equals("X") ? true : false;
+            final String name = k[2];
+            final String imageName = k[3];
+            final String controllerString = k[4];
+            final String manaCost = k[5];
+            final String[] types = k[6].split(";");
+            final int attack = Integer.valueOf(k[7]);
+            final int defense = Integer.valueOf(k[8]);
+            final String[] keywords = k[9].split(";");
+            final String abDesc = k[10];
+            
+           	String fullCost = k[0].substring(11);
+           	String tmpCost = new String(fullCost);
+           	final boolean tapCost = tmpCost.contains("T") ? true : false;
+           	if(tmpCost.contains("T")) {
+                tmpCost = tmpCost.replace("T", "");
+                tmpCost = tmpCost.trim();
+            }
+           	
+        	final String spDesc[] = {"none"};
+        	spDesc[0] = fullCost.toString()+ " - " + abDesc;
+        	
+        	final SpellAbility abMakeToken = new Ability_Activated(card, tmpCost) {
+				private static final long serialVersionUID = -1415539558367883075L;
+				public boolean canPlayAI() {
+                    if (!ComputerUtil.canPayCost(this)) return false;
+                    if(xString && CardFactoryUtil.xCount(card, numString) > 0) {
+						return false;
+					}
+					else {
+						Random r = new Random();
+	                    boolean rr = false;
+	                    if( r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()) ) {
+	                    	rr = true;
+	                    }
+	                    return rr;
+					}
+        		}
+        		@Override
+                public boolean canPlay(){
+                	//Cost_Payment pay = new Cost_Payment(abCost, this);
+                    return CardFactoryUtil.canUseAbility(card) && super.canPlay();
+                }
+        		@Override
+                public void resolve() {
+        			if(tapCost) {
+        				//TODO - should be part of paying for ability
+        				card.tap();
+        			}
+        			String controller = (controllerString.equals("Controller") ? card.getController() : AllZone.GameAction.getOpponent(card.getController()));
+					if(keywords[0].equals("None")) keywords[0] = "";
+					
+					int num = xString ? CardFactoryUtil.xCount(card, numString) : Integer.valueOf(numString);
+		            for(int i = 0; i < num; i ++ ){
+                    	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
+                    }
+                }
+        	};//end abMakeToken ability
+        	abMakeToken.setDescription(spDesc[0]);
+        	abMakeToken.setStackDescription(card+" - "+abDesc);
+        	card.addSpellAbility(abMakeToken);
+        	card.setSVar("PlayMain1", "TRUE");
+        }// end abMakeToken keyword
         	
         //******************************************************************
         //************** Link to different CardFactories ******************* 
@@ -6150,7 +6222,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("The Hive")) {
             final SpellAbility ability = new Ability_Tap(card, "5") {
@@ -6166,7 +6238,7 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription("The Hive - Put a 1/1 token with flying into play.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mobilization")) {
