@@ -187,56 +187,6 @@ public class GameActionUtil {
 		}//end Blight
 		
 		/*
-		 * Psychic Venom - When enchanted land becomes tapped, it deals 2 damage
-		 * to enchanted lands' controller
-		 */
-		if(c.isEnchantedBy("Psychic Venom")) {
-			final ArrayList<Card> cards = c.getEnchantedBy();
-			for(Card card:cards) {
-				final Card source = card;
-				if(card.getName().equals("Psychic Venom")) {
-					Ability ability = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							activePlayer.addDamage(2, source);
-						}
-					};//Ability
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - deals 2 damage to ").append(activePlayer);
-					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
-				}
-			}
-		}//end Psychic Venom
-		
-		/*
-		 * Insolence - Whenever enchanted creature becomes 
-		 * tapped, Insolence deals 2 damage to that creature's controller.
-		 */
-		if(c.isEnchantedBy("Insolence")) {
-			final ArrayList<Card> cards = c.getEnchantedBy();
-			for(Card card:cards) {
-				final Card source = card;
-				if(card.getName().equals("Insolence")) {
-					Ability ability = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							activePlayer.addDamage(2, source);
-						}
-					};//Ability
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - deals 2 damage to ").append(activePlayer);
-					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
-				}
-			}
-		}//end Insolence
-		
-		/*
 		 * Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
 		 */
 		if(c.isEnchantedBy("Spirit Shackle")) {
@@ -292,13 +242,6 @@ public class GameActionUtil {
 	public static void executeUntapSideEffects(Card c) {
 		/*
 		 * This is currently only for Hollowsage, Mesmeric Orb and Wake Thrasher
-		 * I don't think WheneverKeyword is implemented for BecomesUntapped
-		 */
-		//AllZone.GameAction.CheckWheneverKeyword(c,"BecomesUntapped",null);
-		
-		/*
-		 * Mesmeric Orb - Whenever a permanent becomes untapped, that permanent's
-		 * controller puts the top card of his or her library into his or her graveyard.
 		 */
 		
 		/*
