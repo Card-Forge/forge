@@ -1,0 +1,10 @@
+Name:Gangrenous Goliath
+ManaCost:3 B B
+Types:Creature Zombie Giant
+Text:no text
+PT:4/4
+A:AB$ChangeZone | Cost$tapXType<3/Cleric> | Origin$ Graveyard | Destination$ Hand | ActivatingZone$ Graveyard | SpellDescription$ Return Gangrenous Goliath from your graveyard to your hand.
+Var:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gangrenous_goliath.jpg
+End
