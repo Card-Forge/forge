@@ -1,3 +1,31 @@
+Sacred Nectar
+1 W
+Sorcery
+no text
+spGainLife:4
+
+Imperiosaur
+2 G G
+Creature Lizard
+(NOTE: "Spend only mana produced by basic lands to play Imperiosaur." is not implemented.)
+5/5
+
+Hagra Crocodile
+3 B
+Creature Crocodile
+no text
+3/1
+This creature cannot block
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Junun Efreet
+1 B B
+Creature Efreet
+no text
+3/3
+Flying
+At the beginning of your upkeep, sacrifice Junun Efreet unless you pay:B B
+
 Diamond Valley
 no cost
 Land
@@ -826,13 +854,6 @@ Hedron Rover
 Artifact Creature Construct
 no text
 2/2
-Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
-
-Hagra Crocodile
-3 B
-Creature Crocodile
-no text
-3/1
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
 
 Steppe Lynx
@@ -2531,14 +2552,6 @@ no text
 4/4
 At the beginning of your upkeep, sacrifice Kami of the Tended Garden unless you pay:G
 Soulshift:3
-
-Junun Efreet
-1 B B
-Creature  Efreet
-no text
-3/3
-Flying
-At the beginning of your upkeep, sacrifice Junun Efreet unless you pay:B B
 
 Hungry Mist
 2 G G
@@ -5353,11 +5366,6 @@ Benalish Trapper
 Creature Human Soldier
 no text
 1/2
-
-Sacred Nectar
-1 W
-Sorcery
-no text
 
 Maniacal Rage
 1 R
@@ -16424,12 +16432,6 @@ Nessian Courser
 Creature Centaur Warrior
 no text
 3/3
-
-Imperiosaur
-2 G G
-Creature Lizard
-Spend only mana produced by basic lands to play Imperiosaur.
-5/5
 
 Wrap in Vigor
 1 G
