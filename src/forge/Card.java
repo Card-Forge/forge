@@ -535,13 +535,15 @@ public class Card extends MyObservable {
         		counters.remove(p1Counter);
         	}
         }
-        
+
         //Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
-        AllZone.TriggerHandler.runTrigger("CounterAdded", runParams);
-
+        for(int i=0;i<(multiplier*n);i++)
+        {
+            AllZone.TriggerHandler.runTrigger("CounterAdded", runParams);
+        }
 
         AllZone.GameAction.checkStateEffects();
         

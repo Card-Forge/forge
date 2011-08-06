@@ -802,12 +802,8 @@ public class CardFactory implements NewConstants {
                     public void resolve() {
                         int totalCounters = numCreatures[0] * multiplier;
 
-                        AllZone.TriggerHandler.suppressMode("CounterAdded");
-
                         card.addCounter(Counters.P1P1, totalCounters);
 
-                        AllZone.TriggerHandler.clearSuppression("CounterAdded");
-                        
                         if(card.getName().equals("Skullmulcher")) {
                             for(int i = 0; i < numCreatures[0]; i++) {
                                 card.getController().drawCard();
@@ -975,11 +971,9 @@ public class CardFactory implements NewConstants {
                 	else {
                 		toAdd = Integer.parseInt(numCounters);
                 	}
-                    AllZone.TriggerHandler.suppressMode("CounterAdded");
 
                     card.addCounter(counter, toAdd);
 
-                    AllZone.TriggerHandler.clearSuppression("CounterAdded");
                 }
             });//ComesIntoPlayCommand
         } // if etbCounter
@@ -994,11 +988,9 @@ public class CardFactory implements NewConstants {
 				public void execute() {
 					if(card.getController().getOpponent().getAssignedDamage() > 0)
                     {
-                        AllZone.TriggerHandler.suppressMode("CounterAdded");
 
 						card.addCounter(Counters.P1P1, count);
 
-                        AllZone.TriggerHandler.clearSuppression("CounterAdded");
                     }
 				}
         		
