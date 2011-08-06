@@ -213,6 +213,8 @@ public class ComputerUtil_Attack2 {
   		  		return (0 < AllZone.HumanPlayer.predictDamage(c.getNetCombatDamage(),c,true) || c.getName().equals("Guiltfeeder"));
   		  	}
   		});
+        
+        if (attackersLeft.isEmpty()) return combat;
 
            // *******************
            // start of edits
