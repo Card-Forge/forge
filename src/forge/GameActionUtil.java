@@ -4108,9 +4108,11 @@ public class GameActionUtil
 	{
 
 		if (c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
-			playerCombatDamage_PoisonCounter(c);
+			playerCombatDamage_PoisonCounter(c, 1);
 		
-		if (c.getName().equals("Hypnotic Specter"))
+		if (c.getName().equals("Marsh Viper"))
+			playerCombatDamage_PoisonCounter(c, 2);
+		else if (c.getName().equals("Hypnotic Specter"))
 			playerCombatDamage_Hypnotic_Specter(c);
 		else if (c.getName().equals("Dimir Cutpurse"))
 			playerCombatDamage_Dimir_Cutpurse(c);
@@ -4207,15 +4209,15 @@ public class GameActionUtil
 	}
 	*/
 	
-	private static void playerCombatDamage_PoisonCounter(Card c)
+	private static void playerCombatDamage_PoisonCounter(Card c, int n)
 	{
 		final String player = c.getController();
 		final String opponent = AllZone.GameAction.getOpponent(player);
 		
 		if (opponent.equals(Constant.Player.Human))
-			AllZone.Human_PoisonCounter.addPoisonCounters(1);
+			AllZone.Human_PoisonCounter.addPoisonCounters(n);
 		else
-			AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+			AllZone.Computer_PoisonCounter.addPoisonCounters(n);
 	}
 	
 	private static void playerCombatDamage_Oros(Card c)
@@ -5131,6 +5133,7 @@ public class GameActionUtil
 		} // if creatures > 0
 
 	}
+	
 	
 	
 	

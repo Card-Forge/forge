@@ -19368,7 +19368,7 @@ public class CardFactory_Creatures {
 	      	
 	      }//*************** END ************ END **************************
 	       
-	      //*************** END ************ END **************************
+	      //*************** START *********** START **************************
 	      else if (cardName.equals("Lockjaw Snapper"))
 	      {
 	      	
@@ -19408,8 +19408,34 @@ public class CardFactory_Creatures {
 	      		}
 	      	};//command
 	      	card.addDestroyCommand(destroy);
-	      }//*************** START *********** START **************************
+	      }//*************** END ************ END **************************
 	       
+	     //*************** START *********** START **************************
+	      else if (cardName.equals("Arctic Nishoba"))
+	      {
+	    	  final Ability ability = new Ability(card, "0")
+	    	  {
+	    		  public void resolve()
+	    		  {
+	    			  int lifeGain = card.getCounters(Counters.AGE) * 2;
+	    			  AllZone.GameAction.getPlayerLife(card.getController()).addLife(lifeGain);
+	    			  
+	    		  }
+	    	  };
+	    	  
+	    	  Command destroy = new Command()
+	    	  {
+				    private static final long serialVersionUID = 1863551466234257411L;
+
+					public void execute()
+		      		{
+		      			ability.setStackDescription(card.getName()+ " - gain 2 life for each age counter on it.");
+		                AllZone.Stack.add(ability);
+		      		}
+		      };//command
+		      
+		      card.addDestroyCommand(destroy);
+	      }//*************** END ************ END **************************
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)

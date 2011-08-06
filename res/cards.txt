@@ -1,3 +1,41 @@
+Windborn Muse
+3 W
+Creature Spirit
+Creatures can't attack you unless their controller pays 2 for each creature he or she controls that's attacking you.
+2/3
+Flying
+
+Ghostly Prison
+2 W
+Enchantment
+Creatures can't attack you unless their controller pays 2 for each creature he or she controls that's attacking you.
+
+Propaganda
+2 U
+Enchantment
+Creatures can't attack you unless their controller pays 2 for each creature he or she controls that's attacking you.
+
+Peacekeeper
+2 W
+Creature Human
+Creatures can't attack
+1/1
+Upkeep:1 W
+
+Arctic Nishoba
+5 G
+Creature Cat
+When Arctic Nishoba is put into a graveyard from the battlefield, you gain 2 life for each age counter on it.
+6/6
+Trample
+Cumulative upkeep:GW
+
+Marsh Viper
+3 G
+Creature Snake
+Whenever Marsh Viper deals damage to an opponent, that player gets two poison counters.
+1/2
+
 Force of Will
 3 U U
 Instant
@@ -705,8 +743,9 @@ no text
 Pit Scorpion
 2 B
 Creature Scorpion
-Whenever this creature deals damage to a player, that player gets a poison counter.
+no text
 1/1
+Whenever this creature deals damage to a player, that player gets a poison counter.
 
 Bridge from Below
 B B B

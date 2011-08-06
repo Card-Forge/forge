@@ -17,6 +17,7 @@ public void showMessage()
     	Card c = creats.get(i);
     	if (CombatUtil.canAttack(c) && c.getKeyword().contains("This card attacks each turn if able."))
     	{
+    		
     		AllZone.Combat.addAttacker(c);
     		if (!c.getKeyword().contains("Vigilance"))
     				c.tap();
@@ -62,15 +63,15 @@ public void showMessage()
        CombatUtil.canAttack(card)
        )
     {
+      
       if(! card.getKeyword().contains("Vigilance"))
       {
         card.tap();
-
         //otherwise cards stay untapped, not sure why this is needed but it works
         AllZone.Human_Play.updateObservers();
       }
       AllZone.Combat.addAttacker(card);
-      
+          
       //for Castle Raptors, since it gets a bonus if untapped
       for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
 			Command com = GameActionUtil.commands.get(effect);

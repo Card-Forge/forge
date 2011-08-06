@@ -17,11 +17,6 @@ public class CombatUtil
     	&& blocker.getKeyword().contains("This creature can block creatures with shadow as though they didn't have shadow."))
     	return false;
     
-    /*
-    if(attacker.getKeyword().contains("Shadow"))
-        return blocker.getKeyword().contains("Shadow") || 
-        	   blocker.getKeyword().contains("This creature can block creatures with shadow as though they didn't have shadow.");
-    */
     if (attacker.getKeyword().contains("Shadow") && !blocker.getKeyword().contains("Shadow") 
     	&& !blocker.getKeyword().contains("This creature can block creatures with shadow as though they didn't have shadow.") )
     	return false;
@@ -194,13 +189,14 @@ public class CombatUtil
   public static boolean canAttack(Card c)
   {
 
+	if (isPeaceKeeperInPlay())
+		return false;
+	  
 	boolean moatPrevented = false;
 	if (isMoatInPlay() || isMagusMoatInPlay())
 	{
 		if (!c.getKeyword().contains("Flying"))
-		{
 			moatPrevented = true;
-		}
 	}
 	
 	PlayerZone play = AllZone.getZone(Constant.Zone.Play,AllZone.GameAction.getOpponent(c.getController()));
@@ -661,6 +657,16 @@ public class CombatUtil
 		  return false;
   }
   
+  public static boolean isPeaceKeeperInPlay()
+  {
+	  CardList all = new CardList();
+	  all.addAll(AllZone.Human_Play.getCards());
+	  all.addAll(AllZone.Computer_Play.getCards());
+	  
+	  all = all.getName("Peacekeeper");
+	  return all.size() > 0;
+  }
+  
   public static boolean isMoatInPlay()
   {
 	  CardList all = new CardList();
@@ -685,6 +691,68 @@ public class CombatUtil
 		  return true;
 	  else
 		  return false;
+  }
+  
+  public static boolean checkPropagandaEffects(Card c)
+  {  
+	  if (CardFactoryUtil.getPropagandaCost(c).equals("0"))
+		  return true;
+	  
+	  final Card crd = c;
+	  final boolean[] canAttack = new boolean[1];
+	  canAttack[0] = false;
+	  //if (AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers))
+	  if (AllZone.Phase.getPhase().equals("Declare Blockers") ||
+		  AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility))
+	  {
+		  //if (!c.getCreatureAttackedThisTurn())
+		  //{
+			  String cost = CardFactoryUtil.getPropagandaCost(c);
+			  if (!cost.equals("0"))
+			  {
+				  final Ability ability = new Ability(c, cost)
+				  	{
+				  		public void resolve()
+				  		{
+				  			canAttack[0] = true;
+				  		}
+				  	};
+				  	
+				  	final Command unpaidCommand = new Command() {
+
+						private static final long serialVersionUID = -6483405139208343935L;
+
+						public void execute() {
+			  				//AllZone.GameAction.sacrifice(c);
+							canAttack[0] = false;
+							AllZone.Combat.removeFromCombat(crd);
+							crd.untap();
+			  			}
+				  	};
+			  	
+				  	final Command paidCommand = new Command() {
+						private static final long serialVersionUID = -8303368287601871955L;
+
+						public void execute() {
+							canAttack[0] = true;
+				  		}
+				  	};
+				  	
+				  	if (c.getController().equals(Constant.Player.Human)) {
+				  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Propaganda "+ c +"\r\n", ability.getManaCost(), paidCommand, unpaidCommand));
+				  	}
+				  	else //computer
+				  	{
+				  		if (ComputerUtil.canPayCost(ability))
+				  			ComputerUtil.playNoStack(ability);
+				  		else
+				  			canAttack[0] = false;
+				  	}	
+			  }
+		  }
+		  //c.setCreatureAttackedThisTurn(true);
+	  //}
+	  return canAttack[0];
   }
   
   public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers

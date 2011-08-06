@@ -65,9 +65,11 @@ public class Input_PayManaCost_Ability extends Input
     		//tappedLand.clear();
     		AllZone.ManaPool.paid();
 
-    		//Command MUST BE AFTER, for Urborg Syphon-Mage - tap, mana, discard abilit
-    		stopSetNext(new ComputerAI_StackNotEmpty());
+    		//Command MUST BE AFTER, for Urborg Syphon-Mage - tap, mana, discard ability
+    		//does it really have to be after?
     		paidCommand.execute();
+    		stopSetNext(new ComputerAI_StackNotEmpty());
+    		//paidCommand.execute();
     	}
 
     }

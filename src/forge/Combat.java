@@ -145,7 +145,7 @@ public class Combat
   public void addAttackingDamage(int n) {attackingDamage += n;}
   public int getAttackingDamage() {return attackingDamage;}
 
-  public void addAttacker(Card c) {map.put(c, new CardList()); declaredAttackers++;}
+  public void addAttacker(Card c) {map.put(c, new CardList()); declaredAttackers++; }
   public void resetAttackers()    {map.clear();}
   public Card[] getAttackers()
   {

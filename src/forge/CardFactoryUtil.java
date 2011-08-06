@@ -505,8 +505,8 @@ public class CardFactoryUtil
       {
         if(choices.contains(card))
         {
-          AllZone.getZone(card).remove(card);
-          AllZone.GameAction.moveToGraveyard(card);
+          //AllZone.getZone(card).remove(card);
+          AllZone.GameAction.sacrifice(card);
           stop();
         }
       }
@@ -3025,13 +3025,34 @@ public class CardFactoryUtil
 	  return count;
   }
   
-  
   public static CardList getFastbonds(String player)
   {  
 	  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
 	  list = list.getName("Fastbond");
 	  return list;
   }
+  
+  //total cost to pay for an attacker c, cards like Propaganda, Ghostly Prison, Collective Restraint, ...
+  public static String getPropagandaCost(Card c)
+  {
+	  String s = "";
+	  
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(c.getController()));
+	  CardList list = new CardList(play.getCards());
+	  list = list.filter(new CardListFilter()
+	  {
+		  public boolean addCard(Card c)
+		  {
+			  return c.getName().equals("Propaganda") || c.getName().equals("Windborn Muse") || c.getName().equals("Ghostly Prison");
+		  }
+	  });
+	  int cost = list.size() * 2;
+	  
+	  s = Integer.toString(cost);
+	  
+	  return s;
+  }
+  
   
   //do card1 and card2 share any colors?
   public static boolean sharesColorWith(Card card1, Card card2)

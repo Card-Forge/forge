@@ -89,10 +89,12 @@ import java.util.*;
         		   CardList list = new CardList();
         	   	   list.addAll(AllZone.Combat.getAttackers());
         	   	   list.addAll(AllZone.pwCombat.getAttackers());
+        	   	   
+	        	   for (Card c : list)
+	     	   		   CombatUtil.checkPropagandaEffects(c);
+        	   	   
         	   	   for (Card c : list)
-        	   	   {
         	   		   CombatUtil.checkDeclareAttackers(c);
-        	   	   }
         	   	   
         		   return new Input_Attack_Instant();
         	   }
@@ -296,6 +298,10 @@ import java.util.*;
     		   CardList list = new CardList();
     	   	   list.addAll(AllZone.Combat.getAttackers());
     	   	   list.addAll(AllZone.pwCombat.getAttackers());
+	    	   for (Card c : list)
+	 	   	   {
+	 	   		   CombatUtil.checkPropagandaEffects(c);
+	 	   	   }
     	   	   for (Card c : list)
     	   	   {
     	   		   CombatUtil.checkDeclareAttackers(c);

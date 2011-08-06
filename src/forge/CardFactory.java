@@ -17904,7 +17904,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 			        public void selectButtonCancel() {stop();}
 			        public void selectCard(Card c, PlayerZone zone)
 			        {
-			          if(CardUtil.getColors(c).contains(Constant.Color.Blue) && zone.is(Constant.Zone.Hand))
+			          if(CardUtil.getColors(c).contains(Constant.Color.Blue) && zone.is(Constant.Zone.Hand) &&
+			             !c.equals(card))
 			          {
 			            AllZone.GameAction.removeFromGame(c);
 			            String player = card.getController();
