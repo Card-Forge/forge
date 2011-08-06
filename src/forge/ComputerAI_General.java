@@ -8,6 +8,7 @@ import java.util.TreeSet;
 
 public class ComputerAI_General implements Computer {
     //private boolean          playLand = true;
+	//private int numberPlayLand = 1;
 	private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
     private Collection<Card> playMain1Cards;
     

@@ -16723,6 +16723,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
 			}
 		};
+		ability.setDescription("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");
 		ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
 		ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
 		card.addSpellAbility(ability);

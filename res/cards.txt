@@ -1,7 +1,20 @@
+Xiahou Dun, the One-Eyed
+2 B B
+Legendary Creature Human Soldier
+no text
+3/2
+Horsemanship
+
+Loyal Retainers
+2 W
+Creature Human Advisor
+no text
+1/1
+
 Kor Cartographer
 3 W
 Creature Kor Scout
-When Kor Cartographer enters the field, you may search your library for a plains card, put it onto the battlefield tapped, then shuffle your library.
+When Kor Cartographer enters the battlefield, you may search your library for a plains card, put it onto the battlefield tapped, then shuffle your library.
 2/2
 
 Celestial Purge
@@ -126,7 +139,7 @@ Umezawa's Jitte
 Artifact Equipment
 Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
 
-Vendillion Clique
+Vendilion Clique
 1 U U
 Legendary Creature Faerie Wizard
 When Vendilion Clique enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card.
@@ -294,7 +307,7 @@ no text
 This creature can't attack unless defending player controls an Island
 When you control no Islands, sacrifice this creature
 
-Zhou You, Chief Commander
+Zhou Yu, Chief Commander
 5 U U
 Legendary Creature Human Soldier
 no text

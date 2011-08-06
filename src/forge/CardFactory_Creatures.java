@@ -16899,6 +16899,174 @@ public class CardFactory_Creatures {
 			}};
 	      card.addComesIntoPlayCommand(cip);
 	    }//*************** END ************ END **************************
+	    
+	      
+	    //*************** START *********** START **************************
+	    else if (cardName.equals("Loyal Retainers"))
+	    {
+	    	final Ability ability = new Ability(card, "0")
+	    	{
+
+				public void resolve() {
+					if (AllZone.GameAction.isCardInPlay(card)) {
+						AllZone.GameAction.sacrifice(card);
+					
+						PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+						PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+						CardList list = new CardList(grave.getCards());
+						list = list.filter(new CardListFilter()
+						{
+							public boolean addCard(Card c)
+							{
+								return c.isCreature() && c.getType().contains("Legendary");
+							}
+						});
+						
+						if (list.size() >0) {
+							if (card.getController().equals(Constant.Player.Human))
+							{
+								Object o = AllZone.Display.getChoiceOptional("Select Legendary creature", list.toArray());
+				    			if (o!=null)
+				    			{
+				    				Card c = (Card)o;
+				    				grave.remove(c);
+				    				play.add(c);
+				    			}
+				    			
+							}
+							else //computer
+							{
+								Card c = CardFactoryUtil.AI_getBestCreature(list);
+								grave.remove(c);
+								play.add(c);
+							}
+						}
+					}
+				}	    
+				
+				public boolean canPlay()
+				{
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+					CardList list = new CardList(grave.getCards());
+					list = list.filter(new CardListFilter()
+					{
+						public boolean addCard(Card c)
+						{
+							return c.isCreature() && c.getType().contains("Legendary");
+						}
+					});
+					
+					SpellAbility sa;
+	    	    	for (int i=0; i<AllZone.Stack.size(); i++)
+	    	    	{
+	    	    	     sa = AllZone.Stack.peek(i);
+	    	    	     if (sa.getSourceCard().equals(card))
+	    	    	          return false;
+	    	    	}
+	    	    	
+					return super.canPlay() && list.size() > 0 && 
+						   AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && 
+						   AllZone.Phase.getActivePlayer().equals(card.getController());
+				}
+				
+				public boolean canPlayAI()
+				{
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+					CardList list = new CardList(grave.getCards());
+					list = list.filter(new CardListFilter()
+					{
+						public boolean addCard(Card c)
+						{
+							return c.isCreature() && c.getType().contains("Legendary") && CardUtil.getConvertedManaCost(c.getManaCost()) > 4;
+						}
+					});
+					return list.size()>0;
+				}
+				
+				
+	    	};
+	    	ability.setDescription("Sacrifice Loyal Retainers: Return target legendary creature card from your graveyard to the battlefield. Activate this ability only during your turn, before attackers are declared.");
+	    	ability.setStackDescription(cardName + " - Return target legendary creature card from your graveyard to the battlefield.");
+	    	
+	    	card.addSpellAbility(ability);
+	    }//*************** END ************ END **************************
+	      
+	      
+	      //*************** START *********** START **************************
+	    else if (cardName.equals("Xiahou Dun, the One-Eyed"))
+	    {
+	    	final Ability ability = new Ability(card, "0")
+	    	{
+
+				public void resolve() {
+					if (AllZone.GameAction.isCardInPlay(card)) {
+						AllZone.GameAction.sacrifice(card);
+					
+						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+						PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+						CardList list = new CardList(grave.getCards());
+						list = list.filter(new CardListFilter()
+						{
+							public boolean addCard(Card c)
+							{
+								return CardUtil.getColors(c).contains(Constant.Color.Black);
+							}
+						});
+						
+						if (list.size() >0) {
+							if (card.getController().equals(Constant.Player.Human))
+							{
+								Object o = AllZone.Display.getChoiceOptional("Select black card", list.toArray());
+				    			if (o!=null)
+				    			{
+				    				Card c = (Card)o;
+				    				grave.remove(c);
+				    				hand.add(c);
+				    			}
+				    			
+							}
+							else //computer
+							{
+								//TODO
+							}
+						}
+					}
+				}	    
+				public boolean canPlay()
+				{
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+					CardList list = new CardList(grave.getCards());
+					list = list.filter(new CardListFilter()
+					{
+						public boolean addCard(Card c)
+						{
+							return CardUtil.getColors(c).contains(Constant.Color.Black);
+						}
+					});
+					
+					SpellAbility sa;
+	    	    	for (int i=0; i<AllZone.Stack.size(); i++)
+	    	    	{
+	    	    	     sa = AllZone.Stack.peek(i);
+	    	    	     if (sa.getSourceCard().equals(card))
+	    	    	          return false;
+	    	    	}
+	    	    	
+					return super.canPlay() && list.size() > 0 && 
+						   AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && 
+						   AllZone.Phase.getActivePlayer().equals(card.getController());
+				}
+				
+				public boolean canPlayAI()
+				{
+					return false;
+				}
+	    	};
+	    	ability.setDescription("Sacrifice Xiahou Dun, the One-Eyed: Return target black card from your graveyard to your hand. Activate this ability only during your turn, before attackers are declared.");
+	    	ability.setStackDescription(cardName + " - Return target black card from your graveyard to your hand.");
+	    	
+	    	card.addSpellAbility(ability);
+	    }//*************** END ************ END **************************
 	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
