@@ -979,8 +979,8 @@ public class Card extends MyObservable {
                     else if(k.length > 5) sbLong.append(k[6]).append("\r\n");
                     else sbLong.append(k[3]).append("\r\n");
                 } else if (keyword.get(i).toString().contains("stAnimate")) {
-                    String k[] = keyword.get(i).split(":", 7);
-                    if (!k[4].contains("no text")) sbLong.append(k[6]).append("\r\n");
+                    String k[] = keyword.get(i).split(":", 8);
+                    if (!k[7].contains("no text")) sbLong.append(k[7]).append("\r\n");
                 }else if (keyword.get(i).toString().contains("Protection:")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[2]).append("\r\n");
@@ -1243,6 +1243,22 @@ public class Card extends MyObservable {
     
     public void clearFirstSpellAbility(){
     	spellAbility.remove(0);
+    }
+    
+    public void clearAllButFirstSpellAbility(){
+    	SpellAbility first = spellAbility.get(0);
+    	spellAbility.clear();
+    	spellAbility.add(first);
+    	manaAbility.clear();
+    }
+    
+    public ArrayList<SpellAbility> getAllButFirstSpellAbility() {
+    	ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
+    	sas.addAll(spellAbility);
+    	sas.addAll(manaAbility);
+    	SpellAbility first = spellAbility.get(0);
+    	sas.remove(first);
+    	return sas;
     }
     
     public void clearSpellAbility() {
@@ -2211,9 +2227,20 @@ public class Card extends MyObservable {
         return new ArrayList<String>(intrinsicKeyword);
     }
     
+    public void clearIntrinsicKeyword() {
+    	intrinsicKeyword.clear();
+    }
+    
     public void setIntrinsicKeyword(ArrayList<String> a) {
         intrinsicKeyword = new ArrayList<String>(a);
         this.updateObservers();
+    }
+    
+    public void clearAllKeywords() {
+    	intrinsicKeyword.clear();
+        extrinsicKeyword.clear();
+        otherExtrinsicKeyword.clear();
+        HiddenExtrinsicKeyword.clear();		//Hidden keywords won't be displayed on the card
     }
     
     public void setIntrinsicAbilities(ArrayList<String> a)

@@ -4,26 +4,131 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import forge.card.spellability.SpellAbility;
 
 public class StaticEffect {
-	private Card			 	source				  			= new Card();
-	private int			 		keywordNumber				  	= 0;	
-    private CardList            affectedCards                	= new CardList();
-	private int			 		xValue				  			= 0;
-	private int					yValue							= 0;
+	private Card			 	source				  				= new Card();
+	private int			 		keywordNumber					  	= 0;	
+    private CardList            affectedCards       	         	= new CardList();
+	private int			 		xValue				  				= 0;
+	private int					yValue								= 0;
 	
 	//for P/T
-	private HashMap<Card, String> originalPT					= new HashMap<Card, String>();
+	private HashMap<Card, String>	originalPT						= new HashMap<Card, String>();
 	
 	//for types
-	private HashMap<Card, ArrayList<String>> types				= new HashMap<Card, ArrayList<String>>();
-	private HashMap<Card, ArrayList<String>> originalTypes		= new HashMap<Card, ArrayList<String>>();
-	private boolean				overwriteTypes					= false;
+	private boolean								overwriteTypes		= false;
+	private HashMap<Card, ArrayList<String>>	types				= new HashMap<Card, ArrayList<String>>();
+	private HashMap<Card, ArrayList<String>>	originalTypes		= new HashMap<Card, ArrayList<String>>();
 	
+	//keywords
+	private boolean								overwriteKeywords	= false;
+	private HashMap<Card, ArrayList<String>>	originalKeywords	= new HashMap<Card, ArrayList<String>>();
+	
+	//for abilities
+	private boolean									overwriteAbilities	= false;
+	private HashMap<Card, ArrayList<SpellAbility>>	originalAbilities	= new HashMap<Card, ArrayList<SpellAbility>>();
 	
 	//for colors
-	private	String				colorDesc 						= "";
-	private	HashMap<Card, Long>	timestamps						= new HashMap<Card, Long>();
+	private	String				colorDesc 							= "";
+	private	HashMap<Card, Long>	timestamps							= new HashMap<Card, Long>();
+	
+	
+	//overwrite SAs
+	public boolean isOverwriteAbilities() {
+		return overwriteAbilities;
+	}
+
+	public void setOverwriteAbilities(boolean overwriteAbilities) {
+		this.overwriteAbilities = overwriteAbilities;
+	}
+	
+	//original SAs
+	public void addOriginalAbilities(Card c, SpellAbility sa) {
+		if(!originalAbilities.containsKey(c)) {
+			ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
+			list.add(sa);
+			originalAbilities.put(c, list);
+		}
+		else originalAbilities.get(c).add(sa);
+	}
+	
+	public void addOriginalAbilities(Card c, ArrayList<SpellAbility> s) {
+		ArrayList<SpellAbility> list = new ArrayList<SpellAbility>(s);
+		if(!originalAbilities.containsKey(c)) {
+			originalAbilities.put(c, list);
+		}
+		else {
+			originalAbilities.remove(c);
+			originalAbilities.put(c, list);
+		}
+	}
+    
+    public ArrayList<SpellAbility> getOriginalAbilities(Card c) {
+    	ArrayList<SpellAbility> returnList = new ArrayList<SpellAbility>();
+    	if(originalAbilities.containsKey(c)) {
+			returnList.addAll(originalAbilities.get(c));
+		}
+    	return returnList;
+    }
+    
+    public void clearOriginalAbilities(Card c) {
+    	if(originalAbilities.containsKey(c)) {
+			originalAbilities.get(c).clear();
+		}
+    }
+    
+    public void clearAllOriginalAbilities() {
+    	originalAbilities.clear();
+    }
+
+	//overwrite keywords
+	public boolean isOverwriteKeywords() {
+		return overwriteKeywords;
+	}
+
+	public void setOverwriteKeywords(boolean overwriteKeywords) {
+		this.overwriteKeywords = overwriteKeywords;
+	}
+	
+	//original keywords
+	public void addOriginalKeyword(Card c, String s) {
+		if(!originalKeywords.containsKey(c)) {
+			ArrayList<String> list = new ArrayList<String>();
+			list.add(s);
+			originalKeywords.put(c, list);
+		}
+		else originalKeywords.get(c).add(s);
+	}
+	
+	public void addOriginalKeywords(Card c, ArrayList<String> s) {
+		ArrayList<String> list = new ArrayList<String>(s);
+		if(!originalKeywords.containsKey(c)) {
+			originalKeywords.put(c, list);
+		}
+		else {
+			originalKeywords.remove(c);
+			originalKeywords.put(c, list);
+		}
+	}
+    
+    public ArrayList<String> getOriginalKeywords(Card c) {
+    	ArrayList<String> returnList = new ArrayList<String>();
+    	if(originalKeywords.containsKey(c)) {
+			returnList.addAll(originalKeywords.get(c));
+		}
+    	return returnList;
+    }
+    
+    public void clearOriginalKeywords(Card c) {
+    	if(originalKeywords.containsKey(c)) {
+			originalKeywords.get(c).clear();
+		}
+    }
+    
+    public void clearAllOriginalKeywords() {
+    	originalKeywords.clear();
+    }
 	
 	//original power/toughness
 	public void addOriginalPT(Card c, int power, int toughness) {

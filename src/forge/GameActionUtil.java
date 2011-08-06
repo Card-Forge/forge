@@ -7394,10 +7394,10 @@ public class GameActionUtil {
 
 	public static Command stAnimate = new Command() {
 		/** stAnimate
-		 * Syntax:[ k[0] stAnimate[All][Self][Enchanted] : k[1] AnimateValid : 
-		 * 			k[2] P/T/Keyword : k[3] extra types : k[4] extra colors : k[5] Special Conditions : k[6] Description
+		 * Syntax:[ k[0] stAnimate[All][Self][Enchanted] 		: k[1] AnimateValid : 
+		 * 			k[2] P/T/Keyword : k[3] extra types 		: k[4] extra colors : 
+		 * 			k[5] Abilities	 : k[6] Special Conditions 	: k[7] Description
 		 * 
-		 * extra colors k[4] - not implemented yet
 		 */
 		
 		private static final long serialVersionUID = -1404133561787349004L;
@@ -7435,9 +7435,9 @@ public class GameActionUtil {
 
 	            		
 	            		//get the affected cards
-						String k[] = keyword.split(":", 7);    
+						String k[] = keyword.split(":", 8);    
 						
-						if(areSpecialConditionsMet(cardWithKeyword, k[5])) { //special conditions are isPresent, isValid
+						if(areSpecialConditionsMet(cardWithKeyword, k[6])) { //special conditions are isPresent, isValid
 						
 							final String affected = k[1];			
 							final String specific[] = affected.split(",");
@@ -7471,6 +7471,14 @@ public class GameActionUtil {
 		                 		colors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(k[4].split(","))));
 		                 	}
 		                 	
+		                 	if(k[2].contains("Overwrite")) {
+		                 		se.setOverwriteKeywords(true);
+		                 	}
+		                 	
+		                 	if(k[5].contains("Overwrite")) {
+		                 		se.setOverwriteAbilities(true);
+		                 	}
+		                 	
 							addStaticEffects(se, cardWithKeyword, affectedCards, k[2], types, colors); //give the boni to the affected cards
 
 							storage.add(se); // store the information
@@ -7485,7 +7493,6 @@ public class GameActionUtil {
 			String[] keyword = details.split("/", 3);
 			String powerStr = keyword[0];
 			String toughStr = keyword[1];
-			boolean overwriteTypes = se.isOverwriteTypes();
 			
 			for(int i = 0; i < affectedCards.size(); i++) {
 				Card affectedCard = affectedCards.get(i);
@@ -7496,7 +7503,7 @@ public class GameActionUtil {
 				affectedCard.setBaseAttack(power);
 				affectedCard.setBaseDefense(toughness);
 				
-				if(overwriteTypes) {
+				if(se.isOverwriteTypes()) {
 					se.addOriginalTypes(affectedCard, affectedCard.getType());
 					affectedCard.clearAllTypes();
 				}
@@ -7509,28 +7516,42 @@ public class GameActionUtil {
 						se.removeType(affectedCard, type);
 					}
 				}
-				
-				if(keyword.length > 2) {
-					String keywords[] = keyword[2].split(" & ");
-					for(int j = 0; j < keywords.length; j++) {
-						String kw = keywords[j];
-						/*if(kw.startsWith("SVar=")) {
+				if(se.isOverwriteKeywords()) {
+					se.addOriginalKeywords(affectedCard, affectedCard.getIntrinsicKeyword());
+					affectedCard.clearAllKeywords();
+				}
+				else {
+					if(keyword.length > 2) {
+						String keywords[] = keyword[2].split(" & ");
+						for(int j = 0; j < keywords.length; j++) {
+							String kw = keywords[j];
+							/*if(kw.startsWith("SVar=")) {
 							String sVar = source.getSVar(kw.split("SVar=")[1]);
 							if (sVar.startsWith("AB")) { // grant the ability
 								AbilityFactory AF = new AbilityFactory();
 								SpellAbility sa = AF.getAbility(sVar, affectedCard);
 								sa.setType("Temporary");
-			        		
+
 								affectedCard.addSpellAbility(sa);
 							}
 							else { // Copy this SVar
 								affectedCard.setSVar(kw.split("SVar=")[1], sVar);								
 							}
 						}
-						
+
 						else */ affectedCard.addExtrinsicKeyword(kw);
+						}
 					}
 				}
+				//Abilities
+				if(se.isOverwriteAbilities()) {
+					se.addOriginalAbilities(affectedCard, affectedCard.getAllButFirstSpellAbility());
+					affectedCard.clearAllButFirstSpellAbility();
+				}
+				else {
+					//TODO - adding SpellAbilities statically here not supported at this time
+				}
+				
 				long t = affectedCard.addColor(colors, affectedCard, true, true);
 				se.addTimestamp(affectedCard, t);
 			}//end for
@@ -7562,11 +7583,15 @@ public class GameActionUtil {
 				for(String type : se.getOriginalTypes(affectedCard)) affectedCard.addType(type);
 			}
 			
-			String[] kw = details[2].split("/", 3);
-			if (kw.length > 2) {
-				String kws[] = kw[2].split(" & ");
-				for(int j = 0; j < kws.length; j++) {
-					String keyword = kws[j];
+			if(se.isOverwriteKeywords()) {
+				for(String kw : se.getOriginalKeywords(affectedCard)) affectedCard.addIntrinsicKeyword(kw);
+			}
+			else {
+				String[] kw = details[2].split("/", 3);
+				if (kw.length > 2) {
+					String kws[] = kw[2].split(" & ");
+					for(int j = 0; j < kws.length; j++) {
+						String keyword = kws[j];
 					/*
 					if(keyword.startsWith("SVar=")) {
 						String sVar = source.getSVar(keyword.split("SVar=")[1]);
@@ -7580,8 +7605,17 @@ public class GameActionUtil {
 						}
 					}
 					else */ affectedCard.removeExtrinsicKeyword(keyword);
+					}
 				}
 			}
+			//Abilities
+			if(se.isOverwriteAbilities()) {
+				for(SpellAbility sa : se.getOriginalAbilities(affectedCard)) affectedCard.addSpellAbility(sa);
+			}
+			else {
+				//TODO - adding SpellAbilities statically here not supported at this time
+			}
+			
 			affectedCard.removeColor(se.getColorDesc(), affectedCard, true, se.getTimestamp(affectedCard));
 		}//end removeStaticEffects
 		
