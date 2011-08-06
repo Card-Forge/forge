@@ -17416,6 +17416,71 @@ public class CardFactory_Creatures {
             };
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Reveillark")) {
+
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			final String player = card.getController();
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+    				CardList graveList = new CardList(grave.getCards());
+    				graveList = graveList.filter(new CardListFilter() {
+    					public boolean addCard(Card c) {
+    						return c.isCreature() && c.getNetAttack() <=2;
+    					}
+    				});
+        			if( player.equals(Constant.Player.Human)) {
+        				if(graveList.size() > 0) {
+        					for(int i = 0; i < 2; i++) {
+        						Card c = AllZone.Display.getChoiceOptional("Select creature", graveList.toArray());
+        						if(c == null) break;
+        						AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Play, player), c);
+        						graveList.remove(c);
+        					}
+        				}
+        			}
+        			else{ //computer
+        				if(graveList.size() > 0) {
+        					int end = graveList.size();
+        					graveList.shuffle();
+        					for(int i=0;i<end;i++) {
+        						AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Play, player), graveList.get(i));
+        					}
+        				}
+        			}
+        		}//resolve()
+        	};//SpellAbility
+        	Command leavesPlay = new Command() {
+				private static final long serialVersionUID = -2495216861720523362L;
+
+				public void execute() {
+					ability.setStackDescription(card.getName()+" - return up to 2 creatures with power < 2 from graveyard to play.");
+        			AllZone.Stack.add(ability);
+        		}//execute()
+        	};
+            card.addLeavesPlayCommand(leavesPlay);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(new Spell_Permanent(card) {
+				private static final long serialVersionUID = -3588276621923227230L;
+
+				@Override
+                public boolean canPlayAI() {
+                	return true;
+                }
+            });
+            
+            card.addSpellAbility(new Spell_Evoke(card, "5 W") {
+				private static final long serialVersionUID = -6197651256234977129L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            });
+        }//*************** END ************ END **************************
         
         
         // Cards with Cycling abilities
