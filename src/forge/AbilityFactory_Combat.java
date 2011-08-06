@@ -110,21 +110,21 @@ public class AbilityFactory_Combat {
 	
 	public static boolean fogCanPlayAI(final AbilityFactory af, SpellAbility sa){
 		// AI should only activate this during Human's Declare Blockers phase
-		boolean chance;
-		if (AllZone.Phase.isPlayerTurn(sa.getActivatingPlayer().getOpponent()))
-			chance = AllZone.Phase.isBefore(Constant.Phase.Combat_FirstStrikeDamage);
-		else 
-			chance = AllZone.Phase.isAfter(Constant.Phase.Combat_Damage);
-		// Only cast when Stack is empty, so Human uses spells/abilities first
-		chance &= AllZone.Stack.size() == 0;
+		if (AllZone.Phase.isPlayerTurn(sa.getActivatingPlayer())) return false;
+		if (!AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)) return false;
 		
-		// Some additional checks on how much Damage/Poison AI would take, or how many creatures would be lost
+		// Only cast when Stack is empty, so Human uses spells/abilities first
+		if (AllZone.Stack.size() != 0) return false;
+		
+		// Don't cast it, if the effect is already in place
+		if(AllZone.GameInfo.isPreventCombatDamageThisTurn()) return false;
 		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
-			chance &= subAb.chkAI_Drawback();
+			if(!subAb.chkAI_Drawback()) return false;
 		
-		return chance;
+		// Cast it if life is in danger
+		return CombatUtil.lifeInDanger(AllZone.Combat);
 	}
 	
 	public static boolean fogPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
