@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urabrask_the_hidden.jpg
+SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/98.jpg
 End

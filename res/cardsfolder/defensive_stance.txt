@@ -7,4 +7,5 @@ K:enPump:-1/+1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defensive_stance.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/34.jpg
 End
