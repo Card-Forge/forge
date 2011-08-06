@@ -1,0 +1,9 @@
+Name:Tel-Jilad Defiance
+ManaCost:1 G
+Types:Instant
+Text:no text
+K:spPumpTgt:Protection from artifacts
+K:Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_defiance.jpg
+End

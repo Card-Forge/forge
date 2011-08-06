@@ -1,0 +1,11 @@
+Name:Ogre Recluse
+ManaCost:3 R
+Types:Creature Ogre Warrior
+Text:no text
+PT:5/4
+K:WheneverKeyword:CastSpell/Any:No Condition:Play:TapPermanent:Self:ASAP:No_Condition:No Special Condition:Whenever a player casts a spell, tap Ogre Recluse.
+SVar:AntiBuffedBy:Spell
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_recluse.jpg
+End
