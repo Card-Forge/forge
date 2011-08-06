@@ -1,10 +1,12 @@
 Name:Homarid
 ManaCost:2 U
 Types:Creature Homarid
-Text:As long as there is exactly one tide counter on Homarid, it gets -1/-1.\r\nAs long as there are exactly three tide counters on Homarid, it gets +1/+1.\r\nWhenever there are four tide counters on Homarid, remove all tide counters from it.
+Text:Whenever there are four tide counters on CARDNAME, remove all tide counters from it.
 PT:2/2
 K:etbCounter:TIDE:1
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.TIDE/1:Self:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, put a tide counter on CARDNAME.
+K:stPumpSelf:Permanent:-1/-1:isValid Permanent.countersEQ1TIDE:As long as there is exactly one tide counter on CARDNAME, it gets -1/-1.
+K:stPumpSelf:Permanent:1/1:isValid Permanent.countersEQ3TIDE:As long as there are exactly three tide counters on CARDNAME, it gets +1/+1.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/38.jpg

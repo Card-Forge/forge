@@ -14022,18 +14022,6 @@ public class GameActionUtil {
 				if(tide == 4) {
 					homarid.setCounter(Counters.TIDE, 0, true);
 				}
-				if(tide == 1) {
-					homarid.setBaseAttack(1);
-					homarid.setBaseDefense(1);
-				}
-				else if (tide == 3) {
-					homarid.setBaseAttack(3);
-					homarid.setBaseDefense(3);
-				}
-				else {
-					homarid.setBaseAttack(2);
-					homarid.setBaseDefense(2);
-				}
 			}
 		}// execute()
 	};
