@@ -4,7 +4,7 @@ Types:Creature Wall
 Text:no text
 PT:0/4
 K:Defender
-T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigDamage | CombatDamage$ True | TriggerDescription$ Whenever Wall of Souls is dealt combat damage, it deals that much damage to target opponent.
+T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigDamage | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME is dealt combat damage, it deals that much damage to target opponent.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Uncommon
