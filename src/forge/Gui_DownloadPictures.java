@@ -3,6 +3,7 @@ package forge;
 import static java.lang.Integer.*;
 import static javax.swing.JOptionPane.*;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,10 +23,14 @@ import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultBoundedRangeModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -62,6 +67,9 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
     
     private JOptionPane              dlg;
     private JButton                  close;
+    private JComboBox jComboBox1;
+    private JLabel jLabel1;
+    private String url;
     
     private Gui_DownloadPictures(Card[] c) {
         this.cards = c;
@@ -72,6 +80,9 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
         JPanel p0 = new JPanel();
         p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
         
+        
+        
+        
         //Proxy Choice
         ButtonGroup bg = new ButtonGroup();
         String[] labels = {
@@ -81,13 +92,37 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
             JRadioButton rb = new JRadioButton(labels[i]);
             rb.addChangeListener(new ProxyHandler(i));
             bg.add(rb);
+            
             p0.add(rb);
+           
+            
+            
             if(i == 0) rb.setSelected(true);
         }
         
         //Proxy config
+        
         p0.add(addr);
         p0.add(port);
+        
+        p0.add(Box.createVerticalStrut(5));
+        jLabel1 = new JLabel();
+  		jLabel1.setText("Please select server:");
+  		
+  		jLabel1.setAlignmentX(Component.LEFT_ALIGNMENT);
+  		
+  		p0.add(jLabel1);
+  		p0.add(Box.createVerticalStrut(5));
+  		    ComboBoxModel jComboBox1Model = 
+      		new DefaultComboBoxModel(
+      				new String[] { "mtgpics.chutography.com", "pics.slightlymagic.net" });
+      	jComboBox1 = new JComboBox();
+      	
+      	jComboBox1.setModel(jComboBox1Model);
+    		jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
+          p0.add(jComboBox1);
+          p0.add(Box.createVerticalStrut(5));
+        
 //        JTextField[] tfs = {addr, port};
 //        String[] labels = {"Address", "Port"};
 //        for(int i = 0; i < labels.length; i++) {
@@ -190,7 +225,22 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
             int len;          
             for(update(0); card < cards.length && !cancel; update(card + 1)) {
                 try {
-                    String url = cards[card].url;
+                	
+                	String tsr;
+                	tsr=cards[card].url.substring(7,15);
+                	
+                	if(tsr.equals("[server]"))
+                    {                    	
+                			
+                			String b = cards[card].url.substring(0,7)+jComboBox1.getSelectedItem().toString()+cards[card].url.substring(15,cards[card].url.length());
+                    		url=b;
+                    	                    	
+                    }else
+                    {
+                    	 url = cards[card].url;
+                    }
+                    
+                    
                     String cName;
                     if(cards[card].name.substring(0, 3).equals("[T]")){
                     	base = ForgeProps.getFile(IMAGE_TOKEN);
@@ -227,7 +277,7 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
                     out.close();
                 } catch(Exception ex) {
                     ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.OTHER), cards[card].name,
-                            cards[card].url);
+                            url);
 //                    throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
                     break;
                 }
