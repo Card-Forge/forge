@@ -87,7 +87,6 @@ public class GameActionUtil {
 		upkeep_Mirror_Sigil_Sergeant();
 		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
-		upkeep_Goblin_Assault();
 		
 		// Win / Lose	
 		//final Player player = AllZone.Phase.getPlayerTurn();
@@ -7089,34 +7088,6 @@ public class GameActionUtil {
 
 		}//else
 	}// upkeep_Greener_Pastures()
-
-
-	private static void upkeep_Goblin_Assault() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Goblin Assault");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", crd.getController(), "R", new String[] {
-							"Creature", "Goblin"}, 1, 1, new String[] {"Haste"});
-				}// resolve()
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Goblin Assault - ").append(player);
-			sb.append(" puts a 1/1 red Goblin creature token with haste onto the battlefield.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Goblin_Assault()
 
 	private static void upkeep_Masticore() {
 		final Player player = AllZone.Phase.getPlayerTurn();
