@@ -55,8 +55,8 @@ public class StaticEffects
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		//cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
 		//cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});
-		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
-		cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
+		//cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
+		//cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
 		
 		cardToEffectsList.put("Hada Spy Patrol", new String[] {"Hada_Spy_Patrol"});
 		cardToEffectsList.put("Halimar Wavewatch", new String[] {"Halimar_Wavewatch"});

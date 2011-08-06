@@ -12544,6 +12544,10 @@ public class GameActionUtil {
 	      		SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
 	      		if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
   	      	}
+  	      	if(SpecialConditions.contains("OppHandEmpty")) {
+	      		CardList oppHand = AllZoneUtil.getPlayerHand(SourceCard.getController().getOpponent());
+	      		if(!(oppHand.size() == 0)) return false;
+	      	}
   	      	if(SpecialConditions.contains("LibraryLE")) {
   	      		CardList Library = new CardList();
   	      		Library.addAll(AllZone.getZone(Constant.Zone.Library, SourceCard.getController()).getCards());
@@ -13811,6 +13815,7 @@ public class GameActionUtil {
 		}
 	};
 	*/
+	/*
 	public static Command Guul_Draz_Vampire           = new Command() {
 		private static final long serialVersionUID = -4252257530318024113L;
 
@@ -13838,6 +13843,7 @@ public class GameActionUtil {
 			return opp.getLife() <= 10;
 		}
 	};
+	*/
 	/*
 	public static Command Ruthless_Cullblade          = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
@@ -14838,7 +14844,7 @@ public class GameActionUtil {
 
 	}; //overbeing of myth
 	*/
-
+	/*
 	public static Command Guul_Draz_Specter           = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -14879,6 +14885,7 @@ public class GameActionUtil {
 		}
 
 	}; //Guul Draz Specter
+	*/
 
 	public static Command Sound_the_Call_Wolf      = new Command() {
 		private static final long serialVersionUID = 4614281706799537283L;
@@ -16263,8 +16270,8 @@ public class GameActionUtil {
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		//commands.put("Goblin_Assault", Goblin_Assault);
 		//commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
-		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
-		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
+		//commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
+		//commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);

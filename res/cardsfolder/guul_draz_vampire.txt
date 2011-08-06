@@ -1,8 +1,9 @@
 Name:Guul Draz Vampire
 ManaCost:B
 Types:Creature Vampire Rogue
-Text:As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
+Text:no text
 PT:1/1
+K:stPumpSelf:Permanent:2/1/Intimidate:OppLifeLE/10:As long as an opponent has 10 or less life, CARDNAME gets +2/+1 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_vampire.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/93.jpg
