@@ -1,3 +1,103 @@
+Edgewalker
+1 W B 
+Creature Human Cleric
+Cleric spells you cast cost W B less to cast. This effect reduces only the amount of colored mana you pay. (For example, if you cast a Cleric spell with mana cost 1 W, it costs 1 to cast.)
+2/2
+CostChange:Player:Less:W:Spell:All:Cleric:NoSpecial
+CostChange:Player:Less:B:Spell:All:Cleric:NoSpecial
+
+Thunderscape Familiar 
+1 R
+Creature Kavu
+Black spells and green spells you cast cost 1 less to cast.
+1/1
+First strike
+CostChange:Player:Less:1:Spell:black/green:All:OnlyOneBonus
+
+Sphere of Resistance
+2
+Artifact
+Spells cost 1 more to cast.
+CostChange:All:More:1:Spell:All:All:NoSpecial
+
+Training Grounds
+U
+Enchantment
+Activated abilities of creatures you control cost up to 2 less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
+CostChange:Player:Less:2:Ability:All:Creature:TargetInPlay
+
+Undead Warchief
+2 B B
+Creature Zombie 
+Zombie spells you cast cost 1 less to cast. Zombie creatures you control get +2/+1.
+1/1
+CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
+
+Grand Arbiter Augustin IV
+2 W U
+Legendary Creature Human Advisor
+White spells you cast cost 1 less to cast. Blue spells you cast cost 1 less to cast. Spells your opponents cast cost 1 more to cast.
+2/3
+CostChange:Player:Less:1:Spell:white:All:NoSpecial
+CostChange:Player:Less:1:Spell:blue:All:NoSpecial
+CostChange:Opponent:More:1:Spell:All:All:NoSpecial
+
+Goblin Warchief
+1 R R
+Creature Goblin 
+Goblin spells you cast cost 1 less to cast. Goblin creatures you control have haste.
+2/2
+CostChange:Player:Less:1:Spell:All:Goblin:NoSpecial
+
+Etherium Sculptor
+1 U
+Artifact Creature Vedalken Artificer
+Artifact spells you cast cost 1 less to cast.
+1/2
+CostChange:Player:Less:1:Spell:All:All:NoSpecial
+
+Chill
+1 U
+Enchantment
+Red spells cost 2 more to cast.
+CostChange:All:More:2:Spell:red:All:NoSpecial
+
+Centaur Omenreader
+3 G
+Snow Creature Centaur Shaman
+As long as Centaur Omenreader is tapped, creature spells you cast cost 2 less to cast.
+3/3
+CostChange:Player:Less:2:Spell:All:Creature:CardIsTapped
+
+Bosk Banneret
+1 G
+Creature Treefolk Shaman
+Treefolk spells and Shaman spells you cast cost 1 less to cast.
+1/3
+CostChange:Player:Less:1:Spell:All:Treefolk/Shaman:OnlyOneBonus
+
+Ballyrush Banneret
+1 W
+Creature Kithkin Soldier
+Kithkin spells and Soldier spells you cast cost 1 less to cast.
+2/1
+CostChange:Player:Less:1:Spell:All:Kithkin/Soldier:OnlyOneBonus
+
+Andradite Leech
+2 B
+Creature Leech
+Black spells you cast cost B more to cast.
+2/2
+abPump B:+1/+1
+CostChange:Player:More:B:Spell:black:All:NoSpecial
+
+Alabaster Leech
+W
+Creature Leech
+White spells you cast cost W more to cast.
+1/3
+CostChange:Player:More:W:Spell:white:All:NoSpecial
+
 Volcanic Island
 no cost
 Land Mountain Island

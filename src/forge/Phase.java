@@ -234,6 +234,7 @@ public class Phase extends MyObservable
         //if(getPhase().equals(Constant.Phase.Untap)) {
         if(is(Constant.Phase.Untap, Constant.Player.Human)) {
         	StormCount = 0;
+        	
         	HighTideCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   
@@ -265,8 +266,7 @@ public class Phase extends MyObservable
               */
         }
         if(is(Constant.Phase.Main1, Constant.Player.Human)) {
-        	if(turn == 1) {
-        	GameBegins = 1; // Omnath
+        	if(turn == 1) {     	
         	StormCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   

@@ -9872,6 +9872,126 @@ public class GameActionUtil {
         }// execute()
     };
     
+	public static Command Goblin_Warchief                 = new Command() {
+
+		private static final long serialVersionUID   = -6707183535529395830L;
+		CardList                  gloriousAnthemList = new CardList();
+    	String[]              Akroma_Memorial_Controller = new String[10]; // Shouldn't have more than 8 in play, let alone 10.
+        public void execute() {
+            String keyword = "Haste";
+            CardList list = gloriousAnthemList;
+            Card c;
+            
+			CardList Akroma_List = AllZoneUtil.getCardsInPlay("Goblin Warchief");
+			CardList Akroma_Zone = new CardList();
+        	for(int i = 0; i < Akroma_List.size(); i++) {
+        		Akroma_Zone.clear();
+				Akroma_Zone.addAll(AllZone.getZone(Constant.Zone.Play, Akroma_List.get(i).getController()).getCards());	
+        	}
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+            for(int i = 0; i < List_Copy.size(); i++) {
+                c = List_Copy.get(i);                 
+                if(!Akroma_Zone.contains(c)) {
+                	c.removeExtrinsicKeyword(keyword);
+                    list.remove(c);
+                }
+            }
+
+            PlayerZone[] zone = getZone("Goblin Warchief");
+			if(AllZoneUtil.isCardInPlay("Goblin Warchief")) {
+			CardList ControllerCheck = AllZoneUtil.getCardsInPlay("Goblin Warchief");
+			for(int i = 0; i < ControllerCheck.size(); i++) Akroma_Memorial_Controller[i] = ControllerCheck.get(i).getController();
+            for(int outer = 0; outer < zone.length; outer++) {
+                CardList creature = new CardList(
+                        zone[outer].getCards());
+                creature = creature.getType("Creature");
+            	
+                for(int i = 0; i < creature.size(); i++) {
+                    c = creature.get(i);
+                    if(!list.contains(c)) {
+                    gloriousAnthemList.add(c);
+                    
+                    if(!c.getIntrinsicKeyword().contains(keyword)) {
+                        c.addExtrinsicKeyword(keyword);  
+                    }
+                    }
+                }// for inner
+            }// for outer
+			} 
+        }// execute()
+/**
+		public void execute() {
+			String keyword = "Haste";
+
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.removeExtrinsicKeyword(keyword);
+			}
+
+			list.clear();
+			PlayerZone[] zone = getZone("Goblin Warchief");
+
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+				creature = creature.getType("Creature");
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					if(!c.getKeyword().contains(keyword)) {
+						c.addExtrinsicKeyword(keyword);
+						gloriousAnthemList.add(c);
+					}
+				}// for inner
+			}// for outer
+		}// execute()
+		**/
+	};
+    
+	public static Command Undead_Warchief         = new Command() {
+		private static final long serialVersionUID   = -3463429634177142721L;
+
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			int pumpAttack = 2;
+			int pumpDefense = 1;
+
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.addSemiPermanentAttackBoost(-pumpAttack);
+				c.addSemiPermanentDefenseBoost(-pumpDefense);
+			}
+
+			// add +1/+1 to cards
+			list.clear();
+			PlayerZone[] zone = getZone("Undead Warchief");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList();
+				creature.addAll(AllZone.Human_Play.getCards());
+				creature.addAll(AllZone.Computer_Play.getCards());
+				creature = creature.getType("Zombie");
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					c.addSemiPermanentAttackBoost(pumpAttack);
+					c.addSemiPermanentDefenseBoost(pumpDefense);
+
+					gloriousAnthemList.add(c);
+				}// for inner
+			}// for outer
+		}// execute()
+	}; // Undead Warchief
+    
 	public static Command Leyline_of_Singularity                = new Command() {
 
 		private static final long serialVersionUID   = -67071835355151830L;
@@ -18257,6 +18377,8 @@ public class GameActionUtil {
 		commands.put("Darksteel_Forge", Darksteel_Forge);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
+		commands.put("Goblin_Warchief", Goblin_Warchief);	
+		commands.put("Undead_Warchief", Undead_Warchief);
 		commands.put("Levitation", Levitation);
 		commands.put("Knighthood", Knighthood);
 		commands.put("Absolute_Law", Absolute_Law);

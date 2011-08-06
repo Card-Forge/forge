@@ -510,8 +510,10 @@ public class Card extends MyObservable {
         StringBuilder sb = new StringBuilder();
         ArrayList<String> keyword = getKeyword();
         for(int i = 0; i < keyword.size(); i++) {
+        	if(!keyword.get(i).toString().contains("CostChange")) {
             if(i != 0) sb.append(", ");
-            sb.append(keyword.get(i).toString());
+            sb.append(keyword.get(i).toString()); 
+        	}
         }
         sb.append("\r\n");
         sb.append(text);

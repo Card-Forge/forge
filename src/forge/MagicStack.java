@@ -29,6 +29,55 @@ public class MagicStack extends MyObservable
 	  }
   }
 
+  public ManaCost GetMultiKickerSpellCostChange(SpellAbility sa) { 
+	  int Max = 25;
+     	String[] Numbers = new String[Max];
+   	for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
+		  ManaCost manaCost = new ManaCost(sa.getManaCost());
+		  String Mana = manaCost.toString();
+		 int MultiKickerPaid = AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid;
+       	for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
+       	String Number_ManaCost = " ";
+   		if(Mana.toString().length() == 1) Number_ManaCost = Mana.toString().substring(0, 1);
+   		else if(Mana.toString().length() == 0) Number_ManaCost = "0";  // Should Never Occur
+   		else Number_ManaCost = Mana.toString().substring(0, 2);
+   		Number_ManaCost = Number_ManaCost.trim();
+   		
+
+       	for(int check = 0; check < Max; check ++) {
+       		if(Number_ManaCost.equals(Numbers[check])) {
+       			
+       			if(check - MultiKickerPaid < 0) {    
+       				MultiKickerPaid = MultiKickerPaid - check;
+       				AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid = MultiKickerPaid;
+       				Mana = Mana.replaceFirst(String.valueOf(check),"0");
+       			} else {
+       				Mana = Mana.replaceFirst(String.valueOf(check),String.valueOf(check - MultiKickerPaid));
+       				MultiKickerPaid = 0;
+       				AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid = MultiKickerPaid;
+       			}
+       		}
+       		Mana = Mana.trim();
+       		if(Mana.equals("")) Mana = "0";
+       		manaCost = new ManaCost(Mana);	
+       	}	
+       	 String Color_cut = AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored;
+       	
+		 for(int Colored_Cut = 0; Colored_Cut < Color_cut.length(); Colored_Cut++) {
+			 if("WUGRB".contains(Color_cut.substring(Colored_Cut, Colored_Cut + 1))) {
+			if(!Mana.equals(Mana.replaceFirst((Color_cut.substring(Colored_Cut, Colored_Cut + 1)), ""))) {             		 
+          	Mana = Mana.replaceFirst(Color_cut.substring(Colored_Cut, Colored_Cut + 1), "");
+          	AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored = AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.replaceFirst(Color_cut.substring(Colored_Cut, Colored_Cut + 1), "");
+          	Mana = Mana.trim();
+          	if(Mana.equals("")) Mana = "0";
+         	manaCost = new ManaCost(Mana);
+			 }
+			 }
+		 }
+         
+	  return manaCost;
+  }
+  
   public void add(SpellAbility sp)
   {
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
@@ -64,17 +113,17 @@ public class MagicStack extends MyObservable
 				private static final long serialVersionUID = -2224875229611007788L;
 
 				public void execute() {
-	                    ability.resolve();
-	                    Card crd = sa.getSourceCard();
-	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + crd.getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
-		                        ability.getManaCost(), this, unpaidCommand, true));
-				}
-	          };
-			  
-			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
-	                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X=0)\r\n",
-	                        ability.getManaCost(), paidCommand, unpaidCommand, true));
-	          } 
+                    ability.resolve();
+                    Card crd = sa.getSourceCard();
+                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + crd.getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
+	                        ability.getManaCost(), this, unpaidCommand, true));
+			}
+          };
+          Card crd = sa.getSourceCard();
+		  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
+                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
+                        ability.getManaCost(), paidCommand, unpaidCommand, true));
+          } 
 			  else //computer
 	          {
 				  int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
@@ -112,14 +161,47 @@ public class MagicStack extends MyObservable
 				    private static final long serialVersionUID = -6037161763374971106L;
 					public void execute() {
 	                    ability.resolve();
-	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n",
-		                        ability.getManaCost(), this, unpaidCommand));
+	                    ManaCost manaCost = GetMultiKickerSpellCostChange(ability);
+	  				  if(manaCost.isPaid()) {
+						  this.execute();
+					  } else {
+						  if(AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid == 0 
+								  && AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
+			                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n"
+			                    		+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
+				                        manaCost.toString(), this, unpaidCommand));
+						  } else {
+	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n" 
+	                    		+ "Mana in Reserve: " + ((AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid != 0)? 
+	                    				AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid:"") + 
+	                    				AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored + "\r\n"
+	                    		+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
+		                        manaCost.toString(), this, unpaidCommand));
+						  }
+					  }
 	                }
 	          };
 			  
 			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
-	                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sp.getSourceCard() + "\r\n",
-	                        ability.getManaCost(), paidCommand, unpaidCommand));
+				  ManaCost manaCost = GetMultiKickerSpellCostChange(ability); 
+			       
+				  if(manaCost.isPaid()) {
+					  paidCommand.execute();
+				  } else {
+					  if(AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid == 0 
+							  && AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
+		                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n"
+		                    		+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
+			                        manaCost.toString(), paidCommand, unpaidCommand));
+					  } else {
+                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n" 
+                		+ "Mana in Reserve: " + ((AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid != 0)? 
+                				AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid:"") + 
+                				AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored + "\r\n"
+                		+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
+	                        manaCost.toString(), paidCommand, unpaidCommand));
+					  }
+				  }
 	            } 
 			    else //computer
 	            {
