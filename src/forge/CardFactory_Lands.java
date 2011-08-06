@@ -110,7 +110,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         
-                //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Sejiri Steppe")) {
         	final HashMap<Card, String[]> creatureMap = new HashMap<Card, String[]>();
         	final SpellAbility[] a = new SpellAbility[1];
@@ -229,8 +229,8 @@ class CardFactory_Lands {
         		}
         	};         
         	card.addComesIntoPlayCommand(intoPlay);
-
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Faerie Conclave")) {
@@ -574,12 +574,11 @@ class CardFactory_Lands {
             
             card.addSpellAbility(ability);
             sacrifice.setStackDescription("Sacrifice "+card.getName());
-            card.addSpellAbility(sacrifice);
-            
+            card.addSpellAbility(sacrifice);            
         }//*************** END ************ END **************************
         
         
-                //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Mutavault")) {
         	final long[] timeStamp = new long[1];
             
@@ -1337,6 +1336,7 @@ class CardFactory_Lands {
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Sheltered Valley")) {
         	
@@ -1422,6 +1422,7 @@ class CardFactory_Lands {
             card.addComesIntoPlayCommand(comesIntoPlay);
          }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Island of Wak-Wak")) {
         	/*
@@ -1485,8 +1486,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-                
-        
+                        
         //*************** START ************ START **************************
         else if(cardName.equals("Bottomless Vault") || cardName.equals("Dwarven Hold")
         		|| cardName.equals("Hollow Trees") || cardName.equals("Icatian Store")
@@ -1570,6 +1570,7 @@ class CardFactory_Lands {
             card.addSpellAbility(abMana);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         //Lorwyn Dual Lands, and a couple Morningtide...
         else if(cardName.equals("Ancient Amphitheater") || cardName.equals("Auntie's Hovel")
@@ -1638,7 +1639,6 @@ class CardFactory_Lands {
         
 
         //*************** START ************ START **************************
-
         else if(cardName.equals("Calciform Pools") || cardName.equals("Dreadship Reef") ||
         		cardName.equals("Fungal Reaches")  || cardName.equals("Molten Slagheap") ||
         		cardName.equals("Saltcrusted Steppe")) {

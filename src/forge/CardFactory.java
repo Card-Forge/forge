@@ -873,92 +873,6 @@ public class CardFactory implements NewConstants {
         		sa.setReplicateManaCost(k[1]);
         	}
         }
-        
-        /*
-        //Creatures with self-regenerate abilities
-        //-1 means keyword "RegenerateMe" not found
-        while(hasKeyword(card, "RegenerateMe") != -1) {
-            int n = hasKeyword(card, "RegenerateMe");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                final Command untilEOT = new Command() {
-                    private static final long serialVersionUID = -7619842476705984912L;
-                    
-                    public void execute() {
-                        card.setShield(0);
-                        
-                    }
-                };
-                
-                final SpellAbility a1 = new Ability(card, manacost) {
-                    @Override
-                    public boolean canPlayAI() {
-                        if(CardFactoryUtil.AI_isMainPhase()) {
-                            if(CardFactoryUtil.AI_doesCreatureAttack(card)) {
-                                //"Fuzzy logic" to determine if using a regenerate ability might be helpful because
-                                //we can't wait to decide to play this ability during combat, like the human can
-                                //weight[] is a set of probability percentages to be averaged later
-                                int weight[] = new int[3];
-                                
-                                // cards with real keywords (flying, trample, etc) are probably more desireable
-                                if(card.getKeyword().size() > 0) weight[0] = 75;
-                                else weight[0] = 0;
-                                
-                                // if there are many cards in hand, then maybe it's not such a great idea to waste mana
-                                CardList HandList = new CardList(AllZone.getZone(Constant.Zone.Hand,
-                                        AllZone.ComputerPlayer).getCards());
-                                
-                                if(HandList.size() >= 4) weight[1] = 25;
-                                else weight[1] = 75;
-                                
-                                // compare the highest converted mana cost of cards in hand to the number of lands
-                                // if there's spare mana, then regeneration might be viable
-                                int hCMC = 0;
-                                for(int i = 0; i < HandList.size(); i++)
-                                    if(CardUtil.getConvertedManaCost(HandList.getCard(i).getManaCost()) > hCMC) hCMC = CardUtil.getConvertedManaCost(HandList.getCard(
-                                            i).getManaCost());
-                                
-                                CardList LandList = new CardList(AllZone.getZone(Constant.Zone.Play,
-                                        AllZone.ComputerPlayer).getCards());
-                                LandList = LandList.getType("Land");
-                                
-                                //most regenerate abilities cost 2 or less
-                                if(hCMC + 2 >= LandList.size()) weight[2] = 50;
-                                else weight[2] = 0;
-                                
-                                // ultimately, it's random fate that dictates if this was the right play
-                                int aw = (weight[0] + weight[1] + weight[2]) / 3;
-                                Random r = new Random();
-                                if(r.nextInt(100) <= aw) return true;
-                            }
-                        }
-                        return false;
-                    }
-                    
-                    @Override
-                    public void resolve() {
-                        card.addShield();
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }; //SpellAbility
-                
-                card.addSpellAbility(a1);
-                
-                String Desc = "";
-                Desc = "Regenerate " + cardName;
-                
-                a1.setDescription(manacost + ": " + Desc);
-                a1.setStackDescription(Desc);
-                
-                a1.setBeforePayMana(new Input_PayManaCost(a1));
-            } //if (should RegenerateMe)
-        } //while - card has more RegenerateMe - Jungle Troll has two Regenerate keywords
-        */
 
         /* Cards converted to SP$PumpAll
         if (hasKeyword(card, "spAllPump") != -1)
@@ -1852,7 +1766,7 @@ public class CardFactory implements NewConstants {
             }
         }//Spore Saproling
         */
-        
+        /*
         if(hasKeyword(card, "spDamageTgt") != -1) {
             int n = hasKeyword(card, "spDamageTgt");
             if(n != -1) {
@@ -2084,170 +1998,8 @@ public class CardFactory implements NewConstants {
                 }
 
             }
-        }// spDamageTgt
-
-        
-        //Keyword for spells, that damage all creatures
-        /*
-         * Converted all cards to AbilityFactory DamageAll. 12/30/10.  Let this code hang around for a beta or two
-         * to make sure the AF code is at least as solid.
-         * 
-        if (hasKeyword(card, "spDamageAll") != -1)
-        {
-        	int n = hasKeyword(card, "spDamageAll");
-        	if (n != -1)
-        	{
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                final int NumDam[] = {-1};
-                final String NumDamX[] = {"none"};
-                final boolean DmgPlayer[] = {false};
-                
-                String k[] = parse.split(":");
-                String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
-                // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
-                //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
-                if (Targets.startsWith("Player")) {
-                	Targets = Targets.replaceFirst("Player,", "");
-                	DmgPlayer[0] = true;
-                }											// if Players are affected they have to be at the start
-                final String Tgts[] = Targets.split(","); 
-
-                
-                  if (k[2].matches("X"))
-                  {
-                     String x = card.getSVar(k[2]);
-                     if (x.startsWith("Count$"))
-                     {
-                        String kk[] = x.split("\\$");
-                        NumDamX[0] = kk[1];
-                     }
-                  }
-                  else if (k[2].matches("[0-9][0-9]?"))
-                     NumDam[0] = Integer.parseInt(k[2]);
-                 
-                  // drawbacks and descriptions
-                  final String DrawBack[] = {"none"};
-                  final String spDesc[] = {"none"};
-                  if (k.length > 3)
-                  {
-                     if (k[3].contains("Drawback$"))
-                     {
-                    	 String kk[] = k[3].split("\\$");
-                    	 DrawBack[0] = kk[1];
-                    	 spDesc[0] = k[4];
-                     }
-                     else
-                    	 spDesc[0] = k[3];
-                  }
-                  else
-                	  spDesc[0] = "cardName deals " + NumDam[0] + " damage to each creature and player.";
- 
-
-                  final SpellAbility spDmgAll = new Spell(card)
-                  {
-                  private static final long serialVersionUID = -2598054704232863475L;
-
-                   public int getNumDam()
-                   {
-                      if (NumDam[0] != -1)
-                         return NumDam[0];
-
-                      if (! NumDamX[0].equals("none"))
-                      return CardFactoryUtil.xCount(card, NumDamX[0]);
-                     
-                      return 0;
-                   }
-                   
-                   public boolean canPlayAI()
-                   {
-                	   	if(!super.canPlayAI()) return false;
-                	   
-                	   	int ndam = getNumDam();
-                	   	
-                    	if (DmgPlayer[0] && AllZone.ComputerPlayer.getLife() <= ndam) 
-                    		return false;       									// The AI will not kill itself
-                    	if (DmgPlayer[0] && AllZone.HumanPlayer.getLife() <= ndam && AllZone.ComputerPlayer.getLife() > ndam) 
-                    		return true;											// The AI will kill the human if possible
-                    	
-                	   	CardList human = new CardList(AllZone.Human_Battlefield.getCards());
-                	   	CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
-                    
-                    	human = human.getValidCards(Tgts,card.getController(),card);
-                        human = human.canBeDamagedBy(card);
-                    	human = human.getNotKeyword("Indestructible");
-                    	human = human.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return (c.getKillDamage() <= getNumDam());
-                            }
-                    	}); // leaves all creatures that will be destroyed
-                        int humanvalue = CardListUtil.sumCMC(human);
-                        humanvalue += human.size();
-                        humanvalue += CardListUtil.sumAttack(human.getTokens());
-                        // X = total converted mana cost + number of permanents + total power of tokens (Human)
-                        if (!DmgPlayer[0] && AllZone.ComputerPlayer.getLife() < 7) humanvalue += CardListUtil.sumAttack(human); 
-                        // in Low Life Emergency (and not hurting itself) X = X + total power of human creatures
-                        
-                    	computer = computer.getValidCards(Tgts,card.getController(),card);
-                    	computer = computer.canBeDamagedBy(card);
-                    	computer = computer.getNotKeyword("Indestructible");
-                    	computer = computer.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return (c.getKillDamage() <= getNumDam());
-                            }
-                    	}); // leaves all creatures that will be destroyed
-                        int computervalue = CardListUtil.sumCMC(computer);
-                        computervalue += computer.size();
-                        computervalue += CardListUtil.sumAttack(computer.getTokens()); 
-                        // Y = total converted mana cost + number of permanents + total power of tokens (Computer)
-
-                        // the computer will play the spell if Y < X - 3
-                        return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-                        		(computervalue < humanvalue - 3);
-                   	}
-
-                  public void resolve()
-                    {
-                        int ndam = getNumDam();
-                       
-                        CardList all = new CardList();
-                    	all.addAll(AllZone.Human_Battlefield.getCards());
-                    	all.addAll(AllZone.Computer_Battlefield.getCards());
-                    	all = all.getValidCards(Tgts,card.getController(),card);
-                    
-                    	for(int i = 0; i < all.size(); i++) {
-                        	all.get(i).addDamage(ndam, card);
-                    	}
-                    	if (DmgPlayer[0] == true) {
-                    		AllZone.ComputerPlayer.addDamage(ndam, card);
-                    		AllZone.HumanPlayer.addDamage(ndam, card);
-                    	}
-                       // if (!DrawBack[0].equals("none"))
-                       //    CardFactoryUtil.doDrawBack(DrawBack[0], ndam, card.getController(), card.getController().getOpponent(), null, card, null);
-                    	
-                     }//resolve()
-                  };//SpellAbility spDmgAll
-                 
-                  spDmgAll.setDescription(spDesc[0]);
-                  spDmgAll.setStackDescription(spDesc[0]);
-                 
-                  card.clearSpellAbility();
-                  card.addSpellAbility(spDmgAll);
-                  
-                  String bbCost = card.getSVar("Buyback");
-                  if (!bbCost.equals(""))
-                  {
-                     SpellAbility bbspDmgAll = spDmgAll.copy();
-                     bbspDmgAll.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-                     bbspDmgAll.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
-                     bbspDmgAll.setIsBuyBackAbility(true);
-                     
-                     card.addSpellAbility(bbspDmgAll);
-                  }
-        	}
-        }//spDamageAll
-        */
+        }// spDamageTgt 
+		*/
         
         /* Cards converted to AF_AB$Damage
         while(hasKeyword(card, "abDamage") != -1) {
@@ -2752,7 +2504,7 @@ public class CardFactory implements NewConstants {
         }// abDestroyTgt
         */
 
-        
+        /*
         // Generic enters the battlefield destroy target
         if (hasKeyword(card, "etbDestroyTgt") != -1)
         {
@@ -2958,7 +2710,7 @@ public class CardFactory implements NewConstants {
             	card.addSpellAbility(evDestroyTgt);
             }
         } // etbDestoryTgt
-        
+        */
         // NOTE: This cannot currently be converted to triggers because of this line:
         // card.getSpellPermanent().setLoseLifeAmount(num);
         

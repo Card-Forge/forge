@@ -397,10 +397,9 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
+             
 
-	//*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Roiling Terrain")) {
             SpellAbility spell = new Spell(card) {
 
@@ -458,9 +457,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);  
         }//*************** END ************ END **************************
 
-
-        
-        
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Mind's Desire"))
         {
@@ -1470,8 +1467,7 @@ public class CardFactory_Sorceries {
             card.setSpellWithChoices(true);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
-        
-        
+               
         
         //*************** START *********** START **************************
         else if(cardName.equals("Overwhelming Forces")) {
@@ -1938,8 +1934,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
    
         
-      
-
         //*************** START *********** START **************************
         else if(cardName.equals("Sleight of Hand")) {
             final SpellAbility spell = new Spell(card) {
@@ -2057,9 +2051,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
-        
-        
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
             SpellAbility spell = new Spell(card) {
@@ -2488,9 +2480,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************          
         
-
-       
-                
+            
         //*************** START *********** START **************************
         else if(cardName.equals("Donate")) {
             final SpellAbility spell = new Spell(card) {
@@ -2555,9 +2545,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-                
-        
-        
+                                
         //********************Start********Start***********************
         else if(cardName.equals("Living Death"))
         {
@@ -2751,9 +2739,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-    
-        
-           
+               
         
         //*************** START *********** START **************************
         else if(cardName.equals("Balance"))
@@ -2838,60 +2824,6 @@ public class CardFactory_Sorceries {
         }
         //*************** END ************ END **************************
         
-        
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Riding the Dilu Horse"))
-        {
-        	SpellAbility spell = new Spell(card)
-        	{
-        		private static final long serialVersionUID = -620930445462994580L;
-
-
-        		public boolean canPlayAI()
-        		{
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-
-        			CardList list = new CardList(play.getCards());
-        			list = list.filter(new CardListFilter()
-        			{
-        				public boolean addCard(Card c)
-        				{
-        					return c.isCreature() && !c.getKeyword().contains("Horsemanship") && !c.getKeyword().contains("Defender");
-        				}
-        			});
-        			if (list.size() > 0) {
-        				Card c = CardFactoryUtil.AI_getBestCreature(list, card);
-        				setTargetCard(c);
-        				return true;
-        			}
-        			return false;
-        		}
-
-        		public void resolve()
-        		{
-        			final Card[] target = new Card[1];
-
-
-        			target[0] = getTargetCard();
-        			if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-        			{
-        				target[0].addTempAttackBoost(2);
-        				target[0].addTempDefenseBoost(2);
-        				target[0].addExtrinsicKeyword("Horsemanship");
-      		  
-        				//String s = target[0].getText();
-        				target[0].setText("(+2/+2 and Horsemanship from " +card+")");
-        			}
-        		}//resolve()
-        	};
-        	spell.setDescription("Target creature gets +2/+2 and gains horsemanship. (This effect lasts indefinitely.)");
-	        spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-	        card.clearSpellAbility();
-	        card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Summer Bloom"))
@@ -3139,7 +3071,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-                //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Brood Birthing")) {
         	final SpellAbility spell = new Spell(card)
         	{
@@ -3169,6 +3101,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("All Is Dust")) {
         	/*
@@ -3404,7 +3337,8 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-               
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Fireball")) {
         	/*
@@ -3604,8 +3538,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
+                
         
         //*************** START *********** START **************************
         else if(cardName.equals("Recall")) {
@@ -3870,8 +3803,7 @@ public class CardFactory_Sorceries {
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" - choose a creature type.");
             spell.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************        
         
         
         //*************** START *********** START **************************
@@ -4017,8 +3949,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
-        
-                
+                       
         
         //*************** START *********** START **************************
         else if(cardName.equals("Overwhelming Stampede")) {

@@ -141,8 +141,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Wings of Velis Vel")) {
             final SpellAbility spell = new Spell(card) {
@@ -203,7 +201,6 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sprout Swarm")) {
@@ -250,6 +247,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Reiterate")) {
             final SpellAbility spell_one = new Spell(card) {
@@ -425,7 +423,6 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Fact or Fiction")) {
@@ -544,7 +541,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
                      
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Decay")) {
@@ -1190,8 +1186,6 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
-        
           
         
         //*************** START *********** START **************************
@@ -1286,9 +1280,7 @@ public class CardFactory_Instants {
 
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
-        
-        
+
             
         //*************** START *********** START **************************
         else if(cardName.equals("Hurkyl's Recall")) {
@@ -1330,8 +1322,7 @@ public class CardFactory_Instants {
         	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
-        
-        
+  
         //*****************************START*******************************
         else if(cardName.equals("Twiddle") || cardName.equals("Twitch")) {
         	/*
@@ -1993,8 +1984,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        
+             
         //*************** START *********** START **************************
         else if(cardName.equals("Cryptic Command")) {
         	final SpellAbility[] m_spell = new SpellAbility[1];
