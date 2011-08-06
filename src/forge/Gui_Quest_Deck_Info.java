@@ -4,7 +4,10 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.io.File;
 import java.util.TreeMap;
@@ -249,8 +252,14 @@ public class Gui_Quest_Deck_Info implements NewConstants {
     }
 
     public static String getDescription(String deckName) {
-        System.out.println("deckName = " + deckName);
-        return nameDeckMap.get(deckName).description;
+        if (nameDeckMap.containsKey(deckName)){
+            return nameDeckMap.get(deckName).description;
+        }
+
+        else{
+            System.out.println("Deck " +deckName+" does not have a description.");
+            return "";
+        }
     }
 
 
