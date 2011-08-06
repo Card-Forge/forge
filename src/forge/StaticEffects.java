@@ -98,7 +98,7 @@ public class StaticEffects
 		
 		//cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
 		cardToEffectsList.put("Nirkana Cutthroat", new String[] {"Nirkana_Cutthroat"});
-		cardToEffectsList.put("Nut Collector", new String[] {"Nut_Collector"});
+		//cardToEffectsList.put("Nut Collector", new String[] {"Nut_Collector"});
 		cardToEffectsList.put("Nyxathid", new String[] {"Nyxathid"});
 		
 		cardToEffectsList.put("Old Man of the Sea", new String[] {"Old_Man_of_the_Sea"});

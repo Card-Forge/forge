@@ -16012,7 +16012,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Muraganda_Petroglyphs
-	
+	/*
 	public static Command Nut_Collector = new Command()
 	{
 		private static final long serialVersionUID = 4873843480453112825L;
@@ -16054,7 +16054,7 @@ public class GameActionUtil {
 			
 		}//execute
 	}; //nut_collector
-	
+	*/
 	
 	public static Command Meddling_Mage               = new Command() {
 		private static final long serialVersionUID   = 738264163993370439L;
@@ -16375,7 +16375,7 @@ public class GameActionUtil {
 		
 		//commands.put("Nightmare", Nightmare);
 		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
-		commands.put("Nut_Collector", Nut_Collector);
+		//commands.put("Nut_Collector", Nut_Collector);
 		commands.put("Nyxathid", Nyxathid);
 		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
