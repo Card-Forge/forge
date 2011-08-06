@@ -1192,56 +1192,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
 
         
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Windstorm"))
-        {
-      	  final SpellAbility spell = new Spell(card)
-      	  {
-  			private static final long serialVersionUID = 6024081054401784073L;
-  			public void resolve()
-      		{
-  				CardList all = AllZoneUtil.getCreaturesInPlay();
-                  all = all.filter(new CardListFilter()
-                  {
-                  	public boolean addCard(Card c)
-                  	{
-                  		return c.getKeyword().contains("Flying");
-                  	}
-                  });
-                  
-                  for(int i = 0; i < all.size(); i++)
-                      	all.get(i).addDamage(card.getXManaCostPaid(), card);
-                  
-      			card.setXManaCostPaid(0);
-      		}
-  			public boolean canPlayAI()
-  			{
-  				final int maxX = ComputerUtil.getAvailableMana().size() - 1;
-  								
-  				CardListFilter filter = new CardListFilter(){
-  					public boolean addCard(Card c)
-  					{
-  						return c.isCreature() && c.getKeyword().contains("Flying") && maxX >= (c.getKillDamage());
-  					}
-  				};
-  				
-  				CardList humanFliers = new CardList(AllZone.Human_Battlefield.getCards());
-  			    humanFliers = humanFliers.filter(filter);
-  			    
-  			    CardList compFliers = new CardList(AllZone.Computer_Battlefield.getCards());
-  			    compFliers = compFliers.filter(filter);
-  			    
-  			    return humanFliers.size() > (compFliers.size() + 2);
-  			}
-      	  };
-      	  spell.setDescription("Windstorm deals X damage to each creature with flying.");
-      	  spell.setStackDescription("Windstorm - deals X damage to each creature with flying.");
-      	  
-      	  card.clearSpellAbility();
-      	  card.addSpellAbility(spell);
-        } 
-        //*************** END ************ END **************************
           
         
         //*************** START *********** START **************************
