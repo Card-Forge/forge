@@ -1,0 +1,9 @@
+Name:Override
+ManaCost:2 U
+Types:Instant
+Text:no text
+A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/override.jpg
+End

@@ -1,0 +1,11 @@
+Name:Spell Contortion
+ManaCost:2 U
+Types:Instant
+Text:no text
+A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ 2 | SubAbility$SVar=DBDraw | SpellDescription$ Counter target spell unless its controller pays 2. Draw a card for each time CARDNAME was kicked.
+K:Multikicker 1 U
+SVar:DBDraw:DB$Draw | NumCards$ X
+SVar:X:Count$TimesKicked
+SVar:Rarity:Uncommon
+SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_contortion.jpg
+End

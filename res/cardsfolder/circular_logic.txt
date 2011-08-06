@@ -1,0 +1,10 @@
+Name:Circular Logic
+ManaCost:2 U
+Types:Instant
+Text:no text
+A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays 1 for each card in your graveyard.
+K:Madness:U
+SVar:X:Count$InYourYard
+SVar:Rarity:Uncommon
+SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/circular_logic.jpg
+End

@@ -48,7 +48,7 @@ public class AbilityFactory_CounterMagic {
 		else splitExtraActions = new String[] {"None"};
 		
 		if(params.containsKey("UnlessCost")) 
-			unlessCost = params.get("UnlessCost");
+			unlessCost = params.get("UnlessCost").trim();
 
 		tgt[0] = null;
 	}
@@ -125,7 +125,13 @@ public class AbilityFactory_CounterMagic {
 			System.out.println("Send countered spell to " + destination);
 
 			if(unlessCost != null) {
-				Ability ability = new Ability(af.getHostCard(), unlessCost) {
+				String unlessCostFinal = unlessCost;
+				if(unlessCost.equals("X"))
+				{
+					unlessCostFinal = Integer.toString(CardFactoryUtil.xCount(af.getHostCard(), af.getHostCard().getSVar("X")));
+				}
+				
+				Ability ability = new Ability(af.getHostCard(), unlessCostFinal) {
                     @Override
                     public void resolve() {
                         ;
