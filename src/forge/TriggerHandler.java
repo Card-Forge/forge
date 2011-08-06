@@ -238,6 +238,10 @@ public class TriggerHandler {
 			final SpellAbility[] sa = new SpellAbility[1];
 			Card host = AllZoneUtil.getCardState(regtrig.getHostCard());
 			
+			// This will fix the Oblivion Ring issue, but is this the right fix?
+			for(Card c : regtrig.getHostCard().getRemembered())
+				host.addRemembered(c);
+			
 			sa[0] = regtrig.getOverridingAbility();
 			if(sa[0] == null)
 			{
@@ -778,8 +782,6 @@ public class TriggerHandler {
 						}
 					}
 					
-					
-					//sa[0].resolve();
 					if(sa[0].getSourceCard().getController().isHuman())
 					{
 						AllZone.GameAction.playSpellAbility_NoStack(sa[0], true);
