@@ -239,12 +239,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         
         oppTwoRadio.setText("Bob");
-        oppTwoRadio.setBounds(new Rectangle(15, 75, 250, 41));
+        oppTwoRadio.setBounds(new Rectangle(15, 65, 250, 35));
         oppOneRadio.setSelected(true);
         oppOneRadio.setText("Sam");
-        oppOneRadio.setBounds(new Rectangle(15, 53, 250, 33));
+        oppOneRadio.setBounds(new Rectangle(15, 30, 250, 35));
         oppThreeRadio.setText("Generated Deck");
-        oppThreeRadio.setBounds(new Rectangle(15, 116, 250, 25));
+        oppThreeRadio.setBounds(new Rectangle(15, 100, 250, 35));
         jLabel5.setText("Your Deck:");
         jLabel5.setBounds(new Rectangle(15, 151, 125, 29));
         deckComboBox.setBounds(new Rectangle(98, 152, 185, 29));
