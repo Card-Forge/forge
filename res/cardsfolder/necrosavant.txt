@@ -1,0 +1,10 @@
+Name:Necrosavant
+ManaCost:3 B B B
+Types:Creature Zombie Giant
+Text:no text
+PT:5/5
+A:AB$Retrieve|Cost$3 B B Sac<1/Creature>|Destination$Battlefield|ActivatingZone$Graveyard|PlayerTurn$True|ActivatingPhases$Upkeep|SpellDescription$Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necrosavant.jpg
+End
