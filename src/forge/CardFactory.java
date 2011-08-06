@@ -843,7 +843,7 @@ public class CardFactory implements NewConstants {
             } //if (should RegenerateMe)
         } //while - card has more RegenerateMe - Jungle Troll has two Regenerate keywords
         */
-        
+        /*
         if (hasKeyword(card, "spDiscard") != -1)
         {
         	int n = hasKeyword(card, "spDiscard");
@@ -1065,6 +1065,7 @@ public class CardFactory implements NewConstants {
             }
 
         }//spDiscardTgt
+        */
         
         if (hasKeyword(card, "spAllPump") != -1)
         {
