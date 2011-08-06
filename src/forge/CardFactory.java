@@ -2777,7 +2777,39 @@ public class CardFactory implements NewConstants {
             tmpDesc = tmpDesc.substring(0, i);
             final String Selec = "Select target " + tmpDesc + " to destroy.";
             
-            final boolean NoRegen = (k.length == 3);
+            final boolean NoRegen[] = {false};
+            final String Drawback[] = {"none"};
+            final String spDesc[] = {"none"};
+            final String stDesc[] = {"none"};
+            
+            if (k.length > 2)
+            {
+            	if (k[3].equals("NoRegen"))
+            		NoRegen[0] = true;
+            	
+            	else if (k[3].startsWith("Drawback$"))
+            		Drawback[0] = k[3];
+            	
+            	else
+            		spDesc[0] = k[3];
+            	
+            	if (k.length > 3)
+            	{
+            		if (k[4].startsWith("Drawback$"))
+            			Drawback[0] = k[4];
+            		else 
+            			spDesc[0] = k[4];
+            		
+            		if (k.length > 4)
+            			stDesc[0] = k[5];
+            	}
+            	
+            	if (!Drawback[0].equals("none"))
+            	{
+            		String kk[] = Drawback[0].split("\\$");
+                    Drawback[0] = kk[1];
+            	}
+            }
             
             card.clearSpellAbility();
             
@@ -2836,11 +2868,19 @@ public class CardFactory implements NewConstants {
                 }
                 
                 @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) if(NoRegen) AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-                    else AllZone.GameAction.destroy(getTargetCard());
-                    
+                public void resolve() 
+                {
+                	Card tgtC = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(card, tgtC))
+                    {
+                    	if(NoRegen[0]) 
+                    		AllZone.GameAction.destroyNoRegeneration(tgtC);
+                    	else 
+                    		AllZone.GameAction.destroy(tgtC);
+                    	
+                    	if (!Drawback[0].equals("none"))
+                    		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC);
+                    }
                 }
             }; //SpDstryTgt
             
@@ -2871,8 +2911,18 @@ public class CardFactory implements NewConstants {
             card.setSVar("PlayMain1", "TRUE");
             
             spDstryTgt.setBeforePayMana(InGetTarget);
-            spDstryTgt.setDescription(card.getText());
-            card.setText("");
+            
+            if (spDesc[0].equals("none"))
+            {
+            	spDstryTgt.setDescription(card.getText());
+            	card.setText("");
+            }
+            else
+            	spDstryTgt.setDescription(spDesc[0]);
+            
+            if (!stDesc[0].equals("none"))
+            	spDstryTgt.setStackDescription(stDesc[0]);
+            
             card.addSpellAbility(spDstryTgt);
             
             String bbCost = card.getSVar("Buyback");
