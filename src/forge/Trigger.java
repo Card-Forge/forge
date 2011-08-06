@@ -272,5 +272,5 @@ public abstract class Trigger {
 	
 	public abstract Trigger getCopy();
 	
-	public abstract Card getTriggeringCard(HashMap<String,Object> runParams);
+	public abstract void setTriggeringObjects(Card c);
 }

@@ -4,9 +4,10 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 K:enPump:+0/+0
-T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredController | LifeAmount$ 3
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeAttack | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
+T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeBlock | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
+SVar:TrigLoseLifeAttack:AB$LoseLife | Cost$ 0 | Defined$ TriggeredAttackerController | LifeAmount$ 3
+SVar:TrigLoseLifeBlock:AB$LoseLife | Cost$ 0 | Defined$ TriggeredBlockerController | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_bond.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/61.jpg

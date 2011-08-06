@@ -60,8 +60,10 @@ public class Trigger_DamageDone extends Trigger {
 	}
 	
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	public void setTriggeringObjects(Card c)
 	{
-		return null;
+		c.setTriggeringObject("Source",runParams.get("DamageSource"));
+        c.setTriggeringObject("Target",runParams.get("DamageTarget"));
+        c.setTriggeringObject("DamageAmount",runParams.get("DamageAmount"));
 	}
 }

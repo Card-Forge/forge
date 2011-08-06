@@ -35,8 +35,9 @@ public class Trigger_LifeLost extends Trigger {
 	}
 	
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	public void setTriggeringObjects(Card c)
 	{
-		return null;
+		c.setTriggeringObject("LifeAmount",runParams.get("LifeAmount"));
+        c.setTriggeringObject("Player",runParams.get("Player"));
 	}
 }

@@ -40,8 +40,8 @@ public class Trigger_Phase extends Trigger {
 	}
 	
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	public void setTriggeringObjects(Card c)
 	{
-		return null;
+        c.setTriggeringObject("Player",runParams.get("Player"));
 	}
 }

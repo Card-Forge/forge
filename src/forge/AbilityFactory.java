@@ -83,12 +83,7 @@ public class AbilityFactory {
 	
 	//*******************************************************
 	
-	public SpellAbility getAbility(String abString,Card hostCard)
-	{
-		return getAbility(abString,hostCard,null);
-	}
-	
-	public HashMap<String,String> getMapParams(String abString, Card hostCard, Card triggeringCard) {
+	public HashMap<String,String> getMapParams(String abString, Card hostCard) {
 		HashMap<String,String> mapParameters = new HashMap<String,String>();
 		
 		if (!(abString.length() > 0))
@@ -122,13 +117,13 @@ public class AbilityFactory {
 		return mapParameters;
 	}
 	
-	public SpellAbility getAbility(String abString, Card hostCard,Card triggeringCard){
+	public SpellAbility getAbility(String abString, Card hostCard){
 		
 		SpellAbility SA = null;
 		
 		hostC = hostCard;
 		
-		mapParams = getMapParams(abString, hostCard, triggeringCard);
+		mapParams = getMapParams(abString, hostCard);
 		
 		// parse universal parameters
 		
@@ -572,8 +567,7 @@ public class AbilityFactory {
         	SA.setStackDescription(hostCard.getName());
         
         SA.setRestrictions(buildRestrictions(SA));
-        SA.setTriggeringCard(triggeringCard);
-        
+
         return SA;
 	}
 	
@@ -721,7 +715,7 @@ public class AbilityFactory {
 				}
 				else if (calcX[0].startsWith("Triggered")) {
 					list = new CardList();
-					list.add(ability.getTriggeringCard());
+					list.add((Card)ability.getSourceCard().getTriggeringObject(calcX[0].substring(9)));
 				}
 				else if (calcX[0].startsWith("Remembered")) {
 					list = new CardList();
@@ -764,8 +758,8 @@ public class AbilityFactory {
 			cards.addAll(parent.getTarget().getTargetCards());
 		}
 		
-		else if (defined.equals("Triggered"))
-			c = AllZoneUtil.getCardState(sa.getTriggeringCard());
+		else if (defined.startsWith("Triggered"))
+			c = AllZoneUtil.getCardState((Card)sa.getSourceCard().getTriggeringObject(defined.substring(9)));
 		
 		else if (defined.equals("Remembered")){
 			for(Card rem : hostCard.getRemembered()){
@@ -818,6 +812,25 @@ public class AbilityFactory {
 					players.add(p);
 			}
 		}
+        else if (defined.startsWith("Triggered")){
+            if (defined.endsWith("Controller")){
+                String triggeringType = defined.substring(9);
+                triggeringType = triggeringType.substring(0,triggeringType.length()-10);
+                Card c = (Card)sa.getSourceCard().getTriggeringObject(triggeringType);
+				Player p = c.getController();
+				if (!players.contains(p))
+					players.add(p);
+            }
+            else if (defined.endsWith("Owner")){
+                String triggeringType = defined.substring(9);
+                triggeringType = triggeringType.substring(0,triggeringType.length()-5);
+                Card c = (Card)sa.getSourceCard().getTriggeringObject(triggeringType);
+                Player p = c.getOwner();
+			    if (!players.contains(p))
+				    players.add(p);
+		    }
+
+        }
 		else if (defined.equals("TriggeredController")){
 				Player p = sa.getTriggeringCard().getController();
 				if (!players.contains(p))

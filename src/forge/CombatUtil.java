@@ -703,7 +703,7 @@ public class CombatUtil {
 				if(willTrigger && trigParams.containsKey("Execute")) {
 					String ability = defender.getSVar(trigParams.get("Execute"));
 					AbilityFactory AF = new AbilityFactory();
-	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
+	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender);
 	        		if (abilityParams.containsKey("AB")) { 
 						if (abilityParams.get("AB").equals("Pump")) 
 							if (abilityParams.containsKey("NumAtt")){
@@ -743,7 +743,7 @@ public class CombatUtil {
 				if(willTrigger && trigParams.containsKey("Execute")) {
 					String ability = defender.getSVar(trigParams.get("Execute"));
 					AbilityFactory AF = new AbilityFactory();
-	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
+	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender);
 	        		if (abilityParams.containsKey("AB")) {
 						if (abilityParams.get("AB").equals("Pump")) 
 							if (abilityParams.containsKey("NumDef")) {

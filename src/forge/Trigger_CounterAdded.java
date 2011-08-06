@@ -41,7 +41,8 @@ public class Trigger_CounterAdded extends Trigger {
 	}
 
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams) {
-		return (Card)runParams.get("Card");
+	public void setTriggeringObjects(Card c)
+    {
+        c.setTriggeringObject("Card",runParams.get("Card"));
 	}
 }

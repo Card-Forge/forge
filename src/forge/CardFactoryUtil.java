@@ -3348,8 +3348,12 @@ public class CardFactoryUtil {
         CardList someCards = new CardList();
         
         //Complex counting methods
-        
-        
+
+       //TriggeringObjects
+       if(sq[0].startsWith("Triggered"))
+       {
+            return doXMath((Integer)c.getTriggeringObject(sq[0].substring(9)),m);
+       }
         
         // Count$Domain
         if(sq[0].contains("Domain")) {

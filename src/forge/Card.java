@@ -20,6 +20,7 @@ public class Card extends MyObservable {
     
     //private Collection keyword   = new TreeSet();
     //private ArrayList<String> keyword = new ArrayList<String>();
+    private HashMap<String,Object>        triggeringObjects                 = new HashMap<String,Object>();
     private ArrayList<Trigger>			triggers						= new ArrayList<Trigger>();
     private ArrayList<String>			 intrinsicAbility				   = new ArrayList<String>();
     private ArrayList<String>            intrinsicKeyword                  = new ArrayList<String>();
@@ -235,6 +236,16 @@ public class Card extends MyObservable {
     public void clearTriggersNew()
     {
     	triggers.clear();
+    }
+
+    public void setTriggeringObject(String type,Object o)
+    {
+        triggeringObjects.put(type,o);
+    }
+
+    public Object getTriggeringObject(String type)
+    {
+        return triggeringObjects.get(type);
     }
 
     public void setAbilityUsed(int i) {

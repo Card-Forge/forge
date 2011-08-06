@@ -154,8 +154,8 @@ public class Trigger_SpellAbilityCast extends Trigger {
 	}
 	
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	public void setTriggeringObjects(Card c)
 	{
-		return ((SpellAbility)runParams.get("CastSA")).getSourceCard();
+		c.setTriggeringObject("Card",((SpellAbility)runParams.get("CastSA")).getSourceCard());
 	}
 }

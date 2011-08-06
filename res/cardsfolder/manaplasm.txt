@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell, Manaplasm gets +X/+X until end of turn, where X is that spell's converted mana cost.
 SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +X | NumDef$ +X
-SVar:X:Triggered$CardManaCost
+SVar:X:TriggeredCard$CardManaCost
 SVar:BuffedBy:Card
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manaplasm.jpg

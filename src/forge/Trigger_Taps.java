@@ -37,8 +37,8 @@ public class Trigger_Taps extends Trigger {
 	}
 	
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	public void setTriggeringObjects(Card c)
 	{
-		return (Card)runParams.get("Card");
+		c.setTriggeringObject("Card",runParams.get("Card"));
 	}
 }

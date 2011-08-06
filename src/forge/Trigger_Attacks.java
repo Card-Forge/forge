@@ -58,8 +58,8 @@ public class Trigger_Attacks extends Trigger {
 	}
 	
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	public void setTriggeringObjects(Card c)
 	{
-		return (Card)runParams.get("Attacker");
+		c.setTriggeringObject("Attacker",runParams.get("Attacker"));
 	}
 }

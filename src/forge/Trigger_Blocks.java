@@ -42,8 +42,9 @@ public class Trigger_Blocks extends Trigger {
 	}
 	
 	@Override
-	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	public void setTriggeringObjects(Card c)
 	{
-		return (Card)runParams.get("Blocker");
+        c.setTriggeringObject("Blocker",runParams.get("Blocker"));
+		c.setTriggeringObject("Attacker",runParams.get("Attacker"));
 	}
 }

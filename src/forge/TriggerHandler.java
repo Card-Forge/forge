@@ -295,9 +295,10 @@ public class TriggerHandler {
                 }
                 else
                 {
-				    sa[0] = AF.getAbility(host.getSVar(trigParams.get("Execute")), host, regtrig.getTriggeringCard(runParams));
+				    sa[0] = AF.getAbility(host.getSVar(trigParams.get("Execute")), host);
                 }
 			}
+            regtrig.setTriggeringObjects(host);
 
 			sa[0].setActivatingPlayer(host.getController());
 			if(sa[0].getStackDescription().equals(""))
