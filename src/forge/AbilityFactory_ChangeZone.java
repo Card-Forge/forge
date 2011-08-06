@@ -983,7 +983,7 @@ public class AbilityFactory_ChangeZone {
 		Ability_Cost abCost = af.getAbCost();
 		Card source = af.getHostCard();
 		HashMap<String,String> params = af.getMapParams();
-        //String destination = params.get("Destination");
+        String destination = params.get("Destination");
         String origin = params.get("Origin");
 		
 		if (abCost != null){
@@ -1059,6 +1059,20 @@ public class AbilityFactory_ChangeZone {
 		else if (origin.equals("Sideboard")){
 			// This situation doesn't exist
 			return false;
+		}
+		
+		if (destination.equals(Constant.Zone.Battlefield)){
+			if (params.get("GainControl") != null){
+				// todo: don't activate if less than 4 cards.
+				// although if those cards are awesome, or we need the blockers maybe we should
+				if (humanType.size() + computerType.size() < 4)
+					return false;
+			}
+			else{
+				// don't activate if human gets more back than AI does
+				if (humanType.size() > computerType.size())
+					return false;
+			}
 		}
 		
 		Ability_Sub subAb = sa.getSubAbility();
