@@ -498,7 +498,7 @@ public class GameActionUtil {
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Merrow_Levitator(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
-		playCard_Kor_Firewalker(c);
+		//playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
 		playCard_Venser_Emblem(c);
 		playCard_Presence_of_the_Master(c);
@@ -1941,7 +1941,8 @@ public class GameActionUtil {
 			}
 		}//if
 	}//Fable
-
+	
+	/*
     public static void playCard_Kor_Firewalker(Card c) {
 
         CardList list = AllZoneUtil.getCardsInPlay("Kor Firewalker");
@@ -1974,7 +1975,7 @@ public class GameActionUtil {
                 }//for
             }//if c.isRed
         }//if list
-    }//Kor Firewalker
+    }//Kor Firewalker*/
 	
 	public static void playCard_Curse_of_Wizardry(final Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay("Curse of Wizardry");
