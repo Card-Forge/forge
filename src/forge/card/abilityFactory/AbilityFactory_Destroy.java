@@ -596,21 +596,21 @@ public class AbilityFactory_Destroy {
 		
 		list = list.getValidCards(Valid.split(","), card.getController(), card);
 
-		int destroyedThisWay = 0;
+		boolean remDestroyed = params.containsKey("RememberDestroyed");
+		if (remDestroyed)
+			card.clearRemembered();
 		
 	 	if(noRegen){
 	 		for(int i = 0; i < list.size(); i++) 
-	 			if (AllZone.GameAction.destroyNoRegeneration(list.get(i)))
-	 				destroyedThisWay++;
+	 			if (AllZone.GameAction.destroyNoRegeneration(list.get(i)) && remDestroyed)
+	 				card.addRemembered(list.get(i));
 	 	}
 	 	else{
 	 		for(int i = 0; i < list.size(); i++) 
-	 			if (AllZone.GameAction.destroy(list.get(i)))
-	 				destroyedThisWay++;
+	 			if (AllZone.GameAction.destroy(list.get(i)) && remDestroyed)
+	 				card.addRemembered(list.get(i));
 	 	}
 		
-	 	card.setSVar("DestroyedThisWay", Integer.toString(destroyedThisWay));
-	 	
 	 	if (af.hasSubAbility()){
 	 		Ability_Sub abSub = sa.getSubAbility();
 	 		if (abSub != null){

@@ -800,8 +800,10 @@ public class AbilityFactory {
 					list.add((Card)ability.getSourceCard().getTriggeringObject(calcX[0].substring(9)));
 				}
 				else if (calcX[0].startsWith("Remembered")) {
+					// Add whole Remembered list to handlePaid
 					list = new CardList();
-					list.add(AllZoneUtil.getCardState(card.getRemembered().get(0)));
+					for(Card c : card.getRemembered())
+						list.add(AllZoneUtil.getCardState(c));
 				}
 				else
 					return 0;

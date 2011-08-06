@@ -3730,10 +3730,10 @@ public class CardFactoryUtil {
         return doXMath(n, m);
     }
     
-    private static int doXMath(int num, String[] m) {
-        if(m[0].equals("none")) return num;
+    private static int doXMath(int num, String m){
+        if(m.equals("none")) return num;
         
-        String[] s = m[0].split("\\.");
+        String[] s = m.split("\\.");
         
         if(s[0].contains("Plus")) return num + Integer.parseInt(s[1]);
         else if(s[0].contains("NMinus")) return Integer.parseInt(s[1]) - num;
@@ -3747,13 +3747,27 @@ public class CardFactoryUtil {
         else if(s[0].contains("Times")) return num * Integer.parseInt(s[1]);
         else return num;
     }
+    
+    private static int doXMath(int num, String[] m) {
+    	if (m.length == 0)
+    		return num;
+    	
+    	return doXMath(num, m[0]);
+    }
 	
 	public static int handlePaid(CardList paidList, String string, Card source) {
 		if (paidList == null || paidList.size() == 0)
 			return 0;
 		
-		if (string.equals("Amount"))
-			return paidList.size();
+		if (string.startsWith("Amount")){
+			if (string.contains(".")){
+				String[] splitString = string.split("\\.", 2);
+				return doXMath(paidList.size(), splitString[1]);
+			}
+			else
+				return paidList.size();
+			
+		}
 		if( string.contains("Valid") ) {
 			String valid = string.replace("Valid ", "");
 			return paidList.getValidCards(valid, source.getController(), source).size();
