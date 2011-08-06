@@ -373,7 +373,13 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
         smoothLandCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.AI_LAND));
+        
         devModeCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DEV_MODE));
+        devModeCheckBox.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
+        	}
+        });
         
         /*
          *  Buttons
@@ -609,7 +615,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }// else
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
-        Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
+        //Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
         
         if(newGuiCheckBox.isSelected()) AllZone.Display = new GuiDisplay4();
         else AllZone.Display = new GuiDisplay3();

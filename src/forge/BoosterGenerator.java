@@ -46,11 +46,14 @@ public class BoosterGenerator {
 	public BoosterGenerator(String DeckFile, int nCommons, int nUncommons, int nRares, int nMythics, int nSpecials, boolean ignoreRarity) {
 		DeckManager dio = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
 		Deck dPool= dio.getDeck(DeckFile);
+		if (dPool == null)
+			throw new RuntimeException("BoosterGenerator : deck not found - " + DeckFile);
+		
 		CardList cList = new CardList();
 		List<String> tList = dPool.getMain();
 
 		for (int i=0; i<tList.size(); i++) {
-			String cardName = dPool.getMain(i);
+			String cardName = tList.get(i);
         	String setCode = "";
             if (cardName.contains("|"))
             {
@@ -134,11 +137,13 @@ public class BoosterGenerator {
 
         }
 
-		System.out.println("numCommons: " + numCommons);
-		System.out.println("numUncommons: " + numUncommons);
-		System.out.println("numRares: " + numRares);
-		System.out.println("numMythics: " + numMythics);
-		System.out.println("numSpecials: " + numSpecials);
+        if (Constant.Runtime.DevMode[0]) {
+			System.out.println("numCommons: " + numCommons);
+			System.out.println("numUncommons: " + numUncommons);
+			System.out.println("numRares: " + numRares);
+			System.out.println("numMythics: " + numMythics);
+			System.out.println("numSpecials: " + numSpecials);
+        }
 
 	}
 
@@ -162,27 +167,25 @@ public class BoosterGenerator {
 		if (commons.size() > 0)
 			commons.shuffle();
 
-		System.out.println("commons.size: " + commons.size());
-
 		if (uncommons.size() > 0)
 			uncommons.shuffle();
-
-		System.out.println("uncommons.size: " + uncommons.size());
 
 		if (rares.size() > 0)
 			rares.shuffle();
 
-		System.out.println("rares.size: " + rares.size());
-
 		if (mythics.size() > 0)
 			mythics.shuffle();
-
-		System.out.println("mythics.size: " + mythics.size());
 
 		if (specials.size() > 0)
 			specials.shuffle();
 
-		System.out.println("specials.size: " + specials.size());
+		if (Constant.Runtime.DevMode[0]) {
+			System.out.println("commons.size: " + commons.size());
+			System.out.println("uncommons.size: " + uncommons.size());
+			System.out.println("rares.size: " + rares.size());
+			System.out.println("mythics.size: " + mythics.size());
+			System.out.println("specials.size: " + specials.size());
+		}
 	}
 
 	public CardList getBoosterPack() {

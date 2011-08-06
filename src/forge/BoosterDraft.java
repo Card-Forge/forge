@@ -200,7 +200,7 @@ class BoosterDraft_1 implements BoosterDraft
 	    	  int n = 0;
 	    	  for (int i=0; i<chosenDraft.NumPacks; i++) {
 	    		  packs.add(bpCustom);
-	    		  n += bpCustom.getBoosterPackSize();
+	    		  n += chosenDraft.NumCards; //bpCustom.getBoosterPackSize();
 	    	  }
 	    	  stopCount = n;
 	    	  
