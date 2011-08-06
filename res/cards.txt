@@ -1,3 +1,53 @@
+Baloth Woodcrasher
+4 G G
+Creature Beast
+no text
+4/4
+WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Trample!StatsPumpEOT/4/4:Self!Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Baloth Woodcrasher gets +4/+4 and gains trample until end of turn.
+
+Scion of the Wild
+1 G G
+Creature Avatar
+no text
+0/1
+StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:Permanents you Control:Scion of the Wild's power and toughness are each equal to the number of creatures you control.
+
+Deepwood Wolverine
+G
+Creature Wolverine
+no text
+1/1
+WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever Deepwood Wolverine becomes blocked, it gets +2/+0 until end of turn.
+
+Rabid Wolverines
+3 G G
+Creature Wolverine
+no text
+4/4
+WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Rabid Wolverines becomes blocked by a creature, Rabid Wolverines gets +1/+1 until end of turn.
+
+Citanul Druid
+1 G
+Creature Human Druid
+no text
+1/1
+WheneverKeyword:CastSpell/Opponent:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts an artifact spell, put a +1/+1 counter on Citanul Druid.
+
+Dwarven Berserker
+1 R
+Creature Dwarf Berserker
+no text
+1/1
+WheneverKeyword:BecomesBlocked:Self:Play:KeywordPumpEOT/Trample!StatsPumpEOT/3/0:Self!Self:ASAP:No_Condition:No Special Condition:Whenever Dwarven Berserker becomes blocked, it gets +3/+0 and gains trample until end of turn.
+
+Battle Squadron
+3 R R
+Creature Goblin
+no text
+0/1
+Flying
+StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:Permanents you Control:Battle Squadron's power and toughness are each equal to the number of creatures you control.
+
 Spike Feeder
 1 G G
 Creature Spike
