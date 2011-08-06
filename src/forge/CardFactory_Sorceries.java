@@ -1635,6 +1635,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             card.addSpellAbility(freeCast);
+            spell.setDescription("");
         }
         //*************** END ************ END **************************  
         
