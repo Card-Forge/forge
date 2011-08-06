@@ -185,6 +185,14 @@ public class AbilityFactory {
 			}
 		}
 
+		if (API.equals("Fetch")){
+			if (isAb)
+				SA = AbilityFactory_Fetch.createAbilityFetch(this);
+			if (isSp){
+				SA = AbilityFactory_Fetch.createSpellFetch(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
 		if (isSp){	
@@ -204,6 +212,8 @@ public class AbilityFactory {
         	SA.setDescription(sb.toString());
         }
 
+        if (!isTargeted)
+        	SA.setStackDescription(hostCard.getName());
 		
         return SA;
 	}

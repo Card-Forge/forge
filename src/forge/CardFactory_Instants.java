@@ -4301,70 +4301,7 @@ public class CardFactory_Instants {
            card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Harrow")){
-            final SpellAbility spell = new Spell(card) {
-
-				private static final long serialVersionUID = -6598323179507468746L;
-
-				@Override
-                public void resolve() {
-					// Put two lands into play, tapped
-					AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(), 
-							Constant.Zone.Play, false, 
-							Constant.Zone.Play, false);
-                } // resolve
-               
-        		public void chooseTargetAI() {
-        			Card target = null;
-        			target = CardFactoryUtil.getWorstLand(Constant.Player.Computer);
-        			setTargetCard(target);
-        			AllZone.GameAction.sacrifice(getTargetCard());
-        		}//chooseTargetAI()
-
-                
-                public boolean canPlayAI()
-                {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
-                	CardList list = new CardList(library.getCards());
-                	list = list.getType("Basic");
-                	PlayerZone inPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                	CardList listInPlay = new CardList(inPlay.getCards());
-                	listInPlay = listInPlay.getType("Land");
-                	// One or more lands in library, 2 or more lands in play
-                	return (list.size() > 0) && (listInPlay.size() > 1);
-                }
-            };//SpellAbility
-            Input runtime = new Input() {
-                
-				private static final long serialVersionUID = -7551607354431165941L;
-
-				@Override
-                public void showMessage() {
-                    String player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    CardList choice = new CardList(play.getCards());
-                    choice = choice.getType("Land");   
-                    
-                    boolean free = false;
-                    if (this.isFree())
-                    	free = true;
-                    
-                    if (player.equals(Constant.Player.Human)) {
-                    	stopSetNext(CardFactoryUtil.input_sacrifice(spell, choice, "Select a land to sacrifice.", free));
-                    }
-                }
-            };
-
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(runtime);
-
-        } //*************** END ************ END **************************
-        
-        
+   
         //*************** START *********** START **************************
         else if(cardName.equals("Natural Selection")) {
         	/* Look at the top 3 cards of target player's library and put them
