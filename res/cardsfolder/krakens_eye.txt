@@ -2,7 +2,8 @@ Name:Kraken's Eye
 ManaCost:2
 Types:Artifact
 Text:no text
-K:WheneverKeyword:CastSpell/Any:Color/blue:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a player casts a blue spell, you may gain 1 life.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a blue spell, you may gain 1 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krakens_eye.jpg

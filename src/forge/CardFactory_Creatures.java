@@ -1318,35 +1318,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Kemuri-Onna")) {
-            final SpellAbility ability = new Ability(card, "0") {
-            	
-                @Override
-                public void resolve() {
-                    Player opponent = card.getController().getOpponent();
-                    opponent.discard(this);
-                }//resolve()
-            };//SpellAbility
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -6451753440468941341L;
-                
-                public void execute() {
-                    Player opponent = card.getController().getOpponent();
-                    
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(opponent).append(" discards a card");
-                    ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-  
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Oracle of Mul Daya")) {
             final SpellAbility ability = new Ability(card, "0") {

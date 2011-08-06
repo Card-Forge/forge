@@ -4,7 +4,8 @@ Types:Creature Kavu
 Text:no text
 PT:3/3
 K:stPumpAll:Creature.Kavu:0/0/Trample:No Condition:Kavu creatures have trample.
-K:WheneverKeyword:EntersBattleField:Type/Kavu:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Kavu.Other+YouCtrl | TriggerZones$ Battlefield | Execute$TrigPutCounter | TriggerDescription$ Whenever another Kavu enters the battlefield, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Kavu
 SVar:Rarity:Rare

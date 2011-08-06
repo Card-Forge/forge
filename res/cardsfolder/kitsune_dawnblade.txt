@@ -4,7 +4,8 @@ Types:Creature Fox Samurai
 Text:no text
 PT:2/3
 K:Bushido 1
-K:WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:When Kitsune Dawnblade enters the battlefield, you may tap target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ True | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap target creature.
+SVar:TrigTap:AB$Tap | Cost$ 0 | Tgt$ TgtC
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_dawnblade.jpg
