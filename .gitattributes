@@ -2730,6 +2730,7 @@ res/cardsfolder/meekstone.txt -text svneol=native#text/plain
 res/cardsfolder/megatog.txt -text svneol=native#text/plain
 res/cardsfolder/meglonoth.txt -text svneol=native#text/plain
 res/cardsfolder/megrim.txt -text svneol=native#text/plain
+res/cardsfolder/meishin_the_mind_cage.txt -text svneol=native#text/plain
 res/cardsfolder/melancholy.txt -text svneol=native#text/plain
 res/cardsfolder/melesse_spirit.txt -text svneol=native#text/plain
 res/cardsfolder/meloku_the_clouded_mirror.txt -text svneol=native#text/plain
@@ -5483,6 +5484,7 @@ res/quest/themes/Anti[!!-~]Black[!!-~]WG.thm -text
 res/quest/themes/Arcane[!!-~]Spirits[!!-~]UBG.thm -text
 res/quest/themes/Artifacts[!!-~]Colorless.thm -text
 res/quest/themes/Auras[!!-~]WRG.thm -text
+res/quest/themes/Black[!!-~]Vise[!!-~]UB.thm -text
 res/quest/themes/Dermageddon[!!-~]WG.thm -text
 res/quest/themes/Domain.thm -text
 res/quest/themes/Elves[!!-~]G.thm -text
