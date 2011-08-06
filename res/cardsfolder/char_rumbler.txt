@@ -2,7 +2,7 @@ Name:Char-Rumbler
 ManaCost:2 R R
 Types:Creature Elemental
 Text:no text
-PT:-1/3
+PT:1/3
 K:Double Strike
 A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Char-Rumbler gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
