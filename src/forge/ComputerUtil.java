@@ -5,6 +5,7 @@ import java.util.Comparator;
 //import java.util.HashMap;
 //import java.util.Map;
 
+
 public class ComputerUtil
 {
 
@@ -149,9 +150,6 @@ public class ComputerUtil
   }
   static public boolean canPayCost(SpellAbility sa)
   {
-    if(sa.getManaCost().equals(("0")))
-       return true;
-
     CardList land = getAvailableMana();
    
     if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
@@ -159,7 +157,11 @@ public class ComputerUtil
        land.remove(sa.getSourceCard());
     }
     ManaCost cost = new ManaCost(sa.getManaCost());
+ // Beached - Delete old
     cost = AllZone.GameAction.GetSpellCostChange(sa);
+    if(cost.isPaid())
+        return true;
+ // Beached - Delete old
     ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)
@@ -220,9 +222,6 @@ public class ComputerUtil
 
   static public void payManaCost(SpellAbility sa)
   {
-    if(sa.getManaCost().equals(("0")))
-       return;
-
     CardList land = getAvailableMana();
    
     //this is to prevent errors for land cards that have abilities that cost mana.
@@ -232,6 +231,10 @@ public class ComputerUtil
     }
     ManaCost cost = new ManaCost(sa.getManaCost());
     cost = AllZone.GameAction.GetSpellCostChange(sa);
+    // Beached - Delete old
+    if(cost.isPaid())
+        return;
+ // Beached - Delete old
     ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)

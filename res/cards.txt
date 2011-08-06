@@ -1,3 +1,19 @@
+Tooth of Chiss-Goria
+3
+Artifact
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+Flash
+abPumpTgt T:+1/+0
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+
+Scale of Chiss-Goria
+3
+Artifact
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+Flash
+abPumpTgt T:+0/+1
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+
 Defense Grid
 2
 Artifact
