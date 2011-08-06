@@ -1609,6 +1609,7 @@ public class GameAction {
                  return false;
              }
          });
+ 		Cards_In_Play.add(originalCard);
  		String Mana = manaCost.toString();
  		CardList Player_Play = new CardList(AllZone.getZone(Constant.Zone.Play, sa.getSourceCard().getController()).getCards());
  		int XBonus = 0;
@@ -1645,7 +1646,8 @@ public class GameAction {
                  	}
                  if((k[1].equals("Player") && card.getController().equals(sa.getSourceCard().getController()) 
                  		|| (k[1].equals("Opponent") && card.getController().equals(AllZone.GameAction.getOpponent(sa.getSourceCard().getController()))) || k[1].equals("All"))
-                 		&& ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) || k[4].equals("All"))
+                        && ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
+                        || (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                  		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
                  		&& ((sa.getSourceCard().getType().contains(k[6])) || k[6].equals("All"))) {     
                   	if(k[7].equals("CardIsTapped")) {
@@ -1653,6 +1655,15 @@ public class GameAction {
                  	}
                  	if(k[7].equals("TargetInPlay")) {
                  		if(Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
+                 	}
+                 	if(k[7].contains("Affinity")) {
+                          String spilt = k[7];                
+                          String color_spilt[] = spilt.split("/");  
+                          	k[7] = color_spilt[1];	
+                          	PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, originalCard.getController()); 
+                          	CardList PlayerList = new CardList(PlayerPlay.getCards());	   
+                          	PlayerList = PlayerList.getType(k[7]);
+                          	k[3] = String.valueOf(PlayerList.size());   		
                  	}
                  	String[] Numbers = new String[Max];
                  	if(!"WUGRB".contains(k[3])) {
@@ -1714,7 +1725,8 @@ public class GameAction {
       	                 	}
                          if((k[1].equals("Player") && card.getController().equals(sa.getSourceCard().getController()) 
                          		|| (k[1].equals("Opponent") && card.getController().equals(AllZone.GameAction.getOpponent(sa.getSourceCard().getController()))) || k[1].equals("All"))
-                         		&& ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) || k[4].equals("All"))
+                         		&& ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
+                         		|| (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                          		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
                          		&& ((sa.getSourceCard().getType().contains(k[6])) || k[6].equals("All"))) { 
                          	if(k[7].equals("CardIsTapped")) {
@@ -1723,7 +1735,15 @@ public class GameAction {
                          	if(k[7].equals("TargetInPlay")) {
                          		if(Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
                          	}
-
+                         	if(k[7].contains("Affinity")) {
+      	                            String spilt = k[7];                
+      	                            String color_spilt[] = spilt.split("/");  
+      	                            	k[7] = color_spilt[1];	
+      	                            	PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, originalCard.getController()); 
+      	                            	CardList PlayerList = new CardList(PlayerPlay.getCards());	   
+      	                            	PlayerList = PlayerList.getType(k[7]);
+      	                            	k[3] = String.valueOf(PlayerList.size());    		
+                         	}
 
                      	String[] Numbers = new String[Max];
                      	if(!"WUGRB".contains(k[3])) {
@@ -1744,9 +1764,11 @@ public class GameAction {
                      		manaCost = new ManaCost(Mana);	
                      	}		
                          } else {
+                     //   	 JOptionPane.showMessageDialog(null, Mana + " " + Mana.replaceFirst(k[3],""), "", JOptionPane.INFORMATION_MESSAGE);
                         	 if(Mana.equals(Mana.replaceFirst(k[3], ""))) {                       		 
                         		// if(sa.isXCost()) sa.getSourceCard().addXManaCostPaid(1); Not Included as X Costs are not in Colored Mana
                         		 if(sa.isMultiKicker())	 CostCutting_GetMultiMickerManaCostPaid_Colored = CostCutting_GetMultiMickerManaCostPaid_Colored + k[3]; 
+                        //		 JOptionPane.showMessageDialog(null, CostCutting_GetMultiMickerManaCostPaid_Colored, "", JOptionPane.INFORMATION_MESSAGE);
                         	 } else {	 
                          	Mana = Mana.replaceFirst(k[3], "");
                          	Mana = Mana.trim();
@@ -1767,7 +1789,6 @@ public class GameAction {
                  	}	
               		}
       	                 }
-
                     if(sa.isXCost()) {
                     
                     for(int XPaid = 0; XPaid < XBonus; XPaid++) sa.getSourceCard().addXManaCostPaid(1);
@@ -1776,15 +1797,6 @@ public class GameAction {
                     	CostCutting_GetMultiMickerManaCostPaid = 0;
                                for(int XPaid = 0; XPaid < XBonus; XPaid++) CostCutting_GetMultiMickerManaCostPaid = CostCutting_GetMultiMickerManaCostPaid + 1;        
                     }
-                    /**
-                    if(sa.isMultiKicker()) {
-                   	 for(int XPaid = 0; XPaid < XBonus ; XPaid++) {
-                   	//	 AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("1", "");
-                   		 AllZone.ManaPool.addMana("1");;
-                   	 }
-                    }
-                    **/
-
          }
          if(originalCard.getName().equals("Khalni Hydra") && spell.isSpell() == true) {
  			String player = AllZone.Phase.getActivePlayer();
@@ -1807,7 +1819,7 @@ public class GameAction {
  	        }
          } // Khalni Hydra      
          return manaCost;
-    }
+    } 
     
     public void playSpellAbility(SpellAbility sa) {
     	ManaCost manaCost = GetSpellCostChange(sa);    

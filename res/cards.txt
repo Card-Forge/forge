@@ -1,3 +1,10 @@
+Frogmite
+4
+Artifact Creature Frog
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+2/2
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+
 Eye of Ugin
 no cost
 Legendary Land
