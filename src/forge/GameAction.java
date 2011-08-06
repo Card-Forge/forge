@@ -5,6 +5,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -1415,7 +1416,7 @@ public class GameAction {
         playSpellAbilityForFree(sa);
     }
     
-    public void playSpellAbilityForFree(SpellAbility sa) {
+    public void playSpellAbilityForFree(final SpellAbility sa) {
     	
     	
     	if(sa.getBeforePayMana() == null) {
@@ -1423,6 +1424,17 @@ public class GameAction {
         	if (sa.getSourceCard().getManaCost().contains("X"))
         		x = true;
     		
+        	if (sa.isKickerAbility()) {
+                Command paid1 = new Command() {
+                    
+    				private static final long serialVersionUID = 1L;
+
+    				public void execute() {
+                        AllZone.Stack.add(sa);
+                    }
+                };
+            	AllZone.InputControl.setInput(new Input_PayManaCost_Ability(sa.getAdditionalManaCost(),paid1));        		
+        	}
     		AllZone.Stack.add(sa, x);
             
             /*
@@ -1435,7 +1447,12 @@ public class GameAction {
             }
             */
         } else {
-            sa.getBeforePayMana().setFree(true);
+        	if (sa.isKickerAbility()) {
+        		sa.getBeforePayMana().setFree(false);
+        		sa.setManaCost(sa.getAdditionalManaCost());
+        	} else {
+                sa.getBeforePayMana().setFree(true);        		
+        	}
             AllZone.InputControl.setInput(sa.getBeforePayMana());
         }
     }
@@ -1718,31 +1735,70 @@ public class GameAction {
         
     }
     
-    public void searchLibraryBasicLand(String player, String Zone1, boolean tapLand) {
-    	searchLibraryTwoBasicLand(player, Zone1, tapLand, "", false);
+    public void searchLibraryLand(String type, String player, String Zone1, boolean tapLand) {
+    	searchLibraryTwoLand(type, player, Zone1, tapLand, "", false);
     }
-
-	public void searchLibraryTwoBasicLand(String player,
-			String Zone1, boolean tapFirstLand, 
-			String Zone2, boolean tapSecondLand) {
-        
+    
+    public void searchLibraryBasicLand(String player, String Zone1, boolean tapLand) {
+    	searchLibraryTwoLand("Basic", player, Zone1, tapLand, "", false);
+    }
+    
+    public void searchLibraryTwoLand(String type, String player,
+    		String Zone1, boolean tapFirstLand, 
+    		String Zone2, boolean tapSecondLand) {
         if(player.equals(Constant.Player.Human)) {
-        	humanSearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
+        	humanSearchTwoLand(type, Zone1, tapFirstLand, Zone2, tapSecondLand);
         } else {
-        	aiSearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
+        	aiSearchTwoLand(type, Zone1, tapFirstLand, Zone2, tapSecondLand);
         }
         
         AllZone.GameAction.shuffle(player);
+		
+	}
+	public void searchLibraryTwoBasicLand(String player,
+			String Zone1, boolean tapFirstLand, 
+			String Zone2, boolean tapSecondLand) {
+        searchLibraryTwoLand("Basic", player, Zone1, tapFirstLand, Zone2, tapSecondLand);
     }
-    
-    private void aiSearchTwoBasicLand(String Zone1, boolean tapFirstLand,
+    	
+    private void aiSearchTwoLand(String type, String Zone1, boolean tapFirstLand,
     		String Zone2, boolean tapSecondLand) {
         CardList land = new CardList(AllZone.Computer_Library.getCards());
-        land = land.getType("Basic");
+        land = land.getType(type);
         PlayerZone firstZone = AllZone.getZone(Zone1, Constant.Player.Computer);
-        //just to make the computer a little less predictable
-        land.shuffle();
         
+        if (type.contains("Basic")) {
+        	// No need for special sorting for basic land
+        	// just shuffle to make the computer a little less predictable
+        	land.shuffle();
+        } else {
+            Comparator<Card> aiLandComparator = new Comparator<Card>()
+            {
+            	private int scoreLand(Card a) {
+            		String valakutName = "Valakut, the Molten Pinnacle";
+
+            		int theScore = 0;
+            		if (!a.isBasicLand()) {
+            			// favor non-basic land
+            			theScore++;
+            			if (a.getName().contains(valakutName)) {
+            				// TODO: Add names of other special lands
+            				theScore++;
+            			}
+            		}
+            		return theScore;
+            	}
+              public int compare(Card a, Card b)
+              {
+            	  int aScore = scoreLand(a);
+            	  int bScore = scoreLand(b);
+            	  return bScore - aScore;
+              } // compare
+            };//Comparator
+
+        	// Prioritize the land somewhat
+        	land.sort(aiLandComparator);
+        }        
         //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
         if(land.size() != 0) {
             //branch 2 - at least 1 land in library
@@ -1765,20 +1821,28 @@ public class GameAction {
         }
     }
 
-    private void humanSearchTwoBasicLand(String Zone1, boolean tapFirstLand, String Zone2, boolean tapSecondLand) {
+    private void humanSearchTwoLand(String type, String Zone1, boolean tapFirstLand, String Zone2, boolean tapSecondLand) {
         PlayerZone firstZone = AllZone.getZone(Zone1, Constant.Player.Human);
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
         
         CardList list = new CardList(library.getCards());
-        list = list.getType("Basic");
+        list = list.getType(type);
         
         //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
         
         //branch 1
         if(list.size() == 0) return;
         
+        // Check whether we were only asked for one land, and adjust the prompt accordingly
+        boolean onlyOneLand = (Zone2.trim().length() == 0);
+        String firstPrompt;
+        if (onlyOneLand)
+        	firstPrompt = new String("Choose a land");
+        else
+        	firstPrompt = new String("Choose first land");
+        
         //branch 2
-        Object o = AllZone.Display.getChoiceOptional("Choose first land", list.toArray());
+        Object o = AllZone.Display.getChoiceOptional(firstPrompt, list.toArray());
         if(o != null) {
             Card c = (Card) o;
             list.remove(c);
@@ -1789,7 +1853,7 @@ public class GameAction {
             firstZone.add(c);
             
         }//if
-        if ((list.size() == 0) || Zone2.trim().length() == 0) return;
+        if ((list.size() == 0) || onlyOneLand) return;
         //branch 3
         o = AllZone.Display.getChoiceOptional("Choose second land", list.toArray());
         if(o != null) {

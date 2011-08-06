@@ -75,6 +75,12 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 CardList list = new CardList(play.getCards());
                 CardList graveList = new CardList(grave.getCards());
                 
+                CardList listValakut = list.filter(new CardListFilter() {
+                	public boolean addCard(Card c) {
+                		return c.getName().contains("Valakut, the Molten Pinnacle");
+                	}
+                });
+                
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         return c.getKeyword().contains("Landfall") || 
@@ -96,6 +102,16 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     GameActionUtil.executeLandfallEffects(list.get(i));
                 }
                 
+                // Check for a mountain
+                if (!listValakut.isEmpty() && c.getType().contains("Mountain") ) {
+                	for (int i = 0; i < listValakut.size(); i++) {
+                		boolean b = GameActionUtil.executeValakutEffect(listValakut.get(i),c);
+                		if (!b) {
+                			// Not enough mountains to activate Valakut -- stop the loop
+                			break;
+                		}
+                	}
+                }
             }//isLand()
             
             //hack to make tokens trigger ally effects:

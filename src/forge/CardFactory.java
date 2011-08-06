@@ -1,5 +1,5 @@
-
 package forge;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18121,8 +18121,6 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
                     
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
@@ -18132,12 +18130,12 @@ public class CardFactory implements NewConstants {
                         }
                     } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
                     
-                    grave.remove(card);
-                    removed.add(card);
-                    
+                    card.setKicked(true);
                 }
             };//flashback
-            kicker.setManaCost("4 R");
+            kicker.setManaCost("R 4");
+            kicker.setAdditionalManaCost("4");
+            kicker.setKickerAbility(true);
             kicker.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(kicker, true, false));
             kicker.setDescription("Kicker: 4");
             
@@ -19839,6 +19837,31 @@ public class CardFactory implements NewConstants {
                 }
             };//Input
             spell.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        //*************** START *********** START **************************
+        else if(cardName.equals("Expedition Map")) {
+        	final Ability_Tap ability = new Ability_Tap(card, "2") {
+
+ 				private static final long serialVersionUID = -5796728507926918991L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			return AllZoneUtil.getPlayerTypeInLibrary(Constant.Player.Computer,
+        					"Land").size() >= 1;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			AllZone.GameAction.searchLibraryLand("Land", 
+        					card.getController(), Constant.Zone.Hand, false);
+        			AllZone.GameAction.sacrifice(card);
+        		}
+        	};//ability
+
+        	ability.setDescription("2, tap, sacrifice Expedition Map: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.");
+        	ability.setStackDescription("Sacrifice Expedition Map: search your library for a land and put it into your hand.");
+        	ability.setManaCost("2");
+        	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
       //*************** START *********** START **************************

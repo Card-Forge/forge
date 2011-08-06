@@ -291,6 +291,18 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	/**
+	 * gets a list of all cards of a certain type that a given player has in his library
+	 * @param player the player to check for cards in play
+	 * @param cardType the card type to check for
+	 * @return a CardList with all cards of a certain type the player has in his library
+	 */
+	public static CardList getPlayerTypeInLibrary(final String player, final String cardType) {
+		CardList cards = getPlayerCardsInLibrary(player);
+		cards = cards.getType(cardType);
+		return cards;	
+	}
+	
 	////////////// cardListFilter for different types
 	public static CardListFilter artifacts = new CardListFilter() {
 		public boolean addCard(Card c) {

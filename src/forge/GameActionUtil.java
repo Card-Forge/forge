@@ -3742,6 +3742,118 @@ public class GameActionUtil {
 		else if(c.getName().equals("Bloodghast")) landfall_Bloodghast(c);
 		else if(c.getName().equals("Avenger of Zendikar")) landfall_Avenger_of_Zendikar(c);
 	}
+	
+	private static boolean checkValakutCondition(Card valakutCard, Card mtn) {
+		// Get a list of all mountains
+		CardList mountainList = AllZoneUtil.getPlayerTypeInPlay(valakutCard.getController(),
+				"Mountain");
+		// Don't count the one that just came into play
+		if (mountainList.contains(mtn))
+			mountainList.remove(mtn);
+		
+		// Do not activate if at least 5 other mountains are not present.
+		if (mountainList.size() < 5)
+			return false;  
+		else
+			return true;
+		
+	}
+	// Returns true if the routine found enough mountains to activate the effect
+	// Returns false otherwise
+	// This lets the calling routine break if a player has multiple Valakut in play
+	public static boolean executeValakutEffect(final Card valakutCard, final Card mtn) {
+		
+		if (!checkValakutCondition(valakutCard, mtn))
+			return false; // Tell the calling routine there aren't enough mountains, don't call again
+		
+        SpellAbility DamageTgt = new Spell(valakutCard) {
+
+        	private static final long serialVersionUID = -7360567876931046530L;
+
+			public boolean canPlayAI() {
+                return getCreature().size() != 0 || AllZone.Human_Life.getLife() < 10;
+            }
+            
+            public boolean canPlay() {
+            	return true;
+            }
+            
+            CardList getCreature() {
+                //toughness of 3
+                CardList list = CardFactoryUtil.AI_getHumanCreature(3, valakutCard, true);
+                list = list.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        //only get 1/1 flyers or 2/1 or bigger creatures
+                        return (2 <= c.getNetAttack()) || c.getKeyword().contains("Flying");
+                    }
+                });
+                return list;
+            }//getCreature()
+ 
+            @Override
+            public void chooseTargetAI() {
+            	boolean targetHuman; 
+            	// Get a list of all creatures Valakut could destroy
+            	CardList list = getCreature();
+            	
+                CardList listValakut = list.filter(new CardListFilter() {
+                	public boolean addCard(Card c) {
+                		return c.getName().contains("Valakut, the Molten Pinnacle");
+                	}
+                });
+            	
+                int lifeThreshold = Math.max( 3 * listValakut.size(), 6); 
+                if ( (AllZone.Human_Life.getLife() < lifeThreshold) || list.isEmpty()) { 
+                	targetHuman = true;
+                } else {
+            		// Remove any creatures that have been targeted by other Valakuts
+            		for (int ix = 0; ix < AllZone.Stack.size(); ix++) {
+            			SpellAbility sa = AllZone.Stack.peek(ix);
+            			if (sa.getSourceCard().getName().contains("Valakut, the Molten Pinnacle")) {
+            				Card target = sa.getTargetCard();
+            				if ((target != null) && list.contains(target)) {
+            					list.remove(target);
+            				}
+            			}
+            		}
+            		if (list.isEmpty()) {
+            			targetHuman = true;
+            		} else {
+            			targetHuman = false;
+            		}
+            	}
+            	
+            	
+                if(targetHuman) setTargetPlayer(Constant.Player.Human);
+                else {
+                    list.shuffle();
+                    setTargetCard(list.get(0));
+                }
+            }//chooseTargetAI()
+            
+            @Override
+            public void resolve() {
+            	if (!checkValakutCondition(valakutCard, mtn))
+            		return;
+                if(getTargetCard() != null) {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(valakutCard, getTargetCard())) getTargetCard().addDamage(3,
+                            valakutCard);
+                } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(3);
+            }//resolve()
+
+        };
+        DamageTgt.setManaCost(new String("0"));
+        DamageTgt.setStackDescription("Valakut, the Molten Pinnacle deals 3 damage to target creature or player.");
+        if (valakutCard.getController() == Constant.Player.Human) {
+        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(DamageTgt, true, true));
+        } else {
+        	DamageTgt.chooseTargetAI();
+        	AllZone.Stack.add(DamageTgt);
+        }
+        return true; // Tell the calling routine it's okay to call again if there are other Valakuts in play
+	}
+
 
 	private static boolean showLandfallDialog(Card c) {
 		String[] choices = {"Yes", "No"};

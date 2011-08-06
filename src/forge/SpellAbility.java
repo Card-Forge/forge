@@ -31,6 +31,7 @@ public abstract class SpellAbility {
     private boolean         flashBackAbility   = false;
     private boolean			multiKicker 	   = false;
     private boolean 		xCost			   = false;
+    private boolean         kickerAbility      = false;
     
     private Input           beforePayMana;
     private Input           afterResolve;
@@ -296,7 +297,12 @@ public abstract class SpellAbility {
     public boolean isFlashBackAbility() {
         return flashBackAbility;
     }
-    
+    public void setKickerAbility(boolean kab) {
+    	this.kickerAbility=kab;
+    }
+    public boolean isKickerAbility() {
+    	return kickerAbility;
+    }
     // Only used by Ability_Reflected_Mana, because the user has an option to cancel the input.
     // Most spell abilities and even most mana abilities do not need to use this.
     public boolean wasCancelled() {
