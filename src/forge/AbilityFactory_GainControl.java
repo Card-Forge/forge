@@ -30,7 +30,8 @@ public class AbilityFactory_GainControl {
 		AF = newAF;
 		params = AF.getMapParams();
 		hostCard = AF.getHostCard();
-		lose = new ArrayList<String>(Arrays.asList(params.get("LoseControl").split(",")));
+		if (params.containsKey("LoseControl"))
+			lose = new ArrayList<String>(Arrays.asList(params.get("LoseControl").split(",")));
 		if(params.containsKey("Untap")) {
 			if(params.get("Untap").equals("True")) {
 				bUntap = true;
@@ -52,7 +53,7 @@ public class AbilityFactory_GainControl {
             	doResolve(this);
             }//resolve
             
-            /*@Override
+            @Override
 			public String getStackDescription(){
 				 StringBuilder sb = new StringBuilder();
 				 String name = AF.getHostCard().getName();
@@ -60,7 +61,7 @@ public class AbilityFactory_GainControl {
 				 Card tgt = getTargetCard();
 				 if (tgt != null) sb.append(tgt.getName());
 				 return sb.toString();
-			}*/
+			}
         };//SpellAbility
         
         return spControl;
@@ -182,17 +183,17 @@ public class AbilityFactory_GainControl {
 			
 			//end copied
             
-            
-            if(lose.contains("LeavesPlay")) {
-            	hostCard.addLeavesPlayCommand(getLoseControlCommand(j));
+            if (lose != null){
+	            if(lose.contains("LeavesPlay")) {
+	            	hostCard.addLeavesPlayCommand(getLoseControlCommand(j));
+	            }
+	            if(lose.contains("Untap")) {
+	            	hostCard.addUntapCommand(getLoseControlCommand(j));
+	            }
+	            if(lose.contains("ChangeController")) {
+	            	hostCard.addChangeControllerCommand(getLoseControlCommand(j));
+	            }
             }
-            if(lose.contains("Untap")) {
-            	hostCard.addUntapCommand(getLoseControlCommand(j));
-            }
-            if(lose.contains("ChangeController")) {
-            	hostCard.addChangeControllerCommand(getLoseControlCommand(j));
-            }
-			
         
 		}//end foreach target
 		

@@ -7525,9 +7525,8 @@ public class CardFactory_Sorceries {
 					
 					//opponent moves this many cards to graveyard
 					PlayerZone oppLib = AllZone.getZone(Constant.Zone.Library, opp);
-					for(int i = 0; i < maxCards; i++) {
-						AllZone.GameAction.moveToGraveyard(oppLib.get(i));
-					}
+
+					opp.mill(maxCards);
 					
 					//then, move revealed cards to bottom of library
 					for(Card c:topCards) {
