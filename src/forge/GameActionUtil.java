@@ -4663,8 +4663,12 @@ public class GameActionUtil {
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
+		
+		/* Converteded to AF Trigger
 		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_You_Choose(c);
-		//else if(c.getName().equals("Silent Specter")) opponent_Discard(c, 2);
+		else if(c.getName().equals("Silent Specter")) opponent_Discard(c, 2);
+		 */
+		
 		else if(c.getName().equals("The Unspeakable")) may_Return_Graveyard_to_Hand(c, "Arcane".split(","));
 		else if(c.getName().equals("Woebearer")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
 		else if(c.isEnchantedBy("Necromantic Thirst")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));

@@ -3645,7 +3645,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability1);
         }//*************** END ************ END **************************
          
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Doomsday Specter")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -3686,7 +3686,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Master of the Wild Hunt")) {
