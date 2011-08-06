@@ -17462,7 +17462,8 @@ public class CardFactory_Creatures {
 
               public void resolve() {
                  Card c = getTargetCard();
-                 AllZone.GameAction.sacrifice(c);
+                 if (c != null)
+                	 AllZone.GameAction.sacrifice(c);
                  AllZone.GameAction.addDamage(card.getController(), 1, card);
               }
            };
@@ -17480,17 +17481,20 @@ public class CardFactory_Creatures {
                  CardList choice = new CardList(play.getCards());
                  choice  = choice.getType("Land");
                  
-                 if (choice.size() > 0) 
+                 if (choice.size() > 0)
                  {
 	                 if (player.equals(Constant.Player.Human))
-		                 AllZone.InputControl.setInput(CardFactoryUtil.input_sacrifice(ability,choice,"Select a land to sacrifice"));
+		                 AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanent(ability, choice, "Select a land to sacrifice"));
 	                 else //compy
 	                 {
 	                	 //AllZone.GameAction.sacrificePermanent(Constant.Player.Computer, ability, choice);
-	                	 ability.setTargetCard(choice.get(0));
+	               		 ability.setTargetCard(choice.get(0));
 	                	 AllZone.Stack.add(ability);
 	                 }
                  }
+                 else
+                	 AllZone.Stack.add(ability);
+                 
               }
            };
            
