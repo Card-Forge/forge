@@ -1,0 +1,9 @@
+Name:Chub Toad
+ManaCost:2 G
+Types:Creature Toad
+Text:No text.
+PT:1/1
+K:Bushido 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chub_toad.jpg
+End
