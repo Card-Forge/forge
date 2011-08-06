@@ -171,7 +171,8 @@ public class GameActionUtil {
 			Ability ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, crd, 1);
+					//AllZone.GameAction.addDamage(player, crd, 1);
+					player.addDamage(1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("City of Brass deals 1 damage to " + player);
@@ -268,7 +269,8 @@ public class GameActionUtil {
 					Ability ability = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-							AllZone.GameAction.addDamage(activePlayer, source, 2);
+							//AllZone.GameAction.addDamage(activePlayer, source, 2);
+							activePlayer.addDamage(2, source);
 						}
 					};//Ability
 					ability.setStackDescription(card.getName()+" - deals 2 damage to "+activePlayer);
@@ -289,7 +291,8 @@ public class GameActionUtil {
 					Ability ability = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-							AllZone.GameAction.addDamage(activePlayer, source, 2);
+							//AllZone.GameAction.addDamage(activePlayer, source, 2);
+							activePlayer.addDamage(2, source);
 						}
 					};//Ability
 					ability.setStackDescription(card.getName()+" - deals 2 damage to "+activePlayer);
@@ -332,7 +335,8 @@ public class GameActionUtil {
 				Ability ability = new Ability(decree, "0") {
 					@Override
 					public void resolve() {
-						AllZone.GameAction.addDamage(source.getController(), crd, 1);
+						//AllZone.GameAction.addDamage(source.getController(), crd, 1);
+						source.getController().addDamage(1, crd);
 					}
 				};//Ability
 				ability.setStackDescription(decree.getName()+" - does 1 damage to "+c.getController()+".  ("+c.getName()+" was tapped.)");
@@ -3309,7 +3313,8 @@ public class GameActionUtil {
 				public void execute() {
 					if(c.getName().equals("Cosmic Horror")) {
 						Player player = c.getController();
-						AllZone.GameAction.addDamage(player, c, 7);
+						//AllZone.GameAction.addDamage(player, c, 7);
+						player.addDamage(7, c);
 					}
 					AllZone.GameAction.destroy(c);
 				}
@@ -3381,7 +3386,8 @@ public class GameActionUtil {
 				public void execute() {
 					//AllZone.GameAction.sacrifice(c);
 					Player player = c.getController();
-					AllZone.GameAction.addDamage(player, c, c.getUpkeepDamage());
+					//AllZone.GameAction.addDamage(player, c, c.getUpkeepDamage());
+					player.addDamage(c.getUpkeepDamage(), c);
 				}
 			};
 
@@ -3519,7 +3525,8 @@ public class GameActionUtil {
 
 				private void tapAndDamage(Player player) {
 					c.tap();
-					AllZone.GameAction.addDamage(player, c, 2);
+					//AllZone.GameAction.addDamage(player, c, 2);
+					player.addDamage(2, c);
 				}
 			};
 			sacrificeArtifact.setStackDescription(c.getName()+" - sacrifice an artifact or "+c.getName()+" becomes tapped and deals 2 damage to you.");
@@ -3560,7 +3567,8 @@ public class GameActionUtil {
 			final Ability sevenDamage = new Ability(c, "") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, c, 7);
+					//AllZone.GameAction.addDamage(player, c, 7);
+					player.addDamage(7, c);
 				}
 			};
 			
@@ -4651,7 +4659,10 @@ public class GameActionUtil {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(valakutCard, getTargetCard())) getTargetCard().addDamage(3,
                             valakutCard);
-                } else AllZone.GameAction.addDamage(getTargetPlayer(), valakutCard, 3);
+                } else {
+                	//AllZone.GameAction.addDamage(getTargetPlayer(), valakutCard, 3);
+                	getTargetPlayer().addDamage(3, valakutCard);
+                }
             }//resolve()
 
         };
@@ -5011,8 +5022,9 @@ public class GameActionUtil {
 				Card target = getTargetCard();
 				if(target != null)
 					target.addDamage(2, src);
-				else 
-					AllZone.GameAction.addDamage(getTargetPlayer(), src, 2);
+				else {
+					getTargetPlayer().addDamage(2, src);
+				}
 				
 				AllZone.GameAction.drawCard(src.getController());
 			}
@@ -5153,7 +5165,8 @@ public class GameActionUtil {
     					Ability ability = new Ability(source, "0") {
     						@Override
     						public void resolve() {
-    							AllZone.GameAction.addDamage(c.getController(), source, damage);
+    							//AllZone.GameAction.addDamage(c.getController(), source, damage);
+    							c.getController().addDamage(damage, source);
     						}
     					};
     					ability.setStackDescription(source.getName()+" - deals "+damage+" damage to "+ c.getController());
@@ -6316,7 +6329,8 @@ public class GameActionUtil {
         				ability = new Ability(aura, "0") {
         					@Override
         					public void resolve() {
-        						AllZone.GameAction.addDamage(player, source, 1);
+        						//AllZone.GameAction.addDamage(player, source, 1);
+        						player.addDamage(1, source);
         					}
         				};
         				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
@@ -6350,7 +6364,8 @@ public class GameActionUtil {
         				ability = new Ability(aura, "0") {
         					@Override
         					public void resolve() {
-        						AllZone.GameAction.addDamage(player, source, 1);
+        						//AllZone.GameAction.addDamage(player, source, 1);
+        						player.addDamage(1, source);
         					}
         				};
         				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
@@ -6414,7 +6429,8 @@ public class GameActionUtil {
         				ability = new Ability(aura, "0") {
         					@Override
         					public void resolve() {
-        						AllZone.GameAction.addDamage(player, source, 1);
+        						//AllZone.GameAction.addDamage(player, source, 1);
+        						player.addDamage(1, source);
         					}
         				};
         				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
@@ -6512,7 +6528,8 @@ public class GameActionUtil {
         					@Override
         					public void resolve() {
         						int damage = source.getCounters(Counters.INFECTION);
-        						AllZone.GameAction.addDamage(enchantedCard.getController(), source, damage );
+        						//AllZone.GameAction.addDamage(enchantedCard.getController(), source, damage );
+        						enchantedCard.getController().addDamage(damage, source);
         					}
         				};
         				ability1.setStackDescription(auraName + " - deals X damage to "+target.getController());
@@ -7921,7 +7938,8 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						if(damage>0){
-							AllZone.GameAction.addDamage(player, src, damage);
+							//AllZone.GameAction.addDamage(player, src, damage);
+							player.addDamage(damage,src);
 						}
 					}
 				};// Ability
@@ -7954,7 +7972,8 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						if(damage>0){
-							AllZone.GameAction.addDamage(player, src, 1);
+							//AllZone.GameAction.addDamage(player, src, 1);
+							player.addDamage(1, src);
 						}
 					}
 				};// Ability
@@ -8102,7 +8121,8 @@ public class GameActionUtil {
 				Ability ability = new Ability(src, "0") {
 					@Override
 					public void resolve() {
-						AllZone.GameAction.addDamage(player, src, damage);
+						//AllZone.GameAction.addDamage(player, src, damage);
+						player.addDamage(damage, src);
 					}
 				};// Ability
 
@@ -8131,7 +8151,8 @@ public class GameActionUtil {
 				Ability ability = new Ability(source, "0") {
 					@Override
 					public void resolve() {
-						AllZone.GameAction.addDamage(player, source, damage);
+						//AllZone.GameAction.addDamage(player, source, damage);
+						player.addDamage(damage, source);
 					}
 				};// Ability
 
@@ -8170,7 +8191,8 @@ public class GameActionUtil {
 			Ability ability = new Ability(src, "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, src, damage);
+					//AllZone.GameAction.addDamage(player, src, damage);
+					player.addDamage(damage, src);
 				}
 			};// Ability
 
@@ -8193,7 +8215,8 @@ public class GameActionUtil {
 			ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, source, 1);
+					//AllZone.GameAction.addDamage(player, source, 1);
+					player.addDamage(1, source);
 				}
 			};// Ability
 			ability.setStackDescription(source+" - deals 1 damage to " + player);
@@ -8494,7 +8517,8 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, F_card, 2);
+					//AllZone.GameAction.addDamage(player, F_card, 2);
+					player.addDamage(2, F_card);
 				}
 			};
 
@@ -8531,7 +8555,8 @@ public class GameActionUtil {
 							@Override
 							public void resolve() {
 								//if (c.getController().equals(player))
-								AllZone.GameAction.addDamage(player, F_card, 1);
+								//AllZone.GameAction.addDamage(player, F_card, 1);
+								player.addDamage(1, F_card);
 							}
 						};
 						ability.setStackDescription("Cursed Land deals one damage to enchanted land's controller.");
@@ -8838,7 +8863,8 @@ public class GameActionUtil {
 			Ability ability = new Ability(blaze.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, Source, 1);
+					//AllZone.GameAction.addDamage(player, Source, 1);
+					player.addDamage(1, Source);
 				}
 			};
 			ability.setStackDescription(blaze.get(i) + " - has a blaze counter and deals 1 damage to" + player + ".");
@@ -9245,8 +9271,8 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					
-					AllZone.GameAction.addDamage(player, crd, 1);
+					//AllZone.GameAction.addDamage(player, crd, 1);
+					player.addDamage(1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("Serendib Efreet - deals 1 damage to " + player);
@@ -9268,7 +9294,8 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, crd, 1);
+					//AllZone.GameAction.addDamage(player, crd, 1);
+					player.addDamage(1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("Nettletooth Djinn - deals 1 damage to " + player);
@@ -9609,8 +9636,9 @@ public class GameActionUtil {
 						String[] choices = {"Yes", "No, target a creature instead"};
 
 						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
-						if(q != null && q.equals("Yes")) AllZone.GameAction.addDamage(AllZone.ComputerPlayer,
-								card, hondlist.size());
+						if(q != null && q.equals("Yes")) {
+							AllZone.ComputerPlayer.addDamage(hondlist.size(), card);
+						}	
 						else {
 							CardList cards = new CardList(oppPlay.getCards());
 							CardList oppCreatures = new CardList();
@@ -9643,7 +9671,10 @@ public class GameActionUtil {
 						}
 						if(targetc != null) {
 							if(AllZone.GameAction.isCardInPlay(targetc)) targetc.addDamage(hondlist.size(), card);
-						} else AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, hondlist.size());
+						} else {
+							//AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, hondlist.size());
+							AllZone.HumanPlayer.addDamage(hondlist.size(), card);
+						}
 					}
 				}//resolve()
 			};//SpellAbility
@@ -9781,7 +9812,8 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, crd, 1);
+					//AllZone.GameAction.addDamage(player, crd, 1);
+					player.addDamage(1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("Juzam Djinn - deals 1 damage to " + player);
@@ -9803,8 +9835,8 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, crd, 1);
-					
+					//AllZone.GameAction.addDamage(player, crd, 1);
+					player.addDamage(1, crd);
 				}
 			};// Ability
 			ability.setStackDescription("Fledgling Djinn - deals 1 damage to " + player);
@@ -10898,8 +10930,10 @@ public class GameActionUtil {
 					            if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(c, getTargetCard()) )
 					            	AllZone.GameAction.addDamage(getTargetCard(), c, 1);
 					          }
-					          else
-					        	  AllZone.GameAction.addDamage(getTargetPlayer(), c, 1);
+					          else {
+					        	  //AllZone.GameAction.addDamage(getTargetPlayer(), c, 1);
+					        	  getTargetPlayer().addDamage(1, c);
+					          }
 					        }//resolve()
 					    };//SpellAbility
 					    ability.setKothThirdAbility(true);
