@@ -21,7 +21,8 @@ public class SpellAbility_Requirements {
 			if (!ability.getSourceCard().isCopiedSpell()){
 				Card c = ability.getSourceCard();
 				fromZone = AllZone.getZone(c);
-				fromZone.remove(c);
+				if (fromZone != null)
+					fromZone.remove(c);	
 			}
 		}
 		

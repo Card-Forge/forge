@@ -2,7 +2,7 @@ Name:Obsessive Search
 ManaCost:U
 Types:Instant
 Text:no text
-K:spDrawCards:1:Draw a card.:Obsessive Search - draw a card.
+A:SP$Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
 K:Madness:U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_search.jpg
