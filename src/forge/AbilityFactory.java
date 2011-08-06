@@ -88,12 +88,18 @@ public class AbilityFactory {
 		
 		String a[] = abString.split("\\|");
 		
+		for (int aCnt = 0; aCnt < a.length; aCnt ++)
+		    a[aCnt] = a[aCnt].trim();
+		
 		if (!(a.length > 1))
 			throw new RuntimeException("AbilityFactory : getAbility -- a[] too short in " + hostCard.getName());
 			
 		for (int i=0; i<a.length; i++)
 		{
 			String aa[] = a[i].split("\\$");
+			
+			for (int aaCnt = 0; aaCnt < aa.length; aaCnt ++)
+		        aa[aaCnt] = aa[aaCnt].trim();
 			
 			if (!(aa.length == 2))
 				throw new RuntimeException("AbilityFactory : getAbility -- aa.length not 2 in " + hostCard.getName());
