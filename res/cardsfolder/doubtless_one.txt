@@ -3,8 +3,10 @@ ManaCost:3 W
 Types:Creature Cleric Avatar
 Text:no text
 PT:*/*
-K:Whenever CARDNAME deals damage, you gain that much life.
-K:stSetPT:Count$Valid Cleric:Count$Valid Cleric:Doubtless One's power and toughness are each equal to the number of Clerics on the battlefield.
+K:stSetPT:Count$Valid Cleric:Count$Valid Cleric:CARDNAME's power and toughness are each equal to the number of Clerics on the battlefield.
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:Count$TriggeredDamageAmount
 SVar:BuffedBy:Cleric
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubtless_one.jpg

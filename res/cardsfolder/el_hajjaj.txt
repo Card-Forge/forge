@@ -3,7 +3,9 @@ ManaCost:1 B B
 Types:Creature Human Wizard
 Text:no text
 PT:1/1
-K:Whenever CARDNAME deals damage, you gain that much life.
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/el_hajjaj.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/16.jpg
