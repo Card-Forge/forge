@@ -16840,7 +16840,7 @@ public class CardFactory implements NewConstants {
         
         
       //*************** START *********** START **************************
-      else if (cardName.equals("Hurricane"))
+      else if (cardName.equals("Hurricane") || cardName.equals("Squall Line"))
       {
     	  final SpellAbility spell = new Spell(card)
     	  {
@@ -16892,13 +16892,14 @@ public class CardFactory implements NewConstants {
 			    return humanFliers.size() > (compFliers.size() + 2) && AllZone.Computer_Life.getLife() > maxX + 3;
 			}
     	  };
-    	  spell.setDescription("Hurricane deals X damage to each creature with flying and each player.");
+    	  spell.setDescription(cardName + " deals X damage to each creature with flying and each player.");
     	  spell.setStackDescription(card + " - deals X damage to each creature with flying and each player.");
     	  
     	  card.clearSpellAbility();
     	  card.addSpellAbility(spell);
       } 
       //*************** END ************ END **************************
+        
         
       //*************** START *********** START **************************
       else if (cardName.equals("Earthquake") || cardName.equals("Rolling Earthquake") || cardName.equals("Fault Line"))
