@@ -81,7 +81,10 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                         untapCrd.untap();
                     }
                 };
-                ability.setStackDescription("Amulet of Vigor - Untap " + c);
+                StringBuilder sb = new StringBuilder();
+                sb.append("Amulet of Vigor - Untap ").append(c);
+                ability.setStackDescription(sb.toString());
+                
                 for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Amulet of Vigor").size(); i++)
                     AllZone.Stack.add(ability);
             }
@@ -107,7 +110,10 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             				for(Card cr:creatures) cr.untap();
             			}
             		};
-            		ability.setStackDescription(triggerer.getName()+" - untap all creatures.");
+            		StringBuilder sb = new StringBuilder();
+            		sb.append(triggerer.getName()).append(" - untap all creatures.");
+            		ability.setStackDescription(sb.toString());
+            		
             		AllZone.Stack.add(ability);
             	}
             }
@@ -166,7 +172,10 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 			ankhLand.getController().addDamage(2, source);
                 		}
                 	};
-                	ability.setStackDescription(source+" - deals 2 damage to "+ankhLand.getController());
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(source).append(" - deals 2 damage to ").append(ankhLand.getController());
+                	ability.setStackDescription(sb.toString());
+                	
                 	AllZone.Stack.add(ability);
                 }
                 
@@ -181,7 +190,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 					"G", new String[] {"Creature", "Snake"}, 1, 1, new String[] {});
                 		}
                 	};
-                	ability.setStackDescription(source+" - "+seedLand.getController()+" puts a 1/1 green Snake token in play");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(source).append(" - ").append(seedLand.getController());
+                	sb.append(" puts a 1/1 green Snake token in play");
+                	ability.setStackDescription(sb.toString());
+                	
                 	AllZone.Stack.add(ability);
                 }
                 
@@ -198,7 +211,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 			for(Card land:lands) land.tap();
                 		}
                 	};
-                	ability.setStackDescription(source+" - tap all lands "+tisLand.getController()+"controls.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(source).append(" - tap all lands ");
+                	sb.append(tisLand.getController()).append("controls.");
+                	ability.setStackDescription(sb.toString());
+                	
                 	AllZone.Stack.add(ability);
                 }
             }//isLand()
@@ -295,7 +312,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     }
                 };
                 
-                ability.setStackDescription("Sword of the Meek - Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.");
+                StringBuilder sb = new StringBuilder();
+                sb.append("Sword of the Meek - Whenever a 1/1 creature enters the battlefield under your control, you may ");
+                sb.append("return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.");
+                ability.setStackDescription(sb.toString());
+
                 AllZone.Stack.add(ability);
             }
         }
