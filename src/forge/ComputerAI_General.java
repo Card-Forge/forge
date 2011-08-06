@@ -151,7 +151,6 @@ public class ComputerAI_General implements Computer {
             	if (c.getSVar("PlayMain1").equals("TRUE"))
             		return true;
             	
-                if(c.isLand()) return false;
                 if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
 
                 CardList buffed = new CardList(AllZone.Computer_Play.getCards());
@@ -164,6 +163,8 @@ public class ComputerAI_General implements Computer {
                 			if (c.isValidCard(bffdby)) return true;
                 	}       
                 }
+
+                if(c.isLand()) return false;
 
                 CardList Vengevines = new CardList();
                 Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, "Computer").getCards());       

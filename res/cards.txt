@@ -247,6 +247,7 @@ Flying
 WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NonType.Land/NotSelf:ASAP:Yes_No:Initiator - OwnedByController!AttachTarget:Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
 WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
 SVar:RemAIDeck:True
+SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
 
@@ -282,6 +283,7 @@ Adventuring Gear
 1
 Artifact Equipment
 Landfall - Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adventuring_gear.jpg
 
@@ -2075,6 +2077,7 @@ Creature Elemental
 When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control. Landfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
 5/5
 Landfall
+SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
 
@@ -2314,6 +2317,7 @@ Creature Beast
 no text
 4/4
 WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Trample!StatsPumpEOT/4/4:Self!Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Baloth Woodcrasher gets +4/+4 and gains trample until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_woodcrasher.jpg
 
@@ -10416,6 +10420,7 @@ Creature Griffin
 no text
 2/2
 WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Flying:Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Fledgling Griffin gains flying until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
 
@@ -13195,6 +13200,7 @@ no text
 3/1
 CARDNAME can't block.
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hagra_crocodile.jpg
 
@@ -13638,6 +13644,7 @@ Artifact Creature Construct
 no text
 2/2
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_rover.jpg
 
@@ -20820,6 +20827,7 @@ Legendary Creature Demon
 Landfall - Whenever a land enters the battlefield under your control, you may have target player lose 3 life. If you do, put three +1/+1 counters on Ob Nixilis, the Fallen.
 3/3
 Landfall
+SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_the_fallen.jpg
 
@@ -22291,6 +22299,7 @@ no text
 1/1
 First Strike
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_geopede.jpg
 
@@ -28701,6 +28710,7 @@ Creature Cat
 no text
 0/1
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steppe_lynx.jpg
 
@@ -29532,6 +29542,7 @@ Creature Surrakar
 no text
 2/1
 WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Intimidate:Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Surrakar Marauder gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_marauder.jpg
 
@@ -30308,6 +30319,7 @@ Creature Beast
 no text
 4/4
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/territorial_baloth.jpg
 
@@ -32996,6 +33008,7 @@ Creature Plant
 no text
 1/1
 WheneverKeyword:EntersBattleField:Type/Land:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
+SVar:BuffedBy:Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vinelasher_kudzu.jpg
 
@@ -34622,6 +34635,7 @@ no text
 2/2
 Flying
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windrider_eel.jpg
 
