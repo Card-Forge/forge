@@ -2832,12 +2832,19 @@ public class Card extends MyObservable {
         receivedDamageFromThisTurn.clear();
     }
     
-    //the amount of damage needed to kill the creature
+    //the amount of damage needed to kill the creature (for AI)
     public int getKillDamage() {
     	int killDamage = getNetDefense() + preventNextDamage - getDamage();
         if(killDamage > preventNextDamage && hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) killDamage = 1 + preventNextDamage;
         
         return killDamage;
+    }
+    
+    //this is the minimal damage a trampling creature has to assign to a blocker
+    public int getLethalDamage() {
+    	int lethalDamage = getNetDefense() - getDamage();
+        
+        return lethalDamage;
     }
     
     public void setDamage(int n) {
@@ -2853,8 +2860,6 @@ public class Card extends MyObservable {
         if(damage < 0) damage = 0;
         
         int assignedDamage = damage;
-        
-        if(!CardFactoryUtil.canDamage(sourceCard, this)) assignedDamage = 0;
 
         Log.debug(this + " - was assigned " + assignedDamage + " damage, by " + sourceCard);
         if(!assignedDamageHashMap.containsKey(sourceCard)) assignedDamageHashMap.put(sourceCard, assignedDamage);
@@ -2936,6 +2941,8 @@ public class Card extends MyObservable {
 		
 		int restDamage = damage;
 		Player player = getController();
+		
+		if(CardFactoryUtil.hasProtectionFrom(source,this)) return 0;
 		
     	if(isCombat) {
     		if(getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))return 0;
@@ -3111,8 +3118,6 @@ public class Card extends MyObservable {
     public void addDamage(final int damageIn, final Card source) {
         int damageToAdd = damageIn;
         
-        if(!CardFactoryUtil.canDamage(source, this)) return;
-        
     	damageToAdd = replaceDamage(damageToAdd, source, false);
         damageToAdd = preventDamage(damageToAdd, source, false);
         
@@ -3122,8 +3127,6 @@ public class Card extends MyObservable {
     
     public void addDamageWithoutPrevention(final int damageIn, final Card source) {
         int damageToAdd = damageIn;
-        
-        if(!CardFactoryUtil.canDamage(source, this)) return;
         
     	damageToAdd = replaceDamage(damageToAdd, source, false);
         

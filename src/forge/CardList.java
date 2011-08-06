@@ -239,6 +239,7 @@ public class CardList implements Iterable<Card> {
         });
     }
     
+    /*no longer needed
     public CardList canBeDamagedBy(final Card card) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
@@ -246,6 +247,7 @@ public class CardList implements Iterable<Card> {
             }
         });
     }
+    */
     
     public CardList filter(CardListFilter f) {
         CardList c = new CardList();

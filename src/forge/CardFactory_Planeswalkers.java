@@ -949,7 +949,7 @@ class CardFactory_Planeswalkers {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             Card c = getTargetCard();
-                            if(CardFactoryUtil.canDamage(card, c)) c.addDamage(1, card);
+                            c.addDamage(1, card);
                         }
                     }
 
@@ -1026,8 +1026,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     card.subtractCounter(Counters.LOYALTY, damage2[0]);
-                    if(CardFactoryUtil.canDamage(card, getTargetCard())) getTargetCard().addDamage(damage2[0],
-                            card);
+                    getTargetCard().addDamage(damage2[0], card);
                     
                     damage2[0] = 0;
                 }//resolve()
@@ -1113,9 +1112,8 @@ class CardFactory_Planeswalkers {
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Creature");
                     
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(10, card);
-                    }
+                    for(int i = 0; i < list.size(); i++) 
+                    	list.get(i).addDamage(10, card);
                 }//resolve()
                 
                 @Override

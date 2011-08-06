@@ -3205,6 +3205,7 @@ public class CardFactoryUtil {
         return false;
     }
     
+    /*no longer needed
     public static boolean canDamage(Card spell, Card receiver) {
         //this is for untargeted damage spells, such as Pestilence, Pyroclasm, Tremor, etc. 
         //and also combat damage?
@@ -3214,6 +3215,7 @@ public class CardFactoryUtil {
         return true;
         
     }
+    */
     
     public static boolean isCounterable(Card c) {
         if(!c.getKeyword().contains("CARDNAME can't be countered.")) return true;

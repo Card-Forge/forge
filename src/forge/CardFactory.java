@@ -2159,7 +2159,7 @@ public class CardFactory implements NewConstants {
                     	all = all.getValidCards(Tgts,card.getController(),card);
                     
                     	for(int i = 0; i < all.size(); i++) {
-                        	if(CardFactoryUtil.canDamage(card, all.get(i))) all.get(i).addDamage(ndam, card);
+                        	all.get(i).addDamage(ndam, card);
                     	}
                     	if (DmgPlayer[0] == true) {
                     		AllZone.ComputerPlayer.addDamage(ndam, card);
@@ -4261,7 +4261,7 @@ public class CardFactory implements NewConstants {
                             
                             for(int i = 0; i < creatures.size(); i++) {
                                 Card crd = creatures.get(i);
-                                if(CardFactoryUtil.canDamage(card, crd)) crd.addDamage(3, card);
+                                crd.addDamage(3, card);
                             }
                         }
                         
@@ -4992,7 +4992,7 @@ public class CardFactory implements NewConstants {
                     CardList list = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
+                        list.get(i).addDamage(1, card);
                     }
                     
                     AllZone.HumanPlayer.addDamage(1, card);
@@ -5048,11 +5048,9 @@ public class CardFactory implements NewConstants {
                     list = list.getType("Creature");
                     
                     for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, list.get(i))){
                         	HashMap<Card, Integer> m = new HashMap<Card, Integer>();
                         	m.put(card, 1);
                         	list.get(i).addDamage(m);
-                        }
                     }
                     
                     AllZone.HumanPlayer.addDamage(1, card);
@@ -7845,7 +7843,7 @@ public class CardFactory implements NewConstants {
 
         			CardListFilter filter = new CardListFilter() {
         				public boolean addCard(Card c) {
-        					return c.isCreature() && CardFactoryUtil.canDamage(card, c) && damage >= (c.getNetDefense() + c.getDamage());
+        					return c.isCreature() && damage >= (c.getNetDefense() + c.getDamage());
         				}
         			};
 

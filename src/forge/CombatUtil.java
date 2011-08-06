@@ -585,8 +585,6 @@ public class CombatUtil {
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return 0;
         
-        if(!CardFactoryUtil.canDamage(defender, attacker)) return 0;
-        
         int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetCombatDamage() - flankingMagnitude + defBushidoMagnitude;
@@ -659,8 +657,6 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
-        
-        if(!CardFactoryUtil.canDamage(defender, attacker)) return false;
         
         int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
@@ -737,8 +733,6 @@ public class CombatUtil {
     		if(defender.isValidCard(restrictions,attacker.getController(),attacker) && !defender.getKeyword().contains("Indestructible"))
     			return true;
         }
-        
-        if(!CardFactoryUtil.canDamage(attacker,defender)) return false;
         
         int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");

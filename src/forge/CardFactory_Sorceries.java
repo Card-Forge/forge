@@ -1451,7 +1451,7 @@ public class CardFactory_Sorceries {
                     CardListFilter filter = new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isCreature() && CardFactoryUtil.canDamage(card, c) && (c.getNetDefense() - c.getDamage())< 4;
+                    		return c.isCreature() && (c.getNetDefense() - c.getDamage())< 4;
                     	}
                     };
                     
@@ -1471,10 +1471,8 @@ public class CardFactory_Sorceries {
                     
                     for(int i = 0; i < all.size(); i++)
                         if(!all.get(i).getKeyword().contains("Flying")) {
-                            if(CardFactoryUtil.canDamage(card, all.get(i))) {
                                 all.get(i).setShield(0);
                                 all.get(i).addDamage(3, card);
-                            }
                         }
                     AllZone.HumanPlayer.addDamage(3, card);
                     AllZone.ComputerPlayer.addDamage(3, card);
@@ -2141,7 +2139,7 @@ public class CardFactory_Sorceries {
                         
 
                         for(int i = 0; i < list.size(); i++) {
-                            if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(2, card);
+                            list.get(i).addDamage(2, card);
                         }
                     }
                     
@@ -4304,8 +4302,7 @@ public class CardFactory_Sorceries {
                   {
                   	public boolean addCard(Card c)
                   	{
-                  		return c.isCreature() && c.getKeyword().contains("Flying") &&
-                  			   CardFactoryUtil.canDamage(card, c);
+                  		return c.isCreature() && c.getKeyword().contains("Flying");
                   	}
                   });
                   
@@ -4327,8 +4324,7 @@ public class CardFactory_Sorceries {
   				CardListFilter filter = new CardListFilter(){
   					public boolean addCard(Card c)
   					{
-  						return c.isCreature() && c.getKeyword().contains("Flying") &&
-  							   CardFactoryUtil.canDamage(card, c) && maxX >= (c.getNetDefense() + c.getDamage());
+  						return c.isCreature() && c.getKeyword().contains("Flying") && maxX >= (c.getNetDefense() + c.getDamage());
   					}
   				};
   				
@@ -4378,8 +4374,7 @@ public class CardFactory_Sorceries {
                   {
                   	public boolean addCard(Card c)
                   	{
-                  		return c.isCreature() && !c.getKeyword().contains(keyword[0]) &&
-                  			   CardFactoryUtil.canDamage(card, c);
+                  		return c.isCreature() && !c.getKeyword().contains(keyword[0]);
                   	}
                   });
                   
@@ -4401,8 +4396,7 @@ public class CardFactory_Sorceries {
   				CardListFilter filter = new CardListFilter(){
   					public boolean addCard(Card c)
   					{
-  						return c.isCreature() && !c.getKeyword().contains(keyword) &&
-  							   CardFactoryUtil.canDamage(card, c) && maxX >= (c.getNetDefense() + c.getDamage());
+  						return c.isCreature() && !c.getKeyword().contains(keyword) && maxX >= (c.getNetDefense() + c.getDamage());
   					}
   				};
   				
@@ -4480,7 +4474,7 @@ public class CardFactory_Sorceries {
         			{
         				public boolean addCard(Card c)
         				{
-        					return c.isCreature() && CardFactoryUtil.canDamage(card, c);
+        					return c.isCreature();
         				}
         			});
 
@@ -4496,8 +4490,7 @@ public class CardFactory_Sorceries {
         			CardListFilter filter = new CardListFilter(){
         				public boolean addCard(Card c)
         				{
-        					return c.isCreature() && CardFactoryUtil.canDamage(card, c) && 
-        					maxX >= (c.getNetDefense() + c.getDamage());
+        					return c.isCreature() && maxX >= (c.getNetDefense() + c.getDamage());
         				}
         			};
 
@@ -4573,7 +4566,7 @@ public class CardFactory_Sorceries {
         			{
         				public boolean addCard(Card c)
         				{
-        					return c.isCreature() && CardFactoryUtil.canDamage(card, c);
+        					return c.isCreature();
         				}
         			});
 
@@ -4594,8 +4587,7 @@ public class CardFactory_Sorceries {
         			CardListFilter filter = new CardListFilter(){
         				public boolean addCard(Card c)
         				{
-        					return c.isCreature() && CardFactoryUtil.canDamage(card, c) && 
-        					maxX >= (c.getNetDefense() + c.getDamage());
+        					return c.isCreature() && maxX >= (c.getNetDefense() + c.getDamage());
         				}
         			};
 

@@ -572,7 +572,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(getTargetCard() != null && CardFactoryUtil.canDamage(card, getTargetCard())
+                    if(getTargetCard() != null
                             && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(3, card);
                     else getTargetPlayer().addDamage(3, card);
                 }
@@ -611,7 +611,7 @@ public class CardFactory_Creatures {
                     
                     for(int i = 0; i < creatures.size(); i++) {
                         Card crd = creatures.get(i);
-                        if(CardFactoryUtil.canDamage(card, crd) && !crd.equals(card)) crd.addDamage(4, card);
+                        if(!crd.equals(card)) crd.addDamage(4, card);
                     }
 
                 }
@@ -642,7 +642,7 @@ public class CardFactory_Creatures {
                     
                     for(int i = 0; i < creatures.size(); i++) {
                         Card crd = creatures.get(i);
-                        if(CardFactoryUtil.canDamage(card, crd)) crd.addDamage(2, card);
+                        crd.addDamage(2, card);
                     }
         			AllZone.ComputerPlayer.addDamage(2, card);
         			AllZone.HumanPlayer.addDamage(2, card);
@@ -700,8 +700,7 @@ public class CardFactory_Creatures {
         			{
         				public boolean addCard(Card c)
         				{
-        					return !c.getKeyword().contains("Flying") &&
-        					CardFactoryUtil.canDamage(card, c);
+        					return !c.getKeyword().contains("Flying");
         				}
         			});
 
@@ -737,8 +736,7 @@ public class CardFactory_Creatures {
         			{
         				public boolean addCard(Card c)
         				{
-        					return c.getKeyword().contains("Flying") &&
-        					CardFactoryUtil.canDamage(card, c);
+        					return c.getKeyword().contains("Flying");
         				}
         			});
 
@@ -1830,8 +1828,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     CardList list = AllZoneUtil.getCreaturesInPlay();
                     for(int i = 0; i < list.size(); i++)
-                        if(!list.get(i).getKeyword().contains("Flying")
-                                && CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(5, card);
+                        if(!list.get(i).getKeyword().contains("Flying")) list.get(i).addDamage(5, card);
                 }
             };
             Command destroy = new Command() {
@@ -1911,7 +1908,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canDamage(card, getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                     	getTargetCard().addDamage(4, card);
                     }
@@ -2360,7 +2356,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canDamage(card, getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(3, card);
                 }
             };
@@ -2442,7 +2437,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canDamage(card, getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(2, card);
                 }
             };
@@ -3414,7 +3408,6 @@ public class CardFactory_Creatures {
                         
                         if(getTargetCard() != null) {
                             if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                    && CardFactoryUtil.canDamage(card, getTargetCard())
                                     && CardFactoryUtil.canTarget(card, getTargetCard())) {
                                 Card c = getTargetCard();
                                 c.addDamage(damage, card);
@@ -4408,7 +4401,7 @@ public class CardFactory_Creatures {
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         CardList list = getRadiance(getTargetCard());
                         for(int i = 0; i < list.size(); i++) {
-                            if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
+                        	list.get(i).addDamage(1, card);
                         }
                     }
                 }//resolve()
@@ -4681,7 +4674,7 @@ public class CardFactory_Creatures {
                     CardList list = AllZoneUtil.getCreaturesInPlayWithKeyword("Flying");
                     
                     for(int i = 0; i < list.size(); i++)
-                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
+                        list.get(i).addDamage(1, card);
                 }//resolve()
             };//SpellAbility
             
@@ -4749,8 +4742,7 @@ public class CardFactory_Creatures {
                     {
                     	public boolean addCard(Card c)
                     	{
-                    		return !c.getKeyword().contains("Flying") &&
-                    			   CardFactoryUtil.canDamage(card, c);
+                    		return !c.getKeyword().contains("Flying");
                     	}
                     });
                     
@@ -4782,8 +4774,7 @@ public class CardFactory_Creatures {
                     {
                     	public boolean addCard(Card c)
                     	{
-                    		return !c.getKeyword().contains("Flying") &&
-                    			   CardFactoryUtil.canDamage(card, c);
+                    		return !c.getKeyword().contains("Flying");
                     	}
                     });
                     
@@ -4810,8 +4801,7 @@ public class CardFactory_Creatures {
                     {
                     	public boolean addCard(Card c)
                     	{
-                    		return c.getKeyword().contains("Flying") &&
-                    			   !c.equals(card) && CardFactoryUtil.canDamage(card, c);
+                    		return c.getKeyword().contains("Flying");
                     	}
                     });
                     
@@ -6712,8 +6702,7 @@ public class CardFactory_Creatures {
                     CardList cards = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < cards.size(); i++) {
-                        if(!(cards.get(i)).isWhite()
-                                && CardFactoryUtil.canDamage(card, cards.get(i))) {
+                        if(!(cards.get(i)).isWhite()) {
                             cards.get(i).addDamage(3, card);
                         }
                     }
@@ -7998,7 +7987,7 @@ public class CardFactory_Creatures {
                     else {		// AI Choose spread Damage
                     	CardList damageableWolves = wolves.filter(new CardListFilter() {
                     		public boolean addCard(Card c) {
-                    			return CardFactoryUtil.canDamage(target, c);
+                    			return (c.predictDamage(target.getNetAttack(), target, false) > 0);
                     		}
                     	});
                     	

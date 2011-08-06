@@ -2699,7 +2699,7 @@ public class CardFactory_Instants {
                   {
                   	public boolean addCard(Card c)
                   	{
-                  		return c.getKeyword().contains("Flying") && CardFactoryUtil.canDamage(card, c);
+                  		return c.getKeyword().contains("Flying");
                   	}
                   });
                   
@@ -2715,8 +2715,7 @@ public class CardFactory_Instants {
   				CardListFilter filter = new CardListFilter(){
   					public boolean addCard(Card c)
   					{
-  						return c.isCreature() && c.getKeyword().contains("Flying") &&
-  							   CardFactoryUtil.canDamage(card, c) && maxX >= (c.getNetDefense() + c.getDamage());
+  						return c.isCreature() && c.getKeyword().contains("Flying") && maxX >= (c.getKillDamage());
   					}
   				};
   				
@@ -2886,9 +2885,7 @@ public class CardFactory_Instants {
   				CardList all = AllZoneUtil.getCreaturesInPlay();
                   
                   for(int i = 0; i < all.size(); i++) {
-                      	if(CardFactoryUtil.canDamage(card, all.get(i))) {
                       		all.get(i).addDamage(card.getXManaCostPaid(), card);
-                      	}
                   }
                   
       			card.setXManaCostPaid(0);
@@ -2900,8 +2897,7 @@ public class CardFactory_Instants {
   				CardListFilter filter = new CardListFilter(){
   					public boolean addCard(Card c)
   					{
-  						return c.isCreature() && CardFactoryUtil.canDamage(card, c) && 
-  							   maxX >= (c.getNetDefense() + c.getDamage());
+  						return c.isCreature() && maxX >= (c.getKillDamage());
   					}
   				};
   				

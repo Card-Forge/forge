@@ -546,14 +546,14 @@ public class AbilityFactory_DealDamage {
     		CardListFilter filterX = new CardListFilter(){
     			public boolean addCard(Card c)
     			{
-    				return CardFactoryUtil.canDamage(source, c) && c.predictDamage(maxX, source, false) >= c.getKillDamage();
+    				return (c.predictDamage(maxX, source, false) >= c.getKillDamage());
     			}
     		};
     		
     		CardListFilter filter = new CardListFilter(){
     			public boolean addCard(Card c)
     			{
-    				return CardFactoryUtil.canDamage(source, c) && c.predictDamage(dmg, source, false) >= c.getKillDamage();
+    				return (c.predictDamage(dmg, source, false) >= c.getKillDamage());
     			}
     		};
 

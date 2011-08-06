@@ -8428,12 +8428,10 @@ public class GameActionUtil {
                     
                     CardList humanCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                     humanCreatures = humanCreatures.getValidCards(smallCreatures,k.getController(),k);
-                    humanCreatures = humanCreatures.canBeDamagedBy(k);
                     humanCreatures = humanCreatures.getNotKeyword("Indestructible");
                     
                     CardList computerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                     computerCreatures = computerCreatures.getValidCards(smallCreatures,k.getController(),k);
-                    computerCreatures = computerCreatures.canBeDamagedBy(k);
                     computerCreatures = computerCreatures.getNotKeyword("Indestructible");
                     
                     // We assume that both players will want to peek, ask if they want to reveal.
@@ -8465,7 +8463,6 @@ public class GameActionUtil {
                     if (wantDamageCreatures) {
                         CardList allCreatures = AllZoneUtil.getCreaturesInPlay();
                         for (final Card crd : allCreatures) {
-                            if (CardFactoryUtil.canDamage(k, crd))
                                 crd.addDamage(2, k);
                         }
                     }
