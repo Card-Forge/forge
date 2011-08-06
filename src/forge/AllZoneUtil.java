@@ -413,9 +413,12 @@ public class AllZoneUtil {
 	}
 	
 	public static Card getCardState(Card card){
-		CardList zone = getCardsInZone(AllZone.getZone(card).getZoneName());
+		PlayerZone zone = AllZone.getZone(card);
+		if (zone == null)	// for tokens
+			return null;
 		
-		for(Card c : zone){
+		CardList list = getCardsInZone(zone.getZoneName());
+		for(Card c : list){
 			if (card.equals(c))
 				return c;
 		}
