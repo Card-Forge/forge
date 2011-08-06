@@ -1,3 +1,13 @@
+Murkfiend Liege
+2 UG UG UG
+Creature Horror
+Untap all green and/or blue creatures you control during each other player's untap step.
+4/4
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+
 Sootwalkers
 2 RB RB
 Creature Elemental Rogue

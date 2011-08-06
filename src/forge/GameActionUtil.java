@@ -78,6 +78,7 @@ public class GameActionUtil {
 		upkeep_Bringer_of_the_Green_Dawn();
 		upkeep_Bringer_of_the_Blue_Dawn();
 		upkeep_Bringer_of_the_White_Dawn();
+		upkeep_Murkfiend_Liege();
 		upkeep_Mirror_Sigil_Sergeant();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 		upkeep_Bitterblossom();
@@ -9230,6 +9231,42 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Fledgling_Djinn()
+	
+	private static void upkeep_Murkfiend_Liege()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final String opp = AllZone.GameAction.getOpponent(player);
+		
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
+		list = list.getName("Murkfiend Liege");
+		
+		Ability ability;
+		for (int i = 0; i < list.size(); i++) {
+			final Card card = list.get(i);
+			
+			ability = new Ability(card, "0")
+			{
+				public void resolve()
+				{
+					CardList blueGreen = AllZoneUtil.getPlayerCardsInPlay(opp);
+					blueGreen = blueGreen.filter(new CardListFilter() {
+						public boolean addCard(Card c)
+						{
+							return c.isCreature() && c.isTapped() && (CardUtil.getColors(c).contains(Constant.Color.Blue) || CardUtil.getColors(c).contains(Constant.Color.Green));
+						}
+					});
+					
+					for (Card crd:blueGreen)
+					{
+						crd.untap();
+					}
+				}
+			};
+			
+			ability.setStackDescription(card + " - Untap all green and/or blue creatures you control during each other player's untap step.");
+			AllZone.Stack.add(ability);
+		}
+	}
 
 	private static void upkeep_Mirror_Sigil_Sergeant()
 	{
