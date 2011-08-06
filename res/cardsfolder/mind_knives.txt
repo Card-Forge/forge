@@ -2,7 +2,7 @@ Name:Mind Knives
 ManaCost:1 B
 Types:Sorcery
 Text:no text
-K:spDiscardOpp:AtRandom:1:Target opponent discards a card at random.:Mind Knives - opponent discards cards
+A:SP$Discard|Cost$1 B|Opponent$True|NumCards$1|Mode$Random|SpellDescription$Target opponent discards a card at random.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_knives.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/23.jpg

@@ -2,7 +2,6 @@ Name:Mind Twist
 ManaCost:X B
 Types:Sorcery
 Text:no text
-#K:spDiscardTgt:AtRandom:X:Target player discards X cards at random.:Mind Twist - target player discards cards
 A:SP$Discard|Cost$X B|ValidTgts$Player|NumCards$X|Mode$Random|SpellDescription$Target player discards X cards at random.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
