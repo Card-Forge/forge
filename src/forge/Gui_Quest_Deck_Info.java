@@ -227,9 +227,13 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         }
 
         JTable table = new JTable(){
-            public TableCellRenderer getCellRenderer(int row, int column){
+			private static final long serialVersionUID = 4794007259716860046L;
+
+			public TableCellRenderer getCellRenderer(int row, int column){
                 TableCellRenderer renderer = new DefaultTableCellRenderer(){
-                    public String getToolTipText(){
+					private static final long serialVersionUID = -901181777024884454L;
+
+					public String getToolTipText(){
                         return this.getText();
                     }
                 };

@@ -437,8 +437,12 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
 
 		//Replace cell renderer with one that displays the cell text as tooltip.
 		topTable = new JTable(){
+			private static final long serialVersionUID = -1103518241118990299L;
+
 			public TableCellRenderer getCellRenderer(int row, int column){
 				TableCellRenderer renderer = new DefaultTableCellRenderer(){
+					private static final long serialVersionUID = -9208011190616028553L;
+
 					public String getToolTipText(){
 						return this.getText();
 					}
@@ -448,8 +452,12 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
 		};
 
 		bottomTable = new JTable(){
+			private static final long serialVersionUID = -3703821828491920769L;
+
 			public TableCellRenderer getCellRenderer(int row, int column){
 				TableCellRenderer renderer = new DefaultTableCellRenderer(){
+					private static final long serialVersionUID = -2544330968158633077L;
+
 					public String getToolTipText(){
 						return this.getText();
 					}
