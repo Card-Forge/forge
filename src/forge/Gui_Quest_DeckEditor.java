@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,6 +22,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,11 +36,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.filechooser.FileFilter;
 
 import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 
-public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
+public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisplay, NewConstants {
     private static final long serialVersionUID     = 152061168634545L;
     
     Gui_Quest_DeckEditor_Menu customMenu;
@@ -58,6 +65,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     private TitledBorder      titledBorder2;
     private JButton           addButton            = new JButton();
     private JButton           analysisButton            = new JButton();
+    private JButton           changePictureButton            = new JButton();
+    private JButton           removePictureButton            = new JButton();
     private JPanel            cardDetailPanel      = new JPanel();
     private Border            border3;
     private TitledBorder      titledBorder3;
@@ -97,7 +106,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     private CardList         top;
     private CardList         bottom;
     public Card cCardHQ; 
-        
+    private static File       previousDirectory = null;
+    
     public static void main(String[] args) {
 
     }
@@ -485,6 +495,23 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
         analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
         
+        changePictureButton.setText("Change picture...");
+        changePictureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	changePictureButton_actionPerformed(e);
+            }
+        });
+        changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+        changePictureButton.setBounds(new Rectangle(765, 349, 118, 20));
+        
+        removePictureButton.setText("Remove picture...");
+        removePictureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	removePictureButton_actionPerformed(e);
+            }
+        });
+        removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+        removePictureButton.setBounds(new Rectangle(885, 349, 118, 20));
         
         /**
          * Type filtering
@@ -611,7 +638,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         cardDetailPanel.setBounds(new Rectangle(765, 23, 239, 323));
         cardDetailPanel.setLayout(null);
         picturePanel.setBorder(BorderFactory.createEtchedBorder());
-        picturePanel.setBounds(new Rectangle(765, 362, 239, 338));
+        picturePanel.setBounds(new Rectangle(765, 372, 239, 338));
         picturePanel.setLayout(borderLayout1);
         picturePanel.addMouseListener(new CustomListener());
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
@@ -657,6 +684,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         this.getContentPane().add(addButton, null);
         this.getContentPane().add(removeButton, null);
         this.getContentPane().add(analysisButton, null);
+        this.getContentPane().add(changePictureButton, null);
+        this.getContentPane().add(removePictureButton, null);
         this.getContentPane().add(statsLabel2, null);
         this.getContentPane().add(statsLabel, null);
         this.getContentPane().add(jLabel1, null);
@@ -727,7 +756,95 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     	g.setEnabled(false);
     }}
     
+ void changePictureButton_actionPerformed(ActionEvent e) {
+ 	if (cCardHQ!=null){
+ 	File file = getImportFilename();
+ 	if (file!=null){
+ 	String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName())+".jpg";
+ 	File base = ForgeProps.getFile(IMAGE_BASE);
+ 	File f = new File(base, fileName);
+ 	f.delete();
+ 	
+ 	try {
+ 	    
+ 	    f.createNewFile();
+ 	    FileOutputStream fos = new FileOutputStream(f);
+ 	    FileInputStream fis = new FileInputStream(file);
+ 	    byte[] buff = new byte[32*1024];
+ 	    int length;
+ 	    while(fis.available()>0){
+ 	        length = fis.read(buff);
+ 	        if (length>0)
+ 	            fos.write(buff,0,length);
+ 	    }
+ 	    fos.flush();
+ 	    fis.close();
+ 	    fos.close();
+ 	    updateCardDetail(cCardHQ);
+ 	    
+ 	} catch (IOException e1) {
+ 	    e1.printStackTrace();
+ 	}
+ 	
+ 	}}
+ }
+ 
+ private File getImportFilename() {
+     JFileChooser chooser = new JFileChooser(previousDirectory);
+     ImagePreviewPanel preview = new ImagePreviewPanel();
+     chooser.setAccessory(preview);
+     chooser.addPropertyChangeListener(preview);
+     chooser.addChoosableFileFilter(dckFilter);   
+     int returnVal = chooser.showOpenDialog(null);
+     
+     if(returnVal == JFileChooser.APPROVE_OPTION) {
+         File file = chooser.getSelectedFile();
+         previousDirectory = file.getParentFile();
+         return file;
+     }
+     
+
+     return null;
+     
+ }
+ 
+ private FileFilter dckFilter = new FileFilter(){
+
+		public boolean accept(File f) {
+			return f.getName().endsWith(".jpg") || f.isDirectory();
+		}
+
+		public String getDescription() {
+			return "*.jpg";
+		}
+ 	
+ };
+
+ 
+ void removePictureButton_actionPerformed(ActionEvent e) {
+ 	if (cCardHQ!=null){
+ 	String options[] = {"Yes", "No"};
+     int value = JOptionPane.showOptionDialog(
+             null,
+             "Do you want delete " +cCardHQ.getName()+" picture?" ,
+             "Delete picture",
+             JOptionPane.YES_NO_OPTION,  
+             JOptionPane.QUESTION_MESSAGE,
+             null,
+             options,
+             options[1]);
+     if(value == 0){
+     	String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName())+".jpg";
+     	File base = ForgeProps.getFile(IMAGE_BASE);
+     	File f = new File(base, fileName);
+     	f.delete();
+     	JOptionPane.showMessageDialog(null, "Picture "+cCardHQ.getName()+" deleted.","Delete picture" ,JOptionPane.INFORMATION_MESSAGE );
+     	updateCardDetail(cCardHQ);
+     }}
     
+ }   
+ 
+ 
     void removeButton_actionPerformed(ActionEvent e) {
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
         

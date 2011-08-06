@@ -158,6 +158,7 @@ src/forge/IO.java svneol=native#text/plain
 src/forge/ImageCache.java svneol=native#text/plain
 src/forge/ImageEditor.java -text svneol=native#text/plain
 src/forge/ImageJPanel.java -text svneol=native#text/plain
+src/forge/ImagePreviewPanel.java -text svneol=native#text/plain
 src/forge/ImageUtil.java svneol=native#text/plain
 src/forge/Input.java svneol=native#text/plain
 src/forge/InputControl.java svneol=native#text/plain

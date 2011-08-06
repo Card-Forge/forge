@@ -871,7 +871,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JTable getJTable1() {
 		if(jTable1 == null) {
 			DefaultTableModel dm = new DefaultTableModel();
-			 dm.setDataVector(new Object[][] { {  }}, new Object[] { "Card", "Qty","1st","2st","3st","4st","5st","6st","7st" });
+			 dm.setDataVector(new Object[][] { {  }}, new Object[] { "Card", "Qty","1st","2nd","3rd","4st","5st","6st","7st" });
 
 			jTable1 = new JTable(dm);
 			CardList rList = new CardList();		
@@ -984,8 +984,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 					
 			jTable1.getColumn("Qty").setMaxWidth(50);
 			jTable1.getColumn("1st").setMaxWidth(50);
-			jTable1.getColumn("2st").setMaxWidth(50);
-			jTable1.getColumn("3st").setMaxWidth(50);
+			jTable1.getColumn("2nd").setMaxWidth(50);
+			jTable1.getColumn("3rd").setMaxWidth(50);
 			jTable1.getColumn("4st").setMaxWidth(50);
 			jTable1.getColumn("5st").setMaxWidth(50);
 			jTable1.getColumn("6st").setMaxWidth(50);
@@ -1009,7 +1009,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel getJLabel1xxxxx() {
 		if(jLabel1 == null) {
 			jLabel1 = new JLabel();
-			jLabel1.setText("Probability of drawing current card:");
+			jLabel1.setText("Draw Probabilities:");
 			jLabel1.setLayout(null);
 			jLabel1.setBounds(7, 237, 447, 25);
 		}
