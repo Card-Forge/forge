@@ -2224,48 +2224,47 @@ public class CardFactoryUtil {
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sourceCard.getController());
                 
-
                 CardList cards = new CardList(lib.getCards());
                 CardList sameCost = new CardList();
                 int Cost = CardUtil.getConvertedManaCost(Manacost);
-                for(int i = 0; i < cards.size(); i++) {
-                    if((CardUtil.getConvertedManaCost(cards.get(i).getManaCost()) <= Cost)
+                for (int i = 0; i < cards.size(); i++) {
+                    if ((CardUtil.getConvertedManaCost(cards.get(i).getManaCost()) <= Cost)
                             && cards.get(i).isType("Spirit")) {
                         sameCost.add(cards.get(i));
                     }
                 }
                 
-
-                if(sameCost.size() == 0) return;
+                if (sameCost.size() == 0) return;
                 
-                if(sourceCard.getController().isHuman()) {
-                    String[] choices = {"Yes", "No"};
-                    Object choice = AllZone.Display.getChoice(sourceCard + " - Soulshift " + Cost + "?", choices);
-                    if(choice.equals("Yes")) {
+                if (sourceCard.getController().isHuman()) {
+                    StringBuilder question = new StringBuilder();
+                    question.append("Return target Spirit card with converted mana cost ");
+                    question.append(Manacost).append(" or less from your graveyard to your hand?");
+                    
+                    if (GameActionUtil.showYesNoDialog(sourceCard, question.toString())) {
                         Object o = AllZone.Display.getChoiceOptional("Select a card", sameCost.toArray());
-                        if(o != null) {
-                            //ability.setTargetCard((Card)o);
-                            //AllZone.Stack.add(ability);
+                        if (o != null) {
                             
                             Card c1 = (Card) o;
                             lib.remove(c1);
                             hand.add(c1);
-                            
-
                         }
                     }
-                } else //Wiser choice should be here
-                {
+                } else {
+                    //Wiser choice should be here
                     Card choice = null;
                     sameCost.shuffle();
                     choice = sameCost.getCard(0);
-                    if(!(choice == null)) {
+                    
+                    if (!(choice == null)) {
                         lib.remove(choice);
                         hand.add(choice);
                     }
                 }
-            }
-        };
+            }// resolve()
+        };// SpellAbility desc
+        
+        // The spell description below fails to appear in the card detail panel
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Soulshift ").append(Manacost);
         sbDesc.append(" - When this permanent is put into a graveyard from play, you may return target Spirit card with converted mana cost ");
