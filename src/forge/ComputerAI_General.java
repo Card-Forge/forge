@@ -138,6 +138,27 @@ public class ComputerAI_General implements Computer {
         return getPlayable(all);
     }//getMain2()
     
+    private SpellAbility[] getOtherPhases(){
+        CardList all = new CardList();
+        all.addAll(AllZone.Computer_Hand.getCards());
+        all.addAll(AllZone.Computer_Play.getCards());
+        all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
+
+        
+        CardList humanPlayable = new CardList();
+        humanPlayable.addAll(AllZone.Human_Play.getCards());
+        humanPlayable = humanPlayable.filter(new CardListFilter()
+        {
+          public boolean addCard(Card c)
+          {
+            return (c.canAnyPlayerActivate());
+          }
+        });
+        all.addAll(humanPlayable.toArray());
+        
+        return getPlayable(all);
+    }
+    
     /**
      * Returns the spellAbilities from the card list that the computer is able to play
      */
@@ -148,9 +169,9 @@ public class ComputerAI_General implements Computer {
                 //This try/catch should fix the "computer is thinking" bug
                 try {
                 	sa.setActivatingPlayer(AllZone.ComputerPlayer);
-                    if(ComputerUtil.canPayCost(sa) && sa.canPlayAI() && 
-                    		(sa.canPlay()))
-                    			spellAbility.add(sa);
+                    if(sa.canPlay() && ComputerUtil.canPayCost(sa) && sa.canPlayAI()){
+                    	spellAbility.add(sa);
+                    }
                 } catch(Exception ex) {
                     showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
                 }
@@ -251,7 +272,6 @@ public class ComputerAI_General implements Computer {
     
     //end of Human's turn
     public void end_of_turn() {
-    	// todo: AI play any end of Human turn stuff
     	stackResponse();
     }
     
@@ -261,7 +281,11 @@ public class ComputerAI_General implements Computer {
     
     public void stackResponse(){
     	// if top of stack is empty 
+    	SpellAbility[] sas;
     	if (AllZone.Stack.size() == 0){
+    		sas = getOtherPhases();
+    		
+    		if (sas.length > 0){
     		// do things dependent on the phase, 
     		
     		// if beginCombat tap best attackers etc
@@ -271,25 +295,37 @@ public class ComputerAI_General implements Computer {
     		// if end of Human's turn, feel free to use tap/mana abilities that will untap next turn
     		
     		// if you don't or can't play anything
+    		}
+    		
     		AllZone.Phase.passPriority();	
     		return;
     	}
     	
-    	SpellAbility sa = AllZone.Stack.peek();
+    	SpellAbility topSA = AllZone.Stack.peek();
     	// if top of stack is owned by me
-    	if (sa.getActivatingPlayer().isComputer()){
+    	if (topSA.getActivatingPlayer().isComputer()){
     		// probably should let my stuff resolve to force Human to respond to it
     		AllZone.Phase.passPriority();
     		return;
     	}
     	
     	// top of stack is owned by human, 
+    	sas = getOtherPhases();
     	
-    	// does it target it me or something I own?
-    	// can i protect it? can I counter it?
-    	
-    	// does it target his stuff? can I kill it in response?
-    	
+    	if (sas.length > 0){
+    		if (topSA.getTarget() != null){
+    			ArrayList<Object> targets = topSA.getTarget().getTargets();
+		    	// does it target me or something I own?
+		    	// can i protect it? can I counter it?
+		    	
+		    	// if i can't save it, can I activate an ability on that card in response? sacrifice etc?
+		    	
+		    	// does it target his stuff? can I kill it in response?
+	    	}
+    		else{
+    			// no target, figure out what type of spell it is and react according
+    		}
+    	}
     	// if this hasn't been covered above, just PassPriority()
     	AllZone.Phase.passPriority();
     }
