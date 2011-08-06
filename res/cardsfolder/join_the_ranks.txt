@@ -1,0 +1,8 @@
+Name:Join the Ranks
+ManaCost:3 W
+Types:Instant
+Text:Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/join_the_ranks.jpg
+End

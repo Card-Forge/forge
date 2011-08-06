@@ -1,0 +1,8 @@
+Name:Jasmine Boreal
+ManaCost:3 W G
+Types:Legendary Creature Human
+Text:no text
+PT:4/5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card109764.jpg
+End

@@ -1,0 +1,8 @@
+Name:Jackal Pup
+ManaCost:R
+Types:Creature Hound
+Text:Whenever Jackal Pup is dealt damage, it deals that much damage to you.
+PT:2/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4825.jpg
+End

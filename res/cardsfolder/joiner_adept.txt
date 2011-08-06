@@ -1,0 +1,8 @@
+Name:Joiner Adept
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:Lands you control have "tap: Add one mana of any color to your mana pool."
+PT:2/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/joiner_adept.jpg
+End

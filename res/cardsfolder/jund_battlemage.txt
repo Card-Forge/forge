@@ -1,0 +1,8 @@
+Name:Jund Battlemage
+ManaCost:2 R
+Types:Creature Human Shaman
+Text:no text
+PT:2/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_battlemage.jpg
+End

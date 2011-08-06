@@ -1,0 +1,8 @@
+Name:Jabari's Banner
+ManaCost:2
+Types:Artifact
+Text:no text
+K:abPumpTgtC 1 T:Flanking
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jabaris_banner.jpg
+End

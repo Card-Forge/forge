@@ -1,0 +1,7 @@
+Name:Jace Beleren
+ManaCost:1 U U
+Types:Planeswalker - Jace
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_beleren.jpg
+End

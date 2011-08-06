@@ -1,0 +1,10 @@
+Name:Jungle Troll
+ManaCost:1 R G
+Types:Creature Troll
+Text:no text
+PT:2/1
+K:RegenerateMe:R
+K:RegenerateMe:G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_troll.jpg
+End

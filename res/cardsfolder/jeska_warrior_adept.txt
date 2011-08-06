@@ -1,0 +1,11 @@
+Name:Jeska, Warrior Adept
+ManaCost:2 R R
+Types:Legendary Creature Human Barbarian Warrior
+Text:no text
+PT:3/1
+K:First Strike
+K:Haste
+K:abDamageTgtCP T:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jeska_warrior_adept.jpg
+End

@@ -1,0 +1,9 @@
+Name:Jhovall Rider
+ManaCost:4 W
+Types:Creature Human Rebel
+Text:no text
+PT:3/3
+K:Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card20172.jpg
+End

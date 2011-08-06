@@ -1,0 +1,9 @@
+Name:Jackalope Herd
+ManaCost:3 G
+Types:Creature Rabbit Beast
+Text:no text
+PT:4/5
+K:WheneverKeyword:CastSpell/Controller:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When you cast a spell, return Jackalope Herd to its owner's hand.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jackalope_herd.jpg
+End

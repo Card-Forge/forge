@@ -1,0 +1,12 @@
+Name:Jodah's Avenger
+ManaCost:5 U
+Types:Creature Shapeshifter
+Text:no text
+PT:4/4
+K:abPump 0:-1/-1/Double Strike
+K:abPump 0:-1/-1/Protection from red
+K:abPump 0:-1/-1/Vigilance
+K:abPump 0:-1/-1/Shadow
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jodahs_avenger.jpg
+End

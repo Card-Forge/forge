@@ -1,0 +1,10 @@
+Name:Juvenile Gloomwidow
+ManaCost:G G
+Types:Creature Spider
+Text:no text
+PT:1/3
+K:Reach
+K:Wither
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/juvenile_gloomwidow.jpg
+End

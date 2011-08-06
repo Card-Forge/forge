@@ -1,0 +1,8 @@
+Name:Jandor's Saddlebags
+ManaCost:2
+Types:Artifact
+Text:no text
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jandors_saddlebags.jpg
+End

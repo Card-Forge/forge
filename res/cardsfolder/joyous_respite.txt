@@ -1,0 +1,9 @@
+Name:Joyous Respite
+ManaCost:3 G
+Types:Sorcery Arcane
+Text:no text
+K:spGainLife:X:You gain 1 life for each land you control.:Joyous Respite - player gains X life
+K:SVar:X:Count$TypeYouCtrl.Land
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/joyous_respite.jpg
+End

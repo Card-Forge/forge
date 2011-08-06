@@ -1,0 +1,9 @@
+Name:Jugan, the Rising Star
+ManaCost:3 G G G
+Types:Legendary Creature Dragon Spirit
+Text:When Jugan, the Rising Star is put into a graveyard from play, you may put five +1/+1 counters on ONE target creature.
+PT:5/5
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50247.jpg
+End

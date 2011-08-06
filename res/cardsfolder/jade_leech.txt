@@ -1,0 +1,9 @@
+Name:Jade Leech
+ManaCost:2 G G
+Types:Creature Leech
+Text:Green spells you cast cost G more to cast.
+PT:5/5
+K:CostChange:Player:More:G:Spell:green:All:NoSpecial
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_leech.jpg
+End

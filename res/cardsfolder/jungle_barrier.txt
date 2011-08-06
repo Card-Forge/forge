@@ -1,0 +1,10 @@
+Name:Jungle Barrier
+ManaCost:2 G U
+Types:Creature Plant Wall
+Text:no text
+PT:2/6
+K:Defender
+K:When CARDNAME enters the battlefield, draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_barrier.jpg
+End

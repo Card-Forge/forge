@@ -1,0 +1,9 @@
+Name:Jenara, Asura of War
+ManaCost:G W U
+Types:Legendary Creature Angel
+Text:no text
+PT:3/3
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jenara_asura_of_war.jpg
+End

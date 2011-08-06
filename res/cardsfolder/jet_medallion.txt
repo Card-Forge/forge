@@ -1,0 +1,9 @@
+Name:Jet Medallion
+ManaCost:2
+Types:Artifact
+Text:Black spells you cast cost 1 less to cast.
+K:CostChange:Player:Less:1:Spell:black:All:NoSpecial
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jet_medallion.jpg
+End
