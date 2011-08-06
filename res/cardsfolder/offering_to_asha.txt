@@ -5,5 +5,5 @@ Text:no text
 A:SP$Counter | Cost$ 2 W U | Type$ Spell | UnlessCost$ 4 | SubAbility$SVar=DBGainLife | SpellDescription$ Counter target spell unless its controller pays 4. You gain 4 life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
 SVar:Rarity:Common
-SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/offering_to_asha.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/offering_to_asha.jpg
 End

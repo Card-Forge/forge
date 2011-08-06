@@ -5,5 +5,5 @@ Text:no text
 PT:2/2
 A:AB$Counter | Cost$ tapXType<1/Creature.Wizard> | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1.
 SVar:Rarity:Rare
-SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_wizard.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_wizard.jpg
 End
