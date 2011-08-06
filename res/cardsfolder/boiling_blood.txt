@@ -6,6 +6,6 @@ A:SP$Pump | Cost$ 2 R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each t
 K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_blood.txt
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_blood.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/92.jpg
 End
