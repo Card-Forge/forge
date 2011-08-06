@@ -1,3 +1,11 @@
+Wall of Reverence
+3 W
+Creature Spirit Wall
+At the beginning of your end step, you may gain life equal to the power of target creature you control.
+1/6
+Defender
+Flying
+
 Howl of the Night Pack
 6 G
 Sorcery

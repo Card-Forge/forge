@@ -33,6 +33,8 @@ public class EndOfTurn implements java.io.Serializable
         AllZone.GameAction.sacrifice(sacrifice.get(i));
     }
     
+    GameActionUtil.endOfTurn_Wall_Of_Reverence();
+    
     //GameActionUtil.removeExaltedEffects();
     GameActionUtil.removeAttackedBlockedThisTurn();
     

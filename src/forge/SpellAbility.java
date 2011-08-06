@@ -192,7 +192,7 @@ public abstract class SpellAbility {
     
     //begin - Input methods
     public Input getBeforePayMana() {
-        return beforePayMana;
+    	return beforePayMana;
     }
     
     public void setBeforePayMana(Input in) {

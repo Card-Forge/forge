@@ -241,7 +241,7 @@ public class CardUtil {
        
        tMC = tCL.toString() + " " + mc1 + " " + mc2;
        
-       System.out.println("TMC:" + tMC);
+       //System.out.println("TMC:" + tMC);
        return tMC;
     }
     
