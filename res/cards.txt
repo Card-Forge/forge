@@ -11191,7 +11191,7 @@ Defender
 Aether Membrane
 1 R R
 Creature Wall
-Reach
+(NOTE: "Whenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat." not implemented.)
 0/5
 Defender
 This creature can block as though it had flying.
@@ -12256,7 +12256,7 @@ Trample
 Giant Dustwasp
 3 G G
 Creature Insect
-no text
+(NOTE: "Suspend" not implemented.)
 3/3
 Flying
 
@@ -12355,7 +12355,7 @@ Flying
 Arashi, the Sky Asunder
 3 G G
 Legendary Creature Spirit
-no text
+(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel Ñ X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
 5/5
 
 Spitting Spider
