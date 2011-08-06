@@ -1,0 +1,11 @@
+Name:Soaring Hope
+ManaCost:4 W
+Types:Enchantment Aura
+Text:When Soaring Hope enters the battlefield, you gain 3 life.\r\n\r\nEnchanted creature has flying.
+K:etbGainLife:3
+K:Enchant creature
+K:enPump:+0/+0/Flying
+A:AB$ChangeZone|Cost$W|Origin$Battlefield|Destination$Library|LibraryPosition$0|SpellDescription$Put CARDNAME on top of its owner's library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soaring_hope.jpg
+End
