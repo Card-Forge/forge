@@ -6915,7 +6915,9 @@ public class GameActionUtil {
 	                       } else {
 	                          CardList CompLibCreature = new CardList(lib.getCards());
 	                          CompLibCreature = CompLibCreature.getType("Creature");
-	                          if(CompLibCreature.size() > 2) {
+	                          CardList compBattleCreature = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
+	                          compBattleCreature = compBattleCreature.getType("Creature");
+	                          if(CompLibCreature.size() > 2 || (compBattleCreature.size() == 0 && CompLibCreature.size() > 0) ) {
 	                              int max = libList.size();
 	                              int stop = 0;                 
 
@@ -6986,7 +6988,7 @@ public class GameActionUtil {
 	                       } else {
 	                          CardList CompLibCreature = new CardList(lib.getCards());
 	                          CompLibCreature = CompLibCreature.getType("Creature");
-	                          if(CompLibCreature.size() > 2) {
+	                          if(CompLibCreature.size() > 2 ) {
 	                              int max = libList.size();
 	                              int stop = 0;                 
 
