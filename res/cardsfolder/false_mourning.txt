@@ -2,7 +2,7 @@ Name:False Mourning
 ManaCost:G
 Types:Sorcery
 Text:Put target card from your graveyard on top of your library.
-K:spReturnTgt:1:Artifact,Creature,Enchantment,Land,Instant,Sorcery,Planeswalker:TopofLibrary
+K:spReturnTgt:1:Card:TopofLibrary
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_mourning.jpg
