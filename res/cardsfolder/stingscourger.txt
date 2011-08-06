@@ -1,9 +1,10 @@
 Name:Stingscourger
 ManaCost:1 R
 Types:Creature Goblin Warrior
-Text:When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
+Text:no text
 PT:2/2
-K:etbBounceTgt:Creature.YouDontCtrl:Hand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
 K:Echo:3 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stingscourger.jpg
