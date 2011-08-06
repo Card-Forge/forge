@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 K:stPumpAll:Creature.Wall:0/0/HIDDEN CARDNAME can attack as though it didn't have defender.:No Condition:Wall creatures can attack as though they didn't have defender.
 SVar:PlayMain1:TRUE
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_stones.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/38.jpg
