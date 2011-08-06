@@ -1,0 +1,10 @@
+Name:Arc Lightning
+ManaCost:2 R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ SVar=DBDamage2 | SpellDescription$ 4 R R - CARDNAME deals 3 damage divided as you choose among any number of target creatures and/or players.
+SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ SVar=DBDamage3
+SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Arc_Lightning.jpg
+End
