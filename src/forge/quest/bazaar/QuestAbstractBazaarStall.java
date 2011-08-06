@@ -30,6 +30,8 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
     }
 
     private void initUI() {
+        this.removeAll();
+        
         JLabel stallNameLabel;
         JLabel creditLabel;
 
@@ -82,10 +84,15 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
             constraints.gridy = 3;
             constraints.anchor = GridBagConstraints.NORTHWEST;
             constraints.fill = GridBagConstraints.BOTH;
-
+            constraints.insets = new Insets(10,5,10,5);
             JLabel noSaleLabel = new JLabel("This stall does not offer anything useful for purchase.");
             layout.setConstraints(noSaleLabel, constraints);
             this.add(noSaleLabel);
+            constraints.gridy++;
+            constraints.weighty = 1;
+            JLabel emptyLabel = new JLabel();
+            layout.setConstraints(emptyLabel, constraints);
+            this.add(emptyLabel);
         }
 
         else {
@@ -160,7 +167,6 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
     }
 
     public void updateItems() {
-        this.removeAll();
         this.initUI();
     }
 }
