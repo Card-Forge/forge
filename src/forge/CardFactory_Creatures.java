@@ -5546,10 +5546,11 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
-        else if(cardName.equals("Orcish Artillery") || cardName.equals("Goblin Artillery")
-                || cardName.equals("Orcish Cannoneers")) {
+        else if(cardName.equals("Orcish Artillery") || cardName.equals("Goblin Artillery") || 
+                cardName.equals("Orcish Cannoneers")) {
             final Ability_Tap ability = new Ability_Tap(card) {
                 private static final long serialVersionUID = -305363091630642003L;
                 
@@ -5606,8 +5607,9 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
         }//*************** END ************ END **************************
+*/
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Sparksmith")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -5659,6 +5661,8 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rathi Assassin")) {

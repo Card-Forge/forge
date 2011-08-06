@@ -4860,12 +4860,14 @@ Orcish Cannoneers
 Creature Orc Warrior
 no text
 1/3
+abDamageTgtCP T:2:Drawback$DamageYou/3:Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.:Orcish Cannoneers - deal damage to creature or player and you.
 
 Goblin Artillery
 1 R R
 Creature Goblin Warrior
 no text
 1/3
+abDamageTgtCP T:2:Drawback$DamageYou/3:Goblin Artillery deals 2 damage to target creature or player and 3 damage to you.:Goblin Artillery - deal damage to creature or player and you.
 
 Hunted Lammasu
 2 W W
@@ -15362,6 +15364,7 @@ Orcish Artillery
 Creature Orc Warrior
 no text
 1/3
+abDamageTgtCP T:2:Drawback$DamageYou/3:Orcish Artillery deals 2 damage to target creature or player and 3 damage to you.:Orcish Artillery - deal damage to creature or player and you.
 
 Frost Ogre
 3 R R
@@ -15702,6 +15705,8 @@ Sparksmith
 Creature Goblin
 no text
 1/1
+abDamageTgtC T:X:Drawback$DamageYou/X:Sparksmith deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.:Sparksmith - deal X damage to creature and X damage to you.
+SVar:X:Count$TypeOnBattlefield.Goblin
 
 Goretusk Firebeast
 5 R
