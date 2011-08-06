@@ -274,6 +274,9 @@ public class Ability_Cost {
 			first = false;
 		}
 		
+		if (first)
+			return "";
+		
 		cost.append(".").append("\n");
 		return cost.toString();
 	}
