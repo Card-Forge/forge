@@ -153,12 +153,10 @@ public class Spell_Permanent extends Spell {
         	if (turn.equals(source.getController()) && turn.getTurn() <= 3)
         		return false;
     	}
-    	
-    	CardList shimmerMyrs = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Shimmer Myr");
-    	boolean shimmering = source.isArtifact() && shimmerMyrs.size() > 0;
+    
     	
     	// Flash handled by super.canPlay
-        return super.canPlay() || shimmering;
+        return super.canPlay();
     }
     
     @Override
