@@ -356,7 +356,7 @@ public class PhaseUtil {
             return true;
     	}
     	
-    	if (AllZoneUtil.isCardInPlay("Necropotence", player) || AllZoneUtil.isCardInPlay("Yawgmoth's Bargain", player))
+    	if (AllZoneUtil.isCardInPlay("Necropotence", player) || AllZoneUtil.isCardInPlay("Yawgmoth's Bargain", player) || AllZoneUtil.isCardInPlay("Dragon Appeasement", player))
     		return true;
     	
     	return false;
