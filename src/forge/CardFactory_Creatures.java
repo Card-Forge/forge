@@ -18402,9 +18402,6 @@ public class CardFactory_Creatures {
         if(cardName.equals("Lord of the Undead")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 B") {
                 
-                /**
-				 * 
-				 */
 				private static final long serialVersionUID = -4287216165943846367L;
 
 				@Override
@@ -18455,6 +18452,43 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
 
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Grave Defiler")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    
+                    //get top 4 cards of the library
+                    CardList top = new CardList();
+                    Card[] library = libraryZone.getCards();
+                    for(int i = 0; i < 4 && i < library.length; i++)
+                        top.add(library[i]);
+                    
+                    //put top 4 cards on bottom of library
+                    for(int i = 0; i < top.size(); i++) {
+                        libraryZone.remove(top.get(i));
+                        libraryZone.add(top.get(i));
+                    }
+                    
+                    CardList zombies = top.getType("Zombie");
+                    
+                    for(int i = 0; i < zombies.size(); i++)
+                        AllZone.GameAction.moveTo(hand, zombies.get(i));
+                }//resolve()
+            };//SpellAbility
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -8899812490387286816L;
+
+				public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };
+            ability.setStackDescription("When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library.");
+            card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
         // Cards with Cycling abilities

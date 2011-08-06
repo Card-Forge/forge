@@ -344,6 +344,9 @@ public class CombatUtil {
                 && (defender.getType().contains("Demon") || defender.getKeyword().contains("Changeling"))) return false;
         if(attacker.getKeyword().contains("Protection from Goblins")
                 && (defender.getType().contains("Goblin") || defender.getKeyword().contains("Changeling"))) return false;
+        if(attacker.getKeyword().contains("Protection from Clerics")
+                && (defender.getType().contains("Cleric") || defender.getKeyword().contains("Changeling"))) return false;
+        
         
         int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
         int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);

@@ -1,3 +1,18 @@
+Grave Defiler
+3 B
+Creature Zombie
+When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library.
+2/1
+RegenerateMe:1 B
+
+Fallen Cleric
+4 B
+Creature Zombie Cleric
+no text
+4/2
+Protection from Clerics
+Morph:4 B
+
 Lord of the Undead
 1 B B
 Creature Zombie

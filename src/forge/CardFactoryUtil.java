@@ -2797,6 +2797,8 @@ public class CardFactoryUtil {
                         && (spell.getType().contains("Demon") || spell.getKeyword().contains("Changeling"))) return false;
                 if(kw.equals("Protection from Goblins")
                         && (spell.getType().contains("Goblin") || spell.getKeyword().contains("Changeling"))) return false;
+                if(kw.equals("Protection from Clerics")
+                        && (spell.getType().contains("Cleric") || spell.getKeyword().contains("Changeling"))) return false;
                 
                 if(kw.equals("Protection from enchantments") && spell.getType().contains("Enchantment")) return false;
                 
@@ -2845,6 +2847,8 @@ public class CardFactoryUtil {
                         && (card.getType().contains("Demon") || card.getKeyword().contains("Changeling"))) return true;
                 if(kw.equals("Protection from Goblins")
                         && (card.getType().contains("Goblin") || card.getKeyword().contains("Changeling"))) return true;
+                if(kw.equals("Protection from Clerics")
+                        && (card.getType().contains("Cleric") || card.getKeyword().contains("Changeling"))) return false;
                 
                 if(kw.equals("Protection from enchantments") && card.getType().contains("Enchantment") && 
                 		!card.getName().contains("Tattoo Ward")) return true;
@@ -2880,6 +2884,8 @@ public class CardFactoryUtil {
                     && (spell.getType().contains("Demon") || spell.getKeyword().contains("Changeling"))) return false;
             if(kw.equals("Protection from Goblins")
                     && (spell.getType().contains("Goblin") || spell.getKeyword().contains("Changeling"))) return false;
+            if(kw.equals("Protection from Clerics")
+                    && (spell.getType().contains("Cleric") || spell.getKeyword().contains("Changeling"))) return false;
             
             if(kw.equals("Protection from enchantments") && spell.getType().contains("Enchantment")) return false;
             
