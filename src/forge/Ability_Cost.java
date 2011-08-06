@@ -286,7 +286,7 @@ public class Ability_Cost {
 
 	public boolean isReusuableResource() {
 		return !(sacCost || exileCost || exileFromHandCost || tapXTypeCost || discardCost ||
-				returnCost || lifeCost);
+				returnCost || lifeCost) && isAbility;
 		// todo: add/sub counter? Maybe check if it's we're adding a positive counter, or removing a negative counter
 	}
 	
