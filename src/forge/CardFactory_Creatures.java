@@ -249,34 +249,6 @@ public class CardFactory_Creatures {
             a2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a2));
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Street Wraith")) {
-            final SpellAbility a1 = new Ability_Hand(card, "0") {
-                
-                private static final long serialVersionUID = -4960704261761785512L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.getController().subtractLife(2,card);
-                    AllZone.GameAction.discard(card, this);
-                    AllZone.GameAction.drawCard(card.getController());
-                    card.cycle();
-                };
-                
-
-            };//SpellAbility
-            card.addSpellAbility(a1);
-            a1.setDescription("Cycling - (Pay 2 life, Discard this card: Draw a card.)");
-            a1.setStackDescription(card + " Cycling: Draw a card");
-            
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Shinka Gatekeeper")) {
@@ -4320,9 +4292,6 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-            
-            //add cycling
-            card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2"));
         }//*************** END ************ END ***************************
         
 
@@ -20921,195 +20890,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription(cardName + " - rearrange top 3 cards of target player's library.");
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-        
-        // Cards with Cycling abilities
-        // -1 means keyword "Cycling" not found
-        if(shouldCycle(card) != -1) {
-            int n = shouldCycle(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
-            }
-        }//Cycling
-        
-        while(shouldTypeCycle(card) != -1) {
-            int n = shouldTypeCycle(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String type = k[1];
-                final String manacost = k[2];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_typecycle(card, manacost, type));
-            }
-        }//TypeCycling
-        
-        if(shouldTransmute(card) != -1) {
-            int n = shouldTransmute(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_transmute(card, manacost));
-            }
-        }//Transmute
-        
-        while(shouldSoulshift(card) != -1) {
-            int n = shouldSoulshift(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                card.addSpellAbility(CardFactoryUtil.soul_desc(card, manacost));
-                card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
-            }
-        }//Soulshift
-        
-        if(hasKeyword(card, "Echo") != -1) {
-            int n = hasKeyword(card, "Echo");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                //card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.setEchoCost(manacost);
-                
-                final Command intoPlay = new Command() {
-                    private static final long serialVersionUID = 8930023870127082001L;
-                    
-                    public void execute() {
-                        card.addIntrinsicKeyword("(Echo unpaid)");
-                    }
-                };
-                card.addComesIntoPlayCommand(intoPlay);
-                
-            }
-        }//echo
-        
-        if(hasKeyword(card,"HandSize") != -1) {
-            String toParse = card.getKeyword().get(hasKeyword(card,"HandSize"));
-            card.removeIntrinsicKeyword(toParse);
-           
-            String parts[] = toParse.split(" ");
-            final String Mode = parts[1];
-            final int Amount;
-            if(parts[2].equals("INF")) {
-               Amount = -1;
-            }
-            else {
-               Amount = Integer.parseInt(parts[2]);
-            }
-            final String Target = parts[3];
-           
-            final Command entersPlay,leavesPlay, controllerChanges;
-           
-            entersPlay = new Command() {
-               private static final long serialVersionUID = 98743547743456L;
                
-               public void execute() {
-                 card.setSVar("HSStamp","" + Input_Cleanup.GetHandSizeStamp());
-                  if(card.getController() == AllZone.HumanPlayer) {
-                     //System.out.println("Human played me! Mode(" + Mode + ") Amount(" + Amount + ") Target(" + Target + ")" );
-                     if(Target.equals("Self")) {
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                  }
-                  else
-                  {
-                     //System.out.println("Compy played me! Mode(" + Mode + ") Amount(" + Amount + ") Target(" + Target + ")" );
-                     if(Target.equals("Self")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                  }
-               }
-            };
-           
-            leavesPlay = new Command() {
-               private static final long serialVersionUID = -6843545358873L;
-               
-               public void execute() {
-                  if(card.getController() == AllZone.HumanPlayer) {
-                     if(Target.equals("Self")) {
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                  }
-                  else
-                  {
-                     if(Target.equals("Self")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                  }
-               }
-            };
-           
-            controllerChanges = new Command() {
-               private static final long serialVersionUID = 778987998465463L;
-               
-               public void execute() {
-                  Log.debug("HandSize", "Control changed: " + card.getController());
-                  if(card.getController().equals(AllZone.HumanPlayer)) {
-                     Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     
-                     Computer_Cleanup.sortHandSizeOperations();
-                  }
-                  else if(card.getController().equals(AllZone.ComputerPlayer)) {
-                     Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     
-                     Input_Cleanup.sortHandSizeOperations();
-                  }
-               }
-            };
-           
-            card.addComesIntoPlayCommand(entersPlay);
-            card.addLeavesPlayCommand(leavesPlay);
-            card.addChangeControllerCommand(controllerChanges);
-         } //HandSize
-        
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
         	int n = hasKeyword(card, "Level up");
@@ -21158,17 +20939,6 @@ public class CardFactory_Creatures {
                 
             }
         }//level up
-        
-        if (card.getManaCost().contains("X"))
-        {
-        	SpellAbility sa = card.getSpellAbility()[0];
-    		sa.setIsXCost(true);
-    		
-        	if (card.getManaCost().startsWith("X X"))
-        		sa.setXManaCost("2");
-        	else if (card.getManaCost().startsWith("X"))
-        		sa.setXManaCost("1");
-        }//X
         
         return card;
     }

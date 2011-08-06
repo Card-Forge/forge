@@ -11335,7 +11335,11 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(addMana);
         }//*************** END ************ END **************************
 
-        
+        return postFactoryKeywords(card);
+    }//getCard2
+    
+    public Card postFactoryKeywords(final Card card){
+    	// this function should handle any keywords that need to be added after a spell goes through the factory
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
@@ -11387,7 +11391,6 @@ public class CardFactory implements NewConstants {
                 String k[] = parse.split(":");
                 final String manacost = k[1];
                 
-                card.addSpellAbility(CardFactoryUtil.soul_desc(card, manacost));
                 card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
             }
         }//Soulshift
@@ -11535,12 +11538,7 @@ public class CardFactory implements NewConstants {
         	else if (card.getManaCost().startsWith("X"))
         		sa.setXManaCost("1");
         }//X
-
-        return postFactoryKeywords(card);
-    }//getCard2
-    
-    public Card postFactoryKeywords(Card card){
-    	// this function should handle any keywords that need to be added after a spell goes through the factory
+    	
 		card.addColor(card.getManaCost());
     	int cardnameSpot = hasKeyword(card, "CARDNAME is ");
     	if (cardnameSpot != -1){
@@ -11564,10 +11562,7 @@ public class CardFactory implements NewConstants {
                 String k[] = parse.split(":");
                 final int power = Integer.parseInt(k[1]);
                 
-
                 card.addComesIntoPlayCommand(CardFactoryUtil.fading(card, power));
-                // todo: come up with better way to add description
-                card.addSpellAbility(CardFactoryUtil.fading_desc(card, power));
             }
         }//Fading    	
     	
@@ -11580,8 +11575,6 @@ public class CardFactory implements NewConstants {
                 final int power = Integer.parseInt(k[1]);
                 
                 card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
-                // todo: come up with better way to add description
-                card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
             }
         }//Vanishing
         

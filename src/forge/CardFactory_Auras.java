@@ -2473,21 +2473,6 @@ class CardFactory_Auras {
             }// SpellAbility spell
         }// enControlCreature
         
-        // Cards with Cycling abilities
-        // -1 means keyword "Cycling" not found
-        if(shouldCycle(card) != -1) {
-            int n = shouldCycle(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
-            }
-        }//Cycling
-        
         return card;
     }
     

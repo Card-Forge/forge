@@ -2,6 +2,7 @@ Name:Ichor Slick
 ManaCost:2 B
 Types:Sorcery
 Text:no text
+K:Cycling:2
 K:Madness:3 B
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130683.jpg

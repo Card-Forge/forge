@@ -24,7 +24,7 @@ public class InputUtil
 					int count = 0;
 					for (SpellAbility s : sa)
 					{
-						if (s.canPlay() && (s instanceof Ability_Hand))
+						if (s.canPlay())
 							count++;
 					}
 					if (count > 0)

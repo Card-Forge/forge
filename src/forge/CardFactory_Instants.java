@@ -4862,62 +4862,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        // -1 means keyword "Cycling" not found
-        if(hasKeyword(card, "Cycling") != -1) {
-            int n = hasKeyword(card, "Cycling");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
-            }
-        }//Cycling
-
-        while(hasKeyword(card, "TypeCycling") != -1) {
-            int n = hasKeyword(card, "TypeCycling");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String type = k[1];
-                final String manacost = k[2];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_typecycle(card, manacost, type));
-            }
-        }//TypeCycling
-        
-        if(hasKeyword(card, "Transmute") != -1) {
-            int n = hasKeyword(card, "Transmute");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_transmute(card, manacost));
-            }
-        }//transmute
-          
-           
-        if (card.getManaCost().contains("X"))
-        {
-        	SpellAbility sa = card.getSpellAbility()[0];
-    		sa.setIsXCost(true);
-    		
-        	if (card.getManaCost().startsWith("X X"))
-        		sa.setXManaCost("2");
-        	else if (card.getManaCost().startsWith("X"))
-        		sa.setXManaCost("1");
-        }//X
-         
-        
-        
     	return card;
     }//getCard
 }

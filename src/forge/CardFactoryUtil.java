@@ -1552,32 +1552,37 @@ public class CardFactoryUtil {
         return ability;
     }
     
-    public static SpellAbility ability_cycle(final Card sourceCard, final String cycleCost) {
-        final SpellAbility cycle = new Ability_Hand(sourceCard, cycleCost) {
+    public static SpellAbility ability_cycle(final Card sourceCard, String cycleCost) {
+    	cycleCost += " Discard<1/CARDNAME>";
+    	Ability_Cost abCost = new Ability_Cost(cycleCost, sourceCard.getName(), true);
+    	
+        final SpellAbility cycle = new Ability_Activated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
             
             @Override
             public boolean canPlayAI() {
+            	//TODO: When should AI Cycle?
                 return false;
             }
             
             @Override
             public void resolve() {
-                AllZone.GameAction.discard(sourceCard, this);
                 AllZone.GameAction.drawCard(sourceCard.getController());
                 sourceCard.cycle();
             }
         };
-        cycle.setDescription("Cycling " + cycleCost + " (" + cycleCost + ", Discard this card: Draw a card.)");
+        cycle.setDescription("Cycling (" + abCost.toString() + " Draw a card.)");
         cycle.setStackDescription(sourceCard + " Cycling: Draw a card");
+        cycle.getRestrictions().setActivateZone(Constant.Zone.Hand);
         return cycle;
     }//ability_cycle()
     
-    public static SpellAbility ability_typecycle(final Card sourceCard, final String cycleCost, final String type) {
+    public static SpellAbility ability_typecycle(final Card sourceCard, String cycleCost, final String type) {
         String description;
-        final SpellAbility cycle = new Ability_Hand(sourceCard, cycleCost) {
-            
-
+    	cycleCost += " Discard<1/CARDNAME>";
+    	Ability_Cost abCost = new Ability_Cost(cycleCost, sourceCard.getName(), true);
+    	
+        final SpellAbility cycle = new Ability_Activated(sourceCard, abCost, null) {
             private static final long serialVersionUID = -4960704261761785512L;
             
             @Override
@@ -1589,8 +1594,7 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                if(super.canPlay()) return true;
-                else return false;
+            	return super.canPlay();
             }
             
             @Override
@@ -1634,17 +1638,22 @@ public class CardFactoryUtil {
         };
         if(type.contains("Basic")) description = "basic land";
         else description = type;
-        cycle.setDescription(description + "cycling " + cycleCost + " (" + cycleCost
-                + ", Discard this card:  Search your library for a " + description
+        cycle.setDescription(description + "cycling (" + abCost.toString() + " Search your library for a " + description
                 + " card, reveal it, and put it into your hand. Then shuffle your library.");
         cycle.setStackDescription(sourceCard + " " + description + "cycling: Search your library for a "
-                + description + " card.");
+                + description + " card.)");
+        
+        cycle.getRestrictions().setActivateZone(Constant.Zone.Hand);
+        
         return cycle;
     }//ability_typecycle()
     
     
-    public static SpellAbility ability_transmute(final Card sourceCard, final String transmuteCost) {
-        final SpellAbility transmute = new Ability_Hand(sourceCard, transmuteCost) {
+    public static SpellAbility ability_transmute(final Card sourceCard, String transmuteCost) {
+    	transmuteCost += " Discard<1/CARDNAME>";
+    	Ability_Cost abCost = new Ability_Cost(transmuteCost, sourceCard.getName(), true);
+
+        final SpellAbility transmute = new Ability_Activated(sourceCard, abCost, null)  {
             private static final long serialVersionUID = -4960704261761785512L;
             
             @Override
@@ -1654,13 +1663,8 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                if((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)
-                        && AllZone.Phase.getActivePlayer() == sourceCard.getController() && super.canPlay())
-                        || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
-                                && AllZone.Phase.getActivePlayer() == sourceCard.getController() && super.canPlay())) return true;
-                else return false;
+            	return super.canPlay() && Phase.canCastSorcery(sourceCard.getController());
             }
-            
             
             @Override
             public void resolve() {
@@ -1696,29 +1700,26 @@ public class CardFactoryUtil {
             }
             
         };
-        transmute.setDescription("Transmute "
-                + transmuteCost
-                + " ("
-                + transmuteCost
-                + ", Discard this card: Search your library for a card with the same converted mana cost as the discarded card, reveal that card, and put it into your hand. Then shuffle your library. Play this ability only any time you could play a sorcery.)");
+        transmute.setDescription("Transmute ("
+                + abCost.toString()
+                + "Search your library for a card with the same converted mana cost as the discarded card, reveal that card, and put it into your hand. Then shuffle your library. Play this ability only any time you could play a sorcery.)");
         transmute.setStackDescription(sourceCard
-                + " Transmute: Search your library for a card with the same converted mana cost.");
+                + " Transmute: Search your library for a card with the same converted mana cost.)");
+        transmute.getRestrictions().setActivateZone(Constant.Zone.Hand);
         return transmute;
     }//ability_transmute()
     
     public static SpellAbility ability_suspend(final Card sourceCard, final String suspendCost, final int suspendCounters) {
-        final SpellAbility suspend = new Ability_Hand(sourceCard, suspendCost) {
+    	// be careful with Suspend ability, it will not hit the stack
+        final SpellAbility suspend = new Ability_Static(sourceCard, suspendCost) {
 			private static final long serialVersionUID = 21625903128384507L;
 
 			@Override
 			public boolean canPlay(){
-				// if not in hand can't suspend
-				if (!AllZone.GameAction.isCardInZone(sourceCard, AllZone.getZone(Zone.Hand, sourceCard.getOwner())))
-					return false;
-				
 				if (sourceCard.isInstant())
-					return true;
-				return Phase.canCastSorcery(sourceCard.getOwner());
+					return super.canPlay();
+				
+				return Phase.canCastSorcery(sourceCard.getOwner()) && super.canPlay();
 			}
 			
 			@Override
@@ -1734,6 +1735,7 @@ public class CardFactoryUtil {
         };
         suspend.setDescription("Suspend " +suspendCounters + ": "+ suspendCost);
         suspend.setStackDescription(sourceCard.getName() + " suspending for " + suspendCounters + " turns.)");
+        suspend.getRestrictions().setActivateZone(Constant.Zone.Hand);
         return suspend;
     }//ability_suspend()
     
@@ -2235,26 +2237,7 @@ public class CardFactoryUtil {
             }
         };
         return fade;
-    } // vanishing
-    
-    public static SpellAbility fading_desc(final Card sourceCard, final int power) {
-        final SpellAbility desc = new Ability_Hand(sourceCard, "0") {
-            private static final long serialVersionUID = -4960704261761785512L;
-            
-            @Override
-            public boolean canPlay() {
-                return false;
-            }
-            
-            @Override
-            public void resolve() {}
-        };
-        // Be carefull changing this description cause it's crucial for ability to work (see GameActionUtil - vanishing for it)
-        desc.setDescription("(This permanent enters the battlefield with "
-                + power
-                + " fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)");
-        return desc;
-    }//vanish_desc()
+    } // fading
     
     public static Command vanishing(final Card sourceCard, final int Power) {
         Command age = new Command() {
@@ -2273,31 +2256,12 @@ public class CardFactoryUtil {
         return age;
     } // vanishing
     
-    public static SpellAbility vanish_desc(final Card sourceCard, final int power) {
-        final SpellAbility desc = new Ability_Hand(sourceCard, "0") {
-            private static final long serialVersionUID = -4960704261761785512L;
-            
-            @Override
-            public boolean canPlay() {
-                return false;
-            }
-            
-            @Override
-            public void resolve() {}
-        };
-        // Be carefull changing this description cause it's crucial for ability to work (see GameActionUtil - vanishing for it)
-        desc.setDescription("(This permanent enters the battlefield with "
-                + power
-                + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)");
-        return desc;
-    }//vanish_desc()
-    
     public static Command ability_Soulshift(final Card sourceCard, final String Manacost) {
         final Command Soulshift = new Command() {
             private static final long serialVersionUID = -4960704261761785512L;
             
             public void execute() {
-                AllZone.Stack.add(soul_desc(sourceCard, Manacost));
+                AllZone.Stack.add(soulshiftTrigger(sourceCard, Manacost));
             }
             
         };
@@ -2305,14 +2269,9 @@ public class CardFactoryUtil {
         return Soulshift;
     }//ability_Soulshift()
     
-    public static SpellAbility soul_desc(final Card sourceCard, final String Manacost) {
-        final SpellAbility desc = new Ability_Hand(sourceCard, "0") {
+    public static SpellAbility soulshiftTrigger(final Card sourceCard, final String Manacost) {
+        final SpellAbility desc = new Ability(sourceCard, "0") {
             private static final long serialVersionUID = -4960704261761785512L;
-            
-            @Override
-            public boolean canPlay() {
-                return false;
-            }
             
             @Override
             public void resolve() {
