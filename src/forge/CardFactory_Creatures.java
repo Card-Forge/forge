@@ -3548,132 +3548,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
 
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Nova Chaser") || cardName.equals("Supreme Exemplar")) {
-            final CommandReturn getCreature = new CommandReturn() {
-                public Object execute() {
-                    //get all creatures
-                    CardList list = new CardList();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    list.addAll(play.getCards());
-                    
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getType().contains("Elemental") || c.getKeyword().contains("Changeling");
-                        }
-                    });
-                    
-                    return list;
-                }
-            };//CommandReturn
-            
-            final SpellAbility abilityComes = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if(getTargetCard() == null || getTargetCard() == card) AllZone.GameAction.sacrifice(card);
-                    
-                    else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
-                        AllZone.GameAction.exile(getTargetCard());
-                    }
-                }//resolve()
-            };
-            
-            final Input inputComes = new Input() {
-                private static final long serialVersionUID = -6066115143834426784L;
-                
-                @Override
-                public void showMessage() {
-                    CardList choice = (CardList) getCreature.execute();
-                    
-                    stopSetNext(CardFactoryUtil.input_targetChampionSac(card, abilityComes, choice,
-                            "Select Elemental to remove from the game", false, false));
-                    ButtonUtil.disableAll();
-                }
-                
-            };
-            Command commandComes = new Command() {
-                private static final long serialVersionUID = -3498068247359658023L;
-                
-                public void execute() {
-                    CardList creature = (CardList) getCreature.execute();
-                    Player s = card.getController();
-                    if(creature.size() == 0) {
-                        AllZone.GameAction.sacrifice(card);
-                        return;
-                    } else if(s.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(inputComes);
-                    else //computer
-                    {
-                        Card target;
-                        //must target computer creature
-                        CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
-                        computer = computer.getType("Elemental");
-                        computer.remove(card);
-                        
-                        computer.shuffle();
-                        if(computer.size() != 0) {
-                            target = computer.get(0);
-                            abilityComes.setTargetCard(target);
-                            AllZone.Stack.add(abilityComes);
-                        }
-                        else
-                        	AllZone.GameAction.sacrifice(card);
-                    }//else
-                }//execute()
-            };//CommandComes
-            Command commandLeavesPlay = new Command() {
-                private static final long serialVersionUID = 4236503599017025393L;
-                
-                public void execute() {
-                    //System.out.println(abilityComes.getTargetCard().getName());
-                    Object o = abilityComes.getTargetCard();
-                    
-                    if(o == null || ((Card) o).isToken() || !AllZone.GameAction.isCardExiled((Card) o)) return;
-                    
-                    SpellAbility ability = new Ability(card, "0") {
-                        @Override
-                        public void resolve() {
-                            //copy card to reset card attributes like attack and defense
-                            Card c = abilityComes.getTargetCard();
-                            if(!c.isToken()) {
-                                c = AllZone.CardFactory.copyCard(c);
-                                c.setController(c.getOwner());
-                                
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-                                PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
-                                removed.remove(c);
-                                play.add(c);
-                                
-                            }
-                        }//resolve()
-                    };//SpellAbility
-                    
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - returning creature to play");
-                    ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }//execute()
-            };//Command
-            
-            card.addComesIntoPlayCommand(commandComes);
-            card.addLeavesPlayCommand(commandLeavesPlay);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(new Spell_Permanent(card) {
-                private static final long serialVersionUID = -62128538015338896L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    Object o = getCreature.execute();
-                    if(o == null) return false;
-                    
-                    CardList cl = (CardList) getCreature.execute();
-                    return (o != null) && cl.size() > 0 && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
-                }
-            });
-        }//*************** END ************ END **************************
-        
-        
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Lightning Crafter")) {
             final CommandReturn getCreature = new CommandReturn() {
@@ -3967,12 +3842,10 @@ public class CardFactory_Creatures {
             final CommandReturn getCreature = new CommandReturn() {
                 public Object execute() {
                     //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && CardFactoryUtil.canTarget(card, c);
+                            return CardFactoryUtil.canTarget(card, c);
                         }
                     });
                     
