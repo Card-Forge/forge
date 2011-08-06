@@ -16873,7 +16873,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.Phase.getActivePlayer().equals(card.getController())
+                    return super.canPlay() && AllZone.Phase.getActivePlayer().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
                             && !AllZone.GameAction.isCardInPlay(card);
                 }
@@ -16892,13 +16892,17 @@ public class CardFactory_Creatures {
             kicker.setAdditionalManaCost("B");
             kicker.setDescription("Kicker B");
             kicker.setStackDescription(card.getName() + " - Creature 2/2 (Kicked)");
+            
             card.addSpellAbility(kicker);
             
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
-                    card.setKicked(false);
+                	if (card.getController().equals(Constant.Player.Computer))
+                		setTargetPlayer(Constant.Player.Human);
+                	AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+
+                	card.setKicked(false);
                 }
             };
             
@@ -16910,7 +16914,8 @@ public class CardFactory_Creatures {
                         if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
                         else //computer
                         {
-                            ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+                            ability.setStackDescription("Gatekeeper of Malakir - targeting Human");
+                            AllZone.Stack.add(ability);
                         }//else
                     }
                 }//execute()

@@ -2899,7 +2899,7 @@ class CardFactory_Lands {
                 @Override
                 public void showMessage() {
                     CardList choice = new CardList();
-                    final String player = AllZone.Phase.getActivePlayer();
+                    final String player = card.getController();
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
                     choice.addAll(play.getCards());
 
