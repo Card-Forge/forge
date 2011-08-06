@@ -228,18 +228,18 @@ public class CardFactoryUtil {
     //Object[1] is the max number of times it can be used per turn
     //Object[1] has to be an Object like Integer and not just an int
     private static Object[][] AbilityLimits = {
-            {"Azimaet Drake", Integer.valueOf(1)}, {"Drake Hatchling", Integer.valueOf(1)},
-            {"Fire Drake", Integer.valueOf(1)}, {"Plated Rootwalla", Integer.valueOf(1)},
-            {"Rootwalla", Integer.valueOf(1)}, {"Spitting Drake", Integer.valueOf(1)},
-            {"Ghor-Clan Bloodscale", Integer.valueOf(1)}, {"Wild Aesthir", Integer.valueOf(1)},
+            {"Azimaet Drake", Integer.valueOf(1)},            {"Drake Hatchling", Integer.valueOf(1)},
+            {"Fire Drake", Integer.valueOf(1)},               {"Plated Rootwalla", Integer.valueOf(1)},
+            {"Rootwalla", Integer.valueOf(1)},                {"Spitting Drake", Integer.valueOf(1)},
+            {"Ghor-Clan Bloodscale", Integer.valueOf(1)},     {"Wild Aesthir", Integer.valueOf(1)},
             {"Viashino Slaughtermaster", Integer.valueOf(1)}, {"Twinblade Slasher", Integer.valueOf(1)},
-            {"Boreal Centaur", Integer.valueOf(1)}, {"Knight of the Skyward Eye", Integer.valueOf(1)},
-            {"Chronatog", Integer.valueOf(1)}, {"Putrid Leech", Integer.valueOf(1)},
+            {"Boreal Centaur", Integer.valueOf(1)},           {"Knight of the Skyward Eye", Integer.valueOf(1)},
+            {"Chronatog", Integer.valueOf(1)},                {"Putrid Leech", Integer.valueOf(1)},
+            {"Oracle of Mul Daya", Integer.valueOf(1)},       {"Basking Rootwalla", Integer.valueOf(1)},
 
-            {"Phyrexian Battleflies", Integer.valueOf(2)}, {"Pit Imp", Integer.valueOf(2)},
-            {"Roterothopter", Integer.valueOf(2)}, {"Vampire Bats", Integer.valueOf(2)},
-            {"Fire-Belly Changeling", Integer.valueOf(2)}, {"Azusa, Lost but Seeking", Integer.valueOf(2)},
-            {"Oracle of Mul Daya", Integer.valueOf(1)}}; 
+            {"Phyrexian Battleflies", Integer.valueOf(2)},    {"Pit Imp", Integer.valueOf(2)},
+            {"Roterothopter", Integer.valueOf(2)},            {"Vampire Bats", Integer.valueOf(2)},
+            {"Fire-Belly Changeling", Integer.valueOf(2)},    {"Azusa, Lost but Seeking", Integer.valueOf(2)}};
     
     public static boolean canUseAbility(Card card) {
         int found = -1;
