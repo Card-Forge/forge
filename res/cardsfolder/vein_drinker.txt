@@ -11,4 +11,5 @@ SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vein_drinker.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/91.jpg
 End
