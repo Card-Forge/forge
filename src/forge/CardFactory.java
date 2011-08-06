@@ -3382,12 +3382,19 @@ public class CardFactory implements NewConstants {
         
         ////////////////////////////////////////////////////////////////
         
-        if(card.getKeyword().contains("When CARDNAME comes into play, draw a card.")) {
+        if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.") || 
+        		card.getKeyword().contains("When CARDNAME enters the battlefield, draw two cards.")) {
             
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                	int drawCardsNum = 1;
+                	if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw two cards.")) {
+                		drawCardsNum = 2;
+                	}
+                	for (int i = 0; i < drawCardsNum; i++) {
+                        AllZone.GameAction.drawCard(card.getController());
+                	}//for loop
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
@@ -3395,7 +3402,16 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 1707519783018941582L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getController() + " draws a card.");
+                	StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName());
+                    sb.append(" - ");
+                    sb.append(card.getController());
+                    sb.append(" draws ");
+                    if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.")) {
+                    	sb.append("a card.");
+                    } else sb.append("two cards.");
+                	
+                    ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
             };

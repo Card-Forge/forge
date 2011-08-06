@@ -1,8 +1,10 @@
-Elvish Vanguard
-1 G
-Creature Elf
-Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
-1/1
+Flight of Fancy
+3 U
+Enchantment Aura
+Enchanted creature has flying.
+Enchant creature
+enPump:Flying
+When CARDNAME enters the battlefield, draw two cards.
 
 Arctic Wolves
 3 G G
@@ -10,7 +12,7 @@ Creature Wolf
 no text
 4/5
 Cumulative upkeep:2
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Carven Caryatid
 1 G G
@@ -18,21 +20,21 @@ Creature Spirit
 no text
 2/5
 Defender
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Council of Advisors
 2 U
 Creature Human Advisor
 no text
 1/1
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Elvish Visionary
 1 G
 Creature Elf Shaman
 no text
 1/1
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Eternity Snare
 5 U
@@ -40,7 +42,7 @@ Enchantment Aura
 Enchanted creature doesn't untap during its controller's untap step.
 Enchant creature
 enPumpCurse:This card doesn't untap during your untap step.
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Frog Tongue
 G
@@ -48,7 +50,7 @@ Enchantment Aura
 Enchanted creature has reach.
 Enchant creature
 enPump:Reach
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Jungle Barrier
 2 G U
@@ -56,21 +58,21 @@ Creature Plant Wall
 no text
 2/6
 Defender
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Kavu Climber
 3 G G
 Creature Kavu
 no text
 3/3
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Merchant of Secrets
 2 U
 Creature Human Wizard
 no text
 1/1
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Messenger Falcons
 2 GU W
@@ -78,21 +80,21 @@ Creature Bird
 no text
 2/2
 Flying
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Multani's Acolyte
 G G
 Creature Elf
 no text
 2/1
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 Echo:G G
 
 Prophetic Prism
 2
 Artifact
 no text
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 tap: add W
 tap: add B
 tap: add U
@@ -105,7 +107,7 @@ Enchantment Aura
 Enchanted creature gets +1/+1.
 Enchant creature
 enPump:+1/+1
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Shielding Plax
 2 GU
@@ -113,14 +115,14 @@ Enchantment Aura
 Enchanted creature can't be the target of spells or abilities your opponents control.
 Enchant creature
 enPump:This card can't be the target of spells or abilities your opponents control.
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Striped Bears
 3 G
 Creature Bear
 no text
 2/2
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Unquestioned Authority
 2 W
@@ -128,7 +130,7 @@ Enchantment Aura
 Enchanted creature has protection from creatures.
 Enchant creature
 enPump:Protection from creatures
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Wall of Blossoms
 1 G
@@ -136,7 +138,7 @@ Creature Wall
 no text
 0/4
 Defender
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Wall of Omens
 1 W
@@ -144,14 +146,20 @@ Creature Wall
 no text
 0/4
 Defender
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
 
 Wistful Selkie
 GU GU GU
 Creature Merfolk Wizard
 no text
 2/2
-When CARDNAME comes into play, draw a card.
+When CARDNAME enters the battlefield, draw a card.
+
+Elvish Vanguard
+1 G
+Creature Elf
+Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
+1/1
 
 Tribal Forcemage
 1 G
