@@ -7370,6 +7370,41 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Ephemeron")) {
+            
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public boolean canPlayAI() {
+                   return false;
+                }
+
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    
+                    card.untap();
+                    AllZone.getZone(card).remove(card);
+                    if(!card.isToken()) hand.add(card);
+                }//resolve()
+            };//SpellAbility
+            
+
+            Input runtime = new Input() {
+                private static final long serialVersionUID = -4312210760957471033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
+                    
+                }
+            };
+            ability.setStackDescription(card + " gets returned to owner's hand");
+            ability.setDescription("Discard a card: Return Ephemeron to owner's hand.");
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Flowstone Sculpture")) {
             
             final Ability ability1 = new Ability(card, "2") {
@@ -8343,8 +8378,13 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Bloodfire Colossus")) {
-            final Ability ability = new Ability(card, "R") {
-                
+        	
+        	Ability_Cost abCost = new Ability_Cost("R Sac<1/CARDNAME>", cardName, true);
+
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null){
+        		
+                private static final long serialVersionUID = 8283052965865884889L;
+
                 @Override
                 public void resolve() {
         			int damage = 6;
