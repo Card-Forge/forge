@@ -1,0 +1,10 @@
+Name:Splitting Headache
+ManaCost:3 B
+Types:Sorcery
+Text:no text
+A:SP$Discard|Cost$3 B|ValidTgts$Player|NumCards$2|Mode$TgtChoose|SpellDescription$Choose one Ñ Target player discards two cards; 
+A:SP$Discard|Cost$3 B|ValidTgts$Player|NumCards$1|Mode$RevealYouChoose|SpellDescription$or target player reveals his or her hand, you choose a card from it, then that player discards that card.
+K:Flashback:3 B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_fracture.jpg
+End
