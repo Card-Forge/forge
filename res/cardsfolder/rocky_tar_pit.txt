@@ -1,0 +1,9 @@
+Name:Rocky Tar Pit
+ManaCost:no cost
+Types:Land
+Text:no text
+K:Comes into play tapped.
+A:AB$Fetch|Cost$T Sac<1/CARDNAME>|Destination$Battlefield|FetchType$Swamp,Mountain|FetchNum$1|SpellDescription$Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rocky_tar_pit.jpg
+End
