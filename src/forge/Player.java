@@ -748,6 +748,12 @@ public abstract class Player extends MyObservable{
 
         list.toArray(c);
         library.setCards(c);
+
+        //Run triggers
+        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Player",this);
+        AllZone.TriggerHandler.runTrigger("Shuffled",runParams);
+
     }//shuffle
     ////////////////////////////////
     

@@ -96,6 +96,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_Sacrificed(mapParams,host);
 		}
+        else if(mode.equals("Shuffled"))
+        {
+            ret = new Trigger_Shuffled(mapParams,host);
+        }
 		else if(mode.equals("SpellAbilityCast"))
 		{
 			ret = new Trigger_SpellAbilityCast(mapParams,host);
