@@ -631,6 +631,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_Choose.createDrawbackChooseType(this);
 		}
 		
+		if(API.equals("CopyPermanent")){
+			if(isAb)
+				SA = AbilityFactory_Copy.createAbilityCopyPermanent(this);
+			else if(isSp)
+				SA = AbilityFactory_Copy.createSpellCopyPermanent(this);
+			else if(isDb)
+				SA = AbilityFactory_Copy.createDrawbackCopyPermanent(this);
+		}
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 
