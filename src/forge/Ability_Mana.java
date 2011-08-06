@@ -32,7 +32,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     
     private static boolean isTapAbility(String orig) {
         String cost = orig.split(":")[0];
-        cost = cost.replaceAll("tap", "T");
+        cost = cost.replaceAll("Tap", "tap").replaceAll("tap", "T");
         return (cost.contains("T"));
     }
     
@@ -82,7 +82,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         Mana = Mana.replaceAll(" ", "");
         
         String cost = parts[0];
-        cost = cost.replaceAll("tap", "T");
+        cost = cost.replaceAll("Tap", "tap").replaceAll("tap", "T");
         //cost = cost.replaceAll("T, ", "");
         setManaCost(cost.replaceAll("T", "").split(",")[0]);
         if(getManaCost().equals("")) setManaCost("0");

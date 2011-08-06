@@ -16795,7 +16795,7 @@ public class CardFactory implements NewConstants {
     	  card.addSpellAbility(spell);
       }
       //*************** END ************ END **************************
-      
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
