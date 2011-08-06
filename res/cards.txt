@@ -1,3 +1,11 @@
+Fracturing Gust
+2 GW GW GW
+Instant
+Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
+spDestroyAll:Artifact,Enchantment:Drawback$GainLifeYou/X.Times.2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fracturing_gust.jpg
+
 Abandoned Outpost
 no cost
 Land
@@ -11261,13 +11269,6 @@ no text
 abPump RG RG RG:+3/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foxfire_oak.jpg
-
-Fracturing Gust
-2 GW GW GW
-Instant
-Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fracturing_gust.jpg
 
 Frantic Purification
 2 W

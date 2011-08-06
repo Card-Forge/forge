@@ -4767,11 +4767,11 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Fracturing Gust")) {
+        /*else if(cardName.equals("Fracturing Gust")) {
            /*
             * Destroy all artifacts and enchantments.
             * You gain 2 life for each permanent destroyed this way.
-            */
+            *
             SpellAbility spell = new Spell(card) {
             private static final long serialVersionUID = 6940814538785932457L;
 
@@ -4819,6 +4819,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************
