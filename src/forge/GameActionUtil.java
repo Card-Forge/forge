@@ -10179,15 +10179,20 @@ public class GameActionUtil {
 	                        return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
 	                    }
 	                });
+					CardList Already_Added = new CardList();
 					for(int x = 0; x < Type.size(); x++) {
+						Already_Added.clear();
 						for(int x2 = 0; x2 < Type.get(x).getType().size(); x2++) {
-						if(crd.getType().contains(Type.get(x).getType().get(x2))) {
-						if(Type.get(x).getType().get(x2).equals("Creature") || Type.get(x).getType().get(x2).equals("Legendary") 
-								|| Type.get(x).getType().get(x2).equals("Artifact") ) {						
-						} else {
+							if(!Already_Added.contains(Type.get(x))) {
+						if(!Type.get(x).getType().get(x2).equals("Creature") && !Type.get(x).getType().get(x2).equals("Legendary") 
+								&& !Type.get(x).getType().get(x2).equals("Artifact") ) {	
+						if(crd.getType().contains(Type.get(x).getType().get(x2)) || crd.getKeyword().contains("Changeling")
+								 || Type.get(x).getKeyword().contains("Changeling")) {					
+						Already_Added.add(Type.get(x));
 						crd.addSemiPermanentAttackBoost(1);
 						crd.addSemiPermanentDefenseBoost(1);
 						gloriousAnthemList.add(crd);
+						}
 						}
 						}
 						}
