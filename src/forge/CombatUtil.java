@@ -38,9 +38,9 @@ public class CombatUtil {
 		
         if(blocker.getKeyword().contains("CARDNAME can't block.") || blocker.getKeyword().contains("CARDNAME can't attack or block.")) 
         	return false;
-		
+		/*
         if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
-        	return false;
+        	return false; */
         
         CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
         if (kulrath.size() > 0)
@@ -426,8 +426,9 @@ public class CombatUtil {
         	return false;
         }
         
+        /*
         if (c.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
-        	return false;
+        	return false; */
         
         if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
         	int limit = Integer.MAX_VALUE;

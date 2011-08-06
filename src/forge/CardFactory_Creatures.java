@@ -16354,7 +16354,7 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
        
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Gwafa Hazid, Profiteer")) {
             final Ability_Tap ability = new Ability_Tap(card, "W U") {
@@ -16421,6 +16421,7 @@ public class CardFactory_Creatures {
             });
 
         }//*************** END ************ END **************************
+        */
 
         
         //*************** START *********** START **************************

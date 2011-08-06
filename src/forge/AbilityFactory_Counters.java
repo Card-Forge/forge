@@ -373,7 +373,7 @@ public class AbilityFactory_Counters {
 			   abSub.resolve();
 			}
 			else
-				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, tgtCards.get(0), sa);
 		}
 	}
 
