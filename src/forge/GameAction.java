@@ -704,20 +704,10 @@ private Card getCurrentCard(int ID)
 
     if(library.size() != 0)
     {
-      
       Card c = library.get(0);
       library.remove(0);
       hand.add(c);
       
-      GameActionUtil.executeDrawCardTriggeredEffects(player);
-    }
-    if(library.size() != 0)
-    {
-     
-      Card c = library.get(0);
-      library.remove(0);
-      hand.add(c);
-     
       GameActionUtil.executeDrawCardTriggeredEffects(player);
     }
     //lose:

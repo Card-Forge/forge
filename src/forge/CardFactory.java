@@ -17578,6 +17578,53 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
 	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
 	    }//*************** END ************ END ************************** 
+	    
+	    
+	  //*************** START *********** START **************************
+	    if (cardName.equals("Identity Crisis"))
+	    {
+	      final SpellAbility spell = new Spell(card)
+	      {
+	      private static final long serialVersionUID = 42470566751344693L;
+
+	        public boolean canPlayAI()
+	        {
+	            String player = getTargetPlayer();
+	            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	            CardList libList = new CardList(lib.getCards());
+	            return libList.size() > 0;
+	        }
+
+	        public void resolve()
+	        {
+	             String player = getTargetPlayer();
+	             
+	             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+	             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	             PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+	             CardList handList = new CardList(hand.getCards());
+	             CardList graveList = new CardList(grave.getCards());
+	             
+	             int max = handList.size() ;
+	             for (int i=0;i<max;i++)
+	             {
+	                Card c = handList.get(i);
+	                hand.remove(c);
+	                exiled.add(c);
+	             }
+	             int grv = graveList.size() ;
+	             for (int i=0;i<grv;i++)
+	             {
+	                Card c = graveList.get(i);
+	                grave.remove(c);
+	                exiled.add(c);
+	             }
+	        }
+	      };//SpellAbility
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+	    }//*************** END ************ END **************************
 
 	        
     // Cards with Cycling abilities
