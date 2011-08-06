@@ -3209,6 +3209,7 @@ res/cardsfolder/minds_eye.txt -text svneol=native#text/plain
 res/cardsfolder/mindstab.txt -text svneol=native#text/plain
 res/cardsfolder/mindwarper.txt -text svneol=native#text/plain
 res/cardsfolder/mindwrack_liege.txt -text svneol=native#text/plain
+res/cardsfolder/mine_bearer.txt svneol=native#text/plain
 res/cardsfolder/minions_murmurs.txt svneol=native#text/plain
 res/cardsfolder/minister_of_impediments.txt -text svneol=native#text/plain
 res/cardsfolder/minotaur_explorer.txt -text svneol=native#text/plain
