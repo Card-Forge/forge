@@ -17931,6 +17931,46 @@ public class CardFactory_Creatures {
         	ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Arc-Slogger")) {
+        	/*
+        	 * R, Exile the top ten cards of your library: Arc-Slogger deals
+        	 * 2 damage to target creature or player.
+        	 */
+        	final SpellAbility ability = new Ability(card, "R") {
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+        			int life = AllZone.Human_Life.getLife();
+        			if(lib.size() > 10 && life <=2) {
+        				return true;
+        			}
+        			else{
+        				return false;
+        			}
+        		}
+        		@Override
+        		public void resolve() {
+        			int damage = 2;
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			int max = Math.min(lib.size(), 10);
+        			for(int i = 0; i < max; i++) {
+        				//remove the top card 10 times
+        				AllZone.GameAction.removeFromGame(lib.get(0));
+        			}
+        			if(getTargetCard() != null) {
+        				if(AllZone.GameAction.isCardInPlay(getTargetCard())
+        						&& CardFactoryUtil.canTarget(card, getTargetCard())) {
+        					AllZone.GameAction.addDamage(getTargetCard(), card, damage);
+        				}
+        			} else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+
+        		}   
+        	};
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
