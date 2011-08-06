@@ -19,9 +19,6 @@ import java.util.*;
 import java.util.List;
 
 
-//presumes AllZone.QuestDataOld is not null
-
-//AllZone.QuestDataOld should be set by Gui_QuestOptions
 public class QuestMainPanel extends QuestAbstractPanel {
     private forge.quest.data.QuestData questData;
 
@@ -303,6 +300,14 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 }
             });
             petPanel.add(this.petComboBox);
+
+            this.plantBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
+                    questData.getPetManager().usePlant=plantBox.isSelected();
+                }
+            });
+            petPanel.add(this.plantBox);
+
             matchPanel.add(petPanel);
             petPanel.setMaximumSize(petPanel.getPreferredSize());
             petPanel.setAlignmentX(LEFT_ALIGNMENT);
@@ -423,6 +428,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 petCheckBox.setSelected(true);
                 petComboBox.setSelectedItem(questData.getPetManager().getSelectedPet().getName());
             }
+
+
+            this.plantBox.setEnabled(questData.getPetManager().getPlant().getLevel() > 0);
+            this.plantBox.setSelected(questData.getPetManager().shouldPlantBeUsed());
+
         }
 
         if (nextQuestInWins() > 0) {
