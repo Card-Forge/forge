@@ -98,6 +98,17 @@ private void playerDamage(PlayerLife p)
     	   
     	   for(int j=0; j < CardFactoryUtil.hasNumberEnchantments(attackers.getCard(i), "Guilty Conscience"); j++)
         	   GameActionUtil.executeGuiltyConscienceEffects(attackers.getCard(i));
+    	   
+    	   
+    	   if(CardFactoryUtil.hasNumberEquipments(attackers.getCard(i), "Umezawa's Jitte") == 1 && attackers.get(i).getNetAttack() > 0)
+   			{
+	   			PlayerZone play = AllZone.getZone(attackers.getCard(i));
+	   			CardList clist = new CardList(play.getCards());
+	   			clist = clist.getName("Umezawa's Jitte");
+	   			Card jitte = clist.get(0);
+	   			jitte.addCounter(Counters.CHARGE, 2);
+   			}
+    	   
     	   /*
     	   
     	   //old stuff: gain life for each instance of lifelink

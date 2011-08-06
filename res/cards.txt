@@ -1,3 +1,40 @@
+Umezawa's Jitte
+2
+Artifact Equipment
+Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
+
+Vendillion Clique
+1 U U
+Legendary Creature Faerie Wizard
+When Vendilion Clique enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card.
+3/1
+Flying
+Flash
+
+Elvish Harbinger
+2 G
+Creature Elf Druid
+When Elvish Harbinger enters the battlefield, you may search your library for an Elf card, reveal it, then shuffle your library and put that card on top of it.
+1/2
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+
+Merrow Harbinger
+3 U
+Creature Merfolk Wizard
+When Merrow Harbinger enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
+2/3
+Islandwalk
+
+Boggart Harbinger
+2 B
+Creature Goblin Shaman
+When Boggart Harbinger enters the battlefield, you may search your library for a Goblin card, reveal it, then shuffle your library and put that card on top of it.
+2/1
+
 Staff of Domination
 3
 Artifact
@@ -101,8 +138,9 @@ This creature can't attack unless defending player controls an Island
 Goblin Chieftain
 1 R R
 Creature Goblin
-Haste Other Goblin creatures you control get +1/+1 and have haste.
+Other Goblin creatures you control get +1/+1 and have haste.
 2/2
+Haste
 
 Dwarven Pony
 R

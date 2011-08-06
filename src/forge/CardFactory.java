@@ -7619,8 +7619,12 @@ public class CardFactory implements NewConstants {
 
           //check for no cards in hand on resolve
           PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetPlayer());
+          CardList fullHand = new CardList(hand.getCards());
           Card[] handChoices = removeLand(hand.getCards());
 
+          if (fullHand.size() > 0 && card.getController().equals(Constant.Player.Human))
+        	  AllZone.Display.getChoice("Revealing hand", fullHand.toArray());
+        	  
           if(handChoices.length == 0)
             return;
 
@@ -12951,6 +12955,7 @@ public class CardFactory implements NewConstants {
           //human chooses
           if(card.getController().equals(Constant.Player.Human))
           {
+        	AllZone.Display.getChoice("Revealing hand", cards.toArray());
             choice = (Card) AllZone.Display.getChoice("Choose", nonCreatureCards.toArray());
           }
           else//computer chooses
@@ -13012,7 +13017,7 @@ public class CardFactory implements NewConstants {
           {
         	  if(cards.get(i).getType().contains("Creature"))
         	  {
-        		  System.out.println("ostracize: " + cards.get(i).getType());
+        		  //System.out.println("ostracize: " + cards.get(i).getType());
         		  creatureCards.add(cards.get(i));
         	  }
         		 
@@ -13024,6 +13029,7 @@ public class CardFactory implements NewConstants {
           //human chooses
           if(card.getController().equals(Constant.Player.Human))
           {
+        	AllZone.Display.getChoice("Revealing hand", cards.toArray());
             choice = (Card) AllZone.Display.getChoice("Choose", creatureCards.toArray());
           }
           else//computer chooses

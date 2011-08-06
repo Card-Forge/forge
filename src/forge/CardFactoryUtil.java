@@ -1881,6 +1881,26 @@ public class CardFactoryUtil
 	  return list.size();
 	  
   }
+  
+  //returns the number of equipments named "e" card c is equipped by
+  public static int hasNumberEquipments(Card c, String e)
+  {
+	  if (!c.isEquipped())
+		  return 0;
+	  
+	  final String equipmentName = e;
+	  CardList list = new CardList(c.getEquippedBy().toArray());
+	  list = list.filter(new CardListFilter()
+	  {
+		public boolean addCard(Card c) {
+			return c.getName().equals(equipmentName);
+		}
+		  
+	  });
+	  
+	  return list.size();
+	  
+  }
   /*public static CardList getValuableCreatures() 
   {
 	  

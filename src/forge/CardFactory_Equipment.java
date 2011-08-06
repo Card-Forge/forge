@@ -1347,14 +1347,15 @@ class CardFactory_Equipment {
 	      
 	       Command onEquip = new Command()
 	       {   
-	         private static final long serialVersionUID = 1L;
 
-	         public void execute()
+			private static final long serialVersionUID = -4784079305541955698L;
+
+			public void execute()
 	           {
 	            if (card.isEquipping())
 	             {
 	               Card crd=card.getEquipping().get(0);
-	               untapboost.setDescription("3, Untap:"+crd+" gets +2/+2 until end of turn");
+	               untapboost.setDescription("3, Untap: " +crd+" gets +2/+2 until end of turn");
 	                untapboost.setStackDescription(crd+ " - +2/+2 until EOT");
 	               
 	               crd.addSpellAbility(untapboost);
@@ -1621,6 +1622,265 @@ class CardFactory_Equipment {
 	       
 	       card.addEquipCommand(onEquip);
 	       card.addUnEquipCommand(onUnEquip);
+
+	    } //*************** END ************ END **************************
+	    
+	  //*************** START *********** START **************************
+	    else if (cardName.equals("Umezawa's Jitte"))
+	    {
+	       final Ability equip = new Ability(card, "2")
+	       {
+	          public void resolve()
+	          {
+	             if (AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+	             {
+	                if (card.isEquipping())
+	                {
+	                   Card crd = card.getEquipping().get(0);
+	                   if (crd.equals(getTargetCard()) )
+	                      return;
+	                   
+	                   card.unEquipCard(crd);
+	                }   
+	                card.equipCard(getTargetCard());
+	             }
+	          }
+	          
+	          public boolean canPlay()
+	          {
+	             return AllZone.getZone(card).is(Constant.Zone.Play) &&           
+	                      AllZone.Phase.getActivePlayer().equals(card.getController()) &&
+	                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2") );
+	          }
+	          
+	          public boolean canPlayAI()
+	            {
+	              return getCreature().size() != 0 && !card.isEquipping();
+	            }
+	         
+	          public void chooseTargetAI()
+	            {
+	              Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+	              setTargetCard(target);
+	            }
+	            CardList getCreature()
+	            {
+	              CardList list = new CardList(AllZone.Computer_Play.getCards());
+	              list = list.filter(new CardListFilter()
+	              {
+	                public boolean addCard(Card c)
+	                {
+	                  return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c)) && CardFactoryUtil.canTarget(card, c) &&
+	                         (! c.getKeyword().contains("Defender"));
+	                }
+	              });
+	              // list.remove(card);      // if mana-only cost, allow self-target
+	              return list;
+	            }//getCreature()
+	          
+	       };//equip ability
+	       
+	       
+	       Input runtime = new Input()
+	       {
+
+			    private static final long serialVersionUID = 3087795844819115833L;
+
+				public void showMessage()
+	             {
+	               //get all creatures you control
+	               CardList list = new CardList();
+	               list.addAll(AllZone.Human_Play.getCards());
+	               list = list.getType("Creature");
+	              
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	             }
+	        };//Input
+	        
+	       
+	       final Ability gainLife = new Ability(card, "0")
+	        {
+				public void resolve() {
+					card.subtractCounter(Counters.CHARGE, 1);
+					String player = card.getController();
+					PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+		        	life.addLife(2);
+				}	
+				public boolean canPlay()
+				{
+				    SpellAbility sa;
+	 	    	    for (int i=0; i<AllZone.Stack.size(); i++)
+	 	    	    {
+	 	    	       sa = AllZone.Stack.peek(i);
+	 	    	       if (sa.getSourceCard().equals(card))
+	 	    	             return false;
+	 	    	    }
+		 	    	  
+					return card.getCounters(Counters.CHARGE) > 0;
+				}
+				
+				public boolean canPlayAI()
+				{
+					return AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() <= 4;
+				}
+				
+	        };
+	        
+	        gainLife.setDescription("Remove a charge counter from Umezawa's Jitte: You gain 2 life.");
+	        gainLife.setStackDescription(cardName + " - You gain 2 life.");
+	      
+	        final Ability negBoost = new Ability(card, "0")
+	        {
+	        	public void resolve() {
+	        		
+	        		card.subtractCounter(Counters.CHARGE, 1);
+	        		final Card[] target = new Card[1];
+	                final Command untilEOT = new Command()
+	                {
+	    				private static final long serialVersionUID = -1615047325868708734L;
+
+	    			public void execute()
+	                  {
+	                    if(AllZone.GameAction.isCardInPlay(target[0]) )
+	                    {
+	                      target[0].addTempAttackBoost(1);
+	                      target[0].addTempDefenseBoost(1);
+	                    }
+	                  }
+	                };
+
+	                target[0] = getTargetCard();
+	                if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
+	                {
+	                  target[0].addTempAttackBoost(-1);
+	                  target[0].addTempDefenseBoost(-1);
+
+	                  AllZone.EndOfTurn.addUntil(untilEOT);
+	                }
+	        	}
+	        	public boolean canPlay()
+				{
+	        		  SpellAbility sa;
+	     	    	  for (int i=0; i<AllZone.Stack.size(); i++)
+	     	    	  {
+	     	    	       sa = AllZone.Stack.peek(i);
+	     	    	       if (sa.getSourceCard().equals(card))
+	     	    	             return false;
+	     	    	  }
+	        		
+					 return card.getCounters(Counters.CHARGE) > 0;
+				}
+	        	public boolean canPlayAI()
+	            {
+	        	  if (gainLife.canPlayAI())
+	        		  return false;
+	        	  
+	              CardList c = CardFactoryUtil.AI_getHumanCreature(1, card, true);
+	              CardListUtil.sortAttack(c);
+	              CardListUtil.sortFlying(c);
+
+	              if(c.isEmpty())
+	                return false;
+	              else
+	              {
+	                setTargetCard(c.get(0));
+	                return true;
+	              }
+	            }//canPlayAI()
+	        };
+	        Input target = new Input()
+	        {
+				private static final long serialVersionUID = -5404464532726469761L;
+				public void showMessage()
+		          {
+		            AllZone.Display.showMessage("Select target creature for " +card.getName());
+		            ButtonUtil.enableOnlyCancel();
+		          }
+		          public void selectButtonCancel() {stop();}
+		          public void selectCard(Card card, PlayerZone zone)
+		          {
+		            if(!CardFactoryUtil.canTarget(negBoost, card)){
+		            	  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+		            }	
+		            else if(card.isCreature() && zone.is(Constant.Zone.Play))
+		            {
+		              negBoost.setTargetCard(card);
+		              AllZone.Stack.add(negBoost);
+		              stop();
+		            }
+		          }
+	        };//Input
+	        negBoost.setDescription("Remove a charge counter from Umezawa's Jitte: Target creature gets -1/-1 until end of turn");
+	        negBoost.setBeforePayMana(target);
+	        
+	        
+	        final Ability boost = new Ability(card, "0")
+	        {
+				public void resolve() {
+					card.subtractCounter(Counters.CHARGE, 1);
+					final Card[] target = new Card[1];
+			          final Command untilEOT = new Command()
+			          {
+						private static final long serialVersionUID = 2751279830522020186L;
+
+						public void execute()
+			            {
+			              if(AllZone.GameAction.isCardInPlay(target[0]))
+			              {
+			                target[0].addTempAttackBoost(-2);
+			                target[0].addTempDefenseBoost(-2);
+			              }
+			            }
+			          };
+
+			          target[0] = card.getEquipping().get(0);
+			          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
+			          {
+			            target[0].addTempAttackBoost(2);
+			            target[0].addTempDefenseBoost(2);
+
+			            AllZone.EndOfTurn.addUntil(untilEOT);
+			          }
+				}
+				public boolean canPlay()
+				{
+					  SpellAbility sa;
+		 	    	  for (int i=0; i<AllZone.Stack.size(); i++)
+		 	    	  {
+		 	    	       sa = AllZone.Stack.peek(i);
+		 	    	       if (sa.getSourceCard().equals(card))
+		 	    	             return false;
+		 	    	  }
+		 	    	  
+					  return card.isEquipping() && card.getCounters(Counters.CHARGE) > 0;
+				}
+				
+				public boolean canPlayAI()
+				{
+		 	    	  if (gainLife.canPlayAI() || negBoost.canPlayAI())
+		 	    		  return false;
+		 	    	  
+		 	    	  if (card.isEquipping()) {
+		 	    		  Card c = card.getEquipping().get(0);
+		 	    		  if (CardFactoryUtil.AI_doesCreatureAttack(c))
+		 	    			  return true;
+		 	    		  
+		 	    	  }
+		 	    	  return false;
+				}
+	        };
+	        
+	        boost.setDescription("Remove a charge counter from Umezawa's Jitte: Equipped creature gets +2/+2 until end of turn.");
+	        boost.setStackDescription(cardName + " - Equipped creature gets +2/+2 untin end of turn.");
+	        
+	       
+	       equip.setBeforePayMana(runtime);
+	       equip.setDescription("Equip: 2");
+	       card.addSpellAbility(equip);
+	       card.addSpellAbility(boost);
+	       card.addSpellAbility(negBoost);
+	       card.addSpellAbility(gainLife);
+	       
 
 	    } //*************** END ************ END **************************
 

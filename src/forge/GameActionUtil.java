@@ -1799,7 +1799,15 @@ public class GameActionUtil
 			playerCombatDamage_Rootwater_Thief(c);
 		else if (c.getName().equals("Treva, the Renewer"))
 			playerCombatDamage_Treva(c);
-
+		/*
+		if(CardFactoryUtil.hasNumberEquipments(c, "Umezawa's Jitte") == 1)
+		{
+			PlayerZone play = AllZone.getZone(c);
+			CardList list = new CardList(play.getCards());
+			list = list.getName("Umezawa's Jitte");
+			Card jitte = list.get(0);
+		}
+		*/
 
 		if (c.getNetAttack() > 0)
 			c.setDealtCombatDmgToOppThisTurn(true);
