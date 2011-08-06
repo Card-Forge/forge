@@ -14035,7 +14035,7 @@ Flying
 Arashi, the Sky Asunder
 3 G G
 Legendary Creature Spirit
-(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel � X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
 5/5
 
 Spitting Spider
@@ -14371,7 +14371,7 @@ When Kemuri-Onna comes into play, target player discards a card. (NOTE: "Wheneve
 Infernal Kirin
 2 B B
 Legendary Creature Kirin Spirit
-(NOTE: "Whenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost." not implemented.)
+Whenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost.
 3/3
 Flying
 
