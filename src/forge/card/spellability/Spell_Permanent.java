@@ -187,12 +187,12 @@ public class Spell_Permanent extends Spell {
     	
         //check on legendary
         if(card.getType().contains("Legendary")) {
-        	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+        	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
             if (list.containsName(card.getName()))
             	return false;
         }
         if(card.getType().contains("Planeswalker")) {
-        	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+        	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
         	list = list.getType("Planeswalker");
         	
         	for (int i=0;i<list.size();i++)
@@ -206,7 +206,7 @@ public class Spell_Permanent extends Spell {
         	}
         }
         if(card.getType().contains("World")) {
-        	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+        	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
         	list = list.getType("World");
         	if(list.size() > 0) return false;
         }
