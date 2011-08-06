@@ -1,8 +1,8 @@
 Name:Hoodwink
 ManaCost:1 U
 Types:Instant
-Text:Return target artifact, enchantment, or land to its owner's hand.
-K:spBounceTgt:Artifact,Enchantment,Land:Hand
+Text:no text
+A:SP$Bounce|Cost$1 U|ValidTgts$Artifact,Enchantment,Land|TgtPrompt$Select target artifact, enchantment, or land|Destination$Hand|SpellDescription$Return target artifact, enchantment, or land to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoodwink.jpg
 End
