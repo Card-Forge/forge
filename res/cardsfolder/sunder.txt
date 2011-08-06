@@ -1,6 +1,6 @@
 Name:Sunder
 ManaCost:3 U U
-Types:Sorcery
+Types:Instant
 Text:Return all lands to their owners' hands.
 K:spBounceAll:Land:Hand
 SVar:Rarity:Rare

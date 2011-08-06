@@ -1,6 +1,6 @@
 Name:Scorched Ruins
 Types:Land
-Text:If CARDNAME would enter the battlefield, two untapped Lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+Text:If CARDNAME would enter the battlefield, sacrifice two untapped lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 K:Tap: add 4
 SVar:RemAIDeck:True
 SVar:Rarity:Common
