@@ -1363,7 +1363,11 @@ public class CardFactory_Sorceries {
 		   					}
 						} else if(c.isPermanent() == true && c.isAura() == false) {
 							c.removeIntrinsicKeyword("Flash"); // Stops the player from re-casting the flash spell.
-							PlayCreature.setStackDescription(c.getName() + " - Copied from Mind's Desire");
+							
+							StringBuilder sb = new StringBuilder();
+							sb.append(c.getName()).append(" - Copied from Mind's Desire");
+							PlayCreature.setStackDescription(sb.toString());
+							
 		                	Card [] ReAttach = new Card[Attached.length]; 
 		                	ReAttach[0] = c;
 		                	int ReAttach_Count = 0;
@@ -1937,7 +1941,10 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             
             spell.setBeforePayMana(new Input_PayManaCost(spell));
-            spell.setStackDescription(card.getName() + " - targeting opponent");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - targeting opponent");
+            spell.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         
@@ -3005,7 +3012,10 @@ public class CardFactory_Sorceries {
                 }
             };
             spell.setDescription("Target player draws two cards.");
-            spell.setStackDescription(card.getName() + " - " + card.getController() + " draws two cards.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - ").append(card.getController()).append(" draws two cards.");
+            spell.setStackDescription(sb.toString());
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
@@ -4083,7 +4093,10 @@ public class CardFactory_Sorceries {
             ability2.setFlashBackAbility(true);
             card.setUnearth(true);
             ability2.setDescription("2 R R R: Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.");
-            ability2.setStackDescription(card.getName() + " returns from the graveyard to hand");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" returns from the graveyard to hand");
+            ability2.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
 
@@ -4285,8 +4298,11 @@ public class CardFactory_Sorceries {
             };
             
             spell.setDescription("Put a token onto the battlefield that's a copy of target creature.");
-            spell.setStackDescription(card.getName() + " - " + card.getController()
-                    + " puts a token onto the battlefield that's a copy of target creature.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - ").append(card.getController());
+            sb.append(" puts a token onto the battlefield that's a copy of target creature.");
+            spell.setStackDescription(sb.toString());
             
             SpellAbility kicker = new Spell(card) {
                 private static final long serialVersionUID = 13762512058673590L;
@@ -4354,8 +4370,11 @@ public class CardFactory_Sorceries {
             kicker.setManaCost("7 U U");
             kicker.setAdditionalManaCost("5");
             kicker.setDescription("Kicker 5: If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.");
-            kicker.setStackDescription(card.getName() + " - " + card.getController()
-                    + " puts five tokens onto the battlefield that's a copy of target creature.");
+            
+            StringBuilder sbKick = new StringBuilder();
+            sbKick.append(card.getName()).append(" - ").append(card.getController());
+            sbKick.append(" puts five tokens onto the battlefield that's a copy of target creature.");
+            kicker.setStackDescription(sbKick.toString());
             kicker.setBeforePayMana(CardFactoryUtil.input_targetCreature(kicker));
             
             card.clearSpellAbility();
@@ -4380,8 +4399,11 @@ public class CardFactory_Sorceries {
             };
             
             spell.setDescription("Put six 1/1 white Kor Soldier creature tokens onto the battlefield.");
-            spell.setStackDescription(card.getName() + " - " + card.getController()
-                    + " puts six 1/1 white Kor Soldier creature tokens onto the battlefield.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - ").append(card.getController());
+            sb.append(" puts six 1/1 white Kor Soldier creature tokens onto the battlefield.");
+            spell.setStackDescription(sb.toString());
             
             SpellAbility kicker = new Spell(card) {
                 private static final long serialVersionUID = 1376255732058673590L;
@@ -4399,8 +4421,11 @@ public class CardFactory_Sorceries {
             kicker.setManaCost("8 W W W");
             kicker.setAdditionalManaCost("6");
             kicker.setDescription("Kicker 6: If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.");
-            kicker.setStackDescription(card.getName() + " - " + card.getController()
-                    + " puts twelve 1/1 white Kor Soldier creature tokens onto the battlefield.");
+            
+            StringBuilder sbkick = new StringBuilder();
+            sbkick.append(card.getName()).append(" - ").append(card.getController());
+            sbkick.append(" puts twelve 1/1 white Kor Soldier creature tokens onto the battlefield.");
+            kicker.setStackDescription(sbkick.toString());
             
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -5162,7 +5187,9 @@ public class CardFactory_Sorceries {
   			}
       	  };
       	  spell.setDescription("Each player draws X cards.");
-      	  spell.setStackDescription(card + " - Each player draws X cards.");
+      	  StringBuilder sb = new StringBuilder();
+      	  sb.append(card).append(" - Each player draws X cards.");
+      	  spell.setStackDescription(sb.toString());
       	  
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -5223,8 +5250,13 @@ public class CardFactory_Sorceries {
   			    return humanFliers.size() > (compFliers.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
   			}
       	  };
-      	  spell.setDescription(cardName + " deals X damage to each creature with flying and each player.");
-      	  spell.setStackDescription(card + " - deals X damage to each creature with flying and each player.");
+      	  StringBuilder sbDesc = new StringBuilder();
+      	  sbDesc.append(cardName).append(" deals X damage to each creature with flying and each player.");
+      	  spell.setDescription(sbDesc.toString());
+      	  
+      	  StringBuilder sbStack = new StringBuilder();
+      	  sbStack.append(card).append(" - deals X damage to each creature with flying and each player.");
+      	  spell.setStackDescription(sbStack.toString());
       	  
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -5292,8 +5324,15 @@ public class CardFactory_Sorceries {
   			    return human.size() > (comp.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
   			}
       	  };
-      	  spell.setDescription(cardName + " deals X damage to each creature without "+ keyword[0]+" and each player.");
-      	  spell.setStackDescription(card + " - deals X damage to each creature without " +keyword[0] +" and each player.");
+      	  StringBuilder sbDesc = new StringBuilder();
+      	  sbDesc.append(cardName).append(" deals X damage to each creature without ");
+      	  sbDesc.append(keyword[0]).append(" and each player.");
+      	  spell.setDescription(sbDesc.toString());
+      	  
+      	  StringBuilder sbStack = new StringBuilder();
+      	  sbStack.append(card).append(" - deals X damage to each creature without ");
+      	  sbStack.append(keyword[0]).append(" and each player.");
+      	  spell.setStackDescription(sbStack.toString());
       	  
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -5471,8 +5510,13 @@ public class CardFactory_Sorceries {
   			    return humanAll.size() > (compAll.size() + 2);
   			}
       	  };
-      	  spell.setDescription(cardName + " deals X damage to each creature.");
-      	  spell.setStackDescription(cardName + " - deals X damage to each creature.");
+      	  StringBuilder sbDesc = new StringBuilder();
+      	  sbDesc.append(cardName).append(" deals X damage to each creature.");
+      	  spell.setDescription(sbDesc.toString());
+      	  
+      	  StringBuilder sbStack = new StringBuilder();
+      	  sbStack.append(cardName).append(" - deals X damage to each creature.");
+      	  spell.setStackDescription(sbStack.toString());
       	  
       	  card.clearSpellAbility();
       	  card.addSpellAbility(spell);
@@ -5740,8 +5784,11 @@ public class CardFactory_Sorceries {
                     return false;
                 }
             };
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" adds W U B R G to your mana pool");
+            spell.setStackDescription(sb.toString());
            
-            spell.setStackDescription(cardName + " adds W U B R G to your mana pool");
             card.clearSpellAbility();
             card.addSpellAbility(spell);
            
@@ -6020,7 +6067,10 @@ public class CardFactory_Sorceries {
         		}
         	};//SpellAbility
         	
-        	spell.setStackDescription(card.getName() + " - Each player's life total becomes the lowest life total among all players..");
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card.getName()).append(" - Each player's life total becomes the lowest life total among all players.");
+        	spell.setStackDescription(sb.toString());
+        	
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -6155,7 +6205,10 @@ public class CardFactory_Sorceries {
         		}
         	};
         	
-        	spell.setStackDescription(cardName+" - each player draws 3 cards, then discards 3 cards at random.");
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - each player draws 3 cards, then discards 3 cards at random.");
+        	spell.setStackDescription(sb.toString());
+        	
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -6182,7 +6235,11 @@ public class CardFactory_Sorceries {
         			}
         		}
         	};
-        	spell.setStackDescription(cardName+" - " + card.getController() + " puts one or three 0/1 Eldrazi Spawn creature tokens onto the battlefield.");
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - ").append(card.getController());
+        	sb.append(" puts one or three 0/1 Eldrazi Spawn creature tokens onto the battlefield.");
+        	spell.setStackDescription(sb.toString());
+        	
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -6496,7 +6553,12 @@ public class CardFactory_Sorceries {
         			return false;
         		}
         	};//spell
-        	spell.setStackDescription(cardName+" - Rearrange the top 3 cards in your library in any order.  You may shuffle you library.  Draw a card.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Rearrange the top 3 cards in your library in any order. ");
+        	sb.append("You may shuffle you library. Draw a card.");
+        	spell.setStackDescription(sb.toString());
+        	
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -6523,7 +6585,11 @@ public class CardFactory_Sorceries {
         			return false;
         		}
         	};//spell
-        	spell.setStackDescription(cardName+" - Rearrange the top 5 cards in your library in any order.  You may shuffle you library.  Draw a card.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Rearrange the top 5 cards in your library in any order. You may shuffle you library. Draw a card.");
+        	spell.setStackDescription(sb.toString());
+        	
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -6945,8 +7011,11 @@ public class CardFactory_Sorceries {
         			}*/
         		}//resolve()
         	};//SpellAbility
-
-        	spell.setStackDescription(card.getName()+" - discard X cards and return X cards to your hand.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card.getName()).append(" - discard X cards and return X cards to your hand.");
+        	spell.setStackDescription(sb.toString());
+        	
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -7279,7 +7348,11 @@ public class CardFactory_Sorceries {
         	};
         	
         	card.clearSpellAbility();
-        	spDFWf.setStackDescription(cardName + " - Each player sacrifices lands and damage is dealt to each creature");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Each player sacrifices lands and damage is dealt to each creature");
+        	spDFWf.setStackDescription(sb.toString());
+        	
         	card.addSpellAbility(spDFWf);
         }//*************** END ************ END **************************
         
