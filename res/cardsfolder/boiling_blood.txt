@@ -1,0 +1,10 @@
+Name:Boiling Blood
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$Pump | Cost$ 2 R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Select target creature | SpellDescription$ Target creature attacks this turn if able.
+K:Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_blood.txt
+End
