@@ -2603,6 +2603,7 @@ res/cardsfolder/order_of_the_sacred_bell.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_the_white_shield.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_whiteclay.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_yawgmoth.txt -text svneol=native#text/plain
+res/cardsfolder/ordered_migration.txt -text svneol=native#text/plain
 res/cardsfolder/orgg.txt -text svneol=native#text/plain
 res/cardsfolder/ornithopter.txt -text svneol=native#text/plain
 res/cardsfolder/orochi_leafcaller.txt -text svneol=native#text/plain
