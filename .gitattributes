@@ -1225,6 +1225,7 @@ res/cardsfolder/dwarven_pony.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_ruins.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_trader.txt -text svneol=native#text/plain
 res/cardsfolder/eager_cadet.txt -text svneol=native#text/plain
+res/cardsfolder/earnest_fellowship.txt -text svneol=native#text/plain
 res/cardsfolder/earth_elemental.txt -text svneol=native#text/plain
 res/cardsfolder/earth_servant.txt -text svneol=native#text/plain
 res/cardsfolder/earth_surge.txt -text svneol=native#text/plain
@@ -5353,6 +5354,7 @@ res/quest/themes/Indestructibility[!!-~]WB.thm -text
 res/quest/themes/Legends[!!-~]WG.thm -text
 res/quest/themes/Mono[!!-~]Black.thm -text
 res/quest/themes/Multicolor[!!-~]BG.thm -text
+res/quest/themes/Multicolor[!!-~]BR.thm -text
 res/quest/themes/Multicolor[!!-~]RG.thm -text
 res/quest/themes/Multicolor[!!-~]UG.thm -text
 res/quest/themes/Treefolk[!!-~]WBG.thm -text

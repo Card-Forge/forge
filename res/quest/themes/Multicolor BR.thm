@@ -1,0 +1,74 @@
+BasicLandPercentage=16
+
+[Group MaxCnt=4 Percentage=21]
+Badlands
+Blood Crypt
+Akoum Refuge
+Bloodstained Mire
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Defiler of Souls
+Fists of the Demigod
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Emberstrike Duo
+Jund Hackblade
+Grixis Grimblade
+Nightscape Familiar
+Thunderscape Familiar
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Goblin Deathraiders
+Goblin Outlander
+Marsh Goblins
+Shivan Zombie
+Terminate
+Terminate
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Ashenmoor Gouger
+Blightning
+Blightning
+Pyre Zombie
+Rakdos Ickspitter
+Shambling Remains
+Shauku's Minion
+Vicious Kavu
+[/Group]
+
+[Group MaxCnt=1 Percentage=9]
+Blazing Specter
+Murderous Redcap
+Murderous Redcap
+Poison the Well
+Sootwalkers
+Spiteful Visions
+Wrecking Ball
+[/Group]
+
+[Group MaxCnt=1 Percentage=6]
+Breath of Malfegor
+Demigod of Revenge
+Demigod of Revenge
+Kulrath Knight
+Kulrath Knight
+Monstrous Carabid
+[/Group]
+
+[Group MaxCnt=1 Percentage=3]
+Barktooth Warbeard
+Bituminous Blast
+Boris Devilboon
+Deathbringer Thoctar
+Lady Orca
+Pavel Maliki
+Tsabo Tavoc
+Vampiric Dragon
+Rattleblaze Scarecrow
+[/Group]
+
+End
