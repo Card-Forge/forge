@@ -2,7 +2,7 @@ Name:Thoughtcast
 ManaCost:4 U
 Types:Sorcery
 Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\n
-K:spDrawCards:2:Draw two cards.:Thoughtcast - draw 2 cards.
+A:SP$Draw | Cost$ 4 U | NumCards$ 2 | SpellDescription$ Draw two cards.
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtcast.jpg

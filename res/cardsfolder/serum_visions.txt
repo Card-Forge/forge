@@ -2,7 +2,7 @@ Name:Serum Visions
 ManaCost:U
 Types:Sorcery
 Text:no text
-K:spDrawCards:1:Draw a card.:Serum Visions - draw a card.
+A:SP$Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
 K:Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_visions.jpg

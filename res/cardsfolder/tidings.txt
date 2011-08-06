@@ -2,7 +2,7 @@ Name:Tidings
 ManaCost:3 U U
 Types:Sorcery
 Text:no text
-K:spDrawCards:4:Draw four cards.:Tidings - Draw 4 cards.
+A:SP$Draw | Cost$ 3 U U | NumCards$ 4 | SpellDescription$ Draw four cards.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidings.jpg
 End
