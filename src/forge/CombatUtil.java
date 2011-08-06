@@ -278,7 +278,7 @@ public class CombatUtil {
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by white creatures."))
         {
-        	if (!blocker.isWhite())
+        	if (blocker.isWhite())
         		return false;
         }
         
