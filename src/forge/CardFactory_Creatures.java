@@ -21374,6 +21374,50 @@ public class CardFactory_Creatures {
         }
       //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Voice of the Woods"))
+        {
+        	final Ability ability = new Ability(card, "0")
+        	{
+        		public void resolve()
+        		{
+        			CardFactoryUtil.makeToken("Elemental", "G 7 7 Elemental", getActivatingPlayer(), "G", new String[] {
+                        "Creature", "Elemental"}, 7, 7, new String[] {"Trample"});
+        		}
+        	};
+        	
+        	final Ability_Cost cost = new Ability_Cost("tapXType<5/Elf>", card.getName(), true);
+            ability.setPayCosts(cost);
+        	
+        	ability.setDescription("Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.");
+        	ability.setStackDescription(card +" - Put a 7/7 green Elemental creature token with trample onto the battlefield.");
+        	
+        	card.addSpellAbility(ability);
+	    }
+	    //*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Selesnya Evangel"))
+        {
+        	final Ability ability = new Ability(card, "0")
+        	{
+        		public void resolve()
+        		{
+        			CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", getActivatingPlayer(), "G", new String[] {
+                        "Creature", "Saproling"}, 1, 1, new String[] {""});
+        		}
+        	};
+        	
+        	final Ability_Cost cost = new Ability_Cost("1 T tapXType<1/Creature>", card.getName(), true);
+            ability.setPayCosts(cost);
+        	
+        	ability.setDescription("1, tap, Tap an untapped creature you control: Put a 1/1 green Saproling creature token onto the battlefield.");
+        	ability.setStackDescription(card +" - Put a 1/1 green Saproling creature token onto the battlefield.");
+        	
+        	card.addSpellAbility(ability);
+	    }
+	    //*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

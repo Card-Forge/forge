@@ -1,0 +1,8 @@
+Name:Voice of the Woods
+ManaCost:3 G G
+Types:Creature Elf
+Text:no text
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_the_woods.jpg
+End

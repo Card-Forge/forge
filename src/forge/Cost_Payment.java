@@ -540,7 +540,8 @@ public class Cost_Payment {
             public void showMessage() {
             	if (cardList.size() == 0) stop();
             	
-                AllZone.Display.showMessage("Select a "+ cardType + " to tap");
+            	int left = nCards - nTapped;
+                AllZone.Display.showMessage("Select a "+ cardType + " to tap (" +left + " left)");
                 ButtonUtil.enableOnlyCancel();
             }
             
