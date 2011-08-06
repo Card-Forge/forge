@@ -36,34 +36,10 @@ public class CardFactory_Instants {
 
     public static Card getCard(final Card card, final String cardName, Player owner) {
     	
-    	
-        //*************** START *********** START **************************
-        if (cardName.equals("Resuscitate")) {
-            /**
-             *  This card does not work and this is a place holder.
-             *  May require a keyword factory.
-             */
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 2024445242584858534L;
-                
-                @Override
-                public void resolve() {
-                    
-                }//resolve
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - I do nothing but go to the graveyard.");
-            spell.setStackDescription(sb.toString());
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
-        else if (cardName.equals("Brave the Elements")) {
+        if (cardName.equals("Brave the Elements")) {
         	/**
         	 *  This card now works slightly better than it did before the spAllPump 
         	 *  keyword was created. The AI is too simple and needs some work.

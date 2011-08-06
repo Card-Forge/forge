@@ -159,6 +159,7 @@ public class AbilityFactory_Effect {
 		String[] effectAbilities = null;
 		String[] effectTriggers = null;
 		String[] effectSVars = null;
+		String[] effectKeywords = null;
 		
 		if(params.containsKey("Abilities"))
 			effectAbilities = params.get("Abilities").split(",");
@@ -168,6 +169,9 @@ public class AbilityFactory_Effect {
 		
 		if(params.containsKey("SVars"))
 			effectSVars = params.get("SVars").split(",");
+		
+		if(params.containsKey("Keywords"))
+			effectKeywords = params.get("Keywords").split(",");
 		
 		//Effect eff = new Effect();
 		String name = params.get("Name");
@@ -226,6 +230,14 @@ public class AbilityFactory_Effect {
 			for(String s : effectSVars){
 				String actualSVar = af.getHostCard().getSVar(s);
 				eff.setSVar(s, actualSVar);
+			}
+		}
+		
+		//Grant Keywords
+		if(effectKeywords != null){
+			for(String s : effectKeywords){
+				String actualKeyword = af.getHostCard().getSVar(s);
+				eff.addIntrinsicKeyword(actualKeyword);
 			}
 		}
 		
