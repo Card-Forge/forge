@@ -1,3 +1,9 @@
+Nut Collector
+5 G
+Creature Human Druid
+At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.
+1/1
+
 Phyrexian Plaguelord
 3 B B
 Creature Carrier

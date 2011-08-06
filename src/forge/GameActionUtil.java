@@ -79,6 +79,7 @@ public class GameActionUtil {
 		upkeep_Bitterblossom();
 		upkeep_Goblin_Assault();
 		upkeep_Awakening_Zone();
+		upkeep_Nut_Collector();
 		
 		// Win / Lose	
 		final String player = AllZone.Phase.getActivePlayer();
@@ -8187,6 +8188,30 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Awakening_Zone()
+	
+	private static void upkeep_Nut_Collector() {
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList(playZone.getCards());
+		list = list.getName("Nut Collector");
+
+		Ability ability;
+		for(int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
+			ability = new Ability(list.get(i), "0") {
+				@Override
+				public void resolve() {
+					CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", crd, "G", new String[] {
+							"Creature", "Squirrel"}, 1, 1, new String[] {""});
+				}// resolve()
+			};// Ability
+			ability.setStackDescription("Nut Collector - " + player +
+			" puts a 1/1 green Squirrel creature token onto the battlefield.");
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Nut_Collector()
 
 	private static void upkeep_Masticore() {
 		final String player = AllZone.Phase.getActivePlayer();
@@ -18647,7 +18672,62 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Muraganda_Petroglyphs
+	
+	public static Command Nut_Collector = new Command()
+	{
+		private static final long serialVersionUID = 4873843480453112825L;
+		CardList                  gloriousAnthemList = new CardList();
 
+		public void execute() {
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.addSemiPermanentAttackBoost(-2);
+				c.addSemiPermanentDefenseBoost(-2);
+			}
+			
+			// add +2/+2 to vanilla cards
+			list.clear();
+			PlayerZone[] zone = getZone("Nut Collector");
+			
+			
+			// for each zone found add +2/+2 to each vanilla card
+			for(int outer = 0; outer < zone.length; outer++) {
+				PlayerZone z = zone[outer];
+				String player = z.getPlayer();
+				
+				if (AllZoneUtil.getPlayerGraveyard(player).size() >= 7)
+				{
+					// CardList creature = new CardList(zone[outer].getCards());
+					CardList creature = new CardList();
+					creature.addAll(AllZone.Human_Play.getCards());
+					creature.addAll(AllZone.Computer_Play.getCards());
+					creature = creature.getType("Creature");
+					
+					creature = creature.filter(new CardListFilter()
+					{
+						public boolean addCard(Card crd)
+						{
+							return crd.getType().contains("Squirrel") || crd.getKeyword().contains("Changeling");
+						}
+					});
+					
+					for(int i = 0; i < creature.size(); i++) {
+						c = creature.get(i);
+						c.addSemiPermanentAttackBoost(2);
+						c.addSemiPermanentDefenseBoost(2);
+	
+						gloriousAnthemList.add(c);
+					}// for inner
+				}//if Threshold
+			}// for outer
+			
+		}//execute
+	}; //nut_collector
+	
+	
 	public static Command Meddling_Mage               = new Command() {
 		private static final long serialVersionUID   = 738264163993370439L;
 		CardList                  gloriousAnthemList = new CardList();
@@ -19067,6 +19147,7 @@ public class GameActionUtil {
 		commands.put("Chainer", Chainer);
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
+		commands.put("Nut_Collector", Nut_Collector);
 
 		commands.put("Engineered_Plague", Engineered_Plague);
 		commands.put("Night_of_Souls_Betrayal", Night_of_Souls_Betrayal);
