@@ -7972,7 +7972,7 @@ public class CardFactory_Creatures {
             sb2.append(card).append(" deals 6 damage to each other creature with flying.");
             a2.setStackDescription(sb2.toString());
             
-            a2.setDescription("1 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
+            a2.setDescription("5 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
             card.addSpellAbility(a2);
         }//*************** END ************ END **************************
         
