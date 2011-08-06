@@ -1,3 +1,11 @@
+Deathbringer Thoctar
+4 B R
+Creature Zombie Beast
+no text
+3/3
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Deathbringer Thoctar.
+abDamageTgtCP 0 SubCounter<P1P1/1>:1
+
 Abandoned Outpost
 no cost
 Land
