@@ -1,0 +1,9 @@
+Name:Assassin's Blade
+ManaCost:1 B
+Types:Instant
+Text:no text
+A:SP$Destroy | Cost$1 B | ValidTgts$Creature.nonBlack+attacking | TgtPrompt$Select target nonblack attacking creature | OpponentTurn$True | ActivatingPhases$Declare Attackers - Play Instants and Abilities | SpellDescription$Cast Assassin's Blade only during the declare attackers step and only if you've been attacked this step. Destroy target nonblack attacking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assassins_blade.jpg
+End
