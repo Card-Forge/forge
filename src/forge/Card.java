@@ -188,7 +188,7 @@ public class Card extends MyObservable
   };
   
   //for Planeswalker abilities and Effects (like Wither), Doubling Season gets ignored.
-  public void addCounterFromCostOrEffect(Counters counterName, int n)
+  public void addCounterFromNonEffect(Counters counterName, int n)
   {
 	  if(counters.containsKey(counterName))
 	  {

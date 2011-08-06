@@ -1514,7 +1514,7 @@ private int getDifferentLand(CardList list, String land)
 				  card.isCreature())
 			  {
 				  damageToAdd = 0;
-				  card.addCounterFromCostOrEffect(Counters.M1M1, damage);
+				  card.addCounterFromNonEffect(Counters.M1M1, damage);
 			  }  
 			  if (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed"))
 			  {
@@ -1552,7 +1552,7 @@ private int getDifferentLand(CardList list, String land)
 		  card.isCreature())
 	  {
 		  damageToAdd = 0;
-		  card.addCounterFromCostOrEffect(Counters.M1M1, damage);
+		  card.addCounterFromNonEffect(Counters.M1M1, damage);
 	  }  
 	  if (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed"))
 	  {
