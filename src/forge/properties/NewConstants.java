@@ -251,6 +251,7 @@ public interface NewConstants {
                     public static final String LF         = "%s/NewGame/menu/lookAndFeel";
                     public static final String DOWNLOAD   = "%s/NewGame/menu/download";
                     public static final String DOWNLOADLQ   = "%s/NewGame/menu/downloadlq";
+                    public static final String IMPORTPICTURE   = "%s/NewGame/menu/importPicture";
                     public static final String CARD_SIZES = "%s/NewGame/menu/cardSizes";
                     public static final String ABOUT      = "%s/NewGame/menu/about";
                 }

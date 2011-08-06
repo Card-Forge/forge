@@ -93,6 +93,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
     private Action                  DOWNLOAD_ACTION      = new DownloadAction();
     private Action                  DOWNLOAD_ACTION_LQ      = new DownloadActionLQ();
+    private Action                  IMPORT_PICTURE      = new ImportPictureAction();
     private Action                  CARD_SIZES_ACTION    = new CardSizesAction();
     private Action                  ABOUT_ACTION         = new AboutAction();
     
@@ -175,7 +176,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
         setBounds(bounds);
-        
+     
         setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
         setupMenu();
         setVisible(true);
@@ -184,7 +185,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void setupMenu() {
         Action[] actions = {
-                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION,DOWNLOAD_ACTION_LQ, CARD_SIZES_ACTION, ErrorViewer.ALL_THREADS_ACTION,
+                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION,DOWNLOAD_ACTION_LQ, IMPORT_PICTURE ,CARD_SIZES_ACTION, ErrorViewer.ALL_THREADS_ACTION,
                 ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for(Action a:actions)
@@ -655,8 +656,20 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }
     }
     
-    
-    
+ public static class ImportPictureAction extends AbstractAction {
+	
+	private static final long serialVersionUID = 6893292814498031508L;
+
+			public ImportPictureAction() {
+	            super(ForgeProps.getLocalized(MENU_BAR.MENU.IMPORTPICTURE));
+	        }
+	        
+	        public void actionPerformed(ActionEvent e) {
+	        	GUI_ImportPicture ip = new GUI_ImportPicture(null);
+	            ip.setVisible(true);
+	        }
+	    }    
+
     public static class CardSizesAction extends AbstractAction {
         
         private static final long serialVersionUID = -2900235618450319571L;
