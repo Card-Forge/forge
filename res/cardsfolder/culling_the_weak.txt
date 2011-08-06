@@ -6,4 +6,5 @@ A:SP$Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ 4 | SpellDescription
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_the_weak.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/55.jpg
 End

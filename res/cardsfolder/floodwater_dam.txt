@@ -9,4 +9,5 @@ SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floodwater_dam.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/161.jpg
 End

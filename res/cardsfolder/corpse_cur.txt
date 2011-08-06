@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.withInfect | TgtPrompt$ Choose target creature with Infect in your graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_cur.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/147.jpg
 End

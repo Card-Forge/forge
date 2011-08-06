@@ -8,4 +8,8 @@ A:AB$Untap|Cost$ 9|ActivatingPhases$Upkeep|PlayerTurn$True|SpellDescription$Unta
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colossus_of_sardia.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/358.jpg
+SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/11.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/326.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/317.jpg
 End

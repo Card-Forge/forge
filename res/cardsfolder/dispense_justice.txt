@@ -7,4 +7,5 @@ SVar:X:Count$Metalcraft.2.1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispense_justice.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/5.jpg
 End

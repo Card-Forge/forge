@@ -8,4 +8,5 @@ SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$1 | Amount$ 4
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/su_chi.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/31.jpg
 End

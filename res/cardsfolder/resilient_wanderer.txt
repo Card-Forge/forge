@@ -11,4 +11,5 @@ A:AB$Pump | Cost$ Discard<1/Any> | KW$ Protection from red | SpellDescription$ C
 A:AB$Pump | Cost$ Discard<1/Any> | KW$ Protection from white | SpellDescription$ CARDNAME gains protection from white until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resilient_wanderer.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/43.jpg
 End

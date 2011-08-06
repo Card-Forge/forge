@@ -7,4 +7,5 @@ A:AB$Token | Cost$ SubCounter<3/CHARGE> | TokenAmount$ 1 | TokenName$ Golem | To
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ CHARGE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golem_foundry.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/160.jpg
 End

@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Artifact.YouCtrl | Execute$ TrigPump | TriggerZon
 SVar:TrigPump:AB$Pump | Cost$ 0 | Tgt$ TgtC | NumAtt$ 2 | KW$ Deathtouch
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painsmith.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/74.jpg
 End

@@ -8,4 +8,5 @@ SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigil_for_the_lost.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/26.jpg
 End

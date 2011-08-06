@@ -6,4 +6,5 @@ A:AB$PutCounter | Cost$ T Sac<1/CARDNAME> | Tgt$ TgtC | CounterType$ P0P1 | Coun
 SVar:X:Targeted$CardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_armor.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/101.jpg
 End

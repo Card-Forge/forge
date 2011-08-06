@@ -7,4 +7,5 @@ SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_adnate.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/25.jpg
 End

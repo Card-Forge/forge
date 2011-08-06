@@ -8,4 +8,5 @@ SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_yawgmoth.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/49.jpg
 End

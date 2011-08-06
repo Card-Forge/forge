@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Tgt$ TgtC | CounterType$ M1M1 | CounterNum$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinrender.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/78.jpg
 End

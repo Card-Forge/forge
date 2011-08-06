@@ -7,4 +7,5 @@ A:AB$Mana | Cost$ B T Discard<1/Any> | Produced$B | Amount$3 | SpellDescription$
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_witch.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/118.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Counter | Cost$ 1 U | Type$ SpellOrAbility |DestroyPermanent$True| SpellTar
 SVar:DB:DB$Draw | NumCards$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_response.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/78.jpg
 End

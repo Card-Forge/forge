@@ -6,4 +6,5 @@ A:SP$PumpAll | Cost$ 1 W W | ValidCards$ Creature.attacking | NumAtt$ +2 | Spell
 SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/army_of_allah.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/56.jpg
 End

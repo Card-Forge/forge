@@ -10,4 +10,5 @@ A:AB$Mana | Cost$T | Produced$G| IsPresent$ Artifact | PresentCompare$ GE3 | Pre
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_opal.jpg
+SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/179.jpg
 End

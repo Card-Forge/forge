@@ -11,4 +11,5 @@ SVar:DBDraw:DB$Draw | ValidTgts$ Opponent | NumCards$ 2
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_tresserhorn.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/193.jpg
 End

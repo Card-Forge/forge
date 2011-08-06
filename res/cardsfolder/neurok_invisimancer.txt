@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:AB$Pump | Cost$ 0 | Tgt$ TgtC | KW$ Unblockable
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_invisimancer.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/37.jpg
 End
