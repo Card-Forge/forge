@@ -125,7 +125,6 @@ public class AbilityFactory_Counters {
 		return sb.toString();
 	}
 	
-	
 	public static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
 		Random r = new Random();
@@ -373,8 +372,12 @@ public class AbilityFactory_Counters {
 		}
 		
 		for(Card tgtCard : tgtCards)
-			if(AllZone.GameAction.isCardInPlay(tgtCard) && (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)))
-				tgtCard.addCounter(Counters.valueOf(type), counterAmount);
+			if(tgt == null || CardFactoryUtil.canTarget(card, tgtCard)){
+				if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield))
+					tgtCard.addCounter(Counters.valueOf(type), counterAmount);
+				else	// adding counters to something like re-suspend cards
+					tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
+			}
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
