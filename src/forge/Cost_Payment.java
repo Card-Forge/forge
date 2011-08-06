@@ -724,12 +724,27 @@ public class Cost_Payment {
             
             @Override
             public void showMessage() {
+            	boolean any = discType.equals("Any") ? true : false;
             	if (AllZone.Human_Hand.getCards().length == 0) stop();
             	StringBuilder type = new StringBuilder("");
-            	if (!discType.equals("Any") || !discType.equals("Card")){
+            	if (any || !discType.equals("Card")){
             		type.append(" ").append(discType);
             	}
-                AllZone.Display.showMessage("Select a "+ type.toString() + " card to discard");
+            	StringBuilder sb = new StringBuilder();
+            	sb.append("Select ");
+            	if(any) {
+            		sb.append("any ");
+            	}
+            	else {
+            		sb.append("a ").append(type.toString()).append(" ");
+            	}
+            	sb.append("card to discard.");
+            	if(nCards > 1) {
+            		sb.append(" You have ");
+            		sb.append(nCards - nDiscard);
+            		sb.append(" remaining.");
+            	}
+                AllZone.Display.showMessage(sb.toString());
                 ButtonUtil.enableOnlyCancel();
             }
             
