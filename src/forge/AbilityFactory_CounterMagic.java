@@ -7,7 +7,7 @@ import java.util.HashMap;
 //CounterValid - a "valid" expression for types to counter
 //SpellTarget - a "valid" expression for targets of the spell to counter
 //Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
-//		-Graveyard
+//		-Graveyard (Default)
 //		-Exile
 //		-TopDeck
 //		-Hand
@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 //Examples:
 //A:SP$Counter|Cost$1 G|Type$Ability|SpellDescription$Counter target activated ability.
-//A:AB$Counter|Cost$G G|Type$Spell|Destination$Graveyard|CounterValid$Color.Black|SpellDescription$Counter target black spell.
+//A:AB$Counter|Cost$G G|Type$Spell|Destination$Exile|CounterValid$Color.Black|SpellDescription$xxxxx
 
 public class AbilityFactory_CounterMagic {
 
