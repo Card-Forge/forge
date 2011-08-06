@@ -523,6 +523,7 @@ res/cardsfolder/blessed_orator.txt -text svneol=native#text/plain
 res/cardsfolder/blessed_reversal.txt -text svneol=native#text/plain
 res/cardsfolder/blessed_wine.txt -text svneol=native#text/plain
 res/cardsfolder/blessing.txt -text svneol=native#text/plain
+res/cardsfolder/blessing_of_leeches.txt -text svneol=native#text/plain
 res/cardsfolder/blessing_of_the_nephilim.txt -text svneol=native#text/plain
 res/cardsfolder/blight.txt -text svneol=native#text/plain
 res/cardsfolder/blight_mamba.txt -text svneol=native#text/plain
