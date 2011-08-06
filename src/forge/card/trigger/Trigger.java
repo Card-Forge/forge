@@ -273,8 +273,55 @@ public abstract class Trigger {
 				
 		}
 		
+		if (mapParams.containsKey("IsPresent2")){
+			String sIsPresent = mapParams.get("IsPresent2");
+			String presentCompare = "GE1";
+			String presentZone = "Battlefield";
+			String presentPlayer = "Any";
+			if(mapParams.containsKey("PresentCompare2"))
+			{
+				presentCompare = mapParams.get("PresentCompare2");
+			}
+			if(mapParams.containsKey("PresentZone2"))
+			{
+				presentZone = mapParams.get("PresentZone2");
+			}
+			if(mapParams.containsKey("PresentPlayer2"))
+			{
+				presentPlayer = mapParams.get("PresentPlayer2");
+			}
+			CardList list = new CardList();
+			if(presentPlayer.equals("You") || presentPlayer.equals("Any"))
+			{
+				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
+			}
+			if(presentPlayer.equals("Opponent") || presentPlayer.equals("Any"))
+			{
+				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
+			}
+			
+			list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
+			
+			int right = 1;
+			String rightString = presentCompare.substring(2);
+			if(rightString.equals("X")) {
+				right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+			}
+			else {
+				right = Integer.parseInt(presentCompare.substring(2));
+			}
+			int left = list.size();
+			
+			if (!Card.compare(left, presentCompare, right))
+			{
+				return false;
+			}
+				
+		}
+		
 		return true;
 	}
+	
 	
 	public boolean matchesValid(Object o,String[] valids,Card srcCard)
 	{
