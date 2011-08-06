@@ -1,0 +1,11 @@
+Name:Sanity Gnawers
+ManaCost:1 B R
+Types:Creature Rat
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards a card at random.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | Mode$ Random
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sanity_gnawers.jpg
+SVar:Rarity:Uncommon
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/44.jpg
+End
