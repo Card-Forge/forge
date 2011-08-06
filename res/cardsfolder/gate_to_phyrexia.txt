@@ -1,0 +1,9 @@
+Name:Gate to Phyrexia
+ManaCost:B B
+Types:Enchantment
+Text:no text
+AB$Destroy | Cost$Sac<1/Creature> | ValidTgts$Artifact | TgtPrompt$Select target artifact | ActivatingPhases$Untap | ActivationLimit$1 | SpellDescription$Destroy target artifact. Activate this ability only during your upkeep and only once each turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_to_phyrexia.jpg
+End
