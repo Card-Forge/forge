@@ -1,3 +1,8 @@
+Celestial Purge
+1 W
+Instant
+Exile target black or red permanent.
+
 Ajani Vengeant
 2 R W
 Planeswalker - Ajani

@@ -17062,7 +17062,88 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	card.clearSpellAbility();
     	card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-    
+	  if (cardName.equals("Celestial Purge"))
+	    {
+	    	final Spell spell = new Spell(card)
+	    	{
+	    		/**
+				 * 
+				 */
+				private static final long serialVersionUID = 2626237206744317044L;
+
+				public void resolve()
+	    		{
+	    			Card c = getTargetCard();
+	    			
+	    			if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c))
+	    			{
+	    				AllZone.GameAction.removeFromGame(c);
+	    			}
+	    		}
+	    		
+	    		public void chooseTargetAI()
+	    		{
+	    			PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+	    			CardList human = new CardList(hplay.getCards());
+	    			human = human.filter(new CardListFilter()
+	    			{
+	    				public boolean addCard(Card c)
+	    				{
+	    					return CardFactoryUtil.canTarget(card, c)
+	  					      && (CardUtil.getColors(c).contains(Constant.Color.Black)
+	  	    				  || CardUtil.getColors(c).contains(Constant.Color.Red));
+	    				}
+	    			});
+	    	    	
+	    			if (human.size() != 0)
+	    			{
+	    				setTargetCard(CardFactoryUtil.AI_getMostExpensivePermanent(human, card, true));
+	    			}
+	    		}
+	    		
+	    		public boolean canPlayAI()
+	    		{
+	    			PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+	    			CardList human = new CardList(hplay.getCards());
+	    			human = human.filter(new CardListFilter()
+	    			{
+	    				public boolean addCard(Card c)
+	    				{
+	    					return CardFactoryUtil.canTarget(card, c)
+	    					  && (CardUtil.getColors(c).contains(Constant.Color.Black)
+	    				      || CardUtil.getColors(c).contains(Constant.Color.Red));
+	    				}
+	    			});
+	    			return human.size() > 0; 
+	    		}
+	    		
+	    	};//ability
+	    	
+	    	Input target = new Input()
+	    	{
+				private static final long serialVersionUID = -7279903055386088569L;
+				public void showMessage()
+		      	{
+		      	  AllZone.Display.showMessage("Select target black or red permanent for " + card);
+		      	  ButtonUtil.enableOnlyCancel();
+		      	}
+		      	public void selectButtonCancel() {stop();}
+		      	public void selectCard(Card crd, PlayerZone zone)
+		      	{
+		      	  if(zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(card, crd)
+		      		&& (CardUtil.getColors(crd).contains(Constant.Color.Black)
+		      		|| CardUtil.getColors(crd).contains(Constant.Color.Red)))
+		      	  {
+		      		spell.setTargetCard(crd);
+		      		stopSetNext(new Input_PayManaCost(spell));
+		      	  }
+		      	}
+	        };//Input
+	        spell.setBeforePayMana(target);
+	        card.clearSpellAbility();
+	    	card.addSpellAbility(spell);    
+	  	}//*************** END ************ END **************************
+	        
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found
     if (hasKeyword(card, "Cycling") != -1)
