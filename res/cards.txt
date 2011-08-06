@@ -15151,7 +15151,7 @@ Creatures you control get +1/+1.
 
 Ball Lightning
 R R R
-Creature Ball-Lightning
+Creature Elemental
 At end of turn, sacrifice Ball Lightning.
 6/1
 Haste
