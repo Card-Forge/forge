@@ -88,15 +88,7 @@ public class AbilityFactory_GainControl {
             
             @Override
 			public String getStackDescription(){
-				 StringBuilder sb = new StringBuilder();
-				 String name = AF.getHostCard().getName();
-				 sb.append(name).append(" - gain control of ");
-				 Card tgt = getTargetCard();
-				 if (tgt != null) {
-					 if(tgt.isFaceDown()) sb.append("Morph");
-					 else sb.append(tgt.getName());
-				 }
-				 return sb.toString();
+				 return gainControlStackDescription(this);
 			}
         };//SpellAbility
         
@@ -121,15 +113,7 @@ public class AbilityFactory_GainControl {
 
 			@Override
 			public String getStackDescription(){
-				StringBuilder sb = new StringBuilder();
-				String name = AF.getHostCard().getName();
-				sb.append(name).append(" - gain control of ");
-				Card tgt = getTargetCard();
-				if (tgt != null) {
-					if(tgt.isFaceDown()) sb.append("Morph");
-					else sb.append(tgt.getName());
-				}
-				return sb.toString();
+				return gainControlStackDescription(this);
 			}
 
 			@Override
@@ -141,6 +125,39 @@ public class AbilityFactory_GainControl {
 		return abControl;
 	}
 
+	private String gainControlStackDescription(SpellAbility sa) {
+		StringBuilder sb = new StringBuilder();
+		
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard()).append(" - ");
+		else
+			sb.append(" ");
+		
+		ArrayList<Card> tgtCards;
+
+		Target tgt = AF.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+		}
+		
+		sb.append("gain control of ");
+		
+		for (Card c : tgtCards) {
+			sb.append(" ");
+			if(c.isFaceDown()) sb.append("Morph");
+			else sb.append(c);
+		}
+		sb.append(".");
+		
+		Ability_Sub abSub = sa.getSubAbility();
+        if(abSub != null) {
+        	sb.append(abSub.getStackDescription());
+        }
+		
+		return sb.toString();
+	}
 
     private boolean doTgtAI(SpellAbility sa) {
         boolean hasCreature = false;
@@ -212,14 +229,15 @@ public class AbilityFactory_GainControl {
     }   
     
     private void doResolve(SpellAbility sa) {
-		ArrayList<Card> tgtCards;
+    	ArrayList<Card> tgtCards;
+
 		Target tgt = AF.getAbTgt();
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(hostCard);
+			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 		}
+		//tgtCards.add(hostCard);
 
 		int size = tgtCards.size();
 		for(int j = 0; j < size; j++){
