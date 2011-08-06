@@ -15025,35 +15025,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command Rakdos_Pit_Dragon           = new Command() {
-		private static final long serialVersionUID = -8778900687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Rakdos Pit Dragon");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(hellbent(c.getController())
-						&& !c.getIntrinsicKeyword().contains(
-								"Double Strike")) c.addIntrinsicKeyword("Double Strike");
-				else if(!hellbent(c.getController())
-						&& c.getIntrinsicKeyword().contains(
-								"Double Strike")) c.removeIntrinsicKeyword("Double Strike");
-			}
-		}
-
-		private boolean hellbent(Player player) {
-			PlayerZone hand = AllZone.getZone(
-					Constant.Zone.Hand, player);
-
-			CardList list = new CardList();
-			list.addAll(hand.getCards());
-
-			return list.size() == 0;
-		}
-
-	}; //Rakdos Pit Dragon
-
 	public static Command Nyxathid                    = new Command() {
 
 		private static final long serialVersionUID = -8778900687347191964L;
@@ -15092,25 +15063,11 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseAttack(countCards());
+				CardList graves = AllZoneUtil.getCardsInGraveyard();
+				c.setBaseAttack(graves.size());
 				c.setBaseDefense(c.getBaseAttack());
 			}
 		}
-
-		private int countCards() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
-
-			return list.size();
-		}
-
 	}; //Lord of Extinction
 
 
@@ -16316,7 +16273,6 @@ public class GameActionUtil {
 		commands.put("Plague_Rats", Plague_Rats);
 		commands.put("Primalcrux", Primalcrux);
 		
-		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
 		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
 		
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);

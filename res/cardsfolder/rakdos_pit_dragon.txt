@@ -1,10 +1,11 @@
 Name:Rakdos Pit Dragon
 ManaCost:2 R R
 Types:Creature Dragon
-Text:Hellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand.
+Text:no text
 PT:3/3
 A:AB$Pump | Cost$ R R | KW$ Flying | SpellDescription$ Rakdos Pit Dragon gains flying until end of turn.
 A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Rakdos Pit Dragon gets +1/+0 until end of turn.
+K:stPumpSelf:Creature:0/0/Double Strike:Hellbent:Hellbent Ñ Rakdos Pit Dragon has double strike as long as you have no cards in hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_pit_dragon.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/69.jpg
