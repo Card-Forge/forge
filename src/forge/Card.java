@@ -290,7 +290,10 @@ public class Card extends MyObservable
       for(int i = 0; i < sa.length; i++)
         sb.append(sa[i].toString() + "\r\n");
       
-	  
+      // Cantrip -> Draw a card.
+      if (getKeyword().contains("Draw a card."))
+    	  s += "Draw a card.\r\n";
+
       return sb.toString();
     }
 
