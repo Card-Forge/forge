@@ -533,7 +533,7 @@ public class CardFactory implements NewConstants {
                 	PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
                 	int numHHand = pzH.size();
                 	
-                	if (numHHand > (nCards - 1))
+                	if (numHHand >= nCards)
                 	{
                 		if (Tgt)
                 			setTargetPlayer(Constant.Player.Human);
