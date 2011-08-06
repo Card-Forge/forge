@@ -10105,6 +10105,61 @@ public class CardFactory implements NewConstants {
         	ability.setStackDescription(cardName+" - Exchange life totals with target opponent.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Jade Statue")) {
+        	/*
+        	 * 2: Jade Statue becomes a 3/6 Golem artifact creature until
+        	 * end of combat. Activate this ability only during combat.
+        	 */
+            
+            final Command untilEOC = new Command() {
+				private static final long serialVersionUID = -8432597117196682284L;
+
+				public void execute() {
+                    Card c = card;
+                    String[] types = { "Creature", "Golem" };
+                    String[] keywords = {  };
+                    CardFactoryUtil.revertManland(c, types, keywords, "4");
+                }
+            };
+            
+            final SpellAbility a1 = new Ability(card, "2") {
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public boolean canPlay() {
+                	return Phase.canPlayDuringCombat();
+                }
+                
+                @Override
+                public void resolve() {
+                    Card c = card;
+                    String[] types = { "Creature", "Golem" };
+                    String[] keywords = {  };
+                    CardFactoryUtil.activateManland(c, 3, 6, types, keywords, "4");
+
+                    AllZone.EndOfCombat.addUntil(untilEOC);
+                }
+            };//SpellAbility
+            
+            //card.clearSpellKeepManaAbility();
+            card.addSpellAbility(a1);
+            a1.setStackDescription(card + " becomes a 3/6 Golem creature until End of Combat");
+            
+            Command paid1 = new Command() {
+				private static final long serialVersionUID = 1531378274457977155L;
+
+				public void execute() {
+                    AllZone.Stack.add(a1);
+                }
+            };
+            
+            a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
+        }//*************** END ************ END **************************
 
 
         // Cards with Cycling abilities

@@ -440,4 +440,19 @@ public class Phase extends MyObservable
 		return ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) 
 				&& AllZone.GameAction.isPlayerTurn(player)) && AllZone.Stack.size() == 0);
 	}
+	
+	public static boolean canPlayDuringCombat() {
+		String phase = AllZone.Phase.getPhase();
+		ArrayList<String> validPhases = new ArrayList<String>();
+		validPhases.add(Constant.Phase.Combat_Before_Declare_Attackers_InstantAbility);
+		validPhases.add(Constant.Phase.Combat_Declare_Attackers);
+		validPhases.add(Constant.Phase.Combat_Declare_Attackers_InstantAbility);
+		validPhases.add(Constant.Phase.Combat_Declare_Blockers);
+		validPhases.add(Constant.Phase.Combat_Declare_Blockers_InstantAbility);
+		validPhases.add(Constant.Phase.Combat_After_Declare_Blockers);
+		validPhases.add(Constant.Phase.Combat_FirstStrikeDamage);
+		validPhases.add(Constant.Phase.Combat_Damage);
+		
+		return validPhases.contains(phase);
+	}
 }

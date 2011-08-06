@@ -198,6 +198,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             }
             */
             else if(phase.equals(Constant.Phase.End_Of_Combat)) {
+            	AllZone.EndOfCombat.executeUntil();
                 AllZone.EndOfCombat.executeAt();
                 AllZone.Phase.setNeedToNextPhase(true);
                 appliedExaltedEffects = false;

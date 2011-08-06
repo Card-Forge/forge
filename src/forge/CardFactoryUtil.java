@@ -4428,7 +4428,7 @@ public class CardFactoryUtil {
     }
     
     
-    public static void revertManland(Card c, String[] removeTypes, String[] removeKeywords) {
+    public static void revertManland(Card c, String[] removeTypes, String[] removeKeywords, String cost) {
         c.setBaseAttack(0);
         c.setBaseDefense(0);
         for(String r : removeTypes)
@@ -4437,7 +4437,7 @@ public class CardFactoryUtil {
         for(String k : removeKeywords)
         	c.removeIntrinsicKeyword(k);
         
-        c.setManaCost("");
+        c.setManaCost(cost);
         c.unEquipAllCards();
     }
     

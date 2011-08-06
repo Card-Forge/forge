@@ -1,7 +1,7 @@
 package forge;
 //import java.util.*;
 
-//handles "until end of turn" and "at end of turn" commands from cards
+//handles "until end of combat" and "at end of combat" commands from cards
 public class EndOfCombat implements java.io.Serializable
 {
 

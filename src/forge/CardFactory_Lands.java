@@ -520,7 +520,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Faerie" };
                     String[] keywords = { "Flying" };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -577,7 +577,7 @@ class CardFactory_Lands {
                     String[] types = { "Creature", "Soldier" };
                     String[] keywords = {  };
 
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -633,7 +633,7 @@ class CardFactory_Lands {
                     
                     String[] removeTypes = { "Creature", "Ape" };
                     String[] removeKeywords = { "Trample" };
-                    CardFactoryUtil.revertManland(c, removeTypes, removeKeywords);
+                    CardFactoryUtil.revertManland(c, removeTypes, removeKeywords, "");
                 }
             };
             
@@ -687,7 +687,7 @@ class CardFactory_Lands {
                 		Card c = card;
                 		String[] types = { "Artifact", "Creature", "Blinkmoth" };
                 		String[] keywords = { "Flying" };
-                		CardFactoryUtil.revertManland(c, types, keywords);
+                		CardFactoryUtil.revertManland(c, types, keywords, "");
                 	}
                 };
                 
@@ -854,7 +854,7 @@ class CardFactory_Lands {
                     
                     String[] types = { "Artifact", "Creature", "Assembly-Worker" };
                     String[] keywords = { };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -2264,7 +2264,7 @@ class CardFactory_Lands {
 
                     String[] types = { "Creature" };
                     String[] keywords = { "Changeling" };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
 
                 }
             };
@@ -2340,7 +2340,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Skeleton" };
                     String[] keywords = {  };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                     c.removeSpellAbility(a2);
                 }
             };
@@ -2950,7 +2950,7 @@ class CardFactory_Lands {
                     String[] types = { "Creature", "Zombie", "Plant" };
                     String[] keywords = {  };
 
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -2998,7 +2998,7 @@ class CardFactory_Lands {
                     String[] types = { "Creature", "Warrior" };
                     String[] keywords = { "First Strike" };
 
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -3097,7 +3097,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Elemental" };
                     String[] keywords = { "Vigilance", "Flying" };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -3188,7 +3188,7 @@ class CardFactory_Lands {
                       Card c = card;
                       String[] types = { "Creature", "Elemental" };
                       String[] keywords = {  };
-                      CardFactoryUtil.revertManland(c, types, keywords);
+                      CardFactoryUtil.revertManland(c, types, keywords, "");
                       c.removeSpellAbility(X_ability);
                   }
               };
@@ -3241,7 +3241,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Elemental" };
                     String[] keywords = { "Reach" };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -3280,7 +3280,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Elemental" };
                     String[] keywords = { "Unblockable" };
-                    CardFactoryUtil.revertManland(c, types, keywords);	
+                    CardFactoryUtil.revertManland(c, types, keywords, "");	
                 }
             };
             
@@ -3319,7 +3319,7 @@ class CardFactory_Lands {
                     
                     String[] types = { "Creature", "Elemental"};
                     String[] keywords = { "Whenever this creature attacks, put a +1/+1 counter on it." };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
@@ -3361,7 +3361,7 @@ class CardFactory_Lands {
                     
                     String[] types = { "Artifact", "Creature", "Golem"};
                     String[] keywords = {  };
-                    CardFactoryUtil.revertManland(c, types, keywords);
+                    CardFactoryUtil.revertManland(c, types, keywords, "");
                 }
             };
             
