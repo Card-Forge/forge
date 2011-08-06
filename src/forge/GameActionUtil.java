@@ -3403,6 +3403,27 @@ public class GameActionUtil {
 			
 		}
 		player.clearSlowtripList();
+		
+		//Do the same for the opponent
+		final Player opponent = player.getOpponent();
+		
+		list = opponent.getSlowtripList();
+		
+		for (int i = 0; i < list.size(); i++) {
+			Card card = list.get(i);
+			card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep."); //otherwise another slowtrip gets added
+			
+			final Ability slowtrip = new Ability(card, "0") {
+				@Override
+				public void resolve() {
+					opponent.drawCard();
+				}
+			};
+			slowtrip.setStackDescription(card.getName() + " - Draw a card");
+			AllZone.Stack.add(slowtrip);
+			
+		}
+		opponent.clearSlowtripList();
 	}
 	
 	
