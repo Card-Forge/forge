@@ -8015,58 +8015,6 @@ public class CardFactory_Sorceries {
 
         
         //*************** START *********** START **************************
-        else if(cardName.equals("False Mourning") || cardName.equals("Salvage")) {
-            final SpellAbility spell = new Spell(card) {
-                
-				private static final long serialVersionUID = -6183756156784063761L;
-
-				@Override
-                public void resolve() {
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    
-                    if(AllZone.GameAction.isCardInZone(getTargetCard(), graveyard)) {
-                        graveyard.remove(getTargetCard());
-                        AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
-                    }
-                }//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    return graveyard.getCards().length != 0 && super.canPlay();
-                }
-            };
-            Input runtime = new Input() {
-				private static final long serialVersionUID = -1438178075940689742L;
-
-				@Override
-                public void showMessage() {
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    Object o = AllZone.Display.getChoiceOptional("Select target card", graveyard.getCards());
-                    if(o == null) stop();
-                    else {
-                    	String location = "top of owner's library";
-                    	
-                        spell.setStackDescription("Return " + o + " to " + location);
-                        spell.setTargetCard((Card) o);
-                        if(this.isFree()) 
-                        {
-                        	this.setFree(false);
-                        	stop();
-                        	AllZone.Stack.add(spell);
-                    	} 
-                        else
-                        	stopSetNext(new Input_PayManaCost(spell));
-                    }
-                }//showMessage()
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetType("All", AllZone.Computer_Graveyard));
-            spell.setBeforePayMana(runtime);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-      //*************** START *********** START **************************
         else if(cardName.equals("Sanity Grinding")) {
         	/*
         	 * Chroma — Reveal the top ten cards of your library. For each blue
