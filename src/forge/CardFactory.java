@@ -13425,7 +13425,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        
+/* Converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Boomerang") || cardName.equals("Eye of Nowhere") || cardName.equals("Rescind") || cardName.equals("Surging AEther") || cardName.equals("Deny Reality")) {
             final SpellAbility spell = new Spell(card) {
@@ -13491,7 +13492,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/
+
+
         //*************** START *********** START **************************
         else if(cardName.equals("Momentous Fall")) {
             final SpellAbility spell = new Spell(card) {

@@ -1,3 +1,36 @@
+Boomerang
+U U
+Instant
+Return target permanent to its owner's hand.
+spBounceTgt:Permanent:Hand
+
+Deny Reality
+3 U B
+Instant
+Cascade, Return target permanent to its owner's hand.
+Cascade
+spBounceTgt:Permanent:Hand
+
+Eye of Nowhere
+U U
+Sorcery
+Return target permanent to its owner's hand.
+spBounceTgt:Permanent:Hand
+
+Rescind
+1 U U
+Instant
+Return target permanent to its owner's hand.
+Cycling:2
+spBounceTgt:Permanent:Hand
+
+Surging AEther
+3 U
+Instant
+Ripple:4, Return target permanent to its owner's hand.
+Ripple:4
+spBounceTgt:Permanent:Hand
+
 Mirror Gallery
 5
 Artifact
@@ -1465,18 +1498,6 @@ Cultivate
 2 G
 Sorcery  
 Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
-
-Deny Reality
-3 U B
-Instant
-Return target permanent to its owner's hand.
-Cascade
-
-Rescind
-1 U U
-Instant
-Return target permanent to its owner's hand.
-Cycling:2
 
 Rotting Rats
 1 B
@@ -3203,12 +3224,6 @@ Thrumming Stone
 5
 Legendary Artifact
 Spells you cast have ripple 4.
-
-Surging AEther
-3 U
-Instant
-Return target permanent to its owner's hand.
-Ripple:4
 
 Surging Flame
 1 R	
@@ -14872,11 +14887,6 @@ Sorcery
 no text
 spDrawCards:4:Drawback$YouDiscard/3/AtRandom:Draw four cards, then discard three cards at random.:Goblin Lore - Draw 4 cards, then discard 3 at random.
 
-Eye of Nowhere
-U U
-Sorcery
-Return target permanent to its owner's hand.
-
 Ravages of War
 3 W
 Sorcery
@@ -24738,11 +24748,6 @@ Legendary Creature Human Wizard
 Flying. Whenever Zur the Enchanter attacks, you may search your library for an enchantment card with converted mana cost 3 or less and put it into play. If you do, shuffle your library.
 1/4
 Flying
-
-Boomerang
-U U
-Instant
-Return target permanent to its owner's hand.
 
 Culling Sun
 2 W W B
