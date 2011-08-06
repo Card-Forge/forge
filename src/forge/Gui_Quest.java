@@ -65,7 +65,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
     private JComboBox         deckComboBox       = new JComboBox();
     private JComboBox         petComboBox        = new JComboBox();
     private ButtonGroup       oppGroup           = new ButtonGroup();
-    private static JCheckBox  smoothLandCheckBox = new JCheckBox("", true);
+    private static JCheckBox  smoothLandCheckBox = new JCheckBox("", false);
     private static JCheckBox  resizeCheckbox     = new JCheckBox("", true);
     private static JCheckBox  millLoseCheckBox 	 = new JCheckBox("", true);
     

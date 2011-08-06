@@ -82,7 +82,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     // titledBorder2
     private TitledBorder            titledBorder2;
     private static JCheckBox        newGuiCheckBox       = new JCheckBox("", true);
-    private static JCheckBox        smoothLandCheckBox   = new JCheckBox("", true);
+    private static JCheckBox        smoothLandCheckBox   = new JCheckBox("", false);
     private static JCheckBox        millLoseCheckBox     = new JCheckBox("", true);
     
     // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
