@@ -1,0 +1,9 @@
+Name:Tezzeret, Agent of Bolas
+ManaCost:2 U B
+Types:Planeswalker Tezzeret
+Text:no text
+Loyalty:3
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_agent_of_bolas.jpg
+End
