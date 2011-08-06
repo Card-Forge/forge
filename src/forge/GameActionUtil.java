@@ -5178,24 +5178,17 @@ public class GameActionUtil {
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
 		} else if(c.getController().equals(AllZone.ComputerPlayer)) {
-            CardList Hexmages = new CardList();
-            PlayerZone zone = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-            if(zone != null) {
-            	Hexmages.addAll(zone.getCards());
-            	Hexmages = Hexmages.getName("Vampire Hexmage");
-            int clife = AllZone.ComputerPlayer.getLife();			
-			if(compVessel.getCounters(Counters.CHARGE) > clife && (Hexmages.size() == 0)) AllZone.Stack.add(ability);
-		}
+			CardList Hexmages = new CardList();
+			PlayerZone zone = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+			if(zone != null) {
+				Hexmages.addAll(zone.getCards());
+				Hexmages = Hexmages.getName("Vampire Hexmage");
+				int clife = AllZone.ComputerPlayer.getLife();			
+				if(compVessel.getCounters(Counters.CHARGE) > clife && (Hexmages.size() == 0)) AllZone.Stack.add(ability);
+			}
 		}
 
 	}//landfall_Eternity_Vessel
-	
-	public static void executeLifeLinkEffects(Card c) {
-		int pwr = c.getNetAttack();
-		if(CombatUtil.isDoranInPlay()) pwr = c.getNetDefense();
-
-		executeLifeLinkEffects(c, pwr);
-	}
 
 	public static void executeLifeLinkEffects(final Card c, int n) {
 		final Player player = c.getController();
