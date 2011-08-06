@@ -11241,21 +11241,21 @@ public class GameActionUtil {
 						return false;
 					}
 				});
-				// For each card found, find the keywords which are the StatusEffect Keywords
+				// For each card found, find the keywords which are the stPump Keywords
 				for(int i = 0; i < Cards_WithKeyword.size() ; i++) {
 					Card card = Cards_WithKeyword.get(i);
 					ArrayList<String> a = card.getKeyword();
-					int StaticEffectKeywords = 0;
-					int StaticEffectKeyword_Number[] = new int[a.size()];
+					int stPumpKeywords = 0;
+					int stPumpKeyword_Number[] = new int[a.size()];
 					for(int x = 0; x < a.size(); x++)
 						if(a.get(x).toString().startsWith("stPump")) {
-     		            	StaticEffectKeyword_Number[StaticEffectKeywords] = x;
-     		            	StaticEffectKeywords = StaticEffectKeywords + 1;
+							stPumpKeyword_Number[stPumpKeywords] = x;
+							stPumpKeywords = stPumpKeywords + 1;
      		            }
 					// For each keyword found, Record Data about the keyword and the source card
 					// Record Data Start
-					for(int CKeywords = 0; CKeywords < StaticEffectKeywords; CKeywords++) {
-						String parse = card.getKeyword().get(StaticEffectKeyword_Number[CKeywords]).toString();                
+					for(int CKeywords = 0; CKeywords < stPumpKeywords; CKeywords++) {
+						String parse = card.getKeyword().get(stPumpKeyword_Number[CKeywords]).toString();                
 						String k[] = parse.split(":");
 						int ANCount = 0;
 						KeywordsActive = 0;
@@ -11278,7 +11278,7 @@ public class GameActionUtil {
 								}
 							}
 							if(!ActivatedAlready) {
-								InfoStorage[KeywordsActive] = String.valueOf(card.getUniqueNumber()) + ":" + StaticEffectKeyword_Number[CKeywords] + ":" +  card.getController();
+								InfoStorage[KeywordsActive] = String.valueOf(card.getUniqueNumber()) + ":" + stPumpKeyword_Number[CKeywords] + ":" +  card.getController();
 								ActivationNumber = KeywordsActive;
 							}
 							CardList SourceCard_in_CardsWithKeyword = CardsWithKeyword.getName(card.getName());
@@ -11288,7 +11288,7 @@ public class GameActionUtil {
 							}
 							// JOptionPane.showMessageDialog(null, ANCount + " " + SourceCard_in_CardsWithKeyword.size(), "", JOptionPane.INFORMATION_MESSAGE);
 							for(int i1 = 0; i1 < ANCount - SourceCard_in_CardsWithKeyword.size() + 1; i1++) {
-								if(CKeywords + 1 == StaticEffectKeywords) CardsWithKeyword.add(card);
+								if(CKeywords + 1 == stPumpKeywords) CardsWithKeyword.add(card);
 							}
 							// Record Data End
      	     			
@@ -11305,12 +11305,7 @@ public class GameActionUtil {
 			next[ANumber].clear();
 	      	CardList Cards_inZone = new CardList();
 	      		
-	      	// Where does the SourceCard have to be?
-	      	boolean CardInRightZone = false;
-	      	if(AllZone.GameAction.isCardInPlay(SourceCard)) CardInRightZone = true;
-	      	if(Keyword_Details[1].equals("Graveyard")&& AllZone.GameAction.isCardInGrave(SourceCard)) CardInRightZone = true;
-	      	
-	      	if(CardInRightZone) {
+	      	if(AllZone.GameAction.isCardInPlay(SourceCard)) {
 	      		// Who gets the Bonus?
 	      		Cards_inZone.add(AffectedCards(SourceCard, Keyword_Details));
 	      		
@@ -11351,7 +11346,6 @@ public class GameActionUtil {
      		 // Is the Card in the right location	 
             boolean SourceCardinRightZone = true;
             if(!AllZone.GameAction.isCardInPlay(Source)) SourceCardinRightZone = false;
-            if(k[1].equals("Graveyard") && !AllZone.GameAction.isCardInGrave(Source)) SourceCardinRightZone = false;
             if(!LastKnownController.equals(Source.getController())) SourceCardinRightZone = false;
             	
       	    // If the Source Card is not in the right Location or the Special Conditions are no longer met - Then Remove Bonus
