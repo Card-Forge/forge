@@ -2004,7 +2004,7 @@ class CardFactory_Lands {
                 @Override
                 public void showMessage() {
                     ButtonUtil.enableOnlyCancel();
-                    AllZone.Display.showMessage("Select egendary creature to get fear");
+                    AllZone.Display.showMessage("Select legendary creature to get fear");
                 }
                 
                 @Override
