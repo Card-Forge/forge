@@ -37,9 +37,6 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
 		cardToEffectsList.put("Caravan Escort", new String[] {"Caravan_Escort"});
-		cardToEffectsList.put("Castle", new String[] {"Castle"});
-		cardToEffectsList.put("Castle Raptors", new String[] {"Castle_Raptors"});
-		cardToEffectsList.put("Chainer, Dementia Master", new String[] {"Chainer"});
 		cardToEffectsList.put("Champion's Drake", new String[] {"Champions_Drake"});
 		cardToEffectsList.put("Coat of Arms", new String[] {"Coat_of_Arms"});
 		cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
@@ -67,7 +64,6 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
-		cardToEffectsList.put("Giant Tortoise", new String[] {"Giant_Tortoise"});
 		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
 		cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});
 		cardToEffectsList.put("Grixis Grimblade", new String[] {"Grixis_Grimblade"});

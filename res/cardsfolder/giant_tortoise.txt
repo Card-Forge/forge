@@ -3,6 +3,7 @@ ManaCost:1 U
 Types:Creature Turtle
 Text:As long as Giant Tortoise is untapped, it gets +0/+3.
 PT:1/1
+K:stPumpSelf:Creature:0/3:isUntapped:As long as CARDNAME is untapped, it gets +0/+3.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_tortoise.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/76.jpg

@@ -1,7 +1,8 @@
 Name:Castle
 ManaCost:3 W
 Types:Enchantment
-Text:Untapped creatures you control get +0/+2.
+Text:no text
+K:stPumpAll:Creature.untapped+YouCtrl:0/2:No Condition:Untapped creatures you control get +0/+2.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/castle.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/194.jpg

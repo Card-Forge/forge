@@ -15949,112 +15949,6 @@ public class GameActionUtil {
 		}
 	};
 
-	public static Command Castle                      = new Command() {
-		private static final long serialVersionUID = 4779036066493452237L;
-
-		CardList                  old              = new CardList();
-
-		public void execute() {
-			Card c;
-			// reset all previous cards stats
-			for(int i = 0; i < old.size(); i++) {
-				c = old.get(i);
-				c.addSemiPermanentDefenseBoost(-2);
-			}
-			old.clear();
-
-			CardList list = AllZoneUtil.getCardsInPlay();
-
-			CardList creatures = list.getType("Creature");
-
-			list = list.getName("Castle");
-
-			// Each Castle
-			for(int i = 0; i < list.size(); i++) {
-				// Each creature in play
-				Card castleCard = list.get(i);
-				for(int j = 0; j < creatures.size(); j++) {
-					c = creatures.get(j);
-
-					if(c.isUntapped()) {
-						if(c.getController().equals(
-								castleCard.getController())) // Only
-								// apply
-								// benefit
-								// to
-								// controlled
-								// cards
-								{
-							c.addSemiPermanentDefenseBoost(2);
-							old.add(c);
-								}
-					}
-				}
-			}
-		}
-	}; // Castle
-
-	public static Command Castle_Raptors              = new Command() {
-		private static final long serialVersionUID = 8774172452544866232L;
-
-		CardList                  old              = new CardList();
-		int                       pump             = 2;
-
-		public void execute() {
-			Card c;
-			// reset all previous cards stats
-			for(int i = 0; i < old.size(); i++) {
-				c = old.get(i);
-				c.addSemiPermanentDefenseBoost(-pump);
-			}
-			old.clear();
-
-			CardList list = getCard("Castle Raptors");
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				// only add boost if card is untapped
-				if(c.isUntapped()) {
-					c.addSemiPermanentDefenseBoost(pump);
-					old.add(c);
-				}
-			}// for
-		}// execute()
-
-		CardList getCard(String name) {
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName(name);
-			return list;
-		}// getRaptor()
-	}; // Castle Raptors
-
-	public static Command Giant_Tortoise = new Command() {
-		private static final long serialVersionUID = -8191148876633239167L;
-
-		CardList old = new CardList();
-		int pump = 3;
-
-		public void execute() {
-			Card c;
-			// reset all previous cards stats
-			for(int i = 0; i < old.size(); i++) {
-				c = old.get(i);
-				c.addSemiPermanentDefenseBoost(-pump);
-			}
-			old.clear();
-
-			CardList list = AllZoneUtil.getCardsInPlay("Giant Tortoise");
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				// only add boost if card is untapped
-				if(c.isUntapped()) {
-					c.addSemiPermanentDefenseBoost(pump);
-					old.add(c);
-				}
-			}// for
-		}// execute()
-	}; // Giant_Tortoise
 
 	public static Command Filth                       = new Command() {
 		private static final long serialVersionUID = -8423145847505L;
@@ -16758,39 +16652,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Spidersilk Armor
 
-	public static Command Chainer                     = new Command() {
-		private static final long serialVersionUID   = -5404417712966524986L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Chainer, Dementia Master");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Nightmare");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Chainer
-
+	
 	public static Command Eldrazi_Monument            = new Command() {
 
 		private static final long serialVersionUID   = -3591110487441151195L;
@@ -17305,9 +17167,6 @@ public class GameActionUtil {
 		
 		commands.put("Cantivore", Cantivore);
 		commands.put("Caravan_Escort", Caravan_Escort);
-		commands.put("Castle", Castle);
-		commands.put("Castle_Raptors", Castle_Raptors);
-		commands.put("Chainer", Chainer);
 		commands.put("Champions_Drake", Champions_Drake);
 		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		commands.put("Cognivore", Cognivore);
@@ -17336,7 +17195,6 @@ public class GameActionUtil {
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
-		commands.put("Giant_Tortoise", Giant_Tortoise);
 		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
 		commands.put("Grixis_Grimblade", Grixis_Grimblade);
