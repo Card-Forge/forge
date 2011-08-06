@@ -3,6 +3,7 @@ ManaCost:1 U U
 Types:Creature Jellyfish
 Text:no text
 PT:5/5
+K:Flying
 K:CARDNAME enters the battlefield tapped.
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ SpellCast | TargetsValid$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you become the target of a spell, you may untap CARDNAME.
