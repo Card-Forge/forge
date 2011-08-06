@@ -158,7 +158,6 @@ public class GameActionUtil {
 		playCard_Chalice_of_the_Void(c);
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
-		playCard_Halcyon_Glaze(c);
 		playCard_Infernal_Kirin(c);
 		playCard_Battlegate_Mimic(c);
 		playCard_Nightsky_Mimic(c);
@@ -599,60 +598,6 @@ public class GameActionUtil {
 
 		}//if					
 	}// Demigod of Revenge
-
-	public static void playCard_Halcyon_Glaze(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Halcyon Glaze");
-
-		if(list.size() > 0) {
-			if(c.getType().contains("Creature")) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					final Command untilEOT = new Command() {
-						private static final long serialVersionUID = -4569751606008597903L;
-
-						public void execute() {
-							if(AllZone.GameAction.isCardInPlay(card)) {
-								card.setBaseAttack(0);
-								card.setBaseDefense(0);
-								card.removeType("Creature");
-								card.removeType("Illusion");
-								card.removeIntrinsicKeyword("Flying");
-
-							}
-						}
-					};
-
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							card.setBaseAttack(4);
-							card.setBaseDefense(4);
-							if(!card.getIntrinsicKeyword().contains("Flying")) card.addIntrinsicKeyword("Flying");
-							if(!card.getType().contains("Creature")) card.addType("Creature");
-							if(!card.getType().contains("Illusion")) card.addType("Illusion");
-							AllZone.EndOfTurn.addUntil(untilEOT);
-						}
-					}; // ability2
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a creature spell Halcyon Glaze becomes a 4/4 Illusion ");
-					sb.append("creature with flying until end of turn. It's still an enchantment.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-	}//Halcyon Glaze
 
 	public static void playCard_Infernal_Kirin(Card c) {
 		final Player controller = c.getController();
