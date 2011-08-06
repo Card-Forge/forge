@@ -4,7 +4,8 @@ Types:Creature Spirit
 Text:no text
 PT:2/1
 K:When CARDNAME enters the battlefield, draw a card.
-K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Haru-Onna to its owner's hand.
+T:Mode$ SpellCast | ValidCard$ Spirit.YouCtrl,Arcane.YouCtrl | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may return CARDNAME to its owner's hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haru_onna.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/132.jpg
