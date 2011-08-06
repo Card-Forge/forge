@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Instant
 Text:no text
 A:SP$Counter|Cost$U U|Type$Spell|Destination$Graveyard|SpellDescription$Counter target spell.
-SVar:AltCost:Return<2/Island>
+SVar:AltCost:Return<3/Island>
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thwart.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/108.jpg
