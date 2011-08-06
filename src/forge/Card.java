@@ -506,7 +506,11 @@ public class Card extends MyObservable
 	  if (this.getName().equals("Cho-Manno, Revolutionary"))
 		  n = 0;
 	  //setDamage(getDamage() + n);
-	  damage += n;
+	  
+	  if (CardFactoryUtil.canDamage(source, this))
+	  {
+		  damage += n;
+	  }
   }
   public void setDamage(int n) 
   {

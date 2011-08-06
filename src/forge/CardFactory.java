@@ -8422,12 +8422,19 @@ public class CardFactory implements NewConstants {
              CardList all = new CardList();
              all.addAll(AllZone.Human_Play.getCards());
              all.addAll(AllZone.Computer_Play.getCards());
-
+             all = all.filter(new CardListFilter()
+             {
+            	public boolean addCard(Card c)
+            	{
+            		return c.isPermanent() && !c.isArtifact();
+            	}
+             });
+             CardListUtil.sortByDestroyEffect(all);
+             
              for (int i = 0; i < all.size(); i++)
              {
                 Card c = all.get(i);
-                if (c.isPermanent() && !c.isArtifact())
-                   AllZone.GameAction.destroy(c);
+                AllZone.GameAction.destroy(c);
              }
           }// resolve()
 
@@ -8512,13 +8519,15 @@ public class CardFactory implements NewConstants {
 				CardList all = new CardList();
 				all.addAll(AllZone.Human_Play.getCards());
 				all.addAll(AllZone.Computer_Play.getCards());
+				all = all.getType("Creature");
 
+				CardListUtil.sortByDestroyEffect(all);
+				
 				for (int i = 0; i < all.size(); i++)
 				{
 					Card c = all.get(i);
-					if (c.isCreature()) {
-						AllZone.GameAction.destroyNoRegeneration(c);
-					}
+					System.out.println("WOG: " + c );
+					AllZone.GameAction.destroyNoRegeneration(c);
 				}
 			}// resolve()
 
@@ -8633,13 +8642,13 @@ public class CardFactory implements NewConstants {
 				CardList all = new CardList();
 				all.addAll(AllZone.Human_Play.getCards());
 				all.addAll(AllZone.Computer_Play.getCards());
-
+				all = all.getType("Enchantment");
+				CardListUtil.sortByDestroyEffect(all);
+				
 				for (int i = 0; i < all.size(); i++)
 				{
 					Card c = all.get(i);
-					if (c.isEnchantment())
-						AllZone.GameAction.destroy(c);
-					
+					AllZone.GameAction.destroy(c);
 				}	
 				
 			}// resolve()
@@ -8678,12 +8687,13 @@ public class CardFactory implements NewConstants {
 				CardList all = new CardList();
 				all.addAll(AllZone.Human_Play.getCards());
 				all.addAll(AllZone.Computer_Play.getCards());
+				all = all.getType("Enchantment");
+				CardListUtil.sortByDestroyEffect(all);
 
 				for (int i = 0; i < all.size(); i++)
 				{
 					Card c = all.get(i);
-					if (c.isEnchantment())
-						AllZone.GameAction.destroy(c);
+					AllZone.GameAction.destroy(c);
 				}
 
 			}// resolve()
@@ -8751,6 +8761,7 @@ public class CardFactory implements NewConstants {
             list.addAll(AllZone.Human_Play.getCards());
             list.addAll(AllZone.Computer_Play.getCards());
             list = list.getType("Creature");
+
 
             for(int i = 0; i < list.size(); i++) {
               if (CardFactoryUtil.canDamage(card, list.get(i)))
@@ -9168,6 +9179,7 @@ public class CardFactory implements NewConstants {
           CardList all = new CardList();
           all.addAll(AllZone.Human_Play.getCards());
           all.addAll(AllZone.Computer_Play.getCards());
+          CardListUtil.sortByDestroyEffect(all);
 
           for(int i = 0; i < all.size(); i++)
           {
@@ -17111,10 +17123,28 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
 			public void resolve() {
 				System.out.println("Turn: " + AllZone.Phase.getTurn());
-				AllZone.Phase.addExtraTurn();
+				AllZone.Phase.addExtraTurn(card.getController());
 			}
     	};
     	card.clearSpellAbility();
+    	card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
+	
+	//*************** START *********** START **************************
+    else if (cardName.equals("Time Stretch"))
+	{
+    	final SpellAbility spell = new Spell(card)
+    	{
+			private static final long serialVersionUID = -76579316599195788L;
+
+			public void resolve() {
+				AllZone.Phase.addExtraTurn(getTargetPlayer());
+				AllZone.Phase.addExtraTurn(getTargetPlayer());
+			}
+    	};
+    	card.clearSpellAbility();
+    	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+    	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     	card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 	

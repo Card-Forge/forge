@@ -6,7 +6,8 @@ public class Phase extends MyObservable
   private int phaseIndex;
   private int turn;
   
-  private int extraTurns;
+  private int humanExtraTurns;
+  private int computerExtraTurns;
   
   private String phases[][] =
   {
@@ -54,7 +55,8 @@ public class Phase extends MyObservable
   {
     turn = 1;
     phaseIndex = 0;
-    extraTurns = 0;
+    humanExtraTurns = 0;
+    computerExtraTurns = 0;
     this.updateObservers();
   }
   public void setPhase(String phase, String player)
@@ -96,7 +98,9 @@ public class Phase extends MyObservable
     
     AllZone.ManaPool.clear();
     
-    if (getPhase().equals(Constant.Phase.Cleanup) && extraTurns > 0)
+    //if (getPhase().equals(Constant.Phase.Cleanup) && extraTurns > 0)
+    if ((is(Constant.Phase.Cleanup, Constant.Player.Human) && humanExtraTurns > 0 ) || 
+    	(is(Constant.Phase.Cleanup, Constant.Player.Computer) && computerExtraTurns > 0 ) )
     {
     	//System.out.println("CLEANUP!");
     	String player = getActivePlayer();
@@ -114,12 +118,22 @@ public class Phase extends MyObservable
     }
      
 
-    if(getPhase().equals(Constant.Phase.Untap)) {
+    //if(getPhase().equals(Constant.Phase.Untap)) {
+    if (is(Constant.Phase.Untap, Constant.Player.Human))
+    {
       turn++;
-      if (extraTurns > 0)
-    	  extraTurns--;
-      else if(extraTurns < 0)
-    	  extraTurns++;
+      if (humanExtraTurns > 0)
+    	  humanExtraTurns--;
+      else if(humanExtraTurns < 0)
+    	  humanExtraTurns++;
+    }
+    else if (is(Constant.Phase.Untap, Constant.Player.Computer))
+    {
+      turn++;
+      if (computerExtraTurns > 0)
+    	  computerExtraTurns--;
+      else if(computerExtraTurns < 0)
+    	  computerExtraTurns++;
     }
     
     //for debugging: System.out.println(getPhase());
@@ -164,19 +178,28 @@ public class Phase extends MyObservable
     turn = in_turn;
   }
   
-  public void addExtraTurn()
+  public void addExtraTurn(String player)
   {
-	  extraTurns++;
+	  if (player.equals(Constant.Player.Human))
+		  humanExtraTurns++;
+	  else
+		  computerExtraTurns++;
   }
   
-  public int getExtraTurns()
+  public int getExtraTurns(String player)
   {
-	  return extraTurns;
+	  if (player.equals(Constant.Player.Human))
+		  return humanExtraTurns;
+	  else
+		  return computerExtraTurns;
   }
   
-  public void setExtraTurns(int i)
+  public void setExtraTurns(int i, String player)
   {
-	  extraTurns = i;
+	  if (player.equals(Constant.Player.Human))
+		  humanExtraTurns = i;
+	  else
+		  computerExtraTurns = i;
   }
   
   public static void main(String args[])

@@ -1345,9 +1345,6 @@ class CardFactory_Planeswalkers {
 	    //*************** END ************ END **************************
 
 
-
-
-
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Chandra Nalaar"))
 	    {

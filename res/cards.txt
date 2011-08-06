@@ -1,3 +1,8 @@
+Time Stretch
+8 U U
+Sorcery
+Target player takes two extra turns after this one.
+
 Veteran Armorsmith
 W W
 Creature Human Soldier 
@@ -13721,7 +13726,7 @@ When Kemuri-Onna comes into play, target player discards a card. (NOTE: "Wheneve
 Infernal Kirin
 2 B B
 Legendary Creature Kirin Spirit
-Whenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost.
+(NOTE: "Whenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost." not implemented.)
 3/3
 Flying
 

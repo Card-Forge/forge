@@ -108,6 +108,49 @@ public class CardListUtil
     list.sort(com);
   }//sortByKeyword()
   
+  public static void sortByDestroyEffect(CardList list)
+  {
+	  Comparator<Card> com = new Comparator<Card>()
+	  {
+	      public int compare(Card a, Card b)
+	      {
+	    	ArrayList<String> aKeywords = a.getKeyword();
+	    	ArrayList<String> bKeywords = b.getKeyword();
+	    	
+	    	boolean aContains = false;
+	    	boolean bContains = false;
+	    	
+	    	for (String kw : aKeywords)
+	    	{
+	    		if (kw.startsWith("Whenever") && kw.contains("into a graveyard from the battlefield,"))
+	    		{	
+	    			aContains = true;
+	    			break;
+	    		}
+	    	}
+	    	
+	    	for (String kw : bKeywords)
+	    	{
+	    		if (kw.startsWith("Whenever") && kw.contains("into a graveyard from the battlefield,"))
+	    		{	
+	    			bContains = true;
+	    			break;
+	    		}
+	    	}
+	        if( aContains && bContains)
+	          return 0;
+	        else if(aContains)
+	          return 1;
+	        else if(bContains)
+	          return -1;
+
+	        return 0;
+	     }
+	   };
+	   list.sort(com);
+  }
+  
+  
   public static void sortCMC(CardList list)
   {
      Comparator<Card> com = new Comparator<Card>()

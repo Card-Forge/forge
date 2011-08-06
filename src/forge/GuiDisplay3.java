@@ -489,6 +489,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         String chosenColorText = "";
         if(c.getChosenColor() != "") chosenColorText = "(chosen color: " + c.getChosenColor() + ")";
         
+        String namedCardText = "";
+        if (c.getNamedCard() != "") namedCardText = "(named card: " + c.getNamedCard() + ")";
+        
         String equippingText = "";
         if(c.getEquipping().size() > 0) equippingText = "=Equipping " + c.getEquipping().get(0) + "=";
         
@@ -521,7 +524,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         	uncastableText = "This card can't be cast.";
         
         if(!c.isFaceDown()) this.cdArea.setText(tokenText + c.getText() + counterText + chosenTypeText
-                +chosenColorText + equippingText + equippedByText + enchantingText + enchantedByText + uncastableText);
+                +chosenColorText + namedCardText + equippingText + equippedByText + enchantingText + enchantedByText + uncastableText);
         else this.cdArea.setText(tokenText + counterText);
         
         cdPanel.setBorder(GuiDisplayUtil.getBorder(c));

@@ -14424,14 +14424,12 @@ public class GameActionUtil
 			for (int i = 0; i < list.size(); i++)
 			{
 				c = list.get(i);
-				if (CardUtil.getColors(c).contains(Constant.Color.Green)
-						&& !c.getName().equals("Tolsimir Wolfblood"))
+				if (CardUtil.getColors(c).contains(Constant.Color.Green))
 				{
 					c.addSemiPermanentAttackBoost(-1);
 					c.addSemiPermanentDefenseBoost(-1);
 				}
-				if (CardUtil.getColors(c).contains(Constant.Color.White)
-						&& !c.getName().equals("Tolsimir Wolfblood"))
+				if (CardUtil.getColors(c).contains(Constant.Color.White))
 				{
 					c.addSemiPermanentAttackBoost(-1);
 					c.addSemiPermanentDefenseBoost(-1);
@@ -14451,20 +14449,19 @@ public class GameActionUtil
 				for (int i = 0; i < creature.size(); i++)
 				{
 					c = creature.get(i);
-					if (CardUtil.getColors(c).contains(Constant.Color.Green)
-							&& !c.getName().equals("Tolsimir Wolfblood"))
-					{
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-					}
-					if (CardUtil.getColors(c).contains(Constant.Color.White)
-							&& !c.getName().equals("Tolsimir Wolfblood"))
-					{
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-					}
-
+					if (!c.getName().equals("Tolsimir Wolfblood") && !c.isFaceDown()) {
+						if (CardUtil.getColors(c).contains(Constant.Color.Green))
+						{
+							c.addSemiPermanentAttackBoost(1);
+							c.addSemiPermanentDefenseBoost(1);
+						}
+						if (CardUtil.getColors(c).contains(Constant.Color.White))
+						{
+							c.addSemiPermanentAttackBoost(1);
+							c.addSemiPermanentDefenseBoost(1);
+						}
 					gloriousAnthemList.add(c);
+					}
 				}// for inner
 			}// for outer
 		}// execute()

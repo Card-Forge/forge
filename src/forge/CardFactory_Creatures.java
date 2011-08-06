@@ -14186,8 +14186,6 @@ public class CardFactory_Creatures {
 	      card.addSpellAbility(a1);
 	      a1.setDescription("T: Put a legendary 2/2 green and white Wolf creature token named Voja into play.");
 	      a1.setStackDescription("Put a 2/2 white green Legendary Wolf creature token named Voja into play.");
-
-	      a1.setBeforePayMana(new Input_PayManaCost(a1));
 	    }//*************** END ************ END **************************
 
 	  //*************** START *********** START **************************
@@ -18110,6 +18108,49 @@ public class CardFactory_Creatures {
 	        				  input[0] = (String)JOptionPane.showInputDialog(null, "Which card?", "Pick card", JOptionPane.QUESTION_MESSAGE);
 	        				  card.setNamedCard(input[0]);
 	        			  }
+	        			  else
+	        			  {
+	        				  String s = "Ancestral Recall";
+	        				  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+	        				  PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+	        				  
+	        				  CardList list = new CardList();
+	        				  list.addAll(hand.getCards());
+	        				  list.addAll(lib.getCards());
+	        				  list = list.filter(new CardListFilter()
+	        				  {
+	        					 public boolean addCard(Card c)
+	        					 {
+	        						 return !c.isLand() && !c.isUnCastable();
+	        					 }
+	        				  });
+	        				  
+	        				  if (list.size() > 0 ) {
+		        				  CardList rare = new CardList();
+		        				  rare = list;
+		        				  rare = rare.filter(new CardListFilter()
+		        				  {
+		        					 public boolean addCard(Card c)
+		        					 {
+		        						 return c.getRarity().equals("Rare");
+		        					 }
+		        				  });
+		        				  
+		        				  if (rare.size() > 0) {
+		        					  s = rare.get(CardUtil.getRandomIndex(rare)).getName();
+		        				  }
+		        				  else
+		        				  {
+		        					  Card c = list.get(CardUtil.getRandomIndex(list));
+		        					  //System.out.println(c + " - " + c.getRarity());
+		        					  s = c.getName();
+		        				  }
+	        				  }
+	        				  
+	        				  card.setNamedCard(s);  
+	        				  
+	        			  }
+	        				  
 	        		  }
 	        	  };
 	        	  Command comesIntoPlay = new Command()

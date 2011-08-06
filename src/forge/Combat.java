@@ -342,8 +342,13 @@ public class Combat
         	AllZone.GameAction.addAssignedDamage(block.get(index), c, damage);
         	damage = 0;
         }
+        else if (c.getKeyword().contains("Trample"))
+        {
+      	  this.addDefendingDamage(damage, c);
+        }
       }//setAssignedFirstStrikeDamage()
 
+      
 
 	  //set Card.setAssignedDamage() for all creatures in combat
       //also assigns player damage by setPlayerDamage()
@@ -502,6 +507,10 @@ public class Combat
           	int index = CardUtil.getRandomIndex(block);
           	AllZone.GameAction.addAssignedDamage(block.get(index), c, damage);
           	damage = 0;
+          }
+          else if (c.getKeyword().contains("Trample"))
+          {
+        	  this.addDefendingDamage(damage, c);
           }
       }//setAssignedDamage()
 
