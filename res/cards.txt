@@ -1,3 +1,8 @@
+Suffer the Past
+X B
+Instant
+Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.
+
 Time of Heroes
 1 W
 Enchantment
@@ -1687,11 +1692,6 @@ Khalni Heart Expedition
 Enchantment
 Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Khalni Heart Expedition.
 Landfall
-
-Suffer the Past
-X B
-Sorcery
-Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.
 
 Repay in Kind
 5 B B

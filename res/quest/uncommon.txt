@@ -1,13 +1,16 @@
+AErathi Berserker
 AEther Membrane
 AEther Vial
 Abbey Gargoyles
 Abomination
 Absolute Grace
 Absolute Law
+Acidic Soil
 Act of Treason
 Adarkar Sentinel
 Air Elemental
 Akoum Refuge
+Alaborn Zealot
 Albino Troll
 Alert Shu Infantry
 Allied Strategies
@@ -19,6 +22,7 @@ Anaconda
 Angel of Light
 Angel of Mercy
 Anger
+Animate Artifact
 Animate Dead
 Animate Land
 Annihilate
@@ -26,6 +30,7 @@ Arachnoid
 Arcane Sanctum
 Arcbound Lancer
 Arcbound Slith
+Archaeological Dig
 Arctic Flats
 Arctic Nishoba
 Arctic Wolves
@@ -39,6 +44,7 @@ Aspect of Mongoose
 Assembly-Worker
 Auriok Bladewarden
 Avalanche Riders
+Aven Fateshaper
 Aven Smokeweaver
 Aysen Abbey
 Azure Drake
@@ -53,12 +59,14 @@ Battle Mastery
 Battlefield Percher
 Bazaar of Baghdad
 Beast Attack
+Beastbreaker of Bala Ged
 Bee Sting
 Behemoth Sledge
 Belligerent Hatchling
 Beloved Chaplain
 Benalish Heralds
 Bestial Menace
+Binding Grasp
 Bituminous Blast
 Black Knight
 Black Vise
@@ -93,6 +101,7 @@ Briarhorn
 Brilliant Plan
 Bull Cerodon
 Bull Hippo
+Buried Alive
 Burrowing
 Cabal Coffers
 Calciderm
@@ -139,22 +148,28 @@ Council of Advisors
 Counterbalance
 Counterspell
 Cradle Guard
+Craw Giant
 Crazed Skirge
 Creeping Mold
 Crenellated Wall
 Crib Swap
+Crosis's Attendant
+Crowd Favorites
 Crowd of Cinders
 Crude Rampart
 Crumbling Necropolis
 Crypt Cobra
+Crystal Vein
 Crystalline Sliver
 Cudgel Troll
 Cunning Sparkmage
+Curse of Wizardry
 Cursed Land
 Daggerclaw Imp
 Dakmor Ghoul
 Dance of Shadows
 Dancing Scimitar
+Darigaaz's Attendant
 Darksteel Gargoyle
 Darkwatch Elves
 Daru Encampment
@@ -177,12 +192,15 @@ Diamond Valley
 Dimir Guildmage
 Dingus Staff
 Dismiss
+Dissipate
 Divine Transformation
 Dragon Blood
 Dragonstalker
 Drake-Skull Cameo
 Dreadwing
+Dreamstone Hedron
 Drekavac
+Dromar's Attendant
 Drove of Elves
 Dryad Arbor
 Dryad Sophisticate
@@ -190,10 +208,13 @@ Duergar Cave-Guard
 Dunerider Outlaw
 Duskdale Wurm
 Duskmantle, House of Shadow
+Dwarven Ruins
 Earth Elemental
+Ebon Stronghold
 Ebony Treefolk
 Elfhame Palace
 Elite Vanguard
+Elven Riders
 Elvish Aberration
 Elvish Harbinger
 Engineered Plague
@@ -206,8 +227,11 @@ Eron the Relentless
 Eternal Witness
 Ethereal Usher
 Ethereal Whiskergill
+Everflowing Chalice
 Execute
 Exotic Disease
+Explosive Revelation
+Fabricate
 Faerie Conclave
 Faerie Harbinger
 Faerie Swarm
@@ -216,10 +240,12 @@ Fallowsage
 Fanatical Fever
 Fecundity
 Feedback Bolt
+Feldon's Cane
 Femeref Archers
 Feral Animist
 Feral Lightning
 Fighting Drake
+Filigree Sages
 Fire Bowman
 Fire Diamond
 Fire Drake
@@ -246,6 +272,7 @@ Flying Carpet
 Forbidding Watchtower
 Force of Will
 Forked-Branch Garami
+Frost Giant
 Frost Marsh
 Frozen AEther
 Furnace Whelp
@@ -272,9 +299,11 @@ Gift of Estates
 Gilder Bairn
 Glacial Wall
 Glass Golem
+Glasses of Urza
 Gloomwidow
 Gluttonous Slime
 Gluttonous Zombie
+Gnat Alley Creeper
 Goblin Artillery
 Goblin Balloon Brigade
 Goblin Berserker
@@ -283,8 +312,10 @@ Goblin General
 Goblin Glider
 Goblin Lackey
 Goblin Lore
+Goblin Mutant
 Goblin Offensive
 Goblin Ringleader
+Goblin Spy
 Gods' Eye, Gate to the Reikai
 Goldmeadow Lookout
 Goliath Spider
@@ -299,12 +330,14 @@ Grizzly Fate
 Guardian of Cloverdell
 Guma
 Hada Freeblade
+Hada Spy Patrol
 Halcyon Glaze
 Hand of Cruelty
 Hand of Honor
 Harmattan Efreet
 Harmonize
 Haunted Angel
+Havenwood Battleground
 Hawkeater Moth
 Hazerider Drake
 Headhunter
@@ -313,6 +346,7 @@ Heartwood Shard
 Heartwood Treefolk
 Hedge Troll
 Hedron Crab
+Heedless One
 Hellspark Elemental
 Henge Guardian
 Henge of Ramos
@@ -326,9 +360,11 @@ Honden of Seeing Winds
 Hopping Automaton
 Horned Cheetah
 Horned Sliver
+Horrible Hordes
 Hoverguard Observer
 Howl of the Night Pack
 Hulking Cyclops
+Hunding Gjornersen
 Hurricane
 Hypnotic Specter
 Icatian Priest
@@ -379,6 +415,7 @@ Kathari Remnant
 Kazandu Blademaster
 Kazandu Refuge
 Keening Banshee
+Keldon Warlord
 Kemuri-Onna
 Killer Bees
 Killer Whale
@@ -395,6 +432,8 @@ Knight of Meadowgrain
 Knight of Stromgald
 Knighthood
 Knotvine Mystic
+Kor Duelist
+Kor Firewalker
 Koskun Keep
 Lady Orca
 Lance
@@ -429,6 +468,7 @@ Malach of the Dawn
 Mana Prism
 Mantis Engine
 Marble Diamond
+Marhault Elsdragon
 Marisi's Twinclaws
 Mask of Riddles
 Megrim
@@ -437,12 +477,15 @@ Merrow Harbinger
 Messenger Falcons
 Might Sliver
 Millstone
+Mind Control
 Mind Funeral
+Mind Harness
 Minions' Murmurs
 Minotaur Explorer
 Mishra's Factory
 Mistral Charger
 Mogg Fanatic
+Mogg Jailer
 Mold Adder
 Moon Sprite
 Moonlit Wake
@@ -455,12 +498,14 @@ Mystical Tutor
 Nantuko Elder
 Narwhal
 Nature's Ruin
+Naya Battlemage
 Needle Storm
 Needlebug
 Nettletooth Djinn
 Night's Whisper
 Nightshade Schemers
 Nimble Mongoose
+Nirkana Cutthroat
 No-Dachi
 Nocturnal Raid
 Novijen, Heart of Progress
@@ -468,11 +513,13 @@ Noxious Hatchling
 Nullmage Shepherd
 Obsianus Golem
 Ogre Taskmaster
+Ogre's Cleaver
 Opportunity
 Orcish Artillery
 Orcish Cannoneers
 Order of the White Shield
 Orzhova, the Church of Deals
+Oust
 Overrun
 Overwhelming Intellect
 Oxidize
@@ -489,6 +536,7 @@ Peregrine Drake
 Peregrine Mask
 Perimeter Captain
 Perish
+Persuasion
 Pestilence
 Phantom Centaur
 Phantom Monster
@@ -548,6 +596,7 @@ Ridgetop Raptor
 Righteous Charge
 Riptide Crab
 Riptide Pilferer
+Rith's Attendant
 Riven Turnbull
 River Bear
 Rix Maadi, Dungeon Palace
@@ -556,6 +605,7 @@ Robber Fly
 Rockslide Ambush
 Rod of Ruin
 Rootbreaker Wurm
+Ruins of Trokair
 Sabertooth Wyvern
 Salt Marsh
 Saltblast
@@ -603,6 +653,8 @@ Silver Knight
 Sir Shandlar of Eberyn
 Sivitri Scarzam
 Skarrg, the Rage Pits
+Skeletal Wurm
+Skittering Invasion
 Skullclamp
 Sky Diamond
 Sky Spirit
@@ -623,7 +675,9 @@ Soltari Monk
 Soltari Priest
 Soul Feast
 Soul Warden
+Soulbound Guardians
 Soulcatcher
+Soulsurge Elemental
 Spark Elemental
 Sparkspitter
 Spawning Pool
@@ -631,6 +685,7 @@ Spectral Bears
 Spectral Procession
 Spectral Searchlight
 Spell Snare
+Spitfire Handler
 Spitting Drake
 Spitting Spider
 Sporesower Thallid
@@ -647,7 +702,9 @@ Steam Spitter
 Steel Wall
 Stern Judge
 Stolen Grain
+Stone Spirit
 Stonecloaker
+Storm Seeker
 Storm Shaman
 Stormcloud Djinn
 Stratozeppelid
@@ -659,11 +716,13 @@ Stromgald Crusader
 Stronghold Zeppelin
 Stun Sniper
 Sturdy Hatchling
+Suffer the Past
 Sunastian Falconer
 Sunder from Within
 Sunhome, Fortress of the Legion
 Suq'Ata Assassin
 Svogthos, the Restless Tomb
+Svyelunite Temple
 Swallowing Plague
 Sword of the Meek
 Swords to Plowshares
@@ -710,6 +769,7 @@ Treefolk Harbinger
 Treetop Sentinel
 Treetop Village
 Tresserhorn Sinks
+Treva's Attendant
 Troll-Horn Cameo
 Tromp the Domains
 Trusty Machete
@@ -765,6 +825,7 @@ Wall of Granite
 Wall of Lava
 Wall of Light
 Wall of Mulch
+Wall of Omens
 Wall of Opposition
 Wall of Pine Needles
 Wall of Razors
@@ -818,3 +879,4 @@ Zodiac Ox
 Zodiac Pig
 Zodiac Tiger
 Zombify
+Zuran Orb

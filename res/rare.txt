@@ -2,6 +2,7 @@ Absorb
 Abyssal Hunter
 Academy Rector
 Academy Ruins
+Acid Rain
 Adarkar Valkyrie
 Adun Oakenshield
 Ajani Goldmane
@@ -11,6 +12,7 @@ Akroma, Angel of Fury
 Akroma, Angel of Wrath
 Aladdin's Ring
 Ali from Cairo
+All is Dust
 Aluren
 Ambassador Laquatus
 Amulet of Vigor
@@ -23,10 +25,12 @@ Angel of Retribution
 Anowon, the Ruin Sage
 Ant Queen
 Arashi, the Sky Asunder
+Arc-Slogger
 Arcanis the Omnipotent
 Archangel
 Archivist
 Archon of Justice
+Arena of the Ancients
 Argothian Enchantress
 Arid Mesa
 Armageddon
@@ -36,6 +40,7 @@ Ashes to Ashes
 Augury Adept
 Aven Brigadier
 Avenger of Zendikar
+Awakening Zone
 Ayumi, the Last Visitor
 Azusa, Lost but Seeking
 Bad Moon
@@ -72,6 +77,7 @@ Bloodstained Mire
 Blurred Mongoose
 Boris Devilboon
 Borrowing the East Wind
+Bottle of Suleiman
 Bounteous Kirin
 Braingeyser
 Breeding Pool
@@ -105,6 +111,7 @@ Char
 Child of Alara
 Child of Gaea
 Cho-Manno, Revolutionary
+Chromium
 Chronatog
 Citanul Centaurs
 Cleanse
@@ -118,6 +125,7 @@ Commander Eesha
 Concordant Crossroads
 Conqueror's Pledge
 Conspiracy
+Consume the Meek
 Convalescence
 Convalescent Care
 Corrupt Official
@@ -146,6 +154,7 @@ Darkwater Catacombs
 Dauntless Dourbark
 Day of Judgment
 Death Grasp
+Deathless Angel
 Debtors' Knell
 Defense of the Heart
 Demigod of Revenge
@@ -175,6 +184,7 @@ Earthquake
 El-Hajjaj
 Eladamri's Call
 Eladamri, Lord of Leaves
+Eldrazi Conscription
 Eldrazi Monument
 Elspeth, Knight-Errant
 Elven Warhounds
@@ -183,6 +193,7 @@ Elvish Archers
 Elvish Champion
 Elvish Farmer
 Elvish Piper
+Elvish Vanguard
 Emeria Angel
 Emeria, the Sky Ruin
 Emmessi Tome
@@ -191,6 +202,7 @@ Endless Cockroaches
 Energizer
 Entomb
 Epic Proportions
+Epic Struggle
 Essence Sliver
 Eternal Flame
 Ethersworn Adjudicator
@@ -199,6 +211,7 @@ Eviscerator
 Exalted Angel
 Exotic Orchard
 Exploration
+Eye of Ramos
 Fable of Wolf and Owl
 Fastbond
 Fault Line
@@ -226,6 +239,7 @@ Font of Mythos
 Force of Nature
 Force of Savagery
 Forced Fruition
+Fracturing Gust
 Gaddock Teeg
 Gaea's Anthem
 Gaea's Avenger
@@ -233,6 +247,7 @@ Gaea's Cradle
 Gargoyle Castle
 Garruk Wildspeaker
 Garza Zol, Plague Queen
+Genesis
 Ghastlord of Fugue
 Giant Solifuge
 Gilded Lotus
@@ -263,6 +278,7 @@ Grim Monolith
 Grim Tutor
 Grinning Demon
 Groundbreaker
+Guan Yu's 1,000-Li March
 Guan Yu, Sainted Warrior
 Guiltfeeder
 Guul Draz Specter
@@ -273,11 +289,14 @@ Hanna, Ship's Navigator
 Harabaz Druid
 Hatching Plans
 Haunting Echoes
+Heart of Ramos
 Heartmender
+Hedron Matrix
 Helix Pinnacle
 Hell's Thunder
 Hell-Bent Raider
 Helldozer
+Hellion Eruption
 Hellkite Overlord
 Herald of Serra
 Hero's Demise
@@ -286,12 +305,14 @@ Hidetsugu's Second Rite
 Honor of the Pure
 Hoofprints of the Stag
 Horde of Notions
+Horn of Ramos
 Howling Mine
 Hunted Dragon
 Hunted Horror
 Hunted Lammasu
 Hunted Phantasm
 Hunted Troll
+Hurkyl's Recall
 Hystrodon
 Identity Crisis
 Ifh-Biff Efreet
@@ -302,12 +323,14 @@ Incendiary Command
 Indomitable Ancients
 Infernal Contract
 Infernal Kirin
+Inferno
 Inkwell Leviathan
 Intrepid Hero
 Intuition
 Invincible Hymn
 Iona, Shield of Emeria
 Iridescent Angel
+Ironclaw Curse
 Isamaru, Hound of Konda
 Jace Beleren
 Jace, the Mind Sculptor
@@ -328,12 +351,15 @@ Kalonian Behemoth
 Kamahl, Pit Fighter
 Karmic Guide
 Kaysa
+Kazandu Tuskcaller
 Kazuul Warlord
+Keening Stone
 Keiga, the Tide Star
 Kher Keep
 Kiki-Jiki, Mirror Breaker
 Kinsbaile Borderguard
 Kinsbaile Cavalier
+Kjeldoran Outpost
 Knight of the Reliquary
 Knight of the White Orchid
 Knotvine Paladin
@@ -343,6 +369,7 @@ Kokusho, the Evening Star
 Konda, Lord of Eiganjo
 Kongming, "Sleeping Dragon"
 Korlash, Heir to Blackblade
+Kozilek, Butcher of Truth
 Krosan Cloudscraper
 Krosan Colossus
 Lady Zhurong, Warrior Queen
@@ -354,12 +381,14 @@ Legacy Weapon
 Lhurgoyf
 Lich Lord of Unx
 Lichenthrope
+Lighthouse Chronologist
 Lightning Angel
 Lightning Dragon
 Liliana Vess
 Liu Bei, Lord of Shu
 Living Death
 Livonya Silone
+Lodestone Bauble
 Lord of Atlantis
 Lord of Extinction
 Lotus Cobra
@@ -409,6 +438,7 @@ Mind Spring
 Mind Twist
 Mirri the Cursed
 Mirri, Cat Warrior
+Mirror-Sigil Sergeant
 Misty Rainforest
 Moat
 Mobilization
@@ -422,6 +452,7 @@ Mox Jet
 Mox Pearl
 Mox Ruby
 Mox Sapphire
+Mul Daya Channelers
 Multani, Maro-Sorcerer
 Muraganda Petroglyphs
 Mutavault
@@ -432,7 +463,9 @@ Mystic Snake
 Mythic Proportions
 Nantuko Shade
 Nath of the Gilt-Leaf
+Natural Selection
 Nature's Cloak
+Near-Death Experience
 Necropotence
 Nemata, Grove Guardian
 Nemesis of Reason
@@ -455,6 +488,7 @@ Obsidian Fireheart
 Okina, Temple to the Grandfathers
 Oran-Rief, the Vastwood
 Order of Whiteclay
+Orgg
 Oros, the Avenger
 Overbeing of Myth
 Overgrown Tomb
@@ -513,7 +547,9 @@ Reach of Branches
 Reckless Embermage
 Reflecting Pool
 Reki, the History of Kamigawa
+Repay in Kind
 Retribution of the Meek
+Reveillark
 Reya Dawnbringer
 Rhys the Redeemed
 Riding the Dilu Horse
@@ -536,6 +572,7 @@ Sacred Foundry
 Sapling of Colfenor
 Saprazzan Heir
 Sarkhan Vol
+Sarkhan the Mad
 Sarpadian Empires, Vol. VII
 Savannah
 Savannah Lions
@@ -574,9 +611,11 @@ Siege-Gang Commander
 Sigil of the Empty Throne
 Silvos, Rogue Elemental
 Simic Sky Swallower
+Skull of Ramos
 Skullmulcher
 Sky Swallower
 Skycloud Expanse
+Slate of Ancestry
 Sleeper Agent
 Sliver Legion
 Sliver Overlord
@@ -598,6 +637,7 @@ Spiritual Guardian
 Squall Line
 Squee, Goblin Nabob
 Staff of Domination
+Stalking Assassin
 Stangg
 Starstorm
 Stasis
@@ -612,6 +652,7 @@ Storm Herd
 Storm Spirit
 Stormscape Master
 Stroke of Genius
+Student of Warfare
 Stuffy Doll
 Sun Ce, Young Conquerer
 Sun Quan, Lord of Wu
@@ -631,6 +672,7 @@ Talas Warrior
 Taoist Mystic
 Tarmogoyf
 Tarox Bladewing
+Teeka's Dragon
 Temple Garden
 Temporal Manipulation
 Terra Stomper
@@ -646,6 +688,7 @@ Thelonite Hermit
 Thornling
 Thornscape Master
 Thoughtseize
+Threads of Disloyalty
 Thriss, Nantuko Primus
 Tidal Kraken
 Timber Protector
@@ -658,6 +701,7 @@ Titanic Ultimatum
 Tithe
 Tolarian Academy
 Tolsimir Wolfblood
+Tooth of Ramos
 Tower of Champions
 Tower of Eons
 Tower of Fortunes
@@ -665,14 +709,19 @@ Tower of the Magistrate
 Tradewind Rider
 Trailblazer
 Trained Orgg
+Transcendent Master
 Traumatize
+Treachery
 Treva, the Renewer
+Tribal Forcemage
 Troll Ascetic
 Tropical Island
 Tuknir Deathlock
+Tuktuk the Explorer
 Tundra
 Turntimber Ranger
 Twilight Mire
+Ulamog, the Infinite Gyre
 Umezawa's Jitte
 Underground Sea
 Undermine
@@ -682,6 +731,7 @@ Ursapine
 Urza's Blueprints
 Utopia Tree
 Vaevictis Asmadi
+Vampire Nocturnus
 Vampiric Tutor
 Vedalken Archmage
 Veldrane of Sengir
@@ -711,6 +761,7 @@ Wheel of Fortune
 Will-o'-the-Wisp
 Windborn Muse
 Windswept Heath
+Winter Orb
 Wit's End
 Witch-Maw Nephilim
 Wolfbriar Elemental
@@ -723,6 +774,7 @@ Wren's Run Packmaster
 Wydwen, the Biting Gale
 Xiahou Dun, the One-Eyed
 Xira Arien
+Yavimaya's Embrace
 Yawgmoth's Bargain
 Yellow Scarves General
 Yore-Tiller Nephilim
