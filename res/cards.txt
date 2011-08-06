@@ -1,3 +1,162 @@
+Arc Runner
+2 R
+Creature Elemental Ox
+no text
+5/1
+Haste
+At the beginning of the end step, sacrifice CARDNAME.
+
+Armored Cancrix
+4 U
+Creature Crab
+no text
+2/5
+
+Assault Griffin
+3 W
+Creature Griffin
+no text
+3/2
+Flying
+
+Barony Vampire
+2 B
+Creature Vampire
+no text
+3/2
+
+Chandra's Outrage
+2 R R
+Instant
+no text
+spDamageTgtC:4:Drawback$DamageTgt/2:Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.:Chandra's Outrage - deals 4 damage to creature and 2 damage to its controller.
+
+Cloud Crusader
+2 W W
+Creature Human Knight
+no text
+2/3
+Flying
+First Strike
+
+Dryad's Favor
+G
+Enchantment Aura
+Enchanted creature has forestwalk.
+Enchant creature
+enPump:Forestwalk
+
+Garruk's Companion
+G G
+Creature Beast
+no text
+3/2
+Trample
+
+Greater Basilisk
+3 G G
+Creature Basilisk
+no text
+3/5
+Deathtouch
+
+Hornet Sting
+G
+Instant
+no text
+spDamageTgtCP:1:Hornet Sting deals 1 damage to target creature or player.
+
+Inspired Charge
+2 W W
+Instant
+no text
+spAllPump:YouCtrl:+2/+1:Creatures you control get +2/+1 until end of turn.:Inspired Charge - Creatures get +2/+1 until EOT
+
+Jace's Ingenuity
+3 U U
+Instant
+no text
+spDrawCards:3:Draw three cards.:Jace's Ingenuity - draw 3 cards.
+
+Maritime Guard
+1 U
+Creature Merfolk Soldier
+no text
+1/3
+
+Mighty Leap
+1 W
+Instant
+no text
+spPumpTgt:+2/+2/Flying
+
+Nether Horror
+3 B
+Creature Horror
+no text
+4/2
+
+Nightwing Shade
+4 B
+Creature Shade
+no text
+2/2
+Flying
+abPump 1 B:+1/+1
+
+Rotting Legion
+4 B
+Creature Zombie
+no text
+4/5
+CARDNAME enters the battlefield tapped.
+
+Sacred Wolf
+2 G
+Creature Wolf
+no text
+3/1
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Stone Golem
+5
+Artifact Creature Golem
+no text
+4/4
+
+Sword of Vengeance
+3
+Artifact Equipment
+Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.
+eqPump 3:+2/+0/First Strike & Vigilance & Trample & Haste
+
+Thunder Strike
+1 R
+Instant
+no text
+spPumpTgt:+2/+0/First Strike
+
+Volcanic Strength
+1 R
+Enchantment Aura
+Enchanted creature gets +2/+2 and has mountainwalk.
+Enchant creature
+enPump:+2/+2/Mountainwalk
+
+Wall of Vines
+G
+Creature Plant Wall
+no text
+0/3
+Defender
+Reach
+
+Warlord's Axe
+3
+Artifact Equipment
+Equipped creature gets +3/+1.
+eqPump 4:+3/+1
+
 Phylactery Lich
 B B B
 Creature Zombie
