@@ -7217,57 +7217,6 @@ public class GameActionUtil {
 		}
 	}
 
-	private static void upkeep_Sensation_Gorger() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final Player opponent = player.getOpponent();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Sensation Gorger");
-
-		for(int i = 0; i < list.size(); i++) {
-			Card crd = list.get(0);
-			if(library.size() <= 0) {
-				return;
-			}
-
-			if(list.get(i).getController().equals(AllZone.HumanPlayer)) {
-				String[] choices = {"Yes", "No"};
-				Object o = AllZone.Display.getChoiceOptional("Use " + list.get(i).getName() + "'s ability?",
-						choices);
-
-				if(o == null) return;
-				if(o.equals("No")) return;
-			}
-
-			// System.out.println("top of deck: " + library.get(i).getName());
-			//String creatureType = library.get(i).getType().toString();
-			//String cardName = library.get(i).getName();
-
-			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-
-			PlayerZone oppHand = AllZone.getZone(Constant.Zone.Hand, opponent);
-
-			String creatureType = library.get(0).getType().toString();
-
-			if(creatureType.contains("Goblin") || creatureType.contains("Shaman")
-					|| library.get(0).getKeyword().contains("Changeling")) {
-				Card[] c = hand.getCards();
-				for(int q = 0; q < c.length; q++)
-					c[q].getController().discard(c[q], crd.getSpellAbility()[0]);
-
-				Card[] oc = oppHand.getCards();
-				for(int j = 0; j < oc.length; j++)
-					oc[j].getController().discard(oc[j], crd.getSpellAbility()[0]);
-
-				AllZone.ComputerPlayer.drawCards(4);
-				AllZone.HumanPlayer.drawCards(4);
-
-			}
-		}// for
-	}// upkeep_Sensation_Gorger() 
-
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -7527,6 +7476,85 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Nightshade_Schemers()
+    
+    
+    private static void upkeep_Sensation_Gorger() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Sensation Gorger");
+        final Player opponent = player.getOpponent();
+        
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        
+        if (kinship.size() == 0 || library.size() <= 0)
+            return;
+        
+        final String[] shareTypes = { "Goblin", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantDiscardThenDraw = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and have both players discard their hand and draw 4 cards?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantDiscardThenDraw = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            if (library.size() > 4 && hand.size() < 2) {
+                                String title = "Computer reveals";
+                                revealTopCard(title);
+                                wantDiscardThenDraw = true;
+                            }
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    if (wantDiscardThenDraw) {
+                        player.discardHand(this);
+                        opponent.discardHand(this);
+                        
+                        player.drawCards(4);
+                        opponent.drawCards(4);
+                    }
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Sensation Gorger - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Sensation_Gorger() 
     
     
     private static void upkeep_Wandering_Graybeard() {
