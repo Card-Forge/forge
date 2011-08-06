@@ -1,7 +1,7 @@
 Name:Amugaba
 ManaCost:5 U U
 Types:Creature Illusion	
-Text:2 U, Discard a card: return Amugaba to owner's hand.
+Text:none.
 K:Flying
 PT:6/6
 SVar:Rarity:Rare
