@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Flying:Self:AS
 SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/5.jpg
 End

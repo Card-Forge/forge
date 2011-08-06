@@ -5,4 +5,5 @@ Text:Counter target creature spell.\r\nDraw a card.
 K:spCounter:Spell:Type(Creature):Graveyard:My-Draw(1)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exclude.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/56.jpg
 End

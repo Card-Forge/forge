@@ -6,4 +6,5 @@ K:spDamageTgtOpp:X:Drawback$DamageYou/X.HalfUp:Eternal Flame deals X damage to t
 SVar:X:Count$NumTypeYouCtrl.Mountain
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_flame.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/60.jpg
 End

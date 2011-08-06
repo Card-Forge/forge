@@ -6,4 +6,5 @@ PT:0/2
 K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_farmer.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/71.jpg
 End

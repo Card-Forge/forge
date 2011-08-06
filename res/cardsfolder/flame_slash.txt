@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtC:4:Flame Slash deals 4 damage to target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_slash.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/145.jpg
 End

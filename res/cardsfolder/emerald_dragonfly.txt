@@ -7,4 +7,5 @@ K:Flying
 K:abPump G G:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_dragonfly.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/98.jpg
 End

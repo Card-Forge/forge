@@ -6,4 +6,5 @@ K:spDestroyTgt:Creature.nonBlack+nonArtifact:NoRegen
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/expunge.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/135.jpg
 End

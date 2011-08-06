@@ -7,4 +7,5 @@ K:stPumpAll:Creature.nonEye.YouCtrl:0/0/HIDDEN CARDNAME can't attack.:No conditi
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_eye_of_urborg.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/107.jpg
 End

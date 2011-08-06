@@ -5,4 +5,5 @@ Text:Whenever Filthy Cur is dealt damage, you lose that much life.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31804.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/136.jpg
 End

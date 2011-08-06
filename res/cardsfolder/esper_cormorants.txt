@@ -6,4 +6,5 @@ PT:3/3
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_cormorants.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/105.jpg
 End

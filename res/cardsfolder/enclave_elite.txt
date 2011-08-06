@@ -7,4 +7,5 @@ K:Islandwalk
 K:Multikicker 1 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_elite.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/27.jpg
 End

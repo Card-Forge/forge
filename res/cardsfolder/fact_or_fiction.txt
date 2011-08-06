@@ -4,4 +4,5 @@ Types:Instant
 Text:Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fact_or_fiction.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/57.jpg
 End

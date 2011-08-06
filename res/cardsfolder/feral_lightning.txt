@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes$
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/97.jpg
 End

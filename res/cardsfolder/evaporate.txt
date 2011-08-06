@@ -6,4 +6,5 @@ K:spDamageAll:Creature.White,Creature.Blue:1:Evaporate deals 1 damage to each cr
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evaporate.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/94.jpg
 End

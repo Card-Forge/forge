@@ -6,4 +6,5 @@ K:WheneverKeyword:CastSpell/Controller:Type/Creature:Play:Damage/1:NormalInput/P
 SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_assault.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/191.jpg
 End

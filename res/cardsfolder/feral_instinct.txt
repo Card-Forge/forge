@@ -6,4 +6,5 @@ A:SP$Pump | Cost$ 1 G | Tgt$ TgtC | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ 
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_instinct.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/57.jpg
 End

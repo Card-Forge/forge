@@ -7,4 +7,5 @@ K:Flying
 K:abPump R:+2/-2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_wyvern.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/176.jpg
 End

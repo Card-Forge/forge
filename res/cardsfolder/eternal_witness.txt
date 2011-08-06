@@ -6,4 +6,5 @@ PT:2/1
 K:etbReturnTgt:1/MayReturn:Card:Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51628.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/86.jpg
 End

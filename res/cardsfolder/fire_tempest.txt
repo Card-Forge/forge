@@ -5,4 +5,6 @@ Text:no text
 K:spDamageAll:Player,Creature:6:Fire Tempest deals 6 damage to each creature and each player.
 SVar:Rarity:Rare
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/fire_tempest.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/97.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/133.jpg
 End

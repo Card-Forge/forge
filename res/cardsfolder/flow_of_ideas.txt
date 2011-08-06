@@ -6,4 +6,6 @@ K:spDrawCards:X:Draw a card for each Island you control.:Flow of Ideas - draw ca
 SVar:X:Count$TypeYouCtrl.Island
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_ideas.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/50.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/38.jpg
 End

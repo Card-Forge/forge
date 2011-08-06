@@ -6,4 +6,5 @@ PT:1/1
 K:abTapTgt T:Creature.toughnessLE2:Tap target creature with toughness 2 or less.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/errant_doomsayers.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/15.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:abDestroyTgtV GW T Sac<1/CARDNAME>:Enchantment:Destroy target enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_hexhunter.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/226.jpg
 End

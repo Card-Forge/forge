@@ -6,4 +6,5 @@ PT:4/4
 K:abPumpTgtC R R:+1/-1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_overseer.jpg
+SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/82.jpg
 End

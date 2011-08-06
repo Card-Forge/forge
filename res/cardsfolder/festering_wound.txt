@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, you may put an infection counter on Fester
 K:Enchant Creature Curse
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/61.jpg
 End

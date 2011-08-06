@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtC:1:Drawback$DamageTgt/1:First Volley deals 1 damage to target creature and 1 damage to that creature's controller.:First Volley - deals 1 damage to creature and 1 damage to its controller.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/first_volley.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/100.jpg
 End

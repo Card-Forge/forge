@@ -8,4 +8,5 @@ K:Lifelink
 K:Morph:2 W W
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exalted_angel.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/28.jpg
 End

@@ -5,4 +5,5 @@ Text:Destroy target non-Elf creature.
 K:spDestroyTgt:Creature.nonElf
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eyeblights_ending.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/110.jpg
 End

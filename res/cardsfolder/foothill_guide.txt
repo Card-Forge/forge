@@ -7,4 +7,5 @@ K:Morph:W
 K:Protection from Goblins
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foothill_guide.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/29.jpg
 End

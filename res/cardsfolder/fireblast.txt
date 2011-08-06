@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ 4 R R | Tgt$ TgtCP | NumDmg$ 4 | SpellDescription$ CARDN
 SVar:AltCost:Sac<2/Mountain>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireblast.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/79.jpg
 End

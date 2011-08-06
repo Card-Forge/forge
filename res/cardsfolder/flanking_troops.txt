@@ -6,4 +6,6 @@ PT:2/2
 K:WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Flanking Troops attacks, you may tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flanking_troops.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/5.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/5.jpg
 End

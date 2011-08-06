@@ -6,4 +6,5 @@ PT:2/2
 K:abDamageTgtCP 1 Sac<1/CARDNAME>:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_hauler.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/135.jpg
 End

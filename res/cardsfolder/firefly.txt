@@ -7,4 +7,5 @@ K:Flying
 K:abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firefly.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/172.jpg
 End

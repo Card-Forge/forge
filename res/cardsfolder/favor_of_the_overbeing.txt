@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.Blue:1/1/Flying:No Condition:As long as enchanted cre
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_overbeing.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/151.jpg
 End

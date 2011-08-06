@@ -4,4 +4,7 @@ Types:Enchantment
 Text:You may play as many lands as you choose on your turn. Whenever you play a land other than the first land of the turn, Fastbond deals 1 damage to you.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fastbond.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/101.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/101.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/101.jpg
 End

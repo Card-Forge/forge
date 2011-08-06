@@ -5,5 +5,6 @@ Text:If a permanent with a wind counter on it would untap during its controller'
 K:WheneverKeyword:BecomesTapped:OneTypeOfMany/Artifact/Creature/Enchantment/Land:Play:CustomCounter.WIND/1:Initiating_Card:ASAP:No_Condition:No Condition:Whenever a permanent becomes tapped, put a wind counter on it.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_winds.jpg 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_winds.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/129.jpg
 End

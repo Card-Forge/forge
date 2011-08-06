@@ -5,4 +5,8 @@ Text:no text
 K:abAddReflectedMana:Color:Opp
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fellwar_stone.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/369.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/99.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/337.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/297.jpg
 End

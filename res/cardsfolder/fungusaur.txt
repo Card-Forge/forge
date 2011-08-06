@@ -5,4 +5,10 @@ Text:Whenever Fungusaur is dealt damage, put a +1/+1 counter on it.
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungusaur.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/250.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/104.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/158.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/130.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/104.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/104.jpg
 End

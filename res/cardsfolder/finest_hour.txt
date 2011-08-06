@@ -6,4 +6,5 @@ K:Exalted
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/finest_hour.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/126.jpg
 End

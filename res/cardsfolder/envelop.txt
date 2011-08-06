@@ -5,4 +5,5 @@ Text:Counter target sorcery spell.
 K:spCounter:Spell:Type(Sorcery):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/envelop.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/39.jpg
 End

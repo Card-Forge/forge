@@ -6,4 +6,7 @@ PT:3/3
 K:abDestroyTgtV B B T:Permanent.Green:Destroy target green permanent.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eastern_paladin.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/131.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/133.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/132.jpg
 End

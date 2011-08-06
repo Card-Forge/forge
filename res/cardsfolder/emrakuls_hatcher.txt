@@ -5,4 +5,5 @@ Text:When Emrakul's Hatcher enters the battlefield, put three 0/1 colorless Eldr
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakuls_hatcher.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/142.jpg
 End

@@ -7,4 +7,5 @@ K:Cycling:2
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fend_off.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/7.jpg
 End

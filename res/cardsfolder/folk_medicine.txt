@@ -7,4 +7,5 @@ SVar:X:Count$TypeYouCtrl.Creature
 K:Flashback:1 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_medicine.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/115.jpg
 End

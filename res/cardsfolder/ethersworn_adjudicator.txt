@@ -8,4 +8,5 @@ K:Untap:2 U
 K:abDestroyTgtV 1 W B T:Creature,Enchantment:Destroy target creature or enchantment.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg
+SetInfo:CON|Mythic|http://magiccards.info/scans/en/cfx/26.jpg
 End

@@ -6,4 +6,9 @@ PT:0/1
 K:abPump B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frozen_shade.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/25.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/18.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/20.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/22.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/18.jpg
 End

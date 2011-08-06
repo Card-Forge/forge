@@ -6,4 +6,6 @@ PT:1/1
 K:paintap:1:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elves_of_deep_shadow.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/161.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/39.jpg
 End

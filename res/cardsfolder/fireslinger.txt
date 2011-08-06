@@ -6,4 +6,5 @@ PT:1/1
 K:abDamageTgtCP T:1:Drawback$DamageYou/1:Fireslinger deals 1 damage to target creature or player and 1 damage to you.:Fireslinger - deal damage to creature or player and you.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireslinger.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/173.jpg
 End

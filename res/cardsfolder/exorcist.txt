@@ -6,4 +6,5 @@ PT:1/1
 K:abDestroyTgtV 1 W T:Creature.Black:Destroy target black creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exorcist.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/79.jpg
 End

@@ -7,4 +7,5 @@ K:enPump:Flying
 K:When CARDNAME enters the battlefield, draw two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flight_of_fancy.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/49.jpg
 End

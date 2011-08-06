@@ -9,4 +9,5 @@ K:UG, tap: add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_grove.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/177.jpg
 End

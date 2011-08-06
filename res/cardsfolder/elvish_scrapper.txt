@@ -6,4 +6,6 @@ PT:1/1
 K:abDestroyTgtV G T Sac<1/CARDNAME>:Artifact:Destroy target artifact.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_scrapper.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/245.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/258.jpg
 End

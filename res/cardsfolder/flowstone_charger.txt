@@ -5,4 +5,5 @@ Text:Whenever Flowstone Charger attacks, it gets +3/-3 until end of turn.
 PT:2/5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_charger.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/99.jpg
 End

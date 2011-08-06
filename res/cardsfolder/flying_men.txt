@@ -6,4 +6,5 @@ PT:1/1
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flying_men.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/19.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_blood.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/88.jpg
 End

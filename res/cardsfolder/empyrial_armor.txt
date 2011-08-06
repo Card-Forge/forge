@@ -8,4 +8,5 @@ K:stPumpEnchanted:Creature:X/X:no Condition:no text
 SVar:X:Count$InYourHand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empyrial_armor.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/129.jpg
 End

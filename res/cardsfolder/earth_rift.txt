@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land. | Sp
 K:Flashback:5 R R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_rift.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/189.jpg
 End

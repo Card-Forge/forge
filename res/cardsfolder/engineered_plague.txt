@@ -4,4 +4,6 @@ Types:Enchantment
 Text:As Engineered Plague comes into play, choose a creature type.\r\nAll creatures of the chosen type get -1/-1.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/51.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/133.jpg
 End

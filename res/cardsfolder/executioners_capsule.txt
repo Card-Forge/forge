@@ -5,4 +5,5 @@ Text:no text
 K:abDestroyTgtV 1 B T Sac<1/CARDNAME>:Creature.nonBlack:Destroy target nonblack creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/executioners_capsule.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/75.jpg
 End

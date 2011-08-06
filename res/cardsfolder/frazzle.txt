@@ -5,4 +5,5 @@ Text:Counter target nonblue spell.
 K:spCounter:Spell:Color(Non-blue):Graveyard:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frazzle.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/25.jpg
 End

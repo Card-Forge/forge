@@ -7,4 +7,5 @@ K:abDamageTgtC R Sac<1/CARDNAME>:X:Flame Elemental deals damage equal to its pow
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_elemental.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/175.jpg
 End

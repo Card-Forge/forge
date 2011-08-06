@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever CARDNAME blocks, it gets +2/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_of_an_havva.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/58.jpg
 End

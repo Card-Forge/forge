@@ -5,4 +5,9 @@ Text:At the beginning of the upkeep of enchanted enchantment's controller, Feedb
 K:Enchant Enchantment Curse
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feedback.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/85.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/58.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/58.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/71.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/58.jpg
 End

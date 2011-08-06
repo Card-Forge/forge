@@ -7,4 +7,5 @@ K:tap: add G G G
 K:TypeCycling:Forest:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_aberration.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/118.jpg
 End

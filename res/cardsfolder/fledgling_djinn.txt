@@ -6,4 +6,5 @@ PT:2/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/wl/en-us/card4457.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/11.jpg
 End

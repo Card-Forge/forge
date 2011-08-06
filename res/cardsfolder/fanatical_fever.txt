@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+3/+0/Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatical_fever.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/122.jpg
 End

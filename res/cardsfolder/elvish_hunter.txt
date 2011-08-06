@@ -5,4 +5,5 @@ Text:no text
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_hunter.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/72.jpg
 End

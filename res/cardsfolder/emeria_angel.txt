@@ -7,4 +7,5 @@ K:Flying
 K:Landfall
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emeria_angel.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/11.jpg
 End

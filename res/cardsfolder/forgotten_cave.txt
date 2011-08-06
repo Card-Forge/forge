@@ -7,4 +7,5 @@ K:tap: add R
 K:Cycling:R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_cave.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/317.jpg
 End

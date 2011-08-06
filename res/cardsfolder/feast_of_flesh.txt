@@ -6,4 +6,5 @@ K:spDamageTgtC:X:Drawback$YouGainLife/X:Feast of Flesh deals X damage to target 
 SVar:X:Count$NamedInAllYards.Feast of Flesh/Plus.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_flesh.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/56.jpg
 End

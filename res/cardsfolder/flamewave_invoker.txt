@@ -6,4 +6,6 @@ PT:2/2
 K:abDamageTgtP 7 R:5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamewave_invoker.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/92.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/202.jpg
 End

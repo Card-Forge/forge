@@ -5,4 +5,5 @@ Text:Creatures you control get +1/+1, have flying, and are indestructible.\r\nAt
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
+SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/199.jpg
 End

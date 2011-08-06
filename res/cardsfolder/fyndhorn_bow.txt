@@ -5,4 +5,5 @@ Text:no text
 K:abPumpTgtC 3 T:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_bow.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/293.jpg
 End

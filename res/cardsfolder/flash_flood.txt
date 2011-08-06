@@ -7,4 +7,5 @@ A:SP$Bounce | Cost$ U | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_flood.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/57.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freewind_falcon.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/105.jpg
 End

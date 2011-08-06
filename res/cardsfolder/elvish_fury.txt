@@ -5,4 +5,5 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4760.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/120.jpg
 End

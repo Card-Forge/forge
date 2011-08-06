@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC G:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_herder.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/247.jpg
 End

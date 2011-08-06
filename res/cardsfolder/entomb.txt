@@ -4,4 +4,5 @@ Types:Instant
 Text:Search your library for a card and put that card into your graveyard. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entomb.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/132.jpg
 End

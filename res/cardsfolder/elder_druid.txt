@@ -8,4 +8,8 @@ K:abUntapTgt 3 G T:Artifact,Creature,Land:Untap target artifact, creature, or la
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_druid.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/152.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/223.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/120.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/238.jpg
 End

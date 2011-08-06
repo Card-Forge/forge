@@ -8,4 +8,5 @@ K:G, tap: add R
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_sprites.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/100.jpg
 End

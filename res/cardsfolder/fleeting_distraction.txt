@@ -6,4 +6,5 @@ K:spPumpTgtCurse:-1/-0
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_distraction.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/67.jpg
 End

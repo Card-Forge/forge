@@ -5,4 +5,5 @@ Text:no text
 PT:4/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126149.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/114.jpg
 End

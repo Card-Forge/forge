@@ -9,4 +9,5 @@ K:stPumpSelf:Creature:X/X:No Condition:Earthen Goo gets +1/+1 for each age count
 SVar:X:Count$CardCounters.AGE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthen_goo.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/80.jpg
 End

@@ -6,4 +6,6 @@ PT:2/2
 K:abPump R:+1/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_shambler.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/86.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/185.jpg
 End

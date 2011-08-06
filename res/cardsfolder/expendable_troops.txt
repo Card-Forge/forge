@@ -7,4 +7,5 @@ K:abDamageTgtV Sac<1/CARDNAME>:2:Creature.attacking,Creature.blocking:Expendable
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/expendable_troops.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/8.jpg
 End

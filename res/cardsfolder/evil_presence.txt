@@ -5,4 +5,9 @@ Text:Enchanted land is a Swamp.
 K:Enchant land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_presence.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/22.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/16.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/18.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/20.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/16.jpg
 End

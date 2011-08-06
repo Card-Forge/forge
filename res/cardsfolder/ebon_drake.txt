@@ -8,4 +8,5 @@ K:WheneverKeyword:CastSpell/Any:No Condition:Play:ModifyLife/-1:ControllingPlaye
 SVar:AntiBuffedBy:Spell
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_drake.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/48.jpg
 End

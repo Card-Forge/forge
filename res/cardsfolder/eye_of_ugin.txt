@@ -6,4 +6,5 @@ K:CostChange:Player:Less:2:Spell:colorless:Eldrazi:NoSpecial
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_ugin.jpg
+SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/136.jpg
 End

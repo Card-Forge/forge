@@ -7,4 +7,6 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fling.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/139.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/82.jpg
 End

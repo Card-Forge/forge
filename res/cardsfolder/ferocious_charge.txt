@@ -6,4 +6,5 @@ K:spPumpTgt:+4/+4:
 K:Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferocious_charge.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/88.jpg
 End

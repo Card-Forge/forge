@@ -7,4 +7,5 @@ K:Cumulative upkeep:2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_radiance.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/108.jpg
 End

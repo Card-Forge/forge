@@ -5,4 +5,6 @@ Text:no text
 A:SP$Retrieve | Cost$ 2 G G | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_cache.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/55.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/89.jpg
 End

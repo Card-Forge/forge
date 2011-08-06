@@ -4,4 +4,6 @@ Types:Planeswalker - Elspeth
 Text:no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_tirel.jpg
+SetInfo:MRD|Mythic|http://magiccards.info/scans/en/som/6.jpg
+SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/6.jpg
 End

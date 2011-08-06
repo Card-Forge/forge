@@ -5,4 +5,6 @@ Text:
 A:SP$Bounce | Cost$ 2 G | ValidTgts$ Land | TgtPrompt$ Select target land | Destination$ TopofLibrary | SpellDescription$ Put target land on top of its owner's library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallow_earth.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/227.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/112.jpg
 End

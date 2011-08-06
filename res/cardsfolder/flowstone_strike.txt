@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+1/-1/Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_strike.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/84.jpg
 End

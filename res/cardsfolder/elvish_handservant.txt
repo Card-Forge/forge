@@ -1,4 +1,4 @@
-Name:Elvish Handservant 
+Name:Elvish Handservant
 ManaCost:G
 Types:Creature Elf Warrior
 Text:no text
@@ -7,4 +7,5 @@ K:WheneverKeyword:CastSpell/Any:Type/Giant:Play:+1+1 Counters/1:Self:ASAP:Yes_No
 SVar:BuffedBy:Giant
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_handservant.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/206.jpg
 End

@@ -5,4 +5,11 @@ Text:no text
 PT:5/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card15813.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/150.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/183.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/209.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/176.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/148.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/96.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/149.jpg
 End

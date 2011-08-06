@@ -5,4 +5,5 @@ Text:Exile all creatures.
 K:spBounceAll:Creature:Exile
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_judgment.jpg
+SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/4.jpg
 End

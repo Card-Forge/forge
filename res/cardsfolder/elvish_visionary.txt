@@ -6,4 +6,6 @@ PT:1/1
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_visionary.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/178.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/130.jpg
 End

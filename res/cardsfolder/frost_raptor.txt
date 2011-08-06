@@ -7,4 +7,5 @@ K:Flying
 K:abPump S S:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_raptor.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/34.jpg
 End

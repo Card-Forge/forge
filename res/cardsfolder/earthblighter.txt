@@ -6,4 +6,5 @@ PT:1/1
 K:abDestroyTgtV 2 B T Sac<1/Goblin>:Land:Destroy target land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthblighter.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/68.jpg
 End

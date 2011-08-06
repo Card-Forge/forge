@@ -5,4 +5,6 @@ Text:no text
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_bowman.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/112.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/112.jpg
 End

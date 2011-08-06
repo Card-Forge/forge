@@ -7,4 +7,5 @@ K:Flying
 K:Flash
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_harbinger.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/61.jpg
 End

@@ -6,4 +6,5 @@ PT:0/2
 K:abPump R:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_brawler.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/166.jpg
 End

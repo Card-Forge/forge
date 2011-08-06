@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ 3 U U | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | 
 K:Cycling:2 U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_fracture.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/82.jpg
 End

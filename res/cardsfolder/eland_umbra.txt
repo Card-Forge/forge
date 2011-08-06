@@ -7,4 +7,5 @@ K:Totem armor
 K:enPump:+0/+4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eland_umbra.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/19.jpg
 End

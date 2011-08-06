@@ -5,4 +5,5 @@ Text:Equipped creature has double strike.
 K:eqPump 2:Double Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireshrieker.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/171.jpg
 End

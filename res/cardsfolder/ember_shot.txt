@@ -6,4 +6,5 @@ K:spDamageTgtCP:3
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_shot.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/87.jpg
 End

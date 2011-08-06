@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardTgt:RevealYouChoose/Land.nonBasic:1:Target player reveals his or her hand. You choose a nonbasic land card from it. That player discards that card.:Encroach - player reveals hand and discards a card
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/encroach.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/59.jpg
 End

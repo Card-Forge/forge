@@ -5,4 +5,6 @@ Text:Faerie Conclave comes into play tapped.
 K:tap: add U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_conclave.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/139.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/351.jpg
 End

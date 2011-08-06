@@ -6,4 +6,5 @@ K:StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures
 K:abPumpTgtC Sac<1/CARDNAME>:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_yavimaya.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/246.jpg
 End

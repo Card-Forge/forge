@@ -7,4 +7,5 @@ K:Protection from Clerics
 K:Morph:4 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_cleric.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/145.jpg
 End

@@ -7,4 +7,5 @@ K:Haste
 A:AB$Regenerate | Cost$ R R R | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eron_the_relentless.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/93.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_of_gnats.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/53.jpg
 End

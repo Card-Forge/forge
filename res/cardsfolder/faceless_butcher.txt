@@ -6,4 +6,5 @@ PT:2/3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/60.jpg
 End

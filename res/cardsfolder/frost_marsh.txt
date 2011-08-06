@@ -7,4 +7,5 @@ K:tap: add U
 K:tap: add B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_marsh.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/146.jpg
 End

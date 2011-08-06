@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.Red:1/1/First Strike:No Condition:As long as enchante
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_the_demigod.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/187.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_vanguard.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/259.jpg
 End

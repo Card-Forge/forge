@@ -9,4 +9,5 @@ K:RG, tap: add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_lit_thicket.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/271.jpg
 End

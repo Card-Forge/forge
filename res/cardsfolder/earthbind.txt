@@ -5,4 +5,7 @@ Text:When Earthbind enters the battlefield, if enchanted creature has flying, Ea
 K:Enchant creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbind.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/147.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/146.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/146.jpg
 End

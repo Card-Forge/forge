@@ -5,7 +5,5 @@ Text:no text
 A:AB$Pump | Cost$ 1 T Sac<1/CARDNAME> | Tgt$ TgtC | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_lyre.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/172.jpg
 End
-#
-# K:abPumpTgtC 1 T Sac<1/CARDNAME>:+2/+2
-#

@@ -6,4 +6,5 @@ A:AB$Fetch | Cost$ G Discard<1/Creature> | Destination$ Hand | FetchType$ Creatu
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fauna_shaman.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/172.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19542.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/20.jpg
 End

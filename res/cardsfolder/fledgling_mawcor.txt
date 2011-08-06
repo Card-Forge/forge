@@ -8,4 +8,5 @@ K:Morph:U U
 K:abDamageTgtCP T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_mawcor.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/63.jpg
 End

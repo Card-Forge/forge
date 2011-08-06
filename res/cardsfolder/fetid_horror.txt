@@ -6,4 +6,5 @@ PT:1/2
 K:abPump B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fetid_horror.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/21.jpg
 End

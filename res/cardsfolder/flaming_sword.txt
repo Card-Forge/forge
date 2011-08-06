@@ -7,4 +7,5 @@ K:Enchant creature
 K:enPump:+1/+0/First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flaming_sword.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/190.jpg
 End

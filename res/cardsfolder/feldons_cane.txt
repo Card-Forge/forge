@@ -5,4 +5,6 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feldons_cane.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/368.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/15.jpg
 End

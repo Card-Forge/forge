@@ -5,4 +5,8 @@ Text:no text
 K:abGainLife 2 T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_youth.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/372.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/100.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/286.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/323.jpg
 End

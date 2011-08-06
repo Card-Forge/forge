@@ -6,4 +6,5 @@ PT:5/5
 K:Protection from white
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eviscerator.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/52.jpg
 End

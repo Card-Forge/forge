@@ -8,4 +8,5 @@ K:Totem armor
 K:enPump:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eel_umbra.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/65.jpg
 End

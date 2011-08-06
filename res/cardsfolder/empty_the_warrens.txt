@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 3 R | TokenAmount$ 2 | TokenName$ Goblin | TokenTypes$ Creatu
 K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/152.jpg
 End

@@ -6,4 +6,5 @@ PT:0/1
 K:Morph:R R
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fortune_thief.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/156.jpg
 End

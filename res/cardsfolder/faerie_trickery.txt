@@ -5,4 +5,5 @@ Text:Counter target non-Faerie spell. If that spell is countered this way, exile
 K:spCounter:Spell:Type(Non-Faerie):Exile:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_trickery.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/62.jpg
 End

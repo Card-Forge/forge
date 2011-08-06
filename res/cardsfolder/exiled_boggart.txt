@@ -6,4 +6,5 @@ PT:2/2
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DiscardCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Exiled Boggart is put into a graveyard from the battlefield, discard a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exiled_boggart.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/109.jpg
 End

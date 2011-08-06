@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card50539.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/61.jpg
 End

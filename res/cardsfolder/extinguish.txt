@@ -5,4 +5,8 @@ Text:Counter target sorcery spell.
 K:spCounter:Spell:Type(Sorcery):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extinguish.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/38.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/37.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/43.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/43.jpg
 End

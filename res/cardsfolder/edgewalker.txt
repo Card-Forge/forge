@@ -7,4 +7,5 @@ K:CostChange:Player:Less:W:Spell:All:Cleric:NoSpecial
 K:CostChange:Player:Less:B:Spell:All:Cleric:NoSpecial
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edgewalker.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/137.jpg
 End

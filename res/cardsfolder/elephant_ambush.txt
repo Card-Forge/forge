@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 2 G G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Cr
 K:Flashback:6 G G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/240.jpg
 End

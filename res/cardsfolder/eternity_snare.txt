@@ -7,4 +7,5 @@ K:enPumpCurse:CARDNAME doesn't untap during your untap step.
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_snare.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/61.jpg
 End

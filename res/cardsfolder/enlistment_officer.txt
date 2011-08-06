@@ -7,4 +7,5 @@ K:First Strike
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enlistment_officer.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/9.jpg
 End

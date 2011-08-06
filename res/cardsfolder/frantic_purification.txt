@@ -6,4 +6,5 @@ K:spDestroyTgt:Enchantment
 K:Madness:W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_purification.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/6.jpg
 End

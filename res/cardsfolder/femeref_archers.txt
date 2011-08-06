@@ -7,4 +7,8 @@ K:abDamageTgtV T:4:Creature.attacking+withFlying:Femeref Archers deals 4 damage 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_archers.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/229.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/113.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/244.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/264.jpg
 End

@@ -6,4 +6,6 @@ PT:2/2
 K:abPump R:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_hellhound.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/136.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/135.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 A:SP$DealDamage | Cost$ 1 R Sac<1/Creature> | Tgt$ TgtC | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_conclusion.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/122.jpg
 End

@@ -6,4 +6,5 @@ K:Comes into play tapped.
 K:tap: add W
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emeria_the_sky_ruin.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/213.jpg
 End

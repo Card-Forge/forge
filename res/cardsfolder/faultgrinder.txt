@@ -8,4 +8,5 @@ K:etbDestroyTgt:Land
 SVar:Evoke:4 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faultgrinder.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/163.jpg
 End

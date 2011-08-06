@@ -4,4 +4,5 @@ Types:Artifact
 Text:At the beginning of each player's draw step, that player draws two additional cards.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/font_of_mythos.jpg
+SetInfo:CON|Rare|http://magiccards.info/scans/en/cfx/136.jpg
 End

@@ -6,4 +6,6 @@ A:SP$Fetch | Cost$ 2 U | Destination$ Hand | FetchType$ Artifact | FetchNum$ 1 |
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/35.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/52.jpg
 End

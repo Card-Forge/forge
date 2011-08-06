@@ -7,4 +7,5 @@ K:Echo:4
 A:AB$PutCounter | Cost$ Sac<1/Artifact> | ValidTgts$ Creature | TgtPrompt$ Select target Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extruder.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/130.jpg
 End

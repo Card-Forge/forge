@@ -7,4 +7,5 @@ SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faith_healer.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/14.jpg
 End

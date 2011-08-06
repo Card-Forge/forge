@@ -7,4 +7,5 @@ SVar:X:Count$NumType.Zombie
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feeding_frenzy.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/147.jpg
 End

@@ -6,4 +6,5 @@ K:abUntapTgt tapXType<1/Creature>:Land.Basic:Untap target basic land.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthcraft.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/116.jpg
 End

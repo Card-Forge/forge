@@ -5,4 +5,5 @@ Text:You may play an additional land this turn.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/explore.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/99.jpg
 End

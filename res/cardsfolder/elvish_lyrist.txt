@@ -6,4 +6,7 @@ PT:1/1
 K:abDestroyTgtV G T Sac<1/CARDNAME>:Enchantment:Destroy target enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_lyrist.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/242.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/248.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/241.jpg
 End

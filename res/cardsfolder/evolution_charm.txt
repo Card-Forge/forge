@@ -8,4 +8,5 @@ A:SP$Pump | Cost$ 1 G | ValidTgts$ Creature | KW$ Flying | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolution_charm.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/127.jpg
 End

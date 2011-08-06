@@ -6,4 +6,5 @@ A:AB$PutCounter | Cost$ G G | ValidTgts$ Fungus | TgtPrompt$ Select target Fungu
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_bloom.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/79.jpg
 End

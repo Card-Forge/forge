@@ -7,4 +7,6 @@ K:Flying
 A:AB$Pump | Cost$ R | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ Fire Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_drake.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/226.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/61.jpg
 End

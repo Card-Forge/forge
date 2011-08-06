@@ -5,4 +5,7 @@ Text:no text
 PT:2/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84608.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/17.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/178.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/14.jpg
 End

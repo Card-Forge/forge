@@ -7,4 +7,5 @@ K:Enchant creature
 K:enPump:+5/+5/Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_proportions.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/209.jpg
 End

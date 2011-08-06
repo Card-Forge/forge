@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ 2 U | Destination$ Hand | FetchType$ Arcane | FetchNum$ 1 | S
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eerie_procession.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/58.jpg
 End

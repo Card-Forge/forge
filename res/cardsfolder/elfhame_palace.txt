@@ -7,4 +7,6 @@ K:tap: add W
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elfhame_palace.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/324.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/322.jpg
 End

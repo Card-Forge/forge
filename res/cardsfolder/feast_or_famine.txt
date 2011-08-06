@@ -7,4 +7,5 @@ A:SP$Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_or_famine.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/8.jpg
 End

@@ -6,4 +6,6 @@ A:SP$Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eightfold_maze.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/2.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/2.jpg
 End

@@ -6,4 +6,5 @@ PT:1/3
 K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121197.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/109.jpg
 End

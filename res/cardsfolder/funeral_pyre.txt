@@ -6,4 +6,5 @@ A:SP$Retrieve | Cost$ W | Destination$ Exile | TgtPrompt$ Choose target card in 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_pyre.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/10.jpg
 End
