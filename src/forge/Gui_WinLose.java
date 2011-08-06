@@ -307,6 +307,10 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     				sb.append("Won in one turn! Bonus: <b>+1500 credits</b>.<br>");
     			else if (i <= 5)
     				sb.append("Won by turn 5! Bonus: <b>+250 credits</b>.<br>");
+    			else if (i <= 10)
+    				sb.append("Won by turn 10! Bonus: <b>+50 credits</b>.<br>");
+    			else if (i <= 15)
+    				sb.append("Won by turn 15! Bonus: <b>+5 credits</b>.<br>");
     		}
     	}
 

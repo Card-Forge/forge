@@ -529,6 +529,7 @@ public class QuestData implements NewConstants {
     {
     	long creds = (long) (10 + (0.3 * win));
     	String[] wins = winLose.getWinMethods();
+    	int[] winTurns = winLose.getWinTurns();
     	
     	if (winLose.getLose() == 0)
     		creds += 10;
@@ -542,6 +543,17 @@ public class QuestData implements NewConstants {
 	    			creds+=100;
 	    		}
     		}
+    	}
+    	for (int i : winTurns)
+    	{
+    		if (i == 1)
+    			creds+=1500;
+			else if (i <= 5)
+				creds+=250;
+			else if (i <= 10)
+				creds+=50;
+			else if (i <= 15)
+				creds+=5;
     	}
     	
     	if (getEstatesLevel() == 1)
