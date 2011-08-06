@@ -690,7 +690,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                	card.getController().loseLife(4, card);
+                	card.getController().addDamage(4, card);
                 }
             };
             Command intoPlay = new Command() {
