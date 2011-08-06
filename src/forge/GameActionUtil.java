@@ -4817,7 +4817,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Ior Ruin Expedition")
 				|| c.getName().equals("Khalni Heart Expedition")) landfall_AddQuestCounter(c);
 		else if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
-		else if(c.getName().equals("Hedron Crab")) landfall_Hedron_Crab(c);
 		else if(c.getName().equals("Bloodghast")) landfall_Bloodghast(c);
 		else if(c.getName().equals("Avenger of Zendikar")) landfall_Avenger_of_Zendikar(c);
 		else if(c.getName().equals("Eternity Vessel")) landfall_Eternity_Vessel(c);
@@ -5146,33 +5145,6 @@ public class GameActionUtil {
 		}
 	}
 
-	private static void landfall_Hedron_Crab(Card c) {
-		//final Card crd = c;
-		final Player targetPlayer = c.getController().getOpponent();
-		final Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				getTargetPlayer().mill(3);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - Landfall: ").append(targetPlayer);
-		sb.append(" puts the top three cards of his or her library into his or her graveyard.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
-			//AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) {
-			//ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-			ability.setTargetPlayer(AllZone.HumanPlayer);
-			AllZone.Stack.add(ability);
-
-		}
-	}//landfall_Hedron_Crab
 
 	private static void landfall_Bloodghast(Card c) {
 		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
