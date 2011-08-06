@@ -3934,14 +3934,16 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					CardList creatures = AllZoneUtil.getCreaturesInPlay();
-					CardListUtil.sortAttackLowFirst(creatures);
-					int power = creatures.get(0).getNetAttack();
-					if(player.equals(AllZone.HumanPlayer)) {
-        				AllZone.InputControl.setInput(CardFactoryUtil.input_destroyNoRegeneration(getLowestPowerList(creatures), "Select creature with power: "+power+" to sacrifice."));
-        			}
-					else { //computer
-						Card compyTarget = getCompyCardToDestroy(creatures);
-						AllZone.GameAction.destroyNoRegeneration(compyTarget);
+					if(creatures.size() > 0) {
+						CardListUtil.sortAttackLowFirst(creatures);
+						int power = creatures.get(0).getNetAttack();
+						if(player.equals(AllZone.HumanPlayer)) {
+							AllZone.InputControl.setInput(CardFactoryUtil.input_destroyNoRegeneration(getLowestPowerList(creatures), "Select creature with power: "+power+" to sacrifice."));
+						}
+						else { //computer
+							Card compyTarget = getCompyCardToDestroy(creatures);
+							AllZone.GameAction.destroyNoRegeneration(compyTarget);
+						}
 					}
 				}//resolve
 				
