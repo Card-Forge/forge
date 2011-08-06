@@ -276,6 +276,8 @@ public class Phase extends MyObservable
 	    	CardList hHand = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
 	    	for(Card c:cHand) c.setDrawnThisTurn(false);
 	    	for(Card c:hHand) c.setDrawnThisTurn(false);
+	    	AllZone.HumanPlayer.resetNumDrawnThisTurn();
+	    	AllZone.ComputerPlayer.resetNumDrawnThisTurn();
 	    }
         
 		resetPriority();

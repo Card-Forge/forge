@@ -8001,6 +8001,69 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Molten Psyche")) {
+        	/*
+        	 * Each player shuffles the cards from his or her hand into his
+        	 * or her library, then draws that many cards.
+        	 * Metalcraft — If you control three or more artifacts, Molten
+        	 * Psyche deals damage to each opponent equal to the number of
+        	 * cards that player has drawn this turn.
+        	 */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -1276674329039279896L;
+
+				@Override
+                public void resolve() {
+                	Player player = card.getController();
+                	Player opp = player.getOpponent();
+                    discardDraw(AllZone.HumanPlayer);
+                    discardDraw(AllZone.ComputerPlayer);
+                    
+                    if(player.hasMetalcraft()) {
+                    	opp.addDamage(opp.getNumDrawnThisTurn(), card);
+                    }
+                }//resolve()
+                
+                void discardDraw(Player player) {
+                    CardList hand = AllZoneUtil.getPlayerHand(player);
+                    int numDraw = hand.size();
+                    
+                    //move hand to library
+                    for(Card c:hand) {
+                    	AllZone.GameAction.moveToLibrary(c);
+                    }
+                    
+                    // Shuffle library
+                    player.shuffle();
+                    
+                    // Draw X cards
+                    player.drawCards(numDraw);
+                }
+                
+                // Simple, If computer has two or less playable cards remaining in hand play CARDNAME
+                @Override
+                public boolean canPlayAI() {
+                    Card[] c = removeLand(AllZone.Computer_Hand.getCards());
+                    return 2 >= c.length || 
+                    	(AllZone.ComputerPlayer.hasMetalcraft() && AllZone.HumanPlayer.getLife() <= 3);
+                }
+                
+                private Card[] removeLand(Card[] in) {
+                    CardList c = new CardList(in);
+                    c = c.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return !c.isLand();
+                        }
+                    });
+                    return c.toArray();
+                }//removeLand()
+                
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }

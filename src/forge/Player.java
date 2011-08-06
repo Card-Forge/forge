@@ -22,6 +22,7 @@ public abstract class Player extends MyObservable{
 	protected boolean bFirstTurn;
 	
 	protected Card lastDrawnCard;
+	protected int numDrawnThisTurn = 0;
 	
 	public Player(String myName) {
 		this(myName, 20, 0);
@@ -33,6 +34,7 @@ public abstract class Player extends MyObservable{
 		poisonCounters = myPoisonCounters;
 		assignedDamage = 0;
 		lastDrawnCard = null;
+		numDrawnThisTurn = 0;
 		bFirstTurn = true;
 		altWin = false;
 		altLose = false;
@@ -45,6 +47,7 @@ public abstract class Player extends MyObservable{
 		poisonCounters = 0;
 		assignedDamage = 0;
 		lastDrawnCard = null;
+		numDrawnThisTurn = 0;
 		bFirstTurn = true;
 		altWin = false;
 		altLose = false;
@@ -304,6 +307,7 @@ public abstract class Player extends MyObservable{
 			hand.add(c);
 			setLastDrawnCard(c);
 			c.setDrawnThisTurn(true);
+			numDrawnThisTurn++;
 
 			GameActionUtil.executeDrawCardTriggeredEffects(this);
 		}
@@ -341,6 +345,14 @@ public abstract class Player extends MyObservable{
         
         throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
     }//getDredgeNumber()
+    
+    public void resetNumDrawnThisTurn() {
+    	numDrawnThisTurn = 0;
+    }
+    
+    public int getNumDrawnThisTurn() {
+    	return numDrawnThisTurn;
+    }
     
     ////////////////////////////////
 	///
@@ -598,6 +610,11 @@ public abstract class Player extends MyObservable{
     		return false;
     	
     	return altWin;
+    }
+    
+    public boolean hasMetalcraft() {
+    	CardList list = AllZoneUtil.getPlayerTypeInPlay(this, "Artifact");
+    	return list.size() >= 3;
     }
     
 	////////////////////////////////
