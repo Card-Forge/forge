@@ -1,3 +1,10 @@
+Chronatog
+1 U
+Creature Atog
+no text
+1/2
+SVar:RemAIDeck:True
+
 People of the Woods
 G G
 Creature Human
@@ -11938,12 +11945,6 @@ B
 Creature Zombie
 At the beginning of your upkeep, tap Carnophage unless you pay 1 life
 2/2
-
-Chronatog
-1 U
-Creature Atog
-no text
-1/2
 
 Loxodon Gatekeeper
 2 W W
