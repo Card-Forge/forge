@@ -1,0 +1,10 @@
+Name:Unholy Grotto
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+A:AB$Retrieve|Cost$B T|TgtPrompt$Choose target Zombie card in your graveyard|ValidTgts$Zombie.YouCtrl|Destination$Library|SpellDescription$Put target Zombie card from your graveyard on top of your library.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unholy_grotto.jpg
+End

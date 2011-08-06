@@ -1,0 +1,10 @@
+Name:Hua Tuo, Honored Physician
+ManaCost:1 G G
+Types:Legendary Creature Human
+Text:no text
+PT:1/2
+A:AB$Retrieve|Cost$B T|TgtPrompt$Choose target creature card in your graveyard|ValidTgts$Creature.YouCtrl|Destination$Library|PlayerTurn$True|ActivatingPhases$Upkeep,Draw,Main1,BeginCombat|SpellDescription$Put target creature card from your graveyard on top of your library. Activate this ability only during your turn, before attackers are declared.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hua_tuo_honored_physician.jpg
+End
