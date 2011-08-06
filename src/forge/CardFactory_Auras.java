@@ -33,9 +33,99 @@ class CardFactory_Auras {
     
     public static Card getCard(final Card card, String cardName, String owner) {
         
-
+    	
         //*************** START *********** START **************************
-        if(cardName.equals("Epic Proportions")) {
+        if(cardName.equals("Pillory of the Sleepless")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 4504925036782582195L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))
+                                && !list.get(i).getKeyword().contains("Defender")) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        //System.out.println("Enchanted: " +getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -6104532173397759007L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("This creature can't attack or block");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                
+                private static final long serialVersionUID = -2563098134722661731L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.removeExtrinsicKeyword("This creature can't attack or block");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -1621250313053538491L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
+        
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Epic Proportions")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 358340213887424783L;
                 
@@ -121,7 +211,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
+    	
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Mythic Proportions")) {
             final SpellAbility spell = new Spell(card) {
@@ -205,7 +297,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
+    	
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Nimbus Wings")) {
             final SpellAbility spell = new Spell(card) {
@@ -299,7 +393,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
@@ -893,93 +987,7 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Pillory of the Sleepless")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 4504925036782582195L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))
-                                && !list.get(i).getKeyword().contains("Defender")) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        //System.out.println("Enchanted: " +getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -6104532173397759007L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature can't attack or block");
-                    }
-                }//execute()
-            };//Command
-            
 
-            Command onUnEnchant = new Command() {
-                
-                private static final long serialVersionUID = -2563098134722661731L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature can't attack or block");
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -1621250313053538491L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Brilliant Halo")) {

@@ -1,3 +1,26 @@
+Fishliver Oil
+1 U
+Enchantment Aura
+Enchanted creature has islandwalk.
+Enchant creature
+enPump:Islandwalk
+
+Flaming Sword
+1 R
+Enchantment Aura
+Enchanted creature gets +1/+0 and has first strike.
+Flash
+Enchant creature
+enPump:+1/+0/First Strike
+
+Frog Tongue
+G
+Enchantment Aura
+Enchanted creature has reach.
+Enchant creature
+enPump:Reach
+When this card comes into play, draw a card.
+
 Putrid Leech
 B G
 Creature Zombie Leech
@@ -5347,6 +5370,7 @@ Nimbus Wings
 Enchantment Aura
 Enchanted creature gets +1/+2 and has flying.
 Enchant creature
+enPump:+1/+2/Flying
 
 Vexing Beetle
 4 G
@@ -7462,8 +7486,9 @@ tap: add 1
 Mythic Proportions
 4 G G G
 Enchantment Aura
-Target creature gets +8/+8 and has trample.
+Enchanted creature gets +8/+8 and has trample.
 Enchant creature
+enPump:+8/+8/Trample
 
 Goblin King
 1 R R
@@ -7914,9 +7939,10 @@ Enchant creature
 Epic Proportions
 4 G G
 Enchantment Aura
-Target creature gets +5/+5 and has trample.
+Enchanted creature gets +5/+5 and has trample.
 Flash
-Enchant Creature
+Enchant creature
+enPump:+5/+5/Trample
 
 Banishing Knack
 U

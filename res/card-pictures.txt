@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+fishliver_oil.jpg		http://www.wizards.com/global/images/magic/general/fishliver_oil.jpg
+flaming_sword.jpg		http://www.wizards.com/global/images/magic/general/flaming_sword.jpg
+frog_tongue.jpg		http://www.wizards.com/global/images/magic/general/frog_tongue.jpg
 putrid_leech.jpg		http://www.wizards.com/global/images/magic/general/putrid_leech.jpg
 cave_sense.jpg		http://www.wizards.com/global/images/magic/general/cave_sense.jpg
 divine_transformation.jpg		http://www.wizards.com/global/images/magic/general/divine_transformation.jpg
