@@ -655,6 +655,7 @@ res/cardsfolder/bear_cub.txt -text svneol=native#text/plain
 res/cardsfolder/bear_umbra.txt svneol=native#text/plain
 res/cardsfolder/bearscape.txt svneol=native#text/plain
 res/cardsfolder/beast_attack.txt -text svneol=native#text/plain
+res/cardsfolder/beast_hunt.txt -text svneol=native#text/plain
 res/cardsfolder/beast_of_burden.txt -text svneol=native#text/plain
 res/cardsfolder/beast_within.txt -text svneol=native#text/plain
 res/cardsfolder/beastbreaker_of_bala_ged.txt -text svneol=native#text/plain
