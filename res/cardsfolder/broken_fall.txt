@@ -1,0 +1,8 @@
+Name:Broken Fall
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+A:AB$Regenerate|Tgt$TgtC|Cost$Return<1/CARDNAME>|SpellDescription$Regenerate target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_fall.jpg
+End
