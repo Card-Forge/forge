@@ -152,6 +152,40 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Bojuka Bog")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+					if (card.getController().equals(Constant.Player.Computer))
+						setTargetPlayer(Constant.Player.Human);
+					
+        			final String player = getTargetPlayer();
+        			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+        			for(Card c:grave) {
+        				AllZone.GameAction.exile(c);
+        			}
+                }
+            };
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -4309535765473933378L;
+
+				public void execute() {
+                    card.tap();
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
+                        ButtonUtil.disableAll();
+                    } else if(card.getController().equals(Constant.Player.Computer)) {
+                        ability.setTargetPlayer(Constant.Player.Human);
+                    }
+                    ability.setStackDescription(card.getName() + " - " + " Exile target player's graveyard.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Sejiri Steppe")) {
             final HashMap<Card, String[]> creatureMap = new HashMap<Card, String[]>();
             final SpellAbility[] a = new SpellAbility[1];

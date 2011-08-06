@@ -1,3 +1,9 @@
+Bojuka Bog
+no cost
+Land
+CARDNAME enters the battlefield tapped. When CARDNAME enters the battlefield, exile target player's graveyard.
+tap: add B
+
 Thran Quarry
 no cost
 Land
