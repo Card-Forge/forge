@@ -1,3 +1,23 @@
+Thran Quarry
+no cost
+Land
+At the beginning of the end step, if you control no creatures, sacrifice CARDNAME
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+
+Glimmervoid
+no cost
+Land
+At the beginning of the end step, if you control no artifacts, sacrifice CARDNAME
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+
 Nature's Lore
 1 G
 Sorcery

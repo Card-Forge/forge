@@ -36,6 +36,8 @@ public class EndOfTurn implements java.io.Serializable
     GameActionUtil.endOfTurn_Predatory_Advantage();
     GameActionUtil.endOfTurn_Wall_Of_Reverence();
     GameActionUtil.endOfTurn_Lighthouse_Chronologist();
+    GameActionUtil.endOfTurn_Thran_Quarry();
+    GameActionUtil.endOfTurn_Glimmervoid();
     
     //GameActionUtil.removeExaltedEffects();
     GameActionUtil.removeAttackedBlockedThisTurn();

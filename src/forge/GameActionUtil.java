@@ -3728,6 +3728,44 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
+	
+	public static void endOfTurn_Thran_Quarry() 
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList(playZone.getCards());
+
+		CardList quarries = list.getName("Thran Quarry");
+		
+		if (quarries.size() == 0) return;
+		
+		CardList creatures = list.getType("Creature");
+		
+		if (creatures.size() == 0){
+			for(Card c : quarries){
+				AllZone.GameAction.sacrifice(c);
+			}
+		}
+	}
+	
+	public static void endOfTurn_Glimmervoid() 
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList(playZone.getCards());
+
+		CardList glimmers = list.getName("Glimmervoid");
+		
+		if (glimmers.size() == 0) return;
+		
+		CardList artifacts = list.getType("Artifact");
+		
+		if (artifacts.size() == 0){
+			for(Card c : glimmers){
+				AllZone.GameAction.sacrifice(c);
+			}
+		}
+	}
 
 
 	//END ENDOFTURN CARDS
