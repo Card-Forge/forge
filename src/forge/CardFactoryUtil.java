@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.Map.Entry;
 
 
 public class CardFactoryUtil {
@@ -2994,10 +2995,8 @@ public class CardFactoryUtil {
     public static String getMostProminentCreatureType(CardList list) {
         
         Map<String, Integer> map = new HashMap<String, Integer>();
-        String s = "";
         
-        for(int i = 0; i < list.size(); i++) {
-            Card c = list.get(i);
+        for(Card c : list) {
             ArrayList<String> typeList = c.getType();
             
             for(String var:typeList) {
@@ -3013,29 +3012,24 @@ public class CardFactoryUtil {
         int max = 0;
         String maxType = "";
         
-        for(int i = 0; i < map.size(); i++) {
-            Iterator<String> iter = map.keySet().iterator();
-            while(iter.hasNext()) {
-                String type = iter.next();
-                System.out.println(type + " - " + map.get(type));
-                
-                if(max < map.get(type)) {
-                    max = map.get(type);
-                    maxType = type;
-                }
+        for(Entry<String, Integer> entry : map.entrySet()){
+            String type = entry.getKey();
+            System.out.println(type + " - " + entry.getValue());
+            
+            if(max < entry.getValue()) {
+                max = entry.getValue();
+                maxType = type;
             }
         }
-        s = maxType;
-        return s;
+        
+        return maxType;
     }
     
     public static String getMostProminentColor(CardList list) {
         
         Map<String, Integer> map = new HashMap<String, Integer>();
-        String s = "";
         
-        for(int i = 0; i < list.size(); i++) {
-            Card c = list.get(i);
+        for(Card c : list) {
             ArrayList<String> colorList = CardUtil.getColors(c);
             
             for(String color:colorList) {
@@ -3049,21 +3043,18 @@ public class CardFactoryUtil {
         
         int max = 0;
         String maxColor = "";
-        
-        for(int i = 0; i < map.size(); i++) {
-            Iterator<String> iter = map.keySet().iterator();
-            while(iter.hasNext()) {
-                String color = iter.next();
-                System.out.println(color + " - " + map.get(color));
-                
-                if(max < map.get(color)) {
-                    max = map.get(color);
-                    maxColor = color;
-                }
+
+        for(Entry<String, Integer> entry : map.entrySet()){
+            String color = entry.getKey();
+            System.out.println(color + " - " + entry.getValue());
+            
+            if(max < entry.getValue()) {
+                max = entry.getValue();
+                maxColor = color;
             }
         }
-        s = maxColor;
-        return s;
+
+        return maxColor;
     }
     
     

@@ -820,9 +820,7 @@ public class Card extends MyObservable {
     
     
     public void addDamage(HashMap<Card, Integer> sourcesMap) {
-        Iterator<Entry<Card, Integer>> iter1 = sourcesMap.entrySet().iterator();
-        while(iter1.hasNext()) {
-            Entry<Card, Integer> entry = iter1.next();
+        for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
             this.addDamage(entry.getValue(), entry.getKey());
         }
         

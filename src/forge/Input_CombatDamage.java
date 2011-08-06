@@ -5,6 +5,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 
 public class Input_CombatDamage extends Input {
@@ -228,10 +229,10 @@ public class Input_CombatDamage extends Input {
                 HashMap<Card, Integer> assignedDamageMap = c.getAssignedDamageHashMap();
                 HashMap<Card, Integer> damageMap = new HashMap<Card, Integer>();
                 
-                Iterator<Card> iter = assignedDamageMap.keySet().iterator();
-                while(iter.hasNext()) {
-                    Card crd = iter.next();
-                    //AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
+
+                for(Entry<Card, Integer> entry : assignedDamageMap.entrySet()){
+                    Card crd = entry.getKey();
+                    //AllZone.GameAction.addDamage(c, crd , entry.getValue());
                     /*
                     for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
                     Command com = GameActionUtil.commands.get(effect);
@@ -241,7 +242,7 @@ public class Input_CombatDamage extends Input {
                     GameActionUtil.executeCardStateEffects();
                     */
 
-                    damageMap.put(crd, assignedDamageMap.get(crd));
+                    damageMap.put(crd, entry.getValue());
                 }
                 AllZone.GameAction.addDamage(c, damageMap);
                 

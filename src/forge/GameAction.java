@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -1375,11 +1376,10 @@ public class GameAction {
         //int totalDamage = 0;
         CardList list = new CardList();
         
-        Iterator<Card> iter = map.keySet().iterator();
-        while(iter.hasNext()) {
-            Card source = iter.next();
+        for(Entry<Card, Integer> entry : map.entrySet()){
+            Card source = entry.getKey();
             list.add(source);
-            int damage = map.get(source);
+            int damage = entry.getValue();
             int damageToAdd = damage;
             //AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
             
