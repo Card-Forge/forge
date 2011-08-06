@@ -1,0 +1,11 @@
+Name:Decree of Justice
+ManaCost:X X 2 W W
+Types:Sorcery
+Text:no text
+K:Cycling:2 W
+A:SP$Token | Cost$ X X 2 W W | TokenAmount$ X | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4|TokenKeywords$ Flying|SpellDescription$Put X 4/4 white Angel creature tokens with flying onto the battlefield.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_justice.jpg
+End

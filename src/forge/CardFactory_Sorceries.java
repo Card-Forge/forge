@@ -7305,6 +7305,51 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Decree of Justice")) { 
+        	/*
+        	 *   When you cycle Decree of Justice, you may pay X. If you do, put X 1/1 
+        	 *   white Soldier creature tokens onto the battlefield.
+        	 */
+        	Ability_Cost abCost = new Ability_Cost("X", cardName, false);
+        	final SpellAbility ability = new Ability_Activated(card, abCost, null) {
+        		private static final long serialVersionUID = -7995897172138409120L;
+
+        		@Override
+        		public void resolve() {
+        			for(int i = 0; i < card.getXManaCostPaid(); i++)
+        				CardFactoryUtil.makeToken11WSoldier(card.getController());
+        			card.setXManaCostPaid(0);
+        		}
+
+        	};
+        	ability.setStackDescription(cardName+" - put X 1/1 white Soldier creature tokens onto the battlefield.");
+        	card.addCycleCommand(new Command() {
+        		private static final long serialVersionUID = 7699412574052780825L;
+
+        		public void execute() {
+        			AllZone.InputControl.setInput(new Input() {
+        				private static final long serialVersionUID = 7823602729552197455L;
+
+        				public void showMessage() {
+        					String s = JOptionPane.showInputDialog(cardName+" - What would you like X to be?");
+        					try {
+        						int x = Integer.parseInt(s);
+        						ability.setManaCost(s);
+        						stopSetNext(new Input_PayManaCost(ability));
+        						card.setXManaCostPaid(x);
+        					}
+        					catch(NumberFormatException e){
+        						AllZone.Display.showMessage("\"" + s + "\" is not a number.");
+        						showMessage();
+        					}
+        				}
+        			});
+        		}
+        	});
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
