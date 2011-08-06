@@ -17673,7 +17673,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Sage Owl")) {
+        else if(cardName.equals("Sage Owl") || cardName.equals("Inkfathor Divers")) {
         	final SpellAbility ability = new Ability(card, "0") {
         		@Override
         		public void resolve() {

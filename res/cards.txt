@@ -1,3 +1,10 @@
+Inkfathom Divers
+3 U U
+Creature Merfolk Soldier
+When Inkfathom Divers enters the battlefield, look at the top four cards of your library, then put them back in any order.
+3/3
+Islandwalk
+
 Index
 U
 Sorcery
