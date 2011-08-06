@@ -8659,7 +8659,7 @@ public class GameActionUtil {
 					final int num = source.getCounters(Counters.FADE);
 					final CardList list = AllZoneUtil.getPlayerCardsInPlay(player).filter(new CardListFilter() {
 						public boolean addCard(Card c) {
-							return (c.isArtifact() || c.isLand() || c.isEnchantment()) && c.isUntapped();
+							return (c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped();
 						}
 					});
 					for(int i = 0; i < num; i++) {
