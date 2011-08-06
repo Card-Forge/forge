@@ -174,8 +174,14 @@ public class AbilityFactory_ZoneAffecting {
 				return true;
 		}
 		
+		double chance = .4;	// 40 percent chance of milling with instant speed stuff
+		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
+			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		Random r = new Random();
-		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
+		
+		if (AbilityFactory.playReusable(sa))
+			randomReturn = true;
 		
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null)
@@ -491,10 +497,9 @@ public class AbilityFactory_ZoneAffecting {
 		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		
-		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed());
+		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 		
-		if (sa.getPayCosts().isReusuableResource() && 
-				AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer))
+		if (AbilityFactory.playReusable(sa))
 			randomReturn = true;
 		// some other variables here, like deck size, and phase and other fun stuff
 
@@ -926,8 +931,14 @@ public class AbilityFactory_ZoneAffecting {
 			}
 		}
 		
+		double chance = .4;	// 40 percent chance of milling with instant speed stuff
+		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
+			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		Random r = new Random();
-		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
+				
+		if (AbilityFactory.playReusable(sa))
+			randomReturn = true;
 		
 		// some other variables here, like handsize vs. maxHandSize
 
@@ -1154,14 +1165,16 @@ public class AbilityFactory_ZoneAffecting {
 	}
 	
 	private static boolean scryCanPlayAI(final AbilityFactory af, SpellAbility sa){
-		Random r = new Random();
 		Card source = sa.getSourceCard();
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
+		Random r = new Random();
+		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 		
-		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed());
+		if (AbilityFactory.playReusable(sa))
+			randomReturn = true;
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();

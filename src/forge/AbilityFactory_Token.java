@@ -203,8 +203,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment it's usually not mandatory
 			return false;
 
-		if (AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer) &&
-				cost.isReusuableResource())
+		if (AbilityFactory.playReusable(sa))
 			return true;
 
 		// todo: if i don't have enough blockers and my token can block one of the unblocked creatures

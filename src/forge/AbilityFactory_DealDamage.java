@@ -309,8 +309,7 @@ public class AbilityFactory_DealDamage {
 				
 				// todo: add check here if card is about to die from something on the stack
 				// or from taking combat damage
-				boolean freePing = mandatory || (saMe.getPayCosts().isReusuableResource() && 
-						AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer));
+				boolean freePing = mandatory || AbilityFactory.playReusable(saMe);
 
 				if (freePing && tgt.addTarget(AllZone.HumanPlayer))
 					continue;
