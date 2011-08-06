@@ -43,11 +43,26 @@ public class Input_Main extends Input
 		    		}
 		    	}
 		    	InputUtil.playAnyCard(card, zone);
-		    	canPlayNumberOfLands--;
-		    	firstLandHasBeenPlayed = true;
+		    	//canPlayNumberOfLands--;
+		    	//firstLandHasBeenPlayed = true;
 	            AllZone.GameAction.checkStateEffects();
 		    }
-	
+		    
+		    //card might have cycling/transmute/etc.
+		    else { 
+		    	SpellAbility[] sa = card.getSpellAbility();
+		    	if (sa.length > 0)
+				{
+					int count = 0;
+					for (SpellAbility s : sa)
+					{
+						if (s.canPlay() && (s instanceof Ability_Hand))
+							count++;
+					}
+					if (count > 0)
+						InputUtil.playAnyCard(card, zone);
+				}
+		    }
 			//TODO: add code for exploration / fastbond here
 		    
 		}

@@ -1,8 +1,22 @@
 package forge;
+
+import java.util.ArrayList;
+
 class CardFactory_Lands {
+	
+	private static final int hasKeyword(Card c, String k)
+    {
+    	ArrayList<String> a = c.getKeyword();
+    	for (int i = 0; i < a.size(); i++)
+    		if (a.get(i).toString().startsWith(k))
+    			return i;
+
+    	return -1;
+    }
+	
 	public static Card getCard(final Card card, String cardName, String owner)
 	{
-	
+		
 //	    computer plays 2 land of these type instead of just 1 per turn
 
 	    
@@ -2933,6 +2947,54 @@ class CardFactory_Lands {
 	         };
 	          a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
 	        }//*************** END ************ END **************************
+	        
+	        
+	        if (hasKeyword(card, "Cycling") != -1)
+		       {
+		         int n = hasKeyword(card, "Cycling");
+		         if (n != -1)
+		         {
+		           String parse = card.getKeyword().get(n).toString();
+		           card.removeIntrinsicKeyword(parse);
+
+		           String k[] = parse.split(":");
+		           final String manacost = k[1];
+
+		           card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
+		         }
+		       }//Cycling
+		       
+		       while (hasKeyword(card, "TypeCycling") != -1)
+		       {
+		         int n = hasKeyword(card, "TypeCycling");
+		         if (n != -1)
+		         {
+		           String parse = card.getKeyword().get(n).toString();
+		           card.removeIntrinsicKeyword(parse);
+
+		           String k[] = parse.split(":");
+		           final String type = k[1];
+		           final String manacost = k[2];
+
+		           card.addSpellAbility(CardFactoryUtil.ability_typecycle(card, manacost,type));
+		         }
+		       }//TypeCycling
+
+		       if (hasKeyword(card, "Transmute") != -1)
+		       {
+		         int n = hasKeyword(card, "Transmute");
+		         if (n != -1)
+		         {
+		           String parse = card.getKeyword().get(n).toString();
+		           card.removeIntrinsicKeyword(parse);
+
+		           String k[] = parse.split(":");
+		           final String manacost = k[1];
+
+		           card.addSpellAbility(CardFactoryUtil.ability_transmute(card, manacost));
+		         }
+		       }//transmute
+
 
          
 		return card;

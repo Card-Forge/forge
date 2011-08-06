@@ -17217,10 +17217,12 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		    		 return c.isCreature() && !c.getKeyword().contains("Horsemanship") && !c.getKeyword().contains("Defender");
 		    	 }
 		      });
-		      
-		      Card c = CardFactoryUtil.AI_getBestCreature(list, card);
-		      setTargetCard(c);
-	          return list.size() > 0;
+		      if (list.size() > 0) {
+			      Card c = CardFactoryUtil.AI_getBestCreature(list, card);
+			      setTargetCard(c);
+		          return true;
+		      }
+		      return false;
 	        }
 	        
 	        public void resolve()

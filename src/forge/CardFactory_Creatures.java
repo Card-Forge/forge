@@ -18358,7 +18358,7 @@ public class CardFactory_Creatures {
 	      {
 	    	  final Card newCard = new Card()
 	    	  {
-		    	  public void addDamage(final int n, CardList sources)
+		    	  public void addDamage(HashMap<Card, Integer> map)
 			      {
 		    		  final Ability ability = new Ability(card, "0")
 		    		  {
@@ -18457,6 +18457,110 @@ public class CardFactory_Creatures {
              };
              card.addComesIntoPlayCommand(intoPlay);
           }//*************** END ************ END **************************
+	       
+	     //*************** START *********** START **************************
+	      else if (cardName.equals("Lichentrope"))
+	      {
+	    	  final Card newCard = new Card()
+	    	  {
+		    	  public void addDamage(final int n, final Card source)
+			      {
+		    		  final Ability ability = new Ability(card, "0")
+		    		  {
+		    			  public void resolve(){
+				    		  for (int i=0;i<n;i++)
+				    		  	card.addCounter(Counters.M1M1, n);
+		    			  }
+		    		  };
+		    		  ability.setStackDescription(card.getName() + " - gets " + n +" -1/-1 counters.");
+			          AllZone.Stack.add(ability);
+			      }
+	    	  };
+	    	  
+	    	  newCard.setOwner(card.getOwner());
+		      newCard.setController(card.getController());
+
+		      newCard.setManaCost(card.getManaCost());
+		      newCard.setName(card.getName());
+		      newCard.addType("Creature");
+		      newCard.addType("Plant");
+		      newCard.addType("Fungus");
+		      newCard.setText(card.getSpellText());
+		      newCard.setBaseAttack(card.getBaseAttack());
+		      newCard.setBaseDefense(card.getBaseDefense());
+		      
+		      newCard.addSpellAbility(new Spell_Permanent(newCard));
+		      
+		      return newCard;
+		  }//*************** END ************ END **************************
+	       
+	       
+	     //*************** START *********** START **************************
+	      else if (cardName.equals("Phytohydra"))
+	      {
+	    	  final Card newCard = new Card()
+	    	  {
+		    	  public void addDamage(final int n, final Card source)
+			      {
+		    		  final Ability ability = new Ability(card, "0")
+		    		  {
+		    			  public void resolve(){
+				    		  for (int i=0;i<n;i++)
+				    		  	card.addCounter(Counters.P1P1, n);
+		    			  }
+		    		  };
+		    		  ability.setStackDescription(card.getName() + " - gets " + n +" +1/+1 counters.");
+			          AllZone.Stack.add(ability);
+			      }
+	    	  };
+	    	  
+	    	  newCard.setOwner(card.getOwner());
+		      newCard.setController(card.getController());
+
+		      newCard.setManaCost(card.getManaCost());
+		      newCard.setName(card.getName());
+		      newCard.addType("Creature");
+		      newCard.addType("Plant");
+		      newCard.addType("Hydra");
+		      newCard.setText(card.getSpellText());
+		      newCard.setBaseAttack(card.getBaseAttack());
+		      newCard.setBaseDefense(card.getBaseDefense());
+		      
+		      newCard.addSpellAbility(new Spell_Permanent(newCard));
+		      
+		      return newCard;
+		  }//*************** END ************ END **************************
+	       
+	       
+	     //*************** START *********** START **************************
+	      else if (cardName.equals("Callous Giant"))
+	      {
+	    	  final Card newCard = new Card()
+	    	  {
+		    	  public void addDamage(int n, Card source)
+			      {		    			  
+		    		  if (n <= 3)
+		    			  n = 0;
+		    		  super.addDamage(n, source);
+			      }
+	    	  };
+	    	  
+	    	  newCard.setOwner(card.getOwner());
+		      newCard.setController(card.getController());
+
+		      newCard.setManaCost(card.getManaCost());
+		      newCard.setName(card.getName());
+		      newCard.addType("Creature");
+		      newCard.addType("Giant");
+		      newCard.setText(card.getSpellText());
+		      newCard.setBaseAttack(card.getBaseAttack());
+		      newCard.setBaseDefense(card.getBaseDefense());
+		      
+		      newCard.addSpellAbility(new Spell_Permanent(newCard));
+		      
+		      return newCard;
+		  }//*************** END ************ END **************************
+	       
 	       
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found

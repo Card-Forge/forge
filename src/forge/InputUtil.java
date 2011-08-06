@@ -16,9 +16,35 @@ public class InputUtil
 	if(zone.is(Constant.Zone.Hand, Constant.Player.Human) && 
 	    (card.isLand()))
 	{
-	    AllZone.Human_Hand.remove(card);
-	    AllZone.Human_Play.add(card);
-	}
+		
+		//hacky stuff: see if there's cycling/transmute/other hand abilities on the land:
+		SpellAbility[] sa = card.getSpellAbility();
+		if (sa.length > 0)
+		{
+			int count = 0;
+			for (SpellAbility s : sa)
+			{
+				if (s.canPlay() && (s instanceof Ability_Hand))
+					count++;
+			}
+			if (count > 0)
+				AllZone.GameAction.playCard(card);
+			else //play the land
+			{
+				AllZone.Human_Hand.remove(card);
+				AllZone.Human_Play.add(card);
+				Input_Main.canPlayNumberOfLands--;
+		    	Input_Main.firstLandHasBeenPlayed = true;
+			}
+		}
+		else //play the land
+		{
+			AllZone.Human_Hand.remove(card);
+			AllZone.Human_Play.add(card);
+			Input_Main.canPlayNumberOfLands--;
+	    	Input_Main.firstLandHasBeenPlayed = true;
+		}
+	} //land
 	else if(zone.is(Constant.Zone.Hand, Constant.Player.Human) && 
 	    card.getManaCost().equals("0"))//for Mox Ruby and the like
 	{

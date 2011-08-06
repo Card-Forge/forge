@@ -18,6 +18,8 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+phytohydra.jpg 				http://www.wizards.com/global/images/magic/general/phytohyrda.jpg
+lichentrope.jpg				http://www.wizards.com/global/images/magic/general/lichentrope.jpg
 feast_of_flesh.jpg		http://www.wizards.com/global/images/magic/general/feast_of_flesh.jpg
 first_volley.jpg		http://www.wizards.com/global/images/magic/general/first_volley.jpg
 svogthos_the_restless_tomb.jpg   http://www.wizards.com/global/images/magic/general/svogthos_the_restless_tomb.jpg

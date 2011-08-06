@@ -1139,31 +1139,72 @@ private int getDifferentLand(CardList list, String land)
   }
   public void playCard(Card c)
   {
-	  
-	//TODO: add code for cards like Standstill ??
+	if (c.isLand() && isCardInZone(c, AllZone.Human_Hand))
+	{	
+		HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
+		SpellAbility[] sas = canPlaySpellAbility(c.getSpellAbility());
+		
+		ArrayList<String> choices = new ArrayList<String>();
+		
+		if (Input_Main.canPlayNumberOfLands > 0)
+			choices.add("Play land");
+		
+		for (SpellAbility sa: sas)
+		{
+			if (sa.canPlay())
+			{
+				choices.add(sa.toString());
+				map.put(sa.toString(), sa);
+			}
+		}
+
+		//String[] ch = (String[])choices.toArray();
+		String[] ch = new String[choices.size()];
+		for (int i=0;i<choices.size();i++)
+		{
+			ch[i] = choices.get(i);
+		}
+		String choice = AllZone.Display.getChoiceOptional("Choose", ch);
+		
+		if (choice == null)
+			;	
+		else if (choice.equals("Play land"))
+		{
+			 AllZone.Human_Hand.remove(c);
+			 AllZone.Human_Play.add(c);
+			 Input_Main.canPlayNumberOfLands--;
+		     Input_Main.firstLandHasBeenPlayed = true;
+		}
+		else 
+		{
+			SpellAbility sa = map.get(choice);
+			playSpellAbility(sa);
+		}
+	}
+	else  
+	{
+	    SpellAbility[] choices = canPlaySpellAbility(c.getSpellAbility());
+	    SpellAbility sa;
+	/*
+	 System.out.println(choices.length);
+	 for(int i = 0; i < choices.length; i++)
+	     System.out.println(choices[i]);
+	*/
+	    if(choices.length == 0)
+	      return;
+	    else if(choices.length == 1)
+	      sa = choices[0];
+	    else
+	      sa = (SpellAbility) AllZone.Display.getChoiceOptional("Choose", choices);
 	
-    SpellAbility[] choices = canPlaySpellAbility(c.getSpellAbility());
-    SpellAbility sa;
-/*
- System.out.println(choices.length);
- for(int i = 0; i < choices.length; i++)
-     System.out.println(choices[i]);
-*/
-    if(choices.length == 0)
-      return;
-    else if(choices.length == 1)
-      sa = choices[0];
-    else
-      sa = (SpellAbility) AllZone.Display.getChoiceOptional("Choose", choices);
-
-    if(sa == null)
-      return;
-
-    playSpellAbility(sa);
+	    if(sa == null)
+	      return;
+	
+	    playSpellAbility(sa);
+	}
   }
   public void playSpellAbility(SpellAbility sa)
   {
-	  
 	if (sa.getManaCost().equals("0") && sa.getBeforePayMana() == null){
 		AllZone.Stack.add(sa);
 		if (sa.isTapAbility())
@@ -1269,7 +1310,7 @@ private int getDifferentLand(CardList list, String land)
   
   public void addDamage(Card card, HashMap<Card,Integer> map)
   {
-	  int totalDamage = 0;
+	  //int totalDamage = 0;
 	  CardList list = new CardList();
 	  
 	  Iterator<Card> iter = map.keySet().iterator();
@@ -1305,11 +1346,12 @@ private int getDifferentLand(CardList list, String land)
 				  AllZone.Combat.removeFromCombat(card);
 			  }
 			  
-			  totalDamage += damageToAdd;
+			  //totalDamage += damageToAdd;
+			  map.put(source, damageToAdd);
 	  }
 	  
 	  if (isCardInPlay(card))
-		  card.addDamage(totalDamage, list);
+		  card.addDamage(map);
 	  
   }
   

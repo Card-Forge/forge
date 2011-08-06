@@ -2,11 +2,8 @@ package forge;
 //TODO: make this class a type of Ability
 abstract public class Ability_Hand extends SpellAbility implements java.io.Serializable
 {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+  
+	private static final long serialVersionUID = 7782525158887272529L;
 	public Ability_Hand(Card sourceCard)
     {
 	this(sourceCard, "");

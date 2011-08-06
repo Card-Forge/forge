@@ -5,6 +5,7 @@ enum Counters {
 	AGE, BLAZE, CHARGE, DIVINITY, FADE, HOOFPRINT, ICE, LOYALTY, M1M1, MANA, P0M1, P1P1, QUEST, SPORE
 }
 
+
 public class Card extends MyObservable 
 {
   private static int nextUniqueNumber;
@@ -485,17 +486,27 @@ public class Card extends MyObservable
   public String getRarity()          {return rarity;}
 
   
-  public void addDamage(int n, CardList sources)
+  public void addDamage(HashMap<Card, Integer> sourcesMap)
   {
-	  for(Card source : sources)
-		  this.addDamage(n, source);
+	  Iterator<Card> iter = sourcesMap.keySet().iterator();
+	  while(iter.hasNext()) {
+			Card source = iter.next();	
+			int damage = sourcesMap.get(source);
+			
+			this.addDamage(damage, source);
+	  }
+	  //for(Card source : sources)
+	  //	  this.addDamage(n, source);
+	  
   }
   
   public void addDamage(int n, Card source) 
   {
+	  System.out.println("addDamage called on " + this + " for " + n + " damage.");
 	  if (this.getName().equals("Cho-Manno, Revolutionary"))
 		  n = 0;
-	  setDamage(getDamage() + n);
+	  //setDamage(getDamage() + n);
+	  damage += n;
   }
   public void setDamage(int n) 
   {
