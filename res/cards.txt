@@ -1,3 +1,19 @@
+Knight of Cliffhaven
+1 W
+Creature Kor Knight
+LEVEL 1-3 2/3 Flying LEVEL 4+ 2/4 Flying Vigilance
+2/2
+Level up:3
+maxLevel:4
+
+Ikiral Outrider
+1 W
+Creature Human Soldier
+LEVEL 1-3 3/6 LEVEL 4+ 3/10 First Strike
+1/2
+Level up:4
+maxLevel:4
+
 Caravan Escort
 W
 Creature Human Knight

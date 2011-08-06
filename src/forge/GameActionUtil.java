@@ -9925,9 +9925,6 @@ public class GameActionUtil {
 	};
 	
 	public static Command Caravan_Escort  = new Command() {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = -6996623102170747897L;
 
 		public void execute()
@@ -9955,6 +9952,75 @@ public class GameActionUtil {
 					c.setBaseAttack(5);
 					c.setBaseDefense(5);
 					c.addNonStackingIntrinsicKeyword("First Strike");
+				}
+			}
+		}
+	};
+	
+	public static Command Ikiral_Outrider  = new Command() {
+		private static final long serialVersionUID = 7835884582225439851L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Ikiral Outrider");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(1);
+					c.setBaseDefense(2);
+				}
+				else if ( lcs >=1 && lcs < 3 )
+				{
+					c.setBaseAttack(3);
+					c.setBaseDefense(6);
+					c.addNonStackingIntrinsicKeyword("Vigilance");
+				}
+				else
+				{
+					c.setBaseAttack(5);
+					c.setBaseDefense(5);
+					c.addNonStackingIntrinsicKeyword("Vigilance");
+				}
+			}
+		}
+	};
+	
+	public static Command Knight_of_Cliffhaven  = new Command() {
+		private static final long serialVersionUID = 3624165284236103054L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Knight of Cliffhaven");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(2);
+				}
+				else if ( lcs >=1 && lcs < 3 )
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(3);
+					c.addNonStackingIntrinsicKeyword("Flying");
+				}
+				else
+				{
+					c.setBaseAttack(5);
+					c.setBaseDefense(5);
+					c.addNonStackingIntrinsicKeyword("Flying");
+					c.addNonStackingIntrinsicKeyword("Vigilance");
 				}
 			}
 		}
@@ -15375,6 +15441,8 @@ public class GameActionUtil {
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		commands.put("Caravan_Escort", Caravan_Escort);
+		commands.put("Ikiral_Outrider", Ikiral_Outrider);
+		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);

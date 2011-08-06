@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+knight_of_cliffhaven.jpg		http://www.wizards.com/global/images/magic/general/knight_of_cliffhaven.jpg
+ikiral_outrider.jpg				http://www.wizards.com/global/images/magic/general/ikiral_outrider.jpg
 caravan_escort.jpg				http://www.wizards.com/global/images/magic/general/caravan_escort.jpg
 soulsurge_elemental.jpg			http://www.wizards.com/global/images/magic/general/soulsurge_elemental.jpg
 hellion_eruption.jpg			http://www.wizards.com/global/images/magic/general/hellion_eruption.jpg

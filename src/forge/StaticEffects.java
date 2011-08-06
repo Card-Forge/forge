@@ -59,6 +59,9 @@ public class StaticEffects
 		cardToEffectsList.put("Lighthouse Chronologist", new String[] {"Lighthouse_Chronologist"});
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
 		cardToEffectsList.put("Caravan Escort", new String[] {"Caravan_Escort"});
+		cardToEffectsList.put("Ikiral Outrider", new String[] {"Ikiral_Outrider"});
+		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
+		
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
