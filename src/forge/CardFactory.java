@@ -2578,6 +2578,66 @@ public class CardFactory implements NewConstants {
 
         }//spDestroyTgt
 
+        // Generic destroy all card
+        if(hasKeyword(card, "spDestroyAll") != -1) {
+            int n = hasKeyword(card, "spDestroyAll");
+            
+            String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String k[] = parse.split(":");
+            String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
+            // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+            //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+            final String Tgts[] = Targets.split(",");
+            
+            final boolean NoRegen = (k.length == 3);
+            
+            card.clearSpellAbility();
+            
+            final SpellAbility spDstryAll = new Spell(card) {
+                private static final long serialVersionUID = 132554543614L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    human = human.getValidCards(Tgts);
+                    human = human.getNotKeyword("Indestructible");
+                    computer = computer.getValidCards(Tgts);
+                    computer = computer.getNotKeyword("Indestructible");
+                    
+                    // the computer will at least destroy 2 more human permanents
+                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+                    		(computer.size() < human.size() - 1);
+                }
+
+                @Override
+                public void resolve() {
+                    CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.getValidCards(Tgts);
+                    
+                    CardListUtil.sortByIndestructible(all);
+                    CardListUtil.sortByDestroyEffect(all);
+                    
+                    for(int i = 0; i < all.size(); i++) {
+                        Card c = all.get(i);
+                        if(NoRegen) AllZone.GameAction.destroyNoRegeneration(c); else AllZone.GameAction.destroy(c);
+                    }
+                }// resolve()
+
+            }; //SpDstryAll
+            
+            
+            card.setSVar("PlayMain1", "TRUE");
+            card.addSpellAbility(spDstryAll);            
+
+        }//spDestroyAll
+
+
         // Generic bounce target card
         if(hasKeyword(card, "spBounceTgt") != -1) {
             int n = hasKeyword(card, "spBounceTgt");

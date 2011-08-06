@@ -1,3 +1,21 @@
+Serene Heart
+1 G
+Instant
+Destroy all Auras.
+spDestroyAll:Aura
+
+Tranquil Domain
+1 G
+Instant
+Destroy all non-Aura enchantments.
+spDestroyAll:Enchantment.nonAura
+
+Tsunami
+3 G
+Sorcery
+Destroy all Islands.
+spDestroyAll:Island
+
 Assassinate
 2 B
 Sorcery
