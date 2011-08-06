@@ -2353,8 +2353,10 @@ public class CardFactory implements NewConstants {
             String tmpDesc = card.getText().substring(15);
             int i = tmpDesc.indexOf(".");
             tmpDesc = tmpDesc.substring(0, i);
-            final String Selec = "Select target to return to owners hand.";
-                       
+            final String Selec = "Select a target";
+            
+            final boolean TopofLibrary = (k.length == 3);
+            
             card.clearSpellAbility();
             
             final SpellAbility spBnceTgt = new Spell(card) { 
@@ -2416,9 +2418,11 @@ public class CardFactory implements NewConstants {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         	if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
-                        	else {
-                            		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
-                           	 	AllZone.GameAction.moveTo(hand, getTargetCard());
+                        	else {  if(TopofLibrary) AllZone.GameAction.moveToTopOfLibrary(getTargetCard()); 
+					else {
+                            			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
+                           	 		AllZone.GameAction.moveTo(hand, getTargetCard());
+					}
 				}
                         }
 
@@ -2471,6 +2475,7 @@ public class CardFactory implements NewConstants {
             }
 
         }//spBounceTgt
+
 
         while(hasKeyword(card, "abDrawCards") != -1) {
             int n = hasKeyword(card, "abDrawCards");

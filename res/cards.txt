@@ -1,3 +1,15 @@
+Temporal Eddy
+2 U U
+Sorcery
+Put target creature or land on top of its owner's library.
+spBounceTgt:Creature, Land:TopofLibrary
+
+Time Ebb
+2 U
+Sorcery
+Put target creature on top of its owner's library.
+spBounceTgt:Creature:TopofLibrary
+
 Hoodwink
 1 U
 Instant
