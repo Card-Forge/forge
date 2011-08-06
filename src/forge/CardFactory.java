@@ -10767,7 +10767,7 @@ public class CardFactory implements NewConstants {
     }// copyStats()
     
     public static void main(String[] args) {
-        CardFactory f = new CardFactory("cards.txt");
+        CardFactory f = new CardFactory(ForgeProps.getFile(CARDSFOLDER));
         Card c = f.getCard("Arc-Slogger", "d");
         System.out.println(c.getOwner());
     }
