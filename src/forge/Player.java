@@ -200,8 +200,6 @@ public abstract class Player extends MyObservable{
 		int damageToDo = damage;
 		
 		if( AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
-			
-			System.out.println("Crumbling Sanctuary ("+source+") - exile number of cards:"+damageToDo);
 			for(int i = 0; i < damageToDo; i++) {
 				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
 				if(lib.size() > 0) {
