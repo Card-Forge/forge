@@ -1,3 +1,12 @@
+King Suleiman
+1 W
+Creature Human
+tap: Destroy target Djinn or Efreet.
+1/1
+abTapDestroyTgt:Creature.Djinn,Creature.Efreet
+SVars:Rarity:Rare
+SVars:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
+
 Tenza, Godo's Maul
 3
 Legendary Artifact Equipment
