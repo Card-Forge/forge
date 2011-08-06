@@ -7086,7 +7086,6 @@ res/quest/medium.txt -text svneol=native#text/plain
 res/quest/price.txt -text svneol=native#text/plain
 res/quest/quest.preferences -text
 res/quest/quest.properties svneol=native#text/plain
-res/quest/questData -text svneol=unset#unset
 res/quest/quests.txt -text svneol=native#text/plain
 res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WG.thm -text
