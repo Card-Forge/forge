@@ -1,6 +1,8 @@
 
 package forge;
 
+import java.util.ArrayList;
+
 
 public abstract class Player extends MyObservable{
 	protected String name;
@@ -229,7 +231,75 @@ public abstract class Player extends MyObservable{
 		return new CardList();
 	}
 	
+
+	////////////////////////////////
+	///
+	/// replaces AllZone.GameAction.draw* methods
+	///
+	////////////////////////////////
 	
+	public void drawCard() {
+		drawCards(1);
+	}
+	
+	public void drawCards() {
+		drawCards(1);
+	}
+	
+	public abstract boolean dredge();
+	
+	public void drawCards(int n) {
+		PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
+		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, this);
+		for(int i = 0; i < n; i++) {
+			if(getDredge().size() == 0 || !dredge()) {
+				doDraw(library, hand);
+			}
+		}
+	}
+	
+	private void doDraw(PlayerZone library, PlayerZone hand) {
+		if(library.size() != 0) {
+			Card c = library.get(0);
+			library.remove(0);
+			hand.add(c);
+
+			GameActionUtil.executeDrawCardTriggeredEffects(this);
+		}
+		//lose:
+		else if(Constant.Runtime.Mill[0]) {
+			if(!AllZoneUtil.isCardInPlay("Platinum Angel", this) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", this.getOpponent())) {
+				setLife(0);
+				AllZone.GameAction.checkStateEffects();
+			}
+		}
+	}
+	
+	protected CardList getDredge() {
+        CardList dredge = new CardList();
+        CardList cl = AllZoneUtil.getPlayerGraveyard(this);
+        
+        for(Card c:cl) {
+            ArrayList<String> kw = c.getKeyword();
+            for(int i = 0; i < kw.size(); i++) {
+                if(kw.get(i).toString().startsWith("Dredge")) {
+                    if(AllZoneUtil.getPlayerCardsInLibrary(this).size() >= getDredgeNumber(c)) dredge.add(c);
+                }
+            }
+        }
+        return dredge;
+    }//hasDredge()
+    
+    protected int getDredgeNumber(Card c) {
+        ArrayList<String> a = c.getKeyword();
+        for(int i = 0; i < a.size(); i++)
+            if(a.get(i).toString().startsWith("Dredge")) {
+                String s = a.get(i).toString();
+                return Integer.parseInt("" + s.charAt(s.length() - 1));
+            }
+        
+        throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
+    }//getDredgeNumber()
 	
 	////////////////////////////////
 	//

@@ -2354,15 +2354,20 @@ public class GameAction {
      * @param player target player to draw
      * @param numCards the number of cards the player should draw
      */
+    @Deprecated
     public void drawCards(Player player, int numCards) {
-    	if(numCards > 0) {
+    	player.drawCards(numCards);
+    	/*if(numCards > 0) {
     		for(int i=0; i < numCards; i++) {
     			drawCard(player);
     		}
     	}
+    	*/
     }
-    
+    @Deprecated
     public void drawCard(Player player) {
+    	player.drawCard();
+    	/*
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
         
@@ -2392,8 +2397,9 @@ public class GameAction {
         else {
         	doDraw(player, library, hand);
         }
+        */
     }
-    
+    /*
     private void doDraw(Player player, PlayerZone library, PlayerZone hand) {
     	if(library.size() != 0) {
             Card c = library.get(0);
@@ -2417,7 +2423,7 @@ public class GameAction {
     		}
         }
     }
-    
+    *
     private ArrayList<Card> getDredge() {
         ArrayList<Card> dredge = new ArrayList<Card>();
         Card c[] = AllZone.Human_Graveyard.getCards();
@@ -2442,6 +2448,7 @@ public class GameAction {
         
         throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
     }//getDredgeNumber()
+    */
     
     //is this card a permanent that is in play?
     public boolean isCardInPlay(Card c) {
