@@ -646,8 +646,9 @@ public class AbilityFactory_ChangeZone {
 				// AI Targeting 
 				Card choice = null;
 
-				if (list.getNotType("Creature").size() == 0 && destination.equals("Battlefield"))
-	        		choice = CardFactoryUtil.AI_getBestCreature(list); //if only creatures take the best
+				if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
+						&& destination.equals("Battlefield"))
+	        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
 	        	else if (destination.equals("Battlefield"))
 	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
 	        	else{
@@ -1035,11 +1036,13 @@ public class AbilityFactory_ChangeZone {
 		else if (origin.equals("Battlefield")){
 			// this statement is assuming the AI is trying to use this spell offensively
 			// if the AI is using it defensively, then something else needs to occur
-			if (computerType.size()+1 > humanType.size())
-				return false;
-			
-			if (humanType.size() <= 1) // unless that 1 thing is going to kill me soon? 
-				return false;
+			// if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
+			 if (humanType.getNotType("Creature").size() == 0 && computerType.getNotType("Creature").size() == 0) {
+				 if(CardFactoryUtil.evaluateCreatureList(computerType) + 200 >= CardFactoryUtil.evaluateCreatureList(humanType))
+					 return false;
+			 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
+			 else if(CardFactoryUtil.evaluatePermanentList(computerType) + 3 >= CardFactoryUtil.evaluatePermanentList(humanType))
+				 return false;
 			
 			// Don't cast during main1?
 			if (AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer))
@@ -1066,14 +1069,21 @@ public class AbilityFactory_ChangeZone {
 		
 		if (destination.equals(Constant.Zone.Battlefield)){
 			if (params.get("GainControl") != null){
-				// todo: don't activate if less than 4 cards.
-				// although if those cards are awesome, or we need the blockers maybe we should
-				if (humanType.size() + computerType.size() < 4)
+				// Check if the cards are valuable enough
+				if (humanType.getNotType("Creature").size() == 0 && computerType.getNotType("Creature").size() == 0) {
+					 if(CardFactoryUtil.evaluateCreatureList(computerType) + CardFactoryUtil.evaluateCreatureList(humanType) < 400)
+						 return false;
+				 } // otherwise evaluate both lists by CMC and pass only if human permanents are less valuable
+				 else if(CardFactoryUtil.evaluatePermanentList(computerType) + CardFactoryUtil.evaluatePermanentList(humanType) < 6)
 					return false;
 			}
 			else{
 				// don't activate if human gets more back than AI does
-				if (humanType.size() > computerType.size())
+				if (humanType.getNotType("Creature").size() == 0 && computerType.getNotType("Creature").size() == 0) {
+					 if(CardFactoryUtil.evaluateCreatureList(computerType) <= CardFactoryUtil.evaluateCreatureList(humanType) + 100)
+						 return false;
+				 } // otherwise evaluate both lists by CMC and pass only if human permanents are less valuable
+				 else if(CardFactoryUtil.evaluatePermanentList(computerType) <= CardFactoryUtil.evaluatePermanentList(humanType) + 2)
 					return false;
 			}
 		}
@@ -1128,6 +1138,8 @@ public class AbilityFactory_ChangeZone {
 		// I don't know if library position is necessary. It's here if it is, just in case
 		int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
 		for(Card c : cards){
+			if (destination.equals("Battlefield") && params.containsKey("Tapped"))
+                c.tap();
 			if (params.containsKey("GainControl"))
 				AllZone.GameAction.moveToPlay(c, sa.getActivatingPlayer());
 			else

@@ -391,7 +391,7 @@ public class CardFactoryUtil {
             	if (biggest.isToken()) biggestvalue += 100; 	// raise the value of tokens
             	newvalue = evaluateCreature(all.get(i));
             	if (all.get(i).isToken()) newvalue += 100;		// raise the value of tokens
-                if(evaluateCreature(biggest) < evaluateCreature(all.get(i))) biggest = all.get(i);
+                if(biggestvalue < newvalue) biggest = all.get(i);
             }
         }
         return biggest;
