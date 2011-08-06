@@ -3515,8 +3515,11 @@ class CardFactory_Lands {
               //@Override
                 public String mana() {
                 	StringBuilder mana = new StringBuilder();
-                	for(int i = 0; i < num[0]; i++) {
-                		mana.append(shortString).append(" ");
+                	if(num[0] == 0) mana.append("0");
+                	else {
+                		for(int i = 0; i < num[0]; i++) {
+                			mana.append(shortString).append(" ");
+                		}
                 	}
                     return mana.toString().trim();
                 }
