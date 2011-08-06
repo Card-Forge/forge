@@ -291,7 +291,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     
     private String getWinText(long creds, WinLose winLose, QuestData q)
     {
-    	// This text isn't up-to-date with the quest.preferences
+    	// todo use q.qdPrefs to write bonus credits in prefs file 
     	StringBuilder sb = new StringBuilder();
     	String[] wins = winLose.getWinMethods();
     	
@@ -300,16 +300,25 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	for (String s : wins)
     	{
     		if (s != null) {
-	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
+    			sb.append("Alternate win condition: ");
+    			sb.append("<u>");
+    			sb.append(s);
+    			sb.append("</u>");
+    			sb.append("! Bonus: <b>+");
+    			
+    			if (s.equals("Poison Counters"))
+    				sb.append(q.qdPrefs.getMatchRewardPoisonWinBonus());
+    			else if (s.equals("Milled"))
+    				sb.append(q.qdPrefs.getMatchRewardMilledWinBonus());
+    			else if (s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
 	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience") ||
 	    			s.equals("Mortal Combat") || s.equals("Test of Endurance") ) {
-	    			sb.append("Alternate win condition: ");
-	    			sb.append("<u>");
-	    			sb.append(s);
-	    			sb.append("</u>");
-	    			sb.append("! Bonus: <b>+100 credits</b>.<br>");
+
+	    			sb.append(q.qdPrefs.getMatchRewardAltWinBonus());
 	    		}
+    			
+    			sb.append(" credits</b>.<br>");
     		}
     	}
     	

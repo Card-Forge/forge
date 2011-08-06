@@ -39,7 +39,11 @@ public class QuestData_Prefs implements Serializable {
 	private int matchRewardBase = 10;
 	private double matchRewardTotalWins = 0.3;
 	private int matchRewardNoLosses = 10;
+	
+	private int matchRewardPoisonWinBonus = 50;
+	private int matchRewardMilledWinBonus = 40;
 	private int matchRewardAltWinBonus = 100;
+	
 	private int matchRewardWinOnFirstTurn = 1500;
 	private int matchRewardWinByTurnFive = 250;
 	private int matchRewardWinByTurnTen = 50;
@@ -95,6 +99,10 @@ public class QuestData_Prefs implements Serializable {
 					setMatchRewardTotalWins(split[1]);
 				else if (split[0].equals("matchRewardNoLosses"))
 					setMatchRewardNoLosses(split[1]);
+				else if (split[0].equals("matchRewardMilledWinBonus"))
+					setMatchRewardMilledWinBonus(split[1]);
+				else if (split[0].equals("matchRewardPoisonWinBonus"))
+					setMatchRewardPoisonWinBonus(split[1]);
 				else if (split[0].equals("matchRewardAltWinBonus"))
 					setMatchRewardAltWinBonus(split[1]);
 				else if (split[0].equals("matchRewardWinOnFirstTurn"))
@@ -187,6 +195,14 @@ public class QuestData_Prefs implements Serializable {
 	
 	public int getMatchRewardNoLosses(){
 		return matchRewardNoLosses;
+	}
+	
+	public int getMatchRewardPoisonWinBonus(){
+		return matchRewardPoisonWinBonus;
+	}
+	
+	public int getMatchRewardMilledWinBonus(){
+		return matchRewardMilledWinBonus;
 	}
 	
 	public int getMatchRewardAltWinBonus(){
@@ -304,6 +320,14 @@ public class QuestData_Prefs implements Serializable {
 	
 	public void setMatchRewardNoLosses(String match){
 		this.matchRewardNoLosses = Integer.parseInt(match);
+	}
+	
+	public void setMatchRewardPoisonWinBonus(String match){
+		this.matchRewardPoisonWinBonus = Integer.parseInt(match);
+	}
+	
+	public void setMatchRewardMilledWinBonus(String match){
+		this.matchRewardMilledWinBonus = Integer.parseInt(match);
 	}
 	
 	public void setMatchRewardAltWinBonus(String match){

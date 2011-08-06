@@ -19,10 +19,11 @@ boosterPackRare=1
 matchRewardBase=10
 matchRewardTotalWins=0.3
 matchRewardNoLosses=10
+matchRewardPoisonWinBonus=50
+matchRewardMilledWinBonus=40
 matchRewardAltWinBonus=100
 matchRewardWinOnFirstTurn=1500
 matchRewardWinByTurnFive=250
 matchRewardWinByTurnTen=50
 matchRewardWinByTurnFifteen=5
 matchRewardMullToZero=500
-
