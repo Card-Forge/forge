@@ -3210,13 +3210,16 @@ public class CardFactory implements NewConstants {
                     list = list.getValidCards(Tgts);
                                         
                     if(list.size() != 0) {
-                        //comp will just grab the first one it finds
+                        //comp will just grab the first one it finds, but tries to avoid another copy of same tutor
+                    	if (list.getNotName(card.getName()).size() != 0) 
+                    	{
+                    		list = list.getNotName(card.getName());
+                    	}
                         Card c = list.get(0);
                         AllZone.GameAction.shuffle(card.getController());
-                        //move to hand
                         AllZone.Computer_Library.remove(c);
-                        if (Destination == "Hand") AllZone.Computer_Hand.add(c);
-                        else if (Destination == "TopOfLibrary") AllZone.Computer_Library.add(c, 0);
+                        if (Destination == "Hand") AllZone.Computer_Hand.add(c);         			//move to hand
+                        else if (Destination == "TopOfLibrary") AllZone.Computer_Library.add(c, 0); //move to top of library
                         
                         CardList l = new CardList();
                         l.add(c);
@@ -3233,10 +3236,9 @@ public class CardFactory implements NewConstants {
                         
                         AllZone.GameAction.shuffle(card.getController());
                         if(o != null) {
-                            //put card in hand
                         	AllZone.Human_Library.remove(o);
-                        	if (Destination.equals("Hand")) AllZone.Human_Hand.add((Card) o);
-                            else if (Destination.equals("TopOfLibrary")) AllZone.Human_Library.add((Card) o, 0);
+                        	if (Destination.equals("Hand")) AllZone.Human_Hand.add((Card) o);         			//move to hand
+                            else if (Destination.equals("TopOfLibrary")) AllZone.Human_Library.add((Card) o, 0);//move to top of library
                         }
                     }//if
                 }//resolve()
