@@ -4,5 +4,5 @@ Types:Enchantment Aura
 Text:Whenever enchanted creature deals combat damage to a player, you may return target creature card from your graveyard to your hand.
 K:Enchant Creature
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necromantic_thirst.txt
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necromantic_thirst.jpg
 End
