@@ -401,10 +401,12 @@ public abstract class Player extends MyObservable{
     	
     	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
     	
-    	/* work in progress - slapshot5
-    	//Psychic Purge
+    	/*
+    	 * When a spell or ability an opponent controls causes you
+    	 * to discard Psychic Purge, that player loses 5 life.
+    	 */
     	if(c.getName().equals("Psychic Purge")) {
-    		if(!sa.getSourceCard().getController().equals(this)) {
+    		if( null != sa && !sa.getSourceCard().getController().equals(this)) {
     			SpellAbility ability = new Ability(c, "") {
     				public void resolve() {
     					sa.getSourceCard().getController().loseLife(5, c);
@@ -414,7 +416,7 @@ public abstract class Player extends MyObservable{
     					sa.getSourceCard().getController()+" loses 5 life.");
     			AllZone.Stack.add(ability);
     		}
-    	} */
+    	} 
     	
         AllZone.GameAction.discard_nath(c);
         AllZone.GameAction.discard_megrim(c);

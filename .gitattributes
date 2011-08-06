@@ -3409,6 +3409,7 @@ res/cardsfolder/psionic_entity.txt -text svneol=native#text/plain
 res/cardsfolder/psychatog.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_drain.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_membrane.txt -text svneol=native#text/plain
+res/cardsfolder/psychic_purge.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_spear.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_venom.txt -text svneol=native#text/plain
 res/cardsfolder/psychotic_haze.txt -text svneol=native#text/plain
