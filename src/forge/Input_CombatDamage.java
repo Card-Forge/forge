@@ -61,9 +61,17 @@ public class Input_CombatDamage extends Input {
         String player = AllZone.Combat.getDefendingPlayer();
         if(player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
         	player = Constant.Player.Computer;
-        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
         
-        life.subtractLife(AllZone.Combat.getTotalDefendingDamage(),AllZone.CardFactory.HumanNullCard); 
+        
+        HashMap<Card, Integer> defMap = AllZone.Combat.getDefendingDamageMap();
+        
+        for(Entry<Card, Integer> entry : defMap.entrySet()) {
+        	AllZone.GameAction.addCombatDamage(player, entry.getKey(), entry.getValue());
+            //this.addDamage(entry.getValue(), entry.getKey());
+        }
+        
+        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+        //life.subtractLife(AllZone.Combat.getTotalDefendingDamage(),AllZone.CardFactory.HumanNullCard); 
         // Quick Fix, should work for Whenever keyword because of GameActionUtil.ExecutePlayerCombatEffects
         
 
@@ -112,23 +120,17 @@ public class Input_CombatDamage extends Input {
                     }
                 }
                 */
-
+                
+                /*
                 if(!attackers.getCard(i).hasDoubleStrike()
                         || (attackers.getCard(i).hasDoubleStrike() && !AllZone.Combat.isBlocked(attackers.getCard(i)))
                         || (attackers.getCard(i).hasDoubleStrike()
                                 && AllZone.Combat.isBlocked(attackers.getCard(i)) && defend.size() != 0)) {
-                    /* 
-                    //old stuff: lifelink triggers on multiple instances of the lifelink keyword
-                    for (int j=0; j < list.size(); j++)
-                    {
-                    	if (list.get(j).equals("Lifelink"))
-                    		GameActionUtil.executeLifeLinkEffects(attackers.getCard(i));
-                    }
-                    */
+                    
 
                     CombatUtil.executeCombatDamageEffects(attackers.getCard(i));
                 }
-                
+                */
                 //not sure if this will work correctly with multiple blockers?
                 int defenderToughness = 0;
                 for(int k = 0; k < defend.size(); k++) {
@@ -247,7 +249,7 @@ public class Input_CombatDamage extends Input {
 
                     damageMap.put(crd, entry.getValue());
                 }
-                AllZone.GameAction.addDamage(c, damageMap);
+                AllZone.GameAction.addCombatDamage(c, damageMap);
                 
                 AllZone.GameAction.checkWinLoss();
                 

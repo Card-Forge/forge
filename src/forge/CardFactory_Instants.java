@@ -4057,8 +4057,8 @@ public class CardFactory_Instants {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
-                  AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
+                  AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
+                  AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -4123,8 +4123,8 @@ public class CardFactory_Instants {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
-                  AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
+                  AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
+                  AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -4990,7 +4990,7 @@ public class CardFactory_Instants {
         			if( damage < 0 )
         				damage = 0;
 
-        			AllZone.GameAction.addDamage(getTargetPlayer(), damage, card);
+        			AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
         		}
         	};
         	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -5162,8 +5162,8 @@ public class CardFactory_Instants {
         			for(Card c:all) {
         				AllZone.GameAction.addDamage(c, card, damage);
         			}
-        			AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
-        			AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
+        			AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
+        			AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
         		}// resolve()
 
         		@Override

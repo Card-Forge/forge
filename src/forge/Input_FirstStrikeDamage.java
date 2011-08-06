@@ -68,8 +68,16 @@ public class Input_FirstStrikeDamage extends Input {
         String player = AllZone.Combat.getDefendingPlayer();
         if(player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
         player = Constant.Player.Computer;
-        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-        life.subtractLife(AllZone.Combat.getTotalFirstStrikeDefendingDamage(),AllZone.CardFactory.HumanNullCard);
+        
+        HashMap<Card, Integer> defMap = AllZone.Combat.getDefendingFirstStrikeDamageMap();
+        
+        for(Entry<Card, Integer> entry : defMap.entrySet()) {
+        	AllZone.GameAction.addCombatDamage(player, entry.getKey(), entry.getValue());
+            //this.addDamage(entry.getValue(), entry.getKey());
+        }
+        
+        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+        //life.subtractLife(AllZone.Combat.getTotalFirstStrikeDefendingDamage(),AllZone.CardFactory.HumanNullCard);
         // Quick Fix, should work for Whenever keyword because of GameActionUtil.ExecutePlayerCombatEffects
         Log.debug("getTotalFirstStrikeDefendingDamage: "
                 + AllZone.Combat.getTotalFirstStrikeDefendingDamage());
@@ -103,22 +111,11 @@ public class Input_FirstStrikeDamage extends Input {
             CardList defend = AllZone.Combat.getBlockers(attackers.getCard(i));
             ArrayList<String> list = attackers.getCard(i).getKeyword();
             
-
+            /*
             if((attackers.getCard(i).hasFirstStrike() || attackers.getCard(i).hasDoubleStrike())) {
             	
                 CombatUtil.executeCombatDamageEffects(attackers.getCard(i));
-                
-                /*
-                
-                //old stuff: gain life for each instance of lifelink
-                for (int j=0; j < list.size(); j++)
-                 {
-                 	if (list.get(j).equals("Lifelink"))
-                 		GameActionUtil.executeLifeLinkEffects(attackers.getCard(i));
-                 	
-                 }
-                 */
-            }
+            }*/
             
             //not sure if this will work correctly with multiple blockers?
             int defenderToughness = 0;
@@ -183,7 +180,7 @@ public class Input_FirstStrikeDamage extends Input {
                     damageMap.put(crd, entry.getValue());
                 }
                 
-                AllZone.GameAction.addDamage(c, damageMap);
+                AllZone.GameAction.addCombatDamage(c, damageMap);
                 
                 AllZone.GameAction.checkWinLoss();
                 

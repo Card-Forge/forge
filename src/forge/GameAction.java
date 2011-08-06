@@ -1791,11 +1791,11 @@ public class GameAction {
       			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount[0]);
       			                              }
       			                          } else {
-      			                             AllZone.GameAction.addDamage( (String) Targets_Multi[z], F_Amount[0],F_card);
+      			                             AllZone.GameAction.addDamage( (String) Targets_Multi[z], F_card, F_Amount[0]);
       			                          }
       			                      }
       			                      }
-      			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount[0]*F_Multiple_Targets,F_card);
+      			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_card, F_Amount[0]*F_Multiple_Targets);
                       			}
                         				}
                                     };
@@ -3561,7 +3561,7 @@ public class GameAction {
         */
     }
     
-    public void addDamage(Card card, HashMap<Card, Integer> map) {
+    public void addCombatDamage(Card card, HashMap<Card, Integer> map) {
         //int totalDamage = 0;
         CardList list = new CardList();
         
@@ -3572,7 +3572,7 @@ public class GameAction {
             int damageToAdd = damage;
             //AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
             
-            if(source.getKeyword().contains("Wither") && card.isCreature()) {
+            if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && card.isCreature()) {
                 damageToAdd = 0;
                 card.addCounterFromNonEffect(Counters.M1M1, damage);
             }
@@ -3597,17 +3597,20 @@ public class GameAction {
             map.put(source, damageToAdd);
         }
         
-        if(isCardInPlay(card)) card.addDamage(map);
+        if(isCardInPlay(card)) {
+        	card.addDamage(map);
+        	CombatUtil.executeCombatDamageEffects(card);
+        }
         
     }
     
     public void addDamage(Card card, Card source, int damage) {
         int damageToAdd = damage;
-        if(source.getKeyword().contains("Wither") && card.isCreature()) {
+        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && card.isCreature()) {
             damageToAdd = 0;
             card.addCounterFromNonEffect(Counters.M1M1, damage);
         }
-        if(source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) {
+        if(source.getName().equals("Spiritmonger")) {
             final Card thisCard = source;
             Ability ability2 = new Ability(source, "0") {
                 @Override
@@ -3676,49 +3679,7 @@ public class GameAction {
         }
         
     }
-    
     /*
-    public void counterSpell()
-    {
-      SpellAbility s;
-      boolean spellOnStack = false;
-      for (int i=0; i<AllZone.Stack.size(); i++)
-      {
-           s = AllZone.Stack.peek(i);
-           if (s.isSpell()) {
-                 spellOnStack = true;
-                 break;
-           }
-      }
-      
-      if (!spellOnStack)
-    	  return;
-      
-      SpellAbility sa = AllZone.Stack.peek();
-      //SpellAbility sa = AllZone.Stack.pop();
-      
-      
-      while (!sa.isSpell() || AllZone.Stack.size() == 0)
-      {
-      	  sa = AllZone.Stack.peek();
-      	  sa.resolve();
-      }
-      if (sa.isSpell())
-    	  AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-    }
-    */
-/**
-    public void addLife(String player, int life) {
-        // place holder for future life gain modification rules
-        
-        getPlayerLife(player).addLife(life);
-    }
-    public void subLife(String player, int life) {
-        // place holder for future life loss modification rules
-        
-        getPlayerLife(player).subtractLife(life);
-    }
-    **/
     public void addDamage(String player, int damage, Card source) {
         // place holder for future damage modification rules (prevention?)
         
@@ -3730,16 +3691,34 @@ public class GameAction {
         }
         getPlayerLife(player).subtractLife(damage,source);
     }
-    /**
-    public void addDamage(String player, int damage) {
-        // place holder for future damage modification rules (prevention?)
-        
-        getPlayerLife(player).subtractLife(damage);
+    */
+    public void addCombatDamage(String player, Card source, int damage)
+    {
+    	//addDamage(player, source, damage);
+    	if (source.getKeyword().contains("Infect"))
+        {
+        	if(player.equals(Constant.Player.Human)) 
+				AllZone.Human_PoisonCounter.addPoisonCounters(damage);
+			else
+				AllZone.Computer_PoisonCounter.addPoisonCounters(damage);
+        }
+        else
+        	getPlayerLife(player).subtractLife(damage,source);
+    	
+    	CombatUtil.executeCombatDamageEffects(source);
     }
-    **/
+    
     public void addDamage(String player, Card source, int damage) {
-        getPlayerLife(player).subtractLife(damage,source);
-        
+        if (source.getKeyword().contains("Infect"))
+        {
+        	if(player.equals(Constant.Player.Human)) 
+				AllZone.Human_PoisonCounter.addPoisonCounters(damage);
+			else
+				AllZone.Computer_PoisonCounter.addPoisonCounters(damage);
+        }
+        else
+        	getPlayerLife(player).subtractLife(damage,source);
+         
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");

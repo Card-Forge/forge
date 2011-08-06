@@ -1455,7 +1455,7 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Venerable Monk") || cardName.equals("Kitchen Finks")
-                || cardName.equals("Shu Grain Caravan")) {
+                || cardName.equals("Shu Grain Caravan") || cardName.equals("Kemba's Skyguard")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -19231,7 +19231,7 @@ public class CardFactory_Creatures {
                  Card c = getTargetCard();
                  if (c != null)
                 	 AllZone.GameAction.sacrifice(c);
-                 AllZone.GameAction.addDamage(card.getController(), 1, card);
+                 AllZone.GameAction.addDamage(card.getController(), card, 1);
               }
            };
 

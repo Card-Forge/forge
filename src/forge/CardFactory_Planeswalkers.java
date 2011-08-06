@@ -3094,7 +3094,7 @@ class CardFactory_Planeswalkers {
                     for(int i = 0; i < dragons.size(); i++) {
                     	Card dragon = dragons.get(i);
                     	int damage = dragon.getNetAttack();
-                    	AllZone.GameAction.addDamage(target, damage, dragon);
+                    	AllZone.GameAction.addDamage(target, dragon, damage);
                     }
                     
                 }//resolve()

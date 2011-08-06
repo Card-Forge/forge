@@ -5878,8 +5878,8 @@ public class CardFactory_Sorceries {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
-                  AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
+                  AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
+                  AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -5947,8 +5947,8 @@ public class CardFactory_Sorceries {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
-                  AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
+                  AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
+                  AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -6104,8 +6104,8 @@ public class CardFactory_Sorceries {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
-                  AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
+                  AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
+                  AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -6291,7 +6291,7 @@ public class CardFactory_Sorceries {
                       	list.get(i).addDamage(card.getXManaCostPaid(), card);
                   }
                   
-                  AllZone.GameAction.addDamage(player, damage,card);
+                  AllZone.GameAction.addDamage(player, card, damage);
       			card.setXManaCostPaid(0);
       		}
   			public boolean canPlayAI()
@@ -7135,8 +7135,8 @@ public class CardFactory_Sorceries {
         			CardList humanLands = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Human);
         			CardList compLands = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Computer);
         			
-        			AllZone.GameAction.addDamage(Constant.Player.Computer, compLands.size(), card);
-        			AllZone.GameAction.addDamage(Constant.Player.Human, humanLands.size(), card);
+        			AllZone.GameAction.addDamage(Constant.Player.Computer, card, compLands.size());
+        			AllZone.GameAction.addDamage(Constant.Player.Human, card, humanLands.size());
         		}// resolve()
 
         		@Override
@@ -7224,7 +7224,7 @@ public class CardFactory_Sorceries {
                     } else {
                         javax.swing.JOptionPane.showMessageDialog(null, cardName+" causes " + damage
                                 + " to " + getTargetPlayer());
-                        AllZone.GameAction.addDamage(getTargetPlayer(), damage, card);
+                        AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                     }
                     //System.out.println("Library after: "+AllZoneUtil.getPlayerCardsInLibrary(card.getController()));
                 }

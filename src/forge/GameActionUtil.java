@@ -155,7 +155,7 @@ public class GameActionUtil {
 			Ability ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, 1, crd);
+					AllZone.GameAction.addDamage(player, crd, 1);
 				}
 			};// Ability
 			ability.setStackDescription("City of Brass deals 1 damage to " + player);
@@ -5084,6 +5084,29 @@ public class GameActionUtil {
 			}
 		}
 		
+		/*
+		if (c.getKeyword().contains("Infect"))
+		{
+			final String player = AllZone.GameAction.getOpponent(c.getController());
+			final int power = c.getNetAttack();
+
+			if(power > 0) {
+				Ability ability2 = new Ability(c, "0") {
+					@Override
+					public void resolve() {
+						if(player.equals(Constant.Player.Human)) 
+							AllZone.Human_PoisonCounter.addPoisonCounters(power);
+						else
+							AllZone.Computer_PoisonCounter.addPoisonCounters(power);
+					}
+				};// ability2
+
+				ability2.setStackDescription(c.getName() + " - " + player + " gets " + power + " poison counter(s).");
+				AllZone.Stack.add(ability2);
+			} // if
+		}
+		*/
+		
 		if(CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles") > 0 && c.getNetAttack() > 0) {
 			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles"); k++) {
 				playerCombatDamage_May_draw(c);
@@ -8683,7 +8706,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					
-					AllZone.GameAction.addDamage(player, 1, crd);
+					AllZone.GameAction.addDamage(player, crd, 1);
 				}
 			};// Ability
 			ability.setStackDescription("Serendib Efreet - deals 1 damage to " + player);
@@ -8705,7 +8728,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, 1, crd);
+					AllZone.GameAction.addDamage(player, crd, 1);
 				}
 			};// Ability
 			ability.setStackDescription("Nettletooth Djinn - deals 1 damage to " + player);
@@ -9201,7 +9224,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, 1, crd);
+					AllZone.GameAction.addDamage(player, crd, 1);
 				}
 			};// Ability
 			ability.setStackDescription("Juzam Djinn - deals 1 damage to " + player);
@@ -9223,7 +9246,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.addDamage(player, 1, crd);
+					AllZone.GameAction.addDamage(player, crd, 1);
 					
 				}
 			};// Ability

@@ -1,3 +1,34 @@
+Memnite
+no cost
+Artifact Creature Construct
+no text
+1/1
+SVar:Rarity:Uncommon
+
+Darksteel Axe
+1
+Artifact Equipment
+Equipped creature gets +2/+0.
+Indestructible
+eqPump 2:+2/+0
+SVar:Rarity:Common
+
+Tempered Steel
+1 W W
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Artifact:Artifact creatures you control get +2/+2.
+
+Skithiryx, the Blight Dragon
+3 B B
+Legendary Creature Dragon Skeleton
+no text
+4/4
+Flying
+Infect
+RegenerateMe:B B
+abPump B:Haste
+
 Ravenous Baloth
 2 G G
 Creature Beast

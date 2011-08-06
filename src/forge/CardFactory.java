@@ -2048,7 +2048,7 @@ public class CardFactory implements NewConstants {
                                 tgtP = c.getController();
                             }
                         } else {
-                            AllZone.GameAction.addDamage(getTargetPlayer(), damage,card);
+                            AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                             tgtP = getTargetPlayer();
                         }
                         
@@ -8792,7 +8792,7 @@ public class CardFactory implements NewConstants {
                  }
                  else{
                     JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
-                    AllZone.GameAction.addDamage(card.getController(), 5, card);
+                    AllZone.GameAction.addDamage(card.getController(), card, 5);
                  }
               }
            };//SpellAbility

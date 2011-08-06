@@ -59,6 +59,16 @@ public class Combat
       //relates to defending player damage
   //public int getDefendingDamage() {return defendingDamage;}
   
+  public HashMap<Card, Integer> getDefendingDamageMap()
+  {
+	  return defendingDamageMap;
+  }
+  
+  public HashMap<Card, Integer> getDefendingFirstStrikeDamageMap()
+  {
+	  return defendingFirstStrikeDamageMap;
+  }
+  
   public int getTotalDefendingDamage()         
   {
 	  int total = 0;

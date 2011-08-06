@@ -3755,7 +3755,7 @@ public class CardFactoryUtil {
         else if (d[0].contains("DamageSelf"))
         	AllZone.GameAction.addDamage(Src, Src, X); // 2/10
         else if(d[0].contains("Damage"))
-        	AllZone.GameAction.addDamage(dbPlayer, X, Src);
+        	AllZone.GameAction.addDamage(dbPlayer, Src, X);
         
 
         if(d[0].contains("GainLife")) 
