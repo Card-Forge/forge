@@ -159,6 +159,7 @@ public class AbilityFactory_ZoneAffecting {
 	}
 	
 	public static boolean drawCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
 		// AI cannot use this properly until he can use SAs during Humans turn
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
@@ -194,6 +195,9 @@ public class AbilityFactory_ZoneAffecting {
 			if (players.size() > 0 && players.get(0).equals(AllZone.HumanPlayer))
 				return true;
 		}
+		
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        	return false;
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))

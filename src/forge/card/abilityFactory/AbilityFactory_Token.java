@@ -206,7 +206,6 @@ public class AbilityFactory_Token extends AbilityFactory {
 	
 	private boolean tokenCanPlayAI(SpellAbility sa){
 		Cost cost = sa.getPayCosts();
-		HashMap<String,String> params = af.getMapParams();
 		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment it's usually not mandatory
 			return false;
 
@@ -231,7 +230,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 			
 		//Don't generate tokens without haste before main 2 if possible
-		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !haste && !params.containsKey("ActivatingPhases"))
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !haste)
         	return false;
 		if(AllZone.Phase.isAfter(Constant.Phase.Combat_Begin) && oneShot)
         	return false;
