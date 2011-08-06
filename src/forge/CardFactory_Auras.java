@@ -2809,7 +2809,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+        
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Sleeper's Guile")) {
             final SpellAbility spell = new Spell(card) {
@@ -2897,7 +2899,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Reflexes")) {
             final SpellAbility spell = new Spell(card) {
@@ -2984,7 +2988,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+*/
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Shield of Duty and Reason")) {
             final SpellAbility spell = new Spell(card) {
@@ -3073,7 +3079,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+*/
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Vigilance")) {
             final SpellAbility spell = new Spell(card) {
@@ -3161,7 +3169,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************

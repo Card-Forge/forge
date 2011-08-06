@@ -1,3 +1,10 @@
+Wings of Aesthir
+W U
+Enchantment Aura
+Enchanted creature gets +1/+0 and has flying and first strike.
+Enchant creature
+enPump:+1/+0/Flying & First Strike
+
 Paralyzing Grasp
 2 U
 Enchantment Aura
@@ -5040,12 +5047,14 @@ W
 Enchantment Aura
 Enchanted creature has protection from green and from blue.
 Enchant creature
+enPump:Protection from green & Protection from blue
 
 Reflexes
 R
 Enchantment Aura
 Enchanted creature has first strike.
 Enchant creature
+enPump:First Strike
 
 Dakmor Ghoul
 2 B B
@@ -6492,11 +6501,12 @@ enPump:Flying
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Sleeper's Guile
-1 B
+2 B
 Enchantment Aura
 Enchanted creature has fear.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:Fear
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Weatherseed Treefolk
 2 G G G
