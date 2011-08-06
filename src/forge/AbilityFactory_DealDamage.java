@@ -21,8 +21,9 @@ public class AbilityFactory_DealDamage {
 		nDamage = NumDmg;
 		XDamage = NumDmgX;
 		
-		if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
-			TgtOpp = true;
+		if(af.getMapParams().containsKey("Tgt"))
+			if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
+				TgtOpp = true;
 		
         final SpellAbility abDamage = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt())
         {
@@ -58,8 +59,9 @@ public class AbilityFactory_DealDamage {
 		nDamage = NumDmg;
 		XDamage = NumDmgX;
 		
-		if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
-			TgtOpp = true;
+		if(af.getMapParams().containsKey("Tgt"))
+			if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
+				TgtOpp = true;
 		
 		final SpellAbility spDealDamage = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
