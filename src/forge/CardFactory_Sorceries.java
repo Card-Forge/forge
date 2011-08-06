@@ -2754,41 +2754,6 @@ public class CardFactory_Sorceries {
     
         
            
-        //*************** START *********** START **************************
-        else if (cardName.equals("Psychic Drain"))
-        {
-        	final SpellAbility spell = new Spell(card){
-        		private static final long serialVersionUID = -5739635875246083152L;
-
-        		public void resolve()
-        		{
-        			getTargetPlayer().mill(card.getXManaCostPaid());
-        			
-        			card.getController().gainLife(card.getXManaCostPaid(), card);
-        			
-        			card.setXManaCostPaid(0);
-        		}
-      		  
-        		public boolean canPlayAI()
-        		{
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-        			CardList libList = new CardList(lib.getCards());
-      			  
-        			int humanLife = AllZone.HumanPlayer.getLife();
-        			int computerLife = AllZone.ComputerPlayer.getLife();
-      			  
-        			final int maxX = ComputerUtil.getAvailableMana().size() - 2;
-        			return (maxX >= 3) && (humanLife >= computerLife) && (libList.size() > 0);
-        		}
-        	};
-        	spell.setDescription("Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.");
-        	spell.setStackDescription("Psychic Drain - Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.");
-        	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Balance"))
