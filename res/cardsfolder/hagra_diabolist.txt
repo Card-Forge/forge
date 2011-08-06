@@ -3,8 +3,8 @@ ManaCost:4 B
 Types:Creature Orge Shaman Ally
 Text:no text
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control,
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ you may have target player lose life equal to the number of Allies you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control,
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigLoseLife | TriggerDescription$ you may have target player lose life equal to the number of Allies you control.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | LifeAmount$ NumAllies | TgtPrompt$ Select a target player.
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hagra_diabolist.jpg
