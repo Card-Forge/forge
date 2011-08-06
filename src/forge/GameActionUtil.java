@@ -3139,12 +3139,8 @@ public class GameActionUtil {
 	
 	
 	public static void upkeep_TabernacleUpkeepCost() {
-		Player player = AllZone.Phase.getPlayerTurn();
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		//list = list.getType("Creature");
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				ArrayList<String> a = c.getKeyword();
@@ -3164,13 +3160,7 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
 
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = -1832975152887536245L;
-
-				public void execute() {
-					;
-				}
-			};
+			final Command paidCommand = Command.Blank;
 			
 			final Command unpaidCommand = new Command() {
 
@@ -3181,35 +3171,33 @@ public class GameActionUtil {
 				}
 			};
 			
+			final Ability aiPaid = upkeepAIPayment(c, c.getTabernacleUpkeepCost());
+			
 			// TODO convert to triggered ability when they are no longer Commands
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Tabernacle Upkeep for ").append(c).append("\n");
 			final Ability destroyAbility = new Ability(c, c.getTabernacleUpkeepCost()) {
 				@Override
 				public void resolve() {
-					payManaDuringAbilityResolve(sb.toString(), c.getTabernacleUpkeepCost(), paidCommand, unpaidCommand);
+					if(c.getController().equals(AllZone.HumanPlayer)) {
+						payManaDuringAbilityResolve(sb.toString(), c.getTabernacleUpkeepCost(), paidCommand, unpaidCommand);
+					}
+					else
+						if(ComputerUtil.canPayCost(aiPaid)) 
+							ComputerUtil.playNoStack(aiPaid);
+						else 
+							AllZone.GameAction.destroy(c);
 				}
 			};
 			destroyAbility.setStackDescription(sb.toString());
 
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.Stack.add(destroyAbility);
-			} 
-			else //computer
-			{
-				if(ComputerUtil.canPayCost(destroyAbility)) ComputerUtil.playNoStack(destroyAbility);
-				else AllZone.GameAction.destroy(c);
-			}
+			AllZone.Stack.add(destroyAbility);
 		}
 	}//TabernacleUpkeepCost
 
 	private static void upkeep_MagusTabernacleUpkeepCost() {
-		Player player = AllZone.Phase.getPlayerTurn();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		//list = list.getType("Creature");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
+		
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				ArrayList<String> a = c.getKeyword();
@@ -3237,41 +3225,34 @@ public class GameActionUtil {
 				}
 			};
 
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = 7896720208740364774L;
-
-				public void execute() {
-					;
-				}
-			};
+			final Command paidCommand = Command.Blank;
+			
+			final Ability aiPaid = upkeepAIPayment(c, c.getMagusTabernacleUpkeepCost());
 			
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Magus of the Tabernacle Upkeep for ").append(c).append("\n");
-			final Ability upkeepAbility = new Ability(c, c.getTabernacleUpkeepCost()) {
+			final Ability upkeepAbility = new Ability(c, c.getMagusTabernacleUpkeepCost()) {
 				@Override
 				public void resolve() {
-					payManaDuringAbilityResolve(sb.toString(), c.getTabernacleUpkeepCost(), paidCommand, unpaidCommand);
+					if(c.getController().equals(AllZone.HumanPlayer)) {
+						payManaDuringAbilityResolve(sb.toString(), c.getMagusTabernacleUpkeepCost(), paidCommand, unpaidCommand);
+					}
+					else
+						if(ComputerUtil.canPayCost(aiPaid)) 
+							ComputerUtil.playNoStack(aiPaid);
+						else 
+							AllZone.GameAction.sacrifice(c);
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.Stack.add(upkeepAbility);
-			} 
-			else //computer
-			{
-				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
-				else AllZone.GameAction.sacrifice(c);
-			}
+
+			AllZone.Stack.add(upkeepAbility);
+			
 		}
 	}//MagusTabernacleUpkeepCost
 
 	public static void upkeep_CumulativeUpkeepCost() {
-		Player player = AllZone.Phase.getPlayerTurn();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		//list = list.getType("Creature");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				ArrayList<String> a = c.getKeyword();
@@ -3302,41 +3283,33 @@ public class GameActionUtil {
 				}
 			};
 
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = -1832975152887536245L;
-
-				public void execute() {
-					;
-				}
-			};
+			final Command paidCommand = Command.Blank;
+			
+			final Ability aiPaid = upkeepAIPayment(c, c.getEchoCost());
 			
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Upkeep for ").append(c).append("\n");
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+					if(c.getController().equals(AllZone.HumanPlayer)) {
+						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+					}
+					else
+						if(ComputerUtil.canPayCost(aiPaid)) 
+							ComputerUtil.playNoStack(aiPaid);
+						else 
+							AllZone.GameAction.sacrifice(c);
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.Stack.add(upkeepAbility);
-			} 
-			else //computer
-			{
-				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
-				else AllZone.GameAction.sacrifice(c);
-			}
+
+			AllZone.Stack.add(upkeepAbility);
 		}
 	}//upkeepCost
 
 	private static void upkeep_Echo() {
-		Player player = AllZone.Phase.getPlayerTurn();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return c.getKeyword().contains("(Echo unpaid)");
@@ -3347,13 +3320,7 @@ public class GameActionUtil {
 			final Card c = list.get(i);
 			if(c.getIntrinsicKeyword().contains("(Echo unpaid)")) {
 
-				final Command paidCommand = new Command() {
-					private static final long serialVersionUID = 4549981408026393913L;
-
-					public void execute() {
-						System.out.println("Echo cost for " + c + " was paid.");
-					}
-				};
+				final Command paidCommand = Command.Blank;
 				
 				final Command unpaidCommand = new Command() {
 					private static final long serialVersionUID = -7354791599039157375L;
@@ -3363,27 +3330,29 @@ public class GameActionUtil {
 					}
 				};
 				
+				final Ability aiPaid = upkeepAIPayment(c, c.getEchoCost());
+				
 				final StringBuilder sb = new StringBuilder();
 				sb.append("Echo for ").append(c).append("\n");
 				
 				final Ability sacAbility = new Ability(c, c.getEchoCost()) {
 					@Override
 					public void resolve() {
-						payManaDuringAbilityResolve(sb.toString(), c.getEchoCost(), paidCommand, unpaidCommand);
+						if(c.getController().equals(AllZone.HumanPlayer)) {
+							payManaDuringAbilityResolve(sb.toString(), c.getEchoCost(), paidCommand, unpaidCommand);
+						}
+						else //computer
+						{
+							if(ComputerUtil.canPayCost(aiPaid)) 
+								ComputerUtil.playNoStack(aiPaid);
+							else 
+								AllZone.GameAction.sacrifice(c);
+						}
 					}
 				};
 				sacAbility.setStackDescription(sb.toString());
 
-				if(c.getController().equals(AllZone.HumanPlayer)) {
-					AllZone.Stack.add(sacAbility);
-				} 
-				else //computer
-				{
-					if(ComputerUtil.canPayCost(sacAbility)) 
-						ComputerUtil.playNoStack(sacAbility);
-					else 
-						AllZone.GameAction.sacrifice(c);
-				}
+				AllZone.Stack.add(sacAbility);
 
 				c.removeIntrinsicKeyword("(Echo unpaid)");
 			}
@@ -3400,12 +3369,7 @@ public class GameActionUtil {
 	}
 	
 	private static void upkeep_UpkeepCost() {
-		Player player = AllZone.Phase.getPlayerTurn();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		//list = list.getType("Creature");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				ArrayList<String> a = c.getKeyword();
@@ -3433,41 +3397,34 @@ public class GameActionUtil {
 				}
 			};
 
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = -8303368287601871955L;
-
-				public void execute() {
-					;
-				}
-			};
+			final Command paidCommand = Command.Blank;
+			
+			final Ability aiPaid = upkeepAIPayment(c, c.getUpkeepCost());
 			
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Upkeep for ").append(c).append("\n");
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+					if(c.getController().equals(AllZone.HumanPlayer)) {
+						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+					} 
+					else //computer
+					{
+						if(ComputerUtil.canPayCost(aiPaid)) 
+							ComputerUtil.playNoStack(aiPaid);
+						else 
+							AllZone.GameAction.sacrifice(c);
+					}
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.Stack.add(upkeepAbility);
-			} 
-			else //computer
-			{
-				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
-				else AllZone.GameAction.sacrifice(c);
-			}
+			AllZone.Stack.add(upkeepAbility);
 		}
 	}//upkeepCost
 
 	private static void upkeep_DestroyUpkeepCost() {
-		Player player = AllZone.Phase.getPlayerTurn();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		//list = list.getType("Creature");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				ArrayList<String> a = c.getKeyword();
@@ -3497,42 +3454,34 @@ public class GameActionUtil {
 				}
 			};
 
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = -8462246567257483700L;
-
-				public void execute() {
-					;
-				}
-			};
+			final Command paidCommand = Command.Blank;
+			
+			final Ability aiPaid = upkeepAIPayment(c, c.getUpkeepCost());
 			
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Upkeep for ").append(c).append("\n");
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+					if(c.getController().equals(AllZone.HumanPlayer)) {
+						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+					} 
+					else //computer
+					{
+						if(ComputerUtil.canPayCost(aiPaid)) 
+							ComputerUtil.playNoStack(aiPaid);
+						else AllZone.GameAction.destroy(c);
+					}		
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.Stack.add(upkeepAbility);
-			} 
-			else //computer
-			{
-				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
-				else AllZone.GameAction.destroy(c);
-			}
+			AllZone.Stack.add(upkeepAbility);
 		}
 	}//upkeepCost
 
 
 	private static void upkeep_DamageUpkeepCost() {
-		Player player = AllZone.Phase.getPlayerTurn();
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		//list = list.getType("Creature");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				ArrayList<String> a = c.getKeyword();
@@ -3567,33 +3516,39 @@ public class GameActionUtil {
 				}
 			};
 
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = -8462246567257483700L;
-
-				public void execute() {
-					;
-				}
-			};
+			final Command paidCommand = Command.Blank;
+			
+			final Ability aiPaid = upkeepAIPayment(c, c.getUpkeepCost());
 			
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Upkeep for ").append(c).append("\n");
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+					if(c.getController().equals(AllZone.HumanPlayer)) {
+						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+
+					} 
+					else //computer
+					{
+						if(ComputerUtil.canPayCost(aiPaid)) ComputerUtil.playNoStack(aiPaid);
+						else AllZone.GameAction.sacrifice(c);
+					}
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.Stack.add(upkeepAbility);
-			} 
-			else //computer
-			{
-				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
-				else AllZone.GameAction.sacrifice(c);
-			}
+			AllZone.Stack.add(upkeepAbility);
 		}
 	}//damageUpkeepCost
+	
+	private static Ability upkeepAIPayment(Card c, String cost){
+		return new Ability_Static(c, cost) {
+			@Override
+			public void resolve() {
+				
+			}
+		};
+	}
 	
 	private static void upkeep_The_Abyss() {
 		/*

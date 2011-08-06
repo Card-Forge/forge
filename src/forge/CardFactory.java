@@ -5594,18 +5594,8 @@ public class CardFactory implements NewConstants {
                 final SpellAbility ability = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        if(card.getController().equals(AllZone.ComputerPlayer)) {
-                            CardList choices = new CardList(AllZone.Computer_Play.getCards()).filter(new CardListFilter() {
-                                public boolean addCard(Card c) {
-                                    return c.isCreature() && c.isArtifact();
-                                }
-                            });
-                            if(choices.size() != 0) CardFactoryUtil.AI_getBestCreature(choices).addCounter(
-                                    Counters.P1P1, getSourceCard().getCounters(Counters.P1P1));
-                        } else {
-                            Card card2 = this.getTargetCard();
-                            card2.addCounter(Counters.P1P1, getSourceCard().getCounters(Counters.P1P1));
-                        }//else
+                        Card card2 = this.getTargetCard();
+                        card2.addCounter(Counters.P1P1, getSourceCard().getCounters(Counters.P1P1));
                     }//resolve()
                 };
                 
@@ -5616,7 +5606,19 @@ public class CardFactory implements NewConstants {
                         ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
                                 + " +1/+1 counter/s from " + card + " on target artifact creature.");
                         // Target as Modular is Destroyed
-                        AllZone.InputControl.setInput(CardFactoryUtil.modularInput(ability, card));
+                        if(card.getController().equals(AllZone.ComputerPlayer)) {
+                            CardList choices = new CardList(AllZone.Computer_Play.getCards()).filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    return c.isCreature() && c.isArtifact();
+                                }
+                            });
+                            if(choices.size() != 0){
+                            	ability.setTargetCard(CardFactoryUtil.AI_getBestCreature(choices));
+                            	AllZone.Stack.add(ability);
+                            }
+                        }
+                        else
+                        	AllZone.InputControl.setInput(CardFactoryUtil.modularInput(ability, card));
                     }
                 });
                 
