@@ -2,7 +2,6 @@ Name:Icy Manipulator
 ManaCost:4
 Types:Artifact
 Text:no text
-#K:abTapTgt 1 T:Artifact,Creature,Land:Tap target artifact, creature, or land.
 A:AB$Tap | Cost$ 1 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land. | SpellDescription$ Tap target artifact, creature, or land.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
