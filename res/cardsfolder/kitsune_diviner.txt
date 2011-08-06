@@ -1,0 +1,9 @@
+Name:Kitsune Diviner
+ManaCost:W
+Types:Creature Fox Cleric
+Text:no text
+PT:0/1
+K:abTapTgt T:Spirit:Tap target Spirit.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_diviner.jpg
+End

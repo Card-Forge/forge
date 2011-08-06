@@ -1,0 +1,9 @@
+Name:Homarid Shaman
+ManaCost:2 U U
+Types:Creature Homarid Shaman
+Text:no text
+PT:2/1
+K:abTapTgt U:Creature.Green:Tap target green creature.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_shaman.jpg
+End

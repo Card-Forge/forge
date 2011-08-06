@@ -1,0 +1,8 @@
+Name:Flood
+ManaCost:U
+Types:Enchantment
+Text:no text
+K:abTapTgt U U:Creature.withoutFlying:Tap target creature without flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flood.jpg
+End

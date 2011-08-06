@@ -1,0 +1,8 @@
+Name:Storm Front
+ManaCost:G
+Types:Enchantment
+Text:no text
+K:abTapTgt G G:Creature.withFlying:Tap target creature with flying.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_front.jpg
+End

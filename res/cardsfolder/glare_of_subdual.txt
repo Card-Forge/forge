@@ -1,0 +1,8 @@
+Name:Glare of Subdual
+ManaCost:2 G W
+Types:Enchantment
+Text:no text
+K:abTapTgt tapXType<1/Creature>:Artifact,Creature:Tap target artifact or creature.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glare_of_subdual.jpg
+End

@@ -1,0 +1,10 @@
+Name:Air Servant
+ManaCost:4 U
+Types:Creature Elemental
+Text:no text
+PT:4/3
+K:Flying
+K:abTapTgt 2 U:Creature.withFlying:Tap target creature with flying.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/air_servant.jpg
+End

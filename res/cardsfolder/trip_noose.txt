@@ -1,0 +1,8 @@
+Name:Trip Noose
+ManaCost:2
+Types:Artifact
+Text:no text
+K:abTapTgt 2 T:Creature:Tap target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_noose.jpg
+End

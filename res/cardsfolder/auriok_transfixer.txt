@@ -1,0 +1,9 @@
+Name:Auriok Transfixer
+ManaCost:W
+Types:Creature Human Scout
+Text:no text
+PT:1/1
+K:abTapTgt W:Artifact:Tap target artifact.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_transfixer.jpg
+End
