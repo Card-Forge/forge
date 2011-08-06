@@ -1,3 +1,10 @@
+Stormscape Apprentice
+U
+Creature Human Wizard
+no text
+1/1
+abLoseLifeTgt B T:1
+
 Stormscape Master
 2 U U
 Creature Human Wizard

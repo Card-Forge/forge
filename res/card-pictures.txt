@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+stormscape_apprentice.jpg		http://www.wizards.com/global/images/magic/general/stormscape_apprentice.jpg
 stormscape_master.jpg		http://www.wizards.com/global/images/magic/general/stormscape_master.jpg
 thunderscape_apprentice.jpg		http://www.wizards.com/global/images/magic/general/thunderscape_apprentice.jpg
 dragonskull_summit.jpg		http://www.wizards.com/global/images/magic/general/dragonskull_summit.jpg

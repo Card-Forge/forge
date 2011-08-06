@@ -8612,7 +8612,8 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(new Input_PayManaCost(ability));
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Squall Drifter")) {
             final SpellAbility ability = new Ability_Tap(card, "W") {
@@ -8634,7 +8635,7 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
-        
+*/
 
 /*
         //*************** START *********** START **************************
@@ -9110,7 +9111,8 @@ public class CardFactory_Creatures {
         if(cardName.equals("Goldmeadow Harrier") || cardName.equals("Loxodon Mystic")
                 || cardName.equals("Master Decoy") || cardName.equals("Benalish Trapper")
                 || cardName.equals("Whipcorder") || cardName.equals("Blinding Mage")
-                || cardName.equals("Ostiary Thrull")) {
+                || cardName.equals("Ostiary Thrull") || cardName.equals("Squall Drifter")
+                || cardName.equals("Stormscape Apprentice")) {
             final SpellAbility ability = new Ability_Tap(card, "W") {
                 
                 private static final long serialVersionUID = 4424848120984319655L;
