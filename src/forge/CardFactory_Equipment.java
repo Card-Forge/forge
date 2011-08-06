@@ -471,7 +471,7 @@ class CardFactory_Equipment {
         } //*************** END ************ END **************************
         
 
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Skullclamp")) {
             final Ability equip = new Ability(card, "1") {
@@ -577,7 +577,7 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
             
         } //*************** END ************ END **************************
-    	
+*/
         
 /*
         //*************** START *********** START **************************

@@ -222,6 +222,12 @@ Artifact Equipment
 Equipped creature gets +1/+0.
 eqPump 0:+1/+0
 
+Skullclamp
+1
+Artifact Equipment
+Equipped creature gets +1/-1. When equipped creature is put into a graveyard, draw two cards.
+eqPump 1:+1/-1
+
 Slagwurm Armor
 1
 Artifact Equipment
@@ -7884,11 +7890,6 @@ Creature Dragon
 At the beginning of each upkeep, put a 1/1 red and green Dragon creature token with flying and devour 2 into play.
 4/4
 Flying
-
-Skullclamp
-1
-Artifact Equipment
-Equipped creature gets +1/-1. When equipped creature is put into a graveyard, draw two cards.
 
 Survival of the Fittest
 1 G

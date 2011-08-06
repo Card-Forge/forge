@@ -1269,7 +1269,8 @@ public class CardFactoryUtil {
                     public boolean addCard(Card c) {
                         return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
                                 && CardFactoryUtil.canTarget(sourceCard, c)
-                                && (!c.getKeyword().contains("Defender"));
+                                && (!c.getKeyword().contains("Defender"))
+                                && (c.getNetDefense() + Tough > 0);
                     }
                 });
                 // list.remove(card);      // if mana-only cost, allow self-target
