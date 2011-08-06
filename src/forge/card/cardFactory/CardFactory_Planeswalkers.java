@@ -933,25 +933,29 @@ class CardFactory_Planeswalkers {
                                 
                                 AllZone.EndOfTurn.addUntil(creatureUntilEOT);
                             } else {
-                                final Command nonCreatureUntilEOT = new Command() {
-                                    private static final long serialVersionUID = 248122386218960073L;
-                                    
-                                    public void execute() {
-                                        art[0].removeType("Creature");
-                                        art[0].setBaseAttack(0);
-                                        art[0].setBaseDefense(0);
-                                    }
-                                };//Command
-                                
+                            	final Command nonCreatureUntilEOT = new Command() {
+                            		private static final long serialVersionUID = 248122386218960073L;
+
+                            		public void execute() {
+                            			art[0].removeType("Creature");
+                            			art[0].setBaseAttack(0);
+                            			art[0].setBaseDefense(0);
+                            		}
+                            	};//Command
+
+                            	//no longer needed - this is handled as a state effect
+                            	/*
                                 if(art[0].isEquipment() && art[0].isEquipping()) {
                                     Card equippedCreature = art[0].getEquipping().get(0);
                                     art[0].unEquipCard(equippedCreature);
                                 }
-                                art[0].addType("Creature");
-                                art[0].setBaseAttack(5);
-                                art[0].setBaseDefense(5);
-                                
-                                AllZone.EndOfTurn.addUntil(nonCreatureUntilEOT);
+                            	 */
+
+                            	art[0].addType("Creature");
+                            	art[0].setBaseAttack(5);
+                            	art[0].setBaseDefense(5);
+
+                            	AllZone.EndOfTurn.addUntil(nonCreatureUntilEOT);
                             }//noncreature artifact
                             
                         }
