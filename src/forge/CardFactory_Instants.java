@@ -2051,7 +2051,8 @@ public class CardFactory_Instants {
             };//SpellAbility
             
             StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - deal 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.");
+            sb.append(cardName).append(" deals 2 damage to target creature or player. If ");
+            sb.append(cardName).append(" was kicked, it deals 4 damage to that creature or player instead.");
             spell.setDescription(sb.toString());
             
             final SpellAbility kicker = new Spell(card) {
@@ -3064,8 +3065,73 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Burn the Impure")) {
+        	/*
+        	 * Burn the Impure deals 3 damage to target creature. If that 
+        	 * creature has infect, Burn the Impure deals 3 damage to that 
+        	 * creature's controller.
+        	 */
+        	Ability_Cost abCost = new Ability_Cost("1 R", cardName, false);
+        	final SpellAbility spell = new Spell(card, abCost, new Target(card, "TgtC")) {
+				private static final long serialVersionUID = -3069135027502686218L;
+				int damage = 3;
+
+        		@Override
+        		public void chooseTargetAI() {
+
+        			CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+        			creatures = creatures.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
+        				}
+        			});
+        			CardList infect = creatures.filter(AllZoneUtil.getKeywordFilter("Infect"));
+        			if(infect.size() > 0) {
+        				Card c = CardFactoryUtil.AI_getBestCreature(infect);
+        				setTargetCard(c);
+        			}
+        			else {
+        				Card c = CardFactoryUtil.AI_getBestCreature(creatures);
+        				setTargetCard(c);
+        			}
+
+        		}//chooseTargetAI()
+
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+        			creatures = creatures.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
+        				}
+        			});
+        			return creatures.size() > 0;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			if(AllZone.GameAction.isCardInPlay(getTargetCard())
+        					&& CardFactoryUtil.canTarget(card, getTargetCard())) {
+        				Card c = getTargetCard();
+        				c.addDamage(damage, card);
+        				if(c.hasKeyword("Infect")) c.getController().addDamage(3, card);
+        			}
+        		}
+        	};//SpellAbility
+
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName);
+        	sb.append(" deals 3 damage to target creature. If that creature has infect, ");
+        	sb.append(cardName);
+        	sb.append(" deals 3 damage to that creature's controller.");
+        	spell.setDescription(sb.toString());
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+
     	return card;
     }//getCard
 }
