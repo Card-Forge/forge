@@ -188,7 +188,7 @@ public class ComputerUtil_Block2
 	  currentAttackers = new CardList(attackersLeft.toArray());
 	  
 	  //if computer life is not in danger, try to make good gangblocks
-	  if(!bLifeInDanger) 
+	  if(!CombatUtil.lifeInDanger(combat)) 
 		  for(Card attacker : attackersLeft) {
 			  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")
 					   && !attacker.hasStartOfKeyword("Rampage")) {
@@ -224,11 +224,11 @@ public class ComputerUtil_Block2
 	  if(blockersLeft.size() == 0) return combat;
 	  
 	  //choose necessary trade blocks if life is in danger
-	  if (bLifeInDanger)
+	  if (CombatUtil.lifeInDanger(combat))
 		  for(Card attacker : attackersLeft) {
 			  killingBlockers = 
 				  getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft, combat));
-			  if(killingBlockers.size() > 0) {
+			  if(killingBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
 				  Card blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
 				  combat.addBlocker(attacker, blocker);
 				  currentAttackers.remove(attacker);
@@ -239,10 +239,10 @@ public class ComputerUtil_Block2
 	  attackersLeft = new CardList(currentAttackers.toArray());
 	   
 	  //choose necessary chump blocks if life is still in danger
-	  if (bLifeInDanger)
+	  if (CombatUtil.lifeInDanger(combat))
 		  for(Card attacker : attackersLeft) {
 			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
-			  if(chumpBlockers.size() > 0) {
+			  if(chumpBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
 				  Card blocker = CardFactoryUtil.AI_getWorstCreature(chumpBlockers);
 				  combat.addBlocker(attacker, blocker);
 				  currentAttackers.remove(attacker);
@@ -254,7 +254,7 @@ public class ComputerUtil_Block2
 	  attackersLeft = new CardList(currentAttackers.toArray()); 
 	  
 	 //Reinforce blockers blocking attackers with trample if life is still in danger
-	  if (bLifeInDanger) {
+	  if (CombatUtil.lifeInDanger(combat)) {
 		  tramplingAttackers = attackers.getKeyword("Trample");
 		  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
 		  tramplingAttackers = tramplingAttackers.
@@ -265,7 +265,8 @@ public class ComputerUtil_Block2
 			  for(Card blocker : chumpBlockers) {
 			  	  //Add an additional blocker if the current blockers are not enough and the new one would suck some of the damage
 			  	  if(CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
-			  			  && CombatUtil.shieldDamage(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)) {
+			  			&& CombatUtil.shieldDamage(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)
+			  			&& CombatUtil.lifeInDanger(combat)) {
 			  		  combat.addBlocker(attacker, blocker);
 			  		  blockersLeft.remove(blocker);
 				  }
