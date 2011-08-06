@@ -206,14 +206,14 @@ public class Ability_Cost {
 	// maybe add a conversion method that turns the amounts into words 1=a(n), 2=two etc.
 	
 	private String spellToString() {
-		StringBuilder cost = new StringBuilder("As an additional cost to play ");
+		StringBuilder cost = new StringBuilder("As an additional cost to cast ");
 		cost.append(name);
 		cost.append(", ");
 		boolean first = true;
 
 		if (!(manaCost.equals("0") || manaCost.equals(""))){
-			// never a normal additional mana cost for spells
-			cost.append(manaCost);
+			// usually no additional mana cost for spells
+			// only three Alliances cards have additional mana costs, but they are basically kicker/multikicker
 		}
 		
 		if (tapCost || untapCost){	
@@ -274,7 +274,7 @@ public class Ability_Cost {
 			first = false;
 		}
 		
-		cost.append(".");
+		cost.append(".").append("\n");
 		return cost.toString();
 	}
 

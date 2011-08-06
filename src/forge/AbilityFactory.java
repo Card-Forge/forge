@@ -57,9 +57,8 @@ public class AbilityFactory {
 		return abTgt;
 	}
 	
-	private boolean isCurse = false;
 	public boolean isCurse(){
-		return isCurse;
+		return mapParams.containsKey("IsCurse");
 	}
 
 	private boolean hasSubAb = false;
@@ -146,8 +145,6 @@ public class AbilityFactory {
 				abTgt = new Target(mapParams.get("Tgt"));
 		}
 		
-		isCurse = mapParams.containsKey("IsCurse");	
-		
 		hasSubAb = mapParams.containsKey("SubAbility");
 		
 		hasSpDesc = mapParams.containsKey("SpellDescription");		
@@ -201,11 +198,10 @@ public class AbilityFactory {
         
         if (hasSpDesc)
         {
-        	String desc = mapParams.get("SpellDescription");
-        	if (isAb)
-        		desc = abCost.toString() + desc;
+        	StringBuilder sb = new StringBuilder(abCost.toString());
+        	sb.append(mapParams.get("SpellDescription"));
         	
-        	SA.setDescription(desc);
+        	SA.setDescription(sb.toString());
         }
 
 		
