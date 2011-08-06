@@ -1246,7 +1246,9 @@ public class CardFactoryUtil {
     public static SpellAbility ability_Merc_Search(final Card sourceCard, String cost) {
         final int intCost = Integer.parseInt(cost);
         
-        final SpellAbility ability = new Ability_Tap(sourceCard, cost) {
+        final Ability_Cost abCost = new Ability_Cost("T", sourceCard.getName(), true);
+        abCost.setMana(cost);
+        final SpellAbility ability = new Ability_Activated(sourceCard, abCost, null){
             private static final long serialVersionUID = 4988299801575232348L;
             
             @Override
@@ -1334,14 +1336,11 @@ public class CardFactoryUtil {
     }
     
     public static SpellAbility ability_Rebel_Search(final Card sourceCard, String cost) {
-        String costMinusOne = "";
-        int a = Integer.parseInt(cost);
-        a--;
-        costMinusOne = Integer.toString(a);
-        final int converted = a;
-        //final String player = sourceCard.getController();
+        final int converted = Integer.parseInt(cost) - 1;
         
-        final SpellAbility ability = new Ability_Tap(sourceCard, cost) {
+        final Ability_Cost abCost = new Ability_Cost("T", sourceCard.getName(), true);
+        abCost.setMana(cost);
+        final SpellAbility ability = new Ability_Activated(sourceCard, abCost, null){
             private static final long serialVersionUID = 7219065355049285681L;
             
             @Override
@@ -1439,7 +1438,7 @@ public class CardFactoryUtil {
         };
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append(cost).append(", tap: Search your library for a Rebel permanent card with converted mana cost ");
-        sbDesc.append(costMinusOne).append(" or less and put it into play. Then shuffle your library.");
+        sbDesc.append(converted).append(" or less and put it into play. Then shuffle your library.");
         ability.setDescription(sbDesc.toString());
         
         StringBuilder sbStack = new StringBuilder();

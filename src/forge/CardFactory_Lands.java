@@ -1266,81 +1266,9 @@ class CardFactory_Lands {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Tortuga")) {
-            final Input discardThenDraw = new Input() {
-                private static final long serialVersionUID = -7119292573232058526L;
-                int                       nCards           = 1;
-                int                       n                = 0;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select a card to discard");
-                    ButtonUtil.disableAll();
-                    
-                    //in case no more cards in hand
-                    if(n == nCards || AllZone.Human_Hand.getCards().length == 0) {
-                        stop();
-                        card.getController().drawCard();
-                        n = 0; //very important, otherwise the 2nd time you play this ability, you
-                        //don't have to discard
-                    }
-                }
-                
-                @Override
-                public void selectCard(Card card, PlayerZone zone) {
-                    if(zone.is(Constant.Zone.Hand)) {
-                        card.getController().discard(card, null);
-                        n++;
-                        showMessage();
-                    }
-                }
-            };//SpellAbility
-            
-            final Ability_Tap ability = new Ability_Tap(card) {
-                
-                private static final long serialVersionUID = -2946606436670861559L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.InputControl.setInput(discardThenDraw);
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("tap: Discard a card, then draw a card.");
-            ability.setStackDescription("Tortuga - Discard a card, then draw a card.");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
-            
-
-            final Ability_Tap ability2 = new Ability_Tap(card) {
-                private static final long serialVersionUID = 8961266883009597786L;
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    return hand.getCards().length == 7;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.getController().drawCard();
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability2);
-            ability2.setDescription("tap: Draw a card. Play this ability only if you have exactly 7 cards in your hand.");
-            ability2.setStackDescription("Tortuga - draw a card.");
-            ability2.setBeforePayMana(new Input_NoCost_TapAbility(ability2));
-            
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Library of Alexandria")) {
-            final Ability_Tap ability2 = new Ability_Tap(card) {
+        	final Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	final SpellAbility draw = new Ability_Activated(card, abCost, null){
                 private static final long serialVersionUID = -3405763871882165537L;
                 
                 @Override
@@ -1354,11 +1282,11 @@ class CardFactory_Lands {
                     card.getController().drawCard();
                 }
             };//SpellAbility
-            card.addSpellAbility(ability2);
-            ability2.setDescription("tap: Draw a card. Play this ability only if you have exactly 7 cards in your hand.");
-            ability2.setStackDescription("Library of Alexandria - draw a card.");
-            ability2.setBeforePayMana(new Input_NoCost_TapAbility(ability2));
-            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost.toString()).append("Draw a card. Play this ability only if you have exactly 7 cards in your hand.");
+            draw.setDescription(sbDesc.toString());
+            draw.setStackDescription("Library of Alexandria - draw a card.");
+            card.addSpellAbility(draw);
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
