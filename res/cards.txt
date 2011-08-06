@@ -1,3 +1,52 @@
+Bloodcurdling Scream
+X B
+Sorcery
+no text
+spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
+SVar:X:Count$xPaid
+
+Enrage
+X R
+Instant
+no text
+spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
+SVar:X:Count$xPaid
+
+Heat Ray
+X R
+Instant
+no text
+spDamageTgtC:X:Heat Ray deals X damage to target creature.
+SVar:X:Count$xPaid
+
+Howl from Beyond
+X B
+Instant
+no text
+spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
+SVar:X:Count$xPaid
+
+Mind Spring
+X U U
+Sorcery
+no text
+spDrawCards:X:Draw X cards.:Mind Spring - Draw X cards.
+SVar:X:Count$xPaid
+
+Swallowing Plague
+X B B
+Sorcery Arcane
+no text
+spDamageTgtC:X:Drawback$YouGainLife/X:Swallowing Plague deals X damage to target creature and you gain X life.
+SVar:X:Count$xPaid
+
+Volcanic Geyser
+X R R
+Instant
+no text
+spDamageTgtCP:X:Volcanic Geyser deals X damage to target creature or player.
+SVar:X:Count$xPaid
+
 Stroke of Genius
 X 2 U
 Instant
