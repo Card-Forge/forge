@@ -4221,6 +4221,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Hedron Crab")) landfall_Hedron_Crab(c);
 		else if(c.getName().equals("Bloodghast")) landfall_Bloodghast(c);
 		else if(c.getName().equals("Avenger of Zendikar")) landfall_Avenger_of_Zendikar(c);
+		else if(c.getName().equals("Eternity Vessel")) landfall_Eternity_Vessel(c);
 	}
 	
 	private static boolean checkValakutCondition(Card valakutCard, Card mtn) {
@@ -4582,7 +4583,51 @@ public class GameActionUtil {
 		}
 
 	}//landfall_Avenger
+	
+	private static void landfall_Eternity_Vessel(Card c) {
+		final Card crd = c;
+		Card biggest = null;
+		if(c.getController() == "Computer") {
+            CardList Vessels = new CardList();
+            PlayerZone zone = AllZone.getZone(Constant.Zone.Play, c.getController());
+            if(zone != null) {
+            Vessels.addAll(zone.getCards());
+            Vessels = Vessels.getName("Eternity Vessel");
+                 biggest = Vessels.get(0);
+                 for(int i = 0; i < Vessels.size(); i++)
+                     if(biggest.getCounters(Counters.CHARGE) < Vessels.get(i).getCounters(Counters.CHARGE)) biggest = Vessels.get(i);                         
+		}
+		}
+        final Card CompVessel = biggest;
+		Ability ability = new Ability(c, "0") {
+			@Override
+			public void resolve() {
+				Card Target = null;
+				if(crd.getController() == "Human") Target = crd;
+				else Target = CompVessel;
+				
+                        PlayerLife life = AllZone.GameAction.getPlayerLife(Target.getController());
+                        int lifeGain = Target.getCounters(Counters.CHARGE);
+                        life.setLife(lifeGain);
+			}
+		};
+		ability.setStackDescription("Landfall — Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.");
 
+		if(c.getController().equals(Constant.Player.Human)) {
+			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
+		} else if(c.getController().equals(Constant.Player.Computer)) {
+            CardList Hexmages = new CardList();
+            PlayerZone zone = AllZone.getZone(Constant.Zone.Play, "Human");
+            if(zone != null) {
+            	Hexmages.addAll(zone.getCards());
+            	Hexmages = Hexmages.getName("Vampire Hexmage");
+            int clife = AllZone.Computer_Life.getLife();			
+			if(CompVessel.getCounters(Counters.CHARGE) > clife && (Hexmages.size() == 0)) AllZone.Stack.add(ability);
+		}
+		}
+
+	}//landfall_Eternity_Vessel
+	
 	public static void executeLifeLinkEffects(Card c) {
 		final String player = c.getController();
 		int pwr = c.getNetAttack();

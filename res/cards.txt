@@ -1,3 +1,9 @@
+Eternity Vessel
+6
+Artifact
+Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total. Landfall — Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
+Landfall
+
 Vengevine
 2 G G
 Creature Elemental

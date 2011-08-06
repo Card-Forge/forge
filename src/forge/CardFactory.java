@@ -4111,7 +4111,24 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************		
         
-
+        //*************** START *********** START **************************
+        else if(cardName.equals("Eternity Vessel")) {
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 7202704600935499188L;
+                
+                public void execute() {
+                	int player = 0;
+                	if(card.getController() == "Human") {
+                		player = AllZone.Human_Life.getLife();
+                	} else {
+                		player = AllZone.Computer_Life.getLife();               		
+                	}
+                	card.addCounter(Counters.CHARGE, player);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);          
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Timetwister")) {
             final SpellAbility spell = new Spell(card) {
