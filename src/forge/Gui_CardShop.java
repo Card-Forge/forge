@@ -365,7 +365,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         		multi+=0.01;
         	else if (questData.getEstatesLevel()==2)
         		multi+=0.0175;
-        	else if (questData.getEstatesLevel()==3)
+        	else if (questData.getEstatesLevel()>=3)
         		multi+=0.025;
         }
     	

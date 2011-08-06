@@ -172,7 +172,7 @@ public class Gui_Treasury extends JFrame implements NewConstants{
     	//ImageIcon icon = getIcon(fileName);
     	
     	learnEstatesButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice() || questData.getEstatesLevel() > 3)
+    	if (questData.getCredits() < getPrice() || questData.getEstatesLevel() >= 3)
     		learnEstatesButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));

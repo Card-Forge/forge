@@ -18343,12 +18343,25 @@ public class CardFactory_Creatures {
 
         		@Override
         		public boolean canPlayAI() {
+        			CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer, "Dark Depths");
+        			list = list.filter(new CardListFilter(){
+        				public boolean addCard(Card crd)
+        				{
+        					return crd.getCounters(Counters.ICE) >= 3;
+        				}
+        			});
+        			
+        			if (list.size()>0)
+        			{
+        				setTargetCard(list.get(0));
+        				return true;
+        			}
         			return false;
         		}
         		
         		@Override
         		public boolean canPlay() {
-        			return AllZoneUtil.isCardInPlay(card) && !card.hasSickness();
+        			return AllZoneUtil.isCardInPlay(card);
         		}
 
         		@Override
