@@ -1,3 +1,28 @@
+Cruel Edict
+1 B
+Sorcery
+Target opponent sacrifices a creature.
+
+Imperial Edict
+1 B
+Sorcery
+Target opponent sacrifices a creature.
+
+Chainer's Edict
+1 B
+Sorcery
+Target player sacrifices a creature.
+
+Diabolic Edict
+1 B
+Instant
+Target player sacrifices a creature.
+
+Innocent Blood
+B
+Sorcery
+Each player sacrifices a creature.
+
 Transguild Courier
 4
 Artifact Creature Golem
@@ -4197,7 +4222,7 @@ no text
 
 Elephant Ambush
 2 G G
-Sorcery
+Instant
 no text
 
 Crush of Wurms

@@ -15846,7 +15846,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
     //*************** START *********** START **************************
-    if (cardName.equals("Standstill"))
+    else if (cardName.equals("Standstill"))
     {
     	card.clearSpellAbility();
 	    card.addSpellAbility(new Spell_Permanent(card)
@@ -15951,7 +15951,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
   	}//*************** END ************ END **************************
     
   //*************** START *********** START **************************
-    if (cardName.equals("Voltaic Key"))
+    else if (cardName.equals("Voltaic Key"))
     {
     	final Ability_Tap ability = new Ability_Tap(card, "1")
     	{
@@ -15994,7 +15994,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
   	}//*************** END ************ END **************************
     
     //*************** START *********** START **************************
-    if (cardName.equals("Seething Song"))
+    else if (cardName.equals("Seething Song"))
     {
        final SpellAbility spell = new Spell(card)
        {
@@ -16025,7 +16025,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
     //*************** START *********** START **************************
-    if (cardName.equals("Dark Ritual"))
+    else if (cardName.equals("Dark Ritual"))
     {
        final SpellAbility spell = new Spell(card)
        {
@@ -16054,7 +16054,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
     //*************** START *********** START **************************
-    if (cardName.equals("Black Lotus"))
+    else if (cardName.equals("Black Lotus"))
     {
        final SpellAbility ability = new Ability_Tap(card)
        {
@@ -16108,7 +16108,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     
  
     //*************** START ************ START **************************
-    if (cardName.equals("Ashnod's Transmogrant"))
+    else if (cardName.equals("Ashnod's Transmogrant"))
     {
     	final Ability_Tap ability = new Ability_Tap(card)
     	{
@@ -16164,7 +16164,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
     //*************** START ************ START **************************
-    if (cardName.equals("Gemstone Array"))
+    else if (cardName.equals("Gemstone Array"))
     {
     	final Ability store = new Ability(card, "2"){
     		public void resolve(){card.addCounter(Counters.CHARGE, 1);}
@@ -16208,7 +16208,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     
     
     //*************** START ************ START **************************
-    if (cardName.equals("Goblin Grenade"))
+    else if (cardName.equals("Goblin Grenade"))
     {
     	final SpellAbility DamageCP =  new Spell(card)
     	{
@@ -16382,7 +16382,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     
     
     //*************** START *********** START **************************
-    if(cardName.equals("Onyx Goblet"))
+    else if(cardName.equals("Onyx Goblet"))
     {
       final Ability_Tap ability = new Ability_Tap(card)
       {
@@ -16403,7 +16403,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
 	
 	//*************** START *********** START **************************
-    if(cardName.equals("Braidwood Cup"))
+    else if(cardName.equals("Braidwood Cup"))
     {
       final Ability_Tap ability = new Ability_Tap(card)
       {
@@ -16423,7 +16423,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
   //*************** START *********** START **************************
-    if(cardName.equals("Scepter of Insight"))
+    else if(cardName.equals("Scepter of Insight"))
     {
      final SpellAbility ability = new Ability_Tap(card, "3 U")
      {
@@ -16442,6 +16442,137 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       ability.setStackDescription(card.getName() + " - draw a card.");
     }//*************** END ************ END **************************
     
+  //*************** START *********** START **************************
+    else if(cardName.equals("Innocent Blood"))
+    {
+    	final SpellAbility spell = new Spell(card)
+    	{
+			private static final long serialVersionUID = 3915880400376059369L;
+
+			public void resolve() {
+				AllZone.GameAction.sacrificeCreature(Constant.Player.Human, this);
+				AllZone.GameAction.sacrificeCreature(Constant.Player.Computer, this);
+			}    	
+			
+			public boolean canPlayAI()
+			{
+				PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+				PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+				
+				CardList hList = new CardList(hPlay.getCards());
+				CardList cList = new CardList(cPlay.getCards());
+				CardList smallCreats = cList.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c) {
+						return c.isCreature() && c.getNetAttack() < 2 && c.getNetDefense() < 3;
+					}
+				});
+				
+				hList = hList.getType("Creature");
+				cList = cList.getType("Creature");
+				
+				if (hList.size() == 0)
+					return false;
+				
+				return smallCreats.size() > 0;
+			}
+    	};
+    	
+    	card.clearSpellAbility();
+    	card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
+    
+    //*************** START *********** START **************************
+    else if (cardName.equals("Diabolic Edict") || cardName.equals("Chainer's Edict"))
+    {
+    	final SpellAbility spell = new Spell(card)
+    	{
+			private static final long serialVersionUID = 8970446094797667088L;
+
+			public void resolve() {
+				AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+			}   
+			
+			public boolean canPlayAI()
+			{
+				PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+				CardList hList = new CardList(hPlay.getCards());
+				hList = hList.getType("Creature");
+				return hList.size() > 0;
+			}
+    	};
+    	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+    	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+    
+    	card.clearSpellAbility();
+    	card.addSpellAbility(spell);
+    	
+    	if (cardName.equals("Chainer's Edict"))
+    	{
+    		final SpellAbility flashback = new Spell(card)
+    	    {
+				private static final long serialVersionUID = -4889392369463499074L;
+
+				public boolean canPlay()
+    	        {
+    	        	PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard ,card.getController());
+    				String phase         = AllZone.Phase.getPhase();
+    				String activePlayer  = AllZone.Phase.getActivePlayer();
+    				
+    				return AllZone.GameAction.isCardInZone(card, grave) && 
+    						((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2)) &&
+    					    card.getController().equals(activePlayer) && AllZone.Stack.size() == 0 );
+    	        }
+
+    	        public boolean canPlayAI()
+    			{
+    				PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+    				CardList hList = new CardList(hPlay.getCards());
+    				hList = hList.getType("Creature");
+    				return hList.size() > 0;
+    			}
+    	        
+				public void resolve() {
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard , card.getController());
+					PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+					
+					grave.remove(card);
+					removed.add(card);
+				}
+    	    };
+    	    
+    	    flashback.setManaCost("5 B B");
+    	    flashback.setBeforePayMana(CardFactoryUtil.input_targetPlayer(flashback));
+    	    flashback.setDescription("Flashback: 5 B B");
+    	    flashback.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+    		
+    	    card.addSpellAbility(flashback);
+    		card.setFlashback(true);
+    	}//if Chainer's Edict
+    }//*************** END ************ END **************************
+    
+  //*************** START *********** START **************************
+    else if (cardName.equals("Cruel Edict") || cardName.equals("Imperial Edict"))
+    {
+    	final SpellAbility spell = new Spell(card)
+    	{
+			private static final long serialVersionUID = 4782606423085170723L;
+
+			public void resolve() {
+				AllZone.GameAction.sacrificeCreature(AllZone.GameAction.getOpponent(card.getController()), this);
+			}   
+			
+			public boolean canPlayAI()
+			{
+				PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+				CardList hList = new CardList(hPlay.getCards());
+				hList = hList.getType("Creature");
+				return hList.size() > 0;
+			}
+    	};
+    	card.clearSpellAbility();
+    	card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
     
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

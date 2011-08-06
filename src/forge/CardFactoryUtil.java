@@ -486,6 +486,31 @@ public class CardFactoryUtil
     return target;
   }//input_sacrifice()
   
+  
+  public static Input input_sacrificePermanent(final CardList choices, final String message)
+  {
+    Input target = new Input()
+    {
+	  private static final long serialVersionUID = 2685832214519141903L;
+	
+	  public void showMessage()
+      {
+        AllZone.Display.showMessage(message);
+        ButtonUtil.disableAll();
+      }
+      public void selectCard(Card card, PlayerZone zone)
+      {
+        if(choices.contains(card))
+        {
+          AllZone.getZone(card).remove(card);
+          AllZone.GameAction.moveToGraveyard(card);
+          stop();
+        }
+      }
+    };
+    return target;
+  }//input_sacrifice()
+  
   public static Input input_putFromHandToLibrary(final String TopOrBottom, final int num)
   {
      Input target = new Input()

@@ -471,6 +471,37 @@ private Card getCurrentCard(int ID)
     }
     return a;
   }
+  
+  
+  public void sacrificeCreature(String player, SpellAbility sa)
+  {
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	  CardList list = new CardList(play.getCards());
+	  list = list.getType("Creature");
+	  
+	  this.sacrificePermanent(player, sa, list);
+  }
+  
+  public void sacrificePermanent(String player, SpellAbility sa, CardList choices)
+  {
+	  if (choices.size() > 0 ){
+		  if (player.equals(Constant.Player.Human))
+		  {	  
+			  Input in = CardFactoryUtil.input_sacrificePermanent(choices, "Select a creature to sacrifice.");
+			  AllZone.InputControl.setInput(in);
+		  }
+		  else
+		  {
+			  //Card c = CardFactoryUtil.AI_getCheapestPermanent(choices, sa.getSourceCard(), false);
+			  CardListUtil.sortDefense(choices);
+			  choices.reverse();
+			  CardListUtil.sortAttackLowFirst(choices);
+			  Card c = choices.get(0);
+			  this.sacrificeDestroy(c);
+		  }
+	  } 
+  }
+  
   public void sacrifice(Card c)
   {
     sacrificeDestroy(c);
