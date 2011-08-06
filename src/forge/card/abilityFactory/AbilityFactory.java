@@ -1098,7 +1098,8 @@ public class AbilityFactory {
         else if(defined.startsWith("Triggered"))
         {
             String triggeringType = defined.substring(9);
-            s = (SpellAbility)sa.getSourceCard().getTriggeringObject(triggeringType);
+            if(sa.getSourceCard().getTriggeringObject(triggeringType) instanceof SpellAbility)
+                s = (SpellAbility)sa.getSourceCard().getTriggeringObject(triggeringType);
         }
 		
 		if (s != null)
