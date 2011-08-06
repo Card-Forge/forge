@@ -9,7 +9,8 @@ public class Phase extends MyObservable
 {
 	private int phaseIndex;
 	private int turn;
-
+    static int	   StormCount;
+    
 	private int humanExtraTurns;
 	private int computerExtraTurns;
 
@@ -220,6 +221,7 @@ public class Phase extends MyObservable
 
         //if(getPhase().equals(Constant.Phase.Untap)) {
         if(is(Constant.Phase.Untap, Constant.Player.Human)) {
+        	StormCount = 0;
             turn++;
             /*
             if (humanExtraTurns > 0)
@@ -228,6 +230,7 @@ public class Phase extends MyObservable
               humanExtraTurns++;
               */
         } else if(is(Constant.Phase.Untap, Constant.Player.Computer)) {
+        	StormCount = 0;
             AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(false);
             turn++;
             /*
@@ -236,6 +239,11 @@ public class Phase extends MyObservable
             else if(computerExtraTurns < 0)
               computerExtraTurns++;
               */
+        }
+        if(is(Constant.Phase.Main1, Constant.Player.Human)) {
+        	if(turn == 1) {
+        	StormCount = 0;
+        	}
         }
         //for debugging: System.out.println(getPhase());
         //System.out.println(getPhase() + " " + getActivePlayer());

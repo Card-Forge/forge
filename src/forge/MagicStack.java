@@ -4,7 +4,8 @@ import java.util.*;
 public class MagicStack extends MyObservable
 {
   private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
-
+  private Object StormCount;
+  
   public void reset()
   {
 	  stack.clear();
@@ -131,17 +132,21 @@ public class MagicStack extends MyObservable
   }
   public void push(SpellAbility sp)
   {
+	    if (stack.size() == 0) {
+	     }
     stack.add(0, sp);
+
     this.updateObservers();
     if(sp.isSpell())
     {
+   	    Phase.StormCount = Phase.StormCount + 1;
     	//attempt to counter human spell
     	if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
     		CardFactoryUtil.isCounterable(sp.getSourceCard()) )
-    		ComputerAI_counterSpells2.counter_Spell(sp);
-    	
+    		ComputerAI_counterSpells2.counter_Spell(sp);	
     	//put code for Standstill here
     	GameActionUtil.executePlayCardEffects(sp);
+    	
     }
   }
   public SpellAbility pop()
@@ -169,4 +174,11 @@ public class MagicStack extends MyObservable
 
     return a;
   }
+  public void setStormCount(Object stormCount) {
+	  	StormCount = stormCount;
+	  }
+
+	  public Object getStormCount() {
+	  	return StormCount;
+	  }
 }
