@@ -877,7 +877,9 @@ public class Card extends MyObservable {
             		&& 
             		!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps")
             		&& 
-            		!keyword.get(i).toString().contains("PreventAllDamageBy"))
+            		!keyword.get(i).toString().contains("PreventAllDamageBy")
+            		&& 
+            		!keyword.get(i).toString().contains("CantBeBlockedBy"))
             	{
                 if (keyword.get(i).toString().contains("WheneverKeyword")) {
                     String k[] = keyword.get(i).split(":");
@@ -2604,80 +2606,81 @@ public class Card extends MyObservable {
 
         else if (Property.startsWith("SharesColorWith")) { if(!sharesColorWith(source)) return false; }
 				
-             else if (Property.startsWith("with")) // ... Card keywords
-             {
-              	if (Property.startsWith("without") && getKeyword().contains(Property.substring(7))) return false;
-             	if (!Property.startsWith("without") && !getKeyword().contains(Property.substring(4))) return false;
-             }
-             
-             else if (Property.startsWith("tapped"))
-             	{ if(!isTapped()) return false;}
-             else if (Property.startsWith("untapped"))
-             	{ if(!isUntapped()) return false;}
-             else if (Property.startsWith("faceDown"))
-             	{ if(!isFaceDown()) return false;}
-             else if (Property.startsWith("enteredBattlefieldThisTurn"))
-             	{ if(!(getTurnInZone() == AllZone.Phase.getTurn())) return false;}
-             else if (Property.startsWith("dealtDamageToYouThisTurn")){
-            	 if(!(dealtDmgToHumanThisTurn && getController().isPlayer(AllZone.ComputerPlayer))
-            			 && !(dealtDmgToComputerThisTurn && getController().isPlayer(AllZone.HumanPlayer))) return false;}
-             else if (Property.startsWith("wasDealtDamageThisTurn")){
-            	 if((getReceivedDamageFromThisTurn().keySet()).isEmpty())return false;}
-             
-             else if (Property.startsWith("enchanted"))
-             	{ if(!isEnchanted()) return false;}
-             else if (Property.startsWith("unenchanted"))
-             	{ if(isEnchanted()) return false;}
-             else if (Property.startsWith("enchanting"))
-             	{ if(!isEnchanting()) return false;}
- 			
-             else if (Property.startsWith("equipped"))
-         		{ if(!isEquipped()) return false;}
-             else if (Property.startsWith("unequipped"))
-         		{ if(isEquipped()) return false;}
-             else if (Property.startsWith("equipping"))
-         		{ if(!isEquipping()) return false;}
-             
-             else if (Property.startsWith("token"))
-         		{ if(!isToken()) return false;}
-             else if (Property.startsWith("nonToken"))
-         		{ if(isToken()) return false;}
-             
-             else if (Property.startsWith("power") || 	// 8/10
-             		 Property.startsWith("toughness") ||
-             		 Property.startsWith("cmc"))
-             {
-             	int x = 0;
-             	int y = 0;
-             	int z = 0;
-             	
-             	if (Property.startsWith("power") )
-                 {
-                 	z = 7;
-                 	y = getNetAttack();
-                 }
-                 else if (Property.startsWith("toughness"))
-                 {
-                 	z = 11;
-                 	y = getNetDefense();
-                 }
-                 else if (Property.startsWith("cmc"))
-                 {
-                 	z = 5;
-                 	y = getCMC();
-                 }
-             	
-             	if (Property.substring(z).equals("X")) {
-             		x = CardFactoryUtil.xCount(source, source.getSVar("X"));
-             	}
-             	else
-             		x = Integer.parseInt(Property.substring(z));
-             	
-             	if (!compare(y, Property, x))
-             		return false;
-             }
-			// syntax example: countersGE9 P1P1 or countersLT12TIME (greater number than 99 not supported)
-			/*
+         else if (Property.startsWith("with")) // ... Card keywords
+         {
+          	if (Property.startsWith("without") && getKeyword().contains(Property.substring(7))) return false;
+         	if (!Property.startsWith("without") && !getKeyword().contains(Property.substring(4))) return false;
+         }
+         
+         else if (Property.startsWith("tapped"))
+         	{ if(!isTapped()) return false;}
+         else if (Property.startsWith("untapped"))
+         	{ if(!isUntapped()) return false;}
+         else if (Property.startsWith("faceDown"))
+         	{ if(!isFaceDown()) return false;}
+         else if (Property.startsWith("enteredBattlefieldThisTurn"))
+         	{ if(!(getTurnInZone() == AllZone.Phase.getTurn())) return false;}
+         else if (Property.startsWith("dealtDamageToYouThisTurn")){
+        	 if(!(dealtDmgToHumanThisTurn && getController().isPlayer(AllZone.ComputerPlayer))
+        			 && !(dealtDmgToComputerThisTurn && getController().isPlayer(AllZone.HumanPlayer))) return false;}
+         else if (Property.startsWith("wasDealtDamageThisTurn")){
+        	 if((getReceivedDamageFromThisTurn().keySet()).isEmpty())return false;}
+         
+         else if (Property.startsWith("enchanted"))
+         	{ if(!isEnchanted()) return false;}
+         else if (Property.startsWith("unenchanted"))
+         	{ if(isEnchanted()) return false;}
+         else if (Property.startsWith("enchanting"))
+         	{ if(!isEnchanting()) return false;}
+		
+         else if (Property.startsWith("equipped"))
+     		{ if(!isEquipped()) return false;}
+         else if (Property.startsWith("unequipped"))
+     		{ if(isEquipped()) return false;}
+         else if (Property.startsWith("equipping"))
+     		{ if(!isEquipping()) return false;}
+         
+         else if (Property.startsWith("token"))
+     		{ if(!isToken()) return false;}
+         else if (Property.startsWith("nonToken"))
+     		{ if(isToken()) return false;}
+         
+         else if (Property.startsWith("power") || 	// 8/10
+         		 Property.startsWith("toughness") ||
+         		 Property.startsWith("cmc"))
+	         {
+	         	int x = 0;
+	         	int y = 0;
+	         	int z = 0;
+	         	
+	         	if (Property.startsWith("power") )
+	             {
+	             	z = 7;
+	             	y = getNetAttack();
+	             }
+	             else if (Property.startsWith("toughness"))
+	             {
+	             	z = 11;
+	             	y = getNetDefense();
+	             }
+	             else if (Property.startsWith("cmc"))
+	             {
+	             	z = 5;
+	             	y = getCMC();
+	             }
+	         	
+	         	if (Property.substring(z).equals("X")) {
+	         		x = CardFactoryUtil.xCount(source, source.getSVar("X"));
+	         	}
+	         	else
+	         		x = Integer.parseInt(Property.substring(z));
+	         	
+	         	if (!compare(y, Property, x))
+	         		return false;
+	         }
+        
+			 // syntax example: countersGE9 P1P1 or countersLT12TIME (greater number than 99 not supported)
+			 /*
 			 * slapshot5 - fair warning, you cannot use numbers with 2 digits (greater number than 9 not supported
 			 * you can use X and the SVar:X:Number$12 to get two digits.  This will need a better fix, and I have the
 			 * beginnings of a regex below

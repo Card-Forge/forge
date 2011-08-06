@@ -256,11 +256,22 @@ public class CombatUtil {
             }
         
             if (blocker.getNetAttack() > attacker.getNetAttack() && 
-                    blocker.getKeyword().contains("CARDNAME can't be blocked by creatures with power greater than CARDNAME's power.")) return false;
-            if (blocker.getNetAttack() >= attacker.getNetDefense() && 
-                    blocker.getKeyword().contains("CARDNAME can't be blocked by creatures with power equal to or greater than CARDNAME's toughness.")) return false;
+                    blocker.getKeyword().contains("CARDNAME can't be blocked by creatures with power greater than CARDNAME's power.")) 
+            	return false;
+            if (blocker.getNetAttack() >= attacker.getNetDefense() && blocker.getKeyword().contains(
+            		"CARDNAME can't be blocked by creatures with power equal to or greater than CARDNAME's toughness.")) 
+            	return false;
         
         }// hasKeyword CARDNAME can't be blocked by creatures with power ...
+        
+        if(attacker.hasStartOfKeyword("CantBeBlockedBy")) {
+        	int KeywordPosition = attacker.getKeywordPosition("CantBeBlockedBy");
+        	String parse = attacker.getKeyword().get(KeywordPosition).toString();
+    		String k[] = parse.split(" ",2);
+    		final String restrictions[] = k[1].split(",");
+    		if(blocker.isValidCard(restrictions, attacker.getController(), attacker))
+    			return false;
+        }
 
         if(blocker.getKeyword().contains("CARDNAME can block only creatures with flying.")
                 && !attacker.getKeyword().contains("Flying")) return false;
