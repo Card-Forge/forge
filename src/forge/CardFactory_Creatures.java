@@ -2222,7 +2222,9 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Phyrexian Plaguelord")) {
             final SpellAbility negMajorBoost = new Ability_Tap(card, "0") {
-                @Override
+				private static final long serialVersionUID = -7797077528670642603L;
+
+				@Override
                 public void resolve() {
                     final Card[] target = new Card[1];
                     final Command untilEOT = new Command() {

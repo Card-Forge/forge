@@ -4,7 +4,7 @@ package forge;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Rectangle;
+// import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
