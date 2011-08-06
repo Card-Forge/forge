@@ -1,0 +1,10 @@
+Name:Prized Unicorn
+ManaCost:3 G
+Types:Creature Unicorn
+Text:no text
+PT:2/2
+K:All creatures able to block CARDNAME do so.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prized_unicorn.jpg
+End
