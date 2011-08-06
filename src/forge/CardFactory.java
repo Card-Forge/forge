@@ -18366,6 +18366,23 @@ public class CardFactory implements NewConstants {
 				}
 				else AllZone.GameAction.playCardNoCost(c);
 			}
+			
+			public boolean canPlay()
+			{
+				if (getSourceCard().getAttachedCards().length > 0)
+				{
+					Card c = copyCard(getSourceCard().getAttachedCards()[0]);
+					if (c.getName().equals("Counterspell") || c.getName().equals("Stifle"))
+					{
+						SpellAbility sa = c.getSpellAbility()[0];
+						return sa.canPlay();
+					}
+					else return true;
+				}
+				else
+					return false;
+			}
+			
 			public boolean canPlayAI()
 			{
 				if (getSourceCard().getAttachedCards().length == 0)
