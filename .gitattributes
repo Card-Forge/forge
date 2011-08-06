@@ -3824,6 +3824,7 @@ res/cardsfolder/phyrexian_walker.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_war_beast.txt -text svneol=native#text/plain
 res/cardsfolder/phytohydra.txt -text svneol=native#text/plain
 res/cardsfolder/pianna_nomad_captain.txt -text svneol=native#text/plain
+res/cardsfolder/piety.txt svneol=native#text/plain
 res/cardsfolder/pilgrims_eye.txt -text svneol=native#text/plain
 res/cardsfolder/pillage.txt -text svneol=native#text/plain
 res/cardsfolder/pillaging_horde.txt -text svneol=native#text/plain
