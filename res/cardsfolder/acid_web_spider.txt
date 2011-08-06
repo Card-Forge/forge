@@ -1,7 +1,7 @@
 Name:Acid Web Spider
 ManaCost:3 G G
 Types:Creature Spider
-Text:no text
+Text:When Acid Web Spider enters the battlefield, you may destroy target Equipment.
 PT:3/5
 K:Reach
 K:etbDestroyTgt:Equipment
