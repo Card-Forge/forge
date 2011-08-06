@@ -1,7 +1,7 @@
 Name:Thief of Hope
 ManaCost:2 B
 Types:Creature Spirit
-Text:Whenever you play a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.\r\nSoulshift 2
+Text:Whenever you play a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.
 PT:2/2
 K:Soulshift:2
 SVar:Rarity:Uncommon

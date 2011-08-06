@@ -1,7 +1,7 @@
 Name:Kami of Lunacy
 ManaCost:4 B B
 Types:Creature Spirit
-Text:Soulshift 5
+Text:no text
 PT:4/1
 K:Flying
 K:Soulshift:5

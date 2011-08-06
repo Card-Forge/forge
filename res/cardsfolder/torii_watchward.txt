@@ -1,7 +1,7 @@
 Name:Torii Watchward
 ManaCost:4 W
 Types:Creature Spirit
-Text:Soulshift 4
+Text:no text
 PT:3/3
 K:Vigilance
 K:Soulshift:4

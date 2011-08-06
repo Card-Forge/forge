@@ -1,7 +1,7 @@
 Name:Forked-Branch Garami
 ManaCost:3 G G
 Types:Creature Spirit
-Text:Soulshift 4, Soulshift 4
+Text:no text
 PT:4/4
 K:Soulshift:4
 K:Soulshift:4

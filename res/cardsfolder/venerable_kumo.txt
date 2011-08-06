@@ -1,7 +1,7 @@
 Name:Venerable Kumo
 ManaCost:4 G
 Types:Creature Spirit
-Text:Soulshift 4
+Text:no text
 PT:2/3
 K:Reach
 K:Soulshift:4

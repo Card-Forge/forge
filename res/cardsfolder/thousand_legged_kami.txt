@@ -1,7 +1,7 @@
 Name:Thousand-legged Kami
 ManaCost:6 G G
 Types:Creature Spirit
-Text:Soulshift 7
+Text:no text
 PT:6/6
 K:Soulshift:7
 SVar:Rarity:Uncommon

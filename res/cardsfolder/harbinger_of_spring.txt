@@ -1,7 +1,7 @@
 Name:Harbinger of Spring
 ManaCost:4 G
 Types:Creature Spirit
-Text:Soulshift 4
+Text:no text
 PT:2/1
 K:Protection:Creature.nonSpirit:Protection from non-Spirit creatures
 K:Soulshift:4

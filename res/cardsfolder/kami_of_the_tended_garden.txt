@@ -1,7 +1,7 @@
 Name:Kami of the Tended Garden
 ManaCost:3 G
 Types:Creature Spirit
-Text:Soulshift 3
+Text:no text
 PT:4/4
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G
 K:Soulshift:3

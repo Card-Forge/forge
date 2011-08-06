@@ -1,7 +1,7 @@
 Name:Deathknell Kami
 ManaCost:1 B
 Types:Creature Spirit
-Text:Soulshift 1
+Text:no text
 PT:0/1
 K:Flying
 A:AB$Pump | Cost$ 2 | NumAtt$ +1 | NumDef$ +1 | KW$ At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Deathknell Kami gets +1/+1 until end of turn. Sacrifice it at the beginning of the next end step.

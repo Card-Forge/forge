@@ -1,7 +1,7 @@
 Name:Nightsoil Kami
 ManaCost:4 G G
 Types:Creature Spirit
-Text:Soulshift 5
+Text:no text
 PT:6/4
 K:Soulshift:5
 SVar:Rarity:Common
