@@ -15969,7 +15969,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Spidersilk Armor
 
-	
+	/*
 	public static Command Eldrazi_Monument            = new Command() {
 
 		private static final long serialVersionUID   = -3591110487441151195L;
@@ -16009,6 +16009,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Eldrazi_Monument
+	*/
 
 	public static Command Muraganda_Petroglyphs       = new Command() {
 		private static final long serialVersionUID   = -6715848091817213517L;
@@ -16030,11 +16031,7 @@ public class GameActionUtil {
 
 			// for each zone found add +2/+2 to each vanilla card
 			for(int outer = 0; outer < zone.length; outer++) {
-				// CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
+				CardList creature = AllZoneUtil.getCreaturesInPlay();
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -16289,7 +16286,6 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				//c.setBaseAttack(countCreatures(c));
 				c.setBaseAttack(AllZoneUtil.getCreaturesInPlay(c.getController()).size());
 				c.setBaseDefense(1);
 			}
@@ -16361,7 +16357,7 @@ public class GameActionUtil {
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		
-		commands.put("Eldrazi_Monument", Eldrazi_Monument);
+		//commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Emperor_Crocodile", Emperor_Crocodile);
 		commands.put("Esper_Stormblade", Esper_Stormblade);

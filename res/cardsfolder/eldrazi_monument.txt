@@ -1,7 +1,8 @@
 Name:Eldrazi Monument
 ManaCost:5
 Types:Artifact
-Text:Creatures you control get +1/+1, have flying, and are indestructible.\r\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
+Text:At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
+K:stPumpAll:Creature.YouCtrl:1/1/Flying & HIDDEN Indestructible:No Condition:Creatures you control get +1/+1, have flying, and are indestructible.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
