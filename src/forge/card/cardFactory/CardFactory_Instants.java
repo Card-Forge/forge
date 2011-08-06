@@ -23,6 +23,7 @@ import forge.Player;
 import forge.PlayerZone;
 import forge.Phase;
 import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -2149,6 +2150,59 @@ public class CardFactory_Instants {
                 }//resolve()
             };//SpellAbility
             
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Wing Puncture")) {
+        	
+        	Target t2 = new Target(card, "Select target creature with flying", "Creature.withFlying".split(","));
+            final Ability_Sub sub = new Ability_Sub(card, t2) {
+				private static final long serialVersionUID = 4618047889975691050L;
+
+				@Override
+            	public boolean chkAI_Drawback() {
+            		return false;
+            	}
+				
+				@Override
+				public void resolve() {
+					Card myc = this.getParent().getTargetCard();
+					Card tgt = getTargetCard();
+					if(AllZoneUtil.isCardInPlay(myc) && AllZoneUtil.isCardInPlay(tgt)) {
+						if(CardFactoryUtil.canTarget(card, myc) && CardFactoryUtil.canTarget(card, tgt)) {
+							tgt.addDamage(myc.getNetAttack(), myc);
+						}
+					}
+				}
+            	
+            	@Override
+            	public boolean doTrigger(boolean b) {
+            		return false;
+            	}
+            };
+        	
+        	Cost abCost = new Cost("G", cardName, false);
+        	Target t1 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
+        	final SpellAbility spell = new Spell(card, abCost, t1) {
+				private static final long serialVersionUID = 8964235807056739219L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	sub.resolve();
+                }
+            };
+            spell.setSubAbility(sub);
+            spell.setDescription("Target creature you control deals damage equal to its power to target creature with flying.");
+            spell.setStackDescription(card+" - Creature you control deals damage equal to its power to creature with flying.");
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
