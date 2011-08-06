@@ -2780,16 +2780,23 @@ public class Card extends MyObservable {
     		else return 0;
     	}
     	
-		//more specific prevents here:
+    	if(hasStartOfKeyword("PreventAllDamageBy")) {
+    		String valid = this.getKeyword().get(getKeywordPosition("PreventAllDamageBy")).split(" ")[1]; 
+    		if (source.isValid(valid,this.getController(),this))
+    			return 0;
+    	}
+    	
+		/* Should use the PreventAllDamageBy
     	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
 				&& source.isCreature() && source.isArtifact()))return 0;
     	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifacts.") 
 				&& source.isArtifact()))return 0;
     	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by creatures.")
 				&& source.isCreature()))return 0;
+		*/
 		
 		// specific Cards
-    	if(!isCreature()) { //and not a planeswalker
+    	if(isCreature()) { //and not a planeswalker
     		if((this.isCreature() && source.isCreature() && 
 				AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this)))return 0;
     	

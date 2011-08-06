@@ -1,9 +1,9 @@
 Name:Argothian Treefolk
 ManaCost:3 G G
 Types:Creature Treefolk
-Text:no text
+Text:Prevent all damage that would be dealt to CARDNAME by artifacts.
 PT:3/5
-K:Prevent all damage that would be dealt to CARDNAME by artifacts.
+K:PreventAllDamageBy Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_treefolk.jpg
 End

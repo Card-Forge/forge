@@ -3511,7 +3511,6 @@ public class CardFactoryUtil {
             String kw = "";
             for(int i = 0; i < list.size(); i++) {
                 kw = list.get(i);
-                
 
                 if(kw.equals("Protection from white") && card.isWhite() && 
                 		!card.getName().contains("White Ward")) return true;
