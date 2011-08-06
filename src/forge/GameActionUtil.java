@@ -5397,9 +5397,27 @@ public class GameActionUtil {
 	        	AllZone.Stack.add(ability);
         }
         
-        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
-        for(Card c:cl) {
-            GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
+        CardList enchantments = new CardList(source.getEnchantedBy().toArray());
+        
+        for(Card enchantment: enchantments) {
+        	if(enchantment.getName().equals("Guilty Conscience"))
+        		GameActionUtil.executeGuiltyConscienceEffects(source, enchantment, damage);
+        	if(enchantment.getKeyword().contains("Whenever enchanted creature deals damage, you gain that much life.")) {
+    			final int life = damage;
+    			final Card e = enchantment;
+    			final Player player = e.getController();
+    			
+    	    	Ability ability = new Ability(e, "0") {
+    	    		@Override
+    	    		public void resolve() {
+    	    			player.gainLife(life, e);
+    	    		}
+    	    	};
+    	    	StringBuilder sb = new StringBuilder();
+    	        sb.append(e.getName()+" - ").append(player).append(" gains ").append(life).append(" life");
+    	        ability.setStackDescription(sb.toString());
+    	        AllZone.Stack.add(ability);
+            }
         }
 	}
 	
