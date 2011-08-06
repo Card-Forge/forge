@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+kami_of_the_crescent_moon.jpg		http://www.wizards.com/global/images/magic/general/kami_of_the_crescent_moon.jpg
 three_visits.jpg		http://www.wizards.com/global/images/magic/general/three_visits.jpg
 bojuka_bog.jpg		http://www.wizards.com/global/images/magic/general/bojuka_bog.jpg
 thran_quarry.jpg		http://www.wizards.com/global/images/magic/general/thran_quarry.jpg

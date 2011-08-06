@@ -124,6 +124,7 @@ public class GameActionUtil {
 		upkeep_Howling_Mine(); // keep this one even laster, since it would
 		// cause black vise to do an extra point of
 		// damage if black vise was in play
+		upkeep_Kami_Crescent_Moon();
 		upkeep_Font_of_Mythos();
 		upkeep_Teferi_Puzzle_Box();
 		upkeep_Overbeing_of_Myth();
@@ -8585,6 +8586,19 @@ public class GameActionUtil {
 			}
 		}
 	}// upkeep_Howling_Mine()
+	
+	private static void upkeep_Kami_Crescent_Moon() {
+		final String player = AllZone.Phase.getActivePlayer();
+
+		CardList list = new CardList();
+		list.addAll(AllZone.Human_Play.getCards());
+		list.addAll(AllZone.Computer_Play.getCards());
+		list = list.getName("Kami of the Crescent Moon");
+
+		for(int i = 0; i < list.size(); i++){
+			AllZone.GameAction.drawCard(player);
+		}
+	}// upkeep_Kami_Crescent_Moon()
 
 	private static void upkeep_Font_of_Mythos() {
 		final String player = AllZone.Phase.getActivePlayer();
