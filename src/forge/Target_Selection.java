@@ -95,11 +95,16 @@ public class Target_Selection {
 				
 				if (zone.equals(Constant.Zone.Play)){
 		            boolean canTargetPlayer = false;
-		            for(String s : Tgts)
-		            	if (s.equals("player") || s.equals("Player"))
+		            boolean canTargetOpponent = false;
+		            for(String s : Tgts){
+		            	
+		            	if (s.equalsIgnoreCase("Player"))
 		            		canTargetPlayer = true;
+		            	if (s.equalsIgnoreCase("Opponent"))
+		            		canTargetOpponent = true;
+		            }
 	
-		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, select, req));
+		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req));
 				}
 				else{
 					stopSetNext(input_cardFromList(sa, choices, message, true, select, req));
@@ -110,7 +115,7 @@ public class Target_Selection {
 
     //CardList choices are the only cards the user can successful select
     public static Input input_targetSpecific(final SpellAbility sa, final CardList choices, final String message, 
-    		final boolean targeted, final boolean bTgtPlayer, final Target_Selection select, final SpellAbility_Requirements req) {
+    		final boolean targeted, final boolean bTgtPlayer, final boolean bTgtOpponent, final Target_Selection select, final SpellAbility_Requirements req) {
         Input target = new Input() {
 			private static final long serialVersionUID = -1091595663541356356L;
 
@@ -160,10 +165,11 @@ public class Target_Selection {
             
             @Override
             public void selectPlayer(Player player) {
-            	if (bTgtPlayer && player.canTarget(sa.getSourceCard())){
-            		select.getTgt().addTarget(player);
-	                done();
-            	}
+            	if ((bTgtPlayer || (bTgtOpponent && player.equals(sa.getActivatingPlayer().getOpponent()))) && 
+	            	player.canTarget(sa.getSourceCard())){
+	            		select.getTgt().addTarget(player);
+		                done();
+	            	}
             }
             
             void done() {

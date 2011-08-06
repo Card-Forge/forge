@@ -9,8 +9,6 @@ import java.util.Random;
         private AbilityFactory AF = null;
         
         private String damage;
-
-        private boolean TgtOpp = false;
     	
     	public AbilityFactory_DealDamage(AbilityFactory newAF)
     	{
@@ -18,9 +16,7 @@ import java.util.Random;
 
     		damage = AF.getMapParams().get("NumDmg");
 
-    		if(AF.getMapParams().containsKey("Tgt"))
-    			if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
-    				TgtOpp = true;
+    		// Note: TgtOpp should not be used, Please use ValidTgts$ Opponent instead
     	}
        
        public SpellAbility getAbility()
@@ -259,7 +255,7 @@ import java.util.Random;
 				}
 			}
 
-			if (tgt.canTgtPlayer() || TgtOpp) {
+			if (tgt.canTgtPlayer()) {
 				tgt.addTarget(AllZone.HumanPlayer);
 				continue;
 			}
@@ -330,10 +326,7 @@ import java.util.Random;
                tgts = tgt.getTargets();
             else{
                tgts = new ArrayList<Object>();
-               if (TgtOpp){
-               		tgts.add(saMe.getActivatingPlayer().getOpponent());
-               }
-               else if (AF.getMapParams().containsKey("Affected")){
+               if (AF.getMapParams().containsKey("Affected")){
             	   String affected = AF.getMapParams().get("Affected");
             	   if (affected.equals("You"))
             		   tgts.add(saMe.getActivatingPlayer());
@@ -352,7 +345,7 @@ import java.util.Random;
     		boolean noPrevention = params.containsKey("NoPrevention");
 
             ArrayList<Object> tgts = findTargets(saMe);
-            boolean targeted = (AF.getAbTgt() != null) || TgtOpp;
+            boolean targeted = (AF.getAbTgt() != null);
 
             if (tgts == null || tgts.size() == 0){
             	System.out.println("AF_DealDamage ("+AF.getHostCard()+") - No targets?  Ok.  Just making sure.");
