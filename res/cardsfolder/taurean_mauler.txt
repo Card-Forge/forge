@@ -4,7 +4,8 @@ Types:Creature Shapeshifter
 Text:no text
 PT:2/2
 K:Changeling
-K:WheneverKeyword:CastSpell/Opponent:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever an opponent casts a spell, you may put a +1/+1 counter on Taurean Mauler.
+T:Mode$ SpellCast | ValidCard$ Card.YouDontCtrl | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a spell, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taurean_mauler.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/109.jpg

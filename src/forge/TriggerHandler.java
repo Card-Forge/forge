@@ -220,6 +220,9 @@ public class TriggerHandler {
 					{
 						StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
 						buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
+						buildQuestion.append("\r\n(");
+						buildQuestion.append(regtrig.getMapParams().get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
+						buildQuestion.append(")");
 						if(!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString()))
 						{
 							return;
