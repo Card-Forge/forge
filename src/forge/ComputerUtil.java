@@ -160,6 +160,7 @@ public class ComputerUtil
     }
     Card originalCard = sa.getSourceCard();
     ManaCost cost = new ManaCost(sa.getManaCost());
+    if(sa.isSpell() == true) {
     if(originalCard.getName().equals("Avatar of Woe")){
 		String player = AllZone.Phase.getActivePlayer();
 		String opponent = AllZone.GameAction.getOpponent(player);
@@ -182,6 +183,30 @@ public class ComputerUtil
         	ManaCost cost2 = new ManaCost("U U"); 
         	cost = cost2;
         }
+    } else if(originalCard.getName().equals("Avatar of Fury")) {
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
+      PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+      CardList OpponentLand = new CardList(OpponentPlay.getCards());	   
+      OpponentLand = OpponentLand.getType("Land");
+      if(OpponentLand.size() >= 7) {
+      	ManaCost cost2 = new ManaCost("R R"); 
+    	cost = cost2;        	
+      }
+  } else if(originalCard.getName().equals("Avatar of Might")) {
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
+      PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
+      CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
+      PlayerCreature = PlayerCreature.getType("Creature");
+      PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+      CardList OpponentCreature = new CardList(OpponentPlay.getCards());	   
+      OpponentCreature = OpponentCreature.getType("Creature");
+      if(OpponentCreature.size() - PlayerCreature.size() >= 4) {
+      	ManaCost cost2 = new ManaCost("G G"); 
+    	cost = cost2;
+  }
+  }
     }   
     ArrayList<String> colors;
 
@@ -256,6 +281,7 @@ public class ComputerUtil
    
     Card originalCard = sa.getSourceCard();
     ManaCost cost = new ManaCost(sa.getManaCost());
+    if(sa.isSpell() == true) {
     if(originalCard.getName().equals("Avatar of Woe")){
 		String player = AllZone.Phase.getActivePlayer();
 		String opponent = AllZone.GameAction.getOpponent(player);
@@ -278,7 +304,31 @@ public class ComputerUtil
         	ManaCost cost2 = new ManaCost("U U"); 
         	cost = cost2;
         }
-    } 
+    } else if(originalCard.getName().equals("Avatar of Fury")) {
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
+      PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+      CardList OpponentLand = new CardList(OpponentPlay.getCards());	   
+      OpponentLand = OpponentLand.getType("Land");
+      if(OpponentLand.size() >= 7) {
+      	ManaCost cost2 = new ManaCost("R R"); 
+    	cost = cost2;        	
+      }
+  } else if(originalCard.getName().equals("Avatar of Might")) {
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
+      PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
+      CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
+      PlayerCreature = PlayerCreature.getType("Creature");
+      PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+      CardList OpponentCreature = new CardList(OpponentPlay.getCards());	   
+      OpponentCreature = OpponentCreature.getType("Creature");
+      if(OpponentCreature.size() - PlayerCreature.size() >= 4) {
+      	ManaCost cost2 = new ManaCost("G G"); 
+    	cost = cost2;
+  }
+  }
+    }
     ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)

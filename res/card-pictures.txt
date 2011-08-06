@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+avatar_of_might.jpg			http://www.wizards.com/global/images/magic/general/avatar_of_might.jpg
+avatar_of_fury.jpg			http://www.wizards.com/global/images/magic/general/avatar_of_fury.jpg
 eternity_vessel.jpg				http://www.wizards.com/global/images/magic/general/eternity_vessel.jpg
 vengevine.jpg					http://www.wizards.com/global/images/magic/general/vengevine.jpg
 maelstrom_nexus.jpg				http://www.wizards.com/global/images/magic/general/maelstrom_nexus.jpg

@@ -1,3 +1,18 @@
+Avatar of Might
+6 G G
+Creature Avatar
+If an opponent controls at least four more creatures than you, Avatar of Might costs 6 less to cast.
+8/8
+Trample
+
+Avatar of Fury
+6 R R
+Creature Avatar
+If an opponent controls seven or more lands, Avatar of Fury costs 6 less to cast.
+6/6
+Flying
+abPump R:+1/+0
+
 Hada Spy Patrol
 1 U
 Creature Human Rogue

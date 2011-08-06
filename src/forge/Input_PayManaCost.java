@@ -20,9 +20,10 @@ public class Input_PayManaCost extends Input {
    
     public Input_PayManaCost(SpellAbility sa) {
         originalManaCost = sa.getManaCost();
-        originalCard = sa.getSourceCard();     
+        originalCard = sa.getSourceCard();
+        
         spell = sa;
-
+        if(spell.isSpell() == true) {
         if(originalCard.getName().equals("Avatar of Woe")){
 			String player = AllZone.Phase.getActivePlayer();
 			String opponent = AllZone.GameAction.getOpponent(player);
@@ -47,9 +48,37 @@ public class Input_PayManaCost extends Input {
 	        } else {
 	            manaCost = new ManaCost(sa.getManaCost());	        	
 	        }
+        } else if(originalCard.getName().equals("Avatar of Fury")) {
+			String player = AllZone.Phase.getActivePlayer();
+			String opponent = AllZone.GameAction.getOpponent(player);
+	        PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+	        CardList OpponentLand = new CardList(OpponentPlay.getCards());	   
+	        OpponentLand = OpponentLand.getType("Land");
+	        if(OpponentLand.size() >= 7) {
+            manaCost = new ManaCost("R R");   
+	        } else {
+	            manaCost = new ManaCost(sa.getManaCost());	        	
+	        }
+        } else if(originalCard.getName().equals("Avatar of Might")) {
+			String player = AllZone.Phase.getActivePlayer();
+			String opponent = AllZone.GameAction.getOpponent(player);
+	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
+	        CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
+	        PlayerCreature = PlayerCreature.getType("Creature");
+	        PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+	        CardList OpponentCreature = new CardList(OpponentPlay.getCards());	   
+	        OpponentCreature = OpponentCreature.getType("Creature");
+	        if(OpponentCreature.size() - PlayerCreature.size() >= 4) {
+            manaCost = new ManaCost("G G");   
+	        } else {
+	            manaCost = new ManaCost(sa.getManaCost());	        	
+	        }
         } else {
         manaCost = new ManaCost(sa.getManaCost());
         }
+    } else {
+    	manaCost = new ManaCost(sa.getManaCost());
+    }
     }
    
     private void resetManaCost() {
