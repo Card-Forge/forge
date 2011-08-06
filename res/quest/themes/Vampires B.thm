@@ -1,0 +1,37 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=15]
+Anowon, the Ruin Sage
+Malakir Bloodwitch
+Vampire Nocturnus
+[/Group]
+
+[Group MaxCnt=4 Percentage=30]
+Ascendant Evincar
+Bloodghast
+Gatekeeper of Malakir
+Child of Night
+Guul Draz Vampire
+Mirri the Cursed
+Nirkana Cutthroat
+Sengir Vampire
+Vampire Nighthawk
+[/Group]
+
+[Group MaxCnt=3 Percentage=20]
+Arrogant Vampire
+Barony Vampire
+Bloodrite Invoker
+Bloodthrone Vampire
+Irini Sengir
+Pulse Tracker
+Quag Vampires
+Ruthless Cullblade
+Skyshroud Vampire
+Vampire Aristocrat
+Vampire Hexmage
+Vampire Hounds
+Vampire Lacerator
+[/Group]
+
+End
