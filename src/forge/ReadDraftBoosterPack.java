@@ -1,27 +1,27 @@
 package forge;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+//import java.io.BufferedReader;
+//import java.io.File;
+//import java.io.FileReader;
 import java.util.ArrayList;
 
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
+//import forge.error.ErrorViewer;
+//import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
 
 public class ReadDraftBoosterPack implements NewConstants {
     
-    final private static String comment = "//";
+//    final private static String comment = "//";
     
-    private CardList     commonCreatureList;
-    private CardList     commonNonCreatureList;
+    private CardList     commonCreatureList = new CardList();
+    private CardList     commonNonCreatureList = new CardList();
     
-    private CardList     commonList;
-    private CardList     uncommonList;
-    private CardList     rareList;
+    private CardList     commonList = new CardList();
+    private CardList     uncommonList = new CardList();
+    private CardList     rareList = new CardList();
     
     public ReadDraftBoosterPack() {
         setup();
@@ -180,7 +180,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         //    }
         //});
     	
-        CardList AllCards = new CardList(AllZone.CardFactory.getAllCards().toArray());
+        CardList AllCards = AllZone.CardFactory.getAllCards();
         
         for (int i=0; i<AllCards.size(); i++)
         {
@@ -212,7 +212,7 @@ public class ReadDraftBoosterPack implements NewConstants {
     }//setup()
     
 
-    private CardList readFile(File file) {
+/*    private CardList readFile(File file) {
         CardList cardList = new CardList();
         
         BufferedReader in;
@@ -237,7 +237,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         }
         
         return cardList;
-    }//readFile()
+    }//readFile()*/
 }
 
 
