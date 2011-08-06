@@ -131,6 +131,60 @@ public class CombatUtil {
 	            if(!temp.isEmpty()) return false;
 	        }
 	        
+	        if(attacker.getKeyword().contains("Snow swampwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isType("Swamp") && c.isSnow();
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Snow forestwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isType("Forest") && c.isSnow();
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Snow islandwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isType("Island") && c.isSnow();
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Snow plainswalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isType("Plains") && c.isSnow();
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Snow mountainwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isType("Mountain") && c.isSnow();
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Snow landwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isLand() && c.isSnow();
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
 	        if(attacker.getKeyword().contains("Desertwalk")) {
 	            temp = blkCL.filter(new CardListFilter() {
 	                public boolean addCard(Card c) {
