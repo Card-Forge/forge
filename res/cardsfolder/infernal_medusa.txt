@@ -1,0 +1,9 @@
+Name:Infernal Medusa
+ManaCost:3 B B
+Types:Creature Gorgon
+Text:Whenever Infernal Medusa blocks a creature, destroy that creature at end of combat.\r\nWhenever Infernal Medusa becomes blocked by a non-Wall creature, destroy that creature at end of combat.
+PT:2/4
+K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature
+K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonWall
+K:SVar:Rarity:Uncommon
+End

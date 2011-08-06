@@ -1,0 +1,8 @@
+Name:Tangle Asp
+ManaCost:1 G
+Types:Creature Snake
+Text:Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
+PT:1/2
+K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature
+K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature
+End

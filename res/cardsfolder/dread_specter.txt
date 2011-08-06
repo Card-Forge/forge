@@ -1,0 +1,9 @@
+Name:Dread Specter
+ManaCost:3 B
+Types:Creature Specter
+Text:Whenever Dread Specter blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+PT:2/2
+K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature.nonBlack
+K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonBlack
+K:SVar:Rarity:Uncommon
+End
