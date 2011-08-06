@@ -297,6 +297,14 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         	area.append("+");
         }
         
+        //cloned via
+        if(card.getCloneOrigin() != "") {
+        	if(area.length() != 0) area.append("\n");
+        	area.append("^Cloned via: ");
+        	area.append(card.getCloneOrigin());
+        	area.append("^");
+        }
+        
         //uncastable
         if(card.isUnCastable()) {
             if(area.length() != 0) area.append("\n");
