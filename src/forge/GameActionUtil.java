@@ -12626,7 +12626,7 @@ public class GameActionUtil {
 								if(condition2.startsWith("LevelGE")) {
 									condition2 = condition2.replace("LevelGE", "");
 									int levelReq = Integer.parseInt(condition2);
-									System.out.println("condition2, got level: "+levelReq);
+									//System.out.println("condition2, got level: "+levelReq);
 									if(card.getCounters(Counters.LEVEL) >= levelReq) {
 										altCondition2 = true;
 									}
@@ -12646,7 +12646,7 @@ public class GameActionUtil {
 								else if(condition.startsWith("LevelGE")) {
 									condition = condition.replace("LevelGE", "");
 									int levelReq = Integer.parseInt(condition);
-									System.out.println("condition, got level: "+levelReq);
+									//System.out.println("condition, got level: "+levelReq);
 									if(card.getCounters(Counters.LEVEL) >= levelReq) {
 										altCondition = true;
 									}
