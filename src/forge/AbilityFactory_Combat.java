@@ -13,6 +13,12 @@ public class AbilityFactory_Combat {
 			
 			final AbilityFactory af = AF;
 			
+			@Override
+            public String getStackDescription(){
+            // when getStackDesc is called, just build exactly what is happening
+                return fogStackDescription(af, this);
+            }
+			
 			public boolean canPlayAI()
 			{
 				return fogCanPlayAI(af, this);
@@ -32,6 +38,12 @@ public class AbilityFactory_Combat {
 			private static final long serialVersionUID = -5141246507533353605L;
 			
 			final AbilityFactory af = AF;
+			
+			@Override
+            public String getStackDescription(){
+            // when getStackDesc is called, just build exactly what is happening
+                return fogStackDescription(af, this);
+            }
 			
 			public boolean canPlayAI()
 			{
@@ -66,6 +78,25 @@ public class AbilityFactory_Combat {
 		};
 		return dbFog;
 	}
+	
+	public static String fogStackDescription(AbilityFactory af, SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        
+        if (!(sa instanceof Ability_Sub))
+            sb.append(sa.getSourceCard().getName()).append(" - ");
+        else
+            sb.append(" ");
+        
+        sb.append(sa.getSourceCard().getController());
+        sb.append(" prevents all combat damage this turn.");
+        
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null){
+            sb.append(abSub.getStackDescription());
+        }
+        
+        return sb.toString();
+    }
 	
 	public static boolean fogCanPlayAI(final AbilityFactory af, SpellAbility sa){
 		// AI should only activate this during Human's Declare Blockers phase
