@@ -5654,6 +5654,7 @@ src/forge/AbilityFactory_Counters.java -text svneol=native#text/plain
 src/forge/AbilityFactory_DealDamage.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Destroy.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Fetch.java -text svneol=native#text/plain
+src/forge/AbilityFactory_GainControl.java -text svneol=native#text/plain
 src/forge/AbilityFactory_PermanentState.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Pump.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Regenerate.java -text svneol=native#text/plain

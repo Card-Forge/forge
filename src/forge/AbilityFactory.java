@@ -330,6 +330,15 @@ public class AbilityFactory {
 				SA = AFT.getSpell(this, numTokens, mapParams.get("TokenName"), mapParams.get("TokenTypes").split(","), mapParams.get("TokenOwner"), mapParams.get("TokenColors").split(","), numPower, numToughness, keywords);
 		}
 		
+		if (API.equals("GainControl")) {
+			AbilityFactory_GainControl afControl = new AbilityFactory_GainControl(this);
+			
+			if (isAb)
+				SA = afControl.getAbility();
+			if (isSp)
+				SA = afControl.getSpell();
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
