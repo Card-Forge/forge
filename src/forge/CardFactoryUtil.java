@@ -857,7 +857,7 @@ public class CardFactoryUtil {
     }//input_sacrifice()
     
     public static Input input_sacrificePermanent(final CardList choices, final String message) {
-    	return input_sacrificePermanentsFromList(1, choices, "Select a permanent to sacrifice");
+    	return input_sacrificePermanentsFromList(1, choices, message);
     }//input_sacrifice()
     
     public static Input input_sacrificePermanents(final int nCards) {
@@ -4328,7 +4328,7 @@ public class CardFactoryUtil {
         //c.setOwner(controller);
         
         // todo: most tokens mana cost is 0, this needs to be fixed
-        c.setManaCost(manaCost);
+        //c.setManaCost(manaCost);
         c.addColor(manaCost);
         c.setToken(true);
         

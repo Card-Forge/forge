@@ -10118,211 +10118,70 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gilt-Leaf Archdruid")) {
-            final SpellAbility a1 = new Ability(card, "0") {
-                @Override
-                public boolean canPlay() {
-                    Player controller = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-                    
-                    CardList druids = new CardList();
-                    
-                    druids.addAll(play.getCards());
-                    druids = druids.getType("Druid");
-                    
-                    //System.out.println("Druids size: " + druids.size());
-                    
-                    int druidsUntapped = 0;
-                    for(int i = 0; i < druids.size(); i++) {
-                        Card c = druids.get(0);
-                        if(!c.isTapped()) druidsUntapped++;
-                    }
-                    
-                    if(druids.size() > 6 && druidsUntapped > 6 && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
-                    else return false;
-                }
+        	Ability_Cost abCost = new Ability_Cost("tapXType<7/Druid>", cardName, true);
+        	Target tgt = new Target("Select a player to gain lands from", "Player".split(","));
+        	final SpellAbility stealLands = new Ability_Activated(card, abCost, tgt){
+				private static final long serialVersionUID = 636594487143500891L;
+
+				@Override
+        		public boolean canPlayAI(){
+        			Player p = AllZone.HumanPlayer;
+        			
+        			if (!p.canTarget(card))
+        				return false;
+        			
+        			setTargetPlayer(p);
+        			
+        			CardList lands = AllZoneUtil.getPlayerCardsInPlay(p);
+        			lands = lands.getType("Land");
+        			
+        			// Don't steal lands if Human has less than 2
+        			return lands.size() >= 2;
+        		}
                 
                 @Override
                 public void resolve() {
+                    Player activator = this.getActivatingPlayer();
                     
-                    Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
-                    else computerResolve();
+                    CardList lands = AllZoneUtil.getPlayerCardsInPlay(getTargetPlayer());
+                    lands = lands.getType("Land");
+                    
+                    for(int i = 0; i < lands.size(); i++) {
+                        Card land = lands.get(i);
+                        if(AllZone.GameAction.isCardInPlay(land)) {	// this really shouldn't fail in the middle of resolution
+                            land.setController(activator);
+                            
+                            // i don't know how the code handles Sum Sickness so I'm leaving this
+                            // but a card changing controllers should always gain this no matter if it has haste or not
+                            if(land.getKeyword().contains("Haste")) {
+                                land.setSickness(false);
+                            } else {
+                                land.setSickness(true);
+                            }
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
+                            
+                            PlayerZone from = AllZone.getZone(land);
+                            from.remove(land);
+                            
+                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                            to.add(land);
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                        }//if
+                    }
                 }
-                
-                public void humanResolve() {
-                    Player controller = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-                    CardList druids = new CardList();
-                    
-                    druids.addAll(play.getCards());
-                    druids = druids.getType("Druid");
-                    
-                    CardList tappedDruids = new CardList();
-                    
-                    Object o = AllZone.Display.getChoice("Pick first druid to tap", druids.toArray());
-                    
-                    if(o != null) {
-                        Card c1 = (Card) o;
-                        druids.remove(c1);
-                        tappedDruids.add(c1);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick second druid to tap", druids.toArray());
-                    if(o != null) {
-                        Card c2 = (Card) o;
-                        druids.remove(c2);
-                        tappedDruids.add(c2);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick third druid to tap", druids.toArray());
-                    if(o != null) {
-                        Card c3 = (Card) o;
-                        druids.remove(c3);
-                        tappedDruids.add(c3);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick fourth druid to tap", druids.toArray());
-                    if(o != null) {
-                        Card c4 = (Card) o;
-                        druids.remove(c4);
-                        tappedDruids.add(c4);
-                    } else return;
-                    o = AllZone.Display.getChoice("Pick fifth druid to tap", druids.toArray());
-                    if(o != null) {
-                        Card c5 = (Card) o;
-                        druids.remove(c5);
-                        tappedDruids.add(c5);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick sixth druid to tap", druids.toArray());
-                    if(o != null) {
-                        Card c6 = (Card) o;
-                        druids.remove(c6);
-                        tappedDruids.add(c6);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick seventh druid to tap", druids.toArray());
-                    if(o != null) {
-                        Card c7 = (Card) o;
-                        druids.remove(c7);
-                        tappedDruids.add(c7);
-                    } else return;
-                    
-                    for(int i = 0; i < tappedDruids.size(); i++) {
-                        Card tapDruid = tappedDruids.get(i);
-                        tapDruid.tap();
-                    }
-                    
-                    Player opponent = controller.getOpponent();
-                    PlayerZone opponentPlay = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-                    
-                    CardList lands = new CardList();
-                    lands.addAll(opponentPlay.getCards());
-                    lands = lands.getType("Land");
-                    
-                    //System.out.println("Land size: " +lands.size());
-                    
-                    for(int i = 0; i < lands.size(); i++) {
-                        Card land = lands.get(i);
-                        
-
-                        if(AllZone.GameAction.isCardInPlay(land)) {
-                            land.setController(controller);
-                            
-                            //set summoning sickness
-                            if(land.getKeyword().contains("Haste")) {
-                                land.setSickness(false);
-                            } else {
-                                land.setSickness(true);
-                            }
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                            
-                            PlayerZone from = AllZone.getZone(land);
-                            from.remove(land);
-                            
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                            to.add(land);
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
-                        }//if
-                        
-
-                    }
-                    
-                }//humanResolve
-                
-                public void computerResolve() {
-                    Player controller = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-                    CardList druids = new CardList();
-                    
-                    druids.addAll(play.getCards());
-                    druids = druids.getType("Druid");
-                    
-
-                    for(int i = 0; i < 7; i++) {
-                        Card c = druids.get(i);
-                        c.tap();
-                        
-                    }
-                    
-                    Player opponent = controller.getOpponent();
-                    PlayerZone opponentPlay = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-                    
-                    CardList lands = new CardList();
-                    lands.addAll(opponentPlay.getCards());
-                    lands = lands.getType("Land");
-                    
-                    for(int i = 0; i < lands.size(); i++) {
-                        Card land = lands.get(i);
-                        if(AllZone.GameAction.isCardInPlay(land)) {
-                            land.setController(controller);
-                            
-                            //set summoning sickness
-                            if(land.getKeyword().contains("Haste")) {
-                                land.setSickness(false);
-                            } else {
-                                land.setSickness(true);
-                            }
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                            
-                            PlayerZone from = AllZone.getZone(land);
-                            from.remove(land);
-                            
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                            to.add(land);
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
-                        }//if
-                    }
-                    
-                }//computerResolve
-                
-            };//a1
+            };
             
-            card.clearSpellAbility();
-            card.addSpellAbility(a1);
+            card.addSpellAbility(stealLands);
             
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" taps seven untapped Druids and gains control of all opponent's land.");
-            a1.setStackDescription(sb.toString());
+            sb.append(card.toString()).append(" - Gain control of all lands target player controls.");
+            stealLands.setStackDescription(sb.toString());
             
-            a1.setDescription("Tap seven untapped Druids you control: Gain control of all lands target player controls.");
-            
-            card.addSpellAbility(new Spell_Permanent(card) {
-                private static final long serialVersionUID = -4621346281051305833L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return true;
-                }
-            });
+            stealLands.setDescription("Tap seven untapped Druids you control: Gain control of all lands target player controls.");
         }//*************** END ************ END **************************
         
 

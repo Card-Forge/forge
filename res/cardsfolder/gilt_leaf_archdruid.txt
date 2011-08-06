@@ -1,7 +1,7 @@
 Name:Gilt-Leaf Archdruid
 ManaCost:3 G G
 Types:Creature Elf Druid
-Text:Whenever you play a Druid spell, you may draw a card.\r\nTap seven untapped Druids you control: Gain control of all lands target player controls.
+Text:Whenever you play a Druid spell, you may draw a card.
 PT:3/3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_archdruid.jpg

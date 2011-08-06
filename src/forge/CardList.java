@@ -305,7 +305,10 @@ public class CardList implements Iterable<Card> {
     		}
     	});
     }
-    
+
+    public CardList getValidCards(String Restrictions, final Player sourceController, final Card source) {
+    	return getValidCards(Restrictions.split(","), sourceController, source);
+    } 
     
     public CardList getValidCards(final String Restrictions[], final Player sourceController, final Card source) {
         return this.filter(new CardListFilter() {

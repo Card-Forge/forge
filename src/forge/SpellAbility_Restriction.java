@@ -155,9 +155,6 @@ public class SpellAbility_Restriction {
 		if (activationLimit != -1 && numberTurnActivations >= activationLimit)
 			return false;
 		
-		/*if( activationNumberSacrifice != -1 && numberTurnActivations >= (activationNumberSacrifice - 1))
-			return false;*/
-		
 		if (activatePhases.size() > 0){
 			boolean isPhase = false;
 			String currPhase = AllZone.Phase.getPhase();

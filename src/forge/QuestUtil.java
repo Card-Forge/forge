@@ -122,7 +122,7 @@ public class QuestUtil {
         c.setController(AllZone.HumanPlayer);
         c.setOwner(AllZone.HumanPlayer);
         
-        c.setManaCost("G");
+        //c.setManaCost("G");
         c.addColor("G");
         c.setToken(true);
 
@@ -208,7 +208,7 @@ public class QuestUtil {
         c.setController(AllZone.HumanPlayer);
         c.setOwner(AllZone.HumanPlayer);
         
-        c.setManaCost("G");
+        //c.setManaCost("G");
         c.addColor("G");
         c.setToken(true);
 
@@ -265,7 +265,7 @@ public class QuestUtil {
         c.setController(AllZone.HumanPlayer);
         c.setOwner(AllZone.HumanPlayer);
         
-        c.setManaCost("B");
+        //c.setManaCost("B");
         c.addColor("B");
         c.setToken(true);
 
@@ -322,7 +322,7 @@ public class QuestUtil {
         c.setController(AllZone.HumanPlayer);
         c.setOwner(AllZone.HumanPlayer);
         
-        c.setManaCost("W");
+        //c.setManaCost("W");
         c.addColor("W");
         c.setToken(true);
 
@@ -381,7 +381,7 @@ public class QuestUtil {
         c.setController(AllZone.HumanPlayer);
         c.setOwner(AllZone.HumanPlayer);
         
-        c.setManaCost("R");
+        //c.setManaCost("R");
         c.addColor("R");
         c.setToken(true);
 
@@ -503,7 +503,7 @@ public class QuestUtil {
 		        c.setController(AllZone.HumanPlayer);
 		        c.setOwner(AllZone.HumanPlayer);
 		        
-		        c.setManaCost("G");
+		        //c.setManaCost("G");
 		        c.addColor("G");
 		        c.setToken(true);
 		        
