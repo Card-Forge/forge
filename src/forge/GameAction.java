@@ -110,6 +110,7 @@ public class GameAction {
     	PlayerZone oldBattlefield = AllZone.getZone(Constant.Zone.Battlefield, oldController);
     	PlayerZone newBattlefield = AllZone.getZone(Constant.Zone.Battlefield, newController);
     	
+    	AllZone.TriggerHandler.suppressMode("ChangesZone");
         ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
         ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
         //so "enters the battlefield" abilities don't trigger
@@ -122,6 +123,7 @@ public class GameAction {
         		AllZone.Combat.removeFromCombat(c);
         }
         
+        AllZone.TriggerHandler.clearSuppression("ChangesZone");
         ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
         ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
     }

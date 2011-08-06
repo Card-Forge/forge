@@ -6,6 +6,17 @@ import java.util.HashMap;
 public class TriggerHandler {
 
 	private ArrayList<Trigger> registeredTriggers = new ArrayList<Trigger>();
+	private ArrayList<String> suppressedModes = new ArrayList<String>();
+	
+	public void suppressMode(String mode)
+	{
+		suppressedModes.add(mode);
+	}
+	
+	public void clearSuppression(String mode)
+	{
+		suppressedModes.remove(mode);
+	}
 	
 	public static Trigger parseTrigger(String name,String trigParse,Card host)
 	{
@@ -165,6 +176,10 @@ public class TriggerHandler {
 	
 	public void runTrigger(String mode,HashMap<String,Object> runParams)
 	{
+		if(suppressedModes.contains(mode))
+		{
+			return;
+		}
 		//AP
 		for(Trigger regtrig : registeredTriggers)
 		{
