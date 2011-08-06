@@ -1,7 +1,7 @@
 Name:Witch-Maw Nephilim
 ManaCost:G W U B
 Types:Creature Nephilim
-Text:Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.\r\nWhenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
+Text:Whenever you cast a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.\r\nWhenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
 PT:1/1
 SVar:BuffedBy:Spell
 SVar:Rarity:Rare

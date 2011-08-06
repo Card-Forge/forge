@@ -2367,49 +2367,47 @@ public class GameActionUtil {
 
 	}// Voracious Hatchling
 
-	public static void playCard_Witch_Maw_Nephilim(Card c) {
-		final Player controller = c.getController();
+    public static void playCard_Witch_Maw_Nephilim(Card c) {
+        final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
+        final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
+        CardList list = new CardList();
+        list.addAll(play.getCards());
 
-		list = list.getName("Witch-Maw Nephilim");
+        list = list.getName("Witch-Maw Nephilim");
 
-		if(list.size() > 0) {
+        if (list.size() > 0) {
 
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                final Card card = list.get(i);
 
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
+                Ability ability2 = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
 
-						if(card.getController().equals(AllZone.HumanPlayer)) {
-							String[] choices = {"Yes", "No"};
-							Object choice = AllZone.Display.getChoice("Put two +1/+1 on Witch-Maw Nephilim?",
-									choices);
-							if(choice.equals("Yes")) {
-								card.addCounter(Counters.P1P1, 2);
-							}
-						}
-						if(card.getController().equals(AllZone.ComputerPlayer)) {
-							card.addCounter(Counters.P1P1, 2);
-						}
-					}
-
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-			}
-		}
-	}// Witch-Maw Nephilim
+                        if (card.getController().equals(AllZone.HumanPlayer)) {
+                            String question = "Put two +1/+1 counters on Witch-Maw Nephilim?";
+                            
+                            if (GameActionUtil.showYesNoDialog(card, question)) {
+                                card.addCounter(Counters.P1P1, 2);
+                            }
+                        }
+                        if (card.getController().equals(AllZone.ComputerPlayer)) {
+                            card.addCounter(Counters.P1P1, 2);
+                        }
+                    }
+                }; // ability2
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append(card.getName()).append(" - ").append(c.getController());
+                sb.append(" played a spell and may put two +1/+1 counters on Witch-Maw Nephilim.");
+                ability2.setStackDescription(sb.toString());
+                
+                AllZone.Stack.add(ability2);
+            }
+        }
+    }// Witch-Maw Nephilim
 
 	public static void playCard_Gelectrode(Card c) {
 		final Player controller = c.getController();
