@@ -28,7 +28,7 @@ public class QuestNurseryStall extends QuestAbstractBazaarStall {
 
 
         itemList.add(new QuestAbstractBazaarItem(plant.getName(),
-                plant.getUpgradeDescription(),
+                formatDescription(plant),
                 plant.getUpgradePrice(),
                 GuiUtils.getIconFromFile(plant.getImageName())) {
             @Override
@@ -38,6 +38,16 @@ public class QuestNurseryStall extends QuestAbstractBazaarStall {
         });
 
         return itemList;
+    }
+
+    private String formatDescription(QuestPetAbstract pet) {
+        String description =
+                "<em>"+pet.getDescription()+"</em><br>" + pet.getUpgradeDescription()+
+                "<br><br><u>Current stats:</u> " + pet.getStats()+
+                "<br><u>Upgraded stats:</u> " + pet.getUpgradedStats();
+
+
+        return description;
     }
 
 
