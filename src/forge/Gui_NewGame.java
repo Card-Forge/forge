@@ -389,9 +389,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         this.getContentPane().add(jPanel1, "span 2, grow");
         jPanel1.add(jLabel2);
-        jPanel1.add(humanComboBox, "wrap");
+        jPanel1.add(humanComboBox, "sg combobox, wrap");
         jPanel1.add(jLabel3);
-        jPanel1.add(computerComboBox); 
+        jPanel1.add(computerComboBox, "sg combobox"); 
         this.getContentPane().add(deckEditorButton, "sg buttons, align 50% 50%, wrap");
         
         this.getContentPane().add(jPanel3, "span 2, grow");
