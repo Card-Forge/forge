@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Barbarian
 Text:no text
 PT:3/2
-A:AB$Pump | Cost$ Discard<1/Any> | NumAtt$ +1 | KW$ First Strike | SpellDescription$ CARDNAME gets +1/+0 and gains first strike until end of turn.
+A:AB$Pump | Cost$ Discard<1/Random> | NumAtt$ +1 | KW$ First Strike | SpellDescription$ CARDNAME gets +1/+0 and gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_lancer.jpg
 End
