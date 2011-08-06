@@ -4754,9 +4754,10 @@ Flash
 Buoyancy
 1 U
 Enchantment Aura
-Enchanted creature has Flying.
+Enchanted creature has flying.
 Enchant creature
 Flash
+enPump:Flying
 
 Feast of the Unicorn
 3 B
@@ -5801,6 +5802,7 @@ Hero's Resolve
 Enchantment Aura
 Enchanted creature gets +1/+5.
 Enchant creature
+enPump:+1/+5
 
 Silent Attendant
 2 W
@@ -5978,6 +5980,7 @@ Cloak of Mists
 Enchantment Aura
 Enchanted creature is unblockable.
 Enchant creature
+enPump:Unblockable
 
 Nourish
 G G
