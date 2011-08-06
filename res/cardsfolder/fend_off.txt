@@ -2,7 +2,7 @@ Name:Fend Off
 ManaCost:1 W
 Types:Instant
 Text:no text
-K:spPumpTgtCurse:HIDDEN Prevent all combat damage that would be dealt by CARDNAME.:Prevent all combat damage that would be dealt by target creature this turn.
+A:SP$Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
 K:Cycling:2
 SVar:RemAIDeck:True
 SVar:Rarity:Common

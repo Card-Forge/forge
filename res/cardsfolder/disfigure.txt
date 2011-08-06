@@ -2,7 +2,7 @@ Name:Disfigure
 ManaCost:B
 Types:Instant
 Text:no text
-K:spPumpTgtCurse:-2/-2
+A:SP$Pump | Cost$ B| ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disfigure.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/87.jpg

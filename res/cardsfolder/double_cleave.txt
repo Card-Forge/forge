@@ -2,7 +2,7 @@ Name:Double Cleave
 ManaCost:1 RW
 Types:Instant
 Text:no text
-K:spPumpTgt:Double Strike
+A:SP$Pump | Cost$ 1 RW | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/double_cleave.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/135.jpg

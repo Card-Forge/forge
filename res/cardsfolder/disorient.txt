@@ -2,7 +2,7 @@ Name:Disorient
 ManaCost:3 U
 Types:Instant
 Text:no text
-K:spPumpTgtCurse:-7/-0
+A:SP$Pump | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -7 | IsCurse$ True | SpellDescription$ Target creature gets -7/-0 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disorient.jpg
