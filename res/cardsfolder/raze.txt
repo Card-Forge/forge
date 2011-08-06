@@ -1,0 +1,9 @@
+Name:Raze
+ManaCost:R
+Types:Sorcery
+Text:no text
+A:SP$Destroy|Cost$R Sac<1/Land>|ValidTgts$Land|TgtPrompt$Select target land|SpellDescription$Destroy target lands.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/raze.jpg
+End
