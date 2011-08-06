@@ -382,7 +382,7 @@ public class GameActionUtil {
 					Ability ability = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-							enchantedCard.addCounter(Counters.P0M2, 1);
+							enchantedCard.addCounter(Counters.M0M2, 1);
 						}
 					};//Ability
 					

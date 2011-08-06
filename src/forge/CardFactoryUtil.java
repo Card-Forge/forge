@@ -4422,11 +4422,10 @@ public class CardFactoryUtil {
         BRIBERY(),
         ICE(),
         M1M1("-1/-1"),
-        P0M2("+0/-2"),
         TIME(),
         */
     	return c == Counters.AGE || c == Counters.BLAZE || c == Counters.BRIBERY || c == Counters.DOOM || c == Counters.ICE ||
-        		c == Counters.M1M1 || c == Counters.P0M2 || c == Counters.TIME;
+        		c == Counters.M1M1 || c == Counters.M0M2 || c == Counters.M0M1|| c == Counters.TIME;
     }
 
     public static String checkEmblemKeyword(Card c) 
