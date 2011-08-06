@@ -4450,11 +4450,6 @@ public class GameActionUtil {
 			}
 		}
 		
-		if(CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles") > 0 && c.getNetAttack() > 0) {
-			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles"); k++) {
-				playerCombatDamage_May_draw(c);
-			}
-		}
 		if(CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0 && c.getNetAttack() > 0) {
 			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {
 				playerCombatDamage_lose_halflife_up(c);
@@ -4809,25 +4804,6 @@ public class GameActionUtil {
 			AllZone.EndOfTurn.addAt(dealtDmg);
 
 		} // if
-	}
-
-	private static void playerCombatDamage_May_draw(Card c) {
-		final Player player = c.getController();
-
-		if(c.getNetAttack() > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					player.mayDrawCard();
-				}
-			};// ability2
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(player).append(" may draw a card.");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		}
 	}
 
 	private static void playerCombatDamage_lose_halflife_up(Card c) {
