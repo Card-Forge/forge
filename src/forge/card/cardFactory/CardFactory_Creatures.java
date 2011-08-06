@@ -152,7 +152,8 @@ public class CardFactory_Creatures {
                     return list.containsName("Glorious Anthem") || list.containsName("Gaea's Anthem");
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
@@ -203,7 +204,8 @@ public class CardFactory_Creatures {
                     return super.canPlay();
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -856,7 +858,8 @@ public class CardFactory_Creatures {
                 }//canPlay()
             };
             card.addComesIntoPlayCommand(intoPlay);
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1094,8 +1097,8 @@ public class CardFactory_Creatures {
                     }//else
                 }//execute()
             };
-            
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
                 
 				private static final long serialVersionUID = -1506199222879057809L;
@@ -1551,7 +1554,8 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(commandComes);
             card.addLeavesPlayCommand(commandLeavesPlay);
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = -62128538115338896L;
                 
@@ -3416,7 +3420,8 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = 6440845807532409545L;
                 
@@ -4086,7 +4091,8 @@ public class CardFactory_Creatures {
                     return super.canPlayAI() && list.size() > 0;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -4104,7 +4110,8 @@ public class CardFactory_Creatures {
                     return super.canPlayAI() && list.size() > 0;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -4123,7 +4130,8 @@ public class CardFactory_Creatures {
                     return super.canPlayAI() && list.size() > 0;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -4142,7 +4150,8 @@ public class CardFactory_Creatures {
                     return super.canPlayAI() && list.size() > 0;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -4161,7 +4170,8 @@ public class CardFactory_Creatures {
                     return super.canPlayAI() && list.size() > 0;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -4180,7 +4190,8 @@ public class CardFactory_Creatures {
                     return super.canPlayAI() && list.size() > 0;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -4199,7 +4210,8 @@ public class CardFactory_Creatures {
                     return super.canPlayAI() && list.size() > 0;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -4262,7 +4274,8 @@ public class CardFactory_Creatures {
                     return super.canPlay() && 5 <= ComputerUtil.getAvailableMana().size() - 2;
                 }
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
 
             Command intoPlay = new Command() {
@@ -5718,8 +5731,8 @@ public class CardFactory_Creatures {
         			  card.setBaseDefense(sumToughness[0]);
         		  }
         	  };
-
-        	  card.clearSpellAbility();
+              // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	  card.clearFirstSpellAbility();
         	  card.addComesIntoPlayCommand(intoPlay);
         	  card.addSpellAbility(new Spell_Permanent(card) {
         		  private static final long serialVersionUID = 304885517082977723L;
@@ -6422,7 +6435,8 @@ public class CardFactory_Creatures {
             		}
             	}
             };
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(copy);
             copy.setStackDescription(cardName+" - enters the battlefield as a copy of selected card.");
             copy.setBeforePayMana(runtime);
