@@ -1,3 +1,9 @@
+Kjeldoran Outpost
+no cost
+Land
+If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.
+tap: add W
+
 Lone Missionary
 1 W
 Creature Kor Monk

@@ -2847,7 +2847,76 @@ class CardFactory_Lands {
            
         }//*************** END ************ END **************************
 
-        
+      //*************** START *********** START **************************
+        if(cardName.equals("Kjeldoran Outpost")) {
+           final Command comesIntoPlay = new Command() {
+              private static final long serialVersionUID = 6175830918425915833L;
+              final String player = card.getController();
+              public void execute() {
+                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                 CardList plains = new CardList(play.getCards());
+                 plains = plains.getType("Plains");
+
+                 if( player.equals(Constant.Player.Computer)) {
+                    if( plains.size() > 0 ) {
+                       CardList tappedPlains = new CardList(plains.toArray());
+                       tappedPlains = tappedPlains.filter(new CardListFilter() {
+                          public boolean addCard(Card c) {
+                             return c.isTapped();
+                          }
+                       });
+                       if( tappedPlains.size() > 0 ) {
+                          AllZone.GameAction.sacrifice(tappedPlains.get(0));
+                       }
+                       else {
+                          AllZone.GameAction.sacrifice(plains.get(0));
+                       }
+                       //if any are tapped, sacrifice it
+                       //else sacrifice random
+                    }
+                    else {
+                       AllZone.GameAction.sacrifice(card);
+                    }
+                 }
+                 else { //this is the human resolution
+                    //this works with correct input
+                    //really, what I want is Cancel to sacrifice Kjeldoran Outpost
+                    Input target = new Input() {
+                       private static final long serialVersionUID = 6653677835621129465L;
+                       public void showMessage() {
+                          AllZone.Display.showMessage("Kjeldoran Outpost - Select one plains to sacrifice");
+                          ButtonUtil.enableOnlyCancel();
+                       }
+                       public void selectButtonCancel() {
+                    	   AllZone.GameAction.sacrifice(card);
+                    	   stop();
+                       }
+                       public void selectCard(Card c, PlayerZone zone) {
+                          if(c.isLand() && zone.is(Constant.Zone.Play) && c.getType().contains("Plains")) {
+                             AllZone.GameAction.sacrifice(c);
+                             stop();
+                          }
+                       }//selectCard()
+                    };//Input
+                    AllZone.InputControl.setInput(target);
+                 }
+              }
+           };
+
+           final Ability_Tap ability2 = new Ability_Tap(card, "1 W") {
+              private static final long serialVersionUID = 6987135326425915833L;
+              public void resolve() {
+                 CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {"Creature", "Soldier"}, 1, 1, new String[] {""});
+              }
+           };//SpellAbility
+
+           card.addComesIntoPlayCommand(comesIntoPlay);
+           card.addSpellAbility(ability2);
+           ability2.setDescription("tap: Put a 1/1 white soldier token in play.");
+           ability2.setStackDescription("Kjeldoran Outpost - put a 1/1 white soldier token in play");
+           ability2.setBeforePayMana(new Input_PayManaCost(ability2));
+
+        }//*************** END ************ END **************************
 
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
