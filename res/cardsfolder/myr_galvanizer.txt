@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Creature Myr
 Text:no text
 PT:2/2
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Myr!NotSelf:Other Myr creatures you control get +1/+1.
+K:stPumpAll:Creature.Myr+Other+YouCtrl:1/1:No Condition:Other Myr creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_galvanizer.jpg

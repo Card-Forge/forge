@@ -2,7 +2,7 @@ Name:Lodestone Myr
 ManaCost:4
 Types:Artifact Creature Myr
 Text:no text
-PT:3/3
+PT:2/2
 K:Trample
 K:abPump tapXType<1/Artifact>:+1/+1
 SVar:Rarity:Rare
