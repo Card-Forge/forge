@@ -2704,6 +2704,7 @@ res/cardsfolder/goblin_spy.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_striker.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_swine_rider.txt svneol=native#text/plain
 res/cardsfolder/goblin_taskmaster.txt -text svneol=native#text/plain
+res/cardsfolder/goblin_tinkerer.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_trenches.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_tunneler.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_turncoat.txt svneol=native#text/plain
