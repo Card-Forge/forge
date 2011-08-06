@@ -112,6 +112,11 @@ public class AbilityFactory_Effect {
 	public static String effectStackDescription(AbilityFactory af, SpellAbility sa){
 		StringBuilder sb = new StringBuilder();
 
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		
 		sb.append(sa.getDescription());
 
 		Ability_Sub abSub = sa.getSubAbility();
@@ -186,6 +191,7 @@ public class AbilityFactory_Effect {
 		eff.setController(controller);
 		eff.setOwner(controller);
 		eff.setImageName(card.getImageName());
+		eff.setColor(card.getColor());
 		
 		// Effects should be Orange or something probably
 		

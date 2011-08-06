@@ -4,14 +4,15 @@ package forge;
 
 public class PlayerUtil {
 	public static boolean worshipFlag(Player player) {
-    	if( AllZoneUtil.isCardInPlay("Ali from Cairo", player)
-    			|| (AllZoneUtil.isCardInPlay("Worship", player) && AllZoneUtil.getCreaturesInPlay(player).size() > 0)
-    			|| AllZoneUtil.isCardInPlay("Fortune Thief", player)
-    			|| AllZoneUtil.isCardInPlay("Sustaining Spirit", player)) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+		// Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+		list = list.getKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return !c.isFaceDown();
+			}
+		});
+		
+		return list.size() > 0;
     }
 }

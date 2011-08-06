@@ -225,6 +225,7 @@ res/cardsfolder/angelic_shield.txt svneol=native#text/plain
 res/cardsfolder/angelic_voices.txt -text svneol=native#text/plain
 res/cardsfolder/angelic_wall.txt -text svneol=native#text/plain
 res/cardsfolder/angels_feather.txt -text svneol=native#text/plain
+res/cardsfolder/angels_grace.txt -text svneol=native#text/plain
 res/cardsfolder/angels_mercy.txt -text svneol=native#text/plain
 res/cardsfolder/angelsong.txt -text svneol=native#text/plain
 res/cardsfolder/anger.txt -text svneol=native#text/plain

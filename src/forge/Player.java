@@ -905,23 +905,36 @@ public abstract class Player extends MyObservable{
     }
     
     public boolean cantLose(){
-    	if ((AllZoneUtil.getPlayerCardsInPlay(this, "Platinum Angel").size() > 0) ||
-    			(AllZoneUtil.getPlayerCardsInPlay(getOpponent(), "Abyssal Persecutor").size() > 0)){
+    	CardList list = AllZoneUtil.getPlayerCardsInPlay(this);
+    	list = list.getKeyword("You can't lose the game.");
+    	
+    	if (list.size() > 0)
     		return true;
-    	}
-    	return false;
+    	
+    	CardList oppList = AllZoneUtil.getPlayerCardsInPlay(getOpponent());
+    	oppList = oppList.getKeyword("Your opponents can't win the game.");
+    	
+    	return oppList.size() > 0;
     }
     
     public boolean cantLoseForZeroOrLessLife() {
-    	return AllZoneUtil.isCardInPlay("Lich", this);
+    	CardList list = AllZoneUtil.getPlayerCardsInPlay(this);
+    	list = list.getKeyword("You don't lose the game for having 0 or less life.");
+    	
+    	return list.size() > 0;
     }
     
     public boolean cantWin(){
-    	if ((AllZoneUtil.getPlayerCardsInPlay(getOpponent(), "Platinum Angel").size() > 0) ||
-    			(AllZoneUtil.getPlayerCardsInPlay(this, "Abyssal Persecutor").size() > 0)){
+    	CardList list = AllZoneUtil.getPlayerCardsInPlay(getOpponent());
+    	list = list.getKeyword("You can't win the game.");
+    	
+    	if (list.size() > 0)
     		return true;
-    	}
-    	return false;
+    	
+    	CardList oppList = AllZoneUtil.getPlayerCardsInPlay(this);
+    	oppList = oppList.getKeyword("Your opponents can't lose the game.");
+    	
+    	return oppList.size() > 0;
     }
     
     public boolean hasLost(){
