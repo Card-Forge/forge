@@ -301,6 +301,7 @@ public class Phase extends MyObservable
 			AllZone.ManaPool.clearPool();
         
         if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
+        	AllZone.Stack.unfreezeStack();
         	nCombatsThisTurn++;
         	CardList list = new CardList();
 	        list.addAll(AllZone.Combat.getAttackers());
@@ -347,6 +348,8 @@ public class Phase extends MyObservable
         
         if (is(Constant.Phase.Combat_Declare_Blockers)){
         	// Before damage is assigned, confirm how things are blocked/blocking
+        	AllZone.Stack.unfreezeStack();
+        	
         	CardList list = new CardList();
             list.addAll(AllZone.Combat.getAllBlockers().toArray());
             list.addAll(AllZone.pwCombat.getAllBlockers().toArray());

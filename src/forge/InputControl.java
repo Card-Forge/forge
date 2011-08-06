@@ -64,11 +64,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         
         // Special Inputs needed for the following phases:        
         if(phase.equals(Constant.Phase.Combat_Declare_Attackers)) {
+        	AllZone.Stack.freezeStack();
         	if (playerTurn.isHuman())
         		return new Input_Attack();
         }
         
         else if(phase.equals(Constant.Phase.Combat_Declare_Blockers)) {
+        	AllZone.Stack.freezeStack();
             if (playerTurn.isHuman()){
             	AllZone.Computer.getComputer().declare_blockers();
             	return null;
