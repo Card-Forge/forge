@@ -20114,65 +20114,7 @@ public class CardFactory_Creatures {
         	    
         }
         //*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Fauna Shaman")) {
-            SpellAbility ability = new Ability_Tap(card, "G") {
-   
-				private static final long serialVersionUID = 5191841182000183907L;
-
-				@Override
-                public void resolve() {
-					Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
-                    else computerResolve();
-                }//resolve()
-                
-                public void humanResolve() {
-                    CardList handCreatures = new CardList(AllZone.Human_Hand.getCards());
-                    handCreatures = handCreatures.getType("Creature");
-                    
-                    if(handCreatures.size() == 0) return;
-                    
-                    Object discard = AllZone.Display.getChoiceOptional("Select Creature to discard",
-                            handCreatures.toArray());
-                    if(discard != null) {
-                        
-                        CardList creatures = new CardList(AllZone.Human_Library.getCards());
-                        creatures = creatures.getType("Creature");
-                        
-                        if(creatures.size() != 0) {
-                            Object check = AllZone.Display.getChoiceOptional("Select Creature",
-                                    creatures.toArray());
-                            if(check != null) {
-                                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                                AllZone.GameAction.moveTo(hand, (Card) check);
-                            }
-                            AllZone.GameAction.shuffle(AllZone.HumanPlayer);
-                        }
-                        AllZone.GameAction.discard((Card) discard, this);
-                    }
-                }
-                
-                public void computerResolve() {
-                //TODO
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-            };//SpellAbility
-            
-            //card.clearSpellAbility();
-            ability.setDescription("Tap, G: Discard a creature card: Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.");
-            ability.setStackDescription(cardName + " - search for a creature card and put into hand");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END ************************** 
-
-        
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Gwafa Hazid, Profiteer")) {
             final Ability_Tap ability = new Ability_Tap(card, "W U") {
