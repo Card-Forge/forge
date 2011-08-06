@@ -9512,17 +9512,14 @@ public class GameActionUtil {
 			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
-					int damage = 3 - playerHandSize;
-					if (damage < 1) 
-						return;
+					int damage = 4 - AllZone.getZone(Constant.Zone.Hand, player).size();
 					player.addDamage(damage, source);
 				}
 			};// Ability
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append(storm).append(" - deals X damage to ").append(player);
-			sb.append(", where X is 3 minus the number of cards in his or her hand.");
+			sb.append(", where X is 4 minus the number of cards in his or her hand.");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
