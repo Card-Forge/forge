@@ -916,6 +916,7 @@ res/cardsfolder/cavalry_master.txt -text svneol=native#text/plain
 res/cardsfolder/cave_in.txt -text svneol=native#text/plain
 res/cardsfolder/cave_people.txt -text svneol=native#text/plain
 res/cardsfolder/cave_sense.txt -text svneol=native#text/plain
+res/cardsfolder/cave_tiger.txt -text svneol=native#text/plain
 res/cardsfolder/cavern_crawler.txt -text svneol=native#text/plain
 res/cardsfolder/cavern_harpy.txt -text svneol=native#text/plain
 res/cardsfolder/cavern_thoctar.txt -text svneol=native#text/plain
