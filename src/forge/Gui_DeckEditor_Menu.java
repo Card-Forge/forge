@@ -252,7 +252,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
                 //private String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity"};
                 Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
                 
-                g.getTopTableModel().sort(7, true);
+                g.getTopTableModel().sort(99, true);
             }
         });
         

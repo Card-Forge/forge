@@ -92,7 +92,12 @@ public class TableSorter implements Comparator<Card>, NewConstants
       aCom = getRarity(a);
       bCom = getRarity(b);
     }
-    else if (column == 7)//New First
+    else if (column == 7)//Value
+    {
+      aCom = getValue(a);
+      bCom = getValue(b);
+    }
+    else if (column == 99)//New First
     {
       aCom = sortNewFirst(a);
       bCom = sortNewFirst(b);
@@ -128,6 +133,11 @@ public class TableSorter implements Comparator<Card>, NewConstants
       return Integer.valueOf(5);
   }
 
+  final private Long getValue(Card c)
+  {
+	  return c.getValue();
+  }
+  
   final public static String getColor(Card c)
   {
     ArrayList list = CardUtil.getColors(c);

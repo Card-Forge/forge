@@ -80,6 +80,7 @@ class TableModel extends AbstractTableModel {
                 column.setPreferredWidth(40);
                 column.setMaxWidth(40);
             }
+            
         }//for
         
         for(int j = 0; j < table.getColumnCount(); j++) {
