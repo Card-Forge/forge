@@ -1,9 +1,9 @@
 Abraham Lincoln
-Albert Einstein
+Albert Einstein 3
 Batman
 Blackbeard
 Boba Fett
-Buffy III
+Buffy 3
 C3PO
 Comic Book Guy
 Crocodile Dundee 3
@@ -11,14 +11,17 @@ Cyclops
 Da Vinci 3
 Darth Vador
 Data
-Frodo
+Doc Holiday 3
 Genghis Khan 3
 Green Lantern
 Han Solo
+Homer Simpson 3
 Iceman
+Indiana Jones 3
 Jabba the Hut
+James Bond 3
 James T Kirk
-King Edward III
+King Edward 3
 Kojak 3
 Luke Skywalker
 Magneto
@@ -29,12 +32,12 @@ Newton
 Picard
 Pinky and the Brain
 Professor X
-R2-D2
+Rocky 3
 Rogue
+Seabiscuit 3
 Sherlock Holmes 3
 Silver Surfer
 Storm 3
-Superman
 Terminator
 Uncle Owen
 Wolverine
