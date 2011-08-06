@@ -1,3 +1,10 @@
+Champion's Drake
+1 U
+Creature Drake
+Champion's Drake gets +3/+3 as long as you control a creature with three or more level counters on it.
+1/1
+Flying
+
 Halimar Wavewatch
 1 U
 Creature Merfolk Soldier

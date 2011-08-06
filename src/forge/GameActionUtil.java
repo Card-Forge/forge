@@ -10767,6 +10767,46 @@ public class GameActionUtil {
 			else return false;
 		}
 	};
+	
+	public static Command Champions_Drake = new Command() {
+		private static final long serialVersionUID = 8076177362922156784L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Champion's Drake");
+
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				if(hasThreeLevels(c)) {
+					c.setBaseAttack(4);
+					c.setBaseDefense(4);
+				} else {
+					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+				}
+			}
+
+		}// execute()
+
+		private boolean hasThreeLevels(Card c) {
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+
+			CardList levels = new CardList();
+			levels.addAll(play.getCards());
+
+			levels = levels.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.isCreature() && c.getCounters(Counters.LEVEL) >= 3;
+				}
+			});
+			if(levels.size() > 0) return true;
+			else return false;
+		}
+	};
 
 
 	public static Command Wild_Nacatl                 = new Command() {
@@ -15632,6 +15672,7 @@ public class GameActionUtil {
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
+		commands.put("Champions_Drake", Champions_Drake);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);
