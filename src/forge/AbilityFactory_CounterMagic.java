@@ -28,6 +28,7 @@ public class AbilityFactory_CounterMagic {
 	private String targetType = null;
 	private String destination = null;
 	private String[] splitTargetingRestrictions = null;
+	private String[] splitSpellTargetRestrictions = null;
 	private String[] splitExtraActions;
 	private String unlessCost = null;
 
@@ -42,6 +43,9 @@ public class AbilityFactory_CounterMagic {
 			splitTargetingRestrictions = params.get("CounterValid").split(",");
 		}
 		else splitTargetingRestrictions = new String[] {"Card"};
+		if(params.containsKey("SpellTarget")) {
+			splitSpellTargetRestrictions = params.get("SpellTarget").split(",");
+		}
 		if(params.containsKey("ExtraActions")) {
 			splitExtraActions = params.get("ExtraActions").split(" ");
 		}
@@ -122,7 +126,7 @@ public class AbilityFactory_CounterMagic {
 	private void counterResolve(final AbilityFactory af, final SpellAbility sa) {
 		Card source = sa.getSourceCard();
 		//copied from spCounter
-		if(matchSpellAbility(sa.getSourceCard(), tgt[0], splitTargetingRestrictions, targetType) 
+		if(matchSpellAbility(sa.getSourceCard(), tgt[0], splitTargetingRestrictions, splitSpellTargetRestrictions, targetType) 
 				&& AllZone.Stack.contains(tgt[0])
 				&& !tgt[0].getSourceCard().keywordsContain("CARDNAME can't be countered.")) {
 			final SpellAbility tgtSA = tgt[0];
@@ -243,7 +247,7 @@ public class AbilityFactory_CounterMagic {
 
 		for(int i = 0; i < choosables.size(); i++) {
 			if(!matchSpellAbility(sa.getSourceCard(), choosables.get(i), 
-					splitTargetingRestrictions, targetType)) {
+					splitTargetingRestrictions, splitSpellTargetRestrictions, targetType)) {
 				choosables.remove(i);
 			}
 		}
@@ -263,7 +267,7 @@ public class AbilityFactory_CounterMagic {
 		if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()))
 			return false;
 		
-		if(matchSpellAbility(sa.getSourceCard(), topSA, splitTargetingRestrictions, targetType)) {
+		if(matchSpellAbility(sa.getSourceCard(), topSA, splitTargetingRestrictions, splitSpellTargetRestrictions, targetType)) {
 			tgt[0] = topSA;
 			toReturn = true;
 		}
@@ -462,7 +466,9 @@ public class AbilityFactory_CounterMagic {
 		}
 	}
 
-	private static boolean matchSpellAbility(Card srcCard, SpellAbility sa, String[] splitRestrictions, String targetType) {
+	private static boolean matchSpellAbility(Card srcCard, SpellAbility sa, String[] splitRestrictions, String[] splitTargetRestrictions, String targetType) {
+		boolean result = false;
+		
 		if(targetType.equals("Spell")) {
 			if(sa.isAbility()) {
 				System.out.println(srcCard.getName() + " can only counter spells, not abilities.");
@@ -482,8 +488,65 @@ public class AbilityFactory_CounterMagic {
 			throw new IllegalArgumentException("Invalid target type for card " + srcCard.getName());
 		}
 		
-		return sa.getSourceCard().isValidCard(splitRestrictions, srcCard.getController(), srcCard);
+		if(splitTargetRestrictions != null)
+		{
+			if(sa.getTarget() != null)
+			{
+				for(Object o : sa.getTarget().getTargets())
+				{
+					if(matchesValid(o,splitTargetRestrictions,srcCard))
+					{
+						result = true;
+						break;
+					}
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
+		if(!matchesValid(sa.getSourceCard(),splitRestrictions,srcCard))
+		{
+			return false;
+		}
+		
+		return result;
 	}//matchSpellAbility
+	
+	private static boolean matchesValid(Object o,String[] valids,Card srcCard)
+	{
+		if(o instanceof Card)
+		{
+			Card c = (Card)o;
+			return c.isValidCard(valids, srcCard.getController(), srcCard);
+		}
+		
+		if(o instanceof Player)
+		{
+			for(String v : valids)
+			{
+				if(v.equalsIgnoreCase("Player"))
+				{
+					return true;
+				}
+				if(v.equalsIgnoreCase("Opponent"))
+				{
+					if(o.equals(srcCard.getController().getOpponent()))
+					{
+						return true;
+					}
+				}
+				if(v.equalsIgnoreCase("You"))
+				{
+					return o.equals(srcCard.getController());
+				}
+			}
+		}
+		
+		return false;
+	}
 
 	private Input getInput(final SpellAbility sa) {
 		Input runtime = new Input() {
@@ -499,7 +562,7 @@ public class AbilityFactory_CounterMagic {
 				}
 
 				for(int i = 0; i < choosables.size(); i++) {
-					if(!matchSpellAbility(sa.getSourceCard(), choosables.get(i), splitTargetingRestrictions, targetType) || choosables.get(i).getSourceCard().equals(sa.getSourceCard())) {
+					if(!matchSpellAbility(sa.getSourceCard(), choosables.get(i), splitTargetingRestrictions, splitSpellTargetRestrictions, targetType) || choosables.get(i).getSourceCard().equals(sa.getSourceCard())) {
 						choosables.remove(i);
 					}
 				}
