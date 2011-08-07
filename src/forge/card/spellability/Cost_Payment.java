@@ -1368,7 +1368,7 @@ public class Cost_Payment {
                     if (typeList.size() == 0) 
                     	cancel();
                         
-                    Object o = GuiUtils.getChoiceOptional("Select a card", typeList.toArray());
+                    Object o = GuiUtils.getChoiceOptional("Exile from grave", typeList.toArray());
                     
                     if (o != null) {
                         Card c = (Card) o;
