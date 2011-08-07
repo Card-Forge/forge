@@ -718,16 +718,13 @@ public class AbilityFactory {
 				SA = AbilityFactory_Animate.createDrawbackAnimateAll(this);
 		}
         
-        if(API.equals("Unpump")){
+        if(API.equals("Debuff")){
 			if (isAb)
-				SA = AbilityFactory_Unpump.createAbilityUnpump(this);
+				SA = AbilityFactory_Debuff.createAbilityDebuff(this);
 			else if (isSp)
-				SA = AbilityFactory_Unpump.createSpellUnpump(this);
+				SA = AbilityFactory_Debuff.createSpellDebuff(this);
 			else if (isDb)
-				SA = AbilityFactory_Unpump.createDrawbackUnpump(this);
-			
-			if (isAb || isSp)
-				hostCard.setSVar("PlayMain1", "TRUE");
+				SA = AbilityFactory_Debuff.createDrawbackDebuff(this);
 		}
 
 		if (SA == null)

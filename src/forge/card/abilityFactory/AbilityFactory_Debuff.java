@@ -24,88 +24,88 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbility_Restriction;
 import forge.card.spellability.Target;
 
-public class AbilityFactory_Unpump {
+public class AbilityFactory_Debuff {
 	// *************************************************************************
-	// ***************************** Unpump ************************************
+	// ***************************** Debuff ************************************
 	// *************************************************************************
 
-	public static SpellAbility createAbilityUnpump(final AbilityFactory af) {
-		final SpellAbility abUnpump = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+	public static SpellAbility createAbilityDebuff(final AbilityFactory af) {
+		final SpellAbility abDebuff = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = 3536198601841771383L;
 
 			@Override
 			public String getStackDescription() {
-				return unpumpStackDescription(af, this);
+				return debuffStackDescription(af, this);
 			}
 
 			@Override
 			public boolean canPlayAI() {
-				return unpumpCanPlayAI(af, this);
+				return debuffCanPlayAI(af, this);
 			}
 
 			@Override
 			public void resolve() {
-				unpumpResolve(af, this);
+				debuffResolve(af, this);
 			}
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return unpumpTriggerAI(af, this, mandatory);
+				return debuffTriggerAI(af, this, mandatory);
 			}
 
 		};
-		return abUnpump;
+		return abDebuff;
 	}
 
-	public static SpellAbility createSpellUnpump(final AbilityFactory af) {
-		final SpellAbility spUnpump = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+	public static SpellAbility createSpellDebuff(final AbilityFactory af) {
+		final SpellAbility spDebuff = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = -54573740774322697L;
 
 			@Override
 			public String getStackDescription() {
-				return unpumpStackDescription(af, this);
+				return debuffStackDescription(af, this);
 			}
 
 			@Override
 			public boolean canPlayAI() {
-				return unpumpCanPlayAI(af, this);
+				return debuffCanPlayAI(af, this);
 			}
 
 			@Override
 			public void resolve() {
-				unpumpResolve(af, this);
+				debuffResolve(af, this);
 			}
 
 		};
-		return spUnpump;
+		return spDebuff;
 	}
 
-	public static SpellAbility createDrawbackUnpump(final AbilityFactory af) {
-		final SpellAbility dbUnpump = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+	public static SpellAbility createDrawbackDebuff(final AbilityFactory af) {
+		final SpellAbility dbDebuff = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
 			private static final long serialVersionUID = -4728590185604233229L;
 
 			@Override
 			public String getStackDescription() {
-				return unpumpStackDescription(af, this);
+				return debuffStackDescription(af, this);
 			}
 
 			@Override
 			public void resolve() {
-				unpumpResolve(af, this);
+				debuffResolve(af, this);
 			}
 
 			@Override
 			public boolean chkAI_Drawback() {
-				return unpumpDrawbackAI(af, this);
+				return debuffDrawbackAI(af, this);
 			}
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return unpumpTriggerAI(af, this, mandatory);
+				return debuffTriggerAI(af, this, mandatory);
 			}
 
 		};
-		return dbUnpump;
+		return dbDebuff;
 	}
 
 	private static ArrayList<String> getKeywords(HashMap<String,String> params) {
@@ -116,7 +116,7 @@ public class AbilityFactory_Unpump {
 		return kws;
 	}
 
-	private static String unpumpStackDescription(AbilityFactory af, SpellAbility sa) {
+	private static String debuffStackDescription(AbilityFactory af, SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
 		Card host = af.getHostCard();
 		ArrayList<String> kws = getKeywords(params);
@@ -166,7 +166,8 @@ public class AbilityFactory_Unpump {
 		return sb.toString();
 	}
 
-	private static boolean unpumpCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+	private static boolean debuffCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		System.out.println("Checking debuff canPlayAI()");
 		// if there is no target and host card isn't in play, don't activate
     	if (af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(af.getHostCard())) 
     		return false;
@@ -195,16 +196,16 @@ public class AbilityFactory_Unpump {
     	if (!ComputerUtil.canPayCost(sa))
     		return false;
     	
+    	System.out.println("Past abCost in canPlayAI");
+    	
     	HashMap<String,String> params = af.getMapParams();
     	SpellAbility_Restriction restrict = sa.getRestrictions();
     	
     	// Phase Restrictions
     	if (AllZone.Stack.size() == 0 && AllZone.Phase.isBefore(Constant.Phase.Combat_Begin)){
     		// Instant-speed pumps should not be cast outside of combat when the stack is empty
-    		if (!af.isCurse()){
     			if (!AbilityFactory.isSorcerySpeed(sa))
     				return false;
-    		}
     	}
     	else if (AllZone.Stack.size() > 0){
     		// TODO: pump something only if the top thing on the stack will kill it via damage
@@ -232,22 +233,22 @@ public class AbilityFactory_Unpump {
 			}*/
         }
         else
-        	return unpumpTgtAI(af, sa, getKeywords(params), false);
+        	return debuffTgtAI(af, sa, getKeywords(params), false);
         
         return false;
 	}
 
-	private static boolean unpumpDrawbackAI(AbilityFactory af, SpellAbility sa) {
+	private static boolean debuffDrawbackAI(AbilityFactory af, SpellAbility sa) {
 		if(af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
 			//TODO - copied from AF_Pump.pumpDrawbackAI() - what shoul be here?
 		}
 		else
-			return unpumpTgtAI(af, sa, getKeywords(af.getMapParams()), false);
+			return debuffTgtAI(af, sa, getKeywords(af.getMapParams()), false);
 
 		return true; 
-	}//unpumpDrawbackAI()
+	}//debuffDrawbackAI()
 
-	private static boolean unpumpTgtAI(AbilityFactory af, SpellAbility sa, ArrayList<String> kws, boolean mandatory) {
+	private static boolean debuffTgtAI(AbilityFactory af, SpellAbility sa, ArrayList<String> kws, boolean mandatory) {
 		//this would be for evasive things like Flying, Unblockable, etc
 		if(!mandatory && AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility))
 			return false;
@@ -264,7 +265,7 @@ public class AbilityFactory_Unpump {
 		//3a. remove Persist?
 
 		if (list.isEmpty())
-			return mandatory && unpumpMandatoryTarget(af, sa, mandatory);
+			return mandatory && debuffMandatoryTarget(af, sa, mandatory);
 
 		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 			Card t = null;
@@ -273,7 +274,7 @@ public class AbilityFactory_Unpump {
 			if (list.isEmpty()){
 				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 					if (mandatory)
-						return unpumpMandatoryTarget(af, sa, mandatory);
+						return debuffMandatoryTarget(af, sa, mandatory);
 
 					tgt.resetTargets();
 					return false;
@@ -293,7 +294,6 @@ public class AbilityFactory_Unpump {
 	}//pumpTgtAI()
 
 	private static CardList getCurseCreatures(AbilityFactory af, SpellAbility sa, final ArrayList<String> kws) {
-		//HashMap<String,String> params = af.getMapParams();
 		Card hostCard = af.getHostCard();
 		CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
 		list = list.filter(AllZoneUtil.getCanTargetFilter(hostCard));
@@ -301,7 +301,7 @@ public class AbilityFactory_Unpump {
 		if (!list.isEmpty()) {
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return !c.hasAnyKeyword(kws);    // don't add duplicate negative keywords
+					return c.hasAnyKeyword(kws);    // don't add duplicate negative keywords
 				}
 			});
 		}
@@ -309,7 +309,7 @@ public class AbilityFactory_Unpump {
 		return list;
 	}//getCurseCreatures()
 
-	private static boolean unpumpMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
+	private static boolean debuffMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		CardList list = AllZoneUtil.getCardsInPlay();
 		Target tgt = sa.getTarget();
 		list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -366,7 +366,7 @@ public class AbilityFactory_Unpump {
 		return true;
 	}//pumpMandatoryTarget()
 
-	private static boolean unpumpTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory){
+	private static boolean debuffTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 
@@ -380,13 +380,13 @@ public class AbilityFactory_Unpump {
 				return true;
 		}
 		else{
-			return unpumpTgtAI(af, sa, kws, mandatory);
+			return debuffTgtAI(af, sa, kws, mandatory);
 		}
 
 		return true;
 	}
 
-	private static void unpumpResolve(final AbilityFactory af, final SpellAbility sa) {
+	private static void debuffResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
 		Card host = af.getHostCard();
 
@@ -423,6 +423,6 @@ public class AbilityFactory_Unpump {
 			}
 		}
 
-	}//unpumpResolve
+	}//debuffResolve
 
-}//end class AbilityFactory_Unpump
+}//end class AbilityFactory_Debuff
