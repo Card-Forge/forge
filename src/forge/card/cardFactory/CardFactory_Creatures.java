@@ -4379,6 +4379,10 @@ public class CardFactory_Creatures {
 							cloned[0].setBaseAttack(7);
 						}
 						
+						for(SpellAbility sa : copyTarget[0].getSpellAbilities()) {
+							cloned[0].addSpellAbility(sa);
+						}
+						
 						//Slight hack in case the cloner copies a card with triggers
 						for(Trigger t : cloned[0].getTriggers())
 						{

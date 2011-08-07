@@ -1350,6 +1350,12 @@ public class Card extends MyObservable {
         return s;
     }
     
+    public ArrayList<SpellAbility> getSpellAbilities() {
+        ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(spellAbility);
+        res.addAll(getManaAbility());
+        return res;
+    }
+    
     public ArrayList<SpellAbility> getSpells() {
         ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(spellAbility);
         ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
