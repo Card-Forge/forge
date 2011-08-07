@@ -32,6 +32,7 @@ public class AbilityFactory_Choose {
 				return chooseTypeStackDescription(af, this);
 			}
 
+			@Override
 			public boolean canPlayAI() {
 				return chooseTypeCanPlayAI(af, this);
 			}
@@ -78,7 +79,7 @@ public class AbilityFactory_Choose {
 			private static final long serialVersionUID = 5555184803257696143L;
 
 			@Override
-			public String getStackDescription(){
+			public String getStackDescription() {
 				return chooseTypeStackDescription(af, this);
 			}
 
@@ -105,7 +106,7 @@ public class AbilityFactory_Choose {
 		StringBuilder sb = new StringBuilder();
 
 		if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" - ");
+			sb.append(sa.getSourceCard()).append(" - ");
 		else
 			sb.append(" ");
 
