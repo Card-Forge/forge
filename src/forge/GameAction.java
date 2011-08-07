@@ -125,6 +125,8 @@ public class GameAction {
         	oldBattlefield.remove(c);
         	c.setController(newController);
         	newBattlefield.add(c);
+            //set summoning sickness
+        	c.setSickness(true);
         	c.setTurnInZone(turnInZone); // The number of turns in the zone should not change
         	if (c.isCreature())
         		AllZone.Combat.removeFromCombat(c);

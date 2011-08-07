@@ -251,13 +251,7 @@ public class AbilityFactory_GainControl {
             hostCard.addGainControlTarget(tgtC);
             
             if(AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
-                //set summoning sickness
-                if(tgtC.getKeyword().contains("Haste")) {
-                    tgtC.setSickness(false);
-                } else {
-                    tgtC.setSickness(true);
-                }
-                
+            	
                 AllZone.GameAction.changeController(new CardList(tgtC), tgtC.getController(), newController.get(0));
                 
                 if(bUntap) tgtC.untap();
