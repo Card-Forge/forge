@@ -1,0 +1,10 @@
+Name:Viridian Scout
+ManaCost:3 G
+Types:Creature Elf Warrior Scout
+Text:no text
+PT:1/2
+A:AB$ DealDamage | Cost$ 2 G Sac<1/CARDNAME> | ValidTgts$ Creature.withFlying | NumDmg$ 2 | SpellDescription$ or CARDNAME deals 2 damage to target creature with flying.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_scout.jpg
+End
