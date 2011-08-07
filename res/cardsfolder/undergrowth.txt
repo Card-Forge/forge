@@ -8,5 +8,5 @@ SVar:KWPump:stPumpAll:Creature.nonRed:0/0/HIDDEN Prevent all combat damage that 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undergrowth.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/87.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/87.jpg|2
 End
