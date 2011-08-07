@@ -1722,48 +1722,7 @@ public class CardFactory implements NewConstants {
             });
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Kaervek's Spite")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -6259614160639535500L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    if(AllZone.HumanPlayer.getLife() <= 5) return true;
-                    
-                    CardList playList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
-                    
-                    playList = playList.getName("Academy Rector");
-                    libList = libList.getName("Barren Glory");
-                    
-                    return (AllZone.HumanPlayer.getLife() <= 5) || (playList.size() == 1 && libList.size() >= 1);
-                }
-                
-                @Override
-                public void resolve() {
-                    CardList play = AllZoneUtil.getPlayerCardsInPlay(card.getController());
-                    
-                    for(Card c:play) {
-                        AllZone.GameAction.sacrifice(c);
-                    }
-                    card.getController().discardHand(this);
-                    
-                    getTargetPlayer().loseLife(5, card);
-                }
-            };
-            
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        }//*************** END ************ END **************************
-        
-        
+ 
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Charbelcher")) {
         	Cost abCost = new Cost("3 T", cardName, true);

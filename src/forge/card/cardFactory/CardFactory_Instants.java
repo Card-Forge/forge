@@ -1248,93 +1248,7 @@ public class CardFactory_Instants {
             spell.setStackDescription("Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way");
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-                                               /*
-        //*************** START ********** START *************************
-        else if(cardName.equals("Mana Drain"))//NOTE: The AI can't cast this spell due to inability to use a manapool, but provisions are still made for it for if/when we get to that point.
-        {
-        	SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6139754377230333678L;
-                
-                @Override
-                public void resolve() {
-                	SpellAbility sa = AllZone.Stack.pop();
-                	
-                	if(card.getController().isHuman())
-                	{
-                		Phase.getManaDrain_BonusMana_Human().add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
-                		Phase.getManaDrain_Source_Human().add(card);
-                	}
-                	else if(card.getController().isComputer())
-                	{
-                		Phase.getManaDrain_BonusMana_AI().add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
-                		Phase.getManaDrain_Source_AI().add(card);        		
-                	}
-                }
-                
-                @Override
-                public boolean canPlayAI()
-                {
-                	return false;
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() != 0)
-                    {
-                    	return AllZone.Stack.peek().isSpell();
-                    }
-                    else
-                    {
-                    	return false;
-                    }
-                }
-            };
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-                                                       */
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Kaervek's Spite")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -6259614160639535500L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    if(AllZone.HumanPlayer.getLife() <= 5) return true;
-                    
-                    CardList playList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
-                    
-                    playList = playList.getName("Academy Rector");
-                    libList = libList.getName("Barren Glory");
-                    
-                    return playList.size() == 1 && libList.size() >= 1;
-                }
-                
-                @Override
-                public void resolve() {
-                    CardList list = AllZoneUtil.getPlayerCardsInPlay(card.getController());
-                    for(Card c:list) {
-                        AllZone.GameAction.sacrifice(c);
-                    }
-                    card.getController().discardHand(this);
-                    
-                    getTargetPlayer().loseLife(5, card);
-                }
-            };
-            
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        }//*************** END ************ END **************************
-        
+
         
         //*************** START *********** START **************************
         else if( cardName.equals("Siren's Call") ) {
@@ -1489,7 +1403,6 @@ public class CardFactory_Instants {
             
             String phase = AllZone.Phase.buildActivateString(Constant.Phase.Upkeep, Constant.Phase.Combat_Declare_Blockers_InstantAbility);
             spell.getRestrictions().setActivatePhases(phase);
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
         

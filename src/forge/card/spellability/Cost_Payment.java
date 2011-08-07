@@ -164,8 +164,11 @@ public class Cost_Payment {
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 			    CardList typeList = new CardList(play.getCards());
 			    
-			    typeList = typeList.getValidCards(cost.getSacType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard()); 
-				if (typeList.size() < cost.getSacAmount())
+			    typeList = typeList.getValidCards(cost.getSacType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard());
+			    
+			    int amount = cost.isSacAll() ?  typeList.size() : cost.getSacAmount();
+			    
+				if (typeList.size() < amount)
 					return false;
 			}
 			else if (!AllZoneUtil.isCardInPlay(card))
@@ -375,7 +378,10 @@ public class Cost_Payment {
 		if (!paySac && cost.getSacCost()){					// sacrifice stuff here
     		if (cost.getSacThis())
     			setInput(sacrificeThis(ability, this));
-    		else if(cost.isSacX()) setInput(sacrificeXType(ability, cost.getSacType(), this));
+    		else if (cost.isSacAll())
+    			sacrificeAllType(ability, cost.getSacType(), this);	
+    		else if (cost.isSacX()) 
+    			setInput(sacrificeXType(ability, cost.getSacType(), this));
     		else
     			setInput(sacrificeType(ability, cost.getSacType(), this));
     		return false;
@@ -499,13 +505,19 @@ public class Cost_Payment {
     	
     	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
     	if (cost.getSacCost()){
+    		int amount = cost.getSacAmount();
     		if (cost.getSacThis())
     			sacCard.add(card);
+    		else if (cost.isSacAll()){
+    			CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+    		    typeList = typeList.getValidCards(cost.getSacType().split(","), card.getController(), card);	
+    			sacCard.add(typeList);
+    			amount = sacCard.size();
+    		}    			
     		else
     			sacCard = ComputerUtil.chooseSacrificeType(cost.getSacType(), card, ability.getTargetCard(),  cost.getSacAmount());
     		
-    		
-	    	if (sacCard.size() != cost.getSacAmount()){
+	    	if (sacCard.size() != amount){
 	    		System.out.println("Couldn't find a valid card to sacrifice for: "+card.getName());
 	    		return;
 	    	}
@@ -1022,6 +1034,22 @@ public class Cost_Payment {
 
         return target;
     }//sacrificeType()
+    
+    public static void sacrificeAllType(final SpellAbility sa, final String type, final Cost_Payment payment){
+    	// TODO Ask First
+    	
+    	CardList typeList;
+    	typeList = AllZoneUtil.getPlayerCardsInPlay(sa.getActivatingPlayer());
+        typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+    	
+        for(Card card : typeList){
+	    	payment.getAbility().addSacrificedCost(card);
+	    	AllZone.GameAction.sacrifice(card);
+        }
+    	
+    	payment.setPaySac(true);
+    	payment.payCost();
+    }
     
     public static Input sacrificeXType(final SpellAbility sa, final String type, final Cost_Payment payment){
         Input target = new Input() {

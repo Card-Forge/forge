@@ -932,7 +932,8 @@ class CardFactory_Auras {
                     
                     prevController[0] = c.getController();
                     AllZone.GameAction.moveToPlay(card);
-                	c.attachCard(card);
+                    card.enchantCard(c);
+                	//c.attachCard(card);
                 	AllZone.GameAction.changeController(new CardList(c), c.getController(), card.getController()); 
                 	if(cardName.equals("Volition Reins")) {
                 		if(c.isTapped()) c.untap();
