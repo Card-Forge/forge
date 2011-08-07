@@ -1378,66 +1378,6 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************     
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Counterbalance")) {
-        	Player player = card.getController();
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    Card topCard = lib.get(0);
-                    
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-
-                    int convertedManaTopCard = CardUtil.getConvertedManaCost(topCard.getManaCost());
-                    int convertedManaSpell = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());
-                    
-                    CardList showTop = new CardList();
-                    showTop.add(topCard);
-                    GuiUtils.getChoiceOptional("Revealed top card: ", showTop.toArray());
-                    
-                    if(convertedManaTopCard == convertedManaSpell) {
-                        
-                        AllZone.Stack.pop();
-                        AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                    }
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                	Player player = card.getController();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    
-                    if(AllZone.Stack.size() == 0 || lib.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    Player opponent = card.getController().getOpponent();
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    if(AllZone.getZone(card).is(Constant.Zone.Battlefield) && sa.isSpell()
-                            && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard())) return true;
-                    else return false;
-                }//canPlay()
-            };//SpellAbility ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("Counterbalance - ").append(player);
-            sb.append(" reveals top card and counters spell if it has the same converted manacost");
-            ability.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
@@ -3038,6 +2978,13 @@ public class CardFactory implements NewConstants {
                 	card.setEvoked(true);
                     AllZone.GameAction.moveToPlay(card);
                 }
+                
+				@Override
+        		public boolean canPlayAI() {
+					if (!Spell_Permanent.checkETBEffects(card, this, null))
+			        	return false;
+					return super.canPlayAI();
+        		}
             };
             String parse = card.getKeyword().get(evokeKeyword).toString();
             card.removeIntrinsicKeyword(parse);
@@ -3125,21 +3072,6 @@ public class CardFactory implements NewConstants {
            card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
            shiftPos = hasKeyword(card, "Soulshift", n+1);
         }//Soulshift
-        
-        /*
-        while(hasKeyword(card, "Soulshift") != -1) {
-            int n = hasKeyword(card, "Soulshift");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
-            }
-        }//Soulshift
-        */
         
         if(hasKeyword(card, "Echo") != -1) {
             int n = hasKeyword(card, "Echo");
