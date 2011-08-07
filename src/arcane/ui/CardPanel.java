@@ -186,8 +186,6 @@ public class CardPanel extends JPanel implements CardContainer{
 					 (this.gameCard.getCurSetCode().equals("8ED")) ||
 					 (this.gameCard.getCurSetCode().equals("9ED")) ||
 					 (this.gameCard.getCurSetCode().equals("CHR")) ||
-					 (this.gameCard.getCurSetCode().equals("POR")) ||
-					 (this.gameCard.getCurSetCode().equals("PTK")) ||
 					 (this.gameCard.getCurSetCode().equals("S99")) ||
 					 (this.gameCard.getCurSetCode().equals("S00")) ) {
 					if (!isSelected) {
