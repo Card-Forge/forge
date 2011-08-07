@@ -93,8 +93,8 @@ class CardShopTableModel extends AbstractTableModel {
     
     public CardList getCards() {
         CardList all = new CardList();
-        all.addAll(dataCopies.toArray());
-        all.addAll(dataNoCopies.toArray());
+        all.addAll(dataCopies);
+        all.addAll(dataNoCopies);
         
         return all;
     }
@@ -258,8 +258,8 @@ class CardShopTableModel extends AbstractTableModel {
         recentAscending = ascending;
         
         CardList all = new CardList();
-        all.addAll(dataNoCopies.toArray());
-        all.addAll(dataCopies.toArray());
+        all.addAll(dataNoCopies);
+        all.addAll(dataCopies);
         
         TableSorter sorter = new TableSorter(all, column, ascending);
         Card[] array = all.toArray();

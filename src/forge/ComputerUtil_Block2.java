@@ -327,7 +327,7 @@ public class ComputerUtil_Block2
 		  //Don't use blockers without First Strike or Double Strike if attacker has it
 		  if (attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")) {
 			  safeBlockers = blockers.getKeyword("First Strike");
-			  safeBlockers.addAll(blockers.getKeyword("Double Strike").toArray());
+			  safeBlockers.addAll(blockers.getKeyword("Double Strike"));
 		  }
 		  else safeBlockers = new CardList(blockers.toArray());
 

@@ -261,7 +261,7 @@ public class ComputerUtil
     CardList all = new CardList();
     all.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
     all.addAll(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
-    all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer).toArray());
+    all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer));
     
     CardList humanPlayable = new CardList();
     humanPlayable.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer));
@@ -273,7 +273,7 @@ public class ComputerUtil
       }
     });
     
-    all.addAll(humanPlayable.toArray());
+    all.addAll(humanPlayable);
     
     all = all.filter(new CardListFilter()
     {

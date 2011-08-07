@@ -51,7 +51,7 @@ public class QuestUtil {
 		CardList list = getHumanPlantAndPet(qd);
 		
 		if (qa!=null)
-			list.addAll(qa.getHuman().toArray());
+			list.addAll(qa.getHuman());
 		
 		return list;
 	}

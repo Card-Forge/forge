@@ -154,7 +154,7 @@ public class ComputerAI_General implements Computer {
     			return (c.canAnyPlayerActivate());
     		}
     	});
-    	all.addAll(humanPlayable.toArray());
+    	all.addAll(humanPlayable);
 
     	return getPlayable(all);
     }//getMain2()
@@ -184,7 +184,7 @@ public class ComputerAI_General implements Computer {
     			return (c.canAnyPlayerActivate());
     		}
     	});
-    	all.addAll(humanPlayable.toArray());
+    	all.addAll(humanPlayable);
     	return all;
     }
     
