@@ -2070,7 +2070,6 @@ public class GameActionUtil {
 		if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
-		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		
@@ -2122,14 +2121,6 @@ public class GameActionUtil {
 
 	}
 
-
-	private static void playerCombatDamage_Rootwater_Thief(Card c) {
-		SpellAbility[] sa = c.getSpellAbility();
-		if(c.getController().isHuman()) AllZone.GameAction.playSpellAbility(sa[2]); //because sa[1] is the kpump u: flying
-		else ComputerUtil.playNoStack(sa[2]);
-
-
-	}
 
 	private static void playerCombatDamage_Treva(Card c) {
 		SpellAbility[] sa = c.getSpellAbility();

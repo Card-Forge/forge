@@ -2183,43 +2183,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Rootwater Thief")) {
-            final Ability ability2 = new Ability(card, "2") {
-                @Override
-                public void resolve() {
-                	Player opponent = card.getController().getOpponent();
-                    CardList cards = AllZoneUtil.getPlayerCardsInLibrary(opponent);
-                    
-                    if(cards.size() > 0) {
-                        if(card.getController().isHuman()) {
-                            Object o = GuiUtils.getChoiceOptional("Select card to remove: ",
-                                    cards.toArray());
-                            Card c = (Card) o;
-                            AllZone.GameAction.exile(c);
-                            opponent.shuffle();
-                        } else {
-                            Card c = cards.get(0);
-                            AllZone.GameAction.exile(c);
-                            opponent.shuffle();
-                        }
-                    }
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    //this is set to false, since it should only TRIGGER
-                    return false;
-                }
-            };// ability2
-            card.addSpellAbility(ability2);
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" - search opponent's library and remove a card from game.");
-            ability2.setStackDescription(sb2.toString());
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Treva, the Renewer")) {
