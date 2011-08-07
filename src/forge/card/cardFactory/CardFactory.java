@@ -153,7 +153,7 @@ public class CardFactory implements NewConstants {
             card2 = CardFactory_Equipment.getCard(in, in.getName(), in.getOwner());
             
             return card2;
-        } else if (in.isType("Planeswalker")) {
+        } else if (in.isPlaneswalker()) {
             Card card2 = new Card();
             card2 = CardFactory_Planeswalkers.getCard(in, in.getName(), in.getOwner());
             
@@ -824,7 +824,7 @@ public class CardFactory implements NewConstants {
             card2 = CardFactory_Auras.getCard(card, cardName, owner);
         } else if (card.isEquipment()) {
             card2 = CardFactory_Equipment.getCard(card, cardName, owner);
-        } else if (card.isType("Planeswalker")) {
+        } else if (card.isPlaneswalker()) {
             card2 = CardFactory_Planeswalkers.getCard(card, cardName, owner);
         } else if (card.isLand()) {
             card2 = CardFactory_Lands.getCard(card, cardName, owner);

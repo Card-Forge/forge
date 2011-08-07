@@ -190,7 +190,7 @@ public class Spell_Permanent extends Spell {
             if (list.containsName(card.getName()))
             	return false;
         }
-        if (card.isType("Planeswalker")) {
+        if (card.isPlaneswalker()) {
         	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
         	list = list.getType("Planeswalker");
         	
