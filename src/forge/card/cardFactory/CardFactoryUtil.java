@@ -2548,17 +2548,7 @@ public class CardFactoryUtil {
         		return doXMath(Integer.parseInt(sq[1]), m, c); // Have Threshold
         	else
         		return doXMath(Integer.parseInt(sq[2]), m, c); // not Threshold
-        }
-        
-        //Count$Kicked.<numIfKicked>.<numIfNotKicked>
-        if (sq[0].contains("Kicked"))
-        {
-        	if (c.isKicked())
-        		return doXMath(Integer.parseInt(sq[1]), m, c); // kicked
-        	else
-        		return doXMath(Integer.parseInt(sq[2]), m, c); // not kicked
-        }
-        	
+        }        	
         
         // Count$CardPower
         if(sq[0].contains("CardPower")) return doXMath(c.getNetAttack(), m, c);
