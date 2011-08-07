@@ -116,7 +116,7 @@ public class AbilityFactory_PreventDamage {
 
 		ArrayList<Object> tgts;
 		if(sa.getTarget() == null) 
-			tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
 		else 
 			tgts = sa.getTarget().getTargets();
 

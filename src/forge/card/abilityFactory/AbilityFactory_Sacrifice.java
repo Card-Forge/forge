@@ -101,7 +101,8 @@ public class AbilityFactory_Sacrifice {
 		return dbSacrifice;
 	}
 	
-	public static String sacrificeDescription(final AbilityFactory af, SpellAbility sa){
+	public static String sacrificeDescription(final AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
 		
 		if (sa instanceof Ability_Sub)
@@ -109,7 +110,7 @@ public class AbilityFactory_Sacrifice {
 		else
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 		
@@ -118,13 +119,13 @@ public class AbilityFactory_Sacrifice {
 		if (tgt != null)
 			tgts = tgt.getTargetPlayers();
 		else
-			tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
-		String valid = af.getMapParams().get("SacValid");
+		String valid = params.get("SacValid");
 		if (valid == null)
 			valid = "Self";
 		
-		String num = af.getMapParams().get("Amount");
+		String num = params.get("Amount");
 		num = (num == null) ? "1" : num;
 		int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 		
@@ -138,7 +139,7 @@ public class AbilityFactory_Sacrifice {
 			for(Player p : tgts)
 				sb.append(p.getName()).append(" ");
 			
-			String msg = af.getMapParams().get("SacMessage");
+			String msg = params.get("SacMessage");
 			if (msg == null)
 				msg = valid;
 			

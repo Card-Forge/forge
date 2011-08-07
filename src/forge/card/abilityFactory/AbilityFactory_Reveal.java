@@ -128,7 +128,7 @@ public class AbilityFactory_Reveal {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		sb.append(host.getController()).append(" looks at the top ").append(numToDig);
 		sb.append(" card");
@@ -241,7 +241,7 @@ public class AbilityFactory_Reveal {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(Player p : tgtPlayers) {
 			if (tgt == null || p.canTarget(af.getHostCard())) {
@@ -493,10 +493,11 @@ public class AbilityFactory_Reveal {
 	}
 
 	private static String revealHandStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
 
 		if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" - ");
+			sb.append(sa.getSourceCard()).append(" - ");
 		else
 			sb.append(" ");
 
@@ -506,7 +507,7 @@ public class AbilityFactory_Reveal {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		sb.append(sa.getActivatingPlayer()).append(" looks at ");
 
@@ -738,7 +739,7 @@ public class AbilityFactory_Reveal {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(Player p : tgtPlayers) {
 			if (tgt == null || p.canTarget(af.getHostCard())){
@@ -767,7 +768,8 @@ public class AbilityFactory_Reveal {
 		return scryTargetAI(af, sa);
 	}// scryTargetAI()
 
-	private static String scryStackDescription(AbilityFactory af, SpellAbility sa){
+	private static String scryStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
 
 		if (!(sa instanceof Ability_Sub))
@@ -781,14 +783,14 @@ public class AbilityFactory_Reveal {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(Player p : tgtPlayers)
 			sb.append(p.toString()).append(" ");
 
 		int num = 1;
-		if (af.getMapParams().containsKey("ScryNum"))
-			num = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("ScryNum"), sa);
+		if (params.containsKey("ScryNum"))
+			num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);
 
 		sb.append("scrys (").append(num).append(").");
 
@@ -918,25 +920,26 @@ public class AbilityFactory_Reveal {
 		return dbDraw;
 	}
 
-	private static String rearrangeTopOfLibraryStackDescription(final AbilityFactory AF, final SpellAbility sa)
+	private static String rearrangeTopOfLibraryStackDescription(final AbilityFactory af, final SpellAbility sa)
 	{
+		HashMap<String,String> params = af.getMapParams();
 		int numCards = 0;
 		ArrayList<Player> tgtPlayers;
 		boolean shuffle = false;
 
-		Target tgt = AF.getAbTgt();
-		if (tgt != null && !AF.getMapParams().containsKey("Defined"))
+		Target tgt = af.getAbTgt();
+		if (tgt != null && !params.containsKey("Defined"))
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), AF.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
-		numCards = AbilityFactory.calculateAmount(AF.getHostCard(), AF.getMapParams().get("NumCards"), sa);
-		shuffle = AF.getMapParams().containsKey("MayShuffle") ? true : false;
+		numCards = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumCards"), sa);
+		shuffle = params.containsKey("MayShuffle") ? true : false;
 
 		StringBuilder ret = new StringBuilder();
 		if(!(sa instanceof Ability_Sub))
 		{
-			ret.append(AF.getHostCard().getName());
+			ret.append(af.getHostCard().getName());
 			ret.append(" - ");
 		}
 		ret.append("Look at the top ");
@@ -970,7 +973,7 @@ public class AbilityFactory_Reveal {
 		return ret.toString();
 	}
 
-	private static boolean rearrangeTopOfLibraryTrigger(final AbilityFactory AF, final SpellAbility sa, final boolean mandatory)
+	private static boolean rearrangeTopOfLibraryTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory)
 	{
 		if(!ComputerUtil.canPayCost(sa))
 			return false;
@@ -983,26 +986,27 @@ public class AbilityFactory_Reveal {
 		return false;
 	}
 
-	private static void rearrangeTopOfLibraryResolve(final AbilityFactory AF,final SpellAbility sa)
+	private static void rearrangeTopOfLibraryResolve(final AbilityFactory af, final SpellAbility sa)
 	{
+		HashMap<String,String> params = af.getMapParams();
 		int numCards = 0;
 		ArrayList<Player> tgtPlayers = new ArrayList<Player>();
 		boolean shuffle = false;
 
 		if(sa.getActivatingPlayer().isHuman())
 		{
-			Target tgt = AF.getAbTgt();
-			if (tgt != null && !AF.getMapParams().containsKey("Defined"))
+			Target tgt = af.getAbTgt();
+			if (tgt != null && !params.containsKey("Defined"))
 				tgtPlayers = tgt.getTargetPlayers();
 			else
-				tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), AF.getMapParams().get("Defined"), sa);
+				tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
-			numCards = AbilityFactory.calculateAmount(AF.getHostCard(), AF.getMapParams().get("NumCards"), sa);
-			shuffle = AF.getMapParams().containsKey("MayShuffle") ? true : false;
+			numCards = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumCards"), sa);
+			shuffle = params.containsKey("MayShuffle") ? true : false;
 
 			for(Player p : tgtPlayers)
-				if (tgt == null || p.canTarget(AF.getHostCard()))
-					rearrangeTopOfLibrary(AF.getHostCard(), p, numCards, shuffle);
+				if (tgt == null || p.canTarget(af.getHostCard()))
+					rearrangeTopOfLibrary(af.getHostCard(), p, numCards, shuffle);
 		}
 	}
 	
