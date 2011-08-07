@@ -199,9 +199,11 @@ public class AbilityFactory_ZoneAffecting {
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
 		
-		double chance = .4;	// 40 percent chance of milling with instant speed stuff
+		double chance = .4;	// 40 percent chance of drawing with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
-			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
+			chance = .667;	// 66.7% chance for sorcery speed
+		if((AllZone.Phase.is(Constant.Phase.End_Of_Turn) && AllZone.Phase.isNextTurn(AllZone.ComputerPlayer)))
+			chance = .9;	// 90% for end of opponents turn
 		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 		
@@ -554,7 +556,10 @@ public class AbilityFactory_ZoneAffecting {
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
-			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
+			chance = .667;	// 66.7% chance for sorcery speed
+		
+		if((AllZone.Phase.is(Constant.Phase.End_Of_Turn) && AllZone.Phase.isNextTurn(AllZone.ComputerPlayer)))
+			chance = .9;	// 90% for end of opponents turn
 		
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 		
@@ -1024,7 +1029,11 @@ public class AbilityFactory_ZoneAffecting {
 		
 		double chance = .5;	// 50 percent chance of discarding with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
-			chance = .75;	// 75% chance for sorcery speed (since it will never activate EOT)
+			chance = .75;	// 75% chance for sorcery speed
+		
+		if((AllZone.Phase.is(Constant.Phase.End_Of_Turn) && AllZone.Phase.isNextTurn(AllZone.ComputerPlayer)))
+			chance = .9;	// 90% for end of opponents turn
+		
 		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 				
