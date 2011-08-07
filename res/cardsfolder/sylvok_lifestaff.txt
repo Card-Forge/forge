@@ -1,7 +1,7 @@
 Name:Sylvok Lifestaff
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
+Text:Equipped creature gets +1/+0.
 K:eqPump 1:+1/+0
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigGainLife | TriggerDescription$ Whenever equipped creature is put into a graveyard, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
