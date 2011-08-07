@@ -36,6 +36,7 @@ public enum Counters {
     EON(),
     FADE(),
     FEATHER(),
+    FLOOD(),
     FUSE(),
     GLYPH(),
     GOLD(),
