@@ -1682,9 +1682,7 @@ public class GameActionUtil {
     public static void endOfTurn_Wall_Of_Reverence()
     {
         final Player player = AllZone.Phase.getPlayerTurn();
-        final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Wall of Reverence");
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Wall of Reverence");
 
         Ability ability;
         for (int i = 0; i < list.size(); i++)
@@ -1694,31 +1692,24 @@ public class GameActionUtil {
             {
                 public void resolve()
                 {
-                    CardList creats = new CardList(playZone.getCards());
-                    CardList validTargets = new CardList();
-                    creats = creats.getType("Creature");
-                    for (int i = 0; i < creats.size(); i++) {
-                        if (CardFactoryUtil.canTarget(card, creats.get(i))) {
-                            validTargets.add(creats.get(i));
-                        }
-                    }
-                    if (validTargets.size() == 0)
+                    CardList creats = AllZoneUtil.getCreaturesInPlay(player);
+                    creats = creats.filter(AllZoneUtil.getCanTargetFilter(card));
+                    if (creats.size() == 0)
                         return;
 
                     if (player.isHuman())
                     {
-                        Object o = GuiUtils.getChoiceOptional("Select creature for Wall of Reverence life gain", validTargets.toArray());
+                        Object o = GuiUtils.getChoiceOptional("Select target creature for Wall of Reverence life gain", creats.toArray());
                         if (o != null) {
                             Card c = (Card) o;
-                            int power=c.getNetAttack();
+                            int power = c.getNetAttack();
                             player.gainLife(power, card);
                         }
                     }
                     else//computer
                     {
-                        CardListUtil.sortAttack(validTargets);
-                        Card c = validTargets.get(0);
-                        // Card c = creats.get(0);
+                        CardListUtil.sortAttack(creats);
+                        Card c = creats.get(0);
                         if (c != null) {
                             int power = c.getNetAttack();
                             player.gainLife(power, card);
@@ -1728,7 +1719,7 @@ public class GameActionUtil {
             }; // ability
             
             StringBuilder sb = new StringBuilder();
-            sb.append("Wall of Reverence - ").append(player).append(" gains life equal to target creature's power.");
+            sb.append(card).append(" - ").append(player).append(" gains life equal to target creature's power.");
             ability.setStackDescription(sb.toString());
 
             AllZone.Stack.addSimultaneousStackEntry(ability);
@@ -2077,8 +2068,6 @@ public class GameActionUtil {
 	public static void executeDamageToCreatureEffects(final Card source, final Card affected, int damage) {
 		
 		if (damage <= 0) return;
-		
-		final Player player = affected.getController();
 		
         if(affected.getName().equals("Stuffy Doll")) {
         	final Player opponent = affected.getOwner().getOpponent();
