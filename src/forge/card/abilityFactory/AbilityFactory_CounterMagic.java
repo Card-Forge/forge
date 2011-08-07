@@ -295,44 +295,7 @@ public class AbilityFactory_CounterMagic {
 			Card tgtSACard = tgtSA.getSourceCard();
 			if (AllZone.Stack.contains(tgtSA) && !tgtSACard.keywordsContain("CARDNAME can't be countered.")){
 
-				// TODO: Unless Cost should be generalized for all AFS
-				if(unlessCost != null) {					
-					String unlessCostFinal = unlessCost;
-					if(unlessCost.equals("X"))
-						unlessCostFinal = Integer.toString(CardFactoryUtil.xCount(af.getHostCard(), af.getHostCard().getSVar("X")));
-					// Above xCount should probably be changed to a AF.calculateAmount
-					
-					Ability ability = new Ability(af.getHostCard(), unlessCostFinal) {
-	                    @Override
-	                    public void resolve() {
-	                        ;
-	                    }
-	                };
-	                
-	                final Command unpaidCommand = new Command() {
-	                    private static final long serialVersionUID = 8094833091127334678L;
-	                    
-	                    public void execute() {
-	                    	removeFromStack(tgtSA, sa);
-	                    	if(params.containsKey("PowerSink")) doPowerSink(AllZone.HumanPlayer);
-	                    }
-	                };
-	                
-	                if(tgtSA.getActivatingPlayer().isHuman()) {
-	                	GameActionUtil.payManaDuringAbilityResolve(af.getHostCard() + "\r\n", ability.getManaCost(), 
-	                			Command.Blank, unpaidCommand);
-	                } else {
-	                    if(ComputerUtil.canPayCost(ability)) {
-	                    	ComputerUtil.playNoStack(ability);
-	                    }
-	                    else {
-	                    	removeFromStack(tgtSA,sa);
-	                        if(params.containsKey("PowerSink")) doPowerSink(AllZone.ComputerPlayer);
-	                    }
-	                }
-				}
-				else
-					removeFromStack(tgtSA,sa);
+				removeFromStack(tgtSA,sa);
 					
 				// Destroy Permanent may be able to be turned into a SubAbility
 				if(tgtSA.isAbility() && params.containsKey("DestroyPermanent")) {
@@ -349,21 +312,6 @@ public class AbilityFactory_CounterMagic {
 			}
 		}
 	}//end counterResolve
-	
-	private void doPowerSink(Player p) {
-		//get all lands with mana abilities
-		CardList lands = AllZoneUtil.getPlayerLandsInPlay(p);
-		lands = lands.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				return c.getManaAbility().size() > 0;
-			}
-		});
-		//tap them
-		for(Card c:lands) c.tap();
-		
-		//empty mana pool
-		if(p.isHuman()) AllZone.ManaPool.clearPool();
-	}
 
 	private String counterStackDescription(AbilityFactory af, SpellAbility sa) {
 

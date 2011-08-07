@@ -6908,5 +6908,21 @@ public class GameActionUtil {
 			return affected;
 		}//end getAffectedCards()
 	};
+	
+	
+	public static void doPowerSink(Player p) {
+		//get all lands with mana abilities
+		CardList lands = AllZoneUtil.getPlayerLandsInPlay(p);
+		lands = lands.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.getManaAbility().size() > 0;
+			}
+		});
+		//tap them
+		for(Card c:lands) c.tap();
+		
+		//empty mana pool
+		if(p.isHuman()) AllZone.ManaPool.clearPool();
+	}
 
 }//end class GameActionUtil

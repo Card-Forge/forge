@@ -7,9 +7,13 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.Command;
+import forge.ComputerUtil;
 import forge.Constant;
+import forge.GameActionUtil;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
 import forge.card.spellability.SpellAbility;
@@ -1279,14 +1283,70 @@ public class AbilityFactory {
 		}
 	}
 	
+	public static void passUnlessCost(final SpellAbility sa) {
+		Card source = sa.getSourceCard();
+		AbilityFactory af = sa.getAbilityFactory();
+		final HashMap<String,String> params = af.getMapParams();
+		
+		//Nothing to do
+		if (params.get("UnlessCost") == null) { 
+			sa.resolve();
+			return;
+		}
+		
+		//The player who has the chance to cancel the ability
+		String pays = params.containsKey("UnlessPayer") ? params.get("UnlessPayer") : "Opponent";
+		Player payer = getDefinedPlayers(sa.getSourceCard(), pays, sa).get(0);
+		
+		//The cost
+		String unlessCost = params.get("UnlessCost").trim();
+		if(unlessCost.equals("X"))
+			unlessCost = Integer.toString(CardFactoryUtil.xCount(source, source.getSVar("X")));
+		// Above xCount should probably be changed to a AF.calculateAmount
+		
+		Ability ability = new Ability(source, unlessCost) {
+            @Override
+            public void resolve() {
+                ;
+            }
+        };
+        
+        final Command unpaidCommand = new Command() {
+            private static final long serialVersionUID = 8094833091127334678L;
+            
+            public void execute() {
+            	if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.HumanPlayer);
+            	sa.resolve();
+            }
+        };
+        
+        if(payer.isHuman()) {
+        	GameActionUtil.payManaDuringAbilityResolve(source + "\r\n", ability.getManaCost(), 
+        			Command.Blank, unpaidCommand);
+        } else {
+            if(ComputerUtil.canPayCost(ability)) {
+            	ComputerUtil.playNoStack(ability); //Unless cost was payed - no resolve
+            }
+            else {
+                if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.ComputerPlayer);
+                sa.resolve();
+            }
+        }
+	}
+	
 	public static void resolve(SpellAbility sa) {
 		if (sa == null) return;
 		AbilityFactory af = sa.getAbilityFactory();
 		HashMap<String,String> params = af.getMapParams();
 		
+		
 		//check conditions
-		if (AbilityFactory.checkConditional(params, sa))
-			sa.resolve();
+		if (AbilityFactory.checkConditional(params, sa)) {
+			if (params.get("UnlessCost") == null)
+				sa.resolve();
+			else passUnlessCost(sa);
+		}
+			
 		
 		//try to resolve subabilities (see null check above)
 		Ability_Sub abSub = sa.getSubAbility();
