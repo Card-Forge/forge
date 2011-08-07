@@ -1074,10 +1074,8 @@ public class CardFactoryUtil {
             }
             
             @Override
-            public void resolve() { 
-                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-
-                CardList cards = new CardList(lib.getCards());
+            public void resolve() {
+                CardList cards = AllZoneUtil.getPlayerCardsInLibrary(sourceCard.getController());
                 CardList sameType = new CardList();
                 
                 for(int i = 0; i < cards.size(); i++) {
@@ -1086,13 +1084,11 @@ public class CardFactoryUtil {
                     }
                 }
                 
-
                 if(sameType.size() == 0) {
                 	sourceCard.getController().discard(sourceCard, this);
                 	return;
                 }
                 
-
                 Object o = GuiUtils.getChoiceOptional("Select a card", sameType.toArray());
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
@@ -1151,10 +1147,7 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                
-
-                CardList cards = new CardList(lib.getCards());
+                CardList cards = AllZoneUtil.getPlayerCardsInLibrary(sourceCard.getController());
                 CardList sameCost = new CardList();
                 
                 for(int i = 0; i < cards.size(); i++) {
@@ -1278,7 +1271,7 @@ public class CardFactoryUtil {
             }
             
             CardList getCreature() {
-                CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+                CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         return c.isCreature() 
@@ -1404,15 +1397,14 @@ public class CardFactoryUtil {
             }// CanPlay (for auras with Flash)
 			
             public boolean canPlayAI() {
-                CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                list = list.getType("Creature");
+                CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                 
                 if (list.isEmpty()) return false;
                 
                 //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                 
                 if (Tough >= -1) {    // we want Rabid Wombat or a Uril, the Miststalker to gain at least +1 toughness
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
+                    CardList auraMagnetList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1592,8 +1584,7 @@ public class CardFactoryUtil {
             }// CanPlay (for auras with Flash)
 			
             public boolean canPlayAI() {
-                CardList list = new CardList(AllZone.Human_Battlefield.getCards());    // Target human creature
-                list = list.getType("Creature");
+                CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                 
                 if (list.isEmpty()) return false;
                 
@@ -1756,9 +1747,7 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                
-                CardList cards = new CardList(grave.getCards());
+                CardList cards = AllZoneUtil.getPlayerGraveyard(sourceCard.getController());
                 CardList sameCost = new CardList();
                 int Cost = CardUtil.getConvertedManaCost(Manacost);
                 for (int i = 0; i < cards.size(); i++) {
@@ -2134,20 +2123,15 @@ public class CardFactoryUtil {
     }
     
     public static CardList AI_getHumanCreature(final Card spell, boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
-        creature = creature.getType("Creature");
+        CardList creature = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
         if(targeted) {
-            creature = creature.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return canTarget(spell, c);
-                }
-            });
+            creature = creature.filter(AllZoneUtil.getCanTargetFilter(spell));
         }
         return creature;
     }
     
     public static CardList AI_getHumanCreature(final String keyword, final Card spell, final boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
+        CardList creature = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         creature = creature.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 if(targeted) return c.isCreature() && c.getKeyword().contains(keyword) && canTarget(spell, c);
@@ -2158,7 +2142,7 @@ public class CardFactoryUtil {
     }//AI_getHumanCreature()
     
     public static CardList AI_getHumanCreature(final int toughness, final Card spell, final boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
+        CardList creature = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         creature = creature.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 if(targeted) return c.isCreature() && (c.getNetDefense() <= toughness) && canTarget(spell, c);
@@ -2200,8 +2184,7 @@ public class CardFactoryUtil {
 
     public static boolean oppHasKismet(Player player) {
         Player opp = player.getOpponent();
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
-        CardList list = new CardList(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.getName().equals("Kismet") || c.getName().equals("Frozen AEther")
@@ -2437,8 +2420,7 @@ public class CardFactoryUtil {
     }
 
     public static CardList getGraveyardActivationCards(final Player player) {
-        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-        CardList cl = new CardList(grave.getCards());
+        CardList cl = AllZoneUtil.getPlayerGraveyard(player);
         cl = cl.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return activateFromGrave(c, player);
@@ -2562,9 +2544,7 @@ public class CardFactoryUtil {
         	String restrictions = l[0].replace("Valid ", "");
         	restrictions = restrictions.replace("Count$", "");
         	final String rest[] = restrictions.split(",");
-        	CardList cardsonbattlefield = new CardList();
-        	cardsonbattlefield.addAll(myField.getCards());
-        	cardsonbattlefield.addAll(opField.getCards());
+        	CardList cardsonbattlefield = AllZoneUtil.getCardsInPlay();
         	cardsonbattlefield = cardsonbattlefield.getValidCards(rest, cardController, c);
         	
         	n = cardsonbattlefield.size();
@@ -3256,21 +3236,16 @@ public class CardFactoryUtil {
         String s = "";
         //TODO, take into account what human has
         
-        PlayerZone humanPlayZone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-        PlayerZone humanLibZone = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
+        CardList humanPlay = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+        CardList humanLib = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
         
-        CardList humanPlay = new CardList(humanPlayZone.getCards());
-        CardList humanLib = new CardList(humanLibZone.getCards());
-        
-        PlayerZone compPlayZone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-        PlayerZone compLibZone = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-        PlayerZone compHandZone = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-        
-        CardList compPlay = new CardList(compPlayZone.getCards());
-        CardList compHand = new CardList(compHandZone.getCards());
-        CardList compAll = new CardList(compPlayZone.getCards());
-        compAll.addAll(compLibZone.getCards());
-        compAll.addAll(compHandZone.getCards());
+        CardList compPlay = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+        CardList compHand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+        CardList compLib = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
+        CardList compAll = new CardList();
+        compAll.addAll(compLib);
+        compAll.addAll(compHand);
+        compAll.addAll(compPlay);
         
         humanPlay = humanPlay.getType("Creature");
         humanLib = humanLib.getType("Creature");
@@ -3329,8 +3304,7 @@ public class CardFactoryUtil {
     
     public static int countBasicLandTypes(Player player) {
         String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-        CardList list = new CardList(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
         int count = 0;
         
         for(int i = 0; i < basic.length; i++)
@@ -3343,8 +3317,7 @@ public class CardFactoryUtil {
     public static String getPropagandaCost(Card c) {
         String s = "";
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController().getOpponent());
-        CardList list = new CardList(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent());
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.getName().equals("Propaganda") || c.getName().equals("Windborn Muse")
@@ -3353,8 +3326,7 @@ public class CardFactoryUtil {
         });
         int cost = list.size() * 2;
         
-        list = new CardList(play.getCards());
-        list = list.getName("Collective Restraint");
+        list = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent(), "Collective Restraint");
         
         int domain = countBasicLandTypes(c.getController().getOpponent());
         
@@ -3366,8 +3338,7 @@ public class CardFactoryUtil {
     }
     
     public static int getUsableManaSources(Player player) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-        CardList list = new CardList(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 for(Ability_Mana am:c.getAIPlayableMana())
