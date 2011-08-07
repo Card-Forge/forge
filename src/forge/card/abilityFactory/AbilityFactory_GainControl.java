@@ -335,9 +335,11 @@ public class AbilityFactory_GainControl {
     			if(null == c) return;
 
     			if(AllZoneUtil.isCardInPlay(c)) {
-    				AllZone.GameAction.changeController(new CardList(c), c.getController(), c.getController().getOpponent());
-
-    				c.setSickness(true);
+    				if(c.getController() != c.getOwner()) {
+    					AllZone.GameAction.changeController(new CardList(c), c.getController(), c.getController().getOpponent());
+    					c.setSickness(true);
+    				}
+    				
 
     				if(bTapOnLose) c.tap();
     				
