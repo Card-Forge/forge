@@ -5,6 +5,7 @@ Text:no text
 PT:4/3
 A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Pump | Cost$ S | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
+SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermopod.jpg
