@@ -5325,10 +5325,13 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 8005448956536998277L;
 
 		public void execute() {
+			
+			
+			HashMap<String,String> produces = new HashMap<String,String>();
+			/*
+			 * for future use
 			boolean naked = AllZoneUtil.isCardInPlay("Naked Singularity");
 			boolean twist = AllZoneUtil.isCardInPlay("Reality Twist");
-			HashMap<String,String> produces = new HashMap<String,String>();
-			
 			//set up what they produce
 			produces.put("Forest", naked || twist ? "B" : "G");
 			produces.put("Island", naked == true ? "G" : "U");
@@ -5339,6 +5342,12 @@ public class GameActionUtil {
 			if(naked) produces.put("Swamp", "W");
 			else if(twist) produces.put("Swamp", "G");
 			else produces.put("Swamp", "B");
+			*/
+			produces.put("Forest", "G");
+			produces.put("Island", "U");
+			produces.put("Mountain", "R");
+			produces.put("Plains", "W");
+			produces.put("Swamp", "B");
 			
 			CardList lands = AllZoneUtil.getCardsInGame();
 			lands = lands.filter(AllZoneUtil.lands);
