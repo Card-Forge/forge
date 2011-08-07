@@ -1,0 +1,9 @@
+Name:Great Defender
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature | NumDef$ +X | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +0/+X until end of turn, where X is its converted mana cost.
+SVar:X:Targeted$CardManaCost
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/great_defender.jpg
+End
