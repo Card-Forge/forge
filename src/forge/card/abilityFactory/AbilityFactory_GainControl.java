@@ -244,9 +244,6 @@ public class AbilityFactory_GainControl {
 		for(int j = 0; j < size; j++){
 			final Card tgtC = tgtCards.get(j);
 			
-			// copied from CardFactory_Creatures for Rubinia Soulsinger
-			
-			//Card c = getTargetCard();
             movedCards[j] = tgtC;
             hostCard.addGainControlTarget(tgtC);
             

@@ -1029,6 +1029,9 @@ public class ComputerUtil
 	}
     
     public static boolean canRegenerate(Card card) {
+    	
+        if(card.hasKeyword("CARDNAME can't be regenerated.")) return false;
+        
     	Player controller = card.getController();
     	CardList l = AllZoneUtil.getCardsInPlay();
     	for(Card c:l)

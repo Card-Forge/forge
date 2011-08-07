@@ -1062,7 +1062,7 @@ public class CombatUtil {
     }
     
     //can the blocker destroy the attacker?
-    public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat, boolean noRegen) {
+    public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat, boolean noAbilityUsed) {
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) return false;
         
@@ -1076,9 +1076,7 @@ public class CombatUtil {
             	return false;
         }//flanking
         
-        if(defender.hasKeyword("CARDNAME can't be regenerated.")) noRegen = true;
-        
-        if((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !noRegen)) && 
+        if((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !noAbilityUsed)) && 
         		!(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) return false;
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
@@ -1138,7 +1136,7 @@ public class CombatUtil {
     }
     
     //can the attacker destroy this blocker?
-    public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat, boolean noRegen) {
+    public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat, boolean noAbilityUsed) {
     	
         int flankingMagnitude = 0;
         if(attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
@@ -1149,9 +1147,7 @@ public class CombatUtil {
             if((flankingMagnitude >= defender.getKillDamage()) && !defender.hasKeyword("Indestructible")) return true;    
         }//flanking
         
-        if(defender.hasKeyword("CARDNAME can't be regenerated.")) noRegen = true;
-        
-        if((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !noRegen)) && 
+        if((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !noAbilityUsed)) && 
         		!(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) return false;
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) return true;
