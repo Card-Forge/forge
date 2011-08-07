@@ -266,6 +266,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_Counters.createDrawbackRemoveCounters(this);
 		}
 		
+		if (API.equals("RemoveCounterAll")){
+			if (isAb)
+				SA = AbilityFactory_Counters.createAbilityRemoveCounterAll(this);
+			else if (isSp)
+				SA = AbilityFactory_Counters.createSpellRemoveCounterAll(this);
+			else if (isDb)
+				SA = AbilityFactory_Counters.createDrawbackRemoveCounterAll(this);
+		}
+		
 		if (API.equals("Proliferate")){
 			if (isAb)
 				SA = AbilityFactory_Counters.createAbilityProliferate(this);

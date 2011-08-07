@@ -1284,4 +1284,143 @@ public class AbilityFactory_Counters {
 				tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
 		}
 	}
+	
+	// *******************************************
+	// ********** RemoveCounterAll ***************
+	// *******************************************
+	
+	public static SpellAbility createAbilityRemoveCounterAll(final AbilityFactory af) {
+
+		final SpellAbility abRemoveCounterAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 1189198508841846311L;
+
+			@Override
+			public String getStackDescription() {
+				return removeCounterAllStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return removeCounterAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				removeCounterAllResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return true;
+			}
+
+		};
+		return abRemoveCounterAll;
+	}
+	
+	public static SpellAbility createSpellRemoveCounterAll(final AbilityFactory af) {
+		final SpellAbility spRemoveCounterAll = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 4173468877313664704L;
+
+			@Override
+			public String getStackDescription() {
+				return removeCounterAllStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return removeCounterAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				removeCounterAllResolve(af, this);
+			}
+
+		};
+		return spRemoveCounterAll;
+	}
+	
+	public static SpellAbility createDrawbackRemoveCounterAll(final AbilityFactory af) {
+		final SpellAbility dbRemoveCounterAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = 9210702927696563686L;
+
+			@Override
+			public String getStackDescription() {
+				return removeCounterAllStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				removeCounterAllResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return removeCounterAllPlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return removeCounterAllPlayDrawbackAI(af, this);
+			}
+
+		};
+		return dbRemoveCounterAll;
+	}
+	
+	private static String removeCounterAllStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
+		StringBuilder sb = new StringBuilder();
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		Counters cType = Counters.valueOf(params.get("CounterType"));
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+
+		sb.append("Remove ").append(amount).append(" ").append(cType.getName()).append(" counter");
+		if(amount != 1) sb.append("s");
+		sb.append(" from each valid permanent.");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null){
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+	
+	private static boolean removeCounterAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		//Heartmender is the only card using this, and it's from a trigger.
+		//If at some point, other cards use this as a spell or ability, this will need to be implemented.
+		return false;
+	}
+	
+	private static boolean removeCounterAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+		return removeCounterAllCanPlayAI(af, sa);
+	}
+
+	private static void removeCounterAllResolve(final AbilityFactory af, final SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();		
+
+		String type = params.get("CounterType");
+		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+		String valid = params.get("ValidCards");
+
+		CardList cards = AllZoneUtil.getCardsInPlay();
+		cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
+
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			Player pl = sa.getTargetPlayer();
+			cards = cards.getController(pl);
+		}
+		
+		for(Card tgtCard : cards) {
+				tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
+		}
+	}
 }
