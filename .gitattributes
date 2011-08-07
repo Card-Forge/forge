@@ -956,6 +956,7 @@ res/cardsfolder/branching_bolt.txt svneol=native#text/plain
 res/cardsfolder/branchsnap_lorian.txt -text svneol=native#text/plain
 res/cardsfolder/branded_brawlers.txt svneol=native#text/plain
 res/cardsfolder/brass_gnat.txt -text svneol=native#text/plain
+res/cardsfolder/brass_herald.txt -text svneol=native#text/plain
 res/cardsfolder/brass_man.txt -text svneol=native#text/plain
 res/cardsfolder/brass_secretary.txt -text svneol=native#text/plain
 res/cardsfolder/brass_squire.txt svneol=native#text/plain
