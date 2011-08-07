@@ -1,0 +1,9 @@
+Name:Whirlpool Drake
+ManaCost:3 U
+Types:Creature Drake
+Text:When CARDNAME enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.\r\n\r\nWhen CARDNAME is put into a graveyard from the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
+PT:2/2
+K:Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlpool_drake.jpg
+End

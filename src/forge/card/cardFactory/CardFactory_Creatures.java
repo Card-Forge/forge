@@ -718,7 +718,7 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Whirlpool Rider")) {
+        else if(cardName.equals("Whirlpool Rider") || cardName.equals("Whirlpool Drake")) {
             final SpellAbility ability = new Ability(card, "0") {
             	
                 @Override
@@ -737,7 +737,7 @@ public class CardFactory_Creatures {
                 }
             };//SpellAbility
             
-            Command intoPlay = new Command() {
+            Command shuffle = new Command() {
                 private static final long serialVersionUID = 6290392806910817877L;
                 
                 public void execute() {
@@ -750,7 +750,8 @@ public class CardFactory_Creatures {
 
                 }
             };
-            card.addComesIntoPlayCommand(intoPlay);
+            card.addComesIntoPlayCommand(shuffle);
+            if(cardName.equals("Whirlpool Drake")) card.addDestroyCommand(shuffle);
         }//*************** END ************ END **************************
         
 
