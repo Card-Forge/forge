@@ -22,12 +22,6 @@ public class Phase extends MyObservable
     static int	   ComputerSpellCount;
     static int	   ComputerCreatureSpellCount;
 
-    //Not sure these should be here but I can't think of a better place
-    private static ArrayList<Integer> ManaDrain_BonusMana_Human = new ArrayList<Integer>();
-    private static ArrayList<Integer> ManaDrain_BonusMana_AI = new ArrayList<Integer>();
-    private static CardList ManaDrain_Source_Human = new CardList();
-    private static CardList ManaDrain_Source_AI = new CardList();
-    
     private Stack<Player> extraTurns = new Stack<Player>();
     
 	private int extraCombats;
@@ -174,29 +168,6 @@ public class Phase extends MyObservable
 	    
 	    else if(phase.equals(Constant.Phase.Draw)){
 	    	PhaseUtil.handleDraw();
-	    }
-	    	
-	    else if (phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2)){
-	    	// TODO: Move the function to Player class, and use gainManaDrainMana() instead
-	    	// turn.gainManaDrainMana();
-	    	
-	    	if (turn.isHuman() && Phase.getManaDrain_BonusMana_Human().size() != 0){
-	        	for(int i=0;i<Phase.getManaDrain_BonusMana_Human().size();i++)
-	        		AllZone.ManaPool.addManaToFloating(Integer.toString(Phase.getManaDrain_BonusMana_Human().get(i)), Phase.getManaDrain_Source_Human().get(i) );
-	        	
-	        	Phase.getManaDrain_BonusMana_Human().clear();
-	        	Phase.getManaDrain_Source_Human().clear();
-	    	}
-	    	
-	        if(turn.isComputer() && Phase.getManaDrain_BonusMana_AI().size() != 0){
-	        	//for(int i=0;i<Phase.ManaDrain_BonusMana_AI.size();i++)
-	        	//	AllZone.ManaPool.addManaToFloating(Integer.toString(Phase.ManaDrain_BonusMana_AI.get(i)), Phase.ManaDrain_Source_AI.get(i) );
-
-	        	// Mana is currently lost for AI. The above commented code was adding to the Human's mana pool
-	        	
-	        	Phase.getManaDrain_BonusMana_AI().clear();
-	        	Phase.getManaDrain_Source_AI().clear();
-	        }
 	    }
         
 	    else if(phase.equals(Constant.Phase.Combat_Begin)){
@@ -631,40 +602,6 @@ public class Phase extends MyObservable
 
 	public static int getStormCount() {
 		return StormCount;
-	}
-
-	public static void setManaDrain_BonusMana_Human(
-			ArrayList<Integer> manaDrain_BonusMana_Human) {
-		ManaDrain_BonusMana_Human = manaDrain_BonusMana_Human;
-	}
-
-	public static ArrayList<Integer> getManaDrain_BonusMana_Human() {
-		return ManaDrain_BonusMana_Human;
-	}
-
-	public static void setManaDrain_Source_Human(CardList manaDrain_Source_Human) {
-		ManaDrain_Source_Human = manaDrain_Source_Human;
-	}
-
-	public static CardList getManaDrain_Source_Human() {
-		return ManaDrain_Source_Human;
-	}
-
-	public static void setManaDrain_BonusMana_AI(
-			ArrayList<Integer> manaDrain_BonusMana_AI) {
-		ManaDrain_BonusMana_AI = manaDrain_BonusMana_AI;
-	}
-
-	public static ArrayList<Integer> getManaDrain_BonusMana_AI() {
-		return ManaDrain_BonusMana_AI;
-	}
-
-	public static void setManaDrain_Source_AI(CardList manaDrain_Source_AI) {
-		ManaDrain_Source_AI = manaDrain_Source_AI;
-	}
-
-	public static CardList getManaDrain_Source_AI() {
-		return ManaDrain_Source_AI;
 	}
 
 	public static void setGameBegins(int gameBegins) {
