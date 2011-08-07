@@ -5,7 +5,7 @@
 /CHANGES.txt -text svneol=native#text/plain
 /LICENSE.txt svneol=native#text/plain
 /README.txt svneol=native#text/plain
-/build.xml -text svneol=native#text/xml
+/build.xml svneol=native#text/xml
 build/Forge.icns -text svneol=unset#unset
 build/backgroundImage.jpg -text svneol=unset#image/jpeg
 build/create-dmg -text
