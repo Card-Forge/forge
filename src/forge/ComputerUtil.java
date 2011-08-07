@@ -1033,7 +1033,7 @@ public class ComputerUtil
         if(card.hasKeyword("CARDNAME can't be regenerated.")) return false;
         
     	Player controller = card.getController();
-    	CardList l = AllZoneUtil.getCardsInPlay();
+    	CardList l = AllZoneUtil.getPlayerCardsInPlay(controller);
     	for(Card c:l)
             for(SpellAbility sa:c.getSpellAbility())
             	// if SA is from AF_Counter don't add to getPlayable
@@ -1047,7 +1047,7 @@ public class ComputerUtil
                 				return true;
                 			Target tgt = sa.getTarget();
                 			if (tgt != null) {
-                				if (AllZoneUtil.getCardsInPlay().getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, af.getHostCard())
+                				if (AllZoneUtil.getCardsInPlay().getValidCards(tgt.getValidTgts(), controller, af.getHostCard())
                 						.contains(card))
                 					return true;
                 						
@@ -1059,5 +1059,38 @@ public class ComputerUtil
                 }
     	
     	return false;
+    }
+    
+    public static int possibleDamagePrevention(Card card) {
+    	
+        int prevented = 0;
+        
+    	Player controller = card.getController();
+    	CardList l = AllZoneUtil.getPlayerCardsInPlay(controller);
+    	for(Card c:l)
+            for(SpellAbility sa:c.getSpellAbility())
+            	// if SA is from AF_Counter don't add to getPlayable
+                //This try/catch should fix the "computer is thinking" bug
+                try {
+                    if(sa.canPlay() && ComputerUtil.canPayCost(sa,controller) && sa.getAbilityFactory() != null && sa.isAbility()){
+                    	AbilityFactory af = sa.getAbilityFactory();
+                    	HashMap <String,String> mapParams = af.getMapParams();
+                		if (mapParams.get("AB").equals("PreventDamage")) {
+                			if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
+                				prevented += AbilityFactory.calculateAmount(af.getHostCard(), mapParams.get("Amount"), sa);
+                			Target tgt = sa.getTarget();
+                			if (tgt != null) {
+                				if (AllZoneUtil.getCardsInPlay().getValidCards(tgt.getValidTgts(), controller, af.getHostCard())
+                						.contains(card))
+                					prevented += AbilityFactory.calculateAmount(af.getHostCard(), mapParams.get("Amount"), sa);
+                						
+                			}
+                		}
+                    }
+                } catch(Exception ex) {
+                    showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
+                }
+    	
+    	return prevented;
     }
 }

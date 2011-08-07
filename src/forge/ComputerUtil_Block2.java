@@ -32,7 +32,7 @@ public class ComputerUtil_Block2
 	  CardList blockers = new CardList();
 	   
 	  for(Card b : blockersLeft) {
-		  if(!CombatUtil.canDestroyBlocker(b,attacker, combat, false)) blockers.add(b);
+		  if(!CombatUtil.canDestroyBlocker(b, attacker, combat, false)) blockers.add(b);
 	  }
 	  
 	  return blockers;   
@@ -142,12 +142,12 @@ public class ComputerUtil_Block2
    private static Combat makeGangBlocks(Combat combat){
 	   
 	  CardList currentAttackers = new CardList(attackersLeft.toArray());
+	  currentAttackers = currentAttackers.getKeywordsDontContain("Rampage"); 
 	  CardList blockers = new CardList();
 	  
 	  //Try to block an attacker without first strike with a gang of first strikers
 	  for(Card attacker : attackersLeft) {
-		  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")
-				   && !attacker.hasStartOfKeyword("Rampage")) {
+		  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")) {
 			  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 			  CardList firstStrikeBlockers = new CardList();
 			  CardList blockGang = new CardList();
@@ -155,7 +155,7 @@ public class ComputerUtil_Block2
 		         if(blockers.get(i).hasFirstStrike() || blockers.get(i).hasDoubleStrike())
 		        	 firstStrikeBlockers.add(blockers.get(i));
 		      
-		      if(!firstStrikeBlockers.isEmpty()) {
+		      if(firstStrikeBlockers.size() > 1) {
 		    	  CardListUtil.sortAttack(firstStrikeBlockers);
 		    	  for(Card blocker : firstStrikeBlockers) {
 		    		  //if the total damage of the blockgang was not enough without but is enough with this blocker finish the blockgang

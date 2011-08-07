@@ -1057,7 +1057,7 @@ public class CombatUtil {
     }
     
     //can the blocker destroy the attacker?
-    public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat, boolean noAbilityUsed) {
+    public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat, boolean withoutAbilities) {
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) return false;
         
@@ -1071,7 +1071,7 @@ public class CombatUtil {
             	return false;
         }//flanking
         
-        if((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !noAbilityUsed)) && 
+        if((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !withoutAbilities)) && 
         		!(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) return false;
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
@@ -1080,10 +1080,17 @@ public class CombatUtil {
         	defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
         	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         }
+
+        int possibleDefenderPrevention = 0;
+        int possibleAttackerPrevention = 0;
+        if (!withoutAbilities) {
+	        possibleDefenderPrevention = ComputerUtil.possibleDamagePrevention(defender);
+	        possibleAttackerPrevention = ComputerUtil.possibleDamagePrevention(attacker);
+        }
         
         // consider Damage Prevention/Replacement
-        defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
-        attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
+        defenderDamage = attacker.predictDamage(defenderDamage, possibleAttackerPrevention, defender, true);
+        attackerDamage = defender.predictDamage(attackerDamage, possibleDefenderPrevention, attacker, true);
         
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender, combat);
@@ -1131,7 +1138,7 @@ public class CombatUtil {
     }
     
     //can the attacker destroy this blocker?
-    public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat, boolean noAbilityUsed) {
+    public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat, boolean withoutAbilities) {
     	
         int flankingMagnitude = 0;
         if(attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
@@ -1142,7 +1149,7 @@ public class CombatUtil {
             if((flankingMagnitude >= defender.getKillDamage()) && !defender.hasKeyword("Indestructible")) return true;    
         }//flanking
         
-        if((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !noAbilityUsed)) && 
+        if((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities)) && 
         		!(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) return false;
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) return true;
@@ -1154,9 +1161,16 @@ public class CombatUtil {
         	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         }
         
+        int possibleDefenderPrevention = 0;
+        int possibleAttackerPrevention = 0;
+        if (!withoutAbilities) {
+	        possibleDefenderPrevention = ComputerUtil.possibleDamagePrevention(defender);
+	        possibleAttackerPrevention = ComputerUtil.possibleDamagePrevention(attacker);
+        }
+        
         // consider Damage Prevention/Replacement
-        defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
-        attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
+        defenderDamage = attacker.predictDamage(defenderDamage, possibleAttackerPrevention, defender, true);
+        attackerDamage = defender.predictDamage(attackerDamage, possibleDefenderPrevention, attacker, true);
         
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender, combat);

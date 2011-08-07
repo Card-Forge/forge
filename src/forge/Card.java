@@ -3218,6 +3218,18 @@ public class Card extends MyObservable {
     }
     
     //This function helps the AI calculate the actual amount of damage an effect would deal
+    public int predictDamage(final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
+    	
+    	int restDamage = damage;
+    	
+    	restDamage = staticReplaceDamage(restDamage, source, isCombat);
+    	
+    	restDamage = staticDamagePrevention(restDamage, possiblePrevention, source, isCombat);
+    	
+    	return restDamage;
+    }
+    
+    //This function helps the AI calculate the actual amount of damage an effect would deal
     public int predictDamage(final int damage, final Card source, final boolean isCombat) {
     	
     	int restDamage = damage;
@@ -3228,6 +3240,18 @@ public class Card extends MyObservable {
     	
     	return restDamage;
     }
+    
+  //This should be also usable by the AI to forecast an effect (so it must not change the game state) 
+	public int staticDamagePrevention(final int damage, final int possiblePrvenetion, final Card source, final boolean isCombat) {
+		
+    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+    	
+    	int restDamage = damage - possiblePrvenetion;
+		
+		restDamage = staticDamagePrevention(restDamage, source, isCombat);
+		
+		return restDamage;
+	}
     
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
 	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
