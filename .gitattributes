@@ -7174,6 +7174,7 @@ res/cardsfolder/tallowisp.txt svneol=native#text/plain
 res/cardsfolder/talon_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/talon_trooper.txt -text svneol=native#text/plain
 res/cardsfolder/talonrend.txt -text svneol=native#text/plain
+res/cardsfolder/talruum_champion.txt svneol=native#text/plain
 res/cardsfolder/talruum_minotaur.txt -text svneol=native#text/plain
 res/cardsfolder/talus_paladin.txt -text svneol=native#text/plain
 res/cardsfolder/tamanoa.txt svneol=native#text/plain
