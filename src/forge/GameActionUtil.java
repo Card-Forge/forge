@@ -85,7 +85,6 @@ public class GameActionUtil {
 		upkeep_Barren_Glory();
 		upkeep_Felidar_Sovereign();
 
-		upkeep_Ancient_Runes();
 		upkeep_Karma();
 		upkeep_Oath_of_Druids();
 		upkeep_Oath_of_Ghouls();
@@ -4156,40 +4155,7 @@ public class GameActionUtil {
 		}
 	}//Oath of Ghouls
 	
-	private static void upkeep_Ancient_Runes() {
-		final Player player = AllZone.Phase.getPlayerTurn();
 		
-		CardList ancient_runes = AllZoneUtil.getCardsInPlay("Ancient Runes");
-		
-		// determine how much damage to deal the current player
-		final int damage = AllZoneUtil.getPlayerTypeInPlay(player, "Artifact").size();
-		
-		// if there are 1 or more Ancient Runes on the 
-		// battlefield have each of them deal damage.
-		if(0 < ancient_runes.size()) {
-			for(Card rune:ancient_runes) {
-				final Card src = rune;
-				Ability ability = new Ability(src, "0") {
-					@Override
-					public void resolve() {
-						if(damage>0){
-							player.addDamage(damage,src);
-						}
-					}
-				};// Ability
-				if(damage>0){
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append("Ancient Runes deals ").append(damage).append(" damage to ").append(player);
-					ability.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-				}
-			}
-		}// if
-	}// upkeep_Ancient_Runes()
-	
 	private static void upkeep_Karma() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList karmas = AllZoneUtil.getCardsInPlay("Karma");
