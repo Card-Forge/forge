@@ -6,4 +6,5 @@ A:AB$ Draw | Cost$ 1 Sac<1/Land> | NumCards$ 1 | AnyPlayer$ True | SpellDescript
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excavation.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/33.jpg
 End
