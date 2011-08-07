@@ -1,6 +1,6 @@
 Name:Soul Spike
 ManaCost:5 B B
-Types:Sorcery
+Types:Instant
 Text:no text
 A:SP$ DealDamage | Cost$ 5 B B | Tgt$ TgtCP | NumDmg$ 4 | SubAbility$ SVar=DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature or player and you gain 4 life.
 A:SP$ DealDamage | Cost$ ExileFromHand<2/Card.Black> | Tgt$ TgtCP | NumDmg$ 4 | SubAbility$ SVar=DBGainLife | CostDesc$ You may exile two black cards from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
