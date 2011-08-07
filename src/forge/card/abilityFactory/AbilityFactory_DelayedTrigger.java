@@ -16,6 +16,8 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class AbilityFactory_DelayedTrigger {
+    private static AbilityFactory tempCreator = new AbilityFactory();
+
     public static Ability_Sub getDrawback(final AbilityFactory AF)
     {
         final Ability_Sub drawback = new Ability_Sub(AF.getHostCard(),AF.getAbTgt()) {
@@ -38,6 +40,36 @@ public class AbilityFactory_DelayedTrigger {
         };
 
         return drawback;
+    }
+
+    private boolean doChkAI_Drawback(final AbilityFactory AF, final SpellAbility SA)
+    {
+        String svarName = AF.getMapParams().get("Execute");
+        SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName),AF.getHostCard());
+
+        if(trigsa instanceof Ability_Sub)
+        {
+            return ((Ability_Sub)trigsa).chkAI_Drawback();
+        }
+        else
+        {
+            return trigsa.canPlayAI();
+        }
+    }
+
+    private boolean doTriggerAI(final AbilityFactory AF,final SpellAbility SA)
+    {
+        String svarName = AF.getMapParams().get("Execute");
+        SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName),AF.getHostCard());
+
+        if(!AF.getMapParams().containsKey("OptionalDecider"))
+        {
+                return trigsa.doTrigger(true);
+        }
+        else
+        {
+            return trigsa.doTrigger(!AF.getMapParams().get("OptionalDecider").equals("You"));
+        }
     }
 
     private static void doResolve(AbilityFactory AF,SpellAbility SA)
