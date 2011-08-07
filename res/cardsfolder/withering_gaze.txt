@@ -9,4 +9,6 @@ SVar:Y:Count$GreenInOppHand
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_gaze.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/79.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/113.jpg
 End

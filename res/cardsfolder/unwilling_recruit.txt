@@ -7,4 +7,5 @@ SVar:DBPump:DB$Pump | Defined$ Targeted | NumAtt$ X | KW$ Haste
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unwilling_recruit.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/64.jpg
 End

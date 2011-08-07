@@ -7,4 +7,5 @@ A:AB$ Dig | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | Di
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_mystic.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/44.jpg
 End
