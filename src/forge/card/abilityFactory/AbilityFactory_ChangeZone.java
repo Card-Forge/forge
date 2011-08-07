@@ -186,11 +186,23 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
 		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
+		
 		if (isHidden(origin, params.containsKey("Hidden")) && !params.containsKey("Ninjutsu"))
 			changeHiddenOriginResolve(af, sa);
 		
 		else if (isKnown(origin) || params.containsKey("Ninjutsu"))
 			changeKnownOriginResolve(af, sa);
+		
+	    
+        if (af.hasSubAbility()){
+        	Ability_Sub abSub = sa.getSubAbility();
+        	if (abSub != null)
+        	   abSub.resolve();
+        }
 	}
 
 	// *************************************************************************************
@@ -555,12 +567,6 @@ public class AbilityFactory_ChangeZone {
         
         if ((origin.contains("Library") && !destination.equals("Library")) || params.containsKey("Shuffle"))
             player.shuffle();
-	    
-        if (af.hasSubAbility()){
-        	Ability_Sub abSub = sa.getSubAbility();
-        	if (abSub != null)
-        	   abSub.resolve();
-        }
 	}
 	
 	private static void changeHiddenOriginResolveAI(AbilityFactory af, SpellAbility sa, Player player){
@@ -657,13 +663,6 @@ public class AbilityFactory_ChangeZone {
         		GuiUtils.getChoice(picked, fetched.toArray());
         	else
         		GuiUtils.getChoice(picked, new String[]{ "<Nothing>" } );
-        }
-
-        if (af.hasSubAbility()){
-        	Ability_Sub abSub = sa.getSubAbility();
-        	if (abSub != null){
-        	   abSub.resolve();
-        	}
         }
 	}
 	
@@ -1198,7 +1197,7 @@ public class AbilityFactory_ChangeZone {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-			   abSub.resolve();
+			   //moved to general resolve
 			}
 			else{
 				String DrawBack = af.getMapParams().get("SubAbility");
