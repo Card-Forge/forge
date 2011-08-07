@@ -242,7 +242,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		// prevent run-away activations - first time will always return true
 		Random r = MyRandom.random;
 		final Card source = sa.getSourceCard();
-		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		boolean chance = r.nextFloat() <= Math.pow(.9, source.getAbilityUsed());
 
 		Target tgt = sa.getTarget();
 		if (tgt != null){
