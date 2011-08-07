@@ -170,8 +170,42 @@ public class CardPanel extends JPanel implements CardContainer{
 	protected void paintComponent (Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setColor(Color.black);
+		
+		// + White borders for Core sets Unlimited - 9th +
 		int cornerSize = Math.max(4, Math.round(cardWidth * ROUNDED_CORNER_SIZE));
+
+		if (this.gameCard != null)
+		{
+			if ( (!this.gameCard.getImageFilename().equals("none")) && (!this.gameCard.getName().equals("Morph")) ) {
+				if ( (this.gameCard.getCurSetCode().equals("2ED")) ||
+					 (this.gameCard.getCurSetCode().equals("3ED")) ||
+					 (this.gameCard.getCurSetCode().equals("4ED")) ||
+					 (this.gameCard.getCurSetCode().equals("5ED")) ||
+					 (this.gameCard.getCurSetCode().equals("6ED")) ||
+					 (this.gameCard.getCurSetCode().equals("7ED")) ||
+					 (this.gameCard.getCurSetCode().equals("8ED")) ||
+					 (this.gameCard.getCurSetCode().equals("9ED")) ||
+					 (this.gameCard.getCurSetCode().equals("CHR")) ||
+					 (this.gameCard.getCurSetCode().equals("POR")) ||
+					 (this.gameCard.getCurSetCode().equals("PTK")) ||
+					 (this.gameCard.getCurSetCode().equals("S99")) ||
+					 (this.gameCard.getCurSetCode().equals("S00")) ) {
+					if (!isSelected) {
+						g2d.setColor(Color.black);
+						int offset = tapped ? 1 : 0;
+						for (int i = 1, n = Math.max(1, Math.round(cardWidth * SELECTED_BORDER_SIZE)); i <= n; i++)
+							g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset, cardWidth + i * 2 - 1, cardHeight + i * 2 - 1,
+									cornerSize, cornerSize);
+					}
+					g2d.setColor(Color.white);
+				}
+				else {
+					g2d.setColor(Color.black);
+				}
+			}
+		}		
+		// - White borders for Core sets Unlimited - 9th -
+
 		g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
 		if (isSelected) {
 			g2d.setColor(Color.green);
