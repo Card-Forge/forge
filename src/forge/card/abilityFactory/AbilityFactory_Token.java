@@ -213,10 +213,6 @@ public class AbilityFactory_Token extends AbilityFactory {
 				// Don't kill AIs Legendary tokens
 				if (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, tokenName).size() > 0)
 					return false;
-				
-				/*// Kill Human's Legendary tokens
-				if (AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, tokenName).size() > 0)
-					return true;*/ // Never use "return true" in canPlayAI
 			}
 		}
 		
@@ -278,16 +274,23 @@ public class AbilityFactory_Token extends AbilityFactory {
 			}
 		}
 		
-		if (tokenAmount.equals("X") && source.getSVar(tokenAmount).equals("Count$xPaid")){
-			// Set PayX here to maximum value.
-			int xPay = ComputerUtil.determineLeftoverMana(sa);
-			source.setSVar("PayX", Integer.toString(xPay));
+		if (tokenAmount.equals("X")) {
+			if(source.getSVar(tokenAmount).equals("Count$xPaid")){
+				// Set PayX here to maximum value.
+				int xPay = ComputerUtil.determineLeftoverMana(sa);
+				source.setSVar("PayX", Integer.toString(xPay));
+			}
+			if(AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa) <= 0)
+				return false;
 		}
 		
 		if (AbilityFactory.playReusable(sa))
 			return chance;
 		
-		return ((r.nextFloat() < .6667) && chance);
+		if (sa.isAbility())
+			return (r.nextFloat() < .9 && chance);
+		
+		return (r.nextFloat() < .6667 && chance);
 	}
 	
 	private boolean tokenDoTriggerAI(SpellAbility sa, boolean mandatory){
