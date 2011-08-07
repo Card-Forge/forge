@@ -696,11 +696,14 @@ public class CombatUtil {
     //Checks if the life of the attacked Player/Planeswalker is in danger 
     public static boolean lifeInDanger(Combat combat) {
   	   // life in danger only cares about the player's life. Not about a Planeswalkers life
- 	   if(AllZone.ComputerPlayer.cantLose() || AllZone.ComputerPlayer.cantLoseForZeroOrLessLife())
+ 	   if(AllZone.ComputerPlayer.cantLose())
  		   return false;
  	   
-	   return (lifeThatWouldRemain(combat) < Math.min(4, AllZone.ComputerPlayer.getLife())
-			   || resultingPoison(combat) > Math.max(7,AllZone.ComputerPlayer.getPoisonCounters()));
+ 	   if (lifeThatWouldRemain(combat) < Math.min(4, AllZone.ComputerPlayer.getLife()) 
+ 			   && !AllZone.ComputerPlayer.cantLoseForZeroOrLessLife())
+ 		   return true;
+ 	   
+	   return (resultingPoison(combat) > Math.max(7,AllZone.ComputerPlayer.getPoisonCounters()));
     }
     
     //Checks if the life of the attacked Player would be reduced
@@ -712,8 +715,13 @@ public class CombatUtil {
     //Checks if the life of the attacked Player/Planeswalker is in danger 
     public static boolean lifeInSeriousDanger(Combat combat) {
   	   // life in danger only cares about the player's life. Not about a Planeswalkers life
+  	   if(AllZone.ComputerPlayer.cantLose())
+ 		   return false;
  	   
-	   return (lifeThatWouldRemain(combat) < 1 || resultingPoison(combat) > 9);
+ 	   if (lifeThatWouldRemain(combat) < 1 && !AllZone.ComputerPlayer.cantLoseForZeroOrLessLife())
+ 		   return true;
+ 	   
+	   return (resultingPoison(combat) > 9);
     }
     
     // This calculates the amount of damage a blockgang can deal to the attacker (first strike not supported)
