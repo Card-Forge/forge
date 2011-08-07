@@ -1,0 +1,10 @@
+Name:Pardic Firecat
+ManaCost:3 R
+Types:Creature Elemental Cat
+Text:If Pardic Firecat is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst.
+PT:2/3
+K:Haste
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_firecat.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/211.jpg
+End
