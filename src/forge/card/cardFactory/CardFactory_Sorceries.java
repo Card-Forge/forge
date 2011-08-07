@@ -3464,60 +3464,6 @@ public class CardFactory_Sorceries {
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-                
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Choking Sands")) {
-            Cost abCost = new Cost("1 B B", cardName, false);
-            Target target = new Target(card,"Select target non-Swamp land.", new String[]{"Land.nonSwamp"});
-            final SpellAbility spell = new Spell(card, abCost, target) {
-				private static final long serialVersionUID = 6499378648382900112L;
-
-				@Override
-                public boolean canPlayAI() {
-					CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
-                    land = land.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return !c.isType("Swamp");
-                    	}
-                    });
-                    return land.size() > 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
-                    land = land.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return !c.isType("Swamp");
-                    	}
-                    });
-                    CardList nonBasic = land.filter(AllZoneUtil.nonBasicLand);
-                    if(nonBasic.size() > 0) {
-                    	setTargetCard(nonBasic.get(0));
-                    }
-                    else {
-                    	setTargetCard(land.get(0));
-                    }
-                }//chooseTargetAI()
-                
-                @Override
-                public void resolve() {
-                    if(AllZoneUtil.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        AllZone.GameAction.destroy(getTargetCard());
-                        
-                        if(!getTargetCard().isBasicLand()) getTargetCard().getController().addDamage(2, card);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setDescription(abCost+"Destroy target non-Swamp land. If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.");
-        }//*************** END ************ END **************************
-
         
       
         //*************** START *********** START **************************
