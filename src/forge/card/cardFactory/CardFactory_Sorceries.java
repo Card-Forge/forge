@@ -131,7 +131,8 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-                
+        
+/*        
 	
 	    //*************** START *********** START **************************
         else if(cardName.equals("Identity Crisis")) {
@@ -174,7 +175,8 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
-        
+ */
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Do or Die")) {
         	// TODO: Please please please, someone fix this card
