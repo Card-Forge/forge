@@ -5,7 +5,7 @@ Text:no text
 K:Flash
 K:Enchant Creature Curse
 T:Mode$ DamageDone | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller loses that much life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ EnchantedController | LifeAmount$ X
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragged_veins.jpg
