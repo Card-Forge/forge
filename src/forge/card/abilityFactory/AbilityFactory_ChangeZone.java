@@ -464,6 +464,7 @@ public class AbilityFactory_ChangeZone {
 		Target tgt = af.getAbTgt();
 		if (tgt != null){
 			ArrayList<Player> players = tgt.getTargetPlayers();
+			player = players.get(0);
 			if (players.contains(player) && !player.canTarget(sa.getSourceCard()))
 				return;
 		}
