@@ -941,57 +941,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Flamebreak")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -4224693616606508949L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    if (AllZone.ComputerPlayer.getLife() <= 3)
-                    	return false;
-                    
-                    if (AllZone.HumanPlayer.getLife() <= 3)
-                    	return true;
-                    
-                    CardListFilter filter = new CardListFilter(){
-                    	public boolean addCard(Card c)
-                    	{
-                    		return c.isCreature() && (c.getNetDefense() - c.getDamage())< 4;
-                    	}
-                    };
-                    
-                    CardList humCreats = new CardList(AllZone.Human_Battlefield.getCards());
-                    humCreats = humCreats.filter(filter);
-                    
-                    CardList compCreats = new CardList(AllZone.Computer_Battlefield.getCards());
-                    compCreats = compCreats.filter(filter);
-                    
-                    return humCreats.size() > compCreats.size();
-                    
-                }
-                
-                @Override
-                public void resolve() {
-                    CardList all = AllZoneUtil.getCreaturesInPlay();
-                    
-                    for(int i = 0; i < all.size(); i++)
-                        if(!all.get(i).getKeyword().contains("Flying")) {
-                                all.get(i).setShield(0);
-                                all.get(i).addDamage(3, card);
-                        }
-                    AllZone.HumanPlayer.addDamage(3, card);
-                    AllZone.ComputerPlayer.addDamage(3, card);
-                }
-            };
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************
