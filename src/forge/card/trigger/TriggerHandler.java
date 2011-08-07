@@ -46,10 +46,15 @@ public class TriggerHandler {
 		ret.setName(name);
 		return ret;
 	}
+
+    public static Trigger parseTrigger(String trigParse,Card host)
+    {
+        HashMap<String,String> mapParams = parseParams(trigParse);
+        return parseTrigger(mapParams,host);
+    }
 	
-	public static Trigger parseTrigger(String trigParse,Card host)
+	public static Trigger parseTrigger(HashMap<String,String> mapParams,Card host)
 	{
-		HashMap<String,String> mapParams = parseParams(trigParse);
 		Trigger ret = null;
 		
 		String mode = mapParams.get("Mode");
@@ -342,8 +347,13 @@ public class TriggerHandler {
                 host = regtrig.getHostCard();
 			
 			// This will fix the Oblivion Ring issue, but is this the right fix?
-			for(Card c : regtrig.getHostCard().getRemembered())
-				host.addRemembered(c);
+            for(Card c : regtrig.getHostCard().getRemembered())
+            {
+                if(!host.getRemembered().contains(c))
+                {
+                    host.addRemembered(c);
+                }
+            }
 			
 			sa[0] = regtrig.getOverridingAbility();
 			if(sa[0] == null)
