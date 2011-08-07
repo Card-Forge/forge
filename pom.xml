@@ -5,7 +5,7 @@
     <artifactId>forge</artifactId>
     <packaging>jar</packaging>
     <name>Forge</name>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
     <description>Forge</description>
     <url>http://www.slightlymagic.net/</url>
     <properties>
@@ -57,7 +57,7 @@
         <version>2.1</version>
         <configuration>
           <tagBase>
-            https://cardforge.googlecode.com/svn/tags
+            http://cardforge.googlecode.com/svn/tags
           </tagBase>
         </configuration>
       </plugin>
