@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment Aura
 Text:no text
 K:Enchant Land Curse
-K:stAnimateEnchanted:Land:no changes:Land,Swamp,RemoveSubTypes:no colors:Overwrite:No Condition:Enchanted land is a Swamp.
+K:stAnimateEnchanted:Land:no change/no change/Overwrite:Land,Swamp,RemoveSubTypes:no colors:Overwrite:No Condition:Enchanted land is a Swamp.
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever enchanted land becomes tapped, its controller loses 2 life.
 SVar:TrigLose:AB$LoseLife | Cost$ 0 | Defined$ EnchantedController | LifeAmount$ 2
 SVar:Rarity:Common

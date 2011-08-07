@@ -7343,8 +7343,8 @@ public class GameActionUtil {
 							CardList affectedCards = getAffectedCards(cardWithKeyword, k, specific); // options are All, Self, Enchanted etc.
 							se.setAffectedCards(affectedCards);
 							
-							if(!k[2].equals("no changes")) {
-								String[] pt = k[2].split("/");
+							String[] pt = k[2].split("/");
+							if(!k[2].equals("no changes") && pt.length > 1) {
 								
 								int x = 0;
 			            		if (pt[0].contains("X") || pt[1].contains("X")) 
@@ -7406,18 +7406,25 @@ public class GameActionUtil {
 					String powerStr = keyword[0];
 					String toughStr = keyword[1];
 					//copied from stSetPT power/toughness
-					int power = powerStr.matches("[0-9][0-9]?") ? Integer.parseInt(powerStr) : CardFactoryUtil.xCount(affectedCard, powerStr);
-					int toughness = toughStr.matches("[0-9][0-9]?") ? Integer.parseInt(toughStr) : CardFactoryUtil.xCount(affectedCard, toughStr);
-					se.addOriginalPT(affectedCard, affectedCard.getBaseAttack(), affectedCard.getBaseDefense());
-					affectedCard.setBaseAttack(power);
-					affectedCard.setBaseDefense(toughness);
+					if(!powerStr.equals("no change")) {
+						int power = powerStr.matches("[0-9][0-9]?") ? Integer.parseInt(powerStr) : CardFactoryUtil.xCount(affectedCard, powerStr);
+						se.addOriginalPT(affectedCard, affectedCard.getBaseAttack(), affectedCard.getBaseDefense());
+						affectedCard.setBaseAttack(power);
+					}
+					if(!toughStr.equals("no change")) {
+						int toughness = toughStr.matches("[0-9][0-9]?") ? Integer.parseInt(toughStr) : CardFactoryUtil.xCount(affectedCard, toughStr);
+						se.addOriginalPT(affectedCard, affectedCard.getBaseAttack(), affectedCard.getBaseDefense());
+						affectedCard.setBaseDefense(toughness);
+					}	
 					if(se.isOverwriteKeywords()) {
 						se.addOriginalKeywords(affectedCard, affectedCard.getIntrinsicKeyword());
 						affectedCard.clearAllKeywords();
 					}
 					else {
-						if(keyword.length > 2) {
-							String keywords[] = keyword[2].split(" & ");
+						if(keyword.length != 2) {
+							int index = 2;
+							if (keyword.length == 1) index = 0;
+							String keywords[] = keyword[index].split(" & ");
 							for(int j = 0; j < keywords.length; j++) {
 								String kw = keywords[j];
 								affectedCard.addExtrinsicKeyword(kw);
@@ -7484,8 +7491,12 @@ public class GameActionUtil {
 		
 		private void removeStaticEffect(StaticEffect se, Card source, Card affectedCard, String[] details) {
 			
+			String[] kw = details[2].split("/", 3);
+			
 			if(!details[2].equals("no changes")) {
-				affectedCard.setBaseAttack(se.getOriginalPower(affectedCard));
+				if (!kw[0].equals("no change"))
+						affectedCard.setBaseAttack(se.getOriginalPower(affectedCard));
+				if (!kw[1].equals("no change"))
 				affectedCard.setBaseDefense(se.getOriginalToughness(affectedCard));
 			}
 			
@@ -7506,15 +7517,16 @@ public class GameActionUtil {
 			}
 			
 			if(se.isOverwriteKeywords()) {
-				for(String kw : se.getOriginalKeywords(affectedCard)) affectedCard.addIntrinsicKeyword(kw);
+				for(String keyw : se.getOriginalKeywords(affectedCard)) affectedCard.addIntrinsicKeyword(keyw);
 			}
 			else {
-				String[] kw = details[2].split("/", 3);
-				if (kw.length > 2) {
-					String kws[] = kw[2].split(" & ");
-					for(int j = 0; j < kws.length; j++) {
-						String keyword = kws[j];
-						affectedCard.removeExtrinsicKeyword(keyword);
+				if(kw.length != 2) {
+					int index = 2;
+					if (kw.length == 1) index = 0;
+					String keywords[] = kw[index].split(" & ");
+					for(int j = 0; j < keywords.length; j++) {
+						String keyw = keywords[j];
+						affectedCard.removeExtrinsicKeyword(keyw);
 					}
 				}
 			}

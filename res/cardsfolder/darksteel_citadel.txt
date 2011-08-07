@@ -1,7 +1,7 @@
 Name:Darksteel Citadel
 ManaCost:no cost
 Types:Artifact Land
-Text:("Destroy" effects and lethal damage don't destroy it.)
+Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 K:Indestructible
 SVar:Rarity:Common
