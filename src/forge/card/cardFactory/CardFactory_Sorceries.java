@@ -44,35 +44,8 @@ public class CardFactory_Sorceries {
     public static Card getCard(final Card card, final String cardName, Player owner) 
     {
     
-    	 
         //*************** START *********** START **************************
-        if(cardName.equals("Molten Rain")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 8855786097956610090L;
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        if(!c.getType().contains("Basic")) c.getController().addDamage(2, card);
-                        AllZone.GameAction.destroy(c);
-                    }
-                    
-                }// resolve()
-                
-            };// Spell
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetType("Land", AllZone.Human_Battlefield));
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
-        }// *************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Political Trickery")) {
+        if(cardName.equals("Political Trickery")) {
             final Card[] target = new Card[2];
             final int[] index = new int[1];
             

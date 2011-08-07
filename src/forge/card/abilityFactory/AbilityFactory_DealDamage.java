@@ -139,8 +139,13 @@ public class AbilityFactory_DealDamage {
 			tgts = sa.getTarget().getTargets();
 
 		if (!(sa instanceof Ability_Sub))
-			sb.append(name).append(" - ");
+			sb.append(name).append(" -");
+		sb.append(" ");
 
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
+		
 		ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("DamageSource"), sa);
 		Card source = definedSources.get(0);
 		
@@ -502,8 +507,13 @@ public class AbilityFactory_DealDamage {
 
 	private void doResolve(SpellAbility saMe)
 	{
-		int dmg = getNumDamage(saMe);
 		HashMap<String,String> params = AF.getMapParams();
+		if (!AbilityFactory.checkConditional(params, saMe)){
+			AbilityFactory.resolveSubAbility(saMe);
+			return;
+		}
+		
+		int dmg = getNumDamage(saMe);		
 
 		boolean noPrevention = params.containsKey("NoPrevention");
 
@@ -540,28 +550,7 @@ public class AbilityFactory_DealDamage {
 			}
 		}
 
-		if (AF.hasSubAbility()){
-			Ability_Sub abSub = saMe.getSubAbility();
-			if (abSub != null){
-				abSub.resolve();
-			}
-			else{
-				Object obj = tgts.get(0);
-
-				Player pl = null;
-				Card c = null;
-
-				if (obj instanceof Card){
-					c = (Card)obj;
-					pl = c.getController();
-				}
-				else{
-					pl = (Player)obj;
-				}
-				CardFactoryUtil.doDrawBack(params.get("SubAbility"), dmg, AF.getHostCard().getController(),
-						AF.getHostCard().getController().getOpponent(),   pl, AF.getHostCard(), c, saMe);
-			}
-		}
+		AbilityFactory.resolveSubAbility(saMe);
 	}
 
 	// ******************************************************************************************************

@@ -998,7 +998,6 @@ public class AbilityFactory {
 		return cards;
 	}
 	
-	
 	public static ArrayList<Player> getDefinedPlayers(Card card, String def, SpellAbility sa){
 		ArrayList<Player> players = new ArrayList<Player>();
 		String defined = (def == null) ? "You" : def;
@@ -1184,6 +1183,52 @@ public class AbilityFactory {
 		}while(parent.getTarget() == null || parent.getTarget().getTargetPlayers().size() == 0);
 		
 		return parent;
+	}
+	
+	public static boolean checkConditional(HashMap<String,String> params, SpellAbility sa){
+		// ConditionPresent is required. Other paramaters are optional.
+		// ConditionDefined$ What cardlist we will be comparing (Triggered, Valid, Targeted etc)
+		// ConditionPresent$ Similar to IsPresent, but the Condition is checked on Resolution, not Activation
+		// ConditionCompare$ Similar to PresentCompare, but the Condition is checked on Resolution, not Activation
+		// ConditionDescription$ Not used here, but can be used in StackDescription		
+
+		String present = params.get("ConditionPresent");
+		if (present == null)	// If CP doesn't exist, return true
+			return true;
+		
+		String compare = params.get("ConditionCompare");
+		if (compare == null)	// Compare defaults to "Does this exist?"
+			compare = "GE1";
+		
+		String defined = params.get("ConditionDefined");
+		CardList list;
+		if (defined == null)
+			list = AllZoneUtil.getCardsInPlay();
+		else{
+			list = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa));
+		}
+		
+		list = list.getValidCards(present.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+		
+		int right;
+		String rightString = compare.substring(2);
+		try{	// If this is an Integer, just parse it
+			right = Integer.parseInt(rightString);
+		}
+		catch(NumberFormatException e){	// Otherwise, grab it from the SVar
+			right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
+		}
+
+		int left = list.size();
+		
+		return Card.compare(left, compare, right);
+	}
+	
+	public static void resolveSubAbility(SpellAbility sa){
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null){
+			abSub.resolve();
+		}
 	}
 	
 	public static void handleRemembering(AbilityFactory AF)

@@ -4152,9 +4152,13 @@ public class CardFactory_Creatures {
         	/*
         	 * Sacrifice Vampire Hexmage: Remove all counters from target permanent.
         	 */
-        	final SpellAbility ability = new Ability(card, "0") {
 
-        		@Override
+        	Cost cost = new Cost("Sac<1/CARDNAME>", cardName, true);
+        	final Target tgt = new Target(card, "Select a permanent", "Permanent".split(","));
+        	final SpellAbility ability = new Ability_Activated(card, cost, tgt) {
+				private static final long serialVersionUID = -5084369399105353155L;
+
+				@Override
         		public boolean canPlayAI() {
         			
         			//Dark Depths:
@@ -4168,7 +4172,7 @@ public class CardFactory_Creatures {
         			
         			if (list.size()>0)
         			{
-        				setTargetCard(list.get(0));
+        				tgt.addTarget(list.get(0));
         				return true;
         			}
         			
@@ -4183,16 +4187,11 @@ public class CardFactory_Creatures {
         			
         			if (list.size()>0)
         			{
-        				setTargetCard(list.get(0));
+        				tgt.addTarget(list.get(0));
         				return true;
         			}
         			
         			return false;
-        		}
-        		
-        		@Override
-        		public boolean canPlay() {
-        			return AllZoneUtil.isCardInPlay(card) && super.canPlay();
         		}
 
         		@Override
@@ -4203,11 +4202,9 @@ public class CardFactory_Creatures {
         					c.setCounter(counter, 0, false);
         				}
         			}
-        			AllZone.GameAction.sacrifice(card);
         		}
         	};
         	card.addSpellAbility(ability);
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
         }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
