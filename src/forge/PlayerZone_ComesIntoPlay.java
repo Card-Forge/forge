@@ -88,7 +88,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 }
                 /*
                 // Check for a mountain
-                if (!listValakut.isEmpty() && c.getType().contains("Mountain") ) {
+                if (!listValakut.isEmpty() && c.isType("Mountain") ) {
                 	for (int i = 0; i < listValakut.size(); i++) {
                 		boolean b = GameActionUtil.executeValakutEffect(listValakut.get(i),c);
                 		if (!b) {
@@ -101,14 +101,14 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 //Tectonic Instability
                 CardList tis = AllZoneUtil.getCardsInPlay("Tectonic Instability");
                 final Card tisLand = c;
-                for(Card ti:tis) {
+                for (Card ti:tis) {
                 	final Card source = ti;
                 	SpellAbility ability = new Ability(source, "") {
                 		@Override
                 		public void resolve() {
                 			CardList lands = AllZoneUtil.getPlayerCardsInPlay(tisLand.getController());
                 			lands = lands.filter(AllZoneUtil.lands);
-                			for(Card land:lands) land.tap();
+                			for (Card land : lands) land.tap();
                 		}
                 	};
                 	StringBuilder sb = new StringBuilder();

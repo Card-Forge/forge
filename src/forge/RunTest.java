@@ -20,23 +20,23 @@ public class RunTest
 	    check("1", c.getOwner().isComputer());
 	    check("1.1", c.getName().equals("Elvish Warrior"));
 	    check("2", c.getManaCost().equals("G G"));
-	    check("2.1", c.getType().contains("Creature"));
-	    check("2.2", c.getType().contains("Elf"));
-	    check("2.3", c.getType().contains("Warrior"));
+	    check("2.1", c.isType("Creature"));
+	    check("2.2", c.isType("Elf"));
+	    check("2.3", c.isType("Warrior"));
 	    check("3", c.getText().equals(""));
 	    check("4", c.getNetAttack() == 2);
 	    check("5", c.getNetDefense() == 3);
 	    check("6", c.getKeyword().isEmpty());
 	    
 	    c = cf.getCard("Shock", null);
-	    check("14", c.getType().contains("Instant"));
+	    check("14", c.isType("Instant"));
 	    //check("15", c.getText().equals("Shock deals 2 damge to target creature or player."));
 	    
 	    c = cf.getCard("Bayou", null);
 	    check("17", c.getManaCost().equals(""));
-	    check("18", c.getType().contains("Land"));
-	    check("19", c.getType().contains("Swamp"));
-	    check("20", c.getType().contains("Forest"));
+	    check("18", c.isType("Land"));
+	    check("19", c.isType("Swamp"));
+	    check("20", c.isType("Forest"));
 	    
 	    //********* test ManaCost
 	    ManaCost manaCost = new ManaCost("G");

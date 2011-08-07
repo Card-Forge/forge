@@ -276,27 +276,28 @@ public class GameActionUtil {
 							CardList topOfLibrary = AllZoneUtil.getPlayerCardsInLibrary(controller);
 							CardList revealed = new CardList();
 							int RippleNumber = RippleCount;
-							if(topOfLibrary.size() == 0) return;
+							if (topOfLibrary.size() == 0) return;
 							int RippleMax = 10; // Shouldn't Have more than Ripple 10, seeing as no cards exist with a ripple greater than 4
 							Card[] RippledCards = new Card[RippleMax]; 
 							Card crd;
-							if(topOfLibrary.size() < RippleNumber) RippleNumber = topOfLibrary.size();
+							if (topOfLibrary.size() < RippleNumber) RippleNumber = topOfLibrary.size();
 
 							for(int i = 0; i < RippleNumber; i++){
 								crd = topOfLibrary.get(i);
 								revealed.add(crd);
-								if(crd.getName().equals(RippleCard.getName())) RippledCards[i] = crd;
+								if (crd.getName().equals(RippleCard.getName())) RippledCards[i] = crd;
 							}//For
 							GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
-							for(int i = 0; i < RippleMax; i++) {
-								if(RippledCards[i] != null && !RippledCards[i].isUnCastable()) {
+							for (int i = 0; i < RippleMax; i++) {
+								if (RippledCards[i] != null 
+										&& !RippledCards[i].isUnCastable()) {
 
-									if(RippledCards[i].getController().isHuman()) {
+									if (RippledCards[i].getController().isHuman()) {
 										Object[] possibleValues = {"Yes", "No"};
 										Object q = JOptionPane.showOptionDialog(null, "Cast " + RippledCards[i].getName() + "?", "Ripple", 
 												JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 												null, possibleValues, possibleValues[0]);
-										if(q.equals(0)) {
+										if (q.equals(0)) {
 											AllZone.GameAction.playCardNoCost(RippledCards[i]);
 											revealed.remove(RippledCards[i]);
 										}
@@ -304,8 +305,9 @@ public class GameActionUtil {
 									{
 										ArrayList<SpellAbility> choices = RippledCards[i].getBasicSpells();
 
-										for(SpellAbility sa:choices) {
-											if(sa.canPlayAI() && !sa.getSourceCard().getType().contains("Legendary")) {
+										for (SpellAbility sa:choices) {
+											if (sa.canPlayAI() 
+													&& !sa.getSourceCard().isType("Legendary")) {
 												ComputerUtil.playStackFree(sa);
 												revealed.remove(RippledCards[i]);
 												break;
@@ -315,7 +317,7 @@ public class GameActionUtil {
 								}
 							}
 							revealed.shuffle();
-							for(Card bottom:revealed) {
+							for (Card bottom:revealed) {
 								AllZone.GameAction.moveToBottomOfLibrary(bottom);
 							}
 						}
@@ -543,7 +545,8 @@ public class GameActionUtil {
 		final int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
 		list = list.getName("Dovescape");
 		final CardList cl = list;
-		if(!c.getType().contains("Creature") && list.size() > 0) {
+		if (!c.isType("Creature") 
+				&& list.size() > 0) {
 			final Card card = list.get(0);
 
 			Ability ability2 = new Ability(card, "0") {
@@ -552,14 +555,14 @@ public class GameActionUtil {
 
 					SpellAbility sa = AllZone.Stack.peek();
 
-					if(sa.getSourceCard().equals(c)) {
+					if (sa.getSourceCard().equals(c)) {
 						sa = AllZone.Stack.pop();
 
 						AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
 
-						for(int j = 0; j < cl.size() * cmc; j++) {
-							CardFactoryUtil.makeToken("Bird", "WU 1 1 Bird", sa.getSourceCard().getController(), "W U", new String[] {
-								"Creature", "Bird"}, 1, 1, new String[] {"Flying"});
+						for (int j = 0; j < cl.size() * cmc; j++) {
+							CardFactoryUtil.makeToken("Bird", "WU 1 1 Bird", sa.getSourceCard().getController(), "W U", 
+								new String[] {"Creature", "Bird"}, 1, 1, new String[] {"Flying"});
 						}
 
 						/*
@@ -3652,7 +3655,7 @@ public class GameActionUtil {
                                for (int i = 0; i < max; i++) {
                                    Card c = libraryList.get(i);
                                    cardsToReveal.add(c);
-                                   if (c.getType().contains("Creature")) {
+                                   if (c.isType("Creature")) {
                                        AllZone.GameAction.moveTo(battlefield, c);
                                        break;   
                                    } 
@@ -5006,11 +5009,11 @@ public class GameActionUtil {
 				{
 					public boolean addCard(Card crd)
 					{
-						return crd.getType().contains("Mountain");
+						return crd.isType("Mountain");
 					}
 				});
 				
-				for(int j = 0; j < mountains.size(); j++) {
+				for (int j = 0; j < mountains.size(); j++) {
 					final Card c = mountains.get(j);
 					boolean hasAbility = false;
 					SpellAbility[] sas = c.getSpellAbility();
@@ -5020,7 +5023,7 @@ public class GameActionUtil {
 							hasAbility = true;
 					}
 					
-					if(!hasAbility) {
+					if (!hasAbility) {
 						Cost abCost = new Cost("T", c.getName(), true);
 						Target target = new Target(c,"TgtCP");
 						final Ability_Activated ability = new Ability_Activated(c, abCost, target)
@@ -5031,7 +5034,7 @@ public class GameActionUtil {
 					          CardList list = CardFactoryUtil.AI_getHumanCreature(1, c, true);
 					          list.shuffle();
 
-					          if(list.isEmpty() || AllZone.HumanPlayer.getLife() < 5)
+					          if (list.isEmpty() || AllZone.HumanPlayer.getLife() < 5)
 					            setTargetPlayer(AllZone.HumanPlayer);
 					          else
 					            setTargetCard(list.get(0));
@@ -5624,7 +5627,7 @@ public class GameActionUtil {
 		public void execute() {
 			CardList list = gloriousAnthemList;
 			// reset all cards in list - aka "old" cards
-			for(int i2 = 0; i2 < list.size(); i2++) {
+			for (int i2 = 0; i2 < list.size(); i2++) {
 				list.get(i2).addSemiPermanentAttackBoost(-1);
 				list.get(i2).addSemiPermanentDefenseBoost(-1);
 			}
@@ -5633,10 +5636,10 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Coat of Arms");
 
 			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
+			for (int outer = 0; outer < zone.length; outer++) {
 				CardList creature = AllZoneUtil.getCardsInPlay();
 
-				for(int i = 0; i < creature.size(); i++) {
+				for (int i = 0; i < creature.size(); i++) {
 					final Card crd = creature.get(i);
 					CardList Type = AllZoneUtil.getCardsInPlay();
 					Type = Type.filter(new CardListFilter() {
@@ -5645,13 +5648,13 @@ public class GameActionUtil {
 						}
 					});
 					CardList Already_Added = new CardList();
-					for(int x = 0; x < Type.size(); x++) {
+					for (int x = 0; x < Type.size(); x++) {
 						Already_Added.clear();
-						for(int x2 = 0; x2 < Type.get(x).getType().size(); x2++) {
-							if(!Already_Added.contains(Type.get(x))) {
-								if(!Type.get(x).getType().get(x2).equals("Creature") && !Type.get(x).getType().get(x2).equals("Legendary") 
+						for (int x2 = 0; x2 < Type.get(x).getType().size(); x2++) {
+							if (!Already_Added.contains(Type.get(x))) {
+								if (!Type.get(x).getType().get(x2).equals("Creature") && !Type.get(x).getType().get(x2).equals("Legendary") 
 										&& !Type.get(x).getType().get(x2).equals("Artifact") ) {	
-									if (crd.getType().contains(Type.get(x).getType().get(x2)) 
+									if (crd.isType(Type.get(x).getType().get(x2)) 
 											|| crd.hasKeyword("Changeling")
 											|| Type.get(x).hasKeyword("Changeling")) {					
 										Already_Added.add(Type.get(x));
