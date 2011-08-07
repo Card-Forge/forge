@@ -40,6 +40,7 @@ public class GameActionUtil {
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
 		upkeep_Dega_Sanctuary();
+		upkeep_Ceta_Sanctuary();
 		upkeep_Tangle_Wire();
 		upkeep_Dance_of_the_Dead();
 		upkeep_Mana_Crypt();
@@ -3670,6 +3671,40 @@ public class GameActionUtil {
 
 		}//for
 	}//upkeep_Dega_Sanctuary()
+	
+	private static void upkeep_Ceta_Sanctuary() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Ceta Sanctuary");
+
+		for(Card sanc:list) {
+			final Card source = sanc;
+			final Ability ability = new Ability(source, "0") {
+				public void resolve() {
+					int draw = 0;
+					CardList play = AllZoneUtil.getPlayerCardsInPlay(player);
+					CardList green = play.filter(AllZoneUtil.green);
+					CardList red = play.filter(AllZoneUtil.red);
+					
+					if(green.size() > 0 && red.size() > 0) draw = 2;
+					else if(green.size() > 0 || red.size() > 0) draw = 1;
+					
+					if(draw > 0) {
+						player.drawCards(draw);
+						player.discard(1, this, true);
+					}
+				}
+			};//Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source).append(" - ");
+			sb.append("At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.");
+			ability.setStackDescription(sb.toString());
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
+		}//for
+	}//upkeep_Ceta_Sanctuary()
 		
 	private static void upkeep_Power_Surge() {
 		/*
