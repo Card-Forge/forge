@@ -220,7 +220,7 @@ public class ComputerUtil_Block2
 				  combat.addBlocker(attacker, leader);
 				  blockersLeft.remove(blocker);
 				  blockersLeft.remove(leader);
-				  continue;
+				  break;
 			  }
 		  }
 	  }
