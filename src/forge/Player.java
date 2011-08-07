@@ -768,6 +768,9 @@ public abstract class Player extends MyObservable{
 			CardFactoryUtil.playLandEffects(land);
 			numLandsPlayed++;
 			
+			//check state effects for static animate (Living Lands, Conversion, etc...)
+			AllZone.GameAction.checkStateEffects();
+			
 			//Run triggers
 			HashMap<String, Object> runParams = new HashMap<String, Object>();
 			runParams.put("Card", land);

@@ -246,16 +246,6 @@ public class ComputerUtil
 	  if (source.getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
 		  source.getController().addSlowtripList(source);
 
-      for (int i=0; i<sa.getSourceCard().getKeyword().size(); i++)
-      {
-      	String k = sa.getSourceCard().getKeyword().get(i);
-      	if (k.startsWith("Scry"))
-      	{
-      		String kk[] = k.split(" ");
-      		sa.getSourceCard().getController().scry(Integer.parseInt(kk[1]));
-      	}
-      }
-
       //destroys creatures if they have lethal damage, etc..
       AllZone.GameAction.checkStateEffects();
     }
@@ -785,7 +775,6 @@ public class ComputerUtil
 		  landList.remove(ix);
 		  computer.playLand(land);
 
-		  AllZone.GameAction.checkStateEffects();
 		  if (AllZone.Stack.size() != 0)
 			  return false;
 	  }
