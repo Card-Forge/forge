@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Each | TriggerZones
 SVar:TrigCounter:AB$Counter | Cost$ 0 | UnlessCost$ 3 | Defined$ TriggeredSpellAbility | UnlessPayer$ TriggeredCardController
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_void.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/27.jpg
 End
