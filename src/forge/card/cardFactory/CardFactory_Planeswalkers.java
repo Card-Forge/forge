@@ -53,12 +53,12 @@ class CardFactory_Planeswalkers {
 				@Override
                 public void resolve() {
                     turn[0] = AllZone.Phase.getTurn();
+                    final Card c = getTargetCard();
                     
                     final Command eot = new Command() {
                         private static final long serialVersionUID = 94488363210770877L;
                         
                         public void execute() {
-                            Card c = getTargetCard();
                             if(AllZoneUtil.isCardInPlay(c)) {
                                 c.addTempAttackBoost(-3);
                                 c.addTempDefenseBoost(-3);
@@ -66,8 +66,6 @@ class CardFactory_Planeswalkers {
                             }
                         }//execute()
                     };//Command
-                    
-                    Card c = getTargetCard();
                     if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         c.addTempAttackBoost(3);
                         c.addTempDefenseBoost(3);
