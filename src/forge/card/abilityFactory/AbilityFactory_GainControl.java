@@ -170,6 +170,12 @@ public class AbilityFactory_GainControl {
         boolean hasLand = false;
         
 		Target tgt = AF.getAbTgt();
+		
+		//if Defined, then don't worry about targeting
+		if(tgt == null) {
+			return true;
+		}
+		
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		list = list.getValidCards(tgt.getValidTgts(), hostCard.getController(), hostCard);
 		//AI won't try to grab cards that are filtered out of AI decks on purpose
