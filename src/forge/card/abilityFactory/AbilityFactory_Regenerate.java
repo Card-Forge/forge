@@ -25,6 +25,10 @@ public class AbilityFactory_Regenerate {
 	
 	// Ex: A:SP$Regenerate | Cost$W | Tgt$TgtC | SpellDescription$Regenerate target creature.
 	// http://www.slightlymagic.net/wiki/Forge_AbilityFactory#Regenerate
+	
+	//**************************************************************
+	// ********************* Regenerate ****************************
+	//**************************************************************
 
 	public static SpellAbility getAbilityRegenerate(final AbilityFactory af) {
 
@@ -229,7 +233,7 @@ public class AbilityFactory_Regenerate {
 			chance &= subAb.chkAI_Drawback();
 		
 		return chance;
-	}
+	}//regenerateCanPlayAI
 
 	private static boolean doTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
 		boolean chance = false;
@@ -335,5 +339,227 @@ public class AbilityFactory_Regenerate {
 				AllZone.EndOfTurn.addUntil(untilEOT);
 			}
 		}
-	}//doResolve
-}
+	}//regenerateResolve
+
+	//**************************************************************
+	// ********************* RegenerateAll *************************
+	//**************************************************************
+
+	public static SpellAbility getAbilityRegenerateAll(final AbilityFactory af) {
+
+		final SpellAbility abRegenerateAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = -3001272997209059394L;
+
+			@Override
+			public boolean canPlayAI() {
+				return regenerateAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				regenerateAllResolve(af, this);
+				af.getHostCard().setAbilityUsed(af.getHostCard().getAbilityUsed() + 1);
+			}
+			
+			@Override
+			public String getStackDescription(){
+				return regenerateAllStackDescription(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return regenerateAllDoTriggerAI(af, this, mandatory);
+			}
+			
+		};//Ability_Activated
+
+		return abRegenerateAll;
+	}
+
+	public static SpellAbility getSpellRegenerateAll(final AbilityFactory af){
+
+		final SpellAbility spRegenerateAll = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = -4185454527676705881L;
+
+			@Override
+			public boolean canPlayAI() {
+				return regenerateAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				regenerateAllResolve(af, this);
+			}
+			
+			@Override
+			public String getStackDescription(){
+				return regenerateAllStackDescription(af, this);
+			}
+			
+		}; // Spell
+
+		return spRegenerateAll;
+	}
+	
+	public static SpellAbility createDrawbackRegenerateAll(final AbilityFactory af) {
+		final SpellAbility dbRegenAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = 4777861790603705572L;
+
+			@Override
+			public String getStackDescription(){
+				return regenerateAllStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				regenerateAllResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return regenerateAllDoTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return dbRegenAll;
+	}
+	
+	private static String regenerateAllStackDescription(AbilityFactory af, SpellAbility sa){
+		final HashMap<String,String> params = af.getMapParams();
+		StringBuilder sb = new StringBuilder();
+		Card host = af.getHostCard();
+
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(host).append(" - ");
+
+		String desc = "";
+		if(params.containsKey("SpellDescription")) {
+			desc = params.get("SpellDescription");
+		}
+		else {
+			desc = "Regenerate all valid cards.";
+		}
+
+		sb.append(desc);
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+
+	private static boolean regenerateAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		final HashMap<String,String> params = af.getMapParams();
+		final Card hostCard = af.getHostCard();
+		boolean chance = false;
+		Cost abCost = af.getAbCost();
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost() && !abCost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String type = abCost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(type.split(","), hostCard.getController(), hostCard);
+			    if(ComputerUtil.getCardPreference(hostCard, "SacCost", typeList) == null)
+			    	return false;
+			}
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
+		}
+
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+
+
+		// filter AIs battlefield by what I can target
+		String valid = "";
+
+		if(params.containsKey("ValidCards")) 
+			valid = params.get("ValidCards");
+    	
+    	CardList list = AllZoneUtil.getCardsInPlay();
+		list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+
+		if (list.size() == 0)
+			return false;
+
+		int numSaved = 0;
+		if (AllZone.Stack.size() > 0){
+			//TODO - check stack for something on the stack will kill anything i control
+		}
+		else{
+
+			if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
+				CardList combatants = list.getType("Creature");
+
+				for(Card c : combatants){
+					if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)){
+						numSaved++;
+					}
+				}
+			}
+		}
+		
+		if(numSaved > 1) {
+			chance = true;
+		}
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+
+		return chance;
+	}
+
+	private static boolean regenerateAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+		boolean chance = true;
+
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.doTrigger(mandatory);
+		
+		return chance;
+	}
+	
+	private static void regenerateAllResolve(final AbilityFactory af, final SpellAbility sa) {
+		Card hostCard = af.getHostCard();
+		final HashMap<String,String> params = af.getMapParams();
+		String valid = "";
+
+		if(params.containsKey("ValidCards")) 
+			valid = params.get("ValidCards");
+    	
+    	CardList list = AllZoneUtil.getCardsInPlay();
+		list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+		
+		for(final Card c : list){
+			final Command untilEOT = new Command() {
+				private static final long serialVersionUID = 259368227093961103L;
+
+				public void execute() {
+					c.resetShield();
+				}
+			};
+			
+			if (AllZoneUtil.isCardInPlay(c)){
+				c.addShield();
+				AllZone.EndOfTurn.addUntil(untilEOT);
+			}
+		}
+	}//regenerateAllResolve
+	
+}//end class AbilityFactory_Regenerate

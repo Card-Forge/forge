@@ -689,6 +689,16 @@ public class AbilityFactory {
             if(isDb)
                 SA = AbilityFactory_Cleanup.getDrawback(this);
         }
+        
+        if (API.equals("RegenerateAll")){
+			if (isAb)
+				SA = AbilityFactory_Regenerate.getAbilityRegenerateAll(this);
+			else if (isSp)
+				SA = AbilityFactory_Regenerate.getSpellRegenerateAll(this);
+			else if(isDb) {
+				SA = AbilityFactory_Regenerate.createDrawbackRegenerateAll(this);
+			}
+		}
 
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
