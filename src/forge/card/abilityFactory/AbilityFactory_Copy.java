@@ -14,6 +14,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.MyRandom;
+import forge.PlayerZone_ComesIntoPlay;
 import forge.card.cardFactory.CardFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -231,6 +232,7 @@ public class AbilityFactory_Copy {
 		if(params.containsKey("Keywords")) {
 			keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
 		}
+		int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(card, params.get("NumCopies"), sa) : 1;
 
 		ArrayList<Card> tgtCards;
 
@@ -245,9 +247,13 @@ public class AbilityFactory_Copy {
 
 				//start copied Kiki code
 				int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
+				multiplier *= numCopies;
 				Card[] crds = new Card[multiplier];
-
+				
+				PlayerZone_ComesIntoPlay.setSimultaneousEntry(true);
+				
 				for(int i = 0; i < multiplier; i++) {
+					if(i + 1 == multiplier) PlayerZone_ComesIntoPlay.setSimultaneousEntry(false);
 					//TODO: Use central copy methods
 					Card copy;
 					if(!c.isToken()) {

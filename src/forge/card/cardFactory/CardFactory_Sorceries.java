@@ -25,14 +25,12 @@ import forge.Constant;
 import forge.HandSizeOp;
 import forge.Player;
 import forge.PlayerZone;
-import forge.PlayerZone_ComesIntoPlay;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.spellability.Target;
-import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
@@ -1546,6 +1544,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
         	Cost cost = new Cost(card.getManaCost(), cardName, false);
@@ -1711,7 +1710,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             card.addSpellAbility(kicker);
         }//*************** END ************ END **************************
-     
+        */
         
 
         //*************** START *********** START **************************

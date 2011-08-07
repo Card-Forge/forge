@@ -2540,6 +2540,15 @@ public class CardFactoryUtil {
         	else
         		return doXMath(Integer.parseInt(sq[2]), m, c); // not Threshold
         }
+        
+        //Count$Kicked.<numIfKicked>.<numIfNotKicked>
+        if (sq[0].contains("Kicked"))
+        {
+        	if (c.isKicked())
+        		return doXMath(Integer.parseInt(sq[1]), m, c); // kicked
+        	else
+        		return doXMath(Integer.parseInt(sq[2]), m, c); // not kicked
+        }
         	
         
         // Count$CardPower
