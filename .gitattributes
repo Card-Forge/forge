@@ -8126,6 +8126,7 @@ res/cardsfolder/wild_mongrel.txt -text svneol=native#text/plain
 res/cardsfolder/wild_nacatl.txt -text svneol=native#text/plain
 res/cardsfolder/wild_ox.txt -text svneol=native#text/plain
 res/cardsfolder/wild_research.txt svneol=native#text/plain
+res/cardsfolder/wild_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/wilderness_elemental.txt -text svneol=native#text/plain
 res/cardsfolder/wilderness_hypnotist.txt -text svneol=native#text/plain
 res/cardsfolder/wildfield_borderpost.txt -text svneol=native#text/plain
