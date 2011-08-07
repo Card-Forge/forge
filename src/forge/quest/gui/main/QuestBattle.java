@@ -160,6 +160,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Goblin Recruit 2", "medium", "RG Skullclamp deck");
 //        addToDeckList("Goblin Recruit 3", "hard", "BR Goblin Sacrifice deck");
         addToDeckList("Gold Finger 3", "hard", "Mono U control deck with various counter spells, Serra Sphinx and Memnarch");
+        addToDeckList("Gold Finger 4", "very hard", "Mono U control deck with various counter spells");
         addToDeckList("Grampa Simpson 1", "easy", "WR Double and First Strike deck with equipments and auras");
         addToDeckList("Grampa Simpson 2", "medium", "WR Double Strike deck with equipments and auras");
         addToDeckList("Grampa Simpson 3", "hard", "WRG Double Strike deck with equipments and auras");
