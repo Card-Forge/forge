@@ -108,7 +108,7 @@ public class PhaseUtil {
     				}
     			}
     		}
-    		else if((c.getCounters(Counters.WIND)>0) && AllZoneUtil.isCardInPlay("Freyalise's Winds")) {
+    		else if((c.getCounters(Counters.WIND) > 0) && AllZoneUtil.isCardInPlay("Freyalise's Winds")) {
     			//remove a WIND counter instead of untapping
     			c.subtractCounter(Counters.WIND, 1);
     		}
@@ -122,28 +122,11 @@ public class PhaseUtil {
     		c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
     	}
     	
-    	
     	//opponent untapping during your untap phase
     	CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
     	for (Card oppCard:opp) 
     		if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step."))
     			oppCard.untap();
-		/*
-		for(Card oppCard:opp) oppCard.untap();
-    	if(AllZoneUtil.isCardInPlay("Murkfiend Liege", player.getOpponent())) {
-    		CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
-    		opp = opp.filter(new CardListFilter() {
-    			public boolean addCard(Card c) {
-    				return c.isBlue() || c.isGreen();
-    			}
-    		});
-    		for(Card oppCard:opp) oppCard.untap();
-    	}
-    	if(AllZoneUtil.isCardInPlay("Seedborn Muse", player.getOpponent())) {
-    		CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
-    		for(Card oppCard:opp) oppCard.untap();
-    		
-    	}*/
     	//end opponent untapping during your untap phase
     	
     	if( canOnlyUntapOneLand()) {
@@ -257,7 +240,7 @@ public class PhaseUtil {
 	    		String k[] = parse.split(":");
 	    		final String restrictions[] = k[1].split(",");
 	    		final Card card = ca;
-				if(c.isValidCard(restrictions,card.getController(),card)) return false;
+				if(c.isValidCard(restrictions, card.getController(), card)) return false;
 			}
 		} // end of Permanents don't untap during their controllers' untap steps
 		
@@ -270,17 +253,7 @@ public class PhaseUtil {
 
     
     private static boolean canOnlyUntapOneLand() {
-    	
-    	// This is the older and no longer used rule for this card
-    	/*
-    	CardList orbs = AllZoneUtil.getCardsInPlay("Winter Orb");
-    	for(Card c : orbs){
-        	//if any Winter Orb is untapped, effect is on
-    		if (c.isUntapped())
-    			return true;
-    	}
-    	*/
-    	
+    	//Winter Orb was given errata so it no longer matters if it's tapped or not
     	if (AllZoneUtil.getCardsInPlay("Winter Orb").size() > 0)
     		return true;
 
@@ -420,7 +393,7 @@ public class PhaseUtil {
     	AllZone.Combat.setUnblocked();
     	
     	CardList list = new CardList();
-        list.addAll(AllZone.Combat.getAllBlockers().toArray());
+        list.addAll(AllZone.Combat.getAllBlockers());
 
         list = list.filter(new CardListFilter(){
         	public boolean addCard(Card c)
