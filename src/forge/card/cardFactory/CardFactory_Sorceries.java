@@ -2127,57 +2127,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(kicker);
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Conqueror's Pledge")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -2902179434079334177L;
                 
-                @Override
-                public void resolve() {
-                    for(int i = 0; i < 6; i++) {
-                        CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card.getController(), "W", new String[] {
-                                "Creature", "Kor", "Soldier"}, 1, 1, new String[] {""});
-                    }//for
-                }//resolve()
-            };
-            
-            spell.setDescription("Put six 1/1 white Kor Soldier creature tokens onto the battlefield.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - ").append(card.getController());
-            sb.append(" puts six 1/1 white Kor Soldier creature tokens onto the battlefield.");
-            spell.setStackDescription(sb.toString());
-            
-            SpellAbility kicker = new Spell(card) {
-                private static final long serialVersionUID = 1376255732058673590L;
-                
-                @Override
-                public void resolve() {
-                    card.setKicked(true);
-                    for(int i = 0; i < 12; i++) {
-                        CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card.getController(), "W", new String[] {
-                                "Creature", "Kor", "Soldier"}, 1, 1, new String[] {""});
-                    }//for
-                }//resolve()
-            };
-            kicker.setKickerAbility(true);
-            kicker.setManaCost("8 W W W");
-            kicker.setAdditionalManaCost("6");
-            kicker.setDescription("Kicker 6: If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.");
-            
-            StringBuilder sbkick = new StringBuilder();
-            sbkick.append(card.getName()).append(" - ").append(card.getController());
-            sbkick.append(" puts twelve 1/1 white Kor Soldier creature tokens onto the battlefield.");
-            kicker.setStackDescription(sbkick.toString());
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(kicker);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Traumatize")) {
