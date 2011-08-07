@@ -1,0 +1,10 @@
+Name:Dralnu's Crusade
+ManaCost:1 B R
+Types:Enchantment
+Text:no text
+K:stPumpAll:Creature.Goblin:1/1:No Condition:Goblin creatures get +1/+1.
+K:stAnimateAll:Goblin:no changes:Zombie:Black,Overwrite:No Abilities:No Condition:All Goblins are black and are Zombies in addition to their other creature types.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnus_crusade.jpg
+End
