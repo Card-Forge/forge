@@ -7,4 +7,5 @@ A:AB$ Dig | Cost$ 1 T | DigNum$ 1 | DestinationZone$ Library | Optional$ True | 
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_excavations.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/188.jpg
 End

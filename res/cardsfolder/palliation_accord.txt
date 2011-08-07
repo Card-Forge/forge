@@ -7,4 +7,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SHIEL
 A:AB$ PreventDamage | Cost$ SubCounter<1/SHIELD> | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palliation_accord.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/122.jpg
 End
