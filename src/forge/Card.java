@@ -157,6 +157,7 @@ public class Card extends MyObservable {
     private String						 topCardName					   = "";
     private String						 reflectableMana				   = "";
     private Card						cloneOrigin							= null;
+    private ArrayList<Card>				clones								= new ArrayList<Card>();
     private Card						currentlyCloningCard				= null;
     private Command						cloneLeavesPlayCommand				= null;
     private ArrayList<Card>				gainControlTargets					= new ArrayList<Card>();	
@@ -424,6 +425,27 @@ public class Card extends MyObservable {
     
     public boolean getSirenAttackOrDestroy() {
     	return sirenAttackOrDestroy;
+    }
+    
+    public ArrayList<Card> getClones() {
+    	return clones;
+    }
+    
+    public void setClones(ArrayList<Card> c) {
+    	clones.clear();
+    	clones.addAll(c);
+    }
+    
+    public void addClone(Card c) {
+    	clones.add(c);
+    }
+    
+    public void addClones(ArrayList<Card> c) {
+    	clones.addAll(c);
+    }
+    
+    public void clearClones() {
+    	clones.clear();
     }
     
     public Card getCloneOrigin() {
@@ -2808,6 +2830,10 @@ public class Card extends MyObservable {
         	if (!equippedBy.contains(source) && !enchantedBy.contains(source)) return false; }
         else if (Property.startsWith("Attached")) {
         	if (!equipping.contains(source) && !enchanting.contains(source)) return false; }
+        
+        else if(Property.startsWith("Cloned")) {
+        	if(cloneOrigin == null || !cloneOrigin.equals(source)) return false;
+        }
 
         else if (Property.startsWith("DamagedBy")) {
         	if(!receivedDamageFromThisTurn.containsKey(source)) return false; }

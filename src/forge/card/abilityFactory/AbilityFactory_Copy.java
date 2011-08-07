@@ -227,12 +227,12 @@ public class AbilityFactory_Copy {
 
 	private static void copyPermanentResolve(final AbilityFactory af, final SpellAbility sa) {
 		final HashMap<String,String> params = af.getMapParams();
-		Card card = af.getHostCard();
+		Card hostCard = af.getHostCard();
 		ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) {
 			keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
 		}
-		int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(card, params.get("NumCopies"), sa) : 1;
+		int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(hostCard, params.get("NumCopies"), sa) : 1;
 
 		ArrayList<Card> tgtCards;
 
@@ -240,13 +240,15 @@ public class AbilityFactory_Copy {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else
-			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+		
+		hostCard.clearClones();
 
 		for(Card c : tgtCards) {
-			if (tgt == null || CardFactoryUtil.canTarget(card, c)) {
+			if (tgt == null || CardFactoryUtil.canTarget(hostCard, c)) {
 
 				//start copied Kiki code
-				int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
+				int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(hostCard.getController());
 				multiplier *= numCopies;
 				Card[] crds = new Card[multiplier];
 				
@@ -310,11 +312,12 @@ public class AbilityFactory_Copy {
 						copy.setCurSetCode("");
 						copy.setImageFilename("morph.jpg");
 					}
-
-					AllZone.GameAction.moveToPlay(copy);
+					copy = AllZone.GameAction.moveToPlay(copy);
+					
+					copy.setCloneOrigin(hostCard);
+					sa.getSourceCard().addClone(copy);
 					crds[i] = copy;
 				}
-
 
 				//have to do this since getTargetCard() might change
 				//if Kiki-Jiki somehow gets untapped again

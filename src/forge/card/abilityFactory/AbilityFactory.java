@@ -1026,6 +1026,12 @@ public class AbilityFactory {
 			}
 		}
 		
+		else if (defined.equals("Clones")){
+			for(Card clone : hostCard.getClones()){
+				cards.add(AllZoneUtil.getCardState(clone));
+			}
+		}
+		
 		else if (defined.equals("Imprinted")){
 			for(Card imprint : hostCard.getImprinted()){
 				cards.add(AllZoneUtil.getCardState(imprint));

@@ -748,6 +748,19 @@ public class MagicStack extends MyObservable {
 			CombatUtil.showCombat();
 
 		GuiDisplayUtil.updateGUI();
+		
+		//TODO - this is a huge hack.  Why is this necessary?
+		//hostCard in AF is not the same object that's on the battlefield
+		//verified by System.identityHashCode(card);
+		Card tmp = sa.getSourceCard();
+		if(tmp.getClones().size() > 0) {
+			for(Card c : AllZoneUtil.getCardsInPlay()) {
+				if(c.equals(tmp)) {
+					c.setClones(tmp.getClones());
+				}
+			}
+			
+		}
 	}
 
 	public boolean hasFizzled(SpellAbility sa, Card source){
