@@ -1,7 +1,7 @@
 Name:Strandwalker
 ManaCost:5
 Types:Artifact Equipment
-Text:no text
+Text:Equipped creature gets +2/+4 and has reach.
 K:eqPump 4:+2/+4/Reach
 K:Living Weapon
 SVar:Rarity:Uncommon
