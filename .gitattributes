@@ -7989,6 +7989,7 @@ res/cardsfolder/walker_of_the_grove.txt -text svneol=native#text/plain
 res/cardsfolder/walking_archive.txt -text svneol=native#text/plain
 res/cardsfolder/walking_atlas.txt svneol=native#text/plain
 res/cardsfolder/walking_dead.txt -text svneol=native#text/plain
+res/cardsfolder/walking_desecration.txt svneol=native#text/plain
 res/cardsfolder/walking_dream.txt -text svneol=native#text/plain
 res/cardsfolder/walking_wall.txt svneol=native#text/plain
 res/cardsfolder/wall_of_air.txt -text svneol=native#text/plain

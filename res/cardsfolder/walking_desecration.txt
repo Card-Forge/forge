@@ -1,0 +1,11 @@
+Name:Walking Desecration
+ManaCost:2 B
+Types:Creature Zombie
+Text:no text
+PT:1/1
+A:AB$ ChooseType | Cost$ B T | Defined$ You | Type$ Creature | SubAbility$ SVar=DBPumpAll | SpellDescription$ Creatures of the creature type of your choice attack this turn if able.
+SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.ChosenType | IsCurse$ True | KW$ HIDDEN CARDNAME attacks each turn if able.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_desecration.jpg
+End
