@@ -2965,6 +2965,7 @@ res/cardsfolder/goblin_guide.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_hero.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_king.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_lackey.txt -text svneol=native#text/plain
+res/cardsfolder/goblin_legionnaire.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_lookout.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_lore.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_marshal.txt -text svneol=native#text/plain
