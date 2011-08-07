@@ -20,7 +20,7 @@ build/support/template.applescript -text
 /forge.properties svneol=native#text/plain
 /pom.xml svneol=native#text/xml
 res/AllTokens.txt -text svneol=native#text/plain
-res/PerSetTracking.py -text svneol=native#text/x-python
+res/PerSetTracking.py svneol=native#text/x-python
 res/blockdata/blocks.txt svneol=native#text/plain
 res/blockdata/setdata.txt svneol=native#text/plain
 res/booster-decks -text svneol=unset#unset
@@ -8919,8 +8919,8 @@ res/quest/themes/White.thm -text
 res/quest/themes/Wolves[!!-~]WG.thm -text
 res/quest/themes/Zombies[!!-~]B.thm -text
 res/quest/veryhard.txt -text svneol=native#text/plain
-res/reprintSetInfo.py -text svneol=native#text/x-python
-res/setInfoScript.py -text svneol=native#text/x-python
+res/reprintSetInfo.py svneol=native#text/x-python
+res/setInfoScript.py svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
 src/arcane/ui/CardArea.java svneol=native#text/plain
 src/arcane/ui/CardPanel.java svneol=native#text/plain

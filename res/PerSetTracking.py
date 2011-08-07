@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 pathToMtgData = "mtg-data.txt"
 
 ############IMPLEMENTATION FOLLOWS############
@@ -60,7 +62,6 @@ for file in forgeFolderFiles :
                 tmpname = tmpname.rstrip()
                 forgeCards.append(tmpname)
 
-                
 #Compare datasets and output results
 print("Comparing datasets and outputting results.")
 totalData = {}
@@ -89,10 +90,9 @@ for currentSet in setCodes :
         percentage = 0       
         if total > 0 :
                 percentage = (float(len(currentImplemented))/float(total))*100
-        
-		currentMissing.sort()
-		currentImplemented.sort()
-		
+        currentMissing.sort()
+        currentImplemented.sort()
+
         with open(sys.path[0] + os.sep + "PerSetTracking Results" + os.sep + "set_" + currentSet + ".txt", "w") as output :
                 output.write("Implemented (" + str(len(currentImplemented)) + "):\n")
                 for everyImplemented in currentImplemented :
@@ -125,7 +125,7 @@ with open(sys.path[0] + os.sep + "PerSetTracking Results" + os.sep + "CompleteSt
         totalPercentage = totalImplemented / fullTotal
         statsfile.write("\n")
         statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
-        
+
 print "Done!"
 print "Press Enter to exit."
 raw_input("")
