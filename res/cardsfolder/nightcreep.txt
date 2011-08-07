@@ -1,0 +1,11 @@
+Name:Nightcreep
+ManaCost:B B
+Types:Instant
+Text:no text
+A:SP$ Effect | Cost$ B B | Name$ Nightcreep Effect | Keywords$ KWAnimateAll,KWAnimateSwamp | SpellDescription$ Until end of turn, all creatures become black and all lands become Swamps.
+SVar:KWAnimateAll:stAnimateAll:Creature:no change/no change:no types:Black,Overwrite:No Abilities:No condition:Until end of turn, all creatures become black and all lands become Swamps.
+SVar:KWAnimateSwamp:stAnimateAll:Land:no change/no change/Overwrite:Land,Swamp,RemoveSubTypes:no colors:Overwrite:No Condition:no text
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightcreep.jpg
+End
