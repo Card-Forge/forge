@@ -701,7 +701,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     private void moveDeckToTop(String humanDeckName) {
-        this.lastUsedDeck = humanDeckName;
+        QuestMainPanel.lastUsedDeck = humanDeckName;
     }
 
 

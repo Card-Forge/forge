@@ -463,7 +463,7 @@ public class BoosterDraftAI
 		
 				for (int j=0; j<=nLand; j++) {
 					Card c = AllZone.CardFactory.getCard(ClrCnts[i].Color, AllZone.ComputerPlayer);
-					c.setCurSetCode(bd.LandSetCode[0]);
+					c.setCurSetCode(BoosterDraft.LandSetCode[0]);
 					outList.add(c);
 					landsNeeded--;
 				}
@@ -473,7 +473,7 @@ public class BoosterDraftAI
 		while (landsNeeded > 0) {
 			if (ClrCnts[n].Count > 0) {
 				Card c = AllZone.CardFactory.getCard(ClrCnts[n].Color, AllZone.ComputerPlayer);
-				c.setCurSetCode(bd.LandSetCode[0]);
+				c.setCurSetCode(BoosterDraft.LandSetCode[0]);
 				outList.add(c);
 				landsNeeded--;
 				

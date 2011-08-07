@@ -1350,8 +1350,8 @@ public class GameAction {
         playSpellAbilityForFree(sa);
     }
     
+    
     public void playSpellAbilityForFree(final SpellAbility sa) {
-
     	if (sa.getPayCosts() != null){
         		Target_Selection ts = new Target_Selection(sa.getTarget(), sa);    		
         		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);

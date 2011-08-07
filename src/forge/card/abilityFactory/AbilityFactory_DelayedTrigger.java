@@ -19,7 +19,9 @@ public class AbilityFactory_DelayedTrigger {
     public static Ability_Sub getDrawback(final AbilityFactory AF)
     {
         final Ability_Sub drawback = new Ability_Sub(AF.getHostCard(),AF.getAbTgt()) {
-            @Override
+			private static final long serialVersionUID = 6192972525033429820L;
+
+			@Override
             public boolean chkAI_Drawback() {
                 return false;  //To change body of implemented methods use File | Settings | File Templates.
             }

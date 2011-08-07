@@ -530,11 +530,11 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         
 
         for(int i = 0; i < 20; i++) {
-            deck.addSideboard("Forest|" + boosterDraft.LandSetCode[0]);
-            deck.addSideboard("Mountain|" + boosterDraft.LandSetCode[0]);
-            deck.addSideboard("Swamp|" + boosterDraft.LandSetCode[0]);
-            deck.addSideboard("Island|" + boosterDraft.LandSetCode[0]);
-            deck.addSideboard("Plains|" + boosterDraft.LandSetCode[0]);
+            deck.addSideboard("Forest|" + BoosterDraft.LandSetCode[0]);
+            deck.addSideboard("Mountain|" + BoosterDraft.LandSetCode[0]);
+            deck.addSideboard("Swamp|" + BoosterDraft.LandSetCode[0]);
+            deck.addSideboard("Island|" + BoosterDraft.LandSetCode[0]);
+            deck.addSideboard("Plains|" + BoosterDraft.LandSetCode[0]);
         }
         
         return deck;

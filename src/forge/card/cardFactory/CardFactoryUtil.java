@@ -430,10 +430,12 @@ public class CardFactoryUtil {
         return AI_getCheapestPermanent(list, null, false);
     }
     
+    @Deprecated
     public static Input input_targetCreaturePlayer(final SpellAbility spell, boolean targeted, boolean free) {
         return input_targetCreaturePlayer(spell, Command.Blank, targeted, free);
     }
     
+    @Deprecated
     public static Input input_targetCreaturePlayer(final SpellAbility spell, final Command paid, final boolean targeted, final boolean free) {
         Input target = new Input() {
             private static final long serialVersionUID = 2781418414287281005L;
@@ -2075,10 +2077,12 @@ public class CardFactoryUtil {
     }//input_discardRecall()
     
     //****************copied from input_targetType*****************
+    @Deprecated
     public static Input input_targetCreature(final SpellAbility spell) {
         return input_targetCreature(spell, Command.Blank);
     }
     
+    @Deprecated
     public static Input input_targetCreature(final SpellAbility spell, final Command paid) {
         Input target = new Input() {
             private static final long serialVersionUID = 141164423096887945L;
@@ -2155,6 +2159,7 @@ public class CardFactoryUtil {
         return target;
     }//input_MasteroftheWildHunt_input_targetCreature()
     
+    @Deprecated
     public static Input input_targetPlayer(final SpellAbility spell) {
         Input target = new Input() {
             private static final long serialVersionUID = 8736682807625129068L;
@@ -2215,7 +2220,6 @@ public class CardFactoryUtil {
 	    };
 	    return modularInput;
     }
-    
     
     public static CardList AI_getHumanCreature(final Card spell, boolean targeted) {
         CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
