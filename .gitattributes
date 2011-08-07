@@ -3799,6 +3799,7 @@ res/cardsfolder/kathari_screecher.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_aggressor.txt svneol=native#text/plain
 res/cardsfolder/kavu_climber.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_glider.txt -text svneol=native#text/plain
+res/cardsfolder/kavu_howler.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_lair.txt svneol=native#text/plain
 res/cardsfolder/kavu_mauler.txt svneol=native#text/plain
 res/cardsfolder/kavu_monarch.txt -text svneol=native#text/plain
