@@ -136,39 +136,31 @@ public class GameActionUtil {
 		Command Cascade = new Command() {
 			private static final long serialVersionUID = -845154812215847505L;
 			public void execute() {
-				final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield,
-						AllZone.HumanPlayer);
-				final PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield,
-						AllZone.ComputerPlayer);
 
-				CardList Human_Nexus = new CardList();
-				CardList Computer_Nexus = new CardList();
-				Human_Nexus.addAll(play.getCards());
-				Computer_Nexus.addAll(comp.getCards());
+				CardList humanNexus = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Maelstrom Nexus");
+				CardList computerNexus = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Maelstrom Nexus");
 
-				Human_Nexus = Human_Nexus.getName("Maelstrom Nexus");
-				Computer_Nexus = Computer_Nexus.getName("Maelstrom Nexus");
-				if (Human_Nexus.size() > 0){
+				if (humanNexus.size() > 0){
 					if (Phase.PlayerSpellCount == 1 && !c.isCopiedSpell())
 					{
-						for (int i=0;i<Human_Nexus.size();i++)
+						for (int i = 0; i < humanNexus.size(); i++)
 						{
 							DoCascade(c);
 						}
 					}
-						}
-				if (Computer_Nexus.size() > 0){
+				}
+				if (computerNexus.size() > 0){
 					if (Phase.ComputerSpellCount == 1 && !c.isCopiedSpell())
 					{
-						for (int i=0;i<Computer_Nexus.size();i++)
+						for (int i = 0; i < computerNexus.size(); i++)
 						{ 
 							DoCascade(c);
 						}
 					}
-						}
+				}
 				if(c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast")) //keyword gets cleared for Bitumonous Blast
 				{
-				DoCascade(c);	
+					DoCascade(c);	
 				}
 			}// execute()
 
@@ -540,74 +532,12 @@ public class GameActionUtil {
 		}//if					
 	}// Demigod of Revenge
 
-	/*
-	public static void playCard_Infernal_Kirin(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Infernal Kirin");
-
-		if(list.size() > 0) {
-			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					final int converted = CardUtil.getConvertedManaCost(c.getManaCost());
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							final Player target;
-							if(card.getController().isHuman()) {
-								String[] choices = {"Opponent", "Yourself"};
-								Object choice = GuiUtils.getChoice("Choose target player", choices);
-								if(choice.equals("Opponent")) {
-									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
-								}// if choice yes
-								else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
-							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
-							PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target);
-							CardList fullHand = new CardList(hand.getCards());
-							if(fullHand.size() > 0 && target.isComputer()) GuiUtils.getChoice(
-									"Revealing hand", fullHand.toArray());
-							CardList discard = new CardList(hand.getCards());
-							discard = discard.filter(new CardListFilter() {
-								public boolean addCard(Card c) {
-									return CardUtil.getConvertedManaCost(c.getManaCost()) == converted;
-								}
-							});
-							for(int j = 0; j < discard.size(); j++) {
-								Card choice = discard.get(j);
-								choice.getController().discard(choice, this);
-							}
-						} //resolve
-					}; //ability
-					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a Spirit or Arcane spell, target player reveals his or her hand ");
-					sb.append("and discards all cards with converted mana cost ").append(converted).append(".");
-					ability2.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(ability2);
-
-				}
-			}//if
-		}
-	}//Infernal Kirin*/
-
 	public static void playCard_Dovescape(final Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay();
 		final int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
 		list = list.getName("Dovescape");
 		final CardList cl = list;
 		if(!c.getType().contains("Creature") && list.size() > 0) {
-
-
 			final Card card = list.get(0);
 
 			Ability ability2 = new Ability(card, "0") {
@@ -673,7 +603,6 @@ public class GameActionUtil {
 			ability2.setStackDescription(sb.toString());
 
             AllZone.Stack.addSimultaneousStackEntry(ability2);
-
 
 		}
 
@@ -6296,9 +6225,7 @@ public class GameActionUtil {
 		}
 
 		boolean isInGrave(Player player) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, player);
-			CardList list = new CardList(grave.getCards());
+			CardList list = AllZoneUtil.getPlayerGraveyard(player);
 			
 			CardList lands = AllZoneUtil.getPlayerTypeInPlay(player, "Plains");
 
@@ -6357,15 +6284,8 @@ public class GameActionUtil {
 		}
 
 		boolean isInGrave(Player player) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, player);
-			CardList list = new CardList(grave.getCards());
-
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, player);
-			CardList lands = new CardList(play.getCards());
-			lands = lands.getType("Mountain");
-
+			CardList list = AllZoneUtil.getPlayerGraveyard(player);
+			CardList lands = AllZoneUtil.getPlayerTypeInPlay(player, "Mountain");
 
 			if(!list.containsName("Anger") || lands.size() == 0) return false;
 			else return true;
@@ -6491,30 +6411,23 @@ public class GameActionUtil {
 		}
 
 		boolean isInGrave(Player player) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, player);
-			CardList list = new CardList(grave.getCards());
-
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, player);
-			CardList lands = new CardList(play.getCards());
-			lands = lands.getType("Forest");
-
+			CardList list = AllZoneUtil.getPlayerGraveyard(player);
+			CardList lands = AllZoneUtil.getPlayerTypeInPlay(player, "Forest");
 
 			if(!list.containsName("Brawn") || lands.size() == 0) return false;
 			else return true;
 		}
 
 		void removeTrample(CardList list) {
-        	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
+			CardList List_Copy = new CardList();
+			List_Copy.add(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
 					List_Copy.get(i).removeExtrinsicKeyword("Trample");
 					old.remove(c);
 				}
-		}
+			}
 		}
 
 		void addTrample(CardList list) {
@@ -6685,11 +6598,8 @@ public class GameActionUtil {
 				Player opp = controller.getOpponent();
 
 				CardList spells = new CardList();
-				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, opp);
-				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
-
-				spells.addAll(grave.getCards());
-				spells.addAll(hand.getCards());
+				spells.addAll(AllZoneUtil.getPlayerGraveyard(opp));
+				spells.addAll(AllZoneUtil.getPlayerHand(opp));
 
 				spells = spells.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
