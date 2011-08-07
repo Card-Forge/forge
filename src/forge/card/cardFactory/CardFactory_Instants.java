@@ -147,7 +147,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Wings of Velis Vel")) {
             final SpellAbility spell = new Spell(card) {
@@ -210,7 +210,7 @@ public class CardFactory_Instants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sprout Swarm")) {
