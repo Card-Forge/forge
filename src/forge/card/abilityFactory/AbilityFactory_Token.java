@@ -421,6 +421,8 @@ public class AbilityFactory_Token extends AbilityFactory {
 						};
 						c.addLeavesPlayCommand(LPCommand);
 						Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c);
+						String ability = AF.getHostCard().getSVar(parsedTrigger.getMapParams().get("Execute"));
+						parsedTrigger.setOverridingAbility(new AbilityFactory().getAbility(ability, c));
 						c.addTrigger(parsedTrigger);
 						AllZone.TriggerHandler.registerTrigger(parsedTrigger);
 					}
