@@ -5,6 +5,7 @@ Text:no text
 PT:4/1
 K:CARDNAME can't attack unless defending player controls an Island.
 K:When you control no Islands, sacrifice CARDNAME.
+SVar:NeedsToPlay:Island.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106631.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/79.jpg
