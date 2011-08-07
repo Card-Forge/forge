@@ -20,7 +20,6 @@ import forge.MyRandom;
 import forge.PhaseUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.Phase;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;

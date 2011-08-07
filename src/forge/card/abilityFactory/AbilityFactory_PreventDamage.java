@@ -2,14 +2,12 @@ package forge.card.abilityFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
-import forge.Combat;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -169,7 +167,7 @@ public class AbilityFactory_PreventDamage {
 		Target tgt = af.getAbTgt();
 		if (tgt == null){
 			// As far as I can tell these Defined Cards will only have one of them
-			ArrayList<Object> objects = AbilityFactory.getDefinedObjects(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			ArrayList<Object> objects = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
 			
 			if (AllZone.Stack.size() > 0){
 			// check stack for something that will kill this

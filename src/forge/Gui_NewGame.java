@@ -84,7 +84,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private JButton                 questButton          = new JButton();
     
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
-    private Action                  DOWNLOAD_ACTION      = new DownloadAction();
+    // private Action                  DOWNLOAD_ACTION      = new DownloadAction();
     private Action                  DOWNLOAD_ACTION_LQ   = new DownloadActionLQ();
     private Action					DOWNLOAD_ACTION_SETLQ = new DownloadActionSetLQ();
     private Action                  IMPORT_PICTURE       = new ImportPictureAction();
