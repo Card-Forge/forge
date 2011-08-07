@@ -196,6 +196,7 @@ public class CardFactory implements NewConstants {
         out.setEnchantedBy(in.getEnchantedBy());
         out.setEnchanting(in.getEnchanting());
         out.setClones(in.getClones());
+        out.setCounters(in.getCounters());
         return out;
     	
     }

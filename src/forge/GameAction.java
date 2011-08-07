@@ -60,6 +60,10 @@ public class GameAction {
     	else{
     		copied = AllZone.CardFactory.copyCard(c);
     		
+    		//remove counters if destination is not the battlefield
+    		if(!zone.is(Constant.Zone.Battlefield))
+    			copied.clearCounters();
+    		
     		// todo: improve choices here
     		// Certain attributes need to be copied from Hand->Stack and Stack->Battlefield
 	    	if (c.wasSuspendCast())			// these probably can be moved back to SubtractCounters

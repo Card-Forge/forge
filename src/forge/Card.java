@@ -628,6 +628,11 @@ public class Card extends MyObservable {
         } else return 0;
     }
     
+    //get all counters from a card
+    public Hashtable<Counters, Integer> getCounters() {
+        return counters;
+    }
+    
     public boolean hasCounters()
     {
     	return counters.size() > 0;
@@ -646,6 +651,16 @@ public class Card extends MyObservable {
 	        	subtractCounter(counterName, num - n);
 	    }
         this.updateObservers();
+    }
+    
+    //get all counters from a card
+    public  void setCounters(Hashtable<Counters, Integer> allCounters) {
+        counters = allCounters;
+    }
+    
+    //get all counters from a card
+    public  void clearCounters() {
+        counters = new Hashtable<Counters, Integer>();
     }
     
     /**
