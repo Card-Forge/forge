@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ Each | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Shuffle$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_benefactor.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/44.jpg
 End

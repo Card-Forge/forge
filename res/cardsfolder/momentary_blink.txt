@@ -8,4 +8,5 @@ SVar:DBReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/momentary_blink.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/29.jpg
 End
