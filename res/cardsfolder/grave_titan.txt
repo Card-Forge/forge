@@ -4,7 +4,7 @@ Types:Creature Giant
 Text:no text
 PT:6/6
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield,  put two 2/2 black Zombie creature tokens onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield,  put two 2/2 black Zombie creature tokens onto the battlefield.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, put two 2/2 black Zombie creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 2
 SVar:Rarity:Mythic
