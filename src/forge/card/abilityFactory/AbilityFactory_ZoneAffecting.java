@@ -125,6 +125,10 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
+		
 		ArrayList<Player> tgtPlayers;
 
 		Target tgt = af.getAbTgt();
@@ -337,6 +341,10 @@ public class AbilityFactory_ZoneAffecting {
     
 	public static void drawResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 		
 		Card source = sa.getSourceCard();
         int numCards = 1;
