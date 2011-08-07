@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>forge</groupId>
@@ -53,14 +54,14 @@
         <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.1</version>
-        <configuration>
-          <tagBase>
-            http://cardforge.googlecode.com/svn/tags
-          </tagBase>
-        </configuration>
-      </plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <tagBase>
+                        https://cardforge.googlecode.com/svn/tags
+                    </tagBase>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>maven-replacer-plugin</artifactId>
@@ -178,16 +179,16 @@
                                     <fileset dir="${basedir}" includes="res/**"/>
                                     <fileset dir="${project.build.directory}" includes="forge.exe"/>
                                     <fileset dir="${project.build.directory}"
-                                        includes="${project.build.finalName}-jar-with-dependencies.jar"/>
+                                             includes="${project.build.finalName}-jar-with-dependencies.jar"/>
                                 </copy>
                                 <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh"
-                                    perm="a+rx"/>
+                                       perm="a+rx"/>
                                 <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe"
-                                    perm="a+rx"/>
+                                       perm="a+rx"/>
                                 <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2"
-                                    compression="bzip2">
+                                     compression="bzip2">
                                     <tarfileset filemode="755"
-                                        dir="${project.build.directory}/${project.build.finalName}">
+                                                dir="${project.build.directory}/${project.build.finalName}">
                                         <include name="forge.sh"/>
                                         <include name="forge.exe"/>
                                     </tarfileset>
@@ -501,36 +502,36 @@
                                             <fileset dir="${basedir}" includes="CHANGES.txt"/>
                                         </copy>
                                         <taskdef name="jarbundler"
-                                            classpathref="maven.runtime.classpath"
-                                            classname="net.sourceforge.jarbundler.JarBundler"/>
+                                                 classpathref="maven.runtime.classpath"
+                                                 classname="net.sourceforge.jarbundler.JarBundler"/>
                                         <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
-                                            name="${project.name}"
-                                            version="${project.version}"
-                                            mainclass="forge.Gui_NewGame"
-                                            icon="${basedir}/build/Forge.icns"
-                                            jvmversion="1.5+"
-                                            vmoptions="-Xmx1024m"
-                                            shortname="${project.name}"
-                                            workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
-                                            jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
+                                                    name="${project.name}"
+                                                    version="${project.version}"
+                                                    mainclass="forge.Gui_NewGame"
+                                                    icon="${basedir}/build/Forge.icns"
+                                                    jvmversion="1.5+"
+                                                    vmoptions="-Xmx1024m"
+                                                    shortname="${project.name}"
+                                                    workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
+                                                    jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
                                             <javafileset dir="${basedir}" includes="*.properties"/>
                                             <javafileset dir="${basedir}" includes="res/**"/>
                                             <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
                                         </jarbundler>
                                         <exec dir="${project.build.directory}/${project.build.finalName}-osx"
-                                            executable="ln"
-                                            failonerror="false">
+                                              executable="ln"
+                                              failonerror="false">
                                             <arg line="-s /Applications Applications"/>
                                         </exec>
                                         <exec
-                                            executable="${basedir}/build/create-dmg"
-                                            failonerror="false">
+                                                executable="${basedir}/build/create-dmg"
+                                                failonerror="false">
                                             <arg line="--volname ${project.name}-${project.version} --background ${basedir}/build/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
                                         </exec>
                                         <tar basedir="${project.build.directory}"
-                                            includes="${project.build.finalName}.dmg"
-                                            destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2"
-                                            compression="bzip2"/>
+                                             includes="${project.build.finalName}.dmg"
+                                             destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2"
+                                             compression="bzip2"/>
                                     </tasks>
                                 </configuration>
                                 <goals>
@@ -539,39 +540,39 @@
                             </execution>
                         </executions>
                     </plugin>
-                                <plugin>
-                <groupId>com.googlecode.maven-gcu-plugin</groupId>
-                <artifactId>maven-gcu-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>googlecode-upload</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>upload</goal>
-                        </goals>
-                        <configuration>
-                            <failsOnError>true</failsOnError>
-                            <!-- default: false -->
-                            <projectName>cardforge</projectName>
-                            <!-- default: ${project.artifactId} -->
-                            <uploads>
-                                <upload>
-                                    <file>
-                                        ${project.build.directory}/${project.build.finalName}.osx.tar.bz2
-                                    </file>
-                                    <summary>${project.name} ${project.version} Mac OSX package</summary>
-                                    <labels>
-                                        <label>Featured</label>
-                                        <label>Type-Archive</label>
-                                        <label>OpSys-OSX</label>
-                                    </labels>
-                                </upload>
-                            </uploads>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                    <plugin>
+                        <groupId>com.googlecode.maven-gcu-plugin</groupId>
+                        <artifactId>maven-gcu-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>googlecode-upload</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>upload</goal>
+                                </goals>
+                                <configuration>
+                                    <failsOnError>true</failsOnError>
+                                    <!-- default: false -->
+                                    <projectName>cardforge</projectName>
+                                    <!-- default: ${project.artifactId} -->
+                                    <uploads>
+                                        <upload>
+                                            <file>
+                                                ${project.build.directory}/${project.build.finalName}.osx.tar.bz2
+                                            </file>
+                                            <summary>${project.name} ${project.version} Mac OSX package</summary>
+                                            <labels>
+                                                <label>Featured</label>
+                                                <label>Type-Archive</label>
+                                                <label>OpSys-OSX</label>
+                                            </labels>
+                                        </upload>
+                                    </uploads>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
