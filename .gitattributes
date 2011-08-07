@@ -3970,6 +3970,7 @@ res/cardsfolder/lava_tubes.txt svneol=native#text/plain
 res/cardsfolder/lava_zombie.txt -text svneol=native#text/plain
 res/cardsfolder/lavaborn_muse.txt svneol=native#text/plain
 res/cardsfolder/lavaclaw_reaches.txt -text svneol=native#text/plain
+res/cardsfolder/lavacore_elemental.txt -text svneol=native#text/plain
 res/cardsfolder/lavafume_invoker.txt -text svneol=native#text/plain
 res/cardsfolder/lavalanche.txt -text svneol=native#text/plain
 res/cardsfolder/lavamancers_skill.txt -text svneol=native#text/plain
