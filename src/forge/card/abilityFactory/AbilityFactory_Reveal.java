@@ -345,7 +345,10 @@ public class AbilityFactory_Reveal {
 									Card chosen = valid.get(0);
 									if(chosen.equals(dummy)) break;
 									PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
-									AllZone.GameAction.moveTo(zone, chosen);
+									if(zone.is("Library")) {
+										AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
+									} else 
+										AllZone.GameAction.moveTo(zone, chosen);
 									if (changeValid.length() > 0)
 										GuiUtils.getChoice("Computer picked: ", chosen);
 									valid.remove(chosen);
