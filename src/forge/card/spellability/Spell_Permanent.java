@@ -245,6 +245,9 @@ public class Spell_Permanent extends Spell {
         	if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self"))
         		continue;
         	
+        	if(!tr.requirementsCheck())
+        		continue;
+        	
         	if (tr.getOverridingAbility() != null)	// Don't look at Overriding Abilities yet
         		continue;
         	
