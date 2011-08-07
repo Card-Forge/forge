@@ -831,8 +831,9 @@ public class CardFactory_Creatures {
                     
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.getType().contains("Goblin") || 
-                            c.getType().contains("Shaman") || c.hasKeyword("Changeling");
+                            return c.isType("Goblin") 
+                            			|| c.isType("Shaman") 
+                            			|| c.hasKeyword("Changeling");
                         }
                     });
                     
@@ -2630,7 +2631,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Spirit") && super.canPlayAI();
+                    return !card.isType("Spirit") 
+                    			&& super.canPlayAI();
                 }
                 
             };// ability1
@@ -2664,12 +2666,14 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return card.isType("Spirit") && super.canPlay();
+                    return card.isType("Spirit") 
+                    			&& super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Warrior") && super.canPlayAI();
+                    return !card.isType("Warrior") 
+                    			&& super.canPlayAI();
                 }
                 
             };// ability2
@@ -2704,12 +2708,14 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return card.isType("Warrior") && super.canPlay();
+                    return card.isType("Warrior") 
+                    			&& super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Avatar") && super.canPlayAI();
+                    return !card.isType("Avatar") 
+                    			&& super.canPlayAI();
                 }
             };// ability3
             
@@ -3402,8 +3408,8 @@ public class CardFactory_Creatures {
                     kithkin = kithkin.filter(new CardListFilter() {
                         
                         public boolean addCard(Card c) {
-                            return (c.getType().contains("Kithkin") || c.hasKeyword("Changeling"))
-                                    && !c.equals(card);
+                            return (c.isType("Kithkin") || c.hasKeyword("Changeling"))
+                                    	&& !c.equals(card);
                         }
                         
                     });

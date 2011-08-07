@@ -135,11 +135,11 @@ class CardFactory_Auras {
             			
             			int minAt = 0;
             			int minVal = Integer.MAX_VALUE;
-            			for(int i=0;i<LandTypes.length;i++)
+            			for (int i = 0; i < LandTypes.length; i++)
             			{
-            				if(getTargetCard().getType().contains(LandTypes[i])) continue;
+            				if (getTargetCard().isType(LandTypes[i])) continue;
             				
-            				if(humanLandCount.get(LandTypes[i]) < minVal)
+            				if (humanLandCount.get(LandTypes[i]) < minVal)
             				{
             					minVal = humanLandCount.get(LandTypes[i]);
             					minAt = i;
