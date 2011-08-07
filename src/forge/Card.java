@@ -2909,14 +2909,9 @@ public class Card extends MyObservable {
 	         	
 	         	if (Property.substring(z).equals("X")) {
 	         		x = CardFactoryUtil.xCount(source, source.getSVar("X"));
-	         	}
-	         	else
-	         		x = Integer.parseInt(Property.substring(z));
-	         	
-	         	if (Property.substring(z).equals("Y")) {
+	         	} else if (Property.substring(z).equals("Y")) {
 	         		x = CardFactoryUtil.xCount(source, source.getSVar("Y"));
-	         	}
-	         	else
+	         	} else
 	         		x = Integer.parseInt(Property.substring(z));
 	         	
 	         	if (!compare(y, Property, x))
