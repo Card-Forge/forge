@@ -1,0 +1,9 @@
+Name:Nether Void
+ManaCost:3 B
+Types:World Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Each | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a spell, counter it unless its controller pays 3.
+SVar:TrigCounter:AB$Counter | Cost$ 0 | UnlessCost$ 3 | Defined$ TriggeredSpellAbility | UnlessPayer$ TriggeredCardController
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_void.jpg
+End
