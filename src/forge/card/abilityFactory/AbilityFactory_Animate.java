@@ -272,6 +272,12 @@ public class AbilityFactory_Animate {
 		final ArrayList<String> types = new ArrayList<String>();
 		if(params.containsKey("Types")) types.addAll(Arrays.asList(params.get("Types").split(",")));
 		
+		//allow ChosenType - overrides anything else specified
+		if(types.contains("ChosenType")) {
+			types.clear();
+			types.add(host.getChosenType());
+		}
+		
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
 		//allow SVar substitution for keywords
@@ -568,6 +574,12 @@ public class AbilityFactory_Animate {
 		
 		final ArrayList<String> types = new ArrayList<String>();
 		if(params.containsKey("Types")) types.addAll(Arrays.asList(params.get("Types").split(",")));
+		
+		//allow ChosenType - overrides anything else specified
+		if(types.contains("ChosenType")) {
+			types.clear();
+			types.add(host.getChosenType());
+		}
 		
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
