@@ -1568,35 +1568,6 @@ public class CombatUtil {
 	                }
                 }
             }//Sapling of Colfenor
-            
-            else if(c.getName().equals("Goblin Guide") && !c.getCreatureAttackedThisCombat()) {
-                final Player opp = c.getController().getOpponent();
-                
-                Ability ability = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opp);
-                        if(lib.size() > 0) {
-                            CardList cl = new CardList();
-                            cl.add(lib.get(0));
-                            GuiUtils.getChoiceOptional("Top card:", cl.toArray());
-                            
-                            Card c = cl.get(0);
-                            if(c.isLand()) {
-                                AllZone.GameAction.moveToHand(c);
-                            }
-                        }
-                    }
-                };
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append("Goblin Guide - defending player reveals the top card of his or her library. ");
-                sb.append("If it's a land card, that player puts it into his or her hand.");
-                ability.setStackDescription(sb.toString()); 
-                
-                AllZone.Stack.add(ability);
-                
-            }//Goblin Guide
 
             c.setCreatureAttackedThisCombat(true);
     }//checkDeclareAttackers
