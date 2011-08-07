@@ -93,6 +93,7 @@ public class SpellAbility_Requirements {
 			{
 				addAbilityToStack();
 			}
+            AllZone.GameAction.checkStateEffects();
 		}
 		else if (payment.isCanceled()){
 			Card c = ability.getSourceCard();
