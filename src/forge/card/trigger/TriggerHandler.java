@@ -215,13 +215,13 @@ public class TriggerHandler {
 	
 	public void clearRegistered()
 	{
+        delayedTriggers.clear();
 		registeredTriggers.clear();
         registeredModes.clear();
 	}
 	
 	public void removeRegisteredTrigger(Trigger trig)
 	{
-
         for(int i=0;i< registeredTriggers.size();i++)
         {
             if(registeredTriggers.get(i).equals(trig))
