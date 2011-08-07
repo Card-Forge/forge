@@ -1305,7 +1305,7 @@ public class AbilityFactory {
 		}
 		
 		//The player who has the chance to cancel the ability
-		String pays = params.containsKey("UnlessPayer") ? params.get("UnlessPayer") : "Opponent";
+		String pays = params.containsKey("UnlessPayer") ? params.get("UnlessPayer") : "TargetedController";
 		Player payer = getDefinedPlayers(sa.getSourceCard(), pays, sa).get(0);
 		
 		//The cost
@@ -1324,8 +1324,8 @@ public class AbilityFactory {
             private static final long serialVersionUID = 8094833091127334678L;
             
             public void execute() {
-            	if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.HumanPlayer);
             	sa.resolve();
+            	if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.HumanPlayer);
             }
         };
         
@@ -1348,14 +1348,12 @@ public class AbilityFactory {
 		AbilityFactory af = sa.getAbilityFactory();
 		HashMap<String,String> params = af.getMapParams();
 		
-		
 		//check conditions
 		if (AbilityFactory.checkConditional(params, sa)) {
 			if (params.get("UnlessCost") == null)
 				sa.resolve();
 			else passUnlessCost(sa);
 		}
-			
 		
 		//try to resolve subabilities (see null check above)
 		Ability_Sub abSub = sa.getSubAbility();
