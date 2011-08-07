@@ -129,12 +129,13 @@
                     </dependency>
                 </dependencies>
                 <executions>
+                    <!--
                     <execution>
-                        <id>appbundle</id>
+                        <id>osx-appbundle</id>
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <!-- OSX archive -->
+                                 OSX archive
                                 <mkdir dir="${project.build.directory}/${project.build.finalName}-osx"/>
                                 <copy todir="${project.build.directory}/${project.build.finalName}-osx">
                                     <fileset dir="${basedir}" includes="LICENSE.txt"/>
@@ -166,6 +167,17 @@
                                 <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg"
                                      destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2"
                                      compression="bzip2"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>   -->
+                    <execution>
+                        <id>win-linux-app-bundle</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
                                 <!-- Windows/Linux archive -->
                                 <mkdir dir="${project.build.directory}/${project.build.finalName}"/>
                                 <copy todir="${project.build.directory}/${project.build.finalName}">
@@ -227,7 +239,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.0-beta-3</version>
+                <version>2.3</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -357,5 +369,76 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <profiles>
+        <profile>
+            <id>osx</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.7.1</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>osx-appbundle</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <!-- OSX archive -->
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx"/>
+                                        <copy todir="${project.build.directory}/${project.build.finalName}-osx">
+                                            <fileset dir="${basedir}" includes="LICENSE.txt"/>
+                                            <fileset dir="${basedir}" includes="README.txt"/>
+                                            <fileset dir="${basedir}" includes="CHANGES.txt"/>
+                                        </copy>
+                                        <taskdef name="jarbundler"
+                                                 classpathref="maven.runtime.classpath"
+                                                 classname="net.sourceforge.jarbundler.JarBundler"/>
+                                        <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
+                                                    name="${project.name}"
+                                                    version="${project.version}"
+                                                    mainclass="forge.Gui_NewGame"
+                                                    icon="${basedir}/build/Forge.icns"
+                                                    jvmversion="1.5+"
+                                                    vmoptions="-Xmx1024m"
+                                                    shortname="${project.name}"
+                                                    workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
+                                                    jar="${project.build.directory}/run-forge.jar">
+                                            <javafileset dir="${basedir}" includes="*.properties"/>
+                                            <javafileset dir="${basedir}" includes="res/**"/>
+                                            <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
+                                        </jarbundler>
+                                        <exec dir="${project.build.directory}"
+                                              executable="hdiutil"
+                                              failonerror="false">
+                                            <arg line="create -srcfolder ${project.build.directory}/${project.build.finalName}-osx ${project.build.directory}/${project.build.finalName}.dmg"/>
+                                        </exec>
+                                        <tar basedir="${project.build.directory}"
+                                             includes="${project.build.finalName}.dmg"
+                                             destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2"
+                                             compression="bzip2"/>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
