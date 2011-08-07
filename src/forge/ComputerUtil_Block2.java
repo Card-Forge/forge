@@ -94,7 +94,7 @@ public class ComputerUtil_Block2
    // Good Blocks means a good trade or no trade
    private static Combat makeGoodBlocks(Combat combat){
 	   
-	  CardList currentAttackers = new CardList();
+	  CardList currentAttackers = new CardList(attackersLeft.toArray());
 	  
 	  for(Card attacker : attackersLeft) {
 		  
@@ -140,9 +140,10 @@ public class ComputerUtil_Block2
    // Good Gang Blocks means a good trade or no trade
    private static Combat makeGangBlocks(Combat combat){
 	   
-	  CardList currentAttackers = new CardList();
+	  CardList currentAttackers = new CardList(attackersLeft.toArray());
 	  CardList blockers = new CardList();
 	  
+	  //Try to block an attacker without first strike with a gang of first strikers
 	  for(Card attacker : attackersLeft) {
 		  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")
 				   && !attacker.hasStartOfKeyword("Rampage")) {
@@ -171,6 +172,52 @@ public class ComputerUtil_Block2
 		      }
 		  }
 	  }
+	  
+	  attackersLeft = new CardList(currentAttackers.toArray());
+	  currentAttackers = new CardList(attackersLeft.toArray());
+	  
+	  //Try to block an attacker with two blockers of which only one will die
+	  for(final Card attacker : attackersLeft) {
+		  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
+		  CardList usableBlockers = new CardList();
+		  CardList blockGang = new CardList();
+		  int absorbedDamage = 0; //The amount of damage needed to kill the first blocker
+		  
+		  //Try to add blockers that could be destroyed, but are worth less than the attacker
+		  //Don't use blockers without First Strike or Double Strike if attacker has it
+		  usableBlockers = blockers.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
+							&& !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike")))
+						return false;
+					return true;//CardFactoryUtil.evaluateCreature(c) + diff < CardFactoryUtil.evaluateCreature(attacker);
+				}
+		  });
+		  
+		  Card leader = CardFactoryUtil.AI_getBestCreature(usableBlockers);
+		  blockGang.add(leader);
+		  usableBlockers.remove(leader);
+		  absorbedDamage = leader.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
+
+		  for(Card blocker : usableBlockers) {
+			  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
+			  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker, blockGang);
+			  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
+			  int absorbedDamage2 = blocker.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
+			  if(attacker.getKillDamage() > currentDamage
+					  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
+					  && absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage() 
+					  && CombatUtil.canBlock(attacker,blocker,combat)) {
+				  currentAttackers.remove(attacker);
+				  combat.addBlocker(attacker, blocker);
+				  combat.addBlocker(attacker, leader);
+				  blockersLeft.remove(blocker);
+				  blockersLeft.remove(leader);
+				  continue;
+			  }
+		  }
+	  }
+	  
 	  attackersLeft = new CardList(currentAttackers.toArray());
 	  return combat;
    }
@@ -178,7 +225,7 @@ public class ComputerUtil_Block2
    // Bad Trade Blocks (should only be made if life is in danger)
    private static Combat makeTradeBlocks(Combat combat){
 	   
-	  CardList currentAttackers = new CardList();
+	  CardList currentAttackers = new CardList(attackersLeft.toArray());
 	  CardList killingBlockers = new CardList();
 	  
 	  for(Card attacker : attackersLeft) {
@@ -198,7 +245,7 @@ public class ComputerUtil_Block2
    // Chump Blocks (should only be made if life is in danger)
    private static Combat makeChumpBlocks(Combat combat){
 	   
-	  CardList currentAttackers = new CardList();
+	  CardList currentAttackers = new CardList(attackersLeft.toArray());
 	  CardList chumpBlockers = new CardList();
 	  
 	  for(Card attacker : attackersLeft) {
@@ -320,7 +367,7 @@ public class ComputerUtil_Block2
 	  CardList blockers = new CardList();
 	  CardList chumpBlockers = new CardList();
 	  
-	  diff = AllZone.ComputerPlayer.getLife() * 2 + 5; //This is the minimal gain for an unnecessary trade 
+	  diff = AllZone.ComputerPlayer.getLife() * 2; //This is the minimal gain for an unnecessary trade 
 	  
 	  // remove all attackers that can't be blocked anyway
 	  for(Card a : attackers) {
@@ -349,6 +396,7 @@ public class ComputerUtil_Block2
 	  if (CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersAgainstTrample(combat);
 	  //Support blockers not destroying the attacker with more blockers to try to kill the attacker
 	  if (!CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersToKill(combat);
+	  
 	  
 	  //== 2. If the AI life would still be in danger make a safer approach ==
 	  if (CombatUtil.lifeInDanger(combat)) {
