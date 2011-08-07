@@ -42,8 +42,8 @@ public class GameAction {
     	
     	Card copied = null;
     	
-    	// Don't copy tokens, or cards staying in the same Zone (battlefield => battlefield)
-    	if (suppress || c.isToken())
+    	// Don't copy Tokens, Cards staying in same zone, or cards entering Battlefield
+    	if (c.isToken() || suppress || zone.is(Constant.Zone.Battlefield))
     		copied = c;
     	else{
     		copied = AllZone.CardFactory.copyCard(c);
