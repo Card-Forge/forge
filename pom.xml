@@ -5,7 +5,7 @@
     <artifactId>forge</artifactId>
     <packaging>jar</packaging>
     <name>Forge</name>
-    <version>1.0.13</version>
+    <version>1.0.14-SNAPSHOT</version>
     <description>Forge</description>
     <url>http://www.slightlymagic.net/</url>
     <properties>
@@ -46,8 +46,8 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:svn:https://cardforge.googlecode.com/svn/tags/forge-1.0.13</connection>
-        <developerConnection>scm:svn:https://cardforge.googlecode.com/svn/tags/forge-1.0.13</developerConnection>
+        <connection>scm:svn:https://cardforge.googlecode.com/svn/src</connection>
+        <developerConnection>scm:svn:https://cardforge.googlecode.com/svn/src</developerConnection>
     </scm>
     <build>
         <sourceDirectory>src</sourceDirectory>
