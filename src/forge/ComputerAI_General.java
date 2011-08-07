@@ -45,146 +45,137 @@ public class ComputerAI_General implements Computer {
     }//playCards()
 
     private SpellAbility[] getMain1() {
-        //Card list of all cards to consider
-        CardList hand = new CardList(AllZone.Computer_Hand.getCards());
-        
-        hand = hand.filter(new CardListFilter() {
-        	// Beached As Start
-            public boolean addCard(Card c) {
-                //Collection<Card> play = playMain1Cards;
-            	if (c.getSVar("PlayMain1").equals("TRUE"))
-            		return true;
-            	
-                if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
+    	//Card list of all cards to consider
+    	CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
 
-                CardList buffed = new CardList(AllZone.Computer_Battlefield.getCards()); //get all cards the computer controls with BuffedBy
-                for(int j = 0; j < buffed.size(); j++) {
-                    Card buffedcard = buffed.get(j);
-                    if (buffedcard.getSVar("BuffedBy").length() > 0) {
-                            String buffedby = buffedcard.getSVar("BuffedBy");
-                            String bffdby[] = buffedby.split(",");
-                            if (c.isValidCard(bffdby,c.getController(),c)) return true;
-                    }       
-                }//BuffedBy
+    	hand = hand.filter(new CardListFilter() {
+    		// Beached As Start
+    		public boolean addCard(Card c) {
+    			//Collection<Card> play = playMain1Cards;
+    			if (c.getSVar("PlayMain1").equals("TRUE"))
+    				return true;
 
-                CardList antibuffed = new CardList(AllZone.Human_Battlefield.getCards()); //get all cards the human controls with AntiBuffedBy
-                for(int k = 0; k < antibuffed.size(); k++) {
-                    Card buffedcard = antibuffed.get(k);
-                    if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
-                            String buffedby = buffedcard.getSVar("AntiBuffedBy");
-                            String bffdby[] = buffedby.split(",");
-                            if (c.isValidCard(bffdby,c.getController(),c)) return true;
-                    }       
-                }//AntiBuffedBy
+    			if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
 
-                if(c.isLand()) return false;
+    			CardList buffed = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer); //get all cards the computer controls with BuffedBy
+    			for(int j = 0; j < buffed.size(); j++) {
+    				Card buffedcard = buffed.get(j);
+    				if (buffedcard.getSVar("BuffedBy").length() > 0) {
+    					String buffedby = buffedcard.getSVar("BuffedBy");
+    					String bffdby[] = buffedby.split(",");
+    					if (c.isValidCard(bffdby,c.getController(),c)) return true;
+    				}       
+    			}//BuffedBy
 
-                CardList Vengevines = new CardList();
-                Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());       
-                Vengevines = Vengevines.getName("Vengevine");
-                if(Vengevines.size() > 0) {
-	                CardList Creatures = new CardList();  
-	                CardList Creatures2 = new CardList();       
-	                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-	        		for(int i = 0; i < Creatures.size(); i++) {
-	        			if(Creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(Creatures.get(i).getManaCost()) <= 3) {
-	        				Creatures2.add(Creatures.get(i));
-	        			}
-	        		}
-	                if(Creatures2.size() + Phase.ComputerCreatureSpellCount > 1 
-	                	&& c.getType().contains("Creature") && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
-	            } // AI Improvement for Vengevine
-            	// Beached As End
-                return false;
-            }
-        });
-        CardList all = new CardList();
-        all.addAll(hand.toArray());
-        all.addAll(AllZone.Computer_Battlefield.getCards());
-        
-        CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
-        humanPlayable = humanPlayable.filter(new CardListFilter()
-        {
-          public boolean addCard(Card c)
-          {
-            return (c.canAnyPlayerActivate());
-          }
-        });
-        
-        all.addAll(humanPlayable.toArray());
-        
-        return getPlayable(all);
+    			CardList antibuffed = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer); //get all cards the human controls with AntiBuffedBy
+    			for(int k = 0; k < antibuffed.size(); k++) {
+    				Card buffedcard = antibuffed.get(k);
+    				if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
+    					String buffedby = buffedcard.getSVar("AntiBuffedBy");
+    					String bffdby[] = buffedby.split(",");
+    					if (c.isValidCard(bffdby,c.getController(),c)) return true;
+    				}       
+    			}//AntiBuffedBy
+
+    			if(c.isLand()) return false;
+
+    			CardList vengevines = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer, "Vengevine");
+    			if(vengevines.size() > 0) {
+    				CardList creatures = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+    				CardList creatures2 = new CardList();
+    				for(int i = 0; i < creatures.size(); i++) {
+    					if(creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(creatures.get(i).getManaCost()) <= 3) {
+    						creatures2.add(creatures.get(i));
+    					}
+    				}
+    				if(creatures2.size() + Phase.ComputerCreatureSpellCount > 1 
+    					&& c.getType().contains("Creature") && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
+    			} // AI Improvement for Vengevine
+    			// Beached As End
+    			return false;
+    		}
+    	});
+    	CardList all = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+    	all.addAll(hand);
+
+    	CardList humanPlayable = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+    	humanPlayable = humanPlayable.filter(new CardListFilter()
+    	{
+    		public boolean addCard(Card c)
+    		{
+    			return (c.canAnyPlayerActivate());
+    		}
+    	});
+
+    	all.addAll(humanPlayable);
+
+    	return getPlayable(all);
     }//getMain1()
     
 
     private SpellAbility[] getMain2() {
-        //Card list of all cards to consider
-        CardList all = new CardList();
-        all.addAll(AllZone.Computer_Hand.getCards());
-        //Don't play permanents with Flash before humans declare attackers step
-        all = all.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
-                	|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
-                	return false;
-                return true;
-            }
-        });
-        all.addAll(AllZone.Computer_Battlefield.getCards());
-        all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer).toArray());
-        
-        // Prevent the computer from summoning Ball Lightning type creatures during main phase 2
-        all = all.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-        
-        all = all.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if(c.isLand()) return false;
-                return true;
-            }
-        });
-        
-        CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
-        humanPlayable = humanPlayable.filter(new CardListFilter()
-        {
-          public boolean addCard(Card c)
-          {
-            return (c.canAnyPlayerActivate());
-          }
-        });
-        all.addAll(humanPlayable.toArray());
-        
-        return getPlayable(all);
+    	//Card list of all cards to consider
+    	CardList all = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+    	//Don't play permanents with Flash before humans declare attackers step
+    	all = all.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
+    					|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
+    				return false;
+    			return true;
+    		}
+    	});
+    	all.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
+    	all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer));
+
+    	// Prevent the computer from summoning Ball Lightning type creatures during main phase 2
+    	all = all.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+
+    	all = all.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			if(c.isLand()) return false;
+    			return true;
+    		}
+    	});
+
+    	CardList humanPlayable = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+    	humanPlayable = humanPlayable.filter(new CardListFilter()
+    	{
+    		public boolean addCard(Card c)
+    		{
+    			return (c.canAnyPlayerActivate());
+    		}
+    	});
+    	all.addAll(humanPlayable.toArray());
+
+    	return getPlayable(all);
     }//getMain2()
     
     private CardList getAvailableSpellAbilities(){
-        CardList all = new CardList();
-        all.addAll(AllZone.Computer_Hand.getCards());
-        //Don't play permanents with Flash before humans declare attackers step
-        all = all.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
-                	|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
-                	return false;
-                return true;
-            }
-        });
-        all.addAll(AllZone.Computer_Battlefield.getCards());
-        all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer).toArray());
+    	CardList all = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+    	//Don't play permanents with Flash before humans declare attackers step
+    	all = all.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
+    					|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
+    				return false;
+    			return true;
+    		}
+    	});
+    	all.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
+    	all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer));
 
-        
-        CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
-        humanPlayable = humanPlayable.filter(new CardListFilter()
-        {
-          public boolean addCard(Card c)
-          {
-            return (c.canAnyPlayerActivate());
-          }
-        });
-        all.addAll(humanPlayable.toArray());
-        return all;
+
+    	CardList humanPlayable = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+    	humanPlayable = humanPlayable.filter(new CardListFilter()
+    	{
+    		public boolean addCard(Card c)
+    		{
+    			return (c.canAnyPlayerActivate());
+    		}
+    	});
+    	all.addAll(humanPlayable.toArray());
+    	return all;
     }
     
     private SpellAbility[] getOtherPhases(){
