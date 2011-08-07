@@ -190,9 +190,9 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Jack 2", "medium", "BG Aggressive deck");
 //        addToDeckList("Jack 3", "hard", "WUB Sphinx Cascade deck");
         addToDeckList("Jack Sparrow 2", "medium", "UB Pirate deck with Talas Warrior, Coastal Piracy and Spreading Seas");
-        addToDeckList("James Bond 1", "easy", "WG Agro deck with several Slivers");
-        addToDeckList("James Bond 2", "medium", "WG Agro deck with several Slivers and Glorious Anthem");
-        addToDeckList("James Bond 3", "hard", "WGR Agro deck with several Slivers and Glorious Anthem");
+        addToDeckList("James Bond 1", "easy", "WG Sliver deck");
+        addToDeckList("James Bond 2", "medium", "WG Sliver deck");
+        addToDeckList("James Bond 3", "hard", "WG Sliver deck");
         addToDeckList("James T Kirk 3", "hard", "B discard deck with Liliana Vess");
 //        addToDeckList("Jason Todd 3", "hard", "BRG Sacrifice deck");
         addToDeckList("Joe Kidd 1", "easy", "WB deck with Voracious Hatchling and Nightsky Mimic");
@@ -283,13 +283,14 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Rocky 1", "easy", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
         addToDeckList("Rocky 2", "medium", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
         addToDeckList("Rocky 3", "hard", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
-        addToDeckList("Rogue 3", "hard", "R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar");
+        addToDeckList("Rogue 3", "hard", "Mono R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar");
         
 //        addToDeckList("Sabertooth 2", "medium", "G Smokestack deck");
         addToDeckList("Samantha Stephens 1", "easy", "WU Painter's Servant anti-red deck");
         addToDeckList("Samantha Stephens 2", "medium", "WU Painter's Servant anti-red deck");
         addToDeckList("Samantha Stephens 3", "hard", "WU Painter's Servant anti-red deck with Grindstone combo");
         addToDeckList("Samantha Stephens 4", "very hard", "WU Painter's Servant - Grindstone combo");
+        addToDeckList("Samwise Gamgee 2", "medium", "Mono W Kithkin deck");
         addToDeckList("Samwise Gamgee 3", "hard", "Mono W Kithkin deck");
         addToDeckList("Saruman 2", "medium", "UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Saruman 3", "hard", "UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry ");

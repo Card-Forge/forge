@@ -3785,6 +3785,7 @@ res/cardsfolder/kitesail_apprentice.txt -text svneol=native#text/plain
 res/cardsfolder/kithkin_daggerdare.txt -text svneol=native#text/plain
 res/cardsfolder/kithkin_greatheart.txt -text svneol=native#text/plain
 res/cardsfolder/kithkin_harbinger.txt -text svneol=native#text/plain
+res/cardsfolder/kithkin_healer.txt -text svneol=native#text/plain
 res/cardsfolder/kithkin_rabble.txt -text svneol=native#text/plain
 res/cardsfolder/kithkin_shielddare.txt -text svneol=native#text/plain
 res/cardsfolder/kithkin_spellduster.txt -text svneol=native#text/plain
@@ -8515,6 +8516,7 @@ res/quest/decks/Samantha[!!-~]Stephens[!!-~]1.dck -text
 res/quest/decks/Samantha[!!-~]Stephens[!!-~]2.dck -text
 res/quest/decks/Samantha[!!-~]Stephens[!!-~]3.dck -text
 res/quest/decks/Samantha[!!-~]Stephens[!!-~]4.dck -text
+res/quest/decks/Samwise[!!-~]Gamgee[!!-~]2.dck -text
 res/quest/decks/Samwise[!!-~]Gamgee[!!-~]3.dck -text
 res/quest/decks/Saruman[!!-~]2.dck -text
 res/quest/decks/Saruman[!!-~]3.dck -text
