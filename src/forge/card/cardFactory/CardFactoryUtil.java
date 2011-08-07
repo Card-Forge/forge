@@ -1503,11 +1503,63 @@ public class CardFactoryUtil {
                 if (list.isEmpty()) return false;
                 
                 //else we may need to filter the list and remove inappropriate targets
-
-                /* If extrinsicKeywords contains "CARDNAME can't attack." or "CARDNAME can't attack or block."
-                 *     then remove creatures with Defender from the list and remove creatures that have one
-                 *     or more of these keywords to start with
-                 */
+                
+                final ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
+                
+                list = list.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        for (String sAura : extKeywords) {
+                            
+                            /* If extrinsicKeywords contains "CARDNAME attacks each turn if able." then remove creatures 
+                             *     with Defender and creatures with the keyword "CARDNAME attacks each turn if able."
+                             *     and creatures with a keyword that starts with "CARDNAME can't attack"
+                             */
+                            if (sAura.contains("CARDNAME attacks each turn if able.")) {
+                                if (c.getKeyword().contains("Defender") 
+                                        || c.getKeyword().contains("CARDNAME attacks each turn if able."))
+                                    return false;
+                                else {
+                                    ArrayList<String> cardCKeywords = c.getKeyword();
+                                    for (String sCreat : cardCKeywords) {
+                                        if (sCreat.toString().startsWith("CARDNAME can't attack"))
+                                            return false;
+                                    }
+                                }
+                            }
+                            
+                            /* If extrinsicKeywords contains "CARDNAME can't attack." or "CARDNAME can't attack or block."
+                             *     then remove creatures with Defender and remove creatures that have one or more of these
+                             *     keywords to start with
+                             */
+                            if (sAura.contains("CARDNAME can't attack.") || extKeywords.contains("CARDNAME can't attack or block.")) {
+                                if (c.getKeyword().contains("Defender") 
+                                        || c.getKeyword().contains("CARDNAME can't attack.") 
+                                        || c.getKeyword().contains("CARDNAME can't attack or block."))
+                                    return false;
+                            }
+                            
+                            /* If extrinsicKeywords contains "CARDNAME doesn't untap during your untap step."
+                             *     then remove creatures with Vigilance that are untapped and remove creatures that have the keyword 
+                             *     "CARDNAME doesn't untap during your untap step."  and remove creatures that are untapped
+                            */
+                            if (sAura.contains("CARDNAME doesn't untap during your untap step.")) {
+                                if ((c.getKeyword().contains("Vigilance") && c.isUntapped()) 
+                                        || c.getKeyword().contains("CARDNAME doesn't untap during your untap step.") 
+                                        || c.isUntapped())
+                                    return false;
+                            }
+                            
+                        }
+                        // Card c is a potential target if we reach this point.
+                        return true;
+                    }
+                });
+                
+                /*
+                // If extrinsicKeywords contains "CARDNAME can't attack." or "CARDNAME can't attack or block."
+                //     then remove creatures with Defender from the list and remove creatures that have one
+                //     or more of these keywords to start with
+                //
                 final ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                 
                 if (extKeywords.contains("CARDNAME can't attack.") || extKeywords.contains("CARDNAME can't attack or block.")) {
@@ -1519,9 +1571,9 @@ public class CardFactoryUtil {
                     });
                 }
                 
-                /* If extrinsicKeywords contains "CARDNAME doesn't untap during your untap step."
-                 *     then remove creatures with Vigilance from the list
-                */
+                // If extrinsicKeywords contains "CARDNAME doesn't untap during your untap step."
+                //     then remove creatures with Vigilance from the list
+                //
                 if (extKeywords.contains("HIDDEN CARDNAME doesn't untap during your untap step.")) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -1554,6 +1606,7 @@ public class CardFactoryUtil {
                 }
                 
                 //else aura is power/toughness decrease and may have keyword(s)
+                */
                 
                 CardListUtil.sortAttack(list);
                 CardListUtil.sortFlying(list);
