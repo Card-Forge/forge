@@ -745,22 +745,24 @@ public class AbilityFactory {
 	public Ability_Sub getSubAbility(){
 		Ability_Sub abSub = null;
 
-       String sSub = getMapParams().get("SubAbility");
-       
-       if (sSub.startsWith("SVar="))
-          sSub = getHostCard().getSVar(sSub.split("=")[1]);
-       
-       if (sSub.startsWith("DB$"))
-       {
-          AbilityFactory afDB = new AbilityFactory();
-          abSub = (Ability_Sub)afDB.getAbility(sSub, getHostCard());
-       }
-       else{
-    	   // Older style Drawback doesn't create an abSub
-    	   // on Resolution use getMapParams().get("SubAbility"); to call Drawback
-       }
+		String sSub = getMapParams().get("SubAbility");
 
-        return abSub;
+		if(sSub.startsWith("SVar=")) {
+			sSub = sSub.replace("SVar=", "");
+		}
+
+		sSub = getHostCard().getSVar(sSub);
+
+		if(!sSub.equals("")) {
+			// Older style Drawback no longer supported
+			AbilityFactory afDB = new AbilityFactory();
+			abSub = (Ability_Sub)afDB.getAbility(sSub, getHostCard());
+		}
+		else {
+			System.out.println("SubAbility not found for: "+getHostCard());
+		}
+
+		return abSub;
 	}
 	
 	public SpellAbility_Restriction buildRestrictions(SpellAbility SA){
