@@ -733,8 +733,10 @@ public class AbilityFactory_DealDamage {
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 
+		int minGain = 200; //The minimum gain in destroyed creatures
+		if (sa.getPayCosts().isReusuableResource()) minGain = 100; 
 		// evaluate both lists and pass only if human creatures are more valuable
-		if(CardFactoryUtil.evaluateCreatureList(computerList) + 200 >= CardFactoryUtil.evaluateCreatureList(humanList))
+		if(CardFactoryUtil.evaluateCreatureList(computerList) + minGain >= CardFactoryUtil.evaluateCreatureList(humanList))
 			return false;
 
 		Ability_Sub subAb = sa.getSubAbility();

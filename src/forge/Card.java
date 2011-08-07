@@ -3166,7 +3166,12 @@ public class Card extends MyObservable {
     	int restDamage = damage;
     	
     	restDamage = staticReplaceDamage(restDamage, source, isCombat);
+    	
+    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return restDamage;
+    	
     	restDamage = staticDamagePrevention(restDamage, source, isCombat);
+    	
+    	if(getName().equals("Swans of Bryn Argoll")) return 0;
     	
     	return restDamage;
     }
