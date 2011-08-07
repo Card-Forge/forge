@@ -1219,7 +1219,7 @@ class CardFactory_Planeswalkers {
                     //avoid targeting the dragon tokens we just put in play...
                     cards = cards.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
-                    		return !(c.isToken() && c.getType().contains("Dragon"));
+                    		return !(c.isToken() && c.isType("Dragon"));
                     	}
                     });
                 	setTargetCard(CardFactoryUtil.AI_getCheapestCreature(cards, card, true));
@@ -1312,7 +1312,7 @@ class CardFactory_Planeswalkers {
                     {
                     	public boolean addCard(Card crd)
                     	{
-                    		return crd.getType().contains("Mountain");
+                    		return crd.isType("Mountain");
                     	}
                     });
                     
@@ -1421,7 +1421,7 @@ class CardFactory_Planeswalkers {
                     oldAttack[0] = card[0].getBaseAttack();
                     oldDefense[0] = card[0].getBaseDefense();
                    
-                    if (card[0].getType().contains("Mountain"))
+                    if (card[0].isType("Mountain"))
                     {
                     	card[0].untap();
                     	
@@ -1464,7 +1464,8 @@ class CardFactory_Planeswalkers {
                 	{
                 		public boolean addCard(Card crd)
                 		{
-                			return crd.getType().contains("Mountain") && CardFactoryUtil.canTarget(card, crd);
+                			return crd.isType("Mountain") 
+                						&& CardFactoryUtil.canTarget(card, crd);
                 		}
                 	});
                 	CardListUtil.sortByTapped(mountains);
@@ -1472,7 +1473,7 @@ class CardFactory_Planeswalkers {
                 	if (mountains.size() == 0)
                 		return false;
                 	
-                    if(ability3.canPlay() && ability3.canPlayAI() && list.size() == 0) {
+                    if (ability3.canPlay() && ability3.canPlayAI() && list.size() == 0) {
                         return false;
                     } else {
                     	setTargetCard(mountains.get(0));
@@ -1578,7 +1579,7 @@ class CardFactory_Planeswalkers {
                 						|| c.getName().equals("Venerated Teacher") 
                 						|| c.getName().equals("Stoneforge Mystic") 
                 						|| c.getName().equals("Sun Titan") 
-                						|| c.getType().contains("Ally");
+                						|| c.isType("Ally");
                 			}
                 		});
                 		

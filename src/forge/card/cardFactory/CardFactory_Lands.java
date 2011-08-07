@@ -801,7 +801,9 @@ class CardFactory_Lands {
         						stop();
         					}
         					public void selectCard(Card c, PlayerZone zone) {
-        						if(c.isLand() && zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && !c.getType().contains("Lair")) {
+        						if (c.isLand() 
+        								&& zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) 
+        								&& !c.isType("Lair")) {
         							AllZone.GameAction.moveToHand(c);
         							stop();
         						}
