@@ -1135,7 +1135,7 @@ public class GuiDisplayUtil implements NewConstants {
     {
     	CardList cl = new CardList();
         for (int i = 0; i < data.length; i ++) {
-        	String cardinfo[] = data[i].trim().split("@");
+        	String cardinfo[] = data[i].trim().split("\\|");
         	
             Card c = AllZone.CardFactory.getCard(cardinfo[0], player);
 
