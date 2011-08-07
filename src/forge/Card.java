@@ -1610,8 +1610,8 @@ public class Card extends MyObservable {
         enchantCommandList.add(c);
     }
     
-    public void removeEnchantCommand(Command c) {
-        enchantCommandList.add(c);
+    public void clearEnchantCommand() {
+        enchantCommandList.clear();
     }
     
     public void enchant() {
@@ -1621,6 +1621,10 @@ public class Card extends MyObservable {
     
     public void addUnEnchantCommand(Command c) {
         unEnchantCommandList.add(c);
+    }
+    
+    public void clearUnEnchantCommand() {
+        unEnchantCommandList.clear();
     }
     
     public void unEnchant() {

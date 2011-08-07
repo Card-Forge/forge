@@ -252,7 +252,7 @@ public class AbilityFactory_DealDamage {
 				ArrayList<Card> cards = tgt.getTargetCards();
 				for(Card c : cards){
 					int adjDamage = c.getEnoughDamageToKill(dmg, source, false, noPrevention);
-					if (adjDamage > actualPay)
+					if (adjDamage > actualPay && adjDamage <= dmg)
 						actualPay = adjDamage;
 				}
 				
