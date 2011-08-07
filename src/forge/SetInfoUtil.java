@@ -17,7 +17,7 @@ public class SetInfoUtil {
 					
 					String ss[] = s.split("\\|");
 					for (int j=0; j<ss.length; j++) {
-						String kv[] = ss[i].split(":");
+						String kv[] = ss[j].split(":");
 						sm.put(kv[0], kv[1]);
 					}
 					
@@ -211,7 +211,7 @@ public class SetInfoUtil {
 					
 					String ss[] = s.split("\\|");
 					for (int j=0; j<ss.length; j++) {
-						String kv[] = ss[i].split(":");
+						String kv[] = ss[j].split(":");
 						sm.put(kv[0], kv[1]);
 					}
 					
