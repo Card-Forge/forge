@@ -17,6 +17,10 @@ public class Trigger_ChangesZone extends Trigger {
 		{
 			if(!mapParams.get("Origin").equals("Any"))
 			{
+                if(mapParams.get("Origin") == null)
+                {
+                    return false;
+                }
 				if(!mapParams.get("Origin").equals((String)runParams.get("Origin")))
 				{
 					return false;

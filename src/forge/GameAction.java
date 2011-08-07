@@ -33,12 +33,24 @@ public class GameAction {
     }
 
     public static Card changeZone(PlayerZone prev, PlayerZone zone, Card c){
-    	if (prev == null){
+    	if (prev == null && !c.isToken()){
     		zone.add(c);
     		return c;
     	}
     	
-    	boolean suppress = prev.equals(zone);
+    	boolean suppress;
+        if(prev == null && !c.isToken())
+        {
+            suppress = true;
+        }
+        else if(c.isToken())
+        {
+            suppress = false;
+        }
+        else
+        {
+            suppress = prev.equals(zone);
+        }
     	
     	Card copied = null;
     	
@@ -66,19 +78,29 @@ public class GameAction {
 
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Card", copied);
-        runParams.put("Origin", prev.getZoneName());
+        if(prev != null)
+        {
+            runParams.put("Origin", prev.getZoneName());
+        }
+        else
+        {
+            runParams.put("Origin",null);
+        }
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
         //AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
         
         if(suppress)
         	AllZone.TriggerHandler.clearSuppression("ChangesZone");
-    	
-    	if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
-            AllZone.Combat.removeFromCombat(c);
-    	
-    	prev.remove(c);
 
+        if(prev != null)
+        {
+            if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
+                AllZone.Combat.removeFromCombat(c);
+
+            prev.remove(c);
+        }
+        
     	return copied;
     }
     
