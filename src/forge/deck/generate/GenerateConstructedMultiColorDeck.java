@@ -260,9 +260,9 @@ public class GenerateConstructedMultiColorDeck
     color3 = Constant.Color.onlyColors[c];
 
     CardList out = new CardList();
-    out.addAll(CardListUtil.getColor(in, color1).toArray());
-    out.addAll(CardListUtil.getColor(in, color2).toArray());
-    out.addAll(CardListUtil.getColor(in, color3).toArray());
+    out.addAll(CardListUtil.getColor(in, color1));
+    out.addAll(CardListUtil.getColor(in, color2));
+    out.addAll(CardListUtil.getColor(in, color3));
     out.shuffle();
 
     CardList artifact = in.filter(new CardListFilter()
@@ -276,7 +276,7 @@ public class GenerateConstructedMultiColorDeck
          !Gui_NewGame.removeArtifacts.isSelected();
       }
     });
-    out.addAll(artifact.toArray());
+    out.addAll(artifact);
    
     out = out.filter(new CardListFilter()
     {
@@ -308,13 +308,13 @@ public class GenerateConstructedMultiColorDeck
 
     CardList out = new CardList();
     /*
-    out.addAll(CardListUtil.getColor(in, color1).toArray());
-    out.addAll(CardListUtil.getColor(in, color2).toArray());
-    out.addAll(CardListUtil.getColor(in, color3).toArray());
-    out.addAll(CardListUtil.getColor(in, color4).toArray());
-    out.addAll(CardListUtil.getColor(in, color5).toArray());
+    out.addAll(CardListUtil.getColor(in, color1));
+    out.addAll(CardListUtil.getColor(in, color2));
+    out.addAll(CardListUtil.getColor(in, color3));
+    out.addAll(CardListUtil.getColor(in, color4));
+    out.addAll(CardListUtil.getColor(in, color5));
     */
-    out.addAll(CardListUtil.getGoldCards(in).toArray());
+    out.addAll(CardListUtil.getGoldCards(in));
     out.shuffle();
 
     CardList artifact = in.filter(new CardListFilter()
@@ -328,7 +328,7 @@ public class GenerateConstructedMultiColorDeck
          !Gui_NewGame.removeArtifacts.isSelected();
       }
     });
-    out.addAll(artifact.toArray());
+    out.addAll(artifact);
    
     out = out.filter(new CardListFilter()
     {

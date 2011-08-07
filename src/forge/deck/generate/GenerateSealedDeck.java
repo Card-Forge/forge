@@ -88,8 +88,8 @@ public class GenerateSealedDeck
     color2 = Constant.Color.onlyColors[b];
 
     CardList out = new CardList();
-    out.addAll(CardListUtil.getColor(in, color1).toArray());
-    out.addAll(CardListUtil.getColor(in, color2).toArray());
+    out.addAll(CardListUtil.getColor(in, color1));
+    out.addAll(CardListUtil.getColor(in, color2));
 
     CardList artifact = in.filter(new CardListFilter()
     {
@@ -102,7 +102,7 @@ public class GenerateSealedDeck
          !Gui_NewGame.removeArtifacts.isSelected();
       }
     });
-    out.addAll(artifact.toArray());
+    out.addAll(artifact);
    
     out = out.filter(new CardListFilter()
     {
