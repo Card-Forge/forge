@@ -790,7 +790,7 @@ public class CardFactory_Sorceries {
                     //in case human player only has a few creatures in play, target anything
                     if(out.isEmpty() && 0 < CardFactoryUtil.AI_getHumanCreature(2, card, true).size()
                             && 3 > CardFactoryUtil.AI_getHumanCreature(card, true).size()) {
-                        out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true).toArray());
+                        out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true));
                         CardListUtil.sortFlying(out);
                     }
                     return out;
@@ -1322,7 +1322,7 @@ public class CardFactory_Sorceries {
                             //to determine the best look at which lands have enchantments, which lands are tapped
                             cl.remove(cl.get(0));
                             //add the rest of the lands of this basic type to the target list, this is the list which will be sacrificed.
-                            target.addAll(cl.toArray());
+                            target.addAll(cl);
                         }
                     }
                     
@@ -1338,7 +1338,7 @@ public class CardFactory_Sorceries {
                             else return false;
                         }
                     });
-                    target.addAll(land.toArray());
+                    target.addAll(land);
                     
                     //when this spell resolves all basic lands which were not selected are sacrificed.
                     for(int i = 0; i < target.size(); i++)
@@ -1397,7 +1397,7 @@ public class CardFactory_Sorceries {
                             cl.remove(c);
                             saveList.add(c);
                         }
-                        target.addAll(cl.toArray());
+                        target.addAll(cl);
                         
                         index[0]++;
                         showMessage();
@@ -1416,7 +1416,7 @@ public class CardFactory_Sorceries {
                                 else return false;
                             }
                         });
-                        target.addAll(land.toArray());
+                        target.addAll(land);
                         
                     }
                 }//selectCard()

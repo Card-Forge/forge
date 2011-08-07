@@ -3683,7 +3683,7 @@ public class CardFactoryUtil {
         CardList in = AllZone.CardFactory.getAllCards();
         
         CardList list = new CardList();
-        list.addAll(CardListUtil.getColor(in, "black").toArray());
+        list.addAll(CardListUtil.getColor(in, "black"));
         list = list.getType("Creature");
         
         System.out.println("Most prominent creature type: " + getMostProminentCreatureType(list));

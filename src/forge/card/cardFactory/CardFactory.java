@@ -1177,7 +1177,7 @@ public class CardFactory implements NewConstants {
 							chooseGrave = grave;
 						else{
 							chooseGrave = aiGrave;
-							chooseGrave.addAll(grave.toArray());
+							chooseGrave.addAll(grave);
 						}
 						
 						Object o = GuiUtils.getChoice("Choose first creature to exile", chooseGrave.toArray());

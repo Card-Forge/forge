@@ -398,7 +398,7 @@ public class CardFactory_Instants {
                     //in case human player only has a few creatures in play, target anything
                     if(out.isEmpty() && 0 < CardFactoryUtil.AI_getHumanCreature(2, card, true).size()
                             && 3 > CardFactoryUtil.AI_getHumanCreature(card, true).size()) {
-                        out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true).toArray());
+                        out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true));
                         CardListUtil.sortFlying(out);
                     }
                     return out;
