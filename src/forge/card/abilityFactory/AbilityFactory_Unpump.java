@@ -1,0 +1,428 @@
+package forge.card.abilityFactory;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Random;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Counters;
+import forge.MyRandom;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.Target;
+
+public class AbilityFactory_Unpump {
+	// *************************************************************************
+	// ***************************** Unpump ************************************
+	// *************************************************************************
+
+	public static SpellAbility createAbilityUnpump(final AbilityFactory af) {
+		final SpellAbility abUnpump = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 3536198601841771383L;
+
+			@Override
+			public String getStackDescription() {
+				return unpumpStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return unpumpCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				unpumpResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return unpumpTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return abUnpump;
+	}
+
+	public static SpellAbility createSpellUnpump(final AbilityFactory af) {
+		final SpellAbility spUnpump = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = -54573740774322697L;
+
+			@Override
+			public String getStackDescription() {
+				return unpumpStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return unpumpCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				unpumpResolve(af, this);
+			}
+
+		};
+		return spUnpump;
+	}
+
+	public static SpellAbility createDrawbackUnpump(final AbilityFactory af) {
+		final SpellAbility dbUnpump = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = -4728590185604233229L;
+
+			@Override
+			public String getStackDescription() {
+				return unpumpStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				unpumpResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return unpumpDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return unpumpTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return dbUnpump;
+	}
+
+	private static ArrayList<String> getKeywords(HashMap<String,String> params) {
+		ArrayList<String> kws = new ArrayList<String>();
+		if(params.containsKey("Keywords")) {
+			kws.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
+		}
+		return kws;
+	}
+
+	private static String unpumpStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
+		Card host = af.getHostCard();
+		ArrayList<String> kws = getKeywords(params);
+		StringBuilder sb = new StringBuilder();
+
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+
+		if(tgtCards.size() > 0) {
+			if (sa instanceof Ability_Sub)
+				sb.append(" ");
+			else
+				sb.append(host).append(" - ");
+
+			Iterator<Card> it = tgtCards.iterator();
+			while(it.hasNext()) {
+				Card tgtC = it.next();
+				if(tgtC.isFaceDown()) sb.append("Morph");
+				else sb.append(tgtC);
+
+				if(it.hasNext()) sb.append(" ");
+			}
+			sb.append(" loses ");
+			/*
+			Iterator<String> kwit = kws.iterator();
+			while(it.hasNext()) {
+				String kw = kwit.next();
+				sb.append(kw);
+				if(it.hasNext()) sb.append(" ");
+			}*/
+			sb.append(kws);
+			if(!params.containsKey("Permanent")) {
+				sb.append(" until end of turn");
+			}
+			sb.append(".");
+		}
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if(abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+
+	private static boolean unpumpCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		// if there is no target and host card isn't in play, don't activate
+    	if (af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(af.getHostCard())) 
+    		return false;
+    	
+    	// temporarily disabled until AI is improved
+    	if (af.getAbCost().getSacCost() && sa.getSourceCard().isCreature()) return false;	
+    	if (af.getAbCost().getLifeCost()) {
+				return false;
+    	}
+    	if (af.getAbCost().getSubCounter()){
+    		// instead of never removing counters, we will have a random possibility of failure.
+    		// all the other tests still need to pass if a counter will be removed
+    		Counters count = af.getAbCost().getCounterType();
+    		double chance = .66;
+    		if (count.equals(Counters.P1P1)){	// 10% chance to remove +1/+1 to pump
+    			chance = .1;
+    		}
+    		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove charge to pump
+    			chance = .5;
+    		}
+            Random r = MyRandom.random;
+            if(r.nextFloat() > chance)
+            	return false;
+    	}
+    	
+    	if (!ComputerUtil.canPayCost(sa))
+    		return false;
+    	
+    	HashMap<String,String> params = af.getMapParams();
+    	SpellAbility_Restriction restrict = sa.getRestrictions();
+    	
+    	// Phase Restrictions
+    	if (AllZone.Stack.size() == 0 && AllZone.Phase.isBefore(Constant.Phase.Combat_Begin)){
+    		// Instant-speed pumps should not be cast outside of combat when the stack is empty
+    		if (!af.isCurse()){
+    			if (!AbilityFactory.isSorcerySpeed(sa))
+    				return false;
+    		}
+    	}
+    	else if (AllZone.Stack.size() > 0){
+    		// TODO: pump something only if the top thing on the stack will kill it via damage
+    		// or if top thing on stack will pump it/enchant it and I want to kill it
+    		return false;
+    	}
+    	
+    	int activations = restrict.getNumberTurnActivations();
+    	int sacActivations = restrict.getActivationNumberSacrifice();
+    	//don't risk sacrificing a creature just to pump it
+    	if(sacActivations != -1 && activations >= (sacActivations - 1)) {
+    		return false;
+		}
+        
+        if(af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
+        	ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+
+        	if (cards.size() == 0)
+        		return false;
+
+        	/*
+        	// when this happens we need to expand AI to consider if its ok for everything?
+			for(Card card : cards){      
+				// TODO: if AI doesn't control Card and Pump is a Curse, than maybe use?
+			}*/
+        }
+        else
+        	return unpumpTgtAI(af, sa, getKeywords(params), false);
+        
+        return false;
+	}
+
+	private static boolean unpumpDrawbackAI(AbilityFactory af, SpellAbility sa) {
+		if(af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
+			//TODO - copied from AF_Pump.pumpDrawbackAI() - what shoul be here?
+		}
+		else
+			return unpumpTgtAI(af, sa, getKeywords(af.getMapParams()), false);
+
+		return true; 
+	}//unpumpDrawbackAI()
+
+	private static boolean unpumpTgtAI(AbilityFactory af, SpellAbility sa, ArrayList<String> kws, boolean mandatory) {
+		//this would be for evasive things like Flying, Unblockable, etc
+		if(!mandatory && AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility))
+			return false;
+
+		Target tgt = af.getAbTgt();
+		tgt.resetTargets();
+		CardList list = getCurseCreatures(af, sa, kws);
+		list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+
+		//several uses here:
+		//1. make human creatures lose evasion when they are attacking
+		//2. make human creatures lose Flying/Horsemanship/Shadow/etc. when Comp is attacking
+		//3. remove Indestructible keyword so it can be destroyed?
+		//3a. remove Persist?
+
+		if (list.isEmpty())
+			return mandatory && unpumpMandatoryTarget(af, sa, mandatory);
+
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
+			Card t = null;
+			//boolean goodt = false;
+
+			if (list.isEmpty()){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					if (mandatory)
+						return unpumpMandatoryTarget(af, sa, mandatory);
+
+					tgt.resetTargets();
+					return false;
+				}
+				else{
+					// TODO is this good enough? for up to amounts?
+					break;
+				}
+			}
+
+			t = CardFactoryUtil.AI_getBestCreature(list);
+			tgt.addTarget(t);
+			list.remove(t);
+		}
+
+		return true;
+	}//pumpTgtAI()
+
+	private static CardList getCurseCreatures(AbilityFactory af, SpellAbility sa, final ArrayList<String> kws) {
+		//HashMap<String,String> params = af.getMapParams();
+		Card hostCard = af.getHostCard();
+		CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+		list = list.filter(AllZoneUtil.getCanTargetFilter(hostCard));
+
+		if (!list.isEmpty()) {
+			list = list.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return !c.hasAnyKeyword(kws);    // don't add duplicate negative keywords
+				}
+			});
+		}
+
+		return list;
+	}//getCurseCreatures()
+
+	private static boolean unpumpMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		CardList list = AllZoneUtil.getCardsInPlay();
+		Target tgt = sa.getTarget();
+		list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+
+		if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+			tgt.resetTargets();
+			return false;
+		}
+
+		// Remove anything that's already been targeted
+		for(Card c : tgt.getTargetCards())
+			list.remove(c);
+
+		CardList pref = list.getController(AllZone.HumanPlayer);
+		CardList forced = list.getController(AllZone.ComputerPlayer);
+		Card source = sa.getSourceCard();
+
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)){
+			if (pref.isEmpty())
+				break;
+
+			Card c;
+			if (pref.getNotType("Creature").size() == 0)
+				c = CardFactoryUtil.AI_getBestCreature(pref);
+			else
+				c = CardFactoryUtil.AI_getMostExpensivePermanent(pref, source, true);
+
+			pref.remove(c);
+
+			tgt.addTarget(c);
+		}
+
+		while(tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+			if (forced.isEmpty())
+				break;
+
+			//TODO - if forced targeting, just pick something without the given keyword
+			Card c;
+			if (forced.getNotType("Creature").size() == 0)
+				c = CardFactoryUtil.AI_getWorstCreature(forced);
+			else
+				c = CardFactoryUtil.AI_getCheapestPermanent(forced, source, true);
+
+			forced.remove(c);
+
+			tgt.addTarget(c);
+		}
+
+		if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+			tgt.resetTargets();
+			return false;
+		}
+
+		return true;
+	}//pumpMandatoryTarget()
+
+	private static boolean unpumpTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+
+		HashMap<String,String> params = af.getMapParams();
+		//Card source = sa.getSourceCard();
+
+		ArrayList<String> kws = getKeywords(params);
+
+		if (sa.getTarget() == null){
+			if (mandatory)
+				return true;
+		}
+		else{
+			return unpumpTgtAI(af, sa, kws, mandatory);
+		}
+
+		return true;
+	}
+
+	private static void unpumpResolve(final AbilityFactory af, final SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
+		Card host = af.getHostCard();
+
+		ArrayList<String> kws = getKeywords(params);
+
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else
+			tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+
+		for(final Card tgtC : tgtCards) {
+			final ArrayList<String> hadIntrinsic = new ArrayList<String>();
+			if(AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(host, tgtC)) {
+				for(String kw : kws) {
+					if(tgtC.getIntrinsicKeyword().contains(kw)) hadIntrinsic.add(kw);
+					tgtC.removeIntrinsicKeyword(kw);
+					tgtC.removeExtrinsicKeyword(kw);
+				}
+			}
+			if(!params.containsKey("Permanent")) {
+				AllZone.EndOfTurn.addUntil(new Command() {
+					private static final long serialVersionUID = 5387486776282932314L;
+
+					public void execute() {
+						if(AllZoneUtil.isCardInPlay(tgtC)){
+							for(String kw : hadIntrinsic) {
+								tgtC.addIntrinsicKeyword(kw);
+							}
+						}
+					}
+				});
+			}
+		}
+
+	}//unpumpResolve
+
+}//end class AbilityFactory_Unpump

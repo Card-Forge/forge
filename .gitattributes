@@ -9020,6 +9020,7 @@ src/forge/card/abilityFactory/AbilityFactory_Reveal.java -text svneol=native#tex
 src/forge/card/abilityFactory/AbilityFactory_Sacrifice.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Token.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Turns.java -text svneol=native#text/plain
+src/forge/card/abilityFactory/AbilityFactory_Unpump.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_ZoneAffecting.java -text svneol=native#text/plain
 src/forge/card/cardFactory/CardFactory.java -text svneol=native#text/plain
 src/forge/card/cardFactory/CardFactoryUtil.java -text svneol=native#text/plain

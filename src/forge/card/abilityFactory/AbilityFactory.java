@@ -717,6 +717,18 @@ public class AbilityFactory {
 			else if(isDb)
 				SA = AbilityFactory_Animate.createDrawbackAnimateAll(this);
 		}
+        
+        if(API.equals("Unpump")){
+			if (isAb)
+				SA = AbilityFactory_Unpump.createAbilityUnpump(this);
+			else if (isSp)
+				SA = AbilityFactory_Unpump.createSpellUnpump(this);
+			else if (isDb)
+				SA = AbilityFactory_Unpump.createDrawbackUnpump(this);
+			
+			if (isAb || isSp)
+				hostCard.setSVar("PlayMain1", "TRUE");
+		}
 
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
