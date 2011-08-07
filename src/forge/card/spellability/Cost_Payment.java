@@ -42,10 +42,9 @@ public class Cost_Payment {
 	
 	private boolean bCancel = false;
 	private boolean bXDefined = true;
-	
-	// why are these static? should they be attached to the CostPayment?
-	private static CardList payTapXTypeTappedList = new CardList();
-	static void addPayTapXTypeTappedList(Card c){
+
+	private CardList payTapXTypeTappedList = new CardList();
+	private void addPayTapXTypeTappedList(Card c){
 		payTapXTypeTappedList.add(c);
 	}
 
@@ -1472,7 +1471,7 @@ public class Cost_Payment {
                 if(zone.is(Constant.Zone.Battlefield) && cardList.contains(card) && card.isUntapped() ) {
                 	// send in CardList for Typing
                     card.tap();
-                    payTapXTypeTappedList.add(card);
+                    payment.addPayTapXTypeTappedList(card);
                     cardList.remove(card);
                     payment.getAbility().addCostToHashList(card, "Tapped");
                     nTapped++;
