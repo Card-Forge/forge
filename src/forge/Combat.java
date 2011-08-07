@@ -176,7 +176,7 @@ public class Combat {
 		// sum unblocked attackers' power
 		for (int i = 0; i < att.size(); i++) {
 			if (!isBlocked(att.get(i)) 
-					|| (getBlockers(att.get(i)).size() == 0 && att.get(i).getKeyword().contains("Trample"))) {
+					|| (getBlockers(att.get(i)).size() == 0 && att.get(i).hasKeyword("Trample"))) {
 				
 				int damageDealt = att.get(i).getNetCombatDamage();
 
@@ -437,7 +437,7 @@ public class Combat {
 			else if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
 				needFirstStrike = true;
 				if (getAttackingPlayer().isHuman()) {// human attacks
-					if (attacker.getKeyword().contains("Trample") || block.size() > 1)
+					if (attacker.hasKeyword("Trample") || block.size() > 1)
 						AllZone.Display.assignDamage(attacker, block, damageDealt);
 					else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
 				}
@@ -465,11 +465,11 @@ public class Combat {
 
 		// if attacker has no trample, and there's damage left, assign the rest
 		// to a random blocker
-		if (damage > 0 && !c.getKeyword().contains("Trample")) {
+		if (damage > 0 && !c.hasKeyword("Trample")) {
 			int index = CardUtil.getRandomIndex(block);
 			block.get(index).addAssignedDamage(damage, c);
 			damage = 0;
-		} else if (c.getKeyword().contains("Trample")) {
+		} else if (c.hasKeyword("Trample")) {
 			this.addDefendingDamage(damage, c);
 		}
 	}// setAssignedFirstStrikeDamage()
@@ -505,7 +505,7 @@ public class Combat {
 				
 				if (getAttackingPlayer().isHuman()) {// human attacks
 					
-					if (attacker.getKeyword().contains("Trample") || block.size() > 1)
+					if (attacker.hasKeyword("Trample") || block.size() > 1)
 						AllZone.Display.assignDamage(attacker, block, damageDealt);
 					else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
 				}
@@ -527,7 +527,7 @@ public class Combat {
 			Card blocker = block.get(0);
 			
 			// trample
-			if (attacker.getKeyword().contains("Trample")) {
+			if (attacker.hasKeyword("Trample")) {
 			
 				int damageNeeded = 0;
 				
@@ -565,11 +565,14 @@ public class Combat {
 	
 			// if attacker has no trample, and there's damage left, assign the rest
 			// to a random blocker
-			if (damage > 0 && !(c.getKeyword().contains("Trample") && killsAllBlockers == true)) {
+			if (damage > 0 
+					&& !(c.hasKeyword("Trample") 
+					&& killsAllBlockers == true)) {
 				int index = CardUtil.getRandomIndex(block);
 				block.get(index).addAssignedDamage(damage, c);
 				damage = 0;
-			} else if (c.getKeyword().contains("Trample") && killsAllBlockers == true) {
+			} else if (c.hasKeyword("Trample") 
+							&& killsAllBlockers == true) {
 				this.addDefendingDamage(damage, c);
 			}
 		}
