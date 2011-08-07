@@ -6299,27 +6299,23 @@ public class GameActionUtil {
 			PlayerZone grave = AllZone.getZone(
 					Constant.Zone.Graveyard, player);
 			CardList list = new CardList(grave.getCards());
-
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, player);
-			CardList lands = new CardList(play.getCards());
-			lands = lands.getType("Plains");
-
+			
+			CardList lands = AllZoneUtil.getPlayerTypeInPlay(player, "Plains");
 
 			if(!list.containsName("Valor") || lands.size() == 0) return false;
 			else return true;
 		}
 
 		void removeFirstStrike(CardList list) {
-        	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
+			CardList List_Copy = new CardList();
+			List_Copy.add(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
 					List_Copy.get(i).removeExtrinsicKeyword("First Strike");
 					old.remove(c);
 				}
-		}
+			}
 		}
 
 		void addFirstStrike(CardList list) {
@@ -6350,9 +6346,7 @@ public class GameActionUtil {
 
 		void addHaste(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-			CardList playlist = new CardList(play.getCards());
-			playlist = playlist.getType("Creature");
+			CardList playlist = AllZoneUtil.getCreaturesInPlay(player);
 			for(int i = 0; i < playlist.size(); i++) {
 				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
 			}

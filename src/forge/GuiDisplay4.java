@@ -438,11 +438,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         {//make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(Observable a, Object b) {
-                    playerHandValue.setText("" + AllZone.Human_Hand.getCards().length);
-                    playerGraveValue.setText("" + AllZone.Human_Graveyard.getCards().length);
-                    playerLibraryValue.setText("" + AllZone.Human_Library.getCards().length);
+                    playerHandValue.setText("" + AllZone.Human_Hand.size());
+                    playerGraveValue.setText("" + AllZone.Human_Graveyard.size());
+                    playerLibraryValue.setText("" + AllZone.Human_Library.size());
                     playerFBValue.setText("" + CardFactoryUtil.getGraveyardActivationCards(AllZone.HumanPlayer).size());
-                    playerRemovedValue.setText("" + AllZone.Human_Exile.getCards().length);
+                    playerRemovedValue.setText("" + AllZone.Human_Exile.size());
                    
                 }
             };
@@ -455,10 +455,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         {//make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(Observable a, Object b) {
-                    oppHandValue.setText("" + AllZone.Computer_Hand.getCards().length);
-                    oppGraveValue.setText("" + AllZone.Computer_Graveyard.getCards().length);
-                    oppLibraryValue.setText("" + AllZone.Computer_Library.getCards().length);
-                    oppRemovedValue.setText("" + AllZone.Computer_Exile.getCards().length);
+                    oppHandValue.setText("" + AllZone.Computer_Hand.size());
+                    oppGraveValue.setText("" + AllZone.Computer_Graveyard.size());
+                    oppLibraryValue.setText("" + AllZone.Computer_Library.size());
+                    oppRemovedValue.setText("" + AllZone.Computer_Exile.size());
                 }
             };
             AllZone.Computer_Hand.addObserver(o);
@@ -529,8 +529,6 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 for(int i = stack.size() - 1; 0 <= i; i--) {
                     label = new JLabel("" + (count++) + ". " + stack.peek(i).getStackDescription());
                    
-
-
                     //update card detail
                     final CardPanel cardPanel = new CardPanel(stack.peek(i).getSourceCard());
                     cardPanel.setLayout(new BorderLayout());
@@ -733,7 +731,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     }
    
     private void initMsgYesNo(JPanel pane) {
-//        messageArea.setBorder(BorderFactory.createEtchedBorder());
+    	//messageArea.setBorder(BorderFactory.createEtchedBorder());
         messageArea.setEditable(false);
         messageArea.setLineWrap(true);
         messageArea.setWrapStyleWord(true);

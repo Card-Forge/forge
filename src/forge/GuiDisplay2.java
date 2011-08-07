@@ -286,9 +286,9 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         {//make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(Observable a, Object b) {
-                    playerHandLabel.setText("" + AllZone.Human_Hand.getCards().length);
-                    playerGraveLabel.setText("" + AllZone.Human_Graveyard.getCards().length);
-                    playerLibraryLabel.setText("" + AllZone.Human_Library.getCards().length);
+                    playerHandLabel.setText("" + AllZone.Human_Hand.size());
+                    playerGraveLabel.setText("" + AllZone.Human_Graveyard.size());
+                    playerLibraryLabel.setText("" + AllZone.Human_Library.size());
                 }
             };
             AllZone.Human_Hand.addObserver(o);
@@ -300,9 +300,9 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         {//make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(Observable a, Object b) {
-                    oppHandLabel.setText("" + AllZone.Computer_Hand.getCards().length);
-                    oppGraveLabel.setText("" + AllZone.Computer_Graveyard.getCards().length);
-                    oppLibraryLabel.setText("" + AllZone.Computer_Library.getCards().length);
+                    oppHandLabel.setText("" + AllZone.Computer_Hand.size());
+                    oppGraveLabel.setText("" + AllZone.Computer_Graveyard.size());
+                    oppLibraryLabel.setText("" + AllZone.Computer_Library.size());
                 }
             };
             AllZone.Computer_Hand.addObserver(o);

@@ -312,8 +312,8 @@ public class GameAction {
         if (p != null && p.is(Constant.Zone.Battlefield))
         	c = AllZone.CardFactory.copyCard(c);
         
-        if (libPosition == -1 || libPosition > library.getCards().length)
-        	libPosition = library.getCards().length;
+        if (libPosition == -1 || libPosition > library.size())
+        	libPosition = library.size();
         
         library.add(c, libPosition);
         return c;
