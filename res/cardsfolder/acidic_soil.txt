@@ -6,6 +6,7 @@ A:SP$ DealDamage | Cost$ 2 R | Defined$ You | NumDmg$ X | SubAbility$ SVar=DBDam
 SVar:DBDamageOpp:DB$DealDamage | Defined$ Opponent | NumDmg$ Y
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Y:Count$TypeOppCtrl.Land
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_soil.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/172.jpg
