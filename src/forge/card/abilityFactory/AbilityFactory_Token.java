@@ -254,7 +254,14 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 
 		if (cost != null){
-			// AI currently disabled for these costs
+			if (cost.getSacCost() && !cost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String type = cost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+			    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+			    	return false;
+			}
 			if (cost.getSubCounter()){
 				if (cost.getCounterType().equals(Counters.P1P1)) {
 					// A card has a 25% chance per counter to be able to pass through here
@@ -264,6 +271,10 @@ public class AbilityFactory_Token extends AbilityFactory {
 					if (percent <= r.nextFloat())
 						return false;
 				}
+			}
+			if (cost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - cost.getLifeAmount() < 4)
+					return false;
 			}
 		}
 		

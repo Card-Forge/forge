@@ -210,8 +210,13 @@ public class AbilityFactory_ChangeZone {
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
-			if (abCost.getSacCost()){
-				// Sac is ok in general, but should add some decision making based off what we Sacrifice and what we might get
+			if (abCost.getSacCost() && !abCost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String type = abCost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+			    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+			    	return false;
 			}
 			if (abCost.getLifeCost()){
 				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
@@ -767,8 +772,13 @@ public class AbilityFactory_ChangeZone {
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
-			if (abCost.getSacCost()){
-				// Sac is ok in general, but should add some decision making based off SacType and Retrieve Type
+			if (abCost.getSacCost() && !abCost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String type = abCost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+			    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+			    	return false;
 			}
 			if (abCost.getLifeCost()){
 				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)

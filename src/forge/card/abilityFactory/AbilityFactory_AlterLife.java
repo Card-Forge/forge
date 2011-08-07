@@ -7,6 +7,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
@@ -174,10 +175,17 @@ public class AbilityFactory_AlterLife {
 		if (lifeAmount <= 0) return false;
 
 		if (abCost != null){
-			// AI currently disabled for these costs
-			if (abCost.getSacCost()){
-				if (life > 4)
+			if (abCost.getSacCost() && life > 4){
+				if (abCost.getSacThis() && life > 6)
 					return false;
+				else {
+					//only sacrifice something that's supposed to be sacrificed 
+					String type = abCost.getSacType();
+				    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+				    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+				    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+				    	return false;
+				}
 			}
 			if (abCost.getLifeCost() && life > 5)	 return false;
 			if (abCost.getDiscardCost() && life > 5) return false;
@@ -457,6 +465,14 @@ public class AbilityFactory_AlterLife {
 			if (abCost.getSacCost()){
 				if (amountStr.contains("X"))
 					return false;
+				if (!abCost.getSacThis()){
+					//only sacrifice something that's supposed to be sacrificed 
+					String type = abCost.getSacType();
+				    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+				    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+				    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+				    	return false;
+				}
 			}
 			if (abCost.getLifeCost() && aiLife - abCost.getLifeAmount() < humanLife - amount)	 return false;
 			if (abCost.getDiscardCost()) return false;
@@ -797,6 +813,7 @@ public class AbilityFactory_AlterLife {
 	
 	private static boolean poisonCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
 		Cost abCost = sa.getPayCosts();
+		final Card source = af.getHostCard();
 		HashMap<String,String> params = af.getMapParams();
 		//int humanPoison = AllZone.HumanPlayer.getPoisonCounters();
 		//int humanLife = AllZone.HumanPlayer.getLife();
@@ -811,6 +828,14 @@ public class AbilityFactory_AlterLife {
 			if (abCost.getSacCost()){
 				if (amountStr.contains("X"))
 					return false;
+				if (!abCost.getSacThis()){
+					//only sacrifice something that's supposed to be sacrificed 
+					String type = abCost.getSacType();
+				    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+				    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+				    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+				    	return false;
+				}
 			}
 			if(abCost.getLifeCost() && aiLife - abCost.getLifeAmount() <= 0) return false;
 		}
