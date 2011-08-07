@@ -73,8 +73,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getLandsInPlay() {
 		CardList lands = new CardList();
-		lands.add(getPlayerLandsInPlay(AllZone.HumanPlayer));
-		lands.add(getPlayerLandsInPlay(AllZone.ComputerPlayer));
+		lands.addAll(getPlayerLandsInPlay(AllZone.HumanPlayer));
+		lands.addAll(getPlayerLandsInPlay(AllZone.ComputerPlayer));
 		return lands;
 	}
 	
@@ -92,7 +92,7 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsInPlay() {
 		CardList cards = new CardList();
-		cards.add(getCardsInPlay(null));
+		cards.addAll(getCardsInPlay(null));
 		return cards;		
 	}
 	
@@ -104,8 +104,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsInPlay(final String cardName) {
 		CardList cards = new CardList();
-		cards.add(getPlayerCardsInPlay(AllZone.HumanPlayer));
-		cards.add(getPlayerCardsInPlay(AllZone.ComputerPlayer));
+		cards.addAll(getPlayerCardsInPlay(AllZone.HumanPlayer));
+		cards.addAll(getPlayerCardsInPlay(AllZone.ComputerPlayer));
 		if( cardName != null && !"".equals(cardName) ) {
 			cards = cards.getName(cardName);
 		}
@@ -156,8 +156,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsInGraveyard() {
 		CardList cards = new CardList();
-		cards.add(getPlayerGraveyard(AllZone.HumanPlayer));
-		cards.add(getPlayerGraveyard(AllZone.ComputerPlayer));
+		cards.addAll(getPlayerGraveyard(AllZone.HumanPlayer));
+		cards.addAll(getPlayerGraveyard(AllZone.ComputerPlayer));
 		return cards;
 	}
 	
@@ -199,8 +199,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsInGraveyard(final String cardName) {
 		CardList cards = new CardList();
-		cards.add(getPlayerGraveyard(AllZone.HumanPlayer));
-		cards.add(getPlayerGraveyard(AllZone.ComputerPlayer));
+		cards.addAll(getPlayerGraveyard(AllZone.HumanPlayer));
+		cards.addAll(getPlayerGraveyard(AllZone.ComputerPlayer));
 		cards = cards.getName(cardName);
 		return cards;
 	}
@@ -271,8 +271,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsInExile() {
 		CardList cards = new CardList();
-		cards.add(getPlayerCardsInExile(AllZone.ComputerPlayer));
-		cards.add(getPlayerCardsInExile(AllZone.HumanPlayer));
+		cards.addAll(getPlayerCardsInExile(AllZone.ComputerPlayer));
+		cards.addAll(getPlayerCardsInExile(AllZone.HumanPlayer));
 		return cards;
 	}
 	
@@ -442,7 +442,7 @@ public class AllZoneUtil {
 	 */
 	public static CardList getColorInPlay(final String color) {
 		CardList cards = getPlayerColorInPlay(AllZone.ComputerPlayer, color);
-		cards.add(getPlayerColorInPlay(AllZone.HumanPlayer, color));
+		cards.addAll(getPlayerColorInPlay(AllZone.HumanPlayer, color));
 		return cards;
 	}
 	

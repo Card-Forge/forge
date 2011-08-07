@@ -17,8 +17,6 @@ public class CardList implements Iterable<Card> {
     
     private ArrayList<Card> list = new ArrayList<Card>();
     
-    //private LinkedList list = new LinkedList();
-    
     public CardList() {}
     
     public CardList(Card... c) {
@@ -26,6 +24,10 @@ public class CardList implements Iterable<Card> {
     }
     
     public CardList(ArrayList<Card> al) {
+    	addAll(al.toArray());
+    }
+    
+    public CardList(CardList al) {
     	addAll(al.toArray());
     }
     
@@ -62,7 +64,7 @@ public class CardList implements Iterable<Card> {
     
     public CardList getOnly2Colors(final String clr1, final String clr2) {
     	CardList list = new CardList();
-    	list.add(this);
+    	list.addAll(this);
     	
     	CardListFilter clrF = new CardListFilter(){
 			public boolean addCard(Card c){
@@ -119,14 +121,6 @@ public class CardList implements Iterable<Card> {
     
     public void add(int n, Card c) {
         list.add(n, c);
-    }
-    
-    /**
-     * add(CardList) - lets you add one CardList to another directly
-     * @param in - CardList to add to the current CardList
-     */
-    public void add(CardList in) {
-    	addAll(in.toArray());
     }
     
     /**

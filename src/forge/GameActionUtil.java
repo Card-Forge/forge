@@ -1064,8 +1064,8 @@ public class GameActionUtil {
 		final CardList magus = AllZoneUtil.getCardsInPlay("Magus of the Abyss");
 		
 		CardList cards = new CardList();
-		cards.add(the);
-		cards.add(magus);
+		cards.addAll(the);
+		cards.addAll(magus);
 		
 		for(Card c:cards) {
 			final Card abyss = c;
@@ -1234,7 +1234,7 @@ public class GameActionUtil {
 		 */
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList lords = AllZoneUtil.getPlayerCardsInPlay(player, "Lord of the Pit");
-		lords.add(AllZoneUtil.getPlayerCardsInPlay(player, "Liege of the Pit"));
+		lords.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Liege of the Pit"));
 		final CardList cards = lords;
 		
 		for(int i = 0; i < cards.size(); i++) {
@@ -1296,7 +1296,7 @@ public class GameActionUtil {
 		 */
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList drops = AllZoneUtil.getPlayerCardsInPlay(player, "Drop of Honey");
-		drops.add(AllZoneUtil.getPlayerCardsInPlay(player, "Porphyry Nodes"));
+		drops.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Porphyry Nodes"));
 		final CardList cards = drops;
 		
 		for(int i = 0; i < cards.size(); i++) {
@@ -4676,10 +4676,10 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 
 		CardList all = AllZoneUtil.getPlayerCardsInPlay(player, "Bottomless Vault");
-		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Dwarven Hold"));
-		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Hollow Trees"));
-		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Icatian Store"));
-		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Sand Silos"));
+		all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Dwarven Hold"));
+		all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Hollow Trees"));
+		all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Icatian Store"));
+		all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Sand Silos"));
 		
 		for(Card land:all) {
 			if(land.isTapped()) land.addCounter(Counters.STORAGE, 1);
@@ -4789,11 +4789,8 @@ public class GameActionUtil {
 						player);
 
 				for(int outer = 0; outer < zone.length; outer++) {
-					CardList creature = new CardList(
-							zone[outer].getCards());
+					CardList creature = AllZoneUtil.getCardsInZone(zone[outer]);
 					creature = creature.getType("Creature");
-
-					//System.out.println("zone[" + outer + "] = " + creature.size());
 
 					for(int j = 0; j < creature.size(); j++) {
 						boolean art = false;
@@ -6158,7 +6155,7 @@ public class GameActionUtil {
 
 		void removeSwampwalk(CardList list) {
 			CardList List_Copy = new CardList();
-			List_Copy.add(list);
+			List_Copy.addAll(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
@@ -6217,7 +6214,7 @@ public class GameActionUtil {
 
 		void removeFirstStrike(CardList list) {
 			CardList List_Copy = new CardList();
-			List_Copy.add(list);
+			List_Copy.addAll(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
@@ -6275,7 +6272,7 @@ public class GameActionUtil {
 
 		void removeHaste(CardList list) {
         	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
+        	List_Copy.addAll(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
@@ -6313,9 +6310,7 @@ public class GameActionUtil {
 
 		void addFlying(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-			CardList playlist = new CardList(play.getCards());
-			playlist = playlist.getType("Creature");
+			CardList playlist = AllZoneUtil.getCreaturesInPlay(player);
 			for(int i = 0; i < playlist.size(); i++) {
 				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
 			}
@@ -6326,15 +6321,8 @@ public class GameActionUtil {
 		}
 
 		boolean isInGrave(Player player) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, player);
-			CardList list = new CardList(grave.getCards());
-
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, player);
-			CardList lands = new CardList(play.getCards());
-			lands = lands.getType("Island");
-
+			CardList list = AllZoneUtil.getPlayerGraveyard(player);
+			CardList lands = AllZoneUtil.getPlayerTypeInPlay(player, "Island");
 
 			if(!list.containsName("Wonder") || lands.size() == 0) return false;
 			else return true;
@@ -6342,7 +6330,7 @@ public class GameActionUtil {
 
 		void removeFlying(CardList list) {
         	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
+        	List_Copy.addAll(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
@@ -6380,14 +6368,11 @@ public class GameActionUtil {
 
 		void addTrample(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-			CardList playlist = new CardList(play.getCards());
-			playlist = playlist.getType("Creature");
+			CardList playlist = AllZoneUtil.getCreaturesInPlay(player);
 			for(int i = 0; i < playlist.size(); i++) {
 				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
 			}
 			// add creatures to "old" or previous list of creatures
-			
 			
 			addTrample(next);
 		}
@@ -6402,7 +6387,7 @@ public class GameActionUtil {
 
 		void removeTrample(CardList list) {
 			CardList List_Copy = new CardList();
-			List_Copy.add(list);
+			List_Copy.addAll(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
@@ -6479,10 +6464,10 @@ public class GameActionUtil {
 				final Card crd = cl.get(i);
 
 				CardList spells = new CardList();
-				spells.addAll(AllZone.Human_Graveyard.getCards());
-				spells.addAll(AllZone.Human_Hand.getCards());
-				spells.addAll(AllZone.Computer_Hand.getCards());
-				spells.addAll(AllZone.Computer_Graveyard.getCards());
+				spells.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
+				spells.addAll(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer));
+				spells.addAll(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
+				spells.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer));
 				spells = spells.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
 						return !c.isLand()
@@ -6523,11 +6508,10 @@ public class GameActionUtil {
 
 			for(int i = 0; i < cl.size(); i++) {
 				CardList spells = new CardList();
-				spells.addAll(AllZone.Human_Graveyard.getCards());
-				spells.addAll(AllZone.Human_Hand.getCards());
-				spells.addAll(AllZone.Computer_Hand.getCards());
-				spells.addAll(AllZone.Computer_Graveyard.getCards());
-
+				spells.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
+				spells.addAll(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer));
+				spells.addAll(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
+				spells.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer));
 
 				spells = spells.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
@@ -6915,7 +6899,7 @@ public class GameActionUtil {
 				affected.add(source);
 			}
 			else if(range.equals("All")) {
-      			affected.add(AllZoneUtil.getCardsInPlay());
+      			affected.addAll(AllZoneUtil.getCardsInPlay());
       		}
 			else if(range.equals("Enchanted")) {
       			if(source.getEnchanting().size() > 0) {
