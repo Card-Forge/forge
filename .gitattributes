@@ -3196,6 +3196,7 @@ res/cardsfolder/headhunter.txt -text svneol=native#text/plain
 res/cardsfolder/headless_horseman.txt -text svneol=native#text/plain
 res/cardsfolder/headlong_rush.txt svneol=native#text/plain
 res/cardsfolder/headstone.txt -text svneol=native#text/plain
+res/cardsfolder/healing_salve.txt -text svneol=native#text/plain
 res/cardsfolder/heap_doll.txt -text svneol=native#text/plain
 res/cardsfolder/heart_of_light.txt -text svneol=native#text/plain
 res/cardsfolder/heart_of_ramos.txt -text svneol=native#text/plain
