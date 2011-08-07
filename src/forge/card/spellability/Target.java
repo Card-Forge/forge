@@ -170,6 +170,10 @@ public class Target {
 		this(src, select, valid, "1", "1");
 	}
 	
+	public Target(Card src, String select, String valid){		
+		this(src, select, valid.split(","), "1", "1");
+	}
+	
 	public Target(Card src, String select, String[] valid, String min, String max){
 		srcCard = src;
 		tgtValid = true;

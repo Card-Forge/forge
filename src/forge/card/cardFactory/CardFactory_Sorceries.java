@@ -3121,14 +3121,17 @@ public class CardFactory_Sorceries {
         	 * Target player loses all poison counters.
         	 * Leeches deals that much damage to that player.
         	 */
-        	SpellAbility spell = new Spell(card) {
+        	final Target tgt = new Target(card, "Select a player", "Player");
+        	Cost cost = new Cost("1 W W", cardName, false);
+        	SpellAbility spell = new Spell(card, cost, tgt) {
 				private static final long serialVersionUID = 8555498267738686288L;
 
 				@Override
         		public void resolve() {
-        			int counters = getTargetPlayer().getPoisonCounters();
-        			getTargetPlayer().addDamage(counters, card);
-        			getTargetPlayer().subtractPoisonCounters(counters);
+					Player p = tgt.getTargetPlayers().get(0);
+        			int counters = p.getPoisonCounters();
+        			p.addDamage(counters, card);
+        			p.subtractPoisonCounters(counters);
         		}// resolve()
 
         		@Override
@@ -3137,20 +3140,18 @@ public class CardFactory_Sorceries {
         			int compPoison = AllZone.ComputerPlayer.getPoisonCounters();
         			
         			if(AllZone.HumanPlayer.getLife() <= humanPoison ) {
-        				setTargetPlayer(AllZone.HumanPlayer);
+        				tgt.addTarget(AllZone.HumanPlayer);
         				return true;
         			}
         			
         			if( (2*(11 - compPoison) < AllZone.ComputerPlayer.getLife() || compPoison > 7) && compPoison < AllZone.ComputerPlayer.getLife() - 2) {
-        				setTargetPlayer(AllZone.ComputerPlayer);
+        				tgt.addTarget(AllZone.ComputerPlayer);
         				return true;
         			}
         			
         			return false;
         		}
         	};// SpellAbility
-        	
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         	
         	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
         	card.clearFirstSpellAbility();
