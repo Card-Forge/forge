@@ -3259,6 +3259,7 @@ res/cardsfolder/haunting_apparition.txt svneol=native#text/plain
 res/cardsfolder/haunting_echoes.txt -text svneol=native#text/plain
 res/cardsfolder/haunting_hymn.txt -text svneol=native#text/plain
 res/cardsfolder/haunting_misery.txt -text svneol=native#text/plain
+res/cardsfolder/haunting_wind.txt svneol=native#text/plain
 res/cardsfolder/havenwood_battleground.txt -text svneol=native#text/plain
 res/cardsfolder/havenwood_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/havoc.txt -text svneol=native#text/plain
