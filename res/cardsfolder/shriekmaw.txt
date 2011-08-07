@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 K:Fear
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonartifact, nonblack creature.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonartifact, nonblack creature.
 K:Evoke:1 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0

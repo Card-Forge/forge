@@ -6,7 +6,7 @@ PT:1/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
 K:Evoke:W
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:Rarity:Common

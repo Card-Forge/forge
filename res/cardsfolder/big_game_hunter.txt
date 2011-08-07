@@ -4,7 +4,7 @@ Types:Creature Human Rebel Assassin
 Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.powerGE4 | NoRegen$ True | TgtPrompt$ Select target creature with power 4 or greater.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.powerGE4 | NoRegen$ True | TgtPrompt$ Select target creature with power 4 or greater.
 K:Madness:B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/big_game_hunter.jpg
