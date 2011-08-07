@@ -1296,32 +1296,6 @@ public class CardFactory_Sorceries {
             card.setSpellWithChoices(true);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
-                       
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Amnesia")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -5456164079438881319L;
-                
-                @Override
-                public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetPlayer());
-                    Card[] c = hand.getCards();
-                    
-                    for(int i = 0; i < c.length; i++)
-                        if(!c[i].isLand()) c[i].getController().discard(c[i], this);
-                }
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pulse of the Tangle")) {

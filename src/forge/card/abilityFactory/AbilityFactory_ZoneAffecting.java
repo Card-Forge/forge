@@ -729,6 +729,7 @@ public class AbilityFactory_ZoneAffecting {
 	//				-TgtChoose
 	//				-RevealYouChoose
 	//				-RevealOppChoose
+	//				-RevealDiscardAll (defaults to Card if DiscardValid is missing)
 	//				-Hand
 	//DiscardValid - a ValidCards syntax for acceptable cards to discard
 	//UnlessType - a ValidCards expression for "discard x unless you discard a ..."
@@ -848,7 +849,9 @@ public class AbilityFactory_ZoneAffecting {
 					continue;
 				}
 				
-				int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+		        int numCards = 1;
+		        if (params.containsKey("NumCards"))
+		        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 				
 				if(mode.equals("Random")) {
 					p.discardRandom(numCards, sa);
@@ -859,6 +862,29 @@ public class AbilityFactory_ZoneAffecting {
 						p.discardUnless(numCards, params.get("UnlessType"), sa);
 					}
 					else p.discard(numCards, sa, true);
+				}
+				
+				else if (mode.equals("RevealDiscardAll")){
+					// Reveal 
+					CardList dPHand = AllZoneUtil.getPlayerHand(p);
+					
+					if (p.isHuman()){
+						// "reveal to computer" for information gathering
+					}
+					else{
+						GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+					}
+					
+					String valid = params.get("DiscardValid");
+					if (valid == null)
+						valid = "Card";
+					
+					CardList dPChHand = dPHand.getValidCards(valid.split(","), source.getController(), source);
+					
+					// Reveal cards that will be discarded?
+					for(Card c : dPChHand){
+						p.discard(c, sa);
+					}
 				}
 
 				else if(mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")) {
@@ -968,18 +994,32 @@ public class AbilityFactory_ZoneAffecting {
 			
 			if(mode.equals("RevealYouChoose")) 
 				sb.append("reveals his or her hand.").append("  You choose (");
+			else if(mode.equals("RevealDiscardAll"))
+				sb.append("reveals his or her hand. Discard (");
 			else 
 				sb.append("discards (");
 			
+	        int numCards = 1;
+	        if (params.containsKey("NumCards"))
+	        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+			
 			if(mode.equals("Hand"))
 				sb.append("his or her hand");
+			else if(mode.equals("RevealDiscardAll"))
+				sb.append("All");
 			else 
-				sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa));
+				sb.append(numCards);
 				
 			sb.append(")");
 			
 			if(mode.equals("RevealYouChoose")) 
 				sb.append(" to discard");
+			else if(mode.equals("RevealDiscardAll")){
+				String valid = params.get("DiscardValid");
+				if (valid == null)
+					valid = "Card";
+				sb.append(" of type: ").append(valid);
+			}
 			
 			if(mode.equals("Random"))
 				sb.append(" at random.");
