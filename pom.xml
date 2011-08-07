@@ -132,7 +132,7 @@
                                 <fileVersion>1.0.0.0</fileVersion>
                                 <txtFileVersion>1.0.0.0</txtFileVersion>
                                 <fileDescription>Forge</fileDescription>
-                                <copyright>my copyright</copyright>
+                                <copyright>Forge</copyright>
                                 <productVersion>1.0.0.0</productVersion>
                                 <txtProductVersion>1.0.0.0</txtProductVersion>
                                 <productName>Forge</productName>
@@ -295,6 +295,8 @@
                                     <labels>
                                         <label>Featured</label>
                                         <label>Type-Archive</label>
+                                        <label>OpSys-Windows</label>
+                                        <label>OpSys-Linux</label>
                                     </labels>
                                 </upload>
                             </uploads>
@@ -553,6 +555,7 @@
                                     <labels>
                                         <label>Featured</label>
                                         <label>Type-Archive</label>
+                                        <label>OpSys-OSX</label>
                                     </labels>
                                 </upload>
                             </uploads>
