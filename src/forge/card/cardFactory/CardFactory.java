@@ -1864,7 +1864,7 @@ public class CardFactory implements NewConstants {
         	 */
 
         	Cost abCost = new Cost("1 T Sac<1/CARDNAME>", cardName, true);
-        	Target target = new Target(card,"Select target player", new String[]{"Player"});
+        	Target target = new Target(card, "Select target player", new String[]{"Player"});
         	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
         		private static final long serialVersionUID = -6711849408085138636L;
 
@@ -1912,7 +1912,7 @@ public class CardFactory implements NewConstants {
         					AllZone.GameAction.moveToLibrary(list.get(i));
         			}
    
-        			getTargetPlayer().addSlowtripList(card);
+        			player.addSlowtripList(card);
         		}
 
         		private CardList getComputerLands() {
@@ -2277,40 +2277,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(addMana);
         }
         //*************** END ************ END **************************        
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sorcerer's Strongbox")) {
-        	/*
-        	 * 2, Tap: Flip a coin. If you win the flip, sacrifice Sorcerer's
-        	 * Strongbox and draw three cards.
-        	 */
-        	Cost abCost = new Cost("2 T", cardName, true);
-        	final SpellAbility ability = new Ability_Activated(card, abCost, null) {
-        		private static final long serialVersionUID = 5152381570537520053L;
-
-        		@Override
-        		public void resolve() {
-        			if( GameActionUtil.flipACoin(card.getController(), card)) {
-        				AllZone.GameAction.sacrifice(card);
-        				card.getController().drawCards(3);
-        			}
-        			else {
-        				//do nothing
-        			}
-        		}
-        	};//SpellAbility
-
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(abCost).append("Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards.");
-        	ability.setDescription(sbDesc.toString());
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(card.getName()).append(" - flip a coin");
-        	ability.setStackDescription(sbStack.toString());
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
