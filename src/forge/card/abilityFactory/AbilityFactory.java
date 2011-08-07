@@ -1397,8 +1397,8 @@ public class AbilityFactory {
             private static final long serialVersionUID = 8094833091127334678L;
             
             public void execute() {
-            	Ability_Sub abSub = sa.getSubAbility();
-				resolve(abSub);
+            	resolveSubAbilities(sa);
+				AllZone.Stack.finishResolving(sa, false);
             }
         };
         
@@ -1408,8 +1408,8 @@ public class AbilityFactory {
             public void execute() {
             	sa.resolve();
             	if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.HumanPlayer);
-            	Ability_Sub abSub = sa.getSubAbility();
-				resolve(abSub);
+            	resolveSubAbilities(sa);
+				AllZone.Stack.finishResolving(sa, false);
             }
         };
         
@@ -1419,14 +1419,14 @@ public class AbilityFactory {
         } else {
             if(ComputerUtil.canPayCost(ability)) {
             	ComputerUtil.playNoStack(ability); //Unless cost was payed - no resolve
-            	Ability_Sub abSub = sa.getSubAbility();
-				resolve(abSub);
+            	resolveSubAbilities(sa);
+				AllZone.Stack.finishResolving(sa, false);
             }
             else {
                 sa.resolve();
                 if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.ComputerPlayer);
-                Ability_Sub abSub = sa.getSubAbility();
-				resolve(abSub);
+                resolveSubAbilities(sa);
+				AllZone.Stack.finishResolving(sa, false);
             }
         }
 	}
@@ -1436,17 +1436,31 @@ public class AbilityFactory {
 		AbilityFactory af = sa.getAbilityFactory();
 		HashMap<String,String> params = af.getMapParams();
 		
+		
 		//check conditions
 		if (AbilityFactory.checkConditional(params, sa)) {
 			if (params.get("UnlessCost") == null) {
 				sa.resolve();
 				
 				//try to resolve subabilities (see null check above)
-				Ability_Sub abSub = sa.getSubAbility();
-				resolve(abSub);
+				resolveSubAbilities(sa);
+				AllZone.Stack.finishResolving(sa, false);
 			}
 			else passUnlessCost(sa);
+		} else
+			resolveSubAbilities(sa);
+	}
+	
+	public static void resolveSubAbilities(SpellAbility sa) {
+		Ability_Sub abSub = sa.getSubAbility();
+		if(abSub == null) return;
+		AbilityFactory af = abSub.getAbilityFactory();
+		HashMap<String,String> params = af.getMapParams();
+		//check conditions
+		if (AbilityFactory.checkConditional(params, abSub)) {
+			abSub.resolve();
 		}
+		resolveSubAbilities(abSub);
 	}
 	
 }//end class AbilityFactory

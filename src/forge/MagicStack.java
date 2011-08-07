@@ -680,66 +680,56 @@ public class MagicStack extends MyObservable {
 
 		AllZone.Phase.resetPriority();	// ActivePlayer gains priority first after Resolve
 		Card source = sa.getSourceCard();
-		boolean fizzle = hasFizzled(sa, source);
-		Command buyback = null;
 
-
-		if (!fizzle) {
-			final Card crd = source;
-			if (sa.isBuyBackAbility()) {
-				buyback = new Command() {
-					private static final long serialVersionUID = -2559488318473330418L;
-
-					public void execute() {
-						AllZone.GameAction.moveToHand(crd);
-					}
-				};
-				source.addReplaceMoveToGraveyardCommand(buyback);
-			}
-
-			// To stop Copied Spells from going into the graveyard.
-			if (sa.getSourceCard().isCopiedSpell()) {
-				source.addReplaceMoveToGraveyardCommand(new Command() {
-					private static final long serialVersionUID = -2559488318473330418L;
-
-					public void execute() {
-					}
-				});
-			}
+		if (hasFizzled(sa, source)) {//Fizzle
+			// TODO: Spell fizzles, what's the best way to alert player?
+			Log.debug(source.getName() + " ability fizzles.");
+			finishResolving(sa, true);
+		}
+		
+		else 
 			if(sa.getAbilityFactory() != null) {
 				AbilityFactory.handleRemembering(sa.getAbilityFactory());
 				AbilityFactory.resolve(sa);
-			} else
+			} else {
 				sa.resolve();
-		} else {
-			// TODO: Spell fizzles, what's the best way to alert player?
-			Log.debug(source.getName() + " ability fizzles.");
+				finishResolving(sa, false);
+			}
+		
+	}
+	
+	public void removeCardFromStack(SpellAbility sa, boolean fizzle) {
+		Card source = sa.getSourceCard();
+		
+		//do nothing
+		if (sa.getSourceCard().isCopiedSpell() || sa.isAbility()){
+		}
+		// Handle cards that need to be moved differently
+		else if (sa.isBuyBackAbility() && !fizzle){
+			AllZone.GameAction.moveToHand(source);
 		}
 
-		// Handle cards that need to be moved differently
-		if (sa.isFlashBackAbility()){
+		else if (sa.isFlashBackAbility()){
 			AllZone.GameAction.exile(source);
 			sa.setFlashBackAbility(false);
 		}
 
-		else if (fizzle && sa.isSpell())
-			AllZone.GameAction.moveToGraveyard(source);
-
-		else if (sa.isAbility())
-		{}	// don't send to graveyard if the spell is using an ability
-
 		// If Spell and still on the Stack then let it goto the graveyard or replace its own movement
-		else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery()) && 
+		else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery() || fizzle) && 
 				AllZone.getZone(source).is(Constant.Zone.Stack)){
 			if (source.getReplaceMoveToGraveyard().size() == 0)
 				AllZone.GameAction.moveToGraveyard(source);
 			else{
 				source.replaceMoveToGraveyard();
-				if (buyback != null)
-					source.getReplaceMoveToGraveyard().remove(buyback);
 			}
 		}
-
+	}
+	
+	public void finishResolving(SpellAbility sa, boolean fizzle) {
+		
+		//remove card from the stack
+		removeCardFromStack(sa, fizzle);
+		
 		// After SA resolves we have to do a handful of things
 		setResolving(false);
 		this.unfreezeStack(); 
