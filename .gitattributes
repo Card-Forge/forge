@@ -84,7 +84,6 @@ res/boosterdata/WTH.pack -text
 res/boosterdata/WWK.pack -text
 res/boosterdata/ZEN.pack -text
 res/card-pictures-token.txt -text svneol=native#text/plain
-res/cardsfolder/Anoint.txt -text svneol=native#text/plain
 res/cardsfolder/abandoned_outpost.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_gargoyles.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_matron.txt svneol=native#text/plain
@@ -319,6 +318,7 @@ res/cardsfolder/ankh_of_mishra.txt -text svneol=native#text/plain
 res/cardsfolder/annihilate.txt -text svneol=native#text/plain
 res/cardsfolder/annul.txt -text svneol=native#text/plain
 res/cardsfolder/anodet_lurker.txt -text svneol=native#text/plain
+res/cardsfolder/anoint.txt -text svneol=native#text/plain
 res/cardsfolder/anowon_the_ruin_sage.txt -text svneol=native#text/plain
 res/cardsfolder/ant_queen.txt -text svneol=native#text/plain
 res/cardsfolder/anthroplasm.txt -text svneol=native#text/plain
