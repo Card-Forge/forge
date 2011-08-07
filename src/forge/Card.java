@@ -3171,11 +3171,7 @@ public class Card extends MyObservable {
     	
     	restDamage = staticReplaceDamage(restDamage, source, isCombat);
     	
-    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return restDamage;
-    	
     	restDamage = staticDamagePrevention(restDamage, source, isCombat);
-    	
-    	if(getName().equals("Swans of Bryn Argoll")) return 0;
     	
     	return restDamage;
     }
@@ -3237,29 +3233,14 @@ public class Card extends MyObservable {
 		
 		// specific Cards
     	if(isCreature()) { //and not a planeswalker
+        	if(getName().equals("Swans of Bryn Argoll")) return 0;
+        	
     		if((source.isCreature() && AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this)))return 0;
     	
     		if((!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", player)))return 0;
-    		
-    		/*
-    		if((AllZoneUtil.isCardInPlay("Light of Sanction", player) && source.getController().isPlayer(player)))
-    			return 0;
-    	
-    		if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell()&& restDamage > 0) {
-        		int amount = AllZoneUtil.getCardsInPlay("Plated Pegasus").size();
-				for (int i = 0; i < amount;i++)
-					if ( restDamage > 0 )	%
-						restDamage -= 1;
-    		}
-    		
-    		if (isType("Cleric") && AllZoneUtil.isCardInPlay("Daunting Defender", player))
-    			restDamage = restDamage - AllZoneUtil.getPlayerCardsInPlay(player, "Daunting Defender").size();
-    		*/
-    		
+
     		if(getName().equals("Callous Giant") && restDamage <= 3) return 0;
     	} //Creature end
-    	
-		if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
     	
 		if ( restDamage > 0)
 			return restDamage;
