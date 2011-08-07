@@ -7,4 +7,5 @@ SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Enchantment.YouCtrl | ConditionPre
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/calming_verse.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/110.jpg
 End

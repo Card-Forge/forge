@@ -7,4 +7,5 @@ SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionPresent$ Permanent.Bla
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_temper.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/61.jpg
 End
