@@ -11,6 +11,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.ComputerUtil;
+import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -156,6 +157,10 @@ public class AbilityFactory_PermanentState {
 		// AI cannot use this properly until he can use SAs during Humans turn
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
+		
+    	if (af.getAbCost().getAddCounter())
+    		if (af.getAbCost().getCounterType().equals(Counters.M1M1))
+            	return false;
 		
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
