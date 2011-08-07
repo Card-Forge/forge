@@ -2389,13 +2389,7 @@ public class CardFactoryUtil {
         int n = 0;
         
         Player cardController = c.getController();
-        Player oppController = cardController.getOpponent();
-        
-        PlayerZone myYard = AllZone.getZone(Constant.Zone.Graveyard, cardController);
-        PlayerZone opYard = AllZone.getZone(Constant.Zone.Graveyard, oppController);
-        
-        PlayerZone myHand = AllZone.getZone(Constant.Zone.Hand, cardController);
-        PlayerZone opHand = AllZone.getZone(Constant.Zone.Hand, oppController);    
+        Player oppController = cardController.getOpponent();  
         
         final String[] l;
         l = s.split("/"); // separate the specification from any math
@@ -2518,7 +2512,7 @@ public class CardFactoryUtil {
         // Count$Hellbent.<numHB>.<numNotHB>
         if(sq[0].contains("Hellbent"))
         {
-        	if(myHand.size() <= 0) 
+        	if(cardController.hasHellbent()) 
         		return doXMath(Integer.parseInt(sq[1]), m, c); // Hellbent
         	else
         		return doXMath(Integer.parseInt(sq[2]), m, c); // not Hellbent
@@ -2535,7 +2529,7 @@ public class CardFactoryUtil {
         
         if (sq[0].contains("Threshold"))
         {
-        	if (myYard.size() >= 7)
+        	if (cardController.hasThreshold())
         		return doXMath(Integer.parseInt(sq[1]), m, c); // Have Threshold
         	else
         		return doXMath(Integer.parseInt(sq[2]), m, c); // not Threshold
@@ -2644,12 +2638,12 @@ public class CardFactoryUtil {
         }
         
         if(sq[0].contains("InOppYard")) if(OY == false) {
-            someCards.addAll(opYard.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerGraveyard(oppController));
             OY = true;
         }
         
         if(sq[0].contains("InOppHand")) if(OH == false) {
-            someCards.addAll(opHand.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerHand(oppController));
             OH = true;
         }
         
@@ -2659,13 +2653,13 @@ public class CardFactoryUtil {
         }
         
         if(sq[0].contains("InAllYards")) {
-            if(MY == false) someCards.addAll(myYard.getCards());
-            if(OY == false) someCards.addAll(opYard.getCards());
+            if(MY == false) someCards.addAll(AllZoneUtil.getPlayerGraveyard(cardController));
+            if(OY == false) someCards.addAll(AllZoneUtil.getPlayerGraveyard(oppController));
         }
         
         if(sq[0].contains("InAllHands")) {
-            if(MH == false) someCards.addAll(myHand.getCards());
-            if(OH == false) someCards.addAll(opHand.getCards());
+            if(MH == false) someCards.addAll(AllZoneUtil.getPlayerHand(cardController));
+            if(OH == false) someCards.addAll(AllZoneUtil.getPlayerHand(oppController));
         }
         
         // filter lists based on the specified quality
