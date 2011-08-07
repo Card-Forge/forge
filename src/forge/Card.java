@@ -27,8 +27,6 @@ public class Card extends MyObservable {
     
     private long						 value;
     
-    //private Collection keyword   = new TreeSet();
-    //private ArrayList<String> keyword = new ArrayList<String>();
     private HashMap<String,Object>        triggeringObjects                 = new HashMap<String,Object>();
     private ArrayList<Trigger>			triggers						= new ArrayList<Trigger>();
     private ArrayList<String>			 intrinsicAbility				   = new ArrayList<String>();
@@ -147,8 +145,6 @@ public class Card extends MyObservable {
     private String                       text                              = "";
     private String                       manaCost                          = "";
     private String                       upkeepCost                        = "";
-    //private String                       tabernacleUpkeepCost              = "";
-    //private String                       magusTabernacleUpkeepCost         = "";
     private String                       echoCost                          = "";
     private String						 madnessCost					   = "";
     private String                       chosenType                        = "";
@@ -826,22 +822,6 @@ public class Card extends MyObservable {
     public boolean hasUpkeepCost() {
         return upkeepCost.length() > 0 && !upkeepCost.equals("0");
     }
-    /*
-    public void setTabernacleUpkeepCost(String s) {
-        tabernacleUpkeepCost = s;
-    }
-    
-    public String getTabernacleUpkeepCost() {
-        return tabernacleUpkeepCost;
-    }
-    
-    public void setMagusTabernacleUpkeepCost(String s) {
-        magusTabernacleUpkeepCost = s;
-    }
-    
-    public String getMagusTabernacleUpkeepCost() {
-        return magusTabernacleUpkeepCost;
-    }*/
     
     //used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
     public String getChosenType() {
@@ -1724,9 +1704,6 @@ public class Card extends MyObservable {
         return rarity;
     }
     
-    
-    
-    
     public void setImageName(String s) {
         imageName = s;
     }
@@ -1842,8 +1819,6 @@ public class Card extends MyObservable {
             equippedBy.get(0).unEquipCard(this);
         }
     }
-    
-    //
     
     public ArrayList<Card> getEnchantedBy() {
         return enchantedBy;
@@ -2019,7 +1994,7 @@ public class Card extends MyObservable {
         this.updateObservers();
     }
     
-  //values that are printed on card
+    //values that are printed on card
     public String getBaseAttackString() {
         return (null == baseAttackString) ? ""+getBaseAttack() : baseAttackString;
     }
@@ -2119,8 +2094,6 @@ public class Card extends MyObservable {
     	return replicateMagnitude;
     }
     
-    //public int getAttack(){return attack;}
-    
     //for cards like Giant Growth, etc.
     public int getTempAttackBoost() {
         return tempAttackBoost;
@@ -2199,9 +2172,6 @@ public class Card extends MyObservable {
     public void setOtherDefenseBoost(int n) {
         otherDefenseBoost = n;
     }
-    
-    //public void setAttack(int n)    {attack  = n; this.updateObservers();}
-    //public void setDefense(int n)  {defense = n; this.updateObservers();}
     
     public boolean isUntapped() {
         return !tapped;
@@ -2288,13 +2258,6 @@ public class Card extends MyObservable {
     {
     	return intrinsicAbility;
     }
-    
-    //public void setKeyword(ArrayList a) {keyword = new ArrayList(a); this.updateObservers();}
-    //public void addKeyword(String s)     {keyword.add(s);                    this.updateObservers();}
-    //public void removeKeyword(String s) {keyword.remove(s);              this.updateObservers();}
-    //public int getKeywordSize() 	{return keyword.size();}
-    
-    //public String[] basics = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
     
     public ArrayList<String> getIntrinsicKeyword() {
         return new ArrayList<String>(intrinsicKeyword);
@@ -2476,7 +2439,7 @@ public class Card extends MyObservable {
     }
     
     public boolean isInstant() {
-        return type.contains("Instant") /*|| hasKeyword("Flash")*/;
+        return type.contains("Instant");
     }
     
     public boolean isArtifact() {
@@ -2508,16 +2471,12 @@ public class Card extends MyObservable {
         return typeContains("Enchantment");
     }
     
-    public boolean isLocalEnchantment() {
-        return typeContains("Aura");
-    }
-    
     public boolean isAura() {
         return typeContains("Aura");
     }
     
     public boolean isGlobalEnchantment() {
-        return typeContains("Enchantment") && (!isLocalEnchantment());
+        return typeContains("Enchantment") && (!isAura());
     }
     
     private boolean typeContains(String s) {
@@ -2546,6 +2505,7 @@ public class Card extends MyObservable {
     {
     	return value;
     }
+    
     @Override
     public boolean equals(Object o) {
         if(o instanceof Card) {

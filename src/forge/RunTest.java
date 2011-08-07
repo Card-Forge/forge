@@ -169,7 +169,7 @@ public class RunTest
 	    check("74", ! c.isGlobalEnchantment());
 	    check("75", ! c.isInstant());
 	    check("76", ! c.isLand());
-	    check("77", ! c.isLocalEnchantment());
+	    check("77", ! c.isAura());
 	    check("78", c.isPermanent());
 	    check("79", ! c.isSorcery());
 	    check("80", ! c.isTapped());
@@ -191,7 +191,7 @@ public class RunTest
 	    check("90", ! c.isGlobalEnchantment());
 	    check("91", c.isInstant());
 	    check("92", ! c.isLand());
-	    check("93", ! c.isLocalEnchantment());
+	    check("93", ! c.isAura());
 	    check("94", ! c.isPermanent());
 	    check("95", ! c.isSorcery());
 	    check("96", ! c.isTapped());
