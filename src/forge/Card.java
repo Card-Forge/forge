@@ -2740,17 +2740,20 @@ public class Card extends MyObservable {
         
             if (incR[0].equals("Spell") && isLand())
             	return false;
-            if (incR[0].equals("Permanent") && (isInstant() || isType("Sorcery")))
+            if (incR[0].equals("Permanent") && (isInstant() || isSorcery()))
             	return false;
-            if(!incR[0].equals("card") && !incR[0].equals("Card") && !incR[0].equals("Spell") 
-            		&& !incR[0].equals("Permanent") && !(isType(incR[0])))
+            if (!incR[0].equals("card") 
+            		&& !incR[0].equals("Card") 
+            		&& !incR[0].equals("Spell") 
+            		&& !incR[0].equals("Permanent") 
+            		&& !(isType(incR[0])))
             	return false; //Check for wrong type
             
-            if(incR.length > 1) {
+            if (incR.length > 1) {
                 final String excR = incR[1];
                 String exR[] = excR.split("\\+"); // Exclusive Restrictions are ...
-                for(int j = 0; j < exR.length; j++)
-                    if(hasProperty(exR[j],sourceController,source) == false) return false;
+                for (int j = 0; j < exR.length; j++)
+                    if (hasProperty(exR[j],sourceController,source) == false) return false;
             }
             return true;
     }//isValidCard(String Restriction)
@@ -2758,17 +2761,17 @@ public class Card extends MyObservable {
     // Takes arguments like Blue or withFlying
 	public boolean hasProperty(String Property, final Player sourceController, final Card source) {
 		//by name can also have color names, so needs to happen before colors.
-        if(Property.startsWith("named")) { if(!getName().equals(Property.substring(5))) return false; }
-        else if(Property.startsWith("sameName")) { if(!getName().equals(source.getName())) return false; }
-        
-        else if (Property.contains("White") || // ... Card colors
-                Property.contains("Blue") ||
-                Property.contains("Black") ||
-                Property.contains("Red") ||
-                Property.contains("Green") ||
-                Property.contains("Colorless")) 
+        if (Property.startsWith("named")) { if(!getName().equals(Property.substring(5))) return false; }
+        else if (Property.startsWith("sameName")) { if(!getName().equals(source.getName())) return false; }
+        // ... Card colors
+        else if (Property.contains("White") 
+        			|| Property.contains("Blue") 
+        			|| Property.contains("Black") 
+        			|| Property.contains("Red") 
+        			|| Property.contains("Green") 
+        			|| Property.contains("Colorless")) 
  			{
-					if(Property.startsWith("non"))
+					if (Property.startsWith("non"))
 					{	
 						if (CardUtil.getColors(this).contains(Property.substring(3).toLowerCase())) return false;
 					}	

@@ -830,7 +830,7 @@ public class CardFactory implements NewConstants {
             card2 = CardFactory_Lands.getCard(card, cardName, owner);
         } else if (card.isInstant()) {
         	card2 = CardFactory_Instants.getCard(card, cardName, owner);
-        } else if (card.isType("Sorcery")) {
+        } else if (card.isSorcery()) {
         	card2 = CardFactory_Sorceries.getCard(card, cardName, owner);
         }
         
