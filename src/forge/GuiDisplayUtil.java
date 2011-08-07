@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -940,6 +941,7 @@ public class GuiDisplayUtil implements NewConstants {
     	String t_computerSetupGraveyard = "NONE";
         String t_humanSetupLibrary = "NONE";
         String t_computerSetupLibrary = "NONE";
+        String t_changePlayer = "NONE";
     	String t_end = "";
     	
     	String wd = System.getProperty("user.dir");
@@ -986,6 +988,8 @@ public class GuiDisplayUtil implements NewConstants {
     				  t_humanSetupLibrary = categoryValue;
     			  else if (categoryName.equals("AICardsInLibrary"))
     				  t_computerSetupLibrary = categoryValue;
+    			  else if (categoryName.equals("ActivePlayer"))
+    				  t_changePlayer = categoryValue;
     		  }
     		      		  
     		  in.close();
@@ -1015,6 +1019,16 @@ public class GuiDisplayUtil implements NewConstants {
         CardList humanDevLibrarySetup = new CardList();
         CardList computerDevLibrarySetup = new CardList();
 		
+        if (!t_changePlayer.trim().toLowerCase().equals("none")) {
+        	if (t_changePlayer.trim().toLowerCase().equals("human")) {        		
+        		AllZone.Phase.setPlayerTurn(AllZone.HumanPlayer);
+        	}
+        	if (t_changePlayer.trim().toLowerCase().equals("ai")) {        		
+        		AllZone.Phase.setPlayerTurn(AllZone.ComputerPlayer);
+        	}
+    		AllZone.Phase.updateObservers();
+        }
+        
 		if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
 			for (int i = 0; i < humanSetupCardsInPlay.length; i ++) {
 				Card c = AllZone.CardFactory.getCard(humanSetupCardsInPlay[i].trim(), AllZone.HumanPlayer);
