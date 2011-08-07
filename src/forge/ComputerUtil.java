@@ -861,12 +861,8 @@ public class ComputerUtil
 	  return chooseExileFrom(Constant.Zone.Graveyard, type, activate, target, amount);
   }
   
-  static public CardList chooseExileFromTopType(String type, Card activate, Card target, int amount){
-	  return chooseExileFrom(Constant.Zone.Library, type, activate, target, amount);
-  }
-  
   static public CardList chooseExileFrom(String zone, String type, Card activate, Card target, int amount){
-	  CardList typeList = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+	  CardList typeList = AllZoneUtil.getCardsInZone(zone, AllZone.ComputerPlayer);
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  if (target != null && target.getController().isComputer() && typeList.contains(target))
 		  typeList.remove(target);	// don't exile the card we're pumping

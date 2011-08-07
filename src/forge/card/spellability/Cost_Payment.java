@@ -555,7 +555,7 @@ public class Cost_Payment {
     		if (cost.getExileFromTopThis())
     			exileFromTopCard.add(card);
     		else
-    			exileFromTopCard = ComputerUtil.chooseExileFromTopType(cost.getExileFromTopType(), card, ability.getTargetCard(), cost.getExileFromTopAmount());
+    			exileFromTopCard = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer, cost.getExileFromTopAmount());
     		
 	    	if (exileFromTopCard.size() != cost.getExileFromTopAmount()){
 	    		System.out.println("Couldn't find a valid card to exile for: "+card.getName());
