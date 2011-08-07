@@ -58,9 +58,11 @@ public class GameAction {
     	if (suppress)
 	        AllZone.TriggerHandler.suppressMode("ChangesZone");
 
-    	// If the card is not a token, add it anywhere. If it is a token, only add to Battlefield
-        if (!c.isToken() || zone.is(Constant.Zone.Battlefield))
-        	 zone.add(copied);
+    	zone.add(copied);
+
+        //Tokens outside the battlefield disappear immideately.
+        if(copied.isToken() && !zone.is(Constant.Zone.Battlefield))
+            zone.remove(copied);
         
         if(suppress)
         	AllZone.TriggerHandler.clearSuppression("ChangesZone");
