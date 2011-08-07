@@ -28,13 +28,7 @@ import forge.gui.input.Input_PayManaCost;
 
 public class CardFactoryUtil {
     private static Random random = MyRandom.random;
-    
-    // who uses this function?
-    public final static String getPumpString(int n) {
-        if(0 <= n) return "+" + n;
-        else return "" + n;
-    }
-    
+
     public static Card AI_getMostExpensivePermanent(CardList list, final Card spell, boolean targeted) {
         CardList all = list;
         if(targeted) {
@@ -226,19 +220,6 @@ public class CardFactoryUtil {
         }
         return artifact;
     }
-    
-    public static CardList AI_getHumanEnchantment(final Card spell, boolean targeted) {
-        CardList enchantment = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-        enchantment = enchantment.getType("Enchantment");
-        if(targeted) {
-            enchantment = enchantment.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return canTarget(spell, c);
-                }
-            });
-        }
-        return enchantment;
-    }
 
     public static boolean AI_doesCreatureAttack(Card card) {
         Combat combat = ComputerUtil.getAttackers();
@@ -357,19 +338,6 @@ public class CardFactoryUtil {
         
     } //evaluateCreature
 
-    
-    public static Card AI_getBestCreature(CardList list, Card c) {
-        final Card crd = c;
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return CardFactoryUtil.canTarget(crd, c);
-            }
-        });
-        
-        return AI_getBestCreature(list);
-        
-    }
-    
     //returns null if list.size() == 0
     public static Card AI_getBestCreature(CardList list) {
         CardList all = list;
@@ -550,78 +518,6 @@ public class CardFactoryUtil {
         return target;
     }//input_targetSpell()
     
-    public static Input input_targetNonCreaturePermanent(final SpellAbility spell, final Command paid) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 8796813407167561318L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target noncreature permanent");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(!card.isCreature() && zone.is(Constant.Zone.Battlefield)) {
-                    spell.setTargetCard(card);
-                    done();
-                }
-            }//selectCard()
-            
-            void done() {
-                paid.execute();
-                
-                if(spell.getManaCost().equals("0") || this.isFree()) {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    stop();
-                } else stopSetNext(new Input_PayManaCost(spell));
-            }
-        };
-        return target;
-    }//input_targetNonCreaturePermanent()
-    
-    public static Input input_targetPermanent(final SpellAbility spell) {
-        Input target = new Input() {
-            private static final long serialVersionUID = -7635051691776562901L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target permanent");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(card.isPermanent() && zone.is(Constant.Zone.Battlefield)) {
-                    spell.setTargetCard(card);
-                    done();
-                }
-            }//selectCard()
-            
-            void done() {
-                
-                if(spell.getManaCost().equals("0") || this.isFree()) {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    stop();
-                } else stopSetNext(new Input_PayManaCost(spell));
-            }
-        };
-        return target;
-    }//input_targetPermanent()
-
-    
     public static Input input_destroyNoRegeneration(final CardList choices, final String message) {
         Input target = new Input() {
 			private static final long serialVersionUID = -6637588517573573232L;
@@ -642,40 +538,6 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_destroyNoRegeneration()
-
-    //this one is used for Phyrexian War Beast:
-    public static Input input_sacrificePermanent(final SpellAbility spell, final CardList choices, final String message) {
-        Input target = new Input() {
-			private static final long serialVersionUID = 5927821262821559665L;
-
-			@Override
-            public void showMessage() {
-            	if (choices.size()==0) {
-            		stop();
-            	}
-            	else
-            	{
-	                AllZone.Display.showMessage(message);
-	                ButtonUtil.disableAll();
-            	}
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(choices.contains(card)) {
-                    //AllZone.getZone(card).remove(card);
-                    AllZone.GameAction.sacrifice(card);
-                    stop();
-                    
-                    if(spell.getManaCost().equals("0")) {
-                        AllZone.Stack.add(spell);
-                        stop();
-                    } else stopSetNext(new Input_PayManaCost(spell));
-                }
-            }
-        };
-        return target;
-    }//input_sacrifice()
     
     public static Input input_sacrificePermanent(final CardList choices, final String message) {
     	return input_sacrificePermanentsFromList(1, choices, message);
@@ -811,33 +673,6 @@ public class CardFactoryUtil {
         
         return target;
     }//input_discardNumUnless
-    
-
-    public static SpellAbility ability_Untap(final Card sourceCard, String cost) {
-    	Cost abCost = new Cost(cost, sourceCard.getName(), true);
-        final SpellAbility a1 = new Ability_Activated(sourceCard, abCost, null) {
-			private static final long serialVersionUID = -8604400186962948654L;
-            
-            @Override
-            public boolean canPlayAI() {
-                return sourceCard.isTapped() && super.canPlayAI();
-            }
-            
-            @Override
-            public void resolve() {
-                sourceCard.untap();
-            }
-        };//SpellAbility        
-        StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append(cost).append(": Untap ").append(sourceCard.getName()).append(".");
-        a1.setDescription(sbDesc.toString());
-        
-        StringBuilder sbStack = new StringBuilder();
-        sbStack.append("Untap ").append(sourceCard.getName());
-        a1.setStackDescription(sbStack.toString());
-        
-        return a1;
-    }
     
     public static SpellAbility ability_Flashback(final Card sourceCard, String cost) {
     	Cost fbCost = new Cost(cost,sourceCard.getName(),true);
@@ -2095,22 +1930,6 @@ public class CardFactoryUtil {
         return desc;
     }//soul_desc()
     
-    public static Input input_targetValid(final SpellAbility sa, final String[] Tgts, final String message)
-    {
-    	return new Input() {
-        private static final long serialVersionUID = -142142142142L;
-        
-        @Override
-        public void showMessage() {
-            CardList allCards = AllZoneUtil.getCardsInPlay();
-            
-            CardList choices = allCards.getValidCards(Tgts,sa.getActivatingPlayer(),sa.getSourceCard());
-            boolean free = false;
-            if(this.isFree()) free = true;
-            stopSetNext(CardFactoryUtil.input_targetSpecific(sa, choices, message, true, free));
-        }
-       };
-    }//input_targetValid
     //CardList choices are the only cards the user can successful select
     public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted, final boolean free) {
         return input_targetSpecific(spell, choices, message, Command.Blank, targeted, free);
@@ -2205,51 +2024,7 @@ public class CardFactoryUtil {
 	    };//Input
 	    return runtime;
     }
-    
-    public static Input input_discard(final SpellAbility spell, final int nCards) {
-    	Input target = new Input() {
-            private static final long serialVersionUID = 5101772642421944050L;
-            
-            int                       n                = 0;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select a card to discard");
-                ButtonUtil.disableAll();
-                
-                if(n == nCards || AllZone.Human_Hand.getCards().length == 0) stop();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(zone.is(Constant.Zone.Hand)) {
-                    card.getController().discard(card, spell);
-                    n++;
-                    if(spell.getManaCost().equals("0")) {
-                        AllZone.Stack.add(spell);
-                        stop();
-                    } else stopSetNext(new Input_PayManaCost(spell));
-                    
-                    //showMessage();
-                } // if
-                
 
-            }//selectCard
-            
-        };
-        return target;
-        
-    }
-    
-    public static Input input_discard(SpellAbility sa) {
-        return input_discard(1, sa);
-    }
-    
     public static Input input_discard(final int nCards, SpellAbility sa) {
         final SpellAbility sp = sa;
     	Input target = new Input() {
@@ -2510,44 +2285,7 @@ public class CardFactoryUtil {
         });
         return creature;
     }//AI_getHumanCreature()
-    
-    public static CardList AI_getHumanCreature(final boolean lower, final int manaCost, final Card spell, final boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
-        creature = creature.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if(targeted && lower) return c.isCreature()
-                        && (CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) && canTarget(spell, c);
-                else if(lower) return c.isCreature() && (CardUtil.getConvertedManaCost(c.getManaCost()) <= 3);
-                
-                else if(targeted && !lower) return c.isCreature()
-                        && (CardUtil.getConvertedManaCost(c.getManaCost()) >= 3) && canTarget(spell, c);
-                else //if !targeted && !lower
-                return c.isCreature() && (CardUtil.getConvertedManaCost(c.getManaCost()) >= 3);
-            }
-        });
-        return creature;
-    }//AI_getHumanCreature()
-    
-    public static CommandArgs AI_targetHumanCreatureOrPlayer() {
-        return new CommandArgs() {
-            private static final long serialVersionUID = 1530080942899792553L;
-            
-            public void execute(Object o) {
-                SpellAbility sa = (SpellAbility) o;
-                
-                CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
-                creature = creature.getType("Creature");
-                Card c = getRandomCard(creature);
-                
-                if((c == null) || random.nextBoolean()) {
-                    sa.setTargetPlayer(AllZone.HumanPlayer);
-                } else {
-                    sa.setTargetCard(c);
-                }
-            }
-        };//CommandArgs
-    }//human_creatureOrPlayer()
-    
+
     public static CommandArgs AI_targetHuman() {
         return new CommandArgs() {
             private static final long serialVersionUID = 8406907523134006697L;
@@ -2559,29 +2297,6 @@ public class CardFactoryUtil {
         };
     }//targetHuman()
 
-    //type can also be "All"
-    public static CommandArgs AI_targetType(final String type, final PlayerZone zone) {
-        return new CommandArgs() {
-            private static final long serialVersionUID = 6475810798098105603L;
-            
-            public void execute(Object o) {
-                CardList filter = new CardList(zone.getCards());
-                
-                if(!type.equals("All")) filter = filter.getType(type);
-                
-                Card c = getRandomCard(filter);
-                if(c != null) {
-                    SpellAbility sa = (SpellAbility) o;
-                    sa.setTargetCard(c);
-                    
-                    //doesn't work for some reason
-//          if(shouldAttack && CombatUtil.canAttack(c))
-//            AllZone.Combat.addAttacker(c);
-                }
-            }//execute()
-        };
-    }//targetInPlay()
-    
     public static int getNumberOfPermanentsByColor(String color) {
         CardList cards = AllZoneUtil.getCardsInPlay();
         
@@ -3782,16 +3497,6 @@ public class CardFactoryUtil {
         return list.size();
     }
     
-    public static ArrayList<String> getCreatureLandNames() {
-        String[] creatureLands = {
-                "Faerie Conclave", "Forbidding Watchtower", "Treetop Village", "Ghitu Encampment",
-                "Blinkmoth Nexus", "Mishra's Factory", "Mutavault"};
-        final ArrayList<String> list = new ArrayList<String>();
-        for(int i = 0; i < creatureLands.length; i++)
-            list.add(creatureLands[i]);
-        return list;
-    }
-    
     public static Card getTopCard(Card c)
     {
     	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getController());
@@ -3803,13 +3508,6 @@ public class CardFactoryUtil {
     
     public static CardList makeTokenSaproling(Player controller) {
     	return makeToken("Saproling", "G 1 1 Saproling", controller, "G", new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""});
-    }
-    public static CardList makeToken11WSoldier(Player controller) {
-    	return makeToken("Soldier", "W 1 1 Soldier", controller, "W", new String[] {"Creature", "Soldier"}, 1, 1, new String[] {""});
-    }
-    
-    public static CardList makeToken11BRat(Player controller) {
-    	return makeToken("Rat", "B 1 1 Rat", controller, "B", new String[] {"Creature", "Rat"}, 1, 1, new String[] {""});
     }
     
     public static CardList makeToken(String name, String imageName, Player controller, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
@@ -4009,12 +3707,7 @@ public class CardFactoryUtil {
         int index = random.nextInt(list.size());
         return list.get(index);
     }
-    
-    //may return null
-    static public Card getRandomCard(PlayerZone zone) {
-        return getRandomCard(new CardList(zone.getCards()));
-    }
-    
+
     public static void revertManland(Card c, String[] removeTypes, String[] removeKeywords, String cost, long timeStamp) {
         c.setBaseAttack(0);
         c.setBaseDefense(0);
