@@ -1213,8 +1213,10 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
 		if (humanDevHandSetup.size() > 0)
 			AllZone.Human_Hand.setCards(humanDevHandSetup.toArray());
 
-		AllZone.ComputerPlayer.setLife(setComputerLife, null);
-		AllZone.HumanPlayer.setLife(setHumanLife, null);
+		if (setComputerLife > 0)
+			AllZone.ComputerPlayer.setLife(setComputerLife, null);
+		if (setHumanLife > 0)
+			AllZone.HumanPlayer.setLife(setHumanLife, null);
 		
 		AllZone.GameAction.checkStateEffects();
 	}
