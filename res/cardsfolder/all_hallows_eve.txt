@@ -13,5 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_hallows_eve.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/2.jpg
 End
-
-
