@@ -361,7 +361,7 @@ public class CardFactory_Creatures {
                         };//Command
                         
                         if (AllZoneUtil.isCardInPlay(target) && 
-                        		!target.getKeyword().contains(kboost)) {
+                        		!target.hasKeyword(kboost)) {
                             target.addExtrinsicKeyword(kboost);
                             
                             AllZone.EndOfTurn.addUntil(untilEOT);
@@ -832,7 +832,7 @@ public class CardFactory_Creatures {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.getType().contains("Goblin") || 
-                            c.getType().contains("Shaman") || c.getKeyword().contains("Changeling");
+                            c.getType().contains("Shaman") || c.hasKeyword("Changeling");
                         }
                     });
                     
@@ -1021,10 +1021,10 @@ public class CardFactory_Creatures {
                     CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && 
-                            	   (!CardFactoryUtil.AI_doesCreatureAttack(c)) && 
-                            	   (!c.getKeyword().contains("Flying")) && 
-                            	   CardFactoryUtil.canTarget(card, c);
+                            return c.isCreature() 
+                            		&& (!CardFactoryUtil.AI_doesCreatureAttack(c)) 
+                            		&& (!c.hasKeyword("Flying")) 
+                            		&& CardFactoryUtil.canTarget(card, c);
                         }
                     });
                     list.remove(card);
@@ -2040,9 +2040,11 @@ public class CardFactory_Creatures {
                                 CardList assassins = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                                 assassins = assassins.filter(new CardListFilter() {
                                     public boolean addCard(Card c) {
-                                        return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
-                                              (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
-                                               c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
+                                        return c.isCreature() 
+                                        		&& (!c.hasSickness() || c.hasKeyword("Haste")) 
+                                        		&& c.isUntapped() 
+                                        		&& (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") 
+                                        				|| c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
                                     }
                                 });
                                 
@@ -2583,7 +2585,7 @@ public class CardFactory_Creatures {
                             
                             // i don't know how the code handles Sum Sickness so I'm leaving this
                             // but a card changing controllers should always gain this no matter if it has haste or not
-                            if(land.getKeyword().contains("Haste")) {
+                            if(land.hasKeyword("Haste")) {
                                 land.setSickness(false);
                             } else {
                                 land.setSickness(true);
@@ -2997,42 +2999,42 @@ public class CardFactory_Creatures {
                                         // The type following "Enchant" maybe upercase or lowercase, cardsfolder has both
                                         // Note that I am being overly cautious.
                                         
-                                        if (c.getKeyword().contains("Enchant creature without flying") 
-                                                || c.getKeyword().contains("Enchant Creature without flying")) {
+                                        if (c.hasKeyword("Enchant creature without flying") 
+                                                || c.hasKeyword("Enchant Creature without flying")) {
                                             enchantThisType[0] = "Creature.withoutFlying";
                                             message[0] = "Select a creature without flying";
-                                        } else if (c.getKeyword().contains("Enchant creature with converted mana cost 2 or less") 
-                                                || c.getKeyword().contains("Enchant Creature with converted mana cost 2 or less")) {
+                                        } else if (c.hasKeyword("Enchant creature with converted mana cost 2 or less") 
+                                                || c.hasKeyword("Enchant Creature with converted mana cost 2 or less")) {
                                             enchantThisType[0] = "Creature.cmcLE2";
                                             message[0] = "Select a creature with converted mana cost 2 or less";
-                                        } else if (c.getKeyword().contains("Enchant red or green creature")) {
+                                        } else if (c.hasKeyword("Enchant red or green creature")) {
                                             enchantThisType[0] = "Creature.Red,Creature.Green";
                                             message[0] = "Select a red or green creature";
-                                        } else if (c.getKeyword().contains("Enchant tapped creature")) {
+                                        } else if (c.hasKeyword("Enchant tapped creature")) {
                                             enchantThisType[0] = "Creature.tapped";
                                             message[0] = "Select a tapped creature";
-                                        } else if (c.getKeyword().contains("Enchant creature") 
-                                                || c.getKeyword().contains("Enchant Creature")) {
+                                        } else if (c.hasKeyword("Enchant creature") 
+                                                || c.hasKeyword("Enchant Creature")) {
                                             enchantThisType[0] = "Creature";
                                             message[0] = "Select a creature";
-                                        } else if (c.getKeyword().contains("Enchant wall") 
-                                                || c.getKeyword().contains("Enchant Wall")) {
+                                        } else if (c.hasKeyword("Enchant wall") 
+                                                || c.hasKeyword("Enchant Wall")) {
                                             enchantThisType[0] = "Wall";
                                             message[0] = "Select a Wall";
-                                        } else if (c.getKeyword().contains("Enchant land you control") 
-                                                || c.getKeyword().contains("Enchant Land you control")) {
+                                        } else if (c.hasKeyword("Enchant land you control") 
+                                                || c.hasKeyword("Enchant Land you control")) {
                                             enchantThisType[0] = "Land.YouCtrl";
                                             message[0] = "Select a land you control";
-                                        } else if (c.getKeyword().contains("Enchant land") 
-                                                || c.getKeyword().contains("Enchant Land")) {
+                                        } else if (c.hasKeyword("Enchant land") 
+                                                || c.hasKeyword("Enchant Land")) {
                                             enchantThisType[0] = "Land";
                                             message[0] = "Select a land";
-                                        } else if (c.getKeyword().contains("Enchant artifact") 
-                                                || c.getKeyword().contains("Enchant Artifact")) {
+                                        } else if (c.hasKeyword("Enchant artifact") 
+                                                || c.hasKeyword("Enchant Artifact")) {
                                             enchantThisType[0] = "Artifact";
                                             message[0] = "Select an artifact";
-                                        } else if (c.getKeyword().contains("Enchant enchantment") 
-                                                || c.getKeyword().contains("Enchant Enchantment")) {
+                                        } else if (c.hasKeyword("Enchant enchantment") 
+                                                || c.hasKeyword("Enchant Enchantment")) {
                                             enchantThisType[0] = "Enchantment";
                                             message[0] = "Select an enchantment";
                                         }
@@ -3400,7 +3402,7 @@ public class CardFactory_Creatures {
                     kithkin = kithkin.filter(new CardListFilter() {
                         
                         public boolean addCard(Card c) {
-                            return (c.getType().contains("Kithkin") || c.getKeyword().contains("Changeling"))
+                            return (c.getType().contains("Kithkin") || c.hasKeyword("Changeling"))
                                     && !c.equals(card);
                         }
                         
