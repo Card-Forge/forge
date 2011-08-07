@@ -50,13 +50,13 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Bear 3", "hard", "Token 2/2s, a lot of Token 2/2s deck");
 //        addToDeckList("Beast 2", "medium", "GR Furnace Celebration deck");
 //        addToDeckList("Beast 3", "hard", "UWB Standard Constructed deck");
-        addToDeckList("Bela Lugosi 3", "hard", "B Vampire Aggro deck");
+        addToDeckList("Bela Lugosi 3", "hard", "Mono B Vampire Aggro deck");
         addToDeckList("Betty Rubble 3", "hard", "BRG Hand of Emrakul deck with Broodwarden and Eldrazi Spawn tokens");
-        addToDeckList("Blackbeard 3", "hard", "W Soldiers deck with Preeminent Captain, Captain of the Watch and Daru Warchief");
+        addToDeckList("Blackbeard 3", "hard", "Mono W Soldiers deck with Preeminent Captain, Captain of the Watch and Daru Warchief");
         addToDeckList("Boba Fett 3", "hard", "WRG Dragons deck with Chandra Nalaar, Crucible of Fire and Dragon Roost");
         addToDeckList("Boris Karloff 3", "hard", "WR Boros Aggro deck with Kors, levelers and threat removal");
-        addToDeckList("Boromir 2", "medium", "G Elvish Piper deck with Quicksilver Amulet and huge creatures");
-        addToDeckList("Boromir 3", "hard", "G Elvish Piper deck with Quicksilver Amulet and huge creatures");
+        addToDeckList("Boromir 2", "medium", "Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures");
+        addToDeckList("Boromir 3", "hard", "Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures");
         addToDeckList("Boromir 4", "very hard", "UG Show and Tell deck with huge creatures");
 //        addToDeckList("Brood 2", "medium", "W Battlecry deck");
         addToDeckList("Buffy 1", "easy", "Mono B Zombie deck");
@@ -88,12 +88,12 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Da Vinci 2", "medium", "Mono B deck with Korlash, Heir to Blackblade, Badmoon and threat removal");
         addToDeckList("Da Vinci 3", "hard", "Mono B deck with Korlash, Heir to Blackblade, Badmoon and threat removal");
 //        addToDeckList("Darkseid 2", "medium", "B Sacrifice");
-        addToDeckList("Darrin Stephens 1", "easy", "U Affinity deck with Affinity for artifacts and Modular cards");
-        addToDeckList("Darrin Stephens 2", "medium", "U Affinity deck with Affinity for artifacts and Modular cards");
-        addToDeckList("Darrin Stephens 3", "hard", "U Affinity deck with Affinity for artifacts and Modular cards");
-        addToDeckList("Darrin Stephens 4", "very hard", "U Affinity deck");
+        addToDeckList("Darrin Stephens 1", "easy", "Mono U Affinity deck with Affinity for artifacts and Modular cards");
+        addToDeckList("Darrin Stephens 2", "medium", "Mono U Affinity deck with Affinity for artifacts and Modular cards");
+        addToDeckList("Darrin Stephens 3", "hard", "Mono U Affinity deck with Affinity for artifacts and Modular cards");
+        addToDeckList("Darrin Stephens 4", "very hard", "Mono U Affinity deck");
         addToDeckList("Darth Vader 3", "hard", "WU Battle of Wits style alternate win type deck with WoG");
-        addToDeckList("Data 3", "hard", "B deck with Korlash, Heir to Blackblade and Liliana Vess");
+        addToDeckList("Data 3", "hard", "WB Swampwalk Karma deck with Contaminated Ground and Crusading Knight");
         addToDeckList("Deadpool 2", "medium", "BR deck with Ashenmoor Liege and Grixis Grimblade");
         addToDeckList("Deadpool 3", "hard", "BR deck with Ashenmoor Liege and Grixis Grimblade");
         addToDeckList("Demon 3", "hard", "Mono B Demon deck");
@@ -137,7 +137,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Frodo 2", "medium", "WRG Zoo deck with some threat removal and Glorious Anthem");
         addToDeckList("Frodo 3", "hard", "WRG Zoo deck with threat removal and Glorious Anthems");
         
-        addToDeckList("Galadriel 2", "medium", "G Deck with Amulet of Vigor, mana ramp, Time Vault and Howl of the Night Pack");
+        addToDeckList("Galadriel 2", "medium", "Mono G Deck with Amulet of Vigor, mana ramp, Time Vault and Howl of the Night Pack");
         addToDeckList("Galahad 1", "easy", "WB Knight deck with Kinsbaile Cavalier and Knight Exemplar");
         addToDeckList("Galahad 2", "medium", "WB Knight deck with Kinsbaile Cavalier and Knight Exemplar");
         addToDeckList("Galahad 3", "hard", "WB Knight deck with Kinsbaile Cavalier and Knight Exemplar");
@@ -155,7 +155,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Goblin King 3", "hard", "RG Extended deck");
 //        addToDeckList("Goblin Recruit 2", "medium", "RG Skullclamp deck");
 //        addToDeckList("Goblin Recruit 3", "hard", "BR Goblin Sacrifice deck");
-        addToDeckList("Gold Finger 3", "hard", "U control deck with various counter spells, Serra Sphinx and Memnarch");
+        addToDeckList("Gold Finger 3", "hard", "Mono U control deck with various counter spells, Serra Sphinx and Memnarch");
         addToDeckList("Grampa Simpson 1", "easy", "WR Double and First Strike deck with equipments and auras");
         addToDeckList("Grampa Simpson 2", "medium", "WR Double Strike deck with equipments and auras");
         addToDeckList("Grampa Simpson 3", "hard", "WRG Double Strike deck with equipments and auras");
@@ -168,7 +168,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Hagrid 2", "medium", "Mono R Giants deck");
         addToDeckList("Han Solo 3", "hard", "WU Enchanted Evening deck with lots of enchantment removal");
         addToDeckList("Hans 3", "hard", "WRG Allies deck");
-        addToDeckList("Harry Potter 1", "easy", "U Mill and counter spell deck");
+        addToDeckList("Harry Potter 1", "easy", "Mono U Mill and counter spell deck");
         addToDeckList("Harry Potter 2", "medium", "UB Mill and counter spell deck");
         addToDeckList("Harry Potter 3", "hard", "UB Mill and counter spell deck with card draw");
         addToDeckList("Hellboy 3", "hard", "BR direct damage deck");
@@ -189,7 +189,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Indiana Jones 2", "medium", "UBR Sol'kanar the Swamp King, buff and Raise Dead");
         addToDeckList("Indiana Jones 3", "hard", "UBR Sol'kanar the Swamp King, buff and Terminate");
         
-        addToDeckList("Jabba the Hut 3", "hard", "B Infect deck");
+        addToDeckList("Jabba the Hut 3", "hard", "Mono B Infect deck");
 //        addToDeckList("Jack 2", "medium", "BG Aggressive deck");
 //        addToDeckList("Jack 3", "hard", "WUB Sphinx Cascade deck");
         addToDeckList("Jack Sparrow 1", "easy", "UB Pirate deck with Talas Warrior, Coastal Piracy, Drowned and Sea's Claim");
@@ -197,7 +197,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("James Bond 1", "easy", "WG Sliver deck");
         addToDeckList("James Bond 2", "medium", "WG Sliver deck");
         addToDeckList("James Bond 3", "hard", "WG Sliver deck");
-        addToDeckList("James T Kirk 3", "hard", "B discard deck with Liliana Vess");
+        addToDeckList("James T Kirk 3", "hard", "Mono B discard deck with Liliana Vess");
 //        addToDeckList("Jason Todd 3", "hard", "BRG Sacrifice deck");
         addToDeckList("Joe Kidd 1", "easy", "WB deck with Voracious Hatchling and Nightsky Mimic");
         addToDeckList("Joe Kidd 2", "medium", "WB deck with Voracious Hatchling and Nightsky Mimic");
@@ -231,13 +231,13 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Luke Skywalker 3", "hard", "WU Rebels deck with Training Grounds");
         
         addToDeckList("Maggie Simpson 3", "hard", "BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf");
-        addToDeckList("Magneto 3", "hard", "B Shriekmaw deck with creature removal and re-animation");
+        addToDeckList("Magneto 3", "hard", "Mono B Shriekmaw deck with creature removal and re-animation");
         addToDeckList("Magnum 1", "easy", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 2", "medium", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 3", "hard", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Marge Simpson 2", "medium", "RG deck with tokens which are devoured by creatures with devour");
 //        addToDeckList("Michael 3", "hard", "W Angels deck");
-        addToDeckList("Morpheus 3", "hard", "G Elf deck with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
+        addToDeckList("Morpheus 3", "hard", "Mono G Elf deck with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
         addToDeckList("Mr Slate 2", "medium", "WUG Merfolk deck with Lord of Atlantis, Stonybrook Banneret and Stonybrook Schoolmaster");
         addToDeckList("Mr Slate 3", "hard", "WUG Merfolk deck with Lord of Atlantis, Stonybrook Banneret and Stonybrook Schoolmaster");
 //        addToDeckList("Mummy 1", "easy", "W Life deck");
@@ -246,10 +246,10 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Namor 2", "medium", "U Control deck");
 //        addToDeckList("Namor 3", "hard", "U Standard Constructed deck");
         addToDeckList("Napoleon 3", "hard", "WBG Wall deck with Rolling Stones and Doran, the Siege Tower");
-        addToDeckList("Ned Flanders 1", "easy", "B reanimator deck with a few large creatures and some spells");
-        addToDeckList("Ned Flanders 2", "medium", "B reanimator deck with a few large creatures and some spells");
-        addToDeckList("Ned Flanders 3", "hard", "B reanimator deck with a few large creatures and some spells");
-        addToDeckList("Ned Flanders 4", "very hard", "B reanimator deck with a few large creatures and some spells");
+        addToDeckList("Ned Flanders 1", "easy", "Mono B reanimator deck with a few large creatures and some spells");
+        addToDeckList("Ned Flanders 2", "medium", "Mono B reanimator deck with a few large creatures and some spells");
+        addToDeckList("Ned Flanders 3", "hard", "Mono B reanimator deck with a few large creatures and some spells");
+        addToDeckList("Ned Flanders 4", "very hard", "Mono B reanimator deck with a few large creatures and some spells");
         addToDeckList("Neo 3", "hard", "RG deck with Boartusk Liege, Jund Hackblade and Naya Hushblade");
         addToDeckList("Newton 3", "hard", "WB Relentless Rats deck with Thrumming Stone, Vindicate and Swords to Plowshares");
         
@@ -271,7 +271,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Pointy Haired Boss 3", "hard", "WUG Combo deck with Hokori, Dust Drinker, Mana Leak and Sunscape Master");
         addToDeckList("Professor X 3", "hard", "WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade");
         
-        addToDeckList("R2-D2 3", "hard", "U Black Vise deck with bounce (Boomerang) spells and Howling Mine");
+        addToDeckList("R2-D2 3", "hard", "Mono U Black Vise deck with bounce (Boomerang) spells and Howling Mine");
         addToDeckList("Radagast 2", "medium", "Mono G Muraganda Petroglyphs deck with vanilla creatures and a few tokens");
         addToDeckList("Radiant 3", "hard", "WUB flying creature deck with Radiant, Archangel, Gravitational Shift and Moat");
 //        addToDeckList("Ras Al Ghul 2", "medium", "RG Biorhythm deck");
@@ -301,10 +301,10 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Sauron 2", "medium", "UB Black Vise deck with Underworld Dreams, lots of card draw for both players");
         addToDeckList("Scooby Doo 3", "hard", "WR Giants Aggro deck with a few changelings");
         addToDeckList("Scotty 2", "medium", "WBG Pestilence deck with Castle, Penumbra Kavu, Spider and Wurm but no pro black");
-        addToDeckList("Seabiscuit 1", "easy", "W Metalcraft deck with Ardent Recruit and Indomitable Archangel");
-        addToDeckList("Seabiscuit 2", "medium", "W Metalcraft deck with Ardent Recruit and Indomitable Archangel");
-        addToDeckList("Seabiscuit 3", "hard", "W Metalcraft deck with Ardent Recruit and Indomitable Archangel");
-        addToDeckList("Secret Squirrel 3", "hard", "G Squirrel deck with Squirrel Mob, Deranged Hermit, Coat of Arms and Nut Collector");
+        addToDeckList("Seabiscuit 1", "easy", "Mono W Metalcraft deck with Ardent Recruit and Indomitable Archangel");
+        addToDeckList("Seabiscuit 2", "medium", "Mono W Metalcraft deck with Ardent Recruit and Indomitable Archangel");
+        addToDeckList("Seabiscuit 3", "hard", "Mono W Metalcraft deck with Ardent Recruit and Indomitable Archangel");
+        addToDeckList("Secret Squirrel 3", "hard", "Mono G Squirrel deck with Squirrel Mob, Deranged Hermit, Coat of Arms and Nut Collector");
 //        addToDeckList("Sentinel 2", "medium", "WB Token deck");
 //        addToDeckList("Sentinel 3", "hard", "WB Token deck");
 //        addToDeckList("Shelob 1", "easy", "G Reach deck");
@@ -315,7 +315,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Silver Samurai 2", "medium", "Mono W Samurai deck");
         addToDeckList("Spiderman 2", "medium", "Mono W weenie deck with WoG, Armageddon and Mass Calcify");
         addToDeckList("Spiderman 3", "hard", "Mono W weenie deck with WoG, Armageddon, Honor of the Pure and Mass Calcify");
-        addToDeckList("Spock 2", "medium", "G Elf singleton deck with several Winnower Patrol and Wolf-Skull Shaman");
+        addToDeckList("Spock 2", "medium", "Mono G Elf singleton deck with several Winnower Patrol and Wolf-Skull Shaman");
 //        addToDeckList("Starfire 2", "medium", "Incarnations deck");
 //        addToDeckList("Starfire 3", "hard", "Incarnations deck");
         addToDeckList("Storm 1", "easy", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
@@ -341,7 +341,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Thugs 3", "hard", "WG Strength in Numbers deck");
         addToDeckList("Tom Bombadil 3", "hard", "Mono G deck with Garruk's Packleader, Garruk Wildspeaker and Garruk's Companion");
         addToDeckList("Totoro 2", "medium", "UBG deck with spirits and arcane spells");
-        addToDeckList("Treebeard 1", "easy", "G Treefolk deck with Bosk Banneret, Dauntless Dourbark and Leaf-Crowned Elder");
+        addToDeckList("Treebeard 1", "easy", "Mono G Treefolk deck with Bosk Banneret, Dauntless Dourbark and Leaf-Crowned Elder");
         addToDeckList("Treebeard 2", "medium", "WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder and Doran");
         addToDeckList("Treebeard 3", "hard", "WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder and Doran");
         
@@ -360,7 +360,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Wilma Flintstone 2", "medium", "BG deck with Noxious Hatchling and Woodlurker Mimic");
         addToDeckList("Wilma Flintstone 3", "hard", "BG deck with Noxious Hatchling and Woodlurker Mimic");
         addToDeckList("Wolverine 3", "hard", "BG deck with Nightmare, Korlash, Heir to Blackblade and Kodama's Reach");
-        addToDeckList("Wonder Woman 2", "medium", "W Equipment deck");
+        addToDeckList("Wonder Woman 2", "medium", "Mono W Equipment deck");
         addToDeckList("Wyatt Earp 1", "easy", "Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium sized creatures.");
         addToDeckList("Wyatt Earp 2", "medium", "Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium sized creatures.");
         addToDeckList("Wyatt Earp 3", "hard", "Mono W deck with Crovax, Ascendant Hero, Honor of the Pure and small to medium sized creatures.");
