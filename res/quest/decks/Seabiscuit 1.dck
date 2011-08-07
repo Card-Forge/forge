@@ -2,9 +2,8 @@ Seabiscuit 1
 [general]
 constructed
 [main]
-3 Ancient Den
-3 Darksteel Citadel
-17 Plains
+1 Ancient Den
+22 Plains
 3 Ardent Recruit 
 2 Auriok Edgewright
 2 Auriok Sunchaser
@@ -16,7 +15,7 @@ constructed
 1 Argivian Archaeologist
 1 Master's Call
 1 Myrsmith
-4 Court Homunculus
+3 Court Homunculus
 2 Dispeller's Capsule
 1 Marble Chalice
 1 Metallurgeon
@@ -29,4 +28,5 @@ constructed
 1 Battered Golem
 1 Chrome Steed
 1 Frogmite
+1 Porcelain Legionnaire
 [sideboard]
