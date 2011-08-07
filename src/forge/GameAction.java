@@ -63,6 +63,13 @@ public class GameAction {
         //Tokens outside the battlefield disappear immideately.
         if(copied.isToken() && !zone.is(Constant.Zone.Battlefield))
             zone.remove(copied);
+
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Card", copied);
+        runParams.put("Origin", prev.getZoneName());
+        runParams.put("Destination", zone.getZoneName());
+        AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
+        //AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
         
         if(suppress)
         	AllZone.TriggerHandler.clearSuppression("ChangesZone");
@@ -89,12 +96,6 @@ public class GameAction {
         }
         
         Card lastKnownInfo = c;
-        
-        // Setup triggers before Zones get changed.
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Card", lastKnownInfo);
-        runParams.put("Origin", prevName);
-        runParams.put("Destination", zone.getZoneName());
 
         c = changeZone(prev, zone, c);
         
@@ -102,9 +103,6 @@ public class GameAction {
         	// TODO: add attachment code here
         	// Attach to something that can be attached to
         }
-
-        AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
-        AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
 
         return c;
     }
