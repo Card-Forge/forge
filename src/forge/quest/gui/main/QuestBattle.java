@@ -164,7 +164,7 @@ public class QuestBattle extends QuestSelectablePanel {
         
         addToDeckList("Hagrid 2", "medium", "Mono R Giants deck");
         addToDeckList("Han Solo 3", "hard", "WU Enchanted Evening deck with lots of enchantment removal");
-//        addToDeckList("Hans 2", "medium", "WRG Allies deck");
+        addToDeckList("Hans 3", "hard", "WRG Allies deck");
         addToDeckList("Harry Potter 1", "easy", "U Mill and counter spell deck");
         addToDeckList("Harry Potter 2", "medium", "UB Mill and counter spell deck");
         addToDeckList("Harry Potter 3", "hard", "UB Mill and counter spell deck with card draw");
@@ -212,6 +212,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("King Edward 1", "easy", "WUBRG Elementals deck with Tribal Flames");
         addToDeckList("King Edward 2", "medium", "WUBRG Elementals deck with Tribal Flames");
         addToDeckList("King Edward 3", "hard", "WUBRG Elementals deck with Tribal Flames and Horde of Notions");
+        addToDeckList("King Goldemar 1", "easy", "Mono R Kobold deck");
         addToDeckList("King Kong 1", "easy", "WBG Squirrel deck with tokens, changelings, Deranged Hermit and curse type auras");
         addToDeckList("King Kong 2", "medium", "WBG Squirrel deck with tokens, changelings, Deranged Hermit and curse type auras");
         addToDeckList("King Kong 3", "hard", "WRG Squirrel deck with tokens, changelings, Deranged Hermit and threat removal");
