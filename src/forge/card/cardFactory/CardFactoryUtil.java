@@ -820,7 +820,7 @@ public class CardFactoryUtil {
                 CardList list = AllZoneUtil.getPlayerCardsInLibrary(sourceCard.getController());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return ((c.getType().contains("Rebel") || c.getKeyword().contains("Changeling")))
+                        return ((c.getType().contains("Rebel") || c.hasKeyword("Changeling")))
                                 && c.isPermanent();
                     }
                 });
@@ -867,7 +867,7 @@ public class CardFactoryUtil {
                         AllZone.GameAction.moveToPlay(rebel);
                         if(rebel.isAura()) {
                             Object obj = null;
-                            if(rebel.getKeyword().contains("Enchant creature")) {
+                            if(rebel.hasKeyword("Enchant creature")) {
                                 CardList creats = AllZoneUtil.getCreaturesInPlay();
                                 obj = GuiUtils.getChoiceOptional("Pick a creature to attach "
                                         + rebel.getName() + " to", creats.toArray());
@@ -1232,10 +1232,10 @@ public class CardFactoryUtil {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
-                            for (String s:extKeywords) {
+                            for (String s : extKeywords) {
                                 
                                 // We want to give a new keyword
-                                if (!c.getKeyword().contains(s))
+                                if (! c.hasKeyword(s))
                                     return true;
                             }
                                 //no new keywords:
@@ -1271,10 +1271,11 @@ public class CardFactoryUtil {
                 if (sourceCard.isEquipping()) {
                     Card crd = sourceCard.getEquipping().get(0);
                     
-                    for(int i = 0; i < extrinsicKeywords.length; i ++)
+                    for (int i = 0; i < extrinsicKeywords.length; i ++)
                     {
-                    	if (! (extrinsicKeywords[i].equals ("none")) && (! crd.getKeyword().contains(extrinsicKeywords[i])))    // prevent Flying, Flying
-                    		   crd.addExtrinsicKeyword(extrinsicKeywords[i]);
+                    	if (! (extrinsicKeywords[i].equals ("none")) 
+                    			&& (! crd.hasKeyword(extrinsicKeywords[i])))    // prevent Flying, Flying
+                    		crd.addExtrinsicKeyword(extrinsicKeywords[i]);
                     }
                     
                     crd.addSemiPermanentAttackBoost(Power);
@@ -1353,7 +1354,9 @@ public class CardFactoryUtil {
                         public boolean addCard(Card c){
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                             for (String s:extKeywords) {
-                                if (!c.getKeyword().contains(s) && !c.getKeyword().contains("Defender") && !c.isEnchanted())
+                                if (!c.hasKeyword(s) 
+                                		&& !c.hasKeyword("Defender") 
+                                		&& !c.isEnchanted())
                                     return true;
                             }
                                 // no new keywords:
@@ -1371,9 +1374,11 @@ public class CardFactoryUtil {
                 CardListUtil.sortFlying(list);
                 
                 for (int i = 0; i < list.size(); i++) {
-                    if (CardFactoryUtil.canTarget(sourceCard, list.get(i)) && 
-                            list.get(i).getNetAttack() + Power > 0 && list.get(i).getNetDefense() + Tough > 0 && 
-                            !list.get(i).getKeyword().contains("Defender") && !list.get(i).isEnchanted()) {
+                    if (CardFactoryUtil.canTarget(sourceCard, list.get(i)) 
+                    		&& list.get(i).getNetAttack() + Power > 0 
+                    		&& list.get(i).getNetDefense() + Tough > 0 
+                    		&& !list.get(i).hasKeyword("Defender") 
+                    		&& !list.get(i).isEnchanted()) {
                         setTargetCard(list.get(i));
                         return true;
                     }
@@ -1414,8 +1419,9 @@ public class CardFactoryUtil {
                     Card crd = sourceCard.getEnchanting().get(0);
                     
                     for(int i = 0; i < extrinsicKeywords.length; i ++) {
-                    	if (! (extrinsicKeywords[i].equals ("none")) && (! crd.getKeyword().contains(extrinsicKeywords[i])))    // prevent Flying, Flying
-                    		   crd.addExtrinsicKeyword(extrinsicKeywords[i]);
+                    	if (! (extrinsicKeywords[i].equals ("none")) 
+                    			&& (! crd.hasKeyword(extrinsicKeywords[i])))    // prevent Flying, Flying
+                    		crd.addExtrinsicKeyword(extrinsicKeywords[i]);
                     }
                     
                     crd.addSemiPermanentAttackBoost(Power);
@@ -1559,8 +1565,10 @@ public class CardFactoryUtil {
                 if (extKeywords.contains("CARDNAME can't attack.") || extKeywords.contains("CARDNAME can't attack or block.")) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                        	return c.isCreature() && !c.getKeyword().contains("Defender") && 
-                        	!c.getKeyword().contains("CARDNAME can't attack.") && !c.getKeyword().contains("CARDNAME can't attack or block.");
+                        	return c.isCreature() 
+                        			&& !c.hasKeyword("Defender") 
+                        			&& !c.hasKeyword("CARDNAME can't attack.") 
+                        			&& !c.hasKeyword("CARDNAME can't attack or block.");
                         }
                     });
                 }
@@ -1571,10 +1579,10 @@ public class CardFactoryUtil {
                 if (extKeywords.contains("HIDDEN CARDNAME doesn't untap during your untap step.")) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                        	if (c.getKeyword().contains("CARDNAME doesn't untap during your untap step."))
+                        	if (c.hasKeyword("CARDNAME doesn't untap during your untap step."))
                         		return false;
                         	
-                        	if (c.getKeyword().contains("Vigilance") && c.isUntapped())
+                        	if (c.hasKeyword("Vigilance") && c.isUntapped())
                         		return false;
                         	
                             return c.isCreature() && (c.isTapped() || Power < 1);
@@ -1589,7 +1597,7 @@ public class CardFactoryUtil {
                         public boolean addCard(Card c){
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                             for (String s:extKeywords) {
-                                if (!c.getKeyword().contains(s))
+                                if (!c.hasKeyword(s))
                                     return true;
                             }
                                 //no new keywords:
@@ -2009,8 +2017,13 @@ public class CardFactoryUtil {
         CardList creature = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         creature = creature.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                if(targeted) return c.isCreature() && c.getKeyword().contains(keyword) && canTarget(spell, c);
-                else return c.isCreature() && c.getKeyword().contains(keyword);
+                if (targeted) 
+                	return c.isCreature() 
+                			&& c.hasKeyword(keyword) 
+                			&& canTarget(spell, c);
+                else 
+                	return c.isCreature() 
+                			&& c.hasKeyword(keyword);
             }
         });
         return creature;
@@ -2272,7 +2285,7 @@ public class CardFactoryUtil {
     }
     
     public static boolean isCounterable(Card c) {
-        if(!c.getKeyword().contains("CARDNAME can't be countered.")) return true;
+        if (!c.hasKeyword("CARDNAME can't be countered.")) return true;
         else return false;
     }
 
@@ -3520,10 +3533,10 @@ public class CardFactoryUtil {
 
     public static String checkEmblemKeyword(Card c) 
     {
-    	if (c.getKeyword().contains("Artifacts, creatures, enchantments, and lands you control are indestructible."))
+    	if (c.hasKeyword("Artifacts, creatures, enchantments, and lands you control are indestructible."))
     		return "Elspeth_Emblem";
     	
-    	if (c.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'"))
+    	if (c.hasKeyword("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'"))
     		return "Koth_Emblem";
     	
     	return "";
@@ -3535,7 +3548,7 @@ public class CardFactoryUtil {
     	
     	//if (AllZoneUtil.isCardInPlay(c)) 
     	//{
-    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.") 
+    	if (c.hasKeyword("When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.") 
     			|| (c.isCreature() && AllZoneUtil.isCardInPlay("Cowardice"))) {
     		SpellAbility ability = new Ability(c, "0")
     		{
@@ -3550,7 +3563,7 @@ public class CardFactoryUtil {
     		
     		AllZone.Stack.add(ability);
     	}
-    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, destroy CARDNAME.") 
+    	if (c.hasKeyword("When CARDNAME becomes the target of a spell or ability, destroy CARDNAME.") 
     			|| AllZoneUtil.isCardInPlay("Horobi, Death's Wail")) {
     		
     		SpellAbility ability = new Ability(c, "0")
@@ -3566,7 +3579,7 @@ public class CardFactoryUtil {
     		
     		AllZone.Stack.add(ability);
     	}
-    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, sacrifice it.")) {
+    	if (c.hasKeyword("When CARDNAME becomes the target of a spell or ability, sacrifice it.")) {
     		SpellAbility ability = new Ability(c, "0")
     		{
     			public void resolve()
