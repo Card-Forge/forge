@@ -4,7 +4,7 @@ Types:Creature Human Advisor
 Text:no text
 PT:1/2
 K:HandSize + 2 Self
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature.Blue | PresentZone$ Battlefield | PresentPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a blue creature you control to its owner's hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a blue creature you control to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target blue creature | Mandatory$ True | ValidTgts$ Creature.Blue+YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

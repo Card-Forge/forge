@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.Zombie | PresentCompare$ EQ0 | Execute$ TrigNoZombies | TriggerDescription$ At the beginning of your upkeep, if there are no Zombies on the battlefield, CARDNAME deals 1 damage to you.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Zombie | PresentCompare$ EQ0 | Execute$ TrigNoZombies | TriggerDescription$ At the beginning of your upkeep, if there are no Zombies on the battlefield, CARDNAME deals 1 damage to you.
 SVar:TrigNoZombies:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:BuffedBy:Zombie
 SVar:Rarity:Rare

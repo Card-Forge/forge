@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to your mana pool.
 K:CARDNAME doesn't untap during your untap step.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Card.Self+tapped | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay 4. If you do, untap CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay 4. If you do, untap CARDNAME.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | IsPresent$ Card.Self+tapped | Execute$ TrigDamage | TriggerDescription$ At the beginning of your draw step, if CARDNAME is tapped, it deals 1 damage to you.
 SVar:TrigUntap:AB$Untap | Cost$ 4 | Defined$ Self
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1

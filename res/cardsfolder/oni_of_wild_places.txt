@@ -4,7 +4,7 @@ Types:Creature Demon Spirit
 Text:no text
 PT:6/5
 K:Haste
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature.Red | PresentZone$ Battlefield | PresentPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a red creature you control to its owner's hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a red creature you control to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target red creature | Mandatory$ True | ValidTgts$ Creature.Red+YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

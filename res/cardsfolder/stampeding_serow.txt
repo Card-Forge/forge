@@ -4,7 +4,7 @@ Types:Creature Antelope Beast
 Text:no text
 PT:5/4
 K:Trample
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature.Green | PresentZone$ Battlefield | PresentPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a green creature you control to its owner's hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a green creature you control to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Green+YouCtrl | ChangeNum$ 1 | Mandatory$ True | Hidden$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

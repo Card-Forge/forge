@@ -10,7 +10,7 @@ A:SP$ Counter | Cost$ W W | TargetType$ Spell | TgtPrompt$ Select target Artifac
 # | SubAbility$ SVar=DBGainLife
 # SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X
 # SVar:X:Count$TgtCardManaCost
-SVar:Rarity:Uncommon
+SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illumination.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/225.jpg
 End

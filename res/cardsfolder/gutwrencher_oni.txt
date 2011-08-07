@@ -4,8 +4,8 @@ Types:Creature Demon Spirit
 Text:no text
 PT:5/4
 K:Trample
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Ogre.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, discard a card if you don't control an Ogre.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, discard a card if you don't control an Ogre.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0 
 SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Ogre.YouCtrl
 SVar:Rarity:Uncommon
