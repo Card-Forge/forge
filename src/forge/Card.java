@@ -2016,7 +2016,7 @@ public class Card extends MyObservable {
     }
     
     public int getNetAttack() {
-       if(this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 == 1 ) return getUnswitchedDefense();
+       if(this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0 ) return getUnswitchedDefense();
        else return getUnswitchedAttack();
     }
     
@@ -2032,7 +2032,7 @@ public class Card extends MyObservable {
     }
     
     public int getNetDefense() {
-        if(this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 == 1 ) return getUnswitchedAttack();
+        if(this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2 != 0 ) return getUnswitchedAttack();
         else return getUnswitchedDefense();
     }
     

@@ -2,6 +2,7 @@ package forge.card.trigger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -77,9 +78,9 @@ public abstract class Trigger {
 	{
 		name = n;
 		mapParams = new HashMap<String,String>();
-		for(String key : params.keySet())
+		for(Map.Entry<String,String> entry : params.entrySet())
 		{
-			mapParams.put(key,params.get(key));
+			mapParams.put(entry.getKey(),entry.getValue());
 		}
 		hostCard = host;
 	}
@@ -87,9 +88,9 @@ public abstract class Trigger {
 	public Trigger(HashMap<String,String> params, Card host)
 	{
 		mapParams = new HashMap<String,String>();
-		for(String key : params.keySet())
+		for(Map.Entry<String,String> entry : params.entrySet())
 		{
-			mapParams.put(key,params.get(key));
+			mapParams.put(entry.getKey(),entry.getValue());
 		}
 		hostCard = host;
 	}

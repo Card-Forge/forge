@@ -549,7 +549,7 @@ public class AbilityFactory_Destroy {
 			// Set PayX here to maximum value.
 			int xPay = ComputerUtil.determineLeftoverMana(sa);
 			source.setSVar("PayX", Integer.toString(xPay));
-			Valid.replace("X", Integer.toString(xPay));
+			Valid = Valid.replace("X", Integer.toString(xPay));
 		}
 		
 		CardList humanlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);

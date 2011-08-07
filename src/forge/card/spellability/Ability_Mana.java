@@ -190,6 +190,8 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
     public boolean equals(Object o)
     {
     	//Mana abilities with same Descriptions are "equal"
+    	if(o == null)
+    		return false;
     	return  o.toString().equals(this.toString());
     }
     

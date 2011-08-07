@@ -1053,7 +1053,7 @@ public class AbilityFactory {
             else if (defined.endsWith("Owner")){
                 String triggeringType = defined.substring(9);
                 triggeringType = triggeringType.substring(0,triggeringType.length()-5);
-                Object c = (Card)sa.getSourceCard().getTriggeringObject(triggeringType);
+                Object c = sa.getSourceCard().getTriggeringObject(triggeringType);
                 if(c instanceof Card)
                 {
                     o = ((Card)c).getOwner();

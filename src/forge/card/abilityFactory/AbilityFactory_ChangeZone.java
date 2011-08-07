@@ -600,9 +600,9 @@ public class AbilityFactory_ChangeZone {
         		c = basicManaFixing(fetchList, type);
         	else if (fetchList.getNotType("Creature").size() == 0)
         		c = CardFactoryUtil.AI_getBestCreature(fetchList); 	//if only creatures take the best
-        	else if (destination.equals("Battlefield") || destination.equals("Graveyard"))
+        	else if ("Battlefield".equals(destination) || "Graveyard".equals(destination))
         		c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
-        	else if (destination.equals("Exile")){
+        	else if ("Exile".equals(destination)){
         		// Exiling your own stuff, if Exiling opponents stuff choose best
         		if (destZone.getPlayer().isHuman())
         			c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
@@ -627,11 +627,11 @@ public class AbilityFactory_ChangeZone {
         	player.shuffle();
         
         for(Card c : fetched){
-        	if (destination.equals("Library")){
+        	if ("Library".equals(destination)){
         		int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
         		AllZone.GameAction.moveToLibrary(c, libraryPos);
         	}
-        	else if (destination.equals("Battlefield")){
+        	else if ("Battlefield".equals(destination)){
         		if (params.containsKey("Tapped"))
         			c.tap();
         		if (params.containsKey("GainControl"))
@@ -646,7 +646,7 @@ public class AbilityFactory_ChangeZone {
             if(params.containsKey("Imprint")) card.addImprinted(c);
         }
         
-        if (!destination.equals("Battlefield") && !type.equals("Card")){
+        if (!"Battlefield".equals(destination) && !"Card".equals(type)){
         	String picked = af.getHostCard().getName() + " - Computer picked:";
         	if (fetched.size() > 0)
         		GuiUtils.getChoice(picked, fetched.toArray());
@@ -688,7 +688,7 @@ public class AbilityFactory_ChangeZone {
 				return new CardList();
 			
 			source = rem.get(0);
-			type.replace("Remembered", "Card");
+			type = type.replace("Remembered", "Card");
 		}
 		
 		return list.getValidCards(type.split(","), sa.getActivatingPlayer(), source);

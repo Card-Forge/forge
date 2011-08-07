@@ -7322,8 +7322,8 @@ public class GameActionUtil {
 		                 	if(!k[4].equalsIgnoreCase("no colors")) {
 		                 		colors = k[4];
 		                 		if(colors.contains(",Overwrite") || colors.contains("Overwrite")) {
-		                 			colors.replace(",Overwrite","");
-		                 			colors.replace("Overwrite","");
+		                 			colors = colors.replace(",Overwrite","");
+		                 			colors = colors.replace("Overwrite","");
 		                 			se.setOverwriteColors(true);
 		                 		}
 		                 		colors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(k[4].split(","))));

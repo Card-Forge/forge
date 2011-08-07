@@ -3,10 +3,16 @@ package forge.deck;
 import forge.Card;
 import forge.Constant;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Deck implements Comparable<Deck>{
-    //gameType is from Constant.GameType, like Constant.GameType.Regular
+public class Deck implements Comparable<Deck>, Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7478025567887481994L;
+
+	//gameType is from Constant.GameType, like Constant.GameType.Regular
 
     private Map<String, String> metadata = new HashMap<String, String>();
 
@@ -163,6 +169,14 @@ public class Deck implements Comparable<Deck>{
 
     public int compareTo(Deck d) {
     	return getName().compareTo(d.getName());
+    }
+    
+    public boolean equals(Object o) {
+    	if(o instanceof Deck){
+    		Deck d = (Deck)o;
+    		return getName().equals(d.getName());
+    	}
+    	return false;
     }
 
     public Set<Map.Entry<String,String>> getMetadata() {
