@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ T | Tgt$ TgtCP | Amount$ 1 | SpellDescription$ Preve
 A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_archer.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/269.jpg
 End

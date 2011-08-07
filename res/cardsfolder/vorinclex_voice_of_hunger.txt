@@ -10,4 +10,5 @@ T:Mode$ TapsForMana | ValidCard$ Land.YouDontCtrl | Execute$ TrigPump | TriggerZ
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredCard | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorinclex_voice_of_hunger.jpg
+SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/127.jpg
 End

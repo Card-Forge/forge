@@ -11,4 +11,5 @@ A:AB$ Mana | Cost$ G T | Produced$ R | SpellDescription$ Add R to your mana pool
 A:AB$ Mana | Cost$ G T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necra_disciple.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/44.jpg
 End
