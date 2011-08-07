@@ -2097,22 +2097,6 @@ public class GameActionUtil {
 
         }
         
-        if(affected.getName().equals("Jackal Pup") || affected.getName().equals("Shinka Gatekeeper")) {
-        	final int selfDamage = damage;
-        	Ability ability = new Ability(affected, "0") {
-        		@Override
-        		public void resolve() {
-        			player.addDamage(selfDamage, affected);
-        		}
-        	};
-        	StringBuilder sb = new StringBuilder();
-            sb.append(affected.getName()+" - Deals ").append(selfDamage).append(" damage to ").append(player);
-            ability.setStackDescription(sb.toString());
-
-            AllZone.Stack.addSimultaneousStackEntry(ability);
-
-        }
-        
 		if(source.getName().equals("Spiritmonger")) {
         	Ability ability2 = new Ability(source, "0") {
         		@Override
