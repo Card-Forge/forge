@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1001,10 +1002,14 @@ public class GuiDisplayUtil implements NewConstants {
     		  }
     		      		  
     		  in.close();
-    	} catch (Exception e) {
-    		  JOptionPane.showMessageDialog(null, "Error loading battle setup file!");
-    		  return;
-        }
+    	} 
+    	catch( FileNotFoundException fnfe ) {
+    		JOptionPane.showMessageDialog(null, "File not found: "+fc.getSelectedFile().getAbsolutePath());
+    	}
+    	catch (Exception e) {
+    		JOptionPane.showMessageDialog(null, "Error loading battle setup file!");
+    		return;
+    	}
 
 		int setHumanLife = Integer.parseInt(t_humanLife);
 		int setComputerLife = Integer.parseInt(t_computerLife);
