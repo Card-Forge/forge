@@ -178,26 +178,6 @@ public class AbilityFactory_Reveal {
 			}
 		}
 		return randomReturn;
-		
-		/*
-		if (!ComputerUtil.canPayCost(sa))
-			return false;
-
-		Target tgt = sa.getTarget();
-
-		if (sa.getTarget() != null){
-			tgt.resetTargets();
-			sa.getTarget().addTarget(AllZone.ComputerPlayer);
-		}
-		else{
-			ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-			for (Player p : tgtPlayers)
-				if (p.isHuman())
-					return false;
-			// not sure if the AI should be playing with cards that give the Human more turns.
-		}
-		return true;
-		 */
 	}
 
 	private static boolean digTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
@@ -223,6 +203,7 @@ public class AbilityFactory_Reveal {
 	private static void digResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
 		Card host = af.getHostCard();
+		Player player = sa.getActivatingPlayer();
 		int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
 		String destZone1 = params.containsKey("DestinationZone") ? params.get("DestinationZone") : "Hand";
 		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : -1;
@@ -270,7 +251,7 @@ public class AbilityFactory_Reveal {
 						GuiUtils.getChoice("Revealing cards from library", top.toArray());
 						//AllZone.GameAction.revealToCopmuter(top.toArray()); - for when it exists
 					}
-					else {
+					else if (player.isHuman()){
 						//show the user the revealed cards
 						GuiUtils.getChoice("Looking at cards from library", top.toArray());
 					}
@@ -312,27 +293,41 @@ public class AbilityFactory_Reveal {
 						}
 						else {
 							int j = 0;
-							while(j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
-								//let user get choice
-								Card chosen = null;
-								if(anyNumber || optional) {
-									chosen = GuiUtils.getChoiceOptional("Choose a card to put into "+destZone1, valid.toArray());
+							if (player.isHuman()) {
+								while(j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
+									//let user get choice
+									Card chosen = null;
+									if(anyNumber || optional) {
+										chosen = GuiUtils.getChoiceOptional("Choose a card to put into "+destZone1, valid.toArray());
+									}
+									else {
+										chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
+									}
+									if(chosen == null || chosen.getName().equals("[No valid cards]")) break;
+									valid.remove(chosen);
+									PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
+									if(zone.is("Library")) {
+										//System.out.println("Moving to lib position: "+libraryPosition);
+										AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
+									}
+									else {
+										AllZone.GameAction.moveTo(zone, chosen);
+									}
+									//AllZone.GameAction.revealToComputer() - for when this exists
+									j++;
 								}
-								else {
-									chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
-								}
-								if(chosen == null || chosen.getName().equals("[No valid cards]")) break;
-								valid.remove(chosen);
-								PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
-								if(zone.is("Library")) {
-									//System.out.println("Moving to lib position: "+libraryPosition);
-									AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
-								}
-								else {
+							}//human
+							else { //computer (pick the first cards)
+								int changeNum = Math.min(destZone1ChangeNum, valid.size());
+								if(anyNumber) changeNum = valid.size();//always take all
+								for (j=0;j<changeNum;j++) {
+									Card chosen = valid.get(0);
+									if(chosen.equals(dummy)) continue;
+									PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
 									AllZone.GameAction.moveTo(zone, chosen);
+									GuiUtils.getChoice("Computer picked: ", chosen);
+									valid.remove(chosen);
 								}
-								//AllZone.GameAction.revealToComputer() - for when this exists
-								j++;
 							}
 						}
 
@@ -341,7 +336,7 @@ public class AbilityFactory_Reveal {
 						if(rest.contains(dummy)) rest.remove(dummy);
 
 						//now, move the rest to destZone2
-						if(destZone2.equals("Library")) {
+						if(destZone2.equals("Library") && player.isHuman()) {
 							//put them in any order
 							while(rest.size() > 0) {
 								Card chosen;
