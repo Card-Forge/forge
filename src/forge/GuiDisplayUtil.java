@@ -1074,6 +1074,8 @@ public class GuiDisplayUtil implements NewConstants {
         if (!t_computerSetupExile.trim().toLowerCase().equals("none"))
         	computerDevExileSetup = devProcessCardsForZone(computerSetupExile, AllZone.ComputerPlayer);
 
+        AllZone.TriggerHandler.suppressMode("ChangesZone");
+
 		for (Card c : humanDevSetup)
 		{
 			AllZone.Human_Hand.add(c);
@@ -1107,6 +1109,8 @@ public class GuiDisplayUtil implements NewConstants {
             AllZone.Human_Exile.setCards(humanDevExileSetup.toArray());
         if(computerDevExileSetup.size() > 0)
             AllZone.Computer_Exile.setCards(computerDevExileSetup.toArray());
+
+        AllZone.TriggerHandler.clearSuppression("ChangesZone");
 		
 		if (setComputerLife > 0)
 			AllZone.ComputerPlayer.setLife(setComputerLife, null);
