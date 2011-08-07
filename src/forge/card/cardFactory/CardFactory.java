@@ -724,7 +724,7 @@ public class CardFactory implements NewConstants {
             
         }//while shouldModular
 
-        int etbCounter = hasKeyword(card, "etbCounter");	// etbCounter:CounterType:CounterAmount
+        int etbCounter = hasKeyword(card, "etbCounter");	// etbCounter:CounterType:CounterAmount:Condition:Description
         // enters the battlefield with CounterAmount of CounterType
         if(etbCounter != -1) {
             String parse = card.getKeyword().get(etbCounter).toString();
@@ -733,19 +733,23 @@ public class CardFactory implements NewConstants {
             String p[] = parse.split(":");
             final Counters counter = Counters.valueOf(p[1]);
             final String numCounters = p[2];
+            final String condition = p.length > 3 ? p[3] : "";
               
             StringBuilder sb = new StringBuilder(card.getSpellText());
             if (sb.length() != 0)
             	sb.append("\n");
-            
-            sb.append(card.getName());
-            sb.append(" enters the battlefield with ");
-            sb.append(numCounters);
-            sb.append(" ");
-            sb.append(counter.getName());
-            sb.append(" counter");
-            if("1" != numCounters) sb.append("s"); 
-            sb.append(" on it.");
+            if(p.length > 4)
+            	sb.append(p[4]);
+            else {
+	            sb.append(card.getName());
+	            sb.append(" enters the battlefield with ");
+	            sb.append(numCounters);
+	            sb.append(" ");
+	            sb.append(counter.getName());
+	            sb.append(" counter");
+	            if("1" != numCounters) sb.append("s"); 
+	            sb.append(" on it.");
+            }
             
             card.setText(sb.toString());
 
@@ -753,15 +757,17 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -2292898970576123040L;
 
                 public void execute() {
-                	int toAdd = -1;
-                	if(numCounters.equals("X")) { 
-                		toAdd = CardFactoryUtil.xCount(card, card.getSVar("X"));
+                	if(GameActionUtil.SpecialConditionsMet(card, condition)) {
+	                	int toAdd = -1;
+	                	if(numCounters.equals("X")) { 
+	                		toAdd = CardFactoryUtil.xCount(card, card.getSVar("X"));
+	                	}
+	                	else {
+	                		toAdd = Integer.parseInt(numCounters);
+	                	}
+	
+	                    card.addCounter(counter, toAdd);
                 	}
-                	else {
-                		toAdd = Integer.parseInt(numCounters);
-                	}
-
-                    card.addCounter(counter, toAdd);
 
                 }
             });//ComesIntoPlayCommand

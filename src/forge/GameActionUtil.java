@@ -5683,102 +5683,6 @@ public class GameActionUtil {
 			}
 		}
 		
-    	// Special Conditions
-		boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
-  	      	
-  	      	if(SpecialConditions.contains("CardsInHandMore")) {
-  	      		CardList SpecialConditionsCardList = AllZoneUtil.getPlayerHand(SourceCard.getController());
-	      		String Condition = SpecialConditions.split("/")[1];
-	      		if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("OppHandEmpty")) {
-	      		CardList oppHand = AllZoneUtil.getPlayerHand(SourceCard.getController().getOpponent());
-	      		if(!(oppHand.size() == 0)) return false;
-	      	}
-  	      	if(SpecialConditions.contains("TopCardOfLibraryIsBlack")) {
-	      		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, SourceCard.getController());
-	      		if(!(lib.get(0).isBlack())) return false;
-	      	}
-  	      	if(SpecialConditions.contains("LibraryLE")) {
-  	      		CardList Library = AllZoneUtil.getPlayerCardsInLibrary(SourceCard.getController());
-  	      		String maxnumber = SpecialConditions.split("/")[1];
-	      		if (Library.size() > Integer.valueOf(maxnumber)) return false;
-	      	}
-  	      	if(SpecialConditions.contains("LifeGE")) {
-  	      		int life = SourceCard.getController().getLife();
-  	      		String maxnumber = SpecialConditions.split("/")[1];
-  	      		if (!(life >= Integer.valueOf(maxnumber))) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("OppLifeLE")) {
-	      		int life = SourceCard.getController().getOpponent().getLife();
-	      		String maxnumber = SpecialConditions.split("/")[1];
-	      		if (!(life <= Integer.valueOf(maxnumber))) return false;
-	      	}
-  	      	if(SpecialConditions.contains("Threshold")) {
-  	      		if (!SourceCard.getController().hasThreshold()) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("Imprint")) {
-  	      		if(SourceCard.getImprinted().isEmpty()) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("Hellbent")) {
-  	      		CardList Handcards = AllZoneUtil.getPlayerHand(SourceCard.getController());
-	      		if (Handcards.size() > 0) return false;
-	      	}
-  	      	if(SpecialConditions.contains("Metalcraft")) {
-  	      		CardList CardsinPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
-      			CardsinPlay = CardsinPlay.getType("Artifact");
-	      		if (CardsinPlay.size() < 3) return false;
-	      	}
-  	      	if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
-  	    	  	String Requirements = SpecialConditions.replaceAll("isPresent ", "");
-    			CardList CardsinPlay = AllZoneUtil.getCardsInPlay();
-      			String Conditions[] = Requirements.split(",");
-      			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
-	      		if (CardsinPlay.isEmpty()) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("isInGraveyard")) { // is a card of a certain type/color present in yard?
-  	      		String Requirements = SpecialConditions.replaceAll("isInGraveyard ", "");
-  	      		CardList CardsinYards = AllZoneUtil.getCardsInGraveyard();
-  	      		String Conditions[] = Requirements.split(",");
-  	      		CardsinYards = CardsinYards.getValidCards(Conditions, SourceCard.getController(), SourceCard);
-  	      		if (CardsinYards.isEmpty()) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("isNotPresent")) { // is no card of a certain type/color present?
-  	      		String Requirements = SpecialConditions.replaceAll("isNotPresent ", "");
-    			CardList CardsinPlay = AllZoneUtil.getCardsInPlay();
-      			String Conditions[] = Requirements.split(",");
-      			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
-	      		if (!CardsinPlay.isEmpty()) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("isEquipped")) {
-	      		if (!SourceCard.isEquipped()) return false;
-	      	}
-  	      	if(SpecialConditions.contains("isEnchanted")) {
-	      		if (!SourceCard.isEnchanted()) return false;
-	      	}
-  	      	if(SpecialConditions.contains("isUntapped")) {
-	      		if (!SourceCard.isUntapped()) return false;
-	      	}
-  	      	if(SpecialConditions.contains("isValid")) { // does this card meet the valid description?
-  	      		String Requirements = SpecialConditions.replaceAll("isValid ", "");
-  	      		if (!SourceCard.isValid(Requirements, SourceCard.getController(), SourceCard)) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("isYourTurn")) {
-  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController())) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("notYourTurn")) {
-  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController().getOpponent())) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("OppPoisoned")) {
-  	      		if( SourceCard.getController().getOpponent().getPoisonCounters() == 0) return false;
-  	      	}
-  	      	if(SpecialConditions.contains("OppNotPoisoned")) {
-  	      		if( SourceCard.getController().getOpponent().getPoisonCounters() > 0) return false;
-  	      	}
-  	      	return true;
-			
-		}
-		
 		CardList AffectedCards (Card SourceCard, String[] Keyword_Details) {
 			// [Self], [All], [Other]
 			CardList Cards_inZone = new CardList();
@@ -5820,6 +5724,102 @@ public class GameActionUtil {
 			return Cards_inZone;
 		}
 	};
+	
+	// Special Conditions
+	public static boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
+	      	
+	      	if(SpecialConditions.contains("CardsInHandMore")) {
+	      		CardList SpecialConditionsCardList = AllZoneUtil.getPlayerHand(SourceCard.getController());
+      		String Condition = SpecialConditions.split("/")[1];
+      		if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
+	      	}
+	      	if(SpecialConditions.contains("OppHandEmpty")) {
+      		CardList oppHand = AllZoneUtil.getPlayerHand(SourceCard.getController().getOpponent());
+      		if(!(oppHand.size() == 0)) return false;
+      	}
+	      	if(SpecialConditions.contains("TopCardOfLibraryIsBlack")) {
+      		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, SourceCard.getController());
+      		if(!(lib.get(0).isBlack())) return false;
+      	}
+	      	if(SpecialConditions.contains("LibraryLE")) {
+	      		CardList Library = AllZoneUtil.getPlayerCardsInLibrary(SourceCard.getController());
+	      		String maxnumber = SpecialConditions.split("/")[1];
+      		if (Library.size() > Integer.valueOf(maxnumber)) return false;
+      	}
+	      	if(SpecialConditions.contains("LifeGE")) {
+	      		int life = SourceCard.getController().getLife();
+	      		String maxnumber = SpecialConditions.split("/")[1];
+	      		if (!(life >= Integer.valueOf(maxnumber))) return false;
+	      	}
+	      	if(SpecialConditions.contains("OppLifeLE")) {
+      		int life = SourceCard.getController().getOpponent().getLife();
+      		String maxnumber = SpecialConditions.split("/")[1];
+      		if (!(life <= Integer.valueOf(maxnumber))) return false;
+      	}
+	      	if(SpecialConditions.contains("Threshold")) {
+	      		if (!SourceCard.getController().hasThreshold()) return false;
+	      	}
+	      	if(SpecialConditions.contains("Imprint")) {
+	      		if(SourceCard.getImprinted().isEmpty()) return false;
+	      	}
+	      	if(SpecialConditions.contains("Hellbent")) {
+	      		CardList Handcards = AllZoneUtil.getPlayerHand(SourceCard.getController());
+      		if (Handcards.size() > 0) return false;
+      	}
+	      	if(SpecialConditions.contains("Metalcraft")) {
+	      		CardList CardsinPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
+  			CardsinPlay = CardsinPlay.getType("Artifact");
+      		if (CardsinPlay.size() < 3) return false;
+      	}
+	      	if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
+	    	  	String Requirements = SpecialConditions.replaceAll("isPresent ", "");
+			CardList CardsinPlay = AllZoneUtil.getCardsInPlay();
+  			String Conditions[] = Requirements.split(",");
+  			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
+      		if (CardsinPlay.isEmpty()) return false;
+	      	}
+	      	if(SpecialConditions.contains("isInGraveyard")) { // is a card of a certain type/color present in yard?
+	      		String Requirements = SpecialConditions.replaceAll("isInGraveyard ", "");
+	      		CardList CardsinYards = AllZoneUtil.getCardsInGraveyard();
+	      		String Conditions[] = Requirements.split(",");
+	      		CardsinYards = CardsinYards.getValidCards(Conditions, SourceCard.getController(), SourceCard);
+	      		if (CardsinYards.isEmpty()) return false;
+	      	}
+	      	if(SpecialConditions.contains("isNotPresent")) { // is no card of a certain type/color present?
+	      		String Requirements = SpecialConditions.replaceAll("isNotPresent ", "");
+			CardList CardsinPlay = AllZoneUtil.getCardsInPlay();
+  			String Conditions[] = Requirements.split(",");
+  			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
+      		if (!CardsinPlay.isEmpty()) return false;
+	      	}
+	      	if(SpecialConditions.contains("isEquipped")) {
+      		if (!SourceCard.isEquipped()) return false;
+      	}
+	      	if(SpecialConditions.contains("isEnchanted")) {
+      		if (!SourceCard.isEnchanted()) return false;
+      	}
+	      	if(SpecialConditions.contains("isUntapped")) {
+      		if (!SourceCard.isUntapped()) return false;
+      	}
+	      	if(SpecialConditions.contains("isValid")) { // does this card meet the valid description?
+	      		String Requirements = SpecialConditions.replaceAll("isValid ", "");
+	      		if (!SourceCard.isValid(Requirements, SourceCard.getController(), SourceCard)) return false;
+	      	}
+	      	if(SpecialConditions.contains("isYourTurn")) {
+	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController())) return false;
+	      	}
+	      	if(SpecialConditions.contains("notYourTurn")) {
+	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController().getOpponent())) return false;
+	      	}
+	      	if(SpecialConditions.contains("OppPoisoned")) {
+	      		if( SourceCard.getController().getOpponent().getPoisonCounters() == 0) return false;
+	      	}
+	      	if(SpecialConditions.contains("OppNotPoisoned")) {
+	      		if( SourceCard.getController().getOpponent().getPoisonCounters() > 0) return false;
+	      	}
+	      	return true;
+		
+	}
 	
 	public static Command stLandManaAbilities = new Command() {
 		private static final long serialVersionUID = 8005448956536998277L;

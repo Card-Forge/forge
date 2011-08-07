@@ -5,8 +5,7 @@ Text:no text
 PT:1/1
 K:Trample
 K:Kicker:8
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with five +1/+1 counters on it.
-SVar:TrigKicker:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 5
+K:etbCounter:P1P1:5:isValid Card.kicked:If CARDNAME was kicked, it enters the battlefield with five +1/+1 counters on it.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_elite.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/196.jpg
