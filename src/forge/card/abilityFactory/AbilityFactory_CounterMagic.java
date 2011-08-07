@@ -326,11 +326,11 @@ public class AbilityFactory_CounterMagic {
 	                	GameActionUtil.payManaDuringAbilityResolve(af.getHostCard() + "\r\n", ability.getManaCost(), 
 	                			Command.Blank, unpaidCommand);
 	                } else {
-	                    if(ComputerUtil.canPayCost(ability)) 
+	                    if(ComputerUtil.canPayCost(ability)) {
 	                    	ComputerUtil.playNoStack(ability);
-	                    
+	                    	removeFromStack(tgtSA,sa);
+	                    }
 	                    else {
-	                        removeFromStack(tgtSA,sa);
 	                        if(params.containsKey("PowerSink")) doPowerSink(AllZone.ComputerPlayer);
 	                    }
 	                }
