@@ -12,6 +12,7 @@ import forge.CardListUtil;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
@@ -161,10 +162,10 @@ public class AbilityFactory_PreventDamage {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 
-		Target tgt = sa.getTarget();
+		Target tgt = af.getAbTgt();
 		if (tgt == null){
 			// As far as I can tell these Defined Cards will only have one of them
-			ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+			ArrayList<Object> objects = AbilityFactory.getDefinedObjects(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 			
 			if (AllZone.Stack.size() > 0){
 			// check stack for something that will kill this
@@ -172,9 +173,14 @@ public class AbilityFactory_PreventDamage {
 			else{
 				if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
 					boolean flag = false;
-					
-					for(Card c : list){
+					for(Object o : objects){
+						if (o instanceof Card){
+							Card c = (Card) o;
 							flag |= CombatUtil.combatantWouldBeDestroyed(c);
+						}else if (o instanceof Player){
+							Player p = (Player)o;
+							flag |= (p.isComputer() && CombatUtil.lifeInDanger(AllZone.Combat));
+						}
 					}
 					
 					chance = flag;
@@ -184,29 +190,28 @@ public class AbilityFactory_PreventDamage {
 				}
 			}
 		}
-		else{
+		else if (AllZone.Stack.size() == 0 && AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
 			tgt.resetTargets();
-			// filter AIs battlefield by what I can target
-			CardList targetables = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, hostCard);
 			
-			if (targetables.size() == 0)
-				return false;
-			
-			if (AllZone.Stack.size() > 0){
-				// check stack for something on the stack will kill anything i control
+			if(tgt.canTgtPlayer() && CombatUtil.lifeInDanger(AllZone.Combat)) {
+				tgt.addTarget(AllZone.ComputerPlayer);
+				chance = true;
 			}
-			else{
-				if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
-					CardList combatants = targetables.getType("Creature");
-					CardListUtil.sortByEvaluateCreature(combatants);
+			else {
+				// filter AIs battlefield by what I can target
+				CardList targetables = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+				targetables = targetables.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, hostCard);
+				
+				if (targetables.size() == 0)
+					return false;
+				CardList combatants = targetables.getType("Creature");
+				CardListUtil.sortByEvaluateCreature(combatants);
 
-					for(Card c : combatants){
-						if (CombatUtil.combatantWouldBeDestroyed(c)){
-							tgt.addTarget(c);
-							chance = true;
-							break;
-						}
+				for(Card c : combatants){
+					if (CombatUtil.combatantWouldBeDestroyed(c)){
+						tgt.addTarget(c);
+						chance = true;
+						break;
 					}
 				}
 			}
@@ -279,21 +284,30 @@ public class AbilityFactory_PreventDamage {
 	}
 	
 	private static void preventDamageResolve(final AbilityFactory af, final SpellAbility sa) {
-		Card hostCard = af.getHostCard();
 		final HashMap<String,String> params = af.getMapParams();
 		int numDam = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
 		
-		ArrayList<Card> tgtCards;
-		Target tgt = af.getAbTgt();
-		if (tgt != null)
-			tgtCards = tgt.getTargetCards();
-		else
-			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+		ArrayList<Object> tgts;
+		if(sa.getTarget() == null) 
+			tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+		else 
+			tgts = sa.getTarget().getTargets();
 		
-		for(final Card tgtC : tgtCards){
-			
-			if (AllZoneUtil.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(hostCard, tgtC))){
-				tgtC.addPreventNextDamage(numDam);
+		boolean targeted = (af.getAbTgt() != null);
+		
+		for(Object o : tgts){
+			if (o instanceof Card){
+				Card c = (Card)o;
+				if(AllZoneUtil.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(af.getHostCard(), c))) {
+					c.addPreventNextDamage(numDam);
+				}
+
+			}
+			else if (o instanceof Player){
+				Player p = (Player) o;
+				if (!targeted || p.canTarget(af.getHostCard())) {
+					p.addPreventNextDamage(numDam);
+				}
 			}
 		}
 		

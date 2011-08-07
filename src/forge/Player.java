@@ -446,6 +446,33 @@ public abstract class Player extends MyObservable{
     		GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);
     	}
     }
+    
+	//////////////////////////
+	//
+	// methods for handling Damage Prevention
+	//
+	//////////////////////////
+    
+    //PreventNextDamage
+    public void setpreventNextDamage(int n) {
+    	preventNextDamage = n;
+    }
+    
+    public int getPreventNextDamage() {
+        return preventNextDamage;
+    }
+    
+    public void addPreventNextDamage(int n) {
+    	preventNextDamage += n;
+    }
+    
+    public void subtractPreventNextDamage(int n) {
+    	preventNextDamage -= n;
+    }
+    
+    public void resetPreventNextDamage() {
+    	preventNextDamage = 0;
+    }
 	
 	//////////////////////////
 	//

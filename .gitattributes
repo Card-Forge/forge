@@ -84,6 +84,7 @@ res/boosterdata/WTH.pack -text
 res/boosterdata/WWK.pack -text
 res/boosterdata/ZEN.pack -text
 res/card-pictures-token.txt -text svneol=native#text/plain
+res/cardsfolder/Anoint.txt -text svneol=native#text/plain
 res/cardsfolder/abandoned_outpost.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_gargoyles.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_matron.txt svneol=native#text/plain
@@ -5840,6 +5841,7 @@ res/cardsfolder/salvage.txt -text svneol=native#text/plain
 res/cardsfolder/salvage_scout.txt -text svneol=native#text/plain
 res/cardsfolder/salvage_slasher.txt -text svneol=native#text/plain
 res/cardsfolder/salvage_titan.txt svneol=native#text/plain
+res/cardsfolder/samite_healer.txt -text svneol=native#text/plain
 res/cardsfolder/samurai_enforcers.txt -text svneol=native#text/plain
 res/cardsfolder/sanctimony.txt -text svneol=native#text/plain
 res/cardsfolder/sanctum_gargoyle.txt -text svneol=native#text/plain

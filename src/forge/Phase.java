@@ -286,6 +286,8 @@ public class Phase extends MyObservable
 				c.resetReceivedDamageFromThisTurn();
 				c.resetDealtDamageToThisTurn();
 			}
+			AllZone.HumanPlayer.resetPreventNextDamage();
+			AllZone.ComputerPlayer.resetPreventNextDamage();
 
 	    	AllZone.EndOfTurn.executeUntil();
 	    	CardList cHand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
