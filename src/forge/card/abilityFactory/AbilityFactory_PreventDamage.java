@@ -9,6 +9,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
+import forge.Combat;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -114,32 +115,32 @@ public class AbilityFactory_PreventDamage {
 		StringBuilder sb = new StringBuilder();
 		Card host = af.getHostCard();
 
-		ArrayList<Card> tgtCards;
-		Target tgt = af.getAbTgt();
-		if (tgt != null)
-			tgtCards = tgt.getTargetCards();
+		ArrayList<Object> tgts;
+		if(sa.getTarget() == null) 
+			tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		else 
+			tgts = sa.getTarget().getTargets();
+
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
 		else
-			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+			sb.append(host).append(" - ");
 
-		if(tgtCards.size() > 0) {
-			if (sa instanceof Ability_Sub)
+		sb.append("Prevent the next ");
+		sb.append(params.get("Amount"));
+		sb.append(" that would be dealt to ");
+		for(int i = 0; i < tgts.size(); i++){
+			if (i != 0)
 				sb.append(" ");
-			else
-				sb.append(host).append(" - ");
-
-			sb.append("Prevent the next ");
-			sb.append(params.get("Amount"));
-			sb.append(" that would be dealt to ");
-			Iterator<Card> it = tgtCards.iterator();
-			while(it.hasNext()) {
-				Card tgtC = it.next();
+			
+			Object o = tgts.get(i);
+			if (o instanceof Card) {
+				Card tgtC = (Card) o;
 				if(tgtC.isFaceDown()) sb.append("Morph");
 				else sb.append(tgtC);
-				
-				if(it.hasNext()) sb.append(" ");
-			}
+			} else sb.append(o.toString());
 		}
-		sb.append(".");
+		sb.append(" this turn.");
 
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
@@ -193,7 +194,8 @@ public class AbilityFactory_PreventDamage {
 		else if (AllZone.Stack.size() == 0 && AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
 			tgt.resetTargets();
 			
-			if(tgt.canTgtPlayer() && CombatUtil.lifeInDanger(AllZone.Combat)) {
+			if(tgt.canTgtPlayer() && CombatUtil.wouldLoseLife(AllZone.Combat)
+					&& (CombatUtil.lifeInDanger(AllZone.Combat) || sa.isAbility())) {
 				tgt.addTarget(AllZone.ComputerPlayer);
 				chance = true;
 			}

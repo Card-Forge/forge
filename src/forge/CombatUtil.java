@@ -699,6 +699,12 @@ public class CombatUtil {
 			   || resultingPoison(combat) > Math.max(7,AllZone.ComputerPlayer.getPoisonCounters()));
     }
     
+    //Checks if the life of the attacked Player would be reduced
+    public static boolean wouldLoseLife(Combat combat) {
+ 	   
+	   return (lifeThatWouldRemain(combat) < AllZone.ComputerPlayer.getLife());
+    }
+    
     //Checks if the life of the attacked Player/Planeswalker is in danger 
     public static boolean lifeInSeriousDanger(Combat combat) {
   	   // life in danger only cares about the player's life. Not about a Planeswalkers life

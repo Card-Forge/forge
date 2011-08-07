@@ -155,7 +155,7 @@ public class AbilityFactory_DealDamage {
 			if (i != 0)
 				sb.append(" ");
 
-			Object o = tgts.get(0);
+			Object o = tgts.get(i);
 			if (o instanceof Card || o instanceof Player)
 				sb.append(o.toString());
 		}
