@@ -7,11 +7,15 @@
 /README.txt svneol=native#text/plain
 /build.xml -text svneol=native#text/xml
 build/Forge.icns -text svneol=unset#unset
+build/backgroundImage.jpg -text svneol=unset#image/jpeg
+build/create-dmg -text
 build/forge.ico -text svneol=unset#image/ico
 build/forge.jardesc -text
 build/forge.sh svneol=native#text/x-sh
 build/forge.xml svneol=native#text/xml
 build/manifest.forge -text
+build/support/AdiumApplescriptRunner -text svneol=unset#unset
+build/support/template.applescript -text
 /delete-me.txt svneol=native#text/plain
 /forge.properties svneol=native#text/plain
 /pom.xml svneol=native#text/xml
