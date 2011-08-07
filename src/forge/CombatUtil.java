@@ -408,10 +408,10 @@ public class CombatUtil {
         }
         
         if (attacker.hasKeyword("CARDNAME can't be blocked by Walls.") 
-        		&& blocker.isType("Wall")) return false;
+        		&& blocker.isWall()) return false;
         
         if (attacker.hasKeyword("CARDNAME can't be blocked except by Walls.") 
-        		&& !blocker.isType("Wall")) return false;
+        		&& !blocker.isWall()) return false;
         
         if (AllZoneUtil.isCardInPlay("Shifting Sliver")) {
         	if (attacker.isType("Sliver") && !blocker.isType("Sliver")) return false;
