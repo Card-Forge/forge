@@ -290,6 +290,10 @@ public class CombatUtil {
         	if(attacker.isWhite() && attacker.getNetAttack() >= 2) return false;
         }
         
+        if(blocker.hasKeyword("CARDNAME can't block black creatures.")) {
+        	if(attacker.isBlack()) return false;
+        }
+        
         // CARDNAME can't block creatures with power ...
         int powerLimit[] = {0};
         int keywordPosition = 0;
