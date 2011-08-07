@@ -30,17 +30,15 @@ abstract public class Ability extends SpellAbility {
     public boolean canPlay() {
     	if(AllZone.Stack.isSplitSecondOnStack()) return false;
     	
-    	// if(getSourceCard().isCreature() && (!getSourceCard().hasSickness()))
-    	CardList Pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-		Pithing.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
-		Pithing = Pithing.getName("Pithing Needle");
-		Pithing = Pithing.filter(new CardListFilter() {
+    	CardList pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+		pithing.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
+		pithing = pithing.getName("Pithing Needle");
+		pithing = pithing.filter(new CardListFilter() {
 			public boolean addCard(Card c){
 				return c.getSVar("PithingTarget").equals(sourceCardName);
 			}
 		});
     		
-    	return AllZoneUtil.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false && Pithing.size() == 0;
-    	// return false;
+    	return AllZoneUtil.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false && pithing.size() == 0;
     }
 }

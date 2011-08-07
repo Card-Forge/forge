@@ -32,16 +32,16 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         	return false;
         if(c.hasKeyword("CARDNAME's activated abilities can't be activated.")) return false;
         
-        CardList Pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-		Pithing.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
-		Pithing = Pithing.getName("Pithing Needle");
-		Pithing = Pithing.filter(new CardListFilter() {
+        CardList pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+		pithing.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
+		pithing = pithing.getName("Pithing Needle");
+		pithing = pithing.filter(new CardListFilter() {
 			public boolean addCard(Card crd){
 				return crd.getSVar("PithingTarget").equals(c.getName());
 			}
 		});
 		
-		if(Pithing.size() != 0) return false;
+		if(pithing.size() != 0) return false;
         
         if (!(getRestrictions().canPlay(c, this)))     
         	return false;

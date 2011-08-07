@@ -143,7 +143,7 @@ public class BoosterDraftAI
     		}
     		
     		typeList = colorList.getType("Instant");
-    		typeList.add(colorList.getType("Sorcery"));
+    		typeList.addAll(colorList.getType("Sorcery"));
     		if (typeList.size() > 0) {
     			CardListUtil.sortCMC(typeList);
     			list.add(typeList.get(typeList.size() / 2));
