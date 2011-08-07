@@ -63,7 +63,7 @@ public class BoosterDraftAI
     {
       CardList allBooster = new CardList();
       for(int i = 0; i < 21; i++)
-        allBooster.addAll(booster.getBoosterPack().toArray());
+        allBooster.addAll(booster.getBoosterPack());
 
       int stop = allBooster.size();
       for(int i = 0; i < stop; i++)

@@ -249,8 +249,8 @@ class BoosterDraft_1 implements BoosterDraft
     
     if (packNum < packs.size()) {
     for(int i = 0; i < list.length; i++)
-      //list[i].addAll(pack.getBoosterPack().toArray());
-    	list[i].addAll(packs.get(packNum).getBoosterPack().toArray());
+      //list[i].addAll(pack.getBoosterPack());
+    	list[i].addAll(packs.get(packNum).getBoosterPack());
     }
     
     packNum++;
