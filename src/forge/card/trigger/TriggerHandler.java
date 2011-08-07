@@ -938,7 +938,7 @@ public class TriggerHandler {
 					
 					if(decider[0] != null)
 					{
-						if(decider[0].equals(AllZone.HumanPlayer))
+						if(decider[0].isHuman())
 						{
 							StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
 							buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
@@ -962,6 +962,8 @@ public class TriggerHandler {
 					
 					if(sa[0].getSourceCard().getController().isHuman())
 					{
+						//Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
+						//System.out.println("Trigger resolving for "+mode+".  Card = "+src);
 						AllZone.GameAction.playSpellAbility_NoStack(sa[0], true);
 					}
 					else
@@ -993,7 +995,11 @@ public class TriggerHandler {
 				wrapperAbility.doTrigger(isMandatory);
 				ComputerUtil.playStack(wrapperAbility);
 			}
-                */
+			 */
+            
+            //Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
+			//System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
+            
             AllZone.Stack.addSimultaneousStackEntry(wrapperAbility);
             return true;
 		}

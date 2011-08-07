@@ -5,6 +5,7 @@ import java.util.HashMap;
 import forge.Card;
 import forge.Player;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Cost;
 
 public class Trigger_SpellAbilityCast extends Trigger {
 
@@ -140,6 +141,12 @@ public class Trigger_SpellAbilityCast extends Trigger {
 					return false;
 				}
 			}
+		}
+		
+		if(mapParams.containsKey("NonTapCost"))
+		{			
+			Cost cost = (Cost)(runParams.get("Cost"));
+			if(cost.getTap()) return false;
 		}
 		
 		return true;
