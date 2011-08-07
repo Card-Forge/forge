@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.Command;
 import forge.ComputerUtil;
@@ -182,6 +183,10 @@ public class AbilityFactory_Effect {
 		String name = params.get("Name");
 		if (name == null)
 			name = sa.getSourceCard().getName() + "'s Effect";
+		
+		//Unique Effects shouldn't be duplicated
+		if(params.containsKey("Unique") && AllZoneUtil.isCardInPlay(name)) 
+			return;
 		
 		Player controller = sa.getActivatingPlayer();
 		Card eff = new Card();
