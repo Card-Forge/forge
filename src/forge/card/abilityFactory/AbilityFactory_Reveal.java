@@ -338,7 +338,8 @@ public class AbilityFactory_Reveal {
 									if(chosen.equals(dummy)) break;
 									PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
 									AllZone.GameAction.moveTo(zone, chosen);
-									GuiUtils.getChoice("Computer picked: ", chosen);
+									if (changeValid.length() > 0)
+										GuiUtils.getChoice("Computer picked: ", chosen);
 									valid.remove(chosen);
 								}
 							}
