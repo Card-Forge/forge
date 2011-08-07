@@ -986,7 +986,8 @@ public class Card extends MyObservable {
                     sbLong.append(k[2]).append("\r\n");
                 }else if (keyword.get(i).toString().contains("stPreventDamage:")) {
                     String k[] = keyword.get(i).split(":");
-                    sbLong.append(k[4]).append("\r\n");
+                    if(!k[4].equals("no text"))
+                    	sbLong.append(k[4]).append("\r\n");
                 } else if (keyword.get(i).startsWith("Enchant")) {
                     String k = keyword.get(i);
                     k = k.replace("Curse", "");
@@ -3212,25 +3213,48 @@ public class Card extends MyObservable {
     		if (source.isValid(valid,this.getController(),this))
     			return 0;
     	}
+    	
+    	//stPreventDamage
+    	CardList allp = AllZoneUtil.getCardsInPlay();
+		for(Card ca : allp) {
+			if (ca.hasStartOfKeyword("stPreventDamage")) {
+				//syntax stPreventDamage:[Who is protected(You/Player/ValidCards)]:[ValidSource]:[Amount/All]
+	        	int KeywordPosition = ca.getKeywordPosition("stPreventDamage");
+	        	String parse = ca.getKeyword().get(KeywordPosition).toString();
+	    		String k[] = parse.split(":");
+	    		
+	    		final String restrictions1[] = k[1].split(",");
+	    		final String restrictions2[] = k[2].split(",");
+	    		final Card card = ca;
+	    		if(this.isValidCard(restrictions1,card.getController(),card)) {
+					if(source.isValidCard(restrictions2,card.getController(),card)) {
+						if (k[3].equals("All")) return 0;
+						restDamage = restDamage - Integer.valueOf(k[3]);
+					}
+	    		}
+			}
+		} //stPreventDamage
 		
 		// specific Cards
     	if(isCreature()) { //and not a planeswalker
     		if((source.isCreature() && AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this)))return 0;
     	
     		if((!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", player)))return 0;
-    	
+    		
+    		/*
     		if((AllZoneUtil.isCardInPlay("Light of Sanction", player) && source.getController().isPlayer(player)))
     			return 0;
     	
     		if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell()&& restDamage > 0) {
         		int amount = AllZoneUtil.getCardsInPlay("Plated Pegasus").size();
 				for (int i = 0; i < amount;i++)
-					if ( restDamage > 0 )	
+					if ( restDamage > 0 )	%
 						restDamage -= 1;
     		}
     		
     		if (isType("Cleric") && AllZoneUtil.isCardInPlay("Daunting Defender", player))
     			restDamage = restDamage - AllZoneUtil.getPlayerCardsInPlay(player, "Daunting Defender").size();
+    		*/
     		
     		if(getName().equals("Callous Giant") && restDamage <= 3) return 0;
     	} //Creature end

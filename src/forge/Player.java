@@ -300,12 +300,11 @@ public abstract class Player extends MyObservable{
 	    		
 	    		final Card card = ca;
 	    		if(k[1].equals("Player") || (k[1].equals("You") && card.getController().isPlayer(this))) {
-	    		final String restrictions[] = k[2].split(",");
-
-				if(source.isValidCard(restrictions,card.getController(),card)) {
-					if (k[3].equals("All")) return 0;
-					restDamage = restDamage - Integer.valueOf(k[3]);
-				}
+	    			final String restrictions[] = k[2].split(",");
+					if(source.isValidCard(restrictions,card.getController(),card)) {
+						if (k[3].equals("All")) return 0;
+						restDamage = restDamage - Integer.valueOf(k[3]);
+					}
 	    		}
 			}
 		} //stPreventDamage
