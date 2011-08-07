@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import forge.AllZone;
@@ -163,6 +164,12 @@ public class AbilityFactory_EndGameCondition {
 	}
 	
 	public static void winsGameResolve(final AbilityFactory af, final SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}		
+		
 		Card card = af.getHostCard();
 
 		ArrayList<Player> players = AbilityFactory.getDefinedPlayers(card, af.getMapParams().get("Defined"), sa);
@@ -357,6 +364,12 @@ public class AbilityFactory_EndGameCondition {
 	}
 	
 	public static void losesGameResolve(final AbilityFactory af, final SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
+		
 		Card card = af.getHostCard();
 
 		Target tgt = sa.getTarget();

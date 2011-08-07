@@ -478,7 +478,11 @@ public class AbilityFactory_Counters {
 
 	public static void putResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}	
+		
 		Card card = af.getHostCard();
 		String type = params.get("CounterType");
 		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
@@ -501,14 +505,7 @@ public class AbilityFactory_Counters {
 			}
 		}
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else
-				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, tgtCards.get(0), sa);
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	// *******************************************
@@ -754,7 +751,11 @@ public class AbilityFactory_Counters {
 	
 	public static void removeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
+		
 		Card card = af.getHostCard();
 		String type = params.get("CounterType");
 		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
@@ -782,14 +783,7 @@ public class AbilityFactory_Counters {
 					tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
 			}
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else
-				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *******************************************
@@ -926,6 +920,12 @@ public class AbilityFactory_Counters {
 	}
 	
 	private static void proliferateResolve(final AbilityFactory AF, SpellAbility sa) {
+		HashMap<String,String> params = AF.getMapParams();
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}	
+		
 		CardList hperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		hperms = hperms.filter(new CardListFilter() {
 			public boolean addCard(Card crd)
@@ -1065,12 +1065,7 @@ public class AbilityFactory_Counters {
 			
 		} //comp
 		
-		if (AF.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *******************************************
@@ -1277,8 +1272,11 @@ public class AbilityFactory_Counters {
 
 	public static void putAllResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
-		Card card = af.getHostCard();
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}		
+
 		String type = params.get("CounterType");
 		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 		String valid = params.get("ValidCards");
@@ -1299,13 +1297,6 @@ public class AbilityFactory_Counters {
 				tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
 		}
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-				abSub.resolve();
-			}
-			else
-				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, cards.get(0), sa);
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 }
