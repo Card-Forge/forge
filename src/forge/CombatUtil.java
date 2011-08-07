@@ -662,6 +662,8 @@ public class CombatUtil {
  	   
  	   damage += sumDamageIfUnblocked(unblocked, AllZone.ComputerPlayer);
  	   
+ 	   if(!AllZone.ComputerPlayer.canLoseLife()) damage = 0;
+ 	   
 	   return AllZone.ComputerPlayer.getLife() - damage;
     }
     
@@ -694,6 +696,8 @@ public class CombatUtil {
     //Checks if the life of the attacked Player/Planeswalker is in danger 
     public static boolean lifeInDanger(Combat combat) {
   	   // life in danger only cares about the player's life. Not about a Planeswalkers life
+ 	   if(AllZone.ComputerPlayer.cantLose() || AllZone.ComputerPlayer.cantLoseForZeroOrLessLife())
+ 		   return false;
  	   
 	   return (lifeThatWouldRemain(combat) < Math.min(4, AllZone.ComputerPlayer.getLife())
 			   || resultingPoison(combat) > Math.max(7,AllZone.ComputerPlayer.getPoisonCounters()));
