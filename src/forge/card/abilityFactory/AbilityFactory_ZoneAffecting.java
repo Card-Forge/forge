@@ -117,7 +117,8 @@ public class AbilityFactory_ZoneAffecting {
 		return dbDraw;
 	}
 	
-	public static String drawStackDescription(AbilityFactory af, SpellAbility sa){
+	public static String drawStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
 		
 		if (!(sa instanceof Ability_Sub))
@@ -125,7 +126,7 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 		
@@ -135,19 +136,19 @@ public class AbilityFactory_ZoneAffecting {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		if (tgtPlayers.size() > 0){
 			for(Player p : tgtPlayers)
 				sb.append(p.toString()).append(" ");
 	
 	        int numCards = 1;
-	        if (af.getMapParams().containsKey("NumCards"))
-	        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
+	        if (params.containsKey("NumCards"))
+	        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 			
 			sb.append("draws (").append(numCards).append(")");
 			
-			if (af.getMapParams().containsKey("NextUpkeep"))
+			if (params.containsKey("NextUpkeep"))
 				sb.append(" at the beginning of the next upkeep");
 			
 			sb.append(".");
@@ -239,7 +240,7 @@ public class AbilityFactory_ZoneAffecting {
         	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
         
         boolean xPaid = false;
-		String num = af.getMapParams().get("NumCards");
+		String num = params.get("NumCards");
 		if (num != null && num.equals("X") && source.getSVar(num).equals("Count$xPaid")){
 			// Set PayX here to maximum value.
 			if (sa instanceof Ability_Sub)
@@ -291,7 +292,7 @@ public class AbilityFactory_ZoneAffecting {
             	}
             	else{
 	                // Don't draw too many cards and then risk discarding cards at EOT
-	            	if (!(af.getMapParams().containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory)
+	            	if (!(params.containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory)
 	            		return false;
             	}
             }
@@ -316,7 +317,7 @@ public class AbilityFactory_ZoneAffecting {
             
             if (computerHandSize + numCards > computerMaxHandSize && AllZone.Phase.getPlayerTurn().isComputer()) {
                 // Don't draw too many cards and then risk discarding cards at EOT
-            	if (!(af.getMapParams().containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory)
+            	if (!(params.containsKey("NextUpkeep") || sa instanceof Ability_Sub) && !mandatory)
             		return false;
             }
         }
@@ -477,10 +478,10 @@ public class AbilityFactory_ZoneAffecting {
 		return dbMill;
 	}
 	
-	public static String millStackDescription(SpellAbility sa, AbilityFactory af){
-		// when getStackDesc is called, just build exactly what is happening
+	public static String millStackDescription(SpellAbility sa, AbilityFactory af) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
-		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
+		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -488,21 +489,21 @@ public class AbilityFactory_ZoneAffecting {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 		
 		for(Player p : tgtPlayers)
 			sb.append(p.toString()).append(" ");
 		
-		String destination = af.getMapParams().get("Destination");
+		String destination = params.get("Destination");
 		if (destination == null || destination.equals(Constant.Zone.Graveyard))
 			sb.append("mills ");
 		else if (destination.equals(Constant.Zone.Exile))
@@ -571,7 +572,7 @@ public class AbilityFactory_ZoneAffecting {
 			randomReturn = true;
 		// some other variables here, like deck size, and phase and other fun stuff
 
-		if (af.getMapParams().get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
+		if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
 			// Set PayX here to maximum value.
 			int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), 
 					AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size());
@@ -643,8 +644,10 @@ public class AbilityFactory_ZoneAffecting {
 		if (!millTargetAI(af, sa, mandatory))
 			return false;
 		
+		HashMap<String,String> params = af.getMapParams();
+		
 		Card source = sa.getSourceCard();
-		if (af.getMapParams().get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
+		if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
 			// Set PayX here to maximum value.
 			int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), 
 					AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size());
@@ -800,7 +803,7 @@ public class AbilityFactory_ZoneAffecting {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard())) {	
@@ -934,7 +937,7 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 		
@@ -1021,7 +1024,7 @@ public class AbilityFactory_ZoneAffecting {
 		}
 		else{
 			// TODO: Add appropriate restrictions
-			ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 			
 			if (players.size() == 1){
 				if (players.get(0).isComputer()){
@@ -1039,8 +1042,8 @@ public class AbilityFactory_ZoneAffecting {
 			}
 		}
 		
-		if(!af.getMapParams().get("Mode").equals("Hand")) {
-			if (af.getMapParams().get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
+		if(!params.get("Mode").equals("Hand")) {
+			if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
 				// Set PayX here to maximum value.
 				int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), 
 						AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.HumanPlayer).size());
@@ -1102,7 +1105,6 @@ public class AbilityFactory_ZoneAffecting {
 					return false;
 			}
 		}
-
 
 		return true;
 	}// discardCheckDrawbackAI()
@@ -1179,7 +1181,6 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public String getStackDescription() {
-				// when getStackDesc is called, just build exactly what is happening
 				return shuffleStackDescription(af, this);
 			}
 
@@ -1203,6 +1204,7 @@ public class AbilityFactory_ZoneAffecting {
 	}
 
 	private static String shuffleStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
 
 		if (!(sa instanceof Ability_Sub))
@@ -1210,7 +1212,7 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 
@@ -1220,7 +1222,7 @@ public class AbilityFactory_ZoneAffecting {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		if (tgtPlayers.size() > 0){
 			Iterator<Player> it = tgtPlayers.iterator();

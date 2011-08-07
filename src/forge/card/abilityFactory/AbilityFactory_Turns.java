@@ -99,11 +99,12 @@ public class AbilityFactory_Turns {
 	}
 
 	private static String addTurnStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
-		int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("NumTurns"), sa);
+		int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
 
 		if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" - ");
+			sb.append(sa.getSourceCard()).append(" - ");
 		else
 			sb.append(" ");
 
@@ -113,7 +114,7 @@ public class AbilityFactory_Turns {
 		if(tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		for(Player player : tgtPlayers)
 			sb.append(player).append(" ");
@@ -144,6 +145,8 @@ public class AbilityFactory_Turns {
 	private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
+		
+		HashMap<String,String> params = af.getMapParams();
 
 		Target tgt = sa.getTarget();
 
@@ -152,7 +155,7 @@ public class AbilityFactory_Turns {
 			sa.getTarget().addTarget(AllZone.ComputerPlayer);
 		}
 		else{
-			ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 			for(Player p : tgtPlayers)
 				if(p.isHuman() && !mandatory)
 					return false;
@@ -171,7 +174,7 @@ public class AbilityFactory_Turns {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		for(Player p : tgtPlayers) {
 			if (tgt == null || p.canTarget(af.getHostCard())) {
