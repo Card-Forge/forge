@@ -1,6 +1,6 @@
 Name:Mirari
 ManaCost:5
-Types:Artifact
+Types:Legendary Artifact
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may pay 3. If you do, copy that spell. You may choose new targets for the copy.
 SVar:TrigCopy:AB$CopySpell | Cost$ 3 | Defined$ TriggeredSpellAbility

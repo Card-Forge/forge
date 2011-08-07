@@ -1,6 +1,6 @@
 Name:Shield of Kaldra
 ManaCost:4
-Types:Artifact Equipment
+Types:Legendary Artifact Equipment
 Text:Equipped creature is indestructible.
 K:stPumpAll:Equipment.namedSword of Kaldra,Equipment.namedShield of Kaldra,Equipment.namedHelm of Kaldra:0/0/HIDDEN Indestructible:No Condition:Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible.
 K:eqPump 4:HIDDEN Indestructible
