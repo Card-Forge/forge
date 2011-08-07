@@ -1,0 +1,11 @@
+Name:Undergrowth
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$ Fog | Cost$ G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+A:SP$ Effect | Cost$ G 2 R | Name$ Undergrowth Effect | Abilities$ ABPumpAll | SpellDescription$ If its additional cost was paid, CARDNAME doesn't affect combat damage that would be dealt by red creatures.
+SVar:ABPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.nonRed | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt this turn by non-red creatures.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undergrowth.jpg
+End
