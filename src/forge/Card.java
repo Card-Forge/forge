@@ -1365,6 +1365,27 @@ public class Card extends MyObservable {
     }
     
     
+    //PreventNextDamage
+    public void setpreventNextDamage(int n) {
+    	preventNextDamage = n;
+    }
+    
+    public int getPreventNextDamage() {
+        return preventNextDamage;
+    }
+    
+    public void addPreventNextDamage(int n) {
+    	preventNextDamage += n;
+    }
+    
+    public void subtractPreventNextDamage(int n) {
+    	preventNextDamage -= n;
+    }
+    
+    public void resetPreventNextDamage() {
+    	preventNextDamage = 0;
+    }
+    
     //shield = regeneration
     public void setShield(int n) {
         nShield = n;

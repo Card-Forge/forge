@@ -216,6 +216,14 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             area.append("Regeneration Shield(s): ").append(regenShields);
         }
         
+        // Damage Prevention
+        int preventNextDamage = card.getPreventNextDamage();
+        if (preventNextDamage > 0){
+            area.append("\n");
+            area.append("Prevent the next ").append(preventNextDamage).append(" damage that would be dealt to ");
+            area.append(card.getName()).append(" it this turn.");
+        }
+        
         //top revealed
         if(card.getKeyword().contains("Play with the top card of your library revealed.") &&
            !card.getTopCardName().equals(""))

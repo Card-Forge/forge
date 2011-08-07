@@ -282,6 +282,7 @@ public class Phase extends MyObservable
 	    	//Reset Damage received map
 	    	CardList list = AllZoneUtil.getCardsInPlay();
 			for(Card c:list) {
+				c.resetPreventNextDamage();
 				c.resetReceivedDamageFromThisTurn();
 				c.resetDealtDamageToThisTurn();
 			}
