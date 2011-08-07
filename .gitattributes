@@ -5961,6 +5961,7 @@ res/cardsfolder/ruins_of_trokair.txt -text svneol=native#text/plain
 res/cardsfolder/rukh_egg.txt -text svneol=native#text/plain
 res/cardsfolder/rumbling_crescendo.txt -text svneol=native#text/plain
 res/cardsfolder/rumbling_slum.txt -text svneol=native#text/plain
+res/cardsfolder/rummaging_wizard.txt svneol=native#text/plain
 res/cardsfolder/rune_cervin_rider.txt -text svneol=native#text/plain
 res/cardsfolder/runeboggle.txt -text svneol=native#text/plain
 res/cardsfolder/runeclaw_bear.txt -text svneol=native#text/plain
