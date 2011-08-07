@@ -7,4 +7,5 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ TriggeredCardC
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genesis_chamber.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/122.jpg
 End

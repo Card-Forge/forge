@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ 1 SubCounter<2/CHARGE> | TokenAmount$ 1 | TokenController$ Y
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_pit.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/141.jpg
 End
