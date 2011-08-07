@@ -690,8 +690,8 @@ public class AbilityFactory_Pump {
 		                }
 		            }
 		        };
-		        
-		        AllZone.EndOfTurn.addUntil(untilEOT);
+		        if(params.containsKey("UntilEndOfCombat")) AllZone.EndOfCombat.addUntil(untilEOT);
+		        else AllZone.EndOfTurn.addUntil(untilEOT);
 	        }
 		}
 		
