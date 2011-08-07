@@ -928,7 +928,7 @@ public class AbilityFactory_Counters {
 		});
 		
 		if (AF.getHostCard().getController().isHuman()) {	
-			cperms.addAll(hperms.toArray());
+			cperms.addAll(hperms);
 			final CardList unchosen = cperms;
 			AllZone.InputControl.setInput(new Input() {
 				private static final long serialVersionUID = -1779224307654698954L;

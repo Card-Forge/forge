@@ -357,7 +357,7 @@ public class AbilityFactory_Reveal {
 						}
 
 						//dump anything not selected from valid back into the rest
-						if(!changeAll) rest.addAll(valid.toArray());
+						if(!changeAll) rest.addAll(valid);
 						if(rest.contains(dummy)) rest.remove(dummy);
 
 						//now, move the rest to destZone2
