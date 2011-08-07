@@ -494,7 +494,7 @@ public class Card extends MyObservable {
         return !hasFirstStrike() || (hasFirstStrike() && hasDoubleStrike());
     };
     
-    //for Planeswalker abilities and Combat Damage (like Wither), Doubling Season gets ignored.
+    //for costs (like Planeswalker abilities) Doubling Season gets ignored.
     public void addCounterFromNonEffect(Counters counterName, int n) {
     	if(this.hasKeyword("CARDNAME can't have counters placed on it."))
     		return;
@@ -3500,7 +3500,7 @@ public class Card extends MyObservable {
         
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
         
-        if(AllZoneUtil.isCardInPlay(this) && wither) addCounterFromNonEffect(Counters.M1M1, damageToAdd);
+        if(AllZoneUtil.isCardInPlay(this) && wither) addCounter(Counters.M1M1, damageToAdd);
         if(AllZoneUtil.isCardInPlay(this) && !wither) damage += damageToAdd;
         
     }
