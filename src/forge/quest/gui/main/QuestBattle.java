@@ -149,6 +149,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("George of the Jungle 3", "hard", "WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant");
 //        addToDeckList("Ghost Rider 3", "hard", "W Aggressive Life deck");
         addToDeckList("Gimli 2", "medium", "WB Indestructible permanents deck with mass removal");
+        addToDeckList("Gimli 3", "hard", "WB Indestructible permanents deck with mass removal");
 //        addToDeckList("Goblin King 2", "medium", "RG Singleton deck");
 //        addToDeckList("Goblin King 3", "hard", "RG Extended deck");
 //        addToDeckList("Goblin Recruit 2", "medium", "RG Skullclamp deck");
