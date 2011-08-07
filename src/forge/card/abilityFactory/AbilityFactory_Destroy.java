@@ -115,7 +115,8 @@ public class AbilityFactory_Destroy {
 		Cost abCost = sa.getPayCosts();
 		Target abTgt = sa.getTarget();
 		final Card source = sa.getSourceCard();
-		final boolean noRegen = af.getMapParams().containsKey("NoRegen");
+		HashMap<String,String> params = af.getMapParams();
+		final boolean noRegen = params.containsKey("NoRegen");
 
 		CardList list;
 		list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
@@ -220,7 +221,8 @@ public class AbilityFactory_Destroy {
 		
 		Target tgt = sa.getTarget();
 		final Card source = sa.getSourceCard();
-		final boolean noRegen = af.getMapParams().containsKey("NoRegen");
+		HashMap<String,String> params = af.getMapParams();
+		final boolean noRegen = params.containsKey("NoRegen");
 
 
 		if (tgt != null){
@@ -313,11 +315,12 @@ public class AbilityFactory_Destroy {
 	}
 	
 	private static String destroyStackDescription(final AbilityFactory af, SpellAbility sa) {
-		final boolean noRegen = af.getMapParams().containsKey("NoRegen");
+		HashMap<String,String> params = af.getMapParams();
+		final boolean noRegen = params.containsKey("NoRegen");
 		StringBuilder sb = new StringBuilder();
 		Card host = af.getHostCard();
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 
@@ -327,7 +330,7 @@ public class AbilityFactory_Destroy {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 		}
 		
 		if (sa instanceof Ability_Sub)
@@ -376,7 +379,7 @@ public class AbilityFactory_Destroy {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 		}
 
 		for(Card tgtC : tgtCards){
@@ -496,33 +499,34 @@ public class AbilityFactory_Destroy {
 	public static String destroyAllStackDescription(final AbilityFactory af, SpellAbility sa, boolean noRegen){
 		// when getStackDesc is called, just build exactly what is happening
 
-		 StringBuilder sb = new StringBuilder();
-		 String name = af.getHostCard().getName();
-		 
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		StringBuilder sb = new StringBuilder();
+		String name = af.getHostCard().getName();
+		HashMap<String,String> params = af.getMapParams();
+
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 
-		 ArrayList<Card> tgtCards;
+		ArrayList<Card> tgtCards;
 
-		 Target tgt = af.getAbTgt();
-		 if (tgt != null)
-		 	tgtCards = tgt.getTargetCards();
-		 else{
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
 			tgtCards = new ArrayList<Card>(); 
-		 	tgtCards.add(sa.getSourceCard());
-		 }
-		 
-		 sb.append(name).append(" - Destroy permanents");
-						 
-		 if(noRegen) sb.append(". They can't be regenerated");
-		
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null) {
-				sb.append(abSub.getStackDescription());
-			}
-		 
-		 return sb.toString();
+			tgtCards.add(sa.getSourceCard());
+		}
+
+		sb.append(name).append(" - Destroy permanents");
+
+		if(noRegen) sb.append(". They can't be regenerated");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
 	}
 	
 	public static boolean destroyAllCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
@@ -532,26 +536,26 @@ public class AbilityFactory_Destroy {
 		final Card source = sa.getSourceCard();
 		final HashMap<String,String> params = af.getMapParams();
 		String Valid = "";
-		
+
 		if(params.containsKey("ValidCards")) 
 			Valid = params.get("ValidCards");
-		
+
 		if (Valid.contains("X") && source.getSVar("X").equals("Count$xPaid")){
 			// Set PayX here to maximum value.
 			int xPay = ComputerUtil.determineLeftoverMana(sa);
 			source.setSVar("PayX", Integer.toString(xPay));
 			Valid = Valid.replace("X", Integer.toString(xPay));
 		}
-		
+
 		CardList humanlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		CardList computerlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-		
+
 		humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
 		computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
-		
+
 		humanlist = humanlist.getNotKeyword("Indestructible");
 		computerlist = computerlist.getNotKeyword("Indestructible");
-		
+
 		if (abCost != null){
 			// AI currently disabled for some costs
 			if (abCost.getSacCost()){ 
@@ -562,35 +566,35 @@ public class AbilityFactory_Destroy {
 					return false;
 			}
 			if (abCost.getDiscardCost()) ;//OK
-			
+
 			if (abCost.getSubCounter()){
-					// OK
+				// OK
 			}
 		}
-		
+
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
-		
-		 // prevent run-away activations - first time will always return true
-		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		 
-		 // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
-		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
-			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
-				 return false;
-		 }//only lands involved
-		 else if (humanlist.getNotType("Land").size() == 0 && computerlist.getNotType("Land").size() == 0) {
-			 if(CardFactoryUtil.evaluatePermanentList(computerlist) + 1 >= CardFactoryUtil.evaluatePermanentList(humanlist))
-				 return false;
-		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
-		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
-			 return false;
-		 
-		 Ability_Sub subAb = sa.getSubAbility();
-		 if (subAb != null)
-		 	chance &= subAb.chkAI_Drawback();
-		 
-		 return ((r.nextFloat() < .9667) && chance);
+
+		// prevent run-away activations - first time will always return true
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		// if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
+		if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
+			if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+				return false;
+		}//only lands involved
+		else if (humanlist.getNotType("Land").size() == 0 && computerlist.getNotType("Land").size() == 0) {
+			if(CardFactoryUtil.evaluatePermanentList(computerlist) + 1 >= CardFactoryUtil.evaluatePermanentList(humanlist))
+				return false;
+		} // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
+		else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
+			return false;
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+
+		return ((r.nextFloat() < .9667) && chance);
 	}
 	
 	public static void destroyAllResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
@@ -627,4 +631,5 @@ public class AbilityFactory_Destroy {
 	 				card.addRemembered(list.get(i));
 	 	}
      }
-}
+	
+}//end class AbilityFactory_Destroy

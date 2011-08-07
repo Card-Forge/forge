@@ -44,8 +44,9 @@ public class AbilityFactory_DelayedTrigger {
 
     private static boolean doChkAI_Drawback(final AbilityFactory AF, final SpellAbility SA)
     {
-        String svarName = AF.getMapParams().get("Execute");
-        SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName),AF.getHostCard());
+    	HashMap<String,String> params = AF.getMapParams();
+        String svarName = params.get("Execute");
+        SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName), AF.getHostCard());
 
         if(trigsa instanceof Ability_Sub)
         {
@@ -59,16 +60,17 @@ public class AbilityFactory_DelayedTrigger {
 
     private static boolean doTriggerAI(final AbilityFactory AF,final SpellAbility SA)
     {
-        String svarName = AF.getMapParams().get("Execute");
+    	HashMap<String,String> params = AF.getMapParams();
+        String svarName = params.get("Execute");
         SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName),AF.getHostCard());
 
-        if(!AF.getMapParams().containsKey("OptionalDecider"))
+        if(!params.containsKey("OptionalDecider"))
         {
                 return trigsa.doTrigger(true);
         }
         else
         {
-            return trigsa.doTrigger(!AF.getMapParams().get("OptionalDecider").equals("You"));
+            return trigsa.doTrigger(!params.get("OptionalDecider").equals("You"));
         }
     }
 

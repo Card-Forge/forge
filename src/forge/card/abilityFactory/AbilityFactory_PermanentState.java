@@ -542,6 +542,7 @@ public class AbilityFactory_PermanentState {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
+		HashMap<String,String> params = af.getMapParams();
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
 		
@@ -549,7 +550,7 @@ public class AbilityFactory_PermanentState {
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
 		if (tgt == null){
-			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, af.getMapParams().get("Defined"), sa);
+			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
 			
 			boolean bFlag = false;
 			for(Card c : defined)
@@ -1216,36 +1217,38 @@ public class AbilityFactory_PermanentState {
 	
 	private static String tapOrUntapStackDescription(AbilityFactory af, SpellAbility sa){
 		// when getStackDesc is called, just build exactly what is happening
-		 StringBuilder sb = new StringBuilder();
-		 
-		 if (sa instanceof Ability_Sub)
-			 sb.append(" ");
-		 else
-			 sb.append(sa.getSourceCard()).append(" - ");
-		 
-		 sb.append("Tap or untap ");
-		 
+		StringBuilder sb = new StringBuilder();
+		
+		HashMap<String,String> params = af.getMapParams();
+
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(sa.getSourceCard()).append(" - ");
+
+		sb.append("Tap or untap ");
+
 		ArrayList<Card> tgtCards;
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 		}
-		
+
 		Iterator<Card> it = tgtCards.iterator();
 		while(it.hasNext()) {
 			sb.append(it.next());
 			if(it.hasNext()) sb.append(", ");
 		}
-		
+
 		sb.append(".");
 
-        Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
-        	sb.append(subAb.getStackDescription());
-		
-		 return sb.toString();
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			sb.append(subAb.getStackDescription());
+
+		return sb.toString();
 	}
 	
 	private static boolean tapOrUntapCanPlayAI(final AbilityFactory af, SpellAbility sa){
@@ -1253,6 +1256,7 @@ public class AbilityFactory_PermanentState {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
+		HashMap<String,String> params = af.getMapParams();
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
 		
@@ -1262,7 +1266,7 @@ public class AbilityFactory_PermanentState {
 		if (tgt == null){
 			//assume we are looking to tap human's stuff
 			//TODO - check for things with untap abilities, and don't tap those.
-			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, af.getMapParams().get("Defined"), sa);
+			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
 			
 			boolean bFlag = false;
 			for(Card c : defined)
