@@ -1,0 +1,14 @@
+Name:Glimmerpoint Stag
+ManaCost:2 W W
+Types:Creature Elk
+Text:no text
+PT:3/3
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Creature.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent.Other | Mandatory$ True | TgtPrompt$ Select another target permanent | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ SVar=DelTrig
+SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled permanent to the battlefield.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmerpoint_stag.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/9.jpg
+End
