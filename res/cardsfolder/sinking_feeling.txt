@@ -8,4 +8,5 @@ K:stPumpEnchanted:Creature:0/0/SVar=Untap:No Condition:Enchanted creature has "1
 SVar:Untap:AB$ Untap | Cost$ 1 AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinking_feeling.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/51.jpg
 End

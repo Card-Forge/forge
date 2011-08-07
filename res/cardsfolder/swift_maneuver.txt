@@ -6,4 +6,5 @@ A:SP$ PreventDamage | Cost$ 1 W | Tgt$ TgtCP | Amount$ 2 | SubAbility$ SVar=DBDr
 SVar:DBDraw:DB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_maneuver.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/21.jpg
 End
