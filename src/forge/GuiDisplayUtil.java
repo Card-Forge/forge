@@ -938,6 +938,8 @@ public class GuiDisplayUtil implements NewConstants {
     	String t_computerSetupCardsInHand = "";
     	String t_humanSetupGraveyard = "";
     	String t_computerSetupGraveyard = "";
+        String t_humanSetupLibrary = "";
+        String t_computerSetupLibrary = "";
     	String t_end = "";
     	
     	String wd = System.getProperty("user.dir");
@@ -962,6 +964,8 @@ public class GuiDisplayUtil implements NewConstants {
     		  t_computerSetupCardsInHand = br.readLine().split("=")[1];
     		  t_humanSetupGraveyard = br.readLine().split("=")[1];
     		  t_computerSetupGraveyard = br.readLine().split("=")[1];
+              t_humanSetupLibrary = br.readLine().split("=")[1];
+              t_computerSetupLibrary = br.readLine().split("=")[1];
     		  t_end = br.readLine();
     		      		  
     		  in.close();
@@ -984,6 +988,8 @@ public class GuiDisplayUtil implements NewConstants {
 		String computerSetupCardsInHand[] = t_computerSetupCardsInHand.split(";");
 		String humanSetupGraveyard[] = t_humanSetupGraveyard.split(";");
 		String computerSetupGraveyard[] = t_computerSetupGraveyard.split(";");
+        String humanSetupLibrary[] = t_humanSetupLibrary.split(";");
+        String computerSetupLibrary[] = t_computerSetupLibrary.split(";");
 		
 		CardList humanDevSetup = new CardList();
 		CardList computerDevSetup = new CardList();
@@ -991,6 +997,8 @@ public class GuiDisplayUtil implements NewConstants {
 		CardList computerDevHandSetup = new CardList();
 		CardList humanDevGraveyardSetup = new CardList();
 		CardList computerDevGraveyardSetup = new CardList();
+        CardList humanDevLibrarySetup = new CardList();
+        CardList computerDevLibrarySetup = new CardList();
 		
 		if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
 			for (int i = 0; i < humanSetupCardsInPlay.length; i ++) {
@@ -1076,6 +1084,34 @@ public class GuiDisplayUtil implements NewConstants {
 			}
 		}
 
+        if (!t_humanSetupLibrary.trim().toLowerCase().equals("none")) {
+            for (int i = 0; i < humanSetupLibrary.length; i ++) {
+                Card c = AllZone.CardFactory.getCard(humanSetupLibrary[i].trim(), AllZone.ComputerPlayer);
+
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+
+				humanDevLibrarySetup.add(c);
+            }
+        }
+
+        if (!t_computerSetupLibrary.trim().toLowerCase().equals("none")) {
+            for (int i = 0; i < computerSetupLibrary.length; i ++) {
+                Card c = AllZone.CardFactory.getCard(computerSetupLibrary[i].trim(), AllZone.ComputerPlayer);
+
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+
+				computerDevLibrarySetup.add(c);
+            }
+        }
+
 		for (Card c : humanDevSetup)
 		{
 			AllZone.Human_Hand.add(c);
@@ -1104,6 +1140,11 @@ public class GuiDisplayUtil implements NewConstants {
 			AllZone.ComputerPlayer.setLife(setComputerLife, null);
 		if (setHumanLife > 0)
 			AllZone.HumanPlayer.setLife(setHumanLife, null);
+
+        if(humanDevLibrarySetup.size() > 0)
+            AllZone.Human_Library.setCards(humanDevLibrarySetup.toArray());
+        if(computerDevLibrarySetup.size() > 0)
+            AllZone.Computer_Library.setCards(computerDevLibrarySetup.toArray());
 		
 		AllZone.GameAction.checkStateEffects();
 	}
