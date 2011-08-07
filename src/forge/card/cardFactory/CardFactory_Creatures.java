@@ -2157,14 +2157,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList allTokens = new CardList();
-                    allTokens.addAll(play.getCards());
-                    allTokens = allTokens.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && c.isToken();
-                        }
-                    });
+                    CardList allTokens = AllZoneUtil.getCreaturesInPlay(card.getController());
+                    allTokens = allTokens.filter(AllZoneUtil.token);
                     
                     int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
                     
@@ -2194,16 +2188,10 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList tokens = new CardList(play.getCards());
-                    tokens = tokens.filter(new CardListFilter() {
-                        
-                        public boolean addCard(Card c) {
-                            return c.isToken();
-                        }
-                        
-                    });
-                    return tokens.size() >= 2;
+                	CardList allTokens = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+                    allTokens = allTokens.filter(AllZoneUtil.token);
+                	
+                    return allTokens.size() >= 2;
                 }
             };
             
@@ -2519,10 +2507,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                 	Player controller = card.getController();
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, controller);
-                    
-                    CardList sins = new CardList(graveyard.getCards());
-                    sins = sins.getType("Assassin");
+                    CardList sins = AllZoneUtil.getPlayerTypeInGraveyard(controller, "Assassin");
                     
                     if(sins.size() > 0 && AllZoneUtil.isCardInPlay(card)
                             && CardFactoryUtil.canTarget(card, getTargetCard()) && super.canPlay()) return true;
@@ -2542,13 +2527,7 @@ public class CardFactory_Creatures {
                     CardListUtil.sortAttack(human);
                     CardListUtil.sortFlying(human);
                     
-                    //if(0 < human.size())
-                    //  setTargetCard(human.get(0));
-                    
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-                    
-                    CardList grave = new CardList(graveyard.getCards());
-                    grave = grave.getType("Assassin");
+                    CardList grave = AllZoneUtil.getPlayerTypeInGraveyard(AllZone.ComputerPlayer, "Assassin");
                     
                     if(human.size() > 0 && grave.size() > 0) setTargetCard(human.get(0));
                     
@@ -2558,12 +2537,9 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	Player controller = card.getController();
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, controller);
+                    CardList sins = AllZoneUtil.getPlayerTypeInGraveyard(controller, "Assassin");
                     
-                    CardList sins = new CardList(graveyard.getCards());
-                    sins = sins.getType("Assassin");
-                    
-                    if(card.getController().isHuman()) {
+                    if(controller.isHuman()) {
                         Object o = GuiUtils.getChoiceOptional("Select an Assassin to exile", sins.toArray());
                         
                         if(o != null) {
@@ -2776,8 +2752,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(
-                            AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.getType("Artifact");
                     return super.canPlayAI() && list.size() > 0;
                 }
@@ -2795,8 +2770,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(
-                            AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.getType("Enchantment");
                     return super.canPlayAI() && list.size() > 0;
                 }
@@ -2814,9 +2788,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(
-                            AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());
-                    list.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer).getCards());
+                    CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+                    list.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
                     list = list.getType("Enchantment");
                     return super.canPlayAI() && list.size() > 0;
                 }
@@ -2834,9 +2807,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(
-                            AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());
-                    list.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer).getCards());
+                	CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+                    list.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
                     list = list.getType("Land");
                     return super.canPlayAI() && list.size() > 0;
                 }
@@ -2854,9 +2826,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(
-                            AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());
-                    list.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer).getCards());
+                	CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+                    list.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
                     list = list.getType("Creature");
                     return super.canPlayAI() && list.size() > 0;
                 }
@@ -2874,9 +2845,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(
-                            AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());
-                    list.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer).getCards());
+                	CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+                    list.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
                     list = list.getType("Instant");
                     return super.canPlayAI() && list.size() > 0;
                 }
@@ -2894,9 +2864,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(
-                            AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());
-                    list.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer).getCards());
+                	CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+                    list.addAll(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
                     list = list.getType("Sorcery");
                     return super.canPlayAI() && list.size() > 0;
                 }
@@ -3091,9 +3060,7 @@ public class CardFactory_Creatures {
                                             message[0] = "Select an enchantment";
                                         }
                                         
-                                        CardList allCards = new CardList();
-                                        allCards.addAll(AllZone.Human_Battlefield.getCards());
-                                        allCards.addAll(AllZone.Computer_Battlefield.getCards());
+                                        CardList allCards = AllZoneUtil.getCardsInPlay();
                                         
                                         // Make sure that we were able to match the selected aura with our list of criteria
                                         
@@ -3139,8 +3106,7 @@ public class CardFactory_Creatures {
                     
                     // player is the computer
                     else {
-                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-                        CardList list = new CardList(lib.getCards());
+                        CardList list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
                         list = list.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
                                 return c.isEnchantment() && !c.isAura();
@@ -3255,9 +3221,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void showMessage() {
-                    CardList creats = new CardList(
-                            AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
-                    creats = creats.getType("Merfolk");
+                    CardList creats = AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Merfolk");
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a target Merfolk",
                             true, false));
@@ -3342,12 +3306,10 @@ public class CardFactory_Creatures {
                         card.setNamedCard(input[0]);
                     } else {
                         String s = "Ancestral Recall";
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
                         
                         CardList list = new CardList();
-                        list.addAll(hand.getCards());
-                        list.addAll(lib.getCards());
+                        list.addAll(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer));
+                        list.addAll(AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer));
                         list = list.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
                                 return !c.isLand() && !c.isUnCastable();
@@ -3407,11 +3369,9 @@ public class CardFactory_Creatures {
                         color = (String) o;
                         card.setChosenColor(color);
                     } else {
-                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
                         CardList list = new CardList();
-                        list.addAll(lib.getCards());
-                        list.addAll(hand.getCards());
+                        list.addAll(AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer));
+                        list.addAll(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer));
 
                         if(list.size() > 0) {
                             String color = CardFactoryUtil.getMostProminentColor(list);
@@ -3520,8 +3480,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public int countKithkin() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList kithkin = new CardList(play.getCards());
+                    CardList kithkin = AllZoneUtil.getPlayerCardsInPlay(card.getController());
                     kithkin = kithkin.filter(new CardListFilter() {
                         
                         public boolean addCard(Card c) {
@@ -3657,76 +3616,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(commandComes);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START ************************** 
-        else if(cardName.equals("Gatekeeper of Malakir")) {
-            final SpellAbility kicker = new Spell(card) {
-                private static final long serialVersionUID = -1598664186463358630L;
-                
-                @Override
-                public void resolve() {
-                    card.setKicked(true);
-                    AllZone.GameAction.moveToPlay(card);
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay() && AllZone.Phase.getPlayerTurn().equals(card.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && !AllZoneUtil.isCardInPlay(card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList cl = new CardList(play.getCards());
-                    cl = cl.getType("Creature");
-                    
-                    return cl.size() > 0;
-                }
-                
-            };
-            kicker.setKickerAbility(true);
-            kicker.setManaCost("B B B");
-            kicker.setAdditionalManaCost("B");
-            kicker.setDescription("Kicker B");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Creature 2/2 (Kicked)");
-            kicker.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(kicker);
-            
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                	if (card.getController().isComputer())
-                		setTargetPlayer(AllZone.HumanPlayer);
-                	getTargetPlayer().sacrificeCreature();
-
-                	card.setKicked(false);
-                }
-            };
-            
-            Command commandComes = new Command() {
-                private static final long serialVersionUID = -2622859088591798773L;
-                
-                public void execute() {
-                    if(card.isKicked()) {
-                        if(card.getController().isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
-                        else //computer
-                        {
-                            ability.setStackDescription("Gatekeeper of Malakir - targeting Human");
-                            AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                        }//else
-                    }
-                }//execute()
-            };//CommandComes
-            
-            card.addComesIntoPlayCommand(commandComes);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite") || 
@@ -3768,8 +3657,7 @@ public class CardFactory_Creatures {
         		
         		@Override
         		public void resolve() {
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-        			CardList level = new CardList(play.getCards());
+        			CardList level = AllZoneUtil.getPlayerCardsInPlay(card.getController());
         			level = level.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
         					return c.hasLevelUp();
@@ -4004,8 +3892,7 @@ public class CardFactory_Creatures {
         		  public void execute() {
         			  int intermSumPower,intermSumToughness;
         			  intermSumPower = intermSumToughness = 0;
-        			  PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-        			  CardList creats = new CardList(grave.getCards());
+        			  CardList creats = AllZoneUtil.getPlayerGraveyard(card.getController());
         			  creats = creats.filter(new CardListFilter() {
         				  public boolean addCard(Card c) {
         					  return c.isCreature() && !c.equals(card);
