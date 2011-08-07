@@ -7,10 +7,10 @@ winsForHardAI=20,18,16,14
 winsForVeryHardAI=40,36,32,28
 # When starting a quest this is how much of each type you'll start with. Plus your starting Credits.
 startingBasicLand=20
-startingSnowBasicLand=20
-startingCommons=45,40,40,40
-startingUncommons=20,15,15,15
-startingRares=10,10,10,10
+startingSnowBasicLand=5
+startingCommons=82,80,78,76
+startingUncommons=20,18,16,15
+startingRares=10,10,10,8
 startingCredits=250
 # When winning a booster pack, this is what you'll expect to see in a pack.
 boosterPackCommon=7
