@@ -176,91 +176,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 				private static final long serialVersionUID = -6660930759092583160L;
 
 				public void actionPerformed(ActionEvent arg0) {
-					// SET UP THE BATTLEFIELD HERE
-					// - define the life values for Human and AI;
-					// - list the cards that need to be placed on the human and the AI's battlefield, respectively;
-					// - list the cards to be placed in the human and AI hands instead of their current hands;
-					int setHumanLife = 10;
-					int setComputerLife = 6;
-					String humanSetupCardsInPlay[] = {"Mountain", "Raging Goblin"}; // cards to be placed on the human battlefield
-					String computerSetupCardsInPlay[] = {"Durkwood Boars", "Forest", "Forest", "Forest", "Forest", "Forest", "Forest"}; // cards to be placed on the AI battlefield
-					String humanSetupCardsInHand[] = {"Raging Goblin"}; // cards that will replace the current human hand
-					String computerSetupCardsInHand[] = {"Force of Nature"}; // cards that will replace the current AI hand
-					
-					CardList humanDevSetup = new CardList();
-					CardList computerDevSetup = new CardList();
-					CardList humanDevHandSetup = new CardList();
-					CardList computerDevHandSetup = new CardList();
-					
-					for (int i = 0; i < humanSetupCardsInPlay.length; i ++) {
-						Card c = AllZone.CardFactory.getCard(humanSetupCardsInPlay[i], AllZone.HumanPlayer);
-			        	for(Trigger trig : c.getTriggers())
-			            {
-			            	AllZone.TriggerHandler.registerTrigger(trig);
-			            }
-
-						c.setCurSetCode(c.getMostRecentSet());
-						c.setImageFilename(CardUtil.buildFilename(c));
-						
-						humanDevSetup.add(c);
-					}
-
-					for (int i = 0; i < humanSetupCardsInHand.length; i ++) {
-						Card c = AllZone.CardFactory.getCard(humanSetupCardsInHand[i], AllZone.HumanPlayer);
-			        	for(Trigger trig : c.getTriggers())
-			            {
-			            	AllZone.TriggerHandler.registerTrigger(trig);
-			            }
-
-						c.setCurSetCode(c.getMostRecentSet());
-						c.setImageFilename(CardUtil.buildFilename(c));
-						
-						humanDevHandSetup.add(c);
-					}
-
-					for (int i = 0; i < computerSetupCardsInPlay.length; i ++) {
-						Card c = AllZone.CardFactory.getCard(computerSetupCardsInPlay[i], AllZone.ComputerPlayer);
-						
-						c.setCurSetCode(c.getMostRecentSet());
-						c.setImageFilename(CardUtil.buildFilename(c));
-			        	for(Trigger trig : c.getTriggers())
-			            {
-			            	AllZone.TriggerHandler.registerTrigger(trig);
-			            }
-
-						computerDevSetup.add(c);
-					}
-
-					for (int i = 0; i < computerSetupCardsInHand.length; i ++) {
-						Card c = AllZone.CardFactory.getCard(computerSetupCardsInHand[i], AllZone.HumanPlayer);
-						
-						c.setCurSetCode(c.getMostRecentSet());
-						c.setImageFilename(CardUtil.buildFilename(c));
-			        	for(Trigger trig : c.getTriggers())
-			            {
-			            	AllZone.TriggerHandler.registerTrigger(trig);
-			            }
-
-						computerDevHandSetup.add(c);
-					}
-
-					for (Card c : humanDevSetup)
-					{
-			        	AllZone.Human_Hand.add(c);
-			        	AllZone.GameAction.moveToPlay(c);					
-			        }
-			         
-			        for (Card c: computerDevSetup)
-			        {
-			        	AllZone.Computer_Hand.add(c);
-			        	AllZone.GameAction.moveToPlay(c);
-			        }
-			        
-			        AllZone.Computer_Hand.setCards(computerDevHandSetup.toArray());
-			        AllZone.Human_Hand.setCards(humanDevHandSetup.toArray());
-
-			        AllZone.ComputerPlayer.setLife(setComputerLife, null);
-			        AllZone.HumanPlayer.setLife(setHumanLife, null);
+					devSetupBattlefield();
 				}
 			};
 			// - Battlefield setup -
@@ -1142,7 +1058,95 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     	return true;
     }
    
-    public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
+    private void devSetupBattlefield() {
+		// SET UP THE BATTLEFIELD HERE
+		// - define the life values for Human and AI;
+		// - list the cards that need to be placed on the human and the AI's battlefield, respectively;
+		// - list the cards to be placed in the human and AI hands instead of their current hands;
+		int setHumanLife = 10;
+		int setComputerLife = 6;
+		String humanSetupCardsInPlay[] = {"Mountain", "Raging Goblin"}; // cards to be placed on the human battlefield
+		String computerSetupCardsInPlay[] = {"Durkwood Boars", "Forest", "Forest", "Forest", "Forest", "Forest", "Forest"}; // cards to be placed on the AI battlefield
+		String humanSetupCardsInHand[] = {"Raging Goblin"}; // cards that will replace the current human hand
+		String computerSetupCardsInHand[] = {"Force of Nature"}; // cards that will replace the current AI hand
+		
+		CardList humanDevSetup = new CardList();
+		CardList computerDevSetup = new CardList();
+		CardList humanDevHandSetup = new CardList();
+		CardList computerDevHandSetup = new CardList();
+		
+		for (int i = 0; i < humanSetupCardsInPlay.length; i ++) {
+			Card c = AllZone.CardFactory.getCard(humanSetupCardsInPlay[i], AllZone.HumanPlayer);
+			for(Trigger trig : c.getTriggers())
+		    {
+		    	AllZone.TriggerHandler.registerTrigger(trig);
+		    }
+
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
+			humanDevSetup.add(c);
+		}
+
+		for (int i = 0; i < humanSetupCardsInHand.length; i ++) {
+			Card c = AllZone.CardFactory.getCard(humanSetupCardsInHand[i], AllZone.HumanPlayer);
+			for(Trigger trig : c.getTriggers())
+		    {
+		    	AllZone.TriggerHandler.registerTrigger(trig);
+		    }
+
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
+			humanDevHandSetup.add(c);
+		}
+
+		for (int i = 0; i < computerSetupCardsInPlay.length; i ++) {
+			Card c = AllZone.CardFactory.getCard(computerSetupCardsInPlay[i], AllZone.ComputerPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			for(Trigger trig : c.getTriggers())
+		    {
+		    	AllZone.TriggerHandler.registerTrigger(trig);
+		    }
+
+			computerDevSetup.add(c);
+		}
+
+		for (int i = 0; i < computerSetupCardsInHand.length; i ++) {
+			Card c = AllZone.CardFactory.getCard(computerSetupCardsInHand[i], AllZone.HumanPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			for(Trigger trig : c.getTriggers())
+		    {
+		    	AllZone.TriggerHandler.registerTrigger(trig);
+		    }
+
+			computerDevHandSetup.add(c);
+		}
+
+		for (Card c : humanDevSetup)
+		{
+			AllZone.Human_Hand.add(c);
+			AllZone.GameAction.moveToPlay(c);
+		}
+		 
+		for (Card c: computerDevSetup)
+		{
+			AllZone.Computer_Hand.add(c);
+			AllZone.GameAction.moveToPlay(c);
+		}
+		
+		AllZone.Computer_Hand.setCards(computerDevHandSetup.toArray());
+		AllZone.Human_Hand.setCards(humanDevHandSetup.toArray());
+
+		AllZone.ComputerPlayer.setLife(setComputerLife, null);
+		AllZone.HumanPlayer.setLife(setHumanLife, null);		
+	}
+
+	public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
     
     // Phases
     public static JCheckBoxMenuItem cbAIUpkeep		       = new JCheckBoxMenuItem("Upkeep", true);
