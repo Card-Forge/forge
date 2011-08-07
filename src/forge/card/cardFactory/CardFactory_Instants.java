@@ -648,7 +648,7 @@ public class CardFactory_Instants {
         //*************** START *********** START **************************
         else if(cardName.equals("Hidetsugu's Second Rite")) {
         	Target t = new Target(card, "Select target player", "Player");
-        	Cost cost = new Cost("3 R", cardName, true);
+        	Cost cost = new Cost("3 R", cardName, false);
             final SpellAbility spell = new Spell(card, cost, t) {
                 private static final long serialVersionUID = 176857775451818523L;
                 
@@ -1100,7 +1100,7 @@ public class CardFactory_Instants {
         	 * Return all artifacts target player owns to his or her hand.
         	 */
         	Target t = new Target(card, "Select target player", "Player");
-        	Cost cost = new Cost("1 U", cardName, true);
+        	Cost cost = new Cost("1 U", cardName, false);
         	
         	SpellAbility spell = new Spell(card, cost, t) {
         		private static final long serialVersionUID = -4098702062413878046L;
@@ -1331,7 +1331,7 @@ public class CardFactory_Instants {
              * Tap all lands target player controls and empty his or her mana pool.
              */
         	Target t = new Target(card, "Select target player", "Player");
-        	Cost cost = new Cost("2 U", cardName, true);
+        	Cost cost = new Cost("2 U", cardName, false);
         	
             final SpellAbility spell = new Spell(card, cost, t) {
 				private static final long serialVersionUID = -2175586347805121896L;
