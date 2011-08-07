@@ -85,19 +85,19 @@ public class PhaseUtil {
     		}
     	});
 
-    	for(Card c : list) {
-    		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
-    			if(c.isTapped()) {
-    				if(c.getController().isHuman()) {
+    	for (Card c : list) {
+    		if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.")) {
+    			if (c.isTapped()) {
+    				if (c.getController().isHuman()) {
     					String prompt = "Untap "+c.getName()+"?";
-    					if(c.getGainControlTargets().size() > 0) {
+    					if (c.getGainControlTargets().size() > 0) {
     						ArrayList<Card> targets = c.getGainControlTargets();
     						prompt += "\r\n"+c.getName()+" is controlling: ";
-    						for(Card target:targets) {
+    						for (Card target:targets) {
     							prompt += target.getName();
     						}
     					}
-    					if(GameActionUtil.showYesNoDialog(c, prompt)) {
+    					if (GameActionUtil.showYesNoDialog(c, prompt)) {
     						c.untap();
     					}
     				}
@@ -125,8 +125,8 @@ public class PhaseUtil {
     	
     	//opponent untapping during your untap phase
     	CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
-    	for(Card oppCard:opp) 
-    		if(oppCard.getKeyword().contains("CARDNAME untaps during each other player's untap step."))
+    	for (Card oppCard:opp) 
+    		if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step."))
     			oppCard.untap();
 		/*
 		for(Card oppCard:opp) oppCard.untap();
@@ -246,8 +246,8 @@ public class PhaseUtil {
     
     public static boolean canUntap(Card c) {
     	
-    	if(c.getKeyword().contains("CARDNAME doesn't untap during your untap step.")
-				|| c.getKeyword().contains("This card doesn't untap during your next untap step.")) return false;
+    	if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
+				|| c.hasKeyword("This card doesn't untap during your next untap step.")) return false;
     	
     	CardList allp = AllZoneUtil.getCardsInPlay();
 		for(Card ca : allp) {

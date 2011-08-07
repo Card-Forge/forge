@@ -355,18 +355,18 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                         mp3.play();
                     }
                    
-                    if(c.isTapped()
+                    if (c.isTapped()
                             && (inputControl.input instanceof Input_PayManaCost || inputControl.input instanceof Input_PayManaCost_Ability)) {
                     	arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
-                    	for(arcane.ui.CardPanel cp : cardPanel.attachedPanels) {                           
-                            if(cp.getCard().isUntapped()) {                              
+                    	for (arcane.ui.CardPanel cp : cardPanel.attachedPanels) {                           
+                            if (cp.getCard().isUntapped()) {                              
                                 break;
                             }
                         }
                     }
                     
                     CardList att = new CardList(AllZone.Combat.getAttackers());
-                    if((c.isTapped() ||c.hasSickness() || ((c.getKeyword().contains("Vigilance")) && att.contains(c)))
+                    if ((c.isTapped() ||c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                             && (inputControl.input instanceof Input_Attack)) {
                     	arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
                         for(arcane.ui.CardPanel cp : cardPanel.attachedPanels) {
@@ -376,9 +376,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                         }
                     }
                     
-                    if(e.isMetaDown()) {
-                        if(att.contains(c) && (inputControl.input instanceof Input_Attack)
-                        		&& !c.getKeyword().contains("CARDNAME attacks each turn if able."))  {
+                    if (e.isMetaDown()) {
+                        if (att.contains(c) && (inputControl.input instanceof Input_Attack)
+                        		&& !c.hasKeyword("CARDNAME attacks each turn if able."))  {
                             c.untap();
                             AllZone.Combat.removeFromCombat(c);
                         }
@@ -1203,7 +1203,7 @@ class Gui_MultipleBlockers4 extends JFrame {
         for(int i = 0; i < creatureList.size(); i++)
             creaturePanel.add(new CardPanel(creatureList.get(i)));
        
-        if (att.getKeyword().contains("Trample")) {
+        if (att.hasKeyword("Trample")) {
                 Card player = new Card();
                 player.setName("Player");
                 player.addIntrinsicKeyword("Shroud");
@@ -1276,12 +1276,15 @@ class Gui_MultipleBlockers4 extends JFrame {
             boolean assignedLethalDamageToAllBlockers = true;
                 for (Card crd : blockers )
                 {
-                        if (crd.getLethalDamage() > 0 && (!att.getKeyword().contains("Deathtouch") || crd.getTotalAssignedDamage() < 1 ))
-                                assignedLethalDamageToAllBlockers = false;
+                        if (crd.getLethalDamage() > 0 
+                        		&& (!att.hasKeyword("Deathtouch") || crd.getTotalAssignedDamage() < 1 ))
+                            assignedLethalDamageToAllBlockers = false;
                 }
                
            
-            if (c.getName().equals("Player") && att.getKeyword().contains("Trample") && assignedLethalDamageToAllBlockers)
+            if (c.getName().equals("Player") 
+            		&& att.hasKeyword("Trample")
+            		&& assignedLethalDamageToAllBlockers)
             {
                 AllZone.Combat.addDefendingDamage(1, att);
                 c.addAssignedDamage(1, att);

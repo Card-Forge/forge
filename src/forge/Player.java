@@ -237,7 +237,7 @@ public abstract class Player extends MyObservable{
 	public void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
 		int damageToDo = damage;
     	
-		if( source.getKeyword().contains("Infect") ) {
+		if ( source.hasKeyword("Infect") ) {
         	addPoisonCounters(damageToDo);
         }
         else {
@@ -277,21 +277,21 @@ public abstract class Player extends MyObservable{
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
 	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 		
-    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+    	if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
 		
 		int restDamage = damage;
 		
-    	if(isCombat) {
-    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
-    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.")) return 0;
+    	if (isCombat) {
+    		if (source.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    		if (source.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")) return 0;
     	}
-    	if(source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
-    	if(source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.")) return 0;
+    	if (source.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    	if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) return 0;
     	if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) return 0;
     	
     	//stPreventDamage
     	CardList allp = AllZoneUtil.getCardsInPlay();
-		for(Card ca : allp) {
+		for (Card ca : allp) {
 			if (ca.hasStartOfKeyword("stPreventDamage")) {
 				//syntax stPreventDamage:[Who is protected(You/Player/ValidCards)]:[ValidSource]:[Amount/All]
 	        	int KeywordPosition = ca.getKeywordPosition("stPreventDamage");
@@ -299,9 +299,9 @@ public abstract class Player extends MyObservable{
 	    		String k[] = parse.split(":");
 	    		
 	    		final Card card = ca;
-	    		if(k[1].equals("Player") || (k[1].equals("You") && card.getController().isPlayer(this))) {
+	    		if (k[1].equals("Player") || (k[1].equals("You") && card.getController().isPlayer(this))) {
 	    			final String restrictions[] = k[2].split(",");
-					if(source.isValidCard(restrictions,card.getController(),card)) {
+					if (source.isValidCard(restrictions,card.getController(),card)) {
 						if (k[3].equals("All")) return 0;
 						restDamage = restDamage - Integer.valueOf(k[3]);
 					}
@@ -634,8 +634,8 @@ public abstract class Player extends MyObservable{
     	 * When a spell or ability an opponent controls causes you
     	 * to discard Psychic Purge, that player loses 5 life.
     	 */
-    	if(c.getName().equals("Psychic Purge")) {
-    		if( null != sa && !sa.getSourceCard().getController().equals(this)) {
+    	if (c.getName().equals("Psychic Purge")) {
+    		if ( null != sa && !sa.getSourceCard().getController().equals(this)) {
     			SpellAbility ability = new Ability(c, "") {
     				public void resolve() {
     					sa.getSourceCard().getController().loseLife(5, c);
@@ -648,19 +648,19 @@ public abstract class Player extends MyObservable{
     	}
         
         // necro disrupts madness
-        if(AllZoneUtil.getPlayerCardsInPlay(c.getOwner(), "Necropotence").size() > 0) {	
+        if (AllZoneUtil.getPlayerCardsInPlay(c.getOwner(), "Necropotence").size() > 0) {	
         	AllZone.GameAction.exile(c);
         	return;
         }
         
         AllZone.GameAction.discard_madness(c);
         
-        if((c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.")
-        		|| c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
+        if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.")
+        		|| c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
         		&& !c.getController().equals(sa.getSourceCard().getController())) {
         	AllZone.GameAction.discard_PutIntoPlayInstead(c);
         }
-        else if (c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.")) {
+        else if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.")) {
         	;
         }
         else {

@@ -67,7 +67,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             c.setSickness(true);// summoning sickness
             c.comesIntoPlay();
             
-            if(c.isLand()) {
+            if (c.isLand()) {
                 CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
                 
                 /*CardList listValakut = list.filter(new CardListFilter() {
@@ -78,12 +78,12 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return c.getKeyword().contains("Landfall") || 
-                        	   c.getKeyword().contains("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
+                        return c.hasKeyword("Landfall") 
+                        			|| c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
                     }
                 });
                 
-                for(int i = 0; i < list.size(); i++) {
+                for (int i = 0; i < list.size(); i++) {
                     GameActionUtil.executeLandfallEffects(list.get(i));
                 }
                 /*
