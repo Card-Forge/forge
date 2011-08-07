@@ -86,7 +86,7 @@ public class GameAction {
     	// Ideally move to should never be called without a prevZone
     	// Remove card from Current Zone, if it has one
     	PlayerZone prev = AllZone.getZone(c);
-    	String prevName = prev != null ? prev.getZoneName() : "";
+    	//String prevName = prev != null ? prev.getZoneName() : "";
        
         if(c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.") &&
         		!zone.is(Constant.Zone.Exile)) {
@@ -95,7 +95,7 @@ public class GameAction {
         	return moveTo(removed, c);
         }
         
-        Card lastKnownInfo = c;
+        //Card lastKnownInfo = c;
 
         c = changeZone(prev, zone, c);
         
@@ -486,7 +486,6 @@ public class GameAction {
         	GameActionUtil.stSetPT.execute();
         	GameActionUtil.stPump.execute();
 
-        	//System.out.println("checking state effects");
         	CardList list = AllZoneUtil.getCardsInPlay();
         	Card c;
 
