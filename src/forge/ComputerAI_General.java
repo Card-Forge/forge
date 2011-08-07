@@ -59,7 +59,7 @@ public class ComputerAI_General implements Computer {
     					&& (c.hasKeyword("Haste")) || c.hasKeyword("Exalted")) return true;
 
     			CardList buffed = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer); //get all cards the computer controls with BuffedBy
-    			for(int j = 0; j < buffed.size(); j++) {
+    			for (int j = 0; j < buffed.size(); j++) {
     				Card buffedcard = buffed.get(j);
     				if (buffedcard.getSVar("BuffedBy").length() > 0) {
     					String buffedby = buffedcard.getSVar("BuffedBy");
@@ -81,16 +81,18 @@ public class ComputerAI_General implements Computer {
     			if(c.isLand()) return false;
 
     			CardList vengevines = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer, "Vengevine");
-    			if(vengevines.size() > 0) {
+    			if (vengevines.size() > 0) {
     				CardList creatures = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
     				CardList creatures2 = new CardList();
-    				for(int i = 0; i < creatures.size(); i++) {
-    					if(creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(creatures.get(i).getManaCost()) <= 3) {
+    				for (int i = 0; i < creatures.size(); i++) {
+    					if (creatures.get(i).isType("Creature") 
+    							&& CardUtil.getConvertedManaCost(creatures.get(i).getManaCost()) <= 3) {
     						creatures2.add(creatures.get(i));
     					}
     				}
-    				if(creatures2.size() + Phase.ComputerCreatureSpellCount > 1 
-    					&& c.getType().contains("Creature") && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
+    				if (creatures2.size() + Phase.ComputerCreatureSpellCount > 1 
+    						&& c.isType("Creature") 
+    						&& CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
     			} // AI Improvement for Vengevine
     			// Beached As End
     			return false;

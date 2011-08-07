@@ -525,12 +525,12 @@ public class GameAction {
         			}
         		}//if isEquipped()
 
-        		if(c.isEquipping()) {
+        		if( c.isEquipping()) {
         			Card equippedCreature = c.getEquipping().get(0);
-        			if(!AllZoneUtil.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
+        			if (!AllZoneUtil.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
 
         			//make sure any equipment that has become a creature stops equipping
-        			if(c.isCreature()) c.unEquipCard(equippedCreature);
+        			if (c.isCreature()) c.unEquipCard(equippedCreature);
         		}//if isEquipping()
 
         		if (c.isAura()) {
@@ -539,7 +539,7 @@ public class GameAction {
         				if (!AllZoneUtil.isCardInPlay(perm)
         						|| CardFactoryUtil.hasProtectionFrom(c, perm)
         						|| ((c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant tapped creature") ) 
-        								&& !perm.getType().contains("Creature"))
+        								&& !perm.isType("Creature"))
         								|| (c.hasKeyword("Enchant tapped creature") && perm.isUntapped() ) ) {
         					c.unEnchantCard(perm);
         					//changed from destroy (and rules-wise, I don't think it's a sacrifice)
