@@ -488,6 +488,8 @@ public class AbilityFactory_ChangeZone {
 
 		String origin = params.get("Origin");
         String destination = params.get("Destination");
+        // this needs to be zero indexed. Top = 0, Third = 2
+        int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
 		
         if (params.containsKey("OriginChoice")){
         	// Currently only used for Mishra, but may be used by other things
@@ -502,6 +504,17 @@ public class AbilityFactory_ChangeZone {
         	
         	if (!GameActionUtil.showYesNoDialog(card, sb.toString()))
         		origin = alt;
+        }
+        
+        if (params.containsKey("DestinationAlternative")){
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(params.get("AlternativeDestinationMessage"));
+        	
+        	if (!GameActionUtil.showYesNoDialog(card, sb.toString())) {
+        		destination = params.get("DestinationAlternative");
+        		libraryPos = params.containsKey("LibraryPositionAlternative") ? Integer.parseInt(params.get("LibraryPositionAlternative")) : 0;
+        	}
         }
         
 
@@ -533,8 +546,6 @@ public class AbilityFactory_ChangeZone {
                 fetchList.remove(c);
 
                 if (destination.equals("Library")) {
-                    // this needs to be zero indexed. Top = 0, Third = 2
-                    int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
                     // do not shuffle the library once we have placed a fetched card on top.
                     if (origin.contains("Library") && i < 1) {
                         player.shuffle();
