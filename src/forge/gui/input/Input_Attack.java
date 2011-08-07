@@ -33,15 +33,17 @@ public class Input_Attack extends Input {
         
         AllZone.Display.showMessage(sb.toString());
         
-        if(AllZone.Combat.getRemainingDefenders() == 0) {
+        if (AllZone.Combat.getRemainingDefenders() == 0) {
         	// Nothing left to attack, has to attack this defender
             CardList possibleAttackers = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
             possibleAttackers = possibleAttackers.getType("Creature");
-            for(int i = 0; i < possibleAttackers.size(); i++) {
+            for (int i = 0; i < possibleAttackers.size(); i++) {
                 Card c = possibleAttackers.get(i);
-                if(c.getKeyword().contains("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c,AllZone.Combat) && !c.isAttacking()) {
+                if (c.hasKeyword("CARDNAME attacks each turn if able.") 
+                		&& CombatUtil.canAttack(c,AllZone.Combat) 
+                		&& !c.isAttacking()) {
                     AllZone.Combat.addAttacker(c);
-                    //if(!c.getKeyword().contains("Vigilance")) 
+                    //if(!c.hasKeyword("Vigilance")) 
                     //	c.tap();
                 }
             }
