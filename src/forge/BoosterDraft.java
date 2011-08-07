@@ -79,7 +79,7 @@ class BoosterDraft_1 implements BoosterDraft
 		  Object o = GuiUtils.getChoice("Choose Block", rbNames.toArray());
           
           ArrayList<String> blockSets = SetInfoUtil.getSets_BlockName(o.toString());
-          int nPacks = SetInfoUtil.getPackCount(o.toString());
+          int nPacks = SetInfoUtil.getDraftPackCount(o.toString());
           
           ArrayList<String> setCombos = new ArrayList<String>();
           
