@@ -2913,6 +2913,12 @@ public class Card extends MyObservable {
 	         	else
 	         		x = Integer.parseInt(Property.substring(z));
 	         	
+	         	if (Property.substring(z).equals("Y")) {
+	         		x = CardFactoryUtil.xCount(source, source.getSVar("Y"));
+	         	}
+	         	else
+	         		x = Integer.parseInt(Property.substring(z));
+	         	
 	         	if (!compare(y, Property, x))
 	         		return false;
 	         }
