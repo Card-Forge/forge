@@ -423,7 +423,8 @@ public class AbilityFactory_DealDamage {
 			}
 			else if (o instanceof Player){
 				Player p = (Player)o;
-				if (p.isComputer() && dmg >= p.getLife())	// Damage from this spell will kill me
+				int restDamage = p.predictDamage(dmg, AF.getHostCard(), false);
+				if (p.isComputer() && p.canLoseLife() && restDamage + 3 >= p.getLife() && restDamage > 0)	// Damage from this spell will kill me
 					return false;
 				if (p.isHuman() && !p.canLoseLife())
 					return false;
