@@ -647,7 +647,9 @@ public class CardFactory_Instants {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Hidetsugu's Second Rite")) {
-            final SpellAbility spell = new Spell(card) {
+        	Target t = new Target(card, "Select target player", "Player");
+        	Cost cost = new Cost("3 R", cardName, true);
+            final SpellAbility spell = new Spell(card, cost, t) {
                 private static final long serialVersionUID = 176857775451818523L;
                 
                 @Override
@@ -670,8 +672,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
 
@@ -1099,7 +1099,10 @@ public class CardFactory_Instants {
         	/*
         	 * Return all artifacts target player owns to his or her hand.
         	 */
-        	SpellAbility spell = new Spell(card) {
+        	Target t = new Target(card, "Select target player", "Player");
+        	Cost cost = new Cost("1 U", cardName, true);
+        	
+        	SpellAbility spell = new Spell(card, cost, t) {
         		private static final long serialVersionUID = -4098702062413878046L;
 
         		@Override
@@ -1133,7 +1136,6 @@ public class CardFactory_Instants {
         	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
         	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
          
 
@@ -1328,7 +1330,10 @@ public class CardFactory_Instants {
             /*
              * Tap all lands target player controls and empty his or her mana pool.
              */
-            final SpellAbility spell = new Spell(card) {
+        	Target t = new Target(card, "Select target player", "Player");
+        	Cost cost = new Cost("2 U", cardName, true);
+        	
+            final SpellAbility spell = new Spell(card, cost, t) {
 				private static final long serialVersionUID = -2175586347805121896L;
 
 				@Override
@@ -1351,7 +1356,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
 
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
         
