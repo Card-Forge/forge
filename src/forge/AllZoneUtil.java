@@ -5,7 +5,6 @@ package forge;
 import java.util.ArrayList;
 
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.gui.GuiUtils;
 
 /**
  * AllZoneUtil contains static functions used to get CardLists of various
@@ -523,67 +522,6 @@ public class AllZoneUtil {
         return all;
 	}
 	
-	//zone manipulation, maybe be better off in GameAction.java...
-	/**
-	 * use this when Human needs to rearrange the top X cards in a player's library.  You
-	 * may also specify a shuffle when done
-	 * 
-	 * @param src the source card
-	 * @param player the player to target
-	 * @param numCards the number of cards from the top to rearrange
-	 * @param shuffle true if a shuffle is desired at the end, false otherwise
-	 */
-	public static void rearrangeTopOfLibrary(final Card src,final Player player, final int numCards, boolean mayshuffle) {
-		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-		int maxCards = lib.size();
-		maxCards = Math.min(maxCards, numCards);
-		if(maxCards == 0) return;
-		CardList topCards =  new CardList();
-		//show top n cards:
-		for(int j = 0; j < maxCards; j++ ) {
-			topCards.add(lib.get(j));
-		}
-		for(int i = 1; i <= maxCards; i++) {
-			String suffix = "";
-			switch(i) {
-			case 1:	suffix="st"; break;
-			case 2: suffix="nd"; break;
-			case 3: suffix="rd"; break;
-			default: suffix="th";
-			}
-			String title = "Put "+i+suffix+" from the top: ";
-			Object o = GuiUtils.getChoiceOptional(title, topCards.toArray());
-			if(o == null) break;
-			Card c_1 = (Card) o;
-			topCards.remove(c_1);
-			AllZone.GameAction.moveToLibrary(c_1, i - 1);
-		}
-		if(mayshuffle) {
-			if(GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?"))
-			{
-				player.shuffle();
-			}
-		}
-	}
-	
-	public static void exileNCardsFromZone(final PlayerZone zone, final CardListFilter filter, final int n, final boolean shuffle) {
-		CardList cards = new CardList(zone.getCards());
-		if(null != filter) {
-			cards = cards.filter(filter);
-		}
-		int maxCards = n;
-		int numCards = cards.size();
-		maxCards = Math.min(maxCards, numCards);
-		for(int i = 1; i <= maxCards; i++) {
-			String title = "Select card to exile: " + i + "/" + maxCards;
-			Object o = GuiUtils.getChoiceOptional(title, cards.toArray());
-			if(o == null) break;
-			Card card = (Card) o;
-			AllZone.GameAction.exile(card);
-		}
-		if(shuffle) zone.getPlayer().shuffle();
-	}
-	
 	public static int compareTypeAmountInPlay(final Player player, String type)
 	{
 		// returns the difference between player's
@@ -860,8 +798,6 @@ public class AllZoneUtil {
         return multiplier;
 	}
 
-	
-	
 	/**
 	 * get a list of all players participating in this game
 	 * @return a list of all player participating in this game
@@ -883,4 +819,5 @@ public class AllZoneUtil {
 		list.add(p.getOpponent());
 		return list;
 	}
-}
+
+}//end class AllZoneUtil

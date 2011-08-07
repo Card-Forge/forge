@@ -13,6 +13,7 @@ import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
+import forge.GameActionUtil;
 import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
@@ -986,7 +987,49 @@ public class AbilityFactory_Reveal {
 
 			for(Player p : tgtPlayers)
 				if (tgt == null || p.canTarget(AF.getHostCard()))
-					AllZoneUtil.rearrangeTopOfLibrary(AF.getHostCard(), p, numCards, shuffle);
+					rearrangeTopOfLibrary(AF.getHostCard(), p, numCards, shuffle);
+		}
+	}
+	
+	/**
+	 * use this when Human needs to rearrange the top X cards in a player's library.  You
+	 * may also specify a shuffle when done
+	 * 
+	 * @param src the source card
+	 * @param player the player to target
+	 * @param numCards the number of cards from the top to rearrange
+	 * @param shuffle true if a shuffle is desired at the end, false otherwise
+	 */
+	private static void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards, boolean mayshuffle) {
+		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+		int maxCards = lib.size();
+		maxCards = Math.min(maxCards, numCards);
+		if(maxCards == 0) return;
+		CardList topCards =  new CardList();
+		//show top n cards:
+		for(int j = 0; j < maxCards; j++ ) {
+			topCards.add(lib.get(j));
+		}
+		for(int i = 1; i <= maxCards; i++) {
+			String suffix = "";
+			switch(i) {
+			case 1:	suffix="st"; break;
+			case 2: suffix="nd"; break;
+			case 3: suffix="rd"; break;
+			default: suffix="th";
+			}
+			String title = "Put "+i+suffix+" from the top: ";
+			Object o = GuiUtils.getChoiceOptional(title, topCards.toArray());
+			if(o == null) break;
+			Card c_1 = (Card) o;
+			topCards.remove(c_1);
+			AllZone.GameAction.moveToLibrary(c_1, i - 1);
+		}
+		if(mayshuffle) {
+			if(GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?"))
+			{
+				player.shuffle();
+			}
 		}
 	}
 
