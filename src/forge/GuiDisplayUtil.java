@@ -956,12 +956,13 @@ public class GuiDisplayUtil implements NewConstants {
     		  
     		  String temp = "";
     		  
-    		  while (!temp.toLowerCase().equals("end"))
+    		  while ((temp = br.readLine()) != null)
     		  {
-    			  temp = br.readLine();
     			  String[] temp_data = temp.split("=");
     			  
     			  if (temp_data.length < 2)
+    				  continue;
+    			  if (temp_data[0].toCharArray()[0] == '#')
     				  continue;
     			  
     			  String categoryName = temp_data[0];
