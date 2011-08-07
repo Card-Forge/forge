@@ -107,7 +107,7 @@ public class AbilityFactory {
 		HashMap<String,String> mapParameters = new HashMap<String,String>();
 		
 		if (!(abString.length() > 0))
-			throw new RuntimeException("AbilityFactory : getAbility -- abString too short in " + hostCard.getName());
+			throw new RuntimeException("AbilityFactory : getAbility -- abString too short in " + hostCard.getName()+": ["+abString+"]");
 		
 		String a[] = abString.split("\\|");
 		
