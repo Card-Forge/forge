@@ -994,6 +994,7 @@ res/cardsfolder/broken_dam.txt -text svneol=native#text/plain
 res/cardsfolder/broken_fall.txt -text svneol=native#text/plain
 res/cardsfolder/broken_visage.txt svneol=native#text/plain
 res/cardsfolder/brood_birthing.txt -text svneol=native#text/plain
+res/cardsfolder/brood_of_cockroaches.txt -text svneol=native#text/plain
 res/cardsfolder/brood_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/broodhatch_nantuko.txt svneol=native#text/plain
 res/cardsfolder/broodmate_dragon.txt -text svneol=native#text/plain
