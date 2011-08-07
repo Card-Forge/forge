@@ -966,27 +966,27 @@ public class GuiDisplayUtil implements NewConstants {
     			  String categoryName = temp_data[0];
     			  String categoryValue = temp_data[1];
     			  
-    			  if (categoryName.equals("HumanLife"))
+    			  if (categoryName.toLowerCase().equals("humanlife"))
     				  t_humanLife = categoryValue;
-    			  else if (categoryName.equals("AILife"))
+    			  else if (categoryName.toLowerCase().equals("ailife"))
     				  t_computerLife = categoryValue;
-    			  else if (categoryName.equals("HumanCardsInPlay"))
+    			  else if (categoryName.toLowerCase().equals("humancardsinplay"))
     				  t_humanSetupCardsInPlay = categoryValue;
-    			  else if (categoryName.equals("AICardsInPlay"))
+    			  else if (categoryName.toLowerCase().equals("aicardsinplay"))
     				  t_computerSetupCardsInPlay = categoryValue;
-    			  else if (categoryName.equals("HumanCardsInHand"))
+    			  else if (categoryName.toLowerCase().equals("humancardsinhand"))
     			  	  t_humanSetupCardsInHand = categoryValue;
-    			  else if (categoryName.equals("AICardsInHand"))
+    			  else if (categoryName.toLowerCase().equals("aicardsinhand"))
     				  t_computerSetupCardsInHand = categoryValue;
-    			  else if (categoryName.equals("HumanCardsInGraveyard"))
+    			  else if (categoryName.toLowerCase().equals("humancardsingraveyard"))
     				  t_humanSetupGraveyard = categoryValue;
-    			  else if (categoryName.equals("AICardsInGraveyard"))
+    			  else if (categoryName.toLowerCase().equals("aicardsingraveyard"))
     				  t_computerSetupGraveyard = categoryValue;
-    			  else if (categoryName.equals("HumanCardsInLibrary"))
+    			  else if (categoryName.toLowerCase().equals("humancardsinlibrary"))
     				  t_humanSetupLibrary = categoryValue;
-    			  else if (categoryName.equals("AICardsInLibrary"))
+    			  else if (categoryName.toLowerCase().equals("aicardsinlibrary"))
     				  t_computerSetupLibrary = categoryValue;
-    			  else if (categoryName.equals("ActivePlayer"))
+    			  else if (categoryName.toLowerCase().equals("activeplayer"))
     				  t_changePlayer = categoryValue;
     		  }
     		      		  
