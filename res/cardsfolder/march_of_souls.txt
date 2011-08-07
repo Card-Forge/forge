@@ -11,4 +11,5 @@ SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_souls.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/10.jpg
 End

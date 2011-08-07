@@ -9,4 +9,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurora_eidolon.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/1.jpg
 End

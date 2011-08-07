@@ -6,4 +6,5 @@ A:SP$ PreventDamage | Cost$ W | ValidTgts$ Creature | Amount$ 3 | TgtPrompt$ Sel
 SVar:Buyback:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anoint.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/215.jpg
 End

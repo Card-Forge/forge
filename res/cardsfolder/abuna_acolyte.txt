@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ T | Tgt$ TgtCP | Amount$ 1 | SpellDescription$ Preve
 A:AB$ PreventDamage | Cost$ T |  ValidTgts$ Creature.Artifact | Amount$ 2 | TgtPrompt$ Select target artifact creature | SpellDescription$ Prevent the next 2 damage that would be dealt to target artifact creature this turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abuna_acolyte.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/1.jpg
 End
