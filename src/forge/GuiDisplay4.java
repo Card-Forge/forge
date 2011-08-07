@@ -561,7 +561,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 PlayerZone pZone = (PlayerZone) a;
                 HandArea p = playerHandPanel;;
                
-                Card c[] = pZone.getCards();
+                Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
                
                 List<Card> tmp, diff;
                 tmp = new ArrayList<Card>();
@@ -570,11 +570,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 diff = new ArrayList<Card>(tmp);
                 diff.removeAll(Arrays.asList(c));
                 if(diff.size() == p.cardPanels.size())
-                        p.clear();
+                	p.clear();
                 else {
-                        for(Card card : diff) {
-                                p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
-                        }
+                	for(Card card : diff) {
+                		p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
+                	}
                 }
                 diff = new ArrayList<Card>(Arrays.asList(c));
                 diff.removeAll(tmp);
@@ -582,27 +582,27 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 int fromZoneX = 0, fromZoneY = 0;
                 Rectangle pb = playerLibraryValue.getBounds();
                 Point zoneLocation = SwingUtilities.convertPoint(playerLibraryValue, Math.round(pb.width / 2.0f), Math.round(pb.height / 2.0f), layeredPane);
-                        fromZoneX = zoneLocation.x;
-                        fromZoneY = zoneLocation.y;
-                        int startWidth, startX, startY;
-                        startWidth = 10;
-                                startX = fromZoneX - Math.round(startWidth / 2.0f);
-                                startY = fromZoneY - Math.round(Math.round(startWidth * arcane.ui.CardPanel.ASPECT_RATIO) / 2.0f);
-                       
+                fromZoneX = zoneLocation.x;
+                fromZoneY = zoneLocation.y;
+                int startWidth, startX, startY;
+                startWidth = 10;
+                startX = fromZoneX - Math.round(startWidth / 2.0f);
+                startY = fromZoneY - Math.round(Math.round(startWidth * arcane.ui.CardPanel.ASPECT_RATIO) / 2.0f);
+
                 int endWidth, endX, endY;
                 arcane.ui.CardPanel toPanel = null;
                
                 for(Card card : diff) {
-                        toPanel = p.addCard(card);
-                        endWidth = toPanel.getCardWidth();
-                        Point toPos = SwingUtilities.convertPoint(playerHandPanel, toPanel.getCardLocation(), layeredPane);
-                        endX = toPos.x;
-                                endY = toPos.y;
-                                arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
-                        if(isShowing())
-                        	Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel, layeredPane, 500);
-                        else
-                        	Animation.moveCard(toPanel);
+                	toPanel = p.addCard(card);
+                	endWidth = toPanel.getCardWidth();
+                	Point toPos = SwingUtilities.convertPoint(playerHandPanel, toPanel.getCardLocation(), layeredPane);
+                	endX = toPos.x;
+                	endY = toPos.y;
+                	arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
+                	if(isShowing())
+                		Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel, layeredPane, 500);
+                	else
+                		Animation.moveCard(toPanel);
                 }
             }
         });
@@ -614,7 +614,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             public void update(Observable a, Object b) {
                 PlayerZone pZone = (PlayerZone) a;
                
-                Card c[] = pZone.getCards();
+                Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
 
                 GuiDisplayUtil.setupPlayZone(playerPlayPanel, c);
             }
@@ -628,7 +628,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             public void update(Observable a, Object b) {
             	PlayerZone pZone = (PlayerZone) a;
                
-                Card c[] = pZone.getCards();
+                Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
                
                 GuiDisplayUtil.setupPlayZone(oppPlayPanel, c);
             }
@@ -1141,7 +1141,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         }
         */
         protected Card[] getCards() {
-            return zone.getCards();
+            return AllZoneUtil.getCardsInZone(zone).toArray();
         }
        
         protected void doAction(Card c) {}
@@ -1224,8 +1224,8 @@ class Gui_MultipleBlockers4 extends JFrame {
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
-//    setSize(470, 280);
-//    show();
+        //    setSize(470, 280);
+        //    show();
     }
    
     private void jbInit() throws Exception {

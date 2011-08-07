@@ -72,7 +72,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         JMenuItem humanGraveyard = new JMenuItem("View Graveyard");
         humanGraveyard.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                Card c[] = AllZone.Human_Graveyard.getCards();
+                Card c[] = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer).toArray();
                 
                 if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
                 
@@ -84,7 +84,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         JMenuItem computerGraveyard = new JMenuItem("Computer - View Graveyard");
         computerGraveyard.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                Card c[] = AllZone.Computer_Graveyard.getCards();
+                Card c[] = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer).toArray();
                 
                 if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
                 
@@ -379,7 +379,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 JPanel p = playerHandPanel;
                 p.removeAll();
                 
-                Card c[] = pZone.getCards();
+                Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
@@ -407,7 +407,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 JPanel p = playerLandPanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Human_Battlefield.getCards();
+                Card[] c = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer).toArray();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
@@ -433,7 +433,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 JPanel p = playerCreaturePanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Human_Battlefield.getCards();
+                Card[] c = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer).toArray();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
@@ -459,7 +459,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 JPanel p = oppCreaturePanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Computer_Battlefield.getCards();
+                Card[] c = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer).toArray();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
@@ -484,7 +484,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 JPanel p = oppLandPanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Computer_Battlefield.getCards();
+                Card[] c = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer).toArray();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {

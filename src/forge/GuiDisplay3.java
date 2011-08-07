@@ -586,7 +586,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 JPanel p = playerHandPanel;
                 p.removeAll();
                 
-                Card c[] = pZone.getCards();
+                Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
                 JPanel panel;
                 for(int i = 0; i < c.length; i++) {
                     panel = new CardPanel(c[i]);
@@ -607,7 +607,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 JPanel p = playerLandPanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupLandPanel(p, AllZone.Human_Battlefield.getCards());
+                GuiDisplayUtil.setupLandPanel(p, AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer).toArray());
                 p.revalidate();
                 p.repaint();
             }
@@ -623,7 +623,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 JPanel p = playerCreaturePanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Human_Battlefield.getCards());
+                GuiDisplayUtil.setupNoLandPanel(p, AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer).toArray());
                 p.revalidate();
                 p.repaint();
             }
@@ -639,7 +639,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 JPanel p = oppCreaturePanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Computer_Battlefield.getCards());
+                GuiDisplayUtil.setupNoLandPanel(p, AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer).toArray());
                 
                 p.revalidate();
                 p.repaint();
@@ -655,7 +655,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 JPanel p = oppLandPanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupLandPanel(p, AllZone.Computer_Battlefield.getCards());
+                GuiDisplayUtil.setupLandPanel(p, AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer).toArray());
                 p.revalidate();
                 p.repaint();
             }
@@ -1158,7 +1158,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         }
         */
         protected Card[] getCards() {
-            return zone.getCards();
+            return AllZoneUtil.getCardsInZone(zone).toArray();
         }
         
         protected void doAction(Card c) {}

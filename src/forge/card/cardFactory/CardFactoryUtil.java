@@ -2936,13 +2936,13 @@ public class CardFactoryUtil {
         {
         	CardList ut = new CardList();
         	if (d[0].contains("YouCtrl"))
-        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, dbPlayer).getCards());
+        		ut.addAll(AllZoneUtil.getPlayerCardsInPlay(dbPlayer));
         	else if (d[0].contains("OppCtrl"))
-        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, Opp).getCards());
+        		ut.addAll(AllZoneUtil.getPlayerCardsInPlay(Opp));
         	else
         	{
-        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, dbPlayer).getCards());
-        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, Opp).getCards());
+        		ut.addAll(AllZoneUtil.getPlayerCardsInPlay(dbPlayer));
+        		ut.addAll(AllZoneUtil.getPlayerCardsInPlay(Opp));
         	}
         	if (d[0].contains("Type"))
         	{
