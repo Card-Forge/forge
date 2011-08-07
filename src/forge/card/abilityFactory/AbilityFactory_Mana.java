@@ -353,9 +353,11 @@ public class AbilityFactory_Mana {
 		
 		CardList cards = null;
 		
-		// TODO: Conver this to Calculate Amount?
-		if (validCard.equals("Sacrificed")){
-			cards = abMana.getPaidList("Sacrificed");
+		// Reuse AF_Defined in a slightly different way
+		if (validCard.startsWith("Defined.")){
+			cards = new CardList();
+			for(Card c : AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), (SpellAbility)abMana))
+				cards.add(c);
 		}
 		else{
 			cards = AllZoneUtil.getCardsInPlay().getValidCards(validCard, abMana.getActivatingPlayer(), card);
@@ -373,7 +375,7 @@ public class AbilityFactory_Mana {
 			colors = hasProperty(maxChoices, cards, colors);
 		}
 		else if (reflectProperty.equals("Produced")){
-			String producedColors = (String)af.getHostCard().getTriggeringObject("Produced");
+			String producedColors = (String)abMana.getTriggeringObject("Produced");
 			for(String col : Constant.Color.onlyColors){
 				String s = Input_PayManaCostUtil.getShortColorString(col);
 				if(producedColors.contains(s) && !colors.contains(col))

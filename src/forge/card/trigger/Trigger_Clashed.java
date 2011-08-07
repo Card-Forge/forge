@@ -1,6 +1,7 @@
 package forge.card.trigger;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 import java.util.HashMap;
 
@@ -51,7 +52,7 @@ public class Trigger_Clashed extends Trigger {
 	}
 
 	@Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
 	{
         //No triggered-variables for you :(
 	}

@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_LifeLost extends Trigger {
 
@@ -38,9 +39,9 @@ public class Trigger_LifeLost extends Trigger {
 	}
 	
 	@Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
 	{
-		c.setTriggeringObject("LifeAmount",runParams.get("LifeAmount"));
-        c.setTriggeringObject("Player",runParams.get("Player"));
+		sa.setTriggeringObject("LifeAmount",runParams.get("LifeAmount"));
+		sa.setTriggeringObject("Player",runParams.get("Player"));
 	}
 }

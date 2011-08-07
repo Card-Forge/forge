@@ -30,10 +30,14 @@ public class SpellAbility_StackInstance {
 	private int xManaPaid = 0;
 
 	// Other Paid things
-	HashMap<String, CardList> paidHash = new HashMap<String, CardList>();
+	private HashMap<String, CardList> paidHash = new HashMap<String, CardList>();
 	
 	// Additional info
     // is Kicked, is Buyback
+	
+	
+	// Triggers
+	private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
 	
 	public SpellAbility_StackInstance(SpellAbility sa){
 		// Base SA info
@@ -56,7 +60,7 @@ public class SpellAbility_StackInstance {
 		}
 
 		// Triggering info
-		
+		triggeringObjects = sa.getTriggeringObjects();
 		
 		Ability_Sub subAb = ability.getSubAbility();
 		if (subAb != null)
@@ -77,6 +81,9 @@ public class SpellAbility_StackInstance {
 		// Set Cost specific things here
 		ability.setPaidHash(paidHash);
 		ability.getSourceCard().setXManaCostPaid(xManaPaid);
+		
+		// Triggered
+		ability.setAllTriggeringObjects(triggeringObjects);
 		
 		return ability;
 	}

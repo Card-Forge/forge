@@ -266,31 +266,10 @@ public class Card extends MyObservable {
     	triggers.clear();
     }
 
-    public void setTriggeringObject(String type,Object o)
-    {
-        triggeringObjects.put(type,o);
-    }
-
     public Object getTriggeringObject(String type)
     {
         return triggeringObjects.get(type);
     }
-
-    public boolean hasTriggeringObject(String type)
-    {
-        return triggeringObjects.containsKey(type);
-    }
-
-    public void setAllTriggeringObjects(HashMap<String, Object> map)
-    {
-        triggeringObjects = map;
-    }
-
-    public HashMap<String, Object> getAllTriggeringObjects()
-    {
-        return triggeringObjects;
-    }
-
 
     public void setAbilityUsed(int i) {
         abilityUsed = i;
@@ -2953,18 +2932,6 @@ public class Card extends MyObservable {
              else if(Property.equals("CostsPhyrexianMana"))
              {
                      if(!manaCost.contains("P")) return false;
-             }
-             else if(Property.startsWith("IsTriggered"))
-             {
-                 if(!source.hasTriggeringObject(Property.substring(11)))
-                     return false;
-
-                 Object TriggeredObject = source.getTriggeringObject(Property.substring(11));
-                 if(!(TriggeredObject instanceof Card))
-                     return false;
-
-                 if(!TriggeredObject.equals(this))
-                     return false;
              }
              else {
             	 if(Property.equals("ChosenType")) {

@@ -2275,14 +2275,20 @@ public class CardFactoryUtil {
         return count;
     }
     
+    public static String[] parseMath(String[] l){
+        String[] m = {"none"};
+        if(l.length > 1) m[0] = l[1];
+        
+        return m;
+    }
+    
+    
     //parser for player targeted X variables
     public static int playerXCount(ArrayList<Player> players, String s, Card source) {
     	if(players.size() == 0) return 0;
     	
-    	final String[] l;
-        l = s.split("/");
-        final String m[] = {"none"};
-        if(l.length > 1) m[0] = l[1];
+    	final String[] l = s.split("/");
+        final String[] m = parseMath(l);
         
         int n = 0;
         
@@ -2336,10 +2342,8 @@ public class CardFactoryUtil {
         Player cardController = c.getController();
         Player oppController = cardController.getOpponent();  
         
-        final String[] l;
-        l = s.split("/"); // separate the specification from any math
-        final String m[] = {"none"};
-        if(l.length > 1) m[0] = l[1];
+    	final String[] l = s.split("/");
+        final String[] m = parseMath(l);
         
         //accept straight numbers
         if(l[0].contains("Number$")) {
@@ -2771,7 +2775,7 @@ public class CardFactoryUtil {
         else return num;
     }
     
-    private static int doXMath(int num, String[] m, Card c) {
+    public static int doXMath(int num, String[] m, Card c) {
     	if (m.length == 0)
     		return num;
     	

@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +X | NumDef$ +X
-SVar:X:Count$TriggeredNumBlockers
+SVar:X:TriggerCount$NumBlockers
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sparring_golem.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/312.jpg

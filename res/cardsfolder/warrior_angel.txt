@@ -6,7 +6,7 @@ PT:3/4
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
-SVar:X:Count$TriggeredDamageAmount
+SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warrior_angel.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/123.jpg

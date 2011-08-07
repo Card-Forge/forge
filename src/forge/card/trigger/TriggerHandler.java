@@ -373,7 +373,9 @@ public class TriggerHandler {
                 }
 			}
             sa[0].setTrigger(true);
-            regtrig.setTriggeringObjects(host);
+            regtrig.setTriggeringObjects(sa[0]);
+            if (regtrig.getStoredTriggeredObjects() != null)
+            	sa[0].setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
 
 			sa[0].setActivatingPlayer(host.getController());
 			if(sa[0].getStackDescription().equals(""))
@@ -401,31 +403,68 @@ public class TriggerHandler {
 			//Yes, it must wrap ALL SpellAbility methods in order to handle possible corner cases.
 			//(The trigger can have a hardcoded OverridingAbility which can make use of any of the methods)
 			final Ability wrapperAbility = new Ability(regtrig.getHostCard(),"0") {
-
+				@Override
 			    public void setPaidHash(HashMap<String, CardList> hash){
 			    	sa[0].setPaidHash(hash);
 			    }
 			    
+			    @Override
 			    public HashMap<String, CardList> getPaidHash(){
 			    	return sa[0].getPaidHash();
 			    }
 			    
+			    @Override
 			    public void setPaidList(CardList list, String str){
 			    	sa[0].setPaidList(list, str);
 			    }
 			    
+			    @Override
 			    public CardList getPaidList(String str){
 			    	return sa[0].getPaidList(str);
 			    }
 			    
+			    @Override
 			    public void addCostToHashList(Card c, String str){
 			    	sa[0].addCostToHashList(c, str);
 			    }
 			    
+			    @Override
 			    public void resetPaidHash(){
 			    	sa[0].resetPaidHash();
 			    }
+			    
+			    @Override
+			    public HashMap<String, Object> getTriggeringObjects() {
+					return sa[0].getTriggeringObjects();
+				}
+
+			    @Override
+				public void setAllTriggeringObjects(HashMap<String, Object> triggeredObjects) {
+					sa[0].setAllTriggeringObjects(triggeredObjects);
+				}
 				
+			    @Override
+				public void setTriggeringObject(String type,Object o) {
+					sa[0].setTriggeringObject(type, o);
+				}
+				
+			    @Override
+			    public Object getTriggeringObject(String type)
+			    {
+			        return sa[0].getTriggeringObject(type);
+			    }
+
+			    @Override
+			    public boolean hasTriggeringObject(String type)
+			    {
+			        return sa[0].hasTriggeringObject(type);
+			    }
+			    
+			    @Override
+			    public void resetTriggeringObjects(){
+			    	sa[0].resetTriggeringObjects();
+			    }
+			    
 				@Override
 				public boolean canPlay()
 				{
@@ -933,7 +972,8 @@ public class TriggerHandler {
                     {
                         String SVarName = regtrig.getMapParams().get("DelayedTrigger");
                         Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(SVarName),regtrig.getHostCard());
-                        registerDelayedTrigger(deltrig);
+                        deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
+                        registerDelayedTrigger(deltrig);                        
                     }
 				}
 			};

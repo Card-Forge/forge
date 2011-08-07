@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
 SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | TgtPromp$ Select target opponent | LifeAmount$ X
-SVar:X:Count$TriggeredLifeAmount
+SVar:X:TriggerCount$LifeAmount
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_bond.jpg

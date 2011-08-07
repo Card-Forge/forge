@@ -190,7 +190,6 @@ public class CardFactory implements NewConstants {
         out.setSets(in.getSets());
         out.setCurSetCode(in.getCurSetCode());
         out.setImageFilename(in.getImageFilename());
-        out.setAllTriggeringObjects(in.getAllTriggeringObjects());
         out.setEquipping(in.getEquipping());
         out.setEquippedBy(in.getEquippedBy());
         out.setEnchantedBy(in.getEnchantedBy());

@@ -3,7 +3,7 @@ ManaCost:R G W
 Types:World Enchantment
 Text:no text
 T:Mode$ TapsForMana | ValidCard$ Land.Snow | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player taps a snow land for mana, that player adds one mana to his or her mana pool of any type that land produced. That land doesn't untap during its controller's next untap step.
-SVar:TrigMana:AB$ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Card.IsTriggeredCard | ReflectProperty$ Produced | Defined$ TriggeredPlayer | SubAbility$ SVar=DBPump
+SVar:TrigMana:AB$ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer | SubAbility$ SVar=DBPump
 SVar:DBPump:DB$Pump | Defined$ TriggeredCard | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

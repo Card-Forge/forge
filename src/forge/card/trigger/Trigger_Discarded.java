@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_Discarded extends Trigger {
 
@@ -56,8 +57,8 @@ public class Trigger_Discarded extends Trigger {
 	}
 	
 	@Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
 	{
-		c.setTriggeringObject("Card",runParams.get("Card"));
+		sa.setTriggeringObject("Card",runParams.get("Card"));
 	}
 }

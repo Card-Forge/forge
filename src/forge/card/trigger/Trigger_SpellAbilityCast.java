@@ -166,11 +166,11 @@ public class Trigger_SpellAbilityCast extends Trigger {
 	}
 	
 	@Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
 	{
-		c.setTriggeringObject("Card",((SpellAbility)runParams.get("CastSA")).getSourceCard());
-        c.setTriggeringObject("SpellAbility",runParams.get("CastSA"));
-        c.setTriggeringObject("Player", runParams.get("Player"));
-        c.setTriggeringObject("Activator", runParams.get("Activator"));
+		sa.setTriggeringObject("Card",((SpellAbility)runParams.get("CastSA")).getSourceCard());
+        sa.setTriggeringObject("SpellAbility",runParams.get("CastSA"));
+        sa.setTriggeringObject("Player", runParams.get("Player"));
+        sa.setTriggeringObject("Activator", runParams.get("Activator"));
 	}
 }

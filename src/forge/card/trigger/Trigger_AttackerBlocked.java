@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_AttackerBlocked extends Trigger {
 
@@ -44,10 +45,10 @@ public class Trigger_AttackerBlocked extends Trigger {
 	}
 	
 	@Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
 	{
-        c.setTriggeringObject("Attacker",runParams.get("Attacker"));
-        c.setTriggeringObject("Blocker",runParams.get("Blocker"));
-        c.setTriggeringObject("NumBlockers", runParams.get("NumBlockers"));
+        sa.setTriggeringObject("Attacker",runParams.get("Attacker"));
+        sa.setTriggeringObject("Blocker",runParams.get("Blocker"));
+        sa.setTriggeringObject("NumBlockers", runParams.get("NumBlockers"));
 	}
 }

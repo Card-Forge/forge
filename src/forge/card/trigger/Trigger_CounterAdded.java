@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import forge.Card;
 import forge.Counters;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_CounterAdded extends Trigger {
 
@@ -45,8 +46,8 @@ public class Trigger_CounterAdded extends Trigger {
 	}
 
 	@Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
     {
-        c.setTriggeringObject("Card",runParams.get("Card"));
+        sa.setTriggeringObject("Card",runParams.get("Card"));
 	}
 }

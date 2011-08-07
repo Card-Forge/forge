@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_DamageDone extends Trigger {
 
@@ -103,10 +104,10 @@ public class Trigger_DamageDone extends Trigger {
 	}
 	
 	@Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
 	{
-		c.setTriggeringObject("Source",runParams.get("DamageSource"));
-        c.setTriggeringObject("Target",runParams.get("DamageTarget"));
-        c.setTriggeringObject("DamageAmount",runParams.get("DamageAmount"));
+		sa.setTriggeringObject("Source",runParams.get("DamageSource"));
+        sa.setTriggeringObject("Target",runParams.get("DamageTarget"));
+        sa.setTriggeringObject("DamageAmount",runParams.get("DamageAmount"));
 	}
 }

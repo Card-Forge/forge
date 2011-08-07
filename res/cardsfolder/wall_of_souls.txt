@@ -6,7 +6,7 @@ PT:0/4
 K:Defender
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigDamage | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME is dealt combat damage, it deals that much damage to target opponent.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X
-SVar:X:Count$TriggeredDamageAmount
+SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_souls.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/25.jpg

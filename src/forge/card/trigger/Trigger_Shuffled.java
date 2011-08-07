@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_Shuffled extends Trigger{
 
@@ -38,8 +39,8 @@ public class Trigger_Shuffled extends Trigger{
 	}
 
     @Override
-	public void setTriggeringObjects(Card c)
+	public void setTriggeringObjects(SpellAbility sa)
 	{
-		c.setTriggeringObject("Player",runParams.get("Player"));
+		sa.setTriggeringObject("Player",runParams.get("Player"));
 	}
 }

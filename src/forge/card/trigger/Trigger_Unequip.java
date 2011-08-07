@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_Unequip extends Trigger {
 
@@ -43,8 +44,8 @@ public class Trigger_Unequip extends Trigger {
 	}
 
 	@Override
-	public void setTriggeringObjects(Card c) {
-		c.setTriggeringObject("Card", runParams.get("Card"));
-		c.setTriggeringObject("Equipment", runParams.get("Equipment"));
+	public void setTriggeringObjects(SpellAbility sa) {
+		sa.setTriggeringObject("Card", runParams.get("Card"));
+		sa.setTriggeringObject("Equipment", runParams.get("Equipment"));
 	}
 }

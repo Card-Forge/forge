@@ -70,9 +70,11 @@ public abstract class SpellAbility {
     private ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
     
-    HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
+    private HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
     
-    private Command         cancelCommand      = Command.Blank;
+    private HashMap<String,Object> triggeringObjects = new HashMap<String,Object>();
+
+	private Command         cancelCommand      = Command.Blank;
     private Command         beforePayManaAI    = Command.Blank;
     
     private CommandArgs     randomTarget       = new CommandArgs() {
@@ -337,12 +339,39 @@ public abstract class SpellAbility {
     	paidLists = new HashMap<String, CardList>();
     }
 
+    public HashMap<String, Object> getTriggeringObjects() {
+		return triggeringObjects;
+	}
+
+	public void setAllTriggeringObjects(HashMap<String, Object> triggeredObjects) {
+		this.triggeringObjects = triggeredObjects;
+	}
+	
+	public void setTriggeringObject(String type,Object o) {
+		this.triggeringObjects.put(type, o);
+	}
+	
+    public Object getTriggeringObject(String type)
+    {
+        return triggeringObjects.get(type);
+    }
+
+    public boolean hasTriggeringObject(String type)
+    {
+        return triggeringObjects.containsKey(type);
+    }
+    
+    public void resetTriggeringObjects(){
+    	triggeringObjects = new HashMap<String, Object>();
+    }
     
     public void resetOnceResolved(){
     	resetPaidHash();
 
     	if (chosenTarget != null)
     		chosenTarget.resetTargets();
+    	
+    	resetTriggeringObjects();
     }
     
     public Input getAfterResolve() {

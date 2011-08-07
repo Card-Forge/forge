@@ -6,7 +6,7 @@ K:Enchant creature
 K:enPump:+0/+0
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
-SVar:X:Count$TriggeredDamageAmount
+SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_link.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/47.jpg

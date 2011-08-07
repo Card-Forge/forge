@@ -682,7 +682,7 @@ public class AbilityFactory_ChangeZone {
 		
 		Card source = sa.getSourceCard();
 		if (type.contains("Triggered")){
-			Object o = source.getTriggeringObject("Card");
+			Object o = sa.getTriggeringObject("Card");
 			
 			// I won't the card attached to the Triggering object
 			if (!(o instanceof Card))

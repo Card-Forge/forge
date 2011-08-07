@@ -6,7 +6,7 @@ K:Enchant creature
 K:enPump:+2/+2/Trample
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
-SVar:X:Count$TriggeredDamageAmount
+SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armadillo_cloak.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/229.jpg

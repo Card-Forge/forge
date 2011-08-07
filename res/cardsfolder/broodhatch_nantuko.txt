@@ -6,7 +6,7 @@ PT:1/1
 K:Morph:2 G
 T:Mode$ DamageDone | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may put that many 1/1 green Insect creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
-SVar:X:Count$TriggeredDamageAmount
+SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodhatch_nantuko.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/250.jpg

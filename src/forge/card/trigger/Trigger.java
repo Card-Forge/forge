@@ -64,6 +64,14 @@ public abstract class Trigger {
 		overridingAbility = sa;
 	}
 	
+	private HashMap<String, Object> storedTriggeredObjects = null;
+	public void setStoredTriggeredObjects(HashMap<String, Object> storedTriggeredObjects) {
+		this.storedTriggeredObjects = storedTriggeredObjects;
+	}
+	public HashMap<String, Object> getStoredTriggeredObjects() {
+		return storedTriggeredObjects;
+	}
+	
 	protected Card hostCard;
 	public Card getHostCard()
 	{
@@ -391,5 +399,5 @@ public abstract class Trigger {
 	
 	public abstract Trigger getCopy();
 	
-	public abstract void setTriggeringObjects(Card c);
+	public abstract void setTriggeringObjects(SpellAbility sa);
 }

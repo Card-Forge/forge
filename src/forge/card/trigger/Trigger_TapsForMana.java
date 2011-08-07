@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 
 public class Trigger_TapsForMana extends Trigger {
 
@@ -36,9 +37,9 @@ public class Trigger_TapsForMana extends Trigger {
 	}
 	
 	@Override
-	public void setTriggeringObjects(Card c) {
-		c.setTriggeringObject("Card", runParams.get("Card"));
-		c.setTriggeringObject("Player", runParams.get("Player"));
-		c.setTriggeringObject("Produced", runParams.get("Produced"));
+	public void setTriggeringObjects(SpellAbility sa) {
+		sa.setTriggeringObject("Card", runParams.get("Card"));
+		sa.setTriggeringObject("Player", runParams.get("Player"));
+		sa.setTriggeringObject("Produced", runParams.get("Produced"));
 	}
 }

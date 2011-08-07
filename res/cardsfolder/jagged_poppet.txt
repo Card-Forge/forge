@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigYouDiscard | TriggerD
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Hellbent$ True | CombatDamage$ True | Execute$ TrigOppDiscard | TriggerDescription$ Hellbent - Whenever CARDNAME deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
 SVar:TrigYouDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ X | Mode$ TgtChoose
 SVar:TrigOppDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ X | Mode$ TgtChoose
-SVar:X:Count$TriggeredDamageAmount
+SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jagged_poppet.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/115.jpg

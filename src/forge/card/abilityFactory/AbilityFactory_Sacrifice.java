@@ -309,7 +309,7 @@ public class AbilityFactory_Sacrifice {
 			}
 		}
 		else if( valid.equals("TriggeredCard")) {
-			Card equipee = (Card)(card.getTriggeringObject("Card"));
+			Card equipee = (Card)sa.getTriggeringObject("Card");
 			if(tgts.contains(card.getController()) && AllZoneUtil.isCardInPlay(equipee)) {
 				AllZone.GameAction.sacrifice(equipee);
 			}
