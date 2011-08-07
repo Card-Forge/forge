@@ -1504,6 +1504,7 @@ res/cardsfolder/crucible_of_worlds.txt -text svneol=native#text/plain
 res/cardsfolder/crude_rampart.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_bargain.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_edict.txt -text svneol=native#text/plain
+res/cardsfolder/cruel_fate.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_revival.txt svneol=native#text/plain
 res/cardsfolder/cruel_tutor.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_ultimatum.txt -text svneol=native#text/plain
