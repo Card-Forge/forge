@@ -167,7 +167,20 @@ public class AbilityFactory_Reveal {
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed() + 1);
-
+		
+		Target tgt = sa.getTarget();
+		Player libraryOwner = AllZone.ComputerPlayer;
+		
+		if (sa.getTarget() != null){
+			tgt.resetTargets();
+			sa.getTarget().addTarget(AllZone.HumanPlayer);
+			libraryOwner = AllZone.HumanPlayer;
+		}
+		
+		//return false if nothing to dig into
+		if (AllZoneUtil.getCardsInZone(Constant.Zone.Library, libraryOwner).isEmpty())
+			return false;
+		
 		if (AbilityFactory.playReusable(sa))
 			randomReturn = true;
 
@@ -177,6 +190,7 @@ public class AbilityFactory_Reveal {
 				return randomReturn && abSub.chkAI_Drawback();
 			}
 		}
+		
 		return randomReturn;
 	}
 
@@ -190,13 +204,7 @@ public class AbilityFactory_Reveal {
 			tgt.resetTargets();
 			sa.getTarget().addTarget(AllZone.ComputerPlayer);
 		}
-		else{
-			ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-			for (Player p : tgtPlayers)
-				if (p.isHuman() && !mandatory)
-					return false;
-			// not sure if the AI should be playing with cards that give the Human more turns.
-		}
+
 		return true;
 	}
 

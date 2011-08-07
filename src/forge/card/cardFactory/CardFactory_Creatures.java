@@ -93,52 +93,7 @@ public class CardFactory_Creatures {
     public static Card getCard(final Card card, final String cardName, Player owner, CardFactory cf) {
         
         //*************** START *********** START **************************
-        if(cardName.equals("Lurking Informant")) {
-            Target target = new Target(card,"Select target player", new String[] {"Player"});
-        	Cost abCost = new Cost("2 T", cardName, true);
-            final SpellAbility a1 = new Ability_Activated(card, abCost, target) {
-                private static final long serialVersionUID = 1446529067071763245L;
-                
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    if(player == null) player = AllZone.HumanPlayer;
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    Card c = lib.get(0);
-                    
-                    if(card.getController().isHuman()) {
-                    	if(GameActionUtil.showYesNoDialog(card, "Mill "+c.getName()+"?")) {
-                            AllZone.GameAction.moveToGraveyard(c);
-                    	}
-                    } else {
-                        CardList landlist = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
-                        //AI will just land starve or land feed human.  Perhaps this could use overall card ranking
-                        if(landlist.size() >= 5 && !c.getType().contains("Land")) {
-                        	AllZone.GameAction.moveToGraveyard(c);
-                        }
-                        else if(landlist.size() < 5 && c.getType().contains("Land")) {
-                        	AllZone.GameAction.moveToGraveyard(c);
-                        }
-                        else if(lib.size() <= 5) {
-                        	AllZone.GameAction.moveToGraveyard(c);
-                        }
-                    }
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
-                    return libList.size() > 0;
-                }
-            };//SpellAbility
-            card.addSpellAbility(a1);
-            a1.setDescription(abCost+"Look at the top card of target player's library. You may put that card into that player's graveyard.");
-            a1.setStackDescription(cardName+" - Look at the top card of target player's library. You may put that card into that player's graveyard.");
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Force of Savagery")) {
+        if(cardName.equals("Force of Savagery")) {
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = 1603238129819160467L;
                 
