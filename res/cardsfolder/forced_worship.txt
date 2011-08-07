@@ -1,5 +1,5 @@
 Name:Forced Worship
-ManaCost:2 W
+ManaCost:1 W
 Types:Enchantment Aura
 Text:no text
 K:Enchant creature
