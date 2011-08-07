@@ -3,7 +3,7 @@ ManaCost:U
 Types:Instant
 Text:no text
 A:SP$ Draw | Cost$ U | NumCards$ 3 | SpellDescription$ Draw three cards, then put two cards from your hand on top of your library in any order. | SubAbility$ SVar=ChangeZoneDB
-SVar:ChangeZoneDB:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2
+SVar:ChangeZoneDB:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brainstorm.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/76.jpg
