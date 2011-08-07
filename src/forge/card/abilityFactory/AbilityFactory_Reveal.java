@@ -752,7 +752,7 @@ public class AbilityFactory_Reveal {
 		return scryTargetAI(af, sa);
 	}// scryTargetAI()
 
-	public static String scryStackDescription(AbilityFactory af, SpellAbility sa){
+	private static String scryStackDescription(AbilityFactory af, SpellAbility sa){
 		StringBuilder sb = new StringBuilder();
 
 		if (!(sa instanceof Ability_Sub))

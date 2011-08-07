@@ -270,13 +270,13 @@ public class AbilityFactory_CounterMagic {
 	private void counterResolve(final AbilityFactory af, final SpellAbility sa) {
 		
 		// TODO: Before this resolves we should see if any of our targets are still on the stack
-		Target tgt = sa.getTarget();
+		ArrayList<SpellAbility> sas;
 		
-		ArrayList<SpellAbility> sas = tgt.getTargetSAs();
-		
-		if (sas == null){
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			sas = tgt.getTargetSAs();
+		else
 			sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
-		}
 
         if(params.containsKey("ForgetOtherTargets"))
         {
@@ -316,23 +316,27 @@ public class AbilityFactory_CounterMagic {
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
-
-		sb.append("countering");
 		
-		ArrayList<SpellAbility> sas = sa.getTarget().getTargetSAs();
-		if (sas == null)
+		ArrayList<SpellAbility> sas;
+		
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			sas = tgt.getTargetSAs();
+		else
 			sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+		
+		sb.append("countering");
 		
 		boolean isAbility = false;
 		for(final SpellAbility tgtSA : sas){
 			sb.append(" ");
-			sb.append(tgtSA.getSourceCard().getName());
+			sb.append(tgtSA.getSourceCard());
 			isAbility = tgtSA.isAbility();
 			if(isAbility) sb.append("'s ability");
 		}
 		
 		if(isAbility && params.containsKey("DestroyPermanent")) {
-			sb.append(" and Destroy it");
+			sb.append(" and destroy it");
 		}
 		
 		sb.append(".");
