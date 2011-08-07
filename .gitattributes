@@ -7178,6 +7178,7 @@ res/cardsfolder/thoughtseize.txt -text svneol=native#text/plain
 res/cardsfolder/thoughtweft_gambit.txt svneol=native#text/plain
 res/cardsfolder/thousand_legged_kami.txt -text svneol=native#text/plain
 res/cardsfolder/thran_dynamo.txt -text svneol=native#text/plain
+res/cardsfolder/thran_forge.txt -text svneol=native#text/plain
 res/cardsfolder/thran_foundry.txt -text svneol=native#text/plain
 res/cardsfolder/thran_golem.txt -text svneol=native#text/plain
 res/cardsfolder/thran_quarry.txt -text svneol=native#text/plain

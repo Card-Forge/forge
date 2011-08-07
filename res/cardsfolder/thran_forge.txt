@@ -1,0 +1,10 @@
+Name:Thran Forge
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Animate | Cost$ 2 | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | Types$ Artifact | Power$ X | SpellDescription$ Until end of turn, target nonartifact creature gets +1/+0 and becomes an artifact in addition to its other types.
+SVar:X:Targeted$CardPower/Plus.1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_forge.jpg
+End
