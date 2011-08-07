@@ -827,7 +827,6 @@ public class AbilityFactory_DealDamage {
 
 	private void damageAllResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
 		Card card = sa.getSourceCard();
 
 		int dmg = getNumDamage(sa);

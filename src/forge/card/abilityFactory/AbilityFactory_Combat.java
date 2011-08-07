@@ -3,11 +3,9 @@ package forge.card.abilityFactory;
 import java.util.HashMap;
 
 import forge.AllZone;
-import forge.Card;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
@@ -174,8 +172,6 @@ public class AbilityFactory_Combat {
 	
 	public static void fogResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		Card card = sa.getSourceCard();
-		String DrawBack = params.get("SubAbility");
 		
 		// Expand Fog keyword here depending on what we need out of it.
 		AllZone.GameInfo.setPreventCombatDamageThisTurn(true);

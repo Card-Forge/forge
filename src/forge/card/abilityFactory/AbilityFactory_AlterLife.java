@@ -13,7 +13,6 @@ import forge.Constant;
 import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
-import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
@@ -284,7 +283,7 @@ public class AbilityFactory_AlterLife {
 			AbilityFactory.resolveSubAbility(sa);
 			return;
 		}
-		Card card = af.getHostCard();
+
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		ArrayList<Player> tgtPlayers;
 
@@ -564,7 +563,7 @@ public class AbilityFactory_AlterLife {
 			AbilityFactory.resolveSubAbility(sa);
 			return;
 		}
-		Card card = af.getHostCard();
+		
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		
 		ArrayList<Player> tgtPlayers;
@@ -723,7 +722,7 @@ public class AbilityFactory_AlterLife {
 	
 	private static void poisonResolve(final AbilityFactory af, final SpellAbility sa, int num){
 		HashMap<String,String> params = af.getMapParams();
-		Card card = af.getHostCard();
+
 		if (!AbilityFactory.checkConditional(params, sa)){
 			AbilityFactory.resolveSubAbility(sa);
 			return;
@@ -1078,7 +1077,6 @@ public class AbilityFactory_AlterLife {
 			return;
 		}
 		
-		Card card = af.getHostCard();
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		ArrayList<Player> tgtPlayers;
 

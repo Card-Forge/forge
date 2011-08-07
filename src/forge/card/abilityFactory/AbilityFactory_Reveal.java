@@ -16,7 +16,6 @@ import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
@@ -727,8 +726,7 @@ public class AbilityFactory_Reveal {
 
 	private static void scryResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-
-		Card source = sa.getSourceCard();
+		
 		int num = 1;
 		if (params.containsKey("ScryNum"))
 			num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);

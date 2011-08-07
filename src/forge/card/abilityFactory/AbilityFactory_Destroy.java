@@ -366,7 +366,7 @@ public class AbilityFactory_Destroy {
 
 	public static void destroyResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
+
 		final boolean noRegen = params.containsKey("NoRegen");
 		Card card = sa.getSourceCard();
 		
@@ -602,7 +602,7 @@ public class AbilityFactory_Destroy {
 	
 	public static void destroyAllResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
+
 		Card card = sa.getSourceCard();
 		
 		if (!AbilityFactory.checkConditional(params, sa)){

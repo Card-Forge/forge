@@ -274,7 +274,6 @@ public class AbilityFactory_Sacrifice {
 	public static void sacrificeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
-		String DrawBack = params.get("SubAbility");
 		
 		if (!AbilityFactory.checkConditional(params, sa)){
 			AbilityFactory.resolveSubAbility(sa);

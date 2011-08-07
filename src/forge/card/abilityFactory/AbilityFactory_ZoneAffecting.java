@@ -673,8 +673,6 @@ public class AbilityFactory_ZoneAffecting {
 			AbilityFactory.resolveSubAbility(sa);
 			return;
 		}
-		
-		Card source = sa.getSourceCard();
 
 		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 		

@@ -10,7 +10,6 @@ import forge.CardList;
 import forge.Constant;
 import forge.Counters;
 import forge.Player;
-import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
@@ -467,7 +466,6 @@ public class AbilityFactory_Mana {
 	// *************** Utility Functions **********************
 	
 	public static void doDrawback(AbilityFactory af, Ability_Mana abMana, Card card){
-		HashMap<String,String> params = af.getMapParams();
 		
 		// if mana production has any type of SubAbility, undoable=false
 		if (af.hasSubAbility()){

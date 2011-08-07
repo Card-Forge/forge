@@ -865,7 +865,6 @@ public class AbilityFactory_PermanentState {
 
 	private static void untapAllResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
 		Card card = sa.getSourceCard();
 
 		String Valid = "";
@@ -1007,7 +1006,6 @@ public class AbilityFactory_PermanentState {
 	
 	private static void tapAllResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
 		Card card = sa.getSourceCard();
 
 		String Valid = "";
