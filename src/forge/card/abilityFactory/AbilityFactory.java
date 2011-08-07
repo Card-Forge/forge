@@ -1393,25 +1393,40 @@ public class AbilityFactory {
             }
         };
         
+        final Command paidCommand = new Command() {
+            private static final long serialVersionUID = 8094833091127334678L;
+            
+            public void execute() {
+            	Ability_Sub abSub = sa.getSubAbility();
+				resolve(abSub);
+            }
+        };
+        
         final Command unpaidCommand = new Command() {
             private static final long serialVersionUID = 8094833091127334678L;
             
             public void execute() {
             	sa.resolve();
             	if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.HumanPlayer);
+            	Ability_Sub abSub = sa.getSubAbility();
+				resolve(abSub);
             }
         };
         
         if(payer.isHuman()) {
         	GameActionUtil.payManaDuringAbilityResolve(source + "\r\n", ability.getManaCost(), 
-        			Command.Blank, unpaidCommand);
+        			paidCommand, unpaidCommand);
         } else {
             if(ComputerUtil.canPayCost(ability)) {
             	ComputerUtil.playNoStack(ability); //Unless cost was payed - no resolve
+            	Ability_Sub abSub = sa.getSubAbility();
+				resolve(abSub);
             }
             else {
-                if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.ComputerPlayer);
                 sa.resolve();
+                if(params.containsKey("PowerSink")) GameActionUtil.doPowerSink(AllZone.ComputerPlayer);
+                Ability_Sub abSub = sa.getSubAbility();
+				resolve(abSub);
             }
         }
 	}
@@ -1423,14 +1438,15 @@ public class AbilityFactory {
 		
 		//check conditions
 		if (AbilityFactory.checkConditional(params, sa)) {
-			if (params.get("UnlessCost") == null)
+			if (params.get("UnlessCost") == null) {
 				sa.resolve();
+				
+				//try to resolve subabilities (see null check above)
+				Ability_Sub abSub = sa.getSubAbility();
+				resolve(abSub);
+			}
 			else passUnlessCost(sa);
 		}
-		
-		//try to resolve subabilities (see null check above)
-		Ability_Sub abSub = sa.getSubAbility();
-		resolve(abSub);
 	}
 	
 }//end class AbilityFactory
