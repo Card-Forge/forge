@@ -7909,6 +7909,7 @@ res/cardsfolder/vision_skeins.txt -text svneol=native#text/plain
 res/cardsfolder/visions.txt -text svneol=native#text/plain
 res/cardsfolder/vital_splicer.txt -text svneol=native#text/plain
 res/cardsfolder/vital_surge.txt -text svneol=native#text/plain
+res/cardsfolder/vitality_charm.txt svneol=native#text/plain
 res/cardsfolder/vitalize.txt -text svneol=native#text/plain
 res/cardsfolder/vitalizing_cascade.txt -text svneol=native#text/plain
 res/cardsfolder/vitalizing_wind.txt -text svneol=native#text/plain
