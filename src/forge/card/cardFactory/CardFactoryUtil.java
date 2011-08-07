@@ -1478,25 +1478,6 @@ public class CardFactoryUtil {
     	return onLeavesPlay;
     }//enPump_LeavesPlay
     
-    public static Ability getForbiddenOrchardAbility(final Card card, Player player)
-    {
-    	final Player opp = player;
-    	final Ability ability = new Ability(card,"0")
-    	{
-    		public void resolve()
-    		{
-    			makeToken("Spirit", "C 1 1 Spirit", opp, "", new String[] {
-                        "Creature", "Spirit"}, 1, 1, new String[] {""});
-    		}
-    	};
-    	StringBuilder sb = new StringBuilder();
-    	sb.append(card);
-    	sb.append(" - put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.");
-    	ability.setStackDescription(sb.toString());
-    	
-    	return ability;
-    }
-    
     public static SpellAbility enPumpCurse_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
     		final String[] spellDescription, final String[] stackDescription) {
     	

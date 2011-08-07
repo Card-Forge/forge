@@ -567,26 +567,4 @@ public class ComputerUtil_Attack2 {
 		return false; // don't attack
 	}
 
-	//
-	public static Combat getAttackers(CardList attackerPermanents, CardList defenderPermanents) {
-
-		Combat combat = new Combat();
-		CardList attackerCreatures = attackerPermanents.getType("Creature");
-		CardList attackersLeft = new CardList(); //keeps track of all undecided attackers
-		CardList plannedBlockers = new CardList(); //creatures that should be held back to block
-
-		CardList humanBlockers = new CardList();
-
-		for(Card c:defenderPermanents) {
-			if(c.isCreature() && CombatUtil.canBlock(c)) humanBlockers.add(c);
-		}
-
-		for(Card c:attackerCreatures) {
-			if(CombatUtil.canAttack(c, combat)) attackersLeft.add(c);
-			else if(CombatUtil.canBlock(c)) plannedBlockers.add(c);
-		}
-
-		return combat;
-	}
-
 }//end class ComputerUtil_Attack2
