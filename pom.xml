@@ -47,18 +47,42 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:hg:https://cardforge.googlecode.com/</connection>
-        <developerConnection>scm:hg:https://cardforge.googlecode.com/</developerConnection>
+        <connection>scm:svn:https://cardforge.googlecode.com/</connection>
+        <developerConnection>scm:svn:https://cardforge.googlecode.com/</developerConnection>
     </scm>
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>maven-replacer-plugin</artifactId>
+                <version>1.3.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>build/forge.sh</file>
+                    <outputFile>
+                        ${project.build.directory}/forge.sh
+                    </outputFile>
+                    <regex>false</regex>
+                    <replacements>
+                        <replacement>
+                            <token>$project.build.finalName$</token>
+                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <finalName>run-forge</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
@@ -93,9 +117,10 @@
                         </goals>
                         <configuration>
                             <headerType>gui</headerType>
-                            <outfile>target/forge.exe</outfile>
-                            <jar>target/run-forge.jar</jar>
+                            <outfile>${project.build.directory}/forge.exe</outfile>
+                            <jar>${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar</jar>
                             <errTitle>forge</errTitle>
+                            <icon>${basedir}/build/forge.ico</icon>
                             <classPath>
                                 <mainClass>forge.Gui_NewGame</mainClass>
                                 <addDependencies>false</addDependencies>
@@ -154,7 +179,7 @@
                                             vmoptions="-Xmx1024m"
                                             shortname="${project.name}"
                                             workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
-                                            jar="${project.build.directory}/run-forge.jar">
+                                            jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
                                     <javafileset dir="${basedir}" includes="*.properties"/>
                                     <javafileset dir="${basedir}" includes="res/**"/>
                                     <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
@@ -181,14 +206,15 @@
                                 <!-- Windows/Linux archive -->
                                 <mkdir dir="${project.build.directory}/${project.build.finalName}"/>
                                 <copy todir="${project.build.directory}/${project.build.finalName}">
-                                    <fileset dir="${basedir}/build" includes="forge.sh"/>
+                                    <fileset dir="${project.build.directory}" includes="forge.sh"/>
                                     <fileset dir="${basedir}" includes="forge.properties"/>
                                     <fileset dir="${basedir}" includes="LICENSE.txt"/>
                                     <fileset dir="${basedir}" includes="README.txt"/>
                                     <fileset dir="${basedir}" includes="CHANGES.txt"/>
                                     <fileset dir="${basedir}" includes="res/**"/>
                                     <fileset dir="${project.build.directory}" includes="forge.exe"/>
-                                    <fileset dir="${project.build.directory}" includes="run-forge.jar"/>
+                                    <fileset dir="${project.build.directory}"
+                                             includes="${project.build.finalName}-jar-with-dependencies.jar"/>
                                 </copy>
                                 <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh"
                                        perm="a+rx"/>
@@ -251,7 +277,33 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.1.2</version>
             </plugin>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>attach-distribution</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}.tar.bz2</file>
+                                    <type>tar.bz2</type>
+                                </artifact>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}.osx.tar.bz2</file>
+                                    <classifier>osx</classifier>
+                                    <type>tar.bz2</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>
@@ -346,12 +398,20 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>arcane-maven-repo</id>
+            <name>Arcane</name>
+            <url>http://arcane.googlecode.com/svn/trunk/repository</url>
+        </repository>
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>arcane-maven-repo</id>
             <name>Arcane Maven Repository</name>
             <layout>default</layout>
-            <url>http://arcane.googlecode.com/hg/repository</url>
+            <url>http://arcane.googlecode.com/svn/trunk/repository</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -363,7 +423,7 @@
             <id>arcane-maven-repo</id>
             <name>Arcane Maven Repository</name>
             <layout>default</layout>
-            <url>http://arcane.googlecode.com/hg/repository</url>
+            <url>http://arcane.googlecode.com/svn/trunk/repository</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -414,7 +474,7 @@
                                                     vmoptions="-Xmx1024m"
                                                     shortname="${project.name}"
                                                     workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
-                                                    jar="${project.build.directory}/run-forge.jar">
+                                                    jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
                                             <javafileset dir="${basedir}" includes="*.properties"/>
                                             <javafileset dir="${basedir}" includes="res/**"/>
                                             <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
@@ -440,5 +500,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>
