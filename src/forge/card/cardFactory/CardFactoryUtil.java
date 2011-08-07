@@ -2063,8 +2063,7 @@ public class CardFactoryUtil {
     }
     
     public static boolean multipleControlled(Card c) {
-        PlayerZone play = AllZone.getZone(c);
-        CardList list = new CardList(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
         list.remove(c);
         
         return list.containsName(c.getName());

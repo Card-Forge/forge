@@ -117,7 +117,6 @@ public class CardFactory implements NewConstants {
     private void readCards(File file) {
         map.clear();
         
-        //ReadCard read = new ReadCard(ForgeProps.getFile(CARDS));
         ReadCard read = new ReadCard(ForgeProps.getFile(CARDSFOLDER));
         try {
             read.run();
