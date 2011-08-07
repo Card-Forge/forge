@@ -7196,6 +7196,7 @@ res/cardsfolder/thran_dynamo.txt -text svneol=native#text/plain
 res/cardsfolder/thran_forge.txt svneol=native#text/plain
 res/cardsfolder/thran_foundry.txt -text svneol=native#text/plain
 res/cardsfolder/thran_golem.txt -text svneol=native#text/plain
+res/cardsfolder/thran_lens.txt -text svneol=native#text/plain
 res/cardsfolder/thran_quarry.txt -text svneol=native#text/plain
 res/cardsfolder/thran_war_machine.txt -text svneol=native#text/plain
 res/cardsfolder/thrashing_mudspawn.txt -text svneol=native#text/plain

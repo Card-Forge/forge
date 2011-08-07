@@ -33,6 +33,7 @@ public class StaticEffect {
 	
 	//for colors
 	private	String				colorDesc 							= "";
+	private boolean				overwriteColors						= false;
 	private	HashMap<Card, Long>	timestamps							= new HashMap<Card, Long>();
 	
 	
@@ -265,6 +266,15 @@ public class StaticEffect {
 
 	public void setColorDesc(String colorDesc) {
 		this.colorDesc = colorDesc;
+	}
+	
+	//overwrite color
+	public boolean isOverwriteColors() {
+		return overwriteColors;
+	}
+
+	public void setOverwriteColors(boolean overwriteColors) {
+		this.overwriteColors = overwriteColors;
 	}
     
     public HashMap<Card, Long> getTimestamps() {

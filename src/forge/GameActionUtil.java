@@ -7376,6 +7376,12 @@ public class GameActionUtil {
 		                 	
 		                 	String colors = "";
 		                 	if(!k[4].equalsIgnoreCase("no colors")) {
+		                 		colors = k[4];
+		                 		if(colors.contains(",Overwrite") || colors.contains("Overwrite")) {
+		                 			colors.replace(",Overwrite","");
+		                 			colors.replace("Overwrite","");
+		                 			se.setOverwriteColors(true);
+		                 		}
 		                 		colors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(k[4].split(","))));
 		                 	}
 		                 	
@@ -7470,7 +7476,7 @@ public class GameActionUtil {
 					//TODO - adding SpellAbilities statically here not supported at this time
 				}
 				
-				long t = affectedCard.addColor(colors, affectedCard, true, true);
+				long t = affectedCard.addColor(colors, affectedCard, !se.isOverwriteColors(), true);
 				se.addTimestamp(affectedCard, t);
 			}//end for
 		}
@@ -7538,7 +7544,7 @@ public class GameActionUtil {
 				//TODO - adding SpellAbilities statically here not supported at this time
 			}
 			
-			affectedCard.removeColor(se.getColorDesc(), affectedCard, true, se.getTimestamp(affectedCard));
+			affectedCard.removeColor(se.getColorDesc(), affectedCard, !se.isOverwriteColors(), se.getTimestamp(affectedCard));
 		}//end removeStaticEffects
 		
 		// Special Conditions
