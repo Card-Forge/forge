@@ -196,6 +196,7 @@ public class AbilityFactory_DealDamage {
 		if (!ComputerUtil.canPayCost(saMe))
 			return false;
 		
+		Cost abCost = AF.getAbCost();
 		Card source = saMe.getSourceCard();
 		
 		int dmg = 0;
@@ -209,9 +210,13 @@ public class AbilityFactory_DealDamage {
 		boolean rr = AF.isSpell();
 
 		// temporarily disabled until better AI
-		if (AF.getAbCost().getSacCost())    {
-			if(AF.getHostCard().isCreature() && AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
-				return false;
+		if (abCost.getSacCost() && !abCost.getSacThis() && AllZone.HumanPlayer.getLife() - dmg > 0){
+			//only sacrifice something that's supposed to be sacrificed 
+			String sacType = abCost.getSacType();
+		    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+		    typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
+		    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+		    	return false;
 		}
 		if (AF.getAbCost().getSubCounter())  {
 			// +1/+1 counters only if damage from this ability would kill the human, otherwise ok

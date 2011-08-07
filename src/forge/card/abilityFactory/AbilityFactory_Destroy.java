@@ -141,8 +141,13 @@ public class AbilityFactory_Destroy {
 
 		if (abCost != null){
 			// AI currently disabled for some costs
-			if (abCost.getSacCost() && source.isCreature()){ 
-				return false;
+			if (abCost.getSacCost() && !abCost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String sacType = abCost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
+			    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+			    	return false;
 			}
 			if (abCost.getLifeCost()){
 				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)

@@ -205,8 +205,13 @@ public class AbilityFactory_Counters {
 
 		if (abCost != null){
 			// AI currently disabled for these costs
-			if (abCost.getSacCost()){ 
-				return false;
+			if (abCost.getSacCost() && !abCost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String sacType = abCost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
+			    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+			    	return false;
 			}
 			if (abCost.getLifeCost())	 return false;
 			if (abCost.getDiscardCost()) return false;
@@ -661,8 +666,13 @@ public class AbilityFactory_Counters {
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
-			if (abCost.getSacCost()){ 
-				return false;
+			if (abCost.getSacCost() && !abCost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String sacType = abCost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
+			    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+			    	return false;
 			}
 			if (abCost.getLifeCost())	 return false;
 			if (abCost.getDiscardCost()) return false;

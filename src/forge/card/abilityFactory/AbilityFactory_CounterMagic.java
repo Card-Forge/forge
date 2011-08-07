@@ -17,6 +17,7 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -143,8 +144,26 @@ public class AbilityFactory_CounterMagic {
 
 	private boolean counterCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		boolean toReturn = true;
+		Cost abCost = af.getAbCost();
+		final Card source = sa.getSourceCard();
 		if(AllZone.Stack.size() < 1) {
 			return false;
+		}
+		
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost() && !abCost.getSacThis()){
+				//only sacrifice something that's supposed to be sacrificed 
+				String type = abCost.getSacType();
+			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
+			    if(ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
+			    	return false;
+			}
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
 		}
 		
 		SpellAbility topSA = AllZone.Stack.peek();
@@ -155,11 +174,9 @@ public class AbilityFactory_CounterMagic {
 		tgt.resetTargets();
 		if (Target_Selection.matchSpellAbility(sa, topSA, tgt))
 			tgt.addTarget(topSA);
-		
 		else
 			return false;
 		
-		Card source = sa.getSourceCard();
 		if (unlessCost != null){
 			// Is this Usable Mana Sources? Or Total Available Mana?
 			int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.HumanPlayer);
