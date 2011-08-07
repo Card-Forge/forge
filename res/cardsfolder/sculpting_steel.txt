@@ -1,0 +1,7 @@
+Name:Sculpting Steel
+ManaCost:3
+Types:Artifact
+Text:You may have CARDNAME enter the battlefield as a copy of any artifact on the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sculpting_steel.jpg
+End

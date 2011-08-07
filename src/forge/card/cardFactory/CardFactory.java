@@ -31,8 +31,11 @@ import forge.HandSizeOp;
 import forge.Player;
 import forge.PlayerZone;
 import forge.ReadCard;
+
 import forge.card.abilityFactory.AbilityFactory;
+
 import forge.card.mana.ManaCost;
+
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Mana;
@@ -43,11 +46,16 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.spellability.Target;
+
 import forge.card.trigger.Trigger;
+
 import forge.error.ErrorViewer;
+
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
+import forge.gui.input.Input_PayManaCost;
+
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -2863,6 +2871,101 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription(card+" - Each creature deals damage equal to its power to the other.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Copy Artifact") || cardName.equals("Sculpting Steel")) {
+        	final CardFactory cfact = this;
+        	final Card[] copyTarget = new Card[1];
+        	final Card[] cloned = new Card[1];
+        	
+        	final Command leaves = new Command() {
+				private static final long serialVersionUID = 6212378498863558380L;
+
+				public void execute() {
+                    //Slight hack if the cloner copies a card with triggers
+                    AllZone.TriggerHandler.removeAllFromCard(cloned[0]);
+                    
+                    Card orig = cfact.getCard(card.getName(), card.getController());
+                    PlayerZone dest = AllZone.getZone(card.getCurrentlyCloningCard());
+                    AllZone.GameAction.moveTo(dest, orig);
+                    dest.remove(card.getCurrentlyCloningCard());
+
+                }
+            };
+        	
+        	final SpellAbility copy = new Spell(card) {
+				private static final long serialVersionUID = 4236580139968159802L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			CardList arts = AllZoneUtil.getTypeInPlay("Artifact");
+					return !arts.isEmpty();
+        		}
+
+				@Override
+                public void resolve() {
+					if (card.getController().isComputer()) {
+						CardList arts = AllZoneUtil.getTypeInPlay("Artifact");
+						if(!arts.isEmpty()) {
+							copyTarget[0] = CardFactoryUtil.AI_getBestArtifact(arts);
+						}
+					}
+					
+					if (copyTarget[0] != null) {
+						cloned[0] = CardFactory.copyStats(copyTarget[0]);
+						cloned[0].setOwner(card.getController());
+						cloned[0].setController(card.getController());
+						if(cardName.equals("Copy Artifact")) cloned[0].addType("Enchantment");
+						cloned[0].setCloneOrigin(card);
+						cloned[0].addLeavesPlayCommand(leaves);
+						cloned[0].setCloneLeavesPlayCommand(leaves);
+						cloned[0].setCurSetCode(copyTarget[0].getCurSetCode());
+						cloned[0].setImageFilename(copyTarget[0].getImageFilename());
+						
+						for(SpellAbility sa : copyTarget[0].getSpellAbilities()) {
+							cloned[0].addSpellAbility(sa);
+						}
+						
+						//Slight hack in case the cloner copies a card with triggers
+						for(Trigger t : cloned[0].getTriggers())
+						{
+							AllZone.TriggerHandler.registerTrigger(t);
+						}
+						
+						AllZone.GameAction.moveToPlay(cloned[0]);
+						card.setCurrentlyCloningCard(cloned[0]);
+					}
+                }
+            };//SpellAbility
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 8117808324791871452L;
+
+				@Override
+            	public void showMessage() {
+            		AllZone.Display.showMessage(cardName+" - Select an artifact on the battlefield");
+            		ButtonUtil.enableOnlyCancel();
+            	}
+				
+				@Override
+				public void selectButtonCancel() { stop(); }
+            	
+            	@Override
+            	public void selectCard(Card c, PlayerZone z) {
+            		if( z.is(Constant.Zone.Battlefield) && c.isArtifact()) {
+            			copyTarget[0] = c;
+            			stopSetNext(new Input_PayManaCost(copy));
+            		}
+            	}
+            };
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            card.addSpellAbility(copy);
+            copy.setStackDescription(cardName+" - enters the battlefield as a copy of selected card.");
+            copy.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         
 
         return postFactoryKeywords(card);
