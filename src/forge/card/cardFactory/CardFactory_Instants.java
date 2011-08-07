@@ -456,35 +456,6 @@ public class CardFactory_Instants {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Hidetsugu's Second Rite")) {
-        	Target t = new Target(card, "Select target player", "Player");
-        	Cost cost = new Cost("3 R", cardName, false);
-            final SpellAbility spell = new Spell(card, cost, t) {
-                private static final long serialVersionUID = 176857775451818523L;
-                
-                @Override
-                public void resolve() {
-                    if(getTargetPlayer().getLife() == 10) {
-                    	getTargetPlayer().addDamage(10, card);
-                    }
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.HumanPlayer.getLife() == 10;
-                }
-                
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
         
 
         //*************** START *********** START **************************
@@ -789,36 +760,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Tithe")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 1504792204536793942L;
-                
-                public boolean oppMoreLand() {
-                	Player player = card.getController();
-                    CardList self = AllZoneUtil.getPlayerLandsInPlay(player);
-                    CardList opp = AllZoneUtil.getPlayerLandsInPlay(player.getOpponent());
-                    
-                    return (self.size() < opp.size()); // && super.canPlay();
-                }//oppoMoreLand()
-                
-                @Override
-                public void resolve() {
-                    CardList plains = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
-                    plains = plains.getType("Plains");
-                    
-                    if(0 < plains.size()) AllZone.GameAction.moveToHand(plains.get(0));
-                    
-                    if(oppMoreLand() && 1 < plains.size()) AllZone.GameAction.moveToHand(plains.get(1));
-                    
-                }//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-          
+                  
         
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Courage"))
