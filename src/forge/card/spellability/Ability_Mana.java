@@ -93,11 +93,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         	source.setBounceAtUntap(true);
         }
         
-        if (source.getName().equals("Forbidden Orchard")) {
-        	this.undoable = false;
-        	AllZone.Stack.addSimultaneousStackEntry(CardFactoryUtil.getForbiddenOrchardAbility(source, getActivatingPlayer().getOpponent()));
-        }
-        
         if(AllZoneUtil.isCardInPlay("Mirari's Wake", source.getController())) {
         	CardList list = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Mirari's Wake");
         	ArrayList<String> colors = new ArrayList<String>();

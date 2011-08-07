@@ -677,10 +677,6 @@ public class ComputerUtil
 					  sourceLand.setBounceAtUntap(true);
 				  }
 
-				  if (sourceLand.getName().equals("Forbidden Orchard")) {
-					  AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(sourceLand, AllZone.HumanPlayer));
-				  }
-
 				  if(sourceLand.getName().equals("Rainbow Vale")) {
 					  sourceLand.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
 				  }
