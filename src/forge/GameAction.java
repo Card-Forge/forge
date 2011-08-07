@@ -511,14 +511,14 @@ public class GameAction {
         			if(c.isCreature()) c.unEquipCard(equippedCreature);
         		}//if isEquipping()
 
-        		if(c.isAura()) {
-        			for(int i = 0; i < c.getEnchanting().size(); i++) {
+        		if (c.isAura()) {
+        			for (int i = 0; i < c.getEnchanting().size(); i++) {
         				Card perm = c.getEnchanting().get(i);
-        				if(!AllZoneUtil.isCardInPlay(perm)
+        				if (!AllZoneUtil.isCardInPlay(perm)
         						|| CardFactoryUtil.hasProtectionFrom(c, perm)
-        						|| ((c.getKeyword().contains("Enchant creature") || c.getKeyword().contains("Enchant tapped creature") ) 
+        						|| ((c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant tapped creature") ) 
         								&& !perm.getType().contains("Creature"))
-        								|| (c.getKeyword().contains("Enchant tapped creature") && perm.isUntapped() ) ) {
+        								|| (c.hasKeyword("Enchant tapped creature") && perm.isUntapped() ) ) {
         					c.unEnchantCard(perm);
         					//changed from destroy (and rules-wise, I don't think it's a sacrifice)
         					moveToGraveyard(c);
@@ -526,12 +526,14 @@ public class GameAction {
         			}
         		}//if isAura
 
-        		if(c.isCreature() && c.getNetDefense() <= c.getDamage() && !c.getKeyword().contains("Indestructible")) {
+        		if (c.isCreature() 
+        				&& c.getNetDefense() <= c.getDamage() 
+        				&& !c.hasKeyword("Indestructible")) {
         			destroy(c);
         			AllZone.Combat.removeFromCombat(c); //this is untested with instants and abilities but required for First Strike combat phase
         		}
 
-        		else if(c.isCreature() && c.getNetDefense() <= 0) {
+        		else if (c.isCreature() && c.getNetDefense() <= 0) {
         			destroy(c);
         			AllZone.Combat.removeFromCombat(c);
         		}
@@ -601,7 +603,7 @@ public class GameAction {
     }
     
     public boolean destroyNoRegeneration(Card c) {
-        if(!AllZoneUtil.isCardInPlay(c) || c.getKeyword().contains("Indestructible")) return false;
+        if (!AllZoneUtil.isCardInPlay(c) || c.hasKeyword("Indestructible")) return false;
         
         if (c.isEnchanted())
         {
@@ -610,7 +612,7 @@ public class GameAction {
         	{
         		public boolean addCard(Card crd)
         		{
-        			return crd.getKeyword().contains("Totem armor");
+        			return crd.hasKeyword("Totem armor");
         		}
         	});
         	CardListUtil.sortCMC(list);
@@ -689,7 +691,7 @@ public class GameAction {
         if (!(owner.isComputer() || owner.isHuman()))
         		throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
         
-        boolean persist = (c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0);
+        boolean persist = (c.hasKeyword("Persist") && c.getCounters(Counters.M1M1) == 0);
 
         Card newCard = moveToGraveyard(c);
         
@@ -725,10 +727,11 @@ public class GameAction {
     
    
     public boolean destroy(Card c) {
-        if(!AllZoneUtil.isCardInPlay(c)
-                || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return false;        
+        if (!AllZoneUtil.isCardInPlay(c)
+                || (c.hasKeyword("Indestructible") 
+                		&& (!c.isCreature() || c.getNetDefense() > 0))) return false;        
         
-        if(c.canBeShielded() && c.getShield() > 0) {
+        if (c.canBeShielded() && c.getShield() > 0) {
             c.subtractShield();
             c.setDamage(0);
             c.tap();
@@ -743,7 +746,7 @@ public class GameAction {
         	{
         		public boolean addCard(Card crd)
         		{
-        			return crd.getKeyword().contains("Totem armor");
+        			return crd.hasKeyword("Totem armor");
         		}
         	});
         	CardListUtil.sortCMC(list);

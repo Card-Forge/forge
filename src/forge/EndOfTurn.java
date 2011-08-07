@@ -31,15 +31,15 @@ public class EndOfTurn implements java.io.Serializable
 
 		AllZone.StaticEffects.rePopulateStateBasedList();
 
-		for(Card c : all) {
-			if(!c.isFaceDown()
-					&& c.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME."))
+		for (Card c : all) {
+			if (!c.isFaceDown()
+					&& c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME."))
 			{
 				final Card card = c;
 				final SpellAbility sac = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
+						if (AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
 					}
 				};
 				StringBuilder sb = new StringBuilder();
@@ -49,12 +49,13 @@ public class EndOfTurn implements java.io.Serializable
 				AllZone.Stack.addSimultaneousStackEntry(sac);
 
 			}
-			if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")) {
+			if (!c.isFaceDown() 
+					&& c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
 				final Card card = c;
 				final SpellAbility exile = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.exile(card);
+						if (AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.exile(card);
 					}
 				};
 				StringBuilder sb = new StringBuilder();
@@ -64,12 +65,13 @@ public class EndOfTurn implements java.io.Serializable
 				AllZone.Stack.addSimultaneousStackEntry(exile);
 
 			}
-			if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")) {
+			if (!c.isFaceDown() 
+					&& c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
 				final Card card = c;
 				final SpellAbility destroy = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
+						if (AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
 					}
 				};
 				StringBuilder sb = new StringBuilder();
@@ -80,13 +82,13 @@ public class EndOfTurn implements java.io.Serializable
 
 			}
 			//Berserk is using this, so don't check isFaceDown()
-			if(c.getKeyword().contains("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
-				if(c.getCreatureAttackedThisTurn()) {
+			if (c.hasKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
+				if (c.getCreatureAttackedThisTurn()) {
 					final Card card = c;
 					final SpellAbility sac = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-							if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
+							if (AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
 						}
 					};
 					StringBuilder sb = new StringBuilder();
@@ -100,12 +102,12 @@ public class EndOfTurn implements java.io.Serializable
 					c.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
 				}
 			}
-			if( c.getKeyword().contains("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
+			if ( c.hasKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
 				final Card vale = c;
 				final SpellAbility change = new Ability(vale, "0") {
 					@Override
 					public void resolve() {
-						if(AllZoneUtil.isCardInPlay(vale)) {
+						if (AllZoneUtil.isCardInPlay(vale)) {
 							AllZone.GameAction.changeController(new CardList(vale), vale.getController(), vale.getController().getOpponent());
 
 							vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
