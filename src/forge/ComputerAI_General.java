@@ -323,9 +323,8 @@ public class ComputerAI_General implements Computer {
     		return;
     	}
     	
-    	SpellAbility topSA = AllZone.Stack.peek();
     	// if top of stack is owned by me
-    	if (topSA.getActivatingPlayer().isComputer()){
+    	if (AllZone.Stack.peekInstance().getActivatingPlayer().isComputer()){
     		// probably should let my stuff resolve to force Human to respond to it
     		AllZone.Phase.passPriority();
     		return;

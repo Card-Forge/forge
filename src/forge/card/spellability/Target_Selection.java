@@ -70,99 +70,73 @@ public class Target_Selection {
 				Target_Selection ts = new Target_Selection(abSub.getTarget(), abSub);
 				ts.setRequirements(req);
 				ts.resetTargets();
-				boolean flag = ts.chooseTargets();
-
-				return flag;
+				return ts.chooseTargets();
 			}
 		}
-		
-		//targets still needed
-		boolean mandatoryTarget = target.getMandatory() ? target.hasCandidates() : false;
-		
-		AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req, mandatoryTarget));
+
+		chooseValidInput();
 
         return false;
 	}
 
     // these have been copied over from CardFactoryUtil as they need two extra parameters for target selection.
 	// however, due to the changes necessary for SA_Requirements this is much different than the original
-    public static Input input_targetValid(final SpellAbility sa, final String[] Tgts, final String message, 
-    		final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory)
-    {
-    	Input target = new Input() {
-			private static final long serialVersionUID = -2397096454771577476L;
 
-			@Override
-	        public void showMessage() {
-				Target tgt = select.getTgt();
-				String zone = tgt.getZone();
-				
-				if (zone.equals(Constant.Zone.Stack)){
-					// If Zone is Stack, the choices are handled slightly differently
-					stopSetNext(input_cardFromStack(sa, message, select, req, mandatory));
-					return;
-				}
-				
-				CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(Tgts, sa.getActivatingPlayer(), sa.getSourceCard());
-				
-				// Remove cards already targeted
-				ArrayList<Card> targeted = tgt.getTargetCards();
-				for(Card c : targeted){
-					if (choices.contains(c))
-						choices.remove(c);
-				}
-				
-				if (zone.equals(Constant.Zone.Battlefield)){
-		            boolean canTargetPlayer = false;
-		            boolean canTargetOpponent = false;
-		            for(String s : Tgts){
-		            	
-		            	if (s.equalsIgnoreCase("Player"))
-		            		canTargetPlayer = true;
-		            	if (s.equalsIgnoreCase("Opponent"))
-		            		canTargetOpponent = true;
-		            }
-	
-		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req, mandatory));
-				}
-				else{
-					stopSetNext(input_cardFromList(sa, choices, message, true, select, req, mandatory));
-				}
-	        }
-    	};
-    	
-        return target;
+	public void chooseValidInput(){
+		Target tgt = this.getTgt();
+		String zone = tgt.getZone();
+		final boolean mandatory = target.getMandatory() ? target.hasCandidates() : false;
+		
+		if (zone.equals(Constant.Zone.Stack)){
+			// If Zone is Stack, the choices are handled slightly differently
+			chooseCardFromStack(mandatory);
+			return;
+		}
+		
+		CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(target.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard());
+		
+		// Remove cards already targeted
+		ArrayList<Card> targeted = tgt.getTargetCards();
+		for(Card c : targeted){
+			if (choices.contains(c))
+				choices.remove(c);
+		}
+		
+		if (zone.equals(Constant.Zone.Battlefield)){
+			AllZone.InputControl.setInput(input_targetSpecific(choices, true, mandatory));
+		}
+		else
+			chooseCardFromList(choices, true, mandatory);
     }//input_targetValid
 
     //CardList choices are the only cards the user can successful select
-    public static Input input_targetSpecific(final SpellAbility sa, final CardList choices, final String message, 
-    		final boolean targeted, final boolean bTgtPlayer, final boolean bTgtOpponent, final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory) {
-        Input target = new Input() {
+    public Input input_targetSpecific(final CardList choices, final boolean targeted, final boolean mandatory) {
+    	final SpellAbility sa = this.ability;
+    	final Target_Selection select = this;	
+		final Target tgt = this.target;
+		final SpellAbility_Requirements req = this.req;
+
+    	Input target = new Input() {
 			private static final long serialVersionUID = -1091595663541356356L;
 
 			@Override
-            public void showMessage() {
-				// TODO: Update choices here, remove anything already targeted
-				
+            public void showMessage() {	
 				StringBuilder sb = new StringBuilder();
 				sb.append("Targeted: ");
-				sb.append(select.getTgt().getTargetedString());
+				sb.append(tgt.getTargetedString());
 				sb.append("\n");
-				sb.append(message);
+				sb.append(tgt.getVTSelection());
 				
-                AllZone.Display.showMessage(sb.toString());
-                
-                Target t = select.getTgt();
+                AllZone.Display.showMessage(sb.toString());     
+               
                 // If reached Minimum targets, enable OK button
-                if (t.getMinTargets(sa.getSourceCard(), sa) > t.getNumTargeted())
+                if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa))
                 	ButtonUtil.enableOnlyCancel();
                 else
                 	ButtonUtil.enableAll();
                 
                 if(mandatory)
-                {
                 	ButtonUtil.disableCancel();
-                }
             }
             
             @Override
@@ -180,22 +154,23 @@ public class Target_Selection {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
+            	// leave this in temporarily, there some seriously wrong things going on here
                 if(targeted && !CardFactoryUtil.canTarget(sa, card)) {
                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } 
                 else if(choices.contains(card)) {
-                	select.getTgt().addTarget(card);
+                	tgt.addTarget(card);
                     done();
                 }
             }//selectCard()
             
             @Override
             public void selectPlayer(Player player) {
-            	if ((bTgtPlayer || (bTgtOpponent && player.equals(sa.getActivatingPlayer().getOpponent()))) && 
-	            	player.canTarget(sa.getSourceCard())){
-	            		select.getTgt().addTarget(player);
-		                done();
-	            	}
+            	if ((tgt.canTgtPlayer() || (tgt.canOnlyTgtOpponent() && player.equals(sa.getActivatingPlayer().getOpponent()))) && 
+	               player.canTarget(sa.getSourceCard())){
+            		tgt.addTarget(player);
+            		done();
+	            }
             }
             
             void done() {
@@ -209,86 +184,65 @@ public class Target_Selection {
     }//input_targetSpecific()
     
     
-    public static Input input_cardFromList(final SpellAbility sa, final CardList choices, final String message, 
-    		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory){
+    public void chooseCardFromList(final CardList choices, boolean targeted, final boolean mandatory){
     	// Send in a list of valid cards, and popup a choice box to target 
 		final Card dummy = new Card();
 		dummy.setName("[FINISH TARGETING]");
+    	final SpellAbility sa = this.ability;
+    	final String message = this.target.getVTSelection();
+		
+    	Target tgt = this.getTgt();
     	
-	    Input target = new Input() {
-	        private static final long serialVersionUID = 9027742835781889044L;
-	        
-	        @Override
-	        public void showMessage() {
-	        	Target tgt = select.getTgt();
-	        	
-	        	CardList choicesWithDone = choices;
-	        	if (tgt.isMinTargetsChosen(sa.getSourceCard(), sa)){
-	        		// is there a more elegant way of doing this?
-	        		choicesWithDone.add(dummy);
-	        	}
-	            Object check = GuiUtils.getChoiceOptional(message, choicesWithDone.toArray());
-	            if(check != null) {
-	            	Card c = (Card) check;
-	            	if (c.equals(dummy))
-	            		select.setDoneTarget(true);
-	            	else
-	            		tgt.addTarget(c);
-	            }
-	            else
-	            	select.setCancel(true);
-	            
-	            done();
-	        }//showMessage()
-	        
-	        public void done(){
-                stop();
-                select.chooseTargets();
-	        }
-	    };//Input
-
-	    return target;
+    	CardList choicesWithDone = choices;
+    	if (tgt.isMinTargetsChosen(sa.getSourceCard(), sa)){
+    		// is there a more elegant way of doing this?
+    		choicesWithDone.add(dummy);
+    	}
+        Object check = GuiUtils.getChoiceOptional(message, choicesWithDone.toArray());
+        if(check != null) {
+        	Card c = (Card) check;
+        	if (c.equals(dummy))
+        		this.setDoneTarget(true);
+        	else
+        		tgt.addTarget(c);
+        }
+        else
+        	this.setCancel(true);
+        
+        this.chooseTargets();
     }
     
-    public static Input input_cardFromStack(final SpellAbility sa, final String message,
-    		final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory){
-    	
-    	Input targetOnStack = new Input() {
-			private static final long serialVersionUID = 5360660530175041997L;
-	
-			@Override
-			public void showMessage() {
-				// Find what's targetable, then allow human to choose 
-				ArrayList<SpellAbility> choosables = getTargetableOnStack(sa, select.getTgt());
+    public void chooseCardFromStack(final boolean mandatory){
+    	Target tgt = this.target;
+    	String message = tgt.getVTSelection();
+		Target_Selection select = this;
+    		
+		// Find what's targetable, then allow human to choose 
+		ArrayList<SpellAbility> choosables = getTargetableOnStack(this.ability, select.getTgt());
 
-				HashMap<String,SpellAbility> map = new HashMap<String,SpellAbility>();
-	
-				for(SpellAbility sa : choosables) {
-					map.put(sa.getStackDescription(),sa);
-				}
-	
-				String[] choices = new String[map.keySet().size()];
-				choices = map.keySet().toArray(choices);
-	
-				if (choices.length == 0){
-					select.setCancel(true);
-				}
-				else{
-					String madeChoice = GuiUtils.getChoiceOptional(message, choices);
-		
-					if (madeChoice != null){
-						Target tgt = select.getTgt();
-						tgt.addTarget(map.get(madeChoice));
-					}
-					else
-						select.setCancel(true);
-				}
-				
-				stop();
-				req.finishedTargeting();
-			}//showMessage()
-    	};
-    	return targetOnStack;
+		HashMap<String,SpellAbility> map = new HashMap<String,SpellAbility>();
+
+		for(SpellAbility sa : choosables) {
+			map.put(sa.getStackDescription(),sa);
+		}
+
+		String[] choices = new String[map.keySet().size()];
+		choices = map.keySet().toArray(choices);
+
+		if (choices.length == 0){
+			select.setCancel(true);
+		}
+		else{
+			String madeChoice = GuiUtils.getChoiceOptional(message, choices);
+
+			if (madeChoice != null){
+				tgt.addTarget(map.get(madeChoice));
+			}
+			else
+				select.setCancel(true);
+		}
+
+		select.chooseTargets();
     }
     
     // TODO: The following three functions are Utility functions for TargetOnStack, probably should be moved
@@ -297,7 +251,7 @@ public class Target_Selection {
 		ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
 
 		for(int i = 0; i < AllZone.Stack.size(); i++) {
-			choosables.add(AllZone.Stack.peek(i));
+			choosables.add(AllZone.Stack.peekAbility(i));
 		}
 		
 		for(int i = 0; i < choosables.size(); i++) {
@@ -308,21 +262,21 @@ public class Target_Selection {
 		return choosables;
     }
     
-    public static boolean matchSpellAbility(SpellAbility sa, SpellAbility match, Target tgt){
+    public static boolean matchSpellAbility(SpellAbility sa, SpellAbility topSA, Target tgt){
     	String saType = tgt.getTargetSpellAbilityType();
     	
     	if(null == saType) {
     		//just take this to mean no restrictions - carry on.
     	}
-    	else if (match.isSpell()){
+    	else if (topSA.isSpell()){
     		if (!saType.contains("Spell"))
     			return false;
     	}
-    	else if (match.isTrigger()){
+    	else if (topSA.isTrigger()){
     		if (!saType.contains("Triggered"))
     			return false;
     	}
-    	else if (match.isAbility()){
+    	else if (topSA.isAbility()){
     		if (!saType.contains("Activated"))
     			return false;
     	}
@@ -331,7 +285,7 @@ public class Target_Selection {
 		if(splitTargetRestrictions != null){
 			// TODO: What about spells with SubAbilities with Targets?
 			
-			Target matchTgt = match.getTarget();
+			Target matchTgt = topSA.getTarget();
 			
 			if (matchTgt == null)
 				return false;
@@ -349,7 +303,7 @@ public class Target_Selection {
 				return false;
 		}
 		
-		if(!matchesValid(match, tgt.getValidTgts(), sa)){
+		if(!matchesValid(topSA, tgt.getValidTgts(), sa)){
 			return false;
 		}
 	

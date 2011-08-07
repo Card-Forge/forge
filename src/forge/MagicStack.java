@@ -2,7 +2,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -14,6 +14,7 @@ import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Ability_Static;
 import forge.card.spellability.Ability_Triggered;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_StackInstance;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.spellability.Target;
 import forge.card.spellability.Target_Selection;
@@ -24,11 +25,12 @@ import forge.gui.input.Input_PayManaCost_Ability;
 public class MagicStack extends MyObservable {
 	private ArrayList<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
 
-	private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
-	private ArrayList<SpellAbility> frozenStack = new ArrayList<SpellAbility>();
+	private Stack<SpellAbility_StackInstance> stack = new Stack<SpellAbility_StackInstance>();
+	private Stack<SpellAbility_StackInstance> frozenStack = new Stack<SpellAbility_StackInstance>();
+
 	private boolean frozen = false;
 	private boolean bResolving = false;
-	private boolean splitSecondOnStack = false;
+	private int splitSecondOnStack = 0;
 
 	public boolean isFrozen() {
 		return frozen;
@@ -41,23 +43,26 @@ public class MagicStack extends MyObservable {
 	public void reset() {
 		stack.clear();
 		frozen = false;
-		splitSecondOnStack = false;
+		splitSecondOnStack = 0;
 		frozenStack.clear();
 		this.updateObservers();
 	}
 
 	public boolean isSplitSecondOnStack() {
-		return splitSecondOnStack;
+		return splitSecondOnStack > 0;
 	}
 
-	public void setSplitSecondOnStack() {
-		for(SpellAbility sa:stack) {
-			if(sa.getSourceCard().hasKeyword("Split second")) {
-				splitSecondOnStack = true;
-				return;
-			}
-		}
-		splitSecondOnStack = false;
+	public void incrementSplitSecond(SpellAbility sp){
+		if (sp.getSourceCard().hasKeyword("Split Second"))
+			splitSecondOnStack++;
+	}
+	
+	public void decrementSplitSecond(SpellAbility sp){
+		if (sp.getSourceCard().hasKeyword("Split Second"))
+			splitSecondOnStack--;
+		
+		if (splitSecondOnStack < 0)
+			splitSecondOnStack = 0;
 	}
 
 	public void freezeStack() {
@@ -91,8 +96,7 @@ public class MagicStack extends MyObservable {
 		frozen = false;
 		boolean checkState = !frozenStack.isEmpty();
 		while (!frozenStack.isEmpty()) {
-			SpellAbility sa = frozenStack.get(0);
-			frozenStack.remove(0);
+			SpellAbility sa = frozenStack.pop().getSpellAbility();
 			this.add(sa);
 		}
 		if (checkState)
@@ -201,7 +205,8 @@ public class MagicStack extends MyObservable {
 		}
 
 		if (frozen) {
-			frozenStack.add(sp);
+			SpellAbility_StackInstance si = new SpellAbility_StackInstance(sp);
+			frozenStack.push(si);
 			return;
 		}
 
@@ -509,8 +514,8 @@ public class MagicStack extends MyObservable {
 							}
 						}
 					};
-					SpellAbility prev = peek();
-					if(prev instanceof Spell_Permanent && prev.getSourceCard().getName().equals("Mana Vortex")) {
+					SpellAbility_StackInstance prev = peekInstance();
+					if(prev.isSpell() && prev.getSourceCard().getName().equals("Mana Vortex")) {
 						if(sp.getSourceCard().getController().isHuman()) {
 							AllZone.InputControl.setInput(in);
 						}
@@ -650,16 +655,16 @@ public class MagicStack extends MyObservable {
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 		}
-
-		stack.add(0, sp);
-		setSplitSecondOnStack();
+		
+		incrementSplitSecond(sp);
+		
+		SpellAbility_StackInstance si = new SpellAbility_StackInstance(sp);
+		stack.push(si);
 
 		this.updateObservers();
 
 		if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
 			Phase.increaseSpellCount(sp);
-
-			// attempt to counter human spell 
 
 			GameActionUtil.executePlayCardEffects(sp);
 		}
@@ -818,40 +823,54 @@ public class MagicStack extends MyObservable {
 		return fizzle;
 	}
 
-
 	public SpellAbility pop() {
-		SpellAbility sp = (SpellAbility) stack.remove(0);
+		SpellAbility sp = stack.pop().getSpellAbility();
+		decrementSplitSecond(sp);
 		this.updateObservers();
-		setSplitSecondOnStack();
 		return sp;
 	}
 
+	// CAREFUL! Peeking while an SAs Targets are being choosen may cause issues 
 	// index = 0 is the top, index = 1 is the next to top, etc...
-	public SpellAbility peek(int index) {
-		return (SpellAbility) stack.get(index);
+	public SpellAbility_StackInstance peekInstance(int index) {
+		return stack.get(index);
 	}
-
-	public SpellAbility peek() {
-		return peek(0);
+	
+	public SpellAbility peekAbility(int index) {
+		return stack.get(index).getSpellAbility();
+	}
+	
+	public SpellAbility_StackInstance peekInstance() {
+		return stack.peek();
+	}
+	
+	public SpellAbility peekAbility() {
+		return stack.peek().getSpellAbility();
 	}
 
 	public void remove(SpellAbility sa) {
-		stack.remove(sa);
-		frozenStack.remove(sa);
+		SpellAbility_StackInstance si = getInstanceFromSpellAbility(sa);
+		if (si == null)
+			return;
+			
+		remove(si);
+	}
+	
+	public void remove(SpellAbility_StackInstance si) {
+		if (stack.remove(si)){
+			decrementSplitSecond(si.getSpellAbility());
+		}
+		frozenStack.remove(si);
 		this.updateObservers();
 	}
-
-	public boolean contains(SpellAbility sa) {
-		return stack.contains(sa);
-	}
-
-	public ArrayList<Card> getSourceCards() {
-		ArrayList<Card> a = new ArrayList<Card>();
-		Iterator<SpellAbility> it = stack.iterator();
-		while (it.hasNext())
-			a.add(((SpellAbility) it.next()).getSourceCard());
-
-		return a;
+	
+	public SpellAbility_StackInstance getInstanceFromSpellAbility(SpellAbility sa) {
+		// TODO: Confirm this works!
+		for(SpellAbility_StackInstance si : stack){
+			if (si.getSpellAbility().equals(sa))
+				return si;
+		}
+		return null;
 	}
 
 	public boolean hasSimultaneousStackEntries()

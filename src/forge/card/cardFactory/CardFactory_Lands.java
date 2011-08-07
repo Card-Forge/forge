@@ -203,10 +203,8 @@ class CardFactory_Lands {
             final SpellAbility ability = new Ability(card, "3") {
                 @Override
                 public boolean canPlay() {
-                    SpellAbility sa;
                     for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
+                    	if(AllZone.Stack.peekInstance(i).equals(card)) return false;
                     }
                     
                     if(card.getCounters(Counters.ICE) > 0 && AllZoneUtil.isCardInPlay(card) && super.canPlay()) return true;

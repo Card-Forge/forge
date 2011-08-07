@@ -401,29 +401,30 @@ public class TriggerHandler {
 			//Yes, it must wrap ALL SpellAbility methods in order to handle possible corner cases.
 			//(The trigger can have a hardcoded OverridingAbility which can make use of any of the methods)
 			final Ability wrapperAbility = new Ability(regtrig.getHostCard(),"0") {
-				@Override
-				public void addDiscardedCost(Card c)
-				{
-					sa[0].addDiscardedCost(c);
-				}
-				
-				@Override 
-				public void addSacrificedCost(Card c)
-				{
-					sa[0].addSacrificedCost(c);
-				}
-				
-				@Override
-				public void addExiledCost(Card c)
-				{
-					sa[0].addExiledCost(c);
-				}
-				
-				@Override 
-				public void addTappedCost(Card c)
-				{
-					sa[0].addTappedCost(c);
-				}
+
+			    public void setPaidHash(HashMap<String, CardList> hash){
+			    	sa[0].setPaidHash(hash);
+			    }
+			    
+			    public HashMap<String, CardList> getPaidHash(){
+			    	return sa[0].getPaidHash();
+			    }
+			    
+			    public void setPaidList(CardList list, String str){
+			    	sa[0].setPaidList(list, str);
+			    }
+			    
+			    public CardList getPaidList(String str){
+			    	return sa[0].getPaidList(str);
+			    }
+			    
+			    public void addCostToHashList(Card c, String str){
+			    	sa[0].addCostToHashList(c, str);
+			    }
+			    
+			    public void resetPaidHash(){
+			    	sa[0].resetPaidHash();
+			    }
 				
 				@Override
 				public boolean canPlay()
@@ -509,12 +510,6 @@ public class TriggerHandler {
 				}
 				
 				@Override
-				public CardList getDiscardedCost()
-				{
-					return sa[0].getDiscardedCost();
-				}
-				
-				@Override
 				public String getMultiKickerManaCost()
 				{
 					return sa[0].getMultiKickerManaCost();
@@ -529,22 +524,6 @@ public class TriggerHandler {
 				public SpellAbility_Restriction getRestrictions()
 				{
 					return sa[0].getRestrictions();
-				}
-				
-				@Override
-				public CardList getSacrificedCost()
-				{
-					return sa[0].getSacrificedCost();
-				}
-				
-				@Override
-				public CardList getExiledCost() {
-					return sa[0].getExiledCost();
-				}
-				
-				@Override
-				public CardList getTappedCost() {
-					return sa[0].getTappedCost();
 				}
 				
 				@Override
@@ -697,36 +676,12 @@ public class TriggerHandler {
 				{
 					return sa[0].isXCost();
 				}
-				
-				@Override
-				public void resetDiscardedCost()
-				{
-					sa[0].resetDiscardedCost();
-				}
-				
+
 				@Override
 				public void resetOnceResolved()
 				{
 					// Fixing an issue with Targeting + Paying Mana
 					//sa[0].resetOnceResolved();
-				}
-				
-				@Override
-				public void resetSacrificedCost()
-				{
-					sa[0].resetSacrificedCost();
-				}
-				
-				@Override
-				public void resetExiledCost()
-				{
-					sa[0].resetExiledCost();
-				}
-				
-				@Override
-				public void resetTappedCost()
-				{
-					sa[0].resetTappedCost();
 				}
 				
 				@Override

@@ -11,9 +11,16 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 
 public class Target {
-	private boolean bMandatory = false;
+	// Target has two things happening: 
+	// Targeting restrictions (Creature, Min/Maxm etc) which are true for this whole Target
+	// Target Choices (which is specific for the StackInstance)
 	private Card srcCard;
 	
+	private Target_Choices choice = null;
+	public Target_Choices getTargetChoices() { return choice; }
+	public void setTargetChoices(Target_Choices tc) { choice = tc; }
+	
+	private boolean bMandatory = false;
 	public boolean getMandatory() { return bMandatory; }
 	public void setMandatory(boolean m)	{ bMandatory = m; }
 	
@@ -30,8 +37,8 @@ public class Target {
 	public int getMinTargets(Card c, SpellAbility sa)  	{ return AbilityFactory.calculateAmount(c, minTargets, sa); } 
 	public int getMaxTargets(Card c, SpellAbility sa)  	{ return AbilityFactory.calculateAmount(c, maxTargets, sa); } 
 	
-	public boolean isMaxTargetsChosen(Card c, SpellAbility sa) 	{ return getMaxTargets(c, sa) == numTargeted; }
-	public boolean isMinTargetsChosen(Card c, SpellAbility sa) 	{ return getMinTargets(c, sa) <= numTargeted; }
+	public boolean isMaxTargetsChosen(Card c, SpellAbility sa) 	{ return choice != null && getMaxTargets(c, sa) == choice.getNumTargeted(); }
+	public boolean isMinTargetsChosen(Card c, SpellAbility sa) 	{ return choice != null && getMinTargets(c, sa) <= choice.getNumTargeted(); }
 	
 	private String tgtZone = Constant.Zone.Battlefield;
 	public void setZone(String tZone) { tgtZone = tZone; }
@@ -47,78 +54,59 @@ public class Target {
 	public void setSAValidTargeting(String saValidTgting) { saValidTargeting = saValidTgting; }
 	public String getSAValidTargeting() { return saValidTargeting; }
 	
-	// Card or Player are legal targets.
-	private ArrayList<Card> targetCards = new ArrayList<Card>();
-	private ArrayList<Player> targetPlayers = new ArrayList<Player>();
-	private ArrayList<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
-	
-	public void addTarget(Object o){
+	// Leaving old structure behind for compatibility.
+	public boolean addTarget(Object o){
+		if (choice == null)
+			choice = new Target_Choices();
+		
+		if (o instanceof Card)
+			return choice.addTarget((Card)o);
+		
 		if (o instanceof Player)
-			addTarget((Player)o);
+			return choice.addTarget((Player)o);
 		
-		else if (o instanceof Card)
-			addTarget((Card)o);
+		if (o instanceof SpellAbility)
+			return choice.addTarget((SpellAbility)o);
 		
-		else if (o instanceof SpellAbility)
-			addTarget((SpellAbility)o);
-	}
-	
-	public boolean addTarget(Card c){
-		if (!targetCards.contains(c)){
-			targetCards.add(c);
-			numTargeted++;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean addTarget(Player p){
-		if (!targetPlayers.contains(p)){
-			targetPlayers.add(p);
-			numTargeted++;
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean addTarget(SpellAbility sa){
-		if (!targetSAs.contains(sa)){
-			targetSAs.add(sa);
-			numTargeted++;
-			return true;
-		}
 		return false;
 	}
 
 	public ArrayList<Card> getTargetCards(){
-		return targetCards;
+		if (choice == null)
+			return new ArrayList<Card>();
+		
+		return choice.getTargetCards();
 	}
 	
 	public ArrayList<Player> getTargetPlayers(){
-		return targetPlayers;
+		if (choice == null)
+			return new ArrayList<Player>();
+		
+		return choice.getTargetPlayers();
 	}
 	
 	public ArrayList<SpellAbility> getTargetSAs(){
-		return targetSAs;
+		if (choice == null)
+			return new ArrayList<SpellAbility>();
+		
+		return choice.getTargetSAs();
 	}
 	
 	public ArrayList<Object> getTargets(){
-		ArrayList<Object> tgts = new ArrayList<Object>();
-		tgts.addAll(targetPlayers);
-		tgts.addAll(targetCards);
-		tgts.addAll(targetSAs);
-
-		return tgts;
+		if (choice == null)
+			return new ArrayList<Object>();
+		
+		return choice.getTargets();
 	}
 	
-	private int numTargeted = 0;
-	public int getNumTargeted() { return numTargeted; }
+	public int getNumTargeted() { 
+		if (choice == null)
+			return 0;
+		return choice.getNumTargeted(); 
+	}
 	
-	public void resetTargets() { 
-		numTargeted = 0; 
-		targetCards.clear();
-		targetPlayers.clear();
-		targetSAs.clear();
+	public void resetTargets() {
+		choice = null;
 	}
 	
 	public Target(Card src,String parse){

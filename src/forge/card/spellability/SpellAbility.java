@@ -2,6 +2,7 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import forge.Card;
 import forge.CardList;
@@ -37,6 +38,7 @@ public abstract class SpellAbility {
     private Card            sourceCard;
     
     private CardList        targetList;
+    // targetList doesn't appear to be used anymore
     
     private boolean         spell;
     private boolean			trigger 		   = false;
@@ -57,7 +59,7 @@ public abstract class SpellAbility {
     private Input           afterResolve;
     private Input           afterPayMana;
     
-    protected Cost	payCosts		   = null;
+    protected Cost			payCosts		   = null;
     protected Target		chosenTarget	   = null;
     
     private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
@@ -68,10 +70,7 @@ public abstract class SpellAbility {
     private ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
     
-    private CardList 		sacrificedCards	   = null;
-    private CardList 		discardedCards	   = null;
-    private CardList		exiledCards			 = null;
-    private CardList		tappedCards			= null;
+    HashMap<String, CardList> paidLists = new HashMap<String, CardList>();
     
     private Command         cancelCommand      = Command.Blank;
     private Command         beforePayManaAI    = Command.Blank;
@@ -309,70 +308,38 @@ public abstract class SpellAbility {
     	return paidAbilities;
     }
     
-    public void addSacrificedCost(Card c){
-    	if (sacrificedCards == null)
-    		sacrificedCards = new CardList();
-    	
-    	sacrificedCards.add(c);
+    // Combined PaidLists
+    public void setPaidHash(HashMap<String, CardList> hash){
+    	paidLists = hash;
     }
     
-    public CardList getSacrificedCost(){
-    	return sacrificedCards;
+    public HashMap<String, CardList> getPaidHash(){
+    	return paidLists;
     }
     
-    public void resetSacrificedCost(){
-    	sacrificedCards = null;
+    // Paid List are for things ca
+    public void setPaidList(CardList list, String str){
+    	paidLists.put(str, list);
     }
     
-    public void addExiledCost(Card c){
-    	if (exiledCards == null)
-    		exiledCards = new CardList();
-    	
-    	exiledCards.add(c);
+    public CardList getPaidList(String str){
+    	return paidLists.get(str);
     }
     
-    public CardList getExiledCost(){
-    	return exiledCards;
+    public void addCostToHashList(Card c, String str){
+    	if (!paidLists.containsKey(str))
+    		paidLists.put(str, new CardList());
+    		
+    	paidLists.get(str).add(c);
     }
     
-    public void resetExiledCost(){
-    	exiledCards = null;
+    public void resetPaidHash(){
+    	paidLists = new HashMap<String, CardList>();
     }
-    
-    public void addTappedCost(Card c){
-    	if (tappedCards == null)
-    		tappedCards = new CardList();
-    	
-    	tappedCards.add(c);
-    }
-    
-    public CardList getTappedCost(){
-    	return tappedCards;
-    }
-    
-    public void resetTappedCost(){
-    	tappedCards = null;
-    }
-    
-    public void addDiscardedCost(Card c){
-    	if (discardedCards == null)
-    		discardedCards = new CardList();
-    	discardedCards.add(c);
-    }
-    
-    public CardList getDiscardedCost(){
-    	return discardedCards;
-    }
-    
-    public void resetDiscardedCost(){
-    	discardedCards = null;
-    }
+
     
     public void resetOnceResolved(){
-    	resetDiscardedCost();
-    	resetSacrificedCost();
-    	resetExiledCost();
-    	resetTappedCost();
+    	resetPaidHash();
 
     	if (chosenTarget != null)
     		chosenTarget.resetTargets();

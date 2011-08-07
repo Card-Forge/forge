@@ -273,18 +273,14 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     
     public void showMessage(String s) {
     	messageArea.setText(s);
-        
-        messageArea.setText(s);
-        Border border = new EmptyBorder(1, 1, 1, 1);
             
-        messageArea.setBorder(border);
-            
+        Border border = null;
         int thickness = 3;
         
-        if (AllZone.Stack.size() > 0 && AllZone.Stack.peek().getActivatingPlayer().isComputer())
+        if (AllZone.Stack.size() > 0 && AllZone.Stack.peekInstance().getActivatingPlayer().isComputer())
         	border = BorderFactory.createLineBorder(new Color(0, 255, 255), thickness);
         else if (s.contains("Main"))
-        	border = BorderFactory.createLineBorder(new Color(30, 0, 255), thickness);	
+        	border = BorderFactory.createLineBorder(new Color(30, 0, 255), thickness);
         else if (s.contains("To Block"))
         	border = BorderFactory.createLineBorder(new Color(13, 179, 0), thickness);
         else if (s.contains("Play Instants and Abilities") || s.contains("Combat") || s.contains("Damage"))
@@ -293,8 +289,10 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
            	border = BorderFactory.createLineBorder(new Color(255, 0, 0), thickness);
         else if (s.contains("Upkeep") || s.contains("Draw") || s.contains("End of Turn"))
         	border = BorderFactory.createLineBorder(new Color(200, 0, 170), thickness);
-            
-         messageArea.setBorder(border);
+        else
+        	border = new EmptyBorder(1, 1, 1, 1);
+        
+        messageArea.setBorder(border);
     }
     
     private void addListeners() {
@@ -550,11 +548,11 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 JLabel label;
                 
                 for(int i = stack.size() - 1; 0 <= i; i--) {
-                    label = new JLabel("" + (count++) + ". " + stack.peek(i).getStackDescription());
+                    label = new JLabel("" + (count++) + ". " + stack.peekInstance(i).getStackDescription());
                     
 
                     //update card detail
-                    final CardPanel cardPanel = new CardPanel(stack.peek(i).getSourceCard());
+                    final CardPanel cardPanel = new CardPanel(stack.peekInstance(i).getSourceCard());
                     cardPanel.setLayout(new BorderLayout());
                     cardPanel.add(label);
                     cardPanel.addMouseMotionListener(new MouseMotionAdapter() {

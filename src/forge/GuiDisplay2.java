@@ -340,18 +340,18 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 JLabel label;
                 
                 for(int i = stack.size() - 1; 0 <= i; i--) {
-                    String text = stack.peek(i).getStackDescription();
+                    String text = stack.peekInstance(i).getStackDescription();
                     
                     //change card name
                     if(AllZone.NameChanger.shouldChangeCardName()) {
-                        Card c = stack.peek(i).getSourceCard();
+                        Card c = stack.peekInstance(i).getSourceCard();
                         text = AllZone.NameChanger.changeString(c, text);
                     }
                     
                     label = new JLabel("" + (count++) + ". " + text);
                     
                     //update card detail
-                    final CardPanel cardPanel = new CardPanel(stack.peek(i).getSourceCard());
+                    final CardPanel cardPanel = new CardPanel(stack.peekInstance(i).getSourceCard());
                     cardPanel.setLayout(new BorderLayout());
                     cardPanel.add(label);
                     cardPanel.addMouseMotionListener(new MouseMotionAdapter() {

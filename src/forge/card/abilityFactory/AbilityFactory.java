@@ -919,16 +919,16 @@ public class AbilityFactory {
 				
 				CardList list = new CardList();
 				if (calcX[0].startsWith("Sacrificed"))
-					list = findRootAbility(ability).getSacrificedCost();
+					list = findRootAbility(ability).getPaidList("Sacrificed");
 				
 				else if (calcX[0].startsWith("Discarded"))
-					list = findRootAbility(ability).getDiscardedCost();
+					list = findRootAbility(ability).getPaidList("Discarded");
 				
 				else if( calcX[0].startsWith("Exiled")) {
-					list = findRootAbility(ability).getExiledCost();
+					list = findRootAbility(ability).getPaidList("Exiled");
 				}
 				else if( calcX[0].startsWith("Tapped")) {
-					list = findRootAbility(ability).getTappedCost();
+					list = findRootAbility(ability).getPaidList("Tapped");
 				}
 				
 				else if (calcX[0].startsWith("Targeted")){

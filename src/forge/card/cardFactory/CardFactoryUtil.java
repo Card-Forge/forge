@@ -645,10 +645,9 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                ArrayList<Card> spellsOnStack = AllZone.Stack.getSourceCards();
                 Card sourceCard = this.getSourceCard();
                 
-                return AllZoneUtil.isCardInPlayerGraveyard(sourceCard.getController(), sourceCard) && !spellsOnStack.contains(sourceCard)
+                return AllZoneUtil.isCardInPlayerGraveyard(sourceCard.getController(), sourceCard)
                         && (sourceCard.isInstant() || Phase.canCastSorcery(sourceCard.getController()));
                 
             }
@@ -803,10 +802,8 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                SpellAbility sa;
                 for(int i = 0; i < AllZone.Stack.size(); i++) {
-                    sa = AllZone.Stack.peek(i);
-                    if(sa.getSourceCard().equals(sourceCard)) return false;
+                    if(AllZone.Stack.peekInstance(i).equals(sourceCard)) return false;
                 }
                 
                 if (AllZoneUtil.isCardInPlay(sourceCard) 

@@ -626,8 +626,9 @@ public abstract class Player extends MyObservable{
     }
     
     public void doDiscard(final Card c, final SpellAbility sa) {
+    	// TODO: This line should be moved inside CostPayment somehow
     	if (sa!= null){
-    		sa.addDiscardedCost(c);
+    		sa.addCostToHashList(c, "Discarded");
     	}
     	
     	/*

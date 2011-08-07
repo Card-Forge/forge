@@ -1377,7 +1377,7 @@ public class CardFactory_Instants {
         			for(int i = 0; i <card.getChoices().size(); i++) {
         				if(card.getChoice(i).equals(cardChoice[0])) {
         					if(AllZone.Stack.size() > 0) {
-        						SpellAbility sa = AllZone.Stack.peek();
+        						SpellAbility sa = AllZone.Stack.peekAbility();
         						if(sa.isSpell()) {
         							AllZone.Stack.pop();
         							AllZone.GameAction.moveToGraveyard(sa.getSourceCard());

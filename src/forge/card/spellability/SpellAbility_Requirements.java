@@ -83,16 +83,14 @@ public class SpellAbility_Requirements {
 	}
 	
 	public void finishPaying(){
-		if (isFree || payment.isAllPaid())
-		{
+		if (isFree || payment.isAllPaid()){
 			if(skipStack)
-			{
 				ability.resolve();
-			}
+			
 			else
-			{
 				addAbilityToStack();
-			}
+			
+			select.resetTargets();
             AllZone.GameAction.checkStateEffects();
 		}
 		else if (payment.isCanceled()){

@@ -342,8 +342,10 @@ public class AbilityFactory_Mana {
 			maxChoices++;
 		
 		CardList cards = null;
+		
+		// TODO: Conver this to Calculate Amount?
 		if (validCard.equals("Sacrificed")){
-			cards = abMana.getSacrificedCost();
+			cards = abMana.getPaidList("Sacrificed");
 		}
 		else{
 			cards = AllZoneUtil.getCardsInPlay().getValidCards(validCard, abMana.getActivatingPlayer(), card);

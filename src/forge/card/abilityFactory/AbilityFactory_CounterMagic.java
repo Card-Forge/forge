@@ -15,6 +15,7 @@ import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_StackInstance;
 import forge.card.spellability.Target;
 import forge.card.spellability.Target_Selection;
 
@@ -163,7 +164,7 @@ public class AbilityFactory_CounterMagic {
 		Target tgt = sa.getTarget();
 		if (tgt != null) {
 			
-			SpellAbility topSA = AllZone.Stack.peek();
+			SpellAbility topSA = AllZone.Stack.peekAbility();
 			if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer())
 				return false;
 		
@@ -221,7 +222,7 @@ public class AbilityFactory_CounterMagic {
 
 		Target tgt = sa.getTarget();
 		if (tgt != null) {
-			SpellAbility topSA = AllZone.Stack.peek();
+			SpellAbility topSA = AllZone.Stack.peekAbility();
 			if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer())
 				return false;
 
@@ -292,23 +293,28 @@ public class AbilityFactory_CounterMagic {
 
 		for(final SpellAbility tgtSA : sas){
 			Card tgtSACard = tgtSA.getSourceCard();
-			if (AllZone.Stack.contains(tgtSA) && !tgtSACard.keywordsContain("CARDNAME can't be countered.")){
+			
+			if (tgtSA.isSpell() && tgtSACard.keywordsContain("CARDNAME can't be countered."))
+				continue;
+				
+			SpellAbility_StackInstance si = AllZone.Stack.getInstanceFromSpellAbility(tgtSA);
+			if (si == null)
+				continue;
 
-				removeFromStack(tgtSA,sa);
-					
-				// Destroy Permanent may be able to be turned into a SubAbility
-				if(tgtSA.isAbility() && params.containsKey("DestroyPermanent")) {
-					AllZone.GameAction.destroy(tgtSACard);
-				}
-
-                if(params.containsKey("RememberTargets"))
-                {
-                    if(params.get("RememberTargets").equals("True"))
-                    {
-                        af.getHostCard().addRemembered(tgtSACard);
-                    }
-                }
+			removeFromStack(tgtSA,sa, si);
+				
+			// Destroy Permanent may be able to be turned into a SubAbility
+			if(tgtSA.isAbility() && params.containsKey("DestroyPermanent")) {
+				AllZone.GameAction.destroy(tgtSACard);
 			}
+
+            if(params.containsKey("RememberTargets"))
+            {
+                if(params.get("RememberTargets").equals("True"))
+                {
+                    af.getHostCard().addRemembered(tgtSACard);
+                }
+            }
 		}
 	}//end counterResolve
 
@@ -353,8 +359,8 @@ public class AbilityFactory_CounterMagic {
 		return sb.toString();
 	}//end counterStackDescription
 	
-	private void removeFromStack(SpellAbility tgtSA, SpellAbility srcSA) {
-		AllZone.Stack.remove(tgtSA);
+	private void removeFromStack(SpellAbility tgtSA, SpellAbility srcSA, SpellAbility_StackInstance si) {
+		AllZone.Stack.remove(si);
 		
 		if(tgtSA.isAbility())  {
 			//For Ability-targeted counterspells - do not move it anywhere, even if Destination$ is specified.
