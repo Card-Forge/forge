@@ -3563,6 +3563,14 @@ public class Card extends MyObservable {
     	return "";
     }
     
+    public String getCurSetURL() {
+    	for (int i=0; i<Sets.size(); i++)
+    		if (Sets.get(i).Code.equals(curSetCode))
+    			return Sets.get(i).URL;
+    	
+    	return "";
+    }
+    
     public String getMostRecentSet()
     {
     	return SetInfoUtil.getMostRecentSet(Sets);

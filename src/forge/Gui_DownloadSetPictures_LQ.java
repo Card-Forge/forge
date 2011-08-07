@@ -268,7 +268,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
             System.out.println("basedir: " + base);
             for(update(0); card < cards.length && !cancel; update(card + 1)) {
                 try {
-                    String url = cards[card].url;
+                    String url = cards[card].url;                    
                     String cName;
                     if(cards[card].name.substring(0, 3).equals("[T]")){
                     	base = ForgeProps.getFile(IMAGE_TOKEN);
@@ -278,7 +278,9 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                     	base = ForgeProps.getFile(IMAGE_BASE);
                     	cName=cards[card].name;
                     }                    
-                    
+                    if (Constant.Runtime.DevMode[0])
+                    	System.out.println(cName + " - " + url);
+
                     File f = new File(base, cName);
                     
                     //test for folder existence
@@ -371,8 +373,6 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     	for (int i=0; i<AllCards.size(); i++)
     	{
     		Card  c = AllCards.get(i);
-    		//String url = c.getSVar("Picture");
-    		//String[] URLs = url.split("\\\\");
     		
     		ArrayList<SetInfo> cSetInfo = c.getSets();
     		if (cSetInfo.size() > 0)
@@ -408,7 +408,10 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     					if (imgFN.equals("none") ||	(!imgFN.contains(SC3) && !imgFN.contains(SC2)))
 						{
 							String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + ".full.jpg";
-							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
+							if (MyRandom.percentTrue(65))
+								CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
+							else
+								CList.add(new mCard(SC3 + "/" + fn, c.getCurSetURL(), SC3));
 							
 						}    							
 
