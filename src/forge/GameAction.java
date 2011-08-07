@@ -191,7 +191,7 @@ public class GameAction {
 		//Recover keyword
 		if(c.isType("Creature") && origZone.is(Constant.Zone.Battlefield))
 		{
-			for(final Card recoverable : grave.getCards())
+			for(final Card recoverable : AllZoneUtil.getPlayerGraveyard(c.getOwner()))
 		    {
 		    	if(recoverable.hasStartOfKeyword("Recover"))
 		    	{
@@ -789,12 +789,6 @@ public class GameAction {
 		}
     }
     
-    @Deprecated
-    public boolean isCardInZone(Card card, PlayerZone p) {
-        ArrayList<Card> list = new ArrayList<Card>(Arrays.asList(p.getCards()));
-        return list.contains(card);
-    }
-    
     //removes all damage from player's creatures
     public void removeDamage(Player player) {
         CardList list = AllZoneUtil.getCreaturesInPlay(player);
@@ -840,7 +834,7 @@ public class GameAction {
     
     private boolean Start_Cut = false;
     public void newGame(Deck humanDeck, Deck computerDeck) {
-//    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
+    	//AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
     	
         AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
@@ -1003,10 +997,10 @@ public class GameAction {
         boolean smoothLand = Constant.Runtime.Smooth[0];
         
         if(smoothLand) {
-            Card[] c = smoothComputerManaCurve(AllZone.Computer_Library.getCards());
+            Card[] c = smoothComputerManaCurve(AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer).toArray());
             AllZone.Computer_Library.setCards(c);
         } else {
-            AllZone.Computer_Library.setCards(AllZone.Computer_Library.getCards());
+            AllZone.Computer_Library.setCards(AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer).toArray());
             	AllZone.ComputerPlayer.shuffle();
         }
      
@@ -1185,18 +1179,10 @@ public class GameAction {
     
     public void seeWhoPlaysFirst() {
 
-    	CardList HLibrary = new CardList(AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer).getCards());
-        HLibrary = HLibrary.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return !c.isLand();
-            }
-        });
-    	CardList CLibrary = new CardList(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).getCards());
-        CLibrary = CLibrary.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return !c.isLand();
-            }
-        });
+    	CardList HLibrary = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
+        HLibrary = HLibrary.filter(AllZoneUtil.nonlands);
+    	CardList CLibrary = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
+        CLibrary = CLibrary.filter(AllZoneUtil.nonlands);
 
         boolean Starter_Determined = false;
         int Cut_Count = 0;
@@ -1407,42 +1393,31 @@ public class GameAction {
     		if(originalCard.getName().equals("Avatar of Woe")){
     			Player player = AllZone.Phase.getPlayerTurn();
     			Player opponent = player.getOpponent();
-    			PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-    			CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
+    			CardList PlayerCreatureList = AllZoneUtil.getPlayerGraveyard(player);
     			PlayerCreatureList = PlayerCreatureList.getType("Creature");
-    			PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
-    			CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
+    			CardList OpponentCreatureList = AllZoneUtil.getPlayerGraveyard(opponent);
     			OpponentCreatureList = OpponentCreatureList.getType("Creature");
     			if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
     				manaCost = new ManaCost("B B");           	
     			} // Avatar of Woe
     		} else if(originalCard.getName().equals("Avatar of Will")) {
-    			Player player = AllZone.Phase.getPlayerTurn();
-    			Player opponent = player.getOpponent();
-    			PlayerZone OpponentHand = AllZone.getZone(Constant.Zone.Hand, opponent); 
-    			CardList OpponentHandList = new CardList(OpponentHand.getCards());	        
-    			if(OpponentHandList.size() == 0) {
+    			Player opponent = AllZone.Phase.getPlayerTurn().getOpponent();
+    			CardList opponentHandList = AllZoneUtil.getPlayerHand(opponent);
+    			if(opponentHandList.size() == 0) {
     				manaCost = new ManaCost("U U");           	
     			} // Avatar of Will
     		} else if(originalCard.getName().equals("Avatar of Fury")) {
-    			Player player = AllZone.Phase.getPlayerTurn();
-    			Player opponent = player.getOpponent();
-    			PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Battlefield, opponent); 
-    			CardList OpponentLand = new CardList(OpponentPlay.getCards());	   
-    			OpponentLand = OpponentLand.getType("Land");
-    			if(OpponentLand.size() >= 7) {
+    			Player opponent = AllZone.Phase.getPlayerTurn().getOpponent();
+    			CardList opponentLand = AllZoneUtil.getPlayerLandsInPlay(opponent);
+    			if(opponentLand.size() >= 7) {
     				manaCost = new ManaCost("R R");           	
     			} // Avatar of Fury
     		} else if(originalCard.getName().equals("Avatar of Might")) {
     			Player player = AllZone.Phase.getPlayerTurn();
     			Player opponent = player.getOpponent();
-    			PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, player); 
-    			CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
-    			PlayerCreature = PlayerCreature.getType("Creature");
-    			PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Battlefield, opponent); 
-    			CardList OpponentCreature = new CardList(OpponentPlay.getCards());	   
-    			OpponentCreature = OpponentCreature.getType("Creature");
-    			if(OpponentCreature.size() - PlayerCreature.size() >= 4) {
+    			CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
+    			CardList opponentCreature = AllZoneUtil.getCreaturesInPlay(opponent);
+    			if(opponentCreature.size() - playerCreature.size() >= 4) {
     				manaCost = new ManaCost("G G");   	        	
     			} // Avatar of Might
     		}
@@ -1450,9 +1425,7 @@ public class GameAction {
 
     	// Get Cost Reduction
     	if(Phase.getGameBegins() == 1) { // Remove GameBegins from Phase and into The starting game code
-    		CardList Cards_In_Play = new CardList();
-    		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-    		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+    		CardList Cards_In_Play = AllZoneUtil.getCardsInPlay();
     		Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
     			public boolean addCard(Card c) {
     				if(c.getKeyword().toString().contains("CostChange")) return true;
@@ -1461,8 +1434,8 @@ public class GameAction {
     		});
     		Cards_In_Play.add(originalCard);
     		String Mana = manaCost.toString();
-    		CardList Player_Play = new CardList(AllZone.getZone(Constant.Zone.Battlefield, sa.getSourceCard().getController()).getCards());
-    		CardList Player_Hand = new CardList(AllZone.getZone(Constant.Zone.Hand, sa.getSourceCard().getController()).getCards());
+    		CardList Player_Play = AllZoneUtil.getPlayerCardsInPlay(sa.getSourceCard().getController());
+    		CardList Player_Hand = AllZoneUtil.getPlayerHand(sa.getSourceCard().getController());
     		int XBonus = 0;
     		int Max = 25;
     		if(sa.isXCost() && !sa.getSourceCard().isCopiedSpell()) sa.getSourceCard().setXManaCostPaid(0);
@@ -1549,8 +1522,7 @@ public class GameAction {
     							String spilt = k[7];                
     							String color_spilt[] = spilt.split("/");  
     							k[7] = color_spilt[1];	
-    							PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, originalCard.getController()); 
-    							CardList PlayerList = new CardList(PlayerPlay.getCards());	   
+    							CardList PlayerList = AllZoneUtil.getPlayerCardsInPlay(originalCard.getController());
     							PlayerList = PlayerList.getType(k[7]);
     							k[3] = String.valueOf(PlayerList.size());   		
     						}
@@ -1698,8 +1670,7 @@ public class GameAction {
     								String spilt = k[7];                
     								String color_spilt[] = spilt.split("/");  
     								k[7] = color_spilt[1];	
-    								PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, originalCard.getController()); 
-    								CardList PlayerList = new CardList(PlayerPlay.getCards());	   
+    								CardList PlayerList = AllZoneUtil.getPlayerCardsInPlay(originalCard.getController());
     								PlayerList = PlayerList.getType(k[7]);
     								k[3] = String.valueOf(PlayerList.size());    		
     							}
@@ -1782,22 +1753,16 @@ public class GameAction {
     	}
     	if(originalCard.getName().equals("Khalni Hydra") && spell.isSpell() == true) {
     		Player player = AllZone.Phase.getPlayerTurn();
-    		PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, player); 
-    		CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
-    		PlayerCreature = PlayerCreature.getType("Creature");
-    		PlayerCreature = PlayerCreature.filter(new CardListFilter() {
-    			public boolean addCard(Card c) {
-    				return c.isCreature() && c.isGreen();
+    		CardList playerCreature = AllZoneUtil.getCreaturesInPlay(player);
+    		playerCreature = playerCreature.filter(AllZoneUtil.green);       
+    		String mana = manaCost + " ";
+    		if(playerCreature.size() > 0) {
+    			for(int i = 0; i < playerCreature.size(); i++) {
+    				mana = mana.replaceFirst("G ", "");	
     			}
-    		});       
-    		String Mana = manaCost + " ";
-    		if(PlayerCreature.size() > 0) {
-    			for(int i = 0; i < PlayerCreature.size(); i++) {
-    				Mana = Mana.replaceFirst("G ", "");	
-    			}
-    			Mana = Mana.trim();
-    			if(Mana.equals("")) Mana = "0";
-    			manaCost = new ManaCost(Mana);        	
+    			mana = mana.trim();
+    			if(mana.equals("")) mana = "0";
+    			manaCost = new ManaCost(mana);        	
     		}
     	} // Khalni Hydra      
     	return manaCost;
@@ -1988,9 +1953,8 @@ public class GameAction {
 
     private void humanSearchTwoLand(String type, String Zone1, boolean tapFirstLand, String Zone2, boolean tapSecondLand) {
         PlayerZone firstZone = AllZone.getZone(Zone1, AllZone.HumanPlayer);
-        PlayerZone library = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
         
-        CardList list = new CardList(library.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
         list = list.getType(type);
         
         //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
