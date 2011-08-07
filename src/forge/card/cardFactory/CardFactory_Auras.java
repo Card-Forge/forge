@@ -361,9 +361,9 @@ class CardFactory_Auras {
                 private static final long serialVersionUID = -5302506578307993978L;
                 
                 public void execute() {
-                    if(card.isEnchanting()) {
+                    if (card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        if(crd.getKeyword().contains("Flying")) {
+                        if (crd.hasKeyword("Flying")) {
                             badTarget[0] = false;
                             crd.addDamage(2, card);
                             crd.removeIntrinsicKeyword("Flying");
@@ -421,9 +421,9 @@ class CardFactory_Auras {
                     CardListUtil.sortAttack(list);
                     CardListUtil.sortFlying(list);
                     
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))
-                                && !list.get(i).getKeyword().contains("Defender")) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (CardFactoryUtil.canTarget(card, list.get(i))
+                                && !list.get(i).hasKeyword("Defender")) {
                             setTargetCard(list.get(i));
                             return super.canPlayAI();
                         }
@@ -580,7 +580,7 @@ class CardFactory_Auras {
                     
                     for (int i = 0; i < list.size(); i++) {
                         if (CardFactoryUtil.canTarget(card, list.get(i))
-                                && !list.get(i).getKeyword().contains("Vigilance")) {
+                                && !list.get(i).hasKeyword("Vigilance")) {
                             setTargetCard(list.get(i));
                             return super.canPlayAI();
                         }
@@ -688,8 +688,8 @@ class CardFactory_Auras {
                     
                     for (int i = 0; i < list.size(); i++) {
                         if (CardFactoryUtil.canTarget(card, list.get(i))
-                                && !list.get(i).getKeyword().contains("Lifelink") 
-                                && !list.get(i).getKeyword().contains("Defender") 
+                                && !list.get(i).hasKeyword("Lifelink") 
+                                && !list.get(i).hasKeyword("Defender") 
                                 && !list.get(i).isEnchanted()) {
                             setTargetCard(list.get(i));
                             return super.canPlayAI();
@@ -945,10 +945,10 @@ class CardFactory_Auras {
 				private static final long serialVersionUID = 3426441132121179288L;
 
 				public void execute() {
-                    if(card.isEnchanting()) {
+                    if (card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        if(AllZoneUtil.isCardInPlay(crd)) {
-                            if(crd.getKeyword().contains("Haste")) {
+                        if (AllZoneUtil.isCardInPlay(crd)) {
+                            if (crd.hasKeyword("Haste")) {
                                 crd.setSickness(false);
                             } else {
                                 crd.setSickness(true);
@@ -1020,8 +1020,8 @@ class CardFactory_Auras {
                     
                     for (int i = 0; i < list.size(); i++) {
                         if (CardFactoryUtil.canTarget(card, list.get(i)) 
-                        		&& !list.get(i).getKeyword().contains("Fear") 
-                        		&& !list.get(i).getKeyword().contains("Defender") 
+                        		&& !list.get(i).hasKeyword("Fear") 
+                        		&& !list.get(i).hasKeyword("Defender") 
                         		&& !list.get(i).isEnchanted()) {
                             setTargetCard(list.get(i));
                             return super.canPlayAI();
@@ -1108,11 +1108,11 @@ class CardFactory_Auras {
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
                 			return CardFactoryUtil.canTarget(card, c) && 
-                			      !c.getKeyword().contains("CARDNAME doesn't untap during your untap step.");
+                			      ! c.hasKeyword("CARDNAME doesn't untap during your untap step.");
                 		}
                 	});
                 	
-                	if (card.getKeyword().contains("Enchant tapped creature")) {
+                	if (card.hasKeyword("Enchant tapped creature")) {
                 		list = list.filter(new CardListFilter() {
                     		public boolean addCard(Card c) {
                     			return c.isTapped();
@@ -1120,10 +1120,10 @@ class CardFactory_Auras {
                     	});
                 	}
                 	
-                	if (card.getKeyword().contains("Enchant creature without flying")) {
+                	if (card.hasKeyword("Enchant creature without flying")) {
                 		list = list.filter(new CardListFilter() {
                     		public boolean addCard(Card c) {
-                    			return ! c.getKeyword().contains("Flying");
+                    			return ! c.hasKeyword("Flying");
                     		}
                     	});
                 	}
@@ -1132,7 +1132,7 @@ class CardFactory_Auras {
                     	return false;
                     } else {
                     	CardListUtil.sortAttack(list);
-                    	if (! card.getKeyword().contains("Enchant creature without flying")) {
+                    	if (! card.hasKeyword("Enchant creature without flying")) {
                     		CardListUtil.sortFlying(list);
                     	}
                         setTargetCard(list.get(0));
@@ -1147,7 +1147,7 @@ class CardFactory_Auras {
                     Card c = getTargetCard();
                     
                     if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                    	if (card.getKeyword().contains("When CARDNAME enters the battlefield, tap enchanted creature.")) {
+                    	if (card.hasKeyword("When CARDNAME enters the battlefield, tap enchanted creature.")) {
                     		c.tap();
                     	}
                     	card.enchantCard(c);
@@ -1164,7 +1164,7 @@ class CardFactory_Auras {
 				public void execute() {
                     if (card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        if (! crd.getKeyword().contains("CARDNAME doesn't untap during your untap step."))
+                        if (! crd.hasKeyword("CARDNAME doesn't untap during your untap step."))
                         	crd.addExtrinsicKeyword("CARDNAME doesn't untap during your untap step.");
                     }
                 }//execute()
@@ -1203,16 +1203,16 @@ class CardFactory_Auras {
                     
                     String instruction = "Select target creature";
                     
-                    if (card.getKeyword().contains("Enchant tapped creature")) {
+                    if (card.hasKeyword("Enchant tapped creature")) {
                     	instruction = "Select target tapped creature";
                         creatures = creatures.filter(AllZoneUtil.tapped);
                     }
                     
-                    if (card.getKeyword().contains("Enchant creature without flying")) {
+                    if (card.hasKeyword("Enchant creature without flying")) {
                     	instruction = "Select target creature without flying";
                         creatures = creatures.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
-                                return ! c.getKeyword().contains("Flying");
+                                return ! c.hasKeyword("Flying");
                             }
                         });
                     }
@@ -1489,7 +1489,7 @@ class CardFactory_Auras {
                  *  no need to parse the CMC number at this time
                  */
                 if (option.contains("CMC 2 or less") || 
-                		card.getKeyword().contains("Enchant creature with converted mana cost 2 or less")) {
+                		card.hasKeyword("Enchant creature with converted mana cost 2 or less")) {
                 	optionCmcTwoOrLess[0] = true;
                 }
                 
@@ -1498,7 +1498,7 @@ class CardFactory_Auras {
                  *  no need to parse the colors at this time
                  */
                 if (option.contains("red or green") || 
-                		card.getKeyword().contains("Enchant red or green creature")) {
+                		card.hasKeyword("Enchant red or green creature")) {
                 	optionRedOrGreen[0] = true;
                 }
                 
@@ -1584,10 +1584,10 @@ class CardFactory_Auras {
 					private static final long serialVersionUID = -6323085271405286813L;
 
 					public void execute() {
-                        if(card.isEnchanting()) {
+                        if (card.isEnchanting()) {
                             Card crd = card.getEnchanting().get(0);
                             //set summoning sickness
-                            if(crd.getKeyword().contains("Haste")) {
+                            if (crd.hasKeyword("Haste")) {
                                 crd.setSickness(false);
                             } else {
                                 crd.setSickness(true);
@@ -1603,10 +1603,10 @@ class CardFactory_Auras {
 					private static final long serialVersionUID = -3086710987052359078L;
 
 					public void execute() {
-                        if(card.isEnchanting()) {
+                        if (card.isEnchanting()) {
                             Card crd = card.getEnchanting().get(0);
-                            if(AllZoneUtil.isCardInPlay(crd)) {
-                                if(crd.getKeyword().contains("Haste")) {
+                            if (AllZoneUtil.isCardInPlay(crd)) {
+                                if (crd.hasKeyword("Haste")) {
                                     crd.setSickness(false);
                                 } else {
                                     crd.setSickness(true);
@@ -1720,10 +1720,10 @@ class CardFactory_Auras {
 					private static final long serialVersionUID = -2519887209491512000L;
 
 					public void execute() {
-                        if(card.isEnchanting()) {
+                        if (card.isEnchanting()) {
                             Card crd = card.getEnchanting().get(0);
                             //set summoning sickness
-                            if(crd.getKeyword().contains("Haste")) {
+                            if (crd.hasKeyword("Haste")) {
                                 crd.setSickness(false);
                             } else {
                                 crd.setSickness(true);
@@ -1739,10 +1739,10 @@ class CardFactory_Auras {
 					private static final long serialVersionUID = 3426441132121179288L;
 
 					public void execute() {
-                        if(card.isEnchanting()) {
+                        if (card.isEnchanting()) {
                             Card crd = card.getEnchanting().get(0);
-                            if(AllZoneUtil.isCardInPlay(crd)) {
-                                if(crd.getKeyword().contains("Haste")) {
+                            if (AllZoneUtil.isCardInPlay(crd)) {
+                                if (crd.hasKeyword("Haste")) {
                                     crd.setSickness(false);
                                 } else {
                                     crd.setSickness(true);
