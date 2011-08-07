@@ -65,6 +65,7 @@ public enum Counters {
     ORE(),
     PAGE(),
     PETAL(),
+    PLAGUE(),
     PRESSURE(),
     PHYLACTERY,
     POLYP(),
