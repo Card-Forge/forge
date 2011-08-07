@@ -5,7 +5,7 @@ Text:You control enchanted creature.
 K:Enchant creature
 K:enControlCreature
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Demon.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no Demons, sacrifice CARDNAME.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ EQ0 
 SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Demon.YouCtrl
 SVar:Rarity:Uncommon

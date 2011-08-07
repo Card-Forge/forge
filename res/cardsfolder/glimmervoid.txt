@@ -8,7 +8,7 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no artifacts, sacrifice CARDNAME.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ EQ0 
 SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:Rarity:Rare
