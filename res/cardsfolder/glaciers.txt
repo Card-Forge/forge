@@ -1,0 +1,10 @@
+Name:Glaciers
+ManaCost:2 W U
+Types:Enchantment
+Text:no text
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W U
+K:stAnimateAll:Mountain:0/0:Land,Plains,Overwrite,KeepSupertype:no colors:No Abilities:No Condition:All Mountains are Plains.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glaciers.jpg
+End
