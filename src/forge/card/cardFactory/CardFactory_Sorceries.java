@@ -1307,7 +1307,7 @@ public class CardFactory_Sorceries {
                             new String[] {"Creature", "Beast"}, 3, 3, new String[] {""});
                     
                     //return card to hand if necessary
-                    Player player = card.getController().getOpponent();
+                    Player player = card.getController();
                     
                     CardList oppList = AllZoneUtil.getCreaturesInPlay(player.getOpponent());
                     CardList myList = AllZoneUtil.getCreaturesInPlay(player);
