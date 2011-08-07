@@ -1306,8 +1306,8 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-            	AllZone.GameAction.exile(sourceCard);
-            	sourceCard.addCounter(Counters.TIME, suspendCounters);
+            	Card c = AllZone.GameAction.exile(sourceCard);
+            	c.addCounter(Counters.TIME, suspendCounters);
             }
         };
         StringBuilder sbDesc = new StringBuilder();
