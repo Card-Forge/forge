@@ -1301,8 +1301,7 @@ public class AbilityFactory {
 		//The cost
 		String unlessCost = params.get("UnlessCost").trim();
 		if(unlessCost.equals("X"))
-			unlessCost = Integer.toString(CardFactoryUtil.xCount(source, source.getSVar("X")));
-		// Above xCount should probably be changed to a AF.calculateAmount
+			unlessCost = Integer.toString(AbilityFactory.calculateAmount(source, params.get("UnlessCost"), sa));
 		
 		Ability ability = new Ability(source, unlessCost) {
             @Override
