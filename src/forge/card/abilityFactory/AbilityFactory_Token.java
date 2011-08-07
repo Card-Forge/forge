@@ -229,9 +229,9 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 			
 		//Don't generate tokens without haste before main 2 if possible
-		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !haste)
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer) && !haste)
         	return false;
-		if(AllZone.Phase.isAfter(Constant.Phase.Combat_Begin) && oneShot)
+		if((AllZone.Phase.isAfter(Constant.Phase.Combat_Begin) || AllZone.Phase.isPlayerTurn(AllZone.HumanPlayer)) && oneShot)
         	return false;
 
 		// TODO: if i don't have enough blockers and my token can block one of the unblocked creatures

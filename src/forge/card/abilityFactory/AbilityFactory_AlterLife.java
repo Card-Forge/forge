@@ -200,6 +200,10 @@ public class AbilityFactory_AlterLife {
 		//Don't use lifegain before main 2 if possible
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
+		
+		//Don't tap creatures that may be able to block
+		if(AbilityFactory.waitForBlocking(sa))
+			return false;
 
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
@@ -463,6 +467,10 @@ public class AbilityFactory_AlterLife {
 		//Don't use loselife before main 2 if possible
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
+		
+		//Don't tap creatures that may be able to block
+		if(AbilityFactory.waitForBlocking(sa))
+			return false;
 		
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
@@ -787,6 +795,10 @@ public class AbilityFactory_AlterLife {
 		//Don't use poison before main 2 if possible
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
+		
+		//Don't tap creatures that may be able to block
+		if(AbilityFactory.waitForBlocking(sa))
+			return false;
 		 
 		 Target tgt = sa.getTarget();
 		 

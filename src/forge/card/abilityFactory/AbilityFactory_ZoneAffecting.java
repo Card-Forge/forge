@@ -199,6 +199,10 @@ public class AbilityFactory_ZoneAffecting {
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
 		
+		//Don't tap creatures that may be able to block
+		if(AbilityFactory.waitForBlocking(sa))
+			return false;
+		
 		double chance = .4;	// 40 percent chance of drawing with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed
@@ -553,6 +557,10 @@ public class AbilityFactory_ZoneAffecting {
 		//Don't use draw abilities before main 2 if possible
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
+		
+		//Don't tap creatures that may be able to block
+		if(AbilityFactory.waitForBlocking(sa))
+			return false;
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
@@ -1026,6 +1034,10 @@ public class AbilityFactory_ZoneAffecting {
 		//Don't use draw abilities before main 2 if possible
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
+		
+		//Don't tap creatures that may be able to block
+		if(AbilityFactory.waitForBlocking(sa))
+			return false;
 		
 		double chance = .5;	// 50 percent chance of discarding with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))

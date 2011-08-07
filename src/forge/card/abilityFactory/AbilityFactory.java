@@ -818,6 +818,14 @@ public class AbilityFactory {
 				&& AllZone.Phase.isNextTurn(AllZone.ComputerPlayer));
 	}
 	
+	//returns true if it's better to wait until blockers are declared
+	public static boolean waitForBlocking(SpellAbility sa){
+
+		return (sa.getSourceCard().isCreature() && sa.getPayCosts().getTap() 
+				&& (AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Blockers_InstantAbility) 
+				|| AllZone.Phase.isNextTurn(AllZone.HumanPlayer)));
+	}
+	
 	public static boolean isSorcerySpeed(SpellAbility sa){
 		if (sa.isSpell())
 			return sa.getSourceCard().isSorcery();
