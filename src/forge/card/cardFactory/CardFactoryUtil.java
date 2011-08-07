@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.StringTokenizer;
 import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
@@ -736,6 +735,13 @@ public class CardFactoryUtil {
                 card.addIntrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
                 card.addIntrinsicKeyword("Haste");
                 card.setUnearthed(true);
+            }
+			
+            @Override
+            public boolean canPlayAI() {
+            	if(AllZone.Phase.isAfter(Constant.Phase.Main1) || AllZone.Phase.isPlayerTurn(AllZone.HumanPlayer))
+            		return false;
+            	return ComputerUtil.canPayCost(this);
             }
         };
         SpellAbility_Restriction restrict = new SpellAbility_Restriction();
