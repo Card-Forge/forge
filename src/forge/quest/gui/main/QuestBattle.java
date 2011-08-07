@@ -51,7 +51,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Beast 2", "medium", "GR Furnace Celebration deck");
 //        addToDeckList("Beast 3", "hard", "UWB Standard Constructed deck");
         addToDeckList("Bela Lugosi 3", "hard", "B Vampire Aggro deck");
-        addToDeckList("Betty Rubble 3", "hard", "G deck with Broodwarden and Eldrazi Spawn tokens");
+        addToDeckList("Betty Rubble 3", "hard", "BRG Hand of Emrakul deck with Broodwarden and Eldrazi Spawn tokens");
         addToDeckList("Blackbeard 3", "hard", "W Soldiers deck with Preeminent Captain, Captain of the Watch and Daru Warchief");
         addToDeckList("Boba Fett 3", "hard", "WRG Dragons deck with Chandra Nalaar, Crucible of Fire and Dragon Roost");
         addToDeckList("Boris Karloff 3", "hard", "WR Boros Aggro deck with Kors, levelers and threat removal");
