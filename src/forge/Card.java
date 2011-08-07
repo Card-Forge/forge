@@ -2921,6 +2921,15 @@ public class Card extends MyObservable {
              {
                      if(!manaCost.contains("P")) return false;
              }
+             else if(Property.startsWith("IsTriggered"))
+             {
+                 Object TriggeredObject = source.getTriggeringObject(Property.substring(11));
+                 if(!(TriggeredObject instanceof Card))
+                     return false;
+
+                 if(!TriggeredObject.equals(this))
+                     return false;
+             }
              else {
             	 if(Property.equals("ChosenType")) {
             		 if(!isType(source.getChosenType())) return false;
