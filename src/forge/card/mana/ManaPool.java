@@ -321,7 +321,12 @@ public class ManaPool extends Card {
     	    		return choice;
     	    	}
     	    	
-	    		Object o = GuiUtils.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
+    	    	Object o;
+    	    	
+    	    	if (owner.isHuman()) 
+	    			o = GuiUtils.getChoiceOptional("Pay Mana from Mana Pool", alChoice.toArray());
+    	    	else o = alChoice.get(0); //owner is computer
+	    		
 	    		if (o != null){
 	    			String ch = o.toString();
 	    			boolean grabSnow = ch.startsWith("{S}");

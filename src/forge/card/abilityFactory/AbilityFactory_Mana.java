@@ -15,6 +15,7 @@ import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input_PayManaCostUtil;
 
@@ -116,7 +117,6 @@ public class AbilityFactory_Mana {
 
 			@Override
 			public boolean chkAI_Drawback() {
-				// TODO: AI shouldn't use this until he has a mana pool
 				return true;
 			}
 
@@ -158,7 +158,16 @@ public class AbilityFactory_Mana {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 		
-		abMana.produceMana(generatedMana(abMana, af, sa), sa.getActivatingPlayer());
+		ArrayList<Player> tgtPlayers;
+		
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+		
+		for(Player player : tgtPlayers)
+			abMana.produceMana(generatedMana(abMana, af, sa), player);
 		
 		// convert these to SubAbilities when appropriate		
 		if (params.containsKey("Stuck")){
