@@ -249,63 +249,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
 
-                
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Twincast") || cardName.equals("Reverberate") || cardName.equals("Fork")) {
-            final SpellAbility spell = new Spell(card) {
-
-				private static final long serialVersionUID = -659841515428746L;
-
-				@Override
-                public void resolve() {
-					AllZone.CardFactory.copySpellontoStack(card,getTargetCard(), true);				
-				}
-                
-                public boolean canPlay()
-                {
-                	ArrayList<Card> list = AllZone.Stack.getSourceCards();
-                	CardList StackList = new CardList();
-                	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
-
-                	StackList = StackList.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.isSorcery() || c.isInstant();
-                    	}
-                    });
-                	return StackList.size() > 0 && super.canPlay();
-                }
-            };//SpellAbility
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -7823269301012427007L;
-                
-                @Override
-                public void showMessage() {
-                	ArrayList<Card> list = AllZone.Stack.getSourceCards();
-                	CardList StackList = new CardList();
-                	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
-
-                	StackList = StackList.filter(new CardListFilter()
-                    {
-                    	public boolean addCard(Card c)
-                    	{
-                    		return c.isSorcery() || c.isInstant();
-                    	}
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_Spell(spell, StackList, false));
-                    
-                }//showMessage()
-            };//Input
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            
-            card.setCopiesSpells(true);
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
+                        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Fact or Fiction")) {
