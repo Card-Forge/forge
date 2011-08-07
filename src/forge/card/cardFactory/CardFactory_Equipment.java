@@ -199,7 +199,7 @@ class CardFactory_Equipment {
         				public boolean addCard(Card c) {
         					return CardFactoryUtil.AI_doesCreatureAttack(c)
         							&& CardFactoryUtil.canTarget(card, c)
-        							&& (!c.getKeyword().contains("Defender"));
+        							&& (!c.hasKeyword("Defender"));
         				}
         			});
         			
