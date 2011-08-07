@@ -231,10 +231,10 @@ public class ComputerUtil
   {
 	  // TODO: We should really restrict what doesn't use the Stack
 	  
-    if(canPayCost(sa))
+    if (canPayCost(sa))
     {
     	Card source = sa.getSourceCard();
-		if(sa.isSpell() && !source.isCopiedSpell())
+		if (sa.isSpell() && !source.isCopiedSpell())
 			AllZone.GameAction.moveToStack(source);
 
       sa.setActivatingPlayer(AllZone.ComputerPlayer);
@@ -243,9 +243,9 @@ public class ComputerUtil
 
       sa.resolve();
 
-      if (source.getKeyword().contains("Draw a card."))
+      if (source.hasKeyword("Draw a card."))
     	  source.getController().drawCard();
-	  if (source.getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
+	  if (source.hasKeyword("Draw a card at the beginning of the next turn's upkeep."))
 		  source.getController().addSlowtripList(source);
 
       //destroys creatures if they have lethal damage, etc..
