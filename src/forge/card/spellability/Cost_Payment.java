@@ -769,6 +769,7 @@ public class Cost_Payment {
 		    private void done() {
                 if(phyLifeToLose > 0)
                     AllZone.HumanPlayer.payLife(phyLifeToLose,sa.getSourceCard());
+                sa.getSourceCard().setSunburstValue(mana.getSunburst());
 		    	resetManaCost();
 		    	payment.setPayMana(true);
 		    	stop();
