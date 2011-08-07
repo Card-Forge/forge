@@ -4582,6 +4582,7 @@ res/cardsfolder/mistblade_shinobi.txt svneol=native#text/plain
 res/cardsfolder/mistfolk.txt -text svneol=native#text/plain
 res/cardsfolder/mistform_dreamer.txt svneol=native#text/plain
 res/cardsfolder/mistform_mutant.txt svneol=native#text/plain
+res/cardsfolder/mistform_shrieker.txt svneol=native#text/plain
 res/cardsfolder/mistform_skyreaver.txt svneol=native#text/plain
 res/cardsfolder/mistform_ultimus.txt -text svneol=native#text/plain
 res/cardsfolder/mistmeadow_skulk.txt -text svneol=native#text/plain
