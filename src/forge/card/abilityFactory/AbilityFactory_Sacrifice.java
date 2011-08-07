@@ -109,6 +109,10 @@ public class AbilityFactory_Sacrifice {
 		else
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
+		
 		Target tgt = af.getAbTgt();
 		ArrayList<Player> tgts;
 		if (tgt != null)
@@ -271,6 +275,11 @@ public class AbilityFactory_Sacrifice {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
 		String DrawBack = params.get("SubAbility");
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 		
 		// Expand Sacrifice keyword here depending on what we need out of it.
 		String num = params.containsKey("Amount") ? params.get("Amount") : "1";
