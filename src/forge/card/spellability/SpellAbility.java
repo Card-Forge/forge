@@ -388,7 +388,7 @@ public abstract class SpellAbility {
     
     public void setStackDescription(String s) {
         stackDescription = s;
-        if(description == "")
+        if(description == "" && sourceCard.getText().equals(""))
             description = s;
     }
     
