@@ -136,19 +136,48 @@ public class TableSorter implements Comparator<Card>, NewConstants
 		return count;
 	}
 
-	final private Integer getRarity(Card c)
-	{
-		if(c.getRarity().equals("Common"))
-			return Integer.valueOf(1);
-		else if(c.getRarity().equals("Uncommon"))
-			return Integer.valueOf(2);
-		else if(c.getRarity().equals("Rare"))
-			return Integer.valueOf(3);
-		else if(c.getRarity().equals("Land"))
-			return Integer.valueOf(4);
-		else
-			return Integer.valueOf(5);
-	}
+    final private Integer getRarity(Card c)
+    {
+        String rarity = c.getRarity();
+
+        if (rarity.equals("new"))
+            return 1;
+        
+        if (!c.getCurSetCode().equals("")) {
+            SetInfo si = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode());
+            if (si != null)
+                rarity = si.Rarity;
+        }
+        
+        if (rarity.equals("Common"))
+            return 2;
+        else if (rarity.equals("Uncommon"))
+            return 3;
+        else if (rarity.equals("Rare"))
+            return 4;
+        else if (rarity.equals("Mythic"))
+            return 5;
+        else if (rarity.equals("Special"))
+            return 6;
+        else if (rarity.equals("Land"))
+            return 7;
+        else
+            return 8;
+        
+        // This older form of the method no longer works as it is not compatible with set info.
+        /*
+        if(c.getRarity().equals("Common"))
+            return Integer.valueOf(1);
+        else if(c.getRarity().equals("Uncommon"))
+            return Integer.valueOf(2);
+        else if(c.getRarity().equals("Rare"))
+            return Integer.valueOf(3);
+        else if(c.getRarity().equals("Land"))
+            return Integer.valueOf(4);
+        else
+            return Integer.valueOf(5);
+        */
+    }
 
 	final private Long getValue(Card c)
 	{
