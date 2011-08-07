@@ -72,6 +72,9 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Captain America 3", "hard", "Bant Exalted deck");
         addToDeckList("Catwoman 1", "easy", "WG Cat deck with Kjeldoran War Cry");
         addToDeckList("Catwoman 2", "medium", "WRG Cat deck with Lightning Helix");
+        addToDeckList("Cave Troll 2", "medium", "Mono B Quest for the Nihil Stone deck with The Rack and Bottomless Pit");
+        addToDeckList("Cave Troll 3", "hard", "Mono B Quest for the Nihil Stone deck with The Rack, Bottomless Pit and Nyxathid");
+        
 //        addToDeckList("Colbert 2", "medium", "WG Cats deck");
 //        addToDeckList("Colbert 3", "hard", "WUR Extended deck");
 //        addToDeckList("Colossus 2", "medium", "RG Changeling deck");
