@@ -366,7 +366,7 @@ public class CardFactory implements NewConstants {
         //this is so permanents like creatures and artifacts have a "default" spell
         if(!card.isLand()) card.addSpellAbility(new Spell_Permanent(card));
         
-        if(card.getKeyword().contains("CARDNAME enters the battlefield tapped.")) {
+        if (card.hasKeyword("CARDNAME enters the battlefield tapped.")) {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 203335252453049234L;
                 
@@ -376,7 +376,7 @@ public class CardFactory implements NewConstants {
                 }
             });
         }//if "Comes into play tapped."
-        if(card.getKeyword().contains("CARDNAME enters the battlefield tapped unless you control two or fewer other lands.")) {
+        if (card.hasKeyword("CARDNAME enters the battlefield tapped unless you control two or fewer other lands.")) {
         	card.addComesIntoPlayCommand(new Command() {
 				private static final long serialVersionUID = 6436821515525468682L;
 
