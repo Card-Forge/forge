@@ -831,7 +831,7 @@ public class GameAction {
         AllZone.HumanPlayer.setLife(humanLife, null);
         
         if (qa != null){
-        	computer.addAll(forge.quest.data.QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment).toArray());
+        	computer.addAll(forge.quest.data.QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment));
         }
 
         for (Card c : human)
