@@ -1277,7 +1277,7 @@ public class CardFactoryUtil {
                         return c.isCreature() 
                                 && CombatUtil.canAttackNextTurn(c)
                                 && CardFactoryUtil.canTarget(sourceCard, c) 
-                                && (c.getNetDefense() + Tough > 0);
+                                && (c.getNetDefense() + Tough > 0 || sourceCard.getName().equals("Skullclamp"));
                     }
                 });
 
