@@ -124,7 +124,8 @@ public class CombatUtil {
 	        if (attacker.hasKeyword("Legendary landwalk")) {
 	            temp = blkCL.filter(new CardListFilter() {
 	                public boolean addCard(Card c) {
-	                    return c.isLand() && c.getType().contains("Legendary");
+	                    return c.isLand() 
+	                    		&& c.isType("Legendary");
 	                }
 	            });
 	            if (!temp.isEmpty()) return false;
@@ -187,7 +188,8 @@ public class CombatUtil {
 	        if (attacker.hasKeyword("Desertwalk")) {
 	            temp = blkCL.filter(new CardListFilter() {
 	                public boolean addCard(Card c) {
-	                    return c.isLand() && c.getType().contains("Desert");
+	                    return c.isLand() 
+	                    		&& c.isType("Desert");
 	                }
 	            });
 	            if (!temp.isEmpty()) return false;
@@ -1568,17 +1570,18 @@ public class CombatUtil {
                 } //if (creatures.size() > 0) 
             }//Preeminent Captain
             
-            else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
+            else if (c.getName().equals("Sapling of Colfenor") 
+            		 && !c.getCreatureAttackedThisCombat()) {
                 Player player = c.getController();
                 
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 
-                if(lib.size() > 0) {
+                if (lib.size() > 0) {
                     CardList cl = new CardList();
                     cl.add(lib.get(0));
                     GuiUtils.getChoiceOptional("Top card", cl.toArray());
 	                Card top = lib.get(0);
-	                if(top.getType().contains("Creature")) {
+	                if (top.isType("Creature")) {
 	                    player.gainLife(top.getBaseDefense(), c);
 	                    player.loseLife(top.getBaseAttack(), c);
 	

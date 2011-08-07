@@ -247,7 +247,8 @@ public class CardListUtil
 	  {
 	      public int compare(Card a, Card b)
 	      {
-	        if ( a.getType().contains(t) && b.getType().contains(t))
+	        if ( a.isType(t) 
+	        		&& b.isType(t))
 	          return 0;
 	        else if (a.hasKeyword(t))
 	          return 1;

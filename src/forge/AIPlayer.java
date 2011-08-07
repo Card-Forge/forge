@@ -177,24 +177,24 @@ public class AIPlayer extends Player{
 	
 	protected void doScry(final CardList topN, final int N) {
 		int num = N;
-		for(int i = 0; i < num; i++) {
+		for (int i = 0; i < num; i++) {
             boolean bottom = false;
-            if(topN.get(i).getType().contains("Basic")) {
+            if (topN.get(i).isType("Basic")) {
                 CardList bl = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 bl = bl.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        if(c.getType().contains("Basic")) return true;
+                        if (c.isType("Basic")) return true;
                         
                         return false;
                     }
                 });
                 
                 bottom = bl.size() > 5; // if control more than 5 Basic land, probably don't need more
-            } else if(topN.get(i).getType().contains("Creature")) {
+            } else if (topN.get(i).isType("Creature")) {
                 CardList cl = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 cl = cl.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        if(c.getType().contains("Creature")) return true;
+                        if (c.isType("Creature")) return true;
                         
                         return false;
                     }
@@ -202,14 +202,14 @@ public class AIPlayer extends Player{
                 
                 bottom = cl.size() > 5;  // if control more than 5 Creatures, probably don't need more
             }
-            if(bottom) {
+            if (bottom) {
             	Card c = topN.get(i);
             	AllZone.GameAction.moveToBottomOfLibrary(c);
                 //topN.remove(c);
             }
         }
         num = topN.size();
-        for(int i = 0; i < num; i++) // put the rest on top in random order
+        for (int i = 0; i < num; i++) // put the rest on top in random order
         {
             Random rndm = MyRandom.random;
             int r = rndm.nextInt(topN.size());
