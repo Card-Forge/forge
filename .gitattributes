@@ -6605,6 +6605,7 @@ res/cardsfolder/snapback.txt -text svneol=native#text/plain
 res/cardsfolder/snapping_creeper.txt svneol=native#text/plain
 res/cardsfolder/snapping_drake.txt -text svneol=native#text/plain
 res/cardsfolder/snapsail_glider.txt -text svneol=native#text/plain
+res/cardsfolder/snarling_undorak.txt svneol=native#text/plain
 res/cardsfolder/sneaky_homunculus.txt -text svneol=native#text/plain
 res/cardsfolder/snorting_gahr.txt -text svneol=native#text/plain
 res/cardsfolder/snow_covered_forest.txt -text svneol=native#text/plain
