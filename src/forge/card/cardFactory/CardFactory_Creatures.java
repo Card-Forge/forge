@@ -144,7 +144,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     
                     return list.containsName("Glorious Anthem") || list.containsName("Gaea's Anthem");
                 }
@@ -371,11 +371,8 @@ public class CardFactory_Creatures {
 						color = (String)o;
 					}
 					else {
-						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-						CardList list = new CardList();
-						list.addAll(lib.getCards());
-						list.addAll(hand.getCards());
+						CardList list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
+						list.addAll(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer));
 
 						if (list.size() > 0) {  
 							String mpcolor = CardFactoryUtil.getMostProminentColor(list);
@@ -395,27 +392,24 @@ public class CardFactory_Creatures {
 				public void resolve() {
 					final String kboost = getKeywordBoost();
 					
-					CardList list = new CardList();
-					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    list.addAll(play.getCards());
+					CardList list = AllZoneUtil.getPlayerCardsInPlay(card.getController());
                     
                     for (int i = 0; i < list.size(); i++) {
-                        final Card[] target = new Card[1];
-                        target[0] = list.get(i);
+                        final Card target = list.get(i);
                         
                         final Command untilEOT = new Command() {
 							private static final long serialVersionUID = 6308754740309909072L;
 
 							public void execute() {
-                                if (AllZoneUtil.isCardInPlay(target[0])) {
-                                	target[0].removeExtrinsicKeyword(kboost);
+                                if (AllZoneUtil.isCardInPlay(target)) {
+                                	target.removeExtrinsicKeyword(kboost);
                                 }
                             }
                         };//Command
                         
-                        if (AllZoneUtil.isCardInPlay(target[0]) && 
-                        		!target[0].getKeyword().contains(kboost)) {
-                            target[0].addExtrinsicKeyword(kboost);
+                        if (AllZoneUtil.isCardInPlay(target) && 
+                        		!target.getKeyword().contains(kboost)) {
+                            target.addExtrinsicKeyword(kboost);
                             
                             AllZone.EndOfTurn.addUntil(untilEOT);
                         }//if
@@ -535,7 +529,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() { 
-                    CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
+                    CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
                     if(library.size() == 0) return false;
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());                                      
                     boolean canPlayLand = card.getController().canPlayLand();
@@ -581,10 +575,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     if(card.getController().isHuman()) {
-                        if(AllZone.Human_Hand.getCards().length == 0) AllZone.GameAction.sacrifice(card);
+                        if(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer).size() == 0) AllZone.GameAction.sacrifice(card);
                         else AllZone.InputControl.setInput(discard);
                     } else {
-                        CardList list = new CardList(AllZone.Computer_Hand.getCards());
+                        CardList list = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
                         list = list.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
                                 return (!c.isCreature());
@@ -620,8 +614,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    CardList list = new CardList(hand.getCards());
+                    CardList list = AllZoneUtil.getPlayerHand(card.getController());
                     list.remove(card);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -662,8 +655,8 @@ public class CardFactory_Creatures {
             	
                 @Override
                 public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    if(hand.getCards().length == 0) 
+                	CardList hand = AllZoneUtil.getPlayerHand(card.getController());
+                    if(hand.size() == 0) 
                     	AllZone.GameAction.sacrifice(card);
                     else 
                     	card.getController().discardRandom(this);
@@ -815,14 +808,14 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     //shuffle hand into library, then shuffle library
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    Card c[] = hand.getCards();
-                    for(int i = 0; i < c.length; i++)
-                        AllZone.GameAction.moveTo(library, c[i]);
+                    CardList hand = AllZoneUtil.getPlayerHand(card.getController());
+                    for(int i = 0; i < hand.size(); i++) {
+                        AllZone.GameAction.moveTo(library, hand.get(i));
+                    }
                     card.getController().shuffle();
                     
                     //draw same number of cards as before
-                    for(int i = 0; i < c.length; i++)
+                    for(int i = 0; i < hand.size(); i++)
                     	card.getController().drawCard();
                 }
             };//SpellAbility
@@ -881,9 +874,7 @@ public class CardFactory_Creatures {
             final CommandReturn getCreature = new CommandReturn() {
                 public Object execute() {
                     //get all creatures
-                    CardList list = new CardList();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    list.addAll(play.getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(card.getController());
                     
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -934,7 +925,7 @@ public class CardFactory_Creatures {
                     {
                         Card target;
                         //must target computer creature
-                        CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
+                        CardList computer = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                         computer = computer.getType("Goblin");
                         computer.remove(card);
                         
