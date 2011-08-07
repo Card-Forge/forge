@@ -4,7 +4,7 @@ Types:Creature Giant
 Text:no text
 PT:6/6
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 2
 SVar:Rarity:Mythic
