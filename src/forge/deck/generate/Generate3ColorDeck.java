@@ -396,7 +396,7 @@ public class Generate3ColorDeck
 			{
 				Card c = tDeck.get(r.nextInt(tDeck.size()));
 				
-				while (c.getType().contains("Basic"))	// don't remove basic lands
+				while (c.isType("Basic"))	// don't remove basic lands
 					c = tDeck.get(r.nextInt(tDeck.size()));
 				
 				tDeck.remove(c);
