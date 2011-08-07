@@ -2334,64 +2334,6 @@ public class CardFactoryUtil {
     }//input_discardRecall()
     
     //****************copied from input_targetType*****************
-    //cardType is like "Creature", "Land", "Artifact", "Goblin", "Legendary", ";"-delimited
-    //cardType can also be "All", which will allow any permanent to be selected
-    public static Input input_targetType(final SpellAbility spell, final String cardTypeList) {
-       Input target = new Input() {
-		private static final long serialVersionUID = 6443658187985259709L;
-		public void showMessage() {
-             StringTokenizer st = new StringTokenizer(cardTypeList, ";");
-             if(cardTypeList.equals("All")) {
-                AllZone.Display.showMessage(spell.getSourceCard()+" - Select target permanent");
-             }
-             else {
-                StringBuffer toDisplay = new StringBuffer();
-                toDisplay.append(spell.getSourceCard()+" - Select target ");
-                while( st.hasMoreTokens() ) {
-                   toDisplay.append(st.nextToken());
-                   if( st.hasMoreTokens() ) {
-                      toDisplay.append(" or ");
-                   }
-                }
-                AllZone.Display.showMessage( toDisplay.toString() );
-             }
-             ButtonUtil.enableOnlyCancel();
-          }
-          public void selectButtonCancel() {stop();}
-          public void selectCard(Card card, PlayerZone zone) {
-        	  boolean foundCardType = false;
-        	  StringTokenizer st = new StringTokenizer(cardTypeList, ";");
-        	  if( cardTypeList.equals("All") ) {
-        		  foundCardType = true;
-        	  } else {
-                while( st.hasMoreTokens() ) {
-                   if( card.getType().contains( st.nextToken() )) {
-                      foundCardType = true;
-                   }
-                }
-             }
-        	  if(!canTarget(spell, card)) {
-        		  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-        	  }
-        	  
-        	  else if( foundCardType && zone.is(Constant.Zone.Battlefield)) {
-                spell.setTargetCard(card);
-                if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
-                {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    stop();
-                }
-                else
-                	stopSetNext(new Input_PayManaCost(spell));
-             }
-          }
-       };
-       return target;
-    }//input_targetType()
-    //***************end copy******************
-
-
     public static Input input_targetCreature(final SpellAbility spell) {
         return input_targetCreature(spell, Command.Blank);
     }

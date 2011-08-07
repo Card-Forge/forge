@@ -459,60 +459,39 @@ public class CardFactory_Sorceries {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Roiling Terrain")) {
-            SpellAbility spell = new Spell(card) {
-
+            //SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost("2 R R", cardName, false);
+        	final Target tgt = new Target(card, "Select a Land", "Land".split(","));
+        	
+        	SpellAbility spell = new Spell(card, cost, tgt) {
 				private static final long serialVersionUID = -65124658746L;
 
 				@Override
                 public void resolve() {
-                    if(AllZoneUtil.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        AllZone.GameAction.destroy(getTargetCard());
-                        CardList Grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, getTargetCard().getController()).getCards());
-                        int Damage = (Grave.getType("Land")).size();
-                        getTargetCard().getController().addDamage(Damage, card);
-                    }
+					Card c = tgt.getTargetCards().get(0);
+
+					Player controller = c.getController();
+                    AllZone.GameAction.destroy(c);
+                    
+                    int damage = AllZoneUtil.getPlayerTypeInGraveyard(controller, "Land").size();
+
+                    controller.addDamage(damage, card);
 				}
-                @Override
-                public void chooseTargetAI() {
-                    //target basic land that Human only has 1 or 2 in play
-                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
-                    land = land.getType("Land");
-                    
-                    Card target = null;
-                    
-                    String[] name = {"Forest", "Swamp", "Plains", "Mountain", "Island"};
-                    for(int i = 0; i < name.length; i++)
-                        if(land.getName(name[i]).size() == 1) {
-                            target = land.getName(name[i]).get(0);
-                            break;
-                        }
-                    
-                    //see if there are only 2 lands of the same type
-                    if(target == null) {
-                        for(int i = 0; i < name.length; i++)
-                            if(land.getName(name[i]).size() == 2) {
-                                target = land.getName(name[i]).get(0);
-                                break;
-                            }
-                    }//if
-                    if(target == null) {
-                        land.shuffle();
-                        target = land.get(0);
-                    }
-                    setTargetCard(target);
-                }//chooseTargetAI()
                 
                 @Override
                 public boolean canPlayAI() {
                     CardList land = new CardList(AllZone.Human_Battlefield.getCards());
                     land = land.getType("Land");
-                    return land.size() != 0;
+                    
+                    if (land.size() != 0)
+                    	return false;
+                    tgt.resetTargets();
+                    tgt.addTarget(CardFactoryUtil.AI_getBestLand(land));
+                    
+                    return true;
                 }
             };//SpellAbility
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
-            
+
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);  

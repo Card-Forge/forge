@@ -1658,46 +1658,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Obsidian Fireheart")) {
-            final Ability ability = new Ability(card, "1 R R") {
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    
-                    if(AllZoneUtil.isCardInPlay(c) && c.isLand() && (c.getCounters(Counters.BLAZE) == 0)) c.addCounter(
-                            Counters.BLAZE, 1);
-                    
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList land = new CardList(play.getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isLand() && c.getCounters(Counters.BLAZE) < 1;
-                        }
-                    });
-                    
-                    if(land.size() > 0) setTargetCard(land.get(0));
-                    
-                    return land.size() > 0;
-                }
-                
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("1 R R: Put a blaze counter on target land without a blaze counter on it. ");
-            sb.append("For as long as that land has a blaze counter on it, it has \"At the beginning of your upkeep, ");
-            sb.append("this land deals 1 damage to you.\" (The land continues to burn after Obsidian Fireheart has left the battlefield.)");
-            ability.setDescription(sb.toString());
-            
-            ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Land"));
-            card.addSpellAbility(ability);
-        }// *************** END ************ END **************************        
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Wild Mongrel")) {
         	
         	final String[] color = new String[1];
@@ -2084,32 +2044,35 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Memnarch")) {
             //has 2 non-tap abilities that affect itself
-            final SpellAbility ability1 = new Ability(card, "1 U U") {
-                @Override
-                public void resolve() {
-                    if(AllZoneUtil.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        Card crd = getTargetCard();
-                        ArrayList<String> types = crd.getType();
-                        crd.setType(new ArrayList<String>()); //clear
-                        getTargetCard().addType("Artifact"); //make sure artifact is at the beginning
-                        for(String type:types)
-                            crd.addType(type);
-                        
-                    }
+        	Cost cost = new Cost("1 U U", cardName, true);
+        	final Target target = new Target(card, "Select a permanent", "Permanent".split(","));
+
+            final SpellAbility ability1 = new Ability_Activated(card, cost, target) {
+				private static final long serialVersionUID = -887237000483591242L;
+
+				@Override
+                public void resolve(){
+                	Card crd = target.getTargetCards().get(0);
+                	
+                    ArrayList<String> types = crd.getType();
+                    crd.setType(new ArrayList<String>()); //clear
+                    getTargetCard().addType("Artifact"); //make sure artifact is at the beginning
+                    for(String type:types)
+                        crd.addType(type);
+
                 }//resolve()
                 
                 @Override
                 public boolean canPlayAI() {
                     CardList list = getCreature();
-                    return list.size() != 0;
+                    
+                    if (list.size() == 0)
+                    	return false;
+                    
+                    target.resetTargets();
+                    target.addTarget(CardFactoryUtil.AI_getBestCreature(getCreature()));
+                    return true;
                 }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(target);
-                }//chooseTargetAI()
                 
                 CardList getCreature() {
                     CardList list = new CardList(AllZone.Human_Battlefield.getCards());
@@ -2124,7 +2087,6 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability1);
             ability1.setDescription("1 U U: Target permanent becomes an artifact in addition to its other types. (This effect doesn't end at end of turn.)");
-            ability1.setBeforePayMana(CardFactoryUtil.input_targetType(ability1, "All"));
         }//*************** END ************ END **************************
         
 
