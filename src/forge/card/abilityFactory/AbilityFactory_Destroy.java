@@ -311,6 +311,10 @@ public class AbilityFactory_Destroy {
 		final boolean noRegen = af.getMapParams().containsKey("NoRegen");
 		StringBuilder sb = new StringBuilder();
 		Card host = af.getHostCard();
+		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 
 		ArrayList<Card> tgtCards;
 
@@ -360,6 +364,11 @@ public class AbilityFactory_Destroy {
 		String DrawBack = params.get("SubAbility");
 		final boolean noRegen = params.containsKey("NoRegen");
 		Card card = sa.getSourceCard();
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 
 		ArrayList<Card> tgtCards;
 
