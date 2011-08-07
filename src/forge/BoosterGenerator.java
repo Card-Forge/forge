@@ -22,15 +22,21 @@ public class BoosterGenerator {
 	private int iMythics = 0;
 	private int iSpecials = 0;
 
-	private int numCommons = 11;
-	private int numUncommons = 3;
-	private int numRares = 1;
+	private int numCommons = 0;
+	private int numUncommons = 0;
+	private int numRares = 0;
 	private int numMythics = 0;
 	private int numSpecials = 0;
 
 	private Random r  = new Random();
 
 	public BoosterGenerator() {
+		numCommons = 11;
+		numUncommons = 3;
+		numRares = 1;
+		numMythics = 0;
+		numSpecials = 0;
+
 		CardList tList = AllZone.CardFactory.getAllCards();
 		for (int i=0; i<tList.size(); i++) {
 			Card c = tList.get(i);
@@ -44,6 +50,12 @@ public class BoosterGenerator {
 	}
 
 	public BoosterGenerator(String DeckFile, int nCommons, int nUncommons, int nRares, int nMythics, int nSpecials, boolean ignoreRarity) {
+		numCommons = nCommons;
+		numUncommons = nUncommons;
+		numRares = nRares;
+		numMythics = nMythics;
+		numSpecials = nSpecials;
+		
 		DeckManager dio = new DeckManager(ForgeProps.getFile(NewConstants.NEW_DECKS));
 		Deck dPool= dio.getDeck(DeckFile);
 		if (dPool == null)
@@ -88,15 +100,15 @@ public class BoosterGenerator {
 		}
 
 		shuffleAll();
-
-		numCommons = nCommons;
-		numUncommons = nUncommons;
-		numRares = nRares;
-		numMythics = nMythics;
-		numSpecials = nSpecials;
 	}
 
 	public BoosterGenerator(final String SetCode) {
+		numCommons = 0;
+		numUncommons = 0;
+		numRares = 0;
+		numMythics = 0;
+		numSpecials = 0;
+		
 		CardList tList = AllZone.CardFactory.getAllCards();
 		for (int i=0; i<tList.size(); i++) {
 			Card c = tList.get(i);
