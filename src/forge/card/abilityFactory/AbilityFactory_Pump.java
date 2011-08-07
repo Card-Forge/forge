@@ -798,6 +798,9 @@ public class AbilityFactory_Pump {
     
     private boolean pumpAllCanPlayAI(SpellAbility sa) {
     	String valid = "";
+		Random r = MyRandom.random;
+		final Card source = sa.getSourceCard();
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()); //to prevent runaway activations 
     	
     	if(params.containsKey("ValidCards")) {
 			valid = params.get("ValidCards");
@@ -808,10 +811,17 @@ public class AbilityFactory_Pump {
     	CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
     	human = human.getValidCards(valid,hostCard.getController(), hostCard);
     	
-    	if(AF.isCurse()) {
-    		return human.size() > comp.size();
-    	}
-    	else return comp.size() > human.size();
+    	if(AF.isCurse() && (human.size() <= comp.size()))
+    		return false;
+    	
+    	//don't use PumpAll after Combat_Begin until AI is improved
+    	if(AllZone.Phase.isAfter(Constant.Phase.Combat_Begin))
+    		return false;
+    	
+    	if (comp.size() <= human.size() || comp.size() <= 1)
+    		return false;
+    	
+    	return (r.nextFloat() < .6667) && chance;
     }
     
     private void doPumpAllResolve(SpellAbility sa) {
