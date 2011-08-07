@@ -3535,6 +3535,7 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
           else if(cardName.equals("Sutured Ghoul")) {
         	  final int[] numCreatures = new int[1];
@@ -4093,7 +4094,8 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Clone") || cardName.equals("Vesuvan Doppelganger") 
         		|| cardName.equals("Quicksilver Gargantuan")
-        		|| cardName.equals("Jwari Shapeshifter")) {
+        		|| cardName.equals("Jwari Shapeshifter")
+        		|| cardName.equals("Phyrexian Metamorph")) {
         	final CardFactory cfact = cf;
         	final Card[] copyTarget = new Card[1];
         	final Card[] cloned = new Card[1];
@@ -4140,6 +4142,7 @@ public class CardFactory_Creatures {
 						cloned[0] = CardFactory.copyStats(copyTarget[0]);
 						cloned[0].setOwner(card.getController());
 						cloned[0].setController(card.getController());
+						if(cardName.equals("Phyrexian Metamorph")) cloned[0].addType("Artifact");
 						cloned[0].setCloneOrigin(card);
 						cloned[0].addLeavesPlayCommand(leaves);
 						cloned[0].setCloneLeavesPlayCommand(leaves);
@@ -4175,7 +4178,10 @@ public class CardFactory_Creatures {
 
 				@Override
             	public void showMessage() {
-            		AllZone.Display.showMessage(cardName+" - Select a creature on the battlefield");
+					String message = "Select a creature ";
+					if(cardName.equals("Phyrexian Metamorph")) message += "or artifact ";
+					message += "on the battlefield";
+            		AllZone.Display.showMessage(cardName+" - "+message);
             		ButtonUtil.enableOnlyCancel();
             	}
 				
@@ -4184,7 +4190,8 @@ public class CardFactory_Creatures {
             	
             	@Override
             	public void selectCard(Card c, PlayerZone z) {
-            		if( z.is(Constant.Zone.Battlefield) && c.isCreature()) {
+            		if( z.is(Constant.Zone.Battlefield) && 
+            				(c.isCreature() || (cardName.equals("Phyrexian Metamorph") && c.isArtifact()))) {
             			if(cardName.equals("Jwari Shapeshifter") && ! c.isType("Ally"))
             			{
             				return;
@@ -4534,8 +4541,10 @@ public class CardFactory_Creatures {
 
             ability.setDescription(abCost+"Look at the top three cards of target player's library.");
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************  
+        }//*************** END ************ END **************************
 
+      
+        //*************** START *********** START **************************
         else if(cardName.equals("Awakener Druid"))
         {
             final long[] timeStamp = {0};
@@ -4569,7 +4578,7 @@ public class CardFactory_Creatures {
 
             myTrig.setOverridingAbility(awaken);
             card.addTrigger(myTrig);
-        }
+        }//*************** END ************ END **************************
         
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)

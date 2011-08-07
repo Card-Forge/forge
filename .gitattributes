@@ -5252,6 +5252,7 @@ res/cardsfolder/phyrexian_ingester.txt svneol=native#text/plain
 res/cardsfolder/phyrexian_ironfoot.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_juggernaut.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_lens.txt -text svneol=native#text/plain
+res/cardsfolder/phyrexian_metamorph.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_monitor.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_negator.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_obliterator.txt svneol=native#text/plain
