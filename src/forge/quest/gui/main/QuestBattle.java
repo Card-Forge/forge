@@ -178,6 +178,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Hercules 1", "easy", "GW Deck with Safehold Duo, Bant Sureblade and Naya Hushblade");
         addToDeckList("Hercules 2", "medium", "GW Deck with Bant Sureblade and Naya Hushblade");
         addToDeckList("Hercules 3", "hard", "GW Deck with Wilt-Leaf Liege, Bant Sureblade and Naya Hushblade");
+        addToDeckList("Hermione Granger 3", "hard", "UR deck with Riverfall Mimic and Mindwrack Liege");
         addToDeckList("Higgins 3", "hard", "UBR Grixis Control deck");
         addToDeckList("Hobbes 3", "hard", "UBG Dredge deck with Hermit Druid, Ichorid and Narcomoeba");
         addToDeckList("Hobbes 4", "very hard", "UBG Dredge deck with Hermit Druid, Ichorid and Narcomoeba");
@@ -272,11 +273,13 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Predator 2", "medium", "WG Purity Ramp deck");
 //        addToDeckList("Predator 3", "hard", "UG Beastmaster Ascension deck");
         addToDeckList("Pointy Haired Boss 3", "hard", "WUG Combo deck with Hokori, Dust Drinker, Mana Leak and Sunscape Master");
+        addToDeckList("Princess Selenia 1", "easy", "BUG Song of Serenity deck");
         addToDeckList("Professor X 3", "hard", "WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade");
         
         addToDeckList("R2-D2 3", "hard", "Mono U Black Vise deck with bounce (Boomerang) spells and Howling Mine");
         addToDeckList("Radagast 2", "medium", "Mono G Muraganda Petroglyphs deck with vanilla creatures and a few tokens");
         addToDeckList("Radiant 3", "hard", "WUB flying creature deck with Radiant, Archangel, Gravitational Shift and Moat");
+        addToDeckList("Ratbert 2", "medium", "Mono B Fear deck with Thran Lens");
 //        addToDeckList("Ras Al Ghul 2", "medium", "RG Biorhythm deck");
 //        addToDeckList("Ras Al Ghul 3", "hard", "WG Eldrazi Monument deck");
 //        addToDeckList("Raven 1", "easy", "Birds deck");
@@ -284,7 +287,8 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Raven 3", "hard", " Possessed Birds deck");
 //        addToDeckList("Red Skull 2", "medium", "BR Metalcraft deck");
         addToDeckList("Redwall 2", "medium", "Mono R Defender deck with Vent Sentinel");
-        addToDeckList("Ridler 3", "hard", "WR deck with mass damage spells, Spitemare and Swans of Bryn Argoll");
+        addToDeckList("Riddler 3", "hard", "WR deck with mass damage spells, Spitemare and Swans of Bryn Argoll");
+        addToDeckList("Riddler 4", "very hard", "WR deck with mass damage spells, Stuffy Doll and Guilty Conscience");
 //        addToDeckList("Robin 2", "medium", "G Big Green deck");
 //        addToDeckList("Robin 3", "hard", "WG Standard deck");
         addToDeckList("Rocky 1", "easy", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
