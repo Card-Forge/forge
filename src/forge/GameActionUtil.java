@@ -26,7 +26,6 @@ public class GameActionUtil {
 		
 		upkeep_Slowtrips();  // for "Draw a card at the beginning of the next turn's upkeep."
 		upkeep_UpkeepCost(); //sacrifice unless upkeep cost is paid
-		upkeep_DestroyUpkeepCost(); //destroy unless upkeep cost is paid
 		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
 		upkeep_CumulativeUpkeepCost(); //sacrifice unless cumulative upkeep cost is paid
 		upkeep_Echo();
@@ -1120,121 +1119,100 @@ public class GameActionUtil {
 		}
 		opponent.clearSlowtripList();
 	}
-	
-	
+
 	private static void upkeep_UpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				ArrayList<String> a = c.getKeyword();
-				for(int i = 0; i < a.size(); i++) {
-					if(a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice " + c.getName()) ||
-							a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice CARDNAME")) {
-						String k[] = a.get(i).toString().split(" pay ");
-						c.setUpkeepCost(k[1]);
-						return true;
-					}
-				}
-				return false;
-			}
-		});
 
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
-
-			final Command unpaidCommand = new Command() {
-
-				private static final long serialVersionUID = -6483405139208343935L;
-
-				public void execute() {
-					AllZone.GameAction.sacrifice(c);
-				}
-			};
-
-			final Command paidCommand = Command.Blank;
-			
-			final Ability aiPaid = upkeepAIPayment(c, c.getUpkeepCost());
-			
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Upkeep for ").append(c).append("\n");
-			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
-				@Override
-				public void resolve() {
-					if(c.getController().isHuman()) {
-						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
-					} 
-					else //computer
-					{
-						if(ComputerUtil.canPayCost(aiPaid)) 
-							ComputerUtil.playNoStack(aiPaid);
-						else 
+			ArrayList<String> a = c.getKeyword();
+			for(int j = 0; j < a.size(); j++) {
+				String ability = a.get(j);	
+				
+				//destroy
+				if(ability.startsWith("At the beginning of your upkeep, destroy CARDNAME")) {
+					String k[] = ability.split(" pay ");
+					final String upkeepCost = k[1].toString();
+				
+	
+					final Command unpaidCommand = new Command() {
+						private static final long serialVersionUID = 8942537892273123542L;
+		
+						public void execute() {
+							if(c.getName().equals("Cosmic Horror")) {
+								Player player = c.getController();
+								player.addDamage(7, c);
+							}
+							AllZone.GameAction.destroy(c);
+						}
+					};
+		
+					final Command paidCommand = Command.Blank;
+					
+					final Ability aiPaid = upkeepAIPayment(c, upkeepCost);
+					
+					final StringBuilder sb = new StringBuilder();
+					sb.append("Upkeep for ").append(c).append("\n");
+					final Ability upkeepAbility = new Ability(c, "0") {
+						@Override
+						public void resolve() {
+							if(c.getController().isHuman()) {
+								payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
+							} 
+							else //computer
+							{
+								if(ComputerUtil.canPayCost(aiPaid)) 
+									ComputerUtil.playNoStack(aiPaid);
+								else AllZone.GameAction.destroy(c);
+							}		
+						}
+					};
+					upkeepAbility.setStackDescription(sb.toString());
+		
+		            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+				}//destroy
+				
+				//sacrifice
+				if(ability.startsWith("At the beginning of your upkeep, sacrifice")) {
+					String k[] = ability.split(" pay ");
+					final String upkeepCost = k[1].toString();
+				
+	
+					final Command unpaidCommand = new Command() {
+						private static final long serialVersionUID = 5612348769167529102L;
+		
+						public void execute() {
 							AllZone.GameAction.sacrifice(c);
-					}
-				}
-			};
-			upkeepAbility.setStackDescription(sb.toString());
-
-            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
-
-		}
-	}//upkeepCost
-
-	private static void upkeep_DestroyUpkeepCost() {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				ArrayList<String> a = c.getKeyword();
-				for(int i = 0; i < a.size(); i++) {
-					if(a.get(i).toString().startsWith("At the beginning of your upkeep, destroy CARDNAME")) {
-						String k[] = a.get(i).toString().split(" pay ");
-						c.setUpkeepCost(k[1]);
-						return true;
-					}
-				}
-				return false;
+						}
+					};
+		
+					final Command paidCommand = Command.Blank;
+					
+					final Ability aiPaid = upkeepAIPayment(c, upkeepCost);
+					
+					final StringBuilder sb = new StringBuilder();
+					sb.append("Upkeep for ").append(c).append("\n");
+					final Ability upkeepAbility = new Ability(c, "0") {
+						@Override
+						public void resolve() {
+							if(c.getController().isHuman()) {
+								payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
+							} 
+							else //computer
+							{
+								if(ComputerUtil.canPayCost(aiPaid)) 
+									ComputerUtil.playNoStack(aiPaid);
+								else AllZone.GameAction.sacrifice(c);
+							}		
+						}
+					};
+					upkeepAbility.setStackDescription(sb.toString());
+		
+		            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+				}//sacrifice
 			}
-		});
 
-		for(int i = 0; i < list.size(); i++) {
-			final Card c = list.get(i);
-
-			final Command unpaidCommand = new Command() {
-				private static final long serialVersionUID = 8942537892273123542L;
-
-				public void execute() {
-					if(c.getName().equals("Cosmic Horror")) {
-						Player player = c.getController();
-						player.addDamage(7, c);
-					}
-					AllZone.GameAction.destroy(c);
-				}
-			};
-
-			final Command paidCommand = Command.Blank;
-			
-			final Ability aiPaid = upkeepAIPayment(c, c.getUpkeepCost());
-			
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Upkeep for ").append(c).append("\n");
-			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
-				@Override
-				public void resolve() {
-					if(c.getController().isHuman()) {
-						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
-					} 
-					else //computer
-					{
-						if(ComputerUtil.canPayCost(aiPaid)) 
-							ComputerUtil.playNoStack(aiPaid);
-						else AllZone.GameAction.destroy(c);
-					}		
-				}
-			};
-			upkeepAbility.setStackDescription(sb.toString());
-
-            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
-
-		}
+		}//for
 	}//upkeepCost
 
 
