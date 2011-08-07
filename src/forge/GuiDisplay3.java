@@ -4,6 +4,7 @@ package forge;
 
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.Trigger;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
@@ -184,7 +185,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
 				private static final long serialVersionUID = -6660930759092583160L;
 
 				public void actionPerformed(ActionEvent arg0) {
-					// Set up the battlefield here
+					devSetupBattlefield();
 				}
 			};
 			// - Battlefield setup -
@@ -1090,6 +1091,133 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     // ****** Developer Mode ******* 
     
     public static JCheckBoxMenuItem canLoseByDecking	   = new JCheckBoxMenuItem("Lose by Decking", true);
+
+    private void devSetupBattlefield() {
+    	String t_humanLife = "20";
+    	String t_computerLife = "20";
+    	String t_humanSetupCardsInPlay = "";
+    	String t_computerSetupCardsInPlay = "";
+    	String t_humanSetupCardsInHand = "";
+    	String t_computerSetupCardsInHand = "";
+    	String t_end = "";
+    	
+    	try {
+    		  FileInputStream fstream = new FileInputStream("dev_battle.txt");
+    		  DataInputStream in = new DataInputStream(fstream);
+    		  BufferedReader br = new BufferedReader(new InputStreamReader(in));
+    		  
+    		  t_humanLife = br.readLine();
+    		  t_computerLife = br.readLine();
+    		  t_humanSetupCardsInPlay = br.readLine();
+    		  t_computerSetupCardsInPlay = br.readLine();
+    		  t_humanSetupCardsInHand = br.readLine();
+    		  t_computerSetupCardsInHand = br.readLine();
+    		  t_end = br.readLine();
+    		      		  
+    		  in.close();
+    	} catch (Exception e) {
+    		  JOptionPane.showMessageDialog(null, "Error loading dev_battle.txt!\nError message: " + e.getMessage());
+    		  return;
+        }
+
+   	    if ((t_end == null) || (!t_end.toLowerCase().equals("end"))) {
+			  JOptionPane.showMessageDialog(null, "Error loading dev_battle.txt!\nError message: Can't find an end marker in dev_battle.txt");
+			  return;
+		}
+
+		int setHumanLife = Integer.parseInt(t_humanLife);
+		int setComputerLife = Integer.parseInt(t_computerLife);
+		
+		String humanSetupCardsInPlay[] = t_humanSetupCardsInPlay.split(";");
+		String computerSetupCardsInPlay[] = t_computerSetupCardsInPlay.split(";");
+		String humanSetupCardsInHand[] = t_humanSetupCardsInHand.split(";");
+		String computerSetupCardsInHand[] = t_computerSetupCardsInHand.split(";");
+		
+		CardList humanDevSetup = new CardList();
+		CardList computerDevSetup = new CardList();
+		CardList humanDevHandSetup = new CardList();
+		CardList computerDevHandSetup = new CardList();
+		
+		if (!t_humanSetupCardsInPlay.trim().equals("")) {
+			for (int i = 0; i < humanSetupCardsInPlay.length; i ++) {
+				Card c = AllZone.CardFactory.getCard(humanSetupCardsInPlay[i].trim(), AllZone.HumanPlayer);
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
+				humanDevSetup.add(c);
+			}
+		}
+
+		if (!t_humanSetupCardsInHand.trim().equals("")) {
+			for (int i = 0; i < humanSetupCardsInHand.length; i ++) {
+				Card c = AllZone.CardFactory.getCard(humanSetupCardsInHand[i].trim(), AllZone.HumanPlayer);
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+							
+				humanDevHandSetup.add(c);
+			}
+		}
+
+		if (!t_computerSetupCardsInPlay.trim().equals("")) {
+			for (int i = 0; i < computerSetupCardsInPlay.length; i ++) {
+				Card c = AllZone.CardFactory.getCard(computerSetupCardsInPlay[i].trim(), AllZone.ComputerPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+				
+				computerDevSetup.add(c);
+			}
+		}
+
+		if (!t_computerSetupCardsInHand.trim().equals("")) {
+			for (int i = 0; i < computerSetupCardsInHand.length; i ++) {
+				Card c = AllZone.CardFactory.getCard(computerSetupCardsInHand[i].trim(), AllZone.ComputerPlayer);
+			
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+				
+				computerDevHandSetup.add(c);
+			}
+		}
+
+		for (Card c : humanDevSetup)
+		{
+			AllZone.Human_Hand.add(c);
+			AllZone.GameAction.moveToPlay(c);
+			c.setSickness(false);
+		}
+		 
+		for (Card c: computerDevSetup)
+		{
+			AllZone.Computer_Hand.add(c);
+			AllZone.GameAction.moveToPlay(c);
+			c.setSickness(false);
+		}
+		
+		if (computerDevHandSetup.size() > 0)
+			AllZone.Computer_Hand.setCards(computerDevHandSetup.toArray());
+		if (humanDevHandSetup.size() > 0)
+			AllZone.Human_Hand.setCards(humanDevHandSetup.toArray());
+
+		AllZone.ComputerPlayer.setLife(setComputerLife, null);
+		AllZone.HumanPlayer.setLife(setHumanLife, null);
+		
+		AllZone.GameAction.checkStateEffects();
+	}
 
     // *****************************
     

@@ -232,7 +232,7 @@ public class SetInfoUtil {
 		{"FEM", "", "", "Fallen Empires", "5", "3ED"},
 		{"4ED", "", "", "Fourth Edition", "3", "4ED"},
 		{"ICE", "ALL", "CSP", "Ice Age", "3", "ICE"},
-		{"CHR", "", "", "Chronicles", "4", "4ED"},
+		//{"CHR", "", "", "Chronicles", "4", "4ED"},
 		{"HML", "", "", "Homelands", "5", "4ED"},
 		{"MIR", "VIS", "WTH", "Mirage", "3", "MIR"},
 		{"5ED", "", "", "Fifth Edition", "3", "5ED"},
