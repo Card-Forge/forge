@@ -6502,6 +6502,7 @@ res/cardsfolder/skyreach_manta.txt -text svneol=native#text/plain
 res/cardsfolder/skyrider_trainee.txt -text svneol=native#text/plain
 res/cardsfolder/skyscribing.txt svneol=native#text/plain
 res/cardsfolder/skyshaper.txt -text svneol=native#text/plain
+res/cardsfolder/skyshooter.txt -text svneol=native#text/plain
 res/cardsfolder/skyshroud_archer.txt svneol=native#text/plain
 res/cardsfolder/skyshroud_behemoth.txt -text svneol=native#text/plain
 res/cardsfolder/skyshroud_claim.txt -text svneol=native#text/plain

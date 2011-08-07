@@ -1,0 +1,11 @@
+Name:Skyshooter
+ManaCost:3 W
+Types:Instant
+Text:no text
+PT:1/2
+K:Reach
+A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking+withFlying,Creature.blocking+withFlying | TgtPrompt$ Select target attacking or blocking creature with flying | SpellDescription$ Destroy target attacking or blocking creature with flying.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshooter.jpg
+End
