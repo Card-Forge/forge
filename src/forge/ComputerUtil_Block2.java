@@ -10,7 +10,7 @@ public class ComputerUtil_Block2
 {
 	  private static CardList attackers = new CardList(); //all attackers
 	  private static CardList attackersLeft = new CardList(); //keeps track of all currently unblocked attackers
-	  private static CardList blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
+	  private static CardList blockedButUnkilled = new CardList(); //blocked attackers that currently wouldn't be destroyed
 	  private static CardList blockersLeft = new CardList(); //keeps track of all unassigned blockers
 	  private static int diff = 0;
 	
@@ -213,7 +213,7 @@ public class ComputerUtil_Block2
 			  if(attacker.getKillDamage() > currentDamage
 					  && !(attacker.getKillDamage() > currentDamage + additionalDamage) //The attacker will be killed
 					  && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage() //only one blocker can be killed
-							  || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)) //attacker is worth than the sum
+							  || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)) //attacker is worth more
 					  && CombatUtil.canBlock(attacker,blocker,combat)) {//this is needed for attackers that can't be blocked by more than 1
 				  currentAttackers.remove(attacker);
 				  combat.addBlocker(attacker, blocker);
