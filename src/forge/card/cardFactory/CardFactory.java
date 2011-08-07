@@ -757,7 +757,7 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -2292898970576123040L;
 
                 public void execute() {
-                	if(GameActionUtil.SpecialConditionsMet(card, condition)) {
+                	if(GameActionUtil.specialConditionsMet(card, condition)) {
 	                	int toAdd = -1;
 	                	if(numCounters.equals("X")) { 
 	                		toAdd = CardFactoryUtil.xCount(card, card.getSVar("X"));

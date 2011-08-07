@@ -29,8 +29,6 @@ public class GameActionUtil {
 		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
 		upkeep_CumulativeUpkeepCost(); //sacrifice unless cumulative upkeep cost is paid
 		upkeep_Echo();
-		//upkeep_TabernacleUpkeepCost();
-		//upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		
 		upkeep_The_Abyss();
@@ -818,122 +816,6 @@ public class GameActionUtil {
 
 		}
 	} //upkeep_Braid_of_Fire
-	
-	/*
-	public static void upkeep_TabernacleUpkeepCost() {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
-
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				ArrayList<String> a = c.getKeyword();
-				for(int i = 0; i < a.size(); i++) {
-					if(a.get(i).toString().startsWith(
-							"At the beginning of your upkeep, destroy this creature unless you pay")) {
-						String k[] = a.get(i).toString().split("pay ");
-						k[1] = k[1].substring(0, k[1].length() - 1);
-						c.setTabernacleUpkeepCost(k[1]);
-						return true;
-					}
-				}
-				return false;
-			}
-		});
-
-		for(int i = 0; i < list.size(); i++) {
-			final Card c = list.get(i);
-
-			final Command paidCommand = Command.Blank;
-			
-			final Command unpaidCommand = new Command() {
-
-				private static final long serialVersionUID = -8737736216222268696L;
-
-				public void execute() {
-					AllZone.GameAction.destroy(c);
-				}
-			};
-			
-			final Ability aiPaid = upkeepAIPayment(c, c.getTabernacleUpkeepCost());
-			
-			// TODO convert to triggered ability when they are no longer Commands
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Tabernacle Upkeep for ").append(c).append("\n");
-			final Ability destroyAbility = new Ability(c, c.getTabernacleUpkeepCost()) {
-				@Override
-				public void resolve() {
-					if(c.getController().isHuman()) {
-						payManaDuringAbilityResolve(sb.toString(), c.getTabernacleUpkeepCost(), paidCommand, unpaidCommand);
-					}
-					else
-						if(ComputerUtil.canPayCost(aiPaid)) 
-							ComputerUtil.playNoStack(aiPaid);
-						else 
-							AllZone.GameAction.destroy(c);
-				}
-			};
-			destroyAbility.setStackDescription(sb.toString());
-
-            AllZone.Stack.addSimultaneousStackEntry(destroyAbility);
-
-		}
-	}//TabernacleUpkeepCost 
-
-	private static void upkeep_MagusTabernacleUpkeepCost() {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
-		
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				ArrayList<String> a = c.getKeyword();
-				for(int i = 0; i < a.size(); i++) {
-					if(a.get(i).toString().startsWith(
-							"At the beginning of your upkeep, sacrifice this creature unless you pay")) {
-						String k[] = a.get(i).toString().split("pay ");
-						k[1] = k[1].substring(0, k[1].length() - 1);
-						c.setMagusTabernacleUpkeepCost(k[1]);
-						return true;
-					}
-				}
-				return false;
-			}
-		});
-
-		for(int i = 0; i < list.size(); i++) {
-			final Card c = list.get(i);
-
-			final Command unpaidCommand = new Command() {
-				private static final long serialVersionUID = 660060621665783254L;
-
-				public void execute() {
-					AllZone.GameAction.sacrifice(c);
-				}
-			};
-
-			final Command paidCommand = Command.Blank;
-			
-			final Ability aiPaid = upkeepAIPayment(c, c.getMagusTabernacleUpkeepCost());
-			
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Magus of the Tabernacle Upkeep for ").append(c).append("\n");
-			final Ability upkeepAbility = new Ability(c, c.getMagusTabernacleUpkeepCost()) {
-				@Override
-				public void resolve() {
-					if(c.getController().isHuman()) {
-						payManaDuringAbilityResolve(sb.toString(), c.getMagusTabernacleUpkeepCost(), paidCommand, unpaidCommand);
-					}
-					else
-						if(ComputerUtil.canPayCost(aiPaid)) 
-							ComputerUtil.playNoStack(aiPaid);
-						else 
-							AllZone.GameAction.sacrifice(c);
-				}
-			};
-			upkeepAbility.setStackDescription(sb.toString());
-
-			AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
-
-			
-		}
-	}//MagusTabernacleUpkeepCost */
 
 	public static void upkeep_CumulativeUpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
@@ -1862,120 +1744,6 @@ public class GameActionUtil {
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
 	}
-	/*
-	private static boolean checkValakutCondition(Card valakutCard, Card mtn) {
-		// Get a list of all mountains
-		CardList mountainList = AllZoneUtil.getPlayerTypeInPlay(valakutCard.getController(),
-				"Mountain");
-		// Don't count the one that just entered the battlefield
-		if (mountainList.contains(mtn))
-			mountainList.remove(mtn);
-		
-		// Do not activate if at least 5 other mountains are not present.
-		if (mountainList.size() < 5)
-			return false;  
-		else
-			return true;
-		
-	}
-	// Returns true if the routine found enough mountains to activate the effect
-	// Returns false otherwise
-	// This lets the calling routine break if a player has multiple Valakut in play
-	public static boolean executeValakutEffect(final Card valakutCard, final Card mtn) {
-		
-		if (!checkValakutCondition(valakutCard, mtn))
-			return false; // Tell the calling routine there aren't enough mountains, don't call again
-		
-        SpellAbility DamageTgt = new Spell(valakutCard) {
-
-        	private static final long serialVersionUID = -7360567876931046530L;
-
-			public boolean canPlayAI() {
-                return getCreature().size() != 0 || AllZone.HumanPlayer.getLife() < 10;
-            }
-            
-            public boolean canPlay() {
-            	return true;
-            }
-            
-            CardList getCreature() {
-                //toughness of 3
-                CardList list = CardFactoryUtil.AI_getHumanCreature(3, valakutCard, true);
-                list = list.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        //only get 1/1 flyers or 2/1 or bigger creatures
-                        return (2 <= c.getNetAttack()) || c.getKeyword().contains("Flying");
-                    }
-                });
-                return list;
-            }//getCreature()
- 
-            @Override
-            public void chooseTargetAI() {
-            	boolean targetHuman; 
-            	// Get a list of all creatures Valakut could destroy
-            	CardList list = getCreature();
-            	
-                CardList listValakut = list.filter(new CardListFilter() {
-                	public boolean addCard(Card c) {
-                		return c.getName().contains("Valakut, the Molten Pinnacle");
-                	}
-                });
-            	
-                int lifeThreshold = Math.max( 3 * listValakut.size(), 6); 
-                if ( (AllZone.HumanPlayer.getLife() < lifeThreshold) || list.isEmpty()) { 
-                	targetHuman = true;
-                } else {
-            		// Remove any creatures that have been targeted by other Valakuts
-            		for (int ix = 0; ix < AllZone.Stack.size(); ix++) {
-            			SpellAbility sa = AllZone.Stack.peek(ix);
-            			if (sa.getSourceCard().getName().contains("Valakut, the Molten Pinnacle")) {
-            				Card target = sa.getTargetCard();
-            				if ((target != null) && list.contains(target)) {
-            					list.remove(target);
-            				}
-            			}
-            		}
-            		if (list.isEmpty()) {
-            			targetHuman = true;
-            		} else {
-            			targetHuman = false;
-            		}
-            	}
-            	
-            	
-                if(targetHuman) setTargetPlayer(AllZone.HumanPlayer);
-                else {
-                    list.shuffle();
-                    setTargetCard(list.get(0));
-                }
-            }//chooseTargetAI()
-            
-            @Override
-            public void resolve() {
-            	if (!checkValakutCondition(valakutCard, mtn))
-            		return;
-                if(getTargetCard() != null) {
-                    if(AllZoneUtil.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(valakutCard, getTargetCard())) getTargetCard().addDamage(3,
-                            valakutCard);
-                } else {
-                	getTargetPlayer().addDamage(3, valakutCard);
-                }
-            }//resolve()
-
-        };
-        DamageTgt.setManaCost("0");
-        DamageTgt.setStackDescription("Valakut, the Molten Pinnacle deals 3 damage to target creature or player.");
-        if (valakutCard.getController().isHuman()) {
-        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(DamageTgt, true, true));
-        } else {
-        	DamageTgt.chooseTargetAI();
-            AllZone.Stack.addSimultaneousStackEntry(DamageTgt);
-
-        }
-        return true; // Tell the calling routine it's okay to call again if there are other Valakuts in play
-	}*/
 	
 	private static boolean showLandfallDialog(Card c) {
 		AllZone.Display.setCard(c);
@@ -5518,7 +5286,7 @@ public class GameActionUtil {
 	            		//get the affected cards
 						String k[] = keyword.split(":",5);    
 						
-						if(SpecialConditionsMet(cardWithKeyword, k[3])) { //special Conditions are Threshold, etc.
+						if(specialConditionsMet(cardWithKeyword, k[3])) { //special Conditions are Threshold, etc.
 						
 							final String affected = k[1];			
 							final String specific[] = affected.split(",");
@@ -5726,7 +5494,7 @@ public class GameActionUtil {
 	};
 	
 	// Special Conditions
-	public static boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
+	public static boolean specialConditionsMet(Card SourceCard, String SpecialConditions) {
 	      	
 	      	if(SpecialConditions.contains("CardsInHandMore")) {
 	      		CardList SpecialConditionsCardList = AllZoneUtil.getPlayerHand(SourceCard.getController());
@@ -6050,64 +5818,6 @@ public class GameActionUtil {
 		}// execute
 	}; // Coat of Arms
 	
-	/*
-	public static Command Leyline_of_Singularity                = new Command() {
-
-		private static final long serialVersionUID   = -67071835355151830L;
-		CardList                  Leyline_of_Singularity_Tokens = new CardList();
-
-		public void execute() {
-			String Type = "Legendary";
-
-			if(AllZoneUtil.isCardInPlay("Leyline of Singularity")) {
-				CardList NonLand = new CardList();
-				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
-				
-				NonLand = NonLand.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        return !c.isLand() && c.isPermanent() && !c.getName().equals("Mana Pool");
-                    }
-                });
-
-				for(int i = 0; i < NonLand.size(); i++) {
-					Card c = NonLand.get(i);
-					ArrayList<String> Card_Types = c.getType();
-					if(!c.getType().contains(Type)) {					
-						ArrayList<String> NewCard_Type = new ArrayList<String>(Card_Types.size() + 1);
-						NewCard_Type.add(0,Type);
-						for(int x = 0; x < Card_Types.size(); x++) NewCard_Type.add(x + 1 , Card_Types.get(x));
-						if(c.isToken()) Leyline_of_Singularity_Tokens.add(c);
-						c.setType(NewCard_Type);
-					}
-				}
-				} else {
-    				CardList NonLand = new CardList();
-    				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-    				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
-    				
-    				NonLand = NonLand.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.isLand() && c.isPermanent() && !c.getName().equals("Mana Pool");
-                        }
-                    });
-    				
-    				for(int r = 0; r < NonLand.size(); r++) {
-        				Card crd = NonLand.get(r);
-        				if(!crd.isToken()) {
-                        	Card c = AllZone.CardFactory.copyCard(crd); 
-                        	if(!c.getType().contains("Legendary")) crd.removeType("Legendary");
-
-        				} else if(Leyline_of_Singularity_Tokens.contains(crd) && AllZoneUtil.isCardInPlay(crd.getName())){
-        					crd.removeType("Legendary");
-        				}
-    				
-    				}
-    				Leyline_of_Singularity_Tokens.clear();
-				}
-		}// execute()
-	};*/
-	
 	/**
 	 * stores the Command
 	 */
@@ -6126,80 +5836,6 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
-	
-	/*
-	public static Command The_Tabernacle_at_Pendrell_Vale                 = new Command() {
-		private static final long serialVersionUID   = -3233715310427996429L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "At the beginning of your upkeep, destroy this creature unless you pay";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				ArrayList<String> a = c.getKeyword();
-				for(String s:a) {
-					if(s.startsWith(keyword)) c.removeExtrinsicKeyword(s);
-				}
-			}
-
-			list.clear();
-			
-			CardList clist = AllZoneUtil.getCardsInPlay("The Tabernacle at Pendrell Vale");
-
-			int number = clist.size();
-			//System.out.println("Tabernacle Number:" + number);
-			if(number > 0) {
-				CardList creature = AllZoneUtil.getCreaturesInPlay();
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword + " " + number
-							+ ".");
-					gloriousAnthemList.add(c);
-				}// for inner
-			}
-		}// execute()
-	};
-
-	public static Command Magus_of_the_Tabernacle     = new Command() {
-		private static final long serialVersionUID   = -249708982895077034L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "At the beginning of your upkeep, sacrifice this creature unless you pay";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				ArrayList<String> a = c.getKeyword();
-				for(String s:a) {
-					if(s.startsWith(keyword)) c.removeExtrinsicKeyword(s);
-				}
-			}
-
-			list.clear();
-			CardList clist = AllZoneUtil.getCardsInPlay("Magus of the Tabernacle");
-
-			int number = clist.size();
-			//System.out.println("Tabernacle Number:" + number);
-			if(number > 0) {
-				CardList creature = AllZoneUtil.getCreaturesInPlay();
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword + " " + number
-							+ ".");
-					gloriousAnthemList.add(c);
-				}// for inner
-			}
-		}// execute()
-	};*/
 
 	public static Command Ajani_Avatar_Token          = new Command() {
 		private static final long serialVersionUID = 3027329837165436727L;
@@ -7277,7 +6913,7 @@ public class GameActionUtil {
 	            		//get the affected cards
 						String k[] = keyword.split(":", 8);    
 						
-						if(areSpecialConditionsMet(cardWithKeyword, k[6])) { //special conditions are isPresent, isValid
+						if(specialConditionsMet(cardWithKeyword, k[6])) { //special conditions are isPresent, isValid
 						
 							final String affected = k[1];			
 							final String specific[] = affected.split(",");
@@ -7487,22 +7123,6 @@ public class GameActionUtil {
 			
 			affectedCard.removeColor(se.getColorDesc(), affectedCard, !se.isOverwriteColors(), se.getTimestamp(affectedCard));
 		}//end removeStaticEffects
-		
-		// Special Conditions
-		private boolean areSpecialConditionsMet(Card source, String conditions) {
-			if(conditions.contains("isPresent")) { // is a card of a certain type/color present?
-				String req = conditions.replaceAll("isPresent ", "");
-				String[] reqs = req.split(",");
-				CardList cards = AllZoneUtil.getCardsInPlay();
-				cards = cards.getValidCards(reqs, source.getController(), source);
-				if(cards.isEmpty()) return false;
-			}
-			if(conditions.contains("isValid")) { // does this card meet the valid description?
-				String req = conditions.replaceAll("isValid ", "");
-				if(!source.isValid(req, source.getController(), source)) return false;
-			}
-			return true;
-		}//end areSpecialConditionsMet()
 		
 		private CardList getAffectedCards(Card source, String[] details, String[] specific) {
 			// [Self], [All], [Enchanted]
