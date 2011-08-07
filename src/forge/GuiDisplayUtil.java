@@ -941,6 +941,7 @@ public class GuiDisplayUtil implements NewConstants {
         String t_humanSetupLibrary = "NONE";
         String t_computerSetupLibrary = "NONE";
         String t_changePlayer = "NONE";
+        String t_changePhase = "NONE";
     	
     	String wd = ".";
     	JFileChooser fc = new JFileChooser(wd);
@@ -988,6 +989,8 @@ public class GuiDisplayUtil implements NewConstants {
     				  t_computerSetupLibrary = categoryValue;
     			  else if (categoryName.toLowerCase().equals("activeplayer"))
     				  t_changePlayer = categoryValue;
+    			  else if (categoryName.toLowerCase().equals("activephase"))
+    				  t_changePhase = categoryValue;
     		  }
     		      		  
     		  in.close();
@@ -1024,6 +1027,11 @@ public class GuiDisplayUtil implements NewConstants {
         	if (t_changePlayer.trim().toLowerCase().equals("ai")) {        		
         		AllZone.Phase.setPlayerTurn(AllZone.ComputerPlayer);
         	}
+    		AllZone.Phase.updateObservers();
+        }
+        
+        if (!t_changePhase.trim().toLowerCase().equals("none")) {
+    		AllZone.Phase.setDevPhaseState(t_changePhase);
     		AllZone.Phase.updateObservers();
         }
         
@@ -1173,7 +1181,7 @@ public class GuiDisplayUtil implements NewConstants {
         if(computerDevLibrarySetup.size() > 0)
             AllZone.Computer_Library.setCards(computerDevLibrarySetup.toArray());
 		
-		AllZone.GameAction.checkStateEffects();
+		AllZone.GameAction.checkStateEffects();		
 	}
 
 }

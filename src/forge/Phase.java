@@ -610,4 +610,11 @@ public class Phase extends MyObservable
 	public static int getGameBegins() {
 		return GameBegins;
 	}
+	
+	// this is a hack for the setup game state mode, do not use outside of devSetupGameState code
+	// as it avoids calling any of the phase effects that may be necessary in a less enforced context
+	public void setDevPhaseState(String phaseID)
+	{
+		this.phaseIndex = findIndex(phaseID);
+	}
 }
