@@ -1800,26 +1800,28 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Skycutter")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
+        	Cost cost = new Cost("Sac<1/CARDNAME>", cardName, true);
+        	Target target = new Target(card, "Select target creature with flying", "Creature.withFlying");
+            final SpellAbility ability = new Ability_Activated(card, cost, target) {
+				private static final long serialVersionUID = 200207345405088487L;
+
+				@Override
                 public boolean canPlayAI() {
                     return getFlying().size() != 0;
                 }
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.sacrifice(card);
-                    
                     CardList flying = getFlying();
                     flying.shuffle();
                     setTargetCard(flying.get(0));
                 }
                 
-                CardList getFlying() {
+                private CardList getFlying() {
                     CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
                     flying = flying.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.getNetDefense() == 2;
+                            return c.getNetDefense() <= 2;
                         }
                     });
                     return flying;
@@ -1827,56 +1829,31 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZoneUtil.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        getTargetCard().addDamage(2, card);
-                        getTargetCard().removeIntrinsicKeyword("Flying");
-                        getTargetCard().removeExtrinsicKeyword("Flying");
+                	final Card tgt = getTargetCard();
+                    if(AllZoneUtil.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
+                        tgt.addDamage(2, card);
+                        tgt.removeIntrinsicKeyword("Flying");
+                        tgt.removeExtrinsicKeyword("Flying");
                     }
                     
                     AllZone.EndOfTurn.addUntil(new Command() {
                         private static final long serialVersionUID = -8889549737746466810L;
                         
                         public void execute() {
-                            if(AllZoneUtil.isCardInPlay(getTargetCard())) getTargetCard().addIntrinsicKeyword(
-                                    "Flying");
+                            if(AllZoneUtil.isCardInPlay(tgt)){
+                            	tgt.addIntrinsicKeyword("Flying");
+                            }
                         }
                     });
                 }//resolve()
             };//SpellAbility
             
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 8609211991425118222L;
-                
-                @Override
-                public void showMessage() {
-                    CardList list = AllZoneUtil.getCreaturesInPlay();
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getKeyword().contains("Flying")
-                                    && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list,
-                            "Select a creature with flying to deal 2 damage to", new Command() {
-                                private static final long serialVersionUID = -3287971244881855563L;
-                                
-                                public void execute() {
-                                    AllZone.GameAction.sacrifice(card);
-                                }
-                            }, true, false));
-                }//showMessage()
-            };//Input
-            
             card.addSpellAbility(ability);
             
             StringBuilder sb = new StringBuilder();
-            sb.append("Sacrifice Goblin Skycutter: Goblin Skycutter deals 2 damage to target ");
+            sb.append(cost).append("CARDNAME deals 2 damage to target ");
             sb.append("creature with flying. That creature loses flying until end of turn.");
             ability.setDescription(sb.toString());
-            
-            ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
 
         
