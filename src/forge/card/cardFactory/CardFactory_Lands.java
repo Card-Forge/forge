@@ -818,7 +818,7 @@ class CardFactory_Lands {
       
         //*************** START *********** START **************************
         else if(cardName.equals("Coral Atoll") 		|| cardName.equals("Dormant Volcano")
-        		|| cardName.equals("Evergaldes")	|| cardName.equals("Jungle Basin")
+        		|| cardName.equals("Everglades")	|| cardName.equals("Jungle Basin")
         		|| cardName.equals("Karoo")) {
         	
         	final String[] type = new String[1];
