@@ -3,7 +3,7 @@ package forge.quest.data.bazaar;
 /**
  * This interface defines a thing that can be sold at the Bazaar
  */
-public interface QuestStallPurchasable extends Comparable{
+public interface QuestStallPurchasable extends Comparable<Object>{
     /**
      * @return The Name of the item
      */
