@@ -716,6 +716,11 @@ public class ComputerUtil
 		ArrayList<Ability_Mana> mana = land.getManaAbility();
 		
 		for(Ability_Mana m : mana){
+			
+			//if the mana ability is not avaiable move to the next one
+			m.setActivatingPlayer(land.getController());
+			if (!m.canPlay()) continue;
+			
 			if (!colors.contains(Constant.Color.Black) && m.isBasic() && m.mana().equals("B"))
 				colors.add(Constant.Color.Black);
 			if (!colors.contains(Constant.Color.White) && m.isBasic() && m.mana().equals("W"))
