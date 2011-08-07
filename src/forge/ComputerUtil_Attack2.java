@@ -165,7 +165,7 @@ public class ComputerUtil_Attack2 {
 		//re-add creatures with vigilance
 		for (Card c:attackers)
 		{
-			if (c.getKeyword().contains("Vigilance"))
+			if (c.hasKeyword("Vigilance"))
 				notNeededAsBlockers.add(c);
 		}
 
@@ -255,10 +255,10 @@ public class ComputerUtil_Attack2 {
 		//Atackers that don't really have a choice
 		for (Card attacker : attackers)
 		{
-			if ( (attacker.getKeyword().contains("CARDNAME attacks each turn if able.") 
-					|| attacker.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
-					|| attacker.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
-					|| attacker.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.")
+			if ( (attacker.hasKeyword("CARDNAME attacks each turn if able.") 
+					|| attacker.hasKeyword("At the beginning of the end step, destroy CARDNAME.")
+					|| attacker.hasKeyword("At the beginning of the end step, exile CARDNAME.")
+					|| attacker.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
 					|| attacker.getSacrificeAtEOT()
 					|| attacker.getSirenAttackOrDestroy())
 					&& CombatUtil.canAttack(attacker, combat)) {
@@ -483,7 +483,7 @@ public class ComputerUtil_Attack2 {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
 		list = list.filter(new CardListFilter(){
 			public boolean addCard(Card c) {
-				return c.getKeyword().contains("Exalted");
+				return c.hasKeyword("Exalted");
 			}
 		});
 
@@ -494,7 +494,7 @@ public class ComputerUtil_Attack2 {
 	{
 		int n = c.getNetCombatDamage();
 
-		if(c.getKeyword().contains("Double Strike"))
+		if (c.hasKeyword("Double Strike"))
 			n *= 2;
 
 		return n;
@@ -523,9 +523,9 @@ public class ComputerUtil_Attack2 {
 					} 
 				}
 				// see if this attacking creature can destroy this defender, if not record that it can't kill everything
-				if(!CombatUtil.canDestroyBlocker(defender, attacker, combat, false)){
+				if (!CombatUtil.canDestroyBlocker(defender, attacker, combat, false)) {
 					canKillAll = false;
-					if(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect")){
+					if (defender.hasKeyword("Wither") || defender.hasKeyword("Infect")) {
 						canKillAllDangerous = false; // there is a dangerous creature that can survive an attack from this creature
 					}
 				}

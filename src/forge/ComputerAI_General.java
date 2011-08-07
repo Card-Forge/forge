@@ -55,7 +55,8 @@ public class ComputerAI_General implements Computer {
     			if (c.getSVar("PlayMain1").equals("TRUE"))
     				return true;
 
-    			if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
+    			if (c.isCreature() 
+    					&& (c.hasKeyword("Haste")) || c.hasKeyword("Exalted")) return true;
 
     			CardList buffed = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer); //get all cards the computer controls with BuffedBy
     			for(int j = 0; j < buffed.size(); j++) {
@@ -119,8 +120,10 @@ public class ComputerAI_General implements Computer {
     	//Don't play permanents with Flash before humans declare attackers step
     	all = all.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
-    			if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
-    					|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
+    			if (c.isPermanent() 
+    					&& c.hasKeyword("Flash") 
+    					&& (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
+    							|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
     				return false;
     			return true;
     		}
@@ -156,8 +159,10 @@ public class ComputerAI_General implements Computer {
     	//Don't play permanents with Flash before humans declare attackers step
     	all = all.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
-    			if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
-    					|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
+    			if (c.isPermanent() 
+    					&& c.hasKeyword("Flash") 
+    					&& (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
+    							|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
     				return false;
     			return true;
     		}
@@ -253,7 +258,7 @@ public class ComputerAI_General implements Computer {
         
         for(int i = 0; i < att.length; i++) {
         	// tapping of attackers happens after Propaganda is paid for
-            //if(!att[i].getKeyword().contains("Vigilance")) att[i].tap();
+            //if (!att[i].hasKeyword("Vigilance")) att[i].tap();
             Log.debug("Computer just assigned " + att[i].getName() + " as an attacker.");
         }
         
