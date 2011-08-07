@@ -379,6 +379,8 @@ public class AbilityFactory_Mana {
 				if(producedColors.contains(s) && !colors.contains(col))
 					colors.add(col);
 			}
+			if (maxChoices == 6 && producedColors.contains("1") && !colors.contains(Constant.Color.Colorless))
+				colors.add(Constant.Color.Colorless);
 		}
 		else if (reflectProperty.equals("Produce")){
 			ArrayList<Ability_Mana> abilities = new ArrayList<Ability_Mana>();
