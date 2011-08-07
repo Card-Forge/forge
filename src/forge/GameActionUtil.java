@@ -5354,6 +5354,18 @@ public class GameActionUtil {
 	      		String maxnumber = SpecialConditions.split("/") [1];
 	      	if (!(OppInPlay.size() >= Integer.valueOf(maxnumber))) return false;
 	    }
+	      	if(SpecialConditions.contains("LandYouCtrlLE")) {
+	      		CardList LandInPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
+	      		LandInPlay = LandInPlay.getType("Land");
+	      		String maxnumber = SpecialConditions.split("/") [1];
+	      	if (!(LandInPlay.size() <= Integer.valueOf(maxnumber)))	return false;
+	    }
+	      	if(SpecialConditions.contains("LandOppCtrlLE")) {
+	      		CardList OppLandInPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController().getOpponent());
+	      		OppLandInPlay = OppLandInPlay.getType("Land");
+	      		String maxnumber = SpecialConditions.split("/") [1];
+	      	if (!(OppLandInPlay.size() <= Integer.valueOf(maxnumber))) return false;
+	    }
 	      	if(SpecialConditions.contains("OppLifeLE")) {
       		int life = SourceCard.getController().getOpponent().getLife();
       		String maxnumber = SpecialConditions.split("/")[1];
