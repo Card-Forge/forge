@@ -507,7 +507,9 @@ public class AbilityFactory_PermanentState {
 	
 	public static String tapStackDescription(AbilityFactory af, SpellAbility sa){
 		// when getStackDesc is called, just build exactly what is happening
-		 StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
+		final HashMap<String, String> params = af.getMapParams();
+		Card hostCard = sa.getSourceCard();
 		 
 		 if (sa instanceof Ability_Sub)
 			 sb.append(" ");
@@ -522,7 +524,7 @@ public class AbilityFactory_PermanentState {
 			tgtCards = tgt.getTargetCards();
 		else{
 			tgtCards = new ArrayList<Card>();
-			tgtCards.add(af.getHostCard());	
+			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 		}
 		
 		Iterator<Card> it = tgtCards.iterator();
