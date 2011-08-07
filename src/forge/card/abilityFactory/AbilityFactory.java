@@ -718,7 +718,7 @@ public class AbilityFactory {
 				SA = AbilityFactory_Animate.createDrawbackAnimateAll(this);
 		}
         
-        if(API.equals("Debuff")){
+        if(API.equals("Debuff")) {
 			if (isAb)
 				SA = AbilityFactory_Debuff.createAbilityDebuff(this);
 			else if (isSp)
@@ -727,7 +727,7 @@ public class AbilityFactory {
 				SA = AbilityFactory_Debuff.createDrawbackDebuff(this);
 		}
         
-        if(API.equals("DebuffAll")){
+        if(API.equals("DebuffAll")) {
 			if (isAb)
 				SA = AbilityFactory_Debuff.createAbilityDebuffAll(this);
 			else if (isSp)

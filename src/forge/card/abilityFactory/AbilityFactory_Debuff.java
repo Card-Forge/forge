@@ -514,22 +514,16 @@ public class AbilityFactory_Debuff {
     	CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
     	human = human.getValidCards(valid,hostCard.getController(), hostCard);
     	
+    	//TODO - add blocking situations here also
+    	
     	//only count creatures that can attack
     	human = human.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				return CombatUtil.canAttack(c) && !af.isCurse();
+				return CombatUtil.canAttack(c);
 			}
 		});
     	
-    	if(af.isCurse()) {
-    		//evaluate both lists and pass only if human creatures are more valuable
-    		if(CardFactoryUtil.evaluateCreatureList(comp) + 200 >= CardFactoryUtil.evaluateCreatureList(human))
-    			return false;
-
-    		return chance;
-    	}//end Curse
-    	
-    	//don't use non curse DebuffAll after Combat_Begin until AI is improved
+    	//don't use DebuffAll after Combat_Begin until AI is improved
     	if(AllZone.Phase.isAfter(Constant.Phase.Combat_Begin))
     		return false;
     	
@@ -537,7 +531,7 @@ public class AbilityFactory_Debuff {
     		return false;
     	
     	return (r.nextFloat() < .6667) && chance;
-    }//pumpAllCanPlayAI()
+    }//debuffAllCanPlayAI()
     
     private static void debuffAllResolve(AbilityFactory af, SpellAbility sa) {
     	HashMap<String,String> params = af.getMapParams();
@@ -574,7 +568,7 @@ public class AbilityFactory_Debuff {
 				});
 			}
 		}
-    }//pumpAllResolve()
+    }//debuffAllResolve()
     
     private static boolean debuffAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
 		if (!ComputerUtil.canPayCost(sa))
