@@ -307,7 +307,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Sherlock Holmes 1", "easy", "Mono G deck with Baru, Fist of Krosa, land fetch and some buff cards");
         addToDeckList("Sherlock Holmes 2", "medium", "Mono G deck with Baru, Fist of Krosa and lots of good green creatures");
         addToDeckList("Sherlock Holmes 3", "hard", "Mono G deck with Baru, Fist of Krosa and lots of great green creatures");
-        addToDeckList("Silver Surfer 3", "hard", "G beat down deck with many creatures and several pump spells");
+        addToDeckList("Silver Surfer 3", "hard", "BG deck with Hunted Wumpus and Iwamori of the Open Fist");
         addToDeckList("Silver Samurai 2", "medium", "Mono W Samurai deck");
         addToDeckList("Spiderman 2", "medium", "W weenie deck with WoG, Armageddon and Mass Calcify");
         addToDeckList("Spock 2", "medium", "G Elf singleton deck with several Winnower Patrol and Wolf-Skull Shaman");
@@ -316,6 +316,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Storm 1", "easy", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
         addToDeckList("Storm 2", "medium", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
         addToDeckList("Storm 3", "hard", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
+        addToDeckList("Sun Quan 2", "medium", "Mono U Horsemanship deck");
 //        addToDeckList("Superboy 3", "hard", "R Artifact deck");
         addToDeckList("Superman 3", "hard", "WRG counters deck with Borborygmos, Rushwood Elemental, Doubling Season and Titania's Boon");
 //        addToDeckList("Swamp Thing 1", "easy", "BG deck");
