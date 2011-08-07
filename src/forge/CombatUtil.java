@@ -509,7 +509,8 @@ public class CombatUtil {
         if (c.hasKeyword("CARDNAME can't attack unless defending player controls a snow land.")) {
             temp = list.filter(new CardListFilter() {
             	public boolean addCard(Card c) {
-            		return c.isLand() && c.isType("Snow");
+            		return c.isLand() 
+            				&& c.isSnow();
             	}
             });
             if (temp.isEmpty()) return false;
