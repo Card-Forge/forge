@@ -102,7 +102,7 @@ public class GameActionUtil {
 	public static void executeDrawStepEffects() {
 		AllZone.Stack.freezeStack();
 		final Player player = AllZone.Phase.getPlayerTurn();
-		draw_Teferi_Puzzle_Box(player);
+
 		draw_Sylvan_Library(player);
 
     	AllZone.Stack.unfreezeStack();
@@ -4640,44 +4640,6 @@ public class GameActionUtil {
 
 		}//end for
 	}
-	
-	private static void draw_Teferi_Puzzle_Box(Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Teferi's Puzzle Box");
-        PlayerZone Playerhand = AllZone.getZone(Constant.Zone.Hand, player);
-        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player); 
-       
-		CardList hand = new CardList();
-		Card[] handlist = null;
-		if(list.size() > 0) {
-            AllZone.Display.showMessage("Shuffle cards back into your library: ");
-            ButtonUtil.enableOnlyCancel();
-            hand.addAll(Playerhand.getCards());            
-			int Count = hand.size();
-            for(int i = 0; i < list.size(); i++) {           	
-            	if(AllZone.HumanPlayer.equals(player)) {            
-                    for(int e = 0; e < Count; e++) {
-	                    if(hand.size() == 0) hand.addAll(Playerhand.getCards());
-	                    handlist = hand.toArray();
-	                    Object check = GuiUtils.getChoice("Select card to put on bottom of library", handlist);
-	                    if(check != null) {
-		                     Card target = ((Card) check);
-		                     hand.remove(target);
-		                     AllZone.GameAction.moveTo(lib, target);    
-	                    }
-                    }
-            	}else {
-                    for(int x = 0; x < hand.size(); x++) hand.remove(hand.get(x));
-                    hand.addAll(Playerhand.getCards());
-                    for(int e = 0; e < hand.size(); e++) {
-                    	AllZone.GameAction.moveTo(lib, hand.get(e)); 
-                    }
-            	}
-            			
-				player.drawCards(Count);
-            }
-		}
-
-	}// Teferi_Puzzle_Box
 
 	private static void upkeep_Carnophage() {
 		final Player player = AllZone.Phase.getPlayerTurn();

@@ -680,6 +680,11 @@ public class AbilityFactory {
             if(isDb)
                 SA = AbilityFactory_DelayedTrigger.getDrawback(this);
         }
+        
+        if(API.equals("Cleanup")) {
+            if(isDb)
+                SA = AbilityFactory_Cleanup.getDrawback(this);
+        }
 
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);

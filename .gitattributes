@@ -8910,6 +8910,7 @@ src/forge/card/abilityFactory/AbilityFactory_Animate.java -text svneol=native#te
 src/forge/card/abilityFactory/AbilityFactory_ChangeZone.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Choose.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Clash.java -text svneol=native#text/plain
+src/forge/card/abilityFactory/AbilityFactory_Cleanup.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Combat.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Copy.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_CounterMagic.java -text svneol=native#text/plain

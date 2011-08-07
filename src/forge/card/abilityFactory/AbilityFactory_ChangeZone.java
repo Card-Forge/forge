@@ -1468,16 +1468,27 @@ public class AbilityFactory_ChangeZone {
         String destination = params.get("Destination");
         String origin = params.get("Origin");
 		
-		CardList cards = AllZoneUtil.getCardsInZone(origin);
+		CardList cards = null;
 		
-        Player tgtPlayer = null;
-        if(af.getAbTgt() != null)
-			if(af.getAbTgt().getTargetPlayers() != null) {
-				tgtPlayer = af.getAbTgt().getTargetPlayers().get(0);
-				cards = AllZoneUtil.getCardsInZone(origin,tgtPlayer);
-			}
-		cards = filterListByType(cards, params, sa);
+		ArrayList<Player> tgtPlayers = null;
 
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else if (params.containsKey("Defined"))		// Make sure Defined exists to use it
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+		
+		if (tgtPlayers == null || tgtPlayers.isEmpty())
+			cards = AllZoneUtil.getCardsInZone(origin);
+		else
+			cards = AllZoneUtil.getCardsInZone(origin,tgtPlayers.get(0));			
+		
+		cards = filterListByType(cards, params, sa);
+		
+		if (params.containsKey("ForgetOtherRemembered"))
+			sa.getSourceCard().clearRemembered();
+		
+		String remember = params.get("RememberChanged");
 		
 		// I don't know if library position is necessary. It's here if it is, just in case
 		int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
@@ -1490,6 +1501,9 @@ public class AbilityFactory_ChangeZone {
 			}
 			else
 				AllZone.GameAction.moveTo(destination, c, libraryPos);
+			
+			if (remember != null)
+				sa.getSourceCard().addRemembered(c);
 		}
 		
 		// if Shuffle parameter exists, and any amount of cards were owned by that player, then shuffle that library
