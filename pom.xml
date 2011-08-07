@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>forge</groupId>
@@ -152,54 +153,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.ant</groupId>
-                        <artifactId>ant-nodeps</artifactId>
-                        <version>1.7.1</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>win-linux-app-bundle</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <!-- Windows/Linux archive -->
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}" />
-                                <copy todir="${project.build.directory}/${project.build.finalName}">
-                                    <fileset dir="${project.build.directory}" includes="forge.sh" />
-                                    <fileset dir="${basedir}" includes="forge.properties" />
-                                    <fileset dir="${basedir}" includes="LICENSE.txt" />
-                                    <fileset dir="${basedir}" includes="README.txt" />
-                                    <fileset dir="${basedir}" includes="CHANGES.txt" />
-                                    <fileset dir="${basedir}" includes="res/**" />
-                                    <fileset dir="${project.build.directory}" includes="forge.exe" />
-                                    <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
-                                </copy>
-                                <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
-                                <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
-                                <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
-                                    <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
-                                        <include name="forge.sh" />
-                                        <include name="forge.exe" />
-                                    </tarfileset>
-                                    <tarfileset dir="${project.build.directory}/${project.build.finalName}">
-                                        <include name="**" />
-                                        <exclude name="forge.sh" />
-                                        <exclude name="forge.exe" />
-                                    </tarfileset>
-                                </tar>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -232,32 +185,32 @@
                 <version>2.1.2</version>
             </plugin>
             <!--<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>attach-distribution</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${project.build.directory}/${project.build.finalName}.tar.bz2</file>
-                                    <type>tar.bz2</type>
-                                </artifact>
-                                <artifact>
-                                    <file>${project.build.directory}/${project.build.finalName}.osx.tar.bz2</file>
-                                    <classifier>osx</classifier>
-                                    <type>tar.bz2</type>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>   -->
+             <groupId>org.codehaus.mojo</groupId>
+             <artifactId>build-helper-maven-plugin</artifactId>
+             <version>1.5</version>
+             <executions>
+                 <execution>
+                     <id>attach-distribution</id>
+                     <phase>package</phase>
+                     <goals>
+                         <goal>attach-artifact</goal>
+                     </goals>
+                     <configuration>
+                         <artifacts>
+                             <artifact>
+                                 <file>${project.build.directory}/${project.build.finalName}.tar.bz2</file>
+                                 <type>tar.bz2</type>
+                             </artifact>
+                             <artifact>
+                                 <file>${project.build.directory}/${project.build.finalName}.osx.tar.bz2</file>
+                                 <classifier>osx</classifier>
+                                 <type>tar.bz2</type>
+                             </artifact>
+                         </artifacts>
+                     </configuration>
+                 </execution>
+             </executions>
+         </plugin>   -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -273,40 +226,10 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
             <plugin>
-                <groupId>com.googlecode.maven-gcu-plugin</groupId>
-                <artifactId>maven-gcu-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>googlecode-upload</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>upload</goal>
-                        </goals>
-                        <configuration>
-                            <failsOnError>true</failsOnError>
-                            <!-- default: false -->
-                            <projectName>cardforge</projectName>
-                            <!-- default: ${project.artifactId} -->
-                            <uploads>
-                                <upload>
-                                    <file>
-                                        ${project.build.directory}/${project.build.finalName}.tar.bz2
-                                    </file>
-                                    <summary>${project.name} ${project.version} Windows/Linux package</summary>
-                                    <labels>
-                                        <label>Featured</label>
-                                        <label>Type-Archive</label>
-                                        <label>OpSys-Windows</label>
-                                        <label>OpSys-Linux</label>
-                                    </labels>
-                                </upload>
-                            </uploads>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8</version>
             </plugin>
         </plugins>
 
@@ -327,6 +250,7 @@
 
             </plugins>
         </pluginManagement>
+
     </build>
     <reporting>
         <plugins>
@@ -459,6 +383,108 @@
     <profiles>
         <profile>
             <properties>
+            </properties>
+            <id>windows-linux</id>
+            <activation>
+                <os>
+                    <!-- <family>windows</family>   -->
+                    <!-- <family>unix</family>   -->
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.7.1</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>win-linux-app-bundle</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <!-- Windows/Linux archive -->
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}"/>
+                                        <copy todir="${project.build.directory}/${project.build.finalName}">
+                                            <fileset dir="${project.build.directory}" includes="forge.sh"/>
+                                            <fileset dir="${basedir}" includes="forge.properties"/>
+                                            <fileset dir="${basedir}" includes="LICENSE.txt"/>
+                                            <fileset dir="${basedir}" includes="README.txt"/>
+                                            <fileset dir="${basedir}" includes="CHANGES.txt"/>
+                                            <fileset dir="${basedir}" includes="res/**"/>
+                                            <fileset dir="${project.build.directory}" includes="forge.exe"/>
+                                            <fileset dir="${project.build.directory}"
+                                                     includes="${project.build.finalName}-jar-with-dependencies.jar"/>
+                                        </copy>
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh"
+                                               perm="a+rx"/>
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe"
+                                               perm="a+rx"/>
+                                        <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2"
+                                             compression="bzip2">
+                                            <tarfileset filemode="755"
+                                                        dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="forge.sh"/>
+                                                <include name="forge.exe"/>
+                                            </tarfileset>
+                                            <tarfileset dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="**"/>
+                                                <exclude name="forge.sh"/>
+                                                <exclude name="forge.exe"/>
+                                            </tarfileset>
+                                        </tar>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.googlecode.maven-gcu-plugin</groupId>
+                        <artifactId>maven-gcu-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>googlecode-upload</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>upload</goal>
+                                </goals>
+                                <configuration>
+                                    <failsOnError>true</failsOnError>
+                                    <!-- default: false -->
+                                    <projectName>cardforge</projectName>
+                                    <!-- default: ${project.artifactId} -->
+                                    <uploads>
+                                        <upload>
+                                            <file>
+                                                ${project.build.directory}/${project.build.finalName}.tar.bz2
+                                            </file>
+                                            <summary>${project.name} ${project.version} Windows/Linux package</summary>
+                                            <labels>
+                                                <label>Featured</label>
+                                                <label>Type-Archive</label>
+                                                <label>OpSys-Windows</label>
+                                                <label>OpSys-Linux</label>
+                                            </labels>
+                                        </upload>
+                                    </uploads>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <properties>
                 <license.file.name>"LICENSE.txt"</license.file.name>
                 <changes.file.name>"CHANGES.txt"</changes.file.name>
                 <readme.file.name>"README.txt"</readme.file.name>
@@ -468,7 +494,7 @@
             <id>osx</id>
             <activation>
                 <os>
-                   <!-- <family>mac</family>   -->
+                    <!-- <family>mac</family>   -->
                 </os>
             </activation>
             <build>
@@ -488,25 +514,32 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <tasks>
-                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx" />
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx"/>
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx">
-                                            <fileset dir="${basedir}" includes="LICENSE.txt" />
-                                            <fileset dir="${basedir}" includes="README.txt" />
-                                            <fileset dir="${basedir}" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}" includes="LICENSE.txt"/>
+                                            <fileset dir="${basedir}" includes="README.txt"/>
+                                            <fileset dir="${basedir}" includes="CHANGES.txt"/>
                                         </copy>
-                                        <taskdef name="jarbundler" classpathref="maven.runtime.classpath" classname="net.sourceforge.jarbundler.JarBundler" />
-                                        <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" version="${project.version}" mainclass="forge.Gui_NewGame" icon="${basedir}/build/Forge.icns" jvmversion="1.5+" vmoptions="-Xmx1024m" shortname="${project.name}" workingdirectory="$APP_PACKAGE/Contents/Resources/Java" jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
-                                            <javafileset dir="${basedir}" includes="*.properties" />
-                                            <javafileset dir="${basedir}" includes="res/**" />
-                                            <javaproperty name="apple.laf.useScreenMenuBar" value="true" />
+                                        <taskdef name="jarbundler" classpathref="maven.runtime.classpath"
+                                                 classname="net.sourceforge.jarbundler.JarBundler"/>
+                                        <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
+                                                    name="${project.name}" version="${project.version}"
+                                                    mainclass="forge.Gui_NewGame" icon="${basedir}/build/Forge.icns"
+                                                    jvmversion="1.5+" vmoptions="-Xmx1024m" shortname="${project.name}"
+                                                    workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
+                                                    jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
+                                            <javafileset dir="${basedir}" includes="*.properties"/>
+                                            <javafileset dir="${basedir}" includes="res/**"/>
+                                            <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
                                         </jarbundler>
-                                        <exec dir="${project.build.directory}/${project.build.finalName}-osx" executable="ln" failonerror="false">
-                                            <arg line="-s /Applications Applications" />
-                                        </exec>
+                                        <!--<symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications"/>  -->
                                         <exec executable="${basedir}/build/create-dmg" failonerror="false">
-                                            <arg line="--volname ${project.name}-${project.version} --background ${basedir}/build/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx" />
+                                            <arg line="--volname ${project.name}-${project.version} --background ${basedir}/build/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
                                         </exec>
-                                        <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg" destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2" compression="bzip2" />
+                                        <tar basedir="${project.build.directory}"
+                                             includes="${project.build.finalName}.dmg"
+                                             destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2"
+                                             compression="bzip2"/>
                                     </tasks>
                                 </configuration>
                                 <goals>
@@ -515,37 +548,37 @@
                             </execution>
                         </executions>
                     </plugin>
-                                <plugin>
-                <groupId>com.googlecode.maven-gcu-plugin</groupId>
-                <artifactId>maven-gcu-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>googlecode-upload</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>upload</goal>
-                        </goals>
-                        <configuration>
-                            <failsOnError>true</failsOnError>
-                            <projectName>cardforge</projectName>
-                            <uploads>
-                                <upload>
-                                    <file>
-                                        ${project.build.directory}/${project.build.finalName}.osx.tar.bz2
-                                    </file>
-                                    <summary>${project.name} ${project.version} Mac OSX package</summary>
-                                    <labels>
-                                        <label>Featured</label>
-                                        <label>Type-Archive</label>
-                                        <label>OpSys-OSX</label>
-                                    </labels>
-                                </upload>
-                            </uploads>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                    <plugin>
+                        <groupId>com.googlecode.maven-gcu-plugin</groupId>
+                        <artifactId>maven-gcu-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>googlecode-upload</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>upload</goal>
+                                </goals>
+                                <configuration>
+                                    <failsOnError>true</failsOnError>
+                                    <projectName>cardforge</projectName>
+                                    <uploads>
+                                        <upload>
+                                            <file>
+                                                ${project.build.directory}/${project.build.finalName}.osx.tar.bz2
+                                            </file>
+                                            <summary>${project.name} ${project.version} Mac OSX package</summary>
+                                            <labels>
+                                                <label>Featured</label>
+                                                <label>Type-Archive</label>
+                                                <label>OpSys-OSX</label>
+                                            </labels>
+                                        </upload>
+                                    </uploads>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
