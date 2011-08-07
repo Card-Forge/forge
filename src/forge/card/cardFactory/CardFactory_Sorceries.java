@@ -1097,8 +1097,10 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(c.isLand() && zone.is(Constant.Zone.Battlefield) && !c.getType().contains("Basic")) {
-                    	if(card.isCopiedSpell()) card.getChoiceTargets().remove(0);
+                    if (c.isLand() 
+                    		&& zone.is(Constant.Zone.Battlefield) 
+                    		&& !c.isType("Basic")) {
+                    	if (card.isCopiedSpell()) card.getChoiceTargets().remove(0);
                         m_land[0] = c;
                         spell.setTargetCard(c);
                         card.setSpellChoiceTarget(String.valueOf(c.getUniqueNumber()));
@@ -1330,11 +1332,11 @@ public class CardFactory_Sorceries {
                     land = land.filter(new CardListFilter() {
                         public boolean addCard(Card c){
                             if (c.getName().contains("Dryad Arbor")) return true;
-                            else if (!(c.getType().contains("Forest") 
-                                    || c.getType().contains("Plains") 
-                                    || c.getType().contains("Mountain") 
-                                    || c.getType().contains("Island") 
-                                    || c.getType().contains("Swamp"))) return true;
+                            else if (!(c.isType("Forest") 
+                                    || c.isType("Plains") 
+                                    || c.isType("Mountain") 
+                                    || c.isType("Island") 
+                                    || c.isType("Swamp"))) return true;
                             else return false;
                         }
                     });
@@ -1380,7 +1382,7 @@ public class CardFactory_Sorceries {
                     if(c.isLand() && zone.is(Constant.Zone.Battlefield)
                             && c.getController().isHuman()
                             /*&& c.getName().equals(humanBasic.get(count))*/
-                            && c.getType().contains(humanBasic.get(count)) 
+                            && c.isType(humanBasic.get(count)) 
                             /*&& !saveList.contains(c) */) {
                         //get all other basic[count] lands human player controls and add them to target
                         CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
@@ -1408,11 +1410,11 @@ public class CardFactory_Sorceries {
                         land = land.filter(new CardListFilter() {
                             public boolean addCard(Card c){
                                 if (c.getName().contains("Dryad Arbor")) return true;
-                                else if (!(c.getType().contains("Forest") 
-                                        || c.getType().contains("Plains") 
-                                        || c.getType().contains("Mountain") 
-                                        || c.getType().contains("Island") 
-                                        || c.getType().contains("Swamp"))) return true;
+                                else if (!(c.isType("Forest") 
+                                        || c.isType("Plains") 
+                                        || c.isType("Mountain") 
+                                        || c.isType("Island") 
+                                        || c.isType("Swamp"))) return true;
                                 else return false;
                             }
                         });
@@ -1495,11 +1497,11 @@ public class CardFactory_Sorceries {
                     
                     c2.getController().discard(c2, null);
                     
-                    if(c1.getType().contains("Land")) {
+                    if(c1.isType("Land")) {
                     	AllZone.HumanPlayer.gainLife(3, card);
                     }
                     
-                    if(c2.getType().contains("Land")) {
+                    if(c2.isType("Land")) {
                     	AllZone.HumanPlayer.gainLife(3, card);
                     }
                     
@@ -1509,7 +1511,7 @@ public class CardFactory_Sorceries {
                 public void computerResolve() {
                     CardList list = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
                     
-                    if(list.size() > 0) {
+                    if (list.size() > 0) {
                         
                         Object o = GuiUtils.getChoiceOptional("First card to discard", list.toArray());
                         
@@ -1518,11 +1520,11 @@ public class CardFactory_Sorceries {
                         
                         c.getController().discard(c, null);
                         
-                        if(c.getType().contains("Land")) {
+                        if (c.isType("Land")) {
                         	AllZone.ComputerPlayer.gainLife(3, card);
                         }
                         
-                        if(list.size() > 0) {
+                        if (list.size() > 0) {
                             Object o2 = GuiUtils.getChoiceOptional("Second card to discard", list.toArray());
                             
                             Card c2 = (Card) o2;
@@ -1530,7 +1532,7 @@ public class CardFactory_Sorceries {
                             
                             c2.getController().discard(c2, null);
                             
-                            if(c2.getType().contains("Land")) {
+                            if (c2.isType("Land")) {
                             	AllZone.ComputerPlayer.gainLife(3, card);
                             }
                         }
@@ -1594,7 +1596,7 @@ public class CardFactory_Sorceries {
                     CardList creature = AllZoneUtil.getCreaturesInPlay(card.getController());
                     creature = creature.filter(new CardListFilter() {
 						public boolean addCard(Card card) {
-							return (!card.getType().contains("Legendary"));
+							return (!card.isType("Legendary"));
 						}
 					});
                     if(creature.size() == 0) return false;
@@ -1611,7 +1613,7 @@ public class CardFactory_Sorceries {
                 	CardList creature = AllZoneUtil.getCreaturesInPlay();
                 	creature = creature.filter(new CardListFilter() {
                 		public boolean addCard(Card card) {
-                			return (!card.getType().contains("Legendary"));
+                			return (!card.isType("Legendary"));
                 		}
                 	});
                 	if(creature.size() > 0) {
@@ -1673,13 +1675,13 @@ public class CardFactory_Sorceries {
                 	CardList creature = AllZoneUtil.getCreaturesInPlay(card.getController());
                 	creature = creature.filter(new CardListFilter() {
                 		public boolean addCard(Card card) {
-                			return (!card.getType().contains("Legendary"));
+                			return (!card.isType("Legendary"));
                 		}
                 	});
                 	if(creature.size() == 0) return false;
                 	biggest = creature.get(0);
-                	for(int i = 0; i < creature.size(); i++)
-                		if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                	for (int i = 0; i < creature.size(); i++)
+                		if (biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
                 	setTargetCard(biggest);
 
                 	return biggest.getNetAttack() > 3;
@@ -1690,13 +1692,13 @@ public class CardFactory_Sorceries {
                 	CardList creature = AllZoneUtil.getCreaturesInPlay(card.getController());
                 	creature = creature.filter(new CardListFilter() {
                 		public boolean addCard(Card card) {
-                			return (!card.getType().contains("Legendary"));
+                			return (!card.isType("Legendary"));
                 		}
                 	});
-                	if(creature.size() > 0) {
+                	if (creature.size() > 0) {
                 		Card biggest = creature.get(0);
-                		for(int i = 0; i < creature.size(); i++)
-                			if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                		for (int i = 0; i < creature.size(); i++)
+                			if (biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
                 		setTargetCard(biggest);
                 	}
                 }

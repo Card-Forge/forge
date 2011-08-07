@@ -139,27 +139,27 @@ public class CardFactory implements NewConstants {
     
     final public Card dynamicCopyCard(Card in)
     {
-    	if(in.getType().contains("Creature")) {
+    	if(in.isType("Creature")) {
             Card card2 = new Card();
             card2 = CardFactory_Creatures.getCard(in, in.getName(), in.getOwner(), this);
             
             return card2;
-        } else if(in.getType().contains("Aura")) {
+        } else if(in.isType("Aura")) {
             Card card2 = new Card();
             card2 = CardFactory_Auras.getCard(in, in.getName(), in.getOwner());
             
             return card2;
-        } else if(in.getType().contains("Equipment")) {
+        } else if(in.isType("Equipment")) {
             Card card2 = new Card();
             card2 = CardFactory_Equipment.getCard(in, in.getName(), in.getOwner());
             
             return card2;
-        } else if(in.getType().contains("Planeswalker")) {
+        } else if(in.isType("Planeswalker")) {
             Card card2 = new Card();
             card2 = CardFactory_Planeswalkers.getCard(in, in.getName(), in.getOwner());
             
             return card2;
-        } else if(in.getType().contains("Land")) {
+        } else if(in.isType("Land")) {
             Card card2 = new Card();
             card2 = CardFactory_Lands.getCard(in, in.getName(), in.getOwner());
             
@@ -416,7 +416,7 @@ public class CardFactory implements NewConstants {
         			{
         				Card c = clICtrl.get(i);
         				for (int j = 0; j < types.length; j++)
-        					if (c.getType().contains(types[j].trim()))
+        					if (c.isType(types[j].trim()))
         						fnd = true;
         			}
         			
@@ -819,19 +819,19 @@ public class CardFactory implements NewConstants {
         //******************************************************************
         //************** Link to different CardFactories ******************* 
         Card card2 = null;
-        if(card.getType().contains("Creature")) {
+        if(card.isType("Creature")) {
             card2 = CardFactory_Creatures.getCard(card, cardName, owner, this);
-        } else if(card.getType().contains("Aura")) {
+        } else if(card.isType("Aura")) {
             card2 = CardFactory_Auras.getCard(card, cardName, owner);
-        } else if(card.getType().contains("Equipment")) {
+        } else if(card.isType("Equipment")) {
             card2 = CardFactory_Equipment.getCard(card, cardName, owner);
-        } else if(card.getType().contains("Planeswalker")) {
+        } else if(card.isType("Planeswalker")) {
             card2 = CardFactory_Planeswalkers.getCard(card, cardName, owner);
-        } else if(card.getType().contains("Land")) {
+        } else if(card.isType("Land")) {
             card2 = CardFactory_Lands.getCard(card, cardName, owner);
-        } else if (card.getType().contains("Instant")) {
+        } else if (card.isType("Instant")) {
         	card2 = CardFactory_Instants.getCard(card, cardName, owner);
-        } else if (card.getType().contains("Sorcery")) {
+        } else if (card.isType("Sorcery")) {
         	card2 = CardFactory_Sorceries.getCard(card, cardName, owner);
         }
         
@@ -1443,7 +1443,7 @@ public class CardFactory implements NewConstants {
                     CardList creatures = new CardList();
                     
                     for(int i = 0; i < hand.size(); i++) {
-                        if(hand.get(i).getType().contains("Creature")
+                        if (hand.get(i).isType("Creature")
                                 && CardUtil.getConvertedManaCost(hand.get(i).getManaCost()) <= 3) creatures.add(hand.get(i));
                     }
                     
