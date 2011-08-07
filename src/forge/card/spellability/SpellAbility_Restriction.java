@@ -193,12 +193,12 @@ public class SpellAbility_Restriction {
 		if (sIsPresent != null){
 			CardList list = AllZoneUtil.getCardsInPlay();
 			
-			list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+			list = list.getValidCards(sIsPresent.split(","), activator, c);
 			
 			int right = 1;
 			String rightString = presentCompare.substring(2);
 			if(rightString.equals("X")) {
-				right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
+				right = CardFactoryUtil.xCount(c, c.getSVar("X"));
 			}
 			else {
 				right = Integer.parseInt(presentCompare.substring(2));
