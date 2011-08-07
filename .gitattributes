@@ -4953,6 +4953,7 @@ res/cardsfolder/nyxathid.txt -text svneol=native#text/plain
 res/cardsfolder/oaken_brawler.txt svneol=native#text/plain
 res/cardsfolder/oakenform.txt -text svneol=native#text/plain
 res/cardsfolder/oakgnarl_warrior.txt -text svneol=native#text/plain
+res/cardsfolder/oasis.txt -text svneol=native#text/plain
 res/cardsfolder/oath_of_druids.txt -text svneol=native#text/plain
 res/cardsfolder/oath_of_ghouls.txt -text svneol=native#text/plain
 res/cardsfolder/oathsworn_giant.txt -text svneol=native#text/plain
