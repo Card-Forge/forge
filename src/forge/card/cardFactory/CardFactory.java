@@ -828,7 +828,7 @@ public class CardFactory implements NewConstants {
             card2 = CardFactory_Planeswalkers.getCard(card, cardName, owner);
         } else if (card.isType("Land")) {
             card2 = CardFactory_Lands.getCard(card, cardName, owner);
-        } else if (card.isType("Instant")) {
+        } else if (card.isInstant()) {
         	card2 = CardFactory_Instants.getCard(card, cardName, owner);
         } else if (card.isType("Sorcery")) {
         	card2 = CardFactory_Sorceries.getCard(card, cardName, owner);

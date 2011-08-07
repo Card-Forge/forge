@@ -29,7 +29,7 @@ public class RunTest
 	    check("6", c.getKeyword().isEmpty());
 	    
 	    c = cf.getCard("Shock", null);
-	    check("14", c.isType("Instant"));
+	    check("14", c.isInstant());
 	    //check("15", c.getText().equals("Shock deals 2 damge to target creature or player."));
 	    
 	    c = cf.getCard("Bayou", null);
