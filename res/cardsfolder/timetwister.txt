@@ -2,9 +2,9 @@ Name:Timetwister
 ManaCost:2 U
 Types:Sorcery
 Text:no text
-A:SP$ ChangeZoneAll | Cost$ 2 U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True  | SubAbility$ SVar=DBChangeAll | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library
+A:SP$ ChangeZoneAll | Cost$ 2 U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True  | SubAbility$ SVar=DBChangeAll | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards.
 SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ SVar=DBDraw | Shuffle$ True
-SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ SVar=DBChange | SpellDescription$ , then draws seven cards.
+SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ SVar=DBChange
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Graveyard
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
