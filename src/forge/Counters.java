@@ -75,6 +75,7 @@ public enum Counters {
     QUEST(),
     SCREAM(),
     SHELL(),
+    SHIELD(),
     SLEEP(),
     SLEIGHT(),
     SOOT(),

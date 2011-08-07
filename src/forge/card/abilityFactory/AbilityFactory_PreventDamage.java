@@ -13,6 +13,7 @@ import forge.Combat;
 import forge.CombatUtil;
 import forge.ComputerUtil;
 import forge.Constant;
+import forge.Counters;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
@@ -157,7 +158,9 @@ public class AbilityFactory_PreventDamage {
 		
 		// temporarily disabled until better AI
 		if (af.getAbCost().getSacCost())	 return false;
-		if (af.getAbCost().getSubCounter())  return false;
+		if (af.getAbCost().getSubCounter())  
+			if (af.getAbCost().getCounterType().equals(Counters.P1P1))
+				return false;
 		if (af.getAbCost().getLifeCost())	 return false;
 
 		if (!ComputerUtil.canPayCost(sa))
