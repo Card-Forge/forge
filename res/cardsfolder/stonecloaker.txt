@@ -6,7 +6,7 @@ PT:3/2
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
-SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | ChangeType$ Creature.YouCtrl
+SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from a graveyard.
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Cost$ 0
 SVar:RemAIDeck:True
