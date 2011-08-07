@@ -40,19 +40,25 @@ public class GameAction {
     	
     	boolean suppress = prev.equals(zone);
     	
-    	Card copied;
-    	if (!suppress)
+    	Card copied = null;
+    	
+    	// Don't copy tokens, or cards staying in the same Zone (battlefield => battlefield)
+    	if (suppress || c.isToken())
     		copied = c;
     	else{
     		copied = AllZone.CardFactory.copyCard(c);
-    	
+    		
+    		// todo: improve choices here
+    		// Certain attributes need to be copied from Hand->Stack and Stack->Battlefield
 	    	if (c.wasSuspendCast())			// these probably can be moved back to SubtractCounters
 	        	copied = addSuspendTriggers(c);
-	        copied.setUnearthed(c.isUnearthed());	// this might be unnecessary
-	        
-	        AllZone.TriggerHandler.suppressMode("ChangesZone");
+	        copied.setUnearthed(c.isUnearthed());	// this might be unnecessary	
     	}
 
+    	if (suppress)
+	        AllZone.TriggerHandler.suppressMode("ChangesZone");
+
+    	// If the card is not a token, add it anywhere. If it is a token, only add to Battlefield
         if (!c.isToken() || zone.is(Constant.Zone.Battlefield))
         	 zone.add(copied);
         
