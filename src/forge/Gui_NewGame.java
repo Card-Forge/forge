@@ -199,7 +199,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void setupMenu() {
         Action[] actions = {
-                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
+        		// Remove the option to download HQ pics since the HQ pics server appears to be offline.
+        		// LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
+                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
                 CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for (Action a:actions) {
