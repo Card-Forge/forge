@@ -520,10 +520,11 @@
                                             <javafileset dir="${basedir}" includes="res/**" />
                                             <javaproperty name="apple.laf.useScreenMenuBar" value="true" />
                                         </jarbundler>
-                                        <!--<symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications" />  -->
+                                        <symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications" />
                                         <exec executable="${basedir}/build/create-dmg" failonerror="false">
                                             <arg line="--volname ${project.name}-${project.version} --background ${basedir}/build/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx" />
                                         </exec>
+                                        <symlink action="delete" link="${project.build.directory}/${project.build.finalName}-osx/Applications"/>
                                         <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg" destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2" compression="bzip2" />
                                     </tasks>
                                 </configuration>
