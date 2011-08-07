@@ -135,6 +135,10 @@ public class AbilityFactory_AlterLife {
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
+		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 
 		ArrayList<Player> tgtPlayers;
 
@@ -267,6 +271,11 @@ public class AbilityFactory_AlterLife {
 	
 	public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 		Card card = af.getHostCard();
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		ArrayList<Player> tgtPlayers;
@@ -405,6 +414,10 @@ public class AbilityFactory_AlterLife {
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
+		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 
 		ArrayList<Player> tgtPlayers;
 		Target tgt = af.getAbTgt();
@@ -540,6 +553,11 @@ public class AbilityFactory_AlterLife {
 	
 	public static void loseLifeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 		Card card = af.getHostCard();
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		
@@ -710,6 +728,10 @@ public class AbilityFactory_AlterLife {
 	private static void poisonResolve(final AbilityFactory af, final SpellAbility sa, int num){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -745,6 +767,10 @@ public class AbilityFactory_AlterLife {
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
+		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 
 		ArrayList<Player> tgtPlayers;
 
@@ -910,8 +936,12 @@ public class AbilityFactory_AlterLife {
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" -");
-
-		sb.append(" ");
+		else
+			sb.append(" ");
+		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 
 		ArrayList<Player> tgtPlayers;
 
@@ -1047,6 +1077,12 @@ public class AbilityFactory_AlterLife {
 
 	private static void setLifeResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
+		
 		Card card = af.getHostCard();
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		ArrayList<Player> tgtPlayers;
