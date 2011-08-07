@@ -167,7 +167,6 @@ public class AbilityFactory_Debuff {
 	}
 
 	private static boolean debuffCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-		System.out.println("Checking debuff canPlayAI()");
 		// if there is no target and host card isn't in play, don't activate
     	if (af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(af.getHostCard())) 
     		return false;
@@ -196,21 +195,14 @@ public class AbilityFactory_Debuff {
     	if (!ComputerUtil.canPayCost(sa))
     		return false;
     	
-    	System.out.println("Past abCost in canPlayAI");
-    	
     	HashMap<String,String> params = af.getMapParams();
     	SpellAbility_Restriction restrict = sa.getRestrictions();
     	
     	// Phase Restrictions
     	if (AllZone.Stack.size() == 0 && AllZone.Phase.isBefore(Constant.Phase.Combat_Begin)){
     		// Instant-speed pumps should not be cast outside of combat when the stack is empty
-    			if (!AbilityFactory.isSorcerySpeed(sa))
-    				return false;
-    	}
-    	else if (AllZone.Stack.size() > 0){
-    		// TODO: pump something only if the top thing on the stack will kill it via damage
-    		// or if top thing on stack will pump it/enchant it and I want to kill it
-    		return false;
+    		if (!AbilityFactory.isSorcerySpeed(sa))
+    			return false;
     	}
     	
     	int activations = restrict.getNumberTurnActivations();
@@ -222,15 +214,8 @@ public class AbilityFactory_Debuff {
         
         if(af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
         	ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-
         	if (cards.size() == 0)
         		return false;
-
-        	/*
-        	// when this happens we need to expand AI to consider if its ok for everything?
-			for(Card card : cards){      
-				// TODO: if AI doesn't control Card and Pump is a Curse, than maybe use?
-			}*/
         }
         else
         	return debuffTgtAI(af, sa, getKeywords(params), false);
@@ -239,11 +224,12 @@ public class AbilityFactory_Debuff {
 	}
 
 	private static boolean debuffDrawbackAI(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		if(af.getAbTgt() == null || !af.getAbTgt().doesTarget()) {
-			//TODO - copied from AF_Pump.pumpDrawbackAI() - what shoul be here?
+			//TODO - copied from AF_Pump.pumpDrawbackAI() - what should be here?
 		}
 		else
-			return debuffTgtAI(af, sa, getKeywords(af.getMapParams()), false);
+			return debuffTgtAI(af, sa, getKeywords(params), false);
 
 		return true; 
 	}//debuffDrawbackAI()
