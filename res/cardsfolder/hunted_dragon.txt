@@ -6,7 +6,7 @@ PT:6/6
 K:Flying
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put three 2/2 white Knight creature tokens with first strike onto the battlefield under target opponent's control.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Knight First Strike | TokenTypes$ Creature,Knight | TokenOwner$ Opponent | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ First Strike
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Knight | TokenImage$ W 2 2 Knight First Strike | TokenTypes$ Creature,Knight | TokenOwner$ Opponent | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ First Strike
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_dragon.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/131.jpg
