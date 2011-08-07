@@ -2,8 +2,6 @@
 package forge;
 
 
-import static forge.error.ErrorViewer.showError;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -14,7 +12,6 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
-import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input_PayManaCost_Ability;
@@ -904,7 +901,7 @@ public class CombatUtil {
 				String ability = source.getSVar(trigParams.get("Execute"));
 				AbilityFactory AF = new AbilityFactory();
         		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
-        		if (abilityParams.containsKey("AB")) { 
+        		if (abilityParams.containsKey("AB")) {
 					if (abilityParams.get("AB").equals("Pump"))
 						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
 						if (AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null).contains(defender))
@@ -1064,46 +1061,25 @@ public class CombatUtil {
     	return toughness;
     }
     
-    public static boolean canRegenerate(Card card) {
-    	Player controller = card.getController();
-    	CardList l = AllZoneUtil.getCardsInPlay();
-    	for(Card c:l)
-            for(SpellAbility sa:c.getSpellAbility())
-            	// if SA is from AF_Counter don't add to getPlayable
-                //This try/catch should fix the "computer is thinking" bug
-                try {
-                    if(sa.canPlay() && ComputerUtil.canPayCost(sa,controller) && sa.getAbilityFactory() != null && sa.isAbility()){
-                    	AbilityFactory af = sa.getAbilityFactory();
-                    	HashMap <String,String> mapParams = af.getMapParams();
-                		if (mapParams.get("AB").equals("Regenerate"))
-                			if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
-                				return true;
-                    }
-                } catch(Exception ex) {
-                    showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
-                }
-    	
-    	return false;
-    }
-    
     //can the blocker destroy the attacker?
     public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat, boolean noRegen) {
         
-        if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return false;
+        if(attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) return false;
         
         int flankingMagnitude = 0;
-        if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
+        if(attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
             
         	flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
 
             if(flankingMagnitude >= defender.getNetDefense()) return false;
-            if(flankingMagnitude >= defender.getNetDefense() - defender.getDamage() && !defender.getKeyword().contains("Indestructible")) 
+            if(flankingMagnitude >= defender.getNetDefense() - defender.getDamage() && !defender.hasKeyword("Indestructible")) 
             	return false;
-            
         }//flanking
         
-        if((attacker.getKeyword().contains("Indestructible") || (canRegenerate(attacker) && !noRegen)) && 
-        		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
+        if(defender.hasKeyword("CARDNAME can't be regenerated.")) noRegen = true;
+        
+        if((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !noRegen)) && 
+        		!(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) return false;
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender, combat);
@@ -1119,15 +1095,15 @@ public class CombatUtil {
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         
-        if(defender.getKeyword().contains("Double Strike") ) {
-            if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
+        if(defender.hasKeyword("Double Strike") ) {
+            if(defender.hasKeyword("Deathtouch") && defenderDamage > 0) return true;
             if(defenderDamage >= attackerLife) return true;
             
             //Attacker may kill the blocker before he can deal normal (secondary) damage
-            if((attacker.getKeyword().contains("Double Strike") || attacker.getKeyword().contains("First Strike")) 
-            		&& !defender.getKeyword().contains("Indestructible")) {
+            if((attacker.hasKeyword("Double Strike") || attacker.hasKeyword("First Strike")) 
+            		&& !defender.hasKeyword("Indestructible")) {
                 if(attackerDamage >= defenderLife) return false;
-                if(attackerDamage > 0 && attacker.getKeyword().contains("Deathtouch")) return false;
+                if(attackerDamage > 0 && attacker.hasKeyword("Deathtouch")) return false;
             } 
             if(attackerLife <= 2 * defenderDamage) return true;
         }//defender double strike
@@ -1135,14 +1111,14 @@ public class CombatUtil {
         else //no double strike for defender
         {	
         	//Attacker may kill the blocker before he can deal any damage
-            if(attacker.getKeyword().contains("Double Strike") || attacker.getKeyword().contains("First Strike")
-            		&& !defender.getKeyword().contains("Indestructible") && !defender.getKeyword().contains("First Strike")) {
+            if(attacker.hasKeyword("Double Strike") || attacker.hasKeyword("First Strike")
+            		&& !defender.hasKeyword("Indestructible") && !defender.hasKeyword("First Strike")) {
             	
             	if(attackerDamage >= defenderLife) return false;
-            	if(attackerDamage > 0 && attacker.getKeyword().contains("Deathtouch") ) return false;
+            	if(attackerDamage > 0 && attacker.hasKeyword("Deathtouch") ) return false;
             }
             
-            if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
+            if(defender.hasKeyword("Deathtouch") && defenderDamage > 0) return true;
                 
             return defenderDamage >= attackerLife;
             
@@ -1156,7 +1132,7 @@ public class CombatUtil {
     	Card attacker = AllZone.Combat.getAttackerBlockedBy(blocker);
     	
     	if(canDestroyBlocker(blocker, attacker, AllZone.Combat, true) && 
-    					!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect")))
+    					!(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect")))
     			return true;
     	return false;
     }
@@ -1165,18 +1141,20 @@ public class CombatUtil {
     public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat, boolean noRegen) {
     	
         int flankingMagnitude = 0;
-        if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
+        if(attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
             
         	flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
         	
             if(flankingMagnitude >= defender.getNetDefense()) return true;
-            if((flankingMagnitude >= defender.getKillDamage()) && !defender.getKeyword().contains("Indestructible")) return true;    
+            if((flankingMagnitude >= defender.getKillDamage()) && !defender.hasKeyword("Indestructible")) return true;    
         }//flanking
         
-        if((defender.getKeyword().contains("Indestructible") || (canRegenerate(defender) && !noRegen)) && 
-        		!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect"))) return false;
+        if(defender.hasKeyword("CARDNAME can't be regenerated.")) noRegen = true;
         
-        if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return true;
+        if((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !noRegen)) && 
+        		!(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) return false;
+        
+        if(attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) return true;
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender, combat);
@@ -1192,15 +1170,15 @@ public class CombatUtil {
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         
-        if(attacker.getKeyword().contains("Double Strike") ) {
-            if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
+        if(attacker.hasKeyword("Double Strike") ) {
+            if(attacker.hasKeyword("Deathtouch") && attackerDamage > 0) return true;
             if(attackerDamage >= defenderLife) return true;
             
             //Attacker may kill the blocker before he can deal normal (secondary) damage
-            if((defender.getKeyword().contains("Double Strike") || defender.getKeyword().contains("First Strike")) 
-            		&& !attacker.getKeyword().contains("Indestructible")) {
+            if((defender.hasKeyword("Double Strike") || defender.hasKeyword("First Strike")) 
+            		&& !attacker.hasKeyword("Indestructible")) {
                 if(defenderDamage >= attackerLife) return false;
-                if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch")) return false;
+                if(defenderDamage > 0 && defender.hasKeyword("Deathtouch")) return false;
             } 
             if(defenderLife <= 2 * attackerDamage) return true;
         }//attacker double strike
@@ -1208,14 +1186,14 @@ public class CombatUtil {
         else //no double strike for attacker
         {	
         	//Defender may kill the attacker before he can deal any damage
-            if(defender.getKeyword().contains("Double Strike") || defender.getKeyword().contains("First Strike")
-            		&& !attacker.getKeyword().contains("Indestructible") && !attacker.getKeyword().contains("First Strike")) {
+            if(defender.hasKeyword("Double Strike") || defender.hasKeyword("First Strike")
+            		&& !attacker.hasKeyword("Indestructible") && !attacker.hasKeyword("First Strike")) {
             	
             	if(defenderDamage >= attackerLife) return false;
-            	if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch")) return false;
+            	if(defenderDamage > 0 && defender.hasKeyword("Deathtouch")) return false;
             }
             
-            if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
+            if(attacker.hasKeyword("Deathtouch") && attackerDamage > 0) return true;
                 
             return attackerDamage >= defenderLife;
             

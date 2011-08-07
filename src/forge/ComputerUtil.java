@@ -1,6 +1,8 @@
 
 package forge;
 
+import static forge.error.ErrorViewer.showError;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -306,55 +308,7 @@ public class ComputerUtil
   
   static public boolean canPayCost(SpellAbility sa)
   {
-	  Card card = sa.getSourceCard();
-
-	  CardList land = getAvailableMana();
-
-	  if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
-	  {
-		  land.remove(sa.getSourceCard());
-	  }
-	  // Beached - Delete old
-	  String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
-
-	  ManaCost cost = new ManaCost(mana);
-
-	  // Tack xMana Payments into mana here if X is a set value
-	  if (sa.getPayCosts() != null && cost.getXcounter() > 0){
-		  String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
-		  // For Count$xPaid set PayX in the AFs then use that here
-		  // Else calculate it as appropriate.
-		  if (!card.getSVar(xSvar).equals("")){
-			  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.getXcounter();
-			  cost.increaseColorlessMana(manaToAdd);
-		  }
-	  }
-
-	  cost = AllZone.GameAction.getSpellCostChange(sa, cost);
-	  if(cost.isPaid())
-		  return canPayAdditionalCosts(sa);
-	  // Beached - Delete old
-	  ArrayList<String> colors;
-
-	  for(int i = 0; i < land.size(); i++)
-	  {
-		  colors = getColors(land.get(i));
-		  int once = 0;
-
-		  for(int j =0; j < colors.size(); j++)
-		  {
-			  if(cost.isNeeded(colors.get(j)) && once == 0)
-			  {
-				  cost.payMana(colors.get(j));
-				  once++;
-			  }
-
-			  if(cost.isPaid()) {
-				  return canPayAdditionalCosts(sa);
-			  }
-		  }
-	  }
-	  return false;
+	  return canPayCost(sa, AllZone.ComputerPlayer);
   }//canPayCost()
   
   static public boolean canPayCost(SpellAbility sa, Player player)
@@ -363,7 +317,7 @@ public class ComputerUtil
 
 	  CardList land = getAvailableMana(player);
 
-	  if(card.isLand() && sa.getPayCosts().getTap())
+	  if(card.isLand())
 	  {
 		  land.remove(card);
 	  }
@@ -458,170 +412,7 @@ public class ComputerUtil
   
   static public boolean canPayAdditionalCosts(SpellAbility sa)
   {
-	  	// Add additional cost checks here before attempting to activate abilities
-		Cost cost = sa.getPayCosts();
-		if (cost == null)
-			return true;
-	  	Card card = sa.getSourceCard();
-
-    	if (cost.getTap() && (card.isTapped() || card.isSick()))
-    		return false;
-    	
-    	if (cost.getUntap() && (card.isUntapped() || card.isSick()))
-    		return false;
-    	
-		if (cost.getTapXTypeCost())
-		{
-			CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			typeList = typeList.getValidCards(cost.getTapXType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
-			
-			if (cost.getTap())
-				typeList.remove(sa.getSourceCard());
-			typeList = typeList.filter(AllZoneUtil.untapped);
-			
-			if (cost.getTapXTypeAmount() > typeList.size())
-				return false;
-		}
-    	
-		if (cost.getSubCounter()){
-			Counters c = cost.getCounterType();
-			if (card.getCounters(c) - cost.getCounterNum() < 0 || !AllZoneUtil.isCardInPlay(card)){
-				return false;
-			}
-		}
-		
-		if (cost.getAddCounter()){
-			// this should always be true
-		}
-		
-		if (cost.getLifeCost()){
-			if (AllZone.ComputerPlayer.getLife() <= cost.getLifeAmount())
-				return false;
-		}
-	  
-		if (cost.getDiscardCost()){
-    		CardList handList = AllZoneUtil.getPlayerHand(card.getController());
-    		String discType = cost.getDiscardType();
-    		int discAmount = cost.getDiscardAmount();
-    		
-    		if (cost.getDiscardThis()){
-    			if (!AllZone.getZone(card).getZoneName().equals(Constant.Zone.Hand))
-    				return false;
-    		}
-    		else if( discType.equals("LastDrawn")) {
-    			//compy can't yet use this effectively
-    			return false;
-    		}
-    		else if (discType.equals("Hand")){
-    			// this will always work
-    		}
-    		else{
-    			if (!discType.equals("Any") && !discType.equals("Random")){
-    				String validType[] = discType.split(",");
-    				handList = handList.getValidCards(validType, sa.getActivatingPlayer(), sa.getSourceCard());
-    			}
-	    		if (discAmount > handList.size()){
-	    			// not enough cards in hand to pay
-	    			return false;
-	    		}
-    		}
-		}
-		
-		if (cost.getSacCost()){
-			  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
-			if (!cost.getSacThis()){
-			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			    typeList = typeList.getValidCards(cost.getSacType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().isComputer()) // don't sacrifice the card we're pumping
-					  typeList.remove(target);
-				
-				if (cost.getSacAmount() > typeList.size())
-					return false;
-			}
-			else if (cost.getSacThis() && !AllZoneUtil.isCardInPlay(card))
-				return false;
-		}
-		
-		if (cost.getExileCost()){
-			  // if there's an exile in the cost, just because we can Pay it doesn't mean we want to. 
-			if (!cost.getExileThis()){
-			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			    typeList = typeList.getValidCards(cost.getExileType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().isComputer()) // don't exile the card we're pumping
-					  typeList.remove(target);
-				
-				if (cost.getExileAmount() > typeList.size())
-					return false;
-			}
-			else if (cost.getExileThis() && !AllZoneUtil.isCardInPlay(card))
-				return false;
-		}
-		
-		if (cost.getExileFromHandCost()){
-			  // if there's an exile in the cost, just because we can Pay it doesn't mean we want to. 
-			if (!cost.getExileFromHandThis()){
-			    CardList typeList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
-			    typeList = typeList.getValidCards(cost.getExileFromHandType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().isComputer()) // don't exile the card we're pumping
-					  typeList.remove(target);
-				
-				if (cost.getExileFromHandAmount() > typeList.size())
-					return false;
-			}
-			else if (cost.getExileFromHandThis() && !AllZoneUtil.isCardInPlayerHand(card.getController(), card))
-				return false;
-		}
-		
-		if (cost.getExileFromGraveCost()){
-			if (!cost.getExileFromGraveThis()){
-			    CardList typeList = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
-			    typeList = typeList.getValidCards(cost.getExileFromGraveType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().isComputer()) // don't exile the card we're pumping
-					  typeList.remove(target);
-				
-				if (cost.getExileFromGraveAmount() > typeList.size())
-					return false;
-			}
-			else if (cost.getExileFromGraveThis() && !AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card))
-				return false;
-		}
-		
-		if(cost.getExileFromTopCost()){
-			if(!cost.getExileFromTopThis()){
-			    CardList typeList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
-			    typeList = typeList.getValidCards(cost.getExileFromTopType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().isComputer()) // don't exile the card we're pumping
-					  typeList.remove(target);
-				
-				if (cost.getExileFromTopAmount() > typeList.size())
-					return false;
-			}
-			else if (cost.getExileFromTopThis() && !AllZoneUtil.isCardInPlayerLibrary(card.getController(), card))
-				return false;
-		}
-		
-		if (cost.getReturnCost()){
-			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
-			if (!cost.getReturnThis()){
-			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-			    typeList = typeList.getValidCards(cost.getReturnType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().isComputer()) // don't bounce the card we're pumping
-					  typeList.remove(target);
-				
-				if (cost.getReturnAmount() > typeList.size())
-					return false;
-			}
-			else if (!AllZoneUtil.isCardInPlay(card))
-				return false;
-		}
-		
-		return true;
+	  return canPayAdditionalCosts(sa, AllZone.ComputerPlayer);
   }
   
   static public boolean canPayAdditionalCosts(SpellAbility sa, Player player)
@@ -938,37 +729,7 @@ public class ComputerUtil
 
   static public CardList getAvailableMana()
   {
-	  CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-	  CardList mana = list.filter(new CardListFilter()
-	  {
-		  public boolean addCard(Card c)
-		  {
-			  for (Ability_Mana am : c.getAIPlayableMana()) {
-				  am.setActivatingPlayer(AllZone.ComputerPlayer);
-				  if (am.canPlay()) return true;
-			  }
-
-			  return false;
-		  }
-	  });//CardListFilter
-
-	  CardList sortedMana = new CardList();
-
-	  for (int i=0; i<mana.size();i++)
-	  {
-		  Card card = mana.get(i);
-		  if (card.isBasicLand()){
-			  sortedMana.add(card);
-			  mana.remove(card);
-		  }
-	  }
-	  for (int j=0; j<mana.size();j++)
-	  {
-		  sortedMana.add(mana.get(j));
-	  }
-
-	  return sortedMana;
-
+	  return getAvailableMana(AllZone.ComputerPlayer);
   }//getAvailableMana()
   
   static public CardList getAvailableMana(final Player player)
@@ -1261,4 +1022,26 @@ public class ComputerUtil
 			AllZone.GameAction.sacrifice(c);
 		}
 	}
+    
+    public static boolean canRegenerate(Card card) {
+    	Player controller = card.getController();
+    	CardList l = AllZoneUtil.getCardsInPlay();
+    	for(Card c:l)
+            for(SpellAbility sa:c.getSpellAbility())
+            	// if SA is from AF_Counter don't add to getPlayable
+                //This try/catch should fix the "computer is thinking" bug
+                try {
+                    if(sa.canPlay() && ComputerUtil.canPayCost(sa,controller) && sa.getAbilityFactory() != null && sa.isAbility()){
+                    	AbilityFactory af = sa.getAbilityFactory();
+                    	HashMap <String,String> mapParams = af.getMapParams();
+                		if (mapParams.get("AB").equals("Regenerate"))
+                			if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
+                				return true;
+                    }
+                } catch(Exception ex) {
+                    showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
+                }
+    	
+    	return false;
+    }
 }
