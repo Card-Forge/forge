@@ -118,7 +118,6 @@ public class GameActionUtil {
 		playCard_Ripple(c);
         playCard_Storm(sa);
 
-		playCard_Dovescape(c); //keep this one top
 		playCard_Chalice_of_the_Void(c);
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
@@ -539,55 +538,6 @@ public class GameActionUtil {
 
 		}//if					
 	}// Demigod of Revenge
-
-	public static void playCard_Dovescape(final Card c) {
-		CardList list = AllZoneUtil.getCardsInPlay();
-		final int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
-		list = list.getName("Dovescape");
-		final CardList cl = list;
-		if (!c.isCreature() 
-				&& list.size() > 0) {
-			final Card card = list.get(0);
-
-			Ability ability2 = new Ability(card, "0") {
-				@Override
-				public void resolve() {
-
-					SpellAbility sa = AllZone.Stack.peek();
-
-					if (sa.getSourceCard().equals(c)) {
-						sa = AllZone.Stack.pop();
-
-						AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-
-						for (int j = 0; j < cl.size() * cmc; j++) {
-							CardFactoryUtil.makeToken("Bird", "WU 1 1 Bird", sa.getSourceCard().getController(), "W U", 
-								new String[] {"Creature", "Bird"}, 1, 1, new String[] {"Flying"});
-						}
-
-						/*
-                        SpellAbility sa = AllZone.Stack.peek
-                        if (!sa.getSourceCard().isCreature() && sa.isSpell())
-                        {
-
-                        }
-						 */
-					} else //TODO 
-					{
-						;
-					}
-
-
-				}
-			}; // ability2
-
-			ability2.setStackDescription("Dovescape Ability");
-
-            AllZone.Stack.addSimultaneousStackEntry(ability2);
-
-
-		}
-	} // Dovescape
 
 	public static void playCard_Standstill(Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay("Standstill");
