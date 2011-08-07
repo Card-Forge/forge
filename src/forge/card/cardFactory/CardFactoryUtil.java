@@ -556,7 +556,7 @@ public class CardFactoryUtil {
                 AllZone.Display.showMessage("Select a card to put on the " + TopOrBottom + " of your library.");
                 ButtonUtil.disableAll();
                 
-                if(n == num || AllZone.Human_Hand.getCards().length == 0) stop();
+                if(n == num || AllZone.Human_Hand.size() == 0) stop();
             }
             
             @Override
@@ -592,7 +592,7 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
-            	if (AllZone.Human_Hand.getCards().length == 0) stop();
+            	if (AllZone.Human_Hand.size() == 0) stop();
                 AllZone.Display.showMessage("Select " + (nCards - n) + " cards to discard, unless you discard a "
                         + uType + ".");
                 ButtonUtil.disableAll();
@@ -612,7 +612,7 @@ public class CardFactoryUtil {
                     if(card.getType().contains(uType.toString())) stop();
                     
                     else {
-	                    if(n == nCards || AllZone.Human_Hand.getCards().length == 0) stop();
+	                    if(n == nCards || AllZone.Human_Hand.size() == 0) stop();
 	                    else
 	                    	showMessage();
                     }
@@ -816,10 +816,8 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlayAI() {
-                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                
                 CardList rebels = new CardList();
-                CardList list = new CardList(lib.getCards());
+                CardList list = AllZoneUtil.getPlayerCardsInLibrary(sourceCard.getController());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         return ((c.getType().contains("Rebel") || c.getKeyword().contains("Changeling")))
@@ -844,11 +842,8 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 
-                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
-                
                 CardList rebels = new CardList();
-                CardList list = new CardList(lib.getCards());
+                CardList list = AllZoneUtil.getPlayerCardsInLibrary(sourceCard.getController());
                 list = list.getType("Rebel");
                 list = list.getPermanents();
                 
@@ -873,10 +868,7 @@ public class CardFactoryUtil {
                         if(rebel.isAura()) {
                             Object obj = null;
                             if(rebel.getKeyword().contains("Enchant creature")) {
-                                PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                                CardList creats = new CardList(play.getCards());
-                                creats.addAll(oppPlay.getCards());
-                                creats = creats.getType("Creature");
+                                CardList creats = AllZoneUtil.getCreaturesInPlay();
                                 obj = GuiUtils.getChoiceOptional("Pick a creature to attach "
                                         + rebel.getName() + " to", creats.toArray());
                             }
@@ -886,7 +878,6 @@ public class CardFactoryUtil {
                                     rebel.enchantCard(target);
                                 }
                             }
-                            
                         }
                     }
                 }
@@ -1762,7 +1753,7 @@ public class CardFactoryUtil {
         return target;
     }//input_targetSpecific()
     
-  //CardList choices are the only cards the user can successful select
+    //CardList choices are the only cards the user can successful select
     public static Input input_targetChampionSac(final Card crd, final SpellAbility spell, final CardList choices, final String message, final boolean targeted, final boolean free) {
         Input target = new Input() {
 			private static final long serialVersionUID = -3320425330743678663L;
@@ -1826,7 +1817,7 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
-            	if (AllZone.Human_Hand.getCards().length == 0) stop();
+            	if (AllZone.Human_Hand.size() == 0) stop();
             	if( nCards == 0) stop();
             	
                 AllZone.Display.showMessage("Select a card to discard");
@@ -1840,7 +1831,7 @@ public class CardFactoryUtil {
                     n++;
                     
                     //in case no more cards in hand
-                    if(n == nCards || AllZone.Human_Hand.getCards().length == 0) stop();
+                    if(n == nCards || AllZone.Human_Hand.size() == 0) stop();
                     else
                     	showMessage();
                 }
@@ -1863,7 +1854,7 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
-            	if (AllZone.Human_Hand.getCards().length == 0) stop();
+            	if (AllZone.Human_Hand.size() == 0) stop();
             	
                 AllZone.Display.showMessage("Select a card to discard");
                 ButtonUtil.disableAll();
@@ -1876,7 +1867,7 @@ public class CardFactoryUtil {
                     n++;
                     
                     //in case no more cards in hand
-                    if(n == numCards || AllZone.Human_Hand.getCards().length == 0) done();
+                    if(n == numCards || AllZone.Human_Hand.size() == 0) done();
                     else
                     	showMessage();
                 }
@@ -1899,35 +1890,33 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_discardRecall()
-    
-    //****************copied from input_targetType*****************
-   
+       
     public static Input MasteroftheWildHunt_input_targetCreature(final SpellAbility spell, final CardList choices, final Command paid) {
-        Input target = new Input() {
-            private static final long serialVersionUID = -1779224307654698954L;
-            
-            @Override
-            public void showMessage() {
-            	AllZone.Display.showMessage("Select target wolf to damage for " + spell.getSourceCard());
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-            	if(choices.size() == 0) stop();
-            		if(choices.contains(card)) {
-                    spell.setTargetCard(card);
-                    paid.execute();
-                        stop();                  
-                }
-            }//selectCard()
-        };
-        return target;
+    	Input target = new Input() {
+    		private static final long serialVersionUID = -1779224307654698954L;
+
+    		@Override
+    		public void showMessage() {
+    			AllZone.Display.showMessage("Select target wolf to damage for " + spell.getSourceCard());
+    			ButtonUtil.enableOnlyCancel();
+    		}
+
+    		@Override
+    		public void selectButtonCancel() {
+    			stop();
+    		}
+
+    		@Override
+    		public void selectCard(Card card, PlayerZone zone) {
+    			if(choices.size() == 0) stop();
+    			if(choices.contains(card)) {
+    				spell.setTargetCard(card);
+    				paid.execute();
+    				stop();                  
+    			}
+    		}//selectCard()
+    	};
+    	return target;
     }//input_MasteroftheWildHunt_input_targetCreature()
     
     public static Input modularInput(final SpellAbility ability, final Card card){
@@ -2924,7 +2913,7 @@ public class CardFactoryUtil {
         		AllZone.InputControl.setInput(CardFactoryUtil.input_UntapUpToNType(n, d[2]));
         	else
         	{
-                CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+                CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 list = list.getType(d[2]);
                 list = list.filter(AllZoneUtil.tapped);
                 
