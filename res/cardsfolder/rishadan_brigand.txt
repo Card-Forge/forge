@@ -10,4 +10,5 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Permanent | SacMessag
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_brigand.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/92.jpg
 End

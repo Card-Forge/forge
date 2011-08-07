@@ -9,4 +9,5 @@ SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Each | Num
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wail_of_the_nim.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/81.jpg
 End
