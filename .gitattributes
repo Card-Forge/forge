@@ -6460,6 +6460,7 @@ res/cardsfolder/solar_tide.txt -text svneol=native#text/plain
 res/cardsfolder/solarion.txt svneol=native#text/plain
 res/cardsfolder/soldevi_adnate.txt -text svneol=native#text/plain
 res/cardsfolder/soldevi_digger.txt -text svneol=native#text/plain
+res/cardsfolder/soldevi_heretic.txt -text svneol=native#text/plain
 res/cardsfolder/soldevi_sage.txt svneol=native#text/plain
 res/cardsfolder/soldevi_simulacrum.txt -text svneol=native#text/plain
 res/cardsfolder/soldevi_steam_beast.txt -text svneol=native#text/plain
