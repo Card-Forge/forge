@@ -1,12 +1,12 @@
-Forge 06/13/2011 (unofficial BETA) version
+Forge 06/12/2011 (unofficial BETA) version
 
 (Quest icons used created by Teekatas, from his Legendora set 
 
 http://raindropmemory.deviantart.com)
 
-#### cards in total.
+8269 cards in total.
 
-This version is based upon the revision # #### which is found on our SVN.
+This version is based upon the revision # 9621 which is found on our SVN.
 
 
 This version includes some new cards, bug fixes and a few new quest opponent decks. The developer mode at the new game window gives us a few new features to this option. These new features will primarily interest the devs as it will now help to test out specific cards while testing combat code changes.
@@ -373,16 +373,37 @@ Fixes/Features:
 - Proper fix for drafting sets since the externalized set data.
 - Ran Set Info script.
 - Allowed the AI to play sorceries without PlayMain1 SVar in Main1 (timing should be handled by canPlayAI in the AF's).
-- Added AF_Unpump for things like "target creature loses flying until end of turn". I will be tweaking the AI today.
+- Added AF_Unpump for things like "target creature loses flying until end of turn".
+- Updated the changes.txt file. Not finished at this time.
+- Added a very hard version of the Gold Finger deck.
+- Added a Cube to the Draft folder, to have one available in the default build.
+- Converted Chalice of the Void to script.
+- Removed some redundant SVars.
+- Renamed AF_Unpump to AF_Debuff.
+- Ran set info script.
 
 
 Many people helped with this version. A special thank you goes out to them:
 
-
+Rob Cashwalker
+Agetian
+Sloth
+Slapshot5
+JenDave
+Friar Sol
+Snacko
+Hellfish
+Jeff Wadsworth
+Jaedayr
+SoulStorm
+Starcrash
+DeadSpeak
+Chris H
 
 
 Added many cards, including:
 
+Adarkar WindformAEthermage's TouchAphotic WispsAquitect's WillBaleful StareBandageBarrenton MedicBattlefield MedicBrass HeraldBrood of CockroachesCanker AbominationCatastropheCephalid AristocratChained ThroatseekerCinderhaze WretchCombat MedicCopy ArtifactCorrupted ZendikonCrazed ArmodonCrimson WispsCrusher ZendikonCrystal ShardD'Avenant HealerDance of ManyDaru HealerDeathbringer LiegeDiligent FarmhandDisciple of Tevesh SzatDisembowelDispatchDwarven VigilantesEiganjo CastleEladamri's VineyardErratic PortalEsper BattlemageEthereal ChampionExciseFavorable DestinyFemeref HealerFlickerwispForsaken WastesGalepowder MageGenesis ChamberGibbering HyenasGlimmerpoint StagGloomwidow's FeastGlyph of DestructionGoblin GoonGriffin CanyonGuardian ZendikonGutwrencher OniHasran OgressHealHealing LeavesHealing SalveHell SwarmIchneumon DruidIsolation CellKavu AggressorKei TakahashiKnight of ValorLavacore ElementalLiege of the TangleLoxodon AnchoriteLyzolda, the Blood WitchMagus of the VineyardMana GeyserMartyrs' TombMaster HealerMending HandsMonstrous HoundMurk DwellersNatural AffinityNether VoidNightcreepNiveous WispsOrdruun CommandoOrim's ThunderOtherworldly JourneyPact of NegationPainwracker OniPardic FirecatPhyrexian MetamorphPhyrexian TyrannyPincer SpiderPlague FiendQuesting PhelddagrifRabid ElephantRavaging RiftwurmReturn to DustRhystic DelugeRhystic StudyRishadan BrigandRishadan CutpurseRishadan FootpadRootwater MysticSavage FirecatScaldScarwood BanditsScoria WurmSculpting SteelSegmented WurmSeizuresSelfless ExorcistSheltering PrayersShield of the AgesShieldmate's BlessingSinking FeelingSoul BarrierSoul ScourgeSpawning PitSplit-Tail MikoSquee's ToySunken HopeSway of the StarsSwift ManeuverTanglerootThermal NavigatorTidehollow ScullerTurn to MistUnwilling RecruitUrborg SkeletonVastwood ZendikonVernal BloomViridian BetrayersViridian ScoutVodalian SerpentWail of the NimWalking DreamWayfarer's BaubleWellspringWild WurmWind ZendikonWinter SkyWithering GazeWithstandZirilan of the ClawZombie Mob
 
 
 end
