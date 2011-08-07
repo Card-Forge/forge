@@ -7,4 +7,5 @@ A:SP$ PreventDamage | Cost$ G | Tgt$ TgtCP | Amount$ 3 | PrecostDesc$ or | Spell
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/healing_leaves.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/150.jpg
 End

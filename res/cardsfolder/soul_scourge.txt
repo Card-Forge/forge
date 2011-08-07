@@ -10,4 +10,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigGainLife:DB$GainLife | Defined$ Remembered | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_scourge.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/85.jpg
 End

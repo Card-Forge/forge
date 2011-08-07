@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ X | TgtPrompt$ Sel
 SVar:X:Count$TypeOnBattlefield.Cleric
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_medic.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/9.jpg
 End

@@ -6,4 +6,6 @@ A:SP$ PreventDamage | Cost$ W | Tgt$ TgtCP | Amount$ 1 | SubAbility$ SVar=DBDraw
 SVar:DBDraw:DB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heal.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/308.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/254.jpg
 End
