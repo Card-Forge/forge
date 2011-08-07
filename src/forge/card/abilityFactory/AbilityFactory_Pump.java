@@ -263,7 +263,7 @@ public class AbilityFactory_Pump {
     		return false;
     	
     	// temporarily disabled until AI is improved
-    	if (AF.getAbCost().getSacCost()) return false;	
+    	if (AF.getAbCost().getSacCost() && sa.getSourceCard().isCreature()) return false;	
     	if (AF.getAbCost().getLifeCost()) {
     		if (!AF.isCurse()) return false; //Use life only to kill creatures
     		if (AllZone.ComputerPlayer.getLife() - AF.getAbCost().getLifeAmount() < 4)
