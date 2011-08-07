@@ -1967,9 +1967,6 @@ public class GameActionUtil {
 
 			}
     	}
-		
-    	if (c.hasKeyword("Whenever this creature deals damage to a player, that player gets a poison counter."))
-			playerCombatDamage_PoisonCounter(c, 1);
     
     	if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
 			playerCombatDamage_Whirling_Dervish(c);
@@ -2088,11 +2085,6 @@ public class GameActionUtil {
 
 			}
 		}
-	}
-
-	private static void playerCombatDamage_PoisonCounter(Card c, int n) {
-		final Player opponent = c.getController().getOpponent();
-		opponent.addPoisonCounters(n);
 	}
 	
 	private static void playerDamage_Farsight_Mask(final Player player, final Card c, final Card crd)
