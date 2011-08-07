@@ -1382,6 +1382,7 @@ res/cardsfolder/control_of_the_court.txt -text svneol=native#text/plain
 res/cardsfolder/controvert.txt -text svneol=native#text/plain
 res/cardsfolder/convalescence.txt -text svneol=native#text/plain
 res/cardsfolder/convalescent_care.txt -text svneol=native#text/plain
+res/cardsfolder/conversion.txt -text svneol=native#text/plain
 res/cardsfolder/conversion_chamber.txt svneol=native#text/plain
 res/cardsfolder/conviction.txt -text svneol=native#text/plain
 res/cardsfolder/convincing_mirage.txt -text svneol=native#text/plain
