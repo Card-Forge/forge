@@ -694,9 +694,6 @@ public class AbilityFactory_Pump {
 		        else AllZone.EndOfTurn.addUntil(untilEOT);
 	        }
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
-        
     }
     
     
@@ -893,9 +890,7 @@ public class AbilityFactory_Pump {
 		        
 		        AllZone.EndOfTurn.addUntil(untilEOT);
 	        }
-		}
-		
-		AbilityFactory.resolveSubAbility(sa);    
+		}   
     }
     
     private boolean pumpAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){

@@ -1,7 +1,6 @@
 package forge.card.abilityFactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 import forge.AllZone;
@@ -164,11 +163,6 @@ public class AbilityFactory_EndGameCondition {
 	}
 	
 	public static void winsGameResolve(final AbilityFactory af, final SpellAbility sa){
-		HashMap<String,String> params = af.getMapParams();
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}		
 		
 		Card card = af.getHostCard();
 
@@ -176,13 +170,6 @@ public class AbilityFactory_EndGameCondition {
 		
 		for(Player p : players)
 			p.altWinConditionMet(card.getName());
-		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-		}
 	}
 	
 	// ***********************************************************************************************
@@ -364,11 +351,6 @@ public class AbilityFactory_EndGameCondition {
 	}
 	
 	public static void losesGameResolve(final AbilityFactory af, final SpellAbility sa){
-		HashMap<String,String> params = af.getMapParams();
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 		
 		Card card = af.getHostCard();
 
@@ -383,13 +365,6 @@ public class AbilityFactory_EndGameCondition {
 		
 		for(Player p : players)
 			p.altLoseConditionMet(card.getName());
-		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-		}
 	}
 	
 }

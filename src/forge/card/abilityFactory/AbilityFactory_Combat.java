@@ -171,11 +171,8 @@ public class AbilityFactory_Combat {
 	}
 	
 	public static void fogResolve(final AbilityFactory af, final SpellAbility sa){
-		HashMap<String,String> params = af.getMapParams();
 		
 		// Expand Fog keyword here depending on what we need out of it.
 		AllZone.GameInfo.setPreventCombatDamageThisTurn(true);
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 }

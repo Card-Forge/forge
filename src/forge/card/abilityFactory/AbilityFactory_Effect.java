@@ -265,12 +265,5 @@ public class AbilityFactory_Effect {
 		// TODO: Add targeting to the effect so it knows who it's dealing with
 		
 		AllZone.GameAction.moveToPlay(eff);
-		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-		}
 	}
 }

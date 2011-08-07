@@ -384,8 +384,6 @@ public class AbilityFactory_PermanentState {
 					tgtC.untap();
 			}
 		}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	public static void chooseUntapUpTo(AbilityFactory af, SpellAbility sa, HashMap<String,String> params){
@@ -772,8 +770,6 @@ public class AbilityFactory_PermanentState {
 			if (AllZoneUtil.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(af.getHostCard(), tgtC)))
 				tgtC.tap();
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// ****************************************
@@ -876,8 +872,6 @@ public class AbilityFactory_PermanentState {
 		list = list.getValidCards(Valid.split(","), card.getController(), card);
 
 		for(int i = 0; i < list.size(); i++) list.get(i).untap();
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	private static boolean untapAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1017,8 +1011,6 @@ public class AbilityFactory_PermanentState {
 		list = list.getValidCards(Valid.split(","), card.getController(), card);
 
 		for(int i = 0; i < list.size(); i++) list.get(i).tap();
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	private static boolean tapAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1368,8 +1360,6 @@ public class AbilityFactory_PermanentState {
 				else tgtC.untap();
 			}
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	//Phasing? Something else? Who knows!

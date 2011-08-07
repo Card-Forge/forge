@@ -294,14 +294,6 @@ public class AbilityFactory_GainControl {
             hostCard.addGainControlReleaseCommand(getLoseControlCommand(0));
         
 		}//end foreach target
-		
-		if (AF.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			// doesn't support old style drawbacks
-		}
     }
     
     private Command getDestroyCommand(final int i) {

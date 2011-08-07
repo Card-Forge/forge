@@ -180,13 +180,6 @@ public class AbilityFactory_Turns {
 				}
 			}
 		}
-		
-		if(af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) {
-	     	   abSub.resolve();
-	        }
-		}
 	}
 	
 }//end class AbilityFactory_Turns

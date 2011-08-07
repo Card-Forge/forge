@@ -468,11 +468,8 @@ public class AbilityFactory_Mana {
 	public static void doDrawback(AbilityFactory af, Ability_Mana abMana, Card card){
 		
 		// if mana production has any type of SubAbility, undoable=false
-		if (af.hasSubAbility()){
+		if (af.hasSubAbility())
 			abMana.setUndoable(false);
-			Ability_Sub abSub = abMana.getSubAbility();
-			abSub.resolve();
-		}
 	}
 	
 	private static boolean hasUrzaLands(Player p){

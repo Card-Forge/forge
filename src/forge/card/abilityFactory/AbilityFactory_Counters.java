@@ -483,10 +483,6 @@ public class AbilityFactory_Counters {
 
 	public static void putResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}	
 		
 		Card card = af.getHostCard();
 		String type = params.get("CounterType");
@@ -509,8 +505,6 @@ public class AbilityFactory_Counters {
 					tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
 			}
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	// *******************************************
@@ -761,10 +755,6 @@ public class AbilityFactory_Counters {
 	
 	public static void removeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 		
 		Card card = af.getHostCard();
 		String type = params.get("CounterType");
@@ -792,8 +782,6 @@ public class AbilityFactory_Counters {
 					}
 					tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
 			}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *******************************************
@@ -931,10 +919,6 @@ public class AbilityFactory_Counters {
 	
 	private static void proliferateResolve(final AbilityFactory AF, SpellAbility sa) {
 		HashMap<String,String> params = AF.getMapParams();
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}	
 		
 		CardList hperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		hperms = hperms.filter(new CardListFilter() {
@@ -1075,8 +1059,6 @@ public class AbilityFactory_Counters {
         		AllZone.HumanPlayer.addPoisonCounters(1);
 			
 		} //comp
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *******************************************
@@ -1282,11 +1264,7 @@ public class AbilityFactory_Counters {
 	}
 
 	public static void putAllResolve(final AbilityFactory af, final SpellAbility sa) {
-		HashMap<String,String> params = af.getMapParams();
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}		
+		HashMap<String,String> params = af.getMapParams();		
 
 		String type = params.get("CounterType");
 		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
@@ -1307,7 +1285,5 @@ public class AbilityFactory_Counters {
 			else	// adding counters to something like re-suspend cards
 				tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
 		}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 }

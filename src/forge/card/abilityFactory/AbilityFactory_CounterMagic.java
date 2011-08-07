@@ -273,10 +273,6 @@ public class AbilityFactory_CounterMagic {
 	}
 	
 	private void counterResolve(final AbilityFactory af, final SpellAbility sa) {
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}	
 		
 		// TODO: Before this resolves we should see if any of our targets are still on the stack
 		Target tgt = sa.getTarget();
@@ -352,8 +348,6 @@ public class AbilityFactory_CounterMagic {
                 }
 			}
 		}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}//end counterResolve
 	
 	private void doPowerSink(Player p) {

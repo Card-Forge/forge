@@ -168,11 +168,6 @@ public class AbilityFactory_Clash {
                 runParams.put("Won","False");
         }
 
-        //Oldstyle drawbacks shouldn't be necessary anymore?
-        if(AF.hasSubAbility())
-            if (SA.getSubAbility() != null)
-                SA.getSubAbility().resolve();
-
         AllZone.TriggerHandler.runTrigger("Clashed",runParams);
     }
     
@@ -332,10 +327,6 @@ public class AbilityFactory_Clash {
     			lose.resolve();
     		}
     		//runParams.put("Won","False");
-    	}
-
-    	if(af.hasSubAbility() && sa.getSubAbility() != null) {
-    		sa.getSubAbility().resolve();
     	}
 
     	//AllZone.TriggerHandler.runTrigger("FlipsACoin",runParams);

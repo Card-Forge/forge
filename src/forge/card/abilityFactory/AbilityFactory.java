@@ -1237,12 +1237,13 @@ public class AbilityFactory {
 		return Card.compare(left, compare, right);
 	}
 	
+	/*
 	public static void resolveSubAbility(SpellAbility sa){
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null){
 			abSub.resolve();
 		}
-	}
+	}*/
 	
 	public static void handleRemembering(AbilityFactory AF)
 	{
@@ -1276,6 +1277,20 @@ public class AbilityFactory {
 			ArrayList<Card> tgts = (tgt == null) ? new ArrayList<Card>() : tgt.getTargetCards();
 			host.addImprinted(tgts);
 		}
+	}
+	
+	public static void resolve(SpellAbility sa) {
+		if (sa == null) return;
+		AbilityFactory af = sa.getAbilityFactory();
+		HashMap<String,String> params = af.getMapParams();
+		
+		//check conditions
+		if (AbilityFactory.checkConditional(params, sa))
+			sa.resolve();
+		
+		//try to resolve subabilities (see null check above)
+		Ability_Sub abSub = sa.getSubAbility();
+		resolve(abSub);
 	}
 	
 }//end class AbilityFactory

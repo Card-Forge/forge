@@ -452,7 +452,5 @@ public class AbilityFactory_Token extends AbilityFactory {
 				}
 			}
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 }

@@ -701,11 +701,11 @@ public class MagicStack extends MyObservable {
 					}
 				});
 			}
-			if(sa.getAbilityFactory() != null)
-			{
+			if(sa.getAbilityFactory() != null) {
 				AbilityFactory.handleRemembering(sa.getAbilityFactory());
-			}
-			sa.resolve();
+				AbilityFactory.resolve(sa);
+			} else
+				sa.resolve();
 		} else {
 			// TODO: Spell fizzles, what's the best way to alert player?
 			Log.debug(source.getName() + " ability fizzles.");

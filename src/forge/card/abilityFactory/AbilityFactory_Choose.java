@@ -200,13 +200,6 @@ public class AbilityFactory_Choose {
 				}
 			}
 		}
-
-		if(af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null) {
-				abSub.resolve();
-			}
-		}
 	}
 	
 	// *************************************************************************

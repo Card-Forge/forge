@@ -341,10 +341,6 @@ public class AbilityFactory_ZoneAffecting {
     
 	public static void drawResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 		
 		Card source = sa.getSourceCard();
         int numCards = 1;
@@ -392,8 +388,6 @@ public class AbilityFactory_ZoneAffecting {
 					p.drawCards(numCards);		
 				
 			}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	//**********************************************************************
@@ -668,11 +662,6 @@ public class AbilityFactory_ZoneAffecting {
 	
 	public static void millResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 
 		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 		
@@ -691,8 +680,6 @@ public class AbilityFactory_ZoneAffecting {
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.mill(numCards, destination);	
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	//////////////////////
@@ -804,11 +791,6 @@ public class AbilityFactory_ZoneAffecting {
 	private static void discardResolve(final AbilityFactory af, final SpellAbility sa){
 		Card source = sa.getSourceCard();
 		HashMap<String,String> params = af.getMapParams();
-		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 
 		String mode = params.get("Mode");
 
@@ -932,8 +914,6 @@ public class AbilityFactory_ZoneAffecting {
 					}
 				}
 			}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	private static String discardStackDescription(AbilityFactory af, SpellAbility sa){
@@ -1312,11 +1292,6 @@ public class AbilityFactory_ZoneAffecting {
 		Card host = af.getHostCard();
 		HashMap<String,String> params = af.getMapParams();
 		boolean optional = params.containsKey("Optional");
-		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 
 		ArrayList<Player> tgtPlayers;
 
@@ -1335,11 +1310,6 @@ public class AbilityFactory_ZoneAffecting {
 					p.shuffle();
 				}
 			}
-		}
-
-		if(af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) abSub.resolve();
 		}
 	}
 	

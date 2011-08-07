@@ -369,11 +369,6 @@ public class AbilityFactory_Destroy {
 
 		final boolean noRegen = params.containsKey("NoRegen");
 		Card card = sa.getSourceCard();
-		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 
 		ArrayList<Card> tgtCards;
 
@@ -392,8 +387,6 @@ public class AbilityFactory_Destroy {
 					AllZone.GameAction.destroy(tgtC);
 			}
 		}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *********************************************************************************
@@ -605,11 +598,6 @@ public class AbilityFactory_Destroy {
 
 		Card card = sa.getSourceCard();
 		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
-		
 		String Valid = "";
 		
 		if(params.containsKey("ValidCards")) 
@@ -638,7 +626,5 @@ public class AbilityFactory_Destroy {
 	 			if (AllZone.GameAction.destroy(list.get(i)) && remDestroyed)
 	 				card.addRemembered(list.get(i));
 	 	}
-		
-	 	AbilityFactory.resolveSubAbility(sa);
      }
 }

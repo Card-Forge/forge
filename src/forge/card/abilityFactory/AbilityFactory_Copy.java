@@ -351,13 +351,6 @@ public class AbilityFactory_Copy {
 
 				}
 			}//end canTarget
-
-			if(af.hasSubAbility()) {
-				Ability_Sub abSub = sa.getSubAbility();
-				if(abSub != null) {
-					abSub.resolve();
-				}
-			}
 		}//end foreach Card
 	}//end resolve
 	
@@ -514,13 +507,6 @@ public class AbilityFactory_Copy {
 				//end copied from Twincast
 
 			}//end canTarget
-
-			if(af.hasSubAbility()) {
-				Ability_Sub abSub = sa.getSubAbility();
-				if(abSub != null) {
-					abSub.resolve();
-				}
-			}
 		}//end foreach SpellAbility
 	}//end resolve
 

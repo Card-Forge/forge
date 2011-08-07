@@ -40,7 +40,5 @@ public class AbilityFactory_Cleanup {
 
         if (params.containsKey("ClearRemembered"))
         	sa.getSourceCard().clearRemembered();
-        
-        AbilityFactory.resolveSubAbility(sa);
     }
 }

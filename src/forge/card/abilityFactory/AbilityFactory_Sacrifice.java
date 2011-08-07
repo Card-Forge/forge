@@ -275,11 +275,6 @@ public class AbilityFactory_Sacrifice {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
 		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
-		
 		// Expand Sacrifice keyword here depending on what we need out of it.
 		String num = params.containsKey("Amount") ? params.get("Amount") : "1";
 		int amount = AbilityFactory.calculateAmount(card, num, sa);
@@ -327,8 +322,6 @@ public class AbilityFactory_Sacrifice {
 					sacrificeHuman(p, amount, valid, sa, msg);
 			}
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	

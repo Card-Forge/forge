@@ -278,11 +278,6 @@ public class AbilityFactory_AlterLife {
 	
 	public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		ArrayList<Player> tgtPlayers;
@@ -296,8 +291,6 @@ public class AbilityFactory_AlterLife {
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.gainLife(lifeAmount, sa.getSourceCard());
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *************************************************************************
@@ -559,11 +552,6 @@ public class AbilityFactory_AlterLife {
 	public static void loseLifeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
-		
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		
 		ArrayList<Player> tgtPlayers;
@@ -578,7 +566,6 @@ public class AbilityFactory_AlterLife {
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.loseLife(lifeAmount, sa.getSourceCard());
 		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *************************************************************************
@@ -721,12 +708,6 @@ public class AbilityFactory_AlterLife {
 	}
 	
 	private static void poisonResolve(final AbilityFactory af, final SpellAbility sa, int num){
-		HashMap<String,String> params = af.getMapParams();
-
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -739,9 +720,6 @@ public class AbilityFactory_AlterLife {
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.addPoisonCounters(num);
-		
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	private static String poisonStackDescription(AbilityFactory af, SpellAbility sa){
@@ -1072,11 +1050,6 @@ public class AbilityFactory_AlterLife {
 	private static void setLifeResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
 		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
-		
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		ArrayList<Player> tgtPlayers;
 
@@ -1089,8 +1062,6 @@ public class AbilityFactory_AlterLife {
 		for(Player p : tgtPlayers)
 			if(tgt == null || p.canTarget(af.getHostCard()))
 				p.setLife(lifeAmount, sa.getSourceCard());
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 
 }//end class AbilityFactory_AlterLife

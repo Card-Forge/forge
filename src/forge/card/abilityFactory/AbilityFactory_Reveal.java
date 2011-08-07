@@ -377,13 +377,6 @@ public class AbilityFactory_Reveal {
 					}
 				}//end if canTarget
 			}//end foreach player
-
-			if (af.hasSubAbility()){
-				Ability_Sub abSub = sa.getSubAbility();
-				if (abSub != null) {
-					abSub.resolve();
-				}
-			}
 		}
 	}//end resolve
 
@@ -628,15 +621,7 @@ public class AbilityFactory_Reveal {
 				}
 
 			}
-		}
-
-		if(af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) {
-				abSub.resolve();
-			}
-		}
-		
+		}	
 	}
 
 	//**********************************************************************
@@ -744,8 +729,6 @@ public class AbilityFactory_Reveal {
 				p.scry(num);
 			}
 		}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	private static boolean scryTargetAI(AbilityFactory af, SpellAbility sa) {
@@ -1005,7 +988,6 @@ public class AbilityFactory_Reveal {
 				if (tgt == null || p.canTarget(AF.getHostCard()))
 					AllZoneUtil.rearrangeTopOfLibrary(AF.getHostCard(), p, numCards, shuffle);
 		}
-		AbilityFactory.resolveSubAbility(sa);
 	}
 
 }//end class AbilityFactory_Reveal

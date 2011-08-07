@@ -515,10 +515,6 @@ public class AbilityFactory_DealDamage {
 	private void doResolve(SpellAbility saMe)
 	{
 		HashMap<String,String> params = AF.getMapParams();
-		if (!AbilityFactory.checkConditional(params, saMe)){
-			AbilityFactory.resolveSubAbility(saMe);
-			return;
-		}
 		
 		int dmg = getNumDamage(saMe);		
 
@@ -556,8 +552,6 @@ public class AbilityFactory_DealDamage {
 				}
 			}
 		}
-
-		AbilityFactory.resolveSubAbility(saMe);
 	}
 
 	// ******************************************************************************************************
@@ -857,7 +851,5 @@ public class AbilityFactory_DealDamage {
 		else {
 			//anything else to go here?
 		}
-
-		AbilityFactory.resolveSubAbility(sa);
 	}
 }

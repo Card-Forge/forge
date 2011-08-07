@@ -347,14 +347,6 @@ public class AbilityFactory_Animate {
 				else AllZone.EndOfTurn.addUntil(unanimate);
 			}
 		}
-
-		if(af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) {
-				abSub.resolve();
-			}
-		}
-		
 	}
 
 	private static long doAnimate(Card c, AbilityFactory af, int power, int toughness, ArrayList<String> types, String colors, ArrayList<String> keywords) {

@@ -186,23 +186,11 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
 		
-		if (!AbilityFactory.checkConditional(params, sa)){
-			AbilityFactory.resolveSubAbility(sa);
-			return;
-		}
-		
 		if (isHidden(origin, params.containsKey("Hidden")) && !params.containsKey("Ninjutsu"))
 			changeHiddenOriginResolve(af, sa);
 		
 		else if (isKnown(origin) || params.containsKey("Ninjutsu"))
 			changeKnownOriginResolve(af, sa);
-		
-	    
-        if (af.hasSubAbility()){
-        	Ability_Sub abSub = sa.getSubAbility();
-        	if (abSub != null)
-        	   abSub.resolve();
-        }
 	}
 
 	// *************************************************************************************
@@ -1208,8 +1196,6 @@ public class AbilityFactory_ChangeZone {
 	    		}
 			}
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// **************************** Known Utility **************************************
@@ -1517,8 +1503,6 @@ public class AbilityFactory_ChangeZone {
 			if (cards.getOwner(AllZone.ComputerPlayer).size() > 0)
 				AllZone.ComputerPlayer.shuffle();
 		}
-		
-		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 

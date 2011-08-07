@@ -335,12 +335,5 @@ public class AbilityFactory_Regenerate {
 				AllZone.EndOfTurn.addUntil(untilEOT);
 			}
 		}
-		
-		if (af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) {
-			   abSub.resolve();
-			}
-		}
 	}//doResolve
 }
