@@ -918,8 +918,6 @@ public class AbilityFactory_Counters {
 	}
 	
 	private static void proliferateResolve(final AbilityFactory AF, SpellAbility sa) {
-		HashMap<String,String> params = AF.getMapParams();
-		
 		CardList hperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		hperms = hperms.filter(new CardListFilter() {
 			public boolean addCard(Card crd)

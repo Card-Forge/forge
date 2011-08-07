@@ -1,7 +1,5 @@
 package forge.card.abilityFactory;
 
-import java.util.HashMap;
-
 import forge.AllZone;
 import forge.CombatUtil;
 import forge.ComputerUtil;
