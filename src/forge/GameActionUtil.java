@@ -6109,7 +6109,7 @@ public class GameActionUtil {
 		}// execute
 	}; // Coat of Arms
 	
-	
+	/*
 	public static Command Leyline_of_Singularity                = new Command() {
 
 		private static final long serialVersionUID   = -67071835355151830L;
@@ -6165,7 +6165,7 @@ public class GameActionUtil {
     				Leyline_of_Singularity_Tokens.clear();
 				}
 		}// execute()
-	};
+	};*/
 	
 	/**
 	 * stores the Command
@@ -7270,7 +7270,7 @@ public class GameActionUtil {
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
 		commands.put("Koth_Emblem", Koth_Emblem);
-		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
+		//commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Liu_Bei", Liu_Bei);
 		
 		//commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
