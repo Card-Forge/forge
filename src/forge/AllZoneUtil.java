@@ -38,7 +38,7 @@ public class AllZoneUtil {
 		CardList list = getCreaturesInPlay();
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                return c.getKeyword().contains(keyword);
+                return c.hasKeyword(keyword);
             }
         });
         return list;
@@ -760,7 +760,7 @@ public class AllZoneUtil {
 	public static CardListFilter getKeywordFilter(final String keyword) {
 		CardListFilter filter = new CardListFilter() {
 			public boolean addCard(Card c) {
-				return c.getKeyword().contains(keyword);
+				return c.hasKeyword(keyword);
 			}
 		};
 		return filter;
