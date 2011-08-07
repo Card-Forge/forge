@@ -1,6 +1,6 @@
 Name:Reaper of Sheoldred
 ManaCost:4 B
-Types:Creature Boar
+Types:Creature Horror
 Text:no text
 PT:2/5
 K:Infect
