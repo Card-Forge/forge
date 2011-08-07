@@ -117,7 +117,6 @@ public class GameActionUtil {
 		playCard_Ripple(c);
         playCard_Storm(sa);
 
-		//playCard_Chalice_of_the_Void(c);
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
 		playCard_Standstill(c);
@@ -482,35 +481,7 @@ public class GameActionUtil {
 			}
 		}
 	}
-	
-	public static void playCard_Chalice_of_the_Void(Card c) {
-		CardList list = AllZoneUtil.getCardsInPlay();
-		list = list.getName("Chalice of the Void");
 
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-				final SpellAbility sa = AllZone.Stack.peek();
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						AllZone.Stack.pop();
-						AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a spell with same amount of charge counters on Chalice of the Void. The spell is countered");
-				ability2.setStackDescription(sb.toString());
-                
-				int convertedManaSpell = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());								
-				if(sa.isSpell() == true && card.getCounters(Counters.CHARGE) == convertedManaSpell)
-                    AllZone.Stack.addSimultaneousStackEntry(ability2);
-
-			}					
-		}//if
-	} // Chalice_of_the_Void 
 
 	public static void playCard_Demigod_of_Revenge(final Card c) {
 		// not enough boom stick references in this block of code

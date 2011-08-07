@@ -1016,76 +1016,6 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Oubliette")) {
-            final SpellAbility enchantment = new Spell(card) {
-                private static final long serialVersionUID = -6751177094537759827L;
-                
-                @Override
-                public void resolve() {
-                    if(AllZoneUtil.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        AllZone.GameAction.exile(getTargetCard());
-                        
-                        //put permanent onto the battlefield
-                        AllZone.GameAction.moveToPlay(card);
-                    }
-                }//resolve()
-                
-                @Override
-                public boolean canPlayAI() {
-                    //try to target human creature
-                    CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    Card target = CardFactoryUtil.AI_getBestCreature(human);//returns null if list is empty
-                    
-                    if(target == null) return false;
-                    else {
-                        setTargetCard(target);
-                        return true;
-                    }
-                }//canPlayAI()
-            };//SpellAbility enchantment
-
-            Command commandLeavesPlay = new Command() {
-                private static final long serialVersionUID = -2535098005246027777L;
-                
-                public void execute() {
-                    Object o = enchantment.getTargetCard();
-                    if(o == null || ((Card) o).isToken() || !AllZoneUtil.isCardExiled((Card) o)) return;
-                    
-                    SpellAbility ability = new Ability(card, "0") {
-                        @Override
-                        public void resolve() {
-                            //copy card to reset card attributes like attack and defense
-                            Card c = enchantment.getTargetCard();
-                            if(!c.isToken()) {
-                                c = AllZone.CardFactory.copyCard(c);
-                                c.setController(c.getOwner());
-                                AllZone.GameAction.moveToPlay(c);
-                            }
-                        }//resolve()
-                    };//SpellAbility
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - returning creature to the battlefield");
-                    ability.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                }//execute()
-            };//Command
-            
-            card.addLeavesPlayCommand(commandLeavesPlay);
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(enchantment);
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            enchantment.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchantment));
-        }//*************** END ************ END **************************
-		*/
 
         //*************** START *********** START **************************
         else if(cardName.equals("That Which Was Taken")) {
@@ -1364,21 +1294,7 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(payLife);
             
         }//*************** END ************ END **************************
-
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Chalice of the Void")) {
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -7679939432259603542L;
-                
-                public void execute() {
-                	int XCounters = card.getXManaCostPaid();
-                	card.addCounter(Counters.CHARGE, XCounters);                
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************     
-        */
+        
         
         //*************** START *********** START **************************
         else if (cardName.equals("Aluren")) {
