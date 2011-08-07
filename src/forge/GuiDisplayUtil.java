@@ -940,6 +940,8 @@ public class GuiDisplayUtil implements NewConstants {
     	String t_computerSetupGraveyard = "NONE";
         String t_humanSetupLibrary = "NONE";
         String t_computerSetupLibrary = "NONE";
+        String t_humanSetupExile = "NONE";
+        String t_computerSetupExile = "NONE";
         String t_changePlayer = "NONE";
         String t_changePhase = "NONE";
     	
@@ -988,6 +990,10 @@ public class GuiDisplayUtil implements NewConstants {
     				  t_humanSetupLibrary = categoryValue;
     			  else if (categoryName.toLowerCase().equals("aicardsinlibrary"))
     				  t_computerSetupLibrary = categoryValue;
+    			  else if (categoryName.toLowerCase().equals("humancardsinexile"))
+    				  t_humanSetupExile = categoryValue;
+    			  else if (categoryName.toLowerCase().equals("aicardsinexile"))
+    				  t_computerSetupExile = categoryValue;
     			  else if (categoryName.toLowerCase().equals("activeplayer"))
     				  t_changePlayer = categoryValue;
     			  else if (categoryName.toLowerCase().equals("activephase"))
@@ -1011,6 +1017,8 @@ public class GuiDisplayUtil implements NewConstants {
 		String computerSetupGraveyard[] = t_computerSetupGraveyard.split(";");
         String humanSetupLibrary[] = t_humanSetupLibrary.split(";");
         String computerSetupLibrary[] = t_computerSetupLibrary.split(";");
+        String humanSetupExile[] = t_humanSetupExile.split(";");
+        String computerSetupExile[] = t_computerSetupExile.split(";");
 		
 		CardList humanDevSetup = new CardList();
 		CardList computerDevSetup = new CardList();
@@ -1020,6 +1028,8 @@ public class GuiDisplayUtil implements NewConstants {
 		CardList computerDevGraveyardSetup = new CardList();
         CardList humanDevLibrarySetup = new CardList();
         CardList computerDevLibrarySetup = new CardList();
+        CardList humanDevExileSetup = new CardList();
+        CardList computerDevExileSetup = new CardList();
 		
         if (!t_changePlayer.trim().toLowerCase().equals("none")) {
         	if (t_changePlayer.trim().toLowerCase().equals("human")) {        		
@@ -1028,12 +1038,10 @@ public class GuiDisplayUtil implements NewConstants {
         	if (t_changePlayer.trim().toLowerCase().equals("ai")) {        		
         		AllZone.Phase.setPlayerTurn(AllZone.ComputerPlayer);
         	}
-    		AllZone.Phase.updateObservers();
         }
         
         if (!t_changePhase.trim().toLowerCase().equals("none")) {
     		AllZone.Phase.setDevPhaseState(t_changePhase);
-    		AllZone.Phase.updateObservers();
         }
         
 		if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
@@ -1148,6 +1156,34 @@ public class GuiDisplayUtil implements NewConstants {
             }
         }
 
+        if (!t_humanSetupExile.trim().toLowerCase().equals("none")) {
+            for (int i = 0; i < humanSetupExile.length; i ++) {
+                Card c = AllZone.CardFactory.getCard(humanSetupExile[i].trim(), AllZone.HumanPlayer);
+
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+
+				humanDevExileSetup.add(c);
+            }
+        }
+
+        if (!t_computerSetupExile.trim().toLowerCase().equals("none")) {
+            for (int i = 0; i < computerSetupExile.length; i ++) {
+                Card c = AllZone.CardFactory.getCard(computerSetupExile[i].trim(), AllZone.ComputerPlayer);
+
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+
+				computerDevExileSetup.add(c);
+            }
+        }
+
 		for (Card c : humanDevSetup)
 		{
 			AllZone.Human_Hand.add(c);
@@ -1172,17 +1208,31 @@ public class GuiDisplayUtil implements NewConstants {
 		if (humanDevHandSetup.size() > 0)
 			AllZone.Human_Hand.setCards(humanDevHandSetup.toArray());
 
-		if (setComputerLife > 0)
-			AllZone.ComputerPlayer.setLife(setComputerLife, null);
-		if (setHumanLife > 0)
-			AllZone.HumanPlayer.setLife(setHumanLife, null);
-
         if(humanDevLibrarySetup.size() > 0)
             AllZone.Human_Library.setCards(humanDevLibrarySetup.toArray());
         if(computerDevLibrarySetup.size() > 0)
             AllZone.Computer_Library.setCards(computerDevLibrarySetup.toArray());
 		
-		AllZone.GameAction.checkStateEffects();		
+        if(humanDevExileSetup.size() > 0)
+            AllZone.Human_Exile.setCards(humanDevExileSetup.toArray());
+        if(computerDevExileSetup.size() > 0)
+            AllZone.Computer_Exile.setCards(computerDevExileSetup.toArray());
+		
+		if (setComputerLife > 0)
+			AllZone.ComputerPlayer.setLife(setComputerLife, null);
+		if (setHumanLife > 0)
+			AllZone.HumanPlayer.setLife(setHumanLife, null);
+
+		AllZone.GameAction.checkStateEffects();
+		AllZone.Phase.updateObservers();
+		AllZone.Human_Exile.updateObservers();
+		AllZone.Computer_Exile.updateObservers();
+		AllZone.Human_Hand.updateObservers();
+		AllZone.Computer_Hand.updateObservers();
+		AllZone.Human_Graveyard.updateObservers();
+		AllZone.Computer_Graveyard.updateObservers();
+		AllZone.Human_Battlefield.updateObservers();
+		AllZone.Computer_Battlefield.updateObservers();
 	}
 
 }
