@@ -2878,6 +2878,7 @@ res/cardsfolder/gloomdrifter.txt svneol=native#text/plain
 res/cardsfolder/gloomhunter.txt -text svneol=native#text/plain
 res/cardsfolder/gloomlance.txt svneol=native#text/plain
 res/cardsfolder/gloomwidow.txt -text svneol=native#text/plain
+res/cardsfolder/gloomwidows_feast.txt -text svneol=native#text/plain
 res/cardsfolder/glorious_anthem.txt -text svneol=native#text/plain
 res/cardsfolder/glorious_charge.txt -text svneol=native#text/plain
 res/cardsfolder/glory.txt -text svneol=native#text/plain
