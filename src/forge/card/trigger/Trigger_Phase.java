@@ -14,10 +14,28 @@ public class Trigger_Phase extends Trigger {
 	public boolean performTest(HashMap<String, Object> runParams) {
 		if(mapParams.containsKey("Phase"))
 		{
-			if(!mapParams.get("Phase").equals(runParams.get("Phase")))
-			{
-				return false;
-			}
+            if(mapParams.get("Phase").contains(","))
+            {
+                boolean found = false;
+                for(String s : mapParams.get("Phase").split(","))
+                {
+                    if(s.equals(runParams.get("Phase")))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if(!found)
+                    return false;
+            }
+            else
+            {
+                if(!mapParams.get("Phase").equals(runParams.get("Phase")))
+                {
+                    return false;
+                }
+            }
 		}
 		if(mapParams.containsKey("ValidPlayer"))
 		{
