@@ -3097,13 +3097,13 @@ public class Card extends MyObservable {
     public int getEnoughDamageToKill(int maxDamage, Card source, boolean isCombat, boolean noPrevention) {
     	int killDamage = getKillDamage();
     	
-    	if(getKeyword().contains("Indestructible") || getShield() > 0) { 
-    			if(!(source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect"))) 
-    				return maxDamage + 1;
+    	if (getKeyword().contains("Indestructible") || getShield() > 0) { 
+    		if (!(source.hasKeyword("Wither") || source.hasKeyword("Infect"))) 
+    			return maxDamage + 1;
     	}
     	else
-	        if(source.getKeyword().contains("Deathtouch")) {
-	        	for(int i=1; i <= maxDamage; i++) {
+	        if (source.hasKeyword("Deathtouch")) {
+	        	for (int i=1; i <= maxDamage; i++) {
 	        		if (noPrevention) {
 	        			if (staticReplaceDamage(i, source, isCombat) > 0)
 		        			return i;
@@ -3143,7 +3143,7 @@ public class Card extends MyObservable {
     }
     
     public void setDamage(int n) {
-        //if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
+        //if (this.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
         damage = n;
     }
     
@@ -3263,18 +3263,18 @@ public class Card extends MyObservable {
 		
 		if(CardFactoryUtil.hasProtectionFrom(source,this)) return 0;
 		
-    	if(isCombat) {
-    		if(getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))return 0;
-    		if(getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME."))return 0;
-    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))return 0;
-    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))return 0;
+    	if (isCombat) {
+    		if (getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    		if (getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME.")) return 0;
+    		if (source.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    		if (source.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")) return 0;
     	}
-    	if(getKeyword().contains("Prevent all damage that would be dealt to CARDNAME."))return 0;
-    	if(getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME."))return 0;
-    	if(source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME."))return 0;
-    	if(source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME."))return 0;
+    	if (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) return 0;
+    	if (getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    	if (source.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    	if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) return 0;
     	
-    	if(hasStartOfKeyword("Absorb")) {
+    	if (hasStartOfKeyword("Absorb")) {
     		int absorbed = this.getKeywordMagnitude("Absorb");
     		if (restDamage > absorbed) restDamage = restDamage - absorbed;
     		else return 0;
@@ -3495,7 +3495,7 @@ public class Card extends MyObservable {
         	return;
         }
         
-        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect"))) 
+        if ((source.hasKeyword("Wither") || source.hasKeyword("Infect"))) 
         	wither = true;
         
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
