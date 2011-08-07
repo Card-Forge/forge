@@ -509,7 +509,7 @@ public class AbilityFactory_Destroy {
 		 if (tgt != null)
 		 	tgtCards = tgt.getTargetCards();
 		 else{
-		 	tgtCards = new ArrayList<Card>();
+			tgtCards = new ArrayList<Card>(); 
 		 	tgtCards.add(sa.getSourceCard());
 		 }
 		 

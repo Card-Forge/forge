@@ -519,7 +519,6 @@ public class AbilityFactory_PermanentState {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
 			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 		}
 		

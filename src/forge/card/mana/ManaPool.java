@@ -89,7 +89,7 @@ public class ManaPool extends Card {
         else
         	return ("|||||||||||");
 
-        return sbNormal.toString() + sbSnow.toString();
+        return sbNormal.append(sbSnow).toString();
     	
     }
     
@@ -132,7 +132,7 @@ public class ManaPool extends Card {
         sbNormal.insert(0, "Mana Available:\n");
         sbSnow.insert(0, "Snow Mana Available:\n");
 
-        return sbNormal.toString() + "\n" + sbSnow.toString();
+        return sbNormal.append("\n").append(sbSnow).toString();
     }
     
     public int getAmountOfColor(String color){

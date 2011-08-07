@@ -525,7 +525,7 @@ public class AbilityFactory_ChangeZone {
             if (fetchList.size() == 0 || destination == null) 
                 break;
                 
-            Object o = new Object();
+            Object o;
             if (params.containsKey("Mandatory"))
                 o = GuiUtils.getChoice("Select a card", fetchList.toArray());
             else

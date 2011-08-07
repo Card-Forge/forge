@@ -127,8 +127,8 @@ public class BoosterDraftAI
     	}
     }
     else {
-    	CardList typeList = new CardList();
-    	CardList colorList = new CardList();
+    	CardList typeList;
+    	CardList colorList;
     	
     	colorList = AIPlayables.getOnly2Colors(playerColors.get(player).Color1, playerColors.get(player).Color2);
     	

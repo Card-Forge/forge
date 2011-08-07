@@ -104,7 +104,7 @@ public class ComputerUtil_Block2
 		  CardList blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 		   
 		  CardList safeBlockers = getSafeBlockers(attacker, blockers, combat);
-		  CardList killingBlockers = new CardList();
+		  CardList killingBlockers;
 		   
 		  if(safeBlockers.size() > 0) {
 			  // 1.Blockers that can destroy the attacker but won't get destroyed 
@@ -143,7 +143,7 @@ public class ComputerUtil_Block2
 	   
 	  CardList currentAttackers = new CardList(attackersLeft.toArray());
 	  currentAttackers = currentAttackers.getKeywordsDontContain("Rampage"); 
-	  CardList blockers = new CardList();
+	  CardList blockers;
 	  
 	  //Try to block an attacker without first strike with a gang of first strikers
 	  for (Card attacker : attackersLeft) {
@@ -181,7 +181,7 @@ public class ComputerUtil_Block2
 	  //Try to block an attacker with two blockers of which only one will die
 	  for(final Card attacker : attackersLeft) {
 		  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
-		  CardList usableBlockers = new CardList();
+		  CardList usableBlockers;
 		  CardList blockGang = new CardList();
 		  int absorbedDamage = 0; //The amount of damage needed to kill the first blocker
 		  int currentValue = 0; //The value of the creatures in the blockgang
@@ -234,7 +234,7 @@ public class ComputerUtil_Block2
    private static Combat makeTradeBlocks(Combat combat){
 	   
 	  CardList currentAttackers = new CardList(attackersLeft.toArray());
-	  CardList killingBlockers = new CardList();
+	  CardList killingBlockers;
 	  
 	  for(Card attacker : attackersLeft) {
 		  killingBlockers = 
@@ -254,7 +254,7 @@ public class ComputerUtil_Block2
    private static Combat makeChumpBlocks(Combat combat){
 	   
 	  CardList currentAttackers = new CardList(attackersLeft.toArray());
-	  CardList chumpBlockers = new CardList();
+	  CardList chumpBlockers;
 	  
 	  for(Card attacker : attackersLeft) {
 		  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
@@ -273,7 +273,7 @@ public class ComputerUtil_Block2
    //Reinforce blockers blocking attackers with trample (should only be made if life is in danger)
    private static Combat reinforceBlockersAgainstTrample(Combat combat){
 	   
-	  CardList chumpBlockers = new CardList();
+	  CardList chumpBlockers;
 	  
 	  CardList tramplingAttackers = attackers.getKeyword("Trample");
 	  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
@@ -299,8 +299,8 @@ public class ComputerUtil_Block2
    //Support blockers not destroying the attacker with more blockers to try to kill the attacker
    private static Combat reinforceBlockersToKill(Combat combat){
 	   
-	  CardList safeBlockers = new CardList();
-	  CardList blockers = new CardList();
+	  CardList safeBlockers;
+	  CardList blockers;
 	  CardList targetAttackers = blockedButUnkilled.getKeywordsDontContain("Rampage"); 	//Don't make it worse
 	  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
 	  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
@@ -372,8 +372,8 @@ public class ComputerUtil_Block2
 	  attackersLeft = new CardList(attackers.toArray()); //keeps track of all currently unblocked attackers
 	  blockersLeft = new CardList(possibleBlockers.toArray()); //keeps track of all unassigned blockers
 	  blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
-	  CardList blockers = new CardList();
-	  CardList chumpBlockers = new CardList();
+	  CardList blockers;
+	  CardList chumpBlockers;
 	  
 	  diff = AllZone.ComputerPlayer.getLife() * 2 - 5; //This is the minimal gain for an unnecessary trade 
 	  

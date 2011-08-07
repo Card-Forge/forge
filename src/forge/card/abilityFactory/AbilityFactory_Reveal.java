@@ -905,7 +905,7 @@ public class AbilityFactory_Reveal {
 	private static String rearrangeTopOfLibraryStackDescription(final AbilityFactory AF, final SpellAbility sa)
 	{
 		int numCards = 0;
-		ArrayList<Player> tgtPlayers = new ArrayList<Player>();
+		ArrayList<Player> tgtPlayers;
 		boolean shuffle = false;
 
 		Target tgt = AF.getAbTgt();
