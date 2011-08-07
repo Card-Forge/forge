@@ -7,4 +7,5 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excise.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/8.jpg
 End

@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ W | Defined$ Self | Amount$ 1 | SpellDescription$ Pr
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordruun_commando.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/137.jpg
 End

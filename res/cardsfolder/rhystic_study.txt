@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidControllingPlayer$ Opponent | Trigger
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | UnlessCost$ 1 | UnlessPayer$ TriggeredPlayer | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_study.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/45.jpg
 End
