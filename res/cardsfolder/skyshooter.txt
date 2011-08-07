@@ -1,6 +1,6 @@
 Name:Skyshooter
 ManaCost:3 W
-Types:Instant
+Types:Creature Centaur Archer
 Text:no text
 PT:1/2
 K:Reach
