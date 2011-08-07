@@ -1900,7 +1900,7 @@ public class GameActionUtil {
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
 	}
-	
+	/*
 	private static boolean checkValakutCondition(Card valakutCard, Card mtn) {
 		// Get a list of all mountains
 		CardList mountainList = AllZoneUtil.getPlayerTypeInPlay(valakutCard.getController(),
@@ -2013,7 +2013,7 @@ public class GameActionUtil {
 
         }
         return true; // Tell the calling routine it's okay to call again if there are other Valakuts in play
-	}
+	}*/
 	
 	private static boolean showLandfallDialog(Card c) {
 		AllZone.Display.setCard(c);

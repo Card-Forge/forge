@@ -70,11 +70,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             if(c.isLand()) {
                 CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
                 
-                CardList listValakut = list.filter(new CardListFilter() {
+                /*CardList listValakut = list.filter(new CardListFilter() {
                 	public boolean addCard(Card c) {
                 		return c.getName().contains("Valakut, the Molten Pinnacle");
                 	}
-                });
+                });*/
                 
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
@@ -86,7 +86,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 for(int i = 0; i < list.size(); i++) {
                     GameActionUtil.executeLandfallEffects(list.get(i));
                 }
-                
+                /*
                 // Check for a mountain
                 if (!listValakut.isEmpty() && c.getType().contains("Mountain") ) {
                 	for (int i = 0; i < listValakut.size(); i++) {
@@ -96,7 +96,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 			break;
                 		}
                 	}
-                }
+                }*/
                 
                 //Tectonic Instability
                 CardList tis = AllZoneUtil.getCardsInPlay("Tectonic Instability");
