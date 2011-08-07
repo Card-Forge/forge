@@ -52,7 +52,7 @@ public class Card extends MyObservable {
     private ArrayList<Ability_Mana>      manaAbility                       = new ArrayList<Ability_Mana>();
     private ArrayList<Card_Color>		 cardColor						   = new ArrayList<Card_Color>();
     
-    private ArrayList<Card>				rememberedCards						= new ArrayList<Card>();
+    private ArrayList<Object>			rememberedObjects					= new ArrayList<Object>();
     private ArrayList<Card>				imprintedCards						= new ArrayList<Card>();
     
     private HashMap<Card, Integer>       receivedDamageFromThisTurn        = new HashMap<Card, Integer>();
@@ -190,19 +190,19 @@ public class Card extends MyObservable {
     
     private int                          abilityUsed;                                                           //How many times has this ability been used?
     
-    public void addRemembered(Card c)
+    public void addRemembered(Object o)
     {
-    	rememberedCards.add(c);
+    	rememberedObjects.add(o);
     }
     
-    public ArrayList<Card> getRemembered()
+    public ArrayList<Object> getRemembered()
     {
-    	return rememberedCards;
+    	return rememberedObjects;
     }
     
     public void clearRemembered()
     {
-    	rememberedCards.clear();
+    	rememberedObjects.clear();
     }
     
     public void addImprinted(Card c) {
@@ -1212,14 +1212,20 @@ public class Card extends MyObservable {
         }
         
         //Remembered cards
-        if(rememberedCards.size() > 0)
+        if(rememberedObjects.size() > 0){
 	        sb.append("\r\nRemembered: \r\n");
-        for(Card c : rememberedCards)
-        {
-        	sb.append(c.getName() + "(");
-        	sb.append(c.getUniqueNumber());
-        	sb.append(")");
-        	sb.append("\r\n");
+	        for(Object o : rememberedObjects){
+	        	if (o instanceof Card){
+	        		Card c = (Card)o;
+	        		sb.append(c.getName()); 
+	        		sb.append("(");
+	        		sb.append(c.getUniqueNumber());
+	        		sb.append(")");
+	        	}
+	        	else
+	        		sb.append(o.toString());
+	        	sb.append("\r\n");
+	        }
         }
         
         return sb.toString().replaceAll("CARDNAME", getName()).trim();

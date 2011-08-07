@@ -430,61 +430,7 @@ public class CardFactoryUtil {
         //Planeswalkers fall through to here, lands will fall through if there aren't very many
         return AI_getCheapestPermanent(list, null, false);
     }
-    
-    @Deprecated
-    public static Input input_targetCreaturePlayer(final SpellAbility spell, boolean targeted, boolean free) {
-        return input_targetCreaturePlayer(spell, Command.Blank, targeted, free);
-    }
-    
-    @Deprecated
-    public static Input input_targetCreaturePlayer(final SpellAbility spell, final Command paid, final boolean targeted, final boolean free) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 2781418414287281005L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target Creature, Player, or Planeswalker");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Battlefield)
-                        && (!targeted || canTarget(spell, card))) {
-                    spell.setTargetCard(card);
-                    done();
-                }
-            }//selectCard()
-            
-            @Override
-            public void selectPlayer(Player player) {
-                spell.setTargetPlayer(player);
-                done();
-            }
-            
-            void done() {
-                paid.execute();
-                
-                if(spell.getManaCost().equals("0") || this.isFree()) {
-                	if (spell.getAfterPayMana() == null){
-	                    this.setFree(false);
-	                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-	                    stop();
-                	}
-                	else{
-                		stopSetNext(spell.getAfterPayMana());
-                	}
-                } else stopSetNext(new Input_PayManaCost(spell));
-            }
-        };
-        return target;
-    }//input_targetCreaturePlayer()
-    
+
     public static Input input_Spell(final SpellAbility spell, final CardList choices, final boolean free) {
         Input target = new Input() {
             private static final long serialVersionUID = 2781418414287281005L;

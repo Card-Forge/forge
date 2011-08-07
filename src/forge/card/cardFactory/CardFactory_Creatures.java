@@ -3234,67 +3234,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Laquatus's Champion")) {
-            final SpellAbility abilityComes = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    getTargetPlayer().loseLife(6,card);
-                }//resolve()
-            };
-            
-            final Input inputComes = new Input() {
-                private static final long serialVersionUID = -2666229064706311L;
-                
-                @Override
-                public void showMessage() {
-                    stopSetNext(CardFactoryUtil.input_targetPlayer(abilityComes));
-                    ButtonUtil.disableAll();//to disable the Cancel button
-                }
-            };
-            Command commandComes = new Command() {
-                private static final long serialVersionUID = -4246229185669164581L;
-                
-                public void execute() {
-                    if(card.getController().isHuman()) AllZone.InputControl.setInput(inputComes);
-                    else //computer
-                    {
-                        abilityComes.setTargetPlayer(AllZone.HumanPlayer);
-                        AllZone.Stack.addSimultaneousStackEntry(abilityComes);
-
-                    }//else
-                }//execute()
-            };//CommandComes
-            Command commandLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = 9172348861441804625L;
-                
-                public void execute() {
-                    //System.out.println(abilityComes.getTargetCard().getName());
-                    
-                    SpellAbility ability = new Ability(card, "0") {
-                        @Override
-                        public void resolve() {
-                            abilityComes.getTargetPlayer().gainLife(6, card);
-                            
-                        }//resolve()
-                    };//SpellAbility
-                    
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Laquatus's Champion - ").append(abilityComes.getTargetPlayer()).append(" regains 6 life.");
-                    ability.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                }//execute()
-            };//Command
-            
-            card.addComesIntoPlayCommand(commandComes);
-            card.addLeavesPlayCommand(commandLeavesPlay);
-            
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Meddling Mage")) {
             final String[] input = new String[1];
             final Ability ability = new Ability(card, "0") {

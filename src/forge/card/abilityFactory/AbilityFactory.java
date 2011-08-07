@@ -924,8 +924,10 @@ public class AbilityFactory {
 				else if (calcX[0].startsWith("Remembered")) {
 					// Add whole Remembered list to handlePaid
 					list = new CardList();
-					for(Card c : card.getRemembered())
-						list.add(AllZoneUtil.getCardState(c));
+					for(Object o : card.getRemembered()){
+						if (o instanceof Card)
+							list.add(AllZoneUtil.getCardState((Card)o));
+					}
 				}
 				else if (calcX[0].startsWith("Imprinted")) {
 					// Add whole Imprinted list to handlePaid
@@ -979,9 +981,9 @@ public class AbilityFactory {
         }
 		
 		else if (defined.equals("Remembered")){
-			for(Card rem : hostCard.getRemembered()){
-				// Get current state of each remembered card
-				cards.add(AllZoneUtil.getCardState(rem));
+			for(Object o : hostCard.getRemembered()){
+				if (o instanceof Card)
+					cards.add(AllZoneUtil.getCardState((Card)o));
 			}
 		}
 		
@@ -1037,6 +1039,12 @@ public class AbilityFactory {
 				Player p = c.getOwner();
 				if (!players.contains(p))
 					players.add(p);
+			}
+		}
+		else if (defined.equals("Remembered")){
+			for(Object rem : card.getRemembered()){
+				if (rem instanceof Player)
+					players.add((Player)rem);
 			}
 		}
         else if (defined.startsWith("Triggered")){
@@ -1234,7 +1242,6 @@ public class AbilityFactory {
 	public static void handleRemembering(AbilityFactory AF)
 	{
 		HashMap<String,String> params = AF.getMapParams();
-		ArrayList<Card> tgts;
 		Card host;
 		
 		if(!params.containsKey("RememberTargets") && !params.containsKey("Imprint"))
@@ -1253,15 +1260,15 @@ public class AbilityFactory {
 		}
 		
 		Target tgt = AF.getAbTgt();
-		tgts = (tgt == null) ? new ArrayList<Card>() : tgt.getTargetCards();
 		
 		if(params.containsKey("RememberTargets")) {
-			for(Card c : tgts)
-			{
-				host.addRemembered(c);
+			ArrayList<Object> tgts = (tgt == null) ? new ArrayList<Object>() : tgt.getTargets();
+			for(Object o : tgts){
+				host.addRemembered(o);
 			}
 		}
 		else if(params.containsKey("Imprint")) {
+			ArrayList<Card> tgts = (tgt == null) ? new ArrayList<Card>() : tgt.getTargetCards();
 			host.addImprinted(tgts);
 		}
 	}

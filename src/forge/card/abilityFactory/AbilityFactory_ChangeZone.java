@@ -687,13 +687,18 @@ public class AbilityFactory_ChangeZone {
 			type = type.replace("Triggered", "Card");
 		}
 		else if (type.contains("Remembered")){
-			ArrayList<Card> rem = source.getRemembered(); 
-			
-			if (rem.isEmpty())
+			boolean hasRememberedCard = false;
+			for(Object o : source.getRemembered()){
+				if (o instanceof Card){
+					hasRememberedCard = true;
+					source = (Card)o;
+					type = type.replace("Remembered", "Card");
+					break;
+				}
+			}
+
+			if (!hasRememberedCard)
 				return new CardList();
-			
-			source = rem.get(0);
-			type = type.replace("Remembered", "Card");
 		}
 		
 		return list.getValidCards(type.split(","), sa.getActivatingPlayer(), source);

@@ -347,11 +347,11 @@ public class TriggerHandler {
                 host = regtrig.getHostCard();
 			
 			// This will fix the Oblivion Ring issue, but is this the right fix?
-            for(Card c : regtrig.getHostCard().getRemembered())
+            for(Object o : regtrig.getHostCard().getRemembered())
             {
-                if(!host.getRemembered().contains(c))
+                if(!host.getRemembered().contains(o))
                 {
-                    host.addRemembered(c);
+                    host.addRemembered(o);
                 }
             }
 			
