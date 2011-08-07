@@ -1,15 +1,12 @@
 package forge.card.spellability;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-import forge.CardList;
 import forge.Player;
 import forge.card.mana.ManaPool;
-import forge.gui.GuiUtils;
 
 abstract public class Ability_Mana extends Ability_Activated implements java.io.Serializable {
 	private static final long serialVersionUID = -6816356991224950520L;
@@ -92,31 +89,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         	source.setBounceAtUntap(true);
         }
         
-        if(AllZoneUtil.isCardInPlay("Mirari's Wake", source.getController())) {
-        	CardList list = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Mirari's Wake");
-        	ArrayList<String> colors = new ArrayList<String>();
-    		if(mirariCanAdd("W", produced)) colors.add("W");
-    		if(mirariCanAdd("G", produced)) colors.add("G");
-    		if(mirariCanAdd("U", produced)) colors.add("U");
-    		if(mirariCanAdd("B", produced)) colors.add("B");
-    		if(mirariCanAdd("R", produced)) colors.add("R");
-    		if(colors.size() > 0) {
-    			this.undoable = false;
-    			if(colors.size() == 1) {
-    				manaPool.addManaToFloating(colors.get(0), source);
-    			}
-    			else {
-    				for(int i = 0; i < list.size(); i++) {
-    					String s = (String)GuiUtils.getChoice("Mirari's Wake"+" - Select a color to add", colors.toArray());
-    					if(s != null) {
-    						manaPool.addManaToFloating(s, source);
-    					}
-    				}
-    			}
-    		}
-    		
-        }
-        
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
 
@@ -127,10 +99,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         AllZone.TriggerHandler.runTrigger("TapsForMana", runParams);
         
 	}//end produceMana(String)
-	
-	private boolean mirariCanAdd(String c, String produced) {
-		return produced.contains(c);
-	}
 	
 	public String mana() { return origProduced; }
 	public void setMana(String s) { origProduced = s; }

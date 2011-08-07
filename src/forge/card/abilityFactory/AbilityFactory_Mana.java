@@ -345,7 +345,6 @@ public class AbilityFactory_Mana {
 		
 		String colorOrType = params.get("ColorOrType"); // currently Color or Type, Type is colors + colorless
 		String validCard = params.get("Valid"); 
-
 		String reflectProperty = params.get("ReflectProperty");	// Produce (Reflecting Pool) or Is (Meteor Crater)
 
 		int maxChoices = 5;	// Color is the default colorOrType
@@ -367,11 +366,19 @@ public class AbilityFactory_Mana {
 			if (cards.contains(p))
 				cards.remove(p);
 		
-		if (cards.size() == 0)
+		if (cards.size() == 0 && !reflectProperty.equals("Produced"))
 			return colors;
 			
 		if (reflectProperty.equals("Is")){ // Meteor Crater
 			colors = hasProperty(maxChoices, cards, colors);
+		}
+		else if (reflectProperty.equals("Produced")){
+			String producedColors = (String)af.getHostCard().getTriggeringObject("Produced");
+			for(String col : Constant.Color.onlyColors){
+				String s = Input_PayManaCostUtil.getShortColorString(col);
+				if(producedColors.contains(s) && !colors.contains(col))
+					colors.add(col);
+			}
 		}
 		else if (reflectProperty.equals("Produce")){
 			ArrayList<Ability_Mana> abilities = new ArrayList<Ability_Mana>();
