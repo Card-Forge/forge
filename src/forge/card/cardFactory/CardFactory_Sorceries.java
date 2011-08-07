@@ -855,7 +855,9 @@ public class CardFactory_Sorceries {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Erratic Explosion")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "CP");
+        	final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = -6003403347798646257L;
                 
                 int                       damage           = 3;
@@ -931,8 +933,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
         
         
@@ -1578,7 +1578,9 @@ public class CardFactory_Sorceries {
        
         //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
-            SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = -2902112019334177L;
                 @Override
                 public boolean canPlayAI() {
@@ -1654,7 +1656,9 @@ public class CardFactory_Sorceries {
             sb.append(" puts a token onto the battlefield that's a copy of target creature.");
             spell.setStackDescription(sb.toString());
             
-            SpellAbility kicker = new Spell(card) {
+        	Cost kickCost = new Cost("7 U U", cardName, false);
+        	Target kickTgt = new Target(card, "C");
+        	SpellAbility kicker = new Spell(card, kickCost, kickTgt) {
                 private static final long serialVersionUID = 13762512058673590L;
                 
                 @Override
@@ -1728,7 +1732,6 @@ public class CardFactory_Sorceries {
                 }//resolve()
             };
             kicker.setKickerAbility(true);
-            kicker.setManaCost("7 U U");
             kicker.setAdditionalManaCost("5");
             kicker.setDescription("Kicker 5: If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.");
             
@@ -1736,13 +1739,11 @@ public class CardFactory_Sorceries {
             sbKick.append(card.getName()).append(" - ").append(card.getController());
             sbKick.append(" puts five tokens onto the battlefield that's a copy of target creature.");
             kicker.setStackDescription(sbKick.toString());
-            kicker.setBeforePayMana(CardFactoryUtil.input_targetCreature(kicker));
             
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             card.addSpellAbility(kicker);
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
      
         
@@ -2435,7 +2436,9 @@ public class CardFactory_Sorceries {
         	 * creature or player. Put the nonland card into your hand and the
         	 * rest on the bottom of your library in any order.
         	 */
-        	final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "CP");
+        	final SpellAbility spell = new Spell(card, cost, tgt) {
 				private static final long serialVersionUID = -3234630801871872940L;
 				
 				int damage = 3;
@@ -2531,7 +2534,6 @@ public class CardFactory_Sorceries {
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
         
         

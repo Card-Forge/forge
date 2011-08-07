@@ -309,7 +309,9 @@ class CardFactory_Auras {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Earthbind")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell_Permanent(card, cost, tgt) {
                 
                 private static final long serialVersionUID = 142389375702113977L;
                 
@@ -399,13 +401,13 @@ class CardFactory_Auras {
             card.addEnchantCommand(onEnchant);
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
     	
         //*************** START *********** START **************************
         else if(cardName.equals("Pillory of the Sleepless")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell_Permanent(card, cost, tgt) {
                 
                 private static final long serialVersionUID = 4504925036782582195L;
                 
@@ -486,14 +488,14 @@ class CardFactory_Auras {
             card.addEnchantCommand(onEnchant);
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
         else if(cardName.equals("Guilty Conscience")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell_Permanent(card, cost, tgt) {
                 
                 private static final long serialVersionUID = 1169151960692309514L;
                 
@@ -540,16 +542,15 @@ class CardFactory_Auras {
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
                 
         //******************************************************************
         // This card can't be converted to keyword, problem with CARDNME   *
         //*************** START *********** START **************************
         else if(cardName.equals("Vigilance")) {
-            final SpellAbility spell = new Spell(card) {
-                
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell_Permanent(card, cost, tgt) {
                 private static final long serialVersionUID = 3659751920022901998L;
                 
                 @Override
@@ -645,8 +646,6 @@ class CardFactory_Auras {
             card.addEnchantCommand(onEnchant);
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
         
@@ -654,7 +653,9 @@ class CardFactory_Auras {
         // This card can't be converted to keyword, problem with Lifelink  *
         //*************** START *********** START **************************
         else if(cardName.equals("Lifelink")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell_Permanent(card, cost, tgt) {
 				private static final long serialVersionUID = 8493277543267009695L;
 
 				@Override
@@ -755,8 +756,6 @@ class CardFactory_Auras {
             card.addEnchantCommand(onEnchant);
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
         
@@ -911,10 +910,11 @@ class CardFactory_Auras {
                 costString = "5 U U";
             else if(cardName.equals("Confiscate"))
                 costString = "4 U U";
+            
             Cost cost = new Cost(costString, cardName, false);
             Target tgt = new Target(card,"Select target Permanent", "Permanent".split(","));
             
-            final SpellAbility spell = new Spell(card, cost, tgt) {
+        	final SpellAbility spell = new Spell_Permanent(card, cost, tgt) {
                 private static final long serialVersionUID = -7359291736123492910L;
                 
                 @Override
@@ -985,7 +985,9 @@ class CardFactory_Auras {
         // This card can't be converted to keyword, problem with Fear  *
         //*************** START *********** START **********************
         else if (cardName.equals("Fear")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell_Permanent(card, cost, tgt) {
 				private static final long serialVersionUID = -6430665444443363057L;
 
 				@Override
@@ -1087,8 +1089,6 @@ class CardFactory_Auras {
             card.addEnchantCommand(onEnchant);
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************

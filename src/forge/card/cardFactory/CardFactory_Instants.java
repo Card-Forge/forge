@@ -428,7 +428,9 @@ public class CardFactory_Instants {
                      
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Decay")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = 3154935854257358023L;
                 
                 @Override
@@ -508,8 +510,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
 
@@ -679,7 +679,9 @@ public class CardFactory_Instants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Banishing Knack")) {
-            SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = 6518824567946786581L;
                 
                 @Override
@@ -724,8 +726,6 @@ public class CardFactory_Instants {
                     });
                 }
             };//SpellAbility
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
@@ -879,8 +879,9 @@ public class CardFactory_Instants {
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Courage"))
         {
-        	final SpellAbility spell = new Spell(card)
-        	{
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	Target tgt = new Target(card, "C");
+        	final SpellAbility spell = new Spell(card, cost, tgt) {
         		private static final long serialVersionUID = -8649611733196156346L;
 
         		public boolean canPlayAI()
@@ -946,8 +947,6 @@ public class CardFactory_Instants {
         	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
         	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
-
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
 
             
