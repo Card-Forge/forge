@@ -2966,6 +2966,12 @@ public class CardFactoryUtil {
         		return doXMath(AllZoneUtil.getPlayerHand(players.get(0)).size(), m, source);
         	}
         }
+       
+        if(sq[0].contains("CardsInLibrary")) {
+        	if(players.size() > 0) {
+        		return doXMath(AllZoneUtil.getPlayerCardsInLibrary(players.get(0)).size(), m, source);
+        	}
+        }
         
         if(sq[0].contains("LifeTotal")) {
         	if(players.size() > 0) {

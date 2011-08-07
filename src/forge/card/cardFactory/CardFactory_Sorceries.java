@@ -2127,37 +2127,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(kicker);
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-                
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Traumatize")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 42470566751344693L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-                    CardList libList = new CardList(lib.getCards());
-                    return libList.size() > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    
-                    int max = AllZoneUtil.getPlayerCardsInLibrary(player).size() / 2;
-                    
-                    player.mill(max);
-                }
-            };//SpellAbility
-            
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
+     
         
 
         //*************** START *********** START **************************
