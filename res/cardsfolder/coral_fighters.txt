@@ -7,6 +7,6 @@ T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | E
 SVar:TrigDig:AB$Dig | Cost$ 0 | Defined$ Opponent | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/coral_fighters.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_fighters.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/59.jpg
 End
