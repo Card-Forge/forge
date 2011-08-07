@@ -17,9 +17,11 @@ public class Phase extends MyObservable
 	private static int	 	GameBegins = 0;
     private static int	   StormCount;
     static int	   PlayerSpellCount;
-    static int	   PlayerCreatureSpellCount;   
+    static int	   PlayerCreatureSpellCount;
+    static int		PlayerInstantSpellCount;
     static int	   ComputerSpellCount;
     static int	   ComputerCreatureSpellCount;
+    static int		ComputerInstantSpellCount;
 
     private Stack<Player> extraTurns = new Stack<Player>();
     
@@ -145,9 +147,11 @@ public class Phase extends MyObservable
     public void turnReset(){
     	setStormCount(0);
         PlayerSpellCount = 0;
-        PlayerCreatureSpellCount = 0;   
+        PlayerCreatureSpellCount = 0;
+        PlayerInstantSpellCount = 0;
         ComputerSpellCount = 0;
         ComputerCreatureSpellCount = 0;
+        ComputerInstantSpellCount = 0;
         playerTurn.setNumLandsPlayed(0);
     }
 
@@ -585,12 +589,18 @@ public class Phase extends MyObservable
 			if (sp instanceof Spell_Permanent && sp.getSourceCard().isCreature()) {
 				PlayerCreatureSpellCount++;
 			}
+			if (sp.getSourceCard().isInstant()) {
+				PlayerInstantSpellCount++;
+			}
 		} 
 		
 		else {
 			ComputerSpellCount++;
 			if (sp instanceof Spell_Permanent && sp.getSourceCard().isCreature()) {
 				Phase.ComputerCreatureSpellCount++;
+			}
+			if (sp.getSourceCard().isInstant()) {
+				ComputerInstantSpellCount++;
 			}
 		}
 	}

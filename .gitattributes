@@ -3460,6 +3460,7 @@ res/cardsfolder/ice_storm.txt -text svneol=native#text/plain
 res/cardsfolder/iceberg.txt svneol=native#text/plain
 res/cardsfolder/icefall.txt -text svneol=native#text/plain
 res/cardsfolder/icequake.txt svneol=native#text/plain
+res/cardsfolder/ichneumon_druid.txt svneol=native#text/plain
 res/cardsfolder/ichor_explosion.txt svneol=native#text/plain
 res/cardsfolder/ichor_rats.txt -text svneol=native#text/plain
 res/cardsfolder/ichor_slick.txt -text svneol=native#text/plain

@@ -127,6 +127,7 @@ public class GameActionUtil {
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Curse_of_Wizardry(c);
 		playCard_Venser_Emblem(c);
+		playCard_Ichneumon_Druid(c);
 
 	}
 	
@@ -375,6 +376,29 @@ public class GameActionUtil {
 			}//if
 		}
 	}//playCard_Vengevine()
+	
+	public static void playCard_Ichneumon_Druid(Card c) {
+		if (c.isInstant() && (Phase.PlayerInstantSpellCount >= 2 || Phase.ComputerInstantSpellCount >= 2)) {
+			final Player player = c.getController();
+			final Player opp = player.getOpponent();
+			CardList list = AllZoneUtil.getPlayerCardsInPlay(opp, "Ichneumon Druid");
+			for(int i = 0; i < list.size(); i++) {
+				final Card card = list.get(i);
+				Ability ability = new Ability(card, "0") {
+					@Override
+					public void resolve() {
+						player.addDamage(4, card);
+					}
+				}; // ability
+
+				StringBuilder sb = new StringBuilder();
+				sb.append(card).append(" - ").append("Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, Ichneumon Druid deals 4 damage to him or her.");
+				ability.setStackDescription(sb.toString());
+
+				AllZone.Stack.addSimultaneousStackEntry(ability);
+			}
+		}
+	}//playCard_Ichneumon_Druid()
 	
 	public static void playCard_Venser_Emblem(Card c)
 	{
