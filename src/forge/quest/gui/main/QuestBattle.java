@@ -191,6 +191,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Jabba the Hut 3", "hard", "B Infect deck");
 //        addToDeckList("Jack 2", "medium", "BG Aggressive deck");
 //        addToDeckList("Jack 3", "hard", "WUB Sphinx Cascade deck");
+        addToDeckList("Jack Sparrow 1", "easy", "UB Pirate deck with Talas Warrior, Coastal Piracy, Drowned and Sea's Claim");
         addToDeckList("Jack Sparrow 2", "medium", "UB Pirate deck with Talas Warrior, Coastal Piracy and Spreading Seas");
         addToDeckList("James Bond 1", "easy", "WG Sliver deck");
         addToDeckList("James Bond 2", "medium", "WG Sliver deck");
