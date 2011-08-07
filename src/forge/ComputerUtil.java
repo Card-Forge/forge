@@ -315,6 +315,9 @@ public class ComputerUtil
   {
 	  Card card = sa.getSourceCard();
 	  
+	  ManaPool manapool = AllZone.Computer_ManaPool;
+	  if (player.isHuman()) manapool = AllZone.ManaPool;
+	  
 	  String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
 
 	  ManaCost cost = new ManaCost(mana);
@@ -334,7 +337,7 @@ public class ComputerUtil
 	  if(cost.isPaid())
 		  return canPayAdditionalCosts(sa, player);
 	    
-	  cost = AllZone.Computer_ManaPool.subtractMana(sa, cost);
+	  cost = manapool.subtractMana(sa, cost);
 
 	  CardList land = getAvailableMana(player);
 
@@ -359,12 +362,12 @@ public class ComputerUtil
 			  }
 
 			  if(cost.isPaid()) {
-				  AllZone.Computer_ManaPool.clearPay(sa, true);
+				  manapool.clearPay(sa, true);
 				  return canPayAdditionalCosts(sa, player);
 			  }
 		  }
 	  }
-	  AllZone.Computer_ManaPool.clearPay(sa, true);
+	  manapool.clearPay(sa, true);
 	  return false;
   }//canPayCost()
   
@@ -696,6 +699,7 @@ public class ComputerUtil
 			  {
 				  //if (sa instanceof Spell_Permanent) // should probably add this
 				  sa.getSourceCard().setSunburstValue(cost.getSunburst());
+				  AllZone.Computer_ManaPool.clearPay(sa, false);
 				  break; 
 			  }
 		  }
