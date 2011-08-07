@@ -136,6 +136,7 @@ public class CardFactory implements NewConstants {
         }
     }// readCard()
     
+    //TODO - this can probably be deleted.  I don't think it's used.
     final public Card dynamicCopyCard(Card in)
     {
     	if (in.isCreature()) {
@@ -186,6 +187,7 @@ public class CardFactory implements NewConstants {
         out.setEquippedBy(in.getEquippedBy());
         out.setEnchantedBy(in.getEnchantedBy());
         out.setEnchanting(in.getEnchanting());
+        out.setClones(in.getClones());
         return out;
     	
     }
@@ -3255,7 +3257,6 @@ public class CardFactory implements NewConstants {
         c.setCurSetCode(sim.getCurSetCode());
         c.setImageFilename(sim.getImageFilename());
         c.setTriggers(sim.getTriggers());
-        
         
         return c;
     }// copyStats()
