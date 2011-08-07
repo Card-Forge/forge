@@ -1508,33 +1508,27 @@ public class CardFactoryUtil {
                 
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        for (String sAura : extKeywords) {
+                        for (String s : extKeywords) {
                             
                             /* If extrinsicKeywords contains "CARDNAME attacks each turn if able." then remove creatures 
                              *     with Defender and creatures with the keyword "CARDNAME attacks each turn if able."
                              *     and creatures with a keyword that starts with "CARDNAME can't attack"
                              */
-                            if (sAura.contains("CARDNAME attacks each turn if able.")) {
-                                if (c.getKeyword().contains("Defender") 
-                                        || c.getKeyword().contains("CARDNAME attacks each turn if able."))
+                            if (s.contains("CARDNAME attacks each turn if able.")) {
+                                if (c.hasKeyword("Defender") 
+                                        || c.hasKeyword("CARDNAME attacks each turn if able.") 
+                                        || c.hasStartOfKeyword("CARDNAME can't attack"))
                                     return false;
-                                else {
-                                    ArrayList<String> cardCKeywords = c.getKeyword();
-                                    for (String sCreat : cardCKeywords) {
-                                        if (sCreat.toString().startsWith("CARDNAME can't attack"))
-                                            return false;
-                                    }
-                                }
                             }
                             
                             /* If extrinsicKeywords contains "CARDNAME can't attack." or "CARDNAME can't attack or block."
                              *     then remove creatures with Defender and remove creatures that have one or more of these
                              *     keywords to start with
                              */
-                            if (sAura.contains("CARDNAME can't attack.") || extKeywords.contains("CARDNAME can't attack or block.")) {
-                                if (c.getKeyword().contains("Defender") 
-                                        || c.getKeyword().contains("CARDNAME can't attack.") 
-                                        || c.getKeyword().contains("CARDNAME can't attack or block."))
+                            if (s.contains("CARDNAME can't attack.") || s.contains("CARDNAME can't attack or block.")) {
+                                if (c.hasKeyword("Defender") 
+                                        || c.hasKeyword("CARDNAME can't attack.") 
+                                        || c.hasKeyword("CARDNAME can't attack or block."))
                                     return false;
                             }
                             
@@ -1542,14 +1536,14 @@ public class CardFactoryUtil {
                              *     then remove creatures with Vigilance that are untapped and remove creatures that have the keyword 
                              *     "CARDNAME doesn't untap during your untap step."  and remove creatures that are untapped
                             */
-                            if (sAura.contains("CARDNAME doesn't untap during your untap step.")) {
-                                if ((c.getKeyword().contains("Vigilance") && c.isUntapped()) 
-                                        || c.getKeyword().contains("CARDNAME doesn't untap during your untap step.") 
+                            if (s.contains("CARDNAME doesn't untap during your untap step.")) {
+                                if ((c.hasKeyword("Vigilance") && c.isUntapped()) 
+                                        || c.hasKeyword("CARDNAME doesn't untap during your untap step.") 
                                         || c.isUntapped())
                                     return false;
                             }
-                            
                         }
+                        
                         // Card c is a potential target if we reach this point.
                         return true;
                     }
