@@ -1,0 +1,12 @@
+Name:Portcullis
+ManaCost:4
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Creature | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature. 
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | TriggerDescription$ Return that card to the battlefield under its owner's control when CARDNAME leaves the battlefield.
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | ConditionPresent$ Creature | ConditionCompare$ GE2 | Defined$ TriggeredCard | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
+SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/portcullis.jpg
+End

@@ -5398,6 +5398,7 @@ res/cardsfolder/pooling_venom.txt svneol=native#text/plain
 res/cardsfolder/porcelain_legionnaire.txt -text svneol=native#text/plain
 res/cardsfolder/porphyry_nodes.txt -text svneol=native#text/plain
 res/cardsfolder/port_inspector.txt svneol=native#text/plain
+res/cardsfolder/portcullis.txt -text svneol=native#text/plain
 res/cardsfolder/portent.txt svneol=native#text/plain
 res/cardsfolder/possessed_aven.txt -text svneol=native#text/plain
 res/cardsfolder/possessed_barbarian.txt -text svneol=native#text/plain
