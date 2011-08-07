@@ -1,6 +1,6 @@
+
 package forge.card.spellability;
 
-import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 

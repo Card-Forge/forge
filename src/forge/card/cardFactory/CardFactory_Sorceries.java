@@ -29,7 +29,6 @@ import forge.PlayerZone;
 import forge.PlayerZone_ComesIntoPlay;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -1241,8 +1240,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
         
-
-                
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Martial Coup")) {
             SpellAbility spell = new Spell(card) {
