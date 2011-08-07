@@ -32,7 +32,7 @@ public class ComputerUtil_Block2
 	  CardList blockers = new CardList();
 	   
 	  for(Card b : blockersLeft) {
-		  if(!CombatUtil.canDestroyBlocker(b,attacker, combat)) blockers.add(b);
+		  if(!CombatUtil.canDestroyBlocker(b,attacker, combat, false)) blockers.add(b);
 	  }
 	  
 	  return blockers;   
@@ -43,7 +43,7 @@ public class ComputerUtil_Block2
 	  CardList blockers = new CardList();
 	   
 	  for(Card b : blockersLeft) {
-		   if(CombatUtil.canDestroyAttacker(attacker,b,combat)) blockers.add(b);
+		   if(CombatUtil.canDestroyAttacker(attacker, b, combat, false)) blockers.add(b);
 	  }
 	   
 	  return blockers;   

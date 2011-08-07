@@ -515,7 +515,7 @@ public class ComputerUtil_Attack2 {
 		for (Card defender:defenders) {
 			if(CombatUtil.canBlock(attacker, defender)){ //, combat )) {
 				canBeBlocked = true;
-				if(CombatUtil.canDestroyAttacker(attacker, defender, combat)) {
+				if(CombatUtil.canDestroyAttacker(attacker, defender, combat, false)) {
 					canBeKilledByOne = true;  // there is a single creature on the battlefield that can kill the creature
 					// see if the defending creature is of higher or lower value. We don't want to attack only to lose value
 					if(CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)){
@@ -523,7 +523,7 @@ public class ComputerUtil_Attack2 {
 					} 
 				}
 				// see if this attacking creature can destroy this defender, if not record that it can't kill everything
-				if(!CombatUtil.canDestroyBlocker(defender, attacker, combat)){
+				if(!CombatUtil.canDestroyBlocker(defender, attacker, combat, false)){
 					canKillAll = false;
 					if(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect")){
 						canKillAllDangerous = false; // there is a dangerous creature that can survive an attack from this creature

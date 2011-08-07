@@ -390,7 +390,7 @@ public class AbilityFactory_Pump {
         
         if (AllZone.Stack.size() == 0){
         	// If the cost is tapping, don't activate before declare attack/block
-        	if (sa.getPayCosts().getTap()){
+        	if (sa.getPayCosts() != null && sa.getPayCosts().getTap()){
 	        	if (AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers) && AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer))
 	        		list.remove(sa.getSourceCard());
 	        	if (AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Blockers) && AllZone.Phase.isPlayerTurn(AllZone.HumanPlayer))
@@ -541,8 +541,6 @@ public class AbilityFactory_Pump {
     	if (sa.getTarget() == null){
     		if (mandatory)
     			return true;
-    		
-    		
     	}
     	else{
     		return doTgtAI(sa, defense, attack, mandatory);

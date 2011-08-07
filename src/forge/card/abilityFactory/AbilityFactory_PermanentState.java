@@ -180,6 +180,7 @@ public class AbilityFactory_PermanentState {
 	}
 	
 	public static boolean untapTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		HashMap<String,String> params = af.getMapParams();
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
@@ -190,6 +191,9 @@ public class AbilityFactory_PermanentState {
 				return true;
 			
 			// TODO: use Defined to determine, if this is an unfavorable result
+			ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+			if (pDefined != null && pDefined.get(0).isUntapped())
+				return false;
 			
 			return true;
 		}

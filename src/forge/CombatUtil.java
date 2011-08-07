@@ -2,6 +2,8 @@
 package forge;
 
 
+import static forge.error.ErrorViewer.showError;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -12,6 +14,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
+import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input_PayManaCost_Ability;
@@ -778,7 +781,7 @@ public class CombatUtil {
     // This calculates the amount of damage a blocker in a blockgang can take from the attacker (for trampling attackers)
     public static int shieldDamage(Card attacker, Card defender) {
     	
-    	if (!canDestroyBlocker(defender,attacker, null)) return 100;
+    	if (!canDestroyBlocker(defender,attacker, null, false)) return 100;
     
     	int flankingMagnitude = 0;
     	if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
@@ -813,7 +816,7 @@ public class CombatUtil {
     	CardList blockers = AllZone.Combat.getBlockers(attacker);
     	
     	for (Card defender:blockers) {
-    			if(CombatUtil.canDestroyAttacker(attacker, defender, AllZone.Combat) && 
+    			if(CombatUtil.canDestroyAttacker(attacker, defender, AllZone.Combat, true) && 
     					!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect")))
     				return true;
     	}
@@ -1061,8 +1064,30 @@ public class CombatUtil {
     	return toughness;
     }
     
+    public static boolean canRegenerate(Card card) {
+    	Player controller = card.getController();
+    	CardList l = AllZoneUtil.getCardsInPlay();
+    	for(Card c:l)
+            for(SpellAbility sa:c.getSpellAbility())
+            	// if SA is from AF_Counter don't add to getPlayable
+                //This try/catch should fix the "computer is thinking" bug
+                try {
+                    if(sa.canPlay() && ComputerUtil.canPayCost(sa,controller) && sa.getAbilityFactory() != null && sa.isAbility()){
+                    	AbilityFactory af = sa.getAbilityFactory();
+                    	HashMap <String,String> mapParams = af.getMapParams();
+                		if (mapParams.get("AB").equals("Regenerate"))
+                			if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
+                				return true;
+                    }
+                } catch(Exception ex) {
+                    showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
+                }
+    	
+    	return false;
+    }
+    
     //can the blocker destroy the attacker?
-    public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat) {
+    public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat, boolean noRegen) {
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return false;
         
@@ -1077,11 +1102,8 @@ public class CombatUtil {
             
         }//flanking
         
-        if(attacker.getKeyword().contains("Indestructible") && 
+        if((attacker.getKeyword().contains("Indestructible") || (canRegenerate(attacker) && !noRegen)) && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
-        
-        //unused
-        //int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender, combat);
@@ -1133,14 +1155,14 @@ public class CombatUtil {
     public static boolean blockerWouldBeDestroyed(Card blocker) {
     	Card attacker = AllZone.Combat.getAttackerBlockedBy(blocker);
     	
-    	if(canDestroyBlocker(blocker, attacker, AllZone.Combat) && 
+    	if(canDestroyBlocker(blocker, attacker, AllZone.Combat, true) && 
     					!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect")))
     			return true;
     	return false;
     }
     
     //can the attacker destroy this blocker?
-    public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat) {
+    public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat, boolean noRegen) {
     	
         int flankingMagnitude = 0;
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
@@ -1151,7 +1173,7 @@ public class CombatUtil {
             if((flankingMagnitude >= defender.getKillDamage()) && !defender.getKeyword().contains("Indestructible")) return true;    
         }//flanking
         
-        if(defender.getKeyword().contains("Indestructible") && 
+        if((defender.getKeyword().contains("Indestructible") || (canRegenerate(defender) && !noRegen)) && 
         		!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect"))) return false;
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return true;
@@ -1190,7 +1212,7 @@ public class CombatUtil {
             		&& !attacker.getKeyword().contains("Indestructible") && !attacker.getKeyword().contains("First Strike")) {
             	
             	if(defenderDamage >= attackerLife) return false;
-            	if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch") ) return false;
+            	if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch")) return false;
             }
             
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
