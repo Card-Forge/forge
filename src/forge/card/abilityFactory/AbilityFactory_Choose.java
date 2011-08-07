@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -158,6 +159,10 @@ public class AbilityFactory_Choose {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 		String type = params.get("Type");
+		ArrayList<String> invalidTypes = new ArrayList<String>();
+		if(params.containsKey("InvalidTypes")) {
+			invalidTypes.addAll(Arrays.asList(params.get("InvalidTypes").split(",")));
+		}
 
 		ArrayList<Player> tgtPlayers;
 
@@ -171,32 +176,40 @@ public class AbilityFactory_Choose {
 			if (tgt == null || p.canTarget(af.getHostCard())) {
 
 				if(type.equals("Card")) {
-					if(sa.getActivatingPlayer().isHuman()) {
-						Object o = GuiUtils.getChoice("Choose a card type", CardUtil.getCardTypes().toArray());
-						if(null == o) return;
-						String choice = (String)o;
-						if(CardUtil.isACardType(choice)) {
-							card.setChosenType(choice);
+					boolean valid = false;
+					while(!valid) {
+						if(sa.getActivatingPlayer().isHuman()) {
+							Object o = GuiUtils.getChoice("Choose a card type", CardUtil.getCardTypes().toArray());
+							if(null == o) return;
+							String choice = (String)o;
+							if(CardUtil.isACardType(choice) && !invalidTypes.contains(choice)) {
+								valid = true;
+								card.setChosenType(choice);
+							}
 						}
-					}
-					else {
-						//TODO
-						//computer will need to choose a type
-						//based on whether it needs a creature or land, otherwise, lib search for most common type left
-						//then, reveal chosenType to Human
+						else {
+							//TODO
+							//computer will need to choose a type
+							//based on whether it needs a creature or land, otherwise, lib search for most common type left
+							//then, reveal chosenType to Human
+						}
 					}
 				}
 				else if(type.equals("Creature")) {
 					String chosenType = "";
-					if(sa.getActivatingPlayer().isHuman()) {
-						chosenType = JOptionPane.showInputDialog(null, "Choose a creature type:", card.getName(),
-								JOptionPane.QUESTION_MESSAGE);
-					}
-					else {
-						//not implemented for AI
-					}
-					if (CardUtil.isACreatureType(chosenType)) {
-						card.setChosenType(chosenType);
+					boolean valid = false;
+					while(!valid) {
+						if(sa.getActivatingPlayer().isHuman()) {
+							chosenType = JOptionPane.showInputDialog(null, "Choose a creature type:", card.getName(),
+									JOptionPane.QUESTION_MESSAGE);
+						}
+						else {
+							//not implemented for AI
+						}
+						if( CardUtil.isACreatureType(chosenType) && !invalidTypes.contains(chosenType)) {
+							valid = true;
+							card.setChosenType(chosenType);
+						}
 					}
 				}
 			}
