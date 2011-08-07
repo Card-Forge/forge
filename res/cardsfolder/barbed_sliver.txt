@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:2/2
 K:stPumpAll:Creature.Sliver:0/0/SVar=Pump:no Condition:All Sliver creatures have "2: This creature gets +1/+0 until end of turn."
-SVar:Pump:AB$Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+SVar:Pump:AB$Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
