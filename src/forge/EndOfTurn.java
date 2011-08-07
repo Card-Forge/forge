@@ -159,6 +159,24 @@ public class EndOfTurn implements java.io.Serializable
 				AllZone.Stack.addSimultaneousStackEntry(change);
 
 			}
+			if(c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
+					&& AllZone.Phase.isPlayerTurn(c.getController())) {
+				final Card source = c;
+				final SpellAbility change = new Ability(source, "0") {
+					@Override
+					public void resolve() {
+						if(AllZoneUtil.isCardInPlay(source)) {
+							AllZone.GameAction.moveToHand(source);
+						}
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+				sb.append(source).append(" - At the beginning of your end step, return CARDNAME to its owner's hand.");
+				change.setStackDescription(sb.toString());
+
+				AllZone.Stack.addSimultaneousStackEntry(change);
+
+			}
 
 		}
 

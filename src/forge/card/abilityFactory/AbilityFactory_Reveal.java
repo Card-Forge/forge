@@ -3,6 +3,7 @@ package forge.card.abilityFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
@@ -224,6 +225,10 @@ public class AbilityFactory_Reveal {
 		boolean optional = params.containsKey("Optional");
 		boolean noMove = params.containsKey("NoMove");
 		boolean changeAll = false;
+		ArrayList<String> keywords = new ArrayList<String>();
+		if(params.containsKey("Keywords")) {
+			keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
+		}
 		
 		if(params.containsKey("ChangeNum")) {
 			if(params.get("ChangeNum").equalsIgnoreCase("All")) changeAll = true;
@@ -324,7 +329,10 @@ public class AbilityFactory_Reveal {
 										AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
 									}
 									else {
-										AllZone.GameAction.moveTo(zone, chosen);
+										Card c = AllZone.GameAction.moveTo(zone, chosen);
+										if(destZone1.equals("Battlefield") && !keywords.isEmpty()) {
+											for(String kw : keywords) c.addExtrinsicKeyword(kw);
+										}
 									}
 									//AllZone.GameAction.revealToComputer() - for when this exists
 									j++;
@@ -372,8 +380,12 @@ public class AbilityFactory_Reveal {
 							for(int i = 0; i < rest.size(); i++) {
 								Card c = rest.get(i);
 								PlayerZone toZone = AllZone.getZone(destZone2, c.getOwner());
-								AllZone.GameAction.moveTo(toZone, c);
+								c = AllZone.GameAction.moveTo(toZone, c);
+								if(destZone2.equals("Battlefield") && !keywords.isEmpty()) {
+									for(String kw : keywords) c.addExtrinsicKeyword(kw);
+								}
 							}
+							
 						}
 					}
 				}//end if canTarget
