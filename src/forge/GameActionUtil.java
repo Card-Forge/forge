@@ -46,7 +46,6 @@ public class GameActionUtil {
 		upkeep_Farmstead();
 		
 		upkeep_Greener_Pastures();
-		upkeep_Heartmender();
 		upkeep_Shapeshifter();
 		upkeep_Vesuvan_Doppelganger_Keyword();
 		
@@ -2381,42 +2380,6 @@ public class GameActionUtil {
 			}
 		}
 	}//upkeep_Farmstead()
-	
-	private static void upkeep_Heartmender() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Heartmender");
-
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-
-				Ability ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						CardList creats = AllZoneUtil.getPlayerCardsInPlay(player);
-						creats = creats.filter(new CardListFilter() {
-
-							public boolean addCard(Card c) {
-								return c.getCounters(Counters.M1M1) > 0;
-							}
-
-						});
-
-						for(int j = 0; j < creats.size(); j++) {
-							Card c = creats.get(j);
-							if(c.getCounters(Counters.M1M1) > 0) c.subtractCounter(Counters.M1M1,1);
-						}
-
-					}
-
-				};// Ability
-				ability.setStackDescription("Heartmender - Remove a -1/-1 counter from each creature you control.");
-
-                AllZone.Stack.addSimultaneousStackEntry(ability);
-
-			} // for
-		} // if creatures > 0
-	}//upkeep_Heartmender
 	
     /////////////////////////
     // Start of Kinship cards
