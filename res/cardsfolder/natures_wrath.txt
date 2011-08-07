@@ -10,4 +10,5 @@ SVar:TrigSacrificeBlack:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredCardControlle
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_wrath.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/82.jpg
 End

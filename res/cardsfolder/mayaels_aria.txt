@@ -8,4 +8,5 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ 10 | Defined$ You | ConditionPresent$
 SVar:DBWinGame:DB$ WinsGame | Defined$ You | ConditionPresent$ Creature.YouCtrl+powerGE20
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mayaels_aria.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/121.jpg
 End
