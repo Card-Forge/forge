@@ -347,6 +347,16 @@ public interface NewConstants {
                         public static final String REMOVE_ARTIFACTS = "%s/NewGame/options/generate/removeArtifacts";
                     }
                 }
+
+                 public static interface HELP {
+                    public static final String TITLE = "%s/NewGame/help/title";
+                        }
+
+
+
+
+
+
             }
             
             public static interface ERRORS {}

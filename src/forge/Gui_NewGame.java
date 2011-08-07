@@ -23,15 +23,14 @@ import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 
 /*CHOPPIC*/
@@ -92,6 +91,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private Action					CARD_STACK_ACTION    = new CardStackAction();
     private Action					CARD_STACK_OFFSET_ACTION = new CardStackOffsetAction();
     private Action                  ABOUT_ACTION         = new AboutAction();
+    private Action                  HOW_TO_PLAY_ACTION         = new HowToPlayAction();
     private Action					DNLD_PRICES_ACTION	 = new DownloadPriceAction(); 
     
     static public ForgePreferences preferences;
@@ -233,11 +233,19 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 				ImageCache.scaleLargerThanOriginal = cardScale.isSelected();			
 			}
 		});
+
+        JMenu helpMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.HELP.TITLE)) ;
+
+        Action[] helpActions = {HOW_TO_PLAY_ACTION};
+        for (Action a:helpActions) {
+            helpMenu.add(a);
+        }
         
         JMenuBar bar = new JMenuBar();
         bar.add(menu);
         bar.add(optionsMenu);
-        bar.add(new MenuItem_HowToPlay());
+        bar.add(helpMenu);
+        //bar.add(new MenuItem_HowToPlay());
         
         setJMenuBar(bar);
     }
@@ -1165,7 +1173,30 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         	Constant.Runtime.stackOffset[0] = offsets[index];
         }
     }
-    
+
+        public static class HowToPlayAction extends AbstractAction {
+
+        private static final long serialVersionUID = 5552000208438248428L;
+
+        public HowToPlayAction() {
+            super(ForgeProps.getLocalized(LANG.HowTo.TITLE));
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            String text = ForgeProps.getLocalized(LANG.HowTo.MESSAGE);
+
+                JTextArea area = new JTextArea(text, 25, 40);
+                area.setWrapStyleWord(true);
+                area.setLineWrap(true);
+                area.setEditable(false);
+                area.setOpaque(false);
+
+
+                JOptionPane.showMessageDialog(null, new JScrollPane(area), ForgeProps.getLocalized(LANG.HowTo.TITLE),
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+    }
+
     public static class AboutAction extends AbstractAction {
         
         private static final long serialVersionUID = 5492173304463396871L;
