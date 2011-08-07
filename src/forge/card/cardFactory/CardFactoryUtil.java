@@ -108,7 +108,7 @@ public class CardFactoryUtil {
         CardList nbLand = land.filter(new CardListFilter() // prefer to target non basic lands
         {
             public boolean addCard(Card c) {
-                return (!c.isType("Basic"));
+                return (!c.isBasicLand());
             }
         });
         
@@ -124,9 +124,9 @@ public class CardFactoryUtil {
         String sminBL = "";
         int iminBL = 20000; // hopefully no one will ever have more than 20000 lands of one type....
         int n = 0;
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             n = land.getType(names[i]).size();
-            if(n < iminBL && n > 0) // if two or more are tied, only the first one checked will be used
+            if (n < iminBL && n > 0) // if two or more are tied, only the first one checked will be used
             {
                 iminBL = n;
                 sminBL = names[i];
@@ -135,8 +135,8 @@ public class CardFactoryUtil {
         if(iminBL == 20000) return null; // no basic land was a minimum
         
         CardList BLand = land.getType(sminBL);
-        for(int i = 0; i < BLand.size(); i++)
-            if(!BLand.get(i).isTapped()) // prefer untapped lands
+        for (int i = 0; i < BLand.size(); i++)
+            if (!BLand.get(i).isTapped()) // prefer untapped lands
             return BLand.get(i);
         
         Random r = MyRandom.random;

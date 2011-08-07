@@ -249,7 +249,7 @@ public class GenerateThemeDeck
 			{
 				Card c = tDeck.get(r.nextInt(tDeck.size()));
 				
-				while (c.isType("Basic"))
+				while (c.isBasicLand())
 					c = tDeck.get(r.nextInt(tDeck.size()));
 				
 				tDeck.remove(c);

@@ -1097,7 +1097,7 @@ public class CardFactory_Sorceries {
                 public void selectCard(Card c, PlayerZone zone) {
                     if (c.isLand() 
                     		&& zone.is(Constant.Zone.Battlefield) 
-                    		&& !c.isType("Basic")) {
+                    		&& !c.isBasicLand()) {
                     	if (card.isCopiedSpell()) card.getChoiceTargets().remove(0);
                         m_land[0] = c;
                         spell.setTargetCard(c);
@@ -1124,7 +1124,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void selectPlayer(Player player) {
-                	if(card.isCopiedSpell()) card.getChoiceTargets().remove(0);
+                	if (card.isCopiedSpell()) card.getChoiceTargets().remove(0);
                     m_player[0] = player;
                     spell.setTargetPlayer(player);
                     card.setSpellChoiceTarget(player.toString());
