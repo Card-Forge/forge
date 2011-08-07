@@ -123,7 +123,7 @@ public class GameActionUtil {
 		playCard_Chalice_of_the_Void(c);
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
-		playCard_Infernal_Kirin(c);
+		//playCard_Infernal_Kirin(c);
 		playCard_Standstill(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Curse_of_Wizardry(c);
@@ -555,6 +555,7 @@ public class GameActionUtil {
 		}//if					
 	}// Demigod of Revenge
 
+	/*
 	public static void playCard_Infernal_Kirin(Card c) {
 		final Player controller = c.getController();
 
@@ -612,8 +613,7 @@ public class GameActionUtil {
 				}
 			}//if
 		}
-
-	}//Infernal Kirin
+	}//Infernal Kirin*/
 
 	public static void playCard_Dovescape(Card c) {
 		final Card crd1 = c;

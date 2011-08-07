@@ -879,6 +879,9 @@ public class AbilityFactory_ZoneAffecting {
 					if (valid == null)
 						valid = "Card";
 					
+					if (valid.contains("X"))	
+						valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
+					
 					CardList dPChHand = dPHand.getValidCards(valid.split(","), source.getController(), source);
 					
 					// Reveal cards that will be discarded?
