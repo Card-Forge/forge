@@ -142,7 +142,8 @@ public class ComputerUtil_Block2
    private static Combat makeGangBlocks(Combat combat){
 	   
 	  CardList currentAttackers = new CardList(attackersLeft.toArray());
-	  currentAttackers = currentAttackers.getKeywordsDontContain("Rampage"); 
+	  currentAttackers = currentAttackers.getKeywordsDontContain("Rampage");
+	  currentAttackers = currentAttackers.getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
 	  CardList blockers;
 	  
 	  //Try to block an attacker without first strike with a gang of first strikers
@@ -277,6 +278,7 @@ public class ComputerUtil_Block2
 	  
 	  CardList tramplingAttackers = attackers.getKeyword("Trample");
 	  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
+	  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
 	  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
 	  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
@@ -302,6 +304,7 @@ public class ComputerUtil_Block2
 	  CardList safeBlockers;
 	  CardList blockers;
 	  CardList targetAttackers = blockedButUnkilled.getKeywordsDontContain("Rampage"); 	//Don't make it worse
+	  targetAttackers = targetAttackers.getKeywordsDontContain("CARDNAME can't be blocked by more than one creature.");
 	  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
 	  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 	  
