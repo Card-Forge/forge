@@ -659,51 +659,6 @@ public class CardFactory_Sorceries {
         //*************** END ************ END **************************  
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Doomsday")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 1481112451519L;
-                
-                @Override
-                public void resolve() {
-                	CardList GraveandLibrary = new CardList();
-                	Player Player = card.getController();
-                	GraveandLibrary.add(new CardList(AllZone.getZone(Constant.Zone.Library, Player).getCards()));
-                	GraveandLibrary.add(new CardList(AllZone.getZone(Constant.Zone.Graveyard, Player).getCards()));
-                	CardList NewLibrary = new CardList();
-                	int Count = 5;
-                	if(GraveandLibrary.size() < 5) Count = GraveandLibrary.size();
-                	
-                	for(int i = 0; i < Count; i++) {   
-                	Card[] Search = GraveandLibrary.toArray();
-                    AllZone.Display.showMessage("Select a card to put " + i + " from the top of the new library: "  + (Count - i) + " Choices to go.");
-                    ButtonUtil.enableOnlyCancel();
-                    Object check = GuiUtils.getChoice("Select a card: ", Search);   
-                    NewLibrary.add((Card) check);
-                    GraveandLibrary.remove((Card) check);
-                    
-                	}
-                	
-			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Exile, Player);   
-			        PlayerZone Library = AllZone.getZone(Constant.Zone.Library, Player);  
-                    for(int i = 0; i < GraveandLibrary.size(); i++) AllZone.GameAction.moveTo(RFG,GraveandLibrary.get(i));
-                    for(int i = 0; i < NewLibrary.size(); i++) AllZone.GameAction.moveTo(Library,NewLibrary.get(i));
-
-                    //lose half life
-                    Player player = AllZone.HumanPlayer;
-                    player.loseLife(player.getLife() / 2,card);
-                }
-                        
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
