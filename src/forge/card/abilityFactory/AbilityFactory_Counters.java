@@ -180,13 +180,7 @@ public class AbilityFactory_Counters {
 		list = AllZoneUtil.getPlayerCardsInPlay(player);
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				return CardFactoryUtil.canTarget(source, c);
-			}
-		});
-		
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				return !c.hasKeyword("CARDNAME can't have counters placed on it.");
+				return CardFactoryUtil.canTarget(source, c) && !c.hasKeyword("CARDNAME can't have counters placed on it.");
 			}
 		});
 
@@ -205,7 +199,7 @@ public class AbilityFactory_Counters {
 
 		if (abCost != null){
 			// AI currently disabled for these costs
-			if (abCost.getSacCost() && !abCost.getSacThis()){
+			if (abCost.getSacCost() && (!abCost.getSacThis() || source.isCreature())){
 				//only sacrifice something that's supposed to be sacrificed 
 				String sacType = abCost.getSacType();
 			    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
@@ -238,6 +232,9 @@ public class AbilityFactory_Counters {
 			source.setSVar("PayX", Integer.toString(amount));
 			// TODO: 
 		}
+		
+		//don't use it if no counters to add
+		if (amount <= 0) return false;
 
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
@@ -284,13 +281,16 @@ public class AbilityFactory_Counters {
 			int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
 			// each non +1/+1 counter on the card is a 10% chance of not activating this ability. 
 
-			if (!type.equals("P1P1") && r.nextFloat() < .1 * currCounters)	
+			if (!(type.equals("P1P1") || type.equals("ICE")) && r.nextFloat() < .1 * currCounters)	
 				return false;
 		}
 
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			chance &= subAb.chkAI_Drawback();
+		
+		if (AbilityFactory.playReusable(sa))
+			return chance;
 
 		return ((r.nextFloat() < .6667) && chance);
 	}
