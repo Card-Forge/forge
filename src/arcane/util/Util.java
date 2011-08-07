@@ -65,15 +65,6 @@ public class Util {
 		}
 	}
 
-	static public boolean classExists (String className) {
-		try {
-			Class.forName(className);
-			return true;
-		} catch (ClassNotFoundException ex) {
-			return false;
-		}
-	}
-
 	public static void invokeAndWait (Runnable runnable) throws Exception {
 		try {
 			SwingUtilities.invokeAndWait(runnable);

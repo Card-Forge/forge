@@ -22,10 +22,6 @@ public class Ability_Triggered extends Ability implements Command {
     public ZCTrigger          trigger;
     public Command            todo;
     
-    public Ability_Triggered(Card sourceCard, Command sourceCommand, String situation) {
-        this(sourceCard, sourceCommand, ZCTrigger.getTrigger(situation));
-    }
-    
     public Ability_Triggered(Card sourceCard, Command sourceCommand, ZCTrigger situation) {
         super(sourceCard, "0");
         setTrigger(true);

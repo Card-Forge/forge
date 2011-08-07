@@ -479,60 +479,7 @@ public class QuestData implements NewConstants {
     	}
     }
     
-    public long getCreditsToAdd(WinLose winLose)
-    {
-    	long creds = (long) (qdPrefs.getMatchRewardBase() + (qdPrefs.getMatchRewardTotalWins() * win));
-    	String[] wins = winLose.getWinMethods();
-    	int[] winTurns = winLose.getWinTurns();
-    	boolean[] mulliganedToZero = winLose.getMulliganedToZero();
-    	
-    	if (winLose.getLose() == 0)
-    		creds += qdPrefs.getMatchRewardNoLosses();
-    	
-    	for(String s : wins)
-    	{
-    		if (s != null) {
-    			if (s.equals("Poison Counters"))
-    				creds += qdPrefs.getMatchRewardPoisonWinBonus();
-    			else if (s.equals("Milled"))
-    				creds += qdPrefs.getMatchRewardMilledWinBonus();
-    			else if (s.equals("Battle of Wits") || s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || 
-    					 s.equals("Epic Struggle") || s.equals("Door to Nothingness") || s.equals("Barren Glory") ||
-    					 s.equals("Near-Death Experience") || s.equals("Mortal Combat") || s.equals("Test of Endurance")) {
-	    			creds += qdPrefs.getMatchRewardAltWinBonus();
-	    		}
-    		}
-    	}
-    	for (int i : winTurns)
-    	{
-    		if (i == 1)
-    			creds += qdPrefs.getMatchRewardWinFirst();
-			else if (i <= 5)
-				creds += qdPrefs.getMatchRewardWinByFifth();
-			else if (i <= 10)
-				creds += qdPrefs.getMatchRewardWinByTen();
-			else if (i <= 15)
-				creds += qdPrefs.getMatchRewardWinByFifteen();
-    	}
-    	
-    	
-    	for (boolean b : mulliganedToZero)
-    	{
-    		if (b == true)
-    			creds += qdPrefs.getMatchMullToZero();
-    	}
-    	
-    	if (getEstatesLevel() == 1)
-    		creds*=1.1;
-    	else if (getEstatesLevel() == 2)
-    		creds*=1.15;
-    	else if (getEstatesLevel() == 3)
-    		creds*=1.2;
-    	
-    	this.addCredits(creds);
-    	
-    	return creds;
-    }
+    
     //gets all of the cards that are in the cardpool
     public ArrayList<String> getCards() {
         //copy CardList in order to keep private variables private
