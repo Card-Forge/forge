@@ -789,7 +789,12 @@ public class ComputerUtil
 						
 						list = list.getValidCards(needsToPlay.split(","), c.getController(), c);
 			          if (list.isEmpty()) return false;
-			      } 
+			      }
+			      if(c.getType().contains("Legendary") && !c.getName().equals("Flagstones of Trokair")) {
+				      CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+				      if (list.containsName(c.getName()))
+				      return false;
+			      }
 				 return true;
 			 }
 		 });
