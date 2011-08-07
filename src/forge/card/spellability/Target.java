@@ -3,6 +3,7 @@ package forge.card.spellability;
 import java.util.ArrayList;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.Constant;
 import forge.Player;
@@ -240,7 +241,7 @@ public class Target {
 			return true;
 		}
 		
-		for(Card c : AllZone.getZone(tgtZone,AllZone.HumanPlayer).getCards())
+		for(Card c : AllZoneUtil.getCardsInZone(tgtZone, AllZone.HumanPlayer))
 		{
 			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard) && CardFactoryUtil.canTarget(srcCard, c))
 			{
@@ -248,7 +249,7 @@ public class Target {
 			}
 		}
 		
-		for(Card c : AllZone.getZone(tgtZone,AllZone.ComputerPlayer).getCards())
+		for(Card c : AllZoneUtil.getCardsInZone(tgtZone, AllZone.ComputerPlayer))
 		{
 			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard) && CardFactoryUtil.canTarget(srcCard, c))
 			{

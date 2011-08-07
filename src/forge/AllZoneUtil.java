@@ -253,10 +253,10 @@ public class AllZoneUtil {
 		if(card == null)
 			return false;
 
-		Card c[] = pz.getCards();
+		CardList cl = getCardsInZone(pz);
 
-		for(int i = 0; i < c.length; i++)
-			if(c[i].equals(card))
+		for(int i = 0; i < cl.size(); i++)
+			if(cl.get(i).equals(card))
 				return true;
 
 		return false;
@@ -482,6 +482,10 @@ public class AllZoneUtil {
         return getCardsInZone(zone, null);
 	}
 	
+	public static CardList getCardsInZone(PlayerZone zone){	
+        return new CardList(zone.getCards());
+	}
+	
 	public static CardList getCardsInZone(String zone, Player player){
         CardList all = new CardList();
 
@@ -517,6 +521,17 @@ public class AllZoneUtil {
 		}
 		
         return all;
+	}
+	
+	public static CardList getPlayerCardsWithPhasing(final Player player) {
+		CardList cards = new CardList();
+		cards.addAll(AllZone.getZone(Constant.Zone.Battlefield, player).getCards());
+		cards = cards.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.hasPhasing();
+			}
+		});
+		return cards;
 	}
 	
 	
