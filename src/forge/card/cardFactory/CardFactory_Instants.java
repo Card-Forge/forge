@@ -578,49 +578,6 @@ public class CardFactory_Instants {
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Wrap in Vigor")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -4235465815975050436L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getAttacker() != null;
-                }
-                
-                public Card getAttacker() {
-                    //target creature that is going to attack
-                    Combat c = ComputerUtil.getAttackers();
-                    Card[] att = c.getAttackers();
-                    if(att.length != 0) return att[0];
-                    else return null;
-                }//getAttacker()
-                
-                @Override
-                public void resolve() {
-                    final CardList creatures = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    
-                    for(Card creature : creatures) creature.addShield();
-                    
-                    AllZone.EndOfTurn.addUntil(new Command() {
-                        private static final long serialVersionUID = -3946800525315027053L;
-                        
-                        public void execute() {
-                        	for(Card creature : creatures) creature.resetShield();
-                        }
-                    });
-                    
-                }//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************

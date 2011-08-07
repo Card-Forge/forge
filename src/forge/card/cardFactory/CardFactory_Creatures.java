@@ -109,42 +109,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Loxodon Hierarch")) {
-        	Cost abCost = new Cost("G W Sac<1/CARDNAME>", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = 6606519504236074186L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    final CardList creatures = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    
-                    for(Card creature : creatures) creature.addShield();
-                    
-                    AllZone.EndOfTurn.addUntil(new Command() {
-                        private static final long serialVersionUID = 5853778391858472471L;
-                        
-                        public void execute() {
-                        	for(Card creature : creatures) creature.resetShield();
-                        }
-                    });
-                }//resolve()
-            };//SpellAbility
-            
-            card.addSpellAbility(ability);
-            ability.setDescription(abCost+"Regenerate each creature you control.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" regenerate each of ").append(card.getController()).append("'s creatures.");
-            ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************
