@@ -179,7 +179,17 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
 				}
 			};
 
-            Object[] objDev = { GuiDisplay4.canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary, generateMana };
+			// + Battlefield setup +
+			ForgeAction setupBattleField = new ForgeAction(SETUPBATTLEFIELD) {
+				private static final long serialVersionUID = -6660930759092583160L;
+
+				public void actionPerformed(ActionEvent arg0) {
+					// Set up the battlefield here
+				}
+			};
+			// - Battlefield setup -
+			
+            Object[] objDev = { GuiDisplay4.canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary, generateMana, setupBattleField };
 	        for(Object o:objDev) {
 	        	if(o instanceof ForgeAction) 
 	        		devMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));

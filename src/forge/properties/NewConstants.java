@@ -263,6 +263,13 @@ public interface NewConstants {
                 public static final String BUTTON = "%s/Display/managen/button";
                 public static final String MENU   = "%s/Display/managen/menu";
             }
+            
+            public static final String SETUPBATTLEFIELD = "%s/Display/setupbattlefield";
+            
+            public static interface SETUPBATTLEFIELD {
+            	public static final String BUTTON = "%s/Display/setupbattlefield/button";
+            	public static final String MENU = "%s/Display/setupbattlefield/menu";
+            }
         }
         
         public static interface Gui_DownloadPictures {
