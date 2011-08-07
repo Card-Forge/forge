@@ -25,12 +25,12 @@ public class AbilityFactory_DelayedTrigger {
 
 			@Override
             public boolean chkAI_Drawback() {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
+                return doChkAI_Drawback(AF,this);  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
             public boolean doTrigger(boolean mandatory) {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
+                return doTriggerAI(AF,this);  //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
@@ -42,7 +42,7 @@ public class AbilityFactory_DelayedTrigger {
         return drawback;
     }
 
-    private boolean doChkAI_Drawback(final AbilityFactory AF, final SpellAbility SA)
+    private static boolean doChkAI_Drawback(final AbilityFactory AF, final SpellAbility SA)
     {
         String svarName = AF.getMapParams().get("Execute");
         SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName),AF.getHostCard());
@@ -57,7 +57,7 @@ public class AbilityFactory_DelayedTrigger {
         }
     }
 
-    private boolean doTriggerAI(final AbilityFactory AF,final SpellAbility SA)
+    private static boolean doTriggerAI(final AbilityFactory AF,final SpellAbility SA)
     {
         String svarName = AF.getMapParams().get("Execute");
         SpellAbility trigsa = tempCreator.getAbility(AF.getHostCard().getSVar(svarName),AF.getHostCard());
