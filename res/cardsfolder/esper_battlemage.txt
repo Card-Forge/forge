@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ W T | Defined$ You | Amount$ 2 | SpellDescription$ P
 A:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_battlemage.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/40.jpg
 End

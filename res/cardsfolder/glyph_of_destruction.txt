@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glyph_of_destruction.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/148.jpg
 End

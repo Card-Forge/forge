@@ -6,4 +6,5 @@ A:SP$ PreventDamage | Cost$ 2 W | Tgt$ TgtCP | Amount$ 1 | SubAbility$ SVar=DBDr
 SVar:DBDraw:DB$Draw | Cost$ 0 | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withstand.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/21.jpg
 End
