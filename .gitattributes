@@ -1936,6 +1936,7 @@ res/cardsfolder/doubtless_one.txt -text svneol=native#text/plain
 res/cardsfolder/douse.txt -text svneol=native#text/plain
 res/cardsfolder/douse_in_gloom.txt -text svneol=native#text/plain
 res/cardsfolder/dovescape.txt -text svneol=native#text/plain
+res/cardsfolder/downdraft.txt svneol=native#text/plain
 res/cardsfolder/downhill_charge.txt -text svneol=native#text/plain
 res/cardsfolder/dowsing_shaman.txt -text svneol=native#text/plain
 res/cardsfolder/draconian_cylix.txt -text svneol=native#text/plain
