@@ -721,7 +721,7 @@ public abstract class Player extends MyObservable{
     ////////////////////////////////
     public void shuffle() {
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
-        Card c[] = library.getCards();
+        Card c[] = AllZoneUtil.getPlayerCardsInLibrary(this).toArray();
         
         if(c.length <= 1) return;
         
