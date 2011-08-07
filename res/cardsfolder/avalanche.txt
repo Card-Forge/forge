@@ -7,6 +7,7 @@ A:SP$ Destroy | Cost$ X 2 R R | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ L
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land.Snow
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/171.jpg
