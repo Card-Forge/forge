@@ -3000,7 +3000,7 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Apocalypse Hydra")) {      
+        else if(cardName.equals("Apocalypse Hydra")) { 
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -11489323313L;
                 
@@ -3008,22 +3008,19 @@ public class CardFactory_Creatures {
                 public boolean canPlayAI() {
                     return super.canPlay() && 5 <= ComputerUtil.getAvailableMana().size() - 2;
                 }
+                
+                @Override
+                public void resolve() {
+                	int XCounters = card.getXManaCostPaid();
+                    Card c =  AllZone.GameAction.moveToPlay(getSourceCard());
+                	
+                	if(XCounters >= 5) XCounters = 2 * XCounters;
+                    c.addCounter(Counters.P1P1, XCounters);   
+                }
             };
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
-
-            Command intoPlay = new Command() {
-                
-                private static final long serialVersionUID = 255901529244894L;
-                
-                public void execute() {
-                	int XCounters = card.getXManaCostPaid();
-                	if(XCounters >= 5) XCounters = 2 * XCounters;
-                    card.addCounter(Counters.P1P1, XCounters);                   
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
         

@@ -130,9 +130,12 @@ public class Spell_Permanent extends Spell {
     ////////////////////
     
     public Spell_Permanent(Card sourceCard) {
-        super(sourceCard);
-        
-        setManaCost(sourceCard.getManaCost());
+    	// Add Costs for all SpellPermanents
+    	this(sourceCard, new Cost(sourceCard.getManaCost(), sourceCard.getName(), false), null);
+    }//Spell_Permanent()
+    
+    public Spell_Permanent(Card sourceCard, Cost cost, Target tgt) {
+        super(sourceCard, cost, tgt);
         
         if(CardFactory.hasKeyword(sourceCard,"Champion") != -1) {
         	int n = CardFactory.hasKeyword(sourceCard, "Champion");
@@ -158,6 +161,7 @@ public class Spell_Permanent extends Spell {
         }
         
     }//Spell_Permanent()
+    
     
     @Override
     public boolean canPlay() {
