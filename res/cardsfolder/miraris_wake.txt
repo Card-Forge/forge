@@ -1,7 +1,7 @@
 Name:Mirari's Wake
 ManaCost:3 G W
 Types:Enchantment
-Text:
+Text:no text
 T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
 SVar:TrigMana:AB$ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Card.IsTriggeredCard | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 K:stPumpAll:Creature.YouCtrl:1/1:No Condition:Creatures you control get +1/+1.
