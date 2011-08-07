@@ -453,15 +453,6 @@ public class AbilityFactory_Token extends AbilityFactory {
 			}
 		}
 		
-		if (AF.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else{
-               CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), finalAmount, AF.getHostCard().getController(),
-            		   AF.getHostCard().getController().getOpponent(), null, AF.getHostCard(), null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 }

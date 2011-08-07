@@ -298,17 +298,7 @@ public class AbilityFactory_AlterLife {
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.gainLife(lifeAmount, sa.getSourceCard());
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *************************************************************************
@@ -589,17 +579,7 @@ public class AbilityFactory_AlterLife {
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.loseLife(lifeAmount, sa.getSourceCard());
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
-			}
-		}	
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *************************************************************************
@@ -762,17 +742,7 @@ public class AbilityFactory_AlterLife {
 				p.addPoisonCounters(num);
 		
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, num, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	private static String poisonStackDescription(AbilityFactory af, SpellAbility sa){
@@ -1122,17 +1092,7 @@ public class AbilityFactory_AlterLife {
 			if(tgt == null || p.canTarget(af.getHostCard()))
 				p.setLife(lifeAmount, sa.getSourceCard());
 
-		if(af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) {
-				abSub.resolve();
-			}
-			else {
-				String DrawBack = params.get("SubAbility");
-				if(af.hasSubAbility())
-					CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 
 }//end class AbilityFactory_AlterLife

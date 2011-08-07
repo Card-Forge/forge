@@ -747,17 +747,7 @@ public class AbilityFactory_Reveal {
 			}
 		}
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-				abSub.resolve();
-			}
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	private static boolean scryTargetAI(AbilityFactory af, SpellAbility sa) {
@@ -1017,18 +1007,7 @@ public class AbilityFactory_Reveal {
 				if (tgt == null || p.canTarget(AF.getHostCard()))
 					AllZoneUtil.rearrangeTopOfLibrary(AF.getHostCard(), p, numCards, shuffle);
 		}
-		if (AF.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-				abSub.resolve();
-			}
-			else{
-				String DrawBack = AF.getMapParams().get("SubAbility");
-				if (AF.hasSubAbility())
-					CardFactoryUtil.doDrawBack(DrawBack, numCards, AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(), tgtPlayers.get(0), AF.getHostCard(), null, sa);
-			}
-		}
-
+		AbilityFactory.resolveSubAbility(sa);
 	}
 
 }//end class AbilityFactory_Reveal

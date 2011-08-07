@@ -859,13 +859,6 @@ public class AbilityFactory_DealDamage {
 			//anything else to go here?
 		}
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-				abSub.resolve();
-			}
-			else
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 }

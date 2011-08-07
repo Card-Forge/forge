@@ -1205,17 +1205,7 @@ public class AbilityFactory_ChangeZone {
 			}
 		}
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   //moved to general resolve
-			}
-			else{
-				String DrawBack = af.getMapParams().get("SubAbility");
-				Card card = sa.getSourceCard();
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, targetCard, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// **************************** Known Utility **************************************
@@ -1510,17 +1500,7 @@ public class AbilityFactory_ChangeZone {
 				AllZone.ComputerPlayer.shuffle();
 		}
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else{
-				String DrawBack = af.getMapParams().get("SubAbility");
-				Card card = sa.getSourceCard();
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 

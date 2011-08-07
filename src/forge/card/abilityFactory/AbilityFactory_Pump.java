@@ -695,18 +695,7 @@ public class AbilityFactory_Pump {
 	        }
 		}
 		
-		if (AF.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else{
-				Card first = tgtCards.get(0);
-	        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
-	                hostCard.getController(), hostCard.getController().getOpponent(),
-	                first.getController(), hostCard, first, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
         
     }
     
@@ -906,19 +895,7 @@ public class AbilityFactory_Pump {
 	        }
 		}
 		
-		if (AF.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else{
-				Card first = list.get(0);
-	        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
-	                hostCard.getController(), hostCard.getController().getOpponent(),
-	                first.getController(), hostCard, first, sa);
-			}
-		}
-        
+		AbilityFactory.resolveSubAbility(sa);    
     }
     
     private boolean pumpAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){

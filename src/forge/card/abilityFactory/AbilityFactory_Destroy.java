@@ -393,14 +393,7 @@ public class AbilityFactory_Destroy {
 			}
 		}
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-				abSub.resolve();
-			}
-			else
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, tgtCards.get(0), sa);
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// *********************************************************************************
@@ -646,13 +639,6 @@ public class AbilityFactory_Destroy {
 	 				card.addRemembered(list.get(i));
 	 	}
 		
-	 	if (af.hasSubAbility()){
-	 		Ability_Sub abSub = sa.getSubAbility();
-	 		if (abSub != null){
-	 		   abSub.resolve();
-	 		}
-	 		else
-	 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-	 	}
+	 	AbilityFactory.resolveSubAbility(sa);
      }
 }

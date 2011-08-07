@@ -385,18 +385,7 @@ public class AbilityFactory_PermanentState {
 			}
 		}
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-	        else{
-	        	Card c = tgtCards.get(0);
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
-	        }
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	public static void chooseUntapUpTo(AbilityFactory af, SpellAbility sa, HashMap<String,String> params){
@@ -784,18 +773,7 @@ public class AbilityFactory_PermanentState {
 				tgtC.tap();
 		}
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-	        else{
-	    		Card c = tgtCards.get(0);
-	    		String DrawBack = params.get("SubAbility");
-	    		if (af.hasSubAbility())
-	    			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
-	        }
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	// ****************************************
@@ -900,15 +878,7 @@ public class AbilityFactory_PermanentState {
 
 		for(int i = 0; i < list.size(); i++) list.get(i).untap();
 
-		if (af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) {
-				abSub.resolve();
-			}
-			else {
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	private static boolean untapAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1050,15 +1020,7 @@ public class AbilityFactory_PermanentState {
 
 		for(int i = 0; i < list.size(); i++) list.get(i).tap();
 
-		if (af.hasSubAbility()) {
-			Ability_Sub abSub = sa.getSubAbility();
-			if(abSub != null) {
-				abSub.resolve();
-			}
-			else {
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 
 	private static boolean tapAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
@@ -1409,18 +1371,7 @@ public class AbilityFactory_PermanentState {
 			}
 		}
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-	        else{
-	    		Card c = tgtCards.get(0);
-	    		String DrawBack = params.get("SubAbility");
-	    		if (af.hasSubAbility())
-	    			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
-	        }
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	//Phasing? Something else? Who knows!

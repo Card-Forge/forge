@@ -180,13 +180,6 @@ public class AbilityFactory_Combat {
 		// Expand Fog keyword here depending on what we need out of it.
 		AllZone.GameInfo.setPreventCombatDamageThisTurn(true);
 		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 }

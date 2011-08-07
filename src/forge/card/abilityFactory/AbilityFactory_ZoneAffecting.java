@@ -393,17 +393,7 @@ public class AbilityFactory_ZoneAffecting {
 				
 			}
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-	        else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
-	        }
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	//**********************************************************************
@@ -704,17 +694,7 @@ public class AbilityFactory_ZoneAffecting {
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.mill(numCards, destination);	
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	//////////////////////
@@ -955,17 +935,7 @@ public class AbilityFactory_ZoneAffecting {
 				}
 			}
 
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-				abSub.resolve();
-			}
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, null, sa);
-			}
-		}
+		AbilityFactory.resolveSubAbility(sa);
 	}
 	
 	private static String discardStackDescription(AbilityFactory af, SpellAbility sa){

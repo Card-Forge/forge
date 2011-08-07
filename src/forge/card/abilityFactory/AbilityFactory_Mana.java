@@ -468,18 +468,12 @@ public class AbilityFactory_Mana {
 	
 	public static void doDrawback(AbilityFactory af, Ability_Mana abMana, Card card){
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
 		
 		// if mana production has any type of SubAbility, undoable=false
 		if (af.hasSubAbility()){
 			abMana.setUndoable(false);
 			Ability_Sub abSub = abMana.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else{
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, abMana);
-			}
+			abSub.resolve();
 		}
 	}
 	

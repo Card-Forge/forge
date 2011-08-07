@@ -2859,6 +2859,7 @@ public class CardFactoryUtil {
 		return tot;
 	}
     
+	/*
     public static void doDrawBack(String DB, int nDB, Player cardController, Player Opp, Player TgtP, Card Src, Card TgtC, SpellAbility sa) {
         // Drawbacks may be any simple additional effect a spell or ability may have
         // not just the negative ones
@@ -3003,7 +3004,7 @@ public class CardFactoryUtil {
             }
         }//end MakeToken drawback
 
-    }
+    }*/
     
     public static int getNumberOfMostProminentCreatureType(CardList list, String type) {
         list = list.getType(type);
