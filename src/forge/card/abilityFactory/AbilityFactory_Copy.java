@@ -266,8 +266,8 @@ public class AbilityFactory_Copy {
 						copy.setName(c.getName());
 						copy.setImageName(c.getImageName());
 
-						copy.setOwner(c.getController());
-						copy.setController(c.getController());
+						copy.setOwner(sa.getActivatingPlayer());
+						copy.setController(sa.getActivatingPlayer());
 
 						copy.setManaCost(c.getManaCost());
 						copy.setColor(c.getColor());
