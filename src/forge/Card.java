@@ -279,6 +279,11 @@ public class Card extends MyObservable {
         return triggeringObjects.get(type);
     }
 
+    public boolean hasTriggeringObject(String type)
+    {
+        return triggeringObjects.containsKey(type);
+    }
+
     public void setAllTriggeringObjects(HashMap<String, Object> map)
     {
         triggeringObjects = map;
@@ -2923,6 +2928,9 @@ public class Card extends MyObservable {
              }
              else if(Property.startsWith("IsTriggered"))
              {
+                 if(!source.hasTriggeringObject(Property.substring(11)))
+                     return false;
+
                  Object TriggeredObject = source.getTriggeringObject(Property.substring(11));
                  if(!(TriggeredObject instanceof Card))
                      return false;
