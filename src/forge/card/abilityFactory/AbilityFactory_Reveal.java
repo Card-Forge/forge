@@ -159,9 +159,9 @@ public class AbilityFactory_Reveal {
 			return false;
 		
 		//currently to restrict everything except Mulch
-		if(!params.get("ChangeNum").equalsIgnoreCase("All")) return false;
+		String changeNum = params.get("ChangeNum");
+		if (changeNum != null && !changeNum.equalsIgnoreCase("All")) return false;
 		
-
 		double chance = .4;	// 40 percent chance with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
