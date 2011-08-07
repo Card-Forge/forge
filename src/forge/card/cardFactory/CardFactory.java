@@ -1021,7 +1021,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Oubliette")) {
             final SpellAbility enchantment = new Spell(card) {
@@ -1090,7 +1090,7 @@ public class CardFactory implements NewConstants {
             
             enchantment.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchantment));
         }//*************** END ************ END **************************
-
+		*/
 
         //*************** START *********** START **************************
         else if(cardName.equals("That Which Was Taken")) {
