@@ -311,7 +311,8 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Sherlock Holmes 3", "hard", "Mono G deck with Baru, Fist of Krosa and lots of great green creatures");
         addToDeckList("Silver Surfer 3", "hard", "BG deck with Hunted Wumpus and Iwamori of the Open Fist");
         addToDeckList("Silver Samurai 2", "medium", "Mono W Samurai deck");
-        addToDeckList("Spiderman 2", "medium", "W weenie deck with WoG, Armageddon and Mass Calcify");
+        addToDeckList("Spiderman 2", "medium", "Mono W weenie deck with WoG, Armageddon and Mass Calcify");
+        addToDeckList("Spiderman 3", "hard", "Mono W weenie deck with WoG, Armageddon, Honor of the Pure and Mass Calcify");
         addToDeckList("Spock 2", "medium", "G Elf singleton deck with several Winnower Patrol and Wolf-Skull Shaman");
 //        addToDeckList("Starfire 2", "medium", "Incarnations deck");
 //        addToDeckList("Starfire 3", "hard", "Incarnations deck");
