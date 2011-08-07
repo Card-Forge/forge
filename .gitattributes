@@ -17,6 +17,8 @@ build/manifest.forge -text
 /pom.xml svneol=native#text/xml
 res/AllTokens.txt -text svneol=native#text/plain
 res/PerSetTracking.py -text svneol=native#text/x-python
+res/blockdata/blocks.txt svneol=native#text/plain
+res/blockdata/setdata.txt svneol=native#text/plain
 res/booster-decks -text svneol=unset#unset
 res/boosterdata/10E.pack -text
 res/boosterdata/2ED.pack -text
