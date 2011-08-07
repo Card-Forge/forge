@@ -2404,6 +2404,13 @@ public class CardFactoryUtil {
         	}
         }
         
+        if(sq[0].contains("TopOfLibraryCMC")) {
+        	if(players.size() > 0) {
+        		CardList topcard = AllZoneUtil.getPlayerCardsInLibrary(players.get(0), 1);
+        		return doXMath(topcard.getTotalConvertedManaCost(), m, source);
+        	}
+        }
+        
         return doXMath(n, m, source);
     }
     
@@ -2527,6 +2534,13 @@ public class CardFactoryUtil {
         if(sq[0].contains("LowestLifeTotal")) {
             return Math.min(AllZone.HumanPlayer.getLife(), AllZone.ComputerPlayer.getLife());
         }
+        
+        // Count$TopOfLibraryCMC
+        if(sq[0].contains("TopOfLibraryCMC")) {
+        		CardList topcard = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer, 1);
+        		return doXMath(topcard.getTotalConvertedManaCost(), m, c);
+        }
+
         
         // Count$Chroma.<mana letter>
         if(sq[0].contains("Chroma")) return doXMath(
