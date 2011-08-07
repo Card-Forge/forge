@@ -2518,7 +2518,7 @@ public class CardFactoryUtil {
         
         // Count$TopOfLibraryCMC
         if(sq[0].contains("TopOfLibraryCMC")) {
-        		CardList topcard = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer, 1);
+        		CardList topcard = AllZoneUtil.getPlayerCardsInLibrary(cardController, 1);
         		return doXMath(topcard.getTotalConvertedManaCost(), m, c);
         }
 
