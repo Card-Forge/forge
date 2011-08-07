@@ -16,7 +16,6 @@ public class Combat {
 	private Set<Card> blocked = new HashSet<Card>();
 
 	private HashMap<Card, CardList> unblockedMap = new HashMap<Card, CardList>();
-	//private HashMap<Card, Integer> defendingFirstStrikeDamageMap = new HashMap<Card, Integer>();
 	private HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
 
 	// Defenders are the Defending Player + Each Planeswalker that player controls
@@ -47,7 +46,6 @@ public class Combat {
 
 		attackingDamage = 0;
 		defendingDamageMap.clear();
-		//defendingFirstStrikeDamageMap.clear();
 
 		attackingPlayer = null;
 		defendingPlayer = null;
@@ -131,18 +129,9 @@ public class Combat {
 		return defendingPlayer;
 	}
 
-	// relates to defending player damage
-	// public int getDefendingDamage() {return defendingDamage;}
-
 	public HashMap<Card, Integer> getDefendingDamageMap() {
 		return defendingDamageMap;
 	}
-	
-	/*
-	public HashMap<Card, Integer> getDefendingFirstStrikeDamageMap() {
-		return defendingFirstStrikeDamageMap;
-	}
-	*/
 	
 	public int getTotalDefendingDamage() {
 		int total = 0;
@@ -155,20 +144,6 @@ public class Combat {
 
 		return total;
 	}
-	
-	/*
-	public int getTotalFirstStrikeDefendingDamage() {
-		int total = 0;
-
-		Collection<Integer> c = defendingFirstStrikeDamageMap.values();
-
-		Iterator<Integer> itr = c.iterator();
-		while (itr.hasNext())
-			total += itr.next();
-
-		return total;
-	}
-	*/
 	
 	public void setDefendingDamage() {
 		defendingDamageMap.clear();
@@ -231,27 +206,6 @@ public class Combat {
 			defendingDamageMap.put(source, defendingDamageMap.get(source) + n);
 		}
 	}
-	
-	/*
-	public void addDefendingFirstStrikeDamage(int n, Card source) {
-		String slot = getDefenderByAttacker(source).toString();		
-		Object o = defenders.get(Integer.parseInt(slot));
-		
-		if (o instanceof Card){
-			Card pw = (Card)o;
-			pw.addAssignedDamage(n, source);
-			
-			return;
-		}
-		
-		if (!defendingFirstStrikeDamageMap.containsKey(source))
-			defendingFirstStrikeDamageMap.put(source, n);
-		else {
-			defendingFirstStrikeDamageMap.put(source,
-			defendingFirstStrikeDamageMap.get(source) + n);
-		}
-	}
-	*/
 
 	public void addAttackingDamage(int n) {
 		attackingDamage += n;
@@ -311,7 +265,6 @@ public class Combat {
 	public void addBlocker(Card attacker, Card blocker) {
 		blocked.add(attacker);
 		getList(attacker).add(blocker);
-		// CombatUtil.checkBlockedAttackers(attacker, blocker);
 	}
 
 	public void resetBlockers() {
@@ -327,7 +280,7 @@ public class Combat {
 		CardList block = new CardList();
 
 		for (int i = 0; i < att.size(); i++)
-			block.addAll(getBlockers(att.get(i)).toArray());
+			block.addAll(getBlockers(att.get(i)));
 
 		return block;
 	}// getAllBlockers()
@@ -336,7 +289,7 @@ public class Combat {
 		if (getList(attacker) == null)
 			return new CardList();
 		else
-			return new CardList(getList(attacker).toArray());
+			return new CardList(getList(attacker));
 	}
 	
 	public Card getAttackerBlockedBy(Card blocker) {
@@ -377,7 +330,7 @@ public class Combat {
 	public void verifyCreaturesInPlay() {
 		CardList all = new CardList();
 		all.addAll(getAttackers());
-		all.addAll(getAllBlockers().toArray());
+		all.addAll(getAllBlockers());
 
 		for (int i = 0; i < all.size(); i++)
 			if (!AllZoneUtil.isCardInPlay(all.get(i)))
@@ -398,7 +351,6 @@ public class Combat {
 				HashMap<String,Object> runParams = new HashMap<String,Object>();
 				runParams.put("Attacker", attacker);
 				AllZone.TriggerHandler.runTrigger("AttackerUnblocked", runParams);
-
 
 			}
 		}
@@ -448,33 +400,7 @@ public class Combat {
 		}// for
 		return needFirstStrike;
 	}// setAssignedFirstStrikeDamage()
-	
-	/*
-	private void distributeAIFirstStrikeDamage(Card attacker, CardList block, int damage) {
-
-		Card c = attacker;
-		for (Card b : block) {
-			if (b.getKillDamage() <= damage) {
-				damage -= b.getKillDamage();
-				CardList cl = new CardList();
-				cl.add(attacker);
-
-				b.addAssignedDamage(b.getKillDamage(), c);
-			}
-		}// for
-
-		// if attacker has no trample, and there's damage left, assign the rest
-		// to a random blocker
-		if (damage > 0 && !c.hasKeyword("Trample")) {
-			int index = CardUtil.getRandomIndex(block);
-			block.get(index).addAssignedDamage(damage, c);
-			damage = 0;
-		} else if (c.hasKeyword("Trample")) {
-			this.addDefendingDamage(damage, c);
-		}
-	}// setAssignedFirstStrikeDamage()
-	*/
-	
+		
 	// set Card.setAssignedDamage() for all creatures in combat
 	// also assigns player damage by setPlayerDamage()
 	public void setAssignedDamage() {
@@ -630,7 +556,7 @@ public class Combat {
             c.clearAssignedDamage();
         }
 
-        //This was deeper before,but that resulted in the stack entry acting like before.
+        //This was deeper before, but that resulted in the stack entry acting like before.
 
 	}
 	
