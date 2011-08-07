@@ -1103,8 +1103,17 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     	String t_computerSetupGraveyard = "";
     	String t_end = "";
     	
+    	String wd = System.getProperty("user.dir");
+    	JFileChooser fc = new JFileChooser(wd);
+    	int rc = fc.showDialog(null, "Select Battle Setup File");
+    	if (rc != JFileChooser.APPROVE_OPTION)
+    		return;
+    	
+    	//File file = fc.getSelectedFile();
+    	//filename = file.getAbsolutePath();
+    	
     	try {
-    		  FileInputStream fstream = new FileInputStream("dev_battle.txt");
+    		  FileInputStream fstream = new FileInputStream(fc.getSelectedFile().getAbsolutePath());
     		  DataInputStream in = new DataInputStream(fstream);
     		  BufferedReader br = new BufferedReader(new InputStreamReader(in));
     		  
@@ -1120,12 +1129,12 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     		      		  
     		  in.close();
     	} catch (Exception e) {
-    		  JOptionPane.showMessageDialog(null, "Error loading dev_battle.txt!\nError message: " + e.getMessage());
+    		  JOptionPane.showMessageDialog(null, "Error loading battle setup file!");
     		  return;
         }
 
    	    if ((t_end == null) || (!t_end.toLowerCase().equals("end"))) {
-			  JOptionPane.showMessageDialog(null, "Error loading dev_battle.txt!\nError message: Can't find an end marker in dev_battle.txt");
+			  JOptionPane.showMessageDialog(null, "Error loading battle setup file!\nCan't find an end marker in the chosen file.");
 			  return;
 		}
 
