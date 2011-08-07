@@ -1,7 +1,9 @@
-5
-6
-Forest; Forest; Forest; Llanowar Elves
-Mountain; Mountain; Mountain
-Island; Raging Goblin
-Swamp; Swamp; Forest
+HumanLife=5
+AILife=6
+HumanCardsInPlay=Forest; Forest; Forest; Llanowar Elves
+AICardsInPlay=Mountain; Mountain; Mountain
+HumanCardsInHand=Island; Raging Goblin
+AICardsInHand=Swamp; Swamp; Forest
+HumanCardsInGraveyard=NONE
+AICardsInGraveyard=NONE
 END

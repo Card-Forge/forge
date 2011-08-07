@@ -1086,6 +1086,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     	String t_computerSetupCardsInPlay = "";
     	String t_humanSetupCardsInHand = "";
     	String t_computerSetupCardsInHand = "";
+    	String t_humanSetupGraveyard = "";
+    	String t_computerSetupGraveyard = "";
     	String t_end = "";
     	
     	try {
@@ -1093,12 +1095,14 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     		  DataInputStream in = new DataInputStream(fstream);
     		  BufferedReader br = new BufferedReader(new InputStreamReader(in));
     		  
-    		  t_humanLife = br.readLine();
-    		  t_computerLife = br.readLine();
-    		  t_humanSetupCardsInPlay = br.readLine();
-    		  t_computerSetupCardsInPlay = br.readLine();
-    		  t_humanSetupCardsInHand = br.readLine();
-    		  t_computerSetupCardsInHand = br.readLine();
+    		  t_humanLife = br.readLine().split("=")[1];
+    		  t_computerLife = br.readLine().split("=")[1];
+    		  t_humanSetupCardsInPlay = br.readLine().split("=")[1];
+    		  t_computerSetupCardsInPlay = br.readLine().split("=")[1];
+    		  t_humanSetupCardsInHand = br.readLine().split("=")[1];
+    		  t_computerSetupCardsInHand = br.readLine().split("=")[1];
+    		  t_humanSetupGraveyard = br.readLine().split("=")[1];
+    		  t_computerSetupGraveyard = br.readLine().split("=")[1];
     		  t_end = br.readLine();
     		      		  
     		  in.close();
@@ -1119,13 +1123,17 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 		String computerSetupCardsInPlay[] = t_computerSetupCardsInPlay.split(";");
 		String humanSetupCardsInHand[] = t_humanSetupCardsInHand.split(";");
 		String computerSetupCardsInHand[] = t_computerSetupCardsInHand.split(";");
+		String humanSetupGraveyard[] = t_humanSetupGraveyard.split(";");
+		String computerSetupGraveyard[] = t_computerSetupGraveyard.split(";");
 		
 		CardList humanDevSetup = new CardList();
 		CardList computerDevSetup = new CardList();
 		CardList humanDevHandSetup = new CardList();
 		CardList computerDevHandSetup = new CardList();
+		CardList humanDevGraveyardSetup = new CardList();
+		CardList computerDevGraveyardSetup = new CardList();
 		
-		if (!t_humanSetupCardsInPlay.trim().equals("")) {
+		if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
 			for (int i = 0; i < humanSetupCardsInPlay.length; i ++) {
 				Card c = AllZone.CardFactory.getCard(humanSetupCardsInPlay[i].trim(), AllZone.HumanPlayer);
 				for(Trigger trig : c.getTriggers()) {
@@ -1139,7 +1147,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 			}
 		}
 
-		if (!t_humanSetupCardsInHand.trim().equals("")) {
+		if (!t_humanSetupCardsInHand.trim().toLowerCase().equals("none")) {
 			for (int i = 0; i < humanSetupCardsInHand.length; i ++) {
 				Card c = AllZone.CardFactory.getCard(humanSetupCardsInHand[i].trim(), AllZone.HumanPlayer);
 				for(Trigger trig : c.getTriggers()) {
@@ -1153,7 +1161,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 			}
 		}
 
-		if (!t_computerSetupCardsInPlay.trim().equals("")) {
+		if (!t_computerSetupCardsInPlay.trim().toLowerCase().equals("none")) {
 			for (int i = 0; i < computerSetupCardsInPlay.length; i ++) {
 				Card c = AllZone.CardFactory.getCard(computerSetupCardsInPlay[i].trim(), AllZone.ComputerPlayer);
 				
@@ -1167,7 +1175,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 			}
 		}
 
-		if (!t_computerSetupCardsInHand.trim().equals("")) {
+		if (!t_computerSetupCardsInHand.trim().toLowerCase().equals("none")) {
 			for (int i = 0; i < computerSetupCardsInHand.length; i ++) {
 				Card c = AllZone.CardFactory.getCard(computerSetupCardsInHand[i].trim(), AllZone.ComputerPlayer);
 			
@@ -1178,6 +1186,34 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 				}
 				
 				computerDevHandSetup.add(c);
+			}
+		}
+
+		if (!t_computerSetupGraveyard.trim().toLowerCase().equals("none")) {
+			for (int i = 0; i < computerSetupGraveyard.length; i ++) {
+				Card c = AllZone.CardFactory.getCard(computerSetupGraveyard[i].trim(), AllZone.ComputerPlayer);
+			
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+				
+				computerDevGraveyardSetup.add(c);
+			}
+		}
+
+		if (!t_humanSetupGraveyard.trim().toLowerCase().equals("none")) {
+			for (int i = 0; i < humanSetupGraveyard.length; i ++) {
+				Card c = AllZone.CardFactory.getCard(humanSetupGraveyard[i].trim(), AllZone.ComputerPlayer);
+			
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				for(Trigger trig : c.getTriggers()) {
+					AllZone.TriggerHandler.registerTrigger(trig);
+				}
+				
+				humanDevGraveyardSetup.add(c);
 			}
 		}
 
@@ -1194,6 +1230,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 			AllZone.GameAction.moveToPlay(c);
 			c.setSickness(false);
 		}
+		
+		for (Card c: humanDevGraveyardSetup)
+			AllZone.Human_Graveyard.add(c);
+		for (Card c: computerDevGraveyardSetup)
+			AllZone.Computer_Graveyard.add(c);
 		
 		if (computerDevHandSetup.size() > 0)
 			AllZone.Computer_Hand.setCards(computerDevHandSetup.toArray());
