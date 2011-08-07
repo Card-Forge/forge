@@ -177,7 +177,10 @@ public class CardFactory_Sorceries {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Do or Die")) {
-            final SpellAbility spell = new Spell(card) {
+        	// TODO: Please please please, someone fix this card
+        	Cost cost = new Cost("1 B", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt){
                 private static final long serialVersionUID = 8241241003478388362L;
                 
                 @Override
@@ -196,7 +199,6 @@ public class CardFactory_Sorceries {
                 }
             };//SpellAbility
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             
             card.setSVar("PlayMain1", "TRUE");
             
@@ -693,7 +695,9 @@ public class CardFactory_Sorceries {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cranial Extraction")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost("3 B", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt){
                 private static final long serialVersionUID = 8127696608769903507L;
                 
                 @Override
@@ -753,7 +757,6 @@ public class CardFactory_Sorceries {
             };//SpellAbility spell
             
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
@@ -1746,7 +1749,9 @@ public class CardFactory_Sorceries {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Mind Funeral")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost("1 U B", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt){
                 private static final long serialVersionUID = 42470566751344693L;
                 
                 @Override
@@ -1783,9 +1788,7 @@ public class CardFactory_Sorceries {
                     player.mill(total);
                 }
             };//SpellAbility
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            
+             
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
@@ -1794,7 +1797,9 @@ public class CardFactory_Sorceries {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Haunting Echoes")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost("3 B B", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt){
                 private static final long serialVersionUID = 42470566751344693L;
                 
                 @Override
@@ -1833,9 +1838,7 @@ public class CardFactory_Sorceries {
                     }
                 }
             };//SpellAbility
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            
+
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
@@ -1844,7 +1847,9 @@ public class CardFactory_Sorceries {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Lobotomy")) {
-            final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost("2 U B", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt){
                 private static final long serialVersionUID = 5338238621454661783L;
                 
                 @Override
@@ -1895,8 +1900,6 @@ public class CardFactory_Sorceries {
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************          
         
             
@@ -2028,7 +2031,9 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if (cardName.equals("Lavalanche"))
         {
-        	final SpellAbility spell = new Spell(card)
+        	Cost cost = new Cost("X B R G", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt)
         	{
         		private static final long serialVersionUID = 3571646571415945308L;
         		public void resolve()
@@ -2076,7 +2081,6 @@ public class CardFactory_Sorceries {
         	spell.setDescription("Lavalanche deals X damage to target player and each creature he or she controls.");
         	spell.setStackDescription("Lavalanche - deals X damage to target player and each creature he or she controls.");
         	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
 
         	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
         	card.clearFirstSpellAbility();
@@ -2285,7 +2289,9 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if (cardName.equals("Haunting Misery"))
         {
-        	final SpellAbility spell = new Spell(card){
+        	Cost cost = new Cost("1 B B", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt){
 				private static final long serialVersionUID = 6867051257656060195L;
 
 				@Override
@@ -2329,8 +2335,6 @@ public class CardFactory_Sorceries {
         			return (graveList.size() > 5 || graveList.size() > humanLife);
         		}
         	};
-        	
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         	
         	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
         	card.clearFirstSpellAbility();

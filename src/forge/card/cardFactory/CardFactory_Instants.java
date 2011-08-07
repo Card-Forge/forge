@@ -1123,7 +1123,9 @@ public class CardFactory_Instants {
         //*************** START *********** START **************************
         else if (cardName.equals("Suffer the Past"))
         {
-        	final SpellAbility spell = new Spell(card){
+        	Cost cost = new Cost("2 U B", cardName, false);
+        	Target tgt = new Target(card, "Select a Player", "Player");
+        	final SpellAbility spell = new Spell(card, cost, tgt){
 				private static final long serialVersionUID = 1168802375190293222L;
 				
 				@Override
@@ -1170,8 +1172,6 @@ public class CardFactory_Instants {
         			return (maxX >= 3) && (graveList.size() > 0);
         		}
         	};
-        	
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         	
         	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
         	card.clearFirstSpellAbility();
