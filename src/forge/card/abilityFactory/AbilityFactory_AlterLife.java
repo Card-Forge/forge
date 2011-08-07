@@ -2,6 +2,7 @@ package forge.card.abilityFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import forge.AllZone;
@@ -40,8 +41,8 @@ public class AbilityFactory_AlterLife {
 				return gainLifeStackDescription(af, this);
 			}
 
-			public boolean canPlayAI()
-			{
+			@Override
+			public boolean canPlayAI() {
 				return gainLifeCanPlayAI(af, this);
 			}
 			
@@ -71,8 +72,8 @@ public class AbilityFactory_AlterLife {
 				return gainLifeStackDescription(af, this);
 			}
 			
-			public boolean canPlayAI()
-			{
+			@Override
+			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
@@ -100,8 +101,8 @@ public class AbilityFactory_AlterLife {
 				return gainLifeStackDescription(af, this);
 			}
 			
-			public boolean canPlayAI()
-			{
+			@Override
+			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
@@ -309,8 +310,8 @@ public class AbilityFactory_AlterLife {
 				return loseLifeStackDescription(af, this);
 			}
 
-			public boolean canPlayAI()
-			{
+			@Override
+			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
@@ -342,8 +343,8 @@ public class AbilityFactory_AlterLife {
 				return loseLifeStackDescription(af, this);
 			}
 			
-			public boolean canPlayAI()
-			{
+			@Override
+			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
@@ -370,8 +371,8 @@ public class AbilityFactory_AlterLife {
 				return loseLifeStackDescription(af, this);
 			}
 			
-			public boolean canPlayAI()
-			{
+			@Override
+			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
@@ -574,12 +575,10 @@ public class AbilityFactory_AlterLife {
 	//
 	// Made more sense here than in AF_Counters since it affects players and their health
 	
-	public static SpellAbility createAbilityPoison(final AbilityFactory AF){
+	public static SpellAbility createAbilityPoison(final AbilityFactory af){
 
-		final SpellAbility abPoison = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+		final SpellAbility abPoison = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()){
 			private static final long serialVersionUID = 6598936088284756268L;
-			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -587,20 +586,14 @@ public class AbilityFactory_AlterLife {
 				return poisonStackDescription(af, this);
 			}
 			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
-			public boolean canPlayAI()
-			{
-				return poisonCanPlayAI(af, this, params.get("Num"));
+			@Override
+			public boolean canPlayAI() {
+				return poisonCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), this);
-				poisonResolve(af, this, amount);
+				poisonResolve(af, this);
 			}
 
 			@Override
@@ -612,61 +605,52 @@ public class AbilityFactory_AlterLife {
 		return abPoison;
 	}
 	
-	public static SpellAbility createSpellPoison(final AbilityFactory AF){
-		final SpellAbility spPoison = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+	public static SpellAbility createSpellPoison(final AbilityFactory af){
+		final SpellAbility spPoison = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()){
 			private static final long serialVersionUID = -1495708415138457833L;
-			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
 				return poisonStackDescription(af, this);
 			}
 			
-			public boolean canPlay(){
-				return super.canPlay();	
-			}
-			
+			@Override
 			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return poisonCanPlayAI(af, this, params.get("Num"));
+				return poisonCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), this);
-				poisonResolve(af, this, amount);
+				poisonResolve(af, this);
 			}
 			
 		};
 		return spPoison;
 	}
 	
-	public static SpellAbility createDrawbackPoison(final AbilityFactory AF){
-		final SpellAbility dbPoison = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+	public static SpellAbility createDrawbackPoison(final AbilityFactory af){
+		final SpellAbility dbPoison = new Ability_Sub(af.getHostCard(), af.getAbTgt()){
 			private static final long serialVersionUID = -1173479041548558016L;
-			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
 				return poisonStackDescription(af, this);
 			}
 			
-			public boolean canPlayAI()
-			{
+			@Override
+			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return poisonCanPlayAI(af, this, params.get("Num"));
+				return poisonCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), this);
-				poisonResolve(af, this, amount);
+				poisonResolve(af, this);
 			}
 
 			@Override
@@ -683,7 +667,7 @@ public class AbilityFactory_AlterLife {
 		return dbPoison;
 	}
 	
-	public static boolean poisonDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+	private static boolean poisonDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
 			return false;
 
@@ -707,7 +691,9 @@ public class AbilityFactory_AlterLife {
 		return true;
 	}
 	
-	private static void poisonResolve(final AbilityFactory af, final SpellAbility sa, int num){
+	private static void poisonResolve(final AbilityFactory af, final SpellAbility sa){
+		final HashMap<String,String> params = af.getMapParams();
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -719,7 +705,7 @@ public class AbilityFactory_AlterLife {
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
-				p.addPoisonCounters(num);
+				p.addPoisonCounters(amount);
 	}
 	
 	private static String poisonStackDescription(AbilityFactory af, SpellAbility sa){
@@ -727,7 +713,7 @@ public class AbilityFactory_AlterLife {
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("Num"), sa);
 
 		if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" - ");
+			sb.append(sa.getSourceCard()).append(" - ");
 		else
 			sb.append(" ");
 		
@@ -743,10 +729,19 @@ public class AbilityFactory_AlterLife {
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		
-		for(Player player : tgtPlayers)
-			sb.append(player).append(" ");
+		if(tgtPlayers.size() > 0) {
+			Iterator<Player> it = tgtPlayers.iterator();
+			while(it.hasNext()) {
+				Player p = it.next();
+				sb.append(p);
+				if(it.hasNext()) sb.append(", ");
+				else sb.append(" ");
+			}
+		}
 		
-		sb.append("gets ").append(amount).append(" poison counter");
+		sb.append("get");
+		if(tgtPlayers.size() < 2) sb.append("s");
+		sb.append(" ").append(amount).append(" poison counter");
 		if(amount != 1) sb.append("s.");
 		else sb.append(".");
 
@@ -758,7 +753,7 @@ public class AbilityFactory_AlterLife {
 		return sb.toString();
 	}
 	
-	private static boolean poisonCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
+	private static boolean poisonCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		Cost abCost = sa.getPayCosts();
 		final Card source = af.getHostCard();
 		HashMap<String,String> params = af.getMapParams();
@@ -766,6 +761,7 @@ public class AbilityFactory_AlterLife {
 		//int humanLife = AllZone.HumanPlayer.getLife();
 		//int aiPoison = AllZone.ComputerPlayer.getPoisonCounters();
 		int aiLife = AllZone.ComputerPlayer.getLife();
+		String amountStr = params.get("Num");
 
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		//final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
@@ -812,16 +808,16 @@ public class AbilityFactory_AlterLife {
 	// ************************** SET LIFE *************************************
 	// *************************************************************************
 
-	public static SpellAbility createAbilitySetLife(final AbilityFactory AF) {
-		final SpellAbility abSetLife = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+	public static SpellAbility createAbilitySetLife(final AbilityFactory af) {
+		final SpellAbility abSetLife = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = -7375434097541097668L;
-			final AbilityFactory af = AF;
 
 			@Override
 			public String getStackDescription() {
 				return setLifeStackDescription(af, this);
 			}
 
+			@Override
 			public boolean canPlayAI() {
 				return setLifeCanPlayAI(af, this);
 			}
@@ -840,10 +836,9 @@ public class AbilityFactory_AlterLife {
 		return abSetLife;
 	}
 
-	public static SpellAbility createSpellSetLife(final AbilityFactory AF) {
-		final SpellAbility spSetLife = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+	public static SpellAbility createSpellSetLife(final AbilityFactory af) {
+		final SpellAbility spSetLife = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = -94657822256270222L;
-			final AbilityFactory af = AF;
 
 			@Override
 			public String getStackDescription() {
@@ -866,16 +861,16 @@ public class AbilityFactory_AlterLife {
 		return spSetLife;
 	}
 
-	public static SpellAbility createDrawbackSetLife(final AbilityFactory AF) {
-		final SpellAbility dbSetLife = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+	public static SpellAbility createDrawbackSetLife(final AbilityFactory af) {
+		final SpellAbility dbSetLife = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
 			private static final long serialVersionUID = -7634729949893534023L;
-			final AbilityFactory af = AF;
 
 			@Override
 			public String getStackDescription() {
 				return setLifeStackDescription(af, this);
 			}
 
+			@Override
 			public boolean canPlayAI() {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
@@ -907,7 +902,7 @@ public class AbilityFactory_AlterLife {
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
 
 		if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" -");
+			sb.append(sa.getSourceCard()).append(" -");
 		else
 			sb.append(" ");
 		
