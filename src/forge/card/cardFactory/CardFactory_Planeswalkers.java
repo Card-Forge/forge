@@ -138,7 +138,8 @@ class CardFactory_Planeswalkers {
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isEmblem() && c.getKeyword().contains("Artifacts, creatures, enchantments, and lands you control are indestructible.");
+                    		return c.isEmblem() 
+                    				&& c.hasKeyword("Artifacts, creatures, enchantments, and lands you control are indestructible.");
                     	}
                     });
                 	return list.size() == 0 && card.getCounters(Counters.LOYALTY) > 8;
@@ -1381,7 +1382,8 @@ class CardFactory_Planeswalkers {
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isEmblem() && c.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
+                    		return c.isEmblem() 
+                    				&& c.hasKeyword("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
                     	}
                     });
                 	return list.size() == 0 && card.getCounters(Counters.LOYALTY) > 5;
@@ -1452,7 +1454,8 @@ class CardFactory_Planeswalkers {
                 	{
                 		public boolean addCard(Card crd)
                 		{
-                			return crd.isEmblem() && crd.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
+                			return crd.isEmblem() 
+                					&& crd.hasKeyword("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
                 		}
                 	});
                 	
@@ -1571,9 +1574,11 @@ class CardFactory_Planeswalkers {
                 		{
                 			public boolean addCard(Card c)
                 			{
-                				return c.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.") ||
-                					   c.getName().equals("Venerated Teacher") || c.getName().equals("Stoneforge Mystic") || c.getName().equals("Sun Titan") ||
-                					   c.getType().contains("Ally");
+                				return c.hasKeyword("When CARDNAME enters the battlefield, draw a card.") 
+                						|| c.getName().equals("Venerated Teacher") 
+                						|| c.getName().equals("Stoneforge Mystic") 
+                						|| c.getName().equals("Sun Titan") 
+                						|| c.getType().contains("Ally");
                 			}
                 		});
                 		
@@ -1669,7 +1674,8 @@ class CardFactory_Planeswalkers {
                     {
                     	public boolean addCard(Card crd)
                     	{
-                    		return crd.isEmblem() && crd.getKeyword().contains("Whenever you cast a spell, exile target permanent.");
+                    		return crd.isEmblem() 
+                    				&& crd.hasKeyword("Whenever you cast a spell, exile target permanent.");
                     	}
                     });
                 	
@@ -1682,7 +1688,10 @@ class CardFactory_Planeswalkers {
                     	}
                     });
                     
-                    return list.size() >= 1 && card.getCounters(Counters.LOYALTY) > 2 && creatList.size() >= 3 && AllZone.Phase.getPhase().equals("Main1");
+                    return list.size() >= 1 
+                    		&& card.getCounters(Counters.LOYALTY) > 2 
+                    		&& creatList.size() >= 3 
+                    		&& AllZone.Phase.getPhase().equals("Main1");
                     
                 }
             };//SpellAbility ability2
@@ -1725,7 +1734,8 @@ class CardFactory_Planeswalkers {
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isEmblem() && c.getKeyword().contains("Whenever you cast a spell, exile target permanent.");
+                    		return c.isEmblem() 
+                    				&& c.hasKeyword("Whenever you cast a spell, exile target permanent.");
                     	}
                     });
                     */
