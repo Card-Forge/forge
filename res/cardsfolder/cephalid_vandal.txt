@@ -10,4 +10,5 @@ SVar:X:Count$CardCounters.SHRED
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_vandal.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/31.jpg
 End

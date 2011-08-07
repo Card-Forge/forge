@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_snitch.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/30.jpg
 End

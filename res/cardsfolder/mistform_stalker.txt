@@ -10,4 +10,5 @@ A:AB$ Pump | Cost$ 2 U U | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Flying 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_stalker.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/98.jpg
 End

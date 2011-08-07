@@ -10,4 +10,5 @@ K:Morph:3 U U
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_shrieker.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/96.jpg
 End

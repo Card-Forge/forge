@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | NumAtt$ -1 | IsCurse$ True | TgtPro
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghosts_of_the_damned.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/12.jpg
 End

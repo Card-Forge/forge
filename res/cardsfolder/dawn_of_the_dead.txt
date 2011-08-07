@@ -10,4 +10,5 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste & HIDDEN At the beginning o
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_of_the_dead.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/59.jpg
 End
