@@ -63,11 +63,12 @@ public class AbilityFactory_Pump {
 			Keywords.add("none");
 	}
 	
-	public SpellAbility getSpell()
+	public SpellAbility getSpellPump()
 	{
         SpellAbility spPump = new Spell(hostCard, AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = 42244224L;
-                        
+            
+            @Override
             public boolean canPlayAI() {
             	return pumpPlayAI(this);
             }
@@ -77,15 +78,16 @@ public class AbilityFactory_Pump {
 				return pumpStackDescription(AF, this);
 			}
             
+			@Override
             public void resolve() {
-            	doResolve(this);
+            	pumpResolve(this);
             }//resolve
         };//SpellAbility
         
         return spPump;
 	}
 
-	public SpellAbility getAbility()
+	public SpellAbility getAbilityPump()
 	{
         final SpellAbility abPump = new Ability_Activated(hostCard, AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = -1118592153328758083L;
@@ -102,7 +104,7 @@ public class AbilityFactory_Pump {
             
             @Override
             public void resolve() {
-                doResolve(this);
+                pumpResolve(this);
                 
                 hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
             }//resolve()
@@ -118,11 +120,12 @@ public class AbilityFactory_Pump {
         return abPump;
 	}
 	
-	public SpellAbility getDrawback()
+	public SpellAbility getDrawbackPump()
 	{
         SpellAbility dbPump = new Ability_Sub(hostCard, AF.getAbTgt()) {
             private static final long serialVersionUID = 42244224L;
-                        
+
+            @Override
             public boolean canPlayAI() {
             	return pumpPlayAI(this);
             }
@@ -132,13 +135,14 @@ public class AbilityFactory_Pump {
 				return pumpStackDescription(AF, this);
 			}
             
+			@Override
             public void resolve() {
-            	doResolve(this);
+            	pumpResolve(this);
             }//resolve
 
 			@Override
 			public boolean chkAI_Drawback() {
-				return doDrawbackAI(this);
+				return pumpDrawbackAI(this);
 			}
 
 			@Override
@@ -222,7 +226,7 @@ public class AbilityFactory_Pump {
             }
         });
         return list;
-    }
+    }//getPumpCreatures()
     
     private CardList getCurseCreatures(SpellAbility sa, final int defense, int attack)
     {
@@ -255,7 +259,7 @@ public class AbilityFactory_Pump {
     	
     	
     	return list;
-    }
+    }//getCurseCreatures()
     
     private boolean pumpPlayAI(SpellAbility sa){
     	// if there is no target and host card isn't in play, don't activate
@@ -368,12 +372,12 @@ public class AbilityFactory_Pump {
 			}
         }
         else
-        	return doTgtAI(sa, defense, attack, false);
+        	return pumpTgtAI(sa, defense, attack, false);
         
         return false;
-    }
+    }//pumpPlayAI()
 
-    private boolean doTgtAI(SpellAbility sa, int defense, int attack, boolean mandatory)
+    private boolean pumpTgtAI(SpellAbility sa, int defense, int attack, boolean mandatory)
     {
         if(!mandatory && AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility) && !(AF.isCurse() && defense < 0))
         	return false;
@@ -438,7 +442,7 @@ public class AbilityFactory_Pump {
 		}
         
         return true;
-    }
+    }//pumpTgtAI()
     
     private boolean pumpMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
     	CardList list = AllZoneUtil.getCardsInPlay();
@@ -503,7 +507,7 @@ public class AbilityFactory_Pump {
     	}
     	
     	return true;
-    }
+    }//pumpMandatoryTarget()
     
     
     private boolean pumpTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
@@ -543,13 +547,13 @@ public class AbilityFactory_Pump {
     			return true;
     	}
     	else{
-    		return doTgtAI(sa, defense, attack, mandatory);
+    		return pumpTgtAI(sa, defense, attack, mandatory);
     	}
     	
     	return true;
-    }
+    }//pumpTriggerAI
     
-    private boolean doDrawbackAI(SpellAbility sa)
+    private boolean pumpDrawbackAI(SpellAbility sa)
     {
     	Card source = sa.getSourceCard();
     	int defense;
@@ -575,10 +579,10 @@ public class AbilityFactory_Pump {
     		 }
     	 }
     	 else
-    		 return doTgtAI(sa, defense, attack, false);
+    		 return pumpTgtAI(sa, defense, attack, false);
     	 
     	return true; 
-    }
+    }//pumpDrawbackAI()
     	
     private String pumpStackDescription(AbilityFactory af, SpellAbility sa){
 		// when damageStackDescription is called, just build exactly what is happening
@@ -633,9 +637,9 @@ public class AbilityFactory_Pump {
 		 }
 		 
 		 return sb.toString();
-    }
+    }//pumpStackDescription()
     
-    private void doResolve(SpellAbility sa)
+    private void pumpResolve(SpellAbility sa)
     {
 		ArrayList<Card> tgtCards;
 		Target tgt = AF.getAbTgt();
@@ -694,7 +698,7 @@ public class AbilityFactory_Pump {
 		        else AllZone.EndOfTurn.addUntil(untilEOT);
 	        }
 		}
-    }
+    }//pumpResolve()
     
     
     /////////////////////////////////////
@@ -703,7 +707,7 @@ public class AbilityFactory_Pump {
     //
     //////////////////////////////////////
     
-    public SpellAbility getPumpAllAbility() {
+    public SpellAbility getAbilityPumpAll() {
         final SpellAbility abPumpAll = new Ability_Activated(hostCard, AF.getAbCost(), AF.getAbTgt()) {
 			private static final long serialVersionUID = -8299417521903307630L;
 
@@ -719,7 +723,7 @@ public class AbilityFactory_Pump {
             
             @Override
             public void resolve() {
-                doPumpAllResolve(this);
+                pumpAllResolve(this);
                 hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
             }//resolve()
 
@@ -734,7 +738,7 @@ public class AbilityFactory_Pump {
         return abPumpAll;
 	}
     
-    public SpellAbility getPumpAllSpell() {
+    public SpellAbility getSpellPumpAll() {
     	SpellAbility spPumpAll = new Spell(hostCard, AF.getAbCost(), AF.getAbTgt()) {
     		private static final long serialVersionUID = -4055467978660824703L;
 
@@ -748,14 +752,14 @@ public class AbilityFactory_Pump {
 			}
 
     		public void resolve() {
-    			doPumpAllResolve(this);
+    			pumpAllResolve(this);
     		}//resolve
     	};//SpellAbility
 
     	return spPumpAll;
     }
     
-    public SpellAbility getPumpAllDrawback() {
+    public SpellAbility getDrawbackPumpAll() {
         SpellAbility dbPumpAll = new Ability_Sub(hostCard, AF.getAbTgt()) {
 			private static final long serialVersionUID = 6411531984691660342L;
 
@@ -764,13 +768,14 @@ public class AbilityFactory_Pump {
 				return pumpAllStackDescription(AF, this);
 			}
             
+			@Override
             public void resolve() {
-            	doPumpAllResolve(this);
+            	pumpAllResolve(this);
             }//resolve
 
 			@Override
 			public boolean chkAI_Drawback() {
-				return chkPumpAllDrawbackAI(this);
+				return pumpAllChkDrawbackAI(this);
 			}
 
 			@Override
@@ -838,9 +843,9 @@ public class AbilityFactory_Pump {
     		return false;
     	
     	return (r.nextFloat() < .6667) && chance;
-    }
+    }//pumpAllCanPlayAI()
     
-    private void doPumpAllResolve(SpellAbility sa) {
+    private void pumpAllResolve(SpellAbility sa) {
     	String valid = "";
 
 		if(params.containsKey("ValidCards")) 
@@ -891,9 +896,9 @@ public class AbilityFactory_Pump {
 		        AllZone.EndOfTurn.addUntil(untilEOT);
 	        }
 		}   
-    }
+    }//pumpAllResolve()
     
-    private boolean pumpAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+    private boolean pumpAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
@@ -902,11 +907,11 @@ public class AbilityFactory_Pump {
     	return true;
     }
 
-    private boolean chkPumpAllDrawbackAI(SpellAbility sa) {
+    private boolean pumpAllChkDrawbackAI(SpellAbility sa) {
     	return true;
     }
     
-    private String pumpAllStackDescription(AbilityFactory af, SpellAbility sa){
+    private String pumpAllStackDescription(AbilityFactory af, SpellAbility sa) {
     	StringBuilder sb = new StringBuilder();
 
     	String desc = "";
@@ -916,15 +921,9 @@ public class AbilityFactory_Pump {
     	else if(params.containsKey("PumpAllDescription")) {
     		desc = params.get("PumpAllDescription");
     	}
-
-    	/*
-    	if (sa instanceof Ability_Sub)
-    		sb.append(" ").append(desc);
-    	sb.append(name).append(" -");
-    	*/
     	
     	if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" - ");
+			sb.append(sa.getSourceCard()).append(" - ");
 		else
 			sb.append(" ");
     	sb.append(desc);
@@ -936,5 +935,6 @@ public class AbilityFactory_Pump {
     	}
 
     	return sb.toString();
-    }
-}
+    }//pumpAllStackDescription()
+    
+}//end class AbilityFactory_Pump

@@ -307,11 +307,11 @@ public class AbilityFactory {
 			AbilityFactory_Pump afPump = new AbilityFactory_Pump(this);
 			
 			if (isAb)
-				SA = afPump.getAbility();
+				SA = afPump.getAbilityPump();
 			else if (isSp)
-				SA = afPump.getSpell();
+				SA = afPump.getSpellPump();
 			else if (isDb)
-				SA = afPump.getDrawback();
+				SA = afPump.getDrawbackPump();
 			
 			if (isAb || isSp)
 				hostCard.setSVar("PlayMain1", "TRUE");
@@ -321,11 +321,11 @@ public class AbilityFactory {
 			AbilityFactory_Pump afPump = new AbilityFactory_Pump(this);
 			
 			if (isAb)
-				SA = afPump.getPumpAllAbility();
+				SA = afPump.getAbilityPumpAll();
 			else if (isSp)
-				SA = afPump.getPumpAllSpell();
+				SA = afPump.getSpellPumpAll();
 			else if (isDb)
-				SA = afPump.getPumpAllDrawback();
+				SA = afPump.getDrawbackPumpAll();
 			
 			if (isAb || isSp)
 				hostCard.setSVar("PlayMain1", "TRUE");
@@ -1301,7 +1301,7 @@ public class AbilityFactory {
 		{
 			host.clearRemembered();
 		}
-		else if(params.containsKey("Unimprint")) {
+		if(params.containsKey("Unimprint")) {
 			host.clearImprinted();
 		}
 		
@@ -1313,7 +1313,7 @@ public class AbilityFactory {
 				host.addRemembered(o);
 			}
 		}
-		else if(params.containsKey("Imprint")) {
+		if(params.containsKey("Imprint")) {
 			ArrayList<Card> tgts = (tgt == null) ? new ArrayList<Card>() : tgt.getTargetCards();
 			host.addImprinted(tgts);
 		}
