@@ -6550,6 +6550,7 @@ res/cardsfolder/soul_net.txt -text svneol=native#text/plain
 res/cardsfolder/soul_of_magma.txt -text svneol=native#text/plain
 res/cardsfolder/soul_parry.txt -text svneol=native#text/plain
 res/cardsfolder/soul_rend.txt svneol=native#text/plain
+res/cardsfolder/soul_scourge.txt -text svneol=native#text/plain
 res/cardsfolder/soul_shepherd.txt svneol=native#text/plain
 res/cardsfolder/soul_shred.txt -text svneol=native#text/plain
 res/cardsfolder/soul_snuffers.txt -text svneol=native#text/plain
