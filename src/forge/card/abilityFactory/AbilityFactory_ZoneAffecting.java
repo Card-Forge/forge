@@ -1042,7 +1042,7 @@ public class AbilityFactory_ZoneAffecting {
 			}
 		}
 		
-		if(!params.get("Mode").equals("Hand")) {
+		if(!params.get("Mode").equals("Hand") && !params.get("Mode").equals("RevealDiscardAll")) {
 			if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
 				// Set PayX here to maximum value.
 				int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), 
