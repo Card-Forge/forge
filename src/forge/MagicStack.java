@@ -582,7 +582,7 @@ public class MagicStack extends MyObservable {
 					Card revealed = AllZone.Human_Library.get(0);
 
 					revealMsg.append(revealed.getName());
-					if(!revealed.isType("Creature"))
+					if (!revealed.isCreature())
 					{
 						revealMsg.append("\n\rPut it on the bottom of your library?");
 						if(GameActionUtil.showYesNoDialog(lurkingPredators.get(i), revealMsg.toString()))
@@ -611,7 +611,7 @@ public class MagicStack extends MyObservable {
 					}
 					Card revealed = AllZone.Computer_Library.get(0);
 					revealMsg.append(revealed.getName());
-					if(!revealed.isType("Creature"))
+					if (!revealed.isCreature())
 					{
 						GameActionUtil.showInfoDialg(revealMsg.toString());
 						if(lurkingPredators.size() > i)

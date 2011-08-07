@@ -545,7 +545,7 @@ public class GameActionUtil {
 		final int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
 		list = list.getName("Dovescape");
 		final CardList cl = list;
-		if (!c.isType("Creature") 
+		if (!c.isCreature() 
 				&& list.size() > 0) {
 			final Card card = list.get(0);
 
@@ -3655,7 +3655,7 @@ public class GameActionUtil {
                                for (int i = 0; i < max; i++) {
                                    Card c = libraryList.get(i);
                                    cardsToReveal.add(c);
-                                   if (c.isType("Creature")) {
+                                   if (c.isCreature()) {
                                        AllZone.GameAction.moveTo(battlefield, c);
                                        break;   
                                    } 

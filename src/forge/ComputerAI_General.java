@@ -85,13 +85,13 @@ public class ComputerAI_General implements Computer {
     				CardList creatures = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
     				CardList creatures2 = new CardList();
     				for (int i = 0; i < creatures.size(); i++) {
-    					if (creatures.get(i).isType("Creature") 
+    					if (creatures.get(i).isCreature() 
     							&& CardUtil.getConvertedManaCost(creatures.get(i).getManaCost()) <= 3) {
     						creatures2.add(creatures.get(i));
     					}
     				}
     				if (creatures2.size() + Phase.ComputerCreatureSpellCount > 1 
-    						&& c.isType("Creature") 
+    						&& c.isCreature() 
     						&& CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
     			} // AI Improvement for Vengevine
     			// Beached As End

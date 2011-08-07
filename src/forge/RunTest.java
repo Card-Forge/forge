@@ -20,7 +20,7 @@ public class RunTest
 	    check("1", c.getOwner().isComputer());
 	    check("1.1", c.getName().equals("Elvish Warrior"));
 	    check("2", c.getManaCost().equals("G G"));
-	    check("2.1", c.isType("Creature"));
+	    check("2.1", c.isCreature());
 	    check("2.2", c.isType("Elf"));
 	    check("2.3", c.isType("Warrior"));
 	    check("3", c.getText().equals(""));

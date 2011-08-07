@@ -211,7 +211,8 @@ public class GameAction {
 		c = moveTo(grave, c);
 		
 		//Recover keyword
-		if(c.isType("Creature") && origZone.is(Constant.Zone.Battlefield))
+		if (c.isCreature() 
+				&& origZone.is(Constant.Zone.Battlefield))
 		{
 			for(final Card recoverable : AllZoneUtil.getPlayerGraveyard(c.getOwner()))
 		    {
@@ -539,7 +540,7 @@ public class GameAction {
         				if (!AllZoneUtil.isCardInPlay(perm)
         						|| CardFactoryUtil.hasProtectionFrom(c, perm)
         						|| ((c.hasKeyword("Enchant creature") || c.hasKeyword("Enchant tapped creature") ) 
-        								&& !perm.isType("Creature"))
+        								&& !perm.isCreature())
         								|| (c.hasKeyword("Enchant tapped creature") && perm.isUntapped() ) ) {
         					c.unEnchantCard(perm);
         					//changed from destroy (and rules-wise, I don't think it's a sacrifice)

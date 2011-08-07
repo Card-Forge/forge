@@ -190,11 +190,11 @@ public class AIPlayer extends Player{
                 });
                 
                 bottom = bl.size() > 5; // if control more than 5 Basic land, probably don't need more
-            } else if (topN.get(i).isType("Creature")) {
+            } else if (topN.get(i).isCreature()) {
                 CardList cl = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 cl = cl.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        if (c.isType("Creature")) return true;
+                        if (c.isCreature()) return true;
                         
                         return false;
                     }

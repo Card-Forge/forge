@@ -1585,7 +1585,7 @@ public class CombatUtil {
                     cl.add(lib.get(0));
                     GuiUtils.getChoiceOptional("Top card", cl.toArray());
 	                Card top = lib.get(0);
-	                if (top.isType("Creature")) {
+	                if (top.isCreature()) {
 	                    player.gainLife(top.getBaseDefense(), c);
 	                    player.loseLife(top.getBaseAttack(), c);
 	

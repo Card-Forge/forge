@@ -138,27 +138,27 @@ public class CardFactory implements NewConstants {
     
     final public Card dynamicCopyCard(Card in)
     {
-    	if(in.isType("Creature")) {
+    	if (in.isCreature()) {
             Card card2 = new Card();
             card2 = CardFactory_Creatures.getCard(in, in.getName(), in.getOwner(), this);
             
             return card2;
-        } else if(in.isAura()) {
+        } else if (in.isAura()) {
             Card card2 = new Card();
             card2 = CardFactory_Auras.getCard(in, in.getName(), in.getOwner());
             
             return card2;
-        } else if(in.isType("Equipment")) {
+        } else if (in.isType("Equipment")) {
             Card card2 = new Card();
             card2 = CardFactory_Equipment.getCard(in, in.getName(), in.getOwner());
             
             return card2;
-        } else if(in.isType("Planeswalker")) {
+        } else if (in.isType("Planeswalker")) {
             Card card2 = new Card();
             card2 = CardFactory_Planeswalkers.getCard(in, in.getName(), in.getOwner());
             
             return card2;
-        } else if(in.isType("Land")) {
+        } else if (in.isType("Land")) {
             Card card2 = new Card();
             card2 = CardFactory_Lands.getCard(in, in.getName(), in.getOwner());
             
@@ -429,7 +429,7 @@ public class CardFactory implements NewConstants {
         	Command sunburstCIP = new Command() {
 				private static final long serialVersionUID = 1489845860231758299L;
 				public void execute() {
-					if(card.isType("Creature")) {
+					if (card.isCreature()) {
 						card.addCounter(Counters.P1P1, card.getSunburstValue());
 					}						
 					else {
@@ -818,15 +818,15 @@ public class CardFactory implements NewConstants {
         //******************************************************************
         //************** Link to different CardFactories ******************* 
         Card card2 = null;
-        if(card.isType("Creature")) {
+        if (card.isCreature()) {
             card2 = CardFactory_Creatures.getCard(card, cardName, owner, this);
-        } else if(card.isAura()) {
+        } else if (card.isAura()) {
             card2 = CardFactory_Auras.getCard(card, cardName, owner);
-        } else if(card.isType("Equipment")) {
+        } else if (card.isType("Equipment")) {
             card2 = CardFactory_Equipment.getCard(card, cardName, owner);
-        } else if(card.isType("Planeswalker")) {
+        } else if (card.isType("Planeswalker")) {
             card2 = CardFactory_Planeswalkers.getCard(card, cardName, owner);
-        } else if(card.isType("Land")) {
+        } else if (card.isType("Land")) {
             card2 = CardFactory_Lands.getCard(card, cardName, owner);
         } else if (card.isType("Instant")) {
         	card2 = CardFactory_Instants.getCard(card, cardName, owner);
@@ -1431,22 +1431,22 @@ public class CardFactory implements NewConstants {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Aluren")) {
+        else if (cardName.equals("Aluren")) {
             final Ability ability1 = new Ability(card, "0") {
                 @Override
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
                     
-                    if(hand.size() == 0) return;
+                    if (hand.size() == 0) return;
                     
                     CardList creatures = new CardList();
                     
-                    for(int i = 0; i < hand.size(); i++) {
-                        if (hand.get(i).isType("Creature")
+                    for (int i = 0; i < hand.size(); i++) {
+                        if (hand.get(i).isCreature()
                                 && CardUtil.getConvertedManaCost(hand.get(i).getManaCost()) <= 3) creatures.add(hand.get(i));
                     }
                     
-                    if(creatures.size() == 0) return;
+                    if (creatures.size() == 0) return;
                     
 
                     Object o = GuiUtils.getChoiceOptional("Select target creature to play",

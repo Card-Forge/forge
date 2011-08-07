@@ -210,7 +210,7 @@ public class Spell_Permanent extends Spell {
         	if(list.size() > 0) return false;
         }
         
-        if (card.isType("Creature") 
+        if (card.isCreature() 
         		&& card.getNetDefense() <= 0 
         		&& !card.hasStartOfKeyword("etbCounter") 
         		&& !card.getText().contains("Modular"))
