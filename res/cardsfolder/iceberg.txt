@@ -1,4 +1,4 @@
-Name:Iceberg 
+Name:Iceberg
 ManaCost:X U U
 Types:Enchantment
 Text:no text
@@ -9,4 +9,5 @@ A:AB$ Mana | Cost$ SubCounter<1/ICE> | Produced$ 1 | SpellDescription$ Add 1 to 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iceberg.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/73.jpg
 End
