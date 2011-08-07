@@ -1249,7 +1249,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+                                               /*
         //*************** START ********** START *************************
         else if(cardName.equals("Mana Drain"))//NOTE: The AI can't cast this spell due to inability to use a manapool, but provisions are still made for it for if/when we get to that point.
         {
@@ -1295,7 +1295,7 @@ public class CardFactory_Instants {
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+                                                       */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Kaervek's Spite")) {

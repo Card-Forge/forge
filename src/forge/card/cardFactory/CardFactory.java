@@ -185,6 +185,8 @@ public class CardFactory implements NewConstants {
         out.setAllTriggeringObjects(in.getAllTriggeringObjects());
         out.setEquipping(in.getEquipping());
         out.setEquippedBy(in.getEquippedBy());
+        out.setEnchantedBy(in.getEnchantedBy());
+        out.setEnchanting(in.getEnchanting());
         return out;
     	
     }
