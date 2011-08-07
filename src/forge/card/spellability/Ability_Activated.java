@@ -11,6 +11,10 @@ import forge.CardListFilter;
 abstract public class Ability_Activated extends SpellAbility implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     
+    public Ability_Activated(Card card, String manacost) {
+		this(card, new Cost(manacost, card.getName(), true), null);
+	}
+    
     public Ability_Activated(Card sourceCard, Cost abCost, Target tgt) {
         super(SpellAbility.Ability, sourceCard);
         setManaCost(abCost.getTotalMana());
@@ -18,8 +22,8 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         if (tgt != null && tgt.doesTarget())
         	setTarget(tgt);
     }
-    
-    @Override
+
+	@Override
     public boolean canPlay() {
     	if(AllZone.Stack.isSplitSecondOnStack()) return false;
     	

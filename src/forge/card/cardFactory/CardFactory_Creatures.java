@@ -5119,24 +5119,22 @@ public class CardFactory_Creatures {
                 String l[] = parseMax.split(":");
                 final int maxLevel = Integer.parseInt(l[1]);
                 
-                final Ability levelUp = new Ability(card, manacost){
-                	public void resolve()
+                final SpellAbility levelUp = new Ability_Activated(card, manacost){
+					private static final long serialVersionUID = 3998280279949548652L;
+
+					public void resolve()
                 	{
                 		card.addCounter(Counters.LEVEL, 1);
                 	}
                 	
-                	public boolean canPlay()
-                	{
-                		//only as sorcery
-                		return AllZone.getZone(card).is(Constant.Zone.Battlefield) && Phase.canCastSorcery(card.getController());
-                	}
-                	
                 	public boolean canPlayAI()
                 	{
+                		// Todo: Improve Level up code
                 		return card.getCounters(Counters.LEVEL) < maxLevel;
                 	}
                 	
                 };
+                levelUp.getRestrictions().setSorcerySpeed(true);
                 card.addSpellAbility(levelUp);
                 
                 StringBuilder sbDesc = new StringBuilder();
