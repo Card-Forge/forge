@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>forge</groupId>
@@ -47,8 +46,8 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:svn:https://cardforge.googlecode.com/</connection>
-        <developerConnection>scm:svn:https://cardforge.googlecode.com/</developerConnection>
+        <connection>scm:svn:https://cardforge.googlecode.com/svn/src</connection>
+        <developerConnection>scm:svn:https://cardforge.googlecode.com/svn/src/</developerConnection>
     </scm>
     <build>
         <sourceDirectory>src</sourceDirectory>
@@ -154,50 +153,6 @@
                     </dependency>
                 </dependencies>
                 <executions>
-                    <!--
-                    <execution>
-                        <id>osx-appbundle</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                 OSX archive
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}-osx"/>
-                                <copy todir="${project.build.directory}/${project.build.finalName}-osx">
-                                    <fileset dir="${basedir}" includes="LICENSE.txt"/>
-                                    <fileset dir="${basedir}" includes="README.txt"/>
-                                    <fileset dir="${basedir}" includes="CHANGES.txt"/>
-                                </copy>
-                                <taskdef name="jarbundler"
-                                         classpathref="maven.runtime.classpath"
-                                         classname="net.sourceforge.jarbundler.JarBundler"/>
-                                <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
-                                            name="${project.name}"
-                                            version="${project.version}"
-                                            mainclass="forge.Gui_NewGame"
-                                            icon="${basedir}/build/Forge.icns"
-                                            jvmversion="1.5+"
-                                            vmoptions="-Xmx1024m"
-                                            shortname="${project.name}"
-                                            workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
-                                            jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
-                                    <javafileset dir="${basedir}" includes="*.properties"/>
-                                    <javafileset dir="${basedir}" includes="res/**"/>
-                                    <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
-                                </jarbundler>
-                                <exec dir="${project.build.directory}"
-                                      executable="hdiutil"
-                                      failonerror="false">
-                                    <arg line="create -srcfolder ${project.build.directory}/${project.build.finalName}-osx ${project.build.directory}/${project.build.finalName}.dmg"/>
-                                </exec>
-                                <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg"
-                                     destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2"
-                                     compression="bzip2"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>   -->
                     <execution>
                         <id>win-linux-app-bundle</id>
                         <phase>package</phase>
@@ -269,11 +224,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.5</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.1.2</version>
             </plugin>
@@ -304,8 +254,83 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.google.code.maven-svn-wagon</groupId>
+                        <artifactId>maven-svn-wagon</artifactId>
+                        <version>1.4</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
+            <plugin>
+                <groupId>com.googlecode.maven-gcu-plugin</groupId>
+                <artifactId>maven-gcu-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>googlecode-upload</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>upload</goal>
+                        </goals>
+                        <configuration>
+                            <failsOnError>true</failsOnError>
+                            <!-- default: false -->
+                            <projectName>cardforge</projectName>
+                            <!-- default: ${project.artifactId} -->
+                            <uploads>
+                                <upload>
+                                    <file>
+                                        ${project.build.directory}/${project.build.finalName}.tar.bz2
+                                    </file>
+                                    <summary>${project.name} ${project.version} Windows/Linux package</summary>
+                                    <labels>
+                                        <label>Featured</label>
+                                        <label>Type-Archive</label>
+                                    </labels>
+                                </upload>
+                                <upload>
+                                    <file>
+                                        ${project.build.directory}/${project.build.finalName}.osx.tar.bz2
+                                    </file>
+                                    <summary>${project.name} ${project.version} Mac OSX package</summary>
+                                    <labels>
+                                        <label>Featured</label>
+                                        <label>Type-Archive</label>
+                                    </labels>
+                                </upload>
+                            </uploads>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.googlecode.maven-gcu-plugin</groupId>
+                    <artifactId>maven-gcu-plugin</artifactId>
+                    <version>1.1</version>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
     </build>
     <reporting>
         <plugins>
@@ -367,6 +392,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.google.code.maven-svn-wagon</groupId>
+            <artifactId>maven-svn-wagon</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
             <groupId>org.bluestemsoftware.open.maven.plugin</groupId>
             <artifactId>launch4j-plugin</artifactId>
             <version>1.5.0.0</version>
@@ -400,9 +430,9 @@
 
     <distributionManagement>
         <repository>
-            <id>arcane-maven-repo</id>
-            <name>Arcane</name>
-            <url>http://arcane.googlecode.com/svn/trunk/repository</url>
+            <id>googlecode</id>
+            <name>Cardforge</name>
+            <url>svn:https://cardforge.googlecode.com/svn/trunk/repository</url>
         </repository>
     </distributionManagement>
 
