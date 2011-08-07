@@ -106,11 +106,11 @@ public class CardListUtil
     {
       public int compare(Card a, Card b)
       {
-        if(a.getKeyword().contains("Flying") && b.getKeyword().contains("Flying"))
+        if (a.hasKeyword("Flying") && b.hasKeyword("Flying"))
           return 0;
-        else if(a.getKeyword().contains("Flying"))
+        else if (a.hasKeyword("Flying"))
           return -1;
-        else if(b.getKeyword().contains("Flying"))
+        else if (b.hasKeyword("Flying"))
           return 1;
 
         return 0;
@@ -127,11 +127,11 @@ public class CardListUtil
     {
       public int compare(Card a, Card b)
       {
-        if(a.getKeyword().contains(keyword) && b.getKeyword().contains(keyword))
+        if (a.hasKeyword(keyword) && b.hasKeyword(keyword))
           return 0;
-        else if(a.getKeyword().contains(keyword))
+        else if (a.hasKeyword(keyword))
           return -1;
-        else if(b.getKeyword().contains(keyword))
+        else if (b.hasKeyword(keyword))
           return 1;
 
         return 0;
@@ -247,11 +247,11 @@ public class CardListUtil
 	  {
 	      public int compare(Card a, Card b)
 	      {
-	        if( a.getType().contains(t) && b.getType().contains(t))
+	        if ( a.getType().contains(t) && b.getType().contains(t))
 	          return 0;
-	        else if(a.getKeyword().contains(t))
+	        else if (a.hasKeyword(t))
 	          return 1;
-	        else if(b.getKeyword().contains(t))
+	        else if (b.hasKeyword(t))
 	          return -1;
 
 	        return 0;
