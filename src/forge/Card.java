@@ -2825,6 +2825,8 @@ public class Card extends MyObservable {
          	{ if(!isUntapped()) return false;}
          else if (Property.startsWith("faceDown"))
          	{ if(!isFaceDown()) return false;}
+         else if(Property.startsWith("hasLevelUp"))
+         	{ if(!hasLevelUp()) return false; }
          else if (Property.startsWith("enteredBattlefieldThisTurn"))
          	{ if(!(getTurnInZone() == AllZone.Phase.getTurn())) return false;}
          else if (Property.startsWith("dealtDamageToYouThisTurn")){

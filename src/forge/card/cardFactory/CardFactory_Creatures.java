@@ -2934,7 +2934,6 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sygg, River Guide")) {
@@ -3339,46 +3338,6 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-
-                
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Venerated Teacher")) {
-        	/*
-        	 * When Venerated Teacher enters the battlefield, put two level counters
-        	 * on each creature you control with level up.
-        	 */
-        	final Ability ability = new Ability(card, "0") {
-        		
-        		@Override
-        		public void resolve() {
-        			CardList level = AllZoneUtil.getPlayerCardsInPlay(card.getController());
-        			level = level.filter(new CardListFilter() {
-        				public boolean addCard(Card c) {
-        					return c.hasLevelUp();
-        				}
-        			});
-        			for( int i = 0; i < level.size(); i++ ) {
-        				Card c = level.get(i);
-        				c.addCounter(Counters.LEVEL, 2);
-        			}
-        		}//resolve()
-        	};//Ability
-
-        	Command addLevelCounters = new Command() {
-				private static final long serialVersionUID = 1919112942772054206L;
-
-				public void execute() {
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - Add 2 Level counters to each creature you control with Level up.");
-					ability.setStackDescription(sb.toString());
-        			
-        			AllZone.Stack.addSimultaneousStackEntry(ability);
-
-        		}
-        	};
-        	card.addComesIntoPlayCommand(addLevelCounters);
         }//*************** END ************ END **************************
         
         
