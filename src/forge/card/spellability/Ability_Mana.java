@@ -8,7 +8,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Player;
-import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.gui.GuiUtils;
 
