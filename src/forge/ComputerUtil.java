@@ -11,6 +11,7 @@ import java.util.HashMap;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Cost_Payment;
@@ -209,7 +210,6 @@ public class ComputerUtil
 	  
 		  sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	  
-
 		  payManaCost(sa);
 		  
 		  AllZone.Stack.add(sa);
@@ -314,14 +314,7 @@ public class ComputerUtil
   static public boolean canPayCost(SpellAbility sa, Player player)
   {
 	  Card card = sa.getSourceCard();
-
-	  CardList land = getAvailableMana(player);
-
-	  if(card.isLand())
-	  {
-		  land.remove(card);
-	  }
-	  // Beached - Delete old
+	  
 	  String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
 
 	  ManaCost cost = new ManaCost(mana);
@@ -340,7 +333,16 @@ public class ComputerUtil
 	  cost = AllZone.GameAction.getSpellCostChange(sa, cost);
 	  if(cost.isPaid())
 		  return canPayAdditionalCosts(sa, player);
-	  // Beached - Delete old
+	    
+	  cost = AllZone.Computer_ManaPool.subtractMana(sa, cost);
+
+	  CardList land = getAvailableMana(player);
+
+	  if(card.isLand())
+	  {
+		  land.remove(card);
+	  }
+	  
 	  ArrayList<String> colors;
 
 	  for(int i = 0; i < land.size(); i++)
@@ -357,10 +359,12 @@ public class ComputerUtil
 			  }
 
 			  if(cost.isPaid()) {
+				  AllZone.Computer_ManaPool.clearPay(sa, true);
 				  return canPayAdditionalCosts(sa, player);
 			  }
 		  }
 	  }
+	  AllZone.Computer_ManaPool.clearPay(sa, true);
 	  return false;
   }//canPayCost()
   
@@ -591,6 +595,7 @@ public class ComputerUtil
     CardList land = getAvailableMana();
     
     ManaCost manacost = new ManaCost(cost);
+    
     ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)
@@ -616,14 +621,6 @@ public class ComputerUtil
 
   static public void payManaCost(SpellAbility sa)
   {
-	  CardList land = getAvailableMana();
-
-	  //this is to prevent errors for land cards that have abilities that cost mana.
-	  if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
-	  {
-		  land.remove(sa.getSourceCard());
-	  }
-
 	  String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
 
 	  ManaCost cost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana));
@@ -646,11 +643,21 @@ public class ComputerUtil
 		  card.setXManaCostPaid(manaToAdd);
 	  }
 
-	  // Beached - Delete old
+
 	  if(cost.isPaid())
 		  return;
-	  // Beached - Delete old
+
 	  ArrayList<String> colors;
+	  
+	  cost = ((ManaPool)AllZone.Computer_ManaPool).subtractMana(sa, cost);
+	  
+	  CardList land = getAvailableMana();
+
+	  //this is to prevent errors for land cards that have abilities that cost mana.
+	  if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
+	  {
+		  land.remove(sa.getSourceCard());
+	  }
 
 	  for(int i = 0; i < land.size(); i++)
 	  {
@@ -696,8 +703,6 @@ public class ComputerUtil
 	  }
 	  if(!cost.isPaid())
 		  throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
-
-
       
   }//payManaCost()
   
