@@ -17,6 +17,7 @@ public enum Counters {
     AGE(),
     ARROW(),
     ARROWHEAD(),
+    AWAKENING(),
     BLAZE(),
     BLOOD(),
     BOUNTY(),
