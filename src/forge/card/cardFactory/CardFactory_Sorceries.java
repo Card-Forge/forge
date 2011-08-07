@@ -2518,31 +2518,17 @@ public class CardFactory_Sorceries {
               
               public void resolve()
               {   //grab make 4 creature lists: human_play, human_graveyard, computer_play, computer_graveyard
-                 CardList human_play = new CardList();
-                 human_play.addAll(AllZone.Human_Battlefield.getCards());
-                 human_play = human_play.filter(new CardListFilter()
-                 {
-                    public boolean addCard(Card c) { return c.isCreature(); }
-                 });
-                 CardList human_graveyard = new CardList();
-                 human_graveyard.addAll(AllZone.Human_Graveyard.getCards());
-                 human_graveyard = human_graveyard.filter(new CardListFilter()
-                 {
-                    public boolean addCard(Card c) { return c.isCreature(); }
-                 });
-                 CardList computer_play = new CardList();
-                 computer_play.addAll(AllZone.Computer_Battlefield.getCards());
-                 computer_play = computer_play.filter(new CardListFilter()
-                 {
-                    public boolean addCard(Card c) { return c.isCreature(); }
-                 });
-                 CardList computer_graveyard = new CardList();
-                 computer_graveyard.addAll(AllZone.Computer_Graveyard.getCards());
-                 computer_graveyard = computer_graveyard.filter(new CardListFilter()
-                 {
-                    public boolean addCard(Card c) { return c.isCreature(); }
-                 });
+                 CardList human_play = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+                 
+                 CardList human_graveyard = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
+                 human_graveyard = human_graveyard.filter(AllZoneUtil.creatures);
+                 
+                 CardList computer_play = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+                 
+                 CardList computer_graveyard = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+                 computer_graveyard = computer_graveyard.filter(AllZoneUtil.creatures);
                            
+                 //TODO - the following code doesn't look like it's doing what it should to me...
                  Card c = new Card();
                  Iterator<Card> it = human_play.iterator();
                  while(it.hasNext())
