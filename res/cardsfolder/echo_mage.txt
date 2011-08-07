@@ -9,7 +9,7 @@ K:stSetPT:2:3:LevelGE2:2:4:LevelGE4:2:5:LEVEL 2-3 2/4 U U,Tap: Copy target insta
 K:stPumpSelf:Creature.countersGE2LEVEL+countersLT4LEVEL:0/0/SVar=CopyOnce:no Condition:no text
 K:stPumpSelf:Creature.countersGE4LEVEL:0/0/SVar=CopyTwice:no Condition:no text
 SVar:CopyOnce:AB$CopySpell | Cost$ U U T | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
-SVar:CopyTwice:AB$CopySpell | Cost$ U U T | ValidTgts$ Instant,Sorcery | SubAbility$SVar=CopyTwice2 | SpellDescription$ Copy target instant or sorcery spell twice. You may choose new targets for the copies.
+SVar:CopyTwice:AB$CopySpell | Cost$ U U T | ValidTgts$ Instant,Sorcery | SubAbility$ SVar=CopyTwice2 | SpellDescription$ Copy target instant or sorcery spell twice. You may choose new targets for the copies.
 SVar:CopyTwice2:DB$CopySpell | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
