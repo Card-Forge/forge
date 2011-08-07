@@ -88,9 +88,15 @@ public class BoosterDraftAI
     boolean hasPicked = false;
     Card pickedCard = new Card();
     
+    CardList AIPlayables = in_choose.filter(new CardListFilter(){
+		 public boolean addCard(Card c) {
+			 return !(c.getSVar("RemAIDeck").equals("True"));
+		 }
+	  });
+    
     if (playerColors.get(player).Color1.equals("none") && playerColors.get(player).Color2.equals("none")) {
     	// 
-    	CardList creatures = in_choose.getType("Creature").getColored();
+    	CardList creatures = AIPlayables.getType("Creature").getColored();
     	creatures.sort(bestCreature);
     	//for (int i=0; i<creatures.size(); i++)
     		//System.out.println("creature[" + i + "]: " + creatures.get(i).getName());
@@ -105,7 +111,7 @@ public class BoosterDraftAI
     		hasPicked = true;
     	}
     } else if (!playerColors.get(player).Color1.equals("none") && playerColors.get(player).Color2.equals("none")) {
-    	CardList creatures = in_choose.getType("Creature").getColored();
+    	CardList creatures = AIPlayables.getType("Creature").getColored();
     	creatures.sort(bestCreature);
     	//for (int i=0; i<creatures.size(); i++)
     		//System.out.println("creature[" + i + "]: " + creatures.get(i).getName());
@@ -124,7 +130,7 @@ public class BoosterDraftAI
     	CardList typeList = new CardList();
     	CardList colorList = new CardList();
     	
-    	colorList = in_choose.getOnly2Colors(playerColors.get(player).Color1, playerColors.get(player).Color2);
+    	colorList = AIPlayables.getOnly2Colors(playerColors.get(player).Color1, playerColors.get(player).Color2);
     	
     	if (colorList.size() > 0) {
     		typeList = colorList.getType("Creature");
@@ -158,7 +164,7 @@ public class BoosterDraftAI
     	else {
 /*    		if (!playerColors.get(player).Splash.equals("none")) {
     			// pick randomly from splash color
-    			colorList = in_choose.getColor(playerColors.get(player).Splash);
+    			colorList = AIPlayables.getColor(playerColors.get(player).Splash);
     			if (colorList.size() > 0) {
     				Random r = new Random();
     				list.add(colorList.get(r.nextInt(colorList.size())));
@@ -186,13 +192,13 @@ public class BoosterDraftAI
     			}
     		}
 */    		
-    		typeList = in_choose.getType("Artifact");
+    		typeList = AIPlayables.getType("Artifact");
     		if (typeList.size() > 0) {
     			CardListUtil.sortCMC(typeList);
     			list.add(typeList.get(0));
     		}
     		
-    		typeList = in_choose.getType("Land");
+    		typeList = AIPlayables.getType("Land");
     		if (typeList.size() > 0) {
     			for (int i=0; i<typeList.size(); i++) {
     				ArrayList<Ability_Mana> maList = typeList.get(i).getManaAbility();
@@ -302,7 +308,15 @@ public class BoosterDraftAI
 	int cardsNeeded = 22; 
 	int landsNeeded = 18;
 	
-	CardList creatures = dList.getType("Creature").getOnly2Colors(pClrs.Color1, pClrs.Color2);
+	CardList AIPlayables = dList.filter(new CardListFilter(){
+		 public boolean addCard(Card c) {
+			 return !(c.getSVar("RemAIDeck").equals("True"));
+		 }
+	  });
+	for (int i=0; i<AIPlayables.size(); i++)
+		dList.remove(AIPlayables.get(i));
+	
+	CardList creatures = AIPlayables.getType("Creature").getOnly2Colors(pClrs.Color1, pClrs.Color2);
 	
 	int nCreatures = 15;
 	
@@ -316,7 +330,7 @@ public class BoosterDraftAI
 		outList.add(c);
 		cardsNeeded--;
 		nCreatures--;
-		dList.remove(c);
+		AIPlayables.remove(c);
 		
 		if (Constant.Runtime.DevMode[0])
 			System.out.println("Creature[" + i + "]:" + c.getName() + " (" + c.getManaCost() + ")");
@@ -324,7 +338,7 @@ public class BoosterDraftAI
 		i++;
 	}
 	
-	CardList otherCreatures = dList.getType("Creature");
+	CardList otherCreatures = AIPlayables.getType("Creature");
 	while (nCreatures > 1 && otherCreatures.size() > 1) {
 		
 		Random r = new Random();
@@ -332,15 +346,15 @@ public class BoosterDraftAI
 		outList.add(c);
 		cardsNeeded--;
 		nCreatures--;
-		dList.remove(c);
+		AIPlayables.remove(c);
 		
-		otherCreatures = dList.getType("Creature");
+		otherCreatures = AIPlayables.getType("Creature");
 		
 		if (Constant.Runtime.DevMode[0])
 			System.out.println("AddCreature: " + c.getName() + " (" + c.getManaCost() + ")");
 	}
 	
-	CardList others = dList.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.Color1, pClrs.Color2);
+	CardList others = AIPlayables.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.Color1, pClrs.Color2);
 
 	int ii = 0;
 	while (cardsNeeded > 0 && others.size() > 1) {
@@ -350,16 +364,16 @@ public class BoosterDraftAI
 		//out.addMain(c.getName());
 		outList.add(c);
 		cardsNeeded--;
-		dList.remove(c);
+		AIPlayables.remove(c);
 		
-		others = dList.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.Color1, pClrs.Color2);
+		others = AIPlayables.getNotType("Creature").getNotType("Land").getOnly2Colors(pClrs.Color1, pClrs.Color2);
 		
 		if (Constant.Runtime.DevMode[0])
 			System.out.println("Others[" + ii++ + "]:" + c.getName() + " (" + c.getManaCost() + ")");
 	}
 	
 	ii = 0;
-	CardList z = dList.getNotType("Land");
+	CardList z = AIPlayables.getNotType("Land");
 	while (cardsNeeded > 0 && z.size() > 1) {
 		
 		//if (z.size() < 1)
@@ -370,23 +384,23 @@ public class BoosterDraftAI
 		//out.addMain(c.getName());
 		outList.add(c);
 		cardsNeeded--;
-		dList.remove(c);
+		AIPlayables.remove(c);
 		
-		z = dList.getNotType("Land");
+		z = AIPlayables.getNotType("Land");
 		
 		if (Constant.Runtime.DevMode[0])
 			System.out.println("NonLands[" + ii++ + "]:" + c.getName() + "(" + c.getManaCost() + ")");
 	}
 	
-	CardList lands = dList.getType("Land");
+	CardList lands = AIPlayables.getType("Land");
 	while (landsNeeded > 0 && lands.size() > 0) {
 		Card c = lands.get(0);
 		
 		outList.add(c);
 		landsNeeded--;
-		dList.remove(c);
+		AIPlayables.remove(c);
 		
-		lands = dList.getType("Land");
+		lands = AIPlayables.getType("Land");
 		
 		if (Constant.Runtime.DevMode[0])
 			System.out.println("Land:" + c.getName());		
@@ -475,19 +489,22 @@ public class BoosterDraftAI
 		Random r = new Random();
 		Card c = outList.get(r.nextInt(outList.size() - 1));
 		outList.remove(c);
-		dList.add(c);
+		AIPlayables.add(c);
 	}
 	
 	while (outList.size() < 40) {
 		Random r = new Random();
-		Card c = dList.get(r.nextInt(dList.size() - 1));
+		Card c = AIPlayables.get(r.nextInt(AIPlayables.size() - 1));
 		outList.add(c);
-		dList.remove(c);
+		AIPlayables.remove(c);
 	}
 	if (outList.size() == 40)
 	{
 		for (i=0; i<outList.size(); i++)
 			out.addMain(outList.get(i).getName() + "|" + outList.get(i).getCurSetCode());
+		
+		for (i=0; i<AIPlayables.size(); i++)
+			out.addSideboard(AIPlayables.get(i).getName() + "|" + AIPlayables.get(i).getCurSetCode());
 		
 		for (i=0; i<dList.size(); i++)
 			out.addSideboard(dList.get(i).getName() + "|" + dList.get(i).getCurSetCode());
