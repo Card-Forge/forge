@@ -30,8 +30,8 @@ public class GameActionUtil {
 		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
 		upkeep_CumulativeUpkeepCost(); //sacrifice unless cumulative upkeep cost is paid
 		upkeep_Echo();
-		upkeep_TabernacleUpkeepCost();
-		upkeep_MagusTabernacleUpkeepCost();
+		//upkeep_TabernacleUpkeepCost();
+		//upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		
 		upkeep_The_Abyss();
@@ -849,6 +849,7 @@ public class GameActionUtil {
 		}
 	} //upkeep_Braid_of_Fire
 	
+	/*
 	public static void upkeep_TabernacleUpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 
@@ -905,7 +906,7 @@ public class GameActionUtil {
             AllZone.Stack.addSimultaneousStackEntry(destroyAbility);
 
 		}
-	}//TabernacleUpkeepCost
+	}//TabernacleUpkeepCost 
 
 	private static void upkeep_MagusTabernacleUpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
@@ -962,7 +963,7 @@ public class GameActionUtil {
 
 			
 		}
-	}//MagusTabernacleUpkeepCost
+	}//MagusTabernacleUpkeepCost */
 
 	public static void upkeep_CumulativeUpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
@@ -6207,6 +6208,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 	
+	/*
 	public static Command The_Tabernacle_at_Pendrell_Vale                 = new Command() {
 		private static final long serialVersionUID   = -3233715310427996429L;
 		CardList                  gloriousAnthemList = new CardList();
@@ -6278,7 +6280,7 @@ public class GameActionUtil {
 				}// for inner
 			}
 		}// execute()
-	};
+	};*/
 
 	public static Command Ajani_Avatar_Token          = new Command() {
 		private static final long serialVersionUID = 3027329837165436727L;
@@ -7293,7 +7295,7 @@ public class GameActionUtil {
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Liu_Bei", Liu_Bei);
 		
-		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
+		//commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
@@ -7303,7 +7305,7 @@ public class GameActionUtil {
 		commands.put("Plague_Rats", Plague_Rats);
 		
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-		commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
+		//commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
 		commands.put("Tarmogoyf", Tarmogoyf);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);

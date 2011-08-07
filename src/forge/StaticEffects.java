@@ -36,7 +36,7 @@ public class StaticEffects
 		cardToEffectsList.put("Leyline of Singularity", new String[] {"Leyline_of_Singularity"});
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
 		
-		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
+		//cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
@@ -45,7 +45,7 @@ public class StaticEffects
 		cardToEffectsList.put("Phylactery Lich", new String[]{"Phylactery_Lich"});
 		cardToEffectsList.put("Plague Rats", new String[] {"Plague_Rats"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
-		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"The_Tabernacle_at_Pendrell_Vale"});
+		//cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"The_Tabernacle_at_Pendrell_Vale"});
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
 		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});

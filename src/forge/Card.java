@@ -147,8 +147,8 @@ public class Card extends MyObservable {
     private String                       text                              = "";
     private String                       manaCost                          = "";
     private String                       upkeepCost                        = "";
-    private String                       tabernacleUpkeepCost              = "";
-    private String                       magusTabernacleUpkeepCost         = "";
+    //private String                       tabernacleUpkeepCost              = "";
+    //private String                       magusTabernacleUpkeepCost         = "";
     private String                       echoCost                          = "";
     private String						 madnessCost					   = "";
     private String                       chosenType                        = "";
@@ -799,7 +799,7 @@ public class Card extends MyObservable {
     public boolean hasUpkeepCost() {
         return upkeepCost.length() > 0 && !upkeepCost.equals("0");
     }
-    
+    /*
     public void setTabernacleUpkeepCost(String s) {
         tabernacleUpkeepCost = s;
     }
@@ -814,7 +814,7 @@ public class Card extends MyObservable {
     
     public String getMagusTabernacleUpkeepCost() {
         return magusTabernacleUpkeepCost;
-    }
+    }*/
     
     //used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
     public String getChosenType() {
