@@ -41,8 +41,8 @@ public class QuestBoosterPack implements NewConstants {
     	if (standardPool){
     		// filter Cards for cards appearing in Standard Sets
 	    	ArrayList<String> sets = new ArrayList<String>();
-	    	//TODO: It would be handy if the list of sets in Standard was pulled from a file
-	    	//sets.add("NPX") or whatever the next set is
+	    	//TODO: It would be handy if the list of any sets can be chosen
+	    	sets.add("NPH");
 	    	sets.add("MBS");
 	    	sets.add("SOM");
 	    	sets.add("M11");
