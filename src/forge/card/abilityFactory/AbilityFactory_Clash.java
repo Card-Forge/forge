@@ -39,7 +39,7 @@ public class AbilityFactory_Clash {
             @Override
             public String getStackDescription()
             {
-                return "Clash with an opponent.";
+                return AF.getHostCard().getName()+" - Clash with an opponent.";
             }
 
             @Override
@@ -78,7 +78,7 @@ public class AbilityFactory_Clash {
             @Override
             public String getStackDescription()
             {
-                return "Clash with an opponent.";
+                return AF.getHostCard().getName()+" - Clash with an opponent.";
             }
 
             @Override
@@ -122,7 +122,7 @@ public class AbilityFactory_Clash {
             @Override
             public String getStackDescription()
             {
-                return " Clash with an opponent.";
+                return AF.getHostCard().getName()+" - Clash with an opponent.";
             }
 
             @Override
