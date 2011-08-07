@@ -8,5 +8,5 @@ A:AB$ PumpAll | Cost$ R T | ValidCards$ Creature.attacking | NumAtt$ +X | SpellD
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabble_rouser.jpg
-SetInfo:GPT|Unommon|http://magiccards.info/scans/en/gp/73.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/73.jpg
 End

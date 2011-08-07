@@ -7,5 +7,5 @@ SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController| DamageSourc
 SVar:X:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backlash.jpg
-SetInfo:INV|Unommon|http://magiccards.info/scans/en/in/234.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/234.jpg
 End
