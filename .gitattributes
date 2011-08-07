@@ -4137,6 +4137,7 @@ res/cardsfolder/lurking_informant.txt -text svneol=native#text/plain
 res/cardsfolder/lurking_nightstalker.txt -text svneol=native#text/plain
 res/cardsfolder/lurking_predators.txt svneol=native#text/plain
 res/cardsfolder/lurking_skirge.txt svneol=native#text/plain
+res/cardsfolder/lush_growth.txt -text svneol=native#text/plain
 res/cardsfolder/lust_for_war.txt svneol=native#text/plain
 res/cardsfolder/lux_cannon.txt -text svneol=native#text/plain
 res/cardsfolder/lymph_sliver.txt -text svneol=native#text/plain

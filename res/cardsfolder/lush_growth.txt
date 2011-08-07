@@ -1,0 +1,10 @@
+Name:Lush Growth
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant Land
+K:stAnimateEnchanted:Land:0/0:Land,Mountain,Forest,Plains,Overwrite,KeepSupertype:no colors:No Abilities:No Condition:Enchanted land is a Mountain, Forest, and Plains.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lush_growth.jpg
+End
