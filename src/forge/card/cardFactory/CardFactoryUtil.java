@@ -273,16 +273,16 @@ public class CardFactoryUtil {
         if (c.hasStartOfKeyword("CARDNAME can't be blocked by")) value += power * 2;
         
         //Battle stats increasing keywords
-        if (c.hasKeyword("Double Strike")) value += power * 15;
+        if (c.hasKeyword("Double Strike")) value += 10 + power * 15;
         value += c.getKeywordMagnitude("Bushido") * 16;
         value += c.getAmountOfKeyword("Flanking") * 15;
         
         //Other good keywords
         if (c.hasKeyword("Deathtouch") && power > 0) value += 25;
         value += c.getAmountOfKeyword("Exalted") * 15;
-        if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 15;
+        if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 10 + power * 5;
         if (c.hasKeyword("Lifelink")) value += power * 10;
-        if (c.hasKeyword("Trample")) value += power * 3;
+        if (c.hasKeyword("Trample") && power > 1) value += power * 3;
         if (c.hasKeyword("Vigilance")) value += power * 5 + toughness * 5;
         if (c.hasKeyword("Wither")) value += power * 10;
         value += c.getKeywordMagnitude("Rampage");
@@ -292,7 +292,7 @@ public class CardFactoryUtil {
         		&& power > 0) value += 2;
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +2/+2 counter on CARDNAME.") 
         		&& power > 0) value += 4;
-        if (c.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.") && power > 0) value += 10;
+        if (c.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) value += 10;
         
         //Defensive Keywords
         if (c.hasKeyword("Reach")) value += 5;
@@ -319,16 +319,16 @@ public class CardFactoryUtil {
         
         if (c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) value -= (toughness - 1) * 9;
         
-        if (c.hasKeyword("CARDNAME can't attack or block.")) value = 90 + c.getCMC() * 5; //reset everything - useless
+        if (c.hasKeyword("CARDNAME can't attack or block.")) value = 50 + c.getCMC() * 5; //reset everything - useless
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) value -= 50;
-        if (c.hasKeyword("At the beginning of the end step, shuffle CARDNAME.")) value -= 50;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) value -= 20;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")) value -= 20;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) value -= 20;
         if (c.hasStartOfKeyword("Upkeep:")) value -= 20;
         if (c.hasStartOfKeyword("Cumulative upkeep")) value -= 30;
+        if (c.hasStartOfKeyword("(Echo unpaid)")) value -= 10;
         if (c.hasStartOfKeyword("Fading")) value -= 20; //not used atm
         if (c.hasStartOfKeyword("Vanishing")) value -= 20; //not used atm
         
