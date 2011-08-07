@@ -8369,6 +8369,7 @@ res/cardsfolder/zuran_enchanter.txt -text svneol=native#text/plain
 res/cardsfolder/zuran_orb.txt -text svneol=native#text/plain
 res/cardsfolder/zuran_spellcaster.txt -text svneol=native#text/plain
 res/draft/common.txt -text svneol=native#text/plain
+res/draft/cube_juzamjedi.draft -text
 res/draft/draft.properties -text svneol=native#text/plain
 res/draft/rare.txt -text svneol=native#text/plain
 res/draft/uncommon.txt -text svneol=native#text/plain
