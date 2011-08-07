@@ -266,6 +266,14 @@ public class AbilityFactory_CounterMagic {
 			sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
 		}
 
+        if(params.containsKey("ForgetOtherTargets"))
+        {
+            if(params.get("ForgetOtherTargets").equals("True"))
+            {
+                af.getHostCard().clearRemembered();
+            }
+        }
+
 		for(final SpellAbility tgtSA : sas){
 			Card tgtSACard = tgtSA.getSourceCard();
 			if (AllZone.Stack.contains(tgtSA) && !tgtSACard.keywordsContain("CARDNAME can't be countered.")){
@@ -313,6 +321,14 @@ public class AbilityFactory_CounterMagic {
 				if(tgtSA.isAbility() && params.containsKey("DestroyPermanent")) {
 					AllZone.GameAction.destroy(tgtSACard);
 				}
+
+                if(params.containsKey("RememberTargets"))
+                {
+                    if(params.get("RememberTargets").equals("True"))
+                    {
+                        af.getHostCard().addRemembered(tgtSACard);
+                    }
+                }
 			}
 		}
 

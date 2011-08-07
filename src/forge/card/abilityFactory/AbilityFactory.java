@@ -665,7 +665,12 @@ public class AbilityFactory {
             else if(isDb)
                 SA = AbilityFactory_Clash.getDrawbackFlip(this);
         }
-		
+
+        if(API.equals("DelayedTrigger")) {
+            if(isDb)
+                SA = AbilityFactory_DelayedTrigger.getDrawback(this);
+        }
+
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 

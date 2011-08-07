@@ -8774,6 +8774,7 @@ src/forge/card/abilityFactory/AbilityFactory_Copy.java -text svneol=native#text/
 src/forge/card/abilityFactory/AbilityFactory_CounterMagic.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Counters.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_DealDamage.java -text svneol=native#text/plain
+src/forge/card/abilityFactory/AbilityFactory_DelayedTrigger.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Destroy.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Effect.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_EndGameCondition.java -text svneol=native#text/plain
