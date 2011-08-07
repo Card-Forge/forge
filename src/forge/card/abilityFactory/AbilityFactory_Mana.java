@@ -304,20 +304,31 @@ public class AbilityFactory_Mana {
 	
 	public static void manaReflectedResolve(Ability_Mana abMana, AbilityFactory af){
 		// Spells are not undoable
+		HashMap<String,String> params = af.getMapParams();
 		abMana.setUndoable(af.isAbility() && abMana.isUndoable());
 
 		Card card = af.getHostCard();
 		
 		ArrayList<String> colors = reflectableMana(abMana, af, new ArrayList<String>(), new ArrayList<Card>());
 		
-		String generated = generatedReflectedMana(abMana, af, colors);
+		ArrayList<Player> tgtPlayers;
 		
-		if (abMana.getCanceled()){
-			abMana.undo();
-			return;
-		}
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(abMana.getSourceCard(), params.get("Defined"), abMana);
+		
+		for(Player player : tgtPlayers) {
+			String generated = generatedReflectedMana(abMana, af, colors, player);
+		
+			if (abMana.getCanceled()){
+				abMana.undo();
+				return;
+			}
 
-		abMana.produceMana(generated, card.getController());
+			abMana.produceMana(generated, player);
+		}
 
 		doDrawback(af, abMana, card);
 	}
@@ -426,7 +437,7 @@ public class AbilityFactory_Mana {
 		return colors;
 	}
 
-	private static String generatedReflectedMana(Ability_Mana abMana, AbilityFactory af, ArrayList<String> colors){
+	private static String generatedReflectedMana(Ability_Mana abMana, AbilityFactory af, ArrayList<String> colors, Player player){
 		// Calculate generated mana here for stack description and resolving
 		HashMap<String,String> params = af.getMapParams();
 		int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), abMana) : 1;
@@ -438,7 +449,7 @@ public class AbilityFactory_Mana {
 		else if (colors.size() == 1)
 			baseMana = Input_PayManaCostUtil.getShortColorString(colors.get(0));
 		else{
-			if (abMana.getActivatingPlayer().isHuman()){
+			if (player.isHuman()){
 				Object o = GuiUtils.getChoiceOptional("Select Mana to Produce", colors.toArray());
 				if (o == null) {
 					// User hit cancel
@@ -451,6 +462,7 @@ public class AbilityFactory_Mana {
 			}
 			else{
 				// AI doesn't really have anything here yet
+				baseMana = Input_PayManaCostUtil.getShortColorString(colors.get(0));
 			}
 		}
 
