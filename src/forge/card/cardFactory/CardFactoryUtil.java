@@ -66,7 +66,7 @@ public class CardFactoryUtil {
         
     }
     
-  //for Sarkhan the Mad
+    //for Sarkhan the Mad
     public static Card AI_getCheapestCreature(CardList list, final Card spell, boolean targeted) {
     	list = list.filter(new CardListFilter() {
     		public boolean addCard(Card c) {
@@ -2363,7 +2363,7 @@ public class CardFactoryUtil {
 
         	n = cardsonbattlefield.size();
 
-        	return doXMath(n, m,source);
+        	return doXMath(n, m, source);
         }
         
         final String[] sq;
@@ -2795,7 +2795,7 @@ public class CardFactoryUtil {
         return doXMath(n, m, c);
     }
     
-    private static int doXMath(int num, String m,Card c){
+    private static int doXMath(int num, String m, Card c){
         if(m.equals("none")) return num;
         
         String[] s = m.split("\\.");
@@ -2840,15 +2840,22 @@ public class CardFactoryUtil {
 		if (string.startsWith("Amount")){
 			if (string.contains(".")){
 				String[] splitString = string.split("\\.", 2);
-				return doXMath(paidList.size(), splitString[1],source);
+				return doXMath(paidList.size(), splitString[1], source);
 			}
 			else
 				return paidList.size();
 			
 		}
 		if( string.contains("Valid") ) {
+	        final String m[] = {"none"};
+	        
 			String valid = string.replace("Valid ", "");
-			return paidList.getValidCards(valid, source.getController(), source).size();
+			final String[] l;
+	        l = valid.split("/"); // separate the specification from any math
+	        valid = l[0];
+	        if(l.length > 1) m[0] = l[1];
+			CardList list = paidList.getValidCards(valid, source.getController(), source);
+			return doXMath(list.size(), m, source);
 		}
 		
 		int tot = 0;
@@ -3517,16 +3524,7 @@ public class CardFactoryUtil {
     
     
     public static boolean isNegativeCounter(Counters c)
-    {	
-    	
-    	/*
-    	AGE(),
-        BLAZE(),
-        BRIBERY(),
-        ICE(),
-        M1M1("-1/-1"),
-        TIME(),
-        */
+    {
     	return c == Counters.AGE || c == Counters.BLAZE || c == Counters.BRIBERY || c == Counters.DOOM || c == Counters.ICE ||
         		c == Counters.M1M1 || c == Counters.M0M2 || c == Counters.M0M1|| c == Counters.TIME;
     }
