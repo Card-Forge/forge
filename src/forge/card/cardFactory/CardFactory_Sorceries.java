@@ -3361,43 +3361,6 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         	spell.setBeforePayMana(input);
         }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Energy Tap")) {
-        	/*
-        	 * Tap target untapped creature you control. If you do, add X to
-        	 * your mana pool, where X is that creature's converted mana cost.
-        	 */
-        	Cost cost = new Cost("U", cardName, false);
-        	Target tgt = new Target(card,"Select an untapped creature you control", "Creature.untapped+YouCtrl".split(","));
-        	final SpellAbility spell = new Spell(card, cost, tgt) {
-
-				private static final long serialVersionUID = 8883585452278041848L;
-
-				@Override
-        		public void resolve() {
-        			Card target = getTargetCard();
-        			if(null != target && target.isUntapped()) {
-        				int cmc = CardUtil.getConvertedManaCost(target);
-        				target.tap();
-        				Ability_Mana abMana = new Ability_Mana(card, "0", "1", cmc) {
-        					private static final long serialVersionUID = -2182129023960978132L;
-        				};
-        				abMana.produceMana();
-        			}
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-        	};
-
-        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
-        	card.clearFirstSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
                 
         
         //*************** START *********** START **************************
