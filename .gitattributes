@@ -6089,6 +6089,7 @@ res/cardsfolder/scorching_spear.txt -text svneol=native#text/plain
 res/cardsfolder/scorching_winds.txt svneol=native#text/plain
 res/cardsfolder/scoria_cat.txt -text svneol=native#text/plain
 res/cardsfolder/scoria_elemental.txt -text svneol=native#text/plain
+res/cardsfolder/scoria_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/scornful_aether_lich.txt -text svneol=native#text/plain
 res/cardsfolder/scornful_egotist.txt -text svneol=native#text/plain
 res/cardsfolder/scourge_devil.txt -text svneol=native#text/plain
