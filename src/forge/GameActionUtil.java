@@ -5687,10 +5687,8 @@ public class GameActionUtil {
 		boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
   	      	
   	      	if(SpecialConditions.contains("CardsInHandMore")) {
-  	      		CardList SpecialConditionsCardList = new CardList();
-	      		SpecialConditionsCardList.clear();
+  	      		CardList SpecialConditionsCardList = AllZoneUtil.getPlayerHand(SourceCard.getController());
 	      		String Condition = SpecialConditions.split("/")[1];
-	      		SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
 	      		if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
   	      	}
   	      	if(SpecialConditions.contains("OppHandEmpty")) {
@@ -5702,8 +5700,7 @@ public class GameActionUtil {
 	      		if(!(lib.get(0).isBlack())) return false;
 	      	}
   	      	if(SpecialConditions.contains("LibraryLE")) {
-  	      		CardList Library = new CardList();
-  	      		Library.addAll(AllZone.getZone(Constant.Zone.Library, SourceCard.getController()).getCards());
+  	      		CardList Library = AllZoneUtil.getPlayerCardsInLibrary(SourceCard.getController());
   	      		String maxnumber = SpecialConditions.split("/")[1];
 	      		if (Library.size() > Integer.valueOf(maxnumber)) return false;
 	      	}
@@ -5724,21 +5721,17 @@ public class GameActionUtil {
   	      		if(SourceCard.getImprinted().isEmpty()) return false;
   	      	}
   	      	if(SpecialConditions.contains("Hellbent")) {
-  	      		CardList Handcards = new CardList();
-  	      		Handcards.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
+  	      		CardList Handcards = AllZoneUtil.getPlayerHand(SourceCard.getController());
 	      		if (Handcards.size() > 0) return false;
 	      	}
   	      	if(SpecialConditions.contains("Metalcraft")) {
-  	      		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, SourceCard.getController());
-  	      		CardList CardsinPlay = new CardList(play.getCards());
+  	      		CardList CardsinPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
       			CardsinPlay = CardsinPlay.getType("Artifact");
 	      		if (CardsinPlay.size() < 3) return false;
 	      	}
   	      	if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
   	    	  	String Requirements = SpecialConditions.replaceAll("isPresent ", "");
-    			CardList CardsinPlay = new CardList();
-      			CardsinPlay.addAll(AllZone.Human_Battlefield.getCards());
-      			CardsinPlay.addAll(AllZone.Computer_Battlefield.getCards());
+    			CardList CardsinPlay = AllZoneUtil.getCardsInPlay();
       			String Conditions[] = Requirements.split(",");
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
 	      		if (CardsinPlay.isEmpty()) return false;
@@ -5752,9 +5745,7 @@ public class GameActionUtil {
   	      	}
   	      	if(SpecialConditions.contains("isNotPresent")) { // is no card of a certain type/color present?
   	      		String Requirements = SpecialConditions.replaceAll("isNotPresent ", "");
-    			CardList CardsinPlay = new CardList();
-      			CardsinPlay.addAll(AllZone.Human_Battlefield.getCards());
-      			CardsinPlay.addAll(AllZone.Computer_Battlefield.getCards());
+    			CardList CardsinPlay = AllZoneUtil.getCardsInPlay();
       			String Conditions[] = Requirements.split(",");
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
 	      		if (!CardsinPlay.isEmpty()) return false;
@@ -5773,10 +5764,16 @@ public class GameActionUtil {
   	      		if (!SourceCard.isValid(Requirements, SourceCard.getController(), SourceCard)) return false;
   	      	}
   	      	if(SpecialConditions.contains("isYourTurn")) {
-  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController()) ) return false;
+  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController())) return false;
   	      	}
   	      	if(SpecialConditions.contains("notYourTurn")) {
-  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController().getOpponent()) ) return false;
+  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController().getOpponent())) return false;
+  	      	}
+  	      	if(SpecialConditions.contains("OppPoisoned")) {
+  	      		if( SourceCard.getController().getOpponent().getPoisonCounters() == 0) return false;
+  	      	}
+  	      	if(SpecialConditions.contains("OppNotPoisoned")) {
+  	      		if( SourceCard.getController().getOpponent().getPoisonCounters() > 0) return false;
   	      	}
   	      	return true;
 			
