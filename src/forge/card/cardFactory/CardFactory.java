@@ -517,19 +517,6 @@ public class CardFactory implements NewConstants {
             }
         }//Rebel search
         
-        if(hasKeyword(card, "SearchMerc") != -1) {
-            int n = hasKeyword(card, "SearchMerc");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String manacost = k[1];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_Merc_Search(card, manacost));
-            }
-        }//Merc search
-        
         if(hasKeyword(card, "Morph") != -1) {
             int n = hasKeyword(card, "Morph");
             if(n != -1) {
