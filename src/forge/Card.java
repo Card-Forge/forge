@@ -1255,18 +1255,23 @@ public class Card extends MyObservable {
     }
     
     public void clearAllButFirstSpellAbility(){
-    	SpellAbility first = spellAbility.get(0);
-    	spellAbility.clear();
-    	spellAbility.add(first);
+    	if(!spellAbility.isEmpty()) {
+    		SpellAbility first = spellAbility.get(0);
+    		spellAbility.clear();
+        	spellAbility.add(first);
+    	}
     	manaAbility.clear();
     }
     
     public ArrayList<SpellAbility> getAllButFirstSpellAbility() {
     	ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
     	sas.addAll(spellAbility);
+    	if(!sas.isEmpty()) {
+    		SpellAbility first = spellAbility.get(0);
+    		sas.remove(first);
+    	}
     	sas.addAll(manaAbility);
-    	SpellAbility first = spellAbility.get(0);
-    	sas.remove(first);
+
     	return sas;
     }
     
