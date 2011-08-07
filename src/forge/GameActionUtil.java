@@ -158,7 +158,8 @@ public class GameActionUtil {
 						}
 					}
 				}
-				if(c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast")) //keyword gets cleared for Bitumonous Blast
+				if (c.hasKeyword("Cascade") 
+						|| c.getName().equals("Bituminous Blast")) //keyword gets cleared for Bitumonous Blast
 				{
 					DoCascade(c);	
 				}
@@ -335,10 +336,11 @@ public class GameActionUtil {
 	
 	public static void playCard_Storm(SpellAbility sa) {
 		Card source = sa.getSourceCard();
-		if(!source.isCopiedSpell() && source.getKeyword().contains("Storm"))
+		if (!source.isCopiedSpell() 
+				&& source.hasKeyword("Storm"))
 		{		
 			int StormNumber  = Phase.getStormCount() - 1;		
-			for(int i = 0; i < StormNumber; i++)
+			for (int i = 0; i < StormNumber; i++)
 				AllZone.CardFactory.copySpellontoStack(source, source, sa, true);   	
 		}
 	}//playCard_Storm()
@@ -402,7 +404,7 @@ public class GameActionUtil {
 		list = list.filter(new CardListFilter(){
 			public boolean addCard(Card crd)
 			{
-				return crd.getKeyword().contains("Whenever you cast a spell, exile target permanent.");
+				return crd.hasKeyword("Whenever you cast a spell, exile target permanent.");
 			}
 		});
 		
@@ -787,7 +789,7 @@ public class GameActionUtil {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				return c.getKeyword().contains("(Echo unpaid)");
+				return c.hasKeyword("(Echo unpaid)");
 			}
 		});
 
@@ -922,9 +924,11 @@ public class GameActionUtil {
 							} 
 							else //computer
 							{
-								if(ComputerUtil.canPayCost(aiPaid) && ! c.getKeyword().contains("Indestructible")) 
+								if (ComputerUtil.canPayCost(aiPaid)
+										&& ! c.hasKeyword("Indestructible")) 
 									ComputerUtil.playNoStack(aiPaid);
-								else AllZone.GameAction.destroy(c);
+								else 
+									AllZone.GameAction.destroy(c);
 							}		
 						}
 					};
@@ -1696,7 +1700,7 @@ public class GameActionUtil {
 		
 		if (damage <= 0) return;
 		
-        if(source.getKeyword().contains("Lifelink")) source.getController().gainLife(damage, source);
+        if (source.hasKeyword("Lifelink")) source.getController().gainLife(damage, source);
         
 	}
 	
@@ -1746,7 +1750,7 @@ public class GameActionUtil {
 
         }
         
-        if(affected.getKeyword().contains("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
+        if (affected.hasKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
         	Ability ability2 = new Ability(affected, "0") {
         		@Override
         		public void resolve() {
@@ -1780,7 +1784,7 @@ public class GameActionUtil {
 	    	ability.setStackDescription(sb.toString());
 	    	ability2.setStackDescription(sb.toString());
 	    	
-	    	if(affected.getKeyword().contains("When CARDNAME is dealt damage, destroy it. It can't be regenerated.")) {
+	    	if (affected.hasKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.")) {
 	        	int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
 	            
 	            for(int i=0 ; i < amount ; i++)
@@ -1793,7 +1797,9 @@ public class GameActionUtil {
                 AllZone.Stack.addSimultaneousStackEntry(ability); AllZone.Stack.addSimultaneousStackEntry(ability);
         }
         
-        if(source.getKeyword().contains("Deathtouch") && affected.isCreature()) AllZone.GameAction.destroy(affected);
+        if (source.hasKeyword("Deathtouch") 
+        		&& affected.isCreature()) 
+        	AllZone.GameAction.destroy(affected);
 
 
 	}
@@ -1970,7 +1976,7 @@ public class GameActionUtil {
 			}
     	}
 		
-    	if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
+    	if (c.hasKeyword("Whenever this creature deals damage to a player, that player gets a poison counter."))
 			playerCombatDamage_PoisonCounter(c, 1);
     
     	if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
@@ -3274,7 +3280,7 @@ public class GameActionUtil {
                     if (wantMerfolkBuff) {
                         CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
                         for (int i = 0; i < creatures.size(); i ++) {
-                            if (!creatures.get(i).getKeyword().contains("Flying")) {
+                            if (!creatures.get(i).hasKeyword("Flying")) {
                                 creatures.get(i).addExtrinsicKeyword("Flying");
                             }
                         }
@@ -3284,7 +3290,7 @@ public class GameActionUtil {
                             public void execute() {
                                 CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
                                 for (int i = 0; i < creatures.size(); i ++) {
-                                    if (creatures.get(i).getKeyword().contains("Flying")) {
+                                    if (creatures.get(i).hasKeyword("Flying")) {
                                         creatures.get(i).removeExtrinsicKeyword("Flying");
                                     }
                                 }
@@ -4959,7 +4965,8 @@ public class GameActionUtil {
 			{
 				public boolean addCard(Card c)
 				{
-					return c.isEmblem() && c.getKeyword().contains("Artifacts, creatures, enchantments, and lands you control are indestructible.");
+					return c.isEmblem() 
+								&& c.hasKeyword("Artifacts, creatures, enchantments, and lands you control are indestructible.");
 				}
 			});
 			
@@ -4969,7 +4976,7 @@ public class GameActionUtil {
 				
 				for(int j = 0; j < perms.size(); j++) {
 					c = perms.get(j);
-					if(!c.getKeyword().contains(keyword)) {
+					if (!c.hasKeyword(keyword)) {
 						c.addExtrinsicKeyword(keyword);
 						gloriousAnthemList.add(c);
 					}
@@ -5048,7 +5055,8 @@ public class GameActionUtil {
 			{
 				public boolean addCard(Card c)
 				{
-					return c.isEmblem() && c.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
+					return c.isEmblem() 
+								&& c.hasKeyword("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'");
 				}
 			});
 			
@@ -5666,8 +5674,9 @@ public class GameActionUtil {
 							if(!Already_Added.contains(Type.get(x))) {
 								if(!Type.get(x).getType().get(x2).equals("Creature") && !Type.get(x).getType().get(x2).equals("Legendary") 
 										&& !Type.get(x).getType().get(x2).equals("Artifact") ) {	
-									if(crd.getType().contains(Type.get(x).getType().get(x2)) || crd.getKeyword().contains("Changeling")
-											|| Type.get(x).getKeyword().contains("Changeling")) {					
+									if (crd.getType().contains(Type.get(x).getType().get(x2)) 
+											|| crd.hasKeyword("Changeling")
+											|| Type.get(x).hasKeyword("Changeling")) {					
 										Already_Added.add(Type.get(x));
 										crd.addSemiPermanentAttackBoost(1);
 										crd.addSemiPermanentDefenseBoost(1);
@@ -5831,8 +5840,7 @@ public class GameActionUtil {
 
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains(
-							"Play with the top card of your library revealed.");
+					return c.hasKeyword("Play with the top card of your library revealed.");
 				}
 			});
 
@@ -5855,8 +5863,7 @@ public class GameActionUtil {
 
 			creature = creature.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains(
-							"When you control no Islands, sacrifice CARDNAME.");
+					return c.hasKeyword("When you control no Islands, sacrifice CARDNAME.");
 				}
 			});
 
@@ -5885,8 +5892,7 @@ public class GameActionUtil {
 
 			creature = creature.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains(
-							"When you control no Forests, sacrifice CARDNAME.");
+					return c.hasKeyword("When you control no Forests, sacrifice CARDNAME.");
 				}
 			});
 
@@ -5907,8 +5913,7 @@ public class GameActionUtil {
 
 			creature = creature.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains(
-							"When you control no Swamps, sacrifice CARDNAME.");
+					return c.hasKeyword("When you control no Swamps, sacrifice CARDNAME.");
 				}
 			});
 
@@ -5930,7 +5935,7 @@ public class GameActionUtil {
 
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains("When you control no artifacts, sacrifice CARDNAME.");
+					return c.hasKeyword("When you control no artifacts, sacrifice CARDNAME.");
 				}
 			});
 
@@ -5954,7 +5959,7 @@ public class GameActionUtil {
 
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains("When you control no enchantments, sacrifice CARDNAME.");
+					return c.hasKeyword("When you control no enchantments, sacrifice CARDNAME.");
 				}
 			});
 
@@ -5977,8 +5982,7 @@ public class GameActionUtil {
 
 			cards = cards.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains(
-							"When there are no lands on the battlefield, sacrifice CARDNAME.");
+					return c.hasKeyword("When there are no lands on the battlefield, sacrifice CARDNAME.");
 				}
 			});
 
@@ -5999,8 +6003,7 @@ public class GameActionUtil {
 
 			cards = cards.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains(
-							"When there are no creatures on the battlefield, sacrifice CARDNAME.");
+					return c.hasKeyword("When there are no creatures on the battlefield, sacrifice CARDNAME.");
 				}
 			});
 
@@ -6021,7 +6024,7 @@ public class GameActionUtil {
 
 			cards = cards.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getKeyword().contains("When you control no other creatures, sacrifice CARDNAME.");
+					return c.hasKeyword("When you control no other creatures, sacrifice CARDNAME.");
 				}
 			});
 
@@ -6042,7 +6045,8 @@ public class GameActionUtil {
 			list = list.filter(new CardListFilter(){
 				public boolean addCard(Card c)
 				{
-					return c.getName().equals("Wolf") && c.getKeyword().contains("This creature gets +1/+1 for each card named Sound the Call in each graveyard.");
+					return c.getName().equals("Wolf") 
+								&& c.hasKeyword("This creature gets +1/+1 for each card named Sound the Call in each graveyard.");
 				}
 			});
 
