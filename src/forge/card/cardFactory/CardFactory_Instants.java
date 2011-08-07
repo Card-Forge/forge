@@ -872,7 +872,7 @@ public class CardFactory_Instants {
         //*************** START *********** START **************************
         else if (cardName.equals("Suffer the Past"))
         {
-        	Cost cost = new Cost("2 U B", cardName, false);
+        	Cost cost = new Cost("X B", cardName, false);
         	Target tgt = new Target(card, "Select a Player", "Player");
         	final SpellAbility spell = new Spell(card, cost, tgt){
 				private static final long serialVersionUID = 1168802375190293222L;
