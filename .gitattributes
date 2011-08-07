@@ -7455,6 +7455,7 @@ res/cardsfolder/tolarian_emissary.txt -text svneol=native#text/plain
 res/cardsfolder/tolarian_entrancer.txt svneol=native#text/plain
 res/cardsfolder/tolarian_serpent.txt -text svneol=native#text/plain
 res/cardsfolder/tolsimir_wolfblood.txt -text svneol=native#text/plain
+res/cardsfolder/tomb_of_urami.txt -text svneol=native#text/plain
 res/cardsfolder/tome_scour.txt -text svneol=native#text/plain
 res/cardsfolder/tonic_peddler.txt -text svneol=native#text/plain
 res/cardsfolder/tooth_of_chiss_goria.txt -text svneol=native#text/plain
