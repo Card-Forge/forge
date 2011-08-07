@@ -4307,6 +4307,7 @@ res/cardsfolder/mana_breach.txt -text svneol=native#text/plain
 res/cardsfolder/mana_crypt.txt -text svneol=native#text/plain
 res/cardsfolder/mana_cylix.txt -text svneol=native#text/plain
 res/cardsfolder/mana_drain.txt -text svneol=native#text/plain
+res/cardsfolder/mana_geyser.txt -text svneol=native#text/plain
 res/cardsfolder/mana_leak.txt -text svneol=native#text/plain
 res/cardsfolder/mana_matrix.txt -text svneol=native#text/plain
 res/cardsfolder/mana_prism.txt -text svneol=native#text/plain
