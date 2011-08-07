@@ -253,6 +253,15 @@ public class Phase extends MyObservable
 	    else if(phase.equals(Constant.Phase.Cleanup)){
 	    	AllZone.Phase.getPlayerTurn().setAssignedDamage(0);
 	    	
+	    	//reset dealt damage to vars
+	    	Player opp = AllZone.Phase.getPlayerTurn().getOpponent();
+			CardList oppList = AllZoneUtil.getCreaturesInPlay(opp);
+			for(int i = 0; i < oppList.size(); i++) {
+				Card c = oppList.get(i);
+				c.setDealtDmgToHumanThisTurn(false);
+				c.setDealtDmgToComputerThisTurn(false);
+			}
+	    	
 	    	//Reset Damage received map
 	    	CardList list = AllZoneUtil.getCardsInPlay();
 			for(Card c:list) {

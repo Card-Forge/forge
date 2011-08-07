@@ -21,7 +21,6 @@ import forge.gui.input.Input_PayManaCost_Ability;
 public class GameActionUtil {
 	public static void executeUpkeepEffects() {
 		AllZone.Stack.freezeStack();
-		upkeep_removeDealtDamageToOppThisTurn();
 		upkeep_Braid_Of_Fire();
 		
 		upkeep_Slowtrips();  // for "Draw a card at the beginning of the next turn's upkeep."
@@ -678,20 +677,6 @@ public class GameActionUtil {
 		AllZone.Stack.setResolving(false);
 		AllZone.InputControl.setInput(new Input_PayManaCost_Ability(message, manaCost, paid, unpaid));
 		AllZone.Stack.setResolving(bResolving);
-	}
-	
-	private static void upkeep_removeDealtDamageToOppThisTurn() {
-		// TODO: this should happen in the cleanup phase
-		// resets the status of attacked/blocked this turn
-		Player opp = AllZone.Phase.getPlayerTurn().getOpponent();
-
-		CardList list = AllZoneUtil.getCreaturesInPlay(opp);
-
-		for(int i = 0; i < list.size(); i++) {
-			Card c = list.get(i);
-			c.setDealtDmgToHumanThisTurn(false);
-			c.setDealtDmgToComputerThisTurn(false);
-		}
 	}
 
 	private static void upkeep_Braid_Of_Fire(){
