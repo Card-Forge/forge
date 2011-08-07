@@ -256,11 +256,11 @@ public abstract class Trigger {
 			CardList list = new CardList();
 			if(presentPlayer.equals("You") || presentPlayer.equals("Any"))
 			{
-				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
+				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
 			}
 			if(presentPlayer.equals("Opponent") || presentPlayer.equals("Any"))
 			{
-				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
+				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
 			}
 			
 			list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
@@ -302,11 +302,11 @@ public abstract class Trigger {
 			CardList list = new CardList();
 			if(presentPlayer.equals("You") || presentPlayer.equals("Any"))
 			{
-				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
+				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
 			}
 			if(presentPlayer.equals("Opponent") || presentPlayer.equals("Any"))
 			{
-				list.add(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
+				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
 			}
 			
 			list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);

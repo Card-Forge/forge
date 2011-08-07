@@ -541,7 +541,7 @@ public class MagicStack extends MyObservable {
 			CardList all = AllZoneUtil.getCardsInPlay();
 			all = all.filter(AllZoneUtil.nonToken);
 			CardList graves = AllZoneUtil.getCardsInGraveyard();
-			all.add(graves);
+			all.addAll(graves);
 
 			for(Card c:all) {
 				if(sp.getSourceCard().getName().equals(c.getName())) found = true;
