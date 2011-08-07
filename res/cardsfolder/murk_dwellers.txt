@@ -1,0 +1,10 @@
+Name:Murk Dwellers
+ManaCost:3 B
+Types:Creature Zombie
+Text:no text
+PT:2/2
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it gets +2/+0 until end of combat.
+SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +2 | UntilEndOfCombat$ True
+SVar:Rarity:Common
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/murk_dwellers.jpg
+End
