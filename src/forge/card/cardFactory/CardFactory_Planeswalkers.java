@@ -1273,7 +1273,7 @@ class CardFactory_Planeswalkers {
                     Card target = getTargetCard();
                     AllZone.GameAction.sacrifice(target);
                     //in makeToken, use target for source, so it goes into the correct Zone
-                    CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", target.getController(), "", new String[] {"Creature", "Dragon"}, 5, 5, new String[] {"Flying"});
+                    CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", target.getController(), "R", new String[] {"Creature", "Dragon"}, 5, 5, new String[] {"Flying"});
                     
                 }//resolve()
                 
