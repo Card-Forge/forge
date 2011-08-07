@@ -115,7 +115,7 @@ class BoosterDraft_1 implements BoosterDraft
         	  stopCount = n;
           }
           
-          LandSetCode[0] = blockSets.get(0);
+          LandSetCode[0] = SetInfoUtil.getLandCode(o.toString());
 	  }
 	  
 	  else if (draftType.equals("Custom")) {	// Draft from user-defined cardpools

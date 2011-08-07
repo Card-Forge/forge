@@ -221,48 +221,48 @@ public class SetInfoUtil {
 	}
 
 	private static String[][] blocks = {
-		{"A", "", "", "Alpha", "3"},
-		{"B", "", "", "Beta", "3"},
-		{"2ED", "", "", "Unlimited", "3"},
-		{"ARN", "", "", "Arabian Nights", "5"},
-		{"ATQ", "", "", "Antiquities", "5"},
-		{"3ED", "", "", "Revised", "3"},
-		{"LEG", "", "", "Legends", "3"},
-		{"DRK", "", "", "The Dark", "5"},
-		{"FEM", "", "", "Fallen Empires", "5"},
-		{"4ED", "", "", "Fourth Edition", "3"},
-		{"ICE", "ALL", "CSP", "Ice Age", "3"},
-		{"CHR", "", "", "Chronicles", "4"},
-		{"HML", "", "", "Homelands", "5"},
-		{"MIR", "VIS", "WTH", "Mirage", "3"},
-		{"5ED", "", "", "Fifth Edition", "3"},
-		{"POR", "", "", "Portal", "3"},
-		{"TMP", "STH", "EXO", "Tempest", "3"},
-		{"PO2", "", "", "Portal Second Age", "3"},
-		{"USG", "ULG", "UDS", "Urza", "3"},
-		{"6ED", "", "", "Sixth Edition", "3"},
-		{"PTK", "", "", "Portal Three Kingdoms", "5"},
-		{"MMQ", "NMS", "PCY", "Masques", "3"},
-		{"INV", "PLS", "APC", "Invasion", "3"},
-		{"7ED", "", "", "Seventh Edition", "3"},
-		{"ODY", "TOR", "JUD", "Odyssey", "3"},
-		{"ONS", "LGN", "SCG", "Onslaught", "3"},
-		{"8ED", "", "", "Eighth Edition", "3"},
-		{"MRD", "DST", "5DN", "Mirrodin", "3"},
-		{"CHK", "BOK", "SOK", "Kamigawa", "3"},
-		{"9ED", "", "", "Ninth Edition", "3"},
-		{"RAV", "GPT", "DIS", "Ravnica", "3"},
-		{"CSP", "", "", "Coldsnap", "3"},
-		{"TSP", "PLC", "FUT", "Time Spiral", "3"},
-		{"10E", "", "", "Tenth Edition", "3"},
-		{"LRW", "MOR", "", "Lorwyn", "3"},
-		{"SHM", "EVE", "", "Shadowmoor", "3"},
-		{"ALA", "CFX", "ARB", "Shards of Alara", "3"},
-		{"M10", "", "", "Magic 2010", "3"},
-		{"ZEN", "WWK", "", "Zendikar", "3"},
-		{"ROE", "", "", "Rise of the Eldrazi", "3"},
-		{"M11", "", "", "Magic 2011", "3"},
-		{"SOM", "MBS", "NPH", "Scars of Mirrodin", "3"}
+		{"A", "", "", "Alpha", "3", "A"},
+		{"B", "", "", "Beta", "3", "B"},
+		{"2ED", "", "", "Unlimited", "3", "2ED"},
+		{"ARN", "", "", "Arabian Nights", "5", "2ED"},
+		{"ATQ", "", "", "Antiquities", "5", "ATQ"},
+		{"3ED", "", "", "Revised", "3", "3ED"},
+		{"LEG", "", "", "Legends", "3", "3ED"},
+		{"DRK", "", "", "The Dark", "5", "3ED"},
+		{"FEM", "", "", "Fallen Empires", "5", "3ED"},
+		{"4ED", "", "", "Fourth Edition", "3", "4ED"},
+		{"ICE", "ALL", "CSP", "Ice Age", "3", "ICE"},
+		{"CHR", "", "", "Chronicles", "4", "4ED"},
+		{"HML", "", "", "Homelands", "5", "4ED"},
+		{"MIR", "VIS", "WTH", "Mirage", "3", "MIR"},
+		{"5ED", "", "", "Fifth Edition", "3", "5ED"},
+		{"POR", "", "", "Portal", "3", "POR"},
+		{"TMP", "STH", "EXO", "Tempest", "3", "TMP"},
+		{"PO2", "", "", "Portal Second Age", "3", "PO2"},
+		{"USG", "ULG", "UDS", "Urza", "3", "USG"},
+		{"6ED", "", "", "Sixth Edition", "3", "6ED"},
+		{"PTK", "", "", "Portal Three Kingdoms", "5", "PTK"},
+		{"MMQ", "NMS", "PCY", "Masques", "3", "MMQ"},
+		{"INV", "PLS", "APC", "Invasion", "3", "INV"},
+		{"7ED", "", "", "Seventh Edition", "3", "7ED"},
+		{"ODY", "TOR", "JUD", "Odyssey", "3", "ODY"},
+		{"ONS", "LGN", "SCG", "Onslaught", "3", "ONS"},
+		{"8ED", "", "", "Eighth Edition", "3", "8ED"},
+		{"MRD", "DST", "5DN", "Mirrodin", "3", "MRD"},
+		{"CHK", "BOK", "SOK", "Kamigawa", "3", "CHK"},
+		{"9ED", "", "", "Ninth Edition", "3", "9ED"},
+		{"RAV", "GPT", "DIS", "Ravnica", "3", "RAV"},
+		{"CSP", "", "", "Coldsnap", "3", "9ED"},
+		{"TSP", "PLC", "FUT", "Time Spiral", "3", "TSP"},
+		{"10E", "", "", "Tenth Edition", "3", "10E"},
+		{"LRW", "MOR", "", "Lorwyn", "3", "LRW"},
+		{"SHM", "EVE", "", "Shadowmoor", "3", "SHM"},
+		{"ALA", "CFX", "ARB", "Shards of Alara", "3", "ALA"},
+		{"M10", "", "", "Magic 2010", "3", "M10"},
+		{"ZEN", "WWK", "", "Zendikar", "3", "ZEN"},
+		{"ROE", "", "", "Rise of the Eldrazi", "3", "ROE"},
+		{"M11", "", "", "Magic 2011", "3", "M11"},
+		{"SOM", "MBS", "NPH", "Scars of Mirrodin", "3", "SOM"}
 	};
 	
 	public static ArrayList<String> getBlockNameList() {
@@ -294,5 +294,14 @@ public class SetInfoUtil {
 		}
 		
 		return 0;
+	}
+	
+	public static String getLandCode(String blockName) {
+		for (int i=0; i<blocks.length; i++) {
+			if (blocks[i][3].equals(blockName))
+				return blocks[i][5];
+		}
+		
+		return "M11"; // default, should never happen IRL
 	}
 }
