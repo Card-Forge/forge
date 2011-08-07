@@ -942,7 +942,7 @@ public class GuiDisplayUtil implements NewConstants {
         String t_computerSetupLibrary = "NONE";
         String t_changePlayer = "NONE";
     	
-    	String wd = System.getProperty("user.dir");
+    	String wd = ".";
     	JFileChooser fc = new JFileChooser(wd);
     	int rc = fc.showDialog(null, "Select Game State File");
     	if (rc != JFileChooser.APPROVE_OPTION)
