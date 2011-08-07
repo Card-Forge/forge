@@ -32,98 +32,73 @@ public class GameAction {
         }
     }
 
-    // TODO(sol) Combine all of these move tos
+    public static Card changeZone(PlayerZone prev, PlayerZone zone, Card c){
+    	if (prev == null){
+    		zone.add(c);
+    		return c;
+    	}
+    	
+    	boolean suppress = prev.equals(zone);
+    	
+    	Card copied;
+    	if (!suppress)
+    		copied = c;
+    	else{
+    		copied = AllZone.CardFactory.copyCard(c);
+    	
+	    	if (c.wasSuspendCast())			// these probably can be moved back to SubtractCounters
+	        	copied = addSuspendTriggers(c);
+	        copied.setUnearthed(c.isUnearthed());	// this might be unnecessary
+	        
+	        AllZone.TriggerHandler.suppressMode("ChangesZone");
+    	}
+
+        if (!c.isToken() || zone.is(Constant.Zone.Battlefield))
+        	 zone.add(copied);
+        
+        if(suppress)
+        	AllZone.TriggerHandler.clearSuppression("ChangesZone");
+    	
+    	if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
+            AllZone.Combat.removeFromCombat(c);
+    	
+    	prev.remove(c);
+
+    	return copied;
+    }
     
     public Card moveTo(PlayerZone zone, Card c) {
     	// Ideally move to should never be called without a prevZone
     	// Remove card from Current Zone, if it has one
-    	String prevName = "";
-        PlayerZone prev = AllZone.getZone(c);
-
-        //Card lastKnownInfo = getLastKnownInformation(c);
-        Card lastKnownInfo = c;
-        
+    	PlayerZone prev = AllZone.getZone(c);
+    	String prevName = prev != null ? prev.getZoneName() : "";
+       
         if(c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.") &&
         		!zone.is(Constant.Zone.Exile)) {
         	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
         	c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.");
         	return moveTo(removed, c);
         }
-
-        // Don't add the Token, unless it's moving to the battlefield
-        if (!c.isToken() || zone.is(Constant.Zone.Battlefield)){
-	     // If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
-	        if (prev != null && prev.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield))
-	        	c = AllZone.CardFactory.copyCard(c);
-	
-	        c.setUnearthed(lastKnownInfo.isUnearthed());	// this might be unnecessary
-	        if (lastKnownInfo.wasSuspendCast())			// these probably can be moved back to SubtractCounters
-	        	c = addSuspendTriggers(c);
-
-            if(prev != null)
-            {
-        	    if(prev.equals(zone))
-                    AllZone.TriggerHandler.suppressMode("ChangesZone");
-            }
-
-            zone.add(c);
-
-            if(prev != null)
-            {
-                if(prev.equals(zone))
-                   AllZone.TriggerHandler.clearSuppression("ChangesZone");
-            }
-        }
         
-        if (zone.is(Constant.Zone.Battlefield) && c.isAura()){
-        	// TODO: add attachment code here
-        }
+        Card lastKnownInfo = c;
         
-        // copyCard above seems to already clearRemembered, commenting out for now
-        //if (!zone.is(Constant.Zone.Battlefield))
-        //{
-        	//Other characteristics should be cleared here also.
-        //	c.clearRemembered();
-        //}
-
-        if(prev != null){
-        	if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
-                AllZone.Combat.removeFromCombat(c);
-        	prevName = prev.getZoneName();
-        	prev.remove(c);
-        }
-        else{
-        	// things that were just created will not have zones!
-        	//System.out.println(c.getName() + " " + zone.getZoneName());
-        }
-        
-        //Run triggers        
+        // Setup triggers before Zones get changed.
         HashMap<String,Object> runParams = new HashMap<String,Object>();
-
         runParams.put("Card", lastKnownInfo);
         runParams.put("Origin", prevName);
         runParams.put("Destination", zone.getZoneName());
-        AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
 
+        c = changeZone(prev, zone, c);
+        
+        if (zone.is(Constant.Zone.Battlefield) && c.isAura()){
+        	// TODO: add attachment code here
+        	// Attach to something that can be attached to
+        }
+
+        AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
         AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
 
         return c;
-    }
-    
-    public Card getLastKnownInformation(Card card){
-    	// this may be necessary at some point, but I'm not certain
-    	// record last known information before moving zones
-    	Card lastKnown = AllZone.CardFactory.copyCard(card);
-    	
-    	for(Card eq : card.getEquippedBy())
-    		eq.equipCard(lastKnown);
-    	
-    	for(Card en : card.getEnchantedBy())
-    		en.enchantCard(lastKnown);
-    	
-    	lastKnown.setExtrinsicKeyword(card.getExtrinsicKeyword());
-
-    	return lastKnown;
     }
     
     public void changeController(CardList list, Player oldController, Player newController){
@@ -670,7 +645,7 @@ public class GameAction {
         return sacrificeDestroy(c);
     }
     
-    public Card addSuspendTriggers(final Card c){
+    public static Card addSuspendTriggers(final Card c){
 		c.setSVar("HasteFromSuspend", "True");
 		
 		Command intoPlay = new Command() {
