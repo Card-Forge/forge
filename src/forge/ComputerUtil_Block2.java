@@ -190,7 +190,7 @@ public class ComputerUtil_Block2
 					if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
 							&& !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike")))
 						return false;
-					return true;//CardFactoryUtil.evaluateCreature(c) + diff < CardFactoryUtil.evaluateCreature(attacker);
+					return CardFactoryUtil.evaluateCreature(c) + diff < CardFactoryUtil.evaluateCreature(attacker);
 				}
 		  });
 		  
