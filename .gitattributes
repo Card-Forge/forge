@@ -5058,6 +5058,7 @@ res/cardsfolder/organ_grinder.txt -text svneol=native#text/plain
 res/cardsfolder/orgg.txt -text svneol=native#text/plain
 res/cardsfolder/origin_spellbomb.txt -text svneol=native#text/plain
 res/cardsfolder/orims_prayer.txt svneol=native#text/plain
+res/cardsfolder/orims_thunder.txt -text svneol=native#text/plain
 res/cardsfolder/ornithopter.txt -text svneol=native#text/plain
 res/cardsfolder/orochi_hatchery.txt -text svneol=native#text/plain
 res/cardsfolder/orochi_leafcaller.txt -text svneol=native#text/plain
