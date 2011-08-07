@@ -4,7 +4,6 @@ package forge;
 
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.trigger.Trigger;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
