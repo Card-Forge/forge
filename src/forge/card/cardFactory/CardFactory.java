@@ -482,12 +482,7 @@ public class CardFactory implements NewConstants {
                     
             	public void execute() {
                     CardList CardsinPlay = AllZoneUtil.getTypeInPlay("World");
-              		CardsinPlay = CardsinPlay.filter(new CardListFilter() {
-        				public boolean addCard(Card c) {
-        					if(!c.equals(card)) return true;
-        					return false;
-        				}
-        	      	});
+              		CardsinPlay.remove(card);
               		for(int i = 0; i < CardsinPlay.size(); i++)
                         AllZone.GameAction.sacrificeDestroy(CardsinPlay.get(i));	 
                     }//execute()
@@ -508,45 +503,7 @@ public class CardFactory implements NewConstants {
         		sa.setMultiKickerManaCost(k[1]);
         	}
         }
-        
-        /*
-        if (hasKeyword(card, "etbLoseLife") != -1) {
-        	int n = hasKeyword(card, "etbLoseLife");
 
-        	String parse = card.getKeyword().get(n).toString();
-        	card.removeIntrinsicKeyword(parse);
-        	
-        	String k[] = parse.split(":");
-
-        	final int num = Integer.parseInt(k[1]);
-        	card.getSpellPermanent().setLoseLifeAmount(num);
-
-        	// performs the gain
-        	final SpellAbility etbLoseLifeAbility = new Ability(card, "0") {
-        		@Override
-        		public void resolve() {
-        			card.getController().loseLife(num, card);
-        		}
-        	};
-
-        	// when the card enters the battlefield
-        	Command etbLoseLife = new Command() {
-				private static final long serialVersionUID = -6797619430597211329L;
-
-				public void execute() {
-        			StringBuilder sb = new StringBuilder();
-        			sb.append(card.getController()).append(" loses "+num+" life");
-        			etbLoseLifeAbility.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(etbLoseLifeAbility);
-
-        		}
-        	};
-        	card.addComesIntoPlayCommand(etbLoseLife);
-        } // etbLoseLife
-        */
-        
-        
         if(hasKeyword(card, "SearchRebel") != -1) {
             int n = hasKeyword(card, "SearchRebel");
             if(n != -1) {

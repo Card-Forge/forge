@@ -242,7 +242,7 @@ public class MagicStack extends MyObservable {
 				push(sp);
 			}
 
-			else if (sp.getPayCosts() != null && ! sp.isReplicate()){
+			else if (sp.getPayCosts() != null && !sp.isMultiKicker() && !sp.isReplicate()){
 				push(sp);
 			}
 
