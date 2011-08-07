@@ -451,7 +451,7 @@ public class Card extends MyObservable {
     }
     
     public boolean getSacrificeAtEOT() {
-        return sacrificeAtEOT || getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.");
+        return sacrificeAtEOT || hasKeyword("At the beginning of the end step, sacrifice CARDNAME.");
     }
     
     public void setSacrificeAtEOT(boolean sacrificeAtEOT) {
@@ -475,7 +475,7 @@ public class Card extends MyObservable {
     }
     
     public boolean hasFirstStrike() {
-        return firstStrike || getKeyword().contains("First Strike");
+        return firstStrike || hasKeyword("First Strike");
     }
     
     public void setFirstStrike(boolean firstStrike) {
@@ -487,7 +487,7 @@ public class Card extends MyObservable {
     }
     
     public boolean hasDoubleStrike() {
-        return doubleStrike || getKeyword().contains("Double Strike");
+        return doubleStrike || hasKeyword("Double Strike");
     }
     
     public boolean hasSecondStrike() {
@@ -1108,7 +1108,7 @@ public class Card extends MyObservable {
             }
             
             // Storm
-            if (getKeyword().contains("Storm") && !sb.toString().contains("Storm (When you ")) {
+            if (hasKeyword("Storm") && !sb.toString().contains("Storm (When you ")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
                 }
@@ -1677,13 +1677,13 @@ public class Card extends MyObservable {
     }
     
     public boolean hasSickness() {
-        if(getKeyword().contains("Haste")) return false;
+        if(hasKeyword("Haste")) return false;
         
         return sickness;
     }
     
     public boolean isSick() {
-        if(getKeyword().contains("Haste")) return false;
+        if(hasKeyword("Haste")) return false;
         
         return sickness && isCreature();
     }
@@ -2330,8 +2330,8 @@ public class Card extends MyObservable {
     }
     
     public void addExtrinsicKeyword(String s) {
-        //if(!getKeyword().contains(s)){
-    	if(s.startsWith("HIDDEN")) addHiddenExtrinsicKeyword(s);
+        //if(!hasKeyword(s)){
+    	if (s.startsWith("HIDDEN")) addHiddenExtrinsicKeyword(s);
         else 
         	extrinsicKeyword.add((getName().trim().length()==0 ? s :s.replaceAll(getName(), "CARDNAME")));
         //}
@@ -2448,7 +2448,7 @@ public class Card extends MyObservable {
     }
     
     public boolean isInstant() {
-        return type.contains("Instant") /*|| getKeyword().contains("Flash")*/;
+        return type.contains("Instant") /*|| hasKeyword("Flash")*/;
     }
     
     public boolean isArtifact() {
@@ -2706,7 +2706,7 @@ public class Card extends MyObservable {
     	
     	if (type.contains(cardType)
                     || ( (isCreature() || isTribal())
-                    		&& CardUtil.isACreatureType(cardType) && getKeyword().contains("Changeling"))) return true;
+                    		&& CardUtil.isACreatureType(cardType) && hasKeyword("Changeling"))) return true;
         return false;
     }
     
@@ -3097,7 +3097,7 @@ public class Card extends MyObservable {
     public int getEnoughDamageToKill(int maxDamage, Card source, boolean isCombat, boolean noPrevention) {
     	int killDamage = getKillDamage();
     	
-    	if (getKeyword().contains("Indestructible") || getShield() > 0) { 
+    	if (hasKeyword("Indestructible") || getShield() > 0) { 
     		if (!(source.hasKeyword("Wither") || source.hasKeyword("Infect"))) 
     			return maxDamage + 1;
     	}
@@ -3264,13 +3264,13 @@ public class Card extends MyObservable {
 		if(CardFactoryUtil.hasProtectionFrom(source,this)) return 0;
 		
     	if (isCombat) {
-    		if (getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
-    		if (getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME.")) return 0;
+    		if (hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    		if (hasKeyword("Prevent all combat damage that would be dealt to CARDNAME.")) return 0;
     		if (source.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
     		if (source.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")) return 0;
     	}
-    	if (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) return 0;
-    	if (getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    	if (hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) return 0;
+    	if (hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
     	if (source.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
     	if (source.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) return 0;
     	

@@ -347,9 +347,9 @@ public class CombatUtil {
                 if (asSeparateWords[8].matches("[0-9][0-9]?")) {
                     powerLimit2[0] = Integer.parseInt((asSeparateWords[8]).trim());
         
-                    if (blocker.getNetAttack() >= powerLimit2[0] && attacker.getKeyword().contains
+                    if (blocker.getNetAttack() >= powerLimit2[0] && attacker.hasKeyword
                         ("CARDNAME can't be blocked by creatures with power " + powerLimit2[0] + " or greater.")) return false;
-                    if (blocker.getNetAttack() <= powerLimit2[0] && attacker.getKeyword().contains
+                    if (blocker.getNetAttack() <= powerLimit2[0] && attacker.hasKeyword
                         ("CARDNAME can't be blocked by creatures with power " + powerLimit2[0] + " or less.")) return false;
                 }
             }
