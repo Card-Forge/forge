@@ -113,6 +113,7 @@ public class AbilityFactory_Copy {
 
 	private static String copyPermanentStackDescription(AbilityFactory af, SpellAbility sa) {
 		StringBuilder sb = new StringBuilder();
+		HashMap<String,String> params = af.getMapParams();
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard()).append(" - ");
@@ -125,7 +126,7 @@ public class AbilityFactory_Copy {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else
-			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 
 		sb.append("Copy ");
 		Iterator<Card> it = tgtCards.iterator();
@@ -449,6 +450,7 @@ public class AbilityFactory_Copy {
 
 	private static String copySpellStackDescription(AbilityFactory af, SpellAbility sa) {
 		StringBuilder sb = new StringBuilder();
+		HashMap<String,String> params = af.getMapParams();
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -461,7 +463,7 @@ public class AbilityFactory_Copy {
 		if (tgt != null)
 			tgtSpells = tgt.getTargetSAs();
 		else
-			tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
 
 		sb.append("Copy ");
 		Iterator<SpellAbility> it = tgtSpells.iterator();
@@ -497,7 +499,7 @@ public class AbilityFactory_Copy {
 	}
 
 	private static void copySpellResolve(final AbilityFactory af, final SpellAbility sa) {
-		//final HashMap<String,String> params = af.getMapParams();
+		final HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 
 		ArrayList<SpellAbility> tgtSpells;
@@ -506,7 +508,7 @@ public class AbilityFactory_Copy {
 		if (tgt != null)
 			tgtSpells = tgt.getTargetSAs();
 		else
-			tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(SpellAbility tgtSA: tgtSpells) {
 			if (tgt == null || CardFactoryUtil.canTarget(card, tgtSA.getSourceCard())) {

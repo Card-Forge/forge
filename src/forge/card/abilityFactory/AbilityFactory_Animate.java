@@ -136,7 +136,7 @@ public class AbilityFactory_Animate {
 		if (tgt != null)
 			tgts = tgt.getTargetCards();
 		else
-			tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(Card c : tgts) {
 			sb.append(c).append(" ");
@@ -194,7 +194,7 @@ public class AbilityFactory_Animate {
         	return false;
 		
 		if(null == tgt) {
-			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, af.getMapParams().get("Defined"), sa);
+			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
 			
 			boolean bFlag = false;
 			for(Card c : defined) {

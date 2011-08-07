@@ -129,15 +129,16 @@ public class AbilityFactory_AlterLife {
 	}
 
 	public static String gainLifeStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
-		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 
@@ -147,7 +148,7 @@ public class AbilityFactory_AlterLife {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		for(Player player : tgtPlayers)
 			sb.append(player).append(" ");
@@ -169,7 +170,7 @@ public class AbilityFactory_AlterLife {
 		final Card source = sa.getSourceCard();
 		int life = AllZone.ComputerPlayer.getLife();
 		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
-		String amountStr = af.getMapParams().get("LifeAmount");
+		String amountStr = params.get("LifeAmount");
 		
 		//don't use it if no life to gain
 		if (lifeAmount <= 0) return false;
@@ -248,6 +249,8 @@ public class AbilityFactory_AlterLife {
 	public static boolean gainLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
 			return false;
+		
+		HashMap<String,String> params = af.getMapParams();
 
 		// If the Target is gaining life, target self.
 		// if the Target is modifying how much life is gained, this needs to be handled better
@@ -261,7 +264,7 @@ public class AbilityFactory_AlterLife {
 		}
 
 		Card source = sa.getSourceCard();
-		String amountStr = af.getMapParams().get("LifeAmount");
+		String amountStr = params.get("LifeAmount");
 		if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
 			// Set PayX here to maximum value.
 			int xPay = ComputerUtil.determineLeftoverMana(sa);
@@ -398,15 +401,16 @@ public class AbilityFactory_AlterLife {
 	}
 	
 	static String loseLifeStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
-		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 
@@ -415,7 +419,7 @@ public class AbilityFactory_AlterLife {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(Player player : tgtPlayers)
 			sb.append(player).append(" ");
@@ -507,17 +511,19 @@ public class AbilityFactory_AlterLife {
 		 return (randomReturn && chance);
 	}
 	
-	public static boolean loseLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+	public static boolean loseLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
 			return false;
 
+		HashMap<String,String> params = af.getMapParams();
+		
 		 Target tgt = sa.getTarget();
 		 if (tgt != null){
 			 tgt.addTarget(AllZone.HumanPlayer);
 		 }
 		 
 		 Card source = sa.getSourceCard();
-		 String amountStr = af.getMapParams().get("LifeAmount");
+		 String amountStr = params.get("LifeAmount");
 		 int amount = 0;
 		 if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
 			 // Set PayX here to maximum value.
@@ -532,7 +538,7 @@ public class AbilityFactory_AlterLife {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		
 		if (tgtPlayers.contains(AllZone.ComputerPlayer)){
@@ -561,7 +567,7 @@ public class AbilityFactory_AlterLife {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
@@ -671,23 +677,25 @@ public class AbilityFactory_AlterLife {
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
 			return false;
 
-		 Target tgt = sa.getTarget();
-		 if (tgt != null){
-			 tgt.addTarget(AllZone.HumanPlayer);
-		 }
-		 else{
-			 ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-			 for(Player p : players)
-				 if (!mandatory && p.isComputer() && p.getPoisonCounters() > p.getOpponent().getPoisonCounters())
-					 return false;
-		 }
-		 
+		HashMap<String,String> params = af.getMapParams();
+
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			tgt.addTarget(AllZone.HumanPlayer);
+		}
+		else{
+			ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+			for(Player p : players)
+				if (!mandatory && p.isComputer() && p.getPoisonCounters() > p.getOpponent().getPoisonCounters())
+					return false;
+		}
+
 		// check SubAbilities DoTrigger?
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
 			return abSub.doTrigger(mandatory);
 		}
-		
+
 		return true;
 	}
 	
@@ -701,7 +709,7 @@ public class AbilityFactory_AlterLife {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
@@ -709,15 +717,16 @@ public class AbilityFactory_AlterLife {
 	}
 	
 	private static String poisonStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
-		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("Num"), sa);
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), sa);
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard()).append(" - ");
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 
@@ -727,7 +736,7 @@ public class AbilityFactory_AlterLife {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		if(tgtPlayers.size() > 0) {
 			Iterator<Player> it = tgtPlayers.iterator();
@@ -898,15 +907,16 @@ public class AbilityFactory_AlterLife {
 	}
 
 	private static String setLifeStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
-		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard()).append(" -");
 		else
 			sb.append(" ");
 		
-		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		String conditionDesc = params.get("ConditionDescription");
 		if (conditionDesc != null)
 			sb.append(conditionDesc).append(" ");
 
@@ -916,7 +926,7 @@ public class AbilityFactory_AlterLife {
 		if(tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
 		for(Player player : tgtPlayers)
 			sb.append(player).append(" ");
@@ -1001,7 +1011,8 @@ public class AbilityFactory_AlterLife {
 		int life = AllZone.ComputerPlayer.getLife();
 		int hlife = AllZone.HumanPlayer.getLife();
 		Card source = sa.getSourceCard();
-		String amountStr = af.getMapParams().get("LifeAmount");
+		HashMap<String,String> params = af.getMapParams();
+		String amountStr = params.get("LifeAmount");
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)   // If there is a cost payment it's usually not mandatory
 			return false;
 		
