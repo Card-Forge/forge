@@ -7,4 +7,5 @@ SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ TriggeredPl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangleroot.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/259.jpg
 End

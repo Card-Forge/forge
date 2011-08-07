@@ -10,4 +10,5 @@ SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_firecat.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/218.jpg
 End
