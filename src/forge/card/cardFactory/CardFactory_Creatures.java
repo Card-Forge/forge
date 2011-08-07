@@ -3226,63 +3226,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Vendilion Clique")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-
-                    CardList list = new CardList(hand.getCards());
-                    CardList nonLandList = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.isLand();
-                        }
-                    });
-                    
-                    if(list.size() > 0) {
-                        if(card.getController().isHuman()) {
-                            GuiUtils.getChoiceOptional("Revealing hand", list.toArray());
-                            if(nonLandList.size() > 0) {
-                                Object o = GuiUtils.getChoiceOptional("Select nonland card",
-                                        nonLandList.toArray());
-                                if(o != null) {
-                                    Card c = (Card) o;
-                                	AllZone.GameAction.moveToBottomOfLibrary(c);
-
-                                    player.drawCard();
-                                }
-                            }
-                        } else //comp
-                        {
-                            if(AllZone.Phase.getTurn() >= 12 && nonLandList.size() > 0) {
-                                Card c = CardFactoryUtil.AI_getMostExpensivePermanent(nonLandList, card, false);
-                                AllZone.GameAction.moveToBottomOfLibrary(c);
-                                AllZone.HumanPlayer.drawCard();
-                            }
-                        }
-                    }//handsize > 0
-                    
-                }
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -5052568979553782714L;
-                
-                public void execute() {
-                    if(card.getController().isHuman()) {
-                        AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
-                        ButtonUtil.disableAll();
-                    } else if(card.getController().isComputer()) {
-                        ability.setTargetPlayer(AllZone.HumanPlayer);
-                        AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                    }
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sygg, River Guide")) {
