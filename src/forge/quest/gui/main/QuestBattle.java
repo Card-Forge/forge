@@ -276,6 +276,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Predator 3", "hard", "UG Beastmaster Ascension deck");
         addToDeckList("Pointy Haired Boss 3", "hard", "WUG Combo deck with Hokori, Dust Drinker, Mana Leak and Sunscape Master");
         addToDeckList("Princess Selenia 1", "easy", "BUG Song of Serenity deck");
+        addToDeckList("Professor X 2", "medium", "WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade");
         addToDeckList("Professor X 3", "hard", "WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade");
         
         addToDeckList("R2-D2 3", "hard", "Mono U Black Vise deck with bounce (Boomerang) spells and Howling Mine");
