@@ -1242,36 +1242,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("March of Souls")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -1468254925312413359L;
                 
-                @Override
-                public void resolve() {
-                    change(AllZone.Human_Battlefield, card.getController());
-                    change(AllZone.Computer_Battlefield, card.getController());
-                }
-                
-                public void change(PlayerZone play, Player owner) {
-                    Card[] c = play.getCards();
-                    for(int i = 0; i < c.length; i++) {
-                        if(c[i].isCreature() && !c[i].hasKeyword("Indestructible")) {
-                            AllZone.GameAction.destroyNoRegeneration(c[i]);
-                            CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", c[i].getController(), "W", new String[] {
-                                    "Creature", "Spirit"}, 1, 1, new String[] {"Flying"});
-                        }
-                    }
-                }//change()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Martial Coup")) {
             SpellAbility spell = new Spell(card) {
