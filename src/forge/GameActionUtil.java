@@ -123,12 +123,10 @@ public class GameActionUtil {
 		playCard_Chalice_of_the_Void(c);
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
-		//playCard_Infernal_Kirin(c);
 		playCard_Standstill(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Curse_of_Wizardry(c);
 		playCard_Venser_Emblem(c);
-		playCard_Presence_of_the_Master(c);
 
 	}
 	
@@ -377,23 +375,6 @@ public class GameActionUtil {
 			}//if
 		}
 	}//playCard_Vengevine()
-	
-	public static void playCard_Presence_of_the_Master(Card c) {
-		//if(sp instanceof Spell_Permanent && sp.getSourceCard().isEnchantment()) {
-		if(AllZoneUtil.isCardInPlay("Presence of the Master") && c.isEnchantment()) {
-			final Card source = AllZoneUtil.getCardsInPlay("Presence of the Master").get(0);
-			SpellAbility counter = new Ability(source, "") {
-				@Override
-				public void resolve() {
-					AllZone.Stack.pop();
-				}
-			};
-			counter.setStackDescription(source.getName()+" - counter enchantment spell.");
-
-            AllZone.Stack.addSimultaneousStackEntry(counter);
-
-		}
-	}
 	
 	public static void playCard_Venser_Emblem(Card c)
 	{
