@@ -673,6 +673,15 @@ public class AllZoneUtil {
 	};
 	
 	/**
+	 * a CardListFilter to get all token cards
+	 */
+	public static CardListFilter token = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isToken();
+		}
+	};
+	
+	/**
 	 * a CardListFilter to get all nonbasic lands
 	 */
 	public static CardListFilter nonBasicLand = new CardListFilter() {
