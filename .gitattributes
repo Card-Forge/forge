@@ -2219,6 +2219,7 @@ res/cardsfolder/esper_stormblade.txt -text svneol=native#text/plain
 res/cardsfolder/esperzoa.txt svneol=native#text/plain
 res/cardsfolder/essence_drain.txt -text svneol=native#text/plain
 res/cardsfolder/essence_feed.txt -text svneol=native#text/plain
+res/cardsfolder/essence_flare.txt -text svneol=native#text/plain
 res/cardsfolder/essence_fracture.txt -text svneol=native#text/plain
 res/cardsfolder/essence_scatter.txt -text svneol=native#text/plain
 res/cardsfolder/essence_sliver.txt -text svneol=native#text/plain
