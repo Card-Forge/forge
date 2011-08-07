@@ -956,6 +956,7 @@ public class AbilityFactory_Counters {
 
 				@Override
 				public void selectButtonCancel() {
+                    AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll(); //Hacky intermittent solution to triggers that look for counters being put on. They used to wait for another priority passing after proliferate finished.
 					stop();
 				}
 

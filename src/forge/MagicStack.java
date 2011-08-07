@@ -105,7 +105,7 @@ public class MagicStack extends MyObservable {
 		frozenStack.clear();
 	}
 
-	public void setResolving(boolean b) { bResolving = b; }
+	public void setResolving(boolean b) { bResolving = b; if(!bResolving) chooseOrderOfSimultaneousStackEntryAll(); }
 	public boolean getResolving() { return bResolving; }
 
 	public void add(SpellAbility sp, boolean useX) {
