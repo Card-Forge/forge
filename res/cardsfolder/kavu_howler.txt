@@ -8,4 +8,5 @@ SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | Reveal$ True | ChangeNum$ All | Chan
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_howler.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/79.jpg
 End

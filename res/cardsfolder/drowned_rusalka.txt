@@ -8,4 +8,5 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned_rusalka.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/24.jpg
 End

@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, if you control a red or green permanent, d
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://wizards.com/global/images/magic/general/ceta_sanctuary.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/20.jpg
 End

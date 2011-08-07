@@ -8,4 +8,5 @@ SVar:TrigControl:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ Trig
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drooling_ogre.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/58.jpg
 End

@@ -9,4 +9,5 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_indifference.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/243.jpg
 End

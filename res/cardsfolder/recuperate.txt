@@ -7,4 +7,5 @@ A:SP$ PreventDamage | Cost$ 3 W | Tgt$ TgtCP | Amount$ 6 | PrecostDesc$ or | Spe
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recuperate.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/21.jpg
 End

@@ -8,4 +8,5 @@ T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPrevent | OptionalDecider$ 
 SVar:TrigPrevent:AB$ PreventDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunfire_balm.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/56.jpg
 End

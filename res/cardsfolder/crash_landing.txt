@@ -7,4 +7,5 @@ SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crash_landing.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/82.jpg
 End

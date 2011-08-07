@@ -9,4 +9,5 @@ SVar:DBAnimate:DB$ Animate | Types$ ChosenType | OverwriteTypes$ True | KeepSupe
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_skyreaver.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/97.jpg
 End

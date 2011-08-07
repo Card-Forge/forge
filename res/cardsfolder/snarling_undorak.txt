@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 G | ValidTgts$ Creature.Beast | NumAtt$ +1 | NumDef$ +1 | T
 K:Morph:1 G G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snarling_undorak.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/283.jpg
 End

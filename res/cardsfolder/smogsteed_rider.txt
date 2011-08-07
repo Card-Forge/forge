@@ -7,4 +7,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | KW$ Fear
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smogsteed_rider.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/63.jpg
 End

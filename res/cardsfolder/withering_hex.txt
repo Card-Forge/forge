@@ -10,4 +10,5 @@ SVar:X:Count$CardCounters.PLAGUE/Times.-1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_hex.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/181.jpg
 End
