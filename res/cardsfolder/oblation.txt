@@ -1,0 +1,9 @@
+Name:Oblation
+ManaCost:2 W
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw| SpellDescription$ The owner of target nonland permanent shuffles it into his or her library, then draws two cards.
+SVar:DBDraw:DB$ Draw | Defined$ TargetedOwner | NumCards$ 2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oblation.jpg
+End
