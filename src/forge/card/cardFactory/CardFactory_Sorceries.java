@@ -1525,45 +1525,7 @@ public class CardFactory_Sorceries {
             card.setSpellWithChoices(true);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
-               
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Overwhelming Forces")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7165356050118574287L;
-                
-                @Override
-                public void resolve() {
-                    Player opponent = card.getController().getOpponent();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-                    
-                    CardList all = new CardList(play.getCards());
-                    all = all.getType("Creature");
-                    
-                    for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        if(c.isCreature()) AllZone.GameAction.destroy(c);
-                        card.getController().drawCard();
-                    }
-                }//resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
-                    
-                    human = human.getType("Creature");
-                    human = human.getNotKeyword("Indestructible");                    
-                    
-                    // the computer will at least destroy 1 creature
-                    return !human.isEmpty();
-                }
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+                       
         
         //*************** START *********** START **************************
         else if(cardName.equals("Amnesia")) {
