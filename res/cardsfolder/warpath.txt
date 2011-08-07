@@ -1,8 +1,8 @@
 Name:Warpath
-ManaCost:2 R
+ManaCost:3 R
 Types:Instant
 Text:no text
-A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 3 | ValidCards$ Creature.blocked,Creature.blocking | ValidDescription$ each blocked and blocking creature. | SpellDescription$ CARDNAME deals 3 damage to each blocked and blocking creature.
+A:SP$ DamageAll | Cost$ 3 R | NumDmg$ 3 | ValidCards$ Creature.blocked,Creature.blocking | ValidDescription$ each blocked and blocking creature. | SpellDescription$ CARDNAME deals 3 damage to each blocked and blocking creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warpath.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/226.jpg
