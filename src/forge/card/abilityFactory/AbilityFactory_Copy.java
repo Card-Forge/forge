@@ -252,10 +252,10 @@ public class AbilityFactory_Copy {
 					Card copy;
 					if(!c.isToken()) {
 						//copy creature and put it onto the battlefield
-						copy = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+						copy = AllZone.CardFactory.getCard(c.getName(), sa.getActivatingPlayer());
 
 						//when copying something stolen:
-						copy.setController(c.getController());
+						copy.setController(sa.getActivatingPlayer());
 
 						copy.setToken(true);
 						copy.setCopiedToken(true);
