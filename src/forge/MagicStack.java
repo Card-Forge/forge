@@ -457,6 +457,8 @@ public class MagicStack extends MyObservable {
 			//Run trigger
 			HashMap<String,Object> runParams = new HashMap<String,Object>();
 			runParams.put("Cost", sp.getPayCosts());
+			runParams.put("Player", sp.getSourceCard().getController());
+			runParams.put("Activator", sp.getActivatingPlayer());
 			runParams.put("CastSA", sp);
 			AllZone.TriggerHandler.runTrigger("SpellAbilityCast", runParams);
 

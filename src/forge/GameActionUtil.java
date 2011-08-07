@@ -126,7 +126,6 @@ public class GameActionUtil {
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
 		playCard_Infernal_Kirin(c);
-		playCard_Forced_Fruition(c);
 		playCard_Standstill(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Curse_of_Wizardry(c);
@@ -673,34 +672,6 @@ public class GameActionUtil {
 
 		}
 	} // Dovescape
-
-	public static void playCard_Forced_Fruition(Card c) {
-		CardList list = AllZoneUtil.getCardsInPlay("Forced Fruition");
-
-		for(int i = 0; i < list.size(); i++) {
-			final Card card = list.get(i);
-			final Player drawer = card.getController().getOpponent();
-
-
-			Ability ability2 = new Ability(card, "0") {
-				@Override
-				public void resolve() {
-					drawer.drawCards(7);
-				}
-			}; // ability2
-			if(!(card.getController().equals(c.getController()))) {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a spell, ").append(drawer).append(" draws seven cards.");
-				ability2.setStackDescription(sb.toString());
-
-                AllZone.Stack.addSimultaneousStackEntry(ability2);
-
-			}
-		}
-
-	}
 
 	public static void playCard_Standstill(Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay("Standstill");
