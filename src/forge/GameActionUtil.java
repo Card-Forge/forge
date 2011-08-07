@@ -1161,7 +1161,7 @@ public class GameActionUtil {
 							} 
 							else //computer
 							{
-								if(ComputerUtil.canPayCost(aiPaid)) 
+								if(ComputerUtil.canPayCost(aiPaid) && ! c.getKeyword().contains("Indestructible")) 
 									ComputerUtil.playNoStack(aiPaid);
 								else AllZone.GameAction.destroy(c);
 							}		
