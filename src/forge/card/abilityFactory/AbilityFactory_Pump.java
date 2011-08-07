@@ -162,7 +162,7 @@ public class AbilityFactory_Pump {
     	
         final boolean kHaste = Keywords.contains("Haste");
         final boolean evasive = (Keywords.contains("Flying") || Keywords.contains("Horsemanship") || 
-        		Keywords.contains("HIDDEN Unblockable"));
+        		Keywords.contains("HIDDEN Unblockable") || Keywords.contains("Fear") || Keywords.contains("Intimidate"));
         final boolean kSize = !Keywords.get(0).equals("none");
         String KWpump[] = {"none"};
         if (!Keywords.get(0).equals("none"))
