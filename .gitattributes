@@ -7195,6 +7195,7 @@ res/cardsfolder/tangle_spider.txt -text svneol=native#text/plain
 res/cardsfolder/tangle_wire.txt -text svneol=native#text/plain
 res/cardsfolder/tanglebloom.txt -text svneol=native#text/plain
 res/cardsfolder/tangleroot.txt svneol=native#text/plain
+res/cardsfolder/tanglewalker.txt -text svneol=native#text/plain
 res/cardsfolder/taoist_hermit.txt -text svneol=native#text/plain
 res/cardsfolder/taoist_mystic.txt -text svneol=native#text/plain
 res/cardsfolder/tar_pit_warrior.txt -text svneol=native#text/plain
