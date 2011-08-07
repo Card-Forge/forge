@@ -1409,6 +1409,7 @@ res/cardsfolder/copperhorn_scout.txt -text svneol=native#text/plain
 res/cardsfolder/copperline_gorge.txt -text svneol=native#text/plain
 res/cardsfolder/coral_atoll.txt -text svneol=native#text/plain
 res/cardsfolder/coral_eel.txt -text svneol=native#text/plain
+res/cardsfolder/coral_fighters.txt -text svneol=native#text/plain
 res/cardsfolder/coral_helm.txt -text svneol=native#text/plain
 res/cardsfolder/coral_merfolk.txt -text svneol=native#text/plain
 res/cardsfolder/coral_reef.txt svneol=native#text/plain
