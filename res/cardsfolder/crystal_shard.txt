@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_shard.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/159.jpg
 End

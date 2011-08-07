@@ -6,4 +6,5 @@ A:AB$ Tap | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_deluge.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/43.jpg
 End

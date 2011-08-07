@@ -9,4 +9,5 @@ SVar:DBNoCombatDamage:DB$Pump | Defined$ Self | KW$ HIDDEN Prevent all combat da
 SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_vigilantes.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/77.jpg
 End
