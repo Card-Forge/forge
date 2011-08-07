@@ -529,12 +529,25 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
             deck.addSideboard(list.get(i).getName() + "|" + list.get(i).getCurSetCode());
         
 
-        for(int i = 0; i < 20; i++) {
-            deck.addSideboard("Forest|" + BoosterDraft.LandSetCode[0]);
-            deck.addSideboard("Mountain|" + BoosterDraft.LandSetCode[0]);
-            deck.addSideboard("Swamp|" + BoosterDraft.LandSetCode[0]);
-            deck.addSideboard("Island|" + BoosterDraft.LandSetCode[0]);
-            deck.addSideboard("Plains|" + BoosterDraft.LandSetCode[0]);
+        if (BoosterDraft.LandSetCode[0].equals("CSP")) // temporary fix for the Coldsnap lands
+        {
+            for(int i = 0; i < 20; i++) {
+                deck.addSideboard("Forest|9ED");
+                deck.addSideboard("Mountain|9ED");
+                deck.addSideboard("Swamp|9ED");
+                deck.addSideboard("Island|9ED");
+                deck.addSideboard("Plains|9ED");
+            }
+        }
+        else
+        {
+        	for(int i = 0; i < 20; i++) {
+        		deck.addSideboard("Forest|" + BoosterDraft.LandSetCode[0]);
+        		deck.addSideboard("Mountain|" + BoosterDraft.LandSetCode[0]);
+        		deck.addSideboard("Swamp|" + BoosterDraft.LandSetCode[0]);
+        		deck.addSideboard("Island|" + BoosterDraft.LandSetCode[0]);
+        		deck.addSideboard("Plains|" + BoosterDraft.LandSetCode[0]);
+        	}
         }
         
         return deck;
