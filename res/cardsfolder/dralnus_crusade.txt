@@ -7,4 +7,5 @@ K:stAnimateAll:Goblin:no changes:Zombie:Black,Overwrite:No Abilities:No Conditio
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnus_crusade.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/104.jpg
 End
