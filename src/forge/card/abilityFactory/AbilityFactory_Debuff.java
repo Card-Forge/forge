@@ -11,6 +11,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -357,11 +358,10 @@ public class AbilityFactory_Debuff {
 			return false;
 
 		HashMap<String,String> params = af.getMapParams();
-		//Card source = sa.getSourceCard();
 
 		ArrayList<String> kws = getKeywords(params);
 
-		if (sa.getTarget() == null){
+		if (sa.getTarget() == null) {
 			if (mandatory)
 				return true;
 		}
@@ -410,5 +410,208 @@ public class AbilityFactory_Debuff {
 		}
 
 	}//debuffResolve
+	
+	
+	// *************************************************************************
+	// ***************************** DebuffAll *********************************
+	// *************************************************************************
+	
+	public static SpellAbility createAbilityDebuffAll(final AbilityFactory af) {
+        final SpellAbility abDebuffAll = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = -1977027530713097149L;
+
+			@Override
+            public boolean canPlayAI() {
+            	return debuffAllCanPlayAI(af, this);
+            }
+            
+			@Override
+			public String getStackDescription(){
+				return debuffAllStackDescription(af, this);
+			}
+            
+            @Override
+            public void resolve() {
+                debuffAllResolve(af, this);
+            }
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return debuffAllTriggerAI(af, this, mandatory);
+			}
+            
+        };//SpellAbility
+
+        return abDebuffAll;
+	}
+    
+    public static SpellAbility createSpellDebuffAll(final AbilityFactory af) {
+    	SpellAbility spDebuffAll = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 399707924254248213L;
+
+			@Override
+    		public boolean canPlayAI() {
+    			return debuffAllCanPlayAI(af, this);
+    		}
+    		
+			@Override
+			public String getStackDescription() {
+				return debuffAllStackDescription(af, this);
+			}
+
+			@Override
+    		public void resolve() {
+    			debuffAllResolve(af, this);
+    		}
+    	};//SpellAbility
+
+    	return spDebuffAll;
+    }
+    
+    public static SpellAbility createDrawbackDebuffAll(final AbilityFactory af) {
+        SpellAbility dbDebuffAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = 3262199296469706708L;
+
+			@Override
+			public String getStackDescription() {
+				return debuffAllStackDescription(af, this);
+			}
+            
+			@Override
+            public void resolve() {
+            	debuffAllResolve(af, this);
+            }
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return debuffAllChkDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return debuffAllTriggerAI(af, this, mandatory);
+			}
+        };//SpellAbility
+        
+        return dbDebuffAll;
+	}
+    
+    private static boolean debuffAllCanPlayAI(final AbilityFactory af, SpellAbility sa) {
+    	String valid = "";
+		Random r = MyRandom.random;
+		final Card source = sa.getSourceCard();
+		Card hostCard = af.getHostCard();
+		HashMap<String,String> params = af.getMapParams();
+		
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()); //to prevent runaway activations 
+    	
+    	if(params.containsKey("ValidCards")) {
+			valid = params.get("ValidCards");
+    	}
+    	
+    	CardList comp = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+    	comp = comp.getValidCards(valid, hostCard.getController(), hostCard);
+    	CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+    	human = human.getValidCards(valid,hostCard.getController(), hostCard);
+    	
+    	//only count creatures that can attack
+    	human = human.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return CombatUtil.canAttack(c) && !af.isCurse();
+			}
+		});
+    	
+    	if(af.isCurse()) {
+    		//evaluate both lists and pass only if human creatures are more valuable
+    		if(CardFactoryUtil.evaluateCreatureList(comp) + 200 >= CardFactoryUtil.evaluateCreatureList(human))
+    			return false;
+
+    		return chance;
+    	}//end Curse
+    	
+    	//don't use non curse DebuffAll after Combat_Begin until AI is improved
+    	if(AllZone.Phase.isAfter(Constant.Phase.Combat_Begin))
+    		return false;
+    	
+    	if (comp.size() > human.size())
+    		return false;
+    	
+    	return (r.nextFloat() < .6667) && chance;
+    }//pumpAllCanPlayAI()
+    
+    private static void debuffAllResolve(AbilityFactory af, SpellAbility sa) {
+    	HashMap<String,String> params = af.getMapParams();
+    	Card hostCard = af.getHostCard();
+    	ArrayList<String> kws = getKeywords(params);
+    	String valid = "";
+
+		if(params.containsKey("ValidCards")) 
+			valid = params.get("ValidCards");
+    	
+    	CardList list = AllZoneUtil.getCardsInPlay();
+		list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+
+		for(final Card tgtC : list){
+			final ArrayList<String> hadIntrinsic = new ArrayList<String>();
+			if(AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
+				for(String kw : kws) {
+					if(tgtC.getIntrinsicKeyword().contains(kw)) hadIntrinsic.add(kw);
+					tgtC.removeIntrinsicKeyword(kw);
+					tgtC.removeExtrinsicKeyword(kw);
+				}
+			}
+			if(!params.containsKey("Permanent")) {
+				AllZone.EndOfTurn.addUntil(new Command() {
+					private static final long serialVersionUID = 7486231071095628674L;
+
+					public void execute() {
+						if(AllZoneUtil.isCardInPlay(tgtC)){
+							for(String kw : hadIntrinsic) {
+								tgtC.addIntrinsicKeyword(kw);
+							}
+						}
+					}
+				});
+			}
+		}
+    }//pumpAllResolve()
+    
+    private static boolean debuffAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+    	
+    	return true;
+    }
+
+    private static boolean debuffAllChkDrawbackAI(AbilityFactory af, SpellAbility sa) {
+    	return true;
+    }
+    
+    private static String debuffAllStackDescription(AbilityFactory af, SpellAbility sa) {
+    	HashMap<String,String> params = af.getMapParams();
+    	StringBuilder sb = new StringBuilder();
+
+    	String desc = "";
+    	if(params.containsKey("SpellDescription")) {
+    		desc = params.get("SpellDescription");
+    	}
+    	else if(params.containsKey("DebuffAllDescription")) {
+    		desc = params.get("DebuffAllDescription");
+    	}
+    	
+    	if (sa instanceof Ability_Sub)
+    		sb.append(" ");
+		else
+			sb.append(sa.getSourceCard()).append(" - ");
+    	
+    	sb.append(desc);
+    	
+    	Ability_Sub abSub = sa.getSubAbility();
+    	if (abSub != null) {
+    		sb.append(abSub.getStackDescription());
+    	}
+
+    	return sb.toString();
+    }//debuffAllStackDescription()
 
 }//end class AbilityFactory_Debuff
