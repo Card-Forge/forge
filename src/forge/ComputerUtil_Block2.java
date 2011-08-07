@@ -56,6 +56,7 @@ public class ComputerUtil_Block2
 	   ArrayList<Object> defenders = combat.getDefenders();
 	   
 	   //Begin with the attackers that pose the biggest thread
+	   CardListUtil.sortByEvaluateCreature(attackerLists[0]);
 	   CardListUtil.sortAttack(attackerLists[0]);
 	   
 	   // If I don't have any planeswalkers than sorting doesn't really matter
@@ -182,6 +183,7 @@ public class ComputerUtil_Block2
 		  CardList usableBlockers = new CardList();
 		  CardList blockGang = new CardList();
 		  int absorbedDamage = 0; //The amount of damage needed to kill the first blocker
+		  int currentValue = 0; //The value of the creatures in the blockgang
 		  
 		  //Try to add blockers that could be destroyed, but are worth less than the attacker
 		  //Don't use blockers without First Strike or Double Strike if attacker has it
@@ -193,30 +195,32 @@ public class ComputerUtil_Block2
 					return CardFactoryUtil.evaluateCreature(c) + diff < CardFactoryUtil.evaluateCreature(attacker);
 				}
 		  });
+		  if (usableBlockers.size() < 2)
+			  return combat;
 		  
 		  Card leader = CardFactoryUtil.AI_getBestCreature(usableBlockers);
-		  if (leader != null)
-		  {
-			  blockGang.add(leader);
-			  usableBlockers.remove(leader);
-			  absorbedDamage = leader.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
+		  blockGang.add(leader);
+		  usableBlockers.remove(leader);
+		  absorbedDamage = leader.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
+		  currentValue = CardFactoryUtil.evaluateCreature(leader);
 
-			  for(Card blocker : usableBlockers) {
-				  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
-				  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker, blockGang);
-				  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
-				  int absorbedDamage2 = blocker.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
-				  if(attacker.getKillDamage() > currentDamage
-						  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
-						  && absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage() 
-						  && CombatUtil.canBlock(attacker,blocker,combat)) {
-					  currentAttackers.remove(attacker);
-					  combat.addBlocker(attacker, blocker);
-					  combat.addBlocker(attacker, leader);
-					  blockersLeft.remove(blocker);
-					  blockersLeft.remove(leader);
-					  continue;
-				  }
+		  for(Card blocker : usableBlockers) {
+			  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
+			  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker, blockGang);
+			  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
+			  int absorbedDamage2 = blocker.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
+			  int addedValue = CardFactoryUtil.evaluateCreature(blocker);
+			  if(attacker.getKillDamage() > currentDamage
+					  && !(attacker.getKillDamage() > currentDamage + additionalDamage) //The attacker will be killed
+					  && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage() //only one blocker can be killed
+							  || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)) //attacker is worth than the sum
+					  && CombatUtil.canBlock(attacker,blocker,combat)) {//this is needed for attackers that can't be blocked by more than 1
+				  currentAttackers.remove(attacker);
+				  combat.addBlocker(attacker, blocker);
+				  combat.addBlocker(attacker, leader);
+				  blockersLeft.remove(blocker);
+				  blockersLeft.remove(leader);
+				  continue;
 			  }
 		  }
 	  }
@@ -370,7 +374,7 @@ public class ComputerUtil_Block2
 	  CardList blockers = new CardList();
 	  CardList chumpBlockers = new CardList();
 	  
-	  diff = AllZone.ComputerPlayer.getLife() * 2; //This is the minimal gain for an unnecessary trade 
+	  diff = AllZone.ComputerPlayer.getLife() * 2 - 5; //This is the minimal gain for an unnecessary trade 
 	  
 	  // remove all attackers that can't be blocked anyway
 	  for(Card a : attackers) {

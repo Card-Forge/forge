@@ -246,6 +246,7 @@ public class CardFactoryUtil {
     public static int evaluateCreature(Card c) {
 
         int value = 100;
+        if (c.isToken()) value = 80; //tokens should be worth less than actual cards
         int power = c.getNetAttack();
         int toughness = c.getNetDefense();
         
