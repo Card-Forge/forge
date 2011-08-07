@@ -185,6 +185,7 @@ class CardFactory_Auras {
             };//SpellAbility
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
+            spell.setDescription("");
             card.addSpellAbility(spell);
             
             // Need to set the spell description for Lingering Mirage since it has cycling ability.
@@ -1156,6 +1157,7 @@ class CardFactory_Auras {
             };//SpellAbility
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
+            spell.setDescription("");
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -1320,6 +1322,7 @@ class CardFactory_Auras {
                 }//resolve()
             };//SpellAbility
             card.clearFirstSpellAbility();
+            spell.setDescription("");
             card.addSpellAbility(spell);
             card.addLeavesPlayCommand(standardUnenchant);
 
@@ -1711,6 +1714,7 @@ class CardFactory_Auras {
                 };//SpellAbility
                 // Do not remove SpellAbilities created by AbilityFactory or Keywords.
                 card.clearFirstSpellAbility();
+                spell.setDescription("");
                 card.addSpellAbility(spell);
                 
                 final Player[] prevController = new Player[1];
