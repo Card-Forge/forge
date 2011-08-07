@@ -57,6 +57,8 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
+                    <finalName>run-forge</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
@@ -78,6 +80,45 @@
                     </execution>
                 </executions>
             </plugin>
+                        <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <id>l4j-gui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>target/forge.exe</outfile>
+                            <jar>target/run-forge.jar</jar>
+                            <errTitle>forge</errTitle>
+                            <classPath>
+                                <mainClass>forge.Gui_NewGame</mainClass>
+                                <addDependencies>false</addDependencies>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>1.5.0</minVersion>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>1.0.0.0</fileVersion>
+                                <txtFileVersion>1.0.0.0</txtFileVersion>
+                                <fileDescription>Forge</fileDescription>
+                                <copyright>my copyright</copyright>
+                                <productVersion>1.0.0.0</productVersion>
+                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productName>Forge</productName>
+                                <internalName>forge</internalName>
+                                <originalFilename>original.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <dependencies>
@@ -93,14 +134,17 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}"/>
-                                <copy todir="${project.build.directory}/${project.build.finalName}">
+                                <!-- OSX archive -->
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}-osx"/>
+                                <copy todir="${project.build.directory}/${project.build.finalName}-osx">
                                     <fileset dir="${basedir}" includes="LICENSE.txt"/>
+                                    <fileset dir="${basedir}" includes="README.txt"/>
+                                    <fileset dir="${basedir}" includes="CHANGES.txt"/>
                                 </copy>
                                 <taskdef name="jarbundler"
                                          classpathref="maven.runtime.classpath"
                                          classname="net.sourceforge.jarbundler.JarBundler"/>
-                                <jarbundler dir="${project.build.directory}/${project.build.finalName}"
+                                <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
                                             name="${project.name}"
                                             version="${project.version}"
                                             mainclass="forge.Gui_NewGame"
@@ -109,16 +153,42 @@
                                             vmoptions="-Xmx1024m"
                                             shortname="${project.name}"
                                             workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
-                                            jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
+                                            jar="${project.build.directory}/run-forge.jar">
                                     <javafileset dir="${basedir}" includes="*.properties"/>
                                     <javafileset dir="${basedir}" includes="res/**"/>
                                     <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
                                 </jarbundler>
                                 <exec dir="${project.build.directory}"
                                       executable="hdiutil"
-                                      failonerror="true">
-                                    <arg line="create -srcfolder ${project.build.directory}/${project.build.finalName} ${project.build.directory}/${project.build.finalName}.dmg"/>
+                                      failonerror="false">
+                                    <arg line="create -srcfolder ${project.build.directory}/${project.build.finalName}-osx ${project.build.directory}/${project.build.finalName}.dmg"/>
                                 </exec>
+                                <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg" destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2" compression="bzip2"/>
+                                <!-- Windows/Linux archive -->
+                                <mkdir dir="${project.build.directory}/${project.build.finalName}"/>
+                                <copy todir="${project.build.directory}/${project.build.finalName}">
+                                    <fileset dir="${basedir}/build" includes="forge.sh"/>
+                                    <fileset dir="${basedir}" includes="forge.properties"/>
+                                    <fileset dir="${basedir}" includes="LICENSE.txt"/>
+                                    <fileset dir="${basedir}" includes="README.txt"/>
+                                    <fileset dir="${basedir}" includes="CHANGES.txt"/>
+                                    <fileset dir="${basedir}" includes="res/**"/>
+                                    <fileset dir="${project.build.directory}" includes="forge.exe"/>
+                                    <fileset dir="${project.build.directory}" includes="run-forge.jar"/>
+                                </copy>
+                                <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx"/>
+                                <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx"/>
+                                <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
+                                    <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
+                                        <include name="forge.sh"/>
+                                        <include name="forge.exe"/>
+                                    </tarfileset>
+                                    <tarfileset dir="${project.build.directory}/${project.build.finalName}">
+                                        <include name="**"/>
+                                        <exclude name="forge.sh"/>
+                                        <exclude name="forge.exe"/>
+                                    </tarfileset>
+                                </tar>
                             </tasks>
                         </configuration>
                         <goals>
@@ -164,45 +234,7 @@
                 <version>2.1.2</version>
             </plugin>
 
-            <plugin>
-                <groupId>com.akathist.maven.plugins.launch4j</groupId>
-                <artifactId>launch4j-maven-plugin</artifactId>
-                <version>1.3</version>
-                <executions>
-                    <execution>
-                        <id>l4j-clui</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>launch4j</goal>
-                        </goals>
-                        <configuration>
-                            <headerType>console</headerType>
-                            <outfile>target/forge.exe</outfile>
-                            <jar>target/forge-1.0-SNAPSHOT.jar</jar>
-                            <errTitle>forge</errTitle>
-                            <classPath>
-                                <mainClass>com.akathist.encc.Clui</mainClass>
-                                <addDependencies>false</addDependencies>
-                                <preCp>anything</preCp>
-                            </classPath>
-                            <jre>
-                                <minVersion>1.6.0</minVersion>
-                            </jre>
-                            <versionInfo>
-                                <fileVersion>1.2.3.4</fileVersion>
-                                <txtFileVersion>txt file version?</txtFileVersion>
-                                <fileDescription>a description</fileDescription>
-                                <copyright>my copyright</copyright>
-                                <productVersion>4.3.2.1</productVersion>
-                                <txtProductVersion>txt product version</txtProductVersion>
-                                <productName>E-N-C-C</productName>
-                                <internalName>ccne</internalName>
-                                <originalFilename>original.exe</originalFilename>
-                            </versionInfo>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
     </build>
     <reporting>

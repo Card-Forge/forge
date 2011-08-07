@@ -1,0 +1,394 @@
+Forge 05/31/2011 (unofficial BETA) version
+
+(Quest icons used created by Teekatas, from his Legendora set 
+
+http://raindropmemory.deviantart.com)
+
+8131 cards in total.
+
+This version is based upon the revision # 9116 which is found on our SVN.
+
+
+We have fixed some bugs, added some new cards, improved the AI in the draft mode, revised existing quest opponent decks and added new opponents, improved the AI's attacking and blocking code and improved the border around card images displayed in the new GUI battlefield.
+
+
+I found a utility to remove the hidden Mac-related files. I removed the ".SVN" and the /res/lib/ folders from this archive as they are not needed. We have changed the archiving format to ".tar.bz2" since this may help to store the file permissions for the Mac OS X launcher. There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these archives.
+
+
+The Mac OS application version:
+
+We have packaged the Forge 05/31/2011 BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process. This version should only require java 1.5.
+
+You can move a copy of your pictures and decks over to the Forge.app application. Right click or control click on the Forge.app icon. Select Show Package Contents form the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
+
+/Contents/Resources/Java/res/
+
+Your decks can be placed in the decks folder, your pics can be placed in the pics folder, etc.
+
+
+Fixes/Features:
+
+- Updated the mana base of some decks.
+- Fixed some more instances of First Strike with a lower case "s"
+- Added a Drawback to AF_Regenerate.
+- Fixed a couple of Java warnings.
+- Added a DB$UntapAll.
+- Fixed Sword of Feast and Famine.
+- Added the decks Demon 3, Green Arrow 2 and Optimus Prime 3 by Corwin.
+- The AI will no longer cast permanents with flash before the humans Declare Attackers step. Surprise!
+- Fixed Morbid Bloom, it will now "put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness."
+- The AI will equip equipment earlier.
+- Added AF_FlipACoin (put in AbilityFactory_Clash.java for now; maybe these all go to an AbilityFactory_Chance.java or something like that)
+- Converted Bottle of Suleiman to AF.
+- Converted Stitch in Time to AF.
+- Removed old-style drawback checking in a few places.
+- Minor AI improvement in AF_Animate.
+- Made types and power/toughness overwritable in stAnimate. Two steps closer to Lignify actually being an aura.
+- Added Tom Bombadil 3 deck by Corwin.
+- Fixed Dormant Sliver.
+- Added Ezio 3 deck by Corwin.
+- Converted Dauntless Escort to AF_Effect.
+- Cleanup in Phase and MagicStack.
+- Removed WheneverKeyword code.
+- Converted Overwhelming Intellect to AF_Counter.
+- Addidtional WheneverKeyword cleanup.
+- Fixed Lavamancer's Skill.
+- The AI will now play pump abilities on attackers after blockers have been declared. The AI has still a long way to go to pump correctly.
+- Bigger update of the AF Pump AI.
+- Fixed Psionic Sliver. (Again)
+- Generic aura code now filters out things it can't target for the AI.
+- Added newlines to the end of the easy.txt medium.txt and hard.txt quest files.
+- Fixed Caltrops and probably others that use certain triggered-variables.
+- Fixed the stack description of AF_Destroy.
+- Code simplifications in CF_Auras.
+- Code simplifications in Spell_Permanent.java.
+- Converted Mirri the Cursed to triggers.
+- Added Redwall 2 deck.
+- Converted Opt to AF_Dig.
+- Replaced the Superman 1 and 2 decks with a non-Sliver Superman 3 deck.
+- Ran set info script.
+- Code simplifications in CF_Instants.
+- Added ValidTarget$ Opponent to Snake Umbra.
+- Finished the plumbing in stAnimate for Lignify to become an Aura.
+- Opdated stAnimate cards with the new parameter for stAnimate keyword.
+- Converted Lignify to an Aura with a little script-fu!
+- Added option to "keep supertypes" in the stAnimate keyword.
+- Made sure that state-based effects are checked when a land is played by either player, not just the computer.
+- Fixed the type of Reaper of Sheoldred.
+- Fixed Defined$ for Fervent Charge.
+- Fixed Type for Sensor Splicer.
+- Cleaned up some unused functions.
+- Code simplifications in CF_Creatures.
+- Deleted some unused files.
+- Similar clean up.
+- Made some code improvements.
+- Converted Energy Tap to script.
+- Small step towards being able to script-only Mana Drain.
+- Updated the Betty Rubble 3 quest deck.
+- Ran set info script.
+- Fixed Promise of Power.
+- Added the missing "SVar:RemAIDeck:True" to a few charm like spells.
+- Converted Phyrexian Rebirth to script.
+- Fixed the token name created by Hunted Dragon.
+- Converted Lorthos the Tidemaker to script.
+- Converted March of Souls to script.
+- Converted Goblin Guide to script.
+- Doomgape is not correct. It can not be scripted at this time.
+- Fixed a couple java warnings.
+- Fixed duplicate text in Mindculling.
+- Fixed Akki Coalflinger.
+- Improved AI of Pyrohemia and Swans of Bryn Argoll.
+- Make use of AbilityFactory.playReusable in AF AlterLife.
+- Code simplification in CF_Sorceries.
+- Another small step towards Mana Drain script-only.
+- The AI will use ZoneAffecting more often at the end of human turn.
+- Converted Overwhelming Forces to script.
+- Work towrds getting Haunting Wind scriptable.
+- Let AF_CounterMagic use Remember.
+- Added barebones beginnings of AF_DelayedTrigger. Only usable as a subability, no AI. Nothing uses it yet.
+- Older Core Set cards (Unlimited-9th), Portal, Chronicles, and Starter cards are now displayed with white borders.
+- Updated James Bond decks.
+- Added Riddler 3 deck.
+- Fixed Overgrown Battlement.
+- Added SVar:RemAIDeck:True to Saltfield Recluse.
+- Added Coiling Oracle to some quest decks.
+- Fixed Amulet of Vigor triggering from the library.
+- Added stPreventDamage keyword. Only Player/You supported at the moment.
+- Converted some cards.
+- Converted Urza's Armor and Guardian Seraph to stPreventDamage.
+- Added a parameter to stPreventDamage keyword for creature protection.
+- Converted some cards.
+- Completed conversion of Energy Storm.
+- Fixed Hobble.
+- Reverted Portal and Portal Three Kingdoms to black border because authoritative sources say they are black-bordered editions.
+- Updated the white borders patch yet again - PTK is a white-bordered edition (source: magiccards.info)
+- Converted Invincible Hymn to script.
+- Added Fin Fang Foom decks by Corwin.
+- Added AbilityFactory_PreventDamage. Works only on creatures at the moment.
+- Added Anoint.
+- Converted Conqueror's Pledge to script.
+- Added Hans 3 deck.
+- Added King Goldemar 1 deck.
+- Added player targeting support to AbilityFactory_PreventDamage.
+- Converted Traumatize to script.
+- Improved the AI and stack description of AF PreventDamage.
+- Converted Acidic Soil to script.
+- Renamed Anoint.
+- Converted Nature's Resurgence to script.
+- Adjusted the card Invincible Hymn.
+- Converted All Hollow's Eve to script.
+- Removed extra spaces.
+- Converted Decree of Justice to script.
+- Converted Biorhythm to script.
+- The AI will no longer tap creatures as ability costs before blocking enemy creatures (for certain AFs).
+- Converted Flamebreak to script.
+- Added Conditions to AF. Currently only for Damage, and the AI does not take Conditions into consideration.
+- Convert Molten Rain to Condition.
+- Convert Hexmage to Modern Cost/Target.
+- The AI will no longer chump block when he controls cards like Ali from Cairo, Platinum Angel or Platinum Emperion.
+- Convert a few cards to Modern Cost/Targeting.
+- Converted Doomsday to script.
+- Another little update to lifeInDanger.
+- Converted Cruel Ultimatum to script. Thank the gods for SubAbility.
+- Added Condition to AF Draw.
+- Converted Choking Sands to script.
+- Updated some SVars.
+- Fixed AI of Echoing Courage.
+- Added some text.
+- Fixed Surge Node.
+- Fixed Type of Sage Aven.
+- Fixed Khalni Gem.
+- Fixed Show and Tell.
+- Ran Set Info Script for new cards.
+- Fixes for Auras not running LeavesPlayCommand.
+- Fixes the "LastKnownInfo" bug we were having.
+- Adding NPH temporarily into the Standard until Rob gets the super generic version of it working.
+- Bugfix: Fix Logic in when to copy a Card.
+- Replaced the older Jack Sparrow decks with the new Jack Sparrow 2 deck.
+- Added Condition to AF Discard, Mill, Shuffle, DestroyAll.
+- Fixed Bogardan Hellkite.
+- Added SVar:RemAIDeck:True to cards with sacrifice as a cost for an triggered ability.
+- Fix related to ChangeZone for Lands not ETB tapped.
+- Added Condition to AF Destroy.
+- Non-creatures can now use Sacrifice costs in AF_Destroy.
+- Fixed Mortarpod until I figure out the big picture with Living Weapons and static equipment pumps.
+- Added Condition to AF Sacrifice.
+- Updated a subability of Cruel Ultimatum.
+- Fixed Dark Temper.
+- Fixed Sarkhan the Mad, the dragon token should now be red.
+- Ran Set Info Script.
+- Updated some tribal quest decks.
+- Added a medium version of Samwise Gamgee.
+- Fixed Ragged Veins.
+- Ran Set Info Script.
+- Fixed a Bug with Lead the Stampede being played by AI.
+- Fixed Imperial Hellkite.
+- Improved clarity of Dire Undercurrents' abilities.
+- Updated Silver Surfer 3 deck.
+- Added Sun Quan 2 by Corwin.
+- Updated Wolverine 3 deck.
+- Fixed Hannah, Ship's Navigator.
+- Fixed Excommunicate being a Sorcery.
+- Added Electro 2 by Corwin.
+- Added Condition to AF GainLife, LoseLife, Poison and SetLife.
+- Tokens are now briefly added to non-battlefield zones in order for cards like Fresh Meat or Asmira, Holy Avenger to work correctly with them.
+- Amended the Zuberas.
+- Gave Sprouting Phytohydra Defender back.
+- Made Sprouting Phytohydra's trigger optional. Pretty sure that's the last thing I forgot to do to that card.
+- Converted Ancient Runes to script.
+- Ran Set Info Script.
+- Updated Twitch's mana cost.
+- Fixed Hagrid 2 deck. Thanks Corwin.
+- Updated Electro 3 deck.
+- Converted The Tabernacle at Pendrell Vale and Magus of the Tabernacle to stPump.
+- Fixed Upkeep costs for the AI + some restructuring.
+- The AI will no longer pay for "At the beginning of your upkeep, destroy CARDNAME unless you pay " if the creature is indestructible.
+- Added a hard version of the Gimli deck.
+- Made Gimli 2 a little less powerful.
+- Added AI to AF Dig.
+- Added some text.
+- Added SVar:PlayMain1:TRUE to Jund Hackblade.
+- Removed SVar:RemAIDeck:True from Faerie Mechanist.
+- Improved prompt of AF Dig.
+- Improved AI of AF Dig.
+- Converted Lurking Informant to script.
+- Ran Set Info Script.
+- Fixed Epic Struggle.
+- Added a deck description for Spiderman 3.
+- Modified Thran Forge.
+- Removed most artifact lands from Seabiscuit 1.
+- Added Condition to PutCounter, PutCounterAll, RemoveCounter, LosesGame, WinsGame.
+- Added SVar:RemAIDeck:True to the five lair lands and to Gemstone Mine.
+- Ran Set Info Script.
+- Added a new Jack Sparrow 1.
+- Added filtering for cards the AI shouldn't draft or build into the deck.
+- Removed unused functions.
+- Added the SVar NeedsToPlay. The AI won't play cards with it unless a valid card is on the battlefield.
+- Updated the Lairs to use it.
+- Added NeedsToPlay SVars to Heart of Yavimaya and Kjeldoran Outpost.
+- Added SVar:NeedsToPlay to 18 more cards with "if you control no ..., sacrifice CARDNAME".
+- Fixed AF ChangeZone Hidden targeting for human.
+- Removed SVar:RemAIDeck:True from Prophetic Bolt.
+- The AI will no longer reveal the picked card in AF Dig if every card is valid.
+- The AI will no longer use Unearth after Main1.
+- Fixed spells with AF FlipACoin.
+- Moved ChangesZone trigger point to new zonechanging code. Fixes Mitotic Slime tokens.
+- Ran Set Info Script.
+- Added Dilbert 3.
+- Removed Burnout.
+- Fix for Suspend related to ChangeZone fixes.
+- Fixed Apocalypse Hydra.
+- Tweaked Spell Permanent to use Cost, and added a Constructor to take a Target for later use with Auras.
+- Added some text.
+- Added Conditional to CounterMagic.
+- Fixed some incorrect SetInfos.
+- Ran SetInfo Script.
+- Fixing some errors
+- Deprecated the old Targeting methods to make it easier to find all of the ones that need to be converted.
+- Fixed Living Weapons not retaining equipped or equipping-info after copying.
+- Corrected my Zubera amendment.
+- Updated some decks with new cards, removed Gemstone Mine.
+- Converted Wings of Velis Vel to script.
+- Moved NeedsToPlay from SpellPermanent to Spell.
+- Converted Gatekeeper of Malakir to script.
+- Converted all cards with ETBLoselife to trigger.
+- Commented out the ETBLoselife keyword and the AI things related to it.
+- Fixed description of Strandwalker.
+- Improved the AI of Flametongue Kavu.
+- Added SVar:RemRandomDeck:True to Quest for the Goblin Lord.
+- Improved the AI of more cards by converting etb AF's to DB's.
+- Added more AI SVar's.
+- Improved the Drawback AI of AF DealDamage.
+- Fixed ExileFromTop and ExileFromHand costs for the AI.
+- Updated some card text files.
+- Added a copy of Mayael's Aria to Electro 3.
+- Added some text.
+- Fixed Astrolabe's text.
+- Fixed Stoneforge Mystic.
+- Fixed more cards like Stoneforge Mystic.
+- Fixed Lurking Informant.
+- Removed Ashnod's Cylix.
+- Fixed more cards like Stoneforge Mystic (-G).
+- Fixed more cards like Stoneforge Mystic (-P).
+- Fixed more cards like Stoneforge Mystic (rest).
+- Fixed more cards like Stoneforge Mystic (with Card.Self -B).
+- Fixed more cards like Stoneforge Mystic (with Card.Self -G).
+- Fixed more cards like Stoneforge Mystic (with Card.Self -K).
+- Added some semblance of AI to AF_DelayedTrigger. Not sure how correct it is though.
+- Fixed more cards like Stoneforge Mystic (with Card.Self -M).
+- Fixed more cards like Stoneforge Mystic (with Card.Self -R).
+- Fixed more cards like Stoneforge Mystic (with Card.Self -T).
+- Fixed more cards like Stoneforge Mystic (with Card.Self rest).
+- Fixed AI of AF DelayedTrigger.
+- Fixed AI of Thawing Glaciers.
+- Added Thawing Glaciers to two decks.
+- Ran set info script.
+- Rescripted Undergrowth. Used static effect this time.
+- Added "IsTriggered<Triggered-variable name>" to hasProperty.
+- Added an extra check to IsTriggeredX.
+- Fixed some ETB destroy cards.
+- Fixed the Pump on Barbed Sliver.
+- Fixing Gitaxian Probe type.
+- Ran Set Info Script.
+- Cards' EnchantedBy and Enchanting info is now copied. Fixes Festering Wound NPE.
+- Converted Mana Drain to script.
+- Fixed two more changeszone self cards.
+- Improved the AI of more cards by converting etb AF's to DB's.
+- Added Scry to Condescend.
+- Removed duplicate text for Mana Drain.
+- Fixed two more changeszone self cards.
+- More ManaDrain Cleanup.
+- Improved the AI of Conquering Manticore by converting its etb AF to DB.
+- Fixed some lost functionalities of AI blocking.
+- Added another possible gang block to the AI's repertoire (to be expanded).
+- Fixed Blood Moon and similar cards not removing the lands abilities.
+- Trying to fix a crash in r9045-9046, feel free to revert/refix if I read the code wrong.
+- Fixed clearAllButFirstSpellAbility and getAllButFirstSpellAbility if no abilities are present.
+- Converted Jugan the Rising Star to script.
+- Fixed several flaws in stAnimate. Now Blood Moon and friends will only change subtypes and leave land creatures their type and power/toughness.
+- Converted Leyline of Singularity to script.
+- Fixed Conversion and Glaciers.
+- Convert Kaervek's Spite to script. We should probably add code in LoseLife to handle this card if we expect the AI to use it.
+- Updated the Indiana Jones decks.
+- Fixed Blood Moon and friends not removing keywords.
+- Added the option OverwriteColors to stAnimate.
+- Updated Ambush Commander.
+- Updated Kormus Bell.
+- Fixed CopyPermanent not setting the controller and owner of the token to the activator.
+- More fixes in AF copyPermanent.
+- Updated some card text files.
+- Fixed Presence of Gond token types.
+- Ran set info script.
+- Little fix in the stack description of AF tap.
+- Converted Level Up into an Activated Ability.
+- Fixed Multikicker.
+- CostPayment now handles SunBurst since Spell_Permanents now use Cost.
+- More little improvements in AI blocking decisions.
+- Reverted Conquering Manticore to AB.
+- Updated the Data 3 deck.
+- Added Coldsnap (CSP/CSP/CSP) to the list of possible block drafts.
+- Experimental: Modified the classification of Snow-Covered lands in the ICE set to be Common. This may not be an accurate classification per magic-cards.info, but it allows Snow-Covered lands to be drafted in CSP/ICE/ICE, CSP/ALL/ICE, and ICE/ICE/ICE block drafts without having to give the player free access to large quantities of snow-covered lands (which would not be authentic either), and there is some information found online that some Ice Age boosters had snow-covered lands printed on Common sheets. If further discussion proves that this is too wrong or is not a good idea, feel free to revert/change as you see fit.
+- Ran Set Info script for new cards.
+- AI will use pump abilities of non-creatures that require a Sacrifice.
+- Fixed a bug ComputerUtil_Block2.
+- Fixed triggers being flushed too late when casting spells or proliferating.
+- Made Flourishing Defenses' trigger optional.
+- Added the conversion of Valakut, the Molten Pinnacle by jeffwadsworth.
+- Converted Vendilion Clique to script.
+- Added SVar:RemAIDeck:True to several cards.
+- Ran set info script.
+- Added SVar:RemAIDeck:True to some cards.
+- Added the new quest decks Cave Troll 2 and Cave Troll 3.
+- Ran set info script.
+- Small text addition.
+- Added Mandatory$ True to Stonecloaker.
+- checkETBEffects will now check requirements (like Metalcraft).
+- Converted some etb AF's to DB's.
+- Added the decks: Hermione Granger 3, Princess Selenia 1, Ratbert 2 and Riddler 4.
+- Fixed Warning and text of Panic.
+- Updated some SVars.
+- Updated evaluateCreature.
+- Removed the menu command to download HQ pics since the HQ pics server appears to be offline.
+- Ran set info script.
+- Wistful Thinking should probably have both "SVar:RemAIDeck:True" and "SVar:RemRandomDeck:True" SVars.
+- Fixing SetInfo for Soldevi Heretic and Undergrowth to account for multiple pics.
+- Fix for a crash in Coldsnap draft (CSP/CSP/CSP) caused by the absence of standard basic lands in the CSP set (currently the basic lands are added from the 9th Edition core set, the set that was historically current at the moment when Coldsnap was released).
+- Added RevealDiscardAll to AF_Discard.
+- Converted Amnesia.
+- Updated Wandering Goblins text.
+- Converted Leeches to Cost/Target.
+- Converted MercSearch to AFs.
+- Corrected the rarity for Gelatinous Genesis.
+- Gave Rage Nimbus an "IsCurse$ True" and it will now only target the human's creatures. Unfortunately, this still needs more work as the AI activates the Rage Nimbus ability during it's own turn. Card already has a remAI SVar.
+- Added an "OptionalDecider$ You" to Angelic Benediction.
+- Fixed the token image name for Gelatinous Genesis.
+- A better and more universal fix for sets with no basic lands crashing after the draft is over. I added the fifth parameter to the set info in SetInfoUtil which defines where to take the basic lands from, the early sets which had no basic lands in them, such as Legends, will use the core set which was historically the latest at the moment of the set release; also, the Coldsnap draft will still use the 9th Edition lands since 9ED was the closest to Coldsnap.
+- Lingering Delayed triggers are now removed at new game.
+- Added a "Setup Battlefield" menu item to the Developer menu, currently doing nothing - to be expanded later for use to set up the battlefield for my AI experiments and improvement project.
+- [WIP] More updates to the Setup Battlefield dev command, now allows to set specific cards for the human and AI hand, set up the specific human and AI life, and place specific cards on the battlefield. Not finished yet, does not yet register the cards on the battlefield properly for some reason. Will be fixed and updated ASAP.
+- Minor documentation update for the Setup Battlefield dev command.
+- Fixed state effects not being checked after Flameblast Dragons trigger as well as similar ones.
+- Refactored the current Setup Battlefield code. Moved it to a separate method to clean up the menu creation function.
+- Added some missing Legendary supertypes.
+
+
+Many people helped with this version. A special thank you goes out to them:
+
+Sloth
+Rob Cashwalker
+Slapshot5
+Friar Sol
+Hellfish
+Agetian
+Jeff Wadsworth
+Jaedayr
+SoulStorm
+Night Shadow
+Chris H
+
+
+Added many cards, including:
+
+Abuna AcolyteAlabaster WallAmulet of KroogAnointArgivian BlacksmithAurora EidolonAven RedeemerBeast HuntBenevolent AncestorBlood MoonCall of the WildCalming VerseCerulean WispsChromescale DrakeClergy en-VecCoiling OracleConservatorContaminated GroundConversionCoral FightersCruel FateDark TemperDarkest HourDormant SliverDralnu's CrusadeEdge of AutumnEnergy FieldEssence FlareEye SpyFeast of WormsFiligree FractureGhostflame SliverGiant's IreGlaciersGloomlanceGoblin GrenadiersGoblin VandalGodhead of AweIcebergIcequakeIndigo FaerieKithkin HealerLife and LimbLush GrowthMaddening WindMagus of the MoonMayael's AriaMomentary BlinkNature's ChosenNature's WrathNeurok FamiliarNoble BenefactorPalliation AccordParasitic BondPeppersmokePlumes of PeacePowerstone MinefieldPrecognitionRansackRootgrappleSage's DousingSamite HealerSecond WindSkyscribingSoldevi ExcavationsSoldevi HereticSoul RenSpitemareStream of UnconsciousnessStronghold RatsSurge of ThoughtweftThawing GlaciersThermokarstThran ForgeThran LensTitania's SongUndergrowthViridescent WispsWinter's NightWu SpyZoologist
+
+end
