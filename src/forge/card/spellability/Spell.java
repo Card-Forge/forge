@@ -1,6 +1,8 @@
 package forge.card.spellability;
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
+import forge.CardList;
 import forge.Constant;
 import forge.Phase;
 import forge.error.ErrorViewer;
@@ -47,6 +49,20 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         
         return (card.isInstant() || card.hasKeyword("Flash") || Phase.canCastSorcery(card.getController()));
     }//canPlay()
+    
+    @Override
+    public boolean canPlayAI() {
+    	Card card = getSourceCard();
+    	if (card.getSVar("NeedsToPlay").length() > 0) {
+    		String needsToPlay = card.getSVar("NeedsToPlay");
+    		CardList list = AllZoneUtil.getCardsInPlay();
+	
+    		list = list.getValidCards(needsToPlay.split(","), card.getController(), card);
+    		if (list.isEmpty()) return false;
+    	}     
+
+    	return super.canPlayAI();
+    }
     
     @Override
     public String getStackDescription() {

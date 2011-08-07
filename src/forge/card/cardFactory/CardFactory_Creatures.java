@@ -3789,7 +3789,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(commandComes);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START ************************** 
         else if(cardName.equals("Gatekeeper of Malakir")) {
             final SpellAbility kicker = new Spell(card) {
@@ -3858,7 +3858,7 @@ public class CardFactory_Creatures {
             
             card.addComesIntoPlayCommand(commandComes);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite") || 
