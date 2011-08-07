@@ -8412,6 +8412,7 @@ res/cardsfolder/zombie_master.txt svneol=native#text/plain
 res/cardsfolder/zombie_mob.txt -text svneol=native#text/plain
 res/cardsfolder/zombie_musher.txt svneol=native#text/plain
 res/cardsfolder/zombie_outlander.txt -text svneol=native#text/plain
+res/cardsfolder/zombie_trailblazer.txt svneol=native#text/plain
 res/cardsfolder/zombify.txt -text svneol=native#text/plain
 res/cardsfolder/zoologist.txt svneol=native#text/plain
 res/cardsfolder/zuberi_golden_feather.txt -text svneol=native#text/plain
