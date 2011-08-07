@@ -1,0 +1,9 @@
+Name:Darkest Hour
+ManaCost:B
+Types:Enchantment
+Text:no text
+K:stAnimateAll:Creature:no changes:no types:Black,Overwrite:No Abilities:No Condition:All creatures are black.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darkest_hour.jpg
+End
