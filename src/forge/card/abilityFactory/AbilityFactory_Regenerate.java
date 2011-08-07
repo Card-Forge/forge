@@ -154,7 +154,6 @@ public class AbilityFactory_Regenerate {
 		
 		// temporarily disabled until better AI
 		if (af.getAbCost().getSacCost())	 return false;
-		if (af.getAbCost().getSubCounter())  return false;
 		if (af.getAbCost().getLifeCost())	 return false;
 
 		if (!ComputerUtil.canPayCost(sa))

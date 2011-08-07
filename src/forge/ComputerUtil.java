@@ -1034,9 +1034,17 @@ public class ComputerUtil
                     if(sa.canPlay() && ComputerUtil.canPayCost(sa,controller) && sa.getAbilityFactory() != null && sa.isAbility()){
                     	AbilityFactory af = sa.getAbilityFactory();
                     	HashMap <String,String> mapParams = af.getMapParams();
-                		if (mapParams.get("AB").equals("Regenerate"))
+                		if (mapParams.get("AB").equals("Regenerate")) {
                 			if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa).contains(card))
                 				return true;
+                			Target tgt = sa.getTarget();
+                			if (tgt != null) {
+                				if (AllZoneUtil.getCardsInPlay().getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, af.getHostCard())
+                						.contains(card))
+                					return true;
+                						
+                			}
+                		}
                     }
                 } catch(Exception ex) {
                     showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
