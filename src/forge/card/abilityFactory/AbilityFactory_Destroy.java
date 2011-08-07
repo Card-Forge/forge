@@ -141,7 +141,7 @@ public class AbilityFactory_Destroy {
 
 		if (abCost != null){
 			// AI currently disabled for some costs
-			if (abCost.getSacCost()){ 
+			if (abCost.getSacCost() && source.isCreature()){ 
 				return false;
 			}
 			if (abCost.getLifeCost()){
