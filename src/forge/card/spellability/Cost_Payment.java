@@ -505,7 +505,7 @@ public class Cost_Payment {
     		else if (cost.isSacAll()){
     			CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
     		    typeList = typeList.getValidCards(cost.getSacType().split(","), card.getController(), card);	
-    			sacCard.add(typeList);
+    			sacCard.addAll(typeList);
     			amount = sacCard.size();
     		}    			
     		else

@@ -606,7 +606,7 @@ public class Combat {
         
         CardList combatants = new CardList();
         combatants.addAll(AllZone.Combat.getAttackers());
-        combatants.add(AllZone.Combat.getAllBlockers());
+        combatants.addAll(AllZone.Combat.getAllBlockers());
         combatants.addAll(AllZone.Combat.getDefendingPlaneswalkers());
 
         Card c;

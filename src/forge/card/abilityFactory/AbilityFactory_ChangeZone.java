@@ -715,7 +715,7 @@ public class AbilityFactory_ChangeZone {
 	
 	private static Card basicManaFixing(CardList list, String type){	// type = basic land types
         CardList combined = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-        combined.add(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
+        combined.addAll(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
         
         String names[] = type.split(",");
         ArrayList<String> basics = new ArrayList<String>();

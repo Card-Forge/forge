@@ -288,14 +288,14 @@ class CardFactory_Lands {
                     if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().isComputer()))
                     	return false;
                     inPlay.clear();
-                    inPlay.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
+                    inPlay.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
                     return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
                 
                 @Override
                 public void resolve() {
                     inPlay.clear();
-                    inPlay.add(AllZoneUtil.getCardsInPlay());
+                    inPlay.addAll(AllZoneUtil.getCardsInPlay());
                     for(Card targ:inPlay.filter(targets))
                         targ.addCounter(Counters.P1P1, 1);
                 }

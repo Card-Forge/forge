@@ -721,7 +721,7 @@ public class CardFactory_Sorceries {
                     {
                         //the computer cheats by choosing a creature in the human players library or hand
                         CardList all = AllZoneUtil.getPlayerHand(target);
-                        all.add(AllZoneUtil.getPlayerCardsInLibrary(target));
+                        all.addAll(AllZoneUtil.getPlayerCardsInLibrary(target));
                         
                         CardList four = all.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
@@ -740,8 +740,8 @@ public class CardFactory_Sorceries {
                 
                 void remove(String name, Player player) {
                     CardList all = AllZoneUtil.getPlayerHand(player);
-                    all.add(AllZoneUtil.getPlayerGraveyard(player));
-                    all.add(AllZoneUtil.getPlayerCardsInLibrary(player));
+                    all.addAll(AllZoneUtil.getPlayerGraveyard(player));
+                    all.addAll(AllZoneUtil.getPlayerCardsInLibrary(player));
                     
                     for(int i = 0; i < all.size(); i++) {
                         if(all.get(i).getName().equals(name)) {
@@ -1545,45 +1545,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-/*
-       
-        //*************** START *********** START **************************
-        else if(cardName.equals("Gift of Estates")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -4997834790204261916L;
-                
-                @Override
-                public boolean canPlayAI() {
-                	Player oppPlayer = card.getController().getOpponent();
-                    CardList self = AllZoneUtil.getPlayerLandsInPlay(card.getController());
-                    CardList opp = AllZoneUtil.getPlayerLandsInPlay(oppPlayer);
-                    
-                    return (self.size() < opp.size());
-                }
-                
-                @Override
-                public void resolve() {
-                	Player oppPlayer = card.getController().getOpponent();
-                    CardList self = AllZoneUtil.getPlayerLandsInPlay(card.getController());
-                    CardList opp = AllZoneUtil.getPlayerLandsInPlay(oppPlayer);
-                    
-                    if(self.size() < opp.size()) {
-	                    CardList plains = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
-	                    plains = plains.getType("Plains");
-	                    
-	                    for(int i = 0; i < 3 && i < plains.size(); i++)
-	                        AllZone.GameAction.moveToHand(plains.get(i));
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-  
-*/      
-       
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
         	Cost cost = new Cost(card.getManaCost(), cardName, false);
@@ -1720,10 +1682,6 @@ public class CardFactory_Sorceries {
                 				AllZone.TriggerHandler.registerTrigger(t);
                 			}
                 			Copy.addLeavesPlayCommand(new Command() {
-
-								/**
-								 * 
-								 */
 								private static final long serialVersionUID = -3703289691606291059L;
 
 								public void execute() {
@@ -1888,8 +1846,8 @@ public class CardFactory_Sorceries {
                     String name = choice.getName();
                     
                     CardList remove = AllZoneUtil.getPlayerCardsInLibrary(player);
-                    remove.add(AllZoneUtil.getPlayerHand(player));
-                    remove.add(AllZoneUtil.getPlayerGraveyard(player));
+                    remove.addAll(AllZoneUtil.getPlayerHand(player));
+                    remove.addAll(AllZoneUtil.getPlayerGraveyard(player));
                     remove = remove.getName(name);
                     
                     for(Card c : remove)

@@ -2596,7 +2596,7 @@ public class CardFactoryUtil {
             final String[] valid = validFilter.split(",");
             final Card csource = c;
             CardList res = ((DefaultPlayerZone)AllZone.getZone(destination, AllZone.HumanPlayer)).getCardsAddedThisTurn(origin);
-            res.add(((DefaultPlayerZone)AllZone.getZone(destination, AllZone.ComputerPlayer)).getCardsAddedThisTurn(origin));
+            res.addAll(((DefaultPlayerZone)AllZone.getZone(destination, AllZone.ComputerPlayer)).getCardsAddedThisTurn(origin));
 
             res.filter(new CardListFilter() {
                public boolean addCard(Card csubject)
@@ -3292,7 +3292,7 @@ public class CardFactoryUtil {
 			String tokenKeywords [] = new String [kal.size ()];
 			kal.toArray(tokenKeywords);
 			
-			list.add(makeToken(thisToken.getName(), thisToken.getImageName(), thisToken.getController(), thisToken.getManaCost(), tokenTypes, thisToken.getBaseAttack(), thisToken.getBaseDefense(), tokenKeywords));		
+			list.addAll(makeToken(thisToken.getName(), thisToken.getImageName(), thisToken.getController(), thisToken.getManaCost(), tokenTypes, thisToken.getBaseAttack(), thisToken.getBaseDefense(), tokenKeywords));		
 		}
     	
     	return list;
