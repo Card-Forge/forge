@@ -5260,6 +5260,7 @@ res/cardsfolder/power_surge.txt -text svneol=native#text/plain
 res/cardsfolder/powerstone_minefield.txt svneol=native#text/plain
 res/cardsfolder/pradesh_gypsies.txt -text svneol=native#text/plain
 res/cardsfolder/praetors_counsel.txt svneol=native#text/plain
+res/cardsfolder/precognition.txt -text svneol=native#text/plain
 res/cardsfolder/predator_dragon.txt -text svneol=native#text/plain
 res/cardsfolder/predator_flagship.txt -text svneol=native#text/plain
 res/cardsfolder/predators_strike.txt -text svneol=native#text/plain
