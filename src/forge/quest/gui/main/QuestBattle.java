@@ -35,7 +35,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Ash 3", "hard", "WB Oversold Cemetery deck");
 //        addToDeckList("Atomic Robo 1", "easy", "Artifact Singleton deck");
 //        addToDeckList("Atomic Robo 2", "medium", "Artifact Singleton deck");
-//        addToDeckList("Atomic Robo 3", "hard", "Artifact Standard Constructed deck");
+        addToDeckList("Atomic Robo 3", "hard", "UB artifact sacrifice deck with Thopter Foundry and Sword of the Meek");
         
         addToDeckList("Bamm Bamm Rubble 1", "easy", "WUBRG Domain deck");
         addToDeckList("Barney Rubble 1", "easy", "WU Sovereigns of Lost Alara deck with walls and auras");
