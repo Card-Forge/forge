@@ -3881,6 +3881,7 @@ res/cardsfolder/knight_of_sursi.txt -text svneol=native#text/plain
 res/cardsfolder/knight_of_the_reliquary.txt -text svneol=native#text/plain
 res/cardsfolder/knight_of_the_skyward_eye.txt -text svneol=native#text/plain
 res/cardsfolder/knight_of_the_white_orchid.txt -text svneol=native#text/plain
+res/cardsfolder/knight_of_valor.txt svneol=native#text/plain
 res/cardsfolder/knighthood.txt -text svneol=native#text/plain
 res/cardsfolder/knotvine_mystic.txt -text svneol=native#text/plain
 res/cardsfolder/knotvine_paladin.txt -text svneol=native#text/plain
