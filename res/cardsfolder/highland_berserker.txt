@@ -3,7 +3,8 @@ ManaCost:1 R
 Types:Creature Human Berserker Ally
 Text:no text
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Ally.YouCtrl | KW$ First Strike
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
