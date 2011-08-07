@@ -6,4 +6,6 @@ A:SP$ Dig | Cost$ U | ValidTgts$ Player | DigNum$ 1 | AnyNumber$ True | Destinat
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_spy.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/38.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/39.jpg
 End

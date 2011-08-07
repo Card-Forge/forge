@@ -6,4 +6,5 @@ A:SP$ Dig | Cost$ 4 U | ValidTgts$ Opponent | DigNum$ 5 | ChangeNum$ 1 | Destina
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_fate.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/51.jpg
 End

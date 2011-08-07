@@ -6,4 +6,6 @@ A:SP$ Dig | Cost$ 3 U | ValidTgts$ Player | DigNum$ 5 | AnyNumber$ True | Destin
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ransack.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/47.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/39.jpg
 End

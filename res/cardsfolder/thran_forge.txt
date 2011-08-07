@@ -7,4 +7,5 @@ SVar:X:Targeted$CardPower/Plus.1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_forge.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/159.jpg
 End

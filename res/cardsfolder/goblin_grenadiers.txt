@@ -8,4 +8,5 @@ SVar:TrigDestroyCreature:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creatur
 SVar:DBDestroyLand:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | Mandatory$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grenadiers.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/104.jpg
 End
