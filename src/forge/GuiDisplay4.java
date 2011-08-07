@@ -176,7 +176,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 				private static final long serialVersionUID = -6660930759092583160L;
 
 				public void actionPerformed(ActionEvent arg0) {
-					// Set up the battlefield here - list the cards that need to be placed on the human and the AI's battlefield, respectively
+					// SET UP THE BATTLEFIELD HERE
+					// - define the life values for Human and AI;
+					// - list the cards that need to be placed on the human and the AI's battlefield, respectively;
+					// - list the cards to be placed in the human and AI hands instead of their current hands;
 					int setHumanLife = 10;
 					int setComputerLife = 6;
 					String humanSetupCardsInPlay[] = {"Mountain", "Raging Goblin"}; // cards to be placed on the human battlefield
