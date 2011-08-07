@@ -9,4 +9,5 @@ A:AB$ Untap | Cost$ tapXType<1/Creature.AttachedBy+White+untapped> | CostDesc$ T
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_chosen.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/81.jpg
 End

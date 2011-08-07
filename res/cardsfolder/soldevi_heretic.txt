@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:DBDraw:DB$Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | OptionalDecider$ Opponent
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_heretic.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/49.jpg
 End
