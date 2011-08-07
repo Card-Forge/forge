@@ -1541,6 +1541,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+/*
        
         //*************** START *********** START **************************
         else if(cardName.equals("Gift of Estates")) {
@@ -1576,7 +1577,8 @@ public class CardFactory_Sorceries {
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+  
+*/      
        
         //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
