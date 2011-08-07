@@ -1900,43 +1900,6 @@ public class CardFactory_Sorceries {
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Invincible Hymn")) {
-            final Player player = card.getController();
-            
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -827136493013927725L;
-                
-                @Override
-                public void resolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    CardList libCards = new CardList(library.getCards());
-                    int lifeGain = libCards.size();
-                    
-                    Log.debug("Invincible Hymn", "lifeGain: " + lifeGain);
-                    
-                    player.setLife(lifeGain, card);
-                    
-                    Log.debug("Invincible Hymn", "life.getLife(): " + player.getLife());
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    CardList libCards = new CardList(library.getCards());
-                    int lifeGain = libCards.size();
-                    
-                    if(lifeGain > AllZone.ComputerPlayer.getLife()) return true;
-                    else return false;
-                }
-            };//spell
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
         
        
         //*************** START *********** START **************************
