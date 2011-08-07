@@ -297,11 +297,16 @@ public class AbilityFactory_Reveal {
 								while(j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
 									//let user get choice
 									Card chosen = null;
+									String prompt = "Choose a card to put into the ";
+									if (destZone1.equals("Library") && libraryPosition == -1)
+										 prompt = "Put the rest on the bottom of the ";
+									if (destZone1.equals("Library") && libraryPosition == 0)
+										 prompt = "Put the rest on top of the ";
 									if(anyNumber || optional) {
-										chosen = GuiUtils.getChoiceOptional("Choose a card to put into "+destZone1, valid.toArray());
+										chosen = GuiUtils.getChoiceOptional(prompt+destZone1, valid.toArray());
 									}
 									else {
-										chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
+										chosen = GuiUtils.getChoice(prompt+destZone1, valid.toArray());
 									}
 									if(chosen == null || chosen.getName().equals("[No valid cards]")) break;
 									valid.remove(chosen);
@@ -322,7 +327,7 @@ public class AbilityFactory_Reveal {
 								if(anyNumber) changeNum = valid.size();//always take all
 								for (j=0;j<changeNum;j++) {
 									Card chosen = valid.get(0);
-									if(chosen.equals(dummy)) continue;
+									if(chosen.equals(dummy)) break;
 									PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
 									AllZone.GameAction.moveTo(zone, chosen);
 									GuiUtils.getChoice("Computer picked: ", chosen);
@@ -341,7 +346,10 @@ public class AbilityFactory_Reveal {
 							while(rest.size() > 0) {
 								Card chosen;
 								if(rest.size() > 1) {
-									chosen = GuiUtils.getChoice("Put the rest in the library in any order", rest.toArray());
+									String prompt = "Put the rest on top of the library in any order";
+									if (libraryPosition2 == -1)
+										 prompt = "Put the rest on the bottom of the library in any order";
+									chosen = GuiUtils.getChoice(prompt, rest.toArray());
 								}
 								else {
 									chosen = rest.get(0);
