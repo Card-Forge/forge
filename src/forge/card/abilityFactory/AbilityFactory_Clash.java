@@ -234,7 +234,7 @@ public class AbilityFactory_Clash {
 
     		@Override
     		public void resolve() {
-    			clashResolve(af, this);
+    			flipResolve(af, this);
     		}
     	};
 

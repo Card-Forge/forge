@@ -756,46 +756,6 @@ public class CardFactoryUtil {
         return unearth;
     }//ability_Unearth()
     
-    /*
-    public static SpellAbility ability_Spore_Saproling(final Card sourceCard) {
-        final SpellAbility ability = new Ability(sourceCard, "0") {
-            @Override
-            public boolean canPlay() {
-                SpellAbility sa;
-                for(int i = 0; i < AllZone.Stack.size(); i++) {
-                    sa = AllZone.Stack.peek(i);
-                    if(sa.getSourceCard().equals(sourceCard) && super.canPlay()) return false;
-                }
-                
-                if(sourceCard.getCounters(Counters.SPORE) >= 3 && AllZoneUtil.isCardInPlay(sourceCard)) return true;
-                else return false;
-            }
-            
-            @Override
-            public boolean canPlayAI() {
-                return true;
-            }
-            
-            @Override
-            public void resolve() {
-                sourceCard.subtractCounter(Counters.SPORE, 3);
-                CardFactoryUtil.makeTokenSaproling(sourceCard.getController());
-            }
-        };
-        StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Remove three spore counters from CARDNAME: Put a 1/1 ");
-        sbDesc.append("green Saproling creature token onto the battlefield.");
-        ability.setDescription(sbDesc.toString());
-        
-        StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName());
-        sbStack.append(" - put a 1/1 green Saproling creature token onto the battlefield.");
-        ability.setStackDescription(sbStack.toString());
-        
-        return ability;
-    }//ability_Spore_Saproling()
-    */
-    
     public static SpellAbility ability_Morph_Down(final Card sourceCard) {
         final SpellAbility morph_down = new Spell(sourceCard) {
             private static final long serialVersionUID = -1438810964807867610L;
