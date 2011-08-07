@@ -289,15 +289,36 @@ public abstract class Player extends MyObservable{
     	if(source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.")) return 0;
     	if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) return 0;
     	
+    	//stPreventDamage
+    	CardList allp = AllZoneUtil.getCardsInPlay();
+		for(Card ca : allp) {
+			if (ca.hasStartOfKeyword("stPreventDamage")) {
+				//syntax stPreventDamage:[Who is protected(You/Player/ValidCards)]:[ValidSource]:[Amount/All]
+	        	int KeywordPosition = ca.getKeywordPosition("stPreventDamage");
+	        	String parse = ca.getKeyword().get(KeywordPosition).toString();
+	    		String k[] = parse.split(":");
+	    		
+	    		final Card card = ca;
+	    		if(k[1].equals("Player") || (k[1].equals("You") && card.getController().isPlayer(this))) {
+	    		final String restrictions[] = k[2].split(",");
+
+				if(source.isValidCard(restrictions,card.getController(),card)) {
+					if (k[3].equals("All")) return 0;
+					restDamage = restDamage - Integer.valueOf(k[3]);
+				}
+	    		}
+			}
+		} //stPreventDamage
+		
     	//specific cards
-    	if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
+    	//if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
     	
-    	if (AllZoneUtil.isCardInPlay("Energy Field") && !source.getController().equals(this)) return 0;
+    	//if (AllZoneUtil.isCardInPlay("Energy Field") && !source.getController().equals(this)) return 0;
     	
     	if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this) && !source.getController().equals(this)
     			&& restDamage > 0) restDamage = restDamage - 1;
     	
-    	if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() && restDamage > 0) restDamage = restDamage - 1;
+    	/*if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() && restDamage > 0) restDamage = restDamage - 1;
     	
     	if (AllZoneUtil.isCardInPlay("Sphere of Purity", this) && source.isArtifact() && restDamage > 0) 
     		restDamage = restDamage - 1;
@@ -321,7 +342,7 @@ public abstract class Player extends MyObservable{
     	if (AllZoneUtil.isCardInPlay("Sphere of Truth", this) && source.isWhite()) {
 			if (restDamage > 1) restDamage = restDamage - 2;
 			else return 0;
-    	}
+    	}*/
     	if (AllZoneUtil.isCardInPlay("Urza's Armor", this) && restDamage > 0) restDamage = restDamage - 1;
     	
     	if (AllZoneUtil.isCardInPlay("Guardian Seraph", this) && !source.getController().isPlayer(this) && restDamage > 0) 

@@ -984,6 +984,9 @@ public class Card extends MyObservable {
                 }else if (keyword.get(i).toString().contains("Protection:")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[2]).append("\r\n");
+                }else if (keyword.get(i).toString().contains("stPreventDamage:")) {
+                    String k[] = keyword.get(i).split(":");
+                    sbLong.append(k[4]).append("\r\n");
                 } else if (keyword.get(i).startsWith("Enchant")) {
                     String k = keyword.get(i);
                     k = k.replace("Curse", "");
