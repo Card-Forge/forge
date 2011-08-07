@@ -1666,6 +1666,7 @@ res/cardsfolder/darksteel_gargoyle.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_ingot.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_juggernaut.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_myr.txt -text svneol=native#text/plain
+res/cardsfolder/darksteel_pendant.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_plate.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_relic.txt svneol=native#text/plain
 res/cardsfolder/darksteel_sentinel.txt -text svneol=native#text/plain
