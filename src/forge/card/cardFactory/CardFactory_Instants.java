@@ -82,11 +82,9 @@ public class CardFactory_Instants {
 	             		   color = (String)o;
 	             	   }
 	             	   else {
-	             		   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-	             		   PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
 	             		   CardList list = new CardList();
-	             		   list.addAll(lib.getCards());
-	             		   list.addAll(hand.getCards());
+	             		   list.addAll(AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer));
+	             		   list.addAll(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer));
 
 	             		   if (list.size() > 0) {  
 	             			   String mpcolor = CardFactoryUtil.getMostProminentColor(list);
@@ -106,14 +104,8 @@ public class CardFactory_Instants {
 				public void resolve() {
 					final String kboost = getKeywordBoost();
 					
-					CardList list = new CardList();
-					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    list.addAll(play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                           return c.isWhite();
-                        }
-                    });
+					CardList list = AllZoneUtil.getPlayerCardsInPlay(card.getController());
+                    list = list.filter(AllZoneUtil.white);
                     
                     for (int i = 0; i < list.size(); i++) {
                         final Card[] target = new Card[1];
@@ -786,17 +778,15 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    final Card[] c = AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards();
+                    final CardList creatures = AllZoneUtil.getCreaturesInPlay(card.getController());
                     
-                    for(int i = 0; i < c.length; i++)
-                        if(c[i].isCreature()) c[i].addShield();
+                    for(Card creature : creatures) creature.addShield();
                     
                     AllZone.EndOfTurn.addUntil(new Command() {
                         private static final long serialVersionUID = -3946800525315027053L;
                         
                         public void execute() {
-                            for(int i = 0; i < c.length; i++)
-                                c[i].resetShield();
+                        	for(Card creature : creatures) creature.resetShield();
                         }
                     });
                     
@@ -809,6 +799,7 @@ public class CardFactory_Instants {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Banishing Knack")) {
@@ -883,7 +874,7 @@ public class CardFactory_Instants {
                 }
                 
                 public void humanResolve() {
-                    CardList libraryList = new CardList(AllZone.Human_Library.getCards());
+                    CardList libraryList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
                     CardList selectedCards = new CardList();
                     
                     Object o = GuiUtils.getChoiceOptional("Select first card", libraryList.toArray());
@@ -984,31 +975,21 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 1504792204536793942L;
                 
                 public boolean oppMoreLand() {
-                	Player oppPlayer = card.getController().getOpponent();
-                    
-                    PlayerZone selfZone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    PlayerZone oppZone = AllZone.getZone(Constant.Zone.Battlefield, oppPlayer);
-                    
-                    CardList self = new CardList(selfZone.getCards());
-                    CardList opp = new CardList(oppZone.getCards());
-                    
-                    self = self.getType("Land");
-                    opp = opp.getType("Land");
+                	Player player = card.getController();
+                    CardList self = AllZoneUtil.getPlayerLandsInPlay(player);
+                    CardList opp = AllZoneUtil.getPlayerLandsInPlay(player.getOpponent());
                     
                     return (self.size() < opp.size()); // && super.canPlay();
                 }//oppoMoreLand()
                 
                 @Override
                 public void resolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    
-                    CardList plains = new CardList(library.getCards());
+                    CardList plains = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
                     plains = plains.getType("Plains");
                     
-                    if(0 < plains.size()) AllZone.GameAction.moveTo(hand, plains.get(0));
+                    if(0 < plains.size()) AllZone.GameAction.moveToHand(plains.get(0));
                     
-                    if(oppMoreLand() && 1 < plains.size()) AllZone.GameAction.moveTo(hand, plains.get(1));
+                    if(oppMoreLand() && 1 < plains.size()) AllZone.GameAction.moveToHand(plains.get(1));
                     
                 }//resolve()
             };//SpellAbility
