@@ -1752,60 +1752,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Jugan, the Rising Star")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                //should the computer play this card?
-                @Override
-                public boolean canPlayAI() {
-                    return (getComputerCreatures().size() != 0);
-                }
-                
-                //set the target for the computer AI
-                @Override
-                public void chooseTargetAI() {
-                    CardList list = getComputerCreatures();
-                    
-                    if(0 < list.size()) setTargetCard(list.get(0));
-                    else
-                    //the computer doesn't have any other creatures
-                    setTargetCard(null);
-                }
-                
-                CardList getComputerCreatures() {
-                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                    CardList out = list.getType("Creature");
-                    return out;
-                }//getCreatures
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    if(c != null && AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        c.addCounter(Counters.P1P1, 5);
-                    }
-                }//resolve()
-            };
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
-            
-            Command leavesPlay = new Command() {
-                private static final long serialVersionUID = -2823505283781217181L;
-                
-                public void execute() {
-                    if(card.getController().isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability));
-                    else if(ability.canPlayAI()) {
-                        ability.chooseTargetAI();
-                        //need to add this to the stack
-                        AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            card.addDestroyCommand(leavesPlay);
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
