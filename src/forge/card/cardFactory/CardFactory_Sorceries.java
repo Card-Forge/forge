@@ -2822,47 +2822,7 @@ public class CardFactory_Sorceries {
         	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Acidic Soil")) {
-        	/*
-        	 * Acidic Soil deals damage to each player equal to the number of
-        	 * lands he or she controls.
-        	 */
-        	SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 8555498267738686288L;
-
-				@Override
-        		public void resolve() {
-        			CardList humanLands = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
-        			CardList compLands = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
-        			
-        			AllZone.ComputerPlayer.addDamage(compLands.size(), card);
-        			AllZone.HumanPlayer.addDamage(humanLands.size(), card);
-        		}// resolve()
-
-        		@Override
-        		public boolean canPlayAI() {
-        			CardList human = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
-        			CardList comp = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
-        			
-        			if(AllZone.HumanPlayer.getLife() <= human.size() ) {
-        				return true;
-        			}
-        			
-        			if( AllZone.ComputerPlayer.getLife() >= comp.size() && human.size() > comp.size()+2 ) {
-        				return true;
-        			}
-        			return false;
-        		}
-        	};// SpellAbility
-        	
-        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
-        	card.clearFirstSpellAbility();
-        	card.addSpellAbility(spell);
-        }// *************** END ************ END **************************
-        
+                
         
         //*************** START *********** START **************************
         else if(cardName.equals("Explosive Revelation")) {
