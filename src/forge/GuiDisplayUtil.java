@@ -929,55 +929,70 @@ public class GuiDisplayUtil implements NewConstants {
         AllZone.Human_Hand.updateObservers();
     }
     
-    public static void devSetupBattlefield() {
-    	String t_humanLife = "20";
-    	String t_computerLife = "20";
-    	String t_humanSetupCardsInPlay = "";
-    	String t_computerSetupCardsInPlay = "";
-    	String t_humanSetupCardsInHand = "";
-    	String t_computerSetupCardsInHand = "";
-    	String t_humanSetupGraveyard = "";
-    	String t_computerSetupGraveyard = "";
-        String t_humanSetupLibrary = "";
-        String t_computerSetupLibrary = "";
+    public static void devSetupGameState() {
+    	String t_humanLife = "-1";
+    	String t_computerLife = "-1";
+    	String t_humanSetupCardsInPlay = "NONE";
+    	String t_computerSetupCardsInPlay = "NONE";
+    	String t_humanSetupCardsInHand = "NONE";
+    	String t_computerSetupCardsInHand = "NONE";
+    	String t_humanSetupGraveyard = "NONE";
+    	String t_computerSetupGraveyard = "NONE";
+        String t_humanSetupLibrary = "NONE";
+        String t_computerSetupLibrary = "NONE";
     	String t_end = "";
     	
     	String wd = System.getProperty("user.dir");
     	JFileChooser fc = new JFileChooser(wd);
-    	int rc = fc.showDialog(null, "Select Battle Setup File");
+    	int rc = fc.showDialog(null, "Select Game State File");
     	if (rc != JFileChooser.APPROVE_OPTION)
     		return;
-    	
-    	//File file = fc.getSelectedFile();
-    	//filename = file.getAbsolutePath();
-    	
+    	   	
     	try {
     		  FileInputStream fstream = new FileInputStream(fc.getSelectedFile().getAbsolutePath());
     		  DataInputStream in = new DataInputStream(fstream);
     		  BufferedReader br = new BufferedReader(new InputStreamReader(in));
     		  
-    		  t_humanLife = br.readLine().split("=")[1];
-    		  t_computerLife = br.readLine().split("=")[1];
-    		  t_humanSetupCardsInPlay = br.readLine().split("=")[1];
-    		  t_computerSetupCardsInPlay = br.readLine().split("=")[1];
-    		  t_humanSetupCardsInHand = br.readLine().split("=")[1];
-    		  t_computerSetupCardsInHand = br.readLine().split("=")[1];
-    		  t_humanSetupGraveyard = br.readLine().split("=")[1];
-    		  t_computerSetupGraveyard = br.readLine().split("=")[1];
-              t_humanSetupLibrary = br.readLine().split("=")[1];
-              t_computerSetupLibrary = br.readLine().split("=")[1];
-    		  t_end = br.readLine();
+    		  String temp = "";
+    		  
+    		  while (!temp.toLowerCase().equals("end"))
+    		  {
+    			  temp = br.readLine();
+    			  String[] temp_data = temp.split("=");
+    			  
+    			  if (temp_data.length < 2)
+    				  continue;
+    			  
+    			  String categoryName = temp_data[0];
+    			  String categoryValue = temp_data[1];
+    			  
+    			  if (categoryName.equals("HumanLife"))
+    				  t_humanLife = categoryValue;
+    			  else if (categoryName.equals("AILife"))
+    				  t_computerLife = categoryValue;
+    			  else if (categoryName.equals("HumanCardsInPlay"))
+    				  t_humanSetupCardsInPlay = categoryValue;
+    			  else if (categoryName.equals("AICardsInPlay"))
+    				  t_computerSetupCardsInPlay = categoryValue;
+    			  else if (categoryName.equals("HumanCardsInHand"))
+    			  	  t_humanSetupCardsInHand = categoryValue;
+    			  else if (categoryName.equals("AICardsInHand"))
+    				  t_computerSetupCardsInHand = categoryValue;
+    			  else if (categoryName.equals("HumanCardsInGraveyard"))
+    				  t_humanSetupGraveyard = categoryValue;
+    			  else if (categoryName.equals("AICardsInGraveyard"))
+    				  t_computerSetupGraveyard = categoryValue;
+    			  else if (categoryName.equals("HumanCardsInLibrary"))
+    				  t_humanSetupLibrary = categoryValue;
+    			  else if (categoryName.equals("AICardsInLibrary"))
+    				  t_computerSetupLibrary = categoryValue;
+    		  }
     		      		  
     		  in.close();
     	} catch (Exception e) {
     		  JOptionPane.showMessageDialog(null, "Error loading battle setup file!");
     		  return;
         }
-
-   	    if ((t_end == null) || (!t_end.toLowerCase().equals("end"))) {
-			  JOptionPane.showMessageDialog(null, "Error loading battle setup file!\nCan't find an end marker in the chosen file.");
-			  return;
-		}
 
 		int setHumanLife = Integer.parseInt(t_humanLife);
 		int setComputerLife = Integer.parseInt(t_computerLife);
@@ -1072,7 +1087,7 @@ public class GuiDisplayUtil implements NewConstants {
 
 		if (!t_humanSetupGraveyard.trim().toLowerCase().equals("none")) {
 			for (int i = 0; i < humanSetupGraveyard.length; i ++) {
-				Card c = AllZone.CardFactory.getCard(humanSetupGraveyard[i].trim(), AllZone.ComputerPlayer);
+				Card c = AllZone.CardFactory.getCard(humanSetupGraveyard[i].trim(), AllZone.HumanPlayer);
 			
 				c.setCurSetCode(c.getMostRecentSet());
 				c.setImageFilename(CardUtil.buildFilename(c));
@@ -1086,7 +1101,7 @@ public class GuiDisplayUtil implements NewConstants {
 
         if (!t_humanSetupLibrary.trim().toLowerCase().equals("none")) {
             for (int i = 0; i < humanSetupLibrary.length; i ++) {
-                Card c = AllZone.CardFactory.getCard(humanSetupLibrary[i].trim(), AllZone.ComputerPlayer);
+                Card c = AllZone.CardFactory.getCard(humanSetupLibrary[i].trim(), AllZone.HumanPlayer);
 
 				c.setCurSetCode(c.getMostRecentSet());
 				c.setImageFilename(CardUtil.buildFilename(c));
@@ -1126,10 +1141,10 @@ public class GuiDisplayUtil implements NewConstants {
 			c.setSickness(false);
 		}
 		
-		for (Card c: humanDevGraveyardSetup)
-			AllZone.Human_Graveyard.add(c);
-		for (Card c: computerDevGraveyardSetup)
-			AllZone.Computer_Graveyard.add(c);
+		if (computerDevGraveyardSetup.size() > 0)
+			AllZone.Computer_Graveyard.setCards(computerDevGraveyardSetup.toArray());
+		if (humanDevGraveyardSetup.size() > 0)
+			AllZone.Human_Graveyard.setCards(humanDevGraveyardSetup.toArray());
 		
 		if (computerDevHandSetup.size() > 0)
 			AllZone.Computer_Hand.setCards(computerDevHandSetup.toArray());

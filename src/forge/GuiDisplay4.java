@@ -175,7 +175,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 				private static final long serialVersionUID = -6660930759092583160L;
 
 				public void actionPerformed(ActionEvent arg0) {
-					GuiDisplayUtil.devSetupBattlefield();
+					GuiDisplayUtil.devSetupGameState();
 				}
 			};
 			// - Battlefield setup -
