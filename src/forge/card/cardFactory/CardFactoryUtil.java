@@ -2533,106 +2533,6 @@ public class CardFactoryUtil {
         return target;
     }//input_targetPlayer()
     
-    public static Input input_targetPlayer(final SpellAbility spell, final Command command) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 8736682807625129068L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target player");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectPlayer(Player player) {
-                spell.setTargetPlayer(player);
-                command.execute();
-                if(spell.getManaCost().equals("0") || this.isFree()) {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    stop();
-                } else stopSetNext(new Input_PayManaCost(spell));
-            }
-        };
-        return target;
-    }//input_targetPlayer()
-    
-
-    public static Input spReturnTgt_input_targetCards_InGraveyard(
-            final Card card, final SpellAbility spell, final boolean UpTo, 
-            final int numCards, final String Tgts[], final boolean anyNumber) {
-        
-        Input target = new Input() {
-            private static final long serialVersionUID = 816838038180106359L;
-            
-            @Override
-            public void showMessage() {
-                
-                CardList grave = getGraveyardList();
-                CardList targets = new CardList();
-                
-                if (UpTo) {
-                    for (int i = 0; i < numCards; i++) {
-                        if (grave.size() > 0) {
-                            Object o = GuiUtils.getChoiceOptional("Select a card", grave.toArray());
-                            if (o == null) break;
-                            Card c = (Card) o;
-                            targets.add(c);
-                            grave.remove(c);
-                        }
-                    }
-                } else if (anyNumber) {
-                    int max = grave.size();
-                    for (int i = 0; i < max; i++) {
-                        if (grave.size() > 0) {
-                            Object o = GuiUtils.getChoiceOptional("Select a card", grave.toArray());
-                            if (o == null) break;
-                            Card c = (Card) o;
-                            targets.add(c);
-                            grave.remove(c);
-                        }
-                    }
-                } else if (grave.size() > numCards) {
-                    for (int i = 0; i < numCards; i++) {
-                        Object o = GuiUtils.getChoice("Select a card", grave.toArray());
-                        Card c = (Card) o;
-                        targets.add(c);
-                        grave.remove(c);
-                    }
-                    
-                } else if (grave.size() == numCards) {
-                    targets = grave;
-                }
-                
-                if (targets.size() > 0) {
-                    spell.setTargetList(targets);
-                    
-                    if (this.isFree()) {
-                        
-                        this.setFree(false);
-                        stop();
-                        AllZone.Stack.add(spell);
-                    }
-                    else stopSetNext(new Input_PayManaCost(spell));
-                }
-            }// showMessage()
-            
-            public CardList getGraveyardList() {
-                CardList list = new CardList();
-                PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                list.addAll(zone.getCards());
-                list = list.getValidCards(Tgts,card.getController(),card);
-                return list;
-            }
-        };// Input
-        return target;
-    }//spReturnTgt_input_targetCards_InGraveyard()
-    
     public static Input modularInput(final SpellAbility ability, final Card card){
 	    Input modularInput = new Input() {
 	        
@@ -2747,23 +2647,7 @@ public class CardFactoryUtil {
             }
         };
     }//targetHuman()
-    
-    //is it the computer's main phase before attacking?
-    public static boolean AI_isMainPhase() {
-    	return AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer);
-    }
-    
-    public static CommandArgs AI_targetComputer() {
-        return new CommandArgs() {
-            private static final long serialVersionUID = -445231553588926627L;
-            
-            public void execute(Object o) {
-                SpellAbility sa = (SpellAbility) o;
-                sa.setTargetPlayer(AllZone.ComputerPlayer);
-            }
-        };
-    }//targetComputer()
-    
+
     //type can also be "All"
     public static CommandArgs AI_targetType(final String type, final PlayerZone zone) {
         return new CommandArgs() {
@@ -2805,43 +2689,7 @@ public class CardFactoryUtil {
         
         return list.containsName(c.getName());
     }
-    
-    public static boolean controlsAnotherMulticoloredPermanent(Card c) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-        
-        final Card crd = c;
-        
-        CardList list = new CardList(play.getCards());
-        list = list.filter(new CardListFilter() {
-            
-            public boolean addCard(Card c) {
-                return !c.equals(crd) && CardUtil.getColors(c).size() >= 2;
-            }
-            
-        });
-        
-        return list.size() >= 1;
-        
-    }
-    
-    public static boolean controlsAnotherColoredCreature(Card c, String color) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-        
-        final Card crd = c;
-        final String col = color;
-        CardList list = new CardList(play.getCards());
-        list = list.filter(new CardListFilter() {
-            
-            public boolean addCard(Card c) {
-                return !c.equals(crd) && c.isCreature() && CardUtil.getColors(c).contains(col);
-            }
-            
-        });
-        
-        return list.size() >= 1;
-        
-    }
-    
+
     public static boolean oppHasKismet(Player player) {
         Player opp = player.getOpponent();
         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
@@ -2871,45 +2719,6 @@ public class CardFactoryUtil {
             }
         }
         return count;
-    }
-    
-    public static String sumManaCost(String manacost1, String manacost2)
-    {
-    	String tokenized1[] = manacost1.split("\\s");
-    	String tokenized2[] = manacost2.split("\\s");
-    	
-    	StringBuilder sb = new StringBuilder();
-    	
-    	int totalNumberCost = 0;
-    	if (Character.isDigit(tokenized1[0].charAt(0)) && Character.isDigit(tokenized2[0].charAt(0)))
-    	{
-    		int cost1 = Integer.parseInt(tokenized1[0]);
-    		int cost2 = Integer.parseInt(tokenized2[0]);
-    		totalNumberCost = cost1 + cost2;
-    	}
-    	else if (Character.isDigit(tokenized1[0].charAt(0)))
-    		totalNumberCost = Integer.parseInt(tokenized1[0]);
-    	else if (Character.isDigit(tokenized2[0].charAt(0)))
-    	    totalNumberCost = Integer.parseInt(tokenized2[0]);
-    	
-    	if (totalNumberCost != 0) {
-    		sb.append(totalNumberCost);
-    	}
-    	
-    	for (int i=1;i<tokenized1.length;i++)
-    	{
-    		sb.append(" ");
-    		sb.append(tokenized1[i]);
-    	}
-    	
-    	for (int i=1;i<tokenized2.length;i++)
-    	{
-    		sb.append(" ");
-    		sb.append(tokenized2[i]);
-    	}
-    	
-    	//TODO: resort mana symbol order?
-    	return sb.toString().trim();
     }
     
     public static String multiplyManaCost(String manacost, int multiplier) {
@@ -3096,57 +2905,11 @@ public class CardFactoryUtil {
         return false;
     }
     
-    /*no longer needed
-    public static boolean canDamage(Card spell, Card receiver) {
-        //this is for untargeted damage spells, such as Pestilence, Pyroclasm, Tremor, etc. 
-        //and also combat damage?
-    	
-        if(hasProtectionFrom(spell,receiver)) return false;
-        
-        return true;
-        
-    }
-    */
-    
     public static boolean isCounterable(Card c) {
         if(!c.getKeyword().contains("CARDNAME can't be countered.")) return true;
         else return false;
     }
-    
-    //returns the number of enchantments named "e" card c is enchanted by
-    public static int hasNumberEnchantments(Card c, String e) {
-        if(!c.isEnchanted()) return 0;
-        
-        final String enchantmentName = e;
-        CardList list = new CardList(c.getEnchantedBy().toArray());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getName().equals(enchantmentName);
-            }
-            
-        });
-        
-        return list.size();
-        
-    }
-    
-    //returns a CardList of all auras named e enchanting Card c
-    public static CardList getAurasEnchanting(Card c, String e) {
-        CardList list = new CardList();
-        if(!c.isEnchanted()) return list;
-        
-        final String enchantmentName = e;
-        CardList cl = new CardList(c.getEnchantedBy().toArray());
-        cl = cl.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getName().equals(enchantmentName);
-            }
-            
-        });
-        
-        return cl;
-        
-    }
+
     
     //returns the number of equipments named "e" card c is equipped by
     public static int hasNumberEquipments(Card c, String e) {
@@ -3163,23 +2926,6 @@ public class CardFactoryUtil {
         
         return list.size();
         
-    }
-    
-    /*public static CardList getValuableCreatures() 
-    {
-      
-    }
-    */
-
-    public static CardList getFlashbackCards(Player player) {
-        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-        CardList cl = new CardList(grave.getCards());
-        cl = cl.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.hasFlashback();
-            }
-        });
-        return cl;
     }
 
     public static CardList getGraveyardActivationCards(final Player player) {
