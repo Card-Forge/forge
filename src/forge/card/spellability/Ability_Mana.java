@@ -98,9 +98,10 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         	AllZone.Stack.addSimultaneousStackEntry(CardFactoryUtil.getForbiddenOrchardAbility(source, getActivatingPlayer().getOpponent()));
         }
         
-        if(source.getType().contains("Mountain") && AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
+        if (source.isType("Mountain") 
+        		&& AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
         	CardList list = AllZoneUtil.getCardsInPlay("Gauntlet of Might");
-        	for(int i = 0; i < list.size(); i++) {
+        	for (int i = 0; i < list.size(); i++) {
         		manaPool.addManaToFloating("R", list.get(i));
         	}
         }

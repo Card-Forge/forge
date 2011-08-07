@@ -605,14 +605,14 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(zone.is(Constant.Zone.Hand)) {
+                if (zone.is(Constant.Zone.Hand)) {
                     card.getController().discard(card, sp);
                     n++;
                     
-                    if(card.getType().contains(uType.toString())) stop();
+                    if (card.isType(uType.toString())) stop();
                     
                     else {
-	                    if(n == nCards || AllZone.Human_Hand.size() == 0) stop();
+	                    if( n == nCards || AllZone.Human_Hand.size() == 0) stop();
 	                    else
 	                    	showMessage();
                     }

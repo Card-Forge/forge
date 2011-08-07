@@ -185,12 +185,12 @@ public class Spell_Permanent extends Spell {
     	Card card = getSourceCard();
     	
         //check on legendary
-        if(card.getType().contains("Legendary")) {
+        if (card.isType("Legendary")) {
         	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
             if (list.containsName(card.getName()))
             	return false;
         }
-        if(card.getType().contains("Planeswalker")) {
+        if (card.isType("Planeswalker")) {
         	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
         	list = list.getType("Planeswalker");
         	
@@ -199,27 +199,29 @@ public class Spell_Permanent extends Spell {
         		String subtype = card.getType().get(card.getType().size() - 1);
         		CardList cl = list.getType(subtype);
         		
-        		 if(cl.size() > 0) {
+        		 if (cl.size() > 0) {
                      return false;
                  }
         	}
         }
-        if(card.getType().contains("World")) {
+        if (card.isType("World")) {
         	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
         	list = list.getType("World");
         	if(list.size() > 0) return false;
         }
         
-        if(card.getType().contains("Creature") && card.getNetDefense() <= 0 && 
-        		!card.hasStartOfKeyword("etbCounter") && !card.getText().contains("Modular"))
+        if (card.isType("Creature") 
+        		&& card.getNetDefense() <= 0 
+        		&& !card.hasStartOfKeyword("etbCounter") 
+        		&& !card.getText().contains("Modular"))
         	return false;
         
-        if(willChampion) {
+        if (willChampion) {
         	Object o = championGetCreature.execute();
-            if(o == null) return false;
+            if (o == null) return false;
             
             CardList cl = (CardList) championGetCreature.execute();
-            if( (o == null) || !(cl.size() > 0) || !AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand))
+            if ( (o == null) || !(cl.size() > 0) || !AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand))
             	return false;
         }
         
