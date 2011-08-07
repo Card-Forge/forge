@@ -814,7 +814,7 @@ class CardFactory_Auras {
         	Cost cost = new Cost("1 B", cardName, false);
         	animate.setPayCosts(cost);
         	
-        	animate.getRestrictions().setActivateZone(Constant.Zone.Hand);
+        	animate.getRestrictions().setZone(Constant.Zone.Hand);
             
         	final Ability attach = new Ability(card, "0") {
 				private static final long serialVersionUID = 222308932796127795L;

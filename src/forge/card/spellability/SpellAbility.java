@@ -63,6 +63,7 @@ public abstract class SpellAbility {
     protected Target		chosenTarget	   = null;
     
     private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
+    private SpellAbility_Condition	conditions = new SpellAbility_Condition();
     private Ability_Sub 	subAbility 			= null;
     
     private AbilityFactory  abilityFactory 	   = null;
@@ -292,6 +293,14 @@ public abstract class SpellAbility {
     
     public SpellAbility_Restriction getRestrictions(){
     	return restrictions;
+    }
+    
+    public void setConditions(SpellAbility_Condition condition) {
+    	conditions = condition;
+    }
+    
+    public SpellAbility_Condition getConditions() {
+    	return conditions;
     }
     
     public void setAbilityFactory(AbilityFactory af){

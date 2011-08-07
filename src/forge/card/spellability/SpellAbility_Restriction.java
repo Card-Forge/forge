@@ -1,146 +1,104 @@
+
 package forge.card.spellability;
 
-import java.util.ArrayList;
+
+import java.util.HashMap;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.Constant;
 import forge.Phase;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 
-public class SpellAbility_Restriction {
+public class SpellAbility_Restriction extends SpellAbility_Variables {
 	// A class for handling SpellAbility Restrictions. These restrictions include: 
 	// Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player, 
 	// Threshold, Metalcraft, LevelRange, etc
 	// Each value will have a default, that can be overridden (mostly by AbilityFactory)
-	// The CanPlay function will use these values to determine if the current game state is ok with these restrictions
+	// The canPlay function will use these values to determine if the current game state is ok with these restrictions
 	
-	// default values for Sorcery speed abilities
-	private String activateZone = Constant.Zone.Battlefield;
-
-	public void setActivateZone(String zone){
-		activateZone = zone;
-	}
-	
-	public String getActivateZone(){
-		return activateZone;
-	}
-	
-	private boolean bSorcerySpeed = false;
-	
-	public void setSorcerySpeed(boolean bSpeed){
-		bSorcerySpeed = bSpeed;
-	}
-	
-	public boolean getSorcerySpeed(){
-		return bSorcerySpeed;
-	}
-	
-	private boolean bAnyPlayer = false;
-	
-	public void setAnyPlayer(boolean anyPlayer){
-		bAnyPlayer = anyPlayer;
-	}
-	
-	public boolean getAnyPlayer(){
-		return bAnyPlayer;
-	}
-	
-	private boolean bPlayerTurn = false;
-	
-	public void setPlayerTurn(boolean bTurn){
-		bPlayerTurn = bTurn;
-	}
-	
-	public boolean getPlayerTurn(){
-		return bPlayerTurn;
-	}
-	
-	private boolean bOpponentTurn = false;
-	
-	public void setOpponentTurn(boolean bTurn){
-		bOpponentTurn = bTurn;
-	}
-	
-	public boolean getOpponentTurn(){
-		return bOpponentTurn;
-	}
-	
-	private int activationLimit = -1;
-	private int numberTurnActivations = 0;
-	private int activationNumberSacrifice = -1;
-	
-	public void setActivationLimit(int limit){
-		activationLimit = limit;
-	}
-	
-	public void abilityActivated(){
-		numberTurnActivations++;
-	}
-	
-	public int getNumberTurnActivations() {
-		return numberTurnActivations;
-	}
-	
-	public void resetTurnActivations(){
-		numberTurnActivations = 0;
-	}
-	
-	public void setActivationNumberSacrifice(int num) {
-		activationNumberSacrifice = num;
-	}
-	
-	public int getActivationNumberSacrifice() {
-		return activationNumberSacrifice;
-	}
-	
-	private ArrayList<String> activatePhases = new ArrayList<String>();
-	
-	public void setActivatePhases(String phases){
-		for(String s : phases.split(","))
-			activatePhases.add(s);
-	}
-	
-	private int nCardsInHand = -1;
-	public void setActivateCardsInHand(int cards){
-		nCardsInHand = cards;
-	}
-	
-	private boolean bNeedsThreshold = false;
-	public void setThreshold(boolean bThreshold){
-		bNeedsThreshold = bThreshold;
-	}
-	
-	final private static int THRESHOLD = 7;
-	
-	private String sIsPresent = null;
-	public void setIsPresent(String present){
-		sIsPresent = present;
-	}
-	
-	private String presentCompare = "GE1";	// Default Compare to Greater or Equal to 1
-	public void setPresentCompare(String compare){
-		presentCompare = compare;
-	}
-	
-	private boolean pwAbility = false;
-	public void setPlaneswalker(boolean bPlaneswalker) { pwAbility = bPlaneswalker; }
-	public boolean getPlaneswalker() { return pwAbility; }
-	
-	/*
-	 * Restrictions of the future
-	 * (can level Min level Max be done with isPresent?)
-		int levelMin = 0;
-		int levelMax = 0;
-	*/
 	
 	public SpellAbility_Restriction(){	}
+	
+	public void setRestrictions(HashMap<String,String> params) {
+		if (params.containsKey("Activation")) {
+			String value = params.get("Activation");
+			if(value.equals("Threshold")) setThreshold(true);
+			if(value.equals("Metalcraft")) setMetalcraft(true);
+			if(value.equals("Hellbent")) setHellbent(true);
+		}
+		
+		if (params.containsKey("ActivationZone"))
+        	setZone(params.get("ActivationZone"));
+        
+        if (params.containsKey("Flashback")){
+        	setZone("Graveyard");
+        }
+        
+        if (params.containsKey("SorcerySpeed"))
+        	setSorcerySpeed(true);
+        
+        if (params.containsKey("PlayerTurn"))
+        	setPlayerTurn(true);
+        
+        if (params.containsKey("OpponentTurn"))
+        	setOpponentTurn(true);
+        
+        if (params.containsKey("AnyPlayer"))
+        	setAnyPlayer(true);
+        
+        if (params.containsKey("ActivationLimit"))
+        	setActivationLimit(Integer.parseInt(params.get("ActivationLimit")));
+        
+        if (params.containsKey("ActivationNumberSacrifice"))
+        	setActivationNumberSacrifice(Integer.parseInt(params.get("ActivationNumberSacrifice")));
+
+        if (params.containsKey("ActivationPhases")) {
+        	String phases = params.get("ActivationPhases");
+        	
+        	if (phases.contains("->")){
+        		// If phases lists a Range, split and Build Activate String
+        		// Combat_Begin->Combat_End (During Combat)
+        		// Draw-> (After Upkeep)
+        		// Upkeep->Combat_Begin (Before Declare Attackers)
+        		
+        		String[] split = phases.split("->", 2);
+        		phases = AllZone.Phase.buildActivateString(split[0], split[1]);
+        	}
+        		
+        	setPhases(phases);
+        }
+        
+        if (params.containsKey("ActivationCardsInHand"))
+        	setActivateCardsInHand(Integer.parseInt(params.get("ActivationCardsInHand")));
+        
+        if (params.containsKey("Planeswalker"))
+        	setPlaneswalker(true);
+        
+        if (params.containsKey("IsPresent")){
+        	setIsPresent(params.get("IsPresent"));
+        	if (params.containsKey("PresentCompare"))
+        		setPresentCompare(params.get("PresentCompare"));
+        }
+        
+        if (params.containsKey("IsNotPresent")){
+        	setIsPresent(params.get("IsNotPresent"));
+        	setPresentCompare("EQ0");
+        }
+        
+        //basically PresentCompare for life totals:
+        if(params.containsKey("ActivationLifeTotal")){
+        	lifeTotal = params.get("ActivationLifeTotal");
+        	if(params.containsKey("ActivationLifeAmount")) {
+				lifeAmount = params.get("ActivationLifeAmount");
+			}				
+		}
+	}//end setRestrictions()
 
 	public boolean canPlay(Card c, SpellAbility sa){
-		if (!AllZone.getZone(c).getZoneName().equals(activateZone))
+		if (!AllZone.getZone(c).getZoneName().equals(zone))
 			return false;
 		
 		Player activator = sa.getActivatingPlayer();
@@ -164,10 +122,10 @@ public class SpellAbility_Restriction {
 		if (activationLimit != -1 && numberTurnActivations >= activationLimit)
 			return false;
 		
-		if (activatePhases.size() > 0){
+		if (phases.size() > 0){
 			boolean isPhase = false;
 			String currPhase = AllZone.Phase.getPhase();
-			for(String s : activatePhases){
+			for(String s : phases){
 				if (s.equals(currPhase)){
 					isPhase = true;
 					break;
@@ -178,15 +136,20 @@ public class SpellAbility_Restriction {
 				return false;
 		}
 		
-		if (nCardsInHand != -1){
-			// Can handle Library of Alexandria, or Hellbent
+		if(nCardsInHand != -1){
 			if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand)
 				return false;
 		}
-		
-		if (bNeedsThreshold){
-			// Threshold
-			if (AllZoneUtil.getPlayerGraveyard(activator).size() < THRESHOLD)
+		if(hellbent){
+			if (!activator.hasHellbent())
+				return false;
+		}
+		if(threshold){
+			if (!activator.hasThreshold())
+				return false;
+		}
+		if(metalcraft){
+			if (!activator.hasMetalcraft())
 				return false;
 		}
 		
@@ -209,6 +172,29 @@ public class SpellAbility_Restriction {
 				return false;
 		}
 		
+		if(lifeTotal != null) {
+			int life = 1;
+			if(lifeTotal.equals("You")) {
+				life = activator.getLife();
+			}
+			if(lifeTotal.equals("Opponent")) {
+				life = activator.getOpponent().getLife();
+			}
+			
+			int right = 1;
+			String rightString = lifeAmount.substring(2);
+			if(rightString.equals("X")) {
+				right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
+			}
+			else {
+				right = Integer.parseInt(lifeAmount.substring(2));
+			}
+			
+			if(!Card.compare(life, lifeAmount, right)) {
+				return false;
+			}
+		}
+		
 		if (pwAbility){
 			// Planeswalker abilities can only be activated as Sorceries
 			if (!Phase.canCastSorcery(activator))
@@ -223,5 +209,6 @@ public class SpellAbility_Restriction {
 		}
 			
 		return true;
-	}
-}
+	}//canPlay()
+	
+}//end class SpellAbility_Restriction

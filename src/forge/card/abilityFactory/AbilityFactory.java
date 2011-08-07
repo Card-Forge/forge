@@ -18,6 +18,7 @@ import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.SpellAbility_Condition;
 import forge.card.spellability.Target;
 
 public class AbilityFactory {
@@ -772,9 +773,32 @@ public class AbilityFactory {
         //if (!isTargeted)
         //	SA.setStackDescription(hostCard.getName());
         
-        SA.setRestrictions(buildRestrictions(SA));
+        makeRestrictions(SA);
+        makeConditions(SA);
 
         return SA;
+	}
+	
+	private void makeRestrictions(SpellAbility sa) {
+        // SpellAbility_Restrictions should be added in here
+        SpellAbility_Restriction restrict = sa.getRestrictions(); 
+        if (mapParams.containsKey("Flashback")){
+        	sa.setFlashBackAbility(true);
+        }
+        restrict.setRestrictions(mapParams);
+	}
+	
+	private void makeConditions(SpellAbility sa) {
+        // SpellAbility_Restrictions should be added in here
+        SpellAbility_Condition condition = sa.getConditions(); 
+        if (mapParams.containsKey("Flashback")){
+        	sa.setFlashBackAbility(true);
+        }
+        condition.setConditions(mapParams);
+	}
+	
+	public static boolean checkConditional(SpellAbility sa){
+		return sa.getConditions().checkConditions(sa);
 	}
 	
 	// Easy creation of SubAbilities
@@ -799,73 +823,6 @@ public class AbilityFactory {
 		}
 
 		return abSub;
-	}
-	
-	public SpellAbility_Restriction buildRestrictions(SpellAbility SA){
-        // SpellAbility_Restrictions should be added in here
-        SpellAbility_Restriction restrict = SA.getRestrictions(); 
-        if (mapParams.containsKey("ActivatingZone"))
-        	restrict.setActivateZone(mapParams.get("ActivatingZone"));
-        
-        if (mapParams.containsKey("Flashback")){
-        	SA.setFlashBackAbility(true);
-        	restrict.setActivateZone("Graveyard");
-        }
-        
-        if (mapParams.containsKey("SorcerySpeed"))
-        	restrict.setSorcerySpeed(true);
-        
-        if (mapParams.containsKey("PlayerTurn"))
-        	restrict.setPlayerTurn(true);
-        
-        if (mapParams.containsKey("OpponentTurn"))
-        	restrict.setOpponentTurn(true);
-        
-        if (mapParams.containsKey("AnyPlayer"))
-        	restrict.setAnyPlayer(true);
-        
-        if (mapParams.containsKey("ActivationLimit"))
-        	restrict.setActivationLimit(Integer.parseInt(mapParams.get("ActivationLimit")));
-        
-        if (mapParams.containsKey("ActivationNumberSacrifice"))
-        	restrict.setActivationNumberSacrifice(Integer.parseInt(mapParams.get("ActivationNumberSacrifice")));
-
-        if (mapParams.containsKey("ActivatingPhases")) {
-        	String phases = mapParams.get("ActivatingPhases");
-        	
-        	if (phases.contains("->")){
-        		// If phases lists a Range, split and Build Activate String
-        		// Combat_Begin->Combat_End (During Combat)
-        		// Draw-> (After Upkeep)
-        		// Upkeep->Combat_Begin (Before Declare Attackers)
-        		
-        		String[] split = phases.split("->", 2);
-        		phases = AllZone.Phase.buildActivateString(split[0], split[1]);
-        	}
-        		
-        	restrict.setActivatePhases(phases);
-        }
-        
-        if (mapParams.containsKey("ActivatingCardsInHand"))
-        	restrict.setActivateCardsInHand(Integer.parseInt(mapParams.get("ActivatingCardsInHand")));
-        
-        if (mapParams.containsKey("Threshold"))
-        	restrict.setThreshold(true);
-        
-        if (mapParams.containsKey("Planeswalker"))
-        	restrict.setPlaneswalker(true);
-        
-        if (mapParams.containsKey("IsPresent")){
-        	restrict.setIsPresent(mapParams.get("IsPresent"));
-        	if (mapParams.containsKey("PresentCompare"))
-        		restrict.setPresentCompare(mapParams.get("PresentCompare"));
-        }
-        
-        if (mapParams.containsKey("IsNotPresent")){
-        	restrict.setIsPresent(mapParams.get("IsNotPresent"));
-        	restrict.setPresentCompare("EQ0");
-        }
-        return restrict;
 	}
 	
 	public static boolean playReusable(SpellAbility sa){
@@ -1285,45 +1242,6 @@ public class AbilityFactory {
 		return parent;
 	}
 	
-	public static boolean checkConditional(HashMap<String,String> params, SpellAbility sa){
-		// ConditionPresent is required. Other paramaters are optional.
-		// ConditionDefined$ What cardlist we will be comparing (Triggered, Valid, Targeted etc)
-		// ConditionPresent$ Similar to IsPresent, but the Condition is checked on Resolution, not Activation
-		// ConditionCompare$ Similar to PresentCompare, but the Condition is checked on Resolution, not Activation
-		// ConditionDescription$ Not used here, but can be used in StackDescription		
-
-		String present = params.get("ConditionPresent");
-		if (present == null)	// If CP doesn't exist, return true
-			return true;
-		
-		String compare = params.get("ConditionCompare");
-		if (compare == null)	// Compare defaults to "Does this exist?"
-			compare = "GE1";
-		
-		String defined = params.get("ConditionDefined");
-		CardList list;
-		if (defined == null)
-			list = AllZoneUtil.getCardsInPlay();
-		else{
-			list = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa));
-		}
-		
-		list = list.getValidCards(present.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-		
-		int right;
-		String rightString = compare.substring(2);
-		try{	// If this is an Integer, just parse it
-			right = Integer.parseInt(rightString);
-		}
-		catch(NumberFormatException e){	// Otherwise, grab it from the SVar
-			right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
-		}
-
-		int left = list.size();
-		
-		return Card.compare(left, compare, right);
-	}
-	
 	/*
 	public static void resolveSubAbility(SpellAbility sa){
 		Ability_Sub abSub = sa.getSubAbility();
@@ -1438,7 +1356,7 @@ public class AbilityFactory {
 		
 		
 		//check conditions
-		if (AbilityFactory.checkConditional(params, sa)) {
+		if (AbilityFactory.checkConditional(sa)) {
 			if (params.get("UnlessCost") == null) {
 				sa.resolve();
 				
@@ -1454,10 +1372,8 @@ public class AbilityFactory {
 	public static void resolveSubAbilities(SpellAbility sa) {
 		Ability_Sub abSub = sa.getSubAbility();
 		if(abSub == null) return;
-		AbilityFactory af = abSub.getAbilityFactory();
-		HashMap<String,String> params = af.getMapParams();
 		//check conditions
-		if (AbilityFactory.checkConditional(params, abSub)) {
+		if (AbilityFactory.checkConditional(abSub)) {
 			abSub.resolve();
 		}
 		resolveSubAbilities(abSub);

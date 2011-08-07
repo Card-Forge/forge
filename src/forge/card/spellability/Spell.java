@@ -17,7 +17,7 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         
         setManaCost(sourceCard.getManaCost());
         setStackDescription(sourceCard.getSpellText());
-        getRestrictions().setActivateZone(Constant.Zone.Hand);
+        getRestrictions().setZone(Constant.Zone.Hand);
     }
     
     public Spell(Card sourceCard, Cost abCost, Target abTgt) {
@@ -28,7 +28,7 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         setPayCosts(abCost);
         setTarget(abTgt);
         setStackDescription(sourceCard.getSpellText());
-        getRestrictions().setActivateZone(Constant.Zone.Hand);
+        getRestrictions().setZone(Constant.Zone.Hand);
     }
     
     @Override

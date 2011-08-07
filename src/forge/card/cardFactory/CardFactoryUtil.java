@@ -694,7 +694,7 @@ public class CardFactoryUtil {
             }
         };
         SpellAbility_Restriction restrict = new SpellAbility_Restriction();
-        restrict.setActivateZone("Graveyard");
+        restrict.setZone("Graveyard");
         restrict.setSorcerySpeed(true);
         unearth.setRestrictions(restrict);
         
@@ -930,7 +930,7 @@ public class CardFactoryUtil {
         sbStack.append(sourceCard).append(" Cycling: Draw a card");
         cycle.setStackDescription(sbStack.toString());
         
-        cycle.getRestrictions().setActivateZone(Constant.Zone.Hand);
+        cycle.getRestrictions().setZone(Constant.Zone.Hand);
         return cycle;
     }//ability_cycle()
     
@@ -997,7 +997,7 @@ public class CardFactoryUtil {
         sbStack.append("cycling: Search your library for a ").append(description).append(" card.)");
         cycle.setStackDescription(sbStack.toString());
         
-        cycle.getRestrictions().setActivateZone(Constant.Zone.Hand);
+        cycle.getRestrictions().setZone(Constant.Zone.Hand);
         
         return cycle;
     }//ability_typecycle()
@@ -1059,7 +1059,7 @@ public class CardFactoryUtil {
         sbStack.append(sourceCard).append(" Transmute: Search your library for a card with the same converted mana cost.)");
         transmute.setStackDescription(sbStack.toString());
         
-        transmute.getRestrictions().setActivateZone(Constant.Zone.Hand);
+        transmute.getRestrictions().setZone(Constant.Zone.Hand);
         return transmute;
     }//ability_transmute()
     
@@ -1100,7 +1100,7 @@ public class CardFactoryUtil {
         sbStack.append(sourceCard.getName()).append(" suspending for ").append(suspendCounters).append(" turns.)");
         suspend.setStackDescription(sbStack.toString());
         
-        suspend.getRestrictions().setActivateZone(Constant.Zone.Hand);
+        suspend.getRestrictions().setZone(Constant.Zone.Hand);
         return suspend;
     }//ability_suspend()
     
@@ -2257,7 +2257,7 @@ public class CardFactoryUtil {
     		return true;
     	
     	for(SpellAbility sa : c.getSpellAbility()){
-    		if (sa.getRestrictions().getActivateZone().equals(Constant.Zone.Graveyard))
+    		if (sa.getRestrictions().getZone().equals(Constant.Zone.Graveyard))
     			return true;
     	}
     	
