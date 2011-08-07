@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -942,7 +941,6 @@ public class GuiDisplayUtil implements NewConstants {
         String t_humanSetupLibrary = "NONE";
         String t_computerSetupLibrary = "NONE";
         String t_changePlayer = "NONE";
-    	String t_end = "";
     	
     	String wd = System.getProperty("user.dir");
     	JFileChooser fc = new JFileChooser(wd);
