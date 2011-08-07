@@ -449,6 +449,7 @@ res/cardsfolder/ashenmoor_gouger.txt -text svneol=native#text/plain
 res/cardsfolder/ashenmoor_liege.txt svneol=native#text/plain
 res/cardsfolder/ashes_to_ashes.txt -text svneol=native#text/plain
 res/cardsfolder/ashnods_altar.txt -text svneol=native#text/plain
+res/cardsfolder/ashnods_cylix.txt -text svneol=native#text/plain
 res/cardsfolder/ashnods_transmogrant.txt -text svneol=native#text/plain
 res/cardsfolder/asmira_holy_avenger.txt svneol=native#text/plain
 res/cardsfolder/aspect_of_mongoose.txt -text svneol=native#text/plain
