@@ -10,4 +10,5 @@ SVar:TrigGainControl2:AB$GainControl | Cost$ 0 | Defined$ Enchanted | LoseContro
 SVar:DBUntap:DB$Untap | Defined$ Enchanted
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wellspring.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/348.jpg
 End

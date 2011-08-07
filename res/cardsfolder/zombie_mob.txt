@@ -9,4 +9,5 @@ SVar:TrigExileAll:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Creature.YouCtrl | Or
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_mob.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/51.jpg
 End

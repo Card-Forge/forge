@@ -8,4 +8,5 @@ SVar:DBDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:X:Remembered$CardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_thunder.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/15.jpg
 End
