@@ -19,6 +19,7 @@ public class StaticEffect {
 	//for types
 	private boolean								overwriteTypes		= false;
 	private boolean								keepSupertype		= false;
+	private boolean								removeSubTypes		= false;
 	private HashMap<Card, ArrayList<String>>	types				= new HashMap<Card, ArrayList<String>>();
 	private HashMap<Card, ArrayList<String>>	originalTypes		= new HashMap<Card, ArrayList<String>>();
 	
@@ -174,6 +175,15 @@ public class StaticEffect {
 
 	public void setKeepSupertype(boolean keepSupertype) {
 		this.keepSupertype = keepSupertype;
+	}
+	
+	//should we overwrite land types?
+	public boolean isRemoveSubTypes() {
+		return removeSubTypes;
+	}
+
+	public void setRemoveSubTypes(boolean removeSubTypes) {
+		this.removeSubTypes = removeSubTypes;
 	}
 
 	//original types

@@ -7343,17 +7343,19 @@ public class GameActionUtil {
 							CardList affectedCards = getAffectedCards(cardWithKeyword, k, specific); // options are All, Self, Enchanted etc.
 							se.setAffectedCards(affectedCards);
 							
-							String[] pt = k[2].split("/");
-							
-							int x = 0;
-		            		if (pt[0].contains("X") || pt[1].contains("X")) 
-		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X").split("\\$")[1]);
-		                 	se.setXValue(x);
-		                 	
-		                 	int y = 0;
-		            		if (pt[1].contains("Y")) 
-		                 		y = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("Y").split("\\$")[1]);
-		                 	se.setYValue(y);
+							if(!k[2].equals("no changes")) {
+								String[] pt = k[2].split("/");
+								
+								int x = 0;
+			            		if (pt[0].contains("X") || pt[1].contains("X")) 
+			                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X").split("\\$")[1]);
+			                 	se.setXValue(x);
+			                 	
+			                 	int y = 0;
+			            		if (pt[1].contains("Y")) 
+			                 		y = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("Y").split("\\$")[1]);
+			                 	se.setYValue(y);
+							}
 		                 	
 		                 	ArrayList<String> types = new ArrayList<String>();
 		                 	if(!k[3].equalsIgnoreCase("no types")) {
@@ -7365,6 +7367,10 @@ public class GameActionUtil {
 		                 		if(types.contains("KeepSupertype")) {
 		                 			types.remove("KeepSupertype");
 		                 			se.setKeepSupertype(true);
+		                 		}
+		                 		if(types.contains("RemoveSubTypes")) {
+		                 			types.remove("RemoveSubTypes");
+		                 			se.setRemoveSubTypes(true);
 		                 		}
 		                 	}
 		                 	
@@ -7392,18 +7398,33 @@ public class GameActionUtil {
 		
 		private void addStaticEffects(StaticEffect se, Card source, CardList affectedCards, String details, ArrayList<String> types, String colors) {
 			
-			String[] keyword = details.split("/", 3);
-			String powerStr = keyword[0];
-			String toughStr = keyword[1];
-			
 			for(int i = 0; i < affectedCards.size(); i++) {
 				Card affectedCard = affectedCards.get(i);
-				//copied from stSetPT power/toughness
-				int power = powerStr.matches("[0-9][0-9]?") ? Integer.parseInt(powerStr) : CardFactoryUtil.xCount(affectedCard, powerStr);
-				int toughness = toughStr.matches("[0-9][0-9]?") ? Integer.parseInt(toughStr) : CardFactoryUtil.xCount(affectedCard, toughStr);
-				se.addOriginalPT(affectedCard, affectedCard.getBaseAttack(), affectedCard.getBaseDefense());
-				affectedCard.setBaseAttack(power);
-				affectedCard.setBaseDefense(toughness);
+				
+				if(!details.equals("no changes")) {
+					String[] keyword = details.split("/", 3);
+					String powerStr = keyword[0];
+					String toughStr = keyword[1];
+					//copied from stSetPT power/toughness
+					int power = powerStr.matches("[0-9][0-9]?") ? Integer.parseInt(powerStr) : CardFactoryUtil.xCount(affectedCard, powerStr);
+					int toughness = toughStr.matches("[0-9][0-9]?") ? Integer.parseInt(toughStr) : CardFactoryUtil.xCount(affectedCard, toughStr);
+					se.addOriginalPT(affectedCard, affectedCard.getBaseAttack(), affectedCard.getBaseDefense());
+					affectedCard.setBaseAttack(power);
+					affectedCard.setBaseDefense(toughness);
+					if(se.isOverwriteKeywords()) {
+						se.addOriginalKeywords(affectedCard, affectedCard.getIntrinsicKeyword());
+						affectedCard.clearAllKeywords();
+					}
+					else {
+						if(keyword.length > 2) {
+							String keywords[] = keyword[2].split(" & ");
+							for(int j = 0; j < keywords.length; j++) {
+								String kw = keywords[j];
+								affectedCard.addExtrinsicKeyword(kw);
+							}
+						}
+					}
+				}
 				
 				if(se.isOverwriteTypes()) {
 					se.addOriginalTypes(affectedCard, affectedCard.getType());
@@ -7417,6 +7438,13 @@ public class GameActionUtil {
 						}
 					}
 				}
+				if(se.isRemoveSubTypes()) {
+					se.addOriginalTypes(affectedCard, affectedCard.getType());
+					ArrayList<String> acTypes = affectedCard.getType();
+					for(String t : acTypes) {
+						if(CardUtil.isASubType(t)) affectedCard.removeType(t);
+					}
+				}
 				for(String type : types) {
 					if(!affectedCard.isType(type)) {
 						affectedCard.addType(type);
@@ -7424,19 +7452,6 @@ public class GameActionUtil {
 					}
 					else {
 						se.removeType(affectedCard, type);
-					}
-				}
-				if(se.isOverwriteKeywords()) {
-					se.addOriginalKeywords(affectedCard, affectedCard.getIntrinsicKeyword());
-					affectedCard.clearAllKeywords();
-				}
-				else {
-					if(keyword.length > 2) {
-						String keywords[] = keyword[2].split(" & ");
-						for(int j = 0; j < keywords.length; j++) {
-							String kw = keywords[j];
-							affectedCard.addExtrinsicKeyword(kw);
-						}
 					}
 				}
 				//Abilities
@@ -7469,8 +7484,10 @@ public class GameActionUtil {
 		
 		private void removeStaticEffect(StaticEffect se, Card source, Card affectedCard, String[] details) {
 			
-			affectedCard.setBaseAttack(se.getOriginalPower(affectedCard));
-			affectedCard.setBaseDefense(se.getOriginalToughness(affectedCard));
+			if(!details[2].equals("no changes")) {
+				affectedCard.setBaseAttack(se.getOriginalPower(affectedCard));
+				affectedCard.setBaseDefense(se.getOriginalToughness(affectedCard));
+			}
 			
 			for(String type : se.getTypes(affectedCard)) {
 				affectedCard.removeType(type);
@@ -7480,6 +7497,11 @@ public class GameActionUtil {
 					if(!se.isKeepSupertype() || (se.isKeepSupertype() && !CardUtil.isASuperType(type))) {
 						affectedCard.addType(type);
 					}
+				}
+			}
+			if(se.isRemoveSubTypes()) {
+				for(String type : se.getOriginalTypes(affectedCard)) {
+					if(CardUtil.isASubType(type)) affectedCard.addType(type);
 				}
 			}
 			

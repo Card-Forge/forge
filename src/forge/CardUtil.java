@@ -243,6 +243,10 @@ public class CardUtil {
     			|| cardType.equals("Snow") || cardType.equals("World"));
     }
     
+    public static boolean isASubType(String cardType) {
+    	return (!isASuperType(cardType) && !isACardType(cardType));
+    }
+    
     // Check if a Type is a Creature Type (by excluding all other types)
     public static boolean isACreatureType(String cardType) {
     	return (!isACardType(cardType) && !isASuperType(cardType) && !isALandType(cardType)
