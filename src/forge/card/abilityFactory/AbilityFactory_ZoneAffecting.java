@@ -511,6 +511,10 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
+		
 		for(Player p : tgtPlayers)
 			sb.append(p.toString()).append(" ");
 		
@@ -675,6 +679,11 @@ public class AbilityFactory_ZoneAffecting {
 	public static void millResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
+		
 		Card source = sa.getSourceCard();
 
 		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
@@ -816,6 +825,11 @@ public class AbilityFactory_ZoneAffecting {
 	private static void discardResolve(final AbilityFactory af, final SpellAbility sa){
 		Card source = sa.getSourceCard();
 		HashMap<String,String> params = af.getMapParams();
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 
 		String mode = params.get("Mode");
 
@@ -942,6 +956,10 @@ public class AbilityFactory_ZoneAffecting {
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
+		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 		
 		if (tgtPlayers.size() > 0){
 			
@@ -1200,6 +1218,10 @@ public class AbilityFactory_ZoneAffecting {
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
+		
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 
 		ArrayList<Player> tgtPlayers;
 
@@ -1279,6 +1301,11 @@ public class AbilityFactory_ZoneAffecting {
 		Card host = af.getHostCard();
 		HashMap<String,String> params = af.getMapParams();
 		boolean optional = params.containsKey("Optional");
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 
 		ArrayList<Player> tgtPlayers;
 

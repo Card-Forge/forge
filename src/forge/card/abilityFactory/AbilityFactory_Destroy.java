@@ -498,6 +498,10 @@ public class AbilityFactory_Destroy {
 
 		 StringBuilder sb = new StringBuilder();
 		 String name = af.getHostCard().getName();
+		 
+		String conditionDesc = af.getMapParams().get("ConditionDescription");
+		if (conditionDesc != null)
+			sb.append(conditionDesc).append(" ");
 
 		 ArrayList<Card> tgtCards;
 
@@ -593,6 +597,11 @@ public class AbilityFactory_Destroy {
 		HashMap<String,String> params = af.getMapParams();
 		String DrawBack = params.get("SubAbility");
 		Card card = sa.getSourceCard();
+		
+		if (!AbilityFactory.checkConditional(params, sa)){
+			AbilityFactory.resolveSubAbility(sa);
+			return;
+		}
 		
 		String Valid = "";
 		
