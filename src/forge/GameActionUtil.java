@@ -5935,20 +5935,6 @@ public class GameActionUtil {
 
 	}; //Liu_Bei
 
-	public static Command Plague_Rats = new Command() {
-		private static final long serialVersionUID = 2333292591304646698L;
-
-		public void execute() {
-
-			CardList rats = AllZoneUtil.getCardsInPlay("Plague Rats");
-			for(Card rat:rats) {
-				rat.setBaseAttack(rats.size());
-				rat.setBaseDefense(rats.size());
-			}
-		}// execute()
-
-	};//Plague_Rats
-	
 	public static Command Phylactery_Lich             = new Command() {
 
 		private static final long serialVersionUID = -1606115081917467754L;
@@ -6847,20 +6833,16 @@ public class GameActionUtil {
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
 		commands.put("Koth_Emblem", Koth_Emblem);
-		//commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Liu_Bei", Liu_Bei);
 		
-		//commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
 		commands.put("Phylactery_Lich", Phylactery_Lich);
-		commands.put("Plague_Rats", Plague_Rats);
 		
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-		//commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
 		commands.put("Tarmogoyf", Tarmogoyf);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
