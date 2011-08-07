@@ -245,106 +245,97 @@ public class GameActionUtil {
 		Command Ripple = new Command() {
 			private static final long serialVersionUID = -845154812215847505L;
 			public void execute() {
-				final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield,
-						AllZone.HumanPlayer);
-				final PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield,
-						AllZone.ComputerPlayer);
 
-				CardList Human_ThrummingStone = new CardList();
-				CardList Computer_ThrummingStone = new CardList();
-				Human_ThrummingStone.addAll(play.getCards());
-				Computer_ThrummingStone.addAll(comp.getCards());
+				CardList humanThrummingStone = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Thrumming Stone");
+				CardList computerThrummingStone = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Thrumming Stone");
 
-				Human_ThrummingStone = Human_ThrummingStone.getName("Thrumming Stone");
-				Computer_ThrummingStone = Computer_ThrummingStone.getName("Thrumming Stone");
-						for (int i=0;i<Human_ThrummingStone.size();i++)
-						{
-							if(c.getController().isHuman()) c.addExtrinsicKeyword("Ripple:4");
-						}
-						for (int i=0;i<Computer_ThrummingStone.size();i++)
-						{ 
-							if(c.getController().isComputer()) c.addExtrinsicKeyword("Ripple:4");
-						}
-		 		        ArrayList<String> a = c.getKeyword();
-		 		        for(int x = 0; x < a.size(); x++)
-		 		            if(a.get(x).toString().startsWith("Ripple")) {
-		 		                String parse = c.getKeyword().get(x).toString();                
-		 		                 String k[] = parse.split(":");
-		 		            	DoRipple(c,Integer.valueOf(k[1]));
-		 		            }
+				for (int i = 0; i < humanThrummingStone.size(); i++)
+				{
+					if(c.getController().isHuman()) c.addExtrinsicKeyword("Ripple:4");
+				}
+				for (int i = 0; i < computerThrummingStone.size(); i++)
+				{ 
+					if(c.getController().isComputer()) c.addExtrinsicKeyword("Ripple:4");
+				}
+				ArrayList<String> a = c.getKeyword();
+				for(int x = 0; x < a.size(); x++)
+					if(a.get(x).toString().startsWith("Ripple")) {
+						String parse = c.getKeyword().get(x).toString();                
+						String k[] = parse.split(":");
+						DoRipple(c,Integer.valueOf(k[1]));
+					}
 			}// execute()
 
 			void DoRipple(Card c, final int RippleCount) {
 				final Player controller = c.getController();
-				final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
 				final Card RippleCard = c;
 				boolean Activate_Ripple = false;
-	        	if(controller.isHuman()){
-		        	Object[] possibleValues = {"Yes", "No"};
-                    AllZone.Display.showMessage("Activate Ripple? ");
-		        	Object q = JOptionPane.showOptionDialog(null, "Activate Ripple for " + c, "Ripple", 
-		        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-		        			null, possibleValues, possibleValues[0]);
-                      if(q.equals(0)) Activate_Ripple = true;
-	        	} else Activate_Ripple = true;
-	        	if(Activate_Ripple == true) {
-				final Ability ability = new Ability(c, "0") {
-					@Override
-					public void resolve() {
-						CardList topOfLibrary = new CardList(lib.getCards());
-						CardList revealed = new CardList();
-						int RippleNumber = RippleCount;
-						if(topOfLibrary.size() == 0) return;
-						int RippleMax = 10; // Shouldn't Have more than Ripple 10, seeing as no cards exist with a ripple greater than 4
-						Card[] RippledCards = new Card[RippleMax]; 
-						Card crd;
-						if(topOfLibrary.size() < RippleNumber) RippleNumber = topOfLibrary.size();
+				if(controller.isHuman()){
+					Object[] possibleValues = {"Yes", "No"};
+					AllZone.Display.showMessage("Activate Ripple? ");
+					Object q = JOptionPane.showOptionDialog(null, "Activate Ripple for " + c, "Ripple", 
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+							null, possibleValues, possibleValues[0]);
+					if(q.equals(0)) Activate_Ripple = true;
+				} else Activate_Ripple = true;
+				if(Activate_Ripple == true) {
+					final Ability ability = new Ability(c, "0") {
+						@Override
+						public void resolve() {
+							CardList topOfLibrary = AllZoneUtil.getPlayerCardsInLibrary(controller);
+							CardList revealed = new CardList();
+							int RippleNumber = RippleCount;
+							if(topOfLibrary.size() == 0) return;
+							int RippleMax = 10; // Shouldn't Have more than Ripple 10, seeing as no cards exist with a ripple greater than 4
+							Card[] RippledCards = new Card[RippleMax]; 
+							Card crd;
+							if(topOfLibrary.size() < RippleNumber) RippleNumber = topOfLibrary.size();
 
-						for(int i = 0; i < RippleNumber; i++){
-							crd = topOfLibrary.get(i);
-							revealed.add(crd);
-							if(crd.getName().equals(RippleCard.getName())) RippledCards[i] = crd;
-						}//For
+							for(int i = 0; i < RippleNumber; i++){
+								crd = topOfLibrary.get(i);
+								revealed.add(crd);
+								if(crd.getName().equals(RippleCard.getName())) RippledCards[i] = crd;
+							}//For
 							GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
 							for(int i = 0; i < RippleMax; i++) {
-						if(RippledCards[i] != null && !RippledCards[i].isUnCastable()) {
+								if(RippledCards[i] != null && !RippledCards[i].isUnCastable()) {
 
-							if(RippledCards[i].getController().isHuman()) {
-					        	Object[] possibleValues = {"Yes", "No"};
-					        	Object q = JOptionPane.showOptionDialog(null, "Cast " + RippledCards[i].getName() + "?", "Ripple", 
-					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-					        			null, possibleValues, possibleValues[0]);
-			                      if(q.equals(0)) {
-										AllZone.GameAction.playCardNoCost(RippledCards[i]);
-										revealed.remove(RippledCards[i]);
-									}
-							} else //computer
-							{
-								ArrayList<SpellAbility> choices = RippledCards[i].getBasicSpells();
+									if(RippledCards[i].getController().isHuman()) {
+										Object[] possibleValues = {"Yes", "No"};
+										Object q = JOptionPane.showOptionDialog(null, "Cast " + RippledCards[i].getName() + "?", "Ripple", 
+												JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+												null, possibleValues, possibleValues[0]);
+										if(q.equals(0)) {
+											AllZone.GameAction.playCardNoCost(RippledCards[i]);
+											revealed.remove(RippledCards[i]);
+										}
+									} else //computer
+									{
+										ArrayList<SpellAbility> choices = RippledCards[i].getBasicSpells();
 
-								for(SpellAbility sa:choices) {
-									if(sa.canPlayAI() && !sa.getSourceCard().getType().contains("Legendary")) {
-										ComputerUtil.playStackFree(sa);
-										revealed.remove(RippledCards[i]);
-										break;
+										for(SpellAbility sa:choices) {
+											if(sa.canPlayAI() && !sa.getSourceCard().getType().contains("Legendary")) {
+												ComputerUtil.playStackFree(sa);
+												revealed.remove(RippledCards[i]);
+												break;
+											}
+										}
 									}
 								}
 							}
-						}
-					}
 							revealed.shuffle();
 							for(Card bottom:revealed) {
 								AllZone.GameAction.moveToBottomOfLibrary(bottom);
 							}
-					}
-				};
-				StringBuilder sb = new StringBuilder();
-				sb.append(c).append(" - Ripple.");
-				ability.setStackDescription(sb.toString());
+						}
+					};
+					StringBuilder sb = new StringBuilder();
+					sb.append(c).append(" - Ripple.");
+					ability.setStackDescription(sb.toString());
 
-                AllZone.Stack.addSimultaneousStackEntry(ability);
+					AllZone.Stack.addSimultaneousStackEntry(ability);
 
-			}
+				}
 			}
 		};
 		Ripple.execute();
@@ -414,10 +405,7 @@ public class GameActionUtil {
 	{
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(controller);
 
 		list = list.filter(new CardListFilter(){
 			public boolean addCard(Card crd)
@@ -473,9 +461,7 @@ public class GameActionUtil {
 
 				@Override
                 public void showMessage() {
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getCardsInPlay();
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isPermanent() && CardFactoryUtil.canTarget(card, c);
@@ -614,14 +600,8 @@ public class GameActionUtil {
 		}
 	}//Infernal Kirin*/
 
-	public static void playCard_Dovescape(Card c) {
-		final Card crd1 = c;
-		PlayerZone hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-		PlayerZone cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-
-		CardList list = new CardList();
-		list.addAll(hplay.getCards());
-		list.addAll(cplay.getCards());
+	public static void playCard_Dovescape(final Card c) {
+		CardList list = AllZoneUtil.getCardsInPlay();
 		final int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
 		list = list.getName("Dovescape");
 		final CardList cl = list;
@@ -636,7 +616,7 @@ public class GameActionUtil {
 
 					SpellAbility sa = AllZone.Stack.peek();
 
-					if(sa.getSourceCard().equals(crd1)) {
+					if(sa.getSourceCard().equals(c)) {
 						sa = AllZone.Stack.pop();
 
 						AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
@@ -1582,9 +1562,7 @@ public class GameActionUtil {
 	public static void endOfTurn_Predatory_Advantage()
 	{
 		final Player player = AllZone.Phase.getPlayerTurn();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Predatory Advantage");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Predatory Advantage");
 		for (int i = 0; i < list.size(); i++) {
             final Player controller = list.get(i).getController();
 		    if((player.isHuman() && Phase.PlayerCreatureSpellCount == 0) || (player.isComputer() && Phase.ComputerCreatureSpellCount == 0))
@@ -1607,8 +1585,7 @@ public class GameActionUtil {
 	{
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-		CardList list = new CardList(playZone.getCards());
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(opponent);
 		
 		list = list.filter(new CardListFilter()
 		{
@@ -3636,10 +3613,8 @@ public class GameActionUtil {
 	public static void upkeep_Suspend() {
 		Player player = AllZone.Phase.getPlayerTurn();
 
-		PlayerZone exile = AllZone.getZone(Constant.Zone.Exile, player);
-		CardList list = new CardList();
-		list.addAll(exile.getCards());
-		//list = list.getType("Creature");
+		CardList list = AllZoneUtil.getPlayerCardsInExile(player);
+		
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return c.hasSuspend();
@@ -4601,9 +4576,8 @@ public class GameActionUtil {
 
 						public void execute() {
 
-							PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 							CardList creatsToSac = new CardList();
-							CardList creats = new CardList(play.getCards());
+							CardList creats = AllZoneUtil.getPlayerCardsInPlay(card.getController());
 							creats = creats.filter(new CardListFilter() {
 								public boolean addCard(Card crd) {
 									return crd.isCreature() && !crd.equals(c);
@@ -4693,7 +4667,7 @@ public class GameActionUtil {
 
 									@Override
 						            public void showMessage() {
-						            	if (AllZone.Human_Hand.getCards().length == 0) stop();
+						            	if (AllZone.Human_Hand.size() == 0) stop();
 						                AllZone.Display.showMessage(prompt);
 						                ButtonUtil.disableAll();
 						            }
@@ -4826,12 +4800,8 @@ public class GameActionUtil {
 
 	private static void upkeep_Vampire_Lacerator() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Vampire Lacerator");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Vampire Lacerator");
 
 		for(int i = 0; i < list.size(); i++) {
 			final Card F_card = list.get(i);
@@ -5236,12 +5206,7 @@ public class GameActionUtil {
 			storage = new ArrayList<StaticEffect>();
 			
 			//Gather Cards on the Battlefield with the stPump Keyword
-			PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-			PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-			CardList cards_WithKeyword = new CardList();
-			
-			cards_WithKeyword.add(new CardList(Hplay.getCards()));
-			cards_WithKeyword.add(new CardList(Cplay.getCards()));
+			CardList cards_WithKeyword = AllZoneUtil.getCardsInPlay();
 			cards_WithKeyword.getKeywordsContain("stPump");
 			
 			// check each card
@@ -5436,16 +5401,14 @@ public class GameActionUtil {
 				Cards_inZone.add(SourceCard);
 			}
       		if(Range.equals("All")) {
-      			Cards_inZone.addAll(AllZone.Human_Battlefield.getCards());
-      			Cards_inZone.addAll(AllZone.Computer_Battlefield.getCards());
+      			Cards_inZone.addAll(AllZoneUtil.getCardsInPlay());
       			//this is a hack for Quick Sliver
       			if (Keyword_Details.length >= 2 
       					&& (Keyword_Details[2].contains("Flash") 
       					|| Keyword_Details[2].contains("CARDNAME can't be countered."))) {
-      				Cards_inZone.addAll(AllZone.Human_Hand.getCards());
-      				Cards_inZone.addAll(AllZone.Computer_Hand.getCards());
-      				Cards_inZone.addAll(AllZone.Human_Graveyard.getCards());
-      				Cards_inZone.addAll(AllZone.Computer_Graveyard.getCards());
+      				Cards_inZone.addAll(AllZoneUtil.getPlayerHand(AllZone.HumanPlayer));
+      				Cards_inZone.addAll(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
+      				Cards_inZone.addAll(AllZoneUtil.getCardsInGraveyard());
       			}
       			//hack for Molten Disaster
       			/*
@@ -5757,15 +5720,11 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Battlefield.getCards());
-				creature.addAll(AllZone.Computer_Battlefield.getCards());
+				CardList creature = AllZoneUtil.getCardsInPlay();
 
 				for(int i = 0; i < creature.size(); i++) {
 					final Card crd = creature.get(i);
-					CardList Type = new CardList();
-					Type.addAll(AllZone.Human_Battlefield.getCards());
-					Type.addAll(AllZone.Computer_Battlefield.getCards());
+					CardList Type = AllZoneUtil.getCardsInPlay();
 					Type = Type.filter(new CardListFilter() {
 						public boolean addCard(Card card) {
 							return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
@@ -5891,19 +5850,12 @@ public class GameActionUtil {
 		}// execute()
 
 		private boolean getsBonus(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, c.getController());
-
-			CardList list = new CardList();
-			list.addAll(play.getCards());
+			CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getName().equals(
-							"Guan Yu, Sainted Warrior")
-							|| c.getName().equals(
-									"Zhang Fei, Fierce Warrior");
+					return c.getName().equals("Guan Yu, Sainted Warrior")
+							|| c.getName().equals("Zhang Fei, Fierce Warrior");
 				}
-
 			});
 
 			return list.size() > 0;
@@ -5990,10 +5942,7 @@ public class GameActionUtil {
 		}//execute()
 
 		private int countIslands(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, c.getController());
-			CardList islands = new CardList(play.getCards());
-			islands = islands.getType("Island");
+			CardList islands = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Island");
 			return islands.size();
 		}
 
@@ -6278,9 +6227,7 @@ public class GameActionUtil {
 
 		void addSwampwalk(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-			CardList playlist = new CardList(play.getCards());
-			playlist = playlist.getType("Creature");
+			CardList playlist = AllZoneUtil.getCreaturesInPlay(player);
 			for(int i = 0; i < playlist.size(); i++) {
 				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
 			}
@@ -6291,30 +6238,23 @@ public class GameActionUtil {
 		}
 
 		boolean isInGrave(Player player) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, player);
-			CardList list = new CardList(grave.getCards());
-
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, player);
-			CardList lands = new CardList(play.getCards());
-			lands = lands.getType("Swamp");
-
+			CardList list = AllZoneUtil.getPlayerGraveyard(player);
+			CardList lands = AllZoneUtil.getPlayerTypeInPlay(player, "Swamp");
 
 			if(!list.containsName("Filth") || lands.size() == 0) return false;
 			else return true;
 		}
 
 		void removeSwampwalk(CardList list) {
-        	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
+			CardList List_Copy = new CardList();
+			List_Copy.add(list);
 			for(int i = 0; i < List_Copy.size(); i++) {
 				Card c = List_Copy.get(i);
 				if(!isInGrave(c.getController()) && old.contains(c)) {
 					List_Copy.get(i).removeExtrinsicKeyword("Swampwalk");
 					old.remove(c);
 				}
-		}
+			}
 		}
 
 		void addSwampwalk(CardList list) {
@@ -6345,9 +6285,7 @@ public class GameActionUtil {
 
 		void addFirstStrike(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-			CardList playlist = new CardList(play.getCards());
-			playlist = playlist.getType("Creature");
+			CardList playlist = AllZoneUtil.getCreaturesInPlay(player);
 			for(int i = 0; i < playlist.size(); i++) {
 				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
 			}

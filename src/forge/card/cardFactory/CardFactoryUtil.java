@@ -2338,17 +2338,11 @@ public class CardFactoryUtil {
         Player cardController = c.getController();
         Player oppController = cardController.getOpponent();
         
-        PlayerZone myField = AllZone.getZone(Constant.Zone.Battlefield, cardController);
-        PlayerZone opField = AllZone.getZone(Constant.Zone.Battlefield, oppController);
-        
         PlayerZone myYard = AllZone.getZone(Constant.Zone.Graveyard, cardController);
         PlayerZone opYard = AllZone.getZone(Constant.Zone.Graveyard, oppController);
         
         PlayerZone myHand = AllZone.getZone(Constant.Zone.Hand, cardController);
-        PlayerZone opHand = AllZone.getZone(Constant.Zone.Hand, oppController);
-        
-        PlayerZone myLibrary = AllZone.getZone(Constant.Zone.Library, cardController);
-        //PlayerZone opLibrary = AllZone.getZone(Constant.Zone.Library, oppController);    
+        PlayerZone opHand = AllZone.getZone(Constant.Zone.Hand, oppController);    
         
         final String[] l;
         l = s.split("/"); // separate the specification from any math
@@ -2413,7 +2407,7 @@ public class CardFactoryUtil {
         
         // Count$Domain
         if(sq[0].contains("Domain")) {
-            someCards.addAll(myField.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerCardsInPlay(cardController));
             String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
             
             for(int i = 0; i < basic.length; i++)
@@ -2572,27 +2566,27 @@ public class CardFactoryUtil {
         boolean OF = false, OY = false, OH = false;
         
         if(sq[0].contains("YouCtrl")) if(MF == false) {
-            someCards.addAll(myField.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerCardsInPlay(cardController));
             MF = true;
         }
         
         if(sq[0].contains("InYourYard")) if(MY == false) {
-            someCards.addAll(myYard.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerGraveyard(cardController));
             MY = true;
         }
         
         if(sq[0].contains("InYourLibrary")) if(MY == false) {
-            someCards.addAll(myLibrary.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerCardsInLibrary(cardController));
             MY = true;
         }
         
         if(sq[0].contains("InYourHand")) if(MH == false) {
-            someCards.addAll(myHand.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerHand(cardController));
             MH = true;
         }
         
         if(sq[0].contains("OppCtrl")) if(OF == false) {
-            someCards.addAll(opField.getCards());
+            someCards.addAll(AllZoneUtil.getPlayerCardsInPlay(oppController));
             OF = true;
         }
         
@@ -2607,8 +2601,8 @@ public class CardFactoryUtil {
         }
         
         if(sq[0].contains("OnBattlefield")) {
-            if(MF == false) someCards.addAll(myField.getCards());
-            if(OF == false) someCards.addAll(opField.getCards());
+            if(MF == false) someCards.addAll(AllZoneUtil.getPlayerCardsInPlay(cardController));
+            if(OF == false) someCards.addAll(AllZoneUtil.getPlayerCardsInPlay(oppController));
         }
         
         if(sq[0].contains("InAllYards")) {
