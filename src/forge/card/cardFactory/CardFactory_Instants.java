@@ -1029,36 +1029,15 @@ public class CardFactory_Instants {
 
         		public boolean canPlayAI()
         		{
-        			CardList c = getCreature();
-        			if(c.isEmpty())
+        			CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+        			if(list.isEmpty())
         				return false;
         			else
         			{
-        				setTargetCard(c.get(0));
+        				setTargetCard(CardFactoryUtil.AI_getBestCreature(list));
         				return true;
         			}
         		}//canPlayAI()
-        		CardList getCreature()
-        		{
-        			CardList out = new CardList();
-        			CardList list = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-        			list.shuffle();
-
-        			for(int i = 0; i < list.size(); i++)
-        				if((list.get(i).getNetAttack() >= 2) && (list.get(i).getNetDefense() <= 2))
-        					out.add(list.get(i));
-
-        			//in case human player only has a few creatures in play, target anything
-        			if(out.isEmpty() &&
-        					0 < CardFactoryUtil.AI_getHumanCreature(2, card, true).size() &&
-        					3 > CardFactoryUtil.AI_getHumanCreature(card, true).size())
-        			{
-        				out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true).toArray());
-        				CardListUtil.sortFlying(out);
-        			}
-        			return out;
-        		}//getCreature()
-
 
         		public void resolve()
         		{
