@@ -53,7 +53,7 @@ public class ReadDraftBoosterPack implements NewConstants {
     public CardList getBoosterPack5() {
         CardList list = new CardList();
         for(int i = 0; i < 5; i++)
-            list.addAll(getBoosterPack().toArray());
+            list.addAll(getBoosterPack());
         
         for(int i = 0; i < 20; i++) {
             list.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
