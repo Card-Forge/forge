@@ -251,7 +251,7 @@ public class CardList implements Iterable<Card> {
     public CardList getKeyword(final String keyword) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                return c.getKeyword().contains(keyword);
+                return c.hasKeyword(keyword);
             }
         });
     }
@@ -259,7 +259,7 @@ public class CardList implements Iterable<Card> {
     public CardList getNotKeyword(final String keyword) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                return !c.getKeyword().contains(keyword);
+                return !c.hasKeyword(keyword);
             }
         });
     }
