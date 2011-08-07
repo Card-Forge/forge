@@ -18,8 +18,6 @@ import forge.gui.input.Input_PayManaCost_Ability;
 
 
 public class CombatUtil {
-	private static boolean Lorthos_Cancelled;
-	
 	
 	//can the creature block given the combat state?
 	public static boolean canBlock(Card blocker, Combat combat) {
@@ -1552,91 +1550,6 @@ public class CombatUtil {
                 } //if (creatures.size() > 0) 
             }//Preeminent Captain
             
-            else if(c.getName().equals("Lorthos, the Tidemaker") && !c.getCreatureAttackedThisCombat()) {
-            	final Card[] Targets = new Card[8];
-            	final int[] index = new int[1];
-            	final Ability ability = new Ability(c, "8") {
-            		@Override
-            		public void resolve() {
-            			for(int i = 0; i < 8; i++) {
-            				if(Targets[i] != null) {
-            					Targets[i].tap();
-            					if(!Targets[i].hasKeyword("This card doesn't untap during your next untap step.")) {
-            						Targets[i].addExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            					}
-            				}
-            			}
-            		}
-            	};
-                final Command unpaidCommand = new Command() {                   
-                    private static final long serialVersionUID = -6483124208343935L;                  
-                    public void execute() {
-                    }
-                };
-                
-                final Command paidCommand = new Command() {
-                    private static final long serialVersionUID = -83034517601871955L;
-                    
-                    public void execute() {
-                        final CardList all = AllZoneUtil.getCardsInPlay();
-                        for(int i = 0; i < 8; i++) {
-                       	 AllZone.InputControl.setInput(CardFactoryUtil.Lorthos_input_targetPermanent(ability , all , i ,new Command() {
-                       	
-                             private static final long serialVersionUID = -328305150127775L;
-                             
-                             public void execute() {
-                            	 all.remove(ability.getTargetCard());
-                            	 Targets[index[0]] = ability.getTargetCard();
-                                 index[0]++;                                
-                            	 }
-                         }));
-                        } 
-                    	AllZone.Stack.add(ability);
-                    }
-                };
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append(c.getName()).append(" - taps up to 8 target permanents.");
-                ability.setStackDescription(sb.toString());
-
-        		setLorthosCancelled(false);
-                if(c.getController().isHuman()) {
-                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + c.getName() + "'s ability: " + "\r\n",
-                            ability.getManaCost(), paidCommand, unpaidCommand));
-                } else //computer
-                {
-                    if(ComputerUtil.canPayCost(ability)) {
-                    	ComputerUtil.playNoStack(ability);
-                        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                        final CardList all = new CardList();
-                    	all.addAll(Hplay.getCards());
-                    	CardList Creats = all.getType("Creature");
-                    	CardListUtil.sortAttack(Creats);
-                    	for(int i = 0; i < Creats.size(); i++) {
-                    		if(index[0] < 8 && CardFactoryUtil.canTarget(ability, Creats.get(i))) {
-                    		Targets[index[0]] = Creats.get(i);
-                    		index[0]++;
-                    	}
-                    	}
-                    	CardList Land = all.getType("Land");
-                    	for(int i = 0; i < Land.size(); i++) {
-                    		if(index[0] < 8 && CardFactoryUtil.canTarget(ability, Land.get(i))) {
-                    		Targets[index[0]] = Land.get(i);
-                    		index[0]++;
-                    	}
-                    	}  
-                    	CardList Artifacts = all.getType("Artifact");
-                    	for(int i = 0; i < Artifacts.size(); i++) {
-                    		if(index[0] < 8 && CardFactoryUtil.canTarget(ability, Artifacts.get(i))) {
-                    		Targets[index[0]] = Artifacts.get(i);
-                    		index[0]++;
-                    	}
-                    	} 
-                    	AllZone.Stack.add(ability);
-                    }
-                }
-            }// Lorthos, the Tidemaker
-            
             else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
                 Player player = c.getController();
                 
@@ -1976,15 +1889,5 @@ public class CombatUtil {
     		AllZone.Stack.add(ability);
     	}
     }
-
-
-	public static void setLorthosCancelled(boolean lorthos_Cancelled) {
-		Lorthos_Cancelled = lorthos_Cancelled;
-	}
-
-
-	public static boolean isLorthosCancelled() {
-		return Lorthos_Cancelled;
-	}
     
-}//Class CombatUtil
+}//end class CombatUtil

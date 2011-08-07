@@ -2472,37 +2472,6 @@ public class CardFactoryUtil {
         return target;
     }//input_MasteroftheWildHunt_input_targetCreature()
     
-    public static Input Lorthos_input_targetPermanent(final SpellAbility spell, final CardList choices, final int i, final Command paid) {
-        Input target = new Input() {
-        	
-            private static final long serialVersionUID = -1779224307654698954L;
-            
-            @Override
-            public void showMessage() {
-            	if(CombatUtil.isLorthosCancelled() == true) stop();
-            	AllZone.Display.showMessage("Select target Permanents for Lorthos: " + (i + 1) + " more to pick");
-            	ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-            	CombatUtil.setLorthosCancelled(true);
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-            	if(choices.size() == 0) stop();
-                if(card.isPermanent() && zone.is(Constant.Zone.Battlefield) && canTarget(spell, card) && choices.contains(card)) {
-                    spell.setTargetCard(card);
-                    paid.execute();
-                        stop();                  
-                }
-            }//selectCard()
-        };
-        return target;
-    }//input_Lorthos_input_targetPermanent()
-    
     public static Input input_targetPlayer(final SpellAbility spell) {
         Input target = new Input() {
             private static final long serialVersionUID = 8736682807625129068L;
