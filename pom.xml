@@ -309,6 +309,17 @@
                                         <label>OpSys-Linux</label>
                                     </labels>
                                 </upload>
+                                <upload>
+                                    <file>
+                                        ${project.build.directory}/${project.build.finalName}.osx.tar.bz2
+                                    </file>
+                                    <summary>${project.name} ${project.version} Mac OSX package</summary>
+                                    <labels>
+                                        <label>Featured</label>
+                                        <label>Type-Archive</label>
+                                        <label>OpSys-OSX</label>
+                                    </labels>
+                                </upload>
                             </uploads>
                         </configuration>
                     </execution>
@@ -529,39 +540,6 @@
                                 <goals>
                                     <goal>run</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>com.googlecode.maven-gcu-plugin</groupId>
-                        <artifactId>maven-gcu-plugin</artifactId>
-                        <version>1.1</version>
-                        <executions>
-                            <execution>
-                                <id>googlecode-upload</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>upload</goal>
-                                </goals>
-                                <configuration>
-                                    <failsOnError>true</failsOnError>
-                                    <!-- default: false -->
-                                    <projectName>cardforge</projectName>
-                                    <!-- default: ${project.artifactId} -->
-                                    <uploads>
-                                        <upload>
-                                            <file>
-                                                ${project.build.directory}/${project.build.finalName}.osx.tar.bz2
-                                            </file>
-                                            <summary>${project.name} ${project.version} Mac OSX package</summary>
-                                            <labels>
-                                                <label>Featured</label>
-                                                <label>Type-Archive</label>
-                                                <label>OpSys-OSX</label>
-                                            </labels>
-                                        </upload>
-                                    </uploads>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
