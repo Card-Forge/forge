@@ -5325,6 +5325,21 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 8005448956536998277L;
 
 		public void execute() {
+			boolean naked = AllZoneUtil.isCardInPlay("Naked Singularity");
+			boolean twist = AllZoneUtil.isCardInPlay("Reality Twist");
+			HashMap<String,String> produces = new HashMap<String,String>();
+			
+			//set up what they produce
+			produces.put("Forest", naked || twist ? "B" : "G");
+			produces.put("Island", naked == true ? "G" : "U");
+			if(naked) produces.put("Mountain", "U");
+			else if(twist) produces.put("Mountain", "W");
+			else produces.put("Mountain", "R");
+			produces.put("Plains", naked || twist ? "R" : "W");
+			if(naked) produces.put("Swamp", "W");
+			else if(twist) produces.put("Swamp", "G");
+			else produces.put("Swamp", "B");
+			
 			CardList lands = AllZoneUtil.getCardsInGame();
 			lands = lands.filter(AllZoneUtil.lands);
 			
@@ -5342,31 +5357,31 @@ public class GameActionUtil {
 			for(Card land : lands) {
 				if(land.isType("Swamp")) {
 					AbilityFactory AF = new AbilityFactory();
-					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.", land);
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ "+produces.get("Swamp")+" | SpellDescription$ Add "+produces.get("Swamp")+" to your mana pool.", land);
 					sa.setType("BasicLandTypeMana");
 					land.addSpellAbility(sa);
 				}
 				if(land.isType("Forest")) {
 					AbilityFactory AF = new AbilityFactory();
-					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.", land);
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ "+produces.get("Forest")+" | SpellDescription$ Add "+produces.get("Forest")+" to your mana pool.", land);
 					sa.setType("BasicLandTypeMana");
 					land.addSpellAbility(sa);
 				}
 				if(land.isType("Island")) {
 					AbilityFactory AF = new AbilityFactory();
-					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.", land);
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ "+produces.get("Island")+" | SpellDescription$ Add "+produces.get("Island")+" to your mana pool.", land);
 					sa.setType("BasicLandTypeMana");
 					land.addSpellAbility(sa);
 				}
 				if(land.isType("Mountain")) {
 					AbilityFactory AF = new AbilityFactory();
-					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.", land);
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ "+produces.get("Mountain")+" | SpellDescription$ Add "+produces.get("Mountain")+" to your mana pool.", land);
 					sa.setType("BasicLandTypeMana");
 					land.addSpellAbility(sa);
 				}
 				if(land.isType("Plains")) {
 					AbilityFactory AF = new AbilityFactory();
-					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.", land);
+					SpellAbility sa = AF.getAbility("AB$ Mana | Cost$ T | Produced$ "+produces.get("Plains")+" | SpellDescription$ Add "+produces.get("Plains")+" to your mana pool.", land);
 					sa.setType("BasicLandTypeMana");
 					land.addSpellAbility(sa);
 				}

@@ -1,0 +1,9 @@
+Name:Naked Singularity
+ManaCost:5
+Types:Artifact
+Text:If tapped for mana, Plains produce R, Islands produce G, Swamps produce W, Mountains produce U, and Forests produce B instead of any other type.
+K:Cumulative upkeep:3
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/naked_singularity.jpg
+End

@@ -1,0 +1,9 @@
+Name:Reality Twist
+ManaCost:U U U
+Types:Enchantment
+Text:If tapped for mana, Plains produce R, Swamps produce G, Mountains produce W, and Forests produce B instead of any other type.
+K:Cumulative upkeep:1 U U
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_twist.jpg
+End
