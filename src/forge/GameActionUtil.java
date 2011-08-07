@@ -855,7 +855,7 @@ public class GameActionUtil {
 			
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Upkeep for ").append(c).append("\n");
-			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
+			final Ability upkeepAbility = new Ability(c, "0") {
 				@Override
 				public void resolve() {
 					if(c.getController().isHuman()) {
