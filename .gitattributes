@@ -50,6 +50,8 @@ res/boosterdata/HML.pack -text
 res/boosterdata/ICE.pack -text
 res/boosterdata/INV.pack -text
 res/boosterdata/JUD.pack -text
+res/boosterdata/LEA.pack -text
+res/boosterdata/LEB.pack -text
 res/boosterdata/LEG.pack -text
 res/boosterdata/LGN.pack -text
 res/boosterdata/LRW.pack -text

@@ -221,8 +221,8 @@ public class SetInfoUtil {
 	}
 
 	private static String[][] blocks = {
-		{"A", "", "", "Alpha", "3", "A"},
-		{"B", "", "", "Beta", "3", "B"},
+		{"LEA", "", "", "Alpha", "3", "LEA"},
+		{"LEB", "", "", "Beta", "3", "LEB"},
 		{"2ED", "", "", "Unlimited", "3", "2ED"},
 		{"ARN", "", "", "Arabian Nights", "5", "2ED"},
 		{"ATQ", "", "", "Antiquities", "5", "ATQ"},
