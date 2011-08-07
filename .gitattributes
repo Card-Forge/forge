@@ -8081,6 +8081,7 @@ res/cardsfolder/waterspout_weavers.txt -text svneol=native#text/plain
 res/cardsfolder/waterveil_cavern.txt -text svneol=native#text/plain
 res/cardsfolder/watery_grave.txt -text svneol=native#text/plain
 res/cardsfolder/wave_elemental.txt -text svneol=native#text/plain
+res/cardsfolder/wave_of_indifference.txt svneol=native#text/plain
 res/cardsfolder/wave_of_terror.txt -text svneol=native#text/plain
 res/cardsfolder/waveskimmer_aven.txt -text svneol=native#text/plain
 res/cardsfolder/wayfarers_bauble.txt svneol=native#text/plain
