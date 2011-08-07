@@ -19,6 +19,7 @@ import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbility_Restriction;
+import forge.card.spellability.Spell_Permanent;
 import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -1324,24 +1325,12 @@ public class CardFactoryUtil {
     public static SpellAbility enPump_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
     		final String[] spellDescription, final String[] stackDescription) {
     	
-        final SpellAbility enchant = new Spell(sourceCard) {
+    	Cost cost = new Cost(sourceCard.getManaCost(), sourceCard.getName(), true);
+    	Target tgt = new Target(sourceCard, "C");
+        final SpellAbility enchant = new Spell_Permanent(sourceCard, cost, tgt) {
 			private static final long serialVersionUID = -8259560434384053776L;
 			
-			/*
-			 *  for flash, which is not working through the keyword for some reason
-			 *  if not flash then limit to main 1 and 2 on controller's turn and card in hand
-			 */
-            @Override
-            public boolean canPlay() {
-				if (!AllZone.getZone(sourceCard).is(Constant.Zone.Hand))
-					return false;
-				
-				if (Phase.canCastSorcery(sourceCard.getController()))
-					return true;
-				
-                return sourceCard.getKeyword().contains("Flash");
-            }// CanPlay (for auras with Flash)
-			
+
             public boolean canPlayAI() {
                 CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                 
@@ -1413,7 +1402,7 @@ public class CardFactoryUtil {
                 }
             }//resolve()
         };//enchant ability
-        enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
+
         if (! spellDescription[0].replaceAll("[\\+\\-]", "").equals("Enchanted creature gets 0/0.")) {
             enchant.setDescription(spellDescription[0]);
         }
@@ -1511,24 +1500,12 @@ public class CardFactoryUtil {
     public static SpellAbility enPumpCurse_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
     		final String[] spellDescription, final String[] stackDescription) {
     	
-        final SpellAbility enchant = new Spell(sourceCard) {
+    	Cost cost = new Cost(sourceCard.getManaCost(), sourceCard.getName(), true);
+    	Target tgt = new Target(sourceCard, "C");
+        final SpellAbility enchant = new Spell_Permanent(sourceCard, cost, tgt) {
 			private static final long serialVersionUID = -4021229901439299033L;
 
-			/*
-			 *  for flash, which is not working through the keyword for some reason
-			 *  if not flash then limit to main 1 and 2 on controller's turn and card in hand
-			 */
-            @Override
-            public boolean canPlay() {
-				if (!AllZone.getZone(sourceCard).is(Constant.Zone.Hand))
-					return false;
-				
-				if (Phase.canCastSorcery(sourceCard.getController()))
-					return true;
-				
-                return sourceCard.getKeyword().contains("Flash");
-            }// CanPlay (for auras with Flash)
-			
+
             public boolean canPlayAI() {
                 CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                 
@@ -1609,7 +1586,7 @@ public class CardFactoryUtil {
                 }
             }//resolve()
         };//enchant ability
-        enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
+
         if (! spellDescription[0].replaceAll("[\\+\\-]", "").equals("Enchanted creature gets 0/0.")) {
             enchant.setDescription(spellDescription[0]);
         }
@@ -1924,60 +1901,7 @@ public class CardFactoryUtil {
     }//input_discardRecall()
     
     //****************copied from input_targetType*****************
-    @Deprecated
-    public static Input input_targetCreature(final SpellAbility spell) {
-        return input_targetCreature(spell, Command.Blank);
-    }
-    
-    @Deprecated
-    public static Input input_targetCreature(final SpellAbility spell, final Command paid) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 141164423096887945L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target creature for " + spell.getSourceCard());
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(!canTarget(spell, card)) {
-                    AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                } else if(card.isCreature() && zone.is(Constant.Zone.Battlefield)) {
-                    spell.setTargetCard(card);
-                    done();
-                }
-            }
-            
-            void done() {
-                if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
-                {
-                	if (spell.getAfterPayMana() == null){
-	                    this.setFree(false);
-	                    Card source = spell.getSourceCard();
-	                    if (spell.isSpell() && source.isCopiedSpell())
-	                    	AllZone.GameAction.moveToStack(source);
-	                    AllZone.Stack.add(spell, source.getManaCost().contains("X"));
-	                    stop();
-                	}
-                	else{
-                		stopSetNext(spell.getAfterPayMana());
-                	}
-                } else stopSetNext(new Input_PayManaCost(spell));
-                
-                paid.execute();
-            }
-        };
-        return target;
-    }//input_targetCreature()
-    
-    
+   
     public static Input MasteroftheWildHunt_input_targetCreature(final SpellAbility spell, final CardList choices, final Command paid) {
         Input target = new Input() {
             private static final long serialVersionUID = -1779224307654698954L;
@@ -2005,37 +1929,6 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_MasteroftheWildHunt_input_targetCreature()
-    
-    @Deprecated
-    public static Input input_targetPlayer(final SpellAbility spell) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 8736682807625129068L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage(spell.getSourceCard().getName() + ": Select target player");
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectPlayer(Player player) {
-                spell.setTargetPlayer(player);
-                if(spell.getManaCost().equals("0") || this.isFree()) {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    if(spell.isTapAbility()) spell.getSourceCard().tap();
-                    if(spell.isUntapAbility()) spell.getSourceCard().untap();
-                    stop();
-                } else stopSetNext(new Input_PayManaCost(spell));
-            }
-        };
-        return target;
-    }//input_targetPlayer()
     
     public static Input modularInput(final SpellAbility ability, final Card card){
 	    Input modularInput = new Input() {

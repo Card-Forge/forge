@@ -938,7 +938,9 @@ public class CardFactory_Sorceries {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Martial Coup")) {
-            SpellAbility spell = new Spell(card) {
+        	
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+            SpellAbility spell = new Spell(card, cost, null) {
                 
                 private static final long serialVersionUID = -29101524966207L;
                 
@@ -2709,7 +2711,8 @@ public class CardFactory_Sorceries {
         	 * Discard X cards, then return a card from your graveyard to your
         	 * hand for each card discarded this way. Exile Recall.
         	 */
-        	final SpellAbility spell = new Spell(card) {
+        	Cost cost = new Cost(card.getManaCost(), cardName, false);
+        	final SpellAbility spell = new Spell(card, cost, null) {
 				private static final long serialVersionUID = -3935814273439962834L;
 
 				@Override
