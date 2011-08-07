@@ -523,18 +523,6 @@ public class AllZoneUtil {
         return all;
 	}
 	
-	public static CardList getPlayerCardsWithPhasing(final Player player) {
-		CardList cards = new CardList();
-		cards.addAll(AllZone.getZone(Constant.Zone.Battlefield, player).getCards());
-		cards = cards.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				return c.hasPhasing();
-			}
-		});
-		return cards;
-	}
-	
-	
 	//zone manipulation, maybe be better off in GameAction.java...
 	/**
 	 * use this when Human needs to rearrange the top X cards in a player's library.  You
