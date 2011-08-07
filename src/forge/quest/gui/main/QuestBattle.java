@@ -133,6 +133,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Fat Albert 2", "medium", "WUBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers");
         addToDeckList("Fat Albert 3", "hard", "UG Winter Orb deck with Kalonian Behemoth and mana Elves/Slivers");
 //        addToDeckList("Fin Fang Foom 1", "easy", "B Artifact");
+        addToDeckList("Fin Fang Foom 1", "easy", "Mono G Poison deck");
         addToDeckList("Fin Fang Foom 2", "medium", "Mono G Infect deck");
         addToDeckList("Fin Fang Foom 3", "hard", "GB Infect deck");
         addToDeckList("Fred Flintstone 3", "hard", "WUG deck with Phytohydra and Lorescale Coatl");
