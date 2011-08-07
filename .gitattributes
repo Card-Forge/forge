@@ -2005,6 +2005,7 @@ res/cardsfolder/dromars_attendant.txt -text svneol=native#text/plain
 res/cardsfolder/dromars_cavern.txt -text svneol=native#text/plain
 res/cardsfolder/dromosaur.txt svneol=native#text/plain
 res/cardsfolder/drooling_groodion.txt -text svneol=native#text/plain
+res/cardsfolder/drooling_ogre.txt -text svneol=native#text/plain
 res/cardsfolder/drop_of_honey.txt -text svneol=native#text/plain
 res/cardsfolder/dross_crocodile.txt -text svneol=native#text/plain
 res/cardsfolder/dross_golem.txt -text svneol=native#text/plain
