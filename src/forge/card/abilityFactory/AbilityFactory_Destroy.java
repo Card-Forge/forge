@@ -130,7 +130,7 @@ public class AbilityFactory_Destroy {
 				// TODO: filter out things that could regenerate in response? might be tougher?
 				list = list.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
-						return c.getShield() == 0;
+						return (c.getShield() == 0 && !ComputerUtil.canRegenerate(c));
 					}
 				});
 			}

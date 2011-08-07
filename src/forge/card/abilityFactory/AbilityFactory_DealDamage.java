@@ -313,7 +313,8 @@ public class AbilityFactory_DealDamage {
 
 		CardList killables = hPlay.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d ) 
+				return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d )
+					&& !ComputerUtil.canRegenerate(c)
 					&& !(c.getSVar("SacMe").length() > 0);
 			}
 		});
