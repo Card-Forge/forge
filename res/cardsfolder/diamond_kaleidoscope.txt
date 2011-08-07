@@ -2,7 +2,7 @@ Name:Diamond Kaleidoscope
 ManaCost:4
 Types:Artifact
 Text:no text
-A:AB$Token | Cost$ 3 T | TokenAmount$ 1 | TokenName$ Prism | TokenTypes$ Artifact,Creature,Prism | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Put a 0/1 colorless Prism artifact creature token onto the battlefield.
+A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenName$ Prism | TokenTypes$ Artifact,Creature,Prism | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Put a 0/1 colorless Prism artifact creature token onto the battlefield.
 A:AB$ Mana | Cost$ Sac<1/Prism.token> | CostDesc$ Sacrifice a Prism token: | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ Sac<1/Prism.token> | CostDesc$ Sacrifice a Prism token: | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ Sac<1/Prism.token> | CostDesc$ Sacrifice a Prism token: | Produced$ U | SpellDescription$ Add U to your mana pool.
