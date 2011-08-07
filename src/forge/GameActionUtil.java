@@ -693,15 +693,14 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					c.addCounter(Counters.AGE, 1);
+					int ageCounters = c.getCounters(Counters.AGE);
+					Ability_Mana abMana = new Ability_Mana(c, "0", "R", ageCounters) {
+						private static final long serialVersionUID = -2182129023960978132L;
+					};
 					if (player.isComputer()){
-						// AI can't handle this yet without manapool
-						AllZone.GameAction.sacrifice(c);
+						abMana.produceMana();
 					}
 					else if (GameActionUtil.showYesNoDialog(c, sb.toString())){
-						int ageCounters = c.getCounters(Counters.AGE);
-						Ability_Mana abMana = new Ability_Mana(c, "0", "R", ageCounters) {
-							private static final long serialVersionUID = -2182129023960978132L;
-						};
 						abMana.produceMana();
 					}
 					else{
@@ -6916,6 +6915,7 @@ public class GameActionUtil {
 		
 		//empty mana pool
 		if(p.isHuman()) AllZone.ManaPool.clearPool();
+		else AllZone.Computer_ManaPool.clearPool();
 	}
 
 }//end class GameActionUtil

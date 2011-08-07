@@ -314,8 +314,10 @@ public class Phase extends MyObservable
             return;
         }
         this.bPhaseEffects = true;
-		if(!AllZoneUtil.isCardInPlay("Upwelling"))
+		if(!AllZoneUtil.isCardInPlay("Upwelling")) {
 			AllZone.ManaPool.clearPool();
+			AllZone.Computer_ManaPool.clearPool();
+		}
         
         if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
         	AllZone.Stack.unfreezeStack();

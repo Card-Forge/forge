@@ -7,7 +7,9 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
+import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.mana.ManaPool;
 import forge.gui.GuiUtils;
 
 abstract public class Ability_Mana extends Ability_Activated implements java.io.Serializable {
@@ -66,14 +68,18 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 				}
 			}
 		}
-		produceMana(sb.toString());
+		produceMana(sb.toString(), this.getSourceCard().getController());
 	}
 	
-	public void produceMana(String produced){
+	public void produceMana(String produced, Player player){
 		final Card source = this.getSourceCard();
+		ManaPool manaPool;
+		if (player.isHuman())
+			manaPool = AllZone.ManaPool;
+		else manaPool = AllZone.Computer_ManaPool;
 		// change this, once ManaPool moves to the Player
 		// this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced, getSourceCard());
-		AllZone.ManaPool.addManaToFloating(produced, source);
+		manaPool.addManaToFloating(produced, source);
 
 		// TODO: all of the following would be better as trigger events "tapped for mana"		
         if(source.getName().equals("Rainbow Vale")) {
@@ -95,7 +101,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         if(source.getType().contains("Mountain") && AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
         	CardList list = AllZoneUtil.getCardsInPlay("Gauntlet of Might");
         	for(int i = 0; i < list.size(); i++) {
-        		AllZone.ManaPool.addManaToFloating("R", list.get(i));
+        		manaPool.addManaToFloating("R", list.get(i));
         	}
         }
         
@@ -103,12 +109,12 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         for(Card c : auras){
         	if (c.getName().equals("Wild Growth")){
         		this.undoable = false;
-				AllZone.ManaPool.addManaToFloating("G", c);
+        		manaPool.addManaToFloating("G", c);
 			}
         	if (c.getName().equals("Overgrowth")){
 				this.undoable = false;
-				AllZone.ManaPool.addManaToFloating("G", c);
-				AllZone.ManaPool.addManaToFloating("G", c);
+				manaPool.addManaToFloating("G", c);
+				manaPool.addManaToFloating("G", c);
 			}
         }
         
@@ -123,13 +129,13 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
     		if(colors.size() > 0) {
     			this.undoable = false;
     			if(colors.size() == 1) {
-    				AllZone.ManaPool.addManaToFloating(colors.get(0), source);
+    				manaPool.addManaToFloating(colors.get(0), source);
     			}
     			else {
     				for(int i = 0; i < list.size(); i++) {
     					String s = (String)GuiUtils.getChoice("Mirari's Wake"+" - Select a color to add", colors.toArray());
     					if(s != null) {
-    						AllZone.ManaPool.addManaToFloating(s, source);
+    						manaPool.addManaToFloating(s, source);
     					}
     				}
     			}
@@ -145,8 +151,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         runParams.put("Ability_Mana", this);
         runParams.put("Produced", produced);
         AllZone.TriggerHandler.runTrigger("TapsForMana", runParams);
-
-
         
 	}//end produceMana(String)
 	

@@ -66,6 +66,7 @@ public class AllZone implements NewConstants {
     public final static PlayerZone Stack_Zone   = new DefaultPlayerZone(Constant.Zone.Stack, null);
     
     public static final ManaPool ManaPool = new ManaPool(AllZone.HumanPlayer);
+    public static final ManaPool Computer_ManaPool = new ManaPool(AllZone.ComputerPlayer);
     
     public static Display Display;
 

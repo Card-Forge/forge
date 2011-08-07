@@ -2238,7 +2238,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                	abMana.produceMana(mana());
+                	abMana.produceMana(mana(), card.getController());
                 }
                 
                 @Override

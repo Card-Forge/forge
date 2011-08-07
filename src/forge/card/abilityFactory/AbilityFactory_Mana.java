@@ -117,7 +117,7 @@ public class AbilityFactory_Mana {
 			@Override
 			public boolean chkAI_Drawback() {
 				// TODO: AI shouldn't use this until he has a mana pool
-				return false;
+				return true;
 			}
 
 			@Override
@@ -158,7 +158,7 @@ public class AbilityFactory_Mana {
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 		
-		abMana.produceMana(generatedMana(abMana, af, sa));
+		abMana.produceMana(generatedMana(abMana, af, sa), sa.getActivatingPlayer());
 		
 		// convert these to SubAbilities when appropriate		
 		if (params.containsKey("Stuck")){
@@ -308,7 +308,7 @@ public class AbilityFactory_Mana {
 			return;
 		}
 
-		abMana.produceMana(generated);
+		abMana.produceMana(generated, card.getController());
 
 		doDrawback(af, abMana, card);
 	}

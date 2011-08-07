@@ -553,7 +553,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                	abMana.produceMana(mana());
+                	abMana.produceMana(mana(), card.getController());
                 }
             };
             
@@ -715,7 +715,7 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                 	abMana.setUndoable(false);
-                	abMana.produceMana(mana());
+                	abMana.produceMana(mana(), card.getController());
                 }
             };
             

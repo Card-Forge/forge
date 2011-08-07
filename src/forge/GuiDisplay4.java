@@ -327,11 +327,18 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         //opponent life mouse listener
         oppLifeLabel.addMouseListener(new MouseAdapter() {
-           
+        	
             @Override
             public void mousePressed(MouseEvent e) {
                 inputControl.selectPlayer(AllZone.ComputerPlayer);
             }
+        });
+        
+        oppLifeLabel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent me) {
+                setCard(AllZone.Computer_ManaPool);
+            }//mouseMoved
         });
        
         //self life mouse listener
