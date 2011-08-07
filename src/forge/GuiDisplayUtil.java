@@ -1044,145 +1044,35 @@ public class GuiDisplayUtil implements NewConstants {
     		AllZone.Phase.setDevPhaseState(t_changePhase);
         }
         
-		if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
-			for (int i = 0; i < humanSetupCardsInPlay.length; i ++) {
-				Card c = AllZone.CardFactory.getCard(humanSetupCardsInPlay[i].trim(), AllZone.HumanPlayer);
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-				
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				
-				humanDevSetup.add(c);
-			}
-		}
+		if (!t_humanSetupCardsInPlay.trim().toLowerCase().equals("none")) 
+			humanDevSetup = devProcessCardsForZone(humanSetupCardsInPlay, AllZone.HumanPlayer);
 
-		if (!t_humanSetupCardsInHand.trim().toLowerCase().equals("none")) {
-			for (int i = 0; i < humanSetupCardsInHand.length; i ++) {
-				Card c = AllZone.CardFactory.getCard(humanSetupCardsInHand[i].trim(), AllZone.HumanPlayer);
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-				
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-							
-				humanDevHandSetup.add(c);
-			}
-		}
+		if (!t_humanSetupCardsInHand.trim().toLowerCase().equals("none"))
+			humanDevHandSetup = devProcessCardsForZone(humanSetupCardsInHand, AllZone.HumanPlayer);
 
-		if (!t_computerSetupCardsInPlay.trim().toLowerCase().equals("none")) {
-			for (int i = 0; i < computerSetupCardsInPlay.length; i ++) {
-				Card c = AllZone.CardFactory.getCard(computerSetupCardsInPlay[i].trim(), AllZone.ComputerPlayer);
-				
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-				
-				computerDevSetup.add(c);
-			}
-		}
+		if (!t_computerSetupCardsInPlay.trim().toLowerCase().equals("none"))
+			computerDevSetup = devProcessCardsForZone(computerSetupCardsInPlay, AllZone.ComputerPlayer);
 
-		if (!t_computerSetupCardsInHand.trim().toLowerCase().equals("none")) {
-			for (int i = 0; i < computerSetupCardsInHand.length; i ++) {
-				Card c = AllZone.CardFactory.getCard(computerSetupCardsInHand[i].trim(), AllZone.ComputerPlayer);
-			
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-				
-				computerDevHandSetup.add(c);
-			}
-		}
+		if (!t_computerSetupCardsInHand.trim().toLowerCase().equals("none"))
+			computerDevHandSetup = devProcessCardsForZone(computerSetupCardsInHand, AllZone.ComputerPlayer);
+		
+		if (!t_computerSetupGraveyard.trim().toLowerCase().equals("none"))
+			computerDevGraveyardSetup = devProcessCardsForZone(computerSetupGraveyard, AllZone.ComputerPlayer);
+		
+		if (!t_humanSetupGraveyard.trim().toLowerCase().equals("none"))
+			humanDevGraveyardSetup = devProcessCardsForZone(humanSetupGraveyard, AllZone.HumanPlayer);
+		
+        if (!t_humanSetupLibrary.trim().toLowerCase().equals("none"))
+        	humanDevLibrarySetup = devProcessCardsForZone(humanSetupLibrary, AllZone.HumanPlayer);
+        
+        if (!t_computerSetupLibrary.trim().toLowerCase().equals("none"))
+        	computerDevLibrarySetup = devProcessCardsForZone(computerSetupLibrary, AllZone.ComputerPlayer);
+        
+        if (!t_humanSetupExile.trim().toLowerCase().equals("none"))
+        	humanDevExileSetup = devProcessCardsForZone(humanSetupExile, AllZone.HumanPlayer);
 
-		if (!t_computerSetupGraveyard.trim().toLowerCase().equals("none")) {
-			for (int i = 0; i < computerSetupGraveyard.length; i ++) {
-				Card c = AllZone.CardFactory.getCard(computerSetupGraveyard[i].trim(), AllZone.ComputerPlayer);
-			
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-				
-				computerDevGraveyardSetup.add(c);
-			}
-		}
-
-		if (!t_humanSetupGraveyard.trim().toLowerCase().equals("none")) {
-			for (int i = 0; i < humanSetupGraveyard.length; i ++) {
-				Card c = AllZone.CardFactory.getCard(humanSetupGraveyard[i].trim(), AllZone.HumanPlayer);
-			
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-				
-				humanDevGraveyardSetup.add(c);
-			}
-		}
-
-        if (!t_humanSetupLibrary.trim().toLowerCase().equals("none")) {
-            for (int i = 0; i < humanSetupLibrary.length; i ++) {
-                Card c = AllZone.CardFactory.getCard(humanSetupLibrary[i].trim(), AllZone.HumanPlayer);
-
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-
-				humanDevLibrarySetup.add(c);
-            }
-        }
-
-        if (!t_computerSetupLibrary.trim().toLowerCase().equals("none")) {
-            for (int i = 0; i < computerSetupLibrary.length; i ++) {
-                Card c = AllZone.CardFactory.getCard(computerSetupLibrary[i].trim(), AllZone.ComputerPlayer);
-
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-
-				computerDevLibrarySetup.add(c);
-            }
-        }
-
-        if (!t_humanSetupExile.trim().toLowerCase().equals("none")) {
-            for (int i = 0; i < humanSetupExile.length; i ++) {
-                Card c = AllZone.CardFactory.getCard(humanSetupExile[i].trim(), AllZone.HumanPlayer);
-
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-
-				humanDevExileSetup.add(c);
-            }
-        }
-
-        if (!t_computerSetupExile.trim().toLowerCase().equals("none")) {
-            for (int i = 0; i < computerSetupExile.length; i ++) {
-                Card c = AllZone.CardFactory.getCard(computerSetupExile[i].trim(), AllZone.ComputerPlayer);
-
-				c.setCurSetCode(c.getMostRecentSet());
-				c.setImageFilename(CardUtil.buildFilename(c));
-				for(Trigger trig : c.getTriggers()) {
-					AllZone.TriggerHandler.registerTrigger(trig);
-				}
-
-				computerDevExileSetup.add(c);
-            }
-        }
+        if (!t_computerSetupExile.trim().toLowerCase().equals("none"))
+        	computerDevExileSetup = devProcessCardsForZone(computerSetupExile, AllZone.ComputerPlayer);
 
 		for (Card c : humanDevSetup)
 		{
@@ -1235,4 +1125,25 @@ public class GuiDisplayUtil implements NewConstants {
 		AllZone.Computer_Battlefield.updateObservers();
 	}
 
+    public static CardList devProcessCardsForZone(String[] data, Player player)
+    {
+    	CardList cl = new CardList();
+        for (int i = 0; i < data.length; i ++) {
+        	String cardinfo[] = data[i].trim().split("@");
+        	
+            Card c = AllZone.CardFactory.getCard(cardinfo[0], player);
+
+            if (cardinfo.length != 2)
+            	c.setCurSetCode(c.getMostRecentSet());
+            else
+            	c.setCurSetCode(cardinfo[1]);
+            
+			c.setImageFilename(CardUtil.buildFilename(c));
+			for(Trigger trig : c.getTriggers()) {
+				AllZone.TriggerHandler.registerTrigger(trig);
+			}
+			cl.add(c);
+        }
+        return cl;
+    }
 }
