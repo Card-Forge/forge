@@ -1,9 +1,0 @@
-Name:Amnesia
-ManaCost:3 U U U
-Types:Sorcery
-Text:no text
-A:SP$ Discard | Cost$ 3 U U U | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand | SpellDescription$ Target player reveals his or her hand and discards all nonland cards.
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1746.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/19.jpg
-End

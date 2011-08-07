@@ -1,9 +1,0 @@
-Name:Blatant Thievery
-ManaCost:4 U U U
-Types:Sorcery
-Text:no text
-A:SP$ GainControl | Cost$ 4 U U U | ValidTgts$ Permanent.YouDontCtrl | TgtPrompt$ Select target permanent opponent controls. | SpellDescription$ For each opponent, gain control of target permanent that player controls. (This effect lasts indefinitely.)
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blatant_thievery.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/71.jpg
-End

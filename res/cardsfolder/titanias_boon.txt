@@ -1,9 +1,0 @@
-Name:Titania's Boon
-ManaCost:3 G
-Types:Sorcery
-Text:no text
-A:SP$ PutCounterAll | Cost$ 3 G | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_boon.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/276.jpg
-End

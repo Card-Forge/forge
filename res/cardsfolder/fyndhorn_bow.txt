@@ -1,9 +1,0 @@
-Name:Fyndhorn Bow
-ManaCost:2
-Types:Artifact
-Text:no text
-A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_bow.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/293.jpg
-End

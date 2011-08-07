@@ -1,9 +1,0 @@
-Name:Lost Hours
-ManaCost:1 B
-Types:Sorcery
-Text:no text
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Hand | Destination$ Library | LibraryPosition$ 2 | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | SpellDescription$ Target player reveals his or her hand. You choose a nonland card from it. That player puts that card into his or her library third from the top.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_hours.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/69.jpg
-End

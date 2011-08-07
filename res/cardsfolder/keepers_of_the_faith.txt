@@ -1,9 +1,0 @@
-Name:Keepers of the Faith
-ManaCost:1 W W
-Types:Creature Human Cleric
-Text:no text
-PT:2/3
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/ch/en-us/card2860.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/193.jpg
-End

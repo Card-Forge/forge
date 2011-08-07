@@ -1,9 +1,0 @@
-Name:Rack and Ruin
-ManaCost:2 R
-Types:Instant
-Text:no text
-A:SP$ Destroy | Cost$ 2 R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy two target artifacts.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rack_and_ruin.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/89.jpg
-End

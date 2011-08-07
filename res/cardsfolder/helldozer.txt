@@ -1,9 +1,0 @@
-Name:Helldozer
-ManaCost:3 B B B
-Types:Creature Zombie Giant
-Text:no text
-PT:6/5
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card88990.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/88.jpg
-End

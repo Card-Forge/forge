@@ -2,7 +2,10 @@
 
 # This script grabs the list of all cards in a set and clears out the setInfo
 # After running this script, re-run setInfoScript to fill in the slots
-# MAKE SURE THE setAbbr VARIABLE IS UPDATED TO THE SET YOU WANT TO CLEAR OUT
+# Run this Script with a command line argument, as below
+
+# $ python reprintSetInfo.py <SetAbbr>
+# $ python reprintSetInfo.py M12
 
 from httplib import HTTP
 from urlparse import urlparse
@@ -64,11 +67,12 @@ nameList = []
 getCardsInSet()
 
 for fileName in nameList:
-    # if file doesn't exist continue
-    filePath = os.path.join(folder, fileName)
+	# Join new folder convention cardsfolder/<char>/<cardName>
+    filePath = os.path.join(folder, fileName[0].lower(), fileName)
     print filePath
 
-    if os.path.isfile(filePath) == False:
+	# if file doesn't exist continue
+    if not os.path.isfile(filePath):
         continue
 
     file = open(filePath)
@@ -101,7 +105,7 @@ for fileName in nameList:
 
         line = file.readline().strip()
 
-    file = open(os.path.join(folder, fileName), 'w')
+    file = open(filePath, 'w')
     file.write(card.lines)
 
     file.write('End')

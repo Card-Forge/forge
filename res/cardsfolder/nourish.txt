@@ -1,9 +1,0 @@
-Name:Nourish
-ManaCost:G G
-Types:Instant
-Text:no text
-A:SP$ GainLife | Cost$ G G | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nourish.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/78.jpg
-End

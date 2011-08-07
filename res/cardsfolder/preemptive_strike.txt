@@ -1,9 +1,0 @@
-Name:Preemptive Strike
-ManaCost:1 U
-Types:Instant
-Text:no text
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
-SVar:Rarity:Common
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/preemptive_strike.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/50.jpg
-End

@@ -1,8 +1,0 @@
-Name:Day of the Dragons
-ManaCost:4 U U U
-Types:Enchantment
-Text:When CARDNAME enters the battlefield, exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.\r\nWhen CARDNAME leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_the_dragons.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/31.jpg
-End

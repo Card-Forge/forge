@@ -1,9 +1,0 @@
-Name:Creeping Corrosion
-ManaCost:2 G G
-Types:Sorcery
-Text:no text
-A:SP$ DestroyAll | Cost$ 2 G G | ValidCards$ Artifact | SpellDescription$ Destroy all artifacts.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/creeping_corrosion.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/78.jpg
-End

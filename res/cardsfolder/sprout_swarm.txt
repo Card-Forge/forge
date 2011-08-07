@@ -1,9 +1,0 @@
-Name:Sprout Swarm
-ManaCost:1 G
-Types:Instant
-Text:(NOTE: "Convoke" is not implemented.)
-SVar:RemRandomDeck:True
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout_swarm.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/138.jpg
-End

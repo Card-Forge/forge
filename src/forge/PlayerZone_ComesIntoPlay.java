@@ -1,88 +1,96 @@
-
 package forge;
 
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 
+/**
+ * <p>PlayerZone_ComesIntoPlay class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
+    /** Constant <code>serialVersionUID=5750837078903423978L</code> */
     private static final long serialVersionUID = 5750837078903423978L;
-    
-    private boolean           trigger          = true;
-    private boolean           leavesTrigger    = true;
-	private static boolean SimultaneousEntry = false; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
-	static int SimultaneousEntryCounter = 1; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
-    
+
+    private boolean trigger = true;
+    private boolean leavesTrigger = true;
+
+    /**
+     * <p>Constructor for PlayerZone_ComesIntoPlay.</p>
+     *
+     * @param zone a {@link java.lang.String} object.
+     * @param player a {@link forge.Player} object.
+     */
     public PlayerZone_ComesIntoPlay(String zone, Player player) {
         super(zone, player);
     }
-    
+
+    /** {@inheritDoc} */
     @Override
     public void add(Object o) {
-        if(o == null) throw new RuntimeException("PlayerZone_ComesInto Play : add() object is null");
-        
+        if (o == null) throw new RuntimeException("PlayerZone_ComesInto Play : add() object is null");
+
         super.add(o);
-        
+
         final Card c = (Card) o;
         final Player player = c.getController();
-        
-        if(trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
-        		|| (AllZoneUtil.isCardInPlay("Urabrask the Hidden",c.getController().getOpponent()) && c.isCreature())
-        		|| (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))
-        		|| (AllZoneUtil.isCardInPlay("Orb of Dreams") && c.isPermanent()))) c.tap();
-        
+
+        if (trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
+                || (AllZoneUtil.isCardInPlay("Urabrask the Hidden", c.getController().getOpponent()) && c.isCreature())
+                || (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))
+                || (AllZoneUtil.isCardInPlay("Orb of Dreams") && c.isPermanent()))) c.tap();
+
         //cannot use addComesIntoPlayCommand - trigger might be set to false;
         // Keep track of max lands can play per turn
         int addMax = 0;
 
         boolean adjustLandPlays = false;
         boolean eachPlayer = false;
-        
-        if(c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
-        	addMax = 1;
-        	adjustLandPlays = true;
-        } 
-        else if(c.getName().equals("Azusa, Lost but Seeking")) {
-        	addMax = 2;
-        	adjustLandPlays = true;
-        }
-        else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")){
-        	// these two aren't in yet, but will just need the other part of the card to work with more lands
-        	adjustLandPlays = true;
-        	eachPlayer = true;
-        	addMax = 1;
+
+        if (c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
+            addMax = 1;
+            adjustLandPlays = true;
+        } else if (c.getName().equals("Azusa, Lost but Seeking")) {
+            addMax = 2;
+            adjustLandPlays = true;
+        } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
+            // these two aren't in yet, but will just need the other part of the card to work with more lands
+            adjustLandPlays = true;
+            eachPlayer = true;
+            addMax = 1;
         }
         // 7/13: fastbond code removed, fastbond should be unlimited and will be handled elsewhere.
-        
-        if (adjustLandPlays){
-        	if (eachPlayer){
-        		AllZone.HumanPlayer.addMaxLandsToPlay(addMax);
-        		AllZone.ComputerPlayer.addMaxLandsToPlay(addMax);
-        	}
-        	else
-        		c.getController().addMaxLandsToPlay(addMax);
+
+        if (adjustLandPlays) {
+            if (eachPlayer) {
+                AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
+                AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
+            } else
+                c.getController().addMaxLandsToPlay(addMax);
         }
-        
-        if(trigger) {
+
+        if (trigger) {
             c.setSickness(true);// summoning sickness
             c.comesIntoPlay();
-            
+
             if (c.isLand()) {
                 CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-                
+
                 /*CardList listValakut = list.filter(new CardListFilter() {
-                	public boolean addCard(Card c) {
-                		return c.getName().contains("Valakut, the Molten Pinnacle");
-                	}
+                    public boolean addCard(Card c) {
+                        return c.getName().contains("Valakut, the Molten Pinnacle");
+                    }
                 });*/
-                
+
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return c.hasKeyword("Landfall") 
-                        			|| c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
+                        return c.hasKeyword("Landfall")
+                                || c.hasKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
                     }
                 });
-                
+
                 for (int i = 0; i < list.size(); i++) {
                     GameActionUtil.executeLandfallEffects(list.get(i));
                 }
@@ -97,188 +105,194 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 		}
                 	}
                 }*/
-                
+
                 //Tectonic Instability
                 CardList tis = AllZoneUtil.getCardsInPlay("Tectonic Instability");
                 final Card tisLand = c;
-                for (Card ti:tis) {
-                	final Card source = ti;
-                	SpellAbility ability = new Ability(source, "") {
-                		@Override
-                		public void resolve() {
-                			CardList lands = AllZoneUtil.getPlayerCardsInPlay(tisLand.getController());
-                			lands = lands.filter(AllZoneUtil.lands);
-                			for (Card land : lands) land.tap();
-                		}
-                	};
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(source).append(" - tap all lands ");
-                	sb.append(tisLand.getController()).append(" controls.");
-                	ability.setStackDescription(sb.toString());
+                for (Card ti : tis) {
+                    final Card source = ti;
+                    SpellAbility ability = new Ability(source, "") {
+                        @Override
+                        public void resolve() {
+                            CardList lands = AllZoneUtil.getPlayerCardsInPlay(tisLand.getController());
+                            lands = lands.filter(AllZoneUtil.lands);
+                            for (Card land : lands) land.tap();
+                        }
+                    };
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(source).append(" - tap all lands ");
+                    sb.append(tisLand.getController()).append(" controls.");
+                    ability.setStackDescription(sb.toString());
 
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
+                    AllZone.getStack().addSimultaneousStackEntry(ability);
 
                 }
-                
+
                 CardList les = AllZoneUtil.getPlayerCardsInPlay(c.getOwner().getOpponent(), "Land Equilibrium");
                 final Card lesLand = c;
-                if(les.size() > 0) {
-                	final Card source = les.get(0);
-                	SpellAbility ability = new Ability(source, "") {
-                		@Override
-                		public void resolve() {
-                			CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
-                			lesLand.getOwner().sacrificePermanent(source.getName()+" - Select a land to sacrifice", lands);
-                		}
-                	};
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(source).append(" - ");
-                	sb.append(tisLand.getController()).append(" sacrifices a land.");
-                	ability.setStackDescription(sb.toString());
-                	CardList pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
-                	CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
-                	//(pLands - 1) because this land is in play, and the ability is before it is in play
-                	if(oLands.size() <= (pLands.size() - 1)) {
-                		AllZone.Stack.addSimultaneousStackEntry(ability);
+                if (les.size() > 0) {
+                    final Card source = les.get(0);
+                    SpellAbility ability = new Ability(source, "") {
+                        @Override
+                        public void resolve() {
+                            CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                            lesLand.getOwner().sacrificePermanent(source.getName() + " - Select a land to sacrifice", lands);
+                        }
+                    };
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(source).append(" - ");
+                    sb.append(tisLand.getController()).append(" sacrifices a land.");
+                    ability.setStackDescription(sb.toString());
+                    CardList pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                    CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
+                    //(pLands - 1) because this land is in play, and the ability is before it is in play
+                    if (oLands.size() <= (pLands.size() - 1)) {
+                        AllZone.getStack().addSimultaneousStackEntry(ability);
 
-                	}
+                    }
                 }
-                
+
             }//isLand()
         }
-        
-        if(AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName())) {
-            String[] effects = AllZone.StaticEffects.getCardToEffectsList().get(c.getName());
-            for(String effect:effects) {
-                AllZone.StaticEffects.addStateBasedEffect(effect);
+
+        if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
+            String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
+            for (String effect : effects) {
+                AllZone.getStaticEffects().addStateBasedEffect(effect);
             }
         }
-        
+
         CardList meek = AllZoneUtil.getPlayerGraveyard(c.getController(), "Sword of the Meek");
-        
-        if(meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
-            for(int i = 0; i < meek.size(); i++) {
+
+        if (meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
+            for (int i = 0; i < meek.size(); i++) {
                 final Card crd = meek.get(i);
 
                 Ability ability = new Ability(meek.get(i), "0") {
                     @Override
                     public void resolve() {
-                        if(crd.getController().isHuman()) {
-                            if(GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
-                            	if(AllZoneUtil.isCardInPlayerGraveyard(player, crd)
+                        if (crd.getController().isHuman()) {
+                            if (GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
+                                if (AllZoneUtil.isCardInPlayerGraveyard(player, crd)
                                         && AllZoneUtil.isCardInPlay(c) && c.isCreature()
                                         && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
-                                    AllZone.GameAction.moveToPlay(crd);
-                                    
+                                    AllZone.getGameAction().moveToPlay(crd);
+
                                     crd.equipCard(c);
                                 }
                             }
-                            
+
                         } else //computer
                         {
-                            if(AllZoneUtil.isCardInPlayerGraveyard(player, crd)
+                            if (AllZoneUtil.isCardInPlayerGraveyard(player, crd)
                                     && AllZoneUtil.isCardInPlay(c) && c.isCreature()
                                     && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
-                            	AllZone.GameAction.moveToPlay(crd);
-                                
+                                AllZone.getGameAction().moveToPlay(crd);
+
                                 crd.equipCard(c);
                             }
                         }
                     }
                 };
-                
+
                 StringBuilder sb = new StringBuilder();
                 sb.append("Sword of the Meek - Whenever a 1/1 creature enters the battlefield under your control, you may ");
                 sb.append("return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.");
                 ability.setStackDescription(sb.toString());
 
-                AllZone.Stack.addSimultaneousStackEntry(ability);
+                AllZone.getStack().addSimultaneousStackEntry(ability);
 
             }
         }
 
     }// end add()
-    
+
+    /** {@inheritDoc} */
     @Override
     public void remove(Object o) {
-        
+
         super.remove(o);
-        
+
         Card c = (Card) o;
-        
+
         // Keep track of max lands can play per turn
         int addMax = 0;
 
         boolean adjustLandPlays = false;
         boolean eachPlayer = false;
-        
-        if(c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
-        	addMax = -1;
-        	adjustLandPlays = true;
-        } else if(c.getName().equals("Azusa, Lost but Seeking")) {
-        	addMax = -2;
-        	adjustLandPlays = true;
-        } 
-        else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")){
-        	// once their second half of their abilities are programmed these two can be added in
-        	adjustLandPlays = true;
-        	eachPlayer = true;
-        	addMax = -1;
+
+        if (c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
+            addMax = -1;
+            adjustLandPlays = true;
+        } else if (c.getName().equals("Azusa, Lost but Seeking")) {
+            addMax = -2;
+            adjustLandPlays = true;
+        } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
+            // once their second half of their abilities are programmed these two can be added in
+            adjustLandPlays = true;
+            eachPlayer = true;
+            addMax = -1;
         }
         // 7/12: fastbond code removed, fastbond should be unlimited and will be handled elsewhere.
-        
-        if (adjustLandPlays){
-        	if (eachPlayer){
-        		AllZone.HumanPlayer.addMaxLandsToPlay(addMax);
-        		AllZone.ComputerPlayer.addMaxLandsToPlay(addMax);
-        	}
-        	else
-        		c.getController().addMaxLandsToPlay(addMax);
-        }
-        
 
-        if(leavesTrigger) {
-        	c.leavesPlay();
+        if (adjustLandPlays) {
+            if (eachPlayer) {
+                AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
+                AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
+            } else
+                c.getController().addMaxLandsToPlay(addMax);
         }
 
-        if(AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName())) {
-            String[] effects = AllZone.StaticEffects.getCardToEffectsList().get(c.getName());
+
+        if (leavesTrigger) {
+            c.leavesPlay();
+        }
+
+        if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
+            String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
             String tempEffect = "";
-            for(String effect:effects) {
+            for (String effect : effects) {
                 tempEffect = effect;
-                AllZone.StaticEffects.removeStateBasedEffect(effect);
+                AllZone.getStaticEffects().removeStateBasedEffect(effect);
                 Command comm = GameActionUtil.commands.get(tempEffect); //this is to make sure cards reset correctly
                 comm.execute();
             }
-            
+
         }
 
-        for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
+        for (String effect : AllZone.getStaticEffects().getStateBasedMap().keySet()) {
             Command com = GameActionUtil.commands.get(effect);
             com.execute();
         }
 
 
     }
-    
+
+    /**
+     * <p>Setter for the field <code>trigger</code>.</p>
+     *
+     * @param b a boolean.
+     */
     public void setTrigger(boolean b) {
         trigger = b;
     }
-    
+
+    /**
+     * <p>Setter for the field <code>leavesTrigger</code>.</p>
+     *
+     * @param b a boolean.
+     */
     public void setLeavesTrigger(boolean b) {
         leavesTrigger = b;
     }
-    
+
+    /**
+     * <p>setTriggers.</p>
+     *
+     * @param b a boolean.
+     */
     public void setTriggers(boolean b) {
         trigger = b;
         leavesTrigger = b;
     }
-
-	public static void setSimultaneousEntry(boolean simultaneousEntry) {
-		SimultaneousEntry = simultaneousEntry;
-	}
-
-	public static boolean isSimultaneousEntry() {
-		return SimultaneousEntry;
-	}
 }

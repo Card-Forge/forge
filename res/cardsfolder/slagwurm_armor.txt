@@ -1,9 +1,0 @@
-Name:Slagwurm Armor
-ManaCost:1
-Types:Artifact Equipment
-Text:Equipped creature gets +0/+6.
-K:eqPump 3:+0/+6
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slagwurm_armor.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/243.jpg
-End

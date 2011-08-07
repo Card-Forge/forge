@@ -1,9 +1,0 @@
-Name:Final Judgment
-ManaCost:4 W W
-Types:Sorcery
-Text:no text
-A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/final_judgment.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/4.jpg
-End

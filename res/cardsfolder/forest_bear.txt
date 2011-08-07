@@ -1,9 +1,0 @@
-Name:Forest Bear
-ManaCost:1 G
-Types:Creature Bear
-Text:no text
-PT:2/2
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10505.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/135.jpg
-End

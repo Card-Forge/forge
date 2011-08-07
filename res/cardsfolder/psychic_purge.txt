@@ -1,9 +1,0 @@
-Name:Psychic Purge
-ManaCost:U
-Types:Sorcery
-Text:When a spell or ability an opponent controls causes you to discard Psychic Purge, that player loses 5 life.\r\n
-A:SP$ DealDamage | Cost$ U | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_purge.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/68.jpg
-End

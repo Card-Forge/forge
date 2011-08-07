@@ -1,9 +1,0 @@
-Name:Spontaneous Combustion
-ManaCost:1 B R
-Types:Instant
-Text:no text
-A:SP$ DamageAll | Cost$ 1 B R Sac<1/Creature> | NumDmg$ 3 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 3 damage to each creature.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_combustion.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/348.jpg
-End

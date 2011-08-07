@@ -1,9 +1,0 @@
-Name:Runed Stalactite
-ManaCost:1
-Types:Artifact Equipment
-Text:Equipped creature gets +1/+1 and is every creature type.
-K:eqPump 2:+1/+1/Changeling
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_stalactite.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/260.jpg
-End

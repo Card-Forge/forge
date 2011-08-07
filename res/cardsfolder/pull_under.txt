@@ -1,9 +1,0 @@
-Name:Pull Under
-ManaCost:5 B
-Types:Instant Arcane
-Text:no text
-A:SP$ Pump | Cost$ 5 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | SpellDescription$ Target creature gets -5/-5 until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pull_under.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/137.jpg
-End

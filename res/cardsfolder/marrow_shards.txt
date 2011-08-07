@@ -1,9 +1,0 @@
-Name:Marrow Shards
-ManaCost:PW
-Types:Instant
-Text:no text
-A:SP$ DamageAll | Cost$ PW | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_shards.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/15.jpg
-End

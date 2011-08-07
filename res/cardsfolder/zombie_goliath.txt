@@ -1,9 +1,0 @@
-Name:Zombie Goliath
-ManaCost:4 B
-Types:Creature Zombie Giant
-Text:no text
-PT:4/3
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_goliath.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/123.jpg
-End

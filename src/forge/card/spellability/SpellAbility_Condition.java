@@ -1,234 +1,245 @@
-
 package forge.card.spellability;
 
 
-import java.util.HashMap;
-
-import forge.AllZone;
-import forge.AllZoneUtil;
-import forge.Card;
-import forge.CardList;
-import forge.Phase;
-import forge.Player;
+import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 
-public class SpellAbility_Condition extends SpellAbility_Variables{
-	// A class for handling SpellAbility Conditions. These restrictions include: 
-	// Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player, 
-	// Threshold, Metalcraft, LevelRange, etc
-	// Each value will have a default, that can be overridden (mostly by AbilityFactory)
-	// The CanPlay function will use these values to determine if the current game state is ok with these restrictions
+import java.util.HashMap;
 
-	public SpellAbility_Condition() { }
+/**
+ * <p>SpellAbility_Condition class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ * @since 1.0.15
+ */
+public class SpellAbility_Condition extends SpellAbility_Variables {
+    // A class for handling SpellAbility Conditions. These restrictions include:
+    // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
+    // Threshold, Metalcraft, LevelRange, etc
+    // Each value will have a default, that can be overridden (mostly by AbilityFactory)
+    // The CanPlay function will use these values to determine if the current game state is ok with these restrictions
 
-	public void setConditions(HashMap<String,String> params) {
-		if (params.containsKey("Condition")) {
-			String value = params.get("Condition");
-			if(value.equals("Threshold")) setThreshold(true);
-			if(value.equals("Metalcraft")) setMetalcraft(true);
-			if(value.equals("Hellbent")) setHellbent(true);
-		}
+    /**
+     * <p>Constructor for SpellAbility_Condition.</p>
+     */
+    public SpellAbility_Condition() {
+    }
 
-		if (params.containsKey("ConditionZone"))
-			setZone(params.get("ContitionZone"));
+    /**
+     * <p>setConditions.</p>
+     *
+     * @param params a {@link java.util.HashMap} object.
+     */
+    public void setConditions(HashMap<String, String> params) {
+        if (params.containsKey("Condition")) {
+            String value = params.get("Condition");
+            if (value.equals("Threshold")) setThreshold(true);
+            if (value.equals("Metalcraft")) setMetalcraft(true);
+            if (value.equals("Hellbent")) setHellbent(true);
+        }
 
-		if (params.containsKey("ConditionSorcerySpeed"))
-			setSorcerySpeed(true);
+        if (params.containsKey("ConditionZone"))
+            setZone(params.get("ContitionZone"));
 
-		if (params.containsKey("ConditionPlayerTurn"))
-			setPlayerTurn(true);
+        if (params.containsKey("ConditionSorcerySpeed"))
+            setSorcerySpeed(true);
 
-		if (params.containsKey("ConditionOpponentTurn"))
-			setOpponentTurn(true);
+        if (params.containsKey("ConditionPlayerTurn"))
+            setPlayerTurn(true);
 
-		if (params.containsKey("ConditionAnyPlayer"))
-			setAnyPlayer(true);
+        if (params.containsKey("ConditionOpponentTurn"))
+            setOpponentTurn(true);
 
-		if (params.containsKey("ConditionPhases")) {
-			String phases = params.get("ConditionPhases");
+        if (params.containsKey("ConditionPhases")) {
+            String phases = params.get("ConditionPhases");
 
-			if (phases.contains("->")){
-				// If phases lists a Range, split and Build Activate String
-				// Combat_Begin->Combat_End (During Combat)
-				// Draw-> (After Upkeep)
-				// Upkeep->Combat_Begin (Before Declare Attackers)
+            if (phases.contains("->")) {
+                // If phases lists a Range, split and Build Activate String
+                // Combat_Begin->Combat_End (During Combat)
+                // Draw-> (After Upkeep)
+                // Upkeep->Combat_Begin (Before Declare Attackers)
 
-				String[] split = phases.split("->", 2);
-				phases = AllZone.Phase.buildActivateString(split[0], split[1]);
-			}
+                String[] split = phases.split("->", 2);
+                phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
+            }
 
-			setPhases(phases);
-		}
+            setPhases(phases);
+        }
 
-		if (params.containsKey("ConditionCardsInHand"))
-			setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
+        if (params.containsKey("ConditionCardsInHand"))
+            setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
 
+        //Condition version of IsPresent stuff
+        if (params.containsKey("ConditionPresent")) {
+            setIsPresent(params.get("ConditionPresent"));
+            if (params.containsKey("ConditionCompare"))
+                setPresentCompare(params.get("ConditionCompare"));
+        }
 
+        if (params.containsKey("ConditionDefined")) {
+            setPresentDefined(params.get("ConditionDefined"));
+        }
 
-		//Condition version of IsPresent stuff
-		if (params.containsKey("ConditionPresent")){
-			setIsPresent(params.get("ConditionPresent"));
-			if (params.containsKey("ConditionCompare"))
-				setPresentCompare(params.get("ConditionCompare"));
-		}
+        if (params.containsKey("ConditionNotPresent")) {
+            setIsPresent(params.get("ConditionNotPresent"));
+            setPresentCompare("EQ0");
+        }
 
-		if(params.containsKey("ConditionDefined")) {
-			setPresentDefined(params.get("ConditionDefined"));
-		}
+        //basically PresentCompare for life totals:
+        if (params.containsKey("ConditionLifeTotal")) {
+            lifeTotal = params.get("ConditionLifeTotal");
+            if (params.containsKey("ConditionLifeAmount")) {
+                lifeAmount = params.get("ConditionLifeAmount");
+            }
+        }
+        
+        if(params.containsKey("ConditionManaSpent")) {
+        	setManaSpent(params.get("ConditionManaSpent"));
+        }
+    }//setConditions
 
-		if (params.containsKey("ConditionNotPresent")){
-			setIsPresent(params.get("ConditionNotPresent"));
-			setPresentCompare("EQ0");
-		}
+    /**
+     * <p>checkConditions.</p>
+     *
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public boolean checkConditions(SpellAbility sa) {
 
-		//basically PresentCompare for life totals:
-		if(params.containsKey("ConditionLifeTotal")){
-			lifeTotal = params.get("ConditionLifeTotal");
-			if(params.containsKey("ConditionLifeAmount")) {
-				lifeAmount = params.get("ConditionLifeAmount");
-			}				
-		}
-	}//setConditions
+        Player activator = sa.getActivatingPlayer();
+        if (activator == null) {
+            activator = sa.getSourceCard().getController();
+            System.out.println(sa.getSourceCard().getName() + " Did not have activator set in SpellAbility_Condition.checkConditions()");
+        }
 
-	public boolean checkConditions(SpellAbility sa) {
+        if (hellbent) {
+            if (!activator.hasHellbent())
+                return false;
+        }
+        if (threshold) {
+            if (!activator.hasThreshold())
+                return false;
+        }
+        if (metalcraft) {
+            if (!activator.hasMetalcraft())
+                return false;
+        }
 
-		Player activator = sa.getActivatingPlayer();
-		if (activator == null){
-			activator = sa.getSourceCard().getController();
-			System.out.println(sa.getSourceCard().getName() + " Did not have activator set in SpellAbility_Condition.checkConditions()");
-		}
+        if (bSorcerySpeed && !Phase.canCastSorcery(activator))
+            return false;
 
-		if(hellbent){
-			if (!activator.hasHellbent())
-				return false;
-		}
-		if(threshold){
-			if (!activator.hasThreshold())
-				return false;
-		}
-		if(metalcraft){
-			if (!activator.hasMetalcraft())
-				return false;
-		}
+        if (bPlayerTurn && !AllZone.getPhase().isPlayerTurn(activator))
+            return false;
 
-		if (bSorcerySpeed && !Phase.canCastSorcery(activator))
-			return false;
+        if (bOpponentTurn && AllZone.getPhase().isPlayerTurn(activator))
+            return false;
 
-		if (bPlayerTurn && !AllZone.Phase.isPlayerTurn(activator))
-			return false;
+        if (activationLimit != -1 && numberTurnActivations >= activationLimit)
+            return false;
 
-		if (bOpponentTurn && AllZone.Phase.isPlayerTurn(activator))
-			return false;
+        if (phases.size() > 0) {
+            boolean isPhase = false;
+            String currPhase = AllZone.getPhase().getPhase();
+            for (String s : phases) {
+                if (s.equals(currPhase)) {
+                    isPhase = true;
+                    break;
+                }
+            }
 
-		if (activationLimit != -1 && numberTurnActivations >= activationLimit)
-			return false;
+            if (!isPhase)
+                return false;
+        }
 
-		if (phases.size() > 0){
-			boolean isPhase = false;
-			String currPhase = AllZone.Phase.getPhase();
-			for(String s : phases){
-				if (s.equals(currPhase)){
-					isPhase = true;
-					break;
-				}
-			}
+        if (nCardsInHand != -1) {
+            // Can handle Library of Alexandria, or Hellbent
+            if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand)
+                return false;
+        }
 
-			if (!isPhase)
-				return false;
-		}
+        if (sIsPresent != null) {
+            CardList list = AllZoneUtil.getCardsInPlay();
 
-		if (nCardsInHand != -1){
-			// Can handle Library of Alexandria, or Hellbent
-			if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand)
-				return false;
-		}
+            list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
-		if (sIsPresent != null){
-			CardList list = AllZoneUtil.getCardsInPlay();
+            int right = 1;
+            String rightString = presentCompare.substring(2);
+            if (rightString.equals("X")) {
+                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
+            } else {
+                right = Integer.parseInt(presentCompare.substring(2));
+            }
+            int left = list.size();
 
-			list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            if (!AllZoneUtil.compare(left, presentCompare, right))
+                return false;
+        }
 
-			int right = 1;
-			String rightString = presentCompare.substring(2);
-			if(rightString.equals("X")) {
-				right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
-			}
-			else {
-				right = Integer.parseInt(presentCompare.substring(2));
-			}
-			int left = list.size();
+        if (presentDefined != null) {
+            CardList list = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), presentDefined, sa));
 
-			if (!Card.compare(left, presentCompare, right))
-				return false;
-		}
+            list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
-		if(presentDefined != null) {
-			CardList list;
-			if (presentDefined == null)
-				list = AllZoneUtil.getCardsInPlay();
-			else{
-				list = new CardList(AbilityFactory.getDefinedCards(sa.getSourceCard(), presentDefined, sa));
-			}
+            int right;
+            String rightString = presentCompare.substring(2);
+            try {    // If this is an Integer, just parse it
+                right = Integer.parseInt(rightString);
+            } catch (NumberFormatException e) {    // Otherwise, grab it from the SVar
+                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
+            }
 
-			list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            int left = list.size();
 
-			int right;
-			String rightString = presentCompare.substring(2);
-			try{	// If this is an Integer, just parse it
-				right = Integer.parseInt(rightString);
-			}
-			catch(NumberFormatException e){	// Otherwise, grab it from the SVar
-				right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
-			}
+            return AllZoneUtil.compare(left, presentCompare, right);
+        } else if (sIsPresent != null) {
+            CardList list = AllZoneUtil.getCardsInPlay();
 
-			int left = list.size();
+            list = list.getValidCards(sIsPresent.split(","), activator, sa.getSourceCard());
 
-			return Card.compare(left, presentCompare, right);
-		}
-		else if (sIsPresent != null) {
-			CardList list = AllZoneUtil.getCardsInPlay();
+            int right = 1;
+            String rightString = presentCompare.substring(2);
+            if (rightString.equals("X")) {
+                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
+            } else {
+                right = Integer.parseInt(presentCompare.substring(2));
+            }
+            int left = list.size();
 
-			list = list.getValidCards(sIsPresent.split(","), activator, sa.getSourceCard());
+            if (!AllZoneUtil.compare(left, presentCompare, right))
+                return false;
+        }
 
-			int right = 1;
-			String rightString = presentCompare.substring(2);
-			if(rightString.equals("X")) {
-				right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
-			}
-			else {
-				right = Integer.parseInt(presentCompare.substring(2));
-			}
-			int left = list.size();
+        if (lifeTotal != null) {
+            int life = 1;
+            if (lifeTotal.equals("You")) {
+                life = activator.getLife();
+            }
+            if (lifeTotal.equals("Opponent")) {
+                life = activator.getOpponent().getLife();
+            }
 
-			if (!Card.compare(left, presentCompare, right))
-				return false;
-		}
+            int right = 1;
+            String rightString = lifeAmount.substring(2);
+            if (rightString.equals("X")) {
+                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
+            } else {
+                right = Integer.parseInt(lifeAmount.substring(2));
+            }
 
-		if(lifeTotal != null) {
-			int life = 1;
-			if(lifeTotal.equals("You")) {
-				life = activator.getLife();
-			}
-			if(lifeTotal.equals("Opponent")) {
-				life = activator.getOpponent().getLife();
-			}
+            if (!AllZoneUtil.compare(life, lifeAmount, right)) {
+                return false;
+            }
+        }
+        
+        if(null != manaSpent) {
+        	if(!sa.getSourceCard().getColorsPaid().contains(manaSpent)) {
+        		return false;
+        	}
+        }
 
-			int right = 1;
-			String rightString = lifeAmount.substring(2);
-			if(rightString.equals("X")) {
-				right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
-			}
-			else {
-				right = Integer.parseInt(lifeAmount.substring(2));
-			}
-
-			if(!Card.compare(life, lifeAmount, right)) {
-				return false;
-			}
-		}
-
-		return true;
-	}
+        return true;
+    }
 
 }//end class SpellAbility_Condition

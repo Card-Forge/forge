@@ -1,5 +1,6 @@
 Abraham Lincoln 3
 Albert Einstein 3
+Alice in Wonderland 3
 Aquaman 3
 Atomic Robo 3
 Barney Rubble 3
@@ -11,6 +12,7 @@ Blackbeard 3
 Boba Fett 3
 Boris Karloff 3
 Boromir 3
+Bridge Troll 3
 Buffy 3
 C3PO 3
 Captain America 3
@@ -44,6 +46,7 @@ George of the Jungle 3
 Gimli 3
 Gold Finger 3
 Grampa Simpson 3
+Green Arrow 3
 Green Lantern 3
 Han Solo 3
 Hans 3
@@ -65,11 +68,12 @@ King Arthur 3
 King Edward 3
 King Kong 3
 Kojak 3
-Lisa Simpson 3
+Krypto 3
 Luke Skywalker 3
 Maggie Simpson 3
 Magneto 3
 Magnum 3
+Mister Fantastic 3
 Morpheus 3
 Mr Slate 3
 Napoleon 3
@@ -85,13 +89,15 @@ Pointy Haired Boss 3
 Professor X 3
 R2-D2 3
 Radiant 3
+Radioactive Man 3
 Riddler 3
 Rocky 3
 Rogue 3
 Samantha Stephens 3
 Samwise Gamgee 3
-Scooby Doo 3
 Saruman 3
+Scooby Doo 3
+Scotty 3
 Seabiscuit 3
 Secret Squirrel 3
 Sherlock Holmes 3

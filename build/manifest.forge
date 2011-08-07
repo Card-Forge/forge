@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: forge.Gui_NewGame
-Class-Path: res/lib/google-collections-1.0.jar res/lib/java-image-scaling-0.8.4.jar res/lib/substance.jar res/lib/napkinlaf-1.2.jar res/lib/nimrodlf.jar res/lib/jl1.0.1.jar res/lib/miglayout-3.7.3.1-swing.jar res/lib/xpp3_min-1.1.4c.jar res/lib/xstream-1.3.1.jar

@@ -1,9 +1,0 @@
-Name:Parallel Evolution
-ManaCost:3 G G
-Types:Sorcery
-Text:no text
-SVar:RemRandomDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/parallel_evolution.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/136.jpg
-End

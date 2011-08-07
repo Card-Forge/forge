@@ -1,9 +1,0 @@
-Name:Envelop
-ManaCost:U
-Types:Instant
-Text:no text
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target Sorcery spell | ValidTgts$ Sorcery | SpellDescription$ Counter target sorcery spell.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/envelop.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/39.jpg
-End

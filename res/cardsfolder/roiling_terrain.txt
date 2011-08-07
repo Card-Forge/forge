@@ -1,9 +1,0 @@
-Name:Roiling Terrain
-ManaCost:2 R R
-Types:Sorcery
-Text:Destroy target land, then Roiling Terrain deals damage to that land's controller equal to the number of land cards in that player's graveyard.
-SVar:RemRandomDeck:True
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/roiling_terrain.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/88.jpg
-End

@@ -1,9 +1,0 @@
-Name:Trokin High Guard
-ManaCost:3 W
-Types:Creature Human Knight
-Text:no text
-PT:3/3
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6496.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/146.jpg
-End

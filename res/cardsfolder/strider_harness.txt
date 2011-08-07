@@ -1,9 +1,0 @@
-Name:Strider Harness
-ManaCost:3
-Types:Artifact Equipment
-Text:Equipped creature gets +1/+1 and has haste.
-K:eqPump 1:+1/+1/Haste
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/strider_harness.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/207.jpg
-End

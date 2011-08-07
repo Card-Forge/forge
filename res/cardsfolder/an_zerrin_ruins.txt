@@ -1,8 +1,0 @@
-Name:An-Zerrin Ruins
-ManaCost:2 R R
-Types:Enchantment
-Text:As An-Zerrin Ruins enters the battlefield, choose a creature type.\r\nCreatures of the chosen type don't untap during their controllers' untap steps.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/an_zerrin_ruins.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/87.jpg
-End

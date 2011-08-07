@@ -1,9 +1,0 @@
-Name:Wojek Embermage
-ManaCost:3 R
-Types:Creature Human Wizard
-Text:no text
-PT:1/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_embermage.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/152.jpg
-End

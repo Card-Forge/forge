@@ -1,8 +1,0 @@
-Name:Cerebral Eruption
-ManaCost:2 R R
-Types:Sorcery
-Text:Target opponent reveals the top card of his or her library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cerebral_eruption.jpg
-SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/86.jpg
-End

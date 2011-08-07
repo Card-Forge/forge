@@ -1,9 +1,0 @@
-Name:Triumph of the Hordes
-ManaCost:2 G G
-Types:Sorcery
-Text:no text
-A:SP$ PumpAll | Cost$ 2 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample & Infect | SpellDescription$ Until end of turn, creatures you control get +1/+1 and gain trample and infect. (Creatures with infect deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/triumph_of_the_hordes.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/123.jpg
-End

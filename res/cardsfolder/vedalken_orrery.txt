@@ -1,9 +1,0 @@
-Name:Vedalken Orrery
-ManaCost:4
-Types:Artifact
-Text:no text
-K:stPumpAll:Card.nonLand+YouCtrl:0/0/HIDDEN Flash:No Condition:You may cast nonland cards as though they had flash.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_orrery.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/163.jpg
-End

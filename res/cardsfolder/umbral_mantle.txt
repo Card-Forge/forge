@@ -1,8 +1,0 @@
-Name:Umbral Mantle
-ManaCost:3
-Types:Artifact Equipment
-Text:Equipped creature has "3, Untap: This creature gets +2/+2 until end of turn.".
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/umbral_mantle.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/267.jpg
-End

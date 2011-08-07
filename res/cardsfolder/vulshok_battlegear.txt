@@ -1,9 +1,0 @@
-Name:Vulshok Battlegear
-ManaCost:3
-Types:Artifact Equipment
-Text:Equipped creature gets +3/+3.
-K:eqPump 3:+3/+3
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_battlegear.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/272.jpg
-End

@@ -1,9 +1,0 @@
-Name:Magma Rift
-ManaCost:2 R
-Types:Sorcery
-Text:no text
-A:SP$ DealDamage | Cost$ 2 R Sac<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_rift.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/136.jpg
-End

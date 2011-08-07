@@ -1,8 +1,0 @@
-Name:Predatory Advantage
-ManaCost:3 R G
-Types:Enchantment
-Text:At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, put a 2/2 green Lizard creature token onto the battlefield.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_advantage.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/58.jpg
-End

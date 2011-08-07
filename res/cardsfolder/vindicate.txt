@@ -1,9 +1,0 @@
-Name:Vindicate
-ManaCost:1 W B
-Types:Sorcery
-Text:no text
-A:SP$ Destroy | Cost$ 1 W B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy target permanent.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vindicate.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/126.jpg
-End

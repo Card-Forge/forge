@@ -1,9 +1,0 @@
-Name:Counterintelligence
-ManaCost:2 U U
-Types:Sorcery
-Text:no text
-A:SP$ ChangeZone | Cost$ 2 U U | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return one or two target creatures to their owners' hands.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/counterintelligence.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/41.jpg
-End

@@ -1,9 +1,0 @@
-Name:Rend Flesh
-ManaCost:2 B
-Types:Instant Arcane
-Text:no text
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonSpirit | TgtPrompt$ Select target non-Spirit creature | SpellDescription$ Destroy target non-Spirit creature.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rend_flesh.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/140.jpg
-End

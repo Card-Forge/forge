@@ -1,9 +1,0 @@
-Name:Inspired Charge
-ManaCost:2 W W
-Types:Instant
-Text:no text
-A:SP$ PumpAll | Cost$ 2 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Creatures you control get +2/+1 until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inspired_charge.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/19.jpg
-End

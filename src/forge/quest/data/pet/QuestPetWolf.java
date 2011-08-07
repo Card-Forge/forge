@@ -3,14 +3,21 @@ package forge.quest.data.pet;
 import forge.AllZone;
 import forge.Card;
 
-public class QuestPetWolf extends QuestPetAbstract{
+/**
+ * <p>QuestPetWolf class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
+public class QuestPetWolf extends QuestPetAbstract {
+    /** {@inheritDoc} */
     @Override
     public Card getPetCard() {
         Card petCard = new Card();
 
         petCard.setName("Wolf Pet");
-        petCard.setController(AllZone.HumanPlayer);
-        petCard.setOwner(AllZone.HumanPlayer);
+        petCard.setController(AllZone.getHumanPlayer());
+        petCard.setOwner(AllZone.getHumanPlayer());
 
         petCard.addColor("G");
         petCard.setToken(true);
@@ -19,46 +26,44 @@ public class QuestPetWolf extends QuestPetAbstract{
         petCard.addType("Wolf");
         petCard.addType("Pet");
 
-        if (level == 1)
-		{
-			petCard.setImageName("G 1 1 Wolf Pet");
+        if (level == 1) {
+            petCard.setImageName("G 1 1 Wolf Pet");
             petCard.setBaseAttack(1);
             petCard.setBaseDefense(1);
-		}
-		else if (level == 2)
-		{
+        } else if (level == 2) {
             petCard.setImageName("G 1 2 Wolf Pet");
             petCard.setBaseAttack(1);
             petCard.setBaseDefense(2);
-		}
-		else if (level == 3)
-		{
+        } else if (level == 3) {
             petCard.setImageName("G 2 2 Wolf Pet");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(2);
-		}
-		else if (level == 4)
-		{
+        } else if (level == 4) {
             petCard.setImageName("G 2 2 Wolf Pet Flanking");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(2);
             petCard.addIntrinsicKeyword("Flanking");
-		}
+        }
 
         return petCard;
     }
 
+    /**
+     * <p>Constructor for QuestPetWolf.</p>
+     */
     public QuestPetWolf() {
         super("Wolf",
                 "This ferocious animal may have been raised in captivity, but it has been trained to kill.",
                 4);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int[] getAllUpgradePrices() {
         return new int[]{250, 250, 500, 550};
     }
 
+    /** {@inheritDoc} */
     @Override
     public String[] getAllUpgradeDescriptions() {
         return new String[]{
@@ -69,15 +74,17 @@ public class QuestPetWolf extends QuestPetAbstract{
                 "You cannot train your wolf any further"};
     }
 
+    /** {@inheritDoc} */
     @Override
     public String[] getAllStats() {
         return new String[]{"You do not own a wolf",
-        "1/1, G",
-        "1/2, G",
-        "2/2, G",
-        "2/2, G, Flanking"};
+                "1/1, G",
+                "1/2, G",
+                "2/2, G",
+                "2/2, G, Flanking"};
     }
 
+    /** {@inheritDoc} */
     @Override
     public String[] getAllImageNames() {
         return new String[]{
@@ -86,6 +93,6 @@ public class QuestPetWolf extends QuestPetAbstract{
                 "g_1_2_wolf_pet_small.jpg",
                 "g_2_2_wolf_pet_small.jpg",
                 "g_2_2_wolf_pet_flanking_small.jpg"
-        };       
+        };
     }
 }

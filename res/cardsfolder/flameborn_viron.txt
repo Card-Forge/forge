@@ -1,9 +1,0 @@
-Name:Flameborn Viron
-ManaCost:4 R R
-Types:Creature Insect
-Text:no text
-PT:6/4
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flameborn_viron.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/83.jpg
-End

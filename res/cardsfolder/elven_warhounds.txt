@@ -1,9 +1,0 @@
-Name:Elven Warhounds
-ManaCost:3 G
-Types:Creature Hound
-Text:Whenever Elven Warhounds becomes blocked by a creature, put that creature on top of its owner's library.
-PT:2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_warhounds.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/119.jpg
-End

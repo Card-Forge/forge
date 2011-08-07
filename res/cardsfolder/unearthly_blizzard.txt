@@ -1,9 +1,0 @@
-Name:Unearthly Blizzard
-ManaCost:2 R
-Types:Sorcery Arcane
-Text:no text
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 1 | TargetMax$ 3 | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Up to three target creatures can't block this turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unearthly_blizzard.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/196.jpg
-End

@@ -1,9 +1,0 @@
-Name:Mind Knives
-ManaCost:1 B
-Types:Sorcery
-Text:no text
-A:SP$ Discard | Cost$ 1 B | ValidTgts$ Opponent | NumCards$ 1 | Mode$ Random | SpellDescription$ Target opponent discards a card at random.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_knives.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/23.jpg
-End

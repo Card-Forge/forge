@@ -1,8 +1,0 @@
-Name:Doubling Season
-ManaCost:4 G
-Types:Enchantment
-Text:If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.\r\nIf an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_season.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/158.jpg
-End

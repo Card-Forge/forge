@@ -1,8 +1,0 @@
-Name:Overwhelming Stampede
-ManaCost:3 G G
-Types:Sorcery
-Text:Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_stampede.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/189.jpg
-End

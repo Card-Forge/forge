@@ -1,9 +1,0 @@
-Name:Path of Anger's Flame
-ManaCost:2 R
-Types:Instant Arcane
-Text:no text
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/109.jpg
-End

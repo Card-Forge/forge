@@ -1,9 +1,0 @@
-Name:Planar Cleansing
-ManaCost:3 W W W
-Types:Sorcery
-Text:no text
-A:SP$ DestroyAll | Cost$ 3 W W W | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/24.jpg
-End

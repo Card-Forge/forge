@@ -1,49 +1,59 @@
 package forge.card.trigger;
 
-import java.util.HashMap;
-
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
+import java.util.HashMap;
+
+/**
+ * <p>Trigger_Untaps class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class Trigger_Untaps extends Trigger {
 
-	public Trigger_Untaps(HashMap<String, String> params, Card host) {
-		super(params, host);
-	}
+    /**
+     * <p>Constructor for Trigger_Untaps.</p>
+     *
+     * @param params a {@link java.util.HashMap} object.
+     * @param host a {@link forge.Card} object.
+     */
+    public Trigger_Untaps(HashMap<String, String> params, Card host) {
+        super(params, host);
+    }
 
-	@Override
-	public boolean performTest(HashMap<String, Object> runParams) 
-	{
-		Card untapper = (Card)runParams.get("Card");
+    /** {@inheritDoc} */
+    @Override
+    public boolean performTest(java.util.Map<String, Object> runParams) {
+        Card untapper = (Card) runParams.get("Card");
 
-		if(mapParams.containsKey("ValidCard"))
-		{
-			if(!untapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard))
-			{
-				return false;
-			}
-		}
-		
-		return true;
-	}
+        if (mapParams.containsKey("ValidCard")) {
+            if (!untapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+                return false;
+            }
+        }
 
-	@Override
-	public Trigger getCopy() {
-		Trigger copy = new Trigger_Untaps(mapParams,hostCard);
-		if(overridingAbility != null)
-		{
-			copy.setOverridingAbility(overridingAbility);
-		}
-		copy.setName(name);
+        return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Trigger getCopy() {
+        Trigger copy = new Trigger_Untaps(mapParams, hostCard);
+        if (overridingAbility != null) {
+            copy.setOverridingAbility(overridingAbility);
+        }
+        copy.setName(name);
         copy.setID(ID);
-		
-		return copy;
-	}
-	
-	@Override
-	public void setTriggeringObjects(SpellAbility sa)
-	{
-		sa.setTriggeringObject("Card",runParams.get("Card"));
-	}
+
+        return copy;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setTriggeringObjects(SpellAbility sa) {
+        sa.setTriggeringObject("Card", runParams.get("Card"));
+    }
 
 }

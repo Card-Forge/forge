@@ -1,9 +1,0 @@
-Name:Upheaval
-ManaCost:4 U U
-Types:Sorcery
-Text:no text
-A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all permanents to their owners' hands.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/upheaval.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/113.jpg
-End

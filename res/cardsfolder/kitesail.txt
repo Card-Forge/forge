@@ -1,9 +1,0 @@
-Name:Kitesail
-ManaCost:2
-Types:Artifact Equipment
-Text:Equipped creature gets +1/+0 and has flying.
-K:eqPump 2:+1/+0/Flying
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kitesail.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/126.jpg
-End

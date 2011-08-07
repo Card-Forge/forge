@@ -6,7 +6,6 @@ import arcane.ui.PlayArea;
 import arcane.ui.ViewPanel;
 import arcane.ui.util.Animation;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
@@ -19,8 +18,12 @@ import forge.gui.input.Input_PayManaCost_Ability;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import net.slightlymagic.braids.util.ImmutableIterableFrom;
 import org.jdesktop.swingx.JXMultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
+
+import com.google.code.jyield.Generator;
+import com.google.code.jyield.YieldUtils;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -39,156 +42,230 @@ import java.util.List;
 import static org.jdesktop.swingx.MultiSplitLayout.parseModel;
 
 
+/**
+ * <p>GuiDisplay4 class.</p>
+ *
+ * @author Forge
+ * @version $Id$
+ */
 public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewConstants, NewConstants.GUI.GuiDisplay, NewConstants.LANG.GuiDisplay {
+    /** Constant <code>serialVersionUID=4519302185194841060L</code> */
     private static final long serialVersionUID = 4519302185194841060L;
-   
-    private GuiInput          inputControl;
-   
-    Font                      statFont         = new Font("Dialog", Font.PLAIN, 12);
-    Font                      lifeFont         = new Font("Dialog", Font.PLAIN, 40);
-    Font                      checkboxFont     = new Font("Dialog", Font.PLAIN, 9);
 
-   
-    public static Color       greenColor               = new Color(0, 164, 0);
-   
-    private Action            HUMAN_GRAVEYARD_ACTION;
-    private Action            HUMAN_REMOVED_ACTION;
-    private Action            HUMAN_FLASHBACK_ACTION;
-    private Action            COMPUTER_GRAVEYARD_ACTION;
-    private Action            COMPUTER_REMOVED_ACTION;
-    private Action            CONCEDE_ACTION;
-    public Card               cCardHQ;
-   
+    private GuiInput inputControl;
+
+    Font statFont = new Font("Dialog", Font.PLAIN, 12);
+    Font lifeFont = new Font("Dialog", Font.PLAIN, 40);
+   // Font checkboxFont = new Font("Dialog", Font.PLAIN, 9);
+
+
+    /** Constant <code>greenColor</code> */
+    public static Color greenColor = new Color(0, 164, 0);
+
+    private Action HUMAN_GRAVEYARD_ACTION;
+    private Action HUMAN_REMOVED_ACTION;
+    private Action HUMAN_FLASHBACK_ACTION;
+    private Action COMPUTER_GRAVEYARD_ACTION;
+    private Action COMPUTER_REMOVED_ACTION;
+    private Action CONCEDE_ACTION;
+    //public Card cCardHQ;
+
     //private CardList multiBlockers = new CardList();
-   
+
+    /**
+     * <p>Constructor for GuiDisplay4.</p>
+     */
     public GuiDisplay4() {
-    	AllZone.Display = this;
+        AllZone.setDisplay(this);
         setupActions();
         initComponents();
-       
+
         addObservers();
         addListeners();
         addMenu();
         inputControl = new GuiInput();
     }
-   
+
+    /** {@inheritDoc} */
     @Override
     public void setVisible(boolean visible) {
-        if(visible) {
+        if (visible) {
             //causes an error if put in the constructor, causes some random null pointer exception
-            AllZone.InputControl.updateObservers();
-           
+            AllZone.getInputControl().updateObservers();
+
             //Use both so that when "un"maximizing, the frame isn't tiny
             setSize(1024, 740);
             setExtendedState(Frame.MAXIMIZED_BOTH);
         }
         super.setVisible(visible);
     }
-   
+
+    /** {@inheritDoc} */
     public void assignDamage(Card attacker, CardList blockers, int damage) {
-    	if (damage <= 0)
-    		return;
+        if (damage <= 0)
+            return;
         new Gui_MultipleBlockers4(attacker, blockers, damage, this);
     }
 
+    /**
+     * <p>setupActions.</p>
+     */
     private void setupActions() {
-        HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.Human_Graveyard, HUMAN_GRAVEYARD);
-        HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.Human_Exile, HUMAN_REMOVED);
-        HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.Human_Exile, HUMAN_FLASHBACK) {
-           
+        HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.getHumanGraveyard(), HUMAN_GRAVEYARD);
+        HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.getHumanExile(), HUMAN_REMOVED);
+        HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.getHumanGraveyard(), HUMAN_FLASHBACK) {
+
             private static final long serialVersionUID = 8120331222693706164L;
-           
+
             @Override
-            protected Card[] getCards() {
-                return CardFactoryUtil.getGraveyardActivationCards(AllZone.HumanPlayer).toArray();
+            protected Iterable<Card> getCardsAsIterable() {
+            	return new ImmutableIterableFrom<Card>(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getHumanPlayer()));
             }
-           
+            
             @Override
             protected void doAction(Card c) {
-            	if(!c.isLand())
-            	{
-	                SpellAbility[] sa = c.getSpellAbility();
-	                sa[1].setActivatingPlayer(AllZone.HumanPlayer);
-	                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
-            	}
-            	else	// PlayLand checks if the land can be played
-            		AllZone.HumanPlayer.playLand(c);
+            	AllZone.getGameAction().playCard(c);
             }
         };
-        COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.Computer_Graveyard, COMPUTER_GRAVEYARD);
-        COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.Computer_Exile, COMPUTER_REMOVED);
+        COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.getComputerGraveyard(), COMPUTER_GRAVEYARD);
+        COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.getComputerExile(), COMPUTER_REMOVED);
         CONCEDE_ACTION = new ConcedeAction();
     }
-   
+
+    /**
+     * <p>addMenu.</p>
+     */
     private void addMenu() {
-    	// Game Menu Creation
+        // Game Menu Creation
         Object[] obj = {
                 HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
                 COMPUTER_REMOVED_ACTION, new JSeparator(),
                 playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
                 CONCEDE_ACTION};
-       
+
         JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.MENU.TITLE));
-        for(Object o:obj) {
-            if(o instanceof ForgeAction) gameMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));
-            else if(o instanceof Action) gameMenu.add((Action) o);
-            else if(o instanceof Component) gameMenu.add((Component) o);
+        for (Object o : obj) {
+            if (o instanceof ForgeAction) gameMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));
+            else if (o instanceof Action) gameMenu.add((Action) o);
+            else if (o instanceof Component) gameMenu.add((Component) o);
             else throw new AssertionError();
         }
-       
+
         // Phase Menu Creation
-        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(MENU_BAR.PHASE.TITLE)); 
-        
+        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(MENU_BAR.PHASE.TITLE));
+
         JMenuItem aiLabel = new JMenuItem("Computer");
         JMenuItem humanLabel = new JMenuItem("Human");
-        
-        Component[] objPhases = { aiLabel, cbAIUpkeep, cbAIDraw, cbAIBeginCombat, 
-        						cbAIEndCombat, cbAIEndOfTurn, new JSeparator(), 
-        						humanLabel, cbHumanUpkeep, cbHumanDraw, cbHumanBeginCombat, 
-        						cbHumanEndCombat, cbHumanEndOfTurn };
-        
-        for(Component cmp:objPhases) {
+
+        Component[] objPhases = {aiLabel, cbAIUpkeep, cbAIDraw, cbAIBeginCombat,
+                cbAIEndCombat, cbAIEndOfTurn, new JSeparator(),
+                humanLabel, cbHumanUpkeep, cbHumanDraw, cbHumanBeginCombat,
+                cbHumanEndCombat, cbHumanEndOfTurn};
+
+        for (Component cmp : objPhases) {
             gamePhases.add(cmp);
         }
-        
+
         // Dev Mode Creation
         JMenu devMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.DEV.TITLE));
-        
+
         devMenu.setEnabled(Constant.Runtime.DevMode[0]);
-        
-        if (Constant.Runtime.DevMode[0]){
-        	canLoseByDecking.setSelected(Constant.Runtime.Mill[0]);
-        	
-            Action viewAIHand = new ZoneAction(AllZone.Computer_Hand, COMPUTER_HAND.BASE);
-            Action viewAILibrary = new ZoneAction(AllZone.Computer_Library, COMPUTER_LIBRARY.BASE);
-            Action viewHumanLibrary = new ZoneAction(AllZone.Human_Library, HUMAN_LIBRARY.BASE);
+
+        if (Constant.Runtime.DevMode[0]) {
+            canLoseByDecking.setSelected(Constant.Runtime.Mill[0]);
+
+            Action viewAIHand = new ZoneAction(AllZone.getComputerHand(), COMPUTER_HAND.BASE);
+            Action viewAILibrary = new ZoneAction(AllZone.getComputerLibrary(), COMPUTER_LIBRARY.BASE);
+            Action viewHumanLibrary = new ZoneAction(AllZone.getHumanLibrary(), HUMAN_LIBRARY.BASE);
             ForgeAction generateMana = new ForgeAction(MANAGEN) {
-				private static final long serialVersionUID = 7171104690016706405L;
+                private static final long serialVersionUID = 7171104690016706405L;
+
+                public void actionPerformed(ActionEvent arg0) {
+                    GuiDisplayUtil.devModeGenerateMana();
+                }
+            };
+
+            // + Battlefield setup +
+            ForgeAction setupBattleField = new ForgeAction(SETUPBATTLEFIELD) {
+                private static final long serialVersionUID = -6660930759092583160L;
+
+                public void actionPerformed(ActionEvent arg0) {
+                    GuiDisplayUtil.devSetupGameState();
+                }
+            };
+            // - Battlefield setup -
+
+            //DevMode Tutor
+            ForgeAction tutor = new ForgeAction(TUTOR) {
+                private static final long serialVersionUID = 2003222642609217705L;
+
+                public void actionPerformed(ActionEvent arg0) {
+                    GuiDisplayUtil.devModeTutor();
+                }
+            };
+            //end DevMode Tutor
+            
+            //DevMode AddCounter
+            ForgeAction addCounter = new ForgeAction(ADDCOUNTER) {
+				private static final long serialVersionUID = 3136264111882855268L;
 
 				public void actionPerformed(ActionEvent arg0) {
-					GuiDisplayUtil.devModeGenerateMana();
-				}
-			};
+            		GuiDisplayUtil.devModeAddCounter();
+            	}
+            };
+            //end DevMode AddCounter
 
-			// + Battlefield setup +
-			ForgeAction setupBattleField = new ForgeAction(SETUPBATTLEFIELD) {
-				private static final long serialVersionUID = -6660930759092583160L;
+            //DevMode Tap
+            ForgeAction tapPerm = new ForgeAction(TAPPERM) {
+				private static final long serialVersionUID = -6092045653540313527L;
 
 				public void actionPerformed(ActionEvent arg0) {
-					GuiDisplayUtil.devSetupGameState();
-				}
-			};
-			// - Battlefield setup -
+            		GuiDisplayUtil.devModeTapPerm();
+            	}
+            };
+            //end DevMode Tap
 
-            Object[] objDev = { GuiDisplay4.canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary, generateMana, setupBattleField };
-	        for(Object o:objDev) {
-	        	if(o instanceof ForgeAction) 
-	        		devMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));
-	        	else if (o instanceof Component)
-	        		devMenu.add((Component)o);
-	        	else if (o instanceof Action)
-	        		devMenu.add((Action)o);
-	        }
+            //DevMode Untap
+            ForgeAction untapPerm = new ForgeAction(UNTAPPERM) {
+				private static final long serialVersionUID = 5425291996157256656L;
+
+				public void actionPerformed(ActionEvent arg0) {
+            		GuiDisplayUtil.devModeUntapPerm();
+            	}
+            };
+            //end DevMode Untap
+            
+            //DevMode UnlimitedLand
+            ForgeAction unlimitedLand = new ForgeAction(NOLANDLIMIT) {
+				private static final long serialVersionUID = 2184353891062202796L;
+
+				public void actionPerformed(ActionEvent arg0) {
+            		GuiDisplayUtil.devModeUnlimitedLand();
+            	}
+            };
+            //end DevMode UnlimitedLand
+
+            Object[] objDev = {
+            		GuiDisplay4.canLoseByDecking,
+            		viewAIHand,
+            		viewAILibrary,
+            		viewHumanLibrary,
+            		generateMana,
+            		setupBattleField,
+            		tutor,
+            		addCounter,
+            		tapPerm,
+            		untapPerm,
+            		unlimitedLand
+            };
+            for (Object o : objDev) {
+                if (o instanceof ForgeAction)
+                    devMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));
+                else if (o instanceof Component)
+                    devMenu.add((Component) o);
+                else if (o instanceof Action)
+                    devMenu.add((Action) o);
+            }
         }
 
         JMenuBar menuBar = new JMenuBar();
@@ -198,125 +275,145 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         menuBar.add(new MenuItem_HowToPlay());
         this.setJMenuBar(menuBar);
     }//addMenu()
-    
-	public boolean canLoseByDecking(){
-		return canLoseByDecking.isSelected();
-	}
-   
+
+    /**
+     * <p>canLoseByDecking.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean canLoseByDecking() {
+        return canLoseByDecking.isSelected();
+    }
+
+    /**
+     * <p>getButtonOK.</p>
+     *
+     * @return a {@link forge.MyButton} object.
+     */
     public MyButton getButtonOK() {
         MyButton ok = new MyButton() {
             public void select() {
                 inputControl.selectButtonOK();
             }
-           
+
             public boolean isSelectable() {
                 return okButton.isEnabled();
             }
-           
+
             public void setSelectable(boolean b) {
                 okButton.setEnabled(b);
             }
-           
+
             public String getText() {
                 return okButton.getText();
             }
-           
+
             public void setText(String text) {
                 okButton.setText(text);
             }
-           
+
             public void reset() {
                 okButton.setText("OK");
             }
         };
-       
+
         return ok;
     }//getButtonOK()
-   
+
+    /**
+     * <p>getButtonCancel.</p>
+     *
+     * @return a {@link forge.MyButton} object.
+     */
     public MyButton getButtonCancel() {
         MyButton cancel = new MyButton() {
             public void select() {
                 inputControl.selectButtonCancel();
             }
-           
+
             public boolean isSelectable() {
                 return cancelButton.isEnabled();
             }
-           
+
             public void setSelectable(boolean b) {
                 cancelButton.setEnabled(b);
             }
-           
+
             public String getText() {
                 return cancelButton.getText();
             }
-           
+
             public void setText(String text) {
                 cancelButton.setText(text);
             }
-           
+
             public void reset() {
                 cancelButton.setText("Cancel");
             }
         };
         return cancel;
     }//getButtonCancel()
-   
+
+    /** {@inheritDoc} */
     public void showCombat(String message) {
         combatArea.setText(message);
     }
-   
+
+    /** {@inheritDoc} */
     public void showMessage(String s) {
-    	messageArea.setText(s);
-            
+        messageArea.setText(s);
+
         Border border = null;
         int thickness = 3;
-        
-        if (AllZone.Stack.size() > 0 && AllZone.Stack.peekInstance().getActivatingPlayer().isComputer())
-        	border = BorderFactory.createLineBorder(new Color(0, 255, 255), thickness);
+
+        if (AllZone.getStack().size() > 0 && AllZone.getStack().peekInstance().getActivatingPlayer().isComputer())
+            border = BorderFactory.createLineBorder(new Color(0, 255, 255), thickness);
         else if (s.contains("Main"))
-        	border = BorderFactory.createLineBorder(new Color(30, 0, 255), thickness);	
+            border = BorderFactory.createLineBorder(new Color(30, 0, 255), thickness);
         else if (s.contains("To Block"))
-        	border = BorderFactory.createLineBorder(new Color(13, 179, 0), thickness);
+            border = BorderFactory.createLineBorder(new Color(13, 179, 0), thickness);
         else if (s.contains("Play Instants and Abilities") || s.contains("Combat") || s.contains("Damage"))
-           	border = BorderFactory.createLineBorder(new Color(255, 174, 0), thickness);
+            border = BorderFactory.createLineBorder(new Color(255, 174, 0), thickness);
         else if (s.contains("Declare Attackers"))
-           	border = BorderFactory.createLineBorder(new Color(255, 0, 0), thickness);
+            border = BorderFactory.createLineBorder(new Color(255, 0, 0), thickness);
         else if (s.contains("Upkeep") || s.contains("Draw") || s.contains("End of Turn"))
-        	border = BorderFactory.createLineBorder(new Color(200, 0, 170), thickness);
+            border = BorderFactory.createLineBorder(new Color(200, 0, 170), thickness);
         else
-        	border = new EmptyBorder(1, 1, 1, 1);
-        
+            border = new EmptyBorder(1, 1, 1, 1);
+
         messageArea.setBorder(border);
     }
-   
+
+    /**
+     * <p>addListeners.</p>
+     */
     private void addListeners() {
         //mouse Card Detail
         playerHandPanel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
                 Card c = playerHandPanel.getCardFromMouseOverPanel();
-                if(c != null) {
+                if (c != null) {
                     setCard(c);
                 }
             }//mouseMoved
         });
-        
+
         playerPlayPanel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
                 Card c = playerPlayPanel.getCardFromMouseOverPanel();
-                if(c != null) {
+                if (c != null) {
                     setCard(c);
                 }
             }//mouseMoved
         });
-       
+
         oppPlayPanel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
                 Card c = oppPlayPanel.getCardFromMouseOverPanel();
-                if(c != null) {
+                if (c != null) {
                     setCard(c);
                 }
             }//mouseMoved
@@ -325,265 +422,270 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         //opponent life mouse listener
         oppLifeLabel.addMouseListener(new MouseAdapter() {
-        	
+
             @Override
             public void mousePressed(MouseEvent e) {
-                inputControl.selectPlayer(AllZone.ComputerPlayer);
+                inputControl.selectPlayer(AllZone.getComputerPlayer());
             }
         });
-        
+
         oppLifeLabel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
-                setCard(AllZone.Computer_ManaPool);
+                setCard(AllZone.getComputerManaPool());
             }//mouseMoved
         });
-       
+
         //self life mouse listener
         playerLifeLabel.addMouseListener(new MouseAdapter() {
-           
+
             @Override
             public void mousePressed(MouseEvent e) {
-                inputControl.selectPlayer(AllZone.HumanPlayer);
+                inputControl.selectPlayer(AllZone.getHumanPlayer());
             }
         });
-       
+
         //self play (land) ---- Mouse
         playerPlayPanel.addMouseListener(new MouseAdapter() {
-           
+
             @Override
             public void mousePressed(MouseEvent e) {
-            	Card c = playerPlayPanel.getCardFromMouseOverPanel();
-                if(c != null) {                   
-                    if(c.isUntapped()) {
-                        MP3Player mp3 = new MP3Player("tap.mp3");
-                        mp3.play();
-                    }
-                   
+                Card c = playerPlayPanel.getCardFromMouseOverPanel();
+                if (c != null) {
+
                     if (c.isTapped()
                             && (inputControl.input instanceof Input_PayManaCost || inputControl.input instanceof Input_PayManaCost_Ability)) {
-                    	arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
-                    	for (arcane.ui.CardPanel cp : cardPanel.attachedPanels) {                           
-                            if (cp.getCard().isUntapped()) {                              
+                        arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
+                        for (arcane.ui.CardPanel cp : cardPanel.attachedPanels) {
+                            if (cp.getCard().isUntapped()) {
                                 break;
                             }
                         }
                     }
-                    
-                    CardList att = new CardList(AllZone.Combat.getAttackers());
-                    if ((c.isTapped() ||c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
+
+                    CardList att = new CardList(AllZone.getCombat().getAttackers());
+                    if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                             && (inputControl.input instanceof Input_Attack)) {
-                    	arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
-                        for(arcane.ui.CardPanel cp : cardPanel.attachedPanels) {
-                            if(cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
+                        arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
+                        for (arcane.ui.CardPanel cp : cardPanel.attachedPanels) {
+                            if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
                                 break;
                             }
                         }
                     }
-                    
+
                     if (e.isMetaDown()) {
                         if (att.contains(c) && (inputControl.input instanceof Input_Attack)
-                        		&& !c.hasKeyword("CARDNAME attacks each turn if able."))  {
+                                && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
                             c.untap();
-                            AllZone.Combat.removeFromCombat(c);
+                            AllZone.getCombat().removeFromCombat(c);
+                        } else if (inputControl.input instanceof Input_Block) {
+                            if (c.getController().isHuman())
+                                AllZone.getCombat().removeFromCombat(c);
+                            ((Input_Block) inputControl.input).removeFromAllBlocking(c);
                         }
-                        else if (inputControl.input instanceof Input_Block) {
-                        	if(c.getController().isHuman())
-                        		AllZone.Combat.removeFromCombat(c);
-                        	((Input_Block)inputControl.input).removeFromAllBlocking(c);
-                        }
-                    } else inputControl.selectCard(c, AllZone.Human_Battlefield);
+                    } else inputControl.selectCard(c, AllZone.getHumanBattlefield());
                 }
             }
         });
 
         //self hand ---- Mouse
         playerHandPanel.addMouseListener(new MouseAdapter() {
-           
+
             @Override
             public void mousePressed(MouseEvent e) {
-                if(e.getButton() != MouseEvent.BUTTON1) return;
+                if (e.getButton() != MouseEvent.BUTTON1) return;
                 Card c = playerHandPanel.getCardFromMouseOverPanel();
-                if(c != null) {                
-                    inputControl.selectCard(c, AllZone.Human_Hand);
+                if (c != null) {
+                    inputControl.selectCard(c, AllZone.getHumanHand());
                     okButton.requestFocusInWindow();
                 }
             }
         });
-       
+
         //*****************************************************************
         //computer
-       
+
         //computer play (land) ---- Mouse
         oppPlayPanel.addMouseListener(new MouseAdapter() {
-           
+
             @Override
             public void mousePressed(MouseEvent e) {
-            	Card c = oppPlayPanel.getCardFromMouseOverPanel();
-                if(c != null) { 
-                    inputControl.selectCard(c, AllZone.Computer_Battlefield);
+                Card c = oppPlayPanel.getCardFromMouseOverPanel();
+                if (c != null) {
+                    inputControl.selectCard(c, AllZone.getComputerBattlefield());
                 }
             }
         });
-       
+
 
     }//addListener()
-   
+
+    /**
+     * <p>getCard.</p>
+     *
+     * @return a {@link forge.Card} object.
+     */
     public Card getCard() {
         return detail.getCard();
     }
-   
+
+    /** {@inheritDoc} */
     public void setCard(Card card) {
         detail.setCard(card);
         picture.setCard(card);
     }
-   
+
+    /**
+     * <p>addObservers.</p>
+     */
     private void addObservers() {
         //Human Hand, Graveyard, and Library totals
         {//make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(Observable a, Object b) {
-                    playerHandValue.setText("" + AllZone.Human_Hand.size());
-                    playerGraveValue.setText("" + AllZone.Human_Graveyard.size());
-                    playerLibraryValue.setText("" + AllZone.Human_Library.size());
-                    playerFBValue.setText("" + CardFactoryUtil.getGraveyardActivationCards(AllZone.HumanPlayer).size());
-                    playerRemovedValue.setText("" + AllZone.Human_Exile.size());
-                   
+                    playerHandValue.setText("" + AllZone.getHumanHand().size());
+                    playerGraveValue.setText("" + AllZone.getHumanGraveyard().size());
+                    playerLibraryValue.setText("" + AllZone.getHumanLibrary().size());
+                    playerFBValue.setText("" + CardFactoryUtil.getExternalZoneActivationCards(AllZone.getHumanPlayer()).size());
+                    playerRemovedValue.setText("" + AllZone.getHumanExile().size());
+
                 }
             };
-            AllZone.Human_Hand.addObserver(o);
-            AllZone.Human_Graveyard.addObserver(o);
-            AllZone.Human_Library.addObserver(o);
+            AllZone.getHumanHand().addObserver(o);
+            AllZone.getHumanGraveyard().addObserver(o);
+            AllZone.getHumanLibrary().addObserver(o);
         }
-       
+
         //opponent Hand, Graveyard, and Library totals
         {//make sure to not interfer with anything below, since this is a very long method
             Observer o = new Observer() {
                 public void update(Observable a, Object b) {
-                    oppHandValue.setText("" + AllZone.Computer_Hand.size());
-                    oppGraveValue.setText("" + AllZone.Computer_Graveyard.size());
-                    oppLibraryValue.setText("" + AllZone.Computer_Library.size());
-                    oppRemovedValue.setText("" + AllZone.Computer_Exile.size());
+                    oppHandValue.setText("" + AllZone.getComputerHand().size());
+                    oppGraveValue.setText("" + AllZone.getComputerGraveyard().size());
+                    oppLibraryValue.setText("" + AllZone.getComputerLibrary().size());
+                    oppRemovedValue.setText("" + AllZone.getComputerExile().size());
                 }
             };
-            AllZone.Computer_Hand.addObserver(o);
-            AllZone.Computer_Graveyard.addObserver(o);
-            AllZone.Computer_Library.addObserver(o);
+            AllZone.getComputerHand().addObserver(o);
+            AllZone.getComputerGraveyard().addObserver(o);
+            AllZone.getComputerLibrary().addObserver(o);
         }
-       
+
 
         //opponent life
-        oppLifeLabel.setText("" + AllZone.ComputerPlayer.getLife());
-        AllZone.ComputerPlayer.addObserver(new Observer() {
+        oppLifeLabel.setText("" + AllZone.getComputerPlayer().getLife());
+        AllZone.getComputerPlayer().addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int life = AllZone.ComputerPlayer.getLife();
+                int life = AllZone.getComputerPlayer().getLife();
                 oppLifeLabel.setText("" + life);
             }
         });
-        AllZone.ComputerPlayer.updateObservers();
-       
-        if (AllZone.QuestData != null) {
-                File base = ForgeProps.getFile(IMAGE_ICON);
-                String iconName = "";
-                if (Constant.Quest.oppIconName[0] != null) {
-                        iconName = Constant.Quest.oppIconName[0];
-                        File file = new File(base, iconName);
-                        ImageIcon icon = new ImageIcon(file.toString());
-                        oppIconLabel.setIcon(icon);
-                        oppIconLabel.setAlignmentX(100);
-                       
-                }
+        AllZone.getComputerPlayer().updateObservers();
+
+        if (AllZone.getQuestData() != null) {
+            File base = ForgeProps.getFile(IMAGE_ICON);
+            String iconName = "";
+            if (Constant.Quest.oppIconName[0] != null) {
+                iconName = Constant.Quest.oppIconName[0];
+                File file = new File(base, iconName);
+                ImageIcon icon = new ImageIcon(file.toString());
+                oppIconLabel.setIcon(icon);
+                oppIconLabel.setAlignmentX(100);
+
+            }
         }
-       
-        oppPCLabel.setText("Poison Counters: " + AllZone.ComputerPlayer.getPoisonCounters());
-        AllZone.ComputerPlayer.addObserver(new Observer() {
+
+        oppPCLabel.setText("Poison Counters: " + AllZone.getComputerPlayer().getPoisonCounters());
+        AllZone.getComputerPlayer().addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int pcs = AllZone.ComputerPlayer.getPoisonCounters();
+                int pcs = AllZone.getComputerPlayer().getPoisonCounters();
                 oppPCLabel.setText("Poison Counters: " + pcs);
             }
         });
-        AllZone.ComputerPlayer.updateObservers();
-       
+        AllZone.getComputerPlayer().updateObservers();
+
         //player life
-        playerLifeLabel.setText("" + AllZone.HumanPlayer.getLife());
-        AllZone.HumanPlayer.addObserver(new Observer() {
+        playerLifeLabel.setText("" + AllZone.getHumanPlayer().getLife());
+        AllZone.getHumanPlayer().addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int life = AllZone.HumanPlayer.getLife();
+                int life = AllZone.getHumanPlayer().getLife();
                 playerLifeLabel.setText("" + life);
             }
         });
-        AllZone.HumanPlayer.updateObservers();
-       
-        playerPCLabel.setText("Poison Counters: " + AllZone.HumanPlayer.getPoisonCounters());
-        AllZone.HumanPlayer.addObserver(new Observer() {
+        AllZone.getHumanPlayer().updateObservers();
+
+        playerPCLabel.setText("Poison Counters: " + AllZone.getHumanPlayer().getPoisonCounters());
+        AllZone.getHumanPlayer().addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int pcs = AllZone.HumanPlayer.getPoisonCounters();
+                int pcs = AllZone.getHumanPlayer().getPoisonCounters();
                 playerPCLabel.setText("Poison Counters: " + pcs);
             }
         });
-        AllZone.HumanPlayer.updateObservers();
-       
+        AllZone.getHumanPlayer().updateObservers();
+
         //stack
-        AllZone.Stack.addObserver(new Observer() {
+        AllZone.getStack().addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 stackPanel.removeAll();
-                MagicStack stack = AllZone.Stack;
+                MagicStack stack = AllZone.getStack();
                 int count = 1;
                 JLabel label;
-               
-                for(int i = stack.size() - 1; 0 <= i; i--) {
+
+                for (int i = stack.size() - 1; 0 <= i; i--) {
                     label = new JLabel("" + (count++) + ". " + stack.peekInstance(i).getStackDescription());
-                   
+
                     //update card detail
                     final CardPanel cardPanel = new CardPanel(stack.peekInstance(i).getSourceCard());
                     cardPanel.setLayout(new BorderLayout());
                     cardPanel.add(label);
                     cardPanel.addMouseMotionListener(new MouseMotionAdapter() {
-                       
+
                         @Override
                         public void mouseMoved(MouseEvent me) {
                             setCard(cardPanel.getCard());
                         }//mouseMoved
                     });
-                   
+
                     stackPanel.add(cardPanel);
                 }
-               
+
                 stackPanel.revalidate();
                 stackPanel.repaint();
-               
+
                 okButton.requestFocusInWindow();
-               
+
             }
         });
-        AllZone.Stack.updateObservers();
+        AllZone.getStack().updateObservers();
         //END, stack
-       
+
 
         //self hand
-        AllZone.Human_Hand.addObserver(new Observer() {
-            public void update(Observable a, Object b) {					
+        AllZone.getHumanHand().addObserver(new Observer() {
+            public void update(Observable a, Object b) {
                 PlayerZone pZone = (PlayerZone) a;
-                HandArea p = playerHandPanel;;
-               
+                HandArea p = playerHandPanel;
+                ;
+
                 Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
-               
+
                 List<Card> tmp, diff;
                 tmp = new ArrayList<Card>();
-                for(arcane.ui.CardPanel cpa : p.cardPanels)
-                        tmp.add(cpa.gameCard);
+                for (arcane.ui.CardPanel cpa : p.cardPanels)
+                    tmp.add(cpa.gameCard);
                 diff = new ArrayList<Card>(tmp);
                 diff.removeAll(Arrays.asList(c));
-                if(diff.size() == p.cardPanels.size())
-                	p.clear();
+                if (diff.size() == p.cardPanels.size())
+                    p.clear();
                 else {
-                	for(Card card : diff) {
-                		p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
-                	}
+                    for (Card card : diff) {
+                        p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
+                    }
                 }
                 diff = new ArrayList<Card>(Arrays.asList(c));
                 diff.removeAll(tmp);
-               
+
                 int fromZoneX = 0, fromZoneY = 0;
                 Rectangle pb = playerLibraryValue.getBounds();
                 Point zoneLocation = SwingUtilities.convertPoint(playerLibraryValue, Math.round(pb.width / 2.0f), Math.round(pb.height / 2.0f), layeredPane);
@@ -596,64 +698,67 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
                 int endWidth, endX, endY;
                 arcane.ui.CardPanel toPanel = null;
-               
-                for(Card card : diff) {
-                	toPanel = p.addCard(card);
-                	endWidth = toPanel.getCardWidth();
-                	Point toPos = SwingUtilities.convertPoint(playerHandPanel, toPanel.getCardLocation(), layeredPane);
-                	endX = toPos.x;
-                	endY = toPos.y;
-                	arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
-                	if(isShowing())
-                		Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel, layeredPane, 500);
-                	else
-                		Animation.moveCard(toPanel);
+
+                for (Card card : diff) {
+                    toPanel = p.addCard(card);
+                    endWidth = toPanel.getCardWidth();
+                    Point toPos = SwingUtilities.convertPoint(playerHandPanel, toPanel.getCardLocation(), layeredPane);
+                    endX = toPos.x;
+                    endY = toPos.y;
+                    arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
+                    if (isShowing())
+                        Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel, layeredPane, 500);
+                    else
+                        Animation.moveCard(toPanel);
                 }
             }
         });
-        AllZone.Human_Hand.updateObservers();
+        AllZone.getHumanHand().updateObservers();
         //END, self hand
-       
+
         //self play
-        AllZone.Human_Battlefield.addObserver(new Observer() {
+        AllZone.getHumanBattlefield().addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 PlayerZone pZone = (PlayerZone) a;
-               
+
                 Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
 
                 GuiDisplayUtil.setupPlayZone(playerPlayPanel, c);
             }
         });
-        AllZone.Human_Battlefield.updateObservers();
+        AllZone.getHumanBattlefield().updateObservers();
         //END - self play
-       
+
 
         //computer play
-        AllZone.Computer_Battlefield.addObserver(new Observer() {
+        AllZone.getComputerBattlefield().addObserver(new Observer() {
             public void update(Observable a, Object b) {
-            	PlayerZone pZone = (PlayerZone) a;
-               
+                PlayerZone pZone = (PlayerZone) a;
+
                 Card c[] = AllZoneUtil.getCardsInZone(pZone).toArray();
-               
+
                 GuiDisplayUtil.setupPlayZone(oppPlayPanel, c);
             }
         });
-        AllZone.Computer_Battlefield.updateObservers();
+        AllZone.getComputerBattlefield().updateObservers();
         //END - computer play
-       
+
     }//addObservers()
-   
+
+    /**
+     * <p>initComponents.</p>
+     */
     private void initComponents() {
         //Preparing the Frame
         setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
-        if(!Gui_NewGame.useLAFFonts.isSelected()) setFont(new Font("Times New Roman", 0, 16));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) setFont(new Font("Times New Roman", 0, 16));
         getContentPane().setLayout(new BorderLayout());
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent evt) {
                 concede();
             }
-           
+
             @Override
             public void windowClosed(WindowEvent e) {
                 File f = ForgeProps.getFile(LAYOUT_NEW);
@@ -662,12 +767,12 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(f)));
                     encoder.writeObject(layout);
                     encoder.close();
-                } catch(IOException ex) {
+                } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
         });
-       
+
         //making the multi split pane
         Node model;
         File f = ForgeProps.getFile(LAYOUT_NEW);
@@ -677,7 +782,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             decoder.close();
             pane.getMultiSplitLayout().setModel(model);
             //pane.getMultiSplitLayout().setFloatingDividers(false);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             model = parseModel(""//
                     + "(ROW "//
                     + "(COLUMN"//
@@ -697,11 +802,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         }
         pane.getMultiSplitLayout().setFloatingDividers(false);
         getContentPane().add(pane);
-       
+
         //adding the individual parts
-       
-        if(!Gui_NewGame.useLAFFonts.isSelected()) initFonts(pane);
-       
+
+        if (!Gui_NewGame.useLAFFonts.isSelected()) initFonts(pane);
+
         initMsgYesNo(pane);
         initOpp(pane);
         initStackCombat(pane);
@@ -709,38 +814,48 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         initZones(pane);
         initCardPicture(pane);
     }
-   
+
+    /**
+     * <p>initFonts.</p>
+     *
+     * @param pane a {@link javax.swing.JPanel} object.
+     */
     private void initFonts(JPanel pane) {
         messageArea.setFont(getFont());
-       
+
         oppLifeLabel.setFont(lifeFont);
-       
+
         oppPCLabel.setFont(statFont);
         oppLibraryLabel.setFont(statFont);
-       
+
         oppHandValue.setFont(statFont);
         oppLibraryValue.setFont(statFont);
         oppRemovedValue.setFont(statFont);
         oppGraveValue.setFont(statFont);
-       
+
         playerLifeLabel.setFont(lifeFont);
         playerPCLabel.setFont(statFont);
-       
+
         playerHandValue.setFont(statFont);
         playerLibraryValue.setFont(statFont);
         playerRemovedValue.setFont(statFont);
         playerGraveValue.setFont(statFont);
         playerFBValue.setFont(statFont);
-       
+
         combatArea.setFont(getFont());
     }
-   
+
+    /**
+     * <p>initMsgYesNo.</p>
+     *
+     * @param pane a {@link javax.swing.JPanel} object.
+     */
     private void initMsgYesNo(JPanel pane) {
-    	//messageArea.setBorder(BorderFactory.createEtchedBorder());
+        //messageArea.setBorder(BorderFactory.createEtchedBorder());
         messageArea.setEditable(false);
         messageArea.setLineWrap(true);
         messageArea.setWrapStyleWord(true);
-       
+
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -752,11 +867,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 okButtonActionPerformed(evt);
-               
-                if(AllZone.Phase.isNeedToNextPhase()) {
+
+                if (AllZone.getPhase().isNeedToNextPhase()) {
                     // moves to next turn
-                    AllZone.Phase.setNeedToNextPhase(false);
-                    AllZone.Phase.nextPhase();
+                    AllZone.getPhase().setNeedToNextPhase(false);
+                    AllZone.getPhase().nextPhase();
                 }
                 okButton.requestFocusInWindow();
             }
@@ -766,21 +881,21 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             public void keyPressed(KeyEvent arg0) {
                 // TODO make triggers on escape
                 int code = arg0.getKeyCode();
-                if(code == KeyEvent.VK_ESCAPE) {
+                if (code == KeyEvent.VK_ESCAPE) {
                     cancelButton.doClick();
                 }
             }
         });
-       
+
         okButton.requestFocusInWindow();
-       
+
         //if(okButton.isEnabled())
         //okButton.doClick();
         JPanel yesNoPanel = new JPanel(new FlowLayout());
         yesNoPanel.setBorder(new EtchedBorder());
         yesNoPanel.add(cancelButton);
         yesNoPanel.add(okButton);
-       
+
         JPanel panel = new JPanel(new BorderLayout());
         JScrollPane scroll = new JScrollPane(messageArea);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -788,39 +903,43 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         panel.add(yesNoPanel, BorderLayout.SOUTH);
         pane.add(new ExternalPanel(panel), "info");
     }
-   
+
+    /**
+     * <p>initOpp.</p>
+     *
+     * @param pane a {@link javax.swing.JPanel} object.
+     */
     private void initOpp(JPanel pane) {
         //oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-       
+
         //oppPCLabel.setHorizontalAlignment(SwingConstants.TOP);
         oppPCLabel.setForeground(greenColor);
-       
+
         JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_HAND.BUTTON), SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) oppHandLabel.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) oppHandLabel.setFont(statFont);
+
         JButton oppGraveButton = new JButton(COMPUTER_GRAVEYARD_ACTION);
         oppGraveButton.setText((String) COMPUTER_GRAVEYARD_ACTION.getValue("buttonText"));
         oppGraveButton.setMargin(new Insets(0, 0, 0, 0));
         oppGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) oppGraveButton.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) oppGraveButton.setFont(statFont);
 
 
         JPanel gravePanel = new JPanel(new BorderLayout());
         gravePanel.add(oppGraveButton, BorderLayout.EAST);
-       
+
         JButton oppRemovedButton = new JButton(COMPUTER_REMOVED_ACTION);
         oppRemovedButton.setText((String) COMPUTER_REMOVED_ACTION.getValue("buttonText"));
         oppRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         //removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) oppRemovedButton.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) oppRemovedButton.setFont(statFont);
+
 
         oppHandValue.setHorizontalAlignment(SwingConstants.LEADING);
         oppLibraryValue.setHorizontalAlignment(SwingConstants.LEADING);
         oppGraveValue.setHorizontalAlignment(SwingConstants.LEADING);
         oppRemovedValue.setHorizontalAlignment(SwingConstants.LEADING);
-       
+
         JPanel oppNumbersPanel = new JPanel(new GridLayout(0, 2, 3, 1));
         oppNumbersPanel.add(oppHandLabel);
         oppNumbersPanel.add(oppHandValue);
@@ -830,13 +949,13 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppNumbersPanel.add(oppLibraryValue);
         oppNumbersPanel.add(gravePanel);
         oppNumbersPanel.add(oppGraveValue);
-       
+
         oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-       
+
         JPanel oppIconLifePanel = new JPanel(new GridLayout(0, 1, 0, 0));
         oppIconLifePanel.add(oppIconLabel);
         oppIconLifePanel.add(oppLifeLabel);
-       
+
         JPanel oppPanel = new JPanel();
         oppPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMPUTER_TITLE)));
         oppPanel.setLayout(new BorderLayout());
@@ -847,71 +966,81 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         oppPanel.add(oppPCLabel, BorderLayout.AFTER_LAST_LINE);
         pane.add(new ExternalPanel(oppPanel), "compy");
     }
-   
+
+    /**
+     * <p>initStackCombat.</p>
+     *
+     * @param pane a {@link javax.swing.JPanel} object.
+     */
     private void initStackCombat(JPanel pane) {
         stackPanel.setLayout(new GridLayout(0, 1, 10, 10));
         JScrollPane stackPane = new JScrollPane(stackPanel);
         stackPane.setBorder(new EtchedBorder());
         pane.add(new ExternalPanel(stackPane), "stack");
-       
+
         combatArea.setEditable(false);
         combatArea.setLineWrap(true);
         combatArea.setWrapStyleWord(true);
-       
+
         JScrollPane combatPane = new JScrollPane(combatArea);
-       
+
         combatPane.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMBAT)));
         pane.add(new ExternalPanel(combatPane), "combat");
     }
-   
+
+    /**
+     * <p>initPlayer.</p>
+     *
+     * @param pane a {@link javax.swing.JPanel} object.
+     */
     private void initPlayer(JPanel pane) {
         //int fontSize = 12;
         playerLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-       
+
         playerPCLabel.setForeground(greenColor);
-       
+
         JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.BUTTON),
                 SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) playerLibraryLabel.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) playerLibraryLabel.setFont(statFont);
+
         JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HUMAN_HAND.TITLE), SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) playerHandLabel.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) playerHandLabel.setFont(statFont);
+
         //JLabel playerGraveLabel = new JLabel("Grave:", SwingConstants.TRAILING);
         JButton playerGraveButton = new JButton(HUMAN_GRAVEYARD_ACTION);
         playerGraveButton.setText((String) HUMAN_GRAVEYARD_ACTION.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
         playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) playerGraveButton.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) playerGraveButton.setFont(statFont);
+
 
         JButton playerFlashBackButton = new JButton(HUMAN_FLASHBACK_ACTION);
         playerFlashBackButton.setText((String) HUMAN_FLASHBACK_ACTION.getValue("buttonText"));
         playerFlashBackButton.setMargin(new Insets(0, 0, 0, 0));
         playerFlashBackButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) playerFlashBackButton.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) playerFlashBackButton.setFont(statFont);
+
 
         JPanel gravePanel = new JPanel(new BorderLayout());
         gravePanel.add(playerGraveButton, BorderLayout.EAST);
-       
+
         JPanel playerFBPanel = new JPanel(new BorderLayout());
         playerFBPanel.add(playerFlashBackButton, BorderLayout.EAST);
-       
+
         JButton playerRemovedButton = new JButton(HUMAN_REMOVED_ACTION);
         playerRemovedButton.setText((String) HUMAN_REMOVED_ACTION.getValue("buttonText"));
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         //removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) playerRemovedButton.setFont(statFont);
-       
+        if (!Gui_NewGame.useLAFFonts.isSelected()) playerRemovedButton.setFont(statFont);
+
         playerHandValue.setHorizontalAlignment(SwingConstants.LEADING);
         playerLibraryValue.setHorizontalAlignment(SwingConstants.LEADING);
         playerGraveValue.setHorizontalAlignment(SwingConstants.LEADING);
         playerFBValue.setHorizontalAlignment(SwingConstants.LEADING);
-       
+
         //playerRemovedValue.setFont(new Font("MS Sans Serif", 0, fontSize));
         playerRemovedValue.setHorizontalAlignment(SwingConstants.LEADING);
-       
+
         JPanel playerNumbersPanel = new JPanel(new GridLayout(0, 2, 5, 1));
         playerNumbersPanel.add(playerHandLabel);
         playerNumbersPanel.add(playerHandValue);
@@ -923,7 +1052,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerNumbersPanel.add(playerGraveValue);
         playerNumbersPanel.add(playerFBPanel);
         playerNumbersPanel.add(playerFBValue);
-       
+
         JPanel playerPanel = new JPanel();
         playerPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(HUMAN_TITLE)));
         playerPanel.setLayout(new BorderLayout());
@@ -932,402 +1061,289 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         playerPanel.add(playerPCLabel, BorderLayout.AFTER_LAST_LINE);
         pane.add(new ExternalPanel(playerPanel), "human");
     }
-   
+
+    /**
+     * <p>initZones.</p>
+     *
+     * @param pane a {@link javax.swing.JPanel} object.
+     */
     private void initZones(JPanel pane) {
-    	JScrollPane oppScroll = new JScrollPane();
- 		oppPlayPanel = new PlayArea(oppScroll, true);
- 		oppScroll.setBorder(BorderFactory.createEtchedBorder());
- 		oppScroll.setViewportView(oppPlayPanel);
+        JScrollPane oppScroll = new JScrollPane();
+        oppPlayPanel = new PlayArea(oppScroll, true);
+        oppScroll.setBorder(BorderFactory.createEtchedBorder());
+        oppScroll.setViewportView(oppPlayPanel);
         pane.add(new ExternalPanel(oppScroll), "compyPlay");
-    	
+
         JScrollPane playScroll = new JScrollPane();
-		playerPlayPanel = new PlayArea(playScroll, false);
-		playScroll.setBorder(BorderFactory.createEtchedBorder());
+        playerPlayPanel = new PlayArea(playScroll, false);
+        playScroll.setBorder(BorderFactory.createEtchedBorder());
         playScroll.setViewportView(playerPlayPanel);
         pane.add(new ExternalPanel(playScroll), "humanPlay");
-        
+
         JScrollPane handScroll = new JScrollPane();
         playerHandPanel = new HandArea(handScroll, this);
         playerHandPanel.setBorder(BorderFactory.createEtchedBorder());
         handScroll.setViewportView(playerHandPanel);
         pane.add(new ExternalPanel(handScroll), "humanHand");
     }
-   
+
+    /**
+     * <p>initCardPicture.</p>
+     *
+     * @param pane a {@link javax.swing.JPanel} object.
+     */
     private void initCardPicture(JPanel pane) {
         pane.add(new ExternalPanel(detail), "detail");
         pane.add(new ExternalPanel(picturePanel), "picture");
         picturePanel.setCardPanel(picture);
     }
-   
+
+    /**
+     * <p>cancelButtonActionPerformed.</p>
+     *
+     * @param evt a {@link java.awt.event.ActionEvent} object.
+     */
     private void cancelButtonActionPerformed(ActionEvent evt) {
         inputControl.selectButtonCancel();
     }
-   
+
+    /**
+     * <p>okButtonActionPerformed.</p>
+     *
+     * @param evt a {@link java.awt.event.ActionEvent} object.
+     */
     private void okButtonActionPerformed(ActionEvent evt) {
         inputControl.selectButtonOK();
     }
-   
+
     /**
      * Exit the Application
      */
     private void concede() {
-    	savePrefs();
+        savePrefs();
         dispose();
         Constant.Runtime.matchState.addLose();
         if (!Constant.Quest.fantasyQuest[0])
-                new Gui_WinLose();
+            new Gui_WinLose();
         else {
-                //new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
-                CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
-                CardList computerList = forge.quest.data.QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment);
-               
-                int humanLife = AllZone.QuestData.getLife();
-                int computerLife = 20;
-               
-                if (AllZone.QuestAssignment!=null)
-                        computerLife = AllZone.QuestAssignment.getComputerLife();
-                new Gui_WinLose(humanList, computerList, humanLife, computerLife);
+            //new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
+            CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(AllZone.getQuestData(), AllZone.getQuestAssignment());
+            CardList computerList = forge.quest.data.QuestUtil.getComputerCreatures(AllZone.getQuestData(), AllZone.getQuestAssignment());
+
+            int humanLife = AllZone.getQuestData().getLife();
+            int computerLife = 20;
+
+            if (AllZone.getQuestAssignment() != null)
+                computerLife = AllZone.getQuestAssignment().getComputerLife();
+            new Gui_WinLose(humanList, computerList, humanLife, computerLife);
         }
     }
-   
+
     // ********** Phase stuff in Display ******************
+    /** {@inheritDoc} */
     public boolean stopAtPhase(Player turn, String phase) {
-    	if (turn.isComputer()){
-    		if (phase.equals(Constant.Phase.End_Of_Turn))
-    			return cbAIEndOfTurn.isSelected();
-    		else if (phase.equals(Constant.Phase.Upkeep))
-    			return cbAIUpkeep.isSelected();
-    		else if (phase.equals(Constant.Phase.Draw))
-    			return cbAIDraw.isSelected();
-    		else if (phase.equals(Constant.Phase.Combat_Begin))
-    			return cbAIBeginCombat.isSelected();
-    		else if (phase.equals(Constant.Phase.Combat_End))
-    			return cbAIEndCombat.isSelected();
-    	}
-    	else{
-    		if (phase.equals(Constant.Phase.End_Of_Turn))
-    			return cbHumanEndOfTurn.isSelected();
-    		else if (phase.equals(Constant.Phase.Upkeep))
-    			return cbHumanUpkeep.isSelected();
-    		else if (phase.equals(Constant.Phase.Draw))
-    			return cbHumanDraw.isSelected();
-    		else if (phase.equals(Constant.Phase.Combat_Begin))
-    			return cbHumanBeginCombat.isSelected();
-    		else if (phase.equals(Constant.Phase.Combat_End))
-    			return cbHumanEndCombat.isSelected();
-    	}
-    	return true;
+        if (turn.isComputer()) {
+            if (phase.equals(Constant.Phase.End_Of_Turn))
+                return cbAIEndOfTurn.isSelected();
+            else if (phase.equals(Constant.Phase.Upkeep))
+                return cbAIUpkeep.isSelected();
+            else if (phase.equals(Constant.Phase.Draw))
+                return cbAIDraw.isSelected();
+            else if (phase.equals(Constant.Phase.Combat_Begin))
+                return cbAIBeginCombat.isSelected();
+            else if (phase.equals(Constant.Phase.Combat_End))
+                return cbAIEndCombat.isSelected();
+        } else {
+            if (phase.equals(Constant.Phase.End_Of_Turn))
+                return cbHumanEndOfTurn.isSelected();
+            else if (phase.equals(Constant.Phase.Upkeep))
+                return cbHumanUpkeep.isSelected();
+            else if (phase.equals(Constant.Phase.Draw))
+                return cbHumanDraw.isSelected();
+            else if (phase.equals(Constant.Phase.Combat_Begin))
+                return cbHumanBeginCombat.isSelected();
+            else if (phase.equals(Constant.Phase.Combat_End))
+                return cbHumanEndCombat.isSelected();
+        }
+        return true;
     }
-    
-    public boolean loadPrefs(){
-    	ForgePreferences fp = Gui_NewGame.preferences;
 
-    	cbAIUpkeep.setSelected(fp.bAIUpkeep);
-    	cbAIDraw.setSelected(fp.bAIDraw);
-    	cbAIEndOfTurn.setSelected(fp.bAIEOT);
-		cbAIBeginCombat.setSelected(fp.bAIBeginCombat);
-		cbAIEndCombat.setSelected(fp.bAIEndCombat);
-    	
-    	cbHumanUpkeep.setSelected(fp.bHumanUpkeep);
-    	cbHumanDraw.setSelected(fp.bHumanDraw);
-    	cbHumanEndOfTurn.setSelected(fp.bHumanEOT);
-		cbHumanBeginCombat.setSelected(fp.bHumanBeginCombat);
-		cbHumanEndCombat.setSelected(fp.bHumanEndCombat);
-		
-		canLoseByDecking.setSelected(fp.millingLossCondition);
+    /**
+     * <p>loadPrefs.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean loadPrefs() {
+        ForgePreferences fp = Gui_NewGame.preferences;
 
-    	return true;
+        cbAIUpkeep.setSelected(fp.bAIUpkeep);
+        cbAIDraw.setSelected(fp.bAIDraw);
+        cbAIEndOfTurn.setSelected(fp.bAIEOT);
+        cbAIBeginCombat.setSelected(fp.bAIBeginCombat);
+        cbAIEndCombat.setSelected(fp.bAIEndCombat);
+
+        cbHumanUpkeep.setSelected(fp.bHumanUpkeep);
+        cbHumanDraw.setSelected(fp.bHumanDraw);
+        cbHumanEndOfTurn.setSelected(fp.bHumanEOT);
+        cbHumanBeginCombat.setSelected(fp.bHumanBeginCombat);
+        cbHumanEndCombat.setSelected(fp.bHumanEndCombat);
+
+        canLoseByDecking.setSelected(fp.millingLossCondition);
+
+        return true;
     }
-    
-    public boolean savePrefs(){
-    	Constant.Runtime.Mill[0] = canLoseByDecking.isSelected();
-    	ForgePreferences fp = Gui_NewGame.preferences;
-    	
-    	fp.bAIUpkeep = cbAIUpkeep.isSelected();
-    	fp.bAIDraw = cbAIDraw.isSelected();
-    	fp.bAIEOT = cbAIEndOfTurn.isSelected();
-    	fp.bAIBeginCombat = cbAIBeginCombat.isSelected();
-    	fp.bAIEndCombat = cbAIEndCombat.isSelected();
-    	
-    	fp.bHumanUpkeep = cbHumanUpkeep.isSelected();
-    	fp.bHumanDraw = cbHumanDraw.isSelected();
-    	fp.bHumanEOT = cbHumanEndOfTurn.isSelected();
-    	fp.bHumanBeginCombat = cbHumanBeginCombat.isSelected();
-    	fp.bHumanEndCombat = cbHumanEndCombat.isSelected();
-    	
-    	fp.millingLossCondition = canLoseByDecking.isSelected();
-    	
-    	return true;
+
+    /**
+     * <p>savePrefs.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean savePrefs() {
+        Constant.Runtime.Mill[0] = canLoseByDecking.isSelected();
+        ForgePreferences fp = Gui_NewGame.preferences;
+
+        fp.bAIUpkeep = cbAIUpkeep.isSelected();
+        fp.bAIDraw = cbAIDraw.isSelected();
+        fp.bAIEOT = cbAIEndOfTurn.isSelected();
+        fp.bAIBeginCombat = cbAIBeginCombat.isSelected();
+        fp.bAIEndCombat = cbAIEndCombat.isSelected();
+
+        fp.bHumanUpkeep = cbHumanUpkeep.isSelected();
+        fp.bHumanDraw = cbHumanDraw.isSelected();
+        fp.bHumanEOT = cbHumanEndOfTurn.isSelected();
+        fp.bHumanBeginCombat = cbHumanBeginCombat.isSelected();
+        fp.bHumanEndCombat = cbHumanEndCombat.isSelected();
+
+        fp.millingLossCondition = canLoseByDecking.isSelected();
+
+        return true;
     }
-   
-	public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
-    
+
+    /** Constant <code>playsoundCheckboxForMenu</code> */
+    public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
+
     // Phases
-    public static JCheckBoxMenuItem cbAIUpkeep		       = new JCheckBoxMenuItem("Upkeep", true);
-    public static JCheckBoxMenuItem cbAIDraw		       = new JCheckBoxMenuItem("Draw", true);
-    public static JCheckBoxMenuItem cbAIEndOfTurn	       = new JCheckBoxMenuItem("End of Turn", true);
-    public static JCheckBoxMenuItem cbAIBeginCombat		   = new JCheckBoxMenuItem("Begin Combat", true);
-    public static JCheckBoxMenuItem cbAIEndCombat	       = new JCheckBoxMenuItem("End Combat", true); 
-    
-    public static JCheckBoxMenuItem cbHumanUpkeep		   = new JCheckBoxMenuItem("Upkeep", true);
-    public static JCheckBoxMenuItem cbHumanDraw			   = new JCheckBoxMenuItem("Draw", true);
-    public static JCheckBoxMenuItem cbHumanEndOfTurn	   = new JCheckBoxMenuItem("End of Turn", true);
-    public static JCheckBoxMenuItem cbHumanBeginCombat	   = new JCheckBoxMenuItem("Begin Combat", true);
-    public static JCheckBoxMenuItem cbHumanEndCombat	   = new JCheckBoxMenuItem("End Combat", true); 
-    
+    /** Constant <code>cbAIUpkeep</code> */
+    public static JCheckBoxMenuItem cbAIUpkeep = new JCheckBoxMenuItem("Upkeep", true);
+    /** Constant <code>cbAIDraw</code> */
+    public static JCheckBoxMenuItem cbAIDraw = new JCheckBoxMenuItem("Draw", true);
+    /** Constant <code>cbAIEndOfTurn</code> */
+    public static JCheckBoxMenuItem cbAIEndOfTurn = new JCheckBoxMenuItem("End of Turn", true);
+    /** Constant <code>cbAIBeginCombat</code> */
+    public static JCheckBoxMenuItem cbAIBeginCombat = new JCheckBoxMenuItem("Begin Combat", true);
+    /** Constant <code>cbAIEndCombat</code> */
+    public static JCheckBoxMenuItem cbAIEndCombat = new JCheckBoxMenuItem("End Combat", true);
+
+    /** Constant <code>cbHumanUpkeep</code> */
+    public static JCheckBoxMenuItem cbHumanUpkeep = new JCheckBoxMenuItem("Upkeep", true);
+    /** Constant <code>cbHumanDraw</code> */
+    public static JCheckBoxMenuItem cbHumanDraw = new JCheckBoxMenuItem("Draw", true);
+    /** Constant <code>cbHumanEndOfTurn</code> */
+    public static JCheckBoxMenuItem cbHumanEndOfTurn = new JCheckBoxMenuItem("End of Turn", true);
+    /** Constant <code>cbHumanBeginCombat</code> */
+    public static JCheckBoxMenuItem cbHumanBeginCombat = new JCheckBoxMenuItem("Begin Combat", true);
+    /** Constant <code>cbHumanEndCombat</code> */
+    public static JCheckBoxMenuItem cbHumanEndCombat = new JCheckBoxMenuItem("End Combat", true);
+
     // ********** End of Phase stuff in Display ******************
-    
+
     // ****** Developer Mode ******* 
-    
-    public static JCheckBoxMenuItem canLoseByDecking	   = new JCheckBoxMenuItem("Lose by Decking", true);
+
+    /** Constant <code>canLoseByDecking</code> */
+    public static JCheckBoxMenuItem canLoseByDecking = new JCheckBoxMenuItem("Lose by Decking", true);
 
     // *****************************
-    
-   
-    JXMultiSplitPane                pane                     = new JXMultiSplitPane();
-    JButton                         cancelButton             = new JButton();
-    JButton                         okButton                 = new JButton();
-    JTextArea                       messageArea              = new JTextArea(1, 10);
-    JTextArea                       combatArea               = new JTextArea();
-    JPanel                          stackPanel               = new JPanel();
-    PlayArea                        oppPlayPanel             = null;
-    PlayArea                        playerPlayPanel          = null;
-    HandArea                        playerHandPanel          = null;
-    JPanel                          cdPanel                  = new JPanel();
-    JLabel                          oppLifeLabel             = new JLabel();
-    JLabel                                                      oppIconLabel                     = new JLabel();
-    JLabel                          playerLifeLabel          = new JLabel();
-    JLabel                          oppPCLabel               = new JLabel();
-    JLabel                          playerPCLabel            = new JLabel();
-    JLabel                          oppLibraryLabel          = new JLabel(
-                                                                     ForgeProps.getLocalized(COMPUTER_LIBRARY.BUTTON),
-                                                                     SwingConstants.TRAILING);
-    JLabel                          oppHandValue             = new JLabel();
-    JLabel                          oppLibraryValue          = new JLabel();
-    JLabel                          oppGraveValue            = new JLabel();
-    JLabel                          oppRemovedValue          = new JLabel();
-    JLabel                          playerHandValue          = new JLabel();
-    JLabel                          playerLibraryValue       = new JLabel();
-    JLabel                          playerGraveValue         = new JLabel();
-    JLabel                          playerFBValue            = new JLabel();
-    JLabel                          playerRemovedValue       = new JLabel();
-   
-    CardDetailPanel                 detail                   = new CardDetailPanel(null);
-    ViewPanel                       picturePanel             = new ViewPanel();
-    arcane.ui.CardPanel             picture                  = new arcane.ui.CardPanel(null);
-    JLayeredPane                    layeredPane              = SwingUtilities.getRootPane(this).getLayeredPane();
-   
+
+
+    JXMultiSplitPane pane = new JXMultiSplitPane();
+    JButton cancelButton = new JButton();
+    JButton okButton = new JButton();
+    JTextArea messageArea = new JTextArea(1, 10);
+    JTextArea combatArea = new JTextArea();
+    JPanel stackPanel = new JPanel();
+    PlayArea oppPlayPanel = null;
+    PlayArea playerPlayPanel = null;
+    HandArea playerHandPanel = null;
+    //JPanel cdPanel = new JPanel();
+    JLabel oppLifeLabel = new JLabel();
+    JLabel oppIconLabel = new JLabel();
+    JLabel playerLifeLabel = new JLabel();
+    JLabel oppPCLabel = new JLabel();
+    JLabel playerPCLabel = new JLabel();
+    JLabel oppLibraryLabel = new JLabel(
+            ForgeProps.getLocalized(COMPUTER_LIBRARY.BUTTON),
+            SwingConstants.TRAILING);
+    JLabel oppHandValue = new JLabel();
+    JLabel oppLibraryValue = new JLabel();
+    JLabel oppGraveValue = new JLabel();
+    JLabel oppRemovedValue = new JLabel();
+    JLabel playerHandValue = new JLabel();
+    JLabel playerLibraryValue = new JLabel();
+    JLabel playerGraveValue = new JLabel();
+    JLabel playerFBValue = new JLabel();
+    JLabel playerRemovedValue = new JLabel();
+
+    CardDetailPanel detail = new CardDetailPanel(null);
+    ViewPanel picturePanel = new ViewPanel();
+    arcane.ui.CardPanel picture = new arcane.ui.CardPanel(null);
+    JLayeredPane layeredPane = SwingUtilities.getRootPane(this).getLayeredPane();
+
     private class ZoneAction extends ForgeAction {
         private static final long serialVersionUID = -5822976087772388839L;
-        private PlayerZone        zone;
-        private String            title;
-       
+        private PlayerZone zone;
+        private String title;
+
         public ZoneAction(PlayerZone zone, String property) {
             super(property);
             title = ForgeProps.getLocalized(property + "/title");
             this.zone = zone;
         }
-       
+
         public void actionPerformed(ActionEvent e) {
-            Card[] c = getCards();
-           
-            if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
-           
-            if(c.length == 0) GuiUtils.getChoiceOptional(title, new String[] {"no cards"});
+            Generator<Card> c = YieldUtils.toGenerator(getCardsAsIterable());
+
+            if (AllZone.getNameChanger().shouldChangeCardName()) {
+            	c = AllZone.getNameChanger().changeCard(c);
+            }
+
+            Iterator<Card> iter = YieldUtils.toIterable(c).iterator();
+            
+            if (!iter.hasNext()) {
+            	GuiUtils.getChoiceOptional(title, new String[]{"no cards"});
+            }
             else {
-                Card choice = GuiUtils.getChoiceOptional(title, c);
-                if(choice != null) doAction(choice);
+                Card choice = GuiUtils.getChoiceOptional(title, iter);
+                if (choice != null) doAction(choice);
             }
         }
-       
-        /*
-        protected PlayerZone getZone() {
-            return zone;
-        }
-        */
-        protected Card[] getCards() {
+
+        /**
+         * @deprecated
+         * @see #getCardsAsIterable()
+         */
+        @SuppressWarnings("unused")
+		protected Card[] getCards() {
             return AllZoneUtil.getCardsInZone(zone).toArray();
         }
-       
-        protected void doAction(Card c) {}
+        
+        protected Iterable<Card> getCardsAsIterable() {
+        	return new ImmutableIterableFrom<Card>(AllZoneUtil.getCardsInZone(zone));
+        }
+
+        protected void doAction(Card c) {
+        }
     }
-   
+
     private class ConcedeAction extends ForgeAction {
-       
+
         private static final long serialVersionUID = -6976695235601916762L;
-       
+
         public ConcedeAction() {
             super(CONCEDE);
         }
-       
+
         public void actionPerformed(ActionEvent e) {
             concede();
-        }
-    }
-}
-
-//very hacky
-
-
-class Gui_MultipleBlockers4 extends JFrame {
-    private static final long serialVersionUID = 7622818310877381045L;
-   
-    private int               assignDamage;
-    private Card              att;
-    private CardList          blockers;
-    private CardContainer     guiDisplay;
-   
-    private BorderLayout      borderLayout1    = new BorderLayout();
-    private JPanel            mainPanel        = new JPanel();
-    private JScrollPane       jScrollPane1     = new JScrollPane();
-    private JLabel            numberLabel      = new JLabel();
-    private JPanel            jPanel3          = new JPanel();
-    private BorderLayout      borderLayout3    = new BorderLayout();
-    private JPanel            creaturePanel    = new JPanel();
-   
-   
-    public static void main(String[] args) {
-        CardList list = new CardList();
-        list.add(AllZone.CardFactory.getCard("Elvish Piper", null));
-        list.add(AllZone.CardFactory.getCard("Lantern Kami", null));
-        list.add(AllZone.CardFactory.getCard("Frostling", null));
-        list.add(AllZone.CardFactory.getCard("Frostling", null));
-       
-        for(int i = 0; i < 2; i++)
-            new Gui_MultipleBlockers4(null, list, i + 1, null);
-    }
-   
-    Gui_MultipleBlockers4(Card attacker, CardList creatureList, int damage, CardContainer display) {
-        this();
-        assignDamage = damage;
-        updateDamageLabel();//update user message about assigning damage
-        guiDisplay = display;
-        att = attacker;
-        blockers = creatureList;
-       
-        for(int i = 0; i < creatureList.size(); i++)
-            creaturePanel.add(new CardPanel(creatureList.get(i)));
-       
-        if (att.hasKeyword("Trample")) {
-                Card player = new Card();
-                player.setName("Player");
-                player.addIntrinsicKeyword("Shroud");
-                player.addIntrinsicKeyword("Indestructible");
-                creaturePanel.add(new CardPanel(player));
-        }
-       
-        JDialog dialog = new JDialog(this, true);
-        dialog.setTitle("Multiple Blockers");
-        dialog.setContentPane(mainPanel);
-        dialog.setSize(470, 260);
-        dialog.setVisible(true);
-    }
-   
-    public Gui_MultipleBlockers4() {
-        try {
-            jbInit();
-        } catch(Exception ex) {
-            ErrorViewer.showError(ex);
-        }
-        //    setSize(470, 280);
-        //    show();
-    }
-   
-    private void jbInit() throws Exception {
-        this.getContentPane().setLayout(borderLayout1);
-        this.setTitle("Multiple Blockers");
-        mainPanel.setLayout(null);
-        numberLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        numberLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-        numberLabel.setText("Assign");
-        numberLabel.setBounds(new Rectangle(52, 30, 343, 24));
-        jPanel3.setLayout(borderLayout3);
-        jPanel3.setBounds(new Rectangle(26, 75, 399, 114));
-        creaturePanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                creaturePanel_mousePressed(e);
-            }
-        });
-        creaturePanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                creaturePanel_mouseMoved(e);
-            }
-        });
-        mainPanel.add(jPanel3, null);
-        jPanel3.add(jScrollPane1, BorderLayout.CENTER);
-        mainPanel.add(numberLabel, null);
-        jScrollPane1.getViewport().add(creaturePanel, null);
-        this.getContentPane().add(mainPanel, BorderLayout.CENTER);
-    }
-   
-    void okButton_actionPerformed(ActionEvent e) {
-        dispose();
-    }
-   
-    void creaturePanel_mousePressed(MouseEvent e) {
-        Object o = creaturePanel.getComponentAt(e.getPoint());
-        if(o instanceof CardPanel) {
-               
-                boolean assignedDamage = true;
-               
-            CardContainer cardPanel = (CardContainer) o;
-            Card c = cardPanel.getCard();
-            //c.setAssignedDamage(c.getAssignedDamage() + 1);
-            CardList cl = new CardList();
-            cl.add(att);
-           
-            boolean assignedLethalDamageToAllBlockers = true;
-                for (Card crd : blockers )
-                {
-                        if (crd.getLethalDamage() > 0 
-                        		&& (!att.hasKeyword("Deathtouch") || crd.getTotalAssignedDamage() < 1 ))
-                            assignedLethalDamageToAllBlockers = false;
-                }
-               
-           
-            if (c.getName().equals("Player") 
-            		&& att.hasKeyword("Trample")
-            		&& assignedLethalDamageToAllBlockers)
-            {
-                AllZone.Combat.addDefendingDamage(1, att);
-                c.addAssignedDamage(1, att);
-            }
-            else if (!c.getName().equals("Player")){
-                c.addAssignedDamage(1, att);
-            }
-            else
-                assignedDamage = false;
-           
-            if (assignedDamage)
-            {
-                    assignDamage--;
-                    updateDamageLabel();
-                    if(assignDamage == 0) dispose();
-            }
-           
-            if(guiDisplay != null) {
-                guiDisplay.setCard(c);
-            }
-        }
-        //reduce damage, show new user message, exit if necessary
-       
-    }//creaturePanel_mousePressed()
-   
-    void updateDamageLabel() {
-        numberLabel.setText("Assign " + assignDamage + " damage - click on card to assign damage");
-    }
-   
-    void creaturePanel_mouseMoved(MouseEvent e) {
-        Object o = creaturePanel.getComponentAt(e.getPoint());
-        if(o instanceof CardPanel) {
-            CardContainer cardPanel = (CardContainer) o;
-            Card c = cardPanel.getCard();
-           
-            if(guiDisplay != null) {
-                guiDisplay.setCard(c);
-            }
         }
     }
 }

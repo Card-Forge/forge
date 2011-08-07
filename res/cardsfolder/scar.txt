@@ -1,9 +1,0 @@
-Name:Scar
-ManaCost:BR
-Types:Instant
-Text:no text
-A:SP$ PutCounter | Cost$ BR | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scar.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/194.jpg
-End

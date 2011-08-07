@@ -1,8 +1,0 @@
-Name:Burn the Impure
-ManaCost:1 R
-Types:Instant
-Text:no text
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_the_impure.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/59.jpg
-End

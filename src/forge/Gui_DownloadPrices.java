@@ -1,271 +1,262 @@
 package forge;
 
-import java.awt.Point;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.LANG.Gui_DownloadPrices.DOWNLOADPRICES;
+import forge.properties.NewConstants.QUEST;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.QUEST;
-import forge.properties.NewConstants.LANG.Gui_DownloadPrices.DOWNLOADPRICES;
-
+/**
+ * <p>Gui_DownloadPrices class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class Gui_DownloadPrices extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel jContentPane = null;
-	private JButton jButton = null;
+    /** Constant <code>serialVersionUID=1L</code> */
+    private static final long serialVersionUID = 1L;
+    private JPanel jContentPane = null;
+    private JButton jButton = null;
 
-	/**
-	 * This is the default constructor
-	 */
-	public Gui_DownloadPrices() {
-		super();
-		initialize();
-	}
+    /**
+     * This is the default constructor
+     */
+    public Gui_DownloadPrices() {
+        super();
+        initialize();
+    }
 
-	/**
-	 * This method initializes this
-	 * 
-	 * @return void
-	 */
-	private void initialize() {
-		this.setSize(386, 200);
-		setContentPane(getJContentPane());
-		setTitle(ForgeProps.getLocalized(DOWNLOADPRICES.TITLE));
-	}
+    /**
+     * This method initializes this
+     */
+    private void initialize() {
+        this.setSize(386, 200);
+        setContentPane(getJContentPane());
+        setTitle(ForgeProps.getLocalized(DOWNLOADPRICES.TITLE));
+    }
 
-	/**
-	 * This method initializes jContentPane
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getJContentPane() {
-		if (jContentPane == null) {
-			jContentPane = new JPanel();
-			jContentPane.setLayout(null);
-			jContentPane.add(getJButton(), null);
-		}
-		return jContentPane;
-	}
+    /**
+     * This method initializes jContentPane
+     *
+     * @return javax.swing.JPanel
+     */
+    private JPanel getJContentPane() {
+        if (jContentPane == null) {
+            jContentPane = new JPanel();
+            jContentPane.setLayout(null);
+            jContentPane.add(getJButton(), null);
+        }
+        return jContentPane;
+    }
 
-	/**
-	 * This method initializes jButton
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getJButton() {
-		if (jButton == null) {
-			jButton = new JButton();
-			jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.START_UPDATE));
-			jButton.setLocation(new Point(120, 46));
-			jButton.setSize(158, 89);
+    /**
+     * This method initializes jButton
+     *
+     * @return javax.swing.JButton
+     */
+    private JButton getJButton() {
+        if (jButton == null) {
+            jButton = new JButton();
+            jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.START_UPDATE));
+            jButton.setLocation(new Point(120, 46));
+            jButton.setSize(158, 89);
 
-			jButton.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					if (jButton.getText().equals("Done!"))
-						Gui_DownloadPrices.this.dispose();
+            jButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    if (jButton.getText().equals("Done!"))
+                        Gui_DownloadPrices.this.dispose();
 
-					BufferedInputStream in = null;
-					BufferedOutputStream out = null;
+                    BufferedInputStream in = null;
+                    BufferedOutputStream out = null;
 
-					File f = new File(".//res//tmppl.txt");
-					String url = "http://www.magictraders.com/pricelists/current-magic-excel.txt";
-					Proxy p = Proxy.NO_PROXY;
-					byte[] buf = new byte[1024];
-					int x = 0;
-					String s = "Downloading";
-					
-					try {
-						in = new BufferedInputStream(new URL(url)
-								.openConnection(p).getInputStream());
-						out = new BufferedOutputStream(new FileOutputStream(f));
+                    File f = new File(".//res//tmppl.txt");
+                    String url = "http://www.magictraders.com/pricelists/current-magic-excel.txt";
+                    Proxy p = Proxy.NO_PROXY;
+                    byte[] buf = new byte[1024];
+                    int x = 0;
+                    String s = "Downloading";
 
-						jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.DOWNLOADING));
-						jContentPane.paintImmediately(jButton.getBounds());
+                    try {
+                        in = new BufferedInputStream(new URL(url)
+                                .openConnection(p).getInputStream());
+                        out = new BufferedOutputStream(new FileOutputStream(f));
 
-						
-						
-						int len = 0;
-						while ((len = in.read(buf)) != -1) {
-							out.write(buf, 0, len);
+                        jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.DOWNLOADING));
+                        jContentPane.paintImmediately(jButton.getBounds());
 
-							if (++x % 50 == 0) {
-								s += ".";
-								jButton.setText(s);
-								jContentPane.paintImmediately(jButton
-										.getBounds());
 
-								if (x >= 300) {
-									x = 0;
-									s = "Downloading";
-								}
-							}
-						}
-						in.close();
-						out.flush();
-						out.close();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} finally {
-						try {
-							if (in != null)
-								in.close();
-							if (out != null)
-								out.close();
-						} catch (IOException ex) {
-							// TODO: handle exception
-						}
-					}// while - read and write file
+                        int len = 0;
+                        while ((len = in.read(buf)) != -1) {
+                            out.write(buf, 0, len);
 
-					FileReader fr = null;
-					FileWriter fw = null;
-					try {
-						fr = new FileReader(".//res//tmppl.txt");
+                            if (++x % 50 == 0) {
+                                s += ".";
+                                jButton.setText(s);
+                                jContentPane.paintImmediately(jButton
+                                        .getBounds());
 
-						BufferedReader inBR = new BufferedReader(fr);
-						String line = null;
-	
-						HashMap<String, Integer> prices = new HashMap<String, Integer>();
-						
-						line = inBR.readLine();
-						line = inBR.readLine();
+                                if (x >= 300) {
+                                    x = 0;
+                                    s = "Downloading";
+                                }
+                            }
+                        }
+                        in.close();
+                        out.flush();
+                        out.close();
+                    } catch (IOException e1) {
+                        return;
+                    } finally {
+                        try {
+                            if (in != null)
+                                in.close();
+                            if (out != null)
+                                out.close();
+                        } catch (IOException ex) {
+                            return;
+                        }
+                    }// while - read and write file
 
-						jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.COMPILING));
-						jContentPane.paintImmediately(jButton.getBounds());
+                    FileReader fr = null;
+                    FileWriter fw = null;
+                    try {
+                        fr = new FileReader(".//res//tmppl.txt");
 
-						x = 0;
-						s = "Compiling";
-						while (line != null && !line.equals("")) {
-							String ll[] = line.split("\\|");
+                        BufferedReader inBR = new BufferedReader(fr);
+                        String line = null;
 
-							if (ll[0].contains("(")) {
-								int indx = ll[0].indexOf(" (");
-								ll[0] = ll[0].substring(0, indx);
-							}
+                        HashMap<String, Integer> prices = new HashMap<String, Integer>();
 
-							Float np = Float.parseFloat(ll[3]) * 100;
-							int inp = np.intValue();
+                        line = inBR.readLine();
+                        line = inBR.readLine();
 
-							if (prices.containsKey(ll[0])) {
-								int cp = prices.get(ll[0]);
-								float fScl = 0;
+                        jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.COMPILING));
+                        jContentPane.paintImmediately(jButton.getBounds());
 
-								if (cp >= inp) {
-									fScl = 1 - (float) inp / (float) cp;
-									if (fScl > .333)
-										cp = cp / 2;
-								} else {
-									fScl = 1 - (float) cp / (float) inp;
-									if (fScl > .333)
-										inp = inp / 2;
-								}
+                        x = 0;
+                        s = "Compiling";
+                        while (line != null && !line.equals("")) {
+                            String ll[] = line.split("\\|");
 
-								int ap = (cp + inp) / 2;
-								if (ap < 7)
-									ap += 10;
-								prices.put(ll[0], ap);
-							} else {
-								if (inp < 7)
-									inp += 10;
+                            if (ll[0].contains("(")) {
+                                int indx = ll[0].indexOf(" (");
+                                ll[0] = ll[0].substring(0, indx);
+                            }
 
-								prices.put(ll[0], inp);
-							}
+                            Float np = Float.parseFloat(ll[3]) * 100;
+                            int inp = np.intValue();
 
-							line = inBR.readLine();
-							// System.out.println(line);
+                            if (prices.containsKey(ll[0])) {
+                                int cp = prices.get(ll[0]);
+                                float fScl = 0;
 
-							if (++x % 100 == 0) {
-								s += ".";
-								jButton.setText(s);
-								jContentPane.paintImmediately(jButton
-										.getBounds());
+                                if (cp >= inp) {
+                                    fScl = 1 - (float) inp / (float) cp;
+                                    if (fScl > .333)
+                                        cp = cp / 2;
+                                } else {
+                                    fScl = 1 - (float) cp / (float) inp;
+                                    if (fScl > .333)
+                                        inp = inp / 2;
+                                }
 
-								if (x >= 500) {
-									x = 0;
-									s = "Compiling";
-								}
-							}
-						}
+                                int ap = (cp + inp) / 2;
+                                if (ap < 7)
+                                    ap += 10;
+                                prices.put(ll[0], ap);
+                            } else {
+                                if (inp < 7)
+                                    inp += 10;
 
-						String pfn = ForgeProps.getFile(QUEST.PRICE)
-								.getAbsolutePath();
-						String pfnb = pfn.replace(".txt", ".bak");
-						File ff = new File(pfn);
-						ff.renameTo(new File(pfnb));
+                                prices.put(ll[0], inp);
+                            }
 
-						fw = new FileWriter(ForgeProps
-								.getFile(QUEST.PRICE));
-						BufferedWriter outBW = new BufferedWriter(fw);
+                            line = inBR.readLine();
+                            // System.out.println(line);
 
-						// Collection<String> keys = prices.keySet();
-						ArrayList<String> keys = new ArrayList<String>();
-						keys.addAll(prices.keySet());
-						Collections.sort(keys);
+                            if (++x % 100 == 0) {
+                                s += ".";
+                                jButton.setText(s);
+                                jContentPane.paintImmediately(jButton
+                                        .getBounds());
 
-						for (int i = 0; i < keys.size(); i++) {
-							// keys.add(key);
-							String k = keys.get(i);
-							if (k.equals("Plains") || k.equals("Island")
-									|| k.equals("Swamp")
-									|| k.equals("Mountain")
-									|| k.equals("Forest"))
-								outBW.write(k + "=5\r\n");
+                                if (x >= 500) {
+                                    x = 0;
+                                    s = "Compiling";
+                                }
+                            }
+                        }
 
-							else if (k.equals("Snow-Covered Plains")
-									|| k.equals("Snow-Covered Island")
-									|| k.equals("Snow-Covered Swamp")
-									|| k.equals("Snow-Covered Mountain")
-									|| k.equals("Snow-Covered Forest"))
-								outBW.write(k + "=10\r\n");
-							else
-								outBW.write(keys.get(i) + "="
-										+ prices.get(keys.get(i)) + "\r\n");
+                        String pfn = ForgeProps.getFile(QUEST.PRICE)
+                                .getAbsolutePath();
+                        String pfnb = pfn.replace(".txt", ".bak");
+                        File ff = new File(pfn);
+                        ff.renameTo(new File(pfnb));
 
-							if (i % 100 == 0)
-								outBW.flush();
-						}
+                        fw = new FileWriter(ForgeProps
+                                .getFile(QUEST.PRICE));
+                        BufferedWriter outBW = new BufferedWriter(fw);
 
-						outBW.flush();
-						outBW.close();
-						fw.close();
+                        // Collection<String> keys = prices.keySet();
+                        ArrayList<String> keys = new ArrayList<String>();
+                        keys.addAll(prices.keySet());
+                        Collections.sort(keys);
 
-						jButton.setText("Done!");
-						fr.close();
-						f.delete();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} finally {
-						try {
-							if (fr != null)
-								fr.close();
-							if (fw != null)
-								fw.close();
-						} catch (IOException ex) {
-							// TODO: handle exception
-						}
-					}
-					return;
-				}
-			});
-		}
-		return jButton;
-	}
+                        for (int i = 0; i < keys.size(); i++) {
+                            // keys.add(key);
+                            String k = keys.get(i);
+                            if (k.equals("Plains") || k.equals("Island")
+                                    || k.equals("Swamp")
+                                    || k.equals("Mountain")
+                                    || k.equals("Forest"))
+                                outBW.write(k + "=5\r\n");
+
+                            else if (k.equals("Snow-Covered Plains")
+                                    || k.equals("Snow-Covered Island")
+                                    || k.equals("Snow-Covered Swamp")
+                                    || k.equals("Snow-Covered Mountain")
+                                    || k.equals("Snow-Covered Forest"))
+                                outBW.write(k + "=10\r\n");
+                            else
+                                outBW.write(keys.get(i) + "="
+                                        + prices.get(keys.get(i)) + "\r\n");
+
+                            if (i % 100 == 0)
+                                outBW.flush();
+                        }
+
+                        outBW.flush();
+                        outBW.close();
+                        fw.close();
+
+                        jButton.setText("Done!");
+                        fr.close();
+                        f.delete();
+                    } catch (IOException e1) {
+                        return;
+                    } finally {
+                        try {
+                            if (fr != null)
+                                fr.close();
+                            if (fw != null)
+                                fw.close();
+                        } catch (IOException ex) {
+                            return;
+                        }
+                    }
+                    return;
+                }
+            });
+        }
+        return jButton;
+    }
 
 } // @jve:decl-index=0:visual-constraint="10,10"

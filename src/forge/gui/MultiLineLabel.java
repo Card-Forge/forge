@@ -24,7 +24,7 @@
 package forge.gui;
 
 import javax.swing.*;
-import java.awt.Rectangle;
+import java.awt.*;
 
 
 /**
@@ -33,22 +33,30 @@ import java.awt.Rectangle;
  * {@link MultiLineLabelUI}, the default UI delegate of this component. The text
  * in the label can be horizontally and vertically aligned, relative to the
  * bounds of the component.
- * 
+ *
  * @author Samuel Sjoberg, http://samuelsjoberg.com
  * @version 1.0.0
  */
 public class MultiLineLabel extends JLabel {
 
-    /** Default serial version UID. */
+    /**
+     * Default serial version UID.
+     */
     private static final long serialVersionUID = 1L;
 
-    /** Horizontal text alignment. */
+    /**
+     * Horizontal text alignment.
+     */
     private int halign = LEFT;
 
-    /** Vertical text alignment. */
+    /**
+     * Vertical text alignment.
+     */
     private int valign = CENTER;
 
-    /** Cache to save heap allocations. */
+    /**
+     * Cache to save heap allocations.
+     */
     private Rectangle bounds;
 
     /**
@@ -61,16 +69,19 @@ public class MultiLineLabel extends JLabel {
 
     /**
      * Creates a new label with <code>text</code> value.
-     * 
-     * @param text
-     *            the value of the label
+     *
+     * @param text the value of the label
      */
     public MultiLineLabel(String text) {
         this();
         setText(text);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     *
+     * @return a {@link java.awt.Rectangle} object.
+     */
     public Rectangle getBounds() {
         if (bounds == null) {
             bounds = new Rectangle();
@@ -80,9 +91,8 @@ public class MultiLineLabel extends JLabel {
 
     /**
      * Set the vertical text alignment.
-     * 
-     * @param alignment
-     *            vertical alignment
+     *
+     * @param alignment vertical alignment
      */
     public void setVerticalTextAlignment(int alignment) {
         firePropertyChange("verticalTextAlignment", valign, alignment);
@@ -91,9 +101,8 @@ public class MultiLineLabel extends JLabel {
 
     /**
      * Set the horizontal text alignment.
-     * 
-     * @param alignment
-     *            horizontal alignment
+     *
+     * @param alignment horizontal alignment
      */
     public void setHorizontalTextAlignment(int alignment) {
         firePropertyChange("horizontalTextAlignment", halign, alignment);
@@ -102,7 +111,7 @@ public class MultiLineLabel extends JLabel {
 
     /**
      * Get the vertical text alignment.
-     * 
+     *
      * @return vertical text alignment
      */
     public int getVerticalTextAlignment() {
@@ -111,7 +120,7 @@ public class MultiLineLabel extends JLabel {
 
     /**
      * Get the horizontal text alignment.
-     * 
+     *
      * @return horizontal text alignment
      */
     public int getHorizontalTextAlignment() {

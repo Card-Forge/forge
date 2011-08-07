@@ -1,9 +1,0 @@
-Name:Aeolipile
-ManaCost:2
-Types:Artifact
-Text:no text
-A:AB$ DealDamage | Cost$ 1 T Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aeolipile.jpg
-SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/166.jpg
-End

@@ -1,8 +1,0 @@
-Name:Intuition
-ManaCost:2 U
-Types:Instant
-Text:Search your library for any three cards and reveal them. An opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/intuition.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/70.jpg
-End

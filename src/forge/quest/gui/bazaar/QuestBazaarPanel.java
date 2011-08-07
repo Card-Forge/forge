@@ -5,19 +5,24 @@ import forge.quest.gui.QuestAbstractPanel;
 import forge.quest.gui.QuestFrame;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * <p>QuestBazaarPanel class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class QuestBazaarPanel extends QuestAbstractPanel {
-	private static final long serialVersionUID = 1418913010051869222L;
-	
+    /** Constant <code>serialVersionUID=1418913010051869222L</code> */
+    private static final long serialVersionUID = 1418913010051869222L;
+
+    /** Constant <code>stallList</code> */
     static List<QuestBazaarStall> stallList = new ArrayList<QuestBazaarStall>();
 
     JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -29,6 +34,11 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
 
     CardLayout stallLayout = new CardLayout();
 
+    /**
+     * <p>Constructor for QuestBazaarPanel.</p>
+     *
+     * @param mainFrame a {@link forge.quest.gui.QuestFrame} object.
+     */
     public QuestBazaarPanel(QuestFrame mainFrame) {
         super(mainFrame);
         this.setLayout(new BorderLayout());
@@ -39,26 +49,25 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
             stallList.add(new QuestBazaarStall(QuestStallManager.getStall(stallName)));
         }
 
-        buttonPanelMain.setLayout(new GridLayout(stallList.size(),1));
-        
+        buttonPanelMain.setLayout(new GridLayout(stallList.size(), 1));
+
         stallPanel.setLayout(stallLayout);
         List<JToggleButton> buttonList = new LinkedList<JToggleButton>();
 
-        double maxWidth=0;
-        double maxHeight=0;
+        double maxWidth = 0;
+        double maxHeight = 0;
 
-        for(QuestBazaarStall stall:stallList){
+        for (QuestBazaarStall stall : stallList) {
             JToggleButton stallButton = new JToggleButton(stall.getStallName(), stall.getStallIcon());
             stallButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
-                    if (QuestBazaarPanel.this.selectedStall == e.getSource())
-                    {
+                    if (QuestBazaarPanel.this.selectedStall == e.getSource()) {
                         QuestBazaarPanel.this.selectedStall.setSelected(true);
                         return;
                     }
 
-                    if (QuestBazaarPanel.this.selectedStall != null){
+                    if (QuestBazaarPanel.this.selectedStall != null) {
                         QuestBazaarPanel.this.selectedStall.setSelected(false);
                     }
 
@@ -69,11 +78,11 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
 
             Dimension preferredSize = stallButton.getPreferredSize();
 
-            if (preferredSize.getWidth() > maxWidth){
+            if (preferredSize.getWidth() > maxWidth) {
                 maxWidth = preferredSize.getWidth();
             }
 
-            if (preferredSize.getHeight() > maxHeight){
+            if (preferredSize.getHeight() > maxHeight) {
                 maxHeight = preferredSize.getHeight();
             }
 
@@ -86,9 +95,9 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
         buttonList.get(0).setSelected(true);
         this.selectedStall = buttonList.get(0);
 
-        Dimension max = new Dimension((int)maxWidth, (int)maxHeight);
+        Dimension max = new Dimension((int) maxWidth, (int) maxHeight);
 
-        for (JToggleButton button : buttonList){
+        for (JToggleButton button : buttonList) {
             button.setMinimumSize(max);
         }
 
@@ -109,20 +118,25 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
 
     }
 
+    /**
+     * <p>showStall.</p>
+     *
+     * @param source a {@link java.lang.String} object.
+     */
     private void showStall(String source) {
         stallLayout.show(stallPanel, source);
     }
 
     /**
      * Slightly hackish, but should work.
-     * @return The last created instance of this object, used for updates after purchases.
      */
-    static void refreshLastInstance(){
-        for (QuestBazaarStall stall: stallList){
+    static void refreshLastInstance() {
+        for (QuestBazaarStall stall : stallList) {
             stall.updateItems();
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void refreshState() {
         refreshLastInstance();

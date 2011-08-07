@@ -1,415 +1,509 @@
-
 package forge.properties;
 
 
 /**
  * NewConstants.java
- * 
+ *
  * Created on 22.08.2009
  */
 
-
 /**
- * property keys
- * 
- * @version V0.0 22.08.2009
+ * These are mostly property keys.
+ *
  * @author Clemens Koza
+ * @version V0.0 22.08.2009
  */
 public interface NewConstants {
     //General properties
-    public static final String MAIL          = "program/mail";
-    public static final String FORUM         = "program/forum";
-    public static final String VERSION       = "program/version";
-    
-    public static final String SHOW2CDECK    = "showdeck/2color";
-    
-    public static final String DECKS         = "decks";
-    public static final String BOOSTER_DECKS = "booster-decks";
-    public static final String NEW_DECKS     = "decks-dir";
-    
-    public static final String TOKENS        = "tokens";
-    public static final String CARD_PICTURES = "card-pictures";
-    public static final String CARD_PICTURES_TOKEN_LQ = "card-pictures_token_lq";
-    public static final String CARD_PICTURES_A = "card-pictures_a";
-    public static final String CARD_PICTURES_B = "card-pictures_b";
-    public static final String CARD_PICTURES_C = "card-pictures_c";
-    public static final String CARD_PICTURES_D = "card-pictures_d";
-    public static final String CARD_PICTURES_E = "card-pictures_e";
-    public static final String CARD_PICTURES_F = "card-pictures_f";
-    public static final String CARD_PICTURES_G = "card-pictures_g";
-    public static final String CARD_PICTURES_H = "card-pictures_h";
-    public static final String CARD_PICTURES_I = "card-pictures_i";
-    public static final String CARD_PICTURES_J = "card-pictures_j";
-    public static final String CARD_PICTURES_K = "card-pictures_k";
-    public static final String CARD_PICTURES_L = "card-pictures_l";
-    public static final String CARD_PICTURES_M = "card-pictures_m";
-    public static final String CARD_PICTURES_N = "card-pictures_n";
-    public static final String CARD_PICTURES_O = "card-pictures_o";
-    public static final String CARD_PICTURES_P = "card-pictures_p";
-    public static final String CARD_PICTURES_Q = "card-pictures_q";
-    public static final String CARD_PICTURES_R = "card-pictures_r";
-    public static final String CARD_PICTURES_S = "card-pictures_s";
-    public static final String CARD_PICTURES_T = "card-pictures_t";
-    public static final String CARD_PICTURES_U = "card-pictures_u";
-    public static final String CARD_PICTURES_V = "card-pictures_v";
-    public static final String CARD_PICTURES_W = "card-pictures_w";
-    public static final String CARD_PICTURES_X = "card-pictures_x";
-    public static final String CARD_PICTURES_Y = "card-pictures_y";
-    public static final String CARD_PICTURES_Z = "card-pictures_z";
-    public static final String CARD_PICTURES_OTHER = "card-pictures_other";
-    public static final String CARD_PICTURES_TOKEN_HQ = "card-pictures_token_hq";
-    public static final String CARDS         = "cards";
-    public static final String CARDSFOLDER   = "cardsfolder";
-    public static final String REMOVED       = "removed-cards";
-    public static final String NAME_MUTATOR  = "name-mutator";
-    public static final String BOOSTERDATA   = "boosterdata";
-    
-    public static final String IMAGE_BASE    = "image/base";
-    public static final String IMAGE_TOKEN   = "image/token";
-    public static final String IMAGE_ICON    = "image/icon";
-    public static final String SOUND_BASE    = "sound/base";
-    
+    /** Constant <code>HOW_TO_REPORT_BUGS_URL = "program/howToReportBugsURL"</code>. */
+    String HOW_TO_REPORT_BUGS_URL = "program/howToReportBugsURL";
+    /** Constant <code>VERSION="program/version"</code>. */
+    String VERSION = "program/version";
+
+    /** Constant <code>SHOW2CDECK="showdeck/2color"</code>. */
+    String SHOW2CDECK = "showdeck/2color";
+
+    /** Constant <code>DECKS="decks"</code>. */
+    String DECKS = "decks";
+    /** Constant <code>BOOSTER_DECKS="booster-decks"</code>. */
+    String BOOSTER_DECKS = "booster-decks";
+    /** Constant <code>NEW_DECKS="decks-dir"</code>. */
+    String NEW_DECKS = "decks-dir";
+
+    /** Constant <code>TOKENS="tokens"</code>. */
+    String TOKENS = "tokens";
+    /** Constant <code>CARD_PICTURES="card-pictures"</code>. */
+    String CARD_PICTURES = "card-pictures";
+    /** Constant <code>CARD_PICTURES_TOKEN_LQ="card-pictures_token_lq"</code>. */
+    String CARD_PICTURES_TOKEN_LQ = "card-pictures_token_lq";
+    /** Constant <code>CARD_PICTURES_A="card-pictures_a"</code>. */
+    String CARD_PICTURES_A = "card-pictures_a";
+    /** Constant <code>CARD_PICTURES_B="card-pictures_b"</code>. */
+    String CARD_PICTURES_B = "card-pictures_b";
+    /** Constant <code>CARD_PICTURES_C="card-pictures_c"</code>. */
+    String CARD_PICTURES_C = "card-pictures_c";
+    /** Constant <code>CARD_PICTURES_D="card-pictures_d"</code>. */
+    String CARD_PICTURES_D = "card-pictures_d";
+    /** Constant <code>CARD_PICTURES_E="card-pictures_e"</code>. */
+    String CARD_PICTURES_E = "card-pictures_e";
+    /** Constant <code>CARD_PICTURES_F="card-pictures_f"</code>. */
+    String CARD_PICTURES_F = "card-pictures_f";
+    /** Constant <code>CARD_PICTURES_G="card-pictures_g"</code>. */
+    String CARD_PICTURES_G = "card-pictures_g";
+    /** Constant <code>CARD_PICTURES_H="card-pictures_h"</code>. */
+    String CARD_PICTURES_H = "card-pictures_h";
+    /** Constant <code>CARD_PICTURES_I="card-pictures_i"</code>. */
+    String CARD_PICTURES_I = "card-pictures_i";
+    /** Constant <code>CARD_PICTURES_J="card-pictures_j"</code>. */
+    String CARD_PICTURES_J = "card-pictures_j";
+    /** Constant <code>CARD_PICTURES_K="card-pictures_k"</code>. */
+    String CARD_PICTURES_K = "card-pictures_k";
+    /** Constant <code>CARD_PICTURES_L="card-pictures_l"</code>. */
+    String CARD_PICTURES_L = "card-pictures_l";
+    /** Constant <code>CARD_PICTURES_M="card-pictures_m"</code>. */
+    String CARD_PICTURES_M = "card-pictures_m";
+    /** Constant <code>CARD_PICTURES_N="card-pictures_n"</code>. */
+    String CARD_PICTURES_N = "card-pictures_n";
+    /** Constant <code>CARD_PICTURES_O="card-pictures_o"</code>. */
+    String CARD_PICTURES_O = "card-pictures_o";
+    /** Constant <code>CARD_PICTURES_P="card-pictures_p"</code>. */
+    String CARD_PICTURES_P = "card-pictures_p";
+    /** Constant <code>CARD_PICTURES_Q="card-pictures_q"</code>. */
+    String CARD_PICTURES_Q = "card-pictures_q";
+    /** Constant <code>CARD_PICTURES_R="card-pictures_r"</code>. */
+    String CARD_PICTURES_R = "card-pictures_r";
+    /** Constant <code>CARD_PICTURES_S="card-pictures_s"</code>. */
+    String CARD_PICTURES_S = "card-pictures_s";
+    /** Constant <code>CARD_PICTURES_T="card-pictures_t"</code>. */
+    String CARD_PICTURES_T = "card-pictures_t";
+    /** Constant <code>CARD_PICTURES_U="card-pictures_u"</code>. */
+    String CARD_PICTURES_U = "card-pictures_u";
+    /** Constant <code>CARD_PICTURES_V="card-pictures_v"</code>. */
+    String CARD_PICTURES_V = "card-pictures_v";
+    /** Constant <code>CARD_PICTURES_W="card-pictures_w"</code>. */
+    String CARD_PICTURES_W = "card-pictures_w";
+    /** Constant <code>CARD_PICTURES_X="card-pictures_x"</code>. */
+    String CARD_PICTURES_X = "card-pictures_x";
+    /** Constant <code>CARD_PICTURES_Y="card-pictures_y"</code>. */
+    String CARD_PICTURES_Y = "card-pictures_y";
+    /** Constant <code>CARD_PICTURES_Z="card-pictures_z"</code>. */
+    String CARD_PICTURES_Z = "card-pictures_z";
+    /** Constant <code>CARD_PICTURES_OTHER="card-pictures_other"</code>. */
+    String CARD_PICTURES_OTHER = "card-pictures_other";
+    /** Constant <code>CARD_PICTURES_TOKEN_HQ="card-pictures_token_hq"</code>. */
+    String CARD_PICTURES_TOKEN_HQ = "card-pictures_token_hq";
+    /** Constant <code>CARDS="cards"</code>. */
+    String CARDS = "cards";
+    /** Constant <code>CARDSFOLDER="cardsfolder"</code>. */
+    String CARDSFOLDER = "cardsfolder";
+    /** Constant <code>REMOVED="removed-cards"</code>. */
+    String REMOVED = "removed-cards";
+    /** Constant <code>NAME_MUTATOR="name-mutator"</code>. */
+    String NAME_MUTATOR = "name-mutator";
+    /** Constant <code>BOOSTERDATA="boosterdata"</code>. */
+    String BOOSTERDATA = "boosterdata";
+
+    /** Constant <code>IMAGE_BASE="image/base"</code>. */
+    String IMAGE_BASE = "image/base";
+    /** Constant <code>IMAGE_TOKEN="image/token"</code>. */
+    String IMAGE_TOKEN = "image/token";
+    /** Constant <code>IMAGE_ICON="image/icon"</code>. */
+    String IMAGE_ICON = "image/icon";
+    /** Constant <code>SOUND_BASE="sound/base"</code>. */
+    String SOUND_BASE = "sound/base";
+
     /**
-     * properties for regular game
+     * These properties are for a regular game.
      */
     public static interface REGULAR {
-        public static final String COMMON   = "regular/common";
-        public static final String UNCOMMON = "regular/uncommon";
-        public static final String RARE     = "regular/rare";
+        /** Property path for a common card. */
+        String COMMON = "regular/common";
+        /** Property path for an uncommon card. */
+        String UNCOMMON = "regular/uncommon";
+        /** Property path for a rare card. */
+        String RARE = "regular/rare";
     }
+
     /**
-     * properties for booster draft
+     * These properties are for a booster draft.
      */
     public static interface DRAFT {
-    	public static final String COMMON 	= "draft/common";
-    	public static final String UNCOMMON = "draft/uncommon";
-        public static final String RARE     = "draft/rare";
+        /** Property path for a common card. */
+        String COMMON = "draft/common";
+        /** Property path for an uncommon card. */
+        String UNCOMMON = "draft/uncommon";
+        /** Property path for a rare card. */
+        String RARE = "draft/rare";
     }
-    
+
     /**
-     * properties for quest game
+     * These properties are for a quest game.
      */
     public static interface QUEST {
-        public static final String COMMON   = "quest/common";
-        public static final String UNCOMMON = "quest/uncommon";
-        public static final String RARE     = "quest/rare";
-        
-        public static final String PRICE    = "quest/price";
-        public static final String QUESTS   = "quest/quests";
-        
-        public static final String EASY     = "quest/easy";
-        public static final String MEDIUM   = "quest/medium";
-        public static final String HARD     = "quest/hard";
-        public static final String VERYHARD = "quest/veryhard";
-        
-        public static final String DATA     = "quest/data";
-        public static final String PREFS    = "quest/prefs";
-        
-        public static final String DECKS    = "quest/decks-dir";
-        public static final String XMLDATA  = "quest/data-xml";
+        /** Property path for a common card. */
+        String COMMON = "quest/common";
+        /** Property path for an uncommon card. */
+        String UNCOMMON = "quest/uncommon";
+        /** Property path for a rare card. */
+        String RARE = "quest/rare";
+
+        /** Property path for price. */
+        String PRICE = "quest/price";
+        /** Property path for quests. */
+        String QUESTS = "quest/quests";
+
+        /** Property path for easy quest difficulty. */
+        String EASY = "quest/easy";
+        /** Property path for medium quest difficulty. */
+        String MEDIUM = "quest/medium";
+        /** Property path for hard quest difficulty. */
+        String HARD = "quest/hard";
+        /** Property path for very hard quest difficulty. */
+        String VERYHARD = "quest/veryhard";
+
+        String DATA = "quest/data";
+        String PREFS = "quest/prefs";
+
+        String DECKS = "quest/decks-dir";
+        String XMLDATA = "quest/data-xml";
     }
-    
+
     /**
-     * gui-related properties
+     * These are GUI-related properties.
      */
     public static interface GUI {
         public static interface GuiDisplay {
-            public static final String LAYOUT = "gui/Display";
-            public static final String LAYOUT_NEW = "gui/Display/new";
+            String LAYOUT = "gui/Display";
+            String LAYOUT_NEW = "gui/Display/new";
         }
-        
+
         public static interface GuiDeckEditor {
-            public static final String LAYOUT = "gui/DeckEditor";
+            String LAYOUT = "gui/DeckEditor";
+
         }
     }
-    
+
     /**
-     * Localization properties
+     * These are localization properties.
      */
     public static interface LANG {
-        public static final String PROGRAM_NAME = "%s/program/name";
-        public static final String LANGUAGE     = "lang";
-        
+        String PROGRAM_NAME = "%s/program/name";
+        String LANGUAGE = "lang";
+
         public static interface HowTo {
-            public static final String TITLE   = "%s/HowTo/title";
-            public static final String MESSAGE = "%s/HowTo/message";
+            String TITLE = "%s/HowTo/title";
+            String MESSAGE = "%s/HowTo/message";
         }
-        
+
         public static interface ErrorViewer {
-            public static final String SHOW_ERROR   = "%s/ErrorViewer/show";
-            
-            public static final String TITLE        = "%s/ErrorViewer/title";
-            public static final String MESSAGE      = "%s/ErrorViewer/message";
-            public static final String BUTTON_SAVE  = "%s/ErrorViewer/button/save";
-            public static final String BUTTON_CLOSE = "%s/ErrorViewer/button/close";
-            public static final String BUTTON_EXIT  = "%s/ErrorViewer/button/exit";
-            
+            String SHOW_ERROR = "%s/ErrorViewer/show";
+
+            String TITLE = "%s/ErrorViewer/title";
+            String MESSAGE = "%s/ErrorViewer/message";
+            String BUTTON_SAVE = "%s/ErrorViewer/button/save";
+            String BUTTON_CLOSE = "%s/ErrorViewer/button/close";
+            String BUTTON_EXIT = "%s/ErrorViewer/button/exit";
+
             public static interface ERRORS {
-                public static final String SAVE_MESSAGE = "%s/ErrorViewer/errors/save/message";
-                public static final String SHOW_MESSAGE = "%s/ErrorViewer/errors/show/message";
+                String SAVE_MESSAGE = "%s/ErrorViewer/errors/save/message";
+                String SHOW_MESSAGE = "%s/ErrorViewer/errors/show/message";
             }
         }
-        
+
         public static interface Gui_BoosterDraft {
-            public static final String CLOSE_MESSAGE      = "%s/BoosterDraft/close/message";
-            public static final String SAVE_MESSAGE       = "%s/BoosterDraft/save/message";
-            public static final String SAVE_TITLE         = "%s/BoosterDraft/save/title";
-            public static final String RENAME_MESSAGE     = "%s/BoosterDraft/rename/message";
-            public static final String RENAME_TITLE       = "%s/BoosterDraft/rename/title";
-            public static final String SAVE_DRAFT_MESSAGE = "%s/BoosterDraft/saveDraft/message";
-            public static final String SAVE_DRAFT_TITLE   = "%s/BoosterDraft/saveDraft/title";
+            String CLOSE_MESSAGE = "%s/BoosterDraft/close/message";
+            String SAVE_MESSAGE = "%s/BoosterDraft/save/message";
+            String SAVE_TITLE = "%s/BoosterDraft/save/title";
+            String RENAME_MESSAGE = "%s/BoosterDraft/rename/message";
+            String RENAME_TITLE = "%s/BoosterDraft/rename/title";
+            String SAVE_DRAFT_MESSAGE = "%s/BoosterDraft/saveDraft/message";
+            String SAVE_DRAFT_TITLE = "%s/BoosterDraft/saveDraft/title";
         }
-        
+
         public static interface GuiDisplay {
             public static interface MENU_BAR {
                 public static interface MENU {
-                    public static final String TITLE = "%s/Display/menu/title";
+                    String TITLE = "%s/Display/menu/title";
                 }
-                
+
                 public static interface PHASE {
-                	public static final String TITLE = "%s/Display/phase/title";
+                    String TITLE = "%s/Display/phase/title";
                 }
-                
+
                 public static interface DEV {
-                	public static final String TITLE = "%s/Display/dev/title";
+                    String TITLE = "%s/Display/dev/title";
                 }
             }
-            
-            public static final String HUMAN_TITLE = "%s/Display/human/title";
-            
+
+            String HUMAN_TITLE = "%s/Display/human/title";
+
             public static interface HUMAN_HAND {
-                public static final String TITLE = "%s/Display/human/hand/title";
+                String TITLE = "%s/Display/human/hand/title";
             }
 
             public static interface HUMAN_LIBRARY {
-            	public static final String BASE = "%s/Display/human/library";
-                public static final String TITLE = "%s/Display/human/library/title";
-            	public static final String MENU = "%s/Display/human/library/menu";
-            	public static final String BUTTON = "%s/Display/human/library/button";
+                String BASE = "%s/Display/human/library";
+                String TITLE = "%s/Display/human/library/title";
+                String MENU = "%s/Display/human/library/menu";
+                String BUTTON = "%s/Display/human/library/button";
             }
-            
-            public static final String HUMAN_GRAVEYARD = "%s/Display/human/graveyard";
-            
+
+            String HUMAN_GRAVEYARD = "%s/Display/human/graveyard";
+
             public static interface HUMAN_GRAVEYARD {
-                public static final String TITLE  = "%s/Display/human/graveyard/title";
-                public static final String BUTTON = "%s/Display/human/graveyard/button";
-                public static final String MENU   = "%s/Display/human/graveyard/menu";
+                String TITLE = "%s/Display/human/graveyard/title";
+                String BUTTON = "%s/Display/human/graveyard/button";
+                String MENU = "%s/Display/human/graveyard/menu";
             }
-            
-            public static final String HUMAN_REMOVED = "%s/Display/human/removed";
-            
+
+            String HUMAN_REMOVED = "%s/Display/human/removed";
+
             public static interface HUMAN_REMOVED {
-                public static final String TITLE  = "%s/Display/human/removed/title";
-                public static final String BUTTON = "%s/Display/human/removed/button";
-                public static final String MENU   = "%s/Display/human/removed/menu";
+                String TITLE = "%s/Display/human/removed/title";
+                String BUTTON = "%s/Display/human/removed/button";
+                String MENU = "%s/Display/human/removed/menu";
             }
-            
-            public static final String COMBAT          = "%s/Display/combat/title";
-            
-            public static final String HUMAN_FLASHBACK = "%s/Display/human/flashback";
-            
+
+            String COMBAT = "%s/Display/combat/title";
+
+            String HUMAN_FLASHBACK = "%s/Display/human/flashback";
+
             public static interface HUMAN_FLASHBACK {
-                public static final String TITLE  = "%s/Display/human/flashback/title";
-                public static final String BUTTON = "%s/Display/human/flashback/button";
-                public static final String MENU   = "%s/Display/human/flashback/menu";
+                String TITLE = "%s/Display/human/flashback/title";
+                String BUTTON = "%s/Display/human/flashback/button";
+                String MENU = "%s/Display/human/flashback/menu";
             }
-            
-            public static final String COMPUTER_TITLE = "%s/Display/computer/title";
-            
+
+            String COMPUTER_TITLE = "%s/Display/computer/title";
+
 
             public static interface COMPUTER_HAND {
-            	public static final String BASE = "%s/Display/computer/hand";
-                public static final String TITLE = "%s/Display/computer/hand/title";
-            	public static final String BUTTON = "%s/Display/computer/hand/button";
-            	public static final String MENU = "%s/Display/computer/hand/menu";
+                String BASE = "%s/Display/computer/hand";
+                String TITLE = "%s/Display/computer/hand/title";
+                String BUTTON = "%s/Display/computer/hand/button";
+                String MENU = "%s/Display/computer/hand/menu";
             }
-            
+
 
             public static interface COMPUTER_LIBRARY {
-            	public static final String BASE = "%s/Display/computer/library";
-                public static final String TITLE = "%s/Display/computer/library/title";
-            	public static final String BUTTON = "%s/Display/computer/library/button";
-            	public static final String MENU = "%s/Display/computer/library/menu";
+                String BASE = "%s/Display/computer/library";
+                String TITLE = "%s/Display/computer/library/title";
+                String BUTTON = "%s/Display/computer/library/button";
+                String MENU = "%s/Display/computer/library/menu";
             }
-            
-            
-            public static final String COMPUTER_GRAVEYARD = "%s/Display/computer/graveyard";
-            
+
+
+            String COMPUTER_GRAVEYARD = "%s/Display/computer/graveyard";
+
             public static interface COMPUTER_GRAVEYARD {
-                public static final String TITLE  = "%s/Display/computer/graveyard/title";
-                public static final String BUTTON = "%s/Display/computer/graveyard/button";
-                public static final String MENU   = "%s/Display/computer/graveyard/menu";
+                String TITLE = "%s/Display/computer/graveyard/title";
+                String BUTTON = "%s/Display/computer/graveyard/button";
+                String MENU = "%s/Display/computer/graveyard/menu";
             }
-            
-            
-            public static final String COMPUTER_REMOVED = "%s/Display/computer/removed";
-            
+
+
+            String COMPUTER_REMOVED = "%s/Display/computer/removed";
+
             public static interface COMPUTER_REMOVED {
-                public static final String TITLE  = "%s/Display/computer/removed/title";
-                public static final String BUTTON = "%s/Display/computer/removed/button";
-                public static final String MENU   = "%s/Display/computer/removed/menu";
+                String TITLE = "%s/Display/computer/removed/title";
+                String BUTTON = "%s/Display/computer/removed/button";
+                String MENU = "%s/Display/computer/removed/menu";
             }
-            
-            public static final String CONCEDE = "%s/Display/concede";
-            
+
+            String CONCEDE = "%s/Display/concede";
+
             public static interface CONCEDE {
-                public static final String BUTTON = "%s/Display/concede/button";
-                public static final String MENU   = "%s/Display/concede/menu";
+                String BUTTON = "%s/Display/concede/button";
+                String MENU = "%s/Display/concede/menu";
             }
-            
-            public static final String MANAGEN = "%s/Display/managen";
-            
+
+            String MANAGEN = "%s/Display/managen";
+
             public static interface MANAGEN {
-                public static final String BUTTON = "%s/Display/managen/button";
-                public static final String MENU   = "%s/Display/managen/menu";
+                String BUTTON = "%s/Display/managen/button";
+                String MENU = "%s/Display/managen/menu";
             }
-            
-            public static final String SETUPBATTLEFIELD = "%s/Display/setupbattlefield";
-            
+
+            String SETUPBATTLEFIELD = "%s/Display/setupbattlefield";
+
             public static interface SETUPBATTLEFIELD {
-            	public static final String BUTTON = "%s/Display/setupbattlefield/button";
-            	public static final String MENU = "%s/Display/setupbattlefield/menu";
+                String BUTTON = "%s/Display/setupbattlefield/button";
+                String MENU = "%s/Display/setupbattlefield/menu";
+            }
+
+            String TUTOR = "%s/Display/tutor";
+
+            public static interface TUTOR {
+                String BUTTON = "%s/Display/tutor/button";
+                String MENU = "%s/Display/tutor/menu";
+            }
+
+            String ADDCOUNTER = "%s/Display/addcounter";
+
+            public static interface ADDCOUNTER {
+                String BUTTON = "%s/Display/addcounter/button";
+                String MENU = "%s/Display/addcounter/menu";
+            }
+
+            String TAPPERM = "%s/Display/tapperm";
+
+            public static interface TAPPERM {
+                String BUTTON = "%s/Display/tapperm/button";
+                String MENU = "%s/Display/tapperm/menu";
+            }
+
+            String UNTAPPERM = "%s/Display/untapperm";
+
+            public static interface UNTAPPERM {
+                String BUTTON = "%s/Display/untapperm/button";
+                String MENU = "%s/Display/untapperm/menu";
+            }
+
+            String NOLANDLIMIT = "%s/Display/nolandlimit";
+
+            public static interface NOLANDLIMIT {
+                String BUTTON = "%s/Display/nolandlimit/button";
+                String MENU = "%s/Display/nolandlimit/menu";
             }
         }
-        
+
         public static interface Gui_DownloadPictures {
-            public static final String TITLE            = "%s/DownloadPictures/title";
-            
-            public static final String PROXY_ADDRESS    = "%s/DownloadPictures/proxy/address";
-            public static final String PROXY_PORT       = "%s/DownloadPictures/proxy/port";
-            
-            public static final String NO_PROXY         = "%s/DownloadPictures/proxy/type/none";
-            public static final String HTTP_PROXY       = "%s/DownloadPictures/proxy/type/http";
-            public static final String SOCKS_PROXY      = "%s/DownloadPictures/proxy/type/socks";
-            
-            public static final String NO_MORE          = "%s/DownloadPictures/no-more";
-            
-            public static final String BAR_BEFORE_START = "%s/DownloadPictures/bar/before-start";
-            public static final String BAR_WAIT         = "%s/DownloadPictures/bar/wait";
-            public static final String BAR_CLOSE        = "%s/DownloadPictures/bar/close";
-            
+            String TITLE = "%s/DownloadPictures/title";
+
+            String PROXY_ADDRESS = "%s/DownloadPictures/proxy/address";
+            String PROXY_PORT = "%s/DownloadPictures/proxy/port";
+
+            String NO_PROXY = "%s/DownloadPictures/proxy/type/none";
+            String HTTP_PROXY = "%s/DownloadPictures/proxy/type/http";
+            String SOCKS_PROXY = "%s/DownloadPictures/proxy/type/socks";
+
+            String NO_MORE = "%s/DownloadPictures/no-more";
+
+            String BAR_BEFORE_START = "%s/DownloadPictures/bar/before-start";
+            String BAR_WAIT = "%s/DownloadPictures/bar/wait";
+            String BAR_CLOSE = "%s/DownloadPictures/bar/close";
+
             public static interface BUTTONS {
-                public static final String START  = "%s/DownloadPictures/button/start";
-                public static final String CANCEL = "%s/DownloadPictures/button/cancel";
-                public static final String CLOSE  = "%s/DownloadPictures/button/close";
+                String START = "%s/DownloadPictures/button/start";
+                String CANCEL = "%s/DownloadPictures/button/cancel";
+                String CLOSE = "%s/DownloadPictures/button/close";
             }
-            
+
             public static interface ERRORS {
-                public static final String PROXY_CONNECT = "%s/DownloadPictures/errors/proxy/connect";
-                public static final String OTHER         = "%s/DownloadPictures/errors/other";
+                String PROXY_CONNECT = "%s/DownloadPictures/errors/proxy/connect";
+                String OTHER = "%s/DownloadPictures/errors/other";
             }
         }
-        
+
 
         public static interface Gui_NewGame {
-        	public static interface NEW_GAME_TEXT {
-        		public static final String GAMETYPE     = "%s/NewGame/gametype";
-        		public static final String LIBRARY     = "%s/NewGame/library";
-        		public static final String SETTINGS     = "%s/NewGame/settings";
-        		public static final String NEW_GAME     = "%s/NewGame/new_game";
-        		public static final String CONSTRUCTED_TEXT      = "%s/NewGame/constructed_text";
-                public static final String SEALED_TEXT         = "%s/NewGame/sealed_text";
-                public static final String BOOSTER_TEXT         = "%s/NewGame/booster_text";
-                public static final String YOURDECK        = "%s/NewGame/yourdeck";
-                public static final String OPPONENT         = "%s/NewGame/opponent";
-                public static final String DECK_EDITOR         = "%s/NewGame/deckeditor";
-                public static final String NEW_GUI         = "%s/NewGame/newgui";
-                public static final String AI_LAND         = "%s/NewGame/ailand";
-                public static final String DEV_MODE         = "%s/NewGame/devmode";
-                public static final String QUEST_MODE         = "%s/NewGame/questmode";
-                public static final String START_GAME         = "%s/NewGame/startgame";
-                
-        	}
+            public static interface NEW_GAME_TEXT {
+                String GAMETYPE = "%s/NewGame/gametype";
+                String LIBRARY = "%s/NewGame/library";
+                String SETTINGS = "%s/NewGame/settings";
+                String NEW_GAME = "%s/NewGame/new_game";
+                String CONSTRUCTED_TEXT = "%s/NewGame/constructed_text";
+                String SEALED_TEXT = "%s/NewGame/sealed_text";
+                String BOOSTER_TEXT = "%s/NewGame/booster_text";
+                String YOURDECK = "%s/NewGame/yourdeck";
+                String OPPONENT = "%s/NewGame/opponent";
+                String DECK_EDITOR = "%s/NewGame/deckeditor";
+                String NEW_GUI = "%s/NewGame/newgui";
+                String AI_LAND = "%s/NewGame/ailand";
+                String DEV_MODE = "%s/NewGame/devmode";
+                String QUEST_MODE = "%s/NewGame/questmode";
+                String START_GAME = "%s/NewGame/startgame";
+                String SAVE_SEALED_MSG = "%s/NewGame/savesealed_msg";
+                String SAVE_SEALED_TTL = "%s/NewGame/savesealed_ttl";
+
+            }
+
             public static interface MENU_BAR {
                 public static interface MENU {
-                    public static final String TITLE      = "%s/NewGame/menu/title";
-                    public static final String LF         = "%s/NewGame/menu/lookAndFeel";
-                    public static final String DOWNLOADPRICE  = "%s/NewGame/menu/downloadPrice";
-                    public static final String DOWNLOAD   = "%s/NewGame/menu/download";
-                    public static final String DOWNLOADLQ   = "%s/NewGame/menu/downloadlq";
-                    public static final String DOWNLOADSETLQ = "%s/NewGame/menu/downloadsetlq";
-                    public static final String IMPORTPICTURE   = "%s/NewGame/menu/importPicture";
-                    public static final String CARD_SIZES = "%s/NewGame/menu/cardSizes";
-                    public static final String CARD_STACK = "%s/NewGame/menu/cardStack";
-                    public static final String CARD_STACK_OFFSET = "%s/NewGame/menu/cardStackOffset";
-                    public static final String ABOUT      = "%s/NewGame/menu/about";
+                    String TITLE = "%s/NewGame/menu/title";
+                    String LF = "%s/NewGame/menu/lookAndFeel";
+                    String DOWNLOADPRICE = "%s/NewGame/menu/downloadPrice";
+                    String DOWNLOAD = "%s/NewGame/menu/download";
+                    String DOWNLOADLQ = "%s/NewGame/menu/downloadlq";
+                    String DOWNLOADSETLQ = "%s/NewGame/menu/downloadsetlq";
+                    String IMPORTPICTURE = "%s/NewGame/menu/importPicture";
+                    String CARD_SIZES = "%s/NewGame/menu/cardSizes";
+                    String CARD_STACK = "%s/NewGame/menu/cardStack";
+                    String CARD_STACK_OFFSET = "%s/NewGame/menu/cardStackOffset";
+                    String ABOUT = "%s/NewGame/menu/about";
                 }
-                
+
                 public static interface OPTIONS {
-                    public static final String TITLE = "%s/NewGame/options/title";
-                    public static final String FONT = "%s/NewGame/options/font";
-                    public static final String CARD_OVERLAY = "%s/NewGame/options/cardOverlay";
-					public static final String CARD_SCALE = "%s/NewGame/options/cardScale";
-                    
+                    String TITLE = "%s/NewGame/options/title";
+                    String FONT = "%s/NewGame/options/font";
+                    String CARD_OVERLAY = "%s/NewGame/options/cardOverlay";
+                    String CARD_SCALE = "%s/NewGame/options/cardScale";
+
                     public static interface GENERATE {
-                        public static final String TITLE            = "%s/NewGame/options/generate/title";
-                        public static final String REMOVE_SMALL     = "%s/NewGame/options/generate/removeSmall";
-                        public static final String REMOVE_ARTIFACTS = "%s/NewGame/options/generate/removeArtifacts";
+                        String TITLE = "%s/NewGame/options/generate/title";
+                        String REMOVE_SMALL = "%s/NewGame/options/generate/removeSmall";
+                        String REMOVE_ARTIFACTS = "%s/NewGame/options/generate/removeArtifacts";
                     }
                 }
 
-                 public static interface HELP {
-                    public static final String TITLE = "%s/NewGame/help/title";
-                        }
-
-
-
-
+                public static interface HELP {
+                    String TITLE = "%s/NewGame/help/title";
+                }
 
 
             }
-            
-            public static interface ERRORS {}
+
+            public static interface ERRORS {
+            }
         }
-        
+
         public static interface Gui_WinLose {
-        	public static interface WINLOSE_TEXT {
-        		public static final String WON     = "%s/WinLose/won";
-        		public static final String LOST     = "%s/WinLose/lost";
-        		public static final String WIN     = "%s/WinLose/win";
-        		public static final String LOSE     = "%s/WinLose/lose";
-        		public static final String CONTINUE     = "%s/WinLose/continue";
-        		public static final String RESTART     = "%s/WinLose/restart";
-        		public static final String QUIT     = "%s/WinLose/quit";
-        	}
+            public static interface WINLOSE_TEXT {
+                String WON = "%s/WinLose/won";
+                String LOST = "%s/WinLose/lost";
+                String WIN = "%s/WinLose/win";
+                String LOSE = "%s/WinLose/lose";
+                String CONTINUE = "%s/WinLose/continue";
+                String RESTART = "%s/WinLose/restart";
+                String QUIT = "%s/WinLose/quit";
+            }
         }
-        
+
         public static interface Gui_DownloadPrices {
-        	public static interface DOWNLOADPRICES {
-        		public static final String TITLE     = "%s/DownloadPrices/title";
-        		public static final String START_UPDATE     = "%s/DownloadPrices/startupdate";
-        		public static final String DOWNLOADING     = "%s/DownloadPrices/downloading";
-        		public static final String COMPILING     = "%s/DownloadPrices/compiling";
-        	}
+            public static interface DOWNLOADPRICES {
+                String TITLE = "%s/DownloadPrices/title";
+                String START_UPDATE = "%s/DownloadPrices/startupdate";
+                String DOWNLOADING = "%s/DownloadPrices/downloading";
+                String COMPILING = "%s/DownloadPrices/compiling";
+            }
         }
-        
+
         public static interface GameAction {
-        	public static interface GAMEACTION_TEXT {
-        		public static final String HEADS	="%s/GameAction/heads";
-        		public static final String TAILS	="%s/GameAction/tails";
-        		public static final String HEADS_OR_TAILS	="%s/GameAction/heads_or_tails";
-        		public static final String COIN_TOSS	="%s/GameAction/coin_toss";
-        		public static final String HUMAN_WIN	="%s/GameAction/human_win";
-        		public static final String COMPUTER_WIN	="%s/GameAction/computer_win";
-        		public static final String COMPUTER_STARTS	="%s/GameAction/computer_starts";
-        		public static final String HUMAN_STARTS	="%s/GameAction/human_starts";
-        		public static final String HUMAN_MANA_COST ="%s/GameAction/human_mana_cost";
-        		public static final String COMPUTER_MANA_COST ="%s/GameAction/computer_mana_cost";
-        		public static final String COMPUTER_CUT	="%s/GameAction/computer_cut";
-        		public static final String HUMAN_CUT	="%s/GameAction/human_cut";
-        		public static final String CUT_NUMBER	="%s/GameAction/cut_number";
-        		public static final String RESOLVE_STARTER	="%s/GameAction/resolve_starter";
-        		public static final String EQUAL_CONVERTED_MANA	="%s/GameAction/equal_converted_mana";
-        		public static final String CUTTING_AGAIN	="%s/GameAction/cutting_again";
-        		public static final String YES	="%s/GameAction/yes";
-        		public static final String NO	="%s/GameAction/no";
-        		public static final String WANT_DREDGE	="%s/GameAction/want_dredge";
-        		public static final String SELECT_DREDGE	="%s/GameAction/select_dredge";
-        		public static final String CHOOSE_2ND_LAND	="%s/GameAction/choose_2nd_land";
-        		
-        		
-        		
-        	}
+            public static interface GAMEACTION_TEXT {
+                String HEADS = "%s/GameAction/heads";
+                String TAILS = "%s/GameAction/tails";
+                String HEADS_OR_TAILS = "%s/GameAction/heads_or_tails";
+                String COIN_TOSS = "%s/GameAction/coin_toss";
+                String HUMAN_WIN = "%s/GameAction/human_win";
+                String COMPUTER_WIN = "%s/GameAction/computer_win";
+                String COMPUTER_STARTS = "%s/GameAction/computer_starts";
+                String HUMAN_STARTS = "%s/GameAction/human_starts";
+                String HUMAN_MANA_COST = "%s/GameAction/human_mana_cost";
+                String COMPUTER_MANA_COST = "%s/GameAction/computer_mana_cost";
+                String COMPUTER_CUT = "%s/GameAction/computer_cut";
+                String HUMAN_CUT = "%s/GameAction/human_cut";
+                String CUT_NUMBER = "%s/GameAction/cut_number";
+                String RESOLVE_STARTER = "%s/GameAction/resolve_starter";
+                String EQUAL_CONVERTED_MANA = "%s/GameAction/equal_converted_mana";
+                String CUTTING_AGAIN = "%s/GameAction/cutting_again";
+                String YES = "%s/GameAction/yes";
+                String NO = "%s/GameAction/no";
+                String WANT_DREDGE = "%s/GameAction/want_dredge";
+                String SELECT_DREDGE = "%s/GameAction/select_dredge";
+                String CHOOSE_2ND_LAND = "%s/GameAction/choose_2nd_land";
+
+
+            }
         }
     }
 }

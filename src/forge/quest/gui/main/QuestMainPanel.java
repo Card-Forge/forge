@@ -3,7 +3,6 @@ package forge.quest.gui.main;
 
 import forge.*;
 import forge.deck.Deck;
-import forge.gui.ForgeFontConstants;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestBattleManager;
 import forge.quest.data.QuestData;
@@ -24,10 +23,17 @@ import java.util.*;
 import java.util.List;
 
 
+/**
+ * <p>QuestMainPanel class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class QuestMainPanel extends QuestAbstractPanel {
-	private static final long serialVersionUID = 6142934729724012402L;
+    /** Constant <code>serialVersionUID=6142934729724012402L</code> */
+    private static final long serialVersionUID = 6142934729724012402L;
 
-	private forge.quest.data.QuestData questData;
+    private forge.quest.data.QuestData questData;
 
     JLabel creditsLabel = new JLabel();
     JLabel lifeLabel = new JLabel();
@@ -48,28 +54,40 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     boolean isShowingQuests = false;
     private JCheckBox devModeCheckBox = new JCheckBox("Developer Mode");
-    private JCheckBox newGUICheckbox = new JCheckBox("Use new UI", true);
+    //private JCheckBox newGUICheckbox = new JCheckBox("Use new UI", true);
     private JCheckBox smoothLandCheckBox = new JCheckBox("Adjust AI Land");
     private JCheckBox petCheckBox = new JCheckBox("Summon Pet");
 
     private JCheckBox plantBox = new JCheckBox("Summon Plant");
+    /** Constant <code>NO_DECKS_AVAILABLE="No decks available"</code> */
     private static final String NO_DECKS_AVAILABLE = "No decks available";
+    /** Constant <code>BATTLES="Battles"</code> */
     private static final String BATTLES = "Battles";
+    /** Constant <code>QUESTS="Quests"</code> */
     private static final String QUESTS = "Quests";
 
     //TODO: Make this ordering permanent
+    /** Constant <code>lastUsedDeck="//TODO: Make this ordering permanent"</code> */
     private static String lastUsedDeck;
     private JButton zeppelinButton = new JButton("<html>Launch<br>Zeppelin</html>",
             GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
     private JPanel zeppelinPanel = new JPanel();
 
+    /**
+     * <p>Constructor for QuestMainPanel.</p>
+     *
+     * @param mainFrame a {@link forge.quest.gui.QuestFrame} object.
+     */
     public QuestMainPanel(QuestFrame mainFrame) {
         super(mainFrame);
-        questData = AllZone.QuestData;
+        questData = AllZone.getQuestData();
 
         initUI();
     }
 
+    /**
+     * <p>initUI.</p>
+     */
     private void initUI() {
         refresh();
         this.setLayout(new BorderLayout(5, 5));
@@ -87,14 +105,19 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         centerPanel.add(nextMatchPanel, BorderLayout.CENTER);
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
-        
+
     }
 
+    /**
+     * <p>createStatusPanel.</p>
+     *
+     * @return a {@link javax.swing.JPanel} object.
+     */
     private JPanel createStatusPanel() {
         JPanel northPanel = new JPanel();
         JLabel modeLabel;
         JLabel difficultyLabel;//Create labels at the top
-        titleLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.PLAIN, 28));
+        titleLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 28));
         titleLabel.setAlignmentX(LEFT_ALIGNMENT);
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.add(titleLabel);
@@ -119,6 +142,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
         return northPanel;
     }
 
+    /**
+     * <p>createSidePanel.</p>
+     *
+     * @return a {@link javax.swing.JPanel} object.
+     */
     private JPanel createSidePanel() {
         JPanel panel = new JPanel();
         JPanel optionsPanel;//Create options checkbox list
@@ -142,7 +170,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         });
         eastComponents.add(cardShopButton);
-        cardShopButton.setFont(new Font(ForgeFontConstants.SANS_SERIF, Font.PLAIN, 20));
+        cardShopButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
 
         JButton bazaarButton = null;
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
@@ -154,7 +182,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 }
             });
             eastComponents.add(bazaarButton);
-            bazaarButton.setFont(new Font(ForgeFontConstants.SANS_SERIF, Font.PLAIN, 20));
+            bazaarButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         }
 
 
@@ -164,7 +192,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         });
         eastComponents.add(questButton);
-        questButton.setFont(new Font(ForgeFontConstants.SANS_SERIF, Font.BOLD, 18));
+        questButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         questButton.setPreferredSize(new Dimension(0, 60));
 
 
@@ -174,7 +202,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         });
 
-        playButton.setFont(new Font(ForgeFontConstants.DIALOG, Font.BOLD, 28));
+        playButton.setFont(new Font(Font.DIALOG, Font.BOLD, 28));
         playButton.setPreferredSize(new Dimension(0, 100));
 
 
@@ -191,14 +219,14 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
             panel.add(this.lifeLabel);
-            this.lifeLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.BOLD, 14));
+            this.lifeLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 14));
             this.lifeLabel.setIcon(GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("Life.png"), 30, 30));
         }
 
         GuiUtils.addGap(panel);
         panel.add(this.creditsLabel);
         this.creditsLabel.setIcon(GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("CoinStack.png"), 30, 30));
-        this.creditsLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.BOLD, 14));
+        this.creditsLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 14));
         GuiUtils.addGap(panel, 10);
         panel.add(cardShopButton);
 
@@ -210,7 +238,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         panel.add(Box.createVerticalGlue());
 
         panel.add(questButton);
-        this.nextQuestLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.PLAIN, 11));
+        this.nextQuestLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 11));
         panel.add(nextQuestLabel);
         GuiUtils.addGap(panel);
 
@@ -220,12 +248,17 @@ public class QuestMainPanel extends QuestAbstractPanel {
         return panel;
     }
 
+    /**
+     * <p>createOptionsPanel.</p>
+     *
+     * @return a {@link javax.swing.JPanel} object.
+     */
     private JPanel createOptionsPanel() {
         JPanel optionsPanel;
         optionsPanel = new JPanel();
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
 
-        optionsPanel.add(this.newGUICheckbox);
+        //optionsPanel.add(this.newGUICheckbox);
         optionsPanel.add(Box.createVerticalStrut(5));
         optionsPanel.add(this.smoothLandCheckBox);
         optionsPanel.add(Box.createVerticalStrut(5));
@@ -234,6 +267,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
         return optionsPanel;
     }
 
+    /**
+     * <p>createMatchSettingsPanel.</p>
+     *
+     * @return a {@link javax.swing.JPanel} object.
+     */
     private JPanel createMatchSettingsPanel() {
 
         JPanel matchPanel = new JPanel();
@@ -281,8 +319,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     if (petCheckBox.isSelected()) {
                         questData.getPetManager().setSelectedPet((String) petComboBox.getSelectedItem());
-                    }
-                    else {
+                    } else {
                         questData.getPetManager().setSelectedPet(null);
                     }
 
@@ -296,15 +333,14 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     if (petCheckBox.isSelected()) {
                         questData.getPetManager().setSelectedPet((String) petComboBox.getSelectedItem());
-                    }
-                    else {
+                    } else {
                         questData.getPetManager().setSelectedPet(null);
                     }
                 }
             });
             this.petComboBox.setMaximumSize(
-                    new Dimension(Integer.MAX_VALUE, 
-                    (int) this.petCheckBox.getPreferredSize().getHeight()));
+                    new Dimension(Integer.MAX_VALUE,
+                            (int) this.petCheckBox.getPreferredSize().getHeight()));
             petPanel.add(this.petComboBox);
 
             this.plantBox.addActionListener(new ActionListener() {
@@ -340,6 +376,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
         return matchPanel;
     }
 
+    /**
+     * <p>createBattlePanel.</p>
+     *
+     * @return a {@link javax.swing.JPanel} object.
+     */
     private JPanel createBattlePanel() {
         JPanel BattlePanel = new JPanel();
         BattlePanel.setLayout(new BoxLayout(BattlePanel, BoxLayout.Y_AXIS));
@@ -359,6 +400,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
         return BattlePanel;
     }
 
+    /**
+     * <p>createQuestPanel.</p>
+     *
+     * @return a {@link javax.swing.JPanel} object.
+     */
     private JPanel createQuestPanel() {
         JPanel questPanel = new JPanel();
         questPanel.setLayout(new BoxLayout(questPanel, BoxLayout.Y_AXIS));
@@ -378,12 +424,15 @@ public class QuestMainPanel extends QuestAbstractPanel {
         return questPanel;
     }
 
+    /**
+     * <p>refresh.</p>
+     */
     void refresh() {
-        AllZone.QuestData.saveData();
+        AllZone.getQuestData().saveData();
 
         devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
         smoothLandCheckBox.setSelected(Constant.Runtime.Smooth[0]);
-        newGUICheckbox.setSelected(Gui_NewGame.preferences.newGui);
+        //newGUICheckbox.setSelected(Gui_NewGame.preferences.newGui);
 
         creditsLabel.setText(" " + questData.getCredits());
         statsLabel.setText(questData.getWin() + " wins / " + questData.getLost() + " losses");
@@ -412,9 +461,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             for (String deckName : deckNames) {
                 deckComboBox.addItem(deckName);
             }
-        }
-
-        else {
+        } else {
             deckComboBox.addItem(NO_DECKS_AVAILABLE);
             deckComboBox.setEnabled(false);
         }
@@ -437,9 +484,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 for (String aPetList : petList) {
                     petComboBox.addItem(aPetList);
                 }
-            }
-
-            else {
+            } else {
                 petComboBox.addItem("No pets available");
                 petComboBox.setEnabled(false);
                 petCheckBox.setEnabled(false);
@@ -448,8 +493,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             if (!questData.getPetManager().shouldPetBeUsed()) {
                 petCheckBox.setSelected(false);
                 petComboBox.setEnabled(false);
-            }
-            else {
+            } else {
                 petCheckBox.setSelected(true);
                 petComboBox.setSelectedItem(questData.getPetManager().getSelectedPet().getName());
             }
@@ -460,25 +504,23 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
             QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
 
-            if (zeppelin.getLevel() > 0){
+            if (zeppelin.getLevel() > 0) {
                 zeppelinPanel.removeAll();
-                zeppelinPanel.add(zeppelinButton,BorderLayout.CENTER);
+                zeppelinPanel.add(zeppelinButton, BorderLayout.CENTER);
             }
 
-            if (!zeppelin.hasBeenUsed()){
+            if (!zeppelin.hasBeenUsed()) {
                 zeppelinButton.setEnabled(true);
-            }
-            else{
+            } else {
                 zeppelinButton.setEnabled(false);
             }
-            
+
 
         }
 
         if (nextQuestInWins() > 0) {
             nextQuestLabel.setText("Next Quest in " + nextQuestInWins() + " Wins.");
-        }
-        else {
+        } else {
             nextQuestLabel.setText("Next Quest available now.");
         }
 
@@ -487,34 +529,42 @@ public class QuestMainPanel extends QuestAbstractPanel {
         refreshNextMatchPanel();
     }
 
+    /**
+     * <p>refreshNextMatchPanel.</p>
+     */
     private void refreshNextMatchPanel() {
         nextMatchPanel.removeAll();
         nextMatchLayout = new CardLayout();
         nextMatchPanel.setLayout(nextMatchLayout);
         nextMatchPanel.add(createBattlePanel(), BATTLES);
         nextMatchPanel.add(createQuestPanel(), QUESTS);
-        if (isShowingQuests){
+        if (isShowingQuests) {
             this.nextMatchLayout.show(nextMatchPanel, QUESTS);
-        }
-        else{
+        } else {
             this.nextMatchLayout.show(nextMatchPanel, BATTLES);
         }
     }
 
+    /**
+     * <p>nextQuestInWins.</p>
+     *
+     * @return a int.
+     */
     private int nextQuestInWins() {
 
-        if (questData.getWin() < 25) {
-            return 25 - questData.getWin();
+        // Number of wins was 25, lowereing the number to 20 to help short term questers.
+        if (questData.getWin() < 20) {
+            return 20 - questData.getWin();
         }
 
+        // The int mul has been lowered by one, should face special opps more frequently.
         int questsPlayed = questData.getQuestsPlayed();
-        int mul = 6;
+        int mul = 5;
 
         if (questData.getInventory().hasItem("Zeppelin")) {
+            mul = 3;
+        } else if (questData.getInventory().hasItem("Map")) {
             mul = 4;
-        }
-        else if (questData.getInventory().hasItem("Map")) {
-            mul = 5;
         }
 
         int delta = (questsPlayed * mul) - questData.getWin();
@@ -523,13 +573,16 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
 
+    /**
+     * <p>showDeckEditor.</p>
+     */
     void showDeckEditor() {
         Command exit = new Command() {
             private static final long serialVersionUID = -5110231879431074581L;
 
             public void execute() {
                 //saves all deck data
-                AllZone.QuestData.saveData();
+                AllZone.getQuestData().saveData();
 
                 new QuestFrame();
             }
@@ -542,17 +595,23 @@ public class QuestMainPanel extends QuestAbstractPanel {
         mainFrame.dispose();
     }//deck editor button
 
+    /**
+     * <p>showBazaar.</p>
+     */
     void showBazaar() {
         mainFrame.showBazaarPane();
     }
 
+    /**
+     * <p>showCardShop.</p>
+     */
     void showCardShop() {
         Command exit = new Command() {
             private static final long serialVersionUID = 8567193482568076362L;
 
             public void execute() {
                 //saves all deck data
-                AllZone.QuestData.saveData();
+                AllZone.getQuestData().saveData();
 
                 new QuestFrame();
             }
@@ -567,6 +626,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     }//card shop button
 
+    /**
+     * <p>launchGame.</p>
+     */
     private void launchGame() {
 
         //TODO: This is a temporary hack to see if the image cache affects the heap usage significantly.
@@ -587,49 +649,56 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
 
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
-        if (newGUICheckbox.isSelected()) {
-            AllZone.Display = new GuiDisplay4();
-        }
-        else {
-            AllZone.Display = new GuiDisplay3();
-        }
+        //if (newGUICheckbox.isSelected()) {
+            AllZone.setDisplay(new GuiDisplay4());
+        //} else {
+        //    AllZone.setDisplay(new GuiDisplay3());
+        //}
 
-        Gui_NewGame.preferences.newGui = newGUICheckbox.isSelected();
+        //Gui_NewGame.preferences.newGui = newGUICheckbox.isSelected();
 
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
 
 
         if (isShowingQuests) {
             setupQuest(humanDeck);
-        }
-
-        else {
+        } else {
             setupBattle(humanDeck);
         }
 
-        AllZone.QuestData.saveData();
-        
-        AllZone.Display.setVisible(true);
+        AllZone.getQuestData().saveData();
+
+        AllZone.getDisplay().setVisible(true);
         mainFrame.dispose();
     }
 
 
+    /**
+     * <p>setupBattle.</p>
+     *
+     * @param humanDeck a {@link forge.deck.Deck} object.
+     */
     void setupBattle(Deck humanDeck) {
 
         Deck computer = QuestBattleManager.getAIDeckNewFormat((selectedOpponent).getName());
         Constant.Runtime.ComputerDeck[0] = computer;
 
-        AllZone.GameAction.newGame(humanDeck, computer, forge.quest.data.QuestUtil.getHumanPlantAndPet(questData),
+        AllZone.getGameAction().newGame(humanDeck, computer, forge.quest.data.QuestUtil.getHumanPlantAndPet(questData),
                 new CardList(), questData.getLife(), 20, null);
     }
 
+    /**
+     * <p>setupQuest.</p>
+     *
+     * @param humanDeck a {@link forge.deck.Deck} object.
+     */
     private void setupQuest(Deck humanDeck) {
         Quest_Assignment selectedQuest = ((QuestQuest) selectedOpponent).getQuestAssignment();
 
         Deck computerDeck = QuestBattleManager.getAIDeckNewFormat("quest" + selectedQuest.getId());
         Constant.Runtime.ComputerDeck[0] = computerDeck;
 
-        AllZone.QuestAssignment = selectedQuest;
+        AllZone.setQuestAssignment(selectedQuest);
 
         int extraLife = 0;
 
@@ -637,33 +706,38 @@ public class QuestMainPanel extends QuestAbstractPanel {
             extraLife = 3;
         }
 
-        AllZone.GameAction.newGame(humanDeck, computerDeck,
+        AllZone.getGameAction().newGame(humanDeck, computerDeck,
                 forge.quest.data.QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(),
                 questData.getLife() + extraLife, selectedQuest.getComputerLife(), selectedQuest);
 
     }
 
+    /**
+     * <p>getMatchIcon.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getMatchIcon() {
         String oppIconName;
 
         if (isShowingQuests) {
             Quest_Assignment selectedQuest = ((QuestQuest) selectedOpponent).getQuestAssignment();
             oppIconName = selectedQuest.getIconName();
-        }
-
-        else {
+        } else {
             oppIconName = selectedOpponent.getName();
             oppIconName = oppIconName.substring(0, oppIconName.length() - 1).trim() + ".jpg";
         }
         return oppIconName;
     }
 
+    /**
+     * <p>showQuests.</p>
+     */
     void showQuests() {
         if (isShowingQuests) {
             isShowingQuests = false;
             questButton.setText("Quests");
-        }
-        else {
+        } else {
             isShowingQuests = true;
             questButton.setText("Battles");
         }
@@ -700,15 +774,26 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     }
 
+    /**
+     * <p>moveDeckToTop.</p>
+     *
+     * @param humanDeckName a {@link java.lang.String} object.
+     */
     private void moveDeckToTop(String humanDeckName) {
         QuestMainPanel.lastUsedDeck = humanDeckName;
     }
 
 
+    /**
+     * <p>canGameBeLaunched.</p>
+     *
+     * @return a boolean.
+     */
     boolean canGameBeLaunched() {
         return !(NO_DECKS_AVAILABLE.equals(deckComboBox.getSelectedItem()) || selectedOpponent == null);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void refreshState() {
         this.refresh();

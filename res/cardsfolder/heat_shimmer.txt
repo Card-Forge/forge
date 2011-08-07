@@ -1,9 +1,0 @@
-Name:Heat Shimmer
-ManaCost:2 R
-Types:Sorcery
-Text:no text
-A:SP$CopyPermanent | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Haste | AtEOT$ Exile | SpellDescription$ Put a token that's a copy of target creature onto the battlefield. That token has haste and "At the beginning of the end step, exile this permanent."
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_shimmer.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/175.jpg
-End

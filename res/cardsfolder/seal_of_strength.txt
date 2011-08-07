@@ -1,9 +1,0 @@
-Name:Seal of Strength
-ManaCost:G
-Types:Enchantment
-Text:no text
-A:AB$ Pump | Cost$ 0 Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_strength.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/115.jpg
-End

@@ -1,9 +1,0 @@
-Name:Flowstone Strike
-ManaCost:1 R
-Types:Instant
-Text:no text
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ -1 | KW$ Haste | SpellDescription$ Target creature gets +1/-1 and gains haste until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_strike.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/84.jpg
-End

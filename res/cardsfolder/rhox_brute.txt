@@ -1,9 +1,0 @@
-Name:Rhox Brute
-ManaCost:2 R G
-Types:Creature Rhino Warrior
-Text:no text
-PT:4/4
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_brute.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/59.jpg
-End

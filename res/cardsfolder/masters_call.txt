@@ -1,9 +1,0 @@
-Name:Master's Call
-ManaCost:2 W
-Types:Instant
-Text:no text
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 colorless Myr artifact creature tokens onto the battlefield.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/masters_call.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/13.jpg
-End

@@ -1,9 +1,0 @@
-Name:Planar Gate
-ManaCost:6
-Types:Artifact
-Text:Creature spells you cast cost up to 2 less to cast.
-K:CostChange:Player:Less:2:Spell:All:Creature:NoSpecial
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_gate.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/235.jpg
-End

@@ -1,9 +1,0 @@
-Name:The Abyss
-ManaCost:3 B
-Types:World Enchantment
-Text:At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
-SVar:RemRandomDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/the_abyss.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/34.jpg
-End

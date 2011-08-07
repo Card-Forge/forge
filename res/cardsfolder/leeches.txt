@@ -1,9 +1,0 @@
-Name:Leeches
-ManaCost:1 W W
-Types:Sorcery
-Text:Target player loses all poison counters. Leeches deals that much damage to that player.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leeches.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/111.jpg
-End

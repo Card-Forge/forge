@@ -1,9 +1,0 @@
-Name:Plated Wurm
-ManaCost:4 G
-Types:Creature Wurm
-Text:no text
-PT:4/5
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6617.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/81.jpg
-End

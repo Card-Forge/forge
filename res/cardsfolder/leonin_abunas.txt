@@ -1,9 +1,0 @@
-Name:Leonin Abunas
-ManaCost:3 W
-Types:Creature Cat Cleric
-Text:Artifacts you control can't be the targets of spells or abilities your opponents control.
-PT:2/5
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_abunas.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/8.jpg
-End

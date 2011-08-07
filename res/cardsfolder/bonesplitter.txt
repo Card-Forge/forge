@@ -1,9 +1,0 @@
-Name:Bonesplitter
-ManaCost:1
-Types:Artifact Equipment
-Text:Equipped creature gets +2/+0.
-K:eqPump 1:+2/+0
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/146.jpg
-End

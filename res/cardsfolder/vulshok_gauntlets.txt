@@ -1,9 +1,0 @@
-Name:Vulshok Gauntlets
-ManaCost:2
-Types:Artifact Equipment
-Text:Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
-K:eqPump 3:+4/+2/CARDNAME doesn't untap during your untap step.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_gauntlets.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/273.jpg
-End

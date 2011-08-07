@@ -1,9 +1,0 @@
-Name:Disciple of Kangee
-ManaCost:2 W
-Types:Creature Human Wizard
-Text:no text
-PT:2/2
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/ps/en-us/card26285.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/3.jpg
-End

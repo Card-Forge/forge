@@ -1,9 +1,0 @@
-Name:Banishing Knack
-ManaCost:U
-Types:Instant
-Text:no text
-SVar:RemAIDeck:True
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/banishing_knack.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/17.jpg
-End

@@ -1,9 +1,0 @@
-Name:Squee's Toy
-ManaCost:1
-Types:Artifact
-Text:no text
-A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ 1 | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature this turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/squees_toy.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/299.jpg
-End

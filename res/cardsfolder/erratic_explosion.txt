@@ -1,8 +1,0 @@
-Name:Erratic Explosion
-ManaCost:2 R
-Types:Sorcery
-Text:Choose target creature or player. The computer will randomly choose a nonland card from your library. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player.
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card12484.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/201.jpg
-End

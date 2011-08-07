@@ -1,9 +1,0 @@
-Name:Echoing Decay
-ManaCost:1 B
-Types:Instant
-Text:Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.
-SVar:Rarity:Common
-SVar:RemAIDeck:True
-SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46176.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/41.jpg
-End

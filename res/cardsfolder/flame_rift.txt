@@ -1,9 +1,0 @@
-Name:Flame Rift
-ManaCost:1 R
-Types:Sorcery
-Text:no text
-A:SP$ DamageAll | Cost$ 1 R | NumDmg$ 4 | ValidPlayers$ Each | ValidDescription$ each player. | SpellDescription$ CARDNAME deals 4 damage to each player.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_rift.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/80.jpg
-End

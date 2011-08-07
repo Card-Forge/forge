@@ -1,9 +1,0 @@
-Name:Firestorm
-ManaCost:R
-Types:Instant
-Text:As an additional cost to cast CARDNAME, discard X cards.\r\n\r\nCARDNAME deals X damage to each of X target creatures and/or players.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm.jpg
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/101.jpg
-End

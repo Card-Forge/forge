@@ -43,4 +43,4 @@ Index:38|Set0:ROE|Name:Rise of the Eldrazi|DraftPacks:3|LandSetCode:ROE|SealedPa
 Index:39|Set0:M11|Name:Magic 2011|DraftPacks:3|LandSetCode:M11|SealedPacks:6
 
 Index:40|Set0:SOM|Set1:MBS|Set2:NPH|Name:Scars of Mirrodin|DraftPacks:3|LandSetCode:SOM|SealedPacks:6
-
+Index:41|Set0:M12|Name:Magic 2012|DraftPacks:3|LandSetCode:M12|SealedPacks:6

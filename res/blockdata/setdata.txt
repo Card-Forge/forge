@@ -72,12 +72,14 @@ Index:64|Code2:EVE|Code3:EVE|Name:Eventide
 Index:65|Code2:ALA|Code3:ALA|Name:Shards of Alara
 Index:66|Code2:CFX|Code3:CFX|Name:Conflux
 Index:67|Code2:ARB|Code3:ARB|Name:Alara Reborn
-Index:68|Code2:M10|Code3:M10|Name:Magic The Gathering 2010
+Index:68|Code2:M10|Code3:M10|Name:Magic 2010
 Index:69|Code2:ZEN|Code3:ZEN|Name:Zendikar
 
 Index:70|Code2:WWK|Code3:WWK|Name:Worldwake
 Index:71|Code2:ROE|Code3:ROE|Name:Rise of the Eldrazi
-Index:72|Code2:M11|Code3:M11|Name:Magic The Gathering 2011
+Index:72|Code2:M11|Code3:M11|Name:Magic 2011
 Index:73|Code2:SOM|Code3:SOM|Name:Scars of Mirrodin
 Index:74|Code2:MBS|Code3:MBS|Name:Mirrodin Besieged
 Index:75|Code2:NPH|Code3:NPH|Name:New Phyrexia
+Index:76|Code2:COM|Code3:COM|Name:Commander
+Index:77|Code2:M12|Code3:M12|Name:Magic 2012

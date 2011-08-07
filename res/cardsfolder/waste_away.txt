@@ -1,9 +1,0 @@
-Name:Waste Away
-ManaCost:4 B
-Types:Instant
-Text:no text
-A:SP$ Pump | Cost$ 4 B Discard<1/Card> | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets -5/-5 until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/waste_away.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/88.jpg
-End

@@ -1,9 +1,0 @@
-Name:Whetstone
-ManaCost:3
-Types:Artifact
-Text:no text
-A:AB$ Mill | Cost$ 3 | NumCards$ 2 | Defined$ Each | SpellDescription$ Each player puts the top two cards of his or her library into his or her graveyard.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whetstone.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/316.jpg
-End

@@ -1,9 +1,0 @@
-Name:Quiet Purity
-ManaCost:W
-Types:Instant Arcane
-Text:no text
-A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quiet_purity.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/39.jpg
-End

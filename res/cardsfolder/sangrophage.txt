@@ -1,9 +1,0 @@
-Name:Sangrophage
-ManaCost:B B
-Types:Creature Zombie
-Text:At the beginning of your upkeep, tap Sangrophage unless you pay 2 life
-PT:3/3
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sangrophage.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/127.jpg
-End

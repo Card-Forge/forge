@@ -2,11 +2,22 @@ package forge.deck;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardList;
 
+/**
+ * <p>DownloadDeck class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class DownloadDeck {
 
 
+    /**
+     * <p>foundNumberCard.</p>
+     *
+     * @param rStr a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String foundNumberCard(String rStr) {
         int temp;
         int i;
@@ -21,12 +32,17 @@ public class DownloadDeck {
         }
         if (rStr.codePointAt(i + 1) >= 48 && rStr.codePointAt(i + 1) <= 57) {
             return rStr.substring(i, i + 2);
-        }
-        else {
+        } else {
             return rStr.substring(i, i + 1);
         }
     }
 
+    /**
+     * <p>foundNameCard.</p>
+     *
+     * @param rStr a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String foundNameCard(String rStr) {
         int temp;
         int i;
@@ -43,6 +59,12 @@ public class DownloadDeck {
     }
 
 
+    /**
+     * <p>removeSpace.</p>
+     *
+     * @param rStr a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String removeSpace(String rStr) {
         int temp;
         int i;
@@ -58,6 +80,12 @@ public class DownloadDeck {
         return rStr.substring(i);
     }
 
+    /**
+     * <p>removeSpaceBack.</p>
+     *
+     * @param rStr a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String removeSpaceBack(String rStr) {
         int temp;
         int i;
@@ -73,6 +101,13 @@ public class DownloadDeck {
         return rStr.substring(0, i + 1);
     }
 
+    /**
+     * <p>removeFoundNumberCard.</p>
+     *
+     * @param rStr a {@link java.lang.String} object.
+     * @param Number a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String removeFoundNumberCard(String rStr, String Number) {
         int a;
         int temp;
@@ -80,13 +115,19 @@ public class DownloadDeck {
         temp = rStr.codePointAt(a + 1);
         if (temp >= 48 && temp <= 57) {
             return rStr.substring(a + 2);
-        }
-        else {
+        } else {
             return rStr.substring(a + 1);
         }
 
     }
 
+    /**
+     * <p>removeFoundNameCard.</p>
+     *
+     * @param rStr a {@link java.lang.String} object.
+     * @param Name a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String removeFoundNameCard(String rStr, String Name) {
         int a;
         a = Name.length();
@@ -94,12 +135,16 @@ public class DownloadDeck {
 
     }
 
+    /**
+     * <p>isCardSupport.</p>
+     *
+     * @param CardName a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public boolean isCardSupport(String CardName) {
-        CardList all = AllZone.CardFactory.getAllCards();
-
-        Card gCard;
-        for (int i = 0; i < all.size(); i++) {
-            gCard = all.getCard(i);
+    	// TODO: using AllZone.getCardFactory().getCard() would probably be much faster.
+    	
+        for (Card gCard : AllZone.getCardFactory()) {
             if (CardName.equalsIgnoreCase(gCard.getName())) {
                 return true;
             }
@@ -107,20 +152,23 @@ public class DownloadDeck {
         return false;
     }
 
+    /**
+     * <p>getCardDownload.</p>
+     *
+     * @param c a {@link forge.Card} object.
+     * @param CardName a {@link java.lang.String} object.
+     * @return a {@link forge.Card} object.
+     */
     public Card getCardDownload(Card c, String CardName) {
-        CardList all = AllZone.CardFactory.getAllCards();
-
-        Card newCard = null;
-
-        for (int i = 0; i < all.size(); i++) {
-            newCard = all.getCard(i);
-
+    	// TODO: using AllZone.getCardFactory().getCard() would probably be much faster.
+    	
+        for (Card newCard : AllZone.getCardFactory()) {
             if (CardName.equalsIgnoreCase(newCard.getName())) {
                 return newCard;
             }
         }
 
-        return newCard;
+        return null;
 
     }
 

@@ -1,403 +1,517 @@
 package forge.card.trigger;
 
+import forge.*;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.AllZone;
-import forge.AllZoneUtil;
-import forge.Card;
-import forge.CardList;
-import forge.Player;
-import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.SpellAbility;
-
+/**
+ * <p>Abstract Trigger class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public abstract class Trigger {
 
+    /** Constant <code>nextID=0</code> */
     private static int nextID = 0;
 
-    public static void resetIDs()
-    {
+    /**
+     * <p>resetIDs.</p>
+     */
+    public static void resetIDs() {
         nextID = 50000;
     }
 
     protected int ID = nextID++;
-	
-	protected String name;
-	public String getName()
-	{
-		return name;
-	}
-	public void setName(String n)
-	{
-		name = n;
-	}
 
-    public void setID(int id)
-    {
+    protected String name;
+
+    /**
+     * <p>Getter for the field <code>name</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * <p>Setter for the field <code>name</code>.</p>
+     *
+     * @param n a {@link java.lang.String} object.
+     */
+    public void setName(String n) {
+        name = n;
+    }
+
+    /**
+     * <p>setID.</p>
+     *
+     * @param id a int.
+     */
+    public void setID(int id) {
         ID = id;
     }
 
-	protected HashMap<String,String> mapParams = new HashMap<String,String>();
-	public HashMap<String,String> getMapParams()
-	{
-		return mapParams;
-	}
-	
-	protected HashMap<String,Object> runParams;
-	public void setRunParams(HashMap<String,Object> rp)
-	{
-		runParams = rp;
-	}
-	public HashMap<String,Object> getRunParams()
-	{
-		return runParams;
-	}
-	
-	protected SpellAbility overridingAbility = null;
-	public SpellAbility getOverridingAbility()
-	{
-		return overridingAbility;
-	}
-	public void setOverridingAbility(SpellAbility sa)
-	{
-		overridingAbility = sa;
-	}
-	
-	private HashMap<String, Object> storedTriggeredObjects = null;
-	public void setStoredTriggeredObjects(HashMap<String, Object> storedTriggeredObjects) {
-		this.storedTriggeredObjects = storedTriggeredObjects;
-	}
-	public HashMap<String, Object> getStoredTriggeredObjects() {
-		return storedTriggeredObjects;
-	}
-	
-	protected Card hostCard;
-	public Card getHostCard()
-	{
-		return hostCard;
-	}
-	public void setHostCard(Card c)
-	{
-		hostCard = c;
-	}
-	
-	public Trigger(String n,HashMap<String,String> params, Card host)
-	{
-		name = n;
-		mapParams = new HashMap<String,String>();
-		for(Map.Entry<String,String> entry : params.entrySet())
-		{
-			mapParams.put(entry.getKey(),entry.getValue());
-		}
-		hostCard = host;
-	}
-	
-	public Trigger(HashMap<String,String> params, Card host)
-	{
-		mapParams = new HashMap<String,String>();
-		for(Map.Entry<String,String> entry : params.entrySet())
-		{
-			mapParams.put(entry.getKey(),entry.getValue());
-		}
-		hostCard = host;
-	}
-	
-	public String toString()
-	{
-		if (mapParams.containsKey("TriggerDescription")) {
-			return mapParams.get("TriggerDescription").replace("CARDNAME", hostCard.getName());
-		}
-		else return "";
-	}
-	
-	public boolean zonesCheck()
-	{
-		if(mapParams.containsKey("TriggerZones"))
-		{
-			ArrayList<String> triggerZones = new ArrayList<String>();
-			for(String s :  mapParams.get("TriggerZones").split(","))
-			{
-				triggerZones.add(s);
-			}
-			if(AllZone.getZone(hostCard) == null)
-			{
-				return false;
-			}
-			if(!triggerZones.contains(AllZone.getZone(hostCard).getZoneName()))
-			{
-				return false;
-			}
-		}
-		
-		return true;
-	}
+    protected HashMap<String, String> mapParams = new HashMap<String, String>();
 
-    public boolean phasesCheck()
-    {
-        if(mapParams.containsKey("TriggerPhases"))
-        {
-            String phases = mapParams.get("TriggerPhases");
+    /**
+     * <p>Getter for the field <code>mapParams</code>.</p>
+     *
+     * @return a {@link java.util.HashMap} object.
+     */
+    public HashMap<String, String> getMapParams() {
+        return mapParams;
+    }
 
-        	if (phases.contains("->")){
-        		// If phases lists a Range, split and Build Activate String
-        		// Combat_Begin->Combat_End (During Combat)
-        		// Draw-> (After Upkeep)
-        		// Upkeep->Combat_Begin (Before Declare Attackers)
+    protected Map<String, Object> runParams;
 
-        		String[] split = phases.split("->", 2);
-        		phases = AllZone.Phase.buildActivateString(split[0], split[1]);
-        	}
-            ArrayList<String> triggerPhases = new ArrayList<String>();
-            for(String s :  phases.split(","))
-			{
-				triggerPhases.add(s);
-			}
-            if(!triggerPhases.contains(AllZone.Phase.getPhase()))
-            {
+    /**
+     * <p>Setter for the field <code>runParams</code>.</p>
+     *
+     * @param runParams2 a {@link java.util.Map} object.
+     */
+    public void setRunParams(Map<String, Object> runParams2) {
+        runParams = runParams2;
+    }
+
+    /**
+     * <p>Getter for the field <code>runParams</code>.</p>
+     *
+     * @return a {@link java.util.Map} object.
+     */
+    public Map<String, Object> getRunParams() {
+        return runParams;
+    }
+
+    protected SpellAbility overridingAbility = null;
+
+    /**
+     * <p>Getter for the field <code>overridingAbility</code>.</p>
+     *
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getOverridingAbility() {
+        return overridingAbility;
+    }
+
+    /**
+     * <p>Setter for the field <code>overridingAbility</code>.</p>
+     *
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public void setOverridingAbility(SpellAbility sa) {
+        overridingAbility = sa;
+    }
+
+    private HashMap<String, Object> storedTriggeredObjects = null;
+
+    /**
+     * <p>Setter for the field <code>storedTriggeredObjects</code>.</p>
+     *
+     * @param storedTriggeredObjects a {@link java.util.HashMap} object.
+     * @since 1.0.15
+     */
+    public void setStoredTriggeredObjects(HashMap<String, Object> storedTriggeredObjects) {
+        this.storedTriggeredObjects = storedTriggeredObjects;
+    }
+
+    /**
+     * <p>Getter for the field <code>storedTriggeredObjects</code>.</p>
+     *
+     * @return a {@link java.util.HashMap} object.
+     * @since 1.0.15
+     */
+    public HashMap<String, Object> getStoredTriggeredObjects() {
+        return storedTriggeredObjects;
+    }
+
+    protected Card hostCard;
+
+    /**
+     * <p>Getter for the field <code>hostCard</code>.</p>
+     *
+     * @return a {@link forge.Card} object.
+     */
+    public Card getHostCard() {
+        return hostCard;
+    }
+
+    /**
+     * <p>Setter for the field <code>hostCard</code>.</p>
+     *
+     * @param c a {@link forge.Card} object.
+     */
+    public void setHostCard(Card c) {
+        hostCard = c;
+    }
+
+    /**
+     * <p>Constructor for Trigger.</p>
+     *
+     * @param n a {@link java.lang.String} object.
+     * @param params a {@link java.util.HashMap} object.
+     * @param host a {@link forge.Card} object.
+     */
+    public Trigger(String n, HashMap<String, String> params, Card host) {
+        name = n;
+        mapParams = new HashMap<String, String>();
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            mapParams.put(entry.getKey(), entry.getValue());
+        }
+        hostCard = host;
+    }
+
+    /**
+     * <p>Constructor for Trigger.</p>
+     *
+     * @param params a {@link java.util.HashMap} object.
+     * @param host a {@link forge.Card} object.
+     */
+    public Trigger(HashMap<String, String> params, Card host) {
+        mapParams = new HashMap<String, String>();
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            mapParams.put(entry.getKey(), entry.getValue());
+        }
+        hostCard = host;
+    }
+
+    /**
+     * <p>toString.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String toString() {
+        if (mapParams.containsKey("TriggerDescription")) {
+            return mapParams.get("TriggerDescription").replace("CARDNAME", hostCard.getName());
+        } else return "";
+    }
+
+    /**
+     * <p>zonesCheck.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean zonesCheck() {
+        if (mapParams.containsKey("TriggerZones")) {
+            ArrayList<String> triggerZones = new ArrayList<String>();
+            for (String s : mapParams.get("TriggerZones").split(",")) {
+                triggerZones.add(s);
+            }
+            if (AllZone.getZone(hostCard) == null) {
+                return false;
+            }
+            if (!triggerZones.contains(AllZone.getZone(hostCard).getZoneName())) {
                 return false;
             }
         }
-        
-        if(mapParams.containsKey("PlayerTurn"))
-            if(!AllZone.Phase.isPlayerTurn(hostCard.getController()))
+
+        return true;
+    }
+
+    /**
+     * <p>phasesCheck.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean phasesCheck() {
+        if (mapParams.containsKey("TriggerPhases")) {
+            String phases = mapParams.get("TriggerPhases");
+
+            if (phases.contains("->")) {
+                // If phases lists a Range, split and Build Activate String
+                // Combat_Begin->Combat_End (During Combat)
+                // Draw-> (After Upkeep)
+                // Upkeep->Combat_Begin (Before Declare Attackers)
+
+                String[] split = phases.split("->", 2);
+                phases = AllZone.getPhase().buildActivateString(split[0], split[1]);
+            }
+            ArrayList<String> triggerPhases = new ArrayList<String>();
+            for (String s : phases.split(",")) {
+                triggerPhases.add(s);
+            }
+            if (!triggerPhases.contains(AllZone.getPhase().getPhase())) {
                 return false;
-        
-        if(mapParams.containsKey("OpponentTurn"))
-            if(AllZone.Phase.isPlayerTurn(hostCard.getController()))
+            }
+        }
+
+        if (mapParams.containsKey("PlayerTurn"))
+            if (!AllZone.getPhase().isPlayerTurn(hostCard.getController()))
+                return false;
+
+        if (mapParams.containsKey("OpponentTurn"))
+            if (AllZone.getPhase().isPlayerTurn(hostCard.getController()))
                 return false;
 
         return true;
     }
-	
-	public boolean requirementsCheck()
-	{
-		if(mapParams.containsKey("Metalcraft"))
-		{
-			if(mapParams.get("Metalcraft").equals("True") && !hostCard.getController().hasMetalcraft())
-			{
-				return false;
-			}
-		}
-		
-		if(mapParams.containsKey("Threshold"))
-		{
-			if(mapParams.get("Threshold").equals("True") && !hostCard.getController().hasThreshold())
-			{
-				return false;
-			}
-		}
-		
-		if(mapParams.containsKey("Hellbent"))
-		{
-			if(mapParams.get("Hellbent").equals("True") && !hostCard.getController().hasHellbent())
-			{
-				return false;
-			}
-		}
-		
-		if(mapParams.containsKey("PlayersPoisoned"))
-		{
-			if(mapParams.get("PlayersPoisoned").equals("You") && hostCard.getController().getPoisonCounters() == 0)
-			{
-				return false;
-			}
-			else if(mapParams.get("PlayersPoisoned").equals("Opponent") && hostCard.getController().getOpponent().getPoisonCounters() == 0)
-			{
-				return false;
-			}
-			else if(mapParams.get("PlayersPoisoned").equals("Each") && !(hostCard.getController().getPoisonCounters() != 0 && hostCard.getController().getPoisonCounters() != 0 ))
-			{
-				return false;
-			}
-		}
-		
-		if(mapParams.containsKey("LifeTotal")){
-			String player = mapParams.get("LifeTotal");
-			String lifeCompare = "GE1";
-			int life = 1;
-			
-			if(player.equals("You")) {
-				life = hostCard.getController().getLife();
-			}
-			if(player.equals("Opponent")) {
-				life = hostCard.getController().getOpponent().getLife();
-			}
-			
-			if(mapParams.containsKey("LifeAmount")) {
-				lifeCompare = mapParams.get("LifeAmount");
-			}
-			
-			
-			int right = 1;
-			String rightString = lifeCompare.substring(2);
-			if(rightString.equals("X")) {
-				right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-			}
-			else {
-				right = Integer.parseInt(lifeCompare.substring(2));
-			}
-			
-			if(!Card.compare(life, lifeCompare, right)) {
-				return false;
-			}
-				
-		}
-		
-		if (mapParams.containsKey("IsPresent")){
-			String sIsPresent = mapParams.get("IsPresent");
-			String presentCompare = "GE1";
-			String presentZone = "Battlefield";
-			String presentPlayer = "Any";
-			if(mapParams.containsKey("PresentCompare"))
-			{
-				presentCompare = mapParams.get("PresentCompare");
-			}
-			if(mapParams.containsKey("PresentZone"))
-			{
-				presentZone = mapParams.get("PresentZone");
-			}
-			if(mapParams.containsKey("PresentPlayer"))
-			{
-				presentPlayer = mapParams.get("PresentPlayer");
-			}
-			CardList list = new CardList();
-			if(presentPlayer.equals("You") || presentPlayer.equals("Any"))
-			{
-				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
-			}
-			if(presentPlayer.equals("Opponent") || presentPlayer.equals("Any"))
-			{
-				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
-			}
-			
-			list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
-			
-			int right = 1;
-			String rightString = presentCompare.substring(2);
-			if(rightString.equals("X")) {
-				right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-			}
-			else {
-				right = Integer.parseInt(presentCompare.substring(2));
-			}
-			int left = list.size();
-			
-			if (!Card.compare(left, presentCompare, right))
-			{
-				return false;
-			}
-				
-		}
-		
-		if (mapParams.containsKey("IsPresent2")){
-			String sIsPresent = mapParams.get("IsPresent2");
-			String presentCompare = "GE1";
-			String presentZone = "Battlefield";
-			String presentPlayer = "Any";
-			if(mapParams.containsKey("PresentCompare2"))
-			{
-				presentCompare = mapParams.get("PresentCompare2");
-			}
-			if(mapParams.containsKey("PresentZone2"))
-			{
-				presentZone = mapParams.get("PresentZone2");
-			}
-			if(mapParams.containsKey("PresentPlayer2"))
-			{
-				presentPlayer = mapParams.get("PresentPlayer2");
-			}
-			CardList list = new CardList();
-			if(presentPlayer.equals("You") || presentPlayer.equals("Any"))
-			{
-				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController()));
-			}
-			if(presentPlayer.equals("Opponent") || presentPlayer.equals("Any"))
-			{
-				list.addAll(AllZoneUtil.getCardsInZone(presentZone,hostCard.getController().getOpponent()));
-			}
-			
-			list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
-			
-			int right = 1;
-			String rightString = presentCompare.substring(2);
-			if(rightString.equals("X")) {
-				right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-			}
-			else {
-				right = Integer.parseInt(presentCompare.substring(2));
-			}
-			int left = list.size();
-			
-			if (!Card.compare(left, presentCompare, right))
-			{
-				return false;
-			}
-				
-		}
-		
-		return true;
-	}
-	
-	
-	public boolean matchesValid(Object o,String[] valids,Card srcCard)
-	{
-		if(o instanceof Card)
-		{
-			Card c = (Card)o;
-			return c.isValidCard(valids, srcCard.getController(), srcCard);
-		}
-		
-		if(o instanceof Player)
-		{
-			for(String v : valids)
-			{
-				if(v.equalsIgnoreCase("Player") || v.equalsIgnoreCase("Each"))
-				{
-					return true;
-				}
-				if(v.equalsIgnoreCase("Opponent"))
-				{
-					if(o.equals(srcCard.getController().getOpponent()))
-					{
-						return true;
-					}
-				}
-				if(v.equalsIgnoreCase("You"))
-				{
-					return o.equals(srcCard.getController());
-				}
-				if(v.equalsIgnoreCase("EnchantedController")) {
-					return ((Player)o).isPlayer(srcCard.getEnchantingCard().getController());
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean isSecondary()
-	{
-		if(mapParams.containsKey("Secondary"))
-		{
-			if(mapParams.get("Secondary").equals("True"))
-				return true;
-		}
-		return false;
-	}
 
+    /**
+     * <p>requirementsCheck.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean requirementsCheck() {
+        if (mapParams.containsKey("Metalcraft")) {
+            if (mapParams.get("Metalcraft").equals("True") && !hostCard.getController().hasMetalcraft()) {
+                return false;
+            }
+        }
+
+        if (mapParams.containsKey("Threshold")) {
+            if (mapParams.get("Threshold").equals("True") && !hostCard.getController().hasThreshold()) {
+                return false;
+            }
+        }
+
+        if (mapParams.containsKey("Hellbent")) {
+            if (mapParams.get("Hellbent").equals("True") && !hostCard.getController().hasHellbent()) {
+                return false;
+            }
+        }
+
+        if (mapParams.containsKey("PlayersPoisoned")) {
+            if (mapParams.get("PlayersPoisoned").equals("You") && hostCard.getController().getPoisonCounters() == 0) {
+                return false;
+            } else if (mapParams.get("PlayersPoisoned").equals("Opponent") && hostCard.getController().getOpponent().getPoisonCounters() == 0) {
+                return false;
+            } else if (mapParams.get("PlayersPoisoned").equals("Each") && !(hostCard.getController().getPoisonCounters() != 0 && hostCard.getController().getPoisonCounters() != 0)) {
+                return false;
+            }
+        }
+
+        if (mapParams.containsKey("LifeTotal")) {
+            String player = mapParams.get("LifeTotal");
+            String lifeCompare = "GE1";
+            int life = 1;
+
+            if (player.equals("You")) {
+                life = hostCard.getController().getLife();
+            }
+            if (player.equals("Opponent")) {
+                life = hostCard.getController().getOpponent().getLife();
+            }
+
+            if (mapParams.containsKey("LifeAmount")) {
+                lifeCompare = mapParams.get("LifeAmount");
+            }
+
+
+            int right = 1;
+            String rightString = lifeCompare.substring(2);
+            if (rightString.equals("X")) {
+                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+            } else {
+                right = Integer.parseInt(lifeCompare.substring(2));
+            }
+
+            if (!AllZoneUtil.compare(life, lifeCompare, right)) {
+                return false;
+            }
+
+        }
+
+        if (mapParams.containsKey("IsPresent")) {
+            String sIsPresent = mapParams.get("IsPresent");
+            String presentCompare = "GE1";
+            String presentZone = "Battlefield";
+            String presentPlayer = "Any";
+            if (mapParams.containsKey("PresentCompare")) {
+                presentCompare = mapParams.get("PresentCompare");
+            }
+            if (mapParams.containsKey("PresentZone")) {
+                presentZone = mapParams.get("PresentZone");
+            }
+            if (mapParams.containsKey("PresentPlayer")) {
+                presentPlayer = mapParams.get("PresentPlayer");
+            }
+            CardList list = new CardList();
+            if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
+                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController()));
+            }
+            if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
+                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController().getOpponent()));
+            }
+
+            list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
+
+            int right = 1;
+            String rightString = presentCompare.substring(2);
+            if (rightString.equals("X")) {
+                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+            } else {
+                right = Integer.parseInt(presentCompare.substring(2));
+            }
+            int left = list.size();
+
+            if (!AllZoneUtil.compare(left, presentCompare, right)) {
+                return false;
+            }
+
+        }
+
+        if (mapParams.containsKey("IsPresent2")) {
+            String sIsPresent = mapParams.get("IsPresent2");
+            String presentCompare = "GE1";
+            String presentZone = "Battlefield";
+            String presentPlayer = "Any";
+            if (mapParams.containsKey("PresentCompare2")) {
+                presentCompare = mapParams.get("PresentCompare2");
+            }
+            if (mapParams.containsKey("PresentZone2")) {
+                presentZone = mapParams.get("PresentZone2");
+            }
+            if (mapParams.containsKey("PresentPlayer2")) {
+                presentPlayer = mapParams.get("PresentPlayer2");
+            }
+            CardList list = new CardList();
+            if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
+                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController()));
+            }
+            if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
+                list.addAll(AllZoneUtil.getCardsInZone(presentZone, hostCard.getController().getOpponent()));
+            }
+
+            list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
+
+            int right = 1;
+            String rightString = presentCompare.substring(2);
+            if (rightString.equals("X")) {
+                right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+            } else {
+                right = Integer.parseInt(presentCompare.substring(2));
+            }
+            int left = list.size();
+
+            if (!AllZoneUtil.compare(left, presentCompare, right)) {
+                return false;
+            }
+
+        }
+
+        if(mapParams.containsKey("CheckSVar")) {
+            String SVarName = mapParams.get("CheckSVar");
+            String operator = "GE";
+            String operand = "1";
+
+            if(mapParams.containsKey("SVarCompare"))
+            {
+                operator =  mapParams.get("SVarCompare").substring(0,2);
+                operand = mapParams.get("SVarCompare").substring(2);
+            }
+
+            int sVarResult = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(SVarName));
+            int operandResult = 0;
+            try {
+                operandResult = Integer.parseInt(operand);
+            }
+            catch ( Exception e) {
+                operandResult = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(operand));
+            }
+
+            if(!AllZoneUtil.compare(sVarResult,operator,operandResult))
+            {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
+
+    /**
+     * <p>matchesValid.</p>
+     *
+     * @param o a {@link java.lang.Object} object.
+     * @param valids an array of {@link java.lang.String} objects.
+     * @param srcCard a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public boolean matchesValid(Object o, String[] valids, Card srcCard) {
+        if (o instanceof Card) {
+            Card c = (Card) o;
+            return c.isValidCard(valids, srcCard.getController(), srcCard);
+        }
+
+        if (o instanceof Player) {
+            for (String v : valids) {
+                if (v.equalsIgnoreCase("Player") || v.equalsIgnoreCase("Each")) {
+                    return true;
+                }
+                if (v.equalsIgnoreCase("Opponent")) {
+                    if (o.equals(srcCard.getController().getOpponent())) {
+                        return true;
+                    }
+                }
+                if (v.equalsIgnoreCase("You")) {
+                    return o.equals(srcCard.getController());
+                }
+                if (v.equalsIgnoreCase("EnchantedController")) {
+                    return ((Player) o).isPlayer(srcCard.getEnchantingCard().getController());
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * <p>isSecondary.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean isSecondary() {
+        if (mapParams.containsKey("Secondary")) {
+            if (mapParams.get("Secondary").equals("True"))
+                return true;
+        }
+        return false;
+    }
+
+    /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o)
-    {
-        if(!(o instanceof Trigger))
+    public boolean equals(Object o) {
+        if (!(o instanceof Trigger))
             return false;
 
-        return this.ID == ((Trigger)o).ID;
+        return this.ID == ((Trigger) o).ID;
     }
-	
-	public abstract boolean performTest(HashMap<String,Object> runParams);
-	
-	public abstract Trigger getCopy();
-	
-	public abstract void setTriggeringObjects(SpellAbility sa);
+
+    /**
+     * <p>performTest.</p>
+     *
+     * @param runParams2 a {@link java.util.HashMap} object.
+     * @return a boolean.
+     */
+    public abstract boolean performTest(java.util.Map<String, Object> runParams2);
+
+    /**
+     * <p>getCopy.</p>
+     *
+     * @return a {@link forge.card.trigger.Trigger} object.
+     */
+    public abstract Trigger getCopy();
+
+    /**
+     * <p>setTriggeringObjects.</p>
+     *
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public abstract void setTriggeringObjects(SpellAbility sa);
+    
+    protected boolean temporary = false;
+    
+    public void setTemporary(boolean temp) {
+    	temporary = temp;
+    }
+    
+    public boolean isTemporary() {
+    	return temporary;
+    }
 }

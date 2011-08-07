@@ -1,9 +1,0 @@
-Name:Loamdragger Giant
-ManaCost:4 RG RG RG
-Types:Creature Giant Warrior
-Text:no text
-PT:7/6
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/loamdragger_giant.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/210.jpg
-End

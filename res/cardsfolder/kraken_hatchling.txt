@@ -1,9 +1,0 @@
-Name:Kraken Hatchling
-ManaCost:U
-Types:Creature Kraken
-Text:no text
-PT:0/4
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kraken_hatchling.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/50.jpg
-End

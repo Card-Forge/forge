@@ -1,9 +1,0 @@
-Name:Stifle
-ManaCost:U
-Types:Instant
-Text:no text
-A:SP$ Counter | Cost$ U | TgtPrompt$ Select target Activated or Triggered Ability | ValidTgts$ Card | TargetType$ Activated,Triggered | SpellDescription$ Counter target activated or triggered ability.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stifle.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/52.jpg
-End

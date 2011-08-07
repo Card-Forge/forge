@@ -1,9 +1,0 @@
-Name:Windswept Heath
-ManaCost:no cost
-Types:Land
-Text:no text
-A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest,Plains | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest or Plains card and put it onto the battlefield. Then shuffle your library.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/windswept_heath.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/328.jpg
-End

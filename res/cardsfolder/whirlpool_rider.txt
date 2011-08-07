@@ -1,9 +1,0 @@
-Name:Whirlpool Rider
-ManaCost:1 U
-Types:Creature Merfolk
-Text:When CARDNAME enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
-PT:1/1
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27670.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/35.jpg
-End

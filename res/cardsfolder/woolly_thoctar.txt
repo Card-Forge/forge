@@ -1,9 +1,0 @@
-Name:Woolly Thoctar
-ManaCost:R G W
-Types:Creature Beast
-Text:no text
-PT:5/4
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_thoctar.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/209.jpg
-End

@@ -1,9 +1,0 @@
-Name:Acquire
-ManaCost:3 U U
-Types:Sorcery
-Text:no text
-A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | SpellDescription$ Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acquire.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/21.jpg
-End

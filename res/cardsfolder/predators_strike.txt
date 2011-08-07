@@ -1,9 +1,0 @@
-Name:Predator's Strike
-ManaCost:1 G
-Types:Instant
-Text:no text
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Target creature gets +3/+3 and gains trample until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_strike.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/128.jpg
-End

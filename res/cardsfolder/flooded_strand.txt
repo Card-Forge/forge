@@ -1,9 +1,0 @@
-Name:Flooded Strand
-ManaCost:no cost
-Types:Land
-Text:no text
-A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_strand.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/316.jpg
-End

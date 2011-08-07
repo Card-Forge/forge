@@ -1,9 +1,0 @@
-Name:Captive Flame
-ManaCost:2 R
-Types:Enchantment
-Text:no text
-A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captive_flame.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/96.jpg
-End

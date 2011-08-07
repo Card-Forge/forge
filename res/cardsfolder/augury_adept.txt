@@ -1,9 +1,0 @@
-Name:Augury Adept
-ManaCost:1 WU WU
-Types:Creature Kithkin Wizard
-Text:Whenever Augury Adept deals combat damage to a player, reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost.
-PT:2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/augury_adept.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/137.jpg
-End

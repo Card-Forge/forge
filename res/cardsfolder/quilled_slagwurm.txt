@@ -1,9 +1,0 @@
-Name:Quilled Slagwurm
-ManaCost:4 G G G
-Types:Creature Wurm
-Text:no text
-PT:8/8
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quilled_slagwurm.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/89.jpg
-End

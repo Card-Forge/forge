@@ -1,9 +1,0 @@
-Name:Meng Huo's Horde
-ManaCost:4 G
-Types:Creature Human Soldier
-Text:no text
-PT:4/5
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10503.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/143.jpg
-End

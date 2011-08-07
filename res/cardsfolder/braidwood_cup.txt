@@ -1,9 +1,0 @@
-Name:Braidwood Cup
-ManaCost:3
-Types:Artifact
-Text:no text
-A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/braidwood_cup.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/126.jpg
-End

@@ -1,8 +1,0 @@
-Name:Breeding Pool
-ManaCost:no cost
-Types:Land Forest Island
-Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97088.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/172.jpg
-End

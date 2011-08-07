@@ -1,8 +1,0 @@
-Name:Stitch Together
-ManaCost:B B
-Types:Sorcery
-Text:Return target creature card from your graveyard to your hand.\r\nThreshold - Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_together.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/72.jpg
-End

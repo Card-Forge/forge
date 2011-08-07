@@ -1,9 +1,0 @@
-Name:Transluminant
-ManaCost:1 G
-Types:Creature Dryad Shaman
-Text:no text
-PT:2/2
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87946.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/186.jpg
-End

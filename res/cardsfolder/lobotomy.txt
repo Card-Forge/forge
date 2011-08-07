@@ -1,9 +1,0 @@
-Name:Lobotomy
-ManaCost:2 U B
-Types:Sorcery
-Text:Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lobotomy.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/342.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/255.jpg
-End

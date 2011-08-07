@@ -1,9 +1,0 @@
-Name:Hexplate Golem
-ManaCost:7
-Types:Artifact Creature Golem
-Text:no text
-PT:5/7
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hexplate_golem.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/109.jpg
-End

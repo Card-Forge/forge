@@ -1,67 +1,109 @@
 package forge.card.mana;
 
+/**
+ * <p>Mana_PartPhyrexian class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class Mana_PartPhyrexian extends Mana_Part {
     private Mana_PartColor wrappedColor;
     private String color;
 
-    public Mana_PartPhyrexian(String manaCostToPay)
-    {
+    /**
+     * <p>Constructor for Mana_PartPhyrexian.</p>
+     *
+     * @param manaCostToPay a {@link java.lang.String} object.
+     */
+    public Mana_PartPhyrexian(String manaCostToPay) {
         wrappedColor = new Mana_PartColor(manaCostToPay.substring(1));
         color = manaCostToPay.substring(1);
     }
 
-    public boolean isEasierToPay(Mana_Part part)
-    {
+    /** {@inheritDoc} */
+    public boolean isEasierToPay(Mana_Part part) {
         return true;
     }
 
-    public String toString()
-    {
+    /**
+     * <p>toString.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String toString() {
         return wrappedColor.toString().equals("") ? "" : "P" + wrappedColor.toString();
     }
 
-    public boolean isPaid()
-    {
+    /**
+     * <p>isPaid.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean isPaid() {
         return wrappedColor.isPaid();
     }
 
-    public boolean isColor(String mana)
-    {
+    /**
+     * {@inheritDoc}
+     *
+     * <p>isColor.</p>
+     *
+     * @param mana a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public boolean isColor(String mana) {
         return wrappedColor.isColor(mana);
     }
 
-    public boolean isColor(Mana mana)
-    {
+    /** {@inheritDoc} */
+    public boolean isColor(Mana mana) {
         return wrappedColor.isColor(mana);
     }
 
-    public boolean isNeeded(String mana)
-    {
+    /**
+     * <p>isNeeded.</p>
+     *
+     * @param mana a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public boolean isNeeded(String mana) {
         return wrappedColor.isNeeded(mana);
     }
 
-    public boolean isNeeded(Mana mana)
-    {
+    /** {@inheritDoc} */
+    public boolean isNeeded(Mana mana) {
         return wrappedColor.isNeeded(mana);
     }
 
-    public void reduce(String mana)
-    {
+    /** {@inheritDoc} */
+    public void reduce(String mana) {
         wrappedColor.reduce(mana);
     }
 
-    public void reduce(Mana mana)
-    {
+    /**
+     * {@inheritDoc}
+     *
+     * <p>reduce.</p>
+     *
+     * @param mana a {@link forge.card.mana.Mana} object.
+     */
+    public void reduce(Mana mana) {
         wrappedColor.reduce(mana);
     }
 
-    public int getConvertedManaCost()
-    {
+    /**
+     * <p>getConvertedManaCost.</p>
+     *
+     * @return a int.
+     */
+    public int getConvertedManaCost() {
         return wrappedColor.getConvertedManaCost();
     }
 
-    public void payLife()
-    {
+    /**
+     * <p>payLife.</p>
+     */
+    public void payLife() {
         wrappedColor.reduce(color);
     }
 }

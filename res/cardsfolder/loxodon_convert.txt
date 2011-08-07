@@ -1,9 +1,0 @@
-Name:Loxodon Convert
-ManaCost:3 W
-Types:Creature Elephant Soldier
-Text:no text
-PT:4/2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_convert.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/14.jpg
-End

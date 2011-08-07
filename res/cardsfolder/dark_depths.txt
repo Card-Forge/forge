@@ -1,8 +1,0 @@
-Name:Dark Depths
-ManaCost:no cost
-Types:Legendary Snow Land
-Text:Dark Depths enters the battlefield with ten ice counters on it.\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_depths.jpg
-SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/145.jpg
-End

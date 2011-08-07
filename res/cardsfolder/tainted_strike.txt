@@ -1,9 +1,0 @@
-Name:Tainted Strike
-ManaCost:B
-Types:Instant
-Text:no text
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Infect | SpellDescription$ Target creature gets +1/+0 and gains infect until end of turn.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_strike.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/80.jpg
-End

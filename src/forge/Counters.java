@@ -1,6 +1,6 @@
 /**
  * Counters.java
- * 
+ *
  * Created on 17.02.2010
  */
 
@@ -9,9 +9,9 @@ package forge;
 
 /**
  * The class Counters.
- * 
- * @version V0.0 17.02.2010
+ *
  * @author Clemens Koza
+ * @version V0.0 17.02.2010
  */
 public enum Counters {
     AGE(),
@@ -22,6 +22,7 @@ public enum Counters {
     BLOOD(),
     BOUNTY(),
     BRIBERY(),
+    CARRION(),
     CHARGE(),
     CORPSE(),
     CREDIT(),
@@ -50,6 +51,7 @@ public enum Counters {
     JAVELIN(),
     KI(),
     LEVEL(),
+    LORE(),
     LOYALTY(),
     LUCK(),
     M0M1("-0/-1"),
@@ -65,6 +67,7 @@ public enum Counters {
     ORE(),
     PAGE(),
     PETAL(),
+    PIN(),
     PLAGUE(),
     PRESSURE(),
     PHYLACTERY,
@@ -95,22 +98,41 @@ public enum Counters {
     VITALITY(),
     WIND(),
     WISH();
-    
+
     private String name;
-    
+
+    /**
+     * <p>Constructor for Counters.</p>
+     */
     private Counters() {
         this.name = name().substring(0, 1).toUpperCase() + name().substring(1).toLowerCase();
     }
-    
+
+    /**
+     * <p>Constructor for Counters.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     */
     private Counters(String name) {
         this.name = name;
     }
-    
+
+    /**
+     * <p>Getter for the field <code>name</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         return name;
     }
-    public static Counters getType(String name)
-    {
-    	return Enum.valueOf(Counters.class, name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase());
+
+    /**
+     * <p>getType.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link forge.Counters} object.
+     */
+    public static Counters getType(String name) {
+        return Enum.valueOf(Counters.class, name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase());
     }
 }

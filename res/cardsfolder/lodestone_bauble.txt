@@ -1,9 +1,0 @@
-Name:Lodestone Bauble
-ManaCost:0
-Types:Artifact
-Text:no text
-SVar:RemRandomDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_bauble.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/164.jpg
-End

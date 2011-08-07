@@ -1,9 +1,0 @@
-Name:Scarwood Goblins
-ManaCost:R G
-Types:Creature Goblin
-Text:no text
-PT:2/2
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1822.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/119.jpg
-End

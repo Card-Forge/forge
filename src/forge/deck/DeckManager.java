@@ -16,13 +16,21 @@ import static java.util.Arrays.asList;
 
 
 //reads and writeDeck Deck objects
+/**
+ * <p>DeckManager class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class DeckManager {
+    /** Constant <code>BDKFileFilter</code> */
     private static FilenameFilter BDKFileFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
             return name.endsWith(".bdk");
         }
     };
 
+    /** Constant <code>DCKFileFilter</code> */
     private static FilenameFilter DCKFileFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
             return name.endsWith(".dck");
@@ -34,6 +42,11 @@ public class DeckManager {
     Map<String, Deck> deckMap;
     Map<String, Deck[]> draftMap;
 
+    /**
+     * <p>Constructor for DeckManager.</p>
+     *
+     * @param deckDir a {@link java.io.File} object.
+     */
     public DeckManager(File deckDir) {
         if (deckDir == null) {
             throw new IllegalArgumentException("No deck directory specified");
@@ -43,8 +56,7 @@ public class DeckManager {
 
             if (deckDir.isFile()) {
                 throw new IOException("Not a directory");
-            }
-            else {
+            } else {
                 deckDir.mkdirs();
                 if (!deckDir.isDirectory()) {
                     throw new IOException("Directory can't be created");
@@ -60,19 +72,42 @@ public class DeckManager {
     }
 
 
+    /**
+     * <p>isUnique.</p>
+     *
+     * @param deckName a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public boolean isUnique(String deckName) {
         return !deckMap.containsKey(deckName);
     }
 
+    /**
+     * <p>isUniqueDraft.</p>
+     *
+     * @param deckName a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public boolean isUniqueDraft(String deckName) {
         return !draftMap.keySet().contains(deckName);
     }
 
+    /**
+     * <p>getDeck.</p>
+     *
+     * @param deckName a {@link java.lang.String} object.
+     * @return a {@link forge.deck.Deck} object.
+     */
     public Deck getDeck(String deckName) {
         return deckMap.get(deckName);
     }
 
 
+    /**
+     * <p>addDeck.</p>
+     *
+     * @param deck a {@link forge.deck.Deck} object.
+     */
     public void addDeck(Deck deck) {
         if (deck.getDeckType().equals(Constant.GameType.Draft)) {
             throw new RuntimeException(
@@ -82,10 +117,21 @@ public class DeckManager {
         deckMap.put(deck.getName(), deck);
     }
 
+    /**
+     * <p>deleteDeck.</p>
+     *
+     * @param deckName a {@link java.lang.String} object.
+     */
     public void deleteDeck(String deckName) {
         deckMap.remove(deckName);
     }
 
+    /**
+     * <p>getDraftDeck.</p>
+     *
+     * @param deckName a {@link java.lang.String} object.
+     * @return an array of {@link forge.deck.Deck} objects.
+     */
     public Deck[] getDraftDeck(String deckName) {
         if (!draftMap.containsKey(deckName)) {
             throw new RuntimeException(
@@ -95,12 +141,22 @@ public class DeckManager {
         return draftMap.get(deckName);
     }
 
+    /**
+     * <p>addDraftDeck.</p>
+     *
+     * @param deck an array of {@link forge.deck.Deck} objects.
+     */
     public void addDraftDeck(Deck[] deck) {
         checkDraftDeck(deck);
 
         draftMap.put(deck[0].toString(), deck);
     }
 
+    /**
+     * <p>deleteDraftDeck.</p>
+     *
+     * @param deckName a {@link java.lang.String} object.
+     */
     public void deleteDraftDeck(String deckName) {
         if (!draftMap.containsKey(deckName)) {
             throw new RuntimeException(
@@ -110,6 +166,11 @@ public class DeckManager {
         draftMap.remove(deckName);
     }
 
+    /**
+     * <p>checkDraftDeck.</p>
+     *
+     * @param deck an array of {@link forge.deck.Deck} objects.
+     */
     private void checkDraftDeck(Deck[] deck) {
         if (deck == null || deck.length != 8 || deck[0].getName().equals("")
                 || (!deck[0].getDeckType().equals(Constant.GameType.Draft))) {
@@ -118,19 +179,35 @@ public class DeckManager {
     }
 
 
+    /**
+     * <p>getDecks.</p>
+     *
+     * @return a {@link java.util.Collection} object.
+     */
     public Collection<Deck> getDecks() {
         return deckMap.values();
     }
 
+    /**
+     * <p>getDraftDecks.</p>
+     *
+     * @return a {@link java.util.Map} object.
+     */
     public Map<String, Deck[]> getDraftDecks() {
         return new HashMap<String, Deck[]>(draftMap);
     }
 
+    /**
+     * <p>close.</p>
+     */
     public void close() {
         writeAllDecks();
     }
 
 
+    /**
+     * <p>readAllDecks.</p>
+     */
     public void readAllDecks() {
         deckMap.clear();
         draftMap.clear();
@@ -155,6 +232,12 @@ public class DeckManager {
         }
     }
 
+    /**
+     * <p>readDeck.</p>
+     *
+     * @param deckFile a {@link java.io.File} object.
+     * @return a {@link forge.deck.Deck} object.
+     */
     public static Deck readDeck(File deckFile) {
 
         List<String> lines = new LinkedList<String>();
@@ -185,8 +268,8 @@ public class DeckManager {
         Deck d = new Deck();
 
         //read metadata
-        while(!(line = lineIterator.next()).equals("[main]")){
-            String[] linedata = line.split("=",2);
+        while (!(line = lineIterator.next()).equals("[main]")) {
+            String[] linedata = line.split("=", 2);
             d.addMetaData(linedata[0], linedata[1]);
         }
 
@@ -196,6 +279,12 @@ public class DeckManager {
 
     }
 
+    /**
+     * <p>readDeckOld.</p>
+     *
+     * @param iterator a {@link java.util.ListIterator} object.
+     * @return a {@link forge.deck.Deck} object.
+     */
     private static Deck readDeckOld(ListIterator<String> iterator) {
 
         String line;
@@ -207,8 +296,7 @@ public class DeckManager {
         while ((line = iterator.next()) != null && !line.equals("[general]")) {
             if (comment == null) {
                 comment = line;
-            }
-            else {
+            } else {
                 comment += "\n" + line;
             }
         }
@@ -231,6 +319,12 @@ public class DeckManager {
         return d;
     }
 
+    /**
+     * <p>addCardList.</p>
+     *
+     * @param lineIterator a {@link java.util.ListIterator} object.
+     * @param d a {@link forge.deck.Deck} object.
+     */
     private static void addCardList(ListIterator<String> lineIterator, Deck d) {
         String line;
 
@@ -261,11 +355,20 @@ public class DeckManager {
         }
     }
 
+    /**
+     * <p>deriveFileName.</p>
+     *
+     * @param deckName a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     private String deriveFileName(String deckName) {
         //skips all but the listed characters
         return deckName.replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
     }
 
+    /**
+     * <p>writeAllDecks.</p>
+     */
     public void writeAllDecks() {
         try {
             //store the files that do exist
@@ -313,6 +416,13 @@ public class DeckManager {
         }
     }
 
+    /**
+     * <p>writeDeck.</p>
+     *
+     * @param d a {@link forge.deck.Deck} object.
+     * @param out a {@link java.io.BufferedWriter} object.
+     * @throws java.io.IOException if any.
+     */
     private static void writeDeck(Deck d, BufferedWriter out) throws IOException {
         out.write("[metadata]\n");
 
@@ -331,21 +441,32 @@ public class DeckManager {
         }
     }
 
+    /**
+     * <p>count.</p>
+     *
+     * @param src a {@link java.util.List} object.
+     * @return a {@link java.util.Map} object.
+     */
     private static Map<String, Integer> count(List<String> src) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         for (String s : src) {
             Integer dstValue = result.get(s);
             if (dstValue == null) {
                 result.put(s, 1);
-            }
-            else {
+            } else {
                 result.put(s, dstValue + 1);
             }
         }
         return result;
     }
 
-    public static void writeDeck(Deck d, File f){
+    /**
+     * <p>writeDeck.</p>
+     *
+     * @param d a {@link forge.deck.Deck} object.
+     * @param f a {@link java.io.File} object.
+     */
+    public static void writeDeck(Deck d, File f) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             writeDeck(d, writer);

@@ -1,9 +1,0 @@
-Name:Jedit Ojanen
-ManaCost:4 W W U
-Types:Legendary Creature Cat Warrior
-Text:no text
-PT:5/5
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1660.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/274.jpg
-End

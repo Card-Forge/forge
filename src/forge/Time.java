@@ -1,24 +1,45 @@
 package forge;
-public class Time
-{
-  private long startTime;
-  private long stopTime;
 
-  public Time() {start();}
+/**
+ * <p>Time class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
+public class Time {
+    private long startTime;
+    private long stopTime;
 
-  public void start()
-  {
-    startTime = System.currentTimeMillis();
-  }
+    /**
+     * <p>Constructor for Time.</p>
+     */
+    public Time() {
+        start();
+    }
 
-  public double stop()
-  {
-    stopTime = System.currentTimeMillis();
-    return getTime();
-  }
+    /**
+     * <p>start.</p>
+     */
+    public void start() {
+        startTime = System.currentTimeMillis();
+    }
 
-  public double getTime()
-  {
-    return (stopTime - startTime) / 1000.0;
-  }
+    /**
+     * <p>stop.</p>
+     *
+     * @return a double.
+     */
+    public double stop() {
+        stopTime = System.currentTimeMillis();
+        return getTime();
+    }
+
+    /**
+     * <p>getTime.</p>
+     *
+     * @return a double.
+     */
+    public double getTime() {
+        return (stopTime - startTime) / 1000.0;
+    }
 }

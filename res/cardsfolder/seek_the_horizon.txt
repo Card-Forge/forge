@@ -1,9 +1,0 @@
-Name:Seek the Horizon
-ManaCost:3 G
-Types:Sorcery
-Text:no text
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 3 | SpellDescription$ Search your library for up to three basic land cards, reveal them, and put them into your hand. Then shuffle your library.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seek_the_horizon.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/147.jpg
-End

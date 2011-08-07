@@ -1,9 +1,0 @@
-Name:Lava Flow
-ManaCost:3 R R
-Types:Sorcery
-Text:no text
-A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | SpellDescription$ Destroy target creature or land.
-SVar:Rarity:Uncommon
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/lava_flow.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/143.jpg
-End

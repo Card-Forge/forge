@@ -1,125 +1,217 @@
 package forge;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.Map.Entry;
 
 import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 
+import net.slightlymagic.braids.util.generator.GeneratorFunctions;
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
+import com.google.code.jyield.Generator;
+import com.google.code.jyield.YieldUtils;
+
+
+/**
+ * <p>NameChanger class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class NameChanger implements NewConstants {
-    private Map<String, String> mutatedMap  = new HashMap<String, String>();
-    private Map<String, String> originalMap = new HashMap<String, String>();
-    
-    private boolean             changeCardName;
-    
+    private Map<String, String> mutatedMap = new TreeMap<String, String>();
+    private Map<String, String> originalMap = new TreeMap<String, String>();
+
+    private boolean changeCardName;
+
+    /**
+     * <p>Constructor for NameChanger.</p>
+     */
     public NameChanger() {
 //      readFile();
         setShouldChangeCardName(false);
     }
-    
+
     //should change card name?
+    /**
+     * <p>shouldChangeCardName.</p>
+     *
+     * @return a boolean.
+     */
     public boolean shouldChangeCardName() {
         return changeCardName;
     }
-    
+
+    /**
+     * <p>setShouldChangeCardName.</p>
+     *
+     * @param b a boolean.
+     */
     public void setShouldChangeCardName(boolean b) {
         changeCardName = b;
     }
-    
-    //returns an array of copies
-    public Card[] changeCard(Card c[]) {
-        for(int i = 0; i < c.length; i++)
-            changeCard(c[i]);
-        
-        return c;
+
+    /**
+     * This change's the inputGenerator's Card instances in place,
+     * and returns a generator of those same changed instances.
+     * 
+     * TODO: Should this method return void, because it side effects
+     * the contents of its inputGenerator?
+     * 
+     * @param inputGenerator a Generator of Card objects
+     * @return a Generator of side-effected Card objects
+     */
+    public Generator<Card> changeCard(Generator<Card> inputGenerator) {
+    	
+    	// Create a new Generator by applying a transform to the
+    	// inputGenerator.
+    	
+    	Lambda1<Card,Card> transform = new Lambda1<Card,Card>() {
+    		public Card apply(Card toChange) {
+    			return changeCard(toChange);
+    		};
+    	};
+    	
+    	return GeneratorFunctions.transformGenerator(transform, inputGenerator);
     }
-    
+
     //changes card name, getText(), and all SpellAbility getStackDescription() and toString()
+    /**
+     * <p>changeCard.</p>
+     *
+     * @param c a {@link forge.Card} object.
+     * @return a {@link forge.Card} object.
+     */
     public Card changeCard(Card c) {
         //change name
         String newName = changeName(c.getName());
         c.setName(newName);
-        
+
         //change text
         String s;
         s = c.getSpellText();
         c.setText(changeString(c, s));
-        
+
         //change all SpellAbilities
         SpellAbility[] spell = c.getSpellAbility();
-        for(int i = 0; i < spell.length; i++) {
+        for (int i = 0; i < spell.length; i++) {
             s = spell[i].getStackDescription();
             spell[i].setStackDescription(changeString(c, s));
-            
+
             s = spell[i].toString();
             spell[i].setDescription(changeString(c, s));
         }
-        
+
         return c;
     }//getMutatedCard()
-    
+
+    /**
+     * <p>changeString.</p>
+     *
+     * @param c a {@link forge.Card} object.
+     * @param in a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String changeString(Card c, String in) {
         //String name = getOriginalName(c.getName()); // unused
 //    in = in.replaceAll(name, changeName(name));
-        
+
         return in;
     }
-    
+
+	/**
+	 * Changes a list of cards if shouldChangeCardName() is true.
+	 * 
+	 * If not, we just return list.
+	 * 
+	 * TODO: Should this method return void, because it side effects the
+	 * contents of its input list?
+	 * 
+	 * @param list
+	 *            the list of cards to possibly change; while this list is not
+	 *            affected, its contents might be
+	 * 
+	 * @return either list itself or a new list (possibly wasteful) containing
+	 *         the side effected cards
+	 */
+	public CardList changeCardsIfNeeded(CardList list) {
+		if (shouldChangeCardName()) {
+            list = new CardList(changeCard(YieldUtils.toGenerator(list)));
+        }
+		return list;
+	}
+
     //always returns mutated (alias) for the card name
     //if argument is a mutated name, it returns the same mutated name
+    /**
+     * <p>changeName.</p>
+     *
+     * @param originalName a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String changeName(String originalName) {
         Object o = mutatedMap.get(originalName);
-        
-        if(o == null) return originalName;
-        
+
+        if (o == null) return originalName;
+
         return o.toString();
     }//getMutatedName()
-    
+
     //always returns the original cardname
     //if argument is a original name, it returns the same original name
+    /**
+     * <p>getOriginalName.</p>
+     *
+     * @param mutatedName a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String getOriginalName(String mutatedName) {
         Object o = originalMap.get(mutatedName);
-        
-        if(o == null) return mutatedName;
-        
+
+        if (o == null) return mutatedName;
+
         return o.toString();
     }//getOriginalName()
-    
+
+    /**
+     * <p>readFile.</p>
+     */
     @SuppressWarnings("unused")
-	private void readFile() {
+    private void readFile() {
         try {
             BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NAME_MUTATOR)));
-            
+
             String line = in.readLine();
-            
+
             //stop reading if end of file or blank line is read
-            while(line != null && (line.trim().length() != 0)) {
+            while (line != null && (line.trim().length() != 0)) {
                 processLine(line.trim());
-                
+
                 line = in.readLine();
             }//while
         }//try
-        catch(Exception ex) {
+        catch (Exception ex) {
 //~      throw new RuntimeException("NameMutator : readFile() error, " +ex);
-            
+
 
             //~ (could be cleaner...)
             try {
                 BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NAME_MUTATOR)));
-                
+
                 String line;
-                
+
                 //stop reading if end of file or blank line is read
-                while((line = in.readLine()) != null && (line.trim().length() != 0)) {
+                while ((line = in.readLine()) != null && (line.trim().length() != 0)) {
                     processLine(line.trim());
                 }//while
-            } catch(Exception ex2) {
+            } catch (Exception ex2) {
                 // Show orig exception
                 ErrorViewer.showError(ex2);
                 throw new RuntimeException(String.format("NameMutator : readFile() error, %s", ex), ex);
@@ -127,29 +219,37 @@ public class NameChanger implements NewConstants {
             //~
         }
     }//readFile()
-    
+
     //line is formated "original card name : alias card name"
+    /**
+     * <p>processLine.</p>
+     *
+     * @param line a {@link java.lang.String} object.
+     */
     private void processLine(String line) {
         StringTokenizer tok = new StringTokenizer(line, ":");
-        
-        if(tok.countTokens() != 2)
+
+        if (tok.countTokens() != 2)
             throw new RuntimeException(
                     "NameMutator : processLine() error, invalid line in file name-mutator.txt - " + line);
-        
+
         String original = tok.nextToken().trim();
         String mutated = tok.nextToken().trim();
-        
+
         mutatedMap.put(original, mutated);
         originalMap.put(mutated, original);
     }
-    
+
+    /**
+     * <p>printMap.</p>
+     *
+     * @param map a {@link java.util.Map} object.
+     */
     @SuppressWarnings("unused")
     // printMap
     private void printMap(Map<String, String> map) {
-        for(Entry<String, String> e:map.entrySet()) {
+        for (Entry<String, String> e : map.entrySet()) {
             System.out.println(e.getKey() + " : " + e.getValue());
         }
     }
-    
-    public static void main(String[] args) {}//main()
 }

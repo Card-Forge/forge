@@ -1,13 +1,48 @@
 package forge;
-public interface MyButton
-{
-//  public MyButton(String buttonText, Command command)
-  public void select();
-  public void setSelectable(boolean b);
-  public boolean isSelectable();
 
-  public String getText();
-  public void setText(String text);
+/**
+ * <p>MyButton interface.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
+public interface MyButton {
+    //  public MyButton(String buttonText, Command command)
+    /**
+     * <p>select.</p>
+     */
+    public void select();
 
-  public void reset(); //resets the text and calls setSelectable(false)
+    /**
+     * <p>setSelectable.</p>
+     *
+     * @param b a boolean.
+     */
+    public void setSelectable(boolean b);
+
+    /**
+     * <p>isSelectable.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean isSelectable();
+
+    /**
+     * <p>getText.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String getText();
+
+    /**
+     * <p>setText.</p>
+     *
+     * @param text a {@link java.lang.String} object.
+     */
+    public void setText(String text);
+
+    /**
+     * <p>reset.</p>
+     */
+    public void reset(); //resets the text and calls setSelectable(false)
 }

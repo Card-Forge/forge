@@ -1,4 +1,6 @@
 Albert Einstein 2
+Alice in Wonderland 2
+Apu Nahasapeemapetilon 2
 Aquaman 2
 Aragorn 2
 Barney Rubble 2
@@ -8,7 +10,7 @@ Buffy 2
 C3PO 2
 Captain America 2
 Catwoman 2
-Cave Troll 2
+Conan the Barbarian 2
 Crocodile Dundee 2
 Cyclops 2
 Da Vinci 2
@@ -16,6 +18,7 @@ Darrin Stephens 2
 Deadpool 2
 Dino 2
 Doc Holiday 2
+Dogbert 2
 Electro 2
 Elrond 2
 Endora 2
@@ -25,6 +28,7 @@ Fin Fang Foom 2
 Frodo 2
 Galadriel 2
 Galahad 2
+Gambit 2
 Genghis Khan 2
 George of the Jungle 2
 Gimli 2
@@ -43,17 +47,22 @@ King Arthur 2
 King Edward 2
 King Kong 2
 Kojak 2
+Krypto 2
+Lisa Simpson 2
 Magnum 2
 Marge Simpson 2
 Nagini 2
 Ned Flanders 2
+Neo 2
 Oberon 2
+Odin 2
 Pebbles Flintstone 2
 Pinky and the Brain 2
 Professor X 2
 Radagast 2
 Ratbert 2
 Redwall 2
+Reverend Lovejoy 2
 Rocky 2
 Samantha Stephens 2
 Samwise Gamgee 2
@@ -68,6 +77,7 @@ Spock 2
 Storm 2
 Sun Quan 2
 Tarzan 2
+The Thing 2
 Totoro 2
 Treebeard 2
 Walle 2

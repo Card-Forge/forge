@@ -3,7 +3,7 @@
 pathToMtgData = "mtg-data.txt"
 
 ############IMPLEMENTATION FOLLOWS############
-import os,sys
+import os,sys,fnmatch
 
 if not os.path.exists(pathToMtgData) :
         print("This script requires the text version of Arch's mtg-data to be present.You can download it from slightlymagic.net's forum and either place the text version next to this script or edit this script and provide the path to the file at the top.")
@@ -14,7 +14,6 @@ if not os.path.exists(pathToMtgData) :
 if not os.path.isdir(sys.path[0] + os.sep + 'PerSetTracking Results') :
         os.mkdir(sys.path[0] + os.sep + 'PerSetTracking Results')
 
-forgeFolderContents = os.listdir(sys.path[0] + os.sep + "cardsfolder")
 forgeFolderFiles = []
 forgeCards = []
 mtgDataCards = {}
@@ -52,15 +51,13 @@ with open(pathToMtgData) as mtgdata :
 
 #Parse Forge
 print("Parsing Forge")
-for i in forgeFolderContents :
-        if os.path.isfile(sys.path[0] + os.sep + "cardsfolder" + os.sep + i) == True :
-                forgeFolderFiles.append(i)
-for file in forgeFolderFiles :
-        with open(sys.path[0] + os.sep + "cardsfolder" + os.sep + file) as currentForgeCard :
-                tmpname = currentForgeCard.readline()
-                tmpname = tmpname[5:].replace("AE","Ae")
-                tmpname = tmpname.rstrip()
-                forgeCards.append(tmpname)
+for root, dirnames, filenames in os.walk("cardsfolder"):
+	for fileName in fnmatch.filter(filenames, '*.txt'):
+		with open(os.path.join(root, fileName))  as currentForgeCard :
+			tmpname = currentForgeCard.readline()
+			tmpname = tmpname[5:].replace("AE","Ae")
+			tmpname = tmpname.rstrip()
+			forgeCards.append(tmpname)
 
 #Compare datasets and output results
 print("Comparing datasets and outputting results.")

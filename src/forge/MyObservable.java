@@ -1,20 +1,28 @@
 package forge;
+
 import java.util.Observable;
 
-public class MyObservable extends Observable
-{
-	public final void updateObservers()
-	{	
-		this.setChanged();
-		this.notifyObservers();
-		
-		if(AllZone.Phase != null && AllZone.Phase.isNeedToNextPhase()){
-		    	if(AllZone.Phase.isNeedToNextPhaseInit()){
-		    		// this is used.
-		    		AllZone.Phase.setNeedToNextPhase(false);
-		    		AllZone.Phase.nextPhase();
-		    }
-		}
-	}
+/**
+ * <p>MyObservable class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
+public class MyObservable extends Observable {
+    /**
+     * <p>updateObservers.</p>
+     */
+    public final void updateObservers() {
+        this.setChanged();
+        this.notifyObservers();
+
+        if (AllZone.getPhase() != null && AllZone.getPhase().isNeedToNextPhase()) {
+            if (AllZone.getPhase().isNeedToNextPhaseInit()) {
+                // this is used.
+                AllZone.getPhase().setNeedToNextPhase(false);
+                AllZone.getPhase().nextPhase();
+            }
+        }
+    }
 }
 

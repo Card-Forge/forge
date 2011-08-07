@@ -6,14 +6,19 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
+/**
+ * <p>QuestSelectablePanel class.</p>
+ *
+ * @author Forge
+ * @version $Id: $
+ */
 public class QuestSelectablePanel extends JPanel {
-	private static final long serialVersionUID = -1502285997894190742L;
-	
-	protected Color backgroundColor;
+    /** Constant <code>serialVersionUID=-1502285997894190742L</code> */
+    private static final long serialVersionUID = -1502285997894190742L;
+
+    protected Color backgroundColor;
     private boolean selected;
 
     ImageIcon icon;
@@ -22,6 +27,14 @@ public class QuestSelectablePanel extends JPanel {
     String difficulty;
     JPanel centerPanel = new JPanel();
 
+    /**
+     * <p>Constructor for QuestSelectablePanel.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param difficulty a {@link java.lang.String} object.
+     * @param description a {@link java.lang.String} object.
+     * @param icon a {@link javax.swing.ImageIcon} object.
+     */
     public QuestSelectablePanel(String name, String difficulty, String description, ImageIcon icon) {
         this.backgroundColor = getBackground();
 
@@ -30,16 +43,15 @@ public class QuestSelectablePanel extends JPanel {
         this.description = description;
         this.icon = icon;
 
-        this.setLayout(new BorderLayout(5,5));
+        this.setLayout(new BorderLayout(5, 5));
 
 
         JLabel iconLabel;
 
-        if(icon == null){
-            iconLabel = new JLabel(GuiUtils.getEmptyIcon(40,40));
-        }
-        else{
-            iconLabel = new JLabel(GuiUtils.getResizedIcon(icon,40,40));
+        if (icon == null) {
+            iconLabel = new JLabel(GuiUtils.getEmptyIcon(40, 40));
+        } else {
+            iconLabel = new JLabel(GuiUtils.getResizedIcon(icon, 40, 40));
         }
 
         iconLabel.setBorder(new LineBorder(Color.BLACK));
@@ -52,7 +64,7 @@ public class QuestSelectablePanel extends JPanel {
 
         centerPanel.setOpaque(false);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
-        this.add(centerPanel,BorderLayout.CENTER);
+        this.add(centerPanel, BorderLayout.CENTER);
 
         JPanel centerTopPanel = new JPanel();
         centerTopPanel.setOpaque(false);
@@ -78,24 +90,34 @@ public class QuestSelectablePanel extends JPanel {
         centerPanel.add(descriptionLabel);
 
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
-        this.setBorder(new CompoundBorder(new LineBorder(Color.BLACK),new EmptyBorder(5,5,5,5)));
+        this.setBorder(new CompoundBorder(new LineBorder(Color.BLACK), new EmptyBorder(5, 5, 5, 5)));
     }
 
+    /**
+     * <p>isSelected.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isSelected() {
         return selected;
     }
 
-    public void setSelected(boolean selected){
-        if(selected){
+    /**
+     * <p>Setter for the field <code>selected</code>.</p>
+     *
+     * @param selected a boolean.
+     */
+    public void setSelected(boolean selected) {
+        if (selected) {
             this.setBackground(backgroundColor.darker());
-        }
-        else{
+        } else {
             this.setBackground(backgroundColor);
         }
 
         this.selected = selected;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getName() {
         return name;

@@ -1,9 +1,0 @@
-Name:Endbringer's Revel
-ManaCost:2 B
-Types:Enchantment
-Text:no text
-A:AB$ ChangeZone | Cost$ 4 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature from any graveyard | AnyPlayer$ True | SorcerySpeed$ True | SpellDescription$ Return target creature card from a graveyard to its owner's hand. Any player may activate this ability but only any time he or she could cast a sorcery.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/endbringers_revel.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/63.jpg
-End
