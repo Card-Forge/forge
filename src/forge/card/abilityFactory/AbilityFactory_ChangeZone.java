@@ -531,6 +531,8 @@ public class AbilityFactory_ChangeZone {
         
         int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"), sa) : 1;
 
+        String remember = params.get("RememberChanged");
+        
         for (int i=0; i < changeNum; i++) {
             if (fetchList.size() == 0 || destination == null) 
                 break;
@@ -544,6 +546,8 @@ public class AbilityFactory_ChangeZone {
             if (o != null) {
                 Card c = (Card) o;
                 fetchList.remove(c);
+                if (remember != null)
+                	card.addRemembered(c);
 
                 if (destination.equals("Library")) {
                     // do not shuffle the library once we have placed a fetched card on top.
@@ -610,6 +614,8 @@ public class AbilityFactory_ChangeZone {
         
         int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"), sa) : 1;
 
+        String remember = params.get("RememberChanged");
+        
         for(int i=0;i<changeNum;i++){
 	        if(fetchList.size() == 0 || destination == null)
 	        	break;
@@ -640,7 +646,8 @@ public class AbilityFactory_ChangeZone {
         		c = fetchList.get(0);
         	}
 
-
+            if (remember != null)
+            	card.addRemembered(c);
         	fetched.add(c);
         	fetchList.remove(c);
         }
