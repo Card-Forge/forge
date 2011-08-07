@@ -221,8 +221,12 @@ public class AbilityFactory_AlterLife {
 			int xPay = ComputerUtil.determineLeftoverMana(sa);
 			source.setSVar("PayX", Integer.toString(xPay));
 		}
+		
+		boolean randomReturn = r.nextFloat() <= .6667;
+		if (AbilityFactory.playReusable(sa))
+			randomReturn = true;
 
-		return ((r.nextFloat() < .6667) && chance);
+		return (randomReturn && chance);
 	}
 	
 	public static boolean gainLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
@@ -475,8 +479,12 @@ public class AbilityFactory_AlterLife {
 			 int xPay = ComputerUtil.determineLeftoverMana(sa);
 			 source.setSVar("PayX", Integer.toString(xPay));
 		 }
+		 
+			boolean randomReturn = r.nextFloat() <= .6667;
+			if (AbilityFactory.playReusable(sa))
+				randomReturn = true;
 
-		 return ((r.nextFloat() < .6667) && chance);
+		 return (randomReturn && chance);
 	}
 	
 	public static boolean loseLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
