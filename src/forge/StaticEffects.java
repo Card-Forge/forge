@@ -42,7 +42,7 @@ public class StaticEffects
 		cardToEffectsList.put("Old Man of the Sea", new String[] {"Old_Man_of_the_Sea"});
 		
 		cardToEffectsList.put("Phylactery Lich", new String[]{"Phylactery_Lich"});
-		cardToEffectsList.put("Plague Rats", new String[] {"Plague_Rats"});
+		//cardToEffectsList.put("Plague Rats", new String[] {"Plague_Rats"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
 		//cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"The_Tabernacle_at_Pendrell_Vale"});
 		
