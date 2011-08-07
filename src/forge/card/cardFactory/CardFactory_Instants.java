@@ -122,7 +122,7 @@ public class CardFactory_Instants {
                         };//Command
                         
                         if (AllZoneUtil.isCardInPlay(target[0]) 
-                        		&& !target[0].getKeyword().contains(kboost)) {
+                        		&& !target[0].hasKeyword(kboost)) {
                             target[0].addExtrinsicKeyword(kboost);
                             
                             AllZone.EndOfTurn.addUntil(untilEOT);
@@ -1056,8 +1056,9 @@ public class CardFactory_Instants {
                 	for(Card creature:creatures) {
                 		//skip walls, skip creatures with summoning sickness
                 		//also skip creatures with haste if they came onto the battlefield this turn
-                		if((!creature.isWall() && !creature.hasSickness())
-                				|| (creature.getKeyword().contains("Haste") && creature.getTurnInZone() != 1)) {
+                		if ((!creature.isWall() 
+                				&& !creature.hasSickness())
+                				|| (creature.hasKeyword("Haste") && creature.getTurnInZone() != 1)) {
                 			creature.setSirenAttackOrDestroy(true);
                 			//System.out.println("Siren's Call - setting flag for "+creature.getName());
                 		}
@@ -1629,7 +1630,8 @@ public class CardFactory_Instants {
         			CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
         			creatures = creatures.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
-        					return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
+        					return c.getNetAttack() <= damage 
+        							&& !c.hasKeyword("Indestructible");
         				}
         			});
         			CardList infect = creatures.filter(AllZoneUtil.getKeywordFilter("Infect"));
@@ -1649,7 +1651,8 @@ public class CardFactory_Instants {
         			CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
         			creatures = creatures.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
-        					return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
+        					return c.getNetAttack() <= damage 
+        							&& !c.hasKeyword("Indestructible");
         				}
         			});
         			return creatures.size() > 0;
