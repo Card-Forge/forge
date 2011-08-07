@@ -7441,8 +7441,7 @@ public class GameActionUtil {
 						
 							final String affected = k[1];			
 							final String specific[] = affected.split(",");
-							CardList affectedCards = getAffectedCards(cardWithKeyword, k); // options are All, Self, Enchanted etc.
-							affectedCards = affectedCards.getValidCards(specific, cardWithKeyword.getController(), cardWithKeyword);
+							CardList affectedCards = getAffectedCards(cardWithKeyword, k, specific); // options are All, Self, Enchanted etc.
 							se.setAffectedCards(affectedCards);
 							
 							String[] pt = k[2].split("/");
@@ -7463,6 +7462,10 @@ public class GameActionUtil {
 		                 		if(types.contains("Overwrite")) {
 		                 			types.remove("Overwrite");
 		                 			se.setOverwriteTypes(true);
+		                 		}
+		                 		if(types.contains("KeepSupertype")) {
+		                 			types.remove("KeepSupertype");
+		                 			se.setKeepSupertype(true);
 		                 		}
 		                 	}
 		                 	
@@ -7505,7 +7508,15 @@ public class GameActionUtil {
 				
 				if(se.isOverwriteTypes()) {
 					se.addOriginalTypes(affectedCard, affectedCard.getType());
-					affectedCard.clearAllTypes();
+					if(!se.isKeepSupertype()) {
+						affectedCard.clearAllTypes();
+					}
+					else {
+						ArrayList<String> acTypes = affectedCard.getType();
+						for(String t : acTypes) {
+							if(!CardUtil.isASuperType(t)) affectedCard.removeType(t);
+						}
+					}
 				}
 				for(String type : types) {
 					if(!affectedCard.isType(type)) {
@@ -7525,21 +7536,7 @@ public class GameActionUtil {
 						String keywords[] = keyword[2].split(" & ");
 						for(int j = 0; j < keywords.length; j++) {
 							String kw = keywords[j];
-							/*if(kw.startsWith("SVar=")) {
-							String sVar = source.getSVar(kw.split("SVar=")[1]);
-							if (sVar.startsWith("AB")) { // grant the ability
-								AbilityFactory AF = new AbilityFactory();
-								SpellAbility sa = AF.getAbility(sVar, affectedCard);
-								sa.setType("Temporary");
-
-								affectedCard.addSpellAbility(sa);
-							}
-							else { // Copy this SVar
-								affectedCard.setSVar(kw.split("SVar=")[1], sVar);								
-							}
-						}
-
-						else */ affectedCard.addExtrinsicKeyword(kw);
+							affectedCard.addExtrinsicKeyword(kw);
 						}
 					}
 				}
@@ -7580,7 +7577,11 @@ public class GameActionUtil {
 				affectedCard.removeType(type);
 			}
 			if(se.isOverwriteTypes()) {
-				for(String type : se.getOriginalTypes(affectedCard)) affectedCard.addType(type);
+				for(String type : se.getOriginalTypes(affectedCard)) {
+					if(!se.isKeepSupertype() || (se.isKeepSupertype() && !CardUtil.isASuperType(type))) {
+						affectedCard.addType(type);
+					}
+				}
 			}
 			
 			if(se.isOverwriteKeywords()) {
@@ -7592,19 +7593,7 @@ public class GameActionUtil {
 					String kws[] = kw[2].split(" & ");
 					for(int j = 0; j < kws.length; j++) {
 						String keyword = kws[j];
-					/*
-					if(keyword.startsWith("SVar=")) {
-						String sVar = source.getSVar(keyword.split("SVar=")[1]);
-						if (sVar.startsWith("AB")) { // remove granted abilities
-							SpellAbility[] spellAbility = affectedCard.getSpellAbility();
-							for(SpellAbility s : spellAbility) {
-								if (s.getType().equals("Temporary")) {
-									affectedCard.removeSpellAbility(s);
-								}
-							}
-						}
-					}
-					else */ affectedCard.removeExtrinsicKeyword(keyword);
+						affectedCard.removeExtrinsicKeyword(keyword);
 					}
 				}
 			}
@@ -7635,7 +7624,7 @@ public class GameActionUtil {
 			return true;
 		}//end areSpecialConditionsMet()
 		
-		private CardList getAffectedCards(Card source, String[] details) {
+		private CardList getAffectedCards(Card source, String[] details, String[] specific) {
 			// [Self], [All], [Enchanted]
 			CardList affected = new CardList();
 			String range = details[0].replaceFirst("stAnimate", "");
@@ -7651,6 +7640,7 @@ public class GameActionUtil {
       				affected.addAll(source.getEnchanting().toArray());
       			}
 	      	}
+			affected = affected.getValidCards(specific, source.getController(), source);
       		
 			return affected;
 		}//end getAffectedCards()
