@@ -45,13 +45,13 @@ class CardFactory_Planeswalkers {
             turn[0] = -1;
             
             //ability2: target creature gets +3/+3 and flying until EOT
-            final SpellAbility ability2 = new Ability(card, "0") {
-                
-                @Override
+            Target target2 = new Target(card, "TgtC");
+        	Cost cost2 = new Cost("AddCounter<1/LOYALTY>", cardName, true);
+            final SpellAbility ability2 = new Ability_Activated(card, cost2, target2) {
+				private static final long serialVersionUID = 6624768423224398603L;
+
+				@Override
                 public void resolve() {
-                    
-                    card.addCounterFromNonEffect(Counters.LOYALTY, 1);
-                    
                     turn[0] = AllZone.Phase.getTurn();
                     
                     final Command eot = new Command() {
@@ -93,30 +93,14 @@ class CardFactory_Planeswalkers {
 
                 }//canPlay()
             };//SpellAbility ability2
-            
-            ability2.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = 9062830120519820799L;
-                
-                int                       check            = -1;
-                
-                @Override
-                public void showMessage() {
-                    if(check != AllZone.Phase.getTurn()) {
-                        check = AllZone.Phase.getTurn();
-                        turn[0] = AllZone.Phase.getTurn();
-                        
-                        AllZone.Stack.add(ability2);
-                    }
-                    stop();
-                }//showMessage()
-            });
-            
 
             //ability3
-            final SpellAbility ability3 = new Ability(card, "0") {
-                @Override
+            Cost cost3 = new Cost("SubCounter<8/LOYALTY>", cardName, true);
+            final SpellAbility ability3 = new Ability_Activated(card, cost3, null) {
+				private static final long serialVersionUID = -830373718591602944L;
+
+				@Override
                 public void resolve() {
-                    card.subtractCounter(Counters.LOYALTY, 8);
                     turn[0] = AllZone.Phase.getTurn();
                     
                     Card emblem = new Card();
@@ -160,27 +144,14 @@ class CardFactory_Planeswalkers {
                 	return list.size() == 0 && card.getCounters(Counters.LOYALTY) > 8;
                 }
             };
-            ability3.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = -2054686425541429389L;
-                
-                int                       check            = -1;
-                
-                @Override
-                public void showMessage() {
-                    if(check != AllZone.Phase.getTurn()) {
-                        check = AllZone.Phase.getTurn();
-                        turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.add(ability3);
-                    }
-                    stop();
-                }//showMessage()
-            });
             
             //ability 1: create white 1/1 token
-            final SpellAbility ability1 = new Ability(card, "0") {
-                @Override
+            Cost cost1 = new Cost("AddCounter<1/LOYALTY>", cardName, true);
+            final SpellAbility ability1 = new Ability_Activated(card, cost1, null) {
+				private static final long serialVersionUID = -6766888113766637596L;
+
+				@Override
                 public void resolve() {
-                    card.addCounterFromNonEffect(Counters.LOYALTY, 1);
                     turn[0] = AllZone.Phase.getTurn();
                     
                     CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card.getController(), "W", new String[] {
@@ -205,34 +176,17 @@ class CardFactory_Planeswalkers {
                 }//canPlay()
             };//SpellAbility ability1
             
-            ability1.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = -7892114885686285881L;
-                
-                int                       check            = -1;
-                
-                @Override
-                public void showMessage() {
-                    if(check != AllZone.Phase.getTurn()) {
-                        check = AllZone.Phase.getTurn();
-                        turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.add(ability1);
-                    }
-                    stop();
-                }//showMessage()
-            });
-            
             ability1.setDescription("+1: Put a 1/1 white Soldier creature token onto the battlefield.");
-            ability1.setStackDescription("Elspeth, Knight-Errant - put a 1/1 token onto the battlefield.");
+            ability1.setStackDescription(card+" - put a 1/1 white Soldier creature token onto the battlefield.");
             card.addSpellAbility(ability1);
             
             ability2.setDescription("+1: Target creature gets +3/+3 and gains flying until end of turn.");
-            ability2.setStackDescription("Elspeth, Knight-Errant - creature gets +3/+3 and Flying until EOT.");
-            ability2.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability2));
+            ability2.setStackDescription(card+" - creature gets +3/+3 and gains flying until EOT.");
             
             card.addSpellAbility(ability2);
             
             ability3.setDescription("-8: You get an emblem with \"Artifacts, creatures, enchantments, and lands you control are indestructible.\"");
-            ability3.setStackDescription("Elspeth, Knight-Errant - You get an emblem with \"Artifacts, creatures, enchantments, and lands you control are indestructible.\"");
+            ability3.setStackDescription(card+" - You get an emblem with \"Artifacts, creatures, enchantments, and lands you control are indestructible.\"");
             card.addSpellAbility(ability3);
             
             card.setSVars(card.getSVars());
@@ -249,26 +203,17 @@ class CardFactory_Planeswalkers {
             final int turn[] = new int[1];
             turn[0] = -1;
             
-            //ability2: all controller's creatures get +1\+1 and vigilance until EOT
+            //ability2: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
             final SpellAbility ability2 = new Ability(card, "0") {
                 final Command untilEOT = new Command() {
                 	private static final long serialVersionUID = -5436621445704076988L;
                 	
                 	public void execute() {
                 		Player player = card.getController();
-                		CardList creatures;
-                		if(player.isHuman()) {
-                			creatures = new CardList(AllZone.Human_Battlefield.getCards());
-                		} else {
-                			creatures = new CardList(AllZone.Computer_Battlefield.getCards());
-                		}
-                		
-                		creatures = creatures.getType("Creature");
+                		CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
                 		
                 		for(int i = 0; i < creatures.size(); i++) {
                 			Card card = creatures.get(i);
-                			//card.setAttack(card.getAttack() - 1);
-                			//card.setDefense(card.getDefense() - 1);
                 			card.removeExtrinsicKeyword("Vigilance");
                 		}
                 	}
@@ -280,14 +225,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     Player player = card.getController();
-                    CardList creatures;
-                    if(player.isHuman()) {
-                        creatures = new CardList(AllZone.Human_Battlefield.getCards());
-                    } else {
-                        creatures = new CardList(AllZone.Computer_Battlefield.getCards());
-                    }
-                    
-                    creatures = creatures.getType("Creature");
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
                     
                     for(int i = 0; i < creatures.size(); i++) {
                         Card card = creatures.get(i);
@@ -618,9 +556,7 @@ class CardFactory_Planeswalkers {
                     
                     getTargetPlayer().addDamage(10, card);
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, getTargetPlayer());
-                    CardList list = new CardList(play.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(getTargetPlayer());
                     
                     for(int i = 0; i < list.size(); i++) 
                     	list.get(i).addDamage(10, card);
@@ -749,7 +685,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     //only computer uses the stack
-                    CardList tapped = new CardList(AllZone.Computer_Battlefield.getCards());
+                    CardList tapped = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     tapped = tapped.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isArtifact() && c.isTapped() && CardFactoryUtil.canTarget(card, c);
@@ -833,10 +769,8 @@ class CardFactory_Planeswalkers {
                     final int dam = damage.intValue();
                     
                     card.subtractCounter(Counters.LOYALTY, dam);
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
 
-                    CardList list = new CardList(lib.getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isArtifact() && CardUtil.getConvertedManaCost(c.getManaCost()) <= dam;
@@ -844,8 +778,7 @@ class CardFactory_Planeswalkers {
                     });
                     
                     if(list.size() > 0) {
-                        Object o = GuiUtils.getChoiceOptional("Select artifact",
-                                AllZone.Human_Library.getCards());
+                        Object o = GuiUtils.getChoiceOptional("Select artifact", list);
                         if(o != null) {
                             Card c = (Card) o;
                             if(list.contains(c)) {
@@ -889,8 +822,7 @@ class CardFactory_Planeswalkers {
                     
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList list = new CardList(play.getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(card.getController());
                     list = list.getType("Artifact");
                     CardList creatures = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -898,7 +830,6 @@ class CardFactory_Planeswalkers {
                         }
                     });
                     
-                    //final Card[] tempCards = new Card[creatures.size()];
                     final HashMap<Integer, Card> tempCardMap = new HashMap<Integer, Card>();
                     
                     for(Card creatureCard:creatures) {
@@ -943,14 +874,6 @@ class CardFactory_Planeswalkers {
                             		}
                             	};//Command
 
-                            	//no longer needed - this is handled as a state effect
-                            	/*
-                                if(art[0].isEquipment() && art[0].isEquipping()) {
-                                    Card equippedCreature = art[0].getEquipping().get(0);
-                                    art[0].unEquipCard(equippedCreature);
-                                }
-                            	 */
-
                             	art[0].addType("Creature");
                             	art[0].setBaseAttack(5);
                             	art[0].setBaseDefense(5);
@@ -972,8 +895,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList list = new CardList(play.getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isArtifact()
@@ -1003,11 +925,16 @@ class CardFactory_Planeswalkers {
             final int turn[] = new int[1];
             turn[0] = -1;
              
-            final Ability ability1 = new Ability(card, "0") {
-                @Override
+            Target t1 = new Target(card, "Select target player", "Player");
+        	Cost cost1 = new Cost("AddCounter<2/LOYALTY>", cardName, true);
+        	
+            final SpellAbility ability1 = new Ability_Activated(card, cost1, t1) {
+				private static final long serialVersionUID = -986543400626807336L;
+
+				@Override
                 public void resolve() {
                     turn[0] = AllZone.Phase.getTurn();
-                    card.addCounterFromNonEffect(Counters.LOYALTY, 2);
+                    //card.addCounterFromNonEffect(Counters.LOYALTY, 2);
                     Player targetPlayer = getTargetPlayer();
                     
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, targetPlayer);
@@ -1025,11 +952,10 @@ class CardFactory_Planeswalkers {
                             AllZone.GameAction.moveToBottomOfLibrary(c);
                         }
                         
-                    } else //compy
+                    }
+                    else //compy
                     {
-                        PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                        CardList land = new CardList(humanPlay.getCards());
-                        land = land.getType("Land");
+                        CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
                         
                         //TODO: improve this:
                         if(land.size() > 4 && c.isLand()) ;
@@ -1056,7 +982,6 @@ class CardFactory_Planeswalkers {
             stack1.append(card.getName()).append(" - Look at the top card of target player's library. You may put that card on the bottom of that player's library.");
             ability1.setStackDescription(stack1.toString());
             
-            ability1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability1));
             ability1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.addSpellAbility(ability1);
             
@@ -1073,9 +998,7 @@ class CardFactory_Planeswalkers {
                 }
                 
                 public void humanResolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-                    
-                    CardList putOnTop = new CardList(hand.getCards());
+                    CardList putOnTop = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
                     
                     if(putOnTop.size() > 0) {
                     Object o = GuiUtils.getChoice("First card to put on top: ", putOnTop.toArray());
@@ -1086,7 +1009,7 @@ class CardFactory_Planeswalkers {
 	                    }
                     }
                     
-                    putOnTop = new CardList(hand.getCards());
+                    putOnTop = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
                     
                     if(putOnTop.size() > 0) {
                     	Object o = GuiUtils.getChoice("Second card to put on top: ", putOnTop.toArray());
@@ -1116,11 +1039,16 @@ class CardFactory_Planeswalkers {
             ability2.setStackDescription(stack2.toString());
             card.addSpellAbility(ability2);
             
-            final Ability ability3 = new Ability(card, "0") {
-                @Override
+            Cost cost = new Cost("SubCounter<1/LOYALTY>", cardName, true);
+            Target target = new Target(card, "TgtC");
+            
+            final SpellAbility ability3 = new Ability_Activated(card, cost, target) {
+				private static final long serialVersionUID = -1113077473448818423L;
+
+				@Override
                 public void resolve() {
                     turn[0] = AllZone.Phase.getTurn();
-                    card.subtractCounter(Counters.LOYALTY, 1);
+                    //card.subtractCounter(Counters.LOYALTY, 1);
                     
                     if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
@@ -1145,23 +1073,22 @@ class CardFactory_Planeswalkers {
             StringBuilder stack3 = new StringBuilder();
             stack3.append(card.getName()).append(" - Return target creature to its owner's hand.");
             ability3.setStackDescription(stack3.toString());
-            
-            ability3.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability3));
             card.addSpellAbility(ability3);
             
-            final Ability ability4 = new Ability(card, "0") {
-                @Override
+            Target target4 = new Target(card, "Select target player", "Player");
+        	Cost cost4 = new Cost("SubCounter<12/LOYALTY>", cardName, true);
+            final SpellAbility ability4 = new Ability_Activated(card, cost4, target4) {
+				private static final long serialVersionUID = 5512803971603404142L;
+
+				@Override
                 public void resolve() {
                     turn[0] = AllZone.Phase.getTurn();
-                    card.subtractCounter(Counters.LOYALTY, 12);
+                    //card.subtractCounter(Counters.LOYALTY, 12);
                     
                     Player player = getTargetPlayer();
                     
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    
-                    CardList libList = new CardList(lib.getCards());
-                    CardList handList = new CardList(hand.getCards());
+                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(player);
+                    CardList handList = AllZoneUtil.getPlayerHand(player);
                     
                     for(Card c:libList)
                         AllZone.GameAction.exile(c);
@@ -1191,8 +1118,6 @@ class CardFactory_Planeswalkers {
             StringBuilder stack4 = new StringBuilder();
             stack4.append(card.getName()).append(" - Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
             ability4.setStackDescription(stack4.toString());
-            
-            ability4.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability4));
             ability4.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.addSpellAbility(ability4);
             
@@ -1264,10 +1189,14 @@ class CardFactory_Planeswalkers {
              * -2: Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon
              * creature token with flying onto the battlefield.
              */
-            final SpellAbility ability2 = new Ability(card, "0") {
-                @Override
+            Target target2 = new Target(card, "TgtC");
+        	Cost cost2 = new Cost("SubCounter<2/LOYALTY>", cardName, true);
+            final SpellAbility ability2 = new Ability_Activated(card, cost2, target2) {
+				private static final long serialVersionUID = 4322453486268967722L;
+
+				@Override
                 public void resolve() {
-                    card.subtractCounter(Counters.LOYALTY, 2);
+                    //card.subtractCounter(Counters.LOYALTY, 2);
                     turn[0] = AllZone.Phase.getTurn();
                     
                     Card target = getTargetCard();
@@ -1279,20 +1208,13 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList creatures = new CardList(play.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.isCreature();
-                    	}
-                    });
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                 	return creatures.size() >= 1;
                 }
                 
                 @Override
                 public void chooseTargetAI() {
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList cards = new CardList(play.getCards());
+                    CardList cards = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     //avoid targeting the dragon tokens we just put in play...
                     cards = cards.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
@@ -1313,28 +1235,25 @@ class CardFactory_Planeswalkers {
                 }//canPlay()
             };
             ability2.setDescription("-2: Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.");
-            ability2.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability2));
             
             //ability3
             /*
              * -4: Each Dragon creature you control deals damage equal to its
              * power to target player.
              */
-            final SpellAbility ability3 = new Ability(card, "0") {
-                @Override
+            Target target3 = new Target(card, "Select target player", "Player");
+        	Cost cost3 = new Cost("SubCounter<4/LOYALTY>", cardName, true);
+            final SpellAbility ability3 = new Ability_Activated(card, cost3, target3) {
+				private static final long serialVersionUID = -5488579738767048060L;
+
+				@Override
                 public void resolve() {
-                    card.subtractCounter(Counters.LOYALTY, 4);
+                    //card.subtractCounter(Counters.LOYALTY, 4);
                     turn[0] = AllZone.Phase.getTurn();
                     
                     final Player target = getTargetPlayer();
                     final Player player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                    CardList dragons = new CardList(play.getCards());
-                    dragons = dragons.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.isType("Dragon");
-                    	}
-                    });
+                    CardList dragons = AllZoneUtil.getPlayerTypeInPlay(player, "Dragon");
                     for(int i = 0; i < dragons.size(); i++) {
                     	Card dragon = dragons.get(i);
                     	int damage = dragon.getNetAttack();
@@ -1346,13 +1265,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlayAI() {
                     setTargetPlayer(AllZone.HumanPlayer);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList dragons = new CardList(play.getCards());
-                    dragons = dragons.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.isType("Dragon");
-                    	}
-                    });
+                    CardList dragons = AllZoneUtil.getPlayerTypeInPlay(AllZone.ComputerPlayer, "Dragon");
                     return card.getCounters(Counters.LOYALTY) >= 4 && dragons.size() >= 1;
                 }
                 
@@ -1365,7 +1278,6 @@ class CardFactory_Planeswalkers {
                 }//canPlay()
             };
             ability3.setDescription("-4: Each Dragon creature you control deals damage equal to its power to target player.");
-            ability3.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability3));
             
             card.addSpellAbility(ability1);
             card.addSpellAbility(ability2);
@@ -1579,16 +1491,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
-                    CardList lands = new CardList();
-                    lands.addAll(play.getCards());
-                    lands = lands.filter(new CardListFilter() {
-                    	public boolean addCard(Card crd)
-                    	{
-                    		return crd.getType().contains("Mountain");
-                    	}
-                    });
+                    CardList lands = AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Mountain");
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(ability1, lands, "Select target Mountain",
                             true, false));
@@ -1606,7 +1509,7 @@ class CardFactory_Planeswalkers {
             card.addSpellAbility(ability2);
             
             ability3.setDescription("-5: You get an emblem with \"Mountains you control have 'tap: This land deals 1 damage to target creature or player.'\"");
-            ability3.setStackDescription("Koth of the Hammer - You get an emblem with \"Mountains you control have ‘tap: This land deals 1 damage to target creature or player.'\"");
+            ability3.setStackDescription("Koth of the Hammer - You get an emblem with \"Mountains you control have 'tap: This land deals 1 damage to target creature or player.'\"");
             card.addSpellAbility(ability3);
             
             card.setSVars(card.getSVars());
@@ -1705,9 +1608,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void showMessage() {
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getCardsInPlay();
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isPermanent() && c.getOwner().isHuman() 
