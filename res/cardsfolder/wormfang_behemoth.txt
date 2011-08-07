@@ -1,0 +1,13 @@
+Name:Wormfang Behemoth
+ManaCost:3 U U
+Types:Creature Nightmare Fish Beast
+Text:no text
+PT:5/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from your hand.
+SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Hand | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to their owner's hand.
+SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Exile | Destination$ Hand | Defined$ Remembered
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_behemoth.jpg
+End
