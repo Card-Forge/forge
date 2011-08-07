@@ -117,7 +117,7 @@ public class GameActionUtil {
 		playCard_Ripple(c);
         playCard_Storm(sa);
 
-		playCard_Chalice_of_the_Void(c);
+		//playCard_Chalice_of_the_Void(c);
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
 		playCard_Standstill(c);

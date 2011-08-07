@@ -1365,7 +1365,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Chalice of the Void")) {
             Command intoPlay = new Command() {
@@ -1378,7 +1378,7 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************     
-        
+        */
         
         //*************** START *********** START **************************
         else if (cardName.equals("Aluren")) {

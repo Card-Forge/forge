@@ -4,8 +4,6 @@ Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ 1 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:Buyback:3
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/55.jpg

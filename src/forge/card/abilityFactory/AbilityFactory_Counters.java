@@ -279,7 +279,12 @@ public class AbilityFactory_Counters {
 			if (!(type.equals("P1P1") || type.equals("ICE")) && r.nextFloat() < .1 * currCounters)	
 				return false;
 		}
-
+		
+		//Don't use non P1P1/M1M1 counters before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases")
+				&& !(type.equals("P1P1") || type.equals("M1M1")) )
+        	return false;
+		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			chance &= subAb.chkAI_Drawback();
