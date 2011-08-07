@@ -3279,19 +3279,14 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    Card choice = null;
                     Player opponent = card.getController().getOpponent();
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-                    Card[] handChoices = hand.getCards();
-                    if (handChoices.length > 0)
+                    CardList handChoices = AllZoneUtil.getPlayerHand(opponent);
+                    if (handChoices.size() > 0)
                     {
-	                    choice = CardUtil.getRandom(handChoices);
-	                    handChoices[0] = choice;
-	                    for(int i = 1; i < handChoices.length; i++) {
-	                        handChoices[i] = null;
-	                    }
-	                    GuiUtils.getChoice("Random card", handChoices);
-	                    opponent.loseLife(CardUtil.getConvertedManaCost(choice.getManaCost()),card);
+                    	Card random = CardUtil.getRandom(handChoices.toArray());
+	                    CardList reveal = new CardList(random);
+	                    GuiUtils.getChoice("Random card", reveal);
+	                    opponent.loseLife(CardUtil.getConvertedManaCost(random.getManaCost()),card);
                     }
                 }//resolve()
             };
@@ -3300,10 +3295,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -4833144157620224716L;
                 
                 public void execute() {
-                    ability.setStackDescription("Singe-Mind Ogre - target player reveals a card at random from " +
-                    		"his or her hand, then loses life equal to that card's converted mana cost.");
+                    ability.setStackDescription("When CARDNAME enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.");
                     AllZone.Stack.addSimultaneousStackEntry(ability);
-
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
