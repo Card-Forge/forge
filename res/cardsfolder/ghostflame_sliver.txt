@@ -1,0 +1,9 @@
+Name:Ghostflame Sliver
+ManaCost:B R
+Types:Creature Sliver
+Text:no text
+PT:2/2
+K:stAnimateAll:Sliver:no changes:no types:Overwrite:No Abilities:No Condition:All Slivers are colorless.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostflame_sliver.jpg
+End
