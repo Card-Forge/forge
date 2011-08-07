@@ -84,8 +84,7 @@ public class CombatUtil {
         
         //Landwalk
         if (!AllZoneUtil.isCardInPlay("Staff of the Ages")) { //"Creatures with landwalk abilities can be blocked as though they didn't have those abilities."
-        	PlayerZone blkPZ = AllZone.getZone(Constant.Zone.Battlefield, attacker.getController().getOpponent());
-        	CardList blkCL = new CardList(blkPZ.getCards());
+        	CardList blkCL = AllZoneUtil.getPlayerCardsInPlay(attacker.getController().getOpponent());
         	CardList temp = new CardList();
         
 	        if(attacker.getKeyword().contains("Plainswalk")) {
@@ -532,18 +531,14 @@ public class CombatUtil {
         
         if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
         	int limit = Integer.MAX_VALUE;
-        	CardList Human = new CardList();
-        	Human.addAll(AllZone.Human_Battlefield.getCards());
+        	CardList Human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         	if (Human.getName("Ensnaring Bridge").size() > 0) {
-        		CardList Hand = new CardList();
-        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
+        		CardList Hand = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
         		limit = Hand.size();
         	}
-        	CardList Compi = new CardList();
-        	Compi.addAll(AllZone.Computer_Battlefield.getCards());
+        	CardList Compi = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
         	if (Compi.getName("Ensnaring Bridge").size() > 0) {
-        		CardList Hand = new CardList();
-        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+        		CardList Hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
         		if (Hand.size() < limit) limit = Hand.size();
         	}
         	if (c.getNetAttack() > limit) return false;
@@ -1198,13 +1193,10 @@ public class CombatUtil {
     }//canDestroyBlocker
     
     public static void removeAllDamage() {
-        Card[] c = AllZone.Human_Battlefield.getCards();
-        for(int i = 0; i < c.length; i++)
-            c[i].setDamage(0);
-        
-        c = AllZone.Computer_Battlefield.getCards();
-        for(int i = 0; i < c.length; i++)
-            c[i].setDamage(0);
+        CardList cl = AllZoneUtil.getCardsInPlay();
+        for(Card c : cl) {
+            c.setDamage(0);
+        }
     }
     
     public static void showCombat() {
@@ -1365,7 +1357,7 @@ public class CombatUtil {
 	                    	{
 	                    		if (crd.getController().isHuman())
 	                    		{
-	                    			CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+	                    			CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 	                    			ComputerUtil.sacrificePermanents(a, list);
 	                    		}
 	                    		else
@@ -1399,13 +1391,8 @@ public class CombatUtil {
             if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
                 //hack, to make sure this doesn't break grabbing an oblivion ring:
             	c.setCreatureAttackedThisCombat(true);
-            	
-            	PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-                PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Battlefield,
-                        c.getController().getOpponent());
                 
-                CardList enchantments = new CardList(library.getCards());
+                CardList enchantments = AllZoneUtil.getPlayerCardsInLibrary(c.getController());
                 enchantments = enchantments.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         if(c.isEnchantment() && c.getCMC() <= 3) return true;
@@ -1424,16 +1411,12 @@ public class CombatUtil {
                             if(crd.isAura()) {
                                 Object obj = null;
                                 if(crd.getKeyword().contains("Enchant creature")) {
-                                    CardList creats = new CardList(play.getCards());
-                                    creats.addAll(oppPlay.getCards());
-                                    creats = creats.getType("Creature");
+                                    CardList creats = AllZoneUtil.getCreaturesInPlay();
                                     obj = GuiUtils.getChoiceOptional("Pick a creature to attach "
                                             + crd.getName() + " to", creats.toArray());
                                 } else if(crd.getKeyword().contains("Enchant land")
                                         || crd.getKeyword().contains("Enchant land you control")) {
-                                    CardList lands = new CardList(play.getCards());
-                                    //lands.addAll(oppPlay.getCards());
-                                    lands = lands.getType("Land");
+                                    CardList lands = AllZoneUtil.getLandsInPlay();
                                     if(lands.size() > 0) obj = GuiUtils.getChoiceOptional(
                                             "Pick a land to attach " + crd.getName() + " to", lands.toArray());
                                 }
@@ -1472,8 +1455,7 @@ public class CombatUtil {
             
             else if(c.getName().equals("Spectral Bears")) {
                 Player opp = c.getController().getOpponent();
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
-                CardList list = new CardList(play.getCards());
+                CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card crd) {
                         return crd.isBlack() && !crd.isToken();
@@ -1486,13 +1468,8 @@ public class CombatUtil {
 
             else if(c.getName().equals("Spectral Force")) {
                 Player opp = c.getController().getOpponent();
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
-                CardList list = new CardList(play.getCards());
-                list = list.filter(new CardListFilter() {
-                    public boolean addCard(Card crd) {
-                        return crd.isBlack();
-                    }
-                });
+                CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
+                list = list.filter(AllZoneUtil.black);
                 if(list.size() == 0) {
                     c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
                 }
@@ -1533,9 +1510,8 @@ public class CombatUtil {
             
             else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
                 
-                CardList soldiers = new CardList(hand.getCards());
+                CardList soldiers = AllZoneUtil.getPlayerHand(c.getController());
                 soldiers = soldiers.getType("Soldier");
                 
                 if(soldiers.size() > 0) {
@@ -1694,8 +1670,7 @@ public class CombatUtil {
         
         if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
         	Player opp = b.getController();
-        	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
-        	CardList list = new CardList(hand.getCards());
+        	CardList list = AllZoneUtil.getPlayerHand(opp);
         	int handSize = list.size();
 
         	// opponent discards their hand,
@@ -1784,9 +1759,7 @@ public class CombatUtil {
             Ability ability4 = new Ability(c, "0") {
                 @Override
                 public void resolve() {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, attacker.getController());
-                    
-                    CardList enchantments = new CardList(library.getCards());
+                    CardList enchantments = AllZoneUtil.getPlayerCardsInLibrary(attacker.getController());
                     //final String turn = attacker.getController();
                     enchantments = enchantments.filter(new CardListFilter() {                      
                         public boolean addCard(Card c) {

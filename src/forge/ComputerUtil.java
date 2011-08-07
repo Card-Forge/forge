@@ -259,12 +259,12 @@ public class ComputerUtil
   static public SpellAbility[] getSpellAbility()
   {
     CardList all = new CardList();
-    all.addAll(AllZone.Computer_Battlefield.getCards());
-    all.addAll(AllZone.Computer_Hand.getCards());
+    all.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
+    all.addAll(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
     all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer).toArray());
     
     CardList humanPlayable = new CardList();
-    humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
+    humanPlayable.addAll(AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer));
     humanPlayable = humanPlayable.filter(new CardListFilter()
     {
       public boolean addCard(Card c)
