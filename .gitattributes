@@ -2838,6 +2838,7 @@ res/cardsfolder/ghostflame_sliver.txt svneol=native#text/plain
 res/cardsfolder/ghostly_changeling.txt -text svneol=native#text/plain
 res/cardsfolder/ghostly_prison.txt -text svneol=native#text/plain
 res/cardsfolder/ghostly_visit.txt -text svneol=native#text/plain
+res/cardsfolder/ghostway.txt -text svneol=native#text/plain
 res/cardsfolder/ghouls_feast.txt -text svneol=native#text/plain
 res/cardsfolder/giant_badger.txt svneol=native#text/plain
 res/cardsfolder/giant_cockroach.txt -text svneol=native#text/plain
