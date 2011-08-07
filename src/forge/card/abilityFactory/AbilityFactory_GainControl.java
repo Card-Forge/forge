@@ -243,6 +243,7 @@ public class AbilityFactory_GainControl {
 		int size = tgtCards.size();
 		for(int j = 0; j < size; j++){
 			final Card tgtC = tgtCards.get(j);
+			final Player originalController = tgtC.getController();
 			
             movedCards[j] = tgtC;
             hostCard.addGainControlTarget(tgtC);
@@ -264,16 +265,16 @@ public class AbilityFactory_GainControl {
             
             if (lose != null){
 	            if(lose.contains("LeavesPlay")) {
-	            	hostCard.addLeavesPlayCommand(getLoseControlCommand(j));
+	            	hostCard.addLeavesPlayCommand(getLoseControlCommand(j, originalController));
 	            }
 	            if(lose.contains("Untap")) {
-	            	hostCard.addUntapCommand(getLoseControlCommand(j));
+	            	hostCard.addUntapCommand(getLoseControlCommand(j, originalController));
 	            }
 	            if(lose.contains("LoseControl")) {
-	            	hostCard.addChangeControllerCommand(getLoseControlCommand(j));
+	            	hostCard.addChangeControllerCommand(getLoseControlCommand(j, originalController));
 	            }
 	            if(lose.contains("EOT")) {
-	            	AllZone.EndOfTurn.addAt(getLoseControlCommand(j));
+	            	AllZone.EndOfTurn.addAt(getLoseControlCommand(j, originalController));
 	            }
             }
             
@@ -291,7 +292,7 @@ public class AbilityFactory_GainControl {
             
             //for Old Man of the Sea - 0 is hardcoded since it only allows 1 target
             hostCard.clearGainControlReleaseCommands();
-            hostCard.addGainControlReleaseCommand(getLoseControlCommand(0));
+            hostCard.addGainControlReleaseCommand(getLoseControlCommand(0, originalController));
         
 		}//end foreach target
     }
@@ -325,7 +326,7 @@ public class AbilityFactory_GainControl {
     	return destroy;
     }
     
-    private Command getLoseControlCommand(final int i) {
+    private Command getLoseControlCommand(final int i, final Player originalController) {
     	final Command loseControl = new Command() {
     		private static final long serialVersionUID = 878543373519872418L;
 
@@ -335,7 +336,7 @@ public class AbilityFactory_GainControl {
     			if(null == c) return;
 
     			if(AllZoneUtil.isCardInPlay(c)) {
-    				AllZone.GameAction.changeController(new CardList(c), c.getController(), c.getController().getOpponent());
+    				AllZone.GameAction.changeController(new CardList(c), c.getController(), originalController);
 
     				if(bTapOnLose) c.tap();
     				
