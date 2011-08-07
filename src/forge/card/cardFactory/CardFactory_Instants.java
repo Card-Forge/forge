@@ -1090,55 +1090,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Berserk")) {
-        	Cost cost = new Cost("G", cardName, false);
-        	final SpellAbility spell = new Spell(card, cost, new Target(card, "TgtC")) {
-				private static final long serialVersionUID = 6480841474890362249L;
-
-				@Override
-                public boolean canPlayAI() {
-                	//computer doesn't use x spells very effectively
-                    return false;
-                }//canPlayAI()
-                
-				@Override
-				public void resolve() {
-					final Card target = getTargetCard();
-					final int x = target.getNetAttack();
-					final Command untilEOT = new Command() {
-						private static final long serialVersionUID = -3673524041113224182L;
-
-						public void execute() {
-							if(AllZoneUtil.isCardInPlay(target)) {
-								target.addTempAttackBoost(-x);
-								target.removeExtrinsicKeyword("Trample");
-								target.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
-							}
-						}
-					};
-
-
-					if(AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
-						target.addTempAttackBoost(x);
-						target.addExtrinsicKeyword("Trample");
-						target.addExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
-
-						AllZone.EndOfTurn.addUntil(untilEOT);
-					}
-				}//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            String phase = AllZone.Phase.buildActivateString(Constant.Phase.Upkeep, Constant.Phase.Combat_Declare_Blockers_InstantAbility);
-            spell.getRestrictions().setActivatePhases(phase);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Telling Time")) {
