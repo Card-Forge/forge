@@ -7,4 +7,5 @@ SVar:AnimateSwamp:DB$AnimateAll | ValidCards$ Land | Types$ Swamp | OverwriteTyp
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightcreep.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/49.jpg
 End

@@ -10,4 +10,5 @@ SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Tri
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flickerwisp.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/6.jpg
 End

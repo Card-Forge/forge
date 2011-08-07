@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 W W | Origin$ Battlefield | Destination$ Exile | Vali
 SVar:X:Count$IfMainPhase.2.1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/return_to_dust.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/39.jpg
 End
