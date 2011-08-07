@@ -4684,6 +4684,7 @@ res/cardsfolder/natures_resurgence.txt -text svneol=native#text/plain
 res/cardsfolder/natures_revolt.txt svneol=native#text/plain
 res/cardsfolder/natures_ruin.txt -text svneol=native#text/plain
 res/cardsfolder/natures_spiral.txt -text svneol=native#text/plain
+res/cardsfolder/natures_wrath.txt -text svneol=native#text/plain
 res/cardsfolder/nausea.txt -text svneol=native#text/plain
 res/cardsfolder/naya_battlemage.txt -text svneol=native#text/plain
 res/cardsfolder/naya_hushblade.txt -text svneol=native#text/plain
