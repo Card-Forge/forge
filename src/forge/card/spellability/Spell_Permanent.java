@@ -25,11 +25,6 @@ public class Spell_Permanent extends Spell {
     
     private boolean willChampion = false;
     private String championType = null;
-    private int loseLifeAmount;
-    
-    public void setLoseLifeAmount(int a) {
-    	loseLifeAmount = a;
-    }
     
     /////////////////////
     ///////
@@ -227,10 +222,6 @@ public class Spell_Permanent extends Spell {
             if( (o == null) || !(cl.size() > 0) || !AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand))
             	return false;
         }
- 
-        if(loseLifeAmount > 0 && AllZone.ComputerPlayer.getLife() <= (loseLifeAmount+3)) {
-    		return false;
-    	}
         
         if (!checkETBEffects(card, this, null))
         	return false;

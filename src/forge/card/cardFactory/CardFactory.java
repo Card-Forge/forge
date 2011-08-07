@@ -507,12 +507,7 @@ public class CardFactory implements NewConstants {
         	}
         }
         
-        /////////////////////////////////////////////////////////////////////////////
-        // NOTE: This cannot currently be converted to triggers because of this line:
-        // card.getSpellPermanent().setLoseLifeAmount(num);
-        //
-        // Generic enters the battlefield lose life
-        // there is also code in Spell_Permanent canPlayAI to handle that part
+        /*
         if (hasKeyword(card, "etbLoseLife") != -1) {
         	int n = hasKeyword(card, "etbLoseLife");
 
@@ -547,140 +542,7 @@ public class CardFactory implements NewConstants {
         	};
         	card.addComesIntoPlayCommand(etbLoseLife);
         } // etbLoseLife
-        
-
-        /*
-
-        // Generic destroy all card
-        if(hasKeyword(card, "spDestroyAll") != -1) {
-            int n = hasKeyword(card, "spDestroyAll");
-            
-            String parse = card.getKeyword().get(n).toString();
-            card.removeIntrinsicKeyword(parse);
-            
-            String k[] = parse.split(":");
-            String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
-            // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
-            //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
-            final String Tgts[] = Targets.split(",");
-            
-            final boolean NoRegen[] = {false};
-            final String Drawback[] = {"none"};
-            
-            if (k.length > 2)
-            {
-                 if (k[2].equals("NoRegen"))
-                      NoRegen[0] = true;
-                 
-                 else if (k[2].startsWith("Drawback$"))
-                      Drawback[0] = k[2];
-                                  
-                 if (k.length > 3)
-                 {
-                      if (k[3].startsWith("Drawback$"))
-                           Drawback[0] = k[3];
-                 }
-                 
-                 if (!Drawback[0].equals("none"))
-                 {
-                      String kk[] = Drawback[0].split("\\$");
-                    Drawback[0] = kk[1];
-                 }
-            }
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            
-            final SpellAbility spDstryAll = new Spell(card) {
-                private static final long serialVersionUID = 132554543614L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    // CardList human = new CardList(AllZone.Human_Play.getCards());
-                    // CardList computer = new CardList(AllZone.Computer_Play.getCards());
-                    
-                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
-                    
-                    human = human.getValidCards(Tgts,card.getController(),card);
-                    human = human.getNotKeyword("Indestructible");
-                    int humanvalue = CardListUtil.sumCMC(human);
-                    humanvalue += human.size();
-                    humanvalue += CardListUtil.sumAttack(human.getTokens()); 
-                    humanvalue += human.getType("Land").size();        // X = total converted mana cost + number of permanents + number of lands + total power of tokens (Human)
-                    if (AllZone.ComputerPlayer.getLife() < 7) { humanvalue += CardListUtil.sumAttack(human); } // in Low Life Emergency X = X + total power of human creatures
-
-                    computer = computer.getValidCards(Tgts,card.getController(),card);
-                    computer = computer.getNotKeyword("Indestructible");
-                    int computervalue = CardListUtil.sumCMC(computer);
-                    computervalue += computer.size();
-                    computervalue += CardListUtil.sumAttack(computer.getTokens()); 
-                    computervalue += computer.getType("Land").size();  // Y = total converted mana cost + number of permanents + number of lands + total power of tokens (Computer)
-                    
-                    // the computer will play the spell if Y < X - 3
-                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-                              (computervalue < humanvalue - 3);
-                }
-
-                @Override
-                public void resolve() {
-                    CardList all = new CardList();
-                    // all.addAll(AllZone.Human_Play.getCards());
-                    // all.addAll(AllZone.Computer_Play.getCards());
-                    
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
-                    
-                    all = all.getValidCards(Tgts,card.getController(),card);
-                    
-                    CardListUtil.sortByIndestructible(all);
-                    CardListUtil.sortByDestroyEffect(all);
-                    
-                    for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        if(NoRegen[0])
-                             AllZone.GameAction.destroyNoRegeneration(c);
-                        else
-                             AllZone.GameAction.destroy(c);
-                        
-                    }
-                    
-                    if (!Drawback[0].equals("none"))
-                    {
-                         // drawbacks for DestroyAll spells usually involve the
-                         // number of permanents that were actually destroyed
-                         int nDestroyed = 0;
-                         CardList afterAll = new CardList();
-                         // afterAll.addAll(AllZone.Human_Play.getCards());
-                         // afterAll.addAll(AllZone.Computer_Play.getCards());
-                         
-                         afterAll.addAll(AllZone.Human_Battlefield.getCards());
-                         afterAll.addAll(AllZone.Computer_Battlefield.getCards());
-                         
-                         afterAll = afterAll.getValidCards(Tgts,card.getController(),card);
-                         
-                         ArrayList<Integer> slD = new ArrayList<Integer>();
-                         for (int i=0; i<afterAll.size(); i++)
-                              slD.add(afterAll.get(i).getUniqueNumber());
-                         
-                         for (int i=0; i<all.size(); i++)
-                         {
-                              if (!slD.contains(all.get(i).getUniqueNumber()))
-                                   nDestroyed++;
-                         }
-                         Log.error("nDestroyed: " + nDestroyed);
-                         CardFactoryUtil.doDrawBack(Drawback[0], nDestroyed, card.getController(), card.getController().getOpponent(), null, card, null, this);
-                    }
-                }// resolve()
-
-            }; //SpDstryAll
-            
-            spDstryAll.setDescription(card.getSpellText());
-            card.setText("");
-            
-            card.addSpellAbility(spDstryAll);            
-        }//spDestroyAll
-*/
+        */
         
         
         if(hasKeyword(card, "SearchRebel") != -1) {

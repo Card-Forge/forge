@@ -1,13 +1,10 @@
 Name:Serpent Warrior
 ManaCost:2 B
 Types:Creature Snake Warrior
-Text:When CARDNAME enters the battlefield, you lose 3 life.
+Text:no text
 PT:3/3
-# 
-# NOTE: Do not convert to triggers because of this line:
-#       card.getSpellPermanent().setLoseLifeAmount(num);
-# 
-K:etbLoseLife:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.
+SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83364.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/161.jpg
