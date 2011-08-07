@@ -4756,6 +4756,7 @@ res/cardsfolder/narwhal.txt -text svneol=native#text/plain
 res/cardsfolder/nath_of_the_gilt_leaf.txt -text svneol=native#text/plain
 res/cardsfolder/naths_buffoon.txt -text svneol=native#text/plain
 res/cardsfolder/naths_elite.txt svneol=native#text/plain
+res/cardsfolder/natural_affinity.txt -text svneol=native#text/plain
 res/cardsfolder/natural_order.txt -text svneol=native#text/plain
 res/cardsfolder/natural_selection.txt -text svneol=native#text/plain
 res/cardsfolder/natural_spring.txt -text svneol=native#text/plain
