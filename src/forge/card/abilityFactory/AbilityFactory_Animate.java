@@ -360,25 +360,25 @@ public class AbilityFactory_Animate {
 			}
 		}
 		ArrayList<String> cardtypes = new ArrayList<String>();
-		if(params.containsKey("KeepCardTypes")) {
-			for(String t : c.getType()) {
-				if(CardUtil.isACardType(t)) cardtypes.add(t);
+		if (params.containsKey("KeepCardTypes")) {
+			for (String t : c.getType()) {
+				if (CardUtil.isACardType(t)) cardtypes.add(t);
 			}
 		}
-		if(params.containsKey("OverwriteTypes")) c.clearAllTypes();
+		if (params.containsKey("OverwriteTypes")) c.clearAllTypes();
 		types.addAll(supertypes);
 		types.addAll(cardtypes);
-		for(String r : types) {
+		for (String r : types) {
 			// if the card doesn't have that type, add it
-			if (!c.getType().contains(r))
+			if (!c.isType(r))
 				c.addType(r);
 		}
-		for(String k : keywords) {
-        	if(k.startsWith("HIDDEN"))
+		for (String k : keywords) {
+        	if (k.startsWith("HIDDEN"))
         		c.addExtrinsicKeyword(k);
 			//this maybe should just blindly add since multiple instances of a keyword sometimes have effects
 			//practically, this shouldn't matter though, and will display more cleanly
-        	else if(!c.getIntrinsicKeyword().contains(k) || CardUtil.isStackingKeyword(k))
+        	else if (!c.getIntrinsicKeyword().contains(k) || CardUtil.isStackingKeyword(k))
 				c.addIntrinsicKeyword(k);	
 		}
 

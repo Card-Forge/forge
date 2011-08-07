@@ -103,12 +103,12 @@ public class CardFactoryUtil {
     
     public static Card AI_getBestLand(CardList list) {
         CardList land = list.getType("Land");
-        if(!(land.size() > 0)) return null;
+        if (! (land.size() > 0)) return null;
         
         CardList nbLand = land.filter(new CardListFilter() // prefer to target non basic lands
         {
             public boolean addCard(Card c) {
-                return (!c.getType().contains("Basic"));
+                return (!c.isType("Basic"));
             }
         });
         
@@ -809,8 +809,10 @@ public class CardFactoryUtil {
                     if(sa.getSourceCard().equals(sourceCard)) return false;
                 }
                 
-                if(AllZoneUtil.isCardInPlay(sourceCard) && !sourceCard.hasSickness()
-                        && !sourceCard.isTapped() && super.canPlay()) return true;
+                if (AllZoneUtil.isCardInPlay(sourceCard) 
+                		&& !sourceCard.hasSickness()
+                        && !sourceCard.isTapped() 
+                        && super.canPlay()) return true;
                 else return false;
             }
             
@@ -820,20 +822,21 @@ public class CardFactoryUtil {
                 CardList list = AllZoneUtil.getPlayerCardsInLibrary(sourceCard.getController());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return ((c.getType().contains("Rebel") || c.hasKeyword("Changeling")))
+                        return ((c.isType("Rebel") || c.hasKeyword("Changeling")))
                                 && c.isPermanent();
                     }
                 });
                 
-                if(list.size() == 0) return false;
+                if (list.size() == 0) return false;
                 
-                for(int i = 0; i < list.size(); i++) {
-                    if(CardUtil.getConvertedManaCost(list.get(i).getManaCost()) <= converted) {
+                for (int i = 0; i < list.size(); i++) {
+                    if (CardUtil.getConvertedManaCost(list.get(i).getManaCost()) <= converted) {
                         rebels.add(list.get(i));
                     }
                 }
                 
-                if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && rebels.size() > 0) return true;
+                if (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) 
+                		&& rebels.size() > 0) return true;
                 else return false;
                 
             }
@@ -1016,19 +1019,19 @@ public class CardFactoryUtil {
                 CardList cards = AllZoneUtil.getPlayerCardsInLibrary(sourceCard.getController());
                 CardList sameType = new CardList();
                 
-                for(int i = 0; i < cards.size(); i++) {
-                    if(cards.get(i).getType().contains(type)) {
+                for (int i = 0; i < cards.size(); i++) {
+                    if (cards.get(i).isType(type)) {
                         sameType.add(cards.get(i));
                     }
                 }
                 
-                if(sameType.size() == 0) {
+                if (sameType.size() == 0) {
                 	sourceCard.getController().discard(sourceCard, this);
                 	return;
                 }
                 
                 Object o = GuiUtils.getChoiceOptional("Select a card", sameType.toArray());
-                if(o != null) {
+                if (o != null) {
                     //ability.setTargetCard((Card)o);
 
                     sourceCard.getController().discard(sourceCard, this);
@@ -1038,9 +1041,9 @@ public class CardFactoryUtil {
                 }
                 sourceCard.getController().shuffle();
                 
-                if(AllZoneUtil.isCardInPlay("Astral Slide")) {
+                if (AllZoneUtil.isCardInPlay("Astral Slide")) {
                 	CardList astrals = AllZoneUtil.getCardsInPlay("Astral Slide");
-                	for(Card astral:astrals) {
+                	for (Card astral:astrals) {
                 		AllZone.Stack.add(ability_astralSlide(astral, astral.getController()));
                 	}
                 }
@@ -2231,51 +2234,63 @@ public class CardFactoryUtil {
     
     //does "target" have protection from "card"?
     public static boolean hasProtectionFrom(Card card, Card target) {
-        if(target == null) return false;
+        if (target == null) return false;
         
-        if(target.isImmutable())
+        if (target.isImmutable())
         	return true;
         
-        if(target.getKeyword() != null) {
+        if (target.getKeyword() != null) {
             ArrayList<String> list = target.getKeyword();
             
             String kw = "";
-            for(int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 kw = list.get(i);
 
-                if(kw.equals("Protection from white") && card.isWhite() && 
-                		!card.getName().contains("White Ward")) return true;
-                if(kw.equals("Protection from blue") && card.isBlue() && 
-                		!card.getName().contains("Blue Ward")) return true;
-                if(kw.equals("Protection from black") && card.isBlack() && 
-                		!card.getName().contains("Black Ward")) return true;
-                if(kw.equals("Protection from red") && card.isRed() && 
-                		!card.getName().contains("Red Ward")) return true;
-                if(kw.equals("Protection from green") && card.isGreen() && 
-                		!card.getName().contains("Green Ward")) return true;
+                if (kw.equals("Protection from white") 
+                		&& card.isWhite() 
+                		&& !card.getName().contains("White Ward")) return true;
+                if (kw.equals("Protection from blue") 
+                		&& card.isBlue() 
+                		&& !card.getName().contains("Blue Ward")) return true;
+                if (kw.equals("Protection from black") 
+                		&& card.isBlack() 
+                		&& !card.getName().contains("Black Ward")) return true;
+                if (kw.equals("Protection from red") 
+                		&& card.isRed() 
+                		&& !card.getName().contains("Red Ward")) return true;
+                if (kw.equals("Protection from green") 
+                		&& card.isGreen() 
+                		&& !card.getName().contains("Green Ward")) return true;
                 
-                if(kw.equals("Protection from creatures") && card.isCreature()) return true;
+                if (kw.equals("Protection from creatures") && card.isCreature()) return true;
                 
-                if(kw.equals("Protection from artifacts") && card.isArtifact()) return true;
+                if (kw.equals("Protection from artifacts") && card.isArtifact()) return true;
                 
-                if(kw.equals("Protection from enchantments") && card.getType().contains("Enchantment") && 
-                		!card.getName().contains("Tattoo Ward")) return true;
+                if (kw.equals("Protection from enchantments") 
+                		&& card.isType("Enchantment") 
+                		&& !card.getName().contains("Tattoo Ward")) return true;
                 
-                if(kw.equals("Protection from everything")) return true;
+                if (kw.equals("Protection from everything")) return true;
                 
-                if(kw.equals("Protection from colored spells") && (card.isInstant() || card.isSorcery() || card.isAura() ) &&
-                        isColored(card)) return true;
+                if (kw.equals("Protection from colored spells") 
+                		&& (card.isInstant() || card.isSorcery() || card.isAura() ) 
+                		&& isColored(card)) return true;
                 
-                if(kw.equals("Protection from Dragons") && card.isType("Dragon")) return true;
-                if(kw.equals("Protection from Demons") && card.isType("Demon")) return true;
-                if(kw.equals("Protection from Goblins") && card.isType("Goblin")) return true;
-                if(kw.equals("Protection from Clerics") && card.isType("Cleric")) return true;
-                if(kw.equals("Protection from Gorgons") && card.isType("Gorgon")) return true;
+                if (kw.equals("Protection from Dragons") 
+                		&& card.isType("Dragon")) return true;
+                if (kw.equals("Protection from Demons") 
+                		&& card.isType("Demon")) return true;
+                if (kw.equals("Protection from Goblins") 
+                		&& card.isType("Goblin")) return true;
+                if (kw.equals("Protection from Clerics") 
+                		&& card.isType("Cleric")) return true;
+                if (kw.equals("Protection from Gorgons") 
+                		&& card.isType("Gorgon")) return true;
 
-                if(kw.startsWith("Protection:")) { //uses isValidCard
+                if (kw.startsWith("Protection:")) { //uses isValidCard
                 	String characteristic = kw.split(":")[1];
                 	String characteristics[] = characteristic.split(",");
-                	if(card.isValidCard(characteristics,card.getController(),card)) return true;
+                	if (card.isValidCard(characteristics,card.getController(),card)) return true;
                 }
                 
             }
@@ -3471,16 +3486,16 @@ public class CardFactoryUtil {
         c.setBaseAttack(attack);
         c.setBaseDefense(defense);
         
-        for(String r : addTypes)
+        for (String r : addTypes)
         {
         	// if the card doesn't have that type, add it
-        	if (!c.getType().contains(r))
+        	if (!c.isType(r))
         		c.addType(r);
         }
-        for(String k : addKeywords)
+        for (String k : addKeywords)
         {
         	// if the card doesn't have that keyword, add it (careful about stackable keywords)
-        	if(!c.getIntrinsicKeyword().contains(k))
+        	if (!c.getIntrinsicKeyword().contains(k))
         		c.addIntrinsicKeyword(k);	
         }
         
