@@ -1,8 +1,10 @@
 Name:Gauntlet of Might
 ManaCost:4
 Types:Artifact
-Text:Whenever a Mountain is tapped for mana, its controller adds R to his or her mana pool (in addition to the mana the land produces).
+Text:no text
 K:stPumpAll:Creature.Red:1/1:No Condition:Red creatures get +1/+1.
+T:Mode$ TapsForMana | ValidCard$ Mountain | Execute$ TrigMana | TriggerDescription$ Whenever a Mountain is tapped for mana, its controller adds R to his or her mana pool (in addition to the mana the land produces).
+SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ R | Amount$ 1 | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

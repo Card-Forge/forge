@@ -98,27 +98,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         	AllZone.Stack.addSimultaneousStackEntry(CardFactoryUtil.getForbiddenOrchardAbility(source, getActivatingPlayer().getOpponent()));
         }
         
-        if (source.isType("Mountain") 
-        		&& AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
-        	CardList list = AllZoneUtil.getCardsInPlay("Gauntlet of Might");
-        	for (int i = 0; i < list.size(); i++) {
-        		manaPool.addManaToFloating("R", list.get(i));
-        	}
-        }
-        
-        ArrayList<Card> auras = source.getEnchantedBy();
-        for(Card c : auras){
-        	if (c.getName().equals("Wild Growth")){
-        		this.undoable = false;
-        		manaPool.addManaToFloating("G", c);
-			}
-        	if (c.getName().equals("Overgrowth")){
-				this.undoable = false;
-				manaPool.addManaToFloating("G", c);
-				manaPool.addManaToFloating("G", c);
-			}
-        }
-        
         if(AllZoneUtil.isCardInPlay("Mirari's Wake", source.getController())) {
         	CardList list = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Mirari's Wake");
         	ArrayList<String> colors = new ArrayList<String>();
