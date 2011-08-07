@@ -6,4 +6,7 @@ A:SP$ AnimateAll | Cost$ 2 G | ValidCards$ Land | Types$ Creature | Power$ 2 | T
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_affinity.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/269.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/260.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/256.jpg
 End

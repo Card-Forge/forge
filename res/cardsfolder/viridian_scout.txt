@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ 2 G Sac<1/CARDNAME> | ValidTgts$ Creature.withFlying | 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_scout.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/100.jpg
 End

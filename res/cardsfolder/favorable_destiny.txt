@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature:0/0/Shroud:EnchantedControllerCreaturesGE/2:Enchanted
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favorable_destiny.jpg
-End 
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/220.jpg
+End
