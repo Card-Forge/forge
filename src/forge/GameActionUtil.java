@@ -5319,58 +5319,64 @@ public class GameActionUtil {
 	      	if(SpecialConditions.contains("OppHandEmpty")) {
       		CardList oppHand = AllZoneUtil.getPlayerHand(SourceCard.getController().getOpponent());
       		if(!(oppHand.size() == 0)) return false;
-      	}
+	      	}
 	      	if(SpecialConditions.contains("TopCardOfLibraryIsBlack")) {
       		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, SourceCard.getController());
       		if(!(lib.get(0).isBlack())) return false;
-      	}
+	      	}
 	      	if(SpecialConditions.contains("LibraryLE")) {
 	      		CardList Library = AllZoneUtil.getPlayerCardsInLibrary(SourceCard.getController());
 	      		String maxnumber = SpecialConditions.split("/")[1];
       		if (Library.size() > Integer.valueOf(maxnumber)) return false;
-      	}
+	      	}
 	      	if(SpecialConditions.contains("LifeGE")) {
 	      		int life = SourceCard.getController().getLife();
 	      		String maxnumber = SpecialConditions.split("/")[1];
 	      		if (!(life >= Integer.valueOf(maxnumber))) return false;
-	    }
+	      	}
 	      	if(SpecialConditions.contains("OppCreatureInPlayGE")) {
 	      		CardList OppInPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController().getOpponent());
 	      		OppInPlay = OppInPlay.getType("Creature");
 	      		String maxnumber = SpecialConditions.split("/") [1];
 	      	if (!(OppInPlay.size() >= Integer.valueOf(maxnumber))) return false;
-	    }
+	      	}
 	      	if(SpecialConditions.contains("LandYouCtrlLE")) {
 	      		CardList LandInPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
 	      		LandInPlay = LandInPlay.getType("Land");
 	      		String maxnumber = SpecialConditions.split("/") [1];
 	      	if (!(LandInPlay.size() <= Integer.valueOf(maxnumber)))	return false;
-	    }
+	        }
 	      	if(SpecialConditions.contains("LandOppCtrlLE")) {
 	      		CardList OppLandInPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController().getOpponent());
 	      		OppLandInPlay = OppLandInPlay.getType("Land");
 	      		String maxnumber = SpecialConditions.split("/") [1];
 	      	if (!(OppLandInPlay.size() <= Integer.valueOf(maxnumber))) return false;
-	    }
+	        }
 	      	if(SpecialConditions.contains("OppCtrlMoreCreatures")) {
 	      		CardList CreaturesInPlayYou = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
 	      		CreaturesInPlayYou = CreaturesInPlayYou.getType("Creature");
 	      		CardList CreaturesInPlayOpp = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController().getOpponent());
 	      		CreaturesInPlayOpp = CreaturesInPlayOpp.getType("Creature");
 	      	if (CreaturesInPlayYou.size() > CreaturesInPlayOpp.size()) return false;
-	     }
+	        }
 	      	if(SpecialConditions.contains("OppCtrlMoreLands")) {
 	      		CardList LandsInPlayYou = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
 	      		LandsInPlayYou = LandsInPlayYou.getType("Land");
 	      		CardList LandsInPlayOpp = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController().getOpponent());
 	      		LandsInPlayOpp = LandsInPlayOpp.getType("Land");
 	      	if (LandsInPlayYou.size() > LandsInPlayOpp.size()) return false;
-	     }
+	        }
+	      	if(SpecialConditions.contains("EnchantedControllerCreaturesGE")) {
+	      		CardList EnchantedControllerInPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getEnchantingCard().getController());
+	      		EnchantedControllerInPlay = EnchantedControllerInPlay.getType("Creature");
+	      		String maxnumber = SpecialConditions.split("/") [1];
+	      	if (!(EnchantedControllerInPlay.size() >= Integer.valueOf(maxnumber))) return false;
+	        }
 	      	if(SpecialConditions.contains("OppLifeLE")) {
-      		int life = SourceCard.getController().getOpponent().getLife();
-      		String maxnumber = SpecialConditions.split("/")[1];
-      		if (!(life <= Integer.valueOf(maxnumber))) return false;
-      	}
+	      		int life = SourceCard.getController().getOpponent().getLife();
+	      		String maxnumber = SpecialConditions.split("/")[1];
+	      	if (!(life <= Integer.valueOf(maxnumber))) return false;
+      	    }
 	      	if(SpecialConditions.contains("Threshold")) {
 	      		if (!SourceCard.getController().hasThreshold()) return false;
 	      	}
@@ -5380,12 +5386,12 @@ public class GameActionUtil {
 	      	if(SpecialConditions.contains("Hellbent")) {
 	      		CardList Handcards = AllZoneUtil.getPlayerHand(SourceCard.getController());
       		if (Handcards.size() > 0) return false;
-      	}
+      	    } 	
 	      	if(SpecialConditions.contains("Metalcraft")) {
 	      		CardList CardsinPlay = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
   			CardsinPlay = CardsinPlay.getType("Artifact");
       		if (CardsinPlay.size() < 3) return false;
-      	}
+      	    }
 	      	if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
 	    	  	String Requirements = SpecialConditions.replaceAll("isPresent ", "");
 			CardList CardsinPlay = AllZoneUtil.getCardsInPlay();
