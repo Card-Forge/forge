@@ -29,7 +29,7 @@ import forge.gui.input.Input;
 
 class CardFactory_Lands {
 
-    public static Card getCard(final Card card, final String cardName, Player owner) {
+    public static Card getCard(final Card card, final String cardName, Player owner, CardFactory cf) {
 
 
         //*************** START *********** START **************************
