@@ -1127,6 +1127,8 @@ public class GuiDisplayUtil implements NewConstants {
 		AllZone.Computer_Graveyard.updateObservers();
 		AllZone.Human_Battlefield.updateObservers();
 		AllZone.Computer_Battlefield.updateObservers();
+		AllZone.Human_Library.updateObservers();
+		AllZone.Computer_Library.updateObservers();
 	}
 
     public static CardList devProcessCardsForZone(String[] data, Player player)
