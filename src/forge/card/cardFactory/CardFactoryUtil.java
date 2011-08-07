@@ -1222,7 +1222,7 @@ public class CardFactoryUtil {
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         return c.isCreature() 
-                                && CombatUtil.canAttackNextTurn(c)
+                                && (CombatUtil.canAttack(c) || (CombatUtil.canAttackNextTurn(c) && AllZone.Phase.is(Constant.Phase.Main2)))
                                 && CardFactoryUtil.canTarget(sourceCard, c) 
                                 && (c.getNetDefense() + Tough > 0 || sourceCard.getName().equals("Skullclamp"));
                     }
