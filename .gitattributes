@@ -2055,6 +2055,7 @@ res/cardsfolder/dwarven_soldier.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_strike_force.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_thaumaturgist.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_trader.txt -text svneol=native#text/plain
+res/cardsfolder/dwarven_vigilantes.txt svneol=native#text/plain
 res/cardsfolder/dwarven_warriors.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_weaponsmith.txt -text svneol=native#text/plain
 res/cardsfolder/dying_wail.txt svneol=native#text/plain
