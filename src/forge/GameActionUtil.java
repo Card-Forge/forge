@@ -5366,6 +5366,13 @@ public class GameActionUtil {
 	      		String maxnumber = SpecialConditions.split("/") [1];
 	      	if (!(OppLandInPlay.size() <= Integer.valueOf(maxnumber))) return false;
 	    }
+	      	if(SpecialConditions.contains("YouCtrlMoreCreatures")) {
+	      		CardList CreaturesInPlayYou = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController());
+	      		CreaturesInPlayYou = CreaturesInPlayYou.getType("Creature");
+	      		CardList CreaturesInPlayOpp = AllZoneUtil.getPlayerCardsInPlay(SourceCard.getController().getOpponent());
+	      		CreaturesInPlayOpp = CreaturesInPlayOpp.getType("Creature");
+	      	if (CreaturesInPlayYou.size() > CreaturesInPlayOpp.size()) return false;
+	     }
 	      	if(SpecialConditions.contains("OppLifeLE")) {
       		int life = SourceCard.getController().getOpponent().getLife();
       		String maxnumber = SpecialConditions.split("/")[1];

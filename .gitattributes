@@ -2927,6 +2927,7 @@ res/cardsfolder/goblin_gardener.txt svneol=native#text/plain
 res/cardsfolder/goblin_gaveleer.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_general.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_glider.txt -text svneol=native#text/plain
+res/cardsfolder/goblin_goon.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_grenade.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_grenadiers.txt svneol=native#text/plain
 res/cardsfolder/goblin_guide.txt -text svneol=native#text/plain
