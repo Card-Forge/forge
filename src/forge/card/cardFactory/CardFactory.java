@@ -183,6 +183,8 @@ public class CardFactory implements NewConstants {
         out.setCurSetCode(in.getCurSetCode());
         out.setImageFilename(in.getImageFilename());
         out.setAllTriggeringObjects(in.getAllTriggeringObjects());
+        out.setEquipping(in.getEquipping());
+        out.setEquippedBy(in.getEquippedBy());
         return out;
     	
     }
