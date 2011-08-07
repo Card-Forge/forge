@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant Land
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds G to his or her mana pool for each Elf on the battlefield (in addition to the mana the land produces).
-SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ G | Amount$ X
+SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ G | Amount$ X | Defined$ TriggeredCardController
 SVar:X:Count$Valid Elf
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
