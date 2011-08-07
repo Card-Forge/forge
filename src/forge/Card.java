@@ -2738,7 +2738,7 @@ public class Card extends MyObservable {
         
             String incR[] = Restriction.split("\\."); // Inclusive restrictions are Card types
         
-            if (incR[0].equals("Spell") && isType("Land"))
+            if (incR[0].equals("Spell") && isLand())
             	return false;
             if (incR[0].equals("Permanent") && (isInstant() || isType("Sorcery")))
             	return false;

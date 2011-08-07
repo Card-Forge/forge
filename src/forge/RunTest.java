@@ -34,7 +34,7 @@ public class RunTest
 	    
 	    c = cf.getCard("Bayou", null);
 	    check("17", c.getManaCost().equals(""));
-	    check("18", c.isType("Land"));
+	    check("18", c.isLand());
 	    check("19", c.isType("Swamp"));
 	    check("20", c.isType("Forest"));
 	    

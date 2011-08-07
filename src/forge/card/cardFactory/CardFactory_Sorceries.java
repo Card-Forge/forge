@@ -1482,24 +1482,24 @@ public class CardFactory_Sorceries {
                     CardList list = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
                     list.shuffle();
                     
-                    if(list.size() == 0) return;
+                    if (list.size() == 0) return;
                     
                     Card c1 = list.get(0);
                     list.remove(c1);
                     c1.getController().discard(c1, null);
                     
-                    if(list.size() == 0) return;
+                    if (list.size() == 0) return;
                     
                     Card c2 = list.get(0);
                     list.remove(c2);
                     
                     c2.getController().discard(c2, null);
                     
-                    if(c1.isType("Land")) {
+                    if (c1.isLand()) {
                     	AllZone.HumanPlayer.gainLife(3, card);
                     }
                     
-                    if(c2.isType("Land")) {
+                    if (c2.isLand()) {
                     	AllZone.HumanPlayer.gainLife(3, card);
                     }
                     
@@ -1518,7 +1518,7 @@ public class CardFactory_Sorceries {
                         
                         c.getController().discard(c, null);
                         
-                        if (c.isType("Land")) {
+                        if (c.isLand()) {
                         	AllZone.ComputerPlayer.gainLife(3, card);
                         }
                         
@@ -1530,7 +1530,7 @@ public class CardFactory_Sorceries {
                             
                             c2.getController().discard(c2, null);
                             
-                            if (c2.isType("Land")) {
+                            if (c2.isLand()) {
                             	AllZone.ComputerPlayer.gainLife(3, card);
                             }
                         }
