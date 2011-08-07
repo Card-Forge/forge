@@ -1630,7 +1630,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Painter's Servant")) {
         	final long[] timeStamp = new long[1];
@@ -1683,65 +1682,6 @@ public class CardFactory_Creatures {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
             card.addLeavesPlayCommand(leavesBattlefield);
-        }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Goblin Skycutter")) {
-        	Cost cost = new Cost("Sac<1/CARDNAME>", cardName, true);
-        	Target target = new Target(card, "Select target creature with flying", "Creature.withFlying");
-            final SpellAbility ability = new Ability_Activated(card, cost, target) {
-				private static final long serialVersionUID = 200207345405088487L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return getFlying().size() != 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList flying = getFlying();
-                    flying.shuffle();
-                    setTargetCard(flying.get(0));
-                }
-                
-                private CardList getFlying() {
-                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-                    flying = flying.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getNetDefense() <= 2;
-                        }
-                    });
-                    return flying;
-                }//getFlying()
-                
-                @Override
-                public void resolve() {
-                	final Card tgt = getTargetCard();
-                    if(AllZoneUtil.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
-                        tgt.addDamage(2, card);
-                        tgt.removeIntrinsicKeyword("Flying");
-                        tgt.removeExtrinsicKeyword("Flying");
-                    }
-                    
-                    AllZone.EndOfTurn.addUntil(new Command() {
-                        private static final long serialVersionUID = -8889549737746466810L;
-                        
-                        public void execute() {
-                            if(AllZoneUtil.isCardInPlay(tgt)){
-                            	tgt.addIntrinsicKeyword("Flying");
-                            }
-                        }
-                    });
-                }//resolve()
-            };//SpellAbility
-            
-            card.addSpellAbility(ability);
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cost).append("CARDNAME deals 2 damage to target ");
-            sb.append("creature with flying. That creature loses flying until end of turn.");
-            ability.setDescription(sb.toString());
         }//*************** END ************ END **************************
 
         
