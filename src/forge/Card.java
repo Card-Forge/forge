@@ -1874,7 +1874,7 @@ public class Card extends MyObservable {
     }
     
     public void unEnchantAllCards() {
-        for(int i = 0; i < equippedBy.size(); i++) {
+        for(int i = 0; i < enchantedBy.size(); i++) {
             enchantedBy.get(i).unEnchantCard(this);
         }
     }

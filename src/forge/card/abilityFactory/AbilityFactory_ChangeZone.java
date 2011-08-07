@@ -446,9 +446,10 @@ public class AbilityFactory_ChangeZone {
 		}
 
 		for(Player player : fetchers){
-			if (chooser == null) 
-				chooser = player;
-			if (chooser.isComputer()){
+			Player decider = chooser;
+			if (decider == null) 
+				decider = player;
+			if (decider.isComputer()){
 				changeHiddenOriginResolveAI(af, sa, player);
 			}
 			else{
@@ -491,7 +492,7 @@ public class AbilityFactory_ChangeZone {
         	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Library", AllZoneUtil.getCardsInZone("Library", player).toArray());
         
         if (origin.contains("Hand") && player.isComputer())	// Look at opponents hand before moving onto choosing a card
-        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Human's Hand", AllZoneUtil.getCardsInZone("Hand", player).toArray());
+        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at Opponent's Hand", AllZoneUtil.getCardsInZone("Hand", player).toArray());
 		
 		fetchList = filterListByType(fetchList, params, sa);
 
