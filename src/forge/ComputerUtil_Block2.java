@@ -195,25 +195,28 @@ public class ComputerUtil_Block2
 		  });
 		  
 		  Card leader = CardFactoryUtil.AI_getBestCreature(usableBlockers);
-		  blockGang.add(leader);
-		  usableBlockers.remove(leader);
-		  absorbedDamage = leader.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
+		  if (leader != null)
+		  {
+			  blockGang.add(leader);
+			  usableBlockers.remove(leader);
+			  absorbedDamage = leader.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
 
-		  for(Card blocker : usableBlockers) {
-			  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
-			  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker, blockGang);
-			  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
-			  int absorbedDamage2 = blocker.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
-			  if(attacker.getKillDamage() > currentDamage
-					  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
-					  && absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage() 
-					  && CombatUtil.canBlock(attacker,blocker,combat)) {
-				  currentAttackers.remove(attacker);
-				  combat.addBlocker(attacker, blocker);
-				  combat.addBlocker(attacker, leader);
-				  blockersLeft.remove(blocker);
-				  blockersLeft.remove(leader);
-				  continue;
+			  for(Card blocker : usableBlockers) {
+				  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
+				  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker, blockGang);
+				  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
+				  int absorbedDamage2 = blocker.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
+				  if(attacker.getKillDamage() > currentDamage
+						  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
+						  && absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage() 
+						  && CombatUtil.canBlock(attacker,blocker,combat)) {
+					  currentAttackers.remove(attacker);
+					  combat.addBlocker(attacker, blocker);
+					  combat.addBlocker(attacker, leader);
+					  blockersLeft.remove(blocker);
+					  blockersLeft.remove(leader);
+					  continue;
+				  }
 			  }
 		  }
 	  }
