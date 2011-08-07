@@ -3926,7 +3926,12 @@ public class CardFactory_Creatures {
         	/*
         	 * 8: Tap all creatures target player controls.
         	 */
-        	final SpellAbility ability = new Ability(card, "8") {
+        	Target t = new Target(card, "Select target player", "Player");
+        	Cost cost = new Cost("8", cardName, true);
+
+        	final SpellAbility ability = new Ability_Activated(card, cost, t) {
+        		private static final long serialVersionUID = 3822525186243879729L;
+
         		@Override
         		public boolean canPlayAI() {
         			CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
@@ -3938,15 +3943,13 @@ public class CardFactory_Creatures {
         			final Player player = getTargetPlayer();
         			CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
         			for(Card c:creatures) {
-        				if( c.isUntapped() ) {
-        					c.tap();
-        				}
+        				//no need to check if they're already tapped, c.tap() already does that
+        				c.tap();
         			}
         		}   
         	};
         	card.addSpellAbility(ability);
         	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
         
         
