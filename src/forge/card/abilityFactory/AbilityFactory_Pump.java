@@ -800,6 +800,9 @@ public class AbilityFactory_Pump {
     	String valid = "";
 		Random r = MyRandom.random;
 		final Card source = sa.getSourceCard();
+		params = AF.getMapParams();
+		final int defense = getNumDefense(sa);
+		
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()); //to prevent runaway activations 
     	
     	if(params.containsKey("ValidCards")) {
@@ -811,10 +814,37 @@ public class AbilityFactory_Pump {
     	CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
     	human = human.getValidCards(valid,hostCard.getController(), hostCard);
     	
-    	if(AF.isCurse() && (human.size() <= comp.size()))
-    		return false;
+    	//only count creatures that can attack
+    	human = human.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return CombatUtil.canAttack(c) && !AF.isCurse();
+			}
+		});
     	
-    	//don't use PumpAll after Combat_Begin until AI is improved
+    	if(AF.isCurse()) {
+        	if (defense < 0) { // try to destroy creatures
+        		comp = comp.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                    	if (c.getNetDefense() <= -defense ) return true; // can kill indestructible creatures
+                        return (c.getKillDamage() <= -defense && !c.hasKeyword("Indestructible"));
+                    }
+            	}); // leaves all creatures that will be destroyed
+        		human = human.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                    	if (c.getNetDefense() <= -defense ) return true; // can kill indestructible creatures
+                        return (c.getKillDamage() <= -defense && !c.hasKeyword("Indestructible"));
+                    }
+            	}); // leaves all creatures that will be destroyed
+        	} // -X/-X end
+        	
+   		 //evaluate both lists and pass only if human creatures are more valuable
+         if(CardFactoryUtil.evaluateCreatureList(comp) + 200 >= CardFactoryUtil.evaluateCreatureList(human))
+   			return false;
+         
+         return chance;
+    	}//end Curse
+    	
+    	//don't use non curse PumpAll after Combat_Begin until AI is improved
     	if(AllZone.Phase.isAfter(Constant.Phase.Combat_Begin))
     		return false;
     	
