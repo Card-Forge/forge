@@ -252,6 +252,7 @@ public class SetInfoUtil {
 		{"CHK", "BOK", "SOK", "Kamigawa", "3"},
 		{"9ED", "", "", "Ninth Edition", "3"},
 		{"RAV", "GPT", "DIS", "Ravnica", "3"},
+		{"CSP", "", "", "Coldsnap", "3"},
 		{"TSP", "PLC", "FUT", "Time Spiral", "3"},
 		{"10E", "", "", "Tenth Edition", "3"},
 		{"LRW", "MOR", "", "Lorwyn", "3"},
