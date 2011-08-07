@@ -8242,6 +8242,7 @@ res/cardsfolder/witchs_mist.txt -text svneol=native#text/plain
 res/cardsfolder/withered_wretch.txt -text svneol=native#text/plain
 res/cardsfolder/withering_boon.txt -text svneol=native#text/plain
 res/cardsfolder/withering_gaze.txt -text svneol=native#text/plain
+res/cardsfolder/withering_hex.txt -text svneol=native#text/plain
 res/cardsfolder/withstand.txt -text svneol=native#text/plain
 res/cardsfolder/withstand_death.txt -text svneol=native#text/plain
 res/cardsfolder/wits_end.txt -text svneol=native#text/plain
