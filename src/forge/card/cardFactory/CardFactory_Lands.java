@@ -361,7 +361,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Kjeldoran Outpost") || cardName.equals("Balduvian Trading Post")
-        		|| cardName.equals("Heart of Yavimaya") || cardName.equals("Lake of the Dead")) {
+        		|| cardName.equals("Heart of Yavimaya") || cardName.equals("Lake of the Dead") || cardName.equals("Soldevi Excavations")){
         	
         	final String[] type = new String[1];
         	if(cardName.equals("Kjeldoran Outpost")) type[0] = "Plains";
