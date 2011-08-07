@@ -328,9 +328,9 @@ public class AbilityFactory_CounterMagic {
 	                } else {
 	                    if(ComputerUtil.canPayCost(ability)) {
 	                    	ComputerUtil.playNoStack(ability);
-	                    	removeFromStack(tgtSA,sa);
 	                    }
 	                    else {
+	                    	removeFromStack(tgtSA,sa);
 	                        if(params.containsKey("PowerSink")) doPowerSink(AllZone.ComputerPlayer);
 	                    }
 	                }
