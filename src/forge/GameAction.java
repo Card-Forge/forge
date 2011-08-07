@@ -857,7 +857,6 @@ public class GameAction {
     }
     
     private boolean Start_Cut = false;
-    boolean StaticEffectKeywordReset = true;
     public void newGame(Deck humanDeck, Deck computerDeck) {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
@@ -891,7 +890,6 @@ public class GameAction {
         AllZone.InputControl.clearInput();
         
         AllZone.StaticEffects.reset();
-        StaticEffectKeywordReset = true;
         
         AllZone.HumanPlayer.clearHandSizeOperations();
         AllZone.ComputerPlayer.clearHandSizeOperations();

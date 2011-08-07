@@ -271,7 +271,7 @@ public class StaticEffect {
 	}
     
     public void addTimestamp(Card c, long timestamp) {
-    	timestamps.put(c, new Long(timestamp));
+    	timestamps.put(c, Long.valueOf(timestamp));
     }
     
     public void clearTimestamps() {

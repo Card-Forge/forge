@@ -4379,22 +4379,17 @@ public class CardFactory_Sorceries {
                 	//System.out.println("2: "+ab2card[0]);
                 	//System.out.println("3: "+ab3cards);
                 	
-                	//"Target player loses X life",
-                	for(int i = 0; i < card.getChoices().size(); i++) {
-                		if(card.getChoice(i).equals(cardChoice[0])) {
-                			if(ab0player != null) {
-                				if(ab0player[0].equals(AllZone.HumanPlayer.getName())) {
-                					setTargetPlayer(AllZone.HumanPlayer); 
-                				}
-                				else {
-                					setTargetPlayer(AllZone.ComputerPlayer);
-                				}
-                				if(getTargetPlayer().canTarget(card)) {
-                					getTargetPlayer().addDamage(x[0], card);
-                				}
-                			}
-                		}
-                	}
+					//"Target player loses X life",
+					for(int i = 0; i < card.getChoices().size(); i++) {
+						if(card.getChoice(i).equals(cardChoice[0])) {
+							if(ab0player[0] != null) {
+								setTargetPlayer(ab0player[0]);
+								if(getTargetPlayer().canTarget(card)) {
+									getTargetPlayer().addDamage(x[0], card);
+								}
+							}
+						}
+					}
 
                     //"Return target creature card with converted mana cost X or less from your graveyard to the battlefield",
                     if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {

@@ -358,10 +358,11 @@ public class AbilityFactory_Animate {
 	}
 
 	private static long doAnimate(Card c, AbilityFactory af, int power, int toughness, ArrayList<String> types, String colors, ArrayList<String> keywords) {
+		HashMap<String,String> params = af.getMapParams();
 		if (power != -1) c.setBaseAttack(power);
 		if (toughness != -1) c.setBaseDefense(toughness);
 
-		if(null != af && af.getMapParams().containsKey("OverwriteTypes")) c.clearAllTypes();
+		if(params.containsKey("OverwriteTypes")) c.clearAllTypes();
 		for(String r : types) {
 			// if the card doesn't have that type, add it
 			if (!c.getType().contains(r))
@@ -376,7 +377,7 @@ public class AbilityFactory_Animate {
 				c.addIntrinsicKeyword(k);	
 		}
 
-		long timestamp = c.addColor(colors, c, !af.getMapParams().containsKey("OverwriteColors"), true);		
+		long timestamp = c.addColor(colors, c, !params.containsKey("OverwriteColors"), true);		
 		return timestamp;
 	}
 

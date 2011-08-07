@@ -284,7 +284,7 @@ public class AbilityFactory_Reveal {
 						}
 						else if(!changeValid.equals("")) {
 							if(changeValid.contains("ChosenType")) {
-								changeValid.replace("ChosenType", host.getChosenType());
+								changeValid = changeValid.replace("ChosenType", host.getChosenType());
 							}
 							valid = top.getValidCards(changeValid.split(","), host.getController(), host);
 							for(Card c:top) {
@@ -632,10 +632,9 @@ public class AbilityFactory_Reveal {
 	//******************************* SCRY *********************************
 	//**********************************************************************
 
-	public static SpellAbility createAbilityScry(final AbilityFactory AF){
-		final SpellAbility abScry = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+	public static SpellAbility createAbilityScry(final AbilityFactory af){
+		final SpellAbility abScry = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()){
 			private static final long serialVersionUID = 2631175859655699419L;
-			final AbilityFactory af = AF;
 
 			@Override
 			public String getStackDescription(){
@@ -661,10 +660,9 @@ public class AbilityFactory_Reveal {
 		return abScry;
 	}
 
-	public static SpellAbility createSpellScry(final AbilityFactory AF){
-		final SpellAbility spScry = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+	public static SpellAbility createSpellScry(final AbilityFactory af){
+		final SpellAbility spScry = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()){
 			private static final long serialVersionUID = 6273876397392154403L;
-			final AbilityFactory af = AF;
 
 			@Override
 			public String getStackDescription(){
