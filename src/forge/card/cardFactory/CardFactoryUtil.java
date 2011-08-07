@@ -2262,12 +2262,14 @@ public class CardFactoryUtil {
                 		&& card.isGreen() 
                 		&& !card.getName().contains("Green Ward")) return true;
                 
-                if (kw.equals("Protection from creatures") && card.isCreature()) return true;
+                if (kw.equals("Protection from creatures") 
+                		&& card.isCreature()) return true;
                 
-                if (kw.equals("Protection from artifacts") && card.isArtifact()) return true;
+                if (kw.equals("Protection from artifacts") 
+                		&& card.isArtifact()) return true;
                 
                 if (kw.equals("Protection from enchantments") 
-                		&& card.isType("Enchantment") 
+                		&& card.isEnchantment() 
                 		&& !card.getName().contains("Tattoo Ward")) return true;
                 
                 if (kw.equals("Protection from everything")) return true;
