@@ -762,6 +762,19 @@ public class ComputerUtil
 		  for (Card crd : lands)
 			  landList.add(crd);
 	  }
+	  
+	  landList = landList.filter(new CardListFilter() {
+			 public boolean addCard(Card c) {
+				 if (c.getSVar("NeedsToPlay").length() > 0) {
+			          String needsToPlay = c.getSVar("NeedsToPlay");
+			          CardList list = AllZoneUtil.getCardsInPlay();
+						
+						list = list.getValidCards(needsToPlay.split(","), c.getController(), c);
+			          if (list.isEmpty()) return false;
+			      } 
+				 return true;
+			 }
+		 });
 
 	  while(!landList.isEmpty() && computer.canPlayLand()){
 		  // play as many lands as you can

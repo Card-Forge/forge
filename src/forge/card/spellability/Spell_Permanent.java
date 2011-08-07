@@ -228,6 +228,14 @@ public class Spell_Permanent extends Spell {
     		return false;
     	}
         
+        if (card.getSVar("NeedsToPlay").length() > 0) {
+            String needsToPlay = card.getSVar("NeedsToPlay");
+            CardList list = AllZoneUtil.getCardsInPlay();
+			
+			list = list.getValidCards(needsToPlay.split(","), card.getController(), card);
+            if (list.isEmpty()) return false;
+        }     
+        
         if (!checkETBEffects(card, this, null))
         	return false;
         
