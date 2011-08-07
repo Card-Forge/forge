@@ -244,10 +244,24 @@ public class AllZoneUtil {
 		return isCardInZone(AllZone.getZone(Constant.Zone.Hand, player), card);
 	}
 	
+	/**
+	 * answers the question "is a specific card in this player's library?"
+	 * 
+	 * @param player the player's library to check
+	 * @param card the specific card to look for
+	 * @return true if the card is present in this player's library; false otherwise
+	 */
 	public static boolean isCardInPlayerLibrary(Player player, Card card) {
 		return isCardInZone(AllZone.getZone(Constant.Zone.Library, player), card);
 	}
 	
+	/**
+	 * answers the question "is a specific card in the specified zone?"
+	 * 
+	 * @param pz the PlayerZone to check
+	 * @param card the specific card to look for
+	 * @return true if the card is present in this zone; false otherwise
+	 */
 	public static boolean isCardInZone(PlayerZone pz, Card card) {
 		if(card == null)
 			return false;
@@ -331,6 +345,13 @@ public class AllZoneUtil {
 		return cards.getName(cardName);
 	}
 	
+	/**
+	 * gets a list of a given number of cards from the top of given player's library
+	 * 
+	 * @param player the player's library one is interested in
+	 * @param numCards the number of cards to get from the top
+	 * @return a CardList of the top number of cards in the given player's library
+	 */
 	public static CardList getPlayerCardsInLibrary(final Player player, int numCards) {
 		CardList cards = new CardList();
 		if( player.isHuman() || player.isComputer() ){
