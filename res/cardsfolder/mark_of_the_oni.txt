@@ -7,6 +7,7 @@ K:enControlCreature
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Demon.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no Demons, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
+SVar:NeedsToPlay:Demon.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_the_oni.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/73.jpg
