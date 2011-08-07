@@ -507,7 +507,7 @@
                                 <id>osx-appbundle</id>
                                 <phase>package</phase>
                                 <configuration>
-                                    <tasks>
+                                    <target>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}-osx" />
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx">
                                             <fileset dir="${basedir}" includes="LICENSE.txt" />
@@ -525,8 +525,11 @@
                                             <arg line="--volname ${project.name}-${project.version} --background ${basedir}/build/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx" />
                                         </exec>
                                         <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg" destfile="${project.build.directory}/${project.build.finalName}.osx.tar.bz2" compression="bzip2" />
-                                        <symlink action="delete" link="${project.build.directory}/${project.build.finalName}-osx/Applications"/>
-                                    </tasks>
+                                        <!--<symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" action="delete" />-->
+                                         <exec executable="rm" failonerror="false">
+                                            <arg line="-f ${project.build.directory}/${project.build.finalName}-osx/Applications" />
+                                        </exec>
+                                    </target>
                                 </configuration>
                                 <goals>
                                     <goal>run</goal>
