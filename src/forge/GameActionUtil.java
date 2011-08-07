@@ -35,7 +35,6 @@ public class GameActionUtil {
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		
 		upkeep_The_Abyss();
-		upkeep_All_Hallows_Eve();
 		upkeep_Mana_Vortex();
 		upkeep_Yawgmoth_Demon();
 		upkeep_Lord_of_the_Pit();
@@ -1420,53 +1419,7 @@ public class GameActionUtil {
 		}//end for
 	}//Mana_Vortex
 	
-	private static void upkeep_All_Hallows_Eve() {
-		/*
-		 * At the beginning of your upkeep, if All Hallow's Eve is exiled
-		 * with a scream counter on it, remove a scream counter from it.
-		 * If there are no more scream counters on it, put it into your
-		 * graveyard and each player returns all creature cards from his
-		 * or her graveyard to the battlefield.
-		 */
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList eves = AllZoneUtil.getPlayerCardsInExile(player, "All Hallow's Eve");
-		
-		for(Card c:eves) {
-			final Card eve = c;
-			eve.clearSpellAbility();
-			
-			final Ability hallow = new Ability(eve, "") {
-				@Override
-				public void resolve() {
-					
-					if(AllZoneUtil.isCardExiled(eve) && eve.getCounters(Counters.SCREAM) > 0) {
-						eve.subtractCounter(Counters.SCREAM, 1);
-
-						if(eve.getCounters(Counters.SCREAM) == 0) {
-							eve.clearReplaceMoveToGraveyardCommandList();
-							AllZone.GameAction.moveToGraveyard(eve);
-
-							CardList compGrave = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
-							compGrave = compGrave.filter(AllZoneUtil.creatures);
-							CardList humanGrave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
-							humanGrave = humanGrave.filter(AllZoneUtil.creatures);
-
-							for(Card cc:compGrave) AllZone.GameAction.moveToPlay(cc);
-							for(Card hc:humanGrave) AllZone.GameAction.moveToPlay(hc);
-						}
-					}
-				}//resolve
-			};//sacrificeCreature
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(eve.getName()).append(" - remove a scream counter and return creatures to the battlefield.");
-			hallow.setStackDescription(sb.toString());
-			if(AllZoneUtil.isCardExiled(eve)) {
-				AllZone.Stack.addSimultaneousStackEntry(hallow);
-
-			}
-		}//end for
-	}//All_Hallows_Eve
+	
 	
 	private static void upkeep_Yawgmoth_Demon() {
 		/*
