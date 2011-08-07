@@ -1,0 +1,10 @@
+Name:Adarkar Windform
+ManaCost:4 U
+Types:Snow Creature Illusion
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ Unpump | Cost$ 1 S | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_windform.jpg
+End
