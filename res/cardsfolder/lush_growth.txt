@@ -7,4 +7,5 @@ K:stAnimateEnchanted:Land:0/0:Land,Mountain,Forest,Plains,Overwrite,KeepSupertyp
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lush_growth.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/136.jpg
 End
