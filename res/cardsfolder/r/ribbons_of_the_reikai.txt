@@ -1,0 +1,11 @@
+Name:Ribbons of the Reikai
+ManaCost:4 U
+Types:Sorcery Arcane
+Text:no text
+A:SP$ Draw | Cost$ 4 U | NumCards$ X | SpellDescription$ Draw a card for each Spirit you control.
+SVar:X:Count$TypeYouCtrl.Spirit
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbons_of_the_reikai.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/50.jpg
+End

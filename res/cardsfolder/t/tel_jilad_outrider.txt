@@ -1,0 +1,10 @@
+Name:Tel-Jilad Outrider
+ManaCost:3 G
+Types:Creature Elf Warrior
+Text:no text
+PT:3/1
+K:Protection from artifacts
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_outrider.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/87.jpg
+End

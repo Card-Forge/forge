@@ -1,0 +1,9 @@
+Name:Rain of Embers
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ 1 R | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_embers.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/138.jpg
+End

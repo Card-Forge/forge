@@ -1,0 +1,10 @@
+Name:Whipstitched Zombie
+ManaCost:1 B
+Types:Creature Zombie
+Text:no text
+PT:2/2
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whipstitched_zombie.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/81.jpg
+End

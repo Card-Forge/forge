@@ -1,0 +1,13 @@
+Name:Ritual of Steel
+ManaCost:2 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card at the beginning of the next turn's upkeep.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_steel.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/240.jpg
+End

@@ -1,0 +1,12 @@
+Name:Whetwheel
+ManaCost:4
+Types:Artifact
+Text:no text
+K:Morph:3
+A:AB$ Mill | Cost$ X X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard.
+SVar:X:Count$xPaid
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whetwheel.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/168.jpg
+End

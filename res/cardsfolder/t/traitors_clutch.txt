@@ -1,0 +1,11 @@
+Name:Traitor's Clutch
+ManaCost:4 B
+Types:Instant
+Text:no text
+K:Flashback:1 B
+A:SP$ Pump | Cost$ 4 B | ValidTgts$ Creature | NumAtt$ +1 | KW$ Shadow | SubAbility$ DBAnimate | SpellDescription$ Target creature gets +1/+0, becomes black, and gains shadow until end of turn.
+SVar:DBAnimate:DB$Animate | Defined$ Targeted | Colors$ Black | OverwriteColors$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/traitors_clutch.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/137.jpg
+End

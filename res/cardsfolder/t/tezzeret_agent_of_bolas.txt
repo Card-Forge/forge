@@ -1,0 +1,14 @@
+Name:Tezzeret, Agent of Bolas
+ManaCost:2 U B
+Types:Planeswalker Tezzeret
+Text:no text
+Loyalty:3
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact | SpellDescription$ Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+A:AB$ Animate | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Power$ 5 | Toughness$ 5 | Types$ Creature | Permanent$ True | SpellDescription$ Target artifact becomes a 5/5 artifact creature.
+A:AB$ LoseLife | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SubAbility$ SVar=DBGain | SpellDescription$ Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
+SVar:DBGain:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Artifact.YouCtrl/Times.2
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_agent_of_bolas.jpg
+SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/97.jpg
+End

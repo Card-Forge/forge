@@ -1,0 +1,11 @@
+Name:Talon Sliver
+ManaCost:1 W
+Types:Creature Sliver
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ First Strike | Description$ All Sliver creatures have first strike.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_sliver.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/262.jpg
+End

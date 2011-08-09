@@ -1,0 +1,9 @@
+Name:Reach Through Mists
+ManaCost:U
+Types:Instant Arcane
+Text:no text
+A:SP$ Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_through_mists.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/81.jpg
+End

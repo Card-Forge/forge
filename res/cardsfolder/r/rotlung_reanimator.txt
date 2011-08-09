@@ -1,0 +1,12 @@
+Name:Rotlung Reanimator
+ManaCost:2 B
+Types:Creature Zombie Cleric
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Cleric.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Cleric is put into a graveyard from the battlefield, 
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ put a 2/2 black Zombie creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ Black | TokenOwner$ You | TokenAmount$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rotlung_reanimator.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/164.jpg
+End

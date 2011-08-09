@@ -1,0 +1,13 @@
+Name:Torture
+ManaCost:B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
+A:AB$ PutCounter | Cost$ 1 B | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on enchanted creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/torture.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/23.jpg|2
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/61.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/80.jpg
+End

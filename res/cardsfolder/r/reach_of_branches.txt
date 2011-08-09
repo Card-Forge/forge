@@ -1,0 +1,11 @@
+Name:Reach of Branches
+ManaCost:4 G
+Types:Tribal Instant Treefolk
+Text:no text
+A:SP$ Token | Cost$ 4 G | TokenAmount$ 1 | TokenName$ Treefolk Shaman | TokenTypes$ Creature,Treefolk,Shaman | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 5 | SpellDescription$ Put a 2/5 green Treefolk Shaman creature token onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest.YouCtrl | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever a Forest enters the battlefield under your control, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/132.jpg
+End

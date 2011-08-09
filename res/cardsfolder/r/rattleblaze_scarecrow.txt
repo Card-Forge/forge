@@ -1,0 +1,14 @@
+Name:Rattleblaze Scarecrow
+ManaCost:6
+Types:Artifact Creature Scarecrow
+Text:no text
+PT:5/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Persist | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has persist as long as you control a black creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control a red creature.
+SVar:X:Count$Valid Creature.YouCtrl+Black
+SVar:Y:Count$Valid Creature.YouCtrl+Red
+SVar:BuffedBy:Creature.Black,Creature.Red
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rattleblaze_scarecrow.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/259.jpg
+End

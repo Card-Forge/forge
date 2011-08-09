@@ -1,0 +1,11 @@
+Name:Reliquary Monk
+ManaCost:2 W
+Types:Creature Human Monk Cleric
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target artifact or enchantment.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reliquary_monk.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/14.jpg
+End

@@ -1,0 +1,12 @@
+Name:Wakestone Gargoyle
+ManaCost:3 W
+Types:Creature Gargoyle
+Text:no text
+PT:3/4
+K:Defender
+K:Flying
+A:AB$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl+withDefender | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ Creatures you control with defender can attack this turn as though they didn't have defender.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wakestone_gargoyle.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/21.jpg
+End

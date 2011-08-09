@@ -1,0 +1,11 @@
+Name:Repopulate
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 1 G | Origin$ Graveyard | Destination$ Library | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Creature | Shuffle$ True | SpellDescription$ Shuffle all creature cards from target player's graveyard into that player's library.
+K:Cycling:2
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/repopulate.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/111.jpg
+End

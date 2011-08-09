@@ -1,0 +1,11 @@
+Name:Treetop Sentinel
+ManaCost:2 U U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/3
+K:Flying
+K:Protection from green
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_sentinel.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/111.jpg
+End

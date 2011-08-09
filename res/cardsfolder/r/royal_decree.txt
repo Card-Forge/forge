@@ -1,0 +1,12 @@
+Name:Royal Decree
+ManaCost:2 W W
+Types:Enchantment
+Text:no text
+K:Cumulative upkeep:W
+T:Mode$ Taps | ValidCard$ Swamp,Mountain,Permanent.Black,Permanent.Red | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, CARDNAME deals 1 damage to that permanent's controller.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/royal_decree.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/146.jpg
+End

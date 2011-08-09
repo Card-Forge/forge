@@ -1,0 +1,12 @@
+Name:Rot Wolf
+ManaCost:2 G
+Types:Creature Wolf
+Text:no text
+PT:2/2
+K:Infect
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, you may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rot_wolf.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/90.jpg
+End

@@ -1,0 +1,11 @@
+Name:Righteous War
+ManaCost:1 W B
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.White+YouCtrl | AddKeyword$ Protection from black | Description$ White creatures you control have protection from black.
+S:Mode$ Continuous | Affected$ Creature.Black+YouCtrl | AddKeyword$ Protection from white | Description$ Black creatures you control have protection from white.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_war.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/134.jpg
+End

@@ -1,0 +1,14 @@
+Name:Winter Orb
+ManaCost:2
+Types:Artifact
+Text:Players can't untap more than one land during their untap steps. (NOTE: The ruling for this card was changed.)
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_orb.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/275.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/277.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/408.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/376.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/280.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/276.jpg
+End

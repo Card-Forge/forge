@@ -1,0 +1,11 @@
+Name:Teroh's Faithful
+ManaCost:3 W
+Types:Creature Human Cleric
+Text:no text
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terohs_faithful.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/18.jpg
+End

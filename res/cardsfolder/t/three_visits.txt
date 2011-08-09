@@ -1,0 +1,9 @@
+Name:Three Visits
+ManaCost:1 G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/three_visits.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/153.jpg
+End

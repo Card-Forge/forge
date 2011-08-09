@@ -1,0 +1,10 @@
+Name:Wilt-Leaf Cavaliers
+ManaCost:GW GW GW
+Types:Creature Elf Knight
+Text:no text
+PT:3/4
+K:Vigilance
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wilt_leaf_cavaliers.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/244.jpg
+End

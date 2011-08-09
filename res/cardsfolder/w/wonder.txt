@@ -1,0 +1,13 @@
+Name:Wonder
+ManaCost:3 U
+Types:Creature Incarnation
+Text:no text
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as CARDNAME is in your graveyard and you control a Island, creatures you control have flying.
+SVar:X:Count$Valid Island.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wonder.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/71.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/54.jpg
+End

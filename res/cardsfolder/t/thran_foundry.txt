@@ -1,0 +1,10 @@
+Name:Thran Foundry
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$ ChangeZoneAll | Cost$ 1 T Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Library | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Shuffle$ True | SpellDescription$ Target player shuffles his or her graveyard into his or her library.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_foundry.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/140.jpg
+End

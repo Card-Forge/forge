@@ -1,0 +1,14 @@
+Name:Rabid Wombat
+ManaCost:2 G G
+Types:Creature Wombat
+Text:no text
+PT:0/1
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
+SVar:X:Count$Valid Aura.Attached/Times.2
+SVar:EnchantMe:Multiple
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_wombat.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/181.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/112.jpg
+End

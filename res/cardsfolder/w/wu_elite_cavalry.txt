@@ -1,0 +1,10 @@
+Name:Wu Elite Cavalry
+ManaCost:3 U
+Types:Creature Human Soldier
+Text:no text
+PT:2/3
+K:Horsemanship
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_elite_cavalry.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/58.jpg
+End

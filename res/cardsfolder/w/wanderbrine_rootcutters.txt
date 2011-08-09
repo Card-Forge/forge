@@ -1,0 +1,10 @@
+Name:Wanderbrine Rootcutters
+ManaCost:2 UB UB
+Types:Creature Merfolk Rogue
+Text:CARDNAME can't be blocked by green creatures.
+PT:3/3
+K:CantBeBlockedBy Creature.Green
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderbrine_rootcutters.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/178.jpg
+End

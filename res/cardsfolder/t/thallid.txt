@@ -1,0 +1,13 @@
+Name:Thallid
+ManaCost:G
+Types:Creature Fungus
+Text:no text
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
+A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/87.jpg|4
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/86.jpg
+End

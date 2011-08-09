@@ -1,0 +1,9 @@
+Name:Test of Endurance
+ManaCost:2 W W
+Types:Enchantment
+Text:At the beginning of your upkeep, if you have 50 or more life, you win the game.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/test_of_endurance.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/29.jpg
+End

@@ -1,0 +1,14 @@
+Name:Whirlpool Rider
+ManaCost:1 U
+Types:Creature Merfolk
+PT:1/1
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeAll | TriggerDescription$ When CARDNAME enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
+SVar:TrigChangeAll:DB$ ChangeZoneAll | Defined$ You | Origin$ Hand | Destination$ Library | Shuffle$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ X | Defined$ You | SubAbility$ SVar=DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27670.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/35.jpg
+End

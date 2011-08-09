@@ -1,0 +1,10 @@
+Name:Wipe Clean
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
+K:Cycling:3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wipe_clean.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/26.jpg
+End

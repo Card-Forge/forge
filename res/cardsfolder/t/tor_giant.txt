@@ -1,0 +1,9 @@
+Name:Tor Giant
+ManaCost:3 R
+Types:Creature Giant
+Text:no text
+PT:3/3
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2656.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/220.jpg
+End

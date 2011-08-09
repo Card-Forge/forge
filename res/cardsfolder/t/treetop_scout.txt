@@ -1,0 +1,10 @@
+Name:Treetop Scout
+ManaCost:G
+Types:Creature Elf Scout
+Text:CARDNAME can't be blocked except by creatures with flying.
+PT:1/1
+K:CantBeBlockedBy Creature.withoutFlying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_scout.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/130.jpg
+End

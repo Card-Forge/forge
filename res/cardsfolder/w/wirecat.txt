@@ -1,0 +1,11 @@
+Name:Wirecat
+ManaCost:4
+Types:Artifact Creature Cat
+Text:no text
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ HIDDEN CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't attack or block if an enchantment is on the battlefield.
+SVar:X:Count$Valid Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wirecat.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/317.jpg
+End

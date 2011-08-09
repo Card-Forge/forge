@@ -1,0 +1,10 @@
+Name:Robber Fly
+ManaCost:2 R
+Types:Creature Insect
+Text:Whenever Robber Fly becomes blocked, defending player discards all the cards in his or her hand, then draws that many cards.
+PT:1/1
+K:Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/robber_fly.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/209.jpg
+End

@@ -1,0 +1,12 @@
+Name:Wanderguard Sentry
+ManaCost:4 U
+Types:Creature Drone
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at target opponent's hand.
+SVar:TrigPeek:AB$RevealHand | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderguard_sentry.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/56.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/111.jpg
+End

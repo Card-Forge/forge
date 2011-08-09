@@ -1,0 +1,9 @@
+Name:Wit's End
+ManaCost:5 B B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 5 B B | Mode$ Hand | ValidTgts$ Player | SpellDescription$ Target player discards his or her hand.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107562.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/58.jpg
+End

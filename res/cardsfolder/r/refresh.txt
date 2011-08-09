@@ -1,0 +1,10 @@
+Name:Refresh
+ManaCost:2 G
+Types:Instant
+Text:no text
+A:SP$ Regenerate | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/refresh.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/264.jpg
+End

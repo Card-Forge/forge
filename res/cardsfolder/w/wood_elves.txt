@@ -1,0 +1,16 @@
+Name:Wood Elves
+ManaCost:2 G
+Types:Creature Elf Scout
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Forest | ChangeNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wood_elves.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/289.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/284.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/130.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/121.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/283.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/153.jpg
+End

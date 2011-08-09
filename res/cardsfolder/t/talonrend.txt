@@ -1,0 +1,11 @@
+Name:Talonrend
+ManaCost:4 U
+Types:Creature Elemental
+Text:no text
+PT:0/5
+K:Flying
+A:AB$ Pump | Cost$ UR | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talonrend.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/30.jpg
+End

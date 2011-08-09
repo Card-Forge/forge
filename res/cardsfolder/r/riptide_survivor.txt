@@ -1,0 +1,14 @@
+Name:Riptide Survivor
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:2/1
+K:Morph:1 U U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME is turned face up, discard two cards, then draw three cards.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 3
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_survivor.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/48.jpg
+End

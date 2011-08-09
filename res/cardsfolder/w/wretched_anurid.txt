@@ -1,0 +1,12 @@
+Name:Wretched Anurid
+ManaCost:1 B
+Types:Creature Zombie Frog Beast
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature enters the battlefield, you lose 1 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+SVar:AntiBuffedBy:Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wretched_anurid.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/183.jpg
+End

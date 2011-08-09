@@ -1,0 +1,11 @@
+Name:Rootwater Commando
+ManaCost:2 U
+Types:Creature Merfolk
+Text:no text
+PT:2/2
+K:Islandwalk
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129733.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/39.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/102.jpg
+End

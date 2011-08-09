@@ -1,0 +1,10 @@
+Name:Tattermunge Witch
+ManaCost:1 RG
+Types:Creature Goblin Shaman
+Text:no text
+PT:2/1
+A:AB$ PumpAll | Cost$ R G | ValidCards$ Creature.blocked | NumAtt$ +1 | KW$ Trample | SpellDescription$ Each blocked creature gets +1/+0 and gains trample until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_witch.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/220.jpg
+End

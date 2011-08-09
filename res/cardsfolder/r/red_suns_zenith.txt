@@ -1,0 +1,12 @@
+Name:Red Sun's Zenith
+ManaCost:X R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | SubAbility$ SVar=DBCurse | SpellDescription$ CARDNAME deals X damage to target creature or player. If a creature dealt damage this way would be put into a graveyard this turn, exile it instead. Shuffle CARDNAME into its owner's library.
+SVar:X:Count$xPaid
+SVar:DBCurse:DB$Pump | KW$ If CARDNAME would be put into a graveyard this turn, exile it instead. | Defined$ Targeted | SubAbility$ SVar=DBShuffle
+SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/red_suns_zenith.jpg
+SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/74.jpg
+End

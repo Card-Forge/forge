@@ -1,0 +1,12 @@
+Name:Thalakos Lowlands
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ SVar=DBStayTapped | SpellDescription$ Add W to your mana pool. CARDNAME doesn't untap during your next untap step.
+A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ SVar=DBStayTapped | SpellDescription$ Add U to your mana pool. CARDNAME doesn't untap during your next untap step.
+SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_lowlands.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/338.jpg
+End

@@ -1,0 +1,11 @@
+Name:Tendrils of Agony
+ManaCost:2 B B
+Types:Sorcery
+Text:no text
+K:Storm
+A:SP$ LoseLife | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ SVar=DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_agony.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/75.jpg
+End

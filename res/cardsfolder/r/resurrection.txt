@@ -1,0 +1,13 @@
+Name:Resurrection
+ManaCost:2 W W
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 W W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resurrection.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/218.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/220.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/218.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/12.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/219.jpg
+End

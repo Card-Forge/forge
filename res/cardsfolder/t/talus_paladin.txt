@@ -1,0 +1,15 @@
+Name:Talus Paladin
+ManaCost:3 W
+Types:Creature Human Knight Ally
+Text:no text
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Ally.YouCtrl | KW$ Lifelink | SubAbility$ SVar=DBCounter
+SVar:DBCounter:DB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | OptionalDecider$ You
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Talus_Paladin.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/21.jpg
+End

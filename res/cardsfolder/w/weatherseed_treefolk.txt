@@ -1,0 +1,12 @@
+Name:Weatherseed Treefolk
+ManaCost:2 G G G
+Types:Creature Treefolk
+Text:no text
+PT:5/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_treefolk.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/116.jpg
+End

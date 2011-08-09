@@ -1,0 +1,9 @@
+Name:Talas Merchant
+ManaCost:1 U
+Types:Creature Human Pirate
+Text:no text
+PT:1/3
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6525.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/50.jpg
+End

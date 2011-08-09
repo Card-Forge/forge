@@ -1,0 +1,13 @@
+Name:Teetering Peaks
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +0
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/teetering_peaks.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/226.jpg
+End

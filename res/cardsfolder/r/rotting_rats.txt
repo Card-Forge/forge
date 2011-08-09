@@ -1,0 +1,12 @@
+Name:Rotting Rats
+ManaCost:1 B
+Types:Creature Zombie Rat
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a card.
+K:Unearth:1 B
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Each | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_rats.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/51.jpg
+End

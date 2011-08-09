@@ -1,0 +1,9 @@
+Name:Wei Infantry
+ManaCost:1 B
+Types:Creature Human Soldier
+Text:no text
+PT:2/1
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10519.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/88.jpg
+End

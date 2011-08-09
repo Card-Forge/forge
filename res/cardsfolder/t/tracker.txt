@@ -1,0 +1,13 @@
+Name:Tracker
+ManaCost:2 G
+Types:Creature Human
+Text:no text
+PT:2/2
+A:AB$ DealDamage | Cost$ G G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ SVar=DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
+SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
+SVar:X:Count$CardPower
+SVar:Y:Targeted$CardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tracker.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/52.jpg
+End

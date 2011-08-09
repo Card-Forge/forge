@@ -1,0 +1,10 @@
+Name:Riptide Laboratory
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ ChangeZone | Cost$ 1 U T | ValidTgts$ Creature.Wizard+YouCtrl | TgtPrompt$ Select target Wizard you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Wizard you control to its owner's hand.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_laboratory.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/322.jpg
+End

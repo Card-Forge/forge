@@ -1,0 +1,12 @@
+Name:Renewed Faith
+ManaCost:2 W
+Types:Instant
+Text:no text
+K:Cycling:1 W
+A:SP$ GainLife | Cost$ 2 W | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
+T:Mode$ Cycled | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ When you cycle Renewed Faith, you may gain 2 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41153.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/50.jpg
+End

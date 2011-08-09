@@ -1,0 +1,11 @@
+Name:Tainted Isle
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add U to your mana pool. Activate this ability only if you control a Swamp.
+A:AB$ Mana | Cost$ T | Produced$ B | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add B to your mana pool. Activate this ability only if you control a Swamp.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_isle.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/141.jpg
+End

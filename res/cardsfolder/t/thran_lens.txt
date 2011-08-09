@@ -1,0 +1,10 @@
+Name:Thran Lens
+ManaCost:2
+Types:Artifact
+Text:no text
+S:Mode$ Continuous | Affected$ Permanent | SetColor$ Colorless | Description$ All permanents are colorless.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_lens.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/133.jpg
+End

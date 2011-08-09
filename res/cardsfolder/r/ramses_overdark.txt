@@ -1,0 +1,10 @@
+Name:Ramses Overdark
+ManaCost:2 U U B B
+Types:Legendary Creature Human Assassin
+Text:no text
+PT:4/3
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.enchanted | TgtPrompt$ Select target enchanted creature | SpellDescription$ Destroy target enchanted creature.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ramses_overdark.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/292.jpg
+End

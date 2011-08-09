@@ -1,0 +1,11 @@
+Name:Tolarian Sentinel
+ManaCost:3 U
+Types:Creature Human Spellshaper
+Text:no text
+PT:1/3
+K:Flying
+A:AB$ ChangeZone | Cost$ U T Discard<1/Card> | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent you control to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_sentinel.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/87.jpg
+End

@@ -1,0 +1,17 @@
+Name:Rampant Growth
+ManaCost:1 G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rampant_growth.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/274.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/139.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/262.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/263.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/288.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/201.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/246.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/190.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/133.jpg
+End

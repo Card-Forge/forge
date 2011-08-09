@@ -1,0 +1,12 @@
+Name:Thaumatog
+ManaCost:1 W G
+Types:Creature Atog
+Text:no text
+PT:1/2
+A:AB$ Pump | Cost$ Sac<1/Enchantment> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Thaumatog gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Thaumatog gets +1/+1 until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thaumatog.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/295.jpg
+End

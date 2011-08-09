@@ -1,0 +1,10 @@
+Name:Rix Maadi, Dungeon Palace
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Discard | Cost$ 1 B R T | NumCards$ 1 | Mode$ TgtChoose | Defined$ Each | SorcerySpeed$ True | SpellDescription$ Each player discards a card. Activate this ability only any time you could cast a sorcery.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rix_maadi_dungeon_palace.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/179.jpg
+End

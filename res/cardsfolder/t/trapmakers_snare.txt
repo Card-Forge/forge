@@ -1,0 +1,10 @@
+Name:Trapmaker's Snare
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 U | Origin$ Library | Destination$ Hand | ChangeType$ Trap | ChangeNum$ 1 | SpellDescription$ Search your library for a Trap card, reveal it, and put it into your hand. Then shuffle your library.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trapmakers_snare.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/74.jpg
+End

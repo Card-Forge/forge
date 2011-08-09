@@ -1,0 +1,21 @@
+Name:Tek
+ManaCost:5
+Types:Artifact Creature Dragon
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 2 | CheckSVar$ PLAINS | SVarCompare$ GE1 | Description$ CARDNAME gets +0/+2 as long as you control a Plains.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ ISLAND | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control an Island.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ SWAMP | SVarCompare$ GE1 | Description$ CARDNAME gets +2/+0 as long as you control a Swamp.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | CheckSVar$ MOUNTAIN | SVarCompare$ GE1 | Description$ CARDNAME has first strike as long as you control a Mountain.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ FOREST | SVarCompare$ GE1 | Description$ CARDNAME has trample as long as you control a Forest.
+SVar:PLAINS:Count$Valid Plains.YouCtrl
+SVar:ISLAND:Count$Valid Island.YouCtrl
+SVar:SWAMP:Count$Valid Swamp.YouCtrl
+SVar:MOUNTAIN:Count$Valid Mountain.YouCtrl
+SVar:FOREST:Count$Valid Forest.YouCtrl
+SVar:RemRandomDeck:True
+SVar:BuffedBy:Land
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tek.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/313.jpg
+End

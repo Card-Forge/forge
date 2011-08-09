@@ -1,0 +1,10 @@
+Name:Thundering Tanadon
+ManaCost:4 PG PG
+Types:Artifact Creature Beast
+Text:no text
+PT:5/4
+K:Trample
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_tanadon.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/122.jpg
+End

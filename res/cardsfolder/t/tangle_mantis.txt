@@ -1,0 +1,10 @@
+Name:Tangle Mantis
+ManaCost:2 G G
+Types:Creature Insect
+Text:no text
+PT:3/4
+K:Trample
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_mantis.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/91.jpg
+End

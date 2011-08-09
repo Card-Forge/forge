@@ -1,0 +1,11 @@
+Name:Werebear
+ManaCost:1 G
+Types:Creature Human Bear Druid
+Text:no text
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | Threshold$ True | Description$ Threshold - CARDNAME gets +3/+3 as long as seven or more cards are in your graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/werebear.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/282.jpg
+End

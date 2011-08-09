@@ -1,0 +1,10 @@
+Name:Ruination
+ManaCost:3 R
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Land.nonBasic | SpellDescription$ Destroy all nonbasic lands.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ruination.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/95.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/134.jpg
+End

@@ -1,0 +1,11 @@
+Name:Ruinous Minotaur
+ManaCost:1 R R
+Types:Creature Minotaur Warrior
+Text:no text
+PT:5/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, sacrifice a land.
+SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ You
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ruinous_minotaur.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/145.jpg
+End

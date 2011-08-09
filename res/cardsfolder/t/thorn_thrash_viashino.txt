@@ -1,0 +1,11 @@
+Name:Thorn-Thrash Viashino
+ManaCost:3 R
+Types:Creature Viashino Warrior
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ G | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+K:Devour:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thrash_viashino.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/116.jpg
+End

@@ -1,0 +1,10 @@
+Name:Train of Thought
+ManaCost:1 U
+Types:Sorcery
+Text:no text
+K:Replicate 1 U
+A:SP$Draw | Cost$ 1 U | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/train_of_thought.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/39.jpg
+End

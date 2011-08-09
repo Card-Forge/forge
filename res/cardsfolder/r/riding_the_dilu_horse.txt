@@ -1,0 +1,9 @@
+Name:Riding the Dilu Horse
+ManaCost:2 G
+Types:Sorcery
+Text:no text
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Horsemanship | Permanent$ True | SpellDescription$ Target creature gets +2/+2 and gains horsemanship. (It can't be blocked except by creatures with horsemanship. This effect lasts indefinitely.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riding_the_dilu_horse.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/144.jpg
+End

@@ -1,0 +1,12 @@
+Name:Turntimber Grove
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +1/+1 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/turntimber_grove.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/227.jpg
+End

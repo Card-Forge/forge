@@ -1,0 +1,10 @@
+Name:Tower of the Magistrate
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Protection | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ artifacts | SpellDescription$ Target creature gains protection from artifacts until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_the_magistrate.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/330.jpg
+End

@@ -1,0 +1,9 @@
+Name:Temporal Manipulation
+ManaCost:3 U U
+Types:Sorcery
+Text:no text
+A:SP$ AddTurn | Cost$ 3 U U | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_manipulation.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/54.jpg
+End

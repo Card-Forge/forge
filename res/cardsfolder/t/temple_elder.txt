@@ -1,0 +1,10 @@
+Name:Temple Elder
+ManaCost:2 W
+Types:Creature Human Cleric
+Text:no text
+PT:1/2
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ You gain 1 life. Activate this ability only during your turn, before attackers are declared.
+SVar:Rarity:Uncommon
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/temple_elder.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/144.jpg
+End

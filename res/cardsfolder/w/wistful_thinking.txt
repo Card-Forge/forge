@@ -1,0 +1,11 @@
+Name:Wistful Thinking
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards, then discards four cards. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 4 | Mode$ TgtChoose
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wistful_thinking.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/53.jpg
+End

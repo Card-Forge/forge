@@ -1,0 +1,11 @@
+Name:Thunder Spirit
+ManaCost:1 W W
+Types:Creature Elemental Spirit
+Text:no text
+PT:2/2
+K:Flying
+K:First Strike
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_spirit.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/208.jpg
+End

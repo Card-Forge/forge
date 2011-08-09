@@ -1,0 +1,11 @@
+Name:Redeem
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Prevent all damage that would be dealt this turn to up to two target creatures.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/redeem.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/37.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/33.jpg
+End

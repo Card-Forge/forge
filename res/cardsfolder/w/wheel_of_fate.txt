@@ -1,0 +1,13 @@
+Name:Wheel of Fate
+ManaCost:0
+Types:Sorcery
+Text:no text
+K:CARDNAME is red.
+K:Suspend:4:1 R
+A:SP$ Discard | Cost$ 0 | Mode$ Hand | Defined$ Each | SubAbility$ DBDraw | SpellDescription$ Each player discards his or her hand, then draws seven cards.
+SVar:DBDraw:DB$Draw | Defined$ Each | NumCards$ 7
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_fate.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/187.jpg
+End

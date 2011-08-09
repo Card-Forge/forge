@@ -1,0 +1,12 @@
+Name:Resilient Wanderer
+ManaCost:2 W W
+Types:Creature Human Nomad
+Text:no text
+PT:2/3
+K:First Strike
+A:AB$ Protection | Cost$ Discard<1/Card> | Defined$ Self | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resilient_wanderer.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/43.jpg
+End

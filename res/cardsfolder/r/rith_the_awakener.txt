@@ -1,0 +1,10 @@
+Name:Rith, the Awakener
+ManaCost:3 R G W
+Types:Legendary Creature Dragon
+Text:Whenever Rith, the Awakener deals combat damage to a player, you may pay 2 G. If you do, choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color.
+PT:6/6
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rith_the_awakener.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/267.jpg
+End

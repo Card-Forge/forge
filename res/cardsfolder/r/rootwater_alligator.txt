@@ -1,0 +1,11 @@
+Name:Rootwater Alligator
+ManaCost:3 G
+Types:Creature Crocodile
+Text:no text
+PT:3/2
+A:AB$ Regenerate | Cost$ Sac<1/Forest> | SpellDescription$ Regenerate CARDNAME.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_alligator.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/122.jpg
+End

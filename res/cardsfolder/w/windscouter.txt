@@ -1,0 +1,14 @@
+Name:Windscouter
+ManaCost:3 U
+Types:Creature Human Scout
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigBounce | TriggerDescription$ Return CARDNAME to it's owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/windscouter.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/53.jpg
+End

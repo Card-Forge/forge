@@ -1,0 +1,10 @@
+Name:Wall of Earth
+ManaCost:1 R
+Types:Creature Wall
+Text:no text
+PT:0/6
+K:Defender
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_earth.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/166.jpg
+End

@@ -1,0 +1,13 @@
+Name:Tivadar of Thorn
+ManaCost:1 W W
+Types:Legendary Creature Human Knight
+Text:no text
+PT:2/2
+K:First Strike
+K:Protection from red
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target Goblin.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Goblin | TgtPrompt$ Select target Goblin
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tivadar_of_thorn.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/44.jpg
+End

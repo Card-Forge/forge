@@ -1,0 +1,11 @@
+Name:Tower Drake
+ManaCost:2 U
+Types:Creature Drake
+Text:no text
+PT:2/1
+K:Flying
+A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_drake.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/82.jpg
+End

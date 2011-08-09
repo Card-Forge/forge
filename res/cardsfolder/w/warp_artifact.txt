@@ -1,0 +1,17 @@
+Name:Warp Artifact
+ManaCost:B B
+Types:Enchantment Aura
+Text:no text
+K:Enchant artifact
+A:SP$ Attach | Cost$ B B | ValidTgts$ Artifact | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted artifact's controller, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warp_artifact.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/42.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/42.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/66.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/53.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/43.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/42.jpg
+End

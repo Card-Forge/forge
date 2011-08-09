@@ -1,0 +1,12 @@
+Name:Tuktuk the Explorer
+ManaCost:2 R
+Types:Legendary Creature Goblin
+Text:
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a legendary 5/5 colorless Goblin Golem artifact creature token named Tuktuk the Returned onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1  | TokenName$ Tuktuk the Returned | TokenTypes$ Legendary,Artifact,Creature,Goblin,Golem | TokenOwner$ TriggeredCardController | TokenColors$ Colorless | TokenPower$ 5 | TokenToughness$ 5
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_the_explorer.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/169.jpg
+End

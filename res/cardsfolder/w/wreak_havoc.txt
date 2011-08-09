@@ -1,0 +1,10 @@
+Name:Wreak Havoc
+ManaCost:2 R G
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 2 R G | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
+K:CARDNAME can't be countered.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wreak_havoc.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/139.jpg
+End

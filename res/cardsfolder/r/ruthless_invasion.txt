@@ -1,0 +1,11 @@
+Name:Ruthless Invasion
+ManaCost:3 PR
+Types:Sorcery
+Text:no text
+A:SP$ Effect | Cost$ 3 PR | Name$ Ruthless Invasion Effect | StaticAbilities$ KWPump | SpellDescription$ Nonartifact creatures can't block this turn.
+SVar:KWPump:Mode$ Continuous | Affected$ Creature.nonArtifact | AddKeyword$ CARDNAME can't block. | Description$ Nonartifact creatures can't block this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_invasion.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/93.jpg
+End

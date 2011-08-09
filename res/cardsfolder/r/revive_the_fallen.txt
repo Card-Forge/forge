@@ -1,0 +1,11 @@
+Name:Revive the Fallen
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 B | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Hand | SubAbility$ SVar=DBClash | SpellDescription$ Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
+SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
+SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/revive_the_fallen.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/76.jpg
+End

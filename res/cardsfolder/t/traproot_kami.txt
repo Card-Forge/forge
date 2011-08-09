@@ -1,0 +1,13 @@
+Name:Traproot Kami
+ManaCost:G
+Types:Creature Spirit
+Text:no text
+PT:0/*
+K:Defender
+K:Reach
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Forests on the battlefield.
+SVar:X:Count$Valid Forest
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/traproot_kami.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/147.jpg
+End

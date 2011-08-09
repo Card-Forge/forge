@@ -1,0 +1,10 @@
+Name:Time Stretch
+ManaCost:8 U U
+Types:Sorcery
+Text:no text
+A:SP$ AddTurn | Cost$ 8 U U | ValidTgts$ Player | TgtPrompt$ Select target player. | NumTurns$ 2 | SpellDescription$ Target player takes two extra turns after this one.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/time_stretch.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/108.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/118.jpg
+End

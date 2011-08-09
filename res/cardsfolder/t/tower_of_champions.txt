@@ -1,0 +1,9 @@
+Name:Tower of Champions
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ Pump | Cost$ 8 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6 | SpellDescription$ Target creature gets +6/+6 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_champions.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/265.jpg
+End

@@ -1,0 +1,10 @@
+Name:Rocky Tar Pit
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Swamp,Mountain | ChangeNum$ 1 | SpellDescription$ Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rocky_tar_pit.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/310.jpg
+End

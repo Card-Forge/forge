@@ -1,0 +1,11 @@
+Name:Ranger of Eos
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to two creature cards with converted mana cost 1 or less, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcLE1 | ChangeNum$ 2
+PT:3/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ranger_of_eos.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/21.jpg
+End

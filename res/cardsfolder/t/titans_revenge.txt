@@ -1,0 +1,13 @@
+Name:Titan's Revenge
+ManaCost:X R R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ X R R | NumDmg$ X | Tgt$ TgtCP | SubAbility$ SVar=DBClash | SpellDescription$ CARDNAME deals X damage to target creature or player. Clash with an opponent. If you win, return CARDNAME to it's owner's hand.
+SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
+SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/titans_revenge.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/110.jpg
+End

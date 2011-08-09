@@ -1,0 +1,11 @@
+Name:Wall of Kelp
+ManaCost:U U
+Types:Creature Wall
+Text:no text
+PT:0/3
+K:Defender
+A:AB$ Token | Cost$ U U T | TokenAmount$ 1 | TokenName$ Plant Wall | TokenTypes$ Creature,Plant,Wall | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 0 | TokenToughness$ 1 | TokenKeywords$ Defender | SpellDescription$ Put a 0/1 blue Plant Wall creature token with defender named Kelp onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2959.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/50.jpg
+End

@@ -1,0 +1,11 @@
+Name:Thoughtpicker Witch
+ManaCost:B
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ Dig | Cost$ 1 Sac<1/Creature> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 2 | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition2$ 0 | SpellDescription$ Look at the top two cards of target opponent's library, then exile one of them.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtpicker_witch.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/109.jpg
+End

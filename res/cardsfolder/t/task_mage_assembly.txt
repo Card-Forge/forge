@@ -1,0 +1,11 @@
+Name:Task Mage Assembly
+ManaCost:2 R
+Types:Enchantment
+Text:no text
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When there are no creatures on the battlefield, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | AnyPlayer$ True | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 1 damage to target creature. Any player may activate this ability but only any time he or she could cast a sorcery.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/task_mage_assembly.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/105.jpg
+End

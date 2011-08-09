@@ -1,0 +1,12 @@
+Name:Temporal Isolation
+ManaCost:1 W
+Types:Enchantment Aura
+Text:no text
+K:Flash
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shadow & HIDDEN Prevent all damage that would be dealt by CARDNAME. | Description$ Enchanted creature has shadow. Prevent all damage that would be dealt by enchanted creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_isolation.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/43.jpg
+End

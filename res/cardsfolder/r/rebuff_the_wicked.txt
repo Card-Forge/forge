@@ -1,0 +1,9 @@
+Name:Rebuff the Wicked
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ W | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl | SpellDescription$ Counter target spell that targets a permanent you control.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuff_the_wicked.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/12.jpg
+End

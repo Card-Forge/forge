@@ -1,0 +1,10 @@
+Name:Terrain Generator
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ ChangeZone | Cost$ 2 T | ChangeType$ Land.Basic+YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Hand | Destination$ Battlefield | Tapped$ True | SpellDescription$ You may put a basic land card from your hand onto the battlefield tapped.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terrain_generator.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/143.jpg
+End

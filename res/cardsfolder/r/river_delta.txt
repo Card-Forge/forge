@@ -1,0 +1,14 @@
+Name:River Delta
+ManaCost:no cost
+Types:Land
+Text:no text
+S:Mode$ Continuous | Affected$ Card.Self+countersGE1DEPLETION | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ CARDNAME doesn't untap during your untap step if it has a depletion counter on it.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 1 | SubAbility$ SVar=AddCounter | SpellDescription$ Add U to your mana pool. Put a depletion counter on CARDNAME.
+A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SubAbility$ SVar=AddCounter | SpellDescription$ Add B to your mana pool. Put a depletion counter on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a depletion counter from CARDNAME.
+SVar:TrigSubCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:AddCounter:DB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/river_delta.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/346.jpg
+End

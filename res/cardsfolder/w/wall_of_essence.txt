@@ -1,0 +1,13 @@
+Name:Wall of Essence
+ManaCost:1 W
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+T:Mode$ DamageDone | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGain | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life.
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_essence.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/122.jpg
+End

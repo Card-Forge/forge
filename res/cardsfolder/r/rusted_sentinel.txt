@@ -1,0 +1,10 @@
+Name:Rusted Sentinel
+ManaCost:4
+Types:Artifact Creature Golem
+Text:no text
+PT:3/4
+K:CARDNAME enters the battlefield tapped.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rusted_sentinel.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/215.jpg
+End

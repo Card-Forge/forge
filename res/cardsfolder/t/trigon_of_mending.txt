@@ -1,0 +1,11 @@
+Name:Trigon of Mending
+ManaCost:2
+Types:Artifact
+Text:no text
+K:etbCounter:CHARGE:3
+A:AB$ PutCounter | Cost$ W W T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
+A:AB$ GainLife | Cost$ 2 T SubCounter<1/CHARGE> | LifeAmount$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player to gain 3 life | SpellDescription$ Target player gains 3 life.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_mending.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/215.jpg
+End

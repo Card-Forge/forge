@@ -1,0 +1,15 @@
+Name:Wormfang Manta
+ManaCost:5 U U
+Types:Creature Nightmare Fish Beast
+Text:no text
+PT:6/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigSkip | TriggerDescription$ When CARDNAME enters the battlefield, you skip your next turn.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigAdd | TriggerDescription$ When CARDNAME leaves the battlefield, you take an extra turn after this one.
+SVar:TrigAdd:AB$AddTurn | Cost$ 0 | NumTurns$ 1 | Defined$ You
+SVar:TrigSkip:AB$AddTurn | Cost$ 0 | NumTurns$ 1 | Defined$ Opponent
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_manta.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/58.jpg
+End

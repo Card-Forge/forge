@@ -1,0 +1,12 @@
+Name:Tolarian Entrancer
+ManaCost:1 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, gain control of that creature at end of combat.
+SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigGainControl | TriggerDescription$ Gain control of blocking creature.
+SVar:TrigGainControl:AB$GainControl | Cost$ 0 | Defined$ TriggeredBlocker
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_entrancer.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/56.jpg
+End

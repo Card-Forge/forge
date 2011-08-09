@@ -1,0 +1,14 @@
+Name:Warbreak Trumpeter
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:Morph:X X R
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME is turned face up, put X 1/1 red Goblin creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warbreak_trumpeter.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/116.jpg
+End

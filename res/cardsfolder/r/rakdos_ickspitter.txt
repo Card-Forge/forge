@@ -1,0 +1,11 @@
+Name:Rakdos Ickspitter
+ManaCost:1 B R
+Types:Creature Thrull
+Text:no text
+PT:1/1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ SVar=DBDrain | SpellDescription$ CARDNAME deals 1 damage to target creature and that creature's controller loses 1 life.
+SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_ickspitter.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/128.jpg
+End

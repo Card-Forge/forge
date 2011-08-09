@@ -1,0 +1,9 @@
+Name:Rescue
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent | SpellDescription$ Return target permanent you control to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rescue.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/44.jpg
+End

@@ -1,0 +1,11 @@
+Name:Reassembling Skeleton
+ManaCost:1 B
+Types:Creature Skeleton Warrior
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reassembling_skeleton.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/112.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/104.jpg
+End

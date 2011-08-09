@@ -1,0 +1,12 @@
+Name:Thought Nibbler
+ManaCost:U
+Types:Creature Beast
+Text:Your maximum hand size is reduced by two.
+PT:1/1
+K:HandSize - 2 Self
+K:Flying
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_nibbler.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/107.jpg
+End

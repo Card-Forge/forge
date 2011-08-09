@@ -1,0 +1,12 @@
+Name:Rage Extractor
+ManaCost:4 PR
+Types:Artifact
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with P in its mana cost, CARDNAME deals damage equal to that spell's converted mana cost to target creature or player.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X
+SVar:X:TriggeredCard$CardManaCost
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_extractor.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/91.jpg
+End

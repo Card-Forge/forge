@@ -1,0 +1,12 @@
+Name:Talisman of Dominance
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ SVar=DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
+A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ SVar=DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_dominance.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/253.jpg
+End

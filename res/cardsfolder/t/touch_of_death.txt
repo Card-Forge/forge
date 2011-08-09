@@ -1,0 +1,12 @@
+Name:Touch of Death
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 2 B | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player. You gain 1 life. | SubAbility$ SVar=DBGainLife
+SVar:DBGainLife:DB$GainLife | LifeAmount$ 1 | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_death.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/62.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/55.jpg
+End

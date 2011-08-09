@@ -1,0 +1,10 @@
+Name:Rite of Passage
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+T:Mode$ DamageDone | ValidTarget$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control is dealt damage, put a +1/+1 counter on it. (The damage is dealt before the counter is put on.)
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredTarget | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_passage.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/91.jpg
+End

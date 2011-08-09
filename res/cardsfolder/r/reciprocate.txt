@@ -1,0 +1,10 @@
+Name:Reciprocate
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.dealtDamageToYouThisTurn | TgtPrompt$ Select target creature that dealt damage to you this turn | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature that dealt damage to you this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reciprocate.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/40.jpg
+End

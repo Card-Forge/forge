@@ -1,0 +1,12 @@
+Name:Rabble-Rouser
+ManaCost:3 R
+Types:Creature Goblin Shaman
+Text:no text
+PT:1/1
+K:Bloodthirst 1
+A:AB$ PumpAll | Cost$ R T | ValidCards$ Creature.attacking | NumAtt$ +X | SpellDescription$ Attacking creatures get +X/+0 until end of turn, where X is CARDNAME's power.
+SVar:X:Count$CardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rabble_rouser.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/73.jpg
+End

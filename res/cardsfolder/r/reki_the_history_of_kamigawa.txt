@@ -1,0 +1,11 @@
+Name:Reki, the History of Kamigawa
+ManaCost:2 G
+Types:Legendary Creature Human Shaman
+Text:no text
+PT:1/2
+T:Mode$ SpellCast | ValidCard$ Legendary.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a legendary spell, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reki_the_history_of_kamigawa.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/142.jpg
+End

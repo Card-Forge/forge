@@ -1,0 +1,19 @@
+Name:Raging Goblin
+ManaCost:R
+Types:Creature Goblin Berserker
+Text:no text
+PT:1/1
+K:Haste
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83218.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/212.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/153.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/96.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/211.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/150.jpg|2
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/209.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/224.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/114.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/200.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/114.jpg
+End

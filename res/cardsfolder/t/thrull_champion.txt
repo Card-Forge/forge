@@ -1,0 +1,12 @@
+Name:Thrull Champion
+ManaCost:4 B
+Types:Creature Thrull
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Thrull | AddPower$ 1 | AddToughness$ 1 | Description$ Thrull creatures get +1/+1.
+A:AB$ GainControl | Cost$ T | ValidTgts$ Thrull | TgtPrompt$ Select target Thrull | LoseControl$ LoseControl,LeavesPlay | SpellDescription$ Gain control of target Thrull for as long as you control CARDNAME.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_champion.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/29.jpg
+End

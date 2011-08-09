@@ -1,0 +1,10 @@
+Name:Wildsize
+ManaCost:2 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card107097.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/98.jpg
+End

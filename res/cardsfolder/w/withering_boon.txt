@@ -1,0 +1,9 @@
+Name:Withering Boon
+ManaCost:1 B
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 1 B PayLife<3> | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_boon.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/50.jpg
+End

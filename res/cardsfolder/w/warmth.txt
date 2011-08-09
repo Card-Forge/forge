@@ -1,0 +1,12 @@
+Name:Warmth
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an opponent casts a red spell, you gain 2 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warmth.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/263.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/52.jpg
+End

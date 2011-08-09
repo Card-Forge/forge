@@ -1,0 +1,10 @@
+Name:Warpath Ghoul
+ManaCost:2 B
+Types:Creature Zombie
+Text:no text
+PT:3/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warpath_ghoul.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/120.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/117.jpg
+End

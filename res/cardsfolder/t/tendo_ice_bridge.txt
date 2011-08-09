@@ -1,0 +1,15 @@
+Name:Tendo Ice Bridge
+ManaCost:no cost
+Types:Land
+Text:no text
+K:etbCounter:CHARGE:1
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ U | SpellDescription$ Add U to your mana pool.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
+SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/165.jpg
+End

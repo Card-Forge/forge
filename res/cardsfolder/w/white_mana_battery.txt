@@ -1,0 +1,11 @@
+Name:White Mana Battery
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ PutCounter | Cost$ 2 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/white_mana_battery.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/375.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/244.jpg
+End

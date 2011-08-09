@@ -1,0 +1,10 @@
+Name:Resuscitate
+ManaCost:1 G
+Types:Instant
+Text:Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/121.jpg
+End

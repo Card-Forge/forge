@@ -1,0 +1,11 @@
+Name:Torch Drake
+ManaCost:3 U
+Types:Creature Drake
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_drake.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/38.jpg
+End

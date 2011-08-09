@@ -1,0 +1,10 @@
+Name:Thunderclap
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
+SVar:AltCost:Sac<1/Mountain>
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderclap.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/219.jpg
+End

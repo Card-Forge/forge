@@ -1,0 +1,12 @@
+Name:Rhox Bodyguard
+ManaCost:3 G W
+Types:Creature Rhino Monk Soldier
+Text:no text
+PT:2/3
+K:Exalted
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_bodyguard.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/122.jpg
+End

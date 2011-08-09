@@ -1,0 +1,12 @@
+Name:Whip Silk
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Reach | Description$ Enchanted creature has reach. (It can block creatures with flying.)
+A:AB$ ChangeZone | Cost$ G | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_silk.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/225.jpg
+End

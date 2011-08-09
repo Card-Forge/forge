@@ -1,0 +1,12 @@
+Name:Wild Mongrel
+ManaCost:1 G
+Types:Creature Hound
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SubAbility$ ChangeColor | SpellDescription$ CARDNAME gets +1/+1 and becomes the color of your choice until end of turn.
+SVar:ChangeColor:DB$ ChooseColor | Defined$ You | SubAbility$ Animate
+SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_mongrel.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/283.jpg
+End

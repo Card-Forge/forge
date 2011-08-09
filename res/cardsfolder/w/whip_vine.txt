@@ -1,0 +1,18 @@
+Name:Whip Vine
+ManaCost:2 G
+Types:Creature Plant Wall
+Text:no text
+PT:1/4
+K:Defender
+K:Reach
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.withFlying+blockedBy | TgtPrompt$ Select target creature with flying blocked by Whip Vine | RememberTargets$ True |  SubAbility$ DBTap | SpellDescription$ Tap target creature with flying blocked by CARDNAME. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
+SVar:DBTap:DB$Tap | Defined$ Targeted
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
+SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_vine.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/89.jpg
+End

@@ -1,0 +1,11 @@
+Name:Wall of Diffusion
+ManaCost:1 R
+Types:Creature Wall
+Text:no text
+PT:0/5
+K:Defender
+K:CARDNAME can block creatures with shadow as though they didn't have shadow.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_diffusion.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/211.jpg
+End

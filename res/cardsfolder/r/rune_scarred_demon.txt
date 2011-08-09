@@ -1,0 +1,13 @@
+Name:Rune-Scarred Demon
+ManaCost:5 B B
+Types:Creature Demon
+Text:no text
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card, put it into your hand, then shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_scarred_demon.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/106.jpg
+End

@@ -1,0 +1,13 @@
+Name:Troll Ascetic
+ManaCost:1 G G
+Types:Creature Troll Shaman
+Text:no text
+PT:3/2
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+K:Hexproof
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49828.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/135.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/176.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/305.jpg
+End

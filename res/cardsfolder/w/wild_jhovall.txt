@@ -1,0 +1,9 @@
+Name:Wild Jhovall
+ManaCost:3 R
+Types:Creature Cat
+Text:no text
+PT:3/3
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19605.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/227.jpg
+End

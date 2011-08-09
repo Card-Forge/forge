@@ -1,0 +1,14 @@
+Name:Tibor and Lumia
+ManaCost:2 U R
+Types:Legendary Creature Human Wizard
+Text:no text
+PT:3/3
+#Should the order of these be changed? I can't tell which one gets triggered first on a consistent basis... -PA
+T:Mode$ SpellCast | ValidPlayer$ You | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ TrigFlying | TriggerDescription$ Whenever you cast a blue spell, target creature gains flying until end of turn.
+T:Mode$ SpellCast | ValidPlayer$ You | ValidCard$ Card.Red | TriggerZones$ Battlefield | Execute$ TrigTremor | TriggerDescription$ Whenever you cast a red spell, CARDNAME deals 1 damage to each creature without flying.
+SVar:TrigFlying:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
+SVar:TrigTremor:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tibor_and_lumia.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/135.jpg
+End

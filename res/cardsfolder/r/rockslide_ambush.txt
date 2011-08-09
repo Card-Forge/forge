@@ -1,0 +1,10 @@
+Name:Rockslide Ambush
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of Mountains you control to target creature.
+SVar:X:Count$TypeYouCtrl.Mountain
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rockslide_ambush.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/121.jpg
+End

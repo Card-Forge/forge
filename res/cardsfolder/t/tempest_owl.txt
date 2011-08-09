@@ -1,0 +1,13 @@
+Name:Tempest Owl
+ManaCost:1 U
+Types:Creature Bird
+Text:no text
+PT:1/2
+K:Flying
+K:Kicker:4 U
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, tap up to three target permanents.
+SVar:TrigTap:AB$Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select up to three target permanents | ValidTgts$ Permanent
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_owl.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/72.jpg
+End

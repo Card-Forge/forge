@@ -1,0 +1,12 @@
+Name:Wort, Boggart Auntie
+ManaCost:2 B R
+Types:Legendary Creature Goblin Shaman
+Text:no text
+PT:3/3
+K:Fear
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may return target Goblin card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target Goblin card in your graveyard | ValidTgts$ Goblin.YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wort_boggart_auntie.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/252.jpg
+End

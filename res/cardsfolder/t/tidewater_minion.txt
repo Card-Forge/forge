@@ -1,0 +1,13 @@
+Name:Tidewater Minion
+ManaCost:3 U U
+Types:Creature Elemental Minion
+Text:no text
+PT:4/4
+K:Defender
+A:AB$ Debuff | Cost$ 4 | Keywords$ Defender | Defined$ Self | SpellDescription$ CARDNAME loses defender until end of turn.
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent| SpellDescription$ Untap target permanent.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tidewater_minion.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/71.jpg
+End

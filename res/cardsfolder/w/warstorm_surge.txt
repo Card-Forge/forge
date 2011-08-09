@@ -1,0 +1,11 @@
+Name:Warstorm Surge
+ManaCost:5 R
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature enters the battlefield under your control, it deals damage equal to its power to target creature or player.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X | DamageSource$ TriggeredCard
+SVar:X:TriggeredCard$CardPower
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warstorm_surge.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/160.jpg
+End

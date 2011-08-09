@@ -1,0 +1,10 @@
+Name:Tireless Tribe
+ManaCost:W
+Types:Creature Human Nomad
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ Discard<1/Card> | NumDef$ +4 | SpellDescription$ CARDNAME gets +0/+4 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tireless_tribe.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/56.jpg
+End

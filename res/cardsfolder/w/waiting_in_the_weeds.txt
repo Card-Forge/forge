@@ -1,0 +1,13 @@
+Name:Waiting in the Weeds
+ManaCost:1 G G
+Types:Sorcery
+Text:no text
+A:SP$ Token | Cost$ 1 G G | TokenAmount$ ForestYou | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ SVar=DBToken | SpellDescription$ Each player puts a 1/1 green Cat creature token onto the battlefield for each untapped Forest he or she controls.
+SVar:DBToken:DB$Token | TokenAmount$ ForestOpp | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ Opponent | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:ForestYou:Count$Valid Forest.untapped+YouCtrl
+SVar:ForestOpp:Count$Valid Forest.untapped+YouDontCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/waiting_in_the_weeds.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/266.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/150.jpg
+End

@@ -1,0 +1,15 @@
+Name:Thelonite Hermit
+ManaCost:3 G
+Types:Creature Elf Shaman
+Text:no text
+PT:1/1
+K:Morph:3 G G
+S:Mode$ Continuous | Affected$ Creature.Saproling | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ Saproling creatures get +1/+1.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put four 1/1 green Saproling creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put four 1/1 green Saproling creature tokens onto the battlefield.
+SVar:X:Count$Valid Card.Self+faceUp
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/228.jpg
+End

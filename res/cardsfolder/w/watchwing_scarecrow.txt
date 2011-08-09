@@ -1,0 +1,14 @@
+Name:Watchwing Scarecrow
+ManaCost:4
+Types:Artifact Creature Scarecrow
+Text:no text
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control a blue creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME has vigilance as long as you control a white creature.
+SVar:X:Count$Valid Creature.Blue+YouCtrl
+SVar:Y:Count$Valid Creature.White+YouCtrl
+SVar:BuffedBy:Creature.White,Creature.Blue
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/watchwing_scarecrow.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/268.jpg
+End

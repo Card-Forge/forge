@@ -1,0 +1,12 @@
+Name:Ravenous Skirge
+ManaCost:2 B
+Types:Creature Imp
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_skirge.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/152.jpg
+End

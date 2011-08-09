@@ -1,0 +1,11 @@
+Name:Tromp the Domains
+ManaCost:5 G
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ 5 G | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.
+SVar:X:Count$Domain
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116726.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/230.jpg
+End

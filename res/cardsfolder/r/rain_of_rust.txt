@@ -1,0 +1,13 @@
+Name:Rain of Rust
+ManaCost:3 R R
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | PrecostDesc$ Choose one : | SpellDescription$ Destroy target artifact;
+A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ or destroy target land.
+A:SP$ Destroy | Cost$ 6 R R R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDestroy | PrecostDesc$ Entwine 3 R - | SpellDescription$ (Choose both if you pay the entwine cost.)
+SVar:DBDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_rust.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/76.jpg
+End

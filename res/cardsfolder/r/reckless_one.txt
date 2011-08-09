@@ -1,0 +1,14 @@
+Name:Reckless One
+ManaCost:3 R
+Types:Creature Goblin Avatar
+Text:no text
+PT:*/*
+K:Haste
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Goblins on the battlefield.
+SVar:X:Count$Valid Goblin
+SVar:BuffedBy:Goblin
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/222.jpg
+End

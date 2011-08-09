@@ -1,0 +1,11 @@
+Name:Ranger en-Vec
+ManaCost:1 G W
+Types:Creature Human Soldier Archer
+Text:no text
+PT:2/2
+K:First Strike
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ranger_en_vec.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/343.jpg
+End

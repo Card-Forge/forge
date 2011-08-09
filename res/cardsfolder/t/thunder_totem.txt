@@ -1,0 +1,11 @@
+Name:Thunder Totem
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ W | Amount$ 1 | SpellDescription$ Add W to your mana pool.
+A:AB$ Animate | Cost$ 1 W W | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Artifact,Spirit | Colors$ White | Keywords$ Flying & First Strike | SpellDescription$ CARDNAME becomes a 2/2 white Spirit artifact creature with flying and first strike until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_totem.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/265.jpg
+End

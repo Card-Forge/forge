@@ -1,0 +1,13 @@
+Name:Wren's Run Packmaster
+ManaCost:3 G
+Types:Creature Elf Warrior
+Text:no text
+PT:5/5
+K:Champion:Elf
+S:Mode$ Continuous | Affected$ Creature.Wolf+YouCtrl | AddKeyword$ Deathtouch | Description$ Each Wolf you control has deathtouch. (Any amount of damage it deals to a creature is enough to destroy that creature.)
+A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put a 2/2 green Wolf creature token onto the battlefield.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/244.jpg
+End

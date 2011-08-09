@@ -1,0 +1,11 @@
+Name:Tel-Jilad Wolf
+ManaCost:2 G
+Types:Creature Wolf
+Text:no text
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Artifact | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked by an artifact creature, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_wolf.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/88.jpg
+End

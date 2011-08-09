@@ -1,0 +1,11 @@
+Name:Tar Pitcher
+ManaCost:3 R
+Types:Creature Goblin Shaman
+Text:no text
+PT:2/2
+A:AB$ DealDamage | Cost$ T Sac<1/Goblin> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tar_pitcher.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/193.jpg
+End

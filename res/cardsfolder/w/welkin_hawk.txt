@@ -1,0 +1,12 @@
+Name:Welkin Hawk
+ManaCost:1 W
+Types:Creature Bird
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may search your library for a card named CARDNAME, reveal that card, put it into your hand, then shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedWelkin Hawk | ChangeNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/welkin_hawk.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/25.jpg
+End

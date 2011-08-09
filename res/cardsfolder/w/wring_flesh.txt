@@ -1,0 +1,9 @@
+Name:Wring Flesh
+ManaCost:B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -3/-1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wring_flesh.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/118.jpg
+End

@@ -1,0 +1,11 @@
+Name:Tidal Bore
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ TapOrUntap | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
+SVar:AltCost:Return<1/Island>
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_bore.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/109.jpg
+End

@@ -1,0 +1,10 @@
+Name:Rockcaster Platoon
+ManaCost:5 W W
+Types:Creature Rhino Soldier
+Text:no text
+PT:5/7
+A:AB$ DamageAll | Cost$ 4 G | ValidCards$ Creature.withFlying | ValidPlayers$ Each | NumDmg$ 2 | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature with flying and each player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rockcaster_platoon.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/23.jpg
+End

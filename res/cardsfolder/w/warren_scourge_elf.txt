@@ -1,0 +1,10 @@
+Name:Warren-Scourge Elf
+ManaCost:1 G
+Types:Creature Elf Warrior
+Text:no text
+PT:1/1
+K:Protection from Goblins
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_scourge_elf.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/241.jpg
+End

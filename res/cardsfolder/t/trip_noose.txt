@@ -1,0 +1,9 @@
+Name:Trip Noose
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_noose.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/266.jpg
+End

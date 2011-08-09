@@ -1,0 +1,14 @@
+Name:Revenant
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:*/*
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
+SVar:X:Count$TypeInYourYard.Creature
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/revenant.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/18.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/160.jpg
+End

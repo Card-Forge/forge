@@ -1,0 +1,9 @@
+Name:Replenish
+ManaCost:3 W
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 3 W | ChangeType$ Enchantment.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all enchantment cards from your graveyard to the battlefield. (Auras with nothing to enchant remain in your graveyard.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/replenish.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/15.jpg
+End

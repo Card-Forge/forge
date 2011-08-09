@@ -1,0 +1,10 @@
+Name:Whiptongue Frog
+ManaCost:2 U
+Types:Creature Frog
+Text:no text
+PT:1/3
+A:AB$ Pump | Cost$ U | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6057.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/52.jpg
+End

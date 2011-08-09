@@ -1,0 +1,11 @@
+Name:Titanic Ultimatum
+ManaCost:R R G G G W W
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ R R G G G W W | ValidCards$ Creature.YouCtrl | NumAtt$ +5 | NumDef$ +5 | KW$ First Strike & Lifelink & Trample | SpellDescription$ Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink, and trample.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/titanic_ultimatum.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/204.jpg
+End
+
+

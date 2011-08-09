@@ -1,0 +1,23 @@
+Name:Regeneration
+ManaCost:1 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+A:AB$ Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/regeneration.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/275.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/122.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/122.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/265.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/183.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/152.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/265.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/147.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/290.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/248.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/120.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/134.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/122.jpg
+End

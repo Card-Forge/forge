@@ -1,0 +1,13 @@
+Name:Training Drone
+ManaCost:3
+Types:Artifact Creature Drone
+Text:no text
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ HIDDEN CARDNAME can't attack. & HIDDEN CARDNAME can't block. | CheckSVar$ X | SVarCompare$ EQ1 | Description$ CARDNAME can't attack or block unless it's equipped.
+SVar:X:Count$Valid Card.Self+unequipped
+SVar:BuffedBy:Artifact.Equipment
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/training_drone.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/142.jpg
+End

@@ -1,0 +1,9 @@
+Name:Tribute to the Wild
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ Sacrifice | Cost$ 1 G | Defined$ Opponent | SacValid$ Artifact,Enchantment | SacMessage$ artifact or enchantment | SpellDescription$ Each opponent sacrifices an artifact or enchantment.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tribute_to_the_wild.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/175.jpg
+End

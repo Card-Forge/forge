@@ -1,0 +1,11 @@
+Name:Tattered Drake
+ManaCost:4 U
+Types:Creature Zombie Drake
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tattered_drake.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/68.jpg
+End

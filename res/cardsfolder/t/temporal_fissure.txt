@@ -1,0 +1,10 @@
+Name:Temporal Fissure
+ManaCost:4 U
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+K:Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/53.jpg
+End

@@ -1,0 +1,10 @@
+Name:Thermal Navigator
+ManaCost:3
+Types:Artifact Creature Construct
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thermal_navigator.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/162.jpg
+End

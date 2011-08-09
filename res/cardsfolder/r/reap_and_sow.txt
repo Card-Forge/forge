@@ -1,0 +1,13 @@
+Name:Reap and Sow
+ManaCost:3 G
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Land | TgtPrompt$ Select target land | PrecostDesc$ Choose one - | SpellDescription$ Destroy target land;
+A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ or search your library for a land card, put that card onto the battlefield, then shuffle your library.
+A:SP$ Destroy | Cost$ 4 G G | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ SVar=DBChange | PrecostDesc$ Entwine 1 G | SpellDescription$ (Choose both if you pay the entwine cost.)
+SVar:DBChange:DB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_and_sow.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/81.jpg
+End

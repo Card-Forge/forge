@@ -1,0 +1,12 @@
+Name:Tamanoa
+ManaCost:R G W
+Types:Creature Spirit
+Text:no text
+PT:2/4
+T:Mode$ DamageDone | ValidSource$ Card.nonCreature+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a noncreature source you control deals damage, you gain that much life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+Svar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tamanoa.jpg
+SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/132.jpg
+End

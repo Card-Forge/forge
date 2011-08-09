@@ -1,0 +1,11 @@
+Name:Thran War Machine
+ManaCost:4
+Types:Artifact Creature Construct
+Text:no text
+PT:4/5
+K:CARDNAME attacks each turn if able.
+K:Echo:4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_war_machine.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/134.jpg
+End

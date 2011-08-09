@@ -1,0 +1,10 @@
+Name:Ramirez DePietro
+ManaCost:3 U B B
+Types:Legendary Creature Human Pirate
+Text:no text
+PT:4/3
+K:First Strike
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ramirez_depietro.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/291.jpg
+End

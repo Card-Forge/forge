@@ -1,0 +1,9 @@
+Name:Triangle of War
+ManaCost:1
+Types:Artifact
+Text:no text
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/triangle_of_war.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/158.jpg
+End

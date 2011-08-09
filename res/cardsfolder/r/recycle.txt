@@ -1,0 +1,14 @@
+Name:Recycle
+ManaCost:4 G G
+Types:Enchantment
+Text:Skip your draw step. Your maximum hand size is 2.
+# hardcoded for draw step to be skipped in r6069.
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you play a card, draw a card.
+T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever you play a card, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+K:HandSize = 2 Self
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/recycle.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/142.jpg
+End

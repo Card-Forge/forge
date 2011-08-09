@@ -1,0 +1,12 @@
+Name:Radha, Heir to Keld
+ManaCost:R G
+Types:Legendary Creature Elf Warrior
+Text:no text
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add R R to your mana pool.
+SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/radha_heir_to_keld.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/162.jpg
+End

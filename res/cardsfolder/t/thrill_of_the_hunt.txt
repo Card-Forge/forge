@@ -1,0 +1,10 @@
+Name:Thrill of the Hunt
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Target creature gets +1/+2 until end of turn.
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | Flashback$ True | CostDesc$ Flashback W | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrill_of_the_hunt.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/229.jpg
+End

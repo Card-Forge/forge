@@ -1,0 +1,11 @@
+Name:Whispers of the Muse
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Buyback:5
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whispers_of_the_muse.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/103.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/35.jpg
+End

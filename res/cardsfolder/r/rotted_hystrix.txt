@@ -1,0 +1,9 @@
+Name:Rotted Hystrix
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:3/6
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rotted_hystrix.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/120.jpg
+End

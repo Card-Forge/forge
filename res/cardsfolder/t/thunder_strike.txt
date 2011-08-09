@@ -1,0 +1,9 @@
+Name:Thunder Strike
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ First Strike | SpellDescription$ Target creature gets +2/+0 and gains first strike until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_strike.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/157.jpg
+End

@@ -1,0 +1,13 @@
+Name:Whitemane Lion
+ManaCost:1 W
+Types:Creature Cat
+Text:no text
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whitemane_lion.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/22.jpg
+End

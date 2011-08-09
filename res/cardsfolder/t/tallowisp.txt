@@ -1,0 +1,11 @@
+Name:Tallowisp
+ManaCost:1 W
+Types:Creature Spirit
+Text:no text
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigSearch | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
+SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Aura.withEnchant creature | ChangeNum$ 1 | Shuffle$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tallowisp.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/25.jpg
+End

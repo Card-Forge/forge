@@ -1,0 +1,12 @@
+Name:Wall of Vapor
+ManaCost:3 U
+Types:Creature Wall
+Text:Prevent all damage that would be dealt to CARDNAME by creatures it's blocking.
+PT:0/1
+K:Defender
+K:PreventAllDamageBy Creature.blockedBySource
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vapor.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/84.jpg
+End
