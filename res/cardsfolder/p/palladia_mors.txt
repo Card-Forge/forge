@@ -1,0 +1,12 @@
+Name:Palladia-Mors
+ManaCost:2 W W R R G G
+Types:Legendary Creature Elder Dragon
+Text:no text
+PT:7/7
+K:Flying
+K:Trample
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay R G W
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/palladia_mors.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/287.jpg
+End

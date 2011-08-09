@@ -1,0 +1,14 @@
+Name:Viashino Sandscout
+ManaCost:1 R
+Types:Creature Viashino Scout
+Text:no text
+PT:2/1
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandscout.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/96.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/246.jpg
+End

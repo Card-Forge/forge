@@ -1,0 +1,10 @@
+Name:Vectis Agents
+ManaCost:3 U B
+Types:Artifact Creature Human Rogue
+Text:no text
+PT:4/3
+A:AB$ Pump | Cost$ U B | NumAtt$ -2 | KW$ Unblockable | SpellDescription$ CARDNAME gets -2/-0 until end of turn and is unblockable this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_agents.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/131.jpg
+End

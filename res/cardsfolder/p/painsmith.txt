@@ -1,0 +1,12 @@
+Name:Painsmith
+ManaCost:1 B
+Types:Creature Human Artificer
+Text:no text
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Artifact.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may have target creature get +2/+0 and gain deathtouch until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | KW$ Deathtouch
+SVar:BuffedBy:Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/painsmith.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/74.jpg
+End

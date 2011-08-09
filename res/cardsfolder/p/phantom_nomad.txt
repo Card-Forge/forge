@@ -1,0 +1,11 @@
+Name:Phantom Nomad
+ManaCost:1 W
+Types:Creature Spirit Nomad
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:2
+K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_nomad.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/17.jpg
+End

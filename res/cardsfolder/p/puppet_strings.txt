@@ -1,0 +1,10 @@
+Name:Puppet Strings
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ TapOrUntap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/puppet_strings.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/294.jpg
+End

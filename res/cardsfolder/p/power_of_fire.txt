@@ -1,0 +1,12 @@
+Name:Power of Fire
+ManaCost:1 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | Description$ Enchanted creature has "tap: This creature deals 1 damage to target creature or player."
+SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/power_of_fire.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/101.jpg
+End

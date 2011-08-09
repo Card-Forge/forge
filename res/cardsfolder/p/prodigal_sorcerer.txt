@@ -1,0 +1,18 @@
+Name:Prodigal Sorcerer
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108906.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/74.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/74.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/94.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/94.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/29.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/88.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/75.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/112.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/74.jpg
+End

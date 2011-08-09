@@ -1,0 +1,9 @@
+Name:Obsidian Giant
+ManaCost:4 R
+Types:Creature Giant
+Text:no text
+PT:4/4
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6599.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/109.jpg
+End

@@ -1,0 +1,11 @@
+Name:Oxidda Scrapmelter
+ManaCost:3 R
+Types:Creature Beast
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Choose target artifact.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_scrapmelter.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/101.jpg
+End

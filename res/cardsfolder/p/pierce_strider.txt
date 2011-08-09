@@ -1,0 +1,11 @@
+Name:Pierce Strider
+ManaCost:4
+Types:Artifact Creature Construct
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 3 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | LifeAmount$ 3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pierce_strider.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/123.jpg
+End

@@ -1,0 +1,14 @@
+Name:Vampire Bats
+ManaCost:B
+Types:Creature Bat
+Text:no text
+PT:0/1
+K:Flying
+A:AB$ Pump | Cost$ B | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_bats.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/64.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/39.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/51.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/186.jpg
+End

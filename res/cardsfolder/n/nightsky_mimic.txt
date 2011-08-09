@@ -1,0 +1,12 @@
+Name:Nightsky Mimic
+ManaCost:1 WB
+Types:Creature Shapeshifter
+Text:no text
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.White+Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both white and black, CARDNAME becomes 4/4 and gains flying until end of turn.
+SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 | Keywords$ Flying
+SVar:BuffedBy:Card.Black+White
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightsky_mimic.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/91.jpg
+End

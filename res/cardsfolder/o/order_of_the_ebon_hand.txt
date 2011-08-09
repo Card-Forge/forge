@@ -1,0 +1,12 @@
+Name:Order of the Ebon Hand
+ManaCost:B B
+Types:Creature Cleric Knight
+Text:no text
+PT:2/1
+K:Protection from white
+A:AB$ Pump | Cost$ B | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$ Pump | Cost$ B B | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_ebon_hand.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/25.jpg|3
+End

@@ -1,0 +1,9 @@
+Name:Political Trickery
+ManaCost:2 U
+Types:Sorcery
+Text:Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/political_trickery.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/81.jpg
+End

@@ -1,0 +1,12 @@
+Name:Nocturnal Raid
+ManaCost:2 B B
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature.Black | NumAtt$ +2 | SpellDescription$ Black creatures get +2/+0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25633.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/30.jpg
+End
+
+
+

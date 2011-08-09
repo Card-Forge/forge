@@ -1,0 +1,11 @@
+Name:Pulse of the Fields
+ManaCost:1 W W
+Types:Instant
+Text:no text
+A:SP$ GainLife | Cost$ 1 W W | Defined$ You | LifeAmount$ 4 | SubAbility$ SVar=TrigReturn | SpellDescription$ You gain 4 life. Then if an opponent has more life than you, return CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ConditionLifeTotal$ You | ConditionLifeAmount$ LTX | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionDescription$ If an opponent has more life than you,
+SVar:X:Count$OppLifeTotal
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_fields.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/11.jpg
+End

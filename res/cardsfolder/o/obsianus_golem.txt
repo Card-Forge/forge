@@ -1,0 +1,14 @@
+Name:Obsianus Golem
+ManaCost:6
+Types:Artifact Creature Golem
+Text:no text
+PT:4/6
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card15401.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/267.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/269.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/357.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/302.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/268.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/268.jpg
+End

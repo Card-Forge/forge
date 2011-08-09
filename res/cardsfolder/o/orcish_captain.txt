@@ -1,0 +1,11 @@
+Name:Orcish Captain
+ManaCost:R
+Types:Creature Orc Warrior
+Text:no text
+PT:1/1
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_captain.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/254.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/123.jpg
+End

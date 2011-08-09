@@ -1,0 +1,10 @@
+Name:Volcanic Submersion
+ManaCost:4 R
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
+K:Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_submersion.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/121.jpg
+End

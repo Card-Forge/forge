@@ -1,0 +1,13 @@
+Name:Vulturous Zombie
+ManaCost:3 B G
+Types:Creature Plant Zombie
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.YouDontOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vulturous_zombie.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/238.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/236.jpg
+End

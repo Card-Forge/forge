@@ -1,0 +1,9 @@
+Name:Ogre's Cleaver
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature gets +5/+0.
+K:eqPump 5:+5/+0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ogres_cleaver.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/220.jpg
+End

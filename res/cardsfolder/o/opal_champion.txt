@@ -1,0 +1,10 @@
+Name:Opal Champion
+ManaCost:2 W
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment| Execute$ TrigAnimate | TriggerDescription$ When an opponent casts a creature spell, if CARDNAME is an enchantment, CARDNAME becomes a 3/3 Knight creature with first strike.
+SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 3  | Keywords$ First Strike | Types$ Creature,Knight | OverwriteTypes$ True | Permanent$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_champion.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/16.jpg
+End

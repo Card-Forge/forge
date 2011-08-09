@@ -1,0 +1,8 @@
+Name:Oath of Ghouls
+ManaCost:1 B
+Types:Enchantment
+Text:At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than his or her graveyard does and is his or her opponent. The first player may return a creature card from his or her graveyard to his or her hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_ghouls.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/69.jpg
+End

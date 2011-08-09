@@ -1,0 +1,12 @@
+Name:Negate
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target nonCreature Spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/negate.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/68.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/43.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/69.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/65.jpg
+End

@@ -1,0 +1,10 @@
+Name:Phyrexian Broodlings
+ManaCost:1 B B
+Types:Creature Minion
+Text:no text
+PT:2/2
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_broodlings.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/58.jpg
+End

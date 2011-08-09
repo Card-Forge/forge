@@ -1,0 +1,9 @@
+Name:Vengeful Dreams
+ManaCost:W W
+Types:Instant
+Text:As an additional cost to cast Vengeful Dreams, discard X cards.\r\n\r\nExile X target attacking creatures.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_dreams.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/21.jpg
+End

@@ -1,0 +1,13 @@
+Name:Nimana Sell-Sword
+ManaCost:3 B
+Types:Creature Human Warrior Ally
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Ally
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nimana_sell_sword.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/106.jpg
+End

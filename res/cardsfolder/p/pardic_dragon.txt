@@ -1,0 +1,14 @@
+Name:Pardic Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+K:Suspend:2:R R
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.YouDontCtrl | TriggerZones$ Exile | IsPresent$ Card.countersGE1TIME+Self | PresentZone$ Exile | OptionalDecider$ Opponent | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a spell, if CARDNAME is suspended, that player may put a time counter on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_dragon.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/173.jpg
+End

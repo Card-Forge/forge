@@ -1,0 +1,16 @@
+Name:Vampirism
+ManaCost:1 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card at the beginning of the next turn's upkeep.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each other creature you control.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ -1 | AddToughness$ -1 | Description$ Other creatures you control get -1/-1.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampirism.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/23.jpg
+End

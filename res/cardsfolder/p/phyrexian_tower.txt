@@ -1,0 +1,11 @@
+Name:Phyrexian Tower
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/Creature> | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_tower.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/322.jpg
+End

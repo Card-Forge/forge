@@ -1,0 +1,9 @@
+Name:Profane Command
+ManaCost:X B B
+Types:Sorcery
+Text:Choose two - Target player loses X life; or return target creature card with converted mana cost X or less from your graveyard to the battlefield; or target creature gets -X/-X until end of turn; or up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_command.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/135.jpg
+End

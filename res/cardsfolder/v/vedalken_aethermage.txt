@@ -1,0 +1,14 @@
+Name:Vedalken AEthermage
+ManaCost:1 U
+Types:Creature Vedalken Wizard
+Text:no text
+PT:1/2
+K:Flash
+K:TypeCycling:Wizard:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target Sliver to its owner's hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Sliver | TgtPrompt$ Select target Sliver | Origin$ Battlefield | Destination$ Hand
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_aethermage.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/61.jpg
+End

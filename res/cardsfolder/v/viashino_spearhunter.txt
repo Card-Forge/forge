@@ -1,0 +1,10 @@
+Name:Viashino Spearhunter
+ManaCost:2 R
+Types:Creature Viashino Warrior
+Text:no text
+PT:2/1
+K:First Strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_spearhunter.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/161.jpg
+End

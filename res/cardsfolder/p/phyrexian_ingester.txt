@@ -1,0 +1,15 @@
+Name:Phyrexian Ingester
+ManaCost:6 U
+Types:Creature Beast
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile target nontoken creature.
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Imprint$ True | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Origin$ Battlefield | Destination$ Exile
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ Y | Description$ CARDNAME gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
+SVar:X:Count$ImprintedCardPower
+SVar:Y:Count$ImprintedCardToughness
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_ingester.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/41.jpg
+End

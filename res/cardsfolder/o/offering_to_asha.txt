@@ -1,0 +1,10 @@
+Name:Offering to Asha
+ManaCost:2 W U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 2 W U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SubAbility$ SVar=DBGainLife | SpellDescription$ Counter target spell unless its controller pays 4. You gain 4 life.
+SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/offering_to_asha.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/9.jpg
+End

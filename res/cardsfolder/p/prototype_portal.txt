@@ -1,0 +1,13 @@
+Name:Prototype Portal
+ManaCost:4
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile an artifact card from your hand.
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Artifact | ChangeNum$ 1
+A:AB$CopyPermanent | Cost$ X T | Defined$ Imprinted | SpellDescription$ Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
+SVar:X:Imprinted$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prototype_portal.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/195.jpg
+End

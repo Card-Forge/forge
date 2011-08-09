@@ -1,0 +1,10 @@
+Name:Peacekeeper
+ManaCost:2 W
+Types:Creature Human
+Text:Creatures can't attack
+PT:1/1
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 W
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/peacekeeper.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/138.jpg
+End

@@ -1,0 +1,10 @@
+Name:One with Nothing
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ B | Mode$ Hand | SpellDescription$ Discard your hand.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/one_with_nothing.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/84.jpg
+End

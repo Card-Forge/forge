@@ -1,0 +1,12 @@
+Name:Phyrexian War Beast
+ManaCost:3
+Types:Artifact Creature Beast
+Text:no text
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
+SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | SacValid$ Land | SubAbility$ SVar=DBDealDamage
+SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_war_beast.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/169.jpg|2
+End

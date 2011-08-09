@@ -1,0 +1,10 @@
+Name:Viashino Warrior
+ManaCost:3 R
+Types:Creature Viashino Warrior
+Text:no text
+PT:4/2
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card12974.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/213.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/200.jpg
+End

@@ -1,0 +1,11 @@
+Name:Peppersmoke
+ManaCost:B
+Types:Tribal Instant Faerie
+Text:no text
+A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ SVar=DBDraw | SpellDescription$ Target creature gets -1/-1 until end of turn. If you control a Faerie, draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Faerie.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Faerie,
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/peppersmoke.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/134.jpg
+End

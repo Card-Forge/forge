@@ -1,0 +1,12 @@
+Name:Pilgrim's Eye
+ManaCost:3
+Types:Artifact Creature Thopter
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pilgrims_eye.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/128.jpg
+End

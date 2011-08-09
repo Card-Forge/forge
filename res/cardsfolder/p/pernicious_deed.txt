@@ -1,0 +1,11 @@
+Name:Pernicious Deed
+ManaCost:1 B G
+Types:Enchantment
+Text:no text
+A:AB$ DestroyAll | Cost$ X Sac<1/CARDNAME> | ValidCards$ Artifact.cmcLEX,Creature.cmcLEX,Enchantment.cmcLEX | SpellDescription$ Destroy each artifact, creature, and enchantment with converted mana cost X or less.
+SVar:X:Count$xPaid
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pernicious_deed.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/114.jpg
+End

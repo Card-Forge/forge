@@ -1,0 +1,11 @@
+Name:Plague Witch
+ManaCost:1 B
+Types:Creature Elf Spellshaper
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ B T Discard<1/Card> | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets -1/-1 until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_witch.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/66.jpg
+End

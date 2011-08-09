@@ -1,0 +1,11 @@
+Name:Neurok Spy
+ManaCost:2 U
+Types:Creature Human Rogue
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ HIDDEN Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME is unblockable as long as defending player controls an artifact.
+SVar:X:Count$Valid Artifact.YouDontCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_spy.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/44.jpg
+End

@@ -1,0 +1,10 @@
+Name:Pristine Talisman
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SubAbility$ SVar=DBGainLife | SpellDescription$ Add 1 to your mana pool. You gain 1 life.
+SVar:DBGainLife:DB$GainLife | LifeAmount$ 1 | Defined$ You
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_talisman.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/151.jpg
+End

@@ -1,0 +1,10 @@
+Name:Plasma Elemental
+ManaCost:5 U
+Types:Creature Elemental
+Text:no text
+PT:4/1
+K:Unblockable
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73562.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/34.jpg
+End

@@ -1,0 +1,11 @@
+Name:Nightshade Schemers
+ManaCost:4 B
+Types:Creature Faerie Wizard
+Text:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Nightshade Schemers, you may reveal it. If you do, each opponent loses 2 life.
+PT:3/2
+K:Flying
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightshade_schemers.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/69.jpg
+End

@@ -1,0 +1,10 @@
+Name:Nath's Buffoon
+ManaCost:1 B
+Types:Creature Goblin Rogue
+Text:no text
+PT:1/1
+K:Protection:Elf:Protection from Elves
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/naths_buffoon.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/129.jpg
+End

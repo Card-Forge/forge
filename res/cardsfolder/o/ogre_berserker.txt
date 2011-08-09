@@ -1,0 +1,10 @@
+Name:Ogre Berserker
+ManaCost:4 R
+Types:Creature Ogre Berserker
+Text:no text
+PT:4/2
+K:Haste
+SVar:Rarity:Common
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/ogre_berserker.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/111.jpg
+End

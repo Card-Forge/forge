@@ -1,0 +1,11 @@
+Name:Nimble Mongoose
+ManaCost:G
+Types:Creature Mongoose
+Text:no text
+PT:1/1
+K:Shroud
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Threshold$ True | Description$ Threshold - CARDNAME gets +2/+2 as long as seven or more cards are in your graveyard.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nimble_mongoose.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/258.jpg
+End

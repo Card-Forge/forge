@@ -1,0 +1,10 @@
+Name:Neck Snap
+ManaCost:3 W
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SpellDescription$ Destroy target attacking or blocking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/neck_snap.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/32.jpg
+End

@@ -1,0 +1,11 @@
+Name:Phyresis
+ManaCost:1 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Infect | Description$ Enchanted creature has infect.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyresis.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/49.jpg
+End

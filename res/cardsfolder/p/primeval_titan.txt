@@ -1,0 +1,14 @@
+Name:Primeval Titan
+ManaCost:4 G G
+Types:Creature Giant
+Text:no text
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 2
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_titan.jpg
+SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/192.jpg
+SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/188.jpg
+End

@@ -1,0 +1,11 @@
+Name:Plaguemaw Beast
+ManaCost:3 G G
+Types:Creature Beast
+Text:no text
+PT:4/3
+A:AB$ Proliferate | Cost$ T Sac<1/Creature> | SpellDescription$ Proliferate.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plaguemaw_beast.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/87.jpg
+End

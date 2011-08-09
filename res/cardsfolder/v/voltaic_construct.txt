@@ -1,0 +1,11 @@
+Name:Voltaic Construct
+ManaCost:4
+Types:Artifact Creature Golem Construct
+Text:no text
+PT:2/2
+A:AB$ Untap | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Untap target artifact creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_construct.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/156.jpg
+End

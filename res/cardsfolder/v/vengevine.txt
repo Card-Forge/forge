@@ -1,0 +1,10 @@
+Name:Vengevine
+ManaCost:2 G G
+Types:Creature Elemental
+Text:Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.
+PT:4/3
+K:Haste
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vengevine.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/212.jpg
+End

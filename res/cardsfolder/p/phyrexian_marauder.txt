@@ -1,0 +1,15 @@
+Name:Phyrexian Marauder
+ManaCost:X
+Types:Artifact Creature Construct
+Text:no text
+PT:0/0
+K:CARDNAME can't block.
+K:Creatures can't attack unless their controller pays:Card.Self:Y:CARDNAME can't attack unless you pay 1 for each +1/+1 counter on it.
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+SVar:Y:Count$NumCounters.P1P1
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_marauder.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/151.jpg
+End

@@ -1,0 +1,11 @@
+Name:Vicious Kavu
+ManaCost:1 B R
+Types:Creature Kavu
+Text:no text
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_kavu.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/284.jpg
+End

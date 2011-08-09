@@ -1,0 +1,13 @@
+Name:Vengeful Pharaoh
+ManaCost:2 B B B
+Types:Creature Zombie
+Text:no text
+PT:5/4
+K:Deathtouch
+T:Mode$ DamageDone | ValidTarget$ You,Planeswalker.YouCtrl | CombatDamage$ True | TriggerZones$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ Whenever combat damage is dealt to you or a planeswalker you control, if CARDNAME is in your graveyard, destroy targeting attacking creature, then put CARDNAME on top of your library.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBReturn
+SVar:DBReturn:DB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Library
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_pharaoh.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/116.jpg
+End

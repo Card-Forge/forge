@@ -1,0 +1,12 @@
+Name:Oxidda Daredevil
+ManaCost:1 R
+Types:Creature Goblin Artificer
+Text:no text
+PT:2/1
+A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Haste | SpellDescription$ Oxidda Daredevil gains haste until end of turn.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_daredevil.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/100.jpg
+End

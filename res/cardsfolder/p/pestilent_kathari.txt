@@ -1,0 +1,12 @@
+Name:Pestilent Kathari
+ManaCost:2 B
+Types:Creature Bird Warrior
+Text:no text
+PT:1/1
+K:Flying
+K:Deathtouch
+A:AB$ Pump | Cost$ 2 R | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_kathari.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/50.jpg
+End

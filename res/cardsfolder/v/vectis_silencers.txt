@@ -1,0 +1,10 @@
+Name:Vectis Silencers
+ManaCost:2 U
+Types:Artifact Creature Human Rogue
+Text:no text
+PT:1/2
+A:AB$ Pump | Cost$ 2 B | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_silencers.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/62.jpg
+End

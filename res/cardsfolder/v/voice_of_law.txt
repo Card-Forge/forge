@@ -1,0 +1,11 @@
+Name:Voice of Law
+ManaCost:3 W
+Types:Creature Angel
+Text:no text
+PT:2/2
+K:Flying
+K:Protection from red
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_law.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/55.jpg
+End

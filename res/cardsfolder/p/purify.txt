@@ -1,0 +1,10 @@
+Name:Purify
+ManaCost:3 W W
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Artifact,Enchantment | SpellDescription$ Destroy all artifacts and enchantments.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/19.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/31.jpg
+End

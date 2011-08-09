@@ -1,0 +1,17 @@
+Name:Prophetic Prism
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+A:AB$ Mana | Cost$ 1 T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_prism.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/256.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/222.jpg
+End

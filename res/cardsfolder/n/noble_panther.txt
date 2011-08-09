@@ -1,0 +1,10 @@
+Name:Noble Panther
+ManaCost:1 G W
+Types:Creature Cat
+Text:no text
+PT:3/3
+A:AB$ Pump | Cost$ 1 | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_panther.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/257.jpg
+End

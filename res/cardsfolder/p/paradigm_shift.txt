@@ -1,0 +1,11 @@
+Name:Paradigm Shift
+ManaCost:1 U
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 1 U | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile | SubAbility$ SVar=DBShuffle | SpellDescription$ Exile all cards from your library. Then shuffle your graveyard into your library.
+SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/paradigm_shift.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/46.jpg
+End

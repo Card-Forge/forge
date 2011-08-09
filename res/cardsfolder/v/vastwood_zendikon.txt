@@ -1,0 +1,13 @@
+Name:Vastwood Zendikon
+ManaCost:4 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 4 G | ValidTgts$ Land | AILogic$ Pump
+K:stAnimateEnchanted:Land:6/4:Creature,Elemental:Green:No Abilities:isPresent Card.AttachedBy:Enchanted land is a 6/4 green Elemental creature. It's still a land.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted land is put into a graveyard, return that card to its owner's hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_zendikon.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/117.jpg
+End

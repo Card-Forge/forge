@@ -1,0 +1,10 @@
+Name:Needlepeak Spider
+ManaCost:3 R
+Types:Creature Spider
+Text:no text
+PT:4/2
+K:Reach
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122268.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/105.jpg
+End

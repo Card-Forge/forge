@@ -1,0 +1,10 @@
+Name:Viscid Lemures
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:4/3
+A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | KW$ Swampwalk | SpellDescription$ CARDNAME gets -1/-0 and gains swampwalk until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viscid_lemures.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/141.jpg
+End

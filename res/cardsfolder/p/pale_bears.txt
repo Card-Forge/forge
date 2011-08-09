@@ -1,0 +1,10 @@
+Name:Pale Bears
+ManaCost:2 G
+Types:Creature Bear
+Text:no text
+PT:2/2
+K:Islandwalk
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2580.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/144.jpg
+End

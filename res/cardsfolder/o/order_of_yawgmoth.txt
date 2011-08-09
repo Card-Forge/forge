@@ -1,0 +1,12 @@
+Name:Order of Yawgmoth
+ManaCost:2 B B
+Types:Creature Zombie Knight
+Text:no text
+PT:2/2
+K:Fear
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player  | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_yawgmoth.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/144.jpg
+End

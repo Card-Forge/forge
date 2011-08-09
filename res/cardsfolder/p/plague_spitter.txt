@@ -1,0 +1,12 @@
+Name:Plague Spitter
+ManaCost:2 B
+Types:Creature Horror
+Text:no text
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each creature and each player.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, CARDNAME deals 1 damage to each creature and each player.
+SVar:TrigDamageAll:AB$DamageAll | Cost$ 0 | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 1 | ValidDescription$ each creature and each player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_spitter.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/119.jpg
+End

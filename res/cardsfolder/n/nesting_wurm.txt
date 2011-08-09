@@ -1,0 +1,12 @@
+Name:Nesting Wurm
+ManaCost:4 G G
+Types:Creature Wurm
+Text:no text
+PT:4/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedNesting Wurm | ChangeNum$ 3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nesting_wurm.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/107.jpg
+End

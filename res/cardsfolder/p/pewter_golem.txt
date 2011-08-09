@@ -1,0 +1,10 @@
+Name:Pewter Golem
+ManaCost:5
+Types:Artifact Creature Golem
+Text:no text
+PT:4/2
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pewter_golem.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/227.jpg
+End

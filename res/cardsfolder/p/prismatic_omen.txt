@@ -1,0 +1,10 @@
+Name:Prismatic Omen
+ManaCost:1 G
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ Plains & Island & Swamp & Mountain & Forest | Description$ Lands you control are every basic land type in addition to their other types.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_omen.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/126.jpg
+End

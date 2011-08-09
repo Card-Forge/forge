@@ -1,0 +1,12 @@
+Name:Necrogen Scudder
+ManaCost:2 B
+Types:Creature Horror
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.
+SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_scudder.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/71.jpg
+End

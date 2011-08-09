@@ -1,0 +1,12 @@
+Name:Vow of Lightning
+ManaCost:2 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike | Description$ Enchanted creature gets +2/+2, has first strike, and can't attack you or a planeswalker you control.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+YouDontCtrl | AddKeyword$ HIDDEN CARDNAME can't attack.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vow_of_lightning.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/138.jpg
+End

@@ -1,0 +1,13 @@
+Name:Vampire Nighthawk
+ManaCost:1 B B
+Types:Creature Vampire Shaman
+Text:no text
+PT:2/3
+K:Flying
+K:Deathtouch
+K:Lifelink
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nighthawk.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/116.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/106.jpg
+End

@@ -1,0 +1,11 @@
+Name:Omen
+ManaCost:1 U
+Types:Sorcery
+Text:no text
+A:SP$ RearrangeTopOfLibrary | Cost$ 1 U | Defined$ You | NumCards$ 3 | MayShuffle$ True | SubAbility$ SVar=DBDraw | SpellDescription$ Look at the top three cards of your library, then put them back in any order. You may shuffle your library. Draw a card.
+SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/omen.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/63.jpg
+End

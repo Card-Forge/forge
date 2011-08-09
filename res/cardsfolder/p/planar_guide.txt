@@ -1,0 +1,12 @@
+Name:Planar Guide
+ManaCost:W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+A:AB$ ChangeZoneAll | Cost$ 3 W Exile<1/CARDNAME> | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DelTrig | SpellDescription$ Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control.
+SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return cards exiled by CARDNAME to the battlefield.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | ChangeType$ Card.Other | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_guide.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/18.jpg
+End

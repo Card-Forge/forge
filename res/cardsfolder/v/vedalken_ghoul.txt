@@ -1,0 +1,11 @@
+Name:Vedalken Ghoul
+ManaCost:U B
+Types:Creature Vedalken Zombie
+Text:no text
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player loses 4 life.
+SVar:TrigDrain:AB$LoseLife | Cost$ 0 | Defined$ DefendingPlayer | LifeAmount$ 4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_ghoul.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/32.jpg
+End

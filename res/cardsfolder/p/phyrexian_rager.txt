@@ -1,0 +1,14 @@
+Name:Phyrexian Rager
+ManaCost:2 B
+Types:Creature Horror
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw a card and you lose 1 life.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ SVar=DBLoseLife
+SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 1
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27660.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/49.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/51.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/167.jpg
+End

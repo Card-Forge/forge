@@ -1,0 +1,11 @@
+Name:Neurok Replica
+ManaCost:3
+Types:Artifact Creature Wizard
+Text:no text
+PT:1/4
+A:AB$ ChangeZone | Cost$ 1 U Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_replica.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/186.jpg
+End

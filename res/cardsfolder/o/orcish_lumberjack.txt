@@ -1,0 +1,14 @@
+Name:Orcish Lumberjack
+ManaCost:R
+Types:Creature Orc
+Text:no text
+PT:1/1
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ R R R | SpellDescription$ Add R R R to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ R R G | SpellDescription$ Add R R G to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ R G G | SpellDescription$ Add R G G to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ G G G | SpellDescription$ Add G G G to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_lumberjack.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/210.jpg
+End

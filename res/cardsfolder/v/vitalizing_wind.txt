@@ -1,0 +1,9 @@
+Name:Vitalizing Wind
+ManaCost:8 G
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 8 G | ValidCards$ Creature.YouCtrl | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Creatures you control get +7/+7 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24677.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/133.jpg
+End

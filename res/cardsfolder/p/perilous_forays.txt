@@ -1,0 +1,10 @@
+Name:Perilous Forays
+ManaCost:3 G G
+Types:Enchantment
+Text:no text
+A:AB$ ChangeZone | Cost$ 1 Sac<1/Creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Plains,Land.Island,Land.Swamp,Land.Mountain,Land.Forest | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a land card with a basic land type and put it onto the battlefield tapped. Then shuffle your library.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_forays.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/176.jpg
+End

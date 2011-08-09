@@ -1,0 +1,10 @@
+Name:Noxious Revival
+ManaCost:PG
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ PG | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard | SpellDescription$ Put target card from a graveyard on top of its owner's library.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_revival.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/118.jpg
+End

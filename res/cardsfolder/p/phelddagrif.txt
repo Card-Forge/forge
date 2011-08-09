@@ -1,0 +1,16 @@
+Name:Phelddagrif
+ManaCost:1 W U G
+Types:Legendary Creature Phelddagrif
+Text:no text
+PT:4/4
+A:AB$ Pump | Cost$ G | KW$ Trample | SubAbility$ SVar=DBToken | SpellDescription$ CARDNAME gains trample until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.
+A:AB$ Pump | Cost$ W | KW$ Flying | SubAbility$ SVar=DBGain | SpellDescription$ CARDNAME gains flying until end of turn. Target opponent gains 2 life.
+A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SubAbility$ SVar=DBDraw | SpellDescription$ Return CARDNAME to its owner's hand. Target opponent may draw a card.
+SVar:DBToken:DB$Token | ValidTgts$ Opponent | TokenAmount$ 1 | TokenName$ Hippo | TokenTypes$ Creature,Hippo | TokenOwner$ Opponent | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:DBGain:DB$GainLife | LifeAmount$ 2 | ValidTgts$ Opponent
+SVar:DBDraw:DB$Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | OptionalDecider$ Opponent
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phelddagrif.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/196.jpg
+End

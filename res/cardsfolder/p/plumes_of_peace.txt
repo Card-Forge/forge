@@ -1,0 +1,12 @@
+Name:Plumes of Peace
+ManaCost:1 W U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+A:AB$ Tap | Cost$ W U | TgtPrompt$ Choose target creature | ValidTgts$ Creature | ActivationZone$ Hand | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | CostDesc$ W U, Reveal CARDNAME from your hand: | SpellDescription$ Tap target creature. (Activate this ability only during your upkeep and only once each turn.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plumes_of_peace.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/124.jpg
+End

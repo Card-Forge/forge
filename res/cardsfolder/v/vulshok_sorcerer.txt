@@ -1,0 +1,11 @@
+Name:Vulshok Sorcerer
+ManaCost:1 R R
+Types:Creature Human Shaman
+Text:no text
+PT:1/1
+K:Haste
+A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ Vulshok Sorcerer deals 1 damage to target creature or player.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51177.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/80.jpg
+End

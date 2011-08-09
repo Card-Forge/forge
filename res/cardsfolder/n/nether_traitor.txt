@@ -1,0 +1,13 @@
+Name:Nether Traitor
+ManaCost:B B
+Types:Creature Spirit
+Text:no text
+PT:1/1
+K:Haste
+K:Shadow
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever another creature is put into your graveyard from the battlefield, you may pay B. If you do, return CARDNAME from your graveyard to the battlefield.
+SVar:TrigReturn:AB$ChangeZone | Cost$ B | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_traitor.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/120.jpg
+End

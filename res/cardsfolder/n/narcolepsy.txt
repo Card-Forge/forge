@@ -1,0 +1,12 @@
+Name:Narcolepsy
+ManaCost:1 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Each | IsPresent$ Creature.AttachedBy+untapped | PresentCompare$ EQ1 | IsCurse$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of each upkeep, if enchanted creature is untapped, tap it.
+SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/narcolepsy.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/79.jpg
+End

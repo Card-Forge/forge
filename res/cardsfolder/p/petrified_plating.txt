@@ -1,0 +1,12 @@
+Name:Petrified Plating
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:Suspend:2:G
+A:SP$ Attach | Cost$ 2 G  | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/petrified_plating.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/133.jpg
+End

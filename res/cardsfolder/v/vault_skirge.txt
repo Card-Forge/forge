@@ -1,0 +1,11 @@
+Name:Vault Skirge
+ManaCost:1 PB
+Types:Artifact Creature Imp
+Text:no text
+PT:1/1
+K:Flying
+K:Lifelink
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_skirge.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/76.jpg
+End

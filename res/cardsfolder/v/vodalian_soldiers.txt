@@ -1,0 +1,11 @@
+Name:Vodalian Soldiers
+ManaCost:1 U
+Types:Creature Merfolk Soldier
+Text:no text
+PT:1/2
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/fe/en-us/card1901.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/134.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/104.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/62.jpg|4
+End

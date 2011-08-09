@@ -1,0 +1,12 @@
+Name:Pattern of Rebirth
+ManaCost:3 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigSearch | TriggerDescription$ When enchanted creature is put into a graveyard, that creature's controller may search his or her library for a creature card and put that card onto the battlefield. If that player does, he or she shuffles his or her library.
+SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCardController | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | Origin$ Library | Destination$ Battlefield | Shuffle$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pattern_of_rebirth.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/115.jpg
+End

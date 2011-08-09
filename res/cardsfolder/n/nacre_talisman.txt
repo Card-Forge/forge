@@ -1,0 +1,11 @@
+Name:Nacre Talisman
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever a player casts a white spell, you may pay 3. If you do, untap target permanent.
+SVar:TrigUntap:AB$Untap | Cost$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nacre_talisman.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/304.jpg
+End

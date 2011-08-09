@@ -1,0 +1,11 @@
+Name:Nightwing Shade
+ManaCost:4 B
+Types:Creature Shade
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 1 B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightwing_shade.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/109.jpg
+End

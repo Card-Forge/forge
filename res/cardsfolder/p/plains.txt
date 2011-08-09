@@ -1,0 +1,47 @@
+Name:Plains
+ManaCost:no cost
+Types:Basic Land Plains
+Text:no text
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=8322&type=card\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=159288&type=card\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=4428
+SetInfo:USG|Land|http://magiccards.info/scans/en/us/331.jpg|4
+SetInfo:TMP|Land|http://magiccards.info/scans/en/tp/324.jpg|4
+SetInfo:ZEN|Land|http://magiccards.info/scans/en/zen/230.jpg|4
+SetInfo:4ED|Land|http://magiccards.info/scans/en/4e/186.jpg|3
+SetInfo:3ED|Land|http://magiccards.info/scans/en/rv/293.jpg|3
+SetInfo:SOM|Land|http://magiccards.info/scans/en/som/230.jpg|4
+SetInfo:COM|Land|http://magiccards.info/scans/en/cmd/299.jpg|4
+SetInfo:TSP|Land|http://magiccards.info/scans/en/ts/282.jpg|4
+SetInfo:ODY|Land|http://magiccards.info/scans/en/od/331.jpg|4|4
+SetInfo:MIR|Land|http://magiccards.info/scans/en/mr/306.jpg|4
+SetInfo:PTK|Land|http://magiccards.info/scans/en/p3k/166.jpg|3
+SetInfo:7ED|Land|http://magiccards.info/scans/en/7e/341.jpg|4
+SetInfo:POR|Land|http://magiccards.info/scans/en/po/215.jpg|4
+SetInfo:ROE|Land|http://magiccards.info/scans/en/roe/229.jpg|4
+SetInfo:10E|Land|http://magiccards.info/scans/en/10e/364.jpg|4
+SetInfo:RAV|Land|http://magiccards.info/scans/en/rav/287.jpg|4
+SetInfo:6ED|Land|http://magiccards.info/scans/en/6e/331.jpg|4
+SetInfo:5ED|Land|http://magiccards.info/scans/en/5e/434.jpg|4
+SetInfo:ONS|Land|http://magiccards.info/scans/en/on/331.jpg|4
+SetInfo:S99|Land|http://magiccards.info/scans/en/st/154.jpg|4
+SetInfo:MBS|Land|http://magiccards.info/scans/en/mbs/146.jpg|2
+SetInfo:8ED|Land|http://magiccards.info/scans/en/8e/331.jpg|4
+SetInfo:CHK|Land|http://magiccards.info/scans/en/chk/287.jpg|4
+SetInfo:PO2|Land|http://magiccards.info/scans/en/po2/160.jpg|3
+SetInfo:9ED|Land|http://magiccards.info/scans/en/9e/331.jpg|4
+SetInfo:ICE|Land|http://magiccards.info/scans/en/ia/343.jpg|3
+SetInfo:MRD|Land|http://magiccards.info/scans/en/mi/287.jpg|4
+SetInfo:SHM|Land|http://magiccards.info/scans/en/shm/282.jpg|4
+SetInfo:LEA|Land|http://magiccards.info/scans/en/al/285.jpg|2
+SetInfo:LEB|Land|http://magiccards.info/scans/en/be/289.jpg|3
+SetInfo:NPH|Land|http://magiccards.info/scans/en/nph/166.jpg|2
+SetInfo:INV|Land|http://magiccards.info/scans/en/in/331.jpg|4
+SetInfo:MMQ|Land|http://magiccards.info/scans/en/mm/331.jpg|4
+SetInfo:ALA|Land|http://magiccards.info/scans/en/ala/230.jpg|4
+SetInfo:M11|Land|http://magiccards.info/scans/en/m11/230.jpg|4
+SetInfo:M10|Land|http://magiccards.info/scans/en/m10/230.jpg|4
+SetInfo:M12|Land|http://magiccards.info/scans/en/m12/230.jpg|4
+SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/282.jpg|4
+SetInfo:2ED|Land|http://magiccards.info/scans/en/un/289.jpg|3
+End

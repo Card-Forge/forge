@@ -1,0 +1,12 @@
+Name:Pangosaur
+ManaCost:2 G G
+Types:Creature Lizard
+Text:no text
+PT:6/6
+T:Mode$ LandPlayed | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever a player plays a land, return Pangosaur to its owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pangosaur.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/261.jpg
+End

@@ -1,0 +1,12 @@
+Name:Porphyry Nodes
+ManaCost:W
+Types:Enchantment
+Text:At the beginning of your upkeep, destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When there are no creatures on the battlefield, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:NeedsToPlay:Creature
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/porphyry_nodes.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/28.jpg
+End

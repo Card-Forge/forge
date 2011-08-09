@@ -1,0 +1,11 @@
+Name:Paralyzing Grasp
+ManaCost:2 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/paralyzing_grasp.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/58.jpg
+End

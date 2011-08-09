@@ -1,0 +1,11 @@
+Name:Viashino Slaughtermaster
+ManaCost:1 R
+Types:Creature Viashino Warrior
+Text:no text
+PT:1/1
+K:Double Strike
+A:AB$ Pump | Cost$ B G | NumAtt$ +1 | NumDef$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Activate this ability only once each turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_slaughtermaster.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/73.jpg
+End

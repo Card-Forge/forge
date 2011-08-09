@@ -1,0 +1,14 @@
+Name:Nim Shambler
+ManaCost:2 B B
+Types:Creature Zombie
+Text:no text
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+A:AB$ Regenerate | Cost$ Sac<1/Artifact> | SpellDescription$ Regenerate CARDNAME.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shambler.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/72.jpg
+End

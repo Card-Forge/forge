@@ -1,0 +1,13 @@
+Name:Nightmare Lash
+ManaCost:4
+Types:Artifact Equipment
+Text:no text
+K:eqPump PayLife<3>:+0/+0
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each Swamp you control.
+SVar:X:Count$Valid Swamp.YouCtrl
+SVar:BuffedBy:Swamp
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightmare_lash.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/219.jpg
+End

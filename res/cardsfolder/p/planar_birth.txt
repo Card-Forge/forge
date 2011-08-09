@@ -1,0 +1,10 @@
+Name:Planar Birth
+ManaCost:1 W
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Land.Basic | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all basic land cards from all graveyards to the battlefield tapped under their owners' control.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_birth.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/31.jpg
+End

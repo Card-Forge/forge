@@ -1,0 +1,12 @@
+Name:Nobilis of War
+ManaCost:RW RW RW RW RW
+Types:Creature Spirit Avatar
+Text:no text
+PT:3/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 2 | Description$ Attacking creatures you control get +2/+0.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nobilis_of_war.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/144.jpg
+End

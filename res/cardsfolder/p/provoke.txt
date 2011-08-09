@@ -1,0 +1,12 @@
+Name:Provoke
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | KW$ HIDDEN CARDNAME blocks each turn if able. | IsCurse$ True | SubAbility$ SVar=DBUntap | SpellDescription$ Untap target creature you don't control. That creature blocks this turn if able. Draw a card.
+SVar:DBUntap:DB$Untap | Defined$ Targeted | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/provoke.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/63.jpg
+End

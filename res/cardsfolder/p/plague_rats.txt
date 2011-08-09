@@ -1,0 +1,18 @@
+Name:Plague Rats
+ManaCost:2 B
+Types:Creature Rat
+Text:no text
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
+SVar:X:Count$Valid Creature.namedPlague Rats
+SVar:BuffedBy:Creature.namedPlague Rats
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_rats.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/30.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/30.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/50.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/38.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/31.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/30.jpg
+End

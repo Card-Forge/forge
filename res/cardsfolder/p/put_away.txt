@@ -1,0 +1,10 @@
+Name:Put Away
+ManaCost:2 U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ SVar=DBChangeZone | SpellDescription$ Counter target spell.  You may shuffle up to one target card from your graveyard into your library.
+SVar:DBChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card from your graveyard | TargetMin$ 0 | TargetMax$ 1 | Shuffle$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/put_away.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/48.jpg
+End

@@ -1,0 +1,13 @@
+Name:Vorosh, the Hunter
+ManaCost:3 G U B
+Types:Legendary Creature Dragon
+Text:no text
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 G. If you do, put six +1/+1 counters on Vorosh.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 2 G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 6
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vorosh_the_hunter.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/235.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/164.jpg
+End

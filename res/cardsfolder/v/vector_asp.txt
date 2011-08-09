@@ -1,0 +1,10 @@
+Name:Vector Asp
+ManaCost:1
+Types:Artifact Creature Snake
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ B | KW$ Infect | SpellDescription$ CARDNAME gains infect until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vector_asp.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/219.jpg
+End

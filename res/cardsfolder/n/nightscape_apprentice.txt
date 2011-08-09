@@ -1,0 +1,12 @@
+Name:Nightscape Apprentice
+ManaCost:B
+Types:Creature Zombie Wizard
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature you control on top of its owner's library.
+A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_apprentice.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/112.jpg
+End

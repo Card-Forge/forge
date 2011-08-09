@@ -1,0 +1,12 @@
+Name:Nut Collector
+ManaCost:5 G
+Types:Creature Human Druid
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Squirrel | AddPower$ 2 | AddToughness$ 2 | Threshold$ True | Description$ Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nut_collector.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/259.jpg
+End

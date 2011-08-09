@@ -1,0 +1,10 @@
+Name:Vodalian Hypnotist
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:1/1
+A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | SorcerySpeed$ True | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. Activate this ability only any time you could cast a sorcery.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_hypnotist.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/84.jpg
+End

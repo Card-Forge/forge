@@ -1,0 +1,11 @@
+Name:Nausea
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ 1 B | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nausea.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/148.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/148.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/67.jpg
+End

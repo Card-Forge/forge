@@ -1,0 +1,11 @@
+Name:Paleoloth
+ManaCost:4 G G
+Types:Creature Beast
+Text:no text
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE5+Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever another creature with power 5 or greater enters the battlefield under your control, you may return target creature card from your graveyard to your hand.
+SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | Cost$ 0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/paleoloth.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/88.jpg
+End

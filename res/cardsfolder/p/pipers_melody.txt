@@ -1,0 +1,11 @@
+Name:Piper's Melody
+ManaCost:G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | Shuffle$ True | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Shuffle any number of target creature cards from your graveyard into your library.
+SVar:X:Count$TypeInYourYard.Creature
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pipers_melody.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/261.jpg
+End

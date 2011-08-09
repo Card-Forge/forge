@@ -1,0 +1,9 @@
+Name:Phyrexian Metamorph
+ManaCost:3 PU
+Types:Artifact Creature Shapeshifter
+Text:You may have CARDNAME enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
+PT:0/0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_metamorph.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/42.jpg
+End

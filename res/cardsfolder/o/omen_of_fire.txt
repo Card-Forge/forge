@@ -1,0 +1,14 @@
+Name:Omen of Fire
+ManaCost:3 R R
+Types:Instant
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 3 R R | ChangeType$ Island | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all Islands to their owners' hands. | SubAbility$ SVar=DBSacYou
+SVar:DBSacYou:DB$Sacrifice | Amount$ YouX | SacValid$ Plains,Permanent.White | Defined$ You | SubAbility$ SVar=DBSacOpp | SpellDescription$ Each player sacrifices a Plains or a white permanent for each white permanent he or she controls.
+SVar:DBSacOpp:DB$Sacrifice | Amount$ OppX | SacValid$ Plains,Permanent.White | Defined$ Opponent
+SVar:YouX:Count$Valid Permanent.White+YouCtrl
+SVar:OppX:Count$Valid Permanent.White+YouDontCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/omen_of_fire.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/112.jpg
+End

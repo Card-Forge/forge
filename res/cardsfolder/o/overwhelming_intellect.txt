@@ -1,0 +1,11 @@
+Name:Overwhelming Intellect
+ManaCost:4 U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 4 U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ SVar=DBDraw |  SpellDescription$ Counter target creature spell. Draw cards equal to that spell's converted mana cost.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Targeted$CardManaCost
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_intellect.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/51.jpg
+End

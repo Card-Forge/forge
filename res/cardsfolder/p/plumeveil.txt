@@ -1,0 +1,13 @@
+Name:Plumeveil
+ManaCost:WU WU WU
+Types:Creature Elemental
+Text:no text
+PT:4/4
+K:Flash
+K:Defender
+K:Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plumeveil.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/218.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/145.jpg
+End

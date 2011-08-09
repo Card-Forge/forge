@@ -1,0 +1,13 @@
+Name:Pestilence Rats
+ManaCost:2 B
+Types:Creature Rat
+Text:no text
+PT:*/3
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of other Rats on the battlefield.
+SVar:X:Count$Valid Rat.Other
+SVar:BuffedBy:Rat
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilence_rats.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/45.jpg
+End

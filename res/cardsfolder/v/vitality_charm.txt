@@ -1,0 +1,12 @@
+Name:Vitality Charm
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | PrecostDesc$ Choose one - | SpellDescription$ Put a 1/1 green Insect creature token onto the battlefield;
+A:SP$ Pump | Cost$ G | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | TgtPrompt$ Select target creature | PrecostDesc$ or | SpellDescription$ target creature gets +1/+1 and gains trample until end of turn;
+A:SP$ Regenerate | Cost$ G | ValidTgts$ Beast | TgtPrompt$ Select target Beast | PrecostDesc$ or | SpellDescription$ regenerate target Beast.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vitality_charm.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/296.jpg
+End

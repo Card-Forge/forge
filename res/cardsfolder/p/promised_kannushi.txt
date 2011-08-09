@@ -1,0 +1,10 @@
+Name:Promised Kannushi
+ManaCost:G
+Types:Creature Human Druid
+Text:no text
+PT:1/1
+K:Soulshift:7
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/promised_kannushi.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/141.jpg
+End

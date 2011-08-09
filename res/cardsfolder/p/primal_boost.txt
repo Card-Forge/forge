@@ -1,0 +1,12 @@
+Name:Primal Boost
+ManaCost:2 G
+Types:Instant
+Text:no text
+K:Cycling:2 G
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
+T:Mode$ Cycled | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ When you cycle CARDNAME, you may have target creature get +1/+1 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41145.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/277.jpg
+End

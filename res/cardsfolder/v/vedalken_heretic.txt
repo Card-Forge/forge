@@ -1,0 +1,11 @@
+Name:Vedalken Heretic
+ManaCost:U G
+Types:Creature Vedalken Rogue
+Text:no text
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_heretic.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/104.jpg
+End

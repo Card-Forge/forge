@@ -1,0 +1,13 @@
+Name:Viridian Joiner
+ManaCost:2 G
+Types:Creature Elf Druid
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount of G to your mana pool equal to Viridian Joiner's power.
+SVar:X:Count$CardPower
+PT:1/2
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_joiner.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/138.jpg
+End

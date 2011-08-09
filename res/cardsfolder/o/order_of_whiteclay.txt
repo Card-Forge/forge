@@ -1,0 +1,10 @@
+Name:Order of Whiteclay
+ManaCost:1 W W
+Types:Creature Kithkin Cleric
+Text:no text
+PT:1/4
+A:AB$ ChangeZone | Cost$ 1 W W Untap | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.cmcLE3+YouCtrl | TgtPrompt$ Select a creature card with converted mana cost 3 or less from your graveyard | ChangeNum$ 1 | SpellDescription$ Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_whiteclay.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/16.jpg
+End

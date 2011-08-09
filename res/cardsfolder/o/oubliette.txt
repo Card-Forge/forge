@@ -1,0 +1,14 @@
+Name:Oubliette
+ManaCost:1 B B
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
+SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetMin$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
+SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:
+SVar:Picture:http://resources.wizards.com/magic/cards/med/en-us/card159135.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/11.jpg|2
+End

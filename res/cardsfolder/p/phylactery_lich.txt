@@ -1,0 +1,13 @@
+Name:Phylactery Lich
+ManaCost:B B B
+Types:Creature Zombie
+Text:As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control.
+PT:5/5
+K:Indestructible
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.countersGE1PHYLACTERY+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no permanents with phylactery counters on them, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/110.jpg
+End

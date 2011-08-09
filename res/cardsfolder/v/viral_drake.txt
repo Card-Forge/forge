@@ -1,0 +1,12 @@
+Name:Viral Drake
+ManaCost:3 U
+Types:Creature Drake
+Text:no text
+PT:1/4
+K:Flying
+K:Infect
+A:AB$ Proliferate | Cost$ 3 U | SpellDescription$ Proliferate.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viral_drake.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/49.jpg
+End

@@ -1,0 +1,10 @@
+Name:Visions of Beyond
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Draw | Cost$ U | NumCards$ X | SpellDescription$ Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
+SVar:X:Count$GraveyardWithGE20Cards.3.1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/visions_of_beyond.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/80.jpg
+End

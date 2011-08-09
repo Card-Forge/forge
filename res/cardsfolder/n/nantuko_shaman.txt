@@ -1,0 +1,12 @@
+Name:Nantuko Shaman
+ManaCost:2 G
+Types:Creature Insect Shaman
+Text:no text
+PT:3/2
+K:Suspend:1:2 G G
+T:Mode$ ChangesZone | ValidCard$ Card.Self | IsPresent$ Land.tapped+YouCtrl | PresentCompare$ EQ0 | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you control no tapped lands, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_shaman.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/208.jpg
+End

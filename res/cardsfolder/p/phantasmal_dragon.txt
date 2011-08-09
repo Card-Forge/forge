@@ -1,0 +1,12 @@
+Name:Phantasmal Dragon
+ManaCost:2 U U
+Types:Creature Dragon Illusion
+Text:no text
+PT:5/5
+K:Flying
+T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_dragon.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/71.jpg
+End

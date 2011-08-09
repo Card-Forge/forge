@@ -1,0 +1,12 @@
+Name:Poultice Sliver
+ManaCost:2 W
+Types:Creature Sliver
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Regen | Description$ All Slivers have "2, Tap, Regenerate target Sliver."
+SVar:Regen:AB$Regenerate | Cost$ 2 T | ValidTgts$ Sliver | TgtPrompt$ Select target Sliver. | SpellDescription$ Regenerate a target Sliver.
+SVar:BuffedBy:Sliver
+SVar:Picture:http://www.wizards.com/global/images/magic/general/poultice_sliver.jpg
+SVar:Rarity:Common
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/11.jpg
+End

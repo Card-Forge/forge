@@ -1,0 +1,15 @@
+Name:Vodalian Knights
+ManaCost:1 U U
+Types:Creature Merfolk Knight
+Text:no text
+PT:2/2
+K:First Strike
+K:CARDNAME can't attack unless defending player controls an Island.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+A:AB$ Pump | Cost$ U | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+SVar:NeedsToPlay:Island.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_knights.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/58.jpg
+End

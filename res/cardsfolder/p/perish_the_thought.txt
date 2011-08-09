@@ -1,0 +1,9 @@
+Name:Perish the Thought
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Shuffle$ True | SpellDescription$ Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/123.jpg
+End

@@ -1,0 +1,9 @@
+Name:Venomous Vines
+ManaCost:2 G G
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Permanent.enchanted | TgtPrompt$ Select target enchanted permanent | SpellDescription$ Destroy target enchanted permanent.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_vines.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/136.jpg
+End

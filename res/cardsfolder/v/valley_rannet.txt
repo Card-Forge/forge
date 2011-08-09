@@ -1,0 +1,12 @@
+Name:Valley Rannet
+ManaCost:4 R G
+Types:Creature Beast
+Text:no text
+PT:6/3
+K:TypeCycling:Forest:2
+K:TypeCycling:Mountain:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/valley_rannet.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/61.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/232.jpg
+End

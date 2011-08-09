@@ -1,0 +1,14 @@
+Name:Voidmage Husher
+ManaCost:3 U
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target activated ability.
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigBounce | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, you may return CARDNAME to its owner's hand.
+SVar:TrigCounter:AB$Counter | Cost$ 0 | TargetType$ Activated | TgtPrompt$ Select target ability | ValidTgts$ Permanent
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voidmage_husher.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/92.jpg
+End

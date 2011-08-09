@@ -1,0 +1,11 @@
+Name:Pale Wayfarer
+ManaCost:5 W W
+Types:Creature Spirit Giant
+Text:no text
+PT:4/4
+A:AB$ Protection | Cost$ 2 W W Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of your choice until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pale_wayfarer.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/17.jpg
+End

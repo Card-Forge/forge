@@ -1,0 +1,13 @@
+Name:Pyrohemia
+ManaCost:2 R R
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+A:AB$ DamageAll | Cost$ R | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+SVar:NeedsToPlay:Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122436.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/132.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/119.jpg
+End

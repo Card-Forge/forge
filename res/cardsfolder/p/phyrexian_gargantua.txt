@@ -1,0 +1,13 @@
+Name:Phyrexian Gargantua
+ManaCost:4 B B
+Types:Creature Horror
+Text:no text
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw two cards and you lose 2 life.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2 | SubAbility$ SVar=DBLoseLife
+SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84393.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/48.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/153.jpg
+End

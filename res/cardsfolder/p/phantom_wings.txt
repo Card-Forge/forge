@@ -1,0 +1,15 @@
+Name:Phantom Wings
+ManaCost:1 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Enchanted | SubAbility$ SVar=DBSacrifice | CostDesc$ Sacrifice CARDNAME: | SpellDescription$ Return enchanted creature to owner's hand.
+SVar:DBSacrifice:DB$Sacrifice | Defined$ Card.Self
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_wings.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/49.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/46.jpg
+End

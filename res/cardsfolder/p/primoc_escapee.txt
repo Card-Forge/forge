@@ -1,0 +1,11 @@
+Name:Primoc Escapee
+ManaCost:6 U
+Types:Creature Bird Beast
+Text:no text
+PT:4/4
+K:Flying
+K:Cycling:2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primoc_escapee.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/49.jpg
+End

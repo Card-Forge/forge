@@ -1,0 +1,11 @@
+Name:Viashino Skeleton
+ManaCost:3 R
+Types:Creature Viashino Skeleton
+Text:no text
+PT:2/1
+A:AB$ Regenerate | Cost$ 1 B Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_skeleton.jpg
+SVar:Rarity:Common
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/118.jpg
+End

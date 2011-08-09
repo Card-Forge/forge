@@ -1,0 +1,11 @@
+Name:Voices from the Void
+ManaCost:4 B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 4 B | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Domain - Target player discards a card for each basic land type among lands you control.
+SVar:X:Count$Domain
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voices_from_the_void.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/55.jpg
+End

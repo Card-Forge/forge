@@ -1,0 +1,11 @@
+Name:Ondu Giant
+ManaCost:3 G
+Types:Creature Giant Druid
+Text:no text
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_giant.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/202.jpg
+End
