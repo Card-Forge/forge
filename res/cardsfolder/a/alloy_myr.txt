@@ -1,0 +1,14 @@
+Name:Alloy Myr
+ManaCost:3
+Types:Artifact Creature Myr
+Text:no text
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alloy_myr.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/129.jpg
+End

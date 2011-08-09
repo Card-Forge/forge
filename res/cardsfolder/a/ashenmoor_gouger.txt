@@ -1,0 +1,10 @@
+Name:Ashenmoor Gouger
+ManaCost:BR BR BR
+Types:Creature Elemental Warrior
+Text:no text
+PT:4/4
+K:CARDNAME can't block.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ashenmoor_gouger.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/180.jpg
+End

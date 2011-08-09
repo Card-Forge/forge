@@ -1,0 +1,12 @@
+Name:Apprentice Necromancer
+ManaCost:1 B
+Types:Creature Zombie Wizard
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ B T Sac<1/CARDNAME>  | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | GainControl$ True | SubAbility$ SVar=DBPump | SpellDescription$ Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it.
+SVar:DBPump:DB$Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Defined$ Targeted
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_necromancer.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/51.jpg
+End

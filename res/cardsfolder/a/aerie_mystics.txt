@@ -1,0 +1,11 @@
+Name:Aerie Mystics
+ManaCost:4 W
+Types:Creature Bird Wizard
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ PumpAll | Cost$ 1 G U | ValidCards$ Creature.YouCtrl | KW$ Shroud | SpellDescription$ Creatures you control gain shroud until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aerie_mystics.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/1.jpg
+End

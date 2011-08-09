@@ -1,0 +1,12 @@
+Name:AEther Web
+ManaCost:1 G
+Types:Enchantment Aura
+Text:no text
+K:Flash
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Reach & CARDNAME can block creatures with shadow as though they didn't have shadow. | Description$ Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_web.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/189.jpg
+End

@@ -1,0 +1,9 @@
+Name:Acceptable Losses
+ManaCost:3 R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 3 R Discard<1/Random> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/acceptable_losses.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/172.jpg
+End

@@ -1,0 +1,16 @@
+Name:Aven Fisher
+ManaCost:3 U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1 
+SVar:SacMe:1
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82998.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/61.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/63.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/61.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/68.jpg
+End

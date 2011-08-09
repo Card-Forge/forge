@@ -1,0 +1,11 @@
+Name:Angelic Favor
+ManaCost:3 W
+Types:Instant
+Text:no text
+A:SP$ Token | Cost$ tapXType<1/Creature> | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying<>At the beginning of the end step, exile CARDNAME. | ActivationPhases$ BeginCombat->EndCombat | IsPresent$ Plains.YouCtrl | CostDesc$ If you control a Plains, | SpellDescription$ you may tap an untapped creature you control rather than pay CARDNAME's mana cost.
+A:SP$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying<>At the beginning of the end step, exile CARDNAME. | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ Cast CARDNAME only during combat. Put a 4/4 white Angel creature token with flying onto the battlefield. Exile it at the beginning of the next end step.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_favor.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/1.jpg
+End

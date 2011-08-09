@@ -1,0 +1,14 @@
+Name:Aven Riftwatcher
+ManaCost:2 W
+Types:Creature Bird Rebel Soldier
+Text:no text
+K:Vanishing:3
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield or leaves the battlefield, you gain 2 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or leaves the battlefield, you gain 2 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_riftwatcher.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/1.jpg
+End

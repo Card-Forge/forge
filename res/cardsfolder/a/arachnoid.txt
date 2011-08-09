@@ -1,0 +1,10 @@
+Name:Arachnoid
+ManaCost:6
+Types:Artifact Creature Spider
+Text:no text
+PT:2/6
+K:Reach
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51230.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/102.jpg
+End

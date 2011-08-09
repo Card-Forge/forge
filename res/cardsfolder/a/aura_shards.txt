@@ -1,0 +1,12 @@
+Name:Aura Shards
+ManaCost:1 W G
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+SVar:BuffedBy:Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_shards.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/233.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/182.jpg
+End

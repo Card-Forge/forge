@@ -1,0 +1,9 @@
+Name:Axegrinder Giant
+ManaCost:4 R R
+Types:Creature Giant Warrior
+Text:no text
+PT:6/4
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145976.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/151.jpg
+End

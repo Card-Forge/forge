@@ -1,0 +1,13 @@
+Name:Aven Fateshaper
+ManaCost:6 U
+Types:Creature Bird Wizard
+Text:no text
+PT:4/5
+K:Flying
+A:AB$ RearrangeTopOfLibrary | Cost$ 4 U | Defined$ You | NumCards$ 4 | SpellDescription$ Look at the top four cards of your library, then put them back in any order.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
+SVar:TrigRearrange:AB$RearrangeTopOfLibrary | Cost$ 0 | Defined$ You | NumCards$ 4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_fateshaper.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/69.jpg
+End

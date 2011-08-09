@@ -1,0 +1,11 @@
+Name:Agent of Stromgald
+ManaCost:R
+Types:Creature Human Knight
+Text:no text
+PT:1/1
+A:AB$ Mana | Cost$ R | Produced$ B | SpellDescription$ Add B to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_stromgald.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/94.jpg|2
+End

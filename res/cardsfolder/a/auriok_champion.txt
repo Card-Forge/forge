@@ -1,0 +1,13 @@
+Name:Auriok Champion
+ManaCost:W W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+K:Protection from black
+K:Protection from red
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield, you may gain 1 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_champion.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/3.jpg
+End

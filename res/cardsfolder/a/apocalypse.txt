@@ -1,0 +1,11 @@
+Name:Apocalypse
+ManaCost:2 R R R
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 2 R R R | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Exile | SubAbility$ SVar=DBDiscard | SpellDescription$ Exile all permanents. You discard your hand.
+SVar:DBDiscard:DB$Discard | Mode$ Hand
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/162.jpg
+End

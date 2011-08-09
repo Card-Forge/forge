@@ -1,0 +1,11 @@
+Name:Akki Blizzard-Herder
+ManaCost:1 R
+Types:Creature Goblin Shaman
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player sacrifices a land.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ Each
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_blizzard_herder.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/91.jpg
+End

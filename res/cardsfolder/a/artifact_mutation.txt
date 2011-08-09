@@ -1,0 +1,12 @@
+Name:Artifact Mutation
+ManaCost:R G
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ SVar=TrigToken | SpellDescription$ Destroy target artifact. It can't be regenerated. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that artifact's converted mana cost.
+#X will be the Converted Mana Cost of the target of Mutation
+SVar:TrigToken:DB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:X:Targeted$CardManaCost
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_mutation.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/231.jpg
+End

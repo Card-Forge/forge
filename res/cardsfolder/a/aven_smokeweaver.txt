@@ -1,0 +1,11 @@
+Name:Aven Smokeweaver
+ManaCost:2 U U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/3
+K:Flying
+K:Protection from red
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_smokeweaver.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/64.jpg
+End

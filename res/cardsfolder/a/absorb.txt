@@ -1,0 +1,10 @@
+Name:Absorb
+ManaCost:W U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ W U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell. You gain 3 life. | SubAbility$ SVar=DBGainLife
+SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23155.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/226.jpg
+End

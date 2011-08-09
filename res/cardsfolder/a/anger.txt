@@ -1,0 +1,13 @@
+Name:Anger
+ManaCost:3 R
+Types:Creature Incarnation
+Text:no text
+PT:2/2
+K:Haste
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as CARDNAME is in your graveyard and you control a Mountain, creatures you control have haste.
+SVar:X:Count$Valid Mountain.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anger.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/109.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/77.jpg
+End

@@ -1,0 +1,15 @@
+Name:Archdemon of Unx
+ManaCost:5 B B
+Types:Creature Demon
+Text:no text
+PT:6/6
+K:Flying
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a non-Zombie creature, then put a 2/2 black Zombie creature token onto the battlefield.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.nonZombie | SacMessage$ non-Zombie Creature | SubAbility$ SVar=MakeToken
+SVar:MakeToken:DB$Token | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/archdemon_of_unx.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/64.jpg
+End

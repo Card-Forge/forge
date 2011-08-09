@@ -1,0 +1,10 @@
+Name:Argivian Blacksmith
+ManaCost:1 W W
+Types:Creature Human Artificer
+Text:no text
+PT:2/2
+A:AB$ PreventDamage | Cost$ T |  ValidTgts$ Creature.Artifact | Amount$ 2 | TgtPrompt$ Select target artifact creature | SpellDescription$ Prevent the next 2 damage that would be dealt to target artifact creature this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_blacksmith.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/95.jpg
+End

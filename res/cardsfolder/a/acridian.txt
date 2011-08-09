@@ -1,0 +1,10 @@
+Name:Acridian
+ManaCost:1 G
+Types:Creature Insect
+Text:no text
+PT:2/4
+K:Echo:1 G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/acridian.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/230.jpg
+End

@@ -1,0 +1,12 @@
+Name:Arcbound Wanderer
+ManaCost:6
+Types:Artifact Creature Golem
+Text:no text
+PT:0/0
+K:Modular 0
+K:Sunburst
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_wanderer.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/103.jpg
+End

@@ -1,0 +1,13 @@
+Name:Ashes of the Fallen
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
+SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck
+S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Graveyard | AddType$ ChosenType | Description$ Each creature card in your graveyard has the chosen creature type in addition to its other types.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ashes_of_the_fallen.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/152.jpg
+End

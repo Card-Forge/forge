@@ -1,0 +1,12 @@
+Name:Aku Djinn
+ManaCost:3 B B
+Types:Creature Djinn
+Text:no text
+PT:5/6
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.
+SVar:TrigPutCounterAll:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouDontCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aku_djinn.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/1.jpg
+End

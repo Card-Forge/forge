@@ -1,0 +1,12 @@
+Name:Ambush Party
+ManaCost:4 R
+Types:Creature Human Rogue
+Text:no text
+PT:3/1
+K:First Strike
+K:Haste
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush_party.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/79.jpg|2
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/208.jpg
+End

@@ -1,0 +1,12 @@
+Name:An-Zerrin Ruins
+ManaCost:2 R R
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
+SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls 
+S:Mode$ Continuous | Affected$ Creature.ChosenType | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Creatures of the chosen type don't untap during their controllers' untap steps.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/an_zerrin_ruins.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/87.jpg
+End

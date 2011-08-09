@@ -1,0 +1,12 @@
+Name:Augury Owl
+ManaCost:1 U
+Types:Creature Bird
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 3. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:TrigScry:AB$Scry | Cost$ 0 | ScryNum$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/augury_owl.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/45.jpg
+End

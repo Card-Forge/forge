@@ -1,0 +1,9 @@
+Name:Aura Fracture
+ManaCost:2 W
+Types:Enchantment
+Text:no text
+A:AB$ Destroy | Cost$ Sac<1/Land> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_fracture.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/2.jpg
+End

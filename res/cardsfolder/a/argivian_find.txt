@@ -1,0 +1,9 @@
+Name:Argivian Find
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ W | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact or enchantment card in your graveyard | ValidTgts$ Artifact.YouCtrl,Enchantment.YouCtrl | SpellDescription$ Return target artifact or enchantment card from your graveyard to your hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_find.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/122.jpg
+End

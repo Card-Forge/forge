@@ -1,0 +1,16 @@
+Name:Armageddon Clock
+ManaCost:6
+Types:Artifact
+Text:no text
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your draw step, CARDNAME deals damage equal to the number of doom counters on it to each player.  
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a doom counter on CARDNAME.
+A:AB$ RemoveCounter | Cost$ 4 | CounterType$ DOOM | CounterNum$ 1 | ActivationPhases$ Upkeep | AnyPlayer$ True | SpellDescription$ Remove a doom counter from CARDNAME. Any player may activate this ability but only during any upkeep step.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Each | NumDmg$ X
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DOOM | CounterNum$ 1
+SVar:X:Count$CardCounters.DOOM
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/armageddon_clock.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/234.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/313.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/2.jpg
+End

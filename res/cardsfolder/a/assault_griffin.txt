@@ -1,0 +1,11 @@
+Name:Assault Griffin
+ManaCost:3 W
+Types:Creature Griffin
+Text:no text
+PT:3/2
+K:Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assault_griffin.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/6.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/8.jpg
+End

@@ -1,0 +1,11 @@
+Name:Avian Changeling
+ManaCost:2 W
+Types:Creature Shapeshifter
+Text:no text
+PT:2/2
+K:Flying
+K:Changeling
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145813.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/4.jpg
+End

@@ -1,0 +1,13 @@
+Name:Archon of Justice
+ManaCost:3 W W
+Types:Creature Archon
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, exile target permanent.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Exile
+PT:4/4
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_justice.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/6.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/1.jpg
+End

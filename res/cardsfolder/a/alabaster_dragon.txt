@@ -1,0 +1,12 @@
+Name:Alabaster Dragon
+ManaCost:4 W W
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ If CARDNAME is put into your graveyard from the battlefield, you may shuffle it into your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_dragon.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/118.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/163.jpg
+End

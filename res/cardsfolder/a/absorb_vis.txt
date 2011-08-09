@@ -1,0 +1,11 @@
+Name:Absorb Vis
+ManaCost:6 B
+Types:Sorcery
+Text:no text
+K:TypeCycling:Basic:1 B
+A:SP$ LoseLife | Cost$ 6 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 4 | SubAbility$ SVar=DBGainLife | SpellDescription$ Target player loses 4 life and you gain 4 life.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/absorb_vis.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/40.jpg
+End

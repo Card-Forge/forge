@@ -1,0 +1,11 @@
+Name:Ancestral Recall
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Draw | Cost$ U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player draws three cards.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/48.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/48.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/48.jpg
+End

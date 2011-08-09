@@ -1,0 +1,10 @@
+Name:Avatar of Slaughter
+ManaCost:6 R R
+Types:Creature Avatar
+Text:no text
+PT:8/8
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Double Strike & HIDDEN CARDNAME attacks each turn if able. | Description$ All creatures have double strike and attack each turn if able.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_slaughter.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/111.jpg
+End

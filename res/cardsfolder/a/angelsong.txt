@@ -1,0 +1,10 @@
+Name:Angelsong
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Fog | Cost$ 1 W | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+K:Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelsong.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/4.jpg
+End

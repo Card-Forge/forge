@@ -1,0 +1,11 @@
+Name:Azorius First-Wing
+ManaCost:W U
+Types:Creature Griffin
+Text:no text
+PT:2/2
+K:Flying
+K:Protection from enchantments
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_first_wing.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/105.jpg
+End

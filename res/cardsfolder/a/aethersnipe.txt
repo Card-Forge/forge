@@ -1,0 +1,14 @@
+Name:AEthersnipe
+ManaCost:5 U
+Types:Creature Elemental
+Text:
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return target nonland permanent to its owner's hand.
+K:Evoke:1 U U
+SVar:TrigBounce:DB$ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose target non-Land permanent. | Origin$ Battlefield | Destination$ Hand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aethersnipe.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/50.jpg
+End

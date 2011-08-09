@@ -1,0 +1,11 @@
+Name:Angelic Benediction
+ManaCost:3 W
+Types:Enchantment
+Text:no text
+K:Exalted
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control attacks alone, you may tap target creature.
+SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_benediction.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/3.jpg
+End

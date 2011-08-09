@@ -1,0 +1,11 @@
+Name:Argentum Armor
+ManaCost:6
+Types:Artifact Equipment
+Text:Equipped creature gets +6/+6.
+K:eqPump 6:+6/+6
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature attacks, destroy target permanent.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/argentum_armor.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/137.jpg
+End

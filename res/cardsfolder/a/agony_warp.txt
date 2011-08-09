@@ -1,0 +1,10 @@
+Name:Agony Warp
+ManaCost:U B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ U B | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -3/-0 | NumAtt$ -3 | IsCurse$ True | SubAbility$ SVar=DBPump | SpellDescription$ Target creature gets -3/-0 until end of turn.
+SVar:DBPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -0/-3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -0/-3 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/agony_warp.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/153.jpg
+End

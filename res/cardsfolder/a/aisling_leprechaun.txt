@@ -1,0 +1,13 @@
+Name:Aisling Leprechaun
+ManaCost:G
+Types:Creature Faerie
+Text:no text
+PT:1/1
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigAnimate1 | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature becomes green. (This effect lasts indefinitely.)
+T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigAnimate2 | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature becomes green. (This effect lasts indefinitely.)
+SVar:TrigAnimate1:AB$Animate | Cost$ 0 | Defined$ TriggeredAttacker | Colors$ Green | Permanent$ True
+SVar:TrigAnimate2:AB$Animate | Cost$ 0 | Defined$ TriggeredBlocker | Colors$ Green | Permanent$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aisling_leprechaun.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/87.jpg
+End

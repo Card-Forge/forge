@@ -1,0 +1,11 @@
+Name:Apes of Rath
+ManaCost:2 G G
+Types:Creature Ape
+Text:no text
+PT:5/4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ StayTapped | TriggerDescription$ Whenever CARDNAME attacks, it doesn't untap during its controller's next untap step.
+SVar:StayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/apes_of_rath.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/108.jpg
+End

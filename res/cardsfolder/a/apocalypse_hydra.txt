@@ -1,0 +1,12 @@
+Name:Apocalypse Hydra
+ManaCost:X G R
+Types:Creature Hydra
+Text:Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
+PT:0/0
+A:AB$ DealDamage | Cost$ 1 R SubCounter<1/P1P1> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+# This xPaid doesn't do anything, it's just needed to make Cost work properly
+SVar:X:Count$xPaid
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
+SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/98.jpg
+End

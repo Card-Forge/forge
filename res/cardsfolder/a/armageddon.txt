@@ -1,0 +1,18 @@
+Name:Armageddon
+ManaCost:3 W
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 3 W | ValidCards$ Land | SpellDescription$ Destroy all lands.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20387.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/186.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/187.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/167.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/255.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/132.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/4.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/186.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/283.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/6.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/186.jpg
+End

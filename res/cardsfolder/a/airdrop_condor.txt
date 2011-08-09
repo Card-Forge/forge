@@ -1,0 +1,13 @@
+Name:Airdrop Condor
+ManaCost:4 R
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ DealDamage | Cost$ 1 R Sac<1/Creature.Goblin> | Tgt$ TgtCP | NumDmg$ X | CostDesc$ 1 R, Sacrifice a Goblin creature: | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
+SVar:X:Sacrificed$CardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/airdrop_condor.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/186.jpg
+End

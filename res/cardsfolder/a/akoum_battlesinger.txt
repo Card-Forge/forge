@@ -1,0 +1,15 @@
+Name:Akoum Battlesinger
+ManaCost:1 R
+Types:Creature Human Berserker Ally
+Text:no text
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control get +1/+0 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Ally+YouCtrl | NumAtt$ 1
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Akoum_Battlesinger.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/71.jpg
+End

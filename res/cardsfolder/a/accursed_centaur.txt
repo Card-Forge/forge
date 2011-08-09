@@ -1,0 +1,12 @@
+Name:Accursed Centaur
+ManaCost:B
+Types:Creature Zombie Centaur
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/accursed_centaur.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/123.jpg
+End

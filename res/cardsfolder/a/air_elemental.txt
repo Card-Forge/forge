@@ -1,0 +1,23 @@
+Name:Air Elemental
+ManaCost:3 U U
+Types:Creature Elemental
+Text:no text
+PT:4/4
+K:Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/air_elemental.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/59.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/47.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/47.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/58.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/31.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/59.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/58.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/64.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/42.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/56.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/47.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/71.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/32.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/47.jpg
+End

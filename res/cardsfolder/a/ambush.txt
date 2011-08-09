@@ -1,0 +1,11 @@
+Name:Ambush
+ManaCost:3 R
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 3 R | ValidCards$ Creature.blocking | KW$ First Strike | SpellDescription$ Blocking creatures gain first strike until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/78.jpg
+End
+

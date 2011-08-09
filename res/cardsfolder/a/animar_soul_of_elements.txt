@@ -1,0 +1,15 @@
+Name:Animar, Soul of Elements
+ManaCost:U R G
+Types:Legendary Creature Elemental
+Text:Creature spells you cast cost 1 less to cast for each +1/+1 counter on Animar.
+PT:1/1
+K:Protection from white
+K:Protection from black
+T:Mode$ SpellCast | ValidCard$ Card.Creature+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:CostChange:Player:Less:X:Spell:All:Creature:NoSpecial
+SVar:X:Count$NumCounters.P1P1
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/animar_soul_of_elements.jpg
+SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/181.jpg
+End

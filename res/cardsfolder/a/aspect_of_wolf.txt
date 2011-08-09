@@ -1,0 +1,18 @@
+Name:Aspect of Wolf
+ManaCost:1 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.AttachedBy | AddPower$ X | AddToughness$ Y | Description$ Enchanted creature gets +X/+Y, where X is half the number of Forests you control, rounded down, and Y is half the number of Forests you control, rounded up.
+SVar:X:Count$TypeYouCtrl.Forest/HalfDown
+SVar:Y:Count$Valid Forest.YouCtrl/HalfUp
+SVar:BuffedBy:Forest
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aspect_of_wolf.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/140.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/93.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/93.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/117.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/93.jpg
+End

@@ -1,0 +1,14 @@
+Name:Aquitect's Will
+ManaCost:U
+Types:Tribal Sorcery Merfolk
+Text:no text
+A:SP$ Effect | Cost$ U | Name$ Flood Effect | Keywords$ KWAnimateAll | Unique$ True | Duration$ Permanent | SubAbility$ SVar=TrigPutCounter | SpellDescription$ Put a flood counter on target land. That land is an island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Cost$ 0 | ValidTgts$ Land | CounterType$ FLOOD | CounterNum$ 1 | TgtPrompt$ Select target land | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$ Draw | Cost$ 0 | NumCards$ 1 | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,
+SVar:KWAnimateAll:stAnimateAll:Land.countersGE1FLOOD:no changes:Island:no colors:Overwrite:No Condition:no text
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aquitects_will.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/52.jpg
+End

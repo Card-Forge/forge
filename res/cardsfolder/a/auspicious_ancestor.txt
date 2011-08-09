@@ -1,0 +1,13 @@
+Name:Auspicious Ancestor
+ManaCost:3 W
+Types:Creature Human Cleric
+Text:no text
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a white spell, you may pay 1. If you do, gain 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGrave | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you gain 3 life.
+SVar:TrigGrave:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 3
+SVar:TrigGainLife:AB$GainLife | Cost$ 1 | LifeAmount$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/auspicious_ancestor.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/207.jpg
+End

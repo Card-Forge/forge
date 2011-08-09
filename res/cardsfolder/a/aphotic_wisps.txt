@@ -1,0 +1,11 @@
+Name:Aphotic Wisps
+ManaCost:B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear | SubAbility$ SVar=DBDraw | SpellDescription$ Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.) Draw a card.
+SVar:DBDraw:DB$Draw | SubAbility$ SVar=DBColor | NumCards$ 1
+SVar:DBColor:DB$Animate | Colors$ Black | OverwriteColors$ True | Defined$ Targeted
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aphotic_wisps.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/55.jpg
+End

@@ -1,0 +1,13 @@
+Name:Angel of Despair
+ManaCost:3 W W B B
+Types:Creature Angel
+Text:no text
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target permanent.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card83869.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/101.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/180.jpg
+End

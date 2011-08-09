@@ -1,0 +1,12 @@
+Name:AEtherflame Wall
+ManaCost:1 R
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+K:CARDNAME can block creatures with shadow as though they didn't have shadow.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherflame_wall.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/142.jpg
+End

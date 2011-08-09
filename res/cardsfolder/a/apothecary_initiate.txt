@@ -1,0 +1,11 @@
+Name:Apothecary Initiate
+ManaCost:W
+Types:Creature Kithkin Cleric
+Text:no text
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a white spell, you may pay 1. If you do, gain 1 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 1 | LifeAmount$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/apothecary_initiate.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/1.jpg
+End
