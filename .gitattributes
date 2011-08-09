@@ -1,1 +1,10 @@
 * text=auto !eol
+/.checkstyle -text
+/.classpath -text
+/.fbprefs -text
+/.project -text
+/CHANGES.txt svneol=native#text/plain
+/LICENSE.txt svneol=native#text/plain
+/README.txt svneol=native#text/plain
+/forge.properties svneol=native#text/plain
+/pom.xml svneol=native#text/xml
