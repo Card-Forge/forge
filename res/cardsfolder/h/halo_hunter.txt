@@ -1,0 +1,12 @@
+Name:Halo Hunter
+ManaCost:2 B B B
+Types:Creature Demon
+Text:no text
+PT:6/3
+K:Intimidate
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target Angel.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Angel | TgtPrompt$ Select target Angel
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/halo_hunter.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/96.jpg
+End

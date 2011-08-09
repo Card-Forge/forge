@@ -1,0 +1,12 @@
+Name:Heart Warden
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_warden.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/108.jpg
+End

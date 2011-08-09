@@ -1,0 +1,15 @@
+Name:Halimar Wavewatch
+ManaCost:1 U
+Types:Creature Merfolk Soldier
+Text:no text
+PT:0/3
+K:Level up:2
+K:maxLevel:5
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 0 | SetToughness$ 6 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1+ 0/6
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Islandwalk | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 5+ 6/6 CARDNAME has Islandwalk
+SVar:X:Count$Valid Card.Self+countersGE1LEVEL
+SVar:Y:Count$Valid Card.Self+countersGE5LEVEL
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_wavewatch.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/72.jpg
+End

@@ -1,0 +1,13 @@
+Name:Hell-Bent Raider
+ManaCost:1 R R
+Types:Creature Human Barbarian
+Text:no text
+PT:2/2
+K:First Strike
+K:Haste
+A:AB$ Protection | Cost$ Discard<1/Random> | Gains$ white | SpellDescription$ CARDNAME gains protection from white until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hell_bent_raider.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/101.jpg
+End

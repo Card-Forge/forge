@@ -1,0 +1,9 @@
+Name:Haunting Misery
+ManaCost:1 B B
+Types:Sorcery
+Text:As an additional cost, exile X creature cards from your graveyard. Haunting Misery deals X damage to target player.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_misery.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/13.jpg
+End

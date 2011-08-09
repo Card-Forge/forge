@@ -1,0 +1,10 @@
+Name:Hoar Shade
+ManaCost:3 B
+Types:Creature Shade
+Text:no text
+PT:1/2
+A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hoar_shade.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/19.jpg
+End

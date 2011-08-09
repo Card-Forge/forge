@@ -1,0 +1,11 @@
+Name:Haunting Echoes
+ManaCost:3 B B
+Types:Sorcery
+Text:Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_echoes.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/99.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/98.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/142.jpg
+End

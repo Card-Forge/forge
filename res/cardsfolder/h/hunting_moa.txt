@@ -1,0 +1,14 @@
+Name:Hunting Moa
+ManaCost:2 G
+Types:Creature Bird Beast
+Text:no text
+PT:3/2
+K:Echo:2 G
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_moa.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/109.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/80.jpg
+End

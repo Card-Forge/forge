@@ -1,0 +1,11 @@
+Name:Harbinger of Spring
+ManaCost:4 G
+Types:Creature Spirit
+Text:no text
+PT:2/1
+K:Protection:Creature.nonSpirit:Protection from non-Spirit creatures
+K:Soulshift:4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harbinger_of_spring.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/128.jpg
+End

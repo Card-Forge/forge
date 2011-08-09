@@ -1,0 +1,13 @@
+Name:Hellfire
+ManaCost:2 B B B
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 2 B B B | ValidCards$ Creature.nonBlack | RememberDestroyed$ True | SubAbility$ SVar=DBDealDamage | SpellDescription$ Destroy all nonblack creatures. CARDNAME deals X plus 3 damage to you, where X is the number of creatures put into all graveyards this way.
+SVar:DBDealDamage:DB$DealDamage | NumDmg$ X | Defined$ You
+SVar:X:Remembered$Amount.Plus.3
+# Remember Destroyed still isn't quite right since Hellfire cares about Replacement effects too
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/18.jpg
+End

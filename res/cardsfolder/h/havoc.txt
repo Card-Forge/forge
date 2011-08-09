@@ -1,0 +1,11 @@
+Name:Havoc
+ManaCost:1 R
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.White+YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent casts a white spell, he or she loses 2 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 2
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/181.jpg
+End

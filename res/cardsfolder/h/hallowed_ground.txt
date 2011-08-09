@@ -1,0 +1,10 @@
+Name:Hallowed Ground
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+A:AB$ ChangeZone | Cost$ W W | ValidTgts$ Land.nonSnow+YouCtrl | TgtPrompt$ Target nonsnow land you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonsnow land you control to its owner's hand.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_ground.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/253.jpg
+End

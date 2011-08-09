@@ -1,0 +1,11 @@
+Name:Hunger of the Nim
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +1/+0 until end of turn for each artifact you control.
+SVar:X:Count$TypeYouCtrl.Artifact
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunger_of_the_nim.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/46.jpg
+End

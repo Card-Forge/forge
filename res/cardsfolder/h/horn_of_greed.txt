@@ -1,0 +1,11 @@
+Name:Horn of Greed
+ManaCost:3
+Types:Artifact
+Text:no text
+T:Mode$ LandPlayed | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player plays a land, that player draws a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_greed.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/129.jpg
+End

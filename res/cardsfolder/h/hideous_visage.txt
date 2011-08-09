@@ -1,0 +1,9 @@
+Name:Hideous Visage
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.YouCtrl | KW$ Intimidate | SpellDescription$ Creatures you control gain intimidate until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_visage.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/100.jpg
+End

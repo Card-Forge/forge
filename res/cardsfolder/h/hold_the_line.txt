@@ -1,0 +1,10 @@
+Name:Hold the Line
+ManaCost:1 W W
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.blocking | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Blocking creatures get +7/+7 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hold_the_line.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/13.jpg
+End

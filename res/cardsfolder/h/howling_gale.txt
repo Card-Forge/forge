@@ -1,0 +1,10 @@
+Name:Howling Gale
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ DamageAll | Cost$ 1 G | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Each | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player.
+A:SP$ DamageAll | Cost$ 1 G | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Each | ValidDescription$ each creature with flying and each player. | Flashback$ True | CostDesc$ Flashback 1 G | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_gale.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/244.jpg
+End

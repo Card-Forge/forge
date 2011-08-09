@@ -1,0 +1,12 @@
+Name:Hunted Horror
+ManaCost:B B
+Types:Creature Horror
+Text:no text
+PT:7/7
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 3/3 green Centaur creature tokens with protection from black onto the battlefield under target opponent's control.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ Opponent | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Protection from black
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_horror.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/90.jpg
+End

@@ -1,0 +1,12 @@
+Name:Honor of the Pure
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.White+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ White creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_of_the_pure.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/17.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/16.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/23.jpg
+End

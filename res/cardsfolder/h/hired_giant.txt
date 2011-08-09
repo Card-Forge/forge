@@ -1,0 +1,11 @@
+Name:Hired Giant
+ManaCost:3 R
+Types:Creature Giant
+Text:no text
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each other player may search his or her library for a land card and put that card onto the battlefield. Then each player who searched his or her library this way shuffles it.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | Defined$ Opponent | ChangeNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hired_giant.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/194.jpg
+End

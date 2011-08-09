@@ -1,0 +1,12 @@
+Name:Haunting Apparition
+ManaCost:1 U B
+Types:Creature Spirit
+Text:no text
+PT:*/2
+K:Flying
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to 1 plus the number of green creature cards in opponent's graveyard.
+SVar:X:Count$InOppYard.Creature+Green/Plus.1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_apparition.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/327.jpg
+End

@@ -1,0 +1,15 @@
+Name:Hazezon Tamar
+ManaCost:4 R G W
+Types:Legendary Creature Human Warrior
+Text:no text
+PT:2/4
+T:Mode$ ChangesZone | ValidCard$ Creature.Self | Origin$ Any | Destination$ Battlefield | DelayedTrigger$ DelTrig | TriggerDescription$ When CARDNAME enters the battlefield, put X 1/1 Sand Warrior tokens that are green, red, and white onto the battlefield at the beginning of your next upkeep, where X is the number of lands you control at that time. When Hazezon leaves the battlefield, exile all Sand Warriors.
+SVar:DelTrig: Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigTokens | TriggerDescription$ Create a 1/1 GRW Sand Warrior token for each land you control.
+SVar:TrigTokens:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenName$ Sand Warrior | TokenTypes$ Creature,Sand,Warrior | TokenOwner$ You | TokenColors$ Green,Red,White | TokenPower$ 1 | TokenToughness$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExile | TriggerDescription$ When Hazezon leaves the battlefield, exile all Sand Warriors.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | Defined$ Sand.Warrior+YouCtrl
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hazezon_tamar.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/270.jpg
+End

@@ -1,0 +1,10 @@
+Name:Hivestone
+ManaCost:2
+Types:Artifact
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ Sliver | Description$ Creatures you control are Slivers in addition to their other creature types.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hivestone.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/256.jpg
+End

@@ -1,0 +1,11 @@
+Name:Honor-Worn Shaku
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Untap | Cost$ tapXType<1/Permanent.Legendary> | CostDesc$ Tap an untapped legendary permanent you control: | SpellDescription$ Untap CARDNAME.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_worn_shaku.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/254.jpg
+End

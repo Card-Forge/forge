@@ -1,0 +1,12 @@
+Name:Hope Charm
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | PrecostDesc$ Choose one - | SpellDescription$ Target creature gains first strike until end of turn;
+A:SP$ GainLife | Cost$ W | LifeAmount$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ or target player gains 2 life;
+A:SP$ Destroy | Cost$ W | ValidTgts$ Aura | TgtPrompt$ Select target Aura | SpellDescription$ or destroy target Aura.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_charm.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/108.jpg
+End

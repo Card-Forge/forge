@@ -1,0 +1,12 @@
+Name:Hungry Spriggan
+ManaCost:2 G
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+3 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3 | NumDef$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hungry_spriggan.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/120.jpg
+End

@@ -1,0 +1,12 @@
+Name:Hazy Homunculus
+ManaCost:1 U
+Types:Creature Homunculus Illusion
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ HIDDEN Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME is unblockable as long as defending player controls an untapped land.
+SVar:X:Count$Valid Land.YouDontCtrl+untapped
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hazy_homunculus.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/36.jpg
+End

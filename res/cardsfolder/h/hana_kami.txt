@@ -1,0 +1,11 @@
+Name:Hana Kami
+ManaCost:G
+Types:Creature Spirit
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ 1 G Sac<1/CARDNAME> | TgtPrompt$ Choose target Arcane card in your graveyard | ValidTgts$ Arcane | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Arcane card from your graveyard to your hand.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hana_kami.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/211.jpg
+End

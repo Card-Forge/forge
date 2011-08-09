@@ -1,0 +1,10 @@
+Name:Hillcomber Giant
+ManaCost:2 W W
+Types:Creature Giant Scout
+Text:no text
+PT:3/3
+K:Mountainwalk
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145971.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/20.jpg
+End

@@ -1,0 +1,12 @@
+Name:Hollowborn Barghest
+ManaCost:5 B B
+Types:Creature Demon Hound
+Text:no text
+PT:7/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.YouCtrl | PresentCompare$ EQ0 | PresentZone$ Hand | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.YouDontCtrl | PresentCompare$ EQ0 | PresentZone$ Hand | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has no cards in hand, he or she loses 2 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowborn_barghest.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/68.jpg
+End

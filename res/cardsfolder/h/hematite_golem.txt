@@ -1,0 +1,10 @@
+Name:Hematite Golem
+ManaCost:4
+Types:Artifact Creature Golem
+Text:no text
+PT:1/4
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hematite_golem.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/185.jpg
+End

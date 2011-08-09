@@ -1,0 +1,12 @@
+Name:Hot Springs
+ManaCost:1 G
+Types:Enchantment Aura
+Text:Enchant land you control
+K:Enchant land
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ Pump | Description$ Enchanted land has "Tap: Prevent the next 1 damage that would be dealt to target creature or player this turn."
+SVar:Pump:AB$PreventDamage | Cost$ T | Tgt$ TgtCP | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature or player this turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hot_springs.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/136.jpg
+End

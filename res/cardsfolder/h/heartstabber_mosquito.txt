@@ -1,0 +1,13 @@
+Name:Heartstabber Mosquito
+ManaCost:3 B
+Types:Creature Insect
+Text:no text
+PT:2/2
+K:Flying
+K:Kicker:2 B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target creature.
+SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Heartstabber_Mosquito.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/97.jpg
+End

@@ -1,0 +1,12 @@
+Name:Haunted Cadaver
+ManaCost:3 B
+Types:Creature Zombie
+Text:no text
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, that player discards three cards.
+SVar:TrigDiscard:AB$Discard | Cost$ Sac<1/CARDNAME> | Defined$ Opponent | NumCards$ 3 | Mode$ TgtChoose
+K:Morph:1 B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_cadaver.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/154.jpg
+End

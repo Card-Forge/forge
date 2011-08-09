@@ -1,0 +1,12 @@
+Name:Hasran Ogress
+ManaCost:B B
+Types:Creature Ogre
+Text:no text
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 3 damage to you unless you pay 2.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 3 | UnlessCost$ 2 | UnlessPayer$ You
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hasran_ogress.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/6.jpg
+End

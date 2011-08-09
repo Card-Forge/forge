@@ -1,0 +1,10 @@
+Name:Hopping Automaton
+ManaCost:3
+Types:Artifact Creature Construct
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | KW$ Flying | SpellDescription$ CARDNAME gets -1/-1 and gains flying until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hopping_automaton.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/297.jpg
+End

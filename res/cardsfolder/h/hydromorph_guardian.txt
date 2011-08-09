@@ -1,0 +1,11 @@
+Name:Hydromorph Guardian
+ManaCost:2 U
+Types:Creature Elemental
+Text:no text
+PT:2/2
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.YouCtrl | SpellDescription$ Counter target spell that targets one or more creatures you control.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hydromorph_guardian.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/39.jpg
+End
