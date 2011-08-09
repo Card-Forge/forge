@@ -1,0 +1,10 @@
+Name:Ichneumon Druid
+ManaCost:1 G G
+Types:Creature Human Druid
+Text:Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, CARDNAME deals 4 damage to him or her.
+PT:1/1
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ichneumon_druid.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/105.jpg
+End

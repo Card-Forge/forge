@@ -1,0 +1,14 @@
+Name:Quest for the Nihil Stone
+ManaCost:B
+Types:Enchantment
+Text:no text
+T:Mode$ Discarded | ValidCard$ Card.YouDontCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent discards a card, you may put a quest counter on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Card | PresentZone$ Hand | PresentPlayer$ Opponent | PresentCompare$ EQ0 | IsPresent2$ Card.Self+countersGE2QUEST | Execute$ TrigLoseLife | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has no cards in hand and CARDNAME has two or more quest counters on it, you may have that player lose 5 life.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 5
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_the_nihil_stone.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/64.jpg
+End

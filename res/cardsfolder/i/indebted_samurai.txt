@@ -1,0 +1,12 @@
+Name:Indebted Samurai
+ManaCost:3 W
+Types:Creature Human Samurai
+Text:no text
+PT:2/3
+K:Bushido 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Samurai.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Samurai you control is put into a graveyard from the battlefield, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/indebted_samurai.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/9.jpg
+End

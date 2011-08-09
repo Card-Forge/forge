@@ -1,0 +1,10 @@
+Name:Intimidation
+ManaCost:2 B B B
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Fear | Description$ Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidation.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/142.jpg
+End

@@ -1,0 +1,12 @@
+Name:Ixidor's Will
+ManaCost:2 U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays 2 for each Wizard on the battlefield.
+SVar:X:Count$TypeYouCtrl.Wizard/Twice
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ixidors_will.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/90.jpg
+End

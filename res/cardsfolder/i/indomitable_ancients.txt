@@ -1,0 +1,9 @@
+Name:Indomitable Ancients
+ManaCost:2 W W
+Types:Creature Treefolk Warrior
+Text:no text
+PT:2/10
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/indomitable_ancients.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/13.jpg
+End

@@ -1,0 +1,9 @@
+Name:Intervene
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature | SpellDescription$ Counter target spell that targets a creature. 
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/intervene.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/33.jpg
+End

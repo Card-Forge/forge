@@ -1,0 +1,11 @@
+Name:Yuan Shao's Infantry
+ManaCost:3 R
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, CARDNAME is unblockable this combat.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Unblockable
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shaos_infantry.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/129.jpg
+End

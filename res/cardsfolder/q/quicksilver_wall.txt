@@ -1,0 +1,12 @@
+Name:Quicksilver Wall
+ManaCost:2 U
+Types:Creature Wall
+Text:no text
+PT:1/6
+A:AB$ ChangeZone | Cost$ 4 | Origin$ Battlefield | Destination$ Hand | AnyPlayer$ True | SpellDescription$ Return CARDNAME to its owner's hand. Any player may activate this ability.
+K:Defender
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_wall.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/41.jpg
+End

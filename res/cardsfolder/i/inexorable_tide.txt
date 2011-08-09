@@ -1,0 +1,10 @@
+Name:Inexorable Tide
+ManaCost:3 U U
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigProliferate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, proliferate.
+SVar:TrigProliferate:AB$Proliferate | Cost$ 0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inexorable_tide.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/35.jpg
+End

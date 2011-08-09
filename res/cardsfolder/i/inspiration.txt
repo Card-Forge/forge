@@ -1,0 +1,11 @@
+Name:Inspiration
+ManaCost:3 U
+Types:Instant
+Text:no text
+A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiration.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/35.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/76.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/81.jpg
+End

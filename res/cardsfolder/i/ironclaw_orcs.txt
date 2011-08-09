@@ -1,0 +1,14 @@
+Name:Ironclaw Orcs
+ManaCost:1 R
+Types:Creature Orc
+Text:CARDNAME can't block creatures with power 2 or greater.
+PT:2/2
+K:CantBlock Creature.powerGE2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_orcs.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/160.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/161.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/224.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/160.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/245.jpg
+End

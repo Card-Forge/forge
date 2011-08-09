@@ -1,0 +1,19 @@
+Name:Instill Energy
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+A:AB$ Untap | Cost$ 0 | PlayerTurn$ True | ActivationLimit$ 1 | Defined$ Enchanted | SpellDescription$ Untap enchanted creature. Activate this ability only during your turn and only once each turn.
+SVar:PlayMain1:True
+#AI can't use this effectively right now
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_energy.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/111.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/111.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/166.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/136.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/110.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/111.jpg
+End

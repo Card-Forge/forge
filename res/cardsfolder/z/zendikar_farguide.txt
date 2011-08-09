@@ -1,0 +1,10 @@
+Name:Zendikar Farguide
+ManaCost:4 G
+Types:Creature Elemental
+Text:no text
+PT:3/3
+K:Forestwalk
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zendikar_farguide.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/194.jpg
+End

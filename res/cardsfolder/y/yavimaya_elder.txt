@@ -1,0 +1,13 @@
+Name:Yavimaya Elder
+ManaCost:1 G G
+Types:Creature Human Druid
+Text:no text
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFetch | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may search your library for up to two basic land cards, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:TrigFetch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_elder.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/124.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/179.jpg
+End

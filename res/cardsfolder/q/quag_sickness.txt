@@ -1,0 +1,13 @@
+Name:Quag Sickness
+ManaCost:2 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets -1/-1 for each Swamp you control.
+SVar:X:Count$Valid Swamp.YouCtrl/Negative
+SVar:BuffedBy:Swamp
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quag_sickness.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/111.jpg
+End

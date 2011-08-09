@@ -1,0 +1,10 @@
+Name:Zealous Guardian
+ManaCost:WU
+Types:Creature Kithkin Soldier
+Text:no text
+PT:1/1
+K:Flash
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_guardian.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/157.jpg
+End

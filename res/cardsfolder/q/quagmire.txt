@@ -1,0 +1,9 @@
+Name:Quagmire
+ManaCost:2 B
+Types:Enchantment
+Text:Creatures with swampwalk can be blocked as though they didn't have swampwalk.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/29.jpg
+End

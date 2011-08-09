@@ -1,0 +1,10 @@
+Name:Zodiac Rabbit
+ManaCost:G
+Types:Creature Rabbit
+Text:no text
+PT:1/1
+K:Forestwalk
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10582.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/162.jpg
+End

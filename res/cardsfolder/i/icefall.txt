@@ -1,0 +1,10 @@
+Name:Icefall
+ManaCost:2 R R
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land. | SpellDescription$ Destroy target artifact or land.
+K:Recover:R R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/icefall.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/85.jpg
+End

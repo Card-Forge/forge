@@ -1,0 +1,11 @@
+Name:Quagmire Druid
+ManaCost:2 B
+Types:Creature Zombie Druid
+Text:no text
+PT:2/2
+A:AB$ Destroy | Cost$ G T Sac<1/Creature> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire_druid.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/51.jpg
+End

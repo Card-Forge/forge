@@ -1,0 +1,11 @@
+Name:Information Dealer
+ManaCost:1 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ RearrangeTopOfLibrary | Cost$ T | Defined$ You | NumCards$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
+SVar:X:Count$TypeYouCtrl.Wizard
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/information_dealer.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/88.jpg
+End

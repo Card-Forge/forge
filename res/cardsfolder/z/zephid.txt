@@ -1,0 +1,11 @@
+Name:Zephid
+ManaCost:4 U U
+Types:Creature Illusion
+Text:no text
+PT:3/4
+K:Flying
+K:Shroud
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zephid.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/113.jpg
+End

@@ -1,0 +1,11 @@
+Name:Irini Sengir
+ManaCost:2 B B
+Types:Legendary Creature Vampire Dwarf
+Text:White enchantment spells and green enchantment spells cost 2 more to cast.
+PT:2/2
+K:CostChange:All:More:2:Spell:white/green:Enchantment:OnlyOneBonus
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/irini_sengir.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/17.jpg
+End

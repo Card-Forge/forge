@@ -1,0 +1,12 @@
+Name:Index
+ManaCost:U
+Types:Sorcery
+Text:no text
+A:SP$ RearrangeTopOfLibrary | Cost$ U | Defined$ You | NumCards$ 5 | SpellDescription$ Look at the top five cards of your library, then put them back in any order.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/index.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/84.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/25.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9eb/5.jpg
+End

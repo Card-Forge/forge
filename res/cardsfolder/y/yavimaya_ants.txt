@@ -1,0 +1,12 @@
+Name:Yavimaya Ants
+ManaCost:2 G G
+Types:Creature Insect
+Text:no text
+PT:5/1
+K:Trample
+K:Haste
+K:Cumulative upkeep:G G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_ants.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/93.jpg
+End

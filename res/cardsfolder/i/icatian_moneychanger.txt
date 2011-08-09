@@ -1,0 +1,17 @@
+Name:Icatian Moneychanger
+ManaCost:W
+Types:Creature Human
+Text:no text
+PT:0/2
+K:etbCounter:CREDIT:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to you.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a credit counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CREDIT | CounterNum$ 1 | SpellDescription$ Put a credit counter on CARDNAME.
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ You gain life equal to the number of credit counters on CARDNAME.
+SVar:X:Count$CardCounters.CREDIT
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_moneychanger.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/152.jpg|3
+End

@@ -1,0 +1,11 @@
+Name:Ironshell Beetle
+ManaCost:1 G
+Types:Creature Insect
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
+SVar:TrigPut:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ironshell_beetle.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/121.jpg
+End

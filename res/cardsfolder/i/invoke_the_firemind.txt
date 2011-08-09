@@ -1,0 +1,13 @@
+Name:Invoke the Firemind
+ManaCost:X U U R
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ X U U R | NumCards$ X | SpellDescription$ Choose one - Draw X cards;
+A:SP$ DealDamage | Cost$ X U U R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ or CARDNAME deals X damage to target creature or player.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/invoke_the_firemind.jpg
+SVar:RemAIDeck:True
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/118.jpg
+End

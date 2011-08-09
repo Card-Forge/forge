@@ -1,0 +1,12 @@
+Name:Ignite Disorder
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.Blue,Creature.White | TgtPrompt$ Select target white and/or blue creature (1) | NumDmg$ 1 | SubAbility$ SVar=DBDamage2 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures.
+SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.Blue,Creature.White | TgtPrompt$ Select target white and/or blue creature (2) | NumDmg$ 1 | SubAbility$ SVar=DBDamage3
+SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.Blue,Creature.White | TgtPrompt$ Select target white and/or blue creature (3) | NumDmg$ 1
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_disorder.jpg
+SVar:Rarity:Uncommon
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/66.jpg
+End

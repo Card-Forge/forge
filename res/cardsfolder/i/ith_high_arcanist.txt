@@ -1,0 +1,14 @@
+Name:Ith, High Arcanist
+ManaCost:5 W U
+Types:Legendary Creature Human Wizard
+Text:no text
+PT:3/5
+K:Vigilance
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ SVar=DBPump | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+K:Suspend:4:W U
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ith_high_arcanist.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/241.jpg
+End

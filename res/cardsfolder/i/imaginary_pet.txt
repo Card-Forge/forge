@@ -1,0 +1,13 @@
+Name:Imaginary Pet
+ManaCost:1 U
+Types:Creature Illusion
+Text:no text
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card | PresentZone$ Hand | PresentPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you have a card in hand, return CARDNAME to its owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/imaginary_pet.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/81.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/82.jpg
+End

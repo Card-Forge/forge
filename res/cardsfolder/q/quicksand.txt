@@ -1,0 +1,13 @@
+Name:Quicksand
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | NumAtt$ -1 | NumDef$ -2 | IsCurse$ True | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SpellDescription$ Target attacking creature without flying gets -1/-2 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksand.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/166.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/323.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/140.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/356.jpg
+End

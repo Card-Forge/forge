@@ -1,0 +1,13 @@
+Name:Yuki-Onna
+ManaCost:3 R
+Types:Creature Spirit
+Text:no text
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+T:Mode$ SpellCast | ValidCard$ Spirit.YouCtrl,Arcane.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may return CARDNAME to its owner's hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yuki_onna.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/120.jpg
+End

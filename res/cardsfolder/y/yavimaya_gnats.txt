@@ -1,0 +1,11 @@
+Name:Yavimaya Gnats
+ManaCost:2 G
+Types:Creature Insect
+Text:no text
+PT:0/1
+K:Flying
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_gnats.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/168.jpg
+End

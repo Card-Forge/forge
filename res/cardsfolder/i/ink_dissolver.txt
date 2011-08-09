@@ -1,0 +1,10 @@
+Name:Ink Dissolver
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+Text:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Ink Dissolver, you may reveal it. If you do, each opponent puts the top three cards of his or her library into his or her graveyard.
+PT:2/1
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ink_dissolver.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/36.jpg
+End

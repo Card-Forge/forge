@@ -1,0 +1,13 @@
+Name:Xenograft
+ManaCost:4 U
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
+SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ ChosenType | Description$ Each creature you control is the chosen type in addition to its other types.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/xenograft.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/51.jpg
+End

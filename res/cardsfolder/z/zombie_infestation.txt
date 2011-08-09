@@ -1,0 +1,11 @@
+Name:Zombie Infestation
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+A:AB$ Token | Cost$ Discard<2/Card> | TokenImage$ B 2 2 Zombie | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_infestation.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/170.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/120.jpg
+End

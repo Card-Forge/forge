@@ -1,0 +1,14 @@
+Name:Ivory Guardians
+ManaCost:4 W W
+Types:Creature Giant Cleric
+Text:no text
+PT:3/3
+K:Protection from red
+S:Mode$ Continuous | Affected$ Creature.namedIvory Guardians | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ Creatures named CARDNAME get +1/+1 as long as an opponent controls a nontoken red permanent.
+SVar:X:Count$Valid Permanent.Red+nonToken+YouDontCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_guardians.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/316.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/192.jpg
+End

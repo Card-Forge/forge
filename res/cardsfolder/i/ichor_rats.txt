@@ -1,0 +1,12 @@
+Name:Ichor Rats
+ManaCost:1 B B
+Types:Creature Rat
+Text:no text
+PT:2/1
+K:Infect
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPoison | TriggerDescription$ When CARDNAME enters the battlefield, each player gets a poison counter.
+SVar:TrigPoison:AB$Poison | Cost$ 0 | Defined$ Each | Num$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ichor_rats.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/67.jpg
+End

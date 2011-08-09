@@ -1,0 +1,12 @@
+Name:Ishi-Ishi, Akki Crackshot
+ManaCost:1 R
+Types:Legendary Creature Goblin Warrior
+Text:no text
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Spirit.YouDontCtrl,Arcane.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent casts a Spirit or Arcane spell, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 2
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ishi_ishi_akki_crackshot.jpg
+SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/110.jpg
+End

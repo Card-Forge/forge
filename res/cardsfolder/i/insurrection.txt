@@ -1,0 +1,10 @@
+Name:Insurrection
+ManaCost:5 R R R
+Types:Sorcery
+Text:Untap all creatures and gain control of them until end of turn. They gain haste until end of turn.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/insurrection.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/213.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/126.jpg
+End

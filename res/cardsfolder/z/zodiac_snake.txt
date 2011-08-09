@@ -1,0 +1,10 @@
+Name:Zodiac Snake
+ManaCost:2 B
+Types:Creature Snake
+Text:no text
+PT:2/2
+K:Swampwalk
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10608.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/99.jpg
+End

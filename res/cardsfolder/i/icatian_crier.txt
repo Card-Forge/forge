@@ -1,0 +1,11 @@
+Name:Icatian Crier
+ManaCost:2 W
+Types:Creature Human Spellshaper
+Text:no text
+PT:1/1
+A:AB$ Token | Cost$ 1 W T Discard<1/Card> | TokenAmount$ 2 | TokenName$ Citizen | TokenTypes$ Creature,Citizen | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Citizen creature tokens onto the battlefield.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_crier.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/23.jpg
+End

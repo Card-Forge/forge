@@ -1,0 +1,10 @@
+Name:Quirion Druid
+ManaCost:2 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/2
+A:AB$ Animate | Cost$ G T | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 2 | Toughness$ 2 | Colors$ Green | Types$ Creature | Permanent$ True | SpellDescription$ Target land becomes a 2/2 green creature that's still a land. (This effect lasts indefinitely.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_druid.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/66.jpg
+End

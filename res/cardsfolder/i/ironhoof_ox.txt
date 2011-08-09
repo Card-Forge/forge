@@ -1,0 +1,10 @@
+Name:Ironhoof Ox
+ManaCost:3 G G
+Types:Creature Ox
+Text:no text
+PT:4/4
+K:CARDNAME can't be blocked by more than one creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6628.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/70.jpg
+End

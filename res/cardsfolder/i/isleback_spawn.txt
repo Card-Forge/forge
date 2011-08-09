@@ -1,0 +1,13 @@
+Name:Isleback Spawn
+ManaCost:5 U U
+Types:Creature Kraken
+Text:no text
+PT:4/8
+K:Shroud
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 8 | CheckSVar$ X | SVarCompare$ LEY | Description$ CARDNAME gets +4/+8 as long as a library has twenty or fewer cards in it.
+SVar:Y:Number$20
+SVar:X:Count$LowestLibrary
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/isleback_spawn.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/40.jpg
+End

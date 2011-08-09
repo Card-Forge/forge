@@ -1,0 +1,13 @@
+Name:Infested Roothold
+ManaCost:4 G
+Types:Creature Wall
+Text:no text
+PT:0/3
+K:Defender
+K:Protection from artifacts
+T:Mode$ SpellCast | ValidCard$ Artifact.YouDontCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts an artifact spell, you may put a 1/1 green Insect creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infested_roothold.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/76.jpg
+End

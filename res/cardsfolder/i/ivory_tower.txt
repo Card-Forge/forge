@@ -1,0 +1,13 @@
+Name:Ivory Tower
+ManaCost:1
+Types:Artifact
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ GT4 | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus four.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:Count$InYourHand/Minus.4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_tower.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/254.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/346.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/18.jpg
+End

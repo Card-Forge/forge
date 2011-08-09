@@ -1,0 +1,11 @@
+Name:Qumulox
+ManaCost:6 U U
+Types:Creature Beast
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+PT:5/4
+K:Flying
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/qumulox.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/35.jpg
+End

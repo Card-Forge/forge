@@ -1,0 +1,12 @@
+Name:Inkwell Leviathan
+ManaCost:7 U U
+Types:Artifact Creature Leviathan
+Text:no text
+PT:7/11
+K:Islandwalk
+K:Trample
+K:Shroud
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inkwell_leviathan.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/30.jpg
+End
