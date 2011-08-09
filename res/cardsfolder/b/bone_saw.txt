@@ -1,0 +1,9 @@
+Name:Bone Saw
+ManaCost:0
+Types:Artifact Equipment
+Text:Equipped creature gets +1/+0.
+K:eqPump 1:+1/+0
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_saw.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/135.jpg
+End

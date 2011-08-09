@@ -1,0 +1,12 @@
+Name:Bestial Menace
+ManaCost:3 G G
+Types:Sorcery
+Text:no text
+A:SP$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ SVar=DBWolfToken | SpellDescription$ Put a 1/1 green Snake creature token,
+SVar:DBWolfToken:DB$Token | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SubAbility$ SVar=DBElephantToken | SpellDescription$ a 2/2 green Wolf creature token,
+SVar:DBElephantToken:DB$Token | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ and a 3/3 green Elephant creature token onto the battlefield.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bestial_menace.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/144.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/97.jpg
+End

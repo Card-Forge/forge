@@ -1,0 +1,12 @@
+Name:Blue Sun's Zenith
+ManaCost:X U U U
+Types:Instant
+Text:no text
+A:SP$ Draw | Cost$ X U U U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ SVar=DBShuffle | SpellDescription$ Target player draws X cards. Shuffle CARDNAME into its owner's library.
+SVar:X:Count$xPaid
+SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_suns_zenith.jpg
+SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/20.jpg
+End

@@ -1,0 +1,13 @@
+Name:Bringer of the Green Dawn
+ManaCost:7 G G
+Types:Creature Bringer
+Text:no text
+PT:5/5
+K:Trample
+SVar:AltCost:W U B R G
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may put a 3/3 green Beast creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_green_dawn.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/83.jpg
+End

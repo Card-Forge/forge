@@ -1,0 +1,11 @@
+Name:Bloodrite Invoker
+ManaCost:2 B
+Types:Creature Vampire Shaman
+Text:no text
+PT:3/1
+A:AB$ LoseLife | Cost$ 8 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ SVar=DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrite_invoker.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/97.jpg
+End

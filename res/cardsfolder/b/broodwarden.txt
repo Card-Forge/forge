@@ -1,0 +1,11 @@
+Name:Broodwarden
+ManaCost:3 G G
+Types:Creature Eldrazi Drone
+Text:no text
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.Eldrazi+Spawn+YouCtrl | AddPower$ 2 | AddToughness$ 1 | Description$ Eldrazi Spawn creatures you control get +2/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/broodwarden.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/181.jpg
+End

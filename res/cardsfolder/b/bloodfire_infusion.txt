@@ -1,0 +1,13 @@
+Name:Bloodfire Infusion
+ManaCost:2 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature you control
+A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+A:AB$ DamageAll | Cost$ R Sac<1/Card.AttachedBy> | ActivationZone$ Battlefield | ValidCards$ Creature | NumDmg$ X | CostDesc$ R, Sacrifice enchanted creature: | ValidDescription$ each creature | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to each creature.
+SVar:X:Sacrificed$CardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_infusion.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/57.jpg
+End

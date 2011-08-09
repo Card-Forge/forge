@@ -1,0 +1,10 @@
+Name:Brass Squire
+ManaCost:3
+Types:Artifact Creature Myr
+Text:Tap: Attach target Equipment you control to target creature you control.
+PT:1/3
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_squire.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/101.jpg
+End

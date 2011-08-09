@@ -1,0 +1,9 @@
+Name:Bonebreaker Giant
+ManaCost:4 R
+Types:Creature Giant
+Text:no text
+PT:4/4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bonebreaker_giant.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/123.jpg
+End

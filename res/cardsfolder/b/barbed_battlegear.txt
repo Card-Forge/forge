@@ -1,0 +1,9 @@
+Name:Barbed Battlegear
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature gets +4/-1.
+K:eqPump 2:+4/-1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_battlegear.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/139.jpg
+End

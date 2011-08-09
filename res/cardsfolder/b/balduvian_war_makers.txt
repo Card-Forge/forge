@@ -1,0 +1,11 @@
+Name:Balduvian War-Makers
+ManaCost:4 R
+Types:Creature Human Barbarian
+Text:no text
+PT:3/3
+K:Haste
+K:Rampage 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_war_makers.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/97.jpg|2
+End

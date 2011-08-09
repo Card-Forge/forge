@@ -1,0 +1,12 @@
+Name:Bloodthorn Taunter
+ManaCost:1 R
+Types:Creature Human Scout
+Text:no text
+PT:1/1
+K:Haste
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target creature with power 5 or greater | KW$ Haste | SpellDescription$ Target creature with power 5 or greater gains haste until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodthorn_taunter.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/94.jpg
+End

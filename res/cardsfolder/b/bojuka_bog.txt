@@ -1,0 +1,13 @@
+Name:Bojuka Bog
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target player's graveyard.
+SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bojuka_bog.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/267.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/132.jpg
+End

@@ -1,0 +1,18 @@
+Name:Bogardan Hellkite
+ManaCost:6 R R
+Types:Creature Dragon
+Text:no text
+PT:5/5
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Dmg1 | TriggerDescription$ Whenever CARDNAME enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or players.
+SVar:Dmg1:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ SVar=Dmg2
+SVar:Dmg2:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ SVar=Dmg3
+SVar:Dmg3:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ SVar=Dmg4
+SVar:Dmg4:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ SVar=Dmg5
+SVar:Dmg5:DB$DealDamage | Tgt$ TgtCP | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_hellkite.jpg
+SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/127.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/147.jpg
+End

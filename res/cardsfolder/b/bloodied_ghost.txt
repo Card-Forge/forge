@@ -1,0 +1,11 @@
+Name:Bloodied Ghost
+ManaCost:1 WB WB
+Types:Creature Spirit
+Text:no text
+PT:3/3
+K:Flying
+K:etbCounter:M1M1:1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodied_ghost.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/83.jpg
+End

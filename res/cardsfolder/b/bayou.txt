@@ -1,0 +1,11 @@
+Name:Bayou
+ManaCost:no cost
+Types:Land Swamp Forest
+Text:no text
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card280.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/278.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/279.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/283.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/279.jpg
+End

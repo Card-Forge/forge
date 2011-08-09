@@ -1,0 +1,11 @@
+Name:Belbe's Armor
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Pump | Cost$ X T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ +X | SpellDescription$ Target creature gets -X/+X until end of turn.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_armor.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/126.jpg
+End

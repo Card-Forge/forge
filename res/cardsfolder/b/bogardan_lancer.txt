@@ -1,0 +1,11 @@
+Name:Bogardan Lancer
+ManaCost:1 R
+Types:Creature Human Knight
+Text:no text
+PT:1/1
+K:Bloodthirst 1
+K:Flanking
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_lancer.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/95.jpg
+End

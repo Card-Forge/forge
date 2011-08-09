@@ -1,0 +1,14 @@
+Name:Bellowing Fiend
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME deals damage to a creature, CARDNAME deals 3 damage to that creature's controller and 3 damage to you.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | NumDmg$ 3 | SubAbility$ SVar=DBDealDamage
+SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_fiend.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/2.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/119.jpg
+End

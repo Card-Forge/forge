@@ -1,0 +1,11 @@
+Name:Brassclaw Orcs
+ManaCost:2 R
+Types:Creature Orc
+Text:CARDNAME can't block creatures with power 2 or greater.
+PT:3/2
+K:CantBlock Creature.powerGE2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brassclaw_orcs.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/213.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/100.jpg|4
+End

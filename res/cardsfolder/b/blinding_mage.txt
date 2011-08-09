@@ -1,0 +1,11 @@
+Name:Blinding Mage
+ManaCost:1 W
+Types:Creature Human Wizard
+Text:no text
+PT:1/2
+A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_mage.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/8.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/5.jpg
+End

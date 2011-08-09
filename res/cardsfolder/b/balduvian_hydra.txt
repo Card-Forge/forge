@@ -1,0 +1,14 @@
+Name:Balduvian Hydra
+ManaCost:X R R
+Types:Creature Hydra
+Text:no text
+PT:0/1
+K:etbCounter:P1P0:X
+A:AB$ PreventDamage | Cost$ SubCounter<1/P1P0> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
+A:AB$ PutCounter | Cost$ R R R | CounterType$ P1P0 | CounterNum$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put a +1/+0 counter on CARDNAME. Activate this ability only during your upkeep.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_hydra.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/173.jpg
+End

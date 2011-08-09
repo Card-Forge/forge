@@ -1,0 +1,11 @@
+Name:Blazing Blade Askari
+ManaCost:2 R
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Flanking
+A:AB$ Animate | Cost$ 2 | Defined$ Card.Self | Colors$ Colorless | SpellDescription$ CARDNAME becomes colorless until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_blade_askari.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/146.jpg
+End

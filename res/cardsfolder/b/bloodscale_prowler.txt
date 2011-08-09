@@ -1,0 +1,10 @@
+Name:Bloodscale Prowler
+ManaCost:2 R
+Types:Creature Viashino Warrior
+Text:no text
+PT:3/1
+K:Bloodthirst 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodscale_prowler.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/64.jpg
+End

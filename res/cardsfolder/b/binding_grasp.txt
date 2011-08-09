@@ -1,0 +1,14 @@
+Name:Binding Grasp
+ManaCost:3 U
+Types:Enchantment Aura
+Text:You control enchanted creature.
+K:Enchant creature
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 U
+A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 1 | Description$ Enchanted creature gets +0/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_grasp.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/74.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/60.jpg
+End

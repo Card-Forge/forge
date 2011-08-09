@@ -1,0 +1,13 @@
+Name:Battle Squadron
+ManaCost:3 R R
+Types:Creature Goblin
+Text:no text
+PT:*/*
+K:Flying
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_squadron.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/174.jpg
+End

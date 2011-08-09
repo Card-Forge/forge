@@ -1,0 +1,13 @@
+Name:Betrayal of Flesh
+ManaCost:5 B
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Choose one - | SpellDescription$ Destroy target creature;
+A:SP$ ChangeZone | Cost$ 5 B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ or return target creature card from your graveyard to the battlefield.
+A:SP$ Destroy | Cost$ 5 B Sac<3/Land>  | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ SVar=DBChange | PrecostDesc$ Entwine Sacrifice three lands | SpellDescription$ (Choose both if you pay the entwine cost.)
+SVar:DBChange:DB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/betrayal_of_flesh.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/58.jpg
+End

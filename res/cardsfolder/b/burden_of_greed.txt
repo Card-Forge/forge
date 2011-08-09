@@ -1,0 +1,11 @@
+Name:Burden of Greed
+ManaCost:3 B
+Types:Instant
+Text:no text
+A:SP$ LoseLife | Cost$ 3 B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player loses 1 life for each tapped artifact he or she controls.
+SVar:X:TargetedPlayer$Valid Artifact.tapped+YouCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burden_of_greed.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/38.jpg
+End

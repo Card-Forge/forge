@@ -1,0 +1,13 @@
+Name:Bloodhusk Ritualist
+ManaCost:2 B
+Types:Creature Vampire Shaman
+Text:no text
+PT:2/2
+K:Multikicker B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card for each time it was kicked.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ X | Mode$ TgtChoose
+SVar:X:Count$TimesKicked
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Bloodhusk_Ritualist.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/50.jpg
+End

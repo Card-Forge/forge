@@ -1,0 +1,13 @@
+Name:Bog Hoodlums
+ManaCost:5 B
+Types:Creature Goblin Warrior
+Text:no text
+PT:4/1
+K:CARDNAME can't block.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self |  Execute$ TrigClash | TriggerDescription$ When CARDNAME enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on CARDNAME.
+SVar:TrigClash:AB$Clash | Cost$ 0 | WinSubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_hoodlums.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/100.jpg
+End

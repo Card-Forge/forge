@@ -1,0 +1,12 @@
+Name:Barishi
+ManaCost:2 G G
+Types:Creature Elemental
+Text:no text
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExileandShuffle | TriggerZones$ Graveyard | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, exile CARDNAME, then shuffle all creature cards from your graveyard into your library.
+SVar:TrigExileandShuffle:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Exile | SubAbility$ SVar=DBShuffle
+SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barishi.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/61.jpg
+End

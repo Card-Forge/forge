@@ -1,0 +1,10 @@
+Name:Barbarian Lunatic
+ManaCost:2 R
+Types:Creature Human Barbarian
+Text:no text
+PT:2/1
+A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_lunatic.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/175.jpg
+End

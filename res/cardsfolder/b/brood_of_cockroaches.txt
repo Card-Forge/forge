@@ -1,0 +1,14 @@
+Name:Brood of Cockroaches
+ManaCost:1 B
+Types:Creature Insect
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | DelayedTrigger$ DelTrigLeaves | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return CARDNAME to your hand.
+SVar:DelTrigLeaves:Mode$ Phase | Phase$ End of Turn | Execute$ TrigChange | TriggerDescription$ Lose 1 life and return CARDNAME to your hand.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | SubAbility$ SVar=DBLoseLife
+SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1
+SVar:SacMe:1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_of_cockroaches.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/3.jpg
+End

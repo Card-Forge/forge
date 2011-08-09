@@ -1,0 +1,10 @@
+Name:Blockbuster
+ManaCost:3 R R
+Types:Enchantment
+Text:no text
+PT:6/6
+A:AB$ DamageAll | Cost$ 1 R Sac<1/CARDNAME> | ValidCards$ Creature.tapped | ValidPlayers$ Each | NumDmg$ 3 | ValidDescription$ each tapped creature and each player. | SpellDescription$ CARDNAME deals 3 damage to each tapped creature and each player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blockbuster.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/115.jpg
+End

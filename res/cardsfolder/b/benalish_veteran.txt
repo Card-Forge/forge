@@ -1,0 +1,11 @@
+Name:Benalish Veteran
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_veteran.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/10.jpg
+End

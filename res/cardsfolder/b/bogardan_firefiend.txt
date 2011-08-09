@@ -1,0 +1,12 @@
+Name:Bogardan Firefiend
+ManaCost:2 R
+Types:Creature Elemental Spirit
+Text:no text
+PT:2/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDamage | TriggerDescription$ When CARDNAME is put into the graveyard from the battlefield, it deals 2 damage to target creature.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_firefiend.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/91.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/193.jpg
+End

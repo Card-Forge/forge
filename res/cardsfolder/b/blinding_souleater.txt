@@ -1,0 +1,10 @@
+Name:Blinding Souleater
+ManaCost:3
+Types:Artifact Creature Cleric
+Text:no text
+PT:1/3
+A:AB$ Tap | Cost$ PW T | Tgt$ TgtC | SpellDescription$ Tap target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_souleater.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/131.jpg
+End

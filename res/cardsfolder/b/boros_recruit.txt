@@ -1,0 +1,10 @@
+Name:Boros Recruit
+ManaCost:RW
+Types:Creature Goblin Soldier
+Text:no text
+PT:1/1
+K:First Strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_recruit.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/243.jpg
+End

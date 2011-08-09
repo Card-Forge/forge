@@ -1,0 +1,17 @@
+Name:Brimstone Mage
+ManaCost:2 R
+Types:Creature Human Shaman
+Text:no text
+PT:2/2
+K:Level up:3 R
+K:maxLevel:3
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 3 | AddAbility$ Ping | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1+ 2/3 CARDNAME gets tap: CARDNAME deals 1 damage to target creature or player.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 4 | AddAbility$ Bolt | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 2/4 CARDNAME gets tap: CARDNAME deals 3 damage to target creature or player.
+SVar:Ping:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Bolt:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
+SVar:X:Count$Valid Card.Self+countersGE1LEVEL
+SVar:Y:Count$Valid Card.Self+countersGE3LEVEL
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brimstone_mage.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/137.jpg
+End

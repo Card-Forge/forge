@@ -1,0 +1,9 @@
+Name:Benevolent Unicorn
+ManaCost:1 W
+Types:Creature Unicorn
+Text:If a spell would deal damage to a creature or player, it deals that much damage minus 1 to that creature or player instead.
+PT:1/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/benevolent_unicorn.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/208.jpg
+End

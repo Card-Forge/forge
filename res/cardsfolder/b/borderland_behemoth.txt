@@ -1,0 +1,14 @@
+Name:Borderland Behemoth
+ManaCost:5 R R
+Types:Creature Giant Warrior
+Text:no text
+PT:4/4
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +4/+4 for each other Giant you control.
+SVar:X:Count$Valid Giant.Other+YouCtrl/Times.4
+SVar:RemRandomDeck:True
+SVar:BuffedBy:Giant
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/borderland_behemoth.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/87.jpg
+End

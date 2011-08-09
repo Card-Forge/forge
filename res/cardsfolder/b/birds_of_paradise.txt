@@ -1,0 +1,28 @@
+Name:Birds of Paradise
+ManaCost:G
+Types:Creature Bird
+Text:no text
+PT:0/1
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83688.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/233.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/153.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/95.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/94.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/231.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/142.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/118.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/252.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/165.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/168.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/217.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/165.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/95.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/95.jpg
+End

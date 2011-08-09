@@ -1,0 +1,11 @@
+Name:Bramblesnap
+ManaCost:1 G
+Types:Creature Elemental
+Text:no text
+PT:1/1
+K:Trample
+A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bramblesnap.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/180.jpg
+End

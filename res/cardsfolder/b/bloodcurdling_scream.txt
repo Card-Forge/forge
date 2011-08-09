@@ -1,0 +1,11 @@
+Name:Bloodcurdling Scream
+ManaCost:X B
+Types:Sorcery
+Text:no text
+A:SP$ Pump | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/3.jpg
+End

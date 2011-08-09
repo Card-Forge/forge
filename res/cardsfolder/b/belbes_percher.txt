@@ -1,0 +1,11 @@
+Name:Belbe's Percher
+ManaCost:2 B
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+K:CARDNAME can block only creatures with flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_percher.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/53.jpg
+End

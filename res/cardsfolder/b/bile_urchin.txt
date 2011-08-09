@@ -1,0 +1,11 @@
+Name:Bile Urchin
+ManaCost:B
+Types:Creature Spirit
+Text:no text
+PT:1/1
+A:AB$ LoseLife | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select a player to lose 1 life | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bile_urchin.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/61.jpg
+End

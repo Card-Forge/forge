@@ -1,0 +1,13 @@
+Name:Boartusk Liege
+ManaCost:1 RG RG RG
+Types:Creature Goblin Knight
+Text:no text
+PT:3/4
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.Red+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other red creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other green creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boartusk_liege.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/202.jpg
+End

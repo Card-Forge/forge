@@ -1,0 +1,12 @@
+Name:Betrayal
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature an opponent controls
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature.YouDontCtrl | AILogic$ Pump
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever enchanted creature becomes tapped, you draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/betrayal.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/26.jpg
+End

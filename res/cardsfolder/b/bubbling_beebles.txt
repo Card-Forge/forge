@@ -1,0 +1,11 @@
+Name:Bubbling Beebles
+ManaCost:4 U
+Types:Creature Beeble
+Text:no text
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ HIDDEN Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME is unblockable as long as defending player controls an enchantment.
+SVar:X:Count$Valid Enchantment.YouDontCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_beebles.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/29.jpg
+End

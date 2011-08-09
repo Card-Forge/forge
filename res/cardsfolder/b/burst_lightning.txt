@@ -1,0 +1,10 @@
+Name:Burst Lightning
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player. If CARDNAME was kicked, it deals 4 damage to that creature or player instead.
+A:SP$ DealDamage | Cost$ 4 R | Tgt$ TgtCP | NumDmg$ 4 | SpellDescription$ Kicker 4 (You may pay an additional 4 as you cast this spell.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_lightning.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/119.jpg
+End

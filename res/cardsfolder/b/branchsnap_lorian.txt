@@ -1,0 +1,11 @@
+Name:Branchsnap Lorian
+ManaCost:1 G G
+Types:Creature Beast
+Text:no text
+PT:4/1
+K:Trample
+K:Morph:G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/branchsnap_lorian.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/118.jpg
+End

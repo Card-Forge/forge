@@ -1,0 +1,12 @@
+Name:Bubbling Muck
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ Effect | Cost$ B | Name$ Bubbling Muck Effect | Triggers$ SwampTrigger | SVars$ TrigMana | SpellDescription$ Until end of turn, whenever a player taps a Swamp for mana, that player adds B to his or her mana pool (in addition to the mana the land produces).
+SVar:SwampTrigger:Mode$ TapsForMana | ValidCard$ Swamp | Execute$ TrigMana | TriggerDescription$ Whenever a player taps a Swamp for mana, that player adds B to his or her mana pool (in addition to the mana the land produces).
+SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ B | Amount$ 1 | Defined$ TriggeredPlayer
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_muck.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/54.jpg
+End

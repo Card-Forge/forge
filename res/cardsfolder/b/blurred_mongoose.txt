@@ -1,0 +1,11 @@
+Name:Blurred Mongoose
+ManaCost:1 G
+Types:Creature Mongoose
+Text:no text
+PT:2/1
+K:CARDNAME can't be countered.
+K:Shroud
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blurred_mongoose.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/183.jpg
+End

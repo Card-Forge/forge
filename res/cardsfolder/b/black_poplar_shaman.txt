@@ -1,0 +1,10 @@
+Name:Black Poplar Shaman
+ManaCost:2 B
+Types:Creature Treefolk Shaman
+Text:no text
+PT:1/3
+A:AB$ Regenerate | ValidTgts$ Creature.Treefolk | TgtPrompt$ Select target Treefolk. | Cost$ 2 B | SpellDescription$ Regenerate target Treefolk.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/black_poplar_shaman.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/99.jpg
+End

@@ -1,0 +1,14 @@
+Name:Brass Man
+ManaCost:1
+Types:Artifact Creature Construct
+Text:no text
+PT:1/3
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may pay 1. If you do, untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ 1 | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_man.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/238.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/320.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/73.jpg
+End

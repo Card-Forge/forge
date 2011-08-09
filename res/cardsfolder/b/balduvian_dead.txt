@@ -1,0 +1,10 @@
+Name:Balduvian Dead
+ManaCost:3 B
+Types:Creature Zombie
+Text:no text
+PT:2/3
+A:AB$ Token | Cost$ 2 R ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$ Graveborn | TokenTypes$ Creature,Graveborn | TokenOwner$ You | TokenColors$ Black,Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste<>At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Put a 3/1 black and red Graveborn creature token with haste onto the battlefield. Sacrifice it at the beginning of the next end step.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_dead.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/93.jpg
+End

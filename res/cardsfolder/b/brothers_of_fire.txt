@@ -1,0 +1,13 @@
+Name:Brothers of Fire
+ManaCost:1 R R
+Types:Creature Human Shaman
+Text:no text
+PT:2/2
+A:AB$ DealDamage | Cost$ 1 R R | Tgt$ TgtCP | NumDmg$ 1 | SubAbility$ SVar=DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to target creature or player and 1 damage to you.
+SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brothers_of_fire.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/214.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/58.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/197.jpg
+End

@@ -1,0 +1,14 @@
+Name:Bladewing the Risen
+ManaCost:3 B B R R
+Types:Legendary Creature Zombie Dragon
+Text:no text
+PT:4/4
+K:Flying
+A:AB$ PumpAll | Cost$ B R | ValidCards$ Creature.Dragon | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Dragon creatures get +1/+1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target Dragon permanent card from your graveyard to the battlefield.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.Dragon+YouOwn | TgtPrompt$ Choose target Dragon permanent in your graveyard.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bladewing_the_risen.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/136.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/185.jpg
+End

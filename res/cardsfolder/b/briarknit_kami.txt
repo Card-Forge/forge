@@ -1,0 +1,13 @@
+Name:Briarknit Kami
+ManaCost:3 G G
+Types:Creature Spirit
+Text:no text
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You  | TriggerZones$ Battlefield  | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Arcane,Spirit
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/briarknit_kami.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/124.jpg
+End

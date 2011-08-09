@@ -1,0 +1,12 @@
+Name:Blinkmoth Infusion
+ManaCost:12 U U
+Types:Instant
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+A:SP$ UntapAll | Cost$ 12 U U | ValidCards$ Artifact | SpellDescription$ Untap all artifacts.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/25.jpg
+End

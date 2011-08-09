@@ -1,0 +1,12 @@
+Name:Beasts of Bogardan
+ManaCost:4 R
+Types:Creature Beast
+Text:no text
+PT:3/3
+K:Protection from red
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as an opponent controls a white permanent.
+SVar:X:Count$Valid Permanent.White+YouDontCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beasts_of_bogardan.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/133.jpg
+End

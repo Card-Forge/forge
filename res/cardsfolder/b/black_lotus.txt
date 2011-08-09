@@ -1,0 +1,16 @@
+Name:Black Lotus
+ManaCost:0
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W | Amount$ 3 | SpellDescription$ Add W W W to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ U | Amount$ 3 | SpellDescription$ Add U U U to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B | Amount$ 3 | SpellDescription$ Add B B B to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G | Amount$ 3 | SpellDescription$ Add G G G to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/black_lotus.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/232.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/234.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/233.jpg
+End

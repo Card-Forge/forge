@@ -1,0 +1,10 @@
+Name:Bloodrage Vampire
+ManaCost:2 B
+Types:Creature Vampire
+Text:no text
+PT:3/1
+K:Bloodthirst 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrage_vampire.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/83.jpg
+End

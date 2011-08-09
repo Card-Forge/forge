@@ -1,0 +1,11 @@
+Name:Boggart Forager
+ManaCost:R
+Types:Creature Goblin Rogue
+Text:no text
+PT:1/1
+A:AB$ Shuffle | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles his or her library.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_forager.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/154.jpg
+End

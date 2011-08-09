@@ -1,0 +1,12 @@
+Name:Bequeathal
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigDraw | TriggerDescription$ When enchanted creature is put into a graveyard, draw two cards.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bequeathal.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/106.jpg
+End

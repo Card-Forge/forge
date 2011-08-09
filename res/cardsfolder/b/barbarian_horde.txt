@@ -1,0 +1,9 @@
+Name:Barbarian Horde
+ManaCost:3 R
+Types:Creature Human Barbarian Soldier
+Text:no text
+PT:3/3
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10578.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/101.jpg
+End

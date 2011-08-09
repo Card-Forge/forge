@@ -1,0 +1,12 @@
+Name:Balduvian Rage
+ManaCost:X R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ X R | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +X | SpellDescription$ Target attacking creature gets +X/+0 until end of turn. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_rage.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/76.jpg
+End

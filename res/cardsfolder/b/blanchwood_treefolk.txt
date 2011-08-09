@@ -1,0 +1,9 @@
+Name:Blanchwood Treefolk
+ManaCost:4 G
+Types:Creature Treefolk
+Text:no text
+PT:4/5
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5747.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/238.jpg
+End

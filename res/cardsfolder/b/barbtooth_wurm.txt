@@ -1,0 +1,10 @@
+Name:Barbtooth Wurm
+ManaCost:5 G
+Types:Creature Wurm
+Text:no text
+PT:6/4
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21077.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/62.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/125.jpg
+End

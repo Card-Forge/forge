@@ -1,0 +1,11 @@
+Name:Borrowing the East Wind
+ManaCost:X G G
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ X G G | ValidCards$ Creature.withHorsemanship | ValidPlayers$ Each | NumDmg$ X | ValidDescription$ each creature with horsemanship and each player. | SpellDescription$ CARDNAME deals X damage to each creature with horsemanship and each player.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/borrowing_the_east_wind.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/133.jpg
+End

@@ -1,0 +1,10 @@
+Name:Boros Swiftblade
+ManaCost:R W
+Types:Creature Human Soldier
+Text:no text
+PT:1/2
+K:Double Strike
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_swiftblade.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/193.jpg
+End

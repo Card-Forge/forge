@@ -1,0 +1,11 @@
+Name:Bounty Hunter
+ManaCost:2 B B
+Types:Creature Human Archer Minion
+Text:no text
+PT:2/2
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | CounterType$ BOUNTY | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a bounty counter on target nonblack creature.
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.countersGE1BOUNTY | TgtPrompt$ Select target creature with a bounty counter on it | SpellDescription$ Destroy target creature with a bounty counter on it.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bounty_hunter.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/4.jpg
+End

@@ -1,0 +1,9 @@
+Name:Blessed Wind
+ManaCost:7 W W
+Types:Sorcery
+Text:no text
+A:SP$ SetLife | Cost$ 7 W W | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 20 | SpellDescription$ Target player's life total becomes 20.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_wind.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/4.jpg
+End

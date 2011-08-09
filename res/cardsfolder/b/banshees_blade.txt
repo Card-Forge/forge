@@ -1,0 +1,13 @@
+Name:Banshee's Blade
+ManaCost:2
+Types:Artifact Equipment
+Text:no text
+K:eqPump 2:+0/+0
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player,Creature,Planeswalker | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage, put a charge counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
+SVar:X:Count$CardCounters.CHARGE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/banshees_blade.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/144.jpg
+End

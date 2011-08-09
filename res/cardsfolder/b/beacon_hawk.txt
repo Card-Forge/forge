@@ -1,0 +1,13 @@
+Name:Beacon Hawk
+ManaCost:1 W
+Types:Creature Bird
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigUntap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may untap target creature.
+A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | ValidTgts$ Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_hawk.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/3.jpg
+End

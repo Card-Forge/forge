@@ -1,0 +1,12 @@
+Name:Barren Moor
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+K:Cycling:B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_moor.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/312.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/266.jpg
+End

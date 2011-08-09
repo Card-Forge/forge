@@ -1,0 +1,14 @@
+Name:Bane of the Living
+ManaCost:2 B B
+Types:Creature Insect
+Text:no text
+PT:4/3
+K:Morph:X B B
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME is turned face up, all creatures get -X/-X until end of turn.
+SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bane_of_the_living.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/60.jpg
+End

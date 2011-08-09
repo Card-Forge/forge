@@ -1,0 +1,13 @@
+Name:Blessed Reversal
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ GainLife | Cost$ 1 W | LifeAmount$ X | SpellDescription$ You gain 3 life for each creature attacking you.
+SVar:X:Count$Valid Creature.attacking+YouDontCtrl/Times.3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_reversal.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/7.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/169.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/2.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/3.jpg
+End

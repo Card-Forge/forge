@@ -1,0 +1,13 @@
+Name:Bog Gnarr
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player casts a black spell, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:BuffedBy:Card.Black
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_gnarr.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/76.jpg
+End

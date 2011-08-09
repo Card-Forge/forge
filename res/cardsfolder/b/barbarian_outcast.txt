@@ -1,0 +1,13 @@
+Name:Barbarian Outcast
+ManaCost:1 R
+Types:Creature Human Barbarian Beast
+Text:no text
+PT:2/2
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Swamp.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Swamps, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:NeedsToPlay:Swamp.YouCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_outcast.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/92.jpg
+End

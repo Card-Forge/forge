@@ -1,0 +1,16 @@
+Name:Burrowing
+ManaCost:R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Mountainwalk | Description$ Enchanted creature has mountainwalk.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burrowing.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/139.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/140.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/198.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/170.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/139.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/139.jpg
+End

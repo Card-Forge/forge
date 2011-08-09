@@ -1,0 +1,11 @@
+Name:Blood Ogre
+ManaCost:2 R
+Types:Creature Ogre Warrior
+Text:no text
+PT:2/2
+K:Bloodthirst 1
+K:First Strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_ogre.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/122.jpg
+End
