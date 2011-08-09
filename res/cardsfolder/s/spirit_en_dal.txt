@@ -1,0 +1,11 @@
+Name:Spirit en-Dal
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:2/1
+K:Shadow
+A:AB$ Pump | Cost$ 1 W | ActivationZone$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shadow | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | SpellDescription$ Target creature gains shadow until end of turn. (Activate this ability only during your upkeep and only once each turn.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_en_dal.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/17.jpg
+End

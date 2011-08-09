@@ -1,0 +1,13 @@
+Name:Smoldering Spires
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature can't block this turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block | TgtPrompt$ Select target creature.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Smoldering_Spires.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/143.jpg
+End

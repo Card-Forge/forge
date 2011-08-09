@@ -1,0 +1,12 @@
+Name:Shepherd of the Lost
+ManaCost:4 W
+Types:Creature Angel
+Text:no text
+PT:3/3
+K:Flying
+K:First Strike
+K:Vigilance
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shepherd_of_the_lost.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/34.jpg
+End

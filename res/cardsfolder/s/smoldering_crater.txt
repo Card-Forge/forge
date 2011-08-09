@@ -1,0 +1,11 @@
+Name:Smoldering Crater
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+K:Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_crater.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/328.jpg
+End

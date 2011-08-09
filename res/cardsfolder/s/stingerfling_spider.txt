@@ -1,0 +1,12 @@
+Name:Stingerfling Spider
+ManaCost:4 G
+Types:Creature Spider
+Text:no text
+PT:2/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target creature with flying.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying.
+K:Reach
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stingerfling_spider.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/197.jpg
+End

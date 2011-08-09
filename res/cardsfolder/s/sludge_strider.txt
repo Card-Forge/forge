@@ -1,0 +1,13 @@
+Name:Sludge Strider
+ManaCost:1 W U B
+Types:Artifact Creature Insect
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigLoseLife | TriggerDescription$ Whenever another artifact enters the battlefield under your control or another artifact you control leaves the battlefield, you may pay 1. If you do, target player loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever another artifact enters the battlefield under your control or another artifact you control leaves the battlefield, you may pay 1. If you do, target player loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ SVar=DBGainLife
+SVar:DBGainLife:DB$GainLife | Cost$ 0 | LifeAmount$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sludge_strider.jpg
+SVar:Rarity:Uncommon
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/126.jpg
+End

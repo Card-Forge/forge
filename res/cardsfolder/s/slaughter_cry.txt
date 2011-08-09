@@ -1,0 +1,10 @@
+Name:Slaughter Cry
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ First Strike | SpellDescription$ Target creature gets +3/+0 and gains first strike until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter_cry.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/155.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/149.jpg
+End

@@ -1,0 +1,11 @@
+Name:Spiritual Guardian
+ManaCost:3 W W
+Types:Creature Spirit
+Text:no text
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_guardian.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/189.jpg
+End

@@ -1,0 +1,12 @@
+Name:Subterranean Spirit
+ManaCost:3 R R
+Types:Creature Elemental
+Text:no text
+PT:3/3
+K:Protection from red
+A:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature and without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/subterranean_spirit.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/195.jpg
+End

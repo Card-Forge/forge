@@ -1,0 +1,11 @@
+Name:Syphon Life
+ManaCost:1 B B
+Types:Sorcery
+Text:no text
+A:SP$ LoseLife | Cost$ 1 B B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ SVar=DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
+A:SP$ LoseLife | Cost$ 1 B B Discard<1/Land> | ActivationZone$ Graveyard | CostDesc$ Retrace | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ SVar=DBGainLife | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_life.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/46.jpg
+End

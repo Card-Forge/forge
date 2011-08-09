@@ -1,0 +1,13 @@
+Name:Storm Cauldron
+ManaCost:5
+Types:Artifact
+Text:Each player may play an additional land during each of his or her turns.
+T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever a land is tapped for mana, return it to its owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredCard
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_cauldron.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/314.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/179.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/320.jpg
+End

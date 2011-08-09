@@ -1,0 +1,11 @@
+Name:Sootfeather Flock
+ManaCost:4 B
+Types:Creature Bird
+Text:no text
+PT:3/2
+K:Flying
+K:Morph:3 B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sootfeather_flock.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/82.jpg
+End

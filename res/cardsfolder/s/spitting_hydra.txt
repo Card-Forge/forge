@@ -1,0 +1,11 @@
+Name:Spitting Hydra
+ManaCost:3 R R
+Types:Creature Hydra
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:4
+A:AB$ DealDamage | Cost$ 1 R SubCounter<1/P1P1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$CARDNAME deals 1 damage to target creature.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_hydra.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/99.jpg
+End

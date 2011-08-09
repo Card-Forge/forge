@@ -1,0 +1,15 @@
+Name:Sunweb
+ManaCost:3 W
+Types:Creature Wall
+Text:CARDNAME can't block creatures with power 2 or less.
+PT:5/6
+K:Flying
+K:Defender
+K:CantBlock Creature.powerLE2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunweb.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/52.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/46.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/246.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/51.jpg
+End

@@ -1,0 +1,12 @@
+Name:Sulfur Elemental
+ManaCost:2 R
+Types:Creature Elemental
+Text:no text
+PT:3/2
+K:Flash
+K:Split second
+S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ -1 | Description$ White creatures get +1/-1.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_elemental.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/108.jpg
+End

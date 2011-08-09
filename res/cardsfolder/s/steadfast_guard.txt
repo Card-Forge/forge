@@ -1,0 +1,11 @@
+Name:Steadfast Guard
+ManaCost:W W
+Types:Creature Human Rebel
+Text:no text
+PT:2/2
+K:Vigilance
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card132111.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/50.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/48.jpg
+End

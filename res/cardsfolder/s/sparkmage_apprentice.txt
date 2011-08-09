@@ -1,0 +1,12 @@
+Name:Sparkmage Apprentice
+ManaCost:1 R
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target creature or player. 
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sparkmage_apprentice.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/144.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/158.jpg
+End

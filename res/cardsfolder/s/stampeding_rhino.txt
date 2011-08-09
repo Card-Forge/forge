@@ -1,0 +1,11 @@
+Name:Stampeding Rhino
+ManaCost:4 G
+Types:Creature Rhino
+Text:no text
+PT:4/4
+K:Trample
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_rhino.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/204.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/196.jpg
+End

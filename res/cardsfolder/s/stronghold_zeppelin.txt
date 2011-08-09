@@ -1,0 +1,11 @@
+Name:Stronghold Zeppelin
+ManaCost:2 U U
+Types:Creature Human
+Text:no text
+PT:3/3
+K:Flying
+K:CARDNAME can block only creatures with flying.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_zeppelin.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/47.jpg
+End

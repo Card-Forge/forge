@@ -1,0 +1,12 @@
+Name:Shadow Lance
+ManaCost:W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
+A:AB$ Pump | Cost$ 1 B | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Enchanted creature gets +2/+2 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_lance.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/14.jpg
+End

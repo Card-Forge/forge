@@ -1,0 +1,11 @@
+Name:Sejiri Merfolk
+ManaCost:1 U
+Types:Creature Merfolk Soldier
+Text:no text
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike & Lifelink | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Plains, CARDNAME has first strike and lifelink.
+SVar:X:Count$Valid Plains.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/36.jpg
+End

@@ -1,0 +1,11 @@
+Name:Suntouched Myr
+ManaCost:3
+Types:Artifact Creature Myr
+Text:no text
+PT:0/0
+K:Sunburst
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/suntouched_myr.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/160.jpg
+End

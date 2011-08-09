@@ -1,0 +1,13 @@
+Name:Sylvan Basilisk
+ManaCost:3 G G
+Types:Creature Basilisk
+Text:no text
+PT:2/4
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDestroyBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, destroy that creature.
+SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_basilisk.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/86.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/145.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/301.jpg
+End

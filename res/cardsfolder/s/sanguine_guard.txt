@@ -1,0 +1,11 @@
+Name:Sanguine Guard
+ManaCost:1 B B
+Types:Creature Zombie Knight
+Text:no text
+PT:2/2
+K:First Strike
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_guard.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/155.jpg
+End

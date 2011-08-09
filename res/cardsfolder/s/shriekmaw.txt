@@ -1,0 +1,16 @@
+Name:Shriekmaw
+ManaCost:4 B
+Types:Creature Elemental
+Text:no text
+PT:3/2
+K:Fear
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonartifact, nonblack creature.
+K:Evoke:1 B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/100.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/139.jpg
+End

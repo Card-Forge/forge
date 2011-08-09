@@ -1,0 +1,9 @@
+Name:Straw Soldiers
+ManaCost:1 U
+Types:Creature Scarecrow Soldier
+Text:no text
+PT:1/3
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10613.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/54.jpg
+End

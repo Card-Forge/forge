@@ -1,0 +1,11 @@
+Name:Sovereigns of Lost Alara
+ManaCost:4 W U
+Types:Creature Spirit
+Text:Whenever a creature you control attacks alone, you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle your library.
+PT:4/5
+K:Exalted
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sovereigns_of_lost_alara.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/12.jpg
+End

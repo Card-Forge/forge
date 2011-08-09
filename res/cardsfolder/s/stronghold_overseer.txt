@@ -1,0 +1,14 @@
+Name:Stronghold Overseer
+ManaCost:3 B B B
+Types:Creature Demon
+Text:no text
+PT:5/5
+K:Flying
+K:Shadow
+A:AB$ PumpAll | Cost$ B B | ValidCards$ Creature.withShadow | NumAtt$ +1 | SubAbility$ DBPumpAll | SpellDescription$ Creatures with shadow get +1/+0 until end of turn and creatures without shadow get -1/-0 until end of turn.
+SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.withoutShadow | NumAtt$ -1
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_overseer.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/133.jpg
+End

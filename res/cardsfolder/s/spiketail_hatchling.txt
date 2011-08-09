@@ -1,0 +1,14 @@
+Name:Spiketail Hatchling
+ManaCost:1 U
+Types:Creature Drake
+Text:no text
+PT:1/1
+K:Flying
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spiketail_hatchling.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/102.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/49.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/111.jpg
+End

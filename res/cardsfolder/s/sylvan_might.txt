@@ -1,0 +1,10 @@
+Name:Sylvan Might
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
+A:SP$ Pump | Cost$ 2 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | Flashback$ True | CostDesc$ Flashback 2 G G | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_might.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/277.jpg
+End

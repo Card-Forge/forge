@@ -1,0 +1,10 @@
+Name:Sigil Blessing
+ManaCost:W G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ W G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +2 | SubAbility$ SVar=DBPumpAll | SpellDescription$ Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
+SVar:DBPumpAll:DB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_blessing.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/195.jpg
+End

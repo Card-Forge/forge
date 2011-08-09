@@ -1,0 +1,12 @@
+Name:Silent-Chant Zubera
+ManaCost:1 W
+Types:Creature Zubera Spirit
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you gain 2 life for each Zubera put into a graveyard from the battlefield this turn.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Card.Zubera/Double
+PT:1/2
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80510.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/45.jpg
+End

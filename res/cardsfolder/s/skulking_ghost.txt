@@ -1,0 +1,13 @@
+Name:Skulking Ghost
+ManaCost:1 B
+Types:Creature Ghost
+Text:no text
+PT:2/1
+K:Flying
+T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skulking_ghost.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/41.jpg
+End

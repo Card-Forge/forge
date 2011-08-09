@@ -1,0 +1,13 @@
+Name:Skull Collector
+ManaCost:1 B B
+Types:Creature Ogre Warrior
+Text:no text
+PT:3/3
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a black creature you control to its owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target black creature | Mandatory$ True | ValidTgts$ Creature.Black+YouCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_collector.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/90.jpg
+End

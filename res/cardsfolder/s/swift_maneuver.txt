@@ -1,0 +1,10 @@
+Name:Swift Maneuver
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ PreventDamage | Cost$ 1 W | Tgt$ TgtCP | Amount$ 2 | SubAbility$ SVar=DBDraw | SpellDescription$ Prevent the next 2 damage that would be dealt to target creature or player this turn. Draw a card at the beginning of the next turn's upkeep.
+SVar:DBDraw:DB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_maneuver.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/21.jpg
+End

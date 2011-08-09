@@ -1,0 +1,13 @@
+Name:Savage Twister
+ManaCost:X R G
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ X R G | ValidCards$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_twister.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/127.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/340.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/222.jpg
+End

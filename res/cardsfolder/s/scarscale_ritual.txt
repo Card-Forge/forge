@@ -1,0 +1,11 @@
+Name:Scarscale Ritual
+ManaCost:1 UB
+Types:Sorcery
+Text:no text
+A:SP$ PutCounter | Cost$ 1 UB | CounterType$ M1M1 | CounterNum$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ SVar=DBDraw | SpellDescription$ As an additional cost to cast CARDNAME, put a -1/-1 counter on a creature you control. Draw two cards.
+SVar:DBDraw:DB$Draw | NumCards$ 2
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scarscale_ritual.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/175.jpg
+End

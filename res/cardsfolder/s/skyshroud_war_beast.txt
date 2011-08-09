@@ -1,0 +1,13 @@
+Name:Skyshroud War Beast
+ManaCost:1 G
+Types:Creature Beast
+Text:no text
+PT:*/*
+K:Trample
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic lands your opponent controls.
+SVar:X:Count$Valid Land.nonBasic+YouDontCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_war_beast.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/124.jpg
+End

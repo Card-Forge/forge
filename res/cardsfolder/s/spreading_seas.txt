@@ -1,0 +1,11 @@
+Name:Spreading Seas
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted land is an Island.
+K:Enchant land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_seas.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/70.jpg
+End

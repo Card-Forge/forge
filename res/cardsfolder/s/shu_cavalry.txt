@@ -1,0 +1,10 @@
+Name:Shu Cavalry
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:Horsemanship
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_cavalry.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/19.jpg
+End

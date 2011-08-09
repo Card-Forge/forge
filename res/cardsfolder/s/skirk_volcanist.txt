@@ -1,0 +1,15 @@
+Name:Skirk Volcanist
+ManaCost:3 R
+Types:Creature Goblin
+Text:no text
+PT:3/1
+K:Morph:Sac<2/Mountain>
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | NumDmg$ 1 | SubAbility$ SVar=DBDamage2
+SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ target creature (2) | NumDmg$ 1 | SubAbility$ SVar=DBDamage3
+SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ target creature (3) | NumDmg$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_volcanist.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/104.jpg
+End

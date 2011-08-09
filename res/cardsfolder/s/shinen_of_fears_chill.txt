@@ -1,0 +1,11 @@
+Name:Shinen of Fear's Chill
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:3/2
+K:CARDNAME can't block.
+A:AB$ Pump | Cost$ 1 B Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Channel - | KW$ HIDDEN CARDNAME can't block. | ActivationZone$ Hand | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shinen_of_fears_chill.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/88.jpg
+End

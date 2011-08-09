@@ -1,0 +1,13 @@
+Name:Serendib Efreet
+ManaCost:2 U
+Types:Creature Efreet
+Text:no text
+PT:3/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card939.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/79.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/26.jpg
+End

@@ -1,0 +1,13 @@
+Name:Soulless One
+ManaCost:3 B
+Types:Creature Zombie Avatar
+Text:no text
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.
+SVar:X:Count$TypeOnBattlefield.Zombie/Plus.Y
+SVar:Y:Count$TypeInAllYards.Zombie
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulless_one.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/171.jpg
+End

@@ -1,0 +1,12 @@
+Name:Sewerdreg
+ManaCost:3 B B
+Types:Creature Spirit
+Text:no text
+PT:3/3
+K:Swampwalk
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sewerdreg.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/104.jpg
+End

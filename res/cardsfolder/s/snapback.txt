@@ -1,0 +1,10 @@
+Name:Snapback
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+A:SP$ ChangeZone | Cost$ ExileFromHand<1/Card.Blue> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | CostDesc$ You may exile a blue card from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snapback.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/78.jpg
+End

@@ -1,0 +1,11 @@
+Name:Street Wraith
+ManaCost:3 B B
+Types:Creature Wraith
+Text:no text
+PT:3/4
+K:Swampwalk
+K:Cycling:PayLife<2>
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/street_wraith.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/90.jpg
+End

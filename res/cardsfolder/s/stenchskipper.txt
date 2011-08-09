@@ -1,0 +1,13 @@
+Name:Stenchskipper
+ManaCost:3 B
+Types:Creature Elemental
+Text:no text
+PT:6/5
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Goblin.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no Goblins, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemRandomDeck:True
+SVar:NeedsToPlay:Goblin.YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stenchskipper.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/79.jpg
+End

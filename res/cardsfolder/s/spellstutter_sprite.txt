@@ -1,0 +1,14 @@
+Name:Spellstutter Sprite
+ManaCost:1 U
+Types:Creature Faerie Wizard
+Text:no text
+PT:1/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target spell with converted mana cost X or less, where X is the number of Faeries you control.
+SVar:TrigCounter:DB$Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card.cmcLEX | TgtPrompt$ Select target spell with CMC less than or equal to the number of Faeries you control
+SVar:X:Count$Valid Faerie.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spellstutter_sprite.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/89.jpg
+End

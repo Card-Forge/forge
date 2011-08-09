@@ -1,0 +1,11 @@
+Name:Sustaining Spirit
+ManaCost:1 W
+Types:Creature Angel Spirit
+Text:no text
+PT:0/3
+K:Cumulative upkeep:1 W
+K:Damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sustaining_spirit.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/151.jpg
+End

@@ -1,0 +1,12 @@
+Name:Stronghold Assassin
+ManaCost:1 B B
+Types:Creature Zombie Assassin
+Text:no text
+PT:2/1
+A:AB$ Destroy | Cost$ T Sac<1/Creature> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_assassin.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/21.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/166.jpg
+End

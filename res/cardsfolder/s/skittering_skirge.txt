@@ -1,0 +1,13 @@
+Name:Skittering Skirge
+ManaCost:B B
+Types:Creature Imp
+Text:no text
+PT:3/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.
+SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_skirge.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/158.jpg
+End

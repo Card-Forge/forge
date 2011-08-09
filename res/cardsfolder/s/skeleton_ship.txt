@@ -1,0 +1,13 @@
+Name:Skeleton Ship
+ManaCost:3 U B
+Types:Legendary Creature Skeleton
+Text:no text
+PT:0/3
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+A:AB$ PutCounter | Cost$ T | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature.
+SVar:NeedsToPlay:Island.YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skeleton_ship.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/379.jpg
+End

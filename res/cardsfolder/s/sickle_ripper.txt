@@ -1,0 +1,10 @@
+Name:Sickle Ripper
+ManaCost:1 B
+Types:Creature Elemental Warrior
+Text:no text
+PT:2/1
+K:Wither
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sickle_ripper.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/77.jpg
+End

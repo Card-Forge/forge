@@ -1,0 +1,15 @@
+Name:Sturdy Hatchling
+ManaCost:3 GU
+Types:Creature Elemental
+Text:
+PT:6/6
+K:etbCounter:M1M1:4
+A:AB$ Pump | Cost$ GU | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a green spell, remove a -1/-1 counter from CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a blue spell, remove a -1/-1 counter from CARDNAME.
+SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+SVar:BuffedBy:Card.Blue,Card.Green
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sturdy_hatchling.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/163.jpg
+End

@@ -1,0 +1,14 @@
+Name:Stampeding Wildebeests
+ManaCost:2 G G
+Types:Creature Antelope Beast
+Text:no text
+PT:5/4
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return a green creature you control to its owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ChangeType$ Creature.Green+YouCtrl | ChangeNum$ 1 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_wildebeests.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/71.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/300.jpg
+End

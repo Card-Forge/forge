@@ -1,0 +1,13 @@
+Name:Sunpetal Grove
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/228.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/228.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/229.jpg
+End

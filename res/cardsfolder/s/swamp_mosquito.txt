@@ -1,0 +1,13 @@
+Name:Swamp Mosquito
+ManaCost:1 B
+Types:Creature Insect
+Text:no text
+PT:0/1
+K:Flying
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
+SVar:TrigPoison:AB$Poison | Cost$ 0 | Defined$ Opponent | Num$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swamp_mosquito.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/30.jpg|2
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/49.jpg
+End

@@ -1,0 +1,10 @@
+Name:Skyshroud Troll
+ManaCost:2 G G
+Types:Creature Troll Giant
+Text:no text
+PT:3/3
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_troll.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/151.jpg
+End

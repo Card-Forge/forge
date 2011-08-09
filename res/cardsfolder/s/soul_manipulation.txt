@@ -1,0 +1,13 @@
+Name:Soul Manipulation
+ManaCost:1 U B
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Choose one - counter target creature spell;
+A:SP$ ChangeZone | Cost$ 1 U B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ or return target creature card from your graveyard to your hand;
+A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ SVar=DBChangeZone | SpellDescription$ or counter target creature spell and return target creature card from your graveyard to your hand.
+SVar:DBChangeZone:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_manipulation.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/29.jpg
+End

@@ -1,0 +1,11 @@
+Name:Songstitcher
+ManaCost:W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.attacking+withFlying | TgtPrompt$ Select target attacking creature with flying | IsCurse$ True | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Target attacking creature with flying deals no combat damage this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/songstitcher.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/52.jpg
+End

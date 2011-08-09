@@ -1,0 +1,10 @@
+Name:Squelch
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 1 U | TgtPrompt$ Select target Activated Ability | ValidTgts$ Card | TargetType$ Activated | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target activated ability. Draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squelch.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/92.jpg
+End

@@ -1,0 +1,10 @@
+Name:Shivan Meteor
+ManaCost:3 R R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 13 | SpellDescription$ CARDNAME deals 13 damage to target creature.
+K:Suspend:2:1 R R
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_meteor.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/106.jpg
+End

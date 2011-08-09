@@ -1,0 +1,10 @@
+Name:Skulltap
+ManaCost:1 B
+Types:Instant
+Text:no text
+A:SP$ Draw | Cost$ 1 B Sac<1/Creature> | NumCards$ 2 | SpellDescription$ Draw two cards.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skulltap.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/73.jpg
+End

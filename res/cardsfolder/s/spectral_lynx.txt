@@ -1,0 +1,11 @@
+Name:Spectral Lynx
+ManaCost:1 W
+Types:Creature Cat Spirit
+Text:no text
+PT:2/1
+K:Protection from green
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_lynx.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/17.jpg
+End

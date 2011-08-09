@@ -1,0 +1,14 @@
+Name:Slithermuse
+ManaCost:2 U U
+Types:Creature Elemental
+Text:no text
+PT:3/3
+K:Evoke:3 U
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ X | Defined$ You | IsPresent$ Card.YouDontCtrl | PresentCompare$ GTY | PresentZone$ Hand
+SVar:Y:Count$InYourHand
+SVar:X:Count$InOppHand/Minus.Y
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slithermuse.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/50.jpg
+End

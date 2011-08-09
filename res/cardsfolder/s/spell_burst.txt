@@ -1,0 +1,12 @@
+Name:Spell Burst
+ManaCost:X U
+Types:Instant
+Text:no text
+A:SP$Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell with converted mana cost X.
+SVar:X:Targeted$CardManaCost
+SVar:Buyback:3
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_burst.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/79.jpg
+End

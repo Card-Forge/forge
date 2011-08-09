@@ -1,0 +1,12 @@
+Name:Shinewend
+ManaCost:1 W
+Types:Creature Elemental
+Text:no text
+PT:0/0
+K:Flying
+K:etbCounter:P1P1:1
+A:AB$ Destroy | Cost$ 1 W SubCounter<1/P1P1> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shinewend.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/23.jpg
+End

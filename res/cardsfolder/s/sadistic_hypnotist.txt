@@ -1,0 +1,10 @@
+Name:Sadistic Hypnotist
+ManaCost:3 B B
+Types:Creature Human Minion
+Text:no text
+PT:2/2
+A:AB$ Discard | Cost$ Sac<1/Creature> | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards two cards. Activate this ability only any time you could cast a sorcery.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_hypnotist.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/159.jpg
+End

@@ -1,0 +1,10 @@
+Name:Scrap
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+K:Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scrap.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/213.jpg
+End

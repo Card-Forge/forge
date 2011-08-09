@@ -1,0 +1,13 @@
+Name:Stalking Vengeance
+ManaCost:5 R R
+Types:Creature Avatar
+Text:no text
+PT:5/5
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature you control is put into a graveyard from the battlefield, it deals damage equal to its power to target player.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X
+SVar:X:TriggeredCard$CardPower
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_vengeance.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/73.jpg
+End

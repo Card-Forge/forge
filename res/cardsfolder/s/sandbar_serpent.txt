@@ -1,0 +1,10 @@
+Name:Sandbar Serpent
+ManaCost:4 U
+Types:Creature Serpent
+Text:no text
+PT:3/4
+K:Cycling:2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sandbar_serpent.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/95.jpg
+End

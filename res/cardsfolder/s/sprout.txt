@@ -1,0 +1,9 @@
+Name:Sprout
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/221.jpg
+End

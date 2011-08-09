@@ -1,0 +1,11 @@
+Name:Skarrgan Pit-Skulk
+ManaCost:G
+Types:Creature Human Warrior
+Text:no text
+PT:1/1
+K:Bloodthirst 1
+K:Creatures with power less than CARDNAME's power can't block it.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrgan_pit_skulk.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/96.jpg
+End

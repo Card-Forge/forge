@@ -1,0 +1,11 @@
+Name:Subdue
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ G | ValidTgts$ Creature | NumAtt$ 0 | NumDef$ +X | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME | TgtPrompt$ Select target creature | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn. That creature gets +0/+X until end of turn, where X is its converted mana cost.
+SVar:X:Targeted$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/subdue.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/120.jpg
+End

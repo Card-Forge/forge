@@ -1,0 +1,9 @@
+Name:Shriek of Dread
+ManaCost:1 B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear | SpellDescription$ Target creature gains fear until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shriek_of_dread.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/53.jpg
+End

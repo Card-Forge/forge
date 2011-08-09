@@ -1,0 +1,14 @@
+Name:Snake Umbra
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:Totem armor
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TriggerDamageDone | AddSVar$ TriggeredDraw  | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature deals damage to an opponent, you may draw a card."
+SVar:TriggerDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TriggeredDraw | TriggerDescription$ Whenever enchanted creature deals damage to an opponent, you may draw a card.
+SVar:TriggeredDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_umbra.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/207.jpg
+End

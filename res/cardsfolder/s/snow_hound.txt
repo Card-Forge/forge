@@ -1,0 +1,12 @@
+Name:Snow Hound
+ManaCost:2 W
+Types:Creature Hound
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature.Blue+YouCtrl,Creature.Green+YouCtrl | TgtPrompt$ Select target blue or green creature you control | Origin$ Battlefield | Destination$ Hand | SubAbility$ SVar=Return | SpellDescription$ Return CARDNAME and target green or blue creature you control to their owner's hand.
+SVar:Return:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_hound.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/277.jpg
+End

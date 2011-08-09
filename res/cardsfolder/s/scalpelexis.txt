@@ -1,0 +1,11 @@
+Name:Scalpelexis
+ManaCost:4 U
+Types:Creature Beast
+Text:Whenever CARDNAME deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.
+PT:1/5
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/50.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/105.jpg
+End

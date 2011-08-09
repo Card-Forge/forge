@@ -1,0 +1,13 @@
+Name:Steel of the Godhead
+ManaCost:2 WU
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 WU | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ As long as enchanted creature is white, it gets +1/+1 and has lifelink.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Blue | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ HIDDEN Unblockable | Description$ As long as enchanted creature is blue, it gets +1/+1 and is unblockable.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_of_the_godhead.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/150.jpg
+End

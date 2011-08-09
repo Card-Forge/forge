@@ -1,0 +1,11 @@
+Name:Sigiled Paladin
+ManaCost:W W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:First Strike
+K:Exalted
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sigiled_paladin.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/27.jpg
+End

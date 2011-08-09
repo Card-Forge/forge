@@ -1,0 +1,15 @@
+Name:Spitebellows
+ManaCost:5 R
+Types:Creature Elemental
+Text:no text
+PT:6/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDamageCreature | TriggerDescription$ When CARDNAME leaves the battlefield, it deals 6 damage to target creature.
+K:Evoke:1 R R
+SVar:TrigDamageCreature:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spitebellows.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/105.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/135.jpg
+End

@@ -1,0 +1,14 @@
+Name:Silklash Spider
+ManaCost:3 G G
+Types:Creature Spider
+Text:no text
+PT:2/7
+K:Reach
+A:AB$ DamageAll | Cost$ X G G | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silklash_spider.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/281.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/271.jpg
+End

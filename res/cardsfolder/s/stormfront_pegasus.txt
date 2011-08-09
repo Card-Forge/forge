@@ -1,0 +1,12 @@
+Name:Stormfront Pegasus
+ManaCost:1 W
+Types:Creature Pegasus
+Text:no text
+PT:2/1
+K:Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stormfront_pegasus.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/34.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/35.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/38.jpg
+End

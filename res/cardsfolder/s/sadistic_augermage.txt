@@ -1,0 +1,11 @@
+Name:Sadistic Augermage
+ManaCost:2 B
+Types:Creature Human Wizard
+Text:no text
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player puts a card from his or her hand on top of his or her library.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Defined$ Each
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_augermage.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/103.jpg
+End

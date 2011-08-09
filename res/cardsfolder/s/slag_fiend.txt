@@ -1,0 +1,12 @@
+Name:Slag Fiend
+ManaCost:R
+Types:Creature Construct
+Text:no text
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifact cards in all graveyards.
+SVar:X:Count$TypeInAllYards.Artifact
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slag_fiend.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/95.jpg
+End

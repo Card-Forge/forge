@@ -1,0 +1,12 @@
+Name:Seedborn Muse
+ManaCost:3 G G
+Types:Creature Spirit
+Text:no text
+PT:2/4
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddKeyword$ HIDDEN CARDNAME untaps during each other player's untap step. | Description$ Untap all permanents you control during each other player's untap step.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seedborn_muse.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/138.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/270.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/296.jpg
+End

@@ -1,0 +1,11 @@
+Name:Sliversmith
+ManaCost:2
+Types:Artifact Creature Spellshaper
+Text:no text
+PT:1/1
+A:AB$ Token | Cost$ 1 T Discard<1/Card> | TokenAmount$ 1 | TokenName$ Metallic Sliver | TokenTypes$ Artifact,Creature,Sliver | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 colorless Sliver artifact creature token named Metallic Sliver onto the battlefield.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130329.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/163.jpg
+End

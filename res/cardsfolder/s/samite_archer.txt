@@ -1,0 +1,11 @@
+Name:Samite Archer
+ManaCost:1 W U
+Types:Creature Human Cleric Archer
+Text:no text
+PT:1/1
+A:AB$ PreventDamage | Cost$ T | Tgt$ TgtCP | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature or player this turn.
+A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_archer.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/269.jpg
+End

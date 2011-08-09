@@ -1,0 +1,11 @@
+Name:Skred
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ Skred deals damage to target creature equal to the number of snow permanents you control.
+SVar:X:Count$TypeYouCtrl.Snow
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skred.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/97.jpg
+End

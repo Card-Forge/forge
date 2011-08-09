@@ -1,0 +1,11 @@
+Name:Spawning Breath
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 1 | SubAbility$ SVar=DBToken | SpellDescription$ CARDNAME deals 1 damage to target creature or player. Put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add  to your mana pool."
+SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
+SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_breath.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/164.jpg
+End

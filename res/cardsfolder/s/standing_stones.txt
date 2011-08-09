@@ -1,0 +1,14 @@
+Name:Standing Stones
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ 1 T PayLife<1> | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ 1 T PayLife<1> | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ 1 T PayLife<1> | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ 1 T PayLife<1> | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ 1 T PayLife<1> | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/standing_stones.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/107.jpg
+End

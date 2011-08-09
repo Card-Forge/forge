@@ -1,0 +1,10 @@
+Name:Sigil of the Empty Throne
+ManaCost:3 W W
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Enchantment.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, put a 4/4 white Angel creature token with flying onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_empty_throne.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/18.jpg
+End

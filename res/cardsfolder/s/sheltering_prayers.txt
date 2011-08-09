@@ -1,0 +1,13 @@
+Name:Sheltering Prayers
+ManaCost:W
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Land.Basic+YouCtrl | AddKeyword$ Shroud | CheckSVar$ X | SVarCompare$ LE3 | Description$ Basic lands you control have shroud as long as you control three or fewer lands.
+S:Mode$ Continuous | Affected$ Land.Basic+YouDontCtrl | AddKeyword$ Shroud | CheckSVar$ Y | SVarCompare$ LE3 | Description$ Basic lands your opponent controls have shroud as long as your opponent controls three or fewer lands.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Y:Count$Valid Land.YouDontCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sheltering_prayers.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/22.jpg
+End

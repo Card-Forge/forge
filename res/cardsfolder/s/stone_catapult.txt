@@ -1,0 +1,10 @@
+Name:Stone Catapult
+ManaCost:4 B
+Types:Creature Human Soldier
+Text:no text
+PT:1/2
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.nonBlack+tapped | TgtPrompt$ Select target tapped nonblack creature | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | SpellDescription$ Destroy target tapped nonblack creature. Activate this ability only during your turn, before attackers are declared.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_catapult.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/84.jpg
+End

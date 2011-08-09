@@ -1,0 +1,11 @@
+Name:Seething Pathblazer
+ManaCost:2 R
+Types:Creature Elemental Warrior
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ 0 Sac<1/Elemental> | NumAtt$ +2 | KW$ First Strike | SpellDescription$ Seething Pathblazer gets +2/+0 and gains first strike until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/101.jpg
+End

@@ -1,0 +1,12 @@
+Name:Shrieking Specter
+ManaCost:5 B
+Types:Creature Specter
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME attacks, defending player discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_specter.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/89.jpg
+End

@@ -1,0 +1,11 @@
+Name:Stonybrook Angler
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:1/2
+A:AB$ TapOrUntap | Cost$ 1 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_angler.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/90.jpg
+End

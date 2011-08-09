@@ -1,0 +1,10 @@
+Name:Samurai Enforcers
+ManaCost:4 W W
+Types:Creature Human Samurai
+Text:no text
+PT:4/4
+K:Bushido 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/samurai_enforcers.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/42.jpg
+End

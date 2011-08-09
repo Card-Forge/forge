@@ -1,0 +1,12 @@
+Name:Sea Kings' Blessing
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Blue | OverwriteColors$ True | SpellDescription$ Any number of target creatures become blue until end of turn.
+SVar:MaxTgts:Count$Valid Creature
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_kings_blessing.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/75.jpg
+End

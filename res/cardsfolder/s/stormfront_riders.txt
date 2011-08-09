@@ -1,0 +1,16 @@
+Name:Stormfront Riders
+ManaCost:4 W
+Types:Creature Human Soldier
+Text:no text
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return two creatures you control to their owner's hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 2
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stormfront_riders.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/20.jpg
+End

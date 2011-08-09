@@ -1,0 +1,10 @@
+Name:Stoic Rebuttal
+ManaCost:1 U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | IsPresent$ Artifact.YouCtrl | PresentCompare$ LT3 | SpellDescription$ Counter target spell.
+A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Activation$ Metalcraft | CostDesc$ Metalcraft - | SpellDescription$ CARDNAME costs 1 less to cast if you control 3 or more artifacts.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_rebuttal.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/46.jpg
+End

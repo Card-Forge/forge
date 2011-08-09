@@ -1,0 +1,10 @@
+Name:Sudden Death
+ManaCost:1 B B
+Types:Instant
+Text:no text
+K:Split second
+A:SP$ Pump | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_death.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/134.jpg
+End

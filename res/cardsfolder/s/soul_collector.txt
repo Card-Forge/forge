@@ -1,0 +1,14 @@
+Name:Soul Collector
+ManaCost:3 B B
+Types:Creature Vampire
+Text:no text
+PT:3/4
+K:Flying
+K:Morph:B B B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | Execute$ TrigBounce | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, return that card to the battlefield under your control.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_collector.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/74.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/47.jpg
+End

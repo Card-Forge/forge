@@ -1,0 +1,9 @@
+Name:Seize the Initiative
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+1 and gains first strike until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seize_the_initiative.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/20.jpg
+End

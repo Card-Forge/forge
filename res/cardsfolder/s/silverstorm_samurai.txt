@@ -1,0 +1,11 @@
+Name:Silverstorm Samurai
+ManaCost:4 W W
+Types:Creature Fox Samurai
+Text:no text
+PT:3/3
+K:Flash
+K:Bushido 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silverstorm_samurai.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/22.jpg
+End

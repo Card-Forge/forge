@@ -1,0 +1,11 @@
+Name:Sage's Dousing
+ManaCost:2 U
+Types:Tribal Instant Wizard
+Text:no text
+A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target spell unless its controller pays 3. If you control a Wizard, draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Wizard.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Wizard,
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_dousing.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/48.jpg
+End

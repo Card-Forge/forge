@@ -1,0 +1,14 @@
+Name:Sheoldred, Whispering One
+ManaCost:5 B B
+Types:Legendary Creature Praetor
+Text:no text
+PT:6/6
+K:Swampwalk
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each opponent's upkeep, that player sacrifices a creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ Opponent
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sheoldred_whispering_one.jpg
+SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/73.jpg
+End

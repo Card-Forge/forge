@@ -1,0 +1,10 @@
+Name:Steelshaper Apprentice
+ManaCost:2 W W
+Types:Creature Human Soldier
+Text:no text
+PT:1/3
+A:AB$ ChangeZone | Cost$ W T Return<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Equipment | ChangeNum$ 1 | SpellDescription$ Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steelshaper_apprentice.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/15.jpg
+End

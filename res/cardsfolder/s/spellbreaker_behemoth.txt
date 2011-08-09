@@ -1,0 +1,11 @@
+Name:Spellbreaker Behemoth
+ManaCost:1 R G G
+Types:Creature Beast
+Text:no text
+PT:5/5
+K:CARDNAME can't be countered.
+S:Mode$ Continuous | Affected$ Creature.powerGE5+YouCtrl | AffectedZone$ Stack | AddKeyword$ HIDDEN CARDNAME can't be countered. | Description$ Creature spells you control with power 5 or greater can't be countered.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbreaker_behemoth.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/60.jpg
+End

@@ -1,0 +1,10 @@
+Name:Sky Ruin Drake
+ManaCost:4 U
+Types:Creature Drake
+Text:no text
+PT:2/5
+K:Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_ruin_drake.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/66.jpg
+End

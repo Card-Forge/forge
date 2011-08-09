@@ -1,0 +1,11 @@
+Name:Sea Spirit
+ManaCost:4 U
+Types:Creature Elemental Spirit
+Text:no text
+PT:2/3
+A:AB$ Pump | Cost$ U | NumAtt$ +1 | SpellDescription$ Sea Spirit gets +1/+0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_spirit.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/119.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/95.jpg
+End

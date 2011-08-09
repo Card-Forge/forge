@@ -1,0 +1,12 @@
+Name:Spellshock
+ManaCost:2 R
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigDamageYou | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, CARDNAME deals 2 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Card.YouDontCtrl | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a player casts a spell, CARDNAME deals 2 damage to that player.
+SVar:TrigDamageYou:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 2
+SVar:TrigDamageOpp:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spellshock.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/104.jpg
+End

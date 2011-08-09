@@ -1,0 +1,15 @@
+Name:Sphere of the Suns
+ManaCost:2
+Types:Artifact
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+K:etbCounter:CHARGE:3
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_the_suns.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/134.jpg
+End

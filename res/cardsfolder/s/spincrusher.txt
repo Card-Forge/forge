@@ -1,0 +1,13 @@
+Name:Spincrusher
+ManaCost:2
+Types:Artifact Creature Construct
+Text:no text
+PT:0/2
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME blocks, put a +1/+1 counter on it.
+A:AB$ Pump | Cost$ SubCounter<1/P1P1> | KW$ Unblockable | SpellDescription$ CARDNAME is unblockable this turn.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spincrusher.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/144.jpg
+End

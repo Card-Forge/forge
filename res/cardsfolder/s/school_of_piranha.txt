@@ -1,0 +1,10 @@
+Name:School of Piranha
+ManaCost:1 U
+Types:Creature Fish
+Text:no text
+PT:3/3
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/school_of_piranha.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/45.jpg
+End

@@ -1,0 +1,10 @@
+Name:Svyelunite Priest
+ManaCost:1 U
+Types:Creature Merfolk Cleric
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ U U T | KW$ Shroud | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Target creature gains shroud until end of turn. Activate this ability only during your upkeep. (It can't be the target of spells or abilities.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/svyelunite_priest.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/53.jpg
+End

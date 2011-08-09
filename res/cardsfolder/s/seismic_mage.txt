@@ -1,0 +1,10 @@
+Name:Seismic Mage
+ManaCost:3 R
+Types:Creature Human Spellshaper
+Text:no text
+PT:1/1
+A:AB$ Destroy | Cost$ 2 R T Discard<1/Card> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_mage.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/211.jpg
+End

@@ -1,0 +1,12 @@
+Name:Stirring Wildwood
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Animate | Cost$ 1 G W | Defined$ Self | Power$ 3 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Reach | Colors$ Green,White | SpellDescription$ Until end of turn, CARDNAME becomes a 3/4 green and white Elemental creature with reach. It's still a land.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/144.jpg
+End

@@ -1,0 +1,14 @@
+Name:Stoic Ephemera
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:5/5
+K:Defender
+K:Flying
+T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ When CARDNAME blocks, sacrifice it at end of combat.
+SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at end of combat.
+SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_ephemera.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/19.jpg
+End

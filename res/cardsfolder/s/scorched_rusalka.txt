@@ -1,0 +1,11 @@
+Name:Scorched Rusalka
+ManaCost:R
+Types:Creature Spirit
+Text:no text
+PT:1/1
+A:AB$ DealDamage | Cost$ R Sac<1/Creature> | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_rusalka.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/74.jpg
+End

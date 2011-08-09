@@ -1,0 +1,11 @@
+Name:Silver Erne
+ManaCost:3 U
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+K:Trample
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2534.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/98.jpg
+End

@@ -1,0 +1,11 @@
+Name:Shinen of Stars' Light
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:2/1
+K:First Strike
+A:AB$ Pump | Cost$ 1 W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Channel - | KW$ First Strike | ActivationZone$ Hand | SpellDescription$ Target creature gains first strike until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shinen_of_stars_light.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/28.jpg
+End

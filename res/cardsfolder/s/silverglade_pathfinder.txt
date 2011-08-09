@@ -1,0 +1,11 @@
+Name:Silverglade Pathfinder
+ManaCost:1 G
+Types:Creature Dryad Spellshaper
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ 1 G T Discard<1/Card> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silverglade_pathfinder.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/270.jpg
+End

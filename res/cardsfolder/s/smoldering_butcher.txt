@@ -1,0 +1,10 @@
+Name:Smoldering Butcher
+ManaCost:3 B
+Types:Creature Elemental Warrior
+Text:no text
+PT:4/2
+K:Wither
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_butcher.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/42.jpg
+End

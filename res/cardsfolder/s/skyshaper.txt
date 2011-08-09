@@ -1,0 +1,9 @@
+Name:Skyshaper
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Flying | SpellDescription$ Creatures you control gain flying until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshaper.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/137.jpg
+End

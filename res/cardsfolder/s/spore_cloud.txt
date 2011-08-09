@@ -1,0 +1,11 @@
+Name:Spore Cloud
+ManaCost:1 G G
+Types:Instant
+Text:no text
+A:SP$ TapAll | Cost$ 1 G G | ValidCards$ Creature.blocking | SubAbility$ SVar=DBFog | SpellDescription$ Tap all blocking creatures. Prevent all combat damage that would be dealt this turn. Each attacking creature and each blocking creature doesn't untap during its controller's next untap step.
+SVar:DBFog:DB$Fog | SubAbility$ SVar=DBPumpAll
+SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.attacking,Creature.blocking | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spore_cloud.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/83.jpg|3
+End

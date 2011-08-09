@@ -1,0 +1,11 @@
+Name:Silvos, Rogue Elemental
+ManaCost:3 G G G
+Types:Legendary Creature Elemental
+Text:no text
+PT:8/5
+K:Trample
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39860.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/282.jpg
+End

@@ -1,0 +1,12 @@
+Name:Stormcaller's Boon
+ManaCost:2 W U
+Types:Enchantment
+Text:no text
+K:Cascade
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Flying | SpellDescription$ Creatures you control gain flying until end of turn.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcallers_boon.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/13.jpg
+End

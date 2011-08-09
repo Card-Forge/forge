@@ -1,0 +1,12 @@
+Name:Sowing Salt
+ManaCost:2 R R
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 R R | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target nonbasic land. Search its controller's graveyard, hand, and library for all cards with the same name as that land and exile them. Then that player shuffles his or her library.
+SVar:DBChangeZoneAll:DB$ChangeZoneAll | ChangeType$ Remembered.sameName | Origin$ Graveyard,Hand,Library | Defined$ TargetedController | Destination$ Exile | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sowing_salt.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/97.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/118.jpg
+End

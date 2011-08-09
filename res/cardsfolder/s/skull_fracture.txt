@@ -1,0 +1,10 @@
+Name:Skull Fracture
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
+A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | Flashback$ True | CostDesc$ Flashback 3 B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_fracture.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/162.jpg
+End

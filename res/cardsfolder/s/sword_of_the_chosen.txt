@@ -1,0 +1,10 @@
+Name:Sword of the Chosen
+ManaCost:2
+Types:Legendary Artifact
+Text:no text
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Legendary | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target legendary creature gets +2/+2 until end of turn. | TgtPrompt$ Select target legendary creature.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_chosen.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/135.jpg
+End

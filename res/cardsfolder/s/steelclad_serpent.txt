@@ -1,0 +1,12 @@
+Name:Steelclad Serpent
+ManaCost:5 U
+Types:Artifact Creature Serpent
+Text:no text
+PT:4/5
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ HIDDEN CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack unless you control another artifact.
+SVar:X:Count$Valid Artifact.YouCtrl+Other
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steelclad_serpent.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/59.jpg
+End

@@ -1,0 +1,13 @@
+Name:Soratami Cloudskater
+ManaCost:1 U
+Types:Creature Moonfolk Rogue
+Text:no text
+PT:1/1
+K:Flying
+A:AB$ Draw | Cost$ 2 Return<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_cloudskater.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/86.jpg
+End

@@ -1,0 +1,11 @@
+Name:Shield Wall
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumDef$ +2 | SpellDescription$ Creatures you control get +0/+2 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card11499.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/339.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/205.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/44.jpg
+End

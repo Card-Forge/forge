@@ -1,0 +1,11 @@
+Name:Scrapyard Salvo
+ManaCost:1 R R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R R | Tgt$ TgtP | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of artifact cards in your graveyard.
+SVar:X:Count$TypeInYourYard.Artifact
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapyard_salvo.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/94.jpg
+End

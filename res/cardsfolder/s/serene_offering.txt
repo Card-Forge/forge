@@ -1,0 +1,12 @@
+Name:Serene Offering
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ SVar=DBGainLife | SpellDescription$ Destroy target enchantment. You gain life equal to its converted mana cost.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Targeted$CardManaCost
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_offering.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/252.jpg
+End

@@ -1,0 +1,11 @@
+Name:Sawback Manticore
+ManaCost:3 R G
+Types:Creature Manticore
+Text:no text
+PT:2/4
+A:AB$ Pump | Cost$ 4 | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$ DealDamage | Cost$ 1 | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | IsPresent$ Card.Self+attacking,Card.Self+blocking | PresentCompare$ EQ1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature. Activate this ability only if CARDNAME is attacking or blocking and only once each turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sawback_manticore.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/341.jpg
+End

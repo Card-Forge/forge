@@ -1,0 +1,11 @@
+Name:Sapphire Leech
+ManaCost:1 U
+Types:Creature Leech
+Text:Blue spells you cast cost Blue more to cast.
+PT:2/2
+K:Flying
+K:CostChange:Player:More:U:Spell:blue:All:NoSpecial
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_leech.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/71.jpg
+End

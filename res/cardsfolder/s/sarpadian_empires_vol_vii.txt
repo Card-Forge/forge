@@ -1,0 +1,8 @@
+Name:Sarpadian Empires, Vol. VII
+ManaCost:3
+Types:Artifact
+Text:no text
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sarpadian_empires_vol_vii.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/263.jpg
+End

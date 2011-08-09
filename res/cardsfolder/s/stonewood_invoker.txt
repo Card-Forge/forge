@@ -1,0 +1,10 @@
+Name:Stonewood Invoker
+ManaCost:1 G
+Types:Creature Elf Mutant
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ 7 G | NumAtt$ +5 | NumDef$ +5 | SpellDescription$ CARDNAME gets +5/+5 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewood_invoker.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/139.jpg
+End

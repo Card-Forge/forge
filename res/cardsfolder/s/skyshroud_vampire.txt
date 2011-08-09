@@ -1,0 +1,12 @@
+Name:Skyshroud Vampire
+ManaCost:3 B B
+Types:Creature Vampire
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ Pump | Cost$ Discard<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Skyshroud Vampire gets +2/+2 until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_vampire.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/51.jpg
+End

@@ -1,0 +1,10 @@
+Name:Shower of Sparks
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ SVar=DBDamage | SpellDescription$ CARDNAME deals 1 damage to target creature
+SVar:DBDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ and 1 damage to target player.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shower_of_sparks.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/217.jpg
+End

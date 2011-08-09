@@ -1,0 +1,13 @@
+Name:Scourge Devil
+ManaCost:4 R
+Types:Creature Devil
+Text:no text
+PT:3/3
+K:Unearth:2 R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_devil.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/113.jpg
+End

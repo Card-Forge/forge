@@ -1,0 +1,11 @@
+Name:Sunastian Falconer
+ManaCost:3 R G
+Types:Legendary Creature Human Shaman
+Text:no text
+PT:4/4
+A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SpellDescription$ Add 2 to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1687.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/301.jpg
+End

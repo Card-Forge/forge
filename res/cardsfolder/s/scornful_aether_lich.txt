@@ -1,0 +1,10 @@
+Name:Scornful AEther-Lich
+ManaCost:3 U
+Types:Artifact Creature Zombie Wizard
+Text:no text
+PT:2/4
+A:AB$ Pump | Cost$ W B | KW$ Fear & Vigilance | SpellDescription$ CARDNAME gains fear and vigilance until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scornful_aether_lich.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/34.jpg
+End

@@ -1,0 +1,13 @@
+Name:Spine of Ish Sah
+ManaCost:7
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target permanent.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:SacMe:4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spine_of_ish_sah.jpg
+SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/136.jpg
+End

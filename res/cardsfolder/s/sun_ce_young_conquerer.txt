@@ -1,0 +1,13 @@
+Name:Sun Ce, Young Conquerer
+ManaCost:3 U U
+Types:Legendary Creature Human Soldier
+Text:no text
+PT:3/3
+K:Horsemanship
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature to its owner's hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_ce_young_conquerer.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/55.jpg
+End

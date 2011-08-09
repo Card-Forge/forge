@@ -1,0 +1,11 @@
+Name:Shu General
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:Vigilance
+K:Horsemanship
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_general.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/25.jpg
+End

@@ -1,0 +1,13 @@
+Name:Stone-Seeder Hierophant
+ManaCost:2 G G
+Types:Creature Human Druid
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execuet$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, untap CARDNAME.
+A:AB$ Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap target land.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_seeder_hierophant.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/184.jpg
+End

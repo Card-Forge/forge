@@ -1,0 +1,10 @@
+Name:Siege of Towers
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+K:Replicate 1 R
+A:SP$ Animate | Cost$ 1 R | ValidTgts$ Mountain | Power$ 3 | Toughness$ 1 | Types$ Creature | Permanent$ True | SpellDescription$ Target Mountain becomes a 3/1 creature. It's still a land.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_of_towers.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/76.jpg
+End

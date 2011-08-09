@@ -1,0 +1,8 @@
+Name:Stomping Ground
+ManaCost:no cost
+Types:Land Mountain Forest
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96896.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/165.jpg
+End

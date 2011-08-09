@@ -1,0 +1,14 @@
+Name:Siren's Call
+ManaCost:U
+Types:Instant
+Text:Cast CARDNAME only during an opponent's turn, before attackers are declared.\r\nCreatures the active player controls attack this turn if able.\r\nAt the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/78.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/78.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/80.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/101.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/78.jpg
+End

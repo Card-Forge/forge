@@ -1,0 +1,12 @@
+Name:Skarrgan Skybreaker
+ManaCost:4 R R G
+Types:Creature Giant Shaman
+Text:no text
+PT:3/3
+K:Bloodthirst 3
+A:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature or player.
+SVar:X:Count$CardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrgan_skybreaker.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/130.jpg
+End

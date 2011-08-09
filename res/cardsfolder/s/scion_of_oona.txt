@@ -1,0 +1,15 @@
+Name:Scion of Oona
+ManaCost:2 U
+Types:Creature Faerie Soldier
+Text:no text
+PT:1/1
+K:Flash
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.Faerie+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Faerie creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Faerie.Other+YouCtrl | AddKeyword$ Shroud | Description$ Other Faeries you control have shroud.
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_oona.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/83.jpg
+End

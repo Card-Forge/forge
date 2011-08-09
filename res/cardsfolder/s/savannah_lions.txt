@@ -1,0 +1,15 @@
+Name:Savannah Lions
+ManaCost:W
+Types:Creature Cat
+Text:no text
+PT:2/1
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83246.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/43.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/222.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/224.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/298.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/41.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/223.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/223.jpg
+End

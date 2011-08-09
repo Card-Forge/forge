@@ -1,0 +1,12 @@
+Name:Septic Rats
+ManaCost:1 B B
+Types:Creature Rat
+Text:no text
+PT:2/2
+K:Infect
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | PlayersPoisoned$ Opponent | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks, if defending player is poisoned, it gets +1/+1 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/septic_rats.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/55.jpg
+End

@@ -1,0 +1,10 @@
+Name:Sudden Shock
+ManaCost:1 R
+Types:Instant
+Text:no text
+K:Split second
+A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_shock.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/179.jpg
+End

@@ -1,0 +1,14 @@
+Name:Soramaro, First to Dream
+ManaCost:4 U U
+Types:Legendary Creature Spirit
+Text:no text
+PT:*/*
+K:Flying
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
+A:AB$ Draw | Cost$ 4 Return<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:X:Count$InYourHand
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soramaro_first_to_dream.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/58.jpg
+End

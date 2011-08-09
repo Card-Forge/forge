@@ -1,0 +1,13 @@
+Name:Sulfuric Vortex
+ManaCost:1 R R
+Types:Enchantment
+Text:If a player would gain life, that player gains no life instead.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamageYou | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 2 damage to that player.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigDamageOpp | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 2 damage to that player.
+SVar:TrigDamageYou:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 2
+SVar:TrigDamageOpp:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 2
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfuric_vortex.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/106.jpg
+End

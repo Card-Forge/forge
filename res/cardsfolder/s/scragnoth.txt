@@ -1,0 +1,12 @@
+Name:Scragnoth
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:3/4
+K:Protection from blue
+K:CARDNAME can't be countered.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scragnoth.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/147.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/83.jpg
+End

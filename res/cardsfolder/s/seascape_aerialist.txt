@@ -1,0 +1,15 @@
+Name:Seascape Aerialist
+ManaCost:4 U
+Types:Creature Merfolk Wizard Ally
+Text:no text
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain flying until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain flying until end of turn.
+SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Ally.YouCtrl | KW$ Flying
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seascape_aerialist.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/64.jpg
+End

@@ -1,0 +1,11 @@
+Name:Scalding Salamander
+ManaCost:2 R
+Types:Creature Salamander
+Text:no text
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have it deal 1 damage to each creature without flying defending player controls.
+SVar:TrigDamage:AB$DamageAll | Cost$ 0 | NumDmg$ 1 | ValidCards$ Creature.withoutFlying+YouDontCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_salamander.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/100.jpg
+End

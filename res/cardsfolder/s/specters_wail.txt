@@ -1,0 +1,9 @@
+Name:Specter's Wail
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | NumCards$ 1 | Mode$ Random | SpellDescription$ Target player discards a card at random.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/specters_wail.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/164.jpg
+End

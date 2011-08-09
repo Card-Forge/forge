@@ -1,0 +1,11 @@
+Name:Sterling Grove
+ManaCost:W G
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Enchantment.Other+YouCtrl | AddKeyword$ Shroud | Description$ Other enchantments you control have shroud. (They can't be the targets of spells or abilities.)
+A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Library | Destination$ Library | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sterling_grove.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/278.jpg
+End

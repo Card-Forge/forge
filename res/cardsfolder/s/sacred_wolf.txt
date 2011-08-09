@@ -1,0 +1,11 @@
+Name:Sacred Wolf
+ManaCost:2 G
+Types:Creature Wolf
+Text:no text
+PT:3/1
+K:Hexproof
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_wolf.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/196.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/194.jpg
+End

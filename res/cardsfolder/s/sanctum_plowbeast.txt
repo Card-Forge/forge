@@ -1,0 +1,12 @@
+Name:Sanctum Plowbeast
+ManaCost:4 W U
+Types:Artifact Creature Beast
+Text:no text
+PT:3/6
+K:Defender
+K:TypeCycling:Island:2
+K:TypeCycling:Plains:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_plowbeast.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/10.jpg
+End

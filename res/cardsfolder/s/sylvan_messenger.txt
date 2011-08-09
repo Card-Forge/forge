@@ -1,0 +1,12 @@
+Name:Sylvan Messenger
+ManaCost:3 G
+Types:Creature Elf
+Text:no text
+PT:2/2
+K:Trample
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order.  
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Elf
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27666.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/87.jpg
+End

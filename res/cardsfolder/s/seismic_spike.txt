@@ -1,0 +1,10 @@
+Name:Seismic Spike
+ManaCost:2 R R
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ SVar=DBMana | SpellDescription$ Destroy target land. Add R R to your mana pool.
+SVar:DBMana:DB$Mana | Produced$ R | Amount$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_spike.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/141.jpg
+End

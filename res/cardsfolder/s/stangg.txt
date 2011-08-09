@@ -1,0 +1,9 @@
+Name:Stangg
+ManaCost:4 R G
+Types:Legendary Creature Human Warrior
+Text:When Stangg enters the battlefield, if Stangg is on the battlefield, put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield. When Stangg leaves the battlefield, exile that token. When that token leaves the battlefield, sacrifice Stangg.
+PT:3/4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stangg.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/300.jpg
+End

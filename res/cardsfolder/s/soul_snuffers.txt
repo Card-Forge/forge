@@ -1,0 +1,12 @@
+Name:Soul Snuffers
+ManaCost:2 B B
+Types:Creature Elemental Shaman
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on each creature.
+SVar:TrigPutCounterAll:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_snuffers.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/45.jpg
+End

@@ -1,0 +1,10 @@
+Name:Salvage
+ManaCost:G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Put target card from your graveyard on top of your library.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/salvage.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/85.jpg
+End

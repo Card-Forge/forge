@@ -1,0 +1,16 @@
+Name:Spirit Loop
+ManaCost:1 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature you control
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:SacMe:2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_loop.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/42.jpg
+End

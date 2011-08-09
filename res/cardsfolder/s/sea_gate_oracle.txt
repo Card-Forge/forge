@@ -1,0 +1,11 @@
+Name:Sea Gate Oracle
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_gate_oracle.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/85.jpg
+End

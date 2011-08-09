@@ -1,0 +1,9 @@
+Name:Serene Heart
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ DestroyAll | Cost$ 1 G | ValidCards$ Aura | SpellDescription$ Destroy all Auras.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_heart.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/140.jpg
+End

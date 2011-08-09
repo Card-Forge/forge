@@ -1,0 +1,13 @@
+Name:Smallpox
+ManaCost:B B
+Types:Sorcery
+A:SP$ LoseLife | Cost$ B B | Defined$ Each | LifeAmount$ 1 | SpellDescription$ Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Each | SubAbility$ SVar=DBSacCreature
+SVar:DBSacCreature:DB$Sacrifice | SacValid$ Creature | Defined$ Each | SubAbility$ SVar=DBSacLand
+SVar:DBSacLand:DB$Sacrifice | SacValid$ Land | Defined$ Each
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smallpox.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/108.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/131.jpg
+End

@@ -1,0 +1,11 @@
+Name:Sadistic Sacrament
+ManaCost:B B B
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 7 B B B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 15 | IsCurse$ True | Chooser$ You | Shuffle$ True | SpellDescription$ Kicker 7 (You may pay an additional 7 as you cast this spell.)
+A:SP$ ChangeZone | Cost$ B B B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 3 | IsCurse$ True | Chooser$ You | Shuffle$ True | SpellDescription$ Search target player's library for up to three cards, exile them, then that player shuffles his or her library. If Sadistic Sacrament was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_sacrament.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/110.jpg
+End

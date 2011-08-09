@@ -1,0 +1,13 @@
+Name:Stampeding Serow
+ManaCost:2 G G
+Types:Creature Antelope Beast
+Text:no text
+PT:5/4
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a green creature you control to its owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Green+YouCtrl | ChangeNum$ 1 | Mandatory$ True | Hidden$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_serow.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/150.jpg
+End

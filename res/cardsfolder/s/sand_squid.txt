@@ -1,0 +1,17 @@
+Name:Sand Squid
+ManaCost:3 U
+Types:Creature Squid Beast
+Text:no text
+PT:2/2
+K:Islandwalk
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True |  SubAbility$ DBTap | SpellDescription$ Tap target creature. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
+SVar:DBTap:DB$Tap | Defined$ Targeted
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step.
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
+SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sand_squid.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/96.jpg
+End

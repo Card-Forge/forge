@@ -1,0 +1,10 @@
+Name:Symbol of Unsummoning
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/symbol_of_unsummoning.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/71.jpg
+End

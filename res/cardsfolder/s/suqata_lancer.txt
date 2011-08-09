@@ -1,0 +1,12 @@
+Name:Suq'Ata Lancer
+ManaCost:2 R
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Haste
+K:Flanking
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_lancer.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/96.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/69.jpg
+End

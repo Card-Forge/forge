@@ -1,0 +1,9 @@
+Name:Scorched Ruins
+Types:Land
+Text:If CARDNAME would enter the battlefield, sacrifice two untapped lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 4 | SpellDescription$ Add 4 to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_ruins.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/166.jpg
+End

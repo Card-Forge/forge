@@ -1,0 +1,12 @@
+Name:Soulsworn Jury
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:1/4
+K:Defender
+A:AB$ Counter | Cost$ 1 U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsworn_jury.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/17.jpg
+End

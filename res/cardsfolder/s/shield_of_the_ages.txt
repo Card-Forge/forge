@@ -1,0 +1,9 @@
+Name:Shield of the Ages
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ PreventDamage | Cost$ 2 | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_the_ages.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/310.jpg
+End

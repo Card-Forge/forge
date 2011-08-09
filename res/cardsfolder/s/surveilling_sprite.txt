@@ -1,0 +1,13 @@
+Name:Surveilling Sprite
+ManaCost:1 U
+Types:Creature Faerie Rogue
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:SacMe:1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/surveilling_sprite.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/67.jpg
+End

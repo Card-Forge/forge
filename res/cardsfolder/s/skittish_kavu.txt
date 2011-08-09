@@ -1,0 +1,14 @@
+Name:Skittish Kavu
+ManaCost:1 R
+Types:Creature Kavu
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +1/+1 as long as no opponent controls a white or blue creature.
+SVar:X:Count$Valid Creature.White+YouDontCtrl/Plus.Y
+SVar:Y:Count$Valid Creature.Blue+YouDontCtrl
+SVar:AntiBuffedBy:Creature.White,Creature.Blue
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skittish_kavu.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/168.jpg
+End

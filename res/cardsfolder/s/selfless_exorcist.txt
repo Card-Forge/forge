@@ -1,0 +1,13 @@
+Name:Selfless Exorcist
+ManaCost:3 W W
+Types:Creature Human Cleric
+Text:no text
+PT:3/4
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Graveyard | Destination$ Exile | SubAbility$ SVar=DBDealDamage | SpellDescription$ Exile target creature card from a graveyard. That card deals damage equal to its power to CARDNAME.
+SVar:DBDealDamage:DB$DealDamage | Defined$ Self | NumDmg$ X
+SVar:X:Targeted$CardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/selfless_exorcist.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/21.jpg
+End

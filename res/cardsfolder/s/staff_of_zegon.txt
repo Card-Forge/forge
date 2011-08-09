@@ -1,0 +1,9 @@
+Name:Staff of Zegon
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_zegon.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/30.jpg
+End

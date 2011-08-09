@@ -1,0 +1,11 @@
+Name:Scale of Chiss-Goria
+ManaCost:3
+Types:Artifact
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+K:Flash
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +1 | SpellDescription$ Target creature gets +0/+1 until end of turn.
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scale_of_chiss_goria.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/236.jpg
+End

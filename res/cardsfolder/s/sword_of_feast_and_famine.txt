@@ -1,0 +1,12 @@
+Name:Sword of Feast and Famine
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature gets +2/+2 and has protection from black and from green.
+K:eqPump 2:+2/+2/Protection from black & Protection from green
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ SVar=DBUntapAll
+SVar:DBUntapAll:DB$UntapAll | ValidCards$ Land.YouCtrl
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_feast_and_famine.jpg
+SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/138.jpg
+End

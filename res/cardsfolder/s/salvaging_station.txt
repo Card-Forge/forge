@@ -1,0 +1,11 @@
+Name:Salvaging Station
+ManaCost:6
+Types:Artifact
+Text:no text
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.nonCreature+cmcLE1 | TgtPrompt$ Select target noncreature artifact card with converted mana cost 1 or less from your graveyard | SpellDescription$ Return target noncreature artifact card with converted mana cost 1 or less from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature dies, you may untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/salvaging_station.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/148.jpg
+End

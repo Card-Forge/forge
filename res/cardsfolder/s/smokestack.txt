@@ -1,0 +1,16 @@
+Name:Smokestack
+ManaCost:4
+Types:Artifact
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep .
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TriggerSacrifice | TriggerDescription$ that player sacrifices a Permanent for each soot counter on CARDNAME
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a soot counter on CARDNAME.
+SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Amount$ X | SacValid$ Permanent | SacMessage$ Permanent
+SVar:TriggerSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | Amount$ X | SacValid$ Permanent | SacMessage$ Permanent
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SOOT | CounterNum$ 1
+SVar:X:Count$CardCounters.SOOT
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smokestack.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/309.jpg
+End

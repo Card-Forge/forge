@@ -1,0 +1,10 @@
+Name:Stomper Cub
+ManaCost:3 G G
+Types:Creature Beast
+Text:no text
+PT:5/3
+K:Trample
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stomper_cub.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/210.jpg
+End

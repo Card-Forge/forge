@@ -1,0 +1,15 @@
+Name:Stasis
+ManaCost:1 U
+Types:Enchantment
+Text:Players skip their untap steps.
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/81.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/81.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/127.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/104.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/83.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/81.jpg
+End

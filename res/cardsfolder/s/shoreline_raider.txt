@@ -1,0 +1,10 @@
+Name:Shoreline Raider
+ManaCost:2 U
+Types:Creature Merfolk
+Text:no text
+PT:2/2
+K:Protection:Kavu:Protection from Kavu
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shoreline_raider.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/73.jpg
+End

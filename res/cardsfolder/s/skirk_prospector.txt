@@ -1,0 +1,11 @@
+Name:Skirk Prospector
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+A:AB$ Mana | Cost$ Sac<1/Goblin> | Produced$ R | SpellDescription$ Add R to your mana pool.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_prospector.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/230.jpg
+End

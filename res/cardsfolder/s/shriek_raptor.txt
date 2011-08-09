@@ -1,0 +1,11 @@
+Name:Shriek Raptor
+ManaCost:3 W W
+Types:Creature Bird
+Text:no text
+PT:2/3
+K:Flying
+K:Infect
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shriek_raptor.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/24.jpg
+End

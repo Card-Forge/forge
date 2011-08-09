@@ -1,0 +1,10 @@
+Name:Springing Tiger
+ManaCost:3 G
+Types:Creature Cat
+Text:no text
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Threshold$ True | Description$ Threshold - CARDNAME gets +2/+2 as long as seven or more cards are in your graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/springing_tiger.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/272.jpg
+End

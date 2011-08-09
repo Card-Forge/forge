@@ -1,0 +1,13 @@
+Name:Skyshroud Forest
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ SVar=DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
+A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ SVar=DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
+K:CARDNAME enters the battlefield tapped.
+SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You 
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/332.jpg
+End
