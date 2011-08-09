@@ -10,7 +10,6 @@
 /README.txt svneol=native#text/plain
 build/Forge.icns -text
 build/backgroundImage.jpg -text svneol=unset#image/jpeg
-build/build-forge.bat -text
 build/create-dmg -text
 build/forge.ico -text svneol=unset#image/ico
 build/forge.sh svneol=native#text/x-sh
