@@ -1,0 +1,72 @@
+BasicLandPercentage=37
+
+[Group MaxCnt=4 Percentage=20]
+Auriok Glaivemaster
+Kitesail Apprentice
+Kor Duelist
+Leonin Den-Guard
+Sunspear Shikari
+Stoneforge Mystic
+[/Group]
+
+[Group MaxCnt=2 Percentage=16]
+Kemba, Kha Regent
+Loxodon Punisher
+Myr Adapter
+Skyhunter Cub
+Steelshaper Apprentice
+Raksha Golden Cub
+[/Group]
+
+[Group MaxCnt=4 Percentage=8]
+Adventuring Gear
+Bone Saw
+Bonesplitter
+Leonin Scimitar
+Shuko
+Sylvok Lifestaff
+[/Group]
+
+[Group MaxCnt=4 Percentage=9]
+Basilisk Collar
+Bladed Pinions
+Blight Sickle
+Darksteel Axe
+Gorgon Flail
+Kitesail
+Neurok Hoversail
+Runed Stalactite
+Specter's Shroud
+Spidersilk Net
+Sword of the Meek
+Trailblazer's Boots
+Trusty Machete
+Viridian Claw
+Vorrac Battlehorns
+Vulshok Morningstar
+[/Group]
+
+[Group MaxCnt=4 Percentage=8]
+Accorder's Shield
+Darksteel Plate
+Fireshrieker
+Loxodon Warhammer
+No-Dachi
+Quietus Spike
+Slagwurm Armor
+Strider Harness
+Sword of Body and Mind
+Sword of Feast and Famine
+Sword of Fire and Ice
+Sword of Light and Shadow
+Sword of Vengeance
+Vulshok Battlegear
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Argentum Armor
+Ogre's Cleaver
+Warlord's Axe
+[/Group]
+
+End

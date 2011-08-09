@@ -1,0 +1,836 @@
+Angel
+B
+Creature Angel
+3/3
+Flying
+
+Angel
+W
+Creature Angel
+4/4
+Flying
+
+Ape
+G
+Creature Ape
+2/2
+
+Ape
+G
+Creature Ape
+3/3
+
+Assembly-Worker
+C
+Artifact Creature Assembly-Worker
+2/2
+
+Avatar
+W
+Creature Avatar
+N/N
+This creature's power and toughness are each equal to your life total.
+
+Bat
+B
+Creature Bat
+1/1
+Flying
+
+Bat
+B
+Creature Bat
+1/2
+"1B, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
+
+Bear
+G
+Creature Bear
+2/2
+
+Beast
+G
+Creature Beast
+2/2
+
+Beast
+G
+Creature Beast
+3/3
+
+Beast
+G
+Creature Beast
+4/4
+
+Beast
+G
+Creature Beast
+5/5
+
+Beast
+R G W
+Creature Beast
+8/8
+
+Bird
+R
+Creature Bird
+4/4
+Flying
+
+Bird
+U
+Creature Bird
+1/1
+
+Bird
+W
+Creature Bird
+1/1
+Flying
+
+Bird
+W U
+Creature Bird
+1/1
+Flying
+
+Butterfly
+G
+Creature Insect
+1/1
+Flying
+
+Camarid
+U
+Creature Camarid
+1/1
+
+Caribou
+W
+Creature Caribou
+0/1
+
+Carnivore
+R
+Creature Beast
+3/1
+
+Cat
+B
+Creature Cat
+2/1
+
+Cat
+G
+Creature Cat
+1/1
+
+Cat Warrior
+G
+Creature Cat Warrior
+2/2
+Forestwalk
+
+Centaur
+G
+Creature Centaur
+3/3
+
+Centaur
+G
+Creature Centaur
+3/3
+Protection from black
+
+Citizen
+W
+Creature Citizen
+1/1
+
+Demon
+B
+Creature Demon
+X/X
+
+Deserter
+W
+Creature Deserter
+0/1
+
+Djinn
+C
+Artifact Creature Djinn
+5/5
+
+Dragon
+R
+Creature Dragon
+4/4
+Flying
+
+Dragon
+R
+Creature Dragon
+5/5
+Flying
+
+Dragon Spirit
+U
+Creature Dragon Spirit
+5/5
+Flying
+
+Drake
+U G
+Creature Drake
+2/2
+Flying
+
+Elemental
+B R
+Creature Elemental
+5/5
+
+Elemental
+G
+Creature Elemental
+4/4
+
+Elemental
+G
+Creature Elemental
+7/7
+Trample
+
+Elemental
+G
+Creature Elemental
+X/X
+
+Elemental
+R
+Creature Elemental
+1/1
+Haste
+
+Elemental
+R
+Creature Elemental
+3/1
+
+Elemental
+R
+Creature Elemental
+3/1
+Haste
+
+Elemental
+R
+Creature Elemental
+3/3
+
+Elemental
+U
+Creature Elemental
+2/2
+Flying
+
+Elemental
+U R
+Creature Elemental
+5/5
+Flying
+
+Elemental
+W
+Creature Elemental
+4/4
+Flying
+
+Elemental Cat
+R
+Creature Elemental Cat
+1/1
+
+Elemental Shaman
+R
+Creature Elemental Shaman
+3/1
+
+Elephant
+G
+Creature Elephant
+3/3
+
+Elephant
+G
+Creature Elephant
+N/N
+This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.
+
+Elf Warrior
+G
+Creature Elf Warrior
+1/1
+
+Elf Warrior
+G W
+Creature Elf Warrior
+1/1
+
+Faerie
+U
+Creature Faerie
+1/1
+Flying
+
+Faerie Rogue
+B
+Creature Faerie Rogue
+1/1
+Flying
+
+Faerie Rogue
+U B
+Creature Faerie Rogue
+1/1
+Flying
+
+Giant
+R
+Creature Giant
+4/4
+
+Giant Warrior
+R G
+Creature Giant Warrior
+4/4
+Haste
+
+Giant Warrior
+W
+Creature Giant Warrior
+5/5
+
+Gnome
+C
+Artifact Creature Gnome
+1/1
+
+Goat
+W
+Creature Goat
+0/1
+
+Goblin
+R
+Creature Goblin
+1/1
+
+Goblin
+R
+Creature Goblin
+1/1
+Haste
+
+Goblin
+R
+Creature Goblin
+2/1
+Haste
+
+Goblin Rogue
+B
+Creature Goblin Rogue
+1/1
+
+Goblin Scout
+R
+Creature Goblin Scout
+1/1
+Mountainwalk
+
+Goblin Soldier
+R W
+Creature Goblin Soldier
+1/1
+
+Goblin Warrior
+R G
+Creature Goblin Warrior
+1/1
+
+Graveborn
+Creature Graveborn
+B R
+3/1
+Haste
+
+Griffin
+W
+Creature Griffin
+2/2
+Flying
+
+Hippo
+G
+Creature Hippo
+1/1
+
+Homunculus
+U
+Artifact Creature
+0/1
+
+Hornet
+C
+Haste
+1/1
+Flying
+
+Horror
+B
+Creature Horror
+4/4
+
+Hound
+G
+Creature Hound
+1/1
+
+Illusion
+U
+Creature Illusion
+1/1
+Flying
+
+Insect
+B
+Creature Insect
+0/1
+
+Insect
+G
+Creature Insect
+1/1
+
+Insect
+G
+Creature Insect
+6/1
+Shroud
+
+Kaldra
+C
+Legendary Creature Avatar
+4/4
+
+Kavu
+B
+Creature Kavu
+3/3
+
+Kelp
+U
+Creature Plant Wall
+0/1
+Defender
+
+Kithkin Soldier
+W
+Creature Kithkin Soldier
+1/1
+
+Knight
+B
+Protection from white
+2/2
+Flanking
+
+Knight
+W
+Creature Knight
+1/1
+Banding
+
+Knight
+W
+Creature Knight
+2/2
+First Strike
+
+Knight
+W
+Creature Knight
+2/2
+
+Kobolds of Kher Keep
+R
+Creature Kobold
+0/1
+
+Marit Lage
+B
+Indestructible
+20/20
+Flying
+
+Merfolk Wizard
+U
+Creature Merfolk Wizard
+1/1
+
+Minion
+B
+Creature Minion
+1/1
+
+Minion
+B
+Creature Minion
+X/X
+
+Minor Demon
+B R
+Creature Demon
+1/1
+
+Myr
+C
+Artifact Creature Myr
+1/1
+
+Ooze
+G
+Creature Ooze
+X/X
+
+Orb
+U
+Creature Orb
+X/X
+Flying
+
+Pegasus
+W
+Creature Pegasus
+1/1
+Flying
+
+Pentavite
+C
+Artifact Creature Pentavite
+1/1
+
+Pest
+C
+Artifact Creature Pest
+0/1
+
+Pincher
+C
+Creature Pincher
+2/2
+
+Plant Wall
+G
+Creature Plant Wall
+0/1
+Defender
+
+Prism
+C
+Artifact Creature Prism
+0/1
+
+Rat
+B
+Creature Rat
+1/1
+
+Reflection
+W
+Creature Reflection
+2/2
+
+Reflection
+W
+Creature Reflection
+X/X
+
+Sand
+C
+Creature Sand
+1/1
+
+Sand Warrior
+R G W
+Creature Sand Warrior
+1/1
+"When a permanent name Hazezon Tamar isn't on the battlefield, exile this creature."
+
+Saproling
+G
+Creature Saproling
+1/1
+
+Saproling
+G
+Creature Saproling
+N/N
+This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.
+
+Serf
+B
+Creature Serf
+0/1
+
+Shapeshifter
+C
+Creature Shapeshifter
+1/1
+Changeling
+
+Sheep
+G
+Creature Sheep
+0/1
+
+Skeleton
+B
+Creature Skeleton
+1/1
+B: Regenerate this creature.
+
+Sliver
+C
+Creature Sliver
+1/1
+
+Snake
+C
+Artifact Creature Snake
+1/1
+"Whenever this creature deals damage to a player, that player gets a poison counter."
+
+Snake
+G
+Creature Snake
+1/1
+
+Snake
+G U
+Creature Snake
+1/1
+
+Soldier
+W
+Creature Soldier
+1/1
+
+Spawn
+C
+Artifact Creature Spawn
+2/2
+
+Spider
+B
+Creature Spider
+2/4
+Reach
+
+Spider
+G
+Creature Spider
+1/2
+Reach
+
+Spike
+G
+Creature Spike
+1/1
+
+Spirit
+B
+Creature Spirit
+N/N
+
+Spirit
+C
+Creature Spirit
+1/1
+
+Spirit
+W
+Creature Spirit
+1/1
+Flying
+
+Spirit
+W
+Creature Spirit
+3/3
+Flying
+
+Spirit
+W B
+Creature Spirit
+1/1
+Flying
+
+Splinter
+G
+Cumulative upkeep - G
+1/1
+Flying
+
+Squirrel
+G
+Creature Squirrel
+1/1
+
+Stangg Twin
+R G
+Legendary Creature Human Warrior
+3/4
+
+Starfish
+U
+Creature Starfish
+0/1
+
+Survivor
+R
+Creature Survivor
+1/1
+
+Tetravite
+C
+This creature can't be enchanted.
+1/1
+Flying
+
+Thopter
+C
+Artifact Creature Thopter
+1/1
+Flying
+
+Thopter
+U
+Creature Thopter
+1/1
+Flying
+
+Thrull
+B
+Creature Thrull
+0/1
+
+Thrull
+B
+Creature Thrull
+1/1
+
+Tombspawn
+B
+Creature Zombie
+2/2
+Haste
+
+Treefolk Shaman
+G
+Creature Treefolk Shaman
+2/1
+
+Triskelavite
+C
+Artifact Creature
+1/1
+Flying
+
+Voja
+G W
+Legendary Creature Wolf
+2/2
+
+Wall
+C
+Artifact Creature Wall
+0/2
+Defender
+
+Wall
+U
+Creature Wall
+5/5
+Defender
+
+Warrior
+R
+Creature Warrior
+1/1
+
+Wasp
+C
+Artifact Creature Insect
+1/1
+Flying
+
+Weird
+U
+Flying
+3/3
+Defender
+
+Wirefly
+C
+Artifact Creature Insect
+2/2
+Flying
+
+Wolf
+G
+Creature Wolf
+1/1
+This creature gets +1/+1 for each card named Sound the Call in each graveyard.
+
+Wolf
+G
+Creature Wolf
+2/2
+
+Wolves of the Hunt
+G
+Creature Wolf
+1/1
+Bands with other Wolves
+
+Worm
+B G
+Creature Worm
+1/1
+
+Wurm
+B
+Creature Wurm
+6/6
+Trample
+
+Wurm
+G
+Creature Wurm
+6/6
+
+Wurm
+G
+Creature Wurm
+X/X
+
+Zombie
+B
+Creature Zombie
+2/2
+

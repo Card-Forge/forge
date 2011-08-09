@@ -1,0 +1,81 @@
+BasicLandPercentage=36
+
+[Group MaxCnt=4 Percentage=14]
+Elvish Warrior
+Garruk's Companion
+Juvenile Gloomwidow
+Multani's Acolyte
+Nettle Sentinel
+Nissa's Chosen
+Nourish
+People of the Woods
+Primal Bellow
+Traproot Kami
+Whirling Dervish
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+An-Havva Constable
+An-Havva Inn
+Titania's Chosen
+Blanchwood Armor
+Coiling Woodworm
+Treefolk Seedlings
+Boggart Ram-Gang
+Groundbreaker
+Leatherback Baloth
+Wilt-Leaf Cavaliers
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Beacon of Creation
+Boartusk Liege
+Creakwood Liege
+Drove of Elves
+Natural Order
+Norwood Priestess
+Wilt-Leaf Liege
+Dauntless Dourbark
+Timbermaw Larva
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Baru, Fist of Krosa
+Baru, Fist of Krosa
+Beast Attack
+Bellowing Tanglewurm
+Crabapple Cohort
+Deity of Scars
+Fracturing Gust
+Kaysa
+Kaysa
+Meng Huo, Barbarian King
+Meng Huo, Barbarian King
+Reach of Branches
+Timber Protector
+Kodama of the North Tree
+Overrun
+Oversoul of Dusk
+Rushwood Elemental
+Weatherseed Treefolk
+[/Group]
+
+[Group MaxCnt=1 Percentage=5]
+Howl of the Night Pack
+Khalni Hydra
+Khalni Hydra
+Primalcrux
+Primalcrux
+Roughshod Mentor
+Child of Gaea
+Cloudthresher
+Craw Giant
+Jedit Ojanen of Efrava
+Jugan, the Rising Star
+Pelakka Wurm
+Plated Slagwurm
+Silvos, Rogue Elemental
+Terra Stomper
+[/Group]
+
+End

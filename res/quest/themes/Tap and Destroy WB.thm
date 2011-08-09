@@ -1,0 +1,52 @@
+BasicLandPercentage=15
+
+[Group MaxCnt=4 Percentage=20]
+Scrubland
+Godless Shrine
+Arcane Sanctum
+Marsh Flats
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+King's Assassin
+King's Assassin
+Royal Assassin
+Royal Assassin
+Steam Catapult
+Stone Catapult
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+Aysen Bureaucrats
+Benalish Trapper
+Blinding Mage
+Errant Doomsayers
+Goldmeadow Harrier
+Kor Line-Slinger
+Master Decoy
+Rathi Trapper
+Squall Drifter
+Whipcorder
+[/Group]
+
+[Group MaxCnt=4 Percentage=5]
+Minister of Impediments
+Silkbind Faerie
+[/Group]
+
+[Group MaxCnt=4 Percentage=16]
+Abyssal Hunter
+Ballynock Trapper
+Kismet
+Kismet
+Loxodon Gatekeeper
+Ostiary Thrull
+[/Group]
+
+[Group MaxCnt=1 Percentage=4]
+Harrier Griffin
+Kitsune Dawnblade
+Loxodon Mystic
+[/Group]
+
+End

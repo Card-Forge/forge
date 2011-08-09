@@ -1,0 +1,37 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=3 Percentage=7]
+Ratcatcher
+Marrow-Gnawer
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+Swarm of Rats
+Relentless Rats
+Pestilence Rats
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Bog Rats
+Gnat Miser
+Muck Rats
+Nezumi Shadow-Watcher
+Zodiac Rat
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Kuro's Taken
+Nezumi Cutthroat
+Ravenous Rats
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Chittering Rats
+Disease Carriers
+Deathmask Nezumi
+Nezumi Ronin
+Razortooth Rats
+Locust Miser
+[/Group]
+
+End

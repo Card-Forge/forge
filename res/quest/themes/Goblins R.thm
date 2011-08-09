@@ -1,0 +1,131 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=30]
+Goblin Ringleader
+Goblin General
+Goblin King
+Goblin Piledriver
+Goblin Warchief
+Goblin Lackey
+Goblin Chieftain
+Warren Instigator
+[/Group]
+
+[Group MaxCnt=1 Percentage=16]
+Boggart Shenanigans
+Goblin Matron
+Sensation Gorger
+Goblin Grenade
+Tarfire
+Reckless One
+Mogg War Marshal
+Siege-Gang Commander
+Mudbutton Clanger
+Goblin Marshal
+[/Group]
+
+[Group MaxCnt=4 Percentage=5]
+Crazed Goblin
+Boros Recruit
+Goblin Arsonist
+Goblin Arsonist
+Goblin Balloon Brigade
+Goblin Digging Team
+Goblin Firestarter
+Goblin Gaveleer
+Goblin Guide
+Goblin Masons
+Goblin Mountaineer
+Goblin Patrol
+Mogg Fanatic
+Mogg Sentry
+Mons's Goblin Raiders
+Raging Goblin
+Scuzzback Scrapper
+Spikeshot Elder
+Stream Hopper
+Tattermunge Maniac
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Adder-Staff Boggart
+Akki Blizzard-Herder
+Akki Raider
+Akki Underling
+Bloodmark Mentor
+Bloodmark Mentor
+Ember Hauler
+Goblin Brigand
+Goblin Bully
+Goblin Elite Infantry
+Goblin Firebug
+Goblin Glider
+Dragon Fodder
+Goblin Piker
+Goblin Raider
+Goblin Shortcutter
+Goblin Striker
+Goblin War Buggy
+Goblin Wardriver
+Hulking Goblin
+Kyren Glider
+Mogg Jailer
+Mogg Maniac
+Mudbrawler Cohort
+Mudbrawler Cohort
+Rustrazor Butcher
+Utvara Scalper
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Arms Dealer
+Blisterstick Shaman
+Boggart Arsonists
+Boggart Ram-Gang
+Enslaved Scout
+Flamewave Invoker
+Goatnapper
+Goblin Artillery
+Goblin Cavaliers
+Goblin Chariot
+Goblin Hero
+Goblin Medics
+Goblin Roughrider
+Goblin Sharpshooter
+Goblin Sky Raider
+Goblin Spelunkers
+Hearthfire Hobgoblin
+Hobgoblin Dragoon
+Kyren Sniper
+Lavafume Invoker
+Mudbutton Torchrunner
+Skirk Shaman
+Slingshot Goblin
+Spikeshot Goblin
+Squee, Goblin Nabob
+Tattermunge Duo
+Tuktuk the Explorer
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Akki Underminer
+Battle-Rattle Shaman
+Boartusk Liege
+Goblin Berserker
+Goblin Gardener
+Goblin Settler
+Lightning Crafter
+Murderous Redcap
+Tar Pitcher
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Battle Squadron
+Goblin Commando
+Kiki-Jiki, Mirror Breaker
+Outrage Shaman
+Scuzzback Marauders
+Tuktuk Grunts
+[/Group]
+
+End

@@ -1,0 +1,162 @@
+BasicLandPercentage=23
+
+[Group MaxCnt=4 Percentage=13]
+Badlands
+Blood Crypt
+Bloodstained Mire
+Auntie's Hovel
+[/Group]
+
+[Group MaxCnt=4 Percentage=30]
+Goblin Ringleader
+Goblin King
+Goblin Matron
+Goblin Lackey
+Goblin Piledriver
+Goblin Warchief
+Goblin Chieftain
+Mad Auntie
+Frogtosser Banneret
+Wort, Boggart Auntie
+[/Group]
+
+[Group MaxCnt=2 Percentage=10]
+Goblin General
+Goblin Marshal
+Goblin Matron
+Knucklebone Witch
+Knucklebone Witch
+Mogg War Marshal
+Mudbutton Clanger
+Reckless One
+Reckless One
+Sensation Gorger
+Siege-Gang Commander
+[/Group]
+
+[Group MaxCnt=4 Percentage=6]
+Boggart Birth Rite
+Boggart Shenanigans
+Goblin Grenade
+Goblin Grenade
+Fodder Launch
+Fodder Launch
+Patriarch's Bidding
+Tarfire
+Tarfire
+[/Group]
+
+[Group MaxCnt=4 Percentage=5]
+Crazed Goblin
+Boros Recruit
+Festering Goblin
+Goblin Arsonist
+Goblin Arsonist
+Goblin Balloon Brigade
+Goblin Digging Team
+Goblin Firestarter
+Goblin Gaveleer
+Goblin Guide
+Goblin Mountaineer
+Goblin Patrol
+Mogg Fanatic
+Mogg Sentry
+Mons's Goblin Raiders
+Prickly Boggart
+Prickly Boggart
+Raging Goblin
+Scuzzback Scrapper
+Spikeshot Elder
+Stream Hopper
+Tattermunge Maniac
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Adder-Staff Boggart
+Akki Blizzard-Herder
+Akki Raider
+Akki Underling
+Bloodmark Mentor
+Exiled Boggart
+Goatnapper
+Goblin Brigand
+Goblin Bully
+Goblin Deathraiders
+Goblin Deathraiders
+Goblin Elite Infantry
+Goblin Firebug
+Goblin Glider
+Dragon Fodder
+Goblin Outlander
+Goblin Outlander
+Goblin Piker
+Goblin Raider
+Goblin Shortcutter
+Goblin Striker
+Goblin War Buggy
+Hulking Goblin
+Jund Hackblade
+Kyren Glider
+Marsh Goblins
+Mogg Jailer
+Mogg Maniac
+Mudbrawler Cohort
+Nath's Buffoon
+Rustrazor Butcher
+Slavering Nulls
+Utvara Scalper
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Arms Dealer
+Blisterstick Shaman
+Boggart Arsonists
+Boggart Loggers
+Enslaved Scout
+Flamewave Invoker
+Goblin Cavaliers
+Goblin Chariot
+Goblin Hero
+Goblin Medics
+Goblin Roughrider
+Goblin Sharpshooter
+Goblin Sky Raider
+Goblin Spelunkers
+Hobgoblin Dragoon
+Kyren Sniper
+Lavafume Invoker
+Mudbutton Torchrunner
+Slingshot Goblin
+Spiderwig Boggart
+Spikeshot Goblin
+Squeaking Pie Grubfellows
+Squee, Goblin Nabob
+Tattermunge Duo
+Tuktuk the Explorer
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Akki Underminer
+Battle-Rattle Shaman
+Blackcleave Goblin
+Boggart Mob
+Goblin Berserker
+Goblin Settler
+Hornet Harasser
+Lightning Crafter
+Murderous Redcap
+Murderous Redcap
+Murderous Redcap
+Quill-Slinger Boggart
+Tar Pitcher
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Battle Squadron
+Bog Hoodlums
+Goblin Commando
+Scuzzback Marauders
+Tuktuk Grunts
+[/Group]
+
+End

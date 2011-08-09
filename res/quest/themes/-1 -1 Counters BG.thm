@@ -1,0 +1,48 @@
+BasicLandPercentage=16
+
+[Group MaxCnt=4 Percentage=21]
+Bayou
+Overgrown Tomb
+Savage Lands
+Verdant Catacombs
+[/Group]
+
+[Group MaxCnt=4 Percentage=18]
+Carnifex Demon
+Crumbling Ashes
+Flourishing Defenses
+Kulrath Knight
+Lockjaw Snapper
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+Contagion Clasp
+Fevered Convulsions
+Gnarled Effigy
+Harbinger of Night
+Skinrender
+Serrated Arrows
+Soul Snuffers
+Trigon of Corruption
+[/Group]
+
+[Group MaxCnt=2 Percentage=4]
+Contagion Engine
+Cultbrand Cinder
+Midnight Banshee
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Heartmender
+Noxious Hatchling
+Tatterkite
+Wickerbough Elder
+[/Group]
+
+[Group MaxCnt=2 Percentage=6]
+Deity of Scars
+Grim Poppet
+Melira's Keepers
+[/Group]
+
+End

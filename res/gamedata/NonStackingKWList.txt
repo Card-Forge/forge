@@ -1,0 +1,18 @@
+Changeling
+Deathtouch
+Defender
+Double Strike
+Fear
+First Strike
+Flash
+Flying
+Haste
+Horsemanship
+Infect
+Intimidate
+Lifelink
+Reach
+Shroud
+Trample
+Vigilance
+Wither

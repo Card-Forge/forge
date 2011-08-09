@@ -1,0 +1,15 @@
+Name:Abandoned Outpost
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G | SpellDescription$ Add G to your mana pool.
+K:CARDNAME enters the battlefield tapped.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abandoned_outpost.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/312.jpg
+End

@@ -1,0 +1,84 @@
+BasicLandPercentage=15
+
+[Group MaxCnt=4 Percentage=21]
+Creeping Tar Pit
+Darkslick Shores
+Drowned Catacomb
+Jwar Isle Refuge
+Polluted Delta
+Secluded Glen
+Underground Sea
+Watery Grave
+[/Group]
+
+[Group MaxCnt=4 Percentage=28]
+Dire Undercurrents
+Esper Stormblade
+Glen Elendra Liege
+Glen Elendra Liege
+Glen Elendra Liege
+Glen Elendra Liege
+Gravelgill Duo
+Grixis Grimblade
+Nightscape Familiar
+Stormscape Familiar
+[/Group]
+
+[Group MaxCnt=4 Percentage=8]
+Countersquall
+Dimir Infiltrator
+Glimpse the Unthinkable
+Inkfathom Infiltrator
+Mask of Riddles
+Oona's Gatewarden
+Sleeper's Robe
+Tidehollow Strix
+Vedalken Ghoul
+Vodalian Zombie
+Zombie Outlander
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Lich Lord of Unx
+Mind Funeral
+Psychatog
+Recoil
+Shadowmage Infiltrator
+Stalking Assassin
+Undermine
+Urborg Drake
+Wasp Lancer
+[/Group]
+
+[Group MaxCnt=1 Percentage=9]
+Benthic Djinn
+Brainbite
+Clutch of the Undercity
+Kathari Remnant
+Moroii
+Slinking Serpent
+Wanderbrine Rootcutters
+Wydwen, the Biting Gale
+[/Group]
+
+[Group MaxCnt=1 Percentage=7]
+Deny Reality
+Etherium Abomination
+Ghastlord of Fugue
+Gravelgill Axeshark
+Nemesis of Reason
+Skeleton Ship
+Sphinx Summoner
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Princess Lucrezia
+Ramirez DePietro
+Ramses Overdark
+Riven Turnbull
+Sivitri Scarzam
+Szadek, Lord of Secrets
+Ur-Drago
+[/Group]
+
+End

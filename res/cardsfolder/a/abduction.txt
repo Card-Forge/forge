@@ -1,0 +1,16 @@
+Name:Abduction
+ManaCost:2 U U
+Types:Enchantment Aura
+Text:You control enchanted creature.
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ GainControl
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap enchanted creature.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Enchanted
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | TriggerDescription$ When enchanted creature is put into a graveyard, return that card to the battlefield under its owner's control.
+SVar:TrigReturnOwner:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abduction.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/30.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/55.jpg
+End

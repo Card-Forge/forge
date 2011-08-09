@@ -1,0 +1,69 @@
+BasicLandPercentage=36
+
+[Group MaxCnt=3 Percentage=13]
+Ascendant Evincar
+Bad Moon
+Bad Moon
+Corrosive Mentor
+[/Group]
+
+[Group MaxCnt=4 Percentage=22]
+Ashenmoor Cohort
+Crowd of Cinders
+Hellfire
+Korlash, Heir to Blackblade
+Nocturnal Raid
+Umbra Stalker
+Vampire Nocturnus
+Corrupt
+Mind Sludge
+Nightmare
+Tendrils of Corruption
+Quag Sickness
+Kaervek's Hex
+[/Group]
+
+[Group MaxCnt=4 Percentage=21]
+Black Knight
+Dauthi Slayer
+Bloodghast
+Death Stroke
+Devour in Shadow
+Dunerider Outlaw
+Enfeeblement
+Fear
+Fevered Convulsions
+Fog of Gnats
+Foul Imp
+Gatekeeper of Malakir
+Grasp of Darkness
+Hand of Cruelty
+Hymn to Tourach
+Knight of Stromgald
+Nantuko Shade
+Nether Traitor
+Order of the Ebon Hand
+Sign in Blood
+Sinkhole
+Slith Bloodletter
+Stromgald Crusader
+Vampire Hexmage
+Vicious Hunger
+Wrench Mind
+[/Group]
+
+[Group MaxCnt=1 Percentage=8]
+Dread
+Cosmic Horror
+Halo Hunter
+Helldozer
+Ihsan's Shade
+Intimidation
+Midnight Banshee
+Midnight Banshee
+Pestilence Demon
+Underworld Dreams
+Visara the Dreadful
+[/Group]
+
+End

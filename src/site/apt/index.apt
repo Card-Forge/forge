@@ -1,0 +1,56 @@
+  -----
+  Maven Project Site
+  -----
+  -----
+  2011-06-30
+  -----
+
+Forge
+
+  Forge lets you play the card game Magic: The Gathering against a computer opponent
+  using all of the rules. This is very different than playing solitare Magic with Apprentice or Magic Workstation
+  because the AI will attack and play spells. Currently there are over 8400 cards ranging from old power cards
+  like Ancestral Recall and Lightning Bolt to newer cards like planeswalkers. The user interface is basic, but it
+  does let you download all of the cards pictures and view them while playing the game.
+
+  If you don't know Magic, the easiest way to learn is to download the demo and rulebook from
+  {{{http://www.wizards.com/magic/TCG/NewtoMagic.aspx?x=mtg/tcg/newtomagic/learntoplay}here}}.
+  You can also play sealed deck, draft, or the new quest mode. In draft mode the AI drafts for the 7 other
+  opponents and builds the decks from the cards that it chooses. In the quest mode you start out with a few cards
+  and the more games that you play the more that you win. As you get more cards you can update and change your
+  deck.
+
+  There is also a "quest mode" where you start out with a small, random cardpool and you win more cards by playing
+  against opponents. This is a scaled down version of Shandalar that is only menu based. On easy mode your goal is
+  to win 10 matches. Easy mode is well easy because you always win cards after the match whether you win or lose.
+  On some of the harder modes you only win cards if you win. Quest mode is challenging since the computer uses
+  cards that are better than the stinky ones that you have. The computer opponents are divided into three
+  categories so they get progressively harder.
+
+  Forge supports a number of keywords such as exalted, fear, flying, shadow, flanking, protection, wither, flash,
+  defender, reach, and haste. Forge now also has a mana pool and supports creature enchantments.
+
+  Forge runs on Windows, Linux, and Macs. You can download Forge from
+  {{{http://code.google.com/p/cardforge/downloads/list}here}}.
+
+  <<Maven Project Links>>
+
+  * {{{http://cardforge.googlecode.com/svn/site/index.html}Maven Project Site}}
+
+  * {{{http://cardforge.googlecode.com/svn/site/apidocs/index.html}JavaDocs}}
+
+  * {{{http://cardforge.googlecode.com/svn/site/xref/index.html}Browsable Source Code}}
+
+
+ <<Related Links>>
+
+  * {{{http://cardforge.org/}Main Website}}
+
+  * {{{https://gitorious.org/cardforge/pages/Home}Project Site}}
+
+  * {{{http://mtgrares.blogspot.com/}Original Author's Blog}}
+
+  * {{{http://www.slightlymagic.net/forum/viewforum.php?f=26}Forums}}
+
+  * {{{http://www.slightlymagic.net/wiki/MTG_Forge}Documentation}}
+

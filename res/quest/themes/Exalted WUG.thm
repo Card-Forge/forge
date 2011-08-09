@@ -1,0 +1,58 @@
+BasicLandPercentage=8
+
+[Group MaxCnt=4 Percentage=28]
+Tundra
+Savannah
+Tropical Island
+Flooded Strand
+Windswept Heath
+Misty Rainforest
+Seaside Citadel
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Akrasan Squire
+Noble Hierarch
+[/Group]
+
+[Group MaxCnt=2 Percentage=12]
+Aven Squire
+Ethercaste Knight
+Qasali Pridemage
+Sigiled Paladin
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Ardent Plea
+Court Archers
+Giltspire Avenger
+Guardians of Akrasa
+[/Group]
+
+[Group MaxCnt=4 Percentage=14]
+Angelic Benediction
+Angelic Benediction
+Outrider of Jhess
+Rafiq of the Many
+Rafiq of the Many
+Rhox Charger
+Stoic Angel
+Stoic Angel
+Silent Arbiter
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Battlegrace Angel
+Battlegrace Angel
+Finest Hour
+Finest Hour
+Rhox Bodyguard
+Waveskimmer Aven
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Sovereigns of Lost Alara
+Sigiled Behemoth
+[/Group]
+
+End

@@ -3,8 +3,1035 @@
 /.classpath -text
 /.fbprefs -text
 /.project -text
+.settings/org.eclipse.jdt.core.prefs -text
+.settings/org.eclipse.jdt.ui.prefs -text
 /CHANGES.txt svneol=native#text/plain
 /LICENSE.txt svneol=native#text/plain
 /README.txt svneol=native#text/plain
+build/Forge.icns -text
+build/backgroundImage.jpg -text svneol=unset#image/jpeg
+build/build-forge.bat -text
+build/create-dmg -text
+build/forge.ico -text svneol=unset#image/ico
+build/forge.sh svneol=native#text/x-sh
+build/support/AdiumApplescriptRunner -text
+build/support/template.applescript -text
 /forge.properties svneol=native#text/plain
 /pom.xml svneol=native#text/xml
+res/AllTokens.txt svneol=native#text/plain
+res/PerSetTracking.py svneol=native#text/x-python
+res/blockdata/blocks.txt svneol=native#text/plain
+res/blockdata/setdata.txt svneol=native#text/plain
+res/booster-decks -text
+res/boosterdata/10E.pack -text
+res/boosterdata/2ED.pack -text
+res/boosterdata/3ED.pack -text
+res/boosterdata/4ED.pack -text
+res/boosterdata/5DN.pack -text
+res/boosterdata/5ED.pack -text
+res/boosterdata/6ED.pack -text
+res/boosterdata/7ED.pack -text
+res/boosterdata/8ED.pack -text
+res/boosterdata/9ED.pack -text
+res/boosterdata/A.pack -text
+res/boosterdata/ALA.pack -text
+res/boosterdata/ALL.pack -text
+res/boosterdata/APC.pack -text
+res/boosterdata/ARB.pack -text
+res/boosterdata/ARN.pack -text
+res/boosterdata/ATQ.pack -text
+res/boosterdata/B.pack -text
+res/boosterdata/BOK.pack -text
+res/boosterdata/CFX.pack -text
+res/boosterdata/CHK.pack -text
+res/boosterdata/CHR.pack -text
+res/boosterdata/CSP.pack -text
+res/boosterdata/DIS.pack -text
+res/boosterdata/DRK.pack -text
+res/boosterdata/DST.pack -text
+res/boosterdata/EVE.pack -text
+res/boosterdata/EXO.pack -text
+res/boosterdata/FEM.pack -text
+res/boosterdata/FUT.pack -text
+res/boosterdata/GPT.pack -text
+res/boosterdata/HML.pack -text
+res/boosterdata/ICE.pack -text
+res/boosterdata/INV.pack -text
+res/boosterdata/JUD.pack -text
+res/boosterdata/LEA.pack -text
+res/boosterdata/LEB.pack -text
+res/boosterdata/LEG.pack -text
+res/boosterdata/LGN.pack -text
+res/boosterdata/LRW.pack -text
+res/boosterdata/M10.pack -text
+res/boosterdata/M11.pack -text
+res/boosterdata/M12.pack -text
+res/boosterdata/MBS.pack -text
+res/boosterdata/MIR.pack -text
+res/boosterdata/MMQ.pack -text
+res/boosterdata/MOR.pack -text
+res/boosterdata/MRD.pack -text
+res/boosterdata/NMS.pack -text
+res/boosterdata/NPH.pack -text
+res/boosterdata/ODY.pack -text
+res/boosterdata/ONS.pack -text
+res/boosterdata/P02.pack -text
+res/boosterdata/PCY.pack -text
+res/boosterdata/PLC.pack -text
+res/boosterdata/PLS.pack -text
+res/boosterdata/POR.pack -text
+res/boosterdata/PTK.pack -text
+res/boosterdata/RAV.pack -text
+res/boosterdata/ROE.pack -text
+res/boosterdata/SCG.pack -text
+res/boosterdata/SHM.pack -text
+res/boosterdata/SOK.pack -text
+res/boosterdata/SOM.pack -text
+res/boosterdata/STH.pack -text
+res/boosterdata/TMP.pack -text
+res/boosterdata/TOR.pack -text
+res/boosterdata/TSP.pack -text
+res/boosterdata/UDS.pack -text
+res/boosterdata/ULG.pack -text
+res/boosterdata/USG.pack -text
+res/boosterdata/VIS.pack -text
+res/boosterdata/WTH.pack -text
+res/boosterdata/WWK.pack -text
+res/boosterdata/ZEN.pack -text
+res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
+res/cardsfolder/a/abbey_gargoyles.txt svneol=native#text/plain
+res/cardsfolder/a/abbey_matron.txt svneol=native#text/plain
+res/cardsfolder/a/abduction.txt svneol=native#text/plain
+res/cardsfolder/a/abjure.txt svneol=native#text/plain
+res/cardsfolder/a/abolish.txt svneol=native#text/plain
+res/cardsfolder/a/abomination.txt svneol=native#text/plain
+res/decks/JuzamjediCube.dck -text
+res/draft/common.txt svneol=native#text/plain
+res/draft/cube_juzamjedi.draft -text
+res/draft/draft.properties svneol=native#text/plain
+res/draft/rare.txt svneol=native#text/plain
+res/draft/uncommon.txt svneol=native#text/plain
+res/gamedata/NonStackingKWList.txt svneol=native#text/plain
+res/gamedata/TypeLists.txt svneol=native#text/plain
+res/gui/display_layout.xml svneol=native#text/xml
+res/gui/display_new_layout.xml svneol=native#text/xml
+res/gui/gui.properties svneol=native#text/plain
+res/images/deckeditor/filter_artifact_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_artifact_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_black_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_black_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_blue_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_blue_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_colorless_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_colorless_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_creature_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_creature_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_enchant_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_enchant_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_green_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_green_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_instant_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_instant_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_land_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_land_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_planeswalker_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_planeswalker_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_red_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_red_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_sorcery_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_sorcery_y.png -text svneol=unset#image/png
+res/images/deckeditor/filter_white_n.png -text svneol=unset#image/png
+res/images/deckeditor/filter_white_y.png -text svneol=unset#image/png
+res/images/symbols-13/0.png -text svneol=unset#image/png
+res/images/symbols-13/1.png -text svneol=unset#image/png
+res/images/symbols-13/10.png -text svneol=unset#image/png
+res/images/symbols-13/11.png -text svneol=unset#image/png
+res/images/symbols-13/12.png -text svneol=unset#image/png
+res/images/symbols-13/15.png -text svneol=unset#image/png
+res/images/symbols-13/16.png -text svneol=unset#image/png
+res/images/symbols-13/2.png -text svneol=unset#image/png
+res/images/symbols-13/20.png -text svneol=unset#image/png
+res/images/symbols-13/2B.png -text svneol=unset#image/png
+res/images/symbols-13/2G.png -text svneol=unset#image/png
+res/images/symbols-13/2R.png -text svneol=unset#image/png
+res/images/symbols-13/2U.png -text svneol=unset#image/png
+res/images/symbols-13/2W.png -text svneol=unset#image/png
+res/images/symbols-13/3.png -text svneol=unset#image/png
+res/images/symbols-13/4.png -text svneol=unset#image/png
+res/images/symbols-13/5.png -text svneol=unset#image/png
+res/images/symbols-13/6.png -text svneol=unset#image/png
+res/images/symbols-13/7.png -text svneol=unset#image/png
+res/images/symbols-13/8.png -text svneol=unset#image/png
+res/images/symbols-13/9.png -text svneol=unset#image/png
+res/images/symbols-13/B.png -text svneol=unset#image/png
+res/images/symbols-13/BG.png -text svneol=unset#image/png
+res/images/symbols-13/BR.png -text svneol=unset#image/png
+res/images/symbols-13/C.png -text svneol=unset#image/png
+res/images/symbols-13/G.png -text svneol=unset#image/png
+res/images/symbols-13/GU.png -text svneol=unset#image/png
+res/images/symbols-13/GW.png -text svneol=unset#image/png
+res/images/symbols-13/PB.png -text svneol=unset#image/png
+res/images/symbols-13/PG.png -text svneol=unset#image/png
+res/images/symbols-13/PR.png -text svneol=unset#image/png
+res/images/symbols-13/PU.png -text svneol=unset#image/png
+res/images/symbols-13/PW.png -text svneol=unset#image/png
+res/images/symbols-13/Q.png -text svneol=unset#image/png
+res/images/symbols-13/R.png -text svneol=unset#image/png
+res/images/symbols-13/RG.png -text svneol=unset#image/png
+res/images/symbols-13/RW.png -text svneol=unset#image/png
+res/images/symbols-13/S.png -text svneol=unset#image/png
+res/images/symbols-13/T.png -text svneol=unset#image/png
+res/images/symbols-13/U.png -text svneol=unset#image/png
+res/images/symbols-13/UB.png -text svneol=unset#image/png
+res/images/symbols-13/UR.png -text svneol=unset#image/png
+res/images/symbols-13/W.png -text svneol=unset#image/png
+res/images/symbols-13/WB.png -text svneol=unset#image/png
+res/images/symbols-13/WU.png -text svneol=unset#image/png
+res/images/symbols-13/X.png -text svneol=unset#image/png
+res/images/symbols-13/Y.png -text svneol=unset#image/png
+res/images/symbols-13/Z.png -text svneol=unset#image/png
+res/images/symbols-13/attack.png -text svneol=unset#image/png
+res/images/symbols-13/defend.png -text svneol=unset#image/png
+res/images/symbols-13/foil01.png -text svneol=unset#image/png
+res/images/symbols-13/foil02.png -text svneol=unset#image/png
+res/images/symbols-13/foil03.png -text svneol=unset#image/png
+res/images/symbols-13/foil04.png -text svneol=unset#image/png
+res/images/symbols-13/foil05.png -text svneol=unset#image/png
+res/images/symbols-13/foil06.png -text svneol=unset#image/png
+res/images/symbols-13/foil07.png -text svneol=unset#image/png
+res/images/symbols-13/foil08.png -text svneol=unset#image/png
+res/images/symbols-13/foil09.png -text svneol=unset#image/png
+res/images/symbols-13/foil10.png -text svneol=unset#image/png
+res/images/symbols-13/slash.png -text svneol=unset#image/png
+res/images/symbols-13/summonsick.png -text svneol=unset#image/png
+res/images/ui/newgame_background.jpg -text svneol=unset#image/jpeg
+res/lang/de.properties svneol=native#text/plain
+res/lang/en.properties svneol=native#text/plain
+res/lang/howTo/de.properties svneol=native#text/plain
+res/lang/howTo/en.properties svneol=native#text/plain
+res/lang/lang.properties svneol=native#text/plain
+res/licenses/java-yield-license.txt svneol=native#text/plain
+res/licenses/log4j-license.txt svneol=native#text/plain
+res/licenses/multiline-label-license.txt svneol=native#text/plain
+res/licenses/xpp3-license.txt svneol=native#text/plain
+res/licenses/xstream-license.txt svneol=native#text/plain
+res/main.properties svneol=native#text/plain
+res/mtg-data.txt svneol=native#text/plain
+res/pics/BookIcon.png -text svneol=unset#image/png
+res/pics/BoxIcon.png -text svneol=unset#image/png
+res/pics/GoldIcon.png -text svneol=unset#image/png
+res/pics/HeartIcon.png -text svneol=unset#image/png
+res/pics/icons/BookIcon.png -text svneol=unset#image/png
+res/pics/icons/BookIconSmall.png -text svneol=unset#image/png
+res/pics/icons/BottlesIconSmall.png -text svneol=unset#image/png
+res/pics/icons/BoxIcon.png -text svneol=unset#image/png
+res/pics/icons/BoxIconSmall.png -text svneol=unset#image/png
+res/pics/icons/CoinIcon.png -text svneol=unset#image/png
+res/pics/icons/CoinIconSmall.png -text svneol=unset#image/png
+res/pics/icons/CoinStack.png -text svneol=unset#image/png
+res/pics/icons/ElixirIcon.png -text svneol=unset#image/png
+res/pics/icons/FoxIconSmall.png -text svneol=unset#image/png
+res/pics/icons/GearIconSmall.png -text svneol=unset#image/png
+res/pics/icons/GoldIcon.png -text svneol=unset#image/png
+res/pics/icons/GoldIconLarge.png -text svneol=unset#image/png
+res/pics/icons/GoldIconSmall.png -text svneol=unset#image/png
+res/pics/icons/HeartIcon.png -text svneol=unset#image/png
+res/pics/icons/LeafIconSmall.png -text svneol=unset#image/png
+res/pics/icons/Life.png -text svneol=unset#image/png
+res/pics/icons/MapIcon.png -text svneol=unset#image/png
+res/pics/icons/MapIconLarge.png -text svneol=unset#image/png
+res/pics/icons/ZeppelinIcon.png -text svneol=unset#image/png
+res/pics/icons/notesIcon.png -text svneol=unset#image/png
+res/pics_link/card-pictures_a.txt svneol=native#text/plain
+res/pics_link/card-pictures_b.txt svneol=native#text/plain
+res/pics_link/card-pictures_c.txt svneol=native#text/plain
+res/pics_link/card-pictures_d.txt svneol=native#text/plain
+res/pics_link/card-pictures_e.txt svneol=native#text/plain
+res/pics_link/card-pictures_f.txt svneol=native#text/plain
+res/pics_link/card-pictures_g.txt svneol=native#text/plain
+res/pics_link/card-pictures_h.txt svneol=native#text/plain
+res/pics_link/card-pictures_i.txt svneol=native#text/plain
+res/pics_link/card-pictures_j.txt svneol=native#text/plain
+res/pics_link/card-pictures_k.txt svneol=native#text/plain
+res/pics_link/card-pictures_l.txt svneol=native#text/plain
+res/pics_link/card-pictures_m.txt svneol=native#text/plain
+res/pics_link/card-pictures_n.txt svneol=native#text/plain
+res/pics_link/card-pictures_o.txt svneol=native#text/plain
+res/pics_link/card-pictures_other.txt svneol=native#text/plain
+res/pics_link/card-pictures_p.txt svneol=native#text/plain
+res/pics_link/card-pictures_q.txt svneol=native#text/plain
+res/pics_link/card-pictures_r.txt svneol=native#text/plain
+res/pics_link/card-pictures_s.txt svneol=native#text/plain
+res/pics_link/card-pictures_t.txt svneol=native#text/plain
+res/pics_link/card-pictures_token.txt svneol=native#text/plain
+res/pics_link/card-pictures_u.txt svneol=native#text/plain
+res/pics_link/card-pictures_v.txt svneol=native#text/plain
+res/pics_link/card-pictures_w.txt svneol=native#text/plain
+res/pics_link/card-pictures_x.txt svneol=native#text/plain
+res/pics_link/card-pictures_y.txt svneol=native#text/plain
+res/pics_link/card-pictures_z.txt svneol=native#text/plain
+res/quest/all-prices.txt svneol=native#text/plain
+res/quest/decks/Abraham[!!-~]Lincoln[!!-~]3.dck -text
+res/quest/decks/Albert[!!-~]Einstein[!!-~]2.dck -text
+res/quest/decks/Albert[!!-~]Einstein[!!-~]3.dck -text
+res/quest/decks/Alice[!!-~]in[!!-~]Wonderland[!!-~]2.dck -text
+res/quest/decks/Alice[!!-~]in[!!-~]Wonderland[!!-~]3.dck -text
+res/quest/decks/Apu[!!-~]Nahasapeemapetilon[!!-~]2.dck -text
+res/quest/decks/Aquaman[!!-~]1.dck -text
+res/quest/decks/Aquaman[!!-~]2.dck -text
+res/quest/decks/Aquaman[!!-~]3.dck -text
+res/quest/decks/Aragorn[!!-~]1.dck -text
+res/quest/decks/Aragorn[!!-~]2.dck -text
+res/quest/decks/Atomic[!!-~]Robo[!!-~]3.dck -text
+res/quest/decks/Bamm[!!-~]Bamm[!!-~]Rubble[!!-~]1.dck -text
+res/quest/decks/Barney[!!-~]Rubble[!!-~]1.dck -text
+res/quest/decks/Barney[!!-~]Rubble[!!-~]2.dck -text
+res/quest/decks/Barney[!!-~]Rubble[!!-~]3.dck -text
+res/quest/decks/Bart[!!-~]Simpson[!!-~]1.dck -text
+res/quest/decks/Bart[!!-~]Simpson[!!-~]2.dck -text
+res/quest/decks/Bart[!!-~]Simpson[!!-~]3.dck -text
+res/quest/decks/Batman[!!-~]3.dck -text
+res/quest/decks/Bela[!!-~]Lugosi[!!-~]3.dck -text
+res/quest/decks/Betty[!!-~]Rubble[!!-~]3.dck -text
+res/quest/decks/Blackbeard[!!-~]3.dck -text
+res/quest/decks/Boba[!!-~]Fett[!!-~]3.dck -text
+res/quest/decks/Boris[!!-~]Karloff[!!-~]3.dck -text
+res/quest/decks/Boromir[!!-~]2.dck -text
+res/quest/decks/Boromir[!!-~]3.dck -text
+res/quest/decks/Boromir[!!-~]4.dck -text
+res/quest/decks/Bridge[!!-~]Troll[!!-~]3.dck -text
+res/quest/decks/Buffy[!!-~]1.dck -text
+res/quest/decks/Buffy[!!-~]2.dck -text
+res/quest/decks/Buffy[!!-~]3.dck -text
+res/quest/decks/C3PO[!!-~]1.dck -text
+res/quest/decks/C3PO[!!-~]2.dck -text
+res/quest/decks/C3PO[!!-~]3.dck -text
+res/quest/decks/Captain[!!-~]America[!!-~]2.dck -text
+res/quest/decks/Captain[!!-~]America[!!-~]3.dck -text
+res/quest/decks/Catwoman[!!-~]1.dck -text
+res/quest/decks/Catwoman[!!-~]2.dck -text
+res/quest/decks/Cave[!!-~]Troll[!!-~]3.dck -text
+res/quest/decks/Comic[!!-~]Book[!!-~]Guy[!!-~]3.dck -text
+res/quest/decks/Conan[!!-~]the[!!-~]Barbarian[!!-~]1.dck -text
+res/quest/decks/Conan[!!-~]the[!!-~]Barbarian[!!-~]2.dck -text
+res/quest/decks/Cow[!!-~]1.dck -text
+res/quest/decks/Crocodile[!!-~]Dundee[!!-~]1.dck -text
+res/quest/decks/Crocodile[!!-~]Dundee[!!-~]2.dck -text
+res/quest/decks/Crocodile[!!-~]Dundee[!!-~]3.dck -text
+res/quest/decks/Cyclops[!!-~]2.dck -text
+res/quest/decks/Cyclops[!!-~]3.dck -text
+res/quest/decks/Da[!!-~]Vinci[!!-~]1.dck -text
+res/quest/decks/Da[!!-~]Vinci[!!-~]2.dck -text
+res/quest/decks/Da[!!-~]Vinci[!!-~]3.dck -text
+res/quest/decks/Darrin[!!-~]Stephens[!!-~]1.dck -text
+res/quest/decks/Darrin[!!-~]Stephens[!!-~]2.dck -text
+res/quest/decks/Darrin[!!-~]Stephens[!!-~]3.dck -text
+res/quest/decks/Darrin[!!-~]Stephens[!!-~]4.dck -text
+res/quest/decks/Darth[!!-~]Vader[!!-~]3.dck -text
+res/quest/decks/Data[!!-~]3.dck -text
+res/quest/decks/Deadpool[!!-~]2.dck -text
+res/quest/decks/Deadpool[!!-~]3.dck -text
+res/quest/decks/Demon[!!-~]3.dck -text
+res/quest/decks/Dilbert[!!-~]3.dck -text
+res/quest/decks/Dino[!!-~]1.dck -text
+res/quest/decks/Dino[!!-~]2.dck -text
+res/quest/decks/Dino[!!-~]3.dck -text
+res/quest/decks/Dino[!!-~]4.dck -text
+res/quest/decks/Doc[!!-~]Holiday[!!-~]1.dck -text
+res/quest/decks/Doc[!!-~]Holiday[!!-~]2.dck -text
+res/quest/decks/Doc[!!-~]Holiday[!!-~]3.dck -text
+res/quest/decks/Dogbert[!!-~]2.dck -text
+res/quest/decks/Doran[!!-~]3.dck -text
+res/quest/decks/Dr[!!-~]No[!!-~]3.dck -text
+res/quest/decks/Dr[!!-~]Strangelove[!!-~]3.dck -text
+res/quest/decks/Electro[!!-~]2.dck -text
+res/quest/decks/Electro[!!-~]3.dck -text
+res/quest/decks/Elrond[!!-~]1.dck -text
+res/quest/decks/Elrond[!!-~]2.dck -text
+res/quest/decks/Elrond[!!-~]3.dck -text
+res/quest/decks/Endora[!!-~]2.dck -text
+res/quest/decks/Endora[!!-~]3.dck -text
+res/quest/decks/Eomer[!!-~]2.dck -text
+res/quest/decks/Ezio[!!-~]3.dck -text
+res/quest/decks/Fat[!!-~]Albert[!!-~]1.dck -text
+res/quest/decks/Fat[!!-~]Albert[!!-~]2.dck -text
+res/quest/decks/Fat[!!-~]Albert[!!-~]3.dck -text
+res/quest/decks/Fin[!!-~]Fang[!!-~]Foom[!!-~]1.dck -text
+res/quest/decks/Fin[!!-~]Fang[!!-~]Foom[!!-~]2.dck -text
+res/quest/decks/Fin[!!-~]Fang[!!-~]Foom[!!-~]3.dck -text
+res/quest/decks/Fred[!!-~]Flintstone[!!-~]3.dck -text
+res/quest/decks/Frodo[!!-~]1.dck -text
+res/quest/decks/Frodo[!!-~]2.dck -text
+res/quest/decks/Frodo[!!-~]3.dck -text
+res/quest/decks/Galadriel[!!-~]2.dck -text
+res/quest/decks/Galahad[!!-~]1.dck -text
+res/quest/decks/Galahad[!!-~]2.dck -text
+res/quest/decks/Galahad[!!-~]3.dck -text
+res/quest/decks/Gambit[!!-~]2.dck -text
+res/quest/decks/Genghis[!!-~]Khan[!!-~]1.dck -text
+res/quest/decks/Genghis[!!-~]Khan[!!-~]2.dck -text
+res/quest/decks/Genghis[!!-~]Khan[!!-~]3.dck -text
+res/quest/decks/George[!!-~]of[!!-~]the[!!-~]Jungle[!!-~]1.dck -text
+res/quest/decks/George[!!-~]of[!!-~]the[!!-~]Jungle[!!-~]2.dck -text
+res/quest/decks/George[!!-~]of[!!-~]the[!!-~]Jungle[!!-~]3.dck -text
+res/quest/decks/Gimli[!!-~]2.dck -text
+res/quest/decks/Gimli[!!-~]3.dck -text
+res/quest/decks/Gold[!!-~]Finger[!!-~]3.dck -text
+res/quest/decks/Gold[!!-~]Finger[!!-~]4.dck -text
+res/quest/decks/Grampa[!!-~]Simpson[!!-~]1.dck -text
+res/quest/decks/Grampa[!!-~]Simpson[!!-~]2.dck -text
+res/quest/decks/Grampa[!!-~]Simpson[!!-~]3.dck -text
+res/quest/decks/Green[!!-~]Arrow[!!-~]1.dck -text
+res/quest/decks/Green[!!-~]Arrow[!!-~]2.dck -text
+res/quest/decks/Green[!!-~]Arrow[!!-~]3.dck -text
+res/quest/decks/Green[!!-~]Lantern[!!-~]3.dck -text
+res/quest/decks/Hagrid[!!-~]2.dck -text
+res/quest/decks/Han[!!-~]Solo[!!-~]3.dck -text
+res/quest/decks/Hans[!!-~]3.dck -text
+res/quest/decks/Harry[!!-~]Potter[!!-~]1.dck -text
+res/quest/decks/Harry[!!-~]Potter[!!-~]2.dck -text
+res/quest/decks/Harry[!!-~]Potter[!!-~]3.dck -text
+res/quest/decks/Hellboy[!!-~]3.dck -text
+res/quest/decks/Hercules[!!-~]1.dck -text
+res/quest/decks/Hercules[!!-~]2.dck -text
+res/quest/decks/Hercules[!!-~]3.dck -text
+res/quest/decks/Hermione[!!-~]Granger[!!-~]3.dck -text
+res/quest/decks/Higgins[!!-~]3.dck -text
+res/quest/decks/Hobbes[!!-~]3.dck -text
+res/quest/decks/Hobbes[!!-~]4.dck -text
+res/quest/decks/Homer[!!-~]Simpson[!!-~]1.dck -text
+res/quest/decks/Homer[!!-~]Simpson[!!-~]2.dck -text
+res/quest/decks/Homer[!!-~]Simpson[!!-~]3.dck -text
+res/quest/decks/Iceman[!!-~]3.dck -text
+res/quest/decks/Indiana[!!-~]Jones[!!-~]1.dck -text
+res/quest/decks/Indiana[!!-~]Jones[!!-~]2.dck -text
+res/quest/decks/Indiana[!!-~]Jones[!!-~]3.dck -text
+res/quest/decks/Jabba[!!-~]the[!!-~]Hut[!!-~]3.dck -text
+res/quest/decks/Jack[!!-~]Sparrow[!!-~]1.dck -text
+res/quest/decks/Jack[!!-~]Sparrow[!!-~]2.dck -text
+res/quest/decks/James[!!-~]Bond[!!-~]1.dck -text
+res/quest/decks/James[!!-~]Bond[!!-~]2.dck -text
+res/quest/decks/James[!!-~]Bond[!!-~]3.dck -text
+res/quest/decks/James[!!-~]T[!!-~]Kirk[!!-~]3.dck -text
+res/quest/decks/Joe[!!-~]Kidd[!!-~]1.dck -text
+res/quest/decks/Joe[!!-~]Kidd[!!-~]2.dck -text
+res/quest/decks/Joe[!!-~]Kidd[!!-~]3.dck -text
+res/quest/decks/Kang[!!-~]1.dck -text
+res/quest/decks/Kang[!!-~]2.dck -text
+res/quest/decks/Kang[!!-~]3.dck -text
+res/quest/decks/King[!!-~]Arthur[!!-~]1.dck -text
+res/quest/decks/King[!!-~]Arthur[!!-~]2.dck -text
+res/quest/decks/King[!!-~]Arthur[!!-~]3.dck -text
+res/quest/decks/King[!!-~]Edward[!!-~]1.dck -text
+res/quest/decks/King[!!-~]Edward[!!-~]2.dck -text
+res/quest/decks/King[!!-~]Edward[!!-~]3.dck -text
+res/quest/decks/King[!!-~]Goldemar[!!-~]1.dck -text
+res/quest/decks/King[!!-~]Kong[!!-~]1.dck -text
+res/quest/decks/King[!!-~]Kong[!!-~]2.dck -text
+res/quest/decks/King[!!-~]Kong[!!-~]3.dck -text
+res/quest/decks/Kojak[!!-~]1.dck -text
+res/quest/decks/Kojak[!!-~]2.dck -text
+res/quest/decks/Kojak[!!-~]3.dck -text
+res/quest/decks/Krypto[!!-~]2.dck -text
+res/quest/decks/Krypto[!!-~]3.dck -text
+res/quest/decks/Leprechaun[!!-~]1.dck -text
+res/quest/decks/Lisa[!!-~]Simpson[!!-~]2.dck -text
+res/quest/decks/Luke[!!-~]Skywalker[!!-~]3.dck -text
+res/quest/decks/Maggie[!!-~]Simpson[!!-~]3.dck -text
+res/quest/decks/Magneto[!!-~]3.dck -text
+res/quest/decks/Magnum[!!-~]1.dck -text
+res/quest/decks/Magnum[!!-~]2.dck -text
+res/quest/decks/Magnum[!!-~]3.dck -text
+res/quest/decks/Marge[!!-~]Simpson[!!-~]2.dck -text
+res/quest/decks/Mister[!!-~]Fantastic[!!-~]3.dck -text
+res/quest/decks/Morpheus[!!-~]3.dck -text
+res/quest/decks/Mr[!!-~]Slate[!!-~]2.dck -text
+res/quest/decks/Mr[!!-~]Slate[!!-~]3.dck -text
+res/quest/decks/Nagini[!!-~]2.dck -text
+res/quest/decks/Napoleon[!!-~]3.dck -text
+res/quest/decks/Ned[!!-~]Flanders[!!-~]1.dck -text
+res/quest/decks/Ned[!!-~]Flanders[!!-~]2.dck -text
+res/quest/decks/Ned[!!-~]Flanders[!!-~]3.dck -text
+res/quest/decks/Ned[!!-~]Flanders[!!-~]4.dck -text
+res/quest/decks/Neo[!!-~]2.dck -text
+res/quest/decks/Neo[!!-~]3.dck -text
+res/quest/decks/Newton[!!-~]3.dck -text
+res/quest/decks/Oberon[!!-~]1.dck -text
+res/quest/decks/Oberon[!!-~]2.dck -text
+res/quest/decks/Oberon[!!-~]3.dck -text
+res/quest/decks/Odin[!!-~]1.dck -text
+res/quest/decks/Odin[!!-~]2.dck -text
+res/quest/decks/Odin[!!-~]3.dck -text
+res/quest/decks/Optimus[!!-~]Prime[!!-~]3.dck -text
+res/quest/decks/Pebbles[!!-~]Flintstone[!!-~]2.dck -text
+res/quest/decks/Pebbles[!!-~]Flintstone[!!-~]3.dck -text
+res/quest/decks/Picard[!!-~]3.dck -text
+res/quest/decks/Pinky[!!-~]and[!!-~]the[!!-~]Brain[!!-~]2.dck -text
+res/quest/decks/Pointy[!!-~]Haired[!!-~]Boss[!!-~]3.dck -text
+res/quest/decks/Princess[!!-~]Selenia[!!-~]1.dck -text
+res/quest/decks/Professor[!!-~]X[!!-~]2.dck -text
+res/quest/decks/Professor[!!-~]X[!!-~]3.dck -text
+res/quest/decks/R2-D2[!!-~]3.dck -text
+res/quest/decks/Radagast[!!-~]2.dck -text
+res/quest/decks/Radiant[!!-~]3.dck -text
+res/quest/decks/Radioactive[!!-~]Man[!!-~]3.dck -text
+res/quest/decks/Radioactive[!!-~]Man[!!-~]4.dck -text
+res/quest/decks/Ratbert[!!-~]2.dck -text
+res/quest/decks/Redwall[!!-~]2.dck -text
+res/quest/decks/Reverend[!!-~]Lovejoy[!!-~]2.dck -text
+res/quest/decks/Riddler[!!-~]3.dck -text
+res/quest/decks/Riddler[!!-~]4.dck -text
+res/quest/decks/Rocky[!!-~]1.dck -text
+res/quest/decks/Rocky[!!-~]2.dck -text
+res/quest/decks/Rocky[!!-~]3.dck -text
+res/quest/decks/Rogue[!!-~]3.dck -text
+res/quest/decks/Samantha[!!-~]Stephens[!!-~]1.dck -text
+res/quest/decks/Samantha[!!-~]Stephens[!!-~]2.dck -text
+res/quest/decks/Samantha[!!-~]Stephens[!!-~]3.dck -text
+res/quest/decks/Samantha[!!-~]Stephens[!!-~]4.dck -text
+res/quest/decks/Samwise[!!-~]Gamgee[!!-~]2.dck -text
+res/quest/decks/Samwise[!!-~]Gamgee[!!-~]3.dck -text
+res/quest/decks/Saruman[!!-~]2.dck -text
+res/quest/decks/Saruman[!!-~]3.dck -text
+res/quest/decks/Sauron[!!-~]2.dck -text
+res/quest/decks/Scooby[!!-~]Doo[!!-~]3.dck -text
+res/quest/decks/Scotty[!!-~]2.dck -text
+res/quest/decks/Scotty[!!-~]3.dck -text
+res/quest/decks/Seabiscuit[!!-~]1.dck -text
+res/quest/decks/Seabiscuit[!!-~]2.dck -text
+res/quest/decks/Seabiscuit[!!-~]3.dck -text
+res/quest/decks/Secret[!!-~]Squirrel[!!-~]3.dck -text
+res/quest/decks/Sherlock[!!-~]Holmes[!!-~]1.dck -text
+res/quest/decks/Sherlock[!!-~]Holmes[!!-~]2.dck -text
+res/quest/decks/Sherlock[!!-~]Holmes[!!-~]3.dck -text
+res/quest/decks/Shrek[!!-~]1.dck -text
+res/quest/decks/Silver[!!-~]Samurai[!!-~]2.dck -text
+res/quest/decks/Silver[!!-~]Surfer[!!-~]3.dck -text
+res/quest/decks/Spiderman[!!-~]2.dck -text
+res/quest/decks/Spiderman[!!-~]3.dck -text
+res/quest/decks/Spock[!!-~]2.dck -text
+res/quest/decks/Storm[!!-~]1.dck -text
+res/quest/decks/Storm[!!-~]2.dck -text
+res/quest/decks/Storm[!!-~]3.dck -text
+res/quest/decks/Sun[!!-~]Quan[!!-~]2.dck -text
+res/quest/decks/Superman[!!-~]3.dck -text
+res/quest/decks/Tarzan[!!-~]1.dck -text
+res/quest/decks/Tarzan[!!-~]2.dck -text
+res/quest/decks/Terminator[!!-~]3.dck -text
+res/quest/decks/The[!!-~]Great[!!-~]Gazoo[!!-~]3.dck -text
+res/quest/decks/The[!!-~]Thing[!!-~]2.dck -text
+res/quest/decks/Tom[!!-~]Bombadil[!!-~]3.dck -text
+res/quest/decks/Totoro[!!-~]2.dck -text
+res/quest/decks/Treebeard[!!-~]1.dck -text
+res/quest/decks/Treebeard[!!-~]2.dck -text
+res/quest/decks/Treebeard[!!-~]3.dck -text
+res/quest/decks/Uncle[!!-~]Owen[!!-~]3.dck -text
+res/quest/decks/Walle[!!-~]2.dck -text
+res/quest/decks/Wally[!!-~]3.dck -text
+res/quest/decks/White[!!-~]Knight[!!-~]1.dck -text
+res/quest/decks/White[!!-~]Knight[!!-~]2.dck -text
+res/quest/decks/White[!!-~]Knight[!!-~]3.dck -text
+res/quest/decks/Wilma[!!-~]Flintstone[!!-~]1.dck -text
+res/quest/decks/Wilma[!!-~]Flintstone[!!-~]2.dck -text
+res/quest/decks/Wilma[!!-~]Flintstone[!!-~]3.dck -text
+res/quest/decks/Wolverine[!!-~]3.dck -text
+res/quest/decks/Wonder[!!-~]Woman[!!-~]2.dck -text
+res/quest/decks/Wyatt[!!-~]Earp[!!-~]1.dck -text
+res/quest/decks/Wyatt[!!-~]Earp[!!-~]2.dck -text
+res/quest/decks/Wyatt[!!-~]Earp[!!-~]3.dck -text
+res/quest/decks/quest1.dck -text
+res/quest/decks/quest10.dck -text
+res/quest/decks/quest11.dck -text
+res/quest/decks/quest12.dck -text
+res/quest/decks/quest13.dck -text
+res/quest/decks/quest14.dck -text
+res/quest/decks/quest15.dck -text
+res/quest/decks/quest16.dck -text
+res/quest/decks/quest17.dck -text
+res/quest/decks/quest18.dck -text
+res/quest/decks/quest19.dck -text
+res/quest/decks/quest2.dck -text
+res/quest/decks/quest20.dck -text
+res/quest/decks/quest21.dck -text
+res/quest/decks/quest22.dck -text
+res/quest/decks/quest3.dck -text
+res/quest/decks/quest4.dck -text
+res/quest/decks/quest5.dck -text
+res/quest/decks/quest6.dck -text
+res/quest/decks/quest7.dck -text
+res/quest/decks/quest8.dck -text
+res/quest/decks/quest9.dck -text
+res/quest/easy.txt svneol=native#text/plain
+res/quest/hard.txt svneol=native#text/plain
+res/quest/medium.txt svneol=native#text/plain
+res/quest/price.txt svneol=native#text/plain
+res/quest/quest.preferences -text
+res/quest/quest.properties svneol=native#text/plain
+res/quest/quests.txt svneol=native#text/plain
+res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text
+res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
+res/quest/themes/Anti[!!-~]Black[!!-~]WG.thm -text
+res/quest/themes/Anti[!!-~]Red[!!-~]WR.thm -text
+res/quest/themes/Arcane[!!-~]Spirits[!!-~]UBG.thm -text
+res/quest/themes/Artifacts[!!-~]Colorless.thm -text
+res/quest/themes/Auras[!!-~]WRG.thm -text
+res/quest/themes/Ball[!!-~]Lightning[!!-~]R.thm -text
+res/quest/themes/Black[!!-~]Vise[!!-~]UB.thm -text
+res/quest/themes/Burn[!!-~]R.thm -text
+res/quest/themes/Clerics[!!-~]WB.thm -text
+res/quest/themes/Dermageddon[!!-~]WG.thm -text
+res/quest/themes/Domain.thm -text
+res/quest/themes/Double[!!-~]Strike[!!-~]WR.thm -text
+res/quest/themes/Elves[!!-~]G.thm -text
+res/quest/themes/Enchantments[!!-~]WG.thm -text
+res/quest/themes/Equipment[!!-~]W.thm -text
+res/quest/themes/Exalted[!!-~]WUG.thm -text
+res/quest/themes/Flying[!!-~]W.thm -text
+res/quest/themes/Flying[!!-~]WR.thm -text
+res/quest/themes/Flying[!!-~]WU.thm -text
+res/quest/themes/Fungi[!!-~]and[!!-~]Saprolings[!!-~]WG.thm -text
+res/quest/themes/Giants[!!-~]R.thm -text
+res/quest/themes/Giants[!!-~]WR.thm -text
+res/quest/themes/Goblins[!!-~]BR.thm -text
+res/quest/themes/Goblins[!!-~]R.thm -text
+res/quest/themes/Indestructibility[!!-~]WB.thm -text
+res/quest/themes/Islandwalk[!!-~]U.thm -text
+res/quest/themes/Kithkin[!!-~]W.thm -text
+res/quest/themes/Landfall[!!-~]brG.thm -text
+res/quest/themes/Lands[!!-~]WRG.thm -text
+res/quest/themes/Legends[!!-~]WG.thm -text
+res/quest/themes/Leyline[!!-~]of[!!-~]Singularity[!!-~]WUBRG.thm -text
+res/quest/themes/Lifegain[!!-~]WBG.thm -text
+res/quest/themes/Lorescale[!!-~]Coatl[!!-~]Urg.thm -text
+res/quest/themes/Megrim[!!-~]UBR.thm -text
+res/quest/themes/Merfolk[!!-~]U.thm -text
+res/quest/themes/Milling[!!-~]UB.thm -text
+res/quest/themes/Mono[!!-~]Black.thm -text
+res/quest/themes/Mono[!!-~]Green.thm -text
+res/quest/themes/Mono[!!-~]White.thm -text
+res/quest/themes/Multicolor[!!-~]BG.thm -text
+res/quest/themes/Multicolor[!!-~]BR.thm -text
+res/quest/themes/Multicolor[!!-~]RG.thm -text
+res/quest/themes/Multicolor[!!-~]UB.thm -text
+res/quest/themes/Multicolor[!!-~]UG.thm -text
+res/quest/themes/Multicolor[!!-~]UR.thm -text
+res/quest/themes/Multicolor[!!-~]WB.thm -text
+res/quest/themes/Multicolor[!!-~]WR.thm -text
+res/quest/themes/Naya[!!-~]WRG.thm -text
+res/quest/themes/Oath[!!-~]of[!!-~]Druids[!!-~]WG.thm -text
+res/quest/themes/Pingers[!!-~]UR.thm -text
+res/quest/themes/Rats[!!-~]B.thm -text
+res/quest/themes/Reanimator[!!-~]B.thm -text
+res/quest/themes/Sacrifice[!!-~]uBr.thm -text
+res/quest/themes/Snakes[!!-~]G.thm -text
+res/quest/themes/Snow[!!-~]UBRG.thm -text
+res/quest/themes/Soldiers[!!-~]W.thm -text
+res/quest/themes/Swampwalk[!!-~]BG.thm -text
+res/quest/themes/Tap[!!-~]and[!!-~]Destroy[!!-~]WB.thm -text
+res/quest/themes/The[!!-~]Rack[!!-~]B.thm -text
+res/quest/themes/Treefolk[!!-~]WBG.thm -text
+res/quest/themes/Underworld[!!-~]Dreams[!!-~]BUR.thm -text
+res/quest/themes/Vampires[!!-~]B.thm -text
+res/quest/themes/Vigilance[!!-~]Meekstone[!!-~]W.thm -text
+res/quest/themes/White.thm -text
+res/quest/themes/Wolves[!!-~]WG.thm -text
+res/quest/themes/Zombies[!!-~]B.thm -text
+res/quest/veryhard.txt svneol=native#text/plain
+res/reprintSetInfo.py svneol=native#text/x-python
+res/sealed/juzamjedi.zsealed -text
+res/setInfoScript.py svneol=native#text/x-python
+res/sound/tap.mp3 -text svneol=unset#audio/mpeg
+src/main/config/forge_checks.xml svneol=native#text/xml
+src/main/java/arcane/ui/CardArea.java svneol=native#text/plain
+src/main/java/arcane/ui/CardPanel.java svneol=native#text/plain
+src/main/java/arcane/ui/CardPanelContainer.java svneol=native#text/plain
+src/main/java/arcane/ui/HandArea.java svneol=native#text/plain
+src/main/java/arcane/ui/PlayArea.java svneol=native#text/plain
+src/main/java/arcane/ui/ScaledImagePanel.java svneol=native#text/plain
+src/main/java/arcane/ui/ViewPanel.java svneol=native#text/plain
+src/main/java/arcane/ui/package-info.java svneol=native#text/plain
+src/main/java/arcane/ui/util/Animation.java svneol=native#text/plain
+src/main/java/arcane/ui/util/CardPanelMouseListener.java svneol=native#text/plain
+src/main/java/arcane/ui/util/GlowText.java svneol=native#text/plain
+src/main/java/arcane/ui/util/ImageUtil.java svneol=native#text/plain
+src/main/java/arcane/ui/util/ManaSymbols.java svneol=native#text/plain
+src/main/java/arcane/ui/util/UI.java svneol=native#text/plain
+src/main/java/arcane/ui/util/package-info.java svneol=native#text/plain
+src/main/java/arcane/util/MultiplexOutputStream.java svneol=native#text/plain
+src/main/java/arcane/util/Util.java svneol=native#text/plain
+src/main/java/arcane/util/package-info.java svneol=native#text/plain
+src/main/java/forge/AIPlayer.java svneol=native#text/plain
+src/main/java/forge/AllZone.java svneol=native#text/plain
+src/main/java/forge/AllZoneUtil.java svneol=native#text/plain
+src/main/java/forge/Base64Coder.java svneol=native#text/plain
+src/main/java/forge/BoosterDraft.java svneol=native#text/plain
+src/main/java/forge/BoosterDraftAI.java svneol=native#text/plain
+src/main/java/forge/BoosterDraft_1.java svneol=native#text/plain
+src/main/java/forge/BoosterGenerator.java svneol=native#text/plain
+src/main/java/forge/ButtonUtil.java svneol=native#text/plain
+src/main/java/forge/CCnt.java svneol=native#text/plain
+src/main/java/forge/Card.java svneol=native#text/plain
+src/main/java/forge/CardContainer.java svneol=native#text/plain
+src/main/java/forge/CardFilter.java svneol=native#text/plain
+src/main/java/forge/CardList.java svneol=native#text/plain
+src/main/java/forge/CardListFilter.java svneol=native#text/plain
+src/main/java/forge/CardListUtil.java svneol=native#text/plain
+src/main/java/forge/CardReader.java svneol=native#text/plain
+src/main/java/forge/CardShopTableModel.java svneol=native#text/plain
+src/main/java/forge/CardUtil.java svneol=native#text/plain
+src/main/java/forge/Card_Color.java svneol=native#text/plain
+src/main/java/forge/Card_PT.java svneol=native#text/plain
+src/main/java/forge/Card_Type.java svneol=native#text/plain
+src/main/java/forge/Color.java svneol=native#text/plain
+src/main/java/forge/Combat.java svneol=native#text/plain
+src/main/java/forge/CombatUtil.java svneol=native#text/plain
+src/main/java/forge/Command.java svneol=native#text/plain
+src/main/java/forge/CommandArgs.java svneol=native#text/plain
+src/main/java/forge/CommandList.java svneol=native#text/plain
+src/main/java/forge/CommandReturn.java svneol=native#text/plain
+src/main/java/forge/Computer.java svneol=native#text/plain
+src/main/java/forge/ComputerAI_General.java svneol=native#text/plain
+src/main/java/forge/ComputerAI_Input.java svneol=native#text/plain
+src/main/java/forge/ComputerUtil.java svneol=native#text/plain
+src/main/java/forge/ComputerUtil_Attack2.java svneol=native#text/plain
+src/main/java/forge/ComputerUtil_Block2.java svneol=native#text/plain
+src/main/java/forge/Constant.java svneol=native#text/plain
+src/main/java/forge/Constant_StringArrayList.java svneol=native#text/plain
+src/main/java/forge/Constant_StringHashMap.java svneol=native#text/plain
+src/main/java/forge/CopyFiles.java svneol=native#text/plain
+src/main/java/forge/Counters.java svneol=native#text/plain
+src/main/java/forge/CustomDraft.java svneol=native#text/plain
+src/main/java/forge/DeckColors.java svneol=native#text/plain
+src/main/java/forge/DeckDisplay.java svneol=native#text/plain
+src/main/java/forge/DefaultPlayerZone.java svneol=native#text/plain
+src/main/java/forge/Display.java svneol=native#text/plain
+src/main/java/forge/EndOfCombat.java svneol=native#text/plain
+src/main/java/forge/EndOfTurn.java svneol=native#text/plain
+src/main/java/forge/ExternalPanel.java svneol=native#text/plain
+src/main/java/forge/FileFinder.java svneol=native#text/plain
+src/main/java/forge/FileUtil.java svneol=native#text/plain
+src/main/java/forge/GUI_DeckAnalysis.java svneol=native#text/plain
+src/main/java/forge/GUI_ImportPicture.java svneol=native#text/plain
+src/main/java/forge/GameAction.java svneol=native#text/plain
+src/main/java/forge/GameActionUtil.java svneol=native#text/plain
+src/main/java/forge/GameInfo.java svneol=native#text/plain
+src/main/java/forge/GuiDisplay4.java svneol=native#text/plain
+src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
+src/main/java/forge/GuiFilter.java svneol=native#text/plain
+src/main/java/forge/GuiFilterCheckBox.java svneol=native#text/plain
+src/main/java/forge/GuiInput.java svneol=native#text/plain
+src/main/java/forge/GuiQuestFilter.java svneol=native#text/plain
+src/main/java/forge/Gui_BoosterDraft.java svneol=native#text/plain
+src/main/java/forge/Gui_CardShop.java svneol=native#text/plain
+src/main/java/forge/Gui_DeckEditor.java svneol=native#text/plain
+src/main/java/forge/Gui_DeckEditor_Menu.java svneol=native#text/plain
+src/main/java/forge/Gui_DownloadPictures_LQ.java svneol=native#text/plain
+src/main/java/forge/Gui_DownloadPrices.java svneol=native#text/plain
+src/main/java/forge/Gui_DownloadSetPictures_LQ.java svneol=native#text/plain
+src/main/java/forge/Gui_MigrateLocalMWSSetPictures_HQ.java svneol=native#text/plain
+src/main/java/forge/Gui_MultipleBlockers4.java svneol=native#text/plain
+src/main/java/forge/Gui_NewGame.java svneol=native#text/plain
+src/main/java/forge/Gui_ProgressBarWindow.java svneol=native#text/plain
+src/main/java/forge/Gui_QuestOptions.java svneol=native#text/plain
+src/main/java/forge/Gui_Quest_DeckEditor.java svneol=native#text/plain
+src/main/java/forge/Gui_Quest_DeckEditor_Menu.java svneol=native#text/plain
+src/main/java/forge/Gui_WinLose.java svneol=native#text/plain
+src/main/java/forge/HandSizeOp.java svneol=native#text/plain
+src/main/java/forge/HttpUtil.java svneol=native#text/plain
+src/main/java/forge/HumanPlayer.java svneol=native#text/plain
+src/main/java/forge/IPlayerZone.java svneol=native#text/plain
+src/main/java/forge/ImageCache.java svneol=native#text/plain
+src/main/java/forge/ImagePreviewPanel.java svneol=native#text/plain
+src/main/java/forge/MagicStack.java svneol=native#text/plain
+src/main/java/forge/MenuItem_HowToPlay.java svneol=native#text/plain
+src/main/java/forge/Move.java svneol=native#text/plain
+src/main/java/forge/MyButton.java svneol=native#text/plain
+src/main/java/forge/MyObservable.java svneol=native#text/plain
+src/main/java/forge/MyRandom.java svneol=native#text/plain
+src/main/java/forge/NameChanger.java svneol=native#text/plain
+src/main/java/forge/Phase.java svneol=native#text/plain
+src/main/java/forge/PhaseUtil.java svneol=native#text/plain
+src/main/java/forge/Player.java svneol=native#text/plain
+src/main/java/forge/PlayerUtil.java svneol=native#text/plain
+src/main/java/forge/PlayerZone.java svneol=native#text/plain
+src/main/java/forge/PlayerZone_ComesIntoPlay.java svneol=native#text/plain
+src/main/java/forge/Quest_Assignment.java svneol=native#text/plain
+src/main/java/forge/ReadBoosterPack.java svneol=native#text/plain
+src/main/java/forge/ReadDraftBoosterPack.java svneol=native#text/plain
+src/main/java/forge/ReadPriceList.java svneol=native#text/plain
+src/main/java/forge/ReadQuest_Assignment.java svneol=native#text/plain
+src/main/java/forge/SealedDeck.java svneol=native#text/plain
+src/main/java/forge/SetInfo.java svneol=native#text/plain
+src/main/java/forge/SetInfoUtil.java svneol=native#text/plain
+src/main/java/forge/SimpleCombat.java svneol=native#text/plain
+src/main/java/forge/Singletons.java svneol=native#text/plain
+src/main/java/forge/StaticEffect.java svneol=native#text/plain
+src/main/java/forge/StaticEffects.java svneol=native#text/plain
+src/main/java/forge/TableModel.java svneol=native#text/plain
+src/main/java/forge/TableSorter.java svneol=native#text/plain
+src/main/java/forge/Time.java svneol=native#text/plain
+src/main/java/forge/UndoCommand.java svneol=native#text/plain
+src/main/java/forge/Upkeep.java svneol=native#text/plain
+src/main/java/forge/ZCTrigger.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_AlterLife.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Animate.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Attach.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_ChangeZone.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Choose.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Clash.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Cleanup.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Combat.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Copy.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_CounterMagic.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Counters.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_DealDamage.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Debuff.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_DelayedTrigger.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Destroy.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Effect.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_EndGameCondition.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_GainControl.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Mana.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_PermanentState.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_PreventDamage.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Protection.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Pump.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Regenerate.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Reveal.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Sacrifice.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Token.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_Turns.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/AbilityFactory_ZoneAffecting.java svneol=native#text/plain
+src/main/java/forge/card/abilityFactory/package-info.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/AbstractCardFactory.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactoryInterface.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactoryUtil.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactory_Auras.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactory_Creatures.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactory_Equipment.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactory_Instants.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactory_Lands.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactory_Planeswalkers.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/CardFactory_Sorceries.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/LazyCardFactory.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/PreloadingCardFactory.java svneol=native#text/plain
+src/main/java/forge/card/cardFactory/package-info.java svneol=native#text/plain
+src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
+src/main/java/forge/card/mana/ManaCost.java svneol=native#text/plain
+src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain
+src/main/java/forge/card/mana/Mana_Part.java svneol=native#text/plain
+src/main/java/forge/card/mana/Mana_PartColor.java svneol=native#text/plain
+src/main/java/forge/card/mana/Mana_PartColorless.java svneol=native#text/plain
+src/main/java/forge/card/mana/Mana_PartPhyrexian.java svneol=native#text/plain
+src/main/java/forge/card/mana/Mana_PartSnow.java svneol=native#text/plain
+src/main/java/forge/card/mana/Mana_PartSplit.java svneol=native#text/plain
+src/main/java/forge/card/mana/package-info.java svneol=native#text/plain
+src/main/java/forge/card/package-info.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Ability.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Ability_Activated.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Ability_Mana.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Ability_Static.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Ability_Sub.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Ability_Triggered.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Cost.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Cost_Payment.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Spell.java svneol=native#text/plain
+src/main/java/forge/card/spellability/SpellAbility.java svneol=native#text/plain
+src/main/java/forge/card/spellability/SpellAbilityList.java svneol=native#text/plain
+src/main/java/forge/card/spellability/SpellAbility_Condition.java svneol=native#text/plain
+src/main/java/forge/card/spellability/SpellAbility_Requirements.java svneol=native#text/plain
+src/main/java/forge/card/spellability/SpellAbility_Restriction.java svneol=native#text/plain
+src/main/java/forge/card/spellability/SpellAbility_StackInstance.java svneol=native#text/plain
+src/main/java/forge/card/spellability/SpellAbility_Variables.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Spell_Permanent.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Target.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Target_Choices.java svneol=native#text/plain
+src/main/java/forge/card/spellability/Target_Selection.java svneol=native#text/plain
+src/main/java/forge/card/spellability/package-info.java svneol=native#text/plain
+src/main/java/forge/card/staticAbility/StaticAbility.java svneol=native#text/plain
+src/main/java/forge/card/staticAbility/StaticAbility_Continuous.java svneol=native#text/plain
+src/main/java/forge/card/staticAbility/package-info.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerHandler.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Always.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_AttackerBlocked.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_AttackerUnblocked.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Attacks.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_BecomesTarget.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Blocks.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Championed.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_ChangesZone.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Clashed.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_CounterAdded.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Cycled.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_DamageDone.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Discarded.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Drawn.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_LandPlayed.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_LifeGained.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_LifeLost.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Phase.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Sacrificed.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Shuffled.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_SpellAbilityCast.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Taps.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_TapsForMana.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_TurnFaceUp.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Unequip.java svneol=native#text/plain
+src/main/java/forge/card/trigger/Trigger_Untaps.java svneol=native#text/plain
+src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
+src/main/java/forge/deck/Deck.java svneol=native#text/plain
+src/main/java/forge/deck/DeckManager.java svneol=native#text/plain
+src/main/java/forge/deck/DownloadDeck.java svneol=native#text/plain
+src/main/java/forge/deck/generate/Generate2ColorDeck.java svneol=native#text/plain
+src/main/java/forge/deck/generate/Generate3ColorDeck.java svneol=native#text/plain
+src/main/java/forge/deck/generate/GenerateConstructedDeck.java svneol=native#text/plain
+src/main/java/forge/deck/generate/GenerateConstructedMultiColorDeck.java svneol=native#text/plain
+src/main/java/forge/deck/generate/GenerateThemeDeck.java svneol=native#text/plain
+src/main/java/forge/deck/generate/package-info.java svneol=native#text/plain
+src/main/java/forge/deck/package-info.java svneol=native#text/plain
+src/main/java/forge/error/BugzReporter.java svneol=native#text/plain
+src/main/java/forge/error/ErrorViewer.java svneol=native#text/plain
+src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
+src/main/java/forge/error/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
+src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
+src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
+src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
+src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
+src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
+src/main/java/forge/gui/game/CardDetailPanel.java svneol=native#text/plain
+src/main/java/forge/gui/game/CardPanel.java svneol=native#text/plain
+src/main/java/forge/gui/game/CardPicturePanel.java svneol=native#text/plain
+src/main/java/forge/gui/game/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input.java svneol=native#text/plain
+src/main/java/forge/gui/input/InputControl.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_Attack.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_Block.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_Cleanup.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_Mulligan.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_PassPriority.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_PayManaCost.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_PayManaCostUtil.java svneol=native#text/plain
+src/main/java/forge/gui/input/Input_PayManaCost_Ability.java svneol=native#text/plain
+src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/package-info.java svneol=native#text/plain
+src/main/java/forge/model/FModel.java svneol=native#text/plain
+src/main/java/forge/model/package-info.java svneol=native#text/plain
+src/main/java/forge/package-info.java svneol=native#text/plain
+src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
+src/main/java/forge/properties/ForgeProps.java svneol=native#text/plain
+src/main/java/forge/properties/NewConstants.java svneol=native#text/plain
+src/main/java/forge/properties/Preferences.java svneol=native#text/plain
+src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/plain
+src/main/java/forge/properties/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestBattleManager.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestBoosterPack.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestDataIO.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestMatchState.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestUtil.java svneol=native#text/plain
+src/main/java/forge/quest/data/bazaar/QuestStallDefinition.java svneol=native#text/plain
+src/main/java/forge/quest/data/bazaar/QuestStallManager.java svneol=native#text/plain
+src/main/java/forge/quest/data/bazaar/QuestStallPurchasable.java svneol=native#text/plain
+src/main/java/forge/quest/data/bazaar/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestInventory.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestItemAbstract.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestItemElixir.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestItemEstates.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestItemLuckyCoin.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestItemMap.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestItemSleight.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/QuestItemZeppelin.java svneol=native#text/plain
+src/main/java/forge/quest/data/item/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/data/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/QuestPetAbstract.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/QuestPetBird.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/QuestPetCrocodile.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/QuestPetHound.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/QuestPetManager.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/QuestPetPlant.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/QuestPetWolf.java svneol=native#text/plain
+src/main/java/forge/quest/data/pet/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/gui/QuestAbstractPanel.java svneol=native#text/plain
+src/main/java/forge/quest/gui/QuestFrame.java svneol=native#text/plain
+src/main/java/forge/quest/gui/bazaar/QuestBazaarItem.java svneol=native#text/plain
+src/main/java/forge/quest/gui/bazaar/QuestBazaarPanel.java svneol=native#text/plain
+src/main/java/forge/quest/gui/bazaar/QuestBazaarStall.java svneol=native#text/plain
+src/main/java/forge/quest/gui/bazaar/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/gui/main/QuestBattle.java svneol=native#text/plain
+src/main/java/forge/quest/gui/main/QuestMainPanel.java svneol=native#text/plain
+src/main/java/forge/quest/gui/main/QuestQuest.java svneol=native#text/plain
+src/main/java/forge/quest/gui/main/QuestSelectablePanel.java svneol=native#text/plain
+src/main/java/forge/quest/gui/main/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/gui/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/package-info.java svneol=native#text/plain
+src/main/java/forge/view/FView.java svneol=native#text/plain
+src/main/java/forge/view/package-info.java svneol=native#text/plain
+src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
+src/main/java/forge/view/swing/Main.java svneol=native#text/plain
+src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
+src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/ImmutableIterableFrom.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/NotImplementedError.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/UtilFunctions.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/generator/FindNonDirectoriesSkipDotDirectoriesGenerator.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/generator/GeneratorFromArray.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/generator/GeneratorFunctions.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/generator/package-info.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/FrozenCall.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/Lambda.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/Lambda1.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/Lambda2.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/Lambda3.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/Null.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/Thunk.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/lambda/package-info.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/package-info.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/progress_monitor/BaseProgressMonitor.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/progress_monitor/BraidsProgressMonitor.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonitor.java svneol=native#text/plain
+src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
+src/main/java/treeProperties/PropertyElement.java svneol=native#text/plain
+src/main/java/treeProperties/PropertyType.java svneol=native#text/plain
+src/main/java/treeProperties/TreeProperties.java svneol=native#text/plain
+src/main/java/treeProperties/package-info.java svneol=native#text/plain
+src/main/java/treeProperties/types/FileType.java svneol=native#text/plain
+src/main/java/treeProperties/types/package-info.java svneol=native#text/plain
+src/site/apt/index.apt -text
+src/test/java/forge/BoosterDraftAITest.java svneol=native#text/plain
+src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
+src/test/java/forge/BoosterDraft_1Test.java svneol=native#text/plain
+src/test/java/forge/CardColorTest.java svneol=native#text/plain
+src/test/java/forge/CardReaderTest.java svneol=native#text/plain
+src/test/java/forge/GameActionTest.java svneol=native#text/plain
+src/test/java/forge/GuiBoosterDraftTest.java svneol=native#text/plain
+src/test/java/forge/GuiDownloadPicturesLQTest.java svneol=native#text/plain
+src/test/java/forge/GuiDownloadSetPicturesLQTest.java svneol=native#text/plain
+src/test/java/forge/GuiFilterTest.java svneol=native#text/plain
+src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/plain
+src/test/java/forge/GuiMultipleBlockers4Test.java svneol=native#text/plain
+src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
+src/test/java/forge/GuiQuestFilterTest.java svneol=native#text/plain
+src/test/java/forge/GuiQuestOptionsTest.java svneol=native#text/plain
+src/test/java/forge/GuiWinLoseTest.java svneol=native#text/plain
+src/test/java/forge/MoveTest.java svneol=native#text/plain
+src/test/java/forge/PanelTest.java svneol=native#text/plain
+src/test/java/forge/PhaseTest.java svneol=native#text/plain
+src/test/java/forge/ReadBoosterPackTest.java svneol=native#text/plain
+src/test/java/forge/ReadQuestAssignmentTest.java svneol=native#text/plain
+src/test/java/forge/RunTest.java svneol=native#text/plain
+src/test/java/forge/TinyTest.java svneol=native#text/plain
+src/test/java/forge/card/cardFactory/CardFactoryTest.java svneol=native#text/plain
+src/test/java/forge/card/cardFactory/CardFactoryUtilTest.java svneol=native#text/plain
+src/test/java/forge/card/mana/Mana_PartTest.java svneol=native#text/plain
+src/test/java/forge/deck/generate/GenerateConstructedDeckTest.java svneol=native#text/plain
+src/test/java/forge/deck/generate/GenerateConstructedMultiColorDeckTest.java svneol=native#text/plain
+src/test/java/forge/gui/ListChooserTest.java svneol=native#text/plain
+src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
+src/test/java/net/slightlymagic/braids/util/testng/BraidsAssertFunctions.java svneol=native#text/plain
+src/test/java/net/slightlymagic/braids/util/testng/LICENSE.txt svneol=native#text/plain
