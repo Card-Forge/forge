@@ -98,6 +98,7 @@ res/boosterdata/VIS.pack -text
 res/boosterdata/WTH.pack -text
 res/boosterdata/WWK.pack -text
 res/boosterdata/ZEN.pack -text
+res/card-pictures-token.txt -text
 res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
 res/cardsfolder/a/abbey_gargoyles.txt svneol=native#text/plain
 res/cardsfolder/a/abbey_matron.txt svneol=native#text/plain
@@ -2887,6 +2888,7 @@ res/cardsfolder/f/fyndhorn_brownie.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_elder.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_elves.txt svneol=native#text/plain
 res/cardsfolder/f/fyndhorn_pollen.txt svneol=native#text/plain
+res/cardsfolder/mkzip.sh svneol=native#text/x-sh
 res/decks/JuzamjediCube.dck -text
 res/draft/common.txt svneol=native#text/plain
 res/draft/cube_juzamjedi.draft -text
