@@ -1,0 +1,13 @@
+Name:Dwarven Patrol
+ManaCost:2 R
+Types:Creature Dwarf
+Text:no text
+PT:4/2
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ SpellCast | ValidCard$ Spell.nonRed+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a nonred spell, untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_patrol.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/61.jpg
+End

@@ -1,0 +1,10 @@
+Name:Dross Hopper
+ManaCost:1 B
+Types:Creature Insect Horror
+Text:no text
+PT:2/1
+A:AB$ Pump | Cost$ Sac<1/Creature> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_hopper.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/60.jpg
+End

@@ -1,0 +1,10 @@
+Name:Dismiss
+ManaCost:2 U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target spell. Draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dismiss.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/58.jpg
+End

@@ -1,0 +1,12 @@
+Name:Diamond Faerie
+ManaCost:2 G W U
+Types:Snow Creature Faerie
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ PumpAll | Cost$ 1 S | ValidCards$ Creature.Snow+YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Snow creatures you control get +1/+1 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_faerie.jpg
+SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/128.jpg
+End

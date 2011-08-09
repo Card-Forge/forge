@@ -1,0 +1,12 @@
+Name:Druid of the Anima
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/128.jpg
+End

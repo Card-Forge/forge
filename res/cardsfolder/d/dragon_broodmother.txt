@@ -1,0 +1,12 @@
+Name:Dragon Broodmother
+ManaCost:2 R R R G
+Types:Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, put a 1/1 red and green Dragon creature token with flying and devour 2 onto the battlefield. (As the token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Green,Red | TokenKeywords$ Flying<>Devour:2
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_broodmother.jpg
+SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/53.jpg
+End

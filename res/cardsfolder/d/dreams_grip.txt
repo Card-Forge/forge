@@ -1,0 +1,13 @@
+Name:Dream's Grip
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Tap | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | SpellDescription$ Choose one: Tap target permanent;
+A:SP$ Untap | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to untap | SpellDescription$ or untap target permanent.
+A:SP$ Tap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | SubAbility$ SVar=DBUntap | PrecostDesc$ Entwine - | SpellDescription$ (Choose both if you pay the entwine cost.)
+SVar:DBUntap:DB$ Untap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to untap
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dreams_grip.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/34.jpg
+End

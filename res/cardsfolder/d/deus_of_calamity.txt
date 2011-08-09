@@ -1,0 +1,12 @@
+Name:Deus of Calamity
+ManaCost:RG RG RG RG RG
+Types:Creature Spirit Avatar
+Text:no text
+PT:6/6
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | DamageAmount$ GE6 | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals 6 or more damage to an opponent, destroy target land that player controls.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.YouDontCtrl | TgtPrompt$ Select target land opponent controls.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deus_of_calamity.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/204.jpg
+End

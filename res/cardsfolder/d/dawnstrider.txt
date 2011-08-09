@@ -1,0 +1,10 @@
+Name:Dawnstrider
+ManaCost:1 G
+Types:Creature Dryad Spellshaper
+Text:no text
+PT:1/1
+A:AB$ Fog | Cost$ G T Discard<1/Card> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnstrider.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/237.jpg
+End

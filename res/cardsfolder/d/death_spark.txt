@@ -1,0 +1,11 @@
+Name:Death Spark
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+DirectlyAbove | PresentZone$ Graveyard | PresentCompare$ EQ1 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard with a creature card directly above it, you may pay 1. If you do, return CARDNAME to your hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 1 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/death_spark.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/103.jpg
+End

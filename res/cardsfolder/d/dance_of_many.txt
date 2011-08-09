@@ -1,0 +1,17 @@
+Name:Dance of Many
+ManaCost:U U
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield, put a token that's a copy of target nontoken creature onto the battlefield.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 0 | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME leaves the battlefield, exile the token.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Clones | Origin$ Battlefield | Destination$ Exile
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Cloned | Execute$ TrigSac | TriggerDescription$ When the token leaves the battlefield, sacrifice CARDNAME.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U U
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_of_many.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/78.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/21.jpg
+End

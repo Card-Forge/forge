@@ -1,0 +1,10 @@
+Name:Drekavac
+ManaCost:1 B
+Types:Creature Beast
+Text:When CARDNAME enters the battlefield, sacrifice it unless you discard a noncreature card.
+PT:3/3
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111258.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/43.jpg
+End

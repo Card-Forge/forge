@@ -1,0 +1,11 @@
+Name:Dirtwater Wraith
+ManaCost:3 B
+Types:Creature Wraith
+Text:no text
+PT:1/3
+K:Swampwalk
+A:AB$ Pump | Cost$ B | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dirtwater_wraith.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/15.jpg
+End

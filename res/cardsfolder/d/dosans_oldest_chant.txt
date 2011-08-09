@@ -1,0 +1,10 @@
+Name:Dosan's Oldest Chant
+ManaCost:4 G
+Types:Sorcery
+Text:no text
+A:SP$ GainLife | Cost$ 4 G | LifeAmount$ 6 | SpellDescription$ You gain 6 life. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dosans_oldest_chant.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/127.jpg
+End

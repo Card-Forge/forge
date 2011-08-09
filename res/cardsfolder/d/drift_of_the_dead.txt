@@ -1,0 +1,13 @@
+Name:Drift of the Dead
+ManaCost:3 B
+Types:Creature Wall
+Text:no text
+PT:*/*
+K:Defender
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of snow lands you control.
+SVar:X:Count$Valid Land.Snow+YouCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drift_of_the_dead.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/11.jpg
+End

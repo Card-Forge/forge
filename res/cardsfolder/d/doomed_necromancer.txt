@@ -1,0 +1,11 @@
+Name:Doomed Necromancer
+ManaCost:2 B
+Types:Creature Human Cleric Mercenary
+Text:no text
+PT:2/2
+A:AB$ ChangeZone | Cost$ B T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doomed_necromancer.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/140.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/137.jpg
+End

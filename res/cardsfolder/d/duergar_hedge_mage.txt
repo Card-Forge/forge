@@ -1,0 +1,14 @@
+Name:Duergar Hedge-Mage
+ManaCost:2 RW
+Types:Creature Dwarf Shaman
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Mountain.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDestroyA | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Mountains, you may destroy target artifact.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Plains.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDestroyE | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
+SVar:TrigDestroyA:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
+SVar:TrigDestroyE:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_hedge_mage.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/195.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/137.jpg
+End

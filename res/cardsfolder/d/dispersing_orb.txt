@@ -1,0 +1,10 @@
+Name:Dispersing Orb
+ManaCost:3 U U
+Types:Enchantment
+Text:no text
+A:AB$ ChangeZone | Cost$ 3 U Sac<1/Permanent> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dispersing_orb.jpg
+SVar:Rarity:Uncommon
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/80.jpg
+End

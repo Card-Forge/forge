@@ -1,0 +1,11 @@
+Name:Drudge Reavers
+ManaCost:3 B
+Types:Creature Skeleton
+Text:no text
+PT:2/1
+K:Flash
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drudge_reavers.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/105.jpg
+End

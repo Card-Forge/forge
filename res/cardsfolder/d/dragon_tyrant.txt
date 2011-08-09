@@ -1,0 +1,14 @@
+Name:Dragon Tyrant
+ManaCost:8 R R
+Types:Creature Dragon
+Text:no text
+PT:6/6
+K:Flying
+K:Trample
+K:Double Strike
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay R R R R
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_tyrant.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/88.jpg
+End

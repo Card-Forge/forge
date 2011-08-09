@@ -1,0 +1,9 @@
+Name:Dismember
+ManaCost:1 PB PB
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 PB PB | IsCurse$ True | Tgt$ TgtC | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature gets -5/-5 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dismember.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/57.jpg
+End

@@ -1,0 +1,11 @@
+Name:Dream Cache
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SubAbility$ SVar=ChangeZoneDB | SpellDescription$ Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.
+SVar:ChangeZoneDB:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the cards on the top of your library (and not on the bottom)?
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_cache.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/59.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/62.jpg
+End

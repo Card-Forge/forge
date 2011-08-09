@@ -1,0 +1,13 @@
+Name:Death Mutation
+ManaCost:6 B G
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 6 B G | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ SVar=TrigToken | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that creature's converted mana cost.
+#X will be the Converted Mana Cost of the target of Mutation
+SVar:TrigToken:DB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:X:Targeted$CardManaCost
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/death_mutation.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/96.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/192.jpg
+End

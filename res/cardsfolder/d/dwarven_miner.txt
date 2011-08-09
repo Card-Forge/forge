@@ -1,0 +1,10 @@
+Name:Dwarven Miner
+ManaCost:1 R
+Types:Creature Dwarf
+Text:no text
+PT:1/2
+A:AB$ Destroy | Cost$ 2 R T | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_miner.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/169.jpg
+End

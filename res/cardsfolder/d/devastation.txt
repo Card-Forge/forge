@@ -1,0 +1,10 @@
+Name:Devastation
+ManaCost:5 R R
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 5 R R | ValidCards$ Creature,Land | SpellDescription$ Destroy all creatures and lands.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/94.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/128.jpg
+End

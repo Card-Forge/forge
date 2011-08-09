@@ -1,0 +1,20 @@
+Name:Dark Ritual
+ManaCost:B
+Types:Instant
+Text:no text
+A:SP$ Mana | Cost$ B | Produced$ B | Amount$ 3 | SpellDescription$ Add B B B to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_ritual.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/127.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/12.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/7.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/7.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/13.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/129.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/8.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/7.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/15.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/14.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/7.jpg
+End

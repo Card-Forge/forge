@@ -1,0 +1,11 @@
+Name:Darkest Hour
+ManaCost:B
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature | SetColor$ Black | Description$ All creatures are black.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darkest_hour.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/128.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/128.jpg
+End

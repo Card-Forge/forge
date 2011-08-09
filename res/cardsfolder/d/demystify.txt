@@ -1,0 +1,14 @@
+Name:Demystify
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/demystify.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/16.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/18.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/13.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/13.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/24.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/14.jpg
+End

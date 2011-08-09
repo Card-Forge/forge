@@ -1,0 +1,12 @@
+Name:Darkheart Sliver
+ManaCost:B G
+Types:Creature Sliver
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ GainLife | Description$ All Slivers have "Sacrifice this permanent: You gain 3 life."
+SVar:GainLife:AB$GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ 3 | Defined$ You | SpellDescription$ You gain 3 life.
+SVar:BuffedBy:Sliver
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darkheart_sliver.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/155.jpg
+End

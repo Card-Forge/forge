@@ -1,0 +1,10 @@
+Name:Diamond Valley
+ManaCost:no cost
+Types:Land
+A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+SVar:X:Sacrificed$CardToughness
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_valley.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/87.jpg
+End

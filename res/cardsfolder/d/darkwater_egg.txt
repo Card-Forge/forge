@@ -1,0 +1,11 @@
+Name:Darkwater Egg
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ U B | SubAbility$ SVar=DBDraw | SpellDescription$ Add U B to your mana pool. Draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darkwater_egg.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/299.jpg
+End

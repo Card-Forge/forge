@@ -1,0 +1,11 @@
+Name:Dryad's Favor
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Forestwalk | Description$ Enchanted creature has forestwalk. (It's unblockable as long as defending player controls a Forest.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_favor.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/169.jpg
+End

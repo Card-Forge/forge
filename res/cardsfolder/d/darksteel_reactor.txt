@@ -1,0 +1,14 @@
+Name:Darksteel Reactor
+ManaCost:4
+Types:Artifact
+Text:no text
+K:Indestructible
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+countersGEXCHARGE+YouCtrl | PresentCompare$ GE1 | Execute$ TrigWinGame | TriggerDescription$ When CARDNAME has twenty or more charge counters on it, you win the game.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1 | Defined$ Self
+SVar:TrigWinGame:AB$WinsGame | Cost$ 0 | Defined$ You
+SVar:X:Number$20
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_reactor.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/114.jpg
+End

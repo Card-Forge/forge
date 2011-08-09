@@ -1,0 +1,11 @@
+Name:Desert
+ManaCost:no cost
+Types:Land Desert
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | NumDmg$ 1 | ActivationPhases$ EndCombat | SpellDescription$ Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desert.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/118.jpg
+SetInfo:ARN|Land|http://magiccards.info/scans/en/an/86.jpg
+End

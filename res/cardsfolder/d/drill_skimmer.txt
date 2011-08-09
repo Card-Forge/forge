@@ -1,0 +1,12 @@
+Name:Drill-Skimmer
+ManaCost:4
+Types:Artifact Creature Thopter
+Text:no text
+PT:2/1
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Shroud | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has shroud as long as you control another artifact creature. (It can't be the target of spells or abilities.)
+SVar:X:Count$Valid Creature.Artifact+Other+YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drill_skimmer.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/118.jpg
+End

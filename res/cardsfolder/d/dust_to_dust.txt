@@ -1,0 +1,10 @@
+Name:Dust to Dust
+ManaCost:1 W W
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 W W | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile two target artifacts.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_to_dust.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/305.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/78.jpg
+End

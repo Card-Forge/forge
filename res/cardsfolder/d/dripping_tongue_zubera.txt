@@ -1,0 +1,12 @@
+Name:Dripping-Tongue Zubera
+ManaCost:1 G
+Types:Creature Zubera Spirit
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield for each Zubera put into a graveyard from the battlefield this turn.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Colorless | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenAmount$ X
+SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Card.Zubera
+PT:1/2
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80511.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/206.jpg
+End

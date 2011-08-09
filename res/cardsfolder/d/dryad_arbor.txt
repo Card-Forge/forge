@@ -1,0 +1,10 @@
+Name:Dryad Arbor
+ManaCost:no cost
+Types:Land Creature Forest Dryad
+Text:no text
+PT:1/1
+K:CARDNAME is green.
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136196.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/174.jpg
+End

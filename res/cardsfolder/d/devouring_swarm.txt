@@ -1,0 +1,10 @@
+Name:Devouring Swarm
+ManaCost:1 B B
+Types:Creature Insect
+Text:no text
+PT:2/1
+A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_swarm.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/91.jpg
+End

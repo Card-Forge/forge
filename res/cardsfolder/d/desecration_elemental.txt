@@ -1,0 +1,14 @@
+Name:Desecration Elemental
+ManaCost:3 B
+Types:Creature Elemental
+Text:no text
+PT:8/8
+K:Fear
+T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, sacrifice a creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature
+SVar:RemAIDeck:True
+SVar:AntiBuffedBy:Card
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desecration_elemental.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/45.jpg
+End

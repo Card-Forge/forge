@@ -1,0 +1,10 @@
+Name:Deadly Grub
+ManaCost:2 B
+Types:Creature Insect
+Text:When Deadly Grub is put into a graveyard from the battlefield, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can't be the target of spells or abilities.)
+PT:3/1
+K:Vanishing:3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_grub.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/69.jpg
+End

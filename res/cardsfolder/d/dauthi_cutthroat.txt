@@ -1,0 +1,11 @@
+Name:Dauthi Cutthroat
+ManaCost:1 B
+Types:Creature Dauthi Minion
+Text:no text
+PT:1/1
+K:Shadow
+A:AB$ Destroy | Cost$ 1 B T | ValidTgts$ Creature.withShadow | TgtPrompt$ Select target creature with shadow | SpellDescription$ Destroy target creature with shadow.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_cutthroat.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/57.jpg
+End

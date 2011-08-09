@@ -1,0 +1,11 @@
+Name:Dragonstalker
+ManaCost:4 W
+Types:Creature Bird Soldier
+Text:no text
+PT:3/3
+K:Flying
+K:Protection from Dragons
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstalker.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/11.jpg
+End

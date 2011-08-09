@@ -1,0 +1,10 @@
+Name:Desert Drake
+ManaCost:3 R
+Types:Creature Drake
+Text:no text
+PT:2/2
+K:Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4333.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/127.jpg
+End

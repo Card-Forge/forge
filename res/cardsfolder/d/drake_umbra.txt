@@ -1,0 +1,12 @@
+Name:Drake Umbra
+ManaCost:4 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:Totem armor
+A:SP$ Attach | Cost$ 4 U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Flying | Description$ Enchanted creature gets +3/+3 and has flying.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_umbra.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/63.jpg
+End

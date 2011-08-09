@@ -1,0 +1,10 @@
+Name:Dematerialize
+ManaCost:3 U
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | Cost$ 5 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | Flashback$ True | CostDesc$ Flashback 5 U U | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dematerialize.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/81.jpg
+End

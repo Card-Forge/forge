@@ -1,0 +1,10 @@
+Name:Dragonspeaker Shaman
+ManaCost:1 R R
+Types:Creature Human Barbarian Shaman
+Text:Dragon spells you cast cost 2 less to cast.
+PT:2/2
+K:CostChange:Player:Less:2:Spell:All:Dragon:NoSpecial
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonspeaker_shaman.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/89.jpg
+End

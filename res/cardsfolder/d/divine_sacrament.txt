@@ -1,0 +1,11 @@
+Name:Divine Sacrament
+ManaCost:1 W W
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | Description$ White creatures get +1/+1.
+S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | Threshold$ True | Description$ Threshold - White creatures get an additional +1/+1 as long as seven or more cards are in your graveyard.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_sacrament.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/19.jpg
+End

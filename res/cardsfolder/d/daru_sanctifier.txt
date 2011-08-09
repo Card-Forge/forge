@@ -1,0 +1,12 @@
+Name:Daru Sanctifier
+ManaCost:3 W
+Types:Creature Human Cleric
+Text:no text
+PT:1/4
+K:Morph:1 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is turned face up, destroy target enchantment.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_sanctifier.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/9.jpg
+End

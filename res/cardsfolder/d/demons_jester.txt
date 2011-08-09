@@ -1,0 +1,12 @@
+Name:Demon's Jester
+ManaCost:3 B
+Types:Creature Imp
+Text:no text
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | Hellbent$ True | Description$ Hellbent - CARDNAME gets +2/+1 as long as you have no cards in hand.
+SVar:BuffedBy:Card
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/demons_jester.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/42.jpg
+End

@@ -1,0 +1,12 @@
+Name:Doom Blade
+ManaCost:1 B
+Types:Instant
+Text:
+A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doom_blade.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/95.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/93.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/95.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/78.jpg
+End

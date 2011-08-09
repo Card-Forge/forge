@@ -1,0 +1,11 @@
+Name:Dark Triumph
+ManaCost:4 B
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 4 B | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+A:SP$ PumpAll | Cost$ Sac<1/Creature> | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | IsPresent$ Swamp.YouCtrl | CostDesc$ If you control a Swamp, you may sacrifice a creature | SpellDescription$ rather than pay CARDNAME's mana cost. 
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_triumph.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/55.jpg
+End

@@ -1,0 +1,10 @@
+Name:Duskmantle, House of Shadow
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mill | Cost$ U B T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player puts the top card of his or her library into his or her graveyard.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Duskmantle_House_of_Shadow.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/277.jpg
+End

@@ -1,0 +1,11 @@
+Name:Delraich
+ManaCost:6 B
+Types:Creature Horror
+Text:no text
+PT:6/6
+K:Trample
+SVar:AltCost:Sac<3/Creature.Black>$You may sacrifice three black creatures rather than pay Delraich's mana cost.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/delraich.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/133.jpg
+End

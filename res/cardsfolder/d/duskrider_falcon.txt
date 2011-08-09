@@ -1,0 +1,11 @@
+Name:Duskrider Falcon
+ManaCost:1 W
+Types:Creature Bird
+Text:no text
+PT:1/1
+K:Flying
+K:Protection from black
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/duskrider_falcon.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/128.jpg
+End

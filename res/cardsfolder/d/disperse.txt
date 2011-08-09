@@ -1,0 +1,10 @@
+Name:Disperse
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disperse.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/31.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/31.jpg
+End

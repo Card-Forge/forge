@@ -1,0 +1,11 @@
+Name:Dizzy Spell
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn.
+K:Transmute:1 U U
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dizzy_spell.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/43.jpg
+End

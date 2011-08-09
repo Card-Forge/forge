@@ -1,0 +1,10 @@
+Name:Darting Merfolk
+ManaCost:1 U
+Types:Creature Merfolk
+Text:no text
+PT:1/1
+A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darting_merfolk.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/72.jpg
+End

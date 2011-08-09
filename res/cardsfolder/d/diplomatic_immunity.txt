@@ -1,0 +1,12 @@
+Name:Diplomatic Immunity
+ManaCost:1 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Description$ Shroud (This permanent can't be the target of spells or abilities.)
+K:Shroud
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/diplomatic_immunity.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/75.jpg
+End

@@ -1,0 +1,11 @@
+Name:Drastic Revelation
+ManaCost:2 U B R
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 2 U B R | Mode$ Hand | SubAbility$ SVar=DBDraw | SpellDescription$ Discard your hand. Draw seven cards, then discard three cards at random.
+SVar:DBDraw:DB$Draw | NumCards$ 7 | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | NumCards$ 3 | Mode$ Random
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drastic_revelation.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/111.jpg
+End

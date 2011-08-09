@@ -1,0 +1,10 @@
+Name:Deja Vu
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target sorcery card in your graveyard | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
+SVar:Rarity:Common
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/deja_vu.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/35.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/53.jpg
+End

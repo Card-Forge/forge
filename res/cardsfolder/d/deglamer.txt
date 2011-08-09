@@ -1,0 +1,9 @@
+Name:Deglamer
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ Choose target artifact or enchantment. Its owner shuffles it into his or her library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deglamer.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/118.jpg
+End

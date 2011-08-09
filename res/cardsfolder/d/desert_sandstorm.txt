@@ -1,0 +1,9 @@
+Name:Desert Sandstorm
+ManaCost:2 R
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 1 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 1 damage to each creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_sandstorm.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/107.jpg
+End

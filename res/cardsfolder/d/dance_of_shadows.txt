@@ -1,0 +1,11 @@
+Name:Dance of Shadows
+ManaCost:3 B B
+Types:Sorcery Arcane
+Text:no text
+A:SP$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Fear | SpellDescription$ Creatures you control get +1/+0 and gain fear until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79094.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/108.jpg
+End
+
+

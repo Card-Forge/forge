@@ -1,0 +1,11 @@
+Name:Dwarven Berserker
+ManaCost:1 R
+Types:Creature Dwarf Berserker
+Text:no text
+PT:1/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +3/+0 and gains trample until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3 | KW$ Trample
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_berserker.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/97.jpg
+End

@@ -1,0 +1,9 @@
+Name:Dwarven Trader
+ManaCost:R
+Types:Creature Dwarf
+Text:no text
+PT:1/1
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card3001.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/91.jpg|2
+End

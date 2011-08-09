@@ -1,0 +1,14 @@
+Name:Dwarven Ruins
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_ruins.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/415.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/323.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/179.jpg
+End

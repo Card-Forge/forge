@@ -1,0 +1,14 @@
+Name:Dross Harvester
+ManaCost:1 B B
+Types:Creature Horror
+Text:no text
+PT:4/4
+K:Protection from white
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, you gain 2 life.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 4 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_harvester.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/63.jpg
+End

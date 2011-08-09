@@ -1,0 +1,10 @@
+Name:Desecrated Earth
+ManaCost:4 B
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ SVar=DBDiscard | SpellDescription$ Destroy target land. Its controller discards a card.
+SVar:DBDiscard:DB$Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/86.jpg
+End

@@ -1,0 +1,11 @@
+Name:Deathmask Nezumi
+ManaCost:2 B
+Types:Creature Rat Shaman
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Fear | CheckSVar$ X | SVarCompare$ GE7 | Description$ As long as you have seven or more cards in hand, CARDNAME gets +2/+1 and has fear.
+SVar:X:Count$InYourHand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmask_nezumi.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/66.jpg
+End

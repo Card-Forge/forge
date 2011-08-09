@@ -1,0 +1,10 @@
+Name:Deepwood Ghoul
+ManaCost:2 B
+Types:Creature Zombie
+Text:no text
+PT:2/1
+A:AB$ Regenerate | Cost$ PayLife<2> | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_ghoul.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/8e/127.jpg
+End
