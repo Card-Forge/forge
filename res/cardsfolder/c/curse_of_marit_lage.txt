@@ -1,0 +1,12 @@
+Name:Curse of Marit Lage
+ManaCost:3 R R
+Types:Enchantment
+Text:Islands don't untap during their controllers' untap steps.
+K:Permanents don't untap during their controllers' untap steps:Island
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all Islands.
+SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Island
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_marit_lage.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/181.jpg
+End

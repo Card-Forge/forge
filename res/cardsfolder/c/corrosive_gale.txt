@@ -1,0 +1,10 @@
+Name:Corrosive Gale
+ManaCost:X PG
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ X PG | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+SVar:X:Count$xPaid
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corrosive_gale.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/107.jpg
+End

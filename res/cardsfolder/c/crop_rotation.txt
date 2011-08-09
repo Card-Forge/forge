@@ -1,0 +1,10 @@
+Name:Crop Rotation
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ G Sac<1/Land> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card and put that card onto the battlefield. Then shuffle your library.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crop_rotation.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/98.jpg
+End

@@ -1,0 +1,12 @@
+Name:Crimson Roc
+ManaCost:4 R
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.withoutFlying | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature without flying, CARDNAME gets +1/+0 and gains first strike until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | KW$ First Strike
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_roc.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/168.jpg
+End

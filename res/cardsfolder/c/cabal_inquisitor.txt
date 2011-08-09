@@ -1,0 +1,10 @@
+Name:Cabal Inquisitor
+ManaCost:1 B
+Types:Creature Human Minion
+Text:no text
+PT:1/1
+A:AB$ Discard | Cost$ 1 B T ExileFromGrave<2/Card> | ValidTgts$ Player | Activation$ Threshold | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard. | PrecostDesc$ Threshold -
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_inquisitor.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/119.jpg
+End

@@ -1,0 +1,12 @@
+Name:Corpse Harvester
+ManaCost:3 B B
+Types:Creature Zombie Wizard
+Text:no text
+PT:3/3
+A:AB$ ChangeZone | Cost$ 1 B T Sac<1/Creature> | Origin$ Library | Destination$ Hand | ChangeType$ Zombie | ChangeNum$ 1 | SubAbility$ SVar=DBSwamp | SpellDescription$ Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library.
+SVar:DBSwamp:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Swamp | ChangeNum$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_harvester.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/62.jpg
+End

@@ -1,0 +1,12 @@
+Name:Citanul Flute
+ManaCost:5
+Types:Artifact
+Text:no text
+A:AB$ ChangeZone | Cost$ X T | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcLEX | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card with converted mana cost X or less, reveal it, and put it into your hand. Then shuffle your library.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_flute.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/289.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/315.jpg
+End

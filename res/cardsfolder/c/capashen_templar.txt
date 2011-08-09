@@ -1,0 +1,10 @@
+Name:Capashen Templar
+ManaCost:2 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_templar.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/5.jpg
+End

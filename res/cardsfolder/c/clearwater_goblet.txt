@@ -1,0 +1,13 @@
+Name:Clearwater Goblet
+ManaCost:5
+Types:Artifact
+Text:no text
+K:Sunburst
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you may gain life equal to the number of charge counters on CARDNAME.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:Count$CardCounters.CHARGE
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clearwater_goblet.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/109.jpg
+End

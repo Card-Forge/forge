@@ -1,0 +1,10 @@
+Name:Crag Puca
+ManaCost:UR UR UR
+Types:Creature Shapeshifter
+Text:no text
+PT:2/4
+A:AB$ Pump | Cost$ UR | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crag_puca.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/101.jpg
+End

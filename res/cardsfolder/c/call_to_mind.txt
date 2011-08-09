@@ -1,0 +1,9 @@
+Name:Call to Mind
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_mind.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/47.jpg
+End

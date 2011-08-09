@@ -1,0 +1,12 @@
+Name:Carnival of Souls
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature enters the battlefield, you lose 1 life and add B to your mana pool.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | SubAbility$ SVar=DBMana
+SVar:DBMana:DB$Mana | Produced$ B
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carnival_of_souls.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/55.jpg
+End

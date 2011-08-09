@@ -1,0 +1,10 @@
+Name:Crumbling Ashes
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, destroy target creature with a -1/-1 counter on it.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.countersGE1M1M1 | TgtPrompt$ Select target creature with a -1/-1 counter on it.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_ashes.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/35.jpg
+End

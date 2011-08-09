@@ -1,0 +1,10 @@
+Name:Cruel Revival
+ManaCost:4 B
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature.nonZombie | TgtPrompt$ Select target non-Zombie creature | NoRegen$ True | SubAbility$ SVar=DBReturn | SpellDescription$ Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand.
+SVar:DBReturn:DB$ChangeZone | Cost$ 0 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target Zombie card in your graveyard | ValidTgts$ Zombie.YouCtrl | Origin$ Graveyard | Destination$ Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_revival.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/135.jpg
+End

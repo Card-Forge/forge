@@ -1,0 +1,13 @@
+Name:Changeling Hero
+ManaCost:4 W
+Types:Creature Shapeshifter
+Text:no text
+PT:4/4
+K:Changeling
+K:Lifelink
+K:Champion:Creature
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_hero.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/9.jpg
+End

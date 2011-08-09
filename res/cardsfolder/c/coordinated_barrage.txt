@@ -1,0 +1,12 @@
+Name:Coordinated Barrage
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ ChooseType | Cost$ W | Defined$ You | Type$ Creature | SubAbility$ DBDealDamage | SpellDescription$ Choose a creature type. CARDNAME deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type.
+SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X
+SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coordinated_barrage.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/7.jpg
+End

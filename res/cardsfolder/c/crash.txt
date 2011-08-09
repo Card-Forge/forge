@@ -1,0 +1,10 @@
+Name:Crash
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+SVar:AltCost:Sac<1/Mountain>
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crash.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/186.jpg
+End

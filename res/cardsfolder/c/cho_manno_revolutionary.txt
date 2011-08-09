@@ -1,0 +1,11 @@
+Name:Cho-Manno, Revolutionary
+ManaCost:2 W W
+Types:Legendary Creature Human Rebel
+Text:no text
+PT:2/2
+K:Prevent all damage that would be dealt to CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_manno_revolutionary.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/11.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/12.jpg
+End

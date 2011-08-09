@@ -1,0 +1,10 @@
+Name:Controvert
+ManaCost:2 U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+K:Recover:2 U U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/controvert.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/30.jpg
+End

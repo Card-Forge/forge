@@ -1,0 +1,11 @@
+Name:Court Archers
+ManaCost:2 G
+Types:Creature Human Archers
+Text:no text
+PT:1/3
+K:Reach
+K:Exalted
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/court_archers.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/126.jpg
+End

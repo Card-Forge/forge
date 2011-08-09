@@ -1,0 +1,9 @@
+Name:Ceta Sanctuary
+ManaCost:2 U
+Types:Enchantment
+Text:At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://wizards.com/global/images/magic/general/ceta_sanctuary.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/20.jpg
+End

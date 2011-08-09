@@ -1,0 +1,11 @@
+Name:Cephalid Broker
+ManaCost:3 U
+Types:Creature Cephalid
+Text:no text
+PT:2/2
+A:AB$ Draw | Cost$ T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards, then discards two cards. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_broker.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/71.jpg
+End

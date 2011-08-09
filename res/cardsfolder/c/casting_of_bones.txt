@@ -1,0 +1,13 @@
+Name:Casting of Bones
+ManaCost:2 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigDraw | TriggerDescription$ When enchanted creature is put into a graveyard, draw three cards, then discard one of them.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 3 | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/casting_of_bones.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/2.jpg|2
+End

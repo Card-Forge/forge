@@ -1,0 +1,11 @@
+Name:Cloud Pirates
+ManaCost:U
+Types:Creature Human Pirate
+Text:no text
+PT:1/1
+K:Flying
+K:CARDNAME can block only creatures with flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_pirates.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/47.jpg
+End

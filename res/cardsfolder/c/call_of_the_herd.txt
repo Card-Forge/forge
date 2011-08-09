@@ -1,0 +1,11 @@
+Name:Call of the Herd
+ManaCost:2 G
+Types:Sorcery
+Text:no text
+A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenOwner$ You | SpellDescription$ Put a 3/3 green Elephant creature token onto the battlefield.
+A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenOwner$ You | Flashback$ True | CostDesc$ Flashback 3 G | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_herd.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/231.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/74.jpg
+End

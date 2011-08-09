@@ -1,0 +1,12 @@
+Name:Chained Throatseeker
+ManaCost:5 U
+Types:Creature Horror
+Text:no text
+PT:5/5
+K:Infect
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ LE0 | Description$ CARDNAME can't attack unless defending player is poisoned.
+SVar:X:Count$OppPoisonCounters
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chained_throatseeker.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/30.jpg
+End

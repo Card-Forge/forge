@@ -1,0 +1,11 @@
+Name:Copy Artifact
+ManaCost:1 U
+Types:Enchantment
+Text:You may have CARDNAME enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/copy_artifact.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/54.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/54.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/53.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/54.jpg
+End

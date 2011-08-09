@@ -1,0 +1,10 @@
+Name:Cunning Advisor
+ManaCost:3 B
+Types:Creature Human Advisor
+Text:no text
+PT:1/1
+A:AB$ Discard | Cost$ T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ Target opponent discards a card. Activate this ability only during your turn, before attackers are declared.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_advisor.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/72.jpg
+End

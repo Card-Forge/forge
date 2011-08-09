@@ -1,0 +1,12 @@
+Name:Caustic Tar
+ManaCost:4 B B
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 4 B B | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ LoseLife | Description$ Enchanted land has "tap: Target player loses 3 life."
+SVar:LoseLife:AB$LoseLife | Cost$ T | ValidTgts$ Player | LifeAmount$ 3 | TgtPrompt$ Target a player to lose life | SpellDescription$ Target player loses 3 life.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_tar.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/122.jpg
+End

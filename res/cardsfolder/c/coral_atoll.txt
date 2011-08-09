@@ -1,0 +1,11 @@
+Name:Coral Atoll
+ManaCost:no cost
+Types:Land
+Text:When CARDNAME enters the battlefield, sacrifice it unless you return an untapped Island you control to its owner's hand.
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ 1 U | SpellDescription$ Add 1 U to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_atoll.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/160.jpg
+End

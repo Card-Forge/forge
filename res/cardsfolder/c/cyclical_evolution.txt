@@ -1,0 +1,13 @@
+Name:Cyclical Evolution
+ManaCost:3 G G
+Types:Sorcery
+Text:no text
+K:Suspend:3:2 G
+A:SP$ Pump | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ SVar=DBTimeCounters | SpellDescription$ Target creature gets +3/+3 until end of turn. Exile CARDNAME with three time counters on it.
+SVar:DBTimeCounters:DB$PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 3 | SubAbility$ SVar=DBExile
+SVar:DBExile:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclical_evolution.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/125.jpg
+End

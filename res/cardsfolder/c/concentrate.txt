@@ -1,0 +1,9 @@
+Name:Concentrate
+ManaCost:2 U U
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ 2 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45262.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/78.jpg
+End

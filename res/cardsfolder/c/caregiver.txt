@@ -1,0 +1,11 @@
+Name:Caregiver
+ManaCost:W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+A:AB$ PreventDamage | Cost$ W Sac<1/Creature> | Tgt$ TgtCP | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature or player this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/caregiver.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/6.jpg
+End

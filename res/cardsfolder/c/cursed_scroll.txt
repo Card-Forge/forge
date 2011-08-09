@@ -1,0 +1,8 @@
+Name:Cursed Scroll
+ManaCost:1
+Types:Artifact
+Text:no text
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_scroll.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/271.jpg
+End

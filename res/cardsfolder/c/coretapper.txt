@@ -1,0 +1,12 @@
+Name:Coretapper
+ManaCost:2
+Types:Artifact Creature Myr
+Text:no text
+PT:1/1
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target artifact.
+A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Put two charge counters on target artifact.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coretapper.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/107.jpg
+End

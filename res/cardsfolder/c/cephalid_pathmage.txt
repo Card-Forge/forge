@@ -1,0 +1,11 @@
+Name:Cephalid Pathmage
+ManaCost:2 U
+Types:Creature Cephalid Wizard
+Text:no text
+PT:1/2
+K:Unblockable
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature is unblockable this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_pathmage.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/31.jpg
+End

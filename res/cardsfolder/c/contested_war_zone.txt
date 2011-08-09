@@ -1,0 +1,10 @@
+Name:Contested War Zone
+ManaCost:no cost
+Types:Land
+Text:Whenever a creature deals combat damage to you, that creature's controller gains control of CARDNAME.
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ PumpAll | Cost$ 1 T | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/contested_war_zone.jpg
+SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/144.jpg
+End

@@ -1,0 +1,12 @@
+Name:Chandra's Spitfire
+ManaCost:2 R
+Types:Creature Elemental
+Text:no text
+PT:1/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card | CombatDamage$ False | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an opponent is dealt noncombat damage, CARDNAME gets +3/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +3 | NumDef$ +0 | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_spitfire.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/129.jpg
+End

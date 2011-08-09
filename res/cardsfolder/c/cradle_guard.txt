@@ -1,0 +1,11 @@
+Name:Cradle Guard
+ManaCost:1 G G
+Types:Creature Treefolk
+Text:no text
+PT:4/4
+K:Trample
+K:Echo:1 G G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_guard.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/245.jpg
+End

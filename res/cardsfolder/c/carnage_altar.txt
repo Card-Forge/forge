@@ -1,0 +1,10 @@
+Name:Carnage Altar
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Draw | Cost$ 3 Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carnage_altar.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/198.jpg
+End

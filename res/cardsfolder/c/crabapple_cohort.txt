@@ -1,0 +1,12 @@
+Name:Crabapple Cohort
+ManaCost:4 G
+Types:Creature Treefolk Warrior
+Text:no text
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control another green creature.
+SVar:X:Count$Valid Creature.Green+Other+YouCtrl
+SVar:BuffedBy:Creature.Green
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crabapple_cohort.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/109.jpg
+End

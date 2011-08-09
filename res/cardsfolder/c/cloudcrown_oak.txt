@@ -1,0 +1,10 @@
+Name:Cloudcrown Oak
+ManaCost:2 G G
+Types:Creature Treefolk Warrior
+Text:no text
+PT:3/4
+K:Reach
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139492.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/201.jpg
+End

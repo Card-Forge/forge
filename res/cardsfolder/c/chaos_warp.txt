@@ -1,0 +1,10 @@
+Name:Chaos Warp
+ManaCost:2 R
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 R | Origin$ Battlefield | Destination$ Library | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBDig | Shuffle$ True | SpellDescription$ The owner of target permanent shuffles it into his or her library, then reveals the top card of his or her library. If it's a permanent card, he or she puts it onto the battlefield.
+SVar:DBDig:DB$Dig | Defined$ TargetedController | DigNum$ 1 | Reveal$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ 0 | ChangeNum$ All | ChangeValid$ Permanent
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_warp.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/114.jpg
+End

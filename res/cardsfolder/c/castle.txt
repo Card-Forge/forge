@@ -1,0 +1,16 @@
+Name:Castle
+ManaCost:3 W
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl | AddToughness$ 2 | Description$ Untapped creatures you control get +0/+2.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/castle.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/193.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/194.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/5.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/291.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/262.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/6.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/192.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/193.jpg
+End

@@ -1,0 +1,11 @@
+Name:Castle Raptors
+ManaCost:4 W
+Types:Creature Bird Soldier
+Text:no text
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddToughness$ 2 | Description$ As long as CARDNAME is untapped, it gets +0/+2.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card113614.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/5.jpg
+End

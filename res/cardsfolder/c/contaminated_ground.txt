@@ -1,0 +1,13 @@
+Name:Contaminated Ground
+ManaCost:1 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AILogic$ Curse
+K:stAnimateEnchanted:Land:no change/no change/Overwrite:Land,Swamp,RemoveSubTypes:no colors:Overwrite:No Condition:Enchanted land is a Swamp.
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever enchanted land becomes tapped, its controller loses 2 life.
+SVar:TrigLose:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_ground.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/102.jpg
+End

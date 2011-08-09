@@ -1,0 +1,11 @@
+Name:Corrupted Conscience
+ManaCost:3 U U
+Types:Enchantment Aura
+Text:You control enchanted creature.
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Infect | Description$ Enchanted creature has infect. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_conscience.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/22.jpg
+End

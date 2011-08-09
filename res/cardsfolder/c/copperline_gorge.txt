@@ -1,0 +1,11 @@
+Name:Copperline Gorge
+ManaCost:no cost
+Types:Land
+text:Copperline Gorge enters the battlefield tapped unless you control two or fewer other lands.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/copperline_gorge.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/225.jpg
+End

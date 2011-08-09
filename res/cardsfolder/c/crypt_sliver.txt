@@ -1,0 +1,12 @@
+Name:Crypt Sliver
+ManaCost:1 B
+Types:Creature Sliver
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Regen | Description$ All Slivers have "Tap, Regenerate target Sliver."
+SVar:Regen:AB$Regenerate | Cost$ T | ValidTgts$ Sliver | TgtPrompt$ Select a target Sliver. | SpellDescription$ Regenerate a target Sliver.
+SVar:BuffedBy:Sliver
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_sliver.jpg
+SVar:Rarity:Common
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/63.jpg
+End

@@ -1,0 +1,11 @@
+Name:Cruel Bargain
+ManaCost:B B B
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ B B B | NumCards$ 4 | SubAbility$ SVar=DBLoseLife | SpellDescription$ Draw four cards. You lose half your life, rounded up.
+SVar:DBLoseLife:DB$LoseLife | LifeAmount$ X
+SVar:X:Count$YourLifeTotal/HalfUp
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4214.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/8.jpg
+End

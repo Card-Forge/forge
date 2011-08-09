@@ -1,0 +1,11 @@
+Name:Canyon Minotaur
+ManaCost:3 R
+Types:Creature Minotaur Warrior
+Text:no text
+PT:3/3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/canyon_minotaur.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/126.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/130.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/60.jpg
+End

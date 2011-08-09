@@ -1,0 +1,10 @@
+Name:Channel the Suns
+ManaCost:3 G
+Types:Sorcery
+Text:no text
+A:SP$ Mana | Cost$ 3 G | Produced$ W U B R G | SpellDescription$ Add W U B R G to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/channel_the_suns.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/84.jpg
+End

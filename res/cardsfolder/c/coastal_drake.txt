@@ -1,0 +1,11 @@
+Name:Coastal Drake
+ManaCost:2 U
+Types:Creature Drake
+Text:no text
+PT:2/1
+K:Flying
+A:AB$ ChangeZone | Cost$ 1 U T | ValidTgts$ Kavu | TgtPrompt$ Select target Kavu | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Kavu to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_drake.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/22.jpg
+End

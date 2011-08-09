@@ -1,0 +1,12 @@
+Name:Carven Caryatid
+ManaCost:1 G G
+Types:Creature Spirit
+Text:no text
+PT:2/5
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carven_caryatid.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/155.jpg
+End

@@ -1,0 +1,13 @@
+Name:Coral Trickster
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+Text:no text
+PT:2/1
+K:Morph:U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigTapOrUntap | TriggerDescription$ When CARDNAME is turned face up, you may tap or untap target permanent.
+SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_trickster.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/54.jpg
+End

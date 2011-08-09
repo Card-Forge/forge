@@ -1,0 +1,13 @@
+Name:Curiosity
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Opponent | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature deals damage to an opponent, you may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curiosity.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/72.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/29.jpg
+End

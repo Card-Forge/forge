@@ -1,0 +1,12 @@
+Name:Cateran Slaver
+ManaCost:4 B B
+Types:Creature Horror Mercenary
+Text:no text
+PT:5/5
+K:Swampwalk
+A:AB$ ChangeZone | Cost$ 5 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE5 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with converted mana cost 5 or less and put it onto the battlefield. Then shuffle your library.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_slaver.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/125.jpg
+End

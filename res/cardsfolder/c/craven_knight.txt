@@ -1,0 +1,10 @@
+Name:Craven Knight
+ManaCost:1 B
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:CARDNAME can't block.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4213.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/7.jpg
+End

@@ -1,0 +1,12 @@
+Name:Cyclopean Giant
+ManaCost:2 B B
+Types:Creature Zombie Giant
+Text:no text
+PT:4/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target land becomes a Swamp. Exile CARDNAME.
+SVar:TrigAnimate:AB$ Animate | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | Permanent$ True | SubAbility$ DBExile | SpellDescription$ Target land becomes a Swamp.
+SVar:DBExile:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Exile
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_giant.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/100.jpg
+End

@@ -1,0 +1,14 @@
+Name:Cliffrunner Behemoth
+ManaCost:3 G
+Types:Creature Rhino Beast
+Text:no text
+PT:5/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control a red permanent.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME has lifelink as long as you control a white permanent.
+SVar:X:Count$Valid Permanent.Red+YouCtrl
+SVar:Y:Count$Valid Permanent.White+YouCtrl
+SVar:BuffedBy:Creature.White,Creature.Red
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cliffrunner_behemoth.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/79.jpg
+End

@@ -1,0 +1,14 @@
+Name:Clutch of Undeath
+ManaCost:3 B B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 B B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Zombie | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3 as long as it's a Zombie. Otherwise, it gets -3/-3.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonZombie | AddPower$ -3 | AddToughness$ -3
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clutch_of_undeath.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/61.jpg
+End

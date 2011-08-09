@@ -1,0 +1,10 @@
+Name:Copper Carapace
+ManaCost:1
+Types:Artifact Equipment
+Text:Equipped creature gets +2/+2 and can't block.
+K:eqPump 3:+2/+2/HIDDEN CARDNAME can't block.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_carapace.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/102.jpg
+End

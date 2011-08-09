@@ -1,0 +1,12 @@
+Name:Core Prowler
+ManaCost:4
+Types:Artifact Creature Horror
+Text:no text
+PT:2/2
+K:Infect
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, proliferate.
+SVar:TrigProliferate:AB$Proliferate | Cost$ 0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/core_prowler.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/103.jpg
+End

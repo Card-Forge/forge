@@ -1,0 +1,12 @@
+Name:Chasm Drake
+ManaCost:4 U
+Types:Creature Drake
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature you control gains flying until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chasm_drake.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/48.jpg
+End

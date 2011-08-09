@@ -1,0 +1,10 @@
+Name:Crackdown
+ManaCost:2 W
+Types:Enchantment
+Text:Nonwhite creatures with power 3 or greater don't untap during their controllers' untap steps.
+K:Permanents don't untap during their controllers' untap steps:Creature.powerGE3+nonWhite
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crackdown.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/15.jpg
+End

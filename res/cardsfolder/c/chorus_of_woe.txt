@@ -1,0 +1,12 @@
+Name:Chorus of Woe
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ B | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6564.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/5.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/68.jpg
+End
+
+

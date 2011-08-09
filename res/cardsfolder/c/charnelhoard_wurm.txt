@@ -1,0 +1,12 @@
+Name:Charnelhoard Wurm
+ManaCost:4 B R G
+Types:Creature Wurm
+Text:no text
+PT:6/6
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may return target card from your graveyard to your hand.
+SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl | Cost$ 0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/charnelhoard_wurm.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/100.jpg
+End

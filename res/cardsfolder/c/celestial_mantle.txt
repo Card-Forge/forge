@@ -1,0 +1,11 @@
+Name:Celestial Mantle
+ManaCost:3 W W W
+Types:Enchantment Aura
+Text:Whenever enchanted creature deals combat damage to a player, double its controller's life total.
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 W W W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_mantle.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/6.jpg
+End

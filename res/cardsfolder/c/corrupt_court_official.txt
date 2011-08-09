@@ -1,0 +1,11 @@
+Name:Corrupt Court Official
+ManaCost:1 B
+Types:Creature Human Advisor
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_court_official.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/71.jpg
+End

@@ -1,0 +1,15 @@
+Name:Conversion
+ManaCost:2 W W
+Types:Enchantment
+Text:no text
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W
+K:stAnimateAll:Mountain:no change/no change/Overwrite:Land,Plains,RemoveSubTypes:no colors:Overwrite:No Condition:All Mountains are Plains.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conversion.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/199.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/201.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/198.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/269.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/200.jpg
+End

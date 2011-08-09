@@ -1,0 +1,15 @@
+Name:Chandra's Phoenix
+ManaCost:1 R R
+Types:Creature Phoenix
+Text:no text
+PT:2/2
+K:Flying
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Instant.YouCtrl+Red | ValidTarget$ Opponent | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.
+T:Mode$ DamageDone | ValidSource$ Sorcery.YouCtrl+Red | ValidTarget$ Opponent | TriggerZones$ Graveyard | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.
+T:Mode$ DamageDone | ValidSource$ Planeswalker.YouCtrl+Red | ValidTarget$ Opponent | TriggerZones$ Graveyard | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_phoenix.jpg
+SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/126.jpg
+End

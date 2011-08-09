@@ -1,0 +1,11 @@
+Name:Call the Skybreaker
+ManaCost:5 UR UR
+Types:Sorcery
+Text:no text
+A:SP$ Token | Cost$ 5 UR UR | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Blue,Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | SpellDescription$ Put a 5/5 blue and red Elemental creature token with flying onto the battlefield.
+A:SP$ Token | Cost$ 5 UR UR Discard<1/Land> | ActivationZone$ Graveyard | CostDesc$ Retrace | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Blue,Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_the_skybreaker.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/188.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/98.jpg
+End

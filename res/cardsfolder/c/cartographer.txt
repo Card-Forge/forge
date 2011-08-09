@@ -1,0 +1,12 @@
+Name:Cartographer
+ManaCost:2 G
+Types:Creature Human
+Text:
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target land card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Land.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cartographer.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/107.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/232.jpg
+End

@@ -1,0 +1,11 @@
+Name:Cadaverous Bloom
+ManaCost:3 B G
+Types:Enchantment
+Text:no text
+A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to your mana pool.
+A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaverous_bloom.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/318.jpg
+End

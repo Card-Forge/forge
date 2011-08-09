@@ -1,0 +1,13 @@
+Name:Chainbreaker
+ManaCost:2
+Types:Artifact Creature Scarecrow
+Text:no text
+PT:3/3
+K:etbCounter:M1M1:2
+A:AB$ RemoveCounter | Cost$ 3 T | ValidTgts$ Creature.countersGE1M1M1 | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Remove a -1/-1 counter from target creature.
+#AI cannot handle target RemoveCounter AFs.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chainbreaker.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/249.jpg
+End

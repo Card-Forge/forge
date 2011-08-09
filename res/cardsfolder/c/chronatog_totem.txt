@@ -1,0 +1,12 @@
+Name:Chronatog Totem
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Animate | Cost$ 1 U | Defined$ Self | Power$ 1 | Toughness$ 2 | Types$ Creature,Artifact,Atog | Colors$ Blue | SpellDescription$ CARDNAME becomes a 1/2 blue Atog artifact creature until end of turn.
+A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | IsPresent$ Card.Self+Creature | ActivationLimit$ 1 | SubAbility$ SVar=SkipTurn | SpellDescription$ CARDNAME gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if CARDNAME is a creature.
+SVar:SkipTurn:DB$AddTurn | NumTurns$ 1 | Defined$ Opponent
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chronatog_totem.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/252.jpg
+End

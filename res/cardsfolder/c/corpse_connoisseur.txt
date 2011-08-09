@@ -1,0 +1,13 @@
+Name:Corpse Connoisseur
+ManaCost:4 B
+Types:Creature Zombie Wizard
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a creature card and put that card into your graveyard. If you do, shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Graveyard | ChangeType$ Creature | ChangeNum$ 1
+K:Unearth:3 B
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_connoisseur.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/68.jpg
+End

@@ -1,0 +1,14 @@
+Name:Conspiracy
+ManaCost:3 B B
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
+SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck 
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library | AddType$ ChosenType | RemoveCreatureTypes$ True | Description$ Creature cards you own that aren't on the battlefield, creature spells you control, and creatures you control are the chosen type.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/39.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/127.jpg
+End

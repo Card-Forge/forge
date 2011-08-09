@@ -1,0 +1,14 @@
+Name:Chromescale Drake
+ManaCost:6 U U U
+Types:Creature Drake
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+PT:3/4
+K:Flying
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top three cards of your library. Put all artifact cards revealed this way into your hand and the rest into your graveyard.
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Artifact | DestinationZone2$ Graveyard
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chromescale_drake.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/20.jpg
+End

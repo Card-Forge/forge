@@ -1,0 +1,11 @@
+Name:Carnage Wurm
+ManaCost:6 G
+Types:Creature Wurm
+Text:no text
+PT:6/6
+K:Bloodthirst 3
+K:Trample
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carnage_wurm.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/168.jpg
+End

@@ -1,0 +1,11 @@
+Name:Coiling Woodworm
+ManaCost:2 G
+Types:Creature Insect Worm
+Text:no text
+PT:*/1
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of Forests on the battlefield.
+SVar:X:Count$Valid Forest
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coiling_woodworm.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/103.jpg
+End

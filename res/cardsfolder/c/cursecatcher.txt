@@ -1,0 +1,11 @@
+Name:Cursecatcher
+ManaCost:U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:1/1
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | UnlessCost$ 1 | SpellDescription$ Counter target instant or sorcery spell unless its controller pays 1.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cursecatcher.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/34.jpg
+End

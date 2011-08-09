@@ -1,0 +1,9 @@
+Name:Castigate
+ManaCost:W B
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ W B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | SpellDescription$ Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/castigate.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/106.jpg
+End

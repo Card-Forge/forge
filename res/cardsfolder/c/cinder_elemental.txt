@@ -1,0 +1,12 @@
+Name:Cinder Elemental
+ManaCost:3 R
+Types:Creature Elemental
+Text:no text
+PT:2/2
+A:AB$ DealDamage | Cost$ X R T Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_elemental.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/183.jpg
+End

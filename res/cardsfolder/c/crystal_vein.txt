@@ -1,0 +1,12 @@
+Name:Crystal Vein
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ 1 | Amount$ 2 | SpellDescription$ Add 2 to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_vein.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/322.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/290.jpg
+End

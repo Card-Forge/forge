@@ -1,0 +1,10 @@
+Name:Charging Rhino
+ManaCost:3 G G
+Types:Creature Rhino
+Text:no text
+PT:4/4
+K:CARDNAME can't be blocked by more than one creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_rhino.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/85.jpg
+End

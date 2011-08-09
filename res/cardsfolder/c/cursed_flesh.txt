@@ -1,0 +1,12 @@
+Name:Cursed Flesh
+ManaCost:B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | AddKeyword$ Fear | Description$ Enchanted creature gets -1/-1 and has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_flesh.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/56.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/98.jpg
+End

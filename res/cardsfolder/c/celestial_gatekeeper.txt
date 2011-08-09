@@ -1,0 +1,13 @@
+Name:Celestial Gatekeeper
+ManaCost:3 W W
+Types:Creature Bird Cleric
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, exile it, then return up to two target Bird and/or Cleric permanent cards from your graveyard to the battlefield.
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Exile | SubAbility$ SVar=DBChangeZone
+SVar:DBChangeZone:DB$ChangeZone | ChangeType$ Permanent.Bird+YouCtrl,Permanent.Cleric+YouCtrl | ChangeNum$ 2 | Hidden$ True | Origin$ Hand | Destination$ Battlefield
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_gatekeeper.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/6.jpg
+End

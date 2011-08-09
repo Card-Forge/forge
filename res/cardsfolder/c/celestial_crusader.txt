@@ -1,0 +1,13 @@
+Name:Celestial Crusader
+ManaCost:2 W W
+Types:Creature Spirit
+Text:no text
+PT:2/2
+K:Split second
+K:Flying
+K:Flash
+S:Mode$ Continuous | Affected$ Creature.White+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures get +1/+1.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_crusader.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/7.jpg
+End

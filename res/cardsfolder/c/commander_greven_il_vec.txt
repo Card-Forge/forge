@@ -1,0 +1,14 @@
+Name:Commander Greven il-Vec
+ManaCost:3 B B B
+Types:Legendary Creature Human Warrior
+Text:no text
+PT:7/5
+K:Fear
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
+SVar:RemAIDeck:True
+SVar:NeedsToPlay:Creature.YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/commander_greven_il_vec.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/9.jpg
+End

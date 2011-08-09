@@ -1,0 +1,13 @@
+Name:Cephalid Sage
+ManaCost:3 U
+Types:Creature Cephalid
+Text:no text
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | Threshold$ True | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, draw three cards, then discard two cards."
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 3 | SubAbility$ SVar=DBDiscard
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl
+SVar:DBDiscard:DB$Discard | NumCards$ 2 | Mode$ TgtChoose | Defined$ You
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_sage.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/29.jpg
+End

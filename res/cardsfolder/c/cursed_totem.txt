@@ -1,0 +1,11 @@
+Name:Cursed Totem
+ManaCost:2
+Types:Artifact
+Text:no text
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of creatures can't be activated.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_totem.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/278.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/264.jpg
+End

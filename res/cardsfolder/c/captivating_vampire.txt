@@ -1,0 +1,13 @@
+Name:Captivating Vampire
+ManaCost:1 B B
+Types:Creature Vampire
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Vampire creatures you control get +1/+1.
+A:AB$ GainControl | Cost$ tapXType<5/Vampire> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ SVar=Animate | SpellDescription$ Gain control of target creature. It becomes a Vampire in addition to its other types.
+SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Vampire | Permanent$ True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/captivating_vampire.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/87.jpg
+End

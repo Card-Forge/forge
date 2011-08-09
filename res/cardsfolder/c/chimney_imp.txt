@@ -1,0 +1,13 @@
+Name:Chimney Imp
+ManaCost:4 B
+Types:Creature Imp
+Text:no text
+PT:1/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target opponent puts a card from his or her hand on top of his or her library.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Opponent | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Opponent | Mandatory$ True | IsCurse$ True
+SVar:SacMe:1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chimney_imp.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/59.jpg
+End
