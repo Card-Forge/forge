@@ -1,0 +1,11 @@
+Name:Lorescale Coatl
+ManaCost:1 G U
+Types:Creature Snake
+Text:no text
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lorescale_coatl.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/101.jpg
+End

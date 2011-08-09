@@ -1,0 +1,13 @@
+Name:Kavu Runner
+ManaCost:3 R
+Types:Creature Kavu
+Text:no text
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME has haste as long as no opponent controls a white or blue creature.
+SVar:X:Count$Valid Creature.White+YouDontCtrl/Plus.Y
+SVar:Y:Count$Valid Creature.Blue+YouDontCtrl
+SVar:AntiBuffedBy:Creature.White,Creature.Blue
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_runner.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/150.jpg
+End

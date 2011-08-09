@@ -1,0 +1,11 @@
+Name:Kiln Walker
+ManaCost:3
+Types:Artifact Creature Construct
+Text:no text
+PT:0/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kiln_walker.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/142.jpg
+End

@@ -1,0 +1,13 @@
+Name:Lava Hounds
+ManaCost:2 R R
+Types:Creature  Hound
+Text:no text
+PT:4/4
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to you.
+SVar:TrigDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_hounds.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/198.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/109.jpg
+End

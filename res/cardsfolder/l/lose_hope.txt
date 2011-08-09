@@ -1,0 +1,10 @@
+Name:Lose Hope
+ManaCost:B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ SVar=DBScry | SpellDescription$ Target creature gets -1/-1 until end of turn. Scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:DBScry:DB$Scry | ScryNum$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lose_hope.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/52.jpg
+End

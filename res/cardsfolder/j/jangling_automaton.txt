@@ -1,0 +1,11 @@
+Name:Jangling Automaton
+ManaCost:3
+Types:Artifact Creature Construct
+Text:no text
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap all creatures defending player controls.
+SVar:TrigUntap:AB$UntapAll | Cost$ 0 | ValidCards$ Creature.YouDontCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jangling_automaton.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/151.jpg
+End

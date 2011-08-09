@@ -1,0 +1,18 @@
+Name:Joraga Treespeaker
+ManaCost:G
+Types:Creature Elf Druid
+Text:no text
+PT:1/1
+K:Level up:1 G
+K:maxLevel:5
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 2 | AddAbility$ Mana | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1+ 1/2 CARDNAME has Tap: Add G G to your mana pool.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 4 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 5+ 1/4 Elves you control have "Tap: Add G G to your mana pool."
+S:Mode$ Continuous | Affected$ Card.Elf+YouCtrl | AddAbility$ Mana | CheckSVar$ Y | SVarCompare$ EQ1
+SVar:Mana:AB$Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
+SVar:X:Count$Valid Card.Self+countersGE1LEVEL+countersLT5LEVEL
+SVar:Y:Count$Valid Card.Self+countersGE5LEVEL
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_treespeaker.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/190.jpg
+End

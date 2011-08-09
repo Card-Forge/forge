@@ -1,0 +1,14 @@
+Name:Krovikan Fetish
+ManaCost:2 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card at the beginning of the next turn's upkeep.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_fetish.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/34.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/28.jpg
+End

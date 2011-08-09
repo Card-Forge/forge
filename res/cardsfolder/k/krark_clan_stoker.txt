@@ -1,0 +1,11 @@
+Name:Krark-Clan Stoker
+ManaCost:2 R
+Types:Creature Goblin Shaman
+Text:no text
+PT:2/2
+A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_stoker.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/65.jpg
+End

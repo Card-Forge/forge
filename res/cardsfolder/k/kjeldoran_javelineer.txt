@@ -1,0 +1,13 @@
+Name:Kjeldoran Javelineer
+ManaCost:W
+Types:Creature Human Soldier
+Text:no text
+PT:1/2
+K:Cumulative upkeep:W
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of age counters on it to target attacking or blocking creature.
+SVar:X:Count$CardCounters.AGE
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_javelineer.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/11.jpg
+End

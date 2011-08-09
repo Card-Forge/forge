@@ -1,0 +1,14 @@
+Name:Llanowar Wastes
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ SVar=DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
+A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ SVar=DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
+SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You 
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_wastes.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/141.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/322.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/355.jpg
+End

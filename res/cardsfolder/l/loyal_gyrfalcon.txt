@@ -1,0 +1,14 @@
+Name:Loyal Gyrfalcon
+ManaCost:3 W
+Types:Creature Bird
+Text:no text
+PT:3/3
+K:Flying
+K:Defender
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidControllingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDebuff | TriggerDescription$ Whenever you cast a white spell, CARDNAME loses defender until end of turn.
+SVar:TrigDebuff:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Defender
+SVar:BuffedBy:Card.White
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_gyrfalcon.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/11.jpg
+End

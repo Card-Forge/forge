@@ -1,0 +1,10 @@
+Name:Leyline of the Void
+ManaCost:2 B B
+Types:Enchantment
+Text:If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.\r\nIf a card would be put into an opponent's graveyard from anywhere, exile it instead.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_the_void.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/52.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/101.jpg
+End

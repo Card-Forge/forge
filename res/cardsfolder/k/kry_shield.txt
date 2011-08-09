@@ -1,0 +1,12 @@
+Name:Kry Shield
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ Pump | Cost$ 2 T | KW$ HIDDEN Prevent all damage that would be dealt by CARDNAME. | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl | SubAbility$ SVar=DBPump | SpellDescription$ Prevent all damage that would be dealt this turn by target creature you control. That creature gets +0/+X until end of turn, where X is its converted mana cost.
+SVar:DBPump:DB$Pump | Defined$ Targeted | NumDef$ X
+SVar:X:Targeted$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kry_shield.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/227.jpg
+End

@@ -1,0 +1,11 @@
+Name:Leyline of the Meek
+ManaCost:2 W W
+Types:Enchantment
+Text:If Leyline of the Meek is in your opening hand, you may begin the game with it on the battlefield.
+S:Mode$ Continuous | Affected$ Creature.token | AddPower$ 1 | AddToughness$ 1 | Description$ Creature tokens get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_the_meek.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/10.jpg
+End

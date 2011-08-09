@@ -1,0 +1,17 @@
+Name:Kargan Dragonlord
+ManaCost:R R
+Types:Creature Human Warrior
+Text:no text
+PT:2/2
+K:Level up:R
+K:maxLevel:8
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 4+ 4/4 CARDNAME has Flying
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 8 | SetToughness$ 8 | AddKeyword$ Trample | AddAbility$ Pump | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 8+ 8/8 CARDNAME has Flying and Trample and R: CARDNAME gets +1/+0 until end of turn.
+SVar:Pump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:X:Count$Valid Card.Self+countersGE4LEVEL
+SVar:Y:Count$Valid Card.Self+countersGE8LEVEL
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kargan_dragonlord.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/152.jpg
+End
+

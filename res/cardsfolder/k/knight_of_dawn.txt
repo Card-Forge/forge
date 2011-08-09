@@ -1,0 +1,13 @@
+Name:Knight of Dawn
+ManaCost:1 W W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:First Strike
+A:AB$ Protection | Cost$ W W | Defined$ Self | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
+#Computer isn't very good at picking a color to get protection from yet
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/238.jpg
+End

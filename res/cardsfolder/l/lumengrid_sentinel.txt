@@ -1,0 +1,12 @@
+Name:Lumengrid Sentinel
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/2
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact enters the battlefield under your control, you may tap target permanent.
+SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lumengrid_sentinel.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/40.jpg
+End

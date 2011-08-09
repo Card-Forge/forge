@@ -1,0 +1,15 @@
+Name:Lotus Guardian
+ManaCost:7
+Types:Artifact Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23233.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/305.jpg
+End

@@ -1,0 +1,11 @@
+Name:Lurking Crocodile
+ManaCost:2 G
+Types:Creature Crocodile
+Text:no text
+PT:2/2
+K:Bloodthirst 1
+K:Islandwalk
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_crocodile.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/184.jpg
+End

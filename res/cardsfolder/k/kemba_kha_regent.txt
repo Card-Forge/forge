@@ -1,0 +1,13 @@
+Name:Kemba, Kha Regent
+ManaCost:1 W W
+Types:Legendary Creature Cat Cleric
+Text:no text
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 2/2 white Cat creature token onto the battlefield for each Equipment attached to CARDNAME.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 2 2 Cat | TokenName$ Cat | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenTypes$ Creature,Cat | TokenAmount$ X | TokenOwner$ You
+SVar:X:Count$Valid Equipment.Attached
+SVar:EquipMe:Multiple
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kemba_kha_regent.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/12.jpg
+End

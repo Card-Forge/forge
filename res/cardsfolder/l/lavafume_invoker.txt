@@ -1,0 +1,10 @@
+Name:Lavafume Invoker
+ManaCost:2 R
+Types:Creature Goblin Shaman
+Text:no text
+PT:2/2
+A:AB$ PumpAll | Cost$ 8 | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | SpellDescription$ Creatures you control get +3/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lavafume_invoker.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/155.jpg
+End

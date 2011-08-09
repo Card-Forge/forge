@@ -1,0 +1,12 @@
+Name:Leave No Trace
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ SVar=DBDestroyAll | RememberTargets$ True | ForgetOtherTargets$ True | SpellDescription$ Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
+SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Remembered.Enchantment+Other+SharesColorWith | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leave_no_trace.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/23.jpg
+End

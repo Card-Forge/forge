@@ -1,0 +1,13 @@
+Name:Kingfisher
+ManaCost:3 U
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
+SVar:SacMe:1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kingfisher.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/36.jpg
+End

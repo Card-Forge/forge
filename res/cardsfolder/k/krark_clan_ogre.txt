@@ -1,0 +1,11 @@
+Name:Krark-Clan Ogre
+ManaCost:3 R R
+Types:Creature Ogre
+Text:no text
+PT:3/3
+A:AB$ Pump | Cost$ R Sac<1/Artifact> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_ogre.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/71.jpg
+End

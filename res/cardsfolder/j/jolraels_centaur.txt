@@ -1,0 +1,11 @@
+Name:Jolrael's Centaur
+ManaCost:1 G G
+Types:Creature Centaur Archer
+Text:no text
+PT:2/2
+K:Flanking
+K:Shroud
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jolraels_centaur.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/120.jpg
+End

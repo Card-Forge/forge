@@ -1,0 +1,12 @@
+Name:Kami of the Hunt
+ManaCost:2 G
+Types:Creature Spirit
+Text:no text
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+SVar:BuffedBy:Arcane,Spirit
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_hunt.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/219.jpg
+End

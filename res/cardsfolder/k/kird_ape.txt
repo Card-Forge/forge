@@ -1,0 +1,13 @@
+Name:Kird Ape
+ManaCost:R
+Types:Creature Ape
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+2 as long as you control a Forest.
+SVar:X:Count$Valid Forest.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kird_ape.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/160.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/199.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/49.jpg
+End

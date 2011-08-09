@@ -1,0 +1,14 @@
+Name:Knight of New Alara
+ManaCost:2 W G
+Types:Creature Human Knight
+Text:Each other multicolored creature you control gets +1/+1 for each of its colors.
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl+White | AddPower$ 1 | AddToughness$ 1
+S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl+Blue | AddPower$ 1 | AddToughness$ 1
+S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl+Black | AddPower$ 1 | AddToughness$ 1
+S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl+Red | AddPower$ 1 | AddToughness$ 1
+S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl+Green | AddPower$ 1 | AddToughness$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_new_alara.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/70.jpg
+End

@@ -1,0 +1,13 @@
+Name:Juniper Order Advocate
+ManaCost:2 W
+Types:Creature Human Knight
+Text:no text
+PT:1/2
+S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, green creatures you control get +1/+1.
+SVar:X:Count$Valid Card.Self+untapped
+SVar:RemRandomDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_advocate.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/132.jpg
+End

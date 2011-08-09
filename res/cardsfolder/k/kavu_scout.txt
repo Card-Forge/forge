@@ -1,0 +1,13 @@
+Name:Kavu Scout
+ManaCost:2 R
+Types:Creature Kavu Scout
+Text:no text
+PT:0/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ Domain - CARDNAME gets +1/+0 for each basic land type among lands you control.
+SVar:X:Count$Domain
+SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_scout.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/151.jpg
+End

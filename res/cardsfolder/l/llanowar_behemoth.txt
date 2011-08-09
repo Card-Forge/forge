@@ -1,0 +1,12 @@
+Name:Llanowar Behemoth
+ManaCost:3 G G
+Types:Creature Elemental
+Text:no text
+PT:4/4
+A:AB$ Pump | Cost$ tapXType<1/Creature> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83152.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/261.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/74.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/252.jpg
+End

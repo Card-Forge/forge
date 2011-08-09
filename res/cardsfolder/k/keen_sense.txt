@@ -1,0 +1,12 @@
+Name:Keen Sense
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Opponent | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature deals damage to an opponent, you may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keen_sense.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/152.jpg
+End

@@ -1,0 +1,13 @@
+Name:Kemuri-Onna
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards a card.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may return CARDNAME to its owner's hand.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 1 | Mode$ TgtChoose 
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84705.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/76.jpg
+End

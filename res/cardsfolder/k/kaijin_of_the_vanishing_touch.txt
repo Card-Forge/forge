@@ -1,0 +1,13 @@
+Name:Kaijin of the Vanishing Touch
+ManaCost:1 U
+Types:Creature Spirit
+Text:no text
+PT:0/3
+K:Defender
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, return that creature to its owner's hand at end of combat.
+SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigBounce | TriggerDescription$ Return blocked creature to its owner's hand at end of combat.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttacker
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kaijin_of_the_vanishing_touch.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/39.jpg
+End

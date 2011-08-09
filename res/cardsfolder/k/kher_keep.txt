@@ -1,0 +1,10 @@
+Name:Kher Keep
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Token | Cost$ 1 R T | TokenAmount$ 1 | TokenName$ Kobolds of Kher Keep | TokenTypes$ Creature,Kobold | TokenOwner$ You | TokenColors$ Red | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Put a 0/1 red Kobold creature token named Kobolds of Kher Keep onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kher_keep.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/275.jpg
+End

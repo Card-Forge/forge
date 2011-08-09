@@ -1,0 +1,12 @@
+Name:Kjeldoran Home Guard
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:no text
+PT:1/6
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | IsPresent$ Card.attacking+Self,Card.blocking+Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At end of combat, if CARDNAME attacked or blocked this combat, put a -0/-1 counter on CARDNAME and put a 0/1 white Deserter creature token onto the battlefield.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ M0M1 | CounterNum$ 1 | SubAbility$ SVar=DBToken
+SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Deserter | TokenTypes$ Creature,Deserter | TokenOwner$ You | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_home_guard.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/135.jpg
+End

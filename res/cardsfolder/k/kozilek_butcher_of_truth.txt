@@ -1,0 +1,13 @@
+Name:Kozilek, Butcher of Truth
+ManaCost:10
+Types:Legendary Creature Eldrazi
+Text:no text
+PT:12/12
+K:Annihilator 4
+K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw  | TriggerDescription$ When you cast CARDNAME, draw four cards.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 4
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kozilek_butcher_of_truth.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/6.jpg
+End

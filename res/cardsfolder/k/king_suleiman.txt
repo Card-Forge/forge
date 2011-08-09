@@ -1,0 +1,11 @@
+Name:King Suleiman
+ManaCost:1 W
+Types:Creature Human
+Text:no text
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Djinn,Efreet | TgtPrompt$ Select target Djinn or Efreet | SpellDescription$ Destroy target Djinn or Efreet.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/61.jpg
+End

@@ -1,0 +1,12 @@
+Name:Loxodon Punisher
+ManaCost:3 W
+Types:Creature Elephant Soldier
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Equipment attached to it.
+SVar:X:Count$Valid Equipment.Attached/Times.2
+SVar:EquipMe:Multiple
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_punisher.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/14.jpg
+End

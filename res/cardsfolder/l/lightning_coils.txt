@@ -1,0 +1,14 @@
+Name:Lightning Coils
+ManaCost:3
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control dies, put a charge counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+countersGE5CHARGE | Execute$ TrigElementalParty | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has five or more charge counters on it, remove all of them from it and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+SVar:TrigElementalParty:AB$Token | Cost$ 0 | TokenAmount$ VIP | TokenImage$ r 3 1 elemental | TokenName$ Elemental | TokenColors$ Red | TokenTypes$ Creature,Elemental | TokenKeywords$ Haste<>HIDDEN At the beginning of the end step, exile CARDNAME. | TokenPower$ 3 | TokenToughness$ 1 | SubAbility$ DBClearGuestList
+SVar:DBClearGuestList:DB$RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ VIP | SpellDescription$ Remove counters
+SVar:VIP:Count$CardCounters.CHARGE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_coils.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/198.jpg
+End

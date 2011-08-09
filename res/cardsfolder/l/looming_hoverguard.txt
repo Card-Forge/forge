@@ -1,0 +1,12 @@
+Name:Looming Hoverguard
+ManaCost:4 U U
+Types:Creature Drone
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target artifact on top of its owner's library.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_hoverguard.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/38.jpg
+End

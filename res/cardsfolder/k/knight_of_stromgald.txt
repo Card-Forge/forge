@@ -1,0 +1,13 @@
+Name:Knight of Stromgald
+ManaCost:B B
+Types:Creature Human Knight
+Text:no text
+PT:2/1
+K:Protection from white
+A:AB$ Pump | Cost$ B | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$ Pump | Cost$ B B | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_stromgald.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/33.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/26.jpg
+End

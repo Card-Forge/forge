@@ -1,0 +1,11 @@
+Name:Keldon Halberdier
+ManaCost:4 R
+Types:Creature Human Warrior
+Text:no text
+PT:4/1
+K:First Strike
+K:Suspend:4:R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_halberdier.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/167.jpg
+End

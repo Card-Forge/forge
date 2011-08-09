@@ -1,0 +1,11 @@
+Name:Leonin Elder
+ManaCost:W
+Types:Creature Cat Cleric
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever an artifact enters the battlefield, you may gain 1 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_elder.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/10.jpg
+End

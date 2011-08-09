@@ -1,0 +1,13 @@
+Name:Liege of the Pit
+ManaCost:5 B B B
+Types:Creature Demon
+Text:At the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.
+PT:7/7
+K:Flying
+K:Trample
+K:Morph:B B B B
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_pit.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/113.jpg
+End

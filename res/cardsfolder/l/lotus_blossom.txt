@@ -1,0 +1,17 @@
+Name:Lotus Blossom
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ During your upkeep, you may put a petal counter on CARDNAME.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ U | Amount$ X | SpellDescription$ Add X U to your mana pool
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W | Amount$ X | SpellDescription$ Add X W to your mana pool
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G | Amount$ X | SpellDescription$ Add X G to your mana pool
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | Amount$ X | SpellDescription$ Add X R to your mana pool
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | Amount$ X | SpellDescription$ Add X B to your mana pool
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PETAL | CounterNum$ 1
+SVar:X:Count$CardCounters.PETAL
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_blossom.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/300.jpg
+End

@@ -1,0 +1,10 @@
+Name:Loch Korrigan
+ManaCost:3 B
+Types:Creature Spirit
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ UB | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/loch_korrigan.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/71.jpg
+End

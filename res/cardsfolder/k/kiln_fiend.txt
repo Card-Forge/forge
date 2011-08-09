@@ -1,0 +1,12 @@
+Name:Kiln Fiend
+ManaCost:1 R
+Types:Creature Elemental Beast
+Text:no text
+PT:1/2
+T:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a instant or sorcery spell, CARDNAME gets +3/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +3 | NumDef$ +0 | Defined$ Self
+SVar:BuffedBy:Instant,Sorcery
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kiln_fiend.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/153.jpg
+End

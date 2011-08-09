@@ -1,0 +1,10 @@
+Name:Liquimetal Coating
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ Animate | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Types$ Artifact | SpellDescription$ Target permanent becomes an artifact in addition to its other types until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/liquimetal_coating.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/171.jpg
+End

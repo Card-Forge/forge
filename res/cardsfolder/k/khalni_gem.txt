@@ -1,0 +1,16 @@
+Name:Khalni Gem
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ W | Amount$ 2 | SpellDescription$ Add W W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 2 | SpellDescription$ Add U U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
+T:Mode$ ChangesZone$ | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return two lands you control to their owner's hand.
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | ChangeType$ Land.YouCtrl | ChangeNum$ 2 | Hidden$ True | TgtPrompt$ Select 2 target lands you control
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_gem.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/205.jpg
+End

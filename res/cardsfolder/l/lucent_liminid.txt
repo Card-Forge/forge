@@ -1,0 +1,10 @@
+Name:Lucent Liminid
+ManaCost:3 W W
+Types:Enchantment Creature Elemental
+Text:no text
+PT:3/3
+K:Flying
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130691.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/24.jpg
+End

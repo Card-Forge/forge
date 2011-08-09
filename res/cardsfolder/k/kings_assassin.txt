@@ -1,0 +1,10 @@
+Name:King's Assassin
+ManaCost:1 B B
+Types:Creature Human Assassin
+Text:no text
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ Destroy target tapped creature. Activate this ability only during your turn, before attackers are declared.
+SVar:Rarity:Rare
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/kings_assassin.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/21.jpg
+End

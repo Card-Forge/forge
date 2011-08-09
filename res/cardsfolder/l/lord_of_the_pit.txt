@@ -1,0 +1,18 @@
+Name:Lord of the Pit
+ManaCost:4 B B B
+Types:Creature Demon
+Text:At the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
+PT:7/7
+K:Flying
+K:Trample
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_pit.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/23.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/23.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/36.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/28.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/154.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/24.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/23.jpg
+End

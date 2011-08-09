@@ -1,0 +1,11 @@
+Name:Junktroller
+ManaCost:4
+Types:Artifact Creature Golem
+Text:no text
+PT:0/6
+K:Defender
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from a graveyard on the bottom of its owner's library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/junktroller.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/264.jpg
+End

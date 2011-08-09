@@ -1,0 +1,16 @@
+Name:Lifetap
+ManaCost:U U
+Types:Enchantment
+Text:no text
+T:Mode$ Taps | ValidCard$ Forest.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lifetap.jpg
+SVar:Rarity:Uncommon
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/62.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/62.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/99.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/81.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/63.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/62.jpg
+End

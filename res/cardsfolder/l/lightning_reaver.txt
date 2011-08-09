@@ -1,0 +1,16 @@
+Name:Lightning Reaver
+ManaCost:3 R B
+Types:Creature Zombie Beast
+Text:no text
+PT:3/3
+K:Haste
+K:Fear
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a charge counter on it.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals damage equal to the number of charge counters on it to each opponent.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ X
+SVar:X:Count$CardCounters.CHARGE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_reaver.jpg
+SVar:Rarity:Rare
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/42.jpg
+End

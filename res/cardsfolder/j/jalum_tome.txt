@@ -1,0 +1,12 @@
+Name:Jalum Tome
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jalum_tome.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/382.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/293.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/19.jpg
+End

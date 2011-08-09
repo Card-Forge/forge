@@ -1,0 +1,11 @@
+Name:Kabuto Moth
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:1/2
+K:Flying
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Target creature gets +1/+2 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79105.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/20.jpg
+End

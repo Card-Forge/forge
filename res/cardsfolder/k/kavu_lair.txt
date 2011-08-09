@@ -1,0 +1,11 @@
+Name:Kavu Lair
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with power 4 or greater enters the battlefield, its controller draws a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_lair.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/193.jpg
+End

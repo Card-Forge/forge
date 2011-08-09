@@ -1,0 +1,17 @@
+Name:Keldon Warlord
+ManaCost:2 R R
+Types:Creature Human Barbarian
+Text:no text
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of non-Wall creatures you control.
+SVar:X:Count$Valid Creature.nonWall+YouCtrl
+SVar:BuffedBy:Creature.nonWall
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_warlord.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/161.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/162.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/247.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/225.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/159.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/161.jpg
+End

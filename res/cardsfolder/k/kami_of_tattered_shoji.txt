@@ -1,0 +1,12 @@
+Name:Kami of Tattered Shoji
+ManaCost:4 W
+Types:Creature Spirit
+Text:no text
+PT:2/5
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME gains flying until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying
+SVar:BuffedBy:Arcane,Spirit
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_tattered_shoji.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/11.jpg
+End

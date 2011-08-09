@@ -1,0 +1,10 @@
+Name:Koth of the Hammer
+ManaCost:2 R R
+Types:Planeswalker Koth
+Text:no text
+Loyalty:3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/koth_of_the_hammer.jpg
+SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/94.jpg
+End

@@ -1,0 +1,10 @@
+Name:Lumbering Satyr
+ManaCost:2 G G
+Types:Creature Satyr Beast
+Text:no text
+PT:5/4
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Forestwalk | Description$ All creatures have forestwalk.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lumbering_satyr.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/257.jpg
+End

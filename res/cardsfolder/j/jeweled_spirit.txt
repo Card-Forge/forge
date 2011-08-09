@@ -1,0 +1,12 @@
+Name:Jeweled Spirit
+ManaCost:3 W W
+Types:Creature Spirit
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ Protection | Cost$ Sac<2/Land> | Gains$ Choice | Choices$ AnyColor,artifacts | SpellDescription$ CARDNAME gains protection from artifacts or from the color of your choice until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_spirit.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/12.jpg
+End

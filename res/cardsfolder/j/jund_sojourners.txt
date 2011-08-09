@@ -1,0 +1,13 @@
+Name:Jund Sojourners
+ManaCost:B R G
+Types:Creature Viashino Shaman
+Text:no text
+PT:3/2
+K:Cycling:2 R
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it's put into a graveyard from the battlefield, you may have it deal 1 damage to target creature or player.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When you cycle CARDNAME or it's put into a graveyard from the battlefield, you may have it deal 1 damage to target creature or player.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_sojourners.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/116.jpg
+End

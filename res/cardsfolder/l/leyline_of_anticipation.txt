@@ -1,0 +1,10 @@
+Name:Leyline of Anticipation
+ManaCost:2 U U
+Types:Enchantment
+Text:If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+S:Mode$ Continuous | Affected$ Card.nonLand+YouCtrl | AddKeyword$ HIDDEN Flash | AffectedZone$ Hand,Graveyard,Exile | Description$ You may cast nonland cards as though they had flash. (You may cast them any time you could cast an instant.)
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_anticipation.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/61.jpg
+End

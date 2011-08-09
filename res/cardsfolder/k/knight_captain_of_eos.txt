@@ -1,0 +1,12 @@
+Name:Knight-Captain of Eos
+ManaCost:4 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 white Soldier creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+A:AB$ Fog | Cost$ W Sac<1/Soldier> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_captain_of_eos.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/17.jpg
+End

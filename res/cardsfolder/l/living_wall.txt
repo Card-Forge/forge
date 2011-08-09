@@ -1,0 +1,14 @@
+Name:Living Wall
+ManaCost:4
+Types:Artifact Creature Wall
+Text:no text
+PT:0/6
+K:Defender
+A:AB$ Regenerate | Cost$ 1 | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/living_wall.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/258.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/260.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/262.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/259.jpg
+End

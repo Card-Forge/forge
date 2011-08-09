@@ -1,0 +1,12 @@
+Name:Lightning Dragon
+ManaCost:2 R R
+Types:Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+K:Echo:2 R R
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_dragon.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/202.jpg
+End

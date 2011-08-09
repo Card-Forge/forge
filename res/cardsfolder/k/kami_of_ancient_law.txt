@@ -1,0 +1,11 @@
+Name:Kami of Ancient Law
+ManaCost:1 W
+Types:Creature Spirit
+Text:no text
+PT:2/2
+A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_ancient_law.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/21.jpg
+End

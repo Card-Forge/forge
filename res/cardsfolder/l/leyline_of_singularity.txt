@@ -1,0 +1,10 @@
+Name:Leyline of Singularity
+ManaCost:2 U U
+Types:Enchantment
+Text:If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield.
+S:Mode$ Continuous | Affected$ Permanent.nonLand | AddType$ Legendary | Description$ All nonland permanents are legendary.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_singularity.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/29.jpg
+End

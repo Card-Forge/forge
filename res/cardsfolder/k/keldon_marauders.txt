@@ -1,0 +1,13 @@
+Name:Keldon Marauders
+ManaCost:1 R
+Types:Creature Human Warrior
+Text:no text
+PT:3/3
+K:Vanishing:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target player.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME leaves the battlefield, it deals 1 damage to target player.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_marauders.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/102.jpg
+End

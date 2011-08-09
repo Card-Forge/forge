@@ -1,0 +1,12 @@
+Name:Kinsbaile Balloonist
+ManaCost:3 W
+Types:Creature Kithkin Soldier
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have target creature gain flying until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | KW$ Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_balloonist.jpg
+SetInfo:LRW|Common|http://magiccards.info/lw/en/23.html
+End

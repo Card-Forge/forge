@@ -1,0 +1,12 @@
+Name:Kathari Remnant
+ManaCost:2 U B
+Types:Creature Bird Skeleton
+Text:no text
+PT:0/1
+K:Flying
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+K:Cascade
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kathari_remnant.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/23.jpg
+End

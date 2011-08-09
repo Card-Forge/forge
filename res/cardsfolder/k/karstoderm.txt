@@ -1,0 +1,12 @@
+Name:Karstoderm
+ManaCost:2 G G
+Types:Creature Beast
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact enters the battlefield, remove a +1/+1 counter from CARDNAME.
+SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/karstoderm.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/77.jpg
+End

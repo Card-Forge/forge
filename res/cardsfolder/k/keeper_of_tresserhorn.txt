@@ -1,0 +1,12 @@
+Name:Keeper of Tresserhorn
+ManaCost:5 B
+Types:Creature Avatar
+Text:no text
+PT:6/6
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.
+SVar:TrigPump:DB$Pump | Cost$ 0 | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ SVar=DBLose
+SVar:DBLose:DB$LoseLife | Defined$ Opponent | LifeAmount$ 2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_tresserhorn.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/14.jpg
+End

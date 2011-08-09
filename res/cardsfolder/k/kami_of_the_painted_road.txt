@@ -1,0 +1,13 @@
+Name:Kami of the Painted Road
+ManaCost:4 W
+Types:Creature Spirit
+Text:no text
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigProtect | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME gains protection from the color of your choice until end of turn.
+SVar:TrigProtect:AB$ Protection | Cost$ 0 | Defined$ Self | Gains$ Choice | Choices$ AnyColor
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_painted_road.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/23.jpg
+End

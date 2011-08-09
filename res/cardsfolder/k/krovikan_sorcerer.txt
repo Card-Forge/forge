@@ -1,0 +1,11 @@
+Name:Krovikan Sorcerer
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ Draw | Cost$ T Discard<1/Card.nonBlack> | NumCards$ 1 | CostDesc$ Tap, Discard a non black card: | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_sorcerer.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/96.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/81.jpg
+End

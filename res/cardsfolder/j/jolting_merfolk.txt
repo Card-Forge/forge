@@ -1,0 +1,12 @@
+Name:Jolting Merfolk
+ManaCost:2 U U
+Types:Creature Merfolk
+Text:no text
+PT:2/2
+K:Fading:4
+A:AB$ Tap | Cost$ SubCounter<1/FADE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jolting_merfolk.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/34.jpg
+End

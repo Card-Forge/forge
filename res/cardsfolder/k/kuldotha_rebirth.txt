@@ -1,0 +1,10 @@
+Name:Kuldotha Rebirth
+ManaCost:R
+Types:Sorcery
+Text:no text
+A:SP$ Token | Cost$ R Sac<1/Artifact> | TokenAmount$ 3 | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put three 1/1 red Goblin creature tokens onto the battlefield.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_rebirth.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/96.jpg
+End

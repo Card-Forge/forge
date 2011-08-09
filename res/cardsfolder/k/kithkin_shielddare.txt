@@ -1,0 +1,10 @@
+Name:Kithkin Shielddare
+ManaCost:1 W
+Types:Creature Kithkin Soldier
+PT:1/1
+Text:no text
+A:AB$ Pump | Cost$ W T | ValidTgts$ Creature.blocking | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target blocking creature gets +2/+2 until end of turn. | TgtPrompt$ Select target blocking creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_shielddare.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/10.jpg
+End
