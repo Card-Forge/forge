@@ -1,0 +1,14 @@
+Name:Favorable Destiny
+ManaCost:1 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2 as long as it's white.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | CheckSVar$ X | SVarCompare$ GE2 | Description$ Enchanted creature has shroud as long as its controller controls another creature. (It can't be the target of spells or abilities.)
+SVar:X:Count$EnchantedControllerCreatures
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/favorable_destiny.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/220.jpg
+End

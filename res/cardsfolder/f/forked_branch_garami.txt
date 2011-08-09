@@ -1,0 +1,11 @@
+Name:Forked-Branch Garami
+ManaCost:3 G G
+Types:Creature Spirit
+Text:no text
+PT:4/4
+K:Soulshift:4
+K:Soulshift:4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forked_branch_garami.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/125.jpg
+End

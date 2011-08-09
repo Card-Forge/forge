@@ -1,0 +1,12 @@
+Name:Forgotten Cave
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+K:Cycling:R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_cave.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/317.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/273.jpg
+End

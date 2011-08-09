@@ -1,0 +1,12 @@
+Name:Fledgling Griffin
+ManaCost:1 W
+Types:Creature Griffin
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gains flying until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying
+SVar:BuffedBy:Land
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/5.jpg
+End

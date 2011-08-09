@@ -1,0 +1,12 @@
+Name:Fledgling Mawcor
+ManaCost:3 U
+Types:Creature Beast
+Text:no text
+PT:2/2
+K:Flying
+K:Morph:U U
+A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_mawcor.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/63.jpg
+End

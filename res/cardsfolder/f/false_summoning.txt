@@ -1,0 +1,9 @@
+Name:False Summoning
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
+SVar:Rarity:Common
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/false_summoning.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/40.jpg
+End

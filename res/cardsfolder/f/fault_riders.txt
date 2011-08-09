@@ -1,0 +1,11 @@
+Name:Fault Riders
+ManaCost:2 R
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ +2 | KW$ First Strike | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 and gains first strike until end of turn. Activate this ability only once each turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fault_riders.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/88.jpg
+End

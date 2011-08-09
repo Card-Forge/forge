@@ -1,0 +1,12 @@
+Name:Flame-Kin War Scout
+ManaCost:3 R
+Types:Creature Elemental Scout
+Text:no text
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other |TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When another creature enters the battlefield, sacrifice Flame-Kin War Scout. If you do, Flame-Kin War Scout deals 4 damage to that creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ SVar=DBDamage | RememberSacrificed$ True
+SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TriggeredCard | NumDmg$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card.Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_kin_war_scout.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/61.jpg
+End

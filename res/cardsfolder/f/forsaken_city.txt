@@ -1,0 +1,17 @@
+Name:Forsaken City
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME doesn't untap during your untap step.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may exile a card from your hand. If you do, untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ ExileFromHand<1/Card> | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forsaken_city.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/139.jpg
+End

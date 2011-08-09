@@ -1,0 +1,10 @@
+Name:Fumarole
+ManaCost:3 B R
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 3 B R PayLife<3> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDestroy | SpellDescription$ Destroy target creature and target land.
+SVar:DBDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fumarole.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/369.jpg
+End

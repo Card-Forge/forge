@@ -1,0 +1,12 @@
+Name:Fever Charm
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Choose one - Target creature gains haste until end of turn
+A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ or target creature gets +2/+0 until end of turn
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.wizard | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target Wizard creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fever_charm.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/202.jpg
+End

@@ -1,0 +1,12 @@
+Name:Figure of Destiny
+ManaCost:RW
+Types:Creature Kithkin
+Text:no text
+PT:1/1
+A:AB$ Animate | Cost$ RW | Types$ Kithkin,Spirit | Permanent$ True | Power$ 2 | Toughness$ 2 | SpellDescription$ CARDNAME becomes a 2/2 Kithkin Spirit.
+A:AB$ Animate | Cost$ RW RW RW | IsPresent$ Card.Self+Spirit | PresentCompare$ EQ1 | Types$ Kithkin,Spirit,Warrior | Permanent$ True | Power$ 4 | Toughness$ 4 | SpellDescription$ If CARDNAME is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior.
+A:AB$ Animate | Cost$ RW RW RW RW RW RW| IsPresent$ Card.Self+Warrior | PresentCompare$ EQ1 | Types$ Kithkin,Spirit,Warrior,Avatar | Permanent$ True | Power$ 8 | Toughness$ 8 | Keywords$ Flying & First Strike | SpellDescription$ If CARDNAME is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/figure_of_destiny.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/139.jpg
+End

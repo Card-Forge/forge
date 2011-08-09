@@ -1,0 +1,10 @@
+Name:Flood Plain
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flood_plain.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/291.jpg
+End

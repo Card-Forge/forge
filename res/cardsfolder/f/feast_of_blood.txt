@@ -1,0 +1,11 @@
+Name:Feast of Blood
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ SVar=DBGainLife | IsPresent$ Vampire.YouCtrl | PresentCompare$ GE2 | SpellDescription$ Cast CARDNAME only if you control two or more Vampires. Destroy target creature. You gain 4 life.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 4
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_blood.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/88.jpg
+End

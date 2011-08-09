@@ -1,0 +1,11 @@
+Name:Forfend
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Effect | Cost$ 1 W | Name$ Forfend Effect | StaticAbilities$ KWPump | SpellDescription$ Prevent all damage that would be dealt to creatures this turn.
+SVar:KWPump:Mode$ Continuous | Affected$ Creature | AddKeyword$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to creatures this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forfend.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/10.jpg
+End

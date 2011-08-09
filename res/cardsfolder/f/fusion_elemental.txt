@@ -1,0 +1,9 @@
+Name:Fusion Elemental
+ManaCost:W U B R G
+Types:Creature Elemental
+Text:no text
+PT:8/8
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fusion_elemental.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/107.jpg
+End

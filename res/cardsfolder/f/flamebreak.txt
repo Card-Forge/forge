@@ -1,0 +1,9 @@
+Name:Flamebreak
+ManaCost:R R R
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ R R R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | NumDmg$ 3 | NoRegen$ True | SpellDescription$ CARDNAME deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flamebreak.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/61.jpg
+End

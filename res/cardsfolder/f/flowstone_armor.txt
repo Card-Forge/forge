@@ -1,0 +1,14 @@
+Name:Flowstone Armor
+ManaCost:3
+Types:Artifact
+Text:no text
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True |  SpellDescription$ Target creature gets +1/-1 for as long as CARDNAME remains tapped.
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 1 | AddToughness$ -1
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
+SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_armor.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/131.jpg
+End

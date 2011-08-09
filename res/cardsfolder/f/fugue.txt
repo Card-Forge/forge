@@ -1,0 +1,10 @@
+Name:Fugue
+ManaCost:3 B B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 3 B B | ValidTgts$ Player | NumCards$ 3 | Mode$ TgtChoose | SpellDescription$ Target player discards three cards.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fugue.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/62.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/137.jpg
+End

@@ -1,0 +1,10 @@
+Name:Flayer Husk
+ManaCost:1
+Types:Artifact Equipment
+Text:Equipped creature gets +1/+1.
+K:eqPump 2:+1/+1
+K:Living Weapon
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flayer_husk.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/107.jpg
+End

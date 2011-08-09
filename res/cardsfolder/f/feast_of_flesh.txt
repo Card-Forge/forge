@@ -1,0 +1,11 @@
+Name:Feast of Flesh
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ SVar=DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named CARDNAME in all graveyards.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$NamedInAllYards.Feast of Flesh/Plus.1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_flesh.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/56.jpg
+End

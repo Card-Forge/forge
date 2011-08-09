@@ -1,0 +1,12 @@
+Name:Forbidden Lore
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | Description$ Enchanted land has "Tap: Target creature gets +2/+1 until end of turn."
+SVar:Damage:AB$Pump | Cost$ T | Tgt$ TgtC | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Target creature gets +2/+1 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_lore.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/124.jpg
+End

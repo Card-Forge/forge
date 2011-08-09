@@ -1,0 +1,13 @@
+Name:Funeral March
+ManaCost:1 B B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.AttachedBy | Execute$ TrigSac | TriggerDescription$ When enchanted creature leaves the battlefield, its controller sacrifices a creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ TriggeredCardController
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_march.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/11.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/26.jpg
+End

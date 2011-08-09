@@ -1,0 +1,11 @@
+Name:Final Revels
+ManaCost:4 B
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ 4 B | ValidCards$ Creature | NumAtt$ +2 | PrecostDesc$ Choose one - | SpellDescription$ All creatures get +2/+0 until end of turn;
+A:SP$ PumpAll | Cost$ 4 B | ValidCards$ Creature | NumDef$ -2 | PrecostDesc$ or | SpellDescription$ all creatures get -0/-2 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/final_revels.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/113.jpg
+End

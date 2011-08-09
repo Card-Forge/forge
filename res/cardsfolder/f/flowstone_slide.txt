@@ -1,0 +1,13 @@
+Name:Flowstone Slide
+ManaCost:X 2 R R
+Types:Sorcery
+Text:no text
+A:SP$ PumpAll | Cost$ X 2 R R | ValidCards$ Creature | IsCurse$ True | NumAtt$ +X | NumDef$ -X | SpellDescription$ All Creatures get +X/-X until end of turn.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_slide.jpg
+SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/83.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/186.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/203.jpg
+End

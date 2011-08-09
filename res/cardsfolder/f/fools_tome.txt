@@ -1,0 +1,9 @@
+Name:Fool's Tome
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | ActivationCardsInHand$ 0 | SpellDescription$ Draw a card. Activate this ability only if you have no cards in hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fools_tome.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/279.jpg
+End

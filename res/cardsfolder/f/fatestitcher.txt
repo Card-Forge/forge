@@ -1,0 +1,12 @@
+Name:Fatestitcher
+ManaCost:3 U
+Types:Creature Zombie Wizard
+Text:no text
+PT:1/2
+K:Unearth:U
+A:AB$ TapOrUntap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent | SpellDescription$ You may tap or untap another target permanent.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fatestitcher.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/43.jpg
+End

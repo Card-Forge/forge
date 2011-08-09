@@ -1,0 +1,17 @@
+Name:Fireball
+ManaCost:X R
+Types:Sorcery
+Text:Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\r\nFireball costs 1 more to cast for each target beyond the first.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/150.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/151.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/149.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/227.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/60.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/210.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/138.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/136.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/131.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/150.jpg
+End

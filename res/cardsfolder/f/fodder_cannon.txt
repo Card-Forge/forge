@@ -1,0 +1,10 @@
+Name:Fodder Cannon
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ DealDamage | Cost$ 4 T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_cannon.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/302.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/131.jpg
+End

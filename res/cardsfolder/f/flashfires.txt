@@ -1,0 +1,19 @@
+Name:Flashfires
+ManaCost:3 R
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Plains | SpellDescription$ Destroy all Plains.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/186.jpg
+SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/152.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/153.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/213.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/134.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/183.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/180.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/151.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/231.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/152.jpg
+End

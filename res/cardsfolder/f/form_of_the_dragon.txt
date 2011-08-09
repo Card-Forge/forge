@@ -1,0 +1,14 @@
+Name:Form of the Dragon
+ManaCost:4 R R R
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.withoutFlying+YouDontCtrl | AddKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures without flying can't attack you.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 5 damage to target creature or player.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Each | TriggerZones$ Battlefield | Execute$ TrigLife | TriggerDescription$ At the beginning of each end step, your life total becomes 5.
+SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/form_of_the_dragon.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/93.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/187.jpg
+End

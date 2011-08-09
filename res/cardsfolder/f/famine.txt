@@ -1,0 +1,9 @@
+Name:Famine
+ManaCost:3 B B
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ 3 B B | NumDmg$ 3 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 3 damage to each creature and each player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/famine.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/75.jpg
+End

@@ -1,0 +1,11 @@
+Name:Fodder Launch
+ManaCost:3 B
+Types:Tribal Sorcery Goblin
+Text:no text
+A:SP$ Pump | Cost$ 3 B Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | SubAbility$ SVar=DBDealDamage | SpellDescription$ Target creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.
+SVar:DBDealDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ 5
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_launch.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/114.jpg
+End

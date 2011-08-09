@@ -1,0 +1,9 @@
+Name:Fight to the Death
+ManaCost:R W
+Types:Instant
+Text:no text
+A:SP$ DestroyAll | Cost$ R W | ValidCards$ Creature.blocked,Creature.blocking | SpellDescription$ Destroy all blocking creatures and all blocked creatures.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fight_to_the_death.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/97.jpg
+End

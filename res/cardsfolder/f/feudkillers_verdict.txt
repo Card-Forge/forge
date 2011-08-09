@@ -1,0 +1,11 @@
+Name:Feudkiller's Verdict
+ManaCost:4 W W
+Types:Tribal Sorcery Giant
+Text:no text
+A:SP$ GainLife | Cost$ 4 W W | Defined$ You | LifeAmount$ 10 | SubAbility$ Token | SpellDescription$ You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token onto the battlefield.
+SVar:Token:DB$ Token | ConditionLifeTotal$ You | ConditionLifeAmount$ GEX | TokenAmount$ 1 | TokenName$ Giant Warrior | TokenTypes$ Creature,Giant,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 5 | TokenToughness$ 5  
+SVar:X:Count$OppLifeTotal
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feudkillers_verdict.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/9.jpg
+End

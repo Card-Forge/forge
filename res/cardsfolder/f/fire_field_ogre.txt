@@ -1,0 +1,11 @@
+Name:Fire-Field Ogre
+ManaCost:1 U B R
+Types:Creature Ogre Mutant
+Text:no text
+PT:4/2
+K:First Strike
+K:Unearth:U B R
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_field_ogre.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/168.jpg
+End

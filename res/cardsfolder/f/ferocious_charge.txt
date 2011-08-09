@@ -1,0 +1,10 @@
+Name:Ferocious Charge
+ManaCost:2 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | SubAbility$ SVar=DBScry | SpellDescription$ Target creature gets +4/+4 until end of turn. Scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:DBScry:DB$Scry | ScryNum$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ferocious_charge.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/88.jpg
+End

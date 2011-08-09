@@ -1,0 +1,10 @@
+Name:Frantic Purification
+ManaCost:2 W
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+K:Madness:W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_purification.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/6.jpg
+End

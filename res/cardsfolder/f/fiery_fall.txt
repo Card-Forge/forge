@@ -1,0 +1,10 @@
+Name:Fiery Fall
+ManaCost:5 R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
+K:TypeCycling:Basic:1 R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_fall.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/63.jpg
+End

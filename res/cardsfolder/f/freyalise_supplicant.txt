@@ -1,0 +1,13 @@
+Name:Freyalise Supplicant
+ManaCost:1 G
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+A:AB$ DealDamage | Cost$ T Sac<1/Creature.Red;Creature.White> | Tgt$ TgtCP | NumDmg$ X | CostDesc$ Tap, Sacrifice a red or white creature: | SpellDescription$ CARDNAME deals damage to target creature or player equal to half the sacrificed creature's power, rounded down.
+SVar:X:Sacrificed$CardPower/HalfDown
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalise_supplicant.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/127.jpg
+End

@@ -1,0 +1,13 @@
+Name:Frostweb Spider
+ManaCost:2 G
+Types:Snow Creature Spider
+Text:no text
+PT:1/3
+K:Reach
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.withFlying | DelayedTrigger$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature with flying, put a +1/+1 counter on CARDNAME at end of combat.
+SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ TrigPutCounter | TriggerDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121197.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/109.jpg
+End

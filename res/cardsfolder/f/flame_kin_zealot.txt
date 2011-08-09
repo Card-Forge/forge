@@ -1,0 +1,12 @@
+Name:Flame-Kin Zealot
+ManaCost:1 R R W
+Types:Creature Elemental Berserker
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control get +1/+1 and haste until end of turn.
+SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Haste
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_kin_zealot.jpg
+SVar:Rarity:Uncommon
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/206.jpg
+End

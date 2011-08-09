@@ -1,0 +1,10 @@
+Name:Frontier Guide
+ManaCost:1 G
+Types:Creature Elf Scout
+PT:1/1
+Text:no text
+A:AB$ ChangeZone | Cost$ 3 G T | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped.  Then shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Frontier_guide.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/161.jpg
+End

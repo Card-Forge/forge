@@ -1,0 +1,11 @@
+Name:Farhaven Elf
+ManaCost:2 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield,  you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/farhaven_elf.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/113.jpg
+End

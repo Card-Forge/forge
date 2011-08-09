@@ -1,0 +1,8 @@
+Name:Farsight Mask
+ManaCost:5
+Types:Artifact
+Text:Whenever a source an opponent controls deals damage to you, if Farsight Mask is untapped, you may draw a card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/farsight_mask.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/170.jpg
+End

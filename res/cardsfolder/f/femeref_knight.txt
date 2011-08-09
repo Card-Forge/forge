@@ -1,0 +1,11 @@
+Name:Femeref Knight
+ManaCost:2 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Flanking
+A:AB$ Pump | Cost$ W | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_knight.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/222.jpg
+End

@@ -1,0 +1,17 @@
+Name:Frost Titan
+ManaCost:4 U U
+Types:Creature Giant
+Text:no text
+PT:6/6
+#T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigOverridden | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.
+T:Mode$ BecomesTarget | ValidSource$ Card.YouDontCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent. | SubAbility$ SVar=DBPump
+SVar:DBPump:DB$Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
+SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSourceSA | UnlessCost$ 2 | UnlessPayer$ TriggeredSourceSAController
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_titan.jpg
+SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/55.jpg
+SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/55.jpg
+End

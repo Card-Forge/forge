@@ -1,0 +1,15 @@
+Name:Flamestick Courier
+ManaCost:2 R
+Types:Creature Goblin
+Text:no text
+PT:2/1
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ 2 R T | ValidTgts$ Creature.Goblin | TgtPrompt$ Select target Goblin creature | RememberTargets$ True |  SpellDescription$ Target Goblin creature gets +2/+2 and has haste for as long as CARDNAME remains tapped.
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
+SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flamestick_courier.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/203.jpg
+End

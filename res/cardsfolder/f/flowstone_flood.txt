@@ -1,0 +1,11 @@
+Name:Flowstone Flood
+ManaCost:3 R
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+A:SP$ Destroy | Cost$ 3 R PayLife<3> Discard<1/Random> | ValidTgts$ Land | TgtPrompt$ Select target land | CostDesc$ Buyback-Pay 3 life, Discard a card at random. | SubAbility$ SVar=DBBuyback | SpellDescription$ (You may pay 3 life and discard a card at random in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)
+SVar:DBBuyback:DB$ ChangeZone | Cost$ 0 | Origin$ Stack | Destination$ Hand | ValidCard$ Card.Self
+SVar:Rarity:Uncommon
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/83.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_flood.jpg
+End

@@ -1,0 +1,13 @@
+Name:Furnace Dragon
+ManaCost:6 R R R
+Types:Creature Dragon
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+PT:5/5
+K:Flying
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Stack | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all artifacts.
+SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Exile
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_dragon.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/62.jpg
+End

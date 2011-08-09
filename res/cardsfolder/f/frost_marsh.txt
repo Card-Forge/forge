@@ -1,0 +1,11 @@
+Name:Frost Marsh
+ManaCost:no cost
+Types:Snow Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_marsh.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/146.jpg
+End

@@ -1,0 +1,11 @@
+Name:Fledgling Osprey
+ManaCost:U
+Types:Creature Bird
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+isEnchanted | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's enchanted.
+SVar:EnchantMe:Once
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_osprey.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/33.jpg
+End

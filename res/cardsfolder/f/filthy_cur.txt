@@ -1,0 +1,12 @@
+Name:Filthy Cur
+ManaCost:1 B
+Types:Creature Hound
+Text:no text
+PT:2/2
+T:Mode$ DamageDone | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/filthy_cur.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/136.jpg
+End

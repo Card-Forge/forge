@@ -1,0 +1,12 @@
+Name:Filth
+ManaCost:3 B
+Types:Creature Incarnation
+Text:no text
+PT:2/2
+K:Swampwalk
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Swampwalk | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as CARDNAME is in your graveyard and you control a Swamp, creatures you control have swampwalk.
+SVar:X:Count$Valid Swamp.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/filth.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/66.jpg
+End

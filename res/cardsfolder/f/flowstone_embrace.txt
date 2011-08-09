@@ -1,0 +1,11 @@
+Name:Flowstone Embrace
+ManaCost:1 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+A:AB$ Pump | Cost$ T | Defined$ Enchanted | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ Enchanted creature gets +2/-2 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_embrace.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/113.jpg
+End
