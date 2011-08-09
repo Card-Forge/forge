@@ -1,0 +1,16 @@
+Name:Emrakul, the Aeons Torn
+ManaCost:15
+Types:Legendary Creature Eldrazi
+Text:no text
+PT:15/15
+K:CARDNAME can't be countered.
+K:Flying
+K:Protection from colored spells
+K:Annihilator 6
+K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigAddTurn  | TriggerDescription$ When you cast CARDNAME, take an extra turn after this one.
+SVar:TrigAddTurn:AB$AddTurn | Cost$ 0 | Defined$ You | NumTurns$ 1
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakul_the_aeons_torn.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/4.jpg
+End

@@ -1,0 +1,10 @@
+Name:Emerald Medallion
+ManaCost:2
+Types:Artifact
+Text:Green spells you cast cost 1 less to cast.
+K:CostChange:Player:Less:1:Spell:green:All:NoSpecial
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_medallion.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/273.jpg
+End

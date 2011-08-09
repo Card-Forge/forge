@@ -1,0 +1,14 @@
+Name:Enfeeblement
+ManaCost:B B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ B B | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | AddToughness$ -2 | Description$ Enchanted creature gets -2/-2.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enfeeblement.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/27.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/125.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/19.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/127.jpg
+End

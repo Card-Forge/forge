@@ -1,0 +1,12 @@
+Name:Echoing Ruin
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ SVar=DBDestroyAll | RememberTargets$ True | ForgetOtherTargets$ True | SpellDescription$ Destroy target artifact and all other artifacts with the same name as that artifact.
+SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Remembered.Artifact+Other+sameName | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_ruin.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/59.jpg
+End

@@ -1,0 +1,12 @@
+Name:Ebon Dragon
+ManaCost:5 B B
+Types:Creature Dragon
+Text:no text
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may have target opponent discard a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent. | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_dragon.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/13.jpg
+End

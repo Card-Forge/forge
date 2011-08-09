@@ -1,0 +1,12 @@
+Name:Endless Cockroaches
+ManaCost:1 B B
+Types:Creature Insect
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:SacMe:2
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4220.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/14.jpg
+End

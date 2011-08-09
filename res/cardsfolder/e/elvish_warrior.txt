@@ -1,0 +1,11 @@
+Name:Elvish Warrior
+ManaCost:G G
+Types:Creature Elf Warrior
+Text:no text
+PT:2/3
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83451.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/120.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/240.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/260.jpg
+End

@@ -1,0 +1,9 @@
+Name:Encroach
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ B | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Land.nonBasic | NumCards$ 1 | SpellDescription$ Target player reveals his or her hand. You choose a nonbasic land card from it. That player discards that card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/encroach.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/59.jpg
+End

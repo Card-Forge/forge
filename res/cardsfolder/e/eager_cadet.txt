@@ -1,0 +1,10 @@
+Name:Eager Cadet
+ManaCost:W
+Types:Creature Human Soldier
+Text:no text
+PT:1/1
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card47784.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9eb/1.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/14.jpg
+End

@@ -1,0 +1,12 @@
+Name:Enlistment Officer
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/3
+K:First Strike
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Soldier cards revealed this way into your hand and the rest on the bottom of your library in any order.  
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Soldier
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enlistment_officer.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/9.jpg
+End

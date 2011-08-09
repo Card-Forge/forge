@@ -1,0 +1,13 @@
+Name:Essence Flare
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Description$ Enchanted creature gets +2/+0.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ M0M1 | CounterNum$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_flare.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/69.jpg
+End

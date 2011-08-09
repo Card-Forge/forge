@@ -1,0 +1,10 @@
+Name:Enchanted Being
+ManaCost:1 W W
+Types:Creature Human
+Text:Prevent all combat damage that would be dealt to Enchanted Being by enchanted creatures.
+PT:2/2
+K:PreventAllDamageBy Creature.enchanted
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enchanted_being.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/181.jpg
+End

@@ -1,0 +1,12 @@
+Name:Energy Arc
+ManaCost:W U
+Types:Instant
+Text:no text
+A:SP$ Untap | Cost$ W U | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Choose any number of target creatures | ValidTgts$ Creature | SpellDescription$ Untap any number of target creatures. Prevent all combat damage that would be dealt to and dealt by those creatures this turn. | SubAbility$ SVar=DBPump
+SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. & HIDDEN Prevent all combat damage that would be dealt to CARDNAME.
+SVar:MaxTgts:Count$Valid Creature
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_arc.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/190.jpg
+End

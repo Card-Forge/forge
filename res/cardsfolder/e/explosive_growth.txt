@@ -1,0 +1,10 @@
+Name:Explosive Growth
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn. If CARDNAME was kicked, that creature gets +5/+5 until end of turn instead.
+A:SP$ Pump | Cost$ G 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | SpellDescription$ Kicker 5 (You may pay an additional 5 as you cast this spell.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/explosive_growth.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/187.jpg
+End

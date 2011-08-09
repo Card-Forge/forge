@@ -1,0 +1,12 @@
+Name:Extirpate
+ManaCost:B
+Types:Instant
+Text:no text
+K:Split second
+A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.nonBasic | TgtPrompt$ Select target card in a graveyard other than a basic land | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBSearch | SpellDescription$ Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
+SVar:DBSearch:DB$ChangeZoneAll | Origin$ Graveyard,Hand,Library | Destination$ Exile | Defined$ TargetedController | ChangeType$ Remembered.sameName | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/extirpate.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/71.jpg
+End

@@ -1,0 +1,12 @@
+Name:Embermage Goblin
+ManaCost:3 R
+Types:Creature Goblin Wizard
+Text:no text
+PT:1/1
+A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card named CARDNAME, reveal it, and put it into your hand. If you do, shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedEmbermage Goblin | ChangeNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/embermage_goblin.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/200.jpg
+End

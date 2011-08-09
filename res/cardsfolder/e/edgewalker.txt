@@ -1,0 +1,11 @@
+Name:Edgewalker
+ManaCost:1 W B
+Types:Creature Human Cleric
+Text:Cleric spells you cast cost W B less to cast. This effect reduces only the amount of colored mana you pay. (For example, if you cast a Cleric spell with mana cost 1 W, it costs 1 to cast.)
+PT:2/2
+K:CostChange:Player:Less:W:Spell:All:Cleric:NoSpecial
+K:CostChange:Player:Less:B:Spell:All:Cleric:NoSpecial
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/edgewalker.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/137.jpg
+End

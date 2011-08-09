@@ -1,0 +1,13 @@
+Name:Eternal Warrior
+ManaCost:R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_warrior.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/225.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/208.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/142.jpg
+End

@@ -1,0 +1,13 @@
+Name:Emissary of Despair
+ManaCost:1 B B
+Types:Creature Spirit
+Text:no text
+PT:2/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses 1 life for each artifact he or she controls.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredTarget | LifeAmount$ X
+SVar:X:Count$Valid Artifact.YouDontCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emissary_of_despair.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/42.jpg
+End

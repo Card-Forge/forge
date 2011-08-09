@@ -1,0 +1,15 @@
+Name:Everglove Courier
+ManaCost:2 G
+Types:Creature Elf
+Text:no text
+PT:2/1
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ 2 G T | ValidTgts$ Creature.Elf | TgtPrompt$ Select target Elf creature | RememberTargets$ True |  SpellDescription$ Target Elf creature gets +2/+2 and has trample for as long as CARDNAME remains tapped.
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
+SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/everglove_courier.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/262.jpg
+End

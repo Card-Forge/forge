@@ -1,0 +1,11 @@
+Name:Eyes of the Wisent
+ManaCost:1 G
+Types:Tribal Enchantment Elemental
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.blue | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a blue spell during your turn, you may put a 4/4 green Elemental creature token onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eyes_of_the_wisent.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/210.jpg
+End

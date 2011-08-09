@@ -1,0 +1,11 @@
+Name:Elite Vanguard
+ManaCost:W
+Types:Creature Human Soldier
+Text:no text
+PT:2/1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_vanguard.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/13.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/9.jpg
+SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/15.jpg
+End

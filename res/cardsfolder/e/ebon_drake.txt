@@ -1,0 +1,13 @@
+Name:Ebon Drake
+ManaCost:2 B
+Types:Creature Drake
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell, you lose 1 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+SVar:AntiBuffedBy:Card
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_drake.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/48.jpg
+End

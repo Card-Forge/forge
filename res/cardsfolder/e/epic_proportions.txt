@@ -1,0 +1,12 @@
+Name:Epic Proportions
+ManaCost:4 G G
+Types:Enchantment Aura
+Text:no text
+K:Flash
+K:Enchant creature
+A:SP$ Attach | Cost$ 4 G G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ Trample | Description$ Enchanted creature gets +5/+5 and has trample.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_proportions.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/209.jpg
+End

@@ -1,0 +1,12 @@
+Name:Evolution Charm
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | PrecostDesc$ Choose one - | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library;
+A:SP$ ChangeZone | Cost$ 1 G | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Hand | SpellDescription$ or return target creature card from your graveyard to your hand;
+A:SP$Pump | Cost$ 1 G | ValidTgts$ Creature | KW$ Flying | TgtPrompt$ Select target creature | SpellDescription$ or target creature gains flying until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evolution_charm.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/127.jpg
+End

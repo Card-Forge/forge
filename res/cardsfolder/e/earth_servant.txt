@@ -1,0 +1,12 @@
+Name:Earth Servant
+ManaCost:5 R
+Types:Creature Elemental
+Text:no text
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ X | Description$ CARDNAME gets +0/+1 for each Mountain you control.
+SVar:X:Count$Valid Mountain.YouCtrl
+SVar:BuffedBy:Mountain
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_servant.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/134.jpg
+End

@@ -1,0 +1,10 @@
+Name:Ember Shot
+ManaCost:6 R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 6 R | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ Ember Shot deals 3 damage to target creature or player. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_shot.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/87.jpg
+End

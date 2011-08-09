@@ -1,0 +1,16 @@
+Name:Endoskeleton
+ManaCost:2
+Types:Artifact
+Text:no text
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | RememberTargets$ True |  SpellDescription$ Target creature gets +0/+3 for as long as Endoskeleton remains tapped.
+# Need to Remember the Target up there, so the Static ability here can pump it.
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddToughness$ 3
+# And here's the special sauce
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
+SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/endoskeleton.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/294.jpg
+End

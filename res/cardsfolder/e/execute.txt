@@ -1,0 +1,12 @@
+Name:Execute
+ManaCost:2 B
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | NoRegen$ True | SpellDescription$ Destroy target white creature. It can't be regenerated. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/execute.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/132.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/133.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/128.jpg
+End

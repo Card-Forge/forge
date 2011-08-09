@@ -1,0 +1,10 @@
+Name:Enemy of the Guildpact
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:4/2
+K:Protection:Card.MultiColor:Protection from multicolored
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enemy_of_the_guildpact.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/44.jpg
+End

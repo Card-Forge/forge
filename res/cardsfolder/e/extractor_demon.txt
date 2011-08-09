@@ -1,0 +1,14 @@
+Name:Extractor Demon
+ManaCost:4 B B
+Types:Creature Demon
+Text:no text
+PT:5/5
+K:Flying
+K:Unearth:2 B
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.
+SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player
+SVar:Picture:http://www.wizards.com/global/images/magic/general/extractor_demon.jpg
+SVar:Rarity:Rare
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/81.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/44.jpg
+End

@@ -1,0 +1,10 @@
+Name:Even the Odds
+ManaCost:2 W
+Types:Instant
+Text:no text
+A:SP$ Token | Cost$ 2 W | IsPresent$ Creature.YouCtrl | PresentCompare$ LTX | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Cast CARDNAME only if you control fewer creatures than each opponent.  Put three 1/1 white Soldier creature tokens onto the battlefield.
+SVar:X:Count$Valid Creature.YouDontCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/even_the_odds.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/6.jpg
+End

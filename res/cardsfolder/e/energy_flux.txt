@@ -1,0 +1,14 @@
+Name:Energy Flux
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2 | Description$ All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay 2."
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_flux.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/78.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/83.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/57.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/68.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/53.jpg
+End

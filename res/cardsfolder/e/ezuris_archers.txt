@@ -1,0 +1,12 @@
+Name:Ezuri's Archers
+ManaCost:G
+Types:Creature Elf Archer
+Text:no text
+PT:1/2
+K:Reach
+T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.withFlying | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature with flying, CARDNAME gets +3/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ezuris_archers.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/120.jpg
+End

@@ -1,0 +1,11 @@
+Name:Ethereal Usher
+ManaCost:5 U
+Types:Creature Spirit
+Text:no text
+PT:2/3
+A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature is unblockable this turn.
+K:Transmute:1 U U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_usher.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/47.jpg
+End

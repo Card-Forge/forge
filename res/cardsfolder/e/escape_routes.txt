@@ -1,0 +1,10 @@
+Name:Escape Routes
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+A:AB$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target white or black creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target white or black creature you control to its owner's hand.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/escape_routes.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/25.jpg
+End

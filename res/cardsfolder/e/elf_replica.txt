@@ -1,0 +1,10 @@
+Name:Elf Replica
+ManaCost:3
+Types:Artifact Creature Elf
+Text:no text
+PT:2/2
+A:AB$ Destroy | Cost$ 1 G Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elf_replica.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/167.jpg
+End

@@ -1,0 +1,14 @@
+Name:Elder Land Wurm
+ManaCost:4 W W W
+Types:Creature Dragon Wurm
+Text:no text
+PT:5/5
+K:Defender
+K:Trample
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ When CARDNAME blocks, it loses defender.
+SVar:TrigDebuff:AB$Debuff | Cost$ 0 | Keywords$ Defender | Defined$ TriggeredBlocker | Permanent$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_land_wurm.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/274.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/180.jpg
+End

@@ -1,0 +1,10 @@
+Name:Emmessi Tome
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ Draw | Cost$ 5 T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emmessi_tome.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/274.jpg
+End
