@@ -1,0 +1,17 @@
+Name:Guul Draz Assassin
+ManaCost:B
+Types:Creature Vampire Assassin
+Text:no text
+PT:1/1
+K:Level up:1 B
+K:maxLevel:4
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddAbility$ LowLvl | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2+ 2/2 CARDNAME has B, tap: Target creature gets -2/-2 until end of turn.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddAbility$ HighLvl | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 4/4 CARDNAME has B, tap: Target creature gets -4/-4 until end of turn.
+SVar:LowLvl:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
+SVar:HighLvl:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
+SVar:X:Count$Valid Card.Self+countersGE2LEVEL+countersLT4LEVEL
+SVar:Y:Count$Valid Card.Self+countersGE4LEVEL
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_assassin.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/112.jpg
+End

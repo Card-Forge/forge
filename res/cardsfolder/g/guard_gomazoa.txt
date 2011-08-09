@@ -1,0 +1,13 @@
+Name:Guard Gomazoa
+ManaCost:2 U
+Types:Creature Jellyfish
+Text:no text
+PT:1/3
+K:Defender
+K:Flying
+K:Prevent all combat damage that would be dealt to CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guard_gomazoa.jpg
+SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/49.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/70.jpg
+End

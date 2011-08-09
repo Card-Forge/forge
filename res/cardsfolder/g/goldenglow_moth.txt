@@ -1,0 +1,13 @@
+Name:Goldenglow Moth
+ManaCost:W
+Types:Creature Insect
+Text:no text
+PT:0/1
+K:Flying
+T:Mode$ Blocks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME blocks, you may gain 4 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goldenglow_moth.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/15.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/6.jpg
+End

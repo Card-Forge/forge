@@ -1,0 +1,9 @@
+Name:Guttural Response
+ManaCost:RG
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ RG | TargetType$ Spell | TgtPrompt$ Select target Blue Instant spell | ValidTgts$ Instant.Blue | SpellDescription$ Counter target blue instant spell.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guttural_response.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/208.jpg
+End

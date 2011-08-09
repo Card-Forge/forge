@@ -1,0 +1,10 @@
+Name:Granite Shard
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ DealDamage | Cost$ 3 T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+A:AB$ DealDamage | Cost$ R T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_shard.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/182.jpg
+End

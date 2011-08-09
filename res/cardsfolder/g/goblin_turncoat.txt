@@ -1,0 +1,10 @@
+Name:Goblin Turncoat
+ManaCost:1 B
+Types:Creature Goblin Mercenary
+Text:no text
+PT:2/1
+A:AB$ Regenerate | Cost$ Sac<1/Goblin> | Defined$ Self | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_turncoat.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/72.jpg
+End

@@ -1,0 +1,10 @@
+Name:Gloomlance
+ManaCost:3 B B
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ SVar=DBDiscard | SpellDescription$ Destroy target creature. If that creature was green or white, its controller discards a card.
+SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose | ConditionDefined$ Targeted | ConditionPresent$ Card.Green,Card.White | ConditionCompare$ EQ1 | ConditionDescription$ If that creature was green or white,
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomlance.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/67.jpg
+End

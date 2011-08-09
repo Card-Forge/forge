@@ -1,0 +1,11 @@
+Name:Goldmeadow Lookout
+ManaCost:3 W
+Types:Creature Kithkin Spellshaper
+Text:no text
+PT:2/2
+A:AB$ Token | Cost$ W T Discard<1/Card> | TokenAmount$ 1 | TokenName$ Goldmeadow Harrier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenAbilities$ ABTap | SpellDescription$ Put a 1/1 white Kithkin Soldier creature token onto the battlefield. It has "W, Tap: Tap target creature."
+SVar:ABTap:AB$Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130311.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/22.jpg
+End

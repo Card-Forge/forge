@@ -1,0 +1,12 @@
+Name:Goblins of the Flarg
+ManaCost:R
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:Mountainwalk
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Dwarf.YouCtrl | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When you control a Dwarf, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblins_of_the_flarg.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/69.jpg
+End

@@ -1,0 +1,13 @@
+Name:Goblin Dirigible
+ManaCost:6
+Types:Artifact Creature Construct
+Text:no text
+PT:4/4
+K:Flying
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay 4. If you do, untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ 4 | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dirigible.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/177.jpg
+End

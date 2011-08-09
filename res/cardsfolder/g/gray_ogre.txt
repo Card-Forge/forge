@@ -1,0 +1,13 @@
+Name:Gray Ogre
+ManaCost:2 R
+Types:Creature Ogre
+Text:no text
+PT:2/2
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2283.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/157.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/158.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/156.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/218.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/157.jpg
+End

@@ -1,0 +1,12 @@
+Name:Golden Urn
+ManaCost:1
+Types:Artifact
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on CARDNAME.
+A:AB$ GainLife | Cost$ T Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to the number of charge counters on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+SVar:X:Count$CardCounters.CHARGE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/golden_urn.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/158.jpg
+End

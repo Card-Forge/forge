@@ -1,0 +1,13 @@
+Name:Gorilla Pack
+ManaCost:2 G
+Types:Creature Ape
+text:no text
+PT:3/3
+K:CARDNAME can't attack unless defending player controls a Forest.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Forest.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Forests, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:NeedsToPlay:Forest.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_pack.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/135.jpg
+End

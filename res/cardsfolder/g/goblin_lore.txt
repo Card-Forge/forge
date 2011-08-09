@@ -1,0 +1,11 @@
+Name:Goblin Lore
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ 1 R | NumCards$ 4 | SpellDescription$ Draw four cards, then discard three cards at random. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 3 | Mode$ Random
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lore.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/99.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/104.jpg
+End

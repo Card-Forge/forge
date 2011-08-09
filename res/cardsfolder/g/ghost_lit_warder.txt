@@ -1,0 +1,12 @@
+Name:Ghost-Lit Warder
+ManaCost:1 U
+Types:Creature Spirit
+Text:no text
+PT:1/1
+A:AB$ Counter | Cost$ 3 U T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays 2.
+A:AB$ Counter | Cost$ 3 U Discard<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | ActivationZone$ Hand | PrecostDesc$ Channel - | SpellDescription$ Counter target spell unless its controller pays 4.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_lit_warder.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/39.jpg
+End

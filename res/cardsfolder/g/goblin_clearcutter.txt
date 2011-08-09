@@ -1,0 +1,14 @@
+Name:Goblin Clearcutter
+ManaCost:3 R
+Types:Creature Goblin
+Text:no text
+PT:3/3
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ R R R | SpellDescription$ Add R R R to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ R R G | SpellDescription$ Add R R G to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ R G G | SpellDescription$ Add R G G to your mana pool.
+A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ G G G | SpellDescription$ Add G G G to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_clearcutter.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/96.jpg
+End

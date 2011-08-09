@@ -1,0 +1,12 @@
+Name:Gate Hound
+ManaCost:2 W
+Types:Creature Hound
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ EQ1 | Description$ Creatures you control have vigilance as long as CARDNAME is enchanted.
+SVar:X:Count$Valid Card.Self+enchanted
+SVar:EnchantMe:Once
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_hound.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/19.jpg
+End

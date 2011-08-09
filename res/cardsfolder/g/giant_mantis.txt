@@ -1,0 +1,10 @@
+Name:Giant Mantis
+ManaCost:3 G
+Types:Creature Insect
+Text:no text
+PT:2/4
+K:Reach
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3387.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/116.jpg
+End

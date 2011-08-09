@@ -1,0 +1,13 @@
+Name:Goblin Gaveleer
+ManaCost:R
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +2/+0 for each Equipment attached to it.
+SVar:X:Count$Valid Equipment.Attached/Times.2
+SVar:EquipMe:Multiple
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gaveleer.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/92.jpg
+End

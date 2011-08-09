@@ -1,0 +1,11 @@
+Name:Geyser Glider
+ManaCost:3 R R
+Types:Creature Elemental Beast
+Text:no text
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFlying | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gains flying until end of turn.
+SVar:TrigFlying:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Geyser_glider.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/124.jpg
+End

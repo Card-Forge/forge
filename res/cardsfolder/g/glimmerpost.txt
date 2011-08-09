@@ -1,0 +1,12 @@
+Name:Glimmerpost
+ManaCost:no cost
+Types:Land Locus
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life for each Locus on the battlefield.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ X
+SVar:X:Count$TypeOnBattlefield.Locus
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmerpost.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/227.jpg
+End

@@ -1,0 +1,12 @@
+Name:Gleam of Resistance
+ManaCost:4 W
+Types:Instant
+Text:no text
+A:SP$ UntapAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control get +1/+2 until end of turn. Untap those creatures. | SubAbility$ SVar=DBPumpYourCreatures
+SVar:DBPumpYourCreatures:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +2
+K:TypeCycling:Basic:1 W
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/8.jpg
+End

@@ -1,0 +1,10 @@
+Name:Graceful Adept
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:You have no maximum hand size.
+PT:1/3
+K:HandSize = INF Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_adept.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/63.jpg
+End

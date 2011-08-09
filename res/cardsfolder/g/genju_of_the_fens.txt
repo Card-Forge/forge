@@ -1,0 +1,14 @@
+Name:Genju of the Fens
+ManaCost:B
+Types:Enchantment Aura
+Text:no text
+K:Enchant Swamp
+A:SP$ Attach | Cost$ B | ValidTgts$ Swamp | AILogic$ Pump
+A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 2 | Toughness$ 2 | Types$ Creature,Spirit | Colors$ Black | Abilities$ ABPump | SpellDescription$ Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with "B: This creature gets +1/+1 until end of turn." It's still a land.
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Swamp is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
+SVar:ABPump:AB$Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ This creature gets +1/+1 until end of turn.
+SVar:TrigReturnOwner:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_fens.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/66.jpg
+End

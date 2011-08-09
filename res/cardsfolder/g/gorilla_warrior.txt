@@ -1,0 +1,11 @@
+Name:Gorilla Warrior
+ManaCost:2 G
+Types:Creature Ape Warrior
+Text:no text
+PT:3/2
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5683.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/256.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/128.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/93.jpg
+End

@@ -1,0 +1,13 @@
+Name:Griffin Rider
+ManaCost:1 W
+Types:Creature Human Knight
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Griffin, CARDNAME gets +3/+3 and has flying.
+SVar:X:Count$Valid Griffin.YouCtrl
+SVar:BuffedBy:Griffin
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_rider.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/20.jpg
+End

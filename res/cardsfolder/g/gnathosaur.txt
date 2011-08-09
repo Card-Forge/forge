@@ -1,0 +1,11 @@
+Name:Gnathosaur
+ManaCost:4 R R
+Types:Creature Beast
+Text:no text
+PT:5/4
+A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gnathosaur.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/63.jpg
+End

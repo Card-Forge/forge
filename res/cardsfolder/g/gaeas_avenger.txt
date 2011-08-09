@@ -1,0 +1,11 @@
+Name:Gaea's Avenger
+ManaCost:1 G G
+Types:Creature Treefolk
+Text:no text
+PT:1+*/1+*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to 1 plus the number of artifacts your opponents control.
+SVar:X:Count$NumTypeOppCtrl.Artifact/Plus.1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_avenger.jpg
+SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/63.jpg
+End

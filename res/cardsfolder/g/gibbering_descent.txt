@@ -1,0 +1,13 @@
+Name:Gibbering Descent
+ManaCost:4 B B
+Types:Enchantment
+Text:Hellbent — Skip your upkeep step if you have no cards in hand.
+K:Madness:2 B B
+T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigLoseLifeDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player loses 1 life and discards a card.
+SVar:TrigLoseLifeDiscard:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_descent.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/66.jpg
+End

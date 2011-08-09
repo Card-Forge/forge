@@ -1,0 +1,13 @@
+Name:Gaze of Pain
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ Effect | Cost$ 1 B | Name$ Gaze of Pain Effect | Triggers$ TrigAttackerUnblocked | SVars$ Damage,DBPump,X | SpellDescription$ Until end of turn, whenever a creature you control attacks and isn't blocked, you may choose to have it deal damage equal to its power to a target creature. If you do, it assigns no combat damage this turn.
+SVar:TrigAttackerUnblocked:Mode$ AttackerUnblocked | ValidCard$ Creature.YouCtrl | Execute$ Damage | OptionalDecider$ You | TriggerDescription$ Until end of turn, whenever a creature you control attacks and isn't blocked, you may choose to have it deal damage equal to its power to a target creature. If you do, it assigns no combat damage this turn.
+SVar:Damage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBPump
+SVar:DBPump:DB$Pump | Defined$ TriggeredAttacker | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
+SVar:X:TriggeredAttacker$CardPower
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_pain.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/16.jpg
+End

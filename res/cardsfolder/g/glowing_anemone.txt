@@ -1,0 +1,11 @@
+Name:Glowing Anemone
+ManaCost:3 U
+Types:Creature Jellyfish Beast
+Text:no text
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target land to its owner's hand.
+SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glowing_anemone.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/81.jpg
+End

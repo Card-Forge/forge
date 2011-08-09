@@ -1,0 +1,12 @@
+Name:Gorilla Chieftain
+ManaCost:2 G G
+Types:Creature Ape
+Text:no text
+PT:3/3
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_chieftain.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/235.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/77.jpg|2
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/250.jpg
+End

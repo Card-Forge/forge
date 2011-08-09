@@ -1,0 +1,10 @@
+Name:Gerrard's Command
+ManaCost:W G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ W G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ SVar=DBUntap | SpellDescription$ Untap target creature. It gets +3/+3 until end of turn.
+SVar:DBUntap:DB$Untap | Defined$ Targeted
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_command.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/109.jpg
+End

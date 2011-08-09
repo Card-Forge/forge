@@ -1,0 +1,12 @@
+Name:Goblin Mutant
+ManaCost:2 R R
+Types:Creature Goblin Mutant
+Text:CARDNAME can't block creatures with power 3 or greater.
+PT:5/3
+K:Trample
+K:CARDNAME can't attack if defending player controls an untapped creature with power 3 or greater.
+K:CantBlock Creature.powerGE3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_mutant.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/188.jpg
+End

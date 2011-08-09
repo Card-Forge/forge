@@ -1,0 +1,14 @@
+Name:Granite Gargoyle
+ManaCost:2 R
+Types:Creature Gargoyle
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ R | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_gargoyle.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/156.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/157.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/155.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/156.jpg
+End

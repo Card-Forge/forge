@@ -1,0 +1,11 @@
+Name:Goblin Lackey
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.Goblin | ChangeNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lackey.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/190.jpg
+End

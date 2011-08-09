@@ -1,0 +1,12 @@
+Name:Ghitu Encampment
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+A:AB$ Animate | Cost$ 1 R | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Creature,Warrior | Colors$ Red | Keywords$ First Strike | SpellDescription$ CARDNAME becomes a 2/1 red Warrior creature with first strike until end of turn. It's still a land. (It deals combat damage before creatures without first strike.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_encampment.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/141.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/353.jpg
+End

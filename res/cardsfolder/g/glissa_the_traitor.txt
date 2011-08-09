@@ -1,0 +1,13 @@
+Name:Glissa, the Traitor
+ManaCost:B G G
+Types:Legendary Creature Zombie Elf
+Text:no text
+PT:3/3
+K:First Strike
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls is put into a graveyard from the battlefield, you may return target artifact card from your graveyard to your hand.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glissa_the_traitor.jpg
+SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/96.jpg
+End

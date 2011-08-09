@@ -1,0 +1,10 @@
+Name:Gorehorn Minotaurs
+ManaCost:2 R R
+Types:Creature Minotaur Warrior
+Text:no text
+PT:3/3
+K:Bloodthirst 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorehorn_minotaurs.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/144.jpg
+End

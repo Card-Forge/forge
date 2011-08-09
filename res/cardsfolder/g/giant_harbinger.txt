@@ -1,0 +1,12 @@
+Name:Giant Harbinger
+ManaCost:4 R
+Types:Creature Giant
+Text:no text
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Giant card, reveal it, then shuffle your library and put that card on top of it.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Giant | ChangeNum$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_harbinger.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/169.jpg
+End

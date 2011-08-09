@@ -1,0 +1,11 @@
+Name:Glimmering Angel
+ManaCost:3 W
+Types:Creature Angel
+Text:no text
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ U | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmering_angel.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/17.jpg
+End

@@ -1,0 +1,10 @@
+Name:Grappler Spider
+ManaCost:1 G
+Types:Creature Spider
+Text:no text
+PT:2/1
+K:Reach
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grappler_spider.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/102.jpg
+End

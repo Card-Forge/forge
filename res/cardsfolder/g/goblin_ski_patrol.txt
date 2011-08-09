@@ -1,0 +1,11 @@
+Name:Goblin Ski Patrol
+ManaCost:1 R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | KW$ Flying & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | ActivationLimit$ 1 | IsPresent$ Mountain.Snow+YouCtrl | SpellDescription$ CARDNAME gets +2/+0 and gains flying. Its controller sacrifices it at the beginning of the next end step. Activate this ability only once and only if you control a snow Mountain.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_ski_patrol.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/190.jpg
+End

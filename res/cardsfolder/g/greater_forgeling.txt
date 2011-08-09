@@ -1,0 +1,10 @@
+Name:Greater Forgeling
+ManaCost:3 R R
+Types:Creature Elemental
+Text:no text
+PT:3/4
+A:AB$ Pump | Cost$ 1 R | NumAtt$ +3 | NumDef$ -3 | SpellDescription$ CARDNAME gets +3/-3 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_forgeling.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/129.jpg
+End

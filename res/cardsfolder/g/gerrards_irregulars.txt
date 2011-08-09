@@ -1,0 +1,11 @@
+Name:Gerrard's Irregulars
+ManaCost:4 R
+Types:Creature Human Soldier
+Text:no text
+PT:4/2
+K:Haste
+K:Trample
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19842.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/192.jpg
+End

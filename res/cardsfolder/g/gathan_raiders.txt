@@ -1,0 +1,12 @@
+Name:Gathan Raiders
+ManaCost:3 R R
+Types:Creature Human Warrior
+Text:no text
+PT:3/3
+K:Morph:Discard<1/Card>
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Hellbent$ True | CheckSVar$ X | SVarCompare$ EQ1 | Description$ Hellbent - CARDNAME gets +2/+2 as long as you have no cards in hand.
+SVar:X:Count$Valid Card.Self+faceUp
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gathan_raiders.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/99.jpg
+End

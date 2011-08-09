@@ -1,0 +1,10 @@
+Name:Goblin Burrows
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Pump | Cost$ 1 R T | ValidTgts$ Creature.Goblin | TgtPrompt$ Select target Goblin creature | NumAtt$ +2 | SpellDescription$ Target Goblin creature gets +2/+0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_burrows.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/318.jpg
+End

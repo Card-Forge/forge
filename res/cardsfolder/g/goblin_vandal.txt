@@ -1,0 +1,13 @@
+Name:Goblin Vandal
+ManaCost:R
+Types:Creature Goblin Rogue
+Text:no text
+PT:1/1
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may pay R. If you do, destroy target artifact defending player controls and CARDNAME assigns no combat damage this turn.
+SVar:TrigDestroy:AB$Destroy | Cost$ R | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select target artifact defending player controls | SubAbility$ SVar=DBPump | Mandatory$ True
+SVar:DBPump:DB$Pump | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_vandal.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/105.jpg
+End

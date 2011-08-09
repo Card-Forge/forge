@@ -1,0 +1,15 @@
+Name:Garruk Wildspeaker
+ManaCost:2 G G
+Types:Planeswalker Garruk
+Text:no text
+Loyalty:3
+A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land | TgtPrompt$ Select target land | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Untap two target lands.
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
+A:AB$ PumpAll | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Creatures you control get +3/+3 and gain trample until end of turn.
+SVar:Rarity:Mythic
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140205.jpg
+SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/175.jpg
+SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/183.jpg
+SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/157.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/213.jpg
+End

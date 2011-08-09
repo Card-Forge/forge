@@ -1,0 +1,11 @@
+Name:Giant Dustwasp
+ManaCost:3 G G
+Types:Creature Insect
+Text:no text
+PT:3/3
+K:Flying
+K:Suspend:4:1 G
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122313.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/129.jpg
+End

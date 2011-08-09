@@ -1,0 +1,11 @@
+Name:Garruk's Packleader
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE3+Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature with power 3 or greater enters the battlefield under your control, you may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/garruks_packleader.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/177.jpg
+End

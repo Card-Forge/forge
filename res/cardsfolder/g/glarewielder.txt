@@ -1,0 +1,17 @@
+Name:Glarewielder
+ManaCost:4 R
+Types:Creature Elemental Shaman
+Text:no text
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, up to two target creatures can't block this turn.
+K:Evoke:1 R
+SVar:TrigPump:AB$Pump | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
+K:Haste
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glarewielder.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/171.jpg
+End

@@ -1,0 +1,24 @@
+Name:Giant Spider
+ManaCost:3 G
+Types:Creature Spider
+Text:no text
+PT:2/4
+K:Reach
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129570.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/255.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/107.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/107.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/107.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/249.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/92.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/133.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/244.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/267.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/179.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/185.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/234.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/177.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/162.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/107.jpg
+End

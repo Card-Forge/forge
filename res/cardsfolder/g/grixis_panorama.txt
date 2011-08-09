@@ -1,0 +1,10 @@
+Name:Grixis Panorama
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Island+Basic,Land.Swamp+Basic,Land.Mountain+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Island, Swamp, or Mountain card and put it onto the battlefield tapped. Then shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_panorama.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/224.jpg
+End

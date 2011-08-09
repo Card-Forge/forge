@@ -1,0 +1,14 @@
+Name:Greener Pastures
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigTokenYou | IsPresent$ Land.YouCtrl | PresentCompare$ GTX | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, the player puts a 1/1 green Saproling creature token onto the battlefield.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigTokenOpp | TriggerZones$ Battlefield | Secondary$ True | IsPresent$ Land.YouCtrl | PresentCompare$ LTX | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, the player puts a 1/1 green Saproling creature token onto the battlefield.
+SVar:TrigTokenYou:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigTokenOpp:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Opponent | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:X:Count$Valid Land.YouDontCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greener_pastures.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/258.jpg
+End

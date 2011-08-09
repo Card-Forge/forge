@@ -1,0 +1,11 @@
+Name:Grafted Exoskeleton
+ManaCost:4
+Types:Artifact Equipment
+Text:Equipped creature gets +2/+2 and has infect. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+K:eqPump 2:+2/+2/Infect
+T:Mode$ Unequip | ValidEquipment$ Card.Self | ValidCard$ Permanent | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME becomes unattached from a permanent, sacrifice that permanent.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ TriggeredCard
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grafted_exoskeleton.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/162.jpg
+End

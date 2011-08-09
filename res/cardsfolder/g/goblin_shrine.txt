@@ -1,0 +1,17 @@
+Name:Goblin Shrine
+ManaCost:1 R R
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.Goblin | AddPower$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ If enchanted land is a basic Mountain, Goblin creatures get +1/+0.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME leaves the battlefield, it deals 1 damage to each Goblin creature.
+SVar:TrigDealDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.Goblin | NumDmg$ 1
+SVar:X:Count$Valid Land.AttachedBy+Basic+Mountain
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_shrine.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/67.jpg
+End

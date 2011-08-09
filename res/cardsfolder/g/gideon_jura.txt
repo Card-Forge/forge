@@ -1,0 +1,16 @@
+Name:Gideon Jura
+ManaCost:3 W W
+Types:Planeswalker Gideon
+Text:no text
+Loyalty:6
+A:AB$ MustAttack | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | Planeswalker$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack CARDNAME if able.
+A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Planeswalker$ True | SpellDescription$ Destroy target tapped creature.
+A:AB$ Animate | Cost$ 0 | Defined$ Self | Power$ 6 | Toughness$ 6 | Types$ Creature,Human,Soldier | SubAbility$ DBPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+SVar:DBPrevent:DB$ Pump | Defined$ Self | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME.
+#restriction logic will need to be added to Human declare attackers for this to be OK for the AI to use
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gideon_jura.jpg
+SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/16.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/21.jpg
+End

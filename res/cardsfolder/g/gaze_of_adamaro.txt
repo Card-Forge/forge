@@ -1,0 +1,11 @@
+Name:Gaze of Adamaro
+ManaCost:2 R R
+Types:Instant Arcane
+Text:no text
+A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
+SVar:X:TargetedPlayer$CardsInHand
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_adamaro.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/98.jpg
+End

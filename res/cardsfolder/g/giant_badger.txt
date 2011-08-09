@@ -1,0 +1,11 @@
+Name:Giant Badger
+ManaCost:1 G G
+Types:Creature Badger
+Text:no text
+PT:2/2
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +2/+2 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_badger.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/253.jpg
+End

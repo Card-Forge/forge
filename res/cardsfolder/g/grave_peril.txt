@@ -1,0 +1,15 @@
+Name:Grave Peril
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonBlack |TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a nonblack creature enters the battlefield, sacrifice Grave Peril. If you do, destroy that creature.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ SVar=DBDestroy | RememberSacrificed$ True
+SVar:DBDestroy:DB$Destroy | Cost$ 0 | Defined$ TriggeredCard | ConditionDefined$ Remembered | ConditionPresent$ Card.Self
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_peril.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/67.jpg
+End
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonBlack |TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When a nonblack creature enters the battlefield, sacrifice Grave Peril. If you do, destroy that creature.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard | ConditionPresent$ Card.Self | SubAbility$ SVar=DBSac
+SVar:DBSac:DB$Sacrifice | Cost$ 0 | Defined$ Self

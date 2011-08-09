@@ -1,0 +1,11 @@
+Name:Goblin Brigand
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:2/2
+K:CARDNAME attacks each turn if able.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_brigand.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/94.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/190.jpg
+End

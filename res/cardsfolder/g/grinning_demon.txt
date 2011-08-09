@@ -1,0 +1,12 @@
+Name:Grinning Demon
+ManaCost:2 B B
+Types:Creature Demon
+Text:no text
+PT:6/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+K:Morph:2 B B
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_demon.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/153.jpg
+End

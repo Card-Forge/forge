@@ -1,0 +1,11 @@
+Name:Genesis Wave
+ManaCost:X G G G
+Types:Sorcery
+Text:no text
+A:SP$ Dig | Cost$ X G G G | DigNum$ X | Reveal$ True | AnyNumber$ True | ChangeValid$ Permanent.cmcLEX | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top X cards of your library. You may put any number of permanent cards with converted mana cost X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/genesis_wave.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/122.jpg
+End

@@ -1,0 +1,11 @@
+Name:Giant Tortoise
+ManaCost:1 U
+Types:Creature Turtle
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddToughness$ 3 | Description$ As long as CARDNAME is untapped, it gets +0/+3.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_tortoise.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/76.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/20.jpg|2
+End

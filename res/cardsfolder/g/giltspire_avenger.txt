@@ -1,0 +1,11 @@
+Name:Giltspire Avenger
+ManaCost:G W U
+Types:Creature Human Soldier
+Text:no text
+PT:2/2
+K:Exalted
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.dealtDamageToYouThisTurn | TgtPrompt$ Select target creature that dealt damage to you this turn | SpellDescription$ Destroy target creature that dealt damage to you this turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giltspire_avenger.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/108.jpg
+End

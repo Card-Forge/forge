@@ -1,0 +1,12 @@
+Name:Guan Yu, Sainted Warrior
+ManaCost:3 W W
+Types:Legendary Creature Human Soldier Warrior
+Text:no text
+PT:3/5
+K:Horsemanship
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, you may shuffle CARDNAME into your library.
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yu_sainted_warrior.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/6.jpg
+End
