@@ -1,0 +1,10 @@
+Name:Mindculling
+ManaCost:5 U
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 5 U | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ SVar=DBDraw | SpellDescription$ You draw two cards and target opponent discards two cards.
+SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mindculling.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/39.jpg
+End

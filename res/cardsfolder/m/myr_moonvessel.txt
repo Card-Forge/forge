@@ -1,0 +1,11 @@
+Name:Myr Moonvessel
+ManaCost:1
+Types:Artifact Creature Myr
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAddMana | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, add 1 to your mana pool.
+SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_moonvessel.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/133.jpg
+End

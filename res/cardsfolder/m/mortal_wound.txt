@@ -1,0 +1,11 @@
+Name:Mortal Wound
+ManaCost:G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN When CARDNAME is dealt damage, destroy it. | Description$ When enchanted creature is dealt damage, destroy it.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mortal_wound.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/63.jpg
+End

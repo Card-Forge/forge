@@ -1,0 +1,11 @@
+Name:Merrow Grimeblotter
+ManaCost:3 UB
+Types:Creature Merfolk Wizard
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ 1 UB Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_grimeblotter.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/171.jpg
+End

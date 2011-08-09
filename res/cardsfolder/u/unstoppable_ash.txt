@@ -1,0 +1,14 @@
+Name:Unstoppable Ash
+ManaCost:3 G
+Types:Creature Treefolk Warrior
+Text:no text
+PT:5/5
+K:Trample
+K:Champion:Treefolk,Warrior:Treefolk or Warrior
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumDef$ +5
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unstoppable_ash.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/137.jpg
+End

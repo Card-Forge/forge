@@ -1,0 +1,10 @@
+Name:Molten Rain
+ManaCost:1 R R
+Types:Sorcery
+Text:no text
+A:SP$ Destroy | Cost$ 1 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ SVar=DBDamage | SpellDescription$ Destroy target land. If that land is nonbasic, Molten Rain deals 2 damage to the land's controller.
+SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Land.Basic | ConditionCompare$ EQ0 | ConditionDescription$ If that land is nonbasic,
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46000.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/101.jpg
+End

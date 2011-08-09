@@ -1,0 +1,10 @@
+Name:Magma Jet
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ SVar=DBScry | SpellDescription$ CARDNAME deals 2 damage to target creature or player. Scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:DBScry:DB$Scry | ScryNum$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_jet.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/73.jpg
+End

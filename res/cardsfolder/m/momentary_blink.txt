@@ -1,0 +1,11 @@
+Name:Momentary Blink
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouCtrl | RememberTargets$ True | ForgetOtherTargets$ True | TgtPrompt$ Select target creature you control. | SubAbility$ SVar=DBReturn | SpellDescription$ Exile target creature you control, then return it to the battlefield under its owner's control.
+A:SP$ChangeZone | Cost$ 3 U | Flashback$ True | CostDesc$ Flashback 3 U | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouCtrl | RememberTargets$ True | ForgetOtherTargets$ True | TgtPrompt$ Select target creature you control. | SubAbility$ SVar=DBReturn | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:DBReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/momentary_blink.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/29.jpg
+End

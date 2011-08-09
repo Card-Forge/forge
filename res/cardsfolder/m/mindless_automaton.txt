@@ -1,0 +1,13 @@
+Name:Mindless Automaton
+ManaCost:4
+Types:Artifact Creature Construct
+Text:no text
+PT:0/0
+K:etbCounter:P1P1:2
+A:AB$ PutCounter | Cost$ 1 Discard<1/Card> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on Mindless Automaton.
+A:AB$ Draw | Cost$ SubCounter<2/P1P1> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mindless_automaton.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/135.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/111.jpg
+End

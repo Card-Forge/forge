@@ -1,0 +1,11 @@
+Name:Mire Boa
+ManaCost:1 G
+Types:Creature Snake
+Text:no text
+PT:2/1
+K:Swampwalk
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_boa.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/135.jpg
+End

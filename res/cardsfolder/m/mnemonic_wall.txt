@@ -1,0 +1,12 @@
+Name:Mnemonic Wall
+ManaCost:4 U
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mnemonic_wall.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/78.jpg
+End

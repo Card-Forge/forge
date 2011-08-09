@@ -1,0 +1,8 @@
+Name:Muraganda Petroglyphs
+ManaCost:3 G
+Types:Enchantment
+Text:Creatures with no abilities get +2/+2.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/muraganda_petroglyphs.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/146.jpg
+End

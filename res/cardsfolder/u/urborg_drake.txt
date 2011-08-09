@@ -1,0 +1,11 @@
+Name:Urborg Drake
+ManaCost:1 U B
+Types:Creature Drake
+Text:no text
+PT:2/3
+K:Flying
+K:CARDNAME attacks each turn if able.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_drake.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/283.jpg
+End

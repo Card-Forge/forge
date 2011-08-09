@@ -1,0 +1,9 @@
+Name:Undertow
+ManaCost:2 U
+Types:Enchantment
+Text:Creatures with islandwalk can be blocked as though they didn't have islandwalk.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undertow.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/82.jpg
+End

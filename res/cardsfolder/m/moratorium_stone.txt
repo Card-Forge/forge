@@ -1,0 +1,13 @@
+Name:Moratorium Stone
+ManaCost:1
+Types:Artifact
+Text:no text
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:AB$ ChangeZone | Cost$ 2 W B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card.nonLand | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeAll | SpellDescription$ Exile target nonland card from a graveyard, all other cards from graveyards with the same name as that card, and all permanents with that name.
+SVar:DBChangeAll:DB$ChangeZoneAll | Origin$ Graveyard,Battlefield | Destination$ Exile | ChangeType$ Remembered.sameName | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moratorium_stone.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/154.jpg
+End

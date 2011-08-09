@@ -1,0 +1,10 @@
+Name:Merfolk Mesmerist
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:1/2
+A:AB$ Mill | Cost$ U T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_mesmerist.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/66.jpg
+End

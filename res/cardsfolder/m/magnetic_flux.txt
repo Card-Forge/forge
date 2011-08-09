@@ -1,0 +1,10 @@
+Name:Magnetic Flux
+ManaCost:2 U
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.Artifact+YouCtrl | KW$ Flying | SpellDescription$ Artifact creatures you control gain flying until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magnetic_flux.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/25.jpg
+End

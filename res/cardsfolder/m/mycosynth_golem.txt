@@ -1,0 +1,11 @@
+Name:Mycosynth Golem
+ManaCost:11
+Types:Artifact Creature Golem
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nArtifact creature spells you cast have affinity for artifacts. (They cost 1 less to cast for each artifact you control.)
+PT:4/5
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+K:CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/137.jpg
+End

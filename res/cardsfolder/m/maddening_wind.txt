@@ -1,0 +1,13 @@
+Name:Maddening Wind
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Cumulative upkeep:G
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals 2 damage to that player.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maddening_wind.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/142.jpg
+End

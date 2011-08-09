@@ -572,15 +572,20 @@
 
     <distributionManagement>
         <repository>
-            <id>forge-ftp-repository</id>
+            <id>cardforge-repo</id>
             <name>Forge</name>
             <url>ftp.cardforge.org/releases</url>
         </repository>
         <snapshotRepository>
-            <id>forge-ftp-snapshot-repository</id>
+            <id>cardforge-snapshot-repo</id>
             <name>Forge</name>
             <url>ftp.cardforge.org/snapshots</url>
         </snapshotRepository>
+                <site>
+            <id>slightlymagic-site</id>
+            <name>SlightlyMagic</name>
+            <url>svn:http://svn.slightlymagic.net/forge/site</url>
+        </site>
     </distributionManagement>
 
     <repositories>

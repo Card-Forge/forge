@@ -1,0 +1,11 @@
+Name:Undo
+ManaCost:1 U U
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 U U | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return two target creatures to their owners' hands.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undo.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/59.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/58.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/47.jpg
+End

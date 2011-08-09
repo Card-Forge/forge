@@ -1,0 +1,14 @@
+Name:Magnivore
+ManaCost:2 R R
+Types:Creature Lhurgoyf
+Text:no text
+PT:*/*
+K:Haste
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of sorcery cards in all graveyards.
+SVar:X:Count$TypeInAllYards.Sorcery
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magnivore.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/204.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/202.jpg
+End

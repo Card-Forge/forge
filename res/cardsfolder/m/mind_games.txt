@@ -1,0 +1,11 @@
+Name:Mind Games
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Tap | Cost$ U | TgtPrompt$ Choose target artifact, creature or land | ValidTgts$ Artifact,Creature,Land | SpellDescription$ Tap target artifact, creature or land.
+SVar:Buyback:2 U
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_games.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/38.jpg
+End

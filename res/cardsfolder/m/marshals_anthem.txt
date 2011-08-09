@@ -1,0 +1,14 @@
+Name:Marshal's Anthem
+ManaCost:2 W W
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
+K:Multikicker 1 W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times CARDNAME was kicked.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature card from your graveyard.
+SVar:X:Count$TimesKicked
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marshals_anthem.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/15.jpg
+End

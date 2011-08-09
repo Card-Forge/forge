@@ -1,0 +1,11 @@
+Name:Mightstone
+ManaCost:4
+Types:Artifact
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.attacking | AddPower$ 1 | Description$ Attacking creatures get +1/+0.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mightstone.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/20.jpg
+End

@@ -1,0 +1,14 @@
+Name:Morphling
+ManaCost:3 U U
+Types:Creature Shapeshifter
+Text:no text
+PT:3/3
+A:AB$ Untap | Cost$ U | SpellDescription$ Untap CARDNAME.
+A:AB$ Pump | Cost$ U | KW$ Flying | SpellDescription$ Morphling gains flying until end of turn.
+A:AB$ Pump | Cost$ U | KW$ Shroud | SpellDescription$ Morphling gains shroud until end of turn.
+A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Morphling gets +1/-1 until end of turn.
+A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ Morphling gets -1/+1 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/morphling.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/85.jpg
+End

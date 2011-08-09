@@ -1,0 +1,13 @@
+Name:Mistform Skyreaver
+ManaCost:5 U U
+Types:Creature Illusion
+Text:no text
+PT:6/6
+K:Flying
+A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ SVar=DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_skyreaver.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/97.jpg
+End

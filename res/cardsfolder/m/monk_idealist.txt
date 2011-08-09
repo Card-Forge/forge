@@ -1,0 +1,11 @@
+Name:Monk Idealist
+ManaCost:2 W
+Types:Creature Human Monk Cleric
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target enchantment card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_idealist.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/20.jpg
+End

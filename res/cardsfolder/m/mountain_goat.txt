@@ -1,0 +1,13 @@
+Name:Mountain Goat
+ManaCost:R
+Types:Creature Goat
+Text:no text
+PT:1/1
+K:Mountainwalk
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16442.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/252.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/195.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/146.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/203.jpg
+End

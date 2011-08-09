@@ -1,0 +1,9 @@
+Name:Mass Calcify
+ManaCost:5 W W
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 5 W W | ValidCards$ Creature.nonWhite | SpellDescription$ Destroy all nonwhite creatures.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/12.jpg
+End

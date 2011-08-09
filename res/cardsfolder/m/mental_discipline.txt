@@ -1,0 +1,10 @@
+Name:Mental Discipline
+ManaCost:1 U U
+Types:Enchantment
+Text:no text
+A:AB$ Draw | Cost$ 1 U Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mental_discipline.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/37.jpg
+End

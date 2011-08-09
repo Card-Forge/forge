@@ -1,0 +1,12 @@
+Name:Mire Kavu
+ManaCost:3 R
+Types:Creature Kavu
+Text:no text
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
+SVar:X:Count$Valid Swamp.YouCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_kavu.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/67.jpg
+End

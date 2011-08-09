@@ -1,0 +1,12 @@
+Name:Magus of the Bazaar
+ManaCost:1 U
+Types:Creature Human Wizard
+Text:no text
+PT:0/1
+A:AB$ Draw | Cost$ T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard three cards. | SubAbility$ SVar=DBDiscard
+SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_bazaar.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/43.jpg
+End

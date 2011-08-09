@@ -1,0 +1,12 @@
+Name:Maul Splicer
+ManaCost:6 G
+Types:Creature Human Artificer
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.Golem+YouCtrl | AddKeyword$ Trample | Description$ Golem creatures you control have trample.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 3/3 colorless Golem artifact creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maul_splicer.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/114.jpg
+End

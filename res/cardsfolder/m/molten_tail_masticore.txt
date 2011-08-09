@@ -1,0 +1,11 @@
+Name:Molten-Tail Masticore
+ManaCost:4
+Types:Artifact Creature Masticore
+Text:At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.
+PT:4/4
+A:AB$DealDamage | Cost$ 4 ExileFromGrave<1/Creature> | NumDmg$ 4 | Tgt$ TgtCP | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
+A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_tail_masticore.jpg
+SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/177.jpg
+End

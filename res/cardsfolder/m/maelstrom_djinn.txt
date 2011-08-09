@@ -1,0 +1,17 @@
+Name:Maelstrom Djinn
+ManaCost:7 U
+Types:Creature Djinn
+Text:no text
+PT:5/6
+K:Flying
+K:Morph:2 U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigVanishing | TriggerDescription$ When CARDNAME is turned face up, put two time counters on it and it gains vanishing.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+countersGE2TIME | Secondary$ True | Execute$ TrigRemoveCounter | TriggerDescription$ Remove time counter.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+countersEQ1TIME | Secondary$ True | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME.
+SVar:TrigVanishing:AB$PutCounter | Cost$ 0 | CounterType$ TIME | CounterNum$ 2
+SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | CounterType$ TIME | CounterNum$ 1
+SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | SpellDescription$ Sacrifice CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_djinn.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/39.jpg
+End

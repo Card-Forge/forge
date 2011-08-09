@@ -1,0 +1,10 @@
+Name:Urborg Mindsucker
+ManaCost:2 B
+Types:Creature Horror
+Text:no text
+PT:2/2
+A:AB$ Discard | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Opponent | SorcerySpeed$ True | NumCards$ 1 | Mode$ Random | SpellDescription$ Target opponent discards a card at random. Activate this ability only any time you could cast a sorcery.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_mindsucker.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/21.jpg
+End

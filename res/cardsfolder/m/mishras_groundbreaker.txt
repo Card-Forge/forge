@@ -1,0 +1,10 @@
+Name:Mishra's Groundbreaker
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ Animate | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature | Permanent$ True | SpellDescription$ Target land becomes a 3/3 artifact creature that's still a land. (This effect lasts indefinitely.)
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_groundbreaker.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/165.jpg
+End

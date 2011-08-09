@@ -1,0 +1,11 @@
+Name:Molting Harpy
+ManaCost:B
+Types:Creature Harpy Mercenary
+Text:no text
+PT:2/1
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2
+K:Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_harpy.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/148.jpg
+End

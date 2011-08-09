@@ -1,0 +1,11 @@
+Name:Mind Slash
+ManaCost:1 B B
+Types:Enchantment
+Text:no text
+A:AB$ Discard | Cost$ B Sac<1/Creature> | ValidTgts$ Opponent | SorcerySpeed$ True | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_slash.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/145.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/59.jpg
+End

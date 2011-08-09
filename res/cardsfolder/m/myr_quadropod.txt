@@ -1,0 +1,11 @@
+Name:Myr Quadropod
+ManaCost:4
+Types:Artifact Creature Myr
+Text:no text
+PT:1/4
+A:AB$ Pump | Cost$ 3 | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_quadropod.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/138.jpg
+End

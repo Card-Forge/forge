@@ -1,0 +1,10 @@
+Name:Myr Enforcer
+ManaCost:7
+Types:Artifact Creature Myr
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+PT:4/4
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_enforcer.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/211.jpg
+End

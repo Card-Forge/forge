@@ -1,0 +1,10 @@
+Name:Mtenda Herder
+ManaCost:W
+Types:Creature Human Scout
+Text:no text
+PT:1/1
+K:Flanking
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mtenda_herder.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/233.jpg
+End

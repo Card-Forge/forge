@@ -1,0 +1,10 @@
+Name:Moment's Peace
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ Fog | Cost$ 1 G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+A:SP$ Fog | Cost$ 2 G | Flashback$ True | CostDesc$ Flashback 2 G | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moments_peace.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/251.jpg
+End

@@ -1,0 +1,9 @@
+Name:Molting Skin
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ Return<1/CARDNAME> | SpellDescription$ Regenerate target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_skin.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/138.jpg
+End

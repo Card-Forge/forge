@@ -1,0 +1,13 @@
+Name:Mishra's Helix
+ManaCost:5
+Types:Artifact
+Text:no text
+A:AB$ Tap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land | TgtPrompt$ Select target Land | SpellDescription$ Tap X target lands.
+# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
+SVar:X:Targeted$Amount
+SVar:MaxTgts:Count$Valid Land
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_helix.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/302.jpg
+End

@@ -1,0 +1,11 @@
+Name:Merfolk Observer
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+Text:no text
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at the top card of target player's library.
+SVar:TrigPeek:AB$ RearrangeTopOfLibrary | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 1 | SpellDescription$ Look at the top card of target player's library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_observer.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/76.jpg
+End

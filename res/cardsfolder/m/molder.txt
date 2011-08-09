@@ -1,0 +1,12 @@
+Name:Molder
+ManaCost:X G
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ X G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Targeted$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/molder.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/206.jpg
+End

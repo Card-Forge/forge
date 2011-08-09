@@ -1,0 +1,12 @@
+Name:Moldervine Cloak
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
+K:Dredge 2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moldervine_cloak.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/173.jpg
+End

@@ -1,0 +1,10 @@
+Name:Unspeakable Symbol
+ManaCost:1 B B
+Types:Enchantment
+Text:no text
+A:AB$ PutCounter | Cost$ PayLife<3> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unspeakable_symbol.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/79.jpg
+End

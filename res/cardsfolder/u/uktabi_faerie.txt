@@ -1,0 +1,11 @@
+Name:Uktabi Faerie
+ManaCost:1 G
+Types:Creature Faerie
+Text:no text
+PT:1/1
+K:Flying
+A:AB$ Destroy | Cost$ 3 G Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_faerie.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/145.jpg
+End

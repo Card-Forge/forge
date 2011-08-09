@@ -1,0 +1,11 @@
+Name:Mine Bearer
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:1/1
+A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mine_bearer.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/16.jpg
+End

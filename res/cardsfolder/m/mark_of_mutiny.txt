@@ -1,0 +1,10 @@
+Name:Mark of Mutiny
+ManaCost:2 R
+Types:Sorcery
+Text:no text
+A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ SVar=DBPutCounter | SpellDescription$ Gain control of target creature until end of turn. Put a +1/+1 counter on it and untap it. That creature gains haste until end of turn.
+SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_mutiny.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/137.jpg
+End

@@ -1,0 +1,15 @@
+Name:Merchant Ship
+ManaCost:U
+Types:Creature Human
+Text:no text
+PT:0/2
+K:CARDNAME can't attack unless defending player controls an Island.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you gain 2 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+SVar:NeedsToPlay:Island.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_ship.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/23.jpg
+End

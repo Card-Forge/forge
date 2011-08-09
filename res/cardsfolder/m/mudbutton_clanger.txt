@@ -1,0 +1,10 @@
+Name:Mudbutton Clanger
+ManaCost:R
+Types:Creature Goblin Warrior
+Text:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Mudbutton Clanger, you may reveal it. If you do, Mudbutton Clanger gets +1/+1 until end of turn.
+PT:1/1
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbutton_clanger.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/95.jpg
+End

@@ -1,0 +1,12 @@
+Name:Mox Jet
+ManaCost:0
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card630.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/262.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/264.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/263.jpg
+End

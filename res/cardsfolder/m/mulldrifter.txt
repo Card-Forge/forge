@@ -1,0 +1,16 @@
+Name:Mulldrifter
+ManaCost:4 U
+Types:Creature Elemental
+Text:no text
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards.
+K:Evoke:2 U
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mulldrifter.jpg
+SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/52.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/76.jpg
+End

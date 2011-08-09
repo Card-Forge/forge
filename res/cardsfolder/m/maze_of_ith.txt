@@ -1,0 +1,10 @@
+Name:Maze of Ith
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ SVar=DBPump | IsCurse$ True | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_ith.jpg
+SetInfo:DRK|Uncommon|http://magiccards.info/scans/en/dk/114.jpg
+End

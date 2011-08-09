@@ -1,0 +1,12 @@
+Name:Major Teroh
+ManaCost:3 W
+Types:Legendary Creature Bird Soldier
+Text:no text
+PT:2/3
+K:Flying
+A:AB$ ChangeZoneAll | Cost$ 3 W W Sac<1/CARDNAME> | ChangeType$ Creature.Black | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all black creatures.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/major_teroh.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/8.jpg
+End

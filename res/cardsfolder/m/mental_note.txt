@@ -1,0 +1,11 @@
+Name:Mental Note
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Mill | Cost$ U | NumCards$ 2 | Defined$ You | SubAbility$ SVar=DBDraw | SpellDescription$ Put the top two cards of your library into your graveyard. Draw a card.
+SVar:DBDraw:DB$Draw | Cost$ 0 | NumCards$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mental_note.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/46.jpg
+End

@@ -1,0 +1,10 @@
+Name:Marhault Elsdragon
+ManaCost:3 G R R
+Types:Legendary Creature Elf Warrior
+Text:no text
+PT:4/6
+K:Rampage 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marhault_elsdragon.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/284.jpg
+End

@@ -1,0 +1,12 @@
+Name:Magister Sphinx
+ManaCost:4 W U B
+Types:Artifact Creature Sphinx
+Text:no text
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, target player's life total becomes 10.
+SVar:TrigLife:AB$SetLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magister_sphinx.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/116.jpg
+End

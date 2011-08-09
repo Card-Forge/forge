@@ -1,0 +1,11 @@
+Name:Mortiphobia
+ManaCost:1 B B
+Types:Enchantment
+Text:no text
+A:AB$ ChangeZone | Cost$ 1 B Discard<1/Card> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Mortiphobia.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/72.jpg
+End

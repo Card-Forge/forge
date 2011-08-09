@@ -1,0 +1,14 @@
+Name:Might of Oaks
+ManaCost:3 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Target creature gets +7/+7 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/gu/en-us/card8822.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/265.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/257.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/255.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/277.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/192.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/106.jpg
+End

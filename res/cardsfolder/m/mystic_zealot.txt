@@ -1,0 +1,10 @@
+Name:Mystic Zealot
+ManaCost:3 W
+Types:Creature Human Nomad Mystic
+Text:no text
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_zealot.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/36.jpg
+End

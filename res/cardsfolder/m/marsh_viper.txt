@@ -1,0 +1,13 @@
+Name:Marsh Viper
+ManaCost:3 G
+Types:Creature Snake
+Text:no text
+PT:1/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player gets two poison counters. (A player with ten or more poison counters loses the game.)  
+SVar:TrigPoison:AB$Poison | Cost$ 0 | Defined$ Opponent | Num$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_viper.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/177.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/44.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/147.jpg
+End

@@ -1,0 +1,11 @@
+Name:Muscle Burst
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named CARDNAME in all graveyards.
+SVar:X:Count$NamedInAllYards.Muscle Burst/Plus.Y
+SVar:Y:Count$NamedInAllYards.Diligent Farmhand/Plus.3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/muscle_burst.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/252.jpg
+End

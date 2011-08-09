@@ -1,0 +1,12 @@
+Name:Manic Vandal
+ManaCost:2 R
+Types:Creature Human Warrior
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_vandal.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/151.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/151.jpg
+End

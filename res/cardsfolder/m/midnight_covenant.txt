@@ -1,0 +1,12 @@
+Name:Midnight Covenant
+ManaCost:1 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Pump | Description$ Enchanted creature has "B: This creature gets +1/+1 until end of turn."
+SVar:Pump:AB$Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_covenant.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/125.jpg
+End

@@ -1,0 +1,18 @@
+Name:Marjhan
+ManaCost:5 U U
+Types:Creature Leviathan
+Text:no text
+PT:8/8
+K:CARDNAME doesn't untap during your untap step.
+K:CARDNAME can't attack unless defending player controls an Island.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+A:AB$ Untap | Cost$ U U Sac<1/Creature> | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate this ability only during your upkeep.
+A:AB$ DealDamage | Cost$ U U | NumDmg$ 1 | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SubAbility$ SVar=DBPump | SpellDescription$ CARDNAME gets -1/-0 until end of turn and deals 1 damage to target attacking creature without flying.
+SVar:DBPump:DB$Pump | NumAtt$ -1| Defined$ Self
+SVar:NeedsToPlay:Island.YouCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marjhan.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/39.jpg
+End

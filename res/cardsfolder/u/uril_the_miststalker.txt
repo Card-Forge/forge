@@ -1,0 +1,14 @@
+Name:Uril, the Miststalker
+ManaCost:2 R G W
+Types:Legendary Creature Beast
+Text:no text
+PT:5/5
+K:Hexproof
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
+SVar:X:Count$Valid Aura.Attached/Times.2
+SVar:EnchantMe:Multiple
+SVar:RemRandomDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/uril_the_miststalker.jpg
+SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/124.jpg
+End

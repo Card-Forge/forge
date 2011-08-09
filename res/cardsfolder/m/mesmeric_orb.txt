@@ -1,0 +1,11 @@
+Name:Mesmeric Orb
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ Untaps | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
+SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_orb.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/204.jpg
+End

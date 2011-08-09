@@ -1,0 +1,13 @@
+Name:Mycoloth
+ManaCost:3 G G
+Types:Creature Fungus
+Text:no text
+PT:4/4
+K:Devour:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 1/1 green Saproling creature token onto the battlefield for each +1/+1 counter on CARDNAME.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Green
+SVar:X:Count$NumCounters.P1P1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/140.jpg
+End

@@ -1,0 +1,20 @@
+Name:Magnigoth Treefolk
+ManaCost:4 G
+Types:Creature Treefolk
+Text:no text
+PT:2/6
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Plainswalk | CheckSVar$ P | SVarCompare$ GE1 | Description$ Domain - For each basic land type among lands you control, CARDNAME has landwalk of that type
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Islandwalk | CheckSVar$ I | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Swampwalk | CheckSVar$ S | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Mountainwalk | CheckSVar$ M | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Forestwalk | CheckSVar$ F | SVarCompare$ GE1
+SVar:P:Count$Valid Plains.YouCtrl
+SVar:I:Count$Valid Island.YouCtrl
+SVar:S:Count$Valid Swamp.YouCtrl
+SVar:M:Count$Valid Mountain.YouCtrl
+SVar:F:Count$Valid Forest.YouCtrl
+SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magnigoth_treefolk.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/82.jpg
+End

@@ -1,0 +1,12 @@
+Name:Merrow Levitator
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:2/3
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a blue spell, you may untap CARDNAME.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_levitator.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/26.jpg
+End

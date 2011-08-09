@@ -1,0 +1,13 @@
+Name:Mirozel
+ManaCost:3 U
+Types:Creature Illusion
+Text:no text
+PT:2/3
+K:Flying
+T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.
+SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mirozel.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/41.jpg
+End

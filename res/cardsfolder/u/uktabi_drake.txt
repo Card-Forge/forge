@@ -1,0 +1,14 @@
+Name:Uktabi Drake
+ManaCost:G
+Types:Creature Drake
+Text:no text
+PT:2/1
+K:Flying
+K:Haste
+K:Echo:1 G G
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_drake.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/141.jpg
+End

@@ -1,0 +1,11 @@
+Name:Magus of the Tabernacle
+ManaCost:3 W
+Types:Creature Human Wizard
+Text:no text
+PT:2/6
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 | Description$ All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1."
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_tabernacle.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/8.jpg
+End

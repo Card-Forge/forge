@@ -1,0 +1,11 @@
+Name:Mindlash Sliver
+ManaCost:B
+Types:Creature Sliver
+Text:no text
+PT:1/1
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Discard | Description$ All Slivers have "1, Sacrifice this permanent: Each player discards a card."
+SVar:Discard:AB$Discard | Cost$ 1 Sac<1/CARDNAME> | Defined$ Each | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Each player discards a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mindlash_sliver.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/118.jpg
+End

@@ -1,0 +1,11 @@
+Name:Mirror Wall
+ManaCost:3 U
+Types:Creature Wall
+Text:no text
+PT:3/4
+K:Defender
+A:AB$ Pump | Cost$ W | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_wall.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/47.jpg
+End

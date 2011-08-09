@@ -1,0 +1,15 @@
+Name:Megrim
+ManaCost:2 B
+Types:Enchantment
+Text:no text
+T:Mode$ Discarded | ValidCard$ Card.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent discards a card, CARDNAME deals 2 damage to that player.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 2    
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/megrim.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/143.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/146.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/12.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/144.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/157.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/104.jpg
+End

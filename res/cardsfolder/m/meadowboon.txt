@@ -1,0 +1,14 @@
+Name:Meadowboon
+ManaCost:2 W W
+Types:Creature Elemental
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME leaves the battlefield, put a +1/+1 counter on each creature target player controls.
+K:Evoke:3 W
+SVar:TrigPutCounterAll:AB$PutCounterAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | ValidCards$ Creature | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meadowboon.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/17.jpg
+End

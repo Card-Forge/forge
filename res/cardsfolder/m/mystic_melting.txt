@@ -1,0 +1,10 @@
+Name:Mystic Melting
+ManaCost:3 G
+Types:Instant
+Text:no text
+A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_melting.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/114.jpg
+End

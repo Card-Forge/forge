@@ -1,0 +1,10 @@
+Name:Mijae Djinn
+ManaCost:R R R
+Types:Creature Djinn
+Text:Whenever CARDNAME attacks, flip a coin. If you lose the flip, remove CARDNAME from combat and tap it.
+PT:6/3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mijae_djinn.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/165.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/51.jpg
+End

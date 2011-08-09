@@ -1,0 +1,11 @@
+Name:Metathran Elite
+ManaCost:1 U U
+Types:Creature Metathran Soldier
+Text:no text
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self+isEnchanted | AddKeyword$ Unblockable | Description$ CARDNAME is unblockable as long as it's enchanted.
+SVar:EnchantMe:Once
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/38.jpg
+End

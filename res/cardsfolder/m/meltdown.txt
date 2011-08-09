@@ -1,0 +1,11 @@
+Name:Meltdown
+ManaCost:X R
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ X R | ValidCards$ Artifact.cmcLEX | SpellDescription$ Destroy each artifact with converted mana cost X or less.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meltdown.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/203.jpg
+End

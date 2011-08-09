@@ -1,0 +1,14 @@
+Name:Mistform Stalker
+ManaCost:1 U
+Types:Creature Illusion
+Text:no text
+PT:3/3
+K:Flying
+A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ SVar=DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
+A:AB$ Pump | Cost$ 2 U U | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SpellDescription$ CARDNAME gets +2/+2 and gains flying until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_stalker.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/98.jpg
+End

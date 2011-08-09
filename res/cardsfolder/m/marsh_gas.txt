@@ -1,0 +1,10 @@
+Name:Marsh Gas
+ManaCost:B
+Types:Instant
+Text:no text
+A:SP$ PumpAll | Cost$ B | ValidCards$ Creature | IsCurse$ True | NumAtt$ -2 | SpellDescription$ All creatures get -2/-0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_gas.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/10.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/30.jpg
+End

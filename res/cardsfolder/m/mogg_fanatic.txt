@@ -1,0 +1,11 @@
+Name:Mogg Fanatic
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_fanatic.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/190.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/219.jpg
+End

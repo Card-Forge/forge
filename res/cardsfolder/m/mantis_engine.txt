@@ -1,0 +1,12 @@
+Name:Mantis Engine
+ManaCost:5
+Types:Artifact Creature Insect
+Text:no text
+PT:3/3
+A:AB$ Pump | Cost$ 2 | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$ Pump | Cost$ 2 | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mantis_engine.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/133.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/333.jpg
+End

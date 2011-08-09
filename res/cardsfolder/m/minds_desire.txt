@@ -1,0 +1,12 @@
+Name:Mind's Desire
+ManaCost:4 U U
+Types:Sorcery
+Text:Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
+K:Storm
+K:Shroud
+K:Indestructible
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/41.jpg
+End

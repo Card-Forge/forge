@@ -1,0 +1,11 @@
+Name:Mercenary Informer
+ManaCost:2 W
+Types:Creature Human Rebel Mercenary
+Text:no text
+PT:2/1
+K:CARDNAME can't be the target of black spells or abilities from black sources.
+A:AB$ ChangeZone | Cost$ 2 W | ValidTgts$ Mercenary | IsCurse$ True | TgtPrompt$ Select target Mercenary | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target Mercenary on the bottom of its owner's library.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mercenary_informer.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/15.jpg
+End

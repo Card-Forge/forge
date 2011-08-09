@@ -1,0 +1,10 @@
+Name:Marsh Goblins
+ManaCost:B R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:Swampwalk
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1821.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/118.jpg
+End

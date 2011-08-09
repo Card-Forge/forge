@@ -1,0 +1,12 @@
+Name:Marble Titan
+ManaCost:3 W
+Types:Creature Giant
+Text:Creatures with power 3 or greater don't untap during their controllers' untap steps.
+PT:3/3
+K:Permanents don't untap during their controllers' untap steps:Creature.powerGE3
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84533.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/240.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/26.jpg
+End

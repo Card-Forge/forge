@@ -1,0 +1,10 @@
+Name:Misshapen Fiend
+ManaCost:1 B
+Types:Creature Horror Mercenary
+Text:no text
+PT:1/1
+K:Flying
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19581.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/147.jpg
+End

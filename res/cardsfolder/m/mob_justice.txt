@@ -1,0 +1,10 @@
+Name:Mob Justice
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtP | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of creatures you control.
+SVar:X:Count$TypeYouCtrl.Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_justice.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/90.jpg
+End

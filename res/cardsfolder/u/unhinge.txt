@@ -1,0 +1,10 @@
+Name:Unhinge
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. | SubAbility$ SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unhinge.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/87.jpg
+End

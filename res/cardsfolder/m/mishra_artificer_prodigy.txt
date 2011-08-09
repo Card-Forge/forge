@@ -1,0 +1,11 @@
+Name:Mishra, Artificer Prodigy
+ManaCost:1 U B R
+Types:Legendary Creature Human Artificer
+Text:no text
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Card.Artifact | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ Whenever you cast an artifact spell, you may search your graveyard, hand, and/or library for a card with the same name as that spell and put it onto the battlefield. If you search your library this way, shuffle it.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ You | Hidden$ True | Origin$ Graveyard,Hand,Library | OriginChoice$ True | OriginAlternative$ Graveyard,Hand | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Battlefield | ChangeType$ Triggered.sameName
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mishra_artificer_prodigy.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/243.jpg
+End

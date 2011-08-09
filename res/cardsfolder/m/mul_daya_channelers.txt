@@ -1,0 +1,18 @@
+Name:Mul Daya Channelers
+ManaCost:1 G G
+Types:Creature Elf Druid Shaman
+Text:no text
+PT:2/2
+K:Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | TopCardOfLibraryIs$ Creature | Description$ As long as the top card of your library is a creature card, CARDNAME gets +3/+3.
+S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ WMana & UMana & BMana & RMana & GMana | TopCardOfLibraryIs$ Land | Description$ As long as the top card of your library is a land card, CARDNAME has "Tap: Add two mana of any one color to your mana pool."
+SVar:WMana:AB$Mana | Cost$ T | Produced$ W | Amount$ 2 | SpellDescription$ Add W W to your mana pool.
+SVar:UMana:AB$Mana | Cost$ T | Produced$ U | Amount$ 2 | SpellDescription$ Add U U to your mana pool.
+SVar:BMana:AB$Mana | Cost$ T | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to your mana pool.
+SVar:RMana:AB$Mana | Cost$ T | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
+SVar:GMana:AB$Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mul_daya_channelers.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/198.jpg
+End

@@ -1,0 +1,10 @@
+Name:Malachite Golem
+ManaCost:6
+Types:Artifact Creature Golem
+Text:no text
+PT:5/3
+A:AB$ Pump | Cost$ 1 G | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/malachite_golem.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/202.jpg
+End

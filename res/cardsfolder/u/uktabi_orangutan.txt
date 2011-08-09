@@ -1,0 +1,12 @@
+Name:Uktabi Orangutan
+ManaCost:2 G
+Types:Creature Ape
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
+SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_orangutan.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/73.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/260.jpg
+End

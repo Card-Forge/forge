@@ -1,0 +1,12 @@
+Name:Molder Beast
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:5/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/molder_beast.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/125.jpg
+End
