@@ -167,6 +167,61 @@ Fixes/Features:
 - Fixed test names.
 - Fixed checkstyles, fixed unit tests, added unit tests.
 - Removed obselete libs and build files.
+- Added the recent commit logs to changes.txt.
+- Ran set info script.
+- Fixed the activation cost for Wave Elemental.
+- Added a fluff piece about the new bug reporting system to changes.txt.
+- Fixed Surgical Extraction.
+- Fixed Adaptive Automaton.
+- Fixed Numot the Devastator and Teneb the Harvester.
+- Made it so that an empty list of controllers means that the owner is the controller.
+- This is the initial commit in this repository. This was an attempt to make it so that changes to the files display_new_layout.xml and JuzamjediCube.dck would not automatically appear in EGit’s Commit window. this seems to have failed.
+- Testing EGit merge.
+- Revert "- Testing EGit merge.
+- Revert "- Testing EGit merge.
+- Fixed logic so CardsInPlay was not checked when ConditionDefined used.
+- First small step toward separating UI from logic. Created some packages and some classes. they are not yet in use.
+- Added unit test.
+- Fixed some checkstyle issues.
+- Updated substance LAF jar.
+- Exposed Storm count through Count$.
+- Added Amount parameter to AF_CopySpell.
+- Reimplemented the Storm keyword using Trigger objects. (Though it could be replaced by a script trigger).
+- Simplified Bitter Ordeal. Kinda forgot how ThisTurnEntered worked.
+- Testing conflicting and nonconflicting pulls. To be reverted later.
+- Resolved intentional conflicts; removed silly comments that I made.
+- Move Gui_NewGame to forge.view.swing.OldGuiNewGame. Move main(). Left a delegate from forge.Gui_NewGame.main to forge.swing.view.Main.main.  Refactored references to Gui_NewGame to use new package and class name, forge.view.swing.OldGuiNewGame.
+- Cleaned up Echo Mage using CopySpell's new Amount parameter.
+- Split triggers into intrinsic and extrinsic.
+- Morphed cards can now have triggers pumped to them actually going off.
+- Create forge.view.swing.Main. Sorry, I missed this in previous commit.
+- Reduce Checkstyle, FindBugs, and PMD output for forge.view.swing.Main.
+- Reduce Checkstyle output for forge.view.swing.OldGuiNewGame.
+- Reduce FindBugs & PMD output in forge.view.swing.OldGuiNewGame.
+- Continue to slowly refactor forge.view.swing.Main. Moved some code from forge.view.swing.Main to forge.model.FModel. Improved Main's error handling to catch all Throwables. Turned FModel into a class that could later be turned into an interface. We're not changing models any time soon, so it made sense. Did not do the same for FView; I could see us potentially using a different view for future unit tests. Created nascent forge.view.swing.ApplicationView.
+- Continue to slowly refactor forge.view.swing.Main. Minor changes to forge.view.swing.Main that should have gone into the last commit.
+- Activate $Id$ processing for Git in .java, .properties, and top-level txt files. $Id$ should be replaced by the Git revision SHA-1 hex identifier at checkout, and reversed upon check-in.
+- Maybe I used the wrong syntax for .gitattributes?
+- Automatically fill in and lock the Git field if known. If $Id$ does get replaced properly, we fill in the Git field and set it non-editable. But sometimes $Id$ doesn't get substituted at all. In that case, we allow the user to edit the field.
+- Fixed bug in detection of whether $Id$ had been replaced.
+- Fixed Primal Whisperer.
+- Revert $Id$ changes.
+- Ignore $Id$.
+- Fixed Maggot Therapy and Sigil Blessing.
+- Reverted Sigil Blessing. The implementation is a hack, but there is no scriptable way around it for now.
+- Fixed Stoic Ephemera.
+- Fixed Gobhobbler Rats. The Hellbent flag does not work in StaticAbility. Actually, it does work, I just missed the lower-cased b.
+- A real fix for Gobhobbler Rats.
+- Fixed Blind-Spot Giant, it now can't attack or block unless you control another Giant.
+- Fixed the cc for Wings of Velis Vel.
+- Fixed the CostDesc$ for Krovikan Sorcerer.
+- Fixed Plumes of Peace, it no longer has Flash.
+- Fixed the rest of the morph cards with StaticAbility.
+- Ran Set Info Script.
+- Fixed Slithery Stalker.
+- Fix the unless cost for abilities.
+- Fix the unless cost for spells. [Big changes in MagicStack included!]
+- Moved repository.
 
 
 Many people helped with this version. A special thank you goes out to them:
