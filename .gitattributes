@@ -8,13 +8,6 @@
 /CHANGES.txt svneol=native#text/plain
 /LICENSE.txt svneol=native#text/plain
 /README.txt svneol=native#text/plain
-build/Forge.icns -text
-build/backgroundImage.jpg -text svneol=unset#image/jpeg
-build/create-dmg -text
-build/forge.ico -text svneol=unset#image/ico
-build/forge.sh svneol=native#text/x-sh
-build/support/AdiumApplescriptRunner -text
-build/support/template.applescript -text
 /forge.properties svneol=native#text/plain
 /pom.xml svneol=native#text/xml
 res/AllTokens.txt svneol=native#text/plain
