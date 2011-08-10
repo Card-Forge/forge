@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigGravestorm | TriggerDesc
 SVar:TrigGravestorm:AB$CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ GravestormCount1
 SVar:GravestormCount:Count$ThisTurnEntered Graveyard Permanent
 SVar:Rarity:Rare
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/80.jpg
 End
