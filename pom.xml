@@ -145,6 +145,22 @@
         <plugins>
 
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <!--$NO-MVN-MAN-VER$ -->
@@ -197,7 +213,11 @@
                     <archive>
                         <manifest>
                             <mainClass>forge.Gui_NewGame</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
+                        <manifestEntries>
+                            <Implementation-Build>${buildNumber}</Implementation-Build>
+                        </manifestEntries>
                     </archive>
                 </configuration>
                 <executions>
@@ -250,9 +270,9 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>com.google.code.maven-svn-wagon</groupId>
-                        <artifactId>maven-svn-wagon</artifactId>
-                        <version>1.4</version>
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-ftp</artifactId>
+                        <version>1.0</version>
                     </dependency>
                 </dependencies>
             </plugin>

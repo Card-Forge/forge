@@ -35,18 +35,19 @@ Forge
 
   <<Maven Project Links>>
 
-  * {{{http://cardforge.googlecode.com/svn/site/index.html}Maven Project Site}}
+  * {{{http://cardforge.org/releases/site/index.html}Maven Project Site}}
 
-  * {{{http://cardforge.googlecode.com/svn/site/apidocs/index.html}JavaDocs}}
+  * {{{http://cardforge.org/releases/site/apidocs/index.html}JavaDocs}}
 
-  * {{{http://cardforge.googlecode.com/svn/site/xref/index.html}Browsable Source Code}}
+  * {{{http://cardforge.org/releases/site/xref/index.html}Browsable Source Code}}
 
 
  <<Related Links>>
 
   * {{{http://cardforge.org/}Main Website}}
 
-  * {{{https://gitorious.org/cardforge/pages/Home}Project Site}}
+  * {{{http://svn.slightlymagic.net/forge/trunk}Source Code Repository}}
+  * {{{http://svn.slightlymagic.net/websvn/listing.php?repname=forge}Web View of Source}}
 
   * {{{http://mtgrares.blogspot.com/}Original Author's Blog}}
 
