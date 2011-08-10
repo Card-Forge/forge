@@ -13,6 +13,8 @@ We would like to remove the old "Current Known Bugs" list topic on the forum. Wh
 
 In the future bugs and other issues will be reported with the Bug Report form, the Mantis based Cardforge Issue Tracker or by posting a message on the then current forge beta release topic at CCGH.
 
+Some people that are using an early version of java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should de-install java 7 and install java 6 instead.
+
 
 We have changed the archiving format to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these archives.
 
