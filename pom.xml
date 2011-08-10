@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>forge</groupId>
@@ -142,14 +142,6 @@
     </mailingLists>
 
     <build>
-        <extensions>
-            <!-- Enabling the use of FTP -->
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ftp</artifactId>
-                <version>1.0</version>
-            </extension>
-        </extensions>
         <plugins>
 
             <plugin>
@@ -242,9 +234,9 @@
                 <version>2.6</version>
                 <dependencies>
                     <dependency>
-                        <groupId>com.google.code.maven-svn-wagon</groupId>
-                        <artifactId>maven-svn-wagon</artifactId>
-                        <version>1.4</version>
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-ftp</artifactId>
+                        <version>1.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -574,18 +566,18 @@
     <distributionManagement>
         <repository>
             <id>cardforge-repo</id>
-            <name>Forge</name>
+            <name>Forge Releases</name>
             <url>ftp.cardforge.org/releases</url>
         </repository>
         <snapshotRepository>
             <id>cardforge-snapshot-repo</id>
-            <name>Forge</name>
+            <name>Forge Snapshots</name>
             <url>ftp.cardforge.org/snapshots</url>
         </snapshotRepository>
-                <site>
-            <id>slightlymagic-site</id>
-            <name>SlightlyMagic</name>
-            <url>svn:http://svn.slightlymagic.net/forge/site</url>
+        <site>
+            <id>cardforge-site</id>
+            <name>Forge Site</name>
+            <url>ftp.cardforge.org/site</url>
         </site>
     </distributionManagement>
 
@@ -704,19 +696,19 @@
                                             </fileset>
                                             <fileset dir="${project.build.directory}" includes="forge.exe"/>
                                             <fileset dir="${project.build.directory}"
-                                                     includes="${project.build.finalName}-jar-with-dependencies.jar"/>
+                                                includes="${project.build.finalName}-jar-with-dependencies.jar"/>
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder"/>
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip"
-                                             basedir="${basedir}/res/cardsfolder" level="1"/>
+                                            basedir="${basedir}/res/cardsfolder" level="1"/>
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh"
-                                               perm="a+rx"/>
+                                            perm="a+rx"/>
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe"
-                                               perm="a+rx"/>
+                                            perm="a+rx"/>
                                         <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2"
-                                             compression="bzip2">
+                                            compression="bzip2">
                                             <tarfileset filemode="755"
-                                                        dir="${project.build.directory}/${project.build.finalName}">
+                                                dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh"/>
                                                 <include name="forge.exe"/>
                                             </tarfileset>
@@ -803,15 +795,15 @@
                                         </copy>
                                         <mkdir dir="${project.build.directory}/res/cardsfolder"/>
                                         <zip destfile="${project.build.directory}/res/cardsfolder/cardsfolder.zip"
-                                             basedir="${basedir}/res/cardsfolder" level="1"/>
+                                            basedir="${basedir}/res/cardsfolder" level="1"/>
                                         <taskdef name="jarbundler" classpathref="maven.runtime.classpath"
-                                                 classname="net.sourceforge.jarbundler.JarBundler"/>
+                                            classname="net.sourceforge.jarbundler.JarBundler"/>
                                         <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
-                                                    name="${project.name}" version="${project.version}"
-                                                    mainclass="forge.Gui_NewGame" icon="${basedir}/${configSourceDirectory}/Forge.icns"
-                                                    jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}"
-                                                    workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
-                                                    jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
+                                            name="${project.name}" version="${project.version}"
+                                            mainclass="forge.Gui_NewGame" icon="${basedir}/${configSourceDirectory}/Forge.icns"
+                                            jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}"
+                                            workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
+                                            jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
                                             <javafileset dir="${basedir}">
                                                 <include name="*.properties"/>
                                                 <include name="res/**"/>
@@ -824,15 +816,15 @@
                                             <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
                                         </jarbundler>
                                         <symlink
-                                                link="${project.build.directory}/${project.build.finalName}-osx/Applications"
-                                                resource="/Applications"/>
+                                            link="${project.build.directory}/${project.build.finalName}-osx/Applications"
+                                            resource="/Applications"/>
                                         <exec executable="${basedir}/${configSourceDirectory}/create-dmg" failonerror="false">
                                             <arg line="--volname ${project.name}-${project.version} --background ${basedir}/${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
                                         </exec>
                                         <tar basedir="${project.build.directory}"
-                                             includes="${project.build.finalName}.dmg"
-                                             destfile="${project.build.directory}/${project.build.finalName}-osx.tar.bz2"
-                                             compression="bzip2"/>
+                                            includes="${project.build.finalName}.dmg"
+                                            destfile="${project.build.directory}/${project.build.finalName}-osx.tar.bz2"
+                                            compression="bzip2"/>
                                         <!--<symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" action="delete" /> -->
                                         <exec executable="rm" failonerror="false">
                                             <arg line="-f ${project.build.directory}/${project.build.finalName}-osx/Applications"/>
