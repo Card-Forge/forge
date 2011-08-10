@@ -1,7 +1,17 @@
 package forge;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.TreeMap;
+
 import com.esotericsoftware.minlog.Log;
+
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability_Mana;
@@ -10,10 +20,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
-
-import java.security.acl.Owner;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>Card class.</p>

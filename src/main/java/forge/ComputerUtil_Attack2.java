@@ -356,7 +356,7 @@ public class ComputerUtil_Attack2 {
         // examine the potential forces
         CardList nextTurnAttackers = new CardList();
         int candidateCounterAttackDamage = 0;
-        int candidateTotalBlockDamage = 0;
+        //int candidateTotalBlockDamage = 0;
         for (Card pCard : playerCreatures) {
 
             // if the creature can attack next turn add it to counter attackers list
@@ -364,7 +364,7 @@ public class ComputerUtil_Attack2 {
                 nextTurnAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
                     candidateCounterAttackDamage += pCard.getNetCombatDamage();
-                    candidateTotalBlockDamage += pCard.getNetCombatDamage();
+                    //candidateTotalBlockDamage += pCard.getNetCombatDamage();
                     playerForces += 1; // player forces they might use to attack
                 }
             }
@@ -376,8 +376,9 @@ public class ComputerUtil_Attack2 {
 
         // find the potential counter attacking damage compared to AI life total
         double aiLifeToPlayerDamageRatio = 1000000;
-        if (candidateCounterAttackDamage > 0)
+        if (candidateCounterAttackDamage > 0) {
             aiLifeToPlayerDamageRatio = (double) AllZone.getComputerPlayer().life / candidateCounterAttackDamage;
+        }
 
         // get the potential damage and strength of the AI forces
         CardList candidateAttackers = new CardList();
