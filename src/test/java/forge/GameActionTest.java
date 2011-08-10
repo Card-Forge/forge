@@ -12,7 +12,7 @@ public class GameActionTest {
     /**
      * <p>main.</p>
      */
-    @Test(timeOut = 1000)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = 5000)
     public void GameActionTest1() throws Exception {
         System.out.println("GameActionTest");
         GameAction gameAction = new GameAction();

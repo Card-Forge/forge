@@ -21,7 +21,7 @@ import java.util.TreeSet;
  * @author Forge
  * @version $Id$
  */
-@Test(groups = {"UnitTest"})
+@Test(groups = {"UnitTest"}, timeOut = 5000)
 public class CardFactoryTest implements NewConstants {
 
     private static CardFactoryInterface factory;
@@ -35,7 +35,7 @@ public class CardFactoryTest implements NewConstants {
      * Just a quick test to see if Arc-Slogger is in the database, and if it
      * has the correct owner.
      */
-    @Test(enabled = true)
+    @Test(enabled = true, timeOut = 5000)
     public final void test_getCard_1() {
         final Card card = factory.getCard("Arc-Slogger", null);
         Assert.assertNotNull(card, "card is not null");
@@ -47,7 +47,7 @@ public class CardFactoryTest implements NewConstants {
      *
      * This doesn't work with LazyCardFactory, so it is too slow to enable by default.
      */
-    @Test(enabled = false)
+    @Test(enabled = false, timeOut = 5000)
     public final void test_getRandomCombinationWithoutRepetition_tooLarge() {
         BraidsAssertFunctions.assertThrowsException(IllegalArgumentException.class,
                 new ClumsyRunnable() {
@@ -70,7 +70,7 @@ public class CardFactoryTest implements NewConstants {
      *
      * This doesn't work with LazyCardFactory, so it is too slow to enable by default.
      */
-    @Test(enabled = false)
+    @Test(enabled = false, timeOut = 5000)
     public final void test_getRandomCombinationWithoutRepetition_oneTenth() {
         int divisor = 10;
         final CardList actual = factory.getRandomCombinationWithoutRepetition(factory.size() / divisor);

@@ -15,7 +15,7 @@ public class Mana_PartTest {
     /**
      * <p>testPayManaCost.</p>
      */
-    @Test
+    @Test(groups = {"UnitTest", "fast"}, timeOut = 5000)
     public void testPayManaCost() {
         {
             //test constructor

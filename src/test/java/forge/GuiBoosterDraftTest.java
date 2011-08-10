@@ -16,7 +16,7 @@ public class GuiBoosterDraftTest {
      *
      *
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void GuiBoosterDraftTest1() {
         Constant.Runtime.GameType[0] = Constant.GameType.Draft;
         Constant.Runtime.HumanDeck[0] = new Deck(Constant.GameType.Sealed);

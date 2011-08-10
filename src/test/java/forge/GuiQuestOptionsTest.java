@@ -13,7 +13,7 @@ public class GuiQuestOptionsTest {
      *
      *
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void GuiQuestOptionsTest1() {
         Gui_QuestOptions dialog = new Gui_QuestOptions();
         dialog.setVisible(true);

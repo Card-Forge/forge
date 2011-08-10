@@ -3,8 +3,6 @@ package forge.gui.game;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
-
 /**
  * Created by IntelliJ IDEA.
  * User: dhudson
@@ -15,7 +13,7 @@ public class CardDetailPanelTest {
      *
      *
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void cardDetailPanelTest1() {
         try {
             CardDetailPanel dialog = new CardDetailPanel(null);

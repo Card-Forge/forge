@@ -15,7 +15,7 @@ public class ReadQuestAssignmentTest implements NewConstants {
      *
      *
      */
-    @Test(timeOut = 1000)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = 1000)
     public void ReadQuestAssignmentTest1() {
         try {
             ReadQuest_Assignment read = new ReadQuest_Assignment(ForgeProps.getFile(QUEST.QUESTS), null);

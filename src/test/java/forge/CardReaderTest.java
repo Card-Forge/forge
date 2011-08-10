@@ -1,18 +1,17 @@
 package forge;
 
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+import net.slightlymagic.braids.util.ClumsyRunnable;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import net.slightlymagic.braids.util.ClumsyRunnable;
-
 import static net.slightlymagic.braids.util.testng.BraidsAssertFunctions.assertThrowsException;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 /**
  * Created by hand to test the CardReader class.
@@ -27,7 +26,7 @@ public class CardReaderTest implements NewConstants {
     public static final int ESTIMATED_CARDS_IN_FOLDER = 9001;
 
 
-    @Test(timeOut = TEST_TIMEOUT)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = TEST_TIMEOUT)
     public final void test_ReadCard_nullMap() {
         final ClumsyRunnable withScissors = new ClumsyRunnable() {
             public void run() throws Exception {
@@ -38,7 +37,7 @@ public class CardReaderTest implements NewConstants {
         assertThrowsException(NullPointerException.class, withScissors);
     }
 
-    @Test(timeOut = TEST_TIMEOUT)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = TEST_TIMEOUT)
     public final void test_ReadCard_nullCardsFolder() {
         final ClumsyRunnable withScissors = new ClumsyRunnable() {
             public void run() throws Exception {
@@ -50,7 +49,7 @@ public class CardReaderTest implements NewConstants {
         assertThrowsException(NullPointerException.class, withScissors);
     }
 
-    @Test(timeOut = TEST_TIMEOUT)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = TEST_TIMEOUT)
     public final void test_ReadCard_nonexistentCardsFolder() {
         final ClumsyRunnable withScissors = new ClumsyRunnable() {
             public void run() throws Exception {
@@ -64,7 +63,7 @@ public class CardReaderTest implements NewConstants {
         assertThrowsException(RuntimeException.class, withScissors);
     }
 
-    @Test(timeOut = TEST_TIMEOUT)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = TEST_TIMEOUT)
     public final void test_ReadCard_fileNotFolder() throws IOException {
 
         final File tmpFile = File.createTempFile("just-a-file", ".testng.tmp");
@@ -80,7 +79,7 @@ public class CardReaderTest implements NewConstants {
         assertThrowsException(RuntimeException.class, withScissors);
     }
 
-    @Test(timeOut = TEST_TIMEOUT)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = TEST_TIMEOUT)
     public final void test_ReadCard_findCard_zip() {
         final Map<String, Card> map = new HashMap<String, Card>();
         final File cardsfolder = ForgeProps.getFile(CARDSFOLDER);
@@ -96,7 +95,7 @@ public class CardReaderTest implements NewConstants {
         Assert.assertEquals(elvishWarrior.getName(), "Elvish Warrior", "name is correct");
     }
 
-    @Test(timeOut = TEST_TIMEOUT)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = TEST_TIMEOUT)
     public final void test_ReadCard_findCard_nonzip() {
         final Map<String, Card> map = new HashMap<String, Card>();
         final File cardsfolder = ForgeProps.getFile(CARDSFOLDER);

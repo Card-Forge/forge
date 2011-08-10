@@ -15,7 +15,7 @@ public class GuiQuestFilterTest {
      *
      *
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void guiQuestFilterTest1() {
         try {
             GuiQuestFilter dialog = new GuiQuestFilter(null, null);

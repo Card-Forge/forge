@@ -12,7 +12,7 @@ public class PhaseTest {
      *
      *
      */
-    @Test(timeOut = 5000, enabled = false)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = 5000, enabled = false)
     public void PhaseTest1() {
         Phase phase = new Phase();
         for (int i = 0; i < phase.phaseOrder.length; i++) {

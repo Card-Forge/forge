@@ -14,7 +14,7 @@ public class TinyTest {
     /**
      * Just a quick test to see if TestNG and Assert are working.
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void test_true() {
         Assert.assertTrue(true);
     }

@@ -3,8 +3,6 @@ package forge;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
-
 /**
  * Created by IntelliJ IDEA.
  * User: dhudson
@@ -15,11 +13,10 @@ public class GuiFilterTest {
      *
      *
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void guiFilterTest1() {
         try {
             GuiFilter dialog = new GuiFilter(null, null);
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
             Assert.assertNotNull(dialog);
             dialog.dispose();

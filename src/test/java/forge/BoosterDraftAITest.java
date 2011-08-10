@@ -31,7 +31,7 @@ public class BoosterDraftAITest {
         }//for outer
     }//runTestPrint()
 
-    @Test
+    @Test(timeOut = 5000)
     public void runTest(BoosterDraftAI ai) {
         ReadDraftBoosterPack booster = new ReadDraftBoosterPack();
         for (int outer = 0; outer < 1; outer++) {

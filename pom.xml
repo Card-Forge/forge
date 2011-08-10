@@ -173,6 +173,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.9</version>
                 <configuration>
+                    <groups>fast</groups>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>

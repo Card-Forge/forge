@@ -9765,7 +9765,6 @@ src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
 src/test/java/forge/GuiQuestFilterTest.java svneol=native#text/plain
 src/test/java/forge/GuiQuestOptionsTest.java svneol=native#text/plain
 src/test/java/forge/GuiWinLoseTest.java svneol=native#text/plain
-src/test/java/forge/MoveTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/PhaseTest.java svneol=native#text/plain
 src/test/java/forge/ReadBoosterPackTest.java svneol=native#text/plain

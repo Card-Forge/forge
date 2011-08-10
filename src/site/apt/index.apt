@@ -2,7 +2,7 @@
   Maven Project Site
   -----
   -----
-  2011-06-30
+  2011-08-10
   -----
 
 Forge
@@ -31,7 +31,7 @@ Forge
   defender, reach, and haste. Forge now also has a mana pool and supports creature enchantments.
 
   Forge runs on Windows, Linux, and Macs. You can download Forge from
-  {{{http://code.google.com/p/cardforge/downloads/list}here}}.
+  {{{http://cardforge.org/releases/releases/}here}}.
 
   <<Maven Project Links>>
 
@@ -47,7 +47,7 @@ Forge
   * {{{http://cardforge.org/}Main Website}}
 
   * {{{http://svn.slightlymagic.net/forge/trunk}Source Code Repository}}
-  * {{{http://svn.slightlymagic.net/websvn/listing.php?repname=forge}Web View of Source}}
+  * {{{http://svn.slightlymagic.net/websvn/listing.php?repname=forge}Web View of Source Code Repository}}
 
   * {{{http://mtgrares.blogspot.com/}Original Author's Blog}}
 

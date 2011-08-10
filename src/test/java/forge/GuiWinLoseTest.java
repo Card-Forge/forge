@@ -1,7 +1,5 @@
 package forge;
 
-import forge.deck.Deck;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,13 +7,13 @@ import org.testng.annotations.Test;
  * Created by IntelliJ IDEA.
  * User: dhudson
  */
-@Test(groups = {"UnitTest"})
+@Test(groups = {"UnitTest", "fast"})
 public class GuiWinLoseTest {
     /**
      *
      *
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void GuiWinLoseTest1() {
         Gui_WinLose dialog = new Gui_WinLose();
         dialog.setVisible(true);

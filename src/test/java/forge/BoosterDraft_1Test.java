@@ -12,7 +12,7 @@ public class BoosterDraft_1Test {
     /**
      *
      */
-    @Test(timeOut = 1000)
+    @Test(groups = {"UnitTest", "fast"}, timeOut = 1000)
     public void BoosterDraft_1Test1() throws Exception {
         BoosterDraft_1 draft = new BoosterDraft_1();
         while (draft.hasNextChoice()) {

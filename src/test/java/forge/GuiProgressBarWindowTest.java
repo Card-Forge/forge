@@ -15,7 +15,7 @@ public class GuiProgressBarWindowTest {
      *
      *
      */
-    @Test()
+    @Test(groups = {"UnitTest", "fast"})
     public void GuiProgressBarWindowTest1() {
         try {
             Gui_ProgressBarWindow dialog = new Gui_ProgressBarWindow();
