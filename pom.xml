@@ -879,11 +879,11 @@
             <id>test-deploy</id>
             <distributionManagement>
                 <repository>
-                    <id>forge-ftp-repository-local</id>
+                    <id>cardforge-repo-local</id>
                     <url>ftp://localhost/Users/dhudson/releases</url>
                 </repository>
                 <snapshotRepository>
-                    <id>forge-ftp-snapshot-repository-local</id>
+                    <id>cardforge-snapshot-repo-local</id>
                     <url>ftp://localhost/Users/dhudson/snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
