@@ -15,6 +15,11 @@ In this case you can try the following. Remove the background jpg picture from /
 We have changed the archiving format to ".tar.bz2" since this may help to store the file permissions for the Mac OS X launcher. The Windows launcher in this version does not require you to rename the forge JAR file to work properly. Please keep the forge JAR file name set to "run-forge.jar".
 
 
+Java Issues:
+
+Some people that are using an early version of java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should de-install java 7 and install java 6 instead.
+
+
 Card Picture Issues:
 
 The server which contained the high quality card pictures is now off line and these high quality card pictures are no longer available as a download from within the forge application. We apologize, but the current dev team do not maintain this server and this matter is out of our control.
