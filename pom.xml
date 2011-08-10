@@ -28,6 +28,7 @@
         <project.reporting.outputEncoding>
             ISO-8859-1
         </project.reporting.outputEncoding>
+        <configSourceDirectory>src/main/config</configSourceDirectory>
     </properties>
     <developers>
         <developer>
@@ -139,10 +140,6 @@
             <archive>http://www.slightlymagic.net/forum/viewforum.php?f=52</archive>
         </mailingList>
     </mailingLists>
-    
-    <properties>
-        <configSourceDirectory>${basedir}/src/main/config</configSourceDirectory>
-    </properties>
 
     <build>
         <extensions>
@@ -618,8 +615,6 @@
 
     <profiles>
         <profile>
-            <properties>
-            </properties>
             <id>windows-linux</id>
             <activation>
                 <os>
@@ -813,7 +808,7 @@
                                                  classname="net.sourceforge.jarbundler.JarBundler"/>
                                         <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
                                                     name="${project.name}" version="${project.version}"
-                                                    mainclass="forge.Gui_NewGame" icon="${basedir}/build/Forge.icns"
+                                                    mainclass="forge.Gui_NewGame" icon="${basedir}/${configSourceDirectory}/Forge.icns"
                                                     jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}"
                                                     workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
                                                     jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
@@ -831,8 +826,8 @@
                                         <symlink
                                                 link="${project.build.directory}/${project.build.finalName}-osx/Applications"
                                                 resource="/Applications"/>
-                                        <exec executable="${configSourceDirectory}/create-dmg" failonerror="false">
-                                            <arg line="--volname ${project.name}-${project.version} --background ${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
+                                        <exec executable="${basedir}/${configSourceDirectory}/create-dmg" failonerror="false">
+                                            <arg line="--volname ${project.name}-${project.version} --background ${basedir}/${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
                                         </exec>
                                         <tar basedir="${project.build.directory}"
                                              includes="${project.build.finalName}.dmg"
