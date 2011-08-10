@@ -139,6 +139,10 @@
             <archive>http://www.slightlymagic.net/forum/viewforum.php?f=52</archive>
         </mailingList>
     </mailingLists>
+    
+    <properties>
+        <configSourceDirectory>${basedir}/src/main/config</configSourceDirectory>
+    </properties>
 
     <build>
         <extensions>
@@ -180,7 +184,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <file>build/forge.sh</file>
+                    <file>${configSourceDirectory}/forge.sh</file>
                     <outputFile>
                         ${project.build.directory}/forge.sh
                     </outputFile>
@@ -644,7 +648,7 @@
                                     </jar>
                                     <dontWrapJar>true</dontWrapJar>
                                     <errTitle>forge</errTitle>
-                                    <icon>${basedir}/build/forge.ico</icon>
+                                    <icon>${configSourceDirectory}/forge.ico</icon>
                                     <classPath>
                                         <mainClass>forge.Gui_NewGame</mainClass>
                                         <addDependencies>false</addDependencies>
@@ -827,8 +831,8 @@
                                         <symlink
                                                 link="${project.build.directory}/${project.build.finalName}-osx/Applications"
                                                 resource="/Applications"/>
-                                        <exec executable="${basedir}/build/create-dmg" failonerror="false">
-                                            <arg line="--volname ${project.name}-${project.version} --background ${basedir}/build/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
+                                        <exec executable="${configSourceDirectory}/create-dmg" failonerror="false">
+                                            <arg line="--volname ${project.name}-${project.version} --background ${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
                                         </exec>
                                         <tar basedir="${project.build.directory}"
                                              includes="${project.build.finalName}.dmg"

@@ -1,4 +1,8 @@
 /*.idea
 /*.iml
+/*.tmp
+.settings/org.eclipse.core.resources.prefs
+/forge.log
+/forge.preferences
 /release.properties
 /target

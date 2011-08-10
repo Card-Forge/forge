@@ -9380,7 +9380,14 @@ res/reprintSetInfo.py svneol=native#text/x-python
 res/sealed/juzamjedi.zsealed -text
 res/setInfoScript.py svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
+src/main/config/Forge.icns -text
+src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
+src/main/config/create-dmg -text
+src/main/config/forge.ico -text svneol=unset#image/ico
+src/main/config/forge.sh svneol=native#text/x-sh
 src/main/config/forge_checks.xml svneol=native#text/xml
+src/main/config/support/AdiumApplescriptRunner -text
+src/main/config/support/template.applescript -text
 src/main/java/arcane/ui/CardArea.java svneol=native#text/plain
 src/main/java/arcane/ui/CardPanel.java svneol=native#text/plain
 src/main/java/arcane/ui/CardPanelContainer.java svneol=native#text/plain
