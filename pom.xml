@@ -157,6 +157,9 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <providerImplementations>
+                        <svn>javasvn</svn>
+                    </providerImplementations>
                 </configuration>
             </plugin>
 
