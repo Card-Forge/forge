@@ -7,6 +7,8 @@ K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ SpellTarget | AddSVar$ TrigSac | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and has "When CARDNAME becomes the target of a spell or ability, sacrifice it."
 SVar:SpellTarget:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac  | Secondary$ True | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+# The AI will target this card with buffs.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boneshard_slasher.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/50.jpg
