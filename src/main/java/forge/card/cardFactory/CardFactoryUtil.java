@@ -2282,7 +2282,15 @@ public class CardFactoryUtil {
 
         final String[] l = s.split("/");
         final String[] m = parseMath(l);
-
+ 
+        //count total number of aura enchanting card that aura is attached to
+        if (l[0].contains("AllAurasEnchanting")) {
+            int numAuras = 0;
+            if (c.getEnchanting().size() != 0) 
+                numAuras = c.getEnchantingCard().getEnchantedBy().size();
+            return doXMath(numAuras,m,c);
+        }
+        
         //accept straight numbers
         if (l[0].contains("Number$")) {
             String number = l[0].replace("Number$", "");

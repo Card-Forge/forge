@@ -1,0 +1,14 @@
+Name:Daybreak Coronet
+ManaCost:W W
+Types:Enchantment Aura
+Text:Enchant creature with another Aura attached to it
+K:Enchant creature
+A:SP$ Attach | Cost$ W W | ValidTgts$ Creature.enchanted | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First Strike,Vigilance,Lifelink | Description$ Enchanted creature gets +3/+3 and has first strike, vigilance, and lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
+T:Mode$ Always | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ1 | Execute$ TrigRemove | Static$ True
+SVar:TrigRemove:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Graveyard | Defined$ Self
+SVar:X:Count$AllAurasEnchanting
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daybreak_coronet.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/21.jpg
+End
