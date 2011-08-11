@@ -224,6 +224,23 @@ Fixes/Features:
 - Fix the unless cost for abilities.
 - Fix the unless cost for spells. [Big changes in MagicStack included!]
 - Moved repository.
+- Moved the last of the commit logs from Git to changes.txt.
+- Ran set info script.
+- Updated Maven site url.
+- Fixed Maven site links, Make unit test shorter, add svn rev to manifest.
+- Fixed the activation cost for Wave Elemental.
+- Do not create timestamped snapshots.
+- Updated unit tests to make them less painful from command line. Fixed urls in Maven site home page.
+- Updated project.
+- Small cleanups to make Eclipse happy.
+- Added a section dealing with java 7 issues to the readme.txt file.
+- Added a section dealing with java 7 issues to the changes.txt file.
+- Fixed link to slightlymagic docs.
+- Fixed typo.
+- Fixed Mistform Stalker, it's Flying ability is an activated ability.
+- Removed SVar:RemAIDeck:True from four cards that the AI can now use.
+- Modified xCount to make Daybreak Coronet scriptable.
+- Added SVar:RemAIDeck:True to some cards that after further analysis and testing discovered that the AI will attempt to buff these cards and they will then go to the graveyard.
 
 
 Many people helped with this version. A special thank you goes out to them:
