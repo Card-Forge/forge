@@ -9499,6 +9499,7 @@ src/main/java/forge/NameChanger.java svneol=native#text/plain
 src/main/java/forge/Phase.java svneol=native#text/plain
 src/main/java/forge/PhaseUtil.java svneol=native#text/plain
 src/main/java/forge/Player.java svneol=native#text/plain
+src/main/java/forge/PlayerType.java svneol=native#text/plain
 src/main/java/forge/PlayerUtil.java svneol=native#text/plain
 src/main/java/forge/PlayerZone.java svneol=native#text/plain
 src/main/java/forge/PlayerZone_ComesIntoPlay.java svneol=native#text/plain

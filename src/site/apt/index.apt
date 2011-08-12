@@ -1,5 +1,5 @@
   -----
-  Maven Project Site
+  Forge Maven Project Site
   -----
   -----
   2011-08-10
@@ -30,16 +30,16 @@ Forge
   Forge supports a number of keywords such as exalted, fear, flying, shadow, flanking, protection, wither, flash,
   defender, reach, and haste. Forge now also has a mana pool and supports creature enchantments.
 
-  Forge runs on Windows, Linux, and Macs. You can download Forge from
+  Forge runs on Windows, Linux, and OSX. You can download Forge from
   {{{http://cardforge.org/releases/releases/}here}}.
 
   <<Maven Project Links>>
 
-  * {{{http://cardforge.org/releases/site/index.html}Maven Project Site}}
-
   * {{{http://cardforge.org/releases/site/apidocs/index.html}JavaDocs}}
 
   * {{{http://cardforge.org/releases/site/xref/index.html}Browsable Source Code}}
+  
+  * {{{http://cardforge.org/releases/site/project-reports.html}Project Reports}}
 
 
  <<Related Links>>

@@ -63,6 +63,7 @@ import forge.Gui_DownloadSetPictures_LQ;
 import forge.Gui_QuestOptions;
 import forge.ImageCache;
 import forge.MyRandom;
+import forge.PlayerType;
 import forge.SealedDeck;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
@@ -791,7 +792,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
             if (humanGenerate) {
                 if (constructed) {
-                    genDecks("H");
+                    genDecks(PlayerType.HUMAN);
                 }
                 // else if(sealed)
                 // Constant.Runtime.HumanDeck[0] = generateSealedDeck();
@@ -811,7 +812,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
             if (computerGenerate) {
                 if (constructed) {
-                    genDecks("C");
+                    genDecks(PlayerType.COMPUTER);
                 } // Constant.Runtime.ComputerDeck[0] =
                   // generateConstructedDeck();
                   // else if(sealed)
@@ -858,8 +859,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *
      * @param p
      *            a {@link java.lang.String} object.
+     *            TODO: jendave to refactor deck generation
      */
-    private void genDecks(final String p) {
+    private void genDecks(final PlayerType playerType) {
         Deck d = null;
 
         ArrayList<String> decks = new ArrayList<String>();
@@ -871,7 +873,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         decks.add("3-Color Deck (new)");
 
         String prompt = "Generate ";
-        if (p.equals("H")) {
+        if (playerType.equals(PlayerType.HUMAN)) {
             prompt += "Human ";
         } else {
             prompt += "Computer ";
@@ -889,14 +891,14 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         } else if (o.toString().equals(decks.get(3))) {
             d = generateConstructedThemeDeck();
         } else if (o.toString().equals(decks.get(4))) {
-            d = generate2ColorDeck(p);
+            d = generate2ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(5))) {
-            d = generate3ColorDeck(p);
+            d = generate3ColorDeck(playerType;
         }
 
-        if (p.equals("H")) {
+        if (playerType.equals(PlayerType.HUMAN)) {
             Constant.Runtime.HumanDeck[0] = d;
-        } else if (p.equals("C")) {
+        } else if (playerType.equals(PlayerType.COMPUTER)) {
             Constant.Runtime.ComputerDeck[0] = d;
         }
     }
