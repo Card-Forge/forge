@@ -9665,7 +9665,9 @@ src/main/java/forge/gui/input/Input_PayManaCostUtil.java svneol=native#text/plai
 src/main/java/forge/gui/input/Input_PayManaCost_Ability.java svneol=native#text/plain
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
+src/main/java/forge/model/BuildInfo.java -text
 src/main/java/forge/model/FModel.java svneol=native#text/plain
+src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 src/main/java/forge/model/package-info.java svneol=native#text/plain
 src/main/java/forge/package-info.java svneol=native#text/plain
 src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
@@ -9780,5 +9782,8 @@ src/test/java/forge/deck/generate/GenerateConstructedDeckTest.java svneol=native
 src/test/java/forge/deck/generate/GenerateConstructedMultiColorDeckTest.java svneol=native#text/plain
 src/test/java/forge/gui/ListChooserTest.java svneol=native#text/plain
 src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
+src/test/java/forge/model/BuildInfoTest.java -text
+src/test/java/forge/model/FModelTest.java -text
 src/test/java/net/slightlymagic/braids/util/testng/BraidsAssertFunctions.java svneol=native#text/plain
 src/test/java/net/slightlymagic/braids/util/testng/LICENSE.txt svneol=native#text/plain
+src/test/java/net/slightlymagic/braids/util/testng/package-info.java -text

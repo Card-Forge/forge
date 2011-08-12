@@ -42,7 +42,7 @@ public final class Main {
     public static void main(final String[] args) {
         ExceptionHandler.registerErrorHandling();
         try {
-            final FModel model = new FModel();
+            final FModel model = new FModel(null);
             Singletons.setModel(model);
             final FView view = new ApplicationView();
             Singletons.setView(view);
