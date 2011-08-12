@@ -611,7 +611,6 @@
             <id>cardforge-snapshot-repo</id>
             <name>Forge Snapshots</name>
             <url>ftp.cardforge.org/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
         <site>
             <id>cardforge-site</id>
