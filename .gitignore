@@ -5,5 +5,7 @@
 /forge.log
 /forge.preferences
 /release.properties
+res/cardsfolder/cardsfolder.zip
+res/gui/display_new_layout.xml
 /target
 /test-output

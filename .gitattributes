@@ -8854,7 +8854,6 @@ res/draft/uncommon.txt svneol=native#text/plain
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
 res/gamedata/TypeLists.txt svneol=native#text/plain
 res/gui/display_layout.xml svneol=native#text/xml
-res/gui/display_new_layout.xml svneol=native#text/xml
 res/gui/gui.properties svneol=native#text/plain
 res/images/deckeditor/filter_artifact_n.png -text svneol=unset#image/png
 res/images/deckeditor/filter_artifact_y.png -text svneol=unset#image/png
