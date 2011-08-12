@@ -1337,6 +1337,7 @@ public class AbilityFactory_ChangeZone {
         HashMap<String, String> params = af.getMapParams();
         Target tgt = af.getAbTgt();
         Player player = sa.getActivatingPlayer();
+        Card hostCard = af.getHostCard();
 
         String destination = params.get("Destination");
         String origin = params.get("Origin");
@@ -1350,6 +1351,8 @@ public class AbilityFactory_ChangeZone {
             }
         }
 
+        String remember = params.get("RememberChanged");
+                
         if (tgtCards.size() != 0) {
             for (Card tgtC : tgtCards) {
                 PlayerZone originZone = AllZone.getZone(tgtC);
@@ -1362,7 +1365,7 @@ public class AbilityFactory_ChangeZone {
                     if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC))
                         continue;
                 }
-
+                
                 Player pl = player;
                 if (!destination.equals("Battlefield"))
                     pl = tgtC.getOwner();
@@ -1398,6 +1401,9 @@ public class AbilityFactory_ChangeZone {
                         AllZone.getGameAction().moveTo(AllZone.getZone(destination, pl), tgtC);
                     }
                 }
+                if (remember != null)
+                    hostCard.addRemembered(tgtC);
+                // May also need to add Imprint
             }
         }
     }
