@@ -131,6 +131,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Dogbert 2", "medium", "WRG Berserker deck with Blade-Tribe Berserkers and Spiraling Duelist");
 //        addToDeckList("Dog 2", "medium", "GRB Sacrifice");
         addToDeckList("Doran 3", "hard", "WBG Doran, the Siege Tower deck with high toughness creatures");
+        addToDeckList("Dream 3", "hard", "U Illusion deck with Lord of the Unreal and Krovikan Mist");
 //        addToDeckList("Dr Doom 2", "medium", "GWB");
 //        addToDeckList("Dr Doom 3", "hard", "GWB Constructed");
 //        addToDeckList("Dr Fate 3", "hard", "UB Infect");
