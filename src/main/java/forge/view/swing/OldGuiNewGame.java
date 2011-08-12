@@ -893,7 +893,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         } else if (o.toString().equals(decks.get(4))) {
             d = generate2ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(5))) {
-            d = generate3ColorDeck(playerType;
+            d = generate3ColorDeck(playerType);
         }
 
         if (playerType.equals(PlayerType.HUMAN)) {
@@ -997,7 +997,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    private Deck generate2ColorDeck(final String p) {
+    private Deck generate2ColorDeck(final PlayerType p) {
         Random r = MyRandom.random;
 
         ArrayList<String> colors = new ArrayList<String>();
@@ -1010,7 +1010,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         String c1;
         String c2;
-        if (p.equals("H")) {
+        if (p.equals(PlayerType.HUMAN)) {
             c1 = GuiUtils.getChoice("Select first color.", colors.toArray()).toString();
 
             if (c1.equals("Random")) {
@@ -1052,7 +1052,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *            a {@link java.lang.String} object.
      * @return a {@link forge.deck.Deck} object.
      */
-    private Deck generate3ColorDeck(final String p) {
+    private Deck generate3ColorDeck(final PlayerType p) {
         Random r = MyRandom.random;
 
         ArrayList<String> colors = new ArrayList<String>();
@@ -1066,7 +1066,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         String c1;
         String c2;
         String c3;
-        if (p.equals("H")) {
+        if (p.equals(PlayerType.HUMAN)) {
             c1 = GuiUtils.getChoice("Select first color.", colors.toArray()).toString();
 
             if (c1.equals("Random")) {
