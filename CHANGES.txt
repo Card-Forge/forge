@@ -241,6 +241,16 @@ Fixes/Features:
 - Removed SVar:RemAIDeck:True from four cards that the AI can now use.
 - Modified xCount to make Daybreak Coronet scriptable.
 - Added SVar:RemAIDeck:True to some cards that after further analysis and testing discovered that the AI will attempt to buff these cards and they will then go to the graveyard.
+- Added the recent commit logs to changes.txt.
+- Added issue tracking to maven site.
+- Added javasvn provider to buildnumber plugin.
+- Modified filterListByType method so isRemembered works correctly.
+- Added support for "RememberChanged" to changeKnownOriginResolve.
+- Fixed returning all exiled cards for Day of the Dragons and Portcullis. Issue #0000126.
+- Changed Creature.isRemembered to Card.isRemembered.
+- Fixed site. Starting refactor of deck generation.
+- Fixed method signature.
+- Cleanups.
 
 
 Many people helped with this version. A special thank you goes out to them:
