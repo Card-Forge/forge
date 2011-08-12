@@ -231,4 +231,34 @@ public class BuildInfo {
         return atts.getValue(manifestAttrName);
     }
 
+    /**
+     * Generate a user-friendly string describing the version and build ID.
+     *
+     * This replaces the old system property program/version.
+     *
+     * @return a user-friendly string describing the version and build ID
+     */
+    public final String toPrettyString() {
+        final String rawVersion = getVersion();
+        final String rawBuildID = getBuildID();
+
+        String version;
+        if (rawVersion == null) {
+            version = "Unknown";
+        }
+        else {
+            version = rawVersion;
+        }
+
+        String buildID;
+        if (rawBuildID == null) {
+            buildID = "Unknown";
+        }
+        else {
+            buildID = rawBuildID;
+        }
+
+        return "Forge version " + version + ", build ID " + buildID;
+    }
+
 }

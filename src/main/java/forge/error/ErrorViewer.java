@@ -30,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
+import forge.Singletons;
 import forge.properties.NewConstants;
 
 
@@ -153,7 +154,9 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 
         //Button is not modified, String gets the automatic listener to hide the dialog
         Object[] options = {
-                new JButton(new BugzAction(area)), new JButton(new SaveAction(area)), getLocalized(BUTTON_CLOSE), new JButton(new ExitAction())};
+                new JButton(new BugzAction(area)), new JButton(new SaveAction(area)), getLocalized(BUTTON_CLOSE),
+                new JButton(new ExitAction())};
+
         JOptionPane pane = new JOptionPane(new JScrollPane(area), ERROR_MESSAGE, DEFAULT_OPTION, null, options,
                 options[1]);
         dlg = pane.createDialog(null, getLocalized(TITLE));
@@ -176,7 +179,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         ex.printStackTrace();
 
         pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL),
-                message != null ? message : ex.getMessage(), getProperty(VERSION),
+                message != null ? message : ex.getMessage(),
+                Singletons.getModel().getBuildInfo().toPrettyString(),
                 System.getProperty(NAME_OS), System.getProperty(VERSION_OS), System.getProperty(ARCHITECTURE_OS),
                 System.getProperty(VERSION_JAVA), System.getProperty(VENDOR_JAVA));
         ex.printStackTrace(pw);
@@ -191,7 +195,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     private static void printError(final PrintWriter pw, final String message) {
         System.err.println(message);
 
-        pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL), message, getProperty(VERSION),
+        pw.printf(getLocalized(MESSAGE), getProperty(HOW_TO_REPORT_BUGS_URL), message,
+                Singletons.getModel().getBuildInfo().toPrettyString(),
                 System.getProperty(NAME_OS), System.getProperty(VERSION_OS), System.getProperty(ARCHITECTURE_OS),
                 System.getProperty(VERSION_JAVA), System.getProperty(VENDOR_JAVA));
         Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
@@ -244,20 +249,20 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
             }
         }
     }
-    
+
     private static class BugzAction extends AbstractAction {
 
         private static final long serialVersionUID = 914634661273525959L;
 
         private JTextArea area;
 
-        public BugzAction(JTextArea area) {
+        public BugzAction(final JTextArea neoArea) {
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(VK_B, CTRL_DOWN_MASK));
             putValue(NAME, "Report Bug");
-            this.area = area;
+            this.area = neoArea;
         }
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             BugzReporter br = new BugzReporter();
             br.setDumpText(area.getText());
             br.setVisible(true);

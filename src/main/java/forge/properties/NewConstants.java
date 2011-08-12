@@ -17,8 +17,6 @@ public interface NewConstants {
     //General properties
     /** Constant <code>HOW_TO_REPORT_BUGS_URL = "program/howToReportBugsURL"</code>. */
     String HOW_TO_REPORT_BUGS_URL = "program/howToReportBugsURL";
-    /** Constant <code>VERSION="program/version"</code>. */
-    String VERSION = "program/version";
 
     /** Constant <code>SHOW2CDECK="showdeck/2color"</code>. */
     String SHOW2CDECK = "showdeck/2color";
