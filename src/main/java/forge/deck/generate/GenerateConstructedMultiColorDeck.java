@@ -101,21 +101,11 @@ public class GenerateConstructedMultiColorDeck {
     public CardList generate5ColorDeck() {
         CardList deck;
 
-        /*
-      int check;
-
-      do{
-        deck = get5ColorDeck();
-        check = deck.getType("Creature").size();
-
-      }while(check < 15 || 25 < check);
-      */
-
         deck = get5ColorDeck();
 
         addLand(deck, 5);
 
-        if (deck.size() != 61)
+        if (deck.size() != 60)
             throw new RuntimeException("GenerateConstructedDeck() : generateDeck() error, deck size it not 60, deck size is " + deck.size());
 
         return deck;

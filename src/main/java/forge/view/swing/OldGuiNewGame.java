@@ -844,14 +844,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         dispose();
     } // startButton_actionPerformed()
 
-    /*
-     * private Deck generateSealedDeck() { GenerateSealedDeck gen = new
-     * GenerateSealedDeck(); CardList name = gen.generateDeck(); Deck deck = new
-     * Deck(Constant.GameType.Sealed);
-     *
-     * for(int i = 0; i < 40; i++) deck.addMain(name.get(i).getName()); return
-     * deck; }
-     */
     /**
      * <p>
      * genDecks.
@@ -859,9 +851,9 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      *
      * @param p
      *            a {@link java.lang.String} object.
-     *            TODO: jendave to refactor deck generation
      */
     private void genDecks(final PlayerType playerType) {
+        // TODO: jendave to refactor deck generation
         Deck d = null;
 
         ArrayList<String> decks = new ArrayList<String>();

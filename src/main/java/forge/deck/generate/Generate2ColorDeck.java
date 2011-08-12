@@ -131,8 +131,9 @@ public class Generate2ColorDeck {
         CardListFilter clrF = new CardListFilter() {
             public boolean addCard(Card c) {
                 for (int i = 0; i < notColors.size(); i++) {
-                    if (c.getManaCost().contains(ClrMap.get(notColors.get(i))))
+                    if (c.getManaCost().contains(ClrMap.get(notColors.get(i)))) {
                         return false;
+                    }
                 }
                 return true;
             }
@@ -218,8 +219,9 @@ public class Generate2ColorDeck {
                 c = Cr12.get(r.nextInt(Cr12.size()));
                 lc++;
             }
-            if (lc > 100)
+            if (lc > 100) {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
             int n = CardCounts.get(c.getName());
@@ -235,8 +237,9 @@ public class Generate2ColorDeck {
                 c = Sp12.get(r.nextInt(Sp12.size()));
                 lc++;
             }
-            if (lc > 100)
+            if (lc > 100) {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Sp12");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
             int n = CardCounts.get(c.getName());
@@ -249,8 +252,9 @@ public class Generate2ColorDeck {
         if (LandsPercentage > 0) {
             p = (float) ((float) LandsPercentage * .01);
             numLands = (int) (p * (float) Size);
-        } else     // otherwise, just fill in the rest of the deck with basic lands
+        } else  {   // otherwise, just fill in the rest of the deck with basic lands
             numLands = Size - tDeck.size();
+        }
 
         tmpDeck += "numLands:" + numLands + "\n";
 
@@ -263,8 +267,9 @@ public class Generate2ColorDeck {
                 s = DL.get(r.nextInt(DL.size()));
                 lc++;
             }
-            if (lc > 20)
+            if (lc > 20) {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- DL");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getHumanPlayer()));
             int n = CardCounts.get(s);
@@ -291,16 +296,21 @@ public class Generate2ColorDeck {
                 for (int j = 0; j < mc.length(); j++) {
                     char c = mc.charAt(j);
 
-                    if (c == 'W')
+                    if (c == 'W') {
                         ClrCnts[0].Count++;
-                    else if (c == 'U')
+                    }
+                    else if (c == 'U') {
                         ClrCnts[1].Count++;
-                    else if (c == 'B')
+                    }
+                    else if (c == 'B') {
                         ClrCnts[2].Count++;
-                    else if (c == 'R')
+                    }
+                    else if (c == 'R') {
                         ClrCnts[3].Count++;
-                    else if (c == 'G')
+                    }
+                    else if (c == 'G') {
                         ClrCnts[4].Count++;
+                    }
                 }
             }
 
@@ -322,8 +332,9 @@ public class Generate2ColorDeck {
                     // just to prevent a null exception by the deck size fixing code
                     CardCounts.put(ClrCnts[i].Color, nLand);
 
-                    for (int j = 0; j <= nLand; j++)
+                    for (int j = 0; j <= nLand; j++) {
                         tDeck.add(AllZone.getCardFactory().getCard(ClrCnts[i].Color, AllZone.getComputerPlayer()));
+                    }
                 }
             }
         }
@@ -341,8 +352,9 @@ public class Generate2ColorDeck {
                     c = tDeck.get(r.nextInt(tDeck.size()));
                     lc++;
                 }
-                if (lc > Size)
+                if (lc > Size) {
                     throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- undersize");
+                }
 
                 int n = CardCounts.get(c.getName());
                 tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
@@ -355,8 +367,9 @@ public class Generate2ColorDeck {
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
-                while (c.isBasicLand())    // don't remove basic lands
+                while (c.isBasicLand()) {   // don't remove basic lands
                     c = tDeck.get(r.nextInt(tDeck.size()));
+                }
 
                 tDeck.remove(c);
                 tmpDeck += "Removed:" + c.getName() + "\n";
@@ -364,8 +377,9 @@ public class Generate2ColorDeck {
         }
 
         tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-        if (ForgeProps.getProperty("showdeck/2color", "false").equals("true"))
+        if (ForgeProps.getProperty("showdeck/2color", "false").equals("true")) {
             ErrorViewer.showError(tmpDeck);
+        }
 
         return tDeck;
     }

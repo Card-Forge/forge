@@ -55,9 +55,9 @@ public class GenerateConstructedDeck {
 
         addLand(deck);
 
-        if (deck.size() != 60)
+        if (deck.size() != 60) {
             throw new RuntimeException("GenerateConstructedDeck() : generateDeck() error, deck size it not 60, deck size is " + deck.size());
-
+        }
         return deck;
     }
 
@@ -76,7 +76,7 @@ public class GenerateConstructedDeck {
             land = AllZone.getCardFactory().getCard(map.get(color2).toString(), AllZone.getComputerPlayer());
             list.add(land);
         }
-    }//addLand()
+    } //addLand()
 
     /**
      * Creates a CardList from the set of all cards that meets the criteria
@@ -85,12 +85,12 @@ public class GenerateConstructedDeck {
      *
      * @see #filterBadCards(Iterable)
      *
-     * @return a subset of carsd <= the set of all cards; might be empty, but 
+     * @return a subset of cards <= the set of all cards; might be empty, but 
      * never null
      */
     private CardList getCards() {
         return filterBadCards(AllZone.getCardFactory());
-    }//getCards()
+    } //getCards()
 
     /**
      * <p>get2ColorDeck.</p>
@@ -104,9 +104,9 @@ public class GenerateConstructedDeck {
         deck.shuffle();
 
         //trim deck size down to 34 cards, presumes 26 land, for a total of 60 cards
-        for (int i = 0; i < 34 && i < deck.size(); i++)
+        for (int i = 0; i < 34 && i < deck.size(); i++) {
             out.add(deck.get(i));
-
+        }
         return out;
     }
 
@@ -136,7 +136,7 @@ public class GenerateConstructedDeck {
         CardList artifact = in.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 //is this really a colorless artifact and not something
-                //wierd like Sarcomite Myr which is a colored artifact
+                //weird like Sarcomite Myr which is a colored artifact
                 return c.isArtifact() &&
                         CardUtil.getColors(c).contains(Constant.Color.Colorless) &&
                         !OldGuiNewGame.removeArtifacts.isSelected();
@@ -190,5 +190,5 @@ public class GenerateConstructedDeck {
         });
 
         return out;
-    }//filterBadCards()
+    } //filterBadCards()
 }

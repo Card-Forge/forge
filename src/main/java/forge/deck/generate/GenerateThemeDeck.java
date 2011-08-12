@@ -46,7 +46,7 @@ public class GenerateThemeDeck {
                     + file.getAbsolutePath());
 
         if (!file.isDirectory())
-            throw new RuntimeException("GenerateThemeDeck : getThemeNames error -- not a direcotry -- "
+            throw new RuntimeException("GenerateThemeDeck : getThemeNames error -- not a directory -- "
                     + file.getAbsolutePath());
 
         String[] fileList = file.list();
