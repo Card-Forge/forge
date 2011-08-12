@@ -1657,7 +1657,7 @@ public class AbilityFactory {
 
             source = (Card) (o);
             type = type.replace("Triggered", "Card");
-        } else if (type.contains("Remembered")) {
+        } else if (type.startsWith("Remembered")) {
             boolean hasRememberedCard = false;
             for (Object o : source.getRemembered()) {
                 if (o instanceof Card) {
