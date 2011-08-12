@@ -622,6 +622,11 @@ public class AbilityFactory_ChangeZone {
         int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"), sa) : 1;
 
         String remember = params.get("RememberChanged");
+        String imprint = params.get("Imprint");
+        
+        if (params.containsKey("Unimprint")) {
+            card.clearImprinted();
+        }
 
         for (int i = 0; i < changeNum; i++) {
             if (fetchList.size() == 0 || destination == null)
@@ -657,7 +662,7 @@ public class AbilityFactory_ChangeZone {
                 if (remember != null)
                     card.addRemembered(movedCard);
                 //for imprinted since this doesn't use Target
-                if (params.containsKey("Imprint"))
+                if (imprint != null)
                     card.addImprinted(movedCard);
 
             } else {
@@ -712,6 +717,11 @@ public class AbilityFactory_ChangeZone {
         int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"), sa) : 1;
 
         String remember = params.get("RememberChanged");
+        String imprint = params.get("Imprint");
+        
+        if (params.containsKey("Unimprint")) {
+            card.clearImprinted();
+        }
 
         for (int i = 0; i < changeNum; i++) {
             if (fetchList.size() == 0 || destination == null)
@@ -773,7 +783,8 @@ public class AbilityFactory_ChangeZone {
             if (remember != null)
                 card.addRemembered(newCard);
             //for imprinted since this doesn't use Target
-            if (params.containsKey("Imprint")) card.addImprinted(newCard);
+            if (imprint != null)
+                card.addImprinted(newCard);
         }
 
         if (!"Battlefield".equals(destination) && !"Card".equals(type)) {
@@ -1352,7 +1363,12 @@ public class AbilityFactory_ChangeZone {
         }
 
         String remember = params.get("RememberChanged");
-                
+        String imprint = params.get("Imprint");
+
+        if (params.containsKey("Unimprint")) {
+            hostCard.clearImprinted();
+        }
+        
         if (tgtCards.size() != 0) {
             for (Card tgtC : tgtCards) {
                 PlayerZone originZone = AllZone.getZone(tgtC);
@@ -1366,6 +1382,7 @@ public class AbilityFactory_ChangeZone {
                         continue;
                 }
                 
+                Card movedCard = null;
                 Player pl = player;
                 if (!destination.equals("Battlefield"))
                     pl = tgtC.getOwner();
@@ -1374,7 +1391,7 @@ public class AbilityFactory_ChangeZone {
                     // library position is zero indexed
                     int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
 
-                    AllZone.getGameAction().moveToLibrary(tgtC, libraryPosition);
+                    movedCard = AllZone.getGameAction().moveToLibrary(tgtC, libraryPosition);
 
                     if (params.containsKey("Shuffle"))    // for things like Gaea's Blessing
                         tgtC.getOwner().shuffle();
@@ -1391,19 +1408,20 @@ public class AbilityFactory_ChangeZone {
                     			continue;
                     	}
 
-                        AllZone.getGameAction().moveTo(AllZone.getZone(destination, tgtC.getController()), tgtC);
+                    	movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, tgtC.getController()), tgtC);
 
                         if (params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
                             AllZone.getCombat().addAttacker(tgtC);
                             AllZone.getCombat().addUnblockedAttacker(tgtC);
                         }
                     } else {
-                        AllZone.getGameAction().moveTo(AllZone.getZone(destination, pl), tgtC);
+                        movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, pl), tgtC);
                     }
                 }
                 if (remember != null)
-                    hostCard.addRemembered(tgtC);
-                // May also need to add Imprint
+                    hostCard.addRemembered(movedCard);
+                if (imprint != null)
+                    hostCard.addImprinted(movedCard);
             }
         }
     }

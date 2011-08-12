@@ -1606,7 +1606,7 @@ public class AbilityFactory {
         HashMap<String, String> params = AF.getMapParams();
         Card host;
 
-        if (!params.containsKey("RememberTargets") && !params.containsKey("Imprint")) {
+        if (!params.containsKey("RememberTargets")) {
             return;
         }
 
@@ -1614,9 +1614,6 @@ public class AbilityFactory {
 
         if (params.containsKey("ForgetOtherTargets")) {
             host.clearRemembered();
-        }
-        if (params.containsKey("Unimprint")) {
-            host.clearImprinted();
         }
 
         Target tgt = AF.getAbTgt();
@@ -1626,10 +1623,6 @@ public class AbilityFactory {
             for (Object o : tgts) {
                 host.addRemembered(o);
             }
-        }
-        if (params.containsKey("Imprint")) {
-            ArrayList<Card> tgts = (tgt == null) ? new ArrayList<Card>() : tgt.getTargetCards();
-            host.addImprinted(tgts);
         }
     }
     
