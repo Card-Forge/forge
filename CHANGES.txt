@@ -251,6 +251,30 @@ Fixes/Features:
 - Fixed site. Starting refactor of deck generation.
 - Fixed method signature.
 - Cleanups.
+- Added the recent commit logs to changes.txt.
+- Added programmatic access to BuildID and Version through methods on FModel.getBuildInfo().
+- Added class forge.model.BuildInfo with unit test.
+- Added unit test for forge.model.FModel.
+- Added exception class forge.model.MultipleForgeJarsFoundError.
+- Updated forge.view.swing.Main with some preliminary code for progress monitoring.
+- Reduced CheckStyle, FindBugs, and PMD violations in these files and in net.slightlymagic.braids.util.testng.BraidsAssertFunctions.
+- Added missing package-info in net.slightlymagic.braids.util.testng.
+- Added the new Dream 3 quest deck.
+- Apparently Maven 3 does not support uniqueVersion for snapshots.
+- Issue 120: Improve version and build ID in Crash Reports.
+- forge.error.ErrorViewer now uses BuildInfo.toPrettyString() to display the version.
+- Fixed some CheckStyle violations in ErrorViewer.
+- Added forge.model.BuildInfo.toPrettyString method.
+- Removed obsolete VERSION field from forge.properties.NewConstants. (Java)
+- Removed obsolete property "program/version" from res/main.properties.
+- Replaced the Divination spells with Sleep in the quest deck Dream 3.
+- Added test-output to top svn:ignore.
+- Update svn:ignore on more files; delete display_new_layout.xml (which gets recreated every game).
+- Moved handling of Imprint exclusively to ChangeZone AF.
+- Issue 106: Refactor Gui_NewGame. Moved preferences to FModel.
+- Updated former references to preferences to use FModel in forge.GuiDisplay4 and in forge.view.swing.OldGuiNewGame.
+- Added simple unit test.
+- Reworked Mimic Vat using only the RememberChanged.
 
 
 Many people helped with this version. A special thank you goes out to them:
