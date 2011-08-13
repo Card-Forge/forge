@@ -50,8 +50,8 @@ public final class Main {
             ForgePreferences preferences = null;
 
             try {
-                OldGuiNewGame.preferences = new ForgePreferences("forge.preferences");
-                preferences = OldGuiNewGame.preferences;
+
+                preferences = model.getPreferences();
 
                 OldGuiNewGame.useLAFFonts.setSelected(preferences.lafFonts);
                 // newGuiCheckBox.setSelected(preferences.newGui);
@@ -77,8 +77,8 @@ public final class Main {
                     Constant.Runtime.UpldDrft[0] = false;
                 }
 
-            } catch (Exception e) {
-                Log.error("Error loading preferences");
+            } catch (Exception exn) {
+                Log.error("Error loading preferences: " + exn);
             }
 
             OldGuiNewGame.loadDynamicGamedata();

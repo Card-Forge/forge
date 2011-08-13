@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 
 import org.testng.annotations.Test;
 
+import forge.properties.ForgePreferences;
+
 /**
  * Tests FModel.
  */
@@ -54,5 +56,20 @@ public class FModelTest {
         model.getBuildInfo().getBuildID();
 
         model.close();
+    }
+
+    /**
+     * Test getPreferences.
+     * @throws FileNotFoundException indirectly
+     */
+    @Test
+    public final void test_getPreferences() throws FileNotFoundException {
+        final FModel model = new FModel(null);
+        try {
+            ForgePreferences prefs = model.getPreferences();
+            assertNotNull(prefs, "prefs instance is not null");
+        } finally {
+            model.close();
+        }
     }
 }

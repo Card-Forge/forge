@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import forge.properties.ForgePreferences;
+
 //import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import arcane.util.MultiplexOutputStream;
@@ -27,6 +29,7 @@ public class FModel {
     private final transient PrintStream oldSystemOut;
     private final transient PrintStream oldSystemErr;
     private BuildInfo buildInfo;
+    private ForgePreferences preferences;
 
     /**
      * Constructor.
@@ -60,6 +63,12 @@ public class FModel {
         System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logFileStream), true));
         oldSystemErr = System.err;
         System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
+
+        try {
+            setPreferences(new ForgePreferences("forge.preferences"));
+        } catch (Exception exn) {
+            throw new RuntimeException(exn);
+        }
 
         setBuildInfo(new BuildInfo());
     }
@@ -105,5 +114,20 @@ public class FModel {
     protected final void setBuildInfo(final BuildInfo neoBuildInfo) {
         this.buildInfo = neoBuildInfo;
     }
+
+    /**
+     * @return the preferences
+     */
+    public final ForgePreferences getPreferences() {
+        return preferences;
+    }
+
+    /**
+     * @param neoPreferences the preferences to set
+     */
+    public final void setPreferences(final ForgePreferences neoPreferences) {
+        this.preferences = neoPreferences;
+    }
+
 
 }

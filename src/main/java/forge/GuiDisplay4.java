@@ -1175,7 +1175,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * @return a boolean.
      */
     public boolean loadPrefs() {
-        ForgePreferences fp = OldGuiNewGame.preferences;
+        ForgePreferences fp = Singletons.getModel().getPreferences();
 
         cbAIUpkeep.setSelected(fp.bAIUpkeep);
         cbAIDraw.setSelected(fp.bAIDraw);
@@ -1201,7 +1201,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      */
     public boolean savePrefs() {
         Constant.Runtime.Mill[0] = canLoseByDecking.isSelected();
-        ForgePreferences fp = OldGuiNewGame.preferences;
+        ForgePreferences fp = Singletons.getModel().getPreferences();
 
         fp.bAIUpkeep = cbAIUpkeep.isSelected();
         fp.bAIDraw = cbAIDraw.isSelected();

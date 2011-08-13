@@ -65,6 +65,7 @@ import forge.ImageCache;
 import forge.MyRandom;
 import forge.PlayerType;
 import forge.SealedDeck;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
 import forge.deck.generate.Generate2ColorDeck;
@@ -167,9 +168,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
     private final Action HOW_TO_PLAY_ACTION = new HowToPlayAction();
     private final Action DNLD_PRICES_ACTION = new DownloadPriceAction();
     private final Action BUGZ_REPORTER_ACTION = new BugzReporterAction();
-
-    /** Constant <code>preferences</code>. */
-    public static ForgePreferences preferences;
 
     /**
      * <p>
@@ -528,7 +526,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         devModeCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
-                preferences.developerMode = Constant.Runtime.DevMode[0];
+                Singletons.getModel().getPreferences().developerMode = Constant.Runtime.DevMode[0];
             }
         });
 
@@ -540,7 +538,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         upldDrftCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 Constant.Runtime.UpldDrft[0] = upldDrftCheckBox.isSelected();
-                preferences.uploadDraftAI = Constant.Runtime.UpldDrft[0];
+                Singletons.getModel().getPreferences().uploadDraftAI = Constant.Runtime.UpldDrft[0];
             }
         });
 
@@ -549,7 +547,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         foilRandomCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 Constant.Runtime.RndCFoil[0] = foilRandomCheckBox.isSelected();
-                preferences.randCFoil = Constant.Runtime.RndCFoil[0];
+                Singletons.getModel().getPreferences().randCFoil = Constant.Runtime.RndCFoil[0];
             }
         });
 
@@ -1321,7 +1319,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
                         return;
                     }
                     // UIManager.setLookAndFeel(info[index].getClassName());
-                    preferences.laf = LAFMap.get(name);
+                    Singletons.getModel().getPreferences().laf = LAFMap.get(name);
                     UIManager.setLookAndFeel(LAFMap.get(name));
 
                     SwingUtilities.updateComponentTreeUI(c);
@@ -1512,7 +1510,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * @param index
          */
         public static void set(final int index) {
-            preferences.cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
+            Singletons.getModel().getPreferences().cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
             Constant.Runtime.width[0] = widths[index];
             Constant.Runtime.height[0] = heights[index];
         }
@@ -1522,7 +1520,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * @param s
          */
         public static void set(final CardSizeType s) {
-            preferences.cardSize = s;
+            Singletons.getModel().getPreferences().cardSize = s;
             int index = 0;
             for (String str : keys) {
                 if (str.toLowerCase().equals(s.toString())) {
@@ -1580,7 +1578,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * @param index
          */
         public static void set(final int index) {
-            preferences.maxStackSize = values[index];
+            Singletons.getModel().getPreferences().maxStackSize = values[index];
             Constant.Runtime.stackSize[0] = values[index];
         }
 
@@ -1589,7 +1587,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * @param val
          */
         public static void setVal(final int val) {
-            preferences.maxStackSize = val;
+            Singletons.getModel().getPreferences().maxStackSize = val;
             Constant.Runtime.stackSize[0] = val;
         }
     }
@@ -1636,7 +1634,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * @param index
          */
         public static void set(final int index) {
-            preferences.stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
+            Singletons.getModel().getPreferences().stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
             Constant.Runtime.stackOffset[0] = offsets[index];
         }
 
@@ -1645,7 +1643,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
          * @param s
          */
         public static void set(final StackOffsetType s) {
-            preferences.stackOffset = s;
+            Singletons.getModel().getPreferences().stackOffset = s;
             int index = 0;
             for (String str : keys) {
                 if (str.toLowerCase().equals(s.toString())) {
@@ -1742,6 +1740,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      */
     public final boolean exit() {
         try {
+            ForgePreferences preferences = Singletons.getModel().getPreferences();
             preferences.laf = UIManager.getLookAndFeel().getClass().getName();
             preferences.lafFonts = useLAFFonts.isSelected();
             // preferences.newGui = newGuiCheckBox.isSelected();

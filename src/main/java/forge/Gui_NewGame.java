@@ -2,8 +2,12 @@ package forge;
 
 /**
  * Contains a main delegate; this class used to be Forge's entry point.
+ *
+ * The class that used to be here is presently at
+ * {@link forge.view.swing.OldGuiNewGame}, which is slowly being refactored out
+ * of existence.
  */
-public class Gui_NewGame {
+public final class Gui_NewGame {
 
     /**
      * Do not instantiate.
@@ -14,12 +18,10 @@ public class Gui_NewGame {
 
     /**
      * This is a delegate.
-     * 
-     * @deprecated use forge.view.swing.Main.main
-     * 
-     * @see forge.view.swing.Main.main
-     * 
+     *
      * @param args from the OS or command line
+     *
+     * @deprecated use {@link forge.view.swing.Main.main}
      */
     public static void main(final String[] args) {
         forge.view.swing.Main.main(args);
