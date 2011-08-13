@@ -56,5 +56,7 @@ public class AbilityFactory_Cleanup {
 
         if (params.containsKey("ClearRemembered"))
             sa.getSourceCard().clearRemembered();
+        if (params.containsKey("ClearImprinted"))
+            sa.getSourceCard().clearImprinted();
     }
 }
