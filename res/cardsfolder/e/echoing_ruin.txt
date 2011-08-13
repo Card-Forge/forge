@@ -1,6 +1,6 @@
 Name:Echoing Ruin
 ManaCost:1 R
-Types:Instant
+Types:Sorcery
 Text:no text
 A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ SVar=DBDestroyAll | RememberTargets$ True | ForgetOtherTargets$ True | SpellDescription$ Destroy target artifact and all other artifacts with the same name as that artifact.
 SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Remembered.Artifact+Other+sameName | SubAbility$ DBCleanup
