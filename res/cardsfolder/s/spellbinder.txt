@@ -1,0 +1,14 @@
+Name:Spellbinder
+ManaCost:3
+Types:Artifact Equipment
+Text:no text
+K:eqPump 4:0/0
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile an instant card from your hand.
+SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | ChangeNum$ 1
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
+SVar:TrigSpell:AB$ CopySpell | Cost$ 0 | Defined$ Imprinted
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbinder.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/143.jpg
+End

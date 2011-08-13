@@ -7090,6 +7090,7 @@ res/cardsfolder/s/spell_snare.txt svneol=native#text/plain
 res/cardsfolder/s/spell_snip.txt svneol=native#text/plain
 res/cardsfolder/s/spell_syphon.txt svneol=native#text/plain
 res/cardsfolder/s/spellbane_centaur.txt svneol=native#text/plain
+res/cardsfolder/s/spellbinder.txt -text
 res/cardsfolder/s/spellbook.txt svneol=native#text/plain
 res/cardsfolder/s/spellbreaker_behemoth.txt svneol=native#text/plain
 res/cardsfolder/s/spellgorger_barbarian.txt svneol=native#text/plain
