@@ -3,10 +3,10 @@ ManaCost:3
 Types:Artifact
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with CARDNAME to its owner's graveyard.
-SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Unimprint$ True | Destination$ Graveyard | Defined$ Remembered | ChangeNum$ 1 | SubAbility$ DBCleanup
+SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Graveyard | Defined$ Remembered | ChangeNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True | SubAbility$ DBExile
-SVar:DBExile:DB$ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | RememberChanged$ True | ChangeNum$ 1
-A:AB$CopyPermanent | Cost$ 3 T | Defined$ Imprinted | SubAbility$ DBPump | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+SVar:DBExile:DB$ChangeZone | Cost$ 0 |  Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | RememberChanged$ True | ChangeNum$ 1
+A:AB$CopyPermanent | Cost$ 3 T | Defined$ Remembered | SubAbility$ DBPump | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Clones |  KW$ Haste | Permanent$ True | SubAbility$ DBPump2
 SVar:DBPump2:DB$ Pump | Cost$ 0 | Defined$ Clones |  KW$ HIDDEN At the beginning of the end step, exile CARDNAME.
 SVar:RemAIDeck:True
