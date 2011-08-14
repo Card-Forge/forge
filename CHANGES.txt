@@ -275,6 +275,12 @@ Fixes/Features:
 - Updated former references to preferences to use FModel in forge.GuiDisplay4 and in forge.view.swing.OldGuiNewGame.
 - Added simple unit test.
 - Reworked Mimic Vat using only the RememberChanged.
+- Added the recent commit logs to changes.txt.
+- Fixed Echoing Ruin, it is now a Sorcery.
+- Added support for "ClearImprinted" to Cleanup AF. Updated Mimic Vat.
+- Issue 106: Continue refactoring code from Gui_NewGame to other classes. Moved most of forge.view.swing.Main.main's code into forge.model.FModel and forge.view.swing.ApplicationView. Tested and seems to work OK. Reduced Checkstyle, FindBugs, and PMD output in all changed files.
+- Eliminate compiler warnings from the various class files. This involved commenting out some variables, among other things.
+- Spellbinder can only imprint Instants.
 
 
 Many people helped with this version. A special thank you goes out to them:
