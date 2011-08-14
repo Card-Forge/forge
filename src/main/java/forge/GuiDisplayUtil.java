@@ -1227,7 +1227,7 @@ public class GuiDisplayUtil implements NewConstants {
             computerDevExileSetup = devProcessCardsForZone(computerSetupExile, AllZone.getComputerPlayer());
 
         AllZone.getTriggerHandler().suppressMode("ChangesZone");
-
+        AllZone.getCombat().reset();
         for (Card c : humanDevSetup) {
             AllZone.getHumanHand().add(c);
             AllZone.getGameAction().moveToPlay(c);
@@ -1295,10 +1295,55 @@ public class GuiDisplayUtil implements NewConstants {
 
             Card c = AllZone.getCardFactory().getCard(cardinfo[0], player);
 
-            if (cardinfo.length != 2)
+            boolean hasSetCurSet = false;
+            for(String info : cardinfo)
+            {
+                if(info.startsWith("Set:"))
+                {
+                    c.setCurSetCode(info.substring(info.indexOf(':')+1));
+                    hasSetCurSet = true;                    
+                }
+                else if(info.equalsIgnoreCase("Tapped:True"))
+                {
+                    c.tap();
+                }
+                else if(info.startsWith("Counters:"))
+                {
+                    String[] counterStrings = info.substring(info.indexOf(':')+1).split(",");
+                    for(String counter : counterStrings)
+                    {
+                        c.addCounter(Counters.valueOf(counter), 1);
+                    }
+                }
+                else if(info.equalsIgnoreCase("SummonSick:True"))
+                {
+                    c.setSickness(true);
+                }
+                else if(info.equalsIgnoreCase("Morphed:True"))
+                {
+                    if(!c.getCanMorph())
+                    {
+                        System.out.println("Setup game state - Can't morph a card without the morph keyword!");
+                        continue;
+                    }
+                    c.setIsFaceDown(true);
+                    c.setManaCost("");
+                    c.setColor(new ArrayList<Card_Color>()); //remove all colors
+                    c.addColor("0");
+                    c.setBaseAttack(2);
+                    c.setBaseDefense(2);
+                    c.comesIntoPlay();
+                    c.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
+                    c.setType(new ArrayList<String>()); //remove all types
+                    c.addType("Creature");
+                }
+            }
+            
+            if (!hasSetCurSet)
+            {
                 c.setCurSetCode(c.getMostRecentSet());
-            else
-                c.setCurSetCode(cardinfo[1]);
+            }
+                
 
             c.setImageFilename(CardUtil.buildFilename(c));
             for (Trigger trig : c.getTriggers()) {

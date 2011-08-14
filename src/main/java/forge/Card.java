@@ -87,6 +87,7 @@ public class Card extends MyObservable implements Comparable<Card> {
     private boolean dealtDmgToComputerThisTurn = false;
     private boolean sirenAttackOrDestroy = false;
 
+    private boolean canMorph = false;
     private boolean faceDown = false;
     private boolean kicked = false;
     private boolean evoked = false;
@@ -2269,6 +2270,22 @@ public class Card extends MyObservable implements Comparable<Card> {
      */
     public boolean isFaceDown() {
         return faceDown;
+    }
+    
+    /**
+     * <p>setCanMorph.</p>
+     * @param b a boolean.
+     */
+    public void setCanMorph(boolean b) {
+        canMorph = b;
+    }
+    
+    /**
+     * <p>getCanMorph.</p>
+     * @return a boolean.
+     */
+    public boolean getCanMorph() {
+        return canMorph;
     }
 
     /**
