@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import forge.Constant;
+import forge.HttpUtil;
 import forge.properties.ForgePreferences;
 
 //import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
@@ -67,7 +69,19 @@ public class FModel {
         try {
             setPreferences(new ForgePreferences("forge.preferences"));
         } catch (Exception exn) {
-            throw new RuntimeException(exn);
+            throw new RuntimeException(exn); // NOPMD by Braids on 8/13/11 8:21 PM
+        }
+
+        Constant.Runtime.Mill[0] = preferences.millingLossCondition;
+        Constant.Runtime.DevMode[0] = preferences.developerMode;
+        Constant.Runtime.UpldDrft[0] = preferences.uploadDraftAI;
+        Constant.Runtime.RndCFoil[0] = preferences.randCFoil;
+
+        final HttpUtil pinger = new HttpUtil();
+        if (pinger.getURL("http://cardforge.org/draftAI/ping.php").equals("pong")) {
+            Constant.Runtime.NetConn[0] = true;
+        } else {
+            Constant.Runtime.UpldDrft[0] = false;
         }
 
         setBuildInfo(new BuildInfo());
