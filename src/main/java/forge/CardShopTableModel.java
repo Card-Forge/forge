@@ -293,7 +293,6 @@ class CardShopTableModel extends AbstractTableModel {
 
             @Override
             public void valueChanged(ListSelectionEvent arg0) {
-                // TODO Auto-generated method stub
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     cardDetail.setCard(dataNoCopies.get(row));
