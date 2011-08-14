@@ -370,7 +370,7 @@ public class QuestData {
     /**
      * <p>addCards.</p>
      */
-    public void addCards() {
+    public ArrayList<String> addCards() {
         Generator<Card> cards = YieldUtils.toGenerator(AllZone.getCardFactory());
         int nCommon = QuestPreferences.getNumCommon();
         int nUncommon = QuestPreferences.getNumUncommon();
@@ -385,7 +385,7 @@ public class QuestData {
 
         //getAddedCards() uses newCardList
         newCardList = newCards;
-
+        return newCards;
     }
 
     /**

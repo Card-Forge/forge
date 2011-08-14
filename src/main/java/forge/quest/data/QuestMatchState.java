@@ -143,4 +143,21 @@ public class QuestMatchState {
     public boolean didWinRecently() {
         return winRecently;
     }
+    
+    /**
+     * <p>isMatchOver.</p>
+     * @return whether match is complete
+     */
+    public boolean isMatchOver()
+    {
+        return win == 2 || lose == 2;
+    }
+    /**
+     * <p>isMatchOver.</p>
+     * @return whether match is won
+     */
+    public boolean isMatchWon()
+    {
+        return win == 2;
+    }    
 }

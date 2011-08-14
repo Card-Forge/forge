@@ -618,11 +618,7 @@ public class GameAction {
         if (checkEndGameSate()) {
             AllZone.getDisplay().savePrefs();
             frame.dispose();
-            if (!Constant.Quest.fantasyQuest[0])
-                new Gui_WinLose();
-            else
-                new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],
-                        Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
+            new Gui_WinLose();
             return;
         }
 

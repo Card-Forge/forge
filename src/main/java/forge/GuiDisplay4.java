@@ -1124,20 +1124,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         savePrefs();
         dispose();
         Constant.Runtime.matchState.addLose();
-        if (!Constant.Quest.fantasyQuest[0])
-            new Gui_WinLose();
-        else {
-            //new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
-            CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(AllZone.getQuestData(), AllZone.getQuestAssignment());
-            CardList computerList = forge.quest.data.QuestUtil.getComputerCreatures(AllZone.getQuestData(), AllZone.getQuestAssignment());
-
-            int humanLife = AllZone.getQuestData().getLife();
-            int computerLife = 20;
-
-            if (AllZone.getQuestAssignment() != null)
-                computerLife = AllZone.getQuestAssignment().getComputerLife();
-            new Gui_WinLose(humanList, computerList, humanLife, computerLife);
-        }
+        new Gui_WinLose();
     }
 
     // ********** Phase stuff in Display ******************
