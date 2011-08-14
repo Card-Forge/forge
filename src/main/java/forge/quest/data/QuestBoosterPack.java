@@ -86,6 +86,7 @@ public class QuestBoosterPack implements NewConstants {
             // TODO: Braids: "It would also be handy if comments were written 
             // in clear English."
             
+            sets.add("M12");
             sets.add("NPH");
             sets.add("MBS");
             sets.add("SOM");
