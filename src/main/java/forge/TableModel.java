@@ -2,6 +2,8 @@ package forge;
 
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -332,29 +334,17 @@ class TableModel extends AbstractTableModel {
      */
     public void addListeners(final JTable table) {
         //updates card detail, listens to any key strokes
-        table.addKeyListener(new KeyListener() {
-            public void keyPressed(KeyEvent ev) {
-            }
+        table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
 
-            public void keyTyped(KeyEvent ev) {
-            }
-
-            public void keyReleased(KeyEvent ev) {
-                int row = table.getSelectedRow();
-                if (row != -1) {
-                    cardDetail.setCard(dataNoCopies.get(row));
-                }
-            }
-        });
-        //updates card detail, listens to any mouse clicks
-        table.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void valueChanged(ListSelectionEvent arg0) {
+                // TODO Auto-generated method stub
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     cardDetail.setCard(dataNoCopies.get(row));
                 }
             }
+            
         });
 
         //sorts
