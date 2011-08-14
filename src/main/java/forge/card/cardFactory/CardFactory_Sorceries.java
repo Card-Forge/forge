@@ -173,7 +173,7 @@ public class CardFactory_Sorceries {
                 private static final long serialVersionUID = -5809548350739536763L;
 
                 public void execute() {
-                    int i = 0;
+                    //int i = 0;
                     for (Card target : targets) {
                         //if card isn't in play, do nothing
                         if (!AllZoneUtil.isCardInPlay(target)) continue;
@@ -183,7 +183,7 @@ public class CardFactory_Sorceries {
 
                         target.removeExtrinsicKeyword("Haste");
 
-                        i++;
+                        //i++;
                     }
                 }//execute()
             };//Command
@@ -278,6 +278,7 @@ public class CardFactory_Sorceries {
             };//SpellAbility
 
             final Ability freeCast = new Ability(card, "0") {
+                @SuppressWarnings("unused")
                 private static final long serialVersionUID = 4455819149429678456L;
 
                 @Override

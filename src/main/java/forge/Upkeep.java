@@ -793,6 +793,7 @@ public class Upkeep implements java.io.Serializable {
             final Card c = cards.get(i);
 
             final Ability noPay = new Ability(c, "B B B") {
+                @SuppressWarnings("unused")
                 private static final long serialVersionUID = 4820011390853920644L;
 
                 @Override
@@ -815,6 +816,7 @@ public class Upkeep implements java.io.Serializable {
                 String question = "Pay Demonic Hordes upkeep cost?";
                 if (GameActionUtil.showYesNoDialog(c, question)) {
                     final Ability pay = new Ability(c, "0") {
+                        @SuppressWarnings("unused")
                         private static final long serialVersionUID = 4820011440853920644L;
 
                         public void resolve() {
@@ -842,6 +844,7 @@ public class Upkeep implements java.io.Serializable {
             else { //computer
                 if ((c.getController().isComputer() && (ComputerUtil.canPayCost(noPay)))) {
                     final Ability computerPay = new Ability(c, "0") {
+                        @SuppressWarnings("unused")
                         private static final long serialVersionUID = 4820011440852868644L;
 
                         public void resolve() {

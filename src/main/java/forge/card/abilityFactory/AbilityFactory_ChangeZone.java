@@ -1565,7 +1565,7 @@ public class AbilityFactory_ChangeZone {
     private static boolean changeZoneAllCanPlayAI(AbilityFactory af, SpellAbility sa) {
         // Change Zone All, can be any type moving from one zone to another
         Cost abCost = af.getAbCost();
-        Card source = af.getHostCard();
+        //Card source = af.getHostCard();
         HashMap<String, String> params = af.getMapParams();
         String destination = params.get("Destination");
         String origin = params.get("Origin");

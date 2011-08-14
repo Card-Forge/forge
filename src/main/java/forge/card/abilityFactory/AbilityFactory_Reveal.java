@@ -934,7 +934,7 @@ public class AbilityFactory_Reveal {
      * @return a boolean.
      */
     private static boolean scryCanPlayAI(final AbilityFactory af, SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        //Card source = sa.getSourceCard();
 
         double chance = .4;    // 40 percent chance of milling with instant speed stuff
         if (AbilityFactory.isSorcerySpeed(sa))

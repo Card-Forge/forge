@@ -19,6 +19,7 @@ public class Mana_PartTest {
     public void testPayManaCost() {
         {
             //test constructor
+            @SuppressWarnings("unused")
             ManaCost p = new ManaCost("G");
             p = new ManaCost("U");
             p = new ManaCost("W");

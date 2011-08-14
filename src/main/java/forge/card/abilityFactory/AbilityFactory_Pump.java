@@ -869,7 +869,7 @@ public class AbilityFactory_Pump {
     private boolean pumpAllCanPlayAI(SpellAbility sa) {
         String valid = "";
         Random r = MyRandom.random;
-        final Card source = sa.getSourceCard();
+        //final Card source = sa.getSourceCard();
         params = AF.getMapParams();
         final int defense = getNumDefense(sa);
 

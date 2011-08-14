@@ -1,15 +1,27 @@
 package forge.card.abilityFactory;
 
-import forge.*;
-import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.*;
-import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerHandler;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+
+import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.Card;
+import forge.CardList;
+import forge.Command;
+import forge.ComputerUtil;
+import forge.Constant;
+import forge.Counters;
+import forge.MyRandom;
+import forge.Player;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Sub;
+import forge.card.spellability.Cost;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
 
 /**
  * <p>AbilityFactory_Token class.</p>

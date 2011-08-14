@@ -492,6 +492,7 @@ class CardFactory_Auras {
             animate.getRestrictions().setZone(Constant.Zone.Hand);
 
             final Ability attach = new Ability(card, "0") {
+                @SuppressWarnings("unused")
                 private static final long serialVersionUID = 222308932796127795L;
 
                 @Override

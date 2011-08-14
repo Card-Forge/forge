@@ -166,7 +166,7 @@ public class AbilityFactory_Copy {
      * @return a boolean.
      */
     private static boolean copyPermanentCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-    	Card source = sa.getSourceCard();
+    	//Card source = sa.getSourceCard();
         //TODO - I'm sure someone can do this AI better
 
         HashMap<String, String> params = af.getMapParams();

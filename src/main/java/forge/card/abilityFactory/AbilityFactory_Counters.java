@@ -403,7 +403,7 @@ public class AbilityFactory_Counters {
         HashMap<String, String> params = af.getMapParams();
         Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        boolean chance = true;
+        //boolean chance = true;
         boolean preferred = true;
         CardList list;
         Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
@@ -470,8 +470,9 @@ public class AbilityFactory_Counters {
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
-            chance &= subAb.doTrigger(mandatory);
+        if (subAb != null) {
+            //chance &= subAb.doTrigger(mandatory);
+        }
 
         return true;
     }

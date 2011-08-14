@@ -221,6 +221,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if (cardName.equals("Oracle of Mul Daya")) {
             final SpellAbility ability = new Ability(card, "0") {
+                @SuppressWarnings("unused")
                 private static final long serialVersionUID = 2902408812353813L;
 
                 @Override
@@ -546,6 +547,7 @@ public class CardFactory_Creatures {
         else if (cardName.equals("Jhoira of the Ghitu")) {
             final Stack<Card> chosen = new Stack<Card>();
             final SpellAbility ability = new Ability(card, "2") {
+                @SuppressWarnings("unused")
                 private static final long serialVersionUID = 4414609319033894302L;
 
                 @Override
@@ -653,6 +655,7 @@ public class CardFactory_Creatures {
 
             final Ability ability = new Ability(card, "") {
 
+                @SuppressWarnings("unused")
                 private static final long serialVersionUID = -3075569295823682336L;
 
                 @Override

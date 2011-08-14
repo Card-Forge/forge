@@ -389,9 +389,9 @@ public class AbilityFactory_Attach {
 		}
 		
 		int totToughness = 0;
-		int totPower = 0;
+		//int totPower = 0;
 		ArrayList<String> keywords = new ArrayList<String>();
-		boolean grantingAbilities = false;
+		//boolean grantingAbilities = false;
 		
 		for (StaticAbility stAbility : attachSource.getStaticAbilities()){
 			Map<String,String> params = stAbility.getMapParams();
@@ -405,9 +405,9 @@ public class AbilityFactory_Attach {
 				continue;
 			if ((affected.contains(stCheck) || affected.contains("AttachedBy")) ){
 				totToughness += CardFactoryUtil.parseSVar(attachSource, params.get("AddToughness"));
-				totPower += CardFactoryUtil.parseSVar(attachSource, params.get("AddPower"));
+				//totPower += CardFactoryUtil.parseSVar(attachSource, params.get("AddPower"));
 				
-				grantingAbilities |= params.containsKey("AddAbility");
+				//grantingAbilities |= params.containsKey("AddAbility");
 				
 				String kws = params.get("AddKeyword");
 				if (kws != null){

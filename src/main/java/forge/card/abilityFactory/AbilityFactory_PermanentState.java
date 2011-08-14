@@ -182,7 +182,7 @@ public class AbilityFactory_PermanentState {
                 return false;
 
         Target tgt = af.getAbTgt();
-        Card source = sa.getSourceCard();
+        //Card source = sa.getSourceCard();
 
         Random r = MyRandom.random;
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);

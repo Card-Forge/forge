@@ -1,20 +1,31 @@
 package forge;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-
-import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
-
 import java.awt.Color;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.event.MouseInputAdapter;
+
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * <p>
