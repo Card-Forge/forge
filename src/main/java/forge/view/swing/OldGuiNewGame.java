@@ -1,78 +1,11 @@
 package forge.view.swing;
 
-import static net.slightlymagic.braids.util.UtilFunctions.safeToString;
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.TitledBorder;
-
-import net.miginfocom.swing.MigLayout;
 import arcane.ui.util.ManaSymbols;
-
 import com.esotericsoftware.minlog.Log;
-
-import forge.AllZone;
-import forge.BoosterDraft_1;
-import forge.CardList;
-import forge.Command;
-import forge.Constant;
-import forge.Constant_StringArrayList;
-import forge.FileUtil;
-import forge.GUI_ImportPicture;
-import forge.GuiDisplay4;
-import forge.Gui_BoosterDraft;
-import forge.Gui_DeckEditor;
-import forge.Gui_DownloadPictures_LQ;
-import forge.Gui_DownloadPrices;
-import forge.Gui_DownloadSetPictures_LQ;
-import forge.Gui_QuestOptions;
-import forge.ImageCache;
-import forge.MyRandom;
-import forge.PlayerType;
-import forge.SealedDeck;
-import forge.Singletons;
+import forge.*;
 import forge.deck.Deck;
 import forge.deck.DeckManager;
-import forge.deck.generate.Generate2ColorDeck;
-import forge.deck.generate.Generate3ColorDeck;
-import forge.deck.generate.GenerateConstructedDeck;
-import forge.deck.generate.GenerateConstructedMultiColorDeck;
-import forge.deck.generate.GenerateThemeDeck;
+import forge.deck.generate.*;
 import forge.error.BugzReporter;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
@@ -84,6 +17,21 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.MENU;
 import forge.properties.NewConstants.LANG.OldGuiNewGame.MENU_BAR.OPTIONS;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.*;
+import java.util.List;
+
+import static net.slightlymagic.braids.util.UtilFunctions.safeToString;
 
 /*CHOPPIC*/
 
@@ -847,8 +795,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * genDecks.
      * </p>
      *
-     * @param p
-     *            a {@link java.lang.String} object.
+     * @param playerType
+     *             {@link java.lang.String} object.
      */
     private void genDecks(final PlayerType playerType) {
         // TODO: jendave to refactor deck generation
@@ -861,6 +809,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         decks.add("Semi-Random Theme Deck");
         decks.add("2-Color Deck (new)");
         decks.add("3-Color Deck (new)");
+        decks.add("5-Color Deck (new)");
 
         String prompt = "Generate ";
         if (playerType.equals(PlayerType.HUMAN)) {
@@ -884,6 +833,8 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             d = generate2ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(5))) {
             d = generate3ColorDeck(playerType);
+        } else if (o.toString().equals(decks.get(6))) {
+            d = generate5ColorDeck(playerType);
         }
 
         if (playerType.equals(PlayerType.HUMAN)) {
@@ -1088,6 +1039,40 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
         Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
         CardList d = gen.get3ColorDeck(60);
+
+        Deck deck = new Deck(Constant.GameType.Constructed);
+
+        for (int i = 0; i < d.size(); i++) {
+            deck.addMain(d.get(i).getName());
+        }
+
+        return deck;
+
+    }
+
+       /**
+     * <p>
+     * generate3ColorDeck.
+     * </p>
+     *
+     * @param p
+     *            a {@link java.lang.String} object.
+     * @return a {@link forge.deck.Deck} object.
+     */
+    private Deck generate5ColorDeck(final PlayerType p) {
+        Random r = MyRandom.random;
+
+        ArrayList<String> colors = new ArrayList<String>();
+        colors.add("Random");
+        colors.add("white");
+        colors.add("blue");
+        colors.add("black");
+        colors.add("red");
+        colors.add("green");
+
+
+        Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
+        CardList d = gen.get5ColorDeck(60);
 
         Deck deck = new Deck(Constant.GameType.Constructed);
 
