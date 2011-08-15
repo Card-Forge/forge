@@ -281,6 +281,14 @@ Fixes/Features:
 - Issue 106: Continue refactoring code from Gui_NewGame to other classes. Moved most of forge.view.swing.Main.main's code into forge.model.FModel and forge.view.swing.ApplicationView. Tested and seems to work OK. Reduced Checkstyle, FindBugs, and PMD output in all changed files.
 - Eliminate compiler warnings from the various class files. This involved commenting out some variables, among other things.
 - Spellbinder can only imprint Instants.
+- Added the recent commit logs to changes.txt.
+- Quest Cardshop: after selling a card the picture at the right is being updated properly.
+- M12 is already T2, so it should be added here too.
+- Minor api changes in preparation for Gui_WinLose refactoring.
+- Extended Setup Game State. Added named parameters. Tapped = If this is True,well... the card is tapped, ofc. SummonSick = If this is True, the card has Summoning Sickness. Counters = A comma-separated list of counters on the card. Morphed = If this is True, the card is facedown. (It must have the morph keyword for this to work.) Set = Like you previously set SetCode.If absent, the latest printing is used. Ex. "AICardsInPlay=Aphetto Alchemist|Set:ONS|Tapped:True|SummonSick:True|Counters:P1P1,P1P1,M0M2|Morphed:True; Memnite"
+- Removed misleading comments.
+- Fixed Nameless Inversion so that it removes creature subtypes from target creature.
+- First cut of 5 color deck generator.
 
 
 Many people helped with this version. A special thank you goes out to them:
