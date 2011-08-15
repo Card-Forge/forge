@@ -1625,13 +1625,13 @@ public class AbilityFactory {
             }
         }
     }
-    
+
+
     /**
-     * <p>filterListByType.</p>
      *
-     * @param list a {@link forge.CardList} object.
-     * @param params a {@link java.util.HashMap} object.
-     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param list
+     * @param type
+     * @param sa
      * @return a {@link forge.CardList} object.
      */
     public static CardList filterListByType(CardList list, String type, SpellAbility sa) {

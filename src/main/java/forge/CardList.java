@@ -1,15 +1,14 @@
 package forge;
 
 
+import com.google.code.jyield.Generator;
+import com.google.code.jyield.Yieldable;
 import forge.card.cardFactory.CardFactoryUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.Yieldable;
 
 
 /**
@@ -606,13 +605,13 @@ public class CardList implements Iterable<Card> {
     /**
      * <p>getTargetableCards.</p>
      *
-     * @param Source a {@link forge.Card} object.
+     * @param source a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
-    public CardList getTargetableCards(final Card Source) {
+    public CardList getTargetableCards(final Card source) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                return CardFactoryUtil.canTarget(Source, c);
+                return CardFactoryUtil.canTarget(source, c);
             }
         });
     }
@@ -620,7 +619,7 @@ public class CardList implements Iterable<Card> {
     /**
      * <p>getUnprotectedCards.</p>
      *
-     * @param Source a {@link forge.Card} object.
+     * @param source a {@link forge.Card} object.
      * @return a {@link forge.CardList} object.
      */
     public CardList getUnprotectedCards(final Card source) {

@@ -5,7 +5,7 @@
  * They are licensed under both the GPL and the Apache 2.0 license.
  *
  * For documentation on Java-Yield and its generators, see
- * {@link http://code.google.com/p/java-yield/} .
+ * {@link com.google.code.jyield.Generator}.
  */
 package net.slightlymagic.braids.util.generator;
 

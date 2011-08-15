@@ -114,12 +114,17 @@ public abstract class SpellAbility {
      * @return a boolean.
      */
     abstract public boolean canPlay();
-    
-    /** {@inheritDoc} */
+
+
+    /**
+     *
+     * @return  boolean
+     */
     public boolean canAfford() {
     	Player activator = this.getActivatingPlayer();
-    	if (activator == null)
+    	if (activator == null) {
     		activator = this.getSourceCard().getController();
+        }
     	
     	return ComputerUtil.canPayCost(this, activator);
     }

@@ -1,18 +1,17 @@
 /** Licensed under both the GPL and the Apache 2.0 License. */
 package net.slightlymagic.braids.util.generator;
 
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-
-import net.slightlymagic.braids.util.lambda.Lambda1;
-
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
 import com.google.code.jyield.Yieldable;
+import net.slightlymagic.braids.util.lambda.Lambda1;
+
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * For documentation on Java-Yield and its generators, see
- * {@link http://code.google.com/p/java-yield/}
+ * {@link com.google.code.jyield.Generator}.
  */
 public final class GeneratorFunctions {
 

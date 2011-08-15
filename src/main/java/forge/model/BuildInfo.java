@@ -41,7 +41,7 @@ public class BuildInfo {
      *
      * Package access is intentional for unit testing.
      *
-     * @see FModel.getBuildInfo()
+     * @see forge.model.FModel#getBuildInfo()
      */
     BuildInfo() {
         // empty

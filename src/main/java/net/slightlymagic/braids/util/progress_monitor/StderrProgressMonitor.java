@@ -3,14 +3,14 @@ package net.slightlymagic.braids.util.progress_monitor;
 public class StderrProgressMonitor extends BaseProgressMonitor {
 
 	/**
-	 * @see BaseProgressMonitor(int,long)
+	 * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#BaseProgressMonitor(int, long)
 	 */
     public StderrProgressMonitor(int numPhases, long totalUnitsFirstPhase) {
     	this(numPhases, totalUnitsFirstPhase, 2.0f, null);
     }
     
 	/**
-	 * @see BaseProgressMonitor(int,long,float)
+	 * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#BaseProgressMonitor(int, long, float)
 	 */
     public StderrProgressMonitor(int numPhases, long totalUnitsFirstPhase, 
             float minUpdateIntervalSec) 
@@ -19,7 +19,7 @@ public class StderrProgressMonitor extends BaseProgressMonitor {
 	}
     
 	/**
-	 * @see BaseProgressMonitor(int,long,float,float[])
+     * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#BaseProgressMonitor(int, long, float, float[])
 	 */
     public StderrProgressMonitor(int numPhases, long totalUnitsFirstPhase, 
                  float minUpdateIntervalSec, float[] phaseWeights) 
@@ -29,7 +29,7 @@ public class StderrProgressMonitor extends BaseProgressMonitor {
     
     @Override
 	/**
-	 * @see BaseProgressMonitor#incrementUnitsCompletedThisPhase(long)
+	 * @see net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor#BaseProgressMonitor(int)
 	 */
     public void incrementUnitsCompletedThisPhase(long numUnits) {
         super.incrementUnitsCompletedThisPhase(numUnits);

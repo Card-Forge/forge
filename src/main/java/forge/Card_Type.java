@@ -28,12 +28,13 @@ public class Card_Type implements Comparable<Card_Type> {
     }
 
     /**
-     * <p>Constructor for Card_PT.</p>
      *
-     * @param mc          a {@link forge.card.mana.ManaCost} object.
-     * @param c           a {@link forge.Card} object.
-     * @param addToColors a boolean.
-     * @param baseColor   a boolean.
+     * @param types
+     * @param removeSuperType
+     * @param removeCardType
+     * @param removeSubType
+     * @param removeCreatureType
+     * @param stamp
      */
     Card_Type(ArrayList<String> types, boolean removeSuperType, boolean removeCardType, boolean removeSubType, 
     		boolean removeCreatureType, long stamp) {

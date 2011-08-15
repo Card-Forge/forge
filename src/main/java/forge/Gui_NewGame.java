@@ -21,7 +21,7 @@ public final class Gui_NewGame {
      *
      * @param args from the OS or command line
      *
-     * @deprecated use {@link forge.view.swing.Main.main}
+     * @deprecated use {@link forge.view.swing.Main}
      */
     public static void main(final String[] args) {
         forge.view.swing.Main.main(args);

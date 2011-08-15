@@ -748,10 +748,9 @@ public abstract class Player extends MyObservable {
 	}
 
     /**
-     * <p>canTarget.</p>
      *
-     * @param card a {@link forge.Card} object.
-     * @return a boolean.
+     * @param sa
+     * @return  a boolean
      */
     public boolean canTarget(SpellAbility sa) {
     	if (hasKeyword("Shroud") ||
@@ -1814,7 +1813,7 @@ public abstract class Player extends MyObservable {
      * a Player or Planeswalker that this Player must attack if able in an upcoming combat.
      * This is cleared at the end of each combat.
      * 
-     * @param the Player or Planeswalker (Card) to attack
+     * @param o Player or Planeswalker (Card) to attack
      * 
      * @since 1.1.01
      */

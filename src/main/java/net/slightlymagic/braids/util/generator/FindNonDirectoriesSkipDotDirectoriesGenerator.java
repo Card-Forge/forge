@@ -1,10 +1,10 @@
 /** Licensed under both the GPL and the Apache 2.0 License. */
 package net.slightlymagic.braids.util.generator;
 
-import java.io.File;
-
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.Yieldable;
+
+import java.io.File;
 
 /**
  * This is a generator over all of the non-directories residing in a given
@@ -12,7 +12,7 @@ import com.google.code.jyield.Yieldable;
  * dot; this prevents the code from descending into .svn directories.
  * 
  * For documentation on Java-Yield and its generators, see
- * {@link http://code.google.com/p/java-yield/}
+ * {@link com.google.code.jyield.Generator}
  */
 public class FindNonDirectoriesSkipDotDirectoriesGenerator implements Generator<File> {
 	private File startDir;
@@ -36,7 +36,7 @@ public class FindNonDirectoriesSkipDotDirectoriesGenerator implements Generator<
 	 * <p>Yields results to the given Yieldable.  Convert Generator instances to
 	 * Iterables with YieldUtils.toIterable.</p>
 	 * 
-	 * See {@link https://java-yield.googlecode.com/hg/docs/com/google/code/jyield/YieldUtils.html#toIterable(com.google.code.jyield.Generator)}	
+	 * See {@link com.google.code.jyield.YieldUtils#toIterable(com.google.code.jyield.Generator)}
 	 */
 	public void generate(Yieldable<File> yy) {
 		String[] list = startDir.list();

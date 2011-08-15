@@ -8,7 +8,7 @@ import com.google.code.jyield.Yieldable;
  * substitute for passing around and creating temporary
  * lists, collections, and arrays.
  * 
- * @see http://code.google.com/p/jyield/
+ * {@link com.google.code.jyield.Generator}
  */
 public class GeneratorFromArray<T> implements Generator<T> {
 	private T[] array;

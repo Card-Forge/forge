@@ -24,32 +24,30 @@ public class Card_PT {
     /**
      * <p>Constructor for Card_PT.</p>
      *
-     * @param mc          a {@link forge.card.mana.ManaCost} object.
-     * @param c           a {@link forge.Card} object.
-     * @param addToColors a boolean.
-     * @param baseColor   a boolean.
+     * @param newPower     a int.
+     * @param newToughness a int.
+     * @param stamp        a long.
      */
     Card_PT(int newPower, int newToughness, long stamp) {
-    	power = newPower;
-    	toughness = newToughness;
-    	timeStamp = stamp;
+        power = newPower;
+        toughness = newToughness;
+        timeStamp = stamp;
     }
-    
+
     public int getPower() {
-    	return power;
+        return power;
     }
-    
+
     public int getToughness() {
-    	return toughness;
+        return toughness;
     }
 
     /**
      * <p>equals.</p>
      *
-     * @param cost        a {@link java.lang.String} object.
-     * @param c           a {@link forge.Card} object.
-     * @param addToColors a boolean.
-     * @param time        a long.
+     * @param newPower     a int.
+     * @param newToughness a int.
+     * @param stamp        a long.
      * @return a boolean.
      */
     public boolean equals(int newPower, int newToughness, long stamp) {

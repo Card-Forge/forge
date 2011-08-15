@@ -173,13 +173,7 @@ public class GameAction {
         return c;
     }
 
-    /**
-     * <p>changeController.</p>
-     *
-     * @param list          a {@link forge.CardList} object.
-     * @param oldController a {@link forge.Player} object.
-     * @param newController a {@link forge.Player} object.
-     */ /*
+     /*
     public void changeController(CardList list, Player oldController, Player newController) {
         if (oldController.equals(newController))
             return;
@@ -210,6 +204,10 @@ public class GameAction {
         ((PlayerZone_ComesIntoPlay) AllZone.getComputerBattlefield()).setTriggers(true);
     }*/
 
+    /**
+     *
+     * @param c
+     */
     public void controllerChange_ZoneCorrection(Card c)
     {
         System.out.println("Correcting zone for " + c.toString());

@@ -159,9 +159,7 @@ public class GuiUtils {
     /**
      * Like getChoiceOptional, but this takes an Iterator instead of a 
      * variable number of arguments.
-     * 
-     * @see #getChoiceOptional(String, T...)
-     * @see #getChoices(String, int, int, Object...)
+     *
      *
      * @param message a {@link java.lang.String} object.
      * @param choices an Iterator over T objects.

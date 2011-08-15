@@ -1,16 +1,16 @@
 package forge;
 
+import com.google.code.jyield.Generator;
+import com.google.code.jyield.YieldUtils;
 import forge.card.trigger.TriggerHandler;
 import forge.error.ErrorViewer;
+import forge.gui.MultiPhaseProgressMonitorWithETA;
 import forge.properties.NewConstants;
+import net.slightlymagic.braids.util.UtilFunctions;
+import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
+import net.slightlymagic.braids.util.generator.GeneratorFunctions;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.Locale;
@@ -19,15 +19,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
-
-import net.slightlymagic.braids.util.UtilFunctions;
-import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
-import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-
-import forge.gui.MultiPhaseProgressMonitorWithETA;
 
 
 /**
@@ -72,7 +63,6 @@ public class CardReader implements Runnable, NewConstants {
      * @param theMapToFill  maps card names to Card instances; this is where we
      * place the cards once read
      *
-     * @see CardReader(File,Map,boolean)
      */
     public CardReader(final File theCardsFolder, final Map<String, Card> theMapToFill) {
         this(theCardsFolder, theMapToFill, true);
