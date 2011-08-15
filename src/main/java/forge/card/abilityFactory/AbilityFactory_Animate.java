@@ -355,8 +355,8 @@ public class AbilityFactory_Animate {
         if (params.containsKey("Toughness"))
             toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
         
-        if (power != -1 || toughness != -1)
-        	timest = AllZone.getNextTimestamp();
+        // Every Animate event needs a unique time stamp
+        timest = AllZone.getNextTimestamp();
         
         final long timestamp = timest;
 
@@ -784,10 +784,10 @@ public class AbilityFactory_Animate {
         int toughness = -1;
         if (params.containsKey("Toughness"))
             toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
-        
-        if (power != -1 || toughness != -1)
-        	timest = AllZone.getNextTimestamp();
-        
+
+        // Every Animate event needs a unique time stamp
+        timest = AllZone.getNextTimestamp();
+
         final long timestamp = timest;
 
         boolean permanent = params.containsKey("Permanent") ? true : false;

@@ -4,6 +4,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -3174,8 +3175,12 @@ public class Card extends MyObservable implements Comparable<Card> {
     	if (!changedCardTypes.isEmpty()) {
     	
 	    	ArrayList<String> newType = new ArrayList<String>(type);
-	    	ArrayList<Card_Type> types = sortByTimestamp(changedCardTypes);
-	    	
+	    	ArrayList<Card_Type> types = changedCardTypes;
+            //TODO: Any reason why changedCardTypes can't be sorted in place
+	    	//      Does changedCardTypes ever get out of increasing time
+	    	//      stamp order?
+	    	Collections.sort(types);  // sorts types by timeStamp
+
 	    	for (Card_Type ct : types) {
 	    		ArrayList<String> removeTypes = new ArrayList<String>();
 	    		//remove old types
@@ -3203,21 +3208,7 @@ public class Card extends MyObservable implements Comparable<Card> {
         return new ArrayList<String>(type);
     }
     
-    private ArrayList<Card_Type> sortByTimestamp(ArrayList<Card_Type> cardTypes) {
-    	ArrayList<Card_Type> remainingCardTypes = cardTypes;
-    	ArrayList<Card_Type> types = new ArrayList<Card_Type>();
-    	for(int i = 0; i < cardTypes.size(); i++) {
-    		Card_Type nextCT = remainingCardTypes.get(i);
-    		long nextLowest = nextCT.getTimestamp();
-    		for(Card_Type ct : remainingCardTypes) {
-    			if (nextLowest > ct.getTimestamp())
-    				nextCT = ct;
-    		}
-    		types.add(nextCT);
-    	}
-    	return types;
-    }
-    
+        
     public void addChangedCardTypes(ArrayList<String> types, boolean removeSuperTypes, boolean removeCardTypes, 
     		boolean removeSubTypes, boolean removeCreatureTypes, long timestamp) {
    
