@@ -1,0 +1,14 @@
+Name:Marsh Flitter
+ManaCost:3 B
+Types:Creature Faerie Rogue
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 black Goblin Rogue creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Goblin Rogue  | TokenTypes$ Creature,Goblin,Rogue | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1
+A:AB$ Animate | Cost$ Sac<1/Goblin> | Defined$ Self | Power$ 3 | Toughness$ 3 | SpellDescription$ Sacrifice a Goblin: CARDNAME becomes 3/3 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_flitter.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/125.jpg
+End

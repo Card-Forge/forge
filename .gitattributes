@@ -5066,6 +5066,7 @@ res/cardsfolder/n/necropouncer.txt svneol=native#text/plain
 res/cardsfolder/n/necrosavant.txt svneol=native#text/plain
 res/cardsfolder/n/necroskitter.txt svneol=native#text/plain
 res/cardsfolder/n/necrotic_sliver.txt svneol=native#text/plain
+res/cardsfolder/n/nectar_faerie.txt -text
 res/cardsfolder/n/need_for_speed.txt svneol=native#text/plain
 res/cardsfolder/n/needle_specter.txt svneol=native#text/plain
 res/cardsfolder/n/needle_storm.txt svneol=native#text/plain
@@ -6297,6 +6298,7 @@ res/cardsfolder/r/rustspore_ram.txt svneol=native#text/plain
 res/cardsfolder/r/ruthless_cullblade.txt svneol=native#text/plain
 res/cardsfolder/r/ruthless_invasion.txt svneol=native#text/plain
 res/cardsfolder/r/ryusei_the_falling_star.txt svneol=native#text/plain
+res/cardsfolder/s/marsh_flitter.txt -text
 res/cardsfolder/s/saber_ants.txt svneol=native#text/plain
 res/cardsfolder/s/saberclaw_golem.txt svneol=native#text/plain
 res/cardsfolder/s/sabertooth_alley_cat.txt svneol=native#text/plain
@@ -8527,6 +8529,7 @@ res/cardsfolder/w/weatherseed_treefolk.txt svneol=native#text/plain
 res/cardsfolder/w/web.txt svneol=native#text/plain
 res/cardsfolder/w/wee_dragonauts.txt svneol=native#text/plain
 res/cardsfolder/w/weed_pruner_poplar.txt svneol=native#text/plain
+res/cardsfolder/w/weed_strangle.txt -text
 res/cardsfolder/w/wei_ambush_force.txt svneol=native#text/plain
 res/cardsfolder/w/wei_elite_companions.txt svneol=native#text/plain
 res/cardsfolder/w/wei_infantry.txt svneol=native#text/plain
