@@ -69,7 +69,7 @@
     </module>
 
     <module name="TreeWalker">
-
+        <property name="cacheFile" value="${cacheFile}"/>
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocMethod">

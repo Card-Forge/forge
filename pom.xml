@@ -432,9 +432,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.7</version>
                 <configuration>
                     <configLocation>${basedir}/src/main/config/forge_checks.xml</configLocation>
+                    <propertyExpansion>
+                        cacheFile=${project.build.directory}/checkstyle-cachefile
+                    </propertyExpansion>
                 </configuration>
             </plugin>
 
@@ -464,13 +467,12 @@
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>2.3.2</version>
             </plugin>
-            <!--
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.5.1</version>
             </plugin>
--->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
