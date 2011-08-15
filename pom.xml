@@ -771,6 +771,13 @@
                         <version>1.7</version>
                         <executions>
                             <execution>
+                                <id>released-version</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>released-version</goal>
+                                </goals>
+                            </execution>
+                            <execution>
                                 <id>attach-distribution</id>
                                 <phase>package</phase>
                                 <goals>
@@ -881,6 +888,13 @@
                         <artifactId>build-helper-maven-plugin</artifactId>
                         <version>1.7</version>
                         <executions>
+                            <execution>
+                                <id>released-version</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>released-version</goal>
+                                </goals>
+                            </execution>
                             <execution>
                                 <id>attach-distribution-osx</id>
                                 <phase>package</phase>
