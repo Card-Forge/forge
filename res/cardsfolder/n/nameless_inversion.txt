@@ -2,7 +2,8 @@ Name:Nameless Inversion
 ManaCost:1 B
 Types:Tribal Instant Shapeshifter
 Text:no text
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 and loses all creature types until end of turn.
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SubAbility$ SVar=DBAnimate |SpellDescription$ Target creature gets +3/-3 and loses all creature types until end of turn.
+SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Types$ Creature | OverwriteTypes$ True
 K:Changeling
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
