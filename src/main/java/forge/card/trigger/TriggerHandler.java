@@ -266,9 +266,9 @@ public class TriggerHandler {
             return;
         }
         //AP
-        for (Trigger regtrig : registeredTriggers) {
-            if (regtrig.getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn())) {
-                runSingleTrigger(regtrig, mode, runParams);
+        for (int i=0;i<registeredTriggers.size();i++) {
+            if (registeredTriggers.get(i).getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn())) {
+                runSingleTrigger(registeredTriggers.get(i), mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggers.size(); i++) {
@@ -282,9 +282,9 @@ public class TriggerHandler {
         }
 
         //NAP
-        for (Trigger regtrig : registeredTriggers) {
-            if (regtrig.getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn().getOpponent())) {
-                runSingleTrigger(regtrig, mode, runParams);
+        for (int i=0;i<registeredTriggers.size();i++) {
+            if (registeredTriggers.get(i).getHostCard().getController().equals(AllZone.getPhase().getPlayerTurn().getOpponent())) {
+                runSingleTrigger(registeredTriggers.get(i), mode, runParams);
             }
         }
         for (int i = 0; i < delayedTriggers.size(); i++) {
