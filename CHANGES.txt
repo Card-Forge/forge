@@ -289,6 +289,14 @@ Fixes/Features:
 - Removed misleading comments.
 - Fixed Nameless Inversion so that it removes creature subtypes from target creature.
 - First cut of 5 color deck generator.
+- Added the recent commit logs to changes.txt.
+- Fixed bugs related to Animate AF, see bug issue #137.
+- Removed coburtura reports for now.
+- Fixed releasedVersion in pom.xml.
+- Updates to checkstyle, new version of plugin needs cachefile prop.
+- Fixed javadoc comments.
+- Added support for RemoveSuperTypes, RemoveCardTypes, RemoveSubTypes, and RemoveCreatureTypes to Animate AF.
+- Fixed Nameless Inversion to only remove creature types.
 
 
 Many people helped with this version. A special thank you goes out to them:
