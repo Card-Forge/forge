@@ -499,11 +499,13 @@ public class AbilityFactory_Animate {
 		boolean removeSuperTypes = false;
 	    boolean removeCardTypes = false;
 	    boolean removeSubTypes = false;
+	    boolean removeCreatureTypes = false;
 	    
 	    if (params.containsKey("OverwriteTypes")) {
 	    	removeSuperTypes = true;
 		    removeCardTypes = true;
 		    removeSubTypes = true;
+		    removeCreatureTypes = true;
 	    }
 	    
 	    if (params.containsKey("KeepSupertypes"))
@@ -511,12 +513,28 @@ public class AbilityFactory_Animate {
 	    
 	    if (params.containsKey("KeepCardTypes"))
 		    removeCardTypes = false;
+	    
+	    if (params.containsKey("RemoveSuperTypes")) {
+            removeSuperTypes = true;
+        }
+        
+        if (params.containsKey("RemoveCardTypes")) {
+            removeCardTypes = true;
+        }
+        
+        if (params.containsKey("RemoveSubTypes")) {
+            removeSubTypes = true;
+        }
+        
+        if (params.containsKey("RemoveCreatureTypes")) {
+            removeCreatureTypes = true;
+        }
         
         if (power != -1 || toughness != -1)
     		c.addNewPT(power, toughness, timestamp);
 
         if (!types.isEmpty())
-        	c.addChangedCardTypes(types, removeSuperTypes, removeCardTypes, removeSubTypes, removeSubTypes, timestamp);
+        	c.addChangedCardTypes(types, removeSuperTypes, removeCardTypes, removeSubTypes, removeCreatureTypes, timestamp);
         	
         for (String k : keywords) {
             if (k.startsWith("HIDDEN"))
