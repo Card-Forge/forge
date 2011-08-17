@@ -1,0 +1,12 @@
+Name:Amoeboid Changeling
+ManaCost:1 U
+Types:Creature Shapeshifter
+Text:no text
+PT:1/1
+K:Changeling
+A:AB$ Pump | Cost$ T |ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Changeling | SpellDescription$ Target creature gains all creature types until end of turn.
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Creature | RemoveCreatureTypes$ True| IsCurse$ True | SpellDescription$ Target creature loses all creature types until end of turn.
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/amoeboid_changeling.jpg
+End

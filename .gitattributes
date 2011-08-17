@@ -263,6 +263,7 @@ res/cardsfolder/a/ambush.txt svneol=native#text/plain
 res/cardsfolder/a/ambush_commander.txt svneol=native#text/plain
 res/cardsfolder/a/ambush_party.txt svneol=native#text/plain
 res/cardsfolder/a/amnesia.txt svneol=native#text/plain
+res/cardsfolder/a/amoeboid_changeling.txt -text
 res/cardsfolder/a/amok.txt svneol=native#text/plain
 res/cardsfolder/a/amphibious_kavu.txt svneol=native#text/plain
 res/cardsfolder/a/amphin_cutthroat.txt svneol=native#text/plain
@@ -4432,6 +4433,7 @@ res/cardsfolder/l/lotus_petal.txt svneol=native#text/plain
 res/cardsfolder/l/lotus_vale.txt svneol=native#text/plain
 res/cardsfolder/l/lovisa_coldeyes.txt svneol=native#text/plain
 res/cardsfolder/l/lowland_giant.txt svneol=native#text/plain
+res/cardsfolder/l/lowland_oaf.txt -text
 res/cardsfolder/l/loxodon_anchorite.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_convert.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_gatekeeper.txt svneol=native#text/plain
@@ -4476,6 +4478,7 @@ res/cardsfolder/l/lymph_sliver.txt svneol=native#text/plain
 res/cardsfolder/l/lynx.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_bowmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_huntmaster.txt svneol=native#text/plain
+res/cardsfolder/l/lys_alana_scarblade.txt -text
 res/cardsfolder/l/lyzolda_the_blood_witch.txt svneol=native#text/plain
 res/cardsfolder/m/ma_chao_western_warrior.txt svneol=native#text/plain
 res/cardsfolder/m/macabre_waltz.txt svneol=native#text/plain
@@ -4719,6 +4722,7 @@ res/cardsfolder/m/mighty_leap.txt svneol=native#text/plain
 res/cardsfolder/m/mijae_djinn.txt svneol=native#text/plain
 res/cardsfolder/m/mikokoro_center_of_the_sea.txt svneol=native#text/plain
 res/cardsfolder/m/militant_monk.txt svneol=native#text/plain
+res/cardsfolder/m/militias_pride.txt -text
 res/cardsfolder/m/millikin.txt svneol=native#text/plain
 res/cardsfolder/m/millstone.txt svneol=native#text/plain
 res/cardsfolder/m/mimic_vat.txt -text
@@ -5844,6 +5848,7 @@ res/cardsfolder/q/quirion_explorer.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_ranger.txt svneol=native#text/plain
 res/cardsfolder/q/quirion_trailblazer.txt svneol=native#text/plain
 res/cardsfolder/q/qumulox.txt svneol=native#text/plain
+res/cardsfolder/r/heal_the_scars.txt -text
 res/cardsfolder/r/rabble_rouser.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_elephant.txt svneol=native#text/plain
 res/cardsfolder/r/rabid_rats.txt svneol=native#text/plain
