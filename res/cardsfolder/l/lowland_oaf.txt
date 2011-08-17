@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T |ValidTgts$ Goblin.YouCtrl | TgtPrompt$ Select Goblin you c
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_oaf.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/184.jpg
 End

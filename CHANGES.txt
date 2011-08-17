@@ -297,6 +297,13 @@ Fixes/Features:
 - Fixed javadoc comments.
 - Added support for RemoveSuperTypes, RemoveCardTypes, RemoveSubTypes, and RemoveCreatureTypes to Animate AF.
 - Fixed Nameless Inversion to only remove creature types.
+- Added the recent commit logs to changes.txt.
+- Replaced a couple of foreach loops with regular for-loops to avoid ConcurrentModificationException in TriggerHandler.
+- Fixed Howling Banshee ETB Check.
+- Hide old deck generators.
+- Fixed problem with checkstyle eclipse integration.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:

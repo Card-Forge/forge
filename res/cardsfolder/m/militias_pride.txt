@@ -6,5 +6,5 @@ T:Mode$ Attacks | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefie
 SVar:TrigToken:AB$Token | Cost$ 1 | TokenAmount$ 1 | TokenName$ KithKin Soldier | TokenTypes$ Creature,Soldier,Kithkin | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenTapped$ True | TokenAttacking$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/militias_pride.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/30.jpg
 End
-

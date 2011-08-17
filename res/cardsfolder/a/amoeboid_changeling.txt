@@ -9,4 +9,5 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amoeboid_changeling.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/51.jpg
 End

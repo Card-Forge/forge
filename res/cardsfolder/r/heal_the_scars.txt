@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heal_the_scars.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/217.jpg
 End
