@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each player loses 3 life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Each | LifeAmount$ 3
+SVar:TrigLoseLife:DB$LoseLife | Cost$ 0 | Defined$ Each | LifeAmount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_banshee.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/100.jpg
