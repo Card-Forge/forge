@@ -803,13 +803,16 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         Deck d = null;
 
         ArrayList<String> decks = new ArrayList<String>();
-        decks.add("2-Color Deck (original)");
-        decks.add("3-Color Deck (original)");
-        decks.add("5-Color Deck (original)");
+        decks.add("2-Color Deck");
+        decks.add("3-Color Deck");
+        decks.add("5-Color Deck");
+        //decks.add("2-Color Deck (original)");
+        //decks.add("3-Color Deck (original)");
+        //decks.add("5-Color Deck (original)");
         decks.add("Semi-Random Theme Deck");
-        decks.add("2-Color Deck (new)");
-        decks.add("3-Color Deck (new)");
-        decks.add("5-Color Deck (new)");
+        //decks.add("2-Color Deck (new)");
+        //decks.add("3-Color Deck (new)");
+        //decks.add("5-Color Deck (new)");
 
         String prompt = "Generate ";
         if (playerType.equals(PlayerType.HUMAN)) {
@@ -822,19 +825,22 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         Object o = GuiUtils.getChoice(prompt, decks.toArray());
 
         if (o.toString().equals(decks.get(0))) {
-            d = generateConstructedDeck();
+            //d = generateConstructedDeck();
+            d = generate2ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(1))) {
-            d = generateConstructed3ColorDeck();
+            //d = generateConstructed3ColorDeck();
+            d = generate3ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(2))) {
-            d = generateConstructed5ColorDeck();
+            //d = generateConstructed5ColorDeck();
+            d = generate5ColorDeck(playerType);
         } else if (o.toString().equals(decks.get(3))) {
             d = generateConstructedThemeDeck();
-        } else if (o.toString().equals(decks.get(4))) {
-            d = generate2ColorDeck(playerType);
-        } else if (o.toString().equals(decks.get(5))) {
-            d = generate3ColorDeck(playerType);
-        } else if (o.toString().equals(decks.get(6))) {
-            d = generate5ColorDeck(playerType);
+        //} else if (o.toString().equals(decks.get(4))) {
+        //    d = generate2ColorDeck(playerType);
+        //} else if (o.toString().equals(decks.get(5))) {
+        //    d = generate3ColorDeck(playerType);
+        //} else if (o.toString().equals(decks.get(6))) {
+        //    d = generate5ColorDeck(playerType);
         }
 
         if (playerType.equals(PlayerType.HUMAN)) {
@@ -844,14 +850,14 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
         }
     }
 
-    /**
+    /*
      * <p>
      * generateConstructedDeck.
      * </p>
      *
      * @return a {@link forge.deck.Deck} object.
      */
-    private Deck generateConstructedDeck() {
+/*    private Deck generateConstructedDeck() {
         GenerateConstructedDeck gen = new GenerateConstructedDeck();
         CardList name = gen.generateDeck();
         Deck deck = new Deck(Constant.GameType.Constructed);
@@ -860,16 +866,16 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             deck.addMain(name.get(i).getName());
         }
         return deck;
-    }
+    }*/
 
-    /**
+    /*
      * <p>
      * generateConstructed3ColorDeck.
      * </p>
      *
      * @return a {@link forge.deck.Deck} object.
      */
-    private Deck generateConstructed3ColorDeck() {
+/*    private Deck generateConstructed3ColorDeck() {
         GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
         CardList name = gen.generate3ColorDeck();
         Deck deck = new Deck(Constant.GameType.Constructed);
@@ -878,16 +884,16 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             deck.addMain(name.get(i).getName());
         }
         return deck;
-    }
+    }*/
 
-    /**
+    /*
      * <p>
      * generateConstructed5ColorDeck.
      * </p>
      *
      * @return a {@link forge.deck.Deck} object.
      */
-    private Deck generateConstructed5ColorDeck() {
+/*    private Deck generateConstructed5ColorDeck() {
         GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
         CardList name = gen.generate5ColorDeck();
         Deck deck = new Deck(Constant.GameType.Constructed);
@@ -896,7 +902,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             deck.addMain(name.get(i).getName());
         }
         return deck;
-    }
+    }*/
 
     /**
      * <p>
@@ -1060,15 +1066,15 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
      * @return a {@link forge.deck.Deck} object.
      */
     private Deck generate5ColorDeck(final PlayerType p) {
-        Random r = MyRandom.random;
+        //Random r = MyRandom.random;
 
-        ArrayList<String> colors = new ArrayList<String>();
-        colors.add("Random");
-        colors.add("white");
-        colors.add("blue");
-        colors.add("black");
-        colors.add("red");
-        colors.add("green");
+        //ArrayList<String> colors = new ArrayList<String>();
+        //colors.add("Random");
+        //colors.add("white");
+        //colors.add("blue");
+        //colors.add("black");
+        //colors.add("red");
+        //colors.add("green");
 
 
         Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
