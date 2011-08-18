@@ -5,7 +5,7 @@
     <property name="cacheFile" value="/target/checkstyle-cachefile"/>
     <additional-data name="protect-config-file" value="false"/>
   </local-check-config>
-  <fileset name="all" enabled="true" check-config-name="Forge Checks" local="false">
+  <fileset name="all" enabled="true" check-config-name="Forge Checkstyle Config" local="true">
     <file-match-pattern match-pattern="." include-pattern="true"/>
   </fileset>
   <filter name="WriteProtectedFiles" enabled="true"/>
