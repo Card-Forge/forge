@@ -4596,6 +4596,7 @@ res/cardsfolder/m/marrow_shards.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_boa.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_crocodile.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_flats.txt svneol=native#text/plain
+res/cardsfolder/m/marsh_flitter.txt -text
 res/cardsfolder/m/marsh_gas.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_goblins.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_lurker.txt svneol=native#text/plain
@@ -6303,7 +6304,6 @@ res/cardsfolder/r/rustspore_ram.txt svneol=native#text/plain
 res/cardsfolder/r/ruthless_cullblade.txt svneol=native#text/plain
 res/cardsfolder/r/ruthless_invasion.txt svneol=native#text/plain
 res/cardsfolder/r/ryusei_the_falling_star.txt svneol=native#text/plain
-res/cardsfolder/s/marsh_flitter.txt -text
 res/cardsfolder/s/saber_ants.txt svneol=native#text/plain
 res/cardsfolder/s/saberclaw_golem.txt svneol=native#text/plain
 res/cardsfolder/s/sabertooth_alley_cat.txt svneol=native#text/plain
