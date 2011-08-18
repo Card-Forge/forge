@@ -316,7 +316,82 @@ Many people helped with this version. A special thank you goes out to them:
 
 Added many cards, including:
 
-
+Mistmeadow Witch
+Amber Prison
+Ashnod's Battle Gear
+Ashes of the Fallen
+Chaos Warp
+Chariot of the Sun
+Endoskeleton
+Heed the Mists
+Infernal Genesis
+Open the Vaults
+Rest for the Weary
+View from Above
+Remembrance
+Visions of Beyond
+Veiled Serpent
+Balduvian Hydra
+Everglove Courier
+Flamestick Courier
+Flowstone Armor
+Frightshroud Courier
+Ghosthelm Courier
+Hallowed Healer
+Hisoka's Guard
+Riptide Entrancer
+Treacherous Urge
+Emblem of the Warmind
+Llanowar Teborn
+Pact of the Titan
+Riddle of Lightning
+Saltskitter
+Steamflogger Boss
+Judge Unworthy
+Petrified Plating
+Putrid Cyclops
+Frenzy Sliver
+Oni Possession
+Pit Spawn
+Sand Squid
+Spirit Shield
+Tawnos's Weaponry
+Ice Floe
+Mana Leech
+Mole Worms
+Pyromancer's Swath
+Reality Anchor
+Tidewater Minion
+Restock
+Grozoth
+Elephant Resurgence
+Thalakos Dreamsower
+Whip Vine
+Zelyon Sword
+Lumithread Field
+Bitter Ordeal
+Workfang Behemoth
+Worldgorger Dragon
+Planar Guide
+Dwarven Song
+Heavens Gate
+Sea Kings Blessing
+Sylvan Paradise
+Touch of Darkness
+Darksteel Pendant
+Portcullis
+Daybreak Coronet
+Mimic Vat
+Spellbinder
+Nectar Faerie
+Marsh Flitter
+Weed Strangle
+Whirlpool Whelm
+Amoeboid Changeling
+Heal the Scars
+Lowland Oaf
+Lys Alana Scarblade
+Militia's Pride
 
 
 end
