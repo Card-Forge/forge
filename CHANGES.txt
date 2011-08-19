@@ -32,7 +32,7 @@ Your decks can be placed in the decks folder, your pics can be placed in the pic
 
 Fixes/Features:
 
-- Some cleanup in Card.java
+- Some cleanup in Card.java.
 - Changed usage of outdated Card.abilityUsed in most circumstances.
 - Removed last beta's material from changes.txt.
 - Restored setAbilityUsed.
