@@ -1,16 +1,12 @@
 package forge;
 
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
-import forge.card.trigger.TriggerHandler;
-import forge.error.ErrorViewer;
-import forge.gui.MultiPhaseProgressMonitorWithETA;
-import forge.properties.NewConstants;
-import net.slightlymagic.braids.util.UtilFunctions;
-import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
-import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.Locale;
@@ -19,6 +15,20 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import net.slightlymagic.braids.util.UtilFunctions;
+import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
+import net.slightlymagic.braids.util.generator.GeneratorFunctions;
+import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
+import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
+
+import com.google.code.jyield.Generator;
+import com.google.code.jyield.YieldUtils;
+
+import forge.card.trigger.TriggerHandler;
+import forge.error.ErrorViewer;
+import forge.properties.NewConstants;
+import forge.view.FView;
 
 
 /**
@@ -165,12 +175,19 @@ public class CardReader implements Runnable, NewConstants {
     protected final Card loadCardsUntilYouFind(final String cardName) {
         Card result = null;
 
-        MultiPhaseProgressMonitorWithETA monitor;
+        BraidsProgressMonitor monitor = null;
+        final FView view = Singletons.getView();
+        if (view != null) {
+            monitor = view.getCardLoadingProgressMonitor();
+        }
+
+        if (monitor == null) {
+            monitor = new StderrProgressMonitor(1, 0L);
+        }
+
 
         if (zip != null) {
-            monitor = new MultiPhaseProgressMonitorWithETA("Forge - Loading card database from zip file", 1,
-                    estimatedFilesRemaining, 1.0f);
-
+            monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
             ZipEntry entry;
 
             // zipEnum was initialized in the constructor.
@@ -197,8 +214,7 @@ public class CardReader implements Runnable, NewConstants {
                 findNonDirsIterable = YieldUtils.toIterable(findNonDirsGen);
             }
 
-            monitor = new MultiPhaseProgressMonitorWithETA("Forge - Loading card database from files", 1,
-                    estimatedFilesRemaining, 1.0f);
+            monitor.setTotalUnitsThisPhase(estimatedFilesRemaining);
 
             for (File cardTxtFile : findNonDirsIterable) {
                 if (!cardTxtFile.getName().endsWith(".txt")) {

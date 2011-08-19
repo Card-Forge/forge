@@ -8,6 +8,7 @@ import forge.view.swing.OldGuiNewGame;
 import net.slightlymagic.braids.util.ClumsyRunnable;
 import net.slightlymagic.braids.util.testng.BraidsAssertFunctions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Set;
@@ -24,12 +25,13 @@ import java.util.TreeSet;
 @Test(groups = {"UnitTest"}, timeOut = 5000)
 public class CardFactoryTest implements NewConstants {
 
-    private static CardFactoryInterface factory;
-    static {
+    private CardFactoryInterface factory;
+
+    @BeforeMethod
+    public final void setUp() {
         OldGuiNewGame.loadDynamicGamedata();
         factory = new LazyCardFactory(ForgeProps.getFile(CARDSFOLDER));
     }
-
 
     /**
      * Just a quick test to see if Arc-Slogger is in the database, and if it
@@ -44,10 +46,8 @@ public class CardFactoryTest implements NewConstants {
 
     /**
      * Make sure the method throws an exception when it's supposed to.
-     *
-     * This doesn't work with LazyCardFactory, so it is too slow to enable by default.
      */
-    @Test(enabled = false, timeOut = 5000)
+    @Test(enabled = true, timeOut = 5000)
     public final void test_getRandomCombinationWithoutRepetition_tooLarge() {
         BraidsAssertFunctions.assertThrowsException(IllegalArgumentException.class,
                 new ClumsyRunnable() {
@@ -72,6 +72,7 @@ public class CardFactoryTest implements NewConstants {
      */
     @Test(enabled = false, timeOut = 5000)
     public final void test_getRandomCombinationWithoutRepetition_oneTenth() {
+        factory = new PreloadingCardFactory(ForgeProps.getFile(CARDSFOLDER));
         int divisor = 10;
         final CardList actual = factory.getRandomCombinationWithoutRepetition(factory.size() / divisor);
 

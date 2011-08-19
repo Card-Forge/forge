@@ -1,5 +1,6 @@
 package forge.view;
 
+import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 import forge.model.FModel;
 
 /**
@@ -14,5 +15,12 @@ public interface FView {
      * @param model  the model that has finished bootstrapping
      */
     void setModel(FModel model);
+
+    /**
+     * Get the progress monitor for loading all cards at once.
+     * 
+     * @return a progress monitor having only one phase; may be null
+     */
+    BraidsProgressMonitor getCardLoadingProgressMonitor();
 
 }

@@ -1,7 +1,12 @@
 package forge.view.swing;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import net.slightlymagic.braids.util.UtilFunctions;
+import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -22,11 +27,46 @@ import forge.view.swing.OldGuiNewGame.CardStackOffsetAction;
  * The main view for Forge: a java swing application.
  */
 public class ApplicationView implements FView {
+
+    private SplashFrame splashFrame;
+
     /**
-     * Constructor.
+     * The splashFrame field is guaranteed to exist when this constructor
+     * exits. 
      */
-    public ApplicationView() { // NOPMD by Braids on 8/7/11 1:14 PM: Damnation if it's here; Damnation if it's not.
-        // TODO: insert splash window here
+    public ApplicationView() {
+        
+        // We must use invokeAndWait here to fulfill the constructor's 
+        // contract.
+
+        UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
+            public void run() {
+                splashFrame = new SplashFrame();
+            }
+        });
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                splashFrame.setVisible(true);
+            }
+        });
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FView#getCardLoadingProgressMonitor()
+     */
+    @Override
+    public final BraidsProgressMonitor getCardLoadingProgressMonitor() {
+        BraidsProgressMonitor result;
+
+        if (splashFrame == null) {
+            result = null;
+        }
+        else {
+            result = splashFrame.getMonitor();
+        }
+
+        return result;
     }
 
     /* (non-Javadoc)
@@ -73,18 +113,29 @@ public class ApplicationView implements FView {
             }
         });
 
+        AllZone.getCardFactory(); // forces preloading of all cards
         try {
             Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
             SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/7/11 1:07 PM: this isn't a web app
                 public void run() {
                     AllZone.setComputer(new ComputerAI_Input(new ComputerAI_General()));
+
+                    getCardLoadingProgressMonitor().dispose();
+
+                    // Enable only one of the following two lines. The second
+                    // is useful for debugging.
+
+                    splashFrame.dispose();
+                    //splashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+
+                    splashFrame = null;
                     new OldGuiNewGame();
                 }
             });
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
         }
-
 
     }
 }

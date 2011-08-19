@@ -9735,6 +9735,7 @@ src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/java/forge/view/swing/ApplicationView.java svneol=native#text/plain
 src/main/java/forge/view/swing/Main.java svneol=native#text/plain
 src/main/java/forge/view/swing/OldGuiNewGame.java svneol=native#text/plain
+src/main/java/forge/view/swing/SplashFrame.java -text
 src/main/java/forge/view/swing/package-info.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/ClumsyRunnable.java svneol=native#text/plain

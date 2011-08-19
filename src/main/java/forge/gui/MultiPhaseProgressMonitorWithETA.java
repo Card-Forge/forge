@@ -1,9 +1,14 @@
 package forge.gui;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.JDialog;
 import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import forge.Gui_ProgressBarWindow;
+import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
 
 /**
@@ -32,7 +37,11 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 	}
 	/**
 	 * Create a GUI progress monitor and open its first dialog.
-	 * 
+	 *
+	 * Like all swing components, this constructor must be invoked from the 
+	 * swing Event Dispatching Thread. The rest of the methods of this class
+	 * are exempt from this requirement.
+	 *
 	 * @param title  the title to give the dialog box(es)
 	 * 
 	 * @param numPhases  the total number of phases to expect
@@ -51,108 +60,150 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 			long totalUnitsFirstPhase, float minUIUpdateIntervalSec,
 			float[] phaseWeights) 
 	{
-		super(numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec,
+	    super(numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec,
 				phaseWeights);
-		
+
+        if (!SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException("must be called from within an event dispatch thread");
+        }
+
 		this.title = title;
+
+		if (totalUnitsFirstPhase > 0 && dialog == null) {
+		    throw new IllegalStateException("dialog is null");
+		}
 	}
 
-	
-	/** 
+
+	/**
 	 * For developer testing.
+	 *
+	 * @param args  ignored
 	 */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
     	System.out.println("Initializing...");
 
-    	MultiPhaseProgressMonitorWithETA monitor = 
-    		new MultiPhaseProgressMonitorWithETA("Testing 2 phases", 2, 5000, 
-    				1.0f, null);
-    	
-    	System.out.println("Running...");
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
 
-    	for (int i = 0; i <= 5000; i++) {
-    		monitor.incrementUnitsCompletedThisPhase(1);
-    		
-    		System.out.print("\ri = " + i);
-    		
-    		try {
-				Thread.sleep(1);
-			} catch (InterruptedException ignored) {
-				;
-			}
-    	}
-    	System.out.println();
-    	
-    	monitor.markCurrentPhaseAsComplete(2000);
+            	final int totalUnitsFirstPhase = 5000;
+                final MultiPhaseProgressMonitorWithETA monitor =
+            	        new MultiPhaseProgressMonitorWithETA("Testing 2 phases", 2, totalUnitsFirstPhase, 1.0f,
+            	                new float[] {2, 1});
 
-    	for (int i = 0; i <= 2000; i++) {
-    		monitor.incrementUnitsCompletedThisPhase(1);
-    		
-    		System.out.print("\ri = " + i);
-    		
-    		try {
-				Thread.sleep(1);
-			} catch (InterruptedException ignored) {
-				;
-			}
-    	}
-    	
-    	monitor.markCurrentPhaseAsComplete(0);
+                SwingWorker<Object, Object> worker = new SwingWorker<Object, Object>() {
+                    @Override
+                    public Object doInBackground() {
 
-    	System.out.println();
-   
-    	System.out.println("Done!");
+                        System.out.println("Running...");
+
+                        for (int i = 0; i <= totalUnitsFirstPhase; i++) {
+                            monitor.incrementUnitsCompletedThisPhase(1);
+
+                            System.out.print("\ri = " + i);
+
+                            try {
+                                Thread.sleep(1);
+                            } catch (InterruptedException ignored) {
+                                // blank
+                            }
+                        }
+                        System.out.println();
+
+                        final int totalUnitsSecondPhase = 2000;
+                        monitor.markCurrentPhaseAsComplete(totalUnitsSecondPhase);
+
+                        for (int i = 0; i <= totalUnitsSecondPhase; i++) {
+                            monitor.incrementUnitsCompletedThisPhase(1);
+
+                            System.out.print("\ri = " + i);
+
+                            try {
+                                Thread.sleep(1);
+                            } catch (InterruptedException ignored) {
+                                // blank
+                            }
+                        }
+
+                        monitor.markCurrentPhaseAsComplete(0);
+
+                        System.out.println();
+                        System.out.println("Done!");
+
+                        return null;
+                    }
+
+                };
+
+                worker.execute();
+            }
+        });
     }
-	
 
-	
+
+
 	@Override
 	/**
 	 * @param numUnits cannot be higher than Integer.MAX_VALUE
 	 * 
 	 * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#setTotalUnitsThisPhase(long)
 	 */
-	public void setTotalUnitsThisPhase(long numUnits) {
+	public void setTotalUnitsThisPhase(final long numUnits) {
 		super.setTotalUnitsThisPhase(numUnits);
 		
 		if (numUnits > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("numUnits must be <= " + Integer.MAX_VALUE);
 		}
 
-		if (numUnits > 0) {
-			// (Re)create the progress bar.
-			if (dialog != null) {
-				dialog.dispose();
-				dialog = null;
-			}
-			
-			dialog = new Gui_ProgressBarWindow();
-			dialog.setTitle(title);
-	        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-	        dialog.setVisible(true);
-	        dialog.setResizable(true);        
-	        dialog.getProgressBar().setIndeterminate(false);
-	        dialog.setProgressRange(0, (int) numUnits);
-	        dialog.reset();
+        if (numUnits > 0) {
+            // dialog must exist before we exit this method.
+            UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
+                public void run() {
+                    // (Re)create the progress bar.
+                    if (dialog != null) {
+                        dialog.dispose();
+                        dialog = null;
+                    }
 
-			JProgressBar bar = dialog.getProgressBar();
-			bar.setString("");
-			bar.setStringPainted(true);
-			bar.setValue(0);	
-		}
+                    dialog = new Gui_ProgressBarWindow();
+                }
+            });
+        }
+
+		SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                dialog.setTitle(title);
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.setVisible(true);
+                dialog.setResizable(true);
+                dialog.getProgressBar().setIndeterminate(false);
+                dialog.setProgressRange(0, (int) numUnits);
+                dialog.reset();
+
+                JProgressBar bar = dialog.getProgressBar();
+                bar.setString("");
+                bar.setStringPainted(true);
+                bar.setValue(0);
+		    }
+		});
+
 	}
-	
+
     @Override
 	/**
 	 * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#incrementUnitsCompletedThisPhase(long)
 	 */
-    public void incrementUnitsCompletedThisPhase(long numUnits) {
+    public void incrementUnitsCompletedThisPhase(final long numUnits) {
 		super.incrementUnitsCompletedThisPhase(numUnits);
-        
-        for (int i = 0 ; i < numUnits ; i++) {
-        	dialog.increment();
-        }
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                for (int i = 0 ; i < numUnits ; i++) {
+                    dialog.increment();
+                }
+            }
+        });
 
         if (shouldUpdateUI()) {
 
@@ -187,23 +238,38 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * 
      * @param message  the message to display
      */
-    public void displayUpdate(String message) {
+    public void displayUpdate(final String message) {
 
-    	// i've been having trouble getting the dialog to display its title.
-		dialog.setTitle(title);
+        final Runnable proc = new Runnable() {
+            public void run() {
+            	// i've been having trouble getting the dialog to display its title.
+        		dialog.setTitle(title);
 
-    	JProgressBar bar = dialog.getProgressBar();
-		bar.setString(message);
-    	
-        justUpdatedUI();
+            	JProgressBar bar = dialog.getProgressBar();
+        		bar.setString(message);
+
+                justUpdatedUI();
+            }
+        };
+
+        if (SwingUtilities.isEventDispatchThread()) {
+            proc.run();
+        }
+        else {
+            SwingUtilities.invokeLater(proc);
+        }
     }
 
-    
+
     @Override
-    public void dispose() {
-    	getDialog().dispose();
+    public final void dispose() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                getDialog().dispose();
+            }
+        });
     }
-    
+
 
     /**
      * @return the JDialog for the current phase; use this judiciously to
