@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>forge</groupId>
     <artifactId>forge</artifactId>
     <packaging>jar</packaging>
     <name>Forge</name>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.1.2</version>
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent
         using all of the rules.
@@ -118,8 +117,8 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://svn.slightlymagic.net/forge/trunk</connection>
-        <developerConnection>scm:svn:http://svn.slightlymagic.net/forge/trunk</developerConnection>
+        <connection>scm:svn:http://svn.slightlymagic.net/forge/tags/forge-1.1.2</connection>
+        <developerConnection>scm:svn:http://svn.slightlymagic.net/forge/tags/forge-1.1.2</developerConnection>
     </scm>
 
     <prerequisites>
@@ -358,7 +357,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore/>
+                                        <ignore />
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
@@ -723,40 +722,34 @@
                                 <configuration>
                                     <target>
                                         <!-- Windows/Linux archive -->
-                                        <mkdir dir="${project.build.directory}/${project.build.finalName}"/>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}" />
                                         <copy todir="${project.build.directory}/${project.build.finalName}">
-                                            <fileset dir="${project.build.directory}" includes="forge.sh"/>
-                                            <fileset dir="${basedir}" includes="forge.properties"/>
-                                            <fileset dir="${basedir}" includes="LICENSE.txt"/>
-                                            <fileset dir="${basedir}" includes="README.txt"/>
-                                            <fileset dir="${basedir}" includes="CHANGES.txt"/>
+                                            <fileset dir="${project.build.directory}" includes="forge.sh" />
+                                            <fileset dir="${basedir}" includes="forge.properties" />
+                                            <fileset dir="${basedir}" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}" includes="README.txt" />
+                                            <fileset dir="${basedir}" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}">
-                                                <include name="res/**"/>
-                                                <exclude name="res/cardsfolder/**"/>
-                                                <exclude name="res/lib/**"/>
+                                                <include name="res/**" />
+                                                <exclude name="res/cardsfolder/**" />
+                                                <exclude name="res/lib/**" />
                                             </fileset>
-                                            <fileset dir="${project.build.directory}" includes="forge.exe"/>
-                                            <fileset dir="${project.build.directory}"
-                                                includes="${project.build.finalName}-jar-with-dependencies.jar"/>
+                                            <fileset dir="${project.build.directory}" includes="forge.exe" />
+                                            <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
                                         </copy>
-                                        <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder"/>
-                                        <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip"
-                                            basedir="${basedir}/res/cardsfolder" level="1"/>
-                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh"
-                                            perm="a+rx"/>
-                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe"
-                                            perm="a+rx"/>
-                                        <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2"
-                                            compression="bzip2">
-                                            <tarfileset filemode="755"
-                                                dir="${project.build.directory}/${project.build.finalName}">
-                                                <include name="forge.sh"/>
-                                                <include name="forge.exe"/>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
+                                        <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
+                                            <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="forge.sh" />
+                                                <include name="forge.exe" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
-                                                <include name="**"/>
-                                                <exclude name="forge.sh"/>
-                                                <exclude name="forge.exe"/>
+                                                <include name="**" />
+                                                <exclude name="forge.sh" />
+                                                <exclude name="forge.exe" />
                                             </tarfileset>
                                         </tar>
                                     </target>
@@ -835,47 +828,35 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx"/>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx" />
                                         <copy todir="${project.build.directory}/${project.build.finalName}-osx">
-                                            <fileset dir="${basedir}" includes="LICENSE.txt"/>
-                                            <fileset dir="${basedir}" includes="README.txt"/>
-                                            <fileset dir="${basedir}" includes="CHANGES.txt"/>
+                                            <fileset dir="${basedir}" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}" includes="README.txt" />
+                                            <fileset dir="${basedir}" includes="CHANGES.txt" />
                                         </copy>
-                                        <mkdir dir="${project.build.directory}/res/cardsfolder"/>
-                                        <zip destfile="${project.build.directory}/res/cardsfolder/cardsfolder.zip"
-                                            basedir="${basedir}/res/cardsfolder" level="1"/>
-                                        <taskdef name="jarbundler" classpathref="maven.runtime.classpath"
-                                            classname="net.sourceforge.jarbundler.JarBundler"/>
-                                        <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx"
-                                            name="${project.name}" version="${project.version}"
-                                            mainclass="forge.Gui_NewGame" icon="${basedir}/${configSourceDirectory}/Forge.icns"
-                                            jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}"
-                                            workingdirectory="$APP_PACKAGE/Contents/Resources/Java"
-                                            jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
+                                        <mkdir dir="${project.build.directory}/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
+                                        <taskdef name="jarbundler" classpathref="maven.runtime.classpath" classname="net.sourceforge.jarbundler.JarBundler" />
+                                        <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" version="${project.version}" mainclass="forge.Gui_NewGame" icon="${basedir}/${configSourceDirectory}/Forge.icns" jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}" workingdirectory="$APP_PACKAGE/Contents/Resources/Java" jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
                                             <javafileset dir="${basedir}">
-                                                <include name="*.properties"/>
-                                                <include name="res/**"/>
-                                                <exclude name="res/cardsfolder/**"/>
-                                                <exclude name="res/lib/**"/>
+                                                <include name="*.properties" />
+                                                <include name="res/**" />
+                                                <exclude name="res/cardsfolder/**" />
+                                                <exclude name="res/lib/**" />
                                             </javafileset>
                                             <javafileset dir="${project.build.directory}">
-                                                <include name="res/cardsfolder/cardsfolder.zip"/>
+                                                <include name="res/cardsfolder/cardsfolder.zip" />
                                             </javafileset>
-                                            <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
+                                            <javaproperty name="apple.laf.useScreenMenuBar" value="true" />
                                         </jarbundler>
-                                        <symlink
-                                            link="${project.build.directory}/${project.build.finalName}-osx/Applications"
-                                            resource="/Applications"/>
+                                        <symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications" />
                                         <exec executable="${basedir}/${configSourceDirectory}/create-dmg" failonerror="false">
-                                            <arg line="--volname ${project.name}-${project.version} --background ${basedir}/${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx"/>
+                                            <arg line="--volname ${project.name}-${project.version} --background ${basedir}/${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx" />
                                         </exec>
-                                        <tar basedir="${project.build.directory}"
-                                            includes="${project.build.finalName}.dmg"
-                                            destfile="${project.build.directory}/${project.build.finalName}-osx.tar.bz2"
-                                            compression="bzip2"/>
+                                        <tar basedir="${project.build.directory}" includes="${project.build.finalName}.dmg" destfile="${project.build.directory}/${project.build.finalName}-osx.tar.bz2" compression="bzip2" />
                                         <!--<symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" action="delete" /> -->
                                         <exec executable="rm" failonerror="false">
-                                            <arg line="-f ${project.build.directory}/${project.build.finalName}-osx/Applications"/>
+                                            <arg line="-f ${project.build.directory}/${project.build.finalName}-osx/Applications" />
                                         </exec>
                                     </target>
                                 </configuration>
