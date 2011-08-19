@@ -328,9 +328,9 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Rocky 1", "easy", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
         addToDeckList("Rocky 2", "medium", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
         addToDeckList("Rocky 3", "hard", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
-        addToDeckList("Rogue 3", "hard", "Mono R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar");
+//        addToDeckList("Rogue 3", "hard", "Mono R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar");
 
-//        addToDeckList("Sabertooth 2", "medium", "G Smokestack deck");
+        addToDeckList("Sabertooth 3", "hard", "Mono R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar");
         addToDeckList("Samantha Stephens 1", "easy", "WU Painter's Servant anti-red deck");
         addToDeckList("Samantha Stephens 2", "medium", "WU Painter's Servant anti-red deck");
         addToDeckList("Samantha Stephens 3", "hard", "WU Painter's Servant anti-red deck with Grindstone combo");
