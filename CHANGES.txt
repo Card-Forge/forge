@@ -1,4 +1,4 @@
-Forge Beta: 08-19-2011 ver 1.1.3 rev 9811
+Forge Beta: 08-19-2011 ver 1.1.3 rev 9812
 
 (Quest icons used created by Teekatas, from his Legendora set 
 
@@ -310,6 +310,9 @@ Fixes/Features:
 - Added the new card list to changes.txt.
 - Alphabetized the new card listing in cards.txt.
 - Renamed the quest deck Rogue 3 to Sabertooth 3.
+- Issue 106: Add splash screen just under progress bar, and load all cards at startup.
+- Reduce CheckStyle, FindBugs, and PMD output for recently changed files.
+- Added the recent commit logs to changes.txt and made a few edits. Preparing for the next beta.
 
 
 Many people helped with this version. A special thank you goes out to them:
