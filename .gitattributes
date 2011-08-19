@@ -1761,6 +1761,7 @@ res/cardsfolder/d/davenant_archer.txt svneol=native#text/plain
 res/cardsfolder/d/davenant_healer.txt svneol=native#text/plain
 res/cardsfolder/d/dawn_elemental.txt svneol=native#text/plain
 res/cardsfolder/d/dawn_of_the_dead.txt svneol=native#text/plain
+res/cardsfolder/d/dawnfluke.txt -text
 res/cardsfolder/d/dawnglare_invoker.txt svneol=native#text/plain
 res/cardsfolder/d/dawning_purist.txt svneol=native#text/plain
 res/cardsfolder/d/dawnray_archer.txt svneol=native#text/plain
@@ -2205,6 +2206,7 @@ res/cardsfolder/e/edgewalker.txt svneol=native#text/plain
 res/cardsfolder/e/edric_spymaster_of_trest.txt svneol=native#text/plain
 res/cardsfolder/e/eel_umbra.txt svneol=native#text/plain
 res/cardsfolder/e/eerie_procession.txt svneol=native#text/plain
+res/cardsfolder/e/ego_erasure.txt -text
 res/cardsfolder/e/eiganjo_castle.txt svneol=native#text/plain
 res/cardsfolder/e/eiganjo_free_riders.txt svneol=native#text/plain
 res/cardsfolder/e/eightfold_maze.txt svneol=native#text/plain

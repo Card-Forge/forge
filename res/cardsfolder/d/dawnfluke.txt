@@ -1,0 +1,13 @@
+Name:Dawnfluke
+ManaCost:3 W
+Types:Creature Elemental
+Text:no text
+PT:0/3
+K:Flash
+K:Evoke:W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self |  Execute$ TrigPrevent | TriggerDescription$ When CARDNAME enters the battlefield, prevent the next 3 damage that would be dealt to target creature or player this turn.
+SVar:TrigPrevent:AB$ PreventDamage | Cost$ 0 | Tgt$ TgtCP | Amount$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnfluke.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/12.jpg
+End
