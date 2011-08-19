@@ -8956,6 +8956,7 @@ res/images/symbols-13/foil09.png -text svneol=unset#image/png
 res/images/symbols-13/foil10.png -text svneol=unset#image/png
 res/images/symbols-13/slash.png -text svneol=unset#image/png
 res/images/symbols-13/summonsick.png -text svneol=unset#image/png
+res/images/ui/forgeSplash[!!-~]by[!!-~]moomarc.jpg -text
 res/images/ui/newgame_background.jpg -text svneol=unset#image/jpeg
 res/lang/de.properties svneol=native#text/plain
 res/lang/en.properties svneol=native#text/plain
