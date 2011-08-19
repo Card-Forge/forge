@@ -1,7 +1,5 @@
 package forge.view.swing;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -28,24 +26,24 @@ import forge.view.swing.OldGuiNewGame.CardStackOffsetAction;
  */
 public class ApplicationView implements FView {
 
-    private SplashFrame splashFrame;
+    private transient SplashFrame splashFrame;
 
     /**
      * The splashFrame field is guaranteed to exist when this constructor
-     * exits. 
+     * exits.
      */
     public ApplicationView() {
-        
-        // We must use invokeAndWait here to fulfill the constructor's 
+
+        // We must use invokeAndWait here to fulfill the constructor's
         // contract.
 
-        UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
+        UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() { // NOPMD by Braids on 8/18/11 11:37 PM
             public void run() {
                 splashFrame = new SplashFrame();
             }
         });
-        
-        SwingUtilities.invokeLater(new Runnable() {
+
+        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/18/11 11:37 PM
             public void run() {
                 splashFrame.setVisible(true);
             }
@@ -83,7 +81,10 @@ public class ApplicationView implements FView {
             OldGuiNewGame.smoothLandCheckBox.setSelected(preferences.stackAiLand);
             OldGuiNewGame.devModeCheckBox.setSelected(preferences.developerMode);
             OldGuiNewGame.cardOverlay.setSelected(preferences.cardOverlay);
+
+            // FindBugs doesn't like the next line.
             ImageCache.scaleLargerThanOriginal = preferences.scaleLargerThanOriginal;
+
             OldGuiNewGame.cardScale.setSelected(preferences.scaleLargerThanOriginal);
             CardStackOffsetAction.set(preferences.stackOffset);
             CardStackAction.setVal(preferences.maxStackSize);

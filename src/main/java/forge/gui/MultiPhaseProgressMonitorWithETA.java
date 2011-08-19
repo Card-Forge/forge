@@ -1,107 +1,115 @@
 package forge.gui;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.JDialog;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import forge.Gui_ProgressBarWindow;
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.progress_monitor.BaseProgressMonitor;
+import forge.Gui_ProgressBarWindow;
 
 /**
  * GUI Progress Monitor that displays the ETA (Estimated Time of Arrival or
- * completion) on some platforms and supports one or multiple phases of 
+ * completion) on some platforms and supports one or multiple phases of
  * progress.
- * 
+ *
  * In this implementation, each phase opens a new dialog.
  */
 public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
-	private Gui_ProgressBarWindow dialog;
-	private String title;
+    private transient Gui_ProgressBarWindow dialog;
+    private transient String title;
 
-	/**
-	 * Convenience for 
-	 * MultiPhaseProgressMonitorWithETA(title, numPhases, totalUnitsFirstPhase,
-	 * minUIUpdateIntervalSec, null);
-	 * 
-	 * @see #MultiPhaseProgressMonitorWithETA(String,int,long,float,float[])
-	 */
-	public MultiPhaseProgressMonitorWithETA(String title, int numPhases,
-			long totalUnitsFirstPhase, float minUIUpdateIntervalSec) 
-	{
-		this(title, numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec, null);
-	}
-	/**
-	 * Create a GUI progress monitor and open its first dialog.
-	 *
-	 * Like all swing components, this constructor must be invoked from the 
-	 * swing Event Dispatching Thread. The rest of the methods of this class
-	 * are exempt from this requirement.
-	 *
-	 * @param title  the title to give the dialog box(es)
-	 * 
-	 * @param numPhases  the total number of phases to expect
-	 * 
-	 * @param totalUnitsFirstPhase  the total number of units that will be
-	 *  processed in the first phase
-	 *  
-	 * @param minUIUpdateIntervalSec  the approximate interval at which to 
-	 * update the dialog box in seconds
-	 * 
-	 * @param phaseWeights  see BaseProgressMonitor
-	 * 
-	 * @see BaseProgressMonitor#BaseProgressMonitor(int,long,float,float[])
-	 */
-	public MultiPhaseProgressMonitorWithETA(String title, int numPhases,
-			long totalUnitsFirstPhase, float minUIUpdateIntervalSec,
-			float[] phaseWeights) 
-	{
-	    super(numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec,
-				phaseWeights);
+    /**
+     * Convenience for
+     * MultiPhaseProgressMonitorWithETA(title, numPhases, totalUnitsFirstPhase,
+     * minUIUpdateIntervalSec, null).
+     *
+     * @see #MultiPhaseProgressMonitorWithETA(String,int,long,float,float[])
+     *
+     * @param neoTitle  the title to give the dialog box(es)
+     *
+     * @param numPhases  the total number of phases to expect
+     *
+     * @param totalUnitsFirstPhase  the total number of units that will be
+     *  processed in the first phase
+     *
+     * @param minUIUpdateIntervalSec  the approximate interval at which to
+     * update the dialog box in seconds
+     */
+    public MultiPhaseProgressMonitorWithETA(final String neoTitle, final int numPhases,
+            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec) // NOPMD by Braids on 8/18/11 11:16 PM
+    {
+        this(neoTitle, numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec, null);
+    }
+    /**
+     * Create a GUI progress monitor and open its first dialog.
+     *
+     * Like all swing components, this constructor must be invoked from the
+     * swing Event Dispatching Thread. The rest of the methods of this class
+     * are exempt from this requirement.
+     *
+     * @param neoTitle  the title to give the dialog box(es)
+     *
+     * @param numPhases  the total number of phases to expect
+     *
+     * @param totalUnitsFirstPhase  the total number of units that will be
+     *  processed in the first phase
+     *
+     * @param minUIUpdateIntervalSec  the approximate interval at which to
+     * update the dialog box in seconds
+     *
+     * @param phaseWeights  see BaseProgressMonitor
+     *
+     * @see BaseProgressMonitor#BaseProgressMonitor(int,long,float,float[])
+     */
+    public MultiPhaseProgressMonitorWithETA(final String neoTitle, final int numPhases,
+            final long totalUnitsFirstPhase, final float minUIUpdateIntervalSec, // NOPMD by Braids on 8/18/11 11:16 PM
+            final float[] phaseWeights)
+    {
+        super(numPhases, totalUnitsFirstPhase, minUIUpdateIntervalSec,
+                phaseWeights);
 
         if (!SwingUtilities.isEventDispatchThread()) {
             throw new IllegalStateException("must be called from within an event dispatch thread");
         }
 
-		this.title = title;
+        this.title = neoTitle;
 
-		if (totalUnitsFirstPhase > 0 && dialog == null) {
-		    throw new IllegalStateException("dialog is null");
-		}
-	}
+        if (totalUnitsFirstPhase > 0 && dialog == null) {
+            throw new IllegalStateException("dialog is null");
+        }
+    }
 
 
-	/**
-	 * For developer testing.
-	 *
-	 * @param args  ignored
-	 */
+    /**
+     * For developer testing.
+     *
+     * @param args  ignored
+     */
     public static void main(final String[] args) {
 
-    	System.out.println("Initializing...");
+        System.out.println("Initializing..."); // NOPMD by Braids on 8/18/11 11:13 PM
 
-        SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/18/11 11:16 PM
             public void run() {
 
-            	final int totalUnitsFirstPhase = 5000;
+                final int totalUnitsFirstPhase = 5000; // NOPMD by Braids on 8/18/11 11:16 PM
                 final MultiPhaseProgressMonitorWithETA monitor =
-            	        new MultiPhaseProgressMonitorWithETA("Testing 2 phases", 2, totalUnitsFirstPhase, 1.0f,
-            	                new float[] {2, 1});
+                        new MultiPhaseProgressMonitorWithETA("Testing 2 phases", 2, totalUnitsFirstPhase, 1.0f,
+                                new float[] {2, 1});
 
-                SwingWorker<Object, Object> worker = new SwingWorker<Object, Object>() {
+                final SwingWorker<Object, Object> worker = new SwingWorker<Object, Object>() {
                     @Override
                     public Object doInBackground() {
 
-                        System.out.println("Running...");
+                        System.out.println("Running..."); // NOPMD by Braids on 8/18/11 11:14 PM
 
                         for (int i = 0; i <= totalUnitsFirstPhase; i++) {
                             monitor.incrementUnitsCompletedThisPhase(1);
 
-                            System.out.print("\ri = " + i);
+                            System.out.print("\ri = " + i); // NOPMD by Braids on 8/18/11 11:14 PM
 
                             try {
                                 Thread.sleep(1);
@@ -109,15 +117,15 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                                 // blank
                             }
                         }
-                        System.out.println();
+                        System.out.println(); // NOPMD by Braids on 8/18/11 11:14 PM
 
-                        final int totalUnitsSecondPhase = 2000;
+                        final int totalUnitsSecondPhase = 2000; // NOPMD by Braids on 8/18/11 11:17 PM
                         monitor.markCurrentPhaseAsComplete(totalUnitsSecondPhase);
 
                         for (int i = 0; i <= totalUnitsSecondPhase; i++) {
                             monitor.incrementUnitsCompletedThisPhase(1);
 
-                            System.out.print("\ri = " + i);
+                            System.out.print("\ri = " + i); // NOPMD by Braids on 8/18/11 11:14 PM
 
                             try {
                                 Thread.sleep(1);
@@ -128,8 +136,8 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
                         monitor.markCurrentPhaseAsComplete(0);
 
-                        System.out.println();
-                        System.out.println("Done!");
+                        System.out.println(); // NOPMD by Braids on 8/18/11 11:14 PM
+                        System.out.println("Done!"); // NOPMD by Braids on 8/18/11 11:14 PM
 
                         return null;
                     }
@@ -143,22 +151,22 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
 
 
-	@Override
-	/**
-	 * @param numUnits cannot be higher than Integer.MAX_VALUE
-	 * 
-	 * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#setTotalUnitsThisPhase(long)
-	 */
-	public void setTotalUnitsThisPhase(final long numUnits) {
-		super.setTotalUnitsThisPhase(numUnits);
-		
-		if (numUnits > Integer.MAX_VALUE) {
-			throw new IllegalArgumentException("numUnits must be <= " + Integer.MAX_VALUE);
-		}
+    @Override
+    /**
+     * @param numUnits cannot be higher than Integer.MAX_VALUE
+     *
+     * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#setTotalUnitsThisPhase(long)
+     */
+    public final void setTotalUnitsThisPhase(final long numUnits) {
+        super.setTotalUnitsThisPhase(numUnits);
+
+        if (numUnits > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("numUnits must be <= " + Integer.MAX_VALUE);
+        }
 
         if (numUnits > 0) {
             // dialog must exist before we exit this method.
-            UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() {
+            UtilFunctions.invokeInEventDispatchThreadAndWait(new Runnable() { // NOPMD by Braids on 8/18/11 11:17 PM
                 public void run() {
                     // (Re)create the progress bar.
                     if (dialog != null) {
@@ -171,7 +179,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
             });
         }
 
-		SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/18/11 11:18 PM
             public void run() {
                 dialog.setTitle(title);
                 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -181,25 +189,25 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
                 dialog.setProgressRange(0, (int) numUnits);
                 dialog.reset();
 
-                JProgressBar bar = dialog.getProgressBar();
+                final JProgressBar bar = dialog.getProgressBar();
                 bar.setString("");
                 bar.setStringPainted(true);
                 bar.setValue(0);
-		    }
-		});
+            }
+        });
 
-	}
+    }
 
     @Override
-	/**
-	 * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#incrementUnitsCompletedThisPhase(long)
-	 */
-    public void incrementUnitsCompletedThisPhase(final long numUnits) {
-		super.incrementUnitsCompletedThisPhase(numUnits);
+    /**
+     * @see net.slightlymagic.braids.util.progress_monitor.ProgressMonitor#incrementUnitsCompletedThisPhase(long)
+     */
+    public final void incrementUnitsCompletedThisPhase(final long numUnits) {
+        super.incrementUnitsCompletedThisPhase(numUnits);
 
-        SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/18/11 11:18 PM
             public void run() {
-                for (int i = 0 ; i < numUnits ; i++) {
+                for (int i = 0; i < numUnits; i++) {
                     dialog.increment();
                 }
             }
@@ -207,46 +215,46 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
         if (shouldUpdateUI()) {
 
-        	if ((getNumPhases() > 1)) {
+            if ((getNumPhases() > 1)) {
                 displayUpdate(
-                 "Phase " + getCurrentPhase() + ". " +
-                 //getUnitsCompletedSoFarThisPhase() + " units processed. " + 
-                 //"Overall: " + getTotalPercentCompleteAsString() + "% complete, " +
-                 "Overall ETA in " + getRelativeETAAsString() + "."
+                 "Phase " + getCurrentPhase() + ". "
+                 //+ getUnitsCompletedSoFarThisPhase() + " units processed. "
+                 //+ "Overall: " + getTotalPercentCompleteAsString() + "% complete, "
+                 + "Overall ETA in " + getRelativeETAAsString() + "."
                  );
             }
             else {
                 displayUpdate(
-                 //"Overall: " + 
-                 getUnitsCompletedSoFarThisPhase() + " units processed; " +
-                 //"(" + getTotalPercentCompleteAsString() + "%); " +
-                 "ETA in " + getRelativeETAAsString() + "."
+                 //"Overall: " +
+                 getUnitsCompletedSoFarThisPhase() + " units processed; "
+                 //+ "(" + getTotalPercentCompleteAsString() + "%); "
+                 + "ETA in " + getRelativeETAAsString() + "."
                  );
             }
         }
-        
-        if (getCurrentPhase() == getNumPhases() && 
-        	getUnitsCompletedSoFarThisPhase() >= getTotalUnitsThisPhase())
+
+        if (getCurrentPhase() == getNumPhases()
+            && getUnitsCompletedSoFarThisPhase() >= getTotalUnitsThisPhase())
         {
-        	displayUpdate("Done!");
+            displayUpdate("Done!");
         }
      }
 
     /**
      * Shows the message inside the progress dialog; does not always work on
      * all platforms.
-     * 
+     *
      * @param message  the message to display
      */
-    public void displayUpdate(final String message) {
+    public final void displayUpdate(final String message) {
 
-        final Runnable proc = new Runnable() {
+        final Runnable proc = new Runnable() { // NOPMD by Braids on 8/18/11 11:18 PM
             public void run() {
-            	// i've been having trouble getting the dialog to display its title.
-        		dialog.setTitle(title);
+                // i've been having trouble getting the dialog to display its title.
+                dialog.setTitle(title);
 
-            	JProgressBar bar = dialog.getProgressBar();
-        		bar.setString(message);
+                JProgressBar bar = dialog.getProgressBar();
+                bar.setString(message);
 
                 justUpdatedUI();
             }
@@ -263,7 +271,7 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
 
     @Override
     public final void dispose() {
-        SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() { // NOPMD by Braids on 8/18/11 11:18 PM
             public void run() {
                 getDialog().dispose();
             }
@@ -275,8 +283,8 @@ public class MultiPhaseProgressMonitorWithETA extends BaseProgressMonitor {
      * @return the JDialog for the current phase; use this judiciously to
      * manipulate the dialog directly.
      */
-    public JDialog getDialog() {
-    	return dialog;
+    public final JDialog getDialog() {
+        return dialog;
     }
-    
+
 }
