@@ -1,0 +1,14 @@
+Name:Chandra, the Firebrand
+ManaCost:3 R
+Types:Planeswalker Chandra
+Text:no text
+Loyalty:3
+A:AB$DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+A:AB$Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Name$ Chandra, the Firebrand effect. | Triggers$ TrigCopy,TrigCleanUp | SVars$ TrigCopyMain,TrigCleanUpMain | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+A:AB$DealDamage | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Tgt$ TgtCP | TargetMin$ 0 | TargetMax$ 6 | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to each of up to six target creatures and/or players.
+SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Execute$ TrigCopyMain | TriggerDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopyMain:AB$CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
+SVar:TrigCleanUp:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Execute$ TrigCleanUpMain | Static$ True | Secondary$ True | TriggerDescription$ Ah, hell naw.
+SVar:TrigCleanUpMain:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:Rarity:Mythic
+End
