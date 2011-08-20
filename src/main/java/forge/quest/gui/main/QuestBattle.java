@@ -370,6 +370,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Swamp Thing 1", "easy", "BG deck");
 //        addToDeckList("Swamp Thing 2", "medium", "BG deck");
 //        addToDeckList("Swamp Thing 3", "hard", "BG deck");
+        addToDeckList("Swan 2", "medium", "Mono G Warrior/Elf hybrid deck with Bramblewood Paragon, Nath's Elite and Winnower Patrol");
 
         addToDeckList("Tarzan 1", "easy", "WR Ape tribal deck with Ancient Silverback, Earthbind, Claws of Wirewood and pump spells");
         addToDeckList("Tarzan 2", "medium", "WR Ape tribal deck with Ancient Silverback, Raking Canopy and Treetop Village");
