@@ -7377,6 +7377,7 @@ res/cardsfolder/s/stream_hopper.txt svneol=native#text/plain
 res/cardsfolder/s/stream_of_acid.txt svneol=native#text/plain
 res/cardsfolder/s/stream_of_life.txt svneol=native#text/plain
 res/cardsfolder/s/stream_of_unconsciousness.txt svneol=native#text/plain
+res/cardsfolder/s/streambed_aquitects.txt -text
 res/cardsfolder/s/street_wraith.txt svneol=native#text/plain
 res/cardsfolder/s/streetbreaker_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/strength_in_numbers.txt svneol=native#text/plain
@@ -8500,6 +8501,7 @@ res/cardsfolder/w/warpath_ghoul.txt svneol=native#text/plain
 res/cardsfolder/w/warped_devotion.txt svneol=native#text/plain
 res/cardsfolder/w/warped_researcher.txt svneol=native#text/plain
 res/cardsfolder/w/warren_instigator.txt svneol=native#text/plain
+res/cardsfolder/w/warren_pilferers.txt -text
 res/cardsfolder/w/warren_scourge_elf.txt svneol=native#text/plain
 res/cardsfolder/w/warrior_angel.txt svneol=native#text/plain
 res/cardsfolder/w/warriors_charge.txt svneol=native#text/plain
@@ -8552,6 +8554,7 @@ res/cardsfolder/w/welkin_tern.txt svneol=native#text/plain
 res/cardsfolder/w/well_laid_plans.txt svneol=native#text/plain
 res/cardsfolder/w/well_of_discovery.txt svneol=native#text/plain
 res/cardsfolder/w/well_of_life.txt svneol=native#text/plain
+res/cardsfolder/w/wellgabber_apothecary.txt -text
 res/cardsfolder/w/wellspring.txt svneol=native#text/plain
 res/cardsfolder/w/wellwisher.txt svneol=native#text/plain
 res/cardsfolder/w/werebear.txt svneol=native#text/plain

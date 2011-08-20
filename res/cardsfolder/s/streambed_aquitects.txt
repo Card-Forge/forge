@@ -1,0 +1,11 @@
+Name:Streambed Aquitects
+ManaCost:1 U U
+Types:Creature Merfolk Scout
+Text:no text
+PT:2/3
+A:AB$ Pump | Cost$ T | ValidTgts$ Merfolk | TgtPrompt$ Select target Merfolk creature | NumAtt$ +1 | NumDef$ +1 | KW$ Islandwalk |  SpellDescription$ Target Merfolk creature gets +1/+1 and gains islandwalk until end of turn.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Island | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | SpellDescription$ Target land becomes an Island until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/streambed_aquitects.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/91.jpg
+End
