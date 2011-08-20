@@ -48,7 +48,7 @@ public class SplashFrame extends JFrame {
 
         setUndecorated(true);
 
-        final ImageIcon bgIcon = new ImageIcon("res/images/ui/forgeSplash by moomarc.jpg");
+        final ImageIcon bgIcon = new ImageIcon("res/images/ui/forgeSplash.jpg");
 
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
