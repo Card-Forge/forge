@@ -26,7 +26,17 @@ Your decks can be placed in the decks folder, your pics can be placed in the pic
 
 Fixes/Features:
 
-
+- Added missing image for SplashFrame.
+- Fixed typo in Stone-Seeder Hierophant. now untaps for landfall.
+- Cleared out the changes.txt file, is ready for new material.
+- Added link to releases.
+- Updated to latest launch4j maven plugin.
+- Supressed checkstyle error if there is a trailing space after a javadoc comment.
+- Renamed splash pic. Spaces in the filename are not best practice.
+- Renamed splash pic.
+- Renamed splashpic.
+- Fixed Matsu-Tribe Sniper to trigger on noncombat damage as well.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
