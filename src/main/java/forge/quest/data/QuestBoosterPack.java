@@ -80,12 +80,9 @@ public class QuestBoosterPack implements NewConstants {
         if (standardPool) {
             // filter Cards for cards appearing in Standard Sets
             ArrayList<String> sets = new ArrayList<String>();
-            
+
             //TODO: It would be handy if the list of any sets can be chosen
-            // ... Huh?
-            // TODO: Braids: "It would also be handy if comments were written 
-            // in clear English."
-            
+            // Can someone clarify that? I don't understand it. -Braids
             sets.add("M12");
             sets.add("NPH");
             sets.add("MBS");
@@ -96,23 +93,8 @@ public class QuestBoosterPack implements NewConstants {
             sets.add("ZEN");
 
             allCards = CardFilter.getSets(allCards, sets);
-            
-			/*
-			 * Here we force the generator to evaluate (solidify) into a
-			 * temporary ArrayList. This list only contains cards from 7 sets,
-			 * so it doesn't have nearly as much heap impact as an array of all
-			 * cards. Plus, we need to scan this array 3 times in the code
-			 * below. Braids thinks it's better to have the temporary list than
-			 * to force evaluation of the original generator three times,
-			 * because the original generator examines every card in the
-			 * database.
-			 */
-            allCards = GeneratorFunctions.solidify(allCards);
         }
 
-        // We don't bother solidifying here, because allCards could be 
-        // equal to the set of ALL cards.
-        
         names.addAll(generateCards(allCards, numCommon, Constant.Rarity.Common, null, started));
         names.addAll(generateCards(allCards, numUncommon, Constant.Rarity.Uncommon, null, started));
         names.addAll(generateCards(allCards, numRare, Constant.Rarity.Rare, null, started));
@@ -140,21 +122,25 @@ public class QuestBoosterPack implements NewConstants {
 
         allCards = CardFilter.getRarity(allCards, rarity);
         int count = 0, i = 0;
-        
-        if (num > 1) {
-        	// Force evaluation (solidify) the generator because we've applied
-        	// a filter to it, and we're about to use it more than once.
-        	
-        	allCards = GeneratorFunctions.solidify(allCards);
-        }
-        
-        while (count < num) {
-            String name;
 
-            if (color == null)
-                name = getCardName(allCards, colorOrder.get(i % size));
-            else
+        while (count < num) {
+            String name = null;
+
+            if (color == null) {
+                final String color2 = colorOrder.get(i % size);
+
+                if (color2 != null) {
+                    // Mantis Issue 77: avoid calling
+                    // getCardName(Generator<Card>, String) with null as 2nd
+                    // parameter.
+                    name = getCardName(allCards, color2);
+                }
+            }
+
+            if (name == null) {
+                // We can't decide on a color, so just pick a card.
                 name = getCardName(allCards);
+            }
 
             if (name != null && !names.contains(name)) {
                 names.add(name);
