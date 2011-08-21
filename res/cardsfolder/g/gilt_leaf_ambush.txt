@@ -1,0 +1,12 @@
+Name:Gilt-Leaf Ambush
+ManaCost:2 G
+Types:Tribal Instant Elf
+Text:no text
+A:SP$ Token | Cost$ 2 G | TokenAmount$ 2 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ SVar=DBClash | RememberTokens$ True | SpellDescription$ Put two 1/1 green Elf Warrior creature tokens onto the battlefield. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn.
+SVar:DBClash:DB$Clash | WinSubAbility$ AdditionalPump
+SVar:AdditionalPump:DB$PumpAll | ValidCards$ Creature.IsRemembered | KW$ Deathtouch | SubAbility$ SVar=DBCleanUp
+SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_ambush.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/214.jpg
+End

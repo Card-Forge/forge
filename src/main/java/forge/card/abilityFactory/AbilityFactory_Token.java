@@ -408,6 +408,7 @@ public class AbilityFactory_Token extends AbilityFactory {
         int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
         int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
 
+        String remember = AF.getMapParams().get("RememberTokens");
         for (int i = 0; i < finalAmount; i++) {
             CardList tokens = CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
 
@@ -459,7 +460,7 @@ public class AbilityFactory_Token extends AbilityFactory {
                     }
                 }
             }
-            
+
             //Grant static abilities
             if (tokenStaticAbilities != null) {
                 for (String s : tokenStaticAbilities) {
@@ -476,6 +477,9 @@ public class AbilityFactory_Token extends AbilityFactory {
                 }
                 if (tokenAttacking) {
                     AllZone.getCombat().addAttacker(c);
+                }
+                if (remember != null) {
+                    AF.getHostCard().addRemembered(c);
                 }
             }
         }
