@@ -37,6 +37,14 @@ Fixes/Features:
 - Renamed splashpic.
 - Fixed Matsu-Tribe Sniper to trigger on noncombat damage as well.
 - Added the recent commit logs to changes.txt.
+- Added the new Swan 2 deck to quest mode.
+- Match on empty line with trailing space.
+- Removed compiler warning from forge.deck.generate.Generate5ColorDeck.
+- Issue 77: Avoid NPE when choosing cards at random for quests.
+- Added RememberTokens script key to Token AF.
+- Removed Adium depedency. modify other dmg scripts.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
