@@ -9407,7 +9407,6 @@ src/main/config/create-dmg -text
 src/main/config/forge.ico -text svneol=unset#image/ico
 src/main/config/forge.sh svneol=native#text/x-sh
 src/main/config/forge_checks.xml svneol=native#text/xml
-src/main/config/support/AdiumApplescriptRunner -text
 src/main/config/support/template.applescript -text
 src/main/java/arcane/ui/CardArea.java svneol=native#text/plain
 src/main/java/arcane/ui/CardPanel.java svneol=native#text/plain
