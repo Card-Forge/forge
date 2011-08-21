@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_21" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
  <object id="MultiSplitLayout$Split0" class="org.jdesktop.swingx.MultiSplitLayout$Split"> 
   <void property="bounds"> 
    <object class="java.awt.Rectangle"> 
     <int>0</int> 
     <int>0</int> 
-    <int>1920</int> 
-    <int>1090</int> 
+    <int>1024</int> 
+    <int>687</int> 
    </object> 
   </void> 
   <void id="ArrayList0" property="children"> 
@@ -17,7 +17,7 @@
        <int>0</int> 
        <int>0</int> 
        <int>197</int> 
-       <int>1090</int> 
+       <int>687</int> 
       </object> 
      </void> 
      <void id="ArrayList1" property="children"> 
@@ -28,7 +28,7 @@
           <int>0</int> 
           <int>0</int> 
           <int>197</int> 
-          <int>212</int> 
+          <int>130</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -47,7 +47,7 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>212</int> 
+          <int>130</int> 
           <int>197</int> 
           <int>5</int> 
          </object> 
@@ -62,9 +62,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>217</int> 
+          <int>135</int> 
           <int>197</int> 
-          <int>288</int> 
+          <int>146</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -83,7 +83,7 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>505</int> 
+          <int>281</int> 
           <int>197</int> 
           <int>5</int> 
          </object> 
@@ -98,9 +98,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>510</int> 
+          <int>286</int> 
           <int>197</int> 
-          <int>148</int> 
+          <int>104</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -119,7 +119,7 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>658</int> 
+          <int>390</int> 
           <int>197</int> 
           <int>5</int> 
          </object> 
@@ -134,9 +134,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>663</int> 
+          <int>395</int> 
           <int>197</int> 
-          <int>191</int> 
+          <int>136</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -155,7 +155,7 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>854</int> 
+          <int>531</int> 
           <int>197</int> 
           <int>5</int> 
          </object> 
@@ -170,9 +170,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>859</int> 
+          <int>536</int> 
           <int>197</int> 
-          <int>231</int> 
+          <int>151</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -205,7 +205,7 @@
        <int>197</int> 
        <int>0</int> 
        <int>5</int> 
-       <int>1090</int> 
+       <int>687</int> 
       </object> 
      </void> 
      <void property="parent"> 
@@ -219,8 +219,8 @@
       <object class="java.awt.Rectangle"> 
        <int>202</int> 
        <int>0</int> 
-       <int>1409</int> 
-       <int>1090</int> 
+       <int>566</int> 
+       <int>687</int> 
       </object> 
      </void> 
      <void id="ArrayList2" property="children"> 
@@ -230,8 +230,8 @@
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
           <int>0</int> 
-          <int>1409</int> 
-          <int>236</int> 
+          <int>566</int> 
+          <int>1</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -250,8 +250,8 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>236</int> 
-          <int>1409</int> 
+          <int>1</int> 
+          <int>566</int> 
           <int>5</int> 
          </object> 
         </void> 
@@ -265,9 +265,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>241</int> 
-          <int>1409</int> 
-          <int>195</int> 
+          <int>6</int> 
+          <int>566</int> 
+          <int>282</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -286,8 +286,8 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>436</int> 
-          <int>1409</int> 
+          <int>288</int> 
+          <int>566</int> 
           <int>5</int> 
          </object> 
         </void> 
@@ -301,9 +301,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>441</int> 
-          <int>1409</int> 
-          <int>236</int> 
+          <int>293</int> 
+          <int>566</int> 
+          <int>277</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -322,8 +322,8 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>677</int> 
-          <int>1409</int> 
+          <int>570</int> 
+          <int>566</int> 
           <int>5</int> 
          </object> 
         </void> 
@@ -337,9 +337,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>682</int> 
-          <int>1409</int> 
-          <int>229</int> 
+          <int>575</int> 
+          <int>566</int> 
+          <int>1</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -358,8 +358,8 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>911</int> 
-          <int>1409</int> 
+          <int>576</int> 
+          <int>566</int> 
           <int>5</int> 
          </object> 
         </void> 
@@ -373,9 +373,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>202</int> 
-          <int>916</int> 
-          <int>1409</int> 
-          <int>174</int> 
+          <int>581</int> 
+          <int>566</int> 
+          <int>106</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -408,10 +408,10 @@
     <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>1611</int> 
+       <int>768</int> 
        <int>0</int> 
        <int>5</int> 
-       <int>1090</int> 
+       <int>687</int> 
       </object> 
      </void> 
      <void property="parent"> 
@@ -423,10 +423,10 @@
     <object id="MultiSplitLayout$Split3" class="org.jdesktop.swingx.MultiSplitLayout$Split"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>1616</int> 
+       <int>773</int> 
        <int>0</int> 
-       <int>304</int> 
-       <int>1090</int> 
+       <int>251</int> 
+       <int>687</int> 
       </object> 
      </void> 
      <void id="ArrayList3" property="children"> 
@@ -434,10 +434,10 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1616</int> 
+          <int>773</int> 
           <int>0</int> 
-          <int>304</int> 
-          <int>540</int> 
+          <int>251</int> 
+          <int>339</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -455,9 +455,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1616</int> 
-          <int>540</int> 
-          <int>304</int> 
+          <int>773</int> 
+          <int>339</int> 
+          <int>251</int> 
           <int>5</int> 
          </object> 
         </void> 
@@ -470,10 +470,10 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1616</int> 
-          <int>545</int> 
-          <int>304</int> 
-          <int>545</int> 
+          <int>773</int> 
+          <int>344</int> 
+          <int>251</int> 
+          <int>343</int> 
          </object> 
         </void> 
         <void property="name"> 

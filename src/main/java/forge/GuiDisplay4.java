@@ -762,7 +762,11 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
             @Override
             public void windowClosed(WindowEvent e) {
+
+                // Write the layout to the new file, usually
+                // res/gui/display_new_layout.xml
                 File f = ForgeProps.getFile(LAYOUT_NEW);
+
                 Node layout = pane.getMultiSplitLayout().getModel();
                 try {
                     XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(f)));
@@ -776,7 +780,16 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         //making the multi split pane
         Node model;
+
+        // Try to load the latest saved layout, usually
+        // res/gui/display_new_layout.xml
         File f = ForgeProps.getFile(LAYOUT_NEW);
+
+        // If the new file does not exist, read the configuration from the
+        // default layout, usually res/gui/display_layout.xml
+        if (!f.exists()) {
+            f = ForgeProps.getFile(LAYOUT);
+        }
         try {
             XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(f)));
             model = (Node) decoder.readObject();
