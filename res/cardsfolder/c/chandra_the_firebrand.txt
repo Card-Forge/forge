@@ -11,4 +11,5 @@ SVar:TrigCopyMain:AB$CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amou
 SVar:TrigCleanUp:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Execute$ TrigCleanUpMain | Static$ True | Secondary$ True | TriggerDescription$ Ah, hell naw.
 SVar:TrigCleanUpMain:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:Rarity:Mythic
+SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/124.jpg
 End
