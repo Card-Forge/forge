@@ -426,11 +426,11 @@ public class Generate5ColorDeck {
 
     private class DLnd {
         public String Name;
-        public String Mana;
+        //public String Mana;
 
         public DLnd(String nm, String mn) {
             Name = nm;
-            Mana = mn;
+            //Mana = mn;
         }
     }
 }
