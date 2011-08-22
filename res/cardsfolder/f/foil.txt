@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | SpellDescrip
 SVar:AltCost:Discard<1/Island> Discard<1/Card>$You may discard an Island card and another card rather than pay Foil's mana cost.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foil.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/34.jpg
 End

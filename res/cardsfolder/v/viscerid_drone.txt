@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ Sac<1/Creature> Sac<1/Swamp> | ValidTgts$ Creature.nonArti
 A:AB$ Destroy | Cost$ Sac<1/Creature> Sac<1/Swamp.Snow/Snow Swamp> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_drone.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/62.jpg
 End
