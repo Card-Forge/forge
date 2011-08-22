@@ -374,8 +374,11 @@ public class QuestData {
     /**
      * <p>addCards.</p>
      */
-    public ArrayList<String> addCards() {
+    public ArrayList<String> addCards( List<String> setsFilter ) {
         Generator<Card> cards = YieldUtils.toGenerator(AllZone.getCardFactory());
+        if ( setsFilter != null )
+            cards = CardFilter.getSets(cards, setsFilter);
+
         int nCommon = QuestPreferences.getNumCommon();
         int nUncommon = QuestPreferences.getNumUncommon();
         int nRare = QuestPreferences.getNumRare();
@@ -852,7 +855,7 @@ public class QuestData {
     public static void main(String[] args) {
         QuestData q = new QuestData();
         for (int i = 0; i < 20; i++) {
-            q.addCards();
+            q.addCards( null );
         }
 
         for (int i = 0; i < 10; i++) {

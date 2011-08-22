@@ -6,6 +6,7 @@ import forge.game.GameLossReason;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.game.PlayerIndex;
+import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;
@@ -32,6 +33,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>Gui_WinLose class.</p>
@@ -188,7 +191,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             if ( model.qa != null )
                 computerLife = model.qa.getComputerLife();
 
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife, model.qa );
+            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife, model.qa);
         } else {
             AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         }
@@ -234,10 +237,10 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             int rewardAltWinCondition = q.getCreditsRewardForAltWin(whyAiLost);
             if (rewardAltWinCondition > 0) {
                 String winConditionName = "Unknown (bug)";
-                if ( game.getWinCondition() == GameEndReason.WinsGameSpellEffect ) {
+                if (game.getWinCondition() == GameEndReason.WinsGameSpellEffect) {
                     winConditionName = game.getWinSpellEffect();
                 } else {
-                    switch( whyAiLost ) {
+                    switch(whyAiLost) {
                         case Poisoned: winConditionName = "Poison"; break;
                         case Milled: winConditionName = "Milled"; break;
                         default: break;
@@ -265,8 +268,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
 
             int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
-            if ( 0 == cntCardsHumanStartedWith )
-            {
+            if (0 == cntCardsHumanStartedWith) {
                 int reward = QuestPreferences.getMatchMullToZero();
                 sb.append(String.format("Mulliganed to zero and still won! Bonus: <b>%d credits</b>.<br>", reward));
             }
@@ -374,20 +376,39 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         quitButton_actionPerformed(null);
     }
 
+    protected void giveBooster()
+    {
+        String[] boosterTypes = {"Legacy", "Extended", "T2"};
+        String boosterType = GuiUtils.getChoice("Choose prize booster type", boosterTypes);
+        List<String> setsToGive = null;
+        if (boosterTypes[2].equals( boosterType )) { // T2
+            setsToGive = new ArrayList<String>();
+            setsToGive.addAll( Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN"}) );
+        }
+        if (boosterTypes[1].equals( boosterType )) { // Ext
+            setsToGive = new ArrayList<String>();
+            setsToGive.addAll( Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN","M10","ARB","CFX","ALA","MOR","SHM","EVE","LRW"}) );
+        }
+
+        ArrayList<String> cardsWon = model.quest.addCards(setsToGive);
+        // TODO: Make a better presentation of cards - with pictures at least
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("You have won the following new cards:\n");
+        for (String cardName : cardsWon) {
+            sb.append(cardName + "\n");
+        }
+
+        String fileName = "BookIcon.png";
+        ImageIcon icon = getIcon(fileName);
+
+        JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE, icon);
+    }
+    
     protected void giveQuestRewards(final boolean wonMatch) {
         // Award a random booster, as frequent as set in difficulty setup
         if (model.quest.shouldAddCards(wonMatch)) {
-            ArrayList<String> cardsWon = model.quest.addCards();
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("You have won the following new cards:\n");
-            for (String cardName : cardsWon) {
-                sb.append(cardName + "\n");
-            }
-
-            String fileName = "BookIcon.png";
-            ImageIcon icon = getIcon(fileName);
-            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE, icon);
+            giveBooster();
         }
 
         // Award credits

@@ -1,6 +1,6 @@
 package forge;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
@@ -332,42 +332,36 @@ public class CardFilter {
     }//getColor()
 
     /**
-	 * Filter a Generator of cards so that it contains only the ones that 
-	 * exist in certain sets. 
+	 * Filter a Generator of cards so that it contains only the ones that exist in certain sets.
 	 *
-	 * @param inputGenerator a sequence Generator of Card instances; must
-	 * not be null.
+	 * @param inputGenerator a sequence Generator of Card instances; must not be null.
 	 * 
-	 * @param sets  an ArrayList of Strings identifying the valid sets;
-	 * must not be null.
+	 * @param sets  an ArrayList of Strings identifying the valid sets; must not be null.
 	 * 
 	 * @return a {@link forge.CardList} object.
 	 */
-	public static Generator<Card> getSets(Generator<Card> inputGenerator, 
-			final ArrayList<String> sets) 
+	public static Generator<Card> getSets(Generator<Card> inputGenerator, final List<String> sets)
 	{
 		UtilFunctions.checkNotNull("inputGenerator", inputGenerator);
 		UtilFunctions.checkNotNull("sets", sets);
-		
-		
-		Lambda1<Boolean,Card> predicate = new Lambda1<Boolean,Card>() {
+
+		Lambda1<Boolean, Card> predicate = new Lambda1<Boolean, Card>() {
 			public Boolean apply(Card c) {
 				if (c == null) {
 					return false;
 				}
-				
+
 	            for (SetInfo set : c.getSets()) {
 	                if (set != null && sets.contains(set.toString())) {
 	                	return true;
 	                }
 	            }
-	            
+
 	            return false;
 			}
 		};
-		
+
 		return GeneratorFunctions.filterGenerator(predicate, inputGenerator);
-		
 	}//getSets(Generator,ArrayList)
 
 
