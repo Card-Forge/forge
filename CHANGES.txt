@@ -45,6 +45,23 @@ Fixes/Features:
 - Removed Adium depedency. modify other dmg scripts.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Added the LQ pic URL for Chandra, the Firebrand.
+- Issue 117: Load from default display_layout.xml when user's customized display_new_layout.xml does not exist. Updated the default display_layout.xml to look good on a Windows XP 1024x768 display. Updated GuiDisplay4.java to load from default layout if user's "new" layout does not exist. We have not had display_new_layout.xml in the repository for some time, but that is a related change.
+- Refactored QuestMatchState. GameInfo is renamed to GameSummary and is now an observer for game state. It's purpose is now to hold statistic data on game and actions performed by players. The former functionality moved to ColorChanger and Phase (all combat damage prevention due to Fog spell). Since then game turns calculation is done properly (no need to add/substract 1.)
+- Total cleanup at Gui_WinLose, removed all references to global objects for quest and match-related entites. 
+- Some of quest rewards calculations use now special functions in QuestData class.
+- Tracking of win and lose conditions refactored (see Player and Upkeep classes.)
+- Fixed typo.
+- Bug: 144. Fixed compatibility with Java 7. Problem was due to inability to deserialize display_new_layout.xml. I changed that file's default serializer to XStream. This fix maintains compatibility with existing display_new_layout.xml when possible, and uses an XStream-generated display_layout.xml when it cannot parse the former. Note this updates the default display_layout.xml, which looks OK under Windows XP with resolution 1024x768.
+- Issue 92: Reorganization of Costs.
+- Fixed a few cards to adhere to new Cost requirements.
+- Added questData.dat to svn:ignore on res/quest, so developers don't accidentally add it to the repository.
+- Fixed NPE in IsPlayer().
+- HumanPlayer wasn't saved apparently.
+- Player can choose which booster to receive in the course of quest: containing only T2 cards, Extanded or Legacy (the way it was before).
+- Added "ActivatedOnly" script key so SpellAbilityCast triggers can be limited to non-triggered abilities.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
