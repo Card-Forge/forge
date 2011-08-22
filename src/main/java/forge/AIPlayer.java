@@ -67,11 +67,6 @@ public class AIPlayer extends Player {
         return true;
     }
 
-    /** {@inheritDoc} */
-    public boolean isPlayer(Player p1) {
-        return p1.getName().equals(this.name);
-    }
-
     ///////////////
     ///
     /// End transition methods

@@ -68,7 +68,7 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     public boolean isPlayer(Player p1) {
-        return p1.getName().equals(this.name);
+        return p1 != null && p1.getName().equals(this.name);
     }
 
     ///////////////

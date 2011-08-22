@@ -127,7 +127,9 @@ public abstract class Player extends MyObservable {
      * @param p1 a {@link forge.Player} object.
      * @return a boolean.
      */
-    public abstract boolean isPlayer(Player p1);
+    public boolean isPlayer(Player p1) {
+        return p1 != null && p1.getName().equals(this.name);
+    }
 
     /**
      * <p>getOpponent.</p>
