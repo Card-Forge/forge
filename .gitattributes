@@ -9544,6 +9544,7 @@ src/main/java/forge/Time.java svneol=native#text/plain
 src/main/java/forge/UndoCommand.java svneol=native#text/plain
 src/main/java/forge/Upkeep.java svneol=native#text/plain
 src/main/java/forge/ZCTrigger.java svneol=native#text/plain
+src/main/java/forge/card/CardReference.java -text
 src/main/java/forge/card/abilityFactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_AlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityFactory/AbilityFactory_Animate.java svneol=native#text/plain
