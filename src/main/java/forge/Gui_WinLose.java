@@ -1,8 +1,7 @@
 package forge;
 
-import forge.error.E
+import forge.error.ErrorViewer;
 import forge.game.GameEndReason;
-rrorViewer;
 import forge.game.GameLossReason;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
