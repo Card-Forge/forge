@@ -8327,6 +8327,7 @@ res/cardsfolder/v/viscera_dragger.txt svneol=native#text/plain
 res/cardsfolder/v/viscera_seer.txt svneol=native#text/plain
 res/cardsfolder/v/viscerid_armor.txt svneol=native#text/plain
 res/cardsfolder/v/viscerid_deepwalker.txt svneol=native#text/plain
+res/cardsfolder/v/viscerid_drone.txt -text
 res/cardsfolder/v/viscid_lemures.txt svneol=native#text/plain
 res/cardsfolder/v/viseling.txt svneol=native#text/plain
 res/cardsfolder/v/vision_skeins.txt svneol=native#text/plain
