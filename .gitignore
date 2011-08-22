@@ -7,5 +7,6 @@
 /release.properties
 res/cardsfolder/cardsfolder.zip
 res/gui/display_new_layout.xml
+res/quest/questData.dat
 /target
 /test-output
