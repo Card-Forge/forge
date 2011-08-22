@@ -1,10 +1,78 @@
 package forge;
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import net.slightlymagic.braids.util.ImmutableIterableFrom;
+
+import org.jdesktop.swingx.JXMultiSplitPane;
+import org.jdesktop.swingx.MultiSplitLayout.Node;
+
 import arcane.ui.HandArea;
 import arcane.ui.PlayArea;
 import arcane.ui.ViewPanel;
 import arcane.ui.util.Animation;
+
+import com.google.code.jyield.Generator;
+import com.google.code.jyield.YieldUtils;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
+
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.error.ErrorViewer;
 import forge.game.GameLossReason;
@@ -20,28 +88,6 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.view.swing.OldGuiNewGame;
-import net.slightlymagic.braids.util.ImmutableIterableFrom;
-import org.jdesktop.swingx.JXMultiSplitPane;
-import org.jdesktop.swingx.MultiSplitLayout.Node;
-
-import com.google.code.jyield.Generator;
-import com.google.code.jyield.YieldUtils;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
-import java.awt.*;
-import java.awt.Color;
-import java.awt.event.*;
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
-import java.io.*;
-import java.util.*;
-import java.util.List;
-
-import static org.jdesktop.swingx.MultiSplitLayout.parseModel;
 
 
 /**
@@ -752,28 +798,52 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private void initComponents() {
         //Preparing the Frame
         setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) setFont(new Font("Times New Roman", 0, 16));
+        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+            setFont(new Font("Times New Roman", 0, 16));
+        }
         getContentPane().setLayout(new BorderLayout());
+
+        // I tried using the JavaBeanConverter with this, but I got a
+        // StackOverflowError due to an infinite loop.  The default
+        // XStream format seems just fine, anyway.
+        final XStream xstream = new XStream();
+
+
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent evt) {
+            public void windowClosing(final WindowEvent evt) {
                 concede();
             }
 
             @Override
-            public void windowClosed(WindowEvent e) {
+            public void windowClosed(final WindowEvent evt) {
 
                 // Write the layout to the new file, usually
                 // res/gui/display_new_layout.xml
                 File f = ForgeProps.getFile(LAYOUT_NEW);
 
                 Node layout = pane.getMultiSplitLayout().getModel();
+
+                BufferedOutputStream out = null;
                 try {
-                    XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(f)));
-                    encoder.writeObject(layout);
-                    encoder.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                    out = new BufferedOutputStream(new FileOutputStream(f));
+                    xstream.toXML(layout, out);
+                }
+                catch (IOException ex) {
+                    assert System.err != null;
+
+                    System.err.println("Ignoring exception:");
+                    ex.printStackTrace(); // NOPMD by Braids on 8/21/11 9:20 PM
+                    System.err.println("-------------------");
+                }
+                finally {
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (Throwable ignored) { // NOPMD by Braids on 8/21/11 9:20 PM
+                            // Ignore failure to close.
+                        }
+                    }
                 }
             }
         });
@@ -783,43 +853,95 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         // Try to load the latest saved layout, usually
         // res/gui/display_new_layout.xml
-        File f = ForgeProps.getFile(LAYOUT_NEW);
+        final File file = ForgeProps.getFile(LAYOUT_NEW);
 
-        // If the new file does not exist, read the configuration from the
-        // default layout, usually res/gui/display_layout.xml
-        if (!f.exists()) {
-            f = ForgeProps.getFile(LAYOUT);
-        }
         try {
-            XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(f)));
-            model = (Node) decoder.readObject();
-            decoder.close();
-            pane.getMultiSplitLayout().setModel(model);
-            //pane.getMultiSplitLayout().setFloatingDividers(false);
-        } catch (Exception ex) {
-            model = parseModel(""//
-                    + "(ROW "//
-                    + "(COLUMN"//
-                    + " (LEAF weight=0.2 name=info)"//
-                    + " (LEAF weight=0.2 name=compy)"//
-                    + " (LEAF weight=0.2 name=stack)"//
-                    + " (LEAF weight=0.2 name=combat)"//
-                    + " (LEAF weight=0.2 name=human)) "//
-                    + "(COLUMN weight=1"//
-                    + " (LEAF weight=0.4 name=compyPlay)"//
-                    + " (LEAF weight=0.4 name=humanPlay)"//
-                    + " (LEAF weight=0.2 name=humanHand)) "//
-                    + "(COLUMN"//
-                    + " (LEAF weight=0.5 name=detail)"//
-                    + " (LEAF weight=0.5 name=picture)))");
-            pane.setModel(model);
+            model = loadModel(xstream, file);
         }
+        catch (XStreamException xse) {
+            assert System.err != null;
+
+            System.err.println("Error loading '" + file.getAbsolutePath() + "' using XStream: "
+                    + xse.getLocalizedMessage());
+
+            model = null;
+        }
+        catch (FileNotFoundException e1) {
+            model = null;
+        }
+
+        if (model == null) {
+            assert System.err != null;
+
+            System.err.println("Unable to parse file '" + file.getAbsolutePath()
+                    + "' with XStream; trying XMLDecoder.");
+
+            try {
+                model = loadModelUsingXMLDecoder(file);
+            }
+            catch (FileNotFoundException e1) {
+                model = null;
+            }
+            catch (Throwable exn) { // NOPMD by Braids on 8/21/11 9:20 PM
+                System.err.println("Ignoring exception:");
+                exn.printStackTrace(); // NOPMD by Braids on 8/21/11 9:20 PM
+                System.err.println("-------------------");
+
+                model = null;
+            }
+        }
+
+        if (model == null) {
+            System.err.println("XMLDecoder failed; using default layout.");
+            final File defaultFile = ForgeProps.getFile(LAYOUT);
+
+            try {
+                model = loadModel(xstream, defaultFile);
+            }
+            catch (Exception exn) {
+                // Should never happen.
+                throw new RuntimeException(exn); // NOPMD by Braids on 8/21/11 9:18 PM
+
+                /*
+                 * This code is useful for bootstrapping a display_new_layout.xml file.
+                 * 
+                System.err.println("Unable to parse file '" + defaultFile.getAbsolutePath()
+                        + "' with XStream; using hard coded defaults.");
+
+                model = parseModel(""//
+                        + "(ROW "//
+                        + "(COLUMN"//
+                        + " (LEAF weight=0.2 name=info)"//
+                        + " (LEAF weight=0.2 name=compy)"//
+                        + " (LEAF weight=0.2 name=stack)"//
+                        + " (LEAF weight=0.2 name=combat)"//
+                        + " (LEAF weight=0.2 name=human)) "//
+                        + "(COLUMN weight=1"//
+                        + " (LEAF weight=0.4 name=compyPlay)"//
+                        + " (LEAF weight=0.4 name=humanPlay)"//
+                        + " (LEAF weight=0.2 name=humanHand)) "//
+                        + "(COLUMN"//
+                        + " (LEAF weight=0.5 name=detail)"//
+                        + " (LEAF weight=0.5 name=picture)))");
+
+                pane.setModel(model);
+                 *
+                 */
+            }
+        }
+
+        if (model != null) {
+            pane.getMultiSplitLayout().setModel(model);
+        }
+
         pane.getMultiSplitLayout().setFloatingDividers(false);
         getContentPane().add(pane);
 
         //adding the individual parts
 
-        if (!OldGuiNewGame.useLAFFonts.isSelected()) initFonts(pane);
+        if (!OldGuiNewGame.useLAFFonts.isSelected()) {
+            initFonts(pane);
+        }
 
         initMsgYesNo(pane);
         initOpp(pane);
@@ -827,6 +949,75 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         initPlayer(pane);
         initZones(pane);
         initCardPicture(pane);
+    }
+
+    /**
+     * Load the panel size preferences from a the given file using XStream.
+     * 
+     * <p>
+     * throws XStreamException  if there was a parsing error
+     * </p>
+     * 
+     * @param xstream  the XStream parser to use; do not use JavaBeanConverter!
+     * @param file  the XML file containing the preferences
+     * @return  the preferences model as a Node instance
+     * @throws FileNotFoundException  if file does not exist
+     */
+    public static Node loadModel(final XStream xstream, final File file) throws FileNotFoundException
+    {
+        BufferedInputStream bufferedIn = null;
+        Node model = null;
+        try {
+            bufferedIn = new BufferedInputStream(new FileInputStream(file));
+            model = (Node) xstream.fromXML(bufferedIn);
+        }
+        finally {
+            try {
+                if (bufferedIn != null) {
+                    bufferedIn.close();
+                }
+            } catch (Throwable ignored) { // NOPMD by Braids on 8/21/11 9:20 PM
+                // Ignore exceptions on close.
+            }
+        }
+        return model;
+    }
+
+    /**
+     * Load the panel size preferences from a the given file using the old
+     * XMLDecoder format.  XStream is preferred.
+     * 
+     * @param file  the XML file containing the preferences
+     * @return  the preferences model as a Node instance
+     * @throws FileNotFoundException  if file does not exist
+     */
+    public static Node loadModelUsingXMLDecoder(final File file) throws FileNotFoundException {
+        BufferedInputStream bufferedIn = null;
+        Node model = null;
+        XMLDecoder decoder = null;
+        try {
+            bufferedIn = new BufferedInputStream(new FileInputStream(file));
+            decoder = new XMLDecoder(bufferedIn);
+            model = (Node) decoder.readObject();
+        }
+        finally {
+            try {
+                if (decoder != null) {
+                    decoder.close();
+                }
+            } catch (Throwable ignored) { // NOPMD by Braids on 8/21/11 9:20 PM
+                // Ignore exceptions on close.
+            }
+
+            try {
+                if (bufferedIn != null) {
+                    bufferedIn.close();
+                }
+            } catch (Throwable ignored) { // NOPMD by Braids on 8/21/11 9:20 PM
+                // Ignore exceptions on close.
+            }
+        }
+        return model;
     }
 
     /**
