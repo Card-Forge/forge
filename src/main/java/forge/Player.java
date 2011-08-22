@@ -1479,8 +1479,11 @@ public abstract class Player extends MyObservable {
         loseConditionSpell = spellName;
         return true;
     }
-    
-    
+
+    public void concede() { // No cantLose checks - just lose
+        lossState = GameLossReason.Conceded;
+        loseConditionSpell = null;
+    }
 
     /**
      * <p>cantLose.</p>
@@ -1488,6 +1491,8 @@ public abstract class Player extends MyObservable {
      * @return a boolean.
      */
     public boolean cantLose() {
+        if (lossState == GameLossReason.Conceded) { return false; }
+
         CardList list = AllZoneUtil.getPlayerCardsInPlay(this);
         list = list.getKeyword("You can't lose the game.");
 

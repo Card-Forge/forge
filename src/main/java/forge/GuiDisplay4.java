@@ -75,7 +75,6 @@ import com.thoughtworks.xstream.XStreamException;
 
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.error.ErrorViewer;
-import forge.game.GameLossReason;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.game.CardDetailPanel;
@@ -1325,7 +1324,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * Exit the Application
      */
     private void concede() {
-        AllZone.getHumanPlayer().loseConditionMet(GameLossReason.Conceded, null );
+        AllZone.getHumanPlayer().concede();
         AllZone.getGameAction().checkStateEffects();
     }
 

@@ -203,9 +203,7 @@ public class SetInfoUtil {
 
         int mostRecent = -1;
 
-        for (int i = 0; i < alSI.size(); i++) {
-            SetInfo s = alSI.get(i);
-
+        for (SetInfo s : alSI) {
             for (int j = 0; j < setData.size(); j++) {
                 if (setData.get(j).get("Code3").equals(s.Code)) {
                     if (j > mostRecent) {
