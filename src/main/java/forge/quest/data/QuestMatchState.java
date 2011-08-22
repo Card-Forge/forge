@@ -1,163 +1,79 @@
 package forge.quest.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import forge.game.GameSummary;
+
+
 /**
  * <p>QuestMatchState class.</p>
  *
  * @author Forge
  * @version $Id$
  */
+
+
 public class QuestMatchState {
-    //the way wins were achieved:
-    //Damage
-    //Poison Counters
-    //Battle of Wits
-    //Mortal Combat
-    //Milled
-    //Felidar Sovereign
-    //...
-    //
-    private String[] winMethods = new String[2];
-    private int[] winTurns = new int[2];
+    public static final int GAMES_PER_MATCH = 3;
+    public static final int MIN_GAMES_TO_WIN_MATCH = 2;
 
-    private boolean[] mulliganedToZero = new boolean[2];
+    private List<GameSummary> gamesPlayed = new ArrayList<GameSummary>();
+    //ArrayList<GameSpecialConditions>
 
-    private int win;
-    private int lose;
-    private boolean winRecently;
-
-    /**
-     * <p>reset.</p>
-     */
-    public void reset() {
-        win = 0;
-        lose = 0;
-        winMethods = new String[2];
+    public final void addGamePlayed(final GameSummary completedGame) {
+        gamesPlayed.add(completedGame);
     }
 
-    /**
-     * <p>addWin.</p>
-     */
-    public void addWin() {
-        win++;
-        winRecently = true;
+    public final GameSummary[] getGamesPlayed() {
+        return gamesPlayed.toArray(new GameSummary[gamesPlayed.size()]);
     }
 
-    /**
-     * <p>addLose.</p>
-     */
-    public void addLose() {
-        lose++;
-        winRecently = false;
+    public final int getGamesPlayedCount() {
+        return gamesPlayed.size();
     }
 
-    /**
-     * <p>Getter for the field <code>win</code>.</p>
-     *
-     * @return a int.
-     */
-    public int getWin() {
-        return win;
+    public final boolean hasHumanWonLastGame() {
+        int iLastGame = gamesPlayed.size() - 1;
+        return iLastGame >= 0 ? gamesPlayed.get(iLastGame).isHumanWinner() : false;
     }
 
-    /**
-     * <p>Getter for the field <code>lose</code>.</p>
-     *
-     * @return a int.
-     */
-    public int getLose() {
-        return lose;
+    public final boolean isMatchOver() {
+        int winsHuman = 0;
+        int winsAI = 0;
+        int totalGames = 0;
+
+        for (GameSummary game : gamesPlayed) {
+            if (game.isAIWinner()) { winsAI++; }
+            if (game.isHumanWinner()) { winsHuman++; }
+            totalGames++;
+        }
+
+        return winsAI >= MIN_GAMES_TO_WIN_MATCH || winsHuman >= MIN_GAMES_TO_WIN_MATCH || totalGames >= GAMES_PER_MATCH;
     }
 
-    /**
-     * <p>countWinLose.</p>
-     *
-     * @return a int.
-     */
-    public int countWinLose() {
-        return win + lose;
+    public final int getGamesCountWonByHuman() {
+        int winsHuman = 0;
+        for (GameSummary game : gamesPlayed) {
+            if (game.isHumanWinner()) { winsHuman++; }
+        }
+        return winsHuman;
     }
 
-    /**
-     * <p>setWinMethod.</p>
-     *
-     * @param gameNumber a int.
-     * @param method a {@link java.lang.String} object.
-     */
-    public void setWinMethod(int gameNumber, String method) {
-        winMethods[gameNumber] = method;
+    public final int getGamesCountLostByHuman() {
+        int lossHuman = 0;
+        for (GameSummary game : gamesPlayed) {
+            if (!game.isHumanWinner()) { lossHuman++; }
+        }
+        return lossHuman;
     }
 
-    /**
-     * <p>Getter for the field <code>winMethods</code>.</p>
-     *
-     * @return an array of {@link java.lang.String} objects.
-     */
-    public String[] getWinMethods() {
-        return winMethods;
+    public final boolean isMatchWonByHuman() {
+        return getGamesCountWonByHuman() >= MIN_GAMES_TO_WIN_MATCH;
     }
 
-    /**
-     * <p>setWinTurn.</p>
-     *
-     * @param gameNumber a int.
-     * @param turns a int.
-     */
-    public void setWinTurn(int gameNumber, int turns) {
-        winTurns[gameNumber] = turns;
+    public final void reset() {
+        gamesPlayed.clear();
     }
 
-
-    /**
-     * <p>Getter for the field <code>winTurns</code>.</p>
-     *
-     * @return an array of int.
-     */
-    public int[] getWinTurns() {
-        return winTurns;
-    }
-
-    /**
-     * <p>Getter for the field <code>mulliganedToZero</code>.</p>
-     *
-     * @return an array of boolean.
-     */
-    public boolean[] getMulliganedToZero() {
-        return mulliganedToZero;
-    }
-
-    /**
-     * <p>Setter for the field <code>mulliganedToZero</code>.</p>
-     *
-     * @param gameNumber a int.
-     * @param b a boolean.
-     */
-    public void setMulliganedToZero(int gameNumber, boolean b) {
-        mulliganedToZero[gameNumber] = b;
-    }
-
-    /**
-     * <p>didWinRecently.</p>
-     *
-     * @return a boolean.
-     */
-    public boolean didWinRecently() {
-        return winRecently;
-    }
-    
-    /**
-     * <p>isMatchOver.</p>
-     * @return whether match is complete
-     */
-    public boolean isMatchOver()
-    {
-        return win == 2 || lose == 2;
-    }
-    /**
-     * <p>isMatchOver.</p>
-     * @return whether match is won
-     */
-    public boolean isMatchWon()
-    {
-        return win == 2;
-    }    
 }

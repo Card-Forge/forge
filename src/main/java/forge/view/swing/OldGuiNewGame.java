@@ -126,7 +126,6 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
         AllZone.setQuestData(null);
         allDecks = getDecks();
-        Constant.Runtime.matchState.reset();
 
         if (Constant.Runtime.width[0] == 0) {
             Constant.Runtime.width[0] = 70;

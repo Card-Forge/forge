@@ -1200,7 +1200,7 @@ public class Card extends MyObservable implements Comparable<Card> {
             return new Card_Color(this);
         }
         Card_Color colors = null;
-        ArrayList<Card_Color> globalChanges = AllZone.getGameInfo().getColorChanges();
+        ArrayList<Card_Color> globalChanges = AllZone.getColorChanger().getColorChanges();
         colors = determineColor(globalChanges);
         colors.fixColorless();
         return colors;
@@ -1227,7 +1227,8 @@ public class Card extends MyObservable implements Comparable<Card> {
     Card_Color determineColor(ArrayList<Card_Color> globalChanges) {
         Card_Color colors = new Card_Color(this);
         int i = cardColor.size() - 1;
-        int j = globalChanges.size() - 1;
+        int j = -1;
+        if (globalChanges != null) { j = globalChanges.size() - 1; }
         // if both have changes, see which one is most recent
         while (i >= 0 && j >= 0) {
             Card_Color cc = null;

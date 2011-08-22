@@ -5,6 +5,7 @@ import forge.Card;
 import forge.ComputerUtil;
 import forge.Player;
 import forge.card.spellability.*;
+import forge.game.GameLossReason;
 
 import java.util.ArrayList;
 
@@ -213,7 +214,7 @@ public class AbilityFactory_EndGameCondition {
         ArrayList<Player> players = AbilityFactory.getDefinedPlayers(card, af.getMapParams().get("Defined"), sa);
 
         for (Player p : players)
-            p.altWinConditionMet(card.getName());
+            p.altWinBySpellEffect(card.getName());
     }
 
     // ***********************************************************************************************
@@ -449,7 +450,7 @@ public class AbilityFactory_EndGameCondition {
         }
 
         for (Player p : players)
-            p.altLoseConditionMet(card.getName());
+            p.loseConditionMet( GameLossReason.SpellEffect, card.getName());
     }
 
 }

@@ -2345,7 +2345,7 @@ public class Upkeep implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     if (player.getLife() >= 40)
-                        player.altWinConditionMet(source.getName());
+                        player.altWinBySpellEffect(source.getName());
                 }
             };// Ability
 
@@ -2377,7 +2377,7 @@ public class Upkeep implements java.io.Serializable {
                     CardList grave = AllZoneUtil.getPlayerGraveyard(player);
                     grave = grave.filter(AllZoneUtil.creatures);
                     if (grave.size() >= 20)
-                        player.altWinConditionMet(source.getName());
+                        player.altWinBySpellEffect(source.getName());
                 }
             };// Ability
 
@@ -2405,7 +2405,7 @@ public class Upkeep implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     if (c.getCounters(Counters.TOWER) >= 100)
-                        player.altWinConditionMet(c.getName());
+                        player.altWinBySpellEffect(c.getName());
                 }
             };// Ability
 
@@ -2435,7 +2435,7 @@ public class Upkeep implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     if (player.getLife() == 1)
-                        player.altWinConditionMet(source.getName());
+                        player.altWinBySpellEffect(source.getName());
                 }
             };// Ability
 
@@ -2465,7 +2465,7 @@ public class Upkeep implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     if (player.getLife() >= 50)
-                        player.altWinConditionMet(source.getName());
+                        player.altWinBySpellEffect(source.getName());
                 }
             };// Ability
 
@@ -2507,7 +2507,7 @@ public class Upkeep implements java.io.Serializable {
                     playList.remove(source);
 
                     if (playList.size() == 0 && handList.size() == 0)
-                        player.altWinConditionMet(source.getName());
+                        player.altWinBySpellEffect(source.getName());
                 }
             };// Ability
 

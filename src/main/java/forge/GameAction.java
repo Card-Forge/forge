@@ -11,6 +11,9 @@ import forge.card.spellability.*;
 import forge.card.staticAbility.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.deck.Deck;
+import forge.game.GameEndReason;
+import forge.game.GameSummary;
+import forge.game.PlayerIndex;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input_Mulligan;
 import forge.gui.input.Input_PayManaCost;
@@ -559,43 +562,48 @@ public class GameAction {
      */
     public boolean checkEndGameSate() {
         // Win / Lose
+        GameSummary game = AllZone.getGameInfo();
         boolean humanWins = false;
         boolean computerWins = false;
         Player computer = AllZone.getComputerPlayer();
         Player human = AllZone.getHumanPlayer();
 
-        int gameWon = Constant.Runtime.matchState.getWin();
-
-        if (human.hasWon()) {    // Winning Conditions can be worth more than losing conditions
+        if ( human.hasWon() || computer.hasLost() ) {    // Winning Conditions can be worth more than losing conditions
             // Human wins
             humanWins = true;
+            
             if (human.getAltWin()) {
-                Constant.Runtime.matchState.setWinMethod(gameWon, human.getWinCondition());
+                game.end(GameEndReason.WinsGameSpellEffect, PlayerIndex.HUMAN, human.getWinConditionSource());
+            } else {
+                game.end(GameEndReason.AllOpponentsLost, PlayerIndex.HUMAN, null);
             }
-            Constant.Runtime.matchState.addWin();
-        } else if (computer.hasLost()) {
-            // Human wins
-            humanWins = true;
-
-            if (computer.getAltLose()) {
-                Constant.Runtime.matchState.setWinMethod(gameWon, computer.getLoseCondition());
-            }
-            Constant.Runtime.matchState.addWin();
         }
 
 
         if (computer.hasWon() || human.hasLost()) {
             if (humanWins) {
                 // both players won/lost at the same time.
-                // TODO: Handle a Draw here
+                game.end(GameEndReason.Draw, PlayerIndex.DRAW, null);
+            } else {
+                computerWins = true;
+                
+                if (computer.getAltWin()) {
+                    game.end(GameEndReason.WinsGameSpellEffect, PlayerIndex.AI, computer.getWinConditionSource());
+                } else {
+                    game.end(GameEndReason.AllOpponentsLost, PlayerIndex.AI, null);
+                }
+                
             }
-
-            // Computer wins
-            computerWins = true;
-            Constant.Runtime.matchState.addLose();
         }
 
-        return humanWins || computerWins;
+        boolean isGameDone = humanWins || computerWins;
+        if (isGameDone) {
+            game.getPlayerRating(PlayerIndex.AI).setLossReason(computer.getLossState());
+            game.getPlayerRating(PlayerIndex.HUMAN).setLossReason(human.getLossState());
+            AllZone.getMatchState().addGamePlayed(game);
+        }
+
+        return isGameDone;
     }
 
 
@@ -616,7 +624,7 @@ public class GameAction {
         if (checkEndGameSate()) {
             AllZone.getDisplay().savePrefs();
             frame.dispose();
-            new Gui_WinLose();
+            new Gui_WinLose( AllZone.getMatchState(), AllZone.getQuestData(), AllZone.getQuestAssignment() );
             return;
         }
 
@@ -1044,41 +1052,7 @@ public class GameAction {
         //AllZone.getComputer() = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
 
-        AllZone.getGameInfo().setPreventCombatDamageThisTurn(false);
-        AllZone.getGameInfo().setHumanNumberOfTimesMulliganed(0);
-        AllZone.getGameInfo().setHumanMulliganedToZero(false);
-        AllZone.getGameInfo().setComputerStartedThisGame(false);
-
-        AllZone.getHumanPlayer().reset();
-        AllZone.getComputerPlayer().reset();
-
-        AllZone.getPhase().reset();
-        AllZone.getStack().reset();
-        AllZone.getCombat().reset();
-        AllZone.getDisplay().showCombat("");
-        AllZone.getDisplay().loadPrefs();
-
-        AllZone.getHumanGraveyard().reset();
-        AllZone.getHumanHand().reset();
-        AllZone.getHumanLibrary().reset();
-        AllZone.getHumanBattlefield().reset();
-        AllZone.getHumanExile().reset();
-
-        AllZone.getComputerGraveyard().reset();
-        AllZone.getComputerHand().reset();
-        AllZone.getComputerLibrary().reset();
-        AllZone.getComputerBattlefield().reset();
-        AllZone.getComputerExile().reset();
-
-        AllZone.getInputControl().clearInput();
-
-        AllZone.getStaticEffects().reset();
-
-		// player.reset() now handles this
-        //AllZone.getHumanPlayer().clearHandSizeOperations();
-        //AllZone.getComputerPlayer().clearHandSizeOperations();
-        
-        AllZone.getTriggerHandler().clearRegistered();
+        AllZone.newGameCleanup();
         forge.card.trigger.Trigger.resetIDs();
 
 
@@ -1216,13 +1190,13 @@ public class GameAction {
         }
 
         // Only cut/coin toss if it's the first game of the match
-        if (Constant.Runtime.matchState.countWinLose() == 0) {
+        if (AllZone.getMatchState().getGamesPlayedCount() == 0) {
             // New code to determine who goes first. Delete this if it doesn't work properly
             if (isStartCut())
                 seeWhoPlaysFirst();
             else
                 seeWhoPlaysFirst_CoinToss();
-        } else if (Constant.Runtime.matchState.didWinRecently())    // if player won last, AI starts
+        } else if (AllZone.getMatchState().hasHumanWonLastGame())    // if player won last, AI starts
             computerStartsGame();
 
         for (int i = 0; i < 7; i++) {
@@ -1482,7 +1456,7 @@ public class GameAction {
      */
     public void computerStartsGame() {
         AllZone.getPhase().setPlayerTurn(AllZone.getComputerPlayer());
-        AllZone.getGameInfo().setComputerStartedThisGame(true);
+        AllZone.getGameInfo().setPlayerWhoGotFirstTurn(PlayerIndex.AI);
     }
 
     //if Card had the type "Aura" this method would always return true, since local enchantments are always attached to something

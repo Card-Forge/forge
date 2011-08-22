@@ -7,6 +7,7 @@ import arcane.ui.ViewPanel;
 import arcane.ui.util.Animation;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.error.ErrorViewer;
+import forge.game.GameLossReason;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.game.CardDetailPanel;
@@ -58,7 +59,6 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     Font statFont = new Font("Dialog", Font.PLAIN, 12);
     Font lifeFont = new Font("Dialog", Font.PLAIN, 40);
    // Font checkboxFont = new Font("Dialog", Font.PLAIN, 9);
-
 
     /** Constant <code>greenColor</code> */
     public static Color greenColor = new Color(0, 164, 0);
@@ -1134,10 +1134,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
      * Exit the Application
      */
     private void concede() {
-        savePrefs();
-        dispose();
-        Constant.Runtime.matchState.addLose();
-        new Gui_WinLose();
+        AllZone.getHumanPlayer().loseConditionMet(GameLossReason.Conceded, null );
+        AllZone.getGameAction().checkStateEffects();
     }
 
     // ********** Phase stuff in Display ******************

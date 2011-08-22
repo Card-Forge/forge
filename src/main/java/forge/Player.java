@@ -1,5 +1,6 @@
 package forge;
 
+import forge.game.GameLossReason;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
@@ -24,9 +25,10 @@ public abstract class Player extends MyObservable {
     protected int numPowerSurgeLands;
 
     protected boolean altWin = false;
-    protected String winCondition = "";
+    protected String altWinSourceName;
     protected boolean altLose = false;
-    protected String loseCondition = "";
+    protected GameLossReason lossState = GameLossReason.DidNotLoseYet;
+    protected String loseConditionSpell;
 
     protected int nTurns = 0;
     protected boolean skipNextUntap = false;
@@ -43,6 +45,7 @@ public abstract class Player extends MyObservable {
     protected ManaPool manaPool = null;
     
     protected Object mustAttackEntity = null;
+    
 
     /**
      * <p>Constructor for Player.</p>
@@ -81,9 +84,10 @@ public abstract class Player extends MyObservable {
         slowtripList = new CardList();
         nTurns = 0;
         altWin = false;
+        altWinSourceName = null;
         altLose = false;
-        winCondition = "";
-        loseCondition = "";
+        lossState = GameLossReason.DidNotLoseYet;
+        loseConditionSpell = null;
         maxLandsToPlay = 1;
         numLandsPlayed = 0;
         
@@ -907,7 +911,8 @@ public abstract class Player extends MyObservable {
         //lose:
         else if (!Constant.Runtime.DevMode[0] || AllZone.getDisplay().canLoseByDecking()) {
             // if devMode is off, or canLoseByDecking is Enabled, run Lose Condition
-            if (altLoseConditionMet("Milled")) {
+            if (!cantLose()) {
+                loseConditionMet(GameLossReason.Milled, null);
                 AllZone.getGameAction().checkStateEffects();
             }
         }
@@ -1425,21 +1430,13 @@ public abstract class Player extends MyObservable {
     }
 
     /**
-     * <p>Getter for the field <code>altLose</code>.</p>
-     *
-     * @return a boolean.
-     */
-    public boolean getAltLose() {
-        return altLose;
-    }
-
-    /**
      * <p>Getter for the field <code>winCondition</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getWinCondition() {
-        return winCondition;
+    public String getWinConditionSource()
+    {
+        return altWinSourceName;
     }
 
     /**
@@ -1447,8 +1444,8 @@ public abstract class Player extends MyObservable {
      *
      * @return a {@link java.lang.String} object.
      */
-    public String getLoseCondition() {
-        return loseCondition;
+    public GameLossReason getLossState() {
+        return lossState;
     }
 
     /**
@@ -1456,13 +1453,13 @@ public abstract class Player extends MyObservable {
      *
      * @param s a {@link java.lang.String} object.
      */
-    public void altWinConditionMet(String s) {
+    public void altWinBySpellEffect( String sourceName ) {
         if (cantWin()) {
             System.out.println("Tried to win, but currently can't.");
             return;
         }
         altWin = true;
-        winCondition = s;
+        altWinSourceName = sourceName;
     }
 
     /**
@@ -1471,15 +1468,17 @@ public abstract class Player extends MyObservable {
      * @param s a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public boolean altLoseConditionMet(String s) {
+    public boolean loseConditionMet(GameLossReason state, String spellName ) {
         if (cantLose()) {
             System.out.println("Tried to lose, but currently can't.");
             return false;
         }
-        altLose = true;
-        loseCondition = s;
+        lossState = state;
+        loseConditionSpell = spellName;
         return true;
     }
+    
+    
 
     /**
      * <p>cantLose.</p>
@@ -1539,12 +1538,12 @@ public abstract class Player extends MyObservable {
         if (cantLose())
             return false;
 
-        if (altLose) {
+        if (lossState != GameLossReason.DidNotLoseYet) {
             return true;
         }
 
         if (poisonCounters >= 10) {
-            altLoseConditionMet("Poison Counters");
+            loseConditionMet( GameLossReason.Poisoned, null );
             return true;
         }
 
@@ -1552,7 +1551,13 @@ public abstract class Player extends MyObservable {
             return false;
         }
 
-        return getLife() <= 0;
+        boolean hasNoLife = getLife() <= 0;
+        if (hasNoLife) {
+            loseConditionMet( GameLossReason.LifeReachedZero, null);
+            return true;
+        }
+
+        return false;
     }
 
 

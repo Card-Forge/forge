@@ -149,7 +149,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
      */
     private JPanel createSidePanel() {
         JPanel panel = new JPanel();
-        JPanel optionsPanel;//Create options checkbox list
+        JPanel optionsPanel; //Create options checkbox list
         optionsPanel = createOptionsPanel();
 
         List<Component> eastComponents = new ArrayList<Component>();
@@ -659,7 +659,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
 
-
+        AllZone.getMatchState().reset();
         if (isShowingQuests) {
             setupQuest(humanDeck);
         } else {

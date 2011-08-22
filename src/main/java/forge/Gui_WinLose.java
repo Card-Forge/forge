@@ -1,25 +1,38 @@
 package forge;
 
-
-import forge.error.ErrorViewer;
+import forge.error.E
+import forge.game.GameEndReason;
+rrorViewer;
+import forge.game.GameLossReason;
+import forge.game.GamePlayerRating;
+import forge.game.GameSummary;
+import forge.game.PlayerIndex;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;
+import forge.quest.data.QuestData;
 import forge.quest.data.QuestMatchState;
 import forge.quest.data.QuestPreferences;
 import forge.quest.gui.QuestFrame;
 import forge.view.swing.OldGuiNewGame;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
-
+import java.util.ArrayList;
 
 /**
  * <p>Gui_WinLose class.</p>
@@ -30,14 +43,6 @@ import java.io.File;
 public class Gui_WinLose extends JFrame implements NewConstants {
     /** Constant <code>serialVersionUID=-5800412940994975483L</code> */
     private static final long serialVersionUID = -5800412940994975483L;
-
-    //private CardList          humanList;
-    //private CardList          computerList;
-
-    //private int               humanLife;
-    //private int               computerLife;
-
-    //private boolean           fantasyQuest     = false;
 
     private JLabel titleLabel = new JLabel();
     private JButton continueButton = new JButton();
@@ -52,51 +57,22 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     // border1
     private Border border1;
 
-    /**
-     * <p>Constructor for Gui_WinLose.</p>
-     *
-     * @param human a {@link forge.CardList} object.
-     * @param computer a {@link forge.CardList} object.
-     * @param hLife a int.
-     * @param cLife a int.
-     */
-    public Gui_WinLose(CardList human, CardList computer, int hLife, int cLife) {
-        /*
-          fantasyQuest = true;
-
-          humanList = human;
-          computerList = computer;
-
-          humanLife = hLife;
-          computerLife= cLife;
-          */
-        try {
-            jbInit();
-        } catch (Exception ex) {
-            ErrorViewer.showError(ex);
-        }
-
-        setup();
-
-        Dimension screen = this.getToolkit().getScreenSize();
-        setBounds(screen.width / 3, 100, //position
-                215, 370); //size
-        setVisible(true);
+    private class WinLoseModel {
+        public QuestMatchState match;
+        public QuestData quest;
+        public Quest_Assignment qa;
     }
 
+    private WinLoseModel model;
+
     /**
      * <p>Constructor for Gui_WinLose.</p>
      */
-    public Gui_WinLose() {
-        /*
-    	fantasyQuest = false;
-    	
-    	humanList = new CardList();
-    	computerList = new CardList();
-    	
-    	humanLife = 20;
-    	computerLife= 20;
-    	*/
+    public Gui_WinLose(final QuestMatchState matchState, final QuestData quest, final Quest_Assignment qa) {
+        model = new WinLoseModel();
+        model.match = matchState;
+        model.quest = quest;
+        model.qa = qa;
 
         try {
             jbInit();
@@ -107,8 +83,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         setup();
 
         Dimension screen = this.getToolkit().getScreenSize();
-        setBounds(screen.width / 3, 100, //position
-                215, 370); //size
+        setBounds(screen.width / 3, 100 /*position*/, 215, 370 /*size*/);
         setVisible(true);
     }
 
@@ -116,47 +91,28 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * <p>setup.</p>
      */
     private void setup() {
-        AllZone.getGameInfo().clearColorChanges();
-        QuestMatchState winLose = Constant.Runtime.matchState;
         Phase.setGameBegins(0);
-        //3 is the match length, 3 is the number of games
-        //disable buttons if match is up, or human player won 2 or lost 2 games already
-        if ((winLose.countWinLose() == 3) || (winLose.getWin() == 2) || (winLose.getLose() == 2)) {
+        
+        if (model.match.isMatchOver()) {
 //      editDeckButton.setEnabled(false);
             continueButton.setEnabled(false);
             quitButton.grabFocus();
         }
 
-        if (winLose.getWin() == 2)
-            restartButton.setEnabled(false);
+        restartButton.setEnabled(!model.match.isMatchWonByHuman());
 
         //show Wins and Loses
-        statsLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WON) + winLose.getWin() + ForgeProps.getLocalized(WINLOSE_TEXT.LOST) + winLose.getLose());
+        int humanWins = model.match.getGamesCountWonByHuman();
+        int humanLosses = model.match.getGamesCountLostByHuman();
+        statsLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WON) + humanWins
+                + ForgeProps.getLocalized(WINLOSE_TEXT.LOST) + humanLosses);
 
+        
         //show "You Won" or "You Lost"
-        if (winLose.didWinRecently()) {
+        if (model.match.hasHumanWonLastGame()) {
             titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WIN));
-
-            int game = 0;
-            if (winLose.getWinTurns()[0] != 0)
-                game = 1;
-            int turn = AllZone.getPhase().getTurn();
-            if (AllZone.getGameInfo().isComputerStartedThisGame())
-                turn--;
-
-            if (turn < 1)
-                turn = 1;
-
-            winLose.setWinTurn(game, turn);
-            winLose.setMulliganedToZero(game, AllZone.getGameInfo().getHumanMulliganedToZero());
-
-            //winLose.setWinTurn(winLose.countWinLose()-1, AllZone.getPhase().getTurn());
-
-            //System.out.println("CountwinLose:" + winLose.countWinLose());
-            //System.out.println("You won by turn: " + AllZone.getPhase().getTurn());
         } else {
             titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.LOSE));
-            //System.out.println("You lost by turn: " + AllZone.getPhase().getTurn());
         }
     }//setup();
 
@@ -174,21 +130,15 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         this.getContentPane().setLayout(new MigLayout("fill"));
         continueButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.CONTINUE));
         continueButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                continueButton_actionPerformed(e);
-            }
+            public void actionPerformed(ActionEvent e) { continueButton_actionPerformed(e); }
         });
         restartButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.RESTART));
         restartButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                restartButton_actionPerformed(e);
-            }
+            public void actionPerformed(ActionEvent e) { restartButton_actionPerformed(e); }
         });
         quitButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.QUIT));
         quitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                quitButton_actionPerformed(e);
-            }
+            public void actionPerformed(ActionEvent e) { quitButton_actionPerformed(e); }
         });
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 16));
         statsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -196,9 +146,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         jPanel2.setLayout(new MigLayout("align center"));
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                this_windowClosing(e);
-            }
+            public void windowClosing(WindowEvent e) { this_windowClosing(e); }
         });
         this.getContentPane().add(titleLabel, "align center, grow, wrap");
         this.getContentPane().add(statsLabel, "align center, grow, wrap");
@@ -210,58 +158,42 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     }
 
     /**
-     * <p>editDeckButton_actionPerformed.</p>
-     *
-     * @param e a {@link java.awt.event.ActionEvent} object.
-     */
-    void editDeckButton_actionPerformed(ActionEvent e) {
-        Command exit = new Command() {
-            private static final long serialVersionUID = 4735992294414389187L;
-
-            public void execute() {
-                new Gui_WinLose();
-            }
-        };
-        Gui_DeckEditor editor = new Gui_DeckEditor();
-
-        editor.show(exit);
-
-        dispose();
-    }//editDeckButton_actionPerformed()
-
-    /**
      * <p>continueButton_actionPerformed.</p>
      *
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
     void continueButton_actionPerformed(ActionEvent e) {
         //open up "Game" screen
-        //AllZone.getComputerPlay().reset();//sometimes computer has creature in play in the 2nd game of the match
-
-        if (!Constant.Quest.fantasyQuest[0])
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
-        else {
+        
+        PrepareForNextRound();
+        AllZone.getDisplay().setVisible(true);
+        dispose();
+    }
+    
+    void PrepareForNextRound()
+    {
+        if (Constant.Quest.fantasyQuest[0]) {
             int extraLife = 0;
-            if (AllZone.getQuestAssignment() != null) {
-                forge.quest.data.QuestUtil.setupQuest(AllZone.getQuestAssignment());
-                if (AllZone.getQuestData().getInventory().hasItem("Zeppelin"))
+            if (model.qa != null) {
+                forge.quest.data.QuestUtil.setupQuest(model.qa);
+                if (model.quest.getInventory().hasItem("Zeppelin"))
                     extraLife = 3;
             }
             //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
-            CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(AllZone.getQuestData(), AllZone.getQuestAssignment());
+            CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(model.quest, model.qa);
             CardList computerList = new CardList();
 
 
-            int humanLife = AllZone.getQuestData().getLife() + extraLife;
+            int humanLife = model.quest.getLife() + extraLife;
             int computerLife = 20;
-            if (AllZone.getQuestAssignment() != null)
-                computerLife = AllZone.getQuestAssignment().getComputerLife();
+            if ( model.qa != null )
+                computerLife = model.qa.getComputerLife();
 
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife, AllZone.getQuestAssignment());
+            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife, model.qa );
+        } else {
+            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         }
-        AllZone.getDisplay().setVisible(true);
 
-        dispose();
     }
 
     /**
@@ -270,33 +202,9 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * @param e a {@link java.awt.event.ActionEvent} object.
      */
     void restartButton_actionPerformed(ActionEvent e) {
-        Constant.Runtime.matchState.reset();
-
-        if (!Constant.Quest.fantasyQuest[0])
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
-        else {
-            int extraLife = 0;
-            //AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
-            if (AllZone.getQuestAssignment() != null) {
-                forge.quest.data.QuestUtil.setupQuest(AllZone.getQuestAssignment());
-                if (AllZone.getQuestData().getInventory().hasItem("Zeppelin"))
-                    extraLife = 3;
-            }
-
-            CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(AllZone.getQuestData(), AllZone.getQuestAssignment());
-            //CardList computerList = QuestUtil.getComputerCreatures(AllZone.getQuestData(), AllZone.getQuestAssignment());
-            CardList computerList = new CardList();
-
-            int humanLife = AllZone.getQuestData().getLife() + extraLife;
-            int computerLife = 20;
-
-            if (AllZone.getQuestAssignment() != null)
-                computerLife = AllZone.getQuestAssignment().getComputerLife();
-
-            AllZone.getGameAction().newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife, AllZone.getQuestAssignment());
-        }
+        model.match.reset();
+        PrepareForNextRound();
         AllZone.getDisplay().setVisible(true);
-
         dispose();
     }
 
@@ -304,88 +212,82 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      * <p>getWinText.</p>
      *
      * @param creds a long.
-     * @param winLose a {@link forge.quest.data.QuestMatchState} object.
+     * @param matchState a {@link forge.quest.data.QuestMatchState} object.
      * @param q a {@link forge.quest.data.QuestData} object.
      * @return a {@link java.lang.String} object.
      */
-    private String getWinText(long creds, QuestMatchState winLose, forge.quest.data.QuestData q) {
+    private String getCreditsAwardedText(final long creds, final QuestMatchState matchState, final forge.quest.data.QuestData q) {
         // TODO use q.qdPrefs to write bonus credits in prefs file
-        StringBuilder sb = new StringBuilder();
-        String[] wins = winLose.getWinMethods();
+        StringBuilder sb = new StringBuilder("<html>");
 
-        sb.append("<html>");
+        boolean hasNeverLost = true;
+        for (GameSummary game : matchState.getGamesPlayed()) {
 
+            if (game.isAIWinner()) {
+                hasNeverLost = true;
+                continue; // no rewards for losing a game
+            }
 
-        for (String s : wins) {
-            if (s != null) {
-                sb.append("Alternate win condition: ");
-                sb.append("<u>");
-                sb.append(s);
-                sb.append("</u>");
-                sb.append("! Bonus: <b>+");
+            GamePlayerRating aiRating = game.getPlayerRating(PlayerIndex.AI);
+            GamePlayerRating humanRating = game.getPlayerRating(PlayerIndex.HUMAN);
+            GameLossReason whyAiLost = aiRating.getLossReason();
 
-                if (s.equals("Poison Counters"))
-                    sb.append(QuestPreferences.getMatchRewardPoisonWinBonus());
-                else if (s.equals("Milled"))
-                    sb.append(QuestPreferences.getMatchRewardMilledWinBonus());
-                else if (s.equals("Battle of Wits") ||
-                        s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
-                        s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience") ||
-                        s.equals("Mortal Combat") || s.equals("Test of Endurance")) {
-
-                    sb.append(QuestPreferences.getMatchRewardAltWinBonus());
+            int rewardAltWinCondition = q.getCreditsRewardForAltWin(whyAiLost);
+            if (rewardAltWinCondition > 0) {
+                String winConditionName = "Unknown (bug)";
+                if ( game.getWinCondition() == GameEndReason.WinsGameSpellEffect ) {
+                    winConditionName = game.getWinSpellEffect();
+                } else {
+                    switch( whyAiLost ) {
+                        case Poisoned: winConditionName = "Poison"; break;
+                        case Milled: winConditionName = "Milled"; break;
+                        default: break;
+                    }
                 }
 
-                sb.append(" credits</b>.<br>");
+                String bonus = String.format("Alternate win condition: <u>%s</u>! Bonus: <b>+%d credits</b>.<br>",
+                        winConditionName, rewardAltWinCondition);
+                sb.append(bonus);
+            }
+
+            int winTurn = game.getTurnGameEnded();
+
+            int turnCredits = q.getCreditsRewardForWinByTurn(winTurn);
+
+            if (winTurn == 0) { // this case should never happen - anyway, no reward if we got here
+            } else if (winTurn == 1) { sb.append("Won in one turn!");
+            } else if (winTurn <= 5) { sb.append("Won by turn 5!");
+            } else if (winTurn <= 10) { sb.append("Won by turn 10!");
+            } else if (winTurn <= 15) { sb.append("Won by turn 15!");
+            }
+
+            if (turnCredits > 0) {
+                sb.append(String.format(" Bonus: <b>+%d credits</b>.<br>", turnCredits));
+            }
+
+            int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
+            if ( 0 == cntCardsHumanStartedWith )
+            {
+                int reward = QuestPreferences.getMatchMullToZero();
+                sb.append(String.format("Mulliganed to zero and still won! Bonus: <b>%d credits</b>.<br>", reward));
             }
         }
 
-        int[] winTurns = winLose.getWinTurns();
 
-        for (int i : winTurns) {
-            System.out.println("Quest, won by turn:" + i);
-
-            if (i != 0) {
-                int turnCredits = 0;
-
-                if (i == 1) {
-                    sb.append("Won in one turn!");
-                    turnCredits += QuestPreferences.getMatchRewardWinFirst();
-                } else if (i <= 5) {
-                    sb.append("Won by turn 5!");
-                    turnCredits += QuestPreferences.getMatchRewardWinByFifth();
-                } else if (i <= 10) {
-                    sb.append("Won by turn 10!");
-                    turnCredits += QuestPreferences.getMatchRewardWinByTen();
-                } else if (i <= 15) {
-                    sb.append("Won by turn 15!");
-                    turnCredits += QuestPreferences.getMatchRewardWinByFifteen();
-                }
-                if (turnCredits > 0)
-                    sb.append(" Bonus: <b>+").append(turnCredits).append(" credits</b>.<br>");
-            }
+        if (hasNeverLost) {
+            int reward = QuestPreferences.getMatchRewardNoLosses();
+            sb.append(String.format("You have not lost once! Bonus: <b>+%d credits</b>.<br>", reward));
         }
 
-        boolean[] mulliganedToZero = winLose.getMulliganedToZero();
+        int estatesLevel = q.getInventory().getItemLevel("Estates");
 
-        for (boolean b : mulliganedToZero) {
-            if (b) {
-                sb.append("Mulliganed to zero and still won! Bonus: <b>+");
-                sb.append(QuestPreferences.getMatchMullToZero()).append(" credits</b>.<br>");
-            }
-        }
-
-        if (winLose.getLose() == 0)
-            sb.append("You have not lost once! Bonus: <b>+");
-        sb.append(QuestPreferences.getMatchRewardNoLosses()).append(" credits</b>.<br>");
-
-        if (q.getInventory().getItemLevel("Estates") == 1)
+        if (estatesLevel == 1) {
             sb.append("Estates bonus: <b>10%</b>.<br>");
-        else if (q.getInventory().getItemLevel("Estates") == 2)
+        } else if (estatesLevel == 2) {
             sb.append("Estates bonus: <b>15%</b>.<br>");
-        else if (q.getInventory().getItemLevel("Estates") == 3)
+        } else if (estatesLevel == 3) {
             sb.append("Estates bonus: <b>20%</b>.<br>");
-
+        }
         sb.append("You have earned <b>" + creds + " credits</b> in total.");
 
         sb.append("</html>");
@@ -428,110 +330,30 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (AllZone.getQuestData() == null) {
             new OldGuiNewGame();
         } else { //Quest
-            QuestMatchState matchState = Constant.Runtime.matchState;
-            forge.quest.data.QuestData quest = AllZone.getQuestData();
 
             boolean wonMatch = false;
-            if (matchState.getWin() == 2) {
-                quest.addWin();
+            if (model.match.isMatchWonByHuman()) {
+                model.quest.addWin();
                 wonMatch = true;
-            } else quest.addLost();
+            } else {
+                model.quest.addLost();
+            }
 
             //System.out.println("QuestData cardpoolsize:" + AllZone.getQuestData().getCardpool().size());
-            if (AllZone.getQuestData().getShopList() != null)
-                AllZone.getQuestData().clearShopList();
-
-            if (AllZone.getQuestData().getAvailableQuests() != null)
-                AllZone.getQuestData().clearAvailableQuests();
-
-            if (quest.shouldAddCards(wonMatch)) {
-                quest.addCards();
-                String fileName = "BookIcon.png";
-                ImageIcon icon = getIcon(fileName);
-
-                StringBuilder sb = new StringBuilder();
-                sb.append("You have won the following new cards:\n");
-                for (int i = 0; i < quest.getAddedCards().size(); i++)
-                    sb.append(quest.getAddedCards().get(i) + "\n");
-
-                JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE, icon);
+            if (model.quest.getShopList() != null) {
+                model.quest.clearShopList();
             }
 
-            if (wonMatch) {
-                long creds = quest.getCreditsToAdd(matchState);
-                String s = getWinText(creds, matchState, quest);
-
-                String fileName = "GoldIcon.png";
-                ImageIcon icon = getIcon(fileName);
-
-                JOptionPane.showMessageDialog(null, s, "", JOptionPane.INFORMATION_MESSAGE, icon);
-                int wins = quest.getWin();
-                if (wins > 0 && wins % 80 == 0)    // at every 80 wins, give 10 random rares
-                {
-                    quest.addRandomRare(10);
-                    fileName = "BoxIcon.png";
-                    icon = getIcon(fileName);
-                    JOptionPane.showMessageDialog(null, "You just won 10 random rares!", "", JOptionPane.INFORMATION_MESSAGE, icon);
-                }
-
-                if (AllZone.getQuestAssignment() != null) {
-                    AllZone.getQuestData().addQuestsPlayed();
-                    Quest_Assignment qa = AllZone.getQuestAssignment();
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Quest Completed - \r\n");
-
-                    if (qa.getCardRewardList() != null) {
-                        sb.append("You won the following cards:\r\n\r\n");
-                        for (String cardName : qa.getCardRewardList()) {
-                            sb.append(cardName);
-                            sb.append("\r\n");
-
-                            AllZone.getQuestData().addCard(cardName);
-                        }
-                        AllZone.getQuestData().addToNewList(qa.getCardRewardList());
-                        sb.append("\r\n");
-                    }
-                    sb.append("Quest Bounty: ");
-                    sb.append(qa.getCreditsReward());
-
-                    AllZone.getQuestData().addCredits(qa.getCreditsReward());
-
-                    fileName = "BoxIcon.png";
-                    icon = getIcon(fileName);
-                    JOptionPane.showMessageDialog(null, sb.toString(), "Quest Rewards for " + qa.getName(), JOptionPane.INFORMATION_MESSAGE, icon);
-                }/*
-            	else if(quest.getDifficultyIndex() == 4) {
-                    Card c = AllZone.getCardFactory().getCard(quest.addRandomRare(), AllZone.getHumanPlayer());
-                    c.setCurSetCode(c.getMostRecentSet());
-                	fileName = CardUtil.buildFilename(c) +".jpg";
-                	icon = getCardIcon(fileName);
-                    
-                    JOptionPane.showMessageDialog(null, "", "You have won a random rare for winning against a very hard deck.", JOptionPane.INFORMATION_MESSAGE, icon);
-                }*/
-
-            } else {
-                quest.subtractCredits(15);
-                String fileName = "HeartIcon.png";
-                ImageIcon icon = getIcon(fileName);
-
-                JOptionPane.showMessageDialog(null, "You lose! You have lost 15 credits.", "Awwww", JOptionPane.INFORMATION_MESSAGE, icon);
+            if (model.quest.getAvailableQuests() != null) {
+                model.quest.clearAvailableQuests();
             }
 
-            if (quest.shouldAddAdditionalCards(wonMatch)) {
-                Card c = AllZone.getCardFactory().getCard(quest.addRandomRare(), AllZone.getHumanPlayer());
-                c.setCurSetCode(c.getMostRecentSet());
-                String fileName = CardUtil.buildFilename(c) + ".jpg";
-                ImageIcon icon = getCardIcon(fileName);
+            giveQuestRewards(wonMatch);
 
-                JOptionPane.showMessageDialog(null, "", "You have won a random rare.", JOptionPane.INFORMATION_MESSAGE, icon);
-            }
-
-            matchState.reset();
-
+            model.match.reset();
             AllZone.setQuestAssignment(null);
 
-            quest.saveData();
+            model.quest.saveData();
 
             new QuestFrame();
         }//else - on quest
@@ -551,5 +373,107 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      */
     void this_windowClosing(WindowEvent e) {
         quitButton_actionPerformed(null);
+    }
+
+    protected void giveQuestRewards(final boolean wonMatch) {
+        // Award a random booster, as frequent as set in difficulty setup
+        if (model.quest.shouldAddCards(wonMatch)) {
+            ArrayList<String> cardsWon = model.quest.addCards();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("You have won the following new cards:\n");
+            for (String cardName : cardsWon) {
+                sb.append(cardName + "\n");
+            }
+
+            String fileName = "BookIcon.png";
+            ImageIcon icon = getIcon(fileName);
+            JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+
+        // Award credits
+        if (wonMatch) {
+            long creds = model.quest.getCreditsToAdd(model.match);
+            model.quest.addCredits(creds);
+
+            String s = getCreditsAwardedText(creds, model.match, model.quest);
+            String fileName = "GoldIcon.png";
+            ImageIcon icon = getIcon(fileName);
+
+            JOptionPane.showMessageDialog(null, s, "", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+
+        // Award 10 rares for 80 games won
+        if (wonMatch) {
+            int wins = model.quest.getWin();
+            if (wins > 0 && wins % 80 == 0) // at every 80 wins, give 10 random rares
+            {
+                model.quest.addRandomRare(10);
+                String fileName = "BoxIcon.png";
+                ImageIcon icon = getIcon(fileName);
+                String title = "You just won 10 random rares!";
+                JOptionPane.showMessageDialog(null, title, "", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        }
+
+        // Rewards from QuestAssignment
+        if (wonMatch && model.qa != null) {
+            model.quest.addQuestsPlayed();
+
+            ArrayList<String> questRewardCards = model.qa.getCardRewardList();
+            long questRewardCredits = model.qa.getCreditsReward();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Quest Completed - \r\n");
+
+            if (questRewardCards != null) {
+                sb.append("You won the following cards:\r\n\r\n");
+                for (String cardName : questRewardCards) {
+                    sb.append(cardName);
+                    sb.append("\r\n");
+
+                    model.quest.addCard(cardName);
+                }
+                model.quest.addToNewList(questRewardCards);
+                sb.append("\r\n");
+            }
+            sb.append("Quest Bounty: ");
+            sb.append(questRewardCredits);
+
+            model.quest.addCredits(questRewardCredits);
+
+            String fileName = "BoxIcon.png";
+            ImageIcon icon = getIcon(fileName);
+            String title = "Quest Rewards for " + model.qa.getName();
+            JOptionPane.showMessageDialog(null, sb.toString(), title, JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+        /*
+        else if(quest.getDifficultyIndex() == 4) {
+            Card c = AllZone.getCardFactory().getCard(quest.addRandomRare(), AllZone.getHumanPlayer());
+            c.setCurSetCode(c.getMostRecentSet());
+            fileName = CardUtil.buildFilename(c) +".jpg";
+            icon = getCardIcon(fileName);
+
+            JOptionPane.showMessageDialog(null, "", "You have won a random rare for winning against a very hard deck.", JOptionPane.INFORMATION_MESSAGE, icon);
+        }*/
+
+        // Loss match penalty
+        if (!wonMatch) {
+            model.quest.subtractCredits(15);
+            String fileName = "HeartIcon.png";
+            ImageIcon icon = getIcon(fileName);
+            String text = "You lose! You have lost 15 credits.";
+            JOptionPane.showMessageDialog(null, text, "Awwww", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+
+        // Random rare given at 50% chance (65% with luck upgrade)
+        if (model.quest.shouldAddAdditionalCards(wonMatch)) {
+            Card c = AllZone.getCardFactory().getCard(model.quest.addRandomRare(), AllZone.getHumanPlayer());
+            c.setCurSetCode(c.getMostRecentSet());
+            String fileName = CardUtil.buildFilename(c) + ".jpg";
+            ImageIcon icon = getCardIcon(fileName);
+            String title = "You have won a random rare.";
+            JOptionPane.showMessageDialog(null, "", title, JOptionPane.INFORMATION_MESSAGE, icon);
+        }
     }
 }

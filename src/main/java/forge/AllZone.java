@@ -6,9 +6,11 @@ import forge.card.cardFactory.PreloadingCardFactory;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.DeckManager;
+import forge.game.GameSummary;
 import forge.gui.input.InputControl;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestMatchState;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,6 +42,8 @@ public class AllZone implements NewConstants {
     private static Quest_Assignment QuestAssignment = null;
     /** Constant <code>NameChanger</code> */
     private static final NameChanger NameChanger = new NameChanger();
+    /** Constant <code>ColorChanger</code> */
+    private static final ColorChanger colorChanger = new ColorChanger();
 
     /** Constant <code>EndOfTurn</code> */
     private static EndOfTurn EndOfTurn = new EndOfTurn();
@@ -62,8 +66,11 @@ public class AllZone implements NewConstants {
     private static final GameAction GameAction = new GameAction();
     /** Constant <code>StaticEffects</code> */
     private static final StaticEffects StaticEffects = new StaticEffects();
-    /** Constant <code>GameInfo</code> */
-    private static final GameInfo GameInfo = new GameInfo();
+    
+    /** Game state observer <code>GameSummary</code> collects statistics and players' performance*/
+    private static GameSummary gameInfo = new GameSummary();
+    /** Match State for quests are stored in a <code>QuestMatchState</code> class instance*/
+    public static QuestMatchState matchState = new QuestMatchState();
 
     /** Constant <code>TriggerHandler</code> */
     private static final TriggerHandler TriggerHandler = new TriggerHandler();
@@ -308,11 +315,11 @@ public class AllZone implements NewConstants {
     /**
      * <p>getGameInfo.</p>
      *
-     * @return a {@link forge.GameInfo} object.
+     * @return a {@link forge.GameSummary} object.
      * @since 1.0.15
      */
-    public static GameInfo getGameInfo() {
-        return GameInfo;
+    public static GameSummary getGameInfo() {
+        return gameInfo;
     }
 
     /**
@@ -605,5 +612,55 @@ public class AllZone implements NewConstants {
     public static long getNextTimestamp() {
     	timestamp++;
     	return timestamp;
+    }
+    
+    /**
+     * <p>Resets everything possible to set a new game</p>
+     */
+    public static void newGameCleanup() {
+
+        gameInfo = new GameSummary();
+
+        getHumanPlayer().reset();
+        getComputerPlayer().reset();
+
+        getPhase().reset();
+        getStack().reset();
+        getCombat().reset();
+        getDisplay().showCombat("");
+        getDisplay().loadPrefs();
+
+        getHumanGraveyard().reset();
+        getHumanHand().reset();
+        getHumanLibrary().reset();
+        getHumanBattlefield().reset();
+        getHumanExile().reset();
+
+        getComputerGraveyard().reset();
+        getComputerHand().reset();
+        getComputerLibrary().reset();
+        getComputerBattlefield().reset();
+        getComputerExile().reset();
+
+        getInputControl().clearInput();
+
+        getStaticEffects().reset();
+        getColorChanger().reset();
+
+        // player.reset() now handles this
+        //AllZone.getHumanPlayer().clearHandSizeOperations();
+        //AllZone.getComputerPlayer().clearHandSizeOperations();
+        
+        getTriggerHandler().clearRegistered();
+
+    }
+
+    public static QuestMatchState getMatchState() {
+        return matchState;
+    }
+
+    public static ColorChanger getColorChanger() {
+        // TODO Auto-generated method stub
+        return colorChanger;
     }
 }//AllZone

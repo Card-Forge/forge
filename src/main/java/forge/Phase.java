@@ -46,6 +46,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
     private int extraCombats;
 
     private int nCombatsThisTurn;
+    private boolean bPreventCombatDamageThisTurn;
 
     private Player playerTurn = AllZone.getHumanPlayer();
 
@@ -247,6 +248,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
         extraTurns.clear();
         nCombatsThisTurn = 0;
         extraCombats = 0;
+        bPreventCombatDamageThisTurn = false;
         bCombat = false;
         bRepeat = false;
         this.updateObservers();
@@ -316,7 +318,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
                     AllZone.getPhase().setNeedToNextPhase(true);
 
                 else {
-                    if (!AllZone.getGameInfo().isPreventCombatDamageThisTurn())
+                    if (!AllZone.getPhase().isPreventCombatDamageThisTurn())
                         Combat.dealAssignedDamage();
 
                     AllZone.getGameAction().checkStateEffects();
@@ -331,7 +333,7 @@ public class Phase extends MyObservable implements java.io.Serializable {
 
                 AllZone.getCombat().setAssignedDamage();
 
-                if (!AllZone.getGameInfo().isPreventCombatDamageThisTurn())
+                if (!AllZone.getPhase().isPreventCombatDamageThisTurn())
                     Combat.dealAssignedDamage();
 
                 AllZone.getGameAction().checkStateEffects();
@@ -383,6 +385,10 @@ public class Phase extends MyObservable implements java.io.Serializable {
             resetPriority();
     }
 
+    public boolean isPreventCombatDamageThisTurn() {
+        return bPreventCombatDamageThisTurn;
+    }
+
     /**
      * <p>nextPhase.</p>
      */
@@ -420,9 +426,11 @@ public class Phase extends MyObservable implements java.io.Serializable {
             this.bCombat = false;
         }
 
-        if (phaseOrder[phaseIndex].equals(Constant.Phase.Cleanup))
+        if (phaseOrder[phaseIndex].equals(Constant.Phase.Cleanup)) {
+            bPreventCombatDamageThisTurn = false;
             if (!bRepeat)
                 AllZone.getPhase().setPlayerTurn(handleNextTurn());
+        }
 
         if (is(Constant.Phase.Combat_Declare_Blockers)) {
             AllZone.getStack().unfreezeStack();
@@ -666,9 +674,6 @@ public class Phase extends MyObservable implements java.io.Serializable {
             if (c.getCreatureBlockedThisCombat()) c.setCreatureBlockedThisCombat(false);
 
             if (c.getCreatureGotBlockedThisCombat()) c.setCreatureGotBlockedThisCombat(false);
-
-            AllZone.getGameInfo().setAssignedFirstStrikeDamageThisCombat(false);
-            AllZone.getGameInfo().setResolvedFirstStrikeDamageThisCombat(false);
         }
     }
 
@@ -1025,5 +1030,9 @@ public class Phase extends MyObservable implements java.io.Serializable {
      */
     static void setComputerInstantSpellCount(int i) {
         ComputerInstantSpellCount = (i);
+    }
+
+    public void setPreventCombatDamageThisTurn(boolean b) {
+        bPreventCombatDamageThisTurn = true;
     }
 }

@@ -9449,6 +9449,7 @@ src/main/java/forge/Card_Color.java svneol=native#text/plain
 src/main/java/forge/Card_PT.java svneol=native#text/plain
 src/main/java/forge/Card_Type.java svneol=native#text/plain
 src/main/java/forge/Color.java svneol=native#text/plain
+src/main/java/forge/ColorChanger.java -text
 src/main/java/forge/Combat.java svneol=native#text/plain
 src/main/java/forge/CombatUtil.java svneol=native#text/plain
 src/main/java/forge/Command.java svneol=native#text/plain
@@ -9480,7 +9481,6 @@ src/main/java/forge/GUI_DeckAnalysis.java svneol=native#text/plain
 src/main/java/forge/GUI_ImportPicture.java svneol=native#text/plain
 src/main/java/forge/GameAction.java svneol=native#text/plain
 src/main/java/forge/GameActionUtil.java svneol=native#text/plain
-src/main/java/forge/GameInfo.java svneol=native#text/plain
 src/main/java/forge/GuiDisplay4.java svneol=native#text/plain
 src/main/java/forge/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/GuiFilter.java svneol=native#text/plain
@@ -9663,6 +9663,12 @@ src/main/java/forge/error/BugzReporter.java svneol=native#text/plain
 src/main/java/forge/error/ErrorViewer.java svneol=native#text/plain
 src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 src/main/java/forge/error/package-info.java svneol=native#text/plain
+src/main/java/forge/game/GameEndReason.java -text
+src/main/java/forge/game/GameLossReason.java -text
+src/main/java/forge/game/GamePlayerRating.java -text
+src/main/java/forge/game/GameSummary.java svneol=native#text/plain
+src/main/java/forge/game/PlayerIndex.java -text
+src/main/java/forge/game/package-info.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain

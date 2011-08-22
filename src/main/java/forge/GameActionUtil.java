@@ -4,6 +4,7 @@ package forge;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.*;
+import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
@@ -632,9 +633,6 @@ public class GameActionUtil {
 
             if (c.getCreatureGotBlockedThisCombat()) c.setCreatureGotBlockedThisCombat(false);
         }
-
-        AllZone.getGameInfo().setAssignedFirstStrikeDamageThisCombat(false);
-        AllZone.getGameInfo().setResolvedFirstStrikeDamageThisCombat(false);
     }
 
     /**
@@ -1025,7 +1023,7 @@ public class GameActionUtil {
                             CardList nonTokens = AllZoneUtil.getPlayerCardsInPlay(player);
                             nonTokens = nonTokens.filter(AllZoneUtil.nonToken);
                             if (nonTokens.size() == 0) {
-                                player.altLoseConditionMet("Lich");
+                                player.loseConditionMet( GameLossReason.SpellEffect, lich.getName());
                             } else player.sacrificePermanent("Select a permanent to sacrifice", nonTokens);
                         }
                     }

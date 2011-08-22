@@ -26,6 +26,7 @@ import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.*;
 import forge.card.trigger.Trigger;
+import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
@@ -1804,7 +1805,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             final SpellAbility loseGame = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    card.getController().altLoseConditionMet(card.getName());
+                    card.getController().loseConditionMet( GameLossReason.SpellEffect, card.getName());
                 }
             };
 

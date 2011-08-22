@@ -166,7 +166,7 @@ public class AbilityFactory_Combat {
         if (AllZone.getStack().size() != 0) return false;
 
         // Don't cast it, if the effect is already in place
-        if (AllZone.getGameInfo().isPreventCombatDamageThisTurn()) return false;
+        if (AllZone.getPhase().isPreventCombatDamageThisTurn()) return false;
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null)
@@ -234,7 +234,7 @@ public class AbilityFactory_Combat {
     public static void fogResolve(final AbilityFactory af, final SpellAbility sa) {
 
         // Expand Fog keyword here depending on what we need out of it.
-        AllZone.getGameInfo().setPreventCombatDamageThisTurn(true);
+        AllZone.getPhase().setPreventCombatDamageThisTurn(true);
     }
     
     //**************************************************************

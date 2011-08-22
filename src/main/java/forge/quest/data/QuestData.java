@@ -3,6 +3,10 @@ package forge.quest.data;
 import forge.*;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.game.GameLossReason;
+import forge.game.GamePlayerRating;
+import forge.game.GameSummary;
+import forge.game.PlayerIndex;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
@@ -482,63 +486,80 @@ public class QuestData {
         }
     }
 
+
+    public final int getCreditsRewardForAltWin(final GameLossReason whyAiLost) {
+        int rewardAltWinCondition = 0;
+        switch (whyAiLost) {
+            case LifeReachedZero:
+                break; // nothing special here, ordinary kill
+            case Milled:
+                rewardAltWinCondition = QuestPreferences.getMatchRewardMilledWinBonus();
+                break;
+            case Poisoned:
+                rewardAltWinCondition = QuestPreferences.getMatchRewardPoisonWinBonus();
+                break;
+            case DidNotLoseYet: // must be player's alternate win condition: felidar, helix pinnacle and like this
+                rewardAltWinCondition = QuestPreferences.getMatchRewardAltWinBonus();
+                break;
+            default: // this .checkstyle forces us to write some idiotic code
+                rewardAltWinCondition = 0;
+        }
+        return rewardAltWinCondition;
+    }
+
+    public final int getCreditsRewardForWinByTurn(final int iTurn) {
+        if (iTurn == 1) {
+            return QuestPreferences.getMatchRewardWinFirst();
+        } else if (iTurn <= 5) {
+            return QuestPreferences.getMatchRewardWinByFifth();
+        } else if (iTurn <= 10) {
+            return QuestPreferences.getMatchRewardWinByTen();
+        } else if (iTurn <= 15) {
+            return QuestPreferences.getMatchRewardWinByFifteen();
+        }
+        return 0;
+    }
+
     /**
      * <p>getCreditsToAdd.</p>
      *
      * @param matchState a {@link forge.quest.data.QuestMatchState} object.
      * @return a long.
      */
-    public long getCreditsToAdd(QuestMatchState matchState) {
-        long creds = (long) (QuestPreferences.getMatchRewardBase() + (QuestPreferences.getMatchRewardTotalWins() * win));
-        String[] wins = matchState.getWinMethods();
-        int[] winTurns = matchState.getWinTurns();
-        boolean[] mulliganedToZero = matchState.getMulliganedToZero();
+    public final long getCreditsToAdd(final QuestMatchState matchState) {
+        long creds = (long) (QuestPreferences.getMatchRewardBase()
+                + (QuestPreferences.getMatchRewardTotalWins() * win));
 
-        if (matchState.getLose() == 0) {
-            creds += QuestPreferences.getMatchRewardNoLosses();
-        }
-
-        for (String s : wins) {
-            if (s != null) {
-                if (s.equals("Poison Counters")) {
-                    creds += QuestPreferences.getMatchRewardPoisonWinBonus();
-                } else if (s.equals("Milled")) {
-                    creds += QuestPreferences.getMatchRewardMilledWinBonus();
-                } else if (s.equals("Battle of Wits") || s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") ||
-                        s.equals("Epic Struggle") || s.equals("Door to Nothingness") || s.equals("Barren Glory") ||
-                        s.equals("Near-Death Experience") || s.equals("Mortal Combat") || s.equals("Test of Endurance")) {
-                    creds += QuestPreferences.getMatchRewardAltWinBonus();
-                }
+        boolean hasNeverLost = true;
+        for (GameSummary game : matchState.getGamesPlayed()) {
+            if (game.isAIWinner()) {
+                hasNeverLost = true;
+                continue; // no rewards for losing a game
             }
-        }
-        for (int i : winTurns) {
-            if (i == 1) {
-                creds += QuestPreferences.getMatchRewardWinFirst();
-            } else if (i <= 5) {
-                creds += QuestPreferences.getMatchRewardWinByFifth();
-            } else if (i <= 10) {
-                creds += QuestPreferences.getMatchRewardWinByTen();
-            } else if (i <= 15) {
-                creds += QuestPreferences.getMatchRewardWinByFifteen();
-            }
-        }
 
+            GamePlayerRating aiRating = game.getPlayerRating(PlayerIndex.AI);
+            GamePlayerRating humanRating = game.getPlayerRating(PlayerIndex.HUMAN);
+            GameLossReason whyAiLost = aiRating.getLossReason();
 
-        for (boolean b : mulliganedToZero) {
-            if (b == true) {
+            creds += getCreditsRewardForAltWin(whyAiLost);
+            creds += getCreditsRewardForWinByTurn(game.getTurnGameEnded());
+
+            int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
+            if (0 == cntCardsHumanStartedWith) {
                 creds += QuestPreferences.getMatchMullToZero();
             }
         }
 
-        if (inventory.getItemLevel("Estates") == 1) {
-            creds *= 1.1;
-        } else if (inventory.getItemLevel("Estates") == 2) {
-            creds *= 1.15;
-        } else if (inventory.getItemLevel("Estates") == 3) {
-            creds *= 1.2;
+        if (hasNeverLost) {
+            creds += QuestPreferences.getMatchRewardNoLosses();
         }
 
-        this.addCredits(creds);
+        switch(inventory.getItemLevel("Estates")) {
+            case 1: creds *= 1.1; break;
+            case 2: creds *= 1.15; break;
+            case 3: creds *= 1.2; break;
+            default: break;
+        }
 
         return creds;
     }

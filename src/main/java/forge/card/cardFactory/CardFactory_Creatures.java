@@ -876,7 +876,6 @@ public class CardFactory_Creatures {
 
                         Object o = GuiUtils.getChoice("Choose color", colors);
                         color[0] = (String) o;
-                        card.setChosenColor(color[0]);
                     } else {
                         // AI chooses the color that appears in the keywords of the most cards in its deck, hand and on battlefield
                         CardList list = new CardList();
@@ -895,11 +894,11 @@ public class CardFactory_Creatures {
                                 color[0] = c;
                             }
                         }
-                        card.setChosenColor(color[0]);
                     }
-
+                    card.setChosenColor(color[0]);
                     String s = CardUtil.getShortColor(color[0]);
-                    timeStamp[0] = AllZone.getGameInfo().addColorChanges(s, card, true, true);
+
+                    timeStamp[0] = AllZone.getColorChanger().addColorChanges(s, card, true, true);
                 }
             };//Command
 
@@ -908,7 +907,7 @@ public class CardFactory_Creatures {
 
                 public void execute() {
                     String s = CardUtil.getShortColor(color[0]);
-                    AllZone.getGameInfo().removeColorChanges(s, card, true, timeStamp[0]);
+                    AllZone.getColorChanger().removeColorChanges(s, card, true, timeStamp[0]);
                 }
             };
 
