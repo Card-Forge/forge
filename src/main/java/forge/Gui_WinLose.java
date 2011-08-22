@@ -282,15 +282,12 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
         int estatesLevel = q.getInventory().getItemLevel("Estates");
 
-        if (estatesLevel == 1) {
-            sb.append("Estates bonus: <b>10%</b>.<br>");
-        } else if (estatesLevel == 2) {
-            sb.append("Estates bonus: <b>15%</b>.<br>");
-        } else if (estatesLevel == 3) {
-            sb.append("Estates bonus: <b>20%</b>.<br>");
+        if (estatesLevel == 1) { sb.append("Estates bonus: <b>10%</b>.<br>");
+        } else if (estatesLevel == 2) { sb.append("Estates bonus: <b>15%</b>.<br>");
+        } else if (estatesLevel == 3) { sb.append("Estates bonus: <b>20%</b>.<br>");
         }
-        sb.append("You have earned <b>" + creds + " credits</b> in total.");
-
+        
+        sb.append(String.format("<br>You have earned <b>%d credits</b> in total.", creds));
         sb.append("</html>");
         return sb.toString();
     }
@@ -378,16 +375,16 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 
     protected void giveBooster()
     {
-        String[] boosterTypes = {"Legacy", "Extended", "T2"};
-        String boosterType = GuiUtils.getChoice("Choose prize booster type", boosterTypes);
+        String[] boosterTypes = {"Legacy", "Extended", "Standard"};
+        String boosterType = GuiUtils.getChoice("Choose a format of cards for the prize booster", boosterTypes);
         List<String> setsToGive = null;
-        if (boosterTypes[2].equals( boosterType )) { // T2
+        if (boosterTypes[2].equals(boosterType)) { // T2
             setsToGive = new ArrayList<String>();
-            setsToGive.addAll( Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN"}) );
+            setsToGive.addAll(Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN"}));
         }
-        if (boosterTypes[1].equals( boosterType )) { // Ext
+        if (boosterTypes[1].equals(boosterType)) { // Ext
             setsToGive = new ArrayList<String>();
-            setsToGive.addAll( Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN","M10","ARB","CFX","ALA","MOR","SHM","EVE","LRW"}) );
+            setsToGive.addAll(Arrays.asList(new String[]{"M12","NPH","MBS","M11","ROE","WWK","ZEN","M10","ARB","CFX","ALA","MOR","SHM","EVE","LRW"}));
         }
 
         ArrayList<String> cardsWon = model.quest.addCards(setsToGive);
@@ -395,7 +392,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
         c.show();
     }
-    
+
     protected void giveQuestRewards(final boolean wonMatch) {
         // Award a random booster, as frequent as set in difficulty setup
         if (model.quest.shouldAddCards(wonMatch)) {
