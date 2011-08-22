@@ -1,0 +1,11 @@
+Name:Ceaseless Searblades
+ManaCost:3 R
+Types:Creature Elemental Warrior
+Text:no text
+PT:2/4
+T:Mode$ AbilityCast | ValidCard$ Elemental | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | ActivatedOnly$ True | TriggerDescription$ Whenever you activate an ability of an Elemental, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ceaseless_searblades.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/158.jpg
+End

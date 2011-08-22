@@ -46,6 +46,12 @@ public class Trigger_SpellAbilityCast extends Trigger {
             //Empty block for readability.
         }
 
+        if (mapParams.containsKey("ActivatedOnly")) {
+            if (SA.isTrigger()) {
+                return false;
+            }
+        }
+        
         if (mapParams.containsKey("ValidControllingPlayer")) {
             if (!matchesValid(cast.getController(), mapParams.get("ValidControllingPlayer").split(","), hostCard)) {
                 return false;
