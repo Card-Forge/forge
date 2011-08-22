@@ -9688,6 +9688,7 @@ src/main/java/forge/game/GamePlayerRating.java -text
 src/main/java/forge/game/GameSummary.java svneol=native#text/plain
 src/main/java/forge/game/PlayerIndex.java -text
 src/main/java/forge/game/package-info.java -text
+src/main/java/forge/gui/CardListViewer.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain

@@ -6,6 +6,7 @@ import forge.game.GameLossReason;
 import forge.game.GamePlayerRating;
 import forge.game.GameSummary;
 import forge.game.PlayerIndex;
+import forge.gui.CardListViewer;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -27,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -94,7 +96,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
      */
     private void setup() {
         Phase.setGameBegins(0);
-        
+
         if (model.match.isMatchOver()) {
 //      editDeckButton.setEnabled(false);
             continueButton.setEnabled(false);
@@ -109,7 +111,6 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         statsLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WON) + humanWins
                 + ForgeProps.getLocalized(WINLOSE_TEXT.LOST) + humanLosses);
 
-        
         //show "You Won" or "You Lost"
         if (model.match.hasHumanWonLastGame()) {
             titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WIN));
@@ -253,7 +254,6 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
 
             int winTurn = game.getTurnGameEnded();
-
             int turnCredits = q.getCreditsRewardForWinByTurn(winTurn);
 
             if (winTurn == 0) { // this case should never happen - anyway, no reward if we got here
@@ -391,18 +391,9 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         }
 
         ArrayList<String> cardsWon = model.quest.addCards(setsToGive);
-        // TODO: Make a better presentation of cards - with pictures at least
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("You have won the following new cards:\n");
-        for (String cardName : cardsWon) {
-            sb.append(cardName + "\n");
-        }
-
-        String fileName = "BookIcon.png";
-        ImageIcon icon = getIcon(fileName);
-
-        JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE, icon);
+        ImageIcon icon = getIcon("BookIcon.png");
+        CardListViewer c = new CardListViewer("Booster", "You have won the following new cards", cardsWon, icon);
+        c.show();
     }
     
     protected void giveQuestRewards(final boolean wonMatch) {
@@ -428,11 +419,12 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             int wins = model.quest.getWin();
             if (wins > 0 && wins % 80 == 0) // at every 80 wins, give 10 random rares
             {
-                model.quest.addRandomRare(10);
-                String fileName = "BoxIcon.png";
-                ImageIcon icon = getIcon(fileName);
+                ArrayList<String> randomRares = model.quest.addRandomRare(10);
+                
+                ImageIcon icon = getIcon("BoxIcon.png");
                 String title = "You just won 10 random rares!";
-                JOptionPane.showMessageDialog(null, title, "", JOptionPane.INFORMATION_MESSAGE, icon);
+                CardListViewer c = new CardListViewer("Random rares", title, randomRares, icon);
+                c.show();
             }
         }
 
