@@ -66,11 +66,6 @@ public class HumanPlayer extends Player {
         return false;
     }
 
-    /** {@inheritDoc} */
-    public boolean isPlayer(Player p1) {
-        return p1 != null && p1.getName().equals(this.name);
-    }
-
     ///////////////
     ///
     /// End transition methods
