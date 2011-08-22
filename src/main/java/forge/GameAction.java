@@ -5,6 +5,8 @@ import forge.card.abilityFactory.AbilityFactory;
 import forge.card.abilityFactory.AbilityFactory_Attach;
 import forge.card.cardFactory.CardFactoryInterface;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.Cost_Payment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.*;
@@ -475,26 +477,30 @@ public class GameAction {
             return moveToStack(c);
     }
 
+
     /**
      * <p>AI_discardNumType.</p>
      *
      * @param numDiscard a int.
      * @param uTypes     an array of {@link java.lang.String} objects.
      * @param sa         a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
+     * @return a CardList of discarded cards.
      */
-    public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
+    public CardList AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
         CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
-        CardList tHand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
+        hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
 
-        if (tHand.size() >= numDiscard) {
-            CardListUtil.sortCMC(tHand);
-            tHand.reverse();
+        if (hand.size() < numDiscard)
+            return null;
+        
+        CardList discard = new CardList();
+        
+        CardListUtil.sortCMC(hand);
+        hand.reverse();
             for (int i = 0; i < numDiscard; i++)
-                tHand.get(i).getController().discard(tHand.get(i), sa);
-            return true;
-        }
-        return false;
+            discard.add(hand.get(i));
+        
+        return discard;
     }
 
     /**

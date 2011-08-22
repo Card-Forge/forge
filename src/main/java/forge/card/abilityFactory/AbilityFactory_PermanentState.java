@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 
@@ -176,13 +178,13 @@ public class AbilityFactory_PermanentState {
      */
     private static boolean untapCanPlayAI(final AbilityFactory af, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-
-        if (af.getAbCost().getAddCounter())
-            if (af.getAbCost().getCounterType().equals(Counters.M1M1))
-                return false;
-
-        Target tgt = af.getAbTgt();
-        //Card source = sa.getSourceCard();
+        Target tgt = sa.getTarget();
+        Card source = sa.getSourceCard();
+        Cost cost = sa.getPayCosts();
+        
+        
+        if (!CostUtil.checkAddM1M1CounterCost(cost, source))
+            return false;
 
         Random r = MyRandom.random;
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);

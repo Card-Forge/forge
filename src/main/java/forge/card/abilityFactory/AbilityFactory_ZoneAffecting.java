@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 
@@ -186,24 +188,23 @@ public class AbilityFactory_ZoneAffecting {
     private static boolean drawCanPlayAI(final AbilityFactory af, SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
 
-        Target tgt = af.getAbTgt();
+        Target tgt = sa.getTarget();
         Card source = sa.getSourceCard();
-        Cost abCost = af.getAbCost();
+        Cost abCost = sa.getPayCosts();
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && source.isCreature()) {
+            if (CostUtil.checkCreatureSacrificeCost(abCost, source))
                 return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
+            
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
 
-            if (abCost.getSubCounter()) {
-                if (abCost.getCounterType().equals(Counters.P1P1)) return false; // Other counters should be used
-            }
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
 
         }
 
@@ -595,18 +596,17 @@ public class AbilityFactory_ZoneAffecting {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost()) {
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
                 return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
 
-            if (abCost.getSubCounter()) {
-                if (abCost.getCounterType().equals(Counters.P1P1)) return false; // Other counters should be used
-            }
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
 
         }
 
@@ -1105,24 +1105,23 @@ public class AbilityFactory_ZoneAffecting {
     private static boolean discardCanPlayAI(final AbilityFactory af, SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
 
-        Target tgt = af.getAbTgt();
+        Target tgt = sa.getTarget();
         Card source = sa.getSourceCard();
-        Cost abCost = af.getAbCost();
+        Cost abCost = sa.getPayCosts();
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost()) {
+            if (!CostUtil.checkSacrificeCost(abCost, source))
                 return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
 
-            if (abCost.getSubCounter()) {
-                if (abCost.getCounterType().equals(Counters.P1P1)) return false; // Other counters should be used
-            }
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
+
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
 
         }
 

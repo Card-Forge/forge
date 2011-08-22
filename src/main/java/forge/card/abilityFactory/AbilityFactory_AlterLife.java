@@ -1,6 +1,8 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -200,33 +202,20 @@ public class AbilityFactory_AlterLife {
         //don't use it if no life to gain
         if (lifeAmount <= 0) return false;
 
-        if (abCost != null) {
-            if (abCost.getSacCost() && life > 4) {
-                if (abCost.getSacThis() && life > 6)
+        if (abCost != null) {           
+            if (life > 5){
+                if (!CostUtil.checkSacrificeCost(abCost, source))
                     return false;
-                else {
-                    //only sacrifice something that's supposed to be sacrificed
-                    String type = abCost.getSacType();
-                    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
-                    if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                        return false;
-                }
+                
+                if (!CostUtil.checkLifeCost(abCost, source, 4))
+                    return false;
+                
+                if (!CostUtil.checkDiscardCost(abCost, source))
+                    return false;
             }
-            if (abCost.getLifeCost() && life > 5) return false;
-            if (abCost.getDiscardCost() && life > 5) return false;
-
-            if (abCost.getSubCounter()) {
-                //non +1/+1 counters should be used
-                if (abCost.getCounterType().equals(Counters.P1P1)) {
-                    // A card has a 25% chance per counter to be able to pass through here
-                    // 4+ counters will always pass. 0 counters will never
-                    int currentNum = source.getCounters(abCost.getCounterType());
-                    double percent = .25 * (currentNum / abCost.getCounterNum());
-                    if (percent <= r.nextFloat())
-                        return false;
-                }
-            }
+            
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
         }
 
         if (!AllZone.getComputerPlayer().canGainLife())
@@ -507,8 +496,6 @@ public class AbilityFactory_AlterLife {
         Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         HashMap<String, String> params = af.getMapParams();
-        int humanLife = AllZone.getHumanPlayer().getLife();
-        int aiLife = AllZone.getComputerPlayer().getLife();
 
         String amountStr = params.get("LifeAmount");
 
@@ -517,29 +504,17 @@ public class AbilityFactory_AlterLife {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost()) {
-                if (amountStr.contains("X"))
-                    return false;
-                if (!abCost.getSacThis()) {
-                    //only sacrifice something that's supposed to be sacrificed
-                    String type = abCost.getSacType();
-                    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
-                    if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                        return false;
-                }
-            }
-            if (abCost.getLifeCost() && aiLife - abCost.getLifeAmount() < humanLife - amount) return false;
-            if (abCost.getDiscardCost()) return false;
+            if (!CostUtil.checkLifeCost(abCost, source, amount))
+                return false;
 
-            if (abCost.getSubCounter()) {
-                // A card has a 25% chance per counter to be able to pass through here
-                // 4+ counters will always pass. 0 counters will never
-                int currentNum = source.getCounters(abCost.getCounterType());
-                double percent = .25 * (currentNum / abCost.getCounterNum());
-                if (percent <= r.nextFloat())
-                    return false;
-            }
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
         }
 
         if (!AllZone.getHumanPlayer().canLoseLife())
@@ -892,27 +867,17 @@ public class AbilityFactory_AlterLife {
         //int humanPoison = AllZone.getHumanPlayer().getPoisonCounters();
         //int humanLife = AllZone.getHumanPlayer().getLife();
         //int aiPoison = AllZone.getComputerPlayer().getPoisonCounters();
-        int aiLife = AllZone.getComputerPlayer().getLife();
-        String amountStr = params.get("Num");
 
         // TODO handle proper calculation of X values based on Cost and what would be paid
         //final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost()) {
-                if (amountStr.contains("X"))
-                    return false;
-                if (!abCost.getSacThis()) {
-                    //only sacrifice something that's supposed to be sacrificed
-                    String type = abCost.getSacType();
-                    CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                    typeList = typeList.getValidCards(type.split(","), source.getController(), source);
-                    if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                        return false;
-                }
-            }
-            if (abCost.getLifeCost() && aiLife - abCost.getLifeAmount() <= 0) return false;
+            if (!CostUtil.checkLifeCost(abCost, source, 1))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
         }
 
         //Don't use poison before main 2 if possible

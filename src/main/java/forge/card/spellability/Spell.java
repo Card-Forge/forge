@@ -1,6 +1,8 @@
 package forge.card.spellability;
 
 import forge.*;
+import forge.card.cost.Cost;
+import forge.card.cost.Cost_Payment;
 import forge.error.ErrorViewer;
 
 
@@ -32,7 +34,7 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
      * <p>Constructor for Spell.</p>
      *
      * @param sourceCard a {@link forge.Card} object.
-     * @param abCost a {@link forge.card.spellability.Cost} object.
+     * @param abCost a {@link forge.card.cost.Cost} object.
      * @param abTgt a {@link forge.card.spellability.Target} object.
      */
     public Spell(Card sourceCard, Cost abCost, Target abTgt) {

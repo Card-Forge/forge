@@ -3,6 +3,7 @@ package forge;
 
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.spellability.*;
 import forge.game.GameLossReason;
 import forge.gui.GuiUtils;

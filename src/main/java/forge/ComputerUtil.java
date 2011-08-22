@@ -2,6 +2,9 @@ package forge;
 
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
+import forge.card.cost.Cost_Payment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.*;
@@ -128,7 +131,7 @@ public class ComputerUtil {
         //String totalMana = source.getSVar("PayX"); // + cost.getCMC()
 
         // Consider the costs here for relative "scoring"
-        if (cost.getDiscardType().equals("Hand")) {
+        if (CostUtil.hasDiscardHandCost(cost)) {
             // Null Brooch aid
             restrict -= (AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer()).size() * 20);
         }
@@ -418,160 +421,11 @@ public class ComputerUtil {
      * @return a boolean.
      */
     static public boolean canPayAdditionalCosts(SpellAbility sa, Player player) {
-        // Add additional cost checks here before attempting to activate abilities
-        Cost cost = sa.getPayCosts();
-        if (cost == null)
-            return true;
-        Card card = sa.getSourceCard();
-
-        if (cost.getTap() && (card.isTapped() || card.isSick()))
-            return false;
-
-        if (cost.getUntap() && (card.isUntapped() || card.isSick()))
-            return false;
-
-        if (cost.getTapXTypeCost()) {
-            CardList typeList = AllZoneUtil.getPlayerCardsInPlay(player);
-            typeList = typeList.getValidCards(cost.getTapXType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-
-            if (cost.getTap())
-                typeList.remove(sa.getSourceCard());
-            typeList = typeList.filter(AllZoneUtil.untapped);
-
-            if (cost.getTapXTypeAmount() > typeList.size())
-                return false;
+        if (sa.getActivatingPlayer() == null){
+            System.out.println(sa.getSourceCard() + " in ComputerUtil.canPayAdditionalCosts() without an activating player");
+            sa.setActivatingPlayer(player);
         }
-
-        if (cost.getSubCounter()) {
-            Counters c = cost.getCounterType();
-            if (card.getCounters(c) - cost.getCounterNum() < 0 || !AllZoneUtil.isCardInPlay(card)) {
-                return false;
-            }
-        }
-
-        if (cost.getAddCounter()) {
-            // this should always be true
-        }
-
-        if (cost.getLifeCost()) {
-            if (player.getLife() <= cost.getLifeAmount())
-                return false;
-        }
-
-        if (cost.getDiscardCost()) {
-            CardList handList = AllZoneUtil.getPlayerHand(player);
-            String discType = cost.getDiscardType();
-            int discAmount = cost.getDiscardAmount();
-
-            if (cost.getDiscardThis()) {
-                if (!AllZone.getZone(card).getZoneName().equals(Constant.Zone.Hand))
-                    return false;
-            } else if (discType.equals("LastDrawn")) {
-                //compy can't yet use this effectively
-                return false;
-            } else if (discType.equals("Hand")) {
-                // this will always work
-            } else {
-                if (!discType.equals("Any") && !discType.equals("Random")) {
-                    String validType[] = discType.split(",");
-                    handList = handList.getValidCards(validType, sa.getActivatingPlayer(), sa.getSourceCard());
-                }
-                if (discAmount > handList.size()) {
-                    // not enough cards in hand to pay
-                    return false;
-                }
-            }
-        }
-
-        if (cost.getSacCost()) {
-            // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to.
-            if (!cost.getSacThis()) {
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(player);
-                typeList = typeList.getValidCards(cost.getSacType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                Card target = sa.getTargetCard();
-                if (target != null && target.getController().isPlayer(player)) // don't sacrifice the card we're pumping
-                    typeList.remove(target);
-
-                if (cost.getSacAmount() > typeList.size())
-                    return false;
-            } else if (cost.getSacThis() && !AllZoneUtil.isCardInPlay(card))
-                return false;
-        }
-
-        if (cost.getExileCost()) {
-            // if there's an exile in the cost, just because we can Pay it doesn't mean we want to.
-            if (!cost.getExileThis()) {
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(player);
-                typeList = typeList.getValidCards(cost.getExileType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                Card target = sa.getTargetCard();
-                if (target != null && target.getController().isPlayer(player)) // don't exile the card we're pumping
-                    typeList.remove(target);
-
-                if (cost.getExileAmount() > typeList.size())
-                    return false;
-            } else if (cost.getExileThis() && !AllZoneUtil.isCardInPlay(card))
-                return false;
-        }
-
-        if (cost.getExileFromHandCost()) {
-            // if there's an exile in the cost, just because we can Pay it doesn't mean we want to.
-            if (!cost.getExileFromHandThis()) {
-                CardList typeList = AllZoneUtil.getPlayerHand(player);
-                typeList = typeList.getValidCards(cost.getExileFromHandType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                Card target = sa.getTargetCard();
-                if (target != null && target.getController().isPlayer(player)) // don't exile the card we're pumping
-                    typeList.remove(target);
-
-                if (cost.getExileFromHandAmount() > typeList.size())
-                    return false;
-            } else if (cost.getExileFromHandThis() && !AllZoneUtil.isCardInPlayerHand(player, card))
-                return false;
-        }
-
-        if (cost.getExileFromGraveCost()) {
-            if (!cost.getExileFromGraveThis()) {
-                CardList typeList = AllZoneUtil.getPlayerGraveyard(player);
-                typeList = typeList.getValidCards(cost.getExileFromGraveType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                Card target = sa.getTargetCard();
-                if (target != null && target.getController().isPlayer(player)) // don't exile the card we're pumping
-                    typeList.remove(target);
-
-                if (cost.getExileFromGraveAmount() > typeList.size())
-                    return false;
-            } else if (cost.getExileFromGraveThis() && !AllZoneUtil.isCardInPlayerGraveyard(player, card))
-                return false;
-        }
-
-        if (cost.getExileFromTopCost()) {
-            if (!cost.getExileFromTopThis()) {
-                CardList typeList = AllZoneUtil.getPlayerCardsInLibrary(player);
-                typeList = typeList.getValidCards(cost.getExileFromTopType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                Card target = sa.getTargetCard();
-                if (target != null && target.getController().isPlayer(player)) // don't exile the card we're pumping
-                    typeList.remove(target);
-
-                if (cost.getExileFromTopAmount() > typeList.size())
-                    return false;
-            } else if (cost.getExileFromTopThis() && !AllZoneUtil.isCardInPlayerLibrary(player, card))
-                return false;
-        }
-
-        if (cost.getReturnCost()) {
-            // if there's a return in the cost, just because we can Pay it doesn't mean we want to.
-            if (!cost.getReturnThis()) {
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(player);
-                typeList = typeList.getValidCards(cost.getReturnType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-                Card target = sa.getTargetCard();
-                if (target != null && target.getController().isPlayer(player)) // don't bounce the card we're pumping
-                    typeList.remove(target);
-
-                if (cost.getReturnAmount() > typeList.size())
-                    return false;
-            } else if (!AllZoneUtil.isCardInPlay(card))
-                return false;
-        }
-
-        return true;
+        return Cost_Payment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     }
 
     /**
@@ -651,7 +505,7 @@ public class ComputerUtil {
             for (Ability_Mana m : manaAbilities) {
 
                 if (used) break; //mana source already used in the test
-
+                m.setActivatingPlayer(player);
                 //if the AI can't pay the additional costs skip the mana ability
                 if (m.getPayCosts() != null) {
                     if (!canPayAdditionalCosts(m, player))
@@ -799,15 +653,14 @@ public class ComputerUtil {
             for (Ability_Mana m : manaAbilities) {
 
                 Cost cost = m.getPayCosts();
+                needsLimitedResources |= !cost.isReusuableResource();
 
                 //if the AI can't pay the additional costs skip the mana ability
+                m.setActivatingPlayer(AllZone.getComputerPlayer());
                 if (cost != null) {
                     if (!canPayAdditionalCosts(m, player))
                         continue;
-                    if (cost.getSubCounter() || cost.getLifeCost())
-                        needsLimitedResources = true;
-                } else if (card.isTapped())
-                    continue;
+                }
 
                 //don't use abilities with dangerous drawbacks
                 if (m.getSubAbility() != null) {
@@ -837,15 +690,12 @@ public class ComputerUtil {
                 for (Ability_Mana m : manaAbilities) {
 
                     Cost cost = m.getPayCosts();
-
+                    needsLimitedResources |= !cost.isReusuableResource();
                     //if the AI can't pay the additional costs skip the mana ability
                     if (cost != null) {
                         if (!canPayAdditionalCosts(m, player))
                             continue;
-                        if (cost.getSubCounter() || cost.getLifeCost())
-                            needsLimitedResources = true;
-                    } else if (card.isTapped())
-                        continue;
+                    }
 
                     //don't use abilities with dangerous drawbacks
                     if (m.getSubAbility() != null) {
@@ -1035,7 +885,7 @@ public class ComputerUtil {
         if (target != null && target.getController().isComputer() && typeList.contains(target))
             typeList.remove(target);        // don't sacrifice the card we're pumping
 
-        if (typeList.size() == 0)
+        if (typeList.size() < amount)
             return null;
 
         CardList sacList = new CardList();
@@ -1112,7 +962,7 @@ public class ComputerUtil {
         if (target != null && target.getController().isComputer() && typeList.contains(target))
             typeList.remove(target);    // don't exile the card we're pumping
 
-        if (typeList.size() == 0)
+        if (typeList.size() < amount)
             return null;
 
         CardListUtil.sortAttackLowFirst(typeList);
@@ -1141,7 +991,7 @@ public class ComputerUtil {
         if (tap)
             typeList.remove(activate);
 
-        if (typeList.size() == 0 || amount >= typeList.size())
+        if (typeList.size() < amount)
             return null;
 
         CardListUtil.sortAttackLowFirst(typeList);
@@ -1167,7 +1017,7 @@ public class ComputerUtil {
         if (target != null && target.getController().isComputer() && typeList.contains(target)) // don't bounce the card we're pumping
             typeList.remove(target);
 
-        if (typeList.size() == 0)
+        if (typeList.size() < amount)
             return null;
 
         CardListUtil.sortAttackLowFirst(typeList);

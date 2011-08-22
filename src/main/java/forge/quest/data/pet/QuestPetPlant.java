@@ -3,8 +3,8 @@ package forge.quest.data.pet;
 import forge.AllZone;
 import forge.Card;
 import forge.Constant;
+import forge.card.cost.Cost;
 import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.quest.data.bazaar.QuestStallManager;
 

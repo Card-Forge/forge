@@ -1,6 +1,8 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 
@@ -595,22 +597,22 @@ public class AbilityFactory_Reveal {
      */
     private static boolean revealHandCanPlayAI(final AbilityFactory af, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        Cost abCost = af.getAbCost();
+        Cost abCost = sa.getPayCosts();
+        Card source = sa.getSourceCard();
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost()) {
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
                 return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
 
-            if (abCost.getSubCounter()) {
-                if (abCost.getCounterType().equals(Counters.P1P1)) return false; // Other counters should be used
-            }
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
 
         }
 

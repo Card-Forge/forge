@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 
@@ -283,22 +285,14 @@ public class AbilityFactory_ChangeZone {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && !abCost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String type = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
-
-            if (abCost.getSubCounter()) ; // SubCounter is fine
-
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+            
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
+            
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
         }
 
         Random r = MyRandom.random;
@@ -897,28 +891,17 @@ public class AbilityFactory_ChangeZone {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && !abCost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String type = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+            
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
+            
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
 
-            if (abCost.getSubCounter()) {
-                // A card has a 25% chance per counter to be able to pass through here
-                // 4+ counters will always pass. 0 counters will never
-                int currentNum = source.getCounters(abCost.getCounterType());
-                double percent = .25 * (currentNum / abCost.getCounterNum());
-                if (percent <= r.nextFloat())
-                    return false;
-            }
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
         }
 
         // prevent run-away activations - first time will always return true
@@ -1565,24 +1548,19 @@ public class AbilityFactory_ChangeZone {
     private static boolean changeZoneAllCanPlayAI(AbilityFactory af, SpellAbility sa) {
         // Change Zone All, can be any type moving from one zone to another
         Cost abCost = af.getAbCost();
-        //Card source = af.getHostCard();
+        Card source = sa.getSourceCard();
         HashMap<String, String> params = af.getMapParams();
         String destination = params.get("Destination");
         String origin = params.get("Origin");
+        
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost()) {
-                // Sac is ok in general, but should add some decision making based off what we Sacrifice and what we might get
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
-
-            if (abCost.getSubCounter())
-                ;    // subcounter is fine
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
+            
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
 
         }
 

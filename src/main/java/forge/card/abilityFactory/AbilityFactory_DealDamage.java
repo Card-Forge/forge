@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -238,23 +240,14 @@ public class AbilityFactory_DealDamage {
         boolean rr = AF.isSpell();
 
         // temporarily disabled until better AI
-        if (abCost.getSacCost() && !abCost.getSacThis() && AllZone.getHumanPlayer().getLife() - dmg > 0) {
-            //only sacrifice something that's supposed to be sacrificed
-            String sacType = abCost.getSacType();
-            CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-            typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
-            if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                return false;
-        }
-        if (AF.getAbCost().getSubCounter()) {
-            // +1/+1 counters only if damage from this ability would kill the human, otherwise ok
-            if (AllZone.getHumanPlayer().getLife() - dmg > 0 && AF.getAbCost().getCounterType().equals(Counters.P1P1))
-                return false;
-        }
-        if (AF.getAbCost().getLifeCost()) {
-            if (AllZone.getHumanPlayer().getLife() - dmg > 0) // only if damage from this ability would kill the human
-                return false;
-        }
+        if (!CostUtil.checkLifeCost(abCost, source, 4))
+            return false;
+            
+        if (!CostUtil.checkSacrificeCost(abCost, source))
+            return false;
+            
+        if (!CostUtil.checkRemoveCounterCost(abCost, source))
+            return false;
 
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
@@ -805,18 +798,8 @@ public class AbilityFactory_DealDamage {
         //abCost stuff that should probably be centralized...
         if (abCost != null) {
             // AI currently disabled for some costs
-            if (abCost.getSacCost()) {
-                //OK
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) ; //OK
-
-            if (abCost.getSubCounter()) {
-                // OK
-            }
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
         }
 
         // TODO: if damage is dependant on mana paid, maybe have X be human's max life

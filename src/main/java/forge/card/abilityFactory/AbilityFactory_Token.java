@@ -10,16 +10,16 @@ import forge.CardList;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
-import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
@@ -266,28 +266,17 @@ public class AbilityFactory_Token extends AbilityFactory {
         }
 
         if (cost != null) {
-            if (cost.getSacCost() && !cost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String type = cost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (cost.getSubCounter()) {
-                if (cost.getCounterType().equals(Counters.P1P1)) {
-                    // A card has a 25% chance per counter to be able to pass through here
-                    // 4+ counters will always pass. 0 counters will never
-                    int currentNum = source.getCounters(cost.getCounterType());
-                    double percent = .25 * (currentNum / cost.getCounterNum());
-                    if (percent <= r.nextFloat())
-                        return false;
-                }
-            }
-            if (cost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - cost.getLifeAmount() < 4)
-                    return false;
-            }
+            if (!CostUtil.checkLifeCost(cost, source, 4))
+                return false;
+
+            if (!CostUtil.checkDiscardCost(cost, source))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(cost, source))
+                return false;
+                
+            if (!CostUtil.checkRemoveCounterCost(cost, source))
+                return false;
         }
 
         if (tokenAmount.equals("X")) {

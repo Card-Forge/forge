@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
@@ -221,25 +223,20 @@ public class AbilityFactory_Counters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && (!abCost.getSacThis() || source.isCreature())) {
-                //only sacrifice something that's supposed to be sacrificed
-                String sacType = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) return false;
-            if (abCost.getDiscardCost()) return false;
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
 
-            if (abCost.getSubCounter()) {
-                // A card has a 25% chance per counter to be able to pass through here
-                // 4+ counters will always pass. 0 counters will never
-                int currentNum = source.getCounters(abCost.getCounterType());
-                double percent = .25 * (currentNum / abCost.getCounterNum());
-                if (percent <= r.nextFloat())
-                    return false;
-            }
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+            
+            if (CostUtil.checkCreatureSacrificeCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
         }
 
         // TODO handle proper calculation of X values based on Cost
@@ -743,25 +740,17 @@ public class AbilityFactory_Counters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && !abCost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String sacType = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) return false;
-            if (abCost.getDiscardCost()) return false;
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
 
-            if (abCost.getSubCounter()) {
-                // A card has a 25% chance per counter to be able to pass through here
-                // 4+ counters will always pass. 0 counters will never
-                int currentNum = source.getCounters(abCost.getCounterType());
-                double percent = .25 * (currentNum / abCost.getCounterNum());
-                if (percent <= r.nextFloat())
-                    return false;
-            }
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+                return false;
         }
 
         // TODO handle proper calculation of X values based on Cost
@@ -1363,11 +1352,14 @@ public class AbilityFactory_Counters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost()) {
+            if (!CostUtil.checkLifeCost(abCost, source, 8))
                 return false;
-            }
-            if (abCost.getLifeCost()) return false;
-            if (abCost.getDiscardCost()) return false;
+
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
+                
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
         }
 
         if (tgt != null) {

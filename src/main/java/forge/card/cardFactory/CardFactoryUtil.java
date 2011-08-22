@@ -2,6 +2,7 @@ package forge.card.cardFactory;
 
 import com.esotericsoftware.minlog.Log;
 import forge.*;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.*;
 import forge.card.trigger.Trigger;
@@ -907,7 +908,7 @@ public class CardFactoryUtil {
      * @param sourceCard
      *            a {@link forge.Card} object.
      * @param cost
-     *            a {@link forge.card.spellability.Cost} object.
+     *            a {@link forge.card.cost.Cost} object.
      * @param orgManaCost
      *            a {@link java.lang.String} object.
      * @param a
@@ -1258,7 +1259,7 @@ public class CardFactoryUtil {
      * @param extrinsicKeywords
      *            an array of {@link java.lang.String} objects.
      * @param abCost
-     *            a {@link forge.card.spellability.Cost} object.
+     *            a {@link forge.card.cost.Cost} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility eqPump_Equip(final Card sourceCard, final int Power, final int Tough,
@@ -1370,7 +1371,7 @@ public class CardFactoryUtil {
      * @param extrinsicKeywords
      *            an array of {@link java.lang.String} objects.
      * @param abCost
-     *            a {@link forge.card.spellability.Cost} object.
+     *            a {@link forge.card.cost.Cost} object.
      * @return a {@link forge.Command} object.
      */
     public static Command eqPump_onEquip(final Card sourceCard, final int Power, final int Tough,
@@ -1414,7 +1415,7 @@ public class CardFactoryUtil {
      * @param extrinsicKeywords
      *            an array of {@link java.lang.String} objects.
      * @param abCost
-     *            a {@link forge.card.spellability.Cost} object.
+     *            a {@link forge.card.cost.Cost} object.
      * @return a {@link forge.Command} object.
      */
     public static Command eqPump_unEquip(final Card sourceCard, final int Power, final int Tough,

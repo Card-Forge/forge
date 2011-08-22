@@ -24,6 +24,7 @@ import forge.FileUtil;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cost.Cost;
 import forge.card.spellability.*;
 import forge.card.trigger.Trigger;
 import forge.game.GameLossReason;

@@ -1,6 +1,7 @@
 package forge.card.abilityFactory;
 
 import forge.*;
+import forge.card.cost.Cost;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input_PayManaCostUtil;

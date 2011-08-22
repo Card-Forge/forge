@@ -4,6 +4,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cost.Cost_Payment;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class SpellAbility_Requirements {
      *
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @param ts a {@link forge.card.spellability.Target_Selection} object.
-     * @param cp a {@link forge.card.spellability.Cost_Payment} object.
+     * @param cp a {@link forge.card.cost.Cost_Payment} object.
      */
     public SpellAbility_Requirements(SpellAbility sa, Target_Selection ts, Cost_Payment cp) {
         ability = sa;

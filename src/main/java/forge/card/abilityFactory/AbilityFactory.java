@@ -2,6 +2,7 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class AbilityFactory {
     /**
      * <p>Getter for the field <code>abCost</code>.</p>
      *
-     * @return a {@link forge.card.spellability.Cost} object.
+     * @return a {@link forge.card.cost.Cost} object.
      */
     public Cost getAbCost() {
         return abCost;

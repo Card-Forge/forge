@@ -44,7 +44,9 @@ public class SpellAbility_StackInstance {
 
     // Triggers
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
-
+    
+    private HashMap<String, String> storedSVars = new HashMap<String, String>();
+ 
     /**
      * <p>Constructor for SpellAbility_StackInstance.</p>
      *
@@ -76,6 +78,17 @@ public class SpellAbility_StackInstance {
             tc = target.getTargetChoices();
             ability.getTarget().resetTargets();
         }
+        
+        Card source = ability.getSourceCard();
+        
+        //Store SVars and Clear
+        for(String store : Card.getStorableSVars()){
+            String value = source.getSVar(store);
+            if (value.length() > 0){
+                storedSVars.put(store, value);
+                source.setSVar(store, "");
+            }
+        }
     }
 
     /**
@@ -101,6 +114,15 @@ public class SpellAbility_StackInstance {
         // Triggered
         ability.setAllTriggeringObjects(triggeringObjects);
 
+        // Add SVars back in
+        Card source = ability.getSourceCard();
+        for(String store : storedSVars.keySet()){
+            String value = storedSVars.get(store);
+            if (value.length() > 0){
+                source.setSVar(store, value);
+            }
+        }
+        
         return ability;
     }
 

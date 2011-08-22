@@ -175,6 +175,8 @@ public class Card extends MyObservable implements Comparable<Card> {
 
     private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
     private Map<String, String> SVars = new TreeMap<String, String>();
+    private static String[] storableSVars = { "ChosenX" };
+    public static String[] getStorableSVars() { return storableSVars; }
 
     //hacky code below, used to limit the number of times an ability
     //can be used per turn like Vampire Bats

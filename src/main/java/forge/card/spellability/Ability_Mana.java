@@ -4,6 +4,7 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.Player;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
 
 import java.util.HashMap;
@@ -51,7 +52,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
      * <p>Constructor for Ability_Mana.</p>
      *
      * @param sourceCard a {@link forge.Card} object.
-     * @param cost a {@link forge.card.spellability.Cost} object.
+     * @param cost a {@link forge.card.cost.Cost} object.
      * @param produced a {@link java.lang.String} object.
      */
     public Ability_Mana(Card sourceCard, Cost cost, String produced) {
@@ -62,7 +63,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
      * <p>Constructor for Ability_Mana.</p>
      *
      * @param sourceCard a {@link forge.Card} object.
-     * @param cost a {@link forge.card.spellability.Cost} object.
+     * @param cost a {@link forge.card.cost.Cost} object.
      * @param produced a {@link java.lang.String} object.
      * @param num a int.
      */
@@ -189,7 +190,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
      * @return a boolean.
      */
     public boolean isSacrifice() {
-        return this.getPayCosts().getSacCost();
+        return payCosts.getSacCost();
     }
 
     /**

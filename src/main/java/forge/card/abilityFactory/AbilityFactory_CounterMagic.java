@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -171,18 +173,10 @@ public class AbilityFactory_CounterMagic {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && !abCost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String type = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(type.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
         }
 
         Target tgt = sa.getTarget();

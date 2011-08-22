@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -303,30 +305,20 @@ public class AbilityFactory_Pump {
         if (AF.getAbTgt() == null && !AllZoneUtil.isCardInPlay(hostCard))
             return false;
 
+        Cost cost = sa.getPayCosts();
+        
         // temporarily disabled until AI is improved
-        if (AF.getAbCost().getSacCost() && sa.getSourceCard().isCreature()) return false;
-        if (AF.getAbCost().getLifeCost()) {
-            if (!AF.isCurse()) return false; //Use life only to kill creatures
-            if (AllZone.getComputerPlayer().getLife() - AF.getAbCost().getLifeAmount() < 4)
-                return false;
-        }
-        if (AF.getAbCost().getDiscardCost() && !AF.isCurse()) {
-        	return false;
-        }
-        if (AF.getAbCost().getSubCounter()) {
-            // instead of never removing counters, we will have a random possibility of failure.
-            // all the other tests still need to pass if a counter will be removed
-            Counters count = AF.getAbCost().getCounterType();
-            double chance = .66;
-            if (count.equals(Counters.P1P1)) {    // 10% chance to remove +1/+1 to pump
-                chance = .1;
-            } else if (count.equals(Counters.CHARGE)) { // 50% chance to remove charge to pump
-                chance = .5;
-            }
-            Random r = MyRandom.random;
-            if (r.nextFloat() > chance)
-                return false;
-        }
+        if (!CostUtil.checkLifeCost(cost, hostCard, 4))
+            return false;
+
+        if (!CostUtil.checkDiscardCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkCreatureSacrificeCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkRemoveCounterCost(cost, hostCard))
+            return false;
 
         SpellAbility_Restriction restrict = sa.getRestrictions();
 

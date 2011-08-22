@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 
@@ -209,28 +211,20 @@ public class AbilityFactory_Protection {
         if(af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(hostCard))
             return false;
 
-        // temporarily disabled until AI is improved
-        if(af.getAbCost().getSacCost() && sa.getSourceCard().isCreature()) return false;
-        if(af.getAbCost().getLifeCost()) {
-            if(!af.isCurse()) return false; //Use life only to kill creatures
-            if(AllZone.getComputerPlayer().getLife() - af.getAbCost().getLifeAmount() < 4)
-                return false;
-        }
-        if(af.getAbCost().getSubCounter()) {
-            // instead of never removing counters, we will have a random possibility of failure.
-            // all the other tests still need to pass if a counter will be removed
-            Counters count = af.getAbCost().getCounterType();
-            double chance = .66;
-            if(count.equals(Counters.P1P1)) {    // 10% chance to remove +1/+1 to protect
-                chance = .1;
-            } 
-            else if(count.equals(Counters.CHARGE)) { // 50% chance to remove charge to protect
-                chance = .5;
-            }
-            Random r = MyRandom.random;
-            if(r.nextFloat() > chance)
-                return false;
-        }
+        Cost cost = sa.getPayCosts();
+        
+        // temporarily disabled until better AI
+        if (!CostUtil.checkLifeCost(cost, hostCard, 4))
+            return false;
+
+        if (!CostUtil.checkDiscardCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkCreatureSacrificeCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkRemoveCounterCost(cost, hostCard))
+            return false;
 
         // Phase Restrictions
         if(AllZone.getStack().size() == 0 && AllZone.getPhase().isBefore(Constant.Phase.Combat_FirstStrikeDamage)) {
@@ -768,14 +762,20 @@ public class AbilityFactory_Protection {
         if(af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(hostCard))
             return false;
 
-        // temporarily disabled until AI is improved
-        if(af.getAbCost().getSacCost()) return false;
-        if(af.getAbCost().getLifeCost()) {
-                return false;
-        }
-        if(af.getAbCost().getSubCounter()) {
-                return false;
-        }
+        Cost cost = sa.getPayCosts();
+        
+        // temporarily disabled until better AI
+        if (!CostUtil.checkLifeCost(cost, hostCard, 4))
+            return false;
+
+        if (!CostUtil.checkDiscardCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkSacrificeCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkRemoveCounterCost(cost, hostCard))
+            return false;
 
         return false;
     }//protectAllCanPlayAI()

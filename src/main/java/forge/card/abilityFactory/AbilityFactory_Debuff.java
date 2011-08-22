@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.*;
@@ -194,28 +196,21 @@ public class AbilityFactory_Debuff {
      */
     private static boolean debuffCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
-        if (af.getAbTgt() == null && !AllZoneUtil.isCardInPlay(af.getHostCard()))
+        Card source = sa.getSourceCard();
+        if (sa.getTarget() == null && !AllZoneUtil.isCardInPlay(source))
             return false;
 
+        Cost cost = sa.getPayCosts();
+        
         // temporarily disabled until AI is improved
-        if (af.getAbCost().getSacCost() && sa.getSourceCard().isCreature()) return false;
-        if (af.getAbCost().getLifeCost()) {
+        if (!CostUtil.checkCreatureSacrificeCost(cost, source)) 
             return false;
-        }
-        if (af.getAbCost().getSubCounter()) {
-            // instead of never removing counters, we will have a random possibility of failure.
-            // all the other tests still need to pass if a counter will be removed
-            Counters count = af.getAbCost().getCounterType();
-            double chance = .66;
-            if (count.equals(Counters.P1P1)) {    // 10% chance to remove +1/+1 to pump
-                chance = .1;
-            } else if (count.equals(Counters.CHARGE)) { // 50% chance to remove charge to pump
-                chance = .5;
-            }
-            Random r = MyRandom.random;
-            if (r.nextFloat() > chance)
-                return false;
-        }
+        
+        if (!CostUtil.checkLifeCost(cost, source, 40))
+            return false;
+        
+        if (!CostUtil.checkRemoveCounterCost(cost, source))
+            return false;
 
         HashMap<String, String> params = af.getMapParams();
         SpellAbility_Restriction restrict = sa.getRestrictions();

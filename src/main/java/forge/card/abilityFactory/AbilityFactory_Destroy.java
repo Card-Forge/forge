@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -156,23 +158,14 @@ public class AbilityFactory_Destroy {
 
         if (abCost != null) {
             // AI currently disabled for some costs
-            if (abCost.getSacCost() && !abCost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String sacType = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(sacType.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) return false;
-
-            if (abCost.getSubCounter()) {
-                // OK
-            }
+            if (!CostUtil.checkSacrificeCost(abCost, source))
+                return false;
+            
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
+            
+            if (!CostUtil.checkDiscardCost(abCost, source))
+                return false;
         }
 
         // prevent run-away activations - first time will always return true
@@ -607,18 +600,9 @@ public class AbilityFactory_Destroy {
 
         if (abCost != null) {
             // AI currently disabled for some costs
-            if (abCost.getSacCost()) {
-                //OK
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) ;//OK
 
-            if (abCost.getSubCounter()) {
-                // OK
-            }
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
         }
 
         // prevent run-away activations - first time will always return true

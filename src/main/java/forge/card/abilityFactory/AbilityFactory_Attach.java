@@ -15,13 +15,12 @@ import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
 
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.spellability.Ability_Sub;
-import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
@@ -520,25 +519,7 @@ public class AbilityFactory_Attach {
 
 		if (abCost != null){
 			// No Aura spells have Additional Costs 
-			
-			// AI currently disabled for these costs
-			if (abCost.getSacCost()){
-
-			}
-			if (abCost.getLifeCost())	 return false;
-			if (abCost.getDiscardCost()) return false;
-
-			if (abCost.getSubCounter()){
-				//non +1/+1 counters should be used
-				if (abCost.getCounterType().equals(Counters.P1P1)){
-					// A card has a 25% chance per counter to be able to pass through here
-					// 4+ counters will always pass. 0 counters will never
-				int currentNum = source.getCounters(abCost.getCounterType());
-				double percent = .25 * (currentNum / abCost.getCounterNum());
-				if (percent <= r.nextFloat())
-					return false;
-				}
-			}
+		    
 		}
 
 		// prevent run-away activations - first time will always return true
@@ -552,7 +533,7 @@ public class AbilityFactory_Attach {
 				return false;
 		}
 		
-		if (abCost.getMana().contains("X") && source.getSVar("X").equals("Count$xPaid")){
+		if (abCost.getTotalMana().contains("X") && source.getSVar("X").equals("Count$xPaid")){
 			// Set PayX here to maximum value. (Endless Scream and Venarian Gold)
 			int xPay = ComputerUtil.determineLeftoverMana(sa);
 			

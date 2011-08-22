@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -183,18 +185,14 @@ public class AbilityFactory_Regenerate {
         Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && !abCost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String type = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(type.split(","), hostCard.getController(), hostCard);
-                if (ComputerUtil.getCardPreference(hostCard, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
+            if (!CostUtil.checkLifeCost(abCost, hostCard, 4))
+                return false;
+
+            if (!CostUtil.checkSacrificeCost(abCost, hostCard))
+                return false;
+                
+            if (CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
+                return false;
         }
 
         Target tgt = sa.getTarget();
@@ -550,18 +548,14 @@ public class AbilityFactory_Regenerate {
         Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (abCost.getSacCost() && !abCost.getSacThis()) {
-                //only sacrifice something that's supposed to be sacrificed
-                String type = abCost.getSacType();
-                CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
-                typeList = typeList.getValidCards(type.split(","), hostCard.getController(), hostCard);
-                if (ComputerUtil.getCardPreference(hostCard, "SacCost", typeList) == null)
-                    return false;
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
+            if (!CostUtil.checkSacrificeCost(abCost, hostCard))
+                return false;
+            
+            if (CostUtil.checkCreatureSacrificeCost(abCost, hostCard))
+                return false;
+            
+            if (!CostUtil.checkLifeCost(abCost, hostCard, 4))
+                return false;
         }
 
         // filter AIs battlefield by what I can target

@@ -3,6 +3,7 @@ package forge.card.spellability;
 import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.trigger.Trigger;
 import forge.gui.input.Input;
 
@@ -135,7 +136,7 @@ public class Spell_Permanent extends Spell {
      * <p>Constructor for Spell_Permanent.</p>
      *
      * @param sourceCard a {@link forge.Card} object.
-     * @param cost a {@link forge.card.spellability.Cost} object.
+     * @param cost a {@link forge.card.cost.Cost} object.
      * @param tgt a {@link forge.card.spellability.Target} object.
      */
     public Spell_Permanent(Card sourceCard, Cost cost, Target tgt) {

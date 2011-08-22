@@ -1,6 +1,8 @@
 package forge.card.spellability;
 
 import forge.*;
+import forge.card.cost.Cost;
+import forge.card.cost.Cost_Payment;
 
 
 /**
@@ -27,7 +29,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
      * <p>Constructor for Ability_Activated.</p>
      *
      * @param sourceCard a {@link forge.Card} object.
-     * @param abCost a {@link forge.card.spellability.Cost} object.
+     * @param abCost a {@link forge.card.cost.Cost} object.
      * @param tgt a {@link forge.card.spellability.Target} object.
      */
     public Ability_Activated(Card sourceCard, Cost abCost, Target tgt) {

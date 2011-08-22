@@ -2,6 +2,7 @@ package forge.card.spellability;
 
 import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.gui.input.Input;
 
@@ -505,7 +506,7 @@ public abstract class SpellAbility {
     /**
      * <p>Getter for the field <code>payCosts</code>.</p>
      *
-     * @return a {@link forge.card.spellability.Cost} object.
+     * @return a {@link forge.card.cost.Cost} object.
      */
     public Cost getPayCosts() {
         return payCosts;
@@ -514,7 +515,7 @@ public abstract class SpellAbility {
     /**
      * <p>Setter for the field <code>payCosts</code>.</p>
      *
-     * @param abCost a {@link forge.card.spellability.Cost} object.
+     * @param abCost a {@link forge.card.cost.Cost} object.
      */
     public void setPayCosts(Cost abCost) {
         payCosts = abCost;
@@ -752,6 +753,14 @@ public abstract class SpellAbility {
             chosenTarget.resetTargets();
 
         resetTriggeringObjects();
+        
+        //Clear SVars
+        for(String store : Card.getStorableSVars()){
+            String value = sourceCard.getSVar(store);
+            if (value.length() > 0){
+                sourceCard.setSVar(store, "");
+            }
+        }
     }
 
     /**

@@ -2,6 +2,7 @@ package forge.card.trigger;
 
 import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cost.Cost;
 import forge.card.spellability.*;
 import forge.gui.input.Input;
 

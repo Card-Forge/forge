@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -178,12 +180,20 @@ public class AbilityFactory_PreventDamage {
         final Card hostCard = af.getHostCard();
         boolean chance = false;
 
+        Cost cost = sa.getPayCosts();
+        
         // temporarily disabled until better AI
-        if (af.getAbCost().getSacCost()) return false;
-        if (af.getAbCost().getSubCounter())
-            if (af.getAbCost().getCounterType().equals(Counters.P1P1))
-                return false;
-        if (af.getAbCost().getLifeCost()) return false;
+        if (!CostUtil.checkLifeCost(cost, hostCard, 4))
+            return false;
+
+        if (!CostUtil.checkDiscardCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkSacrificeCost(cost, hostCard))
+            return false;
+            
+        if (!CostUtil.checkRemoveCounterCost(cost, hostCard))
+            return false;
 
         Target tgt = af.getAbTgt();
         if (tgt == null) {

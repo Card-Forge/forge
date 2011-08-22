@@ -3,7 +3,7 @@ package forge.card.trigger;
 import forge.AllZone;
 import forge.Card;
 import forge.Player;
-import forge.card.spellability.Cost;
+import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbility_StackInstance;
 

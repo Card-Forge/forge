@@ -451,4 +451,17 @@ public class CardListUtil {
         return cmc;
 
     }//sumCMC
+    
+    public static CardList getRandomSubList(CardList c, int amount){
+        if (c.size() < amount)
+            return null;
+        
+        CardList subList = new CardList();
+        while(subList.size() < amount){
+            c.shuffle();
+            subList.add(c.get(0));
+            c.remove(0);
+        }
+        return subList;
+    }
 }

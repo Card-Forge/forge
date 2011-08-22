@@ -4,8 +4,9 @@ Types:Artifact Creature Angel
 Text:no text
 PT:2/2
 K:Flying
-A:AB$PutCounter | Cost$ T Sac<X/Land> | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put X +1/+1 counters on CARDNAME.
-SVar:X:Sacrificed$Amount
+A:AB$PutCounter | Cost$ T Sac<X/Land> | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenX | SpellDescription$ Put X +1/+1 counters on CARDNAME.
+SVar:X:XChoice
+#ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_leaf_angel.jpg

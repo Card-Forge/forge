@@ -2,6 +2,8 @@ package forge.card.abilityFactory;
 
 import forge.*;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.*;
 
 import java.util.ArrayList;
@@ -347,15 +349,10 @@ public class AbilityFactory_Sacrifice {
             msg = valid;
 
         msg = "Sacrifice a " + msg;
-        
-        boolean remSacrificed = params.containsKey("RememberSacrificed");
-        if (remSacrificed)
-            card.clearRemembered();
 
         if (valid.equals("Self")) {
             if (AllZone.getZone(sa.getSourceCard()).is(Constant.Zone.Battlefield))
-                if (AllZone.getGameAction().sacrifice(sa.getSourceCard()) && remSacrificed)
-                    card.addRemembered(sa.getSourceCard());
+                AllZone.getGameAction().sacrifice(sa.getSourceCard());
         }
         //TODO - maybe this can be done smarter...
         else if (valid.equals("Card.AttachedBy")) {
@@ -592,18 +589,8 @@ public class AbilityFactory_Sacrifice {
 
         if (abCost != null) {
             // AI currently disabled for some costs
-            if (abCost.getSacCost()) {
-                //OK
-            }
-            if (abCost.getLifeCost()) {
-                if (AllZone.getComputerPlayer().getLife() - abCost.getLifeAmount() < 4)
-                    return false;
-            }
-            if (abCost.getDiscardCost()) ;//OK
-
-            if (abCost.getSubCounter()) {
-                // OK
-            }
+            if (!CostUtil.checkLifeCost(abCost, source, 4))
+                return false;
         }
 
         // prevent run-away activations - first time will always return true
