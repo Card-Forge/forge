@@ -6,8 +6,8 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Clerics on the battlefield.
 SVar:X:Count$Valid Cleric
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
-SVar:X:TriggerCount$DamageAmount
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ Y
+SVar:Y:TriggerCount$DamageAmount
 SVar:BuffedBy:Cleric
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubtless_one.jpg

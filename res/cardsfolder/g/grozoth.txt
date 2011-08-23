@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcLE9 | ChangeNum$ X
 A:AB$ Debuff | Cost$ 4 | Keywords$ Defender | Defined$ Self | SpellDescription$ CARDNAME loses defender until end of turn.
 K:Transmute:1 U U
-SVar:X:Count$TypeInYourLibrary.Card
+SVar:X:Count$InYourLibrary
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grozoth.jpg
