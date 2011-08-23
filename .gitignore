@@ -5,6 +5,7 @@
 /forge.log
 /forge.preferences
 /release.properties
+res/PerSetTrackingResults
 res/cardsfolder/cardsfolder.zip
 res/gui/display_new_layout.xml
 res/quest/questData.dat
