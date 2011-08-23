@@ -9,5 +9,7 @@ res/PerSetTrackingResults
 res/cardsfolder/cardsfolder.zip
 res/gui/display_new_layout.xml
 res/quest/questData.dat
+res/reprintSetInfo.log
+res/setInfoScript.log
 /target
 /test-output
