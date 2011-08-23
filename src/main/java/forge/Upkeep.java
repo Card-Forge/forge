@@ -78,7 +78,6 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Lord_of_the_Pit();
         upkeep_Drop_of_Honey();
         upkeep_Demonic_Hordes();
-        upkeep_Fallen_Empires_Storage_Lands();
         upkeep_Carnophage();
         upkeep_Sangrophage();
         upkeep_Dega_Sanctuary();
@@ -2915,23 +2914,5 @@ public class Upkeep implements java.io.Serializable {
             if (AllZone.getComputerPlayer().getLife() > 2) player.loseLife(2, c);
             else c.tap();
         }
-    }// upkeep_Carnophage
-
-    /**
-     * <p>upkeep_Fallen_Empires_Storage_Lands.</p>
-     */
-    private static void upkeep_Fallen_Empires_Storage_Lands() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList all = AllZoneUtil.getPlayerCardsInPlay(player, "Bottomless Vault");
-        all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Dwarven Hold"));
-        all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Hollow Trees"));
-        all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Icatian Store"));
-        all.addAll(AllZoneUtil.getPlayerCardsInPlay(player, "Sand Silos"));
-
-        for (Card land : all) {
-            if (land.isTapped()) land.addCounter(Counters.STORAGE, 1);
-        }
-    } //upkeep_Fallen_Empires_Storage_Lands
-    
+    }// upkeep_Carnophage    
 }//end class Upkeep

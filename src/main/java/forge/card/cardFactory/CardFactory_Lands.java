@@ -545,7 +545,7 @@ class CardFactory_Lands {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
 
-
+/*
         //*************** START ************ START **************************
         else if (cardName.equals("Bottomless Vault") || cardName.equals("Dwarven Hold")
                 || cardName.equals("Hollow Trees") || cardName.equals("Icatian Store")
@@ -641,7 +641,7 @@ class CardFactory_Lands {
             card.addSpellAbility(addMana);
             card.addSpellAbility(abMana);
         }//*************** END ************ END **************************
-
+*/
 
         //*************** START *********** START **************************
         //Lorwyn Dual Lands, and a couple Morningtide...

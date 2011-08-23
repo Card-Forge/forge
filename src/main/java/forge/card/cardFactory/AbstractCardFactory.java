@@ -31,7 +31,6 @@ import forge.game.GameLossReason;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost;
-import forge.gui.input.Input_PayManaCostUtil;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -1344,6 +1343,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
 
 
         //*************** START ************ START **************************
+        /*
         else if (cardName.equals("Black Mana Battery") || cardName.equals("Blue Mana Battery")
                 || cardName.equals("Green Mana Battery") || cardName.equals("Red Mana Battery")
                 || cardName.equals("White Mana Battery"))
@@ -1420,6 +1420,7 @@ public abstract class AbstractCardFactory implements NewConstants, CardFactoryIn
             addMana.setBeforePayMana(runtime);
             card.addSpellAbility(addMana);
         }
+        */
         //*************** END ************ END **************************
 
 

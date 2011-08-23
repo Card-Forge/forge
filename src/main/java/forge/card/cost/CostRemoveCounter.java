@@ -12,7 +12,6 @@ public class CostRemoveCounter extends CostPart {
     private Counters counter;
     private int lastPaidAmount = 0;
     
-
     public Counters getCounter() {
         return counter;
     }
@@ -115,6 +114,11 @@ public class CostRemoveCounter extends CostPart {
     public boolean decideAIPayment(SpellAbility ability, Card source, Cost_Payment payment) {
         Integer c = convertAmount();
         if (c == null){
+            String sVar = source.getSVar(amount);
+            if (sVar.equals("XChoice")){
+                return false;
+            }
+            
             c = AbilityFactory.calculateAmount(source, amount, ability);
         }
         if (c > source.getCounters(getCounter())) {
