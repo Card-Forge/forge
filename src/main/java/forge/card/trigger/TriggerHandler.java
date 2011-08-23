@@ -336,7 +336,22 @@ public class TriggerHandler {
         {
                 return false; //Test failed.
         }
-
+        
+        //Torpor Orb check
+        CardList torporOrbs = AllZoneUtil.getCardsInPlay("Torpor Orb");
+        
+        if(torporOrbs.size() != 0 && mode.equals("ChangesZone") && regtrig.getMapParams().get("ValidCard").contains("Creature"))
+        {
+            return false;
+        }
+        if(torporOrbs.size() != 0 && regtrig.getMapParams().containsKey("Destination"))
+        {
+            if(!regtrig.getMapParams().get("Destination").equals("Battlefield"))
+            {
+                return false;
+            }
+        }
+        
         HashMap<String, String> trigParams = regtrig.getMapParams();
         final Player[] decider = new Player[1];
 

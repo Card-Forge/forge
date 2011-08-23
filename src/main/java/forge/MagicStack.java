@@ -535,7 +535,7 @@ public class MagicStack extends MyObservable {
             }
 
             //Run AbilityCast triggers
-            if (sp.isAbility()) {
+            if (sp.isAbility() && !sp.isTrigger()) {
                 AllZone.getTriggerHandler().runTrigger("AbilityCast", runParams);
             }
 

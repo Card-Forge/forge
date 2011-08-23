@@ -1,0 +1,6 @@
+Name:Torpor Orb
+ManaCost:2
+Types:Artifact
+Text:Creatures entering the battlefield don't cause abilities to trigger.
+SVar:Rarity:Rare
+End
