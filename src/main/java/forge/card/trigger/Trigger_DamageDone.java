@@ -59,7 +59,7 @@ public class Trigger_DamageDone extends Trigger {
             int operand = Integer.parseInt(fullParam.substring(2));
             int actualAmount = (Integer) runParams.get("DamageAmount");
 
-            if (AllZoneUtil.compare(actualAmount, operator, operand))
+            if (!AllZoneUtil.compare(actualAmount, operator, operand))
                 return false;
 
             System.out.print("DamageDone Amount Operator: ");
