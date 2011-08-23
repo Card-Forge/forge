@@ -2,7 +2,9 @@ package forge.gui.input;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardUtil;
 import forge.Constant;
+import forge.card.abilityFactory.AbilityFactory_Mana;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability_Mana;
@@ -76,10 +78,19 @@ public class Input_PayManaCostUtil {
             ArrayList<Ability_Mana> colorMatches = new ArrayList<Ability_Mana>();
 
             for (Ability_Mana am : abilities) {
-                String[] m = ManaPool.formatMana(am);
-                for (String color : m)
-                    if (manaCost.isColor(color)) // convert to long before checking if color
-                        colorMatches.add(am);
+                if (am.isReflectedMana()){
+                    ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am, am.getAbilityFactory(), new ArrayList<String>(), new ArrayList<Card>());
+                    for (String color : reflectableColors){
+                        if (manaCost.isColor(color)) // convert to long before checking if color
+                            colorMatches.add(am);
+                    }
+                }
+                else{
+                    String[] m = ManaPool.formatMana(am);
+                    for (String color : m)
+                        if (manaCost.isColor(color)) // convert to long before checking if color
+                            colorMatches.add(am);
+                }
             }
 
             if (colorMatches.size() == 0 || colorMatches.size() == abilities.size())
@@ -127,14 +138,30 @@ public class Input_PayManaCostUtil {
      * @return a boolean.
      */
     public static boolean canMake(Ability_Mana am, String mana) {
-        if (mana.contains("1")) return true;
-        if (mana.contains("S") && am.isSnow()) return true;
-
-        for (String color : ManaPool.formatMana(am))
-            if (mana.contains(color)) return true;
+        if (mana.contains("1")){
+            return true;
+        }
+        if (mana.contains("S") && am.isSnow()){
+            return true;
+        }
+        
+        if (am.isReflectedMana()){
+            ArrayList<String> reflectableColors = AbilityFactory_Mana.reflectableMana(am, am.getAbilityFactory(), new ArrayList<String>(), new ArrayList<Card>());
+            for (String color : reflectableColors){
+                if (mana.contains(getShortColorString(color))){
+                    return true;
+                }
+            }
+        }
+        else{
+            for (String color : ManaPool.formatMana(am)){
+                if (mana.contains(color)){
+                    return true;
+                }
+            }
+        }
         return false;
     }
-
 
     /**
      * <p>getLongColorString.</p>

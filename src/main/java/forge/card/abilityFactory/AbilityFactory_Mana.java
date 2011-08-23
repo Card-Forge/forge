@@ -411,7 +411,7 @@ public class AbilityFactory_Mana {
      * @param parents a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private static ArrayList<String> reflectableMana(Ability_Mana abMana, AbilityFactory af, ArrayList<String> colors, ArrayList<Card> parents) {
+    public static ArrayList<String> reflectableMana(Ability_Mana abMana, AbilityFactory af, ArrayList<String> colors, ArrayList<Card> parents) {
         // Here's the problem with reflectable Mana. If more than one is out, they need to Reflect each other,
         // so we basically need to have a recursive list that send the parents so we don't infinite recurse.
         HashMap<String, String> params = af.getMapParams();
