@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 SVar:ABRegen:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate this creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trollhide.jpg
+SetInfo:M12|Common|http://magiccards.info/scans/en/m12/199.jpg
 End
