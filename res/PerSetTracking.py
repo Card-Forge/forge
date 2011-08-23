@@ -11,8 +11,8 @@ if not os.path.exists(pathToMtgData) :
         raw_input("")
         sys.exit()
 
-if not os.path.isdir(sys.path[0] + os.sep + 'PerSetTracking Results') :
-        os.mkdir(sys.path[0] + os.sep + 'PerSetTracking Results')
+if not os.path.isdir(sys.path[0] + os.sep + 'PerSetTrackingResults') :
+        os.mkdir(sys.path[0] + os.sep + 'PerSetTrackingResults')
 
 forgeFolderFiles = []
 forgeCards = []
@@ -90,7 +90,7 @@ for currentSet in setCodes :
         currentMissing.sort()
         currentImplemented.sort()
 
-        with open(sys.path[0] + os.sep + "PerSetTracking Results" + os.sep + "set_" + currentSet + ".txt", "w") as output :
+        with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "set_" + currentSet + ".txt", "w") as output :
                 output.write("Implemented (" + str(len(currentImplemented)) + "):\n")
                 for everyImplemented in currentImplemented :
                         output.write(everyImplemented + '\n')
@@ -112,7 +112,7 @@ totalPercentage = 0
 totalMissing = 0
 totalImplemented = 0
 fullTotal = 0
-with open(sys.path[0] + os.sep + "PerSetTracking Results" + os.sep + "CompleteStats.txt", "w") as statsfile:
+with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "CompleteStats.txt", "w") as statsfile:
         statsfile.write("Set: Implemented (Missing) / Total = Percentage Implemented\n")
         for k,dataKey in totalDataList :
                 totalImplemented += dataKey[0]
