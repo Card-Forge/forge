@@ -943,14 +943,19 @@ public class AbilityFactory_DealDamage {
             targetPlayer = tgt.getTargetPlayers().get(0);
 
         String players = "";
+        CardList list = new CardList();
 
-        if (params.containsKey("ValidPlayers"))
+        if (params.containsKey("ValidPlayers")) {
             players = params.get("ValidPlayers");
+        }
+        
+        if (params.containsKey("ValidCards")) {
+            list = AllZoneUtil.getCardsInPlay();
+        }
 
-        CardList list = AllZoneUtil.getCardsInPlay();
-
-        if (targetPlayer != null)
+        if (targetPlayer != null) {
             list = list.getController(targetPlayer);
+        }
 
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
 
@@ -961,9 +966,9 @@ public class AbilityFactory_DealDamage {
                 p.addDamage(dmg, card);
         } else if (players.equals("EachOpponent")) {
             for (Player p : AllZoneUtil.getOpponents(card.getController())) p.addDamage(dmg, card);
-        } else if (players.equals("Self"))
+        } else if (players.equals("Self")) {
             card.getController().addDamage(dmg, card);
-        else if (players.equals("Targeted"))
+        } else if (players.equals("Targeted"))
             targetPlayer.addDamage(dmg, card);
     }
 }
