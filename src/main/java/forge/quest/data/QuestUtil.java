@@ -121,6 +121,8 @@ public class QuestUtil {
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Blue));
         } else if (id == 3) //Black Dungeon
         {
+            qa.addCompy("Infernal Genesis");
+            
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Black));
         } else if (id == 4) //Red Dungeon
         {
@@ -130,6 +132,19 @@ public class QuestUtil {
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Red));
         } else if (id == 5) //Green Dungeon
         {
+            CardList humanList = new CardList();
+            Card c = AllZone.getCardFactory().getCard("Defense of the Heart", AllZone.getHumanPlayer());
+
+            c.setCurSetCode(c.getMostRecentSet());
+            c.setImageFilename(CardUtil.buildFilename(c));
+
+            humanList.add(c);
+
+            qa.setHuman(humanList);
+            
+            qa.addCompy("Eladamri's Vineyard");
+            qa.addCompy("Upwelling");
+            
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Green));
         } else if (id == 6) //Colorless Dungeon
         {
