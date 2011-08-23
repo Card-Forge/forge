@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Land | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ DamageAll | Description$ Enchanted land has "tap: This land deals 1 damage to each creature and player."
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DamageAll | Description$ Enchanted land has "tap: This land deals 1 damage to each creature and player."
 SVar:DamageAll:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_field.jpg
