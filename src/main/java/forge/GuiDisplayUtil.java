@@ -1432,5 +1432,26 @@ public class GuiDisplayUtil implements NewConstants {
     public static void devModeUnlimitedLand() {
     	AllZone.getHumanPlayer().addMaxLandsToPlay(100);
     }
+    
+    /**
+     * <p>devModeSetLife.</p>
+     *
+     * @since 1.1.3
+     */
+    public static void devModeSetLife() {
+        ArrayList<Player> players = AllZoneUtil.getPlayersInGame();
+        Object o = GuiUtils.getChoiceOptional("Set life for which player?", players.toArray());
+        if (null == o) return;
+        else {
+            Player p = (Player) o;
+            Integer integers[] = new Integer[99];
+            for(int j = 0; j < 99; j++) integers[j] = Integer.valueOf(j);
+            Integer i = GuiUtils.getChoiceOptional("Set life to what?", integers);
+            if (null == i) return;
+            else {
+                p.setLife(i, null);
+            }
+        }
+    }
 
 }//end class GuiDisplayUtil

@@ -363,6 +363,13 @@ public interface NewConstants {
                 String BUTTON = "%s/Display/nolandlimit/button";
                 String MENU = "%s/Display/nolandlimit/menu";
             }
+            
+            String SETLIFE = "%s/Display/setlife";
+
+            public static interface SETLIFE {
+                String BUTTON = "%s/Display/setlife/button";
+                String MENU = "%s/Display/setlife/menu";
+            }
         }
 
         public static interface Gui_DownloadPictures {

@@ -290,6 +290,16 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             	}
             };
             //end DevMode UnlimitedLand
+            
+            //DevMode SetLife
+            ForgeAction setLife = new ForgeAction(SETLIFE) {
+                private static final long serialVersionUID = -1750588303928974918L;
+
+                public void actionPerformed(ActionEvent arg0) {
+                    GuiDisplayUtil.devModeSetLife();
+                }
+            };
+            //end DevMode AddCounter
 
             Object[] objDev = {
             		GuiDisplay4.canLoseByDecking,
@@ -302,7 +312,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             		addCounter,
             		tapPerm,
             		untapPerm,
-            		unlimitedLand
+            		unlimitedLand,
+            		setLife
             };
             for (Object o : objDev) {
                 if (o instanceof ForgeAction)
