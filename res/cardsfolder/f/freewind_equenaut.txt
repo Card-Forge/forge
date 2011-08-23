@@ -4,7 +4,7 @@ Types:Creature Human Archer
 Text:no text
 PT:2/2
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self+isEnchanted | AddAbility$ DealDamage | Description$ As long as CARDNAME is enchanted, it has "Tap: CARDNAME deals 2 damage to target attacking or blocking creature."
+S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddAbility$ DealDamage | Description$ As long as CARDNAME is enchanted, it has "Tap: CARDNAME deals 2 damage to target attacking or blocking creature."
 SVar:DealDamage:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | Secondary$ True | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature."
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freewind_equenaut.jpg
