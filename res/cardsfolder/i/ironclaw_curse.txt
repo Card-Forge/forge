@@ -4,7 +4,8 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ -1 | AddKeyword$ HIDDEN CARDNAME can't block creatures with power equal to or greater than CARDNAME's toughness. | Description$ Enchanted creature gets -0/-1 and can't block creatures with power equal to or greater than the enchanted creature's toughness.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ -1 | AddKeyword$ HIDDEN CantBlock Creature.powerGTX | AddSVar$ X | Description$ Enchanted creature gets -0/-1 and can't block creatures with power equal to or greater than the enchanted creature's toughness.
+SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_curse.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/96.jpg
