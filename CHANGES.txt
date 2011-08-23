@@ -62,6 +62,22 @@ Fixes/Features:
 - Added "ActivatedOnly" script key so SpellAbilityCast triggers can be limited to non-triggered abilities.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Quest reward cards are being presented in a much cleaner detailed view.
+- Updated maven-jar-plugin.
+- Aestetic text changes, booster type "T2" renamed to Standard.
+- Fix: Player could not concede having Platinum Angel on battlefield.
+- CardReference is designed for use in decks and cardpools. holds only name, edition, foil; it also can be key of a hashtable.
+- Some fixes to Reflectable Mana in regard to activating during activation of a SA.
+- Added a Set Player Life option in DevMode.
+- Fixed Gideon Jura's Lure-like ability not working properly when the Human is low on life. (bAssault was taking over before the 'must attack entity' logic was being run.)
+- Fixed output directory name.
+- Fixed 5 card text files.
+- Ignore PerSetTrackingResults.
+- Ignore log files.
+- Fixed logic error with DamageAmount parameter of DamageDone triggers.
+- Fixed TriggerZones of Pain Magnification.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
