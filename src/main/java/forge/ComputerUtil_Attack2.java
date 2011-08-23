@@ -276,12 +276,7 @@ public class ComputerUtil_Attack2 {
         // TODO: split attackers to different planeswalker/human
         // AI will only attack one Defender per combat for now
         ArrayList<Object> defs = c.getDefenders();
-
-        if (defs.size() == 1 || bAssault) {
-            c.setCurrentDefender(0);
-            return;
-        }
-
+        
         // Randomly determine who EVERYONE is attacking
         // would be better to determine more individually
         int n = MyRandom.random.nextInt(defs.size());
@@ -292,13 +287,17 @@ public class ComputerUtil_Attack2 {
         	n = defenders.indexOf(entity);
         	if(-1 == n) {
         		System.out.println("getMustAttackEntity() returned something not in defenders.");
+        		c.setCurrentDefender(0);
         	}
         	else {
         		c.setCurrentDefender(n);
         	}
         }
         else {
-        	c.setCurrentDefender(n);
+            if (defs.size() == 1 || bAssault) {
+                c.setCurrentDefender(0);
+            }
+            else c.setCurrentDefender(n);
         }
         
         return;

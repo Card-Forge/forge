@@ -435,7 +435,7 @@ public class AbilityFactory_Combat {
                 else {
                 	entity = p.getOpponent();
                 }
-            	System.out.println("Setting mustAttackEntity to: "+entity);
+            	//System.out.println("Setting mustAttackEntity to: "+entity);
                 p.setMustAttackEntity(entity);
             }
         }
