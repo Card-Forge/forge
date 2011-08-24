@@ -1782,7 +1782,7 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         } //*************** END ************ END **************************
 
-
+/*
         //*************** START *********** START **************************
         else if (cardName.equals("Haunting Misery")) {
             Cost cost = new Cost("1 B B", cardName, false);
@@ -1835,7 +1835,7 @@ public class CardFactory_Sorceries {
             
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+*/
 
         //*************** START *********** START **************************
         else if (cardName.equals("Brood Birthing")) {

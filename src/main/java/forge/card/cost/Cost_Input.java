@@ -1,5 +1,7 @@
 package forge.card.cost;
 
+import java.util.Iterator;
+
 import javax.swing.JOptionPane;
 
 import forge.AllZone;
@@ -8,11 +10,13 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.Constant;
+import forge.GameActionUtil;
 import forge.Phase;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
+import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
 
@@ -508,6 +512,80 @@ public class Cost_Input {
         return target;
     }//exileType()
 
+    public static Input exileFrom(final SpellAbility sa, final CostExile part, final String type, final Cost_Payment payment, final int nNeeded) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 734256837615635021L;
+
+            @Override
+            public void showMessage() {
+                CardList typeList = AllZoneUtil.getCardsInZone(part.getFrom(), sa.getActivatingPlayer());
+                typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+
+                for (int i = 0; i < nNeeded; i++) {
+                    if (typeList.size() == 0)
+                        cancel();
+
+                    Object o = GuiUtils.getChoiceOptional("Exile from "+part.getFrom(), typeList.toArray());
+
+                    if (o != null) {
+                        Card c = (Card) o;
+                        typeList.remove(c);
+                        payment.getAbility().addCostToHashList(c, "Exiled");
+                        AllZone.getGameAction().exile(c);
+                        if (i == nNeeded - 1) done();
+                    }
+                    else{
+                        cancel();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void selectButtonCancel() {
+                cancel();
+            }
+
+            public void done() {
+                stop();
+                payment.paidCost(part);
+            }
+
+            public void cancel() {
+                stop();
+                payment.cancelCost();
+            }
+        };
+        return target;
+    }//exileFrom()
+    
+    
+    public static void exileFromTop(final SpellAbility sa, final CostExile part, final Cost_Payment payment, final int nNeeded){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
+        CardList list = AllZoneUtil.getPlayerCardsInLibrary(sa.getActivatingPlayer(), nNeeded);
+        
+        if (list.size() > nNeeded){
+            // I don't believe this is possible
+            payment.cancelCost();
+            return;
+        }
+        
+        boolean doExile = GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString());
+        if (doExile){
+            Iterator<Card> itr = list.iterator();
+            while(itr.hasNext()){
+                Card c = (Card)itr.next();
+                payment.getAbility().addCostToHashList(c, "Exiled");
+                AllZone.getGameAction().exile(c);
+            }
+            payment.paidCost(part);
+        }
+        else{
+            payment.cancelCost();
+        }
+    }
+    
     /**
      * <p>input_tapXCost.</p>
      *

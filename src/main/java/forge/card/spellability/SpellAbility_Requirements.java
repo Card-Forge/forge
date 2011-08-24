@@ -150,6 +150,7 @@ public class SpellAbility_Requirements {
             if (select != null)
                 select.resetTargets();
 
+            ability.resetOnceResolved();
             payment.cancelPayment();
             AllZone.getStack().clearFrozen();
         }

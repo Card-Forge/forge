@@ -101,10 +101,18 @@ public class CostExile extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        if (getThis())
+        if (getThis()){
             CostUtil.setInput(Cost_Input.exileThis(ability, payment, this));
-        else
+        }
+        else if (from.equals(Constant.Zone.Battlefield) || from.equals(Constant.Zone.Hand)){
             CostUtil.setInput(Cost_Input.exileType(ability, this, getType(), payment, c));
+        }
+        else if (from.equals(Constant.Zone.Library)){
+            Cost_Input.exileFromTop(ability, this, payment, c);
+        }
+        else{
+            CostUtil.setInput(Cost_Input.exileFrom(ability, this, getType(), payment, c));
+        }
         return false;
     }
 
@@ -116,10 +124,22 @@ public class CostExile extends CostPartWithList {
         else{
             Integer c = convertAmount();
             if (c == null){
+                String sVar = source.getSVar(amount);
+                // Generalize this
+                if (sVar.equals("XChoice")){
+                    return false;
+                }
+                
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
-            list = ComputerUtil.chooseExileFrom(getFrom(), getType(), source, ability.getTargetCard(), c);
-            if (list == null)
+            
+            if (from.equals(Constant.Zone.Library)){
+                list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.getComputerPlayer(), c);
+            }
+            else{
+                list = ComputerUtil.chooseExileFrom(getFrom(), getType(), source, ability.getTargetCard(), c);
+            }
+            if (list == null || list.size() < c)
                 return false;
         }
         return true;
