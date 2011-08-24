@@ -81,7 +81,8 @@ public class BuildInfo {
             Process proc = null;
             BufferedReader reader = null;
             try {
-                proc = Runtime.getRuntime().exec("svnversion");
+                String cmd[] = {"svnversion", "src"};
+                proc = Runtime.getRuntime().exec(cmd, null, null);
                 final InputStream procStdoutStream = proc.getInputStream();
                 final Reader procReader = new InputStreamReader(procStdoutStream, US_ASCII_CHARSET);
                 reader = new BufferedReader(procReader);
@@ -89,18 +90,21 @@ public class BuildInfo {
                 result = reader.readLine();  // may be null
 
             } catch (IOException exn2) {
+                System.out.println("BuildInfo - Runtime.exec_IOException - " + exn2.getMessage());
                 result = null; // NOPMD by Braids on 8/12/11 10:21 AM
             } finally {
                 try {
                     reader.close();
                 } catch (Throwable exn3) { // NOPMD by Braids on 8/12/11 10:21 AM
                     // ignored
+                    System.out.println("BuildInfo - reader.close_Throwable - " + exn3.getMessage());
                 }
 
                 try {
                     proc.destroy();
                 } catch (Throwable exn4) { // NOPMD by Braids on 8/12/11 10:21 AM
                     // ignored
+                    System.out.println("BuildInfo - proc.destroy_Throwable - " + exn4.getMessage());
                 }
             }
         }
