@@ -505,7 +505,7 @@ public class ComputerUtil_Block2 {
                         && CardFactoryUtil.evaluateCreature(blocker) + getDiff() < CardFactoryUtil.evaluateCreature(attacker)
                         && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
-                    getBlockersLeft().remove(blocker);
+                    getBlockersLeft().removeAll(blocker);
                 }
             }
         }
@@ -630,7 +630,7 @@ public class ComputerUtil_Block2 {
                 for (Card blocker : blockers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         combat.addBlocker(attacker, blocker);
-                        getBlockersLeft().remove(blocker);
+                        getBlockersLeft().removeAll(blocker);
                     }
                 }
             }

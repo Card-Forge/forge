@@ -574,6 +574,17 @@ public class CardList implements Iterable<Card> {
     public void remove(Card c) {
         list.remove(c);
     }
+    
+    /**
+     * <p>removeAll.</p>
+     *
+     * @param c a {@link forge.Card} object.
+     */
+    public void removeAll(Card c) {
+        ArrayList<Card> cList = new ArrayList<Card>();
+        cList.add(c);
+        list.removeAll(cList);
+    }
 
     /**
      * <p>clear.</p>
