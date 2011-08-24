@@ -90,7 +90,9 @@ public class CostExile extends CostPartWithList {
     public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
         String amount = getAmount();
         Integer c = convertAmount();
-        CardList list = AllZoneUtil.getCardsInZone(getFrom(), ability.getActivatingPlayer());
+        Player activator = ability.getActivatingPlayer();
+        CardList list = AllZoneUtil.getCardsInZone(getFrom(), activator);
+        list = list.getValidCards(type.split(";"), activator, source);
         if (c == null){
             String sVar = source.getSVar(amount);
             // Generalize this
