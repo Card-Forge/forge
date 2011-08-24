@@ -1,0 +1,11 @@
+Name:Renegade Warlord
+ManaCost:4 R
+Types:Creature Human Warrior
+Text:no text
+PT:3/3
+K:First strike
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Whenever CARDNAME attacks, each other attacking creature gets +1/+0 until end of turn.
+SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_warlord.jpg
+End

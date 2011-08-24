@@ -6072,6 +6072,7 @@ res/cardsfolder/r/rend_flesh.txt svneol=native#text/plain
 res/cardsfolder/r/rend_spirit.txt svneol=native#text/plain
 res/cardsfolder/r/rendclaw_trow.txt svneol=native#text/plain
 res/cardsfolder/r/renegade_troops.txt svneol=native#text/plain
+res/cardsfolder/r/renegade_warlord.txt -text
 res/cardsfolder/r/renewal.txt svneol=native#text/plain
 res/cardsfolder/r/renewed_faith.txt svneol=native#text/plain
 res/cardsfolder/r/renewing_dawn.txt svneol=native#text/plain
