@@ -216,7 +216,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Indiana Jones 2", "medium", "UBR Sol'kanar the Swamp King, buff and Raise Dead");
         addToDeckList("Indiana Jones 3", "hard", "UBR Sol'kanar the Swamp King, buff and Terminate");
 
-        addToDeckList("Jabba the Hut 3", "hard", "Mono B Infect deck");
+        addToDeckList("Jabba the Hut 3", "hard", "UB Infect deck");
 //        addToDeckList("Jack 2", "medium", "BG Aggressive deck");
 //        addToDeckList("Jack 3", "hard", "WUB Sphinx Cascade deck");
         addToDeckList("Jack Sparrow 1", "easy", "UB Pirate deck with Talas Warrior, Coastal Piracy, Drowned and Sea's Claim");
