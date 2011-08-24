@@ -78,6 +78,23 @@ Fixes/Features:
 - Fixed TriggerZones of Pain Magnification.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Fixed Flame Rift and Kagemaro, First to Suffer.
+- Fixed a couple of auras that give abilities to lands.
+- Fixed Dragon Mage.
+- Fixed Spitfire Handler and Ironclaw Curse.
+- Fixed Thalakos Dreamsower's damage ability.
+- Fixed Thran Golem and similar cards.
+- Triggered Abilities no longer trigger AbilityCast.
+- Added XChoice to CostDiscard.
+- Converted Firestorm and Vengeful Dreams to Script.
+- Updated SetInfo for Whip Vine - 2 arts.
+- Added Missing Exile Inputs and support for XChoice.
+- Converted Haunting Misery to Script.
+- Added XChoice to PayLife.
+- Fixed Salvage Scout.
+- Fixed Mimic Vat.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
