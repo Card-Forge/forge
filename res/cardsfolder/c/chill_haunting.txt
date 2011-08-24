@@ -1,0 +1,11 @@
+Name:Chill Haunting
+ManaCost:1 B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 B ExileFromGrave<X/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -ChosenX  | NumDef$ -ChosenX  | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn.
+SVar:X:XChoice
+#ChosenX SVar created by Cost payment
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_haunting.jpg
+End
