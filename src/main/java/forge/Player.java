@@ -5,6 +5,7 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.Trigger;
 
 import javax.swing.*;
 import java.util.*;
@@ -32,7 +33,7 @@ public abstract class Player extends MyObservable {
 
     protected int nTurns = 0;
     protected boolean skipNextUntap = false;
-    protected boolean prowl = false;
+    protected ArrayList<String> prowl = new ArrayList<String>();
 
     protected int maxLandsToPlay = 1;
     protected int numLandsPlayed = 0;
@@ -91,7 +92,7 @@ public abstract class Player extends MyObservable {
         loseConditionSpell = null;
         maxLandsToPlay = 1;
         numLandsPlayed = 0;
-        prowl = false;
+        prowl = new ArrayList<String>();
         
         handSizeOperations = new ArrayList<HandSizeOp>();
         keywords.clear();
@@ -377,8 +378,11 @@ public abstract class Player extends MyObservable {
             GameActionUtil.executeDamageDealingEffects(source, damageToDo);
             GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
             
-            if(isCombat && source.isType("Rogue"))
-                source.getController().setProwl(true);
+            if(isCombat) {
+                ArrayList<String> types = source.getType();
+                for (String type : types)
+                    source.getController().addProwlType(type);
+            }
 
             //Run triggers
             HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1630,12 +1634,16 @@ public abstract class Player extends MyObservable {
      *
      * @return a boolean.
      */
-    public boolean hasProwl() {
-        return prowl;
+    public boolean hasProwl(String type) {
+        return prowl.contains(type);
     }
     
-    public void setProwl(boolean newProwl) {
-        prowl = newProwl;
+    public void addProwlType(String type) {
+        prowl.add(type);
+    }
+    
+    public void resetProwl() {
+        prowl = new ArrayList<String>();
     }
 
     private ArrayList<HandSizeOp> handSizeOperations;

@@ -40,7 +40,7 @@ public class SpellAbility_Variables {
     protected boolean threshold = false;
     protected boolean metalcraft = false;
     protected boolean hellbent = false;
-    protected boolean prowl = false;
+    protected ArrayList<String> prowl = null;
 
     protected String sIsPresent = null;
     protected String presentCompare = "GE1";    // Default Compare to Greater or Equal to 1
@@ -268,8 +268,8 @@ public class SpellAbility_Variables {
      *
      * @param bProwl a boolean.
      */
-    public void setProwl(boolean bProwl) {
-        prowl = bProwl;
+    public void setProwl(ArrayList<String> types) {
+        prowl = types;
     }
 
     //IsPresent for Valid battlefield stuff

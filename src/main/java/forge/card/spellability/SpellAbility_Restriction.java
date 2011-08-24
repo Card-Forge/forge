@@ -5,6 +5,7 @@ import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -39,7 +40,14 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             if (value.equals("Threshold")) setThreshold(true);
             if (value.equals("Metalcraft")) setMetalcraft(true);
             if (value.equals("Hellbent")) setHellbent(true);
-            if (value.equals("Prowl")) setProwl(true);
+            if (value.startsWith("Prowl")) {
+                ArrayList<String> prowlTypes = new ArrayList<String>();
+                prowlTypes.add("Rogue");
+                if(value.split("Prowl").length > 1) {
+                    prowlTypes.add(value.split("Prowl")[1]);
+                }
+                setProwl(prowlTypes);
+            }
         }
 
         if (params.containsKey("ActivationZone"))
@@ -181,9 +189,17 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             if (!activator.hasMetalcraft())
                 return false;
         }
-        if (prowl) {
-            if (!activator.hasProwl())
+        if (prowl != null) {
+            //only true if the activating player has damaged the opponent with one of the specified types 
+            boolean prowlFlag = false;
+            for (String type : prowl) {
+                if (activator.hasProwl(type)) {
+                    prowlFlag = true;
+                }
+            }
+            if (!prowlFlag) {
                 return false;
+            }
         }
         if (sIsPresent != null) {
             CardList list = AllZoneUtil.getCardsInZone(presentZone);
