@@ -14,5 +14,5 @@ SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_vine.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/89.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/89.jpg|2
 End
