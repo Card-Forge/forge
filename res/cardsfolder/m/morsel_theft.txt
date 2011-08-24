@@ -1,8 +1,10 @@
 Name:Morsel Theft
 ManaCost:2 B B
 Types:Tribal Sorcery Rogue
-Text:(NOTE: "Prowl" is not implemented.)
-A:SP$ LoseLife | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ SVar=DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life.
+Text:no text
+A:SP$ LoseLife | Cost$ 1 B | Activation$ Prowl | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ SVar=DBDraw | PrecostDesc$ Prowl 1 B | SpellDescription$ (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)
+A:SP$ LoseLife | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ SVar=DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life. If CARDNAME's prowl cost was paid, draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | SubAbility$ SVar=DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morsel_theft.jpg
