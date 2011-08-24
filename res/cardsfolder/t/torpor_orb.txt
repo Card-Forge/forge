@@ -3,4 +3,5 @@ ManaCost:2
 Types:Artifact
 Text:Creatures entering the battlefield don't cause abilities to trigger.
 SVar:Rarity:Rare
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/162.jpg
 End

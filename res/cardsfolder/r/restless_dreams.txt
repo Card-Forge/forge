@@ -8,4 +8,5 @@ SVar:MaxTgts:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_dreams.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/79.jpg
 End
