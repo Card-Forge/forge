@@ -53,7 +53,8 @@ public class CostPayLife extends CostPart {
     @Override
     public boolean payHuman(SpellAbility ability, Card source, Cost_Payment payment) {
         String amount = getAmount();
-        int life = ability.getActivatingPlayer().getLife();
+        Player activator = ability.getActivatingPlayer();
+        int life = activator.getLife();
         
         Integer c = convertAmount();
         if (c == null){
@@ -70,8 +71,8 @@ public class CostPayLife extends CostPart {
         StringBuilder sb = new StringBuilder();
         sb.append(source.getName()).append(" - Pay ").append(c).append(" Life?");
         
-        if (GameActionUtil.showYesNoDialog(source, sb.toString())) {
-            AllZone.getHumanPlayer().payLife(c, null);
+        if (GameActionUtil.showYesNoDialog(source, sb.toString()) && activator.canPayLife(c)) {
+            activator.payLife(c, null);
             setLastPaidAmount(c);
             payment.setPaidManaPart(this, true);
         } else {
@@ -91,9 +92,7 @@ public class CostPayLife extends CostPart {
             String sVar = source.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")){
-                // This decision should be locked in the AF and be calculable at this state
-                //c = chooseXValue(life);
-                // Figure out what to do here
+                return false;
             }
             else{
                 c = AbilityFactory.calculateAmount(source, amount, ability);
@@ -102,7 +101,7 @@ public class CostPayLife extends CostPart {
         if (!activator.canPayLife(c)){
             return false;
         }
-        
+        activator.payLife(c, null);
         setLastPaidAmount(c);
         return true;
     }

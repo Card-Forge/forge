@@ -1,0 +1,11 @@
+Name:Hatred
+ManaCost:3 B B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 3 B B PayLife<X> | Tgt$ TgtC | NumAtt$ ChosenX | SpellDescription$ Target creature gets +X/+0 until end of turn.
+SVar:X:XChoice
+#ChosenX SVar created by Cost payment
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hatred.jpg
+End
