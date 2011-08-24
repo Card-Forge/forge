@@ -1,0 +1,11 @@
+Name:Necrologia
+ManaCost:3 B B
+Types:Instant
+Text:Cast CARDNAME only during your end step.\r\n
+A:SP$ Draw | Cost$ 3 B B PayLife<X> | NumCards$ ChosenX | Defined$ You | ActivationPhases$ End of Turn | PlayerTurn$ True | SpellDescription$ Draw X cards.
+SVar:X:XChoice
+#ChosenX SVar created by Cost payment
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necrologia.jpg
+End
