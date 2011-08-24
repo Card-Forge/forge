@@ -1,0 +1,10 @@
+Name:Thieves' Fortune
+ManaCost:2 U
+Types:Tribal Instant Rogue
+Text:no text
+A:SP$ Dig | Cost$ U | Activation$ Prowl | DigNum$ 4 | ChangeNum$ 1 | PrecostDesc$ Prowl U | SpellDescription$ (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)
+A:SP$ Dig | Cost$ 2 U | DigNum$ 4 | ChangeNum$ 1 | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thieves_fortune.jpg
+End

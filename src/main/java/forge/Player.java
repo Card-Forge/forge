@@ -32,6 +32,7 @@ public abstract class Player extends MyObservable {
 
     protected int nTurns = 0;
     protected boolean skipNextUntap = false;
+    protected boolean prowl = false;
 
     protected int maxLandsToPlay = 1;
     protected int numLandsPlayed = 0;
@@ -90,6 +91,7 @@ public abstract class Player extends MyObservable {
         loseConditionSpell = null;
         maxLandsToPlay = 1;
         numLandsPlayed = 0;
+        prowl = false;
         
         handSizeOperations = new ArrayList<HandSizeOp>();
         keywords.clear();
@@ -374,6 +376,9 @@ public abstract class Player extends MyObservable {
             addAssignedDamage(damageToDo);
             GameActionUtil.executeDamageDealingEffects(source, damageToDo);
             GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
+            
+            if(isCombat && source.isType("Rogue"))
+                source.getController().setProwl(true);
 
             //Run triggers
             HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1618,6 +1623,19 @@ public abstract class Player extends MyObservable {
     public boolean hasLandfall() {
         CardList list = ((DefaultPlayerZone) AllZone.getZone("Battlefield", this)).getCardsAddedThisTurn("Any").getType("Land");
         return !list.isEmpty();
+    }
+    
+    /**
+     * <p>hasProwl.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean hasProwl() {
+        return prowl;
+    }
+    
+    public void setProwl(boolean newProwl) {
+        prowl = newProwl;
     }
 
     private ArrayList<HandSizeOp> handSizeOperations;

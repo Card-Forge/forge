@@ -39,6 +39,7 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             if (value.equals("Threshold")) setThreshold(true);
             if (value.equals("Metalcraft")) setMetalcraft(true);
             if (value.equals("Hellbent")) setHellbent(true);
+            if (value.equals("Prowl")) setProwl(true);
         }
 
         if (params.containsKey("ActivationZone"))
@@ -180,7 +181,10 @@ public class SpellAbility_Restriction extends SpellAbility_Variables {
             if (!activator.hasMetalcraft())
                 return false;
         }
-
+        if (prowl) {
+            if (!activator.hasProwl())
+                return false;
+        }
         if (sIsPresent != null) {
             CardList list = AllZoneUtil.getCardsInZone(presentZone);
 
