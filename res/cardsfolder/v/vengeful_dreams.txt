@@ -1,7 +1,10 @@
 Name:Vengeful Dreams
 ManaCost:W W
 Types:Instant
-Text:As an additional cost to cast Vengeful Dreams, discard X cards.\r\n\r\nExile X target attacking creatures.
+Text:no text
+A:SP$ ChangeZone | Cost$ W W Discard<X/Card> | Origin$ Battlefield | Destination$ Exile | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Exile X target attacking creatures.
+SVar:X:Targeted$Amount
+SVar:MaxTgts:Count$Valid Creature.attacking
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_dreams.jpg

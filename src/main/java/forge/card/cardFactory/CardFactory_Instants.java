@@ -1017,6 +1017,7 @@ public class CardFactory_Instants {
 
 
         //*************** START *********** START **************************
+        /*
         else if (cardName.equals("Vengeful Dreams")) {
             final CardList targets = new CardList();
             final SpellAbility spell = new Spell(card) {
@@ -1094,8 +1095,8 @@ public class CardFactory_Instants {
             
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
-
+*/
+/*
         //*************** START *********** START **************************
         else if (cardName.equals("Firestorm")) {
             final ArrayList<Object> targets = new ArrayList<Object>();
@@ -1187,7 +1188,7 @@ public class CardFactory_Instants {
             
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+*/
 
         //*************** START *********** START **************************
         else if (cardName.equals("Cryptic Command")) {

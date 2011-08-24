@@ -175,6 +175,10 @@ public class CostDiscard extends CostPartWithList {
         else{
             Integer c = convertAmount();
             if (c == null){
+                String sVar = source.getSVar(amount);
+                if (sVar.equals("XChoice")){
+                    return false;
+                }
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
 
