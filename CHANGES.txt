@@ -95,6 +95,42 @@ Fixes/Features:
 - Fixed Mimic Vat.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Fixed the description and updated the decklist of Jabba the Hut 3.
+- Added Prowl keyword.
+- Added the missing Prowl part to Morsel Theft.
+- Changed Prowl to be used for other Creature types than Rogue.
+- Added the LQ pic URL for Torpor Orb.
+- Modified svnversion command line - provide "src" as target path for revision.
+- Updated BugzReporter -
+- Fixed layout issues causing truncated labels.
+- Changed "Git rev" field to "SVN rev." field.
+- Added "Steps to Reproduce" field.
+- Check Summary and Description fields for valid data, Error Message Dialog if not.
+- Attempt to match Build Version with Mantis version list.
+- Populate SVN rev. field with revision if available.
+- If crash report, relabel "Additional Information" field as "Error Dump" and auto-select category "New Crash Report".
+- Fix log4j warning.
+- Fix close and Cancel buttons not terminating window.
+- Will be used by new Gui.
+- Added the function removeAll to CardList to remove all instances of a card from it (I was shocked that we didn't have this, or am I missing something?).
+- Fixed some possible bugs of assigning blockers twice in ComputerUtil_Block2.
+- Fix for CostExile not grabbing Valid Cards before being used with XChoice.
+- Small fix for ExileFromHand Input.
+- Moved Inputs from Cost_Input into specific CostParts.
+- Added .gitignore for the truly adventurous using git-svn.
+- Removed obselete directories. Release, snapshots and site are hosted at cardforge.org.
+- Initial checkin of CostReveal
+- Some preparation for actual Payment occurring after all Costs have been completed.
+- Added the ability to Exile cards face down. Added an ExileFaceDown$ True parameter to ChangeZone and ChangeZoneAll. In the GUI code, I had to change the ZoneAction (for viewing Exile, Graveyard, etc.) class to not use the YieldUtils iterator stuff. I pull the Generator into an ArrayList. If someone can do it with Iterator, go for it.
+- Removed some debug code in GuiDisplay4.java.
+- Fixed Elemental Mastery.
+- Added default buildnumber when scm fails.
+- Fixed some auras not granting abilities or triggers properly.
+- The AI will now check DealDamage triggered abilities when attacking (to not run into Circle of Flame and Caltrops).
+- Added dependency 2 org.apache.commons.lang3 (for StringUtils.join)
+- Removed duplicated code in GuiFilter.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
