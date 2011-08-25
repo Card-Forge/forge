@@ -2,13 +2,16 @@ package forge.card.cost;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
+import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListUtil;
 import forge.Constant;
 import forge.Player;
+import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.gui.input.Input;
 
 public class CostDiscard extends CostPartWithList {
 	// Discard<Num/Type{/TypeDescription}>
@@ -142,7 +145,7 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
                 
-                CostUtil.setInput(Cost_Input.input_discardCost(discType, handList, ability, payment, this, c));
+                CostUtil.setInput(CostDiscard.input_discardCost(discType, handList, ability, payment, this, c));
                 return false;
             }
         }
@@ -191,4 +194,86 @@ public class CostDiscard extends CostPartWithList {
         }
         return list != null;
     }
+
+    // Inputs
+    
+    /**
+     * <p>input_discardCost.</p>
+     * @param discType a {@link java.lang.String} object.
+     * @param handList a {@link forge.CardList} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment a {@link forge.card.cost.Cost_Payment} object.
+     * @param part TODO
+     * @param nNeeded a int.
+     *
+     * @return a {@link forge.gui.input.Input} object.
+     */
+    public static Input input_discardCost(final String discType, final CardList handList, SpellAbility sa, final Cost_Payment payment, final CostPart part, final int nNeeded) {
+        final SpellAbility sp = sa;
+        Input target = new Input() {
+            private static final long serialVersionUID = -329993322080934435L;
+    
+            int nDiscard = 0;
+    
+            @Override
+            public void showMessage() {
+                boolean any = discType.equals("Any") ? true : false;
+                if (AllZone.getHumanHand().size() == 0) stop();
+                StringBuilder type = new StringBuilder("");
+                if (any || !discType.equals("Card")) {
+                    type.append(" ").append(discType);
+                }
+                StringBuilder sb = new StringBuilder();
+                sb.append("Select ");
+                if (any) {
+                    sb.append("any ");
+                } else {
+                    sb.append("a ").append(type.toString()).append(" ");
+                }
+                sb.append("card to discard.");
+                if (nNeeded > 1) {
+                    sb.append(" You have ");
+                    sb.append(nNeeded - nDiscard);
+                    sb.append(" remaining.");
+                }
+                AllZone.getDisplay().showMessage(sb.toString());
+                ButtonUtil.enableOnlyCancel();
+            }
+    
+            @Override
+            public void selectButtonCancel() {
+                cancel();
+            }
+    
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if (zone.is(Constant.Zone.Hand) && handList.contains(card)) {
+                    // send in CardList for Typing
+                    card.getController().discard(card, sp);
+                    handList.remove(card);
+                    nDiscard++;
+    
+                    //in case no more cards in hand
+                    if (nDiscard == nNeeded)
+                        done();
+                    else if (AllZone.getHumanHand().size() == 0)    // this really shouldn't happen
+                        cancel();
+                    else
+                        showMessage();
+                }
+            }
+    
+            public void cancel() {
+                stop();
+                payment.cancelCost();
+            }
+    
+            public void done() {
+                stop();
+                payment.paidCost(part);
+            }
+        };
+    
+        return target;
+    }//input_discard() 
 }

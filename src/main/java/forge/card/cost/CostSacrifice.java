@@ -1,13 +1,18 @@
 package forge.card.cost;
 
+import javax.swing.JOptionPane;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
+import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
 import forge.Player;
+import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.gui.input.Input;
 
 public class CostSacrifice extends CostPartWithList {
 
@@ -77,10 +82,10 @@ public class CostSacrifice extends CostPartWithList {
         list = list.getValidCards(type.split(";"), activator, source);
         
         if (getThis()){
-            CostUtil.setInput(Cost_Input.sacrificeThis(ability, payment, this));
+            CostUtil.setInput(CostSacrifice.sacrificeThis(ability, payment, this));
         }
         else if (amount.equals("All")){
-            Cost_Input.sacrificeAll(ability, payment, this, list);
+            CostSacrifice.sacrificeAll(ability, payment, this, list);
             return true;
         }
         else{
@@ -96,7 +101,7 @@ public class CostSacrifice extends CostPartWithList {
                 }
             }
             
-            CostUtil.setInput(Cost_Input.sacrificeFromList(ability, payment, this, list, c));
+            CostUtil.setInput(CostSacrifice.sacrificeFromList(ability, payment, this, list, c));
         }
             
         return false;
@@ -129,4 +134,128 @@ public class CostSacrifice extends CostPartWithList {
         }
         return true;
     }
+
+    // Inputs
+    
+    /**
+     * <p>sacrificeAllType.</p>
+     *
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment a {@link forge.card.cost.Cost_Payment} object.
+     * @param part TODO
+     * @param typeList TODO
+     */
+    public static void sacrificeAll(final SpellAbility sa, final Cost_Payment payment, CostPart part, CardList typeList) {
+        // TODO Ask First
+        for (Card card : typeList) {
+            payment.getAbility().addCostToHashList(card, "Sacrificed");
+            AllZone.getGameAction().sacrifice(card);
+        }
+    
+        payment.setPaidManaPart(part, true);
+    }
+
+    /**
+     * <p>sacrificeFromList.</p>
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment a {@link forge.card.cost.Cost_Payment} object.
+     * @param part TODO
+     * @param typeList TODO
+     * @param num TODO
+     *
+     * @return a {@link forge.gui.input.Input} object.
+     */
+    public static Input sacrificeFromList(final SpellAbility sa, final Cost_Payment payment, final CostSacrifice part, final CardList typeList, final int nNeeded) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 2685832214519141903L;
+            private int nSacrifices = 0;
+    
+            @Override
+            public void showMessage() {
+                StringBuilder msg = new StringBuilder("Sacrifice ");
+                int nLeft = nNeeded - nSacrifices;
+                msg.append(nLeft).append(" ");
+                msg.append(part.getDescriptiveType());
+                if (nLeft > 1) {
+                    msg.append("s");
+                }
+    
+                AllZone.getDisplay().showMessage(msg.toString());
+                ButtonUtil.enableOnlyCancel();
+            }
+    
+            @Override
+            public void selectButtonCancel() {
+                cancel();
+            }
+    
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if (typeList.contains(card)) {
+                    nSacrifices++;
+                    payment.getAbility().addCostToHashList(card, "Sacrificed");
+                    AllZone.getGameAction().sacrifice(card);
+                    typeList.remove(card);
+                    //in case nothing else to sacrifice
+                    if (nSacrifices == nNeeded)
+                        done();
+                    else if (typeList.size() == 0)    // this really shouldn't happen
+                        cancel();
+                    else
+                        showMessage();
+                }
+            }
+    
+            public void done() {
+                stop();
+                payment.paidCost(part);
+            }
+    
+            public void cancel() {
+                stop();
+                payment.cancelCost();
+            }
+        };
+    
+        return target;
+    }//sacrificeType()
+
+    /**
+     * <p>sacrificeThis.</p>
+     *
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment a {@link forge.card.cost.Cost_Payment} object.
+     * @param part TODO
+     * @return a {@link forge.gui.input.Input} object.
+     */
+    public static Input sacrificeThis(final SpellAbility sa, final Cost_Payment payment, final CostPart part) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 2685832214519141903L;
+    
+            @Override
+            public void showMessage() {
+                Card card = sa.getSourceCard();
+                if (card.getController().isHuman() && AllZoneUtil.isCardInPlay(card)) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName());
+                    sb.append(" - Sacrifice?");
+                    Object[] possibleValues = {"Yes", "No"};
+                    Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                            null, possibleValues, possibleValues[0]);
+                    if (choice.equals(0)) {
+                        payment.getAbility().addCostToHashList(card, "Sacrificed");
+                        AllZone.getGameAction().sacrifice(card);
+                        stop();
+                        payment.paidCost(part);
+                    } else {
+                        stop();
+                        payment.cancelCost();
+                    }
+                }
+            }
+        };
+    
+        return target;
+    }//input_sacrifice()
 }

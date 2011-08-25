@@ -9616,7 +9616,6 @@ src/main/java/forge/card/cost/CostTap.java -text
 src/main/java/forge/card/cost/CostTapType.java -text
 src/main/java/forge/card/cost/CostUntap.java -text
 src/main/java/forge/card/cost/CostUtil.java -text
-src/main/java/forge/card/cost/Cost_Input.java -text
 src/main/java/forge/card/cost/Cost_Payment.java svneol=native#text/plain
 src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaCost.java svneol=native#text/plain

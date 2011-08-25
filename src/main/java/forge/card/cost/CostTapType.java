@@ -1,12 +1,17 @@
 package forge.card.cost;
 
+import forge.AllZone;
 import forge.AllZoneUtil;
+import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
+import forge.Constant;
 import forge.Player;
+import forge.PlayerZone;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.gui.input.Input;
 
 public class CostTapType extends CostPartWithList {
     public CostTapType(String amount, String type, String description){
@@ -89,7 +94,7 @@ public class CostTapType extends CostPartWithList {
             }
         }
         
-        CostUtil.setInput(Cost_Input.input_tapXCost(this, typeList, ability, payment, c));
+        CostUtil.setInput(CostTapType.input_tapXCost(this, typeList, ability, payment, c));
         return false;
     }
 
@@ -110,4 +115,69 @@ public class CostTapType extends CostPartWithList {
 
         return true;
     }
+
+    // Inputs
+    
+    /**
+     * <p>input_tapXCost.</p>
+     *
+     * @param nCards a int.
+     * @param cardType a {@link java.lang.String} object.
+     * @param cardList a {@link forge.CardList} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param payment a {@link forge.card.cost.Cost_Payment} object.
+     * @return a {@link forge.gui.input.Input} object.
+     */
+    public static Input input_tapXCost(final CostTapType tapType, final CardList cardList, SpellAbility sa, final Cost_Payment payment, final int nCards) {      
+        Input target = new Input() {
+    
+            private static final long serialVersionUID = 6438988130447851042L;
+            int nTapped = 0;
+    
+            @Override
+            public void showMessage() {
+                if (cardList.size() == 0) stop();
+    
+                int left = nCards - nTapped;
+                AllZone.getDisplay().showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
+                ButtonUtil.enableOnlyCancel();
+            }
+    
+            @Override
+            public void selectButtonCancel() {
+                cancel();
+            }
+    
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if (zone.is(Constant.Zone.Battlefield) && cardList.contains(card) && card.isUntapped()) {
+                    // send in CardList for Typing
+                    card.tap();
+                    tapType.addToList(card);
+                    cardList.remove(card);
+                    payment.getAbility().addCostToHashList(card, "Tapped");
+                    nTapped++;
+    
+                    if (nTapped == nCards)
+                        done();
+                    else if (cardList.size() == 0)    // this really shouldn't happen
+                        cancel();
+                    else
+                        showMessage();
+                }
+            }
+    
+            public void cancel() {
+                stop();
+                payment.cancelCost();
+            }
+    
+            public void done() {
+                stop();
+                payment.paidCost(tapType);
+            }
+        };
+    
+        return target;
+    }//input_tapXCost() 
 }
