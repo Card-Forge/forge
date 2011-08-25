@@ -97,9 +97,14 @@ public class ComputerUtil_Attack2 {
      * @return a boolean.
      */
     public boolean isEffectiveAttacker(Card attacker, Combat combat) {
+
+        //if the attacker will die when attacking don't attack
+        if (attacker.getNetDefense() + CombatUtil.predictToughnessBonusOfAttacker(attacker, null, combat) <= 0)
+            return false;
+        
         if (CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) return true;
         if (CombatUtil.poisonIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) return true;
-
+        
         ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
         for (Trigger trigger : registeredTriggers)
             if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)

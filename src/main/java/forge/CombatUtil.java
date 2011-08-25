@@ -1239,6 +1239,25 @@ public class CombatUtil {
             HashMap<String, String> abilityParams = AF.getMapParams(ability, source);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt"))
                 continue; //targeted pumping not supported
+            
+            // DealDamage triggers
+            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
+                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
+                if (!abilityParams.containsKey("Defined") || !abilityParams.get("Defined").equals("TriggeredAttacker")) {
+                    continue;
+                }
+                int damage = 0;
+                try {
+                    damage = Integer.parseInt(abilityParams.get("NumDmg"));
+                } catch (NumberFormatException nfe) {
+                    //can't parse the number (X for example)
+                    continue;
+                }
+                toughness -= attacker.predictDamage(damage, 0, source, false);
+                continue;
+            }
+            
+            // Pump triggers
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump") && !abilityParams.get("AB").equals("PumpAll"))
                 continue;
             if (abilityParams.containsKey("DB") && !abilityParams.get("DB").equals("Pump") && !abilityParams.get("DB").equals("PumpAll"))
@@ -1251,7 +1270,7 @@ public class CombatUtil {
             if (abilityParams.containsKey("ValidCards"))
                 if (attacker.isValidCard(abilityParams.get("ValidCards").split(","), source.getController(), source)
                         || attacker.isValidCard(abilityParams.get("ValidCards").replace("attacking+", "").split(",")
-                        , source.getController(), source))
+                                , source.getController(), source))
                     list.add(attacker);
             if (list.isEmpty()) continue;
             if (!list.contains(attacker)) continue;
