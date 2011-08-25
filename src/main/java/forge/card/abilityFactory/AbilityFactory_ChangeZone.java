@@ -650,8 +650,12 @@ public class AbilityFactory_ChangeZone {
                         c.addController(af.getHostCard());
 
                     movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, c.getController()), c);
-                } else
+                } else {
                     movedCard = AllZone.getGameAction().moveTo(destZone, c);
+                    if(params.containsKey("ExileFaceDown")) {
+                        movedCard.setIsFaceDown(true);
+                    }
+                }
 
                 if (remember != null)
                     card.addRemembered(movedCard);
@@ -771,8 +775,12 @@ public class AbilityFactory_ChangeZone {
             	}
 
                 newCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, c.getController()), c);
-            } else
+            } else {
                 newCard = AllZone.getGameAction().moveTo(destZone, c);
+                if(params.containsKey("ExileFaceDown")) {
+                    newCard.setIsFaceDown(true);
+                }
+            }
 
             if (remember != null)
                 card.addRemembered(newCard);
@@ -1399,6 +1407,9 @@ public class AbilityFactory_ChangeZone {
                         }
                     } else {
                         movedCard = AllZone.getGameAction().moveTo(AllZone.getZone(destination, pl), tgtC);
+                        if(params.containsKey("ExileFaceDown")) {
+                            movedCard.setIsFaceDown(true);
+                        }
                     }
                 }
                 if (remember != null)
@@ -1747,8 +1758,12 @@ public class AbilityFactory_ChangeZone {
             if (params.containsKey("GainControl")) {
                 c.addController(af.getHostCard());
                 AllZone.getGameAction().moveToPlay(c, sa.getActivatingPlayer());
-            } else
-                AllZone.getGameAction().moveTo(destination, c, libraryPos);
+            } else {
+                Card movedCard = AllZone.getGameAction().moveTo(destination, c, libraryPos);
+                if(params.containsKey("ExileFaceDown")) {
+                    movedCard.setIsFaceDown(true);
+                }
+            }
 
             if (remember != null)
                 sa.getSourceCard().addRemembered(c);

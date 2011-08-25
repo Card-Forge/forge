@@ -30,7 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -299,7 +298,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     GuiDisplayUtil.devModeSetLife();
                 }
             };
-            //end DevMode AddCounter
+            //end DevMode SetLife
 
             Object[] objDev = {
             		GuiDisplay4.canLoseByDecking,
@@ -1505,15 +1504,38 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             if (AllZone.getNameChanger().shouldChangeCardName()) {
             	c = AllZone.getNameChanger().changeCard(c);
             }
-
-            Iterator<Card> iter = YieldUtils.toIterable(c).iterator();
             
-            if (!iter.hasNext()) {
+            Iterable<Card> myIterable = YieldUtils.toIterable(c);
+            ArrayList<Card> choices = YieldUtils.toArrayList(myIterable);
+            System.out.println("immediately after: "+choices);
+            //Iterator<Card> iter = myIterable.iterator();
+            
+            ArrayList<Card> choices2 = new ArrayList<Card>();
+            
+            if (choices.isEmpty()) {
             	GuiUtils.getChoiceOptional(title, new String[]{"no cards"});
             }
             else {
-                Card choice = GuiUtils.getChoiceOptional(title, iter);
+                for(int i = 0; i < choices.size(); i++) {
+                    Card crd = choices.get(i);
+                    System.out.println(crd+": "+crd.isFaceDown());
+                    if(crd.isFaceDown()) {
+                        Card faceDown = new Card();
+                        faceDown.setName("Face Down");
+                        choices2.add(faceDown);
+                        System.out.println("Added: "+faceDown);
+                    }
+                    else {
+                        choices2.add(crd);
+                    }
+                }
+                System.out.println("Face down cards replaced: "+choices2);
+                Card choice = (Card) GuiUtils.getChoiceOptional(title, choices2.toArray());
                 if (choice != null) doAction(choice);
+                /*
+                    Card choice = GuiUtils.getChoiceOptional(title, iter);
+                    if (choice != null) doAction(choice);
+                 */
             }
         }
 
