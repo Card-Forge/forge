@@ -5,7 +5,8 @@ Text:no text
 K:Enchant creature
 K:Flash
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
-A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Enchanted creature gets +1/+1 until end of turn.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Pump | Description$ Enchanted creature has "Discard a card: This creature gets +1/+1 until end of turn."
+SVar:Pump:AB$ Pump | Cost$ Discard<1/Card> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oblivion_crown.jpg
