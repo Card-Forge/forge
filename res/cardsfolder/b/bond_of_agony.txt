@@ -1,0 +1,10 @@
+Name:Bond of Agony
+ManaCost:X B
+Types:Sorcery
+Text:no text
+A:SP$ LoseLife | Cost$ X B PayLife<X> | Defined$ Opponent | LifeAmount$ X | SpellDescription$ Each other player loses X life.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bond_of_agony.jpg
+End
