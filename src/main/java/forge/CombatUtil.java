@@ -309,18 +309,6 @@ public class CombatUtil {
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
                 && canBlockAnAttackerWithLure(blocker, combat)) return false;
 
-        if (blocker.hasStartOfKeyword("CARDNAME can't block ")) {
-            for (String kw : blocker.getKeyword()) {
-                if (kw.startsWith("CARDNAME can't block ")) {
-                    String unblockableCard = kw.substring(21);
-                    int ID = Integer.parseInt(unblockableCard.substring(unblockableCard.lastIndexOf("(") + 1, unblockableCard.length() - 1));
-                    if (attacker.getUniqueNumber() == ID) {
-                        return false;
-                    }
-                }
-            }
-        }
-
         return canBlock(attacker, blocker);
     }
 
@@ -341,6 +329,18 @@ public class CombatUtil {
         if (canBeBlocked(attacker) == false) return false;
 
         if (CardFactoryUtil.hasProtectionFrom(blocker, attacker)) return false;
+        
+        if (blocker.hasStartOfKeyword("CARDNAME can't block ")) {
+            for (String kw : blocker.getKeyword()) {
+                if (kw.startsWith("CARDNAME can't block ")) {
+                    String unblockableCard = kw.substring(21);
+                    int ID = Integer.parseInt(unblockableCard.substring(unblockableCard.lastIndexOf("(") + 1, unblockableCard.length() - 1));
+                    if (attacker.getUniqueNumber() == ID) {
+                        return false;
+                    }
+                }
+            }
+        }
 
         //rare case:
         if (blocker.hasKeyword("Shadow")
@@ -1225,7 +1225,9 @@ public class CombatUtil {
     public static int predictToughnessBonusOfAttacker(Card attacker, Card defender, Combat combat) {
         int toughness = 0;
 
-        toughness += attacker.getKeywordMagnitude("Bushido");
+        if (defender != null) {
+            toughness += attacker.getKeywordMagnitude("Bushido");
+        }
 
         ArrayList<Trigger> registeredTriggers = AllZone.getTriggerHandler().getRegisteredTriggers();
         for (Trigger trigger : registeredTriggers) {
