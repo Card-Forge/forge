@@ -156,6 +156,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <revisionOnScmFailure>0000</revisionOnScmFailure>
                     <providerImplementations>
                         <svn>javasvn</svn>
                     </providerImplementations>
