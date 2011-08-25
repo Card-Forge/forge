@@ -4837,6 +4837,13 @@ public class Card extends MyObservable implements Comparable<Card> {
                 return false;
         } else if (Property.startsWith("wasDealtDamageThisTurn")) {
             if ((getReceivedDamageFromThisTurn().keySet()).isEmpty()) return false;
+        } else if (Property.startsWith("greatestPower")) {
+            CardList list = AllZoneUtil.getCreaturesInPlay();
+            for (Card crd : list) {
+                if (crd.getNetAttack() > getNetAttack()) {
+                    return false;
+                }
+            }
         } else if (Property.startsWith("enchanted")) {
             if (!isEnchanted()) return false;
         } else if (Property.startsWith("unenchanted")) {

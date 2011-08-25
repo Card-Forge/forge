@@ -1,0 +1,8 @@
+Name:Topple
+ManaCost:2 W
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.greatestPower | TgtPrompt$ Select target creature with the greatest power | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with the greatest power. (If two or more creatures are tied for greatest power, target any one of them.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/topple.jpg
+End
