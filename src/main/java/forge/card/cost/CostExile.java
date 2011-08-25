@@ -15,7 +15,7 @@ public class CostExile extends CostPartWithList {
 	//Exile<Num/Type{/TypeDescription}>
 	//ExileFromHand<Num/Type{/TypeDescription}>
 	//ExileFromGraveyard<Num/Type{/TypeDescription}>
-	//ExileFromLibrary<Num/Type{/TypeDescription}>
+	//ExileFromTop<Num/Type{/TypeDescription}> (of library)
 
     private String from = Constant.Zone.Battlefield;
 

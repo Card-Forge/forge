@@ -469,8 +469,11 @@ public class Cost_Input {
                 if (nLeft > 1) {
                     msg.append("s");
                 }
-
-                typeList = AllZoneUtil.getPlayerCardsInPlay(sa.getSourceCard().getController());
+                
+                if (part.getFrom().equals(Constant.Zone.Hand)){
+                    msg.append(" from your Hand");
+                }
+                typeList = AllZoneUtil.getCardsInZone(part.getFrom(), sa.getActivatingPlayer());
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 AllZone.getDisplay().showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
@@ -515,10 +518,11 @@ public class Cost_Input {
     public static Input exileFrom(final SpellAbility sa, final CostExile part, final String type, final Cost_Payment payment, final int nNeeded) {
         Input target = new Input() {
             private static final long serialVersionUID = 734256837615635021L;
+            CardList typeList;
 
             @Override
             public void showMessage() {
-                CardList typeList = AllZoneUtil.getCardsInZone(part.getFrom(), sa.getActivatingPlayer());
+                typeList = AllZoneUtil.getCardsInZone(part.getFrom(), sa.getActivatingPlayer());
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
 
                 for (int i = 0; i < nNeeded; i++) {
