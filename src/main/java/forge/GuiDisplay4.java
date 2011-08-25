@@ -1507,7 +1507,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             
             Iterable<Card> myIterable = YieldUtils.toIterable(c);
             ArrayList<Card> choices = YieldUtils.toArrayList(myIterable);
-            System.out.println("immediately after: "+choices);
+            //System.out.println("immediately after: "+choices);
             //Iterator<Card> iter = myIterable.iterator();
             
             ArrayList<Card> choices2 = new ArrayList<Card>();
@@ -1518,18 +1518,18 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             else {
                 for(int i = 0; i < choices.size(); i++) {
                     Card crd = choices.get(i);
-                    System.out.println(crd+": "+crd.isFaceDown());
+                    //System.out.println(crd+": "+crd.isFaceDown());
                     if(crd.isFaceDown()) {
                         Card faceDown = new Card();
                         faceDown.setName("Face Down");
                         choices2.add(faceDown);
-                        System.out.println("Added: "+faceDown);
+                        //System.out.println("Added: "+faceDown);
                     }
                     else {
                         choices2.add(crd);
                     }
                 }
-                System.out.println("Face down cards replaced: "+choices2);
+                //System.out.println("Face down cards replaced: "+choices2);
                 Card choice = (Card) GuiUtils.getChoiceOptional(title, choices2.toArray());
                 if (choice != null) doAction(choice);
                 /*
