@@ -15,11 +15,8 @@ import forge.gui.input.Input;
 
 public class CostTapType extends CostPartWithList {
     public CostTapType(String amount, String type, String description){
-        list = new CardList();
+        super(amount, type, description);
         isReusable = true;
-        this.amount = amount;
-        this.type = type;
-        this.typeDescription = description;
     }
     
     public String getDescription(){
@@ -128,7 +125,7 @@ public class CostTapType extends CostPartWithList {
      * @param payment a {@link forge.card.cost.Cost_Payment} object.
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_tapXCost(final CostTapType tapType, final CardList cardList, SpellAbility sa, final Cost_Payment payment, final int nCards) {      
+    public static Input input_tapXCost(final CostTapType tapType, final CardList cardList, final SpellAbility sa, final Cost_Payment payment, final int nCards) {      
         Input target = new Input() {
     
             private static final long serialVersionUID = 6438988130447851042L;
@@ -155,7 +152,7 @@ public class CostTapType extends CostPartWithList {
                     card.tap();
                     tapType.addToList(card);
                     cardList.remove(card);
-                    payment.getAbility().addCostToHashList(card, "Tapped");
+
                     nTapped++;
     
                     if (nTapped == nCards)
@@ -175,6 +172,7 @@ public class CostTapType extends CostPartWithList {
             public void done() {
                 stop();
                 payment.paidCost(tapType);
+                tapType.addListToHash(sa, "Tapped");
             }
         };
     

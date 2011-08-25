@@ -13,6 +13,14 @@ public abstract class CostPart {
 	protected String type = "Card";
 	protected String typeDescription = null;
 
+	public CostPart(){}
+	
+    public CostPart(String amount, String type, String description){
+        this.amount = amount;
+        this.type = type;
+        this.typeDescription = description;
+    }
+	
     public String getAmount() {
         return amount;
     }

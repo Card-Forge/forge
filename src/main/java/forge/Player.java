@@ -1105,13 +1105,19 @@ public abstract class Player extends MyObservable {
      *
      * @param num a int.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return 
      */
-    public void discardRandom(final int num, final SpellAbility sa) {
+    public CardList discardRandom(final int num, final SpellAbility sa) {
+        CardList discarded = new CardList();
         for (int i = 0; i < num; i++) {
             CardList list = AllZoneUtil.getPlayerHand(this);
-            if (list.size() != 0)
-                doDiscard(CardUtil.getRandom(list.toArray()), sa);
+            if (list.size() != 0){
+                Card disc = CardUtil.getRandom(list.toArray());
+                discarded.add(disc);
+                doDiscard(disc, sa);
+            }
         }
+        return discarded;
     }
 
     /**

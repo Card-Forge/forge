@@ -18,9 +18,7 @@ public class CostReturn extends CostPartWithList {
 	// Return<Num/Type{/TypeDescription}>
     
     public CostReturn(String amount, String type, String description){
-    	this.amount = amount;
-    	this.type = type;
-    	this.typeDescription = description;
+        super(amount, type, description);
     }
 
 	@Override
@@ -127,7 +125,7 @@ public class CostReturn extends CostPartWithList {
      * @param part TODO
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input returnType(final SpellAbility sa, final String type, final Cost_Payment payment, final CostPart part, final int nNeeded) {
+    public static Input returnType(final SpellAbility sa, final String type, final Cost_Payment payment, final CostReturn part, final int nNeeded) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private CardList typeList;
@@ -158,6 +156,7 @@ public class CostReturn extends CostPartWithList {
             public void selectCard(Card card, PlayerZone zone) {
                 if (typeList.contains(card)) {
                     nReturns++;
+                    part.addToList(card);
                     AllZone.getGameAction().moveToHand(card);
                     typeList.remove(card);
                     //in case nothing else to return
@@ -177,6 +176,7 @@ public class CostReturn extends CostPartWithList {
     
             public void cancel() {
                 stop();
+                part.addListToHash(sa, "Returned");
                 payment.cancelCost();
             }
         };
@@ -192,7 +192,7 @@ public class CostReturn extends CostPartWithList {
      * @param part TODO
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input returnThis(final SpellAbility sa, final Cost_Payment payment, final CostPart part) {
+    public static Input returnThis(final SpellAbility sa, final Cost_Payment payment, final CostReturn part) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
     
@@ -208,8 +208,10 @@ public class CostReturn extends CostPartWithList {
                             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                             null, possibleValues, possibleValues[0]);
                     if (choice.equals(0)) {
+                        part.addToList(card);
                         AllZone.getGameAction().moveToHand(card);
                         stop();
+                        part.addListToHash(sa, "Returned");
                         payment.paidCost(part);
                     } else {
                         stop();

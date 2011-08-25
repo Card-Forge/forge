@@ -17,9 +17,7 @@ public class CostDiscard extends CostPartWithList {
 	// Discard<Num/Type{/TypeDescription}>
 
     public CostDiscard(String amount, String type, String description){
-    	this.amount = amount;
-    	this.type = type;
-    	this.typeDescription = description;
+        super(amount, type, description);
     }
 
 	@Override
@@ -101,18 +99,27 @@ public class CostDiscard extends CostPartWithList {
         CardList handList = AllZoneUtil.getPlayerHand(activator);
         String discType = getType();
         String amount = getAmount();
+        resetList();
 
         if (getThis()) {
+            if (!handList.contains(source)){
+                return false;
+            }
             activator.discard(source, ability);
             payment.setPaidManaPart(this, true);
+            addToList(source);
         } else if (discType.equals("Hand")) {
+            list = handList;
             activator.discardHand(ability);
             payment.setPaidManaPart(this, true);
         } else if (discType.equals("LastDrawn")) {
-            if (handList.contains(activator.getLastDrawnCard())) {
-                activator.discard(activator.getLastDrawnCard(), ability);
-                payment.setPaidManaPart(this, true);
+            Card lastDrawn = activator.getLastDrawnCard();
+            addToList(lastDrawn);
+            if (!handList.contains(lastDrawn)) {
+                return false;
             }
+            activator.discard(lastDrawn, ability);
+            payment.setPaidManaPart(this, true);
         } else {
             Integer c = convertAmount();
 
@@ -128,7 +135,7 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
                 
-                activator.discardRandom(c, ability);
+                list = activator.discardRandom(c, ability);
                 payment.setPaidManaPart(this, true);
             } else {
                 String validType[] = discType.split(";");
@@ -149,6 +156,7 @@ public class CostDiscard extends CostPartWithList {
                 return false;
             }
         }
+        addListToHash(ability, "Discarded");
         return true;
     }
 
@@ -161,14 +169,14 @@ public class CostDiscard extends CostPartWithList {
         if (type.equals("LastDrawn")){
             if (!hand.contains(activator.getLastDrawnCard()))
                 return false;
-            list.add(activator.getLastDrawnCard());
+            addToList(activator.getLastDrawnCard());
         }
 
         else if (getThis()){
             if (!hand.contains(source))
                 return false;
             
-            list.add(source);
+            addToList(source);
         }
         
         else if (type.equals("Hand")){
@@ -208,7 +216,7 @@ public class CostDiscard extends CostPartWithList {
      *
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input input_discardCost(final String discType, final CardList handList, SpellAbility sa, final Cost_Payment payment, final CostPart part, final int nNeeded) {
+    public static Input input_discardCost(final String discType, final CardList handList, SpellAbility sa, final Cost_Payment payment, final CostDiscard part, final int nNeeded) {
         final SpellAbility sp = sa;
         Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
@@ -217,20 +225,15 @@ public class CostDiscard extends CostPartWithList {
     
             @Override
             public void showMessage() {
-                boolean any = discType.equals("Any") ? true : false;
                 if (AllZone.getHumanHand().size() == 0) stop();
                 StringBuilder type = new StringBuilder("");
-                if (any || !discType.equals("Card")) {
+                if (!discType.equals("Card")) {
                     type.append(" ").append(discType);
                 }
                 StringBuilder sb = new StringBuilder();
-                sb.append("Select ");
-                if (any) {
-                    sb.append("any ");
-                } else {
-                    sb.append("a ").append(type.toString()).append(" ");
-                }
-                sb.append("card to discard.");
+                sb.append("Select a");
+                sb.append(part.getDescriptiveType());
+                sb.append(" to discard.");
                 if (nNeeded > 1) {
                     sb.append(" You have ");
                     sb.append(nNeeded - nDiscard);
@@ -250,6 +253,7 @@ public class CostDiscard extends CostPartWithList {
                 if (zone.is(Constant.Zone.Hand) && handList.contains(card)) {
                     // send in CardList for Typing
                     card.getController().discard(card, sp);
+                    part.addToList(card);
                     handList.remove(card);
                     nDiscard++;
     
@@ -270,6 +274,7 @@ public class CostDiscard extends CostPartWithList {
     
             public void done() {
                 stop();
+                part.addListToHash(sp, "Discarded");
                 payment.paidCost(part);
             }
         };

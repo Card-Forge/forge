@@ -4380,6 +4380,7 @@ res/cardsfolder/l/living_airship.txt svneol=native#text/plain
 res/cardsfolder/l/living_armor.txt svneol=native#text/plain
 res/cardsfolder/l/living_artifact.txt svneol=native#text/plain
 res/cardsfolder/l/living_death.txt svneol=native#text/plain
+res/cardsfolder/l/living_destiny.txt -text
 res/cardsfolder/l/living_hive.txt svneol=native#text/plain
 res/cardsfolder/l/living_lands.txt svneol=native#text/plain
 res/cardsfolder/l/living_plane.txt svneol=native#text/plain
@@ -9611,6 +9612,7 @@ src/main/java/forge/card/cost/CostPayLife.java -text
 src/main/java/forge/card/cost/CostPutCounter.java -text
 src/main/java/forge/card/cost/CostRemoveCounter.java -text
 src/main/java/forge/card/cost/CostReturn.java -text
+src/main/java/forge/card/cost/CostReveal.java -text
 src/main/java/forge/card/cost/CostSacrifice.java -text
 src/main/java/forge/card/cost/CostTap.java -text
 src/main/java/forge/card/cost/CostTapType.java -text

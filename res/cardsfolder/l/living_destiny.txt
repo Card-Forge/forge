@@ -1,0 +1,10 @@
+Name:Living Destiny
+ManaCost:3 G
+Types:Instant
+Text:no text
+A:SP$ GainLife | Cost$ 3 G Reveal<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the revealed card's converted mana cost.
+SVar:X:Revealed$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/living_destiny.jpg
+End

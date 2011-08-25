@@ -98,6 +98,7 @@ public class Cost {
     private final static String exileFromGraveStr = "ExileFromGrave<";
     private final static String exileFromTopStr = "ExileFromTop<";
     private final static String returnStr = "Return<";
+    private final static String revealStr = "Reveal<";
     
     /**
      * <p>Constructor for Cost.</p>
@@ -124,7 +125,7 @@ public class Cost {
             String[] splitStr = abCostParse(parse, subStr, 4);
             parse = abUpdateParse(parse, subStr);
 
-            String type = splitStr.length > 2 ? splitStr[2] : null;
+            String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             String description = splitStr.length > 3 ? splitStr[3] : null;
             
             costParts.add(new CostRemoveCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description));
@@ -211,6 +212,14 @@ public class Cost {
 
             String description = splitStr.length > 2 ? splitStr[2] : null;
             costParts.add(new CostReturn(splitStr[0], splitStr[1], description));
+        }
+        
+        while (parse.contains(revealStr)) {
+            String[] splitStr = abCostParse(parse, revealStr, 3);
+            parse = abUpdateParse(parse, revealStr);
+
+            String description = splitStr.length > 2 ? splitStr[2] : null;
+            costParts.add(new CostReveal(splitStr[0], splitStr[1], description));
         }
 
         // These won't show up with multiples

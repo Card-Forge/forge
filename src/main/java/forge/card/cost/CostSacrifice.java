@@ -17,9 +17,7 @@ import forge.gui.input.Input;
 public class CostSacrifice extends CostPartWithList {
 
 	public CostSacrifice(String amount, String type, String description){
-    	this.amount = amount;
-    	this.type = type;
-    	this.typeDescription = description;
+	    super(amount, type, description);
     }
 
 	@Override
@@ -85,7 +83,9 @@ public class CostSacrifice extends CostPartWithList {
             CostUtil.setInput(CostSacrifice.sacrificeThis(ability, payment, this));
         }
         else if (amount.equals("All")){
+            this.list = list;
             CostSacrifice.sacrificeAll(ability, payment, this, list);
+            addListToHash(ability, "Sacrificed");
             return true;
         }
         else{
@@ -193,7 +193,7 @@ public class CostSacrifice extends CostPartWithList {
             public void selectCard(Card card, PlayerZone zone) {
                 if (typeList.contains(card)) {
                     nSacrifices++;
-                    payment.getAbility().addCostToHashList(card, "Sacrificed");
+                    part.addToList(card);
                     AllZone.getGameAction().sacrifice(card);
                     typeList.remove(card);
                     //in case nothing else to sacrifice
@@ -208,11 +208,13 @@ public class CostSacrifice extends CostPartWithList {
     
             public void done() {
                 stop();
+                part.addListToHash(sa, "Sacrificed");
                 payment.paidCost(part);
             }
     
             public void cancel() {
                 stop();
+                
                 payment.cancelCost();
             }
         };
@@ -228,7 +230,7 @@ public class CostSacrifice extends CostPartWithList {
      * @param part TODO
      * @return a {@link forge.gui.input.Input} object.
      */
-    public static Input sacrificeThis(final SpellAbility sa, final Cost_Payment payment, final CostPart part) {
+    public static Input sacrificeThis(final SpellAbility sa, final Cost_Payment payment, final CostSacrifice part) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
     
@@ -244,7 +246,8 @@ public class CostSacrifice extends CostPartWithList {
                             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                             null, possibleValues, possibleValues[0]);
                     if (choice.equals(0)) {
-                        payment.getAbility().addCostToHashList(card, "Sacrificed");
+                        part.addToList(card);
+                        part.addListToHash(sa, "Sacrificed");
                         AllZone.getGameAction().sacrifice(card);
                         stop();
                         payment.paidCost(part);

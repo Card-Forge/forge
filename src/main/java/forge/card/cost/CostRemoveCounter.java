@@ -21,16 +21,10 @@ public class CostRemoveCounter extends CostPart {
     }
     
     public CostRemoveCounter(String amount, Counters counter, String type, String description){
+        super(amount, type, description);
     	isReusable = true;
-    	this.amount = amount;
-    	this.counter = counter;
-    	
-    	if (type != null)
-    	    this.type = type;
-    	else
-    	    this.type = "CARDNAME";
 
-    	this.typeDescription  = description;
+    	this.counter = counter;
     }
 
 	@Override

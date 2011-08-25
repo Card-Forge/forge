@@ -32,9 +32,7 @@ public class CostExile extends CostPartWithList {
     }
     
     public CostExile(String amount, String type, String description, String from){
-    	this.amount = amount;
-    	this.type = type;
-    	this.typeDescription = description;
+        super(amount, type, description);
     	if (from != null)
     		this.from = from;
     }
@@ -173,9 +171,10 @@ public class CostExile extends CostPartWithList {
             Iterator<Card> itr = list.iterator();
             while(itr.hasNext()){
                 Card c = (Card)itr.next();
-                payment.getAbility().addCostToHashList(c, "Exiled");
+                part.addToList(c);
                 AllZone.getGameAction().exile(c);
             }
+            part.addListToHash(sa, "Exiled");
             payment.paidCost(part);
         }
         else{
@@ -202,7 +201,7 @@ public class CostExile extends CostPartWithList {
                     if (o != null) {
                         Card c = (Card) o;
                         typeList.remove(c);
-                        payment.getAbility().addCostToHashList(c, "Exiled");
+                        part.addToList(c);
                         AllZone.getGameAction().exile(c);
                         if (i == nNeeded - 1) done();
                     }
@@ -220,6 +219,7 @@ public class CostExile extends CostPartWithList {
     
             public void done() {
                 stop();
+                part.addListToHash(sa, "Exiled");
                 payment.paidCost(part);
             }
     
@@ -275,7 +275,7 @@ public class CostExile extends CostPartWithList {
             public void selectCard(Card card, PlayerZone zone) {
                 if (typeList.contains(card)) {
                     nExiles++;
-                    payment.getAbility().addCostToHashList(card, "Exiled");
+                    part.addToList(card);
                     AllZone.getGameAction().exile(card);
                     typeList.remove(card);
                     //in case nothing else to exile
@@ -290,6 +290,7 @@ public class CostExile extends CostPartWithList {
     
             public void done() {
                 stop();
+                part.addListToHash(sa, "Exiled");
                 payment.paidCost(part);
             }
     
@@ -328,7 +329,9 @@ public class CostExile extends CostPartWithList {
                     if (choice.equals(0)) {
                         payment.getAbility().addCostToHashList(card, "Exiled");
                         AllZone.getGameAction().exile(card);
+                        part.addToList(card);
                         stop();
+                        part.addListToHash(sa, "Exiled");
                         payment.paidCost(part);
                     } else {
                         stop();

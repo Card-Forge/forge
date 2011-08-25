@@ -490,15 +490,17 @@ public class GameAction {
         CardList hand = AllZoneUtil.getPlayerHand(AllZone.getComputerPlayer());
         hand = hand.getValidCards(uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
 
-        if (hand.size() < numDiscard)
+        if (hand.size() < numDiscard){
             return null;
+        }
         
         CardList discard = new CardList();
         
         CardListUtil.sortCMC(hand);
         hand.reverse();
-            for (int i = 0; i < numDiscard; i++)
+        for (int i = 0; i < numDiscard; i++){
             discard.add(hand.get(i));
+        }
         
         return discard;
     }

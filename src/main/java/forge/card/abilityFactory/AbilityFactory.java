@@ -1077,16 +1077,16 @@ public class AbilityFactory {
                 }
 
                 CardList list = new CardList();
-                if (calcX[0].startsWith("Sacrificed"))
+                if (calcX[0].startsWith("Sacrificed")) {
                     list = findRootAbility(ability).getPaidList("Sacrificed");
-
-                else if (calcX[0].startsWith("Discarded"))
+                } else if (calcX[0].startsWith("Discarded")){
                     list = findRootAbility(ability).getPaidList("Discarded");
-
-                else if (calcX[0].startsWith("Exiled")) {
+                } else if (calcX[0].startsWith("Exiled")) {
                     list = findRootAbility(ability).getPaidList("Exiled");
                 } else if (calcX[0].startsWith("Tapped")) {
                     list = findRootAbility(ability).getPaidList("Tapped");
+                } else if (calcX[0].startsWith("Revealed")) {
+                    list = findRootAbility(ability).getPaidList("Revealed");
                 } else if (calcX[0].startsWith("Targeted")) {
                     Target t = ability.getTarget();
                     if (null != t) {
