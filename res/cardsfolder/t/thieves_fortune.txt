@@ -7,4 +7,5 @@ A:SP$ Dig | Cost$ 2 U | DigNum$ 4 | ChangeNum$ 1 | SpellDescription$ Look at the
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thieves_fortune.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/54.jpg
 End
