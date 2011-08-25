@@ -126,8 +126,7 @@ public class QuestUtil {
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Black));
         } else if (id == 4) //Red Dungeon
         {
-            for (int i = 0; i < 3; i++)
-                qa.addCompy("Mons's Goblin Raiders");
+            qa.addCompy("Furnace of Rath");
 
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Red));
         } else if (id == 5) //Green Dungeon
