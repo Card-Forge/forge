@@ -1,16 +1,21 @@
 package forge.deck.generate;
 
-import forge.*;
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import forge.AllZone;
+import forge.Card;
+import forge.CardFilter;
+import forge.CardList;
+import forge.CardListFilter;
+import forge.MyRandom;
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+
 /**
- * <p>Generate3ColorDeck class.</p>
+ * <p>Generate5ColorDeck class.</p>
  *
  * @author Forge
  * @version $Id$
@@ -22,12 +27,15 @@ public class Generate5ColorDeck {
     private String color4 = "red";
     private String color5 = "green";
     private Random r = null;
-    private Map<String, String> ClrMap = null;
+    private Map<String, String> clrMap = null;
     private ArrayList<String> notColors = null;
-    private ArrayList<DLnd> DualLands = null;
-    private ArrayList<String> DL = null;
-    private Map<String, Integer> CardCounts = null;
+    private ArrayList<DLnd> dualLands = null;
+    private ArrayList<String> dl = null;
+    private Map<String, Integer> cardCounts = null;
 
+    /**
+     * 
+     */
     public Generate5ColorDeck() {
         this("white", "blue", "black", "red", "green");
     }
@@ -35,23 +43,25 @@ public class Generate5ColorDeck {
     /**
      * <p>Constructor for Generate5ColorDeck.</p>
      *
-     * @param Clr1 a {@link java.lang.String} object.
-     * @param Clr2 a {@link java.lang.String} object.
-     * @param Clr3 a {@link java.lang.String} object.
-     * @param Clr4 a {@link java.lang.String} object.
-     * @param Clr5 a {@link java.lang.String} object.
+     * @param clr1 a {@link java.lang.String} object.
+     * @param clr2 a {@link java.lang.String} object.
+     * @param clr3 a {@link java.lang.String} object.
+     * @param clr4 a {@link java.lang.String} object.
+     * @param clr5 a {@link java.lang.String} object.
      */
-    public Generate5ColorDeck(String Clr1, String Clr2, String Clr3, String Clr4, String Clr5) {
+    public Generate5ColorDeck(final String clr1, final String clr2,
+            final String clr3, final String clr4, final String clr5)
+    {
         r = MyRandom.random;
 
-        CardCounts = new HashMap<String, Integer>();
+        cardCounts = new HashMap<String, Integer>();
 
-        ClrMap = new HashMap<String, String>();
-        ClrMap.put("white", "W");
-        ClrMap.put("blue", "U");
-        ClrMap.put("black", "B");
-        ClrMap.put("red", "R");
-        ClrMap.put("green", "G");
+        clrMap = new HashMap<String, String>();
+        clrMap.put("white", "W");
+        clrMap.put("blue", "U");
+        clrMap.put("black", "B");
+        clrMap.put("red", "R");
+        clrMap.put("green", "G");
 
         notColors = new ArrayList<String>();
         notColors.add("white");
@@ -60,33 +70,33 @@ public class Generate5ColorDeck {
         notColors.add("red");
         notColors.add("green");
 
-        DualLands = new ArrayList<DLnd>();
-        DualLands.add(new DLnd("Tundra", "WU"));
-        DualLands.add(new DLnd("Hallowed Fountain", "WU"));
-        DualLands.add(new DLnd("Underground Sea", "UB"));
-        DualLands.add(new DLnd("Watery Grave", "UB"));
-        DualLands.add(new DLnd("Badlands", "BR"));
-        DualLands.add(new DLnd("Blood Crypt", "BR"));
-        DualLands.add(new DLnd("Taiga", "RG"));
-        DualLands.add(new DLnd("Stomping Ground", "RG"));
-        DualLands.add(new DLnd("Savannah", "GW"));
-        DualLands.add(new DLnd("Temple Garden", "GW"));
-        DualLands.add(new DLnd("Scrubland", "WB"));
-        DualLands.add(new DLnd("Godless Shrine", "WB"));
-        DualLands.add(new DLnd("Volcanic Island", "UR"));
-        DualLands.add(new DLnd("Steam Vents", "UR"));
-        DualLands.add(new DLnd("Bayou", "BG"));
-        DualLands.add(new DLnd("Overgrown Tomb", "BG"));
-        DualLands.add(new DLnd("Plateau", "RW"));
-        DualLands.add(new DLnd("Sacred Foundry", "RW"));
-        DualLands.add(new DLnd("Tropical Island", "GU"));
-        DualLands.add(new DLnd("Breeding Pool", "GU"));
+        dualLands = new ArrayList<DLnd>();
+        dualLands.add(new DLnd("Tundra", "WU"));
+        dualLands.add(new DLnd("Hallowed Fountain", "WU"));
+        dualLands.add(new DLnd("Underground Sea", "UB"));
+        dualLands.add(new DLnd("Watery Grave", "UB"));
+        dualLands.add(new DLnd("Badlands", "BR"));
+        dualLands.add(new DLnd("Blood Crypt", "BR"));
+        dualLands.add(new DLnd("Taiga", "RG"));
+        dualLands.add(new DLnd("Stomping Ground", "RG"));
+        dualLands.add(new DLnd("Savannah", "GW"));
+        dualLands.add(new DLnd("Temple Garden", "GW"));
+        dualLands.add(new DLnd("Scrubland", "WB"));
+        dualLands.add(new DLnd("Godless Shrine", "WB"));
+        dualLands.add(new DLnd("Volcanic Island", "UR"));
+        dualLands.add(new DLnd("Steam Vents", "UR"));
+        dualLands.add(new DLnd("Bayou", "BG"));
+        dualLands.add(new DLnd("Overgrown Tomb", "BG"));
+        dualLands.add(new DLnd("Plateau", "RW"));
+        dualLands.add(new DLnd("Sacred Foundry", "RW"));
+        dualLands.add(new DLnd("Tropical Island", "GU"));
+        dualLands.add(new DLnd("Breeding Pool", "GU"));
 
-        color1 = Clr1;
-        color2 = Clr2;
-        color3 = Clr3;
-        color4 = Clr4;
-        color5 = Clr5;
+        color1 = clr1;
+        color2 = clr2;
+        color3 = clr3;
+        color4 = clr4;
+        color5 = clr5;
 
         notColors.remove(color1);
         notColors.remove(color2);
@@ -94,11 +104,11 @@ public class Generate5ColorDeck {
         notColors.remove(color4);
         notColors.remove(color5);
 
-        DL = new ArrayList<String>();
-        for (int i = 0; i < DualLands.size(); i++) {
-            DLnd d = DualLands.get(i);
-            DL.add(d.Name);
-            CardCounts.put(d.Name, 0);
+        dl = new ArrayList<String>();
+        for (int i = 0; i < dualLands.size(); i++) {
+            DLnd d = dualLands.get(i);
+            dl.add(d.getName());
+            cardCounts.put(d.getName(), 0);
         }
     }
 
@@ -113,126 +123,128 @@ public class Generate5ColorDeck {
         String tmpDeck = "";
         CardList tDeck = new CardList();
 
-        int LandsPercentage = 44;
-        int CreatPercentage = 34;
-        int SpellPercentage = 22;
+        int landsPercentage = 44;
+        int creatPercentage = 34;
+        int spellPercentage = 22;
 
         // start with all cards
         // remove cards that generated decks don't like
-        CardList AllCards = CardFilter.filter(AllZone.getCardFactory(), new CardListFilter() {
-            public boolean addCard(Card c) {
+        CardList allCards = CardFilter.filter(AllZone.getCardFactory(), new CardListFilter() {
+            public boolean addCard(final Card c) {
                 return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
             }
         });
 
         // reduce to cards that match the colors
-        CardList CL1 = AllCards.getColor(color1);
-        CardList CL2 = AllCards.getColor(color2);
-        CardList CL3 = AllCards.getColor(color3);
-        CardList CL4 = AllCards.getColor(color4);
-        CardList CL5 = AllCards.getColor(color5);
+        CardList cL1 = allCards.getColor(color1);
+        CardList cL2 = allCards.getColor(color2);
+        CardList cL3 = allCards.getColor(color3);
+        CardList cL4 = allCards.getColor(color4);
+        CardList cL5 = allCards.getColor(color5);
 
         // remove multicolor cards that don't match the colors
         CardListFilter clrF = new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 for (int i = 0; i < notColors.size(); i++) {
-                    if (c.getManaCost().contains(ClrMap.get(notColors.get(i))))
+                    if (c.getManaCost().contains(clrMap.get(notColors.get(i)))) {
                         return false;
+                    }
                 }
                 return true;
             }
         };
-        CL1 = CL1.filter(clrF);
-        CL2 = CL2.filter(clrF);
-        CL3 = CL3.filter(clrF);
-        CL4 = CL4.filter(clrF);
-        CL5 = CL5.filter(clrF);
+        cL1 = cL1.filter(clrF);
+        cL2 = cL2.filter(clrF);
+        cL3 = cL3.filter(clrF);
+        cL4 = cL4.filter(clrF);
+        cL5 = cL5.filter(clrF);
 
         // build subsets based on type
-        CardList Cr1 = CL1.getType("Creature");
-        CardList Cr2 = CL2.getType("Creature");
-        CardList Cr3 = CL3.getType("Creature");
-        CardList Cr4 = CL4.getType("Creature");
-        CardList Cr5 = CL5.getType("Creature");
+        CardList cr1 = cL1.getType("Creature");
+        CardList cr2 = cL2.getType("Creature");
+        CardList cr3 = cL3.getType("Creature");
+        CardList cr4 = cL4.getType("Creature");
+        CardList cr5 = cL5.getType("Creature");
 
-        String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker"};
-        CardList Sp1 = CL1.getValidCards(ISE, null, null);
-        CardList Sp2 = CL2.getValidCards(ISE, null, null);
-        CardList Sp3 = CL3.getValidCards(ISE, null, null);
-        CardList Sp4 = CL4.getValidCards(ISE, null, null);
-        CardList Sp5 = CL5.getValidCards(ISE, null, null);
+        String[] ise = {"Instant", "Sorcery", "Enchantment", "Planeswalker"};
+        CardList sp1 = cL1.getValidCards(ise, null, null);
+        CardList sp2 = cL2.getValidCards(ise, null, null);
+        CardList sp3 = cL3.getValidCards(ise, null, null);
+        CardList sp4 = cL4.getValidCards(ise, null, null);
+        CardList sp5 = cL5.getValidCards(ise, null, null);
 
         // final card pools
-        CardList Cr12345 = new CardList();
-        CardList Sp12345 = new CardList();
+        CardList cr12345 = new CardList();
+        CardList sp12345 = new CardList();
 
         // used for mana curve in the card pool
-        final int MinCMC[] = {1}, MaxCMC[] = {3};
+        final int[] minCMC = {1};
+        final int[] maxCMC = {3};
         CardListFilter cmcF = new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 int cCMC = c.getCMC();
-                return (cCMC >= MinCMC[0]) && (cCMC <= MaxCMC[0]);
+                return (cCMC >= minCMC[0]) && (cCMC <= maxCMC[0]);
             }
         };
 
         // select cards to build card pools using a mana curve
         for (int i = 3; i > 0; i--) {
-            CardList Cr1CMC = Cr1.filter(cmcF);
-            CardList Cr2CMC = Cr2.filter(cmcF);
-            CardList Cr3CMC = Cr3.filter(cmcF);
-            CardList Cr4CMC = Cr4.filter(cmcF);
-            CardList Cr5CMC = Cr5.filter(cmcF);
+            CardList cr1CMC = cr1.filter(cmcF);
+            CardList cr2CMC = cr2.filter(cmcF);
+            CardList cr3CMC = cr3.filter(cmcF);
+            CardList cr4CMC = cr4.filter(cmcF);
+            CardList cr5CMC = cr5.filter(cmcF);
 
-            CardList Sp1CMC = Sp1.filter(cmcF);
-            CardList Sp2CMC = Sp2.filter(cmcF);
-            CardList Sp3CMC = Sp3.filter(cmcF);
-            CardList Sp4CMC = Sp4.filter(cmcF);
-            CardList Sp5CMC = Sp5.filter(cmcF);
+            CardList sp1CMC = sp1.filter(cmcF);
+            CardList sp2CMC = sp2.filter(cmcF);
+            CardList sp3CMC = sp3.filter(cmcF);
+            CardList sp4CMC = sp4.filter(cmcF);
+            CardList sp5CMC = sp5.filter(cmcF);
 
             for (int j = 0; j < i; j++) {
-                Card c = Cr1CMC.get(r.nextInt(Cr1CMC.size()));
-                Cr12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                Card c = cr1CMC.get(r.nextInt(cr1CMC.size()));
+                cr12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Cr2CMC.get(r.nextInt(Cr2CMC.size()));
-                Cr12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = cr2CMC.get(r.nextInt(cr2CMC.size()));
+                cr12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Cr3CMC.get(r.nextInt(Cr3CMC.size()));
-                Cr12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = cr3CMC.get(r.nextInt(cr3CMC.size()));
+                cr12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Cr4CMC.get(r.nextInt(Cr4CMC.size()));
-                Cr12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = cr4CMC.get(r.nextInt(cr4CMC.size()));
+                cr12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Cr5CMC.get(r.nextInt(Cr5CMC.size()));
-                Cr12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = cr5CMC.get(r.nextInt(cr5CMC.size()));
+                cr12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Sp1CMC.get(r.nextInt(Sp1CMC.size()));
-                Sp12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = sp1CMC.get(r.nextInt(sp1CMC.size()));
+                sp12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Sp2CMC.get(r.nextInt(Sp2CMC.size()));
-                Sp12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = sp2CMC.get(r.nextInt(sp2CMC.size()));
+                sp12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Sp3CMC.get(r.nextInt(Sp3CMC.size()));
-                Sp12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = sp3CMC.get(r.nextInt(sp3CMC.size()));
+                sp12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Sp4CMC.get(r.nextInt(Sp4CMC.size()));
-                Sp12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = sp4CMC.get(r.nextInt(sp4CMC.size()));
+                sp12345.add(c);
+                cardCounts.put(c.getName(), 0);
 
-                c = Sp5CMC.get(r.nextInt(Sp5CMC.size()));
-                Sp12345.add(c);
-                CardCounts.put(c.getName(), 0);
+                c = sp5CMC.get(r.nextInt(sp5CMC.size()));
+                sp12345.add(c);
+                cardCounts.put(c.getName(), 0);
             }
 
-            MinCMC[0] += 2;
-            MaxCMC[0] += 2;
+            minCMC[0] += 2;
+            maxCMC[0] += 2;
             // resulting mana curve of the card pool
             //18x 1 - 3
             //12x 3 - 5
@@ -241,78 +253,82 @@ public class Generate5ColorDeck {
         }
 
         // shuffle card pools
-        Cr12345.shuffle();
-        Sp12345.shuffle();
+        cr12345.shuffle();
+        sp12345.shuffle();
 
         // calculate card counts
-        float p = (float) ((float) CreatPercentage * .01);
-        int CreatCnt = (int) (p * (float) Size);
-        tmpDeck += "Creature Count:" + CreatCnt + "\n";
+        float p = (float) ((float) creatPercentage * .01);
+        int creatCnt = (int) (p * (float) Size);
+        tmpDeck += "Creature Count:" + creatCnt + "\n";
 
-        p = (float) ((float) SpellPercentage * .01);
-        int SpellCnt = (int) (p * (float) Size);
-        tmpDeck += "Spell Count:" + SpellCnt + "\n";
+        p = (float) ((float) spellPercentage * .01);
+        int spellCnt = (int) (p * (float) Size);
+        tmpDeck += "Spell Count:" + spellCnt + "\n";
 
         // build deck from the card pools
-        for (int i = 0; i < CreatCnt; i++) {
-            Card c = Cr12345.get(r.nextInt(Cr12345.size()));
+        for (int i = 0; i < creatCnt; i++) {
+            Card c = cr12345.get(r.nextInt(cr12345.size()));
 
             lc = 0;
-            while (CardCounts.get(c.getName()) > 3 || lc > 100) {
-                c = Cr12345.get(r.nextInt(Cr12345.size()));
+            while (cardCounts.get(c.getName()) > 3 || lc > 100) {
+                c = cr12345.get(r.nextInt(cr12345.size()));
                 lc++;
             }
-            if (lc > 100)
+            if (lc > 100) {
                 throw new RuntimeException("Generate5ColorDeck : get5ColorDeck -- looped too much -- Cr123");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-            int n = CardCounts.get(c.getName());
-            CardCounts.put(c.getName(), n + 1);
+            int n = cardCounts.get(c.getName());
+            cardCounts.put(c.getName(), n + 1);
             tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
         }
 
-        for (int i = 0; i < SpellCnt; i++) {
-            Card c = Sp12345.get(r.nextInt(Sp12345.size()));
+        for (int i = 0; i < spellCnt; i++) {
+            Card c = sp12345.get(r.nextInt(sp12345.size()));
 
             lc = 0;
-            while (CardCounts.get(c.getName()) > 3 || lc > 100) {
-                c = Sp12345.get(r.nextInt(Sp12345.size()));
+            while (cardCounts.get(c.getName()) > 3 || lc > 100) {
+                c = sp12345.get(r.nextInt(sp12345.size()));
                 lc++;
             }
-            if (lc > 100)
+            if (lc > 100) {
                 throw new RuntimeException("Generate5ColorDeck : get5ColorDeck -- looped too much -- Sp123");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-            int n = CardCounts.get(c.getName());
-            CardCounts.put(c.getName(), n + 1);
+            int n = cardCounts.get(c.getName());
+            cardCounts.put(c.getName(), n + 1);
             tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
         }
 
         // Add lands
         int numLands = 0;
-        if (LandsPercentage > 0) {
-            p = (float) ((float) LandsPercentage * .01);
+        if (landsPercentage > 0) {
+            p = (float) ((float) landsPercentage * .01);
             numLands = (int) (p * (float) Size);
-        } else     // otherwise, just fill in the rest of the deck with basic lands
+        } else {    // otherwise, just fill in the rest of the deck with basic lands
             numLands = Size - tDeck.size();
+        }
 
         tmpDeck += "numLands:" + numLands + "\n";
 
         int nDLands = (numLands / 4);
         for (int i = 0; i < nDLands; i++) {
-            String s = DL.get(r.nextInt(DL.size()));
+            String s = dl.get(r.nextInt(dl.size()));
 
             lc = 0;
-            while (CardCounts.get(s) > 3 || lc > 20) {
-                s = DL.get(r.nextInt(DL.size()));
+            while (cardCounts.get(s) > 3 || lc > 20) {
+                s = dl.get(r.nextInt(dl.size()));
                 lc++;
             }
-            if (lc > 20)
+            if (lc > 20) {
                 throw new RuntimeException("Generate5ColorDeck : get5ColorDeck -- looped too much -- DL");
+            }
 
             tDeck.add(AllZone.getCardFactory().getCard(s, AllZone.getHumanPlayer()));
-            int n = CardCounts.get(s);
-            CardCounts.put(s, n + 1);
+            int n = cardCounts.get(s);
+            cardCounts.put(s, n + 1);
             tmpDeck += s + "\n";
         }
 
@@ -320,7 +336,7 @@ public class Generate5ColorDeck {
 
         if (numLands > 0)    // attempt to optimize basic land counts according to color representation
         {
-            CCnt ClrCnts[] = {new CCnt("Plains", 0),
+            CCnt[] clrCnts = {new CCnt("Plains", 0),
                     new CCnt("Island", 0),
                     new CCnt("Swamp", 0),
                     new CCnt("Mountain", 0),
@@ -335,39 +351,45 @@ public class Generate5ColorDeck {
                 for (int j = 0; j < mc.length(); j++) {
                     char c = mc.charAt(j);
 
-                    if (c == 'W')
-                        ClrCnts[0].Count++;
-                    else if (c == 'U')
-                        ClrCnts[1].Count++;
-                    else if (c == 'B')
-                        ClrCnts[2].Count++;
-                    else if (c == 'R')
-                        ClrCnts[3].Count++;
-                    else if (c == 'G')
-                        ClrCnts[4].Count++;
+                    if (c == 'W') {
+                        clrCnts[0].setCount(clrCnts[0].getCount() + 1);
+                    }
+                    else if (c == 'U') {
+                        clrCnts[1].setCount(clrCnts[1].getCount() + 1);
+                    }
+                    else if (c == 'B') {
+                        clrCnts[2].setCount(clrCnts[2].getCount() + 1);
+                    }
+                    else if (c == 'R') {
+                        clrCnts[3].setCount(clrCnts[3].getCount() + 1);
+                    }
+                    else if (c == 'G') {
+                        clrCnts[4].setCount(clrCnts[4].getCount() + 1);
+                    }
                 }
             }
 
             // total of all ClrCnts
             int totalColor = 0;
             for (int i = 0; i < 5; i++) {
-                totalColor += ClrCnts[i].Count;
-                tmpDeck += ClrCnts[i].Color + ":" + ClrCnts[i].Count + "\n";
+                totalColor += clrCnts[i].getCount();
+                tmpDeck += clrCnts[i].getColor() + ":" + clrCnts[i].getCount() + "\n";
             }
 
             tmpDeck += "totalColor:" + totalColor + "\n";
 
             for (int i = 0; i < 5; i++) {
-                if (ClrCnts[i].Count > 0) {    // calculate number of lands for each color
-                    p = (float) ClrCnts[i].Count / (float) totalColor;
+                if (clrCnts[i].getCount() > 0) {    // calculate number of lands for each color
+                    p = (float) clrCnts[i].getCount() / (float) totalColor;
                     int nLand = (int) ((float) numLands * p);
-                    tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
+                    tmpDeck += "nLand-" + clrCnts[i].getColor() + ":" + nLand + "\n";
 
                     // just to prevent a null exception by the deck size fixing code
-                    CardCounts.put(ClrCnts[i].Color, nLand);
+                    cardCounts.put(clrCnts[i].getColor(), nLand);
 
-                    for (int j = 0; j <= nLand; j++)
-                        tDeck.add(AllZone.getCardFactory().getCard(ClrCnts[i].Color, AllZone.getComputerPlayer()));
+                    for (int j = 0; j <= nLand; j++) {
+                        tDeck.add(AllZone.getCardFactory().getCard(clrCnts[i].getColor(), AllZone.getComputerPlayer()));
+                    }
                 }
             }
         }
@@ -381,16 +403,17 @@ public class Generate5ColorDeck {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
                 lc = 0;
-                while (CardCounts.get(c.getName()) > 3 || lc > Size) {
+                while (cardCounts.get(c.getName()) > 3 || lc > Size) {
                     c = tDeck.get(r.nextInt(tDeck.size()));
                     lc++;
                 }
-                if (lc > Size)
+                if (lc > Size) {
                     throw new RuntimeException("Generate5ColorDeck : get5ColorDeck -- looped too much -- undersize");
+                }
 
-                int n = CardCounts.get(c.getName());
+                int n = cardCounts.get(c.getName());
                 tDeck.add(AllZone.getCardFactory().getCard(c.getName(), AllZone.getComputerPlayer()));
-                CardCounts.put(c.getName(), n + 1);
+                cardCounts.put(c.getName(), n + 1);
                 tmpDeck += "Added:" + c.getName() + "\n";
             }
         } else if (tDeck.size() > Size) {
@@ -399,8 +422,9 @@ public class Generate5ColorDeck {
             for (int i = 0; i < diff; i++) {
                 Card c = tDeck.get(r.nextInt(tDeck.size()));
 
-                while (c.isBasicLand())    // don't remove basic lands
+                while (c.isBasicLand()) {   // don't remove basic lands
                     c = tDeck.get(r.nextInt(tDeck.size()));
+                }
 
                 tDeck.remove(c);
                 tmpDeck += "Removed:" + c.getName() + "\n";
@@ -408,28 +432,61 @@ public class Generate5ColorDeck {
         }
 
         tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-        if (ForgeProps.getProperty("showdeck/5color", "false").equals("true"))
+        if (ForgeProps.getProperty("showdeck/5color", "false").equals("true")) {
             ErrorViewer.showError(tmpDeck);
+        }
 
         return tDeck;
     }
 
     private class CCnt {
-        public String Color;
-        public int Count;
+        private String color;
+        private int count;
 
-        public CCnt(String clr, int cnt) {
-            Color = clr;
-            Count = cnt;
+        public CCnt(final String clr, final int cnt) {
+            this.color = clr;
+            this.count = cnt;
+        }
+
+        /**
+         * 
+         * @return
+         */
+        public String getColor() {
+            return this.color;
+        }
+
+        /**
+         * 
+         * @return
+         */
+        public int getCount() {
+            return this.count;
+        }
+
+        /**
+         * 
+         * @param color
+         */
+        public void setCount(int count) {
+            this.count = count;
         }
     }
 
     private class DLnd {
-        public String Name;
+        private String name;
         //public String Mana;
 
-        public DLnd(String nm, String mn) {
-            Name = nm;
+        /**
+         * 
+         * @return
+         */
+        public String getName() {
+            return this.name;
+        }
+
+        public DLnd(final String nm, final String mn) {
+            this.name = nm;
             //Mana = mn;
         }
     }
