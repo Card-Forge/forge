@@ -2,6 +2,7 @@ package forge;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -71,6 +72,15 @@ public class GuiFilter extends javax.swing.JDialog {
         initGUI();
     }
 
+    private KeyAdapter fnKeyPressed = new KeyAdapter() {
+        @Override
+        public void keyPressed(final java.awt.event.KeyEvent e) {
+
+            if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                filterCardTable();
+            }
+        }
+     };
     /**
      * <p>
      * initGUI.
@@ -111,15 +121,7 @@ public class GuiFilter extends javax.swing.JDialog {
     private JTextField getNameTextField() {
         if (nameTextField == null) {
             nameTextField = new JTextField(30);
-            nameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
+            nameTextField.addKeyListener(fnKeyPressed);
         }
         return nameTextField;
     }
@@ -187,21 +189,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxBlue() {
-        if (jCheckBoxBlue == null) {
-            jCheckBoxBlue = new JCheckBox();
-            jCheckBoxBlue.setText("Blue");
-            jCheckBoxBlue.setSelected(true);
-            jCheckBoxBlue.setBackground(gray);
-            jCheckBoxBlue.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxBlue == null) { initCheckBox(jCheckBoxBlue = new JCheckBox(), "Blue" ); }
         return jCheckBoxBlue;
     }
 
@@ -213,21 +201,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxGreen() {
-        if (jCheckBoxGreen == null) {
-            jCheckBoxGreen = new JCheckBox();
-            jCheckBoxGreen.setText("Green");
-            jCheckBoxGreen.setSelected(true);
-            jCheckBoxGreen.setBackground(gray);
-            jCheckBoxGreen.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxGreen == null) { initCheckBox(jCheckBoxGreen = new JCheckBox(), "Green"); }
         return jCheckBoxGreen;
     }
 
@@ -239,21 +213,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxRed() {
-        if (jCheckBoxRed == null) {
-            jCheckBoxRed = new JCheckBox();
-            jCheckBoxRed.setText("Red");
-            jCheckBoxRed.setSelected(true);
-            jCheckBoxRed.setBackground(gray);
-            jCheckBoxRed.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxRed == null) { initCheckBox(jCheckBoxRed = new JCheckBox(), "Red"); }
         return jCheckBoxRed;
     }
 
@@ -265,21 +225,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxWhite() {
-        if (jCheckBoxWhite == null) {
-            jCheckBoxWhite = new JCheckBox();
-            jCheckBoxWhite.setText("White");
-            jCheckBoxWhite.setSelected(true);
-            jCheckBoxWhite.setBackground(gray);
-            jCheckBoxWhite.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxWhite == null) { initCheckBox(jCheckBoxWhite = new JCheckBox(), "White"); }
         return jCheckBoxWhite;
     }
 
@@ -291,21 +237,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxColorless() {
-        if (jCheckBoxColorless == null) {
-            jCheckBoxColorless = new JCheckBox();
-            jCheckBoxColorless.setText("Colorless");
-            jCheckBoxColorless.setSelected(true);
-            jCheckBoxColorless.setBackground(gray);
-            jCheckBoxColorless.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxColorless == null) { initCheckBox(jCheckBoxColorless = new JCheckBox(), "Colorless"); }
         return jCheckBoxColorless;
     }
 
@@ -338,21 +270,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxBlack() {
-        if (jCheckBoxBlack == null) {
-            jCheckBoxBlack = new JCheckBox();
-            jCheckBoxBlack.setText("Black");
-            jCheckBoxBlack.setBackground(gray);
-            jCheckBoxBlack.setSelected(true);
-            jCheckBoxBlack.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxBlack == null) { initCheckBox(jCheckBoxBlack = new JCheckBox(), "Black"); }
         return jCheckBoxBlack;
     }
 
@@ -421,21 +339,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxSorcery() {
-        if (jCheckBoxSorcery == null) {
-            jCheckBoxSorcery = new JCheckBox();
-            jCheckBoxSorcery.setText("Sorcery");
-            jCheckBoxSorcery.setSelected(true);
-            jCheckBoxSorcery.setBackground(gray);
-            jCheckBoxSorcery.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxSorcery == null) { initCheckBox(jCheckBoxSorcery = new JCheckBox(), "Sorcery"); }
         return jCheckBoxSorcery;
     }
 
@@ -447,21 +351,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxPlaneswalker() {
-        if (jCheckBoxPlaneswalker == null) {
-            jCheckBoxPlaneswalker = new JCheckBox();
-            jCheckBoxPlaneswalker.setText("Planeswalker");
-            jCheckBoxPlaneswalker.setSelected(true);
-            jCheckBoxPlaneswalker.setBackground(gray);
-            jCheckBoxPlaneswalker.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxPlaneswalker == null) { initCheckBox(jCheckBoxPlaneswalker = new JCheckBox(), "Planeswalker"); }
         return jCheckBoxPlaneswalker;
     }
 
@@ -473,21 +363,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxLand() {
-        if (jCheckBoxLand == null) {
-            jCheckBoxLand = new JCheckBox();
-            jCheckBoxLand.setText("Land");
-            jCheckBoxLand.setSelected(true);
-            jCheckBoxLand.setBackground(gray);
-            jCheckBoxLand.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxLand == null) { initCheckBox(jCheckBoxLand = new JCheckBox(), "Land"); }
         return jCheckBoxLand;
     }
 
@@ -499,21 +375,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxInstant() {
-        if (jCheckBoxInstant == null) {
-            jCheckBoxInstant = new JCheckBox();
-            jCheckBoxInstant.setText("Instant");
-            jCheckBoxInstant.setSelected(true);
-            jCheckBoxInstant.setBackground(gray);
-            jCheckBoxInstant.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxInstant == null) { initCheckBox(jCheckBoxInstant = new JCheckBox(), "Instant"); }
         return jCheckBoxInstant;
     }
 
@@ -525,21 +387,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxEnchant() {
-        if (jCheckBoxEnchant == null) {
-            jCheckBoxEnchant = new JCheckBox();
-            jCheckBoxEnchant.setText("Enchant");
-            jCheckBoxEnchant.setSelected(true);
-            jCheckBoxEnchant.setBackground(gray);
-            jCheckBoxEnchant.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxEnchant == null) { initCheckBox(jCheckBoxEnchant = new JCheckBox(), "Enchant"); }
         return jCheckBoxEnchant;
     }
 
@@ -551,21 +399,7 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxCreature() {
-        if (jCheckBoxCreature == null) {
-            jCheckBoxCreature = new JCheckBox();
-            jCheckBoxCreature.setText("Creature");
-            jCheckBoxCreature.setSelected(true);
-            jCheckBoxCreature.setBackground(gray);
-            jCheckBoxCreature.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxCreature == null) { initCheckBox(jCheckBoxCreature = new JCheckBox(), "Creature"); }
         return jCheckBoxCreature;
     }
 
@@ -577,22 +411,15 @@ public class GuiFilter extends javax.swing.JDialog {
      * @return a {@link javax.swing.JCheckBox} object.
      */
     private JCheckBox getJCheckBoxArtifact() {
-        if (jCheckBoxArtifact == null) {
-            jCheckBoxArtifact = new JCheckBox();
-            jCheckBoxArtifact.setText("Artifact");
-            jCheckBoxArtifact.setSelected(true);
-            jCheckBoxArtifact.setBackground(gray);
-            jCheckBoxArtifact.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyPressed(final java.awt.event.KeyEvent e) {
-
-                    if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                        filterCardTable();
-                    }
-                }
-            });
-        }
+        if (jCheckBoxArtifact == null) { initCheckBox(jCheckBoxArtifact = new JCheckBox(), "Artifact"); }
         return jCheckBoxArtifact;
+    }
+
+    private void initCheckBox(final JCheckBox box, final String text) {
+        box.setText(text);
+        box.setSelected(true);
+        box.setBackground(gray);
+        box.addKeyListener(fnKeyPressed);
     }
 
     /**
