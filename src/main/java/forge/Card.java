@@ -4844,6 +4844,13 @@ public class Card extends MyObservable implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (Property.startsWith("greatestCMC")) {
+            CardList list = AllZoneUtil.getCreaturesInPlay();
+            for (Card crd : list) {
+                if (crd.getCMC() > getCMC()) {
+                    return false;
+                }
+            }
         } else if (Property.startsWith("enchanted")) {
             if (!isEnchanted()) return false;
         } else if (Property.startsWith("unenchanted")) {

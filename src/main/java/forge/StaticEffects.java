@@ -135,8 +135,6 @@ public class StaticEffects {
 
         cardToEffectsList.put("Avatar", new String[]{"Ajani_Avatar_Token"});
         cardToEffectsList.put("Coat of Arms", new String[]{"Coat_of_Arms"});
-        //cardToEffectsList.put("Conspiracy", new String[]{"Conspiracy"});
-        cardToEffectsList.put("Favor of the Mighty", new String[]{"Favor_of_the_Mighty"});
         cardToEffectsList.put("Gaddock Teeg", new String[]{"Gaddock_Teeg"});
 
         cardToEffectsList.put("Homarid", new String[]{"Homarid"});
