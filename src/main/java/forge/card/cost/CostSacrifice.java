@@ -172,6 +172,10 @@ public class CostSacrifice extends CostPartWithList {
     
             @Override
             public void showMessage() {
+                if (nNeeded == 0){
+                    done();
+                }
+                
                 StringBuilder msg = new StringBuilder("Sacrifice ");
                 int nLeft = nNeeded - nSacrifices;
                 msg.append(nLeft).append(" ");

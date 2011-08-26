@@ -189,6 +189,10 @@ public class CostExile extends CostPartWithList {
     
             @Override
             public void showMessage() {
+                if (nNeeded == 0){
+                    done();
+                }
+                
                 typeList = AllZoneUtil.getCardsInZone(part.getFrom(), sa.getActivatingPlayer());
                 typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
     
@@ -249,6 +253,10 @@ public class CostExile extends CostPartWithList {
     
             @Override
             public void showMessage() {
+                if (nNeeded == 0){
+                    done();
+                }
+                
                 StringBuilder msg = new StringBuilder("Exile ");
                 int nLeft = nNeeded - nExiles;
                 msg.append(nLeft).append(" ");

@@ -133,6 +133,10 @@ public class CostTapType extends CostPartWithList {
     
             @Override
             public void showMessage() {
+                if (nCards == 0){
+                    done();
+                }
+                
                 if (cardList.size() == 0) stop();
     
                 int left = nCards - nTapped;

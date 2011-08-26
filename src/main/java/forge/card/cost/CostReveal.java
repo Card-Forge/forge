@@ -155,6 +155,10 @@ public class CostReveal extends CostPartWithList {
     
             @Override
             public void showMessage() {
+                if (nNeeded == 0){
+                    done();
+                }
+                
                 if (AllZone.getHumanHand().size() < nNeeded) stop();
                 StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {

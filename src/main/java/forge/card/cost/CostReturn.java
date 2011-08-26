@@ -133,6 +133,10 @@ public class CostReturn extends CostPartWithList {
     
             @Override
             public void showMessage() {
+                if (nNeeded == 0){
+                    done();
+                }
+                
                 StringBuilder msg = new StringBuilder("Return ");
                 int nLeft = nNeeded - nReturns;
                 msg.append(nLeft).append(" ");

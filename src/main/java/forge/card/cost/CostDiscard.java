@@ -225,6 +225,10 @@ public class CostDiscard extends CostPartWithList {
     
             @Override
             public void showMessage() {
+                if (nNeeded == 0){
+                    done();
+                }
+                
                 if (AllZone.getHumanHand().size() == 0) stop();
                 StringBuilder type = new StringBuilder("");
                 if (!discType.equals("Card")) {
