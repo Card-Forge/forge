@@ -40,25 +40,39 @@ public class CostExile extends CostPartWithList {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		Integer i = convertAmount();
         sb.append("Exile ");
 
         if (getThis()) {
         	sb.append(type);
+        	if (!from.equals("Battlefield")){
+        	    sb.append(" from your ").append(from);
+        	}
+        	return sb.toString();
         }
-        else{
-	        Integer i = convertAmount();
-	        String desc = typeDescription == null ? type : typeDescription;
-	        
-	        sb.append(Cost.convertAmountTypeToWords(i, amount, desc));
-        }
-        
+
         if (from.equals("Battlefield")){
+            String desc = typeDescription == null ? type : typeDescription;
+            
+            sb.append(Cost.convertAmountTypeToWords(i, amount, desc));
         	if (!getThis())
         		sb.append(" you control");
+        	return sb.toString();
         }
-        else{
-        	sb.append(" from your ").append(from);
+        
+        if (i != null) {
+            sb.append(i);
+        } else {
+            sb.append(amount);
         }
+        if(!type.equals("Card")) {
+            sb.append(" " + type); 
+        }
+        sb.append(" card");
+        if(i == null || i > 1) {
+            sb.append("s");
+        }
+        sb.append(" from your ").append(from);
         
         return sb.toString();
 	}
