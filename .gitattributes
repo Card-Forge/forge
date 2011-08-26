@@ -4670,6 +4670,7 @@ res/cardsfolder/m/meltdown.txt svneol=native#text/plain
 res/cardsfolder/m/memnarch.txt svneol=native#text/plain
 res/cardsfolder/m/memnite.txt svneol=native#text/plain
 res/cardsfolder/m/memory_erosion.txt svneol=native#text/plain
+res/cardsfolder/m/memory_jar.txt -text
 res/cardsfolder/m/memory_lapse.txt svneol=native#text/plain
 res/cardsfolder/m/mending_hands.txt svneol=native#text/plain
 res/cardsfolder/m/meng_huo_barbarian_king.txt svneol=native#text/plain
