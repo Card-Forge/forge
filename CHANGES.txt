@@ -109,12 +109,12 @@ Fixes/Features:
 - Attempt to match Build Version with Mantis version list.
 - Populate SVN rev. field with revision if available.
 - If crash report, relabel "Additional Information" field as "Error Dump" and auto-select category "New Crash Report".
-- Fix log4j warning.
-- Fix close and Cancel buttons not terminating window.
+- Fixed log4j warning.
+- Fixed close and Cancel buttons not terminating window.
 - Will be used by new Gui.
 - Added the function removeAll to CardList to remove all instances of a card from it (I was shocked that we didn't have this, or am I missing something?).
 - Fixed some possible bugs of assigning blockers twice in ComputerUtil_Block2.
-- Fix for CostExile not grabbing Valid Cards before being used with XChoice.
+- Fixed CostExile not grabbing Valid Cards before being used with XChoice.
 - Small fix for ExileFromHand Input.
 - Moved Inputs from Cost_Input into specific CostParts.
 - Added .gitignore for the truly adventurous using git-svn.
@@ -129,6 +129,20 @@ Fixes/Features:
 - The AI will now check DealDamage triggered abilities when attacking (to not run into Circle of Flame and Caltrops).
 - Added dependency 2 org.apache.commons.lang3 (for StringUtils.join)
 - Removed duplicated code in GuiFilter.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
+- Little updates in CombatUtil.
+- Replaced the red dungeon special quest.
+- Fixed View from Above.
+- Fixed checkstyles. Removed old files.
+- Reverted "fix checkstyles. remove old files".
+- Fixed checkstyles.
+- Added the Frankenstein 2 and 3 decks.
+- Converted Favor of the Mighty to script.
+- Fix for CostInputs not handling X set to 0.
+- Cleaned up a few java warnings.
+- Fixed the Kojak 2 deck list.
+- Improved blocking AI predicting multiblocks.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
 
