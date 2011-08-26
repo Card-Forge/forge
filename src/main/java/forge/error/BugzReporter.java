@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 import forge.Singletons;
 import forge.model.BuildInfo;
-import forge.model.FModel;
 import forge.properties.ForgePreferences;
 
 import javax.swing.JLabel;

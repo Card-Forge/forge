@@ -2,7 +2,6 @@ package forge.gui.input;
 
 import forge.AllZone;
 import forge.Card;
-import forge.CardUtil;
 import forge.Constant;
 import forge.card.abilityFactory.AbilityFactory_Mana;
 import forge.card.mana.ManaCost;

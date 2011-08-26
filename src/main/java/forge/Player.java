@@ -5,7 +5,6 @@ import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.trigger.Trigger;
 
 import javax.swing.*;
 import java.util.*;
