@@ -859,7 +859,7 @@ public class CombatUtil {
         if (attacker.getName().equals("Sylvan Basilisk")
                 && !defender.hasKeyword("Indestructible"))
             return 0;
-
+        
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking")
                 && !defender.hasKeyword("Flanking")) {
@@ -874,10 +874,11 @@ public class CombatUtil {
         }//flanking
         if (attacker.hasKeyword("Indestructible")
                 && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) return 0;
-
-        int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
-
-        int defenderDamage = defender.getNetCombatDamage() - flankingMagnitude + defBushidoMagnitude;
+        
+        int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
+        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
+            defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
+        }
 
         // consider static Damage Prevention
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);

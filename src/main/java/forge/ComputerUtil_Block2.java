@@ -302,10 +302,11 @@ public class ComputerUtil_Block2 {
                 if (firstStrikeBlockers.size() > 1) {
                     CardListUtil.sortAttack(firstStrikeBlockers);
                     for (Card blocker : firstStrikeBlockers) {
+                        int damageNeeded = attacker.getKillDamage() + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
                         //if the total damage of the blockgang was not enough without but is enough with this blocker finish the blockgang
-                        if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) < attacker.getKillDamage()) {
+                        if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) < damageNeeded) {
                             blockGang.add(blocker);
-                            if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) >= attacker.getKillDamage()) {
+                            if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) >= damageNeeded) {
                                 currentAttackers.remove(attacker);
                                 for (Card b : blockGang) {
                                     getBlockersLeft().remove(b);
@@ -354,8 +355,9 @@ public class ComputerUtil_Block2 {
                 int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
                 int absorbedDamage2 = blocker.getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
                 int addedValue = CardFactoryUtil.evaluateCreature(blocker);
-                if (attacker.getKillDamage() > currentDamage
-                        && !(attacker.getKillDamage() > currentDamage + additionalDamage) //The attacker will be killed
+                int damageNeeded = attacker.getKillDamage() + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
+                if (damageNeeded > currentDamage
+                        && !(damageNeeded > currentDamage + additionalDamage) //The attacker will be killed
                         && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage() //only one blocker can be killed
                         || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)) //attacker is worth more
                         && CombatUtil.canBlock(attacker, blocker, combat)) {//this is needed for attackers that can't be blocked by more than 1
@@ -480,8 +482,9 @@ public class ComputerUtil_Block2 {
             //Try to use safe blockers first
             safeBlockers = getSafeBlockers(attacker, blockers, combat);
             for (Card blocker : safeBlockers) {
+                int damageNeeded = attacker.getKillDamage() + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
                 //Add an additional blocker if the current blockers are not enough and the new one would deal additional damage
-                if (attacker.getKillDamage() > CombatUtil.totalDamageOfBlockers(attacker, combat.getBlockers(attacker))
+                if (damageNeeded > CombatUtil.totalDamageOfBlockers(attacker, combat.getBlockers(attacker))
                         && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0 && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
                     getBlockersLeft().remove(blocker);
@@ -497,11 +500,12 @@ public class ComputerUtil_Block2 {
             } else safeBlockers = new CardList(blockers.toArray());
 
             for (Card blocker : safeBlockers) {
+                int damageNeeded = attacker.getKillDamage() + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
                 //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
                 int currentDamage = CombatUtil.totalDamageOfBlockers(attacker, combat.getBlockers(attacker));
                 int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
-                if (attacker.getKillDamage() > currentDamage
-                        && !(attacker.getKillDamage() > currentDamage + additionalDamage)
+                if (damageNeeded > currentDamage
+                        && !(damageNeeded > currentDamage + additionalDamage)
                         && CardFactoryUtil.evaluateCreature(blocker) + getDiff() < CardFactoryUtil.evaluateCreature(attacker)
                         && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
