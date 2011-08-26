@@ -13,4 +13,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_jar.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/129.jpg
 End

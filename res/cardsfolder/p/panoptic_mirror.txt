@@ -9,4 +9,5 @@ SVar:TrigCopy:AB$ CopySpell | Cost$ 0 | Defined$ Imprinted
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panoptic_mirror.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/136.jpg
 End
