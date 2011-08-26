@@ -127,19 +127,16 @@ public class CardListViewer {
             optionPane.setValue(value);
         }
     }
-    
+
     private class CardListFocuser implements WindowFocusListener {
 
         @Override
-        public void windowGainedFocus(WindowEvent e) {
+        public void windowGainedFocus(final WindowEvent e) {
             jList.grabFocus();
         }
 
         @Override
-        public void windowLostFocus(WindowEvent e) {
-            // TODO Auto-generated method stub
-            
-        } }
+        public void windowLostFocus(final WindowEvent e) { } }
 
 
     private class SelListener implements ListSelectionListener {
@@ -147,8 +144,9 @@ public class CardListViewer {
         public void valueChanged(final ListSelectionEvent e) {
             int row = jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
-            if ( row >= 0 && row < list.size() ) {
-                Card card = AllZone.getCardFactory().getCard( list.get(row) , null);
+            if (row >= 0 && row < list.size()) {
+                Card card = AllZone.getCardFactory().getCard(list.get(row) , null);
+                card.setRandomSetCode();
                 card.setImageFilename(CardUtil.buildFilename(card));
                 detail.setCard(card);
                 picture.setCard(card);
