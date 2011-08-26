@@ -11,6 +11,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -30,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -45,6 +49,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -113,6 +118,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private Action COMPUTER_GRAVEYARD_ACTION;
     private Action COMPUTER_REMOVED_ACTION;
     private Action CONCEDE_ACTION;
+    private Action HUMAN_DECKLIST_ACTION;
     //public Card cCardHQ;
 
     //private CardList multiBlockers = new CardList();
@@ -175,6 +181,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.getComputerGraveyard(), COMPUTER_GRAVEYARD);
         COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.getComputerExile(), COMPUTER_REMOVED);
         CONCEDE_ACTION = new ConcedeAction();
+        
+        HUMAN_DECKLIST_ACTION = new DeckListAction(HUMAN_DECKLIST);
     }
 
     /**
@@ -183,7 +191,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private void addMenu() {
         // Game Menu Creation
         Object[] obj = {
-                HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
+                HUMAN_DECKLIST_ACTION, HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
                 COMPUTER_REMOVED_ACTION, new JSeparator(),
                 playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
                 CONCEDE_ACTION};
@@ -1566,6 +1574,66 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         public void actionPerformed(ActionEvent e) {
             concede();
+        }
+    }
+    
+    private class DeckListAction extends ForgeAction {
+        public DeckListAction(String property) {
+            super(property);
+        }
+
+        private static final long serialVersionUID = 9874492387239847L;
+                
+        public void actionPerformed(ActionEvent e) {
+            if (Constant.Runtime.HumanDeck[0].countMain() > 1) {
+                HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
+                
+                for (String s : Constant.Runtime.HumanDeck[0].getMain()){
+                    if (deckMap.containsKey(s))
+                        deckMap.put(s, (Integer)(deckMap.get(s)) + 1);
+                    else
+                        deckMap.put(s, 1);
+                }
+                
+                String nl = System.getProperty("line.separator");
+                StringBuilder DeckList = new StringBuilder();
+                String dName = Constant.Runtime.HumanDeck[0].getName();
+                
+                if (dName == null)
+                    dName = "";
+                else
+                    DeckList.append(dName + nl);
+                
+                ArrayList<String> dmKeys = new ArrayList<String>();
+                for (String s : deckMap.keySet()) 
+                    dmKeys.add(s);
+                
+                Collections.sort(dmKeys);
+                        
+                for (String s : dmKeys) {
+                    DeckList.append(deckMap.get(s) + " x " + s + nl);
+                }
+                
+                int rcMsg = -1138;
+                String ttl = "Human's Decklist";
+                if (!dName.equals(""))
+                        ttl += " - " + dName;
+                
+                StringBuilder msg = new StringBuilder();
+                if (deckMap.keySet().size() <= 32) 
+                    msg.append(DeckList.toString() + nl);
+                else    
+                    msg.append("Decklist too long for dialog." + nl + nl);
+                
+                msg.append("Copy Decklist to Clipboard?");
+                
+                rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
+                
+                if (rcMsg == JOptionPane.OK_OPTION) {
+                    StringSelection ss = new StringSelection(DeckList.toString());
+                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+                }
+            }
         }
     }
 }

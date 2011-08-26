@@ -235,6 +235,8 @@ public interface NewConstants {
 
             String HUMAN_TITLE = "%s/Display/human/title";
 
+            String HUMAN_DECKLIST = "%s/Display/human/decklist";
+            
             public static interface HUMAN_HAND {
                 String TITLE = "%s/Display/human/hand/title";
             }
