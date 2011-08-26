@@ -1,0 +1,10 @@
+Name:Disaster Radius
+ManaCost:5 R R
+Types:Sorcery
+Text:no text
+A:SP$ DamageAll | Cost$ 5 R R Reveal<1/Creature> | NumDmg$ X | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature your opponents control. | SpellDescription$ CARDNAME deals X damage to each creature your opponents control, where X is the revealed card's converted mana cost.
+SVar:X:Revealed$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disaster_radius.jpg
+End
