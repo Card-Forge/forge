@@ -188,7 +188,7 @@ public class ProgressBar_Base extends JProgressBar implements ProgressBar_Interf
 	 * @see forge.view.util.ProgressBar_Interface#setTotalUnitsThisPhase(long)
 	 */
     public void setTotalUnitsThisPhase(long value) {
-        // Doublestrike - why is this called twice?
+        // Doublestrike sez - why is this called twice?
         
         if (value > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("numUnits must be <= " + Integer.MAX_VALUE);
@@ -197,7 +197,6 @@ public class ProgressBar_Base extends JProgressBar implements ProgressBar_Interf
             this.totalUnitsThisPhase = value;
             
             // (Temporary solution until I know a better way) 
-            System.out.println(value);
             this.setProgressRange(0,(int)value);
         }
     }
