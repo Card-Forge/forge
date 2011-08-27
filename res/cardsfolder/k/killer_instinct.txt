@@ -1,0 +1,11 @@
+Name:Killer Instinct
+ManaCost:4 R G
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library. If it's a creature card, put it onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone$ Battlefield | RememberChanged$ True | LibraryPosition2$ 0 | SubAbility$ DBPump
+SVar:DBPump:DB$Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. |  Permanent$ True | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/killer_instinct.jpg
+End

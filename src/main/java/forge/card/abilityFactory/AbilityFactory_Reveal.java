@@ -329,6 +329,8 @@ public class AbilityFactory_Reveal {
                                 } else {
                                     AllZone.getGameAction().moveTo(zone, c);
                                 }
+                                if (params.containsKey("RememberChanged"))
+                                    host.addRemembered(c);
                             }
                         } else {
                             int j = 0;
