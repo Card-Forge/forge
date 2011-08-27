@@ -1,0 +1,12 @@
+Name:Auntie's Snitch
+ManaCost:2 B
+Types:Creature Goblin Rogue
+Text:no text
+PT:3/1
+K:CARDNAME can't block.
+SVar:AltCost:Cost$ 1 B | Activation$ ProwlGoblin | Description$ Prowl 1 B (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)
+T:Mode$ DamageDone | ValidSource$ Goblin.YouCtrl,Rogue.YouCtrl | TriggerZones$ Graveyard | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever a Goblin or Rogue you control deals combat damage to a player, if CARDNAME is in your graveyard, you may return CARDNAME to your hand.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aunties_snitch.jpg
+End
