@@ -83,7 +83,6 @@ public class Upkeep implements java.io.Serializable {
         upkeep_Dega_Sanctuary();
         upkeep_Ceta_Sanctuary();
         upkeep_Tangle_Wire();
-        upkeep_Dance_of_the_Dead();
         
 
 
@@ -879,48 +878,6 @@ public class Upkeep implements java.io.Serializable {
 
         for (Card c : playable)
             AllZone.getGameAction().playSpellAbilityForFree(c.getSpellPermanent());
-    }
-
-
-    /**
-     * <p>upkeep_Dance_of_the_Dead.</p>
-     */
-    private static void upkeep_Dance_of_the_Dead() {
-        final Player player = AllZone.getPhase().getPlayerTurn();
-
-        CardList dances = AllZoneUtil.getPlayerCardsInPlay(player, "Dance of the Dead");
-        for (Card dance : dances) {
-            final Card source = dance;
-            final ArrayList<Card> list = source.getEnchanting();
-            final Card creature = list.get(0);
-            if (creature.isTapped()) {
-                Ability vaultChoice = new Ability(source, "0") {
-
-                    @Override
-                    public void resolve() {
-                        if (GameActionUtil.showYesNoDialog(source, "Untap " + creature.getName() + "?")) {
-                            //prompt for pay mana cost, then untap
-                            final SpellAbility untap = new Ability(source, "1 B") {
-                                @Override
-                                public void resolve() {
-                                    creature.untap();
-                                }
-                            };//Ability
-
-                            StringBuilder sb = new StringBuilder();
-                            sb.append("Untap ").append(creature);
-                            untap.setStackDescription(sb.toString());
-
-                            AllZone.getGameAction().playSpellAbility(untap);
-                        }
-                    }
-                };
-                vaultChoice.setStackDescription(source.getName() + " - Untap creature during Upkeep?");
-
-                AllZone.getStack().addSimultaneousStackEntry(vaultChoice);
-
-            }
-        }
     }
 
     
