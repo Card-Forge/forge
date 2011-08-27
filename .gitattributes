@@ -9833,6 +9833,7 @@ src/main/java/net/slightlymagic/braids/util/progress_monitor/BaseProgressMonitor
 src/main/java/net/slightlymagic/braids/util/progress_monitor/BraidsProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/StderrProgressMonitor.java svneol=native#text/plain
 src/main/java/net/slightlymagic/braids/util/progress_monitor/package-info.java svneol=native#text/plain
+src/main/java/net/slightlymagic/maxmtg/Predicate.java -text
 src/main/java/treeProperties/PropertyElement.java svneol=native#text/plain
 src/main/java/treeProperties/PropertyType.java svneol=native#text/plain
 src/main/java/treeProperties/TreeProperties.java svneol=native#text/plain
