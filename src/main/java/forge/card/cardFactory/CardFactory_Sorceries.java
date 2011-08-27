@@ -279,7 +279,6 @@ public class CardFactory_Sorceries {
             };//SpellAbility
 
             final Ability freeCast = new Ability(card, "0") {
-                @SuppressWarnings("unused")
                 private static final long serialVersionUID = 4455819149429678456L;
 
                 @Override

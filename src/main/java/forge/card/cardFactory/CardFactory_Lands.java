@@ -785,7 +785,6 @@ class CardFactory_Lands {
             abMana.setUndoable(false);
 
             final Ability addMana = new Ability(card, "1", description.toString()) {
-                @SuppressWarnings("unused")
                 private static final long serialVersionUID = 7177960799748450242L;
 
                 //@Override

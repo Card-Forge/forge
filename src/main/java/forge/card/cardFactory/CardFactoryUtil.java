@@ -1206,7 +1206,6 @@ public class CardFactoryUtil {
             final int suspendCounters) {
         // be careful with Suspend ability, it will not hit the stack
         final SpellAbility suspend = new Ability_Static(sourceCard, suspendCost) {
-            @SuppressWarnings("unused")
             private static final long serialVersionUID = 21625903128384507L;
 
             @Override
@@ -1579,7 +1578,6 @@ public class CardFactoryUtil {
      */
     public static SpellAbility soulshiftTrigger(final Card sourceCard, final String Manacost) {
         final SpellAbility desc = new Ability(sourceCard, "0") {
-            @SuppressWarnings("unused")
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
