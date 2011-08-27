@@ -1003,17 +1003,6 @@ public class GameActionUtil {
 
         CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
 
-        if (playerPerms.getName("Farsight Mask").size() > 0) {
-            final Card c1 = c;
-            CardList l = playerPerms.filter(new CardListFilter() {
-                public boolean addCard(Card crd) {
-                    return crd.getName().equals("Farsight Mask") && crd.isUntapped() && !c1.getController().equals(crd.getController());
-                }
-            });
-            for (Card crd : l)
-                playerDamage_Farsight_Mask(player, c, crd);
-        }
-
         if (AllZoneUtil.isCardInPlay("Lich", player)) {
             CardList lichs = playerPerms.getName("Lich");
             for (Card crd : lichs) {
@@ -1167,29 +1156,6 @@ public class GameActionUtil {
             }
         }
     }
-
-    /**
-     * <p>playerDamage_Farsight_Mask.</p>
-     *
-     * @param player a {@link forge.Player} object.
-     * @param c a {@link forge.Card} object.
-     * @param crd a {@link forge.Card} object.
-     * @param crd a {@link forge.Card} object.
-     */
-    private static void playerDamage_Farsight_Mask(final Player player, final Card c, final Card crd) {
-        Ability ability = new Ability(crd, "0") {
-            public void resolve() {
-                if (crd.isUntapped()) {
-                    player.mayDrawCard();
-                }
-            }
-        };
-        ability.setStackDescription("Farsight Mask - You may draw a card.");
-
-        AllZone.getStack().addSimultaneousStackEntry(ability);
-
-    }
-
 
     /**
      * <p>playerCombatDamage_Treva.</p>
