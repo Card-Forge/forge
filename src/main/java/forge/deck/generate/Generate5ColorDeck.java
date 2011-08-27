@@ -10,6 +10,7 @@ import forge.Card;
 import forge.CardFilter;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.Constant;
 import forge.MyRandom;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -137,6 +138,7 @@ public class Generate5ColorDeck {
 
         // reduce to cards that match the colors
         CardList cL1 = allCards.getColor(color1);
+        cL1.addAll(allCards.getColor(Constant.Color.Colorless));
         CardList cL2 = allCards.getColor(color2);
         CardList cL3 = allCards.getColor(color3);
         CardList cL4 = allCards.getColor(color4);
@@ -166,7 +168,7 @@ public class Generate5ColorDeck {
         CardList cr4 = cL4.getType("Creature");
         CardList cr5 = cL5.getType("Creature");
 
-        String[] ise = {"Instant", "Sorcery", "Enchantment", "Planeswalker"};
+        String[] ise = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact"};
         CardList sp1 = cL1.getValidCards(ise, null, null);
         CardList sp2 = cL2.getValidCards(ise, null, null);
         CardList sp3 = cL3.getValidCards(ise, null, null);
