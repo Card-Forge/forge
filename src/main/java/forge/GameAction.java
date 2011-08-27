@@ -649,7 +649,7 @@ public class GameAction {
         	CardList cardsWithStAbs = new CardList();
         	for (Card card : allCards) {
         		ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
-        		if (!staticAbilities.isEmpty())
+        		if (!staticAbilities.isEmpty() && !card.isFaceDown())
         			cardsWithStAbs.add(card);
         	}
         	
