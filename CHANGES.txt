@@ -145,6 +145,23 @@ Fixes/Features:
 - Improved blocking AI predicting multiblocks.
 - Ran set info script.
 - Added the recent commit logs to changes.txt.
+- Removed SVar:RemAIDeck:True from some cards.
+- Card image in rewards view didn't display properly if player had only pet-set images and no flat storage.
+- Fixed the description of exile from graveyard/hand costs.
+- Feature Request 168, View Decklist during game. Pop-up dialog with option to copy to clipboard.
+- Changed "Human - View Decklist" to "Player = ViewDecklist.
+- Cleaned up some Java warnings in Upkeep.java.
+- Cleaned up some Java warnings in CardFactory files.
+- Fixed AI not activating Sacrifice This Costs.
+- Fixed Akki Underling. It should check cards in your hand, not opponent's hand.
+- Fixed Adaptive Automaton.
+- Tweaked showMessage() in Fireball.
+- Static abilities of face down cards will no longer be applied.
+- Updated the scripting of AltCost (in preparation of adding conditions).
+- Added support for restrictions in alternate costs (same as those of AbilityFactory).
+- Hopefully fixed the "triggers for wrong player" bug. The Anodet Lurker/Slave of Bolas case works properly now, among others at least.
+- Ran set info script.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them:
