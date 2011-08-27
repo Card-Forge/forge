@@ -7,4 +7,6 @@ SVar:X:Revealed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disaster_radius.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/119.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/141.jpg
 End

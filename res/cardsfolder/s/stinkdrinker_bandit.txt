@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +2 | NumDef$ +1 | Defined$ TriggeredAt
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_bandit.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/80.jpg
 End
