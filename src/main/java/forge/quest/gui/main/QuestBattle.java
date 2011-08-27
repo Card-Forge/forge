@@ -157,6 +157,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Fin Fang Foom 1", "easy", "Mono G Poison deck");
         addToDeckList("Fin Fang Foom 2", "medium", "Mono G Infect deck");
         addToDeckList("Fin Fang Foom 3", "hard", "GB Infect deck");
+        addToDeckList("Frankenstein 1", "easy", "WG Golem deck with several Splicers");
         addToDeckList("Frankenstein 2", "medium", "WU Golem deck with several Splicers");
         addToDeckList("Frankenstein 3", "hard", "WUG Golem deck with several Splicers");
         addToDeckList("Fred Flintstone 3", "hard", "WUG deck with Phytohydra and Lorescale Coatl");

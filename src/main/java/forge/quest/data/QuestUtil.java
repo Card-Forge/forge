@@ -152,15 +152,8 @@ public class QuestUtil {
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, Constant.Color.Colorless));
         } else if (id == 7) //Gold Dungeon
         {
-            CardList humanList = new CardList();
-            Card c = AllZone.getCardFactory().getCard("Trailblazer's Boots", AllZone.getHumanPlayer());
-
-            c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
-
-            humanList.add(c);
-
-            qa.setHuman(humanList);
+            qa.addCompy("Darksteel Ingot");
+            
             qa.setCardRewardList(pack.generateCards(cards, 3, Constant.Rarity.Rare, "Multicolor"));
         } else if (id == 8) {
             CardList humanList = new CardList();
