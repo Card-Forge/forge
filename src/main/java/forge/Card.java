@@ -2762,10 +2762,20 @@ public class Card extends MyObservable implements Comparable<Card> {
             updateObservers();
         }
     }
-
+    
     public void clearControllers()
     {
         controllerObjects.clear();
+    }
+    
+    public ArrayList<Object> getControllerObjects()
+    {
+        return controllerObjects;
+    }
+    
+    public void setControllerObjects(ArrayList<Object> in)
+    {
+        controllerObjects = in;
     }
 
     /**

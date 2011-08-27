@@ -77,6 +77,7 @@ public class GameAction {
             copied = c;
         else {
             copied = AllZone.getCardFactory().copyCard(c);
+            copied.setControllerObjects(c.getControllerObjects());
 
             // todo: improve choices here
             // Certain attributes need to be copied from Hand->Stack and Stack->Battlefield
@@ -119,6 +120,10 @@ public class GameAction {
 
             prev.remove(c);
         }
+        
+        
+        if (!(c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)))
+            copied = AllZone.getCardFactory().copyCard(copied);
         
         //remove all counters from the card if destination is not the battlefield
         if (!zone.is(Constant.Zone.Battlefield))
