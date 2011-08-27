@@ -82,7 +82,7 @@ public class BugzReporter extends JDialog {
 
 	public void setDumpText(String dump) {
 		txtErrorDump.setText(dump);
-		lblAddInfo.setText("Error Dump");
+		lblAddInfo.setText("Crash Report");
 		cboCategory.setSelectedItem("New Crash Report");
 	}
 	
