@@ -125,6 +125,7 @@ public class Generate2ColorDeck {
 
         // reduce to cards that match the colors
         CardList CL1 = AllCards.getColor(color1);
+        CL1.addAll(AllCards.getColor(Constant.Color.Colorless));
         CardList CL2 = AllCards.getColor(color2);
 
         // remove multicolor cards that don't match the colors
@@ -145,7 +146,7 @@ public class Generate2ColorDeck {
         CardList Cr1 = CL1.getType("Creature");
         CardList Cr2 = CL2.getType("Creature");
 
-        String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker"};
+        String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact"};
         CardList Sp1 = CL1.getValidCards(ISE, null, null);
         CardList Sp2 = CL2.getValidCards(ISE, null, null);
 
