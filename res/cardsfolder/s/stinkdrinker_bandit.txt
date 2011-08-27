@@ -1,0 +1,12 @@
+Name:Stinkdrinker Bandit
+ManaCost:3 B
+Types:Creature Goblin Rogue
+Text:no text
+PT:2/1
+SVar:AltCost:Cost$ 1 B | Activation$ ProwlGoblin | Description$ Prowl 1 B (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)
+T:Mode$ AttackerUnblocked | ValidCard$ Rogue.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +2 | NumDef$ +1 | Defined$ TriggeredAttacker
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_bandit.jpg
+End
