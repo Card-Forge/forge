@@ -4726,6 +4726,7 @@ res/cardsfolder/m/metathran_transport.txt svneol=native#text/plain
 res/cardsfolder/m/metathran_zombie.txt svneol=native#text/plain
 res/cardsfolder/m/meteor_crater.txt svneol=native#text/plain
 res/cardsfolder/m/meteor_storm.txt svneol=native#text/plain
+res/cardsfolder/m/michiko_konda_truth_seeker.txt -text
 res/cardsfolder/m/midnight_banshee.txt svneol=native#text/plain
 res/cardsfolder/m/midnight_covenant.txt svneol=native#text/plain
 res/cardsfolder/m/midsummer_revel.txt svneol=native#text/plain
@@ -6127,6 +6128,7 @@ res/cardsfolder/r/restock.txt svneol=native#text/plain
 res/cardsfolder/r/resurrection.txt svneol=native#text/plain
 res/cardsfolder/r/resuscitate.txt svneol=native#text/plain
 res/cardsfolder/r/retaliate.txt svneol=native#text/plain
+res/cardsfolder/r/retaliator_griffin.txt -text
 res/cardsfolder/r/retract.txt svneol=native#text/plain
 res/cardsfolder/r/retribution_of_the_meek.txt svneol=native#text/plain
 res/cardsfolder/r/retromancer.txt svneol=native#text/plain
