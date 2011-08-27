@@ -2812,6 +2812,16 @@ public class CardFactoryUtil {
             return 0;
         }
 
+        // Count$OppDamageThisTurn
+        if (sq[0].contains("OppDamageThisTurn")) {
+            return doXMath(c.getController().getOpponent().getAssignedDamage(), m, c);
+        }
+   
+        // Count$YourDamageThisTurn
+        if (sq[0].contains("YourDamageThisTurn")) {
+            return doXMath(c.getController().getAssignedDamage(), m, c);
+        }
+
         // Count$HighestLifeTotal
         if (sq[0].contains("HighestLifeTotal")) {
             return Math.max(AllZone.getHumanPlayer().getLife(), AllZone.getComputerPlayer().getLife());
