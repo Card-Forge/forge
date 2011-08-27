@@ -26,9 +26,9 @@ public class Trigger_CounterAdded extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        Card addedTo = (Card) runParams.get("Card");
-        Counters addedType = (Counters) runParams.get("CounterType");
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        Card addedTo = (Card) runParams2.get("Card");
+        Counters addedType = (Counters) runParams2.get("CounterType");
 
         if (mapParams.containsKey("ValidCard")) {
             if (!addedTo.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {

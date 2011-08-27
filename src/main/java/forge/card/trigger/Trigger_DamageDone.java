@@ -26,9 +26,9 @@ public class Trigger_DamageDone extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        Card src = (Card) runParams.get("DamageSource");
-        Object tgt = runParams.get("DamageTarget");
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        Card src = (Card) runParams2.get("DamageSource");
+        Object tgt = runParams2.get("DamageTarget");
 
         if (mapParams.containsKey("ValidSource")) {
             if (!src.isValidCard(mapParams.get("ValidSource").split(","), hostCard.getController(), hostCard)) {
@@ -44,10 +44,10 @@ public class Trigger_DamageDone extends Trigger {
 
         if (mapParams.containsKey("CombatDamage")) {
             if (mapParams.get("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams.get("IsCombatDamage")))
+                if (!((Boolean) runParams2.get("IsCombatDamage")))
                     return false;
             } else if (mapParams.get("CombatDamage").equals("False")) {
-                if (((Boolean) runParams.get("IsCombatDamage")))
+                if (((Boolean) runParams2.get("IsCombatDamage")))
                     return false;
             }
         }
@@ -57,7 +57,7 @@ public class Trigger_DamageDone extends Trigger {
 
             String operator = fullParam.substring(0, 2);
             int operand = Integer.parseInt(fullParam.substring(2));
-            int actualAmount = (Integer) runParams.get("DamageAmount");
+            int actualAmount = (Integer) runParams2.get("DamageAmount");
 
             if (!AllZoneUtil.compare(actualAmount, operator, operand))
                 return false;

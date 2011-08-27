@@ -26,7 +26,7 @@ public class Trigger_Always extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(Map<String, Object> runParams) {
+    public boolean performTest(Map<String, Object> runParams2) {
         return true;
     }
 

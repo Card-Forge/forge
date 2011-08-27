@@ -25,7 +25,7 @@ public class Trigger_Clashed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidPlayer")) {
             if (!matchesValid(runParams.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
                 return false;
@@ -33,7 +33,7 @@ public class Trigger_Clashed extends Trigger {
         }
 
         if (mapParams.containsKey("Won")) {
-            if (!mapParams.get("Won").equals(runParams.get("Won")))
+            if (!mapParams.get("Won").equals(runParams2.get("Won")))
                 return false;
         }
 

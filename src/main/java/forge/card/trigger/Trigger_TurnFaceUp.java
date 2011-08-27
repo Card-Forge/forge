@@ -25,9 +25,9 @@ public class Trigger_TurnFaceUp extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
             }
         }

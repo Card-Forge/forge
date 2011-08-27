@@ -27,15 +27,15 @@ public class Trigger_Attacks extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(Map<String, Object> runParams) {
+    public boolean performTest(Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Attacker"), mapParams.get("ValidCard").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Attacker"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
             }
         }
 
         if (mapParams.containsKey("Alone")) {
-            CardList otherAttackers = (CardList) runParams.get("OtherAttackers");
+            CardList otherAttackers = (CardList) runParams2.get("OtherAttackers");
             if (otherAttackers == null) {
                 return false;
             }

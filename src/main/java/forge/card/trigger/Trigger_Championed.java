@@ -26,8 +26,8 @@ public class Trigger_Championed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        Card championed = (Card) runParams.get("Championed");
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        Card championed = (Card) runParams2.get("Championed");
 
         if (mapParams.containsKey("ValidCard")) {
             if (!championed.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {

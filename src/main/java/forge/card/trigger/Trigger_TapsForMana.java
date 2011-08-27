@@ -25,8 +25,8 @@ public class Trigger_TapsForMana extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        Card tapper = (Card) runParams.get("Card");
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        Card tapper = (Card) runParams2.get("Card");
 
         if (mapParams.containsKey("ValidCard")) {
             if (!tapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {

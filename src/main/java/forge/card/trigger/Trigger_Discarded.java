@@ -25,24 +25,24 @@ public class Trigger_Discarded extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
             }
         }
 
         if (mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
                 return false;
             }
         }
 
         if (mapParams.containsKey("ValidCause")) {
-            if (runParams.get("Cause") == null) {
+            if (runParams2.get("Cause") == null) {
                 return false;
             }
-            if (!matchesValid(runParams.get("Cause"), mapParams.get("ValidCause").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Cause"), mapParams.get("ValidCause").split(","), hostCard)) {
                 return false;
             }
         }

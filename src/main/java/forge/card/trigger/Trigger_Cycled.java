@@ -44,7 +44,7 @@ public class Trigger_Cycled extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
             if (!matchesValid(runParams.get("Card"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;

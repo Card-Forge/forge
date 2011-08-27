@@ -25,8 +25,8 @@ public class Trigger_Drawn extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        Card draw = ((Card) runParams.get("Card"));
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        Card draw = ((Card) runParams2.get("Card"));
 
         if (mapParams.containsKey("ValidCard")) {
             if (!draw.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {

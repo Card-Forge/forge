@@ -29,8 +29,8 @@ public class Trigger_SpellAbilityCast extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        SpellAbility SA = (SpellAbility) runParams.get("CastSA");
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        SpellAbility SA = (SpellAbility) runParams2.get("CastSA");
         Card cast = SA.getSourceCard();
         SpellAbility_StackInstance si = AllZone.getStack().getInstanceFromSpellAbility(SA);
 
@@ -126,7 +126,7 @@ public class Trigger_SpellAbilityCast extends Trigger {
         }
 
         if (mapParams.containsKey("NonTapCost")) {
-            Cost cost = (Cost) (runParams.get("Cost"));
+            Cost cost = (Cost) (runParams2.get("Cost"));
             if (cost.getTap()) return false;
         }
 

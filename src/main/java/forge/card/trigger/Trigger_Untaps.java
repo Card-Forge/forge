@@ -25,8 +25,8 @@ public class Trigger_Untaps extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        Card untapper = (Card) runParams.get("Card");
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        Card untapper = (Card) runParams2.get("Card");
 
         if (mapParams.containsKey("ValidCard")) {
             if (!untapper.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard)) {

@@ -26,9 +26,9 @@ public class Trigger_AttackerUnblocked extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(Map<String, Object> runParams) {
+    public boolean performTest(Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Attacker"), mapParams.get("ValidCard").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Attacker"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
             }
         }

@@ -122,7 +122,7 @@ public class GameAction {
         }
         
         
-        if (!(c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)))
+        if (!(c.isToken() || suppress || zone.is(Constant.Zone.Battlefield)) && !zone.is(Constant.Zone.Battlefield))
             copied = AllZone.getCardFactory().copyCard(copied);
         
         //remove all counters from the card if destination is not the battlefield
@@ -222,7 +222,7 @@ public class GameAction {
     {
         System.out.println("Correcting zone for " + c.toString());
         PlayerZone oldBattlefield = AllZone.getZone(c);
-        PlayerZone newBattlefield = AllZone.getZone("Battlefield",c.getController());
+        PlayerZone newBattlefield = AllZone.getZone(oldBattlefield.getZoneName(),c.getController());
 
         if(oldBattlefield == null || newBattlefield == null)
         {

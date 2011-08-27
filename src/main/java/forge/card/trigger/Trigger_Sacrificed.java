@@ -25,8 +25,8 @@ public class Trigger_Sacrificed extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
-        Card sac = (Card) runParams.get("Card");
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
+        Card sac = (Card) runParams2.get("Card");
         if (mapParams.containsKey("ValidPlayer")) {
             if (!matchesValid(sac.getController(), mapParams.get("ValidPlayer").split(","), hostCard)) {
                 return false;

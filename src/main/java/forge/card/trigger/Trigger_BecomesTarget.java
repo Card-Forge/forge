@@ -28,9 +28,9 @@ public class Trigger_BecomesTarget extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(Map<String, Object> runParams) {
+    public boolean performTest(Map<String, Object> runParams2) {
         if (mapParams.containsKey("SourceType")) {
-            SpellAbility sa = (SpellAbility) runParams.get("SourceSA");
+            SpellAbility sa = (SpellAbility) runParams2.get("SourceSA");
             if (mapParams.get("SourceType").equalsIgnoreCase("spell")) {
                 if (!sa.isSpell()) {
                     return false;
@@ -42,12 +42,12 @@ public class Trigger_BecomesTarget extends Trigger {
             }
         }
         if (mapParams.containsKey("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams.get("SourceSA")).getSourceCard(), mapParams.get("ValidSource").split(","), hostCard)) {
+            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), mapParams.get("ValidSource").split(","), hostCard)) {
                 return false;
             }
         }
         if (mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(runParams.get("Target"), mapParams.get("ValidTarget").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Target"), mapParams.get("ValidTarget").split(","), hostCard)) {
                 return false;
             }
         }

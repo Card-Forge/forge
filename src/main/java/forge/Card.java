@@ -1665,6 +1665,8 @@ public class Card extends MyObservable implements Comparable<Card> {
             while (sb.toString().endsWith("\r\n")) {
                 sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
             }
+            
+            
 
             return sb.toString().replaceAll("CARDNAME", getName());
         }
@@ -1765,7 +1767,16 @@ public class Card extends MyObservable implements Comparable<Card> {
                 sb.append("\r\n");
             }
         }
-
+        
+        /*
+        sb.append("\r\nOwner: ").append(owner).append("\r\n");
+        sb.append("Controller(s):");
+        for(Object o : controllerObjects)
+        {
+            sb.append(o);
+        }
+        sb.append("\r\n");
+        */
         return sb.toString().replaceAll("CARDNAME", getName()).trim();
     }//getText()
 

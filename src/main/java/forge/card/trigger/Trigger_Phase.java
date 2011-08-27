@@ -25,12 +25,12 @@ public class Trigger_Phase extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(java.util.Map<String, Object> runParams) {
+    public boolean performTest(java.util.Map<String, Object> runParams2) {
         if (mapParams.containsKey("Phase")) {
             if (mapParams.get("Phase").contains(",")) {
                 boolean found = false;
                 for (String s : mapParams.get("Phase").split(",")) {
-                    if (s.equals(runParams.get("Phase"))) {
+                    if (s.equals(runParams2.get("Phase"))) {
                         found = true;
                         break;
                     }
@@ -39,13 +39,13 @@ public class Trigger_Phase extends Trigger {
                 if (!found)
                     return false;
             } else {
-                if (!mapParams.get("Phase").equals(runParams.get("Phase"))) {
+                if (!mapParams.get("Phase").equals(runParams2.get("Phase"))) {
                     return false;
                 }
             }
         }
         if (mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard)) {
                 return false;
             }
         }

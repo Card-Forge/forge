@@ -27,14 +27,14 @@ public class Trigger_Blocks extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public boolean performTest(Map<String, Object> runParams) {
+    public boolean performTest(Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
             if (!matchesValid(runParams.get("Blocker"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
             }
         }
         if (mapParams.containsKey("ValidBlocked")) {
-            if (!matchesValid(runParams.get("Attacker"), mapParams.get("ValidBlocked").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Attacker"), mapParams.get("ValidBlocked").split(","), hostCard)) {
                 return false;
             }
         }
