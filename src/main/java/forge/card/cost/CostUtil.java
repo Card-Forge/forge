@@ -24,6 +24,10 @@ public class CostUtil {
                 CostSacrifice sac = (CostSacrifice)part;
                 
                 String type = sac.getType();
+                
+                if (type.equals("CARDNAME"))
+                    continue;
+                
                 CardList typeList = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
                 typeList = typeList.getValidCards(type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null)
