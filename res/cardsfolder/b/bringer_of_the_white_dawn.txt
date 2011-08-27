@@ -4,7 +4,7 @@ Types:Creature Bringer
 Text:no text
 PT:5/5
 K:Trample
-SVar:AltCost:W U B R G
+SVar:AltCost:Cost$ W U B R G
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may return target artifact card from your graveyard to the battlefield.
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl | Cost$ 0
 SVar:Rarity:Rare

@@ -4,7 +4,7 @@ Types:Creature Bringer
 Text:no text
 PT:5/5
 K:Trample
-SVar:AltCost:W U B R G
+SVar:AltCost:Cost$ W U B R G
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
 SVar:TrigChange:AB$GainControl | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
 SVar:Rarity:Rare

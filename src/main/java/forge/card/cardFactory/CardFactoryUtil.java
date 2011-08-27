@@ -4442,19 +4442,40 @@ public class CardFactoryUtil {
         }// Vanishing
 
         // AltCost
-        SpellAbility[] abilities = card.getSpellAbility();
-        if (abilities.length > 0) {
-            String altCost = card.getSVar("AltCost");
-            String altCostDescription = "";
-            String[] altCosts = altCost.split("\\$");
+        if (!card.getSVar("AltCost").equals("")) {
+            SpellAbility[] abilities = card.getSpellAbility();
+            if (abilities.length > 0 && abilities[0].isSpell()) {
+                String altCost = card.getSVar("AltCost");
+                HashMap<String, String> mapParams = new HashMap<String, String>();
+                String altCostDescription = "";
+                String[] altCosts = altCost.split("\\|");
+                
+                for (int aCnt = 0; aCnt < altCosts.length; aCnt++)
+                    altCosts[aCnt] = altCosts[aCnt].trim();
+                
+                for (int i = 0; i < altCosts.length; i++) {
+                    String aa[] = altCosts[i].split("\\$");
 
-            if (altCosts.length > 1) {
-                altCostDescription = altCosts[1];
-                altCost = altCosts[0];
-            }
+                    for (int aaCnt = 0; aaCnt < aa.length; aaCnt++)
+                        aa[aaCnt] = aa[aaCnt].trim();
 
-            SpellAbility sa = abilities[0];
-            if (!altCost.equals("") && sa.isSpell()) {
+                    if (aa.length != 2) {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("StaticEffectFactory Parsing Error: Split length of ");
+                        sb.append(altCosts[i]).append(" in ").append(card.getName()).append(" is not 2.");
+                        throw new RuntimeException(sb.toString());
+                    }
+
+                    mapParams.put(aa[0], aa[1]);
+                }
+
+                altCost = mapParams.get("Cost");
+                
+                if (mapParams.containsKey("Description")) {
+                    altCostDescription = mapParams.get("Description");
+                }
+
+                SpellAbility sa = abilities[0];
                 SpellAbility altCostSA = sa.copy();
 
                 Cost abCost = new Cost(altCost, card.getName(), altCostSA.isAbility());
@@ -4462,7 +4483,7 @@ public class CardFactoryUtil {
 
                 StringBuilder sb = new StringBuilder();
 
-                if (altCosts.length > 1) {
+                if (!altCostDescription.equals("")) {
                     sb.append(altCostDescription);
                 } else {
                     sb.append("You may ").append(abCost.toStringAlt());
@@ -4474,6 +4495,7 @@ public class CardFactoryUtil {
                 card.addSpellAbility(altCostSA);
             }
         }
+        
         return card;
     }
 

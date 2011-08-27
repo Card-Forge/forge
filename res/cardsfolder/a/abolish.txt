@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Instant
 Text:no text
 A:SP$ Destroy | Cost$ 1 W W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:AltCost:Discard<1/Plains>
+SVar:AltCost:Cost$ Discard<1/Plains>
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abolish.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/1.jpg

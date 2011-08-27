@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Instant
 Text:no text
 A:SP$ Draw | Cost$ 4 U | NumCards$ 2 | SpellDescription$ Draw two cards.
-SVar:AltCost:Return<2/Island>
+SVar:AltCost:Cost$ Return<2/Island>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gush.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/82.jpg
