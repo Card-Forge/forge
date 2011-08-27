@@ -1200,7 +1200,24 @@ public class AbilityFactory {
             for (Card imprint : hostCard.getImprinted()) {
                 cards.add(AllZoneUtil.getCardState(imprint));
             }
-        } else {
+        } else if(defined.startsWith("ThisTurnEntered")) {
+            String[] workingCopy = defined.split(" ");
+            String destination, origin, validFilter;
+
+            destination = workingCopy[1];
+            if (workingCopy[2].equals("from")) {
+                origin = workingCopy[3];
+                validFilter = workingCopy[4];
+            } else {
+                origin = "Any";
+                validFilter = workingCopy[2];
+            }
+            for(Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard))
+            {
+                cards.add(cl);
+            }
+        }
+        else {
             CardList list = null;
             if (defined.startsWith("Sacrificed"))
                 list = findRootAbility(sa).getPaidList("Sacrificed");

@@ -636,4 +636,32 @@ public final class CardUtil {
 
         return result;
     }
+    
+    public static CardList getThisTurnEntered(final String to, final String from, final String valid,final Card src)
+    {
+        CardList res = new CardList();
+        if(to != Constant.Zone.Stack)
+        {
+            res.addAll(((DefaultPlayerZone)AllZone.getZone(to, AllZone.getComputerPlayer())).getCardsAddedThisTurn(from));
+            res.addAll(((DefaultPlayerZone)AllZone.getZone(to, AllZone.getHumanPlayer())).getCardsAddedThisTurn(from));
+        }
+        else
+        {
+            res.addAll(((DefaultPlayerZone)AllZone.getZone(to,null)).getCardsAddedThisTurn(from));
+        }
+        
+        res = res.filter(new CardListFilter() {
+           public boolean addCard(Card c)
+           {
+               if(c.isValidCard(valid.split(","), src.getController(), src))
+               {
+                   return true;
+               }
+               
+               return false;
+           }
+        });
+        
+        return res;
+    }
 }

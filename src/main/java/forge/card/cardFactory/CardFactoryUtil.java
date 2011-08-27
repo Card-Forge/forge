@@ -2946,19 +2946,8 @@ public class CardFactoryUtil {
                 origin = "Any";
                 validFilter = workingCopy[2];
             }
-
-            final String[] valid = validFilter.split(",");
-            final Card csource = c;
-            CardList res = ((DefaultPlayerZone) AllZone.getZone(destination, AllZone.getHumanPlayer()))
-                    .getCardsAddedThisTurn(origin);
-            res.addAll(((DefaultPlayerZone) AllZone.getZone(destination, AllZone.getComputerPlayer()))
-                    .getCardsAddedThisTurn(origin));
-
-            res = res.filter(new CardListFilter() {
-                public boolean addCard(Card csubject) {
-                    return csubject.isValidCard(valid, csource.getController(), csource);
-                }
-            });
+            
+            CardList res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
 
             return doXMath(res.size(), m, c);
         }
