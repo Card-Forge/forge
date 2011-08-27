@@ -3,7 +3,7 @@ ManaCost:U
 Types:Enchantment Aura
 Text:no text
 K:Enchant red or green creature
-A:SP$ Attach | Cost$ U | ValidTgts$ Creature.Green,Creature.Red | TgtPrompt$ Select target red or green creature | AILogic$ Curse
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature.Green,Creature.Red | TgtPrompt$ Select target red or green creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

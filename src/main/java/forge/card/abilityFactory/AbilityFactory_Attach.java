@@ -197,7 +197,9 @@ public class AbilityFactory_Attach {
 			c = attachAIPumpPreference(sa, prefList, mandatory, attachSource);
 		else if ("ChangeType".equals(logic))	// Evil Presence, Spreading Seas
 			c = attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
-		// TODO: Does KeepTapped need it's own list? Probably more efficient than just Curse
+		else if ("KeepTapped".equals(logic)){
+		    c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
+		}
 		
 		return c;
 	}
@@ -460,26 +462,65 @@ public class AbilityFactory_Attach {
         return acceptableChoice(c, mandatory);
 	}
 	
-	public static Card attachAIChangeTypePreference(final SpellAbility sa, CardList list, boolean mandatory, Card attachSource){
-		// AI For Cards like Evil Presence or Spreading Seas
-		
-		// A few of these cards are actually good, most of the Animate to Creature ones
-		// One or two of the give basic land types
-		// Maybe require Curse$ on the specific ones and filter the list that way
-		
-		Card c = CardFactoryUtil.AI_getBest(list);
-				
-		// TODO: Port over some of the existing code, but rewrite most of it.
-		// Filter out Basic Lands that have the same type as the changing type
-		// Ultimately, these spells need to be used to reduce mana base of a color. So it might be better to choose a Basic over a Nonbasic
+   public static Card attachAIChangeTypePreference(final SpellAbility sa, CardList list, boolean mandatory, Card attachSource){
+        // AI For Cards like Evil Presence or Spreading Seas
+        
+        // A few of these cards are actually good, most of the Animate to Creature ones
+        // One or two of the give basic land types
+        // Maybe require Curse$ on the specific ones and filter the list that way
+        
+        Card c = CardFactoryUtil.AI_getBest(list);
+                
+        // TODO: Port over some of the existing code, but rewrite most of it.
+        // Filter out Basic Lands that have the same type as the changing type
+        // Ultimately, these spells need to be used to reduce mana base of a color. So it might be better to choose a Basic over a Nonbasic
+        
+        if (c == null)
+            return chooseLessPreferred(mandatory, list);
+        
+        return acceptableChoice(c, mandatory);
+    }
+	
+	public static Card attachAIKeepTappedPreference(final SpellAbility sa, CardList list, boolean mandatory, Card attachSource){
+		// AI For Cards like Paralyzing Grasp and Glimmerdust Nap 
+	    CardList prefList = list.filter(new CardListFilter() {
+            @Override
+            public boolean addCard(Card c) {
+				// Don't do Untapped Vigilance cards
+                if (c.isCreature() && c.hasKeyword("Vigilance") && c.isUntapped())
+                    return false;
+                
+                if (!c.isEnchanted())
+                    return true;
+
+                ArrayList<Card> auras = c.getEnchantedBy();
+                Iterator<Card> itr = auras.iterator();
+                while(itr.hasNext()){
+                    Card aura = (Card)itr.next();
+                    AbilityFactory af = aura.getSpellPermanent().getAbilityFactory();
+                    if (af != null && af.getAPI().equals("Attach")){
+                        Map<String,String> params = af.getMapParams();
+                        if ("KeepTapped".equals(params.get("AILogic"))){
+                            // Don't attach multiple KeepTapped Auras to one card
+                            return false;
+                        }
+                    }
+                }
+                
+                
+                
+                return true;
+            }
+        });
+	    
+	    
+		Card c = CardFactoryUtil.AI_getBest(prefList);
         
         if (c == null)
 			return chooseLessPreferred(mandatory, list);
 		
         return acceptableChoice(c, mandatory);
 	}
-	
-	// Todo: Does RemainTapped need its own SubAttach AF?
 	
 	public static Player attachToPlayerAIPreferences(AbilityFactory af, final SpellAbility sa, boolean mandatory){
 		Target tgt = sa.getTarget();
