@@ -19,7 +19,7 @@ import java.util.zip.ZipFile;
 import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
-import net.slightlymagic.braids.util.progress_monitor.BraidsProgressMonitor;
+import forge.view.util.ProgressBar_Base;
 import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 
 import com.google.code.jyield.Generator;
@@ -185,16 +185,15 @@ public class CardReader
     protected final Card loadCardsUntilYouFind(final String cardName) {
         Card result = null;
 
-        BraidsProgressMonitor monitor = null;
+        ProgressBar_Base monitor = null;
         final FView view = Singletons.getView();
         if (view != null) {
             monitor = view.getCardLoadingProgressMonitor();
         }
 
-        if (monitor == null) {
-            monitor = new StderrProgressMonitor(1, 0L);
-        }
-
+        //if (monitor == null) {
+        //    monitor = new StderrProgressMonitor(1, 0L);
+        // }
 
         if (zip == null) {
             if (estimatedFilesRemaining == UNKNOWN_NUMBER_OF_FILES_REMAINING) {

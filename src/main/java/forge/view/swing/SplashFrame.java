@@ -3,18 +3,16 @@ package forge.view.swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 
-import forge.gui.MultiPhaseProgressMonitorWithETA;
+import forge.view.util.ProgressBar_Embedded;
+
 
 /**
  * Shows the splash frame as the application starts.
@@ -22,97 +20,98 @@ import forge.gui.MultiPhaseProgressMonitorWithETA;
 @SuppressWarnings("serial")
 public class SplashFrame extends JFrame {
 
-    private static final Color WHITE_COLOR = new Color(255, 255, 255);
-    private static final int DISCLAIMER_EAST_WEST_PADDING_PX = 40; // NOPMD by Braids on 8/17/11 9:06 PM
-    private static final int DISCLAIMER_FONT_SIZE = 9; // NOPMD by Braids on 8/17/11 9:06 PM
-    private static final int DISCLAIMER_NORTH_PADDING_PX = 300; // NOPMD by Braids on 8/17/11 9:06 PM
-    private static final int DISCLAIMER_HEIGHT_PX = 20; // NOPMD by Braids on 8/17/11 9:06 PM
-
-    private MultiPhaseProgressMonitorWithETA monitor;
-
+    // Inits: Visual changes can be made here.
+    private static final String BG_ADDRESS = "res/images/ui/forgeSplash.jpg";
+    
+    private static final int    PADDING_X               = 20;
+    private static final int    PADDING_Y               = 20;
+    
+    private static final int    BAR_HEIGHT_PX           = 57;
+    private static final int    DISCLAIMER_HEIGHT_PX    = 20;
+    private static final int    DISCLAIMER_TOP_PX       = 300;
+    
+    private static final int    DISCLAIMER_FONT_SIZE    = 9;
+    private static final Color  DISCLAIMER_COLOR        = Color.white;
+    
+    private ProgressBar_Embedded bar;
 
     /**
      * <p>Create the frame; this <strong>must</strong> be called from an event
      * dispatch thread.</p>
      *
      * <!-- CheckStyle won't let me use at-throws. -->
-     * throws {@link IllegalStateException} if not called from an event
+     * Throws {@link IllegalStateException} if not called from an event
      * dispatch thread.
      */
     public SplashFrame() {
         super();
 
         if (!SwingUtilities.isEventDispatchThread()) {
-            throw new IllegalStateException("must be called from an event dispatch thread");
+            throw new IllegalStateException("SplashFrame() must be called from an event dispatch thread.");
         }
 
         setUndecorated(true);
 
-        final ImageIcon bgIcon = new ImageIcon("res/images/ui/forgeSplash.jpg");
-
+        // Load icon and set preferred JFrame properties.
+        final ImageIcon bgIcon = new ImageIcon(BG_ADDRESS);
         final int splashWidthPx = bgIcon.getIconWidth();
         final int splashHeightPx = bgIcon.getIconHeight();
 
-        monitor = new MultiPhaseProgressMonitorWithETA("Loading card database", 1,
-                1, 1.0f);
-
-        final JDialog progressBarDialog = monitor.getDialog();
-
-        final Rectangle progressRect = progressBarDialog.getBounds();
-
         setMinimumSize(new Dimension(splashWidthPx, splashHeightPx));
-        setLocation(progressRect.x, progressRect.y + progressRect.height);
-
+        setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Insert JPanel to hold content above background
         final JPanel contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         setContentPane(contentPane);
-        contentPane.setLayout(null);
+        contentPane.setLayout(null);    
 
-        final JLabel lblDisclaimer = new JLabel("Forge is not affiliated in any way with Wizards of the Coast.");
+        // Add disclaimer and progress bar.
+        final JLabel lblDisclaimer = new JLabel("<html><center>Forge is not affiliated in any way with Wizards of the Coast.<br>Forge is open source software, released under the GNU Public License.</center></html>");
 
-        // we can't do multiline labels.
-        //+ "\nIt is open source software, released under the GNU Public License."
-        //+ "\n And while we have your attention, go buy some Magic: the Gathering cards!"
-
-        lblDisclaimer.setBounds(DISCLAIMER_EAST_WEST_PADDING_PX, DISCLAIMER_NORTH_PADDING_PX,
-                splashWidthPx - (2 * DISCLAIMER_EAST_WEST_PADDING_PX),
-                DISCLAIMER_HEIGHT_PX);
+        lblDisclaimer.setBounds(PADDING_X, DISCLAIMER_TOP_PX,
+                splashWidthPx - (2 * PADDING_X), DISCLAIMER_HEIGHT_PX);
 
         lblDisclaimer.setFont(new Font("Tahoma", Font.PLAIN, DISCLAIMER_FONT_SIZE));
         lblDisclaimer.setHorizontalAlignment(SwingConstants.CENTER);
-        lblDisclaimer.setForeground(WHITE_COLOR);
+        lblDisclaimer.setForeground(DISCLAIMER_COLOR);
         contentPane.add(lblDisclaimer);
-
-
-        // Add background image.
+       
+        bar = new ProgressBar_Embedded(1, 1); 
+        bar.setBounds(PADDING_X, splashHeightPx - PADDING_Y - BAR_HEIGHT_PX,
+                splashWidthPx - (2 * PADDING_X), BAR_HEIGHT_PX);
+                
+        contentPane.add(bar);
+        
+        bar.displayUpdate("Assembling file list...");
+        
+        // Add background image and close button
         contentPane.setOpaque(false);
         final JLabel bgLabel = new JLabel(bgIcon);
-
+        
         // Do not pass Integer.MIN_VALUE directly here; it must be packaged in an Integer
         // instance.  Otherwise, GUI components will not draw unless moused over.
         getLayeredPane().add(bgLabel, Integer.valueOf(Integer.MIN_VALUE));
 
-        bgLabel.setBounds(0, 0, bgIcon.getIconWidth(), bgIcon.getIconHeight());
+        bgLabel.setBounds(0, 0, splashWidthPx, splashHeightPx);
 
-        pack();
+        pack(); 
     }
 
     /**
-     * Getter for monitor.
-     * @return the MultiPhaseProgressMonitorWithETA in the lower section of this JFrame
+     * Getter for progress bar.
+     * @return the ProgressBar_Embedded object used in the splash frame.
      */
-    public final MultiPhaseProgressMonitorWithETA getMonitor() {
-        return monitor;
+    public final ProgressBar_Embedded getBar() {
+        return bar;
     }
 
     /**
-     * Setter for monitor.
-     * @param neoMonitor  the MultiPhaseProgressMonitorWithETA in the lower section of this JFrame
+     * Setter for progress bar.
+     * @param neoBar  the ProgressBar_Embedded used in the splash frame.
      */
-    protected final void setMonitor(final MultiPhaseProgressMonitorWithETA neoMonitor) {
-        this.monitor = neoMonitor;
+    protected final void setBar(final ProgressBar_Embedded neoBar) {
+        this.bar = neoBar;
     }
 }
