@@ -1,0 +1,6 @@
+Name:No Rest for the Wicked
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered Graveyard from Battlefield Card.Creature+YouCtrl
+End

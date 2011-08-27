@@ -1,0 +1,9 @@
+Name:Gleancrawler
+ManaCost:3 BG BG BG
+Types:Creature Insect Horror
+Text:no text
+PT:6/6
+K:Trample
+T:Mode$Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered Graveyard from Battlefield Card.Creature+YouCtrl
+End

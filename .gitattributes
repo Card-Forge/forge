@@ -3048,6 +3048,7 @@ res/cardsfolder/g/glassdust_hulk.txt svneol=native#text/plain
 res/cardsfolder/g/glasses_of_urza.txt svneol=native#text/plain
 res/cardsfolder/g/glaze_fiend.txt svneol=native#text/plain
 res/cardsfolder/g/gleam_of_resistance.txt svneol=native#text/plain
+res/cardsfolder/g/gleancrawler.txt -text
 res/cardsfolder/g/glen_elendra_archmage.txt svneol=native#text/plain
 res/cardsfolder/g/glen_elendra_liege.txt svneol=native#text/plain
 res/cardsfolder/g/glen_elendra_pranksters.txt svneol=native#text/plain
@@ -5181,6 +5182,7 @@ res/cardsfolder/n/niv_mizzet_the_firemind.txt svneol=native#text/plain
 res/cardsfolder/n/niveous_wisps.txt svneol=native#text/plain
 res/cardsfolder/n/no_dachi.txt svneol=native#text/plain
 res/cardsfolder/n/no_mercy.txt svneol=native#text/plain
+res/cardsfolder/n/no_rest_for_the_wicked.txt -text
 res/cardsfolder/n/nobilis_of_war.txt svneol=native#text/plain
 res/cardsfolder/n/noble_benefactor.txt svneol=native#text/plain
 res/cardsfolder/n/noble_hierarch.txt svneol=native#text/plain
@@ -8071,6 +8073,7 @@ res/cardsfolder/t/twiddle.txt svneol=native#text/plain
 res/cardsfolder/t/twigwalker.txt svneol=native#text/plain
 res/cardsfolder/t/twilight_drover.txt svneol=native#text/plain
 res/cardsfolder/t/twilight_mire.txt svneol=native#text/plain
+res/cardsfolder/t/twilight_shepherd.txt -text
 res/cardsfolder/t/twinblade_slasher.txt svneol=native#text/plain
 res/cardsfolder/t/twincast.txt svneol=native#text/plain
 res/cardsfolder/t/twisted_abomination.txt svneol=native#text/plain
