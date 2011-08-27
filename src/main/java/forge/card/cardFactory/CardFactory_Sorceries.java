@@ -2123,7 +2123,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void selectPlayer(Player player) {
                     if (!player.canTarget(spell)) {
-                        AllZone.getDisplay().showMessage("Cannot target this card.");
+                        AllZone.getDisplay().showMessage("Cannot target this player.");
                         return; //cannot target
                     }
                     if (targetPlayers.contains(player)) {
@@ -2134,8 +2134,6 @@ public class CardFactory_Sorceries {
                     showMessage();
                 }
             };//Input
-
-            
             
             card.addSpellAbility(spell);
             spell.setBeforePayMana(input);
