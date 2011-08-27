@@ -6894,6 +6894,7 @@ res/cardsfolder/s/skyshaper.txt svneol=native#text/plain
 res/cardsfolder/s/skyshooter.txt svneol=native#text/plain
 res/cardsfolder/s/skyshroud_archer.txt svneol=native#text/plain
 res/cardsfolder/s/skyshroud_behemoth.txt svneol=native#text/plain
+res/cardsfolder/s/skyshroud_blessing.txt -text
 res/cardsfolder/s/skyshroud_claim.txt svneol=native#text/plain
 res/cardsfolder/s/skyshroud_elf.txt svneol=native#text/plain
 res/cardsfolder/s/skyshroud_elite.txt svneol=native#text/plain
