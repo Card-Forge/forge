@@ -56,7 +56,6 @@ public class QuestPetHound extends QuestPetAbstract {
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(1);
             petCard.addIntrinsicKeyword("Haste");
-            //petCard.addIntrinsicKeyword("Whenever this creature attacks alone, it gets +2/+0 until end of turn.");
 
             final Trigger myTrigger = TriggerHandler.parseTrigger("Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn.", petCard,true);
             AbilityFactory af = new AbilityFactory();
