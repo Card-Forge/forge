@@ -29,7 +29,7 @@ public class Trigger_Blocks extends Trigger {
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
         if (mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Blocker"), mapParams.get("ValidCard").split(","), hostCard)) {
+            if (!matchesValid(runParams2.get("Blocker"), mapParams.get("ValidCard").split(","), hostCard)) {
                 return false;
             }
         }
