@@ -1,7 +1,9 @@
 package forge.card.cardFactory;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import net.slightlymagic.braids.util.NotImplementedError;
@@ -20,7 +22,8 @@ import forge.Player;
 public class LazyCardFactory extends AbstractCardFactory {
 
     private final CardReader cardReader;
-
+    private final List<String> cardsFailedToLoad = new ArrayList<String>();
+    
     /**
      * Construct an instance, pointing it to a specific cardsfolder.
      *
@@ -65,18 +68,28 @@ public class LazyCardFactory extends AbstractCardFactory {
     protected Card getCard2(final String cardName, final Player owner) {
         final Map<String, Card> cardNamesToCards = getMap();
         Card result = null;
-        boolean cardExists = false;
+        boolean wasLoaded = cardNamesToCards.containsKey(cardName);
 
-        if (!cardNamesToCards.containsKey(cardName)) {
+        if (!wasLoaded) {
+
+            if (cardsFailedToLoad.contains(cardName)) {
+                return null; // no more System.err, exceptions of other drama - just return null.
+            }
+
             final String canonicalASCIIName = CardUtil.canonicalizeCardName(cardName);
-            getCardReader().findCard(canonicalASCIIName);
-
-            if (cardNamesToCards.containsKey(cardName)) {
-                cardExists = true;
+            Card cardRequested = getCardReader().findCard(canonicalASCIIName);
+            if (null != cardRequested) {
+                cardNamesToCards.put(cardName, cardRequested);
+                wasLoaded = true;
+            } else {
+                cardsFailedToLoad.add(cardName);
+                System.err.println(String.format("LazyCF: Tried to read from disk card '%s' but not found it!", cardName));
+                return null;
             }
         }
 
-        if (cardExists) {
+        // Factory should return us a copy, ready for changes.
+        if (wasLoaded) {
             result = super.getCard2(cardName, owner);
         }
 

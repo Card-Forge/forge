@@ -47,7 +47,7 @@ public final class CardDb {
        this(new MtgDataParser()); // I wish cardname.txt parser was be here.
     }
 
-    private CardDb(final Iterator<CardRules> parser) { 
+    private CardDb(final Iterator<CardRules> parser) {
         while (parser.hasNext()) {
             addNewCard(parser.next());
         }
@@ -57,33 +57,31 @@ public final class CardDb {
         if (null == card) { return; }
         //System.out.println(card.getName());
         String cardName = card.getName();
-        
+
         // 1. register among oracle uniques
         cards.put(cardName, card);
-                
-        // 2. fill refs into two lists: one with 
+
+        // 2. Save refs into two lists: one flat and other keyed with sets & name
         CardPrinted lastAdded = null;
         for (Entry<String, CardInSet> s : card.getSetsPrinted()) {
             String set = s.getKey();
-            
-            // get this set storage, if not found, create it! 
+
+            // get this set storage, if not found, create it!
             Map<String, CardPrinted[]> setMap = allCardsBySet.get(set);
             if (null == setMap) {
                 setMap = new Hashtable<String, CardPrinted[]>();
                 allCardsBySet.put(set, setMap);
             }
-            
+
             int count = s.getValue().getCopiesCount();
-            CardPrinted[] cards = new CardPrinted[count];
-            setMap.put(cardName, cards);            
+            CardPrinted[] cardCopies = new CardPrinted[count];
+            setMap.put(cardName, cardCopies);
             for (int i = 0; i < count; i++) {
-                lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i+1);
+                lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
                 allCardsFlat.add(lastAdded);
-                cards[i] = lastAdded;
+                cardCopies[i] = lastAdded;
             }
-            
         }
-        
         uniqueCards.put(cardName, lastAdded);
     }
 
@@ -113,8 +111,8 @@ public final class CardDb {
             throw new NoSuchElementException(err);
         }
         // 3. Get the proper copy
-        if (artIndex > 0 && artIndex <= cards.length) { return cards[artIndex-1]; }
-        String err = String.format("Asked for '%s' from '%s' #%d: db didn't find that copy. Note: artIndex is 1-based", name, set, artIndex);
+        if (artIndex > 0 && artIndex <= cards.length) { return cards[artIndex]; }
+        String err = String.format("Asked for '%s' from '%s' #%d: db didn't find that copy.", name, set, artIndex);
         throw new NoSuchElementException(err);
     }
 

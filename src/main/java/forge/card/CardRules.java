@@ -1,6 +1,9 @@
 package forge.card;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -31,7 +34,7 @@ public final class CardRules {
 
     private String loyalty = null;
 
-    private HashMap<String, CardInSet> setsPrinted = null;
+    private Map<String, CardInSet> setsPrinted = null;
 
     // Ctor and builders are needed here
     public String getName() { return name; }
@@ -54,7 +57,7 @@ public final class CardRules {
     }
 
     public CardRules(final String cardName, final CardType cardType, final String manacost,
-            final String ptLine, final String[] cardRules, final String[] setsData)
+            final String ptLine, final String[] cardRules, final Map<String, CardInSet> setsData)
     {
         this.name = cardName;
         this.type = cardType;
@@ -73,12 +76,7 @@ public final class CardRules {
         } else if (cardType.isPlaneswalker()) {
             this.loyalty = ptLine;
         }
-
-        this.setsPrinted = new HashMap<String, CardInSet>();
-        for (int iSet = 0; iSet < setsData.length; iSet++) {
-            String setCode = setsData[iSet].substring(0, setsData[iSet].indexOf(' '));
-            setsPrinted.put(setCode, CardInSet.parse(setsData[iSet]));
-        }
+        setsPrinted = setsData;
     }
 
     public boolean rulesContain(final String text) {
@@ -334,8 +332,20 @@ public final class CardRules {
             public static final Predicate<CardRules> isBlack = isColor(CardColor.BLACK);
             public static final Predicate<CardRules> isRed = isColor(CardColor.RED);
             public static final Predicate<CardRules> isGreen = isColor(CardColor.GREEN);
+
+            
             public static final Predicate<CardRules> isColorless = hasCntColors((byte) 0);
             public static final Predicate<CardRules> isMulticolor = hasAtLeastCntColors((byte) 2);
+            
+            public static final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
+            static {
+              colors.add(isWhite);
+              colors.add(isBlue);
+              colors.add(isBlack);
+              colors.add(isRed);
+              colors.add(isGreen);
+              colors.add(isColorless);
+            }
 
             // Think twice before using these, since rarity is a prop of printed card.
             public static final Predicate<CardRules> isInLatestSetCommon = rarityInCardsLatestSet(true, CardRarity.Common);

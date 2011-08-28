@@ -83,6 +83,9 @@ public final class CardType implements Comparable<CardType> {
     public boolean isSorcery() { return coreType.contains(CardCoreType.Sorcery); }
     public boolean isEnchantment() { return coreType.contains(CardCoreType.Enchantment); }
 
+    public boolean isBasic() { return superType.contains(CardSuperType.Basic); }
+    public boolean isLegendary() { return superType.contains(CardSuperType.Legendary); }
+
     public String getTypesBeforeDash() {
         ArrayList<String> types = new ArrayList<String>();
         for (CardSuperType st : superType) { types.add(st.name()); }
@@ -109,5 +112,6 @@ public final class CardType implements Comparable<CardType> {
     public int compareTo(final CardType o) {
         return toString().compareTo(o.toString());
     }
+    
 }
 
