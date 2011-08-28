@@ -11,4 +11,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140212.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/102.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/102.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/121.jpg
+Oracle:[+1] Target player discards a card.\n[-2] Search your library for a card, then shuffle your library and put that card on top of it.\n[-8] Put all creature cards from all graveyards onto the battlefield under your control.
 End

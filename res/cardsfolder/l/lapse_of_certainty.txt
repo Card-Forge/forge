@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ 2 W | TargetType$ Spell | TgtPrompt$ Select target spell |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lapse_of_certainty.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/9.jpg
+Oracle:Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
 End

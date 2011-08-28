@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knotvine_mystic.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/114.jpg
+Oracle:{1}, {T}: Add {R}{G}{W} to your mana pool.
 End

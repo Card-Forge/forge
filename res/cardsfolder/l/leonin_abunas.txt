@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Hexproof | Descrip
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_abunas.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/8.jpg
+Oracle:Artifacts you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 End

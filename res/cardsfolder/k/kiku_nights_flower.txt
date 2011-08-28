@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiku_nights_flower.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/121.jpg
+Oracle:{2}{B}{B}, {T}: Target creature deals damage to itself equal to its power.
 End

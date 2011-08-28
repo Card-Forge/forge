@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_advocate.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/132.jpg
+Oracle:As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.
 End

@@ -7,4 +7,5 @@ A:AB$ LoseLife | Cost$ B T | IsPresent$ Permanent.Black+YouCtrl | PresentCompare
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leechridden_swamp.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/273.jpg
+Oracle:({T}: Add {B} to your mana pool.)\nLeechridden Swamp enters the battlefield tapped.\n{B}, {T}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
 End

@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 4 W | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ CARDNAME ge
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lionheart_maverick.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/11.jpg
+Oracle:Vigilance\n{4}{W}: Lionheart Maverick gets +1/+2 until end of turn.
 End

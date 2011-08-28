@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ W | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilanc
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_cavalry.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/195.jpg
+Oracle:{W}: Llanowar Cavalry gains vigilance until end of turn.
 End

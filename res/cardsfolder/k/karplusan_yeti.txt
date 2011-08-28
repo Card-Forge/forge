@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_yeti.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/198.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/197.jpg
+Oracle:{T}: Karplusan Yeti deals damage equal to its power to target creature. That creature deals damage equal to its power to Karplusan Yeti.
 End

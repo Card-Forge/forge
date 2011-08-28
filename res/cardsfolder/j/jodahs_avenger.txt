@@ -11,4 +11,5 @@ A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | KW$ Shadow | SpellDescription$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jodahs_avenger.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/42.jpg
+Oracle:{0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow. (A creature with shadow can block or be blocked by only creatures with shadow.)
 End

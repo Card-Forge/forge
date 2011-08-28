@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightbringer.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/11.jpg
+Oracle:{T}, Sacrifice Lightbringer: Exile target black creature.
 End

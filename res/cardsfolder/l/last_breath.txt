@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_breath.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/27.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/11.jpg
+Oracle:Exile target creature with power 2 or less. Its controller gains 4 life.
 End

@@ -10,4 +10,5 @@ SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_grunt.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/87.jpg
+Oracle:Whenever Laccolith Grunt becomes blocked, you may have it deal damage equal to its power to target creature. If you do, Laccolith Grunt assigns no combat damage this turn.
 End

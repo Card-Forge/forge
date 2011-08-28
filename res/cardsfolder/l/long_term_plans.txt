@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/long_term_plans.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/38.jpg
+Oracle:Search your library for a card, shuffle your library, then put that card third from the top.
 End

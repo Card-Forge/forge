@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_tusker.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/272.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/164.jpg
+Oracle:Cycling {2}{G} ({2}{G}, Discard this card: Draw a card.)\nWhen you cycle Krosan Tusker, you may search your library for a basic land card, reveal that card, put it into your hand, then shuffle your library.
 End

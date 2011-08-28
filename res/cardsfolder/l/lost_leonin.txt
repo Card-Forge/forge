@@ -7,4 +7,5 @@ K:Infect
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_leonin.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/13.jpg
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 End

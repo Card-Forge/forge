@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jwar_isle_refuge.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/215.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/279.jpg
+Oracle:Jwar Isle Refuge enters the battlefield tapped.\nWhen Jwar Isle Refuge enters the battlefield, you gain 1 life.\n{T}: Add {U} or {B} to your mana pool.
 End

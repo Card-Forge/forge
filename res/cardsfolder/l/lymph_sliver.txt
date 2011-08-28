@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Absorb 1 | Descript
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lymph_sliver.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/26.jpg
+Oracle:All Sliver creatures have absorb 1. (If a source would deal damage to a Sliver, prevent 1 of that damage.)
 End

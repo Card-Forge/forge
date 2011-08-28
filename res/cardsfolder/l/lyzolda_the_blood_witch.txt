@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lyzolda_the_blood_witch.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/117.jpg
+Oracle:{2}, Sacrifice a creature: Lyzolda, the Blood Witch deals 2 damage to target creature or player if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
 End

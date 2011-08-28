@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaborn_muse.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/105.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/216.jpg
+Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Lavaborn Muse deals 3 damage to him or her.
 End

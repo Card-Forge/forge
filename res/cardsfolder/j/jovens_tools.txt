@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jovens_tools.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/133.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/386.jpg
+Oracle:{4}, {T}: Target creature can't be blocked this turn except by Walls.
 End

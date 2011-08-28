@@ -12,4 +12,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/justice.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/317.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/256.jpg
+Oracle:At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.\nWhenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
 End

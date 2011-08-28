@@ -9,4 +9,5 @@ SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_hunt.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/219.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, Kami of the Hunt gets +1/+1 until end of turn.
 End

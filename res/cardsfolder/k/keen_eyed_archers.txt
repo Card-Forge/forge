@@ -7,4 +7,5 @@ K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/keen_eyed_archers.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/181.jpg
+Oracle:Reach (This creature can block creatures with flying.)
 End

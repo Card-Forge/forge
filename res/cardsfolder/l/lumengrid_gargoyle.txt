@@ -7,4 +7,5 @@ K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lumengrid_gargoyle.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/112.jpg
+Oracle:Flying
 End

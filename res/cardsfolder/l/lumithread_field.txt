@@ -8,4 +8,5 @@ SVar:X:Count$Valid Card.Self+nonCreature+faceUp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lumithread_field.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/25.jpg
+Oracle:Creatures you control get +0/+1.\nMorph {1}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

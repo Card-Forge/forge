@@ -10,4 +10,5 @@ SVar:X:Count$Valid Land.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_white_orchid.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/16.jpg
+Oracle:First strike\nWhen Knight of the White Orchid enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle your library.
 End

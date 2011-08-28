@@ -10,4 +10,5 @@ SVar:BuffedBy:Elf
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lys_alana_bowmaster.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/130.jpg
+Oracle:Reach (This can block creatures with flying.)\nWhenever you cast an Elf spell, you may have Lys Alana Bowmaster deal 2 damage to target creature with flying.
 End

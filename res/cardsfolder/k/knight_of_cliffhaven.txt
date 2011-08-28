@@ -12,4 +12,5 @@ SVar:Y:Count$Valid Card.Self+countersGE4LEVEL
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_cliffhaven.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/29.jpg
+Oracle:Level up {3} ({3}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-3\n2/3\nFlying\nLEVEL 4+\n4/4\nFlying, vigilance
 End

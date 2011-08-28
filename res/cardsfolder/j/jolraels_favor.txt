@@ -10,4 +10,5 @@ A:AB$ Regenerate | Cost$ 1 G | Defined$ Enchanted | SpellDescription$ Regenerate
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolraels_favor.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/116.jpg
+Oracle:Flash\nEnchant creature\n{1}{G}: Regenerate enchanted creature.
 End

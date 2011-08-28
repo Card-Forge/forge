@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lethargy_trap.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/51.jpg
+Oracle:If three or more creatures are attacking, you may pay {U} rather than pay Lethargy Trap's mana cost.\nAttacking creatures get -3/-0 until end of turn.
 End

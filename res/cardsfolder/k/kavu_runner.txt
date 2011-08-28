@@ -10,4 +10,5 @@ SVar:AntiBuffedBy:Creature.White,Creature.Blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_runner.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/150.jpg
+Oracle:Kavu Runner has haste as long as no opponent controls a white or blue creature.
 End

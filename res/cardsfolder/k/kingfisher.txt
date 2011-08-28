@@ -10,4 +10,5 @@ SVar:SacMe:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kingfisher.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/36.jpg
+Oracle:Flying\nWhen Kingfisher dies, draw a card.
 End

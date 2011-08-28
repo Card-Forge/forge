@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_kiss.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/116.jpg
+Oracle:Last Kiss deals 2 damage to target creature and you gain 2 life.
 End

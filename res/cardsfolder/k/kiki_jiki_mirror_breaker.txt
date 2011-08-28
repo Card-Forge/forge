@@ -8,4 +8,5 @@ A:AB$CopyPermanent | Cost$ T | ValidTgts$ Creature.nonLegendary+YouCtrl | TgtPro
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50321.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/175.jpg
+Oracle:Haste\n{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.
 End

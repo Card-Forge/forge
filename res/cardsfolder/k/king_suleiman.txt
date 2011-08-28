@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/61.jpg
+Oracle:{T}: Destroy target Djinn or Efreet.
 End

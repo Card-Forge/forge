@@ -10,4 +10,5 @@ SVar:TrigBlocked:AB$Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ HIDDEN CARD
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_cohort.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/33.jpg
+Oracle:Whenever Lim-Dul's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
 End

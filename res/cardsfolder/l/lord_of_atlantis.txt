@@ -17,4 +17,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/79.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/64.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/100.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/63.jpg
+Oracle:Other Merfolk creatures get +1/+1 and have islandwalk.
 End

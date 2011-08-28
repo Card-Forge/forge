@@ -11,4 +11,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jagged_poppet.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/115.jpg
+Oracle:Whenever Jagged Poppet is dealt damage, discard that many cards.\nHellbent - Whenever Jagged Poppet deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
 End

@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Triggered | KW$ HIDDEN This card does
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/labyrinth_minotaur.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/97|2
+Oracle:Whenever Labyrinth Minotaur blocks a creature, that creature doesn't untap during its controller's next untap step.
 End

@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell w
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liquify.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/41.jpg
+Oracle:Counter target spell with converted mana cost 3 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 End

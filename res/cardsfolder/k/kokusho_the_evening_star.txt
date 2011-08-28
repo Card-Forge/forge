@@ -10,4 +10,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 5
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50445.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/122.jpg
+Oracle:Flying\nWhen Kokusho, the Evening Star dies, each opponent loses 5 life. You gain life equal to the life lost this way.
 End

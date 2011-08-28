@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenOwner$ You | TokenAmount$ 1 | TokenName
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazuul_tyrant_of_the_cliffs.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/84.jpg
+Oracle:Whenever a creature an opponent controls attacks, if you're the defending player, put a 3/3 red Ogre creature token onto the battlefield unless that creature's controller pays {3}.
 End

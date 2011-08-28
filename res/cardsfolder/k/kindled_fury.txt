@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kindled_fury.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/92.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/144.jpg
+Oracle:Target creature gets +1/+0 and gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
 End

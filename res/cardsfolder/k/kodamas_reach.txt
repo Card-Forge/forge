@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50299.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/225.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/163.jpg
+Oracle:Search your library for two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
 End

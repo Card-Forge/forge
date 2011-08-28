@@ -8,4 +8,5 @@ K:Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kulrath_knight.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/190.jpg
+Oracle:Flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nCreatures your opponents control with counters on them can't attack or block.
 End

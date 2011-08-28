@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lignify.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/228.jpg
+Oracle:Enchant creature\nEnchanted creature is a 0/4 Treefolk with no abilities.
 End

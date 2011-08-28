@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_lair.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/193.jpg
+Oracle:Whenever a creature with power 4 or greater enters the battlefield, its controller draws a card.
 End

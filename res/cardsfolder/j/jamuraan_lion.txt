@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jamuraan_lion.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/110.jpg
+Oracle:{W}, {T}: Target creature can't block this turn.
 End

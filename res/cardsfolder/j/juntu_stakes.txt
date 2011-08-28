@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juntu_stakes.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/304.jpg
+Oracle:Creatures with power 1 or less don't untap during their controllers' untap steps.
 End

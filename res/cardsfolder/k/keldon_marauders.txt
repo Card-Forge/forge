@@ -10,4 +10,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_marauders.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/102.jpg
+Oracle:Vanishing 2 (This permanent enters the battlefield with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Keldon Marauders enters the battlefield or leaves the battlefield, it deals 1 damage to target player.
 End

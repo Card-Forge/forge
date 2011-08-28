@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_diviner.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/26.jpg
+Oracle:{T}: Tap target Spirit.
 End

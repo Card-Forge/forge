@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liquimetal_coating.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/171.jpg
+Oracle:{T}: Target permanent becomes an artifact in addition to its other types until end of turn.
 End

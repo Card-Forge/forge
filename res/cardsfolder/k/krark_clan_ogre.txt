@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_ogre.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/71.jpg
+Oracle:{R}, Sacrifice an artifact: Target creature can't block this turn.
 End

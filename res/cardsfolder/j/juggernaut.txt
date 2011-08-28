@@ -14,4 +14,5 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/328.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/209.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/259.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/256.jpg
+Oracle:Juggernaut attacks each turn if able.\nJuggernaut can't be blocked by Walls.
 End

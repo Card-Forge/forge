@@ -10,4 +10,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/130.jpg
+Oracle:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
 End

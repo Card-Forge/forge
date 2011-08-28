@@ -12,4 +12,5 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/149.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/146.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/161.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/162.jpg
+Oracle:Lightning Bolt deals 3 damage to target creature or player.
 End

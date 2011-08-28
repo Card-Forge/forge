@@ -7,4 +7,5 @@ K:CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_word.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/23.jpg
+Oracle:Last Word can't be countered by spells or abilities.\nCounter target spell.
 End

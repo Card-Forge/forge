@@ -4,8 +4,9 @@ Types:Legendary Creature Angel
 Text:no text
 PT:3/3
 K:Flying
-A:AB$ PutCounter | Cost$ 1 W | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.  
+A:AB$ PutCounter | Cost$ 1 W | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jenara_asura_of_war.jpg
 SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/128.jpg
+Oracle:Flying\n{1}{W}: Put a +1/+1 counter on Jenara, Asura of War.
 End

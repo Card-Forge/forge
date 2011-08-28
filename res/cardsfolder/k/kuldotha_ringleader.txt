@@ -9,4 +9,5 @@ SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_ringleader.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/70.jpg
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nKuldotha Ringleader attacks each turn if able.
 End

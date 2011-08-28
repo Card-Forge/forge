@@ -7,4 +7,5 @@ SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lose_hope.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/52.jpg
+Oracle:Target creature gets -1/-1 until end of turn.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 End

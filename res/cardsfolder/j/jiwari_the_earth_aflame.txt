@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jiwari_the_earth_aflame.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/107.jpg
+Oracle:{X}{R}, {T}: Jiwari, the Earth Aflame deals X damage to target creature without flying.\nChannel - {X}{R}{R}{R}, Discard Jiwari: Jiwari deals X damage to each creature without flying.
 End

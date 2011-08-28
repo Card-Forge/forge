@@ -7,4 +7,5 @@ A:AB$ Regenerate | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select ta
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhoiras_toolbox.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/128.jpg
+Oracle:{2}: Regenerate target artifact creature.
 End

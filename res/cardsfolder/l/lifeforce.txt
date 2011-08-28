@@ -12,4 +12,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/172.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/141.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/114.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/115.jpg
+Oracle:{G}{G}: Counter target black spell.
 End

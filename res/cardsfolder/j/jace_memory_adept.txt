@@ -10,4 +10,5 @@ A:AB$ Draw | Cost$ SubCounter<7/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_memory_adept.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/58.jpg
+Oracle:[+1] Draw a card. Target player puts the top card of his or her library into his or her graveyard.\n[0] Target player puts the top ten cards of his or her library into his or her graveyard.\n[-7] Any number of target players each draw twenty cards.
 End

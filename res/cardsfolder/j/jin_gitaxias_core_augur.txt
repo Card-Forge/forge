@@ -10,4 +10,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 7
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jin_gitaxias_core_augur.jpg
 SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/37.jpg
+Oracle:Flash\nAt the beginning of your end step, draw seven cards.\nEach opponent's maximum hand size is reduced by seven.
 End

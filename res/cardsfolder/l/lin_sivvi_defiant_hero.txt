@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lin_sivvi_defiant_hero.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/12.jpg
+Oracle:{X}, {T}: Search your library for a Rebel permanent card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.\n{3}: Put target Rebel card from your graveyard on the bottom of your library.
 End

@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 7 | AddToughness$ 7 | Thres
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_beast.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/248.jpg
+Oracle:Threshold - Krosan Beast gets +7/+7 as long as seven or more cards are in your graveyard.
 End

@@ -14,4 +14,5 @@ SVar:Y:Count$Valid Card.Self+countersGE6LEVEL
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_tuskcaller.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/191.jpg
+Oracle:Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-5\n1/1\n{T}: Put a 3/3 green Elephant creature token onto the battlefield.\nLEVEL 6+\n1/1\n{T}: Put two 3/3 green Elephant creature tokens onto the battlefield.
 End

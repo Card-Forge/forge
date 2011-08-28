@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karns_touch.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/86.jpg
+Oracle:Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn. (It retains its abilities.)
 End

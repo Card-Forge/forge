@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 3 G | NumAtt$ +3 | NumDef$ +3 | ActivationLimit$ 1 | SpellDes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_skyward_eye.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/15.jpg
+Oracle:{3}{G}: Knight of the Skyward Eye gets +3/+3 until end of turn. Activate this ability only once each turn.
 End

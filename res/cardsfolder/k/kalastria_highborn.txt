@@ -10,4 +10,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalastria_highborn.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/59.jpg
+Oracle:Whenever Kalastria Highborn or another Vampire you control dies, you may pay {B}. If you do, target player loses 2 life and you gain 2 life.
 End

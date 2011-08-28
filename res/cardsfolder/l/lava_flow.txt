@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Creature,Land | TgtPrompt$ Select targe
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/lava_flow.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/143.jpg
+Oracle:Destroy target creature or land.
 End

@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_hookmaster.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/20.jpg
+Oracle:When Kor Hookmaster enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
 End

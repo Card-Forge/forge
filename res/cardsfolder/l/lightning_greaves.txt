@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_greaves.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/199.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/253.jpg
+Oracle:Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}
 End

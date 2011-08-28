@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_gem.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/205.jpg
+Oracle:When Khalni Gem enters the battlefield, return two lands you control to their owner's hand.\n{T}: Add two mana of any one color to your mana pool.
 End

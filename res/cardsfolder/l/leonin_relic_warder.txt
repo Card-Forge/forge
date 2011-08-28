@@ -11,4 +11,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_relic_warder.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/10.jpg
+Oracle:When Leonin Relic-Warder enters the battlefield, you may exile target artifact or enchantment.\nWhen Leonin Relic-Warder leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 End

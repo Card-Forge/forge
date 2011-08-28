@@ -9,4 +9,5 @@ SVar:TrigPutCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.countersG
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lockjaw_snapper.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/255.jpg
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhen Lockjaw Snapper dies, put a -1/-1 counter on each creature with a -1/-1 counter on it.
 End

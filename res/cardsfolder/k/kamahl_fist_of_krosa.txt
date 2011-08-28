@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahl_fist_of_krosa.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/268.jpg
+Oracle:{G}: Target land becomes a 1/1 creature until end of turn. It's still a land.\n{2}{G}{G}{G}: Creatures you control get +3/+3 and gain trample until end of turn.
 End

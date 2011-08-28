@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_idol.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/256.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, Jade Idol becomes a 4/4 Spirit artifact creature until end of turn.
 End

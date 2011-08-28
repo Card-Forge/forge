@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121214.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/112.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/272.jpg
+Oracle:Karplusan Strider can't be the target of blue or black spells.
 End

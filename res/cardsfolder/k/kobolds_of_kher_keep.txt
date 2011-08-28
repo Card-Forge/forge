@@ -7,4 +7,5 @@ K:CARDNAME is red.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobolds_of_kher_keep.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/226.jpg
+Oracle:Kobolds of Kher Keep is red.
 End

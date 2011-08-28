@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_astray.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/14.jpg
+Oracle:Tap up to two target creatures.
 End

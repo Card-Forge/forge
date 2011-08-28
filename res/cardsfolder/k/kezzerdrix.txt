@@ -9,4 +9,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kezzerdrix.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/33.jpg
+Oracle:First strike\nAt the beginning of your upkeep, if your opponents control no creatures, Kezzerdrix deals 4 damage to you.
 End

@@ -7,4 +7,5 @@ A:AB$ Draw | Cost$ T | NumCards$ 1 | ActivationCardsInHand$ 7 | SpellDescription
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card990.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/90.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Draw a card. Activate this ability only if you have exactly seven cards in hand.
 End

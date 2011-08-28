@@ -6,4 +6,5 @@ PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_titan.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/194.jpg
+Oracle:Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)\nIf Kavu Titan was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.
 End

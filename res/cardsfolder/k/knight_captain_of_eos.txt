@@ -9,4 +9,5 @@ A:AB$ Fog | Cost$ W Sac<1/Soldier> | SpellDescription$ Prevent all combat damage
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_captain_of_eos.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/17.jpg
+Oracle:When Knight-Captain of Eos enters the battlefield, put two 1/1 white Soldier creature tokens onto the battlefield.\n{W}, Sacrifice a Soldier: Prevent all combat damage that would be dealt this turn.
 End

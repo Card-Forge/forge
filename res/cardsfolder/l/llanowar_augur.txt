@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Sac<1/CARDNAME> | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | Val
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_augur.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/129.jpg
+Oracle:Sacrifice Llanowar Augur: Target creature gets +3/+3 and gains trample until end of turn. Activate this ability only during your upkeep.
 End

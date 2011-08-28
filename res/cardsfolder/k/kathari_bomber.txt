@@ -11,4 +11,5 @@ SVar:DBSac:DB$Sacrifice | Cost$ 0 | SacValid$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kathari_bomber.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/41.jpg
+Oracle:Flying\nWhen Kathari Bomber deals combat damage to a player, put two 1/1 red Goblin creature tokens onto the battlefield and sacrifice Kathari Bomber.\nUnearth {3}{B}{R} ({3}{B}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
 End

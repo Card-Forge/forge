@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_recluse.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/64.jpg
+Oracle:{T}: Target land becomes a Forest until end of turn.
 End

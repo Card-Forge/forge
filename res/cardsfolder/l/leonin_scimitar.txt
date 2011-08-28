@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_scimitar.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/193.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/331.jpg
+Oracle:Equipped creature gets +1/+1.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
 End

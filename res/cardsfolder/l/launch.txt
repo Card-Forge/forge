@@ -11,4 +11,5 @@ SVar:SacMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/launch.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/82.jpg
+Oracle:Enchant creature\nEnchanted creature has flying.\nWhen Launch is put into a graveyard from the battlefield, return Launch to its owner's hand.
 End

@@ -7,4 +7,5 @@ SVar:X:Targeted$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_armor.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/101.jpg
+Oracle:{T}, Sacrifice Living Armor: Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
 End

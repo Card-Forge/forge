@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_rift.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/217.jpg
+Oracle:Whenever a player cycles a card, you may pay {1}. If you do, Lightning Rift deals 2 damage to target creature or player.
 End

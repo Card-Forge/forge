@@ -7,4 +7,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_caress.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/103.jpg
+Oracle:Whenever an opponent discards a card, that player loses 2 life.
 End

@@ -9,4 +9,5 @@ SVar:TrigGainControl:AB$GainControl | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75286.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/72.jpg
+Oracle:Flying\nWhen Keiga, the Tide Star dies, gain control of target creature.
 End

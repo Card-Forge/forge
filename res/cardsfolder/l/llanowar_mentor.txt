@@ -8,4 +8,5 @@ SVar:ABMana:AB$Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your ma
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126166.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/131.jpg
+Oracle:{G}, {T}, Discard a card: Put a 1/1 green Elf Druid creature token named Llanowar Elves onto the battlefield. It has "{T}: Add {G} to your mana pool."
 End

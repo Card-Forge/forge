@@ -11,4 +11,5 @@ SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/258.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/260.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/262.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/259.jpg
+Oracle:Defender (This creature can't attack.)\n{1}: Regenerate Living Wall.
 End

@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_petal.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/284.jpg
+Oracle:{T}, Sacrifice Lotus Petal: Add one mana of any color to your mana pool.
 End

@@ -10,4 +10,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/37.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/142.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/29.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/25.jpg
+Oracle:Swampwalk
 End

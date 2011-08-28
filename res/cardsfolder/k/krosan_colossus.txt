@@ -7,4 +7,5 @@ K:Morph:6 G G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_colossus.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/270.jpg
+Oracle:Morph {6}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

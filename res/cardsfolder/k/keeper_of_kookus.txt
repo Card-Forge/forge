@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_kookus.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/85.jpg
+Oracle:{R}: Keeper of Kookus gains protection from red until end of turn.
 End

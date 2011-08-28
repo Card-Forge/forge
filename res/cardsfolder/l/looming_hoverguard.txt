@@ -9,4 +9,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ S
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_hoverguard.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/38.jpg
+Oracle:Flying\nWhen Looming Hoverguard enters the battlefield, put target artifact on top of its owner's library.
 End

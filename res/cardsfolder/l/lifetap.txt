@@ -13,4 +13,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/99.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/81.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/63.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/62.jpg
+Oracle:Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
 End

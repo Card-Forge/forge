@@ -10,4 +10,5 @@ SVar:DBNoRegen:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Ta
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaya_ballard_task_mage.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/166.jpg
+Oracle:{R}, {T}, Discard a card: Destroy target blue permanent.\n{1}{R}, {T}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.\n{5}{R}{R}, {T}, Discard a card: Jaya Ballard deals 6 damage to each creature and each player.
 End

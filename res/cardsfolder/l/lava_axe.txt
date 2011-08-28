@@ -16,4 +16,5 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/145.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/148.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/111.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/84.jpg
+Oracle:Lava Axe deals 5 damage to target player.
 End

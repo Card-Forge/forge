@@ -7,4 +7,5 @@ SVar:DBReveal:DB$RevealHand | Defined$ TargetedController
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_bare.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/74.jpg
+Oracle:Counter target spell. Look at its controller's hand.
 End

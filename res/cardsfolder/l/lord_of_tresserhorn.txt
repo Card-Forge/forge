@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_tresserhorn.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/193.jpg
+Oracle:When Lord of Tresserhorn enters the battlefield, you lose 2 life, you sacrifice two creatures, and target opponent draws two cards.\n{B}: Regenerate Lord of Tresserhorn.
 End

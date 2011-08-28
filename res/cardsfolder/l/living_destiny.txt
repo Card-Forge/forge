@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_destiny.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/195.jpg
+Oracle:As an additional cost to cast Living Destiny, reveal a creature card from your hand.\nYou gain life equal to the revealed card's converted mana cost.
 End

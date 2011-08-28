@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_rebirth.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/96.jpg
+Oracle:As an additional cost to cast Kuldotha Rebirth, sacrifice an artifact.\nPut three 1/1 red Goblin creature tokens onto the battlefield.
 End

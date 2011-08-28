@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ 4 | Origin$ Graveyard | Destination$ Battlefield | Acti
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_phoenix.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/95.jpg
+Oracle:Flying, haste\nMetalcraft - {4}: Return Kuldotha Phoenix from your graveyard to the battlefield. Activate this ability only during your upkeep and only if you control three or more artifacts.
 End

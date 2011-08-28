@@ -10,4 +10,5 @@ K:Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lingering_mirage.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/84.jpg
+Oracle:Enchant land\nEnchanted land is an Island.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

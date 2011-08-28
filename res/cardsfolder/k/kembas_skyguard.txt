@@ -9,4 +9,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kembas_skyguard.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/13.jpg
+Oracle:Flying\nWhen Kemba's Skyguard enters the battlefield, you gain 2 life.
 End

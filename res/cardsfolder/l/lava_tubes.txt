@@ -11,4 +11,5 @@ SVar:AddCounter:DB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DEPLETION
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_tubes.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/339.jpg
+Oracle:Lava Tubes doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from Lava Tubes.\n{T}: Add {B} or {R} to your mana pool. Put a depletion counter on Lava Tubes.
 End

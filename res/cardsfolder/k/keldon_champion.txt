@@ -10,4 +10,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_champion.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/90.jpg
+Oracle:Haste\nEcho {2}{R}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Keldon Champion enters the battlefield, it deals 3 damage to target player.
 End

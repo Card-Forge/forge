@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jagged_scar_archers.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/222.jpg
+Oracle:Jagged-Scar Archers's power and toughness are each equal to the number of Elves you control.\n{T}: Jagged-Scar Archers deals damage equal to its power to target creature with flying.
 End

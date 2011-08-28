@@ -11,4 +11,5 @@ SVar:BuffedBy:Card.White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_gyrfalcon.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/11.jpg
+Oracle:Defender, flying\nWhenever you cast a white spell, Loyal Gyrfalcon loses defender until end of turn.
 End

@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDNAME
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_crafter.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/93.jpg
+Oracle:Champion a Goblin or Shaman (When this enters the battlefield, sacrifice it unless you exile another Goblin or Shaman you control. When this leaves the battlefield, that card returns to the battlefield.)\n{T}: Lightning Crafter deals 3 damage to target creature or player.
 End

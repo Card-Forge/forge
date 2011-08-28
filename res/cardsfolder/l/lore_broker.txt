@@ -8,4 +8,5 @@ SVar:DBDiscard:DB$Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Each
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lore_broker.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/57.jpg
+Oracle:{T}: Each player draws a card, then discards a card.
 End

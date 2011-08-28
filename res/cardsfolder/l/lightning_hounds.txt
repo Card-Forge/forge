@@ -7,4 +7,5 @@ K:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_hounds.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/201.jpg
+Oracle:First strike
 End

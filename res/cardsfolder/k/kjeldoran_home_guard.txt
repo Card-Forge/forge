@@ -9,4 +9,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Deserter | TokenTypes$ Creat
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_home_guard.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/135.jpg
+Oracle:At end of combat, if Kjeldoran Home Guard attacked or blocked this combat, put a -0/-1 counter on Kjeldoran Home Guard and put a 0/1 white Deserter creature token onto the battlefield.
 End

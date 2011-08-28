@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/325.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{4}{R}, {T}, Sacrifice a creature: Keldon Necropolis deals 2 damage to target creature or player.
 End

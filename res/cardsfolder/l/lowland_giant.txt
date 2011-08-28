@@ -6,4 +6,5 @@ PT:4/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4829.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/187.jpg
+Oracle:
 End

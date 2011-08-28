@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liability.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/144.jpg
+Oracle:Whenever a nontoken permanent is put into a player's graveyard from the battlefield, that player loses 1 life.
 End

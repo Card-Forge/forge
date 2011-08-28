@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leave_no_trace.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/23.jpg
+Oracle:Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
 End

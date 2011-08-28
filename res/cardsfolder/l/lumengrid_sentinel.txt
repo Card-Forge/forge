@@ -9,4 +9,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lumengrid_sentinel.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/40.jpg
+Oracle:Flying\nWhenever an artifact enters the battlefield under your control, you may tap target permanent.
 End

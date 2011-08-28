@@ -13,4 +13,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/141.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/44.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/143.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/155.jpg
+Oracle:Other Zombie creatures get +1/+1.\n{1}{B}, {T}: Return target Zombie card from your graveyard to your hand.
 End

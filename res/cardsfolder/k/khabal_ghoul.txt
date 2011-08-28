@@ -9,4 +9,5 @@ SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khabal_ghoul.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/10.jpg
+Oracle:At the beginning of each end step, put a +1/+1 counter on Khabal Ghoul for each creature that died this turn.
 End

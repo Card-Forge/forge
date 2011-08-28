@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_oaf.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/184.jpg
+Oracle:{T}: Target Goblin creature you control gets +1/+0 and gains flying until end of turn. Sacrifice that creature at the beginning of the next end step.
 End

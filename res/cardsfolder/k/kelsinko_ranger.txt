@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kelsinko_ranger.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/257.jpg
+Oracle:{1}{W}: Target green creature gains first strike until end of turn.
 End

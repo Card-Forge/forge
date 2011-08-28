@@ -21,4 +21,5 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/240.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/183.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/176.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/120.jpg
+Oracle:Enchant creature\nAll creatures able to block enchanted creature do so.
 End

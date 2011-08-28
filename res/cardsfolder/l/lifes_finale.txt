@@ -7,4 +7,5 @@ SVar:DBSearch:DB$ChangeZone | Origin$ Library | Destination$ Graveyard | ValidTg
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifes_finale.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/65.jpg
+Oracle:Destroy all creatures, then search target opponent's library for up to three creature cards and put them into his or her graveyard. Then that player shuffles his or her library.
 End

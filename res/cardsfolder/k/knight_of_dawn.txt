@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/238.jpg
+Oracle:First strike\n{W}{W}: Knight of Dawn gains protection from the color of your choice until end of turn.
 End

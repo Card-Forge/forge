@@ -9,4 +9,5 @@ SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_tattered_shoji.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/11.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, Kami of Tattered Shoji gains flying until end of turn.
 End

@@ -12,4 +12,5 @@ SVar:BuffedBy:Ally
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_blademaster.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/16.jpg
+Oracle:First strike, vigilance\nWhenever Kazandu Blademaster or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Kazandu Blademaster.
 End

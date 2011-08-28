@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U | KW$ Flying | SpellDescription$ CARDNAME gains flying unti
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6065.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/37.jpg
+Oracle:{U}: Killer Whale gains flying until end of turn.
 End

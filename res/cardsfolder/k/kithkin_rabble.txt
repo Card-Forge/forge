@@ -10,4 +10,5 @@ SVar:BuffedBy:Permanent.White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_rabble.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/9.jpg
+Oracle:Vigilance\nKithkin Rabble's power and toughness are each equal to the number of white permanents you control.
 End

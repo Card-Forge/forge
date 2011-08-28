@@ -13,4 +13,5 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/329.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/210.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/213.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/211.jpg
+Oracle:Whenever a player casts a blue spell, you may gain 1 life.
 End

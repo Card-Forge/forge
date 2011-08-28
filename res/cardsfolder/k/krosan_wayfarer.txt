@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_wayfarer.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/123.jpg
+Oracle:Sacrifice Krosan Wayfarer: You may put a land card from your hand onto the battlefield.
 End

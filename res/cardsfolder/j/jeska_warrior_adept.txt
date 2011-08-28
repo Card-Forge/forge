@@ -9,4 +9,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeska_warrior_adept.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/93.jpg
+Oracle:First strike, haste\n{T}: Jeska, Warrior Adept deals 1 damage to target creature or player.
 End

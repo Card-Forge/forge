@@ -7,4 +7,5 @@ A:AB$ Dig | Cost$ 2 T | DigNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_informant.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/249.jpg
+Oracle:({U/B} can be paid with either {U} or {B}.)\n{2}, {T}: Look at the top card of target player's library. You may put that card into that player's graveyard.
 End

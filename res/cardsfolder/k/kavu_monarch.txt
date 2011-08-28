@@ -11,4 +11,5 @@ SVar:BuffedBy:Kavu
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_monarch.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/149.jpg
+Oracle:Kavu creatures have trample.\nWhenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
 End

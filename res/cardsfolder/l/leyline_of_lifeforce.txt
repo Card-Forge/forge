@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_lifeforce.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/90.jpg
+Oracle:If Leyline of Lifeforce is in your opening hand, you may begin the game with it on the battlefield.\nCreature spells can't be countered.
 End

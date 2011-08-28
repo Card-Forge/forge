@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ U R | Tgt$ TgtC | NumAtt$ 1 | KW$ Flying & First Strike | Spe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leap_of_flame.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/121.jpg
+Oracle:Replicate {U}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTarget creature gets +1/+0 and gains flying and first strike until end of turn.
 End

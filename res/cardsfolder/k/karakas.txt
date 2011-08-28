@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select t
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karakas.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/248.jpg
+Oracle:{T}: Add {W} to your mana pool.\n{T}: Return target legendary creature to its owner's hand.
 End

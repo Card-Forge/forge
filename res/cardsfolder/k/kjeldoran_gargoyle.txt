@@ -11,4 +11,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_gargoyle.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/10.jpg
+Oracle:Flying, first strike\nWhenever Kjeldoran Gargoyle deals damage, you gain that much life.
 End

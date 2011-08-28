@@ -9,4 +9,5 @@ SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target art
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_vandals.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/91.jpg
+Oracle:Echo {2}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Keldon Vandals enters the battlefield, destroy target artifact.
 End

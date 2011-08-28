@@ -8,4 +8,5 @@ SVar:TrigLand:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loam_dweller.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/134.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, you may put a land card from your hand onto the battlefield tapped.
 End

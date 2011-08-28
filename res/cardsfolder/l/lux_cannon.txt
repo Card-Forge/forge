@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ T SubCounter<3/CHARGE> | ValidTgts$ Permanent | TgtPrompt$
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lux_cannon.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/173.jpg
+Oracle:{T}: Put a charge counter on Lux Cannon.\n{T}, Remove three charge counters from Lux Cannon: Destroy target permanent.
 End

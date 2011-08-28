@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ Sac<1/Permanent.token+namedWood> | CostDesc$ Sacrifice a toke
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_patrol.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/121.jpg
+Oracle:{1}{G}, {T}:  Put a 0/1 green Wall creature token with defender named Wood onto the battlefield.\nSacrifice a token named Wood: Add {R} to your mana pool.
 End

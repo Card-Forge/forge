@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jandors_ring.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/78.jpg
+Oracle:{2}, {T}, Discard the last card you drew this turn: Draw a card.
 End

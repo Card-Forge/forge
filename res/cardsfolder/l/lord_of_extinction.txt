@@ -8,4 +8,5 @@ SVar:X:Count$InAllYards
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_extinction.jpg
 SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/91.jpg
+Oracle:Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.
 End

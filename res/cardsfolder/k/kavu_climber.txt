@@ -10,4 +10,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83175.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/192.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/249.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/273.jpg
+Oracle:When Kavu Climber enters the battlefield, draw a card.
 End

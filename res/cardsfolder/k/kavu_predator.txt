@@ -10,4 +10,5 @@ SVar:X:TriggerCount$LifeAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_predator.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/132.jpg
+Oracle:Trample\nWhenever an opponent gains life, put that many +1/+1 counters on Kavu Predator.
 End

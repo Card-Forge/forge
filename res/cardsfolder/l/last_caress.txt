@@ -8,4 +8,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_caress.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/41.jpg
+Oracle:Target player loses 1 life and you gain 1 life.\nDraw a card.
 End

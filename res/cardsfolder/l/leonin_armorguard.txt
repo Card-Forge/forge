@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_armorguard.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/72.jpg
+Oracle:When Leonin Armorguard enters the battlefield, creatures you control get +1/+1 until end of turn.
 End

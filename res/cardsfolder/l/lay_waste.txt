@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5817.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/201.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/216.jpg
+Oracle:Destroy target land.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

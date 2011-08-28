@@ -9,4 +9,5 @@ SVar:AltCost:Cost$ tapXType<1/Creature> | IsPresent$ Plains.YouCtrl | Descriptio
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashknife.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/9.jpg
+Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay Lashknife's mana cost.\nEnchant creature\nEnchanted creature has first strike.
 End

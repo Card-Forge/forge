@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kagemaro_first_to_suffer.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/73.jpg
+Oracle:Kagemaro, First to Suffer's power and toughness are each equal to the number of cards in your hand.\n{B}, Sacrifice Kagemaro: All creatures get -X/-X until end of turn, where X is the number of cards in your hand.
 End

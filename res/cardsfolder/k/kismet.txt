@@ -8,4 +8,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/319.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/27.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/283.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/194.jpg
+Oracle:Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
 End

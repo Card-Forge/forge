@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_dawnblade.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/16.jpg
+Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhen Kitsune Dawnblade enters the battlefield, you may tap target creature.
 End

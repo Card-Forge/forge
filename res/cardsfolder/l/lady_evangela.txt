@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_evangela.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/280.jpg
+Oracle:{W}{B}, {T}: Prevent all combat damage that would be dealt by target creature this turn.
 End

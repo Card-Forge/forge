@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashknife_barrier.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/9.jpg
+Oracle:When Lashknife Barrier enters the battlefield, draw a card.\nIf a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
 End

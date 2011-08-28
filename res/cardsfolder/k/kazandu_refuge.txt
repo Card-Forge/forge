@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_refuge.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/217.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/280.jpg
+Oracle:Kazandu Refuge enters the battlefield tapped.\nWhen Kazandu Refuge enters the battlefield, you gain 1 life.\n{T}: Add {R} or {G} to your mana pool.
 End

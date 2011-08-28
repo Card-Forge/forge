@@ -15,4 +15,5 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/327.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/294.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/258.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/255.jpg
+Oracle:{4}, {T}: Draw a card.
 End

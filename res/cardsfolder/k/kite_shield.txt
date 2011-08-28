@@ -6,4 +6,5 @@ K:eqPump 3:+0/+3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kite_shield.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/210.jpg
+Oracle:Equipped creature gets +0/+3.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
 End

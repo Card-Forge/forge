@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_elementalist.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/27.jpg
+Oracle:{2}{R}: Target creature gets +1/+0 until end of turn.\n{U}{U}: Target creature you control gains flying until end of turn. Sacrifice it at the beginning of the next end step.
 End

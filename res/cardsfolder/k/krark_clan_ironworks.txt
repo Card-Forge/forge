@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_ironworks.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/134.jpg
+Oracle:Sacrifice an artifact: Add {2} to your mana pool.
 End

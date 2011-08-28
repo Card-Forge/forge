@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_skirmisher.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/24.jpg
+Oracle:When Kinsbaile Skirmisher enters the battlefield, target creature gets +1/+1 until end of turn.
 End

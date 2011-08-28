@@ -10,4 +10,5 @@ SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/253.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/255.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/300.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/254.jpg
+Oracle:{2}: Jade Statue becomes a 3/6 Golem artifact creature until end of combat. Activate this ability only during combat.
 End

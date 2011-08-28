@@ -11,4 +11,5 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/258.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/260.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/350.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/257.jpg
+Oracle:All Swamps are 1/1 black creatures that are still lands.
 End

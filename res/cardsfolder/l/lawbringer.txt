@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lawbringer.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/10.jpg
+Oracle:{T}, Sacrifice Lawbringer: Exile target red creature.
 End

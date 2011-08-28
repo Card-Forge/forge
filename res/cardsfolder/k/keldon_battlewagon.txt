@@ -14,4 +14,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_battlewagon.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/139.jpg
+Oracle:Trample\nKeldon Battlewagon can't block.\nWhen Keldon Battlewagon attacks, sacrifice it at end of combat.\nTap an untapped creature you control: Keldon Battlewagon gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
 End

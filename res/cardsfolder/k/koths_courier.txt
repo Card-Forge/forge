@@ -7,4 +7,5 @@ K:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/koths_courier.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/68.jpg
+Oracle:Forestwalk
 End

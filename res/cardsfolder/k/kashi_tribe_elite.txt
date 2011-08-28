@@ -10,4 +10,5 @@ SVar:DBPump:DB$Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't un
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_elite.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/135.jpg
+Oracle:Legendary Snakes you control have shroud. (They can't be the targets of spells or abilities.)\nWhenever Kashi-Tribe Elite deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 End

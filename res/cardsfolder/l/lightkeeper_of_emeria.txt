@@ -12,4 +12,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/18.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/12.jpg
+Oracle:Multikicker {W} (You may pay an additional {W} any number of times as you cast this spell.)\nFlying\nWhen Lightkeeper of Emeria enters the battlefield, you gain 2 life for each time it was kicked.
 End

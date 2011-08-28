@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Red | TgtPrompt$ Select target red cr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jawbone_skulkin.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/170.jpg
+Oracle:{2}: Target red creature gains haste until end of turn.
 End

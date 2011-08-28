@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Illusion+YouCtrl | AddPower$ 1 | AddToug
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_unreal.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/62.jpg
+Oracle:Illusion creatures you control get +1/+1 and have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 End

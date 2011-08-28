@@ -8,4 +8,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_sniper.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/199.jpg
+Oracle:At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player.
 End

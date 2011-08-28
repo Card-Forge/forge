@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_nine_gales.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/42.jpg
+Oracle:Flying\n{T}, Tap two untapped Birds you control: Return target permanent to its owner's hand.
 End

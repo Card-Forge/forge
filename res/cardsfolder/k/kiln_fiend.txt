@@ -9,4 +9,5 @@ SVar:BuffedBy:Instant,Sorcery
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiln_fiend.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/153.jpg
+Oracle:Whenever you cast an instant or sorcery spell, Kiln Fiend gets +3/+0 until end of turn.
 End

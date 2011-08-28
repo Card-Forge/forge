@@ -14,4 +14,5 @@ SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.YouDontCtrl | NumD
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_shatterskull_pass.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/156.jpg
+Oracle:Level up {1}{R} ({1}{R}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-5\n6/6\nLEVEL 6+\n6/6\nWhenever Lord of Shatterskull Pass attacks, it deals 6 damage to each creature defending player controls.
 End

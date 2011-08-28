@@ -12,4 +12,5 @@ SVar:Y:Count$Valid Card.Self+countersGE7LEVEL
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lighthouse_chronologist.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/75.jpg
+Oracle:Level up {U} ({U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 4-6\n2/4\nLEVEL 7+\n3/5\nAt the beginning of each end step, if it's not your turn, take an extra turn after this one.
 End

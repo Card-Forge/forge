@@ -8,4 +8,5 @@ A:AB$ Regenerate | Cost$ 1 G | Activation$ Threshold | PrecostDesc$ Threshold - 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_avenger.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/247.jpg
+Oracle:Trample\nThreshold - {1}{G}: Regenerate Krosan Avenger. Activate this ability only if seven or more cards are in your graveyard.
 End

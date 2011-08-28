@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_spirit.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/12.jpg
+Oracle:Flying\nSacrifice two lands: Jeweled Spirit gains protection from artifacts or from the color of your choice until end of turn.
 End

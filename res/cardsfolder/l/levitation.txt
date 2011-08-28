@@ -11,4 +11,5 @@ SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/82.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/61.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/83.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/35.jpg
+Oracle:Creatures you control have flying.
 End

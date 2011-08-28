@@ -9,4 +9,5 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/200.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/185.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/193.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/200.jpg
+Oracle:Lightning Blast deals 4 damage to target creature or player.
 End

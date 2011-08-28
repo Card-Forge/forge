@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lithatog.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/289.jpg
+Oracle:Sacrifice an artifact: Lithatog gets +1/+1 until end of turn.\nSacrifice a land: Lithatog gets +1/+1 until end of turn.
 End

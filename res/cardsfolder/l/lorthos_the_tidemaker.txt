@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lorthos_the_tidemaker.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/53.jpg
+Oracle:Whenever Lorthos, the Tidemaker attacks, you may pay {8}. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps.
 End

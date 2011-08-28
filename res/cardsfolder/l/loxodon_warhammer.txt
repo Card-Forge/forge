@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_warhamme
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/201.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/303.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/332.jpg
+Oracle:Equipped creature gets +3/+0 and has trample and lifelink. (If the creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker. Damage dealt by the creature also causes its controller to gain that much life.)\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
 End

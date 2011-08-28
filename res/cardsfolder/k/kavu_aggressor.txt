@@ -9,4 +9,5 @@ K:etbCounter:P1P1:1:isValid Card.kicked:If CARDNAME was kicked, it enters the ba
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_aggressor.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/148.jpg
+Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nKavu Aggressor can't block.\nIf Kavu Aggressor was kicked, it enters the battlefield with a +1/+1 counter on it.
 End

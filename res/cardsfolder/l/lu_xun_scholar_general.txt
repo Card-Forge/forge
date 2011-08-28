@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lu_xun_scholar_general.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/48.jpg
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Lu Xun, Scholar General deals damage to an opponent, you may draw a card.
 End

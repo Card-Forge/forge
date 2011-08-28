@@ -9,4 +9,5 @@ SVar:X:TriggeredCard$CardPower
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kresh_the_bloodbraided.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/178.jpg
+Oracle:Whenever another creature dies, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.
 End

@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ R | Tgt$ TgtP | NumDmg$ 3 | SpellDescription$ CARDNAME 
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79084.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/178.jpg
+Oracle:Lava Spike deals 3 damage to target player.
 End

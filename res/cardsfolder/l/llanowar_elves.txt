@@ -19,4 +19,5 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/189.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/239.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/182.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/119.jpg
+Oracle:{T}: Add {G} to your mana pool.
 End

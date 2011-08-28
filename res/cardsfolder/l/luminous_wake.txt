@@ -10,4 +10,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4 | Defined$ You
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminous_wake.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/35.jpg
+Oracle:Enchant creature\nWhenever enchanted creature attacks or blocks, you gain 4 life.
 End

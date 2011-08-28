@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_giant.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/196.jpg
+Oracle:Tap an untapped snow land you control: Karplusan Giant gets +1/+1 until end of turn.
 End

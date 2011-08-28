@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifelink.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/18.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/24.jpg
+Oracle:
 End
