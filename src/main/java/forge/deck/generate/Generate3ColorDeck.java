@@ -117,7 +117,7 @@ public class Generate3ColorDeck {
      * @param Size a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardList get3ColorDeck(int Size) {
+    public CardList get3ColorDeck(int Size, final PlayerType pt) {
         int lc = 0; // loop counter to prevent infinite card selection loops
         String tmpDeck = "";
         CardList tDeck = new CardList();
@@ -130,7 +130,10 @@ public class Generate3ColorDeck {
         // remove cards that generated decks don't like
         CardList AllCards = CardFilter.filter(AllZone.getCardFactory(), new CardListFilter() {
             public boolean addCard(Card c) {
-                return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
+                if (c.getSVar("RemRandomDeck").equals("True")) {
+                    return false;
+            }
+            return (!c.getSVar("RemAIDeck").equals("True") || (pt != null && pt.equals(PlayerType.HUMAN)));
             }
         });
 
@@ -159,7 +162,7 @@ public class Generate3ColorDeck {
         CardList Cr2 = CL2.getType("Creature");
         CardList Cr3 = CL3.getType("Creature");
 
-        String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact"};
+        String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature"};
         CardList Sp1 = CL1.getValidCards(ISE, null, null);
         CardList Sp2 = CL2.getValidCards(ISE, null, null);
         CardList Sp3 = CL3.getValidCards(ISE, null, null);

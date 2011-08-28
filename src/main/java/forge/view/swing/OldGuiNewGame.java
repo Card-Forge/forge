@@ -977,7 +977,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
         }
         Generate2ColorDeck gen = new Generate2ColorDeck(c1, c2);
-        CardList d = gen.get2ColorDeck(60);
+        CardList d = gen.get2ColorDeck(60, p);
 
         Deck deck = new Deck(Constant.GameType.Constructed);
 
@@ -1043,7 +1043,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
             c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
         }
         Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
-        CardList d = gen.get3ColorDeck(60);
+        CardList d = gen.get3ColorDeck(60, p);
 
         Deck deck = new Deck(Constant.GameType.Constructed);
 
@@ -1077,7 +1077,7 @@ public class OldGuiNewGame extends JFrame implements NewConstants, NewConstants.
 
 
         Generate5ColorDeck gen = new Generate5ColorDeck("white", "blue", "black", "red", "green");
-        CardList d = gen.get5ColorDeck(60);
+        CardList d = gen.get5ColorDeck(60, p);
 
         Deck deck = new Deck(Constant.GameType.Constructed);
 

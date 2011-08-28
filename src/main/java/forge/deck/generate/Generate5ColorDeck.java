@@ -12,6 +12,7 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.Constant;
 import forge.MyRandom;
+import forge.PlayerType;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 
@@ -119,7 +120,7 @@ public class Generate5ColorDeck {
      * @param Size a int.
      * @return a {@link forge.CardList} object.
      */
-    public CardList get5ColorDeck(int Size) {
+    public CardList get5ColorDeck(int Size, final PlayerType pt) {
         int lc = 0; // loop counter to prevent infinite card selection loops
         String tmpDeck = "";
         CardList tDeck = new CardList();
@@ -132,7 +133,10 @@ public class Generate5ColorDeck {
         // remove cards that generated decks don't like
         CardList allCards = CardFilter.filter(AllZone.getCardFactory(), new CardListFilter() {
             public boolean addCard(final Card c) {
-                return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
+                if (c.getSVar("RemRandomDeck").equals("True")) {
+                    return false;
+            }
+            return (!c.getSVar("RemAIDeck").equals("True") || (pt != null && pt.equals(PlayerType.HUMAN)));
             }
         });
 
@@ -168,7 +172,7 @@ public class Generate5ColorDeck {
         CardList cr4 = cL4.getType("Creature");
         CardList cr5 = cL5.getType("Creature");
 
-        String[] ise = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact"};
+        String[] ise = {"Instant", "Sorcery", "Enchantment", "Planeswalker", "Artifact.nonCreature"};
         CardList sp1 = cL1.getValidCards(ise, null, null);
         CardList sp2 = cL2.getValidCards(ise, null, null);
         CardList sp3 = cL3.getValidCards(ise, null, null);

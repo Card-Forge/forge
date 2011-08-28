@@ -18,7 +18,7 @@ public class Generate2ColorDeckTest {
     @Test(enabled = false)
     public  void Generate2ColorDeckTest1() {
         Generate2ColorDeck gen = new Generate2ColorDeck("white", "blue");
-        CardList cardList = gen.get2ColorDeck(60);
+        CardList cardList = gen.get2ColorDeck(60, null);
         Assert.assertNotNull(cardList);
     }
 }

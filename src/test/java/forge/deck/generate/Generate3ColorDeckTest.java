@@ -19,7 +19,7 @@ public class Generate3ColorDeckTest {
     @Test(timeOut = 1000, enabled = false)
     public  void Generate3ColorDeckTest1() {
         Generate3ColorDeck gen = new Generate3ColorDeck("white", "blue", "black");
-        CardList cardList = gen.get3ColorDeck(60);
+        CardList cardList = gen.get3ColorDeck(60, null);
         Assert.assertNotNull(cardList);
     }
 }
