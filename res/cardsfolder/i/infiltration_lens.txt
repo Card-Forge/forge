@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltration_lens.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/167.jpg
+Oracle:Whenever equipped creature becomes blocked by a creature, you may draw two cards.\nEquip {1}
 End

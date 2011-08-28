@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5683.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/256.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/128.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/93.jpg
+Oracle:
 End

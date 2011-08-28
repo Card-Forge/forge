@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dynamo.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/97.jpg
+Oracle:{T}: Goblin Dynamo deals 1 damage to target creature or player.\n{X}{R}, {T}, Sacrifice Goblin Dynamo: Goblin Dynamo deals X damage to target creature or player.
 End

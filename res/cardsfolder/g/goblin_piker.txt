@@ -11,4 +11,5 @@ SetInfo:10E|Common|http://magiccards.info/scans/en/10e/209.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/142.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/140.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/141.jpg
+Oracle:
 End

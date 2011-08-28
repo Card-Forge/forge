@@ -8,4 +8,5 @@ K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19842.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/192.jpg
+Oracle:Trample, haste
 End

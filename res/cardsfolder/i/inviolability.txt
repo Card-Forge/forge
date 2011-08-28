@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN Prevent
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inviolability.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/23.jpg
+Oracle:Enchant creature\nPrevent all damage that would be dealt to enchanted creature.
 End

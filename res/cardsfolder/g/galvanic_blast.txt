@@ -7,4 +7,5 @@ SVar:X:Count$Metalcraft.4.2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_blast.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/91.jpg
+Oracle:Galvanic Blast deals 2 damage to target creature or player.\nMetalcraft - Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts.
 End

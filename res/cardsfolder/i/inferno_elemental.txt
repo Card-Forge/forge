@@ -7,4 +7,5 @@ T:Mode$ Blocks | ValidBlocked$ Card.Self | Execute$ TrigDealDamageAttack | Trigg
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamageBlock | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
 SVar:TrigDealDamageBlock:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 3
 SVar:TrigDealDamageAttack:AB$DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 3
+Oracle:Whenever Inferno Elemental blocks or becomes blocked by a creature, Inferno Elemental deals 3 damage to that creature.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_of_battle.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/88.jpg
+Oracle:Whenever a creature blocks, Heat of Battle deals 1 damage to that creature's controller.
 End

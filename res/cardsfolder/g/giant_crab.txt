@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U | KW$ Shroud | SpellDescription$ CARDNAME gains shroud unti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_crab.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/66.jpg
+Oracle:{U}: Giant Crab gains shroud until end of turn. (It can't be the target of spells or abilities.)
 End

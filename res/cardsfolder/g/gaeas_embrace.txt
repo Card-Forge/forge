@@ -9,4 +9,5 @@ A:AB$ Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate e
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_embrace.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/255.jpg
+Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has trample.\n{G}: Regenerate enchanted creature.
 End

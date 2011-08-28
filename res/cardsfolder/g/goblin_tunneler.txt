@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_tunneler.
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/143.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/142.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/148.jpg
+Oracle:{T}: Target creature with power 2 or less is unblockable this turn.
 End

@@ -8,4 +8,5 @@ SVar:ABTap:AB$Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130311.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/22.jpg
+Oracle:{W}, {T}, Discard a card: Put a 1/1 white Kithkin Soldier creature token named Goldmeadow Harrier onto the battlefield. It has "{W}, {T}: Tap target creature."
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gwyllion_hedge_mage.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/202.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/89.jpg
+Oracle:When Gwyllion Hedge-Mage enters the battlefield, if you control two or more Plains, you may put a 1/1 white Kithkin Soldier creature token onto the battlefield.\nWhen Gwyllion Hedge-Mage enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.
 End

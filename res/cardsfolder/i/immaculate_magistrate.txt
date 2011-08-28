@@ -8,4 +8,5 @@ SVar:X:Count$Valid Elf.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immaculate_magistrate.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/219.jpg
+Oracle:{T}: Put a +1/+1 counter on target creature for each Elf you control.
 End

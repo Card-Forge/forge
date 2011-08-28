@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_heart_chimera.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/146.jpg
+Oracle:Vigilance\nSacrifice Iron-Heart Chimera: Put a +2/+2 counter on target Chimera creature. It gains vigilance. (This effect lasts indefinitely.)
 End

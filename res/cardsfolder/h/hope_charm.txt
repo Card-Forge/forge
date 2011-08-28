@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_charm.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/108.jpg
+Oracle:Choose one - Target creature gains first strike until end of turn; or target player gains 2 life; or destroy target Aura.
 End

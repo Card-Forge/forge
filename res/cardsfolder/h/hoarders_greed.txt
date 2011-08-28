@@ -9,4 +9,5 @@ SVar:DBClash:DB$Clash | WinSubAbility$ DBLoseLife
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoarders_greed.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/117.jpg
+Oracle:You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 End

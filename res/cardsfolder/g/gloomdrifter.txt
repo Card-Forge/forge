@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomdrifter.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/61.jpg
+Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Gloomdrifter has "When Gloomdrifter enters the battlefield, nonblack creatures get -2/-2 until end of turn."
 End

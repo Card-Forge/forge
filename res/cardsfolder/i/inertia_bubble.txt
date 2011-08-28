@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inertia_bubble.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/37.jpg
+Oracle:Enchant artifact\nEnchanted artifact doesn't untap during its controller's untap step.
 End

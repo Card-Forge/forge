@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hells_caretaker.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/137.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/19.jpg
+Oracle:{T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
 End

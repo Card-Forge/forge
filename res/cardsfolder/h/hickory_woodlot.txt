@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://wizards.com/global/images/magic/general/hickory_woodlot.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/319.jpg
+Oracle:Hickory Woodlot enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Hickory Woodlot: Add {G}{G} to your mana pool. If there are no depletion counters on Hickory Woodlot, sacrifice it.
 End

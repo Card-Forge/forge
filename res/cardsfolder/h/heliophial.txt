@@ -8,4 +8,5 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heliophial.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/130.jpg
+Oracle:Sunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\n{2}, Sacrifice Heliophial: Heliophial deals damage equal to the number of charge counters on it to target creature or player.
 End

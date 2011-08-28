@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_paint.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/143.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/129.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has haste. (It can attack and {T} no matter when it came under its controller's control.)
 End

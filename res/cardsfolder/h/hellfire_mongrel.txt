@@ -8,4 +8,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire_mongrel.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/130.jpg
+Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Hellfire Mongrel deals 2 damage to him or her.
 End

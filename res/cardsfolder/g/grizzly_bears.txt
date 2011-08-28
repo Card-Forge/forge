@@ -18,4 +18,5 @@ SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/108.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/163.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/129.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/108.jpg
+Oracle:
 End

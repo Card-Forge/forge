@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ Opponent | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_guardian.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/326.jpg
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever Harbor Guardian attacks, defending player may draw a card.
 End

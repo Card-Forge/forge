@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hail_storm.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/79.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/79.jpg
+Oracle:Hail Storm deals 2 damage to each attacking creature and 1 damage to you and each creature you control.
 End

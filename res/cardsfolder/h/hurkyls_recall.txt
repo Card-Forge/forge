@@ -9,4 +9,5 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/60.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/77.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/88.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/54.jpg
+Oracle:Return all artifacts target player owns to his or her hand.
 End

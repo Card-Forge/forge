@@ -10,4 +10,5 @@ SVar:X:Count$Valid Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gempalm_polluter.jpg
 SVar:Rarity:Common
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/70.jpg
+Oracle:Cycling {B}{B} ({B}{B}, Discard this card: Draw a card.)\nWhen you cycle Gempalm Polluter, you may have target player lose life equal to the number of Zombies on the battlefield.
 End

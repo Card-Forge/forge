@@ -10,4 +10,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ E
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_sojourners.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/112.jpg
+Oracle:When you cycle Grixis Sojourners or it dies, you may exile target card from a graveyard.\nCycling {2}{B} ({2}{B}, Discard this card: Draw a card.)
 End

@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25910.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/12.jpg
+Oracle:Flying\nWhen Haunted Angel dies, exile Haunted Angel and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.
 End

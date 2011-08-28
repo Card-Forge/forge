@@ -8,4 +8,5 @@ A:AB$ Discard | Cost$ 5 B B Discard<1/CARDNAME> | ValidTgts$ Player | NumCards$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_lit_stalker.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/69.jpg
+Oracle:{4}{B}, {T}: Target player discards two cards. Activate this ability only any time you could cast a sorcery.\nChannel - {5}{B}{B}, Discard Ghost-Lit Stalker: Target player discards four cards. Activate this ability only any time you could cast a sorcery.
 End

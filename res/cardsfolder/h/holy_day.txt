@@ -10,4 +10,5 @@ SetInfo:INV|Common|http://magiccards.info/scans/en/in/20.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/189.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/18.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/21.jpg
+Oracle:Prevent all combat damage that would be dealt this turn.
 End

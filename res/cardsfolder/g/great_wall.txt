@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_wall.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/186.jpg
+Oracle:Creatures with plainswalk can be blocked as though they didn't have plainswalk.
 End

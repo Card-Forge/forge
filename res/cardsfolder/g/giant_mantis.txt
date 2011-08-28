@@ -7,4 +7,5 @@ K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3387.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/116.jpg
+Oracle:Reach (This creature can block creatures with flying.)
 End

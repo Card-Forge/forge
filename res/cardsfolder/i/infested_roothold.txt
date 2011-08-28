@@ -10,4 +10,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTy
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infested_roothold.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/76.jpg
+Oracle:Defender (This creature can't attack.)\nProtection from artifacts\nWhenever an opponent casts an artifact spell, you may put a 1/1 green Insect creature token onto the battlefield.
 End

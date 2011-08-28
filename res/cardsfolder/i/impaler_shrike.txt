@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ Sac<1/CARDNAME> | Defined$ You | NumCards$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impaler_shrike.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/36.jpg
+Oracle:Flying\nWhenever Impaler Shrike deals combat damage to a player, you may sacrifice it. If you do, draw three cards.
 End

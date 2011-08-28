@@ -10,4 +10,5 @@ SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hagra_crocodile.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/94.jpg
+Oracle:Hagra Crocodile can't block.\nLandfall - Whenever a land enters the battlefield under your control, Hagra Crocodile gets +2/+2 until end of turn.
 End

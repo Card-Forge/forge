@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.blockingSource | NumDmg$ 1 | Sp
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godos_irregulars.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/101.jpg
+Oracle:{R}: Godo's Irregulars deals 1 damage to target creature blocking it.
 End

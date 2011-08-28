@@ -8,4 +8,5 @@ SVar:DBDamage:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select tar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hatchet_bully.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/54.jpg
+Oracle:{2}{R}, {T}, Put a -1/-1 counter on a creature you control: Hatchet Bully deals 2 damage to target creature or player.
 End

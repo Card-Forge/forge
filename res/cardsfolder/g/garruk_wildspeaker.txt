@@ -12,4 +12,5 @@ SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/175.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/183.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/157.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/213.jpg
+Oracle:[+1] Untap two target lands.\n[-1] Put a 3/3 green Beast creature token onto the battlefield.\n[-4] Creatures you control get +3/+3 and gain trample until end of turn.
 End

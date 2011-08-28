@@ -8,4 +8,5 @@ A:AB$ DamageAll | Cost$ 3 B | ValidCards$ Creature | ValidPlayers$ Each | NumDmg
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infected_vermin.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/144.jpg
+Oracle:{2}{B}: Infected Vermin deals 1 damage to each creature and each player.\nThreshold - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard.
 End

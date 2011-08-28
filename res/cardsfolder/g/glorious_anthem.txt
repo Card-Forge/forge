@@ -11,4 +11,5 @@ SetInfo:USG|Rare|http://magiccards.info/scans/en/us/15.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/17.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/16.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/17.jpg
+Oracle:Creatures you control get +1/+1.
 End

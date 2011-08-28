@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_of_the_pur
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/17.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/16.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/23.jpg
+Oracle:White creatures you control get +1/+1.
 End

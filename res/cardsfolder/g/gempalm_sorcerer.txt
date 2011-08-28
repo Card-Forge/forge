@@ -9,4 +9,5 @@ SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Wizard | KW$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gempalm_sorcerer.jpg
 SVar:Rarity:Uncommon
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/39.jpg
+Oracle:Cycling {2}{U} ({2}{U}, Discard this card: Draw a card.)\nWhen you cycle Gempalm Sorcerer, Wizard creatures gain flying until end of turn.
 End

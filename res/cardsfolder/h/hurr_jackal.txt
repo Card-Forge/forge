@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurr_jackal.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/221.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/48.jpg
+Oracle:{T}: Target creature can't be regenerated this turn.
 End

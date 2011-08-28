@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichorclaw_myr.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/166.jpg
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever Ichorclaw Myr becomes blocked, it gets +2/+2 until end of turn.
 End

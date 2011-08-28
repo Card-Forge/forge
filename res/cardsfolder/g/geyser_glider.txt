@@ -8,4 +8,5 @@ SVar:TrigFlying:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Geyser_glider.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/124.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, Geyser Glider gains flying until end of turn.
 End

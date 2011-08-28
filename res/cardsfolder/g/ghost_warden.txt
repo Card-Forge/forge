@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96901.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/5.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/16.jpg
+Oracle:{T}: Target creature gets +1/+1 until end of turn.
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_vandal.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/105.jpg
+Oracle:Whenever Goblin Vandal attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and Goblin Vandal assigns no combat damage this turn.
 End

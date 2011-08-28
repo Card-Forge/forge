@@ -6,4 +6,5 @@ PT:2/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gore_vassal.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/7.jpg
+Oracle:Sacrifice Gore Vassal: Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.
 End

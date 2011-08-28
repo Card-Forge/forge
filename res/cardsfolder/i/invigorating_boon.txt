@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invigorating_boon.jpg
 SVar:Rarity:Uncommon
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/267.jpg
+Oracle:Whenever a player cycles a card, you may put a +1/+1 counter on target creature.
 End

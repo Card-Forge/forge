@@ -13,4 +13,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_mine.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/164.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/119.jpg
+Oracle:Gemstone Mine enters the battlefield with three mining counters on it.\n{T}, Remove a mining counter from Gemstone Mine: Add one mana of any color to your mana pool. If there are no mining counters on Gemstone Mine, sacrifice it.
 End

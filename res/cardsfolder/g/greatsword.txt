@@ -6,4 +6,5 @@ K:eqPump 3:+3/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greatsword.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/209.jpg
+Oracle:Equipped creature gets +3/+0.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
 End

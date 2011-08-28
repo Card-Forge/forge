@@ -7,4 +7,5 @@ K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grappler_spider.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/102.jpg
+Oracle:Reach (This creature can block creatures with flying.)
 End

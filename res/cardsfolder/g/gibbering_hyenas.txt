@@ -7,4 +7,5 @@ K:CARDNAME can't block black creatures.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_hyenas.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/117.jpg
+Oracle:Gibbering Hyenas can't block black creatures.
 End

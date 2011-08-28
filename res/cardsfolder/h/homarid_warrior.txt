@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_warrior.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/92.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/44.jpg|3
+Oracle:{U}: Homarid Warrior gains shroud until end of turn and doesn't untap during your next untap step. Tap Homarid Warrior. (A permanent with shroud can't be the target of spells or abilities.)
 End

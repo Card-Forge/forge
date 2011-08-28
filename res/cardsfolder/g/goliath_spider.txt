@@ -7,4 +7,5 @@ K:Reach
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card88959.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/168.jpg
+Oracle:Reach (This creature can block creatures with flying.)
 End

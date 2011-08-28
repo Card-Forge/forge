@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_guardians.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/316.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/192.jpg
+Oracle:Protection from red\nCreatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent.
 End

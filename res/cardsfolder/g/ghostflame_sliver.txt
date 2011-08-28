@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Sliver | SetColor$ Colorless | Description$ All S
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostflame_sliver.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/239.jpg
+Oracle:All Slivers are colorless.
 End

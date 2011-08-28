@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurly_burly.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/177.jpg
+Oracle:Choose one - Hurly-Burly deals 1 damage to each creature without flying; or Hurly-Burly deals 1 damage to each creature with flying.
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_grip.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/81.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/195.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 for each Mountain you control.
 End

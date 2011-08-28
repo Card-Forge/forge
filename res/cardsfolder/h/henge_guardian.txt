@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 | KW$ Trample | SpellDescription$ CARDNAME gains trample un
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_guardian.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/297.jpg
+Oracle:{2}: Henge Guardian gains trample until end of turn.
 End

@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gainsay.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/26.jpg
+Oracle:Counter target blue spell.
 End

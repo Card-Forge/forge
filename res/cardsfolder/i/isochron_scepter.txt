@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isochron_scepter.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/188.jpg
+Oracle:Imprint - When Isochron Scepter enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.\n{2}, {T}: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
 End

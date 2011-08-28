@@ -10,4 +10,5 @@ SVar:NeedsToPlay:Forest.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_pack.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/135.jpg
+Oracle:Gorilla Pack can't attack unless defending player controls a Forest.\nWhen you control no Forests, sacrifice Gorilla Pack.
 End

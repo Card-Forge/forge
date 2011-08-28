@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_tortoise.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/76.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/20.jpg|2
+Oracle:Giant Tortoise gets +0/+3 as long as it's untapped.
 End

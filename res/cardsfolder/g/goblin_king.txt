@@ -18,4 +18,5 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/207.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/185.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/154.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/155.jpg
+Oracle:Other Goblin creatures get +1/+1 and have mountainwalk. (They're unblockable as long as defending player controls a Mountain.)
 End

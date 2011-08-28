@@ -8,4 +8,5 @@ A:AB$ PutCounter | Cost$ SubCounter<1/M1M1> | IsCurse$ True | ValidTgts$ Creatur
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_poppet.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/252.jpg
+Oracle:Grim Poppet enters the battlefield with three -1/-1 counters on it.\nRemove a -1/-1 counter from Grim Poppet: Put a -1/-1 counter on another target creature.
 End

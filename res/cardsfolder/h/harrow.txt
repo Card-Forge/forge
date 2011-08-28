@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/124.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/189.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/165.jpg
+Oracle:As an additional cost to cast Harrow, sacrifice a land.\nSearch your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
 End

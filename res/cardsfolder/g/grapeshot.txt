@@ -7,4 +7,5 @@ K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grapeshot.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/160.jpg
+Oracle:Grapeshot deals 1 damage to target creature or player.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
 End

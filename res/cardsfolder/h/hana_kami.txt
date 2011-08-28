@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hana_kami.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/211.jpg
+Oracle:{1}{G}, Sacrifice Hana Kami: Return target Arcane card from your graveyard to your hand.
 End

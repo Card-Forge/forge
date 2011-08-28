@@ -12,4 +12,5 @@ SVar:X:Count$CardCounters.FUSE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incendiary.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/89.jpg
+Oracle:Enchant creature\nAt the beginning of your upkeep, you may put a fuse counter on Incendiary.\nWhen enchanted creature dies, Incendiary deals X damage to target creature or player, where X is the number of fuse counters on Incendiary.
 End

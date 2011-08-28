@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_death.jp
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/14.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/80.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/18.jpg|2
+Oracle:Destroy target nonblack creature.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbinger_of_night.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/26.jpg
+Oracle:At the beginning of your upkeep, put a -1/-1 counter on each creature.
 End

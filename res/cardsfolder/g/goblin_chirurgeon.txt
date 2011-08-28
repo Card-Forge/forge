@@ -7,4 +7,5 @@ A:AB$ Regenerate | Cost$ Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chirurgeon.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/110.jpg|3
+Oracle:Sacrifice a Goblin: Regenerate target creature.
 End

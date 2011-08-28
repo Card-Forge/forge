@@ -8,4 +8,5 @@ A:AB$ DamageAll | Cost$ T Sac<1/CARDNAME> | IsPresent$ Swamp.Snow+YouCtrl | Vali
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gangrenous_zombies.jpg
 SVar:Rarity:Common
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/15.jpg
+Oracle:{T}, Sacrifice Gangrenous Zombies: Gangrenous Zombies deals 1 damage to each creature and each player. If you control a snow Swamp, Gangrenous Zombies deals 2 damage to each creature and each player instead.
 End

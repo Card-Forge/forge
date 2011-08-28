@@ -7,4 +7,5 @@ A:AB$ PumpAll | Cost$ T Sac<1/Goblin> | ValidCards$ Creature.Goblin | NumAtt$ +2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lookout.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/101.jpg
+Oracle:{T}, Sacrifice a Goblin: Goblin creatures get +2/+0 until end of turn.
 End

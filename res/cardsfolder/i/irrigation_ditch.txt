@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irrigation_ditch.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/324.jpg
+Oracle:Irrigation Ditch enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\n{T}, Sacrifice Irrigation Ditch: Add {G}{U} to your mana pool.
 End

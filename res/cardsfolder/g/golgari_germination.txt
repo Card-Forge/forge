@@ -7,4 +7,5 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | Tok
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_germination.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/209.jpg
+Oracle:Whenever a nontoken creature you control dies, put a 1/1 green Saproling creature token onto the battlefield.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/in_the_eye_of_chaos.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/61.jpg
+Oracle:Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its converted mana cost.
 End

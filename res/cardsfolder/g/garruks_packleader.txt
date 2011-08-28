@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruks_packleader.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/177.jpg
+Oracle:Whenever another creature with power 3 or greater enters the battlefield under your control, you may draw a card.
 End

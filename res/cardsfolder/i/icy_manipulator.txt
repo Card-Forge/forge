@@ -13,4 +13,5 @@ SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/297.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/326.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/186.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/249.jpg
+Oracle:{1}, {T}: Tap target artifact, creature, or land.
 End

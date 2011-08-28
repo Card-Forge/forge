@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Goblin | TokenTy
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_assault.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/101.jpg
+Oracle:At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.\nGoblin creatures attack each turn if able.
 End

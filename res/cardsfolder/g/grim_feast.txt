@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_feast.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/325.jpg
+Oracle:At the beginning of your upkeep, Grim Feast deals 1 damage to you.\nWhenever a creature is put into an opponent's graveyard from the battlefield, you gain life equal to its toughness.
 End

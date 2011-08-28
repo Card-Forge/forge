@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 R R | Origin$ Battlefield | Destination$ Exile | Targ
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_core.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/67.jpg
+Oracle:Exile two target artifacts.
 End

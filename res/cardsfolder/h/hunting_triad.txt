@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_triad.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/127.jpg
+Oracle:Put three 1/1 green Elf Warrior creature tokens onto the battlefield.\nReinforce 3-{3}{G} ({3}{G}, Discard this card: Put three +1/+1 counters on target creature.)
 End

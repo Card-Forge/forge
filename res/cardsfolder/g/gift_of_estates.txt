@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84504.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/179.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/15.jpg
+Oracle:If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
 End

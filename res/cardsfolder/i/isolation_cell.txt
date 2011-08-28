@@ -7,4 +7,5 @@ SVar:TrigLose:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmo
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isolation_cell.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/141.jpg
+Oracle:Whenever an opponent casts a creature spell, that player loses 2 life unless he or she pays {2}.
 End

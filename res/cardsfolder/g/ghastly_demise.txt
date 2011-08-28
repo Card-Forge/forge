@@ -7,4 +7,5 @@ SVar:X:Count$InYourYard
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_demise.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/139.jpg
+Oracle:Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
 End

@@ -8,4 +8,5 @@ SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Land | TgtPrompt$ Select target l
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glowing_anemone.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/81.jpg
+Oracle:When Glowing Anemone enters the battlefield, you may return target land to its owner's hand.
 End

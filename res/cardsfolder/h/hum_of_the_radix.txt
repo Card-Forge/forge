@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hum_of_the_radix.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/122.jpg
+Oracle:Each artifact spell costs {1} more to cast for each artifact its controller controls.
 End

@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_bogard
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/193.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/188.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/181.jpg
+Oracle:Hammer of Bogardan deals 3 damage to target creature or player.\n{2}{R}{R}{R}: Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.
 End

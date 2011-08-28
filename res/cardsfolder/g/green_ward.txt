@@ -13,4 +13,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/206.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/204.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/277.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/205.jpg
+Oracle:Enchant creature\nEnchanted creature has protection from green. This effect doesn't remove Green Ward.
 End

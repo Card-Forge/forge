@@ -7,4 +7,5 @@ SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 1 | Conditi
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icequake.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/22.jpg
+Oracle:Destroy target land. If that land was a snow land, Icequake deals 1 damage to that land's controller.
 End

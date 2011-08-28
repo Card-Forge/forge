@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/18.jpg
+Oracle:Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures that died this way.
 End

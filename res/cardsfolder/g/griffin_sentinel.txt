@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_sentinel.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/12.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/21.jpg
+Oracle:Flying\nVigilance (Attacking doesn't cause this creature to tap.)
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_seas.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/83.jpg
+Oracle:Red creature spells and green creature spells cost {1} more to cast.
 End

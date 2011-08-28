@@ -7,4 +7,5 @@ K:Echo:R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_patrol.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/193.jpg
+Oracle:Echo {R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
 End

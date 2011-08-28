@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hell_bent_raider.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/101.jpg
+Oracle:First strike, haste\nDiscard a card at random: Hell-Bent Raider gains protection from white until end of turn.
 End

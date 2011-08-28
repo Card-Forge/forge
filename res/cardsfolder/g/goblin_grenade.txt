@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grenade.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/114.jpg|3
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/140.jpg
+Oracle:As an additional cost to cast Goblin Grenade, sacrifice a Goblin.\nGoblin Grenade deals 5 damage to target creature or player.
 End

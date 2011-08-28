@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/heavy_ballista.j
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/133.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/23.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/19.jpg
+Oracle:{T}: Heavy Ballista deals 2 damage to target attacking or blocking creature.
 End

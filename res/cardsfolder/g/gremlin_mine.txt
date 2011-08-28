@@ -7,4 +7,5 @@ A:AB$ RemoveCounter | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Artifact.nonCreatur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gremlin_mine.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/136.jpg
+Oracle:{1}, {T}, Sacrifice Gremlin Mine: Gremlin Mine deals 4 damage to target artifact creature.\n{1}, {T}, Sacrifice Gremlin Mine: Remove up to four charge counters from target noncreature artifact.
 End

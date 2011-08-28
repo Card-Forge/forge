@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_bounty.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/254.jpg
+Oracle:Search your library for up to two Forest cards, reveal those cards, and put them into your hand. Then shuffle your library.
 End

@@ -8,4 +8,5 @@ K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hovermyr.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/138.jpg
+Oracle:Flying, vigilance
 End

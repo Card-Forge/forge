@@ -10,4 +10,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/375.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/17.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/340.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/299.jpg
+Oracle:{T}: Grapeshot Catapult deals 1 damage to target creature with flying.
 End

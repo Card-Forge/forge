@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 1 W U T | TgtPrompt$ Choose target artifact or enchantm
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hanna_ships_navigator.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/249.jpg
+Oracle:{1}{W}{U}, {T}: Return target artifact or enchantment card from your graveyard to your hand.
 End

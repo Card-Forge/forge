@@ -6,4 +6,5 @@ A:AB$ Tap | Cost$ tapXType<1/Creature> | ValidTgts$ Artifact,Creature | TgtPromp
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glare_of_subdual.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/207.jpg
+Oracle:Tap an untapped creature you control: Tap target artifact or creature.
 End

@@ -10,4 +10,5 @@ SVar:Untap:AB$Untap | Cost$ 1 Discard<1/Card> | Defined$ Self | SpellDescription
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immobilizing_ink.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/87.jpg
+Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nEnchanted creature has "{1}, Discard a card: Untap this creature."
 End

@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select tar
 SVar:Rarity:Common
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Three_Kingdoms/ghostly_visit.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/76.jpg
+Oracle:Destroy target nonblack creature.
 End

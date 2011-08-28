@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ 5 W tapXType<3/Creature.White> | ValidTgts$ Creature | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_justice.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/20.jpg
+Oracle:As an additional cost to cast Gaze of Justice, tap three untapped white creatures you control.\nExile target creature.\nFlashback {5}{W} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)
 End

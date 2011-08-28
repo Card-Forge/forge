@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ At the beginni
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_furor.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/134.jpg
+Oracle:Enchant creature\nEnchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
 End

@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122362.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/158.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/149.jpg
+Oracle:Draw three cards.
 End

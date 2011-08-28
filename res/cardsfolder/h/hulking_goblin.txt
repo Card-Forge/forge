@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20212.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/107.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/140.jpg
+Oracle:Hulking Goblin can't block.
 End

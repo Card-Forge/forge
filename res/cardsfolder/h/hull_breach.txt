@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hull_breach.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/203.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/111.jpg
+Oracle:Choose one - Destroy target artifact; or destroy target enchantment; or destroy target artifact and target enchantment.
 End

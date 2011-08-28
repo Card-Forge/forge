@@ -7,4 +7,5 @@ K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card36112.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/118.jpg
+Oracle:Trample
 End

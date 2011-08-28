@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ T
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomlance.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/67.jpg
+Oracle:Destroy target creature. If that creature was green or white, its controller discards a card.
 End

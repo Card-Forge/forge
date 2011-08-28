@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gossamer_phantasm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/55.jpg
+Oracle:Flying\nWhen Gossamer Phantasm becomes the target of a spell or ability, sacrifice it.
 End

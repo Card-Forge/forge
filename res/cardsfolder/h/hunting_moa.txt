@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_moa.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/109.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/80.jpg
+Oracle:Echo {2}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Hunting Moa enters the battlefield or dies, put a +1/+1 counter on target creature.
 End

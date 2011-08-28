@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_warden.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/108.jpg
+Oracle:{T}: Add {G} to your mana pool.\n{2}, Sacrifice Heart Warden: Draw a card.
 End

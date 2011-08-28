@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_shortcutter.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/128.jpg
+Oracle:When Goblin Shortcutter enters the battlefield, target creature can't block this turn.
 End

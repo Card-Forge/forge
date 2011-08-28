@@ -8,4 +8,5 @@ SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghalmas_warden.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/8.jpg
+Oracle:Metalcraft - Ghalma's Warden gets +2/+2 as long as you control three or more artifacts.
 End

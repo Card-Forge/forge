@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivy_dancer.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/171.jpg
+Oracle:{T}: Target creature gains forestwalk until end of turn.
 End

@@ -9,4 +9,5 @@ A:AB$ Regenerate | Cost$ W | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/151.jpg
+Oracle:Hedge Troll gets +1/+1 as long as you control a Plains.\n{W}: Regenerate Hedge Troll.
 End

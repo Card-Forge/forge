@@ -10,4 +10,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Insect | TokenTy
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_queen.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/159.jpg
+Oracle:Flying, deathtouch\nWhen Hornet Queen enters the battlefield, put four 1/1 green Insect creature tokens with flying and deathtouch onto the battlefield.
 End

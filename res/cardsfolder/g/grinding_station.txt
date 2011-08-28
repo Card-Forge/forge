@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grinding_station.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/127.jpg
+Oracle:{T}, Sacrifice an artifact: Target player puts the top three cards of his or her library into his or her graveyard.\nWhenever an artifact enters the battlefield, you may untap Grinding Station.
 End

@@ -8,4 +8,5 @@ SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_cheetah.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/138.jpg
+Oracle:Whenever Hunting Cheetah deals damage to an opponent, you may search your library for a Forest card, reveal that card, put it into your hand, then shuffle your library.
 End

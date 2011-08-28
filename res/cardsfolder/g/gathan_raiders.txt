@@ -9,4 +9,5 @@ SVar:X:Count$Valid Card.Self+faceUp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gathan_raiders.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/99.jpg
+Oracle:Hellbent - Gathan Raiders gets +2/+2 if you have no cards in hand.\nMorph-Discard a card. (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

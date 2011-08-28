@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_monolith.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/126.jpg
+Oracle:Grim Monolith doesn't untap during your untap step.\n{T}: Add {3} to your mana pool.\n{4}: Untap Grim Monolith.
 End

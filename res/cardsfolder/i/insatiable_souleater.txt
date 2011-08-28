@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ PG | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insatiable_souleater.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/140.jpg
+Oracle:{G/P}: Insatiable Souleater gains trample until end of turn. ({G/P} can be paid with either {G} or 2 life.)
 End

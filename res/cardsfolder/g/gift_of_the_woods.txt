@@ -11,4 +11,5 @@ SVar:DBGainLife:DB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_the_woods.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/73.jpg|2
+Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked, it gets +0/+3 until end of turn and you gain 1 life.
 End

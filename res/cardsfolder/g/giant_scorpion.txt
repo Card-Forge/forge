@@ -7,4 +7,5 @@ K:Deathtouch
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_scorpion.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/90.jpg
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
 End

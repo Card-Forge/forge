@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnathosaur.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/63.jpg
+Oracle:Sacrifice an artifact: Gnathosaur gains trample until end of turn.
 End

@@ -7,4 +7,5 @@ K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_deathraiders.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/169.jpg
+Oracle:Trample
 End

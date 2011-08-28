@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/global_ruin.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/18.jpg
+Oracle:Each player chooses from the lands he or she controls a land of each basic land type, then sacrifices the rest.
 End

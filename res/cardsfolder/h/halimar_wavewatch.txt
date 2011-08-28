@@ -12,4 +12,5 @@ SVar:Y:Count$Valid Card.Self+countersGE5LEVEL
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_wavewatch.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/72.jpg
+Oracle:Level up {2} ({2}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-4\n0/6\nLEVEL 5+\n6/6\nIslandwalk
 End

@@ -7,4 +7,5 @@ SVar:DBMill:DB$Mill | NumCards$ 1 | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horrifying_revelation.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/45.jpg
+Oracle:Target player discards a card, then puts the top card of his or her library into his or her graveyard.
 End

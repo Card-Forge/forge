@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gristle_grinner.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/59.jpg
+Oracle:Whenever a creature dies, Gristle Grinner gets +2/+2 until end of turn.
 End

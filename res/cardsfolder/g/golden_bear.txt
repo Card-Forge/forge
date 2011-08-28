@@ -6,4 +6,5 @@ PT:4/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6616.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/67.jpg
+Oracle:
 End

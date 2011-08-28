@@ -7,4 +7,5 @@ A:AB$ Animate | Cost$ 1 R G | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ C
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_war_plow.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/151.jpg
+Oracle:Creatures you control have trample.\n{1}{R}{G}: Gruul War Plow becomes a 4/4 Juggernaut artifact creature until end of turn.
 End

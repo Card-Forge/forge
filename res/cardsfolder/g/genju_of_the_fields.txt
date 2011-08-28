@@ -13,4 +13,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_fields.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/5.jpg
+Oracle:Enchant Plains\n{2}: Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.\nWhen enchanted Plains is put into a graveyard, you may return Genju of the Fields from your graveyard to your hand.
 End

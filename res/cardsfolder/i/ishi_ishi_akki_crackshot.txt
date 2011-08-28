@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ishi_ishi_akki_crackshot.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/110.jpg
+Oracle:Whenever an opponent casts a Spirit or Arcane spell, Ishi-Ishi, Akki Crackshot deals 2 damage to that player.
 End

@@ -9,4 +9,5 @@ SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_ambush.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/214.jpg
+Oracle:Put two 1/1 green Elf Warrior creature tokens onto the battlefield. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost. Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
 End

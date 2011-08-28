@@ -8,4 +8,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halcyon_glaze.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/54.jpg
+Oracle:Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn. It's still an enchantment.
 End

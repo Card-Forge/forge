@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_mage.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/193.jpg
+Oracle:{X}{R}, {T}, Discard a card: Destroy all artifacts with converted mana cost X or less.
 End

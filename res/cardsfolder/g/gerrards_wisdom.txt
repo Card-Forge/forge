@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_wisdom.
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/131.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/18.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/16.jpg
+Oracle:You gain 2 life for each card in your hand.
 End

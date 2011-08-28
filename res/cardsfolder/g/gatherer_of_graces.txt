@@ -10,4 +10,5 @@ SVar:EnchantMe:Multiple
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatherer_of_graces.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/85.jpg
+Oracle:Gatherer of Graces gets +1/+1 for each Aura attached to it.\nSacrifice an Aura: Regenerate Gatherer of Graces.
 End

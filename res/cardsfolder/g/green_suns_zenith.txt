@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/green_suns_zenith.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/81.jpg
+Oracle:Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library. Shuffle Green Sun's Zenith into its owner's library.
 End

@@ -8,9 +8,10 @@ A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ SVar=DBPain | SpellDescription$
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ SVar=DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ SVar=DBPain | SpellDescription$ Add R to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ SVar=DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You 
+SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/319.jpg
+Oracle:Grand Coliseum enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{T}: Add one mana of any color to your mana pool. Grand Coliseum deals 1 damage to you.
 End

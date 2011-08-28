@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_guildmage.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/248.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/201.jpg
+Oracle:{4}{B}, Sacrifice a creature: Return target creature card from your graveyard to your hand.\n{4}{G}: Put a +1/+1 counter on target creature.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incite.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/145.jpg
+Oracle:Target creature becomes red until end of turn and attacks this turn if able.
 End

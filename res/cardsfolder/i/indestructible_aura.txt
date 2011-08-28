@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indestructible_aura.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/190.jpg
+Oracle:Prevent all damage that would be dealt to target creature this turn.
 End

@@ -9,4 +9,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/17.jpg
+Oracle:Enchant creature\nWhenever enchanted creature deals damage, Guilty Conscience deals that much damage to that creature.
 End

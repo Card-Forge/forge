@@ -7,4 +7,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golems_heart.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/161.jpg
+Oracle:Whenever a player casts an artifact spell, you may gain 1 life.
 End

@@ -10,4 +10,5 @@ A:AB$ ChangeZone | Cost$ R | Defined$ Self | Origin$ Battlefield | Destination$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_firebreathing.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/158.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\n{R}: Enchanted creature gets +1/+0 until end of turn.\n{R}: Return Ghitu Firebreathing to its owner's hand.
 End

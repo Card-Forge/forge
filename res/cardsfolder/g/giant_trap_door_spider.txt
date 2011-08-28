@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_trap_door_spider.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/371.jpg
+Oracle:{1}{R}{G}, {T}: Exile Giant Trap Door Spider and target creature without flying that's attacking you.
 End

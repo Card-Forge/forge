@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ U | KW$ Shroud | SpellDescription$ CARDNAME gains shroud unti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmering_angel.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/17.jpg
+Oracle:Flying\n{U}: Glimmering Angel gains shroud until end of turn. (It can't be the target of spells or abilities.)
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heavens_gate.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/188.jpg
+Oracle:Any number of target creatures become white until end of turn.
 End

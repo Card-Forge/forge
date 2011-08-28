@@ -7,4 +7,5 @@ K:Islandwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87914.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/52.jpg
+Oracle:Islandwalk
 End

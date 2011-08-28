@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.Legendary | TgtPrompt$ Select ta
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heros_demise.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/68.jpg
+Oracle:Destroy target legendary creature.
 End

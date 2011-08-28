@@ -5,4 +5,5 @@ Text:Target player discards two cards. You gain 3 life for each land card discar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_verdict.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/102.jpg
+Oracle:Target player discards two cards. You gain 3 life for each land card discarded this way.
 End

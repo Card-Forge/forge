@@ -8,4 +8,5 @@ SVar:X:Count$OppLifeTotal
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_vampire.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/93.jpg
+Oracle:As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 End

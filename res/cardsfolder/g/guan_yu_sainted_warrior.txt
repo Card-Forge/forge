@@ -9,4 +9,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Libra
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yu_sainted_warrior.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/6.jpg
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhen Guan Yu, Sainted Warrior is put into your graveyard from the battlefield, you may shuffle Guan Yu into your library.
 End

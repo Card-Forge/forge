@@ -11,4 +11,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefie
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galepowder_mage.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/15.jpg
+Oracle:Flying\nWhenever Galepowder Mage attacks, exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
 End

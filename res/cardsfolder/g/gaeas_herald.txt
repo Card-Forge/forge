@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_herald.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/252.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/80.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/265.jpg
+Oracle:Creature spells can't be countered.
 End

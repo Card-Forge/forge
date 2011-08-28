@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_disorder.jpg
 SVar:Rarity:Uncommon
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/66.jpg
+Oracle:Ignite Disorder deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures.
 End

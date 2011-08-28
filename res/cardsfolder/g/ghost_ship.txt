@@ -10,4 +10,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card107294.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/21.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/27.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/75.jpg
+Oracle:Flying\n{U}{U}{U}: Regenerate Ghost Ship.
 End

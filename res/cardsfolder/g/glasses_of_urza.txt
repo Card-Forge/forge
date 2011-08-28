@@ -13,4 +13,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/339.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/287.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/249.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/246.jpg
+Oracle:{T}: Look at target player's hand.
 End

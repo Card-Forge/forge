@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidation.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/142.jpg
+Oracle:Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hermit_druid.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/58.jpg
+Oracle:{G}, {T}: Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
 End

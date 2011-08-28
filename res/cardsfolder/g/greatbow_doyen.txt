@@ -10,4 +10,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greatbow_doyen.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/125.jpg
+Oracle:Other Archer creatures you control get +1/+1.\nWhenever an Archer you control deals damage to a creature, that Archer deals that much damage to that creature's controller.
 End

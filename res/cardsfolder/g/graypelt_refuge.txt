@@ -10,4 +10,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/214.jpg
+Oracle:Graypelt Refuge enters the battlefield tapped.\nWhen Graypelt Refuge enters the battlefield, you gain 1 life.\n{T}: Add {G} or {W} to your mana pool.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/island_of_wak_wak.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/89.jpg
+Oracle:{T}: The power of target creature with flying becomes 0 until end of turn.
 End

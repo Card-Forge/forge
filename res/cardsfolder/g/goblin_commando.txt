@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_commando.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/100.jpg
+Oracle:When Goblin Commando enters the battlefield, it deals 2 damage to target creature.
 End

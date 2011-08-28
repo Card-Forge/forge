@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_caretaker.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/76.jpg
+Oracle:Morph {3}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Infernal Caretaker is turned face up, return all Zombie cards from all graveyards to their owners' hands.
 End

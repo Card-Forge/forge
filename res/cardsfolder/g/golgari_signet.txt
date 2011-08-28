@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_signet.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/262.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/249.jpg
+Oracle:{1}, {T}: Add {B}{G} to your mana pool.
 End

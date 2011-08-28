@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grasp_of_darkness.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/65.jpg
+Oracle:Target creature gets -4/-4 until end of turn.
 End

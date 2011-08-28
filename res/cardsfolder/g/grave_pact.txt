@@ -11,4 +11,5 @@ SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/10.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/85.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/135.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/144.jpg
+Oracle:Whenever a creature you control dies, each other player sacrifices a creature.
 End

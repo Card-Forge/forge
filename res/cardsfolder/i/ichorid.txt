@@ -10,4 +10,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ ExileFromGrave<1/Creature.Black+Other> | O
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichorid.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/65.jpg
+Oracle:Haste\nAt the beginning of the end step, sacrifice Ichorid.\nAt the beginning of your upkeep, if Ichorid is in your graveyard, you may exile a black creature card other than Ichorid from your graveyard. If you do, return Ichorid to the battlefield.
 End

@@ -8,4 +8,5 @@ SVar:DBUntap:DB$Untap | Cost$ 0 | ConditionDefined$ Targeted | ConditionPresent$
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card88990.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/88.jpg
+Oracle:{B}{B}{B}, {T}: Destroy target land. If that land was nonbasic, untap Helldozer.
 End

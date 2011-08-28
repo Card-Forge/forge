@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_myr.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/187.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/168.jpg
+Oracle:{T}: Add {R} to your mana pool.
 End

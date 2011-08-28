@@ -10,4 +10,5 @@ SVar:SacMe:5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichor_wellspring.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/110.jpg
+Oracle:When Ichor Wellspring enters the battlefield or is put into a graveyard from the battlefield, draw a card.
 End

@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldenglow_moth.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/15.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/6.jpg
+Oracle:Flying\nWhenever Goldenglow Moth blocks, you may gain 4 life.
 End

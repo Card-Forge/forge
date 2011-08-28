@@ -8,4 +8,5 @@ Var:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gangrenous_goliath.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/150.jpg
+Oracle:Tap three untapped Clerics you control: Return Gangrenous Goliath from your graveyard to your hand.
 End

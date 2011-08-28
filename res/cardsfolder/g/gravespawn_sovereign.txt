@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravespawn_sovereign.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/152.jpg
+Oracle:Tap five untapped Zombies you control: Put target creature card from a graveyard onto the battlefield under your control.
 End

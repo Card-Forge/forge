@@ -7,4 +7,5 @@ K:CostChange:All:More:1:Spell:All:Creature:NonType
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glowrider.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/15.jpg
+Oracle:Noncreature spells cost {1} more to cast.
 End

@@ -9,4 +9,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/135.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/15.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/24.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/140.jpg
+Oracle:{B}, Pay 2 life: Draw a card.
 End

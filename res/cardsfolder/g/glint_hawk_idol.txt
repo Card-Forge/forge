@@ -8,4 +8,5 @@ A:AB$ Animate | Cost$ W | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artif
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk_idol.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/156.jpg
+Oracle:Whenever another artifact enters the battlefield under your control, you may have Glint Hawk Idol become a 2/2 Bird artifact creature with flying until end of turn.\n{W}: Glint Hawk Idol becomes a 2/2 Bird artifact creature with flying until end of turn.
 End

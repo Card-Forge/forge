@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_kavu.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/110.jpg
+Oracle:When Horned Kavu enters the battlefield, return a red or green creature you control to its owner's hand.
 End

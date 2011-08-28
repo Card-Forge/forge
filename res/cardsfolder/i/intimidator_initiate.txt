@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidator_initiate.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/96.jpg
+Oracle:Whenever a player casts a red spell, you may pay {1}. If you do, target creature can't block this turn.
 End

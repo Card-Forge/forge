@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_battlemage.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/78.jpg
+Oracle:{U}, {T}: Draw a card, then discard a card.\n{R}, {T}: Target creature can't block this turn.
 End

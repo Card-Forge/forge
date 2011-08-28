@@ -19,4 +19,5 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/16.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/15.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/208.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/209.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+2.
 End

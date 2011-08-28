@@ -6,7 +6,7 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | CheckSVar$ A | SVarCompare$ EQ1 | Description$ As long as CARDNAME isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as CARDNAME is attacking, its power and toughness are each equal to the number of Forests defending player controls.
 SVar:A:Count$Valid Card.Self+notattacking
 SVar:X:Count$Valid Forest.YouCtrl
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | CheckSVar$ B | SVarCompare$ EQ1 
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | CheckSVar$ B | SVarCompare$ EQ1
 SVar:B:Count$Valid Card.Self+attacking
 SVar:Y:Count$Valid Forest.YouDontCtrl
 A:AB$Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | UntilHostLeavesPlay$ True | SpellDescription$ Target land becomes a Forest until CARDNAME leaves the battlefield.
@@ -20,4 +20,5 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/131.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/78.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/105.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/105.jpg
+Oracle:As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.\n{T}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
 End

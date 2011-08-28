@@ -7,4 +7,5 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature | ChangeNum$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_grounds.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/138.jpg
+Oracle:Threshold - As long as seven or more cards are in your graveyard, Hunting Grounds has "Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield."
 End

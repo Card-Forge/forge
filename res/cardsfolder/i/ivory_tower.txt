@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_tower.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/254.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/346.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/18.jpg
+Oracle:At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus four.
 End

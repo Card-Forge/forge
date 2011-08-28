@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_town.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/314.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/25.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/162.jpg
+Oracle:Put four 1/1 white Citizen creature tokens onto the battlefield.
 End

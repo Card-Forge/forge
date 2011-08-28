@@ -14,4 +14,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illumination.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/225.jpg
+Oracle:Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
 End

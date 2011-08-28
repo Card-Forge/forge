@@ -9,4 +9,5 @@ A:AB$ GainLife | Cost$ G Sac<1/Kithkin> | LifeAmount$ 1 | SpellDescription$ You 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_cloverdell.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/216.jpg
+Oracle:When Guardian of Cloverdell enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.\n{G}, Sacrifice a Kithkin: You gain 1 life.
 End

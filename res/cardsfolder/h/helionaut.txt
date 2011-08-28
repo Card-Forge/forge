@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helionaut.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/13.jpg
+Oracle:Flying\n{1}, {T}: Add one mana of any color to your mana pool.
 End

@@ -7,4 +7,5 @@ A:SP$ DamageAll | Cost$ 1 G | NumDmg$ 1 | ValidCards$ Creature.withFlying | Vali
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_gale.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/244.jpg
+Oracle:Howling Gale deals 1 damage to each creature with flying and each player.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

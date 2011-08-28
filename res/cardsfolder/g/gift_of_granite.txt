@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Descript
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_granite.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/7.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets +0/+2.
 End

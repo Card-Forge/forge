@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_crane_netsuke.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/155.jpg
+Oracle:At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
 End

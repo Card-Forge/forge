@@ -8,4 +8,5 @@ K:Bushido 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74063.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/71.jpg
+Oracle:Protection from white\nBushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
 End

@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ice_storm.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/110.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/110.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/110.jpg
+Oracle:Destroy target land.
 End

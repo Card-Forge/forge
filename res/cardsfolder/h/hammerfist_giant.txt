@@ -7,4 +7,5 @@ A:AB$ DamageAll | Cost$ T | ValidCards$ Creature.withoutFlying | ValidPlayers$ E
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83712.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/130.jpg
+Oracle:{T}: Hammerfist Giant deals 4 damage to each creature without flying and each player.
 End

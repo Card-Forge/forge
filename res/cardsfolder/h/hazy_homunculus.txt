@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazy_homunculus.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/36.jpg
+Oracle:Hazy Homunculus is unblockable as long as defending player controls an untapped land.
 End

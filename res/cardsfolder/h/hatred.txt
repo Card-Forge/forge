@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hatred.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/64.jpg
+Oracle:As an additional cost to cast Hatred, pay X life.\nTarget creature gets +X/+0 until end of turn.
 End

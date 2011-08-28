@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_fortress
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/225.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/226.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/227.jpg
+Oracle:Glacial Fortress enters the battlefield tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U} to your mana pool.
 End

@@ -10,4 +10,5 @@ SVar:TrigPoison:AB$Poison | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select targ
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_the_praetors.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/66.jpg
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nOther creatures you control with infect get +1/+1.\nWhenever you cast a creature spell with infect, target player gets a poison counter.
 End

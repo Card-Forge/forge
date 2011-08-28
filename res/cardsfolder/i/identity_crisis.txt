@@ -7,4 +7,5 @@ SVar:DBChangeZoneAll:DB$ChangeZoneAll | Defined$ Targeted | Origin$ Graveyard | 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/identity_crisis.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/81.jpg
+Oracle:Exile all cards from target player's hand and graveyard.
 End

@@ -12,4 +12,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incandescent_soulstoke.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/178.jpg
+Oracle:Other Elemental creatures you control get +1/+1.\n{1}{R}, {T}: You may put an Elemental creature card from your hand onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
 End

@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ PR | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME g
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immolating_souleater.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/139.jpg
+Oracle:{R/P}: Immolating Souleater gets +1/+0 until end of turn. ({R/P} can be paid with either {R} or 2 life.)
 End

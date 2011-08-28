@@ -11,4 +11,5 @@ SetInfo:USG|Common|http://magiccards.info/scans/en/us/137.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/81.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/139.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/141.jpg
+Oracle:Whenever Hollow Dogs attacks, it gets +2/+0 until end of turn.
 End

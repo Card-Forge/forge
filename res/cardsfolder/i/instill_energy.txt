@@ -16,4 +16,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/166.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/136.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/110.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/111.jpg
+Oracle:Enchant creature\nEnchanted creature can attack as though it had haste.\n{0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
 End

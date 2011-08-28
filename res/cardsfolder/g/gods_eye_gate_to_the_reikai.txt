@@ -9,4 +9,5 @@ SVar:SacMe:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gods_eye_gate_to_the_reikai.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/164.jpg
+Oracle:{T}: Add {1} to your mana pool.\nWhen Gods' Eye, Gate to the Reikai is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield.
 End

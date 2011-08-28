@@ -8,4 +8,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 1 B | NumCards$ 1 | ValidTgts$ Player | NumC
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insidious_bookworms.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/12.jpg|2
+Oracle:When Insidious Bookworms dies, you may pay {1}{B}. If you do, target player discards a card at random.
 End

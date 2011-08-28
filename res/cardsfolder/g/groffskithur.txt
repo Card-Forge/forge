@@ -8,4 +8,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/groffskithur.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/121.jpg
+Oracle:Whenever Groffskithur becomes blocked, you may return target card named Groffskithur from your graveyard to your hand.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heap_doll.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/253.jpg
+Oracle:Sacrifice Heap Doll: Exile target card from a graveyard.
 End

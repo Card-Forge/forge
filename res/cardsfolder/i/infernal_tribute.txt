@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_tribute.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/15.jpg
+Oracle:{2}, Sacrifice a nontoken permanent: Draw a card.
 End

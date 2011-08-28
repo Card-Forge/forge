@@ -10,4 +10,5 @@ SVar:DBProtect:DB$ Protection | Defined$ Self | Gains$ green,white
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grotesque_hybrid.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/63.jpg
+Oracle:Whenever Grotesque Hybrid deals combat damage to a creature, destroy that creature. It can't be regenerated.\nDiscard a card: Grotesque Hybrid gains flying and protection from green and from white until end of turn.
 End

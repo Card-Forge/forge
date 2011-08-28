@@ -8,4 +8,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grazing_gladehart.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/163.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, you may gain 2 life.
 End

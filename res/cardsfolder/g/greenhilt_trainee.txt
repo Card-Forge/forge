@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenhilt_trainee.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/112.jpg
+Oracle:{T}: Target creature gets +4/+4 until end of turn. Activate this ability only if Greenhilt Trainee's power is 4 or greater.
 End

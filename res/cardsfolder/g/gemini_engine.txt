@@ -12,4 +12,5 @@ SVar:Y:Count$CardToughness
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemini_engine.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/121.jpg
+Oracle:Whenever Gemini Engine attacks, put a colorless Construct artifact creature token named Twin onto the battlefield attacking. Its power is equal to Gemini Engine's power and its toughness is equal to Gemini Engine's toughness. Sacrifice the token at end of combat.
 End

@@ -10,4 +10,5 @@ SVar:X:Count$Chroma.R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartlash_cinder.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/56.jpg
+Oracle:Haste\nChroma - When Heartlash Cinder enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.
 End

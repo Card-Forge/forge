@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravitational_shift.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/69.jpg
+Oracle:Creatures with flying get +2/+0.\nCreatures without flying get -2/-0.
 End

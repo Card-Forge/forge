@@ -10,4 +10,5 @@ SVar:X:Remembered$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_genesis.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/68.jpg
+Oracle:At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost.
 End

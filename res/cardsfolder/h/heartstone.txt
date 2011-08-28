@@ -6,4 +6,5 @@ K:CostChange:Player:Less:1:Ability:All:Creature:TargetInPlay
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartstone.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/128.jpg
+Oracle:Activated abilities of creatures cost {1} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
 End

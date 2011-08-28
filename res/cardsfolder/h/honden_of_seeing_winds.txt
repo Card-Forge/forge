@@ -8,4 +8,5 @@ SVar:X:Count$TypeYouCtrl.Shrine
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_seeing_winds.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/69.jpg
+Oracle:At the beginning of your upkeep, draw a card for each Shrine you control.
 End

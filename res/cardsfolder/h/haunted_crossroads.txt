@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_crossroads.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/138.jpg
+Oracle:{B}: Put target creature card from your graveyard on top of your library.
 End

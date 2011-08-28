@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gardener.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/84.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/188.jpg
+Oracle:When Goblin Gardener dies, destroy target land.
 End

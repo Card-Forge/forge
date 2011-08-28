@@ -8,4 +8,5 @@ SVar:TrigPut:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironshell_beetle.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/121.jpg
+Oracle:When Ironshell Beetle enters the battlefield, put a +1/+1 counter on target creature.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenweaver_druid.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/164.jpg
+Oracle:{T}: Add {G}{G} to your mana pool.
 End

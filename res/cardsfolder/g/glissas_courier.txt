@@ -7,4 +7,5 @@ K:Mountainwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissas_courier.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/80.jpg
+Oracle:Mountainwalk
 End

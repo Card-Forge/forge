@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Wall | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_masons.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/86.jpg
+Oracle:When Goblin Masons dies, destroy target Wall.
 End

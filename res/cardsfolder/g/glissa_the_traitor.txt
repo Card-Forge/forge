@@ -10,4 +10,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | ValidTgts$ Artifact.YouCtrl | Origin$ 
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissa_the_traitor.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/96.jpg
+Oracle:First strike, deathtouch\nWhenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.
 End

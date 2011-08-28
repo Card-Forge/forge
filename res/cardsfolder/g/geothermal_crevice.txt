@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geothermal_crevice.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/323.jpg
+Oracle:Geothermal Crevice enters the battlefield tapped.\n{T}: Add {R} to your mana pool.\n{T}, Sacrifice Geothermal Crevice: Add {B}{G} to your mana pool.
 End

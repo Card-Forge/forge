@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horror_of_horrors.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/140.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/20.jpg
+Oracle:Sacrifice a Swamp: Regenerate target black creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
 End

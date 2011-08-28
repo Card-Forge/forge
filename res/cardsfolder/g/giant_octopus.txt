@@ -9,4 +9,5 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/39.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/57.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9eb/4.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/77.jpg
+Oracle:
 End

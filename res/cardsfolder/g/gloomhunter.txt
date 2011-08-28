@@ -7,4 +7,5 @@ K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomhunter.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/111.jpg
+Oracle:Flying
 End

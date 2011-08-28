@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_defender.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/185.jpg
+Oracle:Target creature gets +0/+X until end of turn, where X is its converted mana cost.
 End

@@ -9,4 +9,5 @@ SVar:X:TriggeredCard$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hamletback_goliath.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/173.jpg
+Oracle:Whenever another creature enters the battlefield, you may put X +1/+1 counters on Hamletback Goliath, where X is that creature's power.
 End

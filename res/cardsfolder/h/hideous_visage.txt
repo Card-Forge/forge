@@ -6,4 +6,5 @@ A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.YouCtrl | KW$ Intimidate | Spel
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_visage.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/100.jpg
+Oracle:Creatures you control gain intimidate until end of turn. (Each of those creatures can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 End

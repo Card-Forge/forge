@@ -12,4 +12,5 @@ SetInfo:POR|Common|http://magiccards.info/scans/en/po/58.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/81.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/55.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/74.jpg
+Oracle:
 End

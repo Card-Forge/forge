@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hua_tuo_honored_physician.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/137.jpg
+Oracle:{T}: Put target creature card from your graveyard on top of your library. Activate this ability only during your turn, before attackers are declared.
 End

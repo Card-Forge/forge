@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giants_ire.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/170.jpg
+Oracle:Giant's Ire deals 4 damage to target player. If you control a Giant, draw a card.
 End

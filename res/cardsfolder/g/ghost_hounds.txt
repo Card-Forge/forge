@@ -10,4 +10,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_hounds.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/12.jpg
+Oracle:Vigilance\nWhenever Ghost Hounds blocks or becomes blocked by a white creature, Ghost Hounds gains first strike until end of turn.
 End

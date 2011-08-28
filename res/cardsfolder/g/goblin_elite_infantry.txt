@@ -12,4 +12,5 @@ SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/177.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/183.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/187.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/206.jpg
+Oracle:Whenever Goblin Elite Infantry blocks or becomes blocked, it gets -1/-1 until end of turn.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gossamer_chains.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/106.jpg
+Oracle:Return Gossamer Chains to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.
 End

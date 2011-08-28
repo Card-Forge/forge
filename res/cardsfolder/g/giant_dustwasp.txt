@@ -8,4 +8,5 @@ K:Suspend:4:1 G
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122313.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/129.jpg
+Oracle:Flying\nSuspend 4-{1}{G} (Rather than cast this card from your hand, you may pay {1}{G} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
 End

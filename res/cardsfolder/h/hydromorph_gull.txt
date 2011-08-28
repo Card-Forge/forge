@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydromorph_gull.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/40.jpg
+Oracle:Flying\n{U}, Sacrifice Hydromorph Gull: Counter target spell that targets one or more creatures you control.
 End

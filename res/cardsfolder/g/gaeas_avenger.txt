@@ -8,4 +8,5 @@ SVar:X:Count$NumTypeOppCtrl.Artifact/Plus.1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_avenger.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/63.jpg
+Oracle:Gaea's Avenger's power and toughness are each equal to 1 plus the number of artifacts your opponents control.
 End

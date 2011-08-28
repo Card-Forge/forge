@@ -10,4 +10,5 @@ SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/191.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/103.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/194.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/192.jpg
+Oracle:Goblin Raider can't block.
 End

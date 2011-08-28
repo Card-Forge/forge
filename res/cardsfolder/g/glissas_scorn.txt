@@ -7,4 +7,5 @@ SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissas_scorn.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/110.jpg
+Oracle:Destroy target artifact. Its controller loses 1 life.
 End

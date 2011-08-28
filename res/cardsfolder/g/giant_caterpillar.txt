@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_caterpillar.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/58.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/249.jpg
+Oracle:{G}, Sacrifice Giant Caterpillar: Put a 1/1 green Insect creature token with flying named Butterfly onto the battlefield at the beginning of the next end step.
 End

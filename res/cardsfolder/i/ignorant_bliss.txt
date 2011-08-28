@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignorant_bliss.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/64.jpg
+Oracle:Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.
 End

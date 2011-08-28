@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ 5 T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 1 | Tok
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gargoyle_castle.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/225.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{5}, {T}, Sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.
 End

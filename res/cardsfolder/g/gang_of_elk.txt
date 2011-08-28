@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gang_of_elk.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/102.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/247.jpg
+Oracle:Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
 End

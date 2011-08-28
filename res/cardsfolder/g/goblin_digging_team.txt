@@ -10,4 +10,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/234.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/64.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/182.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/186.jpg
+Oracle:{T}, Sacrifice Goblin Digging Team: Destroy target Wall.
 End

@@ -10,4 +10,5 @@ SVar:X:TriggeredAttacker$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_pain.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/16.jpg
+Oracle:Until end of turn, whenever a creature you control attacks and isn't blocked, you may choose to have it deal damage equal to its power to a target creature. If you do, it assigns no combat damage this turn.
 End

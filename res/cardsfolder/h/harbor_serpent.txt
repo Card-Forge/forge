@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_serpent.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/56.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/56.jpg
+Oracle:Islandwalk (This creature is unblockable as long as defending player controls an Island.)\nHarbor Serpent can't attack unless there are five or more Islands on the battlefield.
 End

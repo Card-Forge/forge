@@ -8,4 +8,5 @@ PT:0/0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivy_elemental.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/245.jpg
+Oracle:Ivy Elemental enters the battlefield with X +1/+1 counters on it.
 End

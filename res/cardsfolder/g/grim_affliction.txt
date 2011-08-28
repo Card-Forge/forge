@@ -7,4 +7,5 @@ SVar:DBProliferate:DB$Proliferate
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_affliction.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/63.jpg
+Oracle:Put a -1/-1 counter on target creature, then proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
 End

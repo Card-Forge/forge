@@ -9,4 +9,5 @@ SVar:X:Sacrificed$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gristleback.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/87.jpg
+Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)\nSacrifice Gristleback: You gain life equal to Gristleback's power.
 End

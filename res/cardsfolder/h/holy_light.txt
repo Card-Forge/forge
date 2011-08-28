@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_light.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/83.jpg
+Oracle:Nonwhite creatures get -1/-1 until end of turn.
 End

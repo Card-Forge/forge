@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gosta_dirk.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/267.jpg
+Oracle:First strike\nCreatures with islandwalk can be blocked as though they didn't have islandwalk.
 End

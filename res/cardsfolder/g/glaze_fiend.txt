@@ -10,4 +10,5 @@ SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/77.jpg
+Oracle:Flying\nWhenever another artifact enters the battlefield under your control, Glaze Fiend gets +2/+2 until end of turn.
 End

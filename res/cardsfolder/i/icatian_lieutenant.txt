@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.Soldier | NumAtt$ +1 | SpellDescrip
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_lieutenant.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/151.jpg
+Oracle:{1}{W}: Target Soldier creature gets +1/+0 until end of turn.
 End

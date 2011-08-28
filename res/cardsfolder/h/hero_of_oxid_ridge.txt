@@ -12,4 +12,5 @@ SVar:KWPump:Mode$ Continuous | Affected$ Creature.powerLE1 | AddKeyword$ HIDDEN 
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hero_of_oxid_ridge.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/66.jpg
+Oracle:Haste\nBattle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever Hero of Oxid Ridge attacks, creatures with power 1 or less can't block this turn.
 End

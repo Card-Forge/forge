@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmattan_efreet.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/73.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/69.jpg
+Oracle:Flying\n{1}{U}{U}: Target creature gains flying until end of turn.
 End

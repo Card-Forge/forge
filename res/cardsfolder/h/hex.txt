@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89059.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/89.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/87.jpg
+Oracle:Destroy six target creatures.
 End

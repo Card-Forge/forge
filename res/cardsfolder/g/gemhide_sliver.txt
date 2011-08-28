@@ -13,4 +13,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemhide_sliver.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/196.jpg
+Oracle:All Slivers have "{T}: Add one mana of any color to your mana pool."
 End

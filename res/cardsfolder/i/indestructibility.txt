@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ HIDDEN Indestructi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indestructibility.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/17.jpg
+Oracle:Enchant permanent\nEnchanted permanent is indestructible. (Effects that say "destroy" don't destroy that permanent. An indestructible creature can't be destroyed by damage.)
 End

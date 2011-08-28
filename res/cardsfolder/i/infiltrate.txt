@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltrate.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/33.jpg
+Oracle:Target creature is unblockable this turn.
 End

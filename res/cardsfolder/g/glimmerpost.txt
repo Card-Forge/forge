@@ -9,4 +9,5 @@ SVar:X:Count$TypeOnBattlefield.Locus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmerpost.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/227.jpg
+Oracle:When Glimmerpost enters the battlefield, you gain 1 life for each Locus on the battlefield.\n{T}: Add {1} to your mana pool.
 End

@@ -9,4 +9,5 @@ SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gwafa_hazid_profiteer.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/110.jpg
+Oracle:{W}{U}, {T}: Put a bribery counter on target creature you don't control. Its controller draws a card.\nCreatures with bribery counters on them can't attack or block.
 End

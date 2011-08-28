@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc_demon.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/74.jpg
+Oracle:Flying\nWhen Havoc Demon dies, all creatures get -5/-5 until end of turn.
 End

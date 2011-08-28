@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ Sac<1/Elemental> | ValidTgts$ Creature.Giant | TgtPrompt$ Sel
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hearthcage_giant.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/174.jpg
+Oracle:When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.\nSacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
 End

@@ -10,4 +10,5 @@ SVar:TrigReturnOwner:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_cedars.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/105.jpg
+Oracle:Enchant Mountain\n{2}: Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land.\nWhen enchanted Mountain is put into a graveyard, you may return Genju of the Spires from your graveyard to your hand.
 End

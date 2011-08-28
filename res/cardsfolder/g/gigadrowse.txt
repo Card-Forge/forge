@@ -7,4 +7,5 @@ K:Replicate U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigadrowse.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/26.jpg
+Oracle:Replicate {U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTap target permanent.
 End

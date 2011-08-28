@@ -8,4 +8,5 @@ K:Bushido 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_honor.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/12.jpg
+Oracle:Protection from black\nBushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
 End

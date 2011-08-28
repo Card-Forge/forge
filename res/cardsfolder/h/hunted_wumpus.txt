@@ -11,4 +11,5 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/258.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/253.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/248.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/269.jpg
+Oracle:When Hunted Wumpus enters the battlefield, each other player may put a creature card from his or her hand onto the battlefield.
 End

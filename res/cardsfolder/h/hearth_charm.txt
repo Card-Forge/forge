@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hearth_charm.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/82.jpg
+Oracle:Choose one - Destroy target artifact creature; or attacking creatures get +1/+0 until end of turn; or target creature with power 2 or less is unblockable this turn.
 End

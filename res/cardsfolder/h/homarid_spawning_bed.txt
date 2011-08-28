@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_spawning_bed.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/106.jpg
+Oracle:{1}{U}{U}, Sacrifice a blue creature: Put X 1/1 blue Camarid creature tokens onto the battlefield, where X is the sacrificed creature's converted mana cost.
 End

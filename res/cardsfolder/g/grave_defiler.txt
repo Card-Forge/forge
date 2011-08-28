@@ -3,10 +3,11 @@ ManaCost:3 B
 Types:Creature Zombie
 Text:no text
 PT:2/1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library in any order.  
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Zombie
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_defiler.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/40.jpg
+Oracle:When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library in any order.\n{1}{B}: Regenerate Grave Defiler.
 End

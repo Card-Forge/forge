@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ire_of_kaminari.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/109.jpg
+Oracle:Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
 End

@@ -8,4 +8,5 @@ K:Dredge 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_shell_scarab.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/211.jpg
+Oracle:{1}, Sacrifice Grave-Shell Scarab: Draw a card.\nDredge 1 (If you would draw a card, instead you may put exactly one card from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illuminated_wings.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/34.jpg
+Oracle:Enchant creature\nEnchanted creature has flying.\n{2}, Sacrifice Illuminated Wings: Draw a card.
 End

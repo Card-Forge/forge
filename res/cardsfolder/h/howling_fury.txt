@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/howling_fury.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/82.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/20.jpg
+Oracle:Target creature gets +4/+0 until end of turn.
 End

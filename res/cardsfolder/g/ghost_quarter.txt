@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_quarter.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/173.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
 End

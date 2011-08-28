@@ -10,4 +10,5 @@ SVar:EquipMe:Multiple
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gaveleer.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/92.jpg
+Oracle:Trample\nGoblin Gaveleer gets +2/+0 for each Equipment attached to it.
 End

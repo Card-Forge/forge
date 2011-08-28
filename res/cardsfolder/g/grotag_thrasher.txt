@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grotag_thrasher.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/83.jpg
+Oracle:Whenever Grotag Thrasher attacks, target creature can't block this turn.
 End

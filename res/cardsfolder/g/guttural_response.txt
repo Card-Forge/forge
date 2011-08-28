@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ RG | TargetType$ Spell | TgtPrompt$ Select target Blue Ins
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guttural_response.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/208.jpg
+Oracle:Counter target blue instant spell.
 End

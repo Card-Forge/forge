@@ -12,4 +12,5 @@ SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_medusa.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/22.jpg
+Oracle:Whenever Infernal Medusa blocks a creature, destroy that creature at end of combat.\nWhenever Infernal Medusa becomes blocked by a non-Wall creature, destroy that creature at end of combat.
 End

@@ -10,4 +10,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_hellkite.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/103.jpg
+Oracle:Flying\nMorph {6}{R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Imperial Hellkite is turned face up, you may search your library for a Dragon card, reveal it, and put it into your hand. If you do, shuffle your library.
 End

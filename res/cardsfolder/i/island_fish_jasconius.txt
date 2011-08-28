@@ -15,4 +15,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/island_fish_jasc
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/61.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/78.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/22.jpg
+Oracle:Island Fish Jasconius doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {U}{U}{U}. If you do, untap Island Fish Jasconius.\nIsland Fish Jasconius can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Island Fish Jasconius.
 End

@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_matron.jp
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/191.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/100.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/191.jpg
+Oracle:When Goblin Matron enters the battlefield, you may search your library for a Goblin card, reveal that card, and put it into your hand. If you do, shuffle your library.
 End

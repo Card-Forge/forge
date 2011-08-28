@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostway.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/6.jpg
+Oracle:Exile each creature you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
 End

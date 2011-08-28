@@ -7,4 +7,5 @@ K:Bloodthirst 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghor_clan_savage.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/86.jpg
+Oracle:Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)
 End

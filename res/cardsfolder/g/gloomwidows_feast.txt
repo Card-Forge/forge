@@ -7,4 +7,5 @@ SVar:DBToken:DB$Token | ConditionDefined$ Targeted | ConditionPresent$ Card.Blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomwidows_feast.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/118.jpg
+Oracle:Destroy target creature with flying. If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield. (It can block creatures with flying.)
 End

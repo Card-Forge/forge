@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlef
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hired_giant.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/194.jpg
+Oracle:When Hired Giant enters the battlefield, each other player may search his or her library for a land card and put that card onto the battlefield. Then each player who searched his or her library this way shuffles it.
 End

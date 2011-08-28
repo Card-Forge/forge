@@ -11,4 +11,5 @@ SetInfo:LEB|Common|http://magiccards.info/scans/en/be/161.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/224.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/160.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/245.jpg
+Oracle:Ironclaw Orcs can't block creatures with power 2 or greater.
 End

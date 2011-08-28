@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_ground.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/253.jpg
+Oracle:{W}{W}: Return target nonsnow land you control to its owner's hand.
 End

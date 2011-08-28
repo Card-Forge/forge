@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature,Enchantment | TgtPrompt$ Sele
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ionas_judgment.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/8.jpg
+Oracle:Exile target creature or enchantment.
 End

@@ -8,4 +8,5 @@ K:stPreventDamage:You:Card.YouDontCtrl:1:If a source an opponent controls would 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_seraph.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/13.jpg
+Oracle:Flying\nIf a source an opponent controls would deal damage to you, prevent 1 of that damage.
 End

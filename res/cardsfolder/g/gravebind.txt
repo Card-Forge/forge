@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravebind.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/17.jpg
+Oracle:Target creature can't be regenerated this turn.\nDraw a card at the beginning of the next turn's upkeep.
 End

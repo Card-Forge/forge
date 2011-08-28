@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warrens.j
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/238.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/187.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/122.jpg
+Oracle:{2}{R}, Sacrifice two Goblins: Put three 1/1 red Goblin creature tokens onto the battlefield.
 End

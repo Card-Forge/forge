@@ -8,4 +8,5 @@ PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74082.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/10.jpg
+Oracle:{W}, {T}: You gain 2 life.\nChannel - {1}{W}, Discard Ghost-Lit Redeemer: You gain 4 life.
 End

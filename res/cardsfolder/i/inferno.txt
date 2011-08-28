@@ -11,4 +11,5 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/243.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/223.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/70.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/191.jpg
+Oracle:Inferno deals 6 damage to each creature and each player.
 End

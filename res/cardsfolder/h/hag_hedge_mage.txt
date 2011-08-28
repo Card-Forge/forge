@@ -10,4 +10,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$  0 | Origin$ Graveyard | Destination$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hag_hedge_mage.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/123.jpg
+Oracle:When Hag Hedge-Mage enters the battlefield, if you control two or more Swamps, you may have target player discard a card.\nWhen Hag Hedge-Mage enters the battlefield, if you control two or more Forests, you may put target card from your graveyard on top of your library.
 End

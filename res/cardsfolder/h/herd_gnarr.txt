@@ -9,4 +9,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herd_gnarr.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/200.jpg
+Oracle:Whenever another creature enters the battlefield under your control, Herd Gnarr gets +2/+2 until end of turn.
 End

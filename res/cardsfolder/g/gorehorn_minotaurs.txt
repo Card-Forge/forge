@@ -7,4 +7,5 @@ K:Bloodthirst 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorehorn_minotaurs.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/144.jpg
+Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)
 End

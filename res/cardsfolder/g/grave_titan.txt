@@ -11,4 +11,5 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_titan.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/97.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/98.jpg
+Oracle:Deathtouch\nWhenever Grave Titan enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield.
 End

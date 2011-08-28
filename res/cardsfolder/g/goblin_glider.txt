@@ -11,4 +11,5 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/189.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/98.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/102.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/189.jpg
+Oracle:Flying\nGoblin Glider can't block.
 End

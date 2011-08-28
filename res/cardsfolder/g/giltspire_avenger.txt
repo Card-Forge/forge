@@ -8,4 +8,5 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.dealtDamageToYouThisTurn | TgtProm
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giltspire_avenger.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/108.jpg
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Destroy target creature that dealt damage to you this turn.
 End

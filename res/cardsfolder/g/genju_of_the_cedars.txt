@@ -10,4 +10,5 @@ SVar:TrigReturnOwner:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_cedars.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/126.jpg
+Oracle:Enchant Forest\n{2}: Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land.\nWhen enchanted Forest is put into a graveyard, you may return Genju of the Cedars from your graveyard to your hand.
 End

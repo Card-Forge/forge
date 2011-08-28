@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ 3 R Sac<1/Land> | Tgt$ TgtP | NumDmg$ 2 | SpellDescript
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildmage.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/144.jpg
+Oracle:({R/G} can be paid with either {R} or {G}.)\n{3}{R}, Sacrifice a land: Gruul Guildmage deals 2 damage to target player.\n{3}{G}: Target creature gets +2/+2 until end of turn.
 End

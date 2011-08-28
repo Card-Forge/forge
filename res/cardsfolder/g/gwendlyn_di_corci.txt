@@ -7,4 +7,5 @@ A:AB$ Discard | Cost$ T | ValidTgts$ Player | PlayerTurn$ True | NumCards$ 1 | M
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gwendlyn_di_corci.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/268.jpg
+Oracle:{T}: Target player discards a card at random. Activate this ability only during your turn.
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graven_cairns.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/175.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/272.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{B/R}, {T}: Add {B}{B}, {B}{R}, or {R}{R} to your mana pool.
 End

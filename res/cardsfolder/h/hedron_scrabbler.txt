@@ -9,4 +9,5 @@ SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_scrabbler.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/204.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, Hedron Scrabbler gets +1/+1 until end of turn.
 End

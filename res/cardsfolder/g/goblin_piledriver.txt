@@ -10,4 +10,5 @@ SVar:X:Count$Valid Goblin.attacking+Other/Times.2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_piledriver.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/205.jpg
+Oracle:Protection from blue\nWhenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
 End

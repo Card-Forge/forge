@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_chieftai
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/235.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/77.jpg|2
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/250.jpg
+Oracle:{1}{G}: Regenerate Gorilla Chieftain.
 End

@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halt_order.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/34.jpg
+Oracle:Counter target artifact spell.\nDraw a card.
 End

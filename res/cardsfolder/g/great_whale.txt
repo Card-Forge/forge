@@ -8,4 +8,5 @@ SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_whale.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/77.jpg
+Oracle:When Great Whale enters the battlefield, untap up to seven lands.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_ray.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/199.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/150.jpg
+Oracle:Heat Ray deals X damage to target creature.
 End

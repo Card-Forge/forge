@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_charm.jpg
 SVar:Rarity:Uncommon
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/171.jpg
+Oracle:Choose one - Return target permanent to its owner's hand; or target creature gets -4/-4 until end of turn; or creatures you control get +2/+0 until end of turn.
 End

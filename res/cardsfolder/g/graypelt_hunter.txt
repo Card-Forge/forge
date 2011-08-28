@@ -11,4 +11,5 @@ SVar:BuffedBy:Ally
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/103.jpg
+Oracle:Trample\nWhenever Graypelt Hunter or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Graypelt Hunter.
 End

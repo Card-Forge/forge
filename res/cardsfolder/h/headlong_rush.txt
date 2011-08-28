@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/headlong_rush.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/198.jpg
+Oracle:Attacking creatures gain first strike until end of turn.
 End

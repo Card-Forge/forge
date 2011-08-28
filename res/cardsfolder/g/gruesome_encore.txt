@@ -7,4 +7,5 @@ SVar:DBPump:DB$Pump | KW$ Haste & HIDDEN At the beginning of the end step, exile
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruesome_encore.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/44.jpg
+Oracle:Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
 End

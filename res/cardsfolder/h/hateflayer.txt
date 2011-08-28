@@ -9,4 +9,5 @@ SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hateflayer.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/55.jpg
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\n{2}{R}, {Q}: Hateflayer deals damage equal to its power to target creature or player. ({Q} is the untap symbol.)
 End

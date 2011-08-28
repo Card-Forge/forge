@@ -9,4 +9,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_cheetah.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/251.jpg
+Oracle:Whenever Horned Cheetah deals damage, you gain that much life.
 End

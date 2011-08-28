@@ -7,4 +7,5 @@ K:CARDNAME can't be blocked by more than one creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/huang_zhong_shu_general.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/8.jpg
+Oracle:Huang Zhong, Shu General can't be blocked by more than one creature.
 End

@@ -12,4 +12,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_flame_acolyte.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/181.jpg
+Oracle:When Inner-Flame Acolyte enters the battlefield, target creature gets +2/+0 and gains haste until end of turn.\nEvoke {R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
 End

@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Ha
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_wings.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/38.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has flying.\nDiscard a card: Return enchanted creature to its owner's hand.
 End

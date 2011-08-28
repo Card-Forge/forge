@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irini_sengir.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/17.jpg
+Oracle:Green enchantment spells and white enchantment spells cost {2} more to cast.
 End

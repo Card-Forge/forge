@@ -10,4 +10,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Griffin | TokenT
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_guide.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/21.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying.\nWhen enchanted creature dies, put a 2/2 white Griffin creature token with flying onto the battlefield.
 End

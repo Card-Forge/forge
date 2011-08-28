@@ -8,4 +8,5 @@ K:Morph:1 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravel_slinger.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/33.jpg
+Oracle:{T}: Gravel Slinger deals 1 damage to target attacking or blocking creature.\nMorph {1}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

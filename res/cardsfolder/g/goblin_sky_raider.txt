@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83305.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/208.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/195.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/210.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
 End

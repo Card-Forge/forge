@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glyph_of_destruction.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/148.jpg
+Oracle:Target blocking Wall you control gets +10/+0 until end of combat. Prevent all damage that would be dealt to it this turn. Destroy it at the beginning of the next end step.
 End

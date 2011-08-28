@@ -8,4 +8,5 @@ A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godsire.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/170.jpg
+Oracle:Vigilance\n{T}: Put an 8/8 Beast creature token that's red, green, and white onto the battlefield.
 End

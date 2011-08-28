@@ -7,4 +7,5 @@ SVar:DB:DB$Draw | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hindering_light.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/173.jpg
+Oracle:Counter target spell that targets you or a permanent you control.\nDraw a card.
 End

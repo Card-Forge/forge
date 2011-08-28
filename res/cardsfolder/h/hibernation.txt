@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/82.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/79.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/79.jpg
+Oracle:Return all green permanents to their owners' hands.
 End
