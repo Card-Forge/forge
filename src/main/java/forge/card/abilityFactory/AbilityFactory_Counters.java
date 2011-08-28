@@ -53,7 +53,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return putDoTriggerAI(af, this, mandatory);
             }
 
@@ -119,7 +119,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return putDoTriggerAI(af, this, mandatory);
             }
 
@@ -134,14 +134,16 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String putStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String putStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         Counters cType = Counters.valueOf(params.get("CounterType"));
         Card card = af.getHostCard();
@@ -149,14 +151,15 @@ public class AbilityFactory_Counters {
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName())
                 .append(" counter");
-        if (amount != 1) sb.append("s");
+        if (amount != 1) { sb.append("s"); }
         sb.append(" on ");
 
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
+        }
         else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
@@ -164,10 +167,10 @@ public class AbilityFactory_Counters {
         Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
             Card tgtC = it.next();
-            if (tgtC.isFaceDown()) sb.append("Morph");
-            else sb.append(tgtC);
-            
-            if (it.hasNext()) sb.append(", ");
+            if (tgtC.isFaceDown()) { sb.append("Morph"); }
+            else { sb.append(tgtC); }
+
+            if (it.hasNext()) { sb.append(", "); }
         }
 
         sb.append(".");
@@ -188,7 +191,8 @@ public class AbilityFactory_Counters {
      * @return a boolean.
      */
     private static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+        // AI needs to be expanded, since this function can be pretty complex based on
+        // what the expected targets could be
         HashMap<String, String> params = af.getMapParams();
         Random r = MyRandom.random;
         Cost abCost = sa.getPayCosts();
@@ -204,39 +208,47 @@ public class AbilityFactory_Counters {
 
         list = AllZoneUtil.getPlayerCardsInPlay(player);
         list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return CardFactoryUtil.canTarget(source, c) && !c.hasKeyword("CARDNAME can't have counters placed on it.");
+            public boolean addCard(final Card c) {
+                return CardFactoryUtil.canTarget(source, c)
+                    && !c.hasKeyword("CARDNAME can't have counters placed on it.");
             }
         });
 
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
 
-            if (list.size() < abTgt.getMinTargets(source, sa))
+            if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
+            }
         } else {    // "put counter on this"
             PlayerZone pZone = AllZone.getZone(source);
             // Don't activate Curse abilities on my cards and non-curse abilites on my opponents
-            if (!pZone.getPlayer().equals(player))
+            if (!pZone.getPlayer().equals(player)) {
                 return false;
+            }
         }
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 4))
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
                 return false;
+            }
 
-            if (!CostUtil.checkDiscardCost(abCost, source))
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
                 return false;
-                
-            if (!CostUtil.checkSacrificeCost(abCost, source))
+            }
+
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
                 return false;
-            
-            if (CostUtil.checkCreatureSacrificeCost(abCost, source))
+            }
+
+            if (CostUtil.checkCreatureSacrificeCost(abCost, source)) {
                 return false;
-                
-            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+            }
+
+            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
                 return false;
+            }
         }
 
         // TODO handle proper calculation of X values based on Cost
@@ -246,11 +258,10 @@ public class AbilityFactory_Counters {
             // Set PayX here to maximum value.
             amount = ComputerUtil.determineLeftoverMana(sa);
             source.setSVar("PayX", Integer.toString(amount));
-            // TODO:
         }
 
         //don't use it if no counters to add
-        if (amount <= 0) return false;
+        if (amount <= 0) { return false; }
 
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -261,7 +272,9 @@ public class AbilityFactory_Counters {
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
+                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
+                            || abTgt.getNumTargeted() == 0)
+                    {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -277,7 +290,9 @@ public class AbilityFactory_Counters {
                 }
 
                 if (choice == null) {    // can't find anything left
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
+                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
+                            || abTgt.getNumTargeted() == 0)
+                    {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -293,24 +308,29 @@ public class AbilityFactory_Counters {
             int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
             // each non +1/+1 counter on the card is a 10% chance of not activating this ability.
 
-            if (!(type.equals("P1P1") || type.equals("ICE")) && r.nextFloat() < .1 * currCounters)
+            if (!(type.equals("P1P1") || type.equals("ICE")) && r.nextFloat() < .1 * currCounters) {
                 return false;
+            }
         }
 
         //Don't use non P1P1/M1M1 counters before main 2 if possible
         if (AllZone.getPhase().isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1")))
+        {
             return false;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
-        if (AbilityFactory.playReusable(sa))
+        if (AbilityFactory.playReusable(sa)) {
             return chance;
+        }
 
         return ((r.nextFloat() < .6667) && chance);
-    }//putCanPlayAI
+    } //putCanPlayAI
 
     /**
      * <p>putPlayDrawbackAI.</p>
@@ -334,7 +354,7 @@ public class AbilityFactory_Counters {
 
         list = AllZoneUtil.getPlayerCardsInPlay(player);
         list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
+            public boolean addCard(final Card c) {
                 return CardFactoryUtil.canTarget(source, c);
             }
         });
@@ -342,14 +362,17 @@ public class AbilityFactory_Counters {
         if (abTgt != null) {
             list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
 
-            if (list.size() == 0)
+            if (list.size() == 0) {
                 return false;
+            }
 
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
                 if (list.size() == 0) {
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
+                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
+                            || abTgt.getNumTargeted() == 0)
+                    {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -364,7 +387,9 @@ public class AbilityFactory_Counters {
                 }
 
                 if (choice == null) {    // can't find anything left
-                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
+                    if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa)
+                            || abTgt.getNumTargeted() == 0)
+                    {
                         abTgt.resetTargets();
                         return false;
                     } else {
@@ -378,11 +403,12 @@ public class AbilityFactory_Counters {
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
-    }//putPlayDrawbackAI
+    } //putPlayDrawbackAI
 
     /**
      * <p>putDoTriggerAI.</p>
@@ -392,10 +418,11 @@ public class AbilityFactory_Counters {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean putDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean putDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // if there is a cost, it's gotta be optional
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         HashMap<String, String> params = af.getMapParams();
         Target abTgt = sa.getTarget();
@@ -413,7 +440,7 @@ public class AbilityFactory_Counters {
             list = new CardList(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa).toArray());
 
             if (!mandatory) {
-                // TODO: If Trigger isn't mandatory, when wouldn't we want to put a counter?
+                // TODO - If Trigger isn't mandatory, when wouldn't we want to put a counter?
                 // things like Powder Keg, which are way too complex for the AI
             }
         } else {
@@ -431,16 +458,19 @@ public class AbilityFactory_Counters {
                 }
                 preferred = false;
             }
-            // Not mandatory, or the the list was regenerated and is still empty, so return false since there are no targets
-            if (list.isEmpty())
+            // Not mandatory, or the the list was regenerated and is still empty,
+            // so return false since there are no targets
+            if (list.isEmpty()) {
                 return false;
+            }
 
             Card choice = null;
 
             // Choose targets here:
             if (af.isCurse()) {
-                if (preferred)
+                if (preferred) {
                     choice = chooseCursedTarget(list, type, amount);
+                }
 
                 else {
                     if (type.equals("M1M1")) {
@@ -450,8 +480,9 @@ public class AbilityFactory_Counters {
                     }
                 }
             } else {
-                if (preferred)
+                if (preferred) {
                     choice = chooseBoonTarget(list, type);
+                }
 
                 else {
                     if (type.equals("P1P1")) {
@@ -461,7 +492,7 @@ public class AbilityFactory_Counters {
                     }
                 }
             }
-            
+
             //TODO - I think choice can be null here.  Is that ok for addTarget()?
             abTgt.addTarget(choice);
         }
@@ -482,19 +513,21 @@ public class AbilityFactory_Counters {
      * @param amount a int.
      * @return a {@link forge.Card} object.
      */
-    private static Card chooseCursedTarget(CardList list, String type, final int amount) {
+    private static Card chooseCursedTarget(final CardList list, final String type, final int amount) {
         Card choice;
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
             CardList killable = list.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
+                public boolean addCard(final Card c) {
                     return c.getNetDefense() <= amount;
                 }
             });
-            if (killable.size() > 0)
+            if (killable.size() > 0) {
                 choice = CardFactoryUtil.AI_getBestCreature(killable);
-            else
+            }
+            else {
                 choice = CardFactoryUtil.AI_getBestCreature(list);
+            }
         } else {
             // improve random choice here
             choice = CardFactoryUtil.getRandomCard(list);
@@ -509,18 +542,18 @@ public class AbilityFactory_Counters {
      * @param type a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    private static Card chooseBoonTarget(CardList list, String type) {
+    private static Card chooseBoonTarget(final CardList list, final String type) {
         Card choice;
         if (type.equals("P1P1")) {
             choice = CardFactoryUtil.AI_getBestCreature(list);
-        } 
-        else if(type.equals("DIVINITY")) {
-        	list = list.filter(new CardListFilter() {
-        		public boolean addCard(Card c) {
-        			return c.getCounters(Counters.DIVINITY) == 0;
-        		}
-        	});
-        	choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, null, false);
+        }
+        else if (type.equals("DIVINITY")) {
+            CardList boon = list.filter(new CardListFilter() {
+                public boolean addCard(final Card c) {
+                    return c.getCounters(Counters.DIVINITY) == 0;
+                }
+            });
+            choice = CardFactoryUtil.AI_getMostExpensivePermanent(boon, null, false);
         }
         else {
             // The AI really should put counters on cards that can use it.
@@ -546,18 +579,22 @@ public class AbilityFactory_Counters {
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
+        }
         else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
 
         for (Card tgtCard : tgtCards) {
             if (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)) {
-                if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield))
+                if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield)) {
                     tgtCard.addCounter(Counters.valueOf(type), counterAmount);
-                else    // adding counters to something like re-suspend cards
+                }
+                else {
+                    // adding counters to something like re-suspend cards
                     tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
+                }
             }
         }
     }
@@ -592,7 +629,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return removeDoTriggerAI(af, this, mandatory);
             }
 
@@ -658,7 +695,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return removeDoTriggerAI(af, this, mandatory);
             }
 
@@ -673,35 +710,39 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String removeStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String removeStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         Card card = af.getHostCard();
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(card).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         Counters cType = Counters.valueOf(params.get("CounterType"));
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
         sb.append("Remove ");
-        if (params.containsKey("UpTo")) sb.append("up to ");
+        if (params.containsKey("UpTo")) { sb.append("up to "); }
         sb.append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) sb.append("s");
+        if (amount != 1) { sb.append("s"); }
         sb.append(" from");
 
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
+        }
         else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
-        for (Card c : tgtCards)
+        for (Card c : tgtCards) {
             sb.append(" ").append(c);
+        }
 
         sb.append(".");
 
@@ -721,7 +762,8 @@ public class AbilityFactory_Counters {
      * @return a boolean.
      */
     private static boolean removeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+        // AI needs to be expanded, since this function can be pretty complex based on what
+        // the expected targets could be
         Random r = MyRandom.random;
         Cost abCost = sa.getPayCosts();
         //Target abTgt = sa.getTarget();
@@ -740,17 +782,21 @@ public class AbilityFactory_Counters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 4))
+            if (!CostUtil.checkLifeCost(abCost, source, 4)) {
                 return false;
+            }
 
-            if (!CostUtil.checkDiscardCost(abCost, source))
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
                 return false;
-                
-            if (!CostUtil.checkSacrificeCost(abCost, source))
+            }
+
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
                 return false;
-                
-            if (!CostUtil.checkRemoveCounterCost(abCost, source))
+            }
+
+            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
                 return false;
+            }
         }
 
         // TODO handle proper calculation of X values based on Cost
@@ -764,12 +810,14 @@ public class AbilityFactory_Counters {
         // Placeholder: No targeting necessary
         int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
         // each counter on the card is a 10% chance of not activating this ability.
-        if (r.nextFloat() < .1 * currCounters)
+        if (r.nextFloat() < .1 * currCounters) {
             return false;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return ((r.nextFloat() < .6667) && chance);
     }
@@ -782,7 +830,8 @@ public class AbilityFactory_Counters {
      * @return a boolean.
      */
     private static boolean removePlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+        // AI needs to be expanded, since this function can be pretty complex based on what
+        // the expected targets could be
         //Target abTgt = sa.getTarget();
         //final Card source = sa.getSourceCard();
         //CardList list;
@@ -805,8 +854,9 @@ public class AbilityFactory_Counters {
         //currently, not targeted
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return chance;
     }
@@ -819,8 +869,9 @@ public class AbilityFactory_Counters {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean removeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
-        // AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+    private static boolean removeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        // AI needs to be expanded, since this function can be pretty complex based on what the
+        // expected targets could be
         boolean chance = true;
 
         //TODO - currently, not targeted, only for Self
@@ -828,12 +879,14 @@ public class AbilityFactory_Counters {
         // Note: Not many cards even use Trigger and Remove Counters. And even fewer are not mandatory
         // Since the targeting portion of this would be what
 
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
+        }
 
         return chance;
     }
@@ -854,25 +907,29 @@ public class AbilityFactory_Counters {
         ArrayList<Card> tgtCards;
 
         Target tgt = af.getAbTgt();
-        if (tgt != null)
+        if (tgt != null) {
             tgtCards = tgt.getTargetCards();
+        }
         else {
             tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
         }
 
-        for (Card tgtCard : tgtCards)
+        for (Card tgtCard : tgtCards) {
             if (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)) {
                 PlayerZone zone = AllZone.getZone(tgtCard);
 
-                if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile))
+                if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile)) {
                     if (params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
                         ArrayList<String> choices = new ArrayList<String>();
-                        for (int i = 0; i <= counterAmount; i++) choices.add("" + i);
-                        Object o = GuiUtils.getChoice("Select the number of " + type + " counters to remove", choices.toArray());
+                        for (int i = 0; i <= counterAmount; i++) { choices.add("" + i); }
+                        String prompt = "Select the number of " + type + " counters to remove";
+                        Object o = GuiUtils.getChoice(prompt, choices.toArray());
                         counterAmount = Integer.parseInt((String) o);
                     }
+                }
                 tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
             }
+        }
     }
 
     // *******************************************
@@ -905,7 +962,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return proliferateDoTriggerAI(this, mandatory);
             }
         };
@@ -979,7 +1036,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return proliferateDoTriggerAI(this, mandatory);
             }
         };
@@ -993,12 +1050,14 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String proliferateStackDescription(SpellAbility sa) {
+    private static String proliferateStackDescription(final SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
         sb.append("Proliferate.");
         sb.append(" (You choose any number of permanents and/or players with ");
         sb.append("counters on them, then give each another counter of a kind already there.)");
@@ -1017,11 +1076,12 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean proliferateShouldPlayAI(SpellAbility sa) {
+    private static boolean proliferateShouldPlayAI(final SpellAbility sa) {
         boolean chance = true;
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         // TODO: Make sure Human has poison counters or there are some counters we want to proliferate
         return chance;
@@ -1034,11 +1094,12 @@ public class AbilityFactory_Counters {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean proliferateDoTriggerAI(SpellAbility sa, boolean mandatory) {
+    private static boolean proliferateDoTriggerAI(final SpellAbility sa, final boolean mandatory) {
         boolean chance = true;
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.doTrigger(mandatory);
+        }
 
         // TODO: Make sure Human has poison counters or there are some counters we want to proliferate
         return chance;
@@ -1050,22 +1111,22 @@ public class AbilityFactory_Counters {
      * @param AF a {@link forge.card.abilityFactory.AbilityFactory} object.
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void proliferateResolve(final AbilityFactory AF, SpellAbility sa) {
+    private static void proliferateResolve(final AbilityFactory af, final SpellAbility sa) {
         CardList hperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.getHumanPlayer());
         hperms = hperms.filter(new CardListFilter() {
-            public boolean addCard(Card crd) {
+            public boolean addCard(final Card crd) {
                 return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
             }
         });
 
         CardList cperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.getComputerPlayer());
         cperms = cperms.filter(new CardListFilter() {
-            public boolean addCard(Card crd) {
+            public boolean addCard(final Card crd) {
                 return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
             }
         });
 
-        if (AF.getHostCard().getController().isHuman()) {
+        if (af.getHostCard().getController().isHuman()) {
             cperms.addAll(hperms);
             final CardList unchosen = cperms;
             AllZone.getInputControl().setInput(new Input() {
@@ -1079,49 +1140,57 @@ public class AbilityFactory_Counters {
 
                 @Override
                 public void selectButtonCancel() {
-                    AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll(); //Hacky intermittent solution to triggers that look for counters being put on. They used to wait for another priority passing after proliferate finished.
+                    // Hacky intermittent solution to triggers that look for counters being put on. They used
+                    // to wait for another priority passing after proliferate finished.
+                    AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
                     stop();
                 }
 
                 @Override
-                public void selectCard(Card card, PlayerZone zone) {
-                    if (!unchosen.contains(card)) return;
+                public void selectCard(final Card card, final PlayerZone zone) {
+                    if (!unchosen.contains(card)) { return; }
                     unchosen.remove(card);
                     ArrayList<String> choices = new ArrayList<String>();
-                    for (Counters c_1 : Counters.values())
-                        if (card.getCounters(c_1) != 0) choices.add(c_1.getName());
-                    if (choices.size() > 0)
+                    for (Counters c1 : Counters.values()) {
+                        if (card.getCounters(c1) != 0) { choices.add(c1.getName()); }
+                    }
+                    if (choices.size() > 0) {
                         card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : GuiUtils.getChoice("Select counter type", choices.toArray()).toString())), 1);
+                    }
                 }
 
                 boolean selComputer = false;
                 boolean selHuman = false;
 
                 @Override
-                public void selectPlayer(Player player) {
+                public void selectPlayer(final Player player) {
                     if (player.isHuman() && selHuman == false) {
                         selHuman = true;
-                        if (AllZone.getHumanPlayer().getPoisonCounters() > 0)
+                        if (AllZone.getHumanPlayer().getPoisonCounters() > 0) {
                             AllZone.getHumanPlayer().addPoisonCounters(1);
+                        }
                     }
                     if (player.isComputer() && selComputer == false) {
                         selComputer = true;
-                        if (AllZone.getComputerPlayer().getPoisonCounters() > 0)
+                        if (AllZone.getComputerPlayer().getPoisonCounters() > 0) {
                             AllZone.getComputerPlayer().addPoisonCounters(1);
+                        }
                     }
                 }
             });
         } else { //Compy
             cperms = cperms.filter(new CardListFilter() {
-                public boolean addCard(Card crd) {
+                public boolean addCard(final Card crd) {
                     int pos = 0;
                     int neg = 0;
-                    for (Counters c_1 : Counters.values()) {
-                        if (crd.getCounters(c_1) != 0) {
-                            if (CardFactoryUtil.isNegativeCounter(c_1))
+                    for (Counters c1 : Counters.values()) {
+                        if (crd.getCounters(c1) != 0) {
+                            if (CardFactoryUtil.isNegativeCounter(c1)) {
                                 neg++;
-                            else
+                            }
+                            else {
                                 pos++;
+                            }
                         }
                     }
                     return pos > neg;
@@ -1129,15 +1198,17 @@ public class AbilityFactory_Counters {
             });
 
             hperms = hperms.filter(new CardListFilter() {
-                public boolean addCard(Card crd) {
+                public boolean addCard(final Card crd) {
                     int pos = 0;
                     int neg = 0;
-                    for (Counters c_1 : Counters.values()) {
-                        if (crd.getCounters(c_1) != 0) {
-                            if (CardFactoryUtil.isNegativeCounter(c_1))
+                    for (Counters c1 : Counters.values()) {
+                        if (crd.getCounters(c1) != 0) {
+                            if (CardFactoryUtil.isNegativeCounter(c1)) {
                                 neg++;
-                            else
+                            }
+                            else {
                                 pos++;
+                            }
                         }
                     }
                     return pos < neg;
@@ -1146,8 +1217,9 @@ public class AbilityFactory_Counters {
 
             StringBuilder sb = new StringBuilder();
             sb.append("<html>Proliferate: <br>Computer selects ");
-            if (cperms.size() == 0 && hperms.size() == 0 && AllZone.getHumanPlayer().getPoisonCounters() == 0)
+            if (cperms.size() == 0 && hperms.size() == 0 && AllZone.getHumanPlayer().getPoisonCounters() == 0) {
                 sb.append("<b>nothing</b>.");
+            }
             else {
                 if (cperms.size() > 0) {
                     sb.append("<br>From Computer's permanents: <br><b>");
@@ -1165,27 +1237,31 @@ public class AbilityFactory_Counters {
                     }
                     sb.append("</b><br>");
                 }
-                if (AllZone.getHumanPlayer().getPoisonCounters() > 0)
+                if (AllZone.getHumanPlayer().getPoisonCounters() > 0) {
                     sb.append("<b>Human Player</b>.");
-            }//else
+                }
+            } //else
             sb.append("</html>");
 
 
             //add a counter for each counter type, if it would benefit the computer
             for (Card c : cperms) {
-                for (Counters c_1 : Counters.values())
-                    if (c.getCounters(c_1) != 0) c.addCounter(c_1, 1);
+                for (Counters c1 : Counters.values()) {
+                    if (c.getCounters(c1) != 0) { c.addCounter(c1, 1); }
+                }
             }
 
             //add a counter for each counter type, if it would screw over the player
             for (Card c : hperms) {
-                for (Counters c_1 : Counters.values())
-                    if (c.getCounters(c_1) != 0) c.addCounter(c_1, 1);
+                for (Counters c1 : Counters.values()) {
+                    if (c.getCounters(c1) != 0) { c.addCounter(c1, 1); }
+                }
             }
 
             //give human a poison counter, if he has one
-            if (AllZone.getHumanPlayer().getPoisonCounters() > 0)
+            if (AllZone.getHumanPlayer().getPoisonCounters() > 0) {
                 AllZone.getHumanPlayer().addPoisonCounters(1);
+            }
 
         } //comp
     }
@@ -1221,7 +1297,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return putAllCanPlayAI(af, this);
             }
 
@@ -1284,7 +1360,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return putAllPlayDrawbackAI(af, this);
             }
 
@@ -1299,20 +1375,22 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String putAllStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String putAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         Counters cType = Counters.valueOf(params.get("CounterType"));
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) sb.append("s");
+        if (amount != 1) { sb.append("s"); }
         sb.append(" on each valid permanent.");
 
         Ability_Sub abSub = sa.getSubAbility();
@@ -1331,7 +1409,8 @@ public class AbilityFactory_Counters {
      * @return a boolean.
      */
     private static boolean putAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+        // AI needs to be expanded, since this function can be pretty complex based on what
+        // the expected targets could be
         Random r = MyRandom.random;
         HashMap<String, String> params = af.getMapParams();
         Cost abCost = sa.getPayCosts();
@@ -1352,22 +1431,27 @@ public class AbilityFactory_Counters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 8))
+            if (!CostUtil.checkLifeCost(abCost, source, 8)) {
                 return false;
+            }
 
-            if (!CostUtil.checkDiscardCost(abCost, source))
+            if (!CostUtil.checkDiscardCost(abCost, source)) {
                 return false;
-                
-            if (!CostUtil.checkSacrificeCost(abCost, source))
+            }
+
+            if (!CostUtil.checkSacrificeCost(abCost, source)) {
                 return false;
+            }
         }
 
         if (tgt != null) {
             Player pl;
-            if (curse)
+            if (curse) {
                 pl = AllZone.getHumanPlayer();
-            else
+            }
+            else {
                 pl = AllZone.getComputerPlayer();
+            }
 
             tgt.addTarget(pl);
 
@@ -1391,23 +1475,24 @@ public class AbilityFactory_Counters {
         if (curse) {
             if (type.equals("M1M1")) {
                 CardList killable = hList.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
+                    public boolean addCard(final Card c) {
                         return c.getNetDefense() <= amount;
                     }
                 });
-                if (!(killable.size() > 2)) return false;
+                if (!(killable.size() > 2)) { return false; }
             } else {
                 //make sure compy doesn't harm his stuff more than human's stuff
-                if (cList.size() > hList.size()) return false;
+                if (cList.size() > hList.size()) { return false; }
             }
         } else {
             //human has more things that will benefit, don't play
-            if (hList.size() >= cList.size()) return false;
+            if (hList.size() >= cList.size()) { return false; }
         }
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
         return ((r.nextFloat() < .6667) && chance);
     }
@@ -1446,10 +1531,13 @@ public class AbilityFactory_Counters {
         }
 
         for (Card tgtCard : cards) {
-            if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield))
+            if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield)) {
                 tgtCard.addCounter(Counters.valueOf(type), counterAmount);
-            else    // adding counters to something like re-suspend cards
+            }
+            else {
+                // adding counters to something like re-suspend cards
                 tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
+            }
         }
     }
 
@@ -1484,7 +1572,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return true;
             }
 
@@ -1547,7 +1635,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return removeCounterAllPlayDrawbackAI(af, this);
             }
 
@@ -1562,20 +1650,22 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String removeCounterAllStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String removeCounterAllStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof Ability_Sub))
+        if (!(sa instanceof Ability_Sub)) {
             sb.append(sa.getSourceCard()).append(" - ");
-        else
+        }
+        else {
             sb.append(" ");
+        }
 
         Counters cType = Counters.valueOf(params.get("CounterType"));
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 
         sb.append("Remove ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) sb.append("s");
+        if (amount != 1) { sb.append("s"); }
         sb.append(" from each valid permanent.");
 
         Ability_Sub abSub = sa.getSubAbility();
@@ -1636,7 +1726,7 @@ public class AbilityFactory_Counters {
             tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
         }
     }
-    
+
     // *******************************************
     // ************ MoveCounters *****************
     // *******************************************
@@ -1667,7 +1757,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return moveCounterDoTriggerAI(af, this, mandatory);
             }
 
@@ -1730,7 +1820,7 @@ public class AbilityFactory_Counters {
             }
 
             @Override
-            public boolean doTrigger(boolean mandatory) {
+            public boolean doTrigger(final boolean mandatory) {
                 return moveCounterDoTriggerAI(af, this, mandatory);
             }
 
@@ -1745,7 +1835,7 @@ public class AbilityFactory_Counters {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String moveCounterStackDescription(AbilityFactory af, SpellAbility sa) {
+    private static String moveCounterStackDescription(final AbilityFactory af, final SpellAbility sa) {
         HashMap<String, String> params = af.getMapParams();
         StringBuilder sb = new StringBuilder();
         Card host = af.getHostCard();
@@ -1756,16 +1846,16 @@ public class AbilityFactory_Counters {
         else {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         }
-        
+
         ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
         Card source = null;
-        if(srcCards.size() > 0) {
+        if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
-        
+
         ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
         Card dest = null;
-        if(destCards.size() > 0) {
+        if (destCards.size() > 0) {
             dest = destCards.get(0);
         }
 
@@ -1774,7 +1864,7 @@ public class AbilityFactory_Counters {
 
         sb.append("Move ").append(amount).append(" ").append(cType.getName())
                 .append(" counter");
-        if (amount != 1) sb.append("s");
+        if (amount != 1) { sb.append("s"); }
         sb.append(" from ");
         sb.append(source).append(" to ").append(dest);
 
@@ -1796,29 +1886,34 @@ public class AbilityFactory_Counters {
      * @return a boolean.
      */
     private static boolean moveCounterCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        // AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+        // AI needs to be expanded, since this function can be pretty complex based on what
+        // the expected targets could be
         HashMap<String, String> params = af.getMapParams();
         Random r = MyRandom.random;
         String amountStr = params.get("CounterNum");
 
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
-        
+
         //don't use it if no counters to add
-        if (amount <= 0) return false;
+        if (amount <= 0) {
+            return false;
+        }
 
         // prevent run-away activations - first time will always return true
         boolean chance = false;
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
+        if (subAb != null) {
             chance &= subAb.chkAI_Drawback();
+        }
 
-        if (AbilityFactory.playReusable(sa))
+        if (AbilityFactory.playReusable(sa)) {
             return chance;
+        }
 
         return ((r.nextFloat() < .6667) && chance);
-    }//moveCounterCanPlayAI
+    } //moveCounterCanPlayAI
 
     /**
      * <p>moveCounterPlayDrawbackAI.</p>
@@ -1831,11 +1926,11 @@ public class AbilityFactory_Counters {
         boolean chance = false;
 
         Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
-            chance &= subAb.chkAI_Drawback();
+        if (subAb != null) {
+            chance &= subAb.chkAI_Drawback();}
 
         return chance;
-    }//moveCounterPlayDrawbackAI
+    } //moveCounterPlayDrawbackAI
 
     /**
      * <p>moveCounterDoTriggerAI.</p>
@@ -1845,10 +1940,11 @@ public class AbilityFactory_Counters {
      * @param mandatory a boolean.
      * @return a boolean.
      */
-    private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // if there is a cost, it's gotta be optional
-        if (!ComputerUtil.canPayCost(sa) && !mandatory)
+        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
+        }
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null) {
@@ -1873,24 +1969,24 @@ public class AbilityFactory_Counters {
 
         ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
         Card source = null;
-        if(srcCards.size() > 0) {
+        if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
 
         ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
         Card dest = null;
-        if(destCards.size() > 0) {
+        if (destCards.size() > 0) {
             dest = destCards.get(0);
         }
-        
-        if(null != source && null != dest) {
-            if(source.getCounters(cType) >= amount) {
-                if(!dest.hasKeyword("CARDNAME can't have counters placed on it.")) {
-                    dest.addCounter(cType,amount);
+
+        if (null != source && null != dest) {
+            if (source.getCounters(cType) >= amount) {
+                if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")) {
+                    dest.addCounter(cType, amount);
                     source.subtractCounter(cType, amount);
                 }
             }
         }
-    }//moveCounterResolve
+    } //moveCounterResolve
 
-}//end class AbilityFactory_Counters
+} //end class AbilityFactory_Counters
