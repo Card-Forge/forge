@@ -3,6 +3,7 @@ ManaCost:1 G
 Types:Creature Human Druid
 Text:no text
 PT:1/1
+A:AB$ DigUntil | Cost$ G T | Valid$ Land.Basic | ValidDescription$ Basic Land | FoundDestination$ Hand | RevealedDestination$ Graveyard | SpellDescription$ Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hermit_druid.jpg

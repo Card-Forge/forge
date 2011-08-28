@@ -592,7 +592,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
-
+/*
         //*************** START *********** START **************************
         else if (cardName.equals("Hermit Druid")) {
             Cost abCost = new Cost("G T", cardName, true);
@@ -645,7 +645,7 @@ public class CardFactory_Creatures {
                     " Put that card into your hand and all other cards revealed this way into your graveyard.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-
+*/
 
         //*************** START *********** START **************************
         else if (cardName.equals("Vedalken Plotter")) {

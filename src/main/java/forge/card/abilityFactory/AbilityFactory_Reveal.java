@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -446,6 +447,328 @@ public class AbilityFactory_Reveal {
         return toReturn;
     }
 
+    //**********************************************************************
+    //******************************* DigUntil ***************************
+    //**********************************************************************
+    
+    /**
+     * <p>createAbilityDigUntil.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createAbilityDigUntil(final AbilityFactory af) {
+
+        final SpellAbility abDig = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 4239474096624403497L;
+
+            @Override
+            public String getStackDescription() {
+                return digUntilStackDescription(af, this);
+            }
+
+            public boolean canPlayAI() {
+                return digUntilCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                digUntilResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(boolean mandatory) {
+                return digUntilTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abDig;
+    }
+
+    /**
+     * <p>createSpellDigUntil.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createSpellDigUntil(final AbilityFactory af) {
+        final SpellAbility spDig = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 3389143507816474146L;
+
+            @Override
+            public String getStackDescription() {
+                return digUntilStackDescription(af, this);
+            }
+
+            public boolean canPlayAI() {
+                return digUntilCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                digUntilResolve(af, this);
+            }
+
+        };
+        return spDig;
+    }
+
+    /**
+     * <p>createDrawbackDigUntil.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackDigUntil(final AbilityFactory af) {
+        final SpellAbility dbDig = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -3372788479421357024L;
+
+            @Override
+            public String getStackDescription() {
+                return digUntilStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                digUntilResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return true;
+            }
+
+            @Override
+            public boolean doTrigger(boolean mandatory) {
+                return digUntilTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbDig;
+    }
+    
+
+    /**
+     * <p>digUntilStackDescription.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String digUntilStackDescription(AbilityFactory af, SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = sa.getSourceCard();
+        StringBuilder sb = new StringBuilder();
+        
+        String desc = "Card";
+        if (params.containsKey("ValidDescription")){
+            desc = params.get("ValidDescription");
+        }
+        
+        int untilAmount = 1;
+        if (params.containsKey("Amount")){
+            untilAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Amount"), sa);
+        }
+
+        if (!(sa instanceof Ability_Sub))
+            sb.append(host).append(" - ");
+        else
+            sb.append(" ");
+
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null)
+            tgtPlayers = tgt.getTargetPlayers();
+        else
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+
+        for(Player pl : tgtPlayers){
+            sb.append(pl).append(" ");
+        }
+        
+        sb.append("reveals cards from his or her library until revealing ");
+        sb.append(untilAmount).append(" ").append(desc);
+        if (untilAmount != 1) sb.append("s");
+        sb.append(". Put ");
+        
+        String found = params.get("FoundDestination");
+        if (found != null){
+        
+            sb.append(untilAmount > 1 ? "those cards" : "that card");
+            sb.append(" ");
+            
+    
+            if (found.equals(Constant.Zone.Hand)){
+                sb.append("into his or her hand ");
+            }
+            
+            sb.append("and all other cards ");
+        }
+        else{
+            sb.append("the revealed cards ");
+        }
+        
+        String revealed = params.get("RevealedDestination");
+        if (revealed.equals(Constant.Zone.Graveyard)){
+            sb.append("into his or her graveyard.");
+        }
+
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>digUntilCanPlayAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean digUntilCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+
+        double chance = .4;    // 40 percent chance with instant speed stuff
+        if (AbilityFactory.isSorcerySpeed(sa))
+            chance = .667;    // 66.7% chance for sorcery speed (since it will never activate EOT)
+        Random r = MyRandom.random;
+        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+
+        Target tgt = sa.getTarget();
+        Player libraryOwner = AllZone.getComputerPlayer();
+
+        if (sa.getTarget() != null) {
+            tgt.resetTargets();
+            if (!AllZone.getHumanPlayer().canTarget(sa))
+                return false;
+            else
+                sa.getTarget().addTarget(AllZone.getHumanPlayer());
+                libraryOwner = AllZone.getHumanPlayer();
+        }
+
+        //return false if nothing to dig into
+        if (AllZoneUtil.getCardsInZone(Constant.Zone.Library, libraryOwner).isEmpty())
+            return false;
+
+        if (af.hasSubAbility()) {
+            Ability_Sub abSub = sa.getSubAbility();
+            if (abSub != null) {
+                return randomReturn && abSub.chkAI_Drawback();
+            }
+        }
+
+        return randomReturn;
+    }
+
+    /**
+     * <p>digUntilTriggerAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory a boolean.
+     * @return a boolean.
+     */
+    private static boolean digUntilTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa))
+            return false;
+
+        Target tgt = sa.getTarget();
+
+        if (sa.getTarget() != null) {
+            tgt.resetTargets();
+            sa.getTarget().addTarget(AllZone.getComputerPlayer());
+        }
+
+        return true;
+    }
+
+    /**
+     * <p>digUntilResolve.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void digUntilResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = sa.getSourceCard();
+        
+        String type = "Card";
+        if (params.containsKey("Valid")){
+            type = params.get("Valid");
+        }
+        
+        int untilAmount = 1;
+        if (params.containsKey("Amount")){
+            untilAmount = AbilityFactory.calculateAmount(host, params.get("Amount"), sa);
+        }
+        
+        Integer maxRevealed = null;
+        if (params.containsKey("MaxRevealed")){
+            maxRevealed = AbilityFactory.calculateAmount(host, params.get("MaxRevealed"), sa);
+        }
+
+        boolean remember = params.containsKey("RememberFound");
+        
+        ArrayList<Player> tgtPlayers;
+
+        Target tgt = af.getAbTgt();
+        if (tgt != null)
+            tgtPlayers = tgt.getTargetPlayers();
+        else
+            tgtPlayers = AbilityFactory.getDefinedPlayers(host, params.get("Defined"), sa);
+        
+        String foundDest = params.get("FoundDestination");
+        int foundLibPos = AbilityFactory.calculateAmount(host, params.get("FoundLibraryPosition"), sa); 
+        String revealedDest = params.get("RevealedDestination");
+        int revealedLibPos = AbilityFactory.calculateAmount(host, params.get("RevealedLibraryPosition"), sa); 
+
+        for (Player p : tgtPlayers) {
+            if (tgt == null || p.canTarget(sa)) {
+                CardList found = new CardList();
+                CardList revealed = new CardList();
+                
+                PlayerZone library = AllZone.getZone(Constant.Zone.Library, p);
+
+                int maxToDig = maxRevealed != null ? maxRevealed : library.size();
+                
+                for (int i = 0; i < maxToDig; i++) {
+                    Card c = library.get(i);
+                    revealed.add(c);
+                    if (c.isValid(type, sa.getActivatingPlayer(), host)){
+                        found.add(c);
+                        if (remember){
+                            host.addRemembered(c);
+                        }
+                        if (found.size() == untilAmount){
+                            break;
+                        }
+                    }
+                }
+
+                GuiUtils.getChoice(p + " revealed: ", revealed.toArray());
+                
+                // TODO: Allow Human to choose the order
+                if (foundDest != null){
+                    Iterator<Card> itr = found.iterator();
+                    while(itr.hasNext()){
+                        Card c = itr.next();
+                        AllZone.getGameAction().moveTo(foundDest, c, foundLibPos);
+                        revealed.remove(c);
+                    }
+                }
+                
+                Iterator<Card> itr = revealed.iterator();
+                while(itr.hasNext()){
+                    Card c = itr.next();
+                    AllZone.getGameAction().moveTo(revealedDest, c, revealedLibPos);
+                }
+            }//end foreach player
+        }
+    }//end resolve
+    
     //**********************************************************************
     //******************************* RevealHand ***************************
     //**********************************************************************

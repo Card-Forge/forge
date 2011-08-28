@@ -704,6 +704,15 @@ public class AbilityFactory {
             else if (isDb)
                 SA = AbilityFactory_Reveal.createDrawbackDig(this);
         }
+        
+        else if (API.equals("DigUntil")) {
+            if (isAb)
+                SA = AbilityFactory_Reveal.createAbilityDigUntil(this);
+            else if (isSp)
+                SA = AbilityFactory_Reveal.createSpellDigUntil(this);
+            else if (isDb)
+                SA = AbilityFactory_Reveal.createDrawbackDigUntil(this);
+        }
 
         else if (API.equals("Shuffle")) {
             if (isAb)
@@ -1029,6 +1038,9 @@ public class AbilityFactory {
     public static int calculateAmount(Card card, String amount, SpellAbility ability) {
         // amount can be anything, not just 'X' as long as sVar exists
 
+        if (amount == null)
+            return 0;
+        
         // If Amount is -X, strip the minus sign before looking for an SVar of that kind
         int multiplier = 1;
         if (amount.startsWith("-")) {
