@@ -17,4 +17,5 @@ SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/272.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/254.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/124.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/126.jpg
+Oracle:Target player gains X life.
 End

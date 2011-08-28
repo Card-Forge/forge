@@ -7,4 +7,5 @@ K:Forestwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23149.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/274.jpg
+Oracle:Forestwalk
 End

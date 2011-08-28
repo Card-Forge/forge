@@ -12,4 +12,5 @@ SVar:BuffedBy:Card.Red,Card.Blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrewd_hatchling.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/112.jpg
+Oracle:Shrewd Hatchling enters the battlefield with four -1/-1 counters on it.\n{U/R}: Target creature can't block Shrewd Hatchling this turn.\nWhenever you cast a blue spell, remove a -1/-1 counter from Shrewd Hatchling.\nWhenever you cast a red spell, remove a -1/-1 counter from Shrewd Hatchling.
 End

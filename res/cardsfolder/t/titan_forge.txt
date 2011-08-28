@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ T SubCounter<3/CHARGE> | TokenAmount$ 1 | TokenName$ Golem |
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titan_forge.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/141.jpg
+Oracle:{3}, {T}: Put a charge counter on Titan Forge.\n{T}, Remove three charge counters from Titan Forge: Put a 9/9 colorless Golem artifact creature token onto the battlefield.
 End

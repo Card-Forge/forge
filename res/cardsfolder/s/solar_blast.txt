@@ -9,4 +9,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solar_blast.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/234.jpg
+Oracle:Solar Blast deals 3 damage to target creature or player.\nCycling {1}{R}{R} ({1}{R}{R}, Discard this card: Draw a card.)\nWhen you cycle Solar Blast, you may have it deal 1 damage to target creature or player.
 End

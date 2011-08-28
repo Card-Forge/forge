@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_banisher.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/39.jpg
+Oracle:When Surrakar Banisher enters the battlefield, you may return target tapped creature to its owner's hand.
 End

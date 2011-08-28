@@ -9,4 +9,5 @@ SVar:DBMountain:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_convergence.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/91.jpg
+Oracle:Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library.
 End

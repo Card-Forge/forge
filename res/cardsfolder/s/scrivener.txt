@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrivener.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/46.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/100.jpg
+Oracle:When Scrivener enters the battlefield, you may return target instant card from your graveyard to your hand.
 End

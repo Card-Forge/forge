@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Black,Creature.Red | TgtPrompt$ Selec
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sootstoke_kindler.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/195.jpg
+Oracle:Haste\n{T}: Target black or red creature gains haste until end of turn.
 End

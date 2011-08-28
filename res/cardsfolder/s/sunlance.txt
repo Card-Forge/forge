@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ W | ValidTgts$ Creature.nonWhite | TgtPrompt$ Select ta
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122355.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/31.jpg
+Oracle:Sunlance deals 3 damage to target nonwhite creature.
 End

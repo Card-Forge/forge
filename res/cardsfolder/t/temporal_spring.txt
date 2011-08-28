@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 1 G U | ValidTgts$ Permanent | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_spring.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/125.jpg
+Oracle:Put target permanent on top of its owner's library.
 End

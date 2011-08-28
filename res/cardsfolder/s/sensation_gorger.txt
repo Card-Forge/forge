@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sensation_gorger.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/102.jpg
+Oracle:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. If you do, each player discards his or her hand and draws four cards.
 End

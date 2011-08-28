@@ -8,4 +8,5 @@ SVar:TrigDamage:AB$DamageAll | Cost$ 0 | NumDmg$ 1 | ValidCards$ Creature.withou
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_salamander.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/100.jpg
+Oracle:Whenever Scalding Salamander attacks, you may have it deal 1 damage to each creature without flying defending player controls.
 End

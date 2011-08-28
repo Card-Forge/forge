@@ -7,4 +7,5 @@ K:CantBeBlockedBy Creature.withoutFlying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_scout.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/130.jpg
+Oracle:Treetop Scout can't be blocked except by creatures with flying.
 End

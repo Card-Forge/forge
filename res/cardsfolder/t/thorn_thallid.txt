@@ -9,4 +9,5 @@ A:AB$ DealDamage | Cost$ SubCounter<3/SPORE> | Tgt$ TgtCP | NumDmg$ 1 | SpellDes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thallid.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/96.jpg|4
+Oracle:At the beginning of your upkeep, put a spore counter on Thorn Thallid.\nRemove three spore counters from Thorn Thallid: Thorn Thallid deals 1 damage to target creature or player.
 End

@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.greatestPower | TgtPrompt$ Se
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/topple.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/24.jpg
+Oracle:Exile target creature with the greatest power. (If two or more creatures are tied for greatest power, target any one of them.)
 End

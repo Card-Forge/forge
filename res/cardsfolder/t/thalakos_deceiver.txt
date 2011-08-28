@@ -9,4 +9,5 @@ SVar:TrigGainControl:AB$GainControl | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creatur
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_deceiver.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/45.jpg
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Thalakos Deceiver attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. (This effect lasts indefinitely.)
 End

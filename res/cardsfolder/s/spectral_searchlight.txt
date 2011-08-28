@@ -10,4 +10,5 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_searchlight.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/271.jpg
+Oracle:{T}: Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool.
 End

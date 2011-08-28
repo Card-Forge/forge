@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/statecraft.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/106.jpg
+Oracle:Prevent all combat damage that would be dealt to and dealt by creatures you control.
 End

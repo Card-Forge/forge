@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_despair.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/25.jpg
+Oracle:As an additional cost to cast Tendrils of Despair, sacrifice a creature.\nTarget opponent discards two cards.
 End

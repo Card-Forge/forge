@@ -10,4 +10,5 @@ SVar:Pump:AB$Pump | Cost$ RW | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_the_nobilis.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/146.jpg
+Oracle:Enchant creature\nAs long as enchanted creature is red, it gets +1/+1 and has "{R/W}: This creature gets +1/+0 until end of turn."\nAs long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
 End

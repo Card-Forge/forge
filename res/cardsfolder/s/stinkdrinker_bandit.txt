@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_bandit.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/80.jpg
+Oracle:Prowl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)\nWhenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.
 End

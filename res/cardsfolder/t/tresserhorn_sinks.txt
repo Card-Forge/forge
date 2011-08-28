@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tresserhorn_sinks.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/150.jpg
+Oracle:Tresserhorn Sinks enters the battlefield tapped.\n{T}: Add {B} or {R} to your mana pool.
 End

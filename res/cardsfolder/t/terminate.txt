@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/terminate.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/231.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/46.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/128.jpg
+Oracle:Destroy target creature. It can't be regenerated.
 End

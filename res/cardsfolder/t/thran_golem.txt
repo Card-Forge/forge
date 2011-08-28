@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/141.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/220.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/313.jpg
+Oracle:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
 End

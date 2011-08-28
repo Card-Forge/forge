@@ -6,4 +6,5 @@ A:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_noose.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/266.jpg
+Oracle:{2}, {T}: Tap target creature.
 End

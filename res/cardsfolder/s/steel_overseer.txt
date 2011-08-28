@@ -7,4 +7,5 @@ A:AB$ PutCounterAll | Cost$ T | ValidCards$ Artifact.Creature+YouCtrl | CounterT
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_overseer.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/214.jpg
+Oracle:{T}: Put a +1/+1 counter on each artifact creature you control.
 End

@@ -8,4 +8,5 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ Opponent | Chan
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thresher_beast.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/128.jpg
+Oracle:Whenever Thresher Beast becomes blocked, defending player sacrifices a land.
 End

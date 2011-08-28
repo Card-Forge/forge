@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_captain.jp
 SVar:Rarity:Uncommon
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/77.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/225.jpg
+Oracle:Whenever a creature enters the battlefield under your control, if that creature is 1/1, put two +1/+1 counters on it.
 End

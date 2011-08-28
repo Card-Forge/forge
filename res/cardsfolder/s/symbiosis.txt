@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 G | TargetMin$ 2 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbiosis.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/275.jpg
+Oracle:Two target creatures each get +2/+2 until end of turn.
 End

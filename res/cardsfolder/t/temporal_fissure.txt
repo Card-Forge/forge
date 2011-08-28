@@ -7,4 +7,5 @@ K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/53.jpg
+Oracle:Return target permanent to its owner's hand.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
 End

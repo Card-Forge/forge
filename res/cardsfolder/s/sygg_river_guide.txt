@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sygg_river_guide.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/251.jpg
+Oracle:Islandwalk\n{1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.
 End

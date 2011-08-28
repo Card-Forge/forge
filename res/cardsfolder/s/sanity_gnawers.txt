@@ -8,4 +8,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanity_gnawers.jpg
 SVar:Rarity:Uncommon
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/44.jpg
+Oracle:When Sanity Gnawers enters the battlefield, target player discards a card at random.
 End

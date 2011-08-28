@@ -8,4 +8,5 @@ K:CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terra_stomper.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/187.jpg
+Oracle:Terra Stomper can't be countered.\nTrample
 End

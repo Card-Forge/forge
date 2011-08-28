@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_removal.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/42.jpg
+Oracle:Sacrifice Seal of Removal: Return target creature to its owner's hand.
 End

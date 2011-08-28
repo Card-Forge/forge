@@ -8,4 +8,5 @@ SVar:X:Count$Valid Land.YouDontCtrl+nonBasic
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_elite.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/123.jpg
+Oracle:Skyshroud Elite gets +1/+2 as long as an opponent controls a nonbasic land.
 End

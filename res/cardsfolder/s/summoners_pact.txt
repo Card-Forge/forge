@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summoners_pact.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/139.jpg
+Oracle:Summoner's Pact is green.\nSearch your library for a green creature card, reveal it, and put it into your hand. Then shuffle your library.\nAt the beginning of your next upkeep, pay {2}{G}{G}. If you don't, you lose the game.
 End

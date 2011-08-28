@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_sunset.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/131.jpg
+Oracle:Prevent all combat damage X target creatures would deal this turn.
 End

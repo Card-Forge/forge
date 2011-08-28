@@ -10,4 +10,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/205.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/175.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/229.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/93.jpg
+Oracle:Destroy all artifacts. They can't be regenerated.
 End

@@ -10,4 +10,5 @@ SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ P1P1 | Counte
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_tiller.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/218.jpg
+Oracle:Spike Tiller enters the battlefield with three +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Tiller: Put a +1/+1 counter on target creature.\n{2}, Remove a +1/+1 counter from Spike Tiller: Target land becomes a 2/2 creature that's still a land. Put a +1/+1 counter on it.
 End

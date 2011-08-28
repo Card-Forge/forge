@@ -9,4 +9,5 @@ SVar:Token:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Squirrel | TokenType
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_nest.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/274.jpg
+Oracle:Enchant land\nEnchanted land has "{T}: Put a 1/1 green Squirrel creature token onto the battlefield."
 End

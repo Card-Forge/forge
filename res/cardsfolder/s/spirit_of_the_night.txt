@@ -11,4 +11,5 @@ S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_of_the_night.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/44.jpg
+Oracle:Flying, trample, haste, protection from black\nSpirit of the Night has first strike as long as it's attacking.
 End

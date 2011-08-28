@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Stern_Proctor.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/99.jpg
+Oracle:When Stern Proctor enters the battlefield, return target artifact or enchantment to its owner's hand.
 End

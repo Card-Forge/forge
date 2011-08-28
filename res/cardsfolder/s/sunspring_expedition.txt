@@ -8,4 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunspring_expedition.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/37.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Sunspring Expedition.\nRemove three quest counters from Sunspring Expedition and sacrifice it: You gain 8 life.
 End

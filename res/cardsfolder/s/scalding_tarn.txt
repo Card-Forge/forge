@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_tarn.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/223.jpg
+Oracle:{T}, Pay 1 life, Sacrifice Scalding Tarn: Search your library for an Island or Mountain card and put it onto the battlefield. Then shuffle your library.
 End

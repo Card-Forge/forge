@@ -8,4 +8,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tireless_missionaries.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/36.jpg
+Oracle:When Tireless Missionaries enters the battlefield, you gain 3 life.
 End

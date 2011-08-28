@@ -11,4 +11,5 @@ SVar:SacMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sluggishness.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/92.jpg
+Oracle:Enchant creature\nEnchanted creature can't block.\nWhen Sluggishness is put into a graveyard from the battlefield, return Sluggishness to its owner's hand.
 End

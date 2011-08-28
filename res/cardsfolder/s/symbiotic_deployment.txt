@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbiotic_deployment.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/88.jpg
+Oracle:Skip your draw step.\n{1}, Tap two untapped creatures you control: Draw a card.
 End

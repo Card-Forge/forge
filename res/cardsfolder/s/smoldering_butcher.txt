@@ -7,4 +7,5 @@ K:Wither
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_butcher.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/42.jpg
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)
 End

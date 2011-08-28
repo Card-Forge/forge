@@ -6,4 +6,5 @@ A:SP$ DamageAll | Cost$ 1 B R Sac<1/Creature> | NumDmg$ 3 | ValidCards$ Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_combustion.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/348.jpg
+Oracle:As an additional cost to cast Spontaneous Combustion, sacrifice a creature.\nSpontaneous Combustion deals 3 damage to each creature.
 End

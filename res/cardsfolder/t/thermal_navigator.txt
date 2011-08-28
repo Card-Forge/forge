@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Flying | SpellDescription$ CARDNAME gai
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermal_navigator.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/162.jpg
+Oracle:Sacrifice an artifact: Thermal Navigator gains flying until end of turn.
 End

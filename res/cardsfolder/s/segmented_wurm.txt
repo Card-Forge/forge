@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/segmented_wurm.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/344.jpg
+Oracle:Whenever Segmented Wurm becomes the target of a spell or ability, put a -1/-1 counter on it.
 End

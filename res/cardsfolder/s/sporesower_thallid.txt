@@ -9,4 +9,5 @@ SVar:TrigCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Fungus.YouCtrl | Coun
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sporesower_thallid.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/220.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on each Fungus you control.\nRemove three spore counters from Sporesower Thallid: Put a 1/1 green Saproling creature token onto the battlefield.
 End

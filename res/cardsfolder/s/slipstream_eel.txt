@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slipstream_eel.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/114.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/62.jpg
+Oracle:Slipstream Eel can't attack unless defending player controls an Island.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)
 End

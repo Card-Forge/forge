@@ -9,4 +9,5 @@ SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_lowlands.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/338.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} or {U} to your mana pool. Thalakos Lowlands doesn't untap during your next untap step.
 End

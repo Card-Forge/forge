@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtpicker_witch.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/109.jpg
+Oracle:{1}, Sacrifice a creature: Look at the top two cards of target opponent's library, then exile one of them.
 End

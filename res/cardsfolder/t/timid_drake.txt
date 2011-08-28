@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timid_drake.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/54.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/111.jpg
+Oracle:Flying\nWhen another creature enters the battlefield, return Timid Drake to its owner's hand.
 End

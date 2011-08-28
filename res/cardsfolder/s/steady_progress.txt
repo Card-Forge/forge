@@ -7,4 +7,5 @@ SVar:DB:DB$Draw | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steady_progress.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/45.jpg
+Oracle:Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)\nDraw a card.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turbulent_dreams.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/49.jpg
+Oracle:As an additional cost to cast Turbulent Dreams, discard X cards.\nReturn X target nonland permanents to their owners' hands.
 End

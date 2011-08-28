@@ -10,4 +10,5 @@ SVar:X:TriggeredCard$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_vengeance.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/73.jpg
+Oracle:Haste\nWhenever another creature you control dies, it deals damage equal to its power to target player.
 End

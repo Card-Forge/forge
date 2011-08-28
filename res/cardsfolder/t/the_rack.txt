@@ -11,4 +11,5 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/113.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/278.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/370.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/37.jpg
+Oracle:As The Rack enters the battlefield, choose an opponent.\nAt the beginning of the chosen player's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
 End

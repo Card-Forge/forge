@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steelclad_serpent.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/59.jpg
+Oracle:Steelclad Serpent can't attack unless you control another artifact.
 End

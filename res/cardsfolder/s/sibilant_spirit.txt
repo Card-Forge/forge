@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sibilant_spirit.
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/123.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/98.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/97.jpg
+Oracle:Flying\nWhenever Sibilant Spirit attacks, defending player may draw a card.
 End

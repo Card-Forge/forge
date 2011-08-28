@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tilling_treefolk.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/78.jpg
+Oracle:When Tilling Treefolk enters the battlefield, you may return up to two target land cards from your graveyard to your hand.
 End

@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/swarm_of_rats.jp
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/167.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/29.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/166.jpg
+Oracle:Swarm of Rats's power is equal to the number of Rats you control.
 End

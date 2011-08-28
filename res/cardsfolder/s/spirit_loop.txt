@@ -13,4 +13,5 @@ SVar:SacMe:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_loop.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/42.jpg
+Oracle:Enchant creature you control\nWhenever enchanted creature deals damage, you gain that much life.\nWhen Spirit Loop is put into a graveyard from the battlefield, return Spirit Loop to its owner's hand.
 End

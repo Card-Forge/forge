@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittish_kavu.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/168.jpg
+Oracle:Skittish Kavu gets +1/+1 as long as no opponent controls a white or blue creature.
 End

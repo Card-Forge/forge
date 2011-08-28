@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_sanctuary.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/281.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/287.jpg
+Oracle:Selesnya Sanctuary enters the battlefield tapped.\nWhen Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {G}{W} to your mana pool.
 End

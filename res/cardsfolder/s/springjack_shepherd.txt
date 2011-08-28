@@ -9,4 +9,5 @@ SVar:X:Count$Chroma.W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_shepherd.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/15.jpg
+Oracle:Chroma - When Springjack Shepherd enters the battlefield, put a 0/1 white Goat creature token onto the battlefield for each white mana symbol in the mana costs of permanents you control.
 End

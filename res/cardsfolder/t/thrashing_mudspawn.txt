@@ -10,4 +10,5 @@ K:Morph:1 B B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrashing_mudspawn.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/177.jpg
+Oracle:Whenever Thrashing Mudspawn is dealt damage, you lose that much life.\nMorph {1}{B}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_champion.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/21.jpg
+Oracle:Whenever a player cycles a card, Stoic Champion gets +2/+2 until end of turn.
 End

@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ R G T | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuknir_deathlock.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/307.jpg
+Oracle:Flying\n{R}{G}, {T}: Target creature gets +2/+2 until end of turn.
 End

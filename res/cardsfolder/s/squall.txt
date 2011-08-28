@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/squall.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/143.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/275.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/271.jpg
+Oracle:Squall deals 2 damage to each creature with flying.
 End

@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection fro
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_duty_and_reason.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/16.jpg
+Oracle:Enchant creature\nEnchanted creature has protection from green and from blue.
 End

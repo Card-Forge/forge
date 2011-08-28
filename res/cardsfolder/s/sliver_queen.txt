@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/141.jpg
+Oracle:{2}: Put a 1/1 colorless Sliver creature token onto the battlefield.
 End

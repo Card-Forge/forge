@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/testament_of_faith.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/55.jpg
+Oracle:{X}: Testament of Faith becomes an X/X Wall creature with defender until end of turn. It's still an enchantment.
 End

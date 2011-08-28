@@ -10,4 +10,5 @@ A:AB$ Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate e
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpent_skin.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/240.jpg
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +1/+1.\n{G}: Regenerate enchanted creature.
 End

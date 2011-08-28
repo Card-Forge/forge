@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sliver.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/52.jpg
+Oracle:Slivers can't be blocked except by Slivers.
 End

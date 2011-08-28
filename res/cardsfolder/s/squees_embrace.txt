@@ -10,4 +10,5 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squees_embrace.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/122.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nWhen enchanted creature dies, return that card to its owner's hand.
 End

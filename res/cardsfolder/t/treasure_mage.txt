@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_mage.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/34.jpg
+Oracle:When Treasure Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 6 or greater, reveal that card, and put it into your hand. If you do, shuffle your library.
 End

@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_owl.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/98.jpg
+Oracle:Flying\nWhen Spire Owl enters the battlefield, look at the top four cards of your library, then put them back in any order.
 End

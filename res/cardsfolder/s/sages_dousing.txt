@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_dousing.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/48.jpg
+Oracle:Counter target spell unless its controller pays {3}. If you control a Wizard, draw a card.
 End

@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_trove.j
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/110.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/50.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/106.jpg
+Oracle:{2}{U}{U}: Draw a card.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_daredevil.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/191.jpg
+Oracle:Giant spells you cast cost {2} less to cast.
 End

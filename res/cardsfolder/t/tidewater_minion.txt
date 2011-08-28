@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidewater_minion.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/71.jpg
+Oracle:Defender (This creature can't attack.)\n{4}: Tidewater Minion loses defender until end of turn.\n{T}: Untap target permanent.
 End

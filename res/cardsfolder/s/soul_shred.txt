@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/soul_shred.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/35.jpg
+Oracle:Soul Shred deals 3 damage to target nonblack creature. You gain 3 life.
 End

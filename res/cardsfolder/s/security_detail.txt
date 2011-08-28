@@ -6,4 +6,5 @@ A:AB$ Token | Cost$ W W | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Crea
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/security_detail.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/47.jpg
+Oracle:{W}{W}: Put a 1/1 white Soldier creature token onto the battlefield. Activate this ability only if you control no creatures and only once each turn.
 End

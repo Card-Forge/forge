@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telepathic_spies.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/47.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/101.jpg
+Oracle:When Telepathic Spies enters the battlefield, look at target opponent's hand.
 End

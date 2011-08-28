@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_signet.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/259.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/166.jpg
+Oracle:{1}, {T}: Add {G}{U} to your mana pool.
 End

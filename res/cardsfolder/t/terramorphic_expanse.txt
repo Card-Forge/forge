@@ -10,4 +10,5 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/229.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/291.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/279.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/360.jpg
+Oracle:{T}, Sacrifice Terramorphic Expanse: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 End

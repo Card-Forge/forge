@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/splitting_headache.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/79.jpg
+Oracle:Choose one - Target player discards two cards; or target player reveals his or her hand, you choose a card from it, then that player discards that card.
 End

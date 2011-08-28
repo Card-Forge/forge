@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throat_slitter.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/88.jpg
+Oracle:Ninjutsu {2}{B} ({2}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Throat Slitter deals combat damage to a player, destroy target nonblack creature that player controls.
 End

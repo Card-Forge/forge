@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soaring_seacliff.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/225.jpg
+Oracle:Soaring Seacliff enters the battlefield tapped.\nWhen Soaring Seacliff enters the battlefield, target creature gains flying until end of turn.\n{T}: Add {U} to your mana pool.
 End

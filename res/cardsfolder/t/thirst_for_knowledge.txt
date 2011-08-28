@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | Unles
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst_for_knowledge.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/53.jpg
+Oracle:Draw three cards. Then discard two cards unless you discard an artifact card.
 End

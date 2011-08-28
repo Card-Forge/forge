@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 1 R Sac<1/Artifact> | Tgt$ TgtCP | NumDmg$ 5 | SpellDes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrapnel_blast.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/106.jpg
+Oracle:As an additional cost to cast Shrapnel Blast, sacrifice an artifact.\nShrapnel Blast deals 5 damage to target creature or player.
 End

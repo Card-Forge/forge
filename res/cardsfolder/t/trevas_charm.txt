@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_charm.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/129.jpg
+Oracle:Choose one - Destroy target enchantment; or exile target attacking creature; or draw a card, then discard a card.
 End

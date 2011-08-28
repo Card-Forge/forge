@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_the_false_god.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/143.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/290.jpg
+Oracle:{T}: Add {2} to your mana pool. Activate this ability only if you control five or more lands.
 End

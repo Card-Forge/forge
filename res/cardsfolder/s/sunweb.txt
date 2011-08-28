@@ -12,4 +12,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/52.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/46.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/246.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/51.jpg
+Oracle:Defender (This creature can't attack.)\nFlying\nSunweb can't block creatures with power 2 or less.
 End

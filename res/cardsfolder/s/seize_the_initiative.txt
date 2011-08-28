@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seize_the_initiative.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/20.jpg
+Oracle:Target creature gets +1/+1 and gains first strike until end of turn.
 End

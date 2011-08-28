@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvok_explorer.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/93.jpg
+Oracle:{T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
 End

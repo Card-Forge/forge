@@ -10,4 +10,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49828.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/135.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/176.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/305.jpg
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate Troll Ascetic.
 End

@@ -10,4 +10,5 @@ A:AB$ Pump | Cost$ Sac<1/Saproling> | NumAtt$ +1 | NumDef$ +2 | SpellDescription
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_devourer.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/91.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Thallid Devourer.\nRemove three spore counters from Thallid Devourer: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Thallid Devourer gets +1/+2 until end of turn.
 End

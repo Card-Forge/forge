@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skulking_knight.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/130.jpg
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhen Skulking Knight becomes the target of a spell or ability, sacrifice it.
 End

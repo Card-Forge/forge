@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ UR | KW$ Flying | SpellDescription$ CARDNAME gains flying unt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_hopper.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/113.jpg
+Oracle:{U/R}: Stream Hopper gains flying until end of turn.
 End

@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 7 G | NumAtt$ +5 | NumDef$ +5 | SpellDescription$ CARDNAME ge
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewood_invoker.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/139.jpg
+Oracle:{7}{G}: Stonewood Invoker gets +5/+5 until end of turn.
 End

@@ -14,4 +14,5 @@ SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/155.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/252.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/123.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/125.jpg
+Oracle:Forestwalk
 End

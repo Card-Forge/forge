@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | Threshold$ True | AddPow
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_seraph.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/23.jpg
+Oracle:Flying\nThreshold - Other creatures you control get +2/+2 as long as seven or more cards are in your graveyard.
 End

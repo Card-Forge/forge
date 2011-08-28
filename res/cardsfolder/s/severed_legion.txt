@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129693.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/163.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/166.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/177.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)
 End

@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Poisonous 3 | 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_cult_initiation.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/89.jpg
+Oracle:Enchant creature\nEnchanted creature has poisonous 3. (Whenever it deals combat damage to a player, that player gets three poison counters. A player with ten or more poison counters loses the game.)
 End

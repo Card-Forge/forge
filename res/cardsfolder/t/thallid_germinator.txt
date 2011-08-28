@@ -10,4 +10,5 @@ A:AB$ Pump | Cost$ Sac<1/Saproling> | ValidTgts$ Creature | TgtPrompt$ Select ta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_germinator.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/225.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Thallid Germinator.\nRemove three spore counters from Thallid Germinator: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Target creature gets +1/+1 until end of turn.
 End

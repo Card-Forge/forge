@@ -7,4 +7,5 @@ A:SP$ Destroy | Cost$ PayLife<4> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Sel
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snuff_out.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/162.jpg
+Oracle:If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.\nDestroy target nonblack creature. It can't be regenerated.
 End

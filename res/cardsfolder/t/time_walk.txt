@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/time_walk.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/84.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/84.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/84.jpg
+Oracle:Take an extra turn after this one.
 End

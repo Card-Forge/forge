@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tawnoss_wand.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/366.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/34.jpg
+Oracle:{2}, {T}: Target creature with power 2 or less is unblockable this turn.
 End

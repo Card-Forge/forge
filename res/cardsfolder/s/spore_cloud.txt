@@ -8,4 +8,5 @@ SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.attacking,Creature.blocking | K
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spore_cloud.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/83.jpg|3
+Oracle:Tap all blocking creatures. Prevent all combat damage that would be dealt this turn. Each attacking creature and each blocking creature doesn't untap during its controller's next untap step.
 End

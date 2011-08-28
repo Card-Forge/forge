@@ -7,4 +7,5 @@ K:CantBeBlockedBy Creature.nonArtifact+nonRed
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card131011.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/123.jpg
+Oracle:Skirk Shaman can't be blocked except by artifact creatures and/or red creatures.
 End

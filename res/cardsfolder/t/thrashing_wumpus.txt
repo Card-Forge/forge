@@ -7,4 +7,5 @@ A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Eac
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrashing_wumpus.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/166.jpg
+Oracle:{B}: Thrashing Wumpus deals 1 damage to each creature and each player.
 End

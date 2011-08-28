@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_praetor.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/60.jpg
+Oracle:{B}, Sacrifice a creature: Destroy each creature with the same converted mana cost as the sacrificed creature.
 End

@@ -24,4 +24,5 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/118.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/194.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/178.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/178.jpg
+Oracle:Destroy target land.
 End

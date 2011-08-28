@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turntimber_grove.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/227.jpg
+Oracle:Turntimber Grove enters the battlefield tapped.\nWhen Turntimber Grove enters the battlefield, target creature gets +1/+1 until end of turn.\n{T}: Add {G} to your mana pool.
 End

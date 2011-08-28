@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/101.jpg
+Oracle:Sacrifice an Elemental: Seething Pathblazer gets +2/+0 and gains first strike until end of turn.
 End

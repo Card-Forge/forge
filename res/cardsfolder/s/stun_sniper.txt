@@ -8,4 +8,5 @@ SVar:DBTap:DB$Tap | Defined$ Targeted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stun_sniper.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/100.jpg
+Oracle:{1}, {T}: Stun Sniper deals 1 damage to target creature. Tap that creature.
 End

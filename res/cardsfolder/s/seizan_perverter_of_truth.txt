@@ -9,4 +9,5 @@ SVar:DBDraw:DB$Draw | Defined$ TriggeredPlayer | NumCards$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78965.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/143.jpg
+Oracle:At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
 End

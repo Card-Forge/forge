@@ -10,4 +10,5 @@ K:eqPump 2:+2/+2/Protection from white & Protection from black
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_light_and_shadow.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/149.jpg
+Oracle:Equipped creature gets +2/+2 and has protection from white and from black.\nWhenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.\nEquip {2}
 End

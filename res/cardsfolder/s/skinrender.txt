@@ -8,4 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ S
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinrender.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/78.jpg
+Oracle:When Skinrender enters the battlefield, put three -1/-1 counters on target creature.
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sachi_daughter_of_seshiro.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/238.jpg
+Oracle:Other Snake creatures you control get +0/+1.\nShamans you control have "{T}: Add {G}{G} to your mana pool."
 End

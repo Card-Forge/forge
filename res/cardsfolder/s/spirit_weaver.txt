@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_weaver.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/39.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/46.jpg
+Oracle:{2}: Target green or blue creature gets +0/+1 until end of turn.
 End

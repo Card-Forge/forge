@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sneaky_homunculus.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/101.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/44.jpg
+Oracle:Sneaky Homunculus can't block or be blocked by creatures with power 2 or greater.
 End

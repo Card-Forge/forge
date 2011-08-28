@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_claim.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/117.jpg
+Oracle:Search your library for up to two Forest cards and put them onto the battlefield. Then shuffle your library.
 End

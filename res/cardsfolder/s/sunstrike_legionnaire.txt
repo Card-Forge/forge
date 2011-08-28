@@ -10,4 +10,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunstrike_legionnaire.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/22.jpg
+Oracle:Sunstrike Legionnaire doesn't untap during your untap step.\nWhenever another creature enters the battlefield, untap Sunstrike Legionnaire.\n{T}: Tap target creature with converted mana cost 3 or less.
 End

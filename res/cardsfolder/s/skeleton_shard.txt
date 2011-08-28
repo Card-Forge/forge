@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeleton_shard.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/242.jpg
+Oracle:{3}, {T} or {B}, {T}: Return target artifact creature card from your graveyard to your hand.
 End

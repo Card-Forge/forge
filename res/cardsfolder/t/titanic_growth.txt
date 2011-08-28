@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanic_growth.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/198.jpg
+Oracle:Target creature gets +4/+4 until end of turn.
 End

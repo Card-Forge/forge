@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tortured_existence.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/24.jpg
+Oracle:{B}, Discard a creature card: Return target creature card from your graveyard to your hand.
 End

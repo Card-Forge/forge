@@ -8,4 +8,5 @@ A:AB$ Tap | Cost$ 1 WU Untap | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkbind_faerie.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/148.jpg
+Oracle:Flying\n{1}{W/U}, {Q}: Tap target creature. ({Q} is the untap symbol.)
 End

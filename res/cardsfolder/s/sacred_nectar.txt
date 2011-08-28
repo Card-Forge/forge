@@ -10,4 +10,5 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/26.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/187.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/38.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/37.jpg
+Oracle:You gain 4 life.
 End

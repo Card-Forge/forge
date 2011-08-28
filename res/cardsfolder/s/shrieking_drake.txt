@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_drake.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/43.jpg
+Oracle:Flying\nWhen Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.
 End

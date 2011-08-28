@@ -6,4 +6,5 @@ A:SP$ DestroyAll | Cost$ 1 G | ValidCards$ Aura | SpellDescription$ Destroy all 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_heart.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/140.jpg
+Oracle:Destroy all Auras.
 End

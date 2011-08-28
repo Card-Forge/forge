@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN All cre
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/setons_desire.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/268.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nThreshold - As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so.
 End

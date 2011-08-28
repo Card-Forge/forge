@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_piercing_vision.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/156.jpg
+Oracle:At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on Shrine of Piercing Vision.\n{T}, Sacrifice Shrine of Piercing Vision: Look at the top X cards of your library, where X is the number of charge counters on Shrine of Piercing Vision. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 End

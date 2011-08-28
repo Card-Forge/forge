@@ -8,4 +8,5 @@ K:CARDNAME can block only creatures with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stratozeppelid.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/36.jpg
+Oracle:Flying\nStratozeppelid can block only creatures with flying.
 End

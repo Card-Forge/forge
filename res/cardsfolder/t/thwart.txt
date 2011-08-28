@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thwart.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/108.jpg
+Oracle:You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.\nCounter target spell.
 End

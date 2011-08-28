@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Saproling | Toke
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_thrinax.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/197.jpg
+Oracle:When Sprouting Thrinax dies, put three 1/1 green Saproling creature tokens onto the battlefield.
 End

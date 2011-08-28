@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_steppe.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/324.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/286.jpg
+Oracle:Secluded Steppe enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\nCycling {W} ({W}, Discard this card: Draw a card.)
 End

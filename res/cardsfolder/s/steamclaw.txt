@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steamclaw.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/310.jpg
+Oracle:{3}, {T}: Exile target card from a graveyard.\n{1}, Sacrifice Steamclaw: Exile target card from a graveyard.
 End

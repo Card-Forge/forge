@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/svyelunite_templ
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/441.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/329.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/187.jpg
+Oracle:Svyelunite Temple enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{T}, Sacrifice Svyelunite Temple: Add {U}{U} to your mana pool.
 End

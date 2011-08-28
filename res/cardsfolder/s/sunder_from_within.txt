@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select targe
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunder_from_within.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/117.jpg
+Oracle:Destroy target artifact or land.
 End

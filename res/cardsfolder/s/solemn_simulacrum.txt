@@ -13,4 +13,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_simulacru
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/245.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/217.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/262.jpg
+Oracle:When Solemn Simulacrum enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.\nWhen Solemn Simulacrum dies, you may draw a card.
 End

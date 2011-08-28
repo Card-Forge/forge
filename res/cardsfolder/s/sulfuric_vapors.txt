@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfuric_vapors.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/220.jpg
+Oracle:If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
 End

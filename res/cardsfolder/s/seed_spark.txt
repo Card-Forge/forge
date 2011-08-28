@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_spark.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/30.jpg
+Oracle:Destroy target artifact or enchantment. If {G} was spent to cast Seed Spark, put two 1/1 green Saproling creature tokens onto the battlefield.
 End

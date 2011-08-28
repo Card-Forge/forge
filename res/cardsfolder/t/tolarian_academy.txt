@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_academy.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/330.jpg
+Oracle:{T}: Add {U} to your mana pool for each artifact you control.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sedraxis_alchemist.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/54.jpg
+Oracle:When Sedraxis Alchemist enters the battlefield, if you control a blue permanent, return target nonland permanent to its owner's hand.
 End

@@ -8,4 +8,5 @@ SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiraling_duelist.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/76.jpg
+Oracle:Metalcraft - Spiraling Duelist has double strike as long as you control three or more artifacts.
 End

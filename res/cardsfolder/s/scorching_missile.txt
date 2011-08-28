@@ -7,4 +7,5 @@ A:SP$ DealDamage | Cost$ 9 R | Tgt$ TgtP | NumDmg$ 4 | Flashback$ True | CostDes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_missile.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/219.jpg
+Oracle:Scorching Missile deals 4 damage to target player.\nFlashback {9}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

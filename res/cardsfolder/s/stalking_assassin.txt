@@ -8,4 +8,5 @@ A:AB$ Destroy | Cost$ 3 B T | ValidTgts$ Creature.tapped | TgtPrompt$ Select tar
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_assassin.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/277.jpg
+Oracle:{3}{U}, {T}: Tap target creature.\n{3}{B}, {T}: Destroy target tapped creature.
 End

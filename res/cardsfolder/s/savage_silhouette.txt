@@ -9,4 +9,5 @@ SVar:ABRegen:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate this creat
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_silhouette.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/181.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature."
 End

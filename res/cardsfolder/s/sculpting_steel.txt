@@ -6,4 +6,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sculpting_steel.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/238.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/342.jpg
+Oracle:You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
 End

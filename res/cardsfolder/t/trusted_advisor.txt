@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trusted_advisor.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/59.jpg
+Oracle:Your maximum hand size is increased by two.\nAt the beginning of your upkeep, return a blue creature you control to its owner's hand.
 End

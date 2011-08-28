@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ 2 R T | ValidTgts$ Land.nonBasic | TgtPrompt$ Select targe
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trench_wurm.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/127.jpg
+Oracle:{2}{R}, {T}: Destroy target nonbasic land.
 End

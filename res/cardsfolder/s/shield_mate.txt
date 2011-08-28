@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select tar
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_mate.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/19.jpg
+Oracle:Sacrifice Shield Mate: Target creature gets +0/+4 until end of turn.
 End

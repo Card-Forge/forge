@@ -6,4 +6,5 @@ K:CostChange:Player:Less:1:Spell:All:All:NoSpecial
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_calendar.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/108.jpg
+Oracle:Spells you cast cost up to {1} less to cast.
 End

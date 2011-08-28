@@ -5,9 +5,10 @@ Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ SVar=DBPain | SpellDescription$ Add W to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ SVar=DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You 
+SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_flats.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/330.jpg
+Oracle:Salt Flats enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{T}: Add {W} or {B} to your mana pool. Salt Flats deals 1 damage to you.
 End

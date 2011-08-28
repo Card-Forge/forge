@@ -8,4 +8,5 @@ SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swell_of_courage.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/26.jpg
+Oracle:Creatures you control get +2/+2 until end of turn.\nReinforce X-{X}{W}{W} ({X}{W}{W}, Discard this card: Put X +1/+1 counters on target creature.)
 End

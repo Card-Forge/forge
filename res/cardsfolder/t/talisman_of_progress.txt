@@ -9,4 +9,5 @@ SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_progress.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/256.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} or {U} to your mana pool. Talisman of Progress deals 1 damage to you.
 End

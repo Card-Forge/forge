@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soilshaper.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/243.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, target land becomes a 3/3 creature until end of turn. It's still a land.
 End

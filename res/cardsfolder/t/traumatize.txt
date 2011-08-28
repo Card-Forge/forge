@@ -11,4 +11,5 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/77.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/119.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/109.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/110.jpg
+Oracle:Target player puts the top half of his or her library, rounded down, into his or her graveyard.
 End

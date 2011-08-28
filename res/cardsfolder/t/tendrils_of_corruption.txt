@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card106632.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/114.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/136.jpg
+Oracle:Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control.
 End

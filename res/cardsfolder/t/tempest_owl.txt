@@ -10,4 +10,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_owl.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/72.jpg
+Oracle:Kicker {4}{U} (You may pay an additional {4}{U} as you cast this spell.)\nFlying\nWhen Tempest Owl enters the battlefield, if it was kicked, tap up to three target permanents.
 End

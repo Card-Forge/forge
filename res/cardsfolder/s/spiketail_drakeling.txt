@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiketail_drakeling.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/80.jpg
+Oracle:Flying\nSacrifice Spiketail Drakeling: Counter target spell unless its controller pays {2}.
 End

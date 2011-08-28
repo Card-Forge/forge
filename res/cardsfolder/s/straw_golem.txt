@@ -8,4 +8,5 @@ SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/straw_golem.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/158.jpg
+Oracle:When an opponent casts a creature spell, sacrifice Straw Golem.
 End

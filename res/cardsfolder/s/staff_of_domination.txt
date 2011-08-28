@@ -10,4 +10,5 @@ A:AB$ Draw | Cost$ 5 T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_domination.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/156.jpg
+Oracle:{1}: Untap Staff of Domination.\n{2}, {T}: You gain 1 life.\n{3}, {T}: Untap target creature.\n{4}, {T}: Tap target creature.\n{5}, {T}: Draw a card.
 End

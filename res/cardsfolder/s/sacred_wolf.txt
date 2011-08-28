@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_wolf.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/196.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/194.jpg
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)
 End

@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U | KW$ Islandwalk | SpellDescription$ CARDNAME gains islandw
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shore_snapper.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/87.jpg
+Oracle:{U}: Shore Snapper gains islandwalk until end of turn.
 End

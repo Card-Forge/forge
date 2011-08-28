@@ -9,4 +9,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_gargoyle.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/24.jpg
+Oracle:Flying\nWhen Sanctum Gargoyle enters the battlefield, you may return target artifact card from your graveyard to your hand.
 End

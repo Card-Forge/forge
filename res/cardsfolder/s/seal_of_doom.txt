@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_doom.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/70.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/53.jpg
+Oracle:Sacrifice Seal of Doom: Destroy target nonblack creature. It can't be regenerated.
 End

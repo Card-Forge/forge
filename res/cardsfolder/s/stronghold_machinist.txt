@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_machinist.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/46.jpg
+Oracle:{U}{U}, {T}, Discard a card: Counter target noncreature spell.
 End

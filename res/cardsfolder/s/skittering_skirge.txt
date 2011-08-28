@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_skirge.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/158.jpg
+Oracle:Flying\nWhen you cast a creature spell, sacrifice Skittering Skirge.
 End

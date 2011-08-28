@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_serow.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/150.jpg
+Oracle:Trample\nAt the beginning of your upkeep, return a green creature you control to its owner's hand.
 End

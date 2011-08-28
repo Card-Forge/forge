@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/seedborn_muse.jp
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/138.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/270.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/296.jpg
+Oracle:Untap all permanents you control during each other player's untap step.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scapegoat.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/114.jpg
+Oracle:As an additional cost to cast Scapegoat, sacrifice a creature.\nReturn any number of target creatures you control to their owner's hand.
 End

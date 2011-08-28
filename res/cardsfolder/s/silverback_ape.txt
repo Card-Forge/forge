@@ -6,4 +6,5 @@ PT:5/5
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card49056.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/141.jpg
+Oracle:
 End

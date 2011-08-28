@@ -13,4 +13,5 @@ SetInfo:10E|Common|http://magiccards.info/scans/en/10e/232.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/206.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/154.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/227.jpg
+Oracle:Shock deals 2 damage to target creature or player.
 End

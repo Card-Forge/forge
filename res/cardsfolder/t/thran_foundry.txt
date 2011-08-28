@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_foundry.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/140.jpg
+Oracle:{1}, {T}, Exile Thran Foundry: Target player shuffles his or her graveyard into his or her library.
 End

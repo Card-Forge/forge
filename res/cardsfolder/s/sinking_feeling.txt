@@ -10,4 +10,5 @@ SVar:Untap:AB$ Untap | Cost$ 1 AddCounter<1/M1M1> | SpellDescription$ Untap CARD
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinking_feeling.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/51.jpg
+Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nEnchanted creature has "{1}, Put a -1/-1 counter on this creature: Untap this creature."
 End

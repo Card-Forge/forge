@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_might.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/149.jpg
+Oracle:Put X +1/+1 counters on target creature, where X is that creature's power.
 End

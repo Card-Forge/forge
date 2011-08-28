@@ -11,4 +11,5 @@ SVar:SacMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slow_motion.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/42.jpg
+Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless he or she pays {2}.\nWhen Slow Motion is put into a graveyard from the battlefield, return Slow Motion to its owner's hand.
 End

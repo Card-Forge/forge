@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Equipment.namedSword of Kaldra,Equipment.namedShi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_kaldra.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/139.jpg
+Oracle:Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible.\nEquipped creature is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\nEquip {4}
 End

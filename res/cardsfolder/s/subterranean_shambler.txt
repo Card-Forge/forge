@@ -10,4 +10,5 @@ SVar:TrigTremor:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature.withoutFlying | N
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/subterranean_shambler.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/178.jpg
+Oracle:Echo {3}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Subterranean Shambler enters the battlefield or leaves the battlefield, it deals 1 damage to each creature without flying.
 End

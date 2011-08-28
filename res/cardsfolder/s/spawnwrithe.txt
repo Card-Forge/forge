@@ -8,4 +8,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnwrithe.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/171.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/129.jpg
+Oracle:Trample\nWhenever Spawnwrithe deals combat damage to a player, put a token that's a copy of Spawnwrithe onto the battlefield.
 End

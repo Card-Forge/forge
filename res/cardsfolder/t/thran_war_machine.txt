@@ -8,4 +8,5 @@ K:Echo:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_war_machine.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/134.jpg
+Oracle:Echo {4} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nThran War Machine attacks each turn if able.
 End

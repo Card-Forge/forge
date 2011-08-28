@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescrip
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ticking_gnomes.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/136.jpg
+Oracle:Echo {3} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nSacrifice Ticking Gnomes: Ticking Gnomes deals 1 damage to target creature or player.
 End

@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 3 R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swelter.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/101.jpg
+Oracle:Swelter deals 2 damage to each of two target creatures.
 End

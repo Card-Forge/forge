@@ -8,4 +8,5 @@ K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spindrift_drake.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/44.jpg
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice Spindrift Drake unless you pay {U}.
 End

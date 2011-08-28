@@ -9,4 +9,5 @@ SVar:TrigPoison:AB$Poison | Cost$ 0 | Defined$ Opponent | Num$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_assassin.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/19.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever Suq'Ata Assassin attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
 End

@@ -9,4 +9,5 @@ SVar:DBMill:DB$Mill | Defined$ TriggeredTarget | NumCards$ 10
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_body_and_mind.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/208.jpg
+Oracle:Equipped creature gets +2/+2 and has protection from green and from blue.\nWhenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.\nEquip {2}
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangleroot.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/259.jpg
+Oracle:Whenever a player casts a creature spell, that player adds {G} to his or her mana pool.
 End

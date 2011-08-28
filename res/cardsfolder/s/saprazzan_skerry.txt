@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://wizards.com/global/images/magic/general/saprazzan_skerry.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/328.jpg
+Oracle:Saprazzan Skerry enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Saprazzan Skerry: Add {U}{U} to your mana pool. If there are no depletion counters on Saprazzan Skerry, sacrifice it.
 End

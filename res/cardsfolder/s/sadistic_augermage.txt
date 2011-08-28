@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Librar
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_augermage.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/103.jpg
+Oracle:When Sadistic Augermage dies, each player puts a card from his or her hand on top of his or her library.
 End

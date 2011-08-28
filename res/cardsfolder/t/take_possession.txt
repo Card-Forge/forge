@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136199.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/44.jpg
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nEnchant permanent\nYou control enchanted permanent.
 End

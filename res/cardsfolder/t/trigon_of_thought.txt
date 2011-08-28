@@ -8,4 +8,5 @@ A:AB$ Draw | Cost$ 2 T SubCounter<1/CHARGE> | NumCards$ 1 | SpellDescription$ Dr
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_thought.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/217.jpg
+Oracle:Trigon of Thought enters the battlefield with three charge counters on it.\n{U}{U}, {T}: Put a charge counter on Trigon of Thought.\n{2}, {T}, Remove a charge counter from Trigon of Thought: Draw a card.
 End

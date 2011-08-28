@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ ExileFromGrave<3/Artifact> | Origin$ Graveyard | Destin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_titan.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/84.jpg
+Oracle:You may sacrifice three artifacts rather than pay Salvage Titan's mana cost.\nExile three artifact cards from your graveyard: Return Salvage Titan from your graveyard to your hand.
 End

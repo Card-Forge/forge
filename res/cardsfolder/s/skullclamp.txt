@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/140.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/260.jpg
+Oracle:Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}
 End

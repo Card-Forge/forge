@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_death.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/134.jpg
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nTarget creature gets -4/-4 until end of turn.
 End

@@ -9,4 +9,5 @@ SVar:Counter:AB$Counter | Cost$ T | TargetType$ Spell | TgtPrompt$ Select target
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_field.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/51.jpg
+Oracle:Enchant land\nEnchanted land has "{T}: Counter target spell unless its controller pays {1}."
 End

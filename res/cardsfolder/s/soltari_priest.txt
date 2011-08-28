@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_priest.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/258.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/14.jpg
+Oracle:Protection from red\nShadow (This creature can block or be blocked by only creatures with shadow.)
 End

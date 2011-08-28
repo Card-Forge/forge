@@ -9,4 +9,5 @@ A:AB$ Fog | Cost$ 1 SubCounter<1/P1P1> | SpellDescription$ Prevent all combat da
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_weaver.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/128.jpg
+Oracle:Spike Weaver enters the battlefield with three +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Weaver: Put a +1/+1 counter on target creature.\n{1}, Remove a +1/+1 counter from Spike Weaver: Prevent all combat damage that would be dealt this turn.
 End

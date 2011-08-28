@@ -9,4 +9,5 @@ SVar:X:Count$InOppHand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_wurm.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/291.jpg
+Oracle:When Tempting Wurm enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.
 End

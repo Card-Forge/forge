@@ -8,4 +8,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_heretic.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/49.jpg|2
+Oracle:{W}, {T}: Prevent the next 2 damage that would be dealt to target creature this turn. Target opponent may draw a card.
 End

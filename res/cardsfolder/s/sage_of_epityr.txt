@@ -8,4 +8,5 @@ SVar:TrigRearrange:AB$RearrangeTopOfLibrary | Cost$ 0 | Defined$ You | NumCards$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_epityr.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/74.jpg
+Oracle:When Sage of Epityr enters the battlefield, look at the top four cards of your library, then put them back in any order.
 End

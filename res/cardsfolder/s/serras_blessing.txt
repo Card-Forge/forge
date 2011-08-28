@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_blessing.
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/141.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/42.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/44.jpg
+Oracle:Creatures you control have vigilance. (Attacking doesn't cause them to tap.)
 End

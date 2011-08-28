@@ -5,4 +5,5 @@ Text:no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarpadian_empires_vol_vii.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/263.jpg
+Oracle:As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\n{3}, {T}: Put a 1/1 creature token of the chosen color and type onto the battlefield.
 End

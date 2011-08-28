@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shackles.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/37.jpg
+Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\n{W}: Return Shackles to its owner's hand.
 End

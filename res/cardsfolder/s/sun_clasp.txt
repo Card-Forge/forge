@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | Defined$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_clasp.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/121.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+3.\n{W}: Return enchanted creature to its owner's hand.
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_boon.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/17.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+2 as long as it's white. Otherwise, it gets -2/-1.
 End

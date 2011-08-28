@@ -6,4 +6,5 @@ PT:6/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card106575.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/133.jpg
+Oracle:
 End

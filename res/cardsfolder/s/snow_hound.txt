@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_hound.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/277.jpg
+Oracle:{1}, {T}: Return Snow Hound and target green or blue creature you control to their owner's hand.
 End

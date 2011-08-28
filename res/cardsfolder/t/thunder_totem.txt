@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_totem.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/265.jpg
+Oracle:{T}: Add {W} to your mana pool.\n{1}{W}{W}: Thunder Totem becomes a 2/2 white Spirit artifact creature with flying and first strike until end of turn.
 End

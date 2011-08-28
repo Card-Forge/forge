@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/326.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/292.jpg
+Oracle:Tranquil Thicket enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\nCycling {G} ({G}, Discard this card: Draw a card.)
 End

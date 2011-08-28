@@ -12,4 +12,5 @@ K:Protection from green
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_steel_wind.jpg
 SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/110.jpg
+Oracle:Flying, first strike, vigilance, lifelink, protection from red and from green
 End

@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.nonBlack+tapped | TgtPrompt$ Selec
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_catapult.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/84.jpg
+Oracle:{T}: Destroy target tapped nonblack creature. Activate this ability only during your turn, before attackers are declared.
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_growth_chamber.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/288.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/180.jpg
+Oracle:Simic Growth Chamber enters the battlefield tapped.\nWhen Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {G}{U} to your mana pool.
 End

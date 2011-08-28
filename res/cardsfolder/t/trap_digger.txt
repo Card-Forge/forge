@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ Sac<1/Land.countersGE1TRAP> | ValidTgts$ Creature.attac
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trap_digger.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/24.jpg
+Oracle:{2}{W}, {T}: Put a trap counter on target land you control.\nSacrifice a land with a trap counter on it: Trap Digger deals 3 damage to target attacking creature without flying.
 End

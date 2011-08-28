@@ -11,4 +11,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/180.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/180.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/245.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/179.jpg
+Oracle:Destroy target Wall. It can't be regenerated.
 End

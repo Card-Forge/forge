@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_vampire.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/51.jpg
+Oracle:Flying\nDiscard a creature card: Skyshroud Vampire gets +2/+2 until end of turn.
 End

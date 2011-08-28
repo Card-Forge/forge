@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_unity.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/40.jpg
+Oracle:Enchant creature\nDomain - Enchanted creature gets +1/+1 for each basic land type among lands you control.
 End

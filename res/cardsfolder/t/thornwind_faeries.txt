@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornwind_faeries.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/44.jpg
+Oracle:Flying\n{T}: Thornwind Faeries deals 1 damage to target creature or player.
 End

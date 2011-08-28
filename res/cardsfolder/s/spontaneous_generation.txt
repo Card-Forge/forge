@@ -7,4 +7,5 @@ SVar:X:Count$InYourHand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_generation.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/274.jpg
+Oracle:Put a 1/1 green Saproling creature token onto the battlefield for each card in your hand.
 End

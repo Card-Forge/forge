@@ -11,4 +11,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/271.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/274.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/261.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/270.jpg
+Oracle:{T}: Add {2} to your mana pool.
 End

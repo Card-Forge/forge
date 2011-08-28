@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_dust.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/137.jpg
+Oracle:Destroy target Equipment. Add {G} to your mana pool.
 End

@@ -7,4 +7,5 @@ SVar:DBPumpAll:DB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_blessing.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/195.jpg
+Oracle:Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
 End

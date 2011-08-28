@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscape_familiar.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/17.jpg
+Oracle:Defender (This creature can't attack.)\nGreen spells and blue spells you cast cost {1} less to cast.
 End

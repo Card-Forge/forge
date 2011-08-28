@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ HIDDEN Prevent all dama
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trained_pronghorn.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/30.jpg
+Oracle:Discard a card: Prevent all damage that would be dealt to Trained Pronghorn this turn.
 End

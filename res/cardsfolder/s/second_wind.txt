@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_wind.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/57.jpg
+Oracle:Enchant creature\n{T}: Tap enchanted creature.\n{T}: Untap enchanted creature.
 End

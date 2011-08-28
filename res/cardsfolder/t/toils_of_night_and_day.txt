@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toils_of_night_and_day.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/57.jpg
+Oracle:You may tap or untap target permanent, then you may tap or untap another target permanent.
 End

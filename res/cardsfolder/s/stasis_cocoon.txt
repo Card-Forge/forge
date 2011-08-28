@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN CARDNAM
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis_cocoon.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/18.jpg
+Oracle:Enchant artifact\nEnchanted artifact's activated abilities can't be activated. If enchanted artifact is a creature, it can't attack or block.
 End

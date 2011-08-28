@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50510.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/239.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/169.jpg
+Oracle:Sacrifice Sakura-Tribe Elder: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
 End

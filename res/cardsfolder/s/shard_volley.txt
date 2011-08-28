@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ R Sac<1/Land> | Tgt$ TgtCP | NumDmg$ 3 | SpellDescripti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_volley.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/103.jpg
+Oracle:As an additional cost to cast Shard Volley, sacrifice a land.\nShard Volley deals 3 damage to target creature or player.
 End

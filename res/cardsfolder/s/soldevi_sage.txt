@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_sage.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/99.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/51.jpg|2
+Oracle:{T}, Sacrifice two lands: Draw three cards, then discard one of them.
 End

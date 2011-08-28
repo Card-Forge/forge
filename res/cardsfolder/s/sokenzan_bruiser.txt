@@ -7,4 +7,5 @@ K:Mountainwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79140.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/188.jpg
+Oracle:Mountainwalk
 End

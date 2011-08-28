@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_tracer.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/49.jpg
+Oracle:{1}{U}, Tap two untapped Wizards you control: Copy target instant or sorcery spell. You may choose new targets for the copy.
 End

@@ -8,4 +8,5 @@ SVar:Mill:AB$Mill | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target playe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_sliver.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/75.jpg
+Oracle:All Slivers have "{T}: Target player puts the top card of his or her library into his or her graveyard."
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selfless_exorcist.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/21.jpg
+Oracle:{T}: Exile target creature card from a graveyard. That card deals damage equal to its power to Selfless Exorcist.
 End

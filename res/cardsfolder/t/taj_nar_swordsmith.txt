@@ -9,4 +9,5 @@ SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taj_nar_swordsmith.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/27.jpg
+Oracle:When Taj-Nar Swordsmith enters the battlefield, you may pay {X}. If you do, search your library for an Equipment card with converted mana cost X or less and put that card onto the battlefield. Then shuffle your library.
 End

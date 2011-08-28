@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/torture.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/23.jpg|2
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/61.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/80.jpg
+Oracle:Enchant creature\n{1}{B}: Put a -1/-1 counter on enchanted creature.
 End

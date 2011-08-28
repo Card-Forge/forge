@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simoon.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/136.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/272.jpg
+Oracle:Simoon deals 1 damage to each creature target opponent controls.
 End

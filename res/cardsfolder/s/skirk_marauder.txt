@@ -9,4 +9,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_marauder.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/113.jpg
+Oracle:Morph {2}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Skirk Marauder is turned face up, it deals 2 damage to target creature or player.
 End

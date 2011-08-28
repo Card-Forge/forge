@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_of_blood.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/113.jpg
+Oracle:Taste of Blood deals 1 damage to target player and you gain 1 life.
 End

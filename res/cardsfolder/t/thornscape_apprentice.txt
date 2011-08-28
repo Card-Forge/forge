@@ -8,4 +8,5 @@ A:AB$ Tap | Cost$ W T |  ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_apprentice.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/215.jpg
+Oracle:{W}, {T}: Tap target creature.\n{R}, {T}: Target creature gains first strike until end of turn.
 End

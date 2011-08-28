@@ -7,4 +7,5 @@ SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_justice.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/95.jpg
+Oracle:Destroy target artifact.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 End

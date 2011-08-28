@@ -12,4 +12,5 @@ SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/44.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/188.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/42.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/40.jpg
+Oracle:Whenever Seasoned Marshal attacks, you may tap target creature.
 End

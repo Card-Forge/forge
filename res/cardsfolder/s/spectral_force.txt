@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_force.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/217.jpg
+Oracle:Trample\nWhenever Spectral Force attacks, if defending player controls no black permanents, it doesn't untap during your next untap step.
 End

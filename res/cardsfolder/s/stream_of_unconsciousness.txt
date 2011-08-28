@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_unconsciousness.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/52.jpg
+Oracle:Target creature gets -4/-0 until end of turn. If you control a Wizard, draw a card.
 End

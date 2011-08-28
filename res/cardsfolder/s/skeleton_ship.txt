@@ -10,4 +10,5 @@ SVar:NeedsToPlay:Island.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeleton_ship.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/379.jpg
+Oracle:When you control no Islands, sacrifice Skeleton Ship.\n{T}: Put a -1/-1 counter on target creature.
 End

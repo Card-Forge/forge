@@ -9,4 +9,5 @@ A:AB$ Fog | Cost$ SubCounter<3/SPORE> | SpellDescription$ Prevent all combat dam
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spore_flower.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/86.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Spore Flower.\nRemove three spore counters from Spore Flower: Prevent all combat damage that would be dealt this turn.
 End

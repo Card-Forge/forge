@@ -8,4 +8,5 @@ A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_guard.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/155.jpg
+Oracle:First strike\n{1}{B}: Regenerate Sanguine Guard.
 End

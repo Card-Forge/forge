@@ -11,4 +11,5 @@ SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_link.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/120.jpg
+Oracle:Enchant creature\nWhenever enchanted creature deals damage, you gain that much life.\nWhenever enchanted creature is dealt damage, you gain that much life.
 End

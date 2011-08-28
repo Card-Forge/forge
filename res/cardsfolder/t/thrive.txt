@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrive.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/129.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/98.jpg
+Oracle:Put a +1/+1 counter on each of X target creatures.
 End

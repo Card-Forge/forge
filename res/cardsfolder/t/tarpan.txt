@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tarpan.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/192.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/155.jpg
+Oracle:When Tarpan dies, you gain 1 life.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14624.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/210.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/196.jpg
+Oracle:Haste
 End

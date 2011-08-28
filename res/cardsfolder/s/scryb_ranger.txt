@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scryb_ranger.jpg
 SVar:Rarity:Uncommon
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/215.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying, protection from blue\nReturn a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
 End

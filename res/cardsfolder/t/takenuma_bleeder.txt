@@ -5,8 +5,9 @@ Text:no text
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life if you don't control a Demon.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life if you don't control a Demon.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ EQ0 
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ EQ0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma_bleeder.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/86.jpg
+Oracle:Whenever Takenuma Bleeder attacks or blocks, you lose 1 life if you don't control a Demon.
 End

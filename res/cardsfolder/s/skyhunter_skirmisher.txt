@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyhunter_skirmisher.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/16.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/43.jpg
+Oracle:Flying, double strike (This creature can't be blocked except by creatures with flying or reach, and it deals both first-strike and regular combat damage.)
 End

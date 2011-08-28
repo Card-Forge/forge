@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Insect | TokenTy
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card32216.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/288.jpg
+Oracle:When Symbiotic Elf dies, put two 1/1 green Insect creature tokens onto the battlefield.
 End

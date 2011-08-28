@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ 1 | ValidTgts$ Creature.attacking,Creature.blocking | T
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sawback_manticore.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/341.jpg
+Oracle:{4}: Sawback Manticore gains flying until end of turn.\n{1}: Sawback Manticore deals 2 damage to target attacking or blocking creature. Activate this ability only if Sawback Manticore is attacking or blocking and only once each turn.
 End

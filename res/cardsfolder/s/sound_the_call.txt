@@ -6,4 +6,5 @@ A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creatur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sound_the_call.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/123.jpg
+Oracle:Put a 1/1 green Wolf creature token onto the battlefield. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteflame_witch.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/197.jpg
+Oracle:{B}{R}: Each player loses 1 life.
 End

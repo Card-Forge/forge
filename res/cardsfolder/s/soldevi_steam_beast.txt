@@ -9,4 +9,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Choos
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_steam_beast.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/177.jpg|2
+Oracle:Whenever Soldevi Steam Beast becomes tapped, target opponent gains 2 life.\n{2}: Regenerate Soldevi Steam Beast.
 End

@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card11499.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/339.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/205.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/44.jpg
+Oracle:Creatures you control get +0/+2 until end of turn.
 End

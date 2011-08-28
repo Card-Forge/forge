@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squeeze.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/105.jpg
+Oracle:Sorcery spells cost {3} more to cast.
 End

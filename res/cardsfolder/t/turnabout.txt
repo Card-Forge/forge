@@ -6,4 +6,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turnabout.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/105.jpg
+Oracle:Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
 End

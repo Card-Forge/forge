@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ G 1 1 Insect | TokenAmount$ 4 | 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbiotic_beast.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/287.jpg
+Oracle:When Symbiotic Beast dies, put four 1/1 green Insect creature tokens onto the battlefield.
 End

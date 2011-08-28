@@ -12,4 +12,5 @@ SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/163.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/164.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/179.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/90.jpg
+Oracle:Target player loses 4 life and you gain 4 life.
 End

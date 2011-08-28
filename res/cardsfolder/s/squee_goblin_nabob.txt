@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squee_goblin_nabob.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/214.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/239.jpg
+Oracle:At the beginning of your upkeep, you may return Squee, Goblin Nabob from your graveyard to your hand.
 End

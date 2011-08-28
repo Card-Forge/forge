@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21785.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/120.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/224.jpg
+Oracle:
 End

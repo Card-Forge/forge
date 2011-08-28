@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sizzle.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/224.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/213.jpg
+Oracle:Sizzle deals 3 damage to each opponent.
 End

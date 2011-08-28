@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_nibbler.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/107.jpg
+Oracle:Flying\nYour maximum hand size is reduced by two.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_grove.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/84.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/258.jpg
+Oracle:{1}{G}{G}: Destroy all other enchantments.
 End

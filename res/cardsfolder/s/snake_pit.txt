@@ -7,4 +7,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Snake | TokenTyp
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_pit.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/271.jpg
+Oracle:Whenever an opponent casts a blue or black spell, you may put a 1/1 green Snake creature token onto the battlefield.
 End

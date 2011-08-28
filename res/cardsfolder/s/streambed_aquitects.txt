@@ -8,4 +8,5 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Type
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/streambed_aquitects.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/91.jpg
+Oracle:{T}: Target Merfolk creature gets +1/+1 and gains islandwalk until end of turn.\n{T}: Target land becomes an Island until end of turn.
 End

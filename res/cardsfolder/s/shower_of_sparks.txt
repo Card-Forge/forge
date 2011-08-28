@@ -7,4 +7,5 @@ SVar:DBDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target playe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shower_of_sparks.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/217.jpg
+Oracle:Shower of Sparks deals 1 damage to target creature and 1 damage to target player.
 End

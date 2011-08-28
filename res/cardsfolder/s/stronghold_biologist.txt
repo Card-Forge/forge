@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_biologist.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/45.jpg
+Oracle:{U}{U}, {T}, Discard a card: Counter target creature spell.
 End

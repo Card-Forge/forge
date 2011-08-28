@@ -6,4 +6,5 @@ A:SP$ PutCounter | Cost$ BR | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scar.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/194.jpg
+Oracle:Put a -1/-1 counter on target creature.
 End

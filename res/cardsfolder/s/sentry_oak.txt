@@ -11,4 +11,5 @@ SVar:DBDebuff:DB$Debuff | Defined$ Self | Keywords$ Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sentry_oak.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/38.jpg
+Oracle:Defender\nAt the beginning of combat on your turn, you may clash with an opponent. If you win, Sentry Oak gets +2/+0 and loses defender until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 End

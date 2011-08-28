@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_magma.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/189.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, Soul of Magma deals 1 damage to target creature.
 End

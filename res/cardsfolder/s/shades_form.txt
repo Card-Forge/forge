@@ -11,4 +11,5 @@ SVar:Pump:AB$Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNA
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shades_form.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/81.jpg
+Oracle:Enchant creature\nEnchanted creature has "{B}: This creature gets +1/+1 until end of turn."\nWhen enchanted creature dies, return that card to the battlefield under your control.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summon_the_school.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/42.jpg
+Oracle:Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.\nTap four untapped Merfolk you control: Return Summon the School from your graveyard to your hand.
 End

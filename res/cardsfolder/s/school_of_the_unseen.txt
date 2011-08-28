@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/school_of_the_unseen.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/186.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{2}, {T}: Add one mana of any color to your mana pool.
 End

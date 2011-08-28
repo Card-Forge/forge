@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solar_tide.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/24.jpg
+Oracle:Choose one - Destroy all creatures with power 2 or less; or destroy all creatures with power 3 or greater.\nEntwine-Sacrifice two lands. (Choose both if you pay the entwine cost.)
 End

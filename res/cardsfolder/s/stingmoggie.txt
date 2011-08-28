@@ -8,4 +8,5 @@ A:AB$ Destroy | Cost$ 3 R SubCounter<1/P1P1> | ValidTgts$ Artifact,Land | TgtPro
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stingmoggie.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/106.jpg
+Oracle:Stingmoggie enters the battlefield with two +1/+1 counters on it.\n{3}{R}, Remove a +1/+1 counter from Stingmoggie: Destroy target artifact or land.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suicidal_charge.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/128.jpg
+Oracle:Sacrifice Suicidal Charge: Creatures your opponents control get -1/-1 until end of turn. Those creatures attack this turn if able.
 End

@@ -8,4 +8,5 @@ SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/touch_of_brilliance.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/58.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/57.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/77.jpg
+Oracle:Draw two cards.
 End

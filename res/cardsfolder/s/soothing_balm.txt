@@ -6,4 +6,5 @@ A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Choo
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soothing_balm.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/48.jpg
+Oracle:Target player gains 5 life.
 End

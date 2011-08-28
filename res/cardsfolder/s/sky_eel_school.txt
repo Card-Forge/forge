@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_eel_school.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/44.jpg
+Oracle:Flying\nWhen Sky-Eel School enters the battlefield, draw a card, then discard a card.
 End

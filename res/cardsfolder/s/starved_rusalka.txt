@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starved_rusalka.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/97.jpg
+Oracle:{G}, Sacrifice a creature: You gain 1 life.
 End

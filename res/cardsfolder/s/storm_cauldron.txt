@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_cauldron.j
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/314.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/179.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/320.jpg
+Oracle:Each player may play an additional land during each of his or her turns.\nWhenever a land is tapped for mana, return it to its owner's hand.
 End

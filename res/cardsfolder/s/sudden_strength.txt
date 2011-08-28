@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_strength.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/132.jpg
+Oracle:Target creature gets +3/+3 until end of turn.\nDraw a card.
 End

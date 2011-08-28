@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stir_the_grave.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/85.jpg
+Oracle:Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
 End

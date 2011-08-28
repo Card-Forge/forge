@@ -18,4 +18,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/158.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/256.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/125.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/127.jpg
+Oracle:Whenever Thicket Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
 End

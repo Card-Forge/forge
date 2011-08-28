@@ -7,4 +7,5 @@ A:AB$ PutCounter | Cost$ Sac<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | S
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarland_thrinax.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/123.jpg
+Oracle:Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.
 End

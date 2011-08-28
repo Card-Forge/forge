@@ -7,4 +7,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tablet_of_epityr.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/32.jpg
+Oracle:Whenever an artifact you control is put into a graveyard from the battlefield, you may pay {1}. If you do, you gain 1 life.
 End

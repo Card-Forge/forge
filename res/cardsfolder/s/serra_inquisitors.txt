@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_inquisitors.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/120.jpg
+Oracle:Whenever Serra Inquisitors blocks or becomes blocked by one or more black creatures, Serra Inquisitors gets +2/+0 until end of turn.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiketail_drake.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/48.jpg
+Oracle:Flying\nSacrifice Spiketail Drake: Counter target spell unless its controller pays {3}.
 End

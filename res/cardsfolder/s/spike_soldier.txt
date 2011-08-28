@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ SubCounter<1/P1P1> | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_soldier.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/69.jpg
+Oracle:Spike Soldier enters the battlefield with three +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Soldier: Put a +1/+1 counter on target creature.\nRemove a +1/+1 counter from Spike Soldier: Spike Soldier gets +2/+2 until end of turn.
 End

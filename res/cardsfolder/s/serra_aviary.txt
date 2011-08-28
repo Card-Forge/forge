@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_aviary.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/118.jpg
+Oracle:Creatures with flying get +1/+1.
 End

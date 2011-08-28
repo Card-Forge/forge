@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_mogg.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/99.jpg
+Oracle:Haste\nWhen Shrieking Mogg enters the battlefield, tap all other creatures.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saltfield_recluse.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/16.jpg
+Oracle:{T}: Target creature gets -2/-0 until end of turn.
 End

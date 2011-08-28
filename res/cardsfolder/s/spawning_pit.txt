@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_pit.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/141.jpg
+Oracle:Sacrifice a creature: Put a charge counter on Spawning Pit.\n{1}, Remove two charge counters from Spawning Pit: Put a 2/2 colorless Spawn artifact creature token onto the battlefield.
 End

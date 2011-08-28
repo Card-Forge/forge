@@ -6,4 +6,5 @@ PT:4/7
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1683.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/297.jpg
+Oracle:
 End

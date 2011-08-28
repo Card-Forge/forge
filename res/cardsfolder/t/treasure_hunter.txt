@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_hunter.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/23.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/52.jpg
+Oracle:When Treasure Hunter enters the battlefield, you may return target artifact card from your graveyard to your hand.
 End

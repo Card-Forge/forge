@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Ha
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skywing_aven.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/47.jpg
+Oracle:Flying\nDiscard a card: Return Skywing Aven to its owner's hand.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slavering_nulls.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/92.jpg
+Oracle:Whenever Slavering Nulls deals combat damage to a player, if you control a Swamp, you may have that player discard a card.
 End

@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_soul.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/176.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/159.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/32.jpg
+Oracle:Syphon Soul deals 2 damage to each other player. You gain life equal to the damage dealt this way.
 End

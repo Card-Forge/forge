@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skizzik.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/169.jpg
+Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nTrample, haste\nAt the beginning of the end step, sacrifice Skizzik unless it was kicked.
 End

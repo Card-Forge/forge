@@ -8,4 +8,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 |
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/specters_shroud.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/142.jpg
+Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature deals combat damage to a player, that player discards a card.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
 End

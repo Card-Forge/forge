@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarscale_ritual.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/175.jpg
+Oracle:As an additional cost to cast Scarscale Ritual, put a -1/-1 counter on a creature you control.\nDraw two cards.
 End

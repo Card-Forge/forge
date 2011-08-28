@@ -11,4 +11,5 @@ SVar:TriggeredDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_umbra.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/207.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has "Whenever this creature deals damage to an opponent, you may draw a card."\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
 End

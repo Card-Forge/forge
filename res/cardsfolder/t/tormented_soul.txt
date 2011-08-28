@@ -8,4 +8,5 @@ K:Unblockable
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormented_soul.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/114.jpg
+Oracle:Tormented Soul can't block and is unblockable.
 End

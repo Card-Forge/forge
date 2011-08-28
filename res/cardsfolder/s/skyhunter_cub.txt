@@ -8,4 +8,5 @@ SVar:EquipMe:Once
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyhunter_cub.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/21.jpg
+Oracle:As long as Skyhunter Cub is equipped, it gets +1/+1 and has flying.
 End

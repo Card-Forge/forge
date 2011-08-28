@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shades_breath.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/167.jpg
+Oracle:Until end of turn, each creature you control becomes a black Shade and gains "{B}: This creature gets +1/+1 until end of turn."
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stave_off.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/36.jpg
+Oracle:Target creature gains protection from the color of your choice until end of turn. (It can't be blocked, targeted, dealt damage, or enchanted by anything of that color.)
 End

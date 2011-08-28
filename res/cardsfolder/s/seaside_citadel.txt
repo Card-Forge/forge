@@ -9,4 +9,5 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_citadel.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/229.jpg
+Oracle:Seaside Citadel enters the battlefield tapped.\n{T}: Add {G}, {W}, or {U} to your mana pool.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130329.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/163.jpg
+Oracle:{1}, {T}, Discard a card: Put a 1/1 colorless Sliver artifact creature token named Metallic Sliver onto the battlefield.
 End

@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 |
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverskin_armor.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/132.jpg
+Oracle:Equipped creature gets +1/+1 and is an artifact in addition to its other types.\nEquip {2}
 End

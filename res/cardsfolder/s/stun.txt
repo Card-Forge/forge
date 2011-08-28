@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/stun.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/207.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/172.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/240.jpg
+Oracle:Target creature can't block this turn.\nDraw a card.
 End

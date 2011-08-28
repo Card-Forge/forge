@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_plower.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/110.jpg
+Oracle:Morph {4}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Shaleskin Plower is turned face up, destroy target land.
 End

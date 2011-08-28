@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trenching_steed.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/26.jpg
-End 
+Oracle:Sacrifice a land: Trenching Steed gets +0/+3 until end of turn.
+End

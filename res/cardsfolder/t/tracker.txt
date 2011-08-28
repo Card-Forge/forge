@@ -10,4 +10,5 @@ SVar:Y:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tracker.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/52.jpg
+Oracle:{G}{G}, {T}: Tracker deals damage equal to its power to target creature. That creature deals damage equal to its power to Tracker.
 End

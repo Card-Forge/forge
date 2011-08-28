@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twisted_abomination.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/76.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/50.jpg
+Oracle:{B}: Regenerate Twisted Abomination.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.)
 End

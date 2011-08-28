@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinen_of_lifes_roar.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/149.jpg
+Oracle:All creatures able to block Shinen of Life's Roar do so.\nChannel - {2}{G}{G}, Discard Shinen of Life's Roar: All creatures able to block target creature this turn do so.
 End

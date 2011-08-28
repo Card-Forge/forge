@@ -12,4 +12,5 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/298.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/41.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/223.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/223.jpg
+Oracle:
 End

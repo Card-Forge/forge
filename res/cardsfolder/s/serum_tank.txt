@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_tank.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/240.jpg
+Oracle:Whenever Serum Tank or another artifact enters the battlefield, put a charge counter on Serum Tank.\n{3}, {T}, Remove a charge counter from Serum Tank: Draw a card.
 End

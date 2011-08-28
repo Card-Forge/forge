@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscale_anarch.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/74.jpg
+Oracle:{2}{R}, Discard a card at random: Stormscale Anarch deals 2 damage to target creature or player. If the discarded card was multicolored, Stormscale Anarch deals 4 damage to that creature or player instead.
 End

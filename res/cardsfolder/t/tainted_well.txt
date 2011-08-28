@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_well.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/126.jpg
+Oracle:Enchant land\nWhen Tainted Well enters the battlefield, draw a card.\nEnchanted land is a Swamp.
 End

@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_purity.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/26.jpg
+Oracle:If an artifact would deal damage to you, prevent 1 of that damage.
 End

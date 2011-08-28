@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/time_warp.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/97.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/75.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/56.jpg
+Oracle:Target player takes an extra turn after this one.
 End

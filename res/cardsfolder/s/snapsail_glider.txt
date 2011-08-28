@@ -8,4 +8,5 @@ SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snapsail_glider.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/203.jpg
+Oracle:Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts.
 End

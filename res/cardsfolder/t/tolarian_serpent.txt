@@ -8,4 +8,5 @@ SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_serpent.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/57.jpg
+Oracle:At the beginning of your upkeep, put the top seven cards of your library into your graveyard.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82980.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/38.jpg
+Oracle:{T}: Draw a card, then discard a card.
 End

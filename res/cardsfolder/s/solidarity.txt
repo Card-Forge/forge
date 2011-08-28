@@ -8,7 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45188.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/46.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/20.jpg
+Oracle:Creatures you control get +0/+5 until end of turn.
 End
-
-
-

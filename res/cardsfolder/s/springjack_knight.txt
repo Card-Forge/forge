@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ Double Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_knight.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/41.jpg
+Oracle:Whenever Springjack Knight attacks, clash with an opponent. If you win, target creature gains double strike until end of turn. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 End

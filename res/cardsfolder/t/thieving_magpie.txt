@@ -13,4 +13,5 @@ SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/49.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/115.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/103.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/104.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Thieving Magpie deals damage to an opponent, draw a card.
 End

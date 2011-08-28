@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surge_node.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/160.jpg
+Oracle:Surge Node enters the battlefield with six charge counters on it.\n{1}, {T}, Remove a charge counter from Surge Node: Put a charge counter on target artifact.
 End

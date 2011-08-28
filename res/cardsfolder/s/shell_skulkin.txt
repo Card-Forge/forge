@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shell_skulkin.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/173.jpg
+Oracle:{3}: Target blue creature gains shroud until end of turn.
 End

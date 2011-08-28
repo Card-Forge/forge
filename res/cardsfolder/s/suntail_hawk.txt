@@ -10,4 +10,5 @@ SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/51.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/49.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/28.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/50.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
 End

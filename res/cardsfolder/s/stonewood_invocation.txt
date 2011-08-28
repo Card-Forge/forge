@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewood_invocation.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/223.jpg
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nTarget creature gets +5/+5 and gains shroud until end of turn. (It can't be the target of spells or abilities.)
 End

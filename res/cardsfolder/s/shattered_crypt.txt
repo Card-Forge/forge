@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_crypt.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/22.jpg
+Oracle:Return X target creature cards from your graveyard to your hand. You lose X life.
 End

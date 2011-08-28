@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_of_the_godhead.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/150.jpg
+Oracle:Enchant creature\nAs long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)\nAs long as enchanted creature is blue, it gets +1/+1 and is unblockable.
 End

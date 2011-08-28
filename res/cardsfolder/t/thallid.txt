@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/87.jpg|4
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/86.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Thallid.\nRemove three spore counters from Thallid: Put a 1/1 green Saproling creature token onto the battlefield.
 End

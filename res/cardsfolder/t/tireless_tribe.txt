@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Discard<1/Card> | NumDef$ +4 | SpellDescription$ CARDNAME get
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tireless_tribe.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/56.jpg
+Oracle:Discard a card: Tireless Tribe gets +0/+4 until end of turn.
 End

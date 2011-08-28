@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/singing_tree.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/39.jpg
+Oracle:{T}: Target attacking creature's power becomes 0 until end of turn.
 End

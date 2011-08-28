@@ -6,4 +6,5 @@ A:SP$ DestroyAll | Cost$ 1 G | ValidCards$ Enchantment.nonAura | SpellDescriptio
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_domain.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/143.jpg
+Oracle:Destroy all non-Aura enchantments.
 End

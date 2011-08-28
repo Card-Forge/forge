@@ -6,4 +6,5 @@ A:SP$ Discard | Cost$ 3 B B | ValidTgts$ Player | NumCards$ 3 | Mode$ TgtChoose 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/three_tragedies.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/87.jpg
+Oracle:Target player discards three cards.
 End

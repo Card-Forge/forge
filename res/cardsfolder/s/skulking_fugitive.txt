@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skulking_fugitive.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/161.jpg
+Oracle:When Skulking Fugitive becomes the target of a spell or ability, sacrifice it.
 End

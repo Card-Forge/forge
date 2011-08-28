@@ -10,4 +10,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget | NoRegen$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_graft.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/53.jpg
+Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhen enchanted creature becomes the target of a spell or ability, destroy that creature. It can't be regenerated.
 End

@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 4 R G | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sangrite_surge.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/190.jpg
+Oracle:Target creature gets +3/+3 and gains double strike until end of turn.
 End

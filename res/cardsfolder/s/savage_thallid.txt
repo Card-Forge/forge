@@ -10,4 +10,5 @@ A:AB$ Regenerate | Cost$ Sac<1/Saproling>  | ValidTgts$ Fungus | TgtPrompt$ Sele
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_thallid.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/213.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Savage Thallid.\nRemove three spore counters from Savage Thallid: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Regenerate target Fungus.
 End

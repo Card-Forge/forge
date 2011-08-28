@@ -9,4 +9,5 @@ SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_centurion.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/161.jpg
+Oracle:When you control no other artifacts, sacrifice Synod Centurion.
 End

@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Hand | TgtPrompt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_knowledge.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/52.jpg
+Oracle:Return target sorcery card from your graveyard to your hand.
 End

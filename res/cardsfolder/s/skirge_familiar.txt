@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirge_familiar.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/157.jpg
+Oracle:Flying\nDiscard a card: Add {B} to your mana pool.
 End

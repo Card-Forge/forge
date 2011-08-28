@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_replica.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/244.jpg
+Oracle:{1}{W}, Sacrifice Soldier Replica: Soldier Replica deals 3 damage to target attacking or blocking creature.
 End

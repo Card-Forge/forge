@@ -7,4 +7,5 @@ A:SP$ ChangeZone | Cost$ ExileFromHand<1/Card.Blue> | ValidTgts$ Creature | TgtP
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snapback.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/78.jpg
+Oracle:You may exile a blue card from your hand rather than pay Snapback's mana cost.\nReturn target creature to its owner's hand.
 End

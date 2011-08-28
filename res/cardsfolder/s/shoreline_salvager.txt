@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Shoreline_Salvager.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/67.jpg
+Oracle:Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.
 End

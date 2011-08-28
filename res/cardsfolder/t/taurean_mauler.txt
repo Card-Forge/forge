@@ -9,4 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taurean_mauler.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/109.jpg
+Oracle:Changeling (This card is every creature type at all times.)\nWhenever an opponent casts a spell, you may put a +1/+1 counter on Taurean Mauler.
 End

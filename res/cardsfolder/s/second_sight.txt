@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_sight.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/33.jpg
+Oracle:Choose one - Look at the top five cards of target opponent's library, then put them back in any order; or look at the top five cards of your library, then put them back in any order.\nEntwine {U} (Choose both if you pay the entwine cost.)
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strip_mine.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/189.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/71.jpg|4
+Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Strip Mine: Destroy target land.
 End

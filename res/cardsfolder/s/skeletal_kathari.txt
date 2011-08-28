@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_kathari.jpg
 SVar:Rarity:Common
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/88.jpg
+Oracle:Flying\n{B}, Sacrifice a creature: Regenerate Skeletal Kathari.
 End

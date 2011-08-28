@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teneb_the_harvester.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/230.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/163.jpg
+Oracle:Flying\nWhenever Teneb, the Harvester deals combat damage to a player, you may pay {2}{B}. If you do, put target creature card from a graveyard onto the battlefield under your control.
 End

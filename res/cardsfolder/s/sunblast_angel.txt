@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunblast_angel.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/22.jpg
+Oracle:Flying\nWhen Sunblast Angel enters the battlefield, destroy all tapped creatures.
 End

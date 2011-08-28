@@ -15,4 +15,5 @@ SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/156.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/314.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/312.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/321.jpg
+Oracle:At the beginning of each player's draw step, that player puts the cards in his or her hand on the bottom of his or her library in any order, then draws that many cards.
 End

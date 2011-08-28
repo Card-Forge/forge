@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_shackle.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/47.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/31.jpg
+Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, put a -0/-2 counter on it.
 End

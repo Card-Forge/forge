@@ -11,4 +11,5 @@ A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_hulk.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/139.jpg
+Oracle:{2}{G}: Regenerate Tangle Hulk.
 End

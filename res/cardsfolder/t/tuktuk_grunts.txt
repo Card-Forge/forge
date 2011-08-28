@@ -11,4 +11,5 @@ SVar:BuffedBy:Ally
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_grunts.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/152.jpg
+Oracle:Haste\nWhenever Tuktuk Grunts or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Tuktuk Grunts.
 End

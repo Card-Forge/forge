@@ -8,4 +8,5 @@ SVar:KWPump:Mode$ Continuous | Affected$ Creature.withoutFlying | AddKeyword$ HI
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_rift.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/157.jpg
+Oracle:Destroy target land. Creatures without flying can't block this turn.
 End

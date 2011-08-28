@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sidewinder_sliver.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/41.jpg
+Oracle:All Sliver creatures have flanking. (Whenever a creature without flanking blocks a Sliver, the blocking creature gets -1/-1 until end of turn.)
 End

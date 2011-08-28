@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 10
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorins_vengeance.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/111.jpg
+Oracle:Sorin's Vengeance deals 10 damage to target player and you gain 10 life.
 End

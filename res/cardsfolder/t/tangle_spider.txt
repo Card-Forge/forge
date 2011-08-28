@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_spider.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/85.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/303.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nReach (This creature can block creatures with flying.)
 End

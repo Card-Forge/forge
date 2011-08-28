@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/112.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/73.jpg
+Oracle:Trample\nAs Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
 End

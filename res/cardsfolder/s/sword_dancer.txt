@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_dancer.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/25.jpg
+Oracle:{W}{W}: Target attacking creature gets -1/-0 until end of turn.
 End

@@ -7,4 +7,5 @@ A:AB$ GainLife | Cost$ G T | LifeAmount$ 1 | IsPresent$ Permanent.Green+YouCtrl 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapseep_forest.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/279.jpg
+Oracle:({T}: Add {G} to your mana pool.)\nSapseep Forest enters the battlefield tapped.\n{G}, {T}: You gain 1 life. Activate this ability only if you control two or more green permanents.
 End

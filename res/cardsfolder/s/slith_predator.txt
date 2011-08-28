@@ -9,4 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_predator.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/129.jpg
+Oracle:Trample\nWhenever Slith Predator deals combat damage to a player, put a +1/+1 counter on it.
 End

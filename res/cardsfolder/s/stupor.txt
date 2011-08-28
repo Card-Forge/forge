@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/stupor.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/158.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/45.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/48.jpg
+Oracle:Target opponent discards a card at random, then discards a card.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/songs_of_the_damned.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/48.jpg
+Oracle:Add {B} to your mana pool for each creature card in your graveyard.
 End

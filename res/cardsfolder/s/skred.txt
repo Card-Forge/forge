@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skred.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/97.jpg
+Oracle:Skred deals damage to target creature equal to the number of snow permanents you control.
 End

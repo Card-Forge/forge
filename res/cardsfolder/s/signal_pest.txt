@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/signal_pest.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/131.jpg
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nSignal Pest can't be blocked except by creatures with flying or reach.
 End

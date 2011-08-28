@@ -10,4 +10,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shielding_plax.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/147.jpg
+Oracle:({G/U} can be paid with either {G} or {U}.)\nEnchant creature\nWhen Shielding Plax enters the battlefield, draw a card.\nEnchanted creature can't be the target of spells or abilities your opponents control.
 End

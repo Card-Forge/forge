@@ -6,4 +6,5 @@ A:SP$ Discard | Cost$ B | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Arti
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_dreams.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/59.jpg
+Oracle:Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.
 End

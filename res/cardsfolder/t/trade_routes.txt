@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/trade_routes.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/109.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/112.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/108.jpg
+Oracle:{1}: Return target land you control to its owner's hand.\n{1}, Discard a land card: Draw a card.
 End

@@ -9,4 +9,5 @@ K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_hunger.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/147.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has trample.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

@@ -6,4 +6,5 @@ A:SP$ Sacrifice | Cost$ 1 G | Defined$ Opponent | SacValid$ Artifact,Enchantment
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tribute_to_the_wild.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/175.jpg
+Oracle:Each opponent sacrifices an artifact or enchantment.
 End

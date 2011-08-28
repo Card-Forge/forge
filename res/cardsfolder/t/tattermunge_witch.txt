@@ -7,4 +7,5 @@ A:AB$ PumpAll | Cost$ R G | ValidCards$ Creature.blocked | NumAtt$ +1 | KW$ Tram
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_witch.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/220.jpg
+Oracle:{R}{G}: Each blocked creature gets +1/+0 and gains trample until end of turn.
 End

@@ -13,4 +13,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_algae.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/281.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/274.jpg
+Oracle:Enchant Swamp\nWhen enchanted land becomes tapped, destroy it.\nWhen Spreading Algae is put into a graveyard from the battlefield, return Spreading Algae to its owner's hand.
 End

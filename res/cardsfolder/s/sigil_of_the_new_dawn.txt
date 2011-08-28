@@ -7,4 +7,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 1 W | Defined$ TriggeredCard | Origin$ Gra
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_new_dawn.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/55.jpg
+Oracle:Whenever a creature is put into your graveyard from the battlefield, you may pay {1}{W}. If you do, return that card to your hand.
 End

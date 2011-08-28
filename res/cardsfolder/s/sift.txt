@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sift.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/42.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/98.jpg
+Oracle:Draw three cards, then discard a card.
 End

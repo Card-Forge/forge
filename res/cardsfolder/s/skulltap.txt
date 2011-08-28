@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skulltap.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/73.jpg
+Oracle:As an additional cost to cast Skulltap, sacrifice a creature.\nDraw two cards.
 End

@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_volcanist.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/104.jpg
+Oracle:Morph-Sacrifice two Mountains. (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Skirk Volcanist is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.
 End

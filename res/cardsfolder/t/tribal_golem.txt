@@ -7,7 +7,7 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ BEAS
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ GOBLIN | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control a Goblin,
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | CheckSVar$ SOLDIER | SVarCompare$ GE1 | Description$ CARDNAME has first strike as long as you control a Soldier,
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ WIZARD | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control a Wizard,
-S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Regen | CheckSVar$ ZOMBIE | SVarCompare$ GE1 | Description$ CARDNAME has "B: Regenerate CARDNAME" as long as you control a Zombie. 
+S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Regen | CheckSVar$ ZOMBIE | SVarCompare$ GE1 | Description$ CARDNAME has "B: Regenerate CARDNAME" as long as you control a Zombie.
 SVar:Regen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:BEAST:Count$Valid Beast.YouCtrl
 SVar:GOBLIN:Count$Valid Goblin.YouCtrl
@@ -18,4 +18,5 @@ SVar:BuffedBy:Beast,Goblin,Soldier,Wizard,Zombie
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tribal_golem.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/311.jpg
+Oracle:Tribal Golem has trample as long as you control a Beast, haste as long as you control a Goblin, first strike as long as you control a Soldier, flying as long as you control a Wizard, and "{B}: Regenerate Tribal Golem" as long as you control a Zombie.
 End

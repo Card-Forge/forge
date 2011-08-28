@@ -9,4 +9,5 @@ SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_garden.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/284.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {G} or {W} to your mana pool. Tranquil Garden doesn't untap during your next untap step.
 End

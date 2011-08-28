@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormfront_riders.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/20.jpg
+Oracle:Flying\nWhen Stormfront Riders enters the battlefield, return two creatures you control to their owner's hand.\nWhenever Stormfront Riders or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
 End

@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_scrying.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/130.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/302.jpg
+Oracle:Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
 End

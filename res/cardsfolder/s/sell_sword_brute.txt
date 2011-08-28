@@ -8,4 +8,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sell_sword_brute.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/142.jpg
+Oracle:When Sell-Sword Brute dies, it deals 2 damage to you.
 End

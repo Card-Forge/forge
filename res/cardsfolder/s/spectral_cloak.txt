@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_cloak.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/78.jpg
+Oracle:Enchant creature\nEnchanted creature has shroud as long as it's untapped. (It can't be the target of spells or abilities.)
 End

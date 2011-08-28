@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_kings_blessing.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/75.jpg
+Oracle:Any number of target creatures become blue until end of turn.
 End

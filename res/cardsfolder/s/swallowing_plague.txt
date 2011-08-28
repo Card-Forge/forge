@@ -8,4 +8,5 @@ SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swallowing_plague.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/146.jpg
+Oracle:Swallowing Plague deals X damage to target creature and you gain X life.
 End

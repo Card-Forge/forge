@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtleech.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/274.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/157.jpg
+Oracle:Whenever an Island an opponent controls becomes tapped, you may gain 1 life.
 End

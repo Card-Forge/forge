@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seshiro_the_anointed.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/241.jpg
+Oracle:Other Snake creatures you control get +2/+2.\nWhenever a Snake you control deals combat damage to a player, you may draw a card.
 End

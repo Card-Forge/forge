@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverglade_pathfinder.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/270.jpg
+Oracle:{1}{G}, {T}, Discard a card: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
 End

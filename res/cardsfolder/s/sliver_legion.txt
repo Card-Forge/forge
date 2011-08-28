@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136146.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/158.jpg
+Oracle:All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
 End

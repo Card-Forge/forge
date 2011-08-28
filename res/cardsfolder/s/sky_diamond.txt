@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_diamond.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/310.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/284.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/316.jpg
+Oracle:Sky Diamond enters the battlefield tapped.\n{T}: Add {U} to your mana pool.
 End

@@ -9,4 +9,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | Num
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seizures.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/47.jpg
+Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Seizures deals 3 damage to that creature's controller unless that player pays {3}.
 End

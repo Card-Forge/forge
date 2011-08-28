@@ -9,4 +9,5 @@ SVar:TrigGainControl:AB$GainControl | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_entrancer.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/56.jpg
+Oracle:Whenever Tolarian Entrancer becomes blocked by a creature, gain control of that creature at end of combat.
 End

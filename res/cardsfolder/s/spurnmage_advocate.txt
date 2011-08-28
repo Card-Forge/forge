@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spurnmage_advocate.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/33.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/27.jpg
+Oracle:{T}: Return two target cards from an opponent's graveyard to his or her hand. Destroy target attacking creature.
 End

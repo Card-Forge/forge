@@ -12,4 +12,5 @@ SVar:BuffedBy:Ally
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Talus_Paladin.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/21.jpg
+Oracle:Whenever Talus Paladin or another Ally enters the battlefield under your control, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on Talus Paladin.
 End

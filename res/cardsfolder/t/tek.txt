@@ -18,4 +18,5 @@ SVar:BuffedBy:Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tek.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/313.jpg
+Oracle:Tek gets +0/+2 as long as you control a Plains, has flying as long as you control an Island, gets +2/+0 as long as you control a Swamp, has first strike as long as you control a Mountain, and has trample as long as you control a Forest.
 End

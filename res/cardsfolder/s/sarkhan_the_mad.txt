@@ -6,4 +6,5 @@ Loyalty:7
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_the_mad.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/214.jpg
+Oracle:[0] Reveal the top card of your library and put it into your hand. Sarkhan the Mad deals damage to himself equal to that card's converted mana cost.\n[-2] Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.\n[-4] Each Dragon creature you control deals damage equal to its power to target player.
 End

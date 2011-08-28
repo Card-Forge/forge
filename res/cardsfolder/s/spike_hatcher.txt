@@ -9,4 +9,5 @@ A:AB$ Regenerate | Cost$ 1 SubCounter<1/P1P1> | SpellDescription$ Regenerate Spi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_hatcher.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/126.jpg
+Oracle:Spike Hatcher enters the battlefield with six +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Hatcher: Put a +1/+1 counter on target creature.\n{1}, Remove a +1/+1 counter from Spike Hatcher: Regenerate Spike Hatcher.
 End

@@ -10,4 +10,5 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/screeching_drake.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/44.jpg
+Oracle:Flying\nWhen Screeching Drake enters the battlefield, draw a card, then discard a card.
 End

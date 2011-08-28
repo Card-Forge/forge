@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_firewalker.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/94.jpg
+Oracle:Suq'Ata Firewalker can't be the target of red spells or abilities from red sources.\n{T}: Suq'Ata Firewalker deals 1 damage to target creature or player.
 End

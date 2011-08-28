@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_of_hooves.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/242.jpg
+Oracle:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
 End

@@ -8,4 +8,5 @@ SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Enchantment.YouDontCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spring_cleaning.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/236.jpg
+Oracle:Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 End

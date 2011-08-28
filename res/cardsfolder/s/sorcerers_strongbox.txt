@@ -8,4 +8,5 @@ SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorcerers_strongbox.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/213.jpg
+Oracle:{2}, {T}: Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_farm.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/329.jpg
+Oracle:Tinder Farm enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\n{T}, Sacrifice Tinder Farm: Add {R}{W} to your mana pool.
 End

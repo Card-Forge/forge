@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/twincast.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/78.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/60.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/120.jpg
+Oracle:Copy target instant or sorcery spell. You may choose new targets for the copy.
 End

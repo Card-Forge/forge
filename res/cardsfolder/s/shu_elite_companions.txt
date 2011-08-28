@@ -7,4 +7,5 @@ K:Horsemanship
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_elite_companions.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/21.jpg
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)
 End

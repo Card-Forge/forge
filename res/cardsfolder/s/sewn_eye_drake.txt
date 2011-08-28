@@ -8,4 +8,5 @@ K:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewn_eye_drake.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/135.jpg
+Oracle:Flying, haste
 End

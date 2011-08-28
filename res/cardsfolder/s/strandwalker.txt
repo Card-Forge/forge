@@ -7,4 +7,5 @@ K:Living Weapon
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strandwalker.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/137.jpg
+Oracle:Living weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)\nEquipped creature gets +2/+4 and has reach.\nEquip {4}
 End

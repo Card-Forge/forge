@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_mistfolk.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/93.jpg
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{U}: Put Thalakos Mistfolk on top of its owner's library.
 End

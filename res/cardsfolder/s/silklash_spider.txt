@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silklash_spider.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/281.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/271.jpg
+Oracle:Reach (This creature can block creatures with flying.)\n{X}{G}{G}: Silklash Spider deals X damage to each creature with flying.
 End

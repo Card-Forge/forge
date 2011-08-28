@@ -6,4 +6,5 @@ K:eqPump 2:+1/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_meek.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/165.jpg
+Oracle:Equipped creature gets +1/+2.\nEquip {2}\nWhenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
 End

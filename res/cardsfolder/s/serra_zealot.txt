@@ -7,4 +7,5 @@ K:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_zealot.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/46.jpg
+Oracle:First strike
 End

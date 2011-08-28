@@ -13,4 +13,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/302.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/278.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/225.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/225.jpg
+Oracle:Exile target creature. Its controller gains life equal to its power.
 End

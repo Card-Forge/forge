@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_cloudskater.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/86.jpg
+Oracle:Flying\n{2}, Return a land you control to its owner's hand: Draw a card, then discard a card.
 End

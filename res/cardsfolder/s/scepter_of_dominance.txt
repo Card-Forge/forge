@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scepter_of_dominance.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/17.jpg
+Oracle:{W}, {T}: Tap target permanent.
 End

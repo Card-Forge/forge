@@ -8,4 +8,5 @@ K:Cycling:PayLife<2>
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/street_wraith.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/90.jpg
+Oracle:Swampwalk\nCycling-Pay 2 life. (Pay 2 life, Discard this card: Draw a card.)
 End

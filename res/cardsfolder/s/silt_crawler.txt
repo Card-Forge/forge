@@ -8,4 +8,5 @@ SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Land.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silt_crawler.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/123.jpg
+Oracle:When Silt Crawler enters the battlefield, tap all lands you control.
 End

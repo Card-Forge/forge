@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_angel.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/31.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/23.jpg
+Oracle:Flying\nWhenever a land enters the battlefield under an opponent's control, you may gain 3 life.
 End

@@ -10,4 +10,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/106.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/48.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/102.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/103.jpg
+Oracle:{U}{U}{U}, {T}: Return target permanent to its owner's hand.
 End

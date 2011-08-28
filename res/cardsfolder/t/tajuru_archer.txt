@@ -13,4 +13,5 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_archer.jpg
 SVar:Rarity:Uncommon
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/185.jpg
+Oracle:Whenever Tajuru Archer or another Ally enters the battlefield under your control, you may have Tajuru Archer deal damage to target creature with flying equal to the number of Allies you control.
 End

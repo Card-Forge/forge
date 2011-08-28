@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_armor.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/273.jpg
+Oracle:Creatures you control get +0/+1 and have reach. (They can block creatures with flying.)
 End

@@ -9,4 +9,5 @@ A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_bloodletter.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/77.jpg
+Oracle:Whenever Slith Bloodletter deals combat damage to a player, put a +1/+1 counter on it.\n{1}{B}: Regenerate Slith Bloodletter.
 End

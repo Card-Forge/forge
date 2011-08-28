@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_burst.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/79.jpg
+Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCounter target spell with converted mana cost X.
 End

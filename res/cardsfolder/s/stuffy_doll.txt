@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 dama
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116724.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/264.jpg
+Oracle:As Stuffy Doll enters the battlefield, choose a player.\nStuffy Doll is indestructible.\nWhenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.\n{T}: Stuffy Doll deals 1 damage to itself.
 End

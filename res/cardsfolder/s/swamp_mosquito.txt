@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swamp_mosquito.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/30.jpg|2
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/49.jpg
+Oracle:Flying\nWhenever Swamp Mosquito attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
 End

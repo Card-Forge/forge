@@ -9,4 +9,5 @@ SVar:DBAnimate:DB$Animate | Defined$ Targeted | Types$ Samurai | Keywords$ Bushi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sensei_golden_tail.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/44.jpg
+Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{1}{W}, {T}: Put a training counter on target creature. That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slinking_skirge.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/71.jpg
+Oracle:Flying\n{2}, Sacrifice Slinking Skirge: Draw a card.
 End

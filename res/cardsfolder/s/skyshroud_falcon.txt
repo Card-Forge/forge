@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5224.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/116.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/45.jpg
+Oracle:Flying, vigilance
 End

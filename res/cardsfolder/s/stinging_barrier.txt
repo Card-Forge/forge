@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ U T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNA
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinging_barrier.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/107.jpg
+Oracle:Defender (This creature can't attack.)\n{U}, {T}: Stinging Barrier deals 1 damage to target creature or player.
 End

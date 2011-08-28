@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | ConditionDefined$ Targeted | Cond
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermokarst.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/156.jpg
+Oracle:Destroy target land. If that land was a snow land, you gain 1 life.
 End

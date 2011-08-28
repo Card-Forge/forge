@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/174.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/69.jpg
+Oracle:Destroy target creature with power 2 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

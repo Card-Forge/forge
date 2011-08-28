@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsworn_jury.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/17.jpg
+Oracle:Defender (This creature can't attack.)\n{1}{U}, Sacrifice Soulsworn Jury: Counter target creature spell.
 End

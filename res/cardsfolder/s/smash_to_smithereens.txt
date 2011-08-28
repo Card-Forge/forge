@@ -7,4 +7,5 @@ SVar:DBDealDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smash_to_smithereens.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/107.jpg
+Oracle:Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
 End

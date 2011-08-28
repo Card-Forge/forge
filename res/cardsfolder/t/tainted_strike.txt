@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_strike.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/80.jpg
+Oracle:Target creature gets +1/+0 and gains infect until end of turn. (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 End

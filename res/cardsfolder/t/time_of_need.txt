@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_need.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/247.jpg
+Oracle:Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
 End

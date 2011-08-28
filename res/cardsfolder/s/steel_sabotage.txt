@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_sabotage.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/33.jpg
+Oracle:Choose one - Counter target artifact spell; or return target artifact to its owner's hand.
 End

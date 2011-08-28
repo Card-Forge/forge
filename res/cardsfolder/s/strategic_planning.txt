@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strategic_planning.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/53.jpg
+Oracle:Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
 End

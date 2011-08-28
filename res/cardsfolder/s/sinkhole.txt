@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sinkhole.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/38.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/38.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/38.jpg
+Oracle:Destroy target land.
 End

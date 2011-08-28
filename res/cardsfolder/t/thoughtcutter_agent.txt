@@ -8,4 +8,5 @@ SVar:DBReveal:DB$RevealHand | Defined$ Targeted
 SVar:Rarity:Uncommon
 SVar:Picture:http://magic.tcgplayer.com/db/cards/16857.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/201.jpg
+Oracle:{U}{B}, {T}: Target player loses 1 life and reveals his or her hand.
 End

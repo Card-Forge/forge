@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steelshapers_gift.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/19.jpg
+Oracle:Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
 End

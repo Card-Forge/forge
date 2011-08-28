@@ -7,4 +7,5 @@ SVar:X:Count$InYourYard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporary_insanity.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/116.jpg
+Oracle:Untap target creature with power less than the number of cards in your graveyard and gain control of it until end of turn. That creature gains haste until end of turn.
 End

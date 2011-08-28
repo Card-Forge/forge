@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Triggered | KW$ HIDDEN This card does
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_the_righteous.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/11.jpg
+Oracle:Equipped creature gets +0/+2 and has vigilance.\nWhenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.\nEquip {2}
 End

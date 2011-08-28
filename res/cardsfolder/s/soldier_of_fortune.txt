@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_of_fortune.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/117.jpg
+Oracle:{R}, {T}: Target player shuffles his or her library.
 End

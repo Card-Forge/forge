@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springleaf_drum.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/261.jpg
+Oracle:{T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
 End

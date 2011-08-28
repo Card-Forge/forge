@@ -10,4 +10,5 @@ SVar:BuffedBy:Island
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpent_of_the_endless_sea.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/70.jpg
+Oracle:Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.\nSerpent of the Endless Sea can't attack unless defending player controls an Island.
 End

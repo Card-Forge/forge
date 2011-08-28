@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_law.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/50.jpg
+Oracle:If a red source would deal damage to you, prevent 2 of that damage.
 End

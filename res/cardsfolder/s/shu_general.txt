@@ -8,4 +8,5 @@ K:Horsemanship
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_general.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/25.jpg
+Oracle:Vigilance; horsemanship (This creature can't be blocked except by creatures with horsemanship.)
 End

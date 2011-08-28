@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_spirit_guide.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/122.jpg
+Oracle:Exile Simian Spirit Guide from your hand: Add {R} to your mana pool.
 End

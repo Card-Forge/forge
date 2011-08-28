@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teetering_peaks.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/226.jpg
+Oracle:Teetering Peaks enters the battlefield tapped.\nWhen Teetering Peaks enters the battlefield, target creature gets +2/+0 until end of turn.\n{T}: Add {R} to your mana pool.
 End

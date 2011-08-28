@@ -13,4 +13,5 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/324.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/315.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/277.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/273.jpg
+Oracle:{5}, {T}: Put a 1/1 colorless Insect artifact creature token with flying named Wasp onto the battlefield. (It can't be blocked except by creatures with flying or reach.)
 End

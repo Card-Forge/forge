@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target nonCreatu
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_pierce.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/67.jpg
+Oracle:Counter target noncreature spell unless its controller pays {2}.
 End

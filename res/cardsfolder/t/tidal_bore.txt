@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_bore.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/109.jpg
+Oracle:You may return an Island you control to its owner's hand rather than pay Tidal Bore's mana cost.\nYou may tap or untap target creature.
 End

@@ -8,4 +8,5 @@ A:AB$ PutCounter | Cost$ 2 SubCounter<1/P1P1> | ValidTgts$ Creature | CounterTyp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_colony.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/67.jpg
+Oracle:Spike Colony enters the battlefield with four +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Colony: Put a +1/+1 counter on target creature.
 End

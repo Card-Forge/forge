@@ -10,4 +10,5 @@ A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 unti
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunhome_enforcer.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/233.jpg
+Oracle:Whenever Sunhome Enforcer deals combat damage, you gain that much life.\n{1}{R}: Sunhome Enforcer gets +1/+0 until end of turn.
 End

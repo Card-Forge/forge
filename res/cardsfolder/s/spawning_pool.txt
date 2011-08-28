@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_pool.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/142.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/358.jpg
+Oracle:Spawning Pool enters the battlefield tapped.\n{T}: Add {B} to your mana pool.\n{1}{B}: Spawning Pool becomes a 1/1 black Skeleton creature with "{B}: Regenerate this creature" until end of turn. It's still a land. (If it regenerates, the next time it would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
 End

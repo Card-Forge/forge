@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_discipline.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/73.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/181.jpg
+Oracle:Each player loses 1 life for each creature he or she controls.
 End

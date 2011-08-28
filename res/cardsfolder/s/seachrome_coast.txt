@@ -8,4 +8,5 @@ K:CARDNAME enters the battlefield tapped unless you control two or fewer other l
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seachrome_coast.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/229.jpg
+Oracle:Seachrome Coast enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {W} or {U} to your mana pool.
 End

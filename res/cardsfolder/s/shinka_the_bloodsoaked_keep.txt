@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ R T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select targe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinka_the_bloodsoaked_keep.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/282.jpg
+Oracle:{T}: Add {R} to your mana pool.\n{R}, {T}: Target legendary creature gains first strike until end of turn.
 End

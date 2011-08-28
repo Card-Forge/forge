@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starlight_invoker.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/20.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/47.jpg
+Oracle:{7}{W}: You gain 5 life.
 End

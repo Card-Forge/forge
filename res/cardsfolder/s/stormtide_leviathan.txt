@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.withoutFlying+withoutIslandwalk | AddKey
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormtide_leviathan.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/74.jpg
+Oracle:Islandwalk (This creature is unblockable as long as defending player controls an Island.)\nAll lands are Islands in addition to their other types.\nCreatures without flying or islandwalk can't attack.
 End

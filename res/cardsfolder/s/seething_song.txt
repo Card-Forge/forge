@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_song.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/104.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/216.jpg
+Oracle:Add {R}{R}{R}{R}{R} to your mana pool.
 End

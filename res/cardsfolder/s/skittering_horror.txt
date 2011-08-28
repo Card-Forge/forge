@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_horror.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/70.jpg
+Oracle:When you cast a creature spell, sacrifice Skittering Horror.
 End

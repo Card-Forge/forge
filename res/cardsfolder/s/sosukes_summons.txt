@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | Cost$ 0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sosukes_summons.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/145.jpg
+Oracle:Put two 1/1 green Snake creature tokens onto the battlefield.\nWhenever a nontoken Snake enters the battlefield under your control, you may return Sosuke's Summons from your graveyard to your hand.
 End

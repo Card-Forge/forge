@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_bracers.
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/123.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/276.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/304.jpg
+Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
 End

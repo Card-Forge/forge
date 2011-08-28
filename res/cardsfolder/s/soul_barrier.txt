@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_barrier.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/125.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/103.jpg
+Oracle:Whenever an opponent casts a creature spell, Soul Barrier deals 2 damage to that player unless he or she pays {2}.
 End

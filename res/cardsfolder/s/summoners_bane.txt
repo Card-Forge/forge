@@ -7,4 +7,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Illusion | TokenTypes$ Creat
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summoners_bane.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/71.jpg
+Oracle:Counter target creature spell. Put a 2/2 blue Illusion creature token onto the battlefield.
 End

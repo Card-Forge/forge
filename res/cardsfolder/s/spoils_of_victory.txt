@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | Chan
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spoils_of_victory.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/147.jpg
+Oracle:Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle your library.
 End

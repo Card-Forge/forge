@@ -7,4 +7,5 @@ SVar:TrigToken:AB$Token | Cost$ W | TokenAmount$ 1 | TokenName$ Spirit | TokenTy
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_cairn.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/26.jpg
+Oracle:Whenever a player discards a card, you may pay {W}. If you do, put a 1/1 white Spirit creature token with flying onto the battlefield.
 End

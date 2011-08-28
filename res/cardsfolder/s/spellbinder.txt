@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbinder.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/143.jpg
+Oracle:Imprint - When Spellbinder enters the battlefield, you may exile an instant card from your hand.\nWhenever equipped creature deals combat damage to a player, you may copy the exiled card. If you do, you may cast the copy without paying its mana cost.\nEquip {4}
 End

@@ -8,4 +8,5 @@ K:Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2534.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/98.jpg
+Oracle:Flying, trample
 End

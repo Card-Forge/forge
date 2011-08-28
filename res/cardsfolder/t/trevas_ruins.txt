@@ -9,4 +9,5 @@ SVar:NeedsToPlay:Land.nonLair+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_ruins.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/143.jpg
+Oracle:When Treva's Ruins enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.\n{T}: Add {G}, {W}, or {U} to your mana pool.
 End

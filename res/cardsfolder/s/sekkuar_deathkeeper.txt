@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Graveborn | Toke
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sekkuar_deathkeeper.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/131.jpg
+Oracle:Whenever another nontoken creature you control dies, put a 3/1 black and red Graveborn creature token with haste onto the battlefield.
 End

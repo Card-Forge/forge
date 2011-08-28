@@ -6,4 +6,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/standstill.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/102.jpg
+Oracle:When a player casts a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.
 End

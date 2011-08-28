@@ -9,4 +9,5 @@ SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+withFlanking
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telimtor.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/197.jpg
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhenever Telim'Tor attacks, all attacking creatures with flanking get +1/+1 until end of turn.
 End

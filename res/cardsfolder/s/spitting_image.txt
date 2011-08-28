@@ -7,4 +7,5 @@ A:SP$CopyPermanent | Cost$ 4 GU GU Discard<1/Land> | ActivationZone$ Graveyard |
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_image.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/162.jpg
+Oracle:Put a token that's a copy of target creature onto the battlefield.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 End

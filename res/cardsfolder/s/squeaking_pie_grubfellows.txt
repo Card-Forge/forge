@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squeaking_pie_grubfellows.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/78.jpg
+Oracle:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Squeaking Pie Grubfellows, you may reveal it. If you do, each opponent discards a card.
 End

@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 unti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_drake.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/38.jpg
+Oracle:Flying\n{1}{R}: Torch Drake gets +1/+0 until end of turn.
 End

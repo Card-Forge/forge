@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_guildmage.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/38.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/46.jpg
+Oracle:{U}, {T}: Put target creature you control on top of its owner's library.\n{R}, {T}: Shadow Guildmage deals 1 damage to target creature or player and 1 damage to you.
 End

@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.nonRed | TgtPrompt$ Select targ
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strafe.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/73.jpg
+Oracle:Strafe deals 3 damage to target nonred creature.
 End

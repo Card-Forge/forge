@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/salvage.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/85.jpg
+Oracle:Put target card from your graveyard on top of your library.
 End

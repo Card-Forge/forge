@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97073.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/54.jpg
+Oracle:Hellbent - When Slaughterhouse Bouncer dies, if you have no cards in hand, target creature gets -3/-3 until end of turn.
 End

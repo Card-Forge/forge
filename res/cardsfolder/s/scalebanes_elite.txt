@@ -7,4 +7,5 @@ K:Protection from black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalebanes_elite.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/135.jpg
+Oracle:Protection from black
 End

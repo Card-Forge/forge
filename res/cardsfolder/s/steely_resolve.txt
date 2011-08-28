@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.ChosenType | AddKeyword$ Shroud | Descri
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steely_resolve.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/286.jpg
+Oracle:As Steely Resolve enters the battlefield, choose a creature type.\nCreatures of the chosen type have shroud. (They can't be the targets of spells or abilities.)
 End

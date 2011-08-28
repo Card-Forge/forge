@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/stromgald_cabal.
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/57.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/157.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/54.jpg
+Oracle:{T}, Pay 1 life: Counter target white spell.
 End

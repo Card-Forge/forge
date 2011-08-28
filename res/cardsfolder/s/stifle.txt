@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ U | TgtPrompt$ Select target Activated or Triggered Abilit
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stifle.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/52.jpg
+Oracle:Counter target activated or triggered ability. (Mana abilities can't be targeted.)
 End

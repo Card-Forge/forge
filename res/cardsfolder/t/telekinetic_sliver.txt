@@ -8,4 +8,5 @@ SVar:Tap:AB$Tap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target perm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telekinetic_sliver.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/84.jpg
+Oracle:All Slivers have "{T}: Tap target permanent."
 End

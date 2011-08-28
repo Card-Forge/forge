@@ -7,4 +7,5 @@ K:Protection from artifacts
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_chosen.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/132.jpg
+Oracle:Protection from artifacts
 End

@@ -7,4 +7,5 @@ SVar:X:Count$Threshold.5.3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermal_blast.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/224.jpg
+Oracle:Thermal Blast deals 3 damage to target creature.\nThreshold - Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
 End

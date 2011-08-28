@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ 1 B | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +2 | SpellDes
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_lance.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/14.jpg
+Oracle:Enchant creature\nEnchanted creature has first strike.\n{1}{B}: Enchanted creature gets +2/+2 until end of turn.
 End

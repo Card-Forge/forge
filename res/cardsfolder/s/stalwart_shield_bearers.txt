@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.withDefender+Other+YouCtrl | AddToughnes
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalwart_shield_bearers.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/46.jpg
+Oracle:Defender\nOther creatures you control with defender get +0/+2.
 End

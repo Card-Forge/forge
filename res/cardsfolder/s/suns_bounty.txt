@@ -7,4 +7,5 @@ K:Recover:1 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suns_bounty.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/18.jpg
+Oracle:You gain 4 life.\nRecover {1}{W} (When a creature is put into your graveyard from the battlefield, you may pay {1}{W}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)
 End

@@ -13,4 +13,5 @@ SetInfo:POR|Common|http://magiccards.info/scans/en/po/32.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/19.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/162.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/88.jpg
+Oracle:When Serpent Warrior enters the battlefield, you lose 3 life.
 End

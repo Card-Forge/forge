@@ -9,4 +9,5 @@ K:Madness:W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_isolation.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/17.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+2 and has protection from black.\nMadness {W} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
 End

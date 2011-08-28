@@ -12,4 +12,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/timetwister.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/85.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/85.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/85.jpg
+Oracle:Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. (Then put Timetwister into its owner's graveyard.)
 End

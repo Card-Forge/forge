@@ -11,4 +11,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soaring_hope.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/40.jpg
+Oracle:Enchant creature\nWhen Soaring Hope enters the battlefield, you gain 3 life.\nEnchanted creature has flying.\n{W}: Put Soaring Hope on top of its owner's library.
 End

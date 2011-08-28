@@ -11,4 +11,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triclopean_sight.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/45.jpg
+Oracle:Flash\nEnchant creature\nWhen Triclopean Sight enters the battlefield, untap enchanted creature.\nEnchanted creature gets +1/+1 and has vigilance.
 End

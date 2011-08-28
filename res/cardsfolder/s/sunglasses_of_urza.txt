@@ -12,4 +12,5 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/273.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/276.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/365.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/272.jpg
+Oracle:You may spend white mana as though it were red mana.
 End

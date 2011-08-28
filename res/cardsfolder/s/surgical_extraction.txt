@@ -8,4 +8,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surgical_extraction.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/74.jpg
+Oracle:({B/P} can be paid with either {B} or 2 life.)\nChoose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
 End

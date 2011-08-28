@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | Description
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torpor_dust.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/177.jpg
+Oracle:Flash\nEnchant creature\nEnchanted creature gets -3/-0.
 End

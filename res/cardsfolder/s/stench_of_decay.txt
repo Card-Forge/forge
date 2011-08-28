@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stench_of_decay.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/27.jpg|2
+Oracle:Nonartifact creatures get -1/-1 until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strongarm_thug.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/165.jpg
+Oracle:When Strongarm Thug enters the battlefield, you may return target Mercenary card from your graveyard to your hand.
 End

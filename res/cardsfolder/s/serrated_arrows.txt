@@ -9,4 +9,5 @@ A:AB$ PutCounter | Cost$ T SubCounter<1/ARROWHEAD> | IsCurse$ True | ValidTgts$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serrated_arrows.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/135.jpg
+Oracle:Serrated Arrows enters the battlefield with three arrowhead counters on it.\nAt the beginning of your upkeep, if there are no arrowhead counters on Serrated Arrows, sacrifice it.\n{T}, Remove an arrowhead counter from Serrated Arrows: Put a -1/-1 counter on target creature.
 End

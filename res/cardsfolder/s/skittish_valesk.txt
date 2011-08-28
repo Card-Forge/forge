@@ -10,4 +10,5 @@ K:Morph:5 R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittish_valesk.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/231.jpg
+Oracle:At the beginning of your upkeep, flip a coin. If you lose the flip, turn Skittish Valesk face down.\nMorph {5}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

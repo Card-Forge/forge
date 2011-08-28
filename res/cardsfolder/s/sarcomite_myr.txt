@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136212.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/56.jpg
+Oracle:{2}: Sarcomite Myr gains flying until end of turn.\n{2}, Sacrifice Sarcomite Myr: Draw a card.
 End

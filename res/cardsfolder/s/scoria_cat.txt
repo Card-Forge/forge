@@ -9,4 +9,5 @@ SVar:BuffedBy:Card.nonLand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scoria_cat.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/101.jpg
+Oracle:Scoria Cat gets +3/+3 as long as you control no untapped lands.
 End

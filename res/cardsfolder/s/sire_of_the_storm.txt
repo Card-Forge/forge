@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/85.jpg
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may draw a card.
 End

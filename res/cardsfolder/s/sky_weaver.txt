@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_weaver.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/74.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/109.jpg
+Oracle:{2}: Target white or black creature gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)
 End

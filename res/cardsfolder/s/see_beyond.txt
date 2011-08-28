@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/see_beyond.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/86.jpg
+Oracle:Draw two cards, then shuffle a card from your hand into your library.
 End

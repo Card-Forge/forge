@@ -8,4 +8,5 @@ K:Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinblade_slasher.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/79.jpg
+Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\n{1}{G}: Twinblade Slasher gets +2/+2 until end of turn. Activate this ability only once each turn.
 End

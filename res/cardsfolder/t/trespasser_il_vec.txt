@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ Discard<1/Card> | KW$ Shadow | SpellDescription$ CARDNAME gai
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trespasser_il_vec.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/138.jpg
+Oracle:Discard a card: Trespasser il-Vec gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)
 End

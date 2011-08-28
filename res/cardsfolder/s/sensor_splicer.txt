@@ -9,4 +9,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTyp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sensor_splicer.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/22.jpg
+Oracle:When Sensor Splicer enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.\nGolem creatures you control have vigilance.
 End

@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AffectedZone$ Hand,Graveyard,E
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmer_myr.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/129.jpg
+Oracle:Flash\nYou may cast artifact cards as though they had flash.
 End

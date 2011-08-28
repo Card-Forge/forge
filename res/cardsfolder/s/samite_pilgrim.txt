@@ -8,4 +8,5 @@ SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_pilgrim.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/15.jpg
+Oracle:Domain - {T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.
 End

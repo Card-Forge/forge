@@ -7,4 +7,5 @@ SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosi
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_crumple.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/63.jpg
+Oracle:Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put Spell Crumple on the bottom of its owner's library.
 End

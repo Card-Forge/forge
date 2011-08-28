@@ -9,4 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ M0M1 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_sphere.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/172.jpg
+Oracle:Defender\nWhenever Shield Sphere blocks, put a -0/-1 counter on it.
 End

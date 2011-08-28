@@ -13,4 +13,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokestack.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/309.jpg
+Oracle:At the beginning of your upkeep, you may put a soot counter on Smokestack.\nAt the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.
 End

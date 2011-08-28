@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taunting_challenge.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/152.jpg
+Oracle:All creatures able to block target creature this turn do so.
 End

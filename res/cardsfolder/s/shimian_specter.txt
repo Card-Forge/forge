@@ -11,4 +11,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimian_specter.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/76.jpg
+Oracle:Flying\nWhenever Shimian Specter deals combat damage to a player, that player reveals his or her hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
 End

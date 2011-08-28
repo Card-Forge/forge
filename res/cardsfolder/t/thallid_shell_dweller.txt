@@ -10,4 +10,5 @@ K:Defender
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_shell_dweller.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/226.jpg
+Oracle:Defender\nAt the beginning of your upkeep, put a spore counter on Thallid Shell-Dweller.\nRemove three spore counters from Thallid Shell-Dweller: Put a 1/1 green Saproling creature token onto the battlefield.
 End

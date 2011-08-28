@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | NoRegen$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinthinner.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/80.jpg
+Oracle:Morph {3}{B}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Skinthinner is turned face up, destroy target nonblack creature. It can't be regenerated.
 End

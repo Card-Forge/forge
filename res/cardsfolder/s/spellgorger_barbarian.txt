@@ -10,4 +10,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellgorger_barbarian.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/100.jpg
+Oracle:When Spellgorger Barbarian enters the battlefield, discard a card at random.\nWhen Spellgorger Barbarian leaves the battlefield, draw a card.
 End

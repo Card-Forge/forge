@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ U T Discard<1/Card> | ValidTgts$ Permanent.YouCtrl | Tg
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_sentinel.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/87.jpg
+Oracle:Flying\n{U}, {T}, Discard a card: Return target permanent you control to its owner's hand.
 End

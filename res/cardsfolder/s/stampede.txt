@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stampede.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/189.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/153.jpg
+Oracle:Attacking creatures get +1/+0 and gain trample until end of turn.
 End

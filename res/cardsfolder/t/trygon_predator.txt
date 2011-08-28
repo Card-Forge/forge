@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.YouDontCtrl,Enchantm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trygon_predator.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/133.jpg
+Oracle:Flying\nWhenever Trygon Predator deals combat damage to a player, you may destroy target artifact or enchantment that player controls.
 End

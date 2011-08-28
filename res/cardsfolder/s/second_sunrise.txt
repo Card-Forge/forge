@@ -4,4 +4,5 @@ Types:Instant
 Text:no text
 A:SP$ChangeZone | Cost$ 1 W W | Origin$ Graveyard | Destination$ Battlefield | Defined$ ThisTurnEntered Graveyard from Battlefield Card.Artifact,Card.Creature,Card.Enchantment,Card.Land | SpellDescription$ Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/20.jpg
+Oracle:Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.
 End

@@ -8,4 +8,5 @@ K:Vigilance
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_angel.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/199.jpg
+Oracle:Flying, vigilance\nPlayers can't untap more than one creature during their untap steps.
 End

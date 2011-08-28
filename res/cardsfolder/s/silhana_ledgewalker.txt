@@ -8,4 +8,5 @@ K:Hexproof
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silhana_ledgewalker.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/94.jpg
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nSilhana Ledgewalker can't be blocked except by creatures with flying.
 End

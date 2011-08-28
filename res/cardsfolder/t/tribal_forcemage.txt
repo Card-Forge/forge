@@ -10,4 +10,5 @@ SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.ChosenType | NumAtt$ +2 | NumDe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tribal_forcemage.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/142.jpg
+Oracle:Morph {1}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Tribal Forcemage is turned face up, creatures of the creature type of your choice get +2/+2 and gain trample until end of turn.
 End

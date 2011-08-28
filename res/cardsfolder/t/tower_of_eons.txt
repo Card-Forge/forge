@@ -6,4 +6,5 @@ A:AB$ GainLife | Cost$ 8 T | LifeAmount$ 10 | SpellDescription$ You gain 10 life
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_eons.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/266.jpg
+Oracle:{8}, {T}: You gain 10 life.
 End

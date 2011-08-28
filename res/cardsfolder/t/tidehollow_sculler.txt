@@ -11,4 +11,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidehollow_sculler.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/202.jpg
+Oracle:When Tidehollow Sculler enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card.\nWhen Tidehollow Sculler leaves the battlefield, return the exiled card to its owner's hand.
 End

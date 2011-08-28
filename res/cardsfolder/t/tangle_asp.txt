@@ -12,4 +12,5 @@ SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_asp.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/94.jpg
+Oracle:Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
 End

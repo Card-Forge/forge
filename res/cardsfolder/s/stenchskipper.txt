@@ -10,4 +10,5 @@ SVar:NeedsToPlay:Goblin.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stenchskipper.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/79.jpg
+Oracle:Flying\nAt the beginning of the end step, if you control no Goblins, sacrifice Stenchskipper.
 End

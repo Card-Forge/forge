@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_visions.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/198.jpg
+Oracle:At the beginning of each player's draw step, that player draws an additional card.\nWhenever a player draws a card, Spiteful Visions deals 1 damage to that player.
 End

@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shadow & HIDDE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_isolation.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/43.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature has shadow. (It can block or be blocked by only creatures with shadow.)\nPrevent all damage that would be dealt by enchanted creature.
 End

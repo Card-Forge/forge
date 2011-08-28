@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstorm.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/137.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/153.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/38.jpg
+Oracle:Sandstorm deals 1 damage to each attacking creature.
 End

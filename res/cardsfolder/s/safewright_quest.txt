@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ GW | Origin$ Library | Destination$ Hand | ChangeType$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safewright_quest.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/240.jpg
+Oracle:Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
 End

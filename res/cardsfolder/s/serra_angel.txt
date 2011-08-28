@@ -20,4 +20,5 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/29.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/33.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/30.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/224.jpg
+Oracle:Flying\nVigilance (Attacking doesn't cause this creature to tap.)
 End

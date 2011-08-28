@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sustainer_of_the_realm.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/23.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/52.jpg
+Oracle:Flying\nWhenever Sustainer of the Realm blocks, it gets +0/+2 until end of turn.
 End

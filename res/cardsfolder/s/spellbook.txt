@@ -12,4 +12,5 @@ SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/138.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/309.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/343.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/220.jpg
+Oracle:You have no maximum hand size.
 End

@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprite_noble.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/81.jpg
+Oracle:Flying\nOther creatures you control with flying get +0/+1.\n{T}: Other creatures you control with flying get +1/+0 until end of turn.
 End

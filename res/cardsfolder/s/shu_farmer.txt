@@ -7,4 +7,5 @@ A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivationPhases$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_farmer.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/23.jpg
+Oracle:{T}: You gain 1 life. Activate this ability only during your turn, before attackers are declared.
 End

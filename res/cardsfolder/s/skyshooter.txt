@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshooter.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/270.jpg
+Oracle:Reach (This creature can block creatures with flying.)\n{T}, Sacrifice Skyshooter: Destroy target attacking or blocking creature with flying.
 End

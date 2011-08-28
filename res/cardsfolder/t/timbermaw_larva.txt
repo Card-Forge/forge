@@ -9,4 +9,5 @@ SVar:X:Count$Valid Forest.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timbermaw_larva.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/189.jpg
+Oracle:Whenever Timbermaw Larva attacks, it gets +1/+1 until end of turn for each Forest you control.
 End

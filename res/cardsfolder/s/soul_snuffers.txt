@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_snuffers.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/45.jpg
+Oracle:When Soul Snuffers enters the battlefield, put a -1/-1 counter on each creature.
 End

@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivs_embrace.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/156.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/216.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying.\n{R}: Enchanted creature gets +1/+0 until end of turn.
 End

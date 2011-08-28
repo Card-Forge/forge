@@ -6,4 +6,5 @@ PT:1/5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_arbiter.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/150.jpg
+Oracle:No more than one creature can attack each combat.\nNo more than one creature can block each combat.
 End

@@ -9,4 +9,5 @@ K:TypeCycling:Plains:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_plowbeast.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/10.jpg
+Oracle:Defender\nPlainscycling {2}, islandcycling {2} ({2}, Discard this card: Search your library for a Plains or Island card, reveal it, and put it into your hand. Then shuffle your library.)
 End

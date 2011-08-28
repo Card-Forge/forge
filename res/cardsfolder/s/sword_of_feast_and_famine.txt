@@ -9,4 +9,5 @@ SVar:DBUntapAll:DB$UntapAll | ValidCards$ Land.YouCtrl
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_feast_and_famine.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/138.jpg
+Oracle:Equipped creature gets +2/+2 and has protection from black and from green.\nWhenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.\nEquip {2}
 End

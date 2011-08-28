@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spincrusher.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/144.jpg
+Oracle:Whenever Spincrusher blocks, put a +1/+1 counter on it.\nRemove a +1/+1 counter from Spincrusher: Spincrusher is unblockable this turn.
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_leaf_paladin.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/127.jpg
+Oracle:First strike\nWhen Steel Leaf Paladin enters the battlefield, return a green or white creature you control to its owner's hand.
 End

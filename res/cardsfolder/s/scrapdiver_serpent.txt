@@ -8,4 +8,5 @@ SVar:X:Count$Valid Artifact.YouDontCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapdiver_serpent.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/41.jpg
+Oracle:Scrapdiver Serpent is unblockable as long as defending player controls an artifact.
 End

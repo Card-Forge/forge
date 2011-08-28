@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scour.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/18.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/20.jpg
+Oracle:Exile target enchantment. Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles his or her library.
 End

@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ PU | Defined$ Self | KW$ Unblockable | SpellDescription$ CARD
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trespassing_souleater.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/163.jpg
+Oracle:{U/P}: Trespassing Souleater is unblockable this turn. ({U/P} can be paid with either {U} or 2 life.)
 End

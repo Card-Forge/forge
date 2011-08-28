@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt
 SVar:Rarity:Rare
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/serpent_assassin.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/31.jpg
+Oracle:When Serpent Assassin enters the battlefield, you may destroy target nonblack creature.
 End

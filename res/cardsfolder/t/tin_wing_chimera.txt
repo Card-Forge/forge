@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tin_wing_chimera.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/157.jpg
+Oracle:Flying\nSacrifice Tin-Wing Chimera: Put a +2/+2 counter on target Chimera creature. It gains flying. (This effect lasts indefinitely.)
 End

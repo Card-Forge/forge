@@ -10,4 +10,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sosuke_son_of_seshiro.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/244.jpg
+Oracle:Other Snake creatures you control get +1/+0.\nWhenever a Warrior you control deals combat damage to a creature, destroy that creature at end of combat.
 End

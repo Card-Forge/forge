@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewerdreg.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/104.jpg
+Oracle:Swampwalk\nSacrifice Sewerdreg: Exile target card from a graveyard.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_attendant.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/315.jpg
+Oracle:{1}, Sacrifice Treva's Attendant: Add {G}{W}{U} to your mana pool.
 End
