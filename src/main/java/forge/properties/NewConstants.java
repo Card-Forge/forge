@@ -101,6 +101,8 @@ public interface NewConstants {
     /** Constant <code>BOOSTERDATA="boosterdata"</code>. */
     String BOOSTERDATA = "boosterdata";
 
+    String MTG_DATA = "mtg-data";
+
     /** Constant <code>IMAGE_BASE="image/base"</code>. */
     String IMAGE_BASE = "image/base";
     /** Constant <code>IMAGE_TOKEN="image/token"</code>. */
