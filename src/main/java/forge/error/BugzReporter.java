@@ -468,9 +468,10 @@ public class BugzReporter extends JDialog {
                 iBug.setSeverity(Severities[i]);
         }
         
+        iBug.setStepsToReproduce(txtSteps.getText());
+        
         ICustomFieldValue icfv[] = {
-                new CustomFieldValue(new MCAttribute(1, "Detected at SVN Rev"), txtSVN.getText()),
-                new CustomFieldValue(new MCAttribute(1, "Steps to Reproduce"), txtSteps.getText())
+                new CustomFieldValue(new MCAttribute(1, "Detected at SVN Rev"), txtSVN.getText())
                 };
         iBug.setCustomFields(icfv);
         
