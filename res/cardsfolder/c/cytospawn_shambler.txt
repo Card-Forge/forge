@@ -1,0 +1,11 @@
+Name:Cytospawn Shambler
+ManaCost:6 G
+Types:Creature Elemental Mutant
+Text:no text
+PT:0/0
+K:Graft 6
+A:AB$ Pump | Cost$ G | ValidTgts$ Creature.countersGE1P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | KW$ Trample | SpellDescription$ Target creature with a +1/+1 counter on it gains trample until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cytospawn_shambler.jpg
+End
