@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balthor_the_defiled.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/61.jpg
+Oracle:Minion creatures get +1/+1.\n{B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from his or her graveyard to the battlefield.
 End

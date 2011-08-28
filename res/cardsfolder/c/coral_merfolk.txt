@@ -9,4 +9,5 @@ SetInfo:USG|Common|http://magiccards.info/scans/en/us/67.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/47.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/49.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/66.jpg
+Oracle:
 End

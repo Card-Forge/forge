@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_necromancer.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/51.jpg
+Oracle:{B}, {T}, Sacrifice Apprentice Necromancer: Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it.
 End

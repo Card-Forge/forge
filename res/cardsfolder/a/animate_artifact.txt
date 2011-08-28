@@ -13,4 +13,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/49.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/48.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/60.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/49.jpg
+Oracle:Enchant artifact\nAs long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
 End

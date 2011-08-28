@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bola_warrior.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/78.jpg
+Oracle:{R}, {T}, Discard a card: Target creature can't block this turn.
 End

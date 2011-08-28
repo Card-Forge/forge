@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coma_veil.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/36.jpg
+Oracle:Enchant artifact or creature\nEnchanted permanent doesn't untap during its controller's untap step.
 End

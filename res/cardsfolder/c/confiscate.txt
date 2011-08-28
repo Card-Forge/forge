@@ -11,4 +11,5 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/69.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/66.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/68.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/65.jpg
+Oracle:Enchant permanent (Target a permanent as you cast this. This card enters the battlefield attached to that permanent.)\nYou control enchanted permanent.
 End

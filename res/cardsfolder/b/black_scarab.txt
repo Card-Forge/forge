@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_scarab.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/230.jpg
+Oracle:Enchant creature\nEnchanted creature can't be blocked by black creatures.\nEnchanted creature gets +2/+2 as long as an opponent controls a black permanent.
 End

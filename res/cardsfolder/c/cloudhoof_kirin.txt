@@ -10,4 +10,5 @@ SVar:X:TriggeredCard$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudhoof_kirin.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/31.jpg
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may put the top X cards of target player's library into his or her graveyard, where X is that spell's converted mana cost.
 End

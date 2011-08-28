@@ -7,4 +7,5 @@ SVar:DBDealDamage:DB$DealDamage | Defined$ Targeted | NumDmg$ 2
 SVar:Rarity:Common
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/burning_cloak.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/125.jpg
+Oracle:Target creature gets +2/+0 until end of turn. Burning Cloak deals 2 damage to that creature.
 End

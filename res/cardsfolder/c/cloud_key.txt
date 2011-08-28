@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_key.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/160.jpg
+Oracle:As Cloud Key enters the battlefield, choose artifact, creature, enchantment, instant, or sorcery.\nSpells you cast of the chosen type cost {1} less to cast.
 End

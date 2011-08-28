@@ -8,4 +8,5 @@ SVar:StayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next un
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apes_of_rath.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/108.jpg
+Oracle:Whenever Apes of Rath attacks, it doesn't untap during its controller's next untap step.
 End

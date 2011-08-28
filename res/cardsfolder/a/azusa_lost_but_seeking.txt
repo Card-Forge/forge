@@ -6,4 +6,5 @@ PT:1/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/201.jpg
+Oracle:You may play two additional lands on each of your turns.
 End

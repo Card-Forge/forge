@@ -9,4 +9,5 @@ SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Creature.YouCtrl | Origin$ Graveya
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barishi.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/61.jpg
+Oracle:When Barishi dies, exile Barishi, then shuffle all creature cards from your graveyard into your library.
 End

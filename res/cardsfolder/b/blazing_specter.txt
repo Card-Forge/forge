@@ -10,4 +10,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_specter.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/236.jpg
+Oracle:Flying, haste\nWhenever Blazing Specter deals combat damage to a player, that player discards a card.
 End

@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select ta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_riftcutter.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/114.jpg
+Oracle:{R}, Sacrifice Barbarian Riftcutter: Destroy target land.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_within.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/103.jpg
+Oracle:Destroy target permanent. Its controller puts a 3/3 green Beast creature token onto the battlefield.
 End

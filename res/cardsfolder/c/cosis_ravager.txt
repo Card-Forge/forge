@@ -8,4 +8,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cosis_ravager.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/77.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player.
 End

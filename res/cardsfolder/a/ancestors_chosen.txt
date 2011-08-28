@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestors_chosen.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/1.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/1.jpg
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhen Ancestor's Chosen enters the battlefield, you gain 1 life for each card in your graveyard.
 End

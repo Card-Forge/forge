@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrenton_medic.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/4.jpg
+Oracle:{T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.\nPut a -1/-1 counter on Barrenton Medic: Untap Barrenton Medic.
 End

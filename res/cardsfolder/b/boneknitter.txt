@@ -8,4 +8,5 @@ K:Morph:2 B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boneknitter.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/128.jpg
+Oracle:{1}{B}: Regenerate target Zombie.\nMorph {2}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

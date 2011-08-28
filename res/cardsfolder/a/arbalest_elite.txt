@@ -8,4 +8,5 @@ SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbalest_elite.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/5.jpg
+Oracle:{2}{W}, {T}: Arbalest Elite deals 3 damage to target attacking or blocking creature. Arbalest Elite doesn't untap during your next untap step.
 End

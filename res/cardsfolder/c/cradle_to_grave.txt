@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonBlack+enteredBattlefieldThisT
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_to_grave.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/67.jpg
+Oracle:Destroy target nonblack creature that entered the battlefield this turn.
 End

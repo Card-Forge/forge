@@ -7,4 +7,5 @@ K:Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_extraction.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/5.jpg
+Oracle:Put target enchantment on top of its owner's library.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

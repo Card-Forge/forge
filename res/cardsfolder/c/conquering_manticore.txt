@@ -9,4 +9,5 @@ SVar:TrigChange:AB$GainControl | Cost$ 0 | TgtPrompt$ Choose target creature you
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquering_manticore.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/139.jpg
+Oracle:Flying\nWhen Conquering Manticore enters the battlefield, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
 End

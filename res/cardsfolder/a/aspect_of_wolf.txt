@@ -15,4 +15,5 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/93.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/93.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/117.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/93.jpg
+Oracle:Enchant creature\nEnchanted creature gets +X/+Y, where X is half the number of Forests you control, rounded down, and Y is half the number of Forests you control, rounded up.
 End

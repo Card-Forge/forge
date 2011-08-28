@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armillary_sphere.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/242.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/134.jpg
+Oracle:{2}, {T}, Sacrifice Armillary Sphere: Search your library for up to two basic land cards, reveal them, and put them into your hand. Then shuffle your library.
 End

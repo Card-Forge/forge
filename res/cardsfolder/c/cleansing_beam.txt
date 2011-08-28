@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleansing_beam.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/118.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/116.jpg
+Oracle:Radiance - Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.
 End

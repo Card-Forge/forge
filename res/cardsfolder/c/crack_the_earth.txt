@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crack_the_earth.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/98.jpg
+Oracle:Each player sacrifices a permanent.
 End

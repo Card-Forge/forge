@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtP
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crushing_pain.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/162.jpg
+Oracle:Crushing Pain deals 6 damage to target creature that was dealt damage this turn.
 End

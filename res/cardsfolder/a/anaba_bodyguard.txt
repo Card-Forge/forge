@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_bodyguard.
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/82.jpg|2
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/164.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/187.jpg
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)
 End

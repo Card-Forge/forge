@@ -6,4 +6,5 @@ A:SP$ Dig | Cost$ 3 G | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_hunt.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/158.jpg
+Oracle:Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.
 End

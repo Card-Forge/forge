@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_trapper.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/2.jpg
+Oracle:{T}: Tap target creature.\nWhenever you cast a white spell, you may untap Ballynock Trapper.
 End

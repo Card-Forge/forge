@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ +0 | TgtPrompt$ Choose another targe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balthor_the_stout.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/91.jpg
+Oracle:Other Barbarian creatures get +1/+1.\n{R}: Another target Barbarian creature gets +1/+0 until end of turn.
 End

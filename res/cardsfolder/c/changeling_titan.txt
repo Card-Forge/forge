@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_titan.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/200.jpg
+Oracle:Changeling (This card is every creature type at all times.)\nChampion a creature (When this enters the battlefield, sacrifice it unless you exile another creature you control. When this leaves the battlefield, that card returns to the battlefield.)
 End

@@ -7,4 +7,5 @@ SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.nonGreen+YouCtrl | NumAtt$ +1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_frenzy.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/175.jpg
+Oracle:Green creatures you control get +1/+1 until end of turn.\nNongreen creatures you control get +1/+0 until end of turn.
 End

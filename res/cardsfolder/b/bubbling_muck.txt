@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_muck.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/54.jpg
+Oracle:Until end of turn, whenever a player taps a Swamp for mana, that player adds {B} to his or her mana pool (in addition to the mana the land produces).
 End

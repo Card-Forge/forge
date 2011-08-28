@@ -7,4 +7,5 @@ A:AB$ Discard | Cost$ T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_advisor.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/72.jpg
+Oracle:{T}: Target opponent discards a card. Activate this ability only during your turn, before attackers are declared.
 End

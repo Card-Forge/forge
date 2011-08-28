@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_charm.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/155.jpg
+Oracle:Choose one - Destroy target artifact; or put target creature on the bottom of its owner's library; or counter target instant spell.
 End

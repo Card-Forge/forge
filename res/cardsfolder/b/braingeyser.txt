@@ -11,4 +11,5 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/51.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/51.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/50.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/51.jpg
+Oracle:Target player draws X cards.
 End

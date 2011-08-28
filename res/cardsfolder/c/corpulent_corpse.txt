@@ -8,4 +8,5 @@ K:Suspend:5:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpulent_corpse.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/98.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nSuspend 5-{B} (Rather than cast this card from your hand, you may pay {B} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
 End

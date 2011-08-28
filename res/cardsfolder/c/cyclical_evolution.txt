@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclical_evolution.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/125.jpg
+Oracle:Target creature gets +3/+3 until end of turn. Exile Cyclical Evolution with three time counters on it.\nSuspend 3-{2}{G} (Rather than cast this card from your hand, you may pay {2}{G} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
 End

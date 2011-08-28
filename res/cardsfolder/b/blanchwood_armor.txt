@@ -14,4 +14,5 @@ SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/237.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/253.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/232.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/232.jpg
+Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +1/+1 for each Forest you control.
 End

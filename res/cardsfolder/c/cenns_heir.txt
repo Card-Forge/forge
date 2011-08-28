@@ -9,4 +9,5 @@ SVar:X:Count$Valid Kithkin.attacking+Other
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_heir.jpg
 SetInfo:LRW|Common|http://magiccards.info/lw/en/8.html
+Oracle:Whenever Cenn's Heir attacks, it gets +1/+1 until end of turn for each other attacking Kithkin.
 End

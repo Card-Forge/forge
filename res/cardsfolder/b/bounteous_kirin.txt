@@ -10,4 +10,5 @@ SVar:X:TriggeredCard$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bounteous_kirin.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/123.jpg
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
 End

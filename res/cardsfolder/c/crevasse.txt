@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crevasse.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/138.jpg
+Oracle:Creatures with mountainwalk can be blocked as though they didn't have mountainwalk.
 End

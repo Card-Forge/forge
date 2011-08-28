@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/affa_guard_hound.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/14.jpg
+Oracle:Flash\nWhen Affa Guard Hound enters the battlefield, target creature gets +0/+3 until end of turn.
 End

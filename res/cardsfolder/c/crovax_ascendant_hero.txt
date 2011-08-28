@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crovax_ascendant_hero.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/3.jpg
+Oracle:Other white creatures get +1/+1.\nNonwhite creatures get -1/-1.\nPay 2 life: Return Crovax, Ascendant Hero to its owner's hand.
 End

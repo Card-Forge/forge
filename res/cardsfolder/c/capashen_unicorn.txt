@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ 1 W T Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_unicorn.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/10.jpg
+Oracle:{1}{W}, {T}, Sacrifice Capashen Unicorn: Destroy target artifact or enchantment.
 End

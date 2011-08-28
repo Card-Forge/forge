@@ -13,4 +13,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_sphere.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/151.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/299.jpg
+Oracle:{1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
 End

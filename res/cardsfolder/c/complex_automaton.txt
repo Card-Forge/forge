@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/complex_automaton.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/128.jpg
+Oracle:At the beginning of your upkeep, if you control seven or more permanents, return Complex Automaton to its owner's hand.
 End

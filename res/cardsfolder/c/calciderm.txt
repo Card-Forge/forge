@@ -8,4 +8,5 @@ K:Shroud
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/calciderm.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/23.jpg
+Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nVanishing 4 (This permanent enters the battlefield with four time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
 End

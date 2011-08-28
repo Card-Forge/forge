@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/buried_alive.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/5.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/118.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/74.jpg
+Oracle:Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library.
 End

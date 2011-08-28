@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_myr.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/158.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/146.jpg
+Oracle:{T}: Add {G} to your mana pool.
 End

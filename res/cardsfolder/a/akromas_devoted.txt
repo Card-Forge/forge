@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Cleric | AddKeyword$ Vigilance | Descrip
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_devoted.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/2.jpg
+Oracle:Cleric creatures have vigilance.
 End

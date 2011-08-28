@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladed_sentinel.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/98.jpg
+Oracle:{W}: Bladed Sentinel gains vigilance until end of turn.
 End

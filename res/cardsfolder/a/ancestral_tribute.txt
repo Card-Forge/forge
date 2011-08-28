@@ -8,4 +8,5 @@ SVar:X:Count$InYourYard/Times.2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_tribute.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/2.jpg
+Oracle:You gain 2 life for each card in your graveyard.\nFlashback {9}{W}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

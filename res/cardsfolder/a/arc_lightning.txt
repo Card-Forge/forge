@@ -8,4 +8,5 @@ SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_lightning.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/174.jpg
+Oracle:Arc Lightning deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
 End

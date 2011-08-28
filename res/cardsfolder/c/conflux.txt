@@ -10,4 +10,5 @@ SVar:DBGreen:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ C
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conflux.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/102.jpg
+Oracle:Search your library for a white card, a blue card, a black card, a red card, and a green card. Reveal those cards and put them into your hand. Then shuffle your library.
 End

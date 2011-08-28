@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | TgtPrompt$ Select target artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/buried_ruin.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/224.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{2}, {T}, Sacrifice Buried Ruin: Return target artifact card from your graveyard to your hand.
 End

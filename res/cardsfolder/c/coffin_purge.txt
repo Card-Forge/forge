@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_purge.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/124.jpg
+Oracle:Exile target card from a graveyard.\nFlashback {B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

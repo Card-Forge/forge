@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anthroplasm.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/25.jpg
+Oracle:Anthroplasm enters the battlefield with two +1/+1 counters on it.\n{X}, {T}: Remove all +1/+1 counters from Anthroplasm and put X +1/+1 counters on it.
 End

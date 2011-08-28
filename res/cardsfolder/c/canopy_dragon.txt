@@ -9,4 +9,5 @@ SVar:DBDebuff:DB$Debuff | Defined$ Self | Keywords$ Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_dragon.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/107.jpg
+Oracle:Trample\n{1}{G}: Canopy Dragon gains flying and loses trample until end of turn.
 End

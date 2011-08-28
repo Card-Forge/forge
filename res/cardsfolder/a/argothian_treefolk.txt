@@ -7,4 +7,5 @@ K:PreventAllDamageBy Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_treefolk.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/60.jpg
+Oracle:Prevent all damage that would be dealt to Argothian Treefolk by artifacts.
 End

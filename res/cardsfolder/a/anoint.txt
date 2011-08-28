@@ -7,4 +7,5 @@ SVar:Buyback:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anoint.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/215.jpg
+Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nPrevent the next 3 damage that would be dealt to target creature this turn.
 End

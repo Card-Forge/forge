@@ -13,4 +13,5 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/66.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/70.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/58.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/56.jpg
+Oracle:Return target permanent to its owner's hand.
 End

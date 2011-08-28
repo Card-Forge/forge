@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.White | TgtPrompt$ Select target whit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/antler_skulkin.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/167.jpg
+Oracle:{2}: Target white creature gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
 End

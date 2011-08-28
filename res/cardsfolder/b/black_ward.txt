@@ -13,4 +13,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/190.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/189.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/258.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/189.jpg
+Oracle:Enchant creature\nEnchanted creature has protection from black. This effect doesn't remove Black Ward.
 End

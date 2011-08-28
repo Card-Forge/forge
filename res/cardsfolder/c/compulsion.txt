@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsion.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/34.jpg
+Oracle:{1}{U}, Discard a card: Draw a card.\n{1}{U}, Sacrifice Compulsion: Draw a card.
 End

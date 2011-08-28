@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consecrated_sphinx.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/21.jpg
+Oracle:Flying\nWhenever an opponent draws a card, you may draw two cards.
 End

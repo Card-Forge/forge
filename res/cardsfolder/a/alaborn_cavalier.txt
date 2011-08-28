@@ -8,4 +8,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_cavalier.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/121.jpg
+Oracle:Whenever Alaborn Cavalier attacks, you may tap target creature.
 End

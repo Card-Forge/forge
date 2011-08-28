@@ -5,4 +5,5 @@ Text:As Curse of Wizardry enters the battlefield, choose a color.\r\nWhenever a 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_wizardry.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/104.jpg
+Oracle:As Curse of Wizardry enters the battlefield, choose a color.\nWhenever a player casts a spell of the chosen color, that player loses 1 life.
 End

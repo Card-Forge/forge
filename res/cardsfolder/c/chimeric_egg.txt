@@ -8,4 +8,5 @@ A:AB$ Animate | Cost$ SubCounter<3/CHARGE> | Defined$ Self | Power$ 6 | Toughnes
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_egg.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/106.jpg
+Oracle:Whenever an opponent casts a nonartifact spell, put a charge counter on Chimeric Egg.\nRemove three charge counters from Chimeric Egg: Chimeric Egg becomes a 6/6 Construct artifact creature with trample until end of turn.
 End

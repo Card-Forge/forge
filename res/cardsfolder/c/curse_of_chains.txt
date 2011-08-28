@@ -9,4 +9,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/139.jpg
+Oracle:Enchant creature\nAt the beginning of each upkeep, tap enchanted creature.
 End

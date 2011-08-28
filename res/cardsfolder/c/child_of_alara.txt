@@ -9,4 +9,5 @@ SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Permanent.nonLand | No
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/101.jpg
+Oracle:Trample\nWhen Child of Alara dies, destroy all nonland permanents. They can't be regenerated.
 End

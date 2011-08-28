@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_page.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/2.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/4.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/1.jpg
+Oracle:Flying\n{T}: Target attacking or blocking creature gets +1/+1 until end of turn.
 End

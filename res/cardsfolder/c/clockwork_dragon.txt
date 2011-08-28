@@ -13,4 +13,5 @@ SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_dragon.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/155.jpg
+Oracle:Flying\nClockwork Dragon enters the battlefield with six +1/+1 counters on it.\nWhenever Clockwork Dragon attacks or blocks, remove a +1/+1 counter from it at end of combat.\n{3}: Put a +1/+1 counter on Clockwork Dragon.
 End

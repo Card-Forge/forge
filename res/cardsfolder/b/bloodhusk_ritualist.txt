@@ -10,4 +10,5 @@ SVar:X:Count$TimesKicked
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Bloodhusk_Ritualist.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/50.jpg
+Oracle:Multikicker {B} (You may pay an additional {B} any number of times as you cast this spell.)\nWhen Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_flute.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/94.jpg
+Oracle:{2}, {T}: All creatures get -1/-0 until end of turn.
 End

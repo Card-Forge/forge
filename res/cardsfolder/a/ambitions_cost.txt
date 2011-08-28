@@ -7,4 +7,5 @@ SVar:DB:DB$LoseLife | LifeAmount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambitions_cost.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/67.jpg
+Oracle:You draw three cards and you lose 3 life.
 End

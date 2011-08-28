@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/blinking_spirit.
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/288.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/8.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/232.jpg
+Oracle:{0}: Return Blinking Spirit to its owner's hand.
 End

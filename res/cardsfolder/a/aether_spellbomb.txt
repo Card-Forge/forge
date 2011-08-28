@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ U Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Se
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_spellbomb.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/141.jpg
+Oracle:{U}, Sacrifice AEther Spellbomb: Return target creature to its owner's hand.\n{1}, Sacrifice AEther Spellbomb: Draw a card.
 End

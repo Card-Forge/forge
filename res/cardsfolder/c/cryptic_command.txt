@@ -6,4 +6,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_command.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/56.jpg
+Oracle:Choose two - Counter target spell; or return target permanent to its owner's hand; or tap all creatures your opponents control; or draw a card.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aggressive_urge.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/181.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/250.jpg
+Oracle:Target creature gets +1/+1 until end of turn.\nDraw a card.
 End

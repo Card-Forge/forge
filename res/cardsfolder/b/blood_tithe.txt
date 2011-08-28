@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_tithe.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/84.jpg
+Oracle:Each opponent loses 3 life. You gain life equal to the life lost this way.
 End

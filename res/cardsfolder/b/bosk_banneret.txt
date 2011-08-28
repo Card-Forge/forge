@@ -7,4 +7,5 @@ K:CostChange:Player:Less:1:Spell:All:Treefolk/Shaman:OnlyOneBonus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bosk_banneret.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/114.jpg
+Oracle:Treefolk spells and Shaman spells you cast cost {1} less to cast.
 End

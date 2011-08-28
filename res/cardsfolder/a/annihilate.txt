@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/annihilate.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/94.jpg
+Oracle:Destroy target nonblack creature. It can't be regenerated.\nDraw a card.
 End

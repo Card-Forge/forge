@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beseech_the_queen.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/57.jpg
+Oracle:({2/B} can be paid with any two mana or with {B}. This card's converted mana cost is 6.)\nSearch your library for a card with converted mana cost less than or equal to the number of lands you control, reveal it, and put it into your hand. Then shuffle your library.
 End

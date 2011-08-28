@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_charm.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/99.jpg
+Oracle:Choose one - Return target permanent to its owner's hand; or destroy target nonblack creature, and it can't be regenerated; or destroy target artifact.
 End

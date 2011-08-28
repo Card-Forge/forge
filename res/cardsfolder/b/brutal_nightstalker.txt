@@ -8,4 +8,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select 
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/brutal_nightstalker.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/4.jpg
+Oracle:When Brutal Nightstalker enters the battlefield, you may have target opponent discard a card.
 End

@@ -8,4 +8,5 @@ SVar:X:Count$YourLifeTotal/HalfUp
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4214.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/8.jpg
+Oracle:Draw four cards. You lose half your life, rounded up.
 End

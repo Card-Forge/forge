@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_lunatic.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/175.jpg
+Oracle:{2}{R}, Sacrifice Barbarian Lunatic: Barbarian Lunatic deals 2 damage to target creature.
 End

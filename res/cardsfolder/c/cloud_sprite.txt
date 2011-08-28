@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_sprite.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/67.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/75.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nCloud Sprite can block only creatures with flying.
 End

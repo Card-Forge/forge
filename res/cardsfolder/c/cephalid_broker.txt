@@ -8,4 +8,5 @@ SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_broker.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/71.jpg
+Oracle:{T}: Target player draws two cards, then discards two cards.
 End

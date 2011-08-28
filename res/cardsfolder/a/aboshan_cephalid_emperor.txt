@@ -8,4 +8,5 @@ A:AB$ TapAll | Cost$ U U U | ValidCards$ Creature.withoutFlying | SpellDescripti
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aboshan_cephalid_emperor.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/58.jpg
+Oracle:Tap an untapped Cephalid you control: Tap target permanent.\n{U}{U}{U}: Tap all creatures without flying.
 End

@@ -7,4 +7,5 @@ K:Rampage 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerathi_berserker.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/131.jpg
+Oracle:Rampage 3 (Whenever this creature becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)
 End

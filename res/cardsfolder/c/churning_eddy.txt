@@ -7,4 +7,5 @@ SVar:spBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/churning_eddy.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/32.jpg
+Oracle:Return target creature and target land to their owners' hands.
 End

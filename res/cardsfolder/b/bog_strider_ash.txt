@@ -9,4 +9,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ G | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_strider_ash.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/198.jpg
+Oracle:Swampwalk\nWhenever a player casts a Goblin spell, you may pay {G}. If you do, you gain 2 life.
 End

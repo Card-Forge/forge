@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_snitch.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/30.jpg
+Oracle:Sacrifice Cephalid Snitch: Target creature loses protection from black until end of turn.
 End

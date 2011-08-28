@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 W W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Se
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altars_light.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/1.jpg
+Oracle:Exile target artifact or enchantment.
 End

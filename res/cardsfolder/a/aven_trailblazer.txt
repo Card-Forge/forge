@@ -10,4 +10,5 @@ SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_trailblazer.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/4.jpg
+Oracle:Flying\nDomain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
 End

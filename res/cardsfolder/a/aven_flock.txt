@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_flock.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/6.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/8.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/4.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{W}: Aven Flock gets +0/+1 until end of turn.
 End

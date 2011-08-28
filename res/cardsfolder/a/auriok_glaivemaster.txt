@@ -8,4 +8,5 @@ SVar:EquipMe:Once
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_glaivemaster.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/1.jpg
+Oracle:As long as Auriok Glaivemaster is equipped, it gets +1/+1 and has first strike.
 End

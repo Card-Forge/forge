@@ -7,4 +7,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creatur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beckon_apparition.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/82.jpg
+Oracle:Exile target card from a graveyard. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.
 End

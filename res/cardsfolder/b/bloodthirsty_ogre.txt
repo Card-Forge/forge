@@ -10,4 +10,5 @@ SVar:BuffedBy:Demon
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodthirsty_ogre.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/104.jpg
+Oracle:{T}: Put a devotion counter on Bloodthirsty Ogre.\n{T}: Target creature gets -X/-X until end of turn, where X is the number of devotion counters on Bloodthirsty Ogre. Activate this ability only if you control a Demon.
 End

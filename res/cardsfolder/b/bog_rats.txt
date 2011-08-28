@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_rats.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/8.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/4.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/117.jpg
+Oracle:Bog Rats can't be blocked by Walls.
 End

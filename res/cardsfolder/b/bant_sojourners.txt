@@ -10,4 +10,5 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | Token
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sojourners.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/125.jpg
+Oracle:When you cycle Bant Sojourners or it dies, you may put a 1/1 white Soldier creature token onto the battlefield.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)
 End

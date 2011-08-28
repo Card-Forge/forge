@@ -7,4 +7,5 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstone_cameo.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/298.jpg
+Oracle:{T}: Add {B} or {R} to your mana pool.
 End

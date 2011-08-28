@@ -8,4 +8,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambassador_laquatus.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/23.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/65.jpg
+Oracle:{3}: Target player puts the top three cards of his or her library into his or her graveyard.
 End

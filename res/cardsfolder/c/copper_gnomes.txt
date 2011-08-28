@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 4 Sac<1/CARDNAME> | Origin$ Hand | Destination$ Battlef
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_gnomes.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/291.jpg
+Oracle:{4}, Sacrifice Copper Gnomes: You may put an artifact card from your hand onto the battlefield.
 End

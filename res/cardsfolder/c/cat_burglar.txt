@@ -7,4 +7,5 @@ A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cat_burglar.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/54.jpg
+Oracle:{2}{B}, {T}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
 End

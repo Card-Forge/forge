@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_infusion.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/57.jpg
+Oracle:Enchant creature you control\n{R}, Sacrifice enchanted creature: Bloodfire Infusion deals damage equal to the sacrificed creature's power to each creature.
 End

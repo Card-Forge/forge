@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awakening_zone.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/142.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/176.jpg
+Oracle:At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
 End

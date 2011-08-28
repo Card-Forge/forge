@@ -12,4 +12,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_mana_battery.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/318.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/217.jpg
+Oracle:{2}, {T}: Put a charge counter on Blue Mana Battery.\n{T}, Remove any number of charge counters from Blue Mana Battery: Add {U} to your mana pool, then add an additional {U} to your mana pool for each charge counter removed this way.
 End

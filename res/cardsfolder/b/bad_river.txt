@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Batt
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_river.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/289.jpg
+Oracle:Bad River enters the battlefield tapped.\n{T}, Sacrifice Bad River: Search your library for an Island or Swamp card and put it onto the battlefield. Then shuffle your library.
 End

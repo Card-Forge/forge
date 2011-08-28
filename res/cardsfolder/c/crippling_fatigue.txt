@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ 1 B PayLife<3> | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crippling_fatigue.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/58.jpg
+Oracle:Target creature gets -2/-2 until end of turn.\nFlashback-{1}{B}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

@@ -6,4 +6,5 @@ K:eqPump 2:Flying & First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladed_pinions.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/140.jpg
+Oracle:Equipped creature has flying and first strike.\nEquip {2}
 End

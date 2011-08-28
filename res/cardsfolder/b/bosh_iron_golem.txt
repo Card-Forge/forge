@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bosh_iron_golem.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/147.jpg
+Oracle:Trample\n{3}{R}, Sacrifice an artifact: Bosh, Iron Golem deals damage equal to the sacrificed artifact's converted mana cost to target creature or player.
 End

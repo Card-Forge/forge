@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronatog.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/28.jpg
+Oracle:{0}: Chronatog gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn.
 End

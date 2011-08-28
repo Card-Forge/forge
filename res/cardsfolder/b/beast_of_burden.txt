@@ -12,4 +12,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/292.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/122.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/288.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/287.jpg
+Oracle:Beast of Burden's power and toughness are each equal to the number of creatures on the battlefield.
 End

@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/290.jpg
+Oracle:Defender (This creature can't attack.)\n{T}: Target creature gets +0/+4 until end of turn.
 End

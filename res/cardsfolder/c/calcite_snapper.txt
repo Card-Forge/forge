@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/calcite_snapper.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/25.jpg
+Oracle:Shroud (This creature can't be the target of spells or abilities.)\nLandfall - Whenever a land enters the battlefield under your control, you may switch Calcite Snapper's power and toughness until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_bonfire.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/161.jpg
+Oracle:Choose one - Consuming Bonfire deals 4 damage to target non-Elemental creature; or Consuming Bonfire deals 7 damage to target Treefolk creature.
 End

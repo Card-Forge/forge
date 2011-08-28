@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ceremonial_guard.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/182.jpg
+Oracle:When Ceremonial Guard attacks or blocks, destroy it at end of combat.
 End

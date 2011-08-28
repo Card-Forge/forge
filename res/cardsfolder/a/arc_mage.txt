@@ -8,4 +8,5 @@ SVar:DBDamage:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select tar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_mage.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/77.jpg
+Oracle:{2}{R}, {T}, Discard a card: Arc Mage deals 2 damage divided as you choose among one or two target creatures and/or players.
 End

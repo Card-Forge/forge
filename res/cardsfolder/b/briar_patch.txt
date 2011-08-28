@@ -7,4 +7,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ -1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briar_patch.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/232.jpg
+Oracle:Whenever a creature attacks you, it gets -1/-0 until end of turn.
 End

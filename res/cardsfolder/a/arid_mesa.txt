@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arid_mesa.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/211.jpg
+Oracle:{T}, Pay 1 life, Sacrifice Arid Mesa: Search your library for a Mountain or Plains card and put it onto the battlefield. Then shuffle your library.
 End

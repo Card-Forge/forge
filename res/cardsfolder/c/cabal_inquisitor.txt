@@ -7,4 +7,5 @@ A:AB$ Discard | Cost$ 1 B T ExileFromGrave<2/Card> | ValidTgts$ Player | Activat
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_inquisitor.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/119.jpg
+Oracle:Threshold - {1}{B}, {T}, Exile two cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery, and only if seven or more cards are in your graveyard.
 End

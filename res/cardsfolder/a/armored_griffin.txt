@@ -8,4 +8,5 @@ K:Vigilance
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/armored_griffin.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/133.jpg
+Oracle:Flying, vigilance
 End

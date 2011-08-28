@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/crafty_pathmage.
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/77.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/71.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/77.jpg
+Oracle:{T}: Target creature with power 2 or less is unblockable this turn.
 End

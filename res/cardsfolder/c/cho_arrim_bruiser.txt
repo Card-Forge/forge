@@ -8,4 +8,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creatur
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_arrim_bruiser.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/9.jpg
+Oracle:Whenever Cho-Arrim Bruiser attacks, you may tap up to two target creatures.
 End

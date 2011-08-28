@@ -13,4 +13,5 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/1.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/110.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/1.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/116.jpg
+Oracle:Flying\nWhenever Abyssal Specter deals damage to a player, that player discards a card.
 End

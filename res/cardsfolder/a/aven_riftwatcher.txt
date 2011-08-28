@@ -11,4 +11,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_riftwatcher.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/1.jpg
+Oracle:Flying\nVanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Aven Riftwatcher enters the battlefield or leaves the battlefield, you gain 2 life.
 End

@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_paladin
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/4.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/12.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/173.jpg
+Oracle:Whenever Charging Paladin attacks, it gets +0/+3 until end of turn.
 End

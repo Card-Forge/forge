@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bottomless_pit.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/1.jpg
+Oracle:At the beginning of each player's upkeep, that player discards a card at random.
 End

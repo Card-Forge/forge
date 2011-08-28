@@ -13,4 +13,5 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/38.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/2.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/4.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/2.jpg
+Oracle:Black creatures get +1/+1.
 End

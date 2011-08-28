@@ -8,4 +8,5 @@ SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cultbrand_cinder.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/182.jpg
+Oracle:When Cultbrand Cinder enters the battlefield, put a -1/-1 counter on target creature.
 End

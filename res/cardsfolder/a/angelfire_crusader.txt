@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until 
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card21253.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/1.jpg
+Oracle:{R}: Angelfire Crusader gets +1/+0 until end of turn.
 End

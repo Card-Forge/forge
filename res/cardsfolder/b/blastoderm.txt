@@ -8,4 +8,5 @@ K:Fading:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blastoderm.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/102.jpg
+Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nFading 3 (This creature enters the battlefield with three fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)
 End

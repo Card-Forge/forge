@@ -10,4 +10,5 @@ SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/15.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/16.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/12.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/12.jpg
+Oracle:{T}: Crossbow Infantry deals 1 damage to target attacking or blocking creature.
 End

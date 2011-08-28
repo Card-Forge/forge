@@ -9,4 +9,5 @@ SVar:TrigPump:DB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | KW$ Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/callous_deceiver.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/53.jpg
+Oracle:{1}: Look at the top card of your library.\n{2}: Reveal the top card of your library. If it's a land card, Callous Deceiver gets +1/+0 and gains flying until end of turn. Activate this ability only once each turn.
 End

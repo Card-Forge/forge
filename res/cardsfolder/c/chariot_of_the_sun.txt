@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chariot_of_the_sun.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/262.jpg
+Oracle:{2}, {T}: Until end of turn, target creature you control gains flying and its toughness becomes 1.
 End

@@ -8,4 +8,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ Each
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_blizzard_herder.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/91.jpg
+Oracle:When Akki Blizzard-Herder dies, each player sacrifices a land.
 End

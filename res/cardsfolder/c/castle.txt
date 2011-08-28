@@ -13,4 +13,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/262.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/6.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/192.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/193.jpg
+Oracle:Untapped creatures you control get +0/+2.
 End

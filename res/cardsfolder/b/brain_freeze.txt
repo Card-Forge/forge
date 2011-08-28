@@ -7,4 +7,5 @@ K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/29.jpg
+Oracle:Target player puts the top three cards of his or her library into his or her graveyard.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
 End

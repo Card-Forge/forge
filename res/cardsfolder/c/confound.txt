@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/confound.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/22.jpg
+Oracle:Counter target spell that targets one or more creatures.\nDraw a card.
 End

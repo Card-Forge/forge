@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_witch.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/118.jpg
+Oracle:{B}, {T}, Discard a card: Add {B}{B}{B} to your mana pool.
 End

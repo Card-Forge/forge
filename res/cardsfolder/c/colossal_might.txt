@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colossal_might.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/51.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/190.jpg
+Oracle:Target creature gets +4/+2 and gains trample until end of turn.
 End

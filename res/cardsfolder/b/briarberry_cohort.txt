@@ -10,4 +10,5 @@ SVar:BuffedBy:Creature.Blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarberry_cohort.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/30.jpg
+Oracle:Flying\nBriarberry Cohort gets +1/+1 as long as you control another blue creature.
 End

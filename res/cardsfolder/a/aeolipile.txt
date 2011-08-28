@@ -6,4 +6,5 @@ A:AB$ DealDamage | Cost$ 1 T Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | SpellDes
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aeolipile.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/166.jpg
+Oracle:{1}, {T}, Sacrifice Aeolipile: Aeolipile deals 2 damage to target creature or player.
 End

@@ -10,4 +10,5 @@ A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcades_sabboth.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/258.jpg
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice Arcades Sabboth unless you pay {G}{W}{U}.\nEach untapped creature you control gets +0/+2 as long as it's not attacking.\n{W}: Arcades Sabboth gets +0/+1 until end of turn.
 End

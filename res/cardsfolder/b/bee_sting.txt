@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bee_sting.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/64.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/83.jpg
+Oracle:Bee Sting deals 2 damage to target creature or player.
 End

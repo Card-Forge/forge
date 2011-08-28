@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ascendant_evincar.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/51.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/127.jpg
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nOther black creatures get +1/+1.\nNonblack creatures get -1/-1.
 End

@@ -9,4 +9,5 @@ SVar:TrigCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | Co
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borborygmos.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/103.jpg
+Oracle:Trample\nWhenever Borborygmos deals combat damage to a player, put a +1/+1 counter on each creature you control.
 End

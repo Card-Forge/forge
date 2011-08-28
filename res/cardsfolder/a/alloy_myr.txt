@@ -11,4 +11,5 @@ A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alloy_myr.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/129.jpg
+Oracle:{T}: Add one mana of any color to your mana pool.
 End

@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_sliver.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/88.jpg
+Oracle:All Sliver creatures get +1/+0.
 End

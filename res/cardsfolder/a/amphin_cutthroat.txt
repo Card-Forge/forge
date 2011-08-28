@@ -6,4 +6,5 @@ PT:2/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amphin_cutthroat.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/43.jpg
+Oracle:
 End

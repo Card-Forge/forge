@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armed_response.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/2.jpg
+Oracle:Armed Response deals damage to target attacking creature equal to the number of Equipment you control.
 End

@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_flames.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/169.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/142.jpg
+Oracle:Enchant creature\n{R}: Enchanted creature gets +1/+0 until end of turn.\n{R}: Return Crown of Flames to its owner's hand.
 End

@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Libra
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenging_angel.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/219.jpg
+Oracle:Flying\nWhen Avenging Angel dies, you may put it on top of its owner's library.
 End

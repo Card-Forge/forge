@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_flesh.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/56.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/98.jpg
+Oracle:Enchant creature\nEnchanted creature gets -1/-1 and has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 End

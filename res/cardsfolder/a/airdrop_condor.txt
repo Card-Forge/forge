@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/airdrop_condor.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/186.jpg
+Oracle:Flying\n{1}{R}, Sacrifice a Goblin creature: Airdrop Condor deals damage equal to the sacrificed creature's power to target creature or player.
 End

@@ -10,4 +10,5 @@ SVar:NeedsToPlay:Swamp.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_serpent.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/84.jpg
+Oracle:Bog Serpent can't attack unless defending player controls a Swamp.\nWhen you control no Swamps, sacrifice Bog Serpent.
 End

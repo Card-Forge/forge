@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basal_sliver.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/96.jpg
+Oracle:All Slivers have "Sacrifice this permanent: Add {B}{B} to your mana pool."
 End

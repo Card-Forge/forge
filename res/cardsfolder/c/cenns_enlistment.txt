@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ 3 W Discard<1/Land> | CostDesc$ Retrace | TokenImage$ W 1 1 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_enlistment.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/3.jpg
+Oracle:Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 End

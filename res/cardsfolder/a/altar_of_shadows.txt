@@ -10,4 +10,5 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_shadows.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/143.jpg
+Oracle:At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Altar of Shadows.\n{7}, {T}: Destroy target creature. Then put a charge counter on Altar of Shadows.
 End

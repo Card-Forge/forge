@@ -7,4 +7,5 @@ A:AB$ Fog | Cost$ W U G T | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Mai
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angus_mackenzie.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/257.jpg
+Oracle:{G}{W}{U}, {T}: Prevent all combat damage that would be dealt this turn. Activate this ability only before the combat damage step.
 End

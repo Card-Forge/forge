@@ -14,4 +14,5 @@ SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/175.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/190.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/91.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/168.jpg
+Oracle:Blaze deals X damage to target creature or player.
 End

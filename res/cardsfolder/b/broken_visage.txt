@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_visage.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/3.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/11.jpg
+Oracle:Destroy target nonartifact attacking creature. It can't be regenerated. Put a black Spirit creature token with that creature's power and toughness onto the battlefield. Sacrifice the token at the beginning of the next end step.
 End

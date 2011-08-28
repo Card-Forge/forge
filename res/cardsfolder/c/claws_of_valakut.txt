@@ -10,4 +10,5 @@ SVar:BuffedBy:Mountain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_valakut.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/75.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 for each Mountain you control and has first strike.
 End

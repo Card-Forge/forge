@@ -12,4 +12,5 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/258.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/53.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/220.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/117.jpg
+Oracle:Destroy target artifact, enchantment, or land.
 End

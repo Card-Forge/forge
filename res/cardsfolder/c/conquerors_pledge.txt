@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ 8 W W W | TokenAmount$ 12 | TokenName$ Kor Soldier | TokenTy
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_pledge.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/8.jpg
+Oracle:Kicker {6} (You may pay an additional {6} as you cast this spell.)\nPut six 1/1 white Kor Soldier creature tokens onto the battlefield. If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.
 End

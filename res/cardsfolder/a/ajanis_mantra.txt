@@ -7,4 +7,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_mantra.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/2.jpg
+Oracle:At the beginning of your upkeep, you may gain 1 life.
 End

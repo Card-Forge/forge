@@ -8,4 +8,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ Each
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_gatekeeper.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/1.jpg
+Oracle:When Abyssal Gatekeeper dies, each player sacrifices a creature.
 End

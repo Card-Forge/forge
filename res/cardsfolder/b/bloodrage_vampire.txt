@@ -7,4 +7,5 @@ K:Bloodthirst 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrage_vampire.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/83.jpg
+Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)
 End

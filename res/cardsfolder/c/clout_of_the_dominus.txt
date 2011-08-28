@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clout_of_the_dominus.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/99.jpg
+Oracle:Enchant creature\nAs long as enchanted creature is blue, it gets +1/+1 and has shroud. (It can't be the target of spells or abilities.)\nAs long as enchanted creature is red, it gets +1/+1 and has haste.
 End

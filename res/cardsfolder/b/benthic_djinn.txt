@@ -9,4 +9,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benthic_djinn.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/317.jpg
+Oracle:Islandwalk\nAt the beginning of your upkeep, you lose 2 life.
 End

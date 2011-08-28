@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consult_the_necrosages.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/199.jpg
+Oracle:Choose one - Target player draws two cards; or target player discards two cards.
 End

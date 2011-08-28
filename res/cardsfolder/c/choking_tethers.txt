@@ -9,4 +9,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choking_tethers.jpg
 SVar:Rarity:Common
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/74.jpg
+Oracle:Tap up to four target creatures.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle Choking Tethers, you may tap target creature.
 End

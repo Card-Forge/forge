@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_tower.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/323.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/321.jpg
+Oracle:Coastal Tower enters the battlefield tapped.\n{T}: Add {W} or {U} to your mana pool.
 End

@@ -7,4 +7,5 @@ A:AB$ LoseLife | Cost$ 1 B T | ValidTgts$ Player | TgtPrompt$ Select a player | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acolyte_of_xathrid.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/83.jpg
+Oracle:{1}{B}, {T}: Target player loses 1 life.
 End

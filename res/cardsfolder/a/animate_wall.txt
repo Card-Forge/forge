@@ -15,4 +15,5 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/254.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/1.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/185.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/185.jpg
+Oracle:Enchant Wall\nEnchanted Wall can attack as though it didn't have defender.
 End

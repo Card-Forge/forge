@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_edict.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/7.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/121.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/133.jpg
+Oracle:Target opponent sacrifices a creature.
 End

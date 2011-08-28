@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_signet.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/159.jpg
+Oracle:{1}, {T}: Add {W}{U} to your mana pool.
 End

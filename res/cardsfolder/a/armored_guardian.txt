@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 1 U U | KW$ Shroud | SpellDescription$ CARDNAME gains shroud 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_guardian.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/230.jpg
+Oracle:{1}{W}{W}: Target creature you control gains protection from the color of your choice until end of turn.\n{1}{U}{U}: Armored Guardian gains shroud until end of turn. (It can't be the target of spells or abilities.)
 End

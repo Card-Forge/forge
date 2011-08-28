@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/canyon_minotaur.
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/126.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/130.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/60.jpg
+Oracle:
 End

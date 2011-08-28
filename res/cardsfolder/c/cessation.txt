@@ -11,4 +11,5 @@ SVar:SacMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cessation.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/4.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack.\nWhen Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
 End

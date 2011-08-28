@@ -7,4 +7,5 @@ SVar:SacMe:4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_rector.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/1.jpg
+Oracle:When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.
 End

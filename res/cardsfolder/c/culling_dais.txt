@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_dais.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/148.jpg
+Oracle:{T}, Sacrifice a creature: Put a charge counter on Culling Dais.\n{1}, Sacrifice Culling Dais: Draw a card for each charge counter on Culling Dais.
 End

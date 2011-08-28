@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_birth_rite.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/101.jpg
+Oracle:Return target Goblin card from your graveyard to your hand.
 End

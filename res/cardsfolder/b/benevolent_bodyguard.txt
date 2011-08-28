@@ -7,4 +7,5 @@ A:AB$ Protection | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtProm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benevolent_bodyguard.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/5.jpg
+Oracle:Sacrifice Benevolent Bodyguard: Target creature you control gains protection from the color of your choice until end of turn.
 End

@@ -9,4 +9,5 @@ SVar:AntiBuffedBy:Card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_creeper.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/42.jpg
+Oracle:Whenever a player casts a spell, Blind Creeper gets -1/-1 until end of turn.
 End

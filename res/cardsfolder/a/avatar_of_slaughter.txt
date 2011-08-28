@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Double Strike & HIDDEN CAR
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_slaughter.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/111.jpg
+Oracle:All creatures have double strike and attack each turn if able.
 End

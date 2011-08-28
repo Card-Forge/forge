@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boar_umbra.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/179.jpg
+Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
 End

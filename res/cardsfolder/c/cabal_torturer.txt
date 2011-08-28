@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 3 B B T | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | ValidTgts
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_torturer.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/53.jpg
+Oracle:{B}, {T}: Target creature gets -1/-1 until end of turn.\nThreshold - {3}{B}{B}, {T}: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
 End

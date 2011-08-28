@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshot_cyclop
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/179.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/77.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/176.jpg
+Oracle:{T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed creature's power to target creature or player.
 End

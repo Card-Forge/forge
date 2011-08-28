@@ -7,4 +7,5 @@ SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrosive_gale.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/107.jpg
+Oracle:({G/P} can be paid with either {G} or 2 life.)\nCorrosive Gale deals X damage to each creature with flying.
 End

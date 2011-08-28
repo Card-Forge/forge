@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDesc
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conviction.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/105.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+3.\n{W}: Return Conviction to its owner's hand.
 End

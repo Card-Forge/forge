@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_witch.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/119.jpg
+Oracle:{X}{B}, {T}, Discard a card: Target creature gets +X/+0 until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:TrigDiscards:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/abyssal_nightstalker.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/1.jpg
+Oracle:Whenever Abyssal Nightstalker attacks and isn't blocked, defending player discards a card.
 End

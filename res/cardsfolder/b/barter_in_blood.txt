@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barter_in_blood.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/57.jpg
+Oracle:Each player sacrifices two creatures.
 End

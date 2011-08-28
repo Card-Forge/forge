@@ -3,8 +3,9 @@ ManaCost:2 R R
 Types:Sorcery
 Text:no text
 A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ SVar=DBPain  | SpellDescription$ Destroy target artifact, creature or land. CARDNAME deals 3 damage to you.
-SVar:DBPain:DB$DealDamage | NumDmg$ 3 | Defined$ You 
+SVar:DBPain:DB$DealDamage | NumDmg$ 3 | Defined$ You
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aftershock.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/160.jpg
+Oracle:Destroy target artifact, creature, or land. Aftershock deals 3 damage to you.
 End

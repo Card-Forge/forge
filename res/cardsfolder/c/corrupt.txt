@@ -11,4 +11,5 @@ SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/89.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/124.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/62.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/124.jpg
+Oracle:Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way.
 End

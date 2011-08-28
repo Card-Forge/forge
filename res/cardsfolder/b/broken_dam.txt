@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_dam.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/37.jpg
+Oracle:Tap one or two target creatures without horsemanship.
 End

@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrosive_mentor.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/61.jpg
+Oracle:Black creatures you control have wither. (They deal damage to creatures in the form of -1/-1 counters.)
 End

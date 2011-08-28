@@ -11,4 +11,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashenmoor_liege.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/181.jpg
+Oracle:Other black creatures you control get +1/+1.\nOther red creatures you control get +1/+1.\nWhenever Ashenmoor Liege becomes the target of a spell or ability an opponent controls, that player loses 4 life.
 End

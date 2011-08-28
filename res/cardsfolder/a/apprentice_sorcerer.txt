@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | PlayerTurn$ True | Activat
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_sorcerer.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/32.jpg
+Oracle:{T}: Apprentice Sorcerer deals 1 damage to target creature or player. Activate this ability only during your turn, before attackers are declared.
 End

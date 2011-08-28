@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_shockwave.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/1.jpg
+Oracle:Choose one - Tap all Spirits; or tap all non-Spirit creatures.
 End

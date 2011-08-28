@@ -10,4 +10,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bravado.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/177.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each other creature you control.
 End

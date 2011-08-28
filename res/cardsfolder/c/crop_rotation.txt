@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crop_rotation.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/98.jpg
+Oracle:As an additional cost to cast Crop Rotation, sacrifice a land.\nSearch your library for a land card and put that card onto the battlefield. Then shuffle your library.
 End

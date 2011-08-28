@@ -10,4 +10,5 @@ SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/asmira_holy_avenger.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/316.jpg
+Oracle:Flying\nAt the beginning of each end step, put a +1/+1 counter on Asmira, Holy Avenger for each creature put into your graveyard from the battlefield this turn.
 End

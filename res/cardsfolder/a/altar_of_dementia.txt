@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_dementia.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/266.jpg
+Oracle:Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard.
 End

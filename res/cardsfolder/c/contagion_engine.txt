@@ -9,4 +9,5 @@ SVar:TrigPutCounterAll:AB$PutCounterAll | Cost$ 0 | ValidTgts$ Player | TgtPromp
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contagion_engine.jpg
 SVar:Rarity:Rare
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/145.jpg
+Oracle:When Contagion Engine enters the battlefield, put a -1/-1 counter on each creature target player controls.\n{4}, {T}: Proliferate, then proliferate again. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there. Then do it again.)
 End

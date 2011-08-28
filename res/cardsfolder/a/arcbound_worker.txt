@@ -7,4 +7,5 @@ K:Modular 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_worker.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/104.jpg
+Oracle:Modular 1 (This enters the battlefield with a +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
 End

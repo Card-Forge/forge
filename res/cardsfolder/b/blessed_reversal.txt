@@ -10,4 +10,5 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/7.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/169.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/2.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/3.jpg
+Oracle:You gain 3 life for each creature attacking you.
 End

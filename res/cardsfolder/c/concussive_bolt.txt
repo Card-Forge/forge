@@ -7,4 +7,5 @@ SVar:DBPump:DB$PumpAll | Defined$ Targeted | ValidCards$ Creature | ConditionPre
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/concussive_bolt.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/60.jpg
+Oracle:Concussive Bolt deals 4 damage to target player.\nMetalcraft - If you control three or more artifacts, creatures that player controls can't block this turn.
 End

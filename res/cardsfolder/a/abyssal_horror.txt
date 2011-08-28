@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_horror.j
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/115.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/63.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/115.jpg
+Oracle:Flying\nWhen Abyssal Horror enters the battlefield, target player discards two cards.
 End

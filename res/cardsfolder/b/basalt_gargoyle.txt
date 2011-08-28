@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ R | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basalt_gargoyle.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/145.jpg
+Oracle:Flying\nEcho {2}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\n{R}: Basalt Gargoyle gets +0/+1 until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_tradewinds.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/24.jpg
+Oracle:Return target permanent you control and target permanent you don't control to their owners' hands.
 End

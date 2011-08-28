@@ -8,4 +8,5 @@ SVar:Buyback:2 B B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brush_with_death.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/2.jpg
+Oracle:Buyback {2}{B}{B} (You may pay an additional {2}{B}{B} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget opponent loses 2 life. You gain 2 life.
 End

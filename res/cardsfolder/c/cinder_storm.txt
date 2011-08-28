@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 6 R | Tgt$ TgtCP | NumDmg$ 7 | SpellDescription$ CARDNA
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_storm.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/93.jpg
+Oracle:Cinder Storm deals 7 damage to target creature or player.
 End

@@ -10,4 +10,5 @@ SVar:BuffedBy:Forest,Treefolk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlewand_oak.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/197.jpg
+Oracle:Whenever a Forest enters the battlefield under your control, Battlewand Oak gets +2/+2 until end of turn.\nWhenever you cast a Treefolk spell, Battlewand Oak gets +2/+2 until end of turn.
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_fiend.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/2.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/119.jpg
+Oracle:Flying\nWhenever Bellowing Fiend deals damage to a creature, Bellowing Fiend deals 3 damage to that creature's controller and 3 damage to you.
 End

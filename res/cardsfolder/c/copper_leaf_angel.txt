@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_leaf_angel.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/137.jpg
+Oracle:Flying\n{T}, Sacrifice X lands: Put X +1/+1 counters on Copper-Leaf Angel.
 End

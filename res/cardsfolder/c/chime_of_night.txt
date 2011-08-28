@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chime_of_night.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/56.jpg
+Oracle:Enchant creature\nWhen Chime of Night is put into a graveyard from the battlefield, destroy target nonblack creature.
 End

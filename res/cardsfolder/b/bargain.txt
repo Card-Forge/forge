@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bargain.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/134.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/7.jpg
+Oracle:Target opponent draws a card.\nYou gain 7 life.
 End

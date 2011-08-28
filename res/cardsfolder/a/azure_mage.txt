@@ -7,4 +7,5 @@ A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a c
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azure_mage.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/45.jpg
+Oracle:{3}{U}: Draw a card.
 End

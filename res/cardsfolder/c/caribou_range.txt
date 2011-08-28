@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caribou_range.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/290.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/235.jpg
+Oracle:Enchant land you control\nEnchanted land has "{W}{W}, {T}: Put a 0/1 white Caribou creature token onto the battlefield."\nSacrifice a Caribou token: You gain 1 life.
 End

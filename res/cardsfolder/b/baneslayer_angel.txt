@@ -12,4 +12,5 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baneslayer_angel.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/7.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/4.jpg
+Oracle:Flying, first strike, lifelink, protection from Demons and from Dragons
 End

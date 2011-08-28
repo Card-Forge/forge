@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_transmogrant.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/350.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/5.jpg
+Oracle:{T}, Sacrifice Ashnod's Transmogrant: Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.
 End

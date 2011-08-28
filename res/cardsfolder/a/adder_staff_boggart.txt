@@ -9,4 +9,5 @@ SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adder_staff_boggart.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/148.jpg
+Oracle:When Adder-Staff Boggart enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Adder-Staff Boggart. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 End

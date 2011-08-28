@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Descr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/buoyancy.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/63.jpg
+Oracle:Flash\nEnchant creature\nEnchanted creature has flying.
 End

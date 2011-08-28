@@ -6,4 +6,5 @@ A:SP$ SetLife | Cost$ 7 W W | ValidTgts$ Player | TgtPrompt$ Select target playe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_wind.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/4.jpg
+Oracle:Target player's life total becomes 20.
 End

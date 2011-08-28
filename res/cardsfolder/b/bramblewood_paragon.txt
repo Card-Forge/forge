@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+countersGE1P1P1 | AddKeyword$ Tr
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bramblewood_paragon.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/115.jpg
+Oracle:Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.\nEach creature you control with a +1/+1 counter on it has trample.
 End

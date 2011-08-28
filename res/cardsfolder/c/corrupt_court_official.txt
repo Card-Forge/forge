@@ -8,4 +8,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_court_official.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/71.jpg
+Oracle:When Corrupt Court Official enters the battlefield, target opponent discards a card.
 End

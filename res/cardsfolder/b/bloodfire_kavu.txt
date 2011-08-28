@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_kavu.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/58.jpg
+Oracle:{R}, Sacrifice Bloodfire Kavu: Bloodfire Kavu deals 2 damage to each creature.
 End

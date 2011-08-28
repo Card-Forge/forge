@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodthorn_taunter.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/94.jpg
+Oracle:Haste\n{T}: Target creature with power 5 or greater gains haste until end of turn.
 End

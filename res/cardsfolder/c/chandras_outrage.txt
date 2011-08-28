@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_outrage.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/128.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/125.jpg
+Oracle:Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.
 End

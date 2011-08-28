@@ -7,4 +7,5 @@ K:CARDNAME attacks each turn if able.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crazed_goblin.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/56.jpg
+Oracle:Crazed Goblin attacks each turn if able.
 End

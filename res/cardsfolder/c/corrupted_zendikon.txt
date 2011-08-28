@@ -10,4 +10,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_zendikon.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/55.jpg
+Oracle:Enchant land\nEnchanted land is a 3/3 black Ooze creature. It's still a land.\nWhen enchanted land dies, return that card to its owner's hand.
 End

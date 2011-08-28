@@ -7,4 +7,5 @@ K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/30.jpg
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nCounter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 End

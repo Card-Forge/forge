@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | TgtPrompt$ Choose target Zombie card i
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_vulture.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/126.jpg
+Oracle:Flying\nWhen Aphetto Vulture dies, you may put target Zombie card from your graveyard on top of your library.
 End

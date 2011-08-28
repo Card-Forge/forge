@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blister_beetle.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/66.jpg
+Oracle:When Blister Beetle enters the battlefield, target creature gets -1/-1 until end of turn.
 End

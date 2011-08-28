@@ -10,4 +10,5 @@ SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_vengeant.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/154.jpg
+Oracle:[+1] Target permanent doesn't untap during its controller's next untap step.\n[-2] Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.\n[-7] Destroy all lands target player controls.
 End

@@ -16,4 +16,5 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/413.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/321.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/85.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/327.jpg
+Oracle:Whenever City of Brass becomes tapped, it deals 1 damage to you.\n{T}: Add one mana of any color to your mana pool.
 End

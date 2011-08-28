@@ -9,4 +9,5 @@ SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature | ValidDescription
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caldera_hellion.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/95.jpg
+Oracle:Devour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)\nWhen Caldera Hellion enters the battlefield, it deals 3 damage to each creature.
 End

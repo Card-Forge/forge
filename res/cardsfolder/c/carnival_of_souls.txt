@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carnival_of_souls.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/55.jpg
+Oracle:Whenever a creature enters the battlefield, you lose 1 life and add {B} to your mana pool.
 End

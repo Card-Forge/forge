@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caltrops.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/129.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/288.jpg
+Oracle:Whenever a creature attacks, Caltrops deals 1 damage to it.
 End

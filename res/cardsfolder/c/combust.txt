@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/combust.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/130.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/128.jpg
+Oracle:Combust can't be countered by spells or abilities.\nCombust deals 5 damage to target white or blue creature. The damage can't be prevented.
 End

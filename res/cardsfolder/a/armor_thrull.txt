@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_thrull.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/1.jpg|4
+Oracle:{T}, Sacrifice Armor Thrull: Put a +1/+2 counter on target creature.
 End

@@ -6,4 +6,5 @@ PT:3/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130676.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/19.jpg
+Oracle:
 End

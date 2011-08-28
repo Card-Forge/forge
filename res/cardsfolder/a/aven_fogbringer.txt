@@ -9,4 +9,5 @@ SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Land | TgtPrompt$ Select target l
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_fogbringer.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/34.jpg
+Oracle:Flying\nWhen Aven Fogbringer enters the battlefield, return target land to its owner's hand.
 End

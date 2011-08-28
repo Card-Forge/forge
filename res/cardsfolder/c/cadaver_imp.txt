@@ -9,4 +9,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaver_imp.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/99.jpg
+Oracle:Flying\nWhen Cadaver Imp enters the battlefield, you may return target creature card from your graveyard to your hand.
 End

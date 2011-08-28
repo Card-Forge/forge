@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_attendant.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/300.jpg
+Oracle:{1}, Sacrifice Crosis's Attendant: Add {U}{B}{R} to your mana pool.
 End

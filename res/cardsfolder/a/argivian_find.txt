@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ W | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_find.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/122.jpg
+Oracle:Return target artifact or enchantment card from your graveyard to your hand.
 End

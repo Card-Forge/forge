@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgt
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charnelhoard_wurm.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/100.jpg
+Oracle:Trample\nWhenever Charnelhoard Wurm deals damage to an opponent, you may return target card from your graveyard to your hand.
 End

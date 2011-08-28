@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 U | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/command_of_unsummoning.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/49.jpg
+Oracle:Cast Command of Unsummoning only during the declare attackers step and only if you've been attacked this step.\nReturn one or two target attacking creatures to their owner's hand.
 End

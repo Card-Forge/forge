@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Librar
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46096.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/39.jpg
+Oracle:When Chittering Rats enters the battlefield, target opponent puts a card from his or her hand on top of his or her library.
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_aristocrat.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/27.jpg
+Oracle:Whenever Cephalid Aristocrat becomes the target of a spell or ability, put the top two cards of your library into your graveyard.
 End

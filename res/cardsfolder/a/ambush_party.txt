@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush_party.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/79.jpg|2
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/208.jpg
+Oracle:First strike, haste
 End

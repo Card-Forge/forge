@@ -10,4 +10,5 @@ SVar:TrigAnimate2:AB$Animate | Cost$ 0 | Defined$ TriggeredBlocker | Colors$ Gre
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aisling_leprechaun.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/87.jpg
+Oracle:Whenever Aisling Leprechaun blocks or becomes blocked by a creature, that creature becomes green. (This effect lasts indefinitely.)
 End

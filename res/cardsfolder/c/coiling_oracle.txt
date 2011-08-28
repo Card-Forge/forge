@@ -8,4 +8,5 @@ SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | Chan
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coiling_oracle.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/107.jpg
+Oracle:When Coiling Oracle enters the battlefield, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand.
 End

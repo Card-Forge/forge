@@ -7,4 +7,5 @@ SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/cruel_tutor.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/9.jpg
+Oracle:Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
 End

@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/berserkers_of_blood_ridge.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/124.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/126.jpg
+Oracle:Berserkers of Blood Ridge attacks each turn if able.
 End

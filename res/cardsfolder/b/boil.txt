@@ -10,4 +10,5 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/180.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/165.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/169.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/177.jpg
+Oracle:Destroy all Islands.
 End

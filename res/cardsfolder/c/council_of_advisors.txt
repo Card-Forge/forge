@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Three_Kingdoms/council_of_advisors.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/40.jpg
+Oracle:When Council of Advisors enters the battlefield, draw a card.
 End

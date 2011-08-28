@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_aethermage.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/104.jpg
+Oracle:Whenever a permanent is returned to your hand, you may pay {1}. If you do, draw a card.
 End

@@ -9,4 +9,5 @@ SVar:X:Count$Valid Permanent.White+YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beasts_of_bogardan.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/133.jpg
+Oracle:Protection from red\nBeasts of Bogardan gets +1/+1 as long as an opponent controls a white permanent.
 End

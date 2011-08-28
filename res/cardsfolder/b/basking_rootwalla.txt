@@ -8,4 +8,5 @@ K:Madness:0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basking_rootwalla.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/121.jpg
+Oracle:{1}{G}: Basking Rootwalla gets +2/+2 until end of turn. Activate this ability only once each turn.\nMadness {0} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
 End

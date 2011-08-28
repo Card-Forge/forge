@@ -10,4 +10,5 @@ SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_sliver.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/163.jpg
+Oracle:All Sliver creatures have "{2}: This creature gets +1/+0 until end of turn."
 End

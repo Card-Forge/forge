@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Assembly-Worker | TgtPrompt$ Select t
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_worker.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/248.jpg
+Oracle:{T}: Target Assembly-Worker creature gets +1/+1 until end of turn.
 End

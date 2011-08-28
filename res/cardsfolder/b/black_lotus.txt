@@ -13,4 +13,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/black_lotus.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/232.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/234.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/233.jpg
+Oracle:{T}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
 End

@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ 1 G PayLife<3> | TokenAmount$ 2 | TokenName$ Squirrel | Toke
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_harvest.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/118.jpg
+Oracle:Put two 1/1 green Squirrel creature tokens onto the battlefield.\nFlashback-{1}{G}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

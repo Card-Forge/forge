@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_seeker.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/81.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/80.jpg
+Oracle:Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
 End

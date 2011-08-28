@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/constricting_tendrils.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/22.jpg
+Oracle:Target creature gets -3/-0 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

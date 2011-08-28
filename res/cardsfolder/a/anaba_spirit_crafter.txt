@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Minotaur | AddPower$ 1 | Description$ Mi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_spirit_crafter.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/86.jpg
+Oracle:Minotaur creatures get +1/+0.
 End

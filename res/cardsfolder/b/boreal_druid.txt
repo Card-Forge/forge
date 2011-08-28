@@ -7,4 +7,5 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121193.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/105.jpg
+Oracle:{T}: Add {1} to your mana pool.
 End

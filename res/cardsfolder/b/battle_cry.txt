@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_cry.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/229.jpg
+Oracle:Untap all white creatures you control.\nWhenever a creature blocks this turn, it gets +0/+1 until end of turn.
 End

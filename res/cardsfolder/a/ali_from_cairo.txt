@@ -7,4 +7,5 @@ K:Damage that would reduce your life total to less than 1 reduces it to 1 instea
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ali_from_cairo.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/44.jpg
+Oracle:Damage that would reduce your life total to less than 1 reduces it to 1 instead.
 End

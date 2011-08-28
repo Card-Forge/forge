@@ -19,4 +19,5 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/75.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/96.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/146.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/98.jpg
+Oracle:Flying\nWhenever Cockatrice blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
 End

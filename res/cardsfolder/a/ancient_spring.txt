@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_spring.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/319.jpg
+Oracle:Ancient Spring enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{T}, Sacrifice Ancient Spring: Add {W}{B} to your mana pool.
 End

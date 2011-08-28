@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cultivate.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/168.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/148.jpg
+Oracle:Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
 End

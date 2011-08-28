@@ -9,4 +9,5 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_chieftain.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/122.jpg
+Oracle:Haste\nThreshold - As long as seven or more cards are in your graveyard, Centaur Chieftain has "When Centaur Chieftain enters the battlefield, creatures you control get +1/+1 and gain trample until end of turn."
 End

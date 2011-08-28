@@ -8,4 +8,5 @@ A:AB$ Protection | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_acolyte.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/11.jpg
+Oracle:Protection from red\n{W}: Target creature gains protection from red until end of turn.
 End

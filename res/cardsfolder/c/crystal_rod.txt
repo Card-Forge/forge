@@ -16,4 +16,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/329.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/277.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/242.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/240.jpg
+Oracle:Whenever a player casts a blue spell, you may pay {1}. If you do, you gain 1 life.
 End

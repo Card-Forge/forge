@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_orator.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/12.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/6.jpg
+Oracle:Other creatures you control get +0/+1.
 End

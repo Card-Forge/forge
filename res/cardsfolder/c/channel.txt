@@ -12,4 +12,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/97.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/95.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/120.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/97.jpg
+Oracle:Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {1} to your mana pool.
 End

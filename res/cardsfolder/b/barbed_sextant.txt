@@ -13,4 +13,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_sextant.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/351.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/287.jpg
+Oracle:{1}, {T}, Sacrifice Barbed Sextant: Add one mana of any color to your mana pool. Draw a card at the beginning of the next turn's upkeep.
 End

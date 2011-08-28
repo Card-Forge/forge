@@ -17,4 +17,5 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/54.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/77.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/34.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/55.jpg
+Oracle:Counter target spell.
 End

@@ -8,4 +8,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Each | NumCards$ 1 | Mode$ TgtC
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_lethemancer.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/69.jpg
+Oracle:At the beginning of your upkeep, each player discards a card.
 End

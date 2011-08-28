@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_knight.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/125.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/11.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFirst strike (This creature deals combat damage before creatures without first strike.)
 End

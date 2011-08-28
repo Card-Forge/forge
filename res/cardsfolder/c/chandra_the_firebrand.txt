@@ -13,4 +13,5 @@ SVar:TrigCleanUpMain:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Desti
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_the_firebrand.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/124.jpg
+Oracle:[+1] Chandra, the Firebrand deals 1 damage to target creature or player.\n[-2] When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\n[-6] Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players.
 End

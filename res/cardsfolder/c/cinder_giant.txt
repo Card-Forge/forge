@@ -8,4 +8,5 @@ SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.YouCtrl+Other | Nu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_giant.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/93.jpg
+Oracle:At the beginning of your upkeep, Cinder Giant deals 2 damage to each other creature you control.
 End

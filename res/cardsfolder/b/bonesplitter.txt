@@ -6,4 +6,5 @@ K:eqPump 1:+2/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/146.jpg
+Oracle:Equipped creature gets +2/+0.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
 End

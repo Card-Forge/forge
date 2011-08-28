@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonBlack+attacking | TgtPrompt$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assassins_blade.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/2.jpg
+Oracle:Cast Assassin's Blade only during the declare attackers step and only if you've been attacked this step.\nDestroy target nonblack attacking creature.
 End

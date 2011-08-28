@@ -7,11 +7,12 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent.Other+nonLand | TgtPrompt$ Choose target nonland permanent other than Admonition Angel. | RememberTargets$ True | Origin$ Battlefield | Destination$ Exile
-SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield  
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:RemAIDeck:True
 SVar:BuffedBy:Land
 SVar:RemAIDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
 SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/1.jpg
+Oracle:Flying\nLandfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.\nWhen Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
 End

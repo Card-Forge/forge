@@ -9,4 +9,5 @@ A:AB$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Hand | SpellDe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cage_of_hands.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/3.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{1}{W}: Return Cage of Hands to its owner's hand.
 End

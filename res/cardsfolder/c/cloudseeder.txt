@@ -8,4 +8,5 @@ A:AB$ Token | Cost$ U T Discard<1/Card> | TokenOwner$ You | TokenAmount$ 1 | Tok
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130309.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/33.jpg
+Oracle:Flying\n{U}, {T}, Discard a card: Put a 1/1 blue Faerie creature token named Cloud Sprite onto the battlefield. It has flying and "Cloud Sprite can block only creatures with flying."
 End

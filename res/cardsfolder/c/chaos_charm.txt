@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_charm.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/163.jpg
+Oracle:Choose one - Destroy target Wall; or Chaos Charm deals 1 damage to target creature; or target creature gains haste until end of turn.
 End

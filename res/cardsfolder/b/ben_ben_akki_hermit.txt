@@ -8,4 +8,5 @@ SVar:X:Count$Valid Mountain.untapped+YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ben_ben_akki_hermit.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/157.jpg
+Oracle:{T}: Ben-Ben, Akki Hermit deals damage to target attacking creature equal to the number of untapped Mountains you control.
 End

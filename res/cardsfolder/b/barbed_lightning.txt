@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_lightning.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/55.jpg
+Oracle:Choose one - Barbed Lightning deals 3 damage to target creature; or Barbed Lightning deals 3 damage to target player.\nEntwine {2} (Choose both if you pay the entwine cost.)
 End

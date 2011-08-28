@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_spyglass.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/93.jpg
+Oracle:{2}, {T}, Sacrifice a land: Draw a card and put a charge counter on Arcane Spyglass.\nRemove three charge counters from Arcane Spyglass: Draw a card.
 End

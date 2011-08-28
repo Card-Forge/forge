@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belltower_sphinx.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/38.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/46.jpg
+Oracle:Flying\nWhenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.
 End

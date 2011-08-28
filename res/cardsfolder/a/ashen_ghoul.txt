@@ -8,4 +8,5 @@ A:AB$ChangeZone | Cost$ B | Defined$ Self | Origin$ Graveyard | Destination$ Bat
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashen_ghoul.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/2.jpg
+Oracle:Haste\n{B}: Return Ashen Ghoul from your graveyard to the battlefield. Activate this ability only during your upkeep and only if three or more creature cards are above Ashen Ghoul.
 End

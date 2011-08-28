@@ -7,4 +7,5 @@ A:AB$ PreventDamage | Cost$ T |  ValidTgts$ Creature.Artifact | Amount$ 2 | TgtP
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_blacksmith.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/95.jpg
+Oracle:{T}: Prevent the next 2 damage that would be dealt to target artifact creature this turn.
 End

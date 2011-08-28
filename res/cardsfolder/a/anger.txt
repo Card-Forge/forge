@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anger.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/109.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/77.jpg
+Oracle:Haste\nAs long as Anger is in your graveyard and you control a Mountain, creatures you control have haste.
 End

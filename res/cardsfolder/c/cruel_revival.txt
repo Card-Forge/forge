@@ -7,4 +7,5 @@ SVar:DBReturn:DB$ChangeZone | Cost$ 0 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_revival.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/135.jpg
+Oracle:Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand.
 End

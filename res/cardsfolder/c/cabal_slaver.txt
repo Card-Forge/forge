@@ -10,4 +10,5 @@ SVar:TrigDiscardYou:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ Tg
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_slaver.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/131.jpg
+Oracle:Whenever a Goblin deals combat damage to a player, that player discards a card.
 End

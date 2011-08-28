@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abjure.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/31.jpg
+Oracle:As an additional cost to cast Abjure, sacrifice a blue permanent.\nCounter target spell.
 End

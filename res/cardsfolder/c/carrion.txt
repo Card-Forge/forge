@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/9.jpg
+Oracle:As an additional cost to cast Carrion, sacrifice a creature.\nPut X 0/1 black Insect creature tokens onto the battlefield, where X is the sacrificed creature's power.
 End

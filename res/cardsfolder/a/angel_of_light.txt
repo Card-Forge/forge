@@ -8,4 +8,5 @@ K:Vigilance
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20391.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/1.jpg
+Oracle:Flying, vigilance
 End

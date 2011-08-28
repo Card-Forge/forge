@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_talon_chimera.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/142.jpg
+Oracle:First strike\nSacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike. (This effect lasts indefinitely.)
 End

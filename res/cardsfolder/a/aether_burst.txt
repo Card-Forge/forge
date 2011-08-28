@@ -7,4 +7,5 @@ SVar:X:Count$NamedInAllYards.AEther Burst/Plus.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_burst.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/60.jpg
+Oracle:Return up to X target creatures to their owners' hands, where X is one plus the number of cards named AEther Burst in all graveyards as you cast AEther Burst.
 End

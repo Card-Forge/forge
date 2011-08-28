@@ -9,4 +9,5 @@ SVar:DestroySelf:DB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_zealot.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/126.jpg
+Oracle:When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
 End

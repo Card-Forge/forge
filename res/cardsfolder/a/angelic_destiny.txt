@@ -10,4 +10,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_destiny.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/3.jpg
+Oracle:Enchant creature\nEnchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.\nWhen enchanted creature dies, return Angelic Destiny to its owner's hand.
 End

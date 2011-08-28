@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenName$ Squirrel | TokenColors$ Gr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chatter_of_the_squirrel.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/233.jpg
+Oracle:Put a 1/1 green Squirrel creature token onto the battlefield.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

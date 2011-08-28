@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balloon_peddler.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/59.jpg
+Oracle:{U}, {T}, Discard a card: Target creature gains flying until end of turn.
 End

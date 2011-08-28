@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agadeem_occultist.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/48.jpg
+Oracle:{T}: Put target creature card from an opponent's graveyard onto the battlefield under your control if its converted mana cost is less than or equal to the number of Allies you control.
 End

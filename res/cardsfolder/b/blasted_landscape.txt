@@ -7,4 +7,5 @@ K:Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasted_landscape.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/319.jpg
+Oracle:{T}: Add {1} to your mana pool.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

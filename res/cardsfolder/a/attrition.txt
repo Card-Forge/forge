@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/attrition.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/52.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/72.jpg
+Oracle:{B}, Sacrifice a creature: Destroy target nonblack creature.
 End

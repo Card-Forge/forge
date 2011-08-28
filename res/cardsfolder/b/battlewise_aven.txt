@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlewise_aven.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/4.jpg
+Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Battlewise Aven gets +1/+1 and has first strike.
 End

@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ T Sac<1/Land> | ValidTgts$ Land | TgtPrompt$ Select target
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/army_ants.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/126.jpg
+Oracle:{T}, Sacrifice a land: Destroy target land.
 End

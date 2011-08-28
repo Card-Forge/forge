@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awakener_druid.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/163.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/167.jpg
+Oracle:When Awakener Druid enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as Awakener Druid remains on the battlefield. It's still a land.
 End

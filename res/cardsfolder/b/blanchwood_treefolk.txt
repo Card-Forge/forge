@@ -6,4 +6,5 @@ PT:4/5
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5747.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/238.jpg
+Oracle:
 End

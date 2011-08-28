@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstained_mire.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/313.jpg
+Oracle:{T}, Pay 1 life, Sacrifice Bloodstained Mire: Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
 End

@@ -9,4 +9,5 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/222.jpg
+Oracle:Crumbling Necropolis enters the battlefield tapped.\n{T}: Add {U}, {B}, or {R} to your mana pool.
 End

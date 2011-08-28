@@ -10,4 +10,5 @@ SVar:TrigLose:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmo
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_ground.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/102.jpg
+Oracle:Enchant land\nEnchanted land is a Swamp.\nWhenever enchanted land becomes tapped, its controller loses 2 life.
 End

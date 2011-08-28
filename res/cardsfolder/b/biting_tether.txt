@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biting_tether.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/29.jpg
+Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
 End

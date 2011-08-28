@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashes_of_the_fallen.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/152.jpg
+Oracle:As Ashes of the Fallen enters the battlefield, choose a creature type.\nEach creature card in your graveyard has the chosen creature type in addition to its other types.
 End

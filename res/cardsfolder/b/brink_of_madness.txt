@@ -8,4 +8,5 @@ SVar:DBDiscard:DB$Discard | Defined$ Opponent | Mode$ Hand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_madness.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/50.jpg
+Oracle:At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards his or her hand.
 End

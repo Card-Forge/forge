@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 U U | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creatu
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterintelligence.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/41.jpg
+Oracle:Return one or two target creatures to their owners' hands.
 End

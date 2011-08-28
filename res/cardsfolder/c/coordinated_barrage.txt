@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coordinated_barrage.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/7.jpg
+Oracle:Choose a creature type. Coordinated Barrage deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type.
 End

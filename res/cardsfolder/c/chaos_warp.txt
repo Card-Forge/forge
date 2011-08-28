@@ -7,4 +7,5 @@ SVar:DBDig:DB$Dig | Defined$ TargetedController | DigNum$ 1 | Reveal$ True | Des
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_warp.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/114.jpg
+Oracle:The owner of target permanent shuffles it into his or her library, then reveals the top card of his or her library. If it's a permanent card, he or she puts it onto the battlefield.
 End

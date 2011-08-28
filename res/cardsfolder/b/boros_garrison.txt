@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_garrison.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/275.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/268.jpg
+Oracle:Boros Garrison enters the battlefield tapped.\nWhen Boros Garrison enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {R}{W} to your mana pool.
 End

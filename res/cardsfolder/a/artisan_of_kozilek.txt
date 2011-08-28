@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artisan_of_kozilek.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/1.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/2.jpg
+Oracle:When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)
 End

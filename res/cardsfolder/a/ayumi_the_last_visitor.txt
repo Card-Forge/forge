@@ -7,4 +7,5 @@ K:Legendary landwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ayumi_the_last_visitor.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/122.jpg
+Oracle:Legendary landwalk
 End

@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_disaster.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/84.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/52.jpg
+Oracle:Enchant creature or land\nWhen enchanted permanent becomes tapped, destroy it.
 End

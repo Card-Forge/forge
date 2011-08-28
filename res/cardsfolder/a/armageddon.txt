@@ -15,4 +15,5 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/186.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/283.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/6.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/186.jpg
+Oracle:Destroy all lands.
 End

@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 4 T | Origin$ Library | Destination$ Battlefield | Chan
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_scout.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/1.jpg
+Oracle:{4}, {T}: Search your library for a Rebel permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
 End

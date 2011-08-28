@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_piracy.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/67.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/68.jpg
+Oracle:Whenever a creature you control deals combat damage to an opponent, you may draw a card.
 End

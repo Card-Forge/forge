@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_splinters.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/67.jpg
+Oracle:As an additional cost to cast Bone Splinters, sacrifice a creature.\nDestroy target creature.
 End

@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borderland_ranger.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/169.jpg
+Oracle:When Borderland Ranger enters the battlefield, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.
 End

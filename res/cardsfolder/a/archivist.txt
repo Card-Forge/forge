@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/archivist.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/60.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/26.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/61.jpg
+Oracle:{T}: Draw a card.
 End

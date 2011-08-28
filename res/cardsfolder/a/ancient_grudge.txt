@@ -7,4 +7,5 @@ A:SP$ Destroy | Cost$ G | ValidTgts$ Artifact | TgtPrompt$ Select target artifac
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_grudge.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/143.jpg
+Oracle:Destroy target artifact.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

@@ -7,4 +7,5 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_of_baghdad.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/84.jpg
+Oracle:{T}: Draw two cards, then discard three cards.
 End

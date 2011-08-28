@@ -9,4 +9,5 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W U B
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromium.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/264.jpg
+Oracle:Flying\nRampage 2 (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)\nAt the beginning of your upkeep, sacrifice Chromium unless you pay {W}{U}{B}.
 End

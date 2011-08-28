@@ -7,4 +7,5 @@ A:AB$ DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying |
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_dwarf.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/55.jpg
+Oracle:{R}, Sacrifice Bloodfire Dwarf: Bloodfire Dwarf deals 1 damage to each creature without flying.
 End

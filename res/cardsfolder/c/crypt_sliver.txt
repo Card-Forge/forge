@@ -9,4 +9,5 @@ SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_sliver.jpg
 SVar:Rarity:Common
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/63.jpg
+Oracle:All Slivers have "{T}: Regenerate target Sliver."
 End

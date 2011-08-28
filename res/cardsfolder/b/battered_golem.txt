@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battered_golem.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/106.jpg
+Oracle:Battered Golem doesn't untap during your untap step.\nWhenever an artifact enters the battlefield, you may untap Battered Golem.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_reef.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/29.jpg
+Oracle:Coral Reef enters the battlefield with four polyp counters on it.\nSacrifice an Island: Put two polyp counters on Coral Reef.\n{U}, Tap an untapped blue creature you control, Remove a polyp counter from Coral Reef: Put a +0/+1 counter on target creature.
 End

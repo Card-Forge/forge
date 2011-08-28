@@ -12,4 +12,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_battle_gear.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/314.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/4.jpg
+Oracle:You may choose not to untap Ashnod's Battle Gear during your untap step.\n{2}, {T}: Target creature you control gets +2/-2 for as long as Ashnod's Battle Gear remains tapped.
 End

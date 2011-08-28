@@ -10,4 +10,5 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/casting_of_bones.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/2.jpg|2
+Oracle:Enchant creature\nWhen enchanted creature dies, draw three cards, then discard one of them.
 End

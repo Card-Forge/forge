@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarknit_kami.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/124.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, put a +1/+1 counter on target creature.
 End

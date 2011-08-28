@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_rain.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/44.jpg
+Oracle:Exile target land.
 End

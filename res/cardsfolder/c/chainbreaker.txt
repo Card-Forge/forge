@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainbreaker.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/249.jpg
+Oracle:Chainbreaker enters the battlefield with two -1/-1 counters on it.\n{3}, {T}: Remove a -1/-1 counter from target creature.
 End

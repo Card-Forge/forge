@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ G T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armorer_guildmage.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/156.jpg
+Oracle:{B}, {T}: Target creature gets +1/+0 until end of turn.\n{G}, {T}: Target creature gets +0/+1 until end of turn.
 End

@@ -12,4 +12,5 @@ SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/166.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/3.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/121.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/5.jpg
+Oracle:Vigilance
 End

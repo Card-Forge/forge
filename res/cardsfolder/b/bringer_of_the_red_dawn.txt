@@ -10,4 +10,5 @@ SVar:TrigChange:AB$GainControl | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_red_dawn.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/62.jpg
+Oracle:You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the Red Dawn's mana cost.\nTrample\nAt the beginning of your upkeep, you may untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
 End

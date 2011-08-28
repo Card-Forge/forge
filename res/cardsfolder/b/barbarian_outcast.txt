@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_outcast.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/92.jpg
+Oracle:When you control no Swamps, sacrifice Barbarian Outcast.
 End

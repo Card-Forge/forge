@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/controlled_instincts.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/23.jpg
+Oracle:Enchant red or green creature\nEnchanted creature doesn't untap during its controller's untap step.
 End

@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_manticor
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/217.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/201.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/139.jpg
+Oracle:Flying\n{R}, {T}: Crimson Manticore deals 1 damage to target attacking or blocking creature.
 End

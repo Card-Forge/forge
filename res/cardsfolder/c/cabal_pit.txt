@@ -8,4 +8,5 @@ SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_pit.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/315.jpg
+Oracle:{T}: Add {B} to your mana pool. Cabal Pit deals 1 damage to you.\nThreshold - {B}, {T}, Sacrifice Cabal Pit: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
 End

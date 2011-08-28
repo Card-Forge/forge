@@ -7,4 +7,5 @@ SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countersquall.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/103.jpg
+Oracle:Counter target noncreature spell. Its controller loses 2 life.
 End

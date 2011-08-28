@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Descr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alexis_cloak.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/29.jpg
+Oracle:Flash\nEnchant creature\nEnchanted creature has shroud. (It can't be the target of spells or abilities.)
 End

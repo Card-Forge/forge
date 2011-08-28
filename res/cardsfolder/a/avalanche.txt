@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/171.jpg
+Oracle:Destroy X target snow lands.
 End

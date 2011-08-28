@@ -8,4 +8,5 @@ K:Vigilance
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121196.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/1.jpg
+Oracle:Flying, vigilance\n{T}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.
 End

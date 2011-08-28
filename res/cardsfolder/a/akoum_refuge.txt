@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_refuge.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/210.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/264.jpg
+Oracle:Akoum Refuge enters the battlefield tapped.\nWhen Akoum Refuge enters the battlefield, you gain 1 life.\n{T}: Add {B} or {R} to your mana pool.
 End

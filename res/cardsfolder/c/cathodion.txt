@@ -8,4 +8,5 @@ SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$ 1 | Amount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathodion.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/149.jpg
+Oracle:When Cathodion dies, add {3} to your mana pool.
 End

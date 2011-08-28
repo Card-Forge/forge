@@ -8,4 +8,5 @@ SVar:X:Count$TypeOnBattlefield.Cleric
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_medic.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/9.jpg
+Oracle:{T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of Clerics on the battlefield.
 End

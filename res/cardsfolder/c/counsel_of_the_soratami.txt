@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83390.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/55.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/69.jpg
+Oracle:Draw two cards.
 End

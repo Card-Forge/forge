@@ -7,4 +7,5 @@ A:AB$ Tap | Cost$ PW T | Tgt$ TgtC | SpellDescription$ Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_souleater.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/131.jpg
+Oracle:{W/P}, {T}: Tap target creature. ({W/P} can be paid with either {W} or 2 life.)
 End

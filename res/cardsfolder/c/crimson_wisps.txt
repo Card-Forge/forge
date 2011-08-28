@@ -8,4 +8,5 @@ SVar:DBColor:DB$Animate | Colors$ Red | OverwriteColors$ True | Defined$ Targete
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_wisps.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/88.jpg
+Oracle:Target creature becomes red and gains haste until end of turn.\nDraw a card.
 End

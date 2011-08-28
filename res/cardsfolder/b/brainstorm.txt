@@ -10,4 +10,5 @@ SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/40.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/61.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/61.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/76.jpg
+Oracle:Draw three cards, then put two cards from your hand on top of your library in any order.
 End

@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ B T | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | TgtP
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ana_disciple.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/73.jpg
+Oracle:{U}, {T}: Target creature gains flying until end of turn.\n{B}, {T}: Target creature gets -2/-0 until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ps/en-us/card26383.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/20.jpg
+Oracle:Domain - Target player draws a card for each basic land type among lands he or she controls.
 End

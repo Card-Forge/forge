@@ -8,4 +8,5 @@ SVar:TrigGravestorm:AB$CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Am
 SVar:GravestormCount:Count$ThisTurnEntered Graveyard Permanent
 SVar:Rarity:Rare
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/80.jpg
+Oracle:Search target player's library for a card and exile it. Then that player shuffles his or her library.\nGravestorm (When you cast this spell, copy it for each permanent put into a graveyard this turn. You may choose new targets for the copies.)
 End

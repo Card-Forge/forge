@@ -8,4 +8,5 @@ SVar:X:Count$Valid Enchantment.YouDontCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_beebles.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/29.jpg
+Oracle:Bubbling Beebles is unblockable as long as defending player controls an enchantment.
 End

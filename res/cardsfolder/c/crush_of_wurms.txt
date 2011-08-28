@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ 9 G G G | TokenAmount$ 3 | TokenName$ Wurm | TokenColors$ Gr
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_of_wurms.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/110.jpg
+Oracle:Put three 6/6 green Wurm creature tokens onto the battlefield.\nFlashback {9}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

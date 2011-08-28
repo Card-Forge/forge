@@ -10,4 +10,5 @@ SVar:SacMe:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimney_imp.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/59.jpg
+Oracle:Flying\nWhen Chimney Imp dies, target opponent puts a card from his or her hand on top of his or her library.
 End

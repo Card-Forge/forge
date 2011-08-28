@@ -13,4 +13,5 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/198.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/170.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/139.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/139.jpg
+Oracle:Enchant creature\nEnchanted creature has mountainwalk.
 End

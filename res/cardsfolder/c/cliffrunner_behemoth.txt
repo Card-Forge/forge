@@ -11,4 +11,5 @@ SVar:BuffedBy:Creature.White,Creature.Red
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cliffrunner_behemoth.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/79.jpg
+Oracle:Cliffrunner Behemoth has haste as long as you control a red permanent.\nCliffrunner Behemoth has lifelink as long as you control a white permanent.
 End

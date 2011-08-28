@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apostles_blessing.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/2.jpg
+Oracle:({W/P} can be paid with either {W} or 2 life.)\nTarget artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
 End

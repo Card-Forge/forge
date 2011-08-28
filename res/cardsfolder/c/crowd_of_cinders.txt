@@ -10,4 +10,5 @@ SVar:BuffedBy:Permanent.Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crowd_of_cinders.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/63.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nCrowd of Cinders's power and toughness are each equal to the number of black permanents you control.
 End

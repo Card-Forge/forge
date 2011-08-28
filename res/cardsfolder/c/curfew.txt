@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curfew.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/68.jpg
+Oracle:Each player returns a creature he or she controls to its owner's hand.
 End

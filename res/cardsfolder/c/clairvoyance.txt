@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clairvoyance.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/63.jpg
+Oracle:Look at target player's hand.\nDraw a card at the beginning of the next turn's upkeep.
 End

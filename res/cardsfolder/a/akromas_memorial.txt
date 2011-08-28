@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_memorial.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/159.jpg
+Oracle:Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
 End

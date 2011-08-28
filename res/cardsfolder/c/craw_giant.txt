@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/craw_giant.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/147.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/76.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/94.jpg
+Oracle:Trample\nRampage 2 (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
 End

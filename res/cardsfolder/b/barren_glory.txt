@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_glory.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/3.jpg
+Oracle:At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
 End

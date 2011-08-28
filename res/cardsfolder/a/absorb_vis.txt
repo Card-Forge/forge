@@ -8,4 +8,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absorb_vis.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/40.jpg
+Oracle:Target player loses 4 life and you gain 4 life.\nBasic landcycling {1}{B} ({1}{B}, Discard this card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.)
 End

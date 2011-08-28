@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_of_energy.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/3.jpg
+Oracle:Untap target permanent.
 End

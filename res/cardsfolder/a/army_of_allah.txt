@@ -6,4 +6,5 @@ A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.attacking | NumAtt$ +2 | Spel
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/army_of_allah.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/56.jpg|2
+Oracle:Attacking creatures get +2/+0 until end of turn.
 End

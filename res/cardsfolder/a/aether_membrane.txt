@@ -11,4 +11,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_membrane.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/93.jpg
+Oracle:Defender; reach (This creature can block creatures with flying.)\nWhenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
 End

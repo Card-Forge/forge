@@ -12,4 +12,5 @@ SetInfo:S99|Rare|http://magiccards.info/scans/en/st/4.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/165.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/2.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/101.jpg
+Oracle:Flying, vigilance
 End

@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ tapXType<2/Wizard> | ValidTgts$ Creature | TgtPrompt$ Select 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crookclaw_elder.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/34.jpg
+Oracle:Flying\nTap two untapped Birds you control: Draw a card.\nTap two untapped Wizards you control: Target creature gains flying until end of turn.
 End

@@ -7,4 +7,5 @@ K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5862.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/235.jpg
+Oracle:Trample
 End

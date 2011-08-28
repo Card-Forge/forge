@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banishing_knack.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/17.jpg
+Oracle:Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
 End

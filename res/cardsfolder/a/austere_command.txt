@@ -7,4 +7,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/austere_command.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/8.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/3.jpg
+Oracle:Choose two - Destroy all artifacts; or destroy all enchantments; or destroy all creatures with converted mana cost 3 or less; or destroy all creatures with converted mana cost 4 or greater.
 End

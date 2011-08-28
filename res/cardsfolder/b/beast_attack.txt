@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ 2 G G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Cr
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_attack.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/230.jpg
+Oracle:Put a 4/4 green Beast creature token onto the battlefield.\nFlashback {2}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

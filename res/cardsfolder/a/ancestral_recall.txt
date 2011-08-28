@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/48.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/48.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/48.jpg
+Oracle:Target player draws three cards.
 End

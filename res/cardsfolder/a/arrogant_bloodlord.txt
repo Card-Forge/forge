@@ -10,4 +10,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrogant_bloodlord.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/94.jpg
+Oracle:Whenever Arrogant Bloodlord blocks or becomes blocked by a creature with power 1 or less, destroy Arrogant Bloodlord at end of combat.
 End

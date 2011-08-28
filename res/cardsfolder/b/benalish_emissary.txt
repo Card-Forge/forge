@@ -9,4 +9,5 @@ SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select targe
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_emissary.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/5.jpg
+Oracle:Kicker {1}{G} (You may pay an additional {1}{G} as you cast this spell.)\nWhen Benalish Emissary enters the battlefield, if it was kicked, destroy target land.
 End

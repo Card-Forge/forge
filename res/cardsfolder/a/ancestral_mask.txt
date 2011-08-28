@@ -11,4 +11,5 @@ SVar:BuffedBy:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_mask.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/229.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each other enchantment on the battlefield.
 End

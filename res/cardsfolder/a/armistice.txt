@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ Opponent | LifeAmount$ 3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armistice.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/3.jpg
+Oracle:{3}{W}{W}: You draw a card and target opponent gains 3 life.
 End

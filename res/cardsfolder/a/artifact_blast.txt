@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ R | TargetType$ Spell | ValidTgts$ Artifact | SpellDescrip
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_blast.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/87.jpg
+Oracle:Counter target artifact spell.
 End

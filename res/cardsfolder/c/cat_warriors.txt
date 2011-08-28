@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16450.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/144.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/219.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/91.jpg
+Oracle:Forestwalk
 End

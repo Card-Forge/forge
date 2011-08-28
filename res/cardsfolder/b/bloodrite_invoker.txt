@@ -8,4 +8,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrite_invoker.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/97.jpg
+Oracle:{8}: Target player loses 3 life and you gain 3 life.
 End

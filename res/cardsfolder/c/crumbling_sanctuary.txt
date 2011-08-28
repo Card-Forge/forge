@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_sanctuary.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/292.jpg
+Oracle:If damage would be dealt to a player, that player exiles that many cards from the top of his or her library instead.
 End

@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_reaper.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/87.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/86.jpg
+Oracle:Other Zombie creatures you control get +1/+1.\n{2}{B}, {T}: Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.
 End

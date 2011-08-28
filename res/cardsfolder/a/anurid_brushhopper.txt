@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anurid_brushhopper.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/137.jpg
+Oracle:Discard two cards: Exile Anurid Brushhopper. Return it to the battlefield under its owner's control at the beginning of the next end step.
 End

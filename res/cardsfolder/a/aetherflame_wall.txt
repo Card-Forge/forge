@@ -9,4 +9,5 @@ K:CARDNAME can block creatures with shadow as though they didn't have shadow.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherflame_wall.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/142.jpg
+Oracle:Defender\nAEtherflame Wall can block creatures with shadow as though they didn't have shadow.\n{R}: AEtherflame Wall gets +1/+0 until end of turn.
 End

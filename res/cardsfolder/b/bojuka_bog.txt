@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bojuka_bog.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/267.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/132.jpg
+Oracle:Bojuka Bog enters the battlefield tapped.\nWhen Bojuka Bog enters the battlefield, exile all cards from target player's graveyard.\n{T}: Add {B} to your mana pool.
 End

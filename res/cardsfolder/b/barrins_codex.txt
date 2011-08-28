@@ -9,4 +9,5 @@ SVar:X:Count$CardCounters.PAGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Barrins_Codex.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/286.jpg
+Oracle:At the beginning of your upkeep, you may put a page counter on Barrin's Codex.\n{4}, {T}, Sacrifice Barrin's Codex: Draw X cards, where X is the number of page counters on Barrin's Codex.
 End

@@ -7,4 +7,5 @@ SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2 | Conditi
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choking_sands.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/11.jpg
+Oracle:Destroy target non-Swamp land. If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.
 End

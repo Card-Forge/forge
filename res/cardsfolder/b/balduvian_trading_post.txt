@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_trading_post.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/182.jpg
+Oracle:If Balduvian Trading Post would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put Balduvian Trading Post onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {1}{R} to your mana pool.\n{1}, {T}: Balduvian Trading Post deals 1 damage to target attacking creature.
 End

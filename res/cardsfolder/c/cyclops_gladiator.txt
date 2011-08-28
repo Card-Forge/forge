@@ -11,4 +11,5 @@ SVar:TheirX:Targeted$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclops_gladiator.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/131.jpg
+Oracle:Whenever Cyclops Gladiator attacks, you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to Cyclops Gladiator.
 End

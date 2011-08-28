@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature.Blinkmoth | TgtPrompt$ Select targe
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card39439.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/163.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{1}: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.\n{1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.
 End

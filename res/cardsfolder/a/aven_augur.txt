@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 2 | ValidTg
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_augur.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/32.jpg
+Oracle:Flying\nSacrifice Aven Augur: Return up to two target creatures to their owners' hands. Activate this ability only during your upkeep.
 End

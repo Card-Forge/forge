@@ -8,4 +8,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_archon.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/129.jpg
+Oracle:{B}, Sacrifice a Cleric: Target player loses 2 life and you gain 2 life.
 End

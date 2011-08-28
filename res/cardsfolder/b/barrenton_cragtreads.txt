@@ -7,4 +7,5 @@ K:CantBeBlockedBy Creature.Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrenton_cragtreads.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/138.jpg
+Oracle:Barrenton Cragtreads can't be blocked by red creatures.
 End

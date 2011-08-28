@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_persuader.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/124.jpg
+Oracle:{1}, {T}: Search your library for a Mercenary permanent card with converted mana cost 1 or less and put it onto the battlefield. Then shuffle your library.
 End

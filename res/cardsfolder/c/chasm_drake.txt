@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Selec
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chasm_drake.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/48.jpg
+Oracle:Flying\nWhenever Chasm Drake attacks, target creature you control gains flying until end of turn.
 End

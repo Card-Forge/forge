@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_shaman.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/114.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/5.jpg
+Oracle:{T}, Sacrifice a Swamp: Target creature gets +1/+1 until end of turn.\n{T}, Sacrifice a creature: Target creature gets +2/+2 until end of turn.
 End

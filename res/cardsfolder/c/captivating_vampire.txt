@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captivating_vampire.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/87.jpg
+Oracle:Other Vampire creatures you control get +1/+1.\nTap five untapped Vampires you control: Gain control of target creature. It becomes a Vampire in addition to its other types.
 End

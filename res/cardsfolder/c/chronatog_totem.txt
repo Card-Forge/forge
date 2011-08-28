@@ -9,4 +9,5 @@ SVar:SkipTurn:DB$AddTurn | NumTurns$ 1 | Defined$ Opponent
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronatog_totem.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/252.jpg
+Oracle:{T}: Add {U} to your mana pool.\n{1}{U}: Chronatog Totem becomes a 1/2 blue Atog artifact creature until end of turn.\n{0}: Chronatog Totem gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if Chronatog Totem is a creature.
 End

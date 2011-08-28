@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_suns_zenith.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/20.jpg
+Oracle:Target player draws X cards. Shuffle Blue Sun's Zenith into its owner's library.
 End

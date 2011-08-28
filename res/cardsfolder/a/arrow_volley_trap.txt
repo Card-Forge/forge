@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrow_volley_trap.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/2.jpg
+Oracle:If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.\nArrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.
 End

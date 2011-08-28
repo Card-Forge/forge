@@ -8,4 +8,5 @@ A:AB$ Draw | Cost$ 2 U Sac<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_scout.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/74.jpg
+Oracle:Flying\n{2}{U}, Sacrifice a land: Draw a card.
 End

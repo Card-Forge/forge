@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chub_toad.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/145.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/117.jpg
+Oracle:Whenever Chub Toad blocks or becomes blocked, it gets +2/+2 until end of turn.
 End

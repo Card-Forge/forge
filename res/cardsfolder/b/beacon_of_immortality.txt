@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_immortality.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/6.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/10.jpg
+Oracle:Double target player's life total. Shuffle Beacon of Immortality into its owner's library.
 End

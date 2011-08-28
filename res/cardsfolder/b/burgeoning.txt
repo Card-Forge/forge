@@ -7,4 +7,5 @@ SVar:TrigDropLand:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefi
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burgeoning.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/52.jpg
+Oracle:Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield.
 End

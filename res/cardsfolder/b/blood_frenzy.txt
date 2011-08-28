@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 R | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat,Declare
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_frenzy.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/164.jpg
+Oracle:Cast Blood Frenzy only before the combat damage step.\nTarget attacking or blocking creature gets +4/+0 until end of turn. Destroy that creature at the beginning of the next end step.
 End

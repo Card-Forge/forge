@@ -7,4 +7,5 @@ K:CostChange:Player:Less:1:Spell:All:Kithkin/Soldier:OnlyOneBonus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballyrush_banneret.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/1.jpg
+Oracle:Kithkin spells and Soldier spells you cast cost {1} less to cast.
 End

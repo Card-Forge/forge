@@ -11,4 +11,5 @@ SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_crusher.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/95.jpg
+Oracle:Trample\nWhenever another artifact enters the battlefield, put a +1/+1 counter on Arcbound Crusher.\nModular 1 (This enters the battlefield with a +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
 End

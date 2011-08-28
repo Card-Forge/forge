@@ -8,4 +8,5 @@ K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87913.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/12.jpg
+Oracle:Flying, vigilance
 End

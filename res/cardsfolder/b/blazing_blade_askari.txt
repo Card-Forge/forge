@@ -8,4 +8,5 @@ A:AB$ Animate | Cost$ 2 | Defined$ Card.Self | Colors$ Colorless | SpellDescript
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_blade_askari.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/146.jpg
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{2}: Blazing Blade Askari becomes colorless until end of turn.
 End

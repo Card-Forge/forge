@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 1 U T | TgtPrompt$ Choose target artifact card in your 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_ruins.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/269.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{1}{U}, {T}: Put target artifact card from your graveyard on top of your library.
 End

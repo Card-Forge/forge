@@ -15,4 +15,5 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_hellkite.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/127.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/147.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Bogardan Hellkite enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or players.
 End

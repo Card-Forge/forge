@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_battlemage.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/5.jpg
+Oracle:{G}, {T}: Target creature gains trample until end of turn.\n{U}, {T}: Target creature gains flying until end of turn.
 End

@@ -6,4 +6,5 @@ PT:2/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_warhorse.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/7.jpg
+Oracle:
 End

@@ -8,4 +8,5 @@ A:AB$ Destroy | Cost$ 2 B Sac<1/CARDNAME> | ValidTgts$ Treefolk,Forest | TgtProm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_loggers.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/103.jpg
+Oracle:Forestwalk\n{2}{B}, Sacrifice Boggart Loggers: Destroy target Treefolk or Forest.
 End

@@ -7,4 +7,5 @@ K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/border_patrol.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/6.jpg
+Oracle:Vigilance
 End

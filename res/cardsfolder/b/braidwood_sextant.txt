@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Ha
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braidwood_sextant.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/127.jpg
+Oracle:{2}, {T}, Sacrifice Braidwood Sextant: Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
 End

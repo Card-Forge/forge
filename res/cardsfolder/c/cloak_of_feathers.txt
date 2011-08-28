@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_feathers.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/45.jpg
+Oracle:Target creature gains flying until end of turn.\nDraw a card.
 End

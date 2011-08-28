@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_illusionist.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/28.jpg
+Oracle:Whenever Cephalid Illusionist becomes the target of a spell or ability, put the top three cards of your library into your graveyard.\n{2}{U}, {T}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
 End

@@ -8,4 +8,5 @@ K:Modular 4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_lancer.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/98.jpg
+Oracle:First strike\nModular 4 (This enters the battlefield with four +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
 End

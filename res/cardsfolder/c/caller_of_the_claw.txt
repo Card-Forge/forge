@@ -10,4 +10,5 @@ SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature.nonToken+YouCtr
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card42187.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/121.jpg
+Oracle:Flash\nWhen Caller of the Claw enters the battlefield, put a 2/2 green Bear creature token onto the battlefield for each nontoken creature put into your graveyard from the battlefield this turn.
 End

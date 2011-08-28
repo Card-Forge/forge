@@ -8,4 +8,5 @@ K:Infect
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blightwidow.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/77.jpg
+Oracle:Reach (This creature can block creatures with flying.)\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 End

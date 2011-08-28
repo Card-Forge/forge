@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cantivore.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/13.jpg
+Oracle:Vigilance\nCantivore's power and toughness are each equal to the number of enchantment cards in all graveyards.
 End

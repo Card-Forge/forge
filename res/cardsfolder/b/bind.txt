@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bind.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/182.jpg
+Oracle:Counter target activated ability. (Mana abilities can't be targeted.)\nDraw a card.
 End

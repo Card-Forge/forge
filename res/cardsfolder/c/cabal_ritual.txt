@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_ritual.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/51.jpg
+Oracle:Add {B}{B}{B} to your mana pool.\nThreshold - Add {B}{B}{B}{B}{B} to your mana pool instead if seven or more cards are in your graveyard.
 End

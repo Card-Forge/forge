@@ -15,4 +15,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/236.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/239.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/322.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/235.jpg
+Oracle:{2}, {T}: Add one mana of any color to your mana pool.
 End

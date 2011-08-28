@@ -6,4 +6,5 @@ A:AB$ Pump | Cost$ 1 T | NumAtt$ +1 | NumDef$ +2 | ValidTgts$ Creature.powerEQ1+
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aegis_of_the_meek.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/282.jpg
+Oracle:{1}, {T}: Target 1/1 creature gets +1/+2 until end of turn.
 End

@@ -9,4 +9,5 @@ A:AB$Regenerate | ValidTgts$ Creature.Vampire+Other | TgtPrompt$ Select another 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baron_sengir.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/1.jpg
+Oracle:Flying\nWhenever a creature dealt damage by Baron Sengir this turn dies, put a +2/+2 counter on Baron Sengir.\n{T}: Regenerate another target Vampire.
 End

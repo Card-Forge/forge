@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target cr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_mage.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/129.jpg
+Oracle:{R}: Target creature you control gains haste until end of turn. (It can attack and {T} this turn.)
 End

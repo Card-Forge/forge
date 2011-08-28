@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_of_speed.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/129.jpg
+Oracle:Creatures you control gain haste until end of turn. (They can attack and {T} even if they just came under your control.)
 End

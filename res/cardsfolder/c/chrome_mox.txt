@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chrome_mox.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/152.jpg
+Oracle:Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.\n{T}: Add one mana of any of the exiled card's colors to your mana pool.
 End

@@ -25,4 +25,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/217.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/165.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/95.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/95.jpg
+Oracle:Flying\n{T}: Add one mana of any color to your mana pool.
 End

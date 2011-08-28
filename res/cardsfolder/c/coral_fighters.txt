@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_fighters.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/59.jpg
+Oracle:Whenever Coral Fighters attacks and isn't blocked, look at the top card of defending player's library. You may put that card on the bottom of that player's library.
 End

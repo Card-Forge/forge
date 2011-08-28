@@ -7,4 +7,5 @@ SVar:AltCost:Cost$ Sac<1/Mountain>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crash.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/186.jpg
+Oracle:You may sacrifice a Mountain rather than pay Crash's mana cost.\nDestroy target artifact.
 End

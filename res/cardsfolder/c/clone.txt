@@ -14,4 +14,5 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/45.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/51.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/75.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/52.jpg
+Oracle:You may have Clone enter the battlefield as a copy of any creature on the battlefield.
 End

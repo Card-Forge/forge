@@ -7,4 +7,5 @@ K:Recover:2 U U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/controvert.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/30.jpg
+Oracle:Counter target spell.\nRecover {2}{U}{U} (When a creature is put into your graveyard from the battlefield, you may pay {2}{U}{U}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)
 End

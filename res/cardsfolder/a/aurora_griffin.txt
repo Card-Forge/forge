@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurora_griffin.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/2.jpg
+Oracle:Flying\n{W}: Target permanent becomes white until end of turn.
 End

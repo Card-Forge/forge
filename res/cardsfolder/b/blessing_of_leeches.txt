@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_leeches.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/62.jpg
+Oracle:Flash\nEnchant creature\nAt the beginning of your upkeep, you lose 1 life.\n{0}: Regenerate enchanted creature.
 End

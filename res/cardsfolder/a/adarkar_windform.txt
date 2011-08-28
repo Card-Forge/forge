@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_windform.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/26.jpg
+Oracle:Flying\n{1}{S}: Target creature loses flying until end of turn. ({S} can be paid with one mana from a snow permanent.)
 End

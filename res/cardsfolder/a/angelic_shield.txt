@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_shield.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/228.jpg
+Oracle:Creatures you control get +0/+1.\nSacrifice Angelic Shield: Return target creature to its owner's hand.
 End

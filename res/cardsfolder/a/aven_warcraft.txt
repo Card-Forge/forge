@@ -7,4 +7,5 @@ SVar:ChooseColor:DB$ ProtectionAll | Condition$ Threshold | ValidCards$ Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_warcraft.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/2.jpg
+Oracle:Creatures you control get +0/+2 until end of turn.\nThreshold - If seven or more cards are in your graveyard, choose a color. Creatures you control also gain protection from the chosen color until end of turn.
 End

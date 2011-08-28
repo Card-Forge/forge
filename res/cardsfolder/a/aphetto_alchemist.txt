@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_alchemist.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/64.jpg
+Oracle:{T}: Untap target artifact or creature.\nMorph {U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

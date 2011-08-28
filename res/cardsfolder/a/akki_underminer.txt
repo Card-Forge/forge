@@ -8,4 +8,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Permanent
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_underminer.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/155.jpg
+Oracle:Whenever Akki Underminer deals combat damage to a player, that player sacrifices a permanent.
 End

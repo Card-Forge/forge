@@ -12,4 +12,5 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/53.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/52.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/64.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/53.jpg
+Oracle:Enchant creature\nYou control enchanted creature.
 End

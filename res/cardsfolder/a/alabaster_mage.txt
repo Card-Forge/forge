@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_mage.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/2.jpg
+Oracle:{1}{W}: Target creature you control gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
 End

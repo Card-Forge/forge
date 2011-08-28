@@ -10,4 +10,5 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/57.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/52.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/41.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/59.jpg
+Oracle:Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
 End

@@ -11,4 +11,5 @@ SVar:X:Count$OppLifeTotal
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/83.jpg
+Oracle:Bloodghast can't block.\nBloodghast has haste as long as an opponent has 10 or less life.\nLandfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
 End

@@ -8,4 +8,5 @@ A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ 4 | PlayerTurn$ True | Acti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/augur_il_vec.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/2.jpg
+Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nSacrifice Augur il-Vec: You gain 4 life. Activate this ability only during your upkeep.
 End

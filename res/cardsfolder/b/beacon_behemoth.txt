@@ -7,5 +7,5 @@ A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target c
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_behemoth.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/78.jpg
+Oracle:{1}: Target creature with power 5 or greater gains vigilance until end of turn.
 End
-

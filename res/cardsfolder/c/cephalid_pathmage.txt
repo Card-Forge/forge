@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_pathmage.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/31.jpg
+Oracle:Cephalid Pathmage is unblockable.\n{T}, Sacrifice Cephalid Pathmage: Target creature is unblockable this turn.
 End

@@ -7,4 +7,5 @@ SVar:DB:DB$LoseLife | LifeAmount$ 3
 SVar:Rarity:Rare
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/ancient_craving.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/2.jpg
+Oracle:You draw three cards and you lose 3 life.
 End

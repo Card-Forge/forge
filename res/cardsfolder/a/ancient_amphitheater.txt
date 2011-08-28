@@ -7,4 +7,5 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_amphitheater.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/266.jpg
+Oracle:As Ancient Amphitheater enters the battlefield, you may reveal a Giant card from your hand. If you don't, Ancient Amphitheater enters the battlefield tapped.\n{T}: Add {R} or {W} to your mana pool.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinderhaze_wretch.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/60.jpg
+Oracle:{T}: Target player discards a card. Activate this ability only during your turn.\nPut a -1/-1 counter on Cinderhaze Wretch: Untap Cinderhaze Wretch.
 End

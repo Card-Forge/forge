@@ -12,4 +12,5 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/44.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/47.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/71.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/51.jpg
+Oracle:Counter target spell.
 End

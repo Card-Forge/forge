@@ -14,4 +14,5 @@ SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/1.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/2.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/128.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/2.jpg
+Oracle:Flying\nWhen Angel of Mercy enters the battlefield, you gain 3 life.
 End

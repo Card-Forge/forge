@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animal_boneyard.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/4.jpg
+Oracle:Enchant land\nEnchanted land has "{T}, Sacrifice a creature: You gain life equal to that creature's toughness."
 End

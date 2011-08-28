@@ -7,4 +7,5 @@ K:CostChange:Player:Less:2:Spell:All:Creature:CardIsTapped
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_omenreader.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/143.jpg
+Oracle:As long as Centaur Omenreader is tapped, creature spells you cast cost {2} less to cast.
 End

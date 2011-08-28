@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/borrowing_the_east_wind.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/133.jpg
+Oracle:Borrowing the East Wind deals X damage to each creature with horsemanship and each player.
 End

@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ R R R T | ValidTgts$ Creature.Artifact | TgtPrompt$ Select
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandler.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/88.jpg
+Oracle:{R}{R}{R}, {T}: Destroy target artifact creature.
 End

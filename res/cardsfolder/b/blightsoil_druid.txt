@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blightsoil_druid.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/59.jpg
+Oracle:{T}, Pay 1 life: Add {G} to your mana pool.
 End

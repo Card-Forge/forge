@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_traitors.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/143.jpg
+Oracle:When you play another land, sacrifice City of Traitors.\n{T}: Add {2} to your mana pool.
 End

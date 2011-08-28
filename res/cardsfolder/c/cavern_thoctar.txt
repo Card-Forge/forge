@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 unti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_thoctar.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/125.jpg
+Oracle:{1}{R}: Cavern Thoctar gets +1/+0 until end of turn.
 End

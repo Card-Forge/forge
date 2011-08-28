@@ -10,4 +10,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84072.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/79.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/173.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/173.jpg
+Oracle:When Anarchist enters the battlefield, you may return target sorcery card from your graveyard to your hand.
 End

@@ -10,4 +10,5 @@ SVar:BuffedBy:Creature.White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_cohort.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/3.jpg
+Oracle:First strike\nBallynock Cohort gets +1/+1 as long as you control another white creature.
 End

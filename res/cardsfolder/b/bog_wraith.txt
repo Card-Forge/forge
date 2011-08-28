@@ -20,4 +20,5 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/4.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/9.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/67.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/4.jpg
+Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
 End

@@ -8,4 +8,5 @@ K:At the beginning of the end step, sacrifice CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_runner.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/123.jpg
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nAt the beginning of the end step, sacrifice Arc Runner.
 End

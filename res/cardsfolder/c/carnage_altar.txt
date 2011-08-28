@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carnage_altar.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/198.jpg
+Oracle:{3}, Sacrifice a creature: Draw a card.
 End

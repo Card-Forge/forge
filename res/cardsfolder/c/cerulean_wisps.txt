@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_wisps.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/31.jpg
+Oracle:Target creature becomes blue until end of turn. Untap that creature.\nDraw a card.
 End

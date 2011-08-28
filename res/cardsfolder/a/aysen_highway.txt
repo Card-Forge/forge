@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_highway.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/107.jpg
+Oracle:White creatures have plainswalk.
 End

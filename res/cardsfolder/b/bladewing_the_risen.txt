@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladewing_the_risen.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/136.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/185.jpg
+Oracle:Flying\nWhen Bladewing the Risen enters the battlefield, you may return target Dragon permanent card from your graveyard to the battlefield.\n{B}{R}: Dragon creatures get +1/+1 until end of turn.
 End

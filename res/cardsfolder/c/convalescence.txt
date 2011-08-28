@@ -7,4 +7,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convalescence.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/5.jpg
+Oracle:At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.
 End

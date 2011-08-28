@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.YouDontCtrl | TgtPro
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_wasps.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/234.jpg
+Oracle:Flying\nWhenever Caustic Wasps deals combat damage to a player, you may destroy target artifact that player controls.
 End

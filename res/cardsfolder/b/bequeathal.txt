@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bequeathal.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/106.jpg
+Oracle:Enchant creature\nWhen enchanted creature dies, you draw two cards.
 End

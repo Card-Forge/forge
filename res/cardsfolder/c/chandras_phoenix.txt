@@ -12,4 +12,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | De
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_phoenix.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/126.jpg
+Oracle:Flying\nHaste (This creature can attack and {T} as soon as it comes under your control.)\nWhenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.
 End

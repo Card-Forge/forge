@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_chancery.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/265.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/170.jpg
+Oracle:Azorius Chancery enters the battlefield tapped.\nWhen Azorius Chancery enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {W}{U} to your mana pool.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_squire.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/101.jpg
+Oracle:{T}: Attach target Equipment you control to target creature you control.
 End

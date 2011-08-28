@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefiel
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charmed_griffin.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/7.jpg
+Oracle:Flying\nWhen Charmed Griffin enters the battlefield, each other player may put an artifact or enchantment card onto the battlefield from his or her hand.
 End

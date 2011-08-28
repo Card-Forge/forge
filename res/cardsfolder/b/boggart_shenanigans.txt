@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_shenanigans.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/155.jpg
+Oracle:Whenever another Goblin you control dies, you may have Boggart Shenanigans deal 1 damage to target player.
 End

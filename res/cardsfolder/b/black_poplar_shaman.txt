@@ -7,4 +7,5 @@ A:AB$ Regenerate | ValidTgts$ Creature.Treefolk | TgtPrompt$ Select target Treef
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_poplar_shaman.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/99.jpg
+Oracle:{2}{B}: Regenerate target Treefolk.
 End

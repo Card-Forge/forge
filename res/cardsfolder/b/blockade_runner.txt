@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U | KW$ Unblockable | SpellDescription$ CARDNAME is unblockab
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blockade_runner.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/60.jpg
+Oracle:{U}: Blockade Runner is unblockable this turn.
 End

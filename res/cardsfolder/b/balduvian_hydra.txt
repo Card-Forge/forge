@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_hydra.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/173.jpg
+Oracle:Balduvian Hydra enters the battlefield with X +1/+0 counters on it.\nRemove a +1/+0 counter from Balduvian Hydra: Prevent the next 1 damage that would be dealt to Balduvian Hydra this turn.\n{R}{R}{R}: Put a +1/+0 counter on Balduvian Hydra. Activate this ability only during your upkeep.
 End

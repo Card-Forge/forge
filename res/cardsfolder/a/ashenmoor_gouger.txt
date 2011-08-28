@@ -7,4 +7,5 @@ K:CARDNAME can't block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashenmoor_gouger.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/180.jpg
+Oracle:Ashenmoor Gouger can't block.
 End

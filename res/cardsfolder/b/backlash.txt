@@ -8,4 +8,5 @@ SVar:X:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backlash.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/234.jpg
+Oracle:Tap target untapped creature. That creature deals damage equal to its power to its controller.
 End

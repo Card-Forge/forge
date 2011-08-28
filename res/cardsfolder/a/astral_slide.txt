@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_slide.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/4.jpg
+Oracle:Whenever a player cycles a card, you may exile target creature. If you do, return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
 End

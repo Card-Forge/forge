@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKe
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_centaur.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/235.jpg
+Oracle:{G}, Discard a card: Crashing Centaur gains trample until end of turn.\nThreshold - As long as seven or more cards are in your graveyard, Crashing Centaur gets +2/+2 and has shroud. (It can't be the target of spells or abilities.)
 End

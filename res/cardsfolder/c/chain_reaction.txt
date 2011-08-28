@@ -8,4 +8,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_reaction.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/113.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/74.jpg
+Oracle:Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
 End

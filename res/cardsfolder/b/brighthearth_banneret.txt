@@ -8,4 +8,5 @@ A:AB$ PutCounter | Cost$ 1 R Discard<1/CARDNAME> | ValidTgts$ Creature | TgtProm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brighthearth_banneret.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/88.jpg
+Oracle:Elemental spells and Warrior spells you cast cost {1} less to cast.\nReinforce 1-{1}{R} ({1}{R}, Discard this card: Put a +1/+1 counter on target creature.)
 End

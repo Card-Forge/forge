@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_harvest.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/6.jpg
+Oracle:Put any number of target creature cards from your graveyard on top of your library.\nDraw a card at the beginning of the next turn's upkeep.
 End

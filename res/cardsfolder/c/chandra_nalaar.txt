@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140176.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/127.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/132.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/159.jpg
+Oracle:[+1] Chandra Nalaar deals 1 damage to target player.\n-X: Chandra Nalaar deals X damage to target creature.\n[-8] Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
 End

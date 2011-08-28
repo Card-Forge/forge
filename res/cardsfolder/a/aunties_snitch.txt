@@ -10,4 +10,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aunties_snitch.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/57.jpg
+Oracle:Auntie's Snitch can't block.\nProwl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)\nWhenever a Goblin or Rogue you control deals combat damage to a player, if Auntie's Snitch is in your graveyard, you may return Auntie's Snitch to your hand.
 End

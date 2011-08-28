@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlef
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_rootcaster.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/109.jpg
+Oracle:Whenever Centaur Rootcaster deals combat damage to a player, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.
 End

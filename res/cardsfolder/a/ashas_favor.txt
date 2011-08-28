@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying & First
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashas_favor.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/2.jpg
+Oracle:Enchant creature\nEnchanted creature has flying, first strike, and vigilance.
 End

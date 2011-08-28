@@ -9,4 +9,5 @@ SVar:DBExile:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Ex
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_giant.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/100.jpg
+Oracle:When Cyclopean Giant dies, target land becomes a Swamp. Exile Cyclopean Giant.
 End

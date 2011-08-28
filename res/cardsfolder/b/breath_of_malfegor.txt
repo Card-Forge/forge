@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 3 B R | Defined$ Opponent | NumDmg$ 5 | SpellDescriptio
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breath_of_malfegor.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/35.jpg
+Oracle:Breath of Malfegor deals 5 damage to each opponent.
 End

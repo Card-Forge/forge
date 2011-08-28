@@ -14,4 +14,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122432.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/108.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/94.jpg
+Oracle:Akroma, Angel of Fury can't be countered.\nFlying, trample, protection from white and from blue\n{R}: Akroma, Angel of Fury gets +1/+0 until end of turn.\nMorph {3}{R}{R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
 End

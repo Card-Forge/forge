@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_vassal.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/118.jpg
+Oracle:Sacrifice Blood Vassal: Add {B}{B} to your mana pool.
 End

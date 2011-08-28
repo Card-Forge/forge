@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrin_master_wizard.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/63.jpg
+Oracle:{2}, Sacrifice a permanent: Return target creature to its owner's hand.
 End

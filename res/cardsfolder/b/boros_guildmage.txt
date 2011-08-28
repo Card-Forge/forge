@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_guildmage.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/242.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/186.jpg
+Oracle:{1}{R}: Target creature gains haste until end of turn.\n{1}{W}: Target creature gains first strike until end of turn.
 End

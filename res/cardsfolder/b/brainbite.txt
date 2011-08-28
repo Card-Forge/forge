@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brainbite.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/18.jpg
+Oracle:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.\nDraw a card.
 End

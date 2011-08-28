@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaverous_bloom.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/318.jpg
+Oracle:Exile a card from your hand: Add {B}{B} or {G}{G} to your mana pool.
 End

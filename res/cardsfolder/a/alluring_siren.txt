@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/alluring_siren.j
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/43.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/43.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/42.jpg
+Oracle:{T}: Target creature an opponent controls attacks you this turn if able.
 End

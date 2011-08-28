@@ -10,4 +10,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brawn.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/145.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/107.jpg
+Oracle:Trample\nAs long as Brawn is in your graveyard and you control a Forest, creatures you control have trample.
 End

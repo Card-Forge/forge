@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_rager.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/148.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Bogardan Rager enters the battlefield, target creature gets +4/+0 until end of turn.
 End

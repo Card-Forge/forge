@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/customs_depot.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/71.jpg
+Oracle:Whenever you cast a creature spell, you may pay {1}. If you do, draw a card, then discard a card.
 End

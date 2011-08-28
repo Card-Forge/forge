@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/char_rumbler.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/96.jpg
+Oracle:Double strike\n{R}: Char-Rumbler gets +1/+0 until end of turn.
 End

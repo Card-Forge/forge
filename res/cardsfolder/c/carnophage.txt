@@ -6,4 +6,5 @@ PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carnophage.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/53.jpg
+Oracle:At the beginning of your upkeep, tap Carnophage unless you pay 1 life.
 End

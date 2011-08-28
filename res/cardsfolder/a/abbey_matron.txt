@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abbey_matron.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/102.jpg|2
+Oracle:{W}, {T}: Abbey Matron gets +0/+3 until end of turn.
 End

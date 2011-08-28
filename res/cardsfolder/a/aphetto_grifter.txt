@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_grifter.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/65.jpg
+Oracle:Tap two untapped Wizards you control: Tap target permanent.
 End

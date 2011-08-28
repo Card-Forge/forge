@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/calciform_pools.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/270.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Put a storage counter on Calciform Pools.\n{1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U} to your mana pool.
 End

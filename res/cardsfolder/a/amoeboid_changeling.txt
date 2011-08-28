@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amoeboid_changeling.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/51.jpg
+Oracle:Changeling (This card is every creature type at all times.)\n{T}: Target creature gains all creature types until end of turn.\n{T}: Target creature loses all creature types until end of turn.
 End

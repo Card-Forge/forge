@@ -8,4 +8,5 @@ K:Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_squire.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/3.jpg
+Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
 End

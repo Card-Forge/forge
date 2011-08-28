@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursecatcher.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/34.jpg
+Oracle:Sacrifice Cursecatcher: Counter target instant or sorcery spell unless its controller pays {1}.
 End

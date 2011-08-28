@@ -9,4 +9,5 @@ SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sureblade.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/143.jpg
+Oracle:As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.
 End

@@ -7,4 +7,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_blast.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/1.jpg
+Oracle:Destroy target enchantment.\nDraw a card.
 End

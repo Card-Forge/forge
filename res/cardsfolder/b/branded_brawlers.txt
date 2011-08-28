@@ -10,4 +10,5 @@ SVar:Y:Count$Valid Land.YouCtrl+untapped
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branded_brawlers.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/84.jpg
+Oracle:Branded Brawlers can't attack if defending player controls an untapped land.\nBranded Brawlers can't block if you control an untapped land.
 End

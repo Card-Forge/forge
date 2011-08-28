@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crazed_armodon.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/114.jpg
+Oracle:{G}: Crazed Armodon gets +3/+0 and gains trample until end of turn. Destroy Crazed Armodon at the beginning of the next end step. Activate this ability only once each turn.
 End

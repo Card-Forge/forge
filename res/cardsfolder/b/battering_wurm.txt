@@ -8,4 +8,5 @@ K:Creatures with power less than CARDNAME's power can't block it.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_wurm.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/79.jpg
+Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)\nCreatures with power less than Battering Wurm's power can't block it.
 End

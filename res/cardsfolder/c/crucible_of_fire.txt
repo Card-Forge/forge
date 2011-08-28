@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crucible_of_fire.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/96.jpg
+Oracle:Dragon creatures you control get +3/+3.
 End

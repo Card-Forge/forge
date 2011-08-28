@@ -10,4 +10,5 @@ Svar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_seer.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/23.jpg
+Oracle:When Crystal Seer enters the battlefield, look at the top four cards of your library, then put them back in any order.\n{4}{U}: Return Crystal Seer to its owner's hand.
 End

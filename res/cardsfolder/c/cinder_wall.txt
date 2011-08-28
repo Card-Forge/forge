@@ -12,4 +12,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_wall.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/182.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/94.jpg
+Oracle:Defender (This creature can't attack.)\nWhen Cinder Wall blocks, destroy it at end of combat.
 End

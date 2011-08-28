@@ -13,4 +13,5 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/311.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/201.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/206.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/202.jpg
+Oracle:Whenever a player casts a white spell, you may gain 1 life.
 End

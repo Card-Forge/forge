@@ -12,4 +12,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_tablet.jp
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/238.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/240.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/239.jpg
+Oracle:At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
 End

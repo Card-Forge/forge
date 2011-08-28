@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_frostwaker.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/28.jpg
+Oracle:{U}, {T}: Target snow land becomes a 2/2 blue Elemental creature with flying. It's still a land.
 End

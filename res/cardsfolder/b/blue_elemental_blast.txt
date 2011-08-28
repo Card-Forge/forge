@@ -12,4 +12,5 @@ SetInfo:LEB|Common|http://magiccards.info/scans/en/be/50.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/49.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/63.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/50.jpg
+Oracle:Choose one - Counter target red spell; or destroy target red permanent.
 End

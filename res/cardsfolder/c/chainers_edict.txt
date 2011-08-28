@@ -7,4 +7,5 @@ A:SP$ Sacrifice | Cost$ 5 B B | ValidTgts$ Player | SacValid$ Creature | SacMess
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainers_edict.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/57.jpg
+Oracle:Target player sacrifices a creature.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

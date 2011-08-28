@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cumber_stone.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/24.jpg
+Oracle:Creatures your opponents control get -1/-0.
 End

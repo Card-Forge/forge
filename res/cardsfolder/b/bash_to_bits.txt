@@ -7,4 +7,5 @@ A:SP$ Destroy | Cost$ 4 R R | ValidTgts$ Artifact | TgtPrompt$ Select target art
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bash_to_bits.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/176.jpg
+Oracle:Destroy target artifact.\nFlashback {4}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

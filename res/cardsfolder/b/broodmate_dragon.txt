@@ -9,4 +9,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTy
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodmate_dragon.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/160.jpg
+Oracle:Flying\nWhen Broodmate Dragon enters the battlefield, put a 4/4 red Dragon creature token with flying onto the battlefield.
 End

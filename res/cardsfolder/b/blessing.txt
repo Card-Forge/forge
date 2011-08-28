@@ -12,4 +12,5 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/192.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/190.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/259.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/191.jpg
+Oracle:Enchant creature\n{W}: Enchanted creature gets +1/+1 until end of turn.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasting_station.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/107.jpg
+Oracle:{T}, Sacrifice a creature: Blasting Station deals 1 damage to target creature or player.\nWhenever a creature enters the battlefield, you may untap Blasting Station.
 End
