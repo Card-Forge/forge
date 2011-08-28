@@ -94,6 +94,7 @@ public enum Counters {
     TRAINING(),
     TRAP(),
     TREASURE(),
+    VELOCITY(),
     VERSE(),
     VITALITY(),
     WIND(),
