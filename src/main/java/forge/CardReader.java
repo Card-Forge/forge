@@ -20,7 +20,6 @@ import net.slightlymagic.braids.util.UtilFunctions;
 import net.slightlymagic.braids.util.generator.FindNonDirectoriesSkipDotDirectoriesGenerator;
 import net.slightlymagic.braids.util.generator.GeneratorFunctions;
 import forge.view.util.ProgressBar_Base;
-import net.slightlymagic.braids.util.progress_monitor.StderrProgressMonitor;
 
 import com.google.code.jyield.Generator;
 import com.google.code.jyield.YieldUtils;
