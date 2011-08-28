@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magetas_boon.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/14.jpg
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +1/+2.
 End

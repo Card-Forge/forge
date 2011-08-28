@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_of_souls_betrayal.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/133.jpg
+Oracle:All creatures get -1/-1.
 End

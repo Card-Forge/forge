@@ -8,4 +8,5 @@ A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_battlemage.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/142.jpg
+Oracle:{R}, {T}: Target creature gets +2/+0 until end of turn.\n{W}, {T}: Tap target creature.
 End

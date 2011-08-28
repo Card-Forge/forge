@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merieke_ri_berit.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/95.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/375.jpg
+Oracle:Merieke Ri Berit doesn't untap during your untap step.\n{T}: Gain control of target creature for as long as you control Merieke Ri Berit. When Merieke Ri Berit leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
 End

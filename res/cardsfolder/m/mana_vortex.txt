@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vortex.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/30.jpg
+Oracle:When you cast Mana Vortex, counter it unless you sacrifice a land.\nAt the beginning of each player's upkeep, that player sacrifices a land.\nWhen there are no lands on the battlefield, sacrifice Mana Vortex.
 End

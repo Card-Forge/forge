@@ -12,4 +12,5 @@ SVar:NeedsToPlay:Demon.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_the_oni.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/73.jpg
+Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
 End

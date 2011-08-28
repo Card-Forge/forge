@@ -9,4 +9,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/madrush_cyclops.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/119.jpg
+Oracle:Creatures you control have haste.
 End

@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_leech.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/141.jpg
+Oracle:You may choose not to untap Mana Leech during your untap step.\n{T}: Tap target land. It doesn't untap during its controller's untap step for as long as Mana Leech remains tapped.
 End

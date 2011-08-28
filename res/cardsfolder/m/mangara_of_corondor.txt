@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangara_of_corondor.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/28.jpg
+Oracle:{T}: Exile Mangara of Corondor and target permanent.
 End

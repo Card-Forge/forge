@@ -10,4 +10,5 @@ SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | Chan
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_connoisseur.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/118.jpg
+Oracle:Whenever you cast a green creature spell, you may search your library for a creature card and reveal it. If you do, shuffle your library and put that card on top of it.\nWhenever you cast a blue creature spell, reveal the top card of your library. If it's a creature card, put that card into your hand.
 End

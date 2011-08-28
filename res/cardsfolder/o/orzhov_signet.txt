@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_signet.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/155.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/255.jpg
+Oracle:{1}, {T}: Add {W}{B} to your mana pool.
 End

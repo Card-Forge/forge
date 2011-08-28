@@ -8,4 +8,5 @@ SVar:Discard:AB$Discard | Cost$ 2 Sac<1/CARDNAME> | Tgt$ TgtP | NumCards$ 1 | Mo
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindwhip_sliver.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/39.jpg
+Oracle:All Slivers have "{2}, Sacrifice this permanent: Target player discards a card at random. Activate this ability only any time you could cast a sorcery."
 End

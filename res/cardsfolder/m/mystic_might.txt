@@ -9,4 +9,5 @@ SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_might.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/86.jpg
+Oracle:Enchant land you control\nCumulative upkeep {1}{U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nEnchanted land has "{T}: Target creature gets +2/+2 until end of turn."
 End

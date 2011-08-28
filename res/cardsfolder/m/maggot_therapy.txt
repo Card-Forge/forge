@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maggot_therapy.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/145.jpg
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +2/-2.
 End

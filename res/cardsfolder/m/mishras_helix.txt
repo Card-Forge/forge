@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_helix.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/302.jpg
+Oracle:{X}, {T}: Tap X target lands.
 End

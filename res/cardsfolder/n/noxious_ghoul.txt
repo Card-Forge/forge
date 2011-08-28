@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_ghoul.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/77.jpg
+Oracle:Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
 End

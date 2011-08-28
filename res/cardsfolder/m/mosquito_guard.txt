@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mosquito_guard.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/18.jpg
+Oracle:First strike\nReinforce 1-{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)
 End

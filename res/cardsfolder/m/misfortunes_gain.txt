@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ TargetedOwner | LifeAmount$ 4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misfortunes_gain.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/13.jpg
+Oracle:Destroy target creature. Its owner gains 4 life.
 End

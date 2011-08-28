@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metal_fatigue.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/8.jpg
+Oracle:Tap all artifacts.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_void.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/27.jpg
+Oracle:Whenever a player casts a spell, counter it unless its controller pays {3}.
 End

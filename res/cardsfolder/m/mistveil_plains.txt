@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ W T | IsPresent$ Permanent.White+YouCtrl | PresentCompa
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistveil_plains.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/275.jpg
+Oracle:({T}: Add {W} to your mana pool.)\nMistveil Plains enters the battlefield tapped.\n{W}, {T}: Put target card from your graveyard on the bottom of your library. Activate this ability only if you control two or more white permanents.
 End

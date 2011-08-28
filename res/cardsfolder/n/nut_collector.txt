@@ -9,4 +9,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Squirrel | Token
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nut_collector.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/259.jpg
+Oracle:At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.\nThreshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
 End

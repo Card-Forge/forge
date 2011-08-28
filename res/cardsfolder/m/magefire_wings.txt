@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddKeyword$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magefire_wings.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/88.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has flying.
 End

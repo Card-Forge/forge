@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Threshold$ True 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_visionary.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/35.jpg
+Oracle:Threshold - Mystic Visionary has flying as long as seven or more cards are in your graveyard.
 End

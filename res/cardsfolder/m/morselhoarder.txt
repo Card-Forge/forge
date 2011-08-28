@@ -12,4 +12,5 @@ A:AB$ Mana | Cost$ SubCounter<1/M1M1> | Produced$ B | SpellDescription$ Add B to
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morselhoarder.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/212.jpg
+Oracle:Morselhoarder enters the battlefield with two -1/-1 counters on it.\nRemove a -1/-1 counter from Morselhoarder: Add one mana of any color to your mana pool.
 End

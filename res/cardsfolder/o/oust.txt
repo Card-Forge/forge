@@ -8,4 +8,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oust.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/40.jpg
+Oracle:Put target creature into its owner's library second from the top. Its controller gains 3 life.
 End

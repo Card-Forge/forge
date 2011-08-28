@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_shadows.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/317.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 End

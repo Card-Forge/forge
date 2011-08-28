@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marker_beetles.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/112.jpg
+Oracle:When Marker Beetles dies, target creature gets +1/+1 until end of turn.\n{2}, Sacrifice Marker Beetles: Draw a card.
 End

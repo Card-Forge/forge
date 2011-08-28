@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_grixis.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/214.jpg
+Oracle:{T}: Add {U}, {B}, or {R} to your mana pool.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niveous_wisps.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/15.jpg
+Oracle:Target creature becomes white until end of turn. Tap that creature.\nDraw a card.
 End

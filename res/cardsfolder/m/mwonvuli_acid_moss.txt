@@ -7,4 +7,5 @@ SVar:DBSearch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Chang
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mwonvuli_acid_moss.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/207.jpg
+Oracle:Destroy target land. Search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
 End

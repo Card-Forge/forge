@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_spy.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/208.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/124.jpg|3
+Oracle:{T}: Look at the top three cards of target player's library.
 End

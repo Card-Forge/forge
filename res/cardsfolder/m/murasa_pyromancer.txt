@@ -13,4 +13,5 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murasa_pyromancer.jpg
 SVar:Rarity:Uncommon
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/139.jpg
+Oracle:Whenever Murasa Pyromancer or another Ally enters the battlefield under your control, you may have Murasa Pyromancer deal damage to target creature equal to the number of Allies you control.
 End

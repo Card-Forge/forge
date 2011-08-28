@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_transport.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/62.jpg
+Oracle:Flying\nMetathran Transport can't be blocked by blue creatures.\n{U}: Target creature becomes blue until end of turn.
 End

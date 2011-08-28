@@ -5,4 +5,5 @@ Text:The first spell you cast each turn has cascade.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_nexus.jpg
 SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/130.jpg
+Oracle:The first spell you cast each turn has cascade. (When you cast your first spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
 End

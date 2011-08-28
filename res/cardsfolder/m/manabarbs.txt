@@ -17,4 +17,5 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/149.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/194.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/150.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/164.jpg
+Oracle:Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
 End

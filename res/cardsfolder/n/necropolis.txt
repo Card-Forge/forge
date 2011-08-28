@@ -9,4 +9,5 @@ SVar:X:Exiled$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropolis.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/102.jpg
+Oracle:Defender (This creature can't attack.)\nExile a creature card from your graveyard: Put X +0/+1 counters on Necropolis, where X is the exiled card's converted mana cost.
 End

@@ -12,4 +12,5 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/24.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/25.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/31.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/24.jpg
+Oracle:Target player discards X cards at random.
 End

@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oni_possession.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/135.jpg
+Oracle:Enchant creature\nAt the beginning of your upkeep, sacrifice a creature.\nEnchanted creature gets +3/+3 and has trample.\nEnchanted creature is a Demon Spirit.
 End

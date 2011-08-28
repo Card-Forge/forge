@@ -7,4 +7,5 @@ K:Protection from artifacts
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_savage.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/86.jpg
+Oracle:Protection from artifacts
 End

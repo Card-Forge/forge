@@ -8,4 +8,5 @@ SVar:X:Remembered$Amount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_forces.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/79.jpg
+Oracle:Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
 End

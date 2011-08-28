@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_revival.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/118.jpg
+Oracle:({G/P} can be paid with either {G} or 2 life.)\nPut target card from a graveyard on top of its owner's library.
 End

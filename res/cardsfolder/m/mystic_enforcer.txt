@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_enforcer.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/290.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/96.jpg
+Oracle:Protection from black\nThreshold - As long as seven or more cards are in your graveyard, Mystic Enforcer gets +3/+3 and has flying.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onyx_talisman.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/306.jpg
+Oracle:Whenever a player casts a black spell, you may pay {3}. If you do, untap target permanent.
 End

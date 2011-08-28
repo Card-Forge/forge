@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nimbus_wings.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/28.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+2 and has flying.
 End

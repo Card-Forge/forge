@@ -6,4 +6,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortal_combat.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/71.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/160.jpg
+Oracle:At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.
 End

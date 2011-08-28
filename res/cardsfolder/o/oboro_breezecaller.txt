@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_breezecaller.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/48.jpg
+Oracle:Flying\n{2}, Return a land you control to its owner's hand: Untap target land.
 End

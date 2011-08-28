@@ -8,4 +8,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/nausea.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/148.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/148.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/67.jpg
+Oracle:All creatures get -1/-1 until end of turn.
 End

@@ -7,4 +7,5 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPro
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opportunist.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/194.jpg
+Oracle:{T}: Opportunist deals 1 damage to target creature that was dealt damage this turn.
 End

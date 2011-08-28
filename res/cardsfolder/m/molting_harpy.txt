@@ -8,4 +8,5 @@ K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_harpy.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/148.jpg
+Oracle:Flying\nAt the beginning of your upkeep, sacrifice Molting Harpy unless you pay {2}.
 End

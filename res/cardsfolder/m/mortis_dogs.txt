@@ -11,4 +11,5 @@ SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortis_dogs.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/66.jpg
+Oracle:Whenever Mortis Dogs attacks, it gets +2/+0 until end of turn.\nWhen Mortis Dogs dies, target player loses life equal to its power.
 End

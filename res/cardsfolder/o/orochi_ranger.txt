@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't un
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_ranger.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/235.jpg
+Oracle:Whenever Orochi Ranger deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 End

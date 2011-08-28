@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oros_the_avenger.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/216.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/161.jpg
+Oracle:Flying\nWhenever Oros, the Avenger deals combat damage to a player, you may pay {2}{W}. If you do, Oros deals 3 damage to each nonwhite creature.
 End

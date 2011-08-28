@@ -12,4 +12,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_phoenix.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/150.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/148.jpg
+Oracle:Flying\nWhen Magma Phoenix dies, it deals 3 damage to each creature and each player.\n{3}{R}{R}: Return Magma Phoenix from your graveyard to your hand.
 End

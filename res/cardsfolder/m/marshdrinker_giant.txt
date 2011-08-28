@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.Island+YouDontCtrl,Land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marshdrinker_giant.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/69.jpg
+Oracle:When Marshdrinker Giant enters the battlefield, destroy target Island or Swamp an opponent controls.
 End

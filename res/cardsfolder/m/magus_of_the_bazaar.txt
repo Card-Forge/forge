@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_bazaar.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/43.jpg
+Oracle:{T}: Draw two cards, then discard three cards.
 End

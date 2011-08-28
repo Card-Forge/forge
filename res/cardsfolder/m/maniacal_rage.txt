@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/maniacal_rage.jp
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/87.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/155.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/68.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and can't block.
 End

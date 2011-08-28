@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mnemonic_nexus.jpg
 SVar:Rarity:Uncommon
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/59.jpg
+Oracle:Each player shuffles his or her graveyard into his or her library.
 End

@@ -6,4 +6,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_soil.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/80.jpg|3
+Oracle:{1}, Exile two creature cards from a single graveyard: Put a 1/1 green Saproling creature token onto the battlefield.
 End

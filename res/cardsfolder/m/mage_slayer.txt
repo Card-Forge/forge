@@ -9,4 +9,5 @@ SVar:X:TriggeredAttacker$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mage_slayer.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/pch/91.jpg
+Oracle:Whenever equipped creature attacks, it deals damage equal to its power to defending player.\nEquip {3}
 End

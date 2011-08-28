@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ 2 W | ValidTgts$ Mercenary | IsCurse$ True | TgtPrompt$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercenary_informer.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/15.jpg
+Oracle:Mercenary Informer can't be the target of black spells or abilities from black sources.\n{2}{W}: Put target nontoken Mercenary on the bottom of its owner's library.
 End

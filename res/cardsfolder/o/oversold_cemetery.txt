@@ -7,4 +7,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oversold_cemetery.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/160.jpg
+Oracle:At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
 End

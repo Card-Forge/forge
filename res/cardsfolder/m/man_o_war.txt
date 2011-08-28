@@ -10,4 +10,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4266.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/37.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/41.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/60.jpg
+Oracle:When Man-o'-War enters the battlefield, return target creature to its owner's hand.
 End

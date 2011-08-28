@@ -6,4 +6,5 @@ A:AB$ Token | Cost$ 2 T | TokenAmount$ 1 | TokenName$ Pest | TokenTypes$ Artifac
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nuisance_engine.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/221.jpg
+Oracle:{2}, {T}: Put a 0/1 colorless Pest artifact creature token onto the battlefield.
 End

@@ -6,4 +6,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_gallery.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/154.jpg
+Oracle:The "legend rule" doesn't apply.
 End

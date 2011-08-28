@@ -8,4 +8,5 @@ SVar:X:Targeted$CardToughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_bloom.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/94.jpg
+Oracle:Exile target creature card from a graveyard, then put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness.
 End

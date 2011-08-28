@@ -13,4 +13,5 @@ SVar:DBDestroy:DB$Destroy | Defined$ Enchanted | ConditionPresent$ Card.Self+cou
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_mine.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/98.jpg
+Oracle:Enchant land\nOrcish Mine enters the battlefield with three ore counters on it.\nAt the beginning of your upkeep and whenever enchanted land becomes tapped, remove an ore counter from Orcish Mine. If there are no ore counters on Orcish Mine, destroy that land and Orcish Mine deals 2 damage to its controller.
 End

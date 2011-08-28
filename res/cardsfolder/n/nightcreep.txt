@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightcreep.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/49.jpg
+Oracle:Until end of turn, all creatures become black and all lands become Swamps.
 End

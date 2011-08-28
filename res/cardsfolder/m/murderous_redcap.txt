@@ -11,4 +11,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_redcap.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/192.jpg
+Oracle:When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
 End

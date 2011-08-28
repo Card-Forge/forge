@@ -7,4 +7,5 @@ A:SP$ Token | Cost$ Sac<2/Mountain> | TokenAmount$ 2 | TokenName$ Goblin | Token
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_alarm.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/93.jpg
+Oracle:You may sacrifice two Mountains rather than pay Mogg Alarm's mana cost.\nPut two 1/1 red Goblin creature tokens onto the battlefield.
 End

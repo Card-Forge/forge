@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_lumberjack.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/210.jpg
+Oracle:{T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.
 End

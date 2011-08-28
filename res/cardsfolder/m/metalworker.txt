@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metalworker.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/135.jpg
+Oracle:{T}: Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way.
 End

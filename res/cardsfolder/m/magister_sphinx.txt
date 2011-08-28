@@ -9,4 +9,5 @@ SVar:TrigLife:AB$SetLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select targe
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magister_sphinx.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/116.jpg
+Oracle:Flying\nWhen Magister Sphinx enters the battlefield, target player's life total becomes 10.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystical_teachings.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/69.jpg
+Oracle:Search your library for an instant card or a card with flash, reveal it, and put it into your hand. Then shuffle your library.\nFlashback {5}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

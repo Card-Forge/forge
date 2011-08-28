@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/natures_ruin.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/26.jpg
+Oracle:Destroy all green creatures.
 End

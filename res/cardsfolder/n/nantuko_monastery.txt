@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_monastery.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/142.jpg
+Oracle:{T}: Add {1} to your mana pool.\nThreshold - {G}{W}: Nantuko Monastery becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate this ability only if seven or more cards are in your graveyard.
 End

@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ PR | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME g
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moltensteel_dragon.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/88.jpg
+Oracle:({R/P} can be paid with either {R} or 2 life.)\nFlying\n{R/P}: Moltensteel Dragon gets +1/+0 until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_bone_reader.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/127.jpg
+Oracle:{B}, Sacrifice a creature: Target player discards a card. Activate this ability only any time you could cast a sorcery.
 End

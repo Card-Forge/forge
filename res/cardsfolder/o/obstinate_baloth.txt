@@ -9,4 +9,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obstinate_baloth.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/188.jpg
+Oracle:When Obstinate Baloth enters the battlefield, you gain 4 life.\nIf a spell or ability an opponent controls causes you to discard Obstinate Baloth, put it onto the battlefield instead of putting it into your graveyard.
 End

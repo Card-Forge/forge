@@ -7,4 +7,5 @@ SVar:TrigToken:AB$Token | Cost$ 1 | TokenAmount$ 1 | TokenName$ KithKin Soldier 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/militias_pride.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/30.jpg
+Oracle:Whenever a nontoken creature you control attacks, you may pay {W}. If you do, put a 1/1 white Kithkin Soldier creature token onto the battlefield tapped and attacking.
 End

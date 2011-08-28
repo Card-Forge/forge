@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/148.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{4}{S}, {T}, Sacrifice Mouth of Ronom: Mouth of Ronom deals 4 damage to target creature. ({S} can be paid with one mana from a snow permanent.)
 End

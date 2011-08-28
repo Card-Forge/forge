@@ -11,4 +11,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_basilica.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/161.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/283.jpg
+Oracle:Orzhov Basilica enters the battlefield tapped.\nWhen Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {W}{B} to your mana pool.
 End

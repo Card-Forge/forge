@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_transmuter.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/31.jpg
+Oracle:{U}, {T}, Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.
 End

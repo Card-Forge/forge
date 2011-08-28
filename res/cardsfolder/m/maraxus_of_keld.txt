@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maraxus_of_keld.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/111.jpg
+Oracle:Maraxus of Keld's power and toughness are each equal to the number of untapped artifacts, creatures, and lands you control.
 End

@@ -12,4 +12,5 @@ SetInfo:M12|Common|http://magiccards.info/scans/en/m12/65.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/39.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/89.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/92.jpg
+Oracle:{T}: Draw a card, then discard a card.
 End

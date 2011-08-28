@@ -11,4 +11,5 @@ SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mantle_of_leadership.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/9.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nWhenever a creature enters the battlefield, enchanted creature gets +2/+2 until end of turn.
 End

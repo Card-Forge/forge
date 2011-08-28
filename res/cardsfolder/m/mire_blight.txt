@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN When CA
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_blight.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/104.jpg
+Oracle:Enchant creature\nWhen enchanted creature is dealt damage, destroy it.
 End

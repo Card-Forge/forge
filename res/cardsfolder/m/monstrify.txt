@@ -7,4 +7,5 @@ A:SP$ Pump | Cost$ 3 G Discard<1/Land> | ActivationZone$ Graveyard | PrecostDesc
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrify.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/70.jpg
+Oracle:Target creature gets +4/+4 until end of turn.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 End

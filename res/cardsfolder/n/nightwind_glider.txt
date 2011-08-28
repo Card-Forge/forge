@@ -8,4 +8,5 @@ K:Protection from black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightwind_glider.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/31.jpg
+Oracle:Flying, protection from black
 End

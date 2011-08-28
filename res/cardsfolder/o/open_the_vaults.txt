@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/open_the_vaults.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/21.jpg
+Oracle:Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control. (Auras with nothing to enchant remain in graveyards.)
 End

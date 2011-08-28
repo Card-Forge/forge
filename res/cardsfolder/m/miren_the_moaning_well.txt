@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miren_the_moaning_well.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/163.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{3}, {T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
 End

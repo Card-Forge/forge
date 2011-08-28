@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narcomoeba.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/54.jpg
+Oracle:Flying\nWhen Narcomoeba is put into your graveyard from your library, you may put it onto the battlefield.
 End

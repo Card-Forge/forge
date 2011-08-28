@@ -6,4 +6,5 @@ A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenName$ Myr | TokenTypes$ Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masters_call.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/13.jpg
+Oracle:Put two 1/1 colorless Myr artifact creature tokens onto the battlefield.
 End

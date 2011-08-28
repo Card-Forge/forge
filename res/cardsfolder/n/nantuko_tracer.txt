@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | ValidTgts$ Card | TgtPrompt$ Select ta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_tracer.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/125.jpg
+Oracle:When Nantuko Tracer enters the battlefield, you may put target card from a graveyard on the bottom of its owner's library.
 End

@@ -6,4 +6,5 @@ A:SP$ Draw | Cost$ 4 U U | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opportunity.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/37.jpg
+Oracle:Target player draws four cards.
 End

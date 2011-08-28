@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necratog.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/18.jpg
+Oracle:Exile the top creature card of your graveyard: Necratog gets +2/+2 until end of turn.
 End

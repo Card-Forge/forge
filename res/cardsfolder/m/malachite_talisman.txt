@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malachite_talisman.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/303.jpg
+Oracle:Whenever a player casts a green spell, you may pay {3}. If you do, untap target permanent.
 End

@@ -8,4 +8,5 @@ A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_tail_masticore.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/177.jpg
+Oracle:At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.\n{4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to target creature or player.\n{2}: Regenerate Molten-Tail Masticore.
 End

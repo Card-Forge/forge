@@ -10,4 +10,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ G G | Defined$ Self | Origin$ Graveyard | 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masked_admirers.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/230.jpg
+Oracle:When Masked Admirers enters the battlefield, draw a card.\nWhenever you cast a creature spell, you may pay {G}{G}. If you do, return Masked Admirers from your graveyard to your hand.
 End

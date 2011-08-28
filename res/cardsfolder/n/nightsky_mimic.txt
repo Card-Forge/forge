@@ -9,4 +9,5 @@ SVar:BuffedBy:Card.Black+White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightsky_mimic.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/91.jpg
+Oracle:Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
 End

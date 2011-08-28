@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130316.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/71.jpg
+Oracle:You draw X cards and you lose X life, where X is the number of creatures you control.
 End

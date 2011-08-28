@@ -7,4 +7,5 @@ A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_spellbomb.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/216.jpg
+Oracle:{B}, Sacrifice Necrogen Spellbomb: Target player discards a card.\n{1}, Sacrifice Necrogen Spellbomb: Draw a card.
 End

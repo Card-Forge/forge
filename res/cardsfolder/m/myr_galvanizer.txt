@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_galvanizer.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/181.jpg
+Oracle:Other Myr creatures you control get +1/+1.\n{1}, {T}: Untap each other Myr you control.
 End

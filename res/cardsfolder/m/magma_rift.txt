@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 2 R Sac<1/Land> | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_rift.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/136.jpg
+Oracle:As an additional cost to cast Magma Rift, sacrifice a land.\nMagma Rift deals 5 damage to target creature.
 End

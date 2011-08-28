@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:
 SVar:Picture:http://resources.wizards.com/magic/cards/med/en-us/card159135.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/11.jpg|2
+Oracle:When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.\nWhen Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
 End

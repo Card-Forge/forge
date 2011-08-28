@@ -11,4 +11,5 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melancholy.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/88.jpg
+Oracle:Enchant creature\nWhen Melancholy enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nAt the beginning of your upkeep, sacrifice Melancholy unless you pay {B}.
 End

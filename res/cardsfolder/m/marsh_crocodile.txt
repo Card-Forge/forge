@@ -11,4 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_crocodile.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/115.jpg
+Oracle:When Marsh Crocodile enters the battlefield, return a blue or black creature you control to its owner's hand.\nWhen Marsh Crocodile enters the battlefield, each player discards a card.
 End

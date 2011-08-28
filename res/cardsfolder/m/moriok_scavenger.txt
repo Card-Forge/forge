@@ -8,4 +8,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_scavenger.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/68.jpg
+Oracle:When Moriok Scavenger enters the battlefield, you may return target artifact creature card from your graveyard to your hand.
 End

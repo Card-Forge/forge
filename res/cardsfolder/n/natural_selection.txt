@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_selectio
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/121.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/121.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/121.jpg
+Oracle:Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.
 End

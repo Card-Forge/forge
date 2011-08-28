@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_invisimancer.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/37.jpg
+Oracle:Neurok Invisimancer is unblockable.\nWhen Neurok Invisimancer enters the battlefield, target creature is unblockable this turn.
 End

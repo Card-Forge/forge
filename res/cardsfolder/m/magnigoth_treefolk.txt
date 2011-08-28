@@ -17,4 +17,5 @@ SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnigoth_treefolk.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/82.jpg
+Oracle:Domain - For each basic land type among lands you control, Magnigoth Treefolk has landwalk of that type.
 End

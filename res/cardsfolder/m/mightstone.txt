@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mightstone.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/20.jpg
+Oracle:Attacking creatures get +1/+0.
 End

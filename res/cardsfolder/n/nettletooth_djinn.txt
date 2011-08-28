@@ -8,4 +8,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettletooth_djinn.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/130.jpg
+Oracle:At the beginning of your upkeep, Nettletooth Djinn deals 1 damage to you.
 End

@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_hatchery.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/266.jpg
+Oracle:Orochi Hatchery enters the battlefield with X charge counters on it.\n{5}, {T}: Put a 1/1 green Snake creature token onto the battlefield for each charge counter on Orochi Hatchery.
 End

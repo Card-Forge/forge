@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_auntie.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/123.jpg
+Oracle:Other Goblin creatures you control get +1/+1.\n{T}: Regenerate another target Goblin.
 End

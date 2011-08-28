@@ -17,4 +17,5 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/303.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/270.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/25.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/224.jpg
+Oracle:Flying
 End

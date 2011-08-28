@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_geyser.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/75.jpg
+Oracle:Add {R} to your mana pool for each tapped land your opponents control.
 End

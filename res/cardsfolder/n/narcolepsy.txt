@@ -9,4 +9,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narcolepsy.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/79.jpg
+Oracle:Enchant creature\nAt the beginning of each upkeep, if enchanted creature is untapped, tap it.
 End

@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moat.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/197.jpg
+Oracle:Creatures without flying can't attack.
 End

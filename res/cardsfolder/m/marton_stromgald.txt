@@ -12,4 +12,5 @@ SVar:Y:Count$Valid Creature.blocking+Other
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marton_stromgald.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/199.jpg
+Oracle:Whenever Marton Stromgald attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than Marton Stromgald.\nWhenever Marton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Marton Stromgald.
 End

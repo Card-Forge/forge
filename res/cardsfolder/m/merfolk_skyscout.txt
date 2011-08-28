@@ -10,4 +10,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select tar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_skyscout.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/77.jpg
+Oracle:Flying\nWhenever Merfolk Skyscout attacks or blocks, untap target permanent.
 End

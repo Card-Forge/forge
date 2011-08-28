@@ -8,4 +8,5 @@ K:Changeling
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/128.jpg
+Oracle:Changeling (This card is every creature type at all times.)\nTarget creature gets +3/-3 and loses all creature types until end of turn.
 End

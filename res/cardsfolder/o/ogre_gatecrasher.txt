@@ -8,4 +8,5 @@ SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.withDefender | TgtPrompt$ Sele
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_gatecrasher.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/67.jpg
+Oracle:When Ogre Gatecrasher enters the battlefield, destroy target creature with defender.
 End

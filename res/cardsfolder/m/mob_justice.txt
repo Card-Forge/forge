@@ -7,4 +7,5 @@ SVar:X:Count$TypeYouCtrl.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_justice.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/90.jpg
+Oracle:Mob Justice deals damage to target player equal to the number of creatures you control.
 End

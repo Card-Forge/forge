@@ -9,4 +9,5 @@ SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefie
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistmeadow_witch.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/144.jpg
+Oracle:{2}{W}{U}: Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
 End

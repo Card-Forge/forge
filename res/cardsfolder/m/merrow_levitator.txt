@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_levitator.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/26.jpg
+Oracle:{T}: Target creature gains flying until end of turn.\nWhenever you cast a blue spell, you may untap Merrow Levitator.
 End

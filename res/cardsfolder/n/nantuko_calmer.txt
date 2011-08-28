@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_calmer.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/132.jpg
+Oracle:{G}, {T}, Sacrifice Nantuko Calmer: Destroy target enchantment.\nThreshold - Nantuko Calmer gets +1/+1 as long as seven or more cards are in your graveyard.
 End

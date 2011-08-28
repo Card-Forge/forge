@@ -11,4 +11,5 @@ SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/255.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/277.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/192.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/106.jpg
+Oracle:Target creature gets +7/+7 until end of turn.
 End

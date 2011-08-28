@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/messenger_falcons.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/145.jpg
+Oracle:Flying\nWhen Messenger Falcons enters the battlefield, draw a card.
 End

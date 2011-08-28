@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogenesis.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/212.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/181.jpg
+Oracle:{2}: Exile target creature card from a graveyard. Put a 1/1 green Saproling creature token onto the battlefield.
 End

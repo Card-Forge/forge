@@ -9,4 +9,5 @@ K:Protection from red
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oversoul_of_dusk.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/234.jpg
+Oracle:Protection from blue, from black, and from red
 End

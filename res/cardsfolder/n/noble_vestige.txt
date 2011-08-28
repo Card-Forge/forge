@@ -8,4 +8,5 @@ A:AB$ PreventDamage | Cost$ T | ValidTarget$ Player | Amount$ 1 | SpellDescripti
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_vestige.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/29.jpg
+Oracle:Flying\n{T}: Prevent the next 1 damage that would be dealt to target player this turn.
 End

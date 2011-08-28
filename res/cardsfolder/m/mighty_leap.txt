@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mighty_leap.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/22.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/26.jpg
+Oracle:Target creature gets +2/+2 and gains flying until end of turn.
 End

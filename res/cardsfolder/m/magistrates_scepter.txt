@@ -7,4 +7,5 @@ A:AB$ AddTurn | Cost$ T SubCounter<3/CHARGE> | NumTurns$ 1 | SpellDescription$ T
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magistrates_scepter.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/304.jpg
+Oracle:{4}, {T}: Put a charge counter on Magistrate's Scepter.\n{T}, Remove three charge counters from Magistrate's Scepter: Take an extra turn after this one.
 End

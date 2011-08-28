@@ -7,4 +7,5 @@ A:AB$ GainLife | Cost$ W T | LifeAmount$ 1 | ValidTgts$ Player | TgtPrompt$ Choo
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mournful_zombie.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/43.jpg
+Oracle:{W}, {T}: Target player gains 1 life.
 End

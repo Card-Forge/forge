@@ -11,4 +11,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orbweaver_kumo.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/231.jpg
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever you cast a Spirit or Arcane spell, Orbweaver Kumo gains forestwalk until end of turn.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_vein.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/203.jpg
+Oracle:{R}, Sacrifice a land: Magma Vein deals 1 damage to each creature without flying.
 End

@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_sac
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/324.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/32.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/269.jpg
+Oracle:{T}, Pay 1 life: Counter target black spell.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_sightbender.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/41.jpg
+Oracle:{X}, {T}: Target creature with power X or less is unblockable this turn.
 End

@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_storm.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/256.jpg
+Oracle:{2}{R}{G}, Discard two cards at random: Meteor Storm deals 4 damage to target creature or player.
 End

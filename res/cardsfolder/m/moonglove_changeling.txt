@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ B | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathto
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonglove_changeling.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/67.jpg
+Oracle:Changeling (This card is every creature type at all times.)\n{B}: Moonglove Changeling gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy that creature.)
 End

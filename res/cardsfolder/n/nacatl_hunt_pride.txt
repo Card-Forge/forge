@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_hunt_pride.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/13.jpg
+Oracle:Vigilance\n{R}, {T}: Target creature can't block this turn.\n{G}, {T}: Target creature blocks this turn if able.
 End

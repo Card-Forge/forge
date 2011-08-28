@@ -5,4 +5,5 @@ Text:Prevent all noncombat damage that would be dealt to creatures you control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_asylum.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/10.jpg
+Oracle:Prevent all noncombat damage that would be dealt to creatures you control.
 End

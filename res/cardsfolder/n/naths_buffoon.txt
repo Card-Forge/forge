@@ -7,4 +7,5 @@ K:Protection:Elf:Protection from Elves
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naths_buffoon.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/129.jpg
+Oracle:Protection from Elves
 End

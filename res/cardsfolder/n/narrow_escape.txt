@@ -7,4 +7,5 @@ SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Narrow_Escape.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/27.jpg
+Oracle:Return target permanent you control to its owner's hand. You gain 4 life.
 End

@@ -7,4 +7,5 @@ SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard this turn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_spray.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/108.jpg
+Oracle:Magma Spray deals 2 damage to target creature. If that creature would die this turn, exile it instead.
 End

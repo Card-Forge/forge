@@ -9,4 +9,5 @@ SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_scudder.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/71.jpg
+Oracle:Flying\nWhen Necrogen Scudder enters the battlefield, you lose 3 life.
 End

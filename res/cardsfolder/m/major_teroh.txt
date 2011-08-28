@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/major_teroh.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/8.jpg
+Oracle:Flying\n{3}{W}{W}, Sacrifice Major Teroh: Exile all black creatures.
 End

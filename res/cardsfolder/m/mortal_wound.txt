@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ HIDDEN When CA
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortal_wound.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/63.jpg
+Oracle:Enchant creature\nWhen enchanted creature is dealt damage, destroy it.
 End

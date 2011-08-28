@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ W | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/origin_spellbomb.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/189.jpg
+Oracle:{1}, {T}, Sacrifice Origin Spellbomb: Put a 1/1 colorless Myr artifact creature token onto the battlefield.\nWhen Origin Spellbomb is put into a graveyard from the battlefield, you may pay {W}. If you do, draw a card.
 End

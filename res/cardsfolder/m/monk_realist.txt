@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_realist.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/21.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/20.jpg
+Oracle:When Monk Realist enters the battlefield, destroy target enchantment.
 End

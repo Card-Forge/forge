@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_lasher.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/71.jpg
+Oracle:Nim Lasher gets +1/+0 for each artifact you control.
 End

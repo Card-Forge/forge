@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omnath_locus_of_mana.jpg
 SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/109.jpg
+Oracle:Green mana doesn't empty from your mana pool as steps and phases end.\nOmnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
 End

@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_nectars.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/233.jpg
+Oracle:{X}, {T}: You gain X life.
 End

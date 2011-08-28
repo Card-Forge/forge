@@ -9,4 +9,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_affinity
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/269.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/260.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/256.jpg
+Oracle:All lands become 2/2 creatures until end of turn. They're still lands.
 End

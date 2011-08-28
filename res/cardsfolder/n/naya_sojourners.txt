@@ -10,4 +10,5 @@ SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_sojourners.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/122.jpg
+Oracle:When you cycle Naya Sojourners or it dies, you may put a +1/+1 counter on target creature.\nCycling {2}{G} ({2}{G}, Discard this card: Draw a card.)
 End

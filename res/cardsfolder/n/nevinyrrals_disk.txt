@@ -12,4 +12,5 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/391.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/356.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/267.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/267.jpg
+Oracle:Nevinyrral's Disk enters the battlefield tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.
 End

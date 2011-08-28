@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/omen.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/63.jpg
+Oracle:Look at the top three cards of your library, then put them back in any order. You may shuffle your library.\nDraw a card.
 End

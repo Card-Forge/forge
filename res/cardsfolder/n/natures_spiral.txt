@@ -7,4 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_spiral.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/187.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/196.jpg
+Oracle:Return target permanent card from your graveyard to your hand. (A permanent card is an artifact, creature, enchantment, land, or planeswalker card.)
 End

@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettling_curse.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/48.jpg
+Oracle:Enchant creature\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.\n{1}{R}: Enchanted creature attacks this turn if able.
 End

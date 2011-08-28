@@ -21,4 +21,5 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/107.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/146.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/28.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/27.jpg
+Oracle:Flying\nNightmare's power and toughness are each equal to the number of Swamps you control.
 End

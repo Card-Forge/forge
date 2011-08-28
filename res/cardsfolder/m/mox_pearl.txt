@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card631.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/263.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/265.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/264.jpg
+Oracle:{T}: Add {W} to your mana pool.
 End

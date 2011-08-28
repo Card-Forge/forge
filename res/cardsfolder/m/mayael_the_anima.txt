@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mayael_the_anima.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/179.jpg
+Oracle:{3}{R}{G}{W}, {T}: Look at the top five cards of your library. You may put a creature card with power 5 or greater from among them onto the battlefield. Put the rest on the bottom of your library in any order.
 End

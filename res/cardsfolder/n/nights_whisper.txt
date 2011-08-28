@@ -7,4 +7,5 @@ SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51178.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/55.jpg
+Oracle:You draw two cards and you lose 2 life.
 End

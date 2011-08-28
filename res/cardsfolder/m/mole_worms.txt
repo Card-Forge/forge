@@ -14,4 +14,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mole_worms.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/41.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/40.jpg
+Oracle:You may choose not to untap Mole Worms during your untap step.\n{T}: Tap target land. It doesn't untap during its controller's untap step for as long as Mole Worms remains tapped.
 End

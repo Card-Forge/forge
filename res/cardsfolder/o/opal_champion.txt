@@ -7,4 +7,5 @@ SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 3 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_champion.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/16.jpg
+Oracle:When an opponent casts a creature spell, if Opal Champion is an enchantment, Opal Champion becomes a 3/3 Knight creature with first strike.
 End

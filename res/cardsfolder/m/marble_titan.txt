@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84533.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/240.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/26.jpg
+Oracle:Creatures with power 3 or greater don't untap during their controllers' untap steps.
 End

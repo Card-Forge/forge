@@ -7,4 +7,5 @@ SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all comba
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_ith.jpg
 SetInfo:DRK|Uncommon|http://magiccards.info/scans/en/dk/114.jpg
+Oracle:{T}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 End

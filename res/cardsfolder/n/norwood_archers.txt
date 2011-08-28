@@ -8,4 +8,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21054.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/76.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/137.jpg
+Oracle:Reach (This creature can block creatures with flying.)
 End

@@ -10,4 +10,5 @@ SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nihilith.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/72.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nSuspend 7-{1}{B} (Rather than cast this card from your hand, you may pay {1}{B} and exile it with seven time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever a card is put into an opponent's graveyard from anywhere, if Nihilith is suspended, you may remove a time counter from Nihilith.
 End

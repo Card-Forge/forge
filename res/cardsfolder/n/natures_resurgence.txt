@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_resurgen
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/79.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/242.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/259.jpg
+Oracle:Each player draws a card for each creature card in his or her graveyard.
 End

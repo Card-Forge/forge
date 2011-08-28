@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oni_of_wild_places.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/108.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/130.jpg
+Oracle:Haste\nAt the beginning of your upkeep, return a red creature you control to its owner's hand.
 End

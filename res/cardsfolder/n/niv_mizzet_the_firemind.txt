@@ -10,4 +10,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niv_mizzet_the_firemind.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/123.jpg
+Oracle:Flying\nWhenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player.\n{T}: Draw a card.
 End

@@ -13,4 +13,5 @@ SVar:Y:Count$Valid Card.Self+countersGE4LEVEL
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/null_champion.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/121.jpg
+Oracle:Level up {3} ({3}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-3\n4/2\nLEVEL 4+\n7/3\n{B}: Regenerate Null Champion.
 End

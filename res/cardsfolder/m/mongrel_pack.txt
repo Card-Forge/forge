@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | ActivationPhases$ BeginCombat->EndCombat | T
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mongrel_pack.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/131.jpg
+Oracle:When Mongrel Pack dies during combat, put four 1/1 green Hound creature tokens onto the battlefield.
 End

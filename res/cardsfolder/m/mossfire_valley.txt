@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mossfire_valley.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/321.jpg
+Oracle:{1}, {T}: Add {R}{G} to your mana pool.
 End

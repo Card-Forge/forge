@@ -10,4 +10,5 @@ SVar:BuffedBy:Ally
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nimana_sell_sword.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/106.jpg
+Oracle:Whenever Nimana Sell-Sword or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Nimana Sell-Sword.
 End

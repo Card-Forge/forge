@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target c
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mosstodon.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/139.jpg
+Oracle:{1}: Target creature with power 5 or greater gains trample until end of turn.
 End

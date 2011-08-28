@@ -9,4 +9,5 @@ SVar:Y:Count$Valid Land.YouDontCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_hound.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/89.jpg
+Oracle:Monstrous Hound can't attack unless you control more lands than defending player.\nMonstrous Hound can't block unless you control more lands than attacking player.
 End

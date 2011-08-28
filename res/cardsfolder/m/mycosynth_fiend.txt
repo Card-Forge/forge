@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_fiend.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/117.jpg
+Oracle:Mycosynth Fiend gets +1/+1 for each poison counter your opponents have.
 End

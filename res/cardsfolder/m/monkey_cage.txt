@@ -9,4 +9,5 @@ SVar:X:TriggeredCard$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monkey_cage.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/307.jpg
+Oracle:When a creature enters the battlefield, sacrifice Monkey Cage and put X 2/2 green Ape creature tokens onto the battlefield, where X is that creature's converted mana cost.
 End

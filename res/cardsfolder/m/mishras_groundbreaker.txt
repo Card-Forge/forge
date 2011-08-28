@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_groundbreaker.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/165.jpg
+Oracle:{T}, Sacrifice Mishra's Groundbreaker: Target land becomes a 3/3 artifact creature that's still a land. (This effect lasts indefinitely.)
 End

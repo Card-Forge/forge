@@ -11,4 +11,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnivore.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/204.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/202.jpg
+Oracle:Haste (This creature can attack the turn it comes under your control.)\nMagnivore's power and toughness are each equal to the number of sorcery cards in all graveyards.
 End

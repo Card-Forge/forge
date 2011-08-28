@@ -9,4 +9,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/27.jpg
+Oracle:Vigilance\nOther creatures you control get +0/+2 and have vigilance.
 End

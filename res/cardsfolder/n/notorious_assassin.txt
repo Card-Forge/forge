@@ -7,4 +7,5 @@ A:AB$ Destroy | Cost$ 2 B T Discard<1/Card> | ValidTgts$ Creature.nonBlack | Tgt
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/notorious_assassin.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/150.jpg
+Oracle:{2}{B}, {T}, Discard a card: Destroy target nonblack creature. It can't be regenerated.
 End

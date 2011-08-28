@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mine_bearer.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/16.jpg
+Oracle:{T}, Sacrifice Mine Bearer: Destroy target attacking creature.
 End

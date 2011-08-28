@@ -7,4 +7,5 @@ A:AB$ Regenerate | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target ar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metallurgeon.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/19.jpg
+Oracle:{W}, {T}: Regenerate target artifact.
 End

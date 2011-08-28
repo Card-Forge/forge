@@ -7,4 +7,5 @@ A:AB$CopyPermanent | Cost$ 3 T | Defined$ Self | SpellDescription$ Put a token t
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_propagator.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/182.jpg
+Oracle:{3}, {T}: Put a token that's a copy of Myr Propagator onto the battlefield.
 End

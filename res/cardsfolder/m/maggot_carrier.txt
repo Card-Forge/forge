@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maggot_carrier.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/142.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/45.jpg
+Oracle:When Maggot Carrier enters the battlefield, each player loses 1 life.
 End

@@ -11,4 +11,5 @@ SVar:TrigDiscardOpp:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mod
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oonas_blackguard.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/72.jpg
+Oracle:Flying\nEach other Rogue creature you control enters the battlefield with an additional +1/+1 counter on it.\nWhenever a creature you control with a +1/+1 counter on it deals combat damage to a player, that player discards a card.
 End

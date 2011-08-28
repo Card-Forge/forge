@@ -9,4 +9,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morsel_theft.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/68.jpg
+Oracle:Prowl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)\nTarget player loses 3 life and you gain 3 life. If Morsel Theft's prowl cost was paid, draw a card.
 End

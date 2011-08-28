@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnetic_mine.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/113.jpg
+Oracle:Whenever another artifact is put into a graveyard from the battlefield, Magnetic Mine deals 2 damage to that artifact's controller.
 End

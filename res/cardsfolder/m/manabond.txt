@@ -10,4 +10,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manabond.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/113.jpg
+Oracle:At the beginning of your end step, you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
 End

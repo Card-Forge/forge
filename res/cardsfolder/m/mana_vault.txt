@@ -17,4 +17,5 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/388.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/352.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/263.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/260.jpg
+Oracle:Mana Vault doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.\nAt the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.\n{T}: Add {3} to your mana pool.
 End

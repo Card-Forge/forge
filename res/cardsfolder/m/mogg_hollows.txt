@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap 
 SVar:Rarity:Uncommon
 SVar:Picture:http://magiccards.info/scans/en/br/45.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/318.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {R} or {G} to your mana pool. Mogg Hollows doesn't untap during your next untap step.
 End

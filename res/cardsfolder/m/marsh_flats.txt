@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_flats.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/219.jpg
+Oracle:{T}, Pay 1 life, Sacrifice Marsh Flats: Search your library for a Plains or Swamp card and put it onto the battlefield. Then shuffle your library.
 End

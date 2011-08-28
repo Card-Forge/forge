@@ -11,4 +11,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mephidross_vampire.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/53.jpg
+Oracle:Flying\nEach creature you control is a Vampire in addition to its other creature types and has "Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature."
 End

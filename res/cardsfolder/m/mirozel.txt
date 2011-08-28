@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirozel.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/41.jpg
+Oracle:Flying\nWhen Mirozel becomes the target of a spell or ability, return Mirozel to its owner's hand.
 End

@@ -10,4 +10,5 @@ SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrotic_sliver.jpg
 SVar:Rarity:Uncommon
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/159.jpg
+Oracle:All Slivers have "{3}, Sacrifice this permanent: Destroy target permanent."
 End

@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/override.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/45.jpg
+Oracle:Counter target spell unless its controller pays {1} for each artifact you control.
 End

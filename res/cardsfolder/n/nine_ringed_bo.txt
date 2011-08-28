@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nine_ringed_bo.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/263.jpg
+Oracle:{T}: Nine-Ringed Bo deals 1 damage to target Spirit creature. If that creature would die this turn, exile it instead.
 End

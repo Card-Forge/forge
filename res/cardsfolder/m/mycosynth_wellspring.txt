@@ -9,4 +9,5 @@ SVar:SacMe:5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_wellspring.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/145.jpg
+Oracle:When Mycosynth Wellspring enters the battlefield or is put into a graveyard from the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
 End

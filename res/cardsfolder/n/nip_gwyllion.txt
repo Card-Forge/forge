@@ -7,4 +7,5 @@ K:Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nip_gwyllion.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/92.jpg
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)
 End

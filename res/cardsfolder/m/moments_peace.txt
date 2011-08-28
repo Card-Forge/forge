@@ -7,4 +7,5 @@ A:SP$ Fog | Cost$ 2 G | Flashback$ True | CostDesc$ Flashback 2 G | SpellDescrip
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moments_peace.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/251.jpg
+Oracle:Prevent all combat damage that would be dealt this turn.\nFlashback {2}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

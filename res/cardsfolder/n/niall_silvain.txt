@@ -7,4 +7,5 @@ A:AB$ Regenerate | Cost$ G G G G T | ValidTgts$ Creature | TgtPrompt$ Select tar
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niall_silvain.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/45.jpg
+Oracle:{G}{G}{G}{G}, {T}: Regenerate target creature.
 End

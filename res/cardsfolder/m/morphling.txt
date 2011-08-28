@@ -11,4 +11,5 @@ A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ Morphling get
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morphling.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/85.jpg
+Oracle:{U}: Untap Morphling.\n{U}: Morphling gains flying until end of turn.\n{U}: Morphling gains shroud until end of turn. (It can't be the target of spells or abilities.)\n{1}: Morphling gets +1/-1 until end of turn.\n{1}: Morphling gets -1/+1 until end of turn.
 End

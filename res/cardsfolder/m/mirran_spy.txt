@@ -9,4 +9,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 0 | ValidTgts$ Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirran_spy.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/26.jpg
+Oracle:Flying\nWhenever you cast an artifact spell, you may untap target creature.
 End

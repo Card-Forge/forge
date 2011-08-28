@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20375.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/20.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/84.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/25.jpg
+Oracle:
 End

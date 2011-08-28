@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ostracize.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/57.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/153.jpg
+Oracle:Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card.
 End

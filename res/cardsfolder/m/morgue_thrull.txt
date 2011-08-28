@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morgue_thrull.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/15.jpg
+Oracle:Sacrifice Morgue Thrull: Put the top three cards of your library into your graveyard.
 End

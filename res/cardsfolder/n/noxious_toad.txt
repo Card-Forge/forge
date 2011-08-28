@@ -9,4 +9,5 @@ SVar:SacMe:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/noxious_toad.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/27.jpg
+Oracle:When Noxious Toad dies, each opponent discards a card.
 End

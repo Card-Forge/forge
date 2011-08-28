@@ -10,4 +10,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_thunder.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/15.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/24.jpg
+Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nDestroy target artifact or enchantment. If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
 End

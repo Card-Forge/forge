@@ -7,4 +7,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnetic_flux.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/25.jpg
+Oracle:Artifact creatures you control gain flying until end of turn.
 End

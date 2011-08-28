@@ -7,4 +7,5 @@ PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/norwood_priestess.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/77.jpg
+Oracle:{T}: You may put a green creature card from your hand onto the battlefield. Activate this ability only during your turn, before attackers are declared.
 End

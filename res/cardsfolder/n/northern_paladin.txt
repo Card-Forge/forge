@@ -13,4 +13,5 @@ SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/28.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/287.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/213.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/214.jpg
+Oracle:{W}{W}, {T}: Destroy target black permanent.
 End

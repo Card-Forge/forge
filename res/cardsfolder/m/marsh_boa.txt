@@ -7,4 +7,5 @@ K:Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24664.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/118.jpg
+Oracle:Swampwalk
 End

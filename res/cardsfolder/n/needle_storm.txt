@@ -8,4 +8,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4311.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/135.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/105.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/259.jpg
+Oracle:Needle Storm deals 4 damage to each creature with flying.
 End

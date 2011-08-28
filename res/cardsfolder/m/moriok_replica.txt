@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_replica.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/178.jpg
+Oracle:{1}{B}, Sacrifice Moriok Replica: You draw two cards and lose 2 life.
 End

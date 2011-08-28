@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_leadfoot.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/102.jpg
+Oracle:Whenever Ogre Leadfoot becomes blocked by an artifact creature, destroy that creature.
 End

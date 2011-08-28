@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nulltread_gargantuan.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/102.jpg
+Oracle:When Nulltread Gargantuan enters the battlefield, put a creature you control on top of its owner's library.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_quadropod.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/138.jpg
+Oracle:{3}: Switch Myr Quadropod's power and toughness until end of turn.
 End

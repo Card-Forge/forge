@@ -9,4 +9,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromantic_thirst.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/97.jpg
+Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, you may return target creature card from your graveyard to your hand.
 End

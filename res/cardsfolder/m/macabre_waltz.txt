@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/macabre_waltz.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/47.jpg
+Oracle:Return up to two target creature cards from your graveyard to your hand, then discard a card.
 End

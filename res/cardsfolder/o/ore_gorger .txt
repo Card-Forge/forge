@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ore_gorger.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/182.jpg
+Oracle:Whenever you cast a Spirit or Arcane spell, you may destroy target nonbasic land.
 End

@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card632.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/264.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/266.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/265.jpg
+Oracle:{T}: Add {R} to your mana pool.
 End

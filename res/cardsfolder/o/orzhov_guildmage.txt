@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_guildmage.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/147.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/217.jpg
+Oracle:{2}{W}: Target player gains 1 life.\n{2}{B}: Each player loses 1 life.
 End

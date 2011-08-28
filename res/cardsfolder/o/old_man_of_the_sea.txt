@@ -9,4 +9,5 @@ SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/old_man_of_the_sea.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/24.jpg
+Oracle:You may choose not to untap Old Man of the Sea during your untap step.\n{T}: Gain control of target creature with power less than or equal to Old Man of the Sea's power for as long as Old Man of the Sea remains tapped and that creature's power remains less than or equal to Old Man of the Sea's power.
 End

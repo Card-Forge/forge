@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ R R T | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_master.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/113.jpg
+Oracle:{U}{U}, {T}: Return target creature to its owner's hand.\n{R}{R}, {T}: Nightscape Master deals 2 damage to target creature.
 End

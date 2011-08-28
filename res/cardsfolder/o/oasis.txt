@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oasis.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/185.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/92.jpg
+Oracle:{T}: Prevent the next 1 damage that would be dealt to target creature this turn.
 End

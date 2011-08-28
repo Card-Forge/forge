@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_crypt.jpg
 SetInfo:MBP|Special|http://magiccards.info/scans/en/mbp/5.jpg
+Oracle:At the beginning of your upkeep, flip a coin. If you lose the flip, Mana Crypt deals 3 damage to you.\n{T}: Add {2} to your mana pool.
 End

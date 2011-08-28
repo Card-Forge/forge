@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindwrack_liege.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/104.jpg
+Oracle:Other blue creatures you control get +1/+1.\nOther red creatures you control get +1/+1.\n{U/R}{U/R}{U/R}{U/R}: You may put a blue or red creature card from your hand onto the battlefield.
 End

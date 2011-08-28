@@ -6,4 +6,5 @@ A:SP$ Dig | Cost$ 1 G | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mulch.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/60.jpg
+Oracle:Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
 End

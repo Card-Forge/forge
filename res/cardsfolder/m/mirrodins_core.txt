@@ -12,4 +12,5 @@ A:AB$Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ G | SpellDescription$ Add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrodins_core.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/165.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Put a charge counter on Mirrodin's Core.\n{T}, Remove a charge counter from Mirrodin's Core: Add one mana of any color to your mana pool.
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nova_cleric.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/45.jpg
+Oracle:{2}{W}, {T}, Sacrifice Nova Cleric: Destroy all enchantments.
 End

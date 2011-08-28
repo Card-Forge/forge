@@ -12,4 +12,5 @@ SVar:NeedsToPlay:Island.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_ship.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/23.jpg
+Oracle:Merchant Ship can't attack unless defending player controls an Island.\nWhenever Merchant Ship attacks and isn't blocked, you gain 2 life.\nWhen you control no Islands, sacrifice Merchant Ship.
 End

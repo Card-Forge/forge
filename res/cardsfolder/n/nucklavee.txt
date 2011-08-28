@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nucklavee.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/214.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/110.jpg
+Oracle:When Nucklavee enters the battlefield, you may return target red sorcery card from your graveyard to your hand.\nWhen Nucklavee enters the battlefield, you may return target blue instant card from your graveyard to your hand.
 End

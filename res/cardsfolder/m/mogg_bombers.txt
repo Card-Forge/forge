@@ -9,4 +9,5 @@ SVar:DBDamage:DB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 3 | ConditionDefined
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_bombers.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/91.jpg
+Oracle:When another creature enters the battlefield, sacrifice Mogg Bombers. If you do, it deals 3 damage to target player.
 End

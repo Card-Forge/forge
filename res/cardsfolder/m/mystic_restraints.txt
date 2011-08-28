@@ -11,4 +11,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_restraints.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/76.jpg
+Oracle:Flash\nEnchant creature\nWhen Mystic Restraints enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.
 End

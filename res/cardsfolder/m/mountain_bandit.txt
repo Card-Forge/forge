@@ -7,4 +7,5 @@ K:Haste
 SVar:Rarity:Common
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Three_Kingdoms/mountain_bandit.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/117.jpg
+Oracle:Haste
 End

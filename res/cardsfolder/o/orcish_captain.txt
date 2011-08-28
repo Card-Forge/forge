@@ -11,4 +11,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_captain.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/254.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/123.jpg
+Oracle:{1}: Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn.
 End

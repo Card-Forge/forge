@@ -7,4 +7,5 @@ K:Flanking
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mtenda_herder.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/233.jpg
+Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)
 End

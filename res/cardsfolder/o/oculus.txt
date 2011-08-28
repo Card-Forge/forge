@@ -9,4 +9,5 @@ SVar:SacMe:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oculus.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/29.jpg
+Oracle:When Oculus dies, you may draw a card.
 End

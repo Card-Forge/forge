@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_kavu.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/67.jpg
+Oracle:Mire Kavu gets +1/+1 as long as you control a Swamp.
 End

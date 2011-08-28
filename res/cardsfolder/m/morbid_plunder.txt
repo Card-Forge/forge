@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 1 B B | Origin$ Graveyard | Destination$ Hand | TargetM
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_plunder.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/47.jpg
+Oracle:Return up to two target creature cards from your graveyard to your hand.
 End

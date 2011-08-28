@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ W | KW$ HIDDEN CARDNAME can attack as though it didn't have d
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_wall.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/47.jpg
+Oracle:Defender (This creature can't attack.)\n{W}: Mirror Wall can attack this turn as though it didn't have defender.
 End

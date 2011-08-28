@@ -9,4 +9,5 @@ SVar:EquipMe:Multiple
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_adapter.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/210.jpg
+Oracle:Myr Adapter gets +1/+1 for each Equipment attached to it.
 End

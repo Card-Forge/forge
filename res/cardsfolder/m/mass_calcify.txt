@@ -6,4 +6,5 @@ A:SP$ DestroyAll | Cost$ 5 W W | ValidCards$ Creature.nonWhite | SpellDescriptio
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/12.jpg
+Oracle:Destroy all nonwhite creatures.
 End

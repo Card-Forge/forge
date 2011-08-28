@@ -7,4 +7,5 @@ A:AB$ PutCounter | Cost$ 1 R R | IsCurse$ True | ValidTgts$ Land.countersEQ0BLAZ
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_fireheart.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/140.jpg
+Oracle:{1}{R}{R}: Put a blaze counter on target land without a blaze counter on it. For as long as that land has a blaze counter on it, it has "At the beginning of your upkeep, this land deals 1 damage to you." (The land continues to burn after Obsidian Fireheart has left the battlefield.)
 End

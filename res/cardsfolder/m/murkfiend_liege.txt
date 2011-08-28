@@ -10,4 +10,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murkfiend_liege.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/156.jpg
+Oracle:Other green creatures you control get +1/+1.\nOther blue creatures you control get +1/+1.\nUntap all green and/or blue creatures you control during each other player's untap step.
 End

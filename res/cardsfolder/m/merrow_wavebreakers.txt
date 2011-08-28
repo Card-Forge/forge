@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_wavebreakers.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/44.jpg
+Oracle:{1}{U}, {Q}: Merrow Wavebreakers gains flying until end of turn. ({Q} is the untap symbol.)
 End

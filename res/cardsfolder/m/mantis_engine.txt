@@ -9,4 +9,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mantis_engine.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/133.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/333.jpg
+Oracle:{2}: Mantis Engine gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)\n{2}: Mantis Engine gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
 End

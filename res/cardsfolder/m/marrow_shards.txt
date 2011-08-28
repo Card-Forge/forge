@@ -6,4 +6,5 @@ A:SP$ DamageAll | Cost$ PW | ValidCards$ Creature.attacking | ValidDescription$ 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_shards.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/15.jpg
+Oracle:({W/P} can be paid with either {W} or 2 life.)\nMarrow Shards deals 1 damage to each attacking creature.
 End

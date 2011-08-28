@@ -10,4 +10,5 @@ SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_the_fallen.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/107.jpg
+Oracle:Landfall - Whenever a land enters the battlefield under your control, you may have target player lose 3 life. If you do, put three +1/+1 counters on Ob Nixilis, the Fallen.
 End

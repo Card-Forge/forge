@@ -11,4 +11,5 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/251.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/231.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/166.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/165.jpg
+Oracle:
 End

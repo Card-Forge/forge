@@ -6,4 +6,5 @@ A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking,Creature.blocking | Tg
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neck_snap.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/32.jpg
+Oracle:Destroy target attacking or blocking creature.
 End

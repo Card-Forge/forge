@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_zealot.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/36.jpg
+Oracle:Threshold - As long as seven or more cards are in your graveyard, Mystic Zealot gets +1/+1 and has flying.
 End

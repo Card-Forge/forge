@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ PG | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Ta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutagenic_growth.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/116.jpg
+Oracle:({G/P} can be paid with either {G} or 2 life.)\nTarget creature gets +2/+2 until end of turn.
 End

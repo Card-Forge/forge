@@ -9,4 +9,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Golem | TokenTyp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maul_splicer.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/114.jpg
+Oracle:When Maul Splicer enters the battlefield, put two 3/3 colorless Golem artifact creature tokens onto the battlefield.\nGolem creatures you control have trample.
 End

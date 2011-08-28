@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirri_cat_warrior.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/114.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/279.jpg
+Oracle:First strike, forestwalk, vigilance (This creature deals combat damage before creatures without first strike, it's unblockable as long as defending player controls a Forest, and attacking doesn't cause this creature to tap.)
 End

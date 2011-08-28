@@ -7,4 +7,5 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45411.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/267.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/109.jpg
+Oracle:
 End

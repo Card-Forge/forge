@@ -14,4 +14,5 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/334.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/299.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/265.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/21.jpg
+Oracle:{2}, {T}: Target player puts the top two cards of his or her library into his or her graveyard.
 End

@@ -11,4 +11,5 @@ SVar:X:Count$CardCounters.GROWTH
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/momentum.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/113.jpg
+Oracle:Enchant creature\nAt the beginning of your upkeep, you may put a growth counter on Momentum.\nEnchanted creature gets +1/+1 for each growth counter on Momentum.
 End

@@ -10,4 +10,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/onulet.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/269.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/358.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/24.jpg
+Oracle:When Onulet dies, you gain 2 life.
 End

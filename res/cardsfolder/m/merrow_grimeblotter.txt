@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_grimeblotter.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/171.jpg
+Oracle:{1}{U/B}, {Q}: Target creature gets -2/-0 until end of turn. ({Q} is the untap symbol.)
 End

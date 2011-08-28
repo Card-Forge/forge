@@ -6,4 +6,5 @@ A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cos
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_skin.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/138.jpg
+Oracle:Return Molting Skin to its owner's hand: Regenerate target creature.
 End

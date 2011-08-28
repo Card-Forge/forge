@@ -10,4 +10,5 @@ SVar:Draw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ocular_halo.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/28.jpg
+Oracle:Enchant creature\nEnchanted creature has "{T}: Draw a card."\n{W}: Enchanted creature gains vigilance until end of turn.
 End

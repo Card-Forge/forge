@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overrule.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/120.jpg
+Oracle:Counter target spell unless its controller pays {X}. You gain X life.
 End

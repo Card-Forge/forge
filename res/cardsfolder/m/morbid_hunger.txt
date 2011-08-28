@@ -8,4 +8,5 @@ SVar:DB:DB$GainLife | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_hunger.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/150.jpg
+Oracle:Morbid Hunger deals 3 damage to target creature or player. You gain 3 life.\nFlashback {7}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 End

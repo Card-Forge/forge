@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Plains.YouCtrl | SpellDescriptio
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nimbus_maze.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/178.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} to your mana pool. Activate this ability only if you control an Island.\n{T}: Add {U} to your mana pool. Activate this ability only if you control a Plains.
 End

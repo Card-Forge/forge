@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moggcatcher.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/96.jpg
+Oracle:{3}, {T}: Search your library for a Goblin permanent card and put it onto the battlefield. Then shuffle your library.
 End

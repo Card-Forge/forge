@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mitotic_manipulation.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/27.jpg
+Oracle:Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order.
 End

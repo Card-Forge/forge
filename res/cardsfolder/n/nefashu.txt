@@ -8,4 +8,5 @@ SVar:TrigShrink:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nefashu.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/70.jpg
+Oracle:Whenever Nefashu attacks, up to five target creatures each get -1/-1 until end of turn.
 End

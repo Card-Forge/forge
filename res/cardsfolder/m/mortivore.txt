@@ -13,4 +13,5 @@ SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/152.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/89.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/147.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/161.jpg
+Oracle:Mortivore's power and toughness are each equal to the number of creature cards in all graveyards.\n{B}: Regenerate Mortivore.
 End

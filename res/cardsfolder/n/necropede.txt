@@ -9,4 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ S
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropede.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/185.jpg
+Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Necropede dies, you may put a -1/-1 counter on target creature.
 End

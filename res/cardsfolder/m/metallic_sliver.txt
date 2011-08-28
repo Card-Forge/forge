@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4617.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/287.jpg
+Oracle:
 End

@@ -9,4 +9,5 @@ SVar:DamageAll:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidCards$ Creature | Vali
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_field.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/70.jpg
+Oracle:Enchant land\nEnchanted land has "{T}: This land deals 1 damage to each creature and each player."
 End

@@ -14,4 +14,5 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/195.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/185.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/275.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/141.jpg
+Oracle:Destroy target artifact or enchantment.
 End

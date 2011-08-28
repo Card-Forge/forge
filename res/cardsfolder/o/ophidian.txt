@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/45.jpg
+Oracle:Whenever Ophidian attacks and isn't blocked, you may draw a card. If you do, Ophidian assigns no combat damage this turn.
 End

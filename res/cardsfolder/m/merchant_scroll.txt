@@ -8,4 +8,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_scroll.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/42.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/91.jpg
+Oracle:Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
 End

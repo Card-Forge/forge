@@ -7,4 +7,5 @@ A:AB$ LoseLife | Cost$ T ExileFromGrave<3/Card>  | ValidTgts$ Player | TgtPrompt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/organ_grinder.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/75.jpg
+Oracle:{T}, Exile three cards from your graveyard: Target player loses 3 life.
 End

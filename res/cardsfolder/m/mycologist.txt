@@ -10,4 +10,5 @@ A:AB$ GainLife | Cost$ Sac<1/Saproling> | LifeAmount$ 2 | SpellDescription$ You 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycologist.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/27.jpg
+Oracle:At the beginning of your upkeep, put a spore counter on Mycologist.\nRemove three spore counters from Mycologist: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: You gain 2 life.
 End

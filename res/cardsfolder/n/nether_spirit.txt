@@ -8,4 +8,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | De
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_spirit.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/149.jpg
+Oracle:At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.
 End

@@ -11,4 +11,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mesa_enchantress
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/20.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/25.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/26.jpg
+Oracle:Whenever you cast an enchantment spell, you may draw a card.
 End

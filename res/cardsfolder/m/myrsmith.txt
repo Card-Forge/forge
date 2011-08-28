@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 1 | TokenImage$ C 1 1 Myr | TokenAmount$ 1 | Tok
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myrsmith.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/16.jpg
+Oracle:Whenever you cast an artifact spell, you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield.
 End

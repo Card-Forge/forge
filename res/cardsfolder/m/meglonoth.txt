@@ -11,4 +11,5 @@ SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meglonoth.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/118.jpg
+Oracle:Vigilance, trample\nWhenever Meglonoth blocks a creature, Meglonoth deals damage to that creature's controller equal to Meglonoth's power.
 End

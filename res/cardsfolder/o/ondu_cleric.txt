@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_cleric.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/30.jpg
+Oracle:Whenever Ondu Cleric or another Ally enters the battlefield under your control, you may gain life equal to the number of Allies you control.
 End

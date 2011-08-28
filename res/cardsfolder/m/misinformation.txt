@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misinformation.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/19.jpg
+Oracle:Put up to three target cards from an opponent's graveyard on top of his or her library in any order.
 End

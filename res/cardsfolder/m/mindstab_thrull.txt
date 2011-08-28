@@ -9,4 +9,5 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindstab_thrull.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/40.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/19.jpg|3
+Oracle:Whenever Mindstab Thrull attacks and isn't blocked, you may sacrifice it. If you do, defending player discards three cards.
 End

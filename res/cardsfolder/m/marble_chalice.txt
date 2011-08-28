@@ -6,4 +6,5 @@ A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_chalice.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/18.jpg
+Oracle:{T}: You gain 1 life.
 End

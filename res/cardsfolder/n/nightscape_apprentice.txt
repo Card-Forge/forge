@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_apprentice.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/112.jpg
+Oracle:{U}, {T}: Put target creature you control on top of its owner's library.\n{R}, {T}: Target creature gains first strike until end of turn.
 End

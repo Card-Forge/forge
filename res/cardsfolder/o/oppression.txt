@@ -9,4 +9,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oppression.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/143.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/152.jpg
+Oracle:Whenever a player casts a spell, that player discards a card.
 End

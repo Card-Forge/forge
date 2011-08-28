@@ -8,4 +8,5 @@ SVar:ABDestroy:AB$Destroy | Cost$ T | ValidTgts$ Equipment | TgtPrompt$ Select t
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manriki_gusari.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/156.jpg
+Oracle:Equipped creature gets +1/+2 and has "{T}: Destroy target Equipment."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
 End

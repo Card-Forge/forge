@@ -6,4 +6,5 @@ A:SP$ UntapAll | Cost$ G | ValidCards$ Creature.YouCtrl | SpellDescription$ Unta
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilize.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/97.jpg
+Oracle:Untap all creatures you control.
 End

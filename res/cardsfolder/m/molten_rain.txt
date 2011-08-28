@@ -7,4 +7,5 @@ SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2 | Conditi
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46000.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/101.jpg
+Oracle:Destroy target land. If that land was nonbasic, Molten Rain deals 2 damage to the land's controller.
 End

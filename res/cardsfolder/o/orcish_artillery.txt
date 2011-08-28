@@ -19,4 +19,5 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/220.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/196.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/167.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/166.jpg
+Oracle:{T}: Orcish Artillery deals 2 damage to target creature or player and 3 damage to you.
 End

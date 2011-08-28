@@ -9,4 +9,5 @@ SVar:X:Remembered$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_drain.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/65.jpg
+Oracle:Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
 End

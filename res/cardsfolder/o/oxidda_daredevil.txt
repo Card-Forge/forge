@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_daredevil.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/100.jpg
+Oracle:Sacrifice an artifact: Oxidda Daredevil gains haste until end of turn.
 End

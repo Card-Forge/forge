@@ -9,4 +9,5 @@ K:Protection from green
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirran_crusader.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/14.jpg
+Oracle:Double strike, protection from black and from green
 End

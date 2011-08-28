@@ -5,4 +5,5 @@ Text:Target opponent reveals cards from the top of his or her library until four
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_funeral.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/26.jpg
+Oracle:Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard.
 End

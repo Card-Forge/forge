@@ -9,4 +9,5 @@ SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | Chan
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_familiar.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/43.jpg
+Oracle:Flying\nWhen Neurok Familiar enters the battlefield, reveal the top card of your library. If it's an artifact card, put it into your hand. Otherwise, put it into your graveyard.
 End

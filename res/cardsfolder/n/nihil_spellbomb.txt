@@ -9,4 +9,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nihil_spellbomb.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/187.jpg
+Oracle:{T}, Sacrifice Nihil Spellbomb: Exile all cards from target player's graveyard.\nWhen Nihil Spellbomb is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.
 End

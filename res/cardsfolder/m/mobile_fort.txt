@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ 3 | NumAtt$ +3 | NumDef$ -1 | KW$ HIDDEN CARDNAME can attack 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mobile_fort.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/303.jpg
+Oracle:Defender (This creature can't attack.)\n{3}: Mobile Fort gets +3/-1 until end of turn and can attack this turn as though it didn't have defender. Activate this ability only once each turn.
 End

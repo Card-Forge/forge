@@ -7,4 +7,5 @@ SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 5 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_archangel.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/23.jpg
+Oracle:When an opponent casts a creature spell, if Opal Archangel is an enchantment, Opal Archangel becomes a 5/5 Angel creature with flying and vigilance.
 End

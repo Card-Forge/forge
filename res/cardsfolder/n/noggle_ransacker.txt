@@ -9,4 +9,5 @@ SVar:DBDiscard:DB$Discard | Defined$ Each | Mode$ Random | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_ransacker.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/109.jpg
+Oracle:When Noggle Ransacker enters the battlefield, each player draws two cards, then discards a card at random.
 End

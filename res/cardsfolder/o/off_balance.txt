@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/off_balance.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/15.jpg
+Oracle:Target creature can't attack or block this turn.
 End

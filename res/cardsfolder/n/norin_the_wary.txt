@@ -12,4 +12,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/norin_the_wary.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/171.jpg
+Oracle:When a player casts a spell or a creature attacks, exile Norin the Wary. Return it to the battlefield under its owner's control at the beginning of the next end step.
 End

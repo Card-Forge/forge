@@ -8,4 +8,5 @@ K:Protection from artifacts
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/needlebug.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/217.jpg
+Oracle:Flash\nProtection from artifacts
 End
