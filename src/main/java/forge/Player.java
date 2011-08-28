@@ -809,6 +809,15 @@ public abstract class Player extends MyObservable {
     /// replaces AllZone.getGameAction().draw* methods
     ///
     ////////////////////////////////
+    
+    /**
+     * <p>canDraw</p>
+     * 
+     * @return true if a player can draw a card, false otherwise
+     */
+    public boolean canDraw() {
+        return !AllZoneUtil.isCardInPlay("Maralen of the Mornsong");
+    }
 
     /**
      * <p>mayDrawCard.</p>
@@ -869,6 +878,11 @@ public abstract class Player extends MyObservable {
      */
     public CardList drawCards(int n, boolean firstFromDraw) {
     	CardList drawn = new CardList();
+    	
+    	if(!canDraw()) {
+    	    return drawn;
+    	}
+    	
         for (int i = 0; i < n; i++) {
 
             // TODO: multiple replacements need to be selected by the controller

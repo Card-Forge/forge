@@ -74,9 +74,7 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     public CardList mayDrawCards(int n) {
-        String[] choices = {"Yes", "No"};
-        Object choice = GuiUtils.getChoice("Draw " + n + " cards?", choices);
-        if (choice.equals("Yes"))
+        if (canDraw() && GameActionUtil.showYesNoDialog(null, "Draw " + n + " cards?"))
             return drawCards(n);
         else return new CardList();
     }
