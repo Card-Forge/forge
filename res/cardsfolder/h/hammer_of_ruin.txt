@@ -1,7 +1,7 @@
 Name:Hammer of Ruin
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
+Text:Equipped creature gets +2/+0.
 K:eqPump 2:+2/+0
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Equipment.YouDontCtrl | TgtPrompt$ Select target equipment defending player controls
