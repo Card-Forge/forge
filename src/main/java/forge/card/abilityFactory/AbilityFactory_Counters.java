@@ -1636,5 +1636,261 @@ public class AbilityFactory_Counters {
             tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
         }
     }
+    
+    // *******************************************
+    // ************ MoveCounters *****************
+    // *******************************************
+
+    /**
+     * <p>createAbilityMoveCounters.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createAbilityMoveCounters(final AbilityFactory af) {
+        final SpellAbility abMoveCounter = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 4602375375570571305L;
+
+            @Override
+            public String getStackDescription() {
+                return moveCounterStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return moveCounterCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                moveCounterResolve(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(boolean mandatory) {
+                return moveCounterDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return abMoveCounter;
+    }
+
+    /**
+     * <p>createSpellMoveCounters.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createSpellMoveCounters(final AbilityFactory af) {
+        final SpellAbility spMoveCounter = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+            private static final long serialVersionUID = 7987458386444373863L;
+
+            @Override
+            public String getStackDescription() {
+                return moveCounterStackDescription(af, this);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return moveCounterCanPlayAI(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                moveCounterResolve(af, this);
+            }
+
+        };
+        return spMoveCounter;
+    }
+
+    /**
+     * <p>createDrawbackMoveCounters.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public static SpellAbility createDrawbackMoveCounters(final AbilityFactory af) {
+        final SpellAbility dbMoveCounter = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+            private static final long serialVersionUID = -9185934729634278014L;
+
+            @Override
+            public String getStackDescription() {
+                return moveCounterStackDescription(af, this);
+            }
+
+            @Override
+            public void resolve() {
+                moveCounterResolve(af, this);
+            }
+
+            @Override
+            public boolean chkAI_Drawback() {
+                return moveCounterPlayDrawbackAI(af, this);
+            }
+
+            @Override
+            public boolean doTrigger(boolean mandatory) {
+                return moveCounterDoTriggerAI(af, this, mandatory);
+            }
+
+        };
+        return dbMoveCounter;
+    }
+
+    /**
+     * <p>moveCounterStackDescription.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String moveCounterStackDescription(AbilityFactory af, SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        StringBuilder sb = new StringBuilder();
+        Card host = af.getHostCard();
+
+        if (sa instanceof Ability_Sub) {
+            sb.append(" ");
+        }
+        else {
+            sb.append(sa.getSourceCard().getName()).append(" - ");
+        }
+        
+        ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
+        Card source = null;
+        if(srcCards.size() > 0) {
+            source = srcCards.get(0);
+        }
+        
+        ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+        Card dest = null;
+        if(destCards.size() > 0) {
+            dest = destCards.get(0);
+        }
+
+        Counters cType = Counters.valueOf(params.get("CounterType"));
+        int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+
+        sb.append("Move ").append(amount).append(" ").append(cType.getName())
+                .append(" counter");
+        if (amount != 1) sb.append("s");
+        sb.append(" from ");
+        sb.append(source).append(" to ").append(dest);
+
+        sb.append(".");
+
+        Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * <p>moveCounterCanPlayAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean moveCounterCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+        // AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+        HashMap<String, String> params = af.getMapParams();
+        Random r = MyRandom.random;
+        String amountStr = params.get("CounterNum");
+
+        // TODO handle proper calculation of X values based on Cost
+        int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+        
+        //don't use it if no counters to add
+        if (amount <= 0) return false;
+
+        // prevent run-away activations - first time will always return true
+        boolean chance = false;
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+            chance &= subAb.chkAI_Drawback();
+
+        if (AbilityFactory.playReusable(sa))
+            return chance;
+
+        return ((r.nextFloat() < .6667) && chance);
+    }//moveCounterCanPlayAI
+
+    /**
+     * <p>moveCounterPlayDrawbackAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    private static boolean moveCounterPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+        boolean chance = false;
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+            chance &= subAb.chkAI_Drawback();
+
+        return chance;
+    }//moveCounterPlayDrawbackAI
+
+    /**
+     * <p>moveCounterDoTriggerAI.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory a boolean.
+     * @return a boolean.
+     */
+    private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+        // if there is a cost, it's gotta be optional
+        if (!ComputerUtil.canPayCost(sa) && !mandatory)
+            return false;
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null) {
+            //chance &= subAb.doTrigger(mandatory);
+        }
+
+        return false;
+    }
+
+    /**
+     * <p>moveCounterResolve.</p>
+     *
+     * @param af a {@link forge.card.abilityFactory.AbilityFactory} object.
+     * @param sa a {@link forge.card.spellability.SpellAbility} object.
+     */
+    private static void moveCounterResolve(final AbilityFactory af, final SpellAbility sa) {
+        HashMap<String, String> params = af.getMapParams();
+        Card host = af.getHostCard();
+
+        Counters cType = Counters.valueOf(params.get("CounterType"));
+        int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+
+        ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
+        Card source = null;
+        if(srcCards.size() > 0) {
+            source = srcCards.get(0);
+        }
+
+        ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+        Card dest = null;
+        if(destCards.size() > 0) {
+            dest = destCards.get(0);
+        }
+        
+        if(null != source && null != dest) {
+            if(source.getCounters(cType) >= amount) {
+                if(!dest.hasKeyword("CARDNAME can't have counters placed on it.")) {
+                    dest.addCounter(cType,amount);
+                    source.subtractCounter(cType, amount);
+                }
+            }
+        }
+    }//moveCounterResolve
 
 }//end class AbilityFactory_Counters

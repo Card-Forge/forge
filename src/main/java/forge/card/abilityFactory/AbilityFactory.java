@@ -338,6 +338,15 @@ public class AbilityFactory {
             else if (isDb)
                 SA = AbilityFactory_Counters.createDrawbackProliferate(this);
         }
+        
+        else if (API.equals("MoveCounter")) {
+            if (isAb)
+                SA = AbilityFactory_Counters.createAbilityMoveCounters(this);
+            else if (isSp)
+                SA = AbilityFactory_Counters.createSpellMoveCounters(this);
+            else if (isDb)
+                SA = AbilityFactory_Counters.createDrawbackMoveCounters(this);
+        }
 
         else if (API.equals("ChangeZone")) {
             if (isAb)
